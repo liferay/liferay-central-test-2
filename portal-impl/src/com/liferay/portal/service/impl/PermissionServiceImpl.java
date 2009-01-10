@@ -61,6 +61,10 @@ import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.service.permission.MBCategoryPermission;
 import com.liferay.portlet.polls.model.PollsQuestion;
 import com.liferay.portlet.polls.service.permission.PollsQuestionPermission;
+import com.liferay.portlet.shopping.model.ShoppingCategory;
+import com.liferay.portlet.shopping.model.ShoppingItem;
+import com.liferay.portlet.shopping.service.permission.ShoppingCategoryPermission;
+import com.liferay.portlet.shopping.service.permission.ShoppingItemPermission;
 import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import com.liferay.portlet.softwarecatalog.service.permission.SCFrameworkVersionPermission;
@@ -307,6 +311,16 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 		}
 		else if (name.equals(PollsQuestion.class.getName())) {
 			PollsQuestionPermission.check(
+				permissionChecker, GetterUtil.getLong(primKey),
+				ActionKeys.PERMISSIONS);
+		}
+		else if (name.equals(ShoppingCategory.class.getName())) {
+			ShoppingCategoryPermission.check(
+				permissionChecker, GetterUtil.getLong(primKey),
+				ActionKeys.PERMISSIONS);
+		}
+		else if (name.equals(ShoppingItem.class.getName())) {
+			ShoppingItemPermission.check(
 				permissionChecker, GetterUtil.getLong(primKey),
 				ActionKeys.PERMISSIONS);
 		}

@@ -63,7 +63,7 @@ public class ShoppingItemServiceUtil {
 		java.io.File largeFile,
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> itemFields,
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> itemPrices,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
@@ -71,31 +71,7 @@ public class ShoppingItemServiceUtil {
 			fieldsQuantities, requiresShipping, stockQuantity, featured, sale,
 			smallImage, smallImageURL, smallFile, mediumImage, mediumImageURL,
 			mediumFile, largeImage, largeImageURL, largeFile, itemFields,
-			itemPrices, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingItem addItem(
-		long categoryId, java.lang.String sku, java.lang.String name,
-		java.lang.String description, java.lang.String properties,
-		java.lang.String fieldsQuantities, boolean requiresShipping,
-		int stockQuantity, boolean featured, java.lang.Boolean sale,
-		boolean smallImage, java.lang.String smallImageURL,
-		java.io.File smallFile, boolean mediumImage,
-		java.lang.String mediumImageURL, java.io.File mediumFile,
-		boolean largeImage, java.lang.String largeImageURL,
-		java.io.File largeFile,
-		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> itemFields,
-		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> itemPrices,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addItem(categoryId, sku, name, description, properties,
-			fieldsQuantities, requiresShipping, stockQuantity, featured, sale,
-			smallImage, smallImageURL, smallFile, mediumImage, mediumImageURL,
-			mediumFile, largeImage, largeImageURL, largeFile, itemFields,
-			itemPrices, communityPermissions, guestPermissions);
+			itemPrices, serviceContext);
 	}
 
 	public static void deleteItem(long itemId)
@@ -122,7 +98,8 @@ public class ShoppingItemServiceUtil {
 		java.io.File mediumFile, boolean largeImage,
 		java.lang.String largeImageURL, java.io.File largeFile,
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> itemFields,
-		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> itemPrices)
+		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> itemPrices,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
@@ -130,7 +107,7 @@ public class ShoppingItemServiceUtil {
 			properties, fieldsQuantities, requiresShipping, stockQuantity,
 			featured, sale, smallImage, smallImageURL, smallFile, mediumImage,
 			mediumImageURL, mediumFile, largeImage, largeImageURL, largeFile,
-			itemFields, itemPrices);
+			itemFields, itemPrices, serviceContext);
 	}
 
 	public static ShoppingItemService getService() {

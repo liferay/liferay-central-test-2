@@ -39,7 +39,7 @@ ShoppingOrder order = (ShoppingOrder)row.getObject();
 
 	<liferay-ui:icon image="edit" url="<%= editURL %>" />
 
-	<c:if test="<%= ShoppingOrderPermission.contains(permissionChecker, plid, order, ActionKeys.DELETE) %>">
+	<c:if test="<%= ShoppingOrderPermission.contains(permissionChecker, scopeGroupId, order, ActionKeys.DELETE) %>">
 		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
 			<portlet:param name="struts_action" value="/shopping/edit_order" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />

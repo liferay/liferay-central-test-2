@@ -75,14 +75,14 @@ import com.liferay.portlet.shopping.service.ShoppingOrderServiceUtil;
  *
  */
 public class ShoppingOrderServiceHttp {
-	public static void completeOrder(HttpPrincipal httpPrincipal, long plid,
+	public static void completeOrder(HttpPrincipal httpPrincipal, long groupId,
 		java.lang.String number, java.lang.String ppTxnId,
 		java.lang.String ppPaymentStatus, double ppPaymentGross,
 		java.lang.String ppReceiverEmail, java.lang.String ppPayerEmail)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(plid);
+			Object paramObj0 = new LongWrapper(groupId);
 
 			Object paramObj1 = number;
 
@@ -145,12 +145,12 @@ public class ShoppingOrderServiceHttp {
 		}
 	}
 
-	public static void deleteOrder(HttpPrincipal httpPrincipal, long plid,
+	public static void deleteOrder(HttpPrincipal httpPrincipal, long groupId,
 		long orderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(plid);
+			Object paramObj0 = new LongWrapper(groupId);
 
 			Object paramObj1 = new LongWrapper(orderId);
 
@@ -180,11 +180,11 @@ public class ShoppingOrderServiceHttp {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrder getOrder(
-		HttpPrincipal httpPrincipal, long plid, long orderId)
+		HttpPrincipal httpPrincipal, long groupId, long orderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(plid);
+			Object paramObj0 = new LongWrapper(groupId);
 
 			Object paramObj1 = new LongWrapper(orderId);
 
@@ -217,12 +217,12 @@ public class ShoppingOrderServiceHttp {
 		}
 	}
 
-	public static void sendEmail(HttpPrincipal httpPrincipal, long plid,
+	public static void sendEmail(HttpPrincipal httpPrincipal, long groupId,
 		long orderId, java.lang.String emailType)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(plid);
+			Object paramObj0 = new LongWrapper(groupId);
 
 			Object paramObj1 = new LongWrapper(orderId);
 
@@ -259,7 +259,7 @@ public class ShoppingOrderServiceHttp {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
-		HttpPrincipal httpPrincipal, long plid, long orderId,
+		HttpPrincipal httpPrincipal, long groupId, long orderId,
 		java.lang.String billingFirstName, java.lang.String billingLastName,
 		java.lang.String billingEmailAddress, java.lang.String billingCompany,
 		java.lang.String billingStreet, java.lang.String billingCity,
@@ -277,7 +277,7 @@ public class ShoppingOrderServiceHttp {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(plid);
+			Object paramObj0 = new LongWrapper(groupId);
 
 			Object paramObj1 = new LongWrapper(orderId);
 
@@ -476,14 +476,14 @@ public class ShoppingOrderServiceHttp {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
-		HttpPrincipal httpPrincipal, long plid, long orderId,
+		HttpPrincipal httpPrincipal, long groupId, long orderId,
 		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
 		double ppPaymentGross, java.lang.String ppReceiverEmail,
 		java.lang.String ppPayerEmail)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(plid);
+			Object paramObj0 = new LongWrapper(groupId);
 
 			Object paramObj1 = new LongWrapper(orderId);
 

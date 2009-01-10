@@ -28,7 +28,10 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.shopping.CouponCodeException;
 import com.liferay.portlet.shopping.CouponDateException;
@@ -40,6 +43,7 @@ import com.liferay.portlet.shopping.CouponNameException;
 import com.liferay.portlet.shopping.CouponStartDateException;
 import com.liferay.portlet.shopping.DuplicateCouponCodeException;
 import com.liferay.portlet.shopping.NoSuchCouponException;
+import com.liferay.portlet.shopping.model.ShoppingCoupon;
 import com.liferay.portlet.shopping.service.ShoppingCouponServiceUtil;
 
 import java.util.Calendar;
@@ -149,14 +153,15 @@ public class EditCouponAction extends PortletAction {
 	}
 
 	protected void deleteCoupons(ActionRequest actionRequest) throws Exception {
-		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		long[] deleteCouponIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "deleteCouponIds"), 0L);
 
 		for (int i = 0; i < deleteCouponIds.length; i++) {
 			ShoppingCouponServiceUtil.deleteCoupon(
-				layout.getPlid(), deleteCouponIds[i]);
+				themeDisplay.getScopeGroupId(), deleteCouponIds[i]);
 		}
 	}
 
@@ -210,27 +215,30 @@ public class EditCouponAction extends PortletAction {
 		String discountType = ParamUtil.getString(
 			actionRequest, "discountType");
 
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			ShoppingCoupon.class.getName(), actionRequest);
+
 		if (couponId <= 0) {
 
 			// Add coupon
 
 			ShoppingCouponServiceUtil.addCoupon(
-				layout.getPlid(), code, autoCode, name, description,
-				startDateMonth, startDateDay, startDateYear, startDateHour,
-				startDateMinute, endDateMonth, endDateDay, endDateYear,
-				endDateHour, endDateMinute, neverExpire, active,
-				limitCategories, limitSkus, minOrder, discount, discountType);
+				code, autoCode, name, description, startDateMonth, startDateDay,
+				startDateYear, startDateHour, startDateMinute, endDateMonth,
+				endDateDay, endDateYear, endDateHour, endDateMinute,
+				neverExpire, active, limitCategories, limitSkus, minOrder,
+				discount, discountType, serviceContext);
 		}
 		else {
 
 			// Update coupon
 
 			ShoppingCouponServiceUtil.updateCoupon(
-				layout.getPlid(), couponId, name, description, startDateMonth,
-				startDateDay, startDateYear, startDateHour, startDateMinute,
-				endDateMonth, endDateDay, endDateYear, endDateHour,
-				endDateMinute, neverExpire, active, limitCategories, limitSkus,
-				minOrder, discount, discountType);
+				couponId, name, description, startDateMonth, startDateDay,
+				startDateYear, startDateHour, startDateMinute, endDateMonth,
+				endDateDay, endDateYear, endDateHour, endDateMinute,
+				neverExpire, active, limitCategories, limitSkus, minOrder,
+				discount, discountType, serviceContext);
 		}
 	}
 

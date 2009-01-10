@@ -25,12 +25,13 @@ package com.liferay.portlet.shopping.action;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.shopping.CategoryNameException;
 import com.liferay.portlet.shopping.NoSuchCategoryException;
+import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.service.ShoppingCategoryServiceUtil;
 
 import javax.portlet.ActionRequest;
@@ -121,8 +122,6 @@ public class EditCategoryAction extends PortletAction {
 	protected void updateCategory(ActionRequest actionRequest)
 		throws Exception {
 
-		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
-
 		long categoryId = ParamUtil.getLong(actionRequest, "categoryId");
 
 		long parentCategoryId = ParamUtil.getLong(
@@ -133,18 +132,15 @@ public class EditCategoryAction extends PortletAction {
 		boolean mergeWithParentCategory = ParamUtil.getBoolean(
 			actionRequest, "mergeWithParentCategory");
 
-		String[] communityPermissions = actionRequest.getParameterValues(
-			"communityPermissions");
-		String[] guestPermissions = actionRequest.getParameterValues(
-			"guestPermissions");
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			ShoppingCategory.class.getName(), actionRequest);
 
 		if (categoryId <= 0) {
 
 			// Add category
 
 			ShoppingCategoryServiceUtil.addCategory(
-				layout.getPlid(), parentCategoryId, name, description,
-				communityPermissions, guestPermissions);
+				parentCategoryId, name, description, serviceContext);
 		}
 		else {
 
@@ -152,7 +148,7 @@ public class EditCategoryAction extends PortletAction {
 
 			ShoppingCategoryServiceUtil.updateCategory(
 				categoryId, parentCategoryId, name, description,
-				mergeWithParentCategory);
+				mergeWithParentCategory, serviceContext);
 		}
 	}
 

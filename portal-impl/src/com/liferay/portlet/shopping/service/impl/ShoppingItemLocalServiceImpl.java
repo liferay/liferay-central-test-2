@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.amazonrankings.model.AmazonRankings;
@@ -93,50 +94,7 @@ public class ShoppingItemLocalServiceImpl
 			File smallFile, boolean mediumImage, String mediumImageURL,
 			File mediumFile, boolean largeImage, String largeImageURL,
 			File largeFile, List<ShoppingItemField> itemFields,
-			List<ShoppingItemPrice> itemPrices, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		return addItem(
-			userId, categoryId, sku, name, description, properties,
-			fieldsQuantities, requiresShipping, stockQuantity, featured, sale,
-			smallImage, smallImageURL, smallFile, mediumImage, mediumImageURL,
-			mediumFile, largeImage, largeImageURL, largeFile, itemFields,
-			itemPrices, Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
-	}
-
-	public ShoppingItem addItem(
-			long userId, long categoryId, String sku, String name,
-			String description, String properties, String fieldsQuantities,
-			boolean requiresShipping, int stockQuantity, boolean featured,
-			Boolean sale, boolean smallImage, String smallImageURL,
-			File smallFile, boolean mediumImage, String mediumImageURL,
-			File mediumFile, boolean largeImage, String largeImageURL,
-			File largeFile, List<ShoppingItemField> itemFields,
-			List<ShoppingItemPrice> itemPrices, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		return addItem(
-			userId, categoryId, sku, name, description, properties,
-			fieldsQuantities, requiresShipping, stockQuantity, featured, sale,
-			smallImage, smallImageURL, smallFile, mediumImage, mediumImageURL,
-			mediumFile, largeImage, largeImageURL, largeFile, itemFields,
-			itemPrices, null, null, communityPermissions, guestPermissions);
-	}
-
-	public ShoppingItem addItem(
-			long userId, long categoryId, String sku, String name,
-			String description, String properties, String fieldsQuantities,
-			boolean requiresShipping, int stockQuantity, boolean featured,
-			Boolean sale, boolean smallImage, String smallImageURL,
-			File smallFile, boolean mediumImage, String mediumImageURL,
-			File mediumFile, boolean largeImage, String largeImageURL,
-			File largeFile, List<ShoppingItemField> itemFields,
-			List<ShoppingItemPrice> itemPrices, Boolean addCommunityPermissions,
-			Boolean addGuestPermissions, String[] communityPermissions,
-			String[] guestPermissions)
+			List<ShoppingItemPrice> itemPrices, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Item
@@ -257,16 +215,17 @@ public class ShoppingItemLocalServiceImpl
 
 		// Resources
 
-		if ((addCommunityPermissions != null) &&
-			(addGuestPermissions != null)) {
+		if (serviceContext.getAddCommunityPermissions() ||
+			serviceContext.getAddGuestPermissions()) {
 
 			addItemResources(
-				category, item, addCommunityPermissions.booleanValue(),
-				addGuestPermissions.booleanValue());
+				category, item, serviceContext.getAddCommunityPermissions(),
+				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addItemResources(
-				category, item, communityPermissions, guestPermissions);
+				category, item, serviceContext.getCommunityPermissions(),
+				serviceContext.getGuestPermissions());
 		}
 
 		return item;
@@ -507,7 +466,7 @@ public class ShoppingItemLocalServiceImpl
 			File smallFile, boolean mediumImage, String mediumImageURL,
 			File mediumFile, boolean largeImage, String largeImageURL,
 			File largeFile, List<ShoppingItemField> itemFields,
-			List<ShoppingItemPrice> itemPrices)
+			List<ShoppingItemPrice> itemPrices, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Item
@@ -742,16 +701,17 @@ public class ShoppingItemLocalServiceImpl
 
 			itemPrices.add(itemPrice);
 
-			boolean addCommunityPermissions = true;
-			boolean addGuestPermissions = true;
+			ServiceContext serviceContext = new ServiceContext();
+
+			serviceContext.setAddCommunityPermissions(true);
+			serviceContext.setAddGuestPermissions(true);
 
 			addItem(
 				userId, categoryId, isbn, name, description, properties,
 				StringPool.BLANK, requiresShipping, stockQuantity, featured,
 				sale, smallImage, smallImageURL, smallFile, mediumImage,
 				mediumImageURL, mediumFile, largeImage, largeImageURL,
-				largeFile, itemFields, itemPrices, addCommunityPermissions,
-				addGuestPermissions);
+				largeFile, itemFields, itemPrices, serviceContext);
 
 			smallFile.delete();
 			mediumFile.delete();

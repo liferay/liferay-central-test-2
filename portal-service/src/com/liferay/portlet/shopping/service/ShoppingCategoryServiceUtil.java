@@ -46,25 +46,14 @@ package com.liferay.portlet.shopping.service;
  */
 public class ShoppingCategoryServiceUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
-		long plid, long parentCategoryId, java.lang.String name,
-		java.lang.String description, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		long parentCategoryId, java.lang.String name,
+		java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addCategory(plid, parentCategoryId, name, description,
-			addCommunityPermissions, addGuestPermissions);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
-		long plid, long parentCategoryId, java.lang.String name,
-		java.lang.String description, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addCategory(plid, parentCategoryId, name, description,
-			communityPermissions, guestPermissions);
+				   .addCategory(parentCategoryId, name, description,
+			serviceContext);
 	}
 
 	public static void deleteCategory(long categoryId)
@@ -82,12 +71,13 @@ public class ShoppingCategoryServiceUtil {
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory updateCategory(
 		long categoryId, long parentCategoryId, java.lang.String name,
-		java.lang.String description, boolean mergeWithParentCategory)
+		java.lang.String description, boolean mergeWithParentCategory,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .updateCategory(categoryId, parentCategoryId, name,
-			description, mergeWithParentCategory);
+			description, mergeWithParentCategory, serviceContext);
 	}
 
 	public static ShoppingCategoryService getService() {

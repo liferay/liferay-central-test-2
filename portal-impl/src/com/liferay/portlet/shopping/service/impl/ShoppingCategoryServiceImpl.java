@@ -25,6 +25,7 @@ package com.liferay.portlet.shopping.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.service.base.ShoppingCategoryServiceBaseImpl;
 import com.liferay.portlet.shopping.service.permission.ShoppingCategoryPermission;
@@ -39,31 +40,16 @@ public class ShoppingCategoryServiceImpl
 	extends ShoppingCategoryServiceBaseImpl {
 
 	public ShoppingCategory addCategory(
-			long plid, long parentCategoryId, String name, String description,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			long parentCategoryId, String name, String description,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		ShoppingCategoryPermission.check(
-			getPermissionChecker(), plid, parentCategoryId,
-			ActionKeys.ADD_CATEGORY);
+			getPermissionChecker(), serviceContext.getScopeGroupId(),
+			parentCategoryId, ActionKeys.ADD_CATEGORY);
 
 		return shoppingCategoryLocalService.addCategory(
-			getUserId(), plid, parentCategoryId, name, description,
-			addCommunityPermissions, addGuestPermissions);
-	}
-
-	public ShoppingCategory addCategory(
-			long plid, long parentCategoryId, String name, String description,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		ShoppingCategoryPermission.check(
-			getPermissionChecker(), plid, parentCategoryId,
-			ActionKeys.ADD_CATEGORY);
-
-		return shoppingCategoryLocalService.addCategory(
-			getUserId(), plid, parentCategoryId, name, description,
-			communityPermissions, guestPermissions);
+			getUserId(), parentCategoryId, name, description, serviceContext);
 	}
 
 	public void deleteCategory(long categoryId)
@@ -86,7 +72,8 @@ public class ShoppingCategoryServiceImpl
 
 	public ShoppingCategory updateCategory(
 			long categoryId, long parentCategoryId, String name,
-			String description, boolean mergeWithParentCategory)
+			String description, boolean mergeWithParentCategory,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		ShoppingCategoryPermission.check(
@@ -94,7 +81,7 @@ public class ShoppingCategoryServiceImpl
 
 		return shoppingCategoryLocalService.updateCategory(
 			categoryId, parentCategoryId, name, description,
-			mergeWithParentCategory);
+			mergeWithParentCategory, serviceContext);
 	}
 
 }

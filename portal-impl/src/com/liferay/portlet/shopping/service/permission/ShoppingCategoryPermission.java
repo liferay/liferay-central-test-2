@@ -27,8 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.service.permission.PortletPermissionUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl;
 import com.liferay.portlet.shopping.service.ShoppingCategoryLocalServiceUtil;
@@ -42,11 +40,11 @@ import com.liferay.portlet.shopping.service.ShoppingCategoryLocalServiceUtil;
 public class ShoppingCategoryPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, long plid, long categoryId,
+			PermissionChecker permissionChecker, long groupId, long categoryId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, plid, categoryId, actionId)) {
+		if (!contains(permissionChecker, groupId, categoryId, actionId)) {
 			throw new PrincipalException();
 		}
 	}
@@ -72,13 +70,13 @@ public class ShoppingCategoryPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, long plid, long categoryId,
+			PermissionChecker permissionChecker, long groupId, long categoryId,
 			String actionId)
 		throws PortalException, SystemException {
 
 		if (categoryId == ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
-			return PortletPermissionUtil.contains(
-				permissionChecker, plid, PortletKeys.SHOPPING, actionId);
+			return ShoppingPermission.contains(
+				permissionChecker, groupId, actionId);
 		}
 		else {
 			return contains(permissionChecker, categoryId, actionId);

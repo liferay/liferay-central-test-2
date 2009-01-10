@@ -73,39 +73,39 @@ import com.liferay.portlet.shopping.service.ShoppingOrderServiceUtil;
  *
  */
 public class ShoppingOrderServiceJSON {
-	public static void completeOrder(long plid, java.lang.String number,
+	public static void completeOrder(long groupId, java.lang.String number,
 		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
 		double ppPaymentGross, java.lang.String ppReceiverEmail,
 		java.lang.String ppPayerEmail)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ShoppingOrderServiceUtil.completeOrder(plid, number, ppTxnId,
+		ShoppingOrderServiceUtil.completeOrder(groupId, number, ppTxnId,
 			ppPaymentStatus, ppPaymentGross, ppReceiverEmail, ppPayerEmail);
 	}
 
-	public static void deleteOrder(long plid, long orderId)
+	public static void deleteOrder(long groupId, long orderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ShoppingOrderServiceUtil.deleteOrder(plid, orderId);
+		ShoppingOrderServiceUtil.deleteOrder(groupId, orderId);
 	}
 
-	public static JSONObject getOrder(long plid, long orderId)
+	public static JSONObject getOrder(long groupId, long orderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		com.liferay.portlet.shopping.model.ShoppingOrder returnValue = ShoppingOrderServiceUtil.getOrder(plid,
+		com.liferay.portlet.shopping.model.ShoppingOrder returnValue = ShoppingOrderServiceUtil.getOrder(groupId,
 				orderId);
 
 		return ShoppingOrderJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static void sendEmail(long plid, long orderId,
+	public static void sendEmail(long groupId, long orderId,
 		java.lang.String emailType)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ShoppingOrderServiceUtil.sendEmail(plid, orderId, emailType);
+		ShoppingOrderServiceUtil.sendEmail(groupId, orderId, emailType);
 	}
 
-	public static JSONObject updateOrder(long plid, long orderId,
+	public static JSONObject updateOrder(long groupId, long orderId,
 		java.lang.String billingFirstName, java.lang.String billingLastName,
 		java.lang.String billingEmailAddress, java.lang.String billingCompany,
 		java.lang.String billingStreet, java.lang.String billingCity,
@@ -122,7 +122,7 @@ public class ShoppingOrderServiceJSON {
 		int ccExpYear, java.lang.String ccVerNumber, java.lang.String comments)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		com.liferay.portlet.shopping.model.ShoppingOrder returnValue = ShoppingOrderServiceUtil.updateOrder(plid,
+		com.liferay.portlet.shopping.model.ShoppingOrder returnValue = ShoppingOrderServiceUtil.updateOrder(groupId,
 				orderId, billingFirstName, billingLastName,
 				billingEmailAddress, billingCompany, billingStreet,
 				billingCity, billingState, billingZip, billingCountry,
@@ -135,13 +135,13 @@ public class ShoppingOrderServiceJSON {
 		return ShoppingOrderJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject updateOrder(long plid, long orderId,
+	public static JSONObject updateOrder(long groupId, long orderId,
 		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
 		double ppPaymentGross, java.lang.String ppReceiverEmail,
 		java.lang.String ppPayerEmail)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		com.liferay.portlet.shopping.model.ShoppingOrder returnValue = ShoppingOrderServiceUtil.updateOrder(plid,
+		com.liferay.portlet.shopping.model.ShoppingOrder returnValue = ShoppingOrderServiceUtil.updateOrder(groupId,
 				orderId, ppTxnId, ppPaymentStatus, ppPaymentGross,
 				ppReceiverEmail, ppPayerEmail);
 

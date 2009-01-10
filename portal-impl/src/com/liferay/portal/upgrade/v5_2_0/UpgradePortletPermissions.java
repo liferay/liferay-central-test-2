@@ -91,6 +91,12 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 				new String[] {"ADD_QUESTION"});
 
 			updatePortletPermissions(
+				"34", "com.liferay.portlet.shopping",
+				new String[] {
+						"ADD_CATEGORY", "MANAGE_COUPONS", "MANAGE_ORDERS"
+				});
+
+			updatePortletPermissions(
 				"98", "com.liferay.portlet.softwarecatalog",
 				new String[] {"ADD_FRAMEWORK_VERSION", "ADD_PRODUCT_ENTRY"});
 

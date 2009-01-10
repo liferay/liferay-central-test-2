@@ -104,40 +104,14 @@ public class ShoppingCategoryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
-		long userId, long plid, long parentCategoryId, java.lang.String name,
-		java.lang.String description, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addCategory(userId, plid, parentCategoryId, name,
-			description, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
-		long userId, long plid, long parentCategoryId, java.lang.String name,
-		java.lang.String description, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addCategory(userId, plid, parentCategoryId, name,
-			description, communityPermissions, guestPermissions);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
-		long userId, long plid, long parentCategoryId, java.lang.String name,
+		long userId, long parentCategoryId, java.lang.String name,
 		java.lang.String description,
-		java.lang.Boolean addCommunityPermissions,
-		java.lang.Boolean addGuestPermissions,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addCategory(userId, plid, parentCategoryId, name,
-			description, addCommunityPermissions, addGuestPermissions,
-			communityPermissions, guestPermissions);
+				   .addCategory(userId, parentCategoryId, name, description,
+			serviceContext);
 	}
 
 	public static void addCategoryResources(long categoryId,
@@ -251,12 +225,13 @@ public class ShoppingCategoryLocalServiceUtil {
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory updateCategory(
 		long categoryId, long parentCategoryId, java.lang.String name,
-		java.lang.String description, boolean mergeWithParentCategory)
+		java.lang.String description, boolean mergeWithParentCategory,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .updateCategory(categoryId, parentCategoryId, name,
-			description, mergeWithParentCategory);
+			description, mergeWithParentCategory, serviceContext);
 	}
 
 	public static ShoppingCategoryLocalService getService() {

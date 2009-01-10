@@ -104,22 +104,23 @@ public class ShoppingCouponLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon addCoupon(
-		long userId, long plid, java.lang.String code, boolean autoCode,
+		long userId, java.lang.String code, boolean autoCode,
 		java.lang.String name, java.lang.String description,
 		int startDateMonth, int startDateDay, int startDateYear,
 		int startDateHour, int startDateMinute, int endDateMonth,
 		int endDateDay, int endDateYear, int endDateHour, int endDateMinute,
 		boolean neverExpire, boolean active, java.lang.String limitCategories,
 		java.lang.String limitSkus, double minOrder, double discount,
-		java.lang.String discountType)
+		java.lang.String discountType,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addCoupon(userId, plid, code, autoCode, name, description,
+				   .addCoupon(userId, code, autoCode, name, description,
 			startDateMonth, startDateDay, startDateYear, startDateHour,
 			startDateMinute, endDateMonth, endDateDay, endDateYear,
 			endDateHour, endDateMinute, neverExpire, active, limitCategories,
-			limitSkus, minOrder, discount, discountType);
+			limitSkus, minOrder, discount, discountType, serviceContext);
 	}
 
 	public static void deleteCoupon(long couponId)
@@ -148,11 +149,11 @@ public class ShoppingCouponLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> search(
-		long plid, long companyId, java.lang.String code, boolean active,
+		long groupId, long companyId, java.lang.String code, boolean active,
 		java.lang.String discountType, boolean andOperator, int start, int end)
 		throws com.liferay.portal.SystemException {
 		return getService()
-				   .search(plid, companyId, code, active, discountType,
+				   .search(groupId, companyId, code, active, discountType,
 			andOperator, start, end);
 	}
 
@@ -171,7 +172,8 @@ public class ShoppingCouponLocalServiceUtil {
 		int endDateMonth, int endDateDay, int endDateYear, int endDateHour,
 		int endDateMinute, boolean neverExpire, boolean active,
 		java.lang.String limitCategories, java.lang.String limitSkus,
-		double minOrder, double discount, java.lang.String discountType)
+		double minOrder, double discount, java.lang.String discountType,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
@@ -179,7 +181,7 @@ public class ShoppingCouponLocalServiceUtil {
 			startDateMonth, startDateDay, startDateYear, startDateHour,
 			startDateMinute, endDateMonth, endDateDay, endDateYear,
 			endDateHour, endDateMinute, neverExpire, active, limitCategories,
-			limitSkus, minOrder, discount, discountType);
+			limitSkus, minOrder, discount, discountType, serviceContext);
 	}
 
 	public static ShoppingCouponLocalService getService() {

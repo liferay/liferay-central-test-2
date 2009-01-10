@@ -28,6 +28,8 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.shopping.DuplicateItemSKUException;
@@ -41,6 +43,7 @@ import com.liferay.portlet.shopping.ItemSmallImageNameException;
 import com.liferay.portlet.shopping.ItemSmallImageSizeException;
 import com.liferay.portlet.shopping.NoSuchCategoryException;
 import com.liferay.portlet.shopping.NoSuchItemException;
+import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.model.ShoppingItemField;
 import com.liferay.portlet.shopping.model.ShoppingItemPrice;
 import com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl;
@@ -253,10 +256,8 @@ public class EditItemAction extends PortletAction {
 			uploadRequest, "largeImageURL");
 		File largeFile = uploadRequest.getFile("largeFile");
 
-		String[] communityPermissions = actionRequest.getParameterValues(
-			"communityPermissions");
-		String[] guestPermissions = actionRequest.getParameterValues(
-			"guestPermissions");
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			ShoppingItem.class.getName(), actionRequest);
 
 		if (itemId <= 0) {
 
@@ -267,8 +268,7 @@ public class EditItemAction extends PortletAction {
 				fieldsQuantities, requiresShipping, stockQuantity, featured,
 				sale, smallImage, smallImageURL, smallFile, mediumImage,
 				mediumImageURL, mediumFile, largeImage, largeImageURL,
-				largeFile, itemFields, itemPrices, communityPermissions,
-				guestPermissions);
+				largeFile, itemFields, itemPrices, serviceContext);
 		}
 		else {
 
@@ -279,7 +279,7 @@ public class EditItemAction extends PortletAction {
 				fieldsQuantities, requiresShipping, stockQuantity, featured,
 				sale, smallImage, smallImageURL, smallFile, mediumImage,
 				mediumImageURL, mediumFile, largeImage, largeImageURL,
-				largeFile, itemFields, itemPrices);
+				largeFile, itemFields, itemPrices, serviceContext);
 		}
 	}
 

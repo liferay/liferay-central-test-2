@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.shopping.CouponCodeException;
 import com.liferay.portlet.shopping.CouponDateException;
@@ -60,19 +61,19 @@ public class ShoppingCouponLocalServiceImpl
 	extends ShoppingCouponLocalServiceBaseImpl {
 
 	public ShoppingCoupon addCoupon(
-			long userId, long plid, String code, boolean autoCode, String name,
+			long userId, String code, boolean autoCode, String name,
 			String description, int startDateMonth, int startDateDay,
 			int startDateYear, int startDateHour, int startDateMinute,
 			int endDateMonth, int endDateDay, int endDateYear, int endDateHour,
 			int endDateMinute, boolean neverExpire, boolean active,
 			String limitCategories, String limitSkus, double minOrder,
-			double discount, String discountType)
+			double discount, String discountType, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Coupon
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		long groupId = PortalUtil.getScopeGroupId(plid);
+		long groupId = serviceContext.getScopeGroupId();
 
 		code = code.trim().toUpperCase();
 
@@ -156,11 +157,9 @@ public class ShoppingCouponLocalServiceImpl
 	}
 
 	public List<ShoppingCoupon> search(
-			long plid, long companyId, String code, boolean active,
+			long groupId, long companyId, String code, boolean active,
 			String discountType, boolean andOperator, int start, int end)
 		throws SystemException {
-
-		long groupId = PortalUtil.getScopeGroupId(plid);
 
 		return shoppingCouponFinder.findByG_C_C_A_DT(
 			groupId, companyId, code, active, discountType, andOperator,
@@ -183,7 +182,7 @@ public class ShoppingCouponLocalServiceImpl
 			int endDateDay, int endDateYear, int endDateHour, int endDateMinute,
 			boolean neverExpire, boolean active, String limitCategories,
 			String limitSkus, double minOrder, double discount,
-			String discountType)
+			String discountType, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);

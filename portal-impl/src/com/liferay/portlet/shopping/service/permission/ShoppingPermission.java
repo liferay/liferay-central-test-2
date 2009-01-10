@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
@@ -20,51 +19,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/shopping/init.jsp" %>
+package com.liferay.portlet.shopping.service.permission;
 
-<%
-String tabs1 = ParamUtil.getString(request, "tabs1", "categories");
+import com.liferay.portal.PortalException;
+import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.PermissionChecker;
 
-String tabs1Names = "categories,cart";
+/**
+ * <a href="ShoppingPermission.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ *
+ */
+public class ShoppingPermission {
 
-if (!user.isDefaultUser()) {
-	tabs1Names += ",orders";
+	public static void check(
+			PermissionChecker permissionChecker, long groupId, String actionId)
+		throws PortalException {
+
+		if (!contains(permissionChecker, groupId, actionId)) {
+			throw new PrincipalException();
+		}
+	}
+
+	public static boolean contains(
+		PermissionChecker permissionChecker, long groupId, String actionId) {
+
+		return permissionChecker.hasPermission(
+			groupId, "com.liferay.portlet.shopping", groupId, actionId);
+	}
+
 }
-
-if (ShoppingPermission.contains(permissionChecker, scopeGroupId, ActionKeys.MANAGE_COUPONS)) {
-	tabs1Names += ",coupons";
-}
-
-// View
-
-PortletURL viewURL = renderResponse.createRenderURL();
-
-viewURL.setWindowState(WindowState.MAXIMIZED);
-
-viewURL.setParameter("struts_action", "/shopping/view");
-
-// Cart
-
-PortletURL cartURL = renderResponse.createRenderURL();
-
-cartURL.setWindowState(WindowState.MAXIMIZED);
-
-cartURL.setParameter("struts_action", "/shopping/cart");
-
-if (!tabs1.equals("cart")) {
-	cartURL.setParameter("redirect", currentURL);
-}
-
-// Back URL
-
-String backURL = ParamUtil.getString(request, "backURL");
-%>
-
-<liferay-ui:tabs
-	names="<%= tabs1Names %>"
-	url="<%= viewURL.toString() %>"
-	url1="<%= cartURL.toString() %>"
-	backURL="<%= backURL %>"
-/>

@@ -25,6 +25,7 @@ package com.liferay.portlet.shopping.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.model.ShoppingItemField;
 import com.liferay.portlet.shopping.model.ShoppingItemPrice;
@@ -61,8 +62,7 @@ public class ShoppingItemServiceImpl extends ShoppingItemServiceBaseImpl {
 			File smallFile, boolean mediumImage, String mediumImageURL,
 			File mediumFile, boolean largeImage, String largeImageURL,
 			File largeFile, List<ShoppingItemField> itemFields,
-			List<ShoppingItemPrice> itemPrices, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			List<ShoppingItemPrice> itemPrices, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		ShoppingCategoryPermission.check(
@@ -73,30 +73,7 @@ public class ShoppingItemServiceImpl extends ShoppingItemServiceBaseImpl {
 			fieldsQuantities, requiresShipping, stockQuantity, featured, sale,
 			smallImage, smallImageURL, smallFile, mediumImage, mediumImageURL,
 			mediumFile, largeImage, largeImageURL, largeFile, itemFields,
-			itemPrices, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public ShoppingItem addItem(
-			long categoryId, String sku, String name, String description,
-			String properties, String fieldsQuantities,
-			boolean requiresShipping, int stockQuantity, boolean featured,
-			Boolean sale, boolean smallImage, String smallImageURL,
-			File smallFile, boolean mediumImage, String mediumImageURL,
-			File mediumFile, boolean largeImage, String largeImageURL,
-			File largeFile, List<ShoppingItemField> itemFields,
-			List<ShoppingItemPrice> itemPrices, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		ShoppingCategoryPermission.check(
-			getPermissionChecker(), categoryId, ActionKeys.ADD_ITEM);
-
-		return shoppingItemLocalService.addItem(
-			getUserId(), categoryId, sku, name, description, properties,
-			fieldsQuantities, requiresShipping, stockQuantity, featured, sale,
-			smallImage, smallImageURL, smallFile, mediumImage, mediumImageURL,
-			mediumFile, largeImage, largeImageURL, largeFile, itemFields,
-			itemPrices, communityPermissions, guestPermissions);
+			itemPrices, serviceContext);
 	}
 
 	public void deleteItem(long itemId)
@@ -125,7 +102,7 @@ public class ShoppingItemServiceImpl extends ShoppingItemServiceBaseImpl {
 			File smallFile, boolean mediumImage, String mediumImageURL,
 			File mediumFile, boolean largeImage, String largeImageURL,
 			File largeFile, List<ShoppingItemField> itemFields,
-			List<ShoppingItemPrice> itemPrices)
+			List<ShoppingItemPrice> itemPrices, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		ShoppingItemPermission.check(
@@ -136,7 +113,7 @@ public class ShoppingItemServiceImpl extends ShoppingItemServiceBaseImpl {
 			fieldsQuantities, requiresShipping, stockQuantity, featured, sale,
 			smallImage, smallImageURL, smallFile, mediumImage, mediumImageURL,
 			mediumFile, largeImage, largeImageURL, largeFile, itemFields,
-			itemPrices);
+			itemPrices, serviceContext);
 	}
 
 }

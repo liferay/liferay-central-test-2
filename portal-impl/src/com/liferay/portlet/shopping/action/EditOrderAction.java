@@ -26,9 +26,9 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.shopping.NoSuchOrderException;
 import com.liferay.portlet.shopping.service.ShoppingOrderServiceUtil;
@@ -112,30 +112,33 @@ public class EditOrderAction extends PortletAction {
 	}
 
 	protected void deleteOrders(ActionRequest actionRequest) throws Exception {
-		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		long[] deleteOrderIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "deleteOrderIds"), 0L);
 
 		for (int i = 0; i < deleteOrderIds.length; i++) {
 			ShoppingOrderServiceUtil.deleteOrder(
-				layout.getPlid(), deleteOrderIds[i]);
+				themeDisplay.getScopeGroupId(), deleteOrderIds[i]);
 		}
 	}
 
 	protected void sendEmail(ActionRequest actionRequest) throws Exception {
-		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		long orderId = ParamUtil.getLong(actionRequest, "orderId");
 
 		String emailType = ParamUtil.getString(actionRequest, "emailType");
 
 		ShoppingOrderServiceUtil.sendEmail(
-			layout.getPlid(), orderId, emailType);
+			themeDisplay.getScopeGroupId(), orderId, emailType);
 	}
 
 	protected void updateOrder(ActionRequest actionRequest) throws Exception {
-		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		String number = ParamUtil.getString(actionRequest, "number");
 		String ppTxnId = ParamUtil.getString(actionRequest, "ppTxnId");
@@ -149,8 +152,8 @@ public class EditOrderAction extends PortletAction {
 			actionRequest, "ppPayerEmail");
 
 		ShoppingOrderServiceUtil.completeOrder(
-			layout.getPlid(), number, ppTxnId, ppPaymentStatus, ppPaymentGross,
-			ppReceiverEmail, ppPayerEmail);
+			themeDisplay.getScopeGroupId(), number, ppTxnId, ppPaymentStatus,
+			ppPaymentGross, ppReceiverEmail, ppPayerEmail);
 	}
 
 }

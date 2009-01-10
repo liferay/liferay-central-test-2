@@ -54,29 +54,29 @@ import com.liferay.portal.kernel.annotation.Transactional;
 @Transactional(rollbackFor =  {
 	PortalException.class, SystemException.class})
 public interface ShoppingOrderService {
-	public void completeOrder(long plid, java.lang.String number,
+	public void completeOrder(long groupId, java.lang.String number,
 		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
 		double ppPaymentGross, java.lang.String ppReceiverEmail,
 		java.lang.String ppPayerEmail)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void deleteOrder(long plid, long orderId)
+	public void deleteOrder(long groupId, long orderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.shopping.model.ShoppingOrder getOrder(
-		long plid, long orderId)
+		long groupId, long orderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void sendEmail(long plid, long orderId, java.lang.String emailType)
+	public void sendEmail(long groupId, long orderId, java.lang.String emailType)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
-		long plid, long orderId, java.lang.String billingFirstName,
+		long groupId, long orderId, java.lang.String billingFirstName,
 		java.lang.String billingLastName, java.lang.String billingEmailAddress,
 		java.lang.String billingCompany, java.lang.String billingStreet,
 		java.lang.String billingCity, java.lang.String billingState,
@@ -94,7 +94,7 @@ public interface ShoppingOrderService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
-		long plid, long orderId, java.lang.String ppTxnId,
+		long groupId, long orderId, java.lang.String ppTxnId,
 		java.lang.String ppPaymentStatus, double ppPaymentGross,
 		java.lang.String ppReceiverEmail, java.lang.String ppPayerEmail)
 		throws com.liferay.portal.PortalException,

@@ -27,8 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.service.permission.PortletPermissionUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.shopping.model.ShoppingOrder;
 import com.liferay.portlet.shopping.service.ShoppingOrderLocalServiceUtil;
 
@@ -41,44 +39,43 @@ import com.liferay.portlet.shopping.service.ShoppingOrderLocalServiceUtil;
 public class ShoppingOrderPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, long plid, long orderId,
+			PermissionChecker permissionChecker, long groupId, long orderId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, plid, orderId, actionId)) {
+		if (!contains(permissionChecker, groupId, orderId, actionId)) {
 			throw new PrincipalException();
 		}
 	}
 
 	public static void check(
-			PermissionChecker permissionChecker, long plid, ShoppingOrder order,
-			String actionId)
+			PermissionChecker permissionChecker, long groupId,
+			ShoppingOrder order, String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, plid, order, actionId)) {
+		if (!contains(permissionChecker, groupId, order, actionId)) {
 			throw new PrincipalException();
 		}
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, long plid, long orderId,
+			PermissionChecker permissionChecker, long groupId, long orderId,
 			String actionId)
 		throws PortalException, SystemException {
 
 		ShoppingOrder order =
 			ShoppingOrderLocalServiceUtil.getOrder(orderId);
 
-		return contains(permissionChecker, plid, order, actionId);
+		return contains(permissionChecker, groupId, order, actionId);
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, long plid, ShoppingOrder order,
-			String actionId)
+			PermissionChecker permissionChecker, long groupId,
+			ShoppingOrder order, String actionId)
 		throws PortalException, SystemException {
 
-		if (PortletPermissionUtil.contains(
-				permissionChecker, plid, PortletKeys.SHOPPING,
-				ActionKeys.MANAGE_ORDERS)) {
+		if (ShoppingPermission.contains(
+				permissionChecker, groupId, ActionKeys.MANAGE_ORDERS)) {
 
 			return true;
 		}

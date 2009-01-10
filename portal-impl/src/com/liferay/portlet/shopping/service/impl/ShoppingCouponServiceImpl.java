@@ -25,10 +25,10 @@ package com.liferay.portlet.shopping.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.service.permission.PortletPermissionUtil;
-import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
 import com.liferay.portlet.shopping.service.base.ShoppingCouponServiceBaseImpl;
+import com.liferay.portlet.shopping.service.permission.ShoppingPermission;
 
 import java.util.List;
 
@@ -41,73 +41,70 @@ import java.util.List;
 public class ShoppingCouponServiceImpl extends ShoppingCouponServiceBaseImpl {
 
 	public ShoppingCoupon addCoupon(
-			long plid, String code, boolean autoCode, String name,
-			String description, int startDateMonth, int startDateDay,
-			int startDateYear, int startDateHour, int startDateMinute,
-			int endDateMonth, int endDateDay, int endDateYear, int endDateHour,
-			int endDateMinute, boolean neverExpire, boolean active,
-			String limitCategories, String limitSkus, double minOrder,
-			double discount, String discountType)
-		throws PortalException, SystemException {
-
-		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.SHOPPING,
-			ActionKeys.MANAGE_COUPONS);
-
-		return shoppingCouponLocalService.addCoupon(
-			getUserId(), plid, code, autoCode, name, description,
-			startDateMonth, startDateDay, startDateYear, startDateHour,
-			startDateMinute, endDateMonth, endDateDay, endDateYear, endDateHour,
-			endDateMinute, neverExpire, active, limitCategories, limitSkus,
-			minOrder, discount, discountType);
-	}
-
-	public void deleteCoupon(long plid, long couponId)
-		throws PortalException, SystemException {
-
-		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.SHOPPING,
-			ActionKeys.MANAGE_COUPONS);
-
-		shoppingCouponLocalService.deleteCoupon(couponId);
-	}
-
-	public ShoppingCoupon getCoupon(long plid, long couponId)
-		throws PortalException, SystemException {
-
-		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.SHOPPING,
-			ActionKeys.MANAGE_COUPONS);
-
-		return shoppingCouponLocalService.getCoupon(couponId);
-	}
-
-	public List<ShoppingCoupon> search(
-			long plid, long companyId, String code, boolean active,
-			String discountType, boolean andOperator, int start, int end)
-		throws PortalException, SystemException {
-
-		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.SHOPPING,
-			ActionKeys.MANAGE_COUPONS);
-
-		return shoppingCouponLocalService.search(
-			plid, companyId, code, active, discountType, andOperator, start,
-			end);
-	}
-
-	public ShoppingCoupon updateCoupon(
-			long plid, long couponId, String name, String description,
+			String code, boolean autoCode, String name, String description,
 			int startDateMonth, int startDateDay, int startDateYear,
 			int startDateHour, int startDateMinute, int endDateMonth,
 			int endDateDay, int endDateYear, int endDateHour, int endDateMinute,
 			boolean neverExpire, boolean active, String limitCategories,
 			String limitSkus, double minOrder, double discount,
-			String discountType)
+			String discountType, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.SHOPPING,
+		ShoppingPermission.check(
+			getPermissionChecker(), serviceContext.getScopeGroupId(),
+			ActionKeys.MANAGE_COUPONS);
+
+		return shoppingCouponLocalService.addCoupon(
+			getUserId(), code, autoCode, name, description,
+			startDateMonth, startDateDay, startDateYear, startDateHour,
+			startDateMinute, endDateMonth, endDateDay, endDateYear, endDateHour,
+			endDateMinute, neverExpire, active, limitCategories, limitSkus,
+			minOrder, discount, discountType, serviceContext);
+	}
+
+	public void deleteCoupon(long groupId, long couponId)
+		throws PortalException, SystemException {
+
+		ShoppingPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.MANAGE_COUPONS);
+
+		shoppingCouponLocalService.deleteCoupon(couponId);
+	}
+
+	public ShoppingCoupon getCoupon(long groupId, long couponId)
+		throws PortalException, SystemException {
+
+		ShoppingPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.MANAGE_COUPONS);
+
+		return shoppingCouponLocalService.getCoupon(couponId);
+	}
+
+	public List<ShoppingCoupon> search(
+			long groupId, long companyId, String code, boolean active,
+			String discountType, boolean andOperator, int start, int end)
+		throws PortalException, SystemException {
+
+		ShoppingPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.MANAGE_COUPONS);
+
+		return shoppingCouponLocalService.search(
+			groupId, companyId, code, active, discountType, andOperator, start,
+			end);
+	}
+
+	public ShoppingCoupon updateCoupon(
+			long couponId, String name, String description, int startDateMonth,
+			int startDateDay, int startDateYear, int startDateHour,
+			int startDateMinute, int endDateMonth, int endDateDay,
+			int endDateYear, int endDateHour, int endDateMinute,
+			boolean neverExpire, boolean active, String limitCategories,
+			String limitSkus, double minOrder, double discount,
+			String discountType, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		ShoppingPermission.check(
+			getPermissionChecker(), serviceContext.getScopeGroupId(),
 			ActionKeys.MANAGE_COUPONS);
 
 		return shoppingCouponLocalService.updateCoupon(
@@ -115,7 +112,7 @@ public class ShoppingCouponServiceImpl extends ShoppingCouponServiceBaseImpl {
 			startDateDay, startDateYear, startDateHour, startDateMinute,
 			endDateMonth, endDateDay, endDateYear, endDateHour, endDateMinute,
 			neverExpire, active, limitCategories, limitSkus, minOrder, discount,
-			discountType);
+			discountType, serviceContext);
 	}
 
 }

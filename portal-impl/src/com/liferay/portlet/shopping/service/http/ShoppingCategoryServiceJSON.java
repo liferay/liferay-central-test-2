@@ -73,27 +73,13 @@ import com.liferay.portlet.shopping.service.ShoppingCategoryServiceUtil;
  *
  */
 public class ShoppingCategoryServiceJSON {
-	public static JSONObject addCategory(long plid, long parentCategoryId,
+	public static JSONObject addCategory(long parentCategoryId,
 		java.lang.String name, java.lang.String description,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		com.liferay.portlet.shopping.model.ShoppingCategory returnValue = ShoppingCategoryServiceUtil.addCategory(plid,
-				parentCategoryId, name, description, addCommunityPermissions,
-				addGuestPermissions);
-
-		return ShoppingCategoryJSONSerializer.toJSONObject(returnValue);
-	}
-
-	public static JSONObject addCategory(long plid, long parentCategoryId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		com.liferay.portlet.shopping.model.ShoppingCategory returnValue = ShoppingCategoryServiceUtil.addCategory(plid,
-				parentCategoryId, name, description, communityPermissions,
-				guestPermissions);
+		com.liferay.portlet.shopping.model.ShoppingCategory returnValue = ShoppingCategoryServiceUtil.addCategory(parentCategoryId,
+				name, description, serviceContext);
 
 		return ShoppingCategoryJSONSerializer.toJSONObject(returnValue);
 	}
@@ -114,11 +100,13 @@ public class ShoppingCategoryServiceJSON {
 
 	public static JSONObject updateCategory(long categoryId,
 		long parentCategoryId, java.lang.String name,
-		java.lang.String description, boolean mergeWithParentCategory)
+		java.lang.String description, boolean mergeWithParentCategory,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.shopping.model.ShoppingCategory returnValue = ShoppingCategoryServiceUtil.updateCategory(categoryId,
-				parentCategoryId, name, description, mergeWithParentCategory);
+				parentCategoryId, name, description, mergeWithParentCategory,
+				serviceContext);
 
 		return ShoppingCategoryJSONSerializer.toJSONObject(returnValue);
 	}

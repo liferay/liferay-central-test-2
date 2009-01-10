@@ -120,11 +120,12 @@ for (int i = 0; i < results.size(); i++) {
 	resultRows.add(row);
 }
 
-boolean showAddCategoryButton = ShoppingCategoryPermission.contains(permissionChecker, plid, categoryId, ActionKeys.ADD_CATEGORY);
+boolean showAddCategoryButton = ShoppingCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.ADD_CATEGORY);
+boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
 boolean showSearch = (results.size() > 0);
 %>
 
-<c:if test="<%= showAddCategoryButton || showSearch %>">
+<c:if test="<%= showAddCategoryButton || showPermissionsButton || showSearch %>">
 	<div>
 		<c:if test="<%= showSearch %>">
 			<label for="<portlet:namespace />keywords1"><liferay-ui:message key="search" /></label>
@@ -136,6 +137,29 @@ boolean showSearch = (results.size() > 0);
 
 		<c:if test="<%= showAddCategoryButton %>">
 			<input type="button" value="<liferay-ui:message key='<%= (category == null) ? "add-category" : "add-subcategory" %>' />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_category" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentCategoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';" />
+		</c:if>
+
+		<c:if test="<%= showPermissionsButton %>">
+			<%
+				String modelResource = "com.liferay.portlet.shopping";
+				String modelResourceDescription = themeDisplay.getScopeGroupName();
+				String resourcePrimKey = String.valueOf(scopeGroupId);
+
+				if (category != null) {
+					modelResource = ShoppingCategory.class.getName();
+					modelResourceDescription = category.getName();
+					resourcePrimKey = String.valueOf(category.getCategoryId());
+				}
+			%>
+			
+			<liferay-security:permissionsURL
+				modelResource="<%= modelResource %>"
+				modelResourceDescription="<%= modelResourceDescription %>"
+				resourcePrimKey="<%= resourcePrimKey %>"
+				var="permissionsURL"
+			/>
+
+			<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionsURL %>';" />
 		</c:if>
 	</div>
 

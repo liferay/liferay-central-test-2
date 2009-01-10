@@ -107,7 +107,7 @@ public class ActionUtil {
 
 		if (couponId > 0) {
 			coupon = ShoppingCouponServiceUtil.getCoupon(
-				themeDisplay.getPlid(), couponId);
+				themeDisplay.getScopeGroupId(), couponId);
 		}
 
 		request.setAttribute(WebKeys.SHOPPING_COUPON, coupon);
@@ -163,7 +163,7 @@ public class ActionUtil {
 
 		if (orderId > 0) {
 			order = ShoppingOrderServiceUtil.getOrder(
-				themeDisplay.getPlid(), orderId);
+				themeDisplay.getScopeGroupId(), orderId);
 		}
 
 		request.setAttribute(WebKeys.SHOPPING_ORDER, order);

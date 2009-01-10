@@ -82,21 +82,22 @@ import java.rmi.RemoteException;
  */
 public class ShoppingCouponServiceSoap {
 	public static com.liferay.portlet.shopping.model.ShoppingCouponSoap addCoupon(
-		long plid, java.lang.String code, boolean autoCode,
-		java.lang.String name, java.lang.String description,
-		int startDateMonth, int startDateDay, int startDateYear,
-		int startDateHour, int startDateMinute, int endDateMonth,
-		int endDateDay, int endDateYear, int endDateHour, int endDateMinute,
-		boolean neverExpire, boolean active, java.lang.String limitCategories,
-		java.lang.String limitSkus, double minOrder, double discount,
-		java.lang.String discountType) throws RemoteException {
+		java.lang.String code, boolean autoCode, java.lang.String name,
+		java.lang.String description, int startDateMonth, int startDateDay,
+		int startDateYear, int startDateHour, int startDateMinute,
+		int endDateMonth, int endDateDay, int endDateYear, int endDateHour,
+		int endDateMinute, boolean neverExpire, boolean active,
+		java.lang.String limitCategories, java.lang.String limitSkus,
+		double minOrder, double discount, java.lang.String discountType,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
 		try {
-			com.liferay.portlet.shopping.model.ShoppingCoupon returnValue = ShoppingCouponServiceUtil.addCoupon(plid,
-					code, autoCode, name, description, startDateMonth,
-					startDateDay, startDateYear, startDateHour,
-					startDateMinute, endDateMonth, endDateDay, endDateYear,
-					endDateHour, endDateMinute, neverExpire, active,
-					limitCategories, limitSkus, minOrder, discount, discountType);
+			com.liferay.portlet.shopping.model.ShoppingCoupon returnValue = ShoppingCouponServiceUtil.addCoupon(code,
+					autoCode, name, description, startDateMonth, startDateDay,
+					startDateYear, startDateHour, startDateMinute,
+					endDateMonth, endDateDay, endDateYear, endDateHour,
+					endDateMinute, neverExpire, active, limitCategories,
+					limitSkus, minOrder, discount, discountType, serviceContext);
 
 			return com.liferay.portlet.shopping.model.ShoppingCouponSoap.toSoapModel(returnValue);
 		}
@@ -107,10 +108,10 @@ public class ShoppingCouponServiceSoap {
 		}
 	}
 
-	public static void deleteCoupon(long plid, long couponId)
+	public static void deleteCoupon(long groupId, long couponId)
 		throws RemoteException {
 		try {
-			ShoppingCouponServiceUtil.deleteCoupon(plid, couponId);
+			ShoppingCouponServiceUtil.deleteCoupon(groupId, couponId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -120,9 +121,9 @@ public class ShoppingCouponServiceSoap {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCouponSoap getCoupon(
-		long plid, long couponId) throws RemoteException {
+		long groupId, long couponId) throws RemoteException {
 		try {
-			com.liferay.portlet.shopping.model.ShoppingCoupon returnValue = ShoppingCouponServiceUtil.getCoupon(plid,
+			com.liferay.portlet.shopping.model.ShoppingCoupon returnValue = ShoppingCouponServiceUtil.getCoupon(groupId,
 					couponId);
 
 			return com.liferay.portlet.shopping.model.ShoppingCouponSoap.toSoapModel(returnValue);
@@ -135,13 +136,13 @@ public class ShoppingCouponServiceSoap {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCouponSoap[] search(
-		long plid, long companyId, java.lang.String code, boolean active,
+		long groupId, long companyId, java.lang.String code, boolean active,
 		java.lang.String discountType, boolean andOperator, int start, int end)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> returnValue =
-				ShoppingCouponServiceUtil.search(plid, companyId, code, active,
-					discountType, andOperator, start, end);
+				ShoppingCouponServiceUtil.search(groupId, companyId, code,
+					active, discountType, andOperator, start, end);
 
 			return com.liferay.portlet.shopping.model.ShoppingCouponSoap.toSoapModels(returnValue);
 		}
@@ -153,21 +154,22 @@ public class ShoppingCouponServiceSoap {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCouponSoap updateCoupon(
-		long plid, long couponId, java.lang.String name,
-		java.lang.String description, int startDateMonth, int startDateDay,
-		int startDateYear, int startDateHour, int startDateMinute,
-		int endDateMonth, int endDateDay, int endDateYear, int endDateHour,
-		int endDateMinute, boolean neverExpire, boolean active,
-		java.lang.String limitCategories, java.lang.String limitSkus,
-		double minOrder, double discount, java.lang.String discountType)
+		long couponId, java.lang.String name, java.lang.String description,
+		int startDateMonth, int startDateDay, int startDateYear,
+		int startDateHour, int startDateMinute, int endDateMonth,
+		int endDateDay, int endDateYear, int endDateHour, int endDateMinute,
+		boolean neverExpire, boolean active, java.lang.String limitCategories,
+		java.lang.String limitSkus, double minOrder, double discount,
+		java.lang.String discountType,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			com.liferay.portlet.shopping.model.ShoppingCoupon returnValue = ShoppingCouponServiceUtil.updateCoupon(plid,
-					couponId, name, description, startDateMonth, startDateDay,
+			com.liferay.portlet.shopping.model.ShoppingCoupon returnValue = ShoppingCouponServiceUtil.updateCoupon(couponId,
+					name, description, startDateMonth, startDateDay,
 					startDateYear, startDateHour, startDateMinute,
 					endDateMonth, endDateDay, endDateYear, endDateHour,
 					endDateMinute, neverExpire, active, limitCategories,
-					limitSkus, minOrder, discount, discountType);
+					limitSkus, minOrder, discount, discountType, serviceContext);
 
 			return com.liferay.portlet.shopping.model.ShoppingCouponSoap.toSoapModel(returnValue);
 		}

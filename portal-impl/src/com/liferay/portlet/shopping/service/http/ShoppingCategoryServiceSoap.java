@@ -82,31 +82,13 @@ import java.rmi.RemoteException;
  */
 public class ShoppingCategoryServiceSoap {
 	public static com.liferay.portlet.shopping.model.ShoppingCategorySoap addCategory(
-		long plid, long parentCategoryId, java.lang.String name,
-		java.lang.String description, boolean addCommunityPermissions,
-		boolean addGuestPermissions) throws RemoteException {
+		long parentCategoryId, java.lang.String name,
+		java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
 		try {
-			com.liferay.portlet.shopping.model.ShoppingCategory returnValue = ShoppingCategoryServiceUtil.addCategory(plid,
-					parentCategoryId, name, description,
-					addCommunityPermissions, addGuestPermissions);
-
-			return com.liferay.portlet.shopping.model.ShoppingCategorySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingCategorySoap addCategory(
-		long plid, long parentCategoryId, java.lang.String name,
-		java.lang.String description, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions) throws RemoteException {
-		try {
-			com.liferay.portlet.shopping.model.ShoppingCategory returnValue = ShoppingCategoryServiceUtil.addCategory(plid,
-					parentCategoryId, name, description, communityPermissions,
-					guestPermissions);
+			com.liferay.portlet.shopping.model.ShoppingCategory returnValue = ShoppingCategoryServiceUtil.addCategory(parentCategoryId,
+					name, description, serviceContext);
 
 			return com.liferay.portlet.shopping.model.ShoppingCategorySoap.toSoapModel(returnValue);
 		}
@@ -145,11 +127,13 @@ public class ShoppingCategoryServiceSoap {
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategorySoap updateCategory(
 		long categoryId, long parentCategoryId, java.lang.String name,
-		java.lang.String description, boolean mergeWithParentCategory)
+		java.lang.String description, boolean mergeWithParentCategory,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.shopping.model.ShoppingCategory returnValue = ShoppingCategoryServiceUtil.updateCategory(categoryId,
-					parentCategoryId, name, description, mergeWithParentCategory);
+					parentCategoryId, name, description,
+					mergeWithParentCategory, serviceContext);
 
 			return com.liferay.portlet.shopping.model.ShoppingCategorySoap.toSoapModel(returnValue);
 		}

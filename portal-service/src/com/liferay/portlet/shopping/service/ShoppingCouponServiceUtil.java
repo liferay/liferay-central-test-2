@@ -46,63 +46,64 @@ package com.liferay.portlet.shopping.service;
  */
 public class ShoppingCouponServiceUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon addCoupon(
-		long plid, java.lang.String code, boolean autoCode,
-		java.lang.String name, java.lang.String description,
-		int startDateMonth, int startDateDay, int startDateYear,
-		int startDateHour, int startDateMinute, int endDateMonth,
-		int endDateDay, int endDateYear, int endDateHour, int endDateMinute,
-		boolean neverExpire, boolean active, java.lang.String limitCategories,
-		java.lang.String limitSkus, double minOrder, double discount,
-		java.lang.String discountType)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addCoupon(plid, code, autoCode, name, description,
-			startDateMonth, startDateDay, startDateYear, startDateHour,
-			startDateMinute, endDateMonth, endDateDay, endDateYear,
-			endDateHour, endDateMinute, neverExpire, active, limitCategories,
-			limitSkus, minOrder, discount, discountType);
-	}
-
-	public static void deleteCoupon(long plid, long couponId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService().deleteCoupon(plid, couponId);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon(
-		long plid, long couponId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService().getCoupon(plid, couponId);
-	}
-
-	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> search(
-		long plid, long companyId, java.lang.String code, boolean active,
-		java.lang.String discountType, boolean andOperator, int start, int end)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .search(plid, companyId, code, active, discountType,
-			andOperator, start, end);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingCoupon updateCoupon(
-		long plid, long couponId, java.lang.String name,
+		java.lang.String code, boolean autoCode, java.lang.String name,
 		java.lang.String description, int startDateMonth, int startDateDay,
 		int startDateYear, int startDateHour, int startDateMinute,
 		int endDateMonth, int endDateDay, int endDateYear, int endDateHour,
 		int endDateMinute, boolean neverExpire, boolean active,
 		java.lang.String limitCategories, java.lang.String limitSkus,
-		double minOrder, double discount, java.lang.String discountType)
+		double minOrder, double discount, java.lang.String discountType,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .updateCoupon(plid, couponId, name, description,
+				   .addCoupon(code, autoCode, name, description,
 			startDateMonth, startDateDay, startDateYear, startDateHour,
 			startDateMinute, endDateMonth, endDateDay, endDateYear,
 			endDateHour, endDateMinute, neverExpire, active, limitCategories,
-			limitSkus, minOrder, discount, discountType);
+			limitSkus, minOrder, discount, discountType, serviceContext);
+	}
+
+	public static void deleteCoupon(long groupId, long couponId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().deleteCoupon(groupId, couponId);
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon(
+		long groupId, long couponId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getCoupon(groupId, couponId);
+	}
+
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> search(
+		long groupId, long companyId, java.lang.String code, boolean active,
+		java.lang.String discountType, boolean andOperator, int start, int end)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .search(groupId, companyId, code, active, discountType,
+			andOperator, start, end);
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingCoupon updateCoupon(
+		long couponId, java.lang.String name, java.lang.String description,
+		int startDateMonth, int startDateDay, int startDateYear,
+		int startDateHour, int startDateMinute, int endDateMonth,
+		int endDateDay, int endDateYear, int endDateHour, int endDateMinute,
+		boolean neverExpire, boolean active, java.lang.String limitCategories,
+		java.lang.String limitSkus, double minOrder, double discount,
+		java.lang.String discountType,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .updateCoupon(couponId, name, description, startDateMonth,
+			startDateDay, startDateYear, startDateHour, startDateMinute,
+			endDateMonth, endDateDay, endDateYear, endDateHour, endDateMinute,
+			neverExpire, active, limitCategories, limitSkus, minOrder,
+			discount, discountType, serviceContext);
 	}
 
 	public static ShoppingCouponService getService() {

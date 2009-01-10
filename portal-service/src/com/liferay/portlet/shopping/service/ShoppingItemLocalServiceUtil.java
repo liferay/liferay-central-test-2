@@ -122,7 +122,7 @@ public class ShoppingItemLocalServiceUtil {
 		java.lang.String largeImageURL, java.io.File largeFile,
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> itemFields,
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> itemPrices,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
@@ -130,58 +130,7 @@ public class ShoppingItemLocalServiceUtil {
 			properties, fieldsQuantities, requiresShipping, stockQuantity,
 			featured, sale, smallImage, smallImageURL, smallFile, mediumImage,
 			mediumImageURL, mediumFile, largeImage, largeImageURL, largeFile,
-			itemFields, itemPrices, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingItem addItem(
-		long userId, long categoryId, java.lang.String sku,
-		java.lang.String name, java.lang.String description,
-		java.lang.String properties, java.lang.String fieldsQuantities,
-		boolean requiresShipping, int stockQuantity, boolean featured,
-		java.lang.Boolean sale, boolean smallImage,
-		java.lang.String smallImageURL, java.io.File smallFile,
-		boolean mediumImage, java.lang.String mediumImageURL,
-		java.io.File mediumFile, boolean largeImage,
-		java.lang.String largeImageURL, java.io.File largeFile,
-		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> itemFields,
-		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> itemPrices,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addItem(userId, categoryId, sku, name, description,
-			properties, fieldsQuantities, requiresShipping, stockQuantity,
-			featured, sale, smallImage, smallImageURL, smallFile, mediumImage,
-			mediumImageURL, mediumFile, largeImage, largeImageURL, largeFile,
-			itemFields, itemPrices, communityPermissions, guestPermissions);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingItem addItem(
-		long userId, long categoryId, java.lang.String sku,
-		java.lang.String name, java.lang.String description,
-		java.lang.String properties, java.lang.String fieldsQuantities,
-		boolean requiresShipping, int stockQuantity, boolean featured,
-		java.lang.Boolean sale, boolean smallImage,
-		java.lang.String smallImageURL, java.io.File smallFile,
-		boolean mediumImage, java.lang.String mediumImageURL,
-		java.io.File mediumFile, boolean largeImage,
-		java.lang.String largeImageURL, java.io.File largeFile,
-		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> itemFields,
-		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> itemPrices,
-		java.lang.Boolean addCommunityPermissions,
-		java.lang.Boolean addGuestPermissions,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addItem(userId, categoryId, sku, name, description,
-			properties, fieldsQuantities, requiresShipping, stockQuantity,
-			featured, sale, smallImage, smallImageURL, smallFile, mediumImage,
-			mediumImageURL, mediumFile, largeImage, largeImageURL, largeFile,
-			itemFields, itemPrices, addCommunityPermissions,
-			addGuestPermissions, communityPermissions, guestPermissions);
+			itemFields, itemPrices, serviceContext);
 	}
 
 	public static void addItemResources(long itemId,
@@ -342,7 +291,8 @@ public class ShoppingItemLocalServiceUtil {
 		java.io.File mediumFile, boolean largeImage,
 		java.lang.String largeImageURL, java.io.File largeFile,
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> itemFields,
-		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> itemPrices)
+		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> itemPrices,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
@@ -350,7 +300,7 @@ public class ShoppingItemLocalServiceUtil {
 			description, properties, fieldsQuantities, requiresShipping,
 			stockQuantity, featured, sale, smallImage, smallImageURL,
 			smallFile, mediumImage, mediumImageURL, mediumFile, largeImage,
-			largeImageURL, largeFile, itemFields, itemPrices);
+			largeImageURL, largeFile, itemFields, itemPrices, serviceContext);
 	}
 
 	public static ShoppingItemLocalService getService() {

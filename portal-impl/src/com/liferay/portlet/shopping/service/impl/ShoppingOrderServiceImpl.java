@@ -25,11 +25,10 @@ package com.liferay.portlet.shopping.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.service.permission.PortletPermissionUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.shopping.model.ShoppingOrder;
 import com.liferay.portlet.shopping.service.base.ShoppingOrderServiceBaseImpl;
 import com.liferay.portlet.shopping.service.permission.ShoppingOrderPermission;
+import com.liferay.portlet.shopping.service.permission.ShoppingPermission;
 
 /**
  * <a href="ShoppingOrderServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -40,14 +39,14 @@ import com.liferay.portlet.shopping.service.permission.ShoppingOrderPermission;
 public class ShoppingOrderServiceImpl extends ShoppingOrderServiceBaseImpl {
 
 	public void completeOrder(
-			long plid, String number, String ppTxnId, String ppPaymentStatus,
+			long groupId, String number, String ppTxnId, String ppPaymentStatus,
 			double ppPaymentGross, String ppReceiverEmail, String ppPayerEmail)
 		throws PortalException, SystemException {
 
 		ShoppingOrder order = shoppingOrderPersistence.findByNumber(number);
 
 		ShoppingOrderPermission.check(
-			getPermissionChecker(), plid, order.getOrderId(),
+			getPermissionChecker(), groupId, order.getOrderId(),
 			ActionKeys.UPDATE);
 
 		shoppingOrderLocalService.completeOrder(
@@ -55,16 +54,16 @@ public class ShoppingOrderServiceImpl extends ShoppingOrderServiceBaseImpl {
 			ppPayerEmail, false);
 	}
 
-	public void deleteOrder(long plid, long orderId)
+	public void deleteOrder(long groupId, long orderId)
 		throws PortalException, SystemException {
 
 		ShoppingOrderPermission.check(
-			getPermissionChecker(), plid, orderId, ActionKeys.DELETE);
+			getPermissionChecker(), groupId, orderId, ActionKeys.DELETE);
 
 		shoppingOrderLocalService.deleteOrder(orderId);
 	}
 
-	public ShoppingOrder getOrder(long plid, long orderId)
+	public ShoppingOrder getOrder(long groupId, long orderId)
 		throws PortalException, SystemException {
 
 		ShoppingOrder order = shoppingOrderLocalService.getOrder(orderId);
@@ -73,25 +72,24 @@ public class ShoppingOrderServiceImpl extends ShoppingOrderServiceBaseImpl {
 			return order;
 		}
 		else {
-			PortletPermissionUtil.check(
-				getPermissionChecker(), plid, PortletKeys.SHOPPING,
-				ActionKeys.MANAGE_ORDERS);
+			ShoppingPermission.check(
+				getPermissionChecker(), groupId, ActionKeys.MANAGE_ORDERS);
 
 			return order;
 		}
 	}
 
-	public void sendEmail(long plid, long orderId, String emailType)
+	public void sendEmail(long groupId, long orderId, String emailType)
 		throws PortalException, SystemException {
 
 		ShoppingOrderPermission.check(
-			getPermissionChecker(), plid, orderId, ActionKeys.UPDATE);
+			getPermissionChecker(), groupId, orderId, ActionKeys.UPDATE);
 
 		shoppingOrderLocalService.sendEmail(orderId, emailType);
 	}
 
 	public ShoppingOrder updateOrder(
-			long plid, long orderId, String billingFirstName,
+			long groupId, long orderId, String billingFirstName,
 			String billingLastName, String billingEmailAddress,
 			String billingCompany, String billingStreet, String billingCity,
 			String billingState, String billingZip, String billingCountry,
@@ -105,7 +103,7 @@ public class ShoppingOrderServiceImpl extends ShoppingOrderServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		ShoppingOrderPermission.check(
-			getPermissionChecker(), plid, orderId, ActionKeys.UPDATE);
+			getPermissionChecker(), groupId, orderId, ActionKeys.UPDATE);
 
 		return shoppingOrderLocalService.updateOrder(
 			orderId, billingFirstName, billingLastName, billingEmailAddress,
@@ -118,12 +116,12 @@ public class ShoppingOrderServiceImpl extends ShoppingOrderServiceBaseImpl {
 	}
 
 	public ShoppingOrder updateOrder(
-			long plid, long orderId, String ppTxnId, String ppPaymentStatus,
+			long groupId, long orderId, String ppTxnId, String ppPaymentStatus,
 			double ppPaymentGross, String ppReceiverEmail, String ppPayerEmail)
 		throws PortalException, SystemException {
 
 		ShoppingOrderPermission.check(
-			getPermissionChecker(), plid, orderId, ActionKeys.UPDATE);
+			getPermissionChecker(), groupId, orderId, ActionKeys.UPDATE);
 
 		return shoppingOrderLocalService.updateOrder(
 			orderId, ppTxnId, ppPaymentStatus, ppPaymentGross, ppReceiverEmail,

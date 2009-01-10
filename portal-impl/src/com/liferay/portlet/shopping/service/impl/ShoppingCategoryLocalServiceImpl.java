@@ -27,7 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.shopping.CategoryNameException;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.ShoppingItem;
@@ -50,39 +50,14 @@ public class ShoppingCategoryLocalServiceImpl
 	extends ShoppingCategoryLocalServiceBaseImpl {
 
 	public ShoppingCategory addCategory(
-			long userId, long plid, long parentCategoryId, String name,
-			String description, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		return addCategory(
-			userId, plid, parentCategoryId, name, description,
-			Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
-	}
-
-	public ShoppingCategory addCategory(
-			long userId, long plid, long parentCategoryId, String name,
-			String description, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		return addCategory(
-			userId, plid, parentCategoryId, name, description, null, null,
-			communityPermissions, guestPermissions);
-	}
-
-	public ShoppingCategory addCategory(
-			long userId, long plid, long parentCategoryId, String name,
-			String description, Boolean addCommunityPermissions,
-			Boolean addGuestPermissions, String[] communityPermissions,
-			String[] guestPermissions)
+			long userId, long parentCategoryId, String name,
+			String description, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Category
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		long groupId = PortalUtil.getScopeGroupId(plid);
+		long groupId = serviceContext.getScopeGroupId();
 		parentCategoryId = getParentCategoryId(groupId, parentCategoryId);
 		Date now = new Date();
 
@@ -107,16 +82,17 @@ public class ShoppingCategoryLocalServiceImpl
 
 		// Resources
 
-		if ((addCommunityPermissions != null) &&
-			(addGuestPermissions != null)) {
+		if (serviceContext.getAddCommunityPermissions() ||
+			serviceContext.getAddGuestPermissions()) {
 
 			addCategoryResources(
-				category, addCommunityPermissions.booleanValue(),
-				addGuestPermissions.booleanValue());
+				category, serviceContext.getAddCommunityPermissions(),
+				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addCategoryResources(
-				category, communityPermissions, guestPermissions);
+				category, serviceContext.getCommunityPermissions(),
+				serviceContext.getGuestPermissions());
 		}
 
 		return category;
@@ -303,7 +279,8 @@ public class ShoppingCategoryLocalServiceImpl
 
 	public ShoppingCategory updateCategory(
 			long categoryId, long parentCategoryId, String name,
-			String description, boolean mergeWithParentCategory)
+			String description, boolean mergeWithParentCategory,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Category
