@@ -310,13 +310,13 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 				permissionChecker, GetterUtil.getLong(primKey),
 				ActionKeys.PERMISSIONS);
 		}
-		else if (name.equals(SCProductEntry.class.getName())) {
-			SCProductEntryPermission.check(
+		else if (name.equals(SCFrameworkVersion.class.getName())) {
+			SCFrameworkVersionPermission.check(
 				permissionChecker, GetterUtil.getLong(primKey),
 				ActionKeys.PERMISSIONS);
 		}
-		else if (name.equals(SCFrameworkVersion.class.getName())) {
-			SCFrameworkVersionPermission.check(
+		else if (name.equals(SCProductEntry.class.getName())) {
+			SCProductEntryPermission.check(
 				permissionChecker, GetterUtil.getLong(primKey),
 				ActionKeys.PERMISSIONS);
 		}
@@ -346,8 +346,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 				primKey.length());
 
 			PortletPermissionUtil.check(
-				permissionChecker, plid, portletId,
-				ActionKeys.CONFIGURATION);
+				permissionChecker, plid, portletId, ActionKeys.CONFIGURATION);
 		}
 		else if (!permissionChecker.hasPermission(
 					groupId, name, primKey, ActionKeys.PERMISSIONS) &&

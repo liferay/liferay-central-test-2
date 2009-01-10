@@ -1382,6 +1382,283 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public List<JournalArticle> findByR_A(long resourcePrimKey, boolean approved)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = JournalArticleModelImpl.CACHE_ENABLED;
+		String finderClassName = JournalArticle.class.getName();
+		String finderMethodName = "findByR_A";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Boolean.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(resourcePrimKey), Boolean.valueOf(approved)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
+				query.append("resourcePrimKey = ?");
+
+				query.append(" AND ");
+
+				query.append("approved = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("articleId ASC, ");
+				query.append("version DESC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(resourcePrimKey);
+
+				qPos.add(approved);
+
+				List<JournalArticle> list = q.list();
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<JournalArticle>)result;
+		}
+	}
+
+	public List<JournalArticle> findByR_A(long resourcePrimKey,
+		boolean approved, int start, int end) throws SystemException {
+		return findByR_A(resourcePrimKey, approved, start, end, null);
+	}
+
+	public List<JournalArticle> findByR_A(long resourcePrimKey,
+		boolean approved, int start, int end, OrderByComparator obc)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = JournalArticleModelImpl.CACHE_ENABLED;
+		String finderClassName = JournalArticle.class.getName();
+		String finderMethodName = "findByR_A";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Boolean.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(resourcePrimKey), Boolean.valueOf(approved),
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
+				query.append("resourcePrimKey = ?");
+
+				query.append(" AND ");
+
+				query.append("approved = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("articleId ASC, ");
+					query.append("version DESC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(resourcePrimKey);
+
+				qPos.add(approved);
+
+				List<JournalArticle> list = (List<JournalArticle>)QueryUtil.list(q,
+						getDialect(), start, end);
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<JournalArticle>)result;
+		}
+	}
+
+	public JournalArticle findByR_A_First(long resourcePrimKey,
+		boolean approved, OrderByComparator obc)
+		throws NoSuchArticleException, SystemException {
+		List<JournalArticle> list = findByR_A(resourcePrimKey, approved, 0, 1,
+				obc);
+
+		if (list.size() == 0) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No JournalArticle exists with the key {");
+
+			msg.append("resourcePrimKey=" + resourcePrimKey);
+
+			msg.append(", ");
+			msg.append("approved=" + approved);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchArticleException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public JournalArticle findByR_A_Last(long resourcePrimKey,
+		boolean approved, OrderByComparator obc)
+		throws NoSuchArticleException, SystemException {
+		int count = countByR_A(resourcePrimKey, approved);
+
+		List<JournalArticle> list = findByR_A(resourcePrimKey, approved,
+				count - 1, count, obc);
+
+		if (list.size() == 0) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No JournalArticle exists with the key {");
+
+			msg.append("resourcePrimKey=" + resourcePrimKey);
+
+			msg.append(", ");
+			msg.append("approved=" + approved);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchArticleException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public JournalArticle[] findByR_A_PrevAndNext(long id,
+		long resourcePrimKey, boolean approved, OrderByComparator obc)
+		throws NoSuchArticleException, SystemException {
+		JournalArticle journalArticle = findByPrimaryKey(id);
+
+		int count = countByR_A(resourcePrimKey, approved);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append(
+				"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
+			query.append("resourcePrimKey = ?");
+
+			query.append(" AND ");
+
+			query.append("approved = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("articleId ASC, ");
+				query.append("version DESC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(resourcePrimKey);
+
+			qPos.add(approved);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					journalArticle);
+
+			JournalArticle[] array = new JournalArticleImpl[3];
+
+			array[0] = (JournalArticle)objArray[0];
+			array[1] = (JournalArticle)objArray[1];
+			array[2] = (JournalArticle)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<JournalArticle> findByG_A(long groupId, String articleId)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalArticleModelImpl.CACHE_ENABLED;
@@ -2877,6 +3154,13 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public void removeByR_A(long resourcePrimKey, boolean approved)
+		throws SystemException {
+		for (JournalArticle journalArticle : findByR_A(resourcePrimKey, approved)) {
+			remove(journalArticle);
+		}
+	}
+
 	public void removeByG_A(long groupId, String articleId)
 		throws SystemException {
 		for (JournalArticle journalArticle : findByG_A(groupId, articleId)) {
@@ -3241,6 +3525,83 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 				QueryPos qPos = QueryPos.getInstance(q);
 
 				qPos.add(smallImageId);
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByR_A(long resourcePrimKey, boolean approved)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = JournalArticleModelImpl.CACHE_ENABLED;
+		String finderClassName = JournalArticle.class.getName();
+		String finderMethodName = "countByR_A";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Boolean.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(resourcePrimKey), Boolean.valueOf(approved)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
+				query.append("resourcePrimKey = ?");
+
+				query.append(" AND ");
+
+				query.append("approved = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(resourcePrimKey);
+
+				qPos.add(approved);
 
 				Long count = null;
 

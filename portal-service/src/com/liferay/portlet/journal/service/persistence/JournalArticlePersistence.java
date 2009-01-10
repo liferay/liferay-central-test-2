@@ -233,6 +233,43 @@ public interface JournalArticlePersistence extends BasePersistence {
 			com.liferay.portlet.journal.NoSuchArticleException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByR_A(
+		long resourcePrimKey, boolean approved)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByR_A(
+		long resourcePrimKey, boolean approved, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByR_A(
+		long resourcePrimKey, boolean approved, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.journal.model.JournalArticle findByR_A_First(
+		long resourcePrimKey, boolean approved,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.journal.model.JournalArticle findByR_A_Last(
+		long resourcePrimKey, boolean approved,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.journal.model.JournalArticle[] findByR_A_PrevAndNext(
+		long id, long resourcePrimKey, boolean approved,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_A(
 		long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException;
@@ -429,6 +466,9 @@ public interface JournalArticlePersistence extends BasePersistence {
 	public void removeBySmallImageId(long smallImageId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByR_A(long resourcePrimKey, boolean approved)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByG_A(long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException;
 
@@ -466,6 +506,10 @@ public interface JournalArticlePersistence extends BasePersistence {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countBySmallImageId(long smallImageId)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int countByR_A(long resourcePrimKey, boolean approved)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

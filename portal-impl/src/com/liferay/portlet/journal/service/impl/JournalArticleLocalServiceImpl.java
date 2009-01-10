@@ -86,6 +86,7 @@ import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.portlet.journal.service.base.JournalArticleLocalServiceBaseImpl;
 import com.liferay.portlet.journal.util.Indexer;
 import com.liferay.portlet.journal.util.JournalUtil;
+import com.liferay.portlet.journal.util.comparator.ArticleVersionComparator;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import com.liferay.portlet.tags.model.TagsEntryConstants;
 import com.liferay.util.LocalizationUtil;
@@ -1335,26 +1336,30 @@ public class JournalArticleLocalServiceImpl
 			long resourcePrimKey, Boolean approved)
 		throws PortalException, SystemException {
 
-		// Get the latest article that is approved, if none are approved, get
-		// the latest unapproved article
+		List<JournalArticle> articles = null;
 
-		JournalArticle article = null;
+		OrderByComparator orderByComparator = new ArticleVersionComparator();
 
 		if (approved == null) {
-			try {
-				article = journalArticleFinder.findByR_A(resourcePrimKey, true);
-			}
-			catch (NoSuchArticleException nsae) {
-				article = journalArticleFinder.findByR_A(
-					resourcePrimKey, false);
+			articles = journalArticlePersistence.findByR_A(
+				resourcePrimKey, true, 0, 1, orderByComparator);
+
+			if (articles.size() == 0) {
+				articles = journalArticlePersistence.findByR_A(
+					resourcePrimKey, false, 0, 1, orderByComparator);
 			}
 		}
 		else {
-			article = journalArticleFinder.findByR_A(
-				resourcePrimKey, approved.booleanValue());
+			articles = journalArticlePersistence.findByR_A(
+				resourcePrimKey, approved.booleanValue(), 0, 1,
+				orderByComparator);
 		}
 
-		return article;
+		if (articles.size() == 0) {
+			throw new NoSuchArticleException();
+		}
+
+		return articles.get(0);
 	}
 
 	public JournalArticle getLatestArticle(long groupId, String articleId)

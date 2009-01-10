@@ -66,6 +66,10 @@
 		<finder name="SmallImageId" return-type="Collection">
 			<finder-column name="smallImageId" />
 		</finder>
+		<finder name="R_A" return-type="Collection">
+			<finder-column name="resourcePrimKey" />
+			<finder-column name="approved" />
+		</finder>
 		<finder name="G_A" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="articleId" />

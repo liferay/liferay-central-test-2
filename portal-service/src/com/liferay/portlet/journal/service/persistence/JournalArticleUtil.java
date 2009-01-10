@@ -269,6 +269,51 @@ public class JournalArticleUtil {
 				   .findBySmallImageId_PrevAndNext(id, smallImageId, obc);
 	}
 
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByR_A(
+		long resourcePrimKey, boolean approved)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByR_A(resourcePrimKey, approved);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByR_A(
+		long resourcePrimKey, boolean approved, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByR_A(resourcePrimKey, approved, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByR_A(
+		long resourcePrimKey, boolean approved, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .findByR_A(resourcePrimKey, approved, start, end, obc);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle findByR_A_First(
+		long resourcePrimKey, boolean approved,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence().findByR_A_First(resourcePrimKey, approved, obc);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle findByR_A_Last(
+		long resourcePrimKey, boolean approved,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence().findByR_A_Last(resourcePrimKey, approved, obc);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle[] findByR_A_PrevAndNext(
+		long id, long resourcePrimKey, boolean approved,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence()
+				   .findByR_A_PrevAndNext(id, resourcePrimKey, approved, obc);
+	}
+
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_A(
 		long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException {
@@ -517,6 +562,11 @@ public class JournalArticleUtil {
 		getPersistence().removeBySmallImageId(smallImageId);
 	}
 
+	public static void removeByR_A(long resourcePrimKey, boolean approved)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByR_A(resourcePrimKey, approved);
+	}
+
 	public static void removeByG_A(long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByG_A(groupId, articleId);
@@ -571,6 +621,11 @@ public class JournalArticleUtil {
 	public static int countBySmallImageId(long smallImageId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countBySmallImageId(smallImageId);
+	}
+
+	public static int countByR_A(long resourcePrimKey, boolean approved)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByR_A(resourcePrimKey, approved);
 	}
 
 	public static int countByG_A(long groupId, java.lang.String articleId)
