@@ -768,7 +768,18 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 								<liferay-ui:message key="default-language" />
 							</td>
 							<td>
-								<select <%= (article == null) ? "disabled" : "" %> name="<portlet:namespace />defaultLanguageId" onChange="<portlet:namespace />changeLanguageView();">
+								<select
+									<c:choose>
+										<c:when test="<%= article == null %>">
+											disabled
+										</c:when>
+										<c:otherwise>
+											name="<portlet:namespace />defaultLanguageId"
+										</c:otherwise>
+									</c:choose>
+
+									onChange="<portlet:namespace />changeLanguageView();"
+								>
 
 									<%
 									if ((availableLocales != null) && (availableLocales.length > 0)) {
@@ -806,6 +817,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 									%>
 
 								</select>
+
 								<c:if test="<%= article == null %>">
 									<input name="<portlet:namespace />defaultLanguageId" type="hidden" value="<%= HtmlUtil.escape(defaultLanguageId) %>" />
 								</c:if>
