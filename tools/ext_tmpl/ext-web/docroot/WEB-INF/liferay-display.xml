@@ -3,17 +3,16 @@
 
 <display>
 	<category name="category.cms">
-		<portlet id="15" />
 		<portlet id="20" />
 		<portlet id="31" />
 		<portlet id="56" />
+		<portlet id="59" />
 		<portlet id="62" />
 		<portlet id="64" />
 		<portlet id="71" />
 		<portlet id="73" />
 		<portlet id="77" />
 		<portlet id="85" />
-		<portlet id="99" />
 		<portlet id="101" />
 		<portlet id="102" />
 		<portlet id="110" />
@@ -46,14 +45,33 @@
 		<portlet id="16" />
 		<portlet id="61" />
 	</category>
+	<category name="category.hidden">
+		<portlet id="9" />
+		<portlet id="15" />
+		<portlet id="25" />
+		<portlet id="79" />
+		<portlet id="99" />
+		<portlet id="104" />
+		<portlet id="111" />
+		<portlet id="123" />
+		<portlet id="125" />
+		<portlet id="126" />
+		<portlet id="127" />
+		<portlet id="128" />
+		<portlet id="129" />
+		<portlet id="130" />
+		<portlet id="131" />
+		<portlet id="132" />
+		<portlet id="134" />
+		<portlet id="135" />
+		<portlet id="136" />
+		<portlet id="137" />
+		<portlet id="138" />
+	</category>
 	<category name="category.news">
 		<portlet id="39" />
 		<portlet id="83" />
 		<portlet id="84" />
-	</category>
-	<category name="category.polls">
-		<portlet id="25" />
-		<portlet id="59" />
 	</category>
 	<category name="category.religion">
 		<category name="category.christianity">
