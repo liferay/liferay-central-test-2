@@ -205,7 +205,13 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		String name = getName();
 
 		try {
-			if (isOrganization()) {
+			if (isLayout()) {
+				Layout layout = LayoutLocalServiceUtil.getLayout(
+					getClassPK());
+
+				name = layout.getName();
+			}
+			else if (isOrganization()) {
 				long organizationId = getClassPK();
 
 				Organization organization =
