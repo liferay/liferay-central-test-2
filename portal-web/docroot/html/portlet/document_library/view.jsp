@@ -98,9 +98,10 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 				<%
 				showAddFolderButton = showAddFolderButton && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER);
 				boolean showCurFolderSearch = showFoldersSearch && (results.size() > 0);
+				boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
 				%>
 
-				<c:if test="<%= showAddFolderButton || showCurFolderSearch %>">
+				<c:if test="<%= showAddFolderButton || showCurFolderSearch || showPermissionsButton %>">
 					<div>
 						<c:if test="<%= showCurFolderSearch %>">
 							<label for="<portlet:namespace />keywords1"><liferay-ui:message key="search" /></label>
@@ -112,6 +113,29 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 						<c:if test="<%= showAddFolderButton %>">
 							<input type="button" value="<liferay-ui:message key='<%= (folder == null) ? "add-folder" : "add-subfolder" %>' />" onClick="<portlet:namespace />addFolder();" />
+						</c:if>
+
+						<c:if test="<%= showPermissionsButton %>">
+							<%
+								String modelResource = "com.liferay.portlet.documentlibrary";
+								String modelResourceDescription = themeDisplay.getScopeGroupName();
+								String resourcePrimKey = String.valueOf(scopeGroupId);
+
+								if (folder != null) {
+									modelResource = DLFolder.class.getName();
+									modelResourceDescription = folder.getName();
+									resourcePrimKey = String.valueOf(folder.getFolderId());
+								}
+							%>
+
+							<liferay-security:permissionsURL
+								modelResource="<%= modelResource %>"
+								modelResourceDescription="<%= modelResourceDescription %>"
+								resourcePrimKey="<%= resourcePrimKey %>"
+								var="permissionsURL"
+							/>
+
+							<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionsURL %>';" />
 						</c:if>
 					</div>
 

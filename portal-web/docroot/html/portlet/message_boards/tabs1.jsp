@@ -40,37 +40,13 @@ if (themeDisplay.isSignedIn()) {
 	if (PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.MESSAGE_BOARDS, ActionKeys.BAN_USER)) {
 		tabs1Values += ",banned_users";
 	}
-
-	if (GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS)) {
-		tabs1Values += ",permissions";
-	}
 }
 
 String tabs1Names = StringUtil.replace(tabs1Values, StringPool.UNDERLINE, StringPool.DASH);
 %>
 
-<liferay-security:permissionsURL
-	modelResource="com.liferay.portlet.messageboards"
-	modelResourceDescription="<%= themeDisplay.getScopeGroupName() %>"
-	resourcePrimKey="<%= String.valueOf(scopeGroupId) %>"
-	var="permissionsURL"
+<liferay-ui:tabs
+	names="<%= tabs1Names %>"
+	tabsValues="<%= tabs1Values %>"
+	portletURL="<%= tabs1URL %>"
 />
-
-<c:choose>
-	<c:when test="<%= (PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.MESSAGE_BOARDS, ActionKeys.BAN_USER)) %>">
-		<liferay-ui:tabs
-			names="<%= tabs1Names %>"
-			tabsValues="<%= tabs1Values %>"
-			portletURL="<%= tabs1URL %>"
-			url6="<%= permissionsURL%>"
-		/>
-	</c:when>
-	<c:otherwise>
-		<liferay-ui:tabs
-			names="<%= tabs1Names %>"
-			tabsValues="<%= tabs1Values %>"
-			portletURL="<%= tabs1URL %>"
-			url5="<%= permissionsURL%>"
-		/>
-	</c:otherwise>
-</c:choose>

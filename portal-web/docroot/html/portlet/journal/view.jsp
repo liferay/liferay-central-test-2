@@ -87,23 +87,11 @@ portletURL.setParameter("tabs1", tabs1);
 
 <%
 String tabs1Names = "articles,structures,templates,feeds,recent";
-
-if (GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS)) {
-	tabs1Names += ",permissions";
-}
 %>
-
-<liferay-security:permissionsURL
-	modelResource="com.liferay.portlet.journal"
-	modelResourceDescription="<%= themeDisplay.getScopeGroupName() %>"
-	resourcePrimKey="<%= String.valueOf(scopeGroupId) %>"
-	var="permissionsURL"
-/>
 
 <liferay-ui:tabs
 	names="<%= tabs1Names %>"
 	url="<%= portletURL.toString() %>"
-	url5="<%= permissionsURL %>"
 />
 
 <c:choose>

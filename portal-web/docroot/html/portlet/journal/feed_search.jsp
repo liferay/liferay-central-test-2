@@ -63,11 +63,30 @@ FeedDisplayTerms displayTerms = (FeedDisplayTerms)searchContainer.getDisplayTerm
 
 <br />
 
-<c:if test="<%= JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_FEED) %>">
+<%
+boolean showAddFeedButtonButton = JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_FEED);
+boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
+%>
+
+<c:if test="<%=  showAddFeedButtonButton || showPermissionsButton %>">
 	<div>
-		<input type="button" value="<liferay-ui:message key="add-feed" />" onClick="<portlet:namespace />addFeed();" />
+		<c:if test="<%=  showAddFeedButtonButton %>">
+			<input type="button" value="<liferay-ui:message key="add-feed" />" onClick="<portlet:namespace />addFeed();" />
+		</c:if>
+
+		<c:if test="<%= showPermissionsButton %>">
+			<liferay-security:permissionsURL
+				modelResource="com.liferay.portlet.journal"
+				modelResourceDescription="<%= themeDisplay.getScopeGroupName() %>"
+				resourcePrimKey="<%= String.valueOf(scopeGroupId) %>"
+				var="permissionsURL"
+			/>
+
+			<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionsURL %>';" />
+		</c:if>
 	</div>
 </c:if>
+
 
 <script type="text/javascript">
 	function <portlet:namespace />addFeed() {

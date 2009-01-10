@@ -63,9 +63,27 @@ StructureDisplayTerms displayTerms = (StructureDisplayTerms)searchContainer.getD
 
 <br />
 
-<c:if test="<%= JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_STRUCTURE) %>">
+<%
+boolean showAddStructureButton = JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_STRUCTURE);
+boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
+%>
+
+<c:if test="<%=  showAddStructureButton || showPermissionsButton %>">
 	<div>
-		<input type="button" value="<liferay-ui:message key="add-structure" />" onClick="<portlet:namespace />addStructure();" />
+		<c:if test="<%=  showAddStructureButton %>">
+			<input type="button" value="<liferay-ui:message key="add-structure" />" onClick="<portlet:namespace />addStructure();" />
+		</c:if>
+
+		<c:if test="<%= showPermissionsButton %>">
+			<liferay-security:permissionsURL
+				modelResource="com.liferay.portlet.journal"
+				modelResourceDescription="<%= themeDisplay.getScopeGroupName() %>"
+				resourcePrimKey="<%= String.valueOf(scopeGroupId) %>"
+				var="permissionsURL"
+			/>
+
+			<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionsURL %>';" />
+		</c:if>
 	</div>
 </c:if>
 

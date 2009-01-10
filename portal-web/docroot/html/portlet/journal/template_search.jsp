@@ -61,11 +61,29 @@ TemplateDisplayTerms displayTerms = (TemplateDisplayTerms)searchContainer.getDis
 	</table>
 </liferay-ui:search-toggle>
 
-<c:if test="<%= JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_TEMPLATE) %>">
+<%
+boolean showAddTemplateButton = JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_TEMPLATE);
+boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
+%>
+
+<c:if test="<%=  showAddTemplateButton || showPermissionsButton %>">
 	<br />
 
 	<div>
-		<input type="button" value="<liferay-ui:message key="add-template" />" onClick="<portlet:namespace />addTemplate();" />
+		<c:if test="<%=  showAddTemplateButton %>">
+			<input type="button" value="<liferay-ui:message key="add-template" />" onClick="<portlet:namespace />addTemplate();" />
+		</c:if>
+
+		<c:if test="<%= showPermissionsButton %>">
+			<liferay-security:permissionsURL
+				modelResource="com.liferay.portlet.journal"
+				modelResourceDescription="<%= themeDisplay.getScopeGroupName() %>"
+				resourcePrimKey="<%= String.valueOf(scopeGroupId) %>"
+				var="permissionsURL"
+			/>
+
+			<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionsURL %>';" />
+		</c:if>
 	</div>
 </c:if>
 

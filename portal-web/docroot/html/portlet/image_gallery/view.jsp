@@ -52,23 +52,11 @@ List scores = null;
 
 <%
 String tabs1Names = "folders,my-images,recent-images";
-
-if (GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS)) {
-	tabs1Names += ",permissions";
-}
 %>
-
-<liferay-security:permissionsURL
-	modelResource="com.liferay.portlet.imagegallery"
-	modelResourceDescription="<%= themeDisplay.getScopeGroupName() %>"
-	resourcePrimKey="<%= String.valueOf(scopeGroupId) %>"
-	var="permissionsURL"
-/>
 
 <liferay-ui:tabs
 	names="<%= tabs1Names %>"
 	url="<%= portletURL.toString() %>"
-	url3="<%= permissionsURL %>"
 />
 
 <c:choose>
@@ -201,10 +189,11 @@ if (GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PER
 		}
 
 		boolean showAddFolderButton = IGFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER);
+		boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
 		boolean showSearch = (results.size() > 0);
 		%>
 
-		<c:if test="<%= showAddFolderButton || showSearch %>">
+		<c:if test="<%= showAddFolderButton || showPermissionsButton || showSearch %>">
 			<div>
 				<c:if test="<%= showSearch %>">
 					<label for="<portlet:namespace />keywords1"><liferay-ui:message key="search" /></label>
@@ -216,6 +205,29 @@ if (GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PER
 
 				<c:if test="<%= showAddFolderButton %>">
 					<input type="button" value="<liferay-ui:message key='<%= (folder == null) ? "add-folder" : "add-subfolder" %>' />" onClick="<portlet:namespace />addFolder();" />
+				</c:if>
+
+				<c:if test="<%= showPermissionsButton %>">
+					<%
+						String modelResource = "com.liferay.portlet.imagegallery";
+						String modelResourceDescription = themeDisplay.getScopeGroupName();
+						String resourcePrimKey = String.valueOf(scopeGroupId);
+
+						if (folder != null) {
+							modelResource = IGFolder.class.getName();
+							modelResourceDescription = folder.getName();
+							resourcePrimKey = String.valueOf(folder.getFolderId());
+						}
+					%>
+
+					<liferay-security:permissionsURL
+						modelResource="<%= modelResource %>"
+						modelResourceDescription="<%= modelResourceDescription %>"
+						resourcePrimKey="<%= resourcePrimKey %>"
+						var="permissionsURL"
+					/>
+
+					<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionsURL %>';" />
 				</c:if>
 			</div>
 

@@ -53,10 +53,6 @@ if (CalendarPermission.contains(permissionChecker, scopeGroupId, ActionKeys.EXPO
 	tabs1Names += ",export-import";
 }
 
-if (GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS)) {
-	tabs1Names += ",permissions";
-}
-
 String[] tabs1NamesArray = StringUtil.split(tabs1Names);
 
 String tabs1Default = preferences.getValue("tabs1-default", tabs1NamesArray[0]);

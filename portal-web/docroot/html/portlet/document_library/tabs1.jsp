@@ -35,23 +35,11 @@
 		tabs1URL.setWindowState(WindowState.MAXIMIZED);
 
 		String tabs1Names = "folders,my-documents,recent-documents";
-
-		if (GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS)) {
-			tabs1Names += ",permissions";
-		}
 		%>
-
-		<liferay-security:permissionsURL
-			modelResource="com.liferay.portlet.documentlibrary"
-			modelResourceDescription="<%= themeDisplay.getScopeGroupName() %>"
-			resourcePrimKey="<%= String.valueOf(scopeGroupId) %>"
-			var="permissionsURL"
-		/>
 
 		<liferay-ui:tabs
 			names="<%= tabs1Names %>"
 			url="<%= tabs1URL.toString() %>"
-			url3="<%= permissionsURL %>"
 		/>
 	</c:when>
 	<c:when test="<%= showTabs && showSubfolders %>">

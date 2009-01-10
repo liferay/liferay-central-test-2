@@ -192,10 +192,11 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		}
 
 		boolean showAddCategoryButton = MBCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.ADD_CATEGORY);
+		boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
 		showSearch = showSearch && (results.size() > 0);
 		%>
 
-		<c:if test="<%= showAddCategoryButton ||  showSearch %>">
+		<c:if test="<%= showAddCategoryButton || showPermissionsButton || showSearch %>">
 			<div>
 				<c:if test="<%= showSearch %>">
 					<label for="<portlet:namespace />keywords1"><liferay-ui:message key="search" /></label>
@@ -207,6 +208,29 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 				<c:if test="<%= showAddCategoryButton %>">
 					<input type="button" value="<liferay-ui:message key='<%= (category == null) ? "add-category" : "add-subcategory" %>' />" onClick="<portlet:namespace />addCategory();" />
+				</c:if>
+
+				<c:if test="<%= showPermissionsButton %>">
+					<%
+						String modelResource = "com.liferay.portlet.messageboards";
+						String modelResourceDescription = themeDisplay.getScopeGroupName();
+						String resourcePrimKey = String.valueOf(scopeGroupId);
+
+						if (category != null) {
+							modelResource = MBCategory.class.getName();
+							modelResourceDescription = category.getName();
+							resourcePrimKey = String.valueOf(category.getCategoryId());
+						}
+					%>
+
+					<liferay-security:permissionsURL
+						modelResource="<%= modelResource %>"
+						modelResourceDescription="<%= modelResourceDescription %>"
+						resourcePrimKey="<%= resourcePrimKey %>"
+						var="permissionsURL"
+					/>
+
+					<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionsURL %>';" />
 				</c:if>
 			</div>
 
