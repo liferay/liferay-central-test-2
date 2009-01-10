@@ -320,6 +320,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.servlet.filters.minifier">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.servlet.filters.sessionid.SessionIdFilter">
 		<priority value="ERROR" />
 	</category>

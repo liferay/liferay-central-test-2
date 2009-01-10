@@ -687,82 +687,6 @@
 		</if>
 	</target>
 
-	<target name="build-javascript">
-		<java
-			classname="com.liferay.portal.tools.JavaScriptBuilder"
-			classpathref="project.classpath"
-			fork="true"
-			newenvironment="true"
-		>
-			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
-			<arg value="javascript.barebone.files" />
-			<arg value="docroot/html/js/" />
-			<arg value="docroot/html/js/barebone_unpacked.js" />
-		</java>
-
-		<antcall target="build-javascript-cmd">
-			<param name="js.from.file" value="docroot/html/js/barebone_unpacked.js" />
-			<param name="js.to.file" value="docroot/html/js/barebone_packed.js" />
-		</antcall>
-
-		<java
-			classname="com.liferay.portal.tools.JavaScriptBuilder"
-			classpathref="project.classpath"
-			fork="true"
-			newenvironment="true"
-		>
-			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
-			<arg value="javascript.everything.files" />
-			<arg value="docroot/html/js/" />
-			<arg value="docroot/html/js/everything_unpacked.js" />
-		</java>
-
-		<antcall target="build-javascript-cmd">
-			<param name="js.from.file" value="docroot/html/js/everything_unpacked.js" />
-			<param name="js.to.file" value="docroot/html/js/everything_packed.js" />
-		</antcall>
-
-		<antcall target="build-javascript-cmd">
-			<param name="js.from.file" value="docroot/html/js/liferay/service_unpacked.js" />
-			<param name="js.to.file" value="docroot/html/js/liferay/service_packed.js" />
-		</antcall>
-
-		<antcall target="build-javascript-cmd">
-			<param name="js.from.file" value="docroot/html/js/liferay/portlet_css_unpacked.js" />
-			<param name="js.to.file" value="docroot/html/js/liferay/portlet_css_packed.js" />
-		</antcall>
-
-		<antcall target="build-javascript-portlet-cmd">
-			<param name="portlet.name" value="enterprise_admin" />
-		</antcall>
-
-		<antcall target="build-javascript-portlet-cmd">
-			<param name="portlet.name" value="message_boards" />
-		</antcall>
-
-		<antcall target="build-javascript-portlet-cmd">
-			<param name="portlet.name" value="tags_admin" />
-		</antcall>
-	</target>
-
-	<target name="build-javascript-cmd">
-		<java
-			classname="com.yahoo.platform.yui.compressor.YUICompressor"
-			classpathref="project.classpath"
-			fork="true"
-			newenvironment="true"
-		>
-			<arg line="--type js -o ${js.to.file} ${js.from.file}" />
-		</java>
-	</target>
-
-	<target name="build-javascript-portlet-cmd">
-		<antcall target="build-javascript-cmd">
-			<param name="js.from.file" value="docroot/html/portlet/${portlet.name}/unpacked.js" />
-			<param name="js.to.file" value="docroot/html/portlet/${portlet.name}/packed.js" />
-		</antcall>
-	</target>
-
 	<target name="build-selenium">
 		<java
 			classname="com.liferay.portal.tools.SeleneseToJavaBuilder"
@@ -818,25 +742,6 @@
 						</copy>
 					</then>
 				</if>
-
-				<java
-					classname="com.liferay.portal.tools.CSSBuilder"
-					classpathref="project.classpath"
-					fork="true"
-					newenvironment="true"
-				>
-					<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
-					<arg line="@{module.name}/css @{module.name}/css/everything_unpacked.css" />
-				</java>
-
-				<java
-					classname="com.yahoo.platform.yui.compressor.YUICompressor"
-					classpathref="project.classpath"
-					fork="true"
-					newenvironment="true"
-				>
-					<arg line="--type css -o @{module.name}/css/everything_packed.css @{module.name}/css/everything_unpacked.css" />
-				</java>
 			</sequential>
 		</for>
 	</target>

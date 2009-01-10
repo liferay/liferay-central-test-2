@@ -45,6 +45,22 @@ public class ServletContextUtil {
 	public static long getLastModified(
 		ServletContext servletContext, String resourcePath) {
 
+		return getLastModified(servletContext, resourcePath, false);
+	}
+
+	public static long getLastModified(
+		ServletContext servletContext, String resourcePath, boolean cache) {
+
+		if (cache) {
+			Long lastModified = (Long)servletContext.getAttribute(
+				ServletContextUtil.class.getName() + StringPool.PERIOD +
+					resourcePath);
+
+			if (lastModified != null) {
+				return lastModified.longValue();
+			}
+		}
+
 		long lastModified = 0;
 
 		Set<String> resourcePaths = servletContext.getResourcePaths(
@@ -67,6 +83,13 @@ public class ServletContextUtil {
 					lastModified = file.lastModified();
 				}
 			}
+		}
+
+		if (cache) {
+			servletContext.setAttribute(
+				ServletContextUtil.class.getName() + StringPool.PERIOD +
+					resourcePath,
+				new Long(lastModified));
 		}
 
 		return lastModified;

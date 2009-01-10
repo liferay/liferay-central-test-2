@@ -70,7 +70,12 @@
 </c:if>
 
 <c:if test="<%= themeDisplay.isIncludePortletCssJs() %>">
-	<script src="<%= themeDisplay.getPathJavaScript() %>/liferay/portlet_css_packed.js?bn=<%= ReleaseInfo.getBuildNumber() %>" type="text/javascript"></script>
+
+	<%
+	long javaScriptLastModified = ServletContextUtil.getLastModified(application, themeDisplay.getPathJavaScript(), true);
+	%>
+
+	<script src="<%= themeDisplay.getPathJavaScript() %>/liferay/portlet_css.js?t=<%= javaScriptLastModified %><%= themeDisplay.isThemeJsFastLoad() ? "&minifierType=js" : "" %>" type="text/javascript"></script>
 </c:if>
 
 <%
@@ -88,11 +93,22 @@ List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORT
 		for (String footerPortalCss : footerPortalCssList) {
 			String footerPortalCssPath = request.getContextPath() + footerPortalCss;
 
-			if (!footerPortalCssPaths.contains(footerPortalCssPath) && !themeDisplay.isIncludedJs(footerPortalCssPath)) {
+			if (!footerPortalCssPaths.contains(footerPortalCssPath)) {
 				footerPortalCssPaths.add(footerPortalCssPath);
+
+				if (footerPortalCssPath.endsWith(".jsp")) {
+					footerPortalCssPath += "?themeId=" + theme.getThemeId() + "&amp;colorSchemeId=" + colorScheme.getColorSchemeId() + "&amp;t=" + portlet.getTimestamp();
+				}
+				else {
+					footerPortalCssPath += "?t=" + portlet.getTimestamp();
+				}
+
+				if (themeDisplay.isThemeCssFastLoad()) {
+					footerPortalCssPath += "&amp;minifierType=css";
+				}
 	%>
 
-				<link href="<%= footerPortalCssPath %>?t=<%= portlet.getTimestamp() %>" rel="stylesheet" type="text/css" />
+				<link href="<%= footerPortalCssPath %>" rel="stylesheet" type="text/css" />
 
 	<%
 			}
@@ -111,10 +127,14 @@ List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORT
 				footerPortletCssPaths.add(footerPortletCssPath);
 
 				if (footerPortletCssPath.endsWith(".jsp")) {
-					footerPortletCssPath += "?themeId=" + themeDisplay.getTheme().getThemeId() + "&amp;colorSchemeId=" + themeDisplay.getColorScheme().getColorSchemeId() + "&amp;t=" + portlet.getTimestamp();
+					footerPortletCssPath += "?themeId=" + theme.getThemeId() + "&amp;colorSchemeId=" + colorScheme.getColorSchemeId() + "&amp;t=" + portlet.getTimestamp();
 				}
 				else {
 					footerPortletCssPath += "?t=" + portlet.getTimestamp();
+				}
+
+				if (themeDisplay.isThemeCssFastLoad()) {
+					footerPortletCssPath += "&amp;minifierType=css";
 				}
 	%>
 
@@ -133,11 +153,22 @@ List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORT
 		for (String footerPortalJavaScript : footerPortalJavaScriptList) {
 			String footerPortalJavaScriptPath = request.getContextPath() + footerPortalJavaScript;
 
-			if (!footerPortalJavaScriptPaths.contains(footerPortalJavaScriptPath)) {
+			if (!footerPortalJavaScriptPaths.contains(footerPortalJavaScriptPath) && !themeDisplay.isIncludedJs(footerPortalJavaScriptPath)) {
 				footerPortalJavaScriptPaths.add(footerPortalJavaScriptPath);
+
+				if (footerPortalJavaScriptPath.endsWith(".jsp")) {
+					footerPortalJavaScriptPath += "?themeId=" + theme.getThemeId() + "&amp;colorSchemeId=" + colorScheme.getColorSchemeId() + "&amp;t=" + portlet.getTimestamp();
+				}
+				else {
+					footerPortalJavaScriptPath += "?t=" + portlet.getTimestamp();
+				}
+
+				if (themeDisplay.isThemeJsFastLoad()) {
+					footerPortalJavaScriptPath += "&amp;minifierType=js";
+				}
 	%>
 
-				<script src="<%= footerPortalJavaScriptPath %>?t=<%= portlet.getTimestamp() %>" type="text/javascript"></script>
+				<script src="<%= footerPortalJavaScriptPath %>" type="text/javascript"></script>
 
 	<%
 			}
@@ -153,19 +184,21 @@ List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORT
 			String footerPortletJavaScriptPath = portlet.getContextPath() + footerPortletJavaScript;
 
 			if (!footerPortletJavaScriptPaths.contains(footerPortletJavaScriptPath)) {
-				if (!PropsValues.JAVASCRIPT_FAST_LOAD && footerPortletJavaScriptPath.endsWith("packed.js")) {
-					StringBuilder sb = new StringBuilder();
+				footerPortletJavaScriptPaths.add(footerPortletJavaScriptPath);
 
-					sb.append(footerPortletJavaScriptPath.substring(0, footerPortletJavaScriptPath.length() - 9));
-					sb.append("unpacked.js");
-
-					footerPortletJavaScriptPath = sb.toString();
+				if (footerPortletJavaScriptPath.endsWith(".jsp")) {
+					footerPortletJavaScriptPath += "?themeId=" + theme.getThemeId() + "&amp;colorSchemeId=" + colorScheme.getColorSchemeId() + "&amp;t=" + portlet.getTimestamp();
+				}
+				else {
+					footerPortletJavaScriptPath += "?t=" + portlet.getTimestamp();
 				}
 
-				footerPortletJavaScriptPaths.add(footerPortletJavaScriptPath);
+				if (themeDisplay.isThemeJsFastLoad()) {
+					footerPortletJavaScriptPath += "&amp;minifierType=js";
+				}
 	%>
 
-				<script src="<%= footerPortletJavaScriptPath %>?t=<%= portlet.getTimestamp() %>" type="text/javascript"></script>
+				<script src="<%= footerPortletJavaScriptPath %>" type="text/javascript"></script>
 
 	<%
 			}

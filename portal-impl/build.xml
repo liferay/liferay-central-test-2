@@ -253,10 +253,6 @@ ${exception.message}
 		</java>
 	</target>
 
-	<target name="build-javascript">
-		<ant dir="../portal-web" target="build-javascript" />
-	</target>
-
 	<target name="build-lang">
 		<antcall target="build-lang-cmd">
 			<param name="lang.dir" value="src/content" />
@@ -449,7 +445,7 @@ ${exception.message}
 			<jvmarg value="-Dservice.spring.file=src/META-INF/portal-spring.xml" />
 			<jvmarg value="-Dservice.api.dir=${project.dir}/portal-service/src" />
 			<jvmarg value="-Dservice.impl.dir=src" />
-			<jvmarg value="-Dservice.json.file=${project.dir}/portal-web/docroot/html/js/liferay/service_unpacked.js" />
+			<jvmarg value="-Dservice.json.file=${project.dir}/portal-web/docroot/html/js/liferay/service.js" />
 			<jvmarg value="-Dservice.remoting.file=${project.dir}/tunnel-web/docroot/WEB-INF/remoting-servlet.xml" />
 			<jvmarg value="-Dservice.sql.dir=../sql" />
 			<jvmarg value="-Dservice.sql.file=portal-tables.sql" />

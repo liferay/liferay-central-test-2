@@ -185,12 +185,16 @@
 	// ]]>
 </script>
 
+<%
+long javaScriptLastModified = ServletContextUtil.getLastModified(application, themeDisplay.getPathJavaScript(), true);
+%>
+
 <c:choose>
 	<c:when test="<%= themeDisplay.isThemeJsFastLoad() %>">
-		<script src="<%= themeDisplay.getPathJavaScript() %>/barebone_packed.js?bn=<%= ReleaseInfo.getBuildNumber() %>" type="text/javascript"></script>
+		<script src="<%= themeDisplay.getPathJavaScript() %>/barebone.js?t=<%= javaScriptLastModified %>&minifierType=js&minifierBundleId=<%= HttpUtil.encodeURL("javascript.barebone.files") %>&minifierBundleDir=<%= HttpUtil.encodeURL(themeDisplay.getPathJavaScript()) %>" type="text/javascript"></script>
 
 		<c:if test="<%= !themeDisplay.isThemeJsBarebone() %>">
-			<script src="<%= themeDisplay.getPathJavaScript() %>/everything_packed.js?bn=<%= ReleaseInfo.getBuildNumber() %>" type="text/javascript"></script>
+			<script src="<%= themeDisplay.getPathJavaScript() %>/everything.js?t=<%= javaScriptLastModified %>&minifierType=js&minifierBundleId=<%= HttpUtil.encodeURL("javascript.everything.files") %>&minifierBundleDir=<%= HttpUtil.encodeURL(themeDisplay.getPathJavaScript()) %>" type="text/javascript"></script>
 		</c:if>
 	</c:when>
 	<c:otherwise>
@@ -201,7 +205,7 @@
 		for (String javaScriptFile : javaScriptFiles) {
 		%>
 
-			<script src="<%= themeDisplay.getPathJavaScript() %>/<%= javaScriptFile %>?bn=<%= ReleaseInfo.getBuildNumber() %>" type="text/javascript"></script>
+			<script src="<%= themeDisplay.getPathJavaScript() %>/<%= javaScriptFile %>?t=<%= javaScriptLastModified %>" type="text/javascript"></script>
 
 		<%
 		}
@@ -212,7 +216,7 @@
 			for (String javaScriptFile : javaScriptFiles) {
 		%>
 
-				<script src="<%= themeDisplay.getPathJavaScript() %>/<%= javaScriptFile %>?bn=<%= ReleaseInfo.getBuildNumber() %>" type="text/javascript"></script>
+				<script src="<%= themeDisplay.getPathJavaScript() %>/<%= javaScriptFile %>?t=<%= javaScriptLastModified %>" type="text/javascript"></script>
 
 		<%
 			}
@@ -227,7 +231,7 @@
 </c:if>
 
 <c:if test="<%= themeDisplay.isIncludeServiceJs() %>">
-	<script src="<%= themeDisplay.getPathJavaScript() %>/liferay/service_packed.js" type="text/javascript"></script>
+	<script src="<%= themeDisplay.getPathJavaScript() %>/liferay/service.js?t=<%= javaScriptLastModified %><%= themeDisplay.isThemeJsFastLoad() ? "&minifierType=js" : "" %>" type="text/javascript"></script>
 </c:if>
 
 <script type="text/javascript">

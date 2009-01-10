@@ -20,50 +20,59 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.tools;
+package com.liferay.portal.servlet.filters.minifier;
 
-import com.liferay.portal.util.FileImpl;
-import com.liferay.portal.util.PropsUtil;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import org.mozilla.javascript.ErrorReporter;
+import org.mozilla.javascript.EvaluatorException;
 
 /**
- * <a href="JavaScriptBuilder.java.html"><b><i>View Source</i></b></a>
+ * <a href="JavaScriptErrorReporter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class JavaScriptBuilder {
+public class JavaScriptErrorReporter implements ErrorReporter {
 
-	public static void main(String[] args) {
-		if (args.length == 3) {
-			new JavaScriptBuilder(args[0], args[1], args[2]);
+	public void error(
+		String message, String sourceName, int line, String lineSource,
+		int lineOffset) {
+
+		if (line < 0) {
+			_log.error(message);
 		}
 		else {
-			throw new IllegalArgumentException();
+			_log.error(line + ": " + lineOffset + ": " + message);
 		}
 	}
 
-	public JavaScriptBuilder(
-		String jsProperty, String jsDir, String mergedFile) {
+	public EvaluatorException runtimeError(
+		String message, String sourceName, int line, String lineSource,
+		int lineOffset) {
 
-		try {
-			StringBuilder sb = new StringBuilder();
+		error(message, sourceName, line, lineSource, lineOffset);
 
-			String[] files = PropsUtil.getArray(jsProperty);
+		return new EvaluatorException(message);
+	}
 
-			for (int i = 0; i < files.length; i++) {
-				String content = _fileUtil.read(jsDir + files[i]);
+	public void warning(
+		String message, String sourceName, int line, String lineSource,
+		int lineOffset) {
 
-				sb.append(content);
-				sb.append("\n");
-			}
-
-			_fileUtil.write(mergedFile, sb.toString());
+		if (!_log.isWarnEnabled()) {
+			return;
 		}
-		catch (Exception e) {
-			e.printStackTrace();
+
+		if (line < 0) {
+			_log.warn(message);
+		}
+		else {
+			_log.warn(line + ": " + lineOffset + ": " + message);
 		}
 	}
 
-	private static FileImpl _fileUtil = FileImpl.getInstance();
+	private static Log _log = LogFactory.getLog(MinifierFilter.class);
 
 }

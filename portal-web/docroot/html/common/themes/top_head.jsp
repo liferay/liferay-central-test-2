@@ -29,7 +29,7 @@
 
 <link rel="Shortcut Icon" href="<%= themeDisplay.getPathThemeImages() %>/<%= PropsValues.THEME_SHORTCUT_ICON %>" />
 
-<link href="<%= themeDisplay.getCDNHost() %><%= themeDisplay.getPathContext() %><%= Portal.PATH_MAIN %>/portal/css_cached?themeId=<%= themeDisplay.getTheme().getThemeId() %>&amp;colorSchemeId=<%= themeDisplay.getColorScheme().getColorSchemeId() %>&amp;t=<%= theme.getTimestamp() %>" type="text/css" rel="stylesheet" />
+<link href="<%= themeDisplay.getCDNHost() %><%= themeDisplay.getPathContext() %><%= Portal.PATH_MAIN %>/portal/css_cached?themeId=<%= theme.getThemeId() %>&amp;colorSchemeId=<%= colorScheme.getColorSchemeId() %>&amp;t=<%= theme.getTimestamp() %>" type="text/css" rel="stylesheet" />
 
 <%
 List<Portlet> portlets = null;
@@ -103,9 +103,20 @@ if (layout != null) {
 
 			if (!headerPortalCssPaths.contains(headerPortalCssPath)) {
 				headerPortalCssPaths.add(headerPortalCssPath);
+
+				if (headerPortalCssPath.endsWith(".jsp")) {
+					headerPortalCssPath += "?themeId=" + theme.getThemeId() + "&amp;colorSchemeId=" + colorScheme.getColorSchemeId() + "&amp;t=" + portlet.getTimestamp();
+				}
+				else {
+					headerPortalCssPath += "?t=" + portlet.getTimestamp();
+				}
+
+				if (themeDisplay.isThemeCssFastLoad()) {
+					headerPortalCssPath += "&amp;minifierType=css";
+				}
 	%>
 
-				<link href="<%= headerPortalCssPath %>?t=<%= portlet.getTimestamp() %>" rel="stylesheet" type="text/css" />
+				<link href="<%= headerPortalCssPath %>" rel="stylesheet" type="text/css" />
 
 	<%
 			}
@@ -124,10 +135,14 @@ if (layout != null) {
 				headerPortletCssPaths.add(headerPortletCssPath);
 
 				if (headerPortletCssPath.endsWith(".jsp")) {
-					headerPortletCssPath += "?themeId=" + themeDisplay.getTheme().getThemeId() + "&amp;colorSchemeId=" + themeDisplay.getColorScheme().getColorSchemeId() + "&amp;t=" + portlet.getTimestamp();
+					headerPortletCssPath += "?themeId=" + theme.getThemeId() + "&amp;colorSchemeId=" + colorScheme.getColorSchemeId() + "&amp;t=" + portlet.getTimestamp();
 				}
 				else {
 					headerPortletCssPath += "?t=" + portlet.getTimestamp();
+				}
+
+				if (themeDisplay.isThemeCssFastLoad()) {
+					headerPortletCssPath += "&amp;minifierType=css";
 				}
 	%>
 
@@ -196,9 +211,20 @@ if (layout != null) {
 
 			if (!headerPortalJavaScriptPaths.contains(headerPortalJavaScriptPath) && !themeDisplay.isIncludedJs(headerPortalJavaScriptPath)) {
 				headerPortalJavaScriptPaths.add(headerPortalJavaScriptPath);
+
+				if (headerPortalJavaScriptPath.endsWith(".jsp")) {
+					headerPortalJavaScriptPath += "?themeId=" + theme.getThemeId() + "&amp;colorSchemeId=" + colorScheme.getColorSchemeId() + "&amp;t=" + portlet.getTimestamp();
+				}
+				else {
+					headerPortalJavaScriptPath += "?t=" + portlet.getTimestamp();
+				}
+
+				if (themeDisplay.isThemeJsFastLoad()) {
+					headerPortalJavaScriptPath += "&amp;minifierType=js";
+				}
 	%>
 
-				<script src="<%= headerPortalJavaScriptPath %>?t=<%= portlet.getTimestamp() %>" type="text/javascript"></script>
+				<script src="<%= headerPortalJavaScriptPath %>" type="text/javascript"></script>
 
 	<%
 			}
@@ -214,19 +240,21 @@ if (layout != null) {
 			String headerPortletJavaScriptPath = portlet.getContextPath() + headerPortletJavaScript;
 
 			if (!headerPortletJavaScriptPaths.contains(headerPortletJavaScriptPath)) {
-				if (!PropsValues.JAVASCRIPT_FAST_LOAD && headerPortletJavaScriptPath.endsWith("packed.js")) {
-					StringBuilder sb = new StringBuilder();
+				headerPortletJavaScriptPaths.add(headerPortletJavaScriptPath);
 
-					sb.append(headerPortletJavaScriptPath.substring(0, headerPortletJavaScriptPath.length() - 9));
-					sb.append("unpacked.js");
-
-					headerPortletJavaScriptPath = sb.toString();
+				if (headerPortletJavaScriptPath.endsWith(".jsp")) {
+					headerPortletJavaScriptPath += "?themeId=" + theme.getThemeId() + "&amp;colorSchemeId=" + colorScheme.getColorSchemeId() + "&amp;t=" + portlet.getTimestamp();
+				}
+				else {
+					headerPortletJavaScriptPath += "?t=" + portlet.getTimestamp();
 				}
 
-				headerPortletJavaScriptPaths.add(headerPortletJavaScriptPath);
+				if (themeDisplay.isThemeJsFastLoad()) {
+					headerPortletJavaScriptPath += "&amp;minifierType=js";
+				}
 	%>
 
-				<script src="<%= headerPortletJavaScriptPath %>?t=<%= portlet.getTimestamp() %>" type="text/javascript"></script>
+				<script src="<%= headerPortletJavaScriptPath %>" type="text/javascript"></script>
 
 	<%
 			}

@@ -1,0 +1,410 @@
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.liferay.portal.servlet.filters.minifier;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.servlet.filters.BasePortalFilter;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.SystemProperties;
+import com.liferay.util.servlet.ServletResponseUtil;
+import com.liferay.util.servlet.filters.CacheResponse;
+
+import com.yahoo.platform.yui.compressor.CssCompressor;
+import com.yahoo.platform.yui.compressor.JavaScriptCompressor;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.StringReader;
+import java.io.StringWriter;
+
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * <a href="MinifierFilter.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class MinifierFilter extends BasePortalFilter {
+
+	public void init(FilterConfig filterConfig) {
+		super.init(filterConfig);
+
+		_servletContext = filterConfig.getServletContext();
+		_servletContextName = GetterUtil.getString(
+			_servletContext.getServletContextName());
+
+		if (Validator.isNull(_servletContextName)) {
+			_tempDir += "/portal";
+		}
+	}
+
+	protected String aggregateCss(String dir, String content, int level)
+		throws IOException {
+
+		StringBuilder sb = new StringBuilder(content.length());
+
+		int pos = 0;
+
+		while (true) {
+			int x = content.indexOf(_CSS_IMPORT_BEGIN, pos);
+			int y = content.indexOf(
+				_CSS_IMPORT_END, x + _CSS_IMPORT_BEGIN.length());
+
+			if ((x == -1) || (y == -1)) {
+				sb.append(content.substring(pos, content.length()));
+
+				break;
+			}
+			else {
+				sb.append(content.substring(pos, x));
+
+				String importFile = content.substring(
+					x + _CSS_IMPORT_BEGIN.length(), y);
+
+				String importContent = FileUtil.read(
+					dir + StringPool.SLASH + importFile);
+
+				String importFilePath = StringPool.BLANK;
+
+				if (importFile.lastIndexOf(StringPool.SLASH) != -1) {
+					importFilePath = StringPool.SLASH + importFile.substring(
+						0, importFile.lastIndexOf(StringPool.SLASH) + 1);
+				}
+
+				importContent = aggregateCss(
+					dir + importFilePath, importContent, level + 1);
+
+				// LEP-7540
+
+				String relativePath = StringPool.BLANK;
+
+				for (int i = 0; i < level; i++) {
+					relativePath += "../";
+				}
+
+				importContent = StringUtil.replace(
+					importContent,
+					new String[] {
+						"url('" + relativePath,
+						"url(\"" + relativePath,
+						"url(" + relativePath
+					},
+					new String[] {
+						"url('[$TEMP_RELATIVE_PATH$]",
+						"url(\"[$TEMP_RELATIVE_PATH$]",
+						"url([$TEMP_RELATIVE_PATH$]"
+					});
+
+				importContent = StringUtil.replace(
+					importContent, "[$TEMP_RELATIVE_PATH$]", StringPool.BLANK);
+
+				sb.append(importContent);
+
+				pos = y + _CSS_IMPORT_END.length();
+			}
+		}
+
+		return sb.toString();
+	}
+
+	protected String getMinifiedBundleContent(HttpServletRequest request)
+		throws IOException {
+
+		String minifierType = ParamUtil.getString(request, "minifierType");
+		String minifierBundleId = ParamUtil.getString(
+			request, "minifierBundleId");
+		String minifierBundleDir = ParamUtil.getString(
+			request, "minifierBundleDir");
+
+		if (Validator.isNull(minifierType) ||
+			Validator.isNull(minifierBundleId) ||
+			Validator.isNull(minifierBundleDir)) {
+
+			return null;
+		}
+
+		String bundleDirRealPath = _servletContext.getRealPath(
+			minifierBundleDir);
+
+		if (bundleDirRealPath == null) {
+			return null;
+		}
+
+		String cacheFileName = _tempDir + request.getRequestURI();
+
+		String queryString = request.getQueryString();
+
+		if (queryString != null) {
+			cacheFileName += _QUESTION_SEPARATOR + queryString;
+		}
+
+		String[] fileNames = PropsUtil.getArray(minifierBundleId);
+
+		File cacheFile = new File(cacheFileName);
+
+		if (cacheFile.exists()) {
+			boolean staleCache = false;
+
+			for (String fileName : fileNames) {
+				File file = new File(
+					bundleDirRealPath + StringPool.SLASH + fileName);
+
+				if (file.lastModified() > cacheFile.lastModified()) {
+					staleCache = true;
+
+					break;
+				}
+			}
+
+			if (!staleCache) {
+				return FileUtil.read(cacheFile);
+			}
+		}
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Minifying JavaScript bundle " + minifierBundleId);
+		}
+
+		StringBuilder sb = new StringBuilder();
+
+		for (String fileName : fileNames) {
+			String content = FileUtil.read(
+				bundleDirRealPath + StringPool.SLASH + fileName);
+
+			sb.append(content);
+			sb.append("\n");
+		}
+
+		String minifiedContent = minifyJavaScript(sb.toString());
+
+		FileUtil.write(cacheFile, minifiedContent);
+
+		return minifiedContent;
+	}
+
+	protected String getMinifiedContent(
+			HttpServletRequest request, HttpServletResponse response,
+			FilterChain filterChain)
+		throws IOException, ServletException {
+
+		String minifierType = ParamUtil.getString(request, "minifierType");
+		String minifierBundleId = ParamUtil.getString(
+			request, "minifierBundleId");
+		String minifierBundleDir = ParamUtil.getString(
+			request, "minifierBundleDir");
+
+		if (Validator.isNull(minifierType) ||
+			Validator.isNotNull(minifierBundleId) ||
+			Validator.isNotNull(minifierBundleDir)) {
+
+			return null;
+		}
+
+		String requestURI = request.getRequestURI();
+
+		String realPath = StringUtil.replace(
+			_servletContext.getRealPath(requestURI), StringPool.BACK_SLASH,
+			StringPool.SLASH);
+
+		if (realPath == null) {
+			return null;
+		}
+
+		File file = new File(realPath);
+
+		if (!file.exists()) {
+
+			// Tomcat incorrectly returns the a real path to a resource that
+			// exists in another web application. For example, it returns
+			// ".../webapps/abc-theme/abc-theme/css/main.css" instead of
+			// ".../webapps/abc-theme/css/main.css".
+
+			if (Validator.isNotNull(_servletContextName)) {
+				realPath = StringUtil.replaceFirst(
+					realPath, StringPool.SLASH + _servletContextName,
+					StringPool.BLANK);
+
+				file = new File(realPath);
+			}
+		}
+
+		if (!file.exists()) {
+			return null;
+		}
+
+		String cacheFileName = _tempDir + requestURI;
+
+		String queryString = request.getQueryString();
+
+		if (queryString != null) {
+			cacheFileName += _QUESTION_SEPARATOR + queryString;
+		}
+
+		String minifiedContent = null;
+
+		File cacheFile = new File(cacheFileName);
+
+		if ((cacheFile.exists()) &&
+			(cacheFile.lastModified() >= file.lastModified())) {
+
+			minifiedContent = FileUtil.read(cacheFile);
+		}
+		else {
+			if (realPath.endsWith(_CSS_EXTENSION)) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Minifying CSS " + file);
+				}
+
+				minifiedContent = minifyCss(file);
+			}
+			else if (realPath.endsWith(_JAVASCRIPT_EXTENSION)) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Minifying JavaScript " + file);
+				}
+
+				minifiedContent = minifyJavaScript(file);
+			}
+			else if (realPath.endsWith(_JSP_EXTENSION)) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Minifying JSP " + file);
+				}
+
+				CacheResponse cacheResponse = new CacheResponse(
+					response, StringPool.UTF8);
+
+				processFilter(
+					MinifierFilter.class, request, cacheResponse, filterChain);
+
+				minifiedContent = new String(
+					cacheResponse.getData(), StringPool.UTF8);
+
+				if (minifierType.equals("css")) {
+					minifiedContent = minifyCss(minifiedContent);
+				}
+				else if (minifierType.equals("js")) {
+					minifiedContent = minifyJavaScript(minifiedContent);
+				}
+			}
+			else {
+				return null;
+			}
+
+			FileUtil.write(cacheFile, minifiedContent);
+		}
+
+		return minifiedContent;
+	}
+
+	protected String minifyCss(File file) throws IOException {
+		String content = FileUtil.read(file);
+
+		content = aggregateCss(file.getParent(), content, 0);
+
+		return minifyCss(content);
+	}
+
+	protected String minifyCss(String content) throws IOException {
+		CssCompressor cssCompressor = new CssCompressor(
+			new BufferedReader(new StringReader(content)));
+
+		StringWriter stringWriter = new StringWriter();
+
+		cssCompressor.compress(stringWriter, -1);
+
+		return stringWriter.toString();
+	}
+
+	protected String minifyJavaScript(File file) throws IOException {
+		String content = FileUtil.read(file);
+
+		return minifyJavaScript(content);
+	}
+
+	protected String minifyJavaScript(String content) throws IOException {
+		JavaScriptCompressor javaScriptCompressor = new JavaScriptCompressor(
+			new BufferedReader(new StringReader(content)),
+			new JavaScriptErrorReporter());
+
+		StringWriter stringWriter = new StringWriter();
+
+		javaScriptCompressor.compress(stringWriter, -1, false, false, false);
+
+		return stringWriter.toString();
+	}
+
+	protected void processFilter(
+			HttpServletRequest request, HttpServletResponse response,
+			FilterChain filterChain)
+		throws IOException, ServletException {
+
+		String minifiedContent = getMinifiedContent(
+			request, response, filterChain);
+
+		if (Validator.isNull(minifiedContent)) {
+			minifiedContent = getMinifiedBundleContent(request);
+		}
+
+		if (Validator.isNull(minifiedContent)) {
+			processFilter(MinifierFilter.class, request, response, filterChain);
+		}
+		else {
+			ServletResponseUtil.write(response, minifiedContent);
+		}
+	}
+
+	private static final String _CSS_IMPORT_BEGIN = "@import url(";
+
+	private static final String _CSS_IMPORT_END = ");";
+
+	private static final String _CSS_EXTENSION = ".css";
+
+	private static final String _JAVASCRIPT_EXTENSION = ".js";
+
+	private static final String _JSP_EXTENSION = ".jsp";
+
+	private static final String _QUESTION_SEPARATOR = "_Q_";
+
+	private static final String _TEMP_DIR =
+		SystemProperties.get(SystemProperties.TMP_DIR) + "/liferay/minifier";
+
+	private static Log _log = LogFactoryUtil.getLog(MinifierFilter.class);
+
+	private ServletContext _servletContext;
+	private String _servletContextName;
+	private String _tempDir = _TEMP_DIR;
+
+}

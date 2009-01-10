@@ -16,7 +16,7 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
-		<footer-portlet-javascript>/html/portlet/enterprise_admin/packed.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/html/portlet/enterprise_admin/javascript.js</footer-portlet-javascript>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 		<system>true</system>
@@ -174,7 +174,7 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/message_boards/css.jsp</header-portlet-css>
-		<footer-portlet-javascript>/html/portlet/message_boards/packed.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/html/portlet/message_boards/javascript.js</footer-portlet-javascript>
 		<css-class-wrapper>portlet-message-boards</css-class-wrapper>
 		<facebook-integration>fbml</facebook-integration>
 	</portlet>
@@ -668,7 +668,7 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
-		<footer-portlet-javascript>/html/portlet/enterprise_admin/packed.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/html/portlet/enterprise_admin/javascript.js</footer-portlet-javascript>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -823,8 +823,8 @@
 		<render-weight>50</render-weight>
 		<ajaxable>false</ajaxable>
 		<header-portlet-css>/html/portlet/tags_admin/css.jsp</header-portlet-css>
-		<footer-portal-javascript>/html/js/liferay/service_packed.js</footer-portal-javascript>
-		<footer-portlet-javascript>/html/portlet/tags_admin/packed.js</footer-portlet-javascript>
+		<footer-portal-javascript>/html/js/liferay/service.js</footer-portal-javascript>
+		<footer-portlet-javascript>/html/portlet/tags_admin/javascript.js</footer-portlet-javascript>
 		<css-class-wrapper>portlet-tags-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1088,7 +1088,7 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
-		<footer-portlet-javascript>/html/portlet/enterprise_admin/packed.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/html/portlet/enterprise_admin/javascript.js</footer-portlet-javascript>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1105,7 +1105,7 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
-		<footer-portlet-javascript>/html/portlet/enterprise_admin/packed.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/html/portlet/enterprise_admin/javascript.js</footer-portlet-javascript>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
 	<portlet>

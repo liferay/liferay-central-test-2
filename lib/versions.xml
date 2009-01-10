@@ -729,17 +729,6 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>development/yuicompressor.jar</file-name>
-		<version>2.1.2</version>
-		<project-name>YUI Compressor</project-name>
-		<project-url>http://developer.yahoo.com/yui/compressor</project-url>
-		<licenses>
-			<license>
-				<license-name>BSD Style License</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>global/container.jar</file-name>
 		<version>2.0 (trunk 811)</version>
 		<project-name>Portlet Container</project-name>
@@ -2627,6 +2616,17 @@
 			<license>
 				<license-name>BSD Style License</license-name>
 				<copyright-notice>Copyright (c) 2003-2006, Joe Walnes. Copyright (c) 2006-2007, XStream Committers. All rights reserved.</copyright-notice>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/yuicompressor.jar</file-name>
+		<version>2.1.2</version>
+		<project-name>YUI Compressor</project-name>
+		<project-url>http://developer.yahoo.com/yui/compressor</project-url>
+		<licenses>
+			<license>
+				<license-name>BSD Style License</license-name>
 			</license>
 		</licenses>
 	</library>

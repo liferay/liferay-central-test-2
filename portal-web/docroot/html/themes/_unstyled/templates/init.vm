@@ -36,13 +36,17 @@
 #set ($full_css_path = $fullCssPath)
 #set ($full_templates_path = $fullTemplatesPath)
 
+#set ($css_main_file = "$css_folder/main.css?t=$theme_timestamp")
+
 #if ($theme_display.isThemeCssFastLoad())
-	#set ($css_main_file = "$css_folder/everything_packed.css?companyId=$theme_display.getCompanyId()&amp;languageId=$languageUtil.getLanguageId($locale)&amp;themeId=$theme_display.getThemeId()&amp;colorSchemeId=$theme_display.getColorSchemeId()&amp;t=$theme_timestamp")
-#else
-	#set ($css_main_file = "$css_folder/main.css?companyId=$theme_display.getCompanyId()&amp;languageId=$languageUtil.getLanguageId($locale)&amp;themeId=$theme_display.getThemeId()&amp;colorSchemeId=$theme_display.getColorSchemeId()&amp;t=$theme_timestamp")
+	#set ($css_main_file = $css_main_file + "&amp;minifierType=css")
 #end
 
 #set ($js_main_file = "$javascript_folder/javascript.js?t=$theme_timestamp")
+
+#if ($theme_display.isThemeJsFastLoad())
+	#set ($js_main_file = $js_main_file + "&amp;minifierType=js")
+#end
 
 #set ($company_id = $company.getCompanyId())
 #set ($company_name = $company.getName())

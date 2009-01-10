@@ -172,6 +172,54 @@ public class ThemeDeployer extends BaseDeployer {
 		sb.append("<url-pattern>*.png</url-pattern>");
 		sb.append("</filter-mapping>");
 
+		// MinifierFilter
+
+		sb.append("<filter>");
+		sb.append("<filter-name>Minifier Filter</filter-name>");
+		sb.append("<filter-class>");
+		sb.append("com.liferay.portal.kernel.servlet.PortalClassLoaderFilter");
+		sb.append("</filter-class>");
+		sb.append("<init-param>");
+		sb.append("<param-name>filter-class</param-name>");
+		sb.append("<param-value>");
+		sb.append("com.liferay.portal.servlet.filters.minifier.MinifierFilter");
+		sb.append("</param-value>");
+		sb.append("</init-param>");
+		sb.append("</filter>");
+
+		sb.append("<filter>");
+		sb.append("<filter-name>Minifier Filter - CSS JSP</filter-name>");
+		sb.append("<filter-class>");
+		sb.append("com.liferay.portal.kernel.servlet.PortalClassLoaderFilter");
+		sb.append("</filter-class>");
+		sb.append("<init-param>");
+		sb.append("<param-name>filter-class</param-name>");
+		sb.append("<param-value>");
+		sb.append("com.liferay.portal.servlet.filters.minifier.MinifierFilter");
+		sb.append("</param-value>");
+		sb.append("</init-param>");
+		sb.append("<init-param>");
+		sb.append("<param-name>url-regex-pattern</param-name>");
+		sb.append("<param-value>");
+		sb.append(".+/css\\.jsp");
+		sb.append("</param-value>");
+		sb.append("</init-param>");
+		sb.append("</filter>");
+
+		sb.append("<filter-mapping>");
+		sb.append("<filter-name>Minifier Filter</filter-name>");
+		sb.append("<url-pattern>*.css</url-pattern>");
+		sb.append("</filter-mapping>");
+		sb.append("<filter-mapping>");
+		sb.append("<filter-name>Minifier Filter</filter-name>");
+		sb.append("<url-pattern>*.js</url-pattern>");
+		sb.append("</filter-mapping>");
+
+		sb.append("<filter-mapping>");
+		sb.append("<filter-name>Minifier Filter - CSS JSP</filter-name>");
+		sb.append("<url-pattern>*.jsp</url-pattern>");
+		sb.append("</filter-mapping>");
+
 		// ThemeContextListener
 
 		sb.append("<listener>");

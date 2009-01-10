@@ -145,6 +145,17 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 
 							if (!headerPortalCssPaths.contains(headerPortalCssPath)) {
 								headerPortalCssPaths.add(headerPortalCssPath);
+
+								if (headerPortalCssPath.endsWith(".jsp")) {
+									headerPortalCssPath += "?themeId=" + theme.getThemeId() + "&amp;colorSchemeId=" + colorScheme.getColorSchemeId() + "&amp;t=" + portlet.getTimestamp();
+								}
+								else {
+									headerPortalCssPath += "?t=" + portlet.getTimestamp();
+								}
+
+								if (themeDisplay.isThemeCssFastLoad()) {
+									headerPortalCssPath += "&amp;minifierType=css";
+								}
 							}
 						}
 
@@ -159,7 +170,14 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 								headerPortletCssPaths.add(headerPortletCssPath);
 
 								if (headerPortletCssPath.endsWith(".jsp")) {
-									headerPortletCssPath += "?themeId=" + themeDisplay.getTheme().getThemeId() + "&amp;colorSchemeId=" + themeDisplay.getColorScheme().getColorSchemeId() + "&amp;t=" + theme.getTimestamp();
+									headerPortletCssPath += "?themeId=" + theme.getThemeId() + "&amp;colorSchemeId=" + colorScheme.getColorSchemeId() + "&amp;t=" + portlet.getTimestamp();
+								}
+								else {
+									headerPortletCssPath += "?t=" + portlet.getTimestamp();
+								}
+
+								if (themeDisplay.isThemeCssFastLoad()) {
+									headerPortletCssPath += "&amp;minifierType=css";
 								}
 							}
 						}
@@ -171,8 +189,19 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 						for (String footerPortalCss : footerPortalCssList) {
 							String footerPortalCssPath = request.getContextPath() + footerPortalCss;
 
-							if (!footerPortalCssPaths.contains(footerPortalCssPath) && !themeDisplay.isIncludedJs(footerPortalCssPath)) {
+							if (!footerPortalCssPaths.contains(footerPortalCssPath)) {
 								footerPortalCssPaths.add(footerPortalCssPath);
+
+								if (footerPortalCssPath.endsWith(".jsp")) {
+									footerPortalCssPath += "?themeId=" + theme.getThemeId() + "&amp;colorSchemeId=" + colorScheme.getColorSchemeId() + "&amp;t=" + portlet.getTimestamp();
+								}
+								else {
+									footerPortalCssPath += "?t=" + portlet.getTimestamp();
+								}
+
+								if (themeDisplay.isThemeCssFastLoad()) {
+									footerPortalCssPath += "&amp;minifierType=css";
+								}
 							}
 						}
 
@@ -187,7 +216,14 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 								footerPortletCssPaths.add(footerPortletCssPath);
 
 								if (footerPortletCssPath.endsWith(".jsp")) {
-									footerPortletCssPath += "?themeId=" + themeDisplay.getTheme().getThemeId() + "&amp;colorSchemeId=" + themeDisplay.getColorScheme().getColorSchemeId() + "&amp;t=" + theme.getTimestamp();
+									footerPortletCssPath += "?themeId=" + theme.getThemeId() + "&amp;colorSchemeId=" + colorScheme.getColorSchemeId() + "&amp;t=" + portlet.getTimestamp();
+								}
+								else {
+									footerPortletCssPath += "?t=" + portlet.getTimestamp();
+								}
+
+								if (themeDisplay.isThemeCssFastLoad()) {
+									footerPortletCssPath += "&amp;minifierType=css";
 								}
 							}
 						}

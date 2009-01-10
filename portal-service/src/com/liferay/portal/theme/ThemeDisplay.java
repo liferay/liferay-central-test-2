@@ -980,12 +980,12 @@ public class ThemeDisplay implements Serializable {
 			return true;
 		}
 		else if (isIncludePortletCssJs() &&
-				 js.equals(path + "/liferay/portlet_css_packed.js")) {
+				 js.equals(path + "/liferay/portlet_css.js")) {
 
 			return true;
 		}
 		else if (isIncludeServiceJs() &&
-				 js.equals(path + "/liferay/service_packed.js")) {
+				 js.equals(path + "/liferay/service.js")) {
 
 			return true;
 		}
