@@ -52,12 +52,6 @@ import org.apache.lucene.search.SortField;
  */
 public class LuceneIndexSearcherImpl implements IndexSearcher {
 
-	public Hits search(long companyId, Query query, int start, int end)
-		throws SearchException {
-
-		return search(companyId, query, null, start, end);
-	}
-
 	public Hits search(
 			long companyId, Query query, Sort[] sorts, int start, int end)
 		throws SearchException {
