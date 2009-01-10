@@ -52,11 +52,13 @@
 
 			<div class="vocabulary-actions">
 				<c:if test="<%= TagsPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_VOCABULARY) %>">
-					<input type="button" class="add-vocabulary-btn" name="add-vocabulary-btn" value="<liferay-ui:message key="add-tag-set" />" id="add-vocabulary-btn">
+					<input class="add-vocabulary-btn" id="add-vocabulary-btn" name="add-vocabulary-btn" type="button"  value="<liferay-ui:message key="add-tag-set" />">
 				</c:if>
+
 				<c:if test="<%= TagsPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ENTRY) %>">
-					<input type="button" class="add-entry-btn" name="add-entry-btn" value="<liferay-ui:message key="add-tag" />" id="add-entry-btn">
+					<input class="add-entry-btn" id="add-entry-btn" name="add-entry-btn" type="button"  value="<liferay-ui:message key="add-tag" />">
 				</c:if>
+
 				<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS) %>">
 					<liferay-security:permissionsURL
 						modelResource="com.liferay.portlet.tags"
