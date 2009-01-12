@@ -281,7 +281,7 @@ public class RSSAction extends PortletAction {
 
 		String contentField = feed.getContentField();
 
-		if (contentField.equals(JournalFeedImpl.RENDERED_WEB_CONTENT)) {
+		if (contentField.equals(JournalFeedImpl.RENDERED_ARTICLE)) {
 			String rendererTemplateId = article.getTemplateId();
 
 			if (Validator.isNotNull(feed.getRendererTemplateId())) {
@@ -298,9 +298,7 @@ public class RSSAction extends PortletAction {
 				content = articleDisplay.getContent();
 			}
 		}
-		else if (!contentField.equals(
-					JournalFeedImpl.WEB_CONTENT_DESCRIPTION)) {
-
+		else if (!contentField.equals(JournalFeedImpl.ARTICLE_DESCRIPTION)) {
 			Document doc = SAXReaderUtil.read(article.getContent());
 
 			XPath xpathSelector = SAXReaderUtil.createXPath(

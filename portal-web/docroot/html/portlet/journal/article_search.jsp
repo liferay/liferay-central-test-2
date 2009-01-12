@@ -33,7 +33,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 <liferay-ui:search-toggle
 	id="toggle_id_journal_article_search"
 	displayTerms="<%= displayTerms %>"
-	buttonLabel="search"
+	buttonLabel="search-articles"
 >
 	<table class="lfr-table">
 	<tr>
@@ -158,7 +158,7 @@ boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, 
 
 	<div>
 		<c:if test="<%= showAddArticleButtonButton %>">
-			<input type="button" value="<liferay-ui:message key="add-web-content" />" onClick="<portlet:namespace />addArticle();" />
+			<input type="button" value="<liferay-ui:message key="add-article" />" onClick="<portlet:namespace />addArticle();" />
 		</c:if>
 
 		<c:if test="<%= showPermissionsButton %>">

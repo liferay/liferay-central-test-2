@@ -72,17 +72,17 @@ JournalStructure structure = (JournalStructure)row.getObject();
 			<portlet:param name="structureId" value="<%= structure.getStructureId() %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="add_article" message="add-web-content" url="<%= addArticleURL %>" />
+		<liferay-ui:icon image="add_article" message="add-article" url="<%= addArticleURL %>" />
 	</c:if>
 
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewArticleURL">
 		<portlet:param name="struts_action" value="/journal/view" />
-		<portlet:param name="tabs1" value="web-contents" />
+		<portlet:param name="tabs1" value="articles" />
 		<portlet:param name="groupId" value="<%= String.valueOf(structure.getGroupId()) %>" />
 		<portlet:param name="structureId" value="<%= structure.getStructureId() %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="view_articles" message="view-web-contents" url="<%= viewArticleURL %>" />
+	<liferay-ui:icon image="view_articles" message="view-articles" url="<%= viewArticleURL %>" />
 
 	<c:if test="<%= JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_TEMPLATE) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addTemplateURL">

@@ -35,10 +35,9 @@ import com.liferay.portlet.journal.model.JournalFeed;
 public class JournalFeedImpl
 	extends JournalFeedModelImpl implements JournalFeed {
 
-	public static final String WEB_CONTENT_DESCRIPTION =
-		"web-content-description";
+	public static final String ARTICLE_DESCRIPTION = "article-description";
 
-	public static final String RENDERED_WEB_CONTENT = "rendered-web-content";
+	public static final String RENDERED_ARTICLE = "rendered-article";
 
 	public JournalFeedImpl() {
 	}

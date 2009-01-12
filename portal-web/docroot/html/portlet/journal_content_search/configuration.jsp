@@ -34,7 +34,7 @@
 <table class="lfr-table">
 <tr>
 	<td>
-		<liferay-ui:message key="web-content-type" />
+		<liferay-ui:message key="article-type" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />type">
@@ -57,7 +57,7 @@
 
 <br />
 
-<liferay-ui:message key="only-show-results-for-web-contents-listed-in-a-web-content-display-portlet" />
+<liferay-ui:message key="only-show-results-for-articles-listed-in-a-journal-content-portlet" />
 
 <input <%= showListed ? "checked" : "" %> name="<portlet:namespace />showListed" type="checkbox" onClick="document.<portlet:namespace />fm.<portlet:namespace />targetPortletId.disabled = this.checked;" />
 

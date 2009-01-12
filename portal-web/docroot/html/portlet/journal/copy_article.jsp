@@ -41,7 +41,7 @@ double version = ParamUtil.getDouble(request, "version");
 <input name="<portlet:namespace />version" type="hidden" value="<%= version %>" />
 
 <liferay-ui:tabs
-	names="web-content"
+	names="article"
 	backURL="<%= redirect %>"
 />
 

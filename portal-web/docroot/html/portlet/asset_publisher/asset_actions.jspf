@@ -90,7 +90,7 @@ else if (className.equals(JournalArticle.class.getName())) {
 	if (articleDisplay != null) {
 		showEditIcon = JournalArticlePermission.contains(permissionChecker, articleDisplay.getGroupId(), articleDisplay.getArticleId(), ActionKeys.UPDATE);
 
-		editIconMsg = "edit-web-content";
+		editIconMsg = "edit-article";
 
 		editPortletURL = new PortletURLImpl(request, PortletKeys.JOURNAL, plid, PortletRequest.RENDER_PHASE);
 

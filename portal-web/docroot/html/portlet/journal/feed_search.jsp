@@ -33,7 +33,7 @@ FeedDisplayTerms displayTerms = (FeedDisplayTerms)searchContainer.getDisplayTerm
 <liferay-ui:search-toggle
 	id="toggle_id_journal_feed_search"
 	displayTerms="<%= displayTerms %>"
-	buttonLabel="search"
+	buttonLabel="search-feeds"
 >
 	<table class="lfr-table">
 	<tr>

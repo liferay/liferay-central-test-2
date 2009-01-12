@@ -36,7 +36,7 @@ portletURL.setParameter("portletResource", portletResource);
 portletURL.setParameter("typeSelection", JournalArticle.class.getName());
 %>
 
-<liferay-ui:tabs names="web-contents" backURL="<%= configurationRenderURL.toString() %>" />
+<liferay-ui:tabs names="articles" backURL="<%= configurationRenderURL.toString() %>" />
 
 <%
 ArticleSearch searchContainer = new ArticleSearch(renderRequest, portletURL);

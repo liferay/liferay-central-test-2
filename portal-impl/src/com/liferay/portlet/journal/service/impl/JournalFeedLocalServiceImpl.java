@@ -393,8 +393,8 @@ public class JournalFeedLocalServiceImpl
 	protected boolean isValidStructureField(
 		long groupId, String structureId, String contentField) {
 
-		if (contentField.equals(JournalFeedImpl.WEB_CONTENT_DESCRIPTION) ||
-			contentField.equals(JournalFeedImpl.RENDERED_WEB_CONTENT)) {
+		if (contentField.equals(JournalFeedImpl.ARTICLE_DESCRIPTION) ||
+			contentField.equals(JournalFeedImpl.RENDERED_ARTICLE)) {
 
 			return true;
 		}
