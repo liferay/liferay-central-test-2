@@ -33,7 +33,7 @@ StructureDisplayTerms displayTerms = (StructureDisplayTerms)searchContainer.getD
 <liferay-ui:search-toggle
 	id="toggle_id_journal_structure_search"
 	displayTerms="<%= displayTerms %>"
-	buttonLabel="search-structures"
+	buttonLabel="search"
 >
 	<table class="lfr-table">
 	<tr>

@@ -68,16 +68,16 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		if (tabs2.equals("email-from")) {
 			updateEmailFrom(actionRequest, preferences);
 		}
-		else if (tabs2.equals("article-approval-denied-email")) {
+		else if (tabs2.equals("web-content-approval-denied-email")) {
 			updateEmailArticleApprovalDenied(actionRequest, preferences);
 		}
-		else if (tabs2.equals("article-approval-granted-email")) {
+		else if (tabs2.equals("web-content-approval-granted-email")) {
 			updateEmailArticleApprovalGranted(actionRequest, preferences);
 		}
-		else if (tabs2.equals("article-approval-requested-email")) {
+		else if (tabs2.equals("web-content-approval-requested-email")) {
 			updateEmailArticleApprovalRequested(actionRequest, preferences);
 		}
-		else if (tabs2.equals("article-review-email")) {
+		else if (tabs2.equals("web-content-review-email")) {
 			updateEmailArticleReview(actionRequest, preferences);
 		}
 

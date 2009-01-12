@@ -68,7 +68,7 @@ groupId = ParamUtil.getLong(request, "groupId", groupId);
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="article-type" />
+		<liferay-ui:message key="web-content-type" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />type">
@@ -130,7 +130,7 @@ groupId = ParamUtil.getLong(request, "groupId", groupId);
 			<option <%= orderByCol.equals("display-date") ? "selected" : "" %> value="display-date"><liferay-ui:message key="display-date" /></option>
 			<option <%= orderByCol.equals("create-date") ? "selected" : "" %> value="create-date"><liferay-ui:message key="create-date" /></option>
 			<option <%= orderByCol.equals("modified-date") ? "selected" : "" %> value="modified-date"><liferay-ui:message key="modified-date" /></option>
-			<option <%= orderByCol.equals("title") ? "selected" : "" %> value="title"><liferay-ui:message key="article-title" /></option>
+			<option <%= orderByCol.equals("title") ? "selected" : "" %> value="title"><liferay-ui:message key="web-content-title" /></option>
 			<option <%= orderByCol.equals("id") ? "selected" : "" %> value="id"><liferay-ui:message key="id" /></option>
 		</select>
 	</td>

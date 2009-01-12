@@ -663,7 +663,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 <input name="<portlet:namespace />expireArticleIds" type="hidden" value="<%= articleId + EditArticleAction.VERSION_SEPARATOR + version %>" />
 
 <liferay-ui:tabs
-	names="article"
+	names="web-content"
 	formName="fm1"
 	backURL="<%= redirect %>"
 />

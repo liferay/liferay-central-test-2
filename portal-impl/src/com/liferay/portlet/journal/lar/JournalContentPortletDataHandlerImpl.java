@@ -414,7 +414,7 @@ public class JournalContentPortletDataHandlerImpl
 
 	private static final PortletDataHandlerBoolean _selectedArticles =
 		new PortletDataHandlerBoolean(
-			_NAMESPACE, "selected-articles", true, true);
+			_NAMESPACE, "selected-web-contents", true, true);
 
 	private static final PortletDataHandlerBoolean _embeddedAssets =
 		new PortletDataHandlerBoolean(_NAMESPACE, "embedded-assets");

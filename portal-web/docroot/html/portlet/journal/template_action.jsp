@@ -74,17 +74,17 @@ JournalTemplate template = (JournalTemplate)row.getObject();
 				<portlet:param name="templateId" value="<%= template.getTemplateId() %>" />
 			</portlet:renderURL>
 
-			<liferay-ui:icon image="add_article" message="add-article" url="<%= addArticleURL %>" />
+			<liferay-ui:icon image="add_article" message="add-web-content" url="<%= addArticleURL %>" />
 		</c:if>
 
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewArticlesURL">
 			<portlet:param name="struts_action" value="/journal/view" />
-			<portlet:param name="tabs1" value="articles" />
+			<portlet:param name="tabs1" value="web-contents" />
 			<portlet:param name="groupId" value="<%= String.valueOf(template.getGroupId()) %>" />
 			<portlet:param name="templateId" value="<%= template.getTemplateId() %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="view_articles" message="view-articles" url="<%= viewArticlesURL %>" />
+		<liferay-ui:icon image="view_articles" message="view-web-contents" url="<%= viewArticlesURL %>" />
 
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editStructureURL">
 			<portlet:param name="struts_action" value="/journal/edit_structure" />
