@@ -39,7 +39,7 @@ public interface SpriteProcessor {
 	public Properties generate(
 			List<File> images, String spriteFileName,
 			String spritePropertiesFileName, String spritePropertiesRootPath,
-			int maxHeight, int maxWidth)
+			int maxHeight, int maxWidth, int maxSize)
 		throws IOException;
 
 }

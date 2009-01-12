@@ -39,12 +39,12 @@ public class SpriteProcessorUtil {
 	public static Properties generate(
 			List<File> images, String spriteFileName,
 			String spritePropertiesFileName, String spritePropertiesRootPath,
-			int maxHeight, int maxWidth)
+			int maxHeight, int maxWidth, int maxSize)
 		throws IOException {
 
 		return getSpriteProcessor().generate(
 			images, spriteFileName, spritePropertiesFileName,
-			spritePropertiesRootPath, maxHeight, maxWidth);
+			spritePropertiesRootPath, maxHeight, maxWidth, maxSize);
 	}
 
 	public static SpriteProcessor getSpriteProcessor() {

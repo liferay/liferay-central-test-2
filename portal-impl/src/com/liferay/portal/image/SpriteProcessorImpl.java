@@ -77,7 +77,7 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 	public Properties generate(
 			List<File> images, String spriteFileName,
 			String spritePropertiesFileName, String spritePropertiesRootPath,
-			int maxHeight, int maxWidth)
+			int maxHeight, int maxWidth, int maxSize)
 		throws IOException {
 
 		if (images.size() < 1) {
@@ -135,6 +135,10 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 
 		for (File file : images) {
 			String fileName = file.getName();
+
+			if (file.length() > maxSize) {
+				continue;
+			}
 
 			RenderedOp renderedOp = FileLoadDescriptor.create(
 				file.toString(), null, null, null);
