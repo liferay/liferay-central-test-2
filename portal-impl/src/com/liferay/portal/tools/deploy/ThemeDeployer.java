@@ -97,6 +97,16 @@ public class ThemeDeployer extends BaseDeployer {
 
 		sb.append(extraContent);
 
+		// ThemeContextListener
+
+		sb.append("<listener>");
+		sb.append("<listener-class>");
+		sb.append("com.liferay.portal.kernel.servlet.ThemeContextListener");
+		sb.append("</listener-class>");
+		sb.append("</listener>");
+
+		// Speed filters
+
 		String speedFiltersContent = FileUtil.read(
 			DeployUtil.getResourcePath("speed_filters.xml"));
 
