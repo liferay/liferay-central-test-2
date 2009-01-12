@@ -70,6 +70,13 @@ public class CookieKeys {
 		HttpServletRequest request, HttpServletResponse response,
 		Cookie cookie) {
 
+		addCookie(request, response, cookie, request.isSecure());
+	}
+
+	public static void addCookie(
+		HttpServletRequest request, HttpServletResponse response,
+		Cookie cookie, boolean secure) {
+
 		if (!PropsValues.SESSION_ENABLE_PERSISTENT_COOKIES ||
 			PropsValues.TCK_URL) {
 
@@ -93,7 +100,7 @@ public class CookieKeys {
 			}
 		}
 
-		cookie.setSecure(request.isSecure());
+		cookie.setSecure(secure);
 		cookie.setValue(encodedValue);
 		cookie.setVersion(VERSION);
 
