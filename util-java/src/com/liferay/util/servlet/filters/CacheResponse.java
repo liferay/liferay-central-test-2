@@ -22,6 +22,7 @@
 
 package com.liferay.util.servlet.filters;
 
+import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.util.servlet.Header;
 
@@ -84,6 +85,10 @@ public class CacheResponse extends HttpServletResponseWrapper {
 		header.setStringValue(value);
 
 		values.add(header);
+
+		if (name.equals(HttpHeaders.CONTENT_TYPE)) {
+			_contentType = value;
+		}
 	}
 
 	public void addIntHeader(String name, int value) {

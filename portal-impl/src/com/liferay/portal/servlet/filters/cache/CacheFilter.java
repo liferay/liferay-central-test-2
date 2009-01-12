@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
-import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -356,10 +355,10 @@ public class CacheFilter extends BasePortalFilter {
 
 			long companyId = PortalInstances.getCompanyId(request);
 
-			CacheResponseData data = CacheUtil.getCacheResponseData(
-				companyId, key);
+			CacheResponseData cacheResponseData =
+				CacheUtil.getCacheResponseData(companyId, key);
 
-			if (data == null) {
+			if (cacheResponseData == null) {
 				if (!isCacheableData(companyId, request)) {
 					if (_log.isDebugEnabled()) {
 						_log.debug("Request is not cacheable " + key);
@@ -381,14 +380,7 @@ public class CacheFilter extends BasePortalFilter {
 				processFilter(
 					CacheFilter.class, request, cacheResponse, filterChain);
 
-				String contentType = cacheResponse.getHeader(
-					HttpHeaders.CONTENT_TYPE);
-
-				if (Validator.isNotNull(contentType)) {
-					cacheResponse.setContentType(contentType);
-				}
-
-				data = new CacheResponseData(
+				cacheResponseData = new CacheResponseData(
 					cacheResponse.getData(), cacheResponse.getContentType(),
 					cacheResponse.getHeaders());
 
@@ -396,15 +388,16 @@ public class CacheFilter extends BasePortalFilter {
 					WebKeys.LAST_PATH);
 
 				if (lastPath != null) {
-					data.setAttribute(WebKeys.LAST_PATH, lastPath);
+					cacheResponseData.setAttribute(WebKeys.LAST_PATH, lastPath);
 				}
 
-				if (data.getData().length > 0) {
-					CacheUtil.putCacheResponseData(companyId, key, data);
+				if (cacheResponseData.getData().length > 0) {
+					CacheUtil.putCacheResponseData(
+						companyId, key, cacheResponseData);
 				}
 			}
 			else {
-				LastPath lastPath = (LastPath)data.getAttribute(
+				LastPath lastPath = (LastPath)cacheResponseData.getAttribute(
 					WebKeys.LAST_PATH);
 
 				if (lastPath != null) {
@@ -414,7 +407,7 @@ public class CacheFilter extends BasePortalFilter {
 				}
 			}
 
-			CacheResponseUtil.write(response, data);
+			CacheResponseUtil.write(response, cacheResponseData);
 		}
 		else {
 			if (_log.isDebugEnabled()) {

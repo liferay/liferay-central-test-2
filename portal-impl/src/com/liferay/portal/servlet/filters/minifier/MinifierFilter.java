@@ -35,6 +35,7 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.servlet.filters.CacheResponse;
+import com.liferay.util.servlet.filters.CacheResponseUtil;
 
 import com.yahoo.platform.yui.compressor.CssCompressor;
 import com.yahoo.platform.yui.compressor.JavaScriptCompressor;
@@ -308,6 +309,11 @@ public class MinifierFilter extends BasePortalFilter {
 
 				processFilter(
 					MinifierFilter.class, request, cacheResponse, filterChain);
+
+				CacheResponseUtil.addHeaders(
+					response, cacheResponse.getHeaders());
+
+				response.setContentType(cacheResponse.getContentType());
 
 				minifiedContent = new String(
 					cacheResponse.getData(), StringPool.UTF8);

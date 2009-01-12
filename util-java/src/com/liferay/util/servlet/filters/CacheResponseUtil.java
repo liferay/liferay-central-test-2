@@ -40,11 +40,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class CacheResponseUtil {
 
-	public static void write(
-			HttpServletResponse response, CacheResponseData data)
+	public static void addHeaders(
+			HttpServletResponse response, Map<String, List<Header>> headers)
 		throws IOException {
-
-		Map<String, List<Header>> headers = data.getHeaders();
 
 		for (Map.Entry<String, List<Header>> entry : headers.entrySet()) {
 			String headerKey = entry.getKey();
@@ -64,10 +62,17 @@ public class CacheResponseUtil {
 				}
 			}
 		}
+	}
 
-		response.setContentType(data.getContentType());
+	public static void write(
+			HttpServletResponse response, CacheResponseData cacheResponseData)
+		throws IOException {
 
-		ServletResponseUtil.write(response, data.getData());
+		addHeaders(response, cacheResponseData.getHeaders());
+
+		response.setContentType(cacheResponseData.getContentType());
+
+		ServletResponseUtil.write(response, cacheResponseData.getData());
 	}
 
 }
