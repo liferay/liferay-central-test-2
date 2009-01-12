@@ -75,8 +75,24 @@ public class DateUtil {
 		return getDate(new Date(), pattern, locale);
 	}
 
+	public static String getCurrentDate(
+		String pattern, Locale locale, TimeZone timeZone) {
+
+		return getDate(new Date(), pattern, locale, timeZone);
+	}
+
 	public static String getDate(Date date, String pattern, Locale locale) {
 		DateFormat dateFormat = new SimpleDateFormat(pattern, locale);
+
+		return dateFormat.format(date);
+	}
+
+	public static String getDate(
+		Date date, String pattern, Locale locale, TimeZone timeZone) {
+
+		DateFormat dateFormat = new SimpleDateFormat(pattern, locale);
+
+		dateFormat.setTimeZone(timeZone);
 
 		return dateFormat.format(date);
 	}
