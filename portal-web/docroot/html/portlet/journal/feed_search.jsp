@@ -68,9 +68,9 @@ boolean showAddFeedButtonButton = JournalPermission.contains(permissionChecker, 
 boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
 %>
 
-<c:if test="<%=  showAddFeedButtonButton || showPermissionsButton %>">
+<c:if test="<%= showAddFeedButtonButton || showPermissionsButton %>">
 	<div>
-		<c:if test="<%=  showAddFeedButtonButton %>">
+		<c:if test="<%= showAddFeedButtonButton %>">
 			<input type="button" value="<liferay-ui:message key="add-feed" />" onClick="<portlet:namespace />addFeed();" />
 		</c:if>
 

@@ -27,7 +27,7 @@
 <%
 User selUser = PortalUtil.getSelectedUser(request);
 
-Contact selContact =  selUser.getContact();
+Contact selContact = selUser.getContact();
 
 List<Organization> organizations = selUser.getOrganizations();
 

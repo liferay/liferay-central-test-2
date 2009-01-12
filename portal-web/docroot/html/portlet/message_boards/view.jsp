@@ -211,16 +211,17 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 				</c:if>
 
 				<c:if test="<%= showPermissionsButton %>">
-					<%
-						String modelResource = "com.liferay.portlet.messageboards";
-						String modelResourceDescription = themeDisplay.getScopeGroupName();
-						String resourcePrimKey = String.valueOf(scopeGroupId);
 
-						if (category != null) {
-							modelResource = MBCategory.class.getName();
-							modelResourceDescription = category.getName();
-							resourcePrimKey = String.valueOf(category.getCategoryId());
-						}
+					<%
+					String modelResource = "com.liferay.portlet.messageboards";
+					String modelResourceDescription = themeDisplay.getScopeGroupName();
+					String resourcePrimKey = String.valueOf(scopeGroupId);
+
+					if (category != null) {
+						modelResource = MBCategory.class.getName();
+						modelResourceDescription = category.getName();
+						resourcePrimKey = String.valueOf(category.getCategoryId());
+					}
 					%>
 
 					<liferay-security:permissionsURL

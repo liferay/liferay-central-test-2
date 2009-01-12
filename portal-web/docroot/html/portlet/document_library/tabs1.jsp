@@ -33,12 +33,10 @@
 		PortletURL tabs1URL = renderResponse.createRenderURL();
 
 		tabs1URL.setWindowState(WindowState.MAXIMIZED);
-
-		String tabs1Names = "folders,my-documents,recent-documents";
 		%>
 
 		<liferay-ui:tabs
-			names="<%= tabs1Names %>"
+			names="folders,my-documents,recent-documents"
 			url="<%= tabs1URL.toString() %>"
 		/>
 	</c:when>

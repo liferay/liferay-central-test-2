@@ -50,12 +50,8 @@ List scores = null;
 <input name="<portlet:namespace />breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
 <input name="<portlet:namespace />searchFolderIds" type="hidden" value="<%= folderId %>" />
 
-<%
-String tabs1Names = "folders,my-images,recent-images";
-%>
-
 <liferay-ui:tabs
-	names="<%= tabs1Names %>"
+	names="folders,my-images,recent-images"
 	url="<%= portletURL.toString() %>"
 />
 
@@ -208,16 +204,17 @@ String tabs1Names = "folders,my-images,recent-images";
 				</c:if>
 
 				<c:if test="<%= showPermissionsButton %>">
-					<%
-						String modelResource = "com.liferay.portlet.imagegallery";
-						String modelResourceDescription = themeDisplay.getScopeGroupName();
-						String resourcePrimKey = String.valueOf(scopeGroupId);
 
-						if (folder != null) {
-							modelResource = IGFolder.class.getName();
-							modelResourceDescription = folder.getName();
-							resourcePrimKey = String.valueOf(folder.getFolderId());
-						}
+					<%
+					String modelResource = "com.liferay.portlet.imagegallery";
+					String modelResourceDescription = themeDisplay.getScopeGroupName();
+					String resourcePrimKey = String.valueOf(scopeGroupId);
+
+					if (folder != null) {
+						modelResource = IGFolder.class.getName();
+						modelResourceDescription = folder.getName();
+						resourcePrimKey = String.valueOf(folder.getFolderId());
+					}
 					%>
 
 					<liferay-security:permissionsURL

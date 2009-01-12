@@ -85,12 +85,8 @@ portletURL.setParameter("tabs1", tabs1);
 <form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 
-<%
-String tabs1Names = "articles,structures,templates,feeds,recent";
-%>
-
 <liferay-ui:tabs
-	names="<%= tabs1Names %>"
+	names="articles,structures,templates,feeds,recent"
 	url="<%= portletURL.toString() %>"
 />
 

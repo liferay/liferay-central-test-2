@@ -116,16 +116,17 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 						</c:if>
 
 						<c:if test="<%= showPermissionsButton %>">
-							<%
-								String modelResource = "com.liferay.portlet.documentlibrary";
-								String modelResourceDescription = themeDisplay.getScopeGroupName();
-								String resourcePrimKey = String.valueOf(scopeGroupId);
 
-								if (folder != null) {
-									modelResource = DLFolder.class.getName();
-									modelResourceDescription = folder.getName();
-									resourcePrimKey = String.valueOf(folder.getFolderId());
-								}
+							<%
+							String modelResource = "com.liferay.portlet.documentlibrary";
+							String modelResourceDescription = themeDisplay.getScopeGroupName();
+							String resourcePrimKey = String.valueOf(scopeGroupId);
+
+							if (folder != null) {
+								modelResource = DLFolder.class.getName();
+								modelResourceDescription = folder.getName();
+								resourcePrimKey = String.valueOf(folder.getFolderId());
+							}
 							%>
 
 							<liferay-security:permissionsURL

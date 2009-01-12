@@ -135,7 +135,7 @@ private void _buildNavigation(Layout rootLayout, Layout selLayout, List selBranc
 
 				boolean open = false;
 
-				if (includedLayouts.equals("auto") &&  selBranch.contains(layoutChild) && (layoutChild.getChildren().size() > 0)) {
+				if (includedLayouts.equals("auto") && selBranch.contains(layoutChild) && (layoutChild.getChildren().size() > 0)) {
 					open = true;
 				}
 

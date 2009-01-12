@@ -68,9 +68,9 @@ boolean showAddStructureButton = JournalPermission.contains(permissionChecker, s
 boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
 %>
 
-<c:if test="<%=  showAddStructureButton || showPermissionsButton %>">
+<c:if test="<%= showAddStructureButton || showPermissionsButton %>">
 	<div>
-		<c:if test="<%=  showAddStructureButton %>">
+		<c:if test="<%= showAddStructureButton %>">
 			<input type="button" value="<liferay-ui:message key="add-structure" />" onClick="<portlet:namespace />addStructure();" />
 		</c:if>
 

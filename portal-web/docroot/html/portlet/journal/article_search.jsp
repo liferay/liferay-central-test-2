@@ -153,11 +153,11 @@ boolean showAddArticleButtonButton = JournalPermission.contains(permissionChecke
 boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
 %>
 
-<c:if test="<%=  showAddArticleButtonButton || showPermissionsButton %>">
+<c:if test="<%= showAddArticleButtonButton || showPermissionsButton %>">
 	<br />
 
 	<div>
-		<c:if test="<%=  showAddArticleButtonButton %>">
+		<c:if test="<%= showAddArticleButtonButton %>">
 			<input type="button" value="<liferay-ui:message key="add-article" />" onClick="<portlet:namespace />addArticle();" />
 		</c:if>
 
