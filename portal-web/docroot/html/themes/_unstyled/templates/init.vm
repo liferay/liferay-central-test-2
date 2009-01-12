@@ -39,7 +39,7 @@
 #set ($css_main_file = "$css_folder/main.css?t=$theme_timestamp")
 
 #if ($theme_display.isThemeCssFastLoad())
-	#set ($css_main_file = $css_main_file + "&amp;minifierType=css")
+	#set ($css_main_file = $css_main_file + "&minifierType=css")
 #end
 
 #set ($js_main_file = "$javascript_folder/javascript.js?t=$theme_timestamp")

@@ -29,7 +29,7 @@
 
 <link rel="Shortcut Icon" href="<%= themeDisplay.getPathThemeImages() %>/<%= PropsValues.THEME_SHORTCUT_ICON %>" />
 
-<link href="<%= themeDisplay.getCDNHost() %><%= themeDisplay.getPathContext() %><%= Portal.PATH_MAIN %>/portal/css_cached?themeId=<%= theme.getThemeId() %>&amp;colorSchemeId=<%= colorScheme.getColorSchemeId() %>&amp;t=<%= theme.getTimestamp() %>" type="text/css" rel="stylesheet" />
+<link href="<%= themeDisplay.getCDNHost() %><%= themeDisplay.getPathContext() %><%= Portal.PATH_MAIN %>/portal/css_cached?themeId=<%= theme.getThemeId() %>&colorSchemeId=<%= colorScheme.getColorSchemeId() %>&t=<%= theme.getTimestamp() %>" type="text/css" rel="stylesheet" />
 
 <%
 List<Portlet> portlets = null;
@@ -105,14 +105,14 @@ if (layout != null) {
 				headerPortalCssPaths.add(headerPortalCssPath);
 
 				if (headerPortalCssPath.endsWith(".jsp")) {
-					headerPortalCssPath += "?themeId=" + theme.getThemeId() + "&amp;colorSchemeId=" + colorScheme.getColorSchemeId() + "&amp;t=" + portlet.getTimestamp();
+					headerPortalCssPath += "?themeId=" + theme.getThemeId() + "&colorSchemeId=" + colorScheme.getColorSchemeId() + "&t=" + portlet.getTimestamp();
 				}
 				else {
 					headerPortalCssPath += "?t=" + portlet.getTimestamp();
 				}
 
 				if (themeDisplay.isThemeCssFastLoad()) {
-					headerPortalCssPath += "&amp;minifierType=css";
+					headerPortalCssPath += "&minifierType=css";
 				}
 	%>
 
@@ -135,14 +135,14 @@ if (layout != null) {
 				headerPortletCssPaths.add(headerPortletCssPath);
 
 				if (headerPortletCssPath.endsWith(".jsp")) {
-					headerPortletCssPath += "?themeId=" + theme.getThemeId() + "&amp;colorSchemeId=" + colorScheme.getColorSchemeId() + "&amp;t=" + portlet.getTimestamp();
+					headerPortletCssPath += "?themeId=" + theme.getThemeId() + "&colorSchemeId=" + colorScheme.getColorSchemeId() + "&t=" + portlet.getTimestamp();
 				}
 				else {
 					headerPortletCssPath += "?t=" + portlet.getTimestamp();
 				}
 
 				if (themeDisplay.isThemeCssFastLoad()) {
-					headerPortletCssPath += "&amp;minifierType=css";
+					headerPortletCssPath += "&minifierType=css";
 				}
 	%>
 
