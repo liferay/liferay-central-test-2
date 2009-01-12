@@ -22,6 +22,7 @@
 
 package com.liferay.portal.kernel.servlet;
 
+import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.File;
@@ -51,6 +52,20 @@ public class ServletContextUtil {
 	public static long getLastModified(
 		ServletContext servletContext, String resourcePath, boolean cache) {
 
+		if (resourcePath.startsWith(Http.HTTP) ||
+			resourcePath.startsWith(Http.HTTPS)) {
+
+			int pos = resourcePath.indexOf(Http.PROTOCOL_DELIMITER);
+
+			resourcePath = resourcePath.substring(pos + 3);
+		}
+
+		int pos = resourcePath.indexOf(StringPool.SLASH);
+
+		if (pos != -1) {
+			resourcePath = resourcePath.substring(pos);
+		}
+
 		if (cache) {
 			Long lastModified = (Long)servletContext.getAttribute(
 				ServletContextUtil.class.getName() + StringPool.PERIOD +
@@ -66,21 +81,23 @@ public class ServletContextUtil {
 		Set<String> resourcePaths = servletContext.getResourcePaths(
 			resourcePath);
 
-		for (String curResourcePath : resourcePaths) {
-			if (curResourcePath.endsWith(StringPool.SLASH)) {
-				long curLastModified = getLastModified(
-					servletContext, curResourcePath);
+		if (resourcePaths != null) {
+			for (String curResourcePath : resourcePaths) {
+				if (curResourcePath.endsWith(StringPool.SLASH)) {
+					long curLastModified = getLastModified(
+						servletContext, curResourcePath);
 
-				if (curLastModified > lastModified) {
-					lastModified = curLastModified;
+					if (curLastModified > lastModified) {
+						lastModified = curLastModified;
+					}
 				}
-			}
-			else {
-				File file = new File(
-					servletContext.getRealPath(curResourcePath));
+				else {
+					File file = new File(
+						servletContext.getRealPath(curResourcePath));
 
-				if (file.lastModified() > lastModified) {
-					lastModified = file.lastModified();
+					if (file.lastModified() > lastModified) {
+						lastModified = file.lastModified();
+					}
 				}
 			}
 		}
