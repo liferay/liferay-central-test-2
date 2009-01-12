@@ -53,6 +53,8 @@ public class SearchContainer<R> {
 
 	public static final String DEFAULT_DELTA_PARAM = "delta";
 
+	public static final int DEFAULT_MAX_PAGES = 25;
+
 	public static final String DEFAULT_ORDER_BY_COL_PARAM = "orderByCol";
 
 	public static final String DEFAULT_ORDER_BY_TYPE_PARAM = "orderByType";
@@ -163,6 +165,14 @@ public class SearchContainer<R> {
 
 	public void setDeltaParam(String deltaParam) {
 		_deltaParam = deltaParam;
+	}
+
+	public int getMaxPages() {
+		return _maxPages;
+	}
+
+	public void setMaxPages(int maxPages) {
+		_maxPages = maxPages;
 	}
 
 	public int getStart() {
@@ -313,6 +323,7 @@ public class SearchContainer<R> {
 	private String _curParam = DEFAULT_CUR_PARAM;
 	private int _delta = DEFAULT_DELTA;
 	private String _deltaParam = DEFAULT_DELTA_PARAM;
+	private int _maxPages = DEFAULT_MAX_PAGES;
 	private int _start;
 	private int _end;
 	private int _resultEnd;

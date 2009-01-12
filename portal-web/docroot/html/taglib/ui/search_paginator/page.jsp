@@ -43,7 +43,7 @@ if (iteratorURL != null) {
 	curParam="<%= searchContainer.getCurParam() %>"
 	delta="<%= searchContainer.getDelta() %>"
 	deltaParam="<%= searchContainer.getDeltaParam() %>"
-	maxPages="<%= 25 %>"
+	maxPages="<%= searchContainer.getMaxPages() %>"
 	total="<%= searchContainer.getTotal() %>"
 	type="<%= type %>"
 	url="<%= url %>"
