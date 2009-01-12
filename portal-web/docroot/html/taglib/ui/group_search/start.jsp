@@ -24,7 +24,7 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearch" %>
+<%@ page import="com.liferay.portlet.enterpriseadmin.search.GroupSearch" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.GroupSearchTerms" %>
 
 <portlet:defineObjects />
@@ -49,7 +49,7 @@ searchContainer.setRowChecker(rowChecker);
 <%
 GroupSearchTerms searchTerms = (GroupSearchTerms)searchContainer.getSearchTerms();
 
-List<User> results = null;
+List<Group> results = null;
 int total = 0;
 %>
 
