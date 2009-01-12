@@ -267,22 +267,30 @@ public class MinifierFilter extends BasePortalFilter {
 			return null;
 		}
 
-		String cacheFileName = _tempDir + requestURI;
+		String minifiedContent = null;
+
+		String cacheCommonFileName = _tempDir + requestURI;
 
 		String queryString = request.getQueryString();
 
 		if (queryString != null) {
-			cacheFileName += _QUESTION_SEPARATOR + queryString;
+			cacheCommonFileName += _QUESTION_SEPARATOR + queryString;
 		}
 
-		String minifiedContent = null;
+		File cacheContentTypeFile = new File(
+			cacheCommonFileName + "_E_contentType");
+		File cacheDataFile = new File(cacheCommonFileName + "_E_data");
 
-		File cacheFile = new File(cacheFileName);
+		if ((cacheDataFile.exists()) &&
+			(cacheDataFile.lastModified() >= file.lastModified())) {
 
-		if ((cacheFile.exists()) &&
-			(cacheFile.lastModified() >= file.lastModified())) {
+			minifiedContent = FileUtil.read(cacheDataFile);
 
-			minifiedContent = FileUtil.read(cacheFile);
+			if (cacheContentTypeFile.exists()) {
+				String contentType = FileUtil.read(cacheContentTypeFile);
+
+				response.setContentType(contentType);
+			}
 		}
 		else {
 			if (realPath.endsWith(_CSS_EXTENSION)) {
@@ -324,12 +332,15 @@ public class MinifierFilter extends BasePortalFilter {
 				else if (minifierType.equals("js")) {
 					minifiedContent = minifyJavaScript(minifiedContent);
 				}
+
+				FileUtil.write(
+					cacheContentTypeFile, cacheResponse.getContentType());
 			}
 			else {
 				return null;
 			}
 
-			FileUtil.write(cacheFile, minifiedContent);
+			FileUtil.write(cacheDataFile, minifiedContent);
 		}
 
 		return minifiedContent;
