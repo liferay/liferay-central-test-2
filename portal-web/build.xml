@@ -506,7 +506,7 @@
 		<if>
 			<equals arg1="${app.server.type}" arg2="tomcat" />
 			<then>
-				<copy todir="${app.server.portal.dir}">
+				<copy todir="${app.server.portal.dir}" preservelastmodified="true">
 					<fileset dir="docroot">
 						<include name="**/*.css" />
 						<include name="**/*.dtd" />

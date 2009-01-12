@@ -101,14 +101,14 @@
 				<if>
 					<available file="tmp" type="dir" />
 					<then>
-						<copy todir="${war.file.dest}">
+						<copy todir="${war.file.dest}" preservelastmodified="true">
 							<fileset dir="tmp" />
 						</copy>
 					</then>
 					<elseif>
 						<available file="docroot" type="dir" />
 						<then>
-							<copy todir="${war.file.dest}">
+							<copy todir="${war.file.dest}" preservelastmodified="true">
 								<fileset dir="docroot" />
 							</copy>
 						</then>
