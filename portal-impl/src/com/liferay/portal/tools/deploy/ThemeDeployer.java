@@ -22,8 +22,9 @@
 
 package com.liferay.portal.tools.deploy;
 
+import com.liferay.portal.deploy.DeployUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
-import com.liferay.portal.kernel.servlet.HttpHeaders;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Plugin;
@@ -96,137 +97,10 @@ public class ThemeDeployer extends BaseDeployer {
 
 		sb.append(extraContent);
 
-		// GZipFilter
+		String speedFiltersContent = FileUtil.read(
+			DeployUtil.getResourcePath("speed_filters.xml"));
 
-		sb.append("<filter>");
-		sb.append("<filter-name>GZip Filter</filter-name>");
-		sb.append("<filter-class>");
-		sb.append("com.liferay.portal.kernel.servlet.PortalClassLoaderFilter");
-		sb.append("</filter-class>");
-		sb.append("<init-param>");
-		sb.append("<param-name>filter-class</param-name>");
-		sb.append("<param-value>");
-		sb.append("com.liferay.portal.servlet.filters.gzip.GZipFilter");
-		sb.append("</param-value>");
-		sb.append("</init-param>");
-		sb.append("</filter>");
-
-		sb.append("<filter-mapping>");
-		sb.append("<filter-name>GZip Filter</filter-name>");
-		sb.append("<url-pattern>*.css</url-pattern>");
-		sb.append("</filter-mapping>");
-		sb.append("<filter-mapping>");
-		sb.append("<filter-name>GZip Filter</filter-name>");
-		sb.append("<url-pattern>*.js</url-pattern>");
-		sb.append("</filter-mapping>");
-
-		// HeaderFilter
-
-		sb.append("<filter>");
-		sb.append("<filter-name>Header Filter</filter-name>");
-		sb.append("<filter-class>");
-		sb.append("com.liferay.portal.kernel.servlet.PortalClassLoaderFilter");
-		sb.append("</filter-class>");
-		sb.append("<init-param>");
-		sb.append("<param-name>filter-class</param-name>");
-		sb.append("<param-value>");
-		sb.append("com.liferay.portal.servlet.filters.header.HeaderFilter");
-		sb.append("</param-value>");
-		sb.append("</init-param>");
-		sb.append("<init-param>");
-		sb.append("<param-name>Cache-Control</param-name>");
-		sb.append("<param-value>");
-		sb.append(HttpHeaders.CACHE_CONTROL_DEFAULT_VALUE);
-		sb.append("</param-value>");
-		sb.append("</init-param>");
-		sb.append("<init-param>");
-		sb.append("<param-name>Expires</param-name>");
-		sb.append("<param-value>");
-		sb.append(HttpHeaders.EXPIRES_DEFAULT_VALUE);
-		sb.append("</param-value>");
-		sb.append("</init-param>");
-		sb.append("</filter>");
-
-		sb.append("<filter-mapping>");
-		sb.append("<filter-name>Header Filter</filter-name>");
-		sb.append("<url-pattern>*.css</url-pattern>");
-		sb.append("</filter-mapping>");
-		sb.append("<filter-mapping>");
-		sb.append("<filter-name>Header Filter</filter-name>");
-		sb.append("<url-pattern>*.gif</url-pattern>");
-		sb.append("</filter-mapping>");
-		sb.append("<filter-mapping>");
-		sb.append("<filter-name>Header Filter</filter-name>");
-		sb.append("<url-pattern>*.html</url-pattern>");
-		sb.append("</filter-mapping>");
-		sb.append("<filter-mapping>");
-		sb.append("<filter-name>Header Filter</filter-name>");
-		sb.append("<url-pattern>*.jpg</url-pattern>");
-		sb.append("</filter-mapping>");
-		sb.append("<filter-mapping>");
-		sb.append("<filter-name>Header Filter</filter-name>");
-		sb.append("<url-pattern>*.js</url-pattern>");
-		sb.append("</filter-mapping>");
-		sb.append("<filter-mapping>");
-		sb.append("<filter-name>Header Filter</filter-name>");
-		sb.append("<url-pattern>*.png</url-pattern>");
-		sb.append("</filter-mapping>");
-
-		// MinifierFilter
-
-		sb.append("<filter>");
-		sb.append("<filter-name>Minifier Filter</filter-name>");
-		sb.append("<filter-class>");
-		sb.append("com.liferay.portal.kernel.servlet.PortalClassLoaderFilter");
-		sb.append("</filter-class>");
-		sb.append("<init-param>");
-		sb.append("<param-name>filter-class</param-name>");
-		sb.append("<param-value>");
-		sb.append("com.liferay.portal.servlet.filters.minifier.MinifierFilter");
-		sb.append("</param-value>");
-		sb.append("</init-param>");
-		sb.append("</filter>");
-
-		sb.append("<filter>");
-		sb.append("<filter-name>Minifier Filter - CSS JSP</filter-name>");
-		sb.append("<filter-class>");
-		sb.append("com.liferay.portal.kernel.servlet.PortalClassLoaderFilter");
-		sb.append("</filter-class>");
-		sb.append("<init-param>");
-		sb.append("<param-name>filter-class</param-name>");
-		sb.append("<param-value>");
-		sb.append("com.liferay.portal.servlet.filters.minifier.MinifierFilter");
-		sb.append("</param-value>");
-		sb.append("</init-param>");
-		sb.append("<init-param>");
-		sb.append("<param-name>url-regex-pattern</param-name>");
-		sb.append("<param-value>");
-		sb.append(".+/css\\.jsp");
-		sb.append("</param-value>");
-		sb.append("</init-param>");
-		sb.append("</filter>");
-
-		sb.append("<filter-mapping>");
-		sb.append("<filter-name>Minifier Filter</filter-name>");
-		sb.append("<url-pattern>*.css</url-pattern>");
-		sb.append("</filter-mapping>");
-		sb.append("<filter-mapping>");
-		sb.append("<filter-name>Minifier Filter</filter-name>");
-		sb.append("<url-pattern>*.js</url-pattern>");
-		sb.append("</filter-mapping>");
-
-		sb.append("<filter-mapping>");
-		sb.append("<filter-name>Minifier Filter - CSS JSP</filter-name>");
-		sb.append("<url-pattern>*.jsp</url-pattern>");
-		sb.append("</filter-mapping>");
-
-		// ThemeContextListener
-
-		sb.append("<listener>");
-		sb.append("<listener-class>");
-		sb.append("com.liferay.portal.kernel.servlet.ThemeContextListener");
-		sb.append("</listener-class>");
-		sb.append("</listener>");
+		sb.append(speedFiltersContent);
 
 		return sb.toString();
 	}

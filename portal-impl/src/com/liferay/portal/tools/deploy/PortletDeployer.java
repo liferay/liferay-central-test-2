@@ -22,6 +22,7 @@
 
 package com.liferay.portal.tools.deploy;
 
+import com.liferay.portal.deploy.DeployUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
@@ -148,54 +149,6 @@ public class PortletDeployer extends BaseDeployer {
 			sb.append("</listener>");
 		}
 
-		// MinifierFilter
-
-		sb.append("<filter>");
-		sb.append("<filter-name>Minifier Filter</filter-name>");
-		sb.append("<filter-class>");
-		sb.append("com.liferay.portal.kernel.servlet.PortalClassLoaderFilter");
-		sb.append("</filter-class>");
-		sb.append("<init-param>");
-		sb.append("<param-name>filter-class</param-name>");
-		sb.append("<param-value>");
-		sb.append("com.liferay.portal.servlet.filters.minifier.MinifierFilter");
-		sb.append("</param-value>");
-		sb.append("</init-param>");
-		sb.append("</filter>");
-
-		sb.append("<filter>");
-		sb.append("<filter-name>Minifier Filter - CSS JSP</filter-name>");
-		sb.append("<filter-class>");
-		sb.append("com.liferay.portal.kernel.servlet.PortalClassLoaderFilter");
-		sb.append("</filter-class>");
-		sb.append("<init-param>");
-		sb.append("<param-name>filter-class</param-name>");
-		sb.append("<param-value>");
-		sb.append("com.liferay.portal.servlet.filters.minifier.MinifierFilter");
-		sb.append("</param-value>");
-		sb.append("</init-param>");
-		sb.append("<init-param>");
-		sb.append("<param-name>url-regex-pattern</param-name>");
-		sb.append("<param-value>");
-		sb.append(".+/css\\.jsp");
-		sb.append("</param-value>");
-		sb.append("</init-param>");
-		sb.append("</filter>");
-
-		sb.append("<filter-mapping>");
-		sb.append("<filter-name>Minifier Filter</filter-name>");
-		sb.append("<url-pattern>*.css</url-pattern>");
-		sb.append("</filter-mapping>");
-		sb.append("<filter-mapping>");
-		sb.append("<filter-name>Minifier Filter</filter-name>");
-		sb.append("<url-pattern>*.js</url-pattern>");
-		sb.append("</filter-mapping>");
-
-		sb.append("<filter-mapping>");
-		sb.append("<filter-name>Minifier Filter - CSS JSP</filter-name>");
-		sb.append("<url-pattern>*.jsp</url-pattern>");
-		sb.append("</filter-mapping>");
-
 		// PortletContextListener
 
 		sb.append("<listener>");
@@ -203,6 +156,13 @@ public class PortletDeployer extends BaseDeployer {
 		sb.append("com.liferay.portal.kernel.servlet.PortletContextListener");
 		sb.append("</listener-class>");
 		sb.append("</listener>");
+
+		// Filters
+
+		String speedFiltersContent = FileUtil.read(
+			DeployUtil.getResourcePath("speed_filters.xml"));
+
+		sb.append(speedFiltersContent);
 
 		return sb.toString();
 	}
