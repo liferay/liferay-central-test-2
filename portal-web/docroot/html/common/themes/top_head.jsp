@@ -29,7 +29,7 @@
 
 <link rel="Shortcut Icon" href="<%= themeDisplay.getPathThemeImages() %>/<%= PropsValues.THEME_SHORTCUT_ICON %>" />
 
-<link href="<%= themeDisplay.getCDNHost() %><%= themeDisplay.getPathContext() %><%= Portal.PATH_MAIN %>/portal/css_cached?themeId=<%= theme.getThemeId() %>&colorSchemeId=<%= colorScheme.getColorSchemeId() %>&t=<%= theme.getTimestamp() %>" type="text/css" rel="stylesheet" />
+<link href="<%= themeDisplay.getCDNHost() %><%= themeDisplay.getPathContext() %>/html/portal/css.jsp?themeId=<%= theme.getThemeId() %>&colorSchemeId=<%= colorScheme.getColorSchemeId() %>&t=<%= theme.getTimestamp() %><%= themeDisplay.isThemeCssFastLoad() ? "&minifierType=css" : "" %>" type="text/css" rel="stylesheet" />
 
 <%
 List<Portlet> portlets = null;

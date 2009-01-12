@@ -33,8 +33,6 @@ import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PropsKeys;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 
 import java.util.List;
@@ -57,10 +55,6 @@ public class RandomLayoutAction extends Action {
 		throws ActionException {
 
 		try {
-
-			// Disable caching for CSS and JavaScript
-
-			PropsUtil.set(PropsKeys.LAST_MODIFIED_CHECK, "false");
 
 			// Do not randomize layout unless the user is logged in
 

@@ -22,13 +22,11 @@
  */
 %>
 
-<%@ include file="/html/portal/init.jsp" %>
+<%@ include file="/html/portlet/css_init.jsp" %>
 
-<%
-response.setContentType(ContentTypes.TEXT_CSS);
-%>
+<%@ page import="com.liferay.portal.model.ModelHintsConstants" %>
 
-<%@ include file="/html/portal/css_cached_uniform.jsp" %>
+<%@ include file="/html/portal/css_uniform.jsp" %>
 
 /* ---------- Modules ---------- */
 
@@ -101,16 +99,16 @@ response.setContentType(ContentTypes.TEXT_CSS);
 }
 
 .lfr-add-content.collapsed h2, .lfr-add-content .lfr-add-content.collapsed h2 {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/arrows/01_plus.png) no-repeat 100% 50%;
+	background: url(<%= themeImagesPath %>/arrows/01_plus.png) no-repeat 100% 50%;
 	border: none;
 }
 
 .lfr-add-content.expanded h2, .lfr-add-content .lfr-add-content.expanded h2 {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/arrows/01_minus.png) no-repeat 100% 50%;
+	background: url(<%= themeImagesPath %>/arrows/01_minus.png) no-repeat 100% 50%;
 }
 
 .lfr-add-content h2 span {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/add_content/portlet_category.png) no-repeat 0 50%;
+	background: url(<%= themeImagesPath %>/add_content/portlet_category.png) no-repeat 0 50%;
 	padding-left: 20px;
 }
 
@@ -121,7 +119,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 }
 
 .lfr-install-more a {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/common/install_more.png) no-repeat 0 50%;
+	background: url(<%= themeImagesPath %>/common/install_more.png) no-repeat 0 50%;
 	display: block;
 	font-weight: bold;
 	padding-left: 20px;
@@ -166,12 +164,12 @@ response.setContentType(ContentTypes.TEXT_CSS);
 }
 
 .js .lfr-flyout.has-children {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/arrows/04_left.png) no-repeat 5px 50%;
+	background: url(<%= themeImagesPath %>/arrows/04_left.png) no-repeat 5px 50%;
 	padding-left: 12px;
 }
 
 .js .lfr-flyout.has-children.send-right {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/arrows/04_right.png);
+	background-image: url(<%= themeImagesPath %>/arrows/04_right.png);
 }
 
 .js .lfr-flyout.has-children ul {
@@ -213,7 +211,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 }
 
 .lfr-panel.lfr-collapsible .lfr-panel-titlebar {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/arrows/05_down.png) no-repeat 2px 50%;
+	background: url(<%= themeImagesPath %>/arrows/05_down.png) no-repeat 2px 50%;
 	cursor: pointer;
 	padding-left: 15px;
 }
@@ -226,7 +224,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 }
 
 .lfr-panel-titlebar .lfr-panel-button {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/application/panel_header_toggler_close.png) no-repeat 0 0;
+	background: url(<%= themeImagesPath %>/application/panel_header_toggler_close.png) no-repeat 0 0;
 	display: none;
 	float: right;
 	height: 22px;
@@ -238,7 +236,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 }
 
 .lfr-panel.lfr-collapsed .lfr-panel-titlebar .lfr-panel-button {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/application/panel_header_toggler_open.png);
+	background-image: url(<%= themeImagesPath %>/application/panel_header_toggler_open.png);
 }
 
 .lfr-panel-titlebar .lfr-panel-button:hover {
@@ -246,12 +244,12 @@ response.setContentType(ContentTypes.TEXT_CSS);
 }
 
 .lfr-panel.lfr-collapsed .lfr-panel-titlebar {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/arrows/05_right.png);
+	background-image: url(<%= themeImagesPath %>/arrows/05_right.png);
 	margin-bottom: 0;
 }
 
 .lfr-panel.lfr-extended .lfr-panel-titlebar {
-	background: #d6d6d6 url(<%= themeDisplay.getPathThemeImages() %>/application/panel_header.png) repeat-x 0 0;
+	background: #d6d6d6 url(<%= themeImagesPath %>/application/panel_header.png) repeat-x 0 0;
 	border-bottom: 1px solid #cdcdcd;
 	line-height: 1.6;
 	padding: 2px;
@@ -279,7 +277,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 }
 
 .js .lfr-floating-trigger {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/arrows/05_down.png);
+	background-image: url(<%= themeImagesPath %>/arrows/05_down.png);
 	background-position: 100% 50%;
 	background-repeat: no-repeat;
 	padding: 3px;
@@ -351,14 +349,14 @@ response.setContentType(ContentTypes.TEXT_CSS);
 }
 
 .lfr-panel-content .lfr-paging-container li a:hover {
-	background: #5094d7 url(<%= themeDisplay.getPathThemeImages() %>/application/current_page_bg.png) repeat-x 0 0;
+	background: #5094d7 url(<%= themeImagesPath %>/application/current_page_bg.png) repeat-x 0 0;
 	border-color: #31659c #396ea8 #4c8ccb;
 	color: #fff;
 	font-weight: bold;
 }
 
 .lfr-panel-content .lfr-paging-container li.lfr-page-current a {
-	background: #99a7b3 url(<%= themeDisplay.getPathThemeImages() %>/application/current_page_hover_bg.png) repeat-x 0 0;
+	background: #99a7b3 url(<%= themeImagesPath %>/application/current_page_hover_bg.png) repeat-x 0 0;
 	border-color: #6b7785 #7c8994 #919fa9;
 	color: #fff;
 	font-weight: bold;
@@ -409,11 +407,11 @@ response.setContentType(ContentTypes.TEXT_CSS);
 }
 
 .lfr-form-row .row-controls .add-row {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/common/add.png);
+	background-image: url(<%= themeImagesPath %>/common/add.png);
 }
 
 .lfr-form-row .row-controls .delete-row {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/common/delete.png);
+	background-image: url(<%= themeImagesPath %>/common/delete.png);
 }
 
 .lfr-form-row legend .field-label{
@@ -434,7 +432,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 }
 
 .lfr-form-row .handle-sort-vertical {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/application/handle_sort_vertical.png) no-repeat 0 50%;
+	background: url(<%= themeImagesPath %>/application/handle_sort_vertical.png) no-repeat 0 50%;
 	cursor: move;
 	padding-left: 20px;
 }
@@ -524,7 +522,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 /* ---------- Portlet item ---------- */
 
 .lfr-portlet-item {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/add_content/portlet_item.png) no-repeat 0 50%;
+	background: url(<%= themeImagesPath %>/add_content/portlet_item.png) no-repeat 0 50%;
 	border: 1px solid #fff;
 	cursor: move;
 	font-size: 1.1em;
@@ -533,7 +531,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 }
 
 .lfr-portlet-item.lfr-instanceable {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/add_content/portlet_item_instanceable.png);
+	background-image: url(<%= themeImagesPath %>/add_content/portlet_item_instanceable.png);
 }
 
 .lfr-portlet-item:hover, .lfr-portlet-item.over {
@@ -584,7 +582,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 }
 
 .js .interactive-mode h2 {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/dock/menu_bar.png) no-repeat 100% -30px;
+	background: url(<%= themeImagesPath %>/dock/menu_bar.png) no-repeat 100% -30px;
 	font-size: 1.2em;
 	margin-bottom: 0;
 	padding: 0 29px 0 0;
@@ -593,7 +591,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 }
 
 .js .interactive-mode h2 span {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/dock/menu_bar.png) no-repeat 0 0;
+	background: url(<%= themeImagesPath %>/dock/menu_bar.png) no-repeat 0 0;
 	display: block;
 	font-size: 1.2em;
 	margin-bottom: 0;
@@ -612,7 +610,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 }
 
 .js .interactive-mode ul {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/dock/menu_bg.png) no-repeat 0 0;
+	background: url(<%= themeImagesPath %>/dock/menu_bg.png) no-repeat 0 0;
 	display: none;
 	float: none;
 }
@@ -639,7 +637,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 }
 
 .js .interactive-mode .my-places li.current a {
-	background: transparent url(<%= themeDisplay.getPathThemeImages() %>/dock/my_place_current.png) no-repeat 1em 50%;
+	background: transparent url(<%= themeImagesPath %>/dock/my_place_current.png) no-repeat 1em 50%;
 	margin: 0.1em 0 0 0.2em;
 	padding-left: 3.5em;
 }
@@ -649,15 +647,15 @@ response.setContentType(ContentTypes.TEXT_CSS);
 }
 
 .js .interactive-mode .my-places li.public a {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/dock/my_places_public.png);
+	background-image: url(<%= themeImagesPath %>/dock/my_places_public.png);
 }
 
 .js .interactive-mode .my-places li.private a {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/dock/my_places_private.png);
+	background-image: url(<%= themeImagesPath %>/dock/my_places_private.png);
 }
 
 .js .interactive-mode .my-places ul li a.add-page {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/dock/page_settings.png) no-repeat;
+	background: url(<%= themeImagesPath %>/dock/page_settings.png) no-repeat;
 	border: none;
 	display: block;
 	font-size: 0;
@@ -904,11 +902,11 @@ li.toggle-expand a {
 }
 
 .lfr-expand {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/trees/expand_all.png) no-repeat 0 50%;
+	background: url(<%= themeImagesPath %>/trees/expand_all.png) no-repeat 0 50%;
 }
 
 .lfr-collapse {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/trees/collapse_all.png) no-repeat 0 50%;
+	background: url(<%= themeImagesPath %>/trees/collapse_all.png) no-repeat 0 50%;
 }
 
 /* ---------- Uploader ---------- */
@@ -924,29 +922,29 @@ li.toggle-expand a {
 }
 
 .lfr-upload-container a.browse-button {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/dock/add_content.png);
+	background-image: url(<%= themeImagesPath %>/dock/add_content.png);
 	background-repeat: no-repeat;
 }
 
 .lfr-upload-container a.upload-button {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/common/top.png);
+	background-image: url(<%= themeImagesPath %>/common/top.png);
 	background-repeat: no-repeat;
 }
 
 .lfr-upload-container a.clear-uploads {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/portlet/refresh.png);
+	background-image: url(<%= themeImagesPath %>/portlet/refresh.png);
 	background-repeat: no-repeat;
 }
 
 .lfr-upload-container a.cancel-uploads {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/common/close.png);
+	background-image: url(<%= themeImagesPath %>/common/close.png);
 	background-repeat: no-repeat;
 	float: right;
 	margin-right: 0;
 }
 
 .lfr-upload-container .upload-file {
-	background: #f0faf0 url(<%= themeDisplay.getPathThemeImages() %>/document_library/jpg.png) no-repeat 5px 50%;
+	background: #f0faf0 url(<%= themeImagesPath %>/document_library/jpg.png) no-repeat 5px 50%;
 	border-bottom: 1px solid #ccc;
 	display: block;
 	font-weight: bold;
@@ -965,7 +963,7 @@ li.toggle-expand a {
 }
 
 .lfr-upload-container .cancel-button {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/common/delete.png);
+	background-image: url(<%= themeImagesPath %>/common/delete.png);
 	background-repeat: no-repeat;
 	position: absolute;
 	right: 5px;
@@ -973,7 +971,7 @@ li.toggle-expand a {
 
 .lfr-upload-container .upload-complete {
 	background-color: #E8EEF7;
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/dock/my_place_current.png);
+	background-image: url(<%= themeImagesPath %>/dock/my_place_current.png);
 	font-weight: normal;
 	opacity: 0.6;
 }
@@ -998,7 +996,7 @@ li.toggle-expand a {
 }
 
 .lfr-upload-container .progress {
-	background: #8db2e3 url(<%= themeDisplay.getPathThemeImages() %>/progress_bar/complete_gradient.png) repeat-y 100% 0;
+	background: #8db2e3 url(<%= themeImagesPath %>/progress_bar/complete_gradient.png) repeat-y 100% 0;
 	display: block;
 	height: 15px;
 	width: 0;
@@ -1124,13 +1122,13 @@ li.toggle-expand a {
 
 .popup-alert-notice {
 	background-color: #ffc;
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/messages/alert.png);
+	background-image: url(<%= themeImagesPath %>/messages/alert.png);
 	border-bottom-color: #fc0;
 }
 
 .popup-alert-warning {
 	background-color: #fcc;
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/messages/error.png);
+	background-image: url(<%= themeImagesPath %>/messages/error.png);
 	border-bottom-color: #f00;
 	font-weight: bold;
 }
@@ -1298,7 +1296,7 @@ fieldset:last-child, .uni-form fieldset:last-child {
 }
 
 .lfr-actions .lfr-trigger, .lfr-actions .lfr-trigger strong {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/common/button_bg.png) no-repeat;
+	background: url(<%= themeImagesPath %>/common/button_bg.png) no-repeat;
 	font-weight: normal;
 }
 
@@ -1332,18 +1330,18 @@ fieldset:last-child, .uni-form fieldset:last-child {
 }
 
 .lfr-actions .lfr-trigger strong span {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/common/action.png) no-repeat 5px 50%;
+	background: url(<%= themeImagesPath %>/common/action.png) no-repeat 5px 50%;
 	padding: 2px 10px 2px 35px;
 }
 
 .lfr-actions.left .lfr-trigger strong span {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/common/action_right.png);
+	background-image: url(<%= themeImagesPath %>/common/action_right.png);
 	background-position: 98% 50%;
 	padding: 2px 35px 2px 10px;
 }
 
 .lfr-menu-list ul {
-	background: #fff url(<%= themeDisplay.getPathThemeImages() %>/forms/button.png) repeat-x 0 100%;
+	background: #fff url(<%= themeImagesPath %>/forms/button.png) repeat-x 0 100%;
 	border: 1px solid;
 	border-color: #DEDEDE #BFBFBF #BFBFBF #DEDEDE;
 }
@@ -1432,12 +1430,12 @@ fieldset:last-child, .uni-form fieldset:last-child {
 }
 
 .taglib-calendar .has-events a span {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/calendar/event_indicator.png) no-repeat 50% 95%;
+	background: url(<%= themeImagesPath %>/calendar/event_indicator.png) no-repeat 50% 95%;
 	padding-bottom: 5px;
 }
 
 .taglib-calendar .calendar-current-day.has-events a span {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/calendar/event_indicator_current.png);
+	background-image: url(<%= themeImagesPath %>/calendar/event_indicator_current.png);
 }
 
 /* ---------- Taglib captcha ---------- */
@@ -1587,23 +1585,23 @@ fieldset:last-child, .uni-form fieldset:last-child {
 }
 
 .taglib-ratings.thumbs .rate-up {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/ratings/thumbs_up_icon.png);
+	background-image: url(<%= themeImagesPath %>/ratings/thumbs_up_icon.png);
 }
 
 .taglib-ratings.thumbs .rate-up:hover, .taglib-ratings.thumbs .rate-up.rated {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/ratings/thumbs_up_icon_hover.png);
+	background-image: url(<%= themeImagesPath %>/ratings/thumbs_up_icon_hover.png);
 }
 
 .taglib-ratings.thumbs .rate-down {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/ratings/thumbs_down_icon.png);
+	background-image: url(<%= themeImagesPath %>/ratings/thumbs_down_icon.png);
 }
 
 .taglib-ratings.thumbs .rate-down:hover, .taglib-ratings.thumbs .rate-down.rated {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/ratings/thumbs_down_icon_hover.png);
+	background-image: url(<%= themeImagesPath %>/ratings/thumbs_down_icon_hover.png);
 }
 
 .taglib-ratings.thumbs .rate-up.rated:hover, .taglib-ratings.thumbs .rate-down.rated:hover {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/ratings/thumbs_cancel_icon.png);
+	background-image: url(<%= themeImagesPath %>/ratings/thumbs_cancel_icon.png);
 }
 
 /* ---------- Taglib search iterator ---------- */
@@ -1655,23 +1653,23 @@ fieldset:last-child, .uni-form fieldset:last-child {
 }
 
 .taglib-page-iterator .search-pages .page-links a.first, .taglib-page-iterator .search-pages .page-links span.first {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/arrows/paging_first.png);
+	background-image: url(<%= themeImagesPath %>/arrows/paging_first.png);
 	background-repeat: no-repeat;
 	border-left: none;
 }
 
 .taglib-page-iterator .search-pages .page-links a.previous, .taglib-page-iterator .search-pages .page-links span.previous {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/arrows/paging_previous.png);
+	background-image: url(<%= themeImagesPath %>/arrows/paging_previous.png);
 	background-repeat: no-repeat;
 }
 
 .taglib-page-iterator .search-pages .page-links a.next, .taglib-page-iterator .search-pages .page-links span.next {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/arrows/paging_next.png);
+	background-image: url(<%= themeImagesPath %>/arrows/paging_next.png);
 	background-repeat: no-repeat;
 }
 
 .taglib-page-iterator .search-pages .page-links a.last, .taglib-page-iterator .search-pages .page-links span.last {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/arrows/paging_last.png);
+	background-image: url(<%= themeImagesPath %>/arrows/paging_last.png);
 	background-repeat: no-repeat;
 }
 
@@ -1770,41 +1768,41 @@ fieldset:last-child, .uni-form fieldset:last-child {
 }
 
 .taglib-social-bookmarks a.taglib-social-bookmark-blinklist {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/blinklist.png);
+	background-image: url(<%= themeImagesPath %>/social_bookmarks/blinklist.png);
 }
 
 .taglib-social-bookmarks a.taglib-social-bookmark-delicious {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/delicious.png);
+	background-image: url(<%= themeImagesPath %>/social_bookmarks/delicious.png);
 }
 
 .taglib-social-bookmarks a.taglib-social-bookmark-digg {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/digg.png);
+	background-image: url(<%= themeImagesPath %>/social_bookmarks/digg.png);
 }
 
 .taglib-social-bookmarks a.taglib-social-bookmark-facebook {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/facebook.png);
+	background-image: url(<%= themeImagesPath %>/social_bookmarks/facebook.png);
 }
 
 .taglib-social-bookmarks a.taglib-social-bookmark-furl {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/furl.png);
+	background-image: url(<%= themeImagesPath %>/social_bookmarks/furl.png);
 }
 
 .taglib-social-bookmarks a.taglib-social-bookmark-newsvine {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/newsvine.png);
+	background-image: url(<%= themeImagesPath %>/social_bookmarks/newsvine.png);
 }
 
 .taglib-social-bookmarks a.taglib-social-bookmark-reddit {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/reddit.png);
+	background-image: url(<%= themeImagesPath %>/social_bookmarks/reddit.png);
 }
 
 .taglib-social-bookmarks a.taglib-social-bookmark-technorati {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/technorati.png);
+	background-image: url(<%= themeImagesPath %>/social_bookmarks/technorati.png);
 }
 
 /* ---------- Taglib tags summary ---------- */
 
 .taglib-tags-summary .tag {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/common/tag.png) no-repeat 0 50%;
+	background: url(<%= themeImagesPath %>/common/tag.png) no-repeat 0 50%;
 	margin-bottom: 3px;
 	margin-right: 3px;
 	padding: 2px 5px 2px 20px;
@@ -1831,7 +1829,7 @@ fieldset:last-child, .uni-form fieldset:last-child {
 }
 
 .taglib-user-display .user-details .network-list .chat-user {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/common/conversation.png);
+	background-image: url(<%= themeImagesPath %>/common/conversation.png);
 }
 
 /* ---------- Taglib webdav ---------- */
@@ -1889,7 +1887,7 @@ fieldset:last-child, .uni-form fieldset:last-child {
 /* ----------- OpenID ---------- */
 
 input[type="text"].openid-login {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/common/openid.gif) no-repeat;
+	background: url(<%= themeImagesPath %>/common/openid.gif) no-repeat;
 	background-color: #fff;
 	background-position: 0 50%;
 	color: #000;
@@ -1897,7 +1895,7 @@ input[type="text"].openid-login {
 }
 
 .ie6 input.text.openid-login {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/common/openid.gif) no-repeat;
+	background: url(<%= themeImagesPath %>/common/openid.gif) no-repeat;
 	background-color: #fff;
 	background-position: 0 50%;
 	color: #000;

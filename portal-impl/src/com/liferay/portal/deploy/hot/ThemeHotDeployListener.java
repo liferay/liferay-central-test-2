@@ -26,8 +26,6 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.lastmodified.LastModifiedCSS;
-import com.liferay.portal.lastmodified.LastModifiedJavaScript;
 import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.velocity.LiferayResourceCacheUtil;
 import com.liferay.portal.velocity.VelocityContextPool;
@@ -147,9 +145,6 @@ public class ThemeHotDeployListener extends BaseHotDeployListener {
 			VelocityContextPool.remove(servletContextName);
 
 			LiferayResourceCacheUtil.clear();
-
-			LastModifiedCSS.clear();
-			LastModifiedJavaScript.clear();
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);

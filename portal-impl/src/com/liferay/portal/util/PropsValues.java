@@ -550,12 +550,6 @@ public class PropsValues {
 		JOURNAL_TEMPLATE_VELOCITY_RESTRICTED_VARIABLES = PropsUtil.getArray(
 			PropsKeys.JOURNAL_TEMPLATE_VELOCITY_RESTRICTED_VARIABLES);
 
-	public static final boolean LAST_MODIFIED_CHECK = GetterUtil.getBoolean(
-		PropsUtil.get(PropsKeys.LAST_MODIFIED_CHECK));
-
-	public static final String[] LAST_MODIFIED_PATHS =
-		PropsUtil.getArray(PropsKeys.LAST_MODIFIED_PATHS);
-
 	public static final String LAYOUT_CLONE_IMPL = PropsUtil.get(
 		PropsKeys.LAYOUT_CLONE_IMPL);
 

@@ -33,8 +33,6 @@ import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PropsKeys;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 
 import java.util.List;
@@ -57,10 +55,6 @@ public class RandomLookAndFeelAction extends Action {
 		throws ActionException {
 
 		try {
-
-			// Disable caching for CSS and JavaScript
-
-			PropsUtil.set(PropsKeys.LAST_MODIFIED_CHECK, "false");
 
 			// Do not randomize look and feel unless the user is logged in
 

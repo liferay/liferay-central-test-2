@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.ProcessingInstruction;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.model.Theme;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
@@ -118,35 +119,55 @@ public class GetArticleAction extends Action {
 		// Add style sheets in the reverse order that they appear in the
 		// document
 
-		// Theme CSS
+		// Portal CSS
 
-		String url =
-			themeDisplay.getPathThemeCss() + "/main.css?companyId=" +
-				themeDisplay.getCompanyId() + "&themeId=" +
-					themeDisplay.getThemeId() + "&colorSchemeId=" +
-						themeDisplay.getColorSchemeId();
+		Theme theme = themeDisplay.getTheme();
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(themeDisplay.getCDNHost());
+		sb.append(themeDisplay.getPathContext());
+		sb.append("/html/portal/css.jsp?themeId=");
+		sb.append(themeDisplay.getThemeId());
+		sb.append("&colorSchemeId=");
+		sb.append(themeDisplay.getColorSchemeId());
+		sb.append("&t=");
+		sb.append(theme.getTimestamp());
+
+		if (themeDisplay.isThemeCssFastLoad()) {
+			sb.append("&minifierType=css");
+		}
+
+		String url = sb.toString();
 
 		Map<String, String> arguments = new LinkedHashMap<String, String>();
 
 		arguments.put("type", "text/css");
 		arguments.put("href", url);
-		arguments.put("title", "theme css");
+		arguments.put("title", "portal css");
+		arguments.put("alternate", "yes");
 
 		addStyleSheet(doc, url, arguments);
 
-		// CSS cached
+		// Theme CSS
 
-		url =
-			themeDisplay.getPathMain() + "/portal/css_cached?themeId=" +
-				themeDisplay.getThemeId() + "&colorSchemeId=" +
-					themeDisplay.getColorSchemeId();
+		sb = new StringBuilder();
+
+		sb.append(themeDisplay.getPathThemeCss());
+		sb.append("/main.css?t=");
+		sb.append(theme.getTimestamp());
+
+		if (themeDisplay.isThemeCssFastLoad()) {
+			sb.append("&minifierType=css");
+		}
+
+		url = sb.toString();
 
 		arguments.clear();
 
 		arguments.put("type", "text/css");
 		arguments.put("href", url);
-		arguments.put("title", "cached css");
-		arguments.put("alternate", "yes");
+		arguments.put("title", "theme css");
 
 		addStyleSheet(doc, url, arguments);
 

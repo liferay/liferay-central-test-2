@@ -311,14 +311,6 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Cache Filter - Resource</filter-name>
-		<url-pattern>/c/portal/css_cached</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Cache Filter - Resource</filter-name>
-		<url-pattern>/c/portal/javascript_cached</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Cache Filter - Resource</filter-name>
 		<url-pattern>/image/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
@@ -388,14 +380,6 @@
 		<url-pattern>/web/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Header Filter</filter-name>
-		<url-pattern>/c/portal/css_cached</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Header Filter</filter-name>
-		<url-pattern>/c/portal/javascript_cached</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Header Filter</filter-name>

@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.PortletSessionTracker;
 import com.liferay.portal.kernel.servlet.ProtectedServletRequest;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -50,7 +49,6 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
-import com.liferay.portal.lastmodified.LastModifiedAction;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
@@ -100,7 +98,6 @@ import com.liferay.util.servlet.EncryptedServletRequest;
 
 import java.io.IOException;
 
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -119,7 +116,6 @@ import javax.servlet.jsp.PageContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.Globals;
-import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionServlet;
 import org.apache.struts.action.RequestProcessor;
 import org.apache.struts.config.ControllerConfig;
@@ -472,20 +468,6 @@ public class MainServlet extends ActionServlet {
 			_log.error(e, e);
 		}
 
-		// Last modified paths
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Last modified paths");
-		}
-
-		if (_lastModifiedPaths == null) {
-			_lastModifiedPaths = new HashSet<String>();
-
-			for (String lastModifiedPath : PropsValues.LAST_MODIFIED_PATHS) {
-				_lastModifiedPaths.add(lastModifiedPath);
-			}
-		}
-
 		// Global startup events
 
 		if (_log.isDebugEnabled()) {
@@ -563,46 +545,6 @@ public class MainServlet extends ActionServlet {
 		// Struts module config
 
 		ModuleConfig moduleConfig = getModuleConfig(request);
-
-		// Last modified check
-
-		if (PropsValues.LAST_MODIFIED_CHECK) {
-			String path = request.getPathInfo();
-
-			if ((path != null) && _lastModifiedPaths.contains(path)) {
-				ActionMapping mapping =
-					(ActionMapping)moduleConfig.findActionConfig(path);
-
-				LastModifiedAction lastModifiedAction =
-					(LastModifiedAction)InstancePool.get(mapping.getType());
-
-				String lmKey = lastModifiedAction.getLastModifiedKey(request);
-
-				if (lmKey != null) {
-					long ifModifiedSince =
-						request.getDateHeader(HttpHeaders.IF_MODIFIED_SINCE);
-
-					if (ifModifiedSince <= 0) {
-						lastModifiedAction.setLastModifiedValue(lmKey, lmKey);
-					}
-					else {
-						String lmValue =
-							lastModifiedAction.getLastModifiedValue(lmKey);
-
-						if (lmValue != null) {
-							response.setStatus(
-								HttpServletResponse.SC_NOT_MODIFIED);
-
-							return;
-						}
-						else {
-							lastModifiedAction.setLastModifiedValue(
-								lmKey, lmKey);
-						}
-					}
-				}
-			}
-		}
 
 		// Portlet session tracker
 

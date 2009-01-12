@@ -26,8 +26,8 @@
 
 <fb:header><%= portletTitle %></fb:header>
 
-<link rel="stylesheet" type="text/css" href="<%= themeDisplay.getPortalURL() %>/c/portal/css_cached?themeId=classic&colorSchemeId=01&t=<%= themeDisplay.getTheme().getTimestamp() %>" />
-<link rel="stylesheet" type="text/css" href="<%= themeDisplay.getPortalURL() %>/html/themes/classic/css/portlet.css" />
+<link rel="stylesheet" type="text/css" href="<%= themeDisplay.getPortalURL() %>/html/portal/css.jsp?themeId=classic&colorSchemeId=01&t=<%= theme.getTimestamp() %><%= themeDisplay.isThemeCssFastLoad() ? "&minifierType=css" : "" %>" />
+<link rel="stylesheet" type="text/css" href="<%= themeDisplay.getPortalURL() %>/html/themes/classic/css/portlet.css?t=<%= theme.getTimestamp() %><%= themeDisplay.isThemeCssFastLoad() ? "&minifierType=css" : "" %>" />
 
 <%
 Set<String> headerPortalCssPaths = new LinkedHashSet<String>();

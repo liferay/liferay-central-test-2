@@ -121,12 +121,8 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		_publicPaths = new HashSet<String>();
 
 		_publicPaths.add(_PATH_C);
-		_publicPaths.add(_PATH_PORTAL_CSS);
-		_publicPaths.add(_PATH_PORTAL_CSS_CACHED);
 		_publicPaths.add(_PATH_PORTAL_FLASH);
 		_publicPaths.add(_PATH_PORTAL_J_LOGIN);
-		_publicPaths.add(_PATH_PORTAL_JAVASCRIPT);
-		_publicPaths.add(_PATH_PORTAL_JAVASCRIPT_CACHED);
 		_publicPaths.add(_PATH_PORTAL_LAYOUT);
 		_publicPaths.add(_PATH_PORTAL_LOGIN);
 		_publicPaths.add(_PATH_PORTAL_RENDER_PORTLET);
@@ -603,17 +599,6 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			}
 		}
 
-		// All users can retrieve CSS and JavaScript
-
-		if ((path != null) &&
-			(path.equals(_PATH_PORTAL_CSS) ||
-			 path.equals(_PATH_PORTAL_CSS_CACHED) ||
-			 path.equals(_PATH_PORTAL_JAVASCRIPT) ||
-			 path.equals(_PATH_PORTAL_JAVASCRIPT_CACHED))) {
-
-			return path;
-		}
-
 		// Authenticated users can always log out
 
 		if (((remoteUser != null) || (user != null)) && (path != null) &&
@@ -880,10 +865,6 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 	private static String _PATH_PORTAL = "/portal";
 
-	private static String _PATH_PORTAL_CSS = "/portal/css";
-
-	private static String _PATH_PORTAL_CSS_CACHED = "/portal/css_cached";
-
 	private static String _PATH_PORTAL_ERROR = "/portal/error";
 
 	private static String _PATH_PORTAL_EXPIRE_SESSION =
@@ -895,11 +876,6 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 	private static String _PATH_PORTAL_FLASH = "/portal/flash";
 
 	private static String _PATH_PORTAL_J_LOGIN = "/portal/j_login";
-
-	private static String _PATH_PORTAL_JAVASCRIPT = "/portal/javascript";
-
-	private static String _PATH_PORTAL_JAVASCRIPT_CACHED =
-		"/portal/javascript_cached";
 
 	private static String _PATH_PORTAL_LAYOUT = "/portal/layout";
 

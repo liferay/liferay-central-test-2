@@ -27,8 +27,8 @@
 <html>
 
 <head>
-	<link href="<%= themeDisplay.getPathMain() %>/portal/css_cached?themeId=<%= themeDisplay.getTheme().getThemeId() %>&colorSchemeId=<%= themeDisplay.getColorScheme().getColorSchemeId() %>" type="text/css" rel="stylesheet" />
-	<link href="<%= themeDisplay.getPathThemeCss() %>/main.css?companyId=<%= themeDisplay.getCompanyId() %>&themeId=<%= themeDisplay.getTheme().getThemeId() %>&colorSchemeId=<%= themeDisplay.getColorScheme().getColorSchemeId() %>" rel="stylesheet" type="text/css" />
+	<link href="<%= themeDisplay.getCDNHost() %><%= themeDisplay.getPathContext() %>/html/portal/css.jsp?themeId=<%= theme.getThemeId() %>&colorSchemeId=<%= colorScheme.getColorSchemeId() %>&t=<%= theme.getTimestamp() %><%= themeDisplay.isThemeCssFastLoad() ? "&minifierType=css" : "" %>" type="text/css" rel="stylesheet" />
+	<link href="<%= themeDisplay.getPathThemeCss() %>/main.css?t=<%= theme.getTimestamp() %><%= themeDisplay.isThemeCssFastLoad() ? "&minifierType=css" : "" %>" rel="stylesheet" type="text/css" />
 
 	<c:if test="<%= (layout != null) && Validator.isNotNull(layout.getCssText()) %>">
 		<style type="text/css">

@@ -33,8 +33,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
-import com.liferay.portal.lastmodified.LastModifiedCSS;
-import com.liferay.portal.lastmodified.LastModifiedJavaScript;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.search.lucene.LuceneIndexer;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -147,8 +145,6 @@ public class EditServerAction extends PortletAction {
 	}
 
 	protected void cacheSingle() throws Exception {
-		LastModifiedCSS.clear();
-		LastModifiedJavaScript.clear();
 		WebCachePoolUtil.clear();
 	}
 

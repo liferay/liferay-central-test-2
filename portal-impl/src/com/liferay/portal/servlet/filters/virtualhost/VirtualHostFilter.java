@@ -316,8 +316,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 		if (url.endsWith(_EXT_C) || url.endsWith(_EXT_CSS) ||
 			url.endsWith(_EXT_GIF) || url.endsWith(_EXT_IMAGE_COMPANY_LOGO) ||
 			url.endsWith(_EXT_ICO) || url.endsWith(_EXT_JS) ||
-			url.endsWith(_EXT_JPEG) || url.endsWith(_EXT_PORTAL_CSS_CACHED) ||
-			url.endsWith(_EXT_PORTAL_JAVASCRIPT_CACHED) ||
+			url.endsWith(_EXT_JPEG) || url.endsWith(_EXT_JSP) ||
 			url.endsWith(_EXT_PORTAL_LAYOUT) ||
 			url.endsWith(_EXT_PORTAL_LOGIN) ||
 			url.endsWith(_EXT_PORTAL_LOGOUT) || url.endsWith(_EXT_PNG)) {
@@ -350,10 +349,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 
 	private static String _EXT_JPEG = ".jpeg";
 
-	private static String _EXT_PORTAL_CSS_CACHED = "/portal/css_cached";
-
-	private static String _EXT_PORTAL_JAVASCRIPT_CACHED =
-		"/portal/javascript_cached";
+	private static String _EXT_JSP = ".jsp";
 
 	private static String _EXT_PORTAL_LAYOUT = "/portal/layout";
 

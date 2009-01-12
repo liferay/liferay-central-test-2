@@ -527,10 +527,6 @@ public interface PropsKeys {
 
 	public static final String JOURNAL_TRANSFORMER_LISTENER = "journal.transformer.listener";
 
-	public static final String LAST_MODIFIED_CHECK = "last.modified.check";
-
-	public static final String LAST_MODIFIED_PATHS = "last.modified.paths";
-
 	public static final String LAYOUT_CLONE_IMPL = "layout.clone.impl";
 
 	public static final String LAYOUT_CONFIGURATION_ACTION_DELETE = "layout.configuration.action.delete";
