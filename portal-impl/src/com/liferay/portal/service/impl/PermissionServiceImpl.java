@@ -314,16 +314,6 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 				permissionChecker, GetterUtil.getLong(primKey),
 				ActionKeys.PERMISSIONS);
 		}
-		else if (name.equals(ShoppingCategory.class.getName())) {
-			ShoppingCategoryPermission.check(
-				permissionChecker, GetterUtil.getLong(primKey),
-				ActionKeys.PERMISSIONS);
-		}
-		else if (name.equals(ShoppingItem.class.getName())) {
-			ShoppingItemPermission.check(
-				permissionChecker, GetterUtil.getLong(primKey),
-				ActionKeys.PERMISSIONS);
-		}
 		else if (name.equals(SCFrameworkVersion.class.getName())) {
 			SCFrameworkVersionPermission.check(
 				permissionChecker, GetterUtil.getLong(primKey),
@@ -331,6 +321,16 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 		}
 		else if (name.equals(SCProductEntry.class.getName())) {
 			SCProductEntryPermission.check(
+				permissionChecker, GetterUtil.getLong(primKey),
+				ActionKeys.PERMISSIONS);
+		}
+		else if (name.equals(ShoppingCategory.class.getName())) {
+			ShoppingCategoryPermission.check(
+				permissionChecker, GetterUtil.getLong(primKey),
+				ActionKeys.PERMISSIONS);
+		}
+		else if (name.equals(ShoppingItem.class.getName())) {
+			ShoppingItemPermission.check(
 				permissionChecker, GetterUtil.getLong(primKey),
 				ActionKeys.PERMISSIONS);
 		}

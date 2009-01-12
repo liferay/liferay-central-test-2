@@ -93,7 +93,7 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 			updatePortletPermissions(
 				"34", "com.liferay.portlet.shopping",
 				new String[] {
-						"ADD_CATEGORY", "MANAGE_COUPONS", "MANAGE_ORDERS"
+					"ADD_CATEGORY", "MANAGE_COUPONS", "MANAGE_ORDERS"
 				});
 
 			updatePortletPermissions(
