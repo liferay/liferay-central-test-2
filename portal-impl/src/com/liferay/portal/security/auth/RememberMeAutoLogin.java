@@ -94,14 +94,14 @@ public class RememberMeAutoLogin implements AutoLogin {
 			cookie.setMaxAge(0);
 			cookie.setPath(StringPool.SLASH);
 
-			CookieKeys.addCookie(request, response, cookie, false);
+			CookieKeys.addCookie(request, response, cookie);
 
 			cookie = new Cookie(CookieKeys.PASSWORD, StringPool.BLANK);
 
 			cookie.setMaxAge(0);
 			cookie.setPath(StringPool.SLASH);
 
-			CookieKeys.addCookie(request, response, cookie, false);
+			CookieKeys.addCookie(request, response, cookie);
 
 			throw new AutoLoginException(e);
 		}

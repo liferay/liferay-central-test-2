@@ -308,12 +308,12 @@ public class LoginUtil {
 			screenNameCookie.setMaxAge(loginMaxAge);
 			screenNameCookie.setPath(StringPool.SLASH);
 
-			CookieKeys.addCookie(request, response, companyIdCookie);
-			CookieKeys.addCookie(request, response, idCookie);
-			CookieKeys.addCookie(request, response, passwordCookie);
-			CookieKeys.addCookie(request, response, rememberMeCookie);
-			CookieKeys.addCookie(request, response, loginCookie);
-			CookieKeys.addCookie(request, response, screenNameCookie);
+			CookieKeys.addCookie(request, response, companyIdCookie, false);
+			CookieKeys.addCookie(request, response, idCookie, false);
+			CookieKeys.addCookie(request, response, passwordCookie, false);
+			CookieKeys.addCookie(request, response, rememberMeCookie, false);
+			CookieKeys.addCookie(request, response, loginCookie, false);
+			CookieKeys.addCookie(request, response, screenNameCookie, false);
 		}
 		else {
 			throw new AuthException();
