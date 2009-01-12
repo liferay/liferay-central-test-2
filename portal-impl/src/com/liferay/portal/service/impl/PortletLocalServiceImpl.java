@@ -416,7 +416,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			PortletApp portletApp = _getPortletApp(StringPool.BLANK);
 
-			_setSpriteImages(servletContext, portletApp, "/html/icons");
+			_setSpriteImages(servletContext, portletApp, "/html/icons/");
 		}
 		catch (Exception e) {
 			_log.error(e, e);

@@ -84,10 +84,17 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 			return null;
 		}
 
+		if (spritePropertiesRootPath.endsWith(StringPool.SLASH) ||
+			spritePropertiesRootPath.endsWith(StringPool.BACK_SLASH)) {
+
+			spritePropertiesRootPath = spritePropertiesRootPath.substring(
+				0, spritePropertiesRootPath.length() - 1);
+		}
+
 		File dir = images.get(0).getParentFile();
 
 		File spritePropertiesFile = new File(
-			dir.toString() + "/" + spritePropertiesFileName);
+			dir.toString() + StringPool.SLASH + spritePropertiesFileName);
 
 		boolean build = false;
 
@@ -168,7 +175,8 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 				MosaicDescriptor.MOSAIC_TYPE_OVERLAY, null, null, null, null,
 				null);
 
-			File spriteFile = new File(dir.toString() + "/" + spriteFileName);
+			File spriteFile = new File(
+				dir.toString() + StringPool.SLASH + spriteFileName);
 
 			ImageIO.write(renderedOp, "png", spriteFile);
 
