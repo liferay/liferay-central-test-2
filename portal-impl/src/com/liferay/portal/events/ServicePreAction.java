@@ -1590,7 +1590,7 @@ public class ServicePreAction extends Action {
 			themeDisplay.setShowPageSettingsIcon(false);
 		}
 
-		themeDisplay.setURLPortal(themeDisplay.getURLHome());
+		themeDisplay.setURLPortal(portalURL + contextPath);
 
 		String urlSignIn = mainPath + "/portal/login";
 
