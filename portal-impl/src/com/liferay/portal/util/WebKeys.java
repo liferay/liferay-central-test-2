@@ -227,10 +227,6 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String ORGANIZATION = "ORGANIZATION";
 
-	public static final String PAGE_SUBTITLE = "LIFERAY_SHARED_PAGE_SUBTITLE";
-
-	public static final String PAGE_TITLE = "LIFERAY_SHARED_PAGE_TITLE";
-
 	public static final String PASSWORD_POLICY = "PASSWORD_POLICY";
 
 	public static final String PHONE = "PHONE";

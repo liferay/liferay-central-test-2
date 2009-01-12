@@ -264,6 +264,14 @@ if (layout != null) {
 
 </c:if>
 
+<%
+StringBuilder pageTopSB = (StringBuilder)request.getAttribute(WebKeys.PAGE_TOP);
+%>
+
+<c:if test="<%= pageTopSB != null %>">
+	<%= pageTopSB.toString() %>
+</c:if>
+
 <%!
 private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.common.themes.top_head.jsp");
 %>

@@ -209,6 +209,14 @@ List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORT
 </c:if>
 
 <%
+StringBuilder pageBottomSB = (StringBuilder)request.getAttribute(WebKeys.PAGE_BOTTOM);
+%>
+
+<c:if test="<%= pageBottomSB != null %>">
+	<%= pageBottomSB.toString() %>
+</c:if>
+
+<%
 if (layout != null) {
 	UnicodeProperties groupTypeSettings = layout.getGroup().getTypeSettingsProperties();
 

@@ -18,6 +18,16 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>html-bottom</name>
+		<tag-class>com.liferay.taglib.util.HtmlBottomTag</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+	<tag>
+		<name>html-top</name>
+		<tag-class>com.liferay.taglib.util.HtmlTopTag</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+	<tag>
 		<name>include</name>
 		<tag-class>com.liferay.taglib.util.IncludeTag</tag-class>
 		<body-content>JSP</body-content>

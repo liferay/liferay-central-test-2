@@ -778,7 +778,7 @@ public class ServicePreAction extends Action {
 			HttpSession session = request.getSession();
 
 			Long previousGroupId = (Long)session.getAttribute(
-				WebKeys.LIFERAY_SHARED_VISITED_GROUP_ID_PREVIOUS);
+				WebKeys.VISITED_GROUP_ID_PREVIOUS);
 
 			if ((previousGroupId != null) &&
 				(previousGroupId.longValue() != layoutGroupId)) {
@@ -836,17 +836,16 @@ public class ServicePreAction extends Action {
 		HttpSession session = request.getSession();
 
 		Long recentGroupId = (Long)session.getAttribute(
-			WebKeys.LIFERAY_SHARED_VISITED_GROUP_ID_RECENT);
+			WebKeys.VISITED_GROUP_ID_RECENT);
 
 		Long previousGroupId = (Long)session.getAttribute(
-			WebKeys.LIFERAY_SHARED_VISITED_GROUP_ID_PREVIOUS);
+			WebKeys.VISITED_GROUP_ID_PREVIOUS);
 
 		if (recentGroupId == null) {
 			recentGroupId = new Long(currentGroupId);
 
 			session.setAttribute(
-				WebKeys.LIFERAY_SHARED_VISITED_GROUP_ID_RECENT,
-				recentGroupId);
+				WebKeys.VISITED_GROUP_ID_RECENT, recentGroupId);
 		}
 		else if (recentGroupId.longValue() != currentGroupId) {
 			previousGroupId = new Long(recentGroupId.longValue());
@@ -854,12 +853,10 @@ public class ServicePreAction extends Action {
 			recentGroupId = new Long(currentGroupId);
 
 			session.setAttribute(
-				WebKeys.LIFERAY_SHARED_VISITED_GROUP_ID_RECENT,
-				recentGroupId);
+				WebKeys.VISITED_GROUP_ID_RECENT, recentGroupId);
 
 			session.setAttribute(
-				WebKeys.LIFERAY_SHARED_VISITED_GROUP_ID_PREVIOUS,
-				previousGroupId);
+				WebKeys.VISITED_GROUP_ID_PREVIOUS, previousGroupId);
 		}
 
 		if (_log.isDebugEnabled()) {

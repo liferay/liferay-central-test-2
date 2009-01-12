@@ -36,9 +36,23 @@ public interface WebKeys {
 
 	public static final String LAYOUTS = "LAYOUTS";
 
+	/**
+	 * @deprecated Use <code>VISITED_GROUP_ID_PREVIOUS</code>.
+	 */
 	public static final String LIFERAY_SHARED_VISITED_GROUP_ID_PREVIOUS = "LIFERAY_SHARED_VISITED_GROUP_ID_PREVIOUS";
 
+	/**
+	 * @deprecated Use <code>VISITED_GROUP_ID_RECENT</code>.
+	 */
 	public static final String LIFERAY_SHARED_VISITED_GROUP_ID_RECENT = "LIFERAY_SHARED_VISITED_GROUP_ID_RECENT";
+
+	public static final String PAGE_BOTTOM = "LIFERAY_SHARED_PAGE_BOTTOM";
+
+	public static final String PAGE_SUBTITLE = "LIFERAY_SHARED_PAGE_SUBTITLE";
+
+	public static final String PAGE_TITLE = "LIFERAY_SHARED_PAGE_TITLE";
+
+	public static final String PAGE_TOP = "LIFERAY_SHARED_PAGE_TOP";
 
 	public static final String PORTLET_DECORATE = "PORTLET_DECORATE";
 
@@ -55,5 +69,9 @@ public interface WebKeys {
 	public static final String THEME_DISPLAY = "THEME_DISPLAY";
 
 	public static final String VELOCITY_TAGLIB = "VELOCITY_TAGLIB";
+
+	public static final String VISITED_GROUP_ID_PREVIOUS = "LIFERAY_SHARED_VISITED_GROUP_ID_PREVIOUS";
+
+	public static final String VISITED_GROUP_ID_RECENT = "LIFERAY_SHARED_VISITED_GROUP_ID_RECENT";
 
 }
