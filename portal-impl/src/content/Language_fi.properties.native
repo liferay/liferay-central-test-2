@@ -127,7 +127,6 @@ category.kb=Knowledge Base
 category.library=Kirjasto
 category.my=Minun
 category.news=Uutiset
-category.polls=Kyselyt
 category.portal=Portaali
 category.religion=Uskonto
 category.sample=Esimerkki
@@ -144,12 +143,12 @@ category.wiki=Wiki
 category.wol=World of Liferay
 category.workflow=Työnkulku
 category.wsrp=WSRP
-model.resource.com.liferay.knowledgebase.model.KBArticle=Knowledge Base artikkeli
 
 ##
 ## Model resources
 ##
 
+model.resource.com.liferay.knowledgebase.model.KBArticle=Knowledge Base artikkeli
 model.resource.com.liferay.portal.model.Group=Yhteisö
 model.resource.com.liferay.portal.model.Layout=Sivu
 model.resource.com.liferay.portal.model.Location=Sijainti
