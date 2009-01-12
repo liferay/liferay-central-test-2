@@ -54,8 +54,6 @@ public class ConfirmNoSessionExpireTest extends BaseTestCase {
 
 		Thread.sleep(30000);
 		Thread.sleep(30000);
-		selenium.click(RuntimeVariables.replace("link=Home"));
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
