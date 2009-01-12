@@ -72,7 +72,7 @@
 <c:if test="<%= themeDisplay.isIncludePortletCssJs() %>">
 
 	<%
-	long javaScriptLastModified = ServletContextUtil.getLastModified(application, themeDisplay.getPathJavaScript(), true);
+	long javaScriptLastModified = ServletContextUtil.getLastModified(application, "/html/js", true);
 	%>
 
 	<script src="<%= themeDisplay.getPathJavaScript() %>/liferay/portlet_css.js?t=<%= javaScriptLastModified %><%= themeDisplay.isThemeJsFastLoad() ? "&minifierType=js" : "" %>" type="text/javascript"></script>
