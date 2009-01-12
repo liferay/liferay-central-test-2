@@ -157,7 +157,7 @@ public class PortletDeployer extends BaseDeployer {
 		sb.append("</listener-class>");
 		sb.append("</listener>");
 
-		// Filters
+		// Speed filters
 
 		String speedFiltersContent = FileUtil.read(
 			DeployUtil.getResourcePath("speed_filters.xml"));
