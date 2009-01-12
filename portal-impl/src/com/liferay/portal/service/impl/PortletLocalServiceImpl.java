@@ -494,9 +494,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			// Sprite images
 
-			//PortletApp portletApp = _getPortletApp(servletContextName);
+			PortletApp portletApp = _getPortletApp(servletContextName);
 
-			//_setSpriteImages(servletContext, portletApp, StringPool.SLASH);
+			_setSpriteImages(servletContext, portletApp, "/icons/");
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -1720,6 +1720,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		Set<String> resourcePaths = servletContext.getResourcePaths(
 			resourcePath);
+
+		if (resourcePaths == null) {
+			return;
+		}
 
 		List<File> images = new ArrayList<File>(resourcePaths.size());
 

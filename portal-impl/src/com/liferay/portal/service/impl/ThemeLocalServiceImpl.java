@@ -691,6 +691,10 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 		Set<String> resourcePaths = servletContext.getResourcePaths(
 			resourcePath);
 
+		if (resourcePaths == null) {
+			return;
+		}
+
 		List<File> images = new ArrayList<File>(resourcePaths.size());
 
 		for (String curResourcePath : resourcePaths) {
