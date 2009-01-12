@@ -1744,7 +1744,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		Properties spriteProperties = SpriteProcessorUtil.generate(
 			images, spriteFileName, spritePropertiesFileName,
-			spritePropertiesRootPath, 16, 16, 10);
+			spritePropertiesRootPath, 16, 16, 10 * 1024);
 
 		if (spriteProperties == null) {
 			return;
