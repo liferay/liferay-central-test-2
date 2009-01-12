@@ -45,10 +45,10 @@ import javax.xml.transform.stream.StreamSource;
 public class XSLContentUtil {
 
 	public static String DEFAULT_XML_URL =
-		"http://www.w3schools.com/xml/simple.xml";
+		"@portal_url@/html/portlet/xsl_content/example.xml";
 
 	public static String DEFAULT_XSL_URL =
-		"http://www.w3schools.com/xml/simple.xsl";
+		"@portal_url@/html/portlet/xsl_content/example.xsl";
 
 	public static String transform(URL xmlURL, URL xslURL)
 		throws IOException, TransformerException {

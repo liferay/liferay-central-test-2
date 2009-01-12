@@ -29,6 +29,9 @@ try {
 	String variablePropertyKey = StringPool.BLANK;
 	String variablePropertyValue = StringPool.BLANK;
 
+	xmlURL = StringUtil.replace(xmlURL,"@portal_url@", themeDisplay.getPortalURL());
+	xslURL = StringUtil.replace(xslURL,"@portal_url@", themeDisplay.getPortalURL());
+
 	int bracketBegin = xmlURL.indexOf("[");
 	int bracketEnd = -1;
 
