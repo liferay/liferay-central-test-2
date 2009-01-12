@@ -69,7 +69,13 @@ if (themeDisplay.isThemeImagesFastLoad()) {
 		if (portlet != null) {
 			PortletApp portletApp = portlet.getPortletApp();
 
-			spriteImage = portletApp.getSpriteImage(src);
+			imageFileName = src;
+
+			if (portletApp.isWARFile() && imageFileName.startsWith(portlet.getContextPath())) {
+				imageFileName = imageFileName.substring(portlet.getContextPath().length());
+			}
+
+			spriteImage = portletApp.getSpriteImage(imageFileName);
 
 			if (spriteImage != null) {
 				spriteFileName = portlet.getContextPath() + spriteImage.getSpriteFileName();
