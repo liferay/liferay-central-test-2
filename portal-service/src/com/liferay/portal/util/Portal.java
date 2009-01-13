@@ -341,6 +341,19 @@ public interface Portal {
 			PortletRequest portletRequest, boolean checkPermission)
 		throws PortalException, SystemException;
 
+	public String getStaticResourceURL(
+		HttpServletRequest request, String uri);
+
+	public String getStaticResourceURL(
+		HttpServletRequest request, String uri, String queryString);
+
+	public String getStaticResourceURL(
+		HttpServletRequest request, String uri, long timestamp);
+
+	public String getStaticResourceURL(
+		HttpServletRequest request, String uri, String queryString,
+		long timestamp);
+
 	public String getStrutsAction(HttpServletRequest request);
 
 	public String[] getSystemCommunityRoles();

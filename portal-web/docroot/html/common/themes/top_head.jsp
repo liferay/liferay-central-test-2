@@ -29,7 +29,7 @@
 
 <link rel="Shortcut Icon" href="<%= themeDisplay.getPathThemeImages() %>/<%= PropsValues.THEME_SHORTCUT_ICON %>" />
 
-<link href="<%= themeDisplay.getCDNHost() %><%= themeDisplay.getPathContext() %>/html/portal/css.jsp?themeId=<%= theme.getThemeId() %>&colorSchemeId=<%= colorScheme.getColorSchemeId() %>&t=<%= theme.getTimestamp() %><%= themeDisplay.isThemeCssFastLoad() ? "&minifierType=css" : "" %>" type="text/css" rel="stylesheet" />
+<link href="<%= PortalUtil.getStaticResourceURL(request, themeDisplay.getCDNHost() + themeDisplay.getPathContext() + "/html/portal/css.jsp") %>" rel="stylesheet" type="text/css" />
 
 <%
 List<Portlet> portlets = null;
@@ -104,16 +104,7 @@ if (layout != null) {
 			if (!headerPortalCssPaths.contains(headerPortalCssPath)) {
 				headerPortalCssPaths.add(headerPortalCssPath);
 
-				if (headerPortalCssPath.endsWith(".jsp")) {
-					headerPortalCssPath += "?themeId=" + theme.getThemeId() + "&colorSchemeId=" + colorScheme.getColorSchemeId() + "&t=" + portlet.getTimestamp();
-				}
-				else {
-					headerPortalCssPath += "?t=" + portlet.getTimestamp();
-				}
-
-				if (themeDisplay.isThemeCssFastLoad()) {
-					headerPortalCssPath += "&minifierType=css";
-				}
+				headerPortalCssPath = PortalUtil.getStaticResourceURL(request, headerPortalCssPath, portlet.getTimestamp());
 	%>
 
 				<link href="<%= headerPortalCssPath %>" rel="stylesheet" type="text/css" />
@@ -134,16 +125,7 @@ if (layout != null) {
 			if (!headerPortletCssPaths.contains(headerPortletCssPath)) {
 				headerPortletCssPaths.add(headerPortletCssPath);
 
-				if (headerPortletCssPath.endsWith(".jsp")) {
-					headerPortletCssPath += "?themeId=" + theme.getThemeId() + "&colorSchemeId=" + colorScheme.getColorSchemeId() + "&t=" + portlet.getTimestamp();
-				}
-				else {
-					headerPortletCssPath += "?t=" + portlet.getTimestamp();
-				}
-
-				if (themeDisplay.isThemeCssFastLoad()) {
-					headerPortletCssPath += "&minifierType=css";
-				}
+				headerPortletCssPath = PortalUtil.getStaticResourceURL(request, headerPortletCssPath, portlet.getTimestamp());
 	%>
 
 				<link href="<%= headerPortletCssPath %>" rel="stylesheet" type="text/css" />
@@ -212,16 +194,7 @@ if (layout != null) {
 			if (!headerPortalJavaScriptPaths.contains(headerPortalJavaScriptPath) && !themeDisplay.isIncludedJs(headerPortalJavaScriptPath)) {
 				headerPortalJavaScriptPaths.add(headerPortalJavaScriptPath);
 
-				if (headerPortalJavaScriptPath.endsWith(".jsp")) {
-					headerPortalJavaScriptPath += "?themeId=" + theme.getThemeId() + "&amp;colorSchemeId=" + colorScheme.getColorSchemeId() + "&amp;t=" + portlet.getTimestamp();
-				}
-				else {
-					headerPortalJavaScriptPath += "?t=" + portlet.getTimestamp();
-				}
-
-				if (themeDisplay.isThemeJsFastLoad()) {
-					headerPortalJavaScriptPath += "&amp;minifierType=js";
-				}
+				headerPortalJavaScriptPath = PortalUtil.getStaticResourceURL(request, headerPortalJavaScriptPath, portlet.getTimestamp());
 	%>
 
 				<script src="<%= headerPortalJavaScriptPath %>" type="text/javascript"></script>
@@ -242,16 +215,7 @@ if (layout != null) {
 			if (!headerPortletJavaScriptPaths.contains(headerPortletJavaScriptPath)) {
 				headerPortletJavaScriptPaths.add(headerPortletJavaScriptPath);
 
-				if (headerPortletJavaScriptPath.endsWith(".jsp")) {
-					headerPortletJavaScriptPath += "?themeId=" + theme.getThemeId() + "&amp;colorSchemeId=" + colorScheme.getColorSchemeId() + "&amp;t=" + portlet.getTimestamp();
-				}
-				else {
-					headerPortletJavaScriptPath += "?t=" + portlet.getTimestamp();
-				}
-
-				if (themeDisplay.isThemeJsFastLoad()) {
-					headerPortletJavaScriptPath += "&amp;minifierType=js";
-				}
+				headerPortletJavaScriptPath = PortalUtil.getStaticResourceURL(request, headerPortletJavaScriptPath, portlet.getTimestamp());
 	%>
 
 				<script src="<%= headerPortletJavaScriptPath %>" type="text/javascript"></script>

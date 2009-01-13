@@ -26,8 +26,8 @@
 
 <fb:header><%= portletTitle %></fb:header>
 
-<link rel="stylesheet" type="text/css" href="<%= themeDisplay.getPortalURL() %>/html/portal/css.jsp?themeId=classic&colorSchemeId=01&t=<%= theme.getTimestamp() %><%= themeDisplay.isThemeCssFastLoad() ? "&minifierType=css" : "" %>" />
-<link rel="stylesheet" type="text/css" href="<%= themeDisplay.getPortalURL() %>/html/themes/classic/css/portlet.css?t=<%= theme.getTimestamp() %><%= themeDisplay.isThemeCssFastLoad() ? "&minifierType=css" : "" %>" />
+<link href="<%= PortalUtil.getStaticResourceURL(request, themeDisplay.getPortalURL() + "/html/portal/css.jsp", "themeId=classic&colorSchemeId=01") %>" rel="stylesheet" type="text/css" />
+<link href="<%= PortalUtil.getStaticResourceURL(request, themeDisplay.getPortalURL() + "/html/themes/classic/css/portlet.css") %>" rel="stylesheet" type="text/css" />
 
 <%
 Set<String> headerPortalCssPaths = new LinkedHashSet<String>();
@@ -40,16 +40,7 @@ for (String headerPortalCss : headerPortalCssList) {
 	if (!headerPortalCssPaths.contains(headerPortalCssPath)) {
 		headerPortalCssPaths.add(headerPortalCssPath);
 
-		if (headerPortalCssPath.endsWith(".jsp")) {
-			headerPortalCssPath += "?themeId=" + theme.getThemeId() + "&amp;colorSchemeId=" + colorScheme.getColorSchemeId() + "&amp;t=" + portlet.getTimestamp();
-		}
-		else {
-			headerPortalCssPath += "?t=" + portlet.getTimestamp();
-		}
-
-		if (themeDisplay.isThemeCssFastLoad()) {
-			headerPortalCssPath += "&amp;minifierType=css";
-		}
+		headerPortalCssPath = PortalUtil.getStaticResourceURL(request, headerPortalCssPath, portlet.getTimestamp());
 %>
 
 		<link href="<%= headerPortalCssPath %>" rel="stylesheet" type="text/css" />
@@ -68,16 +59,7 @@ for (String headerPortletCss : headerPortletCssList) {
 	if (!headerPortletCssPaths.contains(headerPortletCssPath)) {
 		headerPortletCssPaths.add(headerPortletCssPath);
 
-		if (headerPortletCssPath.endsWith(".jsp")) {
-			headerPortletCssPath += "?themeId=" + theme.getThemeId() + "&amp;colorSchemeId=" + colorScheme.getColorSchemeId() + "&amp;t=" + portlet.getTimestamp();
-		}
-		else {
-			headerPortletCssPath += "?t=" + portlet.getTimestamp();
-		}
-
-		if (themeDisplay.isThemeCssFastLoad()) {
-			headerPortletCssPath += "&amp;minifierType=css";
-		}
+		headerPortletCssPath = PortalUtil.getStaticResourceURL(request, headerPortletCssPath, portlet.getTimestamp());
 %>
 
 		<link href="<%= headerPortletCssPath %>" rel="stylesheet" type="text/css" />
@@ -100,16 +82,7 @@ for (String footerPortalCss : footerPortalCssList) {
 	if (!footerPortalCssPaths.contains(footerPortalCssPath)) {
 		footerPortalCssPaths.add(footerPortalCssPath);
 
-		if (footerPortalCssPath.endsWith(".jsp")) {
-			footerPortalCssPath += "?themeId=" + theme.getThemeId() + "&amp;colorSchemeId=" + colorScheme.getColorSchemeId() + "&amp;t=" + portlet.getTimestamp();
-		}
-		else {
-			footerPortalCssPath += "?t=" + portlet.getTimestamp();
-		}
-
-		if (themeDisplay.isThemeCssFastLoad()) {
-			footerPortalCssPath += "&amp;minifierType=css";
-		}
+		footerPortalCssPath = PortalUtil.getStaticResourceURL(request, footerPortalCssPath, portlet.getTimestamp());
 %>
 
 		<link href="<%= footerPortalCssPath %>" rel="stylesheet" type="text/css" />
@@ -128,16 +101,7 @@ for (String footerPortletCss : footerPortletCssList) {
 	if (!footerPortletCssPaths.contains(footerPortletCssPath)) {
 		footerPortletCssPaths.add(footerPortletCssPath);
 
-		if (footerPortletCssPath.endsWith(".jsp")) {
-			footerPortletCssPath += "?themeId=" + theme.getThemeId() + "&amp;colorSchemeId=" + colorScheme.getColorSchemeId() + "&amp;t=" + portlet.getTimestamp();
-		}
-		else {
-			footerPortletCssPath += "?t=" + portlet.getTimestamp();
-		}
-
-		if (themeDisplay.isThemeCssFastLoad()) {
-			footerPortletCssPath += "&amp;minifierType=css";
-		}
+		footerPortletCssPath = PortalUtil.getStaticResourceURL(request, footerPortletCssPath, portlet.getTimestamp());
 %>
 
 		<link href="<%= footerPortletCssPath %>" rel="stylesheet" type="text/css" />

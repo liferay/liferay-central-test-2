@@ -75,7 +75,7 @@
 	long javaScriptLastModified = ServletContextUtil.getLastModified(application, "/html/js", true);
 	%>
 
-	<script src="<%= themeDisplay.getPathJavaScript() %>/liferay/portlet_css.js?t=<%= javaScriptLastModified %><%= themeDisplay.isThemeJsFastLoad() ? "&minifierType=js" : "" %>" type="text/javascript"></script>
+	<script src="<%= PortalUtil.getStaticResourceURL(request, themeDisplay.getPathJavaScript() + "/liferay/portlet_css.js", javaScriptLastModified) %>" type="text/javascript"></script>
 </c:if>
 
 <%
@@ -96,16 +96,7 @@ List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORT
 			if (!footerPortalCssPaths.contains(footerPortalCssPath)) {
 				footerPortalCssPaths.add(footerPortalCssPath);
 
-				if (footerPortalCssPath.endsWith(".jsp")) {
-					footerPortalCssPath += "?themeId=" + theme.getThemeId() + "&amp;colorSchemeId=" + colorScheme.getColorSchemeId() + "&amp;t=" + portlet.getTimestamp();
-				}
-				else {
-					footerPortalCssPath += "?t=" + portlet.getTimestamp();
-				}
-
-				if (themeDisplay.isThemeCssFastLoad()) {
-					footerPortalCssPath += "&amp;minifierType=css";
-				}
+				footerPortalCssPath = PortalUtil.getStaticResourceURL(request, footerPortalCssPath, portlet.getTimestamp());
 	%>
 
 				<link href="<%= footerPortalCssPath %>" rel="stylesheet" type="text/css" />
@@ -126,16 +117,7 @@ List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORT
 			if (!footerPortletCssPaths.contains(footerPortletCssPath)) {
 				footerPortletCssPaths.add(footerPortletCssPath);
 
-				if (footerPortletCssPath.endsWith(".jsp")) {
-					footerPortletCssPath += "?themeId=" + theme.getThemeId() + "&amp;colorSchemeId=" + colorScheme.getColorSchemeId() + "&amp;t=" + portlet.getTimestamp();
-				}
-				else {
-					footerPortletCssPath += "?t=" + portlet.getTimestamp();
-				}
-
-				if (themeDisplay.isThemeCssFastLoad()) {
-					footerPortletCssPath += "&amp;minifierType=css";
-				}
+				footerPortletCssPath = PortalUtil.getStaticResourceURL(request, footerPortletCssPath, portlet.getTimestamp());
 	%>
 
 				<link href="<%= footerPortletCssPath %>" rel="stylesheet" type="text/css" />
@@ -156,16 +138,7 @@ List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORT
 			if (!footerPortalJavaScriptPaths.contains(footerPortalJavaScriptPath) && !themeDisplay.isIncludedJs(footerPortalJavaScriptPath)) {
 				footerPortalJavaScriptPaths.add(footerPortalJavaScriptPath);
 
-				if (footerPortalJavaScriptPath.endsWith(".jsp")) {
-					footerPortalJavaScriptPath += "?themeId=" + theme.getThemeId() + "&amp;colorSchemeId=" + colorScheme.getColorSchemeId() + "&amp;t=" + portlet.getTimestamp();
-				}
-				else {
-					footerPortalJavaScriptPath += "?t=" + portlet.getTimestamp();
-				}
-
-				if (themeDisplay.isThemeJsFastLoad()) {
-					footerPortalJavaScriptPath += "&amp;minifierType=js";
-				}
+				footerPortalJavaScriptPath = PortalUtil.getStaticResourceURL(request, footerPortalJavaScriptPath, portlet.getTimestamp());
 	%>
 
 				<script src="<%= footerPortalJavaScriptPath %>" type="text/javascript"></script>
@@ -186,16 +159,7 @@ List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORT
 			if (!footerPortletJavaScriptPaths.contains(footerPortletJavaScriptPath)) {
 				footerPortletJavaScriptPaths.add(footerPortletJavaScriptPath);
 
-				if (footerPortletJavaScriptPath.endsWith(".jsp")) {
-					footerPortletJavaScriptPath += "?themeId=" + theme.getThemeId() + "&amp;colorSchemeId=" + colorScheme.getColorSchemeId() + "&amp;t=" + portlet.getTimestamp();
-				}
-				else {
-					footerPortletJavaScriptPath += "?t=" + portlet.getTimestamp();
-				}
-
-				if (themeDisplay.isThemeJsFastLoad()) {
-					footerPortletJavaScriptPath += "&amp;minifierType=js";
-				}
+				footerPortletJavaScriptPath = PortalUtil.getStaticResourceURL(request, footerPortletJavaScriptPath, portlet.getTimestamp());
 	%>
 
 				<script src="<%= footerPortletJavaScriptPath %>" type="text/javascript"></script>

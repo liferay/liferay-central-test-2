@@ -27,8 +27,8 @@
 <html>
 
 <head>
-	<link href="<%= themeDisplay.getCDNHost() %><%= themeDisplay.getPathContext() %>/html/portal/css.jsp?themeId=<%= theme.getThemeId() %>&colorSchemeId=<%= colorScheme.getColorSchemeId() %>&t=<%= theme.getTimestamp() %><%= themeDisplay.isThemeCssFastLoad() ? "&minifierType=css" : "" %>" type="text/css" rel="stylesheet" />
-	<link href="<%= themeDisplay.getPathThemeCss() %>/main.css?t=<%= theme.getTimestamp() %><%= themeDisplay.isThemeCssFastLoad() ? "&minifierType=css" : "" %>" rel="stylesheet" type="text/css" />
+	<link href="<%= PortalUtil.getStaticResourceURL(request, themeDisplay.getCDNHost() + themeDisplay.getPathContext() + "/html/portal/css.jsp") %>" type="text/css" rel="stylesheet" />
+	<link href="<%= PortalUtil.getStaticResourceURL(request, themeDisplay.getPathThemeCss() + "/main.css") %>" rel="stylesheet" type="text/css" />
 
 	<c:if test="<%= (layout != null) && Validator.isNotNull(layout.getCssText()) %>">
 		<style type="text/css">

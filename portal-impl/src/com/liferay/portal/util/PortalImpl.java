@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
 import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
+import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
@@ -56,6 +57,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ClassName;
+import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
@@ -67,6 +69,7 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.RoleConstants;
+import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.plugin.PluginPackageUtil;
@@ -1927,6 +1930,115 @@ public class PortalImpl implements Portal {
 
 		return getSelectedUser(
 			getHttpServletRequest(portletRequest), checkPermission);
+	}
+
+	public String getStaticResourceURL(
+		HttpServletRequest request, String uri) {
+
+		return getStaticResourceURL(request, uri, null, 0);
+	}
+
+	public String getStaticResourceURL(
+		HttpServletRequest request, String uri, String queryString) {
+
+		return getStaticResourceURL(request, uri, queryString, 0);
+	}
+
+	public String getStaticResourceURL(
+		HttpServletRequest request, String uri, long timestamp) {
+
+		return getStaticResourceURL(request, uri, null, timestamp);
+	}
+
+	public String getStaticResourceURL(
+		HttpServletRequest request, String uri, String queryString,
+		long timestamp) {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		Theme theme = themeDisplay.getTheme();
+		ColorScheme colorScheme = themeDisplay.getColorScheme();
+
+		Map<String, String[]> parameterMap = null;
+
+		if (Validator.isNotNull(queryString)) {
+			parameterMap = HttpUtil.getParameterMap(queryString);
+		}
+
+		StringBuilder sb = new StringBuilder();
+
+		// URI
+
+		sb.append(uri);
+		sb.append(StringPool.QUESTION);
+
+		// Browser id
+
+		if ((parameterMap == null) ||
+			(!parameterMap.containsKey("browserId"))) {
+
+			sb.append("&browserId=");
+			sb.append(BrowserSnifferUtil.getBrowserId(request));
+		}
+
+		// Theme and color scheme
+
+		if (uri.endsWith(".jsp")) {
+			if ((parameterMap == null) ||
+				(!parameterMap.containsKey("themeId"))) {
+
+				sb.append("&themeId=");
+				sb.append(theme.getThemeId());
+			}
+
+			if ((parameterMap == null) ||
+				(!parameterMap.containsKey("colorSchemeId"))) {
+
+				sb.append("&colorSchemeId=");
+				sb.append(colorScheme.getColorSchemeId());
+			}
+		}
+
+		// Minifier
+
+		if (themeDisplay.isThemeCssFastLoad()) {
+			if ((parameterMap == null) ||
+				(!parameterMap.containsKey("minifierType"))) {
+
+				String minifierType = "js";
+
+				if (uri.endsWith(".css") || uri.endsWith("css.jsp")) {
+					minifierType = "css";
+				}
+
+				sb.append("&minifierType=");
+				sb.append(minifierType);
+			}
+		}
+
+		// Query string
+
+		if (Validator.isNotNull(queryString)) {
+			if (!queryString.startsWith(StringPool.AMPERSAND)) {
+				sb.append(StringPool.AMPERSAND);
+			}
+
+			sb.append(queryString);
+		}
+
+		// Timestamp
+
+		if ((parameterMap == null) || (!parameterMap.containsKey("t"))) {
+			sb.append("&t=");
+			sb.append(theme.getTimestamp());
+		}
+
+		String url = sb.toString();
+
+		url = StringUtil.replace(url, "?&", StringPool.QUESTION);
+
+		return url;
 	}
 
 	public String getStrutsAction(HttpServletRequest request) {

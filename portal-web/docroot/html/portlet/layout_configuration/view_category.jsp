@@ -146,16 +146,7 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 							if (!headerPortalCssPaths.contains(headerPortalCssPath)) {
 								headerPortalCssPaths.add(headerPortalCssPath);
 
-								if (headerPortalCssPath.endsWith(".jsp")) {
-									headerPortalCssPath += "?themeId=" + theme.getThemeId() + "&amp;colorSchemeId=" + colorScheme.getColorSchemeId() + "&amp;t=" + portlet.getTimestamp();
-								}
-								else {
-									headerPortalCssPath += "?t=" + portlet.getTimestamp();
-								}
-
-								if (themeDisplay.isThemeCssFastLoad()) {
-									headerPortalCssPath += "&amp;minifierType=css";
-								}
+								headerPortalCssPath = PortalUtil.getStaticResourceURL(request, headerPortalCssPath, portlet.getTimestamp());
 							}
 						}
 
@@ -169,16 +160,7 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 							if (!headerPortletCssPaths.contains(headerPortletCssPath)) {
 								headerPortletCssPaths.add(headerPortletCssPath);
 
-								if (headerPortletCssPath.endsWith(".jsp")) {
-									headerPortletCssPath += "?themeId=" + theme.getThemeId() + "&amp;colorSchemeId=" + colorScheme.getColorSchemeId() + "&amp;t=" + portlet.getTimestamp();
-								}
-								else {
-									headerPortletCssPath += "?t=" + portlet.getTimestamp();
-								}
-
-								if (themeDisplay.isThemeCssFastLoad()) {
-									headerPortletCssPath += "&amp;minifierType=css";
-								}
+								headerPortletCssPath = PortalUtil.getStaticResourceURL(request, headerPortletCssPath, portlet.getTimestamp());
 							}
 						}
 
@@ -192,16 +174,7 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 							if (!footerPortalCssPaths.contains(footerPortalCssPath)) {
 								footerPortalCssPaths.add(footerPortalCssPath);
 
-								if (footerPortalCssPath.endsWith(".jsp")) {
-									footerPortalCssPath += "?themeId=" + theme.getThemeId() + "&amp;colorSchemeId=" + colorScheme.getColorSchemeId() + "&amp;t=" + portlet.getTimestamp();
-								}
-								else {
-									footerPortalCssPath += "?t=" + portlet.getTimestamp();
-								}
-
-								if (themeDisplay.isThemeCssFastLoad()) {
-									footerPortalCssPath += "&amp;minifierType=css";
-								}
+								footerPortalCssPath = PortalUtil.getStaticResourceURL(request, footerPortalCssPath, portlet.getTimestamp());
 							}
 						}
 
@@ -215,16 +188,7 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 							if (!footerPortletCssPaths.contains(footerPortletCssPath)) {
 								footerPortletCssPaths.add(footerPortletCssPath);
 
-								if (footerPortletCssPath.endsWith(".jsp")) {
-									footerPortletCssPath += "?themeId=" + theme.getThemeId() + "&amp;colorSchemeId=" + colorScheme.getColorSchemeId() + "&amp;t=" + portlet.getTimestamp();
-								}
-								else {
-									footerPortletCssPath += "?t=" + portlet.getTimestamp();
-								}
-
-								if (themeDisplay.isThemeCssFastLoad()) {
-									footerPortletCssPath += "&amp;minifierType=css";
-								}
+								footerPortletCssPath = PortalUtil.getStaticResourceURL(request, footerPortletCssPath, portlet.getTimestamp());
 							}
 						}
 						%>

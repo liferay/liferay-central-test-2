@@ -90,7 +90,7 @@ public class GetArticleAction extends Action {
 
 			Element root = doc.getRootElement();
 
-			addProcessingInstructions(doc, themeDisplay, article);
+			addProcessingInstructions(doc, request, themeDisplay, article);
 
 			JournalUtil.addAllReservedEls(root, tokens, article);
 
@@ -114,7 +114,8 @@ public class GetArticleAction extends Action {
 	}
 
 	protected void addProcessingInstructions(
-		Document doc, ThemeDisplay themeDisplay, JournalArticle article) {
+		Document doc, HttpServletRequest request, ThemeDisplay themeDisplay,
+		JournalArticle article) {
 
 		// Add style sheets in the reverse order that they appear in the
 		// document
@@ -125,18 +126,11 @@ public class GetArticleAction extends Action {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(themeDisplay.getCDNHost());
-		sb.append(themeDisplay.getPathContext());
-		sb.append("/html/portal/css.jsp?themeId=");
-		sb.append(themeDisplay.getThemeId());
-		sb.append("&colorSchemeId=");
-		sb.append(themeDisplay.getColorSchemeId());
-		sb.append("&t=");
-		sb.append(theme.getTimestamp());
-
-		if (themeDisplay.isThemeCssFastLoad()) {
-			sb.append("&minifierType=css");
-		}
+		sb.append(
+			PortalUtil.getStaticResourceURL(
+				request,
+				themeDisplay.getCDNHost() + themeDisplay.getPathContext() +
+					"/html/portal/css.jsp"));
 
 		String url = sb.toString();
 
@@ -153,13 +147,9 @@ public class GetArticleAction extends Action {
 
 		sb = new StringBuilder();
 
-		sb.append(themeDisplay.getPathThemeCss());
-		sb.append("/main.css?t=");
-		sb.append(theme.getTimestamp());
-
-		if (themeDisplay.isThemeCssFastLoad()) {
-			sb.append("&minifierType=css");
-		}
+		sb.append(
+			PortalUtil.getStaticResourceURL(
+				request, themeDisplay.getPathThemeCss() + "/main.css"));
 
 		url = sb.toString();
 

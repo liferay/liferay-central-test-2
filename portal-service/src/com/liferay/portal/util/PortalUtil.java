@@ -580,6 +580,32 @@ public class PortalUtil {
 		return getPortal().getSelectedUser(portletRequest, checkPermission);
 	}
 
+	public static String getStaticResourceURL(
+		HttpServletRequest request, String uri) {
+
+		return getPortal().getStaticResourceURL(request, uri);
+	}
+
+	public static String getStaticResourceURL(
+		HttpServletRequest request, String uri, String queryString) {
+
+		return getPortal().getStaticResourceURL(request, uri, queryString);
+	}
+
+	public static String getStaticResourceURL(
+		HttpServletRequest request, String uri, long timestamp) {
+
+		return getPortal().getStaticResourceURL(request, uri, timestamp);
+	}
+
+	public static String getStaticResourceURL(
+		HttpServletRequest request, String uri, String queryString,
+		long timestamp) {
+
+		return getPortal().getStaticResourceURL(
+			request, uri, queryString, timestamp);
+	}
+
 	public static String getStrutsAction(HttpServletRequest request) {
 		return getPortal().getStrutsAction(request);
 	}

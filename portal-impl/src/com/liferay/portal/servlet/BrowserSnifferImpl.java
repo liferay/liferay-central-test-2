@@ -56,6 +56,18 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		}
 	}
 
+	public String getBrowserId(HttpServletRequest request) {
+		if (isIe(request)) {
+			return BROWSER_ID_IE;
+		}
+		else if (isFirefox(request)) {
+			return BROWSER_ID_FIREFOX;
+		}
+		else {
+			return BROWSER_ID_OTHER;
+		}
+	}
+
 	public float getMajorVersion(HttpServletRequest request) {
 		float majorVersion = 0;
 

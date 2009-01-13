@@ -34,7 +34,15 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface BrowserSniffer {
 
+	public static final String BROWSER_ID_FIREFOX = "firefox";
+
+	public static final String BROWSER_ID_IE = "ie";
+
+	public static final String BROWSER_ID_OTHER = "other";
+
 	public boolean acceptsGzip(HttpServletRequest request);
+
+	public String getBrowserId(HttpServletRequest request);
 
 	public float getMajorVersion(HttpServletRequest request);
 

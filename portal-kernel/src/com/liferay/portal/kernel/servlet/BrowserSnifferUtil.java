@@ -39,6 +39,10 @@ public class BrowserSnifferUtil {
 		return getBrowserSniffer().acceptsGzip(request);
 	}
 
+	public static String getBrowserId(HttpServletRequest request) {
+		return getBrowserSniffer().getBrowserId(request);
+	}
+
 	public static BrowserSniffer getBrowserSniffer() {
 		return _browserSniffer;
 	}

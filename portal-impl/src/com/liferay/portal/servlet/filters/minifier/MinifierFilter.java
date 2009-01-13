@@ -24,7 +24,7 @@ package com.liferay.portal.servlet.filters.minifier;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
+import com.liferay.portal.kernel.servlet.BrowserSniffer;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -281,13 +281,6 @@ public class MinifierFilter extends BasePortalFilter {
 			cacheCommonFileName += _QUESTION_SEPARATOR + queryString;
 		}
 
-		if (BrowserSnifferUtil.isIe(request)) {
-			cacheCommonFileName += _BROWSER_IE_SEPARATOR;
-		}
-		else {
-			cacheCommonFileName += _BROWSER_OTHER_SEPARATOR;
-		}
-
 		File cacheContentTypeFile = new File(
 			cacheCommonFileName + "_E_CONTENT_TYPE");
 		File cacheDataFile = new File(cacheCommonFileName + "_E_DATA");
@@ -370,7 +363,9 @@ public class MinifierFilter extends BasePortalFilter {
 	protected String minifyCss(HttpServletRequest request, String content)
 		throws IOException {
 
-		if (!BrowserSnifferUtil.isIe(request)) {
+		String browserId = ParamUtil.getString(request, "browserId");
+
+		if (!browserId.equals(BrowserSniffer.BROWSER_ID_IE)) {
 			Matcher matcher = _pattern.matcher(content);
 
 			content = matcher.replaceAll(StringPool.BLANK);
@@ -423,10 +418,6 @@ public class MinifierFilter extends BasePortalFilter {
 			ServletResponseUtil.write(response, minifiedContent);
 		}
 	}
-
-	private static final String _BROWSER_IE_SEPARATOR = "_B_IE";
-
-	private static final String _BROWSER_OTHER_SEPARATOR = "_B_OTHER";
 
 	private static final String _CSS_IMPORT_BEGIN = "@import url(";
 

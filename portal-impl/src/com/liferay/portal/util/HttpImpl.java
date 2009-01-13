@@ -247,18 +247,26 @@ public class HttpImpl implements Http {
 	}
 
 	public String getCompleteURL(HttpServletRequest request) {
-		StringBuffer completeURL = request.getRequestURL();
+		StringBuffer sb = request.getRequestURL();
 
-		if (completeURL == null) {
-			completeURL = new StringBuffer();
+		if (sb == null) {
+			sb = new StringBuffer();
 		}
 
 		if (request.getQueryString() != null) {
-			completeURL.append(StringPool.QUESTION);
-			completeURL.append(request.getQueryString());
+			sb.append(StringPool.QUESTION);
+			sb.append(request.getQueryString());
 		}
 
-		return completeURL.toString();
+		String completeURL = sb.toString();
+
+		if (_log.isWarnEnabled()) {
+			if (completeURL.contains("?&")) {
+				_log.warn("Invalid url " + completeURL);
+			}
+		}
+
+		return completeURL;
 	}
 
 	public String getDomain(String url) {
