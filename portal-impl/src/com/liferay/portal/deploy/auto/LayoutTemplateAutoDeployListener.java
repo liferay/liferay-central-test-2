@@ -61,7 +61,8 @@ public class LayoutTemplateAutoDeployListener extends BaseAutoDeployListener {
 		if (_log.isInfoEnabled()) {
 			_log.info(
 				"Layout templates for " + file.getPath() +
-					" copied successfully");
+					" copied successfully. Deployment will start in a few " +
+						"seconds.");
 		}
 	}
 

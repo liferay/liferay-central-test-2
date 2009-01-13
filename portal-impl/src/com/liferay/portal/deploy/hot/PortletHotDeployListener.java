@@ -301,7 +301,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		if (_log.isInfoEnabled()) {
 			_log.info(
 				portlets.size() + " portlets for " + servletContextName +
-					" registered successfully");
+					" registered successfully. They are now ready to be used.");
 		}
 	}
 

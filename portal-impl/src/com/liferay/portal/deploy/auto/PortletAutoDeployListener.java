@@ -86,7 +86,8 @@ public class PortletAutoDeployListener extends BaseAutoDeployListener {
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Portlets for " + file.getPath() + " copied successfully");
+				"Portlets for " + file.getPath() + " copied successfully. " +
+					"Deployment will start in a few seconds.");
 		}
 	}
 

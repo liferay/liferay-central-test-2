@@ -58,7 +58,9 @@ public class ThemeAutoDeployListener extends BaseAutoDeployListener {
 		_deployer.autoDeploy(file.getName());
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Themes for " + file.getPath() + " copied successfully");
+			_log.info(
+				"Themes for " + file.getPath() + " copied successfully. " +
+					"Deployment will start in a few seconds.");
 		}
 	}
 
