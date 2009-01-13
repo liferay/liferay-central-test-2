@@ -101,7 +101,7 @@ public class LayoutTemplateHotDeployListener extends BaseHotDeployListener {
 		if (_log.isInfoEnabled()) {
 			_log.info(
 				"Layout templates for " + servletContextName +
-					" registered successfully. They are now ready to be used.");
+					" registered successfully. It is now ready to be used.");
 		}
 	}
 
