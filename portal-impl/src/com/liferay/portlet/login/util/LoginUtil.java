@@ -308,12 +308,23 @@ public class LoginUtil {
 			screenNameCookie.setMaxAge(loginMaxAge);
 			screenNameCookie.setPath(StringPool.SLASH);
 
-			CookieKeys.addCookie(request, response, companyIdCookie, false);
-			CookieKeys.addCookie(request, response, idCookie, false);
-			CookieKeys.addCookie(request, response, passwordCookie, false);
-			CookieKeys.addCookie(request, response, rememberMeCookie, false);
-			CookieKeys.addCookie(request, response, loginCookie, false);
-			CookieKeys.addCookie(request, response, screenNameCookie, false);
+			boolean secure = request.isSecure();
+
+			if (secure) {
+				Boolean httpsInitial = (Boolean)session.getAttribute(
+					WebKeys.HTTPS_INITIAL);
+
+				if ((httpsInitial != null) || !httpsInitial.booleanValue()) {
+					secure = false;
+				}
+			}
+
+			CookieKeys.addCookie(request, response, companyIdCookie, secure);
+			CookieKeys.addCookie(request, response, idCookie, secure);
+			CookieKeys.addCookie(request, response, passwordCookie, secure);
+			CookieKeys.addCookie(request, response, rememberMeCookie, secure);
+			CookieKeys.addCookie(request, response, loginCookie, secure);
+			CookieKeys.addCookie(request, response, screenNameCookie, secure);
 		}
 		else {
 			throw new AuthException();
