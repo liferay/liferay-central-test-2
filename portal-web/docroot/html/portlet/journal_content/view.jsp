@@ -103,7 +103,7 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 				<br />
 
 				<div class="portlet-msg-info">
-					<liferay-ui:message key="select-an-existing-article-or-add-an-article-to-be-displayed-in-this-portlet" />
+					<liferay-ui:message key="select-existing-web-content-or-add-some-web-content-to-be-displayed-in-this-portlet" />
 				</div>
 
 				<br />
@@ -137,11 +137,11 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 						<portlet:param name="version" value="<%= String.valueOf(articleDisplay.getVersion()) %>" />
 					</liferay-portlet:renderURL>
 
-					<liferay-ui:icon image="edit" message="edit-article" url="<%= editURL %>" />
+					<liferay-ui:icon image="edit" message="edit-web-content" url="<%= editURL %>" />
 				</c:if>
 
 				<c:if test="<%= showSelectArticleIcon %>">
-					<liferay-ui:icon image="configuration" message="select-article" url="<%= portletDisplay.getURLConfiguration() %>" />
+					<liferay-ui:icon image="configuration" message="select-web-content" url="<%= portletDisplay.getURLConfiguration() %>" />
 				</c:if>
 
 				<c:if test="<%= showAddArticleIcon %>">
@@ -151,7 +151,7 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 						<portlet:param name="redirect" value="<%= currentURL %>" />
 					</liferay-portlet:renderURL>
 
-					<liferay-ui:icon image="add_article" message="add-article" url="<%= addArticleURL %>" />
+					<liferay-ui:icon image="add_article" message="add-web-content" url="<%= addArticleURL %>" />
 				</c:if>
 			</div>
 		</c:if>

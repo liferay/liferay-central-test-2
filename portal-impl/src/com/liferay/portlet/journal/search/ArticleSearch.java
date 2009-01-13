@@ -72,7 +72,7 @@ public class ArticleSearch extends SearchContainer<JournalArticle> {
 	}
 
 	public static final String EMPTY_RESULTS_MESSAGE =
-		"no-articles-were-found";
+		"no-web-content-was-found";
 
 	public ArticleSearch(
 		PortletRequest portletRequest, PortletURL iteratorURL) {

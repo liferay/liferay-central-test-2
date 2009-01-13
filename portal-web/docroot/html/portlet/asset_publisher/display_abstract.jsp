@@ -119,7 +119,7 @@ else if (className.equals(JournalArticle.class.getName())) {
 
 		if (articleDisplay.isSmallImage()) {
 			sb.append("<div style=\"float: left; padding-right: 10px;\"><img alt=\"");
-			sb.append(LanguageUtil.get(pageContext, "article-image"));
+			sb.append(LanguageUtil.get(pageContext, "web-content-image"));
 			sb.append("\" src=\"");
 
 			if (Validator.isNotNull(articleDisplay.getSmallImageURL())) {

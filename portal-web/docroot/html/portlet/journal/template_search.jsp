@@ -33,7 +33,7 @@ TemplateDisplayTerms displayTerms = (TemplateDisplayTerms)searchContainer.getDis
 <liferay-ui:search-toggle
 	id="toggle_id_journal_template_search"
 	displayTerms="<%= displayTerms %>"
-	buttonLabel="search-templates"
+	buttonLabel="search"
 >
 	<table class="lfr-table">
 	<tr>

@@ -60,19 +60,19 @@ String emailArticleReviewBody = ParamUtil.getString(request, "emailArticleReview
 	String editorParam = "";
 	String editorContent = "";
 
-	if (tabs2.equals("article-approval-denied-email")) {
+	if (tabs2.equals("web-content-approval-denied-email")) {
 		editorParam = "emailArticleApprovalDeniedBody";
 		editorContent = emailArticleApprovalDeniedBody;
 	}
-	else if (tabs2.equals("article-approval-granted-email")) {
+	else if (tabs2.equals("web-content-approval-granted-email")) {
 		editorParam = "emailArticleApprovalGrantedBody";
 		editorContent = emailArticleApprovalGrantedBody;
 	}
-	else if (tabs2.equals("article-approval-requested-email")) {
+	else if (tabs2.equals("web-content-approval-requested-email")) {
 		editorParam = "emailArticleApprovalRequestedBody";
 		editorContent = emailArticleApprovalRequestedBody;
 	}
-	else if (tabs2.equals("article-review-email")) {
+	else if (tabs2.equals("web-content-review-email")) {
 		editorParam = "emailArticleReviewBody";
 		editorContent = emailArticleReviewBody;
 	}
@@ -97,7 +97,7 @@ String emailArticleReviewBody = ParamUtil.getString(request, "emailArticleReview
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 
 <liferay-ui:tabs
-	names="email-from,article-approval-denied-email,article-approval-granted-email,article-approval-requested-email,article-review-email"
+	names="email-from,web-content-approval-denied-email,web-content-approval-granted-email,web-content-approval-requested-email,web-content-review-email"
 	param="tabs2"
 	url="<%= portletURL %>"
 />
@@ -142,16 +142,16 @@ String emailArticleReviewBody = ParamUtil.getString(request, "emailArticleReview
 			</td>
 			<td>
 				<c:choose>
-					<c:when test='<%= tabs2.equals("article-approval-denied-email") %>'>
+					<c:when test='<%= tabs2.equals("web-content-approval-denied-email") %>'>
 						<liferay-ui:input-checkbox param="emailArticleApprovalDeniedEnabled" defaultValue="<%= JournalUtil.getEmailArticleApprovalDeniedEnabled(portletSetup) %>" />
 					</c:when>
-					<c:when test='<%= tabs2.equals("article-approval-granted-email") %>'>
+					<c:when test='<%= tabs2.equals("web-content-approval-granted-email") %>'>
 						<liferay-ui:input-checkbox param="emailArticleApprovalGrantedEnabled" defaultValue="<%= JournalUtil.getEmailArticleApprovalGrantedEnabled(portletSetup) %>" />
 					</c:when>
-					<c:when test='<%= tabs2.equals("article-approval-requested-email") %>'>
+					<c:when test='<%= tabs2.equals("web-content-approval-requested-email") %>'>
 						<liferay-ui:input-checkbox param="emailArticleApprovalRequestedEnabled" defaultValue="<%= JournalUtil.getEmailArticleApprovalRequestedEnabled(portletSetup) %>" />
 					</c:when>
-					<c:when test='<%= tabs2.equals("article-review-email") %>'>
+					<c:when test='<%= tabs2.equals("web-content-review-email") %>'>
 						<liferay-ui:input-checkbox param="emailArticleReviewEnabled" defaultValue="<%= JournalUtil.getEmailArticleReviewEnabled(portletSetup) %>" />
 					</c:when>
 				</c:choose>
@@ -168,16 +168,16 @@ String emailArticleReviewBody = ParamUtil.getString(request, "emailArticleReview
 			</td>
 			<td>
 				<c:choose>
-					<c:when test='<%= tabs2.equals("article-approval-denied-email") %>'>
+					<c:when test='<%= tabs2.equals("web-content-approval-denied-email") %>'>
 						<input class="lfr-input-text" name="<portlet:namespace />emailArticleApprovalDeniedSubject" type="text" value="<%= emailArticleApprovalDeniedSubject %>" />
 					</c:when>
-					<c:when test='<%= tabs2.equals("article-approval-granted-email") %>'>
+					<c:when test='<%= tabs2.equals("web-content-approval-granted-email") %>'>
 						<input class="lfr-input-text" name="<portlet:namespace />emailArticleApprovalGrantedSubject" type="text" value="<%= emailArticleApprovalGrantedSubject %>" />
 					</c:when>
-					<c:when test='<%= tabs2.equals("article-approval-requested-email") %>'>
+					<c:when test='<%= tabs2.equals("web-content-approval-requested-email") %>'>
 						<input class="lfr-input-text" name="<portlet:namespace />emailArticleApprovalRequestedSubject" type="text" value="<%= emailArticleApprovalRequestedSubject %>" />
 					</c:when>
-					<c:when test='<%= tabs2.equals("article-review-email") %>'>
+					<c:when test='<%= tabs2.equals("web-content-review-email") %>'>
 						<input class="lfr-input-text" name="<portlet:namespace />emailArticleReviewSubject" type="text" value="<%= emailArticleReviewSubject %>" />
 					</c:when>
 				</c:choose>
@@ -212,7 +212,7 @@ String emailArticleReviewBody = ParamUtil.getString(request, "emailArticleReview
 				<b>[$ARTICLE_ID$]</b>
 			</td>
 			<td>
-				The article ID
+				<liferay-ui:message key="the-web-content-id" />
 			</td>
 		</tr>
 		<tr>
@@ -220,17 +220,17 @@ String emailArticleReviewBody = ParamUtil.getString(request, "emailArticleReview
 				<b>[$ARTICLE_TITLE$]</b>
 			</td>
 			<td>
-				The article title
+				<liferay-ui:message key="the-web-content-title" />
 			</td>
 		</tr>
 
-		<c:if test='<%= tabs2.startsWith("article-approval-") %>'>
+		<c:if test='<%= tabs2.startsWith("web-content-approval-") %>'>
 			<tr>
 				<td>
 					<b>[$ARTICLE_URL$]</b>
 				</td>
 				<td>
-					The article URL
+					<liferay-ui:message key="the-web-content-url" />
 				</td>
 			</tr>
 		</c:if>
@@ -240,7 +240,7 @@ String emailArticleReviewBody = ParamUtil.getString(request, "emailArticleReview
 				<b>[$ARTICLE_VERSION$]</b>
 			</td>
 			<td>
-				The article version
+				<liferay-ui:message key="the-web-content-version" />
 			</td>
 		</tr>
 		<tr>
@@ -280,7 +280,7 @@ String emailArticleReviewBody = ParamUtil.getString(request, "emailArticleReview
 				<b>[$TO_ADDRESS$]</b>
 			</td>
 			<td>
-				The address of the email recipient
+				<liferay-ui:message key="the-address-of-the-email-recipient" />
 			</td>
 		</tr>
 		<tr>
@@ -288,7 +288,7 @@ String emailArticleReviewBody = ParamUtil.getString(request, "emailArticleReview
 				<b>[$TO_NAME$]</b>
 			</td>
 			<td>
-				The name of the email recipient
+				<liferay-ui:message key="the-name-of-the-email-recipient" />
 			</td>
 		</tr>
 		</table>

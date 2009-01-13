@@ -45,7 +45,7 @@ portletURL.setParameter("typeSelection", JournalArticle.class.getName());
 <liferay-ui:search-toggle
 	id="toggle_id_journal_article_search"
 	displayTerms="<%= displayTerms %>"
-	buttonLabel="search-articles"
+	buttonLabel="search-web-content"
 >
 	<table class="lfr-table">
 	<tr>

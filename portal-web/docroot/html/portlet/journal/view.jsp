@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/journal/init.jsp" %>
 
 <%
-String tabs1 = ParamUtil.getString(request, "tabs1", "articles");
+String tabs1 = ParamUtil.getString(request, "tabs1", "web-content");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -37,7 +37,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 <script type="text/javascript">
 	function <portlet:namespace />deleteArticles() {
-		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-articles") %>')) {
+		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-web-content") %>')) {
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
 			document.<portlet:namespace />fm.<portlet:namespace />groupId.value = "<%= scopeGroupId %>";
 			document.<portlet:namespace />fm.<portlet:namespace />deleteArticleIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
@@ -73,7 +73,7 @@ portletURL.setParameter("tabs1", tabs1);
 	}
 
 	function <portlet:namespace />expireArticles() {
-		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-expire-the-selected-articles") %>')) {
+		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-expire-the-selected-web-content") %>')) {
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.EXPIRE %>";
 			document.<portlet:namespace />fm.<portlet:namespace />groupId.value = "<%= scopeGroupId %>";
 			document.<portlet:namespace />fm.<portlet:namespace />expireArticleIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
@@ -86,12 +86,12 @@ portletURL.setParameter("tabs1", tabs1);
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 
 <liferay-ui:tabs
-	names="articles,structures,templates,feeds,recent"
+	names="web-content,structures,templates,feeds,recent"
 	url="<%= portletURL.toString() %>"
 />
 
 <c:choose>
-	<c:when test='<%= tabs1.equals("articles") %>'>
+	<c:when test='<%= tabs1.equals("web-content") %>'>
 		<input name="<portlet:namespace />groupId" type="hidden" value="" />
 		<input name="<portlet:namespace />deleteArticleIds" type="hidden" value="" />
 		<input name="<portlet:namespace />expireArticleIds" type="hidden" value="" />
@@ -449,7 +449,7 @@ portletURL.setParameter("tabs1", tabs1);
 		</c:if>
 	</c:when>
 	<c:when test='<%= tabs1.equals("recent") %>'>
-		<%= LanguageUtil.format(pageContext, "this-page-displays-the-last-x-articles,-structures,-and-templates-that-you-accessed", String.valueOf(JournalUtil.MAX_STACK_SIZE), false) %>
+		<%= LanguageUtil.format(pageContext, "this-page-displays-the-last-x-web-content,-structures,-and-templates-that-you-accessed", String.valueOf(JournalUtil.MAX_STACK_SIZE), false) %>
 
 		<br /><br />
 
@@ -459,7 +459,7 @@ portletURL.setParameter("tabs1", tabs1);
 				<table border="0" cellpadding="4" cellspacing="0" width="100%">
 				<tr class="portlet-section-header results-header" style="font-size: x-small; font-weight: bold;">
 					<td colspan="2">
-						<%= LanguageUtil.format(pageContext, "last-x-articles", String.valueOf(JournalUtil.MAX_STACK_SIZE), false) %>
+						<%= LanguageUtil.format(pageContext, "last-x-web-content", String.valueOf(JournalUtil.MAX_STACK_SIZE), false) %>
 					</td>
 				</tr>
 

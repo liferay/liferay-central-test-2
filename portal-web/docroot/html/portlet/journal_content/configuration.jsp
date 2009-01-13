@@ -230,7 +230,7 @@ type = ParamUtil.getString(request, "type", type);
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>" />
 
-<liferay-ui:error exception="<%= NoSuchArticleException.class %>" message="the-article-could-not-be-found" />
+<liferay-ui:error exception="<%= NoSuchArticleException.class %>" message="the-web-content-could-not-be-found" />
 
 <%
 DynamicRenderRequest dynamicRenderReq = new DynamicRenderRequest(renderRequest);

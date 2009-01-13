@@ -262,7 +262,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 		</tr>
 		<tr>
 			<td>
-				<liferay-ui:message key="header-article" />
+				<liferay-ui:message key="header-web-content" />
 			</td>
 			<td>
 				<%= headerArticleResouceTitle %>
@@ -274,7 +274,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 		</tr>
 		<tr>
 			<td>
-				<liferay-ui:message key="footer-article" />
+				<liferay-ui:message key="footer-web-content" />
 			</td>
 			<td>
 				<%= footerArticleResouceTitle %>
