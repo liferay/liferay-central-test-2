@@ -52,6 +52,8 @@ import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.base.DLFileEntryLocalServiceBaseImpl;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
+import com.liferay.portlet.ratings.model.RatingsEntry;
+import com.liferay.portlet.ratings.model.RatingsStats;
 import com.liferay.util.MathUtil;
 
 import java.io.BufferedInputStream;
@@ -878,12 +880,33 @@ public class DLFileEntryLocalServiceImpl
 			dlFileShortcutLocalService.updateFileShortcuts(
 				folderId, name, newFolderId, name);
 
+			long classNameId = PortalUtil.getClassNameId(
+				DLFileEntry.class.getName());
+
 			// File
 
 			dlService.updateFile(
 				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 				folder.getGroupId(), folderId, newFolderId, name,
 				newFileEntryId);
+
+			//Ratings
+
+			RatingsStats stats = ratingsStatsPersistence.fetchByC_C(
+				classNameId, oldFileEntryId);
+
+			stats.setClassPK(newFileEntryId);
+
+			ratingsStatsPersistence.update(stats, false);
+
+			List<RatingsEntry> entries = ratingsEntryPersistence.findByC_C(
+				classNameId, oldFileEntryId);
+
+			for (RatingsEntry entry : entries) {
+				entry.setClassPK(newFileEntryId);
+
+				ratingsEntryPersistence.update(entry, false);
+			}
 
 			// Resources
 
@@ -904,8 +927,7 @@ public class DLFileEntryLocalServiceImpl
 			// Message boards
 
 			MBDiscussion discussion = mbDiscussionPersistence.fetchByC_C(
-				PortalUtil.getClassNameId(DLFileEntry.class.getName()),
-				oldFileEntryId);
+				classNameId, oldFileEntryId);
 
 			if (discussion != null) {
 				discussion.setClassPK(newFileEntryId);
