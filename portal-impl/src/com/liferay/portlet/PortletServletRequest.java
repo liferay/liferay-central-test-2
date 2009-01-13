@@ -72,8 +72,8 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		_request = request;
 		_portletRequestImpl = portletRequestImpl;
 		_lifecycle = _portletRequestImpl.getLifecycle();
-		_pathInfo = GetterUtil.getString(pathInfo);
-		_queryString = GetterUtil.getString(queryString);
+		_pathInfo = pathInfo;
+		_queryString = queryString;
 		_requestURI = GetterUtil.getString(requestURI);
 		_servletPath = GetterUtil.getString(servletPath);
 		_named = named;
@@ -214,7 +214,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 	}
 
 	public long getDateHeader(String name) {
-		return GetterUtil.getLong(getHeader(name));
+		return GetterUtil.getLong(getHeader(name), -1);
 	}
 
 	public String getHeader(String name) {

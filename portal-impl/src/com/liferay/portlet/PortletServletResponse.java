@@ -299,12 +299,12 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 	public void setStatus(int sc) {
 		if (!_include) {
 			if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
-				_portletResponseImpl.setProperty(
-					"status.", String.valueOf("sc"));
+				_response.setStatus(sc);
 			}
 		}
 	}
 
+	@Deprecated
 	public void setStatus(int sc, String msg) {
 		setStatus(sc);
 	}
