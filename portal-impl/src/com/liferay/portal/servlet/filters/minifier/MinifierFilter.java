@@ -24,6 +24,7 @@ package com.liferay.portal.servlet.filters.minifier;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -45,6 +46,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -277,9 +281,16 @@ public class MinifierFilter extends BasePortalFilter {
 			cacheCommonFileName += _QUESTION_SEPARATOR + queryString;
 		}
 
+		if (BrowserSnifferUtil.isIe(request)) {
+			cacheCommonFileName += _BROWSER_IE_SEPARATOR;
+		}
+		else {
+			cacheCommonFileName += _BROWSER_OTHER_SEPARATOR;
+		}
+
 		File cacheContentTypeFile = new File(
-			cacheCommonFileName + "_E_contentType");
-		File cacheDataFile = new File(cacheCommonFileName + "_E_data");
+			cacheCommonFileName + "_E_CONTENT_TYPE");
+		File cacheDataFile = new File(cacheCommonFileName + "_E_DATA");
 
 		if ((cacheDataFile.exists()) &&
 			(cacheDataFile.lastModified() >= file.lastModified())) {
@@ -298,7 +309,7 @@ public class MinifierFilter extends BasePortalFilter {
 					_log.info("Minifying CSS " + file);
 				}
 
-				minifiedContent = minifyCss(file);
+				minifiedContent = minifyCss(request, file);
 			}
 			else if (realPath.endsWith(_JAVASCRIPT_EXTENSION)) {
 				if (_log.isInfoEnabled()) {
@@ -327,7 +338,7 @@ public class MinifierFilter extends BasePortalFilter {
 					cacheResponse.getData(), StringPool.UTF8);
 
 				if (minifierType.equals("css")) {
-					minifiedContent = minifyCss(minifiedContent);
+					minifiedContent = minifyCss(request, minifiedContent);
 				}
 				else if (minifierType.equals("js")) {
 					minifiedContent = minifyJavaScript(minifiedContent);
@@ -346,15 +357,25 @@ public class MinifierFilter extends BasePortalFilter {
 		return minifiedContent;
 	}
 
-	protected String minifyCss(File file) throws IOException {
+	protected String minifyCss(HttpServletRequest request, File file)
+		throws IOException {
+
 		String content = FileUtil.read(file);
 
 		content = aggregateCss(file.getParent(), content, 0);
 
-		return minifyCss(content);
+		return minifyCss(request, content);
 	}
 
-	protected String minifyCss(String content) throws IOException {
+	protected String minifyCss(HttpServletRequest request, String content)
+		throws IOException {
+
+		if (!BrowserSnifferUtil.isIe(request)) {
+			Matcher matcher = _pattern.matcher(content);
+
+			content = matcher.replaceAll(StringPool.BLANK);
+		}
+
 		CssCompressor cssCompressor = new CssCompressor(
 			new BufferedReader(new StringReader(content)));
 
@@ -403,6 +424,10 @@ public class MinifierFilter extends BasePortalFilter {
 		}
 	}
 
+	private static final String _BROWSER_IE_SEPARATOR = "_B_IE";
+
+	private static final String _BROWSER_OTHER_SEPARATOR = "_B_OTHER";
+
 	private static final String _CSS_IMPORT_BEGIN = "@import url(";
 
 	private static final String _CSS_IMPORT_END = ");";
@@ -419,6 +444,9 @@ public class MinifierFilter extends BasePortalFilter {
 		SystemProperties.get(SystemProperties.TMP_DIR) + "/liferay/minifier";
 
 	private static Log _log = LogFactoryUtil.getLog(MinifierFilter.class);
+
+	private static Pattern _pattern = Pattern.compile(
+		"^(\\.ie|\\.js\\.ie)([^}]*)}", Pattern.MULTILINE);
 
 	private ServletContext _servletContext;
 	private String _servletContextName;
