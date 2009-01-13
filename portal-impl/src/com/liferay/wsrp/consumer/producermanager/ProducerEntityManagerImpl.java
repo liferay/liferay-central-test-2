@@ -48,8 +48,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.wsrp.consumer.admin.WSRPChannelManagerImpl;
 import com.liferay.wsrp.model.WSRPConfiguredProducer;
 import com.liferay.wsrp.model.WSRPPortlet;
-import com.liferay.wsrp.service.WSRPPortletLocalServiceUtil;
 import com.liferay.wsrp.service.WSRPConfiguredProducerLocalServiceUtil;
+import com.liferay.wsrp.service.WSRPPortletLocalServiceUtil;
 
 import com.sun.portal.wsrp.common.LeaseTime;
 import com.sun.portal.wsrp.common.WSRPVersion;
@@ -200,20 +200,20 @@ public class ProducerEntityManagerImpl
 		throws WSRPConsumerException {
 
 		try {
-			List<String> remoteChannels = new ArrayList<String>();
+			List<String> channelNames = new ArrayList<String>();
 
 			List<WSRPPortlet> wsrpPortlets =
-					WSRPPortletLocalServiceUtil.getPortlets(producerEntityId);
+				WSRPPortletLocalServiceUtil.getPortlets(producerEntityId);
 
-			for (WSRPPortlet portlet : wsrpPortlets) {
-				remoteChannels.add(portlet.getChannelName());
+			for (WSRPPortlet wsrpPortlet : wsrpPortlets) {
+				channelNames.add(wsrpPortlet.getChannelName());
 			}
-			
-			if (remoteChannels.size() > 0) {
-				WSRPChannelManagerImpl channelManagerImp =
+
+			if (!channelNames.isEmpty()) {
+				WSRPChannelManagerImpl wsrpChannelManagerImpl =
 					new WSRPChannelManagerImpl();
 
-				channelManagerImp.removeWSRPChannels(remoteChannels);
+				wsrpChannelManagerImpl.removeWSRPChannels(channelNames);
 			}
 
 			WSRPConfiguredProducerLocalServiceUtil.deleteWSRPConfiguredProducer(
