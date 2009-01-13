@@ -45,7 +45,10 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.wsrp.consumer.admin.WSRPChannelManagerImpl;
 import com.liferay.wsrp.model.WSRPConfiguredProducer;
+import com.liferay.wsrp.model.WSRPPortlet;
+import com.liferay.wsrp.service.WSRPPortletLocalServiceUtil;
 import com.liferay.wsrp.service.WSRPConfiguredProducerLocalServiceUtil;
 
 import com.sun.portal.wsrp.common.LeaseTime;
@@ -63,6 +66,7 @@ import com.sun.portal.wsrp.consumer.producermanager.impl.ProducerEntityImpl;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -196,6 +200,22 @@ public class ProducerEntityManagerImpl
 		throws WSRPConsumerException {
 
 		try {
+			List<String> remoteChannels = new ArrayList<String>();
+
+			List<WSRPPortlet> wsrpPortlets =
+					WSRPPortletLocalServiceUtil.getPortlets(producerEntityId);
+
+			for (WSRPPortlet portlet : wsrpPortlets) {
+				remoteChannels.add(portlet.getChannelName());
+			}
+			
+			if (remoteChannels.size() > 0) {
+				WSRPChannelManagerImpl channelManagerImp =
+					new WSRPChannelManagerImpl();
+
+				channelManagerImp.removeWSRPChannels(remoteChannels);
+			}
+
 			WSRPConfiguredProducerLocalServiceUtil.deleteWSRPConfiguredProducer(
 				GetterUtil.getLong(producerEntityId));
 		}
