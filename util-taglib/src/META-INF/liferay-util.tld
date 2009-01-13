@@ -18,6 +18,27 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>get-url</name>
+		<tag-class>com.liferay.taglib.util.GetUrlTag</tag-class>
+		<tei-class>com.liferay.taglib.util.GetUrlTei</tei-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>url</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>expires</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>var</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>html-bottom</name>
 		<tag-class>com.liferay.taglib.util.HtmlBottomTag</tag-class>
 		<body-content>JSP</body-content>
