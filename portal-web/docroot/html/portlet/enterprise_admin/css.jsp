@@ -350,3 +350,9 @@
 .lfr-portlet-toolbar .lfr-toolbar-button.export-button a {
 	background-image: url(<%= themeImagesPath %>/common/export.png);
 }
+
+.imageResizing{
+	clear: both;
+	padding: 15px 0 5px;
+	width: 100px;
+}
