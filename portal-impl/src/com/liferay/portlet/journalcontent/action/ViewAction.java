@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journal.model.JournalArticleDisplay;
@@ -50,7 +49,7 @@ import org.apache.struts.action.ActionMapping;
  * @author Raymond Augé
  *
  */
-public class ViewAction extends PortletAction {
+public class ViewAction extends WebContentAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,

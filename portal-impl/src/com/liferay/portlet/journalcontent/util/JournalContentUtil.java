@@ -195,12 +195,14 @@ public class JournalContentUtil {
 		JournalArticleDisplay articleDisplay =
 			(JournalArticleDisplay)MultiVMPoolUtil.get(_cache, key);
 
-		if (articleDisplay == null) {
+		if ((articleDisplay == null) || (!themeDisplay.isLifecycleRender())) {
 			articleDisplay = _getArticleDisplay(
 				groupId, articleId, templateId, viewMode, languageId, page,
 				xmlRequest, themeDisplay);
 
-			if ((articleDisplay != null) && articleDisplay.isCacheable()) {
+			if ((articleDisplay != null) && (articleDisplay.isCacheable()) &&
+				(themeDisplay.isLifecycleRender())) {
+
 				String groupKey = _encodeGroupKey(
 					groupId, articleId, templateId);
 

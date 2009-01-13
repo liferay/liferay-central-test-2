@@ -25,6 +25,7 @@ package com.liferay.util.portlet;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.xml.Document;
@@ -40,12 +41,14 @@ import java.util.Enumeration;
 import java.util.Map;
 
 import javax.portlet.ActionRequest;
+import javax.portlet.MimeResponse;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.PortletSession;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceURL;
 import javax.portlet.WindowStateException;
 
 /**
@@ -85,15 +88,18 @@ public class PortletRequestUtil {
 		DocUtil.add(reqEl, "scheme", portletRequest.getScheme());
 		DocUtil.add(reqEl, "window-state", portletRequest.getWindowState());
 
-		if (portletRequest instanceof RenderRequest) {
-			DocUtil.add(reqEl, "action", Boolean.FALSE);
+		if (portletRequest instanceof ActionRequest) {
+			DocUtil.add(reqEl, "life-cycle", RenderRequest.ACTION_PHASE);
 		}
-		else if (portletRequest instanceof ActionRequest) {
-			DocUtil.add(reqEl, "action", Boolean.TRUE);
+		else if (portletRequest instanceof RenderRequest) {
+			DocUtil.add(reqEl, "life-cycle", RenderRequest.RENDER_PHASE);
+		}
+		else if (portletRequest instanceof ResourceRequest) {
+			DocUtil.add(reqEl, "life-cycle", RenderRequest.RESOURCE_PHASE);
 		}
 
-		if (portletResponse instanceof RenderResponse) {
-			_renderResponseToXML((RenderResponse)portletResponse, reqEl);
+		if (portletResponse instanceof MimeResponse) {
+			_mimeResponseToXML((MimeResponse)portletResponse, reqEl);
 		}
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
@@ -208,54 +214,70 @@ public class PortletRequestUtil {
 		return xml;
 	}
 
-	private static void _renderResponseToXML(
-		RenderResponse renderResponse, Element reqEl) {
+	private static void _mimeResponseToXML(
+		MimeResponse mimeResponse, Element reqEl) {
 
-		DocUtil.add(reqEl, "portlet-namespace", renderResponse.getNamespace());
+		String namespace = mimeResponse.getNamespace();
 
-		PortletURL url = renderResponse.createRenderURL();
+		DocUtil.add(reqEl, "portlet-namespace", namespace);
 
-		DocUtil.add(reqEl, "render-url", url);
+		PortletURL actionUrl = mimeResponse.createActionURL();
+
+		DocUtil.add(reqEl, "action-url", actionUrl);
+
+		PortletURL renderUrl = mimeResponse.createRenderURL();
+
+		DocUtil.add(reqEl, "render-url", renderUrl);
 
 		try {
-			url.setWindowState(LiferayWindowState.EXCLUSIVE);
+			renderUrl.setWindowState(LiferayWindowState.EXCLUSIVE);
 
-			DocUtil.add(reqEl, "render-url-exclusive", url);
+			DocUtil.add(reqEl, "render-url-exclusive", renderUrl);
 		}
 		catch (WindowStateException wse) {
 		}
 
 		try {
-			url.setWindowState(LiferayWindowState.MAXIMIZED);
+			renderUrl.setWindowState(LiferayWindowState.MAXIMIZED);
 
-			DocUtil.add(reqEl, "render-url-maximized", url);
+			DocUtil.add(reqEl, "render-url-maximized", renderUrl);
 		}
 		catch (WindowStateException wse) {
 		}
 
 		try {
-			url.setWindowState(LiferayWindowState.MINIMIZED);
+			renderUrl.setWindowState(LiferayWindowState.MINIMIZED);
 
-			DocUtil.add(reqEl, "render-url-minimized", url);
+			DocUtil.add(reqEl, "render-url-minimized", renderUrl);
 		}
 		catch (WindowStateException wse) {
 		}
 
 		try {
-			url.setWindowState(LiferayWindowState.NORMAL);
+			renderUrl.setWindowState(LiferayWindowState.NORMAL);
 
-			DocUtil.add(reqEl, "render-url-normal", url);
+			DocUtil.add(reqEl, "render-url-normal", renderUrl);
 		}
 		catch (WindowStateException wse) {
 		}
 
 		try {
-			url.setWindowState(LiferayWindowState.POP_UP);
+			renderUrl.setWindowState(LiferayWindowState.POP_UP);
 
-			DocUtil.add(reqEl, "render-url-pop-up", url);
+			DocUtil.add(reqEl, "render-url-pop-up", renderUrl);
 		}
 		catch (WindowStateException wse) {
 		}
+
+		ResourceURL resourceUrl = mimeResponse.createResourceURL();
+
+		String resourceUrlString = HttpUtil.removeParameter(
+			resourceUrl.toString(), namespace + "struts_action");
+
+		resourceUrlString = HttpUtil.removeParameter(
+			resourceUrlString, namespace + "redirect");
+
+		DocUtil.add(reqEl, "resource-url", resourceUrlString);
 	}
 
 	private static void _themeDisplayToXML(

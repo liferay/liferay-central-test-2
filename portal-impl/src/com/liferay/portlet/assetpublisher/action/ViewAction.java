@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.assetpublisher.action;
 
-import com.liferay.portal.struts.PortletAction;
+import com.liferay.portlet.journalcontent.action.WebContentAction;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
@@ -36,9 +36,10 @@ import org.apache.struts.action.ActionMapping;
  * <a href="ViewAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
-public class ViewAction extends PortletAction {
+public class ViewAction extends WebContentAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
