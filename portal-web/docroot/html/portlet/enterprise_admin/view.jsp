@@ -525,6 +525,10 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 				searchContainer.setHeaderNames(headerNames);
 				searchContainer.setEmptyResultsMessage("there-are-no-live-sessions");
 
+				int total = LiveUsers.getSessionUsersCount(company.getCompanyId());
+
+				searchContainer.setTotal(total);
+
 				List results = new ArrayList();
 
 				Iterator itr = LiveUsers.getSessionUsers(company.getCompanyId()).entrySet().iterator();
