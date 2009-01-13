@@ -61,9 +61,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 
 		String version = getVersion(request);
 
-		Pattern pattern = Pattern.compile("(\\d+[.]\\d+)");
-
-		Matcher matcher = pattern.matcher(version);
+		Matcher matcher = _majorVersionPattern.matcher(version);
 
 		if (matcher.find()) {
 			majorVersion = GetterUtil.getFloat(matcher.group(1));
@@ -77,9 +75,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 
 		String userAgent = getUserAgent(request);
 
-		Pattern pattern = Pattern.compile(".+(?:rv|it|ra|ie)[\\/: ]([\\d.]+)");
-
-		Matcher matcher = pattern.matcher(userAgent);
+		Matcher matcher = _revisionPattern.matcher(userAgent);
 
 		while (matcher.find()) {
 			for (int i = 1; i <= matcher.groupCount(); i++) {
@@ -95,30 +91,25 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 
 		String version = StringPool.BLANK;
 
-		Pattern pattern = Pattern.compile("(?:version)[\\/]([\\d.]+)");
-
-		Matcher matcher = pattern.matcher(userAgent);
+		Matcher matcher = _versionPattern.matcher(userAgent);
 
 		if (matcher.find()) {
 			version = matcher.group(1);
 		}
 		else if (isFirefox(request)) {
-			Pattern firefoxPattern = Pattern.compile(
-				"(?:firefox|minefield)[\\/]([\\d.]+)");
+			Matcher versionFirefoxMatcher = _versionFirefoxPattern.matcher(
+				userAgent);
 
-			Matcher firefoxMatcher = firefoxPattern.matcher(userAgent);
-
-			if (firefoxMatcher.find()) {
-				version = firefoxMatcher.group(1);
+			if (versionFirefoxMatcher.find()) {
+				version = versionFirefoxMatcher.group(1);
 			}
 		}
 		else if (isChrome(request)) {
-			Pattern chromePattern = Pattern.compile("(?:chrome)[\\/]([\\d.]+)");
+			Matcher versionChromeMatcher = _versionChromePattern.matcher(
+				userAgent);
 
-			Matcher chromeMatcher = chromePattern.matcher(userAgent);
-
-			if (chromeMatcher.find()) {
-				version = chromeMatcher.group(1);
+			if (versionChromeMatcher.find()) {
+				version = versionChromeMatcher.group(1);
 			}
 		}
 		else {
@@ -155,10 +146,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 
 		String userAgent = getUserAgent(request);
 
-		Pattern pattern = Pattern.compile(
-			"(firefox|minefield|granparadiso|bonecho|firebird|phoenix|camino)");
-
-		Matcher matcher = pattern.matcher(userAgent);
+		Matcher matcher = _firefoxPattern.matcher(userAgent);
 
 		if (matcher.find()) {
 			return true;
@@ -306,9 +294,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 	public boolean isWebKit(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
-		Pattern pattern = Pattern.compile("(khtml|applewebkit)");
-
-		Matcher matcher = pattern.matcher(userAgent);
+		Matcher matcher = _webKitPattern.matcher(userAgent);
 
 		if (matcher.find()) {
 			return true;
@@ -320,9 +306,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 	public boolean isWindows(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
-		Pattern pattern = Pattern.compile("(windows|win32|16bit)");
-
-		Matcher matcher = pattern.matcher(userAgent);
+		Matcher matcher = _windowsPattern.matcher(userAgent);
 
 		if (matcher.find()) {
 			return true;
@@ -368,5 +352,29 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 
 		return userAgent;
 	}
+
+	private static Pattern _firefoxPattern = Pattern.compile(
+		"(firefox|minefield|granparadiso|bonecho|firebird|phoenix|camino)");
+
+	private static Pattern _majorVersionPattern = Pattern.compile(
+		"(\\d+[.]\\d+)");
+
+	private static Pattern _revisionPattern = Pattern.compile(
+		".+(?:rv|it|ra|ie)[\\/: ]([\\d.]+)");
+
+	private static Pattern _versionChromePattern = Pattern.compile(
+		"(?:chrome)[\\/]([\\d.]+)");
+
+	private static Pattern _versionFirefoxPattern = Pattern.compile(
+		"(?:firefox|minefield)[\\/]([\\d.]+)");
+
+	private static Pattern _versionPattern = Pattern.compile(
+		"(?:version)[\\/]([\\d.]+)");
+
+	private static Pattern _webKitPattern = Pattern.compile(
+		"(khtml|applewebkit)");
+
+	private static Pattern _windowsPattern = Pattern.compile(
+		"(windows|win32|16bit)");
 
 }
