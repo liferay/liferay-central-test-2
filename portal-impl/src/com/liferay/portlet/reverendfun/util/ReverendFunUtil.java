@@ -121,7 +121,7 @@ public class ReverendFunUtil {
 		int pos = Collections.binarySearch(
 			_dates, date, new StringComparator(false, true));
 
-		if (pos > 1) {
+		if (pos >= 1) {
 			return _dates.get(pos - 1);
 		}
 
