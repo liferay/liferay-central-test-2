@@ -38,7 +38,7 @@ public class CA_BlogsRolesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//tr[10]/td/a"));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_128_scope33ADD_ENTRY",
+		selenium.select("_128_scopecom.liferay.portlet.blogsADD_ENTRY",
 			RuntimeVariables.replace("label=Enterprise"));
 		selenium.select("_128_scope33CONFIGURATION",
 			RuntimeVariables.replace("label=Enterprise"));
