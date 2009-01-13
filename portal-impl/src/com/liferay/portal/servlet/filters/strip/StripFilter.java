@@ -25,6 +25,7 @@ package com.liferay.portal.servlet.filters.strip;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -118,7 +119,7 @@ public class StripFilter extends BasePortalFilter {
 				StripFilter.class, request, stripResponse, filterChain);
 
 			String contentType = GetterUtil.getString(
-				stripResponse.getContentType());
+				stripResponse.getContentType()).toLowerCase();
 
 			byte[] oldByteArray = stripResponse.getData();
 
@@ -130,19 +131,19 @@ public class StripFilter extends BasePortalFilter {
 					_log.debug("Stripping content of type " + contentType);
 				}
 
-				if (contentType.toLowerCase().indexOf("text/") != -1) {
-					boolean ignore = false;
-					char prevChar = '\n';
+				if (contentType.indexOf("text/") != -1) {
+					int state = 0;
+					char prevChar = CharPool.LESS_THAN;
 
 					for (int i = 0; i < oldByteArray.length; i++) {
 						byte b = oldByteArray[i];
 						char c = (char)b;
 
-						if (c == '<') {
+						if (c == CharPool.LESS_THAN) {
 
 							// Ignore text inside certain HTML tags.
 
-							if (!ignore) {
+							if (state == 0) {
 
 								// Check for <pre>
 
@@ -152,18 +153,21 @@ public class StripFilter extends BasePortalFilter {
 									char c3 = (char)oldByteArray[i + 3];
 									char c4 = (char)oldByteArray[i + 4];
 
-									if (((c1 == 'p') || (c1 == 'P')) &&
-										((c2 == 'r') || (c2 == 'R')) &&
-										((c3 == 'e') || (c3 == 'E')) &&
-										((c4 == '>'))) {
+									if (((c1 == CharPool.LOWER_CASE_P) ||
+										 (c1 == CharPool.UPPER_CASE_P)) &&
+										((c2 == CharPool.LOWER_CASE_R) ||
+										 (c2 == CharPool.UPPER_CASE_R)) &&
+										((c3 == CharPool.LOWER_CASE_E) ||
+										 (c3 == CharPool.UPPER_CASE_E)) &&
+										((c4 == CharPool.GREATER_THAN))) {
 
-										ignore = true;
+										state = 1;
 									}
 								}
 
 								// Check for <textarea
 
-								if (!ignore &&
+								if ((state == 0) &&
 									((i + 9) < oldByteArray.length)) {
 
 									char c1 = (char)oldByteArray[i + 1];
@@ -176,21 +180,29 @@ public class StripFilter extends BasePortalFilter {
 									char c8 = (char)oldByteArray[i + 8];
 									char c9 = (char)oldByteArray[i + 9];
 
-									if (((c1 == 't') || (c1 == 'T')) &&
-										((c2 == 'e') || (c2 == 'E')) &&
-										((c3 == 'x') || (c3 == 'X')) &&
-										((c4 == 't') || (c4 == 'T')) &&
-										((c5 == 'a') || (c5 == 'A')) &&
-										((c6 == 'r') || (c6 == 'R')) &&
-										((c7 == 'e') || (c7 == 'E')) &&
-										((c8 == 'a') || (c8 == 'A')) &&
-										((c9 == ' '))) {
+									if (((c1 == CharPool.LOWER_CASE_T) ||
+										 (c1 == CharPool.UPPER_CASE_T)) &&
+										((c2 == CharPool.LOWER_CASE_E) ||
+										 (c2 == CharPool.UPPER_CASE_E)) &&
+										((c3 == CharPool.LOWER_CASE_X) ||
+										 (c3 == CharPool.UPPER_CASE_X)) &&
+										((c4 == CharPool.LOWER_CASE_T) ||
+										 (c4 == CharPool.UPPER_CASE_T)) &&
+										((c5 == CharPool.LOWER_CASE_A) ||
+										 (c5 == CharPool.UPPER_CASE_A)) &&
+										((c6 == CharPool.LOWER_CASE_R) ||
+										 (c6 == CharPool.UPPER_CASE_R)) &&
+										((c7 == CharPool.LOWER_CASE_E) ||
+										 (c7 == CharPool.UPPER_CASE_E)) &&
+										((c8 == CharPool.LOWER_CASE_A) ||
+										 (c8 == CharPool.UPPER_CASE_A)) &&
+										((c9 == CharPool.SPACE))) {
 
-										ignore = true;
+										state = 1;
 									}
 								}
 							}
-							else if (ignore) {
+							else if (state == 1) {
 
 								// Check for </pre>
 
@@ -201,19 +213,22 @@ public class StripFilter extends BasePortalFilter {
 									char c4 = (char)oldByteArray[i + 4];
 									char c5 = (char)oldByteArray[i + 5];
 
-									if (((c1 == '/')) &&
-										((c2 == 'p') || (c2 == 'P')) &&
-										((c3 == 'r') || (c3 == 'R')) &&
-										((c4 == 'e') || (c4 == 'E')) &&
-										((c5 == '>'))) {
+									if (((c1 == CharPool.SLASH)) &&
+										((c2 == CharPool.LOWER_CASE_P) ||
+										 (c2 == CharPool.UPPER_CASE_P)) &&
+										((c3 == CharPool.LOWER_CASE_R) ||
+										 (c3 == CharPool.UPPER_CASE_R)) &&
+										((c4 == CharPool.LOWER_CASE_E) ||
+										 (c4 == CharPool.UPPER_CASE_E)) &&
+										((c5 == CharPool.GREATER_THAN))) {
 
-										ignore = false;
+										state = 0;
 									}
 								}
 
 								// Check for </textarea>
 
-								if (ignore &&
+								if ((state == 1) &&
 									((i + 10) < oldByteArray.length)) {
 
 									char c1 = (char)oldByteArray[i + 1];
@@ -227,33 +242,44 @@ public class StripFilter extends BasePortalFilter {
 									char c9 = (char)oldByteArray[i + 9];
 									char c10 = (char)oldByteArray[i + 10];
 
-									if (((c1 == '/')) &&
-										((c2 == 't') || (c2 == 'T')) &&
-										((c3 == 'e') || (c3 == 'E')) &&
-										((c4 == 'x') || (c4 == 'X')) &&
-										((c5 == 't') || (c5 == 'T')) &&
-										((c6 == 'a') || (c6 == 'A')) &&
-										((c7 == 'r') || (c7 == 'R')) &&
-										((c8 == 'e') || (c8 == 'E')) &&
-										((c9 == 'a') || (c9 == 'A')) &&
-										((c10 == '>'))) {
+									if (((c1 == CharPool.SLASH)) &&
+										((c2 == CharPool.LOWER_CASE_T) ||
+										 (c2 == CharPool.UPPER_CASE_T)) &&
+										((c3 == CharPool.LOWER_CASE_E) ||
+										 (c3 == CharPool.UPPER_CASE_E)) &&
+										((c4 == CharPool.LOWER_CASE_X) ||
+										 (c4 == CharPool.UPPER_CASE_X)) &&
+										((c5 == CharPool.LOWER_CASE_T) ||
+										 (c5 == CharPool.UPPER_CASE_T)) &&
+										((c6 == CharPool.LOWER_CASE_A) ||
+										 (c6 == CharPool.UPPER_CASE_A)) &&
+										((c7 == CharPool.LOWER_CASE_R) ||
+										 (c7 == CharPool.UPPER_CASE_R)) &&
+										((c8 == CharPool.LOWER_CASE_E) ||
+										 (c8 == CharPool.UPPER_CASE_E)) &&
+										((c9 == CharPool.LOWER_CASE_A) ||
+										 (c9 == CharPool.UPPER_CASE_A)) &&
+										((c10 == CharPool.GREATER_THAN))) {
 
-										ignore = false;
+										state = 0;
 									}
 								}
 							}
 						}
 
-						if ((!ignore) &&
-							((c == '\n') || (c == '\r') || (c == '\t'))) {
+						if ((state == 0) &&
+							((c == CharPool.NEW_LINE) ||
+							 (c == CharPool.RETURN) ||
+							 (c == CharPool.TAB))) {
 
 							if ((i + 1) == oldByteArray.length) {
 							}
 
-							if ((prevChar == '\n') || (prevChar == '\r')) {
+							if ((prevChar == CharPool.NEW_LINE) ||
+								(prevChar == CharPool.RETURN)) {
 							}
 							else {
-								if (c != '\t') {
+								if (c != CharPool.TAB) {
 									prevChar = c;
 								}
 
