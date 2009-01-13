@@ -38,7 +38,9 @@ import java.io.IOException;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.PortletResponse;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -149,6 +151,19 @@ public class PortletAction extends Action {
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
+
+		String resourceId = resourceRequest.getResourceID();
+
+		if (Validator.isNotNull(resourceId)) {
+			PortletContext portletContext = portletConfig.getPortletContext();
+			PortletRequestDispatcher portletRequestDispatcher =
+				portletContext.getRequestDispatcher(resourceId);
+
+			if (portletRequestDispatcher != null) {
+				portletRequestDispatcher.forward(
+					resourceRequest, resourceResponse);
+			}
+		}
 	}
 
 	protected String getForward(PortletRequest portletRequest) {
