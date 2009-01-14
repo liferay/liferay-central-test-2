@@ -25,7 +25,6 @@ package com.liferay.util.portlet;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.xml.Document;
@@ -89,13 +88,13 @@ public class PortletRequestUtil {
 		DocUtil.add(reqEl, "window-state", portletRequest.getWindowState());
 
 		if (portletRequest instanceof ActionRequest) {
-			DocUtil.add(reqEl, "life-cycle", RenderRequest.ACTION_PHASE);
+			DocUtil.add(reqEl, "lifecycle", RenderRequest.ACTION_PHASE);
 		}
 		else if (portletRequest instanceof RenderRequest) {
-			DocUtil.add(reqEl, "life-cycle", RenderRequest.RENDER_PHASE);
+			DocUtil.add(reqEl, "lifecycle", RenderRequest.RENDER_PHASE);
 		}
 		else if (portletRequest instanceof ResourceRequest) {
-			DocUtil.add(reqEl, "life-cycle", RenderRequest.RESOURCE_PHASE);
+			DocUtil.add(reqEl, "lifecycle", RenderRequest.RESOURCE_PHASE);
 		}
 
 		if (portletResponse instanceof MimeResponse) {
@@ -269,15 +268,15 @@ public class PortletRequestUtil {
 		catch (WindowStateException wse) {
 		}
 
-		ResourceURL resourceUrl = mimeResponse.createResourceURL();
+		ResourceURL resourceURL = mimeResponse.createResourceURL();
 
-		String resourceUrlString = HttpUtil.removeParameter(
-			resourceUrl.toString(), namespace + "struts_action");
+		String resourceURLString = HttpUtil.removeParameter(
+			resourceURL.toString(), namespace + "struts_action");
 
-		resourceUrlString = HttpUtil.removeParameter(
-			resourceUrlString, namespace + "redirect");
+		resourceURLString = HttpUtil.removeParameter(
+			resourceURLString, namespace + "redirect");
 
-		DocUtil.add(reqEl, "resource-url", resourceUrlString);
+		DocUtil.add(reqEl, "resource-url", resourceURLString);
 	}
 
 	private static void _themeDisplayToXML(

@@ -23,7 +23,6 @@
 package com.liferay.portlet.journalcontent.action;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -55,16 +54,15 @@ import org.apache.struts.action.ActionMapping;
  */
 public class WebContentAction extends PortletAction {
 
-	public void processAction(ActionMapping mapping, ActionForm form,
-			PortletConfig portletConfig, ActionRequest actionRequest,
-			ActionResponse actionResponse)
+	public void processAction(
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		PortletPreferences preferences = actionRequest.getPreferences();
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)actionRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 
@@ -73,10 +71,8 @@ public class WebContentAction extends PortletAction {
 				preferences.getValue("group-id", StringPool.BLANK));
 		}
 
-		String articleId = ParamUtil.getString(
-			actionRequest, "articleId");
-		String templateId = ParamUtil.getString(
-			actionRequest, "templateId");
+		String articleId = ParamUtil.getString(actionRequest, "articleId");
+		String templateId = ParamUtil.getString(actionRequest, "templateId");
 
 		if (Validator.isNull(articleId)) {
 			articleId = GetterUtil.getString(
@@ -99,9 +95,9 @@ public class WebContentAction extends PortletAction {
 		}
 	}
 
-	public void serveResource(ActionMapping mapping, ActionForm form,
-			PortletConfig portletConfig, ResourceRequest resourceRequest,
-			ResourceResponse resourceResponse)
+	public void serveResource(
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
 		String contentType = ParamUtil.getString(
@@ -160,8 +156,11 @@ public class WebContentAction extends PortletAction {
 				OutputStream os = resourceResponse.getPortletOutputStream();
 
 				try {
-					os.write(
-						articleDisplay.getContent().getBytes(StringPool.UTF8));
+					String content = articleDisplay.getContent();
+
+					byte[] bytes = content.getBytes(StringPool.UTF8);
+
+					os.write(bytes);
 				}
 				finally {
 					os.close();
