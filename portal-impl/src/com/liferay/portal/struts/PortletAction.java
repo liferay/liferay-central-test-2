@@ -156,6 +156,7 @@ public class PortletAction extends Action {
 
 		if (Validator.isNotNull(resourceId)) {
 			PortletContext portletContext = portletConfig.getPortletContext();
+
 			PortletRequestDispatcher portletRequestDispatcher =
 				portletContext.getRequestDispatcher(resourceId);
 
