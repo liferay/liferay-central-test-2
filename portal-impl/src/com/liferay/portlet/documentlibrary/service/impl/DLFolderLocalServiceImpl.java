@@ -124,16 +124,6 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		dlFolderPersistence.update(folder, false);
 
-		// Parent folder
-
-		if (parentFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
-			DLFolder parentFolder = dlFolderPersistence.findByPrimaryKey(parentFolderId);
-
-			parentFolder.setLastPostDate(now);
-
-			dlFolderPersistence.update(parentFolder, false);
-		}
-
 		// Resources
 
 		if ((addCommunityPermissions != null) &&
@@ -145,6 +135,17 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		}
 		else {
 			addFolderResources(folder, communityPermissions, guestPermissions);
+		}
+
+		// Parent folder
+
+		if (parentFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+			DLFolder parentFolder = dlFolderPersistence.findByPrimaryKey(
+				parentFolderId);
+
+			parentFolder.setLastPostDate(now);
+
+			dlFolderPersistence.update(parentFolder, false);
 		}
 
 		// Layout
