@@ -30,84 +30,112 @@ Liferay.PortletURL = new Class({
 		var instance = this;
 
 		instance.options.copyCurrentRenderParameters = copyCurrentRenderParameters;
+
+		return instance;
 	},
 
 	setDoAsUserId: function(doAsUserId) {
 		var instance = this;
 
 		instance.options.doAsUserId = doAsUserId;
+
+		return instance;
 	},
 
 	setEncrypt: function(encrypt) {
 		var instance = this;
 
 		instance.options.encrypt = encrypt;
+
+		return instance;
 	},
 
 	setEscapeXML: function(escapeXML) {
 		var instance = this;
 
 		instance.options.escapeXML = escapeXML;
+
+		return instance;
 	},
 
 	setLifecycle: function(lifecycle) {
 		var instance = this;
 
 		instance.options.lifecycle = lifecycle;
+
+		return instance;
 	},
 
 	setName: function(name) {
 		var instance = this;
 
 		instance.options.name = name;
+
+		return instance;
 	},
 
 	setParameter: function(key, value) {
 		var instance = this;
 
 		instance.params[key] = value;
+
+		return instance;
 	},
 
 	setPlid: function(plid) {
 		var instance = this;
 
 		instance.options.p_l_id = plid;
+
+		return instance;
 	},
 
 	setPortletConfiguration: function(portletConfiguration) {
 		var instance = this;
 
 		instance.options.portletConfiguration = portletConfiguration;
+
+		return instance;
 	},
 
 	setPortletId: function(portletId) {
 		var instance = this;
 
 		instance.options.portletId = portletId;
+
+		return instance;
 	},
 
 	setPortletMode: function(portletMode) {
 		var instance = this;
 
 		instance.options.portletMode = portletMode;
+
+		return instance;
 	},
 
 	setResourceId: function(resourceId) {
 		var instance = this;
 
 		instance.options.resourceId = resourceId;
+
+		return instance;
 	},
 
 	setSecure: function(secure) {
 		var instance = this;
 
 		instance.options.secure = secure;
+
+		return instance;
 	},
 
 	setWindowState: function(windowState) {
 		var instance = this;
 
 		instance.options.windowState = windowState;
+
+		return instance;
 	},
 
 	toString: function() {
