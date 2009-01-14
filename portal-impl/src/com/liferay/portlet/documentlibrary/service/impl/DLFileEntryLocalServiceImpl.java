@@ -880,9 +880,6 @@ public class DLFileEntryLocalServiceImpl
 			dlFileShortcutLocalService.updateFileShortcuts(
 				folderId, name, newFolderId, name);
 
-			long classNameId = PortalUtil.getClassNameId(
-				DLFileEntry.class.getName());
-
 			// File
 
 			dlService.updateFile(
@@ -890,7 +887,15 @@ public class DLFileEntryLocalServiceImpl
 				folder.getGroupId(), folderId, newFolderId, name,
 				newFileEntryId);
 
-			//Ratings
+			// Tags
+
+			tagsAssetLocalService.deleteAsset(
+				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+
+			// Ratings
+
+			long classNameId = PortalUtil.getClassNameId(
+				DLFileEntry.class.getName());
 
 			RatingsStats stats = ratingsStatsPersistence.fetchByC_C(
 				classNameId, oldFileEntryId);
@@ -908,22 +913,6 @@ public class DLFileEntryLocalServiceImpl
 				ratingsEntryPersistence.update(entry, false);
 			}
 
-			// Resources
-
-			Resource resource = resourceLocalService.getResource(
-				fileEntry.getCompanyId(), DLFileEntry.class.getName(),
-				ResourceConstants.SCOPE_INDIVIDUAL,
-				String.valueOf(fileEntry.getPrimaryKey()));
-
-			resource.setPrimKey(String.valueOf(newFileEntryId));
-
-			resourcePersistence.update(resource, false);
-
-			// Tags
-
-			tagsAssetLocalService.deleteAsset(
-				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
-
 			// Message boards
 
 			MBDiscussion discussion = mbDiscussionPersistence.fetchByC_C(
@@ -934,6 +923,17 @@ public class DLFileEntryLocalServiceImpl
 
 				mbDiscussionPersistence.update(discussion, false);
 			}
+
+			// Resources
+
+			Resource resource = resourceLocalService.getResource(
+				fileEntry.getCompanyId(), DLFileEntry.class.getName(),
+				ResourceConstants.SCOPE_INDIVIDUAL,
+				String.valueOf(fileEntry.getPrimaryKey()));
+
+			resource.setPrimKey(String.valueOf(newFileEntryId));
+
+			resourcePersistence.update(resource, false);
 
 			folderId = newFolderId;
 			folder = newFolder;
