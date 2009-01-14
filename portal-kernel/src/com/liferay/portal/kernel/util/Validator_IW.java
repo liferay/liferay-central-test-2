@@ -41,6 +41,10 @@ public class Validator_IW {
 		return Validator.isAddress(address);
 	}
 
+	public boolean isAscii(char c) {
+		return Validator.isAscii(c);
+	}
+
 	public boolean isChar(char c) {
 		return Validator.isChar(c);
 	}

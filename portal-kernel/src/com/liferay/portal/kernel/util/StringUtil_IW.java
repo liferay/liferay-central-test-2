@@ -101,6 +101,11 @@ public class StringUtil_IW {
 		return StringUtil.highlight(s, keywords, highlight1, highlight2);
 	}
 
+	public java.lang.String insert(java.lang.String s, java.lang.String insert,
+		int offset) {
+		return StringUtil.insert(s, insert, offset);
+	}
+
 	public java.lang.String lowerCase(java.lang.String s) {
 		return StringUtil.lowerCase(s);
 	}

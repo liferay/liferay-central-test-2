@@ -42,9 +42,20 @@ public class DateUtil_IW {
 		return DateUtil.getCurrentDate(pattern, locale);
 	}
 
+	public java.lang.String getCurrentDate(java.lang.String pattern,
+		java.util.Locale locale, java.util.TimeZone timeZone) {
+		return DateUtil.getCurrentDate(pattern, locale, timeZone);
+	}
+
 	public java.lang.String getDate(java.util.Date date,
 		java.lang.String pattern, java.util.Locale locale) {
 		return DateUtil.getDate(date, pattern, locale);
+	}
+
+	public java.lang.String getDate(java.util.Date date,
+		java.lang.String pattern, java.util.Locale locale,
+		java.util.TimeZone timeZone) {
+		return DateUtil.getDate(date, pattern, locale, timeZone);
 	}
 
 	public int getDaysBetween(java.util.Date startDate, java.util.Date endDate,
