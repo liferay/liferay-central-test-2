@@ -45,6 +45,7 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.security.auth.AutoLogin;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.servlet.filters.autologin.AutoLoginFilter;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
@@ -560,11 +561,17 @@ public class HookHotDeployListener
 				(SimpleAction)portletClassLoader.loadClass(
 					eventClass).newInstance());
 
+			long companyId = CompanyThreadLocal.getCompanyId();
+
 			long[] companyIds = PortalInstances.getCompanyIds();
 
-			for (long companyId : companyIds) {
-				simpleAction.run(new String[] {String.valueOf(companyId)});
+			for (long curCompanyId : companyIds) {
+				CompanyThreadLocal.setCompanyId(curCompanyId);
+
+				simpleAction.run(new String[] {String.valueOf(curCompanyId)});
 			}
+
+			CompanyThreadLocal.setCompanyId(companyId);
 
 			return null;
 		}
