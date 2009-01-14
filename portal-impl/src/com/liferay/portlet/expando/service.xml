@@ -9,6 +9,10 @@
 
 		<column name="columnId" type="long" primary="true" />
 
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+
 		<!-- Other fields -->
 
 		<column name="tableId" type="long" />
@@ -44,6 +48,10 @@
 
 		<column name="rowId" type="long" primary="true" />
 
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+
 		<!-- Other fields -->
 
 		<column name="tableId" type="long" />
@@ -69,6 +77,10 @@
 
 		<column name="tableId" type="long" primary="true" />
 
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+
 		<!-- Other fields -->
 
 		<column name="classNameId" type="long" />
@@ -76,10 +88,12 @@
 
 		<!-- Finder methods -->
 
-		<finder name="ClassNameId" return-type="Collection">
+		<finder name="C_C" return-type="Collection">
+			<finder-column name="companyId" />
 			<finder-column name="classNameId" />
 		</finder>
-		<finder name="C_N" return-type="ExpandoTable">
+		<finder name="C_C_N" return-type="ExpandoTable">
+			<finder-column name="companyId" />
 			<finder-column name="classNameId" />
 			<finder-column name="name" />
 		</finder>
@@ -93,6 +107,10 @@
 		<!-- PK fields -->
 
 		<column name="valueId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
 
 		<!-- Other fields -->
 

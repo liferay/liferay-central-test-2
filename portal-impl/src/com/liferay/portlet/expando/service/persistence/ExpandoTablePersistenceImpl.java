@@ -260,13 +260,17 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<ExpandoTable> findByClassNameId(long classNameId)
+	public List<ExpandoTable> findByC_C(long companyId, long classNameId)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = ExpandoTableModelImpl.CACHE_ENABLED;
 		String finderClassName = ExpandoTable.class.getName();
-		String finderMethodName = "findByClassNameId";
-		String[] finderParams = new String[] { Long.class.getName() };
-		Object[] finderArgs = new Object[] { new Long(classNameId) };
+		String finderMethodName = "findByC_C";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(companyId), new Long(classNameId)
+			};
 
 		Object result = null;
 
@@ -286,6 +290,10 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 				query.append(
 					"FROM com.liferay.portlet.expando.model.ExpandoTable WHERE ");
 
+				query.append("companyId = ?");
+
+				query.append(" AND ");
+
 				query.append("classNameId = ?");
 
 				query.append(" ");
@@ -293,6 +301,8 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(query.toString());
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
 
 				qPos.add(classNameId);
 
@@ -316,24 +326,24 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<ExpandoTable> findByClassNameId(long classNameId, int start,
-		int end) throws SystemException {
-		return findByClassNameId(classNameId, start, end, null);
+	public List<ExpandoTable> findByC_C(long companyId, long classNameId,
+		int start, int end) throws SystemException {
+		return findByC_C(companyId, classNameId, start, end, null);
 	}
 
-	public List<ExpandoTable> findByClassNameId(long classNameId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+	public List<ExpandoTable> findByC_C(long companyId, long classNameId,
+		int start, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = ExpandoTableModelImpl.CACHE_ENABLED;
 		String finderClassName = ExpandoTable.class.getName();
-		String finderMethodName = "findByClassNameId";
+		String finderMethodName = "findByC_C";
 		String[] finderParams = new String[] {
-				Long.class.getName(),
+				Long.class.getName(), Long.class.getName(),
 				
 				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(classNameId),
+				new Long(companyId), new Long(classNameId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
@@ -356,6 +366,10 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 				query.append(
 					"FROM com.liferay.portlet.expando.model.ExpandoTable WHERE ");
 
+				query.append("companyId = ?");
+
+				query.append(" AND ");
+
 				query.append("classNameId = ?");
 
 				query.append(" ");
@@ -368,6 +382,8 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(query.toString());
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
 
 				qPos.add(classNameId);
 
@@ -392,15 +408,18 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public ExpandoTable findByClassNameId_First(long classNameId,
+	public ExpandoTable findByC_C_First(long companyId, long classNameId,
 		OrderByComparator obc) throws NoSuchTableException, SystemException {
-		List<ExpandoTable> list = findByClassNameId(classNameId, 0, 1, obc);
+		List<ExpandoTable> list = findByC_C(companyId, classNameId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoTable exists with the key {");
 
+			msg.append("companyId=" + companyId);
+
+			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
@@ -412,11 +431,11 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public ExpandoTable findByClassNameId_Last(long classNameId,
+	public ExpandoTable findByC_C_Last(long companyId, long classNameId,
 		OrderByComparator obc) throws NoSuchTableException, SystemException {
-		int count = countByClassNameId(classNameId);
+		int count = countByC_C(companyId, classNameId);
 
-		List<ExpandoTable> list = findByClassNameId(classNameId, count - 1,
+		List<ExpandoTable> list = findByC_C(companyId, classNameId, count - 1,
 				count, obc);
 
 		if (list.size() == 0) {
@@ -424,6 +443,9 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 
 			msg.append("No ExpandoTable exists with the key {");
 
+			msg.append("companyId=" + companyId);
+
+			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
@@ -435,12 +457,12 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public ExpandoTable[] findByClassNameId_PrevAndNext(long tableId,
+	public ExpandoTable[] findByC_C_PrevAndNext(long tableId, long companyId,
 		long classNameId, OrderByComparator obc)
 		throws NoSuchTableException, SystemException {
 		ExpandoTable expandoTable = findByPrimaryKey(tableId);
 
-		int count = countByClassNameId(classNameId);
+		int count = countByC_C(companyId, classNameId);
 
 		Session session = null;
 
@@ -451,6 +473,10 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 
 			query.append(
 				"FROM com.liferay.portlet.expando.model.ExpandoTable WHERE ");
+
+			query.append("companyId = ?");
+
+			query.append(" AND ");
 
 			query.append("classNameId = ?");
 
@@ -464,6 +490,8 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 			Query q = session.createQuery(query.toString());
 
 			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
 
 			qPos.add(classNameId);
 
@@ -486,15 +514,18 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public ExpandoTable findByC_N(long classNameId, String name)
-		throws NoSuchTableException, SystemException {
-		ExpandoTable expandoTable = fetchByC_N(classNameId, name);
+	public ExpandoTable findByC_C_N(long companyId, long classNameId,
+		String name) throws NoSuchTableException, SystemException {
+		ExpandoTable expandoTable = fetchByC_C_N(companyId, classNameId, name);
 
 		if (expandoTable == null) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoTable exists with the key {");
 
+			msg.append("companyId=" + companyId);
+
+			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
 
 			msg.append(", ");
@@ -512,15 +543,20 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 		return expandoTable;
 	}
 
-	public ExpandoTable fetchByC_N(long classNameId, String name)
-		throws SystemException {
+	public ExpandoTable fetchByC_C_N(long companyId, long classNameId,
+		String name) throws SystemException {
 		boolean finderClassNameCacheEnabled = ExpandoTableModelImpl.CACHE_ENABLED;
 		String finderClassName = ExpandoTable.class.getName();
-		String finderMethodName = "fetchByC_N";
+		String finderMethodName = "fetchByC_C_N";
 		String[] finderParams = new String[] {
-				Long.class.getName(), String.class.getName()
+				Long.class.getName(), Long.class.getName(),
+				String.class.getName()
 			};
-		Object[] finderArgs = new Object[] { new Long(classNameId), name };
+		Object[] finderArgs = new Object[] {
+				new Long(companyId), new Long(classNameId),
+				
+				name
+			};
 
 		Object result = null;
 
@@ -540,6 +576,10 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 				query.append(
 					"FROM com.liferay.portlet.expando.model.ExpandoTable WHERE ");
 
+				query.append("companyId = ?");
+
+				query.append(" AND ");
+
 				query.append("classNameId = ?");
 
 				query.append(" AND ");
@@ -556,6 +596,8 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(query.toString());
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
 
 				qPos.add(classNameId);
 
@@ -713,15 +755,16 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public void removeByClassNameId(long classNameId) throws SystemException {
-		for (ExpandoTable expandoTable : findByClassNameId(classNameId)) {
+	public void removeByC_C(long companyId, long classNameId)
+		throws SystemException {
+		for (ExpandoTable expandoTable : findByC_C(companyId, classNameId)) {
 			remove(expandoTable);
 		}
 	}
 
-	public void removeByC_N(long classNameId, String name)
+	public void removeByC_C_N(long companyId, long classNameId, String name)
 		throws NoSuchTableException, SystemException {
-		ExpandoTable expandoTable = findByC_N(classNameId, name);
+		ExpandoTable expandoTable = findByC_C_N(companyId, classNameId, name);
 
 		remove(expandoTable);
 	}
@@ -732,12 +775,17 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public int countByClassNameId(long classNameId) throws SystemException {
+	public int countByC_C(long companyId, long classNameId)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = ExpandoTableModelImpl.CACHE_ENABLED;
 		String finderClassName = ExpandoTable.class.getName();
-		String finderMethodName = "countByClassNameId";
-		String[] finderParams = new String[] { Long.class.getName() };
-		Object[] finderArgs = new Object[] { new Long(classNameId) };
+		String finderMethodName = "countByC_C";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(companyId), new Long(classNameId)
+			};
 
 		Object result = null;
 
@@ -758,6 +806,10 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 				query.append(
 					"FROM com.liferay.portlet.expando.model.ExpandoTable WHERE ");
 
+				query.append("companyId = ?");
+
+				query.append(" AND ");
+
 				query.append("classNameId = ?");
 
 				query.append(" ");
@@ -765,6 +817,8 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(query.toString());
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
 
 				qPos.add(classNameId);
 
@@ -798,15 +852,20 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public int countByC_N(long classNameId, String name)
+	public int countByC_C_N(long companyId, long classNameId, String name)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = ExpandoTableModelImpl.CACHE_ENABLED;
 		String finderClassName = ExpandoTable.class.getName();
-		String finderMethodName = "countByC_N";
+		String finderMethodName = "countByC_C_N";
 		String[] finderParams = new String[] {
-				Long.class.getName(), String.class.getName()
+				Long.class.getName(), Long.class.getName(),
+				String.class.getName()
 			};
-		Object[] finderArgs = new Object[] { new Long(classNameId), name };
+		Object[] finderArgs = new Object[] {
+				new Long(companyId), new Long(classNameId),
+				
+				name
+			};
 
 		Object result = null;
 
@@ -827,6 +886,10 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 				query.append(
 					"FROM com.liferay.portlet.expando.model.ExpandoTable WHERE ");
 
+				query.append("companyId = ?");
+
+				query.append(" AND ");
+
 				query.append("classNameId = ?");
 
 				query.append(" AND ");
@@ -843,6 +906,8 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(query.toString());
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
 
 				qPos.add(classNameId);
 

@@ -85,47 +85,50 @@ public interface ExpandoTablePersistence extends BasePersistence {
 		long tableId) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.expando.model.ExpandoTable> findByClassNameId(
-		long classNameId) throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.expando.model.ExpandoTable> findByClassNameId(
-		long classNameId, int start, int end)
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoTable> findByC_C(
+		long companyId, long classNameId)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.expando.model.ExpandoTable> findByClassNameId(
-		long classNameId, int start, int end,
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoTable> findByC_C(
+		long companyId, long classNameId, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoTable> findByC_C(
+		long companyId, long classNameId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.expando.model.ExpandoTable findByClassNameId_First(
-		long classNameId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.expando.NoSuchTableException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.expando.model.ExpandoTable findByClassNameId_Last(
-		long classNameId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.expando.NoSuchTableException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.expando.model.ExpandoTable[] findByClassNameId_PrevAndNext(
-		long tableId, long classNameId,
+	public com.liferay.portlet.expando.model.ExpandoTable findByC_C_First(
+		long companyId, long classNameId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.expando.NoSuchTableException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.expando.model.ExpandoTable findByC_N(
-		long classNameId, java.lang.String name)
+	public com.liferay.portlet.expando.model.ExpandoTable findByC_C_Last(
+		long companyId, long classNameId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.expando.NoSuchTableException;
 
-	public com.liferay.portlet.expando.model.ExpandoTable fetchByC_N(
-		long classNameId, java.lang.String name)
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.expando.model.ExpandoTable[] findByC_C_PrevAndNext(
+		long tableId, long companyId, long classNameId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.expando.NoSuchTableException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.expando.model.ExpandoTable findByC_C_N(
+		long companyId, long classNameId, java.lang.String name)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.expando.NoSuchTableException;
+
+	public com.liferay.portlet.expando.model.ExpandoTable fetchByC_C_N(
+		long companyId, long classNameId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -151,22 +154,23 @@ public interface ExpandoTablePersistence extends BasePersistence {
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByClassNameId(long classNameId)
+	public void removeByC_C(long companyId, long classNameId)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByC_N(long classNameId, java.lang.String name)
+	public void removeByC_C_N(long companyId, long classNameId,
+		java.lang.String name)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.expando.NoSuchTableException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int countByClassNameId(long classNameId)
+	public int countByC_C(long companyId, long classNameId)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int countByC_N(long classNameId, java.lang.String name)
-		throws com.liferay.portal.SystemException;
+	public int countByC_C_N(long companyId, long classNameId,
+		java.lang.String name) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countAll() throws com.liferay.portal.SystemException;

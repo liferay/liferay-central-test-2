@@ -67,12 +67,15 @@ public class ExpandoTableModelImpl extends BaseModelImpl {
 			{ "tableId", new Integer(Types.BIGINT) },
 			
 
+			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "classNameId", new Integer(Types.BIGINT) },
 			
 
 			{ "name", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table ExpandoTable (tableId LONG not null primary key,classNameId LONG,name VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table ExpandoTable (tableId LONG not null primary key,companyId LONG,classNameId LONG,name VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table ExpandoTable";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -85,6 +88,7 @@ public class ExpandoTableModelImpl extends BaseModelImpl {
 		ExpandoTable model = new ExpandoTableImpl();
 
 		model.setTableId(soapModel.getTableId());
+		model.setCompanyId(soapModel.getCompanyId());
 		model.setClassNameId(soapModel.getClassNameId());
 		model.setName(soapModel.getName());
 
@@ -129,6 +133,16 @@ public class ExpandoTableModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		if (companyId != _companyId) {
+			_companyId = companyId;
+		}
+	}
+
 	public String getClassName() {
 		if (getClassNameId() <= 0) {
 			return StringPool.BLANK;
@@ -170,6 +184,7 @@ public class ExpandoTableModelImpl extends BaseModelImpl {
 			model.setEscapedModel(true);
 
 			model.setTableId(getTableId());
+			model.setCompanyId(getCompanyId());
 			model.setClassNameId(getClassNameId());
 			model.setName(HtmlUtil.escape(getName()));
 
@@ -185,6 +200,7 @@ public class ExpandoTableModelImpl extends BaseModelImpl {
 		ExpandoTableImpl clone = new ExpandoTableImpl();
 
 		clone.setTableId(getTableId());
+		clone.setCompanyId(getCompanyId());
 		clone.setClassNameId(getClassNameId());
 		clone.setName(getName());
 
@@ -240,6 +256,7 @@ public class ExpandoTableModelImpl extends BaseModelImpl {
 	}
 
 	private long _tableId;
+	private long _companyId;
 	private long _classNameId;
 	private String _name;
 }

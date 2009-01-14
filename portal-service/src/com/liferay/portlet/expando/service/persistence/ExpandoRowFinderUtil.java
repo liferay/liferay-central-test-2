@@ -29,21 +29,23 @@ package com.liferay.portlet.expando.service.persistence;
  *
  */
 public class ExpandoRowFinderUtil {
-	public static int countByTC_TN(long classNameId, java.lang.String tableName)
-		throws com.liferay.portal.SystemException {
-		return getFinder().countByTC_TN(classNameId, tableName);
+	public static int countByTC_TC_TN(long companyId, long classNameId,
+		java.lang.String tableName) throws com.liferay.portal.SystemException {
+		return getFinder().countByTC_TC_TN(companyId, classNameId, tableName);
 	}
 
-	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> findByTC_TN(
-		long classNameId, java.lang.String tableName, int start, int end)
-		throws com.liferay.portal.SystemException {
-		return getFinder().findByTC_TN(classNameId, tableName, start, end);
+	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> findByTC_TC_TN(
+		long companyId, long classNameId, java.lang.String tableName,
+		int start, int end) throws com.liferay.portal.SystemException {
+		return getFinder()
+				   .findByTC_TC_TN(companyId, classNameId, tableName, start, end);
 	}
 
-	public static com.liferay.portlet.expando.model.ExpandoRow fetchByTC_TN_C(
-		long classNameId, java.lang.String tableName, long classPK)
-		throws com.liferay.portal.SystemException {
-		return getFinder().fetchByTC_TN_C(classNameId, tableName, classPK);
+	public static com.liferay.portlet.expando.model.ExpandoRow fetchByTC_TC_TN_C(
+		long companyId, long classNameId, java.lang.String tableName,
+		long classPK) throws com.liferay.portal.SystemException {
+		return getFinder()
+				   .fetchByTC_TC_TN_C(companyId, classNameId, tableName, classPK);
 	}
 
 	public static ExpandoRowFinder getFinder() {

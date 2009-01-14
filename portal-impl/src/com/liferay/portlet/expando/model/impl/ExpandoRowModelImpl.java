@@ -64,12 +64,15 @@ public class ExpandoRowModelImpl extends BaseModelImpl {
 			{ "rowId_", new Integer(Types.BIGINT) },
 			
 
+			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "tableId", new Integer(Types.BIGINT) },
 			
 
 			{ "classPK", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table ExpandoRow (rowId_ LONG not null primary key,tableId LONG,classPK LONG)";
+	public static final String TABLE_SQL_CREATE = "create table ExpandoRow (rowId_ LONG not null primary key,companyId LONG,tableId LONG,classPK LONG)";
 	public static final String TABLE_SQL_DROP = "drop table ExpandoRow";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -82,6 +85,7 @@ public class ExpandoRowModelImpl extends BaseModelImpl {
 		ExpandoRow model = new ExpandoRowImpl();
 
 		model.setRowId(soapModel.getRowId());
+		model.setCompanyId(soapModel.getCompanyId());
 		model.setTableId(soapModel.getTableId());
 		model.setClassPK(soapModel.getClassPK());
 
@@ -126,6 +130,16 @@ public class ExpandoRowModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		if (companyId != _companyId) {
+			_companyId = companyId;
+		}
+	}
+
 	public long getTableId() {
 		return _tableId;
 	}
@@ -157,6 +171,7 @@ public class ExpandoRowModelImpl extends BaseModelImpl {
 			model.setEscapedModel(true);
 
 			model.setRowId(getRowId());
+			model.setCompanyId(getCompanyId());
 			model.setTableId(getTableId());
 			model.setClassPK(getClassPK());
 
@@ -172,6 +187,7 @@ public class ExpandoRowModelImpl extends BaseModelImpl {
 		ExpandoRowImpl clone = new ExpandoRowImpl();
 
 		clone.setRowId(getRowId());
+		clone.setCompanyId(getCompanyId());
 		clone.setTableId(getTableId());
 		clone.setClassPK(getClassPK());
 
@@ -227,6 +243,7 @@ public class ExpandoRowModelImpl extends BaseModelImpl {
 	}
 
 	private long _rowId;
+	private long _companyId;
 	private long _tableId;
 	private long _classPK;
 }

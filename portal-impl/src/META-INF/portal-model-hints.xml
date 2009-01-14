@@ -829,6 +829,7 @@
 	</model>
 	<model name="com.liferay.portlet.expando.model.ExpandoColumn">
 		<field name="columnId" type="long" />
+		<field name="companyId" type="long" />
 		<field name="tableId" type="long" />
 		<field name="name" type="String" />
 		<field name="type" type="int" />
@@ -841,16 +842,19 @@
 	</model>
 	<model name="com.liferay.portlet.expando.model.ExpandoRow">
 		<field name="rowId" type="long" />
+		<field name="companyId" type="long" />
 		<field name="tableId" type="long" />
 		<field name="classPK" type="long" />
 	</model>
 	<model name="com.liferay.portlet.expando.model.ExpandoTable">
 		<field name="tableId" type="long" />
+		<field name="companyId" type="long" />
 		<field name="classNameId" type="long" />
 		<field name="name" type="String" />
 	</model>
 	<model name="com.liferay.portlet.expando.model.ExpandoValue">
 		<field name="valueId" type="long" />
+		<field name="companyId" type="long" />
 		<field name="tableId" type="long" />
 		<field name="columnId" type="long" />
 		<field name="rowId" type="long" />

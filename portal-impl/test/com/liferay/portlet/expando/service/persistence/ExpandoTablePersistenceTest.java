@@ -71,6 +71,7 @@ public class ExpandoTablePersistenceTest extends BasePersistenceTestCase {
 
 		ExpandoTable newExpandoTable = _persistence.create(pk);
 
+		newExpandoTable.setCompanyId(nextLong());
 		newExpandoTable.setClassNameId(nextLong());
 		newExpandoTable.setName(randomString());
 
@@ -80,6 +81,8 @@ public class ExpandoTablePersistenceTest extends BasePersistenceTestCase {
 
 		assertEquals(existingExpandoTable.getTableId(),
 			newExpandoTable.getTableId());
+		assertEquals(existingExpandoTable.getCompanyId(),
+			newExpandoTable.getCompanyId());
 		assertEquals(existingExpandoTable.getClassNameId(),
 			newExpandoTable.getClassNameId());
 		assertEquals(existingExpandoTable.getName(), newExpandoTable.getName());
@@ -126,6 +129,7 @@ public class ExpandoTablePersistenceTest extends BasePersistenceTestCase {
 
 		ExpandoTable expandoTable = _persistence.create(pk);
 
+		expandoTable.setCompanyId(nextLong());
 		expandoTable.setClassNameId(nextLong());
 		expandoTable.setName(randomString());
 

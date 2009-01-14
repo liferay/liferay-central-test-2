@@ -65,6 +65,9 @@ public class ExpandoColumnModelImpl extends BaseModelImpl {
 			{ "columnId", new Integer(Types.BIGINT) },
 			
 
+			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "tableId", new Integer(Types.BIGINT) },
 			
 
@@ -79,7 +82,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl {
 
 			{ "typeSettings", new Integer(Types.CLOB) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table ExpandoColumn (columnId LONG not null primary key,tableId LONG,name VARCHAR(75) null,type_ INTEGER,defaultData STRING null,typeSettings TEXT null)";
+	public static final String TABLE_SQL_CREATE = "create table ExpandoColumn (columnId LONG not null primary key,companyId LONG,tableId LONG,name VARCHAR(75) null,type_ INTEGER,defaultData STRING null,typeSettings TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table ExpandoColumn";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -92,6 +95,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl {
 		ExpandoColumn model = new ExpandoColumnImpl();
 
 		model.setColumnId(soapModel.getColumnId());
+		model.setCompanyId(soapModel.getCompanyId());
 		model.setTableId(soapModel.getTableId());
 		model.setName(soapModel.getName());
 		model.setType(soapModel.getType());
@@ -136,6 +140,16 @@ public class ExpandoColumnModelImpl extends BaseModelImpl {
 	public void setColumnId(long columnId) {
 		if (columnId != _columnId) {
 			_columnId = columnId;
+		}
+	}
+
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		if (companyId != _companyId) {
+			_companyId = companyId;
 		}
 	}
 
@@ -208,6 +222,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl {
 			model.setEscapedModel(true);
 
 			model.setColumnId(getColumnId());
+			model.setCompanyId(getCompanyId());
 			model.setTableId(getTableId());
 			model.setName(HtmlUtil.escape(getName()));
 			model.setType(getType());
@@ -226,6 +241,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl {
 		ExpandoColumnImpl clone = new ExpandoColumnImpl();
 
 		clone.setColumnId(getColumnId());
+		clone.setCompanyId(getCompanyId());
 		clone.setTableId(getTableId());
 		clone.setName(getName());
 		clone.setType(getType());
@@ -282,6 +298,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl {
 	}
 
 	private long _columnId;
+	private long _companyId;
 	private long _tableId;
 	private String _name;
 	private int _type;

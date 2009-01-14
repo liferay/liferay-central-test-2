@@ -330,6 +330,7 @@ create table EmailAddress (
 
 create table ExpandoColumn (
 	columnId LONG not null primary key,
+	companyId LONG,
 	tableId LONG,
 	name VARCHAR(75) null,
 	type_ INTEGER,
@@ -339,18 +340,21 @@ create table ExpandoColumn (
 
 create table ExpandoRow (
 	rowId_ LONG not null primary key,
+	companyId LONG,
 	tableId LONG,
 	classPK LONG
 );
 
 create table ExpandoTable (
 	tableId LONG not null primary key,
+	companyId LONG,
 	classNameId LONG,
 	name VARCHAR(75) null
 );
 
 create table ExpandoValue (
 	valueId LONG not null primary key,
+	companyId LONG,
 	tableId LONG,
 	columnId LONG,
 	rowId_ LONG,

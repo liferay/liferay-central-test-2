@@ -24,6 +24,7 @@ package com.liferay.portal.upgrade;
 
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.upgrade.v5_2_0.UpgradeDocumentLibrary;
+import com.liferay.portal.upgrade.v5_2_0.UpgradeExpando;
 import com.liferay.portal.upgrade.v5_2_0.UpgradeJournal;
 import com.liferay.portal.upgrade.v5_2_0.UpgradeOrganization;
 import com.liferay.portal.upgrade.v5_2_0.UpgradePortletId;
@@ -51,6 +52,7 @@ public class UpgradeProcess_5_2_0 extends UpgradeProcess {
 
 		upgrade(UpgradeSchema.class);
 		upgrade(UpgradeDocumentLibrary.class);
+		upgrade(UpgradeExpando.class);
 		upgrade(UpgradeJournal.class);
 		upgrade(UpgradeOrganization.class);
 		upgrade(UpgradePortletId.class);

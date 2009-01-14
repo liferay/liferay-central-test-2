@@ -50,6 +50,7 @@ public class ExpandoValueSoap implements Serializable {
 		ExpandoValueSoap soapModel = new ExpandoValueSoap();
 
 		soapModel.setValueId(model.getValueId());
+		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setTableId(model.getTableId());
 		soapModel.setColumnId(model.getColumnId());
 		soapModel.setRowId(model.getRowId());
@@ -87,6 +88,14 @@ public class ExpandoValueSoap implements Serializable {
 
 	public void setValueId(long valueId) {
 		_valueId = valueId;
+	}
+
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
 	}
 
 	public long getTableId() {
@@ -138,6 +147,7 @@ public class ExpandoValueSoap implements Serializable {
 	}
 
 	private long _valueId;
+	private long _companyId;
 	private long _tableId;
 	private long _columnId;
 	private long _rowId;

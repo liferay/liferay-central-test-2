@@ -45,29 +45,30 @@ import java.util.List;
 public class ExpandoValueFinderImpl
 	extends BasePersistenceImpl implements ExpandoValueFinder {
 
-	public static String COUNT_BY_TC_TN_CN =
-		ExpandoValueFinder.class.getName() + ".countByTC_TN_CN";
+	public static String COUNT_BY_TC_TC_TN_CN =
+		ExpandoValueFinder.class.getName() + ".countByTC_TC_TN_CN";
 
-	public static String COUNT_BY_TC_TN_C =
-		ExpandoValueFinder.class.getName() + ".countByTC_TN_C";
+	public static String COUNT_BY_TC_TC_TN_C =
+		ExpandoValueFinder.class.getName() + ".countByTC_TC_TN_C";
 
-	public static String COUNT_BY_TC_TN_CN_D =
-		ExpandoValueFinder.class.getName() + ".countByTC_TN_CN_D";
+	public static String COUNT_BY_TC_TC_TN_CN_D =
+		ExpandoValueFinder.class.getName() + ".countByTC_TC_TN_CN_D";
 
-	public static String FIND_BY_TC_TN_CN =
-		ExpandoValueFinder.class.getName() + ".findByTC_TN_CN";
+	public static String FIND_BY_TC_TC_TN_CN =
+		ExpandoValueFinder.class.getName() + ".findByTC_TC_TN_CN";
 
-	public static String FIND_BY_TC_TN_C =
-		ExpandoValueFinder.class.getName() + ".findByTC_TN_C";
+	public static String FIND_BY_TC_TC_TN_C =
+		ExpandoValueFinder.class.getName() + ".findByTC_TC_TN_C";
 
-	public static String FIND_BY_TC_TN_CN_C =
-		ExpandoValueFinder.class.getName() + ".findByTC_TN_CN_C";
+	public static String FIND_BY_TC_TC_TN_CN_C =
+		ExpandoValueFinder.class.getName() + ".findByTC_TC_TN_CN_C";
 
-	public static String FIND_BY_TC_TN_CN_D =
-		ExpandoValueFinder.class.getName() + ".findByTC_TN_CN_D";
+	public static String FIND_BY_TC_TC_TN_CN_D =
+		ExpandoValueFinder.class.getName() + ".findByTC_TC_TN_CN_D";
 
-	public int countByTC_TN_CN(
-			long classNameId, String tableName, String columnName)
+	public int countByTC_TC_TN_CN(
+			long companyId, long classNameId, String tableName,
+			String columnName)
 		throws SystemException {
 
 		Session session = null;
@@ -75,7 +76,7 @@ public class ExpandoValueFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_TC_TN_CN);
+			String sql = CustomSQLUtil.get(COUNT_BY_TC_TC_TN_CN);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -83,6 +84,7 @@ public class ExpandoValueFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
+			qPos.add(companyId);
 			qPos.add(classNameId);
 			qPos.add(tableName);
 			qPos.add(columnName);
@@ -107,8 +109,8 @@ public class ExpandoValueFinderImpl
 		}
 	}
 
-	public int countByTC_TN_C(
-			long classNameId, String tableName, long classPK)
+	public int countByTC_TC_TN_C(
+			long companyId, long classNameId, String tableName, long classPK)
 		throws SystemException {
 
 		Session session = null;
@@ -116,7 +118,7 @@ public class ExpandoValueFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_TC_TN_C);
+			String sql = CustomSQLUtil.get(COUNT_BY_TC_TC_TN_C);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -124,6 +126,7 @@ public class ExpandoValueFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
+			qPos.add(companyId);
 			qPos.add(classNameId);
 			qPos.add(tableName);
 			qPos.add(classPK);
@@ -148,8 +151,9 @@ public class ExpandoValueFinderImpl
 		}
 	}
 
-	public int countByTC_TN_CN_D(
-			long classNameId, String tableName, String columnName, String data)
+	public int countByTC_TC_TN_CN_D(
+			long companyId, long classNameId, String tableName,
+			String columnName, String data)
 		throws SystemException {
 
 		Session session = null;
@@ -157,7 +161,7 @@ public class ExpandoValueFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_TC_TN_CN_D);
+			String sql = CustomSQLUtil.get(COUNT_BY_TC_TC_TN_CN_D);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -165,6 +169,7 @@ public class ExpandoValueFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
+			qPos.add(companyId);
 			qPos.add(classNameId);
 			qPos.add(tableName);
 			qPos.add(columnName);
@@ -190,9 +195,9 @@ public class ExpandoValueFinderImpl
 		}
 	}
 
-	public List<ExpandoValue> findByTC_TN_CN(
-			long classNameId, String tableName, String columnName, int start,
-			int end)
+	public List<ExpandoValue> findByTC_TC_TN_CN(
+			long companyId, long classNameId, String tableName,
+			String columnName, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -200,7 +205,7 @@ public class ExpandoValueFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_TC_TN_CN);
+			String sql = CustomSQLUtil.get(FIND_BY_TC_TC_TN_CN);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -208,6 +213,7 @@ public class ExpandoValueFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
+			qPos.add(companyId);
 			qPos.add(classNameId);
 			qPos.add(tableName);
 			qPos.add(columnName);
@@ -223,9 +229,9 @@ public class ExpandoValueFinderImpl
 		}
 	}
 
-	public List<ExpandoValue> findByTC_TN_C(
-			long classNameId, String tableName, long classPK, int start,
-			int end)
+	public List<ExpandoValue> findByTC_TC_TN_C(
+			long companyId, long classNameId, String tableName, long classPK,
+			int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -233,7 +239,7 @@ public class ExpandoValueFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_TC_TN_C);
+			String sql = CustomSQLUtil.get(FIND_BY_TC_TC_TN_C);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -241,6 +247,7 @@ public class ExpandoValueFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
+			qPos.add(companyId);
 			qPos.add(classNameId);
 			qPos.add(tableName);
 			qPos.add(classPK);
@@ -256,8 +263,9 @@ public class ExpandoValueFinderImpl
 		}
 	}
 
-	public ExpandoValue fetchByTC_TN_CN_C(
-			long classNameId, String tableName, String columnName, long classPK)
+	public ExpandoValue fetchByTC_TC_TN_CN_C(
+			long companyId, long classNameId, String tableName,
+			String columnName, long classPK)
 		throws SystemException {
 
 		Session session = null;
@@ -265,7 +273,7 @@ public class ExpandoValueFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_TC_TN_CN_C);
+			String sql = CustomSQLUtil.get(FIND_BY_TC_TC_TN_CN_C);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -273,6 +281,7 @@ public class ExpandoValueFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
+			qPos.add(companyId);
 			qPos.add(classNameId);
 			qPos.add(tableName);
 			qPos.add(columnName);
@@ -288,9 +297,9 @@ public class ExpandoValueFinderImpl
 		}
 	}
 
-	public List<ExpandoValue> findByTC_TN_CN_D(
-			long classNameId, String tableName, String columnName, String data,
-			int start, int end)
+	public List<ExpandoValue> findByTC_TC_TN_CN_D(
+			long companyId, long classNameId, String tableName,
+			String columnName, String data, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -298,7 +307,7 @@ public class ExpandoValueFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_TC_TN_CN_D);
+			String sql = CustomSQLUtil.get(FIND_BY_TC_TC_TN_CN_D);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -306,6 +315,7 @@ public class ExpandoValueFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
+			qPos.add(companyId);
 			qPos.add(classNameId);
 			qPos.add(tableName);
 			qPos.add(columnName);

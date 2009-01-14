@@ -24,6 +24,7 @@ package com.liferay.portlet.expando.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
@@ -63,6 +64,7 @@ public class ExpandoValueLocalServiceImpl
 
 		ExpandoValue value = new ExpandoValueImpl();
 
+		value.setCompanyId(table.getCompanyId());
 		value.setColumnId(column.getColumnId());
 		value.setBoolean(data);
 
@@ -545,8 +547,10 @@ public class ExpandoValueLocalServiceImpl
 			long classNameId, String tableName, String columnName, long classPK)
 		throws PortalException, SystemException {
 
-		ExpandoValue value = expandoValueFinder.fetchByTC_TN_CN_C(
-			classNameId, tableName, columnName, classPK);
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		ExpandoValue value = expandoValueFinder.fetchByTC_TC_TN_CN_C(
+			companyId, classNameId, tableName, columnName, classPK);
 
 		if (value != null) {
 			deleteValue(value.getValueId());
@@ -588,8 +592,10 @@ public class ExpandoValueLocalServiceImpl
 			int end)
 		throws SystemException {
 
-		return expandoValueFinder.findByTC_TN_CN(
-			classNameId, tableName, columnName, start, end);
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return expandoValueFinder.findByTC_TC_TN_CN(
+			companyId, classNameId, tableName, columnName, start, end);
 	}
 
 	public List<ExpandoValue> getColumnValues(
@@ -608,8 +614,10 @@ public class ExpandoValueLocalServiceImpl
 			int start, int end)
 		throws SystemException {
 
-		return expandoValueFinder.findByTC_TN_CN_D(
-			classNameId, tableName, columnName, data, start, end);
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return expandoValueFinder.findByTC_TC_TN_CN_D(
+			companyId, classNameId, tableName, columnName, data, start, end);
 	}
 
 	public int getColumnValuesCount(long columnId) throws SystemException {
@@ -629,8 +637,10 @@ public class ExpandoValueLocalServiceImpl
 			long classNameId, String tableName, String columnName)
 		throws SystemException {
 
-		return expandoValueFinder.countByTC_TN_CN(
-			classNameId, tableName, columnName);
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return expandoValueFinder.countByTC_TC_TN_CN(
+			companyId, classNameId, tableName, columnName);
 	}
 
 	public int getColumnValuesCount(
@@ -646,8 +656,10 @@ public class ExpandoValueLocalServiceImpl
 			long classNameId, String tableName, String columnName, String data)
 		throws SystemException {
 
-		return expandoValueFinder.countByTC_TN_CN_D(
-			classNameId, tableName, columnName, data);
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return expandoValueFinder.countByTC_TC_TN_CN_D(
+			companyId, classNameId, tableName, columnName, data);
 	}
 
 	public boolean getData(
@@ -1053,8 +1065,10 @@ public class ExpandoValueLocalServiceImpl
 			int end)
 		throws SystemException {
 
-		return expandoValueFinder.findByTC_TN_C(
-			classNameId, tableName, classPK, start, end);
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return expandoValueFinder.findByTC_TC_TN_C(
+			companyId, classNameId, tableName, classPK, start, end);
 	}
 
 	public int getRowValuesCount(long rowId) throws SystemException {
@@ -1074,8 +1088,10 @@ public class ExpandoValueLocalServiceImpl
 			long classNameId, String tableName, long classPK)
 		throws SystemException {
 
-		return expandoValueFinder.countByTC_TN_C(
-			classNameId, tableName, classPK);
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return expandoValueFinder.countByTC_TC_TN_C(
+			companyId, classNameId, tableName, classPK);
 	}
 
 	public ExpandoValue getValue(long valueId)
@@ -1103,8 +1119,10 @@ public class ExpandoValueLocalServiceImpl
 			long classNameId, String tableName, String columnName, long classPK)
 		throws SystemException {
 
-		return expandoValueFinder.fetchByTC_TN_CN_C(
-			classNameId, tableName, columnName, classPK);
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return expandoValueFinder.fetchByTC_TC_TN_CN_C(
+			companyId, classNameId, tableName, columnName, classPK);
 	}
 
 }

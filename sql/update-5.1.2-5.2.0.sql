@@ -1,7 +1,14 @@
 alter table Company add homeURL STRING null;
 
+alter table ExpandoColumn add companyId LONG;
 alter table ExpandoColumn add defaultData STRING null;
 alter table ExpandoColumn add typeSettings TEXT null;
+
+alter table ExpandoRow add companyId LONG;
+
+alter table ExpandoTable add companyId LONG;
+
+alter table ExpandoValue add companyId LONG;
 
 alter table JournalArticleImage add elInstanceId VARCHAR(75) null;
 

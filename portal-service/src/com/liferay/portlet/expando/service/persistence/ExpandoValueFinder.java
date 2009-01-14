@@ -29,32 +29,35 @@ package com.liferay.portlet.expando.service.persistence;
  *
  */
 public interface ExpandoValueFinder {
-	public int countByTC_TN_CN(long classNameId, java.lang.String tableName,
-		java.lang.String columnName) throws com.liferay.portal.SystemException;
-
-	public int countByTC_TN_C(long classNameId, java.lang.String tableName,
-		long classPK) throws com.liferay.portal.SystemException;
-
-	public int countByTC_TN_CN_D(long classNameId, java.lang.String tableName,
-		java.lang.String columnName, java.lang.String data)
+	public int countByTC_TC_TN_CN(long companyId, long classNameId,
+		java.lang.String tableName, java.lang.String columnName)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByTC_TN_CN(
-		long classNameId, java.lang.String tableName,
+	public int countByTC_TC_TN_C(long companyId, long classNameId,
+		java.lang.String tableName, long classPK)
+		throws com.liferay.portal.SystemException;
+
+	public int countByTC_TC_TN_CN_D(long companyId, long classNameId,
+		java.lang.String tableName, java.lang.String columnName,
+		java.lang.String data) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByTC_TC_TN_CN(
+		long companyId, long classNameId, java.lang.String tableName,
 		java.lang.String columnName, int start, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByTC_TN_C(
-		long classNameId, java.lang.String tableName, long classPK, int start,
-		int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByTC_TC_TN_C(
+		long companyId, long classNameId, java.lang.String tableName,
+		long classPK, int start, int end)
+		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.expando.model.ExpandoValue fetchByTC_TN_CN_C(
-		long classNameId, java.lang.String tableName,
+	public com.liferay.portlet.expando.model.ExpandoValue fetchByTC_TC_TN_CN_C(
+		long companyId, long classNameId, java.lang.String tableName,
 		java.lang.String columnName, long classPK)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByTC_TN_CN_D(
-		long classNameId, java.lang.String tableName,
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByTC_TC_TN_CN_D(
+		long companyId, long classNameId, java.lang.String tableName,
 		java.lang.String columnName, java.lang.String data, int start, int end)
 		throws com.liferay.portal.SystemException;
 }

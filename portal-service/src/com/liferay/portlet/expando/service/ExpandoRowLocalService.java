@@ -95,7 +95,9 @@ public interface ExpandoRowLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.expando.model.ExpandoRow addRow(long tableId,
-		long classPK) throws com.liferay.portal.SystemException;
+		long classPK)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteRow(long rowId)
 		throws com.liferay.portal.PortalException,

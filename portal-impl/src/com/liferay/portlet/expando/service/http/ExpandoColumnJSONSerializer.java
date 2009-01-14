@@ -54,6 +54,7 @@ public class ExpandoColumnJSONSerializer {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
 		jsonObj.put("columnId", model.getColumnId());
+		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("tableId", model.getTableId());
 		jsonObj.put("name", model.getName());
 		jsonObj.put("type", model.getType());

@@ -71,6 +71,7 @@ public class ExpandoValuePersistenceTest extends BasePersistenceTestCase {
 
 		ExpandoValue newExpandoValue = _persistence.create(pk);
 
+		newExpandoValue.setCompanyId(nextLong());
 		newExpandoValue.setTableId(nextLong());
 		newExpandoValue.setColumnId(nextLong());
 		newExpandoValue.setRowId(nextLong());
@@ -84,6 +85,8 @@ public class ExpandoValuePersistenceTest extends BasePersistenceTestCase {
 
 		assertEquals(existingExpandoValue.getValueId(),
 			newExpandoValue.getValueId());
+		assertEquals(existingExpandoValue.getCompanyId(),
+			newExpandoValue.getCompanyId());
 		assertEquals(existingExpandoValue.getTableId(),
 			newExpandoValue.getTableId());
 		assertEquals(existingExpandoValue.getColumnId(),
@@ -137,6 +140,7 @@ public class ExpandoValuePersistenceTest extends BasePersistenceTestCase {
 
 		ExpandoValue expandoValue = _persistence.create(pk);
 
+		expandoValue.setCompanyId(nextLong());
 		expandoValue.setTableId(nextLong());
 		expandoValue.setColumnId(nextLong());
 		expandoValue.setRowId(nextLong());

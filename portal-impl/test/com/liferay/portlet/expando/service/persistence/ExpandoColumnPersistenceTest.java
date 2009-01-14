@@ -71,6 +71,7 @@ public class ExpandoColumnPersistenceTest extends BasePersistenceTestCase {
 
 		ExpandoColumn newExpandoColumn = _persistence.create(pk);
 
+		newExpandoColumn.setCompanyId(nextLong());
 		newExpandoColumn.setTableId(nextLong());
 		newExpandoColumn.setName(randomString());
 		newExpandoColumn.setType(nextInt());
@@ -83,6 +84,8 @@ public class ExpandoColumnPersistenceTest extends BasePersistenceTestCase {
 
 		assertEquals(existingExpandoColumn.getColumnId(),
 			newExpandoColumn.getColumnId());
+		assertEquals(existingExpandoColumn.getCompanyId(),
+			newExpandoColumn.getCompanyId());
 		assertEquals(existingExpandoColumn.getTableId(),
 			newExpandoColumn.getTableId());
 		assertEquals(existingExpandoColumn.getName(), newExpandoColumn.getName());
@@ -134,6 +137,7 @@ public class ExpandoColumnPersistenceTest extends BasePersistenceTestCase {
 
 		ExpandoColumn expandoColumn = _persistence.create(pk);
 
+		expandoColumn.setCompanyId(nextLong());
 		expandoColumn.setTableId(nextLong());
 		expandoColumn.setName(randomString());
 		expandoColumn.setType(nextInt());

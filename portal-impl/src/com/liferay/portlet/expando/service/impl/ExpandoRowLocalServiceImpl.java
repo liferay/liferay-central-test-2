@@ -24,6 +24,7 @@ package com.liferay.portlet.expando.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoRow;
 import com.liferay.portlet.expando.model.ExpandoTable;
@@ -41,12 +42,15 @@ import java.util.List;
 public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 
 	public ExpandoRow addRow(long tableId, long classPK)
-		throws SystemException {
+		throws PortalException, SystemException {
+
+		ExpandoTable table = expandoTablePersistence.findByPrimaryKey(tableId);
 
 		long rowId = counterLocalService.increment();
 
 		ExpandoRow row = expandoRowPersistence.create(rowId);
 
+		row.setCompanyId(table.getCompanyId());
 		row.setTableId(tableId);
 		row.setClassPK(classPK);
 
@@ -105,8 +109,11 @@ public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 			long classNameId, int start, int end)
 		throws SystemException {
 
-		return expandoRowFinder.findByTC_TN(
-			classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME, start, end);
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return expandoRowFinder.findByTC_TC_TN(
+			companyId, classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME,
+			start, end);
 	}
 
 	public int getDefaultTableRowsCount(String className)
@@ -120,8 +127,10 @@ public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 	public int getDefaultTableRowsCount(long classNameId)
 		throws SystemException {
 
-		return expandoRowFinder.countByTC_TN(
-			classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME);
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return expandoRowFinder.countByTC_TC_TN(
+			companyId, classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME);
 	}
 
 	public ExpandoRow getRow(long rowId)
@@ -147,7 +156,10 @@ public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 	public ExpandoRow getRow(long classNameId, String tableName, long classPK)
 		throws SystemException {
 
-		return expandoRowFinder.fetchByTC_TN_C(classNameId, tableName, classPK);
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return expandoRowFinder.fetchByTC_TC_TN_C(
+			companyId, classNameId, tableName, classPK);
 	}
 
 	public List<ExpandoRow> getRows(long tableId, int start, int end)
@@ -169,8 +181,10 @@ public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 			long classNameId, String tableName, int start, int end)
 		throws SystemException {
 
-		return expandoRowFinder.findByTC_TN(
-			classNameId, tableName, start, end);
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return expandoRowFinder.findByTC_TC_TN(
+			companyId, classNameId, tableName, start, end);
 	}
 
 	public int getRowsCount(long tableId) throws SystemException {
@@ -188,7 +202,10 @@ public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 	public int getRowsCount(long classNameId, String tableName)
 		throws SystemException {
 
-		return expandoRowFinder.countByTC_TN(classNameId, tableName);
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return expandoRowFinder.countByTC_TC_TN(
+			companyId, classNameId, tableName);
 	}
 
 }

@@ -53,6 +53,10 @@ public interface ExpandoValueModel extends BaseModel {
 
 	public void setValueId(long valueId);
 
+	public long getCompanyId();
+
+	public void setCompanyId(long companyId);
+
 	public long getTableId();
 
 	public void setTableId(long tableId);

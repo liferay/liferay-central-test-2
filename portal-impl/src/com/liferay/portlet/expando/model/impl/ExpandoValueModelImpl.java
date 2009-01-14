@@ -67,6 +67,9 @@ public class ExpandoValueModelImpl extends BaseModelImpl {
 			{ "valueId", new Integer(Types.BIGINT) },
 			
 
+			{ "companyId", new Integer(Types.BIGINT) },
+			
+
 			{ "tableId", new Integer(Types.BIGINT) },
 			
 
@@ -84,7 +87,7 @@ public class ExpandoValueModelImpl extends BaseModelImpl {
 
 			{ "data_", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table ExpandoValue (valueId LONG not null primary key,tableId LONG,columnId LONG,rowId_ LONG,classNameId LONG,classPK LONG,data_ STRING null)";
+	public static final String TABLE_SQL_CREATE = "create table ExpandoValue (valueId LONG not null primary key,companyId LONG,tableId LONG,columnId LONG,rowId_ LONG,classNameId LONG,classPK LONG,data_ STRING null)";
 	public static final String TABLE_SQL_DROP = "drop table ExpandoValue";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -97,6 +100,7 @@ public class ExpandoValueModelImpl extends BaseModelImpl {
 		ExpandoValue model = new ExpandoValueImpl();
 
 		model.setValueId(soapModel.getValueId());
+		model.setCompanyId(soapModel.getCompanyId());
 		model.setTableId(soapModel.getTableId());
 		model.setColumnId(soapModel.getColumnId());
 		model.setRowId(soapModel.getRowId());
@@ -142,6 +146,16 @@ public class ExpandoValueModelImpl extends BaseModelImpl {
 	public void setValueId(long valueId) {
 		if (valueId != _valueId) {
 			_valueId = valueId;
+		}
+	}
+
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		if (companyId != _companyId) {
+			_companyId = companyId;
 		}
 	}
 
@@ -226,6 +240,7 @@ public class ExpandoValueModelImpl extends BaseModelImpl {
 			model.setEscapedModel(true);
 
 			model.setValueId(getValueId());
+			model.setCompanyId(getCompanyId());
 			model.setTableId(getTableId());
 			model.setColumnId(getColumnId());
 			model.setRowId(getRowId());
@@ -245,6 +260,7 @@ public class ExpandoValueModelImpl extends BaseModelImpl {
 		ExpandoValueImpl clone = new ExpandoValueImpl();
 
 		clone.setValueId(getValueId());
+		clone.setCompanyId(getCompanyId());
 		clone.setTableId(getTableId());
 		clone.setColumnId(getColumnId());
 		clone.setRowId(getRowId());
@@ -338,6 +354,7 @@ public class ExpandoValueModelImpl extends BaseModelImpl {
 	}
 
 	private long _valueId;
+	private long _companyId;
 	private long _tableId;
 	private long _columnId;
 	private long _rowId;

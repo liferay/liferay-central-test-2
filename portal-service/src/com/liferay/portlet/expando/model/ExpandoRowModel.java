@@ -53,6 +53,10 @@ public interface ExpandoRowModel extends BaseModel {
 
 	public void setRowId(long rowId);
 
+	public long getCompanyId();
+
+	public void setCompanyId(long companyId);
+
 	public long getTableId();
 
 	public void setTableId(long tableId);

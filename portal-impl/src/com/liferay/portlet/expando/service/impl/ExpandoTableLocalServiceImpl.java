@@ -25,6 +25,7 @@ package com.liferay.portlet.expando.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.DuplicateTableNameException;
 import com.liferay.portlet.expando.TableNameException;
@@ -68,7 +69,9 @@ public class ExpandoTableLocalServiceImpl
 	public ExpandoTable addTable(long classNameId, String name)
 		throws PortalException, SystemException {
 
-		validate(0, classNameId, name);
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		validate(companyId, 0, classNameId, name);
 
 		long tableId = counterLocalService.increment();
 
@@ -109,8 +112,10 @@ public class ExpandoTableLocalServiceImpl
 	public void deleteTable(long classNameId, String name)
 		throws PortalException, SystemException {
 
-		ExpandoTable table = expandoTablePersistence.findByC_N(
-			classNameId, name);
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		ExpandoTable table = expandoTablePersistence.findByC_C_N(
+			companyId, classNameId, name);
 
 		deleteTable(table.getTableId());
 	}
@@ -126,8 +131,10 @@ public class ExpandoTableLocalServiceImpl
 	public void deleteTables(long classNameId)
 		throws PortalException, SystemException {
 
-		List<ExpandoTable> tables = expandoTablePersistence.findByClassNameId(
-			classNameId);
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		List<ExpandoTable> tables = expandoTablePersistence.findByC_C(
+			companyId, classNameId);
 
 		for (ExpandoTable table : tables) {
 			deleteTable(table.getTableId());
@@ -165,7 +172,10 @@ public class ExpandoTableLocalServiceImpl
 	public ExpandoTable getTable(long classNameId, String name)
 		throws PortalException, SystemException {
 
-		return expandoTablePersistence.findByC_N(classNameId, name);
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return expandoTablePersistence.findByC_C_N(
+			companyId, classNameId, name);
 	}
 
 	public List<ExpandoTable> getTables(String className)
@@ -179,7 +189,9 @@ public class ExpandoTableLocalServiceImpl
 	public List<ExpandoTable> getTables(long classNameId)
 		throws SystemException {
 
-		return expandoTablePersistence.findByClassNameId(classNameId);
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return expandoTablePersistence.findByC_C(companyId, classNameId);
 	}
 
 	public ExpandoTable updateTable(long tableId, String name)
@@ -192,22 +204,23 @@ public class ExpandoTableLocalServiceImpl
 				"Cannot rename " + ExpandoTableConstants.DEFAULT_TABLE_NAME);
 		}
 
-		validate(tableId, table.getClassNameId(), name);
+		validate(table.getCompanyId(), tableId, table.getClassNameId(), name);
 
 		table.setName(name);
 
 		return expandoTablePersistence.update(table, false);
 	}
 
-	protected void validate(long tableId, long classNameId, String name)
+	protected void validate(
+			long companyId, long tableId, long classNameId, String name)
 		throws PortalException, SystemException {
 
 		if (Validator.isNull(name)) {
 			throw new TableNameException();
 		}
 
-		ExpandoTable table = expandoTablePersistence.fetchByC_N(
-			classNameId, name);
+		ExpandoTable table = expandoTablePersistence.fetchByC_C_N(
+			companyId, classNameId, name);
 
 		if ((table != null) && (table.getTableId() != tableId)) {
 			throw new DuplicateTableNameException();

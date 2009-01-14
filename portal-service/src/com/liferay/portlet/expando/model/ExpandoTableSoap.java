@@ -50,6 +50,7 @@ public class ExpandoTableSoap implements Serializable {
 		ExpandoTableSoap soapModel = new ExpandoTableSoap();
 
 		soapModel.setTableId(model.getTableId());
+		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setClassNameId(model.getClassNameId());
 		soapModel.setName(model.getName());
 
@@ -85,6 +86,14 @@ public class ExpandoTableSoap implements Serializable {
 		_tableId = tableId;
 	}
 
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
+
 	public long getClassNameId() {
 		return _classNameId;
 	}
@@ -102,6 +111,7 @@ public class ExpandoTableSoap implements Serializable {
 	}
 
 	private long _tableId;
+	private long _companyId;
 	private long _classNameId;
 	private String _name;
 }

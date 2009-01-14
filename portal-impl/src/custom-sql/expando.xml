@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <custom-sql>
-	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoColumnFinder.countByTC_TN">
+	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoColumnFinder.countByTC_TC_TN">
 		<![CDATA[
 			SELECT
 				COUNT(*) AS COUNT_VALUE
@@ -11,11 +11,12 @@
 				ExpandoTable ON
 					(ExpandoTable.tableId = ExpandoColumn.tableId)
 			WHERE
+				(ExpandoTable.companyId = ?) AND
 				(ExpandoTable.classNameId = ?) AND
 				(ExpandoTable.name = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoColumnFinder.findByTC_TN">
+	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoColumnFinder.findByTC_TC_TN">
 		<![CDATA[
 			SELECT
 				{ExpandoColumn.*}
@@ -25,13 +26,14 @@
 				ExpandoTable ON
 					(ExpandoTable.tableId = ExpandoColumn.tableId)
 			WHERE
+				(ExpandoTable.companyId = ?) AND
 				(ExpandoTable.classNameId = ?) AND
 				(ExpandoTable.name = ?)
 			ORDER BY
 				ExpandoColumn.name ASC
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoColumnFinder.findByTC_TN_CN">
+	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoColumnFinder.findByTC_TC_TN_CN">
 		<![CDATA[
 			SELECT
 				{ExpandoColumn.*}
@@ -41,12 +43,13 @@
 				ExpandoTable ON
 					(ExpandoTable.tableId = ExpandoColumn.tableId)
 			WHERE
+				(ExpandoTable.companyId = ?) AND
 				(ExpandoTable.classNameId = ?) AND
 				(ExpandoTable.name = ?) AND
 				(ExpandoColumn.name = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoRowFinder.countByTC_TN">
+	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoRowFinder.countByTC_TC_TN">
 		<![CDATA[
 			SELECT
 				COUNT(*) AS COUNT_VALUE
@@ -56,11 +59,12 @@
 				ExpandoTable ON
 					(ExpandoTable.tableId = ExpandoRow.tableId)
 			WHERE
+				(ExpandoTable.companyId = ?) AND
 				(ExpandoTable.classNameId = ?) AND
 				(ExpandoTable.name = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoRowFinder.findByTC_TN">
+	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoRowFinder.findByTC_TC_TN">
 		<![CDATA[
 			SELECT
 				{ExpandoRow.*}
@@ -70,11 +74,12 @@
 				ExpandoTable ON
 					(ExpandoTable.tableId = ExpandoRow.tableId)
 			WHERE
+				(ExpandoTable.companyId = ?) AND
 				(ExpandoTable.classNameId = ?) AND
 				(ExpandoTable.name = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoRowFinder.findByTC_TN_C">
+	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoRowFinder.findByTC_TC_TN_C">
 		<![CDATA[
 			SELECT
 				{ExpandoRow.*}
@@ -84,12 +89,13 @@
 				ExpandoTable ON
 					(ExpandoTable.tableId = ExpandoRow.tableId)
 			WHERE
+				(ExpandoTable.companyId = ?) AND
 				(ExpandoTable.classNameId = ?) AND
 				(ExpandoTable.name = ?) AND
 				(ExpandoRow.classPK = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.countByTC_TN_CN">
+	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.countByTC_TC_TN_CN">
 		<![CDATA[
 			SELECT
 				COUNT(*) AS COUNT_VALUE
@@ -102,12 +108,13 @@
 				ExpandoTable ON
 					(ExpandoTable.tableId = ExpandoColumn.tableId)
 			WHERE
+				(ExpandoTable.companyId = ?) AND
 				(ExpandoTable.classNameId = ?) AND
 				(ExpandoTable.name = ?) AND
 				(ExpandoColumn.name = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.countByTC_TN_C">
+	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.countByTC_TC_TN_C">
 		<![CDATA[
 			SELECT
 				COUNT(*) AS COUNT_VALUE
@@ -120,12 +127,13 @@
 				ExpandoTable ON
 					(ExpandoTable.tableId = ExpandoRow.tableId)
 			WHERE
+				(ExpandoTable.companyId = ?) AND
 				(ExpandoTable.classNameId = ?) AND
 				(ExpandoTable.name = ?) AND
 				(ExpandoRow.classPK = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.findByTC_TN_CN_D">
+	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.findByTC_TC_TN_CN_D">
 		<![CDATA[
 			SELECT
 				COUNT(*) AS COUNT_VALUE
@@ -138,13 +146,14 @@
 				ExpandoTable ON
 					(ExpandoTable.tableId = ExpandoColumn.tableId)
 			WHERE
+				(ExpandoTable.companyId = ?) AND
 				(ExpandoTable.classNameId = ?) AND
 				(ExpandoTable.name = ?) AND
 				(ExpandoColumn.name = ?) AND
 				(ExpandoValue.data_ = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.findByTC_TN_CN">
+	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.findByTC_TC_TN_CN">
 		<![CDATA[
 			SELECT
 				{ExpandoValue.*}
@@ -157,12 +166,13 @@
 				ExpandoTable ON
 					(ExpandoTable.tableId = ExpandoColumn.tableId)
 			WHERE
+				(ExpandoTable.companyId = ?) AND
 				(ExpandoTable.classNameId = ?) AND
 				(ExpandoTable.name = ?) AND
 				(ExpandoColumn.name = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.findByTC_TN_C">
+	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.findByTC_TC_TN_C">
 		<![CDATA[
 			SELECT
 				{ExpandoValue.*}
@@ -175,12 +185,13 @@
 				ExpandoTable ON
 					(ExpandoTable.tableId = ExpandoRow.tableId)
 			WHERE
+				(ExpandoTable.companyId = ?) AND
 				(ExpandoTable.classNameId = ?) AND
 				(ExpandoTable.name = ?) AND
 				(ExpandoRow.classPK = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.findByTC_TN_CN_C">
+	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.findByTC_TC_TN_CN_C">
 		<![CDATA[
 			SELECT
 				{ExpandoValue.*}
@@ -196,13 +207,14 @@
 				ExpandoTable ON
 					(ExpandoTable.tableId = ExpandoColumn.tableId)
 			WHERE
+				(ExpandoTable.companyId = ?) AND
 				(ExpandoTable.classNameId = ?) AND
 				(ExpandoTable.name = ?) AND
 				(ExpandoColumn.name = ?) AND
 				(ExpandoRow.classPK = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.findByTC_TN_CN_D">
+	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.findByTC_TC_TN_CN_D">
 		<![CDATA[
 			SELECT
 				{ExpandoValue.*}
@@ -215,6 +227,7 @@
 				ExpandoTable ON
 					(ExpandoTable.tableId = ExpandoColumn.tableId)
 			WHERE
+				(ExpandoTable.companyId = ?) AND
 				(ExpandoTable.classNameId = ?) AND
 				(ExpandoTable.name = ?) AND
 				(ExpandoColumn.name = ?) AND

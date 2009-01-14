@@ -53,6 +53,10 @@ public interface ExpandoColumnModel extends BaseModel {
 
 	public void setColumnId(long columnId);
 
+	public long getCompanyId();
+
+	public void setCompanyId(long companyId);
+
 	public long getTableId();
 
 	public void setTableId(long tableId);

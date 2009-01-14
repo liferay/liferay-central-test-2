@@ -104,7 +104,9 @@ public class ExpandoRowLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoRow addRow(
-		long tableId, long classPK) throws com.liferay.portal.SystemException {
+		long tableId, long classPK)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		return getService().addRow(tableId, classPK);
 	}
 

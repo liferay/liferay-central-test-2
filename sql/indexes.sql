@@ -98,8 +98,8 @@ create index IX_FEFC8DA7 on ExpandoColumn (tableId, name);
 create index IX_D3F5D7AE on ExpandoRow (tableId);
 create index IX_81EFBFF5 on ExpandoRow (tableId, classPK);
 
-create index IX_F0A86A4F on ExpandoTable (classNameId);
-create index IX_DED782CE on ExpandoTable (classNameId, name);
+create index IX_B5AE8A85 on ExpandoTable (companyId, classNameId);
+create index IX_37562284 on ExpandoTable (companyId, classNameId, name);
 
 create index IX_B29FEF17 on ExpandoValue (classNameId, classPK);
 create index IX_F7DD0987 on ExpandoValue (columnId);

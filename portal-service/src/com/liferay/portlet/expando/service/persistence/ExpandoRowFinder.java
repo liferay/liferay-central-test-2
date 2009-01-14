@@ -29,14 +29,14 @@ package com.liferay.portlet.expando.service.persistence;
  *
  */
 public interface ExpandoRowFinder {
-	public int countByTC_TN(long classNameId, java.lang.String tableName)
-		throws com.liferay.portal.SystemException;
+	public int countByTC_TC_TN(long companyId, long classNameId,
+		java.lang.String tableName) throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.expando.model.ExpandoRow> findByTC_TN(
-		long classNameId, java.lang.String tableName, int start, int end)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoRow> findByTC_TC_TN(
+		long companyId, long classNameId, java.lang.String tableName,
+		int start, int end) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.expando.model.ExpandoRow fetchByTC_TN_C(
-		long classNameId, java.lang.String tableName, long classPK)
-		throws com.liferay.portal.SystemException;
+	public com.liferay.portlet.expando.model.ExpandoRow fetchByTC_TC_TN_C(
+		long companyId, long classNameId, java.lang.String tableName,
+		long classPK) throws com.liferay.portal.SystemException;
 }
