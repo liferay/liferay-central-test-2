@@ -32,20 +32,15 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
+import com.liferay.portal.util.MinifierUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.servlet.filters.CacheResponse;
 import com.liferay.util.servlet.filters.CacheResponseUtil;
 
-import com.yahoo.platform.yui.compressor.CssCompressor;
-import com.yahoo.platform.yui.compressor.JavaScriptCompressor;
-
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.StringReader;
-import java.io.StringWriter;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -211,7 +206,7 @@ public class MinifierFilter extends BasePortalFilter {
 				bundleDirRealPath + StringPool.SLASH + fileName);
 
 			sb.append(content);
-			sb.append("\n");
+			sb.append(StringPool.NEW_LINE);
 		}
 
 		String minifiedContent = minifyJavaScript(sb.toString());
@@ -371,14 +366,7 @@ public class MinifierFilter extends BasePortalFilter {
 			content = matcher.replaceAll(StringPool.BLANK);
 		}
 
-		CssCompressor cssCompressor = new CssCompressor(
-			new BufferedReader(new StringReader(content)));
-
-		StringWriter stringWriter = new StringWriter();
-
-		cssCompressor.compress(stringWriter, -1);
-
-		return stringWriter.toString();
+		return MinifierUtil.minifyCss(content);
 	}
 
 	protected String minifyJavaScript(File file) throws IOException {
@@ -388,15 +376,7 @@ public class MinifierFilter extends BasePortalFilter {
 	}
 
 	protected String minifyJavaScript(String content) throws IOException {
-		JavaScriptCompressor javaScriptCompressor = new JavaScriptCompressor(
-			new BufferedReader(new StringReader(content)),
-			new JavaScriptErrorReporter());
-
-		StringWriter stringWriter = new StringWriter();
-
-		javaScriptCompressor.compress(stringWriter, -1, false, false, false);
-
-		return stringWriter.toString();
+		return MinifierUtil.minifyJavaScript(content);
 	}
 
 	protected void processFilter(
