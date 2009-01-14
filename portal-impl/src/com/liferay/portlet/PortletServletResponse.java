@@ -304,7 +304,6 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		}
 	}
 
-	@Deprecated
 	public void setStatus(int sc, String msg) {
 		setStatus(sc);
 	}
