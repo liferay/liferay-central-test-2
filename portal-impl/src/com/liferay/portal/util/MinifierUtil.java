@@ -61,7 +61,7 @@ public class MinifierUtil {
 
 		StringWriter stringWriter = new StringWriter();
 
-		cssCompressor.compress(stringWriter, -1);
+		cssCompressor.compress(stringWriter, _CSS_LINE_BREAK);
 
 		return stringWriter.toString();
 	}
@@ -73,10 +73,24 @@ public class MinifierUtil {
 
 		StringWriter stringWriter = new StringWriter();
 
-		javaScriptCompressor.compress(stringWriter, -1, false, false, true);
+		javaScriptCompressor.compress(
+			stringWriter, _JS_LINE_BREAK, _JS_MUNGE, _JS_VERBOSE,
+			_JS_PRESERVE_ALL_SEMICOLONS, _JS_DISABLE_OPTIMIZATIONS);
 
 		return stringWriter.toString();
 	}
+
+	private static final int _CSS_LINE_BREAK = -1;
+
+	private static final boolean _JS_DISABLE_OPTIMIZATIONS = false;
+
+	private static final int _JS_LINE_BREAK = -1;
+
+	private static final boolean _JS_MUNGE = true;
+
+	private static final boolean _JS_PRESERVE_ALL_SEMICOLONS = false;
+
+	private static final boolean _JS_VERBOSE = false;
 
 	private static Log _log = LogFactory.getLog(MinifierUtil.class);
 

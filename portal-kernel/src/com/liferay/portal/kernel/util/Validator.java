@@ -71,6 +71,17 @@ public class Validator {
 		return true;
 	}
 
+	public static boolean isAscii(char c) {
+		int i = (int)c;
+
+		if ((i >= 32) && (i <= 126)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	/**
 	 * Returns true if c is a letter between a-z and A-Z.
 	 *
