@@ -39,7 +39,7 @@ public class SearchStructuresTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Web Content Test Page")) {
+				if (selenium.isElementPresent("link=Web Content")) {
 					break;
 				}
 			}
@@ -49,44 +49,10 @@ public class SearchStructuresTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Web Content Test Page"));
+		selenium.click(RuntimeVariables.replace("link=Web Content"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Structures")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("link=Structures"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Advanced \u00bb")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click("link=Advanced \u00bb");
 
 		for (int second = 0;; second++) {
@@ -108,8 +74,7 @@ public class SearchStructuresTest extends BaseTestCase {
 		selenium.typeKeys("_15_searchStructureId",
 			RuntimeVariables.replace("Test"));
 		selenium.type("_15_searchStructureId", RuntimeVariables.replace("Test"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Structures']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Web Content Structure"));
 
@@ -130,8 +95,7 @@ public class SearchStructuresTest extends BaseTestCase {
 		}
 
 		selenium.type("_15_searchStructureId", RuntimeVariables.replace("Test1"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Structures']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("No structures were found."));
 		selenium.type("_15_searchStructureId", RuntimeVariables.replace(""));
@@ -153,8 +117,7 @@ public class SearchStructuresTest extends BaseTestCase {
 		}
 
 		selenium.type("_15_name", RuntimeVariables.replace("Test"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Structures']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Web Content Structure"));
 
@@ -175,8 +138,7 @@ public class SearchStructuresTest extends BaseTestCase {
 		}
 
 		selenium.type("_15_name", RuntimeVariables.replace("Test1"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Structures']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("No structures were found."));
 		selenium.type("_15_name", RuntimeVariables.replace(""));
@@ -199,8 +161,7 @@ public class SearchStructuresTest extends BaseTestCase {
 
 		selenium.type("_15_description",
 			RuntimeVariables.replace("This is a test Web Content Structure!"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Structures']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Web Content Structure"));
 
@@ -222,28 +183,10 @@ public class SearchStructuresTest extends BaseTestCase {
 
 		selenium.type("_15_description",
 			RuntimeVariables.replace("This is a test Web Content Structure!!"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Structures']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("No structures were found."));
 		selenium.type("_15_description", RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=\u00ab Basic")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click("link=\u00ab Basic");
 
 		for (int second = 0;; second++) {

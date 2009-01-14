@@ -39,7 +39,7 @@ public class AddNullTitleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Web Content Test Page")) {
+				if (selenium.isElementPresent("link=Web Content")) {
 					break;
 				}
 			}
@@ -49,9 +49,10 @@ public class AddNullTitleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Web Content Test Page"));
+		selenium.click(RuntimeVariables.replace("link=Web Content"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Article']"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Web Content']"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 
@@ -133,43 +134,10 @@ public class AddNullTitleTest extends BaseTestCase {
 				"//input[@value='Save and Approve']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Please enter a valid name."));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Cancel']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Cancel']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Articles")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Articles"));
+		selenium.click(RuntimeVariables.replace(
+				"//li[@id='_15_tabs1web-contentTabsId']/a"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=Null Test Article"));
 	}

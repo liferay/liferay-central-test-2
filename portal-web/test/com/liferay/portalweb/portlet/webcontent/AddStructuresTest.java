@@ -39,7 +39,7 @@ public class AddStructuresTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Web Content Test Page")) {
+				if (selenium.isElementPresent("link=Web Content")) {
 					break;
 				}
 			}
@@ -49,9 +49,7 @@ public class AddStructuresTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Web Content Test Page"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Web Content Test Page"));
+		selenium.click(RuntimeVariables.replace("link=Web Content"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Structures"));
 		selenium.waitForPageToLoad("30000");

@@ -40,7 +40,7 @@ public class AssertStructureTemplateAssociationTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Web Content Test Page")) {
+				if (selenium.isElementPresent("link=Web Content")) {
 					break;
 				}
 			}
@@ -50,11 +50,13 @@ public class AssertStructureTemplateAssociationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Web Content Test Page"));
+		selenium.click(RuntimeVariables.replace("link=Web Content"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Articles"));
+		selenium.click(RuntimeVariables.replace(
+				"//li[@id='_15_tabs1web-contentTabsId']/a"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Article']"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Web Content']"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 

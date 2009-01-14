@@ -39,7 +39,7 @@ public class DeleteAllTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Web Content Test Page")) {
+				if (selenium.isElementPresent("link=Web Content")) {
 					break;
 				}
 			}
@@ -49,32 +49,16 @@ public class DeleteAllTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Web Content Test Page"));
+		selenium.click(RuntimeVariables.replace("link=Web Content"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Articles")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Articles"));
+		selenium.click(RuntimeVariables.replace(
+				"//li[@id='_15_tabs1web-contentTabsId']/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("_15_allRowIds");
 		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete the selected articles[\\s\\S]$"));
+						   .matches("^Are you sure you want to delete the selected web content[\\s\\S]$"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		selenium.click(RuntimeVariables.replace("link=Structures"));
