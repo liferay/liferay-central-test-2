@@ -65,7 +65,7 @@ public class MinifierUtil {
 			cssCompressor.compress(stringWriter, _CSS_LINE_BREAK);
 		}
 		catch (Exception e) {
-			_log.error("Css Minifier failed for \n" + content);
+			_log.error("CSS Minifier failed for\n" + content);
 
 			stringWriter.append(content);
 		}
@@ -87,7 +87,7 @@ public class MinifierUtil {
 					_JS_PRESERVE_ALL_SEMICOLONS, _JS_DISABLE_OPTIMIZATIONS);
 		}
 		catch (Exception e) {
-			_log.error("JavaScript Minifier failed for \n" + content);
+			_log.error("JavaScript Minifier failed for\n" + content);
 
 			stringWriter.append(content);
 		}
