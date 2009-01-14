@@ -33,6 +33,8 @@ UserTracker userTracker = LiveUsers.getUserTracker(company.getCompanyId(), sessi
 
 List<UserTrackerPath> paths = userTracker.getPaths();
 
+int numHits = userTracker.getHits();
+
 userTracker = userTracker.toEscapedModel();
 %>
 
@@ -111,7 +113,7 @@ userTracker = userTracker.toEscapedModel();
 				<liferay-ui:message key="num-of-hits" />:
 			</td>
 			<td>
-				<%= userTracker.getHits() %>
+				<%= numHits %>
 			</td>
 		</tr>
 		<tr>
