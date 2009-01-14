@@ -77,6 +77,7 @@ public class ExpandoTableLocalServiceImpl
 
 		ExpandoTable table = expandoTablePersistence.create(tableId);
 
+		table.setCompanyId(companyId);
 		table.setClassNameId(classNameId);
 		table.setName(name);
 

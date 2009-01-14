@@ -86,6 +86,7 @@ public class ExpandoValueLocalServiceImpl
 
 		ExpandoValue value = new ExpandoValueImpl();
 
+		value.setCompanyId(table.getCompanyId());
 		value.setColumnId(column.getColumnId());
 		value.setBooleanArray(data);
 
@@ -107,6 +108,7 @@ public class ExpandoValueLocalServiceImpl
 
 		ExpandoValue value = new ExpandoValueImpl();
 
+		value.setCompanyId(table.getCompanyId());
 		value.setColumnId(column.getColumnId());
 		value.setDate(data);
 
@@ -128,6 +130,7 @@ public class ExpandoValueLocalServiceImpl
 
 		ExpandoValue value = new ExpandoValueImpl();
 
+		value.setCompanyId(table.getCompanyId());
 		value.setColumnId(column.getColumnId());
 		value.setDateArray(data);
 
@@ -149,6 +152,7 @@ public class ExpandoValueLocalServiceImpl
 
 		ExpandoValue value = new ExpandoValueImpl();
 
+		value.setCompanyId(table.getCompanyId());
 		value.setColumnId(column.getColumnId());
 		value.setDouble(data);
 
@@ -170,6 +174,7 @@ public class ExpandoValueLocalServiceImpl
 
 		ExpandoValue value = new ExpandoValueImpl();
 
+		value.setCompanyId(table.getCompanyId());
 		value.setColumnId(column.getColumnId());
 		value.setDoubleArray(data);
 
@@ -191,6 +196,7 @@ public class ExpandoValueLocalServiceImpl
 
 		ExpandoValue value = new ExpandoValueImpl();
 
+		value.setCompanyId(table.getCompanyId());
 		value.setColumnId(column.getColumnId());
 		value.setFloat(data);
 
@@ -212,6 +218,7 @@ public class ExpandoValueLocalServiceImpl
 
 		ExpandoValue value = new ExpandoValueImpl();
 
+		value.setCompanyId(table.getCompanyId());
 		value.setColumnId(column.getColumnId());
 		value.setFloatArray(data);
 
@@ -233,6 +240,7 @@ public class ExpandoValueLocalServiceImpl
 
 		ExpandoValue value = new ExpandoValueImpl();
 
+		value.setCompanyId(table.getCompanyId());
 		value.setColumnId(column.getColumnId());
 		value.setInteger(data);
 
@@ -254,6 +262,7 @@ public class ExpandoValueLocalServiceImpl
 
 		ExpandoValue value = new ExpandoValueImpl();
 
+		value.setCompanyId(table.getCompanyId());
 		value.setColumnId(column.getColumnId());
 		value.setIntegerArray(data);
 
@@ -275,6 +284,7 @@ public class ExpandoValueLocalServiceImpl
 
 		ExpandoValue value = new ExpandoValueImpl();
 
+		value.setCompanyId(table.getCompanyId());
 		value.setColumnId(column.getColumnId());
 		value.setLong(data);
 
@@ -296,6 +306,7 @@ public class ExpandoValueLocalServiceImpl
 
 		ExpandoValue value = new ExpandoValueImpl();
 
+		value.setCompanyId(table.getCompanyId());
 		value.setColumnId(column.getColumnId());
 		value.setLongArray(data);
 
@@ -317,6 +328,7 @@ public class ExpandoValueLocalServiceImpl
 
 		ExpandoValue value = new ExpandoValueImpl();
 
+		value.setCompanyId(table.getCompanyId());
 		value.setColumnId(column.getColumnId());
 		value.setShort(data);
 
@@ -338,6 +350,7 @@ public class ExpandoValueLocalServiceImpl
 
 		ExpandoValue value = new ExpandoValueImpl();
 
+		value.setCompanyId(table.getCompanyId());
 		value.setColumnId(column.getColumnId());
 		value.setShortArray(data);
 
@@ -359,6 +372,7 @@ public class ExpandoValueLocalServiceImpl
 
 		ExpandoValue value = new ExpandoValueImpl();
 
+		value.setCompanyId(table.getCompanyId());
 		value.setColumnId(column.getColumnId());
 		value.setString(data);
 
@@ -380,6 +394,7 @@ public class ExpandoValueLocalServiceImpl
 
 		ExpandoValue value = new ExpandoValueImpl();
 
+		value.setCompanyId(table.getCompanyId());
 		value.setColumnId(column.getColumnId());
 		value.setStringArray(data);
 
@@ -475,6 +490,8 @@ public class ExpandoValueLocalServiceImpl
 			String data)
 		throws SystemException {
 
+		long companyId = CompanyThreadLocal.getCompanyId();
+
 		ExpandoRow row = expandoRowPersistence.fetchByT_C(tableId, classPK);
 
 		if (row == null) {
@@ -482,6 +499,7 @@ public class ExpandoValueLocalServiceImpl
 
 			row = expandoRowPersistence.create(rowId);
 
+			row.setCompanyId(companyId);
 			row.setTableId(tableId);
 			row.setClassPK(classPK);
 
@@ -496,6 +514,7 @@ public class ExpandoValueLocalServiceImpl
 
 			value = expandoValuePersistence.create(valueId);
 
+			value.setCompanyId(companyId);
 			value.setTableId(tableId);
 			value.setColumnId(columnId);
 			value.setRowId(row.getRowId());
