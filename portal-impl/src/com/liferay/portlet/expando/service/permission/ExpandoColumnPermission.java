@@ -45,6 +45,7 @@ public class ExpandoColumnPermission {
 		if (!contains(
 				permissionChecker, className, tableName, columnName,
 				actionId)) {
+
 			throw new PrincipalException();
 		}
 	}
