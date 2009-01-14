@@ -56,26 +56,41 @@ public class MinifierUtil {
 	}
 
 	private String _minifyCss(String content) throws IOException {
-		CssCompressor cssCompressor = new CssCompressor(
-			new BufferedReader(new StringReader(content)));
-
 		StringWriter stringWriter = new StringWriter();
 
-		cssCompressor.compress(stringWriter, _CSS_LINE_BREAK);
+		try {
+			CssCompressor cssCompressor = new CssCompressor(
+				new BufferedReader(new StringReader(content)));
+
+			cssCompressor.compress(stringWriter, _CSS_LINE_BREAK);
+		}
+		catch (Exception e) {
+			_log.error("Css Minifier failed for \n" + content);
+
+			stringWriter.append(content);
+		}
 
 		return stringWriter.toString();
 	}
 
 	private String _minifyJavaScript(String content) throws IOException {
-		JavaScriptCompressor javaScriptCompressor = new JavaScriptCompressor(
-			new BufferedReader(new StringReader(content)),
-			new JavaScriptErrorReporter());
-
 		StringWriter stringWriter = new StringWriter();
 
-		javaScriptCompressor.compress(
-			stringWriter, _JS_LINE_BREAK, _JS_MUNGE, _JS_VERBOSE,
-			_JS_PRESERVE_ALL_SEMICOLONS, _JS_DISABLE_OPTIMIZATIONS);
+		try {
+			JavaScriptCompressor javaScriptCompressor =
+				new JavaScriptCompressor(
+					new BufferedReader(new StringReader(content)),
+					new JavaScriptErrorReporter());
+
+			javaScriptCompressor.compress(
+					stringWriter, _JS_LINE_BREAK, _JS_MUNGE, _JS_VERBOSE,
+					_JS_PRESERVE_ALL_SEMICOLONS, _JS_DISABLE_OPTIMIZATIONS);
+		}
+		catch (Exception e) {
+			_log.error("JavaScript Minifier failed for \n" + content);
+
+			stringWriter.append(content);
+		}
 
 		return stringWriter.toString();
 	}
