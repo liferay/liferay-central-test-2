@@ -22,39 +22,58 @@
 
 package com.liferay.portalweb.portal.permissions.messageboards;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="MessageBoardsTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="CA_AddSecondCategoryTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class MessageBoardsTests extends BaseTests {
+public class CA_AddSecondCategoryTest extends BaseTestCase {
+	public void testCA_AddSecondCategory() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-	public MessageBoardsTests() {
-		addTestSuite(CA_LoginTest.class);
-		addTestSuite(CA_AddPageTest.class);
-		addTestSuite(CA_AddPortletTest.class);
-		addTestSuite(CA_AddCategoryTest.class);
-		addTestSuite(CA_AddMessageTest.class);
-		addTestSuite(CA_AssertActionsTest.class);
-		addTestSuite(CA_DeleteMessageTest.class);
-		addTestSuite(CA_DeleteCategoryTest.class);
-		addTestSuite(CA_AddSecondCategoryTest.class);
-		addTestSuite(CA_AddMessageTest.class);
-		addTestSuite(CA_LogoutTest.class);
-		addTestSuite(Member_LoginTest.class);
-		addTestSuite(Member_AssertActionsTest.class);
-		addTestSuite(Member_ViewMessageTest.class);
-		addTestSuite(Member_ReplyMessageTest.class);
-		addTestSuite(Member_PostNewThreadTest.class);
-		addTestSuite(Member_EditThreadTest.class);
-		addTestSuite(Member_DeleteMessageTest.class);
-		addTestSuite(Member_LogoutTest.class);
-		addTestSuite(Guest_ViewTest.class);
-		addTestSuite(Guest_AssertActionsTest.class);
-		addTestSuite(DeletePageTest.class);
+			try {
+				if (selenium.isElementPresent("link=Configuration")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertTrue(selenium.isElementPresent("//input[@value='Add Category']"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Category']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_19_name", RuntimeVariables.replace("Permissions Test 1"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Save']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
-
 }
