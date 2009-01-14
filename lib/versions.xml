@@ -2123,6 +2123,20 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>portal/rhino.jar</file-name>
+		<version>1.6 R7</version>
+		<project-name>Rhino</project-name>
+		<project-url>http://www.mozilla.org/rhino</project-url>
+		<licenses>
+			<license>
+				<license-name>MPL 1.1</license-name>
+			</license>
+		</licenses>
+		<comments>
+			This is a modified version from YUI Compressor.
+		</comments>
+	</library>
+	<library>
 		<file-name>portal/ridl.jar</file-name>
 		<version>2.3.0</version>
 		<project-name>OpenOffice.org Java Uno</project-name>
