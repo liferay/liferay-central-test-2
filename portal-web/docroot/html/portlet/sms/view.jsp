@@ -24,14 +24,15 @@
 
 <%@ include file="/html/portlet/sms/init.jsp" %>
 
-<%
-String to = ParamUtil.getString(request, "to");
-String subject = ParamUtil.getString(request, "subject");
-String message = ParamUtil.getString(request, "message");
-%>
-
 <c:choose>
 	<c:when test="<%= themeDisplay.isSignedIn() %>">
+
+		<%
+		String to = ParamUtil.getString(request, "to");
+		String subject = ParamUtil.getString(request, "subject");
+		String message = ParamUtil.getString(request, "message");
+		%>
+
 		<form action="<portlet:actionURL />" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 		<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.SEND %>" />
 
