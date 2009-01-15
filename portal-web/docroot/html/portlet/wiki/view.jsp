@@ -130,11 +130,7 @@ TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(Wiki
 			viewParentPageURL.setParameter("title", curParentPage.getTitle());
 		%>
 
-			<a href="<%= viewParentPageURL %>"><%= curParentPage.getTitle() %></a>
-
-			<c:if test="<%= (i + 1) < parentPages.size() %>">
-				&raquo;
-			</c:if>
+			<a href="<%= viewParentPageURL %>"><%= curParentPage.getTitle() %></a> &raquo; &nbsp;
 
 		<%
 		}
