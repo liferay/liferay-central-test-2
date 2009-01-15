@@ -65,15 +65,15 @@ public class VelocityPortlet extends GenericPortlet {
 
 		_portletContextName = portletContext.getPortletContextName();
 
-		_actionTemplate = getVelocityTemplateId(
+		_actionTemplateId = getVelocityTemplateId(
 			getInitParameter("action-template"));
-		_editTemplate = getVelocityTemplateId(
+		_editTemplateId = getVelocityTemplateId(
 			getInitParameter("edit-template"));
-		_helpTemplate = getVelocityTemplateId(
+		_helpTemplateId = getVelocityTemplateId(
 			getInitParameter("help-template"));
-		_resourceTemplate = getVelocityTemplateId(
+		_resourceTemplateId = getVelocityTemplateId(
 			getInitParameter("resource-template"));
-		_viewTemplate = getVelocityTemplateId(
+		_viewTemplateId = getVelocityTemplateId(
 			getInitParameter("view-template"));
 	}
 
@@ -81,12 +81,12 @@ public class VelocityPortlet extends GenericPortlet {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws PortletException {
 
-		if (Validator.isNull(_actionTemplate)) {
+		if (Validator.isNull(_actionTemplateId)) {
 			return;
 		}
 
 		try {
-			mergeTemplate(_actionTemplate, actionRequest, actionResponse);
+			mergeTemplate(_actionTemplateId, actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			throw new PortletException(e);
@@ -97,14 +97,15 @@ public class VelocityPortlet extends GenericPortlet {
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws PortletException, IOException {
 
-		if (Validator.isNull(_resourceTemplate)) {
+		if (Validator.isNull(_resourceTemplateId)) {
 			super.serveResource(resourceRequest, resourceResponse);
 
 			return;
 		}
 
 		try {
-			mergeTemplate(_resourceTemplate, resourceRequest, resourceResponse);
+			mergeTemplate(
+				_resourceTemplateId, resourceRequest, resourceResponse);
 		}
 		catch (Exception e) {
 			throw new PortletException(e);
@@ -122,7 +123,7 @@ public class VelocityPortlet extends GenericPortlet {
 		}
 
 		try {
-			mergeTemplate(_editTemplate, renderRequest, renderResponse);
+			mergeTemplate(_editTemplateId, renderRequest, renderResponse);
 		}
 		catch (Exception e) {
 			throw new PortletException(e);
@@ -134,7 +135,7 @@ public class VelocityPortlet extends GenericPortlet {
 		throws PortletException {
 
 		try {
-			mergeTemplate(_helpTemplate, renderRequest, renderResponse);
+			mergeTemplate(_helpTemplateId, renderRequest, renderResponse);
 		}
 		catch (Exception e) {
 			throw new PortletException(e);
@@ -146,21 +147,11 @@ public class VelocityPortlet extends GenericPortlet {
 		throws PortletException {
 
 		try {
-			mergeTemplate(_viewTemplate, renderRequest, renderResponse);
+			mergeTemplate(_viewTemplateId, renderRequest, renderResponse);
 		}
 		catch (Exception e) {
 			throw new PortletException(e);
 		}
-	}
-
-	protected String getVelocityTemplateId(String name) {
-		if (Validator.isNull(name)) {
-			return name;
-		}
-
-		return _portletContextName +
-			VelocityResourceListener.SERVLET_SEPARATOR +
-				StrutsUtil.TEXT_HTML_DIR + name;
 	}
 
 	protected VelocityContext getVelocityContext(
@@ -200,6 +191,21 @@ public class VelocityPortlet extends GenericPortlet {
 		}
 
 		return velocityContext;
+	}
+
+	protected String getVelocityTemplateId(String name) {
+		if (Validator.isNull(name)) {
+			return name;
+		}
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(_portletContextName);
+		sb.append(VelocityResourceListener.SERVLET_SEPARATOR);
+		sb.append(StrutsUtil.TEXT_HTML_DIR);
+		sb.append(name);
+
+		return sb.toString();
 	}
 
 	protected void mergeTemplate(
@@ -268,10 +274,10 @@ public class VelocityPortlet extends GenericPortlet {
 	private static SimplePool _writerPool = new SimplePool(40);
 
 	private String _portletContextName;
-	private String _actionTemplate;
-	private String _editTemplate;
-	private String _helpTemplate;
-	private String _resourceTemplate;
-	private String _viewTemplate;
+	private String _actionTemplateId;
+	private String _editTemplateId;
+	private String _helpTemplateId;
+	private String _resourceTemplateId;
+	private String _viewTemplateId;
 
 }
