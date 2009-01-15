@@ -22,12 +22,10 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.velocity.VelocityContext;
 import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
 import com.liferay.portal.struts.StrutsUtil;
-import com.liferay.portal.velocity.VelocityContextImpl;
 import com.liferay.portal.velocity.VelocityResourceListener;
 
 import java.io.IOException;
@@ -47,9 +45,7 @@ import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
-import org.apache.velocity.Template;
 import org.apache.velocity.io.VelocityWriter;
-import org.apache.velocity.runtime.RuntimeSingleton;
 import org.apache.velocity.util.SimplePool;
 
 /**
@@ -69,11 +65,16 @@ public class VelocityPortlet extends GenericPortlet {
 
 		_portletContextName = portletContext.getPortletContextName();
 
-		_actionTemplate = getInitParameter("action-template");
-		_editTemplate = getInitParameter("edit-template");
-		_helpTemplate = getInitParameter("help-template");
-		_resourceTemplate = getInitParameter("resource-template");
-		_viewTemplate = getInitParameter("view-template");
+		_actionTemplate = getVelocityTemplateId(
+			getInitParameter("action-template"));
+		_editTemplate = getVelocityTemplateId(
+			getInitParameter("edit-template"));
+		_helpTemplate = getVelocityTemplateId(
+			getInitParameter("help-template"));
+		_resourceTemplate = getVelocityTemplateId(
+			getInitParameter("resource-template"));
+		_viewTemplate = getVelocityTemplateId(
+			getInitParameter("view-template"));
 	}
 
 	public void processAction(
@@ -85,9 +86,7 @@ public class VelocityPortlet extends GenericPortlet {
 		}
 
 		try {
-			Template template = getTemplate(_actionTemplate);
-
-			mergeTemplate(template, actionRequest, actionResponse);
+			mergeTemplate(_actionTemplate, actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			throw new PortletException(e);
@@ -105,9 +104,7 @@ public class VelocityPortlet extends GenericPortlet {
 		}
 
 		try {
-			Template template = getTemplate(_resourceTemplate);
-
-			mergeTemplate(template, resourceRequest, resourceResponse);
+			mergeTemplate(_resourceTemplate, resourceRequest, resourceResponse);
 		}
 		catch (Exception e) {
 			throw new PortletException(e);
@@ -125,9 +122,7 @@ public class VelocityPortlet extends GenericPortlet {
 		}
 
 		try {
-			Template template = getTemplate(_editTemplate);
-
-			mergeTemplate(template, renderRequest, renderResponse);
+			mergeTemplate(_editTemplate, renderRequest, renderResponse);
 		}
 		catch (Exception e) {
 			throw new PortletException(e);
@@ -139,9 +134,7 @@ public class VelocityPortlet extends GenericPortlet {
 		throws PortletException {
 
 		try {
-			Template template = getTemplate(_helpTemplate);
-
-			mergeTemplate(template, renderRequest, renderResponse);
+			mergeTemplate(_helpTemplate, renderRequest, renderResponse);
 		}
 		catch (Exception e) {
 			throw new PortletException(e);
@@ -153,79 +146,75 @@ public class VelocityPortlet extends GenericPortlet {
 		throws PortletException {
 
 		try {
-			Template template = getTemplate(_viewTemplate);
-
-			mergeTemplate(template, renderRequest, renderResponse);
+			mergeTemplate(_viewTemplate, renderRequest, renderResponse);
 		}
 		catch (Exception e) {
 			throw new PortletException(e);
 		}
 	}
 
-	protected Template getTemplate(String name) throws Exception {
-		return RuntimeSingleton.getTemplate(
-			_portletContextName + VelocityResourceListener.SERVLET_SEPARATOR +
-				StrutsUtil.TEXT_HTML_DIR + name, StringPool.UTF8);
-	}
+	protected String getVelocityTemplateId(String name) {
+		if (Validator.isNull(name)) {
+			return name;
+		}
 
-	protected Template getTemplate(String name, String encoding)
-		throws Exception {
-
-		return RuntimeSingleton.getTemplate(
-			StrutsUtil.TEXT_HTML_DIR + name, encoding);
+		return _portletContextName +
+			VelocityResourceListener.SERVLET_SEPARATOR +
+				StrutsUtil.TEXT_HTML_DIR + name;
 	}
 
 	protected VelocityContext getVelocityContext(
 		PortletRequest portletRequest, PortletResponse portletResponse) {
 
-		VelocityContext context =
+		VelocityContext velocityContext =
 			VelocityEngineUtil.getWrappedStandardToolsContext();
 
-		context.put("portletConfig", getPortletConfig());
-		context.put("portletContext", getPortletContext());
-		context.put("preferences", portletRequest.getPreferences());
-		context.put(
+		velocityContext.put("portletConfig", getPortletConfig());
+		velocityContext.put("portletContext", getPortletContext());
+		velocityContext.put("preferences", portletRequest.getPreferences());
+		velocityContext.put(
 			"userInfo", portletRequest.getAttribute(PortletRequest.USER_INFO));
 
-		context.put("portletRequest", portletRequest);
+		velocityContext.put("portletRequest", portletRequest);
 
 		if (portletRequest instanceof ActionRequest) {
-			context.put("actionRequest", portletRequest);
+			velocityContext.put("actionRequest", portletRequest);
 		}
 		else if (portletRequest instanceof RenderRequest) {
-			context.put("renderRequest", portletRequest);
+			velocityContext.put("renderRequest", portletRequest);
 		}
 		else {
-			context.put("resourceRequest", portletRequest);
+			velocityContext.put("resourceRequest", portletRequest);
 		}
 
-		context.put("portletResponse", portletResponse);
+		velocityContext.put("portletResponse", portletResponse);
 
 		if (portletResponse instanceof ActionResponse) {
-			context.put("actionResponse", portletResponse);
+			velocityContext.put("actionResponse", portletResponse);
 		}
 		else if (portletRequest instanceof RenderResponse) {
-			context.put("renderResponse", portletResponse);
+			velocityContext.put("renderResponse", portletResponse);
 		}
 		else {
-			context.put("resourceResponse", portletResponse);
+			velocityContext.put("resourceResponse", portletResponse);
 		}
 
-		return context;
+		return velocityContext;
 	}
 
 	protected void mergeTemplate(
-			Template template, PortletRequest portletRequest,
+			String velocityTemplateId, PortletRequest portletRequest,
 			PortletResponse portletResponse)
 		throws Exception {
 
 		mergeTemplate(
-			template, getVelocityContext(portletRequest, portletResponse),
+			velocityTemplateId,
+			getVelocityContext(portletRequest, portletResponse),
 			portletRequest, portletResponse);
 	}
 
 	protected void mergeTemplate(
-			Template template, VelocityContext velocityContext,
+			String velocityTemplateId, VelocityContext velocityContext,
 			PortletRequest portletRequest, PortletResponse portletResponse)
 		throws Exception {
 
@@ -259,12 +248,8 @@ public class VelocityPortlet extends GenericPortlet {
 				velocityWriter.recycle(output);
 			}
 
-			VelocityContextImpl velocityContextImpl =
-				(VelocityContextImpl)velocityContext;
-
-			template.merge(
-				velocityContextImpl.getWrappedVelocityContext(),
-				velocityWriter);
+			VelocityEngineUtil.mergeTemplate(
+				velocityTemplateId, null, velocityContext, velocityWriter);
 		}
 		finally {
 			try {
