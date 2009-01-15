@@ -25,6 +25,7 @@ package com.liferay.portal.events;
 import com.liferay.portal.LayoutPermissionException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -930,7 +931,24 @@ public class ServicePreAction extends Action {
 
 		// User
 
-		User user = PortalUtil.getUser(request);
+		User user = null;
+
+		try {
+			user = PortalUtil.getUser(request);
+		}
+		catch (NoSuchUserException nsue) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(nsue.getMessage());
+			}
+
+			long userId = PortalUtil.getUserId(request);
+
+			if (userId > 0) {
+				session.invalidate();
+			}
+
+			return;
+		}
 
 		boolean signedIn = false;
 
