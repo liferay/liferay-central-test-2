@@ -29,8 +29,10 @@ import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.events.Action;
+import com.liferay.portal.kernel.events.ActionWrapper;
 import com.liferay.portal.kernel.events.InvokerSimpleAction;
 import com.liferay.portal.kernel.events.SimpleAction;
+import com.liferay.portal.kernel.events.SimpleActionWrapper;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -44,7 +46,9 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.model.ModelListenerWrapper;
 import com.liferay.portal.security.auth.AutoLogin;
+import com.liferay.portal.security.auth.AutoLoginWrapper;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.servlet.filters.autologin.AutoLoginFilter;
@@ -519,6 +523,8 @@ public class HookHotDeployListener
 				autoLoginClass).newInstance();
 
 			if (autoLogin != null) {
+				autoLogin = new AutoLoginWrapper(autoLogin, portletClassLoader);
+
 				autoLoginsContainer.registerAutoLogin(autoLogin);
 			}
 		}
@@ -561,6 +567,9 @@ public class HookHotDeployListener
 				(SimpleAction)portletClassLoader.loadClass(
 					eventClass).newInstance());
 
+			simpleAction = new SimpleActionWrapper(
+				simpleAction, portletClassLoader);
+
 			long companyId = CompanyThreadLocal.getCompanyId();
 
 			long[] companyIds = PortalInstances.getCompanyIds();
@@ -579,6 +588,8 @@ public class HookHotDeployListener
 		if (ArrayUtil.contains(_PROPS_KEYS_EVENTS, eventName)) {
 			Action action = (Action)portletClassLoader.loadClass(
 				eventClass).newInstance();
+
+			action = new ActionWrapper(action, portletClassLoader);
 
 			EventsProcessor.registerEvent(eventName, action);
 
@@ -633,6 +644,9 @@ public class HookHotDeployListener
 		ModelListener modelListener =
 			(ModelListener)portletClassLoader.loadClass(
 				modelListenerClass).newInstance();
+
+		modelListener = new ModelListenerWrapper(
+			modelListener, portletClassLoader);
 
 		BasePersistence persistence = getPersistence(modelName);
 
