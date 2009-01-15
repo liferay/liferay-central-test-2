@@ -303,8 +303,7 @@ public class PortletRequestUtil {
 			themeDisplay.getPathThemeImages());
 		DocUtil.add(themeDisplayEl, "plid", themeDisplay.getPlid());
 		DocUtil.add(
-			themeDisplayEl, "time-zone",
-			HttpUtil.removeProtocol(themeDisplay.getTimeZone().getID()));
+			themeDisplayEl, "time-zone", themeDisplay.getTimeZone().getID());
 		DocUtil.add(
 			themeDisplayEl, "url-portal",
 			HttpUtil.removeProtocol(themeDisplay.getURLPortal()));

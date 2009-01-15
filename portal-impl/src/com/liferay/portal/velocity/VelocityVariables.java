@@ -284,7 +284,7 @@ public class VelocityVariables {
 
 		velocityContext.put("stringUtil", StringUtil_IW.getInstance());
 
-		// String util
+		// Time zone util
 
 		velocityContext.put("timeZoneUtil", TimeZoneUtil_IW.getInstance());
 
