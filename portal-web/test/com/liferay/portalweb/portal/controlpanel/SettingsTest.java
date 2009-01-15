@@ -51,6 +51,24 @@ public class SettingsTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Settings"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_130_legalId")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_130_legalId", RuntimeVariables.replace("LIFE"));
 		selenium.type("_130_legalId", RuntimeVariables.replace("LIFE"));
 		selenium.type("_130_sicCode", RuntimeVariables.replace("1234"));
 		selenium.type("_130_tickerSymbol", RuntimeVariables.replace("LFRY"));
@@ -69,7 +87,7 @@ public class SettingsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("document.forms[0].elements[33]")) {
+				if (selenium.isElementPresent("//input[@value='Add']")) {
 					break;
 				}
 			}
@@ -79,9 +97,27 @@ public class SettingsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"document.forms[0].elements[33]"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Add']"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_130_address")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_130_address",
+			RuntimeVariables.replace("Admin@Lifera.com"));
 		selenium.type("_130_address",
 			RuntimeVariables.replace("Admin@Liferay.com"));
 		selenium.select("_130_typeId", RuntimeVariables.replace("label=E-mail"));
@@ -91,6 +127,7 @@ public class SettingsTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent("Admin@Liferay.com"));
+		selenium.click("link=Addresses");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -98,7 +135,7 @@ public class SettingsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("document.forms[0].elements[34]")) {
+				if (selenium.isElementPresent("//div[2]/div[1]/input")) {
 					break;
 				}
 			}
@@ -108,9 +145,27 @@ public class SettingsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"document.forms[0].elements[34]"));
+		selenium.click(RuntimeVariables.replace("//div[2]/div[1]/input"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_130_street1")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_130_street1",
+			RuntimeVariables.replace("123. Lifera Ln."));
 		selenium.type("_130_street1",
 			RuntimeVariables.replace("123. Liferay Ln."));
 		selenium.type("_130_city", RuntimeVariables.replace("Diamond Bar"));
@@ -130,6 +185,7 @@ public class SettingsTest extends BaseTestCase {
 				"Your request processed successfully."));
 		selenium.click("link=Addresses");
 		assertTrue(selenium.isTextPresent("Rays of Light"));
+		selenium.click("link=Websites");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -137,7 +193,7 @@ public class SettingsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("document.forms[0].elements[35]")) {
+				if (selenium.isElementPresent("//div[3]/div[1]/input")) {
 					break;
 				}
 			}
@@ -147,9 +203,27 @@ public class SettingsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"document.forms[0].elements[35]"));
+		selenium.click(RuntimeVariables.replace("//div[3]/div[1]/input"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_130_url")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_130_url",
+			RuntimeVariables.replace("http://www.lifera.com"));
 		selenium.type("_130_url",
 			RuntimeVariables.replace("http://www.liferay.com"));
 		selenium.select("_130_typeId", RuntimeVariables.replace("label=Public"));
@@ -160,6 +234,7 @@ public class SettingsTest extends BaseTestCase {
 				"Your request processed successfully."));
 		selenium.click("link=Websites");
 		assertTrue(selenium.isTextPresent("http://www.liferay.com"));
+		selenium.click("link=Phone Numbers");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -167,7 +242,7 @@ public class SettingsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("document.forms[0].elements[36]")) {
+				if (selenium.isElementPresent("//div[4]/div[1]/input")) {
 					break;
 				}
 			}
@@ -177,9 +252,27 @@ public class SettingsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"document.forms[0].elements[36]"));
+		selenium.click(RuntimeVariables.replace("//div[4]/div[1]/input"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_130_number")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_130_number",
+			RuntimeVariables.replace("123-123-1234"));
 		selenium.type("_130_number", RuntimeVariables.replace("123-123-1234"));
 		selenium.type("_130_extension", RuntimeVariables.replace("123"));
 		selenium.select("_130_typeId", RuntimeVariables.replace("label=Other"));
@@ -219,6 +312,25 @@ public class SettingsTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("_130_defaultUserGroupNames"));
 		selenium.click(RuntimeVariables.replace("link=Reserved Screen Names"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_130_reservedScreenNames")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_130_reservedScreenNames",
+			RuntimeVariables.replace("Lifera"));
 		selenium.type("_130_reservedScreenNames",
 			RuntimeVariables.replace("Liferay"));
 		selenium.type("_130_reservedEmailAddresses",
@@ -229,6 +341,25 @@ public class SettingsTest extends BaseTestCase {
 				"Your request processed successfully."));
 		selenium.click(RuntimeVariables.replace("link=Mail Host Names"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_130_mailHostNames")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_130_mailHostNames",
+			RuntimeVariables.replace("rasoflight.com"));
 		selenium.type("_130_mailHostNames",
 			RuntimeVariables.replace("raysoflight.com"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));

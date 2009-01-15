@@ -33,34 +33,63 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddServerInstanceTest extends BaseTestCase {
 	public void testAddServerInstance() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+		int label = 1;
 
-			try {
-				if (selenium.isElementPresent("link=Portal Instances")) {
-					break;
+		while (label >= 1) {
+			switch (label) {
+			case 1:
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("link=Portal Instances")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				selenium.click(RuntimeVariables.replace("link=Portal Instances"));
+				selenium.waitForPageToLoad("30000");
+
+				boolean InstancePresent = selenium.isElementPresent(
+						"link=test.com");
+
+				if (InstancePresent) {
+					label = 2;
+
+					continue;
+				}
+
+				selenium.click(RuntimeVariables.replace("//input[@value='Add']"));
+				selenium.waitForPageToLoad("30000");
+				selenium.typeKeys("_135_webId",
+					RuntimeVariables.replace("test.com"));
+				selenium.type("_135_webId", RuntimeVariables.replace("test.com"));
+				selenium.typeKeys("_135_virtualHost",
+					RuntimeVariables.replace("guest"));
+				selenium.type("_135_virtualHost",
+					RuntimeVariables.replace("guest"));
+				selenium.typeKeys("_135_mx",
+					RuntimeVariables.replace("test.com"));
+				selenium.type("_135_mx", RuntimeVariables.replace("test.com"));
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Save']"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isTextPresent(
+						"Your request processed successfully."));
+				assertTrue(selenium.isElementPresent("link=test.com"));
+
+			case 2:
+			case 100:
+				label = -1;
+			}
 		}
-
-		selenium.click(RuntimeVariables.replace("link=Portal Instances"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_135_webId", RuntimeVariables.replace("test.com"));
-		selenium.type("_135_webId", RuntimeVariables.replace("test.com"));
-		selenium.typeKeys("_135_virtualHost", RuntimeVariables.replace("guest"));
-		selenium.type("_135_virtualHost", RuntimeVariables.replace("guest"));
-		selenium.typeKeys("_135_mx", RuntimeVariables.replace("test.com"));
-		selenium.type("_135_mx", RuntimeVariables.replace("test.com"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=test.com"));
 	}
 }

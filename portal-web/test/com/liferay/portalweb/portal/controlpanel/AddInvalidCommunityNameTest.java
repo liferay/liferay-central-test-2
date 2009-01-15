@@ -72,13 +72,13 @@ public class AddInvalidCommunityNameTest extends BaseTestCase {
 
 		selenium.typeKeys("_134_name", RuntimeVariables.replace("!@#$"));
 		selenium.type("_134_name", RuntimeVariables.replace("!@#$"));
-		selenium.typeKeys("_134_description",
-			RuntimeVariables.replace("This is an invalid communit test!"));
 		selenium.type("_134_description",
-			RuntimeVariables.replace("This is an invalid community test!"));
+			RuntimeVariables.replace("This is a null community test."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
+		assertFalse(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

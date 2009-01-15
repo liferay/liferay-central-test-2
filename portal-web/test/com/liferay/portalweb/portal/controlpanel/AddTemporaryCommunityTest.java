@@ -53,6 +53,23 @@ public class AddTemporaryCommunityTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Add"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_134_name")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.typeKeys("_134_name",
 			RuntimeVariables.replace("Test Communit 2"));
 		selenium.type("_134_name", RuntimeVariables.replace("Test Community 2"));
@@ -61,5 +78,8 @@ public class AddTemporaryCommunityTest extends BaseTestCase {
 				"This is a second temporary Test Community!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertTrue(selenium.isTextPresent("Test Community 2"));
 	}
 }

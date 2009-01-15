@@ -51,12 +51,51 @@ public class SearchUserTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Users"));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("toggle_id_enterprise_admin_user_searchkeywords",
-			RuntimeVariables.replace("selenium"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_125_keywords")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_125_keywords", RuntimeVariables.replace("selenium"));
+		selenium.type("_125_keywords", RuntimeVariables.replace("selenium"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("selenium01"));
 		assertTrue(selenium.isTextPresent("selenium02"));
-		assertTrue(selenium.isTextPresent("selenium03"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_125_keywords")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_125_keywords", RuntimeVariables.replace("selenium1"));
+		selenium.type("_125_keywords", RuntimeVariables.replace("selenium1"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isTextPresent("selenium01"));
+		assertFalse(selenium.isTextPresent("selenium02"));
 	}
 }

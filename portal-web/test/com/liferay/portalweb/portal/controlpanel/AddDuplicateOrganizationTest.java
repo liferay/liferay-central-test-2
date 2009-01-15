@@ -53,8 +53,6 @@ public class AddDuplicateOrganizationTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Add"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_126_name", RuntimeVariables.replace("Selenium"));
-		selenium.type("_126_name", RuntimeVariables.replace("Selenium"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -62,7 +60,7 @@ public class AddDuplicateOrganizationTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_126_type")) {
+				if (selenium.isElementPresent("_126_name")) {
 					break;
 				}
 			}
@@ -72,13 +70,15 @@ public class AddDuplicateOrganizationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("_126_name", RuntimeVariables.replace("Selenium"));
+		selenium.type("_126_name", RuntimeVariables.replace("Selenium"));
 		selenium.select("_126_type",
 			RuntimeVariables.replace("label=Regular Organization"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again. "));
+				"You have entered invalid data. Please try again."));
 		assertTrue(selenium.isTextPresent(
-				"The organization name is already taken. "));
+				"The organization name is already taken."));
 	}
 }

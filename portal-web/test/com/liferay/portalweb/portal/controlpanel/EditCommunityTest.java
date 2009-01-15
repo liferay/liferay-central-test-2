@@ -68,27 +68,12 @@ public class EditCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("_134_name",
+			RuntimeVariables.replace("Test Community 2"));
 		selenium.type("_134_name", RuntimeVariables.replace("Test Community 2"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Community 2"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//strong/span")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click("//strong/span");
 
 		for (int second = 0;; second++) {
@@ -130,14 +115,13 @@ public class EditCommunityTest extends BaseTestCase {
 			RuntimeVariables.replace("Test Communit 2 Edited"));
 		selenium.type("_134_name",
 			RuntimeVariables.replace("Test Community 2 Edited"));
-		selenium.typeKeys("_134_description",
-			RuntimeVariables.replace(
-				"This is a second temporar Test Communit! This communit has been edited."));
 		selenium.type("_134_description",
 			RuntimeVariables.replace(
 				"This is a second temporary Test Community! This community has been edited."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent("Test Community 2 Edited"));
 	}
 }

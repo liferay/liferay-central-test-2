@@ -51,23 +51,6 @@ public class AddDuplicateCommunityNameTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Communities"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Add")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("link=Add"));
 		selenium.waitForPageToLoad("30000");
 
@@ -89,14 +72,14 @@ public class AddDuplicateCommunityNameTest extends BaseTestCase {
 
 		selenium.typeKeys("_134_name", RuntimeVariables.replace("Test Communit"));
 		selenium.type("_134_name", RuntimeVariables.replace("Test Community"));
-		selenium.typeKeys("_134_description",
-			RuntimeVariables.replace("This is a duplicate communit!"));
 		selenium.type("_134_description",
-			RuntimeVariables.replace("This is a duplicate community!"));
+			RuntimeVariables.replace("This is a null community test."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
 		assertTrue(selenium.isTextPresent("Please enter a unique name."));
+		assertFalse(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

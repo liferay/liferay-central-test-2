@@ -53,15 +53,31 @@ public class AddUser2Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Add"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_125_prefixId")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.select("_125_prefixId", RuntimeVariables.replace("label=Mrs."));
+		selenium.typeKeys("_125_screenName",
+			RuntimeVariables.replace("selenium02"));
 		selenium.type("_125_screenName", RuntimeVariables.replace("selenium02"));
 		selenium.type("_125_emailAddress",
 			RuntimeVariables.replace("test02@selenium.com"));
-		selenium.typeKeys("_125_firstName", RuntimeVariables.replace("selen02"));
 		selenium.type("_125_firstName", RuntimeVariables.replace("selen02"));
-		selenium.typeKeys("_125_middleName", RuntimeVariables.replace("lenn"));
 		selenium.type("_125_middleName", RuntimeVariables.replace("lenn"));
-		selenium.typeKeys("_125_lastName", RuntimeVariables.replace("nium02"));
 		selenium.type("_125_lastName", RuntimeVariables.replace("nium02"));
 		selenium.select("_125_suffixId", RuntimeVariables.replace("label=PhD."));
 		selenium.select("_125_birthdayMonth",
@@ -72,7 +88,27 @@ public class AddUser2Test extends BaseTestCase {
 		selenium.select("_125_male", RuntimeVariables.replace("label=Female"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 		selenium.click("passwordLink");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_125_password1")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_125_password1", RuntimeVariables.replace("test"));
 		selenium.type("_125_password1", RuntimeVariables.replace("test"));
 		selenium.type("_125_password2", RuntimeVariables.replace("test"));
 		selenium.click("addressesLink");

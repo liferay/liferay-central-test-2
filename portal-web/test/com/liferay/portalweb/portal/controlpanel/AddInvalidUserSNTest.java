@@ -53,11 +53,35 @@ public class AddInvalidUserSNTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Add"));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_125_screenName", RuntimeVariables.replace("!@#$%"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_125_screenName")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_125_screenName", RuntimeVariables.replace("!@#$"));
+		selenium.type("_125_screenName", RuntimeVariables.replace("!@#$"));
+		selenium.type("_125_emailAddress",
+			RuntimeVariables.replace("testA@selenium.com"));
+		selenium.type("_125_firstName", RuntimeVariables.replace("testA"));
+		selenium.type("_125_lastName", RuntimeVariables.replace("testA"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
 		assertTrue(selenium.isTextPresent("Please enter a valid screen name."));
+		assertFalse(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }
