@@ -337,7 +337,9 @@ public class PortletExporter {
 					path = getCommentsPath(
 						context, comment[0], comment[1], message);
 
-					context.addZipEntry(path, message);
+					if (context.isPathNotProcessed(path)) {
+						context.addZipEntry(path, message);
+					}
 				}
 			}
 
