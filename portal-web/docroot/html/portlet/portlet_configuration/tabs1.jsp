@@ -66,17 +66,6 @@ permissionsURL.setParameter("returnToFullPageURL", returnToFullPageURL);
 permissionsURL.setParameter("portletResource", portletResource);
 permissionsURL.setParameter("resourcePrimKey", PortletPermissionUtil.getPrimaryKey(layout.getPlid(), portletResource));
 
-// LAR
-
-PortletURL larURL = renderResponse.createRenderURL();
-
-larURL.setWindowState(WindowState.MAXIMIZED);
-
-larURL.setParameter("struts_action", "/portlet_configuration/export_import");
-larURL.setParameter("redirect", redirect);
-larURL.setParameter("returnToFullPageURL", returnToFullPageURL);
-larURL.setParameter("portletResource", portletResource);
-
 // Sharing
 
 PortletURL sharingURL = renderResponse.createRenderURL();
@@ -118,10 +107,6 @@ if (portlet.hasMultipleMimeTypes()) {
 tabs1Names += ",permissions";
 
 request.setAttribute("liferay-ui:tabs:url" + pos++, permissionsURL.toString());
-
-tabs1Names += ",export-import";
-
-request.setAttribute("liferay-ui:tabs:url" + pos++, larURL.toString());
 
 tabs1Names += ",sharing";
 

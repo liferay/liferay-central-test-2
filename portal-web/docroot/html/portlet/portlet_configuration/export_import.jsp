@@ -49,6 +49,10 @@ portletURL.setParameter("portletResource", portletResource);
 
 boolean supportsLAR = Validator.isNotNull(selPortlet.getPortletDataHandlerClass());
 boolean supportsSetup = Validator.isNotNull(selPortlet.getConfigurationActionClass());
+
+if (themeDisplay.getLayout().getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
+	supportsSetup = false;
+}
 %>
 
 <script type="text/javascript">
@@ -94,10 +98,6 @@ boolean supportsSetup = Validator.isNotNull(selPortlet.getConfigurationActionCla
 	}
 </script>
 
-<liferay-util:include page="/html/portlet/portlet_configuration/tabs1.jsp">
-	<liferay-util:param name="tabs1" value="export-import" />
-</liferay-util:include>
-
 <c:choose>
 	<c:when test="<%= supportsLAR || supportsSetup %>">
 
@@ -113,6 +113,7 @@ boolean supportsSetup = Validator.isNotNull(selPortlet.getConfigurationActionCla
 			names="<%= tabs2Names %>"
 			param="tabs2"
 			url="<%= portletURL.toString() %>"
+			backURL="<%= redirect %>"
 		/>
 
 		<liferay-ui:error exception="<%= LARFileException.class %>" message="please-specify-a-lar-file-to-import" />

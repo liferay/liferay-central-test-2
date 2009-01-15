@@ -310,6 +310,14 @@ public class PortletDisplay implements Serializable {
 		_showEditGuestIcon = showEditGuestIcon;
 	}
 
+	public boolean isShowExportImportIcon() {
+		return _showExportImportIcon;
+	}
+
+	public void setShowExportImportIcon(boolean showExportImportIcon) {
+		_showExportImportIcon = showExportImportIcon;
+	}
+
 	public boolean isShowHelpIcon() {
 		return _showHelpIcon;
 	}
@@ -420,6 +428,14 @@ public class PortletDisplay implements Serializable {
 
 	public void setURLEditGuest(String urlEditGuest) {
 		_urlEditGuest = urlEditGuest;
+	}
+
+	public String getURLExportImport() {
+		return _urlExportImport;
+	}
+
+	public void setURLExportImport(String urlExportImport) {
+		_urlExportImport = urlExportImport;
 	}
 
 	public String getURLHelp() {
@@ -550,6 +566,7 @@ public class PortletDisplay implements Serializable {
 		_urlEdit = StringPool.BLANK;
 		_urlEditDefaults = StringPool.BLANK;
 		_urlEditGuest = StringPool.BLANK;
+		_urlExportImport = StringPool.BLANK;
 		_urlHelp = StringPool.BLANK;
 		_urlMax = StringPool.BLANK;
 		_urlMin = StringPool.BLANK;
@@ -606,7 +623,7 @@ public class PortletDisplay implements Serializable {
 		_urlConfiguration = master.getURLConfiguration();
 		_urlEdit = master.getURLEdit();
 		_urlEditDefaults = master.getURLEditDefaults();
-		_urlEditGuest = master.getURLEditGuest();
+		_urlExportImport = master.getURLExportImport();
 		_urlHelp = master.getURLHelp();
 		_urlMax = master.getURLMax();
 		_urlMin = master.getURLMin();
@@ -664,6 +681,7 @@ public class PortletDisplay implements Serializable {
 		slave.setURLEdit(_urlEdit);
 		slave.setURLEditDefaults(_urlEditDefaults);
 		slave.setURLEditGuest(_urlEditGuest);
+		slave.setURLExportImport(_urlExportImport);
 		slave.setURLHelp(_urlHelp);
 		slave.setURLMax(_urlMax);
 		slave.setURLMin(_urlMin);
@@ -710,6 +728,7 @@ public class PortletDisplay implements Serializable {
 	private boolean _showEditIcon;
 	private boolean _showEditDefaultsIcon;
 	private boolean _showEditGuestIcon;
+	private boolean _showExportImportIcon;
 	private boolean _showHelpIcon;
 	private boolean _showMaxIcon;
 	private boolean _showMinIcon;
@@ -724,6 +743,7 @@ public class PortletDisplay implements Serializable {
 	private String _urlEdit = StringPool.BLANK;
 	private String _urlEditDefaults = StringPool.BLANK;
 	private String _urlEditGuest = StringPool.BLANK;
+	private String _urlExportImport = StringPool.BLANK;
 	private String _urlHelp = StringPool.BLANK;
 	private String _urlMax = StringPool.BLANK;
 	private String _urlMin = StringPool.BLANK;
