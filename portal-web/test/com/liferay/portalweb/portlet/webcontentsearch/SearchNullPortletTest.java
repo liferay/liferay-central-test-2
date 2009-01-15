@@ -169,24 +169,5 @@ public class SearchNullPortletTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("//input[@type='image']"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("JCS Setup Test Article"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Return to Full Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
 	}
 }

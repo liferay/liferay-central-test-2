@@ -39,7 +39,7 @@ public class TearDownTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=WCS Setup Test PageA")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -49,23 +49,19 @@ public class TearDownTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=WCS Setup Test PageA"));
+		selenium.click(RuntimeVariables.replace("link=Control Panel"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Articles"));
+		selenium.click(RuntimeVariables.replace("link=Web Content"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("_15_allRowIds");
 		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete the selected articles[\\s\\S]$"));
+						   .matches("^Are you sure you want to delete the selected web content[\\s\\S]$"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.click(RuntimeVariables.replace("link=Back to My Community"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//img[@alt='Remove']");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
-		assertFalse(selenium.isElementPresent("link=Articles"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -73,7 +69,7 @@ public class TearDownTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=WCS Setup Test PageB")) {
+				if (selenium.isElementPresent("link=WCS Setup Test Page")) {
 					break;
 				}
 			}
@@ -83,7 +79,7 @@ public class TearDownTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=WCS Setup Test PageB"));
+		selenium.click(RuntimeVariables.replace("link=WCS Setup Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//img[@alt='Remove']");
 		assertTrue(selenium.getConfirmation()
@@ -250,16 +246,6 @@ public class TearDownTest extends BaseTestCase {
 						   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		selenium.click(RuntimeVariables.replace("//li[2]/ul/li[3]/a/span"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Page"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -281,7 +267,6 @@ public class TearDownTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent(
 				"link=Web Content Search Test Page"));
-		assertFalse(selenium.isElementPresent("link=WCS Setup Test PageA"));
-		assertFalse(selenium.isElementPresent("link=WCS Setup Test PageB"));
+		assertFalse(selenium.isElementPresent("link=WCS Setup Test Page"));
 	}
 }

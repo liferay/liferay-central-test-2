@@ -110,10 +110,9 @@ public class SearchArticleTest extends BaseTestCase {
 		selenium.typeKeys("_86_searchArticleId",
 			RuntimeVariables.replace("Test"));
 		selenium.type("_86_searchArticleId", RuntimeVariables.replace("Test"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Articles']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("No articles were found."));
+		assertTrue(selenium.isTextPresent("no-web-content-was-found"));
 		selenium.type("_86_searchArticleId", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -133,8 +132,7 @@ public class SearchArticleTest extends BaseTestCase {
 		}
 
 		selenium.type("_86_version", RuntimeVariables.replace("1.0"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Articles']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Web Content Article"));
 		selenium.type("_86_version", RuntimeVariables.replace(""));
@@ -156,10 +154,9 @@ public class SearchArticleTest extends BaseTestCase {
 		}
 
 		selenium.type("_86_version", RuntimeVariables.replace("1.1"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Articles']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("No articles were found."));
+		assertTrue(selenium.isTextPresent("no-web-content-was-found"));
 		selenium.type("_86_version", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -179,8 +176,7 @@ public class SearchArticleTest extends BaseTestCase {
 		}
 
 		selenium.type("_86_title", RuntimeVariables.replace("Test"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Articles']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Web Content Article"));
 
@@ -201,10 +197,9 @@ public class SearchArticleTest extends BaseTestCase {
 		}
 
 		selenium.type("_86_title", RuntimeVariables.replace("Test1"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Articles']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("No articles were found."));
+		assertTrue(selenium.isTextPresent("no-web-content-was-found"));
 		selenium.type("_86_title", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -224,15 +219,13 @@ public class SearchArticleTest extends BaseTestCase {
 		}
 
 		selenium.type("_86_description", RuntimeVariables.replace("Test"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Articles']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Web Content Article"));
 		selenium.type("_86_description", RuntimeVariables.replace("Test1"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Articles']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("No articles were found."));
+		assertTrue(selenium.isTextPresent("no-web-content-was-found"));
 		selenium.type("_86_description", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -252,34 +245,29 @@ public class SearchArticleTest extends BaseTestCase {
 		}
 
 		selenium.type("_86_content", RuntimeVariables.replace("test"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Articles']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Web Content Article"));
 		selenium.type("_86_content", RuntimeVariables.replace(""));
 		selenium.select("_86_type",
 			RuntimeVariables.replace("label=Announcements"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Articles']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Web Content Article"));
 		selenium.select("_86_type", RuntimeVariables.replace("label=Blogs"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Articles']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("No articles were found."));
+		assertTrue(selenium.isTextPresent("no-web-content-was-found"));
 		selenium.select("_86_type",
 			RuntimeVariables.replace("label=Announcements"));
 		selenium.select("//select[@name='_86_groupId']",
 			RuntimeVariables.replace("label=Guest"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Articles']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("No articles were found."));
+		assertTrue(selenium.isTextPresent("no-web-content-was-found"));
 		selenium.select("//select[@name='_86_groupId']",
 			RuntimeVariables.replace("label=My Community"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Articles']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Web Content Article"));
 	}

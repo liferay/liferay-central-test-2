@@ -55,7 +55,8 @@ public class AddArticleThroughConfigurationTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Configuration"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Article']"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Web Content']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -214,8 +215,7 @@ public class AddArticleThroughConfigurationTest extends BaseTestCase {
 
 		selenium.typeKeys("_86_keywords", RuntimeVariables.replace("test"));
 		selenium.type("_86_keywords", RuntimeVariables.replace("test"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Articles']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Test Web Content Article"));
 		selenium.waitForPageToLoad("30000");

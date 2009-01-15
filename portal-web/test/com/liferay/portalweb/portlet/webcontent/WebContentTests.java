@@ -33,8 +33,7 @@ import com.liferay.portalweb.portal.BaseTests;
 public class WebContentTests extends BaseTests {
 
 	public WebContentTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
+		addTestSuite(ControlPanelTest.class);
 		addTestSuite(AddArticleTest.class);
 		addTestSuite(AddArticle2Test.class);
 		addTestSuite(WorkflowTest.class);
@@ -47,13 +46,13 @@ public class WebContentTests extends BaseTests {
 		addTestSuite(SearchArticleTest.class);
 		addTestSuite(SearchStructuresTest.class);
 		addTestSuite(SearchTemplateTest.class);
-		addTestSuite(RecentPageTest.class);
 		//addTestSuite(AddNullArticleTest.class);
 		addTestSuite(AddNullTitleTest.class);
+		addTestSuite(RecentPageTest.class);
 		addTestSuite(CancelPopupTest.class);
-		addTestSuite(DeleteAllTest.class);
-		addTestSuite(ImportLARTest.class);
-		addTestSuite(VerifyImportLARTest.class);
+		//addTestSuite(DeleteAllTest.class);
+		//addTestSuite(ImportLARTest.class);
+		//addTestSuite(VerifyImportLARTest.class);
 		addTestSuite(AddAssociatedTemplateTest.class);
 		addTestSuite(AssertStructureTemplateAssociationTest.class);
 		addTestSuite(TearDownTest.class);

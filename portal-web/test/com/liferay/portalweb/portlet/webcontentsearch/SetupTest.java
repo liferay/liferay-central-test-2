@@ -53,64 +53,9 @@ public class SetupTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//a[@id=\"my-community-private-pages\"]"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div/a/span")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("//div/a/span");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("new_page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.typeKeys("new_page",
-			RuntimeVariables.replace("WCS Setup Test PageA"));
-		selenium.type("new_page",
-			RuntimeVariables.replace("WCS Setup Test PageA"));
-		selenium.click("link=Save");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=WCS Setup Test PageA")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=WCS Setup Test PageA"));
+		selenium.click(RuntimeVariables.replace("link=Control Panel"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Web Content"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -119,26 +64,8 @@ public class SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Add Application")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("link=Add Application");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
 				if (selenium.isElementPresent(
-							"//div[@id='ContentManagement-WebContent']/p/a")) {
+							"//input[@value='Add Web Content']")) {
 					break;
 				}
 			}
@@ -148,25 +75,8 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id='ContentManagement-WebContent']/p/a");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Add Article']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Article']"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Web Content']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -315,6 +225,25 @@ public class SetupTest extends BaseTestCase {
 			}
 
 			try {
+				if (selenium.isElementPresent("link=Back to My Community")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Back to My Community"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
 				if (selenium.isElementPresent("//div/a/span")) {
 					break;
 				}
@@ -344,9 +273,9 @@ public class SetupTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("new_page",
-			RuntimeVariables.replace("WCS Setup Test PageB"));
+			RuntimeVariables.replace("WCS Setup Test Page"));
 		selenium.type("new_page",
-			RuntimeVariables.replace("WCS Setup Test PageB"));
+			RuntimeVariables.replace("WCS Setup Test Page"));
 		selenium.click("link=Save");
 
 		for (int second = 0;; second++) {
@@ -355,7 +284,7 @@ public class SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=WCS Setup Test PageB")) {
+				if (selenium.isElementPresent("link=WCS Setup Test Page")) {
 					break;
 				}
 			}
@@ -365,7 +294,7 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=WCS Setup Test PageB"));
+		selenium.click(RuntimeVariables.replace("link=WCS Setup Test Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
