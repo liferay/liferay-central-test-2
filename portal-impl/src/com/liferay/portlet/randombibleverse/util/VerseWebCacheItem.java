@@ -53,7 +53,7 @@ public class VerseWebCacheItem implements WebCacheItem {
 
 			String text = HttpUtil.URLtoString(url);
 
-			int x = text.indexOf("result-text-style-normal");
+			int x = text.indexOf("result-text-style");
 			x = text.indexOf(">", x);
 
 			int y = text.indexOf("</div>", x);
