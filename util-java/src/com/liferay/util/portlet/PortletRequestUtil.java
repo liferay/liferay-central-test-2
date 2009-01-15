@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.util.xml.DocUtil;
 
@@ -302,8 +303,19 @@ public class PortletRequestUtil {
 			themeDisplay.getPathThemeImages());
 		DocUtil.add(themeDisplayEl, "plid", themeDisplay.getPlid());
 		DocUtil.add(
+			themeDisplayEl, "time-zone",
+			HttpUtil.removeProtocol(themeDisplay.getTimeZone().getID()));
+		DocUtil.add(
 			themeDisplayEl, "url-portal",
 			HttpUtil.removeProtocol(themeDisplay.getURLPortal()));
+
+		if (themeDisplay.getPortletDisplay() != null) {
+			Element portletDisplayEl = themeDisplayEl.addElement(
+				"portlet-display");
+
+			_portletDisplayToXML(
+				themeDisplay.getPortletDisplay(), portletDisplayEl);
+		}
 	}
 
 	private static boolean _isValidAttributeName(String name) {
@@ -362,6 +374,23 @@ public class PortletRequestUtil {
 
 			return true;
 		}
+	}
+
+	private static void _portletDisplayToXML(
+		PortletDisplay portletDisplay, Element portletDisplayEl) {
+
+		DocUtil.add(portletDisplayEl, "id", portletDisplay.getId());
+		DocUtil.add(
+			portletDisplayEl, "instance-id", portletDisplay.getInstanceId());
+		DocUtil.add(
+			portletDisplayEl, "portlet-name", portletDisplay.getPortletName());
+		DocUtil.add(
+			portletDisplayEl, "resource-pk", portletDisplay.getResourcePK());
+		DocUtil.add(
+			portletDisplayEl, "root-portlet-id",
+			portletDisplay.getRootPortletId());
+		DocUtil.add(
+			portletDisplayEl, "title", portletDisplay.getTitle());
 	}
 
 }

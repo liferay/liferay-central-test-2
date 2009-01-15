@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.util.ParamUtil_IW;
 import com.liferay.portal.kernel.util.Randomizer_IW;
 import com.liferay.portal.kernel.util.StaticFieldGetter;
 import com.liferay.portal.kernel.util.StringUtil_IW;
+import com.liferay.portal.kernel.util.TimeZoneUtil_IW;
 import com.liferay.portal.kernel.util.UnicodeFormatter_IW;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.Validator_IW;
@@ -282,6 +283,10 @@ public class VelocityVariables {
 		// String util
 
 		velocityContext.put("stringUtil", StringUtil_IW.getInstance());
+
+		// String util
+
+		velocityContext.put("timeZoneUtil", TimeZoneUtil_IW.getInstance());
 
 		// Util locator
 

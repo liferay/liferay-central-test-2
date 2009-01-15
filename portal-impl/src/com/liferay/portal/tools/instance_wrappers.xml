@@ -47,6 +47,10 @@
 	/>
 	<instance-wrapper
 		parent-dir="../portal-kernel/src"
+		src-file="com/liferay/portal/kernel/util/TimeZoneUtil.java"
+	/>
+	<instance-wrapper
+		parent-dir="../portal-kernel/src"
 		src-file="com/liferay/portal/kernel/util/UnicodeFormatter.java"
 	/>
 	<instance-wrapper

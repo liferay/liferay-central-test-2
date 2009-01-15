@@ -22,44 +22,31 @@
 
 package com.liferay.portal.kernel.util;
 
-import java.util.TimeZone;
-
 /**
- * <a href="TimeZoneUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="TimeZoneUtil_IW.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class TimeZoneUtil {
-
-	public static TimeZone getDefault() {
-		return _instance._getDefault();
+public class TimeZoneUtil_IW {
+	public static TimeZoneUtil_IW getInstance() {
+		return _instance;
 	}
 
-	public static TimeZone getTimeZone(String timeZoneId) {
-		return TimeZone.getTimeZone(timeZoneId);
+	public java.util.TimeZone getDefault() {
+		return TimeZoneUtil.getDefault();
 	}
 
-	public static void setDefault(String id) {
-		_instance._setDefault(id);
+	public java.util.TimeZone getTimeZone(java.lang.String timeZoneId) {
+		return TimeZoneUtil.getTimeZone(timeZoneId);
 	}
 
-	private TimeZoneUtil() {
-		_timeZone = TimeZone.getTimeZone(StringPool.UTC);
+	public void setDefault(java.lang.String id) {
+		TimeZoneUtil.setDefault(id);
 	}
 
-	private TimeZone _getDefault() {
-		return _timeZone;
+	private TimeZoneUtil_IW() {
 	}
 
-	private void _setDefault(String id) {
-		if (Validator.isNotNull(id)) {
-			_timeZone = TimeZone.getTimeZone(id);
-		}
-	}
-
-	private static TimeZoneUtil _instance = new TimeZoneUtil();
-
-	private TimeZone _timeZone;
-
+	private static TimeZoneUtil_IW _instance = new TimeZoneUtil_IW();
 }
