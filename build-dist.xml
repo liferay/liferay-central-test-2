@@ -121,7 +121,7 @@
 		<replace
 			file="${app.server.glassfish.dir}/registry.properties"
 			token="source=Glassfish"
-			value="source=Liferay ${lp.version} on Glassfish"
+			value="source=Liferay ${lp.version} on Glassfish 2"
 		/>
 
 		<ant antfile="setup.xml" target="build-jarinstaller-pe" dir="${app.server.glassfish.installer.dir}" >
@@ -263,7 +263,7 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 
 		<replace
 			file="${app.server.parent.dir}/glassfishv3-prelude/glassfish/lib/registration/servicetag-registry.xml"
-			token="GlassFish V3" value="Liferay ${lp.version} on GlassFish V3" summary="true"
+			token="GlassFish V3" value="Liferay ${lp.version} on GlassFish 3" summary="true"
 		/>
 
 		<antcall target="zip-executable">
