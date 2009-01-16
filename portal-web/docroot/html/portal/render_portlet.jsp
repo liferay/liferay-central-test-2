@@ -223,6 +223,7 @@ boolean showConfigurationIcon = false;
 boolean showEditIcon = false;
 boolean showEditDefaultsIcon = false;
 boolean showEditGuestIcon = false;
+boolean showExportImportIcon = false;
 boolean showHelpIcon = portlet.hasPortletMode(responseContentType, PortletMode.HELP);
 boolean showMaxIcon = true;
 boolean showMinIcon = true;
@@ -245,6 +246,7 @@ if (!portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 		(PortletPermissionUtil.contains(permissionChecker, plid, portletId, ActionKeys.CONFIGURATION))) {
 
 		showConfigurationIcon = true;
+		showExportImportIcon = true;
 
 		if (PropsValues.PORTLET_CSS_ENABLED) {
 			showPortletCssIcon = true;
@@ -319,6 +321,7 @@ if (denyAccess) {
 	showEditIcon = false;
 	showEditDefaultsIcon = false;
 	showEditGuestIcon = false;
+	showExportImportIcon = false;
 	showHelpIcon = false;
 	showMaxIcon = false;
 	showMinIcon = false;
@@ -365,6 +368,7 @@ portletDisplay.setShowConfigurationIcon(showConfigurationIcon);
 portletDisplay.setShowEditIcon(showEditIcon);
 portletDisplay.setShowEditDefaultsIcon(showEditDefaultsIcon);
 portletDisplay.setShowEditGuestIcon(showEditGuestIcon);
+portletDisplay.setShowExportImportIcon(showExportImportIcon);
 portletDisplay.setShowHelpIcon(showHelpIcon);
 portletDisplay.setShowMaxIcon(showMaxIcon);
 portletDisplay.setShowMinIcon(showMinIcon);
@@ -487,6 +491,21 @@ else {
 urlEditGuest.setEscapeXml(false);
 
 portletDisplay.setURLEditGuest(urlEditGuest.toString());
+
+// URL export / import
+
+PortletURLImpl urlExportImport = new PortletURLImpl(request, PortletKeys.PORTLET_CONFIGURATION, plid, PortletRequest.RENDER_PHASE);
+
+urlExportImport.setWindowState(WindowState.MAXIMIZED);
+
+urlExportImport.setParameter("struts_action", "/portlet_configuration/export_import");
+urlExportImport.setParameter("redirect", currentURL);
+urlExportImport.setParameter("returnToFullPageURL", currentURL);
+urlExportImport.setParameter("portletResource", portletDisplay.getId());
+
+urlExportImport.setEscapeXml(false);
+
+portletDisplay.setURLExportImport(urlExportImport.toString() + "&" + PortalUtil.getPortletNamespace(PortletKeys.PORTLET_CONFIGURATION));
 
 // URL help
 
@@ -648,6 +667,7 @@ if (themeDisplay.isWidget()) {
 if (group.getName().equals(GroupConstants.CONTROL_PANEL)) {
 	portletDisplay.setShowBackIcon(false);
 	portletDisplay.setShowConfigurationIcon(false);
+	portletDisplay.setShowExportImportIcon(false);
 	portletDisplay.setShowMaxIcon(false);
 	portletDisplay.setShowMinIcon(false);
 	portletDisplay.setShowMoveIcon(false);

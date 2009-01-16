@@ -48,9 +48,10 @@ portletURL.setParameter("returnToFullPageURL", returnToFullPageURL);
 portletURL.setParameter("portletResource", portletResource);
 
 boolean supportsLAR = Validator.isNotNull(selPortlet.getPortletDataHandlerClass());
+
 boolean supportsSetup = Validator.isNotNull(selPortlet.getConfigurationActionClass());
 
-if (themeDisplay.getLayout().getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
+if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 	supportsSetup = false;
 }
 %>
@@ -113,7 +114,6 @@ if (themeDisplay.getLayout().getGroup().getName().equals(GroupConstants.CONTROL_
 			names="<%= tabs2Names %>"
 			param="tabs2"
 			url="<%= portletURL.toString() %>"
-			backURL="<%= redirect %>"
 		/>
 
 		<liferay-ui:error exception="<%= LARFileException.class %>" message="please-specify-a-lar-file-to-import" />
