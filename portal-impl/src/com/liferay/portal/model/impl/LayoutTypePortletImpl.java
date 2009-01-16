@@ -182,7 +182,7 @@ public class LayoutTypePortletImpl
 			}
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		LayoutTemplate oldLayoutTemplate =
@@ -340,7 +340,7 @@ public class LayoutTypePortletImpl
 			}
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		if (portlet != null) {
@@ -541,6 +541,7 @@ public class LayoutTypePortletImpl
 
 		try {
 			Layout layout = getLayout();
+
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
 				layout.getCompanyId(), portletId);
 
@@ -555,8 +556,9 @@ public class LayoutTypePortletImpl
 			}
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
+
 		List<String> columns = getColumns();
 
 		for (int i = 0; i < columns.size(); i++) {
