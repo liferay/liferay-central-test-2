@@ -667,7 +667,6 @@ if (themeDisplay.isWidget()) {
 if (group.getName().equals(GroupConstants.CONTROL_PANEL)) {
 	portletDisplay.setShowBackIcon(false);
 	portletDisplay.setShowConfigurationIcon(false);
-	portletDisplay.setShowExportImportIcon(false);
 	portletDisplay.setShowMaxIcon(false);
 	portletDisplay.setShowMinIcon(false);
 	portletDisplay.setShowMoveIcon(false);
