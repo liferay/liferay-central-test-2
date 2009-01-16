@@ -53,7 +53,7 @@ plugins.includes=${plugins.includes}</echo>
 
 	<target name="test-themes">
 		<exec dir="${lp.plugins.dir}" executable="cmd.exe" os="${os.windows}">
-			<arg line="/c svn update --username ${svn.username} --password ${svn.password}" />
+			<arg line="/c svn update" />
 		</exec>
 
 		<java jar="lib/development/selenium-server.jar" fork="true" spawn="true" />
@@ -74,7 +74,7 @@ plugins.includes=${plugins.includes}</echo>
 		/>
 
 		<exec dir="${lp.plugins.dir}" executable="cmd.exe" os="${os.windows}">
-			<arg line="/c svn update --username ${svn.username} --password ${svn.password}" />
+			<arg line="/c svn update" />
 		</exec>
 
 		<java jar="lib/development/selenium-server.jar" fork="true" spawn="true" />
