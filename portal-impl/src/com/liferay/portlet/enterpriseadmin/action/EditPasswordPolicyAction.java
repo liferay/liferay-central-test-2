@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.enterpriseadmin.action;
 
+import com.liferay.portal.DuplicatePasswordPolicyException;
 import com.liferay.portal.NoSuchPasswordPolicyException;
 import com.liferay.portal.PasswordPolicyNameException;
 import com.liferay.portal.RequiredPasswordPolicyException;
@@ -73,7 +74,8 @@ public class EditPasswordPolicyAction extends PortletAction {
 
 				setForward(actionRequest, "portlet.enterprise_admin.error");
 			}
-			else if (e instanceof PasswordPolicyNameException ||
+			else if (e instanceof DuplicatePasswordPolicyException ||
+					 e instanceof PasswordPolicyNameException ||
 					 e instanceof NoSuchPasswordPolicyException ||
 					 e instanceof RequiredPasswordPolicyException) {
 
