@@ -82,7 +82,7 @@ public class JournalVmUtil {
 
 			Element root = doc.getRootElement();
 
-			List<TemplateNode> nodes = _extractDynamicContents(root);
+			List<TemplateNode> nodes = extractDynamicContents(root);
 
 			for (TemplateNode node : nodes) {
 				velocityContext.put(node.getName(), node);
@@ -90,7 +90,7 @@ public class JournalVmUtil {
 
 			velocityContext.put("xmlRequest", root.element("request").asXML());
 			velocityContext.put(
-				"request", _insertRequestVariables(root.element("request")));
+				"request", insertRequestVariables(root.element("request")));
 
 			long companyId = GetterUtil.getLong(tokens.get("company_id"));
 			Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
@@ -115,7 +115,7 @@ public class JournalVmUtil {
 				PermissionThreadLocal.getPermissionChecker());
 			velocityContext.put("randomNamespace", randomNamespace);
 
-			script = _injectEditInPlace(xml, script);
+			script = injectEditInPlace(xml, script);
 
 			try {
 				String velocityTemplateId = companyId + groupId + templateId;
@@ -178,7 +178,7 @@ public class JournalVmUtil {
 		return output.toString();
 	}
 
-	private static List<TemplateNode> _extractDynamicContents(Element parent)
+	protected static List<TemplateNode> extractDynamicContents(Element parent)
 		throws TransformException {
 
 		List<TemplateNode> nodes = new ArrayList<TemplateNode>();
@@ -207,7 +207,7 @@ public class JournalVmUtil {
 				name, CDATAUtil.strip(content.getText()), type);
 
 			if (el.element("dynamic-element") != null) {
-				node.appendChildren(_extractDynamicContents(el));
+				node.appendChildren(extractDynamicContents(el));
 			}
 			else if (content.element("option") != null) {
 				for (Element option : content.elements("option")) {
@@ -231,7 +231,7 @@ public class JournalVmUtil {
 		return nodes;
 	}
 
-	private static String _injectEditInPlace(String xml, String script)
+	protected static String injectEditInPlace(String xml, String script)
 		throws DocumentException {
 
 		Document doc = SAXReaderUtil.read(xml);
@@ -248,15 +248,15 @@ public class JournalVmUtil {
 				(type.equals("text") || type.equals("text_box") ||
 				 type.equals("text_area"))) {
 
-				script = _wrapField(script, name, type, "data");
-				script = _wrapField(script, name, type, "getData()");
+				script = wrapField(script, name, type, "data");
+				script = wrapField(script, name, type, "getData()");
 			}
 		}
 
 		return script;
 	}
 
-	private static Map<String, Object> _insertRequestVariables(
+	protected static Map<String, Object> insertRequestVariables(
 		Element parent) {
 
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -290,7 +290,7 @@ public class JournalVmUtil {
 				}
 			}
 			else if (el.elements().size() > 0) {
-				map.put(name, _insertRequestVariables(el));
+				map.put(name, insertRequestVariables(el));
 			}
 			else {
 				map.put(name, el.getText());
@@ -300,7 +300,7 @@ public class JournalVmUtil {
 		return map;
 	}
 
-	private static String _wrapField(
+	protected static String wrapField(
 		String script, String name, String type, String call) {
 
 		String field = "$" + name + "." + call;

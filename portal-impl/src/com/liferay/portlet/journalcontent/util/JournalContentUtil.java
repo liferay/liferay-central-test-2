@@ -74,7 +74,7 @@ public class JournalContentUtil {
 		articleId = GetterUtil.getString(articleId).toUpperCase();
 		templateId = GetterUtil.getString(templateId).toUpperCase();
 
-		String groupKey = _encodeGroupKey(groupId, articleId, templateId);
+		String groupKey = encodeGroupKey(groupId, articleId, templateId);
 
 		MultiVMPoolUtil.clearGroup(_groups, groupKey, _cache);
 	}
@@ -189,21 +189,21 @@ public class JournalContentUtil {
 		articleId = GetterUtil.getString(articleId).toUpperCase();
 		templateId = GetterUtil.getString(templateId).toUpperCase();
 
-		String key = _encodeKey(
+		String key = encodeKey(
 			groupId, articleId, templateId, viewMode, languageId, page);
 
 		JournalArticleDisplay articleDisplay =
 			(JournalArticleDisplay)MultiVMPoolUtil.get(_cache, key);
 
 		if ((articleDisplay == null) || (!themeDisplay.isLifecycleRender())) {
-			articleDisplay = _getArticleDisplay(
+			articleDisplay = getArticleDisplay(
 				groupId, articleId, templateId, viewMode, languageId, page,
 				xmlRequest, themeDisplay);
 
 			if ((articleDisplay != null) && (articleDisplay.isCacheable()) &&
 				(themeDisplay.isLifecycleRender())) {
 
-				String groupKey = _encodeGroupKey(
+				String groupKey = encodeGroupKey(
 					groupId, articleId, templateId);
 
 				MultiVMPoolUtil.put(
@@ -234,13 +234,13 @@ public class JournalContentUtil {
 		return articleDisplay;
 	}
 
-	private static String _encodeGroupKey(
+	protected static String encodeGroupKey(
 		long groupId, String articleId, String templateId) {
 
-		return _encodeKey(groupId, articleId, templateId, null, null, 0);
+		return encodeKey(groupId, articleId, templateId, null, null, 0);
 	}
 
-	private static String _encodeKey(
+	protected static String encodeKey(
 		long groupId, String articleId, String templateId, String viewMode,
 		String languageId, int page) {
 
@@ -272,7 +272,7 @@ public class JournalContentUtil {
 		return sb.toString();
 	}
 
-	private static JournalArticleDisplay _getArticleDisplay(
+	protected static JournalArticleDisplay getArticleDisplay(
 		long groupId, String articleId, String templateId, String viewMode,
 		String languageId, int page, String xmlRequest,
 		ThemeDisplay themeDisplay) {
