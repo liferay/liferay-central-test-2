@@ -140,7 +140,9 @@ public class LDAPAuth implements Authenticator {
 		// Make exceptions for omniadmins so that if they break the LDAP
 		// configuration, they can still login to fix the problem
 
-		if (authenticateOmniadmin(companyId, emailAddress, userId) == SUCCESS) {
+		if (authenticateOmniadmin(
+				companyId, emailAddress, screenName, userId) == SUCCESS) {
+
 			return SUCCESS;
 		}
 
@@ -351,7 +353,7 @@ public class LDAPAuth implements Authenticator {
 	}
 
 	protected int authenticateOmniadmin(
-			long companyId, String emailAddress, long userId)
+			long companyId, String emailAddress, String screenName, long userId)
 		throws Exception {
 
 		// Only allow omniadmin if Liferay password checking is enabled
@@ -366,6 +368,18 @@ public class LDAPAuth implements Authenticator {
 				try {
 					User user = UserLocalServiceUtil.getUserByEmailAddress(
 						companyId, emailAddress);
+
+					if (OmniadminUtil.isOmniadmin(user.getUserId())) {
+						return SUCCESS;
+					}
+				}
+				catch (NoSuchUserException nsue) {
+				}
+			}
+			else if (Validator.isNotNull(screenName)) {
+				try {
+					User user = UserLocalServiceUtil.getUserByScreenName(
+						companyId, screenName);
 
 					if (OmniadminUtil.isOmniadmin(user.getUserId())) {
 						return SUCCESS;
