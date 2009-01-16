@@ -478,6 +478,17 @@ public class Validator {
 		}
 	}
 
+	public static boolean isWhitespace(char c) {
+		int i = (int)c;
+
+		if ((i == 0) || Character.isWhitespace(c)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	private static final int _CHAR_BEGIN = 65;
 
 	private static final int _CHAR_END = 122;
