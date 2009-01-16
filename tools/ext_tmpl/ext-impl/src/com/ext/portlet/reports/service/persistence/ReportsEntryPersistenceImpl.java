@@ -6,6 +6,7 @@ import com.ext.portlet.reports.model.impl.ReportsEntryImpl;
 import com.ext.portlet.reports.model.impl.ReportsEntryModelImpl;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -13,11 +14,11 @@ import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import org.apache.commons.logging.Log;
@@ -32,7 +33,8 @@ import java.util.List;
 public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
     implements ReportsEntryPersistence {
     private static Log _log = LogFactory.getLog(ReportsEntryPersistenceImpl.class);
-    private ModelListener[] _listeners = new ModelListener[0];
+    @BeanReference(name = "com.ext.portlet.reports.service.persistence.ReportsEntryPersistence.impl")
+    protected com.ext.portlet.reports.service.persistence.ReportsEntryPersistence reportsEntryPersistence;
 
     public ReportsEntry create(String entryId) {
         ReportsEntry reportsEntry = new ReportsEntryImpl();
@@ -75,18 +77,14 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
 
     public ReportsEntry remove(ReportsEntry reportsEntry)
         throws SystemException {
-        if (_listeners.length > 0) {
-            for (ModelListener listener : _listeners) {
-                listener.onBeforeRemove(reportsEntry);
-            }
+        for (ModelListener listener : listeners) {
+            listener.onBeforeRemove(reportsEntry);
         }
 
         reportsEntry = removeImpl(reportsEntry);
 
-        if (_listeners.length > 0) {
-            for (ModelListener listener : _listeners) {
-                listener.onAfterRemove(reportsEntry);
-            }
+        for (ModelListener listener : listeners) {
+            listener.onAfterRemove(reportsEntry);
         }
 
         return reportsEntry;
@@ -98,6 +96,15 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
 
         try {
             session = openSession();
+
+            if (BatchSessionUtil.isEnabled()) {
+                Object staleObject = session.get(ReportsEntryImpl.class,
+                        reportsEntry.getPrimaryKeyObj());
+
+                if (staleObject != null) {
+                    session.evict(staleObject);
+                }
+            }
 
             session.delete(reportsEntry);
 
@@ -143,25 +150,21 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
         throws SystemException {
         boolean isNew = reportsEntry.isNew();
 
-        if (_listeners.length > 0) {
-            for (ModelListener listener : _listeners) {
-                if (isNew) {
-                    listener.onBeforeCreate(reportsEntry);
-                } else {
-                    listener.onBeforeUpdate(reportsEntry);
-                }
+        for (ModelListener listener : listeners) {
+            if (isNew) {
+                listener.onBeforeCreate(reportsEntry);
+            } else {
+                listener.onBeforeUpdate(reportsEntry);
             }
         }
 
         reportsEntry = updateImpl(reportsEntry, merge);
 
-        if (_listeners.length > 0) {
-            for (ModelListener listener : _listeners) {
-                if (isNew) {
-                    listener.onAfterCreate(reportsEntry);
-                } else {
-                    listener.onAfterUpdate(reportsEntry);
-                }
+        for (ModelListener listener : listeners) {
+            if (isNew) {
+                listener.onAfterCreate(reportsEntry);
+            } else {
+                listener.onAfterUpdate(reportsEntry);
             }
         }
 
@@ -176,15 +179,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
         try {
             session = openSession();
 
-            if (merge) {
-                session.merge(reportsEntry);
-            } else {
-                if (reportsEntry.isNew()) {
-                    session.save(reportsEntry);
-                }
-            }
-
-            session.flush();
+            BatchSessionUtil.update(session, reportsEntry, merge);
 
             reportsEntry.setNew(false);
 
@@ -812,11 +807,16 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
 
                 Query q = session.createQuery(query.toString());
 
-                List<ReportsEntry> list = (List<ReportsEntry>) QueryUtil.list(q,
-                        getDialect(), start, end);
+                List<ReportsEntry> list = null;
 
                 if (obc == null) {
+                    list = (List<ReportsEntry>) QueryUtil.list(q, getDialect(),
+                            start, end, false);
+
                     Collections.sort(list);
+                } else {
+                    list = (List<ReportsEntry>) QueryUtil.list(q, getDialect(),
+                            start, end);
                 }
 
                 FinderCacheUtil.putResult(finderClassNameCacheEnabled,
@@ -1040,22 +1040,6 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
         }
     }
 
-    public void registerListener(ModelListener listener) {
-        List<ModelListener> listeners = ListUtil.fromArray(_listeners);
-
-        listeners.add(listener);
-
-        _listeners = listeners.toArray(new ModelListener[listeners.size()]);
-    }
-
-    public void unregisterListener(ModelListener listener) {
-        List<ModelListener> listeners = ListUtil.fromArray(_listeners);
-
-        listeners.remove(listener);
-
-        _listeners = listeners.toArray(new ModelListener[listeners.size()]);
-    }
-
     public void afterPropertiesSet() {
         String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
                     com.liferay.portal.util.PropsUtil.get(
@@ -1063,14 +1047,14 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
 
         if (listenerClassNames.length > 0) {
             try {
-                List<ModelListener> listeners = new ArrayList<ModelListener>();
+                List<ModelListener> listenersList = new ArrayList<ModelListener>();
 
                 for (String listenerClassName : listenerClassNames) {
-                    listeners.add((ModelListener) Class.forName(
+                    listenersList.add((ModelListener) Class.forName(
                             listenerClassName).newInstance());
                 }
 
-                _listeners = listeners.toArray(new ModelListener[listeners.size()]);
+                listeners = listenersList.toArray(new ModelListener[listenersList.size()]);
             } catch (Exception e) {
                 _log.error(e);
             }

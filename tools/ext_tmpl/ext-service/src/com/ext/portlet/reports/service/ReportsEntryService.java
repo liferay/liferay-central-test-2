@@ -1,5 +1,9 @@
 package com.ext.portlet.reports.service;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.Transactional;
+
 
 /**
  * <a href="ReportsEntryService.java.html"><b><i>View Source</i></b></a>
@@ -25,5 +29,8 @@ package com.ext.portlet.reports.service;
  * @see com.ext.portlet.reports.service.ReportsEntryServiceUtil
  *
  */
+@Transactional(rollbackFor =  {
+    PortalException.class, SystemException.class}
+)
 public interface ReportsEntryService {
 }

@@ -34,9 +34,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.ext.portlet.reports.service.model.ReportsEntry
- * @see com.ext.portlet.reports.service.model.ReportsEntryModel
- * @see com.ext.portlet.reports.service.model.impl.ReportsEntryImpl
+ * @see com.ext.portlet.reports.model.ReportsEntry
+ * @see com.ext.portlet.reports.model.ReportsEntryModel
+ * @see com.ext.portlet.reports.model.impl.ReportsEntryImpl
  *
  */
 public class ReportsEntryModelImpl extends BaseModelImpl {
@@ -215,6 +215,7 @@ public class ReportsEntryModelImpl extends BaseModelImpl {
         } else {
             ReportsEntry model = new ReportsEntryImpl();
 
+            model.setNew(isNew());
             model.setEscapedModel(true);
 
             model.setEntryId(HtmlUtil.escape(getEntryId()));

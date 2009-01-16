@@ -20,9 +20,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.ext.portlet.reports.service.model.ReportsEntry
- * @see com.ext.portlet.reports.service.model.impl.ReportsEntryImpl
- * @see com.ext.portlet.reports.service.model.impl.ReportsEntryModelImpl
+ * @see com.ext.portlet.reports.model.ReportsEntry
+ * @see com.ext.portlet.reports.model.impl.ReportsEntryImpl
+ * @see com.ext.portlet.reports.model.impl.ReportsEntryModelImpl
  *
  */
 public interface ReportsEntryModel extends BaseModel {

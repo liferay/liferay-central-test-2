@@ -3,14 +3,15 @@ package com.ext.portlet.reports.service.base;
 import com.ext.portlet.reports.service.ReportsEntryService;
 import com.ext.portlet.reports.service.persistence.ReportsEntryPersistence;
 
+import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.service.base.PrincipalBean;
 
 
 public abstract class ReportsEntryServiceBaseImpl extends PrincipalBean
     implements ReportsEntryService {
-    @javax.annotation.Resource(name = "com.ext.portlet.reports.service.ReportsEntryService.impl")
+    @BeanReference(name = "com.ext.portlet.reports.service.ReportsEntryService.impl")
     protected ReportsEntryService reportsEntryService;
-    @javax.annotation.Resource(name = "com.ext.portlet.reports.service.persistence.ReportsEntryPersistence.impl")
+    @BeanReference(name = "com.ext.portlet.reports.service.persistence.ReportsEntryPersistence.impl")
     protected ReportsEntryPersistence reportsEntryPersistence;
 
     public ReportsEntryService getReportsEntryService() {

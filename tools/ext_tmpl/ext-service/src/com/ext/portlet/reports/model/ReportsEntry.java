@@ -15,15 +15,15 @@ package com.ext.portlet.reports.model;
  * </p>
  *
  * <p>
- * Customize <code>com.ext.portlet.reports.service.model.impl.ReportsEntryImpl</code>
+ * Customize <code>com.ext.portlet.reports.model.impl.ReportsEntryImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.ext.portlet.reports.service.model.ReportsEntryModel
- * @see com.ext.portlet.reports.service.model.impl.ReportsEntryImpl
- * @see com.ext.portlet.reports.service.model.impl.ReportsEntryModelImpl
+ * @see com.ext.portlet.reports.model.ReportsEntryModel
+ * @see com.ext.portlet.reports.model.impl.ReportsEntryImpl
+ * @see com.ext.portlet.reports.model.impl.ReportsEntryModelImpl
  *
  */
 public interface ReportsEntry extends ReportsEntryModel {

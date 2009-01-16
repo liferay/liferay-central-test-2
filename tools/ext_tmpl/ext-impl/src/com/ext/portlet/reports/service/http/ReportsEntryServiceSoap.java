@@ -47,9 +47,9 @@ package com.ext.portlet.reports.service.http;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.ext.portlet.reports.model.ReportsEntrySoap
  * @see com.ext.portlet.reports.service.ReportsEntryServiceUtil
  * @see com.ext.portlet.reports.service.http.ReportsEntryServiceHttp
- * @see com.ext.portlet.reports.service.model.ReportsEntrySoap
  *
  */
 public class ReportsEntryServiceSoap {
