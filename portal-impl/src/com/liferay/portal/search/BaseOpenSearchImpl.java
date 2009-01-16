@@ -221,13 +221,15 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 
 		if (format.equals("rss")) {
 			return addSearchResultsRSS(
-				keywords, startPage, itemsPerPage, total, start, totalPages,
-				previousPage, nextPage, title, searchPath, themeDisplay);
+				doc, keywords, startPage, itemsPerPage, total, start,
+				totalPages, previousPage, nextPage, title, searchPath,
+				themeDisplay);
 		}
 		else {
 			return addSearchResultsAtom(
-				keywords, startPage, itemsPerPage, total, start, totalPages,
-				previousPage, nextPage, title, searchPath, themeDisplay);
+				doc, keywords, startPage, itemsPerPage, total, start,
+				totalPages, previousPage, nextPage, title, searchPath,
+				themeDisplay);
 		}
 	}
 
