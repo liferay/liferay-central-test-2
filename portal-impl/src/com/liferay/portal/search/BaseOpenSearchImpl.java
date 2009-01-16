@@ -73,6 +73,9 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 		int itemsPerPage = GetterUtil.getInteger(
 			HttpUtil.getParameter(url, "c", false),
 			SearchContainer.DEFAULT_DELTA);
+        String format = GetterUtil.getString(
+			HttpUtil.getParameter(url, "format", false));
+        useRSS = ("RSS".equalsIgnoreCase(format));
 
 		return search(request, keywords, startPage, itemsPerPage);
 	}
@@ -93,6 +96,42 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 	protected void addSearchResult(
 		Element root, String title, String link, Date updated, String summary,
 		String[] tags, double ratings, double score) {
+        if (this.useRSS) {
+            // item
+
+            Element item = root.addElement("item");
+            // title
+
+            OpenSearchUtil.addElement(
+                    item, "title", OpenSearchUtil.NO_NAMESPACE, title);
+
+            // link
+
+            OpenSearchUtil.addElement(
+                    item, "link", OpenSearchUtil.NO_NAMESPACE, link);
+
+            // summary
+
+            OpenSearchUtil.addElement(
+                    item, "description", OpenSearchUtil.NO_NAMESPACE, summary);
+
+            // tags
+
+            OpenSearchUtil.addElement(
+                    item, "tags", OpenSearchUtil.NO_NAMESPACE,
+                    StringUtil.merge(tags));
+
+            // ratings
+
+            OpenSearchUtil.addElement(
+                    item, "ratings", OpenSearchUtil.NO_NAMESPACE, ratings);
+
+            // relevance:score
+
+            OpenSearchUtil.addElement(
+                    item, "score", OpenSearchUtil.RELEVANCE_NAMESPACE, score);
+            return;
+        }
 
 		// entry
 
@@ -164,6 +203,53 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 
 		Document doc = SAXReaderUtil.createDocument();
 
+        if (useRSS) {
+            // rss
+            Element rssRoot = doc.addElement("rss");
+            rssRoot.addAttribute("version", "2.0");
+            rssRoot.add(SAXReaderUtil.createNamespace("atom", "http://www.w3.org/2005/Atom"));
+            rssRoot.add(OpenSearchUtil.getNamespace(OpenSearchUtil.OS_NAMESPACE));
+            rssRoot.add(
+                    OpenSearchUtil.getNamespace(OpenSearchUtil.RELEVANCE_NAMESPACE));
+            // channel
+            Element channel = rssRoot.addElement("channel");
+            // title
+
+            OpenSearchUtil.addElement(
+                    channel, "title", OpenSearchUtil.NO_NAMESPACE, title);
+            // link
+
+            OpenSearchUtil.addElement(
+                    channel, "link", OpenSearchUtil.NO_NAMESPACE, themeDisplay.getURLPortal() + searchPath);
+            // description
+
+            OpenSearchUtil.addElement(
+                    channel, "description", OpenSearchUtil.NO_NAMESPACE, title);
+            // opensearch:totalResults
+
+            OpenSearchUtil.addElement(
+                    channel, "totalResults", OpenSearchUtil.OS_NAMESPACE, total);
+
+            // opensearch:startIndex
+
+            OpenSearchUtil.addElement(
+                    channel, "startIndex", OpenSearchUtil.OS_NAMESPACE, start + 1);
+
+            // opensearch:itemsPerPage
+
+            OpenSearchUtil.addElement(
+                    channel, "itemsPerPage", OpenSearchUtil.OS_NAMESPACE, itemsPerPage);
+            // opensearch:Query
+
+            Element query = OpenSearchUtil.addElement(
+                    channel, "Query", OpenSearchUtil.OS_NAMESPACE);
+
+            query.addAttribute("role", "request");
+            query.addAttribute("searchTerms", keywords);
+            query.addAttribute("startPage", String.valueOf(startPage));
+            return new Object[] {doc, channel};
+
+        }
 		// feed
 
 		Element root = doc.addElement("feed");
@@ -292,5 +378,11 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 
 		return portletURL;
 	}
+
+    protected void setRSS(boolean v) {
+        this.useRSS = v;
+    }
+
+    private boolean useRSS = false;
 
 }

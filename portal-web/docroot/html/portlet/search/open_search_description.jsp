@@ -34,4 +34,5 @@ response.setContentType(ContentTypes.TEXT_XML_UTF8);
 	<ShortName>Liferay Search</ShortName>
 	<Description>Liferay Portal Search</Description>
 	<Url type="application/atom+xml" template="<%= themeDisplay.getPortalURL() %><%= PortalUtil.getPathMain() %>/search/open_search?keywords={searchTerms}&amp;p={startPage?}&amp;c={count?}&amp;format=atom" />
+	<Url type="application/rss+xml" template="<%= themeDisplay.getPortalURL() %><%= PortalUtil.getPathMain() %>/search/open_search?keywords={searchTerms}&amp;p={startPage?}&amp;c={count?}&amp;format=rss" />
 </OpenSearchDescription>
