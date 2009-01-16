@@ -2042,7 +2042,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return		true if the portlet has a role with the specified name
 	 */
 	public boolean hasRoleWithName(String roleName) {
-		if (_rolesArray == null) {
+		if ((_rolesArray == null) || (_rolesArray.length == 0)) {
 			return false;
 		}
 
