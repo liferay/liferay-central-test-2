@@ -94,7 +94,7 @@ boolean allowTrackbacks = BeanParamUtil.getBoolean(entry, request, "allowTrackba
 			<portlet:namespace />oldTitle = title;
 			<portlet:namespace />oldContent = content;
 
-			var url = document.<portlet:namespace />fm.<portlet:namespace />saveDraftURL.value;
+			var url = '<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/blogs/edit_entry" /></portlet:actionURL>';
 
 			jQuery.ajax(
 				{
@@ -188,7 +188,6 @@ boolean allowTrackbacks = BeanParamUtil.getBoolean(entry, request, "allowTrackba
 <input name="<portlet:namespace />referringPortletResource" type="hidden" value="<%= HtmlUtil.escape(referringPortletResource) %>" />
 <input name="<portlet:namespace />entryId" type="hidden" value="<%= entryId %>" />
 <input name="<portlet:namespace />draft" type="hidden" value="0" />
-<input name="<portlet:namespace />saveDraftURL" type="hidden" value="<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/blogs/edit_entry" /></portlet:actionURL>">
 
 <liferay-ui:error exception="<%= EntryTitleException.class %>" message="please-enter-a-valid-title" />
 <liferay-ui:tags-error />
