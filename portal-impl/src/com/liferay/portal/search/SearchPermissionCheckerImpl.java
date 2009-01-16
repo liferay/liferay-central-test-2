@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.SearchPermissionChecker;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Permission;
@@ -150,6 +151,10 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 		BooleanQuery permissionQuery = BooleanQueryFactoryUtil.create();
 
 		List<Role> roles = RoleLocalServiceUtil.getUserRoles(userId);
+
+		roles = ListUtil.copy(roles);
+
+		roles.addAll(RoleLocalServiceUtil.getUserGroupRoles(userId, groupId));
 
 		long companyResourceId = 0;
 
