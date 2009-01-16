@@ -84,7 +84,8 @@ public interface LayoutTypePortlet extends LayoutType {
 
 	public void removePortletId(long userId, String portletId);
 
-	public void removePortletId(long userId, String portletId, boolean modeAndState);
+	public void removePortletId(
+		long userId, String portletId, boolean modeAndState);
 
 	public void setPortletIds(String columnId, String portletIds);
 

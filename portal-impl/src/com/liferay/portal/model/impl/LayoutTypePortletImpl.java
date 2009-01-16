@@ -536,7 +536,9 @@ public class LayoutTypePortletImpl
 		removePortletId(userId, portletId, true);
 	}
 
-	public void removePortletId(long userId, String portletId, boolean cleanUp) {
+	public void removePortletId (
+		long userId, String portletId, boolean cleanUp) {
+
 		try {
 			Layout layout = getLayout();
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
