@@ -2042,6 +2042,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return		true if the portlet has a role with the specified name
 	 */
 	public boolean hasRoleWithName(String roleName) {
+		if (_rolesArray == null) {
+			return false;
+		}
+
 		for (int i = 0; i < _rolesArray.length; i++) {
 			if (_rolesArray[i].equalsIgnoreCase(roleName)) {
 				return true;
@@ -2060,7 +2064,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public boolean hasAddPortletPermission(long userId) {
 		try {
-			if (_rolesArray.length == 0) {
+			if ((_rolesArray == null) || (_rolesArray.length == 0)) {
 				return true;
 			}
 			else if (RoleLocalServiceUtil.hasUserRoles(
