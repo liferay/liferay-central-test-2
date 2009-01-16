@@ -111,7 +111,7 @@ public class UpdateLayoutAction extends Action {
 			if (layoutTypePortlet.hasPortletId(portletId)) {
 				deletePortlet = true;
 
-				layoutTypePortlet.removePortletId(portletId);
+				layoutTypePortlet.removePortletId(userId, portletId);
 			}
 		}
 		else if (cmd.equals("drag")) {

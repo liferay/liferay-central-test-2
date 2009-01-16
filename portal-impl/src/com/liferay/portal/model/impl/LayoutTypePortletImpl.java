@@ -504,7 +504,7 @@ public class LayoutTypePortletImpl
 		_enablePortletLayoutListener = false;
 
 		try {
-			removePortletId(portletId, false);
+			removePortletId(userId, portletId, false);
 			addPortletId(userId, portletId, columnId, columnPos);
 		}
 		finally {
@@ -532,11 +532,29 @@ public class LayoutTypePortletImpl
 		}
 	}
 
-	public void removePortletId(String portletId) {
-		removePortletId(portletId, true);
+	public void removePortletId(long userId, String portletId) {
+		removePortletId(userId, portletId, true);
 	}
 
-	public void removePortletId(String portletId, boolean cleanUp) {
+	public void removePortletId(long userId, String portletId, boolean cleanUp) {
+		try {
+			Layout layout = getLayout();
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(
+				layout.getCompanyId(), portletId);
+
+			if (portlet == null) {
+				_log.error(
+					"Portlet " + portletId +
+						" cannot be removed because it is not registered");
+			}
+
+			if (!portlet.hasAddPortletPermission(userId)) {
+				return;
+			}
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
 		List<String> columns = getColumns();
 
 		for (int i = 0; i < columns.size(); i++) {
