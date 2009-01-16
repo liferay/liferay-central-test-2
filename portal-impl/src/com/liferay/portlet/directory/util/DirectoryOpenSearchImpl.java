@@ -55,11 +55,11 @@ public class DirectoryOpenSearchImpl extends BaseOpenSearchImpl {
 
 	public String search(
 			HttpServletRequest request, String keywords, int startPage,
-			int itemsPerPage)
+			int itemsPerPage, String format)
 		throws SearchException {
 
 		try {
-			return _search(request, keywords, startPage, itemsPerPage);
+			return _search(request, keywords, startPage, itemsPerPage, format);
 		}
 		catch (Exception e) {
 			throw new SearchException(e);
@@ -68,7 +68,7 @@ public class DirectoryOpenSearchImpl extends BaseOpenSearchImpl {
 
 	private String _search(
 			HttpServletRequest request, String keywords, int startPage,
-			int itemsPerPage)
+			int itemsPerPage, String format)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
@@ -86,7 +86,8 @@ public class DirectoryOpenSearchImpl extends BaseOpenSearchImpl {
 
 		Object[] values = addSearchResults(
 			keywords, startPage, itemsPerPage, total, start,
-			"Liferay Directory Search: " + keywords, SEARCH_PATH, themeDisplay);
+			"Liferay Directory Search: " + keywords, SEARCH_PATH, format,
+			themeDisplay);
 
 		Document doc = (Document)values[0];
 		Element root = (Element)values[1];
@@ -106,7 +107,8 @@ public class DirectoryOpenSearchImpl extends BaseOpenSearchImpl {
 				user.getFullName() + " &lt;" + user.getEmailAddress() + "&gt;";
 			double score = 1.0;
 
-			addSearchResult(root, title, url, modifedDate, content, score);
+			addSearchResult(
+				root, title, url, modifedDate, content, score, format);
 		}
 
 		if (_log.isDebugEnabled()) {

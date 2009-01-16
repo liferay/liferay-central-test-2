@@ -47,7 +47,7 @@ public class OpenSearchUtil {
 
 	public static final int RELEVANCE_NAMESPACE = 2;
 
-    public static final int NO_NAMESPACE = 3;
+	public static final int NO_NAMESPACE = 3;
 
 	public static Element addElement(
 		Element el, String name, int namespaceType) {
@@ -121,10 +121,12 @@ public class OpenSearchUtil {
 	}
 
 	public static QName getQName(String name, int namespaceType) {
-        if (NO_NAMESPACE == namespaceType) {
-            return SAXReaderUtil.createQName(name);
-        }
-		return SAXReaderUtil.createQName(name, getNamespace(namespaceType));
+		if (NO_NAMESPACE == namespaceType) {
+			return SAXReaderUtil.createQName(name);
+		}
+		else {
+			return SAXReaderUtil.createQName(name, getNamespace(namespaceType));
+		}
 	}
 
 }

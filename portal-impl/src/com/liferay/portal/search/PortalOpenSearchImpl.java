@@ -67,7 +67,7 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 
 	public String search(
 			HttpServletRequest request, String keywords, int startPage,
-			int itemsPerPage)
+			int itemsPerPage, String format)
 		throws SearchException {
 
 		try {
@@ -84,7 +84,7 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 
 			Object[] values = addSearchResults(
 				keywords, startPage, itemsPerPage, total, start,
-				"Liferay Portal Search: " + keywords, SEARCH_PATH,
+				"Liferay Portal Search: " + keywords, SEARCH_PATH, format,
 				themeDisplay);
 
 			com.liferay.portal.kernel.xml.Document doc =
@@ -139,7 +139,7 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 
 				addSearchResult(
 					root, portletTitle + " &raquo; " + title, url, modifedDate,
-					content, score);
+					content, score, format);
 			}
 
 			if (_log.isDebugEnabled()) {

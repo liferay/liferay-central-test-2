@@ -39,7 +39,7 @@ public interface OpenSearch {
 
 	public String search(
 			HttpServletRequest request, String keywords, int startPage,
-			int itemsPerPage)
+			int itemsPerPage, String format)
 		throws SearchException;
 
 }

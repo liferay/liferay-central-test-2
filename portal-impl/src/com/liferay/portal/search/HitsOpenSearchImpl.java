@@ -67,7 +67,7 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 
 	public String search(
 			HttpServletRequest request, String keywords, int startPage,
-			int itemsPerPage)
+			int itemsPerPage, String format)
 		throws SearchException {
 
 		try {
@@ -84,7 +84,7 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 
 			Object[] values = addSearchResults(
 				keywords, startPage, itemsPerPage, total, start,
-				getTitle(keywords), getSearchPath(), themeDisplay);
+				getTitle(keywords), getSearchPath(), format, themeDisplay);
 
 			com.liferay.portal.kernel.xml.Document doc =
 				(com.liferay.portal.kernel.xml.Document)values[0];
@@ -145,7 +145,7 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 
 				addSearchResult(
 					root, title, url, modifedDate, content, tags, ratings,
-					score);
+					score, format);
 			}
 
 			if (_log.isDebugEnabled()) {
