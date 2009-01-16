@@ -65,7 +65,7 @@ public class JournalContentUtil {
 	public static String VIEW_MODE_SEPARATOR = "_VIEW_MODE_";
 
 	public static void clearCache() {
-		_cache.removeAll();
+		cache.removeAll();
 	}
 
 	public static void clearCache(
@@ -76,7 +76,7 @@ public class JournalContentUtil {
 
 		String groupKey = encodeGroupKey(groupId, articleId, templateId);
 
-		MultiVMPoolUtil.clearGroup(_groups, groupKey, _cache);
+		MultiVMPoolUtil.clearGroup(groups, groupKey, cache);
 	}
 
 	public static String getContent(
@@ -193,7 +193,7 @@ public class JournalContentUtil {
 			groupId, articleId, templateId, viewMode, languageId, page);
 
 		JournalArticleDisplay articleDisplay =
-			(JournalArticleDisplay)MultiVMPoolUtil.get(_cache, key);
+			(JournalArticleDisplay)MultiVMPoolUtil.get(cache, key);
 
 		if ((articleDisplay == null) || (!themeDisplay.isLifecycleRender())) {
 			articleDisplay = getArticleDisplay(
@@ -207,7 +207,7 @@ public class JournalContentUtil {
 					groupId, articleId, templateId);
 
 				MultiVMPoolUtil.put(
-					_cache, key, _groups, groupKey, articleDisplay);
+					cache, key, groups, groupKey, articleDisplay);
 			}
 		}
 
@@ -299,11 +299,11 @@ public class JournalContentUtil {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(JournalContentUtil.class);
+	protected static PortalCache cache = MultiVMPoolUtil.getCache(CACHE_NAME);
 
-	private static PortalCache _cache = MultiVMPoolUtil.getCache(CACHE_NAME);
-
-	private static Map<String, Set<String>> _groups =
+	protected static Map<String, Set<String>> groups =
 		new ConcurrentHashMap<String, Set<String>>();
+
+	private static Log _log = LogFactory.getLog(JournalContentUtil.class);
 
 }
