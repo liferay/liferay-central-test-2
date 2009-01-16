@@ -25,11 +25,6 @@
 <%@ include file="/html/portlet/search/init.jsp" %>
 
 <%
-String defaultKeywords = LanguageUtil.get(pageContext, "search") + "...";
-String unicodeDefaultKeywords = UnicodeFormatter.toString(defaultKeywords);
-
-String keywords = ParamUtil.getString(request, "keywords", defaultKeywords);
-
 String primarySearch = ParamUtil.getString(request, "primarySearch");
 
 if (Validator.isNotNull(primarySearch)) {
@@ -38,9 +33,17 @@ if (Validator.isNotNull(primarySearch)) {
 else {
 	primarySearch = portalPrefs.getValue(PortletKeys.SEARCH, "primary-search", StringPool.BLANK);
 }
+
+String defaultKeywords = LanguageUtil.get(pageContext, "search") + "...";
+String unicodeDefaultKeywords = UnicodeFormatter.toString(defaultKeywords);
+
+String keywords = ParamUtil.getString(request, "keywords", defaultKeywords);
+
+String format = ParamUtil.getString(request, "format");
 %>
 
 <form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/search/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+<input name="<portlet:namespace />format" type="hidden" value="<%= format %>" />
 
 <input name="<portlet:namespace />keywords" size="30" type="text" value="<%= HtmlUtil.escape(keywords) %>" onBlur="if (this.value == '') { this.value = '<%= unicodeDefaultKeywords %>'; }" onFocus="if (this.value == '<%= unicodeDefaultKeywords %>') { this.value = ''; }" />
 
@@ -104,6 +107,7 @@ for (int i = 0; i < portlets.size(); i++) {
 
 	portletURL.setParameter("struts_action", "/search/search");
 	portletURL.setParameter("keywords", keywords);
+	portletURL.setParameter("format", format);
 
 	List<String> headerNames = new ArrayList<String>();
 
@@ -123,7 +127,7 @@ for (int i = 0; i < portlets.size(); i++) {
 	List resultRows = new ArrayList();
 
 	try {
-		String xml = openSearch.search(request, keywords, searchContainer.getCur(), searchContainer.getDelta());
+		String xml = openSearch.search(request, keywords, searchContainer.getCur(), searchContainer.getDelta(), format);
 
 		Document doc = SAXReaderUtil.read(xml);
 
@@ -194,6 +198,7 @@ for (int i = 0; i < portlets.size(); i++) {
 				PortletURL tagURL = PortletURLUtil.clone(portletURL, renderResponse);
 
 				tagURL.setParameter("keywords", Field.TAGS_ENTRIES + StringPool.COLON + tag);
+				tagURL.setParameter("format", format);
 
 				sb.append("<a href=\"");
 				sb.append(tagURL.toString());
@@ -262,7 +267,7 @@ for (int i = 0; i < portlets.size(); i++) {
 		</c:when>
 		<c:otherwise>
 			<div style="padding-top: 5px;">
-				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/search/search" /><portlet:param name="primarySearch" value="<%= portlet.getOpenSearchClass() %>" /><portlet:param name="keywords" value="<%= HtmlUtil.escape(keywords) %>" /></portlet:renderURL>"><liferay-ui:message key="more" /> &raquo;</a>
+				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/search/search" /><portlet:param name="primarySearch" value="<%= portlet.getOpenSearchClass() %>" /><portlet:param name="keywords" value="<%= HtmlUtil.escape(keywords) %>" /><portlet:param name="format" value="<%= format %>" /></portlet:renderURL>"><liferay-ui:message key="more" /> &raquo;</a>
 			</div>
 		</c:otherwise>
 	</c:choose>
