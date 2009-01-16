@@ -80,41 +80,6 @@ String javascriptTitle = LanguageUtil.get(pageContext, "javascript");
 		</tr>
 		<tr>
 			<td>
-				<liferay-ui:message key="robots" />
-			</td>
-			<td>
-
-				<%
-				String selLayoutProperty = "typeSettingsProperties(meta-robots_" + defaultLanguageId + ")";
-				%>
-
-				<textarea class="lfr-textarea" name="TypeSettingsProperties(meta-robots_<%= defaultLanguageId %>)" wrap="soft" style="width: 300px;"><bean:write name="SEL_LAYOUT" property="<%= selLayoutProperty %>" /></textarea>
-			</td>
-			<td>
-
-				<%
-				for (int i = 0; i < locales.length; i++) {
-					if (locales[i].equals(defaultLocale)) {
-						continue;
-					}
-				%>
-
-					<input class="lfr-textarea" id="<portlet:namespace />meta-robots_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="TypeSettingsProperties(meta-robots_<%= LocaleUtil.toLanguageId(locales[i]) %>)" type="hidden" value='<%= GetterUtil.getString(selLayout.getTypeSettingsProperties().getProperty("meta-robots_" + LocaleUtil.toLanguageId(locales[i]))) %>'>
-
-				<%
-				}
-				%>
-
-				<textarea class="lfr-textarea" id="<portlet:namespace />meta-robots_temp" name="TypeSettingsProperties(meta-robots_temp)" onChange="<portlet:namespace />onRobotsChanged();" style="width: 300px; <%= currentLocale.equals(defaultLocale) ? "display: none" : "" %>" wrap="soft"></textarea>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="3">
-				<br />
-			</td>
-		</tr>
-		<tr>
-			<td>
 				<liferay-ui:message key="description" />
 			</td>
 			<td>
@@ -141,6 +106,11 @@ String javascriptTitle = LanguageUtil.get(pageContext, "javascript");
 				%>
 
 				<textarea class="lfr-textarea" id="<portlet:namespace />meta-description_temp" name="TypeSettingsProperties(meta-description_temp)" onChange="<portlet:namespace />onDescriptionChanged();" style="width: 300px; <%= currentLocale.equals(defaultLocale) ? "display: none" : "" %>" wrap="soft"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<br />
 			</td>
 		</tr>
 		<tr>
@@ -171,6 +141,41 @@ String javascriptTitle = LanguageUtil.get(pageContext, "javascript");
 				%>
 
 				<textarea class="lfr-textarea" id="<portlet:namespace />meta-keywords_temp" name="TypeSettingsProperties(meta-keywords_temp)" onChange="<portlet:namespace />onKeywordsChanged();" style="width: 300px; <%= currentLocale.equals(defaultLocale) ? "display: none" : "" %>" wrap="soft"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<br />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="robots" />
+			</td>
+			<td>
+
+				<%
+				String selLayoutProperty = "typeSettingsProperties(meta-robots_" + defaultLanguageId + ")";
+				%>
+
+				<textarea class="lfr-textarea" name="TypeSettingsProperties(meta-robots_<%= defaultLanguageId %>)" wrap="soft" style="width: 300px;"><bean:write name="SEL_LAYOUT" property="<%= selLayoutProperty %>" /></textarea>
+			</td>
+			<td>
+
+				<%
+				for (int i = 0; i < locales.length; i++) {
+					if (locales[i].equals(defaultLocale)) {
+						continue;
+					}
+				%>
+
+					<input class="lfr-textarea" id="<portlet:namespace />meta-robots_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="TypeSettingsProperties(meta-robots_<%= LocaleUtil.toLanguageId(locales[i]) %>)" type="hidden" value='<%= GetterUtil.getString(selLayout.getTypeSettingsProperties().getProperty("meta-robots_" + LocaleUtil.toLanguageId(locales[i]))) %>'>
+
+				<%
+				}
+				%>
+
+				<textarea class="lfr-textarea" id="<portlet:namespace />meta-robots_temp" name="TypeSettingsProperties(meta-robots_temp)" onChange="<portlet:namespace />onRobotsChanged();" style="width: 300px; <%= currentLocale.equals(defaultLocale) ? "display: none" : "" %>" wrap="soft"></textarea>
 			</td>
 		</tr>
 		</table>
