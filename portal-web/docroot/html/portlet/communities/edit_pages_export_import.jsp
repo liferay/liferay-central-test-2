@@ -1,3 +1,4 @@
+<%@ page import="com.liferay.portal.lar.LayoutExporter" %>
 <%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
@@ -66,6 +67,12 @@ while (itr1.hasNext()) {
 			}
 		}
 	}
+}
+
+for (String curPortletId : LayoutExporter.EXPORT_ALWAYS_PORTLET_IDS) {
+	Portlet curPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), curPortletId);
+
+	portletsList.add(curPortlet);
 }
 
 portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(application, locale));
