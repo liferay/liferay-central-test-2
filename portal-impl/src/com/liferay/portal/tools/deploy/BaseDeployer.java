@@ -391,7 +391,7 @@ public class BaseDeployer {
 					deploy = true;
 
 					if (wars.size() > 0) {
-						if (wars.contains(srcFile.getName())) {
+						if (!wars.contains(srcFile.getName())) {
 							deploy = false;
 						}
 					}
