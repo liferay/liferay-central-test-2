@@ -199,31 +199,9 @@
 			<param name="log" value="${oracle.log}" />
 		</antcall>
 
-		<antcall target="rebuild-oracle-sqlldr">
-			<param name="csv.name" value="image" />
-		</antcall>
-
-		<antcall target="rebuild-oracle-sqlldr">
-			<param name="csv.name" value="journalarticle" />
-		</antcall>
-
-		<antcall target="rebuild-oracle-sqlldr">
-			<param name="csv.name" value="journalstructure" />
-		</antcall>
-
-		<antcall target="rebuild-oracle-sqlldr">
-			<param name="csv.name" value="journaltemplate" />
-		</antcall>
-
 		<delete>
 			<fileset dir="portal" includes="*.log" />
 		</delete>
-	</target>
-
-	<target name="rebuild-oracle-sqlldr">
-		<exec executable="${oracle.sqlldr.executable}" dir="portal" output="log/${oracle.log}" append="true">
-			<arg line="${oracle.lportal.user}/${oracle.lportal.password} control=portal-oracle-${csv.name}.ctl" />
-		</exec>
 	</target>
 
 	<target name="rebuild-postgresql">
