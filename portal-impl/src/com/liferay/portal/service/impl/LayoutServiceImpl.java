@@ -171,7 +171,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	}
 
 	public byte[] exportPortletInfo(
-			long groupId, long plid, String portletId,
+			long plid, long groupId, String portletId,
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
@@ -182,11 +182,11 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			ActionKeys.MANAGE_LAYOUTS);
 
 		return layoutLocalService.exportPortletInfo(
-			groupId, plid, portletId, parameterMap, startDate, endDate);
+			plid, groupId, portletId, parameterMap, startDate, endDate);
 	}
 
 	public FileCacheOutputStream exportPortletInfoAsStream(
-			long groupId, long plid, String portletId,
+			long plid, long groupId, String portletId,
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
@@ -197,7 +197,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			ActionKeys.MANAGE_LAYOUTS);
 
 		return layoutLocalService.exportPortletInfoAsStream(
-			groupId, plid, portletId, parameterMap, startDate, endDate);
+			plid, groupId, portletId, parameterMap, startDate, endDate);
 	}
 
 	public void importLayouts(
@@ -237,7 +237,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	}
 
 	public void importPortletInfo(
-			long groupId, long plid, String portletId,
+			long plid, long groupId, String portletId,
 			Map<String, String[]> parameterMap, File file)
 		throws PortalException, SystemException {
 
@@ -248,11 +248,11 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			ActionKeys.MANAGE_LAYOUTS);
 
 		layoutLocalService.importPortletInfo(
-			getUserId(), groupId, plid, portletId, parameterMap, file);
+			getUserId(), plid, groupId, portletId, parameterMap, file);
 	}
 
 	public void importPortletInfo(
-			long groupId, long plid, String portletId,
+			long plid, long groupId, String portletId,
 			Map<String, String[]> parameterMap, InputStream is)
 		throws PortalException, SystemException {
 
@@ -263,7 +263,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			ActionKeys.MANAGE_LAYOUTS);
 
 		layoutLocalService.importPortletInfo(
-			getUserId(), groupId, plid, portletId, parameterMap, is);
+			getUserId(), plid, groupId, portletId, parameterMap, is);
 	}
 
 	public void schedulePublishToLive(

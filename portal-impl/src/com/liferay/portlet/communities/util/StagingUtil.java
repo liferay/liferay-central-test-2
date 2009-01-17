@@ -134,13 +134,13 @@ public class StagingUtil {
 		Layout sourceLayout = LayoutLocalServiceUtil.getLayout(sourcePlid);
 
 		byte[] bytes = LayoutLocalServiceUtil.exportPortletInfo(
-			sourceLayout.getGroupId(), sourcePlid, portletId, parameterMap,
+			sourcePlid, sourceLayout.getGroupId(), portletId, parameterMap,
 			null, null);
 
 		ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
 
 		LayoutServiceUtil.importPortletInfo(
-			sourceLayout.getGroupId(), targetPlid, portletId, parameterMap,
+			targetPlid, sourceLayout.getGroupId(), portletId, parameterMap,
 			bais);
 	}
 

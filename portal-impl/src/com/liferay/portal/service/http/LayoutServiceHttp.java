@@ -598,15 +598,15 @@ public class LayoutServiceHttp {
 	}
 
 	public static byte[] exportPortletInfo(HttpPrincipal httpPrincipal,
-		long groupId, long plid, java.lang.String portletId,
+		long plid, long groupId, java.lang.String portletId,
 		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
 		java.util.Date endDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj0 = new LongWrapper(plid);
 
-			Object paramObj1 = new LongWrapper(plid);
+			Object paramObj1 = new LongWrapper(groupId);
 
 			Object paramObj2 = portletId;
 
@@ -666,16 +666,16 @@ public class LayoutServiceHttp {
 	}
 
 	public static com.liferay.portal.kernel.io.FileCacheOutputStream exportPortletInfoAsStream(
-		HttpPrincipal httpPrincipal, long groupId, long plid,
+		HttpPrincipal httpPrincipal, long plid, long groupId,
 		java.lang.String portletId,
 		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
 		java.util.Date endDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj0 = new LongWrapper(plid);
 
-			Object paramObj1 = new LongWrapper(plid);
+			Object paramObj1 = new LongWrapper(groupId);
 
 			Object paramObj2 = portletId;
 
@@ -879,14 +879,14 @@ public class LayoutServiceHttp {
 	}
 
 	public static void importPortletInfo(HttpPrincipal httpPrincipal,
-		long groupId, long plid, java.lang.String portletId,
+		long plid, long groupId, java.lang.String portletId,
 		java.util.Map<String, String[]> parameterMap, java.io.File file)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj0 = new LongWrapper(plid);
 
-			Object paramObj1 = new LongWrapper(plid);
+			Object paramObj1 = new LongWrapper(groupId);
 
 			Object paramObj2 = portletId;
 
@@ -935,14 +935,14 @@ public class LayoutServiceHttp {
 	}
 
 	public static void importPortletInfo(HttpPrincipal httpPrincipal,
-		long groupId, long plid, java.lang.String portletId,
+		long plid, long groupId, java.lang.String portletId,
 		java.util.Map<String, String[]> parameterMap, java.io.InputStream is)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj0 = new LongWrapper(plid);
 
-			Object paramObj1 = new LongWrapper(plid);
+			Object paramObj1 = new LongWrapper(groupId);
 
 			Object paramObj2 = portletId;
 

@@ -88,7 +88,7 @@ import org.apache.commons.logging.LogFactory;
 public class PortletImporter {
 
 	public void importPortletInfo(
-			long userId, long groupId, long plid, String portletId,
+			long userId, long plid, long groupId, String portletId,
 			Map<String, String[]> parameterMap, InputStream is)
 		throws PortalException, SystemException {
 

@@ -99,12 +99,12 @@ import org.apache.commons.logging.LogFactory;
 public class PortletExporter {
 
 	public byte[] exportPortletInfo(
-			long groupId, long plid, String portletId,
+			long plid, long groupId, String portletId,
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
 		FileCacheOutputStream fcos = exportPortletInfoAsStream(
-			groupId, plid, portletId, parameterMap, startDate, endDate);
+			plid, groupId, portletId, parameterMap, startDate, endDate);
 
 		try {
 			return fcos.getBytes();
@@ -115,7 +115,7 @@ public class PortletExporter {
 	}
 
 	public FileCacheOutputStream exportPortletInfoAsStream(
-			long groupId, long plid, String portletId,
+			long plid, long groupId, String portletId,
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
@@ -158,7 +158,9 @@ public class PortletExporter {
 
 		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
-		if (layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
+		String type = layout.getType();
+
+		if (type.equals(LayoutConstants.TYPE_PORTLET)) {
 			LayoutTypePortlet layoutTypePortlet =
 				(LayoutTypePortlet)layout.getLayoutType();
 
@@ -167,10 +169,11 @@ public class PortletExporter {
 					"The specified layout does not have portlet " + portletId);
 			}
 		}
-		else if (!layout.getType().equals(LayoutConstants.TYPE_PANEL) &&
-				 !layout.getType().equals(LayoutConstants.TYPE_CONTROL_PANEL)) {
+		else if (!type.equals(LayoutConstants.TYPE_CONTROL_PANEL) &&
+				 !type.equals(LayoutConstants.TYPE_PANEL)) {
+
 			throw new LayoutImportException(
-				"Layout type " + layout.getType() + " is not valid");
+				"Layout type " + type + " is not valid");
 		}
 
 		long companyId = layout.getCompanyId();
