@@ -25,6 +25,7 @@ package com.liferay.portal.deploy.auto;
 import com.liferay.portal.deploy.DeployUtil;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.tools.deploy.LayoutTemplateDeployer;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
