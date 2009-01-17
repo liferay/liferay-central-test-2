@@ -618,8 +618,9 @@ public class LayoutAction extends Action {
 					(contentType.startsWith(
 						ContentTypes.MULTIPART_FORM_DATA))) {
 
-					if (!invokerPortlet.getPortletConfig().isWARFile() ||
-						invokerPortlet.isStrutsPortlet()) {
+					if (invokerPortlet.isStrutsPortlet() ||
+						(invokerPortlet.getPortletConfig() != null &&
+							!invokerPortlet.getPortletConfig().isWARFile())) {
 
 						uploadRequest = new UploadServletRequestImpl(request);
 
