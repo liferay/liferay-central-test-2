@@ -88,7 +88,7 @@ import org.apache.commons.logging.LogFactory;
 public class PortletImporter {
 
 	public void importPortletInfo(
-			long userId, long plid, String portletId,
+			long userId, long groupId, long plid, String portletId,
 			Map<String, String[]> parameterMap, InputStream is)
 		throws PortalException, SystemException {
 
@@ -124,7 +124,7 @@ public class PortletImporter {
 		ZipReader zipReader = new ZipReader(is);
 
 		PortletDataContext context = new PortletDataContextImpl(
-			companyId, layout.getGroupId(), parameterMap, new HashSet<String>(),
+			companyId, groupId, parameterMap, new HashSet<String>(),
 			strategy, zipReader);
 
 		context.setPlid(plid);
@@ -224,9 +224,9 @@ public class PortletImporter {
 		// Portlet preferences
 
 		importPortletPreferences(
-			context, layout.getCompanyId(), layout.getGroupId(), layout,
-			portletId, portletEl, importPortletSetup,
-			importPortletArchivedSetups, importUserPreferences, true);
+			context, layout.getCompanyId(), groupId, layout, portletId,
+			portletEl, importPortletSetup, importPortletArchivedSetups,
+			importUserPreferences, true);
 
 		// Portlet data
 

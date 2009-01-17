@@ -99,12 +99,12 @@ import org.apache.commons.logging.LogFactory;
 public class PortletExporter {
 
 	public byte[] exportPortletInfo(
-			long plid, String portletId, Map<String, String[]> parameterMap,
-			Date startDate, Date endDate)
+			long groupId, long plid, String portletId,
+			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
 		FileCacheOutputStream fcos = exportPortletInfoAsStream(
-			plid, portletId, parameterMap, startDate, endDate);
+			groupId, plid, portletId, parameterMap, startDate, endDate);
 
 		try {
 			return fcos.getBytes();
@@ -115,8 +115,8 @@ public class PortletExporter {
 	}
 
 	public FileCacheOutputStream exportPortletInfoAsStream(
-			long plid, String portletId, Map<String, String[]> parameterMap,
-			Date startDate, Date endDate)
+			long groupId, long plid, String portletId,
+			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
 		boolean exportPermissions = MapUtil.getBoolean(
@@ -158,17 +158,19 @@ public class PortletExporter {
 
 		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
-		if (!layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
+		if (layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
+			LayoutTypePortlet layoutTypePortlet =
+				(LayoutTypePortlet)layout.getLayoutType();
+
+			if (!layoutTypePortlet.hasPortletId(portletId)) {
+				throw new LayoutImportException(
+					"The specified layout does not have portlet " + portletId);
+			}
+		}
+		else if (!layout.getType().equals(LayoutConstants.TYPE_PANEL) &&
+				 !layout.getType().equals(LayoutConstants.TYPE_CONTROL_PANEL)) {
 			throw new LayoutImportException(
 				"Layout type " + layout.getType() + " is not valid");
-		}
-
-		LayoutTypePortlet layoutTypePortlet =
-			(LayoutTypePortlet)layout.getLayoutType();
-
-		if (!layoutTypePortlet.hasPortletId(portletId)) {
-			throw new LayoutImportException(
-				"The specified layout does not have portlet " + portletId);
 		}
 
 		long companyId = layout.getCompanyId();
@@ -183,7 +185,7 @@ public class PortletExporter {
 			throw new SystemException(ioe);
 		}
 
-		long scopeGroupId = layout.getGroupId();
+		long scopeGroupId = groupId;
 
 		javax.portlet.PortletPreferences jxPreferences =
 			PortletPreferencesFactoryUtil.getLayoutPortletSetup(

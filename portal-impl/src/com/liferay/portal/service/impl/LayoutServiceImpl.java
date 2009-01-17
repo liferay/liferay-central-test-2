@@ -171,8 +171,8 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	}
 
 	public byte[] exportPortletInfo(
-			long plid, String portletId, Map<String, String[]> parameterMap,
-			Date startDate, Date endDate)
+			long groupId, long plid, String portletId,
+			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
 		Layout layout = layoutLocalService.getLayout(plid);
@@ -182,12 +182,12 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			ActionKeys.MANAGE_LAYOUTS);
 
 		return layoutLocalService.exportPortletInfo(
-			plid, portletId, parameterMap, startDate, endDate);
+			groupId, plid, portletId, parameterMap, startDate, endDate);
 	}
 
 	public FileCacheOutputStream exportPortletInfoAsStream(
-			long plid, String portletId, Map<String, String[]> parameterMap,
-			Date startDate, Date endDate)
+			long groupId, long plid, String portletId,
+			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
 		Layout layout = layoutLocalService.getLayout(plid);
@@ -197,7 +197,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			ActionKeys.MANAGE_LAYOUTS);
 
 		return layoutLocalService.exportPortletInfoAsStream(
-			plid, portletId, parameterMap, startDate, endDate);
+			groupId, plid, portletId, parameterMap, startDate, endDate);
 	}
 
 	public void importLayouts(
@@ -237,8 +237,8 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	}
 
 	public void importPortletInfo(
-			long plid, String portletId, Map<String, String[]> parameterMap,
-			File file)
+			long groupId, long plid, String portletId,
+			Map<String, String[]> parameterMap, File file)
 		throws PortalException, SystemException {
 
 		Layout layout = layoutLocalService.getLayout(plid);
@@ -248,12 +248,12 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			ActionKeys.MANAGE_LAYOUTS);
 
 		layoutLocalService.importPortletInfo(
-			getUserId(), plid, portletId, parameterMap, file);
+			getUserId(), groupId, plid, portletId, parameterMap, file);
 	}
 
 	public void importPortletInfo(
-			long plid, String portletId, Map<String, String[]> parameterMap,
-			InputStream is)
+			long groupId, long plid, String portletId, 
+			Map<String, String[]> parameterMap, InputStream is)
 		throws PortalException, SystemException {
 
 		Layout layout = layoutLocalService.getLayout(plid);
@@ -263,7 +263,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			ActionKeys.MANAGE_LAYOUTS);
 
 		layoutLocalService.importPortletInfo(
-			getUserId(), plid, portletId, parameterMap, is);
+			getUserId(), groupId, plid, portletId, parameterMap, is);
 	}
 
 	public void schedulePublishToLive(

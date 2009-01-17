@@ -131,13 +131,17 @@ public class StagingUtil {
 		Map<String, String[]> parameterMap = getStagingParameters(
 			actionRequest);
 
+		Layout sourceLayout = LayoutLocalServiceUtil.getLayout(sourcePlid);
+
 		byte[] bytes = LayoutLocalServiceUtil.exportPortletInfo(
-			sourcePlid, portletId, parameterMap, null, null);
+			sourceLayout.getGroupId(), sourcePlid, portletId, parameterMap,
+			null, null);
 
 		ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
 
 		LayoutServiceUtil.importPortletInfo(
-			targetPlid, portletId, parameterMap, bais);
+			sourceLayout.getGroupId(), targetPlid, portletId, parameterMap,
+			bais);
 	}
 
 	public static void copyRemoteLayouts(

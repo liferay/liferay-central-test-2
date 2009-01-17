@@ -156,6 +156,7 @@ public class ExportImportAction extends EditConfigurationAction {
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
+			long groupId = ParamUtil.getLong(actionRequest, "groupId");
 			long plid = ParamUtil.getLong(actionRequest, "plid");
 			String fileName = ParamUtil.getString(
 				actionRequest, "exportFileName");
@@ -211,8 +212,8 @@ public class ExportImportAction extends EditConfigurationAction {
 			}
 
 			byte[] bytes = LayoutServiceUtil.exportPortletInfo(
-				plid, portlet.getPortletId(), actionRequest.getParameterMap(),
-				startDate, endDate);
+				groupId, plid, portlet.getPortletId(),
+				actionRequest.getParameterMap(), startDate, endDate);
 
 			HttpServletResponse response = PortalUtil.getHttpServletResponse(
 				actionResponse);
@@ -233,6 +234,7 @@ public class ExportImportAction extends EditConfigurationAction {
 			UploadPortletRequest uploadRequest =
 				PortalUtil.getUploadPortletRequest(actionRequest);
 
+			long groupId = ParamUtil.getLong(uploadRequest, "groupId");
 			long plid = ParamUtil.getLong(uploadRequest, "plid");
 			File file = uploadRequest.getFile("importFileName");
 
@@ -241,8 +243,8 @@ public class ExportImportAction extends EditConfigurationAction {
 			}
 
 			LayoutServiceUtil.importPortletInfo(
-				plid, portlet.getPortletId(), actionRequest.getParameterMap(),
-				file);
+				groupId, plid, portlet.getPortletId(),
+				actionRequest.getParameterMap(), file);
 
 			SessionMessages.add(actionRequest, "request_processed");
 		}

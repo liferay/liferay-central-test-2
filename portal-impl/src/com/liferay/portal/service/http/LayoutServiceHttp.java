@@ -598,42 +598,45 @@ public class LayoutServiceHttp {
 	}
 
 	public static byte[] exportPortletInfo(HttpPrincipal httpPrincipal,
-		long plid, java.lang.String portletId,
+		long groupId, long plid, java.lang.String portletId,
 		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
 		java.util.Date endDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(plid);
+			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = portletId;
+			Object paramObj1 = new LongWrapper(plid);
+
+			Object paramObj2 = portletId;
 
 			if (portletId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
+				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = parameterMap;
+			Object paramObj3 = parameterMap;
 
 			if (parameterMap == null) {
-				paramObj2 = new NullWrapper("java.util.Map");
+				paramObj3 = new NullWrapper("java.util.Map");
 			}
 
-			Object paramObj3 = startDate;
+			Object paramObj4 = startDate;
 
 			if (startDate == null) {
-				paramObj3 = new NullWrapper("java.util.Date");
+				paramObj4 = new NullWrapper("java.util.Date");
 			}
 
-			Object paramObj4 = endDate;
+			Object paramObj5 = endDate;
 
 			if (endDate == null) {
-				paramObj4 = new NullWrapper("java.util.Date");
+				paramObj5 = new NullWrapper("java.util.Date");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"exportPortletInfo",
 					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5
 					});
 
 			Object returnObj = null;
@@ -663,42 +666,46 @@ public class LayoutServiceHttp {
 	}
 
 	public static com.liferay.portal.kernel.io.FileCacheOutputStream exportPortletInfoAsStream(
-		HttpPrincipal httpPrincipal, long plid, java.lang.String portletId,
+		HttpPrincipal httpPrincipal, long groupId, long plid,
+		java.lang.String portletId,
 		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
 		java.util.Date endDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(plid);
+			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = portletId;
+			Object paramObj1 = new LongWrapper(plid);
+
+			Object paramObj2 = portletId;
 
 			if (portletId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
+				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = parameterMap;
+			Object paramObj3 = parameterMap;
 
 			if (parameterMap == null) {
-				paramObj2 = new NullWrapper("java.util.Map");
+				paramObj3 = new NullWrapper("java.util.Map");
 			}
 
-			Object paramObj3 = startDate;
+			Object paramObj4 = startDate;
 
 			if (startDate == null) {
-				paramObj3 = new NullWrapper("java.util.Date");
+				paramObj4 = new NullWrapper("java.util.Date");
 			}
 
-			Object paramObj4 = endDate;
+			Object paramObj5 = endDate;
 
 			if (endDate == null) {
-				paramObj4 = new NullWrapper("java.util.Date");
+				paramObj5 = new NullWrapper("java.util.Date");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"exportPortletInfoAsStream",
 					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5
 					});
 
 			Object returnObj = null;
@@ -872,34 +879,38 @@ public class LayoutServiceHttp {
 	}
 
 	public static void importPortletInfo(HttpPrincipal httpPrincipal,
-		long plid, java.lang.String portletId,
+		long groupId, long plid, java.lang.String portletId,
 		java.util.Map<String, String[]> parameterMap, java.io.File file)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(plid);
+			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = portletId;
+			Object paramObj1 = new LongWrapper(plid);
+
+			Object paramObj2 = portletId;
 
 			if (portletId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
+				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = parameterMap;
+			Object paramObj3 = parameterMap;
 
 			if (parameterMap == null) {
-				paramObj2 = new NullWrapper("java.util.Map");
+				paramObj3 = new NullWrapper("java.util.Map");
 			}
 
-			Object paramObj3 = file;
+			Object paramObj4 = file;
 
 			if (file == null) {
-				paramObj3 = new NullWrapper("java.io.File");
+				paramObj4 = new NullWrapper("java.io.File");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"importPortletInfo",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
@@ -924,34 +935,38 @@ public class LayoutServiceHttp {
 	}
 
 	public static void importPortletInfo(HttpPrincipal httpPrincipal,
-		long plid, java.lang.String portletId,
+		long groupId, long plid, java.lang.String portletId,
 		java.util.Map<String, String[]> parameterMap, java.io.InputStream is)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(plid);
+			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = portletId;
+			Object paramObj1 = new LongWrapper(plid);
+
+			Object paramObj2 = portletId;
 
 			if (portletId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
+				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = parameterMap;
+			Object paramObj3 = parameterMap;
 
 			if (parameterMap == null) {
-				paramObj2 = new NullWrapper("java.util.Map");
+				paramObj3 = new NullWrapper("java.util.Map");
 			}
 
-			Object paramObj3 = is;
+			Object paramObj4 = is;
 
 			if (is == null) {
-				paramObj3 = new NullWrapper("java.io.InputStream");
+				paramObj4 = new NullWrapper("java.io.InputStream");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"importPortletInfo",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);

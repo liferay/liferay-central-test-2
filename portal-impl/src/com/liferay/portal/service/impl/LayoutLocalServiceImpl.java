@@ -365,12 +365,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	public byte[] exportPortletInfo(
-			long plid, String portletId, Map<String, String[]> parameterMap,
-			Date startDate, Date endDate)
+			long groupId, long plid, String portletId,
+			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
 		FileCacheOutputStream fcos = exportPortletInfoAsStream(
-			plid, portletId, parameterMap, startDate, endDate);
+			groupId, plid, portletId, parameterMap, startDate, endDate);
 
 		try {
 			return fcos.getBytes();
@@ -381,14 +381,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	public FileCacheOutputStream exportPortletInfoAsStream(
-			long plid, String portletId, Map<String, String[]> parameterMap,
-			Date startDate, Date endDate)
+			long groupId, long plid, String portletId,
+			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
 		PortletExporter portletExporter = new PortletExporter();
 
 		return portletExporter.exportPortletInfoAsStream(
-			plid, portletId, parameterMap, startDate, endDate);
+			groupId, plid, portletId, parameterMap, startDate, endDate);
 	}
 
 	public long getDefaultPlid(long groupId) throws SystemException {
@@ -623,13 +623,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	public void importPortletInfo(
-			long userId, long plid, String portletId,
+			long userId, long groupId, long plid, String portletId,
 			Map<String, String[]> parameterMap, File file)
 		throws PortalException, SystemException {
 
 		try {
 			importPortletInfo(
-				userId, plid, portletId, parameterMap,
+				userId, groupId, plid, portletId, parameterMap,
 				new FileInputStream(file));
 		}
 		catch (FileNotFoundException fnfe) {
@@ -638,7 +638,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	public void importPortletInfo(
-			long userId, long plid, String portletId,
+			long userId, long groupId, long plid, String portletId,
 			Map<String, String[]> parameterMap, InputStream is)
 		throws PortalException, SystemException {
 
@@ -648,7 +648,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			PortletImporter portletImporter = new PortletImporter();
 
 			portletImporter.importPortletInfo(
-				userId, plid, portletId, parameterMap, is);
+				userId, groupId, plid, portletId, parameterMap, is);
 		}
 		finally {
 			BatchSessionUtil.setEnabled(false);

@@ -131,26 +131,26 @@ public class LayoutServiceUtil {
 			parameterMap, startDate, endDate);
 	}
 
-	public static byte[] exportPortletInfo(long plid,
+	public static byte[] exportPortletInfo(long groupId, long plid,
 		java.lang.String portletId,
 		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
 		java.util.Date endDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .exportPortletInfo(plid, portletId, parameterMap, startDate,
-			endDate);
+				   .exportPortletInfo(groupId, plid, portletId, parameterMap,
+			startDate, endDate);
 	}
 
 	public static com.liferay.portal.kernel.io.FileCacheOutputStream exportPortletInfoAsStream(
-		long plid, java.lang.String portletId,
+		long groupId, long plid, java.lang.String portletId,
 		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
 		java.util.Date endDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .exportPortletInfoAsStream(plid, portletId, parameterMap,
-			startDate, endDate);
+				   .exportPortletInfoAsStream(groupId, plid, portletId,
+			parameterMap, startDate, endDate);
 	}
 
 	public static void importLayouts(long groupId, boolean privateLayout,
@@ -174,18 +174,22 @@ public class LayoutServiceUtil {
 		getService().importLayouts(groupId, privateLayout, parameterMap, is);
 	}
 
-	public static void importPortletInfo(long plid, java.lang.String portletId,
+	public static void importPortletInfo(long groupId, long plid,
+		java.lang.String portletId,
 		java.util.Map<String, String[]> parameterMap, java.io.File file)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().importPortletInfo(plid, portletId, parameterMap, file);
+		getService()
+			.importPortletInfo(groupId, plid, portletId, parameterMap, file);
 	}
 
-	public static void importPortletInfo(long plid, java.lang.String portletId,
+	public static void importPortletInfo(long groupId, long plid,
+		java.lang.String portletId,
 		java.util.Map<String, String[]> parameterMap, java.io.InputStream is)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().importPortletInfo(plid, portletId, parameterMap, is);
+		getService()
+			.importPortletInfo(groupId, plid, portletId, parameterMap, is);
 	}
 
 	public static void schedulePublishToLive(long sourceGroupId,

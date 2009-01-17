@@ -109,14 +109,15 @@ public interface LayoutService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public byte[] exportPortletInfo(long plid, java.lang.String portletId,
+	public byte[] exportPortletInfo(long groupId, long plid,
+		java.lang.String portletId,
 		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
 		java.util.Date endDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.kernel.io.FileCacheOutputStream exportPortletInfoAsStream(
-		long plid, java.lang.String portletId,
+		long groupId, long plid, java.lang.String portletId,
 		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
 		java.util.Date endDate)
 		throws com.liferay.portal.PortalException,
@@ -137,12 +138,14 @@ public interface LayoutService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void importPortletInfo(long plid, java.lang.String portletId,
+	public void importPortletInfo(long groupId, long plid,
+		java.lang.String portletId,
 		java.util.Map<String, String[]> parameterMap, java.io.File file)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void importPortletInfo(long plid, java.lang.String portletId,
+	public void importPortletInfo(long groupId, long plid,
+		java.lang.String portletId,
 		java.util.Map<String, String[]> parameterMap, java.io.InputStream is)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

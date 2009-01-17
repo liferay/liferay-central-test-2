@@ -128,7 +128,7 @@ if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 		<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escape(tabs2) %>">
 		<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 		<input name="<portlet:namespace />plid" type="hidden" value="<%= layout.getPlid() %>">
-		<input name="<portlet:namespace />groupId" type="hidden" value="<%= layout.getGroupId() %>">
+		<input name="<portlet:namespace />groupId" type="hidden" value="<%= themeDisplay.getScopeGroupId() %>">
 		<input name="<portlet:namespace />portletResource" type="hidden" value="<%= HtmlUtil.escape(portletResource) %>">
 		<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(currentURL) %>">
 
