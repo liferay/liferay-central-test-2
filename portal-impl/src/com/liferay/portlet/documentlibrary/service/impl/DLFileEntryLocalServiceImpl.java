@@ -278,9 +278,9 @@ public class DLFileEntryLocalServiceImpl
 
 		dlLocalService.addFile(
 			user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-			folder.getGroupId(), folderId, name,
-			fileEntryId, fileEntry.getLuceneProperties(),
-			fileEntry.getModifiedDate(), tagsEntries, is);
+			folder.getGroupId(), folderId, name, fileEntryId,
+			fileEntry.getLuceneProperties(), fileEntry.getModifiedDate(),
+			tagsEntries, is);
 
 		// Tags
 
