@@ -43,7 +43,7 @@ String format = ParamUtil.getString(request, "format");
 %>
 
 <form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/search/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-<input name="<portlet:namespace />format" type="hidden" value="<%= format %>" />
+<input name="<portlet:namespace />format" type="hidden" value="<%= HtmlUtil.escape(format) %>" />
 
 <input name="<portlet:namespace />keywords" size="30" type="text" value="<%= HtmlUtil.escape(keywords) %>" onBlur="if (this.value == '') { this.value = '<%= unicodeDefaultKeywords %>'; }" onFocus="if (this.value == '<%= unicodeDefaultKeywords %>') { this.value = ''; }" />
 
