@@ -252,7 +252,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	}
 
 	public void importPortletInfo(
-			long groupId, long plid, String portletId, 
+			long groupId, long plid, String portletId,
 			Map<String, String[]> parameterMap, InputStream is)
 		throws PortalException, SystemException {
 

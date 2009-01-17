@@ -423,7 +423,7 @@ public class PortletImporter {
 					context.getGroupId(), context.isPrivateLayout(),
 					scopeLayoutId);
 
-				Group scopeGroup;
+				Group scopeGroup = null;
 
 				if (scopeLayout.hasScopeGroup()) {
 					scopeGroup = scopeLayout.getScopeGroup();
