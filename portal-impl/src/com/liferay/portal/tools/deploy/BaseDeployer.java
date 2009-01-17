@@ -119,6 +119,7 @@ public class BaseDeployer {
 		utilTaglibDTD = System.getProperty("deployer.util.taglib.dtd");
 		unpackWar = GetterUtil.getBoolean(
 			System.getProperty("deployer.unpack.war"), true);
+		filePattern = System.getProperty("deployer.file.pattern");
 		jbossPrefix = GetterUtil.getString(
 			System.getProperty("deployer.jboss.prefix"));
 		tomcatLibDir = System.getProperty("deployer.tomcat.lib.dir");
@@ -389,10 +390,15 @@ public class BaseDeployer {
 				if (fileName.endsWith(".war") || fileName.endsWith(".zip")) {
 					deploy = true;
 
-					if ((wars.size() > 0) &&
-						(!wars.contains(srcFile.getName()))) {
-
-						deploy = false;
+					if (wars.size() > 0) {
+						if (wars.contains(srcFile.getName())) {
+							deploy = false;
+						}
+					}
+					else if (Validator.isNotNull(filePattern)) {
+						if (!StringUtil.matches(fileName, filePattern)) {
+							deploy = false;
+						}
 					}
 				}
 
@@ -1273,6 +1279,7 @@ public class BaseDeployer {
 	protected String uiTaglibDTD;
 	protected String utilTaglibDTD;
 	protected boolean unpackWar;
+	protected String filePattern;
 	protected String jbossPrefix;
 	protected String tomcatLibDir;
 	protected List<String> wars;

@@ -110,6 +110,10 @@ public class StringUtil_IW {
 		return StringUtil.lowerCase(s);
 	}
 
+	public boolean matches(java.lang.String s, java.lang.String pattern) {
+		return StringUtil.matches(s, pattern);
+	}
+
 	public java.lang.String merge(boolean[] array) {
 		return StringUtil.merge(array);
 	}

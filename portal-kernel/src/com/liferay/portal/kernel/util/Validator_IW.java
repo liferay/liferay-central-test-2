@@ -153,6 +153,10 @@ public class Validator_IW {
 		return Validator.isVariableTerm(s);
 	}
 
+	public boolean isWhitespace(char c) {
+		return Validator.isWhitespace(c);
+	}
+
 	private Validator_IW() {
 	}
 

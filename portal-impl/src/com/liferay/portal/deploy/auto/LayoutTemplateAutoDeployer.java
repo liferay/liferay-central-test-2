@@ -56,6 +56,7 @@ public class LayoutTemplateAutoDeployer
 			unpackWar = PrefsPropsUtil.getBoolean(
 				PropsKeys.AUTO_DEPLOY_UNPACK_WAR,
 				PropsValues.AUTO_DEPLOY_UNPACK_WAR);
+			filePattern = StringPool.BLANK;
 			jbossPrefix = PrefsPropsUtil.getString(
 				PropsKeys.AUTO_DEPLOY_JBOSS_PREFIX,
 				PropsValues.AUTO_DEPLOY_JBOSS_PREFIX);

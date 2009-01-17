@@ -336,6 +336,22 @@ public class StringUtil {
 		}
 	}
 
+	public static boolean matches(String s, String pattern) {
+		String[] array = pattern.split("\\*");
+
+		for (int i = 0; i < array.length; i++) {
+			int pos = s.indexOf(array[i]);
+
+			if (pos == -1) {
+				return false;
+			}
+
+			s = s.substring(pos + array[i].length());
+		}
+
+		return true;
+	}
+
 	public static String merge(boolean[] array) {
 		return merge(array, StringPool.COMMA);
 	}
