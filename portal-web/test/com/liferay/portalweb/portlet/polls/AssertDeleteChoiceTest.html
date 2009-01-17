@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>AddQuestion2Test</title>
+<title>AssertDeleteChoiceTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddQuestion2Test</td></tr>
+<tr><td rowspan="1" colspan="3">AssertDeleteChoiceTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
@@ -29,17 +29,17 @@
 <tr>
 	<td>typeKeys</td>
 	<td>_25_title</td>
-	<td>Test Poll Question 2</td>
+	<td>Test Choice Question</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_25_title</td>
-	<td>Test Poll Question 2</td>
+	<td>Test Choice Question</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_25_description</td>
-	<td>This is a test poll 2 description!</td>
+	<td>This is a test to delete choice!</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -73,6 +73,31 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
+	<td>//input[@value='Add Choice']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>_25_choiceDescriptiond</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_25_choiceDescriptiond</td>
+	<td>Test Choice D</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_25_choiceDescriptiond</td>
+	<td>Test Choice D</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
 	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
@@ -84,6 +109,16 @@
 <tr>
 	<td>assertElementPresent</td>
 	<td>link=Test Poll Question 2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Test Choice Question</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Test Choice C</td>
 	<td></td>
 </tr>
 

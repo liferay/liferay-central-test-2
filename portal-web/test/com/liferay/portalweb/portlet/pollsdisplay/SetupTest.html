@@ -4,16 +4,26 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>AddQuestion2Test</title>
+<title>SetupTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddQuestion2Test</td></tr>
+<tr><td rowspan="1" colspan="3">SetupTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Polls</td>
+	<td>my-community-private-pages</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>my-community-private-pages</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Control Panel</td>
 	<td></td>
 </tr>
 <tr>
@@ -29,30 +39,30 @@
 <tr>
 	<td>typeKeys</td>
 	<td>_25_title</td>
-	<td>Test Poll Question 2</td>
+	<td>PD Setup Test Question</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_25_title</td>
-	<td>Test Poll Question 2</td>
+	<td>PD Setup Test Question</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_25_description</td>
-	<td>This is a test poll 2 description!</td>
+	<td>This is a PD setup test question.</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_25_choiceDescriptiona</td>
-	<td>Test Choice A</td>
+	<td>PD Setup Choice A</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_25_choiceDescriptionb</td>
-	<td>Test Choice B</td>
+	<td>PD Setup Choice B</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
+	<td>click</td>
 	<td>//input[@value='Add Choice']</td>
 	<td></td>
 </tr>
@@ -64,12 +74,12 @@
 <tr>
 	<td>typeKeys</td>
 	<td>_25_choiceDescriptionc</td>
-	<td>Test Choice C</td>
+	<td>PD Setup Choice C</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_25_choiceDescriptionc</td>
-	<td>Test Choice C</td>
+	<td>PD Setup Choice C</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -83,7 +93,12 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>link=Test Poll Question 2</td>
+	<td>link=PD Setup Test Question</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Back to My Community</td>
 	<td></td>
 </tr>
 

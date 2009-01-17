@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddQuestion2Test.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssertDeleteChoiceTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddQuestion2Test extends BaseTestCase {
-	public void testAddQuestion2() throws Exception {
+public class AssertDeleteChoiceTest extends BaseTestCase {
+	public void testAssertDeleteChoice() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -55,11 +55,11 @@ public class AddQuestion2Test extends BaseTestCase {
 				"//input[@value='Add Question']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_25_title",
-			RuntimeVariables.replace("Test Poll Question 2"));
+			RuntimeVariables.replace("Test Choice Question"));
 		selenium.type("_25_title",
-			RuntimeVariables.replace("Test Poll Question 2"));
+			RuntimeVariables.replace("Test Choice Question"));
 		selenium.type("_25_description",
-			RuntimeVariables.replace("This is a test poll 2 description!"));
+			RuntimeVariables.replace("This is a test to delete choice!"));
 		selenium.type("_25_choiceDescriptiona",
 			RuntimeVariables.replace("Test Choice A"));
 		selenium.type("_25_choiceDescriptionb",
@@ -87,10 +87,38 @@ public class AddQuestion2Test extends BaseTestCase {
 			RuntimeVariables.replace("Test Choice C"));
 		selenium.type("_25_choiceDescriptionc",
 			RuntimeVariables.replace("Test Choice C"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Choice']"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_25_choiceDescriptiond")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_25_choiceDescriptiond",
+			RuntimeVariables.replace("Test Choice D"));
+		selenium.type("_25_choiceDescriptiond",
+			RuntimeVariables.replace("Test Choice D"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent("link=Test Poll Question 2"));
+		selenium.click(RuntimeVariables.replace("link=Test Choice Question"));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isTextPresent("Test Choice C"));
 	}
 }

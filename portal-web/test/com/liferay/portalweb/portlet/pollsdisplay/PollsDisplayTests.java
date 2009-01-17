@@ -33,10 +33,12 @@ import com.liferay.portalweb.portal.BaseTests;
 public class PollsDisplayTests extends BaseTests {
 
 	public PollsDisplayTests() {
+		addTestSuite(SetupTest.class);
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
 		addTestSuite(EditPreferencesTest.class);
-		addTestSuite(DeletePageTest.class);
+		addTestSuite(AddVoteTest.class);
+		addTestSuite(TearDownTest.class);
 	}
 
 }

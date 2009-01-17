@@ -33,16 +33,36 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddQuestionTest extends BaseTestCase {
 	public void testAddQuestion() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Polls")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Polls"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Question']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_25_title",
 			RuntimeVariables.replace("Test Poll Question"));
-		selenium.typeKeys("_25_description",
+		selenium.type("_25_title",
+			RuntimeVariables.replace("Test Poll Question"));
+		selenium.type("_25_description",
 			RuntimeVariables.replace("This is a test poll description!"));
-		selenium.typeKeys("_25_choiceDescriptiona",
+		selenium.type("_25_choiceDescriptiona",
 			RuntimeVariables.replace("Test Choice A"));
-		selenium.typeKeys("_25_choiceDescriptionb",
+		selenium.type("_25_choiceDescriptionb",
 			RuntimeVariables.replace("Test Choice B"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Choice']"));
 		selenium.waitForPageToLoad("30000");
@@ -65,23 +85,12 @@ public class AddQuestionTest extends BaseTestCase {
 
 		selenium.typeKeys("_25_choiceDescriptionc",
 			RuntimeVariables.replace("Test Choice C"));
+		selenium.type("_25_choiceDescriptionc",
+			RuntimeVariables.replace("Test Choice C"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Test Poll Question")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertTrue(selenium.isElementPresent("link=Test Poll Question"));
 	}
 }

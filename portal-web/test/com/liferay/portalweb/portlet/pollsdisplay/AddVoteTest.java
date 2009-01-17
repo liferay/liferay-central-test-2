@@ -26,57 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddPageTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddVoteTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddPageTest extends BaseTestCase {
-	public void testAddPage() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//a[@id=\"my-community-private-pages\"]")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace(
-				"//a[@id=\"my-community-private-pages\"]"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("//div/a/span");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("new_page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.typeKeys("new_page",
-			RuntimeVariables.replace("Polls Displa Test Page"));
-		selenium.type("new_page",
-			RuntimeVariables.replace("Polls Display Test Page"));
-		selenium.click("link=Save");
-
+public class AddVoteTest extends BaseTestCase {
+	public void testAddVote() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -95,5 +51,10 @@ public class AddPageTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Polls Display Test Page"));
 		selenium.waitForPageToLoad("30000");
+		selenium.click("//tr[3]/td[1]/input");
+		selenium.click(RuntimeVariables.replace("//input[@value='Vote']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Thank you for your vote."));
+		assertTrue(selenium.isTextPresent("100%"));
 	}
 }

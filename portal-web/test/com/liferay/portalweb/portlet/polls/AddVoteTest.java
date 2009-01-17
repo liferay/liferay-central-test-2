@@ -33,22 +33,13 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddVoteTest extends BaseTestCase {
 	public void testAddVote() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Test Poll Question"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("document.forms[0].elements[4]");
-		selenium.click(RuntimeVariables.replace("//input[@value='Vote']"));
-		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent("100%"));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Test Poll Question")) {
+				if (selenium.isElementPresent("link=Polls")) {
 					break;
 				}
 			}
@@ -57,5 +48,19 @@ public class AddVoteTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click(RuntimeVariables.replace("link=Polls"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Test Poll Question"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("_25_choiceId");
+		selenium.click(RuntimeVariables.replace("//input[@value='Vote']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertTrue(selenium.isTextPresent("100%"));
+		selenium.click(RuntimeVariables.replace("link=Polls"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=1"));
 	}
 }

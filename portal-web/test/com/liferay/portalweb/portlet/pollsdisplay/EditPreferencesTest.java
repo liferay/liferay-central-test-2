@@ -33,22 +33,13 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EditPreferencesTest extends BaseTestCase {
 	public void testEditPreferences() throws Exception {
-		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.select("_86_questionId",
-			RuntimeVariables.replace("label=Test Poll Question"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[7]")) {
+				if (selenium.isElementPresent("link=Polls Display Test Page")) {
 					break;
 				}
 			}
@@ -57,5 +48,21 @@ public class EditPreferencesTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click(RuntimeVariables.replace("link=Polls Display Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.select("_86_questionId",
+			RuntimeVariables.replace("label=PD Setup Test Question"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"You have successfully updated the setup."));
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("PD Setup Choice A"));
+		assertTrue(selenium.isTextPresent("PD Setup Choice B"));
+		assertTrue(selenium.isTextPresent("PD Setup Choice C"));
 	}
 }

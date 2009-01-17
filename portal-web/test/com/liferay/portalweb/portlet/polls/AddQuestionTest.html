@@ -1,6 +1,9 @@
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
 <title>AddQuestionTest</title>
 </head>
 <body>
@@ -8,6 +11,16 @@
 <thead>
 <tr><td rowspan="1" colspan="3">AddQuestionTest</td></tr>
 </thead><tbody>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Polls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Polls</td>
+	<td></td>
+</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Add Question']</td>
@@ -19,17 +32,22 @@
 	<td>Test Poll Question</td>
 </tr>
 <tr>
-	<td>typeKeys</td>
+	<td>type</td>
+	<td>_25_title</td>
+	<td>Test Poll Question</td>
+</tr>
+<tr>
+	<td>type</td>
 	<td>_25_description</td>
 	<td>This is a test poll description!</td>
 </tr>
 <tr>
-	<td>typeKeys</td>
+	<td>type</td>
 	<td>_25_choiceDescriptiona</td>
 	<td>Test Choice A</td>
 </tr>
 <tr>
-	<td>typeKeys</td>
+	<td>type</td>
 	<td>_25_choiceDescriptionb</td>
 	<td>Test Choice B</td>
 </tr>
@@ -49,12 +67,22 @@
 	<td>Test Choice C</td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>_25_choiceDescriptionc</td>
+	<td>Test Choice C</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
 	<td>link=Test Poll Question</td>
 	<td></td>
 </tr>

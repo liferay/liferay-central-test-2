@@ -12,13 +12,23 @@
 <tr><td rowspan="1" colspan="3">AddVoteTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Polls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Polls</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Test Poll Question</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>document.forms[0].elements[4]</td>
+	<td>_25_choiceId</td>
 	<td></td>
 </tr>
 <tr>
@@ -27,18 +37,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>100%</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Return to Full Page</td>
+	<td>link=Polls</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Test Poll Question</td>
+	<td>assertElementPresent</td>
+	<td>link=1</td>
 	<td></td>
 </tr>
 
