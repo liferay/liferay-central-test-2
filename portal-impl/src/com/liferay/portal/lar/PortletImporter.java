@@ -47,6 +47,7 @@ import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.PortletItem;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletItemLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
@@ -248,23 +249,26 @@ public class PortletImporter {
 			PortletDataContext context, String portletId, long plid)
 		throws SystemException {
 
+		long ownerId = PortletKeys.PREFS_OWNER_ID_DEFAULT;
+		int ownerType = PortletKeys.PREFS_OWNER_TYPE_LAYOUT;
+
+		PortletPreferences portletPreferences = null;
+
 		try {
-			long ownerId = PortletKeys.PREFS_OWNER_ID_DEFAULT;
-			int ownerType = PortletKeys.PREFS_OWNER_TYPE_LAYOUT;
-
-			PortletPreferences portletPreferences =
-				PortletPreferencesUtil.findByO_O_P_P(
-					ownerId, ownerType, plid, portletId);
-
-			String xml = deletePortletData(
-				context, portletId, portletPreferences);
-
-			if (xml != null) {
-				PortletPreferencesLocalServiceUtil.updatePreferences(
-					ownerId, ownerType, plid, portletId, xml);
-			}
+			portletPreferences = PortletPreferencesUtil.findByO_O_P_P(
+				ownerId, ownerType, plid, portletId);
 		}
 		catch (NoSuchPortletPreferencesException nsppe) {
+			portletPreferences =
+				new com.liferay.portal.model.impl.PortletPreferencesImpl();
+		}
+
+		String xml = deletePortletData(
+			context, portletId, portletPreferences);
+
+		if (xml != null) {
+			PortletPreferencesLocalServiceUtil.updatePreferences(
+				ownerId, ownerType, plid, portletId, xml);
 		}
 	}
 
@@ -343,23 +347,26 @@ public class PortletImporter {
 			Element portletDataRefEl)
 		throws SystemException {
 
+		long ownerId = PortletKeys. PREFS_OWNER_ID_DEFAULT;
+		int ownerType = PortletKeys.PREFS_OWNER_TYPE_LAYOUT;
+
+		PortletPreferences portletPreferences = null;
+
 		try {
-			long ownerId = PortletKeys. PREFS_OWNER_ID_DEFAULT;
-			int ownerType = PortletKeys.PREFS_OWNER_TYPE_LAYOUT;
-
-			PortletPreferences portletPreferences =
-				PortletPreferencesUtil.findByO_O_P_P(
-					ownerId, ownerType, plid, portletId);
-
-			String xml = importPortletData(
-				context, portletId, portletPreferences, portletDataRefEl);
-
-			if (xml != null) {
-				PortletPreferencesLocalServiceUtil.updatePreferences(
-					ownerId, ownerType, plid, portletId, xml);
-			}
+			portletPreferences = PortletPreferencesUtil.findByO_O_P_P(
+				ownerId, ownerType, plid, portletId);
 		}
 		catch (NoSuchPortletPreferencesException nsppe) {
+			portletPreferences =
+				new com.liferay.portal.model.impl.PortletPreferencesImpl();
+		}
+
+		String xml = importPortletData(
+			context, portletId, portletPreferences, portletDataRefEl);
+
+		if (xml != null) {
+			PortletPreferencesLocalServiceUtil.updatePreferences(
+				ownerId, ownerType, plid, portletId, xml);
 		}
 	}
 
@@ -416,11 +423,20 @@ public class PortletImporter {
 					context.getGroupId(), context.isPrivateLayout(),
 					scopeLayoutId);
 
-				if (scopeLayout.hasScopeGroup()) {
-					Group scopeGroup = scopeLayout.getScopeGroup();
+				Group scopeGroup;
 
-					context.setGroupId(scopeGroup.getGroupId());
+				if (scopeLayout.hasScopeGroup()) {
+					scopeGroup = scopeLayout.getScopeGroup();
 				}
+				else {
+					String name = String.valueOf(scopeLayout.getPlid());
+
+					scopeGroup = GroupLocalServiceUtil.addGroup(
+						context.getUserId(null), Layout.class.getName(),
+						scopeLayout.getPlid(), name, null, 0, null, true);
+				}
+
+				context.setGroupId(scopeGroup.getGroupId());
 			}
 			catch (PortalException pe) {
 			}

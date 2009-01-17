@@ -132,6 +132,7 @@
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
+		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>

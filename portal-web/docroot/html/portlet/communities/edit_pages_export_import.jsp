@@ -68,6 +68,14 @@ while (itr1.hasNext()) {
 	}
 }
 
+for (String curPortletId : LayoutExporter.ALWAYS_EXPORT_PORTLET_IDS) {
+	Portlet curPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), curPortletId);
+
+	if (curPortlet.isActive()) {
+		portletsList.add(curPortlet);
+	}
+}
+
 portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(application, locale));
 
 String tabs4Names = "export,import";

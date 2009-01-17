@@ -101,6 +101,10 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LayoutExporter {
 
+	public static String[] ALWAYS_EXPORT_PORTLET_IDS = {
+		PortletKeys.JOURNAL, PortletKeys.POLLS
+	};
+
 	public byte[] exportLayouts(
 			long groupId, boolean privateLayout, long[] layoutIds,
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
@@ -334,6 +338,42 @@ public class LayoutExporter {
 							scopeLayoutId
 						}
 					);
+				}
+			}
+
+			for (String portletId : ALWAYS_EXPORT_PORTLET_IDS) {
+				Portlet portlet = PortletLocalServiceUtil.getPortletById(
+					context.getCompanyId(), portletId);
+
+				if (!portlet.isActive()) {
+					continue;
+				}
+
+				if (portlet.isScopeable() && layout.hasScopeGroup()) {
+					String key = PortletPermissionUtil.getPrimaryKey(
+						layout.getPlid(), portletId);
+
+					portletIds.put(
+						key,
+						new Object[] {
+							portletId, layout.getPlid(),
+							layout.getScopeGroup().getGroupId(),
+							layout.getLayoutId()
+						}
+					);
+				}
+				else {
+					String key = PortletPermissionUtil.getPrimaryKey(
+						0, portletId);
+
+					if (portletIds.get(key) == null) {
+						portletIds.put(
+							key,
+							new Object[] {
+								portletId, layout.getPlid(), groupId, 0L
+							}
+						);
+					}
 				}
 			}
 

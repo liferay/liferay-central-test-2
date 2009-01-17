@@ -593,6 +593,15 @@ public class LayoutImporter {
 				importPortletArchivedSetups, importPortletUserPreferences,
 				false);
 
+			// Portlet data scope
+
+			long scopeLayoutId = GetterUtil.getLong(
+				portletEl.attributeValue("scope-layout-id"));
+
+			if (scopeLayoutId > 0) {
+				context.setScopeLayoutId(scopeLayoutId);
+			}
+
 			// Portlet data
 
 			Element portletDataEl = portletEl.element("portlet-data");
