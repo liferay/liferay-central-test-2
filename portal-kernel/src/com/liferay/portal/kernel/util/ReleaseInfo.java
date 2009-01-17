@@ -45,11 +45,14 @@ public class ReleaseInfo {
 	static String date = "January 19, 2009";
 
 	static String releaseInfoPrefix = System.getProperty(
-		"liferay.brand.info" , StringPool.BLANK);
+		"liferay.release.info.prefix" , StringPool.BLANK);
+
+	static String releaseInfoSuffix = System.getProperty(
+		"liferay.release.info.suffix" , StringPool.BLANK);
 
 	static String releaseInfo =
 		releaseInfoPrefix + name + " " + version + " (" + codeName +
-			" / Build " + build + " / " + date + ")";
+			" / Build " + build + " / " + date + ")" + releaseInfoSuffix;
 
 	static String serverInfo = name + " / " + version;
 
