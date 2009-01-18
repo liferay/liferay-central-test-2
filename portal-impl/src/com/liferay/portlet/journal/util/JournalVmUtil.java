@@ -178,7 +178,7 @@ public class JournalVmUtil {
 		return output.toString();
 	}
 
-	protected static List<TemplateNode> extractDynamicContents(Element parent)
+	public static List<TemplateNode> extractDynamicContents(Element parent)
 		throws TransformException {
 
 		List<TemplateNode> nodes = new ArrayList<TemplateNode>();
