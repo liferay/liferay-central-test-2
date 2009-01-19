@@ -65,6 +65,59 @@ import org.apache.velocity.exception.VelocityException;
  */
 public class JournalVmUtil {
 
+	public static List<TemplateNode> extractDynamicContents(Element parent)
+		throws TransformException {
+
+		List<TemplateNode> nodes = new ArrayList<TemplateNode>();
+
+		Map<String, TemplateNode> prototypeNodes =
+			new HashMap<String, TemplateNode>();
+
+		for (Element el : parent.elements("dynamic-element")) {
+			Element content = el.element("dynamic-content");
+
+			if (content == null) {
+				throw new TransformException(
+					"Element missing \"dynamic-content\"");
+			}
+
+			String name = el.attributeValue("name", "");
+
+			if (name.length() == 0) {
+				throw new TransformException(
+					"Element missing \"name\" attribute");
+			}
+
+			String type = el.attributeValue("type", "");
+
+			TemplateNode node = new TemplateNode(
+				name, CDATAUtil.strip(content.getText()), type);
+
+			if (el.element("dynamic-element") != null) {
+				node.appendChildren(extractDynamicContents(el));
+			}
+			else if (content.element("option") != null) {
+				for (Element option : content.elements("option")) {
+					node.appendOption(CDATAUtil.strip(option.getText()));
+				}
+			}
+
+			TemplateNode prototypeNode = prototypeNodes.get(name);
+
+			if (prototypeNode == null) {
+				prototypeNode = node;
+
+				prototypeNodes.put(name, prototypeNode);
+
+				nodes.add(node);
+			}
+
+			prototypeNode.appendSibling(node);
+		}
+
+		return nodes;
+	}
+
 	public static String transform(
 			Map<String, String> tokens, String viewMode, String languageId,
 			String xml, String script)
@@ -176,59 +229,6 @@ public class JournalVmUtil {
 		}
 
 		return output.toString();
-	}
-
-	public static List<TemplateNode> extractDynamicContents(Element parent)
-		throws TransformException {
-
-		List<TemplateNode> nodes = new ArrayList<TemplateNode>();
-
-		Map<String, TemplateNode> prototypeNodes =
-			new HashMap<String, TemplateNode>();
-
-		for (Element el : parent.elements("dynamic-element")) {
-			Element content = el.element("dynamic-content");
-
-			if (content == null) {
-				throw new TransformException(
-					"Element missing \"dynamic-content\"");
-			}
-
-			String name = el.attributeValue("name", "");
-
-			if (name.length() == 0) {
-				throw new TransformException(
-					"Element missing \"name\" attribute");
-			}
-
-			String type = el.attributeValue("type", "");
-
-			TemplateNode node = new TemplateNode(
-				name, CDATAUtil.strip(content.getText()), type);
-
-			if (el.element("dynamic-element") != null) {
-				node.appendChildren(extractDynamicContents(el));
-			}
-			else if (content.element("option") != null) {
-				for (Element option : content.elements("option")) {
-					node.appendOption(CDATAUtil.strip(option.getText()));
-				}
-			}
-
-			TemplateNode prototypeNode = prototypeNodes.get(name);
-
-			if (prototypeNode == null) {
-				prototypeNode = node;
-
-				prototypeNodes.put(name, prototypeNode);
-
-				nodes.add(node);
-			}
-
-			prototypeNode.appendSibling(node);
-		}
-
-		return nodes;
 	}
 
 	protected static String injectEditInPlace(String xml, String script)
