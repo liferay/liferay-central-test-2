@@ -25,6 +25,7 @@ package com.liferay.portal.servlet.filters.minifier;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.BrowserSniffer;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -141,7 +142,8 @@ public class MinifierFilter extends BasePortalFilter {
 		return sb.toString();
 	}
 
-	protected String getMinifiedBundleContent(HttpServletRequest request)
+	protected String getMinifiedBundleContent(
+			HttpServletRequest request, HttpServletResponse response)
 		throws IOException {
 
 		String minifierType = ParamUtil.getString(request, "minifierType");
@@ -191,6 +193,8 @@ public class MinifierFilter extends BasePortalFilter {
 			}
 
 			if (!staleCache) {
+				response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
+
 				return FileUtil.read(cacheFile);
 			}
 		}
@@ -210,6 +214,8 @@ public class MinifierFilter extends BasePortalFilter {
 		}
 
 		String minifiedContent = minifyJavaScript(sb.toString());
+
+		response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
 
 		FileUtil.write(cacheFile, minifiedContent);
 
@@ -298,6 +304,10 @@ public class MinifierFilter extends BasePortalFilter {
 				}
 
 				minifiedContent = minifyCss(request, file);
+
+				response.setContentType(ContentTypes.TEXT_CSS);
+
+				FileUtil.write(cacheContentTypeFile, ContentTypes.TEXT_CSS);
 			}
 			else if (realPath.endsWith(_JAVASCRIPT_EXTENSION)) {
 				if (_log.isInfoEnabled()) {
@@ -305,6 +315,11 @@ public class MinifierFilter extends BasePortalFilter {
 				}
 
 				minifiedContent = minifyJavaScript(file);
+
+				response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
+
+				FileUtil.write(
+					cacheContentTypeFile, ContentTypes.TEXT_JAVASCRIPT);
 			}
 			else if (realPath.endsWith(_JSP_EXTENSION)) {
 				if (_log.isInfoEnabled()) {
@@ -388,7 +403,7 @@ public class MinifierFilter extends BasePortalFilter {
 			request, response, filterChain);
 
 		if (Validator.isNull(minifiedContent)) {
-			minifiedContent = getMinifiedBundleContent(request);
+			minifiedContent = getMinifiedBundleContent(request, response);
 		}
 
 		if (Validator.isNull(minifiedContent)) {
