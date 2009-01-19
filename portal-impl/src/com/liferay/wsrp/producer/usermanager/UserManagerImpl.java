@@ -43,6 +43,7 @@ package com.liferay.wsrp.producer.usermanager;
 
 import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
@@ -60,10 +61,8 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portal.util.WebKeys;
 
 import com.sun.portal.container.PortletWindowContext;
 import com.sun.portal.wsrp.common.WSRPSpecKeys;
@@ -116,7 +115,7 @@ public class UserManagerImpl implements UserManager{
 			String portletId = (String)request.getAttribute(_PORTAL_ID);
 
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
-				PortalInstances.getCompanyId(request), portletId);
+				PortalUtil.getCompanyId(request), portletId);
 
 			PortletWindowContext portletWindowContext =
 				new PortletWindowContextImpl(
@@ -196,7 +195,7 @@ public class UserManagerImpl implements UserManager{
 		// Layouts
 
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
-			PortalInstances.getCompanyId(request), GroupConstants.GUEST);
+			PortalUtil.getCompanyId(request), GroupConstants.GUEST);
 
 		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 			guestGroup.getGroupId(), false,
