@@ -122,8 +122,7 @@ public class ImageEdittingTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@class=\"ui-dialog-titlebar\"]")) {
+				if (selenium.isElementPresent("//body/div[4]/div[1]/div[1]")) {
 					break;
 				}
 			}
@@ -137,7 +136,7 @@ public class ImageEdittingTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Edit"));
 		assertTrue(selenium.isElementPresent("link=Permissions"));
 		assertTrue(selenium.isElementPresent("link=Delete"));
-		selenium.click("link=X");
+		selenium.click("//div[4]/div[1]/div[1]/a");
 		Thread.sleep(2000);
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");

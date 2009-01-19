@@ -39,7 +39,7 @@ public class UploadLARFileTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
+				if (selenium.isElementPresent("link=Calendar Test Page")) {
 					break;
 				}
 			}
@@ -49,9 +49,27 @@ public class UploadLARFileTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
+		selenium.click(RuntimeVariables.replace("link=Calendar Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Export / Import"));
+		selenium.click("//strong/span");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//body/div[2]/ul/li[3]/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[3]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Import"));
 		selenium.waitForPageToLoad("30000");
@@ -75,9 +93,6 @@ public class UploadLARFileTest extends BaseTestCase {
 		selenium.type("_86_importFileName",
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\calendar\\Calendar-Selenium.portlet.lar"));
-		selenium.click("_86_PORTLET_ARCHIVED_SETUPSCheckbox");
-		selenium.click("_86_PORTLET_USER_PREFERENCESCheckbox");
-		selenium.click("_86_DELETE_PORTLET_DATA");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

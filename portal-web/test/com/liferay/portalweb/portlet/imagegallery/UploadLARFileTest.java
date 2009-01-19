@@ -51,6 +51,7 @@ public class UploadLARFileTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
 		selenium.waitForPageToLoad("30000");
+		selenium.click("//strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -58,7 +59,7 @@ public class UploadLARFileTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
+				if (selenium.isElementPresent("link=Export / Import")) {
 					break;
 				}
 			}
@@ -68,8 +69,6 @@ public class UploadLARFileTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
-		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Export / Import"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Import"));

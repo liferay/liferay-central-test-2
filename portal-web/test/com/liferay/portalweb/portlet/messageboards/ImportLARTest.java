@@ -53,8 +53,24 @@ public class ImportLARTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Configuration"));
-		selenium.waitForPageToLoad("30000");
+		selenium.click("//strong/span");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Export / Import")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Export / Import"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Import");
@@ -78,7 +94,6 @@ public class ImportLARTest extends BaseTestCase {
 		selenium.type("_86_importFileName",
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\messageboards\\Message_Boards-LAR.portlet.lar"));
-		selenium.click("_86_DELETE_PORTLET_DATA");
 		selenium.click(RuntimeVariables.replace("//input[@value='Import']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

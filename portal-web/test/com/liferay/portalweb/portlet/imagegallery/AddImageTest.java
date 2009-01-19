@@ -33,79 +33,142 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddImageTest extends BaseTestCase {
 	public void testAddImage() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+		int label = 1;
 
-			try {
-				if (selenium.isElementPresent("link=Image Gallery Test Page")) {
-					break;
+		while (label >= 1) {
+			switch (label) {
+			case 1:
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent(
+									"link=Image Gallery Test Page")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.click(RuntimeVariables.replace(
+						"link=Image Gallery Test Page"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace("//b"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace("//b"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Add Image']"));
+				selenium.waitForPageToLoad("30000");
+				Thread.sleep(5000);
 
-		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//b"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//b"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Image']"));
-		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
+				boolean IGClassicUploaderPresentA = selenium.isElementPresent(
+						"link=Use the classic uploader.");
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				if (IGClassicUploaderPresentA) {
+					label = 2;
 
-			try {
-				if (selenium.isElementPresent("link=Use the classic uploader.")) {
-					break;
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.click(RuntimeVariables.replace(
+						"link=Image Gallery Test Page"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace("//b"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace("//b"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Add Image']"));
+				selenium.waitForPageToLoad("30000");
+				Thread.sleep(5000);
 
-		selenium.click("link=Use the classic uploader.");
+			case 2:
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				boolean IGClassicUploaderPresentB = selenium.isElementPresent(
+						"link=Use the classic uploader.");
 
-			try {
-				if (selenium.isElementPresent("_31_file")) {
-					break;
+				if (IGClassicUploaderPresentB) {
+					label = 3;
+
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				selenium.click(RuntimeVariables.replace(
+						"link=Image Gallery Test Page"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace("//b"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace("//b"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Add Image']"));
+				selenium.waitForPageToLoad("30000");
+				Thread.sleep(5000);
+
+			case 3:
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent(
+									"link=Use the classic uploader.")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.click("link=Use the classic uploader.");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("_31_file")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.type("_31_file",
+					RuntimeVariables.replace(
+						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\imagegallery\\test_image.jpg"));
+				selenium.typeKeys("_31_name",
+					RuntimeVariables.replace("test_image"));
+				selenium.type("_31_name", RuntimeVariables.replace("test_image"));
+				selenium.typeKeys("_31_description",
+					RuntimeVariables.replace("This is the Lifera logo!"));
+				selenium.type("_31_description",
+					RuntimeVariables.replace("This is the Liferay logo!"));
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Save']"));
+				selenium.waitForPageToLoad("30000");
+				Thread.sleep(5000);
+				assertTrue(selenium.isElementPresent("//img[@alt='Image']"));
+				assertTrue(selenium.isTextPresent("test_image"));
+
+			case 100:
+				label = -1;
+			}
 		}
-
-		selenium.type("_31_file",
-			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\imagegallery\\test_image.jpg"));
-		selenium.typeKeys("_31_name", RuntimeVariables.replace("test_image"));
-		selenium.type("_31_name", RuntimeVariables.replace("test_image"));
-		selenium.typeKeys("_31_description",
-			RuntimeVariables.replace("This is the Lifera logo!"));
-		selenium.type("_31_description",
-			RuntimeVariables.replace("This is the Liferay logo!"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-		assertTrue(selenium.isElementPresent("//img[@alt='Image']"));
-		assertTrue(selenium.isTextPresent("test_image"));
 	}
 }

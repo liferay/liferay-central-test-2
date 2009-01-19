@@ -68,7 +68,7 @@ public class MoveThreadTest extends BaseTestCase {
 			RuntimeVariables.replace("Trust and paths will be straightened."));
 		selenium.click("//input[@value='Select']");
 		selenium.waitForPopUp("category", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("name=category");
+		selenium.selectWindow("category");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -88,6 +88,23 @@ public class MoveThreadTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Categories"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Choose']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("//input[@value='Choose']");
 		selenium.selectWindow("null");
 		assertTrue(selenium.isElementPresent("link=Sujr"));

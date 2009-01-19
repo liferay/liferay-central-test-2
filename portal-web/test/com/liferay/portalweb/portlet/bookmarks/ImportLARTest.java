@@ -51,25 +51,7 @@ public class ImportLARTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Bookmarks Test Page"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
-		selenium.waitForPageToLoad("30000");
+		selenium.click("//strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
