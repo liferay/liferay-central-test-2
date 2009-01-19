@@ -192,10 +192,10 @@ public class PluginPackageUtil {
 		return _instance._isUpdateAvailable();
 	}
 
-	public static PluginPackage readPluginPackageProps(
+	public static PluginPackage readPluginPackageProperties(
 		String displayName, Properties props) {
 
-		return _instance._readPluginPackageProps(displayName, props);
+		return _instance._readPluginPackageProperties(displayName, props);
 	}
 
 	public static PluginPackage readPluginPackageXml(String xml)
@@ -858,8 +858,8 @@ public class PluginPackageUtil {
 		return result;
 	}
 
-	private PluginPackage _readPluginPackageProps(
-		String displayName, Properties props) {
+	private PluginPackage _readPluginPackageProperties(
+		String displayName, Properties properties) {
 
 		int pos = displayName.indexOf("-portlet");
 
@@ -896,7 +896,7 @@ public class PluginPackageUtil {
 		String displayPrefix = displayName.substring(0, pos);
 
 		String moduleGroupId = GetterUtil.getString(
-			props.getProperty("module-group-id"));
+			properties.getProperty("module-group-id"));
 		String moduleArtifactId = displayPrefix + "-" + pluginType;
 		String moduleVersion = displayName.substring(
 			pos + pluginType.length() + 2);
@@ -904,12 +904,14 @@ public class PluginPackageUtil {
 			moduleGroupId + "/" + moduleArtifactId + "/" + moduleVersion +
 				"/war";
 
-		String pluginName = GetterUtil.getString(props.getProperty("name"));
+		String pluginName = GetterUtil.getString(
+			properties.getProperty("name"));
 
-		String deploymentContext = GetterUtil.getString(props.getProperty(
-			"recommended-deployment-context"), moduleArtifactId);
+		String deploymentContext = GetterUtil.getString(
+			properties.getProperty("recommended-deployment-context"),
+			moduleArtifactId);
 
-		String author = GetterUtil.getString(props.getProperty("author"));
+		String author = GetterUtil.getString(properties.getProperty("author"));
 
 		List<String> types = new ArrayList<String>();
 
@@ -918,7 +920,7 @@ public class PluginPackageUtil {
 		List<License> licenses = new ArrayList<License>();
 
 		String[] licensesArray = StringUtil.split(
-			props.getProperty("licenses"));
+			properties.getProperty("licenses"));
 
 		for (int i = 0; i < licensesArray.length; i++) {
 			License license = new License();
@@ -932,7 +934,7 @@ public class PluginPackageUtil {
 		List<String> liferayVersions = new ArrayList<String>();
 
 		String[] liferayVersionsArray = StringUtil.split(
-			props.getProperty("liferay-versions"));
+			properties.getProperty("liferay-versions"));
 
 		for (String liferayVersion : liferayVersionsArray) {
 			liferayVersions.add(liferayVersion.trim());
@@ -944,21 +946,22 @@ public class PluginPackageUtil {
 
 		List<String> tags = new ArrayList<String>();
 
-		String[] tagsArray = StringUtil.split(props.getProperty("tags"));
+		String[] tagsArray = StringUtil.split(properties.getProperty("tags"));
 
 		for (String tag : tagsArray) {
 			tags.add(tag.trim());
 		}
 
 		String shortDescription = GetterUtil.getString(
-			props.getProperty("short-description"));
+			properties.getProperty("short-description"));
 		String longDescription = GetterUtil.getString(
-			props.getProperty("long-description"));
+			properties.getProperty("long-description"));
 		String changeLog = GetterUtil.getString(
-			props.getProperty("change-log"));
-		String pageURL = GetterUtil.getString(props.getProperty("page-url"));
+			properties.getProperty("change-log"));
+		String pageURL = GetterUtil.getString(
+			properties.getProperty("page-url"));
 		String downloadURL = GetterUtil.getString(
-			props.getProperty("download-url"));
+			properties.getProperty("download-url"));
 
 		PluginPackage pluginPackage = new PluginPackageImpl(moduleId);
 

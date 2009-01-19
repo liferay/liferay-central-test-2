@@ -231,16 +231,16 @@ public class BaseDeployer {
 	}
 
 	protected void copyPortalDependencies(File srcFile) throws Exception {
-		Properties props = getPluginPackageProperties(srcFile);
+		Properties properties = getPluginPackageProperties(srcFile);
 
-		if (props == null) {
+		if (properties == null) {
 			return;
 		}
 
 		// jars
 
 		String[] portalJars = StringUtil.split(
-			props.getProperty("portal.dependency.jars"));
+			properties.getProperty("portal.dependency.jars"));
 
 		for (int i = 0; i < portalJars.length; i++) {
 			String portalJar = portalJars[i].trim();
@@ -263,7 +263,7 @@ public class BaseDeployer {
 		// tlds
 
 		String[] portalTlds = StringUtil.split(
-			props.getProperty("portal.dependency.tlds"));
+			properties.getProperty("portal.dependency.tlds"));
 
 		for (int i = 0; i < portalTlds.length; i++) {
 			String portalTld = portalTlds[i].trim();
@@ -943,16 +943,16 @@ public class BaseDeployer {
 	protected Properties getPluginPackageProperties(File srcFile)
 		throws Exception {
 
-		File propsFile = new File(
+		File propertiesFile = new File(
 			srcFile + "/WEB-INF/liferay-plugin-package.properties");
 
-		if (!propsFile.exists()) {
+		if (!propertiesFile.exists()) {
 			return null;
 		}
 
-		String propsString = FileUtil.read(propsFile);
+		String propertiesString = FileUtil.read(propertiesFile);
 
-		return PropertiesUtil.load(propsString);
+		return PropertiesUtil.load(propertiesString);
 	}
 
 	protected String getPluginPackageTagsXml(List<String> tags) {
@@ -1100,12 +1100,12 @@ public class BaseDeployer {
 			if (parseProps) {
 				String displayName = getDisplayName(file);
 
-				String propsString = StringUtil.read(is);
+				String propertiesString = StringUtil.read(is);
 
-				Properties props = PropertiesUtil.load(propsString);
+				Properties properties = PropertiesUtil.load(propertiesString);
 
-				return PluginPackageUtil.readPluginPackageProps(
-					displayName, props);
+				return PluginPackageUtil.readPluginPackageProperties(
+					displayName, properties);
 			}
 			else {
 				String xml = StringUtil.read(is);
