@@ -261,6 +261,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			actionRequest, "metadataFields");
 
 		preferences.setValue("selection-style", "dynamic");
+
 		preferences.setValues("entries", entries);
 		preferences.setValues("not-entries", notEntries);
 		preferences.setValue("merge-url-tags", String.valueOf(mergeUrlTags));
