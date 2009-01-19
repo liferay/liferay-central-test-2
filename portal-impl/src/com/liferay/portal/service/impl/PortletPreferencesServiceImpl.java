@@ -140,7 +140,7 @@ public class PortletPreferencesServiceImpl
 				String key = itr.next();
 
 				targetPreferences.setValues(
-					key, sourcePreferences.getValues(key, null));
+					key, sourcePreferences.getValues(key, new String[0]));
 			}
 
 			targetPreferences.store();

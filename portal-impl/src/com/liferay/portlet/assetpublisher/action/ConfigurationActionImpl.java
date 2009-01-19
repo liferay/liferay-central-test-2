@@ -260,6 +260,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String medatadaFields = ParamUtil.getString(
 			actionRequest, "metadataFields");
 
+		preferences.setValue("selection-style", "dynamic");
 		preferences.setValues("entries", entries);
 		preferences.setValues("not-entries", notEntries);
 		preferences.setValue("merge-url-tags", String.valueOf(mergeUrlTags));
@@ -305,6 +306,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		boolean enableRatings = ParamUtil.getBoolean(
 			actionRequest, "enableRatings");
 
+		preferences.setValue("selection-style", "manual");
 		preferences.setValue("display-style", displayStyle);
 		preferences.setValue(
 			"show-available-locales", String.valueOf(showAvailableLocales));
