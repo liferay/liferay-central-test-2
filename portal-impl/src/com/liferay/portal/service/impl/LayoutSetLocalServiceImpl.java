@@ -132,7 +132,7 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 
 		InputStream is = null;
 
-		if(logo){
+		if (logo) {
 			try{
 				is = new FileInputStream(file);
 			}
