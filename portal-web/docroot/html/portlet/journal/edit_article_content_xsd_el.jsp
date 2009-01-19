@@ -182,48 +182,65 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 									<option value=""></option>
 
 									<%
-									LayoutLister layoutLister = new LayoutLister();
+									boolean[] booleans = new boolean[]{false, true};
 
-									LayoutView layoutView = layoutLister.getLayoutView(layout.getGroupId(), layout.isPrivateLayout(), "root", locale);
+									for (boolean isPrivateLayout : booleans) {
+										LayoutLister layoutLister = new LayoutLister();
 
-									List layoutList = layoutView.getList();
+										LayoutView layoutView = layoutLister.getLayoutView(scopeGroupId, isPrivateLayout, "root", locale);
 
-									for (int i = 0; i < layoutList.size(); i++) {
+										List layoutList = layoutView.getList();
 
-										// id | parentId | ls | obj id | name | img | depth
-
-										String layoutDesc = (String)layoutList.get(i);
-
-										String[] nodeValues = StringUtil.split(layoutDesc, "|");
-
-										long objId = GetterUtil.getLong(nodeValues[3]);
-										String name = nodeValues[4];
-
-										int depth2 = 0;
-
-										if (i != 0) {
-											depth2 = GetterUtil.getInteger(nodeValues[6]);
+										if (layoutList.size() <= 1) {
+											continue;
 										}
-
-										for (int j = 0; j < depth2; j++) {
-											name = "-&nbsp;" + name;
-										}
-
-										Layout linkableLayout = null;
-
-										try {
-											linkableLayout = LayoutLocalServiceUtil.getLayout(objId);
-										}
-										catch (Exception e) {
-										}
-
-										if (linkableLayout != null) {
 									%>
 
-											<option <%= (elContent.equals(String.valueOf(linkableLayout.getLayoutId()))) ? "selected" : "" %> value="<%= linkableLayout.getLayoutId() %>"><%= name %></option>
+									  	<optgroup label="<%= LanguageUtil.get(pageContext, isPrivateLayout?"private-pages":"public-pages") %>"
 
 									<%
+										for (int i = 0; i < layoutList.size(); i++) {
+
+											// id | parentId | ls | obj id | name | img | depth
+
+											String layoutDesc = (String)layoutList.get(i);
+
+											String[] nodeValues = StringUtil.split(layoutDesc, "|");
+
+											long objId = GetterUtil.getLong(nodeValues[3]);
+											String name = nodeValues[4];
+
+											int depth2 = 0;
+
+											if (i != 0) {
+												depth2 = GetterUtil.getInteger(nodeValues[6]);
+											}
+
+											for (int j = 0; j < depth2; j++) {
+												name = "-&nbsp;" + name;
+											}
+
+											Layout linkableLayout = null;
+
+											try {
+												linkableLayout = LayoutLocalServiceUtil.getLayout(objId);
+											}
+											catch (Exception e) {
+											}
+
+											if (linkableLayout != null) {
+									%>
+
+													<option <%= (elContent.equals(String.valueOf(linkableLayout.getLayoutId()))) ? "selected" : "" %> value="<%= linkableLayout.getLayoutId() %>"><%= name %></option>
+
+									<%
+											}
 										}
+									%>
+
+									  	</optgroup>
+
+									<%
 									}
 									%>
 
