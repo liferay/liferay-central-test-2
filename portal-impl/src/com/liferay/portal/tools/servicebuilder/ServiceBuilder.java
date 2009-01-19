@@ -1550,6 +1550,8 @@ public class ServiceBuilder {
 
 				String content = _processTemplate(_tplException, context);
 
+				content = StringUtil.replace(content, "\r\n", "\n");
+
 				FileUtil.write(exceptionFile, content);
 			}
 
