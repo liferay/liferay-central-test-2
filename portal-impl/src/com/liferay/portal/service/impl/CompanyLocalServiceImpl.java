@@ -55,7 +55,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.CompanyLocalServiceBaseImpl;
-import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
@@ -133,7 +132,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			String virtualHost = webId;
 
 			if (webId.equals(PropsValues.COMPANY_DEFAULT_WEB_ID)) {
-				virtualHost = PortalInstances.DEFAULT_VIRTUAL_HOST;
+				virtualHost = _DEFAULT_VIRTUAL_HOST;
 			}
 
 			String homeURL = null;
@@ -641,7 +640,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		if (Validator.isNull(virtualHost)) {
 			throw new CompanyVirtualHostException();
 		}
-		else if (virtualHost.equals(PortalInstances.DEFAULT_VIRTUAL_HOST) &&
+		else if (virtualHost.equals(_DEFAULT_VIRTUAL_HOST) &&
 				 !webId.equals(PropsValues.COMPANY_DEFAULT_WEB_ID)) {
 
 			throw new CompanyVirtualHostException();
@@ -679,5 +678,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			throw new CompanyMxException();
 		}
 	}
+
+	private static final String _DEFAULT_VIRTUAL_HOST = "localhost";
 
 }

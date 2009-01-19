@@ -61,8 +61,6 @@ import org.apache.struts.Globals;
  */
 public class PortalInstances {
 
-	public static final String DEFAULT_VIRTUAL_HOST = "localhost";
-
 	public static void addCompanyId(long companyId) {
 		_instance._addCompanyId(companyId);
 	}
