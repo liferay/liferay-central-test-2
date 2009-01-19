@@ -54,6 +54,7 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  * @author Julio Camarero
+ * @author Ganesh Ram
  *
  */
 public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
@@ -131,11 +132,13 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 
 		InputStream is = null;
 
-		try{
-			is = new FileInputStream(file);
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
+		if(logo){
+			try{
+				is = new FileInputStream(file);
+			}
+			catch (IOException ioe) {
+				throw new SystemException(ioe);
+			}
 		}
 
 		updateLogo(groupId, privateLayout, logo, is);
