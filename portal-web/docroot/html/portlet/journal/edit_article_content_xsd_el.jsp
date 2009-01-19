@@ -182,67 +182,16 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 									<option value=""></option>
 
 									<%
-									boolean[] booleans = new boolean[]{false, true};
-
-									for (boolean isPrivateLayout : booleans) {
-										LayoutLister layoutLister = new LayoutLister();
-
-										LayoutView layoutView = layoutLister.getLayoutView(scopeGroupId, isPrivateLayout, "root", locale);
-
-										List layoutList = layoutView.getList();
-
-										if (layoutList.size() <= 1) {
-											continue;
-										}
+									boolean privateLayout = false;
 									%>
 
-									  	<optgroup label="<%= LanguageUtil.get(pageContext, isPrivateLayout?"private-pages":"public-pages") %>"
+									<%@ include file="/html/portlet/journal/edit_article_content_xsd_el_link_to_layout.jspf" %>
 
 									<%
-										for (int i = 0; i < layoutList.size(); i++) {
-
-											// id | parentId | ls | obj id | name | img | depth
-
-											String layoutDesc = (String)layoutList.get(i);
-
-											String[] nodeValues = StringUtil.split(layoutDesc, "|");
-
-											long objId = GetterUtil.getLong(nodeValues[3]);
-											String name = nodeValues[4];
-
-											int depth2 = 0;
-
-											if (i != 0) {
-												depth2 = GetterUtil.getInteger(nodeValues[6]);
-											}
-
-											for (int j = 0; j < depth2; j++) {
-												name = "-&nbsp;" + name;
-											}
-
-											Layout linkableLayout = null;
-
-											try {
-												linkableLayout = LayoutLocalServiceUtil.getLayout(objId);
-											}
-											catch (Exception e) {
-											}
-
-											if (linkableLayout != null) {
+									privateLayout = true;
 									%>
 
-													<option <%= (elContent.equals(String.valueOf(linkableLayout.getLayoutId()))) ? "selected" : "" %> value="<%= linkableLayout.getLayoutId() %>"><%= name %></option>
-
-									<%
-											}
-										}
-									%>
-
-									  	</optgroup>
-
-									<%
-									}
-									%>
+									<%@ include file="/html/portlet/journal/edit_article_content_xsd_el_link_to_layout.jspf" %>
 
 								</select>
 							</c:if>
