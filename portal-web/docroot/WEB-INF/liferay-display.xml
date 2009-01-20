@@ -53,7 +53,6 @@
 		<portlet id="99" />
 		<portlet id="104" />
 		<portlet id="111" />
-		<portlet id="123" />
 		<portlet id="125" />
 		<portlet id="126" />
 		<portlet id="127" />
@@ -66,7 +65,6 @@
 		<portlet id="135" />
 		<portlet id="136" />
 		<portlet id="137" />
-		<portlet id="138" />
 	</category>
 	<category name="category.news">
 		<portlet id="39" />

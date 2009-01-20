@@ -1763,27 +1763,6 @@
 		<supported-public-render-parameter>tag</supported-public-render-parameter>
 	</portlet>
 	<portlet>
-		<portlet-name>123</portlet-name>
-		<display-name>WSRP Consumer</display-name>
-		<portlet-class>com.liferay.portlet.wsrpconsumer.WSRPConsumerPortlet</portlet-class>
-		<init-param>
-			<name>jsp-path</name>
-			<value>/html/portlet/wsrp_consumer</value>
-		</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-		</supports>
-		<portlet-info>
-			<title>WSRP Consumer</title>
-			<short-title>WSRP Consumer</short-title>
-			<keywords>WSRP Consumer</keywords>
-		</portlet-info>
-		<security-role-ref>
-			<role-name>administrator</role-name>
-		</security-role-ref>
-	</portlet>
-	<portlet>
 		<portlet-name>124</portlet-name>
 		<display-name>Social</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
@@ -2007,27 +1986,6 @@
 			<mime-type>text/html</mime-type>
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
-		<security-role-ref>
-			<role-name>administrator</role-name>
-		</security-role-ref>
-	</portlet>
-	<portlet>
-		<portlet-name>138</portlet-name>
-		<display-name>WSRP Producer</display-name>
-		<portlet-class>com.liferay.portlet.wsrpproducer.WSRPProducerPortlet</portlet-class>
-		<init-param>
-			<name>jsp-path</name>
-			<value>/html/portlet/wsrp_producer</value>
-		</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-		</supports>
-		<portlet-info>
-			<title>WSRP Producer</title>
-			<short-title>WSRP Producer</short-title>
-			<keywords>WSRP Producer</keywords>
-		</portlet-info>
 		<security-role-ref>
 			<role-name>administrator</role-name>
 		</security-role-ref>

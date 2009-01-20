@@ -1062,12 +1062,6 @@
 		<css-class-wrapper>portlet-tags-navigation</css-class-wrapper>
 	</portlet>
 	<portlet>
-		<portlet-name>123</portlet-name>
-		<struts-path>wsrp_consumer</struts-path>
-		<control-panel-entry-category>server</control-panel-entry-category>
-		<control-panel-entry-weight>4.0</control-panel-entry-weight>
-	</portlet>
-	<portlet>
 		<portlet-name>124</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>social</struts-path>
@@ -1269,12 +1263,6 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-admin</css-class-wrapper>
-	</portlet>
-	<portlet>
-		<portlet-name>138</portlet-name>
-		<struts-path>wsrp_producer</struts-path>
-		<control-panel-entry-category>server</control-panel-entry-category>
-		<control-panel-entry-weight>5.0</control-panel-entry-weight>
 	</portlet>
 	<portlet>
 		<portlet-name>139</portlet-name>

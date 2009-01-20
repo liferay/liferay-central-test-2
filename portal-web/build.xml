@@ -13,7 +13,6 @@
 
 	<property name="fckeditor.file" value="FCKeditor_2.6.3.zip" />
 	<property name="tinymce.file" value="tinymce_3_2_1.zip" />
-	<property name="wsrp.file" value="wsrp.zip" />
 
 	<target name="clean" depends="build-common-web.clean">
 		<delete dir="classes" />
@@ -25,7 +24,6 @@
 		<delete dir="docroot/html/themes/classic/color_schemes" />
 		<delete dir="docroot/WEB-INF/classes" />
 		<delete dir="docroot/WEB-INF/lib" />
-		<delete dir="docroot/wsrp" />
 		<delete dir="test-classes" />
 		<delete dir="test-results" />
 
@@ -88,8 +86,6 @@
 		<unjar src="${project.dir}/lib/portal/ruon-client.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/struts.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/velocity.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/wsrp-consumer-portlet.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/wsrp-producer-portlet.jar" dest="${classpath.jsp}" />
 
 		<if>
 			<available file="docroot/WEB-INF/classes" />
@@ -257,9 +253,6 @@
 				<unjar src="${project.dir}/lib/portal/spring.jar" dest="${classpath.jsp}" />
 				<unjar src="${project.dir}/lib/portal/struts-el.jar" dest="${classpath.jsp}" />
 				<unjar src="${project.dir}/lib/portal/urlrewrite.jar" dest="${classpath.jsp}" />
-				<unjar src="${project.dir}/lib/portal/webservices.jar" dest="${classpath.jsp}" />
-				<unjar src="${project.dir}/lib/portal/wsrp-consumer.jar" dest="${classpath.jsp}" />
-				<unjar src="${project.dir}/lib/portal/wsrp-producer.jar" dest="${classpath.jsp}" />
 			</then>
 		</if>
 
@@ -337,7 +330,6 @@
 		<antcall target="build-dtd" />
 		<antcall target="build-fckeditor" />
 		<antcall target="build-tinymce" />
-		<antcall target="build-wsrp" />
 
 		<war
 			basedir="docroot"
@@ -352,7 +344,6 @@
 		<antcall target="build-dtd" />
 		<antcall target="build-fckeditor" />
 		<antcall target="build-tinymce" />
-		<antcall target="build-wsrp" />
 
 		<copy todir="docroot/WEB-INF/lib" file="${project.dir}/portal-client/portal-client.jar" failonerror="false" />
 
@@ -704,22 +695,6 @@
 				<move file="docroot/html/js/editor/tinymce/jscripts/tiny_mce" todir="docroot/html/js/editor" />
 
 				<delete dir="docroot/html/js/editor/tinymce" />
-			</then>
-		</if>
-	</target>
-
-	<target name="build-wsrp">
-		<if>
-			<not>
-				<uptodate
-					srcfile="third-party/${wsrp.file}"
-					targetfile="docroot/wsrp"
-				/>
-			</not>
-			<then>
-				<delete dir="docroot/wsrp" />
-
-				<unzip src="third-party/${wsrp.file}" dest="docroot/wsrp" />
 			</then>
 		</if>
 	</target>

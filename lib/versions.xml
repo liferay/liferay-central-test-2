@@ -296,10 +296,21 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>development/jaxb-api.jar</file-name>
+		<version>2.1.9</version>
+		<project-name>Java Architecture for XML Binding</project-name>
+		<project-url>http://jaxb.dev.java.net</project-url>
+		<licenses>
+			<license>
+				<license-name>CDDL 1.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>development/jbi_rt.jar</file-name>
 		<version>2.0 UR1</version>
 		<project-name>Glassfish</project-name>
-		<project-url>https://glassfish.dev.java.net</project-url>
+		<project-url>http://glassfish.dev.java.net</project-url>
 		<licenses>
 			<license>
 				<license-name>CDDL 1.0</license-name>
@@ -310,7 +321,7 @@
 		<file-name>development/jhighlight.jar</file-name>
 		<version>1.0</version>
 		<project-name>JHighlight</project-name>
-		<project-url>https://jhighlight.dev.java.net</project-url>
+		<project-url>http://jhighlight.dev.java.net</project-url>
 		<licenses>
 			<license>
 				<license-name>CDDL 1.0</license-name>
@@ -343,7 +354,7 @@
 		<file-name>development/jnet.jar</file-name>
 		<version></version>
 		<project-name>jnet</project-name>
-		<project-url>https://jnet.dev.java.net</project-url>
+		<project-url>http://jnet.dev.java.net</project-url>
 		<licenses>
 			<license>
 				<license-name>GPL 2.0</license-name>
@@ -376,7 +387,7 @@
 		<file-name>development/jsf-facelets.jar</file-name>
 		<version>1.1.13</version>
 		<project-name>Facelets</project-name>
-		<project-url>https://facelets.dev.java.net</project-url>
+		<project-url>http://facelets.dev.java.net</project-url>
 		<licenses>
 			<license>
 				<license-name>CDDL 1.0</license-name>
@@ -401,7 +412,7 @@
 		<file-name>development/jsf-portlet.jar</file-name>
 		<version>1.1.5</version>
 		<project-name>JSF Portlet Bridge</project-name>
-		<project-url>https://jsfportletbridge.dev.java.net</project-url>
+		<project-url>http://jsfportletbridge.dev.java.net</project-url>
 		<licenses>
 			<license>
 				<license-name>CDDL 1.0</license-name>
@@ -652,7 +663,7 @@
 		<file-name>development/sdk-addon-api-0.2.jar</file-name>
 		<version>0.2</version>
 		<project-name>Glassfish</project-name>
-		<project-url>https://glassfish.dev.java.net</project-url>
+		<project-url>http://glassfish.dev.java.net</project-url>
 		<licenses>
 			<license>
 				<license-name>CDDL 1.0</license-name>
@@ -732,7 +743,7 @@
 		<file-name>global/container.jar</file-name>
 		<version>2.0 (trunk 812)</version>
 		<project-name>Portlet Container</project-name>
-		<project-url>https://portlet-container.dev.java.net</project-url>
+		<project-url>http://portlet-container.dev.java.net</project-url>
 		<licenses>
 			<license>
 				<license-name>CDDL 1.0</license-name>
@@ -754,7 +765,7 @@
 		<file-name>global/portlet-container.jar</file-name>
 		<version>2.0 (trunk 812)</version>
 		<project-name>Portlet Container</project-name>
-		<project-url>https://portlet-container.dev.java.net</project-url>
+		<project-url>http://portlet-container.dev.java.net</project-url>
 		<licenses>
 			<license>
 				<license-name>CDDL 1.0</license-name>
@@ -765,7 +776,7 @@
 		<file-name>global/saw-api.jar</file-name>
 		<version>0.7</version>
 		<project-name>SAW</project-name>
-		<project-url>https://saw.dev.java.net</project-url>
+		<project-url>http://saw.dev.java.net</project-url>
 		<licenses>
 			<license>
 				<license-name>CDDL 1.0</license-name>
@@ -787,7 +798,7 @@
 		<file-name>portal/annotations.jar</file-name>
 		<version>1.0</version>
 		<project-name>Common Annotations</project-name>
-		<project-url>https://jsr250.dev.java.net</project-url>
+		<project-url>http://jsr250.dev.java.net</project-url>
 		<licenses>
 			<license>
 				<license-name>CDDL 1.0</license-name>
@@ -1575,17 +1586,6 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>portal/jaxb.jar</file-name>
-		<version>1.3</version>
-		<project-name>Metro</project-name>
-		<project-url>https://metro.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>CDDL 1.0</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>portal/jaxen.jar</file-name>
 		<version>1.1 B4</version>
 		<project-name>Jaxen</project-name>
@@ -1601,7 +1601,7 @@
 		<file-name>portal/jaxrpc.jar</file-name>
 		<version>1.1</version>
 		<project-name>JAX-RPC</project-name>
-		<project-url>https://jax-rpc.dev.java.net</project-url>
+		<project-url>http://jax-rpc.dev.java.net</project-url>
 		<licenses>
 			<license>
 				<license-name>CDDL 1.0</license-name>
@@ -1692,7 +1692,7 @@
 		<file-name>portal/jets3t.jar</file-name>
 		<version>0.6.0</version>
 		<project-name>JetS3t</project-name>
-		<project-url>https://jets3t.dev.java.net</project-url>
+		<project-url>http://jets3t.dev.java.net</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
@@ -1896,7 +1896,7 @@
 		<file-name>portal/mirage-api.jar</file-name>
 		<version>0.2 (trunk 275)</version>
 		<project-name>Mirage</project-name>
-		<project-url>https://mirage.dev.java.net</project-url>
+		<project-url>http://mirage.dev.java.net</project-url>
 		<licenses>
 			<license>
 				<license-name>CDDL 1.0</license-name>
@@ -2151,7 +2151,7 @@
 		<file-name>portal/rome.jar</file-name>
 		<version>0.9</version>
 		<project-name>ROME</project-name>
-		<project-url>https://rome.dev.java.net</project-url>
+		<project-url>http://rome.dev.java.net</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
@@ -2163,7 +2163,7 @@
 		<file-name>portal/saaj-api.jar</file-name>
 		<version>1.3</version>
 		<project-name>SAAJ</project-name>
-		<project-url>https://saaj.dev.java.net</project-url>
+		<project-url>http://saaj.dev.java.net</project-url>
 		<licenses>
 			<license>
 				<license-name>CDDL 1.0</license-name>
@@ -2174,7 +2174,7 @@
 		<file-name>portal/saaj-impl.jar</file-name>
 		<version>1.3</version>
 		<project-name>SAAJ</project-name>
-		<project-url>https://saaj.dev.java.net</project-url>
+		<project-url>http://saaj.dev.java.net</project-url>
 		<licenses>
 			<license>
 				<license-name>CDDL 1.0</license-name>
@@ -2409,20 +2409,6 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>portal/webservices.jar</file-name>
-		<version>1.3</version>
-		<project-name>Metro</project-name>
-		<project-url>https://metro.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>CDDL 1.0</license-name>
-			</license>
-		</licenses>
-		<comments>
-			Removed all MANIFEST.MF files because there were more than one.
-		</comments>
-	</library>
-	<library>
 		<file-name>portal/wsdl4j.jar</file-name>
 		<version>1.6</version>
 		<project-name>WSDL4J</project-name>
@@ -2431,67 +2417,6 @@
 			<license>
 				<license-name>Common Public License 1.0</license-name>
 				<copyright-notice>Copyright (c) IBM Corp 2001, 2005</copyright-notice>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>portal/wsrp-common.jar</file-name>
-		<version>2.0 (trunk 792)</version>
-		<project-name>WSRP</project-name>
-		<project-url>https://wsrp.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>CDDL 1.0</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>portal/wsrp-consumer.jar</file-name>
-		<version>2.0 (trunk 792)</version>
-		<project-name>WSRP</project-name>
-		<project-url>https://wsrp.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>CDDL 1.0</license-name>
-			</license>
-		</licenses>
-		<comments>
-			See LPS-993.
-		</comments>
-	</library>
-	<library>
-		<file-name>portal/wsrp-consumer-portlet.jar</file-name>
-		<version>2.0 (trunk 792)</version>
-		<project-name>WSRP</project-name>
-		<project-url>https://wsrp.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>CDDL 1.0</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>portal/wsrp-producer.jar</file-name>
-		<version>2.0 (trunk 792)</version>
-		<project-name>WSRP</project-name>
-		<project-url>https://wsrp.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>CDDL 1.0</license-name>
-			</license>
-		</licenses>
-		<comments>
-			See LPS-993.
-		</comments>
-	</library>
-	<library>
-		<file-name>portal/wsrp-producer-portlet.jar</file-name>
-		<version>2.0 (trunk 792)</version>
-		<project-name>WSRP</project-name>
-		<project-url>https://wsrp.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>CDDL 1.0</license-name>
 			</license>
 		</licenses>
 	</library>

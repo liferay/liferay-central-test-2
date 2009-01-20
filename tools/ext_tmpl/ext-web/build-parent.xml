@@ -52,8 +52,6 @@
 		<unjar src="${project.dir}/lib/portal/ruon-client.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/struts.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/velocity.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/wsrp-consumer-portlet.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/wsrp-producer-portlet.jar" dest="${classpath.jsp}" />
 	</target>
 
 	<target name="compile-common-jsp">
@@ -212,9 +210,6 @@
 				<unjar src="${project.dir}/lib/portal/spring.jar" dest="${classpath.jsp}" />
 				<unjar src="${project.dir}/lib/portal/struts-el.jar" dest="${classpath.jsp}" />
 				<unjar src="${project.dir}/lib/portal/urlrewrite.jar" dest="${classpath.jsp}" />
-				<unjar src="${project.dir}/lib/portal/webservices.jar" dest="${classpath.jsp}" />
-				<unjar src="${project.dir}/lib/portal/wsrp-consumer.jar" dest="${classpath.jsp}" />
-				<unjar src="${project.dir}/lib/portal/wsrp-producer.jar" dest="${classpath.jsp}" />
 			</then>
 		</if>
 

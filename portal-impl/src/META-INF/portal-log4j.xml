@@ -580,10 +580,6 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.portlet.wsrp">
-		<priority value="ERROR" />
-	</category>
-
 	<category name="com.liferay.portlet.wiki.importers">
 		<priority value="WARN" />
 	</category>
@@ -605,10 +601,6 @@
 	</category>
 
 	<category name="com.liferay.util.servlet.ServletResponseUtil">
-		<priority value="ERROR" />
-	</category>
-
-	<category name="com.liferay.wsrp">
 		<priority value="ERROR" />
 	</category>
 
@@ -701,10 +693,6 @@
 	</category>
 
 	<category name="org.apache.velocity">
-		<priority value="ERROR" />
-	</category>
-
-	<category name="org.apache.wsrp4j">
 		<priority value="ERROR" />
 	</category>
 

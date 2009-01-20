@@ -404,11 +404,6 @@
 		<include>true</include>
 	</portlet>
 	<portlet>
-		<portlet-name>123</portlet-name>
-		<struts-path>wsrp_consumer</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
 		<portlet-name>124</portlet-name>
 		<struts-path>social</struts-path>
 		<include>true</include>
@@ -476,11 +471,6 @@
 	<portlet>
 		<portlet-name>137</portlet-name>
 		<struts-path>admin_server</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
-		<portlet-name>138</portlet-name>
-		<struts-path>wsrp_producer</struts-path>
 		<include>true</include>
 	</portlet>
 	<portlet>
