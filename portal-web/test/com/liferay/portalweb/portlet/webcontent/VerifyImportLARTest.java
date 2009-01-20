@@ -51,7 +51,8 @@ public class VerifyImportLARTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Web Content"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Articles"));
+		selenium.click(RuntimeVariables.replace(
+				"//li[@id='_15_tabs1web-contentTabsId']/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Web Content Article"));
 		assertTrue(selenium.isElementPresent("link=Test Web Content Article 2"));

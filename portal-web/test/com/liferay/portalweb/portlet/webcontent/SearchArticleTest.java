@@ -77,7 +77,7 @@ public class SearchArticleTest extends BaseTestCase {
 		selenium.type("_15_searchArticleId", RuntimeVariables.replace("Test"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("no-web-content-was-found"));
+		assertTrue(selenium.isTextPresent("No Web Content was found."));
 		selenium.type("_15_searchArticleId", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -121,7 +121,7 @@ public class SearchArticleTest extends BaseTestCase {
 		selenium.type("_15_version", RuntimeVariables.replace("1.1"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("no-web-content-was-found"));
+		assertTrue(selenium.isTextPresent("No Web Content was found."));
 		selenium.type("_15_version", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -164,7 +164,7 @@ public class SearchArticleTest extends BaseTestCase {
 		selenium.type("_15_title", RuntimeVariables.replace("Test1"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("no-web-content-was-found"));
+		assertTrue(selenium.isTextPresent("No Web Content was found."));
 		selenium.type("_15_title", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -207,7 +207,7 @@ public class SearchArticleTest extends BaseTestCase {
 		selenium.type("_15_description", RuntimeVariables.replace("test1"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("no-web-content-was-found"));
+		assertTrue(selenium.isTextPresent("No Web Content was found."));
 		selenium.type("_15_description", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -250,7 +250,7 @@ public class SearchArticleTest extends BaseTestCase {
 		selenium.type("_15_content", RuntimeVariables.replace("test1"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("no-web-content-was-found"));
+		assertTrue(selenium.isTextPresent("No Web Content was found."));
 		selenium.type("_15_content", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -294,7 +294,7 @@ public class SearchArticleTest extends BaseTestCase {
 		selenium.select("_15_type", RuntimeVariables.replace("label=Blogs"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("no-web-content-was-found"));
+		assertTrue(selenium.isTextPresent("No Web Content was found."));
 		selenium.select("_15_type", RuntimeVariables.replace("label="));
 
 		for (int second = 0;; second++) {
@@ -338,7 +338,7 @@ public class SearchArticleTest extends BaseTestCase {
 			RuntimeVariables.replace("label=Not Approved"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("no-web-content-was-found"));
+		assertTrue(selenium.isTextPresent("No Web Content was found."));
 		selenium.select("_15_status", RuntimeVariables.replace("label="));
 		selenium.click("link=\u00ab Basic");
 

@@ -50,9 +50,9 @@ public class WebContentTests extends BaseTests {
 		addTestSuite(AddNullTitleTest.class);
 		addTestSuite(RecentPageTest.class);
 		addTestSuite(CancelPopupTest.class);
-		//addTestSuite(DeleteAllTest.class);
-		//addTestSuite(ImportLARTest.class);
-		//addTestSuite(VerifyImportLARTest.class);
+		addTestSuite(DeleteAllTest.class);
+		addTestSuite(ImportLARTest.class);
+		addTestSuite(VerifyImportLARTest.class);
 		addTestSuite(AddAssociatedTemplateTest.class);
 		addTestSuite(AssertStructureTemplateAssociationTest.class);
 		addTestSuite(TearDownTest.class);
