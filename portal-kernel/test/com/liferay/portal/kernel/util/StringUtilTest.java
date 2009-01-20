@@ -60,4 +60,31 @@ public class StringUtilTest extends BaseTestCase {
 		assertEquals(expected, actual);
 	}
 
+	public void testToCamelCase1() throws Exception {
+		String original = "hello-World-HELLO-WORLD-hello-world";
+		String expected = "HelloWorldHELLOWORLDHelloWorld";
+
+		String actual = StringUtil.toCamelCase(original, true);
+
+		assertEquals(expected, actual);
+	}
+
+	public void testToCamelCase2() throws Exception {
+		String original = "hello-World-HELLO-WORLD-hello-world";
+		String expected = "helloWorldHELLOWORLDHelloWorld";
+
+		String actual = StringUtil.toCamelCase(original, false);
+
+		assertEquals(expected, actual);
+	}
+
+	public void testToMessageKey() throws Exception {
+		String original = "HelloWorldHELLOWORLDHelloWorld";
+		String expected = "hello-world-helloworld-hello-world";
+
+		String actual = StringUtil.toMessageKey(original);
+
+		assertEquals(expected, actual);
+	}
+
 }

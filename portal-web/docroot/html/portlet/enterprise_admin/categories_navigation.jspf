@@ -120,19 +120,7 @@ for (int i = 0; i < categoryNames.length; i++) {
 
 <%!
 private String _getSectionId(String name) {
-	int pos = name.indexOf(StringPool.DASH);
-
-	if (pos == -1) {
-		return name;
-	}
-
-	StringBuilder sb = new StringBuilder();
-
-	sb.append(name.substring(0, pos));
-	sb.append(name.substring(pos + 1, pos + 2).toUpperCase());
-	sb.append(name.substring(pos + 2));
-
-	return _getSectionId(sb.toString());
+	return StringUtil.toCamelCase(name, false);
 }
 
 private String _getSectionJsp(String name) {

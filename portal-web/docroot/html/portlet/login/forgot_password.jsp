@@ -36,10 +36,15 @@ if (Validator.isNull(authType)) {
 <input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL />" />
 
 <liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
-<liferay-ui:error exception="<%= NoSuchUserException.class %>" message="the-email-address-you-requested-is-not-registered-in-our-database" />
+
+<%
+String nsue = "the-" + StringUtil.toMessageKey(authType) + "-you-requested-is-not-registered-in-our-database";
+%>
+
+<liferay-ui:error exception="<%= NoSuchUserException.class %>" message="<%= nsue %>" />
 <liferay-ui:error exception="<%= SendPasswordException.class %>" message="your-password-can-only-be-sent-to-an-external-email-address" />
 <liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-email-address" />
-<liferay-ui:error exception="<%= UserReminderQueryException.class %>" message="Your answer does not match what is in our database." />
+<liferay-ui:error exception="<%= UserReminderQueryException.class %>" message="your-answer-does-not-match-what-is-in-our-database" />
 
 <fieldset class="block-labels">
 	<c:choose>
