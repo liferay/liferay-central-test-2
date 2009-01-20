@@ -411,21 +411,29 @@
 		</if>
 
 		<if>
-			<or>
-				<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-				<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-			</or>
+			<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
 			<then>
 				<if>
-					<equals arg1="${app.server.version}" arg2="5.0" />
+					<equals arg1="${app.server.version}" arg2="4.2" />
 					<then>
 						<delete>
 							<fileset
-								dir="${app.server.lib.portal.dir}"
-								includes="jaxrpc.jar,jmx-remote.jar,jmx-ri.jar,mx4j.jar,stax.jar,xercesImpl.jar,xml-apis.jar"
+								dir="${app.server.instance.dir}/lib"
+								includes="hibernate3.jar"
 							/>
 						</delete>
 					</then>
+					<elseif>
+						<equals arg1="${app.server.version}" arg2="5.0" />
+						<then>
+							<delete>
+								<fileset
+									dir="${app.server.lib.portal.dir}"
+									includes="jaxrpc.jar,jmx-remote.jar,jmx-ri.jar,mx4j.jar,stax.jar,xercesImpl.jar,xml-apis.jar"
+								/>
+							</delete>
+						</then>
+					</elseif>
 				</if>
 			</then>
 		</if>
@@ -585,57 +593,23 @@
 		<mkdir dir="${app.server.work.dir}" />
 
 		<if>
-			<or>
-				<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-				<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-			</or>
+			<equals arg1="${app.server.type}" arg2="jetty" />
 			<then>
 
 				<!--
-				JBoss 4.0.5 defaults to different versions of dom4j, Commons
-				Collections, Commons HttpClient, and Hibernate.
+				Jetty 5.1.10 defaults to a different version of Commons
+				Logging and Hypersonic.
 				-->
 
-				<!--<copy todir="${app.server.dir}/lib" overwrite="yes">
+				<copy todir="${app.server.dir}/ext" overwrite="yes">
 					<fileset
 						dir="lib/portal"
-						includes="commons-codec.jar,commons-httpclient.jar,dom4j.jar,jaxen.jar"
+						includes="commons-logging.jar"
 					/>
 				</copy>
 
-				<copy todir="${app.server.instance.dir}/lib" overwrite="yes">
-					<fileset
-						dir="lib/portal"
-						includes="commons-codec.jar,commons-collections.jar,commons-httpclient.jar"
-					/>
-				</copy>
-
-				<delete>
-					<fileset
-						dir="${app.server.instance.dir}/lib"
-						includes="hibernate3.jar,jboss-hibernate.jar"
-					/>
-				</delete>-->
+				<delete file="${app.server.dir}/extra/ext/hsqldb.jar" />
 			</then>
-			<elseif>
-				<equals arg1="${app.server.type}" arg2="jetty" />
-				<then>
-
-					<!--
-					Jetty 5.1.10 defaults to a different version of Commons
-					Logging and Hypersonic.
-					-->
-
-					<copy todir="${app.server.dir}/ext" overwrite="yes">
-						<fileset
-							dir="lib/portal"
-							includes="commons-logging.jar"
-						/>
-					</copy>
-
-					<delete file="${app.server.dir}/extra/ext/hsqldb.jar" />
-				</then>
-			</elseif>
 		</if>
 
 		<if>

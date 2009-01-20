@@ -78,34 +78,12 @@
 		/>
 	</target>
 
-	<target name="compile-jboss-jetty" depends="merge">
-		<property name="jspc.classes.dir" value="classes/${app.server.type}" />
-		<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.deploy.dir}/jbossweb-jetty.sar/jasper-compiler.jar;${app.server.deploy.dir}/jbossweb-jetty.sar/jasper-runtime.jar" />
-
-		<if>
-			<not>
-				<available file="${classpath.jsp}" />
-			</not>
-			<then>
-				<antcall target="compile-common-lib" />
-
-				<unjar src="${app.server.instance.dir}/lib/javax.servlet.jar" dest="${classpath.jsp}" />
-				<unjar src="${app.server.instance.dir}/lib/javax.servlet.jsp.jar" dest="${classpath.jsp}" />
-				<unjar src="${app.server.deploy.dir}/jbossweb-jetty.sar/commons-el.jar" dest="${classpath.jsp}" />
-			</then>
-		</if>
-
-		<antcall target="compile-common-jsp">
-			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp ${jsp.precompile.dir}" />
-		</antcall>
-	</target>
-
 	<target name="compile-jboss-tomcat">
 		<if>
-			<equals arg1="${app.server.version}" arg2="4.0" />
+			<equals arg1="${app.server.version}" arg2="4.2" />
 			<then>
 				<property name="jspc.classes.dir" value="classes/${app.server.type}" />
-				<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.deploy.dir}/jbossweb-tomcat55.sar/jasper-compiler.jar;${app.server.deploy.dir}/jbossweb-tomcat55.sar/jasper-runtime.jar" />
+				<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.dir}/lib/jboss-common.jar;${app.server.deploy.dir}/jboss-web.deployer/jasper-jdt.jar;${app.server.deploy.dir}/jboss-web.deployer/jbossweb.jar;${app.server.instance.dir}/lib/el-api.jar" />
 
 				<if>
 					<not>
@@ -114,32 +92,12 @@
 					<then>
 						<antcall target="compile-common-lib" />
 
-						<unjar src="${app.server.instance.dir}/lib/javax.servlet.jar" dest="${classpath.jsp}" />
-						<unjar src="${app.server.instance.dir}/lib/javax.servlet.jsp.jar" dest="${classpath.jsp}" />
-						<unjar src="${app.server.deploy.dir}/jbossweb-tomcat55.sar/commons-el.jar" dest="${classpath.jsp}" />
+						<unjar src="${app.server.instance.dir}/lib/jsp-api.jar" dest="${classpath.jsp}" />
+						<unjar src="${app.server.instance.dir}/lib/servlet-api.jar" dest="${classpath.jsp}" />
+						<unjar src="${app.server.deploy.dir}/jboss-web.deployer/jstl.jar" dest="${classpath.jsp}" />
 					</then>
 				</if>
 			</then>
-			<elseif>
-				<equals arg1="${app.server.version}" arg2="4.2" />
-				<then>
-					<property name="jspc.classes.dir" value="classes/${app.server.type}" />
-					<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.dir}/lib/jboss-common.jar;${app.server.deploy.dir}/jboss-web.deployer/jasper-jdt.jar;${app.server.deploy.dir}/jboss-web.deployer/jbossweb.jar;${app.server.instance.dir}/lib/el-api.jar" />
-
-					<if>
-						<not>
-							<available file="${classpath.jsp}" />
-						</not>
-						<then>
-							<antcall target="compile-common-lib" />
-
-							<unjar src="${app.server.instance.dir}/lib/jsp-api.jar" dest="${classpath.jsp}" />
-							<unjar src="${app.server.instance.dir}/lib/servlet-api.jar" dest="${classpath.jsp}" />
-							<unjar src="${app.server.deploy.dir}/jboss-web.deployer/jstl.jar" dest="${classpath.jsp}" />
-						</then>
-					</if>
-				</then>
-			</elseif>
 			<elseif>
 				<equals arg1="${app.server.version}" arg2="5.0" />
 				<then>
@@ -345,30 +303,17 @@
 			<equals arg1="${jsp.precompile}" arg2="on" />
 			<then>
 				<if>
-					<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+					<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
 					<then>
-						<antcall target="compile-jboss-jetty" />
+						<antcall target="compile-jboss-tomcat" />
 
-						<copy todir="${app.server.instance.dir}/work">
+						<copy todir="${app.server.instance.dir}/work/jboss.web/localhost/_">
 							<fileset dir="classes/${app.server.type}">
 								<exclude name="**/*.jspc_error" />
 								<exclude name="**/*.java" />
 							</fileset>
 						</copy>
 					</then>
-					<elseif>
-						<equals arg1="${app.server.version}" arg2="4.0" />
-						<then>
-							<antcall target="compile-jboss-tomcat" />
-
-							<copy todir="${app.server.instance.dir}/work/jboss.web/localhost/_">
-								<fileset dir="classes/${app.server.type}">
-									<exclude name="**/*.jspc_error" />
-									<exclude name="**/*.java" />
-								</fileset>
-							</copy>
-						</then>
-					</elseif>
 					<elseif>
 						<equals arg1="${app.server.type}" arg2="jetty" />
 						<then>
