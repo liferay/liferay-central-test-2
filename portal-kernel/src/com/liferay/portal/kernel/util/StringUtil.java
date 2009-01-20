@@ -628,7 +628,7 @@ public class StringUtil {
 				sb.append(s.substring(0, pos));
 				sb.append(s.substring(x, y));
 
-				s =  sb.toString();
+				s = sb.toString();
 			}
 		}
 
@@ -891,7 +891,7 @@ public class StringUtil {
 			sb.append(s.substring(0, length));
 			sb.append(suffix);
 
-			s =  sb.toString();
+			s = sb.toString();
 		}
 
 		return s;
@@ -1181,7 +1181,7 @@ public class StringUtil {
 
 		if (pos == -1) {
 			if (upperCaseFirstLetter) {
-				s =  upperCaseFirstLetter(s);
+				s = upperCaseFirstLetter(s);
 			}
 
 			return s;
@@ -1449,14 +1449,14 @@ public class StringUtil {
 			return true;
 		}
 		return false;
-    }
+	}
 
 	private static boolean _isLowerCase (char c) {
 		if ((c >= 97) && (c <= 122) ) {
 			return true;
 		}
 		return false;
-    }
+	}
 
 	private static Log _log = LogFactoryUtil.getLog(StringUtil.class);
 
