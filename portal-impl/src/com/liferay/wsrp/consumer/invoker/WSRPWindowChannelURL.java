@@ -41,9 +41,10 @@
 
 package com.liferay.wsrp.consumer.invoker;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portlet.PortletURLImpl;
+import com.liferay.portlet.PortletURLFactoryUtil;
 
 import com.sun.portal.container.ChannelMode;
 import com.sun.portal.container.ChannelState;
@@ -59,6 +60,7 @@ import java.util.Map;
 
 import javax.portlet.PortletModeException;
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletSecurityException;
 import javax.portlet.WindowStateException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -91,7 +93,7 @@ public class WSRPWindowChannelURL implements ChannelURL, Serializable {
 		HttpServletRequest request, Portlet portlet, ChannelState windowState,
 		ChannelMode portletMode, long plid) {
 
-		_portletURLImpl = new PortletURLImpl(
+		_portletURL = PortletURLFactoryUtil.create(
 			request, portlet.getPortletId(), plid, PortletRequest.RENDER_PHASE);
 
 		setWindowState(windowState);
@@ -102,16 +104,16 @@ public class WSRPWindowChannelURL implements ChannelURL, Serializable {
 	}
 
 	public String getCacheLevel() {
-		return _portletURLImpl.getCacheability();
+		return _portletURL.getCacheability();
 	}
 
 	public ChannelMode getChannelMode() {
 		return PortletAppEngineUtils.getChannelMode(
-			_portletURLImpl.getPortletMode());
+			_portletURL.getPortletMode());
 	}
 
 	public Map<String, String[]> getParameters() {
-		return _portletURLImpl.getParameterMap();
+		return _portletURL.getParameterMap();
 	}
 
 	public Map<String, List<String>> getProperties() {
@@ -124,20 +126,20 @@ public class WSRPWindowChannelURL implements ChannelURL, Serializable {
 
 	public ChannelState getWindowState() {
 		return PortletAppEngineUtils.getChannelState(
-			_portletURLImpl.getWindowState());
+			_portletURL.getWindowState());
 	}
 
 	public boolean isSecure() {
-		return _portletURLImpl.isSecure();
+		return _portletURL.isSecure();
 	}
 
 	public void setCacheLevel(String cacheLevel) {
-		_portletURLImpl.setCacheability(cacheLevel);
+		_portletURL.setCacheability(cacheLevel);
 	}
 
 	public void setChannelMode(ChannelMode portletMode) {
 		try {
-			_portletURLImpl.setPortletMode(
+			_portletURL.setPortletMode(
 				PortletAppEngineUtils.getPortletMode(portletMode));
 		}
 		catch (PortletModeException pme) {
@@ -146,39 +148,44 @@ public class WSRPWindowChannelURL implements ChannelURL, Serializable {
 	}
 
 	public void setParameter(String name, String value) {
-		_portletURLImpl.setParameter(name, value);
+		_portletURL.setParameter(name, value);
 	}
 
 	public void setParameter(String name, String[] values) {
-		_portletURLImpl.setParameter(name, values);
+		_portletURL.setParameter(name, values);
 	}
 
 	public void setParameters(Map<String, String[]> parametersMap) {
-		_portletURLImpl.setParameters(parametersMap);
+		_portletURL.setParameters(parametersMap);
 	}
 
 	public void setProperty(String name, String value) {
 	}
 
 	public void setResourceID(String resourceID) {
-		_portletURLImpl.setResourceID(resourceID);
+		_portletURL.setResourceID(resourceID);
 	}
 
 	public void setSecure(boolean secure) {
-		_portletURLImpl.setSecure(secure);
+		try {
+			_portletURL.setSecure(secure);
+		}
+		catch (PortletSecurityException pe) {
+			_log.error(pe, pe);
+		}
 	}
 
 	public void setURLType(ChannelURLType urlType) {
 		_urlType = urlType;
 
-		_portletURLImpl.setLifecycle(getLifecycle());
-		_portletURLImpl.setURLType(getURLType());
+		_portletURL.setLifecycle(getLifecycle());
+		_portletURL.setURLType(getURLType());
 	}
 
 	public void setWindowState(ChannelState windowState) {
 		try {
 			if (windowState != null) {
-				_portletURLImpl.setWindowState(
+				_portletURL.setWindowState(
 					PortletAppEngineUtils.getWindowState(windowState));
 			}
 		}
@@ -188,7 +195,7 @@ public class WSRPWindowChannelURL implements ChannelURL, Serializable {
 	}
 
 	public String toString() {
-		return _portletURLImpl.toString();
+		return _portletURL.toString();
 	}
 
 	protected String getLifecycle() {
@@ -212,7 +219,7 @@ public class WSRPWindowChannelURL implements ChannelURL, Serializable {
 	protected String getTemplate() {
 		StringBuffer sb = new StringBuffer();
 
-		sb.append(_portletURLImpl.toString());
+		sb.append(_portletURL.toString());
 
 		sb.append(StringPool.AMPERSAND);
 		sb.append(PORTLET_ACTION);
@@ -256,7 +263,7 @@ public class WSRPWindowChannelURL implements ChannelURL, Serializable {
 
 	private static Log _log = LogFactory.getLog(WSRPWindowChannelURL.class);
 
-	private PortletURLImpl _portletURLImpl;
+	private LiferayPortletURL _portletURL;
 	private ChannelURLType _urlType;
 
 }
