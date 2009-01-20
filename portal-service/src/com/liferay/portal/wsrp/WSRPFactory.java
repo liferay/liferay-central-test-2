@@ -40,8 +40,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface WSRPFactory {
 
-	public ChannelURLFactory getChannelURLFactory();
-
 	public Container getContainer();
 
 	public ProfileMapManager getProfileMapManager();

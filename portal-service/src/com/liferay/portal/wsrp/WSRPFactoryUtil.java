@@ -40,10 +40,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class WSRPFactoryUtil {
 
-	public static ChannelURLFactory getChannelURLFactory() {
-		return getWSRPFactory().getChannelURLFactory();
-	}
-
 	public static Container getContainer() {
 		return getWSRPFactory().getContainer();
 	}
