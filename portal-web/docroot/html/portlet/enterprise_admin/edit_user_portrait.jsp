@@ -26,11 +26,17 @@
 
 <c:choose>
 	<c:when test='<%= SessionMessages.contains(renderRequest, "request_processed") %>'>
+		<%
+		long userId = ParamUtil.getLong(request, "p_u_i_d");
+		User selUser = UserServiceUtil.getUserById(userId);
+		long portraitId = selUser.getPortraitId();
+		%>
+
 		<script type="text/javascript">
 			jQuery(
 				function() {
 					window.close();
-					opener.<portlet:namespace />changeUserPortrait();
+					opener.<portlet:namespace />changeUserPortrait(<%= portraitId %>);
 				}
 			);
 		</script>

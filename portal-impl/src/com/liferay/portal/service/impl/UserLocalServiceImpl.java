@@ -808,6 +808,20 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			passwordPolicyId, User.class.getName(), userId);
 	}
 
+	public void deletePortrait(long userId)
+		throws PortalException, SystemException {
+
+		User user = userPersistence.findByPrimaryKey(userId);
+		long portraitId = user.getPortraitId();
+
+		if (portraitId > 0) {
+			user.setPortraitId(0);
+
+			userPersistence.update(user, false);
+			imageLocalService.deleteImage(portraitId);
+		}
+	}
+
 	public void deleteRoleUser(long roleId, long userId)
 		throws SystemException {
 

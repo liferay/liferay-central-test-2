@@ -423,6 +423,8 @@ public class EditUserAction extends PortletAction {
 				actionRequest, "password2");
 			boolean passwordReset = ParamUtil.getBoolean(
 				actionRequest, "passwordReset");
+			boolean deletePortrait = ParamUtil.getBoolean(
+				actionRequest, "deletePortrait");
 
 			String tempOldScreenName = user.getScreenName();
 
@@ -436,6 +438,10 @@ public class EditUserAction extends PortletAction {
 				twitterSn, ymSn, jobTitle, groupIds, organizationIds, roleIds,
 				userGroupRoles, userGroupIds, addresses, emailAddresses, phones,
 				websites, announcementsDeliveries, serviceContext);
+
+			if (deletePortrait) {
+				UserServiceUtil.deletePortrait(user.getUserId());
+			}
 
 			if (!tempOldScreenName.equals(user.getScreenName())) {
 				oldScreenName = tempOldScreenName;

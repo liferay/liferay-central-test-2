@@ -238,6 +238,15 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		userLocalService.deleteRoleUser(roleId, userId);
 	}
 
+	public void deletePortrait(long userId)
+		throws PortalException, SystemException {
+
+		UserPermissionUtil.check(
+			getPermissionChecker(), userId, ActionKeys.UPDATE);
+
+		userLocalService.deletePortrait(userId);
+	}
+
 	public void deleteUser(long userId)
 		throws PortalException, SystemException {
 

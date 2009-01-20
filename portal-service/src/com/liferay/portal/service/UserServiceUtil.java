@@ -131,6 +131,12 @@ public class UserServiceUtil {
 		getService().deleteRoleUser(roleId, userId);
 	}
 
+	public static void deletePortrait(long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().deletePortrait(userId);
+	}
+
 	public static void deleteUser(long userId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

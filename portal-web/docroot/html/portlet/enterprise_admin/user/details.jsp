@@ -44,11 +44,22 @@ if (selContact != null) {
 %>
 
 <script type="text/javascript">
-	function <portlet:namespace />changeUserPortrait() {
-		var oldAvatar = jQuery('#<portlet:namespace />avatar').attr('src');
+	function <portlet:namespace />changeUserPortrait(portraitId) {
+		var newAvatar = '<%= themeDisplay.getPathImage() %>/user_<%= selUser.isFemale() ? "female" : "male" %>_portrait?img_id=' + portraitId + '&t=<%= ImageServletTokenUtil.getToken(selUser.getPortraitId()) %>' + 1;
 
-		jQuery('#<portlet:namespace />avatar').attr('src', oldAvatar + 1);
-		jQuery('.avatar').attr('src', oldAvatar + 1);
+		jQuery('#<portlet:namespace />avatar').attr('src', newAvatar);
+		jQuery('.avatar').attr('src', newAvatar);
+
+		jQuery('#<portlet:namespace />deletePortrait').val(false);
+	}
+
+	function <portlet:namespace />deletePortrait() {
+		jQuery('#<portlet:namespace />deletePortrait').val(true);
+
+		var defaultAvatar = '<%= themeDisplay.getPathImage() %>/user_<%= selUser.isFemale() ? "female" : "male" %>_portrait?img_id=0';
+
+		jQuery('#<portlet:namespace />avatar').attr('src', defaultAvatar);
+		jQuery('.avatar').attr('src', defaultAvatar);
 	}
 
 	function <portlet:namespace />openEditPortraitWindow(url) {
@@ -159,7 +170,7 @@ if (selContact != null) {
 </fieldset>
 
 <fieldset class="block-labels col">
-	<div class="change-avatar">
+	<div>
 		<c:if test="<%= selUser != null %>">
 			<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="changeAvatarURL">
 				<portlet:param name="struts_action" value="/enterprise_admin/edit_user_portrait" />
@@ -168,11 +179,19 @@ if (selContact != null) {
 				<portlet:param name="portrait_id" value="<%= String.valueOf(selUser.getPortraitId()) %>" />
 			</portlet:renderURL>
 
-			<a href="javascript: <portlet:namespace />openEditPortraitWindow('<%= changeAvatarURL %>');">
+			<a class="change-avatar" href="javascript: <portlet:namespace />openEditPortraitWindow('<%= changeAvatarURL %>');">
 				<img alt="<liferay-ui:message key="avatar" />" class="avatar" id="<portlet:namespace />avatar" src='<%= themeDisplay.getPathImage() %>/user_<%= selUser.isFemale() ? "female" : "male" %>_portrait?img_id=<%= selUser.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(selUser.getPortraitId()) %>' />
-
-				<span><liferay-ui:message key="change" /></span>
 			</a>
+
+			<div class="portrait-icons">
+				<liferay-ui:icon image="edit" message="change" label="true" url="<%= "javascript:" + renderResponse.getNamespace() + "openEditPortraitWindow('" + changeAvatarURL +"');" %>" />
+
+				<c:if test="<%= selUser.getPortraitId() > 0 %>">
+					<liferay-ui:icon image="delete" label="true" url='<%= "javascript:"+ renderResponse.getNamespace() + "deletePortrait()" %>' />
+					<input name="<portlet:namespace />deletePortrait" id="<portlet:namespace />deletePortrait" type="hidden" value="false" />
+				</c:if>
+			</div>
+
 		</c:if>
 	</div>
 

@@ -227,6 +227,17 @@ public class UserServiceSoap {
 		}
 	}
 
+	public static void deletePortrait(long userId) throws RemoteException {
+		try {
+			UserServiceUtil.deletePortrait(userId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deleteUser(long userId) throws RemoteException {
 		try {
 			UserServiceUtil.deleteUser(userId);

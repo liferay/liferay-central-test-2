@@ -189,6 +189,10 @@ public interface UserLocalService {
 	public void deletePasswordPolicyUser(long passwordPolicyId, long userId)
 		throws com.liferay.portal.SystemException;
 
+	public void deletePortrait(long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public void deleteRoleUser(long roleId, long userId)
 		throws com.liferay.portal.SystemException;
 

@@ -61,10 +61,6 @@
 	display: block;
 }
 
-.portlet-enterprise-admin .change-avatar {
-	text-align: center;
-}
-
 .portlet-enterprise-admin .change-avatar img {
 	display: block;
 	margin: 0 auto;
@@ -237,6 +233,14 @@
 	font-size: 14px;
 	font-weight: 700;
 	margin: 10px 0 0;
+}
+
+.portlet-enterprise-admin .portrait-icons {
+	text-align: center;
+}
+
+.portlet-enterprise-admin .portrait-icons a {
+	float: letf;
 }
 
 .portlet-enterprise-admin table.org-labor-table {
