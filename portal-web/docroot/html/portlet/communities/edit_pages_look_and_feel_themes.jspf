@@ -88,7 +88,7 @@ PluginPackage selPluginPackage = selTheme.getPluginPackage();
 										<%= curColorScheme.getName() %>
 									</span>
 
-									<img alt="<%= curColorScheme.getName() %>" class="theme-thumbnail" src="<%= selTheme.getContextPath() %><%= selColorScheme.getColorSchemeThumbnailPath() %>/thumbnail.png" title="<%= curColorScheme.getName() %>" />
+									<img alt="<%= curColorScheme.getName() %>" class="theme-thumbnail" src="<%= selTheme.getContextPath() %><%= curColorScheme.getColorSchemeThumbnailPath() %>/thumbnail.png" title="<%= curColorScheme.getName() %>" />
 								</a>
 							</li>
 
