@@ -880,17 +880,23 @@ public class DLFileEntryLocalServiceImpl
 			dlFileShortcutLocalService.updateFileShortcuts(
 				folderId, name, newFolderId, name);
 
+			// Resources
+
+			Resource resource = resourceLocalService.getResource(
+				fileEntry.getCompanyId(), DLFileEntry.class.getName(),
+				ResourceConstants.SCOPE_INDIVIDUAL,
+				String.valueOf(fileEntry.getPrimaryKey()));
+
+			resource.setPrimKey(String.valueOf(newFileEntryId));
+
+			resourcePersistence.update(resource, false);
+
 			// File
 
 			dlService.updateFile(
 				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 				folder.getGroupId(), folderId, newFolderId, name,
 				newFileEntryId);
-
-			// Tags
-
-			tagsAssetLocalService.deleteAsset(
-				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
 			// Ratings
 
@@ -924,16 +930,10 @@ public class DLFileEntryLocalServiceImpl
 				mbDiscussionPersistence.update(discussion, false);
 			}
 
-			// Resources
+			// Tags
 
-			Resource resource = resourceLocalService.getResource(
-				fileEntry.getCompanyId(), DLFileEntry.class.getName(),
-				ResourceConstants.SCOPE_INDIVIDUAL,
-				String.valueOf(fileEntry.getPrimaryKey()));
-
-			resource.setPrimKey(String.valueOf(newFileEntryId));
-
-			resourcePersistence.update(resource, false);
+			tagsAssetLocalService.deleteAsset(
+				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
 			folderId = newFolderId;
 			folder = newFolder;
