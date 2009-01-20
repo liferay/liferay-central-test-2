@@ -179,19 +179,22 @@ if (selContact != null) {
 				<portlet:param name="portrait_id" value="<%= String.valueOf(selUser.getPortraitId()) %>" />
 			</portlet:renderURL>
 
-			<a class="change-avatar" href="javascript: <portlet:namespace />openEditPortraitWindow('<%= changeAvatarURL %>');">
-				<img alt="<liferay-ui:message key="avatar" />" class="avatar" id="<portlet:namespace />avatar" src='<%= themeDisplay.getPathImage() %>/user_<%= selUser.isFemale() ? "female" : "male" %>_portrait?img_id=<%= selUser.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(selUser.getPortraitId()) %>' />
-			</a>
+			<a class="change-avatar" href="javascript: <portlet:namespace />openEditPortraitWindow('<%= changeAvatarURL %>');"><img alt="<liferay-ui:message key="avatar" />" class="avatar" id="<portlet:namespace />avatar" src='<%= themeDisplay.getPathImage() %>/user_<%= selUser.isFemale() ? "female" : "male" %>_portrait?img_id=<%= selUser.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(selUser.getPortraitId()) %>' /></a>
 
 			<div class="portrait-icons">
-				<liferay-ui:icon image="edit" message="change" label="true" url="<%= "javascript:" + renderResponse.getNamespace() + "openEditPortraitWindow('" + changeAvatarURL +"');" %>" />
+
+				<%
+				String taglibEditURL = "javascript: " + renderResponse.getNamespace() + "openEditPortraitWindow('" + changeAvatarURL +"');";
+				%>
+
+				<liferay-ui:icon image="edit" message="change" url="<%= taglibEditURL %>" label="<%= true %>" />
 
 				<c:if test="<%= selUser.getPortraitId() > 0 %>">
-					<liferay-ui:icon image="delete" label="true" url='<%= "javascript:"+ renderResponse.getNamespace() + "deletePortrait()" %>' />
-					<input name="<portlet:namespace />deletePortrait" id="<portlet:namespace />deletePortrait" type="hidden" value="false" />
+					<liferay-ui:icon image="delete" url='<%= "javascript: " + renderResponse.getNamespace() + "deletePortrait();" %>' label="<%= true %>" />
+
+					<input id="<portlet:namespace />deletePortrait" name="<portlet:namespace />deletePortrait" type="hidden" value="false" />
 				</c:if>
 			</div>
-
 		</c:if>
 	</div>
 

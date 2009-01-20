@@ -24,31 +24,24 @@
 
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
+<%
+User selUser = PortalUtil.getSelectedUser(request);
+%>
+
 <c:choose>
 	<c:when test='<%= SessionMessages.contains(renderRequest, "request_processed") %>'>
-		<%
-		long userId = ParamUtil.getLong(request, "p_u_i_d");
-		User selUser = UserServiceUtil.getUserById(userId);
-		long portraitId = selUser.getPortraitId();
-		%>
-
 		<script type="text/javascript">
 			jQuery(
 				function() {
 					window.close();
-					opener.<portlet:namespace />changeUserPortrait(<%= portraitId %>);
+					opener.<portlet:namespace />changeUserPortrait(<%= selUser.getPortraitId() %>);
 				}
 			);
 		</script>
 	</c:when>
 	<c:otherwise>
-
-		<%
-		long userId = ParamUtil.getLong(request, "p_u_i_d");
-		%>
-
 		<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_portrait" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-		<input name="<portlet:namespace />p_u_i_d" type="hidden" value="<%= userId %>" />
+		<input name="<portlet:namespace />p_u_i_d" type="hidden" value="<%= selUser.getUserId() %>" />
 
 		<liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />
 		<liferay-ui:error exception="<%= UserPortraitException.class %>" message="please-enter-a-file-with-a-valid-file-size" />

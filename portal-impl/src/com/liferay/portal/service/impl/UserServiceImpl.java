@@ -229,15 +229,6 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		return user;
 	}
 
-	public void deleteRoleUser(long roleId, long userId)
-		throws PortalException, SystemException {
-
-		RolePermissionUtil.check(
-			getPermissionChecker(), roleId, ActionKeys.ASSIGN_MEMBERS);
-
-		userLocalService.deleteRoleUser(roleId, userId);
-	}
-
 	public void deletePortrait(long userId)
 		throws PortalException, SystemException {
 
@@ -245,6 +236,15 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			getPermissionChecker(), userId, ActionKeys.UPDATE);
 
 		userLocalService.deletePortrait(userId);
+	}
+
+	public void deleteRoleUser(long roleId, long userId)
+		throws PortalException, SystemException {
+
+		RolePermissionUtil.check(
+			getPermissionChecker(), roleId, ActionKeys.ASSIGN_MEMBERS);
+
+		userLocalService.deleteRoleUser(roleId, userId);
 	}
 
 	public void deleteUser(long userId)

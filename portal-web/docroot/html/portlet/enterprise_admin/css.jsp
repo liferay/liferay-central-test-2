@@ -241,7 +241,7 @@
 }
 
 .portlet-enterprise-admin .portrait-icons a {
-	float: letf;
+	float: left;
 }
 
 .portlet-enterprise-admin table.org-labor-table {

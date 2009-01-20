@@ -812,12 +812,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
+
 		long portraitId = user.getPortraitId();
 
 		if (portraitId > 0) {
 			user.setPortraitId(0);
 
 			userPersistence.update(user, false);
+
 			imageLocalService.deleteImage(portraitId);
 		}
 	}
