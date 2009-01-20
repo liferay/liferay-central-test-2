@@ -698,10 +698,10 @@ public class EditPagesAction extends PortletAction {
 
 		GroupServiceUtil.updateFriendlyURL(liveGroupId, friendlyURL);
 
-		Group group = GroupServiceUtil.getGroup(liveGroupId);
+		Group liveGroup = GroupServiceUtil.getGroup(liveGroupId);
 
-		if (group.hasStagingGroup()) {
-			Group stagingGroup = group.getStagingGroup();
+		if (liveGroup.hasStagingGroup()) {
+			Group stagingGroup = liveGroup.getStagingGroup();
 
 			publicVirtualHost = ParamUtil.getString(
 				actionRequest, "stagingPublicVirtualHost");

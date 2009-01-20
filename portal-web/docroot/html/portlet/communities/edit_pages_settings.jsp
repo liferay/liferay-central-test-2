@@ -256,7 +256,6 @@ if (!StringUtil.contains(tabs2Names, tabs2)) {
 				</tr>
 				</table>
 			</c:if>
-
 		</c:if>
 
 		<br />
