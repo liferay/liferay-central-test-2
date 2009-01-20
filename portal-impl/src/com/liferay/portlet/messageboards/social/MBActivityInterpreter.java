@@ -29,6 +29,7 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
+import com.liferay.portlet.messageboards.util.BBCodeUtil;
 import com.liferay.portlet.social.model.BaseSocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.SocialActivityFeedEntry;
@@ -111,7 +112,7 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 		sb.append("\">");
 		sb.append(cleanContent(message.getSubject()));
 		sb.append("</a><br />");
-		sb.append(cleanContent(message.getBody()));
+		sb.append(cleanContent(BBCodeUtil.getHTML(message.getBody())));
 
 		String body = sb.toString();
 
