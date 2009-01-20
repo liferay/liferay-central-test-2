@@ -69,7 +69,7 @@ public class AddWebContentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("//select", "label=Web Article");
+		selenium.select("//select", "label=Web Content");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

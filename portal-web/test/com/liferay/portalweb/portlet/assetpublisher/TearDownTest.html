@@ -764,58 +764,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>store</td>
-	<td>eval(selenium.isElementPresent('link=AP Setup Web Content Test Page'))</td>
-	<td>APWebContentPagePresent</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>!${APWebContentPagePresent}</td>
-	<td>No AP Web Content Page Present</td>
-</tr>
-<tr>
 	<td>waitForElementPresent</td>
-	<td>link=AP Setup Web Content Test Page</td>
+	<td>link=Control Panel</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=AP Setup Web Content Test Page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>store</td>
-	<td>eval(selenium.isElementPresent('//span[3]/a/img'))</td>
-	<td>APWebContentPortletPresent</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>!${APWebContentPortletPresent}</td>
-	<td>No AP Web Content Portlet Present</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Articles</td>
+	<td>link=Control Panel</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Articles</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>_15_allRowIds</td>
+	<td>link=Web Content</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
 	<td>_15_allRowIds</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Delete']</td>
 	<td></td>
 </tr>
 <tr>
@@ -825,7 +790,7 @@
 </tr>
 <tr>
 	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete the selected articles?</td>
+	<td>Are you sure you want to delete the selected web content?</td>
 	<td></td>
 </tr>
 <tr>
@@ -845,37 +810,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Return to Full Page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//img[@alt='Remove']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//img[@alt='Remove']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to remove this component?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>//input[@value='Add Article']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>label</td>
-	<td>No AP Web Content Portlet Present</td>
-	<td></td>
-</tr>
-<tr>
-	<td>label</td>
-	<td>No AP Web Content Page Present</td>
+	<td>link=Back to My Community</td>
 	<td></td>
 </tr>
 <tr>
@@ -1501,46 +1436,6 @@
 <tr>
 	<td>store</td>
 	<td>eval(selenium.isElementPresent('//li[2]/ul/li[3]/a/span'))</td>
-	<td>JournalPagesPresent</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>!${JournalPagesPresent}</td>
-	<td>No Journal Pages Present</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//li[2]/ul/li[3]/a/span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Delete']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete the selected page?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>label</td>
-	<td>No Journal Pages Present</td>
-	<td></td>
-</tr>
-<tr>
-	<td>store</td>
-	<td>eval(selenium.isElementPresent('//li[2]/ul/li[3]/a/span'))</td>
 	<td>MBPagesPresent</td>
 </tr>
 <tr>
@@ -1686,11 +1581,6 @@
 <tr>
 	<td>assertElementNotPresent</td>
 	<td>link=AP Setup IG Test Page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>link=AP Setup Web Content Test Page</td>
 	<td></td>
 </tr>
 <tr>

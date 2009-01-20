@@ -109,7 +109,7 @@ public class EditDynamicConfigurationWebContentTest extends BaseTestCase {
 		}
 
 		selenium.select("_86_classNameId",
-			RuntimeVariables.replace("label=Web Article"));
+			RuntimeVariables.replace("label=Web Content"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

@@ -855,7 +855,7 @@ public class SetupTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("//div/a/span")) {
+						if (selenium.isElementPresent("link=Control Panel")) {
 							break;
 						}
 					}
@@ -865,107 +865,12 @@ public class SetupTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("//div/a/span");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("new_page")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.typeKeys("new_page",
-					RuntimeVariables.replace("AP Setup Web Content Test Page"));
-				selenium.type("new_page",
-					RuntimeVariables.replace("AP Setup Web Content Test Page"));
-				selenium.click("link=Save");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent(
-									"link=AP Setup Web Content Test Page")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click(RuntimeVariables.replace(
-						"link=AP Setup Web Content Test Page"));
+				selenium.click(RuntimeVariables.replace("link=Control Panel"));
 				selenium.waitForPageToLoad("30000");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("link=Add Application")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click("link=Add Application");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent(
-									"//div[@id='ContentManagement-WebContent']/p/a")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click("//div[@id='ContentManagement-WebContent']/p/a");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent(
-									"//input[@value='Add Article']")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
+				selenium.click(RuntimeVariables.replace("link=Web Content"));
+				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Add Article']"));
+						"//input[@value='Add Web Content']"));
 				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
@@ -1068,6 +973,9 @@ public class SetupTest extends BaseTestCase {
 
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Save and Approve']"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace(
+						"link=Back to My Community"));
 				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
@@ -1345,6 +1253,26 @@ public class SetupTest extends BaseTestCase {
 				}
 
 				selenium.click("//div[@id='Wiki-Wiki']/p/a");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("link=Configuration")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.click(RuntimeVariables.replace(
+						"link=AP Setup Wiki Test Page"));
+				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {

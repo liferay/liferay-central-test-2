@@ -58,6 +58,6 @@ public class VerifyDisplayToTitleListTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=AP Setup Test Article"));
 		assertTrue(selenium.isElementPresent("link=AP Setup MB Test Thread"));
 		assertTrue(selenium.isElementPresent("link=AP Setup Test Wiki Page"));
-		assertTrue(selenium.isElementPresent("link=AP Setup Test Image"));
+		assertTrue(selenium.isElementPresent("//img[@alt='Edit Image']"));
 	}
 }

@@ -58,7 +58,5 @@ public class VerifyRegularPaginationTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Previous"));
 		assertTrue(selenium.isElementPresent("link=First"));
-		assertTrue(selenium.isElementPresent("link=Last"));
-		assertTrue(selenium.isElementPresent("link=Next"));
 	}
 }
