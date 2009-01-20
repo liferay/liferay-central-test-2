@@ -31,7 +31,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.security.permission.PermissionCheckerFactory;
+import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -69,7 +69,7 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 				User user = UserLocalServiceUtil.getUserById(userId);
 
 				PermissionChecker permissionChecker =
-					PermissionCheckerFactory.create(user, true);
+					PermissionCheckerFactoryUtil.create(user, true);
 
 				PermissionThreadLocal.setPermissionChecker(permissionChecker);
 			}

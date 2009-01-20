@@ -23,7 +23,6 @@
 package com.liferay.portal.security.permission;
 
 import com.liferay.portal.model.User;
-import com.liferay.portal.util.PropsValues;
 
 /**
  * <a href="PermissionCheckerFactory.java.html"><b><i>View Source</i></b></a>
@@ -32,17 +31,9 @@ import com.liferay.portal.util.PropsValues;
  * @author Brian Wing Shun Chan
  *
  */
-public class PermissionCheckerFactory {
+public interface PermissionCheckerFactory {
 
-	public static PermissionChecker create(User user, boolean checkGuest)
-		throws Exception {
-
-		PermissionChecker permissionChecker = (PermissionChecker)Class.forName(
-			PropsValues.PERMISSIONS_CHECKER).newInstance();
-
-		permissionChecker.init(user, checkGuest);
-
-		return permissionChecker;
-	}
+	public PermissionChecker create(User user, boolean checkGuest)
+		throws Exception;
 
 }

@@ -130,6 +130,11 @@
 			<bean class="com.liferay.portal.search.lucene.TermQueryFactoryImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.security.permission.PermissionCheckerFactoryUtil" class="com.liferay.portal.security.permission.PermissionCheckerFactoryUtil">
+		<property name="permissionCheckerFactory">
+			<bean class="com.liferay.portal.security.permission.PermissionCheckerFactoryImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.permission.AccountPermissionUtil" class="com.liferay.portal.service.permission.AccountPermissionUtil">
 		<property name="accountPermission">
 			<bean class="com.liferay.portal.service.permission.AccountPermissionImpl" />

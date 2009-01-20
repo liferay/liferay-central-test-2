@@ -77,7 +77,7 @@ import com.liferay.portal.portletcontainer.HttpServletUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.security.permission.PermissionCheckerFactory;
+import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.service.ClassNameServiceUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -3121,8 +3121,8 @@ public class PortalImpl implements Portal {
 			realUserIdObj.longValue());
 		boolean checkGuest = true;
 
-		PermissionChecker permissionChecker = PermissionCheckerFactory.create(
-			realUser, checkGuest);
+		PermissionChecker permissionChecker =
+			PermissionCheckerFactoryUtil.create(realUser, checkGuest);
 
 		if (doAsUser.isDefaultUser() ||
 			UserPermissionUtil.contains(

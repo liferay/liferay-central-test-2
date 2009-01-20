@@ -25,7 +25,7 @@ package com.liferay.portal.service;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.security.permission.PermissionCheckerFactory;
+import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.BaseTestCase;
@@ -55,7 +55,7 @@ public class BaseServiceTestCase extends BaseTestCase {
 
 		User user = UserLocalServiceUtil.getUserById(TestPropsValues.USER_ID);
 
-		_permissionChecker = PermissionCheckerFactory.create(user, true);
+		_permissionChecker = PermissionCheckerFactoryUtil.create(user, true);
 
 		PermissionThreadLocal.setPermissionChecker(_permissionChecker);
 	}

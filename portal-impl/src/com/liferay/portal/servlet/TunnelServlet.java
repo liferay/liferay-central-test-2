@@ -35,7 +35,7 @@ import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.security.permission.PermissionCheckerFactory;
+import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalInstances;
@@ -114,7 +114,7 @@ public class TunnelServlet extends HttpServlet {
 					PrincipalThreadLocal.setName(user.getUserId());
 
 					PermissionChecker permissionChecker =
-						PermissionCheckerFactory.create(user, true);
+						PermissionCheckerFactoryUtil.create(user, true);
 
 					PermissionThreadLocal.setPermissionChecker(
 						permissionChecker);

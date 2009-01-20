@@ -55,7 +55,7 @@ import com.liferay.portal.portletcontainer.PortletWindowContextImpl;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.security.permission.PermissionCheckerFactory;
+import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
@@ -181,8 +181,8 @@ public class UserManagerImpl implements UserManager{
 
 		// Permission checker
 
-		PermissionChecker permissionChecker = PermissionCheckerFactory.create(
-			user, true);
+		PermissionChecker permissionChecker =
+			PermissionCheckerFactoryUtil.create(user, true);
 
 		PermissionThreadLocal.setPermissionChecker(permissionChecker);
 

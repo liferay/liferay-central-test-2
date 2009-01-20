@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.security.permission.PermissionCheckerFactory;
+import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
@@ -66,7 +66,7 @@ public class JSONServlet extends HttpServlet {
 				User user = UserLocalServiceUtil.getUserById(userId);
 
 				PermissionChecker permissionChecker =
-					PermissionCheckerFactory.create(user, true);
+					PermissionCheckerFactoryUtil.create(user, true);
 
 				PermissionThreadLocal.setPermissionChecker(permissionChecker);
 			}

@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.security.permission.PermissionCheckerFactory;
+import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
@@ -84,7 +84,8 @@ public class WebDAVServlet extends HttpServlet {
 
 				User user = UserLocalServiceUtil.getUserById(userId);
 
-				permissionChecker = PermissionCheckerFactory.create(user, true);
+				permissionChecker = PermissionCheckerFactoryUtil.create(
+					user, true);
 
 				PermissionThreadLocal.setPermissionChecker(permissionChecker);
 			}

@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.security.permission.PermissionCheckerFactory;
+import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.communities.util.StagingUtil;
@@ -95,8 +95,8 @@ public class LayoutsLocalPublisherMessageListener implements MessageListener {
 
 		User user = UserLocalServiceUtil.getUserById(userId);
 
-		PermissionChecker permissionChecker = PermissionCheckerFactory.create(
-			user, false);
+		PermissionChecker permissionChecker =
+			PermissionCheckerFactoryUtil.create(user, false);
 
 		PermissionThreadLocal.setPermissionChecker(permissionChecker);
 

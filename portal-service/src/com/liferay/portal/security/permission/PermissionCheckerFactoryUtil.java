@@ -23,53 +23,33 @@
 package com.liferay.portal.security.permission;
 
 import com.liferay.portal.model.User;
-import com.liferay.portal.security.auth.PrincipalThreadLocal;
-import com.liferay.portal.service.UserLocalServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="DoAsUserThread.java.html"><b><i>View Source</i></b></a>
+ * <a href="PermissionCheckerFactoryUtil.java.html"><b><i>View Source</i></b>
+ * </a>
  *
+ * @author Charles May
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class DoAsUserThread extends Thread {
+public class PermissionCheckerFactoryUtil {
 
-	public DoAsUserThread(long userId) {
-		_userId = userId;
+	public static PermissionChecker create(User user, boolean checkGuest)
+		throws Exception {
+
+		return getPermissionCheckerFactory().create(user, checkGuest);
 	}
 
-	public boolean isSuccess() {
-		return _success;
+	public static PermissionCheckerFactory getPermissionCheckerFactory() {
+		return _permissionCheckerFactory;
 	}
 
-	public void run() {
-		try {
-			PrincipalThreadLocal.setName(_userId);
+	public void setPermissionCheckerFactory(
+		PermissionCheckerFactory permissionCheckerFactory) {
 
-			User user = UserLocalServiceUtil.getUserById(_userId);
-
-			PermissionChecker permissionChecker =
-				PermissionCheckerFactoryUtil.create(user, true);
-
-			PermissionThreadLocal.setPermissionChecker(permissionChecker);
-
-			doRun();
-
-			_success = true;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
+		_permissionCheckerFactory = permissionCheckerFactory;
 	}
 
-	protected abstract void doRun() throws Exception;
-
-	private static Log _log = LogFactory.getLog(DoAsUserThread.class);
-
-	private long _userId;
-	private boolean _success;
+	private static PermissionCheckerFactory _permissionCheckerFactory;
 
 }

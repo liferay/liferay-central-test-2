@@ -34,7 +34,7 @@ import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.security.permission.PermissionCheckerFactory;
+import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
@@ -217,7 +217,7 @@ public class SharepointFilter extends BasePortalFilter {
 			PrincipalThreadLocal.setName(user.getUserId());
 
 			PermissionChecker permissionChecker =
-				PermissionCheckerFactory.create(user, false);
+				PermissionCheckerFactoryUtil.create(user, false);
 
 			PermissionThreadLocal.setPermissionChecker(permissionChecker);
 		}
