@@ -61,7 +61,7 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletInstanceFactory;
+import com.liferay.portlet.PortletInstanceFactoryUtil;
 import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.portlet.PortletQNameUtil;
 import com.liferay.util.bridges.jsp.JSPPortlet;
@@ -488,7 +488,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 				portlets.add(portlet);
 
-				PortletInstanceFactory.clear(portlet);
+				PortletInstanceFactoryUtil.clear(portlet);
 			}
 
 			// Sprite images

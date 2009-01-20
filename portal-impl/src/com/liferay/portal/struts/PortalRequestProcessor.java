@@ -58,7 +58,7 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.InvokerPortlet;
 import com.liferay.portlet.PortletConfigFactory;
-import com.liferay.portlet.PortletInstanceFactory;
+import com.liferay.portlet.PortletInstanceFactoryUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderRequestFactory;
@@ -205,7 +205,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		ServletContext servletContext = (ServletContext)request.getAttribute(
 			WebKeys.CTX);
 
-		InvokerPortlet invokerPortlet = PortletInstanceFactory.create(
+		InvokerPortlet invokerPortlet = PortletInstanceFactoryUtil.create(
 			portlet, servletContext);
 
 		PortletPreferencesIds portletPreferencesIds =

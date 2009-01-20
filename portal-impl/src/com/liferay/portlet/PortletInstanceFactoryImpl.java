@@ -42,45 +42,18 @@ import javax.portlet.UnavailableException;
 import javax.servlet.ServletContext;
 
 /**
- * <a href="PortletInstanceFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletInstanceFactoryImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletInstanceFactory {
+public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 
-	public static void clear(Portlet portlet) {
-		_instance._clear(portlet);
-	}
-
-	public static InvokerPortlet create(
-			Portlet portlet, ServletContext servletContext)
-		throws PortletException {
-
-		return _instance._create(portlet, servletContext);
-	}
-
-	public static void destroy(Portlet portlet) {
-		_instance._destroy(portlet);
-	}
-
-	public void setInternalInvokerPortletPrototype(
-		InvokerPortlet internalInvokerPortletPrototype) {
-
-		_internalInvokerPortletPrototype = internalInvokerPortletPrototype;
-	}
-
-	public void setSunInvokerPortletPrototype(
-		InvokerPortlet sunInvokerPortletPrototype) {
-
-		_sunInvokerPortletPrototype = sunInvokerPortletPrototype;
-	}
-
-	private PortletInstanceFactory() {
+	public PortletInstanceFactoryImpl() {
 		_pool = new ConcurrentHashMap<String, Map<String, InvokerPortlet>>();
 	}
 
-	private void _clear(Portlet portlet) {
+	public void clear(Portlet portlet) {
 		Map<String, InvokerPortlet> portletInstances = _pool.get(
 			portlet.getRootPortletId());
 
@@ -116,8 +89,7 @@ public class PortletInstanceFactory {
 		}
 	}
 
-	private InvokerPortlet _create(
-			Portlet portlet, ServletContext servletContext)
+	public InvokerPortlet create(Portlet portlet, ServletContext servletContext)
 		throws PortletException {
 
 		boolean instanceable = false;
@@ -160,12 +132,12 @@ public class PortletInstanceFactory {
 					PortletBag portletBag = PortletBagPool.get(
 						portlet.getRootPortletId());
 
-					rootInvokerPortletInstance = _init(
+					rootInvokerPortletInstance = init(
 						portlet, portletConfig,
 						portletBag.getPortletInstance());
 				}
 				else {
-					rootInvokerPortletInstance = _init(portlet, portletConfig);
+					rootInvokerPortletInstance = init(portlet, portletConfig);
 				}
 
 				portletInstances.put(
@@ -218,8 +190,8 @@ public class PortletInstanceFactory {
 		return instanceInvokerPortletInstance;
 	}
 
-	private void _destroy(Portlet portlet) {
-		_clear(portlet);
+	public void destroy(Portlet portlet) {
+		clear(portlet);
 
 		PortletConfigFactory.destroy(portlet);
 		PortletContextFactory.destroy(portlet);
@@ -227,13 +199,25 @@ public class PortletInstanceFactory {
 		PortletLocalServiceUtil.destroyPortlet(portlet);
 	}
 
-	private InvokerPortlet _init(Portlet portlet, PortletConfig portletConfig)
-		throws PortletException {
+	public void setInternalInvokerPortletPrototype(
+		InvokerPortlet internalInvokerPortletPrototype) {
 
-		return _init(portlet, portletConfig, null);
+		_internalInvokerPortletPrototype = internalInvokerPortletPrototype;
 	}
 
-	private InvokerPortlet _init(
+	public void setSunInvokerPortletPrototype(
+		InvokerPortlet sunInvokerPortletPrototype) {
+
+		_sunInvokerPortletPrototype = sunInvokerPortletPrototype;
+	}
+
+	protected InvokerPortlet init(Portlet portlet, PortletConfig portletConfig)
+		throws PortletException {
+
+		return init(portlet, portletConfig, null);
+	}
+
+	protected InvokerPortlet init(
 			Portlet portlet, PortletConfig portletConfig,
 			javax.portlet.Portlet portletInstance)
 		throws PortletException {
@@ -273,12 +257,8 @@ public class PortletInstanceFactory {
 		return invokerPortlet;
 	}
 
-	private static PortletInstanceFactory _instance =
-		new PortletInstanceFactory();
-
-	private static InvokerPortlet _internalInvokerPortletPrototype;
-	private static InvokerPortlet _sunInvokerPortletPrototype;
-
+	private InvokerPortlet _internalInvokerPortletPrototype;
+	private InvokerPortlet _sunInvokerPortletPrototype;
 	private Map<String, Map<String, InvokerPortlet>> _pool;
 
 }

@@ -64,7 +64,8 @@ import com.liferay.portlet.EventResponseImpl;
 import com.liferay.portlet.InvokerPortlet;
 import com.liferay.portlet.InvokerPortletImpl;
 import com.liferay.portlet.PortletConfigFactory;
-import com.liferay.portlet.PortletInstanceFactory;
+import com.liferay.portlet.PortletConfigImpl;
+import com.liferay.portlet.PortletInstanceFactoryUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.PortletRequestImpl;
 import com.liferay.portlet.PortletURLImpl;
@@ -307,7 +308,7 @@ public class LayoutAction extends Action {
 		ServletContext servletContext =
 			(ServletContext)request.getAttribute(WebKeys.CTX);
 
-		InvokerPortlet invokerPortlet = PortletInstanceFactory.create(
+		InvokerPortlet invokerPortlet = PortletInstanceFactoryUtil.create(
 			portlet, servletContext);
 
 		PortletConfig portletConfig = PortletConfigFactory.create(
@@ -504,7 +505,7 @@ public class LayoutAction extends Action {
 		ServletContext servletContext = (ServletContext)request.getAttribute(
 			WebKeys.CTX);
 
-		InvokerPortlet invokerPortlet = PortletInstanceFactory.create(
+		InvokerPortlet invokerPortlet = PortletInstanceFactoryUtil.create(
 			portlet, servletContext);
 
 		if (user != null) {
@@ -545,9 +546,12 @@ public class LayoutAction extends Action {
 					(contentType.startsWith(
 						ContentTypes.MULTIPART_FORM_DATA))) {
 
+					PortletConfigImpl invokerPortletConfigImpl =
+						(PortletConfigImpl)invokerPortlet.getPortletConfig();
+
 					if (invokerPortlet.isStrutsPortlet() ||
-						((invokerPortlet.getPortletConfig() != null) &&
-						 (!invokerPortlet.getPortletConfig().isWARFile()))) {
+						((invokerPortletConfigImpl != null) &&
+						 (!invokerPortletConfigImpl.isWARFile()))) {
 
 						uploadRequest = new UploadServletRequestImpl(request);
 

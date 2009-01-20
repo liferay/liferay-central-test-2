@@ -52,9 +52,9 @@ public interface InvokerPortlet
 
 	public ClassLoader getPortletClassLoader();
 
-	public PortletConfigImpl getPortletConfig();
+	public PortletConfig getPortletConfig();
 
-	public PortletContextImpl getPortletContext();
+	public PortletContext getPortletContext();
 
 	public Portlet getPortletInstance();
 

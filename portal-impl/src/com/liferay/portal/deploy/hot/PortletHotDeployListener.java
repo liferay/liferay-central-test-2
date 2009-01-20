@@ -71,7 +71,7 @@ import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletContextBag;
 import com.liferay.portlet.PortletContextBagPool;
 import com.liferay.portlet.PortletFilterFactory;
-import com.liferay.portlet.PortletInstanceFactory;
+import com.liferay.portlet.PortletInstanceFactoryUtil;
 import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.portlet.PortletResourceBundles;
 import com.liferay.portlet.PortletURLListenerFactory;
@@ -177,7 +177,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		WebDAVUtil.deleteStorage(portlet.getWebDAVStorageInstance());
 
-		PortletInstanceFactory.destroy(portlet);
+		PortletInstanceFactoryUtil.destroy(portlet);
 
 		portletIds.add(portlet.getPortletId());
 	}
@@ -578,7 +578,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		}
 
 		try {
-			PortletInstanceFactory.create(portlet, servletContext);
+			PortletInstanceFactoryUtil.create(portlet, servletContext);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

@@ -48,7 +48,7 @@ import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.PortletInstanceFactory;
+import com.liferay.portlet.PortletInstanceFactoryUtil;
 
 import com.sun.portal.wsrp.common.WSRPConfig;
 import com.sun.portal.wsrp.common.WSRPMBeanException;
@@ -138,7 +138,7 @@ public class WSRPChannelManagerImpl implements WSRPChannelManagerMBean {
 				return;
 			}
 
-			PortletInstanceFactory.destroy(portlet);
+			PortletInstanceFactoryUtil.destroy(portlet);
 
 			WSRPPersistenceHelper persistenceHelper =
 				WSRPPersistenceHelper.getInstance();
@@ -289,7 +289,7 @@ public class WSRPChannelManagerImpl implements WSRPChannelManagerMBean {
 				throw new WSRPConsumerException("DUPLICATE_PORTLET_NAME");
 			}
 			else if (portlet.isUndeployedPortlet()) {
-				PortletInstanceFactory.clear(portlet);
+				PortletInstanceFactoryUtil.clear(portlet);
 			}
 		}
 		catch (SystemException se) {

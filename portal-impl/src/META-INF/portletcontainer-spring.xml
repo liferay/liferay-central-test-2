@@ -7,8 +7,11 @@
 >
 	<bean id="internalInvokerPortlet" class="com.liferay.portlet.InvokerPortletImpl" />
 	<bean id="sunInvokerPortlet" class="com.liferay.portal.portletcontainer.WindowInvoker" />
-	<bean id="com.liferay.portlet.PortletInstanceFactory" class="com.liferay.portlet.PortletInstanceFactory">
+	<bean id="com.liferay.portlet.PortletInstanceFactoryImpl" class="com.liferay.portlet.PortletInstanceFactoryImpl">
 		<property name="internalInvokerPortletPrototype" ref="internalInvokerPortlet" />
 		<property name="sunInvokerPortletPrototype" ref="sunInvokerPortlet" />
+	</bean>
+	<bean id="com.liferay.portlet.PortletInstanceFactoryUtil" class="com.liferay.portlet.PortletInstanceFactoryUtil">
+		<property name="portletInstanceFactory" ref="com.liferay.portlet.PortletInstanceFactoryImpl" />
 	</bean>
 </beans>

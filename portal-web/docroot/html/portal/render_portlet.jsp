@@ -117,7 +117,7 @@ boolean modePrint = layoutTypePortlet.hasModePrintPortletId(portletId);
 InvokerPortlet invokerPortlet = null;
 
 try {
-	invokerPortlet = PortletInstanceFactory.create(portlet, application);
+	invokerPortlet = PortletInstanceFactoryUtil.create(portlet, application);
 }
 /*catch (UnavailableException ue) {
 	ue.printStackTrace();
@@ -701,7 +701,7 @@ if (portlet.isActive() && access && supportsMimeType) {
 	catch (UnavailableException ue) {
 		portletException = true;
 
-		PortletInstanceFactory.destroy(portlet);
+		PortletInstanceFactoryUtil.destroy(portlet);
 	}
 	catch (Exception e) {
 		portletException = true;

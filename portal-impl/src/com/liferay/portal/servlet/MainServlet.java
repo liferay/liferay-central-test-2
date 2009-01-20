@@ -85,7 +85,7 @@ import com.liferay.portal.webdav.WebDAVStorage;
 import com.liferay.portal.webdav.WebDAVUtil;
 import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletFilterFactory;
-import com.liferay.portlet.PortletInstanceFactory;
+import com.liferay.portlet.PortletInstanceFactoryUtil;
 import com.liferay.portlet.PortletURLListenerFactory;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialRequestInterpreter;
@@ -221,7 +221,7 @@ public class MainServlet extends ActionServlet {
 					initPortletApp(portlet, servletContext);
 				}
 
-				PortletInstanceFactory.create(portlet, servletContext);
+				PortletInstanceFactoryUtil.create(portlet, servletContext);
 			}
 		}
 		catch (Exception e) {
@@ -806,7 +806,7 @@ public class MainServlet extends ActionServlet {
 			while (itr.hasNext()) {
 				Portlet portlet = itr.next();
 
-				PortletInstanceFactory.destroy(portlet);
+				PortletInstanceFactoryUtil.destroy(portlet);
 			}
 		}
 		catch (Exception e) {
