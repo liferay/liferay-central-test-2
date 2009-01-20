@@ -32,4 +32,9 @@
 			<bean class="com.liferay.portlet.PortletQNameImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.PortletURLFactoryUtil" class="com.liferay.portlet.PortletURLFactoryUtil">
+		<property name="portletURLFactory">
+			<bean class="com.liferay.portlet.PortletURLFactoryImpl" />
+		</property>
+	</bean>
 </beans>
