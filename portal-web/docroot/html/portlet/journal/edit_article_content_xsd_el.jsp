@@ -183,6 +183,12 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 
 									<%
 									boolean privateLayout = false;
+
+									LayoutLister layoutLister = new LayoutLister();
+
+									LayoutView layoutView = null;
+
+									List layoutList = null;
 									%>
 
 									<%@ include file="/html/portlet/journal/edit_article_content_xsd_el_link_to_layout.jspf" %>
