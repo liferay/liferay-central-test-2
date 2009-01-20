@@ -891,7 +891,7 @@ public class StringUtil {
 			sb.append(s.substring(0, length));
 			sb.append(suffix);
 
-			s = sb.toString();
+			s =  sb.toString();
 		}
 
 		return s;
@@ -1176,54 +1176,6 @@ public class StringUtil {
 		return sb.toString();
 	}
 
-	public static String toCamelCase(String s, boolean upperCaseFirstLetter) {
-		int pos = s.indexOf(StringPool.DASH);
-
-		if (pos == -1) {
-			if (upperCaseFirstLetter) {
-				s = upperCaseFirstLetter(s);
-			}
-
-			return s;
-		}
-
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(s.substring(0, pos));
-		sb.append(s.substring(pos + 1, pos + 2).toUpperCase());
-		sb.append(s.substring(pos + 2));
-
-		return toCamelCase(sb.toString(), upperCaseFirstLetter);
-	}
-
-	public static String toMessageKey(String s) {
-		if (s == null) {
-			return null;
-		}
-
-		char[] charArray = s.toCharArray();
-
-		StringBuilder sb = new StringBuilder();
-
-		for (int i = 0; i < charArray.length; i++) {
-			if (_isUpperCase(charArray[i])) {
-				if ((i > 0) && (_isLowerCase(charArray[i-1]) ||
-					((i < charArray.length -1) &&
-						_isLowerCase(charArray[i+1] )))) {
-
-					sb.append(CharPool.DASH);
-				}
-
-				sb.append((char)(charArray[i] + 32));
-			}
-			else {
-				sb.append(charArray[i]);
-			}
-		}
-
-		return sb.toString();
-	}
-
 	public static String trim(String s) {
 		return trim(s, null);
 	}
@@ -1364,7 +1316,7 @@ public class StringUtil {
 	public static String upperCaseFirstLetter(String s) {
 		char[] chars = s.toCharArray();
 
-		if (_isLowerCase(chars[0])) {
+		if ((chars[0] >= 97) && (chars[0] <= 122)) {
 			chars[0] = (char)(chars[0] - 32);
 		}
 
@@ -1442,20 +1394,6 @@ public class StringUtil {
 		}
 
 		return Character.isWhitespace(c);
-	}
-
-	private static boolean _isUpperCase (char c) {
-		if ((c >= 65) && (c <= 90) ) {
-			return true;
-		}
-		return false;
-	}
-
-	private static boolean _isLowerCase (char c) {
-		if ((c >= 97) && (c <= 122) ) {
-			return true;
-		}
-		return false;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(StringUtil.class);
