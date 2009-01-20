@@ -237,6 +237,7 @@
 
 .portlet-enterprise-admin .portrait-icons {
 	text-align: center;
+	margin-bottom: 20px;
 }
 
 .portlet-enterprise-admin .portrait-icons a {
