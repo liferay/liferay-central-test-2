@@ -29,6 +29,7 @@ layoutList = layoutView.getList();
 
 if (layoutList.size() > 1) {
 %>
+
 	<optgroup label="<%= LanguageUtil.get(pageContext, privateLayout ? "private-pages" : "public-pages") %>"
 
 	<%
@@ -69,9 +70,9 @@ if (layoutList.size() > 1) {
 	<%
 		}
 	}
-%>
+	%>
 
-</optgroup>
+	</optgroup>
 
 <%
 }
