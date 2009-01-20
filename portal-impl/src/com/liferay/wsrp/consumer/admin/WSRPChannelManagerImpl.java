@@ -45,7 +45,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletInfo;
-import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.PortletInstanceFactoryUtil;
@@ -90,7 +89,7 @@ public class WSRPChannelManagerImpl implements WSRPChannelManagerMBean {
 
 			validatePortletId(portletId);
 
-			Portlet portlet = new PortletImpl(
+			Portlet portlet = PortletLocalServiceUtil.newPortlet(
 				CompanyConstants.SYSTEM, portletId);
 
 			portlet.setPortletId(portletId);

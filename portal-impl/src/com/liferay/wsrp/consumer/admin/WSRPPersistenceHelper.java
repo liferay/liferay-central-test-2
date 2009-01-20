@@ -45,7 +45,7 @@ import com.liferay.counter.service.CounterServiceUtil;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletInfo;
-import com.liferay.portal.model.impl.PortletImpl;
+import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.wsrp.model.WSRPPortlet;
 import com.liferay.wsrp.service.WSRPPortletLocalServiceUtil;
@@ -158,7 +158,7 @@ public class WSRPPersistenceHelper {
 				String portletId = PortalUtil.getJsSafePortletId(
 					wsrpPortlet.getName());
 
-				Portlet portlet = new PortletImpl(
+				Portlet portlet = PortletLocalServiceUtil.newPortlet(
 					CompanyConstants.SYSTEM, portletId);
 
 				portlet.setPortletId(portletId);

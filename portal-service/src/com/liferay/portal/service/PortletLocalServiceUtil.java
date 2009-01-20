@@ -171,6 +171,11 @@ public class PortletLocalServiceUtil {
 			pluginPackage);
 	}
 
+	public static com.liferay.portal.model.Portlet newPortlet(long companyId,
+		java.lang.String portletId) {
+		return getService().newPortlet(companyId, portletId);
+	}
+
 	public static com.liferay.portal.model.Portlet updatePortlet(
 		long companyId, java.lang.String portletId, java.lang.String roles,
 		boolean active) throws com.liferay.portal.SystemException {

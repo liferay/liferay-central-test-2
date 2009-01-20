@@ -506,6 +506,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		return portlets;
 	}
 
+	public Portlet newPortlet(long companyId, String portletId) {
+		return new PortletImpl(companyId, portletId);
+	}
+
 	public Portlet updatePortlet(
 			long companyId, String portletId, String roles, boolean active)
 		throws SystemException {
