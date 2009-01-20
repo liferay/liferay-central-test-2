@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portlet.messageboards.model.MBMessage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -114,6 +115,21 @@ public class BBCodeUtil {
 	}
 
 	public static final String[][] EMOTICONS = emoticons;
+
+	public static String getHTML(MBMessage message) {
+		String body = message.getBody();
+
+		try {
+			body = getHTML(body);
+		}
+		catch (Exception e) {
+			_log.error(
+				"Could not parse message " + message.getMessageId() + " " +
+					e.getMessage());
+		}
+
+		return body;
+	}
 
 	public static String getHTML(String bbcode) {
 		String html = HtmlUtil.escape(bbcode);

@@ -112,7 +112,7 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 		sb.append("\">");
 		sb.append(cleanContent(message.getSubject()));
 		sb.append("</a><br />");
-		sb.append(cleanContent(BBCodeUtil.getHTML(message.getBody())));
+		sb.append(cleanContent(BBCodeUtil.getHTML(message)));
 
 		String body = sb.toString();
 

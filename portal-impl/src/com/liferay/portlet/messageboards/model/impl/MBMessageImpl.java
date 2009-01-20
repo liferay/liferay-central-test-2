@@ -102,17 +102,13 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 	}
 
 	public String getBody(boolean translate) {
-		String body = getBody();
+		String body = null;
 
 		if (translate) {
-			try {
-				body = BBCodeUtil.getHTML(body);
-			}
-			catch (Exception e) {
-				_log.error(
-					"Could not parse message " + getMessageId() + " " +
-						e.getMessage());
-			}
+			body = BBCodeUtil.getHTML(this);
+		}
+		else {
+			body = getBody();
 		}
 
 		return body;

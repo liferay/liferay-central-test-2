@@ -352,7 +352,3 @@ MBMessageFlagLocalServiceUtil.addReadFlags(themeDisplay.getUserId(), messages);
 
 PortalUtil.setPageSubtitle(message.getSubject(), request);
 %>
-
-<%!
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.message_boards.view_message.jsp");
-%>

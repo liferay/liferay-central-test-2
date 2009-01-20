@@ -501,7 +501,3 @@ if (message != null) {
 		}
 	);
 </script>
-
-<%!
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.message_boards.edit_message.jsp");
-%>

@@ -565,14 +565,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 				value = StringPool.BLANK;
 			}
 			else {
-				try {
-					value = BBCodeUtil.getHTML(message.getBody());
-				}
-				catch (Exception e) {
-					_log.error(
-						"Could not parse message " + message.getMessageId() +
-							" " + e.getMessage());
-				}
+				value = BBCodeUtil.getHTML(message);
 
 				value = StringUtil.replace(
 					value,

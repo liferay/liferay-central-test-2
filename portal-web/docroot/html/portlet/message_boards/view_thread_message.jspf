@@ -222,9 +222,9 @@
 			<div class="thread-body">
 
 				<%
-				String msgBody = message.getBody();
+				/*String msgBody = message.getBody();
 
-				/*String codeStart = "<!--c1--><div class='codetop'>CODE</div><div class='codemain'><!--ec1-->";
+				String codeStart = "<!--c1--><div class='codetop'>CODE</div><div class='codemain'><!--ec1-->";
 				String codeEnd = "<!--c2--></div><!--ec2-->";
 
 				while (true) {
@@ -357,12 +357,7 @@
 					x = msgBody.indexOf(emoticonsPath, x + 1);
 				}*/
 
-				try {
-					msgBody = BBCodeUtil.getHTML(msgBody);
-				}
-				catch (Exception e) {
-					_log.error("Could not parse message " + message.getMessageId() + ": " + e.getMessage());
-				}
+				String msgBody = BBCodeUtil.getHTML(message);
 
 				msgBody = StringUtil.replace(msgBody, "@theme_images_path@/emoticons", themeDisplay.getPathThemeImages() + "/emoticons");
 				%>

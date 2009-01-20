@@ -232,14 +232,7 @@ List messages = treeWalker.getMessages();
 				<div>
 
 					<%
-					String msgBody = message.getBody();
-
-					try {
-						msgBody = BBCodeUtil.getHTML(msgBody);
-					}
-					catch (Exception e) {
-						_log.error("Could not parse message " + message.getMessageId() + " " + e.getMessage());
-					}
+					String msgBody = BBCodeUtil.getHTML(message);
 
 					msgBody = StringUtil.replace(msgBody, "@theme_images_path@/emoticons", themeDisplay.getPathThemeImages() + "/emoticons");
 					%>
@@ -396,7 +389,3 @@ List messages = treeWalker.getMessages();
 </c:if>
 
 </form>
-
-<%!
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.taglib.ui.discussion.page.jsp");
-%>
