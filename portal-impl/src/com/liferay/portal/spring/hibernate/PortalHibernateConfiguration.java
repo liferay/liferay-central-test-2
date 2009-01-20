@@ -74,9 +74,9 @@ public class PortalHibernateConfiguration
 						is.close();
 					}
 				}
-				catch (Exception e1) {
+				catch (Exception e2) {
 					if (_log.isWarnEnabled()) {
-						_log.warn(e1);
+						_log.warn(e2, e2);
 					}
 				}
 			}
@@ -89,8 +89,8 @@ public class PortalHibernateConfiguration
 
 			configuration.setProperties(PropsUtil.getProperties());
 		}
-		catch (Exception e2) {
-			_log.error(e2, e2);
+		catch (Exception e1) {
+			_log.error(e1, e1);
 		}
 
 		return configuration;

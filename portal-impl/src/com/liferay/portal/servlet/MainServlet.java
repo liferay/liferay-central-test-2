@@ -770,10 +770,17 @@ public class MainServlet extends ActionServlet {
 		try {
 			if (PropsValues.SCHEDULER_ENABLED) {
 				for (String className : PropsValues.SCHEDULER_CLASSES) {
-					Scheduler scheduler = (Scheduler)InstancePool.get(
-						className);
+					Scheduler scheduler = null;
+					
+					try {
+						scheduler = (Scheduler)InstancePool.get(className);
+					}
+					catch (Exception e2) {
+					}
 
-					scheduler.unschedule();
+					if (scheduler != null) {
+						scheduler.unschedule();
+					}
 				}
 
 				Iterator<Portlet> itr = portlets.iterator();
@@ -787,15 +794,22 @@ public class MainServlet extends ActionServlet {
 						continue;
 					}
 
-					Scheduler scheduler = (Scheduler)InstancePool.get(
-						className);
+					Scheduler scheduler = null;
+					
+					try {
+						scheduler = (Scheduler)InstancePool.get(className);
+					}
+					catch (Exception e2) {
+					}
 
-					scheduler.unschedule();
+					if (scheduler != null) {
+						scheduler.unschedule();
+					}
 				}
 			}
 		}
-		catch (Exception e) {
-			_log.error(e, e);
+		catch (Exception e1) {
+			_log.error(e1, e1);
 		}
 
 		// Portlets

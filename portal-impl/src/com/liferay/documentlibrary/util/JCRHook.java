@@ -550,14 +550,14 @@ public class JCRHook extends BaseHook {
 						SearchEngineUtil.updateDocument(
 							companyId, doc.get(Field.UID), doc);
 					}
-					catch (Exception e1) {
-						_log.error("Reindexing " + node.getName(), e1);
+					catch (Exception e2) {
+						_log.error("Reindexing " + node.getName(), e2);
 					}
 				}
 			}
 		}
-		catch (Exception e2) {
-			throw new SearchException(e2);
+		catch (Exception e1) {
+			throw new SearchException(e1);
 		}
 		finally {
 			try {
