@@ -34,7 +34,7 @@ User selUser = PortalUtil.getSelectedUser(request);
 			jQuery(
 				function() {
 					window.close();
-					opener.<portlet:namespace />changeUserPortrait(<%= selUser.getPortraitId() %>);
+					opener.<portlet:namespace />changeUserPortrait('<%= themeDisplay.getPathImage() %>/user_<%= selUser.isFemale() ? "female" : "male" %>_portrait?img_id=<%= selUser.getPortraitId()%>&t=<%= ImageServletTokenUtil.getToken(selUser.getPortraitId()) %>' + 1);
 				}
 			);
 		</script>

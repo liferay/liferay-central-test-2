@@ -44,19 +44,15 @@ if (selContact != null) {
 %>
 
 <script type="text/javascript">
-	function <portlet:namespace />changeUserPortrait(portraitId) {
-		var newAvatar = '<%= themeDisplay.getPathImage() %>/user_<%= selUser.isFemale() ? "female" : "male" %>_portrait?img_id=' + portraitId + '&t=<%= ImageServletTokenUtil.getToken(selUser.getPortraitId()) %>' + 1;
-
+	function <portlet:namespace />changeUserPortrait(newAvatar) {
 		jQuery('#<portlet:namespace />avatar').attr('src', newAvatar);
 		jQuery('.avatar').attr('src', newAvatar);
 
 		jQuery('#<portlet:namespace />deletePortrait').val(false);
 	}
 
-	function <portlet:namespace />deletePortrait() {
+	function <portlet:namespace />deletePortrait(defaultAvatar) {
 		jQuery('#<portlet:namespace />deletePortrait').val(true);
-
-		var defaultAvatar = '<%= themeDisplay.getPathImage() %>/user_<%= selUser.isFemale() ? "female" : "male" %>_portrait?img_id=0';
 
 		jQuery('#<portlet:namespace />avatar').attr('src', defaultAvatar);
 		jQuery('.avatar').attr('src', defaultAvatar);
@@ -190,7 +186,12 @@ if (selContact != null) {
 				<liferay-ui:icon image="edit" message="change" url="<%= taglibEditURL %>" label="<%= true %>" />
 
 				<c:if test="<%= selUser.getPortraitId() > 0 %>">
-					<liferay-ui:icon image="delete" url='<%= "javascript: " + renderResponse.getNamespace() + "deletePortrait();" %>' label="<%= true %>" />
+
+					<%
+					String taglibDeleteURL = "javascript: " + renderResponse.getNamespace() + "deletePortrait('" + themeDisplay.getPathImage() + "/user_" + (selUser.isFemale() ? "female" : "male") + "_portrait?img_id=0');";
+					%>
+
+					<liferay-ui:icon image="delete" url="<%= taglibDeleteURL %>" label="<%= true %>" />
 
 					<input id="<portlet:namespace />deletePortrait" name="<portlet:namespace />deletePortrait" type="hidden" value="false" />
 				</c:if>
