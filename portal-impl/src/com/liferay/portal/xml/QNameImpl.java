@@ -43,6 +43,10 @@ public class QNameImpl implements QName {
 		return _qName.equals(qName);
 	}
 
+	public String getLocalPart() {
+		return getName();
+	}
+
 	public String getName() {
 		return _qName.getName();
 	}

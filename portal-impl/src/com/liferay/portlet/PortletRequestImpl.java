@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletConstants;
@@ -45,7 +46,6 @@ import com.liferay.portal.servlet.NamespaceServletRequest;
 import com.liferay.portal.servlet.SharedSessionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.QNameUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.servlet.DynamicServletRequest;
 import com.liferay.util.servlet.SharedSessionServletRequest;
@@ -75,8 +75,6 @@ import javax.portlet.WindowState;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-
-import javax.xml.namespace.QName;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -672,7 +670,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 		if (portletFocus) {
 			values = request.getParameterValues(name);
 
-			QName qName = QNameUtil.getQName(name);
+			QName qName = PortletQNameUtil.getQName(name);
 
 			if (qName != null) {
 				PublicRenderParameter publicRenderParameter =
@@ -704,7 +702,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 		while (names.hasMoreElements()) {
 			String name = names.nextElement();
 
-			QName qName = QNameUtil.getQName(name);
+			QName qName = PortletQNameUtil.getQName(name);
 
 			if (qName == null) {
 				continue;

@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.lar.PortletDataHandler;
 import com.liferay.portal.model.Plugin;
 import com.liferay.portal.model.PluginSetting;
@@ -53,10 +54,10 @@ import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portal.util.QNameUtil;
 import com.liferay.portal.webdav.WebDAVStorage;
 import com.liferay.portlet.ControlPanelEntry;
 import com.liferay.portlet.PortletBagImpl;
+import com.liferay.portlet.PortletQNameUtil;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialRequestInterpreter;
 
@@ -73,8 +74,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import javax.portlet.PortletMode;
-
-import javax.xml.namespace.QName;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -2363,7 +2362,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	public void addProcessingEvent(QName processingEvent) {
 		_processingEvents.add(processingEvent);
 		_processingEventsByQName.put(
-			QNameUtil.getKey(processingEvent), processingEvent);
+			PortletQNameUtil.getKey(processingEvent), processingEvent);
 	}
 
 	/**
@@ -2375,7 +2374,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public QName getProcessingEvent(String uri, String localPart) {
 		return _processingEventsByQName.get(
-			QNameUtil.getKey(uri, localPart));
+			PortletQNameUtil.getKey(uri, localPart));
 	}
 
 	/**
@@ -2441,7 +2440,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_publicRenderParametersByIdentifier.put(
 			publicRenderParameter.getIdentifier(), publicRenderParameter);
 		_publicRenderParametersByQName.put(
-			QNameUtil.getKey(publicRenderParameter.getQName()),
+			PortletQNameUtil.getKey(publicRenderParameter.getQName()),
 			publicRenderParameter);
 	}
 
@@ -2465,7 +2464,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		String uri, String localPart) {
 
 		return _publicRenderParametersByQName.get(
-			QNameUtil.getKey(uri, localPart));
+			PortletQNameUtil.getKey(uri, localPart));
 	}
 
 	/**

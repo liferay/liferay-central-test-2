@@ -20,26 +20,36 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.xml;
+package com.liferay.portlet;
+
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.QName;
 
 /**
- * <a href="QName.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletQName.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface QName {
+public interface PortletQName {
 
-	public String getLocalPart();
+	public static final String PUBLIC_RENDER_PARAMETER_NAMESPACE = "p_r_p_";
 
-	public String getName();
+	public String getKey(QName qName);
 
-	public Namespace getNamespace();
+	public String getKey(String uri, String localPart);
 
-	public String getNamespacePrefix();
+	public String getPublicRenderParameterIdentifier(
+		String publicRenderParameterName);
 
-	public String getNamespaceURI();
+	public String getPublicRenderParameterName(QName qName);
 
-	public String getQualifiedName();
+	public QName getQName(String publicRenderParameterName);
+
+	public QName getQName(
+		Element qNameEl, Element nameEl, String defaultNamespace);
+
+	public void setPublicRenderParameterIdentifier(
+		String publicRenderParameterName, String identifier);
 
 }

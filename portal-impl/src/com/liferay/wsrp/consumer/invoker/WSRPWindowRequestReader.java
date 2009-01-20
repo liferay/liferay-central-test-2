@@ -44,7 +44,8 @@ package com.liferay.wsrp.consumer.invoker;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.QNameUtil;
+import com.liferay.portlet.PortletQName;
+import com.liferay.portlet.PortletQNameUtil;
 
 import com.sun.portal.container.ChannelMode;
 import com.sun.portal.container.ChannelState;
@@ -121,10 +122,10 @@ public class WSRPWindowRequestReader implements WindowRequestReader {
 
 			}
 			else if (key.startsWith(
-						QNameUtil.PUBLIC_RENDER_PARAMETER_NAMESPACE)) {
+						PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE)) {
 
 				String identifier =
-					QNameUtil.getPublicRenderParameterIdentifier(key);
+					PortletQNameUtil.getPublicRenderParameterIdentifier(key);
 
 				parameterMap.put(identifier, mapEntry.getValue());
 			}

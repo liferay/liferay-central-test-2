@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.EventDefinition;
@@ -58,11 +59,11 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portal.util.QNameUtil;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletInstanceFactory;
 import com.liferay.portlet.PortletPreferencesSerializer;
+import com.liferay.portlet.PortletQNameUtil;
 import com.liferay.util.bridges.jsp.JSPPortlet;
 import com.liferay.wsrp.consumer.admin.WSRPPersistenceHelper;
 
@@ -86,8 +87,6 @@ import javax.portlet.PortletMode;
 import javax.portlet.PreferencesValidator;
 
 import javax.servlet.ServletContext;
-
-import javax.xml.namespace.QName;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -1302,7 +1301,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			Element nameEl = eventDefinitionEl.element("name");
 			String valueType = eventDefinitionEl.elementText("value-type");
 
-			QName qName = QNameUtil.getQName(
+			QName qName = PortletQNameUtil.getQName(
 				qNameEl, nameEl, portletApp.getDefaultNamespace());
 
 			EventDefinition eventDefinition = new EventDefinitionImpl(
@@ -1321,7 +1320,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			Element qNameEl = publicRenderParameterEl.element("qname");
 			Element nameEl = publicRenderParameterEl.element("name");
 
-			QName qName = QNameUtil.getQName(
+			QName qName = PortletQNameUtil.getQName(
 				qNameEl, nameEl, portletApp.getDefaultNamespace());
 
 			PublicRenderParameter publicRenderParameter =
@@ -1531,7 +1530,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				Element qNameEl = supportedProcessingEvent.element("qname");
 				Element nameEl = supportedProcessingEvent.element("name");
 
-				QName qName = QNameUtil.getQName(
+				QName qName = PortletQNameUtil.getQName(
 					qNameEl, nameEl, portletApp.getDefaultNamespace());
 
 				portletModel.addProcessingEvent(qName);
@@ -1545,7 +1544,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				Element qNameEl = supportedPublishingEvent.element("qname");
 				Element nameEl = supportedPublishingEvent.element("name");
 
-				QName qName = QNameUtil.getQName(
+				QName qName = PortletQNameUtil.getQName(
 					qNameEl, nameEl, portletApp.getDefaultNamespace());
 
 				portletModel.addPublishingEvent(qName);

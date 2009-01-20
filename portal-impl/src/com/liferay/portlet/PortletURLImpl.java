@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
@@ -46,7 +47,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portal.util.QNameUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.social.util.FacebookUtil;
 import com.liferay.util.Encryptor;
@@ -79,8 +79,6 @@ import javax.portlet.WindowState;
 import javax.portlet.WindowStateException;
 
 import javax.servlet.http.HttpServletRequest;
-
-import javax.xml.namespace.QName;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -932,9 +930,9 @@ public class PortletURLImpl
 
 					String identifier = name;
 
-					name = QNameUtil.getPublicRenderParameterName(qName);
+					name = PortletQNameUtil.getPublicRenderParameterName(qName);
 
-					QNameUtil.setPublicRenderParameterIdentifier(
+					PortletQNameUtil.setPublicRenderParameterIdentifier(
 						name, identifier);
 				}
 			}
@@ -952,7 +950,7 @@ public class PortletURLImpl
 
 				if (!PortalUtil.isReservedParameter(name) &&
 					!name.startsWith(
-						QNameUtil.PUBLIC_RENDER_PARAMETER_NAMESPACE)) {
+						PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE)) {
 
 					sb.append(getNamespace());
 				}

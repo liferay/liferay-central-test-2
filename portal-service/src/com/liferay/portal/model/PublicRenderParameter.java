@@ -22,9 +22,9 @@
 
 package com.liferay.portal.model;
 
-import java.io.Serializable;
+import com.liferay.portal.kernel.xml.QName;
 
-import javax.xml.namespace.QName;
+import java.io.Serializable;
 
 /**
  * <a href="PublicRenderParameter.java.html"><b><i>View Source</i></b></a>

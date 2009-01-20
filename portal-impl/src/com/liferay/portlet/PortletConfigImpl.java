@@ -40,11 +40,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
@@ -113,7 +115,8 @@ public class PortletConfigImpl implements PortletConfig {
 	}
 
 	public Enumeration<QName> getProcessingEventQNames() {
-		return Collections.enumeration(_portlet.getProcessingEvents());
+		return Collections.enumeration(
+			toJavaxQNames(_portlet.getProcessingEvents()));
 	}
 
 	public Enumeration<String> getPublicRenderParameterNames() {
@@ -130,7 +133,8 @@ public class PortletConfigImpl implements PortletConfig {
 	}
 
 	public Enumeration<QName> getPublishingEventQNames() {
-		return Collections.enumeration(_portlet.getPublishingEvents());
+		return Collections.enumeration(
+			toJavaxQNames(_portlet.getPublishingEvents()));
 	}
 
 	public ResourceBundle getResourceBundle(Locale locale) {
@@ -218,6 +222,24 @@ public class PortletConfigImpl implements PortletConfig {
 
 	public boolean isWARFile() {
 		return _portletApp.isWARFile();
+	}
+
+	protected Set<javax.xml.namespace.QName> toJavaxQNames(
+		Set<com.liferay.portal.kernel.xml.QName> liferayQNames) {
+
+		Set<QName> javaxQNames = new HashSet<QName>(liferayQNames.size());
+
+		for (com.liferay.portal.kernel.xml.QName liferayQName :
+				liferayQNames) {
+
+			QName javaxQName = new QName(
+				liferayQName.getNamespaceURI(), liferayQName.getLocalPart(),
+				liferayQName.getNamespacePrefix());
+
+			javaxQNames.add(javaxQName);
+		}
+
+		return javaxQNames;
 	}
 
 	private static Log _log = LogFactory.getLog(PortletConfigImpl.class);

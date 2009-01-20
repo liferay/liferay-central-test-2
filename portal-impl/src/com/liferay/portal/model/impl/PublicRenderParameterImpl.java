@@ -22,10 +22,9 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PublicRenderParameter;
-
-import javax.xml.namespace.QName;
 
 /**
  * <a href="PublicRenderParameterImpl.java.html"><b><i>View Source</i></b></a>

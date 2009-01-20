@@ -22,10 +22,9 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.model.EventDefinition;
 import com.liferay.portal.model.PortletApp;
-
-import javax.xml.namespace.QName;
 
 /**
  * <a href="EventDefinitionImpl.java.html"><b><i>View Source</i></b></a>

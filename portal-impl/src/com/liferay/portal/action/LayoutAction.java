@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
@@ -105,8 +106,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import javax.xml.namespace.QName;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -386,7 +385,7 @@ public class LayoutAction extends Action {
 		}
 
 		for (Event event : events) {
-			QName qName = event.getQName();
+			javax.xml.namespace.QName qName = event.getQName();
 
 			for (Portlet portlet : portlets) {
 				QName processingQName = portlet.getProcessingEvent(
