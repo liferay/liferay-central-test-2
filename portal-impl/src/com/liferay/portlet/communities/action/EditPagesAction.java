@@ -697,6 +697,28 @@ public class EditPagesAction extends PortletAction {
 			liveGroupId, true, privateVirtualHost);
 
 		GroupServiceUtil.updateFriendlyURL(liveGroupId, friendlyURL);
+
+		Group group = GroupServiceUtil.getGroup(liveGroupId);
+
+		if (group.hasStagingGroup()) {
+			Group stagingGroup = group.getStagingGroup();
+
+			publicVirtualHost = ParamUtil.getString(
+				actionRequest, "stagingPublicVirtualHost");
+			privateVirtualHost = ParamUtil.getString(
+				actionRequest, "stagingPrivateVirtualHost");
+			friendlyURL = ParamUtil.getString(
+				actionRequest, "stagingFriendlyURL");
+
+			LayoutSetServiceUtil.updateVirtualHost(
+				stagingGroup.getGroupId(), false, publicVirtualHost);
+
+			LayoutSetServiceUtil.updateVirtualHost(
+				stagingGroup.getGroupId(), true, privateVirtualHost);
+
+			GroupServiceUtil.updateFriendlyURL(
+				stagingGroup.getGroupId(), friendlyURL);
+		}
 	}
 
 	protected void updateWorkflow(ActionRequest actionRequest)

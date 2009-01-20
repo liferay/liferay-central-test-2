@@ -43,6 +43,8 @@ boolean workflowEnabled = ((Boolean)request.getAttribute("edit_pages.jsp-workflo
 
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portletURL");
 
+long stagingGroupId = stagingGroup.getGroupId();
+
 String tabs2Names = "";
 
 if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING)) {
@@ -195,6 +197,66 @@ if (!StringUtil.contains(tabs2Names, tabs2)) {
 				</td>
 			</tr>
 			</table>
+		</c:if>
+
+		<c:if test="<%= liveGroup.hasStagingGroup() %>">
+			<br />
+
+			<b><liferay-ui:message key="staging" /></b>
+
+			<table class="lfr-table">
+			<tr>
+				<td>
+					<liferay-ui:message key="public-virtual-host" />
+				</td>
+				<td>
+
+					<%
+					LayoutSet stagingPublicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(stagingGroupId, false);
+
+					String stagingPublicVirtualHost = ParamUtil.getString(request, "stagingPublicVirtualHost", stagingPublicLayoutSet.getVirtualHost());
+					%>
+
+					<input name="<portlet:namespace />stagingPublicVirtualHost" size="50" type="text" value="<%= stagingPublicVirtualHost %>" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<liferay-ui:message key="private-virtual-host" />
+				</td>
+				<td>
+
+					<%
+					LayoutSet stagingPrivateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(stagingGroupId, true);
+
+					String stagingPrivateVirtualHost = ParamUtil.getString(request, "stagingPrivateVirtualHost", stagingPrivateLayoutSet.getVirtualHost());
+					%>
+
+					<input name="<portlet:namespace />stagingPrivateVirtualHost" size="50" type="text" value="<%= stagingPrivateVirtualHost %>" />
+				</td>
+			</tr>
+			</table>
+
+			<c:if test="<%= liveGroup.isCommunity() || liveGroup.isOrganization() %>">
+				<br />
+
+				<table class="lfr-table">
+				<tr>
+					<td>
+						<liferay-ui:message key="friendly-url" />
+					</td>
+					<td>
+
+						<%
+						String friendlyURL = ParamUtil.getString(request, "stagingFriendlyURL", stagingGroup.getFriendlyURL());
+						%>
+
+						<input name="<portlet:namespace />stagingFriendlyURL" size="30" type="text" value="<%= friendlyURL %>" />
+					</td>
+				</tr>
+				</table>
+			</c:if>
+
 		</c:if>
 
 		<br />
