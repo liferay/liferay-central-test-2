@@ -411,7 +411,7 @@ public class LanguageImpl implements Language {
 			}
 		}
 
-		if ((value == null) || (value.equals(defaultValue))) {
+		if ((value == null) || value.equals(defaultValue)) {
 
 			// LEP-2849
 
