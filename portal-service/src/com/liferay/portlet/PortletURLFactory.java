@@ -22,6 +22,8 @@
 
 package com.liferay.portlet;
 
+import javax.portlet.PortletURL;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -30,22 +32,10 @@ import javax.servlet.http.HttpServletRequest;
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletURLFactory {
+public interface PortletURLFactory {
 
-	public static PortletURLFactory getInstance() {
-		return _instance;
-	}
-
-	public PortletURLImpl create(
+	public PortletURL create(
 		HttpServletRequest request, String portletName, long plid,
-		String lifecycle) {
-
-		return new PortletURLImpl(request, portletName, plid, lifecycle);
-	}
-
-	private PortletURLFactory() {
-	}
-
-	private static PortletURLFactory _instance = new PortletURLFactory();
+		String lifecycle);
 
 }

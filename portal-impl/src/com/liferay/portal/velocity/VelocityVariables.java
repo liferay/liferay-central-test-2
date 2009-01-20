@@ -68,7 +68,7 @@ import com.liferay.portal.util.PropsUtil_IW;
 import com.liferay.portal.util.SessionClicks_IW;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletConfigImpl;
-import com.liferay.portlet.PortletURLFactory;
+import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.expando.service.ExpandoColumnLocalService;
 import com.liferay.portlet.expando.service.ExpandoRowLocalService;
 import com.liferay.portlet.expando.service.ExpandoTableLocalService;
@@ -238,7 +238,7 @@ public class VelocityVariables {
 		// Portlet URL factory
 
 		velocityContext.put(
-			"portletURLFactory", PortletURLFactory.getInstance());
+			"portletURLFactory", PortletURLFactoryUtil.getPortletURLFactory());
 
 		// Portlet preferences
 
