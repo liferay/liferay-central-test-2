@@ -278,10 +278,10 @@ public class VirtualHostFilter extends BasePortalFilter {
 
 		if (PortalInstances.isVirtualHostsIgnorePath(friendlyURL) ||
 			friendlyURL.startsWith(
-				PortalUtil.getPathFriendlyURLPrivateGroup()) ||
-			friendlyURL.startsWith(PortalUtil.getPathFriendlyURLPublic()) ||
+				PortalUtil.getPathFriendlyURLPrivateGroup() + StringPool.SLASH) ||
+			friendlyURL.startsWith(PortalUtil.getPathFriendlyURLPublic() + StringPool.SLASH) ||
 			friendlyURL.startsWith(
-				PortalUtil.getPathFriendlyURLPrivateUser()) ||
+				PortalUtil.getPathFriendlyURLPrivateUser() + StringPool.SLASH) ||
 			friendlyURL.startsWith(_PATH_C) ||
 			friendlyURL.startsWith(_PATH_DELEGATE) ||
 			friendlyURL.startsWith(_PATH_HTML) ||
