@@ -206,8 +206,6 @@ public interface PropsKeys {
 
 	public static final String COMM_LINK_PROPERTIES = "comm.link.properties";
 
-	public static final String COMMONS_POOL_ENABLED = "commons.pool.enabled";
-
 	public static final String COMMUNITIES_EMAIL_FROM_ADDRESS = "communities.email.from.address";
 
 	public static final String COMMUNITIES_EMAIL_FROM_NAME = "communities.email.from.name";

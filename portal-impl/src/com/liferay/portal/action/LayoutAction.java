@@ -69,9 +69,7 @@ import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.PortletRequestImpl;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderParametersPool;
-import com.liferay.portlet.RenderRequestFactory;
 import com.liferay.portlet.RenderRequestImpl;
-import com.liferay.portlet.RenderResponseFactory;
 import com.liferay.portlet.RenderResponseImpl;
 import com.liferay.portlet.ResourceRequestFactory;
 import com.liferay.portlet.ResourceRequestImpl;
@@ -96,7 +94,6 @@ import javax.portlet.PortletException;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.UnavailableException;
 import javax.portlet.WindowState;
@@ -339,37 +336,29 @@ public class LayoutAction extends Action {
 		eventRequestImpl.defineObjects(portletConfig, eventResponseImpl);
 
 		try {
-			try {
-				invokerPortlet.processEvent(
-					eventRequestImpl, eventResponseImpl);
+			invokerPortlet.processEvent(eventRequestImpl, eventResponseImpl);
 
-				if (eventResponseImpl.isCalledSetRenderParameter()) {
-					Map<String, String[]> renderParameterMap =
-						new HashMap<String, String[]>();
+			if (eventResponseImpl.isCalledSetRenderParameter()) {
+				Map<String, String[]> renderParameterMap =
+					new HashMap<String, String[]>();
 
-					MapUtil.copy(
-						eventResponseImpl.getRenderParameterMap(),
-						renderParameterMap);
+				MapUtil.copy(
+					eventResponseImpl.getRenderParameterMap(),
+					renderParameterMap);
 
-					RenderParametersPool.put(
-						request, layout.getPlid(), portletId,
-						renderParameterMap);
-				}
+				RenderParametersPool.put(
+					request, layout.getPlid(), portletId, renderParameterMap);
 			}
-			catch (UnavailableException ue) {
-				throw ue;
-			}
-			catch (PortletException pe) {
-				eventResponseImpl.setWindowState(windowState);
-				eventResponseImpl.setPortletMode(portletMode);
-			}
-
-			processEvents(eventRequestImpl, eventResponseImpl, portlets);
 		}
-		finally {
-			EventRequestFactory.recycle(eventRequestImpl);
-			EventResponseFactory.recycle(eventResponseImpl);
+		catch (UnavailableException ue) {
+			throw ue;
 		}
+		catch (PortletException pe) {
+			eventResponseImpl.setWindowState(windowState);
+			eventResponseImpl.setPortletMode(portletMode);
+		}
+
+		processEvents(eventRequestImpl, eventResponseImpl, portlets);
 	}
 
 	protected void processEvents(
@@ -481,68 +470,7 @@ public class LayoutAction extends Action {
 			return null;
 		}
 		finally {
-			PortletRequest portletRequest =
-				(PortletRequest)request.getAttribute(
-					JavaConstants.JAVAX_PORTLET_REQUEST);
-
-			try {
-				if (portletRequest != null) {
-					if (themeDisplay.isLifecycleAction()) {
-						ActionRequestImpl actionRequestImpl =
-							(ActionRequestImpl)portletRequest;
-
-						ActionRequestFactory.recycle(actionRequestImpl);
-					}
-					else if (themeDisplay.isLifecycleRender()) {
-						RenderRequestImpl renderRequestImpl =
-							(RenderRequestImpl)portletRequest;
-
-						RenderRequestFactory.recycle(renderRequestImpl);
-					}
-					else if (themeDisplay.isLifecycleResource()) {
-						ResourceRequestImpl resourceRequestImpl =
-							(ResourceRequestImpl)portletRequest;
-
-						ResourceRequestFactory.recycle(resourceRequestImpl);
-					}
-				}
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-
 			request.removeAttribute(JavaConstants.JAVAX_PORTLET_REQUEST);
-
-			PortletResponse portletResponse =
-				(PortletResponse)request.getAttribute(
-					JavaConstants.JAVAX_PORTLET_RESPONSE);
-
-			try {
-				if (portletResponse != null) {
-					if (themeDisplay.isLifecycleAction()) {
-						ActionResponseImpl actionResponseImpl =
-							(ActionResponseImpl)portletResponse;
-
-						ActionResponseFactory.recycle(actionResponseImpl);
-					}
-					else if (themeDisplay.isLifecycleRender()) {
-						RenderResponseImpl renderResponseImpl =
-							(RenderResponseImpl)portletResponse;
-
-						RenderResponseFactory.recycle(renderResponseImpl);
-					}
-					else if (themeDisplay.isLifecycleResource()) {
-						ResourceResponseImpl resourceResponseImpl =
-							(ResourceResponseImpl)portletResponse;
-
-						ResourceResponseFactory.recycle(resourceResponseImpl);
-					}
-				}
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-
 			request.removeAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE);
 		}
 	}
@@ -779,9 +707,6 @@ public class LayoutAction extends Action {
 				response, renderResponseImpl.getResourceName(), content,
 				renderResponseImpl.getContentType());
 		}
-
-		RenderRequestFactory.recycle(renderRequestImpl);
-		RenderResponseFactory.recycle(renderResponseImpl);
 	}
 
 	private static Log _log = LogFactory.getLog(LayoutAction.class);

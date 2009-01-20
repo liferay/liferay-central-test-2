@@ -51,73 +51,68 @@ import org.apache.commons.logging.LogFactory;
 public class LayoutsLocalPublisherMessageListener implements MessageListener {
 
 	public void receive(Message message) {
-		PermissionChecker permissionChecker = null;
-
 		try {
-			LayoutsLocalPublisherRequest publisherRequest =
-				(LayoutsLocalPublisherRequest)JSONFactoryUtil.deserialize(
-					(String)message.getPayload());
-
-			String command = publisherRequest.getCommand();
-
-			long userId = publisherRequest.getUserId();
-			long sourceGroupId = publisherRequest.getSourceGroupId();
-			long targetGroupId = publisherRequest.getTargetGroupId();
-			boolean privateLayout = publisherRequest.isPrivateLayout();
-			Map<Long, Boolean> layoutIdMap = publisherRequest.getLayoutIdMap();
-			Map<String, String[]> parameterMap =
-				publisherRequest.getParameterMap();
-			Date startDate = publisherRequest.getStartDate();
-			Date endDate = publisherRequest.getEndDate();
-
-			String range = MapUtil.getString(parameterMap, "range");
-
-			if (range.equals("last")) {
-				int last = MapUtil.getInteger(parameterMap, "last");
-
-				if (last > 0) {
-					Date scheduledFireTime =
-						publisherRequest.getScheduledFireTime();
-
-					startDate = new Date(
-						scheduledFireTime.getTime() - (last * Time.HOUR));
-
-					endDate = scheduledFireTime;
-				}
-			}
-
-			PrincipalThreadLocal.setName(userId);
-
-			User user = UserLocalServiceUtil.getUserById(userId);
-
-			permissionChecker = PermissionCheckerFactory.create(user, false);
-
-			PermissionThreadLocal.setPermissionChecker(permissionChecker);
-
-			if (command.equals(
-					LayoutsLocalPublisherRequest.COMMAND_ALL_PAGES)) {
-
-				StagingUtil.publishLayouts(
-					sourceGroupId, targetGroupId, privateLayout, parameterMap,
-					startDate, endDate);
-			}
-			else if (command.equals(
-				LayoutsLocalPublisherRequest.COMMAND_SELECTED_PAGES)) {
-
-				StagingUtil.publishLayouts(
-					sourceGroupId, targetGroupId, privateLayout, layoutIdMap,
-					parameterMap, startDate, endDate);
-			}
+			doReceive(message);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
-		finally {
-			try {
-				PermissionCheckerFactory.recycle(permissionChecker);
+	}
+
+	protected void doReceive(Message message) throws Exception {
+		LayoutsLocalPublisherRequest publisherRequest =
+			(LayoutsLocalPublisherRequest)JSONFactoryUtil.deserialize(
+				(String)message.getPayload());
+
+		String command = publisherRequest.getCommand();
+
+		long userId = publisherRequest.getUserId();
+		long sourceGroupId = publisherRequest.getSourceGroupId();
+		long targetGroupId = publisherRequest.getTargetGroupId();
+		boolean privateLayout = publisherRequest.isPrivateLayout();
+		Map<Long, Boolean> layoutIdMap = publisherRequest.getLayoutIdMap();
+		Map<String, String[]> parameterMap = publisherRequest.getParameterMap();
+		Date startDate = publisherRequest.getStartDate();
+		Date endDate = publisherRequest.getEndDate();
+
+		String range = MapUtil.getString(parameterMap, "range");
+
+		if (range.equals("last")) {
+			int last = MapUtil.getInteger(parameterMap, "last");
+
+			if (last > 0) {
+				Date scheduledFireTime =
+					publisherRequest.getScheduledFireTime();
+
+				startDate = new Date(
+					scheduledFireTime.getTime() - (last * Time.HOUR));
+
+				endDate = scheduledFireTime;
 			}
-			catch (Exception e) {
-			}
+		}
+
+		PrincipalThreadLocal.setName(userId);
+
+		User user = UserLocalServiceUtil.getUserById(userId);
+
+		PermissionChecker permissionChecker = PermissionCheckerFactory.create(
+			user, false);
+
+		PermissionThreadLocal.setPermissionChecker(permissionChecker);
+
+		if (command.equals(
+				LayoutsLocalPublisherRequest.COMMAND_ALL_PAGES)) {
+
+			StagingUtil.publishLayouts(
+				sourceGroupId, targetGroupId, privateLayout, parameterMap,
+				startDate, endDate);
+		}
+		else if (command.equals(
+			LayoutsLocalPublisherRequest.COMMAND_SELECTED_PAGES)) {
+
+			StagingUtil.publishLayouts(
+				sourceGroupId, targetGroupId, privateLayout, layoutIdMap,
+				parameterMap, startDate, endDate);
 		}
 	}
 

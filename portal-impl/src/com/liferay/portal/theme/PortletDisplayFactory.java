@@ -22,12 +22,6 @@
 
 package com.liferay.portal.theme;
 
-import com.liferay.portal.util.PropsValues;
-
-import org.apache.commons.pool.BasePoolableObjectFactory;
-import org.apache.commons.pool.ObjectPool;
-import org.apache.commons.pool.impl.StackObjectPool;
-
 /**
  * <a href="PortletDisplayFactory.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,44 +31,7 @@ import org.apache.commons.pool.impl.StackObjectPool;
 public class PortletDisplayFactory {
 
 	public static PortletDisplay create() throws Exception {
-		if (PropsValues.COMMONS_POOL_ENABLED) {
-			return (PortletDisplay)_instance._pool.borrowObject();
-		}
-		else {
-			return new PortletDisplay();
-		}
-	}
-
-	public static void recycle(PortletDisplay portletDisplay) throws Exception {
-		if (PropsValues.COMMONS_POOL_ENABLED) {
-			_instance._pool.returnObject(portletDisplay);
-		}
-		else if (portletDisplay != null) {
-			portletDisplay.recycle();
-		}
-	}
-
-	private PortletDisplayFactory() {
-		_pool = new StackObjectPool(new Factory());
-	}
-
-	private static PortletDisplayFactory _instance =
-		new PortletDisplayFactory();
-
-	private ObjectPool _pool;
-
-	private class Factory extends BasePoolableObjectFactory {
-
-		public Object makeObject() {
-			return new PortletDisplay();
-		}
-
-		public void passivateObject(Object obj) {
-			PortletDisplay portletDisplay = (PortletDisplay)obj;
-
-			portletDisplay.recycle();
-		}
-
+		return new PortletDisplay();
 	}
 
 }

@@ -175,13 +175,6 @@ public class RuntimePortletUtil {
 		finally {
 			portletDisplay.copyFrom(portletDisplayClone);
 
-			try {
-				PortletDisplayFactory.recycle(portletDisplayClone);
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-
 			_defineObjects(
 				request, portletConfig, renderRequest, renderResponse);
 		}

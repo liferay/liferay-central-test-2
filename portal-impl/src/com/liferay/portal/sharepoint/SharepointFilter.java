@@ -199,51 +199,40 @@ public class SharepointFilter extends BasePortalFilter {
 			setPostHeaders(response);
 		}
 
-		PermissionChecker permissionChecker = null;
+		HttpSession session = request.getSession();
+
+		User user = (User)session.getAttribute(WebKeys.USER);
 
 		try {
-			HttpSession session = request.getSession();
+			if (user == null) {
+				user = login(request, response);
 
-			User user = (User)session.getAttribute(WebKeys.USER);
-
-			try {
 				if (user == null) {
-					user = login(request, response);
-
-					if (user == null) {
-						throw new PrincipalException("User is null");
-					}
-
-					session.setAttribute(WebKeys.USER, user);
+					throw new PrincipalException("User is null");
 				}
 
-				PrincipalThreadLocal.setName(user.getUserId());
-
-				permissionChecker = PermissionCheckerFactory.create(
-					user, false);
-
-				PermissionThreadLocal.setPermissionChecker(permissionChecker);
-			}
-			catch (Exception e) {
-				sendUnauthorized(response);
-
-				return;
+				session.setAttribute(WebKeys.USER, user);
 			}
 
-			try {
-				processFilter(
-					SharepointFilter.class, request, response, filterChain);
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
+			PrincipalThreadLocal.setName(user.getUserId());
+
+			PermissionChecker permissionChecker =
+				PermissionCheckerFactory.create(user, false);
+
+			PermissionThreadLocal.setPermissionChecker(permissionChecker);
 		}
-		finally {
-			try {
-				PermissionCheckerFactory.recycle(permissionChecker);
-			}
-			catch (Exception e) {
-			}
+		catch (Exception e) {
+			sendUnauthorized(response);
+
+			return;
+		}
+
+		try {
+			processFilter(
+				SharepointFilter.class, request, response, filterChain);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 	}
 

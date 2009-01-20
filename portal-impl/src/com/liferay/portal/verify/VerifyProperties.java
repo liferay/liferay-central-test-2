@@ -203,6 +203,7 @@ public class VerifyProperties extends VerifyProcess {
 
 	private static final String[] _OBSOLETE_PORTAL_KEYS = new String[] {
 		"auth.simultaneous.logins",
+		"commons.pool.enabled",
 		"webdav.storage.class",
 		"webdav.storage.show.edit.url",
 		"webdav.storage.show.view.url",

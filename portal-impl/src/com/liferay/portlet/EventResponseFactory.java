@@ -24,16 +24,11 @@ package com.liferay.portlet;
 
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
-import com.liferay.portal.util.PropsValues;
 
 import javax.portlet.PortletMode;
 import javax.portlet.WindowState;
 
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.pool.BasePoolableObjectFactory;
-import org.apache.commons.pool.ObjectPool;
-import org.apache.commons.pool.impl.StackObjectPool;
 
 /**
  * <a href="EventResponseFactory.java.html"><b><i>View Source</i></b></a>
@@ -49,55 +44,13 @@ public class EventResponseFactory {
 			WindowState windowState, PortletMode portletMode)
 		throws Exception {
 
-		EventResponseImpl eventResponseImpl = null;
-
-		if (PropsValues.COMMONS_POOL_ENABLED) {
-			eventResponseImpl =
-				(EventResponseImpl)_instance._pool.borrowObject();
-		}
-		else {
-			eventResponseImpl = new EventResponseImpl();
-		}
+		EventResponseImpl eventResponseImpl = new EventResponseImpl();
 
 		eventResponseImpl.init(
 			eventRequestImpl, response, portletName, user, layout, windowState,
 			portletMode);
 
 		return eventResponseImpl;
-	}
-
-	public static void recycle(EventResponseImpl eventResponseImpl)
-		throws Exception {
-
-		if (PropsValues.COMMONS_POOL_ENABLED) {
-			_instance._pool.returnObject(eventResponseImpl);
-		}
-		else if (eventResponseImpl != null) {
-			eventResponseImpl.recycle();
-		}
-	}
-
-	private EventResponseFactory() {
-		_pool = new StackObjectPool(new Factory());
-	}
-
-	private static EventResponseFactory _instance =
-		new EventResponseFactory();
-
-	private ObjectPool _pool;
-
-	private class Factory extends BasePoolableObjectFactory {
-
-		public Object makeObject() {
-			return new EventResponseImpl();
-		}
-
-		public void passivateObject(Object obj) {
-			EventResponseImpl eventResponseImpl = (EventResponseImpl)obj;
-
-			eventResponseImpl.recycle();
-		}
-
 	}
 
 }

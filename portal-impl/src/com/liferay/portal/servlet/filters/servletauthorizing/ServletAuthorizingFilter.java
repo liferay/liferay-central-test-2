@@ -100,8 +100,6 @@ public class ServletAuthorizingFilter extends BasePortalFilter {
 
 		request = new ProtectedServletRequest(request, remoteUser);
 
-		PermissionChecker permissionChecker = null;
-
 		if ((userId > 0) || (remoteUser != null)) {
 
 			// Set the principal associated with this thread
@@ -126,7 +124,8 @@ public class ServletAuthorizingFilter extends BasePortalFilter {
 
 				// Permission checker
 
-				permissionChecker = PermissionCheckerFactory.create(user, true);
+				PermissionChecker permissionChecker =
+					PermissionCheckerFactory.create(user, true);
 
 				PermissionThreadLocal.setPermissionChecker(permissionChecker);
 
@@ -148,15 +147,6 @@ public class ServletAuthorizingFilter extends BasePortalFilter {
 				ServletAuthorizingFilter.class, request, response, filterChain);
 		}
 		finally {
-			try {
-
-				// Clean up the permission checker
-
-				PermissionCheckerFactory.recycle(permissionChecker);
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
 
 			// Clear the company id associated with this thread
 

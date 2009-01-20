@@ -203,9 +203,6 @@ public class PropsValues {
 	public static final String CAS_VALIDATE_URL =
 		PropsUtil.get(PropsKeys.CAS_VALIDATE_URL);
 
-	public static final boolean COMMONS_POOL_ENABLED = GetterUtil.getBoolean(
-		PropsUtil.get(PropsKeys.COMMONS_POOL_ENABLED));
-
 	public static final String COMPANY_DEFAULT_HOME_URL =
 		PropsUtil.get(PropsKeys.COMPANY_DEFAULT_HOME_URL);
 

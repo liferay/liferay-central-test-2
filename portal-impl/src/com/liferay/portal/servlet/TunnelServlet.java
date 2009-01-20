@@ -65,98 +65,87 @@ public class TunnelServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 		throws IOException {
 
-		PermissionChecker permissionChecker = null;
+		ObjectInputStream ois = new ObjectInputStream(
+			request.getInputStream());
+
+		Object returnObj = null;
 
 		try {
-			ObjectInputStream ois = new ObjectInputStream(
-				request.getInputStream());
+			ObjectValuePair<HttpPrincipal, MethodWrapper> ovp =
+				(ObjectValuePair<HttpPrincipal, MethodWrapper>)
+					ois.readObject();
 
-			Object returnObj = null;
+			HttpPrincipal httpPrincipal = ovp.getKey();
+			MethodWrapper methodWrapper = ovp.getValue();
 
-			try {
-				ObjectValuePair<HttpPrincipal, MethodWrapper> ovp =
-					(ObjectValuePair<HttpPrincipal, MethodWrapper>)
-						ois.readObject();
+			long companyId = PortalInstances.getCompanyId(request);
 
-				HttpPrincipal httpPrincipal = ovp.getKey();
-				MethodWrapper methodWrapper = ovp.getValue();
+			CompanyThreadLocal.setCompanyId(companyId);
 
-				long companyId = PortalInstances.getCompanyId(request);
+			if (Validator.isNotNull(httpPrincipal.getLogin())) {
+				User user = null;
 
-				CompanyThreadLocal.setCompanyId(companyId);
+				try {
+					user = UserLocalServiceUtil.getUserByEmailAddress(
+						companyId, httpPrincipal.getLogin());
+				}
+				catch (NoSuchUserException nsue) {
+				}
 
-				if (Validator.isNotNull(httpPrincipal.getLogin())) {
-					User user = null;
-
+				if (user == null) {
 					try {
-						user = UserLocalServiceUtil.getUserByEmailAddress(
+						user = UserLocalServiceUtil.getUserByScreenName(
 							companyId, httpPrincipal.getLogin());
 					}
 					catch (NoSuchUserException nsue) {
 					}
+				}
 
-					if (user == null) {
-						try {
-							user = UserLocalServiceUtil.getUserByScreenName(
-								companyId, httpPrincipal.getLogin());
-						}
-						catch (NoSuchUserException nsue) {
-						}
+				if (user == null) {
+					try {
+						user = UserLocalServiceUtil.getUserById(
+							GetterUtil.getLong(httpPrincipal.getLogin()));
 					}
-
-					if (user == null) {
-						try {
-							user = UserLocalServiceUtil.getUserById(
-								GetterUtil.getLong(httpPrincipal.getLogin()));
-						}
-						catch (NoSuchUserException nsue) {
-						}
-					}
-
-					if (user != null) {
-						PrincipalThreadLocal.setName(user.getUserId());
-
-						permissionChecker = PermissionCheckerFactory.create(
-							user, true);
-
-						PermissionThreadLocal.setPermissionChecker(
-							permissionChecker);
+					catch (NoSuchUserException nsue) {
 					}
 				}
 
-				if (returnObj == null) {
-					returnObj = MethodInvoker.invoke(methodWrapper);
+				if (user != null) {
+					PrincipalThreadLocal.setName(user.getUserId());
+
+					PermissionChecker permissionChecker =
+						PermissionCheckerFactory.create(user, true);
+
+					PermissionThreadLocal.setPermissionChecker(
+						permissionChecker);
 				}
 			}
-			catch (InvocationTargetException ite) {
-				returnObj = ite.getCause();
 
-				if (!(returnObj instanceof PortalException)) {
-					ite.printStackTrace();
-
-					returnObj = new SystemException();
-				}
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
-
-			if (returnObj != null) {
-				ObjectOutputStream oos = new ObjectOutputStream(
-					response.getOutputStream());
-
-				oos.writeObject(returnObj);
-
-				oos.flush();
-				oos.close();
+			if (returnObj == null) {
+				returnObj = MethodInvoker.invoke(methodWrapper);
 			}
 		}
-		finally {
-			try {
-				PermissionCheckerFactory.recycle(permissionChecker);
+		catch (InvocationTargetException ite) {
+			returnObj = ite.getCause();
+
+			if (!(returnObj instanceof PortalException)) {
+				ite.printStackTrace();
+
+				returnObj = new SystemException();
 			}
-			catch (Exception e) {
-			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		if (returnObj != null) {
+			ObjectOutputStream oos = new ObjectOutputStream(
+				response.getOutputStream());
+
+			oos.writeObject(returnObj);
+
+			oos.flush();
+			oos.close();
 		}
 	}
 

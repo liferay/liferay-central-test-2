@@ -46,14 +46,13 @@ public abstract class DoAsUserThread extends Thread {
 	}
 
 	public void run() {
-		PermissionChecker permissionChecker = null;
-
 		try {
 			PrincipalThreadLocal.setName(_userId);
 
 			User user = UserLocalServiceUtil.getUserById(_userId);
 
-			permissionChecker = PermissionCheckerFactory.create(user, true);
+			PermissionChecker permissionChecker =
+				PermissionCheckerFactory.create(user, true);
 
 			PermissionThreadLocal.setPermissionChecker(permissionChecker);
 
@@ -63,16 +62,6 @@ public abstract class DoAsUserThread extends Thread {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
-		}
-		finally {
-			if (permissionChecker != null) {
-				try {
-					PermissionCheckerFactory.recycle(permissionChecker);
-				}
-				catch (Exception e) {
-					_log.error(e, e);
-				}
-			}
 		}
 	}
 

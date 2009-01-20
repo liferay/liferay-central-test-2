@@ -23,7 +23,6 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.util.PropsValues;
 
 import javax.portlet.PortletContext;
 import javax.portlet.PortletMode;
@@ -31,12 +30,6 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.WindowState;
 
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.commons.pool.BasePoolableObjectFactory;
-import org.apache.commons.pool.ObjectPool;
-import org.apache.commons.pool.impl.StackObjectPool;
 
 /**
  * <a href="RenderRequestFactory.java.html"><b><i>View Source</i></b></a>
@@ -65,71 +58,13 @@ public class RenderRequestFactory {
 			PortletPreferences preferences, long plid)
 		throws Exception {
 
-		if (PropsValues.COMMONS_POOL_ENABLED) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Borrowing:\t" + _instance._pool.getNumIdle() + "\t" +
-						_instance._pool.getNumActive());
-			}
-		}
-
-		RenderRequestImpl renderRequestImpl = null;
-
-		if (PropsValues.COMMONS_POOL_ENABLED) {
-			renderRequestImpl =
-				(RenderRequestImpl)_instance._pool.borrowObject();
-		}
-		else {
-			renderRequestImpl = new RenderRequestImpl();
-		}
+		RenderRequestImpl renderRequestImpl = new RenderRequestImpl();
 
 		renderRequestImpl.init(
 			request, portlet, invokerPortlet, portletContext, windowState,
 			portletMode, preferences, plid);
 
 		return renderRequestImpl;
-	}
-
-	public static void recycle(RenderRequestImpl renderRequestImpl)
-		throws Exception {
-
-		if (PropsValues.COMMONS_POOL_ENABLED) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Recycling:\t" + _instance._pool.getNumIdle() + "\t" +
-						_instance._pool.getNumActive());
-			}
-
-			_instance._pool.returnObject(renderRequestImpl);
-		}
-		else if (renderRequestImpl != null) {
-			renderRequestImpl.recycle();
-		}
-	}
-
-	private RenderRequestFactory() {
-		_pool = new StackObjectPool(new Factory());
-	}
-
-	private static Log _log =
-		LogFactory.getLog(RenderRequestFactory.class);
-
-	private static RenderRequestFactory _instance = new RenderRequestFactory();
-
-	private ObjectPool _pool;
-
-	private class Factory extends BasePoolableObjectFactory {
-
-		public Object makeObject() {
-			return new RenderRequestImpl();
-		}
-
-		public void passivateObject(Object obj) {
-			RenderRequestImpl renderRequestImpl = (RenderRequestImpl)obj;
-
-			renderRequestImpl.recycle();
-		}
-
 	}
 
 }

@@ -22,15 +22,7 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.util.PropsValues;
-
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.commons.pool.BasePoolableObjectFactory;
-import org.apache.commons.pool.ObjectPool;
-import org.apache.commons.pool.impl.StackObjectPool;
 
 /**
  * <a href="ResourceResponseFactory.java.html"><b><i>View Source</i></b></a>
@@ -45,7 +37,8 @@ public class ResourceResponseFactory {
 			HttpServletResponse response, String portletName, long companyId)
 		throws Exception {
 
-		return create(resourceRequestImpl, response, portletName, companyId, 0);
+		return create(
+			resourceRequestImpl, response, portletName, companyId, 0);
 	}
 
 	public static ResourceResponseImpl create(
@@ -54,71 +47,12 @@ public class ResourceResponseFactory {
 			long plid)
 		throws Exception {
 
-		if (PropsValues.COMMONS_POOL_ENABLED) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Borrowing:\t" + _instance._pool.getNumIdle() + "\t" +
-						_instance._pool.getNumActive());
-			}
-		}
-
-		ResourceResponseImpl resourceResponseImpl = null;
-
-		if (PropsValues.COMMONS_POOL_ENABLED) {
-			resourceResponseImpl =
-				(ResourceResponseImpl)_instance._pool.borrowObject();
-		}
-		else {
-			resourceResponseImpl = new ResourceResponseImpl();
-		}
+		ResourceResponseImpl resourceResponseImpl = new ResourceResponseImpl();
 
 		resourceResponseImpl.init(
 			resourceRequestImpl, response, portletName, companyId, plid);
 
 		return resourceResponseImpl;
-	}
-
-	public static void recycle(ResourceResponseImpl resourceResponseImpl)
-		throws Exception {
-
-		if (PropsValues.COMMONS_POOL_ENABLED) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Recycling:\t" + _instance._pool.getNumIdle() + "\t" +
-						_instance._pool.getNumActive());
-			}
-
-			_instance._pool.returnObject(resourceResponseImpl);
-		}
-		else if (resourceResponseImpl != null) {
-			resourceResponseImpl.recycle();
-		}
-	}
-
-	private ResourceResponseFactory() {
-		_pool = new StackObjectPool(new Factory());
-	}
-
-	private static Log _log = LogFactory.getLog(ResourceResponseFactory.class);
-
-	private static ResourceResponseFactory _instance =
-		new ResourceResponseFactory();
-
-	private ObjectPool _pool;
-
-	private class Factory extends BasePoolableObjectFactory {
-
-		public Object makeObject() {
-			return new ResourceResponseImpl();
-		}
-
-		public void passivateObject(Object obj) {
-			ResourceResponseImpl resourceResponseImpl =
-				(ResourceResponseImpl)obj;
-
-			resourceResponseImpl.recycle();
-		}
-
 	}
 
 }

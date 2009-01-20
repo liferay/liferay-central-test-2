@@ -75,8 +75,6 @@ public class RemotingServlet extends DispatcherServlet {
 			HttpServletRequest request, HttpServletResponse response)
 		throws ServletException {
 
-		PermissionChecker permissionChecker = null;
-
 		try {
 			String remoteUser = request.getRemoteUser();
 
@@ -95,7 +93,8 @@ public class RemotingServlet extends DispatcherServlet {
 
 				User user = UserLocalServiceUtil.getUserById(userId);
 
-				permissionChecker = PermissionCheckerFactory.create(user, true);
+				PermissionChecker permissionChecker =
+					PermissionCheckerFactory.create(user, true);
 
 				PermissionThreadLocal.setPermissionChecker(permissionChecker);
 			}
@@ -111,13 +110,6 @@ public class RemotingServlet extends DispatcherServlet {
 		}
 		catch (Exception e) {
 			throw new ServletException(e);
-		}
-		finally {
-			try {
-				PermissionCheckerFactory.recycle(permissionChecker);
-			}
-			catch (Exception e) {
-			}
 		}
 	}
 

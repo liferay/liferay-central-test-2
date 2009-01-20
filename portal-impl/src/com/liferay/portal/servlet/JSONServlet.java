@@ -51,8 +51,6 @@ public class JSONServlet extends HttpServlet {
 	public void service(
 		HttpServletRequest request, HttpServletResponse response) {
 
-		PermissionChecker permissionChecker = null;
-
 		try {
 			String remoteUser = request.getRemoteUser();
 
@@ -67,7 +65,8 @@ public class JSONServlet extends HttpServlet {
 
 				User user = UserLocalServiceUtil.getUserById(userId);
 
-				permissionChecker = PermissionCheckerFactory.create(user, true);
+				PermissionChecker permissionChecker =
+					PermissionCheckerFactory.create(user, true);
 
 				PermissionThreadLocal.setPermissionChecker(permissionChecker);
 			}
@@ -79,13 +78,6 @@ public class JSONServlet extends HttpServlet {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
-		}
-		finally {
-			try {
-				PermissionCheckerFactory.recycle(permissionChecker);
-			}
-			catch (Exception e) {
-			}
 		}
 	}
 

@@ -23,12 +23,6 @@
 package com.liferay.portal.events;
 
 import com.liferay.portal.kernel.events.Action;
-import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.security.permission.PermissionCheckerFactory;
-import com.liferay.portal.security.permission.PermissionThreadLocal;
-import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.theme.ThemeDisplayFactory;
-import com.liferay.portal.util.WebKeys;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -57,34 +51,6 @@ public class ServicePostAction extends Action {
 			/*if (requestURI.endsWith("/portal/render_portlet")) {
 				return;
 			}*/
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
-
-		try {
-
-			// Clean up the theme display
-
-			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
-			ThemeDisplayFactory.recycle(themeDisplay);
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
-
-		request.removeAttribute(WebKeys.THEME_DISPLAY);
-
-		try {
-
-			// Clean up the permission checker
-
-			PermissionChecker permissionChecker =
-				PermissionThreadLocal.getPermissionChecker();
-
-			PermissionCheckerFactory.recycle(permissionChecker);
 		}
 		catch (Exception e) {
 			_log.error(e);

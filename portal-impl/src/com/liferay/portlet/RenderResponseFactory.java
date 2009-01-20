@@ -22,15 +22,7 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.util.PropsValues;
-
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.commons.pool.BasePoolableObjectFactory;
-import org.apache.commons.pool.ObjectPool;
-import org.apache.commons.pool.impl.StackObjectPool;
 
 /**
  * <a href="RenderResponseFactory.java.html"><b><i>View Source</i></b></a>
@@ -45,7 +37,8 @@ public class RenderResponseFactory {
 			String portletName, long companyId)
 		throws Exception {
 
-		return create(renderRequestImpl, response, portletName, companyId, 0);
+		return create(
+			renderRequestImpl, response, portletName, companyId, 0);
 	}
 
 	public static RenderResponseImpl create(
@@ -53,70 +46,12 @@ public class RenderResponseFactory {
 			String portletName, long companyId, long plid)
 		throws Exception {
 
-		if (PropsValues.COMMONS_POOL_ENABLED) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Borrowing:\t" + _instance._pool.getNumIdle() + "\t" +
-						_instance._pool.getNumActive());
-			}
-		}
-
-		RenderResponseImpl renderResponseImpl = null;
-
-		if (PropsValues.COMMONS_POOL_ENABLED) {
-			renderResponseImpl =
-				(RenderResponseImpl)_instance._pool.borrowObject();
-		}
-		else {
-			renderResponseImpl = new RenderResponseImpl();
-		}
+		RenderResponseImpl renderResponseImpl = new RenderResponseImpl();
 
 		renderResponseImpl.init(
 			renderRequestImpl, response, portletName, companyId, plid);
 
 		return renderResponseImpl;
-	}
-
-	public static void recycle(RenderResponseImpl renderResponseImpl)
-		throws Exception {
-
-		if (PropsValues.COMMONS_POOL_ENABLED) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Recycling:\t" + _instance._pool.getNumIdle() + "\t" +
-						_instance._pool.getNumActive());
-			}
-
-			_instance._pool.returnObject(renderResponseImpl);
-		}
-		else if (renderResponseImpl != null) {
-			renderResponseImpl.recycle();
-		}
-	}
-
-	private RenderResponseFactory() {
-		_pool = new StackObjectPool(new Factory());
-	}
-
-	private static Log _log = LogFactory.getLog(RenderResponseFactory.class);
-
-	private static RenderResponseFactory _instance =
-		new RenderResponseFactory();
-
-	private ObjectPool _pool;
-
-	private class Factory extends BasePoolableObjectFactory {
-
-		public Object makeObject() {
-			return new RenderResponseImpl();
-		}
-
-		public void passivateObject(Object obj) {
-			RenderResponseImpl renderResponseImpl = (RenderResponseImpl)obj;
-
-			renderResponseImpl.recycle();
-		}
-
 	}
 
 }

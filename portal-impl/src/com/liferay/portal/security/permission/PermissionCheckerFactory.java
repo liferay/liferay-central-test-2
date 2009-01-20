@@ -25,12 +25,6 @@ package com.liferay.portal.security.permission;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PropsValues;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.commons.pool.BasePoolableObjectFactory;
-import org.apache.commons.pool.ObjectPool;
-import org.apache.commons.pool.impl.StackObjectPool;
-
 /**
  * <a href="PermissionCheckerFactory.java.html"><b><i>View Source</i></b></a>
  *
@@ -43,82 +37,12 @@ public class PermissionCheckerFactory {
 	public static PermissionChecker create(User user, boolean checkGuest)
 		throws Exception {
 
-		if (PropsValues.COMMONS_POOL_ENABLED) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Borrowing:\t" + _instance._pool.getNumIdle() + "\t" +
-						_instance._pool.getNumActive());
-			}
-		}
-
-		PermissionChecker permissionChecker = null;
-
-		if (PropsValues.COMMONS_POOL_ENABLED) {
-			permissionChecker =
-				(PermissionChecker)_instance._pool.borrowObject();
-		}
-		else {
-			permissionChecker = (PermissionChecker)Class.forName(
-				PropsValues.PERMISSIONS_CHECKER).newInstance();
-		}
+		PermissionChecker permissionChecker = (PermissionChecker)Class.forName(
+			PropsValues.PERMISSIONS_CHECKER).newInstance();
 
 		permissionChecker.init(user, checkGuest);
 
 		return permissionChecker;
-	}
-
-	public static void recycle(PermissionChecker permissionChecker)
-		throws Exception {
-
-		if (PropsValues.COMMONS_POOL_ENABLED) {
-			if (permissionChecker == null) {
-				return;
-			}
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Recycling:\t" + _instance._pool.getNumIdle() + "\t" +
-						_instance._pool.getNumActive());
-			}
-
-			_instance._pool.returnObject(permissionChecker);
-		}
-		else if (permissionChecker != null) {
-			permissionChecker.recycle();
-		}
-	}
-
-	private PermissionCheckerFactory() {
-		_pool = new StackObjectPool(new Factory());
-	}
-
-	private static Log _log = LogFactory.getLog(PermissionCheckerFactory.class);
-
-	private static PermissionCheckerFactory _instance =
-		new PermissionCheckerFactory();
-
-	private ObjectPool _pool;
-
-	private class Factory extends BasePoolableObjectFactory {
-
-		public Object makeObject() {
-			try {
-				return Class.forName(
-					PropsValues.PERMISSIONS_CHECKER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-
-				return null;
-			}
-		}
-
-		public void passivateObject(Object obj) {
-			PermissionChecker permissionChecker = (PermissionChecker)obj;
-
-			permissionChecker.recycle();
-		}
-
 	}
 
 }

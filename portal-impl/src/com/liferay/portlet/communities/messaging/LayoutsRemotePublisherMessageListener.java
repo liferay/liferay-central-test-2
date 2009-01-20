@@ -51,67 +51,61 @@ import org.apache.commons.logging.LogFactory;
 public class LayoutsRemotePublisherMessageListener implements MessageListener {
 
 	public void receive(Message message) {
-		PermissionChecker permissionChecker = null;
-
 		try {
-			LayoutsRemotePublisherRequest publisherRequest =
-				(LayoutsRemotePublisherRequest)JSONFactoryUtil.deserialize(
-					(String)message.getPayload());
-
-			long userId = publisherRequest.getUserId();
-			long sourceGroupId = publisherRequest.getSourceGroupId();
-			boolean privateLayout = publisherRequest.isPrivateLayout();
-			Map<Long, Boolean> layoutIdMap = publisherRequest.getLayoutIdMap();
-			Map<String, String[]> parameterMap =
-				publisherRequest.getParameterMap();
-			String remoteAddress = publisherRequest.getRemoteAddress();
-			int remotePort = publisherRequest.getRemotePort();
-			boolean secureConnection = publisherRequest.isSecureConnection();
-			long remoteGroupId = publisherRequest.getRemoteGroupId();
-			boolean remotePrivateLayout =
-				publisherRequest.isRemotePrivateLayout();
-			Date startDate = publisherRequest.getStartDate();
-			Date endDate = publisherRequest.getEndDate();
-
-			String range = MapUtil.getString(parameterMap, "range");
-
-			if (range.equals("last")) {
-				int last = MapUtil.getInteger(parameterMap, "last");
-
-				if (last > 0) {
-					Date scheduledFireTime =
-						publisherRequest.getScheduledFireTime();
-
-					startDate = new Date(
-						scheduledFireTime.getTime() - (last * Time.HOUR));
-
-					endDate = scheduledFireTime;
-				}
-			}
-
-			PrincipalThreadLocal.setName(userId);
-
-			User user = UserLocalServiceUtil.getUserById(userId);
-
-			permissionChecker = PermissionCheckerFactory.create(user, false);
-
-			PermissionThreadLocal.setPermissionChecker(permissionChecker);
-
-			StagingUtil.copyRemoteLayouts(
-				sourceGroupId, privateLayout, layoutIdMap, parameterMap,
-				remoteAddress, remotePort, secureConnection, remoteGroupId,
-				remotePrivateLayout, parameterMap, startDate, endDate);
+			doReceive(message);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
-		finally {
-			try {
-				PermissionCheckerFactory.recycle(permissionChecker);
-			}
-			catch (Exception e) {
+	}
+
+	protected void doReceive(Message message) throws Exception {
+		LayoutsRemotePublisherRequest publisherRequest =
+			(LayoutsRemotePublisherRequest)JSONFactoryUtil.deserialize(
+				(String)message.getPayload());
+
+		long userId = publisherRequest.getUserId();
+		long sourceGroupId = publisherRequest.getSourceGroupId();
+		boolean privateLayout = publisherRequest.isPrivateLayout();
+		Map<Long, Boolean> layoutIdMap = publisherRequest.getLayoutIdMap();
+		Map<String, String[]> parameterMap = publisherRequest.getParameterMap();
+		String remoteAddress = publisherRequest.getRemoteAddress();
+		int remotePort = publisherRequest.getRemotePort();
+		boolean secureConnection = publisherRequest.isSecureConnection();
+		long remoteGroupId = publisherRequest.getRemoteGroupId();
+		boolean remotePrivateLayout = publisherRequest.isRemotePrivateLayout();
+		Date startDate = publisherRequest.getStartDate();
+		Date endDate = publisherRequest.getEndDate();
+
+		String range = MapUtil.getString(parameterMap, "range");
+
+		if (range.equals("last")) {
+			int last = MapUtil.getInteger(parameterMap, "last");
+
+			if (last > 0) {
+				Date scheduledFireTime =
+					publisherRequest.getScheduledFireTime();
+
+				startDate = new Date(
+					scheduledFireTime.getTime() - (last * Time.HOUR));
+
+				endDate = scheduledFireTime;
 			}
 		}
+
+		PrincipalThreadLocal.setName(userId);
+
+		User user = UserLocalServiceUtil.getUserById(userId);
+
+		PermissionChecker permissionChecker = PermissionCheckerFactory.create(
+			user, false);
+
+		PermissionThreadLocal.setPermissionChecker(permissionChecker);
+
+		StagingUtil.copyRemoteLayouts(
+			sourceGroupId, privateLayout, layoutIdMap, parameterMap,
+			remoteAddress, remotePort, secureConnection, remoteGroupId,
+			remotePrivateLayout, parameterMap, startDate, endDate);
 	}
 
 	private static Log _log =

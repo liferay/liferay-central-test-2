@@ -23,7 +23,6 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.util.PropsValues;
 
 import javax.portlet.PortletContext;
 import javax.portlet.PortletMode;
@@ -31,12 +30,6 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.WindowState;
 
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.commons.pool.BasePoolableObjectFactory;
-import org.apache.commons.pool.ObjectPool;
-import org.apache.commons.pool.impl.StackObjectPool;
 
 /**
  * <a href="EventRequestFactory.java.html"><b><i>View Source</i></b></a>
@@ -53,70 +46,13 @@ public class EventRequestFactory {
 			PortletPreferences preferences, long plid)
 		throws Exception {
 
-		if (PropsValues.COMMONS_POOL_ENABLED) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Borrowing:\t" + _instance._pool.getNumIdle() + "\t" +
-						_instance._pool.getNumActive());
-			}
-		}
-
-		EventRequestImpl eventRequestImpl = null;
-
-		if (PropsValues.COMMONS_POOL_ENABLED) {
-			eventRequestImpl = (EventRequestImpl)_instance._pool.borrowObject();
-		}
-		else {
-			eventRequestImpl = new EventRequestImpl();
-		}
+		EventRequestImpl eventRequestImpl = new EventRequestImpl();
 
 		eventRequestImpl.init(
 			request, portlet, invokerPortlet, portletContext, windowState,
 			portletMode, preferences, plid);
 
 		return eventRequestImpl;
-	}
-
-	public static void recycle(EventRequestImpl eventRequestImpl)
-		throws Exception {
-
-		if (PropsValues.COMMONS_POOL_ENABLED) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Recycling:\t" + _instance._pool.getNumIdle() + "\t" +
-						_instance._pool.getNumActive());
-			}
-
-			_instance._pool.returnObject(eventRequestImpl);
-		}
-		else if (eventRequestImpl != null) {
-			eventRequestImpl.recycle();
-		}
-	}
-
-	private EventRequestFactory() {
-		_pool = new StackObjectPool(new Factory());
-	}
-
-	private static Log _log =
-		LogFactory.getLog(EventRequestFactory.class);
-
-	private static EventRequestFactory _instance = new EventRequestFactory();
-
-	private ObjectPool _pool;
-
-	private class Factory extends BasePoolableObjectFactory {
-
-		public Object makeObject() {
-			return new EventRequestImpl();
-		}
-
-		public void passivateObject(Object obj) {
-			EventRequestImpl eventRequestImpl = (EventRequestImpl)obj;
-
-			eventRequestImpl.recycle();
-		}
-
 	}
 
 }

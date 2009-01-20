@@ -60,12 +60,6 @@ public class BaseServiceTestCase extends BaseTestCase {
 		PermissionThreadLocal.setPermissionChecker(_permissionChecker);
 	}
 
-	protected void tearDown() throws Exception {
-		super.tearDown();
-
-		PermissionCheckerFactory.recycle(_permissionChecker);
-	}
-
 	private PermissionChecker _permissionChecker = null;
 
 }

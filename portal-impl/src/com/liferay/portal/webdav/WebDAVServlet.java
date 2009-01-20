@@ -53,8 +53,6 @@ public class WebDAVServlet extends HttpServlet {
 	public void service(
 		HttpServletRequest request, HttpServletResponse response) {
 
-		PermissionChecker permissionChecker = null;
-
 		int status = HttpServletResponse.SC_PRECONDITION_FAILED;
 
 		try {
@@ -74,6 +72,8 @@ public class WebDAVServlet extends HttpServlet {
 			}
 
 			// Permission checker
+
+			PermissionChecker permissionChecker = null;
 
 			String remoteUser = request.getRemoteUser();
 
@@ -116,12 +116,6 @@ public class WebDAVServlet extends HttpServlet {
 				if (_log.isInfoEnabled()) {
 					_log.info("Status code " + status);
 				}
-			}
-
-			try {
-				PermissionCheckerFactory.recycle(permissionChecker);
-			}
-			catch (Exception e) {
 			}
 		}
 	}

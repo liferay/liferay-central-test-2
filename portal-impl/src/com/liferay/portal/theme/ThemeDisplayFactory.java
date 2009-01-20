@@ -22,12 +22,6 @@
 
 package com.liferay.portal.theme;
 
-import com.liferay.portal.util.PropsValues;
-
-import org.apache.commons.pool.BasePoolableObjectFactory;
-import org.apache.commons.pool.ObjectPool;
-import org.apache.commons.pool.impl.StackObjectPool;
-
 /**
  * <a href="ThemeDisplayFactory.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,43 +31,7 @@ import org.apache.commons.pool.impl.StackObjectPool;
 public class ThemeDisplayFactory {
 
 	public static ThemeDisplay create() throws Exception {
-		if (PropsValues.COMMONS_POOL_ENABLED) {
-			return (ThemeDisplay)_instance._pool.borrowObject();
-		}
-		else {
-			return new ThemeDisplay();
-		}
-	}
-
-	public static void recycle(ThemeDisplay themeDisplay) throws Exception {
-		if (PropsValues.COMMONS_POOL_ENABLED) {
-			_instance._pool.returnObject(themeDisplay);
-		}
-		else if (themeDisplay != null) {
-			themeDisplay.recycle();
-		}
-	}
-
-	private ThemeDisplayFactory() {
-		_pool = new StackObjectPool(new Factory());
-	}
-
-	private static ThemeDisplayFactory _instance = new ThemeDisplayFactory();
-
-	private ObjectPool _pool;
-
-	private class Factory extends BasePoolableObjectFactory {
-
-		public Object makeObject() {
-			return new ThemeDisplay();
-		}
-
-		public void passivateObject(Object obj) {
-			ThemeDisplay themeDisplay = (ThemeDisplay)obj;
-
-			themeDisplay.recycle();
-		}
-
+		return new ThemeDisplay();
 	}
 
 }

@@ -3121,35 +3121,24 @@ public class PortalImpl implements Portal {
 			realUserIdObj.longValue());
 		boolean checkGuest = true;
 
-		PermissionChecker permissionChecker = null;
+		PermissionChecker permissionChecker = PermissionCheckerFactory.create(
+			realUser, checkGuest);
 
-		try {
-			permissionChecker = PermissionCheckerFactory.create(
-				realUser, checkGuest);
+		if (doAsUser.isDefaultUser() ||
+			UserPermissionUtil.contains(
+				permissionChecker, doAsUserId, organizationIds,
+				ActionKeys.IMPERSONATE)) {
 
-			if (doAsUser.isDefaultUser() ||
-				UserPermissionUtil.contains(
-					permissionChecker, doAsUserId, organizationIds,
-					ActionKeys.IMPERSONATE)) {
+			request.setAttribute(WebKeys.USER_ID, new Long(doAsUserId));
 
-				request.setAttribute(WebKeys.USER_ID, new Long(doAsUserId));
-
-				return doAsUserId;
-			}
-			else {
-				_log.error(
-					"User " + realUserIdObj + " does not have the permission " +
-						"to impersonate " + doAsUserId);
-
-				return 0;
-			}
+			return doAsUserId;
 		}
-		finally {
-			try {
-				PermissionCheckerFactory.recycle(permissionChecker);
-			}
-			catch (Exception e) {
-			}
+		else {
+			_log.error(
+				"User " + realUserIdObj + " does not have the permission " +
+					"to impersonate " + doAsUserId);
+
+			return 0;
 		}
 	}
 

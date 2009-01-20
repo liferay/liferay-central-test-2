@@ -54,8 +54,6 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 	public void service(
 		HttpServletRequest request, HttpServletResponse response) {
 
-		PermissionChecker permissionChecker = null;
-
 		try {
 			String remoteUser = request.getRemoteUser();
 
@@ -70,7 +68,8 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 
 				User user = UserLocalServiceUtil.getUserById(userId);
 
-				permissionChecker = PermissionCheckerFactory.create(user, true);
+				PermissionChecker permissionChecker =
+					PermissionCheckerFactory.create(user, true);
 
 				PermissionThreadLocal.setPermissionChecker(permissionChecker);
 			}
@@ -96,13 +95,6 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
-		}
-		finally {
-			try {
-				PermissionCheckerFactory.recycle(permissionChecker);
-			}
-			catch (Exception e) {
-			}
 		}
 	}
 

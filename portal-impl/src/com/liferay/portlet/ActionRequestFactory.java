@@ -23,7 +23,6 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.util.PropsValues;
 
 import javax.portlet.PortletContext;
 import javax.portlet.PortletMode;
@@ -31,10 +30,6 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.WindowState;
 
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.pool.BasePoolableObjectFactory;
-import org.apache.commons.pool.ObjectPool;
-import org.apache.commons.pool.impl.StackObjectPool;
 
 /**
  * <a href="ActionRequestFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,54 +46,13 @@ public class ActionRequestFactory {
 			PortletPreferences preferences, long plid)
 		throws Exception {
 
-		ActionRequestImpl actionRequestImpl = null;
-
-		if (PropsValues.COMMONS_POOL_ENABLED) {
-			actionRequestImpl =
-				(ActionRequestImpl)_instance._pool.borrowObject();
-		}
-		else {
-			actionRequestImpl = new ActionRequestImpl();
-		}
+		ActionRequestImpl actionRequestImpl = new ActionRequestImpl();
 
 		actionRequestImpl.init(
 			request, portlet, invokerPortlet, portletContext, windowState,
 			portletMode, preferences, plid);
 
 		return actionRequestImpl;
-	}
-
-	public static void recycle(ActionRequestImpl actionRequestImpl)
-		throws Exception {
-
-		if (PropsValues.COMMONS_POOL_ENABLED) {
-			_instance._pool.returnObject(actionRequestImpl);
-		}
-		else if (actionRequestImpl != null) {
-			actionRequestImpl.recycle();
-		}
-	}
-
-	private ActionRequestFactory() {
-		_pool = new StackObjectPool(new Factory());
-	}
-
-	private static ActionRequestFactory _instance = new ActionRequestFactory();
-
-	private ObjectPool _pool;
-
-	private class Factory extends BasePoolableObjectFactory {
-
-		public Object makeObject() {
-			return new ActionRequestImpl();
-		}
-
-		public void passivateObject(Object obj) {
-			ActionRequestImpl actionRequestImpl = (ActionRequestImpl)obj;
-
-			actionRequestImpl.recycle();
-		}
-
 	}
 
 }
