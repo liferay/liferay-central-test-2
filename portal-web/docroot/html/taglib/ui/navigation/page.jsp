@@ -109,7 +109,7 @@ private void _buildNavigation(Layout rootLayout, Layout selLayout, List selBranc
 	List layoutChildren = null;
 
 	if (rootLayout != null) {
-		layoutChildren = rootLayout.getChildren();
+		layoutChildren = rootLayout.getChildren(themeDisplay.getPermissionChecker());
 	}
 	else {
 		layoutChildren = LayoutLocalServiceUtil.getLayouts(selLayout.getGroupId(), selLayout.isPrivateLayout(), LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
