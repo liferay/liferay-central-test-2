@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.layoutconfiguration.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.MethodInvoker;
@@ -55,9 +57,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.PageContext;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="RuntimePortletUtil.java.html"><b><i>View Source</i></b></a>
@@ -355,6 +354,6 @@ public class RuntimePortletUtil {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(RuntimePortletUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(RuntimePortletUtil.class);
 
 }

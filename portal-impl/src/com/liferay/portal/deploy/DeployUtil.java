@@ -22,6 +22,8 @@
 
 package com.liferay.portal.deploy;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
@@ -38,9 +40,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="DeployUtil.java.html"><b><i>View Source</i></b></a>
@@ -165,7 +164,7 @@ public class DeployUtil {
 		return FileUtil.getAbsolutePath(file);
 	}
 
-	private static Log _log = LogFactory.getLog(DeployUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(DeployUtil.class);
 
 	private static DeployUtil _instance = new DeployUtil();
 

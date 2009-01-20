@@ -24,14 +24,13 @@ package com.liferay.portlet.calendar.job;
 
 import com.liferay.portal.kernel.job.IntervalJob;
 import com.liferay.portal.kernel.job.JobExecutionContext;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="CheckEventJob.java.html"><b><i>View Source</i></b></a>
@@ -57,6 +56,6 @@ public class CheckEventJob implements IntervalJob {
 		return INTERVAL;
 	}
 
-	private static Log _log = LogFactory.getLog(CheckEventJob.class);
+	private static Log _log = LogFactoryUtil.getLog(CheckEventJob.class);
 
 }

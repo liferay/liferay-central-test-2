@@ -41,12 +41,12 @@
 
 package com.liferay.portal.tools.deploy;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 import javax.enterprise.deploy.spi.status.DeploymentStatus;
 import javax.enterprise.deploy.spi.status.ProgressEvent;
 import javax.enterprise.deploy.spi.status.ProgressListener;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="StartProgressListener.java.html"><b><i>View Source</i></b></a>
@@ -75,7 +75,8 @@ public class StartProgressListener implements ProgressListener {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(StartProgressListener.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(StartProgressListener.class);
 
 	private DeploymentHandler _deploymentHandler;
 

@@ -25,6 +25,8 @@ package com.liferay.portlet.imagegallery.webdav;
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -57,9 +59,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="IGWebDAVStorageImpl.java.html"><b><i>View Source</i></b></a>
@@ -648,6 +647,6 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		return resource;
 	}
 
-	private static Log _log = LogFactory.getLog(IGWebDAVStorageImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(IGWebDAVStorageImpl.class);
 
 }

@@ -23,12 +23,11 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.openid4java.consumer.ConsumerException;
 import org.openid4java.consumer.ConsumerManager;
@@ -93,7 +92,7 @@ public class OpenIdUtil {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(OpenIdUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(OpenIdUtil.class);
 
 	private static OpenIdUtil _instance = new OpenIdUtil();
 

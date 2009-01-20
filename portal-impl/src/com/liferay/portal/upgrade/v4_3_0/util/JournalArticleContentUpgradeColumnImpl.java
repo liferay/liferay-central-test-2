@@ -22,6 +22,8 @@
 
 package com.liferay.portal.upgrade.v4_3_0.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -40,9 +42,6 @@ import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.PKParser;
 
 import java.util.Iterator;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="JournalArticleContentUpgradeColumnImpl.java.html"><b><i>View Source
@@ -254,7 +253,7 @@ public class JournalArticleContentUpgradeColumnImpl
 		"/image/journal/article?img_id=";
 
 	private static Log _log =
-		LogFactory.getLog(JournalArticleContentUpgradeColumnImpl.class);
+		LogFactoryUtil.getLog(JournalArticleContentUpgradeColumnImpl.class);
 
 	private UpgradeColumn _companyIdColumn;
 	private UpgradeColumn _groupIdColumn;

@@ -30,6 +30,8 @@ import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
@@ -42,9 +44,6 @@ import com.liferay.portlet.polls.NoSuchVoteException;
 import com.liferay.portlet.polls.model.PollsVote;
 import com.liferay.portlet.polls.model.impl.PollsVoteImpl;
 import com.liferay.portlet.polls.model.impl.PollsVoteModelImpl;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -1241,5 +1240,5 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence pollsQuestionPersistence;
 	@BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsVotePersistence.impl")
 	protected com.liferay.portlet.polls.service.persistence.PollsVotePersistence pollsVotePersistence;
-	private static Log _log = LogFactory.getLog(PollsVotePersistenceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(PollsVotePersistenceImpl.class);
 }

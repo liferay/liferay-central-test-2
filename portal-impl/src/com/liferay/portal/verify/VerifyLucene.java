@@ -22,11 +22,10 @@
 
 package com.liferay.portal.verify;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="VerifyLucene.java.html"><b><i>View Source</i></b></a>
@@ -53,6 +52,6 @@ public class VerifyLucene extends VerifyProcess {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(VerifyLucene.class);
+	private static Log _log = LogFactoryUtil.getLog(VerifyLucene.class);
 
 }

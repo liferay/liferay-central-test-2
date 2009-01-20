@@ -26,6 +26,8 @@ import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ProgressTracker;
@@ -71,9 +73,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="MediaWikiImporter.java.html"><b><i>View Source</i></b></a>
@@ -682,7 +681,7 @@ public class MediaWikiImporter implements WikiImporter {
 
 	private static final String _WORK_IN_PROGRESS_TAG = "work in progress";
 
-	private static Log _log = LogFactory.getLog(MediaWikiImporter.class);
+	private static Log _log = LogFactoryUtil.getLog(MediaWikiImporter.class);
 
 	private static Pattern _categoriesPattern = Pattern.compile(
 		"\\[\\[[Cc]ategory:([^\\]]*)\\]\\][\\n]*");

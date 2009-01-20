@@ -23,6 +23,8 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -40,9 +42,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="FacebookServlet.java.html"><b><i>View Source</i></b></a>
@@ -113,6 +112,6 @@ public class FacebookServlet extends HttpServlet {
 		return fbml;
 	}
 
-	private static Log _log = LogFactory.getLog(FacebookServlet.class);
+	private static Log _log = LogFactoryUtil.getLog(FacebookServlet.class);
 
 }

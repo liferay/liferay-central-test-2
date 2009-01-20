@@ -22,14 +22,13 @@
 
 package com.liferay.portal.upgrade.v4_3_4;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.impl.ClassNameImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UpgradeClassName.java.html"><b><i>View Source</i></b></a>
@@ -62,6 +61,6 @@ public class UpgradeClassName extends UpgradeProcess {
 		upgradeTable.updateTable();
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeClassName.class);
+	private static Log _log = LogFactoryUtil.getLog(UpgradeClassName.class);
 
 }

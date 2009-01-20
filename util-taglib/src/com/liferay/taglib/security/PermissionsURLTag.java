@@ -22,6 +22,8 @@
 
 package com.liferay.taglib.security;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
@@ -32,9 +34,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.TagSupport;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PermissionsURLTag.java.html"><b><i>View Source</i></b></a>
@@ -140,7 +139,7 @@ public class PermissionsURLTag extends TagSupport {
 
 	private static final String _TAG_DO_END_METHOD = "doEndTag";
 
-	private static Log _log = LogFactory.getLog(PermissionsURLTag.class);
+	private static Log _log = LogFactoryUtil.getLog(PermissionsURLTag.class);
 
 	private String _redirect;
 	private String _modelResource;

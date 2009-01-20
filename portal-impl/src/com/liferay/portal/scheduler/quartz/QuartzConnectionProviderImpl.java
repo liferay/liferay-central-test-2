@@ -22,12 +22,11 @@
 
 package com.liferay.portal.scheduler.quartz;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
 
 import java.sql.Connection;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.quartz.utils.ConnectionProvider;
 
@@ -56,6 +55,7 @@ public class QuartzConnectionProviderImpl implements ConnectionProvider {
 	public void shutdown() {
 	}
 
-	private Log _log = LogFactory.getLog(QuartzConnectionProviderImpl.class);
+	private static Log _log =
+		LogFactoryUtil.getLog(QuartzConnectionProviderImpl.class);
 
 }

@@ -22,6 +22,8 @@
 
 package com.liferay.portal.search.lucene;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
@@ -36,8 +38,6 @@ import java.io.IOException;
 import java.util.List;
 
 import org.apache.commons.lang.time.StopWatch;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.index.IndexWriter;
 
 /**
@@ -162,7 +162,7 @@ public class LuceneIndexer implements Runnable {
 		_finished = true;
 	}
 
-	private static Log _log = LogFactory.getLog(LuceneIndexer.class);
+	private static Log _log = LogFactoryUtil.getLog(LuceneIndexer.class);
 
 	private long _companyId;
 	private boolean _finished;

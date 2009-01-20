@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.journal.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -30,9 +32,6 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="LocaleTransformerListener.java.html"><b><i>View Source</i></b></a>
@@ -139,7 +138,7 @@ public class LocaleTransformerListener extends TransformerListener {
 	}
 
 	private static Log _log =
-		LogFactory.getLog(LocaleTransformerListener.class);
+		LogFactoryUtil.getLog(LocaleTransformerListener.class);
 
 	private String _requestedLocale = StringPool.BLANK;
 

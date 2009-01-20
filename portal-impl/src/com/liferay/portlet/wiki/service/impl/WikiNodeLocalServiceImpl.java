@@ -25,6 +25,8 @@ package com.liferay.portlet.wiki.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.configuration.Filter;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
@@ -57,9 +59,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="WikiNodeLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -448,7 +447,8 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(WikiNodeLocalServiceImpl.class);
+	private static Log _log =
+		LogFactoryUtil.getLog(WikiNodeLocalServiceImpl.class);
 
 	private Map<String, WikiImporter> _wikiImporters =
 		new HashMap<String, WikiImporter>();

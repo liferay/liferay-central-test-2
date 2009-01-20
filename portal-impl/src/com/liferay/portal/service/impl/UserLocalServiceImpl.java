@@ -48,6 +48,8 @@ import com.liferay.portal.UserReminderQueryException;
 import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.UserSmsException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
@@ -131,9 +133,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.mail.internet.InternetAddress;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UserLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -3311,7 +3310,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(UserLocalServiceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(UserLocalServiceImpl.class);
 
 	private static Map<Long, User> _defaultUsers =
 		new ConcurrentHashMap<Long, User>();

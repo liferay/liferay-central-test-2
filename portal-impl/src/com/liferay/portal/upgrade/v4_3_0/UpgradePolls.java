@@ -22,6 +22,8 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -38,9 +40,6 @@ import com.liferay.portlet.polls.model.impl.PollsQuestionImpl;
 import com.liferay.portlet.polls.model.impl.PollsVoteImpl;
 
 import java.sql.Types;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UpgradePolls.java.html"><b><i>View Source</i></b></a>
@@ -121,6 +120,6 @@ public class UpgradePolls extends UpgradeProcess {
 		upgradeTable.updateTable();
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradePolls.class);
+	private static Log _log = LogFactoryUtil.getLog(UpgradePolls.class);
 
 }

@@ -23,6 +23,8 @@
 package com.liferay.portal.upgrade.v4_4_0.util;
 
 import com.liferay.portal.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.StagnantRowException;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
@@ -45,9 +47,6 @@ import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.WikiPageResource;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="TagsAssetGroupIdUpgradeColumnImpl.java.html"><b><i>View Source</i>
@@ -145,7 +144,7 @@ public class TagsAssetGroupIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	}
 
 	private static Log _log =
-		LogFactory.getLog(TagsAssetGroupIdUpgradeColumnImpl.class);
+		LogFactoryUtil.getLog(TagsAssetGroupIdUpgradeColumnImpl.class);
 
 	private UpgradeColumn _classNameIdColumn;
 	private UpgradeColumn _classPKColumn;

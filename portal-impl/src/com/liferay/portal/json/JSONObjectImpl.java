@@ -25,15 +25,14 @@ package com.liferay.portal.json;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.io.Writer;
 
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="JSONObjectImpl.java.html"><b><i>View Source</i></b></a>
@@ -276,7 +275,7 @@ public class JSONObjectImpl implements JSONObject {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(JSONObjectImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(JSONObjectImpl.class);
 
 	private org.json.JSONObject _jsonObj;
 

@@ -24,6 +24,8 @@ package com.liferay.portal.search;
 
 import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
@@ -52,9 +54,6 @@ import com.liferay.portal.util.PropsValues;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="SearchPermissionCheckerImpl.java.html"><b><i>View Source</i></b></a>
@@ -234,6 +233,6 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 	}
 
 	private static Log _log =
-		LogFactory.getLog(SearchPermissionCheckerImpl.class);
+		LogFactoryUtil.getLog(SearchPermissionCheckerImpl.class);
 
 }

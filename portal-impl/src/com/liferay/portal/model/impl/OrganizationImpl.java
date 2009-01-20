@@ -26,6 +26,8 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -51,9 +53,6 @@ import java.util.Locale;
 import java.util.Set;
 
 import javax.portlet.PortletPreferences;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="OrganizationImpl.java.html"><b><i>View Source</i></b></a>
@@ -316,6 +315,6 @@ public class OrganizationImpl
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(Organization.class);
+	private static Log _log = LogFactoryUtil.getLog(Organization.class);
 
 }

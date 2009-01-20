@@ -22,6 +22,8 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.Digester;
 
@@ -31,8 +33,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="DigesterImpl.java.html"><b><i>View Source</i></b></a>
@@ -74,6 +74,6 @@ public class DigesterImpl implements Digester {
 	private static final boolean _BASE_64 =
 		PropsValues.PASSWORDS_DIGEST_ENCODING.equals("base64");
 
-	private static Log _log = LogFactory.getLog(Digester.class);
+	private static Log _log = LogFactoryUtil.getLog(Digester.class);
 
 }

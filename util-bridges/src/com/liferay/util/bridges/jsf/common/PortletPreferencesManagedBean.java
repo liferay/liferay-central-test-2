@@ -22,6 +22,9 @@
 
 package com.liferay.util.bridges.jsf.common;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,9 +32,6 @@ import java.util.Map;
 import javax.faces.context.FacesContext;
 
 import javax.portlet.PortletPreferences;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PortletPreferencesManagedBean.java.html"><b><i>View Source</i></b>
@@ -155,7 +155,7 @@ public class PortletPreferencesManagedBean {
 	}
 
 	private static Log _log =
-		LogFactory.getLog(PortletPreferencesManagedBean.class);
+		LogFactoryUtil.getLog(PortletPreferencesManagedBean.class);
 
 	private PortletPreferences _portletPreferences;
 	private Map<String, String> _preferences;

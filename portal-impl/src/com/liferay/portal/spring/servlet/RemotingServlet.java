@@ -22,6 +22,8 @@
 
 package com.liferay.portal.spring.servlet;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
@@ -36,9 +38,6 @@ import com.liferay.portal.util.PortalInstances;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.springframework.web.servlet.DispatcherServlet;
 
@@ -113,6 +112,6 @@ public class RemotingServlet extends DispatcherServlet {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(RemotingServlet.class);
+	private static Log _log = LogFactoryUtil.getLog(RemotingServlet.class);
 
 }

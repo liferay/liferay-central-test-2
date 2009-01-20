@@ -23,6 +23,8 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
@@ -43,9 +45,6 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.PreferencesValidator;
 import javax.portlet.ReadOnlyException;
 import javax.portlet.ValidatorException;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PortletPreferencesImpl.java.html"><b><i>View Source</i></b></a>
@@ -382,7 +381,8 @@ public class PortletPreferencesImpl
 
 	private static final String _NULL_VALUE = "NULL_VALUE";
 
-	private static Log _log = LogFactory.getLog(PortletPreferencesImpl.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(PortletPreferencesImpl.class);
 
 	private long _companyId;
 	private long _ownerId;

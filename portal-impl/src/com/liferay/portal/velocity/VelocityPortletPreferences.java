@@ -22,14 +22,13 @@
 
 package com.liferay.portal.velocity;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
 
 import javax.portlet.ReadOnlyException;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="VelocityPortletPreferences.java.html"><b><i>View Source</i></b></a>
@@ -69,7 +68,7 @@ public class VelocityPortletPreferences {
 	}
 
 	private static Log _log =
-		LogFactory.getLog(VelocityPortletPreferences.class);
+		LogFactoryUtil.getLog(VelocityPortletPreferences.class);
 
 	private PortletPreferencesImpl _preferencesImpl;
 

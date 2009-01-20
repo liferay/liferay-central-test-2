@@ -26,6 +26,8 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.image.ImageProcessor;
 import com.liferay.portal.kernel.image.ImageProcessorUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.ByteArrayMaker;
@@ -65,9 +67,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.imageio.ImageIO;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="IGImageLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -823,6 +822,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		validate(bytes);
 	}
 
-	private static Log _log = LogFactory.getLog(IGImageLocalServiceImpl.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(IGImageLocalServiceImpl.class);
 
 }

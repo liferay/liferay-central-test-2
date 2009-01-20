@@ -24,14 +24,13 @@ package com.liferay.portal.security.pwd;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.UserPasswordException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.PwdGenerator;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="RegExpToolkit.java.html"><b><i>View Source</i></b></a>
@@ -69,7 +68,7 @@ public class RegExpToolkit extends BasicToolkit {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(RegExpToolkit.class);
+	private static Log _log = LogFactoryUtil.getLog(RegExpToolkit.class);
 
 	private String _pattern;
 	private String _charset;

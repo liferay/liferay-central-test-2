@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.journal.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 
@@ -31,9 +33,6 @@ import java.util.Map;
 
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="URIResolver.java.html"><b><i>View Source</i></b></a>
@@ -81,7 +80,7 @@ public class URIResolver implements javax.xml.transform.URIResolver {
 	private static final String _GET_TEMPLATE_PATH =
 		"/c/journal/get_template?template_id=";
 
-	private static Log _log = LogFactory.getLog(URIResolver.class);
+	private static Log _log = LogFactoryUtil.getLog(URIResolver.class);
 
 	private Map<String, String> _tokens;
 	private String _languageId;

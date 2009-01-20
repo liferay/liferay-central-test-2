@@ -22,6 +22,8 @@
 
 package com.liferay.taglib.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -41,8 +43,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.PageContext;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.taglib.tiles.ComponentConstants;
 import org.apache.struts.tiles.ComponentContext;
 
@@ -230,6 +230,6 @@ public class ThemeUtil {
 		return value;
 	}
 
-	private static Log _log = LogFactory.getLog(ThemeUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(ThemeUtil.class);
 
 }

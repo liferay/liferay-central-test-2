@@ -25,6 +25,8 @@ package com.liferay.portlet.journal.action;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -77,8 +79,6 @@ import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 import javax.portlet.ResourceURL;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
@@ -376,6 +376,6 @@ public class RSSAction extends PortletAction {
 		"<request><parameters><parameter><name>rss</name><value>true</value>" +
 			"</parameter></parameters></request>";
 
-	private static Log _log = LogFactory.getLog(RSSAction.class);
+	private static Log _log = LogFactoryUtil.getLog(RSSAction.class);
 
 }

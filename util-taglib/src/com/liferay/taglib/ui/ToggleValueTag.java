@@ -22,6 +22,8 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
@@ -30,9 +32,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.TagSupport;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ToggleValueTag.java.html"><b><i>View Source</i></b></a>
@@ -93,7 +92,7 @@ public class ToggleValueTag extends TagSupport {
 
 	private static final String _TAG_DO_END_METHOD = "doEndTag";
 
-	private static Log _log = LogFactory.getLog(ToggleValueTag.class);
+	private static Log _log = LogFactoryUtil.getLog(ToggleValueTag.class);
 
 	private String _id;
 

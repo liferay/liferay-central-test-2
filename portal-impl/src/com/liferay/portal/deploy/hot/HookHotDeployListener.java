@@ -34,6 +34,8 @@ import com.liferay.portal.kernel.events.InvokerSimpleAction;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.events.SimpleActionWrapper;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -78,9 +80,6 @@ import java.util.Properties;
 import java.util.Set;
 
 import javax.servlet.ServletContext;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="HookHotDeployListener.java.html"><b><i>View Source</i></b></a>
@@ -875,7 +874,8 @@ public class HookHotDeployListener
 		"LAYOUT_STATIC_PORTLETS_ALL"
 	};
 
-	private static Log _log = LogFactory.getLog(HookHotDeployListener.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(HookHotDeployListener.class);
 
 	private Map<String, AutoLoginsContainer> _autoLoginsContainerMap =
 		new HashMap<String, AutoLoginsContainer>();

@@ -23,6 +23,8 @@
 package com.liferay.portlet.enterpriseadmin.search;
 
 import com.liferay.portal.kernel.dao.search.SearchContainer;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -39,9 +41,6 @@ import java.util.Map;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UserGroupSearch.java.html"><b><i>View Source</i></b></a>
@@ -124,6 +123,6 @@ public class UserGroupSearch extends SearchContainer<UserGroup> {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(UserGroupSearch.class);
+	private static Log _log = LogFactoryUtil.getLog(UserGroupSearch.class);
 
 }

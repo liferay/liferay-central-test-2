@@ -23,6 +23,8 @@
 package com.liferay.portal.events;
 
 import com.liferay.portal.kernel.events.Action;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.struts.LastPath;
@@ -35,9 +37,6 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="DefaultLogoutPageAction.java.html"><b><i>View Source</i></b></a>
@@ -78,6 +77,7 @@ public class DefaultLogoutPageAction extends Action {
 		ses.setAttribute(WebKeys.LAST_PATH, lastPath);*/
 	}
 
-	private static Log _log = LogFactory.getLog(DefaultLogoutPageAction.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(DefaultLogoutPageAction.class);
 
 }

@@ -22,13 +22,13 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 import java.text.MessageFormat;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ResourceBundleUtil.java.html"><b><i>View Source</i></b></a>
@@ -83,6 +83,6 @@ public class ResourceBundleUtil {
 		return value;
 	}
 
-	private static Log _log = LogFactory.getLog(ResourceBundleUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(ResourceBundleUtil.class);
 
 }

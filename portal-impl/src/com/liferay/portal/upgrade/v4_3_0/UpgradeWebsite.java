@@ -22,6 +22,8 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.impl.WebsiteImpl;
@@ -43,9 +45,6 @@ import java.sql.Types;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UpgradeWebsite.java.html"><b><i>View Source</i></b></a>
@@ -108,6 +107,6 @@ public class UpgradeWebsite extends UpgradeProcess {
 		ValueMapperUtil.persist(upgradePKColumn.getValueMapper(), "website-id");
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeWebsite.class);
+	private static Log _log = LogFactoryUtil.getLog(UpgradeWebsite.class);
 
 }

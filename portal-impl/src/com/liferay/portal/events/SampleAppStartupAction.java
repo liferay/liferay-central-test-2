@@ -25,6 +25,8 @@ package com.liferay.portal.events;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
@@ -33,9 +35,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 
 import java.util.Calendar;
 import java.util.Locale;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="SampleAppStartupAction.java.html"><b><i>View Source</i></b></a>
@@ -129,6 +128,7 @@ public class SampleAppStartupAction extends SimpleAction {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(SampleAppStartupAction.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(SampleAppStartupAction.class);
 
 }

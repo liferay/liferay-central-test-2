@@ -22,12 +22,12 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 import javax.portlet.EventRequest;
 import javax.portlet.EventResponse;
 import javax.portlet.PortletRequest;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="EventResponseImpl.java.html"><b><i>View Source</i></b></a>
@@ -59,6 +59,6 @@ public class EventResponseImpl
 		super.recycle();
 	}
 
-	private static Log _log = LogFactory.getLog(EventResponseImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(EventResponseImpl.class);
 
 }

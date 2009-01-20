@@ -23,6 +23,8 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.ccpp.PortalProfileFactory;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletSession;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
@@ -76,9 +78,6 @@ import javax.portlet.WindowState;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PortletRequestImpl.java.html"><b><i>View Source</i></b></a>
@@ -770,7 +769,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 		_plid = 0;
 	}
 
-	private static Log _log = LogFactory.getLog(PortletRequestImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(PortletRequestImpl.class);
 
 	private HttpServletRequest _request;
 	private HttpServletRequest _originalRequest;

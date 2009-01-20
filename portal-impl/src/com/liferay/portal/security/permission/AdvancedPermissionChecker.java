@@ -23,6 +23,8 @@
 package com.liferay.portal.security.permission;
 
 import com.liferay.portal.NoSuchResourceException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
@@ -53,8 +55,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.time.StopWatch;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="AdvancedPermissionChecker.java.html"><b><i>View Source</i></b></a>
@@ -683,6 +683,6 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 	protected Map<Long, Boolean> companyAdmins = new HashMap<Long, Boolean>();
 
 	private static Log _log =
-		LogFactory.getLog(AdvancedPermissionChecker.class);
+		LogFactoryUtil.getLog(AdvancedPermissionChecker.class);
 
 }

@@ -23,6 +23,8 @@
 package com.liferay.portal.security.auth;
 
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -44,9 +46,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="OpenSSOAutoLogin.java.html"><b><i>View Source</i></b></a>
@@ -176,6 +175,6 @@ public class OpenSSOAutoLogin implements AutoLogin {
 			roleIds, userGroupIds, sendEmail, serviceContext);
 	}
 
-	private static Log _log = LogFactory.getLog(OpenSSOAutoLogin.class);
+	private static Log _log = LogFactoryUtil.getLog(OpenSSOAutoLogin.class);
 
 }

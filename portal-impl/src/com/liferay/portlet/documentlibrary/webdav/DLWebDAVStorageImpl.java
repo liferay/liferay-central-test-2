@@ -28,6 +28,8 @@ import com.liferay.lock.InvalidLockException;
 import com.liferay.lock.NoSuchLockException;
 import com.liferay.lock.model.Lock;
 import com.liferay.portal.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -60,9 +62,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="DLWebDAVStorageImpl.java.html"><b><i>View Source</i></b></a>
@@ -855,6 +854,6 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		return resource;
 	}
 
-	private static Log _log = LogFactory.getLog(DLWebDAVStorageImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(DLWebDAVStorageImpl.class);
 
 }

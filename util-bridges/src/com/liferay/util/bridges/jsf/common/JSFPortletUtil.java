@@ -22,6 +22,8 @@
 
 package com.liferay.util.bridges.jsf.common;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.lang.reflect.Method;
@@ -36,9 +38,6 @@ import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="JSFPortletUtil.java.html"><b><i>View Source</i></b></a>
@@ -158,6 +157,6 @@ public class JSFPortletUtil {
 		return value;
 	}
 
-	private static Log _log = LogFactory.getLog(JSFPortletUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(JSFPortletUtil.class);
 
 }

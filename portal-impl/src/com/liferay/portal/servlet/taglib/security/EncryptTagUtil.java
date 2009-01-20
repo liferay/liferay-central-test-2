@@ -22,6 +22,8 @@
 
 package com.liferay.portal.servlet.taglib.security;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
@@ -37,9 +39,6 @@ import java.util.StringTokenizer;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="EncryptTagUtil.java.html"><b><i>View Source</i></b></a>
@@ -158,6 +157,6 @@ public class EncryptTagUtil {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(EncryptTagUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(EncryptTagUtil.class);
 
 }

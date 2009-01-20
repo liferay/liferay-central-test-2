@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.blogs.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
@@ -33,9 +35,6 @@ import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="TrackbackVerifierUtil.java.html"><b><i>View Source</i></b></a>
@@ -122,7 +121,8 @@ public class TrackbackVerifierUtil {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(TrackbackVerifierUtil.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(TrackbackVerifierUtil.class);
 
 	private static List<Tuple> _trackbacks =
 		Collections.synchronizedList(new ArrayList<Tuple>());

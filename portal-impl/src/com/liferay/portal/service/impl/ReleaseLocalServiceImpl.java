@@ -26,6 +26,8 @@ import com.liferay.portal.NoSuchReleaseException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.model.Release;
@@ -40,9 +42,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import java.util.Date;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ReleaseLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -166,6 +165,7 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 	private static final String _GET_BUILD_NUMBER =
 		"select buildNumber from Release_";
 
-	private static Log _log = LogFactory.getLog(ReleaseLocalServiceImpl.class);
+	private static Log _log =
+		LogFactoryUtil.getLog(ReleaseLocalServiceImpl.class);
 
 }

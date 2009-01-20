@@ -22,12 +22,13 @@
 
 package com.liferay.util.poi;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 import java.io.InputStream;
 
 import java.util.Iterator;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -100,7 +101,7 @@ public class XLSTextStripper {
 		return  _text;
 	}
 
-	private static Log _log = LogFactory.getLog(XLSTextStripper.class);
+	private static Log _log = LogFactoryUtil.getLog(XLSTextStripper.class);
 
 	private String _text;
 

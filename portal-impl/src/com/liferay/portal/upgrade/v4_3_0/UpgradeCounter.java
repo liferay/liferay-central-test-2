@@ -24,6 +24,8 @@ package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceCode;
@@ -36,9 +38,6 @@ import com.liferay.portal.upgrade.util.UpgradeTable;
 import java.sql.Types;
 
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UpgradeCounter.java.html"><b><i>View Source</i></b></a>
@@ -98,6 +97,6 @@ public class UpgradeCounter extends UpgradeProcess {
 			"currentId LONG" +
 		")";
 
-	private static Log _log = LogFactory.getLog(UpgradeCounter.class);
+	private static Log _log = LogFactoryUtil.getLog(UpgradeCounter.class);
 
 }

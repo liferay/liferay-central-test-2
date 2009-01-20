@@ -26,6 +26,8 @@ import com.liferay.documentlibrary.DuplicateDirectoryException;
 import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -43,9 +45,6 @@ import com.liferay.portlet.messageboards.service.base.MBThreadLocalServiceBaseIm
 import com.liferay.portlet.messageboards.util.Indexer;
 
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="MBThreadLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -527,6 +526,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		return messagesMoved;
 	}
 
-	private static Log _log = LogFactory.getLog(MBThreadLocalServiceImpl.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(MBThreadLocalServiceImpl.class);
 
 }

@@ -23,6 +23,8 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.kernel.job.JobSchedulerUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ServerDetector;
@@ -40,9 +42,6 @@ import java.util.List;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="LuceneServlet.java.html"><b><i>View Source</i></b></a>
@@ -139,7 +138,7 @@ public class LuceneServlet extends HttpServlet {
 
 	private static final int THREAD_TIMEOUT = 60000;
 
-	private static Log _log = LogFactory.getLog(LuceneServlet.class);
+	private static Log _log = LogFactoryUtil.getLog(LuceneServlet.class);
 
 	private List<ObjectValuePair<LuceneIndexer, Thread>> _indexers =
 		new ArrayList<ObjectValuePair<LuceneIndexer, Thread>>();

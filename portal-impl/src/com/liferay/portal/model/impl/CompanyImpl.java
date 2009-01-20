@@ -23,6 +23,8 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -39,9 +41,6 @@ import java.security.Key;
 
 import java.util.Locale;
 import java.util.TimeZone;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="CompanyImpl.java.html"><b><i>View Source</i></b></a>
@@ -229,7 +228,7 @@ public class CompanyImpl extends CompanyModelImpl implements Company {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(CompanyImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(CompanyImpl.class);
 
 	private Key _keyObj = null;
 

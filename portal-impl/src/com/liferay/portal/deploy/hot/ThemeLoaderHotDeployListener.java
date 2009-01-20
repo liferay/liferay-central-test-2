@@ -24,14 +24,13 @@ package com.liferay.portal.deploy.hot;
 
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.theme.ThemeLoaderFactory;
 import com.liferay.portal.velocity.VelocityContextPool;
 
 import javax.servlet.ServletContext;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ThemeLoaderHotDeployListener.java.html"><b><i>View Source</i></b>
@@ -116,6 +115,6 @@ public class ThemeLoaderHotDeployListener extends BaseHotDeployListener {
 	}
 
 	private static Log _log =
-		LogFactory.getLog(ThemeLoaderHotDeployListener.class);
+		LogFactoryUtil.getLog(ThemeLoaderHotDeployListener.class);
 
 }

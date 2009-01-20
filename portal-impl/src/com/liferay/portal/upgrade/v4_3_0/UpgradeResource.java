@@ -22,6 +22,8 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
@@ -67,9 +69,6 @@ import java.sql.Types;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UpgradeResource.java.html"><b><i>View Source</i></b></a>
@@ -341,6 +340,6 @@ public class UpgradeResource extends UpgradeProcess {
 		"alter table Resource_ drop column scope"
 	};
 
-	private static Log _log = LogFactory.getLog(UpgradeResource.class);
+	private static Log _log = LogFactoryUtil.getLog(UpgradeResource.class);
 
 }

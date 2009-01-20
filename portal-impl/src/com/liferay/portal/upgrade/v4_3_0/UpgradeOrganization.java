@@ -22,6 +22,8 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.impl.OrgGroupPermissionImpl;
 import com.liferay.portal.model.impl.OrgLaborImpl;
 import com.liferay.portal.model.impl.OrganizationImpl;
@@ -36,9 +38,6 @@ import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.ValueMapperUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UpgradeOrganization.java.html"><b><i>View Source</i></b></a>
@@ -118,6 +117,6 @@ public class UpgradeOrganization extends UpgradeProcess {
 			upgradePKColumn.getValueMapper(), "org-labor-id");
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeOrganization.class);
+	private static Log _log = LogFactoryUtil.getLog(UpgradeOrganization.class);
 
 }

@@ -22,6 +22,8 @@
 
 package com.liferay.portal.velocity;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.theme.ThemeLoader;
 import com.liferay.portal.theme.ThemeLoaderFactory;
 
@@ -29,8 +31,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.velocity.exception.ResourceNotFoundException;
 
 /**
@@ -92,6 +92,6 @@ public class ThemeLoaderVelocityResourceListener
 	}
 
 	private static Log _log =
-		LogFactory.getLog(ThemeLoaderVelocityResourceListener.class);
+		LogFactoryUtil.getLog(ThemeLoaderVelocityResourceListener.class);
 
 }

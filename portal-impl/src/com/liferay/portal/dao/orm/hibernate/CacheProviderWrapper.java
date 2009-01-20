@@ -22,10 +22,10 @@
 
 package com.liferay.portal.dao.orm.hibernate;
 
-import java.util.Properties;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.util.Properties;
 
 import org.hibernate.cache.Cache;
 import org.hibernate.cache.CacheException;
@@ -76,7 +76,7 @@ public class CacheProviderWrapper implements CacheProvider {
 		_cacheProvider.stop();
 	}
 
-	private static Log _log = LogFactory.getLog(CacheProviderWrapper.class);
+	private static Log _log = LogFactoryUtil.getLog(CacheProviderWrapper.class);
 
 	private CacheProvider _cacheProvider;
 

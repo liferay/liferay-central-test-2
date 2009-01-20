@@ -23,13 +23,12 @@
 package com.liferay.portlet.bookmarks.model.impl;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="BookmarksEntryImpl.java.html"><b><i>View Source</i></b></a>
@@ -66,7 +65,7 @@ public class BookmarksEntryImpl
 		return folder;
 	}
 
-	private static Log _log = LogFactory.getLog(BookmarksEntryImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(BookmarksEntryImpl.class);
 
 	private String _userUuid;
 

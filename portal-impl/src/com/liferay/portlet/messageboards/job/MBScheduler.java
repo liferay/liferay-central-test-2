@@ -25,10 +25,9 @@ package com.liferay.portlet.messageboards.job;
 import com.liferay.portal.kernel.job.IntervalJob;
 import com.liferay.portal.kernel.job.JobSchedulerUtil;
 import com.liferay.portal.kernel.job.Scheduler;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.PropsValues;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="MBScheduler.java.html"><b><i>View Source</i></b></a>
@@ -57,6 +56,6 @@ public class MBScheduler implements Scheduler {
 
 	private IntervalJob _expireBanJob = new ExpireBanJob();
 
-	private static Log _log = LogFactory.getLog(Scheduler.class);
+	private static Log _log = LogFactoryUtil.getLog(Scheduler.class);
 
 }

@@ -25,6 +25,8 @@ package com.liferay.portlet.journal.service.impl;
 import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
@@ -104,9 +106,6 @@ import java.util.Set;
 import javax.mail.internet.InternetAddress;
 
 import javax.portlet.PortletPreferences;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="JournalArticleLocalServiceImpl.java.html"><b><i>View Source</i></b>
@@ -2616,6 +2615,6 @@ public class JournalArticleLocalServiceImpl
 		PropsKeys.JOURNAL_ARTICLE_TOKEN_PAGE_BREAK);
 
 	private static Log _log =
-		LogFactory.getLog(JournalArticleLocalServiceImpl.class);
+		LogFactoryUtil.getLog(JournalArticleLocalServiceImpl.class);
 
 }

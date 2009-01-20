@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.journal.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -33,9 +35,6 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
 import java.util.Map;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ContentTransformerListener.java.html"><b><i>View Source</i></b></a>
@@ -174,6 +173,6 @@ public class ContentTransformerListener extends TransformerListener {
 	}
 
 	private static Log _log =
-		LogFactory.getLog(ContentTransformerListener.class);
+		LogFactoryUtil.getLog(ContentTransformerListener.class);
 
 }

@@ -41,6 +41,8 @@
 
 package com.liferay.portal.portletcontainer;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portlet.PortletURLImpl;
 
 import com.sun.portal.container.ChannelURLType;
@@ -52,9 +54,6 @@ import javax.portlet.WindowState;
 import javax.portlet.WindowStateException;
 
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="LiferayPortletURLImpl.java.html"><b><i>View Source</i></b></a>
@@ -132,6 +131,7 @@ public class LiferayPortletURLImpl extends PortletURLImpl {
 		return lifecycle;
 	}
 
-	private static Log _log = LogFactory.getLog(LiferayPortletURLImpl.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(LiferayPortletURLImpl.class);
 
 }

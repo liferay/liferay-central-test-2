@@ -23,14 +23,13 @@
 package com.liferay.portlet.enterpriseadmin.search;
 
 import com.liferay.portal.kernel.dao.search.RowChecker;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 
 import javax.portlet.RenderResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="OrganizationGroupChecker.java.html"><b><i>View Source</i></b></a>
@@ -62,7 +61,8 @@ public class OrganizationGroupChecker extends RowChecker {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(OrganizationGroupChecker.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(OrganizationGroupChecker.class);
 
 	private Group _group;
 

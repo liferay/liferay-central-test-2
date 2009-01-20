@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.portletconfiguration.action;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -49,8 +51,6 @@ import javax.portlet.RenderResponse;
 
 import javax.servlet.ServletContext;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -195,6 +195,7 @@ public class EditConfigurationAction extends PortletAction {
 		return title;
 	}
 
-	private static Log _log = LogFactory.getLog(EditConfigurationAction.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(EditConfigurationAction.class);
 
 }

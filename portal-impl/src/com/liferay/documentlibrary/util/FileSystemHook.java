@@ -28,6 +28,8 @@ import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
@@ -45,9 +47,6 @@ import java.io.InputStream;
 
 import java.util.Arrays;
 import java.util.Date;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="FileSystemHook.java.html"><b><i>View Source</i></b></a>
@@ -400,7 +399,7 @@ public class FileSystemHook extends BaseHook {
 	private static final String _ROOT_DIR = PropsUtil.get(
 		PropsKeys.DL_HOOK_FILE_SYSTEM_ROOT_DIR);
 
-	private static Log _log = LogFactory.getLog(FileSystemHook.class);
+	private static Log _log = LogFactoryUtil.getLog(FileSystemHook.class);
 
 	private File _rootDir;
 

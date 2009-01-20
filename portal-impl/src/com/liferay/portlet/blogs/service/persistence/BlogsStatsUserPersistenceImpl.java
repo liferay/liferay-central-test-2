@@ -30,6 +30,8 @@ import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
@@ -42,9 +44,6 @@ import com.liferay.portlet.blogs.NoSuchStatsUserException;
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
 import com.liferay.portlet.blogs.model.impl.BlogsStatsUserImpl;
 import com.liferay.portlet.blogs.model.impl.BlogsStatsUserModelImpl;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -1993,5 +1992,5 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence blogsStatsUserPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence.impl")
 	protected com.liferay.portal.service.persistence.GroupPersistence groupPersistence;
-	private static Log _log = LogFactory.getLog(BlogsStatsUserPersistenceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(BlogsStatsUserPersistenceImpl.class);
 }

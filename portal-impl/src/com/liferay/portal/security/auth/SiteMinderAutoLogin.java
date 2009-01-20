@@ -23,6 +23,8 @@
 package com.liferay.portal.security.auth;
 
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
@@ -34,9 +36,6 @@ import com.liferay.portal.util.PropsValues;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="SiteMinderAutoLogin.java.html"><b><i>View Source</i></b></a>
@@ -100,6 +99,6 @@ public class SiteMinderAutoLogin extends CASAutoLogin {
 		return credentials;
 	}
 
-	private static Log _log = LogFactory.getLog(SiteMinderAutoLogin.class);
+	private static Log _log = LogFactoryUtil.getLog(SiteMinderAutoLogin.class);
 
 }

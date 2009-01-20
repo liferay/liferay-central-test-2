@@ -22,6 +22,8 @@
 
 package com.liferay.portal.struts;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
@@ -61,8 +63,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.Globals;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionErrors;
@@ -570,6 +570,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 	private static final String _PATH_PORTAL_PORTLET_INACTIVE =
 		"/portal/portlet_inactive";
 
-	private static Log _log = LogFactory.getLog(PortletRequestProcessor.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(PortletRequestProcessor.class);
 
 }

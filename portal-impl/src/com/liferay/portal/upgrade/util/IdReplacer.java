@@ -22,12 +22,11 @@
 
 package com.liferay.portal.upgrade.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.upgrade.StagnantRowException;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="IdReplacer.java.html"><b><i>View Source</i></b></a>
@@ -164,6 +163,6 @@ public class IdReplacer {
 		return pos;
 	}
 
-	private static Log _log = LogFactory.getLog(IdReplacer.class);
+	private static Log _log = LogFactoryUtil.getLog(IdReplacer.class);
 
 }

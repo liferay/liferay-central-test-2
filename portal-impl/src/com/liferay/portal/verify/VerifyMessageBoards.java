@@ -22,13 +22,12 @@
 
 package com.liferay.portal.verify;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="VerifyMessageBoards.java.html"><b><i>View Source</i></b></a>
@@ -78,6 +77,6 @@ public class VerifyMessageBoards extends VerifyProcess {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(VerifyMessageBoards.class);
+	private static Log _log = LogFactoryUtil.getLog(VerifyMessageBoards.class);
 
 }

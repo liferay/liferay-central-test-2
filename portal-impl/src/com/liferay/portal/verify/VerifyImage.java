@@ -25,6 +25,8 @@ package com.liferay.portal.verify;
 import com.liferay.portal.NoSuchCompanyException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.ImageLocalServiceUtil;
@@ -44,9 +46,6 @@ import com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException;
 import com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServiceUtil;
 
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="VerifyImage.java.html"><b><i>View Source</i></b></a>
@@ -218,6 +217,6 @@ public class VerifyImage extends VerifyProcess {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(VerifyImage.class);
+	private static Log _log = LogFactoryUtil.getLog(VerifyImage.class);
 
 }

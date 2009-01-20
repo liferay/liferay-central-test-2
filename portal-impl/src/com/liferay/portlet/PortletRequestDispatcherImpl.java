@@ -22,6 +22,8 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -54,8 +56,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.Globals;
 
 /**
@@ -315,7 +315,7 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 	}
 
 	private static Log _log =
-		LogFactory.getLog(PortletRequestDispatcherImpl.class);
+		LogFactoryUtil.getLog(PortletRequestDispatcherImpl.class);
 
 	private RequestDispatcher _requestDispatcher;
 	private boolean _named;

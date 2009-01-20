@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.words.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Randomizer;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -44,9 +46,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="WordsUtil.java.html"><b><i>View Source</i></b></a>
@@ -164,7 +163,7 @@ public class WordsUtil {
 		return validWords.toArray(new String[validWords.size()]);
 	}
 
-	private static Log _log = LogFactory.getLog(WordsUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(WordsUtil.class);
 
 	private static WordsUtil _instance = new WordsUtil();
 

@@ -23,6 +23,8 @@
 package com.liferay.portlet.messageboards.util;
 
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
@@ -45,9 +47,6 @@ import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import java.util.Date;
 
 import javax.portlet.PortletURL;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
@@ -222,6 +221,6 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		MBMessage.class.getName()
 	};
 
-	private static Log _log = LogFactory.getLog(Indexer.class);
+	private static Log _log = LogFactoryUtil.getLog(Indexer.class);
 
 }

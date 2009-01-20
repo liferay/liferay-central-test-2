@@ -23,11 +23,10 @@
 package com.liferay.mail.util;
 
 import com.liferay.mail.model.Filter;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="DummyHook.java.html"><b><i>View Source</i></b></a>
@@ -93,6 +92,6 @@ public class DummyHook implements Hook {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(DummyHook.class);
+	private static Log _log = LogFactoryUtil.getLog(DummyHook.class);
 
 }

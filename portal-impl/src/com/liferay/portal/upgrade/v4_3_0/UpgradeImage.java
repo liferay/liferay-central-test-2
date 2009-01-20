@@ -22,6 +22,8 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
@@ -39,9 +41,6 @@ import com.liferay.portal.upgrade.v4_3_0.util.ImageWidthUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.WebIdUtil;
 
 import java.sql.Types;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UpgradeImage.java.html"><b><i>View Source</i></b></a>
@@ -114,6 +113,6 @@ public class UpgradeImage extends UpgradeProcess {
 		AvailableMappersUtil.setImageIdMapper(imageIdMapper);
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeImage.class);
+	private static Log _log = LogFactoryUtil.getLog(UpgradeImage.class);
 
 }

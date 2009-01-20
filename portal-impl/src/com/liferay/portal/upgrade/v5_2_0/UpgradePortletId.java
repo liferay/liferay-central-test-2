@@ -22,8 +22,8 @@
 
 package com.liferay.portal.upgrade.v5_2_0;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 /**
  * <a href="UpgradePortletId.java.html"><b><i>View Source</i></b></a>
@@ -59,6 +59,6 @@ public class UpgradePortletId
 		};
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradePortletId.class);
+	private static Log _log = LogFactoryUtil.getLog(UpgradePortletId.class);
 
 }

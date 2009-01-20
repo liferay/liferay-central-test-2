@@ -23,6 +23,8 @@
 package com.liferay.portlet.documentlibrary.model.impl;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
@@ -38,9 +40,6 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="DLFileEntryImpl.java.html"><b><i>View Source</i></b></a>
@@ -171,7 +170,7 @@ public class DLFileEntryImpl
 		return sb.toString();
 	}
 
-	private static Log _log = LogFactory.getLog(DLFileEntryImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(DLFileEntryImpl.class);
 
 	private Properties _extraSettingsProperties = null;
 	private String _userUuid;

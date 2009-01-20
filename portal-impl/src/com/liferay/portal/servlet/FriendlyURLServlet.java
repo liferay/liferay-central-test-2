@@ -25,6 +25,8 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -49,9 +51,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="FriendlyURLServlet.java.html"><b><i>View Source</i></b></a>
@@ -255,7 +254,7 @@ public class FriendlyURLServlet extends HttpServlet {
 			group.getGroupId(), _private, mainPath, friendlyURL, params);
 	}
 
-	private static Log _log = LogFactory.getLog(FriendlyURLServlet.class);
+	private static Log _log = LogFactoryUtil.getLog(FriendlyURLServlet.class);
 
 	private boolean _private;
 	private boolean _user;

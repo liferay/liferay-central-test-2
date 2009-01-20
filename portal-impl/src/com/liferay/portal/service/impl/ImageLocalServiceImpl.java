@@ -26,6 +26,8 @@ import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.image.ImageBag;
 import com.liferay.portal.kernel.image.ImageProcessorUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.model.Image;
@@ -44,9 +46,6 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ImageLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -335,7 +334,8 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(ImageLocalServiceImpl.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(ImageLocalServiceImpl.class);
 
 	private Image _defaultSpacer;
 	private Image _defaultCompanyLogo;

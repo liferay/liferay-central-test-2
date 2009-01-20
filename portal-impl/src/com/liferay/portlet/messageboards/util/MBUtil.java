@@ -23,6 +23,8 @@
 package com.liferay.portlet.messageboards.util;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
@@ -71,9 +73,6 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import javax.servlet.jsp.PageContext;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="MBUtil.java.html"><b><i>View Source</i></b></a>
@@ -802,6 +801,6 @@ public class MBUtil {
 		return false;
 	}
 
-	private static Log _log = LogFactory.getLog(MBUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(MBUtil.class);
 
 }

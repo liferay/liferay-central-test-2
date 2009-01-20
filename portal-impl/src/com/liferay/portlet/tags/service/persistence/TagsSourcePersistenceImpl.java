@@ -29,6 +29,8 @@ import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -40,9 +42,6 @@ import com.liferay.portlet.tags.NoSuchSourceException;
 import com.liferay.portlet.tags.model.TagsSource;
 import com.liferay.portlet.tags.model.impl.TagsSourceImpl;
 import com.liferay.portlet.tags.model.impl.TagsSourceModelImpl;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -464,5 +463,5 @@ public class TagsSourcePersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portlet.tags.service.persistence.TagsSourcePersistence tagsSourcePersistence;
 	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsVocabularyPersistence.impl")
 	protected com.liferay.portlet.tags.service.persistence.TagsVocabularyPersistence tagsVocabularyPersistence;
-	private static Log _log = LogFactory.getLog(TagsSourcePersistenceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(TagsSourcePersistenceImpl.class);
 }

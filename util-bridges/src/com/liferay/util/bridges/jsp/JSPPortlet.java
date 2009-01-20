@@ -22,6 +22,8 @@
 
 package com.liferay.util.bridges.jsp;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortlet;
 import com.liferay.portal.kernel.util.GetterUtil;
 
@@ -35,9 +37,6 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="JSPPortlet.java.html"><b><i>View Source</i></b></a>
@@ -212,6 +211,6 @@ public class JSPPortlet extends LiferayPortlet {
 	protected String viewJSP;
 	protected boolean clearRequestParameters;
 
-	private static Log _log = LogFactory.getLog(JSPPortlet.class);
+	private static Log _log = LogFactoryUtil.getLog(JSPPortlet.class);
 
 }

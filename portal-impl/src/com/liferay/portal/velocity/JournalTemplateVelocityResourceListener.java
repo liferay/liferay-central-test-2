@@ -24,6 +24,8 @@ package com.liferay.portal.velocity;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.journal.model.JournalTemplate;
@@ -32,8 +34,6 @@ import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.velocity.exception.ResourceNotFoundException;
 
 /**
@@ -89,6 +89,6 @@ public class JournalTemplateVelocityResourceListener
 	}
 
 	private static Log _log =
-		LogFactory.getLog(JournalTemplateVelocityResourceListener.class);
+		LogFactoryUtil.getLog(JournalTemplateVelocityResourceListener.class);
 
 }

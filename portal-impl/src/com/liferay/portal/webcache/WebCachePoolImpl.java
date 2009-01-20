@@ -24,13 +24,12 @@ package com.liferay.portal.webcache;
 
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.cache.SingleVMPool;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portal.kernel.webcache.WebCachePool;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="WebCachePoolImpl.java.html"><b><i>View Source</i></b></a>
@@ -86,7 +85,7 @@ public class WebCachePoolImpl implements WebCachePool {
 		_singleVMPool = singleVMPool;
 	}
 
-	private static Log _log = LogFactory.getLog(WebCachePoolImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(WebCachePoolImpl.class);
 
 	private SingleVMPool _singleVMPool;
 	private PortalCache _cache;

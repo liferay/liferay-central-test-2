@@ -23,15 +23,14 @@
 package com.liferay.portlet.enterpriseadmin.search;
 
 import com.liferay.portal.kernel.dao.search.RowChecker;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.service.PermissionLocalServiceUtil;
 
 import javax.portlet.RenderResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="GroupPermissionChecker.java.html"><b><i>View Source</i></b></a>
@@ -68,7 +67,8 @@ public class GroupPermissionChecker extends RowChecker {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(GroupPermissionChecker.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(GroupPermissionChecker.class);
 
 	private Role _role;
 	private String _resourceName;

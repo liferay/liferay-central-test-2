@@ -30,6 +30,8 @@ import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.sender.MessageSender;
@@ -56,9 +58,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.naming.NamingException;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="StartupAction.java.html"><b><i>View Source</i></b></a>
@@ -298,6 +297,6 @@ public class StartupAction extends SimpleAction {
 	private static final String _DELETE_TEMP_IMAGES_2 =
 		"DELETE FROM JournalArticleImage where tempImage = TRUE";
 
-	private static Log _log = LogFactory.getLog(StartupAction.class);
+	private static Log _log = LogFactoryUtil.getLog(StartupAction.class);
 
 }

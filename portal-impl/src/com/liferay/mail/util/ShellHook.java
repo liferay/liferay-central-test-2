@@ -23,6 +23,8 @@
 package com.liferay.mail.util;
 
 import com.liferay.mail.model.Filter;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ProcessUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -30,9 +32,6 @@ import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ShellHook.java.html"><b><i>View Source</i></b></a>
@@ -157,6 +156,6 @@ public class ShellHook implements Hook {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(ShellHook.class);
+	private static Log _log = LogFactoryUtil.getLog(ShellHook.class);
 
 }

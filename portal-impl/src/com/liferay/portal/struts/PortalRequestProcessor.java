@@ -27,6 +27,8 @@ import com.liferay.portal.PortletActiveException;
 import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.RequiredRoleException;
 import com.liferay.portal.UserActiveException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -90,8 +92,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.PageContext;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.config.ForwardConfig;
 import org.apache.struts.tiles.TilesRequestProcessor;
@@ -872,7 +872,8 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 	private static String _PATH_PORTAL_UPDATE_TERMS_OF_USE =
 		"/portal/update_terms_of_use";
 
-	private static Log _log = LogFactory.getLog(PortalRequestProcessor.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(PortalRequestProcessor.class);
 
 	private Set<String> _lastPaths;
 	private Set<String> _publicPaths;

@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.enterpriseadmin.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.DocumentSummary;
@@ -43,9 +45,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.portlet.PortletURL;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UserIndexer.java.html"><b><i>View Source</i></b></a>
@@ -243,6 +242,6 @@ public class UserIndexer implements Indexer {
 	};
 
 	private static UserIndexerEnabled _enabled = new UserIndexerEnabled();
-	private static Log _log = LogFactory.getLog(UserIndexer.class);
+	private static Log _log = LogFactoryUtil.getLog(UserIndexer.class);
 
 }

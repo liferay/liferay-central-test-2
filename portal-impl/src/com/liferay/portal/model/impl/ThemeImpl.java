@@ -22,6 +22,8 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -42,9 +44,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ThemeImpl.java.html"><b><i>View Source</i></b></a>
@@ -429,7 +428,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 	private static final String _DEFAULT_WAP_THEME_ID =
 		PortalUtil.getJsSafePortletId(PropsValues.DEFAULT_WAP_THEME_ID);
 
-	private static Log _log = LogFactory.getLog(ThemeImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(ThemeImpl.class);
 
 	private String _themeId;
 	private ThemeCompanyLimit _themeCompanyLimit;

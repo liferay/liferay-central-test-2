@@ -22,6 +22,8 @@
 
 package com.liferay.portal.servlet.taglib.ui;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 
@@ -30,9 +32,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="InputPermissionsTagUtil.java.html"><b><i>View Source</i></b></a>
@@ -92,6 +91,7 @@ public class InputPermissionsTagUtil {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(InputPermissionsTagUtil.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(InputPermissionsTagUtil.class);
 
 }

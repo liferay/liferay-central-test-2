@@ -23,12 +23,11 @@
 package com.liferay.portal.liveusers.messaging;
 
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.liveusers.LiveUsers;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="LiveUsersMessageListener.java.html"><b><i>View Source</i></b></a>
@@ -80,6 +79,7 @@ public class LiveUsersMessageListener implements MessageListener {
 		LiveUsers.signOut(companyId, userId, sessionId);
 	}
 
-	private static Log _log = LogFactory.getLog(LiveUsersMessageListener.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(LiveUsersMessageListener.class);
 
 }

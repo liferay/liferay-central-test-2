@@ -23,6 +23,8 @@
 package com.liferay.portal.upgrade.v4_3_5;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.PortletConstants;
@@ -56,9 +58,6 @@ import java.sql.ResultSet;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UpgradePermission.java.html"><b><i>View Source</i></b></a>
@@ -515,6 +514,6 @@ public class UpgradePermission extends UpgradeProcess {
 	private static final String _GET_PLIDS =
 		"select plid from Layout where Layout.groupId != ?";
 
-	private static Log _log = LogFactory.getLog(UpgradePermission.class);
+	private static Log _log = LogFactoryUtil.getLog(UpgradePermission.class);
 
 }

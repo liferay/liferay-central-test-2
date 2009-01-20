@@ -22,12 +22,12 @@
 
 package com.liferay.portlet.journal.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="RegexTransformerListener.java.html"><b><i>View Source</i></b></a>
@@ -85,6 +85,7 @@ public class RegexTransformerListener extends TransformerListener {
 		return s;
 	}
 
-	private static Log _log = LogFactory.getLog(RegexTransformerListener.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(RegexTransformerListener.class);
 
 }

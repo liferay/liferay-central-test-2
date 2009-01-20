@@ -22,6 +22,8 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.servlet.ProtectedPrincipal;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -49,9 +51,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpSession;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PortletServletRequest.java.html"><b><i>View Source</i></b></a>
@@ -436,7 +435,8 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(PortletServletRequest.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(PortletServletRequest.class);
 
 	private HttpServletRequest _request;
 	private PortletRequestImpl _portletRequestImpl;

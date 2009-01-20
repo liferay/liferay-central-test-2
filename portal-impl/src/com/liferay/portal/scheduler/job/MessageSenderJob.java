@@ -24,13 +24,12 @@ package com.liferay.portal.scheduler.job;
 
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 
 import java.util.Date;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.quartz.Job;
 import org.quartz.JobDataMap;
@@ -73,6 +72,6 @@ public class MessageSenderJob implements Job {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(MessageSenderJob.class);
+	private static Log _log = LogFactoryUtil.getLog(MessageSenderJob.class);
 
 }

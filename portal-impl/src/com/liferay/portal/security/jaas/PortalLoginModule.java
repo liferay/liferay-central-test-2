@@ -22,6 +22,8 @@
 
 package com.liferay.portal.security.jaas;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsValues;
@@ -32,9 +34,6 @@ import javax.security.auth.Subject;
 import javax.security.auth.callback.CallbackHandler;
 import javax.security.auth.login.LoginException;
 import javax.security.auth.spi.LoginModule;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PortalLoginModule.java.html"><b><i>View Source</i></b></a>
@@ -116,7 +115,7 @@ public class PortalLoginModule implements LoginModule {
 		return _loginModule.logout();
 	}
 
- 	private static Log _log = LogFactory.getLog(PortalLoginModule.class);
+ 	private static Log _log = LogFactoryUtil.getLog(PortalLoginModule.class);
 
 	private LoginModule _loginModule;
 

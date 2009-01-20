@@ -22,6 +22,8 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -34,9 +36,6 @@ import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portlet.calendar.model.impl.CalEventImpl;
 
 import java.sql.Types;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UpgradeCalendar.java.html"><b><i>View Source</i></b></a>
@@ -85,6 +84,6 @@ public class UpgradeCalendar extends UpgradeProcess {
 		AvailableMappersUtil.setCalEventIdMapper(eventIdMapper);
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeCalendar.class);
+	private static Log _log = LogFactoryUtil.getLog(UpgradeCalendar.class);
 
 }

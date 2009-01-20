@@ -24,6 +24,8 @@ package com.liferay.portal.upgrade.v5_2_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.dao.jdbc.SmartResultSet;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Permission;
@@ -39,9 +41,6 @@ import com.liferay.portal.upgrade.UpgradeProcess;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UpgradePortletPermissions.java.html"><b><i>View Source</i></b></a>
@@ -247,7 +246,7 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(
+	private static Log _log = LogFactoryUtil.getLog(
 		UpgradePortletPermissions.class);
 
 }

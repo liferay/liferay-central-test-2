@@ -24,6 +24,8 @@ package com.liferay.portlet.journalcontent.util;
 
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -39,8 +41,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.lang.time.StopWatch;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="JournalContentUtil.java.html"><b><i>View Source</i></b></a>
@@ -304,6 +304,6 @@ public class JournalContentUtil {
 	protected static Map<String, Set<String>> groups =
 		new ConcurrentHashMap<String, Set<String>>();
 
-	private static Log _log = LogFactory.getLog(JournalContentUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(JournalContentUtil.class);
 
 }

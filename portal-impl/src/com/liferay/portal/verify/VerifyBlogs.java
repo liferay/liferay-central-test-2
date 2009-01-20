@@ -22,13 +22,12 @@
 
 package com.liferay.portal.verify;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="VerifyBlogs.java.html"><b><i>View Source</i></b></a>
@@ -78,6 +77,6 @@ public class VerifyBlogs extends VerifyProcess {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(VerifyBlogs.class);
+	private static Log _log = LogFactoryUtil.getLog(VerifyBlogs.class);
 
 }

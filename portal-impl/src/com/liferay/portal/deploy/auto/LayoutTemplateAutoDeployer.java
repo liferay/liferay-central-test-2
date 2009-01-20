@@ -24,6 +24,8 @@ package com.liferay.portal.deploy.auto;
 
 import com.liferay.portal.deploy.DeployUtil;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.tools.deploy.LayoutTemplateDeployer;
@@ -33,9 +35,6 @@ import com.liferay.portal.util.PropsValues;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="LayoutTemplateAutoDeployer.java.html"><b><i>View Source</i></b></a>
@@ -92,6 +91,6 @@ public class LayoutTemplateAutoDeployer
 	}
 
 	private static Log _log =
-		LogFactory.getLog(LayoutTemplateAutoDeployer.class);
+		LogFactoryUtil.getLog(LayoutTemplateAutoDeployer.class);
 
 }

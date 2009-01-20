@@ -23,11 +23,10 @@
 package com.liferay.portal.events;
 
 import com.liferay.portal.kernel.events.SessionAction;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import javax.servlet.http.HttpSession;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="SessionDestroyAction.java.html"><b><i>View Source</i></b></a>
@@ -43,6 +42,6 @@ public class SessionDestroyAction extends SessionAction {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(SessionDestroyAction.class);
+	private static Log _log = LogFactoryUtil.getLog(SessionDestroyAction.class);
 
 }

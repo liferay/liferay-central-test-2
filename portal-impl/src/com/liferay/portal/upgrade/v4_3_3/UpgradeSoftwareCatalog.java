@@ -22,6 +22,8 @@
 
 package com.liferay.portal.upgrade.v4_3_3;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -30,9 +32,6 @@ import com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl;
 import com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl;
 import com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryImpl;
 import com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UpgradeSoftwareCatalog.java.html"><b><i>View Source</i></b></a>
@@ -94,6 +93,7 @@ public class UpgradeSoftwareCatalog extends UpgradeProcess {
 		upgradeTable.updateTable();
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeSoftwareCatalog.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(UpgradeSoftwareCatalog.class);
 
 }

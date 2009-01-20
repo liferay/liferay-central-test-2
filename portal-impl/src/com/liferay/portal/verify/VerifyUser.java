@@ -22,15 +22,14 @@
 
 package com.liferay.portal.verify;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl;
 import com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalServiceUtil;
 
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="VerifyUser.java.html"><b><i>View Source</i></b></a>
@@ -76,6 +75,6 @@ public class VerifyUser extends VerifyProcess {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(VerifyUser.class);
+	private static Log _log = LogFactoryUtil.getLog(VerifyUser.class);
 
 }

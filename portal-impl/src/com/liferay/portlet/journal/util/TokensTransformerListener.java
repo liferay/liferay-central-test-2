@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.journal.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -31,9 +33,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="TokensTransformerListener.java.html"><b><i>View Source</i></b></a>
@@ -142,6 +141,6 @@ public class TokensTransformerListener extends TransformerListener {
 	}
 
 	private static Log _log =
-		LogFactory.getLog(TokensTransformerListener.class);
+		LogFactoryUtil.getLog(TokensTransformerListener.class);
 
 }

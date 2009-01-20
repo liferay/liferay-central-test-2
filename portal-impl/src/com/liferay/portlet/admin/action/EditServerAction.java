@@ -24,6 +24,8 @@ package com.liferay.portlet.admin.action;
 
 import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -54,8 +56,6 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
@@ -293,6 +293,6 @@ public class EditServerAction extends PortletAction {
 		preferences.store();
 	}
 
-	private static Log _log = LogFactory.getLog(EditServerAction.class);
+	private static Log _log = LogFactoryUtil.getLog(EditServerAction.class);
 
 }

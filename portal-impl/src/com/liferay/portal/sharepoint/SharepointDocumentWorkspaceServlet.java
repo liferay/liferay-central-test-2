@@ -22,6 +22,8 @@
 
 package com.liferay.portal.sharepoint;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -46,9 +48,6 @@ import java.util.List;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.aspectj.util.FileUtil;
 
@@ -308,6 +307,6 @@ public class SharepointDocumentWorkspaceServlet extends HttpServlet {
 		return doc.asXML();
 	}
 
-	private static Log _log = LogFactory.getLog(SharepointServlet.class);
+	private static Log _log = LogFactoryUtil.getLog(SharepointServlet.class);
 
 }

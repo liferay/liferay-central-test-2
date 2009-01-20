@@ -22,13 +22,12 @@
 
 package com.liferay.portal.pop;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.pop.MessageListenerException;
 
 import javax.mail.Message;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="MessageListenerWrapper.java.html"><b><i>View Source</i></b></a>
@@ -94,7 +93,8 @@ public class MessageListenerWrapper implements MessageListener {
 		return getId().equals(id);
 	}
 
-	private static Log _log = LogFactory.getLog(MessageListenerWrapper.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(MessageListenerWrapper.class);
 
 	private MessageListener _listener;
 

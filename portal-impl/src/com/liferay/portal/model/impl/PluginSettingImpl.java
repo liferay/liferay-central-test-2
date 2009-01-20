@@ -22,6 +22,8 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.PluginSetting;
@@ -29,9 +31,6 @@ import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PluginSettingImpl.java.html"><b><i>View Source</i></b></a>
@@ -150,7 +149,7 @@ public class PluginSettingImpl
 	/**
 	 * Log instance for this class.
 	 */
-	private static Log _log = LogFactory.getLog(PluginSettingImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(PluginSettingImpl.class);
 
 	/**
 	 * An array of required roles of the plugin.

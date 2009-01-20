@@ -24,6 +24,8 @@ package com.liferay.portlet.blogs.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
@@ -68,9 +70,6 @@ import java.util.Set;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="BlogsEntryLocalServiceImpl.java.html"><b><i>View Source</i></b>
@@ -943,6 +942,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	};
 
 	private static Log _log =
-		LogFactory.getLog(BlogsEntryLocalServiceImpl.class);
+		LogFactoryUtil.getLog(BlogsEntryLocalServiceImpl.class);
 
 }

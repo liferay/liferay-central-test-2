@@ -22,6 +22,8 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.FileComparator;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -52,8 +54,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.jackrabbit.extractor.MsExcelTextExtractor;
 import org.apache.jackrabbit.extractor.MsPowerPointTextExtractor;
 import org.apache.jackrabbit.extractor.MsWordTextExtractor;
@@ -763,7 +763,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 		write(file, getBytes(is));
 	}
 
-	private static Log _log = LogFactory.getLog(FileImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(FileImpl.class);
 
 	private static FileImpl _instance = new FileImpl();
 

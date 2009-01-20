@@ -24,6 +24,8 @@ package com.liferay.portal.spring.context;
 
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
 import com.liferay.portal.kernel.util.AggregateClassLoader;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -31,9 +33,6 @@ import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.util.PropsKeys;
 
 import java.io.FileNotFoundException;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.web.context.support.XmlWebApplicationContext;
@@ -112,6 +111,6 @@ public class PortletApplicationContext extends XmlWebApplicationContext {
 	}
 
 	private static Log _log =
-		LogFactory.getLog(PortletApplicationContext.class);
+		LogFactoryUtil.getLog(PortletApplicationContext.class);
 
 }

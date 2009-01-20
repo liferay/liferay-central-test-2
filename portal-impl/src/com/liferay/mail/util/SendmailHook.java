@@ -23,6 +23,8 @@
 package com.liferay.mail.util;
 
 import com.liferay.mail.model.Filter;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ProcessUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -34,9 +36,6 @@ import java.io.File;
 import java.io.FileReader;
 
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="SendmailHook.java.html"><b><i>View Source</i></b></a>
@@ -252,6 +251,6 @@ public class SendmailHook implements Hook {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(SendmailHook.class);
+	private static Log _log = LogFactoryUtil.getLog(SendmailHook.class);
 
 }

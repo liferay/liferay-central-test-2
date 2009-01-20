@@ -41,6 +41,8 @@
 
 package com.liferay.portal.tools.deploy;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 
 import java.io.File;
@@ -51,9 +53,6 @@ import javax.enterprise.deploy.spi.DeploymentManager;
 import javax.enterprise.deploy.spi.TargetModuleID;
 import javax.enterprise.deploy.spi.factories.DeploymentFactory;
 import javax.enterprise.deploy.spi.status.ProgressObject;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="DeploymentHandler.java.html"><b><i>View Source</i></b></a>
@@ -167,7 +166,7 @@ public class DeploymentHandler {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(DeploymentHandler.class);
+	private static Log _log = LogFactoryUtil.getLog(DeploymentHandler.class);
 
 	private DeploymentManager _deploymentManager;
 	private boolean _error;

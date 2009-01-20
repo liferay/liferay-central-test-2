@@ -25,6 +25,8 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
@@ -54,9 +56,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="SoftwareCatalogServlet.java.html"><b><i>View Source</i></b></a>
@@ -242,6 +241,7 @@ public class SoftwareCatalogServlet extends HttpServlet {
 		return version;
 	}
 
-	private static Log _log = LogFactory.getLog(SoftwareCatalogServlet.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(SoftwareCatalogServlet.class);
 
 }

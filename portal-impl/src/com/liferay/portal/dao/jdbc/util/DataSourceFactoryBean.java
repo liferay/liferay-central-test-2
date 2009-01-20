@@ -22,6 +22,8 @@
 
 package com.liferay.portal.dao.jdbc.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.SortedProperties;
 import com.liferay.portal.util.PropsUtil;
 
@@ -32,8 +34,6 @@ import javax.sql.DataSource;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.dbcp.BasicDataSource;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.springframework.beans.factory.config.AbstractFactoryBean;
 
@@ -81,7 +81,8 @@ public class DataSourceFactoryBean extends AbstractFactoryBean {
 		return dataSource;
 	}
 
-	private static Log _log = LogFactory.getLog(DataSourceFactoryBean.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(DataSourceFactoryBean.class);
 
 	private String _propertyPrefix;
 

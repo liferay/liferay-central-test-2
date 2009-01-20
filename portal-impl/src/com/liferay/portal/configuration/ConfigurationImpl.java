@@ -28,6 +28,8 @@ import com.germinus.easyconf.ComponentProperties;
 import com.germinus.easyconf.EasyConf;
 
 import com.liferay.portal.kernel.configuration.Filter;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.lang.reflect.Field;
@@ -47,8 +49,6 @@ import java.util.Set;
 import org.apache.commons.configuration.CompositeConfiguration;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.MapConfiguration;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ConfigurationImpl.java.html"><b><i>View Source</i></b></a>
@@ -328,7 +328,7 @@ public class ConfigurationImpl
 
 	private static final boolean _PRINT_DUPLICATE_CALLS_TO_GET = false;
 
-	private static Log _log = LogFactory.getLog(ConfigurationImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(ConfigurationImpl.class);
 
 	private ComponentConfiguration _componentConfiguration;
 	private Set<String> _keys = new HashSet<String>();

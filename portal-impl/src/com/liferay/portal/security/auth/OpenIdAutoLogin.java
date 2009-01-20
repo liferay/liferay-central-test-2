@@ -22,6 +22,8 @@
 
 package com.liferay.portal.security.auth;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.OpenIdUtil;
@@ -31,9 +33,6 @@ import com.liferay.portal.util.WebKeys;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="OpenIdAutoLogin.java.html"><b><i>View Source</i></b></a>
@@ -81,6 +80,6 @@ public class OpenIdAutoLogin implements AutoLogin {
 		return credentials;
 	}
 
-	private static Log _log = LogFactory.getLog(OpenIdAutoLogin.class);
+	private static Log _log = LogFactoryUtil.getLog(OpenIdAutoLogin.class);
 
 }

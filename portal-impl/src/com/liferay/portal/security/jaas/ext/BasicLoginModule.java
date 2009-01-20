@@ -22,6 +22,8 @@
 
 package com.liferay.portal.security.jaas.ext;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.jaas.PortalPrincipal;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -41,9 +43,6 @@ import javax.security.auth.callback.PasswordCallback;
 import javax.security.auth.callback.UnsupportedCallbackException;
 import javax.security.auth.login.LoginException;
 import javax.security.auth.spi.LoginModule;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="BasicLoginModule.java.html"><b><i>View Source</i></b></a>
@@ -168,7 +167,7 @@ public class BasicLoginModule implements LoginModule {
 		return null;
 	}
 
-	private static Log _log = LogFactory.getLog(BasicLoginModule.class);
+	private static Log _log = LogFactoryUtil.getLog(BasicLoginModule.class);
 
 	private Subject _subject;
 	private CallbackHandler _callbackHandler;

@@ -22,6 +22,8 @@
 
 package com.liferay.portal.upgrade.v4_3_0.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.PortletConstants;
@@ -33,9 +35,6 @@ import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.util.PortalUtil;
 
 import java.util.Map;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ResourcePrimKeyUpgradeColumnImpl.java.html"><b><i>View Source</i>
@@ -141,7 +140,7 @@ public class ResourcePrimKeyUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	}
 
 	private static Log _log =
-		LogFactory.getLog(ResourcePrimKeyUpgradeColumnImpl.class);
+		LogFactoryUtil.getLog(ResourcePrimKeyUpgradeColumnImpl.class);
 
 	private UpgradeColumn _nameColumn;
 	private ResourceCodeIdUpgradeColumnImpl _codeIdColumn;

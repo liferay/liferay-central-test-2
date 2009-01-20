@@ -22,6 +22,8 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -38,9 +40,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ModelHintsImpl.java.html"><b><i>View Source</i></b></a>
@@ -293,7 +292,7 @@ public class ModelHintsImpl implements ModelHints {
 
 	private static final String _HINTS_SUFFIX = "_HINTS";
 
-	private static Log _log = LogFactory.getLog(ModelHintsImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(ModelHintsImpl.class);
 
 	private Map<String, Map<String, String>> _hintCollections;
 	private Map<String, Map<String, String>> _defaultHints;

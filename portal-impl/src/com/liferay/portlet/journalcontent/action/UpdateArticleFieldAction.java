@@ -23,6 +23,8 @@
 package com.liferay.portlet.journalcontent.action;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -39,8 +41,6 @@ import com.liferay.util.servlet.ServletResponseUtil;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -141,6 +141,7 @@ public class UpdateArticleFieldAction extends Action {
 		ServletResponseUtil.write(response, fieldData);
 	}
 
-	private static Log _log = LogFactory.getLog(UpdateArticleFieldAction.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(UpdateArticleFieldAction.class);
 
 }

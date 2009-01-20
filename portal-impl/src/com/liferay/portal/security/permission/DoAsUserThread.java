@@ -22,12 +22,11 @@
 
 package com.liferay.portal.security.permission;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="DoAsUserThread.java.html"><b><i>View Source</i></b></a>
@@ -67,7 +66,7 @@ public abstract class DoAsUserThread extends Thread {
 
 	protected abstract void doRun() throws Exception;
 
-	private static Log _log = LogFactory.getLog(DoAsUserThread.class);
+	private static Log _log = LogFactoryUtil.getLog(DoAsUserThread.class);
 
 	private long _userId;
 	private boolean _success;

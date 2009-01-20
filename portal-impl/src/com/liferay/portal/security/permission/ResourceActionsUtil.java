@@ -24,6 +24,8 @@ package com.liferay.portal.security.permission;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
@@ -61,9 +63,6 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.jsp.PageContext;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ResourceActionsUtil.java.html"><b><i>View Source</i></b></a>
@@ -927,7 +926,7 @@ public class ResourceActionsUtil {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(ResourceActionsUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(ResourceActionsUtil.class);
 
 	private static ResourceActionsUtil _instance = new ResourceActionsUtil();
 

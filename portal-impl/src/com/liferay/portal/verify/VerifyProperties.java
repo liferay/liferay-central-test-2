@@ -22,11 +22,10 @@
 
 package com.liferay.portal.verify;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.SystemProperties;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="VerifyProperties.java.html"><b><i>View Source</i></b></a>
@@ -279,6 +278,6 @@ public class VerifyProperties extends VerifyProcess {
 	private static final String[][] _RENAMED_SYSTEM_KEYS = new String[][] {
 	};
 
-	private static Log _log = LogFactory.getLog(VerifyProperties.class);
+	private static Log _log = LogFactoryUtil.getLog(VerifyProperties.class);
 
 }

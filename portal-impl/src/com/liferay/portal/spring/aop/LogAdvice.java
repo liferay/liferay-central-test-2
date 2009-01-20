@@ -41,11 +41,11 @@
 
 package com.liferay.portal.spring.aop;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 
@@ -83,7 +83,7 @@ public class LogAdvice {
 		Log log = _logs.get(typeName);
 
 		if (log == null) {
-			log = LogFactory.getLog(typeName);
+			log = LogFactoryUtil.getLog(typeName);
 
 			_logs.put(typeName, log);
 		}

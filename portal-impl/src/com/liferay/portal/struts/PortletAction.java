@@ -22,6 +22,8 @@
 
 package com.liferay.portal.struts;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -51,8 +53,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.Globals;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -265,6 +265,6 @@ public class PortletAction extends Action {
 
 	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = true;
 
-	private static Log _log = LogFactory.getLog(PortletAction.class);
+	private static Log _log = LogFactoryUtil.getLog(PortletAction.class);
 
 }

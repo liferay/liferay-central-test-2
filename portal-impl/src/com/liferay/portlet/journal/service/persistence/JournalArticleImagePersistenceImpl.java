@@ -30,6 +30,8 @@ import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
@@ -42,9 +44,6 @@ import com.liferay.portlet.journal.NoSuchArticleImageException;
 import com.liferay.portlet.journal.model.JournalArticleImage;
 import com.liferay.portlet.journal.model.impl.JournalArticleImageImpl;
 import com.liferay.portlet.journal.model.impl.JournalArticleImageModelImpl;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -1820,5 +1819,5 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence journalTemplatePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ImagePersistence.impl")
 	protected com.liferay.portal.service.persistence.ImagePersistence imagePersistence;
-	private static Log _log = LogFactory.getLog(JournalArticleImagePersistenceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(JournalArticleImagePersistenceImpl.class);
 }

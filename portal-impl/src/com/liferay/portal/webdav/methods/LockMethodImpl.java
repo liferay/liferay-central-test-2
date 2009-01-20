@@ -23,6 +23,8 @@
 package com.liferay.portal.webdav.methods;
 
 import com.liferay.lock.model.Lock;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -42,9 +44,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -218,6 +217,6 @@ public class LockMethodImpl implements Method {
 		return XMLFormatter.toString(sb.toString());
 	}
 
-	private static Log _log = LogFactory.getLog(LockMethodImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(LockMethodImpl.class);
 
 }

@@ -24,6 +24,8 @@ package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.mail.model.CyrusUser;
 import com.liferay.mail.model.CyrusVirtual;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.impl.AccountImpl;
 import com.liferay.portal.model.impl.ContactImpl;
 import com.liferay.portal.model.impl.PasswordTrackerImpl;
@@ -42,9 +44,6 @@ import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.UserPortraitIdUpgradeColumnImpl;
 
 import java.sql.Types;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UpgradeUser.java.html"><b><i>View Source</i></b></a>
@@ -158,6 +157,6 @@ public class UpgradeUser extends UpgradeProcess {
 		upgradeTable.updateTable();
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeUser.class);
+	private static Log _log = LogFactoryUtil.getLog(UpgradeUser.class);
 
 }

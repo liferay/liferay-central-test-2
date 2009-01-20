@@ -25,6 +25,8 @@ package com.liferay.portal.lar;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.io.FileCacheOutputStream;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -85,8 +87,6 @@ import java.util.Map;
 import javax.servlet.ServletContext;
 
 import org.apache.commons.lang.time.StopWatch;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="LayoutExporter.java.html"><b><i>View Source</i></b></a>
@@ -821,7 +821,7 @@ public class LayoutExporter {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(LayoutExporter.class);
+	private static Log _log = LogFactoryUtil.getLog(LayoutExporter.class);
 
 	private PortletExporter _portletExporter = new PortletExporter();
 

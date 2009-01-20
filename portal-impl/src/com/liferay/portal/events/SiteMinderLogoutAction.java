@@ -23,6 +23,8 @@
 package com.liferay.portal.events;
 
 import com.liferay.portal.kernel.events.Action;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
@@ -32,9 +34,6 @@ import com.liferay.portal.util.PortalUtil;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="SiteMinderLogoutAction.java.html"><b><i>View Source</i></b></a>
@@ -84,6 +83,7 @@ public class SiteMinderLogoutAction extends Action {
 
 	private static final String _SMIDENTITY = "SMIDENTITY";
 
-	private static Log _log = LogFactory.getLog(SiteMinderLogoutAction.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(SiteMinderLogoutAction.class);
 
 }

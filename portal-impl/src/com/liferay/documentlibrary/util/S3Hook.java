@@ -25,6 +25,8 @@ package com.liferay.documentlibrary.util;
 import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
@@ -52,8 +54,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.id.uuid.UUID;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.jets3t.service.S3Service;
 import org.jets3t.service.S3ServiceException;
@@ -530,7 +530,7 @@ public class S3Hook extends BaseHook {
 	private static final String _BUCKET_NAME = PropsUtil.get(
 		PropsKeys.DL_HOOK_S3_BUCKET_NAME);
 
-	private static Log _log = LogFactory.getLog(S3Hook.class);
+	private static Log _log = LogFactoryUtil.getLog(S3Hook.class);
 
 	private S3Bucket _s3Bucket;
 	private S3Service _s3Service;

@@ -22,6 +22,8 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -52,9 +54,6 @@ import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 
 import javax.xml.namespace.QName;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PortletConfigImpl.java.html"><b><i>View Source</i></b></a>
@@ -242,7 +241,7 @@ public class PortletConfigImpl implements PortletConfig {
 		return javaxQNames;
 	}
 
-	private static Log _log = LogFactory.getLog(PortletConfigImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(PortletConfigImpl.class);
 
 	private PortletApp _portletApp;
 	private Portlet _portlet;

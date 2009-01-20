@@ -24,12 +24,11 @@ package com.liferay.portal.search.lucene;
 
 import com.liferay.portal.kernel.job.IntervalJob;
 import com.liferay.portal.kernel.job.JobExecutionContext;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.ant.DeleteTask;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="CleanUpJob.java.html"><b><i>View Source</i></b></a>
@@ -60,7 +59,7 @@ public class CleanUpJob implements IntervalJob {
 		return _interval;
 	}
 
-	private static Log _log = LogFactory.getLog(CleanUpJob.class);
+	private static Log _log = LogFactoryUtil.getLog(CleanUpJob.class);
 
 	private long _interval;
 

@@ -24,6 +24,8 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Plugin;
 import com.liferay.portal.model.PluginSetting;
@@ -32,9 +34,6 @@ import com.liferay.portal.model.impl.PluginSettingImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.base.PluginSettingLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PluginSettingLocalServiceImpl.java.html"><b><i>View Source</i></b>
@@ -155,6 +154,6 @@ public class PluginSettingLocalServiceImpl
 	}
 
 	private static Log _log =
-		LogFactory.getLog(PluginSettingLocalServiceImpl.class);
+		LogFactoryUtil.getLog(PluginSettingLocalServiceImpl.class);
 
 }

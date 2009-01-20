@@ -22,6 +22,8 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -72,8 +74,6 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.apache.commons.httpclient.params.HttpConnectionParams;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="HttpImpl.java.html"><b><i>View Source</i></b></a>
@@ -1002,7 +1002,7 @@ public class HttpImpl implements Http {
 	private static final int _TIMEOUT = GetterUtil.getInteger(
 		PropsUtil.get(HttpImpl.class.getName() + ".timeout"), 5000);
 
-	private static Log _log = LogFactory.getLog(HttpImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(HttpImpl.class);
 
 	private HttpClient _client = new HttpClient();
 	private HttpClient _proxyClient = new HttpClient();

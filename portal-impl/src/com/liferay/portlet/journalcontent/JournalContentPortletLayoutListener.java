@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.journalcontent;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.portlet.PortletLayoutListenerException;
 import com.liferay.portal.kernel.util.StringPool;
@@ -34,9 +36,6 @@ import com.liferay.portlet.journal.NoSuchContentSearchException;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 
 import javax.portlet.PortletPreferences;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.springframework.mock.web.MockHttpServletRequest;
 
@@ -110,6 +109,6 @@ public class JournalContentPortletLayoutListener
 	}
 
 	private static Log _log =
-		LogFactory.getLog(JournalContentPortletLayoutListener.class);
+		LogFactoryUtil.getLog(JournalContentPortletLayoutListener.class);
 
 }

@@ -24,14 +24,13 @@ package com.liferay.portal.deploy.auto;
 
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployListener;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.io.File;
 import java.io.IOException;
 
 import java.util.zip.ZipFile;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="BaseAutoDeployListener.java.html"><b><i>View Source</i></b></a>
@@ -137,6 +136,7 @@ public abstract class BaseAutoDeployListener implements AutoDeployListener {
 		return false;
 	}
 
-	private static Log _log = LogFactory.getLog(BaseAutoDeployListener.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(BaseAutoDeployListener.class);
 
 }

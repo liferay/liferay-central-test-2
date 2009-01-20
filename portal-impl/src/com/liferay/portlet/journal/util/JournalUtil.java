@@ -24,6 +24,8 @@ package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -81,9 +83,6 @@ import java.util.Stack;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletSession;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="JournalUtil.java.html"><b><i>View Source</i></b></a>
@@ -1289,33 +1288,33 @@ public class JournalUtil {
 		path.pop();
 	}
 
-	private static Log _log = LogFactory.getLog(JournalUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(JournalUtil.class);
 
-	private static Log _logOutputAfterListener = LogFactory.getLog(
+	private static Log _logOutputAfterListener = LogFactoryUtil.getLog(
 		JournalUtil.class.getName() + ".OutputAfterListener");
 
-	private static Log _logOutputBeforeListener = LogFactory.getLog(
+	private static Log _logOutputBeforeListener = LogFactoryUtil.getLog(
 		JournalUtil.class.getName() + ".OutputBeforeListener");
 
-	private static Log _logScriptAfterListener = LogFactory.getLog(
+	private static Log _logScriptAfterListener = LogFactoryUtil.getLog(
 		JournalUtil.class.getName() + ".ScriptAfterListener");
 
-	private static Log _logScriptBeforeListener = LogFactory.getLog(
+	private static Log _logScriptBeforeListener = LogFactoryUtil.getLog(
 		JournalUtil.class.getName() + ".ScriptBeforeListener");
 
-	private static Log _logTransfromAfter = LogFactory.getLog(
+	private static Log _logTransfromAfter = LogFactoryUtil.getLog(
 		JournalUtil.class.getName() + ".TransformAfter");
 
-	private static Log _logTransformBefore = LogFactory.getLog(
+	private static Log _logTransformBefore = LogFactoryUtil.getLog(
 		JournalUtil.class.getName() + ".BeforeTransform");
 
-	private static Log _logTokens = LogFactory.getLog(
+	private static Log _logTokens = LogFactoryUtil.getLog(
 		JournalUtil.class.getName() + ".Tokens");
 
-	private static Log _logXmlAfterListener = LogFactory.getLog(
+	private static Log _logXmlAfterListener = LogFactoryUtil.getLog(
 		JournalUtil.class.getName() + ".XmlAfterListener");
 
-	private static Log _logXmlBeforeListener = LogFactory.getLog(
+	private static Log _logXmlBeforeListener = LogFactoryUtil.getLog(
 		JournalUtil.class.getName() + ".XmlBeforeListener");
 
 }

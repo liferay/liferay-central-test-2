@@ -22,10 +22,10 @@
 
 package com.liferay.portal.spring.context;
 
-import java.io.FileNotFoundException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.io.FileNotFoundException;
 
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -68,6 +68,7 @@ public class ArrayApplicationContext extends ClassPathXmlApplicationContext {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(ArrayApplicationContext.class);
+	private static Log _log =
+		LogFactoryUtil.getLog(ArrayApplicationContext.class);
 
 }

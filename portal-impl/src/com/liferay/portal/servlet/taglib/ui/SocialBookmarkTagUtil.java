@@ -23,6 +23,8 @@
 package com.liferay.portal.servlet.taglib.ui;
 
 import com.liferay.portal.kernel.configuration.Filter;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -34,9 +36,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.hibernate.util.FastHashMap;
 
@@ -96,6 +95,7 @@ public class SocialBookmarkTagUtil {
 		return postUrl;
 	}
 
-	private static Log _log = LogFactory.getLog(SocialBookmarkTagUtil.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(SocialBookmarkTagUtil.class);
 
 }

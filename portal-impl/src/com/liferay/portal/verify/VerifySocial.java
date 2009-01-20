@@ -23,6 +23,8 @@
 package com.liferay.portal.verify;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.social.service.SocialActivityLocalServiceUtil;
 import com.liferay.portlet.social.service.SocialRequestLocalServiceUtil;
@@ -30,9 +32,6 @@ import com.liferay.portlet.social.service.SocialRequestLocalServiceUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="VerifySocial.java.html"><b><i>View Source</i></b></a>
@@ -209,6 +208,6 @@ public class VerifySocial extends VerifyProcess {
 		//deleteDuplicateRequests();
 	}
 
-	private static Log _log = LogFactory.getLog(VerifySocial.class);
+	private static Log _log = LogFactoryUtil.getLog(VerifySocial.class);
 
 }

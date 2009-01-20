@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.messageboards.model.impl;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBTreeWalker;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
@@ -30,9 +32,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="MBTreeWalkerImpl.java.html"><b><i>View Source</i></b></a>
@@ -129,7 +128,7 @@ public class MBTreeWalkerImpl implements MBTreeWalker {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(MBTreeWalkerImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(MBTreeWalkerImpl.class);
 
 	private List<MBMessage> _messages;
 	private Map<Long, Integer> _messageIdsMap;

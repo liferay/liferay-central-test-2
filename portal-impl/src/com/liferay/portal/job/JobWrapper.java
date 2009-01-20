@@ -23,9 +23,8 @@
 package com.liferay.portal.job;
 
 import com.liferay.portal.kernel.job.IntervalJob;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import org.quartz.JobDetail;
 import org.quartz.JobExecutionContext;
@@ -72,7 +71,7 @@ public class JobWrapper implements StatefulJob {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(JobWrapper.class);
+	private static Log _log = LogFactoryUtil.getLog(JobWrapper.class);
 
 	private ClassLoader _classLoader;
 	private IntervalJob _job;

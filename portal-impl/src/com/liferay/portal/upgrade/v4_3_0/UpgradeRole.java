@@ -22,6 +22,8 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
@@ -30,9 +32,6 @@ import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UpgradeRole.java.html"><b><i>View Source</i></b></a>
@@ -72,6 +71,6 @@ public class UpgradeRole extends UpgradeProcess {
 		AvailableMappersUtil.setRoleIdMapper(roleIdMapper);
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeRole.class);
+	private static Log _log = LogFactoryUtil.getLog(UpgradeRole.class);
 
 }

@@ -22,13 +22,13 @@
 
 package com.liferay.portal.servlet;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="SharedSessionUtil.java.html"><b><i>View Source</i></b></a>
@@ -56,6 +56,6 @@ public class SharedSessionUtil {
 		return values;
 	}
 
-	private static Log _log = LogFactory.getLog(SharedSessionUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(SharedSessionUtil.class);
 
 }

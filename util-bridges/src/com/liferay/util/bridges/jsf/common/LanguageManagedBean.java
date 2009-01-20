@@ -23,6 +23,8 @@
 package com.liferay.util.bridges.jsf.common;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.util.Collection;
 import java.util.Locale;
@@ -30,9 +32,6 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.faces.context.FacesContext;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="LanguageManagedBean.java.html"><b><i>View Source</i></b></a>
@@ -128,7 +127,7 @@ public class LanguageManagedBean implements Map<String, String> {
 		throw new UnsupportedOperationException();
 	}
 
-	private static Log _log = LogFactory.getLog(LanguageManagedBean.class);
+	private static Log _log = LogFactoryUtil.getLog(LanguageManagedBean.class);
 
 	private long _companyId = 0;
 

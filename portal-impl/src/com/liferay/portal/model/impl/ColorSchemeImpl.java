@@ -22,6 +22,8 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.SafeProperties;
 import com.liferay.portal.kernel.util.StringPool;
@@ -33,9 +35,6 @@ import com.liferay.portal.util.PropsValues;
 import java.io.IOException;
 
 import java.util.Properties;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ColorSchemeImpl.java.html"><b><i>View Source</i></b></a>
@@ -206,7 +205,7 @@ public class ColorSchemeImpl implements ColorScheme {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(ColorScheme.class);
+	private static Log _log = LogFactoryUtil.getLog(ColorScheme.class);
 
 	private String _colorSchemeId;
 	private String _name;

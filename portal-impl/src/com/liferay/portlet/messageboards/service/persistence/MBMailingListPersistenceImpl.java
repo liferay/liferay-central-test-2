@@ -30,6 +30,8 @@ import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
@@ -44,9 +46,6 @@ import com.liferay.portlet.messageboards.NoSuchMailingListException;
 import com.liferay.portlet.messageboards.model.MBMailingList;
 import com.liferay.portlet.messageboards.model.impl.MBMailingListImpl;
 import com.liferay.portlet.messageboards.model.impl.MBMailingListModelImpl;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -1476,5 +1475,5 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence mbThreadPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
-	private static Log _log = LogFactory.getLog(MBMailingListPersistenceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(MBMailingListPersistenceImpl.class);
 }

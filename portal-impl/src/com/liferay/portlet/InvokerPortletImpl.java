@@ -23,6 +23,8 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.PortletFilterUtil;
@@ -75,8 +77,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.time.StopWatch;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="InvokerPortletImpl.java.html"><b><i>View Source</i></b></a>
@@ -741,7 +741,7 @@ public class InvokerPortletImpl implements InvokerPortlet {
 		return portlet.getPortletId();
 	}
 
-	private static Log _log = LogFactory.getLog(InvokerPortletImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(InvokerPortletImpl.class);
 
 	private com.liferay.portal.model.Portlet _portletModel;
 	private String _portletId;

@@ -24,6 +24,8 @@ package com.liferay.portal.deploy.hot;
 
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.service.ThemeLocalServiceUtil;
@@ -35,9 +37,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ThemeHotDeployListener.java.html"><b><i>View Source</i></b></a>
@@ -157,7 +156,8 @@ public class ThemeHotDeployListener extends BaseHotDeployListener {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(ThemeHotDeployListener.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(ThemeHotDeployListener.class);
 
 	private static Map<String, List<String>> _vars =
 		new HashMap<String, List<String>>();

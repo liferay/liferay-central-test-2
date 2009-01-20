@@ -26,6 +26,8 @@ import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -45,9 +47,6 @@ import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
 import javax.servlet.ServletContext;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PluginPackageHotDeployListener.java.html"><b><i>View Source</i></b>
@@ -299,6 +298,6 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 	}
 
 	private static Log _log =
-		LogFactory.getLog(PluginPackageHotDeployListener.class);
+		LogFactoryUtil.getLog(PluginPackageHotDeployListener.class);
 
 }

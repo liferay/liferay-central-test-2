@@ -450,6 +450,8 @@ public class SourceFormatter {
 	private static String _formatJavaContent(String fileName, String content)
 		throws IOException {
 
+		boolean longLogFactoryUtil = false;
+
 		StringBuilder sb = new StringBuilder();
 
 		BufferedReader br = new BufferedReader(new StringReader(content));
@@ -495,6 +497,12 @@ public class SourceFormatter {
 			if ((excluded == null) && ((line.length() - 1) > 79) &&
 				(!line.startsWith("import "))) {
 
+				if (line.contains(
+						"private static Log _log = LogFactoryUtil.getLog(")) {
+
+					longLogFactoryUtil = true;
+				}
+
 				System.out.println("> 80: " + fileName + " " + lineCount);
 			}
 		}
@@ -505,6 +513,12 @@ public class SourceFormatter {
 
 		if (newContent.endsWith("\n")) {
 			newContent = newContent.substring(0, newContent.length() -1);
+		}
+
+		if (longLogFactoryUtil) {
+			newContent = StringUtil.replace(
+				newContent, "private static Log _log =",
+				"private static Log _log =\n\t\t");
 		}
 
 		return newContent;

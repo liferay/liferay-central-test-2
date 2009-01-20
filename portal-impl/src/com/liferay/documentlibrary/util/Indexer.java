@@ -25,6 +25,8 @@ package com.liferay.documentlibrary.util;
 import com.liferay.documentlibrary.service.impl.DLServiceImpl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.DocumentSummary;
@@ -48,9 +50,6 @@ import java.util.Map;
 import java.util.Properties;
 
 import javax.portlet.PortletURL;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
@@ -305,6 +304,6 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	private static final String[] _CLASS_NAMES = new String[0];
 
-	private static Log _log = LogFactory.getLog(Indexer.class);
+	private static Log _log = LogFactoryUtil.getLog(Indexer.class);
 
 }

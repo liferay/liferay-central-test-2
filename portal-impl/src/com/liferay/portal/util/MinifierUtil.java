@@ -22,6 +22,9 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 import com.yahoo.platform.yui.compressor.CssCompressor;
 import com.yahoo.platform.yui.compressor.JavaScriptCompressor;
 
@@ -29,9 +32,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.mozilla.javascript.ErrorReporter;
 import org.mozilla.javascript.EvaluatorException;
@@ -107,7 +107,7 @@ public class MinifierUtil {
 
 	private static final boolean _JS_VERBOSE = false;
 
-	private static Log _log = LogFactory.getLog(MinifierUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(MinifierUtil.class);
 
 	private static MinifierUtil _instance = new MinifierUtil();
 

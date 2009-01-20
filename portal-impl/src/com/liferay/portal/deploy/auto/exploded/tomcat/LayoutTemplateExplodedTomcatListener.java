@@ -23,11 +23,10 @@
 package com.liferay.portal.deploy.auto.exploded.tomcat;
 
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.io.File;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="LayoutTemplateExplodedTomcatListener.java.html"><b><i>View Source
@@ -72,7 +71,7 @@ public class LayoutTemplateExplodedTomcatListener
 	}
 
 	private static Log _log =
-		LogFactory.getLog(LayoutTemplateExplodedTomcatListener.class);
+		LogFactoryUtil.getLog(LayoutTemplateExplodedTomcatListener.class);
 
 	private ExplodedTomcatDeployer _deployer;
 

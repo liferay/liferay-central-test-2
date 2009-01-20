@@ -22,6 +22,8 @@
 
 package com.liferay.taglib.portlet;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodInvoker;
@@ -37,9 +39,6 @@ import javax.portlet.PortletRequest;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ActionURLTag.java.html"><b><i>View Source</i></b></a>
@@ -290,7 +289,7 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 
 	private static final String _TAG_DO_END_METHOD = "doEndTag";
 
-	private static Log _log = LogFactory.getLog(ActionURLTag.class);
+	private static Log _log = LogFactoryUtil.getLog(ActionURLTag.class);
 
 	private String _windowState;
 	private String _portletMode;

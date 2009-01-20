@@ -22,6 +22,8 @@
 
 package com.liferay.portal.security.auth;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
@@ -33,9 +35,6 @@ import javax.naming.ldap.LdapContext;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="NtlmAutoLogin.java.html"><b><i>View Source</i></b></a>
@@ -106,6 +105,6 @@ public class NtlmAutoLogin implements AutoLogin {
 		return user;
 	}
 
-	private static Log _log = LogFactory.getLog(NtlmAutoLogin.class);
+	private static Log _log = LogFactoryUtil.getLog(NtlmAutoLogin.class);
 
 }

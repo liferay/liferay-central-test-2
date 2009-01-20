@@ -22,6 +22,8 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultPKMapper;
@@ -39,9 +41,6 @@ import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
 
 import java.sql.Types;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UpgradeImageGallery.java.html"><b><i>View Source</i></b></a>
@@ -135,6 +134,6 @@ public class UpgradeImageGallery extends UpgradeProcess {
 		AvailableMappersUtil.setIGImageIdMapper(imageIdMapper);
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeImageGallery.class);
+	private static Log _log = LogFactoryUtil.getLog(UpgradeImageGallery.class);
 
 }

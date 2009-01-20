@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.messageboards.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -31,9 +33,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="BBCodeUtil.java.html"><b><i>View Source</i></b></a>
@@ -490,6 +489,6 @@ public class BBCodeUtil {
 		"</div>", "</div>", "</div>", "</div>", "<tt>", "</tt>"
 	};
 
-	private static Log _log = LogFactory.getLog(BBCodeUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(BBCodeUtil.class);
 
 }

@@ -24,6 +24,8 @@ package com.liferay.portlet.blogs.lar;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -55,9 +57,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="WordPressImporter.java.html"><b><i>View Source</i></b></a>
@@ -342,6 +341,6 @@ public class WordPressImporter {
 
 	private static final String _USER_MAP_FILE = "wordpress-user-map.xml";
 
-	private static Log _log = LogFactory.getLog(WordPressImporter.class);
+	private static Log _log = LogFactoryUtil.getLog(WordPressImporter.class);
 
 }

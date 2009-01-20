@@ -26,6 +26,8 @@ import JOscarLib.Core.OscarConnection;
 
 import JOscarLib.Tool.OscarInterface;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
@@ -34,9 +36,6 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Vector;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ICQConnector.java.html"><b><i>View Source</i></b></a>
@@ -102,7 +101,7 @@ public class ICQConnector implements Observer {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(ICQConnector.class);
+	private static Log _log = LogFactoryUtil.getLog(ICQConnector.class);
 
 	private static ICQConnector _instance = new ICQConnector();
 

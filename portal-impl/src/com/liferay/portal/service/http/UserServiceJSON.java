@@ -153,16 +153,16 @@ public class UserServiceJSON {
 		return UserJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static void deleteRoleUser(long roleId, long userId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		UserServiceUtil.deleteRoleUser(roleId, userId);
-	}
-
 	public static void deletePortrait(long userId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserServiceUtil.deletePortrait(userId);
+	}
+
+	public static void deleteRoleUser(long roleId, long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserServiceUtil.deleteRoleUser(roleId, userId);
 	}
 
 	public static void deleteUser(long userId)

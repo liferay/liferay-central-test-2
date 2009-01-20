@@ -626,17 +626,14 @@ public class UserServiceHttp {
 		}
 	}
 
-	public static void deleteRoleUser(HttpPrincipal httpPrincipal, long roleId,
-		long userId)
+	public static void deletePortrait(HttpPrincipal httpPrincipal, long userId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(roleId);
-
-			Object paramObj1 = new LongWrapper(userId);
+			Object paramObj0 = new LongWrapper(userId);
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
-					"deleteRoleUser", new Object[] { paramObj0, paramObj1 });
+					"deletePortrait", new Object[] { paramObj0 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
@@ -660,14 +657,17 @@ public class UserServiceHttp {
 		}
 	}
 
-	public static void deletePortrait(HttpPrincipal httpPrincipal, long userId)
+	public static void deleteRoleUser(HttpPrincipal httpPrincipal, long roleId,
+		long userId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(userId);
+			Object paramObj0 = new LongWrapper(roleId);
+
+			Object paramObj1 = new LongWrapper(userId);
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
-					"deletePortrait", new Object[] { paramObj0 });
+					"deleteRoleUser", new Object[] { paramObj0, paramObj1 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);

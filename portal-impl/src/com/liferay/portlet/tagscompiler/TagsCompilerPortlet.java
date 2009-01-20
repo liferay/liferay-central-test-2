@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.tagscompiler;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortlet;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -39,9 +41,6 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="TagsCompilerPortlet.java.html"><b><i>View Source</i></b></a>
@@ -91,6 +90,6 @@ public class TagsCompilerPortlet extends LiferayPortlet {
 			request, themeDisplay.getPlid(), PortletKeys.TAGS_COMPILER);
 	}
 
-	private static Log _log = LogFactory.getLog(TagsCompilerPortlet.class);
+	private static Log _log = LogFactoryUtil.getLog(TagsCompilerPortlet.class);
 
 }

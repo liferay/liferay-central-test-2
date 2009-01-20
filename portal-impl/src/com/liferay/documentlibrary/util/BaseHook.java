@@ -25,6 +25,8 @@ package com.liferay.documentlibrary.util;
 import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.FileUtil;
 
@@ -37,9 +39,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.Date;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
 
@@ -265,6 +264,6 @@ public abstract class BaseHook implements Hook {
 			long newRepositoryId, String fileName, long fileEntryId)
 		throws PortalException, SystemException;
 
-	private static Log _log = LogFactory.getLog(BaseHook.class);
+	private static Log _log = LogFactoryUtil.getLog(BaseHook.class);
 
 }

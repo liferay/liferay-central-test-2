@@ -26,6 +26,8 @@ import com.liferay.portal.LayoutFriendlyURLException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -74,9 +76,6 @@ import javax.portlet.PortletRequest;
 import javax.portlet.WindowState;
 
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="LayoutImpl.java.html"><b><i>View Source</i></b></a>
@@ -721,7 +720,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		return url;
 	}
 
-	private static Log _log = LogFactory.getLog(LayoutImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(LayoutImpl.class);
 
 	private UnicodeProperties _typeSettingsProperties = null;
 

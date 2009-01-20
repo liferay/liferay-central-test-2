@@ -22,6 +22,8 @@
 
 package com.liferay.portal.struts;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.PortletModeFactory;
 import com.liferay.portal.kernel.portlet.WindowStateFactory;
@@ -41,9 +43,6 @@ import javax.portlet.WindowState;
 import javax.portlet.WindowStateException;
 
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="StrutsURLEncoder.java.html"><b><i>View Source</i></b></a>
@@ -222,7 +221,7 @@ public class StrutsURLEncoder implements URLEncoder {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(StrutsURLEncoder.class);
+	private static Log _log = LogFactoryUtil.getLog(StrutsURLEncoder.class);
 
 	private String _contextPath;
 	private String _mainPath;

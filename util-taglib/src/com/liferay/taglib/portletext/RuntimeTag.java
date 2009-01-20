@@ -22,6 +22,8 @@
 
 package com.liferay.taglib.portletext;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
@@ -40,9 +42,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.TagSupport;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="RuntimeTag.java.html"><b><i>View Source</i></b></a>
@@ -175,7 +174,7 @@ public class RuntimeTag extends TagSupport {
 		_defaultPreferences = defaultPreferences;
 	}
 
-	private static Log _log = LogFactory.getLog(RuntimeTag.class);
+	private static Log _log = LogFactoryUtil.getLog(RuntimeTag.class);
 
 	private String _portletName;
 	private String _queryString;

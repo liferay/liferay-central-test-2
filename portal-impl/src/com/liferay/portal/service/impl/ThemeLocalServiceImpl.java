@@ -25,6 +25,8 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.image.SpriteProcessorUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -66,9 +68,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.ServletContext;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ThemeLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -728,7 +727,8 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 		theme.setSpriteImages(spriteFileName, spriteProperties);
 	}
 
-	private static Log _log = LogFactory.getLog(ThemeLocalServiceImpl.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(ThemeLocalServiceImpl.class);
 
 	private static Map<String, Theme> _themes =
 		new ConcurrentHashMap<String, Theme>();

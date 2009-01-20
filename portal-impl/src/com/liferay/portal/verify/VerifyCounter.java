@@ -23,13 +23,12 @@
 package com.liferay.portal.verify;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="VerifyCounter.java.html"><b><i>View Source</i></b></a>
@@ -79,6 +78,6 @@ public class VerifyCounter extends VerifyProcess {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(VerifyCounter.class);
+	private static Log _log = LogFactoryUtil.getLog(VerifyCounter.class);
 
 }

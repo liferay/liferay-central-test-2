@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.documentlibrary.lar;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -44,9 +46,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.portlet.PortletPreferences;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="DLDisplayPortletDataHandlerImpl.java.html"><b><i>View Source</i></b>
@@ -261,6 +260,6 @@ public class DLDisplayPortletDataHandlerImpl implements PortletDataHandler {
 		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
 
 	private static Log _log =
-		LogFactory.getLog(DLDisplayPortletDataHandlerImpl.class);
+		LogFactoryUtil.getLog(DLDisplayPortletDataHandlerImpl.class);
 
 }

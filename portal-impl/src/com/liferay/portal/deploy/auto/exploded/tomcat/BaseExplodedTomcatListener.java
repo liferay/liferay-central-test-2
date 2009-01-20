@@ -24,6 +24,8 @@ package com.liferay.portal.deploy.auto.exploded.tomcat;
 
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployListener;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
@@ -34,9 +36,6 @@ import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.File;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="BaseExplodedTomcatListener.java.html"><b><i>View Source</i></b></a>
@@ -145,6 +144,6 @@ public abstract class BaseExplodedTomcatListener implements AutoDeployListener {
 	}
 
 	private static Log _log =
-		LogFactory.getLog(BaseExplodedTomcatListener.class);
+		LogFactoryUtil.getLog(BaseExplodedTomcatListener.class);
 
 }

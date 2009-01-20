@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.directory.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
@@ -39,9 +41,6 @@ import java.util.List;
 import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="DirectoryOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
@@ -118,6 +117,7 @@ public class DirectoryOpenSearchImpl extends BaseOpenSearchImpl {
 		return doc.asXML();
 	}
 
-	private static Log _log = LogFactory.getLog(DirectoryOpenSearchImpl.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(DirectoryOpenSearchImpl.class);
 
 }

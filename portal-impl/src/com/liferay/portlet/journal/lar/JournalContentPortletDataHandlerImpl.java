@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.journal.lar;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -57,9 +59,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.portlet.PortletPreferences;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="JournalContentPortletDataHandlerImpl.java.html"><b><i>View Source
@@ -432,6 +431,6 @@ public class JournalContentPortletDataHandlerImpl
 		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
 
 	private static Log _log =
-		LogFactory.getLog(JournalContentPortletDataHandlerImpl.class);
+		LogFactoryUtil.getLog(JournalContentPortletDataHandlerImpl.class);
 
 }

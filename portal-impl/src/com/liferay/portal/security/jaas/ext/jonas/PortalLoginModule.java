@@ -22,6 +22,8 @@
 
 package com.liferay.portal.security.jaas.ext.jonas;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.security.jaas.ext.BasicLoginModule;
@@ -29,9 +31,6 @@ import com.liferay.portal.security.jaas.ext.BasicLoginModule;
 import java.lang.reflect.Method;
 
 import java.security.Principal;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PortalLoginModule.java.html"><b><i>View Source</i></b></a>
@@ -81,6 +80,6 @@ public class PortalLoginModule extends BasicLoginModule {
 	private static final String _JROLE =
 		"org.objectweb.jonas.security.auth.JRole";
 
- 	private static Log _log = LogFactory.getLog(PortalLoginModule.class);
+ 	private static Log _log = LogFactoryUtil.getLog(PortalLoginModule.class);
 
 }

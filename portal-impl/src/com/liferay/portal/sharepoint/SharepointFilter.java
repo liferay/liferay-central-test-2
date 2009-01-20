@@ -22,6 +22,8 @@
 
 package com.liferay.portal.sharepoint;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.util.Base64;
@@ -52,9 +54,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="SharepointFilter.java.html"><b><i>View Source</i></b></a>
@@ -284,6 +283,6 @@ public class SharepointFilter extends BasePortalFilter {
 			"/_vti_inf.html", "/_vti_bin", "/sharepoint", "/history",
 			"/resources"};
 
-	private static Log _log = LogFactory.getLog(SharepointFilter.class);
+	private static Log _log = LogFactoryUtil.getLog(SharepointFilter.class);
 
 }

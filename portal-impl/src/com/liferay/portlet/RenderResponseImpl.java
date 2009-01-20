@@ -22,6 +22,8 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayRenderResponse;
 import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -33,9 +35,6 @@ import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="RenderResponseImpl.java.html"><b><i>View Source</i></b></a>
@@ -116,7 +115,7 @@ public class RenderResponseImpl
 		_resourceName = null;
 	}
 
-	private static Log _log = LogFactory.getLog(RenderResponseImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(RenderResponseImpl.class);
 
 	private PortletRequestImpl _portletRequestImpl;
 	private String _title;

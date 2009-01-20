@@ -24,14 +24,13 @@ package com.liferay.portlet.wiki.engines.friki;
 
 import com.efsol.friki.BasicDriver;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.stringtree.util.tract.Tract;
 
@@ -95,7 +94,7 @@ public class NodeRepository extends BasicDriver {
 	public void put(String name, Tract page) {
 	}
 
-	private static Log _log = LogFactory.getLog(NodeRepository.class);
+	private static Log _log = LogFactoryUtil.getLog(NodeRepository.class);
 
 	private long _nodeId;
 	private Map<String, Boolean> _names;

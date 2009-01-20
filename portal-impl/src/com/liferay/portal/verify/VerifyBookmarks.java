@@ -22,13 +22,12 @@
 
 package com.liferay.portal.verify;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
 
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="VerifyBookmarks.java.html"><b><i>View Source</i></b></a>
@@ -78,6 +77,6 @@ public class VerifyBookmarks extends VerifyProcess {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(VerifyBookmarks.class);
+	private static Log _log = LogFactoryUtil.getLog(VerifyBookmarks.class);
 
 }

@@ -22,6 +22,8 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
@@ -54,9 +56,6 @@ import java.sql.Types;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UpgradeGroup.java.html"><b><i>View Source</i></b></a>
@@ -230,6 +229,6 @@ public class UpgradeGroup extends UpgradeProcess {
 		"alter table LayoutSet drop column ownerId"
 	};
 
-	private static Log _log = LogFactory.getLog(UpgradeGroup.class);
+	private static Log _log = LogFactoryUtil.getLog(UpgradeGroup.class);
 
 }

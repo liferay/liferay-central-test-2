@@ -23,6 +23,8 @@
 package com.liferay.portal.upgrade.v5_2_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
@@ -42,9 +44,6 @@ import java.sql.PreparedStatement;
 
 import java.util.Iterator;
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UpgradeJournal.java.html"><b><i>View Source</i></b></a>
@@ -171,6 +170,6 @@ public class UpgradeJournal extends UpgradeProcess {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeJournal.class);
+	private static Log _log = LogFactoryUtil.getLog(UpgradeJournal.class);
 
 }

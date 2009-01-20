@@ -24,6 +24,8 @@ package com.liferay.portlet.imagegallery.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.model.Image;
@@ -39,9 +41,6 @@ import java.io.File;
 
 import java.util.Iterator;
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="IGFolderServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -202,6 +201,6 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(IGFolderServiceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(IGFolderServiceImpl.class);
 
 }

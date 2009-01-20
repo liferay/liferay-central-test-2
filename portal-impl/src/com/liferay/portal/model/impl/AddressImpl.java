@@ -22,6 +22,8 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Country;
 import com.liferay.portal.model.ListType;
@@ -29,9 +31,6 @@ import com.liferay.portal.model.Region;
 import com.liferay.portal.service.CountryServiceUtil;
 import com.liferay.portal.service.ListTypeServiceUtil;
 import com.liferay.portal.service.RegionServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="AddressImpl.java.html"><b><i>View Source</i></b></a>
@@ -89,6 +88,6 @@ public class AddressImpl extends AddressModelImpl implements Address {
 		return type;
 	}
 
-	private static Log _log = LogFactory.getLog(AddressImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(AddressImpl.class);
 
 }

@@ -25,11 +25,10 @@ package com.liferay.portal.json;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.io.Writer;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="JSONArrayImpl.java.html"><b><i>View Source</i></b></a>
@@ -188,7 +187,7 @@ public class JSONArrayImpl implements JSONArray {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(JSONArrayImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(JSONArrayImpl.class);
 
 	private org.json.JSONArray _jsonArray;
 

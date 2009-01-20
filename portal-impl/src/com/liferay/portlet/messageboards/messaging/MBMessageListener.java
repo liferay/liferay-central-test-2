@@ -24,6 +24,8 @@ package com.liferay.portlet.messageboards.messaging;
 
 import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.Account;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.mail.SMTPAccount;
@@ -48,9 +50,6 @@ import java.util.List;
 import java.util.Set;
 
 import javax.mail.internet.InternetAddress;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="MBMessageListener.java.html"><b><i>View Source</i></b></a>
@@ -319,6 +318,6 @@ public class MBMessageListener implements MessageListener {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(MBMessageListener.class);
+	private static Log _log = LogFactoryUtil.getLog(MBMessageListener.class);
 
 }

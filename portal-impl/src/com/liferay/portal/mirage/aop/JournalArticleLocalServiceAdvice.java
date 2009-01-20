@@ -22,15 +22,15 @@
 
 package com.liferay.portal.mirage.aop;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 import com.sun.saw.Workflow;
 import com.sun.saw.WorkflowException;
 import com.sun.saw.WorkflowFactory;
 import com.sun.saw.vo.SaveTaskVO;
 
 import java.util.Properties;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 
@@ -173,7 +173,7 @@ public class JournalArticleLocalServiceAdvice extends BaseMirageAdvice {
 	}
 
 	private static Log _log =
-		LogFactory.getLog(JournalArticleLocalServiceAdvice.class);
+		LogFactoryUtil.getLog(JournalArticleLocalServiceAdvice.class);
 
 	private boolean _outputVOError;
 

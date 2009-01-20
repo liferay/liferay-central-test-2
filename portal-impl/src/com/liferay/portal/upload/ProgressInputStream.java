@@ -22,15 +22,15 @@
 
 package com.liferay.portal.upload;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletSession;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ProgressInputStream.java.html"><b><i>View Source</i></b></a>
@@ -152,7 +152,7 @@ public class ProgressInputStream extends InputStream {
 
 	private static final int _DEFAULT_INITIAL_BUFFER_SIZE = 4 * 1024;
 
-	private static Log _log = LogFactory.getLog(ProgressInputStream.class);
+	private static Log _log = LogFactoryUtil.getLog(ProgressInputStream.class);
 
 	private PortletSession _portletSession;
 	private InputStream _is;

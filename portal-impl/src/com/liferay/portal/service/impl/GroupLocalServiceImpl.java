@@ -31,6 +31,8 @@ import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredGroupException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
@@ -76,9 +78,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="GroupLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -1084,6 +1083,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 	protected File publicLARFile;
 
-	private static Log _log = LogFactory.getLog(GroupLocalServiceImpl.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(GroupLocalServiceImpl.class);
 
 }

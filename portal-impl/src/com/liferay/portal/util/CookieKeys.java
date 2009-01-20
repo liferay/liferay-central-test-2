@@ -23,6 +23,8 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.CookieNotSupportedException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.CookieUtil;
@@ -32,8 +34,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="CookieKeys.java.html"><b><i>View Source</i></b></a>
@@ -239,6 +239,6 @@ public class CookieKeys {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(CookieKeys.class);
+	private static Log _log = LogFactoryUtil.getLog(CookieKeys.class);
 
 }

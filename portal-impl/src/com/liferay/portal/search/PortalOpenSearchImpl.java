@@ -22,6 +22,8 @@
 
 package com.liferay.portal.search;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.Field;
@@ -50,9 +52,6 @@ import java.util.List;
 import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PortalOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
@@ -191,6 +190,6 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(PortalOpenSearchImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(PortalOpenSearchImpl.class);
 
 }

@@ -24,11 +24,10 @@ package com.liferay.portal.spring.context;
 
 import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.io.FileNotFoundException;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
@@ -79,6 +78,7 @@ public class TunnelApplicationContext extends XmlWebApplicationContext {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(TunnelApplicationContext.class);
+	private static Log _log =
+		LogFactoryUtil.getLog(TunnelApplicationContext.class);
 
 }

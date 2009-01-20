@@ -23,6 +23,8 @@
 package com.liferay.portal.upgrade.v4_4_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
@@ -30,9 +32,6 @@ import com.liferay.portal.upgrade.UpgradeProcess;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UpgradeUUID.java.html"><b><i>View Source</i></b></a>
@@ -110,6 +109,6 @@ public class UpgradeUUID extends UpgradeProcess {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeUUID.class);
+	private static Log _log = LogFactoryUtil.getLog(UpgradeUUID.class);
 
 }

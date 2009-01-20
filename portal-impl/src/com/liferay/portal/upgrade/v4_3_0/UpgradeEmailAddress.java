@@ -22,6 +22,8 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.impl.EmailAddressImpl;
@@ -43,9 +45,6 @@ import java.sql.Types;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UpgradeEmailAddress.java.html"><b><i>View Source</i></b></a>
@@ -110,6 +109,6 @@ public class UpgradeEmailAddress extends UpgradeProcess {
 			upgradePKColumn.getValueMapper(), "email-address-id");
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeEmailAddress.class);
+	private static Log _log = LogFactoryUtil.getLog(UpgradeEmailAddress.class);
 
 }

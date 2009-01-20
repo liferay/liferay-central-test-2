@@ -23,6 +23,8 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -38,9 +40,6 @@ import java.util.Locale;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="LanguageServlet.java.html"><b><i>View Source</i></b></a>
@@ -112,6 +111,6 @@ public class LanguageServlet extends HttpServlet {
 		ServletResponseUtil.write(response, value.getBytes(StringPool.UTF8));
 	}
 
-	private static Log _log = LogFactory.getLog(LanguageServlet.class);
+	private static Log _log = LogFactoryUtil.getLog(LanguageServlet.class);
 
 }

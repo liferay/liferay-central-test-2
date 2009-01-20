@@ -23,13 +23,12 @@
 package com.liferay.portlet.documentlibrary.model.impl;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="DLFileShortcutImpl.java.html"><b><i>View Source</i></b></a>
@@ -66,7 +65,7 @@ public class DLFileShortcutImpl
 		return folder;
 	}
 
-	private static Log _log = LogFactory.getLog(DLFileShortcutImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(DLFileShortcutImpl.class);
 
 	private String _userUuid;
 

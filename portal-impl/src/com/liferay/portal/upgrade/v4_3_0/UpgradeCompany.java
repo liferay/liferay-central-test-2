@@ -24,6 +24,8 @@ package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.documentlibrary.service.DLLocalServiceUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.search.lucene.LuceneUtil;
@@ -36,9 +38,6 @@ import com.liferay.portal.upgrade.util.ValueMapperFactory;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.WebIdUtil;
 import com.liferay.portal.util.PortletKeys;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UpgradeCompany.java.html"><b><i>View Source</i></b></a>
@@ -189,6 +188,6 @@ public class UpgradeCompany extends UpgradeProcess {
 		"UserGroup", "User_", "Website", "WikiNode", "WikiPage"
 	};
 
-	private static Log _log = LogFactory.getLog(UpgradeCompany.class);
+	private static Log _log = LogFactoryUtil.getLog(UpgradeCompany.class);
 
 }

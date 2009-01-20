@@ -24,13 +24,12 @@ package com.liferay.portlet.ratings.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.ratings.NoSuchStatsException;
 import com.liferay.portlet.ratings.model.RatingsStats;
 import com.liferay.portlet.ratings.service.base.RatingsStatsLocalServiceBaseImpl;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="RatingsStatsLocalServiceImpl.java.html"><b><i>View Source</i></b>
@@ -89,6 +88,6 @@ public class RatingsStatsLocalServiceImpl
 	}
 
 	private static Log _log =
-		LogFactory.getLog(RatingsStatsLocalServiceImpl.class);
+		LogFactoryUtil.getLog(RatingsStatsLocalServiceImpl.class);
 
 }

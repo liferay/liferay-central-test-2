@@ -25,15 +25,14 @@ package com.liferay.portal.spring.context;
 import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.kernel.bean.BeanLocator;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
 
 import java.lang.reflect.Method;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.ContextLoader;
@@ -112,6 +111,6 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 	}
 
 	private static Log _log =
-		LogFactory.getLog(PortletContextLoaderListener.class);
+		LogFactoryUtil.getLog(PortletContextLoaderListener.class);
 
 }

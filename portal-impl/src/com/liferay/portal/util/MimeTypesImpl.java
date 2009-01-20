@@ -22,14 +22,13 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MimeTypes;
 
 import java.io.File;
 
 import javax.activation.MimetypesFileTypeMap;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="MimeTypesImpl.java.html"><b><i>View Source</i></b></a>
@@ -74,7 +73,7 @@ public class MimeTypesImpl implements MimeTypes {
 		return contentType;
 	}
 
-	private static Log _log = LogFactory.getLog(MimeTypesImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(MimeTypesImpl.class);
 
 	private MimetypesFileTypeMap _mimeTypes;
 

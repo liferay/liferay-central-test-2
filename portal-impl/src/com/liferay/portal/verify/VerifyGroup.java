@@ -23,6 +23,8 @@
 package com.liferay.portal.verify;
 
 import com.liferay.portal.GroupFriendlyURLException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
@@ -30,9 +32,6 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="VerifyGroup.java.html"><b><i>View Source</i></b></a>
@@ -96,6 +95,6 @@ public class VerifyGroup extends VerifyProcess {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(VerifyGroup.class);
+	private static Log _log = LogFactoryUtil.getLog(VerifyGroup.class);
 
 }

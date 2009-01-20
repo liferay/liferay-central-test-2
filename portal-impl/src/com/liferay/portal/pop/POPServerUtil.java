@@ -24,15 +24,14 @@ package com.liferay.portal.pop;
 
 import com.liferay.portal.kernel.job.IntervalJob;
 import com.liferay.portal.kernel.job.JobSchedulerUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.util.UnmodifiableList;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="POPServerUtil.java.html"><b><i>View Source</i></b></a>
@@ -170,7 +169,7 @@ public class POPServerUtil {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(POPServerUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(POPServerUtil.class);
 
 	private static POPServerUtil _instance = new POPServerUtil();
 

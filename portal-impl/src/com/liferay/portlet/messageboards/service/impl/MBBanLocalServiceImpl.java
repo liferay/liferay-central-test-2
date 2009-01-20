@@ -24,6 +24,8 @@ package com.liferay.portlet.messageboards.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsValues;
@@ -35,9 +37,6 @@ import com.liferay.portlet.messageboards.util.MBUtil;
 
 import java.util.Date;
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="MBBanLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -147,6 +146,7 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(MBBanLocalServiceImpl.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(MBBanLocalServiceImpl.class);
 
 }

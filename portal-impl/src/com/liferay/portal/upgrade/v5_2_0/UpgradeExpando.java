@@ -23,15 +23,14 @@
 package com.liferay.portal.upgrade.v5_2_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UpgradeExpando.java.html"><b><i>View Source</i></b></a>
@@ -86,6 +85,6 @@ public class UpgradeExpando extends UpgradeProcess {
 	private static final String _GET_COMPANY_IDS =
 		"select companyId from Company";
 
-	private static Log _log = LogFactory.getLog(UpgradeExpando.class);
+	private static Log _log = LogFactoryUtil.getLog(UpgradeExpando.class);
 
 }

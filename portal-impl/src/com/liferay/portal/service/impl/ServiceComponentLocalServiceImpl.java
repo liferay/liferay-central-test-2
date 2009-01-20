@@ -26,6 +26,8 @@ import com.liferay.portal.OldServiceComponentException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.cache.CacheRegistry;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -50,9 +52,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletContext;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ServiceComponentLocalServiceImpl.java.html"><b><i>View Source</i>
@@ -363,6 +362,6 @@ public class ServiceComponentLocalServiceImpl
 	private static final int _MAX_SERVICE_COMPONENTS = 10;
 
 	private static Log _log =
-		LogFactory.getLog(ServiceComponentLocalServiceImpl.class);
+		LogFactoryUtil.getLog(ServiceComponentLocalServiceImpl.class);
 
 }

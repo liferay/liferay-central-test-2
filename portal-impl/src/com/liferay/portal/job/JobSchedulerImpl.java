@@ -24,14 +24,13 @@ package com.liferay.portal.job;
 
 import com.liferay.portal.kernel.job.IntervalJob;
 import com.liferay.portal.kernel.job.JobScheduler;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Time;
 
 import java.util.Date;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
@@ -142,7 +141,7 @@ public class JobSchedulerImpl implements JobScheduler {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(JobScheduler.class);
+	private static Log _log = LogFactoryUtil.getLog(JobScheduler.class);
 
 	private Scheduler _scheduler;
 

@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.randombibleverse.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Randomizer;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.UnmodifiableList;
@@ -44,9 +46,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.portlet.PortletPreferences;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="RBVUtil.java.html"><b><i>View Source</i></b></a>
@@ -152,7 +151,7 @@ public class RBVUtil {
 			wci);
 	}
 
-	private static Log _log = LogFactory.getLog(RBVUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(RBVUtil.class);
 
 	private static RBVUtil _instance = new RBVUtil();
 

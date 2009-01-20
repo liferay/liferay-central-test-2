@@ -30,6 +30,8 @@ import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.comm.CommLink;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -100,8 +102,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.time.StopWatch;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="LayoutImporter.java.html"><b><i>View Source</i></b></a>
@@ -1473,7 +1473,7 @@ public class LayoutImporter {
 		return portletIds;
 	}
 
-	private static Log _log = LogFactory.getLog(LayoutImporter.class);
+	private static Log _log = LogFactoryUtil.getLog(LayoutImporter.class);
 
 	private PortletImporter _portletImporter = new PortletImporter();
 

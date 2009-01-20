@@ -22,12 +22,11 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Randomizer;
 
 import java.util.Map;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="CustomUserAttributes.java.html"><b><i>View Source</i></b></a>
@@ -71,6 +70,6 @@ public class CustomUserAttributes implements Cloneable {
 		return new CustomUserAttributes();
 	}
 
-	private static Log _log = LogFactory.getLog(CustomUserAttributes.class);
+	private static Log _log = LogFactoryUtil.getLog(CustomUserAttributes.class);
 
 }

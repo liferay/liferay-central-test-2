@@ -22,6 +22,8 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.model.Portlet;
@@ -35,9 +37,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.portlet.PortletContext;
 
 import javax.servlet.ServletContext;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PortletContextFactory.java.html"><b><i>View Source</i></b></a>
@@ -130,7 +129,8 @@ public class PortletContextFactory {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(PortletContextFactory.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(PortletContextFactory.class);
 
 	private static PortletContextFactory _instance =
 		new PortletContextFactory();

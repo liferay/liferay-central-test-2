@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.journal.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -32,9 +34,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PropertiesTransformerListener.java.html"><b><i>View Source</i></b>
@@ -173,6 +172,6 @@ public class PropertiesTransformerListener extends TransformerListener {
 	private static final String _GLOBAL_PROPERTIES = "GLOBAL-PROPERTIES";
 
 	private static Log _log =
-		LogFactory.getLog(PropertiesTransformerListener.class);
+		LogFactoryUtil.getLog(PropertiesTransformerListener.class);
 
 }

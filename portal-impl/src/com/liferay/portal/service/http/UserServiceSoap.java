@@ -215,10 +215,9 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static void deleteRoleUser(long roleId, long userId)
-		throws RemoteException {
+	public static void deletePortrait(long userId) throws RemoteException {
 		try {
-			UserServiceUtil.deleteRoleUser(roleId, userId);
+			UserServiceUtil.deletePortrait(userId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -227,9 +226,10 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static void deletePortrait(long userId) throws RemoteException {
+	public static void deleteRoleUser(long roleId, long userId)
+		throws RemoteException {
 		try {
-			UserServiceUtil.deletePortrait(userId);
+			UserServiceUtil.deleteRoleUser(roleId, userId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

@@ -22,11 +22,10 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PortalPreferencesImpl.java.html"><b><i>View Source</i></b></a>
@@ -119,7 +118,7 @@ public class PortalPreferencesImpl implements PortalPreferences {
 
 	private static final String _RANDOM_KEY = "r";
 
-	private static Log _log = LogFactory.getLog(PortalPreferences.class);
+	private static Log _log = LogFactoryUtil.getLog(PortalPreferences.class);
 
 	private PortletPreferencesImpl _preferences;
 	private boolean _signedIn;

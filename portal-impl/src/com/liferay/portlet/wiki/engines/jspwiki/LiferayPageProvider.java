@@ -29,6 +29,8 @@ import com.ecyrd.jspwiki.providers.ProviderException;
 import com.ecyrd.jspwiki.providers.WikiPageProvider;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
@@ -39,9 +41,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="LiferayPageProvider.java.html"><b><i>View Source</i></b></a>
@@ -235,7 +234,7 @@ public class LiferayPageProvider implements WikiPageProvider {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(LiferayPageProvider.class);
+	private static Log _log = LogFactoryUtil.getLog(LiferayPageProvider.class);
 
 	private WikiEngine _engine;
 	private long _nodeId;

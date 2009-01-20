@@ -25,6 +25,8 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -48,9 +50,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ImageServlet.java.html"><b><i>View Source</i></b></a>
@@ -249,7 +248,7 @@ public class ImageServlet extends HttpServlet {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(ImageServlet.class);
+	private static Log _log = LogFactoryUtil.getLog(ImageServlet.class);
 
 	private boolean _lastModified = true;
 

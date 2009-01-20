@@ -23,6 +23,8 @@
 package com.liferay.portal.service.impl;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -57,9 +59,6 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.ServletContext;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="LayoutTemplateLocalServiceImpl.java.html"><b><i>View Source</i></b>
@@ -617,7 +616,7 @@ public class LayoutTemplateLocalServiceImpl
 	}
 
 	private static Log _log =
-		LogFactory.getLog(LayoutTemplateLocalServiceImpl.class);
+		LogFactoryUtil.getLog(LayoutTemplateLocalServiceImpl.class);
 
 	private static Map<String, LayoutTemplate> _portalStandard =
 		new LinkedHashMap<String, LayoutTemplate>();

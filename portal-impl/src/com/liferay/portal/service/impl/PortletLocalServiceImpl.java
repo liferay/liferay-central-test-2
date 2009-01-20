@@ -24,6 +24,8 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.image.SpriteProcessorUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.servlet.ServletContextUtil;
@@ -82,9 +84,6 @@ import javax.portlet.PortletMode;
 import javax.portlet.PreferencesValidator;
 
 import javax.servlet.ServletContext;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PortletLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -1735,7 +1734,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 	private static final String _WSRP_CATEGORY = "category.wsrp";
 
-	private static Log _log = LogFactory.getLog(PortletLocalServiceImpl.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(PortletLocalServiceImpl.class);
 
 	private static Map<String, PortletApp> _portletAppsPool =
 		new ConcurrentHashMap<String, PortletApp>();

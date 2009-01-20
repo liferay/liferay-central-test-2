@@ -24,6 +24,8 @@ package com.liferay.portlet.wiki.util;
 
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.model.WikiPage;
@@ -37,8 +39,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.portlet.PortletURL;
 
 import org.apache.commons.lang.time.StopWatch;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="WikiCacheUtil.java.html"><b><i>View Source</i></b></a>
@@ -169,7 +169,7 @@ public class WikiCacheUtil {
 
 	private static final String _OUTGOING_LINKS = "OUTGOING_LINKS";
 
-	private static Log _log = LogFactory.getLog(WikiUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(WikiUtil.class);
 
 	private static PortalCache _cache = MultiVMPoolUtil.getCache(CACHE_NAME);
 

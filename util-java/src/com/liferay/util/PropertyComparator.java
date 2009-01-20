@@ -22,13 +22,14 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 import java.lang.reflect.InvocationTargetException;
 
 import java.util.Comparator;
 
 import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PropertyComparator.java.html"><b><i>View Source</i></b></a>
@@ -115,7 +116,7 @@ public class PropertyComparator implements Comparator {
 		return -1;
 	}
 
-	private static Log _log = LogFactory.getLog(PropertyComparator.class);
+	private static Log _log = LogFactoryUtil.getLog(PropertyComparator.class);
 
 	private String[] _propertyNames;
 	private boolean _asc;

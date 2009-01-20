@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.messageboards.pop;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.pop.MessageListenerException;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -46,8 +48,6 @@ import com.liferay.portlet.messageboards.util.MBUtil;
 import javax.mail.Message;
 
 import org.apache.commons.lang.time.StopWatch;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="MessageListenerImpl.java.html"><b><i>View Source</i></b></a>
@@ -263,6 +263,6 @@ public class MessageListenerImpl implements MessageListener {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(MessageListenerImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(MessageListenerImpl.class);
 
 }

@@ -22,11 +22,11 @@
 
 package com.liferay.util.transport;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="MulticastClientTool.java.html"><b><i>View Source</i></b></a>
@@ -126,7 +126,7 @@ public class MulticastClientTool {
 		return argsMap;
 	}
 
-	private static final Log _log = LogFactory.getLog(
+	private static final Log _log = LogFactoryUtil.getLog(
 		MulticastClientTool.class);
 
 }

@@ -29,6 +29,8 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.job.Scheduler;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
@@ -100,8 +102,6 @@ import javax.portlet.PreferencesValidator;
 
 import javax.servlet.ServletContext;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.portals.bridges.struts.StrutsPortlet;
 
 /**
@@ -718,7 +718,8 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(PortletHotDeployListener.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(PortletHotDeployListener.class);
 
 	private static Map<String, ObjectValuePair<long[], List<Portlet>>> _vars =
 		new HashMap<String, ObjectValuePair<long[], List<Portlet>>>();

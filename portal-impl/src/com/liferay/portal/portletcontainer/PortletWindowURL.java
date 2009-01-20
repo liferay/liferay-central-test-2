@@ -41,6 +41,8 @@
 
 package com.liferay.portal.portletcontainer;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portlet.PortletURLImpl;
@@ -62,9 +64,6 @@ import javax.portlet.PortletRequest;
 import javax.portlet.WindowStateException;
 
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PortletWindowURL.java.html"><b><i>View Source</i></b></a>
@@ -208,7 +207,7 @@ public class PortletWindowURL implements ChannelURL, Serializable {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(PortletWindowURL.class);
+	private static Log _log = LogFactoryUtil.getLog(PortletWindowURL.class);
 
 	private PortletURLImpl _portletURLImpl;
 	private ChannelURLType _urlType;

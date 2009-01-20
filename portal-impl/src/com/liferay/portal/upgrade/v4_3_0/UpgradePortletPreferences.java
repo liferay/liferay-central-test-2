@@ -22,6 +22,8 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.model.impl.PortletPreferencesImpl;
 import com.liferay.portal.upgrade.UpgradeException;
@@ -42,9 +44,6 @@ import com.liferay.portal.util.PortletKeys;
 import java.sql.Types;
 
 import java.util.Iterator;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UpgradePortletPreferences.java.html"><b><i>View Source</i></b></a>
@@ -147,6 +146,6 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 	};
 
 	private static Log _log =
-		LogFactory.getLog(UpgradePortletPreferences.class);
+		LogFactoryUtil.getLog(UpgradePortletPreferences.class);
 
 }

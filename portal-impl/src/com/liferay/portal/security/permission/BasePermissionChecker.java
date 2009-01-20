@@ -22,6 +22,8 @@
 
 package com.liferay.portal.security.permission;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
@@ -30,9 +32,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.admin.util.OmniadminUtil;
 
 import javax.portlet.PortletRequest;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="BasePermissionChecker.java.html"><b><i>View Source</i></b></a>
@@ -139,6 +138,7 @@ public abstract class BasePermissionChecker implements PermissionChecker {
 	protected Boolean omniadmin;
 	protected Role ownerRole;
 
-	private static Log _log = LogFactory.getLog(BasePermissionChecker.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(BasePermissionChecker.class);
 
 }

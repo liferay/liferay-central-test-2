@@ -24,11 +24,10 @@ package com.liferay.portal.dao.orm.hibernate;
 
 import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.cache.CacheRegistryItem;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.util.Map;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.hibernate.cache.Cache;
 import org.hibernate.cache.CacheException;
@@ -132,7 +131,7 @@ public class CacheWrapper implements Cache, CacheRegistryItem {
 		_cache.clear();
 	}
 
-	private static Log _log = LogFactory.getLog(CacheWrapper.class);
+	private static Log _log = LogFactoryUtil.getLog(CacheWrapper.class);
 
 	private Cache _cache;
 	private String _registryName;

@@ -22,6 +22,8 @@
 
 package com.liferay.portal.dao.orm.hibernate;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import com.opensymphony.oscache.base.CacheEntry;
@@ -29,9 +31,6 @@ import com.opensymphony.oscache.base.NeedsRefreshException;
 import com.opensymphony.oscache.general.GeneralCacheAdministrator;
 
 import java.util.Map;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.hibernate.cache.Cache;
 import org.hibernate.cache.CacheException;
@@ -138,7 +137,7 @@ public class OSCache implements Cache {
 		return keyString;
 	}
 
-	private static Log _log = LogFactory.getLog(OSCache.class);
+	private static Log _log = LogFactoryUtil.getLog(OSCache.class);
 
 	private static GeneralCacheAdministrator _cache =
 		new GeneralCacheAdministrator(PropsUtil.getProperties());

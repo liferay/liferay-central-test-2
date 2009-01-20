@@ -23,6 +23,8 @@
 package com.liferay.portal.security.auth;
 
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -32,9 +34,6 @@ import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="BasicAuthHeaderAutoLogin.java.html"><b><i>View Source</i></b></a>
@@ -147,6 +146,7 @@ public class BasicAuthHeaderAutoLogin implements AutoLogin {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(BasicAuthHeaderAutoLogin.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(BasicAuthHeaderAutoLogin.class);
 
 }

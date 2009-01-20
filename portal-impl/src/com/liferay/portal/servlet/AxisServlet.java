@@ -22,6 +22,8 @@
 
 package com.liferay.portal.servlet;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.servlet.UncommittedServletResponse;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -39,9 +41,6 @@ import com.liferay.util.xml.XMLFormatter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="AxisServlet.java.html"><b><i>View Source</i></b></a>
@@ -147,6 +146,6 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 				"arrayType\" wsdl:arrayType=\"soapenc:string[]\"/>" +
 					"</restriction></complexContent></complexType>";
 
-	private static Log _log = LogFactory.getLog(AxisServlet.class);
+	private static Log _log = LogFactoryUtil.getLog(AxisServlet.class);
 
 }

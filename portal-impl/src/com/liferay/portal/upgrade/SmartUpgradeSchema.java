@@ -22,10 +22,9 @@
 
 package com.liferay.portal.upgrade;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.InstancePool;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="SmartUpgradeSchema.java.html"><b><i>View Source</i></b></a>
@@ -108,7 +107,7 @@ public abstract class SmartUpgradeSchema extends UpgradeProcess {
 		com.liferay.portal.upgrade.v5_2_0.UpgradeSchema.class
 	};
 
-	private static Log _log = LogFactory.getLog(SmartUpgradeSchema.class);
+	private static Log _log = LogFactoryUtil.getLog(SmartUpgradeSchema.class);
 
 	private boolean _alreadyUpgraded;
 

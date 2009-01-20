@@ -22,12 +22,11 @@
 
 package com.liferay.portal.upgrade;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.upgrade.v5_1_2.UpgradeCalendar;
 import com.liferay.portal.upgrade.v5_1_2.UpgradeSchema;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UpgradeProcess_5_1_2.java.html"><b><i>View Source</i></b></a>
@@ -50,6 +49,6 @@ public class UpgradeProcess_5_1_2 extends UpgradeProcess {
 		upgrade(UpgradeCalendar.class);
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeProcess_5_1_2.class);
+	private static Log _log = LogFactoryUtil.getLog(UpgradeProcess_5_1_2.class);
 
 }

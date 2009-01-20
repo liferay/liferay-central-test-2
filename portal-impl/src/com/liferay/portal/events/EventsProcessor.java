@@ -26,6 +26,8 @@ import com.liferay.portal.kernel.events.Action;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SessionAction;
 import com.liferay.portal.kernel.events.SimpleAction;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -37,9 +39,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="EventsProcessor.java.html"><b><i>View Source</i></b></a>
@@ -180,7 +179,7 @@ public class EventsProcessor {
 		events.remove(event);
 	}
 
-	private static Log _log = LogFactory.getLog(EventsProcessor.class);
+	private static Log _log = LogFactoryUtil.getLog(EventsProcessor.class);
 
 	private static EventsProcessor _instance = new EventsProcessor();
 

@@ -22,6 +22,8 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 
 import java.io.ByteArrayInputStream;
@@ -40,8 +42,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.PageContext;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.util.RequestUtils;
 
 /**
@@ -181,7 +181,8 @@ public class PortletResourceBundles {
 		_contexts.remove(servletContextName);
 	}
 
-	private static Log _log = LogFactory.getLog(PortletResourceBundles.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(PortletResourceBundles.class);
 
 	private static PortletResourceBundles _instance =
 		new PortletResourceBundles();

@@ -22,11 +22,11 @@
 
 package com.liferay.util.bridges.ruby;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.util.bridges.bsf.BaseBSFPortlet;
 
 import org.apache.bsf.BSFException;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.jruby.RubyException;
 import org.jruby.exceptions.RaiseException;
@@ -87,6 +87,6 @@ public class RubyPortlet extends BaseBSFPortlet {
 
 	private static final String _SCRIPTING_ENGINE_LANGUAGE = "ruby";
 
-	private static Log _log = LogFactory.getLog(RubyPortlet.class);
+	private static Log _log = LogFactoryUtil.getLog(RubyPortlet.class);
 
 }

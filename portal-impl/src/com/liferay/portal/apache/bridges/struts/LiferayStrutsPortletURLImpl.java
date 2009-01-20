@@ -22,12 +22,12 @@
 
 package com.liferay.portal.apache.bridges.struts;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portlet.PortletResponseImpl;
 import com.liferay.portlet.PortletURLImplWrapper;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.portals.bridges.struts.StrutsPortletURL;
 
 /**
@@ -80,6 +80,6 @@ public class LiferayStrutsPortletURLImpl extends PortletURLImplWrapper {
 	}
 
 	private static Log _log =
-		LogFactory.getLog(LiferayStrutsPortletURLImpl.class);
+		LogFactoryUtil.getLog(LiferayStrutsPortletURLImpl.class);
 
 }

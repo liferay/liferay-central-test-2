@@ -23,6 +23,8 @@
 package com.liferay.portal.search.lucene;
 
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
@@ -38,8 +40,6 @@ import java.io.IOException;
 
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.SortField;
@@ -193,6 +193,7 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 		return subset;
 	}
 
-	private static Log _log = LogFactory.getLog(LuceneIndexSearcherImpl.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(LuceneIndexSearcherImpl.class);
 
 }

@@ -24,6 +24,8 @@ package com.liferay.portal.pop;
 
 import com.liferay.portal.kernel.job.IntervalJob;
 import com.liferay.portal.kernel.job.JobExecutionContext;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -44,9 +46,6 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.internet.InternetAddress;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="POPNotificationsJob.java.html"><b><i>View Source</i></b></a>
@@ -189,7 +188,7 @@ public class POPNotificationsJob implements IntervalJob {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(POPNotificationsJob.class);
+	private static Log _log = LogFactoryUtil.getLog(POPNotificationsJob.class);
 
 	private Store _store;
 	private Folder _inboxFolder;

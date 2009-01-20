@@ -25,6 +25,8 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -61,9 +63,6 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.TimeZone;
 import java.util.TreeSet;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UserImpl.java.html"><b><i>View Source</i></b></a>
@@ -599,7 +598,7 @@ public class UserImpl extends UserModelImpl implements User {
 		super.setTimeZoneId(timeZoneId);
 	}
 
-	private static Log _log = LogFactory.getLog(UserImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(UserImpl.class);
 
 	private boolean _passwordModified;
 	private String _passwordUnencrypted;

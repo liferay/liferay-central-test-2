@@ -23,6 +23,8 @@
 package com.liferay.portlet.blogs.action;
 
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -44,8 +46,6 @@ import javax.portlet.WindowState;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -164,6 +164,6 @@ public class FindEntryAction extends Action {
 		return urlTitle;
 	}
 
-	private static Log _log = LogFactory.getLog(FindEntryAction.class);
+	private static Log _log = LogFactoryUtil.getLog(FindEntryAction.class);
 
 }

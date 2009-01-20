@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.layoutconfiguration.util.velocity;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -37,9 +39,6 @@ import java.util.TreeMap;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PortletColumnLogic.java.html"><b><i>View Source</i></b></a>
@@ -143,7 +142,7 @@ public class PortletColumnLogic extends RuntimeLogic {
 		return _portletsMap;
 	}
 
-	private static Log _log = LogFactory.getLog(PortletColumnLogic.class);
+	private static Log _log = LogFactoryUtil.getLog(PortletColumnLogic.class);
 
 	private ServletContext _servletContext;
 	private HttpServletRequest _request;

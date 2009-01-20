@@ -22,6 +22,8 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringPool;
@@ -41,9 +43,6 @@ import javax.portlet.PortletRequestDispatcher;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PortletContextImpl.java.html"><b><i>View Source</i></b></a>
@@ -233,7 +232,7 @@ public class PortletContextImpl implements PortletContext {
 
 	private static int _MINOR_VERSION = 0;
 
-	private static Log _log = LogFactory.getLog(PortletContextImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(PortletContextImpl.class);
 
 	private Portlet _portlet;
 	private ServletContext _servletContext;

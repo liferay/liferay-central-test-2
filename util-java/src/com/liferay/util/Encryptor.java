@@ -22,6 +22,8 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.Digester;
 import com.liferay.portal.kernel.util.DigesterUtil;
@@ -35,9 +37,6 @@ import java.security.Security;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="Encryptor.java.html"><b><i>View Source</i></b></a>
@@ -207,6 +206,6 @@ public class Encryptor {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(Encryptor.class);
+	private static Log _log = LogFactoryUtil.getLog(Encryptor.class);
 
 }

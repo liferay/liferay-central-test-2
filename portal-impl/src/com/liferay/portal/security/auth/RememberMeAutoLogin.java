@@ -22,6 +22,8 @@
 
 package com.liferay.portal.security.auth;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -33,9 +35,6 @@ import com.liferay.portal.util.PortalUtil;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="RememberMeAutoLogin.java.html"><b><i>View Source</i></b></a>
@@ -107,6 +106,6 @@ public class RememberMeAutoLogin implements AutoLogin {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(RememberMeAutoLogin.class);
+	private static Log _log = LogFactoryUtil.getLog(RememberMeAutoLogin.class);
 
 }

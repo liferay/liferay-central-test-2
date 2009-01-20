@@ -28,6 +28,8 @@ import com.icesoft.faces.component.inputfile.InputFile;
 import com.icesoft.faces.webapp.xmlhttp.PersistentFacesState;
 import com.icesoft.faces.webapp.xmlhttp.RenderingException;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.util.bridges.jsf.common.FacesMessageUtil;
 
 import java.text.DecimalFormat;
@@ -36,9 +38,6 @@ import java.util.EventObject;
 
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="FileUploadManagedBean.java.html"><b><i>View Source</i></b></a>
@@ -178,7 +177,8 @@ public class FileUploadManagedBean implements Renderable {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(FileUploadManagedBean.class);
+	private static Log _log =
+		LogFactoryUtil.getLog(FileUploadManagedBean.class);
 
 	private PersistentFacesState _state;
 	private RenderManager _renderManager;

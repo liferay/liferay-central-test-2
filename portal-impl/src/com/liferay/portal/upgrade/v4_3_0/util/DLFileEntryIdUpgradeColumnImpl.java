@@ -23,6 +23,8 @@
 package com.liferay.portal.upgrade.v4_3_0.util;
 
 import com.liferay.documentlibrary.service.DLLocalServiceUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.ValueMapper;
@@ -30,9 +32,6 @@ import com.liferay.portal.upgrade.util.ValueMapperFactory;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="DLFileEntryIdUpgradeColumnImpl.java.html"><b><i>View Source</i></b>
@@ -93,7 +92,7 @@ public class DLFileEntryIdUpgradeColumnImpl extends PKUpgradeColumnImpl {
 	}
 
 	private static Log _log =
-		LogFactory.getLog(DLFileEntryIdUpgradeColumnImpl.class);
+		LogFactoryUtil.getLog(DLFileEntryIdUpgradeColumnImpl.class);
 
 	private UpgradeColumn _companyIdColumn;
 	private UpgradeColumn _folderIdColumn;

@@ -23,12 +23,11 @@
 package com.liferay.portal.deploy.auto;
 
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.Portal;
 
 import java.io.File;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PortletAutoDeployListener.java.html"><b><i>View Source</i></b></a>
@@ -108,7 +107,7 @@ public class PortletAutoDeployListener extends BaseAutoDeployListener {
 	}
 
 	private static Log _log =
-		LogFactory.getLog(PortletAutoDeployListener.class);
+		LogFactoryUtil.getLog(PortletAutoDeployListener.class);
 
 	private AutoDeployer _deployer;
 	private PHPPortletAutoDeployer _phpDeployer;

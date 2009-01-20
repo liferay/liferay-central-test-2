@@ -22,6 +22,8 @@
 
 package com.liferay.portal.upload;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -44,8 +46,6 @@ import javax.servlet.http.HttpServletRequestWrapper;
 
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UploadServletRequestImpl.java.html"><b><i>View Source</i></b></a>
@@ -266,7 +266,8 @@ public class UploadServletRequestImpl
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(UploadServletRequestImpl.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(UploadServletRequestImpl.class);
 
 	private LiferayServletRequest _lsr;
 	private Map<String, LiferayFileItem[]> _params;

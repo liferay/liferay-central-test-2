@@ -22,6 +22,8 @@
 
 package com.liferay.portal.servlet.taglib.portlet;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.PortletModeFactory;
 import com.liferay.portal.kernel.portlet.WindowStateFactory;
@@ -38,9 +40,6 @@ import javax.portlet.PortletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ActionURLTagUtil.java.html"><b><i>View Source</i></b></a>
@@ -175,6 +174,6 @@ public class ActionURLTagUtil {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(ActionURLTagUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(ActionURLTagUtil.class);
 
 }

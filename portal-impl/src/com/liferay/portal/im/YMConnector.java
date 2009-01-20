@@ -22,14 +22,13 @@
 
 package com.liferay.portal.im;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import java.lang.reflect.Method;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="YMConnector.java.html"><b><i>View Source</i></b></a>
@@ -122,7 +121,7 @@ public class YMConnector {
 
 	private static final String _SESSION = "ymsg.network.Session";
 
-	private static Log _log = LogFactory.getLog(YMConnector.class);
+	private static Log _log = LogFactoryUtil.getLog(YMConnector.class);
 
 	private static YMConnector _instance = new YMConnector();
 

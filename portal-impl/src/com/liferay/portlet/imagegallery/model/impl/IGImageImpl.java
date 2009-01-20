@@ -23,6 +23,8 @@
 package com.liferay.portlet.imagegallery.model.impl;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Image;
@@ -31,9 +33,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="IGImageImpl.java.html"><b><i>View Source</i></b></a>
@@ -129,7 +128,7 @@ public class IGImageImpl extends IGImageModelImpl implements IGImage {
 		return _imageSize.intValue();
 	}
 
-	private static Log _log = LogFactory.getLog(IGImageImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(IGImageImpl.class);
 
 	private String _userUuid;
 	private String _imageType;

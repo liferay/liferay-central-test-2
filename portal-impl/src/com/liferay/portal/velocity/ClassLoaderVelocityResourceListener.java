@@ -22,10 +22,11 @@
 
 package com.liferay.portal.velocity;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 import java.io.InputStream;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.velocity.exception.ResourceNotFoundException;
 
 /**
@@ -67,6 +68,6 @@ public class ClassLoaderVelocityResourceListener
 	}
 
 	private static Log _log =
-		LogFactory.getLog(ClassLoaderVelocityResourceListener.class);
+		LogFactoryUtil.getLog(ClassLoaderVelocityResourceListener.class);
 
 }

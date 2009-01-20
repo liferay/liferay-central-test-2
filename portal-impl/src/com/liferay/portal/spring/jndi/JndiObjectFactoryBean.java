@@ -23,12 +23,11 @@
 package com.liferay.portal.spring.jndi;
 
 import com.liferay.portal.kernel.jndi.JNDIUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="JndiObjectFactoryBean.java.html"><b><i>View Source</i></b></a>
@@ -50,6 +49,7 @@ public class JndiObjectFactoryBean
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(JndiObjectFactoryBean.class);
+	private static Log _log =
+		LogFactoryUtil.getLog(JndiObjectFactoryBean.class);
 
 }

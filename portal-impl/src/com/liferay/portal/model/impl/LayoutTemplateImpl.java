@@ -22,6 +22,8 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -35,9 +37,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="LayoutTemplateImpl.java.html"><b><i>View Source</i></b></a>
@@ -278,7 +277,7 @@ public class LayoutTemplateImpl
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(LayoutTemplateImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(LayoutTemplateImpl.class);
 
 	private String _layoutTemplateId;
 	private boolean _standard;

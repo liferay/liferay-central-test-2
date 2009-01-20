@@ -22,6 +22,8 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Type;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -42,9 +44,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implements ${entity.name}Persistence {
 
@@ -2115,6 +2114,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 		</#if>
 	</#list>
 
-	private static Log _log = LogFactory.getLog(${entity.name}PersistenceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(${entity.name}PersistenceImpl.class);
 
 }

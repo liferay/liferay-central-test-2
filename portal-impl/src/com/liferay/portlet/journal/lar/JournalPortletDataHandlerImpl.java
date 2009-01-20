@@ -25,6 +25,8 @@ package com.liferay.portlet.journal.lar;
 import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -81,9 +83,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.portlet.PortletPreferences;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="JournalPortletDataHandlerImpl.java.html"><b><i>View Source</i></b>
@@ -1675,6 +1674,6 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			_NAMESPACE, "structures-templates-and-feeds", true, true);
 
 	private static Log _log =
-		LogFactory.getLog(JournalPortletDataHandlerImpl.class);
+		LogFactoryUtil.getLog(JournalPortletDataHandlerImpl.class);
 
 }

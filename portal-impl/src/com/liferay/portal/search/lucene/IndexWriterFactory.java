@@ -23,6 +23,8 @@
 package com.liferay.portal.search.lucene;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
@@ -40,8 +42,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Semaphore;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.analysis.SimpleAnalyzer;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
@@ -362,7 +362,7 @@ public class IndexWriterFactory {
 	private static final int _OPTIMIZE_INTERVAL = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.LUCENE_OPTIMIZE_INTERVAL));
 
-	private static Log _log = LogFactory.getLog(IndexWriterFactory.class);
+	private static Log _log = LogFactoryUtil.getLog(IndexWriterFactory.class);
 
 	private FSDirectory _readOnlyLuceneDir = null;
 	private IndexWriter _readOnlyIndexWriter = null;

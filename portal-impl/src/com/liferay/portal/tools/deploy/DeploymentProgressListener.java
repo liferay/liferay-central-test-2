@@ -22,6 +22,9 @@
 
 package com.liferay.portal.tools.deploy;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 import javax.enterprise.deploy.shared.ModuleType;
 import javax.enterprise.deploy.spi.DeploymentManager;
 import javax.enterprise.deploy.spi.TargetModuleID;
@@ -29,9 +32,6 @@ import javax.enterprise.deploy.spi.status.DeploymentStatus;
 import javax.enterprise.deploy.spi.status.ProgressEvent;
 import javax.enterprise.deploy.spi.status.ProgressListener;
 import javax.enterprise.deploy.spi.status.ProgressObject;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="DeploymentProgressListener.java.html"><b><i>View Source</i></b></a>
@@ -94,7 +94,7 @@ public class DeploymentProgressListener implements ProgressListener {
 	}
 
 	private static Log _log =
-		LogFactory.getLog(DeploymentProgressListener.class);
+		LogFactoryUtil.getLog(DeploymentProgressListener.class);
 
 	private DeploymentHandler _deploymentHandler;
 	private String _warContext;

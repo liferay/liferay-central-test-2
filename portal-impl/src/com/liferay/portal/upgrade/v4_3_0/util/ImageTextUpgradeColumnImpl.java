@@ -22,15 +22,14 @@
 
 package com.liferay.portal.upgrade.v4_3_0.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ImageTextUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
@@ -99,7 +98,7 @@ public class ImageTextUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	}
 
 	private static Log _log =
-		LogFactory.getLog(ImageTextUpgradeColumnImpl.class);
+		LogFactoryUtil.getLog(ImageTextUpgradeColumnImpl.class);
 
 	private UpgradeColumn _imageIdColumn;
 	private String _type;

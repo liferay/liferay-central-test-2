@@ -26,6 +26,8 @@ import com.liferay.portal.kernel.captcha.Captcha;
 import com.liferay.portal.kernel.captcha.CaptchaTextException;
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
@@ -45,9 +47,6 @@ import javax.servlet.http.HttpSession;
 
 import nl.captcha.servlet.CaptchaProducer;
 import nl.captcha.util.Helper;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="CaptchaImpl.java.html"><b><i>View Source</i></b></a>
@@ -241,7 +240,7 @@ public class CaptchaImpl implements Captcha {
 		_captchaProducer.createImage(response.getOutputStream(), captchaText);
 	}
 
-	private static Log _log = LogFactory.getLog(CaptchaImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(CaptchaImpl.class);
 
 	private Configuration _configuration;
 	private CaptchaProducer _captchaProducer;

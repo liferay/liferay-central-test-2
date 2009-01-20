@@ -22,6 +22,8 @@
 
 package com.liferay.portal.struts;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -35,8 +37,6 @@ import java.util.Properties;
 
 import javax.servlet.ServletContext;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.util.MessageResourcesFactory;
 import org.apache.struts.util.PropertyMessageResources;
 
@@ -182,7 +182,8 @@ public class MultiMessageResources extends PropertyMessageResources {
 		putMessages(props, localeKey);
 	}
 
-	private static Log _log = LogFactory.getLog(MultiMessageResources.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(MultiMessageResources.class);
 
 	private transient ServletContext _servletContext;
 

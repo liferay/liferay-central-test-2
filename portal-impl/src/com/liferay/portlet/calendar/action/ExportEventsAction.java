@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.calendar.action;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
@@ -42,8 +44,6 @@ import javax.portlet.PortletConfig;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
@@ -99,6 +99,6 @@ public class ExportEventsAction extends PortletAction {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(ExportEventsAction.class);
+	private static Log _log = LogFactoryUtil.getLog(ExportEventsAction.class);
 
 }

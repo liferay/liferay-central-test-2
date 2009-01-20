@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.expando.model.impl;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -33,9 +35,6 @@ import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
 
 import java.util.Enumeration;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ExpandoBridgeIndexerImpl.java.html"><b><i>View Source</i></b></a>
@@ -81,6 +80,7 @@ public class ExpandoBridgeIndexerImpl implements ExpandoBridgeIndexer {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(ExpandoBridgeIndexerImpl.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(ExpandoBridgeIndexerImpl.class);
 
 }

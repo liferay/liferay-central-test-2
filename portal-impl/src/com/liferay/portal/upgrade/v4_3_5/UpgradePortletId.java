@@ -23,6 +23,8 @@
 package com.liferay.portal.upgrade.v4_3_5;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.PortletConstants;
@@ -32,9 +34,6 @@ import com.liferay.portal.upgrade.UpgradeProcess;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UpgradePortletId.java.html"><b><i>View Source</i></b></a>
@@ -228,6 +227,6 @@ public class UpgradePortletId extends UpgradeProcess {
 		return StringUtil.replace(typeSettings, oldPortletId, newPortletId);
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradePortletId.class);
+	private static Log _log = LogFactoryUtil.getLog(UpgradePortletId.class);
 
 }

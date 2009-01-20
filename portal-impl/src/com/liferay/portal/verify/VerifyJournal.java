@@ -22,6 +22,8 @@
 
 package com.liferay.portal.verify;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -37,9 +39,6 @@ import com.liferay.portlet.tags.NoSuchAssetException;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="VerifyJournal.java.html"><b><i>View Source</i></b></a>
@@ -280,6 +279,6 @@ public class VerifyJournal extends VerifyProcess {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(VerifyJournal.class);
+	private static Log _log = LogFactoryUtil.getLog(VerifyJournal.class);
 
 }

@@ -28,6 +28,8 @@ import com.liferay.mail.model.CyrusVirtual;
 import com.liferay.mail.model.Filter;
 import com.liferay.mail.service.persistence.CyrusUserUtil;
 import com.liferay.mail.service.persistence.CyrusVirtualUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ProcessUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -38,9 +40,6 @@ import com.liferay.portal.util.PropsUtil;
 import java.io.File;
 
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="CyrusHook.java.html"><b><i>View Source</i></b></a>
@@ -313,6 +312,6 @@ public class CyrusHook implements Hook {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(CyrusHook.class);
+	private static Log _log = LogFactoryUtil.getLog(CyrusHook.class);
 
 }

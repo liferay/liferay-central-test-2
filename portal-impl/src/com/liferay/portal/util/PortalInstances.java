@@ -23,6 +23,8 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.events.EventsProcessor;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -46,8 +48,6 @@ import java.util.Set;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.Globals;
 
 /**
@@ -420,7 +420,7 @@ public class PortalInstances {
 		return _virtualHostsIgnorePaths.contains(path);
 	}
 
-	private static Log _log = LogFactory.getLog(PortalInstances.class);
+	private static Log _log = LogFactoryUtil.getLog(PortalInstances.class);
 
 	private static PortalInstances _instance = new PortalInstances();
 

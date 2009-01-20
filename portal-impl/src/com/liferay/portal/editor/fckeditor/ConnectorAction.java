@@ -25,6 +25,8 @@ package com.liferay.portal.editor.fckeditor;
 import com.liferay.portal.editor.fckeditor.command.Command;
 import com.liferay.portal.editor.fckeditor.command.CommandArgument;
 import com.liferay.portal.editor.fckeditor.command.CommandFactory;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
@@ -32,8 +34,6 @@ import com.liferay.portal.util.WebKeys;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -82,6 +82,6 @@ public class ConnectorAction extends Action {
 		return null;
 	}
 
-	private static Log _log = LogFactory.getLog(ConnectorAction.class);
+	private static Log _log = LogFactoryUtil.getLog(ConnectorAction.class);
 
 }

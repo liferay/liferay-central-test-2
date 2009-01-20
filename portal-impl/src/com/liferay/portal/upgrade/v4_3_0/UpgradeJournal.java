@@ -22,6 +22,8 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultPKMapper;
@@ -48,9 +50,6 @@ import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 
 import java.sql.Types;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UpgradeJournal.java.html"><b><i>View Source</i></b></a>
@@ -193,6 +192,6 @@ public class UpgradeJournal extends UpgradeProcess {
 		PropsUtil.set(PropsKeys.JOURNAL_SYNC_CONTENT_SEARCH_ON_STARTUP, "true");
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeJournal.class);
+	private static Log _log = LogFactoryUtil.getLog(UpgradeJournal.class);
 
 }

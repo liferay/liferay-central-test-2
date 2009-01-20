@@ -22,14 +22,13 @@
 
 package com.liferay.portal.search.lucene.messaging;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.messaging.SearchRequest;
 import com.liferay.portal.search.lucene.LuceneSearchEngineUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="LuceneWriterMessageListener.java.html"><b><i>View Source</i></b></a>
@@ -90,6 +89,6 @@ public class LuceneWriterMessageListener implements MessageListener {
 	}
 
 	private static Log _log =
-		LogFactory.getLog(LuceneWriterMessageListener.class);
+		LogFactoryUtil.getLog(LuceneWriterMessageListener.class);
 
 }

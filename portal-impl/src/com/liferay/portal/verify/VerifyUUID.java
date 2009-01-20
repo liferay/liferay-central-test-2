@@ -23,6 +23,8 @@
 package com.liferay.portal.verify;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
@@ -36,9 +38,6 @@ import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="VerifyUUID.java.html"><b><i>View Source</i></b></a>
@@ -138,6 +137,6 @@ public class VerifyUUID extends VerifyProcess {
 		}
 	};
 
-	private static Log _log = LogFactory.getLog(VerifyUUID.class);
+	private static Log _log = LogFactoryUtil.getLog(VerifyUUID.class);
 
 }

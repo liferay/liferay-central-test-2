@@ -22,6 +22,8 @@
 
 package com.liferay.util.servlet;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -41,8 +43,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.net.URLCodec;
 import org.apache.commons.lang.CharUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ServletResponseUtil.java.html"><b><i>View Source</i></b></a>
@@ -291,6 +291,6 @@ public class ServletResponseUtil {
 	private static final String _CLIENT_ABORT_EXCEPTION =
 		"org.apache.catalina.connector.ClientAbortException";
 
-	private static Log _log = LogFactory.getLog(ServletResponseUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(ServletResponseUtil.class);
 
 }

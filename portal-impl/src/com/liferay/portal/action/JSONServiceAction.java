@@ -25,6 +25,8 @@ package com.liferay.portal.action;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -44,8 +46,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
@@ -416,7 +416,7 @@ public class JSONServiceAction extends JSONAction {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(JSONServiceAction.class);
+	private static Log _log = LogFactoryUtil.getLog(JSONServiceAction.class);
 
 	private Map<String, Object[]> _methodCache =
 		new HashMap<String, Object[]>();

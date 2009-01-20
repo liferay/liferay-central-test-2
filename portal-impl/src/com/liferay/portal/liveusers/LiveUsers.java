@@ -24,6 +24,8 @@ package com.liferay.portal.liveusers;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ConcurrentHashSet;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.UserTracker;
@@ -42,9 +44,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="LiveUsers.java.html"><b><i>View Source</i></b></a>
@@ -376,7 +375,7 @@ public class LiveUsers {
 		return liveUsers;
 	}
 
-	private static Log _log = LogFactory.getLog(LiveUsers.class);
+	private static Log _log = LogFactoryUtil.getLog(LiveUsers.class);
 
 	private static LiveUsers _instance = new LiveUsers();
 

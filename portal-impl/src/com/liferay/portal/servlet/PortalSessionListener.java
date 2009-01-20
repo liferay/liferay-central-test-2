@@ -26,6 +26,8 @@ import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.model.User;
@@ -39,8 +41,6 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.Globals;
 
 /**
@@ -160,6 +160,7 @@ public class PortalSessionListener implements HttpSessionListener {
 		return companyId;
 	}
 
-	private static Log _log = LogFactory.getLog(PortalSessionListener.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(PortalSessionListener.class);
 
 }

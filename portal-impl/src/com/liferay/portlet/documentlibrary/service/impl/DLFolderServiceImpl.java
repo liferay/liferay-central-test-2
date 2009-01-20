@@ -28,6 +28,8 @@ import com.liferay.lock.NoSuchLockException;
 import com.liferay.lock.model.Lock;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -48,9 +50,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="DLFolderServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -451,6 +450,6 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(DLFolderServiceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(DLFolderServiceImpl.class);
 
 }

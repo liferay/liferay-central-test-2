@@ -24,6 +24,8 @@ package com.liferay.portal.spring.hibernate;
 
 import com.liferay.portal.dao.orm.hibernate.DB2Dialect;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.tools.sql.DBUtil;
 
@@ -31,9 +33,6 @@ import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 
 import javax.sql.DataSource;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.hibernate.dialect.DB2400Dialect;
 import org.hibernate.dialect.Dialect;
@@ -126,6 +125,6 @@ public class DialectDetector {
 		return dialect.getClass().getName();
 	}
 
-	private static Log _log = LogFactory.getLog(DialectDetector.class);
+	private static Log _log = LogFactoryUtil.getLog(DialectDetector.class);
 
 }

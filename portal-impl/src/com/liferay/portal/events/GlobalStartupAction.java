@@ -31,6 +31,8 @@ import com.liferay.portal.kernel.deploy.auto.AutoDeployUtil;
 import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.events.SimpleAction;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
@@ -45,9 +47,6 @@ import java.io.File;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="GlobalStartupAction.java.html"><b><i>View Source</i></b></a>
@@ -215,6 +214,6 @@ public class GlobalStartupAction extends SimpleAction {
 		browserLauncherThread.start();
 	}
 
-	private static Log _log = LogFactory.getLog(GlobalStartupAction.class);
+	private static Log _log = LogFactoryUtil.getLog(GlobalStartupAction.class);
 
 }

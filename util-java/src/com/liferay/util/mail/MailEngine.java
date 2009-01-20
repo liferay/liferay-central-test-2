@@ -22,6 +22,8 @@
 
 package com.liferay.util.mail;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.Account;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.mail.SMTPAccount;
@@ -54,8 +56,6 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 import org.apache.commons.lang.time.StopWatch;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="MailEngine.java.html"><b><i>View Source</i></b></a>
@@ -489,6 +489,6 @@ public class MailEngine {
 
 	private static final String _TEXT_PLAIN = "text/plain;charset=\"UTF-8\"";
 
-	private static Log _log = LogFactory.getLog(MailEngine.class);
+	private static Log _log = LogFactoryUtil.getLog(MailEngine.class);
 
 }

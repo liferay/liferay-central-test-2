@@ -25,6 +25,8 @@ package com.liferay.portlet.portletconfiguration.action;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -47,8 +49,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
@@ -163,6 +163,7 @@ public class UpdateLookAndFeelAction extends JSONAction {
 		return null;
 	}
 
-	private static Log _log = LogFactory.getLog(UpdateLookAndFeelAction.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(UpdateLookAndFeelAction.class);
 
 }

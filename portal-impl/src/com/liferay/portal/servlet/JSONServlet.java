@@ -23,6 +23,8 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.action.JSONServiceAction;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.model.User;
@@ -36,8 +38,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.Action;
 
 /**
@@ -81,6 +81,6 @@ public class JSONServlet extends HttpServlet {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(JSONServlet.class);
+	private static Log _log = LogFactoryUtil.getLog(JSONServlet.class);
 
 }

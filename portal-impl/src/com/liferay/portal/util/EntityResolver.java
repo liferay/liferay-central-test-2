@@ -22,12 +22,11 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.KeyValuePair;
 
 import java.io.InputStream;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.xml.sax.InputSource;
 
@@ -432,6 +431,6 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 		)
 	};
 
-	private static Log _log = LogFactory.getLog(EntityResolver.class);
+	private static Log _log = LogFactoryUtil.getLog(EntityResolver.class);
 
 }

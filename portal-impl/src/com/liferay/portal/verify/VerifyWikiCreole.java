@@ -22,14 +22,13 @@
 
 package com.liferay.portal.verify;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 import com.liferay.portlet.wiki.translators.ClassicToCreoleTranslator;
 
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="VerifyWikiCreole.java.html"><b><i>View Source</i></b></a>
@@ -80,6 +79,6 @@ public class VerifyWikiCreole extends VerifyProcess {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(VerifyWikiCreole.class);
+	private static Log _log = LogFactoryUtil.getLog(VerifyWikiCreole.class);
 
 }

@@ -22,6 +22,8 @@
 
 package com.liferay.portal.upgrade.v5_1_2;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -29,9 +31,6 @@ import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.v5_1_2.util.CalEventRecurrenceUpgradeColumnImpl;
 import com.liferay.portlet.calendar.model.impl.CalEventImpl;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UpgradeCalendar.java.html"><b><i>View Source</i></b></a>
@@ -65,6 +64,6 @@ public class UpgradeCalendar extends UpgradeProcess {
 		upgradeTable.updateTable();
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeCalendar.class);
+	private static Log _log = LogFactoryUtil.getLog(UpgradeCalendar.class);
 
 }

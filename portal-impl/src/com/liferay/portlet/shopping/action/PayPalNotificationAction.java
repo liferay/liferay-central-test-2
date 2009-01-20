@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.shopping.action;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -43,8 +45,6 @@ import java.util.Enumeration;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -205,6 +205,7 @@ public class PayPalNotificationAction extends Action {
 		return true;
 	}
 
-	private static Log _log = LogFactory.getLog(PayPalNotificationAction.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(PayPalNotificationAction.class);
 
 }

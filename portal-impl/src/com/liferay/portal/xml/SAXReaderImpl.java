@@ -22,6 +22,8 @@
 
 package com.liferay.portal.xml;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.xml.Attribute;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
@@ -47,9 +49,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.dom4j.DocumentFactory;
 import org.dom4j.DocumentHelper;
@@ -466,6 +465,6 @@ public class SAXReaderImpl implements SAXReader {
 	private static final String _FEATURES_DYNAMIC =
 		"http://apache.org/xml/features/validation/dynamic";
 
-	private static Log _log = LogFactory.getLog(SAXReaderImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(SAXReaderImpl.class);
 
 }

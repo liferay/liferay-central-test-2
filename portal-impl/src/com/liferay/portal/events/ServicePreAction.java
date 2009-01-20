@@ -32,6 +32,8 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.events.Action;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
@@ -114,8 +116,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.time.StopWatch;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.Globals;
 
 /**
@@ -1746,6 +1746,6 @@ public class ServicePreAction extends Action {
 
 	private static final String _PATH_PORTAL_LAYOUT = "/portal/layout";
 
-	private static Log _log = LogFactory.getLog(ServicePreAction.class);
+	private static Log _log = LogFactoryUtil.getLog(ServicePreAction.class);
 
 }

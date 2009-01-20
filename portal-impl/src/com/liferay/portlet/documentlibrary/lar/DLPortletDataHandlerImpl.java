@@ -24,6 +24,8 @@ package com.liferay.portlet.documentlibrary.lar;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Document;
@@ -64,9 +66,6 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import javax.portlet.PortletPreferences;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="DLPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
@@ -811,6 +810,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 	private static final PortletDataHandlerBoolean _tags =
 		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
 
-	private static Log _log = LogFactory.getLog(DLPortletDataHandlerImpl.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(DLPortletDataHandlerImpl.class);
 
 }

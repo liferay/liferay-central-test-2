@@ -29,6 +29,8 @@ import com.liferay.portal.dao.orm.hibernate.IntegerType;
 import com.liferay.portal.dao.orm.hibernate.LongType;
 import com.liferay.portal.dao.orm.hibernate.ShortType;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -56,9 +58,6 @@ import java.sql.Types;
 import java.text.DateFormat;
 
 import java.util.Date;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.hibernate.usertype.UserType;
 
@@ -566,7 +565,7 @@ public abstract class BaseUpgradeTableImpl {
 	private static final int _BATCH_SIZE = GetterUtil.getInteger(
 		PropsUtil.get("hibernate.jdbc.batch_size"));
 
-	private static Log _log = LogFactory.getLog(BaseUpgradeTableImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(BaseUpgradeTableImpl.class);
 
 	private String _tableName;
 	private Object[][] _columns;

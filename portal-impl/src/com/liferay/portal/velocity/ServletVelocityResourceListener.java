@@ -22,6 +22,8 @@
 
 package com.liferay.portal.velocity;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 
@@ -30,8 +32,6 @@ import java.io.InputStream;
 
 import javax.servlet.ServletContext;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.velocity.exception.ResourceNotFoundException;
 
 /**
@@ -92,6 +92,6 @@ public class ServletVelocityResourceListener extends VelocityResourceListener {
 	}
 
 	private static Log _log =
-		LogFactory.getLog(ServletVelocityResourceListener.class);
+		LogFactoryUtil.getLog(ServletVelocityResourceListener.class);
 
 }

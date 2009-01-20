@@ -24,6 +24,8 @@ package com.liferay.portlet.bookmarks.lar;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -51,9 +53,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.portlet.PortletPreferences;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="BookmarksPortletDataHandlerImpl.java.html"><b><i>View Source</i></b>
@@ -455,6 +454,6 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
 
 	private static Log _log =
-		LogFactory.getLog(BookmarksPortletDataHandlerImpl.class);
+		LogFactoryUtil.getLog(BookmarksPortletDataHandlerImpl.class);
 
 }

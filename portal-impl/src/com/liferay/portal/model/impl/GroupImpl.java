@@ -22,6 +22,8 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Group;
@@ -45,9 +47,6 @@ import com.liferay.portal.util.PropsValues;
 import java.io.IOException;
 
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="GroupImpl.java.html"><b><i>View Source</i></b></a>
@@ -399,7 +398,7 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		return LayoutConstants.DEFAULT_PLID;
 	}
 
-	private static Log _log = LogFactory.getLog(GroupImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(GroupImpl.class);
 
 	private Group _stagingGroup;
 	private Group _liveGroup;

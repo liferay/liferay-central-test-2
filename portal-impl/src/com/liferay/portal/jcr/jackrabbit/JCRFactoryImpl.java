@@ -23,6 +23,8 @@
 package com.liferay.portal.jcr.jackrabbit;
 
 import com.liferay.portal.jcr.JCRFactory;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -40,8 +42,6 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.SimpleCredentials;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.jackrabbit.api.JackrabbitRepository;
 import org.apache.jackrabbit.core.TransientRepository;
 
@@ -192,7 +192,7 @@ public class JCRFactoryImpl implements JCRFactory {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(JCRFactoryImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(JCRFactoryImpl.class);
 
 	private Repository _repository;
 	private boolean _initialized;

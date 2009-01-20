@@ -22,12 +22,11 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.service.GroupLocalServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UserGroupImpl.java.html"><b><i>View Source</i></b></a>
@@ -113,6 +112,6 @@ public class UserGroupImpl extends UserGroupModelImpl implements UserGroup {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(UserGroupImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(UserGroupImpl.class);
 
 }

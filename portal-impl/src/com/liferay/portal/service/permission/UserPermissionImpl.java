@@ -22,15 +22,14 @@
 
 package com.liferay.portal.service.permission;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UserPermissionImpl.java.html"><b><i>View Source</i></b></a>
@@ -137,6 +136,6 @@ public class UserPermissionImpl implements UserPermission {
 		return false;
 	}
 
-	private static Log _log = LogFactory.getLog(UserPermissionImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(UserPermissionImpl.class);
 
 }

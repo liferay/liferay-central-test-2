@@ -22,8 +22,8 @@
 
 package com.liferay.portal.im;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import rath.msnm.MSNMessenger;
 import rath.msnm.SwitchboardSession;
@@ -59,7 +59,7 @@ public class MSNMessageAdapter extends MsnAdapter {
 		_msn.removeMsnListener(this);
 	}
 
-	private static Log _log = LogFactory.getLog(MSNConnector.class);
+	private static Log _log = LogFactoryUtil.getLog(MSNConnector.class);
 
 	private MSNMessenger _msn;
 	private String _to;

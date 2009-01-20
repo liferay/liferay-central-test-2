@@ -22,6 +22,8 @@
 
 package com.liferay.portal.plugin;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.plugin.PluginPackageNameAndContextComparator;
 import com.liferay.portal.kernel.search.SearchException;
@@ -33,9 +35,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="LocalPluginPackageRepository.java.html"><b><i>View Source</i></b>
@@ -181,7 +180,7 @@ public class LocalPluginPackageRepository {
 	}
 
 	private static Log _log =
-		LogFactory.getLog(LocalPluginPackageRepository.class);
+		LogFactoryUtil.getLog(LocalPluginPackageRepository.class);
 
 	private Map<String, PluginPackage> _pluginPackages =
 		new HashMap<String, PluginPackage>();

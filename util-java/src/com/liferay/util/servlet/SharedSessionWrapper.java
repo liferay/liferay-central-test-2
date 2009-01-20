@@ -22,6 +22,8 @@
 
 package com.liferay.util.servlet;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 
 import java.util.Collections;
@@ -32,9 +34,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="SharedSessionWrapper.java.html"><b><i>View Source</i></b></a>
@@ -163,7 +162,7 @@ public class SharedSessionWrapper implements HttpSession {
 		_session.setMaxInactiveInterval(maxInactiveInterval);
 	}
 
-	private static Log _log = LogFactory.getLog(SharedSessionWrapper.class);
+	private static Log _log = LogFactoryUtil.getLog(SharedSessionWrapper.class);
 
 	private HttpSession _session;
 	private Map<String, Object> _sharedAttributes;

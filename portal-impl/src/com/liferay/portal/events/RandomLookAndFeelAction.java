@@ -24,6 +24,8 @@ package com.liferay.portal.events;
 
 import com.liferay.portal.kernel.events.Action;
 import com.liferay.portal.kernel.events.ActionException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Randomizer;
@@ -39,9 +41,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="RandomLookAndFeelAction.java.html"><b><i>View Source</i></b></a>
@@ -117,6 +116,7 @@ public class RandomLookAndFeelAction extends Action {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(RandomLookAndFeelAction.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(RandomLookAndFeelAction.class);
 
 }

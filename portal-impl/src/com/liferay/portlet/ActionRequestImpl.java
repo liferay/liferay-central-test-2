@@ -22,11 +22,11 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletRequest;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ActionRequestImpl.java.html"><b><i>View Source</i></b></a>
@@ -55,6 +55,6 @@ public class ActionRequestImpl
 		super.recycle();
 	}
 
-	private static Log _log = LogFactory.getLog(ActionRequestImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(ActionRequestImpl.class);
 
 }

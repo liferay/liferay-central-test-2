@@ -22,6 +22,8 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.MethodInvoker;
@@ -34,9 +36,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ToggleTag.java.html"><b><i>View Source</i></b></a>
@@ -189,7 +188,7 @@ public class ToggleTag extends IncludeTag {
 
 	private static final String _PAGE = "/html/taglib/ui/toggle/page.jsp";
 
-	private static Log _log = LogFactory.getLog(ToggleTag.class);
+	private static Log _log = LogFactoryUtil.getLog(ToggleTag.class);
 
 	private String _id;
 	private String _showImage;

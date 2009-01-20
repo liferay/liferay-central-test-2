@@ -22,8 +22,8 @@
 
 package com.liferay.portal.verify;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 /**
  * <a href="VerifyProcessSuite.java.html"><b><i>View Source</i></b></a>
@@ -73,6 +73,6 @@ public class VerifyProcessSuite extends VerifyProcess {
 		//verify(new VerifyWikiCreole());
 	}
 
-	private static Log _log = LogFactory.getLog(VerifyProcessSuite.class);
+	private static Log _log = LogFactoryUtil.getLog(VerifyProcessSuite.class);
 
 }

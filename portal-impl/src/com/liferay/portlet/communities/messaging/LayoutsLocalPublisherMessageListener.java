@@ -23,6 +23,8 @@
 package com.liferay.portlet.communities.messaging;
 
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.util.Time;
@@ -37,9 +39,6 @@ import com.liferay.util.MapUtil;
 
 import java.util.Date;
 import java.util.Map;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="LayoutsLocalPublisherMessageListener.java.html"><b><i>View Source
@@ -117,6 +116,6 @@ public class LayoutsLocalPublisherMessageListener implements MessageListener {
 	}
 
 	private static Log _log =
-		LogFactory.getLog(LayoutsLocalPublisherMessageListener.class);
+		LogFactoryUtil.getLog(LayoutsLocalPublisherMessageListener.class);
 
 }

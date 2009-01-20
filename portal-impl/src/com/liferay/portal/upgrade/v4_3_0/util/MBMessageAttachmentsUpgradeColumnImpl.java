@@ -24,12 +24,11 @@ package com.liferay.portal.upgrade.v4_3_0.util;
 
 import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.documentlibrary.service.DLServiceUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="MBMessageAttachmentsUpgradeColumnImpl.java.html"><b><i>View Source
@@ -85,7 +84,7 @@ public class MBMessageAttachmentsUpgradeColumnImpl
 	}
 
 	private static Log _log =
-		LogFactory.getLog(MBMessageAttachmentsUpgradeColumnImpl.class);
+		LogFactoryUtil.getLog(MBMessageAttachmentsUpgradeColumnImpl.class);
 
 	private UpgradeColumn _messageIdColumn;
 	private UpgradeColumn _companyIdColumn;

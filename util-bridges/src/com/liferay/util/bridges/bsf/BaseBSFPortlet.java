@@ -22,6 +22,8 @@
 
 package com.liferay.util.bridges.bsf;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -47,8 +49,6 @@ import javax.portlet.ResourceResponse;
 
 import org.apache.bsf.BSFException;
 import org.apache.bsf.BSFManager;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="BaseBSFPortlet.java.html"><b><i>View Source</i></b></a>
@@ -272,6 +272,6 @@ public abstract class BaseBSFPortlet extends GenericPortlet {
 	protected String[] globalFiles;
 	protected BSFManager bsfManager;
 
-	private static Log _log = LogFactory.getLog(BaseBSFPortlet.class);
+	private static Log _log = LogFactoryUtil.getLog(BaseBSFPortlet.class);
 
 }

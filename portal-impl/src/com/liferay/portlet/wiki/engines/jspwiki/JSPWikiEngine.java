@@ -27,6 +27,8 @@ import com.ecyrd.jspwiki.WikiException;
 import com.ecyrd.jspwiki.WikiPage;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.wiki.PageContentException;
@@ -44,9 +46,6 @@ import java.util.Map;
 import java.util.Properties;
 
 import javax.portlet.PortletURL;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="JSPWikiEngine.java.html"><b><i>View Source</i></b></a>
@@ -193,7 +192,7 @@ public class JSPWikiEngine implements WikiEngine {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(JSPWikiEngine.class);
+	private static Log _log = LogFactoryUtil.getLog(JSPWikiEngine.class);
 
 	private Properties _props;
 	private Map<Long, LiferayJSPWikiEngine> _engines =

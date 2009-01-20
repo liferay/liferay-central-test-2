@@ -22,15 +22,14 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portlet.PortalPreferences;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="SessionTreeJSClicks.java.html"><b><i>View Source</i></b></a>
@@ -128,6 +127,6 @@ public class SessionTreeJSClicks {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(SessionTreeJSClicks.class);
+	private static Log _log = LogFactoryUtil.getLog(SessionTreeJSClicks.class);
 
 }

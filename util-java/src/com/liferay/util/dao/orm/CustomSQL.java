@@ -23,6 +23,8 @@
 package com.liferay.util.dao.orm;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
@@ -46,9 +48,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="CustomSQL.java.html"><b><i>View Source</i></b></a>
@@ -508,7 +507,7 @@ public class CustomSQL {
 		return sb.toString();
 	}
 
-	private static Log _log = LogFactory.getLog(CustomSQL.class);
+	private static Log _log = LogFactoryUtil.getLog(CustomSQL.class);
 
 	private boolean _vendorDB2;
 	private boolean _vendorInformix;

@@ -23,6 +23,8 @@
 package com.liferay.portal.search.lucene;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
@@ -47,8 +49,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.sql.DataSource;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.WhitespaceAnalyzer;
 import org.apache.lucene.document.Document;
@@ -755,7 +755,7 @@ public class LuceneUtil {
 
 	private static final String _LUCENE_TABLE_PREFIX = "LUCENE_";
 
-	private static Log _log = LogFactory.getLog(LuceneUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(LuceneUtil.class);
 
 	private static LuceneUtil _instance = new LuceneUtil();
 

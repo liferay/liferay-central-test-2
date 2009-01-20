@@ -107,11 +107,11 @@ public interface UserService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void deleteRoleUser(long roleId, long userId)
+	public void deletePortrait(long userId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void deletePortrait(long userId)
+	public void deleteRoleUser(long roleId, long userId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

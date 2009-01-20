@@ -24,6 +24,8 @@ package com.liferay.portlet.shopping.model.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.ShoppingItem;
@@ -33,9 +35,6 @@ import com.liferay.portlet.shopping.service.ShoppingItemPriceLocalServiceUtil;
 import com.liferay.portlet.shopping.util.comparator.ItemNameComparator;
 
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ShoppingItemImpl.java.html"><b><i>View Source</i></b></a>
@@ -91,7 +90,7 @@ public class ShoppingItemImpl
 		return ShoppingItemPriceLocalServiceUtil.getItemPrices(getItemId());
 	}
 
-	private static Log _log = LogFactory.getLog(ShoppingItemImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(ShoppingItemImpl.class);
 
 	private String[] _fieldsQuantitiesArray;
 

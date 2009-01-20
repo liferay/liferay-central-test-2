@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.assetpublisher.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -51,9 +53,6 @@ import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="AssetPublisherUtil.java.html"><b><i>View Source</i></b></a>
@@ -221,6 +220,6 @@ public class AssetPublisherUtil {
 		return recentFolderIds;
 	}
 
-	private static Log _log = LogFactory.getLog(AssetPublisherUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(AssetPublisherUtil.class);
 
 }

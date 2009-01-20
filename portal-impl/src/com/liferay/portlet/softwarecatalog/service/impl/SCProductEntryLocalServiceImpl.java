@@ -24,6 +24,8 @@ package com.liferay.portlet.softwarecatalog.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
@@ -70,9 +72,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="SCProductEntryLocalServiceImpl.java.html"><b><i>View Source</i></b>
@@ -871,6 +870,6 @@ public class SCProductEntryLocalServiceImpl
 	}
 
 	private static Log _log =
-		LogFactory.getLog(SCProductEntryLocalServiceImpl.class);
+		LogFactoryUtil.getLog(SCProductEntryLocalServiceImpl.class);
 
 }

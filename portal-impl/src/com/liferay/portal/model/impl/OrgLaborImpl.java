@@ -22,12 +22,11 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.ListType;
 import com.liferay.portal.model.OrgLabor;
 import com.liferay.portal.service.ListTypeServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="OrgLaborImpl.java.html"><b><i>View Source</i></b></a>
@@ -55,6 +54,6 @@ public class OrgLaborImpl extends OrgLaborModelImpl implements OrgLabor {
 		return type;
 	}
 
-	private static Log _log = LogFactory.getLog(OrgLaborImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(OrgLaborImpl.class);
 
 }

@@ -22,6 +22,8 @@
 
 package com.liferay.util.bridges.php;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.PortletServletObjectsFactory;
 import com.liferay.portal.kernel.servlet.ServletObjectsFactory;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
@@ -49,8 +51,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.portals.bridges.common.ScriptPostProcess;
 
 /**
@@ -228,7 +228,7 @@ public class PHPPortlet extends GenericPortlet {
 	private static final String _QUERCUS_SERVLET =
 		"com.caucho.quercus.servlet.QuercusServlet";
 
-	private static Log _log = LogFactory.getLog(PHPPortlet.class);
+	private static Log _log = LogFactoryUtil.getLog(PHPPortlet.class);
 
 	protected String editUri;
 	protected String helpUri;

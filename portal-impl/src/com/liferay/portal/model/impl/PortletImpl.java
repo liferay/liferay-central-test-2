@@ -23,6 +23,8 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.job.Scheduler;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
@@ -74,9 +76,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import javax.portlet.PortletMode;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PortletImpl.java.html"><b><i>View Source</i></b></a>
@@ -2846,7 +2845,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * Log instance for this class.
 	 */
-	private static Log _log = LogFactory.getLog(PortletImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(PortletImpl.class);
 
 	/**
 	 * Package this plugin belongs to.

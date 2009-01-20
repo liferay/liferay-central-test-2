@@ -22,6 +22,8 @@
 
 package com.liferay.portal.webdav.methods;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Tuple;
@@ -45,9 +47,6 @@ import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="BasePropMethodImpl.java.html"><b><i>View Source</i></b></a>
@@ -359,6 +358,6 @@ public abstract class BasePropMethodImpl implements Method {
 			_GETCONTENTTYPE_PAIR, _GETCONTENTLENGTH_PAIR, _RESOURCETYPE_PAIR
 		});
 
-	private static Log _log = LogFactory.getLog(BasePropMethodImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(BasePropMethodImpl.class);
 
 }

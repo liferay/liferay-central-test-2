@@ -22,10 +22,10 @@
 
 package com.liferay.util;
 
-import java.text.NumberFormat;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.text.NumberFormat;
 
 /**
  * <a href="MathUtil.java.html"><b><i>View Source</i></b></a>
@@ -123,6 +123,6 @@ public class MathUtil {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(MathUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(MathUtil.class);
 
 }

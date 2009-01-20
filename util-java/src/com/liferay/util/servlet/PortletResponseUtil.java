@@ -22,6 +22,8 @@
 
 package com.liferay.util.servlet;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -39,8 +41,6 @@ import javax.portlet.ResourceResponse;
 
 import org.apache.commons.codec.net.URLCodec;
 import org.apache.commons.lang.CharUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PortletResponseUtil.java.html"><b><i>View Source</i></b></a>
@@ -237,6 +237,6 @@ public class PortletResponseUtil {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(PortletResponseUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(PortletResponseUtil.class);
 
 }

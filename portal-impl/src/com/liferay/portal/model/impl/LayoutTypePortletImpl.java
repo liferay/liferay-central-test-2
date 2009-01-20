@@ -24,6 +24,8 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.configuration.Filter;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -55,9 +57,6 @@ import com.liferay.util.PwdGenerator;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="LayoutTypePortletImpl.java.html"><b><i>View Source</i></b></a>
@@ -1211,7 +1210,8 @@ public class LayoutTypePortletImpl
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(LayoutTypePortletImpl.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(LayoutTypePortletImpl.class);
 
 	private boolean _enablePortletLayoutListener = true;
 

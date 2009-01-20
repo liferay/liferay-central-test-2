@@ -22,15 +22,14 @@
 
 package com.liferay.portal.sharepoint;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="SharepointWebServicesServlet.java.html"><b><i>View Source</i></b>
@@ -84,6 +83,6 @@ public class SharepointWebServicesServlet extends HttpServlet {
 		ServletResponseUtil.write(response, sb.toString());
 	}
 
-	private static Log _log = LogFactory.getLog(SharepointServlet.class);
+	private static Log _log = LogFactoryUtil.getLog(SharepointServlet.class);
 
 }

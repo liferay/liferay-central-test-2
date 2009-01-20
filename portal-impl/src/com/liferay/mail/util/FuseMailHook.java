@@ -23,6 +23,8 @@
 package com.liferay.mail.util;
 
 import com.liferay.mail.model.Filter;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -34,8 +36,6 @@ import java.util.List;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="FuseMailHook.java.html"><b><i>View Source</i></b></a>
@@ -250,7 +250,7 @@ public class FuseMailHook implements Hook {
 	private static final String _GROUP_PARENT = PropsUtil.get(
 		PropsKeys.MAIL_HOOK_FUSEMAIL_GROUP_PARENT);
 
-	private static Log _log = LogFactory.getLog(FuseMailHook.class);
+	private static Log _log = LogFactoryUtil.getLog(FuseMailHook.class);
 
 	private HttpClient _client;
 

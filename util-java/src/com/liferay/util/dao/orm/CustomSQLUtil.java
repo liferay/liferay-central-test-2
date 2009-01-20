@@ -22,10 +22,9 @@
 
 package com.liferay.util.dao.orm;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="CustomSQLUtil.java.html"><b><i>View Source</i></b></a>
@@ -111,7 +110,7 @@ public class CustomSQLUtil {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(CustomSQLUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(CustomSQLUtil.class);
 
 	private static CustomSQLUtil _instance = new CustomSQLUtil();
 

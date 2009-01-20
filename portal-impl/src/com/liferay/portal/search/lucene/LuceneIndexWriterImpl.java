@@ -22,6 +22,8 @@
 
 package com.liferay.portal.search.lucene;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.IndexWriter;
@@ -32,8 +34,6 @@ import java.io.IOException;
 
 import java.util.Collection;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.index.Term;
 
 /**
@@ -142,6 +142,7 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 		return luceneDoc;
 	}
 
-	private static Log _log = LogFactory.getLog(LuceneIndexWriterImpl.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(LuceneIndexWriterImpl.class);
 
 }

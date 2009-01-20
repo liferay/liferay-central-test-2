@@ -23,6 +23,8 @@
 package com.liferay.portlet.enterpriseadmin.search;
 
 import com.liferay.portal.kernel.dao.search.SearchContainer;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -41,9 +43,6 @@ import java.util.Map;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UserSearch.java.html"><b><i>View Source</i></b></a>
@@ -158,6 +157,6 @@ public class UserSearch extends SearchContainer<User> {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(UserSearch.class);
+	private static Log _log = LogFactoryUtil.getLog(UserSearch.class);
 
 }

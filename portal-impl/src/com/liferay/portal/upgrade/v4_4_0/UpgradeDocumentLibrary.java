@@ -22,6 +22,8 @@
 
 package com.liferay.portal.upgrade.v4_4_0;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
@@ -35,9 +37,6 @@ import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryModelImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderModelImpl;
 
 import java.util.Set;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UpgradeDocumentLibrary.java.html"><b><i>View Source</i></b></a>
@@ -95,6 +94,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		upgradeTable.updateTable();
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeDocumentLibrary.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(UpgradeDocumentLibrary.class);
 
 }

@@ -23,6 +23,8 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
@@ -79,9 +81,6 @@ import javax.portlet.WindowState;
 import javax.portlet.WindowStateException;
 
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PortletURLImpl.java.html"><b><i>View Source</i></b></a>
@@ -1056,7 +1055,7 @@ public class PortletURLImpl
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(PortletURLImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(PortletURLImpl.class);
 
 	private HttpServletRequest _request;
 	private PortletRequest _portletRequest;

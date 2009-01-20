@@ -23,13 +23,12 @@
 package com.liferay.portal.deploy.auto.exploded.tomcat;
 
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.util.Portal;
 
 import java.io.File;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PortletExplodedTomcatListener.java.html"><b><i>View Source</i></b>
@@ -96,7 +95,7 @@ public class PortletExplodedTomcatListener extends BaseExplodedTomcatListener {
 	}
 
 	private static Log _log =
-		LogFactory.getLog(PortletExplodedTomcatListener.class);
+		LogFactoryUtil.getLog(PortletExplodedTomcatListener.class);
 
 	private ExplodedTomcatDeployer _deployer;
 	private PHPPortletExplodedTomcatDeployer _phpDeployer;

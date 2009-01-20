@@ -23,6 +23,8 @@
 package com.liferay.portlet.softwarecatalog.model.impl;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
@@ -30,9 +32,6 @@ import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServic
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUtil;
 
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="SCProductVersionImpl.java.html"><b><i>View Source</i></b></a>
@@ -69,6 +68,6 @@ public class SCProductVersionImpl
 			getProductVersionFrameworkVersions(getProductVersionId());
 	}
 
-	private static Log _log = LogFactory.getLog(SCProductVersionImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(SCProductVersionImpl.class);
 
 }

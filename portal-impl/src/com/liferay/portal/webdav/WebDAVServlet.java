@@ -22,6 +22,8 @@
 
 package com.liferay.portal.webdav;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.model.User;
@@ -37,9 +39,6 @@ import com.liferay.portal.webdav.methods.MethodFactory;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="WebDAVServlet.java.html"><b><i>View Source</i></b></a>
@@ -183,6 +182,6 @@ public class WebDAVServlet extends HttpServlet {
 		return false;
 	}
 
-	private static Log _log = LogFactory.getLog(WebDAVServlet.class);
+	private static Log _log = LogFactoryUtil.getLog(WebDAVServlet.class);
 
 }

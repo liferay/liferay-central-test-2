@@ -22,6 +22,8 @@
 
 package com.liferay.portal.velocity;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
@@ -29,8 +31,6 @@ import com.liferay.portal.util.PropsUtil;
 import java.io.InputStream;
 
 import org.apache.commons.collections.ExtendedProperties;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.runtime.resource.Resource;
 import org.apache.velocity.runtime.resource.loader.ResourceLoader;
@@ -121,6 +121,7 @@ public class LiferayResourceLoader extends ResourceLoader {
 		return false;
 	}
 
-	private static Log _log = LogFactory.getLog(LiferayResourceLoader.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(LiferayResourceLoader.class);
 
 }

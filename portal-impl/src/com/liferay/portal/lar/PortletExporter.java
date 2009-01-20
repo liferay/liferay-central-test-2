@@ -27,6 +27,8 @@ import com.liferay.portal.NoSuchPortletPreferencesException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.io.FileCacheOutputStream;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PortletClassInvoker;
@@ -82,8 +84,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.time.StopWatch;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PortletExporter.java.html"><b><i>View Source</i></b></a>
@@ -1242,6 +1242,6 @@ public class PortletExporter {
 		return false;
 	}
 
-	private static Log _log = LogFactory.getLog(PortletExporter.class);
+	private static Log _log = LogFactoryUtil.getLog(PortletExporter.class);
 
 }

@@ -26,6 +26,8 @@ import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.util.PortalUtil;
@@ -40,9 +42,6 @@ import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="WikiPageImpl.java.html"><b><i>View Source</i></b></a>
@@ -197,7 +196,7 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 		_userUuid = userUuid;
 	}
 
-	private static Log _log = LogFactory.getLog(WikiPageImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(WikiPageImpl.class);
 
 	private String _attachmentDirs;
 	private ExpandoBridge _expandoBridge;

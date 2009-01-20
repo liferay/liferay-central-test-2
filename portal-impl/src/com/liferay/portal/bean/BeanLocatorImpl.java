@@ -24,9 +24,8 @@ package com.liferay.portal.bean;
 
 import com.liferay.portal.kernel.bean.BeanLocator;
 import com.liferay.portal.kernel.bean.BeanLocatorException;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import org.springframework.context.ApplicationContext;
 
@@ -61,7 +60,7 @@ public class BeanLocatorImpl implements BeanLocator {
 		return _applicationContext.getBean(name);
 	}
 
-	private static Log _log = LogFactory.getLog(BeanLocatorImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(BeanLocatorImpl.class);
 
 	private ClassLoader _classLoader;
 	private ApplicationContext _applicationContext;

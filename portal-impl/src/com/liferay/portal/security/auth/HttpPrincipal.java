@@ -23,12 +23,11 @@
 package com.liferay.portal.security.auth;
 
 import com.liferay.portal.PwdEncryptorException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.security.pwd.PwdEncryptor;
 
 import java.io.Serializable;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="HttpPrincipal.java.html"><b><i>View Source</i></b></a>
@@ -85,7 +84,7 @@ public class HttpPrincipal implements Serializable {
 		return _password;
 	}
 
-	private static Log _log = LogFactory.getLog(HttpPrincipal.class);
+	private static Log _log = LogFactoryUtil.getLog(HttpPrincipal.class);
 
 	private String _url;
 	private long _companyId;

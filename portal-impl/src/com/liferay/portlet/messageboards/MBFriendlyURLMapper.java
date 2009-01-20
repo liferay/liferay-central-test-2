@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.messageboards;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.BaseFriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -34,9 +36,6 @@ import java.util.Map;
 
 import javax.portlet.PortletMode;
 import javax.portlet.WindowState;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="MBFriendlyURLMapper.java.html"><b><i>View Source</i></b></a>
@@ -193,6 +192,6 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 	private static final String _PORTLET_ID = PortletKeys.MESSAGE_BOARDS;
 
-	private static Log _log = LogFactory.getLog(MBFriendlyURLMapper.class);
+	private static Log _log = LogFactoryUtil.getLog(MBFriendlyURLMapper.class);
 
 }

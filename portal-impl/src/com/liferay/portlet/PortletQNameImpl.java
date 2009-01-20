@@ -22,6 +22,8 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.Namespace;
@@ -30,9 +32,6 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PortletQNameImpl.java.html"><b><i>View Source</i></b></a>
@@ -151,7 +150,7 @@ public class PortletQNameImpl implements PortletQName {
 
 	private static final String _KEY_SEPARATOR = "_KEY_";
 
-	private static Log _log = LogFactory.getLog(PortletQNameImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(PortletQNameImpl.class);
 
 	private Map<String, QName> _qNames;
 	private Map<String, String> _identifiers;

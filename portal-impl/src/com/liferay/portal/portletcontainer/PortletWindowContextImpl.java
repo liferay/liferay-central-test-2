@@ -42,6 +42,8 @@
 package com.liferay.portal.portletcontainer;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -87,9 +89,6 @@ import javax.portlet.PortletPreferences;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PortletWindowContextImpl.java.html"><b><i>View Source</i></b></a>
@@ -549,7 +548,8 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 		return portlets;
 	}
 
-	private static Log _log = LogFactory.getLog(PortletWindowContextImpl.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(PortletWindowContextImpl.class);
 
 	private HttpServletRequest _request;
 	private Portlet _portlet;

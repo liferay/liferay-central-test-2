@@ -22,15 +22,14 @@
 
 package com.liferay.portal.servlet.taglib.ui;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.SessionClicks;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ToggleValueTagUtil.java.html"><b><i>View Source</i></b></a>
@@ -60,6 +59,6 @@ public class ToggleValueTagUtil {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(ToggleValueTagUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(ToggleValueTagUtil.class);
 
 }

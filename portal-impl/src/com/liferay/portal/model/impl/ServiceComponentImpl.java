@@ -22,15 +22,14 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.ServiceComponent;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ServiceComponentImpl.java.html"><b><i>View Source</i></b></a>
@@ -83,7 +82,7 @@ public class ServiceComponentImpl
 		return _dataEl;
 	}
 
-	private static Log _log = LogFactory.getLog(ServiceComponentImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(ServiceComponentImpl.class);
 
 	private Element _dataEl;
 

@@ -23,6 +23,8 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.servlet.URLEncoder;
@@ -57,9 +59,6 @@ import javax.portlet.WindowStateException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
@@ -556,7 +555,7 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 		_headers.clear();
 	}
 
-	private static Log _log = LogFactory.getLog(PortletResponseImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(PortletResponseImpl.class);
 
 	private PortletRequestImpl _portletRequestImpl;
 	private HttpServletResponse _response;

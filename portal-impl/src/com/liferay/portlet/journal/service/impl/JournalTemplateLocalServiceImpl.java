@@ -24,6 +24,8 @@ package com.liferay.portlet.journal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -54,9 +56,6 @@ import java.io.IOException;
 
 import java.util.Date;
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="JournalTemplateLocalServiceImpl.java.html"><b><i>View Source</i></b>
@@ -704,6 +703,6 @@ public class JournalTemplateLocalServiceImpl
 	}
 
 	private static Log _log =
-		LogFactory.getLog(JournalTemplateLocalServiceImpl.class);
+		LogFactoryUtil.getLog(JournalTemplateLocalServiceImpl.class);
 
 }

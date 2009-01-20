@@ -25,6 +25,8 @@ package com.liferay.portlet.wiki.lar;
 import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Document;
@@ -57,9 +59,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.portlet.PortletPreferences;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="WikiPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
@@ -513,6 +512,6 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
 
 	private static Log _log =
-		LogFactory.getLog(WikiPortletDataHandlerImpl.class);
+		LogFactoryUtil.getLog(WikiPortletDataHandlerImpl.class);
 
 }

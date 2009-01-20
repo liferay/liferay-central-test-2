@@ -24,6 +24,8 @@ package com.liferay.mail.service.impl;
 
 import com.liferay.mail.model.Filter;
 import com.liferay.mail.service.MailService;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
@@ -33,9 +35,6 @@ import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="MailServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -165,6 +164,6 @@ public class MailServiceImpl implements MailService {
 		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
 	}
 
-	private static Log _log = LogFactory.getLog(MailServiceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(MailServiceImpl.class);
 
 }

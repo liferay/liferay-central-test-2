@@ -26,6 +26,8 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -56,9 +58,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.mail.internet.InternetAddress;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="AnnouncementsEntryLocalServiceImpl.java.html"><b><i>View Source</i>
@@ -540,6 +539,6 @@ public class AnnouncementsEntryLocalServiceImpl
 	}
 
 	private static Log _log =
-		LogFactory.getLog(AnnouncementsEntryLocalServiceImpl.class);
+		LogFactoryUtil.getLog(AnnouncementsEntryLocalServiceImpl.class);
 
 }

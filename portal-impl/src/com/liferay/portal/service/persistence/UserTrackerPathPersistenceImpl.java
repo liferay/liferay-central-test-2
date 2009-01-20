@@ -31,6 +31,8 @@ import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
@@ -40,9 +42,6 @@ import com.liferay.portal.model.UserTrackerPath;
 import com.liferay.portal.model.impl.UserTrackerPathImpl;
 import com.liferay.portal.model.impl.UserTrackerPathModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -843,5 +842,5 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portal.service.persistence.WebDAVPropsPersistence webDAVPropsPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WebsitePersistence.impl")
 	protected com.liferay.portal.service.persistence.WebsitePersistence websitePersistence;
-	private static Log _log = LogFactory.getLog(UserTrackerPathPersistenceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(UserTrackerPathPersistenceImpl.class);
 }

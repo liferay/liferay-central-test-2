@@ -22,6 +22,8 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
@@ -30,9 +32,6 @@ import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="WriteTag.java.html"><b><i>View Source</i></b></a>
@@ -119,7 +118,7 @@ public class WriteTag extends IncludeTag {
 
 	private static final String _PAGE = "/html/taglib/ui/write/page.jsp";
 
-	private static Log _log = LogFactory.getLog(WriteTag.class);
+	private static Log _log = LogFactoryUtil.getLog(WriteTag.class);
 
 	private Object _bean;
 	private String _property;

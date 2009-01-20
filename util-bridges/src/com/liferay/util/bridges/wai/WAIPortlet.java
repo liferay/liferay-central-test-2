@@ -22,6 +22,8 @@
 
 package com.liferay.util.bridges.wai;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -47,9 +49,6 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="WAIPortlet.java.html"><b><i>View Source</i></b></a>
@@ -203,7 +202,7 @@ public class WAIPortlet extends GenericPortlet {
 	private static final String _JSP_NORMAL_WINDOW_STATE =
 		_JSP_DIR + "/normal_window_state.jsp";
 
-	private static Log _log = LogFactory.getLog(WAIPortlet.class);
+	private static Log _log = LogFactoryUtil.getLog(WAIPortlet.class);
 
 	private String _connector;
 

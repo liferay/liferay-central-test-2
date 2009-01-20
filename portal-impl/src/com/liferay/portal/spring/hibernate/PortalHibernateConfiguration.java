@@ -22,15 +22,14 @@
 
 package com.liferay.portal.spring.hibernate;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.InputStream;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
@@ -114,6 +113,6 @@ public class PortalHibernateConfiguration
 	}
 
 	private static Log _log =
-		LogFactory.getLog(PortalHibernateConfiguration.class);
+		LogFactoryUtil.getLog(PortalHibernateConfiguration.class);
 
 }

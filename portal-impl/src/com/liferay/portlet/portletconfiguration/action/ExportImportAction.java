@@ -28,6 +28,8 @@ import com.liferay.portal.LayoutImportException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.PortletIdException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
@@ -56,8 +58,6 @@ import javax.portlet.RenderResponse;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -264,6 +264,6 @@ public class ExportImportAction extends EditConfigurationAction {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(ExportImportAction.class);
+	private static Log _log = LogFactoryUtil.getLog(ExportImportAction.class);
 
 }

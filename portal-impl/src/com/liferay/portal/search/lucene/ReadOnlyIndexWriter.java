@@ -22,10 +22,11 @@
 
 package com.liferay.portal.search.lucene;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 import java.io.IOException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexReader;
@@ -109,6 +110,6 @@ public class ReadOnlyIndexWriter extends IndexWriter {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(ReadOnlyIndexWriter.class);
+	private static Log _log = LogFactoryUtil.getLog(ReadOnlyIndexWriter.class);
 
 }

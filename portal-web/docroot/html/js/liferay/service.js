@@ -1000,6 +1000,13 @@ Liferay.Service.Portal.User = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	deletePortrait: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deletePortrait";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	deleteRoleUser: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "deleteRoleUser";
@@ -3109,8 +3116,4 @@ Liferay.Service.Wiki.WikiPage = {
 
 		return Liferay.Service.ajax(params, callback);
 	}
-};
-
-Liferay.Service.WSRP = {
-	servicePackage: "com.liferay.wsrp.service.http."
 };

@@ -42,6 +42,8 @@
 package com.liferay.portal.portletcontainer;
 
 import com.liferay.portal.ccpp.PortalProfileFactory;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.ProtectedPrincipal;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -137,9 +139,6 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.w3c.dom.Element;
 
@@ -852,7 +851,7 @@ public class WindowInvoker extends InvokerPortletImpl {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(WindowInvoker.class);
+	private static Log _log = LogFactoryUtil.getLog(WindowInvoker.class);
 
 	private com.liferay.portal.model.Portlet _portletModel;
 	private PortletConfig _portletConfig;

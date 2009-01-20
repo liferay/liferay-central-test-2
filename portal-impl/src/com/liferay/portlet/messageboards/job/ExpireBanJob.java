@@ -24,14 +24,13 @@ package com.liferay.portlet.messageboards.job;
 
 import com.liferay.portal.kernel.job.IntervalJob;
 import com.liferay.portal.kernel.job.JobExecutionContext;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ExpireBanJob.java.html"><b><i>View Source</i></b></a>
@@ -71,7 +70,7 @@ public class ExpireBanJob implements IntervalJob {
 		return _interval;
 	}
 
-	private static Log _log = LogFactory.getLog(ExpireBanJob.class);
+	private static Log _log = LogFactoryUtil.getLog(ExpireBanJob.class);
 
 	private long _interval;
 

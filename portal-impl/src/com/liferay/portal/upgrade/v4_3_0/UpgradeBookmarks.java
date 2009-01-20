@@ -22,6 +22,8 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultPKMapper;
@@ -36,9 +38,6 @@ import com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
 
 import java.sql.Types;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UpgradeBookmarks.java.html"><b><i>View Source</i></b></a>
@@ -116,6 +115,6 @@ public class UpgradeBookmarks extends UpgradeProcess {
 		AvailableMappersUtil.setBookmarksEntryIdMapper(entryIdMapper);
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeBookmarks.class);
+	private static Log _log = LogFactoryUtil.getLog(UpgradeBookmarks.class);
 
 }

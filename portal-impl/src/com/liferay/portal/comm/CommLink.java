@@ -22,6 +22,8 @@
 
 package com.liferay.portal.comm;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.Validator;
@@ -32,9 +34,6 @@ import java.io.Serializable;
 
 import java.util.LinkedList;
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.jgroups.Channel;
 import org.jgroups.JChannel;
@@ -126,7 +125,7 @@ public class CommLink implements MessageListener {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(CommLink.class);
+	private static Log _log = LogFactoryUtil.getLog(CommLink.class);
 
 	private static CommLink _instance = new CommLink();
 

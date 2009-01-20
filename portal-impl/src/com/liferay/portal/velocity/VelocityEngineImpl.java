@@ -23,6 +23,8 @@
 package com.liferay.portal.velocity;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.velocity.VelocityContext;
@@ -35,8 +37,6 @@ import java.io.IOException;
 import java.io.Writer;
 
 import org.apache.commons.collections.ExtendedProperties;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.velocity.runtime.resource.loader.StringResourceLoader;
 import org.apache.velocity.runtime.resource.util.StringResourceRepository;
 
@@ -192,7 +192,7 @@ public class VelocityEngineImpl implements VelocityEngine {
 	private static final String _RESOURCE_LOADER =
 		org.apache.velocity.app.VelocityEngine.RESOURCE_LOADER;
 
-	private static final Log _log = LogFactory.getLog(VelocityEngineImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(VelocityEngineImpl.class);
 
 	private VelocityContextImpl _restrictedToolsContext;
 	private VelocityContextImpl _standardToolsContext;

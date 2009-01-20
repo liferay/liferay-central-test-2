@@ -23,6 +23,8 @@
 package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
@@ -49,9 +51,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="JournalRSSUtil.java.html"><b><i>View Source</i></b></a>
@@ -312,6 +311,6 @@ public class JournalRSSUtil {
 		return image;
 	}
 
-	private static Log _log = LogFactory.getLog(JournalRSSUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(JournalRSSUtil.class);
 
 }

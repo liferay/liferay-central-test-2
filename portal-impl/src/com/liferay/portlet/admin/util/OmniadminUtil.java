@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.admin.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
@@ -29,9 +31,6 @@ import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsValues;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="OmniadminUtil.java.html"><b><i>View Source</i></b></a>
@@ -91,6 +90,6 @@ public class OmniadminUtil {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(OmniadminUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(OmniadminUtil.class);
 
 }

@@ -22,12 +22,11 @@
 
 package com.liferay.portal.security.permission;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.util.PropsValues;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PermissionCheckerUtil.java.html"><b><i>View Source</i></b></a>
@@ -64,6 +63,7 @@ public class PermissionCheckerUtil {
 
 	private static boolean _CHECK_GUEST = true;
 
-	private static Log _log = LogFactory.getLog(PermissionCheckerUtil.class);
+	private static Log _log =
+		 LogFactoryUtil.getLog(PermissionCheckerUtil.class);
 
 }

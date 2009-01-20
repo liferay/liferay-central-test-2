@@ -22,6 +22,8 @@
 
 package com.liferay.portal.struts;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 
 import java.io.IOException;
@@ -41,8 +43,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.PageContext;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.Globals;
 
 /**
@@ -192,6 +192,6 @@ public class StrutsUtil {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(StrutsUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(StrutsUtil.class);
 
 }

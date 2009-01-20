@@ -22,6 +22,8 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserTracker;
@@ -30,9 +32,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UserTrackerImpl.java.html"><b><i>View Source</i></b></a>
@@ -122,7 +121,7 @@ public class UserTrackerImpl
 		return value;
 	}
 
-	private static Log _log = LogFactory.getLog(UserTrackerImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(UserTrackerImpl.class);
 
 	private User _user;
 	private String _fullName;

@@ -26,9 +26,8 @@ import com.liferay.portal.kernel.dao.orm.Dialect;
 import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.SessionFactory;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import org.hibernate.engine.SessionFactoryImplementor;
 
@@ -73,7 +72,7 @@ public class SessionFactoryImpl implements SessionFactory {
 		_sessionFactoryImplementor = sessionFactoryImplementor;
 	}
 
-	private static Log _log = LogFactory.getLog(SessionFactoryImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(SessionFactoryImpl.class);
 
 	private SessionFactoryImplementor _sessionFactoryImplementor;
 

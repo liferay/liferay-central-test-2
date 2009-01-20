@@ -22,15 +22,14 @@
 
 package com.liferay.portlet.social.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="FacebookUtil.java.html"><b><i>View Source</i></b></a>
@@ -132,6 +131,6 @@ public class FacebookUtil {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(FacebookUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(FacebookUtil.class);
 
 }

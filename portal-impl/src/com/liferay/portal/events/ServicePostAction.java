@@ -23,12 +23,11 @@
 package com.liferay.portal.events;
 
 import com.liferay.portal.kernel.events.Action;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ServicePostAction.java.html"><b><i>View Source</i></b></a>
@@ -57,6 +56,6 @@ public class ServicePostAction extends Action {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(ServicePostAction.class);
+	private static Log _log = LogFactoryUtil.getLog(ServicePostAction.class);
 
 }

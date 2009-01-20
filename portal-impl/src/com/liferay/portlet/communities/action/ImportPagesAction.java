@@ -25,6 +25,8 @@ package com.liferay.portlet.communities.action;
 import com.liferay.portal.LARFileException;
 import com.liferay.portal.LARTypeException;
 import com.liferay.portal.LayoutImportException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
@@ -38,8 +40,6 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
@@ -90,6 +90,6 @@ public class ImportPagesAction extends EditPagesAction {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(ImportPagesAction.class);
+	private static Log _log = LogFactoryUtil.getLog(ImportPagesAction.class);
 
 }

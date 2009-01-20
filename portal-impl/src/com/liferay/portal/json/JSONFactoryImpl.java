@@ -26,9 +26,8 @@ import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import org.jabsorb.JSONSerializer;
 import org.jabsorb.serializer.MarshallException;
@@ -95,7 +94,7 @@ public class JSONFactoryImpl implements JSONFactory {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(JSONFactoryImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(JSONFactoryImpl.class);
 
 	private JSONSerializer _serializer;
 

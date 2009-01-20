@@ -23,6 +23,8 @@
 package com.liferay.portal.tools.sql;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -46,9 +48,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.naming.NamingException;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.hibernate.dialect.DB2Dialect;
 import org.hibernate.dialect.DerbyDialect;
@@ -789,7 +788,7 @@ public abstract class DBUtil {
 		" IDENTITY", "COMMIT_TRANSACTION"
 	};
 
-	private static Log _log = LogFactory.getLog(DBUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(DBUtil.class);
 
 	private static DBUtil _dbUtil;
 

@@ -24,6 +24,8 @@ package com.liferay.portal.security.auth;
 
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -47,9 +49,6 @@ import javax.naming.ldap.LdapContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="CASAutoLogin.java.html"><b><i>View Source</i></b></a>
@@ -183,6 +182,6 @@ public class CASAutoLogin implements AutoLogin {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(CASAutoLogin.class);
+	private static Log _log = LogFactoryUtil.getLog(CASAutoLogin.class);
 
 }

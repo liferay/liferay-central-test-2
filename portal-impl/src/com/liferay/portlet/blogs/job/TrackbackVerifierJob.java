@@ -24,12 +24,11 @@ package com.liferay.portlet.blogs.job;
 
 import com.liferay.portal.kernel.job.IntervalJob;
 import com.liferay.portal.kernel.job.JobExecutionContext;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.blogs.util.TrackbackVerifierUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="TrackbackVerifierJob.java.html"><b><i>View Source</i></b></a>
@@ -57,7 +56,7 @@ public class TrackbackVerifierJob implements IntervalJob {
 		return _interval;
 	}
 
-	private static Log _log = LogFactory.getLog(TrackbackVerifierJob.class);
+	private static Log _log = LogFactoryUtil.getLog(TrackbackVerifierJob.class);
 
 	private long _interval;
 
