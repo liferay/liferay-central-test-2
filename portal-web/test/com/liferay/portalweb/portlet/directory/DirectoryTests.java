@@ -37,8 +37,12 @@ public class DirectoryTests extends BaseTests {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
 		addTestSuite(SearchUsersTest.class);
+		addTestSuite(AdvancedSearchUsersTest.class);
 		addTestSuite(SearchOrganizationsTest.class);
+		addTestSuite(AdvancedSearchOrganizationsTest.class);
 		addTestSuite(SearchUserGroupsTest.class);
+		addTestSuite(AssertCorrectUserInOrganizationTest.class);
+		addTestSuite(AssertCorrectSuborganizationInOrganizationTest.class);
 		addTestSuite(AssertCorrectUserInUserGroupTest.class);
 		addTestSuite(TearDownTest.class);
 	}

@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="SearchUsersTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssertCorrectUserInOrganizationTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class SearchUsersTest extends BaseTestCase {
-	public void testSearchUsers() throws Exception {
+public class AssertCorrectUserInOrganizationTest extends BaseTestCase {
+	public void testAssertCorrectUserInOrganization() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,16 +51,34 @@ public class SearchUsersTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Directory Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_11_keywords", RuntimeVariables.replace("testsn"));
-		selenium.type("_11_keywords", RuntimeVariables.replace("testsn"));
+		selenium.click(RuntimeVariables.replace("link=Organizations"));
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_11_keywords",
+			RuntimeVariables.replace("Diamond Bar"));
+		selenium.type("_11_keywords", RuntimeVariables.replace("Diamond Bar"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=TestFirst1"));
-		assertTrue(selenium.isElementPresent("link=TestFirst2"));
-		selenium.type("_11_keywords", RuntimeVariables.replace("testsnA"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.click("//strong/span");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=View Users")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=View Users"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=TestFirst1"));
-		assertFalse(selenium.isElementPresent("link=TestFirst2"));
+		assertTrue(selenium.isElementPresent("link=TestFirst2"));
 	}
 }

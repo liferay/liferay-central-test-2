@@ -53,23 +53,6 @@ public class TearDownTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Users"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_125_keywords")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.typeKeys("_125_keywords", RuntimeVariables.replace("TestFirst"));
 		selenium.type("_125_keywords", RuntimeVariables.replace("TestFirst"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
@@ -112,7 +95,13 @@ public class TearDownTest extends BaseTestCase {
 		selenium.click("link=\u00ab Basic");
 		selenium.click(RuntimeVariables.replace("link=Organizations"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//tr[19]/td[1]/input");
+		selenium.typeKeys("_126_keywords",
+			RuntimeVariables.replace("Test Organizatio"));
+		selenium.type("_126_keywords",
+			RuntimeVariables.replace("Test Organizatio"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("_126_allRowIds");
 		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
@@ -149,23 +138,6 @@ public class TearDownTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Directory Test Page"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//img[@alt='Remove']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click("//img[@alt='Remove']");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
@@ -189,23 +161,6 @@ public class TearDownTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Manage Pages")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//li[2]/ul/li[3]/a/span"));
