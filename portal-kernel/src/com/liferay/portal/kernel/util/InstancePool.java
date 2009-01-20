@@ -44,6 +44,10 @@ public class InstancePool {
 		return _instance._get(className);
 	}
 
+	public static Object get(String className, boolean logErrors) {
+		return _instance._get(className, logErrors);
+	}
+
 	public static void put(String className, Object obj) {
 		_instance._put(className, obj);
 	}
@@ -59,6 +63,10 @@ public class InstancePool {
 	}
 
 	private Object _get(String className) {
+		return _get(className, true);
+	}
+
+	private Object _get(String className, boolean logErrors) {
 		className = className.trim();
 
 		Object obj = _classPool.get(className);
@@ -75,7 +83,7 @@ public class InstancePool {
 				_put(className, obj);
 			}
 			catch (Exception e1) {
-				if (_log.isWarnEnabled()) {
+				if (logErrors && _log.isWarnEnabled()) {
 					_log.warn(
 						"Unable to load " + className +
 							" with the portal class loader",
@@ -95,11 +103,13 @@ public class InstancePool {
 					_put(className, obj);
 				}
 				catch (Exception e2) {
-					_log.error(
-						"Unable to load " + className +
-							" with the portal class loader or the current " +
-								"context class loader",
-						e2);
+					if (logErrors) {
+						_log.error(
+							"Unable to load " + className +
+								" with the portal class loader or the " +
+									"current context class loader",
+							e2);
+					}
 				}
 			}
 		}
