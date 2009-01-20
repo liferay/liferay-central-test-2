@@ -45,9 +45,7 @@ import com.liferay.portal.kernel.portlet.LiferayPortletMode;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.model.Portlet;
-import com.liferay.wsrp.consumer.invoker.WSRPWindowChannelURLFactory;
-import com.liferay.wsrp.consumer.invoker.WSRPWindowInvoker;
-import com.liferay.wsrp.consumer.invoker.WSRPWindowRequestReader;
+import com.liferay.portal.wsrp.WSRPFactoryUtil;
 
 import com.sun.portal.container.ChannelMode;
 import com.sun.portal.container.ChannelState;
@@ -166,7 +164,7 @@ public class ContainerRequestFactory {
 				request, portlet, channelWindowState, channelPortletMode, plid);
 		}
 		else {
-			channelURLFactory = new WSRPWindowChannelURLFactory(
+			channelURLFactory = WSRPFactoryUtil.getWindowChannelURLFactory(
 				request, portlet, channelWindowState, channelPortletMode, plid);
  		}
 
@@ -180,7 +178,7 @@ public class ContainerRequestFactory {
 					facesPortlet);
 			}
 			else {
-				windowRequestReader = new WSRPWindowRequestReader();
+				windowRequestReader = WSRPFactoryUtil.getWindowRequestReader();
  			}
 
 			ChannelState newWindowState =
@@ -201,7 +199,7 @@ public class ContainerRequestFactory {
 		Container container = null;
 
 		if (remotePortlet) {
-			container = WSRPWindowInvoker.getContainer();
+			container = WSRPFactoryUtil.getContainer();
 		}
 		else {
 			container = ContainerFactory.getContainer(

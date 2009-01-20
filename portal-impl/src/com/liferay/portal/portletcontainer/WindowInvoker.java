@@ -57,6 +57,8 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portal.wsrp.ProfileMapManager;
+import com.liferay.portal.wsrp.WSRPFactoryUtil;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.InvokerPortletImpl;
@@ -65,8 +67,6 @@ import com.liferay.portlet.RenderResponseImpl;
 import com.liferay.portlet.ResourceRequestImpl;
 import com.liferay.portlet.ResourceResponseImpl;
 import com.liferay.portlet.UserInfoFactory;
-import com.liferay.wsrp.consumer.invoker.WSRPWindowInvoker;
-import com.liferay.wsrp.producer.impl.ProfileMapManagerImpl;
 
 import com.sun.portal.container.ChannelMode;
 import com.sun.portal.container.ChannelState;
@@ -91,8 +91,6 @@ import com.sun.portal.container.PortletWindowContextException;
 import com.sun.portal.container.WindowRequestReader;
 import com.sun.portal.portletcontainer.appengine.PortletAppEngineUtils;
 import com.sun.portal.portletcontainer.portlet.impl.PortletRequestConstants;
-import com.sun.portal.wsrp.consumer.wsrpinvoker.WSRPWindowRequestReader;
-import com.sun.portal.wsrp.producer.ProfileMapManager;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -220,7 +218,7 @@ public class WindowInvoker extends InvokerPortletImpl {
 
 			if (_remotePortlet) {
 				WindowRequestReader requestReader =
-					new WSRPWindowRequestReader();
+					WSRPFactoryUtil.getWindowRequestReader();
 
 				ChannelState newChannelState = requestReader.readNewWindowState(
 					request);
@@ -521,7 +519,7 @@ public class WindowInvoker extends InvokerPortletImpl {
 
 	private Container _getContainer() {
 		if (_remotePortlet) {
-			return WSRPWindowInvoker.getContainer();
+			return WSRPFactoryUtil.getContainer();
 		}
 		else {
 			return ContainerFactory.getContainer(
@@ -783,7 +781,8 @@ public class WindowInvoker extends InvokerPortletImpl {
 		try {
 			wsrpUserInfoMap = new HashMap<String, String>();
 
-			ProfileMapManager profileMapManager = new ProfileMapManagerImpl();
+			ProfileMapManager profileMapManager =
+				WSRPFactoryUtil.getProfileMapManager();
 
 			Map<String, String> wsrpDefaultUserInfoMap =
 				profileMapManager.getPortletMap();
