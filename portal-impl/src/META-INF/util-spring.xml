@@ -279,16 +279,6 @@
 	<bean id="com.liferay.portal.kernel.xml.SAXReaderUtil.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityUtil">
 		<property name="target" ref="com.liferay.portal.kernel.xml.SAXReader" />
 	</bean>
-	<bean id="com.liferay.portlet.PortletPreferencesFactoryUtil" class="com.liferay.portlet.PortletPreferencesFactoryUtil">
-		<property name="portletPreferencesFactory">
-			<bean class="com.liferay.portlet.PortletPreferencesFactoryImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.PortletQNameUtil" class="com.liferay.portlet.PortletQNameUtil">
-		<property name="portletQName">
-			<bean class="com.liferay.portlet.PortletQNameImpl" />
-		</property>
-	</bean>
 	<bean id="com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil" class="com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil">
 		<property name="expandoBridgeIndexer">
 			<bean class="com.liferay.portlet.expando.model.impl.ExpandoBridgeIndexerImpl" />

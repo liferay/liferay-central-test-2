@@ -5,13 +5,31 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
 >
-	<bean id="internalInvokerPortlet" class="com.liferay.portlet.InvokerPortletImpl" />
-	<bean id="sunInvokerPortlet" class="com.liferay.portal.portletcontainer.WindowInvoker" />
-	<bean id="com.liferay.portlet.PortletInstanceFactoryImpl" class="com.liferay.portlet.PortletInstanceFactoryImpl">
-		<property name="internalInvokerPortletPrototype" ref="internalInvokerPortlet" />
-		<property name="sunInvokerPortletPrototype" ref="sunInvokerPortlet" />
+	<bean id="com.liferay.portal.portletcontainer.PortletWindowContextFactoryUtil" class="com.liferay.portal.portletcontainer.PortletWindowContextFactoryUtil">
+		<property name="portletWindowContextFactory">
+			<bean class="com.liferay.portal.portletcontainer.PortletWindowContextFactoryImpl" />
+		</property>
 	</bean>
 	<bean id="com.liferay.portlet.PortletInstanceFactoryUtil" class="com.liferay.portlet.PortletInstanceFactoryUtil">
-		<property name="portletInstanceFactory" ref="com.liferay.portlet.PortletInstanceFactoryImpl" />
+		<property name="portletInstanceFactory">
+			<bean class="com.liferay.portlet.PortletInstanceFactoryImpl">
+				<property name="internalInvokerPortletPrototype">
+					<bean class="com.liferay.portlet.InvokerPortletImpl" />
+				</property>
+				<property name="sunInvokerPortletPrototype">
+					<bean class="com.liferay.portal.portletcontainer.WindowInvoker" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.PortletPreferencesFactoryUtil" class="com.liferay.portlet.PortletPreferencesFactoryUtil">
+		<property name="portletPreferencesFactory">
+			<bean class="com.liferay.portlet.PortletPreferencesFactoryImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.PortletQNameUtil" class="com.liferay.portlet.PortletQNameUtil">
+		<property name="portletQName">
+			<bean class="com.liferay.portlet.PortletQNameImpl" />
+		</property>
 	</bean>
 </beans>

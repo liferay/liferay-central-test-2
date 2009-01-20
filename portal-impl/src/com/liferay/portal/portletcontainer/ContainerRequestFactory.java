@@ -157,7 +157,7 @@ public class ContainerRequestFactory {
 			portletMode.toString());
 
 		PortletWindowContext portletWindowContext =
-			new PortletWindowContextImpl(request, portlet, lifecycle);
+			PortletWindowContextFactoryUtil.create(request, portlet, lifecycle);
 
 		ChannelURLFactory channelURLFactory = null;
 

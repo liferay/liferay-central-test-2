@@ -24,6 +24,7 @@ package com.liferay.portlet;
 
 import com.liferay.portal.ccpp.PortalProfileFactory;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
+import com.liferay.portal.kernel.portlet.LiferayPortletSession;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.ProtectedPrincipal;
@@ -385,7 +386,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(_portletName);
-		sb.append(PortletSessionImpl.LAYOUT_SEPARATOR);
+		sb.append(LiferayPortletSession.LAYOUT_SEPARATOR);
 		sb.append(_plid);
 
 		return sb.toString();

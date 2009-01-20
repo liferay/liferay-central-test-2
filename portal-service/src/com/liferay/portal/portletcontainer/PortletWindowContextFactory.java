@@ -20,24 +20,23 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.portlet;
+package com.liferay.portal.portletcontainer;
 
-import javax.portlet.PortletSession;
+import com.liferay.portal.model.Portlet;
 
-import javax.servlet.http.HttpSession;
+import com.sun.portal.container.PortletWindowContext;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="LiferayPortletSession.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletWindowContextFactory.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface LiferayPortletSession extends PortletSession {
+public interface PortletWindowContextFactory {
 
-	public static final String PORTLET_SCOPE_NAMESPACE = "javax.portlet.p.";
-
- 	public static final String LAYOUT_SEPARATOR = "_LAYOUT_";
-
-	public void setHttpSession(HttpSession session);
+	public PortletWindowContext create(
+		HttpServletRequest request, Portlet portlet, String lifecycle);
 
 }

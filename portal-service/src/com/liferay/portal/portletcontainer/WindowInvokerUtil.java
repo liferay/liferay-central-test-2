@@ -41,10 +41,10 @@
 
 package com.liferay.portal.portletcontainer;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletSession;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.PortletSessionImpl;
 
 import com.sun.portal.container.EntityID;
 import com.sun.portal.container.PortletID;
@@ -83,7 +83,7 @@ public class WindowInvokerUtil {
 		StringBuilder windowID = new StringBuilder();
 
 		windowID.append(entityID.getPortletWindowName());
-		windowID.append(PortletSessionImpl.LAYOUT_SEPARATOR);
+		windowID.append(LiferayPortletSession.LAYOUT_SEPARATOR);
 		windowID.append(plid);
 
 		return windowID.toString();

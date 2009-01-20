@@ -51,7 +51,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
-import com.liferay.portal.portletcontainer.PortletWindowContextImpl;
+import com.liferay.portal.portletcontainer.PortletWindowContextFactoryUtil;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -118,7 +118,7 @@ public class UserManagerImpl implements UserManager{
 				PortalUtil.getCompanyId(request), portletId);
 
 			PortletWindowContext portletWindowContext =
-				new PortletWindowContextImpl(
+				PortletWindowContextFactoryUtil.create(
 					request, portlet, PortletRequest.ACTION_PHASE);
 
 			initializeLiferayRequest(request);

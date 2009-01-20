@@ -47,10 +47,6 @@ import javax.servlet.http.HttpSession;
  */
 public class PortletSessionImpl implements LiferayPortletSession {
 
-	public static final String PORTLET_SCOPE_NAMESPACE = "javax.portlet.p.";
-
- 	public static final String LAYOUT_SEPARATOR = "_LAYOUT_";
-
 	public static final String getPortletScope(String portletName, long plid) {
 		StringBuilder sb = new StringBuilder();
 
