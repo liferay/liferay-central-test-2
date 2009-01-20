@@ -406,10 +406,12 @@ public class LanguageImpl implements Language {
 				pageContext, null, null, key);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e);
+			}
 		}
 
-		if (value == null) {
+		if ((value == null) || (value.equals(defaultValue))) {
 
 			// LEP-2849
 
