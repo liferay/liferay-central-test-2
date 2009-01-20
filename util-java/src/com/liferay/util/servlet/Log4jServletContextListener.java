@@ -22,10 +22,10 @@
 
 package com.liferay.util.servlet;
 
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="Log4jServletContextListener.java.html"><b><i>View Source</i></b></a>
@@ -41,7 +41,7 @@ public class Log4jServletContextListener implements ServletContextListener {
 	public void contextDestroyed(ServletContextEvent event) {
 		Thread currentThread = Thread.currentThread();
 
-		LogFactoryUtil.release(currentThread.getContextClassLoader());
+		LogFactory.release(currentThread.getContextClassLoader());
 	}
 
 }
