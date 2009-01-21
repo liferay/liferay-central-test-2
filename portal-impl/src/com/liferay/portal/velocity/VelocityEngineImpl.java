@@ -55,7 +55,9 @@ public class VelocityEngineImpl implements VelocityEngine {
 		StringResourceRepository stringResourceRepository =
 			StringResourceLoader.getRepository();
 
-		stringResourceRepository.removeStringResource(resource);
+		if (stringResourceRepository != null) {
+			stringResourceRepository.removeStringResource(resource);
+		}
 	}
 
 	public VelocityContext getEmptyContext() {
