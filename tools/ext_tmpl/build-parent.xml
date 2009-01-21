@@ -232,28 +232,12 @@
 		<if>
 			<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
 			<then>
-				<if>
-					<equals arg1="${app.server.version}" arg2="4.2" />
-					<then>
-						<delete>
-							<fileset
-								dir="${app.server.instance.dir}/lib"
-								includes="hibernate3.jar"
-							/>
-						</delete>
-					</then>
-					<elseif>
-						<equals arg1="${app.server.version}" arg2="5.0" />
-						<then>
-							<delete>
-								<fileset
-									dir="${app.server.lib.portal.dir}"
-									includes="jaxrpc.jar,jmx-remote.jar,jmx-ri.jar,mx4j.jar,stax.jar,xercesImpl.jar,xml-apis.jar"
-								/>
-							</delete>
-						</then>
-					</elseif>
-				</if>
+				<delete>
+					<fileset
+						dir="${app.server.lib.portal.dir}"
+						includes="jmx-remote.jar,jmx-ri.jar,mx4j.jar,stax.jar,xercesImpl.jar,xml-apis.jar"
+					/>
+				</delete>
 			</then>
 		</if>
 

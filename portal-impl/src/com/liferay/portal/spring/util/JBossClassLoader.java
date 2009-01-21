@@ -20,39 +20,35 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.spring.context;
+package com.liferay.portal.spring.util;
 
-import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
-import com.liferay.portal.kernel.util.AggregateClassLoader;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.kernel.util.ServerDetector;
-import com.liferay.portal.spring.util.JBossClassLoader;
-
-import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
-import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 
 /**
- * <a href="PortletBeanFactoryPostProcessor.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="JBossClassLoader.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletBeanFactoryPostProcessor
-	implements BeanFactoryPostProcessor {
+public class JBossClassLoader extends ClassLoader {
 
-	public void postProcessBeanFactory(
-		ConfigurableListableBeanFactory beanFactory) {
+	public JBossClassLoader(ClassLoader classLoader) {
+		super(classLoader);
+	}
 
-		ClassLoader beanClassLoader = new AggregateClassLoader(
-			PortletClassLoaderUtil.getClassLoader(),
-			PortalClassLoaderUtil.getClassLoader());
+	public Class<?> loadClass(String name) throws ClassNotFoundException {
+		if (name.startsWith("org.aopalliance.") ||
+			name.startsWith("org.hibernate.") ||
+			name.startsWith("org.springframework.")) {
 
-		if (ServerDetector.isJBoss()) {
-			beanClassLoader = new JBossClassLoader(beanClassLoader);
+			ClassLoader portalClassLoader =
+				PortalClassLoaderUtil.getClassLoader();
+
+			return portalClassLoader.loadClass(name);
 		}
-
-		beanFactory.setBeanClassLoader(beanClassLoader);
+		else {
+			return super.loadClass(name);
+		}
 	}
 
 }
