@@ -240,10 +240,6 @@
 	text-align: center;
 }
 
-.portlet-enterprise-admin .portrait-icons a {
-	float: left;
-}
-
 .portlet-enterprise-admin table.org-labor-table {
 	margin-bottom: 30px;
 }
