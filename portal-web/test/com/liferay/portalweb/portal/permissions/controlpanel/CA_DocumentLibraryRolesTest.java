@@ -48,9 +48,13 @@ public class CA_DocumentLibraryRolesTest extends BaseTestCase {
 			RuntimeVariables.replace("label=Enterprise"));
 		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileEntryDELETE",
 			RuntimeVariables.replace("label=Enterprise"));
+		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileEntryDELETE_DISCUSSION",
+			RuntimeVariables.replace("label=Enterprise"));
 		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileEntryPERMISSIONS",
 			RuntimeVariables.replace("label=Enterprise"));
 		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileEntryUPDATE",
+			RuntimeVariables.replace("label=Enterprise"));
+		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileEntryUPDATE_DISCUSSION",
 			RuntimeVariables.replace("label=Enterprise"));
 		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileEntryVIEW",
 			RuntimeVariables.replace("label=Enterprise"));
@@ -75,6 +79,10 @@ public class CA_DocumentLibraryRolesTest extends BaseTestCase {
 		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileShortcutPERMISSIONS",
 			RuntimeVariables.replace("label=Enterprise"));
 		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileShortcutUPDATE",
+			RuntimeVariables.replace("label=Enterprise"));
+		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileShortcutDELETE_DISCUSSION",
+			RuntimeVariables.replace("label=Enterprise"));
+		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileShortcutUPDATE_DISCUSSION",
 			RuntimeVariables.replace("label=Enterprise"));
 		selenium.select("_128_scopecom.liferay.portlet.documentlibrary.model.DLFileShortcutVIEW",
 			RuntimeVariables.replace("label=Enterprise"));
