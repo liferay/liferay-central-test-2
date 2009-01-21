@@ -246,7 +246,13 @@ if (!portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 		(PortletPermissionUtil.contains(permissionChecker, plid, portletId, ActionKeys.CONFIGURATION))) {
 
 		showConfigurationIcon = true;
-		showExportImportIcon = true;
+
+		boolean supportsLAR = Validator.isNotNull(portlet.getPortletDataHandlerClass());
+		boolean supportsSetup = Validator.isNotNull(portlet.getConfigurationActionClass());
+
+		if (supportsLAR || (supportsSetup && !group.getName().equals(GroupConstants.CONTROL_PANEL))) {
+			showExportImportIcon = true;
+		}
 
 		if (PropsValues.PORTLET_CSS_ENABLED) {
 			showPortletCssIcon = true;
