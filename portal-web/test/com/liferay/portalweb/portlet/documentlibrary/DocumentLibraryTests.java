@@ -50,6 +50,9 @@ public class DocumentLibraryTests extends BaseTests {
 		addTestSuite(AssertCommentMoveTest.class);
 		addTestSuite(DeleteCommentsTest.class);
 		addTestSuite(EditSecondFolderTest.class);
+		addTestSuite(DeleteAllTest.class);
+		addTestSuite(ImportLARTest.class);
+		addTestSuite(VerifyImportLARTest.class);
 		addTestSuite(TearDownTest.class);
 	}
 
