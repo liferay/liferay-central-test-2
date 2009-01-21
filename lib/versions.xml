@@ -60,17 +60,6 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>development/c3p0.jar</file-name>
-		<version>0.9.0.4</version>
-		<project-name>C3P0</project-name>
-		<project-url>http://sourceforge.net/projects/c3p0</project-url>
-		<licenses>
-			<license>
-				<license-name>LGPL 2.1</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>development/catalina.jar</file-name>
 		<version>5.5.26</version>
 		<project-name>Tomcat</project-name>
@@ -957,6 +946,17 @@
 			project which is GPL, but a physical review of the source code
 			reveals the Apache License 1.1 in the Burlap source code files.
 		</comments>
+	</library>
+	<library>
+		<file-name>portal/c3p0.jar</file-name>
+		<version>0.9.1.2</version>
+		<project-name>C3P0</project-name>
+		<project-url>http://sourceforge.net/projects/c3p0</project-url>
+		<licenses>
+			<license>
+				<license-name>LGPL 2.1</license-name>
+			</license>
+		</licenses>
 	</library>
 	<library>
 		<file-name>portal/casclient.jar</file-name>

@@ -27,13 +27,14 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.SortedProperties;
 import com.liferay.portal.util.PropsUtil;
 
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+
 import java.util.Enumeration;
 import java.util.Properties;
 
 import javax.sql.DataSource;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.dbcp.BasicDataSource;
 
 import org.springframework.beans.factory.config.AbstractFactoryBean;
 
@@ -56,7 +57,7 @@ public class DataSourceFactoryBean extends AbstractFactoryBean {
 	protected Object createInstance() throws Exception {
 		Properties properties = PropsUtil.getProperties(_propertyPrefix, true);
 
-		BasicDataSource dataSource = new BasicDataSource();
+		DataSource dataSource = new ComboPooledDataSource();
 
 		Enumeration<String> enu =
 			(Enumeration<String>)properties.propertyNames();
@@ -65,6 +66,18 @@ public class DataSourceFactoryBean extends AbstractFactoryBean {
 			String key = enu.nextElement();
 
 			String value = properties.getProperty(key);
+
+			// Map org.apache.commons.dbcp.BasicDataSource to C3PO
+
+			if (key.equalsIgnoreCase("driverClassName")) {
+				key = "driverClass";
+			}
+			else if (key.equalsIgnoreCase("url")) {
+				key = "jdbcUrl";
+			}
+			else if (key.equalsIgnoreCase("username")) {
+				key = "user";
+			}
 
 			BeanUtils.setProperty(dataSource, key, value);
 		}

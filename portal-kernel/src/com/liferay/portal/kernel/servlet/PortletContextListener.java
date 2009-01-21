@@ -30,8 +30,11 @@ import com.liferay.portal.kernel.util.InfrastructureUtil;
 import com.liferay.portal.kernel.util.PortalInitable;
 import com.liferay.portal.kernel.util.PortalInitableUtil;
 
+import java.lang.reflect.Method;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -70,11 +73,21 @@ public class PortletContextListener
 				_log.debug("Dynamically unbinding the Liferay data source");
 			}
 
-			Context ctx = new InitialContext();
+			Context context = new InitialContext();
 
-			ctx.unbind(_JNDI_JDBC_LIFERAY_POOL);
+			try {
+				context.lookup(_JNDI_JDBC_LIFERAY_POOL);
+			}
+			catch (NamingException ne) {
+				context.unbind(_JNDI_JDBC_LIFERAY_POOL);
+			}
 
-			ctx.destroySubcontext(_JNDI_JDBC);
+			try {
+				context.lookup(_JNDI_JDBC);
+			}
+			catch (NamingException ne) {
+				context.destroySubcontext(_JNDI_JDBC);
+			}
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
@@ -116,12 +129,30 @@ public class PortletContextListener
 				return;
 			}
 
-			Context ctx = new InitialContext();
+			Context context = new InitialContext();
 
-			ctx.createSubcontext(_JNDI_JDBC);
+			try {
+				context.lookup(_JNDI_JDBC);
+			}
+			catch (NamingException ne) {
+				context.createSubcontext(_JNDI_JDBC);
+			}
 
-			ctx.bind(
-				_JNDI_JDBC_LIFERAY_POOL, InfrastructureUtil.getDataSource());
+			try {
+				context.lookup(_JNDI_JDBC_LIFERAY_POOL);
+			}
+			catch (NamingException ne) {
+				try {
+					Method method = dataSource.getClass().getMethod(
+						"getTargetDataSource");
+
+					dataSource = (DataSource)method.invoke(dataSource);
+				}
+				catch (NoSuchMethodException nsme) {
+				}
+
+				context.bind(_JNDI_JDBC_LIFERAY_POOL, dataSource);
+			}
 
 			_bindLiferayPool = true;
 		}
