@@ -52,28 +52,14 @@ public class EditPreferencesTest extends BaseTestCase {
 		selenium.click("//strong/span");
 		selenium.click(RuntimeVariables.replace("//img[@alt='Preferences']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_12_symbols", RuntimeVariables.replace("GOOG"));
+		selenium.type("_1_WAR_stocksportlet_symbols",
+			RuntimeVariables.replace("GOOG"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=GOOG"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("Change")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isTextPresent("Change"));
 	}
 }

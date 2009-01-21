@@ -38,6 +38,7 @@ import com.liferay.portalweb.portlet.sampletapestry.SampleTapestryTests;
 import com.liferay.portalweb.portlet.sampletest.SampleTestTests;
 import com.liferay.portalweb.portlet.sampleuitaglibs.SampleUITagLibsTests;
 import com.liferay.portalweb.portlet.samplewap.SampleWAPTests;
+import com.liferay.portalweb.portlet.stocks.StocksTests;
 import com.liferay.portalweb.portlet.sunbookmark.SunBookmarkTests;
 import com.liferay.portalweb.portlet.sunelluminate.SunElluminateTests;
 import com.liferay.portalweb.portlet.sunflickr.SunFlickrTests;
@@ -85,6 +86,7 @@ public class Plugins2TestSuite extends BaseTests {
 		addTestSuite(SampleTestTests.class);
 		addTestSuite(SampleUITagLibsTests.class);
 		addTestSuite(SampleWAPTests.class);
+		addTestSuite(StocksTests.class);
 		//addTestSuite(SSHTermTests.class);
 		//addTestSuite(SSHVncTests.class);
 		addTestSuite(SunBookmarkTests.class);
