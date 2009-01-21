@@ -235,7 +235,7 @@
 				<delete>
 					<fileset
 						dir="${app.server.lib.portal.dir}"
-						includes="jmx-remote.jar,jmx-ri.jar,mx4j.jar,stax.jar,xercesImpl.jar,xml-apis.jar"
+						includes="jaxrpc.jar,jmx-remote.jar,jmx-ri.jar,mx4j.jar,stax.jar,xercesImpl.jar,xml-apis.jar"
 					/>
 				</delete>
 			</then>
