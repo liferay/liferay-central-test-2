@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
@@ -1242,8 +1243,13 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			return portletIds;
 		}
 
-		Document doc = SAXReaderUtil.read(
-			xml, PropsValues.PORTLET_XML_VALIDATE);
+		boolean portletXMLValidate = PropsValues.PORTLET_XML_VALIDATE;
+
+		if (ServerDetector.isGeronimo()) {
+			portletXMLValidate = false;
+		}
+
+		Document doc = SAXReaderUtil.read(xml, portletXMLValidate);
 
 		Element root = doc.getRootElement();
 
