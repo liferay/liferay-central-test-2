@@ -204,7 +204,8 @@ public class TearDownTest extends BaseTestCase {
 						"//input[@value='Search']"));
 				selenium.waitForPageToLoad("30000");
 
-				boolean CommunityPresent = selenium.isElementPresent("//strong");
+				boolean CommunityPresent = selenium.isElementPresent(
+						"//td[6]/ul/li/strong/span");
 
 				if (!CommunityPresent) {
 					label = 4;
@@ -212,7 +213,7 @@ public class TearDownTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("//strong");
+				selenium.click("//td[6]/ul/li/strong/span");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -310,7 +311,7 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 
 				boolean PasswordPolicyPresent = selenium.isElementPresent(
-						"//strong");
+						"//td[3]/ul/li/strong/span");
 
 				if (!PasswordPolicyPresent) {
 					label = 6;
@@ -318,7 +319,7 @@ public class TearDownTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("//strong");
+				selenium.click("//td[3]/ul/li/strong/span");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -378,7 +379,7 @@ public class TearDownTest extends BaseTestCase {
 						"Your request processed successfully."));
 
 				boolean EmailAddressPresent = selenium.isElementPresent(
-						"//strong/span");
+						"//td[4]/ul/li/strong/span");
 
 				if (!EmailAddressPresent) {
 					label = 7;
@@ -386,7 +387,7 @@ public class TearDownTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("//strong/span");
+				selenium.click("//td[4]/ul/li/strong/span");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -417,7 +418,7 @@ public class TearDownTest extends BaseTestCase {
 				selenium.click("link=Addresses");
 
 				boolean AddressPresent = selenium.isElementPresent(
-						"//strong/span");
+						"//td[7]/ul/li/strong");
 
 				if (!AddressPresent) {
 					label = 8;
@@ -425,7 +426,7 @@ public class TearDownTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("//strong/span");
+				selenium.click("//td[7]/ul/li/strong");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -456,7 +457,7 @@ public class TearDownTest extends BaseTestCase {
 				selenium.click("link=Websites");
 
 				boolean WebsitePresent = selenium.isElementPresent(
-						"//strong/span");
+						"//td[4]/ul/li/strong/span");
 
 				if (!WebsitePresent) {
 					label = 9;
@@ -464,7 +465,7 @@ public class TearDownTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("//strong/span");
+				selenium.click("//td[4]/ul/li/strong/span");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -495,7 +496,7 @@ public class TearDownTest extends BaseTestCase {
 				selenium.click("link=Phone Numbers");
 
 				boolean PhoneNumberPresent = selenium.isElementPresent(
-						"//strong/span");
+						"//td[5]/ul/li/strong/span");
 
 				if (!PhoneNumberPresent) {
 					label = 10;
@@ -503,7 +504,7 @@ public class TearDownTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("//strong/span");
+				selenium.click("//td[5]/ul/li/strong/span");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {

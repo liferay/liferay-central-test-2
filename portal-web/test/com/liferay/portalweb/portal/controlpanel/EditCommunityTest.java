@@ -74,7 +74,7 @@ public class EditCommunityTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Community 2"));
-		selenium.click("//strong/span");
+		selenium.click("//td[6]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

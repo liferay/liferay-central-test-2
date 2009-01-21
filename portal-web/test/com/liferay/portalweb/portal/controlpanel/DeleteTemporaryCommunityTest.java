@@ -68,11 +68,13 @@ public class DeleteTemporaryCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("_134_name",
+			RuntimeVariables.replace("Test Community 2 Edited"));
 		selenium.type("_134_name",
 			RuntimeVariables.replace("Test Community 2 Edited"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Test Community 2 Edited"));
+		selenium.click("//td[6]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -80,7 +82,7 @@ public class DeleteTemporaryCommunityTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//strong")) {
+				if (selenium.isElementPresent("link=Delete")) {
 					break;
 				}
 			}
@@ -90,7 +92,6 @@ public class DeleteTemporaryCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//strong");
 		selenium.click(RuntimeVariables.replace("link=Delete"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()

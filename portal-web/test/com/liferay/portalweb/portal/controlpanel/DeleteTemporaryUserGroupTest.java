@@ -68,7 +68,7 @@ public class DeleteTemporaryUserGroupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_127_name", RuntimeVariables.replace("Temporary"));
+		selenium.typeKeys("_127_name", RuntimeVariables.replace("Temporar"));
 		selenium.type("_127_name", RuntimeVariables.replace("Temporary"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
@@ -77,6 +77,7 @@ public class DeleteTemporaryUserGroupTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-		assertTrue(selenium.isTextPresent("You request processed successfully."));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }
