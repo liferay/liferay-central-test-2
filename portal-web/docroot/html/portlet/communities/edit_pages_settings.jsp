@@ -43,8 +43,6 @@ boolean workflowEnabled = ((Boolean)request.getAttribute("edit_pages.jsp-workflo
 
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portletURL");
 
-long stagingGroupId = stagingGroup.getGroupId();
-
 String tabs2Names = "";
 
 if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING)) {
@@ -212,6 +210,8 @@ if (!StringUtil.contains(tabs2Names, tabs2)) {
 				<td>
 
 					<%
+					long stagingGroupId = stagingGroup.getGroupId();
+
 					LayoutSet stagingPublicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(stagingGroupId, false);
 
 					String stagingPublicVirtualHost = ParamUtil.getString(request, "stagingPublicVirtualHost", stagingPublicLayoutSet.getVirtualHost());
