@@ -87,10 +87,6 @@ import com.liferay.portlet.tasks.service.persistence.TasksReviewPersistenceTest;
 import com.liferay.portlet.wiki.service.persistence.WikiNodePersistenceTest;
 import com.liferay.portlet.wiki.service.persistence.WikiPagePersistenceTest;
 import com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistenceTest;
-import com.liferay.wsrp.service.persistence.WSRPConfiguredProducerPersistenceTest;
-import com.liferay.wsrp.service.persistence.WSRPConsumerRegistrationPersistenceTest;
-import com.liferay.wsrp.service.persistence.WSRPPortletPersistenceTest;
-import com.liferay.wsrp.service.persistence.WSRPProducerPersistenceTest;
 
 import junit.framework.TestSuite;
 
@@ -226,11 +222,6 @@ public class PersistenceTestSuite extends TestSuite {
 		addTestSuite(WikiNodePersistenceTest.class);
 		addTestSuite(WikiPagePersistenceTest.class);
 		addTestSuite(WikiPageResourcePersistenceTest.class);
-
-		addTestSuite(WSRPConfiguredProducerPersistenceTest.class);
-		addTestSuite(WSRPConsumerRegistrationPersistenceTest.class);
-		addTestSuite(WSRPPortletPersistenceTest.class);
-		addTestSuite(WSRPProducerPersistenceTest.class);
 	}
 
 	public void test() {
