@@ -1,0 +1,88 @@
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.liferay.portalweb.portlet.wiki;
+
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
+
+/**
+ * <a href="VerifyImportLARTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class VerifyImportLARTest extends BaseTestCase {
+	public void testVerifyImportLAR() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Wiki Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Test Wiki Article"));
+		assertTrue(selenium.isTextPresent("this is italics "));
+		assertTrue(selenium.isTextPresent("bold"));
+		assertTrue(selenium.isElementPresent("link=Link to website"));
+		assertTrue(selenium.isTextPresent("this is a list item"));
+		assertTrue(selenium.isTextPresent("this is a sub list item"));
+		assertTrue(selenium.isTextPresent("Children Pages"));
+		assertTrue(selenium.isElementPresent("link=Test"));
+		assertTrue(selenium.isTextPresent("This is a test edited post reply!"));
+		selenium.click(RuntimeVariables.replace("link=Test"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Test Child Article"));
+		assertTrue(selenium.isTextPresent("this is italics "));
+		assertTrue(selenium.isTextPresent("bold"));
+		assertTrue(selenium.isElementPresent("link=Link to website"));
+		assertTrue(selenium.isTextPresent("this is a list item"));
+		assertTrue(selenium.isTextPresent("this is a sub list item"));
+		selenium.click(RuntimeVariables.replace("//a[2]/span"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Yes this is a second test article"));
+		assertTrue(selenium.isTextPresent(
+				"I love Liferay! This Wiki has been EDITED!"));
+		assertTrue(selenium.isElementPresent("link=Link Me 1"));
+		assertTrue(selenium.isElementPresent("link=Link Me 2"));
+		selenium.click(RuntimeVariables.replace("link=Link Me 1"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Hi Administrator! Hope you are well! Please link me to another page!"));
+		selenium.click(RuntimeVariables.replace("link=Link Me 2"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Hi Administrator!"));
+		assertTrue(selenium.isTextPresent(
+				"I made another mistake! Oh me. Please link this article to another!"));
+	}
+}
