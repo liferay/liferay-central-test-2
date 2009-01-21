@@ -51,7 +51,7 @@ public class AssertApplyUserGroupTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=User Groups"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//strong/span");
+		selenium.click("//td[4]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

@@ -39,7 +39,8 @@ public class ControlPanelTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Control Panel")) {
+				if (selenium.isElementPresent(
+							"//a[@id='my-community-private-pages']")) {
 					break;
 				}
 			}
@@ -49,6 +50,9 @@ public class ControlPanelTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace(
+				"//a[@id='my-community-private-pages']"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Control Panel"));
 		selenium.waitForPageToLoad("30000");
 	}

@@ -72,7 +72,7 @@ public class AssertApplyOrganizationTest extends BaseTestCase {
 		selenium.type("_126_keywords", RuntimeVariables.replace("Selenium"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//strong/span");
+		selenium.click("//td[8]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

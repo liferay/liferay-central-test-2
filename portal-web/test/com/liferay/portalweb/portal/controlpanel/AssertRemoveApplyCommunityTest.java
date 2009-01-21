@@ -72,7 +72,7 @@ public class AssertRemoveApplyCommunityTest extends BaseTestCase {
 		selenium.type("_134_name", RuntimeVariables.replace("Test Community"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//strong/span");
+		selenium.click("//td[6]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
