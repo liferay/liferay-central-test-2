@@ -430,6 +430,10 @@ public class ResourceActionsUtil {
 			actions.add("CONFIGURATION");
 		}
 
+		if (!actions.contains("PREFERENCES")) {
+			actions.add("PREFERENCES");
+		}
+
 		if (!actions.contains("VIEW")) {
 			actions.add("VIEW");
 		}
