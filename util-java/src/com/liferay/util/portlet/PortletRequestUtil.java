@@ -292,8 +292,7 @@ public class PortletRequestUtil {
 			themeDisplay.getI18nLanguageId());
 		DocUtil.add(
 			themeDisplayEl, "language-id", themeDisplay.getLanguageId());
-		DocUtil.add(
-			themeDisplayEl, "locale", themeDisplay.getLocale());
+		DocUtil.add(themeDisplayEl, "locale", themeDisplay.getLocale());
 		DocUtil.add(
 			themeDisplayEl, "path-context", themeDisplay.getPathContext());
 		DocUtil.add(
@@ -318,8 +317,7 @@ public class PortletRequestUtil {
 			themeDisplayEl, "real-user-id", themeDisplay.getRealUserId());
 		DocUtil.add(
 			themeDisplayEl, "scope-group-id", themeDisplay.getScopeGroupId());
-		DocUtil.add(
-			themeDisplayEl, "secure", themeDisplay.isSecure());
+		DocUtil.add(themeDisplayEl, "secure", themeDisplay.isSecure());
 		DocUtil.add(
 			themeDisplayEl, "server-name", themeDisplay.getServerName());
 		DocUtil.add(
@@ -329,8 +327,7 @@ public class PortletRequestUtil {
 		DocUtil.add(
 			themeDisplayEl, "url-portal",
 			HttpUtil.removeProtocol(themeDisplay.getURLPortal()));
-		DocUtil.add(
-			themeDisplayEl, "user-id", themeDisplay.getUserId());
+		DocUtil.add(themeDisplayEl, "user-id", themeDisplay.getUserId());
 
 		if (themeDisplay.getPortletDisplay() != null) {
 			Element portletDisplayEl = themeDisplayEl.addElement(
