@@ -45,6 +45,8 @@ Liferay.Tree = new Class({
 		instance._wasDropped = false;
 
 		instance._dragOptions = {
+			scope: 'liferayTree',
+			cssNamespace: false,
 			helper: 'clone',
 			handle: '> a',
 			distance: 1,
@@ -59,6 +61,8 @@ Liferay.Tree = new Class({
 		};
 
 		instance._dropOptions = {
+			scope: 'liferayTree',
+			cssNamespace: false,
 			accept: '.tree-item',
 			activeClass: '',
 			hoverClass: 'tree-item-hover',
@@ -135,6 +139,27 @@ Liferay.Tree = new Class({
 		Liferay.bind('navigation', instance._navigationCallback, instance);
 
 		instance.create();
+
+		instance._attachEventDelegation();
+	},
+
+	_attachEventDelegation: function() {
+		var instance = this;
+		var treeEl = instance.tree;
+
+		// Set toggling
+		treeEl.click(
+			function(event) {
+				var target = event.target;
+				var nodeName = target.nodeName || '';
+
+				if (nodeName.toLowerCase() == 'img' && target.className) {
+					if (target.className.indexOf('expand-image') != -1) {
+						instance.toggle(target);
+					}
+				}
+			}
+		);
 	},
 
 	addNode: function(parentNode) {
@@ -222,7 +247,7 @@ Liferay.Tree = new Class({
 		var instance = this;
 
 		var outputEl = jQuery(instance.outputId);
-		var mainLi = '<li class="toggle-expand"><a class="lfr-expand" href="javascript: ;">' + instance._expandText + '</a> | <a class="lfr-collapse" href="javascript: ;">' + instance._collapseText + '</a></li>';
+		var mainLi = '<li class="toggle-expand"><a class="lfr-expand" href="javascript: ;" id="lfrExpand">' + instance._expandText + '</a> | <a class="lfr-collapse" href="javascript: ;" id="lfrCollapse">' + instance._collapseText + '</a></li>';
 
 		if (!instance.preRendered) {
 			var icons = instance.icons;
@@ -293,21 +318,13 @@ Liferay.Tree = new Class({
 			instance.nodeIds = nodeIdList.join(',');
 		}
 
-		// Set toggling
-
-		jQuery('img.expand-image', treeEl).click(
-			function() {
-				instance.toggle(this);
-			}
-		);
-
 		// Set draggables and droppables
 
 		instance.setInteraction(treeEl);
 
 		var allDraggable = false;
 
-		jQuery('.lfr-expand', treeEl).click(
+		jQuery('#lfrExpand').click(
 			function() {
 				tree.find('.tree-item ul').show();
 				tree.find('.tree-item img').each(
@@ -334,7 +351,7 @@ Liferay.Tree = new Class({
 			}
 		);
 
-		jQuery('.lfr-collapse', treeEl).click(
+		jQuery('#lfrCollapse').click(
 			function() {
 				tree.find('.tree-item ul').hide();
 				tree.find('.tree-item img').each(
