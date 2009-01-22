@@ -22,8 +22,6 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Portlet;
 
@@ -67,12 +65,6 @@ public class ResourceRequestImpl
 		return _resourceID;
 	}
 
-	protected ResourceRequestImpl() {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Creating new instance " + hashCode());
-		}
-	}
-
 	protected void init(
 		HttpServletRequest request, Portlet portlet,
 		InvokerPortlet invokerPortlet, PortletContext portletContext,
@@ -86,19 +78,6 @@ public class ResourceRequestImpl
 		_cacheablity = ParamUtil.getString(request, "p_p_cacheability");
 		_resourceID = request.getParameter("p_p_resource_id");
 	}
-
-	protected void recycle() {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Recycling instance " + hashCode());
-		}
-
-		super.recycle();
-
-		_cacheablity = null;
-		_resourceID = null;
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(ResourceRequestImpl.class);
 
 	private String _cacheablity;
 	private String _resourceID;

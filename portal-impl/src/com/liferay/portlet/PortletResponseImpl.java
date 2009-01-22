@@ -544,17 +544,6 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 		setPlid(plid);
 	}
 
-	protected void recycle() {
-		_portletRequestImpl = null;
-		_response = null;
-		_portletName = null;
-		_portlet = null;
-		_namespace = null;
-		_companyId = 0;
-		_plid = 0;
-		_headers.clear();
-	}
-
 	private static Log _log = LogFactoryUtil.getLog(PortletResponseImpl.class);
 
 	private PortletRequestImpl _portletRequestImpl;

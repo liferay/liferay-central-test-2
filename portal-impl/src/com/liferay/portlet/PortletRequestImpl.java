@@ -739,31 +739,6 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 		}
 	}
 
-	protected void recycle() {
-		_request.removeAttribute(JavaConstants.JAVAX_PORTLET_CONFIG);
-		_request.removeAttribute(JavaConstants.JAVAX_PORTLET_REQUEST);
-		_request.removeAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE);
-		_request.removeAttribute(PortletRequest.LIFECYCLE_PHASE);
-
-		_request = null;
-		_originalRequest = null;
-		_wapTheme = false;
-		_portlet = null;
-		_portletName = null;
-		_portalContext = null;
-		_portletContext = null;
-		_windowState = null;
-		_portletMode = null;
-		_preferences = null;
-		_session = null;
-		_portalSessionId = null;
-		_remoteUser = null;
-		_userPrincipal = null;
-		_profile = null;
-		_locale = null;
-		_plid = 0;
-	}
-
 	private static Log _log = LogFactoryUtil.getLog(PortletRequestImpl.class);
 
 	private HttpServletRequest _request;

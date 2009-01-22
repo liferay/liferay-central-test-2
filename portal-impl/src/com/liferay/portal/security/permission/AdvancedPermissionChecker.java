@@ -211,12 +211,6 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		}
 	}
 
-	public void recycle() {
-		super.recycle();
-
-		companyAdmins.clear();
-	}
-
 	protected long[] getResourceIds(
 			long companyId, long groupId, String name, String primKey,
 			String actionId)

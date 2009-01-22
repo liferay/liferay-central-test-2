@@ -265,21 +265,6 @@ public abstract class StateAwareResponseImpl
 		_calledSetRenderParameter = false;
 	}
 
-	protected void recycle() {
-		super.recycle();
-
-		_portletRequestImpl = null;
-		_portletName = null;
-		_user = null;
-		_layout = null;
-		_windowState = null;
-		_portletMode = null;
-		_params.clear();
-		_events.clear();
-		_redirectLocation = null;
-		_calledSetRenderParameter = false;
-	}
-
 	private PortletRequestImpl _portletRequestImpl;
 	private String _portletName;
 	private User _user;

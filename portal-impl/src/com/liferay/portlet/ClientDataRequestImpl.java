@@ -76,12 +76,6 @@ public abstract class ClientDataRequestImpl
 		getHttpServletRequest().setCharacterEncoding(enc);
 	}
 
-	protected void recycle() {
-		super.recycle();
-
-		_calledGetReader = false;
-	}
-
 	private boolean _calledGetReader;
 
 }

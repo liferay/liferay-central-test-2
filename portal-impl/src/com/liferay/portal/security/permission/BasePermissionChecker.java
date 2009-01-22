@@ -105,18 +105,6 @@ public abstract class BasePermissionChecker implements PermissionChecker {
 		return omniadmin.booleanValue();
 	}
 
-	public void recycle() {
-		user = null;
-		defaultUserId = 0;
-		signedIn = false;
-		checkGuest = false;
-		omniadmin = null;
-		resetValues();
-	}
-
-	public void resetValues() {
-	}
-
 	public void setCheckGuest(boolean checkGuest) {
 		this.checkGuest = checkGuest;
 	}

@@ -22,9 +22,6 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
 import javax.portlet.Event;
 import javax.portlet.EventRequest;
 import javax.portlet.PortletRequest;
@@ -49,24 +46,6 @@ public class EventRequestImpl
 	public String getLifecycle() {
 		return PortletRequest.EVENT_PHASE;
 	}
-
-	protected EventRequestImpl() {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Creating new instance " + hashCode());
-		}
-	}
-
-	protected void recycle() {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Recycling instance " + hashCode());
-		}
-
-		super.recycle();
-
-		_event = null;
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(EventRequestImpl.class);
 
 	private Event _event;
 

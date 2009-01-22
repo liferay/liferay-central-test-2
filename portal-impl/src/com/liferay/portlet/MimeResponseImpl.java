@@ -177,17 +177,6 @@ public abstract class MimeResponseImpl
 		_response = response;
 	}
 
-	protected void recycle() {
-		super.recycle();
-
-		_portletRequestImpl = null;
-		_response = null;
-		_contentType = null;
-		_calledGetPortletOutputStream = false;
-		_calledGetWriter = false;
-		_calledFlushBuffer = true;
-	}
-
 	private PortletRequestImpl _portletRequestImpl;
 	private HttpServletResponse _response;
 	private String _contentType;

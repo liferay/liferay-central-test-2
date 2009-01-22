@@ -22,9 +22,6 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
 import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 
@@ -44,21 +41,5 @@ public class RenderRequestImpl
 	public String getLifecycle() {
 		return PortletRequest.RENDER_PHASE;
 	}
-
-	protected RenderRequestImpl() {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Creating new instance " + hashCode());
-		}
-	}
-
-	protected void recycle() {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Recycling instance " + hashCode());
-		}
-
-		super.recycle();
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(RenderRequestImpl.class);
 
 }

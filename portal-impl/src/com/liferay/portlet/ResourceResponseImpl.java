@@ -22,9 +22,6 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
 import java.util.Locale;
 
 import javax.portlet.PortletRequest;
@@ -138,12 +135,6 @@ public class ResourceResponseImpl
 		_response.setIntHeader(name, value);
 	}
 
-	protected ResourceResponseImpl() {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Creating new instance " + hashCode());
-		}
-	}
-
 	protected void init(
 		PortletRequestImpl portletRequestImpl, HttpServletResponse response,
 		String portletName, long companyId, long plid) {
@@ -152,18 +143,6 @@ public class ResourceResponseImpl
 
 		_response = response;
 	}
-
-	protected void recycle() {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Recycling instance " + hashCode());
-		}
-
-		super.recycle();
-
-		_response = null;
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(ResourceResponseImpl.class);
 
 	private HttpServletResponse _response;
 

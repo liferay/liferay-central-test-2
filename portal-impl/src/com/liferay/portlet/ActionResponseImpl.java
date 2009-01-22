@@ -22,9 +22,6 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletRequest;
 
@@ -59,21 +56,5 @@ public class ActionResponseImpl
 
 	public void sendRedirect(String location, String renderUrlParamName) {
 	}
-
-	protected ActionResponseImpl() {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Creating new instance " + hashCode());
-		}
-	}
-
-	protected void recycle() {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Recycling instance " + hashCode());
-		}
-
-		super.recycle();
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(ActionResponseImpl.class);
 
 }

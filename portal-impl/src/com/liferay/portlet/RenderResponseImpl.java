@@ -22,8 +22,6 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayRenderResponse;
 import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -87,12 +85,6 @@ public class RenderResponseImpl
 		_useDefaultTemplate = useDefaultTemplate;
 	}
 
-	protected RenderResponseImpl() {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Creating new instance " + hashCode());
-		}
-	}
-
 	protected void init(
 		PortletRequestImpl portletRequestImpl, HttpServletResponse response,
 		String portletName, long companyId, long plid) {
@@ -101,21 +93,6 @@ public class RenderResponseImpl
 
 		_portletRequestImpl = portletRequestImpl;
 	}
-
-	protected void recycle() {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Recycling instance " + hashCode());
-		}
-
-		super.recycle();
-
-		_portletRequestImpl = null;
-		_title = null;
-		_useDefaultTemplate = null;
-		_resourceName = null;
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(RenderResponseImpl.class);
 
 	private PortletRequestImpl _portletRequestImpl;
 	private String _title;

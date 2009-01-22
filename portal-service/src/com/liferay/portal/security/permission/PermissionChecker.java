@@ -70,10 +70,6 @@ public interface PermissionChecker {
 
 	public boolean isOmniadmin();
 
-	public void recycle();
-
-	public void resetValues();
-
 	public void setCheckGuest(boolean checkGuest);
 
 	public void setValues(PortletRequest portletRequest);

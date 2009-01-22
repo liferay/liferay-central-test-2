@@ -1245,7 +1245,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		boolean portletXMLValidate = PropsValues.PORTLET_XML_VALIDATE;
 
-		if (ServerDetector.isGeronimo()) {
+		if (ServerDetector.isGeronimo() || ServerDetector.isResin()) {
 			portletXMLValidate = false;
 		}
 
