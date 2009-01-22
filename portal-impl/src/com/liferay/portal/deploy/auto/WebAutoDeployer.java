@@ -33,8 +33,6 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 
-import java.io.File;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +40,6 @@ import java.util.List;
  * <a href="WebAutoDeployer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
- * @author Sandeep Soni
  *
  */
 public class WebAutoDeployer extends BaseDeployer implements AutoDeployer {
@@ -91,26 +88,6 @@ public class WebAutoDeployer extends BaseDeployer implements AutoDeployer {
 		catch (Exception e) {
 			throw new AutoDeployException(e);
 		}
-	}
-
-	protected String getExtraContent(
-			double webXmlVersion, File srcFile, String displayName)
-		throws Exception {
-
-		StringBuilder sb = new StringBuilder();
-
-		String extraContent = super.getExtraContent(
-			webXmlVersion, srcFile, displayName);
-
-		sb.append(extraContent);
-
-		sb.append("<listener>");
-		sb.append("<listener-class>");
-		sb.append("com.liferay.portal.kernel.servlet.WebsContextListener");
-		sb.append("</listener-class>");
-		sb.append("</listener>");
-
-		return sb.toString();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(WebAutoDeployer.class);
