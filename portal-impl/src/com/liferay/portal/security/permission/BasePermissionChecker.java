@@ -105,6 +105,9 @@ public abstract class BasePermissionChecker implements PermissionChecker {
 		return omniadmin.booleanValue();
 	}
 
+	public void resetValues() {
+	}
+
 	public void setCheckGuest(boolean checkGuest) {
 		this.checkGuest = checkGuest;
 	}
