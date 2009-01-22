@@ -25,15 +25,11 @@ package com.liferay.portal.search.lucene;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PortletClassInvoker;
-import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
-import com.liferay.portal.util.PropsKeys;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.PortletLuceneComparator;
 
@@ -64,18 +60,11 @@ public class LuceneIndexer implements Runnable {
 	}
 
 	public void run() {
-		delayedReIndex();
+		reIndex(PropsValues.INDEX_ON_STARTUP_DELAY);
 	}
 
 	public void reIndex() {
 		reIndex(0);
-	}
-
-	public void delayedReIndex() {
-		int delay = GetterUtil.getInteger(
-			PropsUtil.get(PropsKeys.INDEX_ON_STARTUP_DELAY), 0);
-
-		reIndex(delay);
 	}
 
 	public void reIndex(int delay) {
@@ -89,14 +78,6 @@ public class LuceneIndexer implements Runnable {
 
 		if (delay < 0) {
 			delay = 0;
-		}
-
-		if (ServerDetector.isOrion()) {
-
-			// Wait 10 seconds because Orion 2.0.7 initiates LuceneServlet
-			// before it initiates MainServlet.
-
-			delay += 10;
 		}
 
 		try {

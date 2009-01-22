@@ -487,6 +487,9 @@ public class PropsValues {
 	public static final boolean INDEX_READ_ONLY = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.INDEX_READ_ONLY));
 
+	public static final int INDEX_ON_STARTUP_DELAY = GetterUtil.getInteger(
+		PropsUtil.get(PropsKeys.INDEX_ON_STARTUP_DELAY));
+
 	public static final boolean JAVASCRIPT_BAREBONE_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.JAVASCRIPT_BAREBONE_ENABLED));
