@@ -535,6 +535,31 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return userGroupGroups;
 	}
 
+	public List<Group> getUserOrganizationsGroups(
+			long userId, int start, int end)
+		throws PortalException, SystemException {
+
+		List<Group> userOrgsGroups = new UniqueList<Group>();
+
+		List<Organization> userOrgs =
+			organizationLocalService.getUserOrganizations(
+				userId, start, end);
+
+		for (Organization organization : userOrgs) {
+			userOrgsGroups.add(0, organization.getGroup());
+
+			if (!PropsValues.ORGANIZATIONS_MEMBERSHIP_STRICT) {
+				for (Organization ancestorOrganization :
+						organization.getAncestors()) {
+
+					userOrgsGroups.add(0, ancestorOrganization.getGroup());
+				}
+			}
+		}
+
+		return userOrgsGroups;
+	}
+
 	public boolean hasRoleGroup(long roleId, long groupId)
 		throws SystemException {
 

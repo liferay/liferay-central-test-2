@@ -153,6 +153,13 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 		return groupLocalService.getUserGroupsGroups(userGroups);
 	}
 
+	public List<Group> getUserOrganizationsGroups(
+			long userId, int start, int end)
+		throws PortalException, SystemException {
+
+		return groupLocalService.getUserOrganizationsGroups(userId, start, end);
+	}
+
 	public boolean hasUserGroup(long userId, long groupId)
 		throws SystemException {
 

@@ -189,6 +189,12 @@ public interface GroupLocalService {
 	public java.util.List<com.liferay.portal.model.Group> getUserGroupsGroups(
 		java.util.List<com.liferay.portal.model.UserGroup> userGroups);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portal.model.Group> getUserOrganizationsGroups(
+		long userId, int start, int end)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public boolean hasRoleGroup(long roleId, long groupId)
 		throws com.liferay.portal.SystemException;
 

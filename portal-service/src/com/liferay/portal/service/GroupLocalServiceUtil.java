@@ -227,6 +227,13 @@ public class GroupLocalServiceUtil {
 		return getService().getUserGroupsGroups(userGroups);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Group> getUserOrganizationsGroups(
+		long userId, int start, int end)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getUserOrganizationsGroups(userId, start, end);
+	}
+
 	public static boolean hasRoleGroup(long roleId, long groupId)
 		throws com.liferay.portal.SystemException {
 		return getService().hasRoleGroup(roleId, groupId);

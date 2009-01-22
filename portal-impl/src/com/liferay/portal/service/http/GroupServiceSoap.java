@@ -227,6 +227,21 @@ public class GroupServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.model.GroupSoap[] getUserOrganizationsGroups(
+		long userId, int start, int end) throws RemoteException {
+		try {
+			java.util.List<com.liferay.portal.model.Group> returnValue = GroupServiceUtil.getUserOrganizationsGroups(userId,
+					start, end);
+
+			return com.liferay.portal.model.GroupSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static boolean hasUserGroup(long userId, long groupId)
 		throws RemoteException {
 		try {

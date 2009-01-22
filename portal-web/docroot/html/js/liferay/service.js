@@ -263,6 +263,13 @@ Liferay.Service.Portal.Group = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	getUserOrganizationsGroups: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getUserOrganizationsGroups";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	hasUserGroup: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "hasUserGroup";
