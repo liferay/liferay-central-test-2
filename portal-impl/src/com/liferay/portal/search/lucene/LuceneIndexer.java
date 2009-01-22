@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.PortletClassInvoker;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
@@ -140,9 +139,7 @@ public class LuceneIndexer implements Runnable {
 					_log.info("Reindexing with " + indexerClass + " started");
 				}
 
-				PortletClassInvoker.invoke(
-					portlet.getPortletId(), indexerClass, "reIndex",
-					(Object)indexIds);
+				indexer.reIndex(indexIds);
 
 				if (_log.isInfoEnabled()) {
 					_log.info(

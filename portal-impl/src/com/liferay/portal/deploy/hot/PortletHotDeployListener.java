@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.IndexerWrapper;
 import com.liferay.portal.kernel.search.OpenSearch;
 import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.servlet.ServletContextProvider;
@@ -403,6 +404,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		if (Validator.isNotNull(portlet.getIndexerClass())) {
 			indexerInstance = (Indexer)portletClassLoader.loadClass(
 				portlet.getIndexerClass()).newInstance();
+
+			indexerInstance = new IndexerWrapper(
+				indexerInstance, portletClassLoader);
 
 			for (String className : indexerInstance.getClassNames()) {
 				IndexerRegistryUtil.register(className, indexerInstance);
