@@ -118,6 +118,29 @@ public class SearchRequest {
 		_end = end;
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{command=");
+		sb.append(_command);
+		sb.append(", companyId=");
+		sb.append(_companyId);
+		sb.append(", id=");
+		sb.append(_id);
+		sb.append(", doc=");
+		sb.append(_doc);
+		sb.append(", query=");
+		sb.append(_query);
+		sb.append(", sorts=");
+		sb.append(_sorts);
+		sb.append(", start=");
+		sb.append(_start);
+		sb.append(", end=");
+		sb.append(_end);
+		sb.append("}");
+
+		return sb.toString();
+	}
 	private String _command;
 	private long _companyId;
 	private String _id;

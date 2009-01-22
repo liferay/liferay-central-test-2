@@ -164,14 +164,11 @@ public class Message implements Serializable {
 		sb.append(_destination);
 		sb.append(", responseDestination=");
 		sb.append(_responseDestination);
-		sb.append(", ");
-		sb.append("responseId=");
+		sb.append(", responseId=");
 		sb.append(_responseId);
-		sb.append(", ");
-		sb.append("payload=");
+		sb.append(", payload=");
 		sb.append(_payload);
-		sb.append(", ");
-		sb.append("values=");
+		sb.append(", values=");
 		sb.append(_values);
 		sb.append("}");
 
