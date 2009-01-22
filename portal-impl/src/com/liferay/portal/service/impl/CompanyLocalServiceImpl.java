@@ -104,10 +104,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		companyPersistence.update(company, false);
 
-		// Lucene
-
-		LuceneUtil.checkLuceneDir(company.getCompanyId());
-
 		return company;
 	}
 
@@ -167,6 +163,10 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				companyId, virtualHost, mx, homeURL, name, legalName, legalId,
 				legalType, sicCode, tickerSymbol, industry, type, size);
 
+			// Lucene
+
+			LuceneUtil.checkLuceneDir(company.getCompanyId());
+
 			// Demo settings
 
 			if (webId.equals("liferay.net")) {
@@ -198,6 +198,12 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 					throw new SystemException(pe);
 				}
 			}
+		}
+		else {
+
+			// Lucene
+
+			LuceneUtil.checkLuceneDir(company.getCompanyId());
 		}
 
 		long companyId = company.getCompanyId();
