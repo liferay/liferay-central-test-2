@@ -432,17 +432,10 @@
 		<if>
 			<equals arg1="${app.server.type}" arg2="jetty" />
 			<then>
-				<copy todir="${app.server.lib.portal.dir}">
-					<fileset
-						dir="lib/development"
-						includes="jms.jar,jta.jar"
-					/>
-				</copy>
-
 				<delete>
 					<fileset
 						dir="${app.server.lib.portal.dir}"
-						includes="jmx-remote.jar,jmx-ri.jar,xercesImpl.jar,xml-apis.jar"
+						includes="jmx-remote.jar,jmx-ri.jar,mx4j.jar"
 					/>
 				</delete>
 			</then>
@@ -563,26 +556,6 @@
 		<mkdir dir="${app.server.log.dir}" />
 		<mkdir dir="${app.server.temp.dir}" />
 		<mkdir dir="${app.server.work.dir}" />
-
-		<if>
-			<equals arg1="${app.server.type}" arg2="jetty" />
-			<then>
-
-				<!--
-				Jetty 5.1.10 defaults to a different version of Commons
-				Logging and Hypersonic.
-				-->
-
-				<copy todir="${app.server.dir}/ext" overwrite="yes">
-					<fileset
-						dir="lib/portal"
-						includes="commons-logging.jar"
-					/>
-				</copy>
-
-				<delete file="${app.server.dir}/extra/ext/hsqldb.jar" />
-			</then>
-		</if>
 
 		<if>
 			<or>

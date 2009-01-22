@@ -22,65 +22,39 @@
 
 package com.liferay.util.servlet;
 
-import com.liferay.portal.kernel.util.ServerDetector;
-
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpSession;
 
+import org.mortbay.jetty.servlet.AbstractSessionManager;
+
 /**
- * <a href="SharedSessionServletRequest.java.html"><b><i>View Source</i></b></a>
+ * <a href="JettySharedSessionWrapper.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Brian Myunghun Kim
  *
  */
-public class SharedSessionServletRequest extends HttpServletRequestWrapper {
+public class JettySharedSessionWrapper
+	extends SharedSessionWrapper implements AbstractSessionManager.SessionIf {
 
-	public SharedSessionServletRequest(
-		HttpServletRequest request, Map<String, Object> sharedSessionAttributes,
-		boolean shared) {
+	public JettySharedSessionWrapper(HttpSession session) {
+		super(session);
 
-		super(request);
-
-		_sharedSessionAttributes = sharedSessionAttributes;
-
-		_session = getSharedSessionWrapper(request.getSession());
-		_shared = shared;
+		_session = session;
 	}
 
-	public HttpSession getSession() {
-		if (_shared) {
-			return _session;
-		}
-		else {
-			return getSharedSessionWrapper(super.getSession());
-		}
+	public JettySharedSessionWrapper(
+		HttpSession session, Map<String, Object> sharedAttributes) {
+
+		super(session, sharedAttributes);
+
+		_session = session;
 	}
 
-	public HttpSession getSession(boolean create) {
-		if (_shared) {
-			return _session;
-		}
-		else {
-			return getSharedSessionWrapper(super.getSession(create));
-		}
-	}
-
-	protected HttpSession getSharedSessionWrapper(HttpSession session) {
-		if (!ServerDetector.isJOnAS() && ServerDetector.isJetty()) {
-			return new JettySharedSessionWrapper(
-				session, _sharedSessionAttributes);
-		}
-		else {
-			return new SharedSessionWrapper(session, _sharedSessionAttributes);
-		}
+	public AbstractSessionManager.Session getSession() {
+		return (AbstractSessionManager.Session)_session;
 	}
 
 	private HttpSession _session;
-	private Map<String, Object> _sharedSessionAttributes;
-	private boolean _shared;
 
 }

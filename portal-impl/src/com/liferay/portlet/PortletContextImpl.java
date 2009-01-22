@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
@@ -141,10 +142,11 @@ public class PortletContextImpl implements PortletContext {
 			return null;
 		}
 
-		// Workaround for bug in Jetty that returns the default request
+		// Workaround for bug in Jetty 5 that returns the default request
 		// dispatcher instead of null for an invalid path
 
-		if ((requestDispatcher != null) &&
+		if (ServerDetector.isJOnAS() && ServerDetector.isJetty() &&
+			(requestDispatcher != null) &&
 			(requestDispatcher.getClass().getName().equals(
 				"org.mortbay.jetty.servlet.Dispatcher"))) {
 

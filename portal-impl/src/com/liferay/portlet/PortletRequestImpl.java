@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.QName;
@@ -595,10 +596,11 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 			else {
 
 				// Do not allow reserved or null parameters to pass through.
-				// Jetty has a bug that adds an additional null parameter
+				// Jetty 5 has a bug that adds an additional null parameter
 				// the enumeration of parameter names.
 
-				if (!PortalUtil.isReservedParameter(name) &&
+				if (ServerDetector.isJOnAS() && ServerDetector.isJetty() &&
+					!PortalUtil.isReservedParameter(name) &&
 					Validator.isNotNull(name)) {
 
 					ObjectValuePair<String, String[]> ovp = getParameterValues(

@@ -307,6 +307,28 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>development/jetty.jar</file-name>
+		<version>6.1.14</version>
+		<project-name>Jetty</project-name>
+		<project-url>http://www.mortbay.org/jetty</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>development/jetty-util.jar</file-name>
+		<version>6.1.14</version>
+		<project-name>Jetty</project-name>
+		<project-url>http://www.mortbay.org/jetty</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>development/jhighlight.jar</file-name>
 		<version>1.0</version>
 		<project-name>JHighlight</project-name>
