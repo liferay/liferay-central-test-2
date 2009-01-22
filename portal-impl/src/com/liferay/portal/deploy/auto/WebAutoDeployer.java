@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.tools.deploy.BaseDeployer;
+import com.liferay.portal.tools.deploy.WebDeployer;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
@@ -42,7 +42,7 @@ import java.util.List;
  * @author Jorge Ferrer
  *
  */
-public class WebAutoDeployer extends BaseDeployer implements AutoDeployer {
+public class WebAutoDeployer extends WebDeployer implements AutoDeployer {
 
 	public WebAutoDeployer() {
 		try {
