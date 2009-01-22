@@ -147,7 +147,6 @@ Liferay.Tree = new Class({
 		var instance = this;
 		var treeEl = instance.tree;
 
-		// Set toggling
 		treeEl.click(
 			function(event) {
 				var target = event.target;
