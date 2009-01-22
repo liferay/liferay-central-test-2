@@ -114,8 +114,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		doc.addKeyword(Field.ENTRY_CLASS_NAME, JournalArticle.class.getName());
 		doc.addKeyword(Field.ENTRY_CLASS_PK, articleId);
-		doc.addKeyword("version", version);
-		doc.addKeyword("type", type);
+		doc.addKeyword(Field.VERSION, version);
+		doc.addKeyword(Field.TYPE, type);
 
 		ExpandoBridgeIndexerUtil.addAttributes(doc, expandoBridge);
 

@@ -71,6 +71,8 @@ public class Field {
 
 	public static final String USER_NAME = "userName";
 
+	public static final String VERSION = "version";
+
 	public Field(String name, String value, boolean tokenized) {
 		this(name, new String[] {value}, tokenized);
 	}
