@@ -25,11 +25,15 @@ package com.liferay.portal.search.lucene;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.PortletClassInvoker;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.util.PropsKeys;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.PortletLuceneComparator;
 
@@ -60,10 +64,21 @@ public class LuceneIndexer implements Runnable {
 	}
 
 	public void run() {
-		reIndex();
+		delayedReIndex();
 	}
 
 	public void reIndex() {
+		reIndex(0);
+	}
+
+	public void delayedReIndex() {
+		int delay = GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.INDEX_ON_STARTUP_DELAY), 0);
+
+		reIndex(delay);
+	}
+
+	public void reIndex(int delay) {
 		if (PropsValues.INDEX_READ_ONLY) {
 			return;
 		}
@@ -72,16 +87,24 @@ public class LuceneIndexer implements Runnable {
 			_log.info("Reindexing Lucene started");
 		}
 
+		if (delay < 0) {
+			delay = 0;
+		}
+
 		if (ServerDetector.isOrion()) {
 
 			// Wait 10 seconds because Orion 2.0.7 initiates LuceneServlet
 			// before it initiates MainServlet.
 
-			try {
-				Thread.sleep(Time.SECOND * 10);
+			delay += 10;
+		}
+
+		try {
+			if (delay > 0) {
+				Thread.sleep(Time.SECOND * delay);
 			}
-			catch (InterruptedException ie) {
-			}
+		}
+		catch (InterruptedException ie) {
 		}
 
 		StopWatch stopWatch1 = null;
@@ -136,7 +159,9 @@ public class LuceneIndexer implements Runnable {
 					_log.info("Reindexing with " + indexerClass + " started");
 				}
 
-				indexer.reIndex(indexIds);
+				PortletClassInvoker.invoke(
+					portlet.getPortletId(), indexerClass, "reIndex",
+					(Object)indexIds);
 
 				if (_log.isInfoEnabled()) {
 					_log.info(
