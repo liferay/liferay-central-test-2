@@ -604,6 +604,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.mchange">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.opensymphony.oscache">
 		<priority value="ERROR" />
 	</category>
