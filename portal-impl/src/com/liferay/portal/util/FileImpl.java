@@ -497,7 +497,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 
 		File[] fileArray = file.listFiles();
 
-		for (int i = 0; i < fileArray.length; i++) {
+		for (int i = 0; (fileArray != null) && (i < fileArray.length); i++) {
 			if (fileArray[i].isDirectory()) {
 				dirs.add(fileArray[i].getName());
 			}
