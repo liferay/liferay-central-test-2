@@ -128,7 +128,7 @@ for (int i = 0; i < locales.length; i++) {
 
 			<c:choose>
 				<c:when test="<%= (displayStyle == LanguageTag.LIST_LONG_TEXT) || (displayStyle == LanguageTag.LIST_SHORT_TEXT) %>">
-					<a href="<%= formAction %>&<%= name %>=<%= locales[i].getLanguage() + "_" + locales[i].getCountry() %>">
+					<a href="<%= formAction %>&<%= namespace + name %>=<%= locales[i].getLanguage() + "_" + locales[i].getCountry() %>">
 						<%= language %>
 
 						<c:if test="<%= duplicateLanguages.contains(locales[i].getLanguage()) %>">
@@ -144,7 +144,7 @@ for (int i = 0; i < locales.length; i++) {
 					<liferay-ui:icon
 						image='<%= "../language/" + LocaleUtil.toLanguageId(locales[i]) %>'
 						message="<%= locales[i].getDisplayName(locales[i]) %>"
-						url='<%= formAction + "&" + name + "=" + locales[i].getLanguage() + "_" + locales[i].getCountry() %>'
+						url='<%= formAction + "&" + namespace + name + "=" + locales[i].getLanguage() + "_" + locales[i].getCountry() %>'
 					/>
 				</c:otherwise>
 			</c:choose>
