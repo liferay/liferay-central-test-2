@@ -1616,6 +1616,15 @@ public class JournalArticleLocalServiceImpl
 			int end)
 		throws SystemException {
 
+		return search(
+			companyId, groupId, keywords, new Sort[] {sort}, start, end);
+	}
+
+	public Hits search(
+			long companyId, long groupId, String keywords, Sort[] sorts,
+			int start, int end)
+		throws SystemException {
+
 		try {
 			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
 
@@ -1644,7 +1653,7 @@ public class JournalArticleLocalServiceImpl
 			}
 
 			return SearchEngineUtil.search(
-				companyId, fullQuery, sort, start, end);
+				companyId, fullQuery, sorts, start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
