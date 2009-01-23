@@ -43,7 +43,7 @@ public interface JavaConstants {
 		"javax.portlet.response";
 
 	public static final String JAVAX_PORTLET_SERVLET_CONTEXT =
-		"javax.portlet.servletContext"
+		"javax.portlet.servletContext";
 
 	public static final String JAVAX_PORTLET_SHORT_TITLE =
 		"javax.portlet.short-title";
