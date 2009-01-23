@@ -24,35 +24,41 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-communities .lfr-theme-list h3 {
+.portlet-communities .lfr-theme-list h3,
+.portlet-enterprise-admin .lfr-theme-list h3 {
 	background: #D3DADD;
 	padding: 0.5em;
 }
 
-.portlet-communities .lfr-theme-list li {
+.portlet-communities .lfr-theme-list li,
+.portlet-enterprise-admin .lfr-theme-list li {
 	float: left;
 	margin: 0 1.3em 1.3em 0;
 	text-align: center;
 }
 
-.portlet-communities .theme-title {
+.portlet-communities .theme-title,
+.portlet-enterprise-admin .theme-title {
 	font-weight: bold;
 	margin: 0;
 	padding: 2px;
 }
 
-.portlet-communities .lfr-current-theme {
+.portlet-communities .lfr-current-theme,
+.portlet-enterprise-admin .lfr-current-theme {
 	background: #F0F5F7;
 	border: 1px solid #828F95;
 	margin-bottom: 1em;
 	padding: 3px 3px 1em;
 }
 
-.portlet-communities .lfr-current-theme h3 {
+.portlet-communities .lfr-current-theme h3,
+.portlet-enterprise-admin .lfr-current-theme h3 {
 	margin: 0 0 0.5em;
 }
 
-.portlet-communities .lfr-current-theme .theme-title {
+.portlet-communities .lfr-current-theme .theme-title,
+.portlet-enterprise-admin .lfr-current-theme .theme-title {
 	border-bottom: 1px solid #828F95;
 	font-size: 1.4em;
 	margin-bottom: 0.5em;
@@ -60,38 +66,44 @@
 	padding-top: 0;
 }
 
-.portlet-communities .lfr-current-theme .theme-details {
+.portlet-communities .lfr-current-theme .theme-details,
+.portlet-enterprise-admin .lfr-current-theme .theme-details {
 	padding: 0 2px 0 170px;
 }
 
-.portlet-communities .theme-entry {
+.portlet-communities .theme-entry,
+.portlet-enterprise-admin .theme-entry {
 	height: 96px;
 	text-decoration: none;
 	width: 120px;
 }
 
-.portlet-communities .theme-entry, .portlet-communities .lfr-current-theme .theme-screenshot {
+.portlet-communities .theme-entry, .portlet-communities .lfr-current-theme .theme-screenshot,
+.portlet-enterprise-admin .theme-entry, .portlet-enterprise-admin .lfr-current-theme .theme-screenshot {
 	border: 1px solid #AEB8BC;
 	color: #fff;
 	display: block;
 	padding: 1px;
 }
 
-.portlet-communities .lfr-current-theme .theme-screenshot {
+.portlet-communities .lfr-current-theme .theme-screenshot,
+.portlet-enterprise-admin .lfr-current-theme .theme-screenshot {
 	float: left;
 	height: 120px;
 	margin: 0 0.5em;
 	width: 150px;
 }
 
-.portlet-communities .theme-entry .theme-title {
+.portlet-communities .theme-entry .theme-title,
+.portlet-enterprise-admin .theme-entry .theme-title {
 	background: #878F93;
 	display: block;
 	font-size: 1em;
 	margin-bottom: 3px;
 }
 
-.portlet-communities .lfr-theme-list .theme-entry:hover {
+.portlet-communities .lfr-theme-list .theme-entry:hover,
+.portlet-enterprise-admin .lfr-theme-list .theme-entry:hover {
 	background: #DFF4FF;
 	border-color: #A7CEDF;
 	color: #9ebac8;
@@ -99,7 +111,8 @@
 	text-decoration: underline;
 }
 
-.portlet-communities .theme-entry:hover .theme-thumbnail {
+.portlet-communities .theme-entry:hover .theme-thumbnail,
+.portlet-enterprise-admin .theme-entry:hover .theme-thumbnail {
 	border: 1px solid #A7CEDF;
 	display: block;
 	height: 120px;
@@ -111,49 +124,60 @@
 	z-index: 100;
 }
 
-.portlet-communities .theme-entry:hover .theme-title {
+.portlet-communities .theme-entry:hover .theme-title,
+.portlet-enterprise-admin .theme-entry:hover .theme-title {
 	background: #1E2529;
 }
 
-.portlet-communities .theme-thumbnail {
+.portlet-communities .theme-thumbnail,
+.portlet-enterprise-admin .theme-thumbnail {
 	height: 68px;
 	width: 85px;
 }
 
-.portlet-communities .lfr-available-themes h3 {
+.portlet-communities .lfr-available-themes h3,
+.portlet-enterprise-admin .lfr-available-themes h3 {
 	margin: 0;
 	overflow: hidden;
 }
 
-.portlet-communities .lfr-available-themes .lfr-theme-list {
+.portlet-communities .lfr-available-themes .lfr-theme-list,
+.portlet-enterprise-admin .lfr-available-themes .lfr-theme-list {
 	margin-top: 0.7em;
 }
 
-.portlet-communities .lfr-available-themes .header-title {
+.portlet-communities .lfr-available-themes .header-title,
+.portlet-enterprise-admin .lfr-available-themes .header-title {
 	float: left;
 }
 
-.portlet-communities .lfr-available-themes .install-themes {
+.portlet-communities .lfr-available-themes .install-themes,
+.portlet-enterprise-admin .lfr-available-themes .install-themes {
 	float: right;
 	font-size: 11px;
 }
 
-.portlet-communities .theme-details dl, .portlet-communities .lfr-theme-list .theme-details dd {
+.portlet-communities .theme-details dl, .portlet-communities .lfr-theme-list .theme-details dd,
+.portlet-enterprise-admin .theme-details dl, .portlet-enterprise-admin .lfr-theme-list .theme-details dd {
 	margin: 0;
 }
 
-.portlet-communities .theme-details dl {
+.portlet-communities .theme-details dl,
+.portlet-enterprise-admin .theme-details dl {
 	margin-bottom: 1em;
 }
 
-.portlet-communities .theme-details dt {
+.portlet-communities .theme-details dt,
+.portlet-enterprise-admin .theme-details dt {
 	font-weight: bold;
 }
 
-.portlet-communities .selected-color-scheme .theme-entry {
+.portlet-communities .selected-color-scheme .theme-entry,
+.portlet-enterprise-admin .selected-color-scheme .theme-entry {
 	border: 3px solid #369;
 }
 
-.portlet-communities .selected-color-scheme .theme-entry .theme-title {
+.portlet-communities .selected-color-scheme .theme-entry .theme-title,
+.portlet-enterprise-admin .selected-color-scheme .theme-entry .theme-title {
 	background: #1E2529;
 }
