@@ -30,7 +30,7 @@ package com.liferay.portal.theme;
  */
 public class ThemeDisplayFactory {
 
-	public static ThemeDisplay create() throws Exception {
+	public static ThemeDisplay create() {
 		return new ThemeDisplay();
 	}
 

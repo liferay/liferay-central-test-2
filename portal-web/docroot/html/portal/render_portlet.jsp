@@ -921,6 +921,9 @@ if (themeDisplay.isFacebook() || themeDisplay.isStateExclusive()) {
 	request.setAttribute(JavaConstants.JAVAX_PORTLET_REQUEST, renderRequestImpl);
 	request.setAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE, renderResponseImpl);
 }
+else {
+	renderRequestImpl.cleanUp();
+}
 %>
 
 <%!

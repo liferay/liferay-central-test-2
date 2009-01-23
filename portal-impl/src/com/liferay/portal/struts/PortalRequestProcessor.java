@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -156,6 +157,15 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		}
 
 		super.process(request, response);
+
+		try {
+			if (isPortletPath(path)) {
+				cleanUp(request);
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
 	}
 
 	protected void addPaths(Set<String> paths, String propsKey) {
@@ -193,6 +203,20 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		throws IOException, ServletException {
 
 		return super.processRoles(request, response, mapping);
+	}
+
+	protected void cleanUp(HttpServletRequest request) throws Exception {
+
+		// Clean up portlet objects that may have been created by defineObjects
+		// for portlets that are called directly from a Struts path
+
+		RenderRequestImpl renderRequestImpl =
+			(RenderRequestImpl)request.getAttribute(
+				JavaConstants.JAVAX_PORTLET_REQUEST);
+
+		if (renderRequestImpl != null) {
+			renderRequestImpl.cleanUp();
+		}
 	}
 
 	protected void defineObjects(

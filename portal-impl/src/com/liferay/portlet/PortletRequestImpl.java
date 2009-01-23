@@ -89,6 +89,13 @@ import javax.servlet.http.HttpServletRequest;
  */
 public abstract class PortletRequestImpl implements LiferayPortletRequest {
 
+	public void cleanUp() {
+		_request.removeAttribute(JavaConstants.JAVAX_PORTLET_CONFIG);
+		_request.removeAttribute(JavaConstants.JAVAX_PORTLET_REQUEST);
+		_request.removeAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE);
+		_request.removeAttribute(PortletRequest.LIFECYCLE_PHASE);
+	}
+
 	public void defineObjects(
 		PortletConfig portletConfig, PortletResponse portletResponse) {
 

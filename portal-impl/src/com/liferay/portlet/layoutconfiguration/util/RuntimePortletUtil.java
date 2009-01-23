@@ -174,6 +174,8 @@ public class RuntimePortletUtil {
 		finally {
 			portletDisplay.copyFrom(portletDisplayClone);
 
+			portletDisplayClone.recycle();
+
 			_defineObjects(
 				request, portletConfig, renderRequest, renderResponse);
 		}

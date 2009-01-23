@@ -337,29 +337,36 @@ public class LayoutAction extends Action {
 		eventRequestImpl.defineObjects(portletConfig, eventResponseImpl);
 
 		try {
-			invokerPortlet.processEvent(eventRequestImpl, eventResponseImpl);
+			try {
+				invokerPortlet.processEvent(
+					eventRequestImpl, eventResponseImpl);
 
-			if (eventResponseImpl.isCalledSetRenderParameter()) {
-				Map<String, String[]> renderParameterMap =
-					new HashMap<String, String[]>();
+				if (eventResponseImpl.isCalledSetRenderParameter()) {
+					Map<String, String[]> renderParameterMap =
+						new HashMap<String, String[]>();
 
-				MapUtil.copy(
-					eventResponseImpl.getRenderParameterMap(),
-					renderParameterMap);
+					MapUtil.copy(
+						eventResponseImpl.getRenderParameterMap(),
+						renderParameterMap);
 
-				RenderParametersPool.put(
-					request, layout.getPlid(), portletId, renderParameterMap);
+					RenderParametersPool.put(
+						request, layout.getPlid(), portletId,
+						renderParameterMap);
+				}
 			}
-		}
-		catch (UnavailableException ue) {
-			throw ue;
-		}
-		catch (PortletException pe) {
-			eventResponseImpl.setWindowState(windowState);
-			eventResponseImpl.setPortletMode(portletMode);
-		}
+			catch (UnavailableException ue) {
+				throw ue;
+			}
+			catch (PortletException pe) {
+				eventResponseImpl.setWindowState(windowState);
+				eventResponseImpl.setPortletMode(portletMode);
+			}
 
-		processEvents(eventRequestImpl, eventResponseImpl, portlets);
+			processEvents(eventRequestImpl, eventResponseImpl, portlets);
+		}
+		finally {
+			eventRequestImpl.cleanUp();
+		}
 	}
 
 	protected void processEvents(
@@ -471,8 +478,16 @@ public class LayoutAction extends Action {
 			return null;
 		}
 		finally {
-			request.removeAttribute(JavaConstants.JAVAX_PORTLET_REQUEST);
-			request.removeAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE);
+			PortletRequest portletRequest =
+				(PortletRequest)request.getAttribute(
+					JavaConstants.JAVAX_PORTLET_REQUEST);
+
+			if (portletRequest != null) {
+				PortletRequestImpl portletRequestImpl =
+					(PortletRequestImpl)portletRequest;
+
+				portletRequestImpl.cleanUp();
+			}
 		}
 	}
 
@@ -711,6 +726,8 @@ public class LayoutAction extends Action {
 				response, renderResponseImpl.getResourceName(), content,
 				renderResponseImpl.getContentType());
 		}
+
+		renderRequestImpl.cleanUp();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(LayoutAction.class);

@@ -30,7 +30,7 @@ package com.liferay.portal.theme;
  */
 public class PortletDisplayFactory {
 
-	public static PortletDisplay create() throws Exception {
+	public static PortletDisplay create() {
 		return new PortletDisplay();
 	}
 
