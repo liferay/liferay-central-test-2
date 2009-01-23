@@ -46,9 +46,12 @@ portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
+request.setAttribute("edit_community_assignments.jsp-tabs1", tabs1);
 request.setAttribute("edit_community_assignments.jsp-tabs2", tabs2);
 
 request.setAttribute("edit_community_assignments.jsp-cur", cur);
+
+request.setAttribute("edit_community_assignments.jsp-redirect", redirect);
 
 request.setAttribute("edit_community_assignments.jsp-group", group);
 request.setAttribute("edit_community_assignments.jsp-selUser", selUser);

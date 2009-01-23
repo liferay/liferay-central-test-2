@@ -25,7 +25,10 @@
 <%@ include file="/html/portlet/communities/init.jsp" %>
 
 <%
+String tabs1 = (String)request.getAttribute("edit_community_assignments.jsp-tabs1");
 String tabs2 = (String)request.getAttribute("edit_community_assignments.jsp-tabs2");
+
+String redirect = (String)request.getAttribute("edit_community_assignments.jsp-redirect");
 
 String cur = (String)request.getAttribute("edit_community_assignments.jsp-cur");
 
