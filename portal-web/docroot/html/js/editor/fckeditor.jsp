@@ -92,7 +92,7 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 				var agent = /(Firefox)\/(.+)/.exec(ua);
 
 				if (agent && agent.length && (agent.length == 3)) {
-					if (parseInt(agent[2])) {
+					if (parseInt(agent[2]) && parseInt(agent[2]) < 3) {
 						isFirefox2andBelow = true;
 					}
 				}
