@@ -51,6 +51,7 @@ request.setAttribute("edit_community_assignments.jsp-tabs2", tabs2);
 request.setAttribute("edit_community_assignments.jsp-cur", cur);
 
 request.setAttribute("edit_community_assignments.jsp-group", group);
+request.setAttribute("edit_community_assignments.jsp-selUser", selUser);
 
 request.setAttribute("edit_community_assignments.jsp-portletURL", portletURL);
 %>

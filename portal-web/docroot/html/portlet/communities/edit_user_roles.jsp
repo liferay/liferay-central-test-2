@@ -79,6 +79,23 @@ if (role != null) {
 
 	breadcrumbs += " &raquo; <a href=\"" + breadcrumbsURL.toString() + "\">" + role.getTitle(locale) + "</a>";
 }
+
+request.setAttribute("edit_user_roles.jsp-tabs1", tabs1);
+
+request.setAttribute("edit_user_roles.jsp-cur", cur);
+
+request.setAttribute("edit_user_roles.jsp-redirect", redirect);
+
+request.setAttribute("edit_user_roles.jsp-group", group);
+request.setAttribute("edit_user_roles.jsp-groupName", groupName);
+request.setAttribute("edit_user_roles.jsp-role", role);
+request.setAttribute("edit_user_roles.jsp-roleId", roleId);
+request.setAttribute("edit_user_roles.jsp-roleType", roleType);
+request.setAttribute("edit_user_roles.jsp-organization", organization);
+
+request.setAttribute("edit_user_roles.jsp-portletURL", portletURL);
+
+request.setAttribute("edit_user_roles.jsp-breadcrumbs", breadcrumbs);
 %>
 
 <script type="text/javascript">
@@ -104,167 +121,10 @@ if (role != null) {
 
 <c:choose>
 	<c:when test="<%= role == null %>">
-		<div class="portlet-section-body results-row" style="border: 1px solid; padding: 5px;">
-			<%= LanguageUtil.format(pageContext, "step-x-of-x", new String[] {"1", "2"}) %>
-
-			<liferay-ui:message key="choose-a-role" />
-		</div>
-
-		<br />
-
-		<div class="breadcrumbs">
-			<%= breadcrumbs %>
-		</div>
-
-		<liferay-ui:tabs
-			names="roles"
-		/>
-
-		<%
-		RoleSearch searchContainer = new RoleSearch(renderRequest, portletURL);
-		%>
-
-		<liferay-ui:search-form
-			page="/html/portlet/enterprise_admin/role_search.jsp"
-			searchContainer="<%= searchContainer %>"
-		/>
-
-		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-
-			<%
-			RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();
-
-			int total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(roleType));
-
-			searchContainer.setTotal(total);
-
-			List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(roleType), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
-
-			searchContainer.setResults(results);
-			%>
-
-			<div class="separator"><!-- --></div>
-
-			<%
-			List resultRows = searchContainer.getResultRows();
-
-			for (int i = 0; i < results.size(); i++) {
-				Role curRole = (Role)results.get(i);
-
-				ResultRow row = new ResultRow(curRole, curRole.getRoleId(), i);
-
-				PortletURL rowURL = renderResponse.createRenderURL();
-
-				rowURL.setWindowState(WindowState.MAXIMIZED);
-
-				rowURL.setParameter("struts_action", "/communities/edit_user_roles");
-				rowURL.setParameter("redirect", redirect);
-				rowURL.setParameter("groupId", String.valueOf(group.getGroupId()));
-				rowURL.setParameter("roleId", String.valueOf(curRole.getRoleId()));
-
-				// Name
-
-				row.addText(curRole.getTitle(locale), rowURL);
-
-				// Type
-
-				row.addText(LanguageUtil.get(pageContext, curRole.getTypeLabel()), rowURL);
-
-				// Description
-
-				row.addText(curRole.getDescription(), rowURL);
-
-				// Add result row
-
-				resultRows.add(row);
-			}
-			%>
-
-			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-		</c:if>
+		<liferay-util:include page="/html/portlet/communities/edit_user_roles_role.jsp" />
 	</c:when>
 	<c:otherwise>
-		<input name="<portlet:namespace />addUserIds" type="hidden" value="" />
-		<input name="<portlet:namespace />removeUserIds" type="hidden" value="" />
-
-		<div class="portlet-section-body results-row" style="border: 1px solid; padding: 5px;">
-			<%= LanguageUtil.format(pageContext, "step-x-of-x", new String[] {"2", "2"}) %>
-
-			<%= LanguageUtil.get(pageContext, "assign-" + (group.isOrganization() ? "organization" : "community") + "-roles-to-users") %>
-
-			<i>Current</i> signifies current users associated with the <i><%= role.getTitle(locale) %></i> role. <i>Available</i> signifies all users associated with the <i><%= groupName %></i> <%= (group.isOrganization()) ? "organization" : "community" %>.
-		</div>
-
-		<br />
-
-		<div class="breadcrumbs">
-			<%= breadcrumbs %>
-		</div>
-
-		<liferay-ui:tabs
-			names="users"
-		/>
-
-		<liferay-ui:tabs
-			names="current,available"
-			param="tabs1"
-			url="<%= portletURL.toString() %>"
-		/>
-
-		<liferay-ui:search-container
-			rowChecker="<%= new UserGroupRoleUserChecker(renderResponse, group, role) %>"
-			searchContainer="<%= new UserSearch(renderRequest, portletURL) %>"
-		>
-			<liferay-ui:search-form
-				page="/html/portlet/enterprise_admin/user_search.jsp"
-			/>
-
-			<%
-			UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
-
-			LinkedHashMap userParams = new LinkedHashMap();
-
-			if (group.isOrganization()) {
-				userParams.put("usersOrgs", new Long(organization.getOrganizationId()));
-			}
-			else {
-				userParams.put("usersGroups", new Long(group.getGroupId()));
-			}
-
-			if (tabs1.equals("current")) {
-				userParams.put("userGroupRole", new Long[] {new Long(group.getGroupId()), new Long(roleId)});
-			}
-			%>
-
-			<liferay-ui:search-container-results>
-				<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
-			</liferay-ui:search-container-results>
-
-			<liferay-ui:search-container-row
-				className="com.liferay.portal.model.User"
-				escapedModel="<%= true %>"
-				keyProperty="userId"
-				modelVar="user2"
-			>
-				<liferay-ui:search-container-column-text
-					name="name"
-					property="fullName"
-				/>
-
-				<liferay-ui:search-container-column-text
-					name="screen-name"
-					property="screenName"
-				/>
-			</liferay-ui:search-container-row>
-
-			<div class="separator"><!-- --></div>
-
-			<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateUserGroupRoleUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
-
-			<br /><br />
-
-			<liferay-ui:search-iterator />
-		</liferay-ui:search-container>
+		<liferay-util:include page="/html/portlet/communities/edit_user_roles_users.jsp" />
 	</c:otherwise>
 </c:choose>
 

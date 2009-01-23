@@ -30,6 +30,7 @@ String tabs2 = (String)request.getAttribute("edit_community_assignments.jsp-tabs
 String cur = (String)request.getAttribute("edit_community_assignments.jsp-cur");
 
 Group group = (Group)request.getAttribute("edit_community_assignments.jsp-group");
+User selUser = (User)request.getAttribute("edit_community_assignments.jsp-selUser");
 
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_community_assignments.jsp-portletURL");
 %>
