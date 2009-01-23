@@ -25,13 +25,14 @@ package com.liferay.portal.apache.bridges.struts;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.ServletContextProvider;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.portletcontainer.HttpServletUtil;
 import com.liferay.portal.upload.UploadServletRequestImpl;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.PortletContextImpl;
-import com.liferay.portlet.RenderRequestImpl;
 
+import javax.portlet.ActionRequest;
 import javax.portlet.GenericPortlet;
+import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 
@@ -45,15 +46,24 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author James Schopp
  * @author Michael Young
+ * @author Deepak Gothe
  *
  */
 public class LiferayServletContextProvider implements ServletContextProvider {
 
 	public ServletContext getServletContext(GenericPortlet portlet) {
-		PortletContextImpl portletContextImpl =
-			(PortletContextImpl)portlet.getPortletContext();
 
-		return getServletContext(portletContextImpl.getServletContext());
+		PortletContext portletContext = portlet.getPortletContext();
+		ServletContext servletContext =
+			HttpServletUtil.getServletContext(portletContext);
+
+		if (servletContext == null) {
+			PortletContextImpl portletContextImpl =
+				(PortletContextImpl)portlet.getPortletContext();
+			servletContext = portletContextImpl.getServletContext();
+		}
+
+		return getServletContext(servletContext);
 	}
 
 	public ServletContext getServletContext(ServletContext servletContext) {
@@ -63,10 +73,10 @@ public class LiferayServletContextProvider implements ServletContextProvider {
 	public HttpServletRequest getHttpServletRequest(
 		GenericPortlet portlet, PortletRequest portletRequest) {
 
-		HttpServletRequest request = null;
+		HttpServletRequest request =
+			PortalUtil.getHttpServletRequest(portletRequest);
 
-		if (portletRequest instanceof ActionRequestImpl) {
-			request = PortalUtil.getHttpServletRequest(portletRequest);
+		if (portletRequest instanceof ActionRequest) {
 
 			String contentType = request.getHeader(HttpHeaders.CONTENT_TYPE);
 
@@ -77,13 +87,11 @@ public class LiferayServletContextProvider implements ServletContextProvider {
 				request = new LiferayStrutsRequestImpl(request);
 			}
 			else {
-				request = new LiferayStrutsRequestImpl(
-					(ActionRequestImpl)portletRequest);
+				request = new LiferayStrutsRequestImpl(request);
 			}
 		}
 		else {
-			request = new LiferayStrutsRequestImpl(
-				(RenderRequestImpl)portletRequest);
+			request = new LiferayStrutsRequestImpl(request);
 		}
 
 		return request;

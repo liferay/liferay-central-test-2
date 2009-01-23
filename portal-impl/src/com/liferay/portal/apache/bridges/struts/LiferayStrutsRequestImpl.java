@@ -27,8 +27,6 @@ import com.liferay.portal.upload.LiferayFileItem;
 import com.liferay.portal.upload.UploadServletRequestImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.portlet.RenderRequestImpl;
 
 import java.util.Collections;
 import java.util.Enumeration;
@@ -45,16 +43,31 @@ import javax.servlet.http.HttpServletRequestWrapper;
  * <a href="LiferayStrutsRequestImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael Young
+ * @author Deepak Gothe
  *
  */
 public class LiferayStrutsRequestImpl extends HttpServletRequestWrapper {
 
-	public LiferayStrutsRequestImpl(ActionRequestImpl actionRequestImpl) {
-		this(actionRequestImpl.getHttpServletRequest());
-	}
+	public LiferayStrutsRequestImpl(HttpServletRequest request) {
+		super(request);
 
-	public LiferayStrutsRequestImpl(RenderRequestImpl renderRequestImpl) {
-		this(renderRequestImpl.getHttpServletRequest());
+		_strutsAttributes = (Map<String, Object>)request.getAttribute(
+			WebKeys.STRUTS_BRIDGES_ATTRIBUTES);
+
+		if (_strutsAttributes == null) {
+			_strutsAttributes = new HashMap<String, Object>();
+
+			request.setAttribute(
+				WebKeys.STRUTS_BRIDGES_ATTRIBUTES, _strutsAttributes);
+		}
+
+		UploadServletRequestImpl uploadRequest =
+			(UploadServletRequestImpl)PortalUtil.getUploadServletRequest(
+				request);
+
+		if (uploadRequest != null) {
+			_multipartParams = uploadRequest.getMultipartParameterMap();
+		}
 	}
 
 	public Object getAttribute(String name) {
@@ -150,28 +163,6 @@ public class LiferayStrutsRequestImpl extends HttpServletRequestWrapper {
 		}
 		else {
 			return super.getParameterValues(name);
-		}
-	}
-
-	protected LiferayStrutsRequestImpl(HttpServletRequest request) {
-		super(request);
-
-		_strutsAttributes = (Map<String, Object>)request.getAttribute(
-			WebKeys.STRUTS_BRIDGES_ATTRIBUTES);
-
-		if (_strutsAttributes == null) {
-			_strutsAttributes = new HashMap<String, Object>();
-
-			request.setAttribute(
-				WebKeys.STRUTS_BRIDGES_ATTRIBUTES, _strutsAttributes);
-		}
-
-		UploadServletRequestImpl uploadRequest =
-			(UploadServletRequestImpl)PortalUtil.getUploadServletRequest(
-				request);
-
-		if (uploadRequest != null) {
-			_multipartParams = uploadRequest.getMultipartParameterMap();
 		}
 	}
 

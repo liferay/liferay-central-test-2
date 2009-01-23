@@ -25,9 +25,11 @@ package com.liferay.portal.portletcontainer;
 import com.sun.portal.portletcontainer.portlet.impl.PortletRequestImpl;
 import com.sun.portal.portletcontainer.portlet.impl.PortletResponseImpl;
 
+import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -65,6 +67,16 @@ public class HttpServletUtil {
 		else {
 			return null;
 		}
+	}
+
+	public static ServletContext getServletContext(
+		PortletContext portletContext) {
+
+		ServletContext servletContext =
+			(ServletContext)portletContext.getAttribute(
+			"javax.portlet.servletContext");
+
+		return servletContext;
 	}
 
 }
