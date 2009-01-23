@@ -24,35 +24,35 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.lfr-theme-list h3 {
+.portlet-communities .lfr-theme-list h3 {
 	background: #D3DADD;
 	padding: 0.5em;
 }
 
-.lfr-theme-list li {
+.portlet-communities .lfr-theme-list li {
 	float: left;
 	margin: 0 1.3em 1.3em 0;
 	text-align: center;
 }
 
-.theme-title {
+.portlet-communities .theme-title {
 	font-weight: bold;
 	margin: 0;
 	padding: 2px;
 }
 
-.lfr-current-theme {
+.portlet-communities .lfr-current-theme {
 	background: #F0F5F7;
 	border: 1px solid #828F95;
 	margin-bottom: 1em;
 	padding: 3px 3px 1em;
 }
 
-.lfr-current-theme h3 {
+.portlet-communities .lfr-current-theme h3 {
 	margin: 0 0 0.5em;
 }
 
-.lfr-current-theme .theme-title {
+.portlet-communities .lfr-current-theme .theme-title {
 	border-bottom: 1px solid #828F95;
 	font-size: 1.4em;
 	margin-bottom: 0.5em;
@@ -60,38 +60,38 @@
 	padding-top: 0;
 }
 
-.lfr-current-theme .theme-details {
+.portlet-communities .lfr-current-theme .theme-details {
 	padding: 0 2px 0 170px;
 }
 
-.theme-entry {
+.portlet-communities .theme-entry {
 	height: 96px;
 	text-decoration: none;
 	width: 120px;
 }
 
-.theme-entry, .lfr-current-theme .theme-screenshot {
+.portlet-communities .theme-entry, .portlet-communities .lfr-current-theme .theme-screenshot {
 	border: 1px solid #AEB8BC;
 	color: #fff;
 	display: block;
 	padding: 1px;
 }
 
-.lfr-current-theme .theme-screenshot {
+.portlet-communities .lfr-current-theme .theme-screenshot {
 	float: left;
 	height: 120px;
 	margin: 0 0.5em;
 	width: 150px;
 }
 
-.theme-entry .theme-title {
+.portlet-communities .theme-entry .theme-title {
 	background: #878F93;
 	display: block;
 	font-size: 1em;
 	margin-bottom: 3px;
 }
 
-.lfr-theme-list .theme-entry:hover {
+.portlet-communities .lfr-theme-list .theme-entry:hover {
 	background: #DFF4FF;
 	border-color: #A7CEDF;
 	color: #9ebac8;
@@ -99,7 +99,7 @@
 	text-decoration: underline;
 }
 
-.theme-entry:hover .theme-thumbnail {
+.portlet-communities .theme-entry:hover .theme-thumbnail {
 	border: 1px solid #A7CEDF;
 	display: block;
 	height: 120px;
@@ -111,49 +111,49 @@
 	z-index: 100;
 }
 
-.theme-entry:hover .theme-title {
+.portlet-communities .theme-entry:hover .theme-title {
 	background: #1E2529;
 }
 
-.theme-thumbnail {
+.portlet-communities .theme-thumbnail {
 	height: 68px;
 	width: 85px;
 }
 
-.lfr-available-themes h3 {
+.portlet-communities .lfr-available-themes h3 {
 	margin: 0;
 	overflow: hidden;
 }
 
-.lfr-available-themes .lfr-theme-list {
+.portlet-communities .lfr-available-themes .lfr-theme-list {
 	margin-top: 0.7em;
 }
 
-.lfr-available-themes .header-title {
+.portlet-communities .lfr-available-themes .header-title {
 	float: left;
 }
 
-.lfr-available-themes .install-themes {
+.portlet-communities .lfr-available-themes .install-themes {
 	float: right;
 	font-size: 11px;
 }
 
-.theme-details dl, .lfr-theme-list .theme-details dd {
+.portlet-communities .theme-details dl, .portlet-communities .lfr-theme-list .theme-details dd {
 	margin: 0;
 }
 
-.theme-details dl {
+.portlet-communities .theme-details dl {
 	margin-bottom: 1em;
 }
 
-.theme-details dt {
+.portlet-communities .theme-details dt {
 	font-weight: bold;
 }
 
-.selected-color-scheme .theme-entry {
+.portlet-communities .selected-color-scheme .theme-entry {
 	border: 3px solid #369;
 }
 
-.selected-color-scheme .theme-entry .theme-title {
+.portlet-communities .selected-color-scheme .theme-entry .theme-title {
 	background: #1E2529;
 }
