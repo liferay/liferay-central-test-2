@@ -25,6 +25,7 @@ package com.liferay.portal.apache.bridges.struts;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.ServletContextProvider;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.upload.UploadServletRequestImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.PortletContextImpl;
