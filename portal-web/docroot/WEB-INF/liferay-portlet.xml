@@ -1101,6 +1101,7 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/communities/css.jsp</header-portlet-css>
 		<footer-portlet-javascript>/html/portlet/enterprise_admin/javascript.js</footer-portlet-javascript>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
@@ -1219,6 +1220,7 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/communities/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
