@@ -22,18 +22,29 @@
 
 package com.liferay.portal.apache.bridges.struts;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
+import com.liferay.portal.portletcontainer.WindowInvokerUtil;
+import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.PortletRequestImpl;
 import com.liferay.portlet.PortletResponseImpl;
 import com.liferay.portlet.PortletServletRequest;
 import com.liferay.portlet.PortletServletResponse;
 
+import com.sun.portal.portletcontainer.portlet.impl.RDRequestWrapper;
+import com.sun.portal.portletcontainer.portlet.impl.RDResponseWrapper;
+
 import java.io.IOException;
 
 import java.util.Set;
+
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -47,6 +58,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Michael Young
  * @author Brian Myunghun Kim
+ * @author Brian Wing Shun Chan
+ * @author Deepak Gothe
  *
  */
 public class LiferayRequestDispatcher implements RequestDispatcher {
@@ -62,9 +75,11 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 			ServletRequest servletRequest, ServletResponse servletResponse)
 		throws IOException, ServletException {
 
-		if (servletRequest.getAttribute(JavaConstants.JAVAX_PORTLET_REQUEST) !=
-				null) {
+		PortletRequest portletRequest =
+			(PortletRequest)servletRequest.getAttribute(
+				JavaConstants.JAVAX_PORTLET_REQUEST);
 
+		if (portletRequest != null) {
 			invoke(servletRequest, servletResponse, false);
 		}
 		else {
@@ -76,9 +91,11 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 			ServletRequest servletRequest, ServletResponse servletResponse)
 		throws IOException, ServletException {
 
-		if (servletRequest.getAttribute(JavaConstants.JAVAX_PORTLET_REQUEST) !=
-				null) {
+		PortletRequest portletRequest =
+			(PortletRequest)servletRequest.getAttribute(
+				JavaConstants.JAVAX_PORTLET_REQUEST);
 
+		if (portletRequest != null) {
 			invoke(servletRequest, servletResponse, true);
 		}
 		else {
@@ -96,12 +113,12 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 		String requestURI = null;
 		String servletPath = null;
 
-		PortletRequestImpl portletRequestImpl =
-			(PortletRequestImpl)servletRequest.getAttribute(
+		PortletRequest portletRequest =
+			(PortletRequest)servletRequest.getAttribute(
 				JavaConstants.JAVAX_PORTLET_REQUEST);
 
-		PortletResponseImpl portletResponseImpl =
-			(PortletResponseImpl)servletRequest.getAttribute(
+		PortletResponse portletResponse =
+			(PortletResponse)servletRequest.getAttribute(
 				JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 		if (_path != null) {
@@ -114,11 +131,8 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 				queryString = _path.substring(pos + 1, _path.length());
 			}
 
-			Portlet portlet = portletRequestImpl.getPortlet();
-
-			PortletApp portletApp = portlet.getPortletApp();
-
-			Set<String> servletURLPatterns = portletApp.getServletURLPatterns();
+			Set<String> servletURLPatterns = getServletURLPatterns(
+				servletRequest, portletRequest, portletResponse);
 
 			for (String urlPattern : servletURLPatterns) {
 				if (urlPattern.endsWith("/*")) {
@@ -141,18 +155,16 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 				servletPath = pathNoQueryString;
 			}
 
-			requestURI =
-				portletRequestImpl.getContextPath() + pathNoQueryString;
+			requestURI = portletRequest.getContextPath() + pathNoQueryString;
 		}
 
-		PortletServletRequest portletServletRequest = new PortletServletRequest(
-			(HttpServletRequest)servletRequest, portletRequestImpl, pathInfo,
-			queryString, requestURI, servletPath, false, include);
+		HttpServletRequest portletServletRequest = getPortletServletRequest(
+			servletRequest, portletRequest, pathInfo, queryString, requestURI,
+			servletPath, include);
 
-		PortletServletResponse portletServletResponse =
-			new PortletServletResponse(
-				(HttpServletResponse)servletResponse, portletResponseImpl,
-				include);
+		HttpServletResponse portletServletResponse =
+			getPortletServletResponse(
+				servletResponse, portletRequest, portletResponse, include);
 
 		if (include) {
 			_requestDispatcher.include(
@@ -161,6 +173,90 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 		else {
 			_requestDispatcher.forward(
 				portletServletRequest, portletServletResponse);
+		}
+	}
+
+	protected HttpServletRequest getPortletServletRequest(
+		ServletRequest servletRequest, PortletRequest portletRequest,
+		String pathInfo, String queryString, String requestURI,
+		String servletPath, boolean include) {
+
+		HttpServletRequest request = (HttpServletRequest)servletRequest;
+		boolean named = false;
+
+		if (PropsValues.PORTLET_CONTAINER_IMPL_SUN) {
+			String lifecyclePhase = (String)portletRequest.getAttribute(
+				PortletRequest.LIFECYCLE_PHASE);
+
+			return new RDRequestWrapper(
+				null, request, portletRequest, requestURI, servletPath,
+				pathInfo, queryString, lifecyclePhase, named, include);
+		}
+		else {
+			PortletRequestImpl portletRequestImpl =
+				(PortletRequestImpl)portletRequest;
+
+			return new PortletServletRequest(
+				request, portletRequestImpl, pathInfo, queryString, requestURI,
+				servletPath, named, include);
+		}
+	}
+
+	protected HttpServletResponse getPortletServletResponse(
+		ServletResponse servletResponse, PortletRequest portletRequest,
+		PortletResponse portletResponse, boolean include) {
+
+		HttpServletResponse response = (HttpServletResponse)servletResponse;
+
+		if (PropsValues.PORTLET_CONTAINER_IMPL_SUN) {
+			String lifecyclePhase = (String)portletRequest.getAttribute(
+				PortletRequest.LIFECYCLE_PHASE);
+
+			return new RDResponseWrapper(
+				response, portletResponse, lifecyclePhase, include);
+		}
+		else {
+			PortletResponseImpl portletResponseImpl =
+				(PortletResponseImpl)portletResponse;
+
+			return new PortletServletResponse(
+				response, portletResponseImpl, include);
+		}
+	}
+
+	protected Set<String> getServletURLPatterns(
+			ServletRequest servletRequest, PortletRequest portletRequest,
+			PortletResponse portletResponse)
+		throws ServletException {
+
+		if (PropsValues.PORTLET_CONTAINER_IMPL_SUN) {
+			try {
+				HttpServletRequest request = (HttpServletRequest)servletRequest;
+
+				long companyId = PortalUtil.getCompanyId(request);
+				String portletId = WindowInvokerUtil.getPortletId(
+					portletResponse.getNamespace());
+
+				Portlet portlet = PortletLocalServiceUtil.getPortletById(
+					companyId, portletId);
+
+				PortletApp portletApp = portlet.getPortletApp();
+
+				return portletApp.getServletURLPatterns();
+			}
+			catch (SystemException se) {
+				throw new ServletException(se);
+			}
+		}
+		else {
+			PortletRequestImpl portletRequestImpl =
+				(PortletRequestImpl)portletRequest;
+
+			Portlet portlet = portletRequestImpl.getPortlet();
+
+			PortletApp portletApp = portlet.getPortletApp();
+
+			return portletApp.getServletURLPatterns();
 		}
 	}
 

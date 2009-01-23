@@ -22,9 +22,6 @@
 
 package com.liferay.portal.apache.bridges.struts;
 
-import com.liferay.portal.portletcontainer.StrutsBridgeRequestDispatcher;
-import com.liferay.portal.util.PropsValues;
-
 import java.io.InputStream;
 
 import java.net.MalformedURLException;
@@ -43,7 +40,6 @@ import javax.servlet.ServletContext;
  * <a href="LiferayServletContext.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael Young
- * @author Deepak Gothe
  *
  */
 public class LiferayServletContext implements ServletContext {
@@ -95,7 +91,12 @@ public class LiferayServletContext implements ServletContext {
 		RequestDispatcher requestDispatcher =
 			_servletContext.getNamedDispatcher(name);
 
-		return _getDispatcher(requestDispatcher, name);
+		if (requestDispatcher != null) {
+			requestDispatcher = new LiferayRequestDispatcher(
+				requestDispatcher, name);
+		}
+
+		return requestDispatcher;
 	}
 
 	public String getRealPath(String path) {
@@ -106,7 +107,12 @@ public class LiferayServletContext implements ServletContext {
 		RequestDispatcher requestDispatcher =
 			_servletContext.getRequestDispatcher(path);
 
-		return _getDispatcher(requestDispatcher, path);
+		if (requestDispatcher != null) {
+			requestDispatcher = new LiferayRequestDispatcher(
+				requestDispatcher, path);
+		}
+
+		return requestDispatcher;
 	}
 
 	public URL getResource(String path) throws MalformedURLException {
@@ -163,23 +169,6 @@ public class LiferayServletContext implements ServletContext {
 
 	public String toString() {
 		return _servletContext.toString();
-	}
-
-	private RequestDispatcher _getDispatcher(
-		RequestDispatcher requestDispatcher, String path) {
-
-		if (requestDispatcher != null) {
-			if (PropsValues.PORTLET_CONTAINER_IMPL_SUN) {
-				requestDispatcher = new StrutsBridgeRequestDispatcher(
-					requestDispatcher, path);
-
-			} else {
-				requestDispatcher = new LiferayRequestDispatcher(
-					requestDispatcher, path);
-			}
-		}
-
-		return requestDispatcher;
 	}
 
 	private ServletContext _servletContext;

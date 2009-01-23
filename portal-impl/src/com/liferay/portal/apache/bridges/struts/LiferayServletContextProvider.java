@@ -25,7 +25,6 @@ package com.liferay.portal.apache.bridges.struts;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.ServletContextProvider;
 import com.liferay.portal.kernel.util.ContentTypes;
-import com.liferay.portal.portletcontainer.HttpServletUtil;
 import com.liferay.portal.upload.UploadServletRequestImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.PortletContextImpl;
@@ -52,14 +51,16 @@ import javax.servlet.http.HttpServletResponse;
 public class LiferayServletContextProvider implements ServletContextProvider {
 
 	public ServletContext getServletContext(GenericPortlet portlet) {
-
 		PortletContext portletContext = portlet.getPortletContext();
+
 		ServletContext servletContext =
-			HttpServletUtil.getServletContext(portletContext);
+			(ServletContext)portletContext.getAttribute(
+				JavaConstants.JAVAX_PORTLET_SERVLET_CONTEXT);
 
 		if (servletContext == null) {
 			PortletContextImpl portletContextImpl =
 				(PortletContextImpl)portlet.getPortletContext();
+
 			servletContext = portletContextImpl.getServletContext();
 		}
 
@@ -73,11 +74,10 @@ public class LiferayServletContextProvider implements ServletContextProvider {
 	public HttpServletRequest getHttpServletRequest(
 		GenericPortlet portlet, PortletRequest portletRequest) {
 
-		HttpServletRequest request =
-			PortalUtil.getHttpServletRequest(portletRequest);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
 
 		if (portletRequest instanceof ActionRequest) {
-
 			String contentType = request.getHeader(HttpHeaders.CONTENT_TYPE);
 
 			if ((contentType != null) &&

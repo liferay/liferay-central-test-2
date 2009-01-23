@@ -77,20 +77,21 @@ public class WindowInvokerUtil {
 	}
 
 	public static String getPortletId(String portletNamespace) {
-		int firstIndex = portletNamespace.indexOf(StringPool.UNDERLINE);
-		int lastIndex = portletNamespace.lastIndexOf(StringPool.UNDERLINE);
+		int x = portletNamespace.indexOf(StringPool.UNDERLINE);
+		int y = portletNamespace.lastIndexOf(StringPool.UNDERLINE);
 
-		if (firstIndex == -1) {
-			firstIndex = 0;
+		if (x == -1) {
+			x = 0;
 		}
 		else {
-			firstIndex++;
+			x++;
 		}
 
-		if (lastIndex == -1) {
-			lastIndex = portletNamespace.length();
+		if (y == -1) {
+			y = portletNamespace.length();
 		}
-		return portletNamespace.substring(firstIndex, lastIndex);
+
+		return portletNamespace.substring(x, y);
 	}
 
 	public static String getPortletNamespace(EntityID entityID) {
