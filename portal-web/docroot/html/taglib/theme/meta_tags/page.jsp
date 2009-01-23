@@ -66,7 +66,7 @@
 	String metaKeywordsLanguageId = w3cCurrentLanguageId;
 
 	if (Validator.isNull(metaKeywords)) {
-		metaDescription = layout.getTypeSettingsProperties().getProperty("meta-keywords_" + defaultLanguageId);
+		metaKeywords = layout.getTypeSettingsProperties().getProperty("meta-keywords_" + defaultLanguageId);
 		metaKeywordsLanguageId = w3cDefaultLanguageId;
 	}
 	%>
