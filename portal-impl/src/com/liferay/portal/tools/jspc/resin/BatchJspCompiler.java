@@ -27,8 +27,6 @@ import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.util.FileImpl;
 
-import java.io.File;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
