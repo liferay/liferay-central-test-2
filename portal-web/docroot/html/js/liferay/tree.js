@@ -45,13 +45,13 @@ Liferay.Tree = new Class({
 		instance._wasDropped = false;
 
 		instance._dragOptions = {
-			scope: 'liferayTree',
 			cssNamespace: false,
 			helper: 'clone',
 			handle: '> a',
 			distance: 1,
 			opacity: 0.5,
 			revert: false,
+			scope: 'liferayTree',
 			start: function(event, ui) {
 				instance._originalParentNode = this.parentNode;
 			},
@@ -61,11 +61,11 @@ Liferay.Tree = new Class({
 		};
 
 		instance._dropOptions = {
-			scope: 'liferayTree',
 			cssNamespace: false,
 			accept: '.tree-item',
 			activeClass: '',
 			hoverClass: 'tree-item-hover',
+			scope: 'liferayTree',
 			tolerance: 'pointer',
 			drop: function(event, ui) {
 				ui.helper.remove();
@@ -141,24 +141,6 @@ Liferay.Tree = new Class({
 		instance.create();
 
 		instance._attachEventDelegation();
-	},
-
-	_attachEventDelegation: function() {
-		var instance = this;
-		var treeEl = instance.tree;
-
-		treeEl.click(
-			function(event) {
-				var target = event.target;
-				var nodeName = target.nodeName || '';
-
-				if (nodeName.toLowerCase() == 'img' && target.className) {
-					if (target.className.indexOf('expand-image') != -1) {
-						instance.toggle(target);
-					}
-				}
-			}
-		);
 	},
 
 	addNode: function(parentNode) {
@@ -563,6 +545,24 @@ Liferay.Tree = new Class({
 				}
 			);
 		}
+	},
+
+	_attachEventDelegation: function() {
+		var instance = this;
+		var treeEl = instance.tree;
+
+		treeEl.click(
+			function(event) {
+				var target = event.target;
+				var nodeName = target.nodeName || '';
+
+				if (nodeName.toLowerCase() == 'img' && target.className) {
+					if (target.className.indexOf('expand-image') != -1) {
+						instance.toggle(target);
+					}
+				}
+			}
+		);
 	},
 
 	_fixParentsOfSelected: function(currentLi) {
