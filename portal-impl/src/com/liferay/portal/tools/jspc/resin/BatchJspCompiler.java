@@ -71,9 +71,9 @@ public class BatchJspCompiler {
 			List<String> fileNames = new ArrayList<String>();
 
 			for (int i = 0; i < files.length; i++) {
-				File file = new File(appDir + "/" + files[i]);
+				String fileName = files[i];
 
-				fileNames.add(file.toString());
+				fileNames.add(fileName);
 
 				if (((i > 0) && ((i % 200) == 0)) ||
 					((i + 1) == files.length)) {
