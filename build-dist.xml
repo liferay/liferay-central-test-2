@@ -409,7 +409,7 @@ app.server.jboss-tomcat.lib.global.dir=$${app.server.jboss-tomcat.instance.dir}/
 	<target name="build-dist-jetty">
 		<delete dir="${app.server.jetty.dir}" />
 
-		<unzip src="${app.server.parent.dir}/jetty-5.1.10.zip" dest="${app.server.parent.dir}" />
+		<unzip src="${app.server.parent.dir}/jetty-6.1.14.zip" dest="${app.server.parent.dir}" />
 
 		<echo file="app.server.${user.name}.properties">app.server.type=jetty</echo>
 
@@ -569,7 +569,7 @@ app.server.jboss-tomcat.lib.global.dir=$${app.server.jboss-tomcat.instance.dir}/
 	<target name="build-dist-resin">
 		<delete dir="${app.server.resin.dir}" />
 
-		<unzip src="${app.server.parent.dir}/resin-3.0.19.zip" dest="${app.server.parent.dir}" />
+		<unzip src="${app.server.parent.dir}/resin-3.1.8.zip" dest="${app.server.parent.dir}" />
 
 		<echo file="app.server.${user.name}.properties">app.server.type=resin</echo>
 
@@ -821,9 +821,9 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip</
 
 	<target name="zip-portal-war">
 		<antcall target="zip-portal-war-2.4" />
-		<antcall target="zip-portal-war-2.3" />
+		<!--<antcall target="zip-portal-war-2.3" />-->
 		<antcall target="zip-portal-war-2.4-with-dependencies" />
-		<antcall target="zip-portal-war-2.3-with-dependencies" />
+		<!--<antcall target="zip-portal-war-2.3-with-dependencies" />-->
 	</target>
 
 	<target name="zip-portal-war-2.3">
@@ -1073,7 +1073,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip</
 		<ant dir="${lp.plugins.dir}/portlets/mail-portlet" target="all" inheritAll="false" />
 		<ant dir="${lp.plugins.dir}/portlets/web-form-portlet" target="all" inheritAll="false" />
 		<ant dir="${lp.plugins.dir}/portlets/wol-portlet" target="all" inheritAll="false" />
-		<ant dir="${lp.plugins.dir}/themes/7-cogs-theme" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/themes/sevencogs-theme" target="all" inheritAll="false" />
 
 		<taskdef classname="com.liferay.portal.util.PropsUtilTask" classpathref="project.classpath" name="propsutil" />
 
