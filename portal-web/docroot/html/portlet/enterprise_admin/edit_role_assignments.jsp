@@ -44,6 +44,14 @@ portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("tabs3", tabs3);
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
+
+request.setAttribute("edit_role_assignments.jsp-tabs3", tabs3);
+
+request.setAttribute("edit_role_assignments.jsp-cur", cur);
+
+request.setAttribute("edit_role_assignments.jsp-role", role);
+
+request.setAttribute("edit_role_assignments.jsp-portletURL", portletURL);
 %>
 
 <script type="text/javascript">
@@ -85,292 +93,16 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
 <c:choose>
 	<c:when test='<%= tabs2.equals("users") %>'>
-		<input name="<portlet:namespace />addUserIds" type="hidden" value="" />
-		<input name="<portlet:namespace />removeUserIds" type="hidden" value="" />
-
-		<liferay-ui:tabs
-			names="current,available"
-			param="tabs3"
-			url="<%= portletURL.toString() %>"
-		/>
-
-		<liferay-ui:search-container
-			rowChecker="<%= new UserRoleChecker(renderResponse, role) %>"
-			searchContainer="<%= new UserSearch(renderRequest, portletURL) %>"
-		>
-			<liferay-ui:search-form
-				page="/html/portlet/enterprise_admin/user_search.jsp"
-			/>
-
-			<%
-			UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
-
-			LinkedHashMap userParams = new LinkedHashMap();
-
-			if (tabs3.equals("current")) {
-				userParams.put("usersRoles", new Long(role.getRoleId()));
-			}
-			%>
-
-			<liferay-ui:search-container-results>
-				<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
-			</liferay-ui:search-container-results>
-
-			<liferay-ui:search-container-row
-				className="com.liferay.portal.model.User"
-				escapedModel="<%= true %>"
-				keyProperty="userId"
-				modelVar="user2"
-			>
-				<liferay-ui:search-container-column-text
-					name="name"
-					property="fullName"
-				/>
-
-				<liferay-ui:search-container-column-text
-					name="screen-name"
-					property="screenName"
-				/>
-			</liferay-ui:search-container-row>
-
-			<div class="separator"><!-- --></div>
-
-			<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateRoleUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
-
-			<br /><br />
-
-			<liferay-ui:search-iterator />
-		</liferay-ui:search-container>
+		<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_assignments_users.jsp" />
 	</c:when>
 	<c:when test='<%= tabs2.equals("communities") %>'>
-		<input name="<portlet:namespace />addGroupIds" type="hidden" value="" />
-		<input name="<portlet:namespace />removeGroupIds" type="hidden" value="" />
-
-		<liferay-ui:tabs
-			names="current,available"
-			param="tabs3"
-			url="<%= portletURL.toString() %>"
-		/>
-
-		<%
-		GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
-
-		searchContainer.setRowChecker(new GroupRoleChecker(renderResponse, role));
-		%>
-
-		<liferay-ui:search-form
-			page="/html/portlet/enterprise_admin/group_search.jsp"
-			searchContainer="<%= searchContainer %>"
-		/>
-
-		<%
-		GroupSearchTerms searchTerms = (GroupSearchTerms)searchContainer.getSearchTerms();
-
-		LinkedHashMap groupParams = new LinkedHashMap();
-
-		if (tabs3.equals("current")) {
-			groupParams.put("groupsRoles", new Long(role.getRoleId()));
-		}
-
-		int total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams);
-
-		searchContainer.setTotal(total);
-
-		List results = GroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
-
-		searchContainer.setResults(results);
-		%>
-
-		<div class="separator"><!-- --></div>
-
-		<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateRoleGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
-
-		<br /><br />
-
-		<%
-		List resultRows = searchContainer.getResultRows();
-
-		for (int i = 0; i < results.size(); i++) {
-			Group group = (Group)results.get(i);
-
-			ResultRow row = new ResultRow(group, group.getGroupId(), i);
-
-			// Name
-
-			row.addText(group.getName());
-
-			// Type
-
-			row.addText(LanguageUtil.get(pageContext, group.getTypeLabel()));
-
-			// Add result row
-
-			resultRows.add(row);
-		}
-		%>
-
-		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+		<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_assignments_communities.jsp" />
 	</c:when>
 	<c:when test='<%= tabs2.equals("organizations") %>'>
-		<input name="<portlet:namespace />addGroupIds" type="hidden" value="" />
-		<input name="<portlet:namespace />removeGroupIds" type="hidden" value="" />
-
-		<liferay-ui:tabs
-			names="current,available"
-			param="tabs3"
-			url="<%= portletURL.toString() %>"
-		/>
-
-		<liferay-ui:search-container
-			rowChecker="<%= new OrganizationRoleChecker(renderResponse, role) %>"
-			searchContainer="<%= new OrganizationSearch(renderRequest, portletURL) %>"
-		>
-			<liferay-ui:search-form
-				page="/html/portlet/enterprise_admin/organization_search.jsp"
-			/>
-
-			<%
-			OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
-
-			long parentOrganizationId = OrganizationConstants.ANY_PARENT_ORGANIZATION_ID;
-
-			LinkedHashMap organizationParams = new LinkedHashMap();
-
-			if (tabs3.equals("current")) {
-				organizationParams.put("organizationsRoles", new Long(role.getRoleId()));
-			}
-			%>
-
-			<liferay-ui:search-container-results>
-				<%@ include file="/html/portlet/enterprise_admin/organization_search_results.jspf" %>
-			</liferay-ui:search-container-results>
-
-			<liferay-ui:search-container-row
-				className="com.liferay.portal.model.Organization"
-				escapedModel="<%= true %>"
-				keyProperty="organizationId"
-				modelVar="organization"
-			>
-				<liferay-ui:search-container-column-text
-					name="name"
-					orderable="<%= true %>"
-					property="name"
-				/>
-
-				<liferay-ui:search-container-column-text
-					buffer="buffer"
-					name="parent-organization"
-				>
-
-					<%
-					if (organization.getParentOrganizationId() > 0) {
-						try {
-							Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(organization.getParentOrganizationId());
-
-							buffer.append(parentOrganization.getName());
-						}
-						catch (Exception e) {
-						}
-					}
-					%>
-
-				</liferay-ui:search-container-column-text>
-
-				<liferay-ui:search-container-column-text
-					name="type"
-					orderable="<%= true %>"
-					value="<%= LanguageUtil.get(pageContext, organization.getType()) %>"
-				/>
-
-				<liferay-ui:search-container-column-text
-					name="city"
-					value="<%= organization.getAddress().getCity() %>"
-				/>
-
-				<liferay-ui:search-container-column-text
-					name="region"
-				>
-					<liferay-ui:write bean="<%= organization %>" property="region" />
-				</liferay-ui:search-container-column-text>
-
-				<liferay-ui:search-container-column-text
-					name="country"
-				>
-					<liferay-ui:write bean="<%= organization %>" property="country" />
-				</liferay-ui:search-container-column-text>
-			</liferay-ui:search-container-row>
-
-			<div class="separator"><!-- --></div>
-
-			<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateRoleGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
-
-			<br /><br />
-
-			<liferay-ui:search-iterator />
-		</liferay-ui:search-container>
+		<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_assignments_organizations.jsp" />
 	</c:when>
 	<c:when test='<%= tabs2.equals("user-groups") %>'>
-		<input name="<portlet:namespace />addGroupIds" type="hidden" value="" />
-		<input name="<portlet:namespace />removeGroupIds" type="hidden" value="" />
-
-		<liferay-ui:tabs
-			names="current,available"
-			param="tabs3"
-			url="<%= portletURL.toString() %>"
-		/>
-
-		<liferay-ui:search-container
-			rowChecker="<%= new UserGroupRoleChecker(renderResponse, role) %>"
-			searchContainer="<%= new UserGroupSearch(renderRequest, portletURL) %>"
-		>
-			<liferay-ui:search-form
-				page="/html/portlet/enterprise_admin/user_group_search.jsp"
-			/>
-
-			<%
-			UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
-
-			LinkedHashMap userGroupParams = new LinkedHashMap();
-
-			if (tabs3.equals("current")) {
-				List userGroupsRoles = new ArrayList();
-
-				userGroupParams.put("userGroupsRoles", new Long(role.getRoleId()));
-			}
-			%>
-
-			<liferay-ui:search-container-results
-				results="<%= UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator()) %>"
-				total="<%= UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams) %>"
-			/>
-
-			<liferay-ui:search-container-row
-				className="com.liferay.portal.model.UserGroup"
-				escapedModel="<%= true %>"
-				keyProperty="group.userGroupId"
-				modelVar="userGroup"
-			>
-				<liferay-ui:search-container-column-text
-					name="name"
-					orderable="<%= true %>"
-					property="name"
-				/>
-
-				<liferay-ui:search-container-column-text
-					name="description"
-					orderable="<%= true %>"
-					property="description"
-				/>
-			</liferay-ui:search-container-row>
-
-			<div class="separator"><!-- --></div>
-
-			<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateRoleGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
-
-			<br /><br />
-
-			<liferay-ui:search-iterator />
-		</liferay-ui:search-container>
+		<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_assignments_user_groups.jsp" />
 	</c:when>
 </c:choose>
 
