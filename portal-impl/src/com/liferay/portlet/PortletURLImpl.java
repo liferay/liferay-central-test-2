@@ -899,6 +899,7 @@ public class PortletURLImpl
 					_params.put(name, oldValues);
 				}
 				else if (isBlankValue(newValues)) {
+					_params.remove(name);
 				}
 				else {
 					newValues = ArrayUtil.append(newValues, oldValues);
