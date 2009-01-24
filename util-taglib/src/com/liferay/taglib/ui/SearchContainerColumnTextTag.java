@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.dao.search.ResultRow;
 import com.liferay.portal.kernel.dao.search.SearchEntry;
 import com.liferay.portal.kernel.dao.search.TextSearchEntry;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.List;
@@ -95,20 +96,22 @@ public class SearchContainerColumnTextTag extends SearchContainerColumnTag {
 			return EVAL_PAGE;
 		}
 		finally {
-			align = SearchEntry.DEFAULT_ALIGN;
-			_buffer = null;
-			colspan = SearchEntry.DEFAULT_COLSPAN;
-			_href = null;
-			index = -1;
-			name = null;
-			_orderable = false;
-			_orderableProperty = null;
-			_property = null;
-			_target = null;
-			_title = null;
-			_translate = false;
-			valign = SearchEntry.DEFAULT_VALIGN;
-			_value = null;
+			if (!ServerDetector.isResin()) {
+				align = SearchEntry.DEFAULT_ALIGN;
+				_buffer = null;
+				colspan = SearchEntry.DEFAULT_COLSPAN;
+				_href = null;
+				index = -1;
+				name = null;
+				_orderable = false;
+				_orderableProperty = null;
+				_property = null;
+				_target = null;
+				_title = null;
+				_translate = false;
+				valign = SearchEntry.DEFAULT_VALIGN;
+				_value = null;
+			}
 		}
 	}
 

@@ -24,6 +24,7 @@ package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -125,13 +126,15 @@ public class IconMenuTag extends BodyTagSupport {
 			throw new JspException(e);
 		}
 		finally {
-			_startPage = null;
-			_endPage = null;
-			_message = "actions";
-			_showWhenSingleIcon = false;
-			_align = "right";
-			_cssClass = null;
-			_bodyContentString = StringPool.BLANK;
+			if (!ServerDetector.isResin()) {
+				_startPage = null;
+				_endPage = null;
+				_message = "actions";
+				_showWhenSingleIcon = false;
+				_align = "right";
+				_cssClass = null;
+				_bodyContentString = StringPool.BLANK;
+			}
 		}
 	}
 

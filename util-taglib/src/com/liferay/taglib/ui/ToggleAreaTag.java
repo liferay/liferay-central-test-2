@@ -22,6 +22,7 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 
@@ -75,14 +76,16 @@ public class ToggleAreaTag extends ParamAndPropertyAncestorTagImpl {
 			throw new JspException(e);
 		}
 		finally {
-			_startPage = null;
-			_endPage = null;
-			_id = null;
-			_showMessage = null;
-			_hideMessage = null;
-			_defaultShowContent = true;
-			_stateVar = null;
-			_align = "left";
+			if (!ServerDetector.isResin()) {
+				_startPage = null;
+				_endPage = null;
+				_id = null;
+				_showMessage = null;
+				_hideMessage = null;
+				_defaultShowContent = true;
+				_stateVar = null;
+				_align = "left";
+			}
 		}
 	}
 

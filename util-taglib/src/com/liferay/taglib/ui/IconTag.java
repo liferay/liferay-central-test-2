@@ -22,6 +22,7 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletRequest;
@@ -76,14 +77,16 @@ public class IconTag extends IncludeTag {
 			throw new JspException(e);
 		}
 		finally {
-			_image = null;
-			_message = null;
-			_src = null;
-			_url = null;
-			_method = null;
-			_target = null;
-			_label = false;
-			_toolTip = false;
+			if (!ServerDetector.isResin()) {
+				_image = null;
+				_message = null;
+				_src = null;
+				_url = null;
+				_method = null;
+				_target = null;
+				_label = false;
+				_toolTip = false;
+			}
 		}
 	}
 

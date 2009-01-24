@@ -23,6 +23,7 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.dao.search.SearchContainer;
+import com.liferay.portal.kernel.util.ServerDetector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,10 +77,12 @@ public class SearchContainerResultsTag extends TagSupport {
 			throw new JspException(e);
 		}
 		finally {
-			_results = null;
-			_resultsVar = DEFAULT_RESULTS_VAR;
-			_total = 0;
-			_totalVar = DEFAULT_TOTAL_VAR;
+			if (!ServerDetector.isResin()) {
+				_results = null;
+				_resultsVar = DEFAULT_RESULTS_VAR;
+				_total = 0;
+				_totalVar = DEFAULT_TOTAL_VAR;
+			}
 		}
 	}
 

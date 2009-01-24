@@ -25,6 +25,7 @@ package com.liferay.taglib.ui;
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -119,15 +120,17 @@ public class TableIteratorTag extends TagSupport {
 			throw new JspException(e);
 		}
 		finally {
-			_startPage = null;
-			_bodyPage = null;
-			_endPage = null;
-			_list = null;
-			_listPos = 0;
-			_rowLength = 0;
-			_rowPadding = "0";
-			_rowValign = "middle";
-			_rowBreak = null;
+			if (!ServerDetector.isResin()) {
+				_startPage = null;
+				_bodyPage = null;
+				_endPage = null;
+				_list = null;
+				_listPos = 0;
+				_rowLength = 0;
+				_rowPadding = "0";
+				_rowValign = "middle";
+				_rowBreak = null;
+			}
 		}
 	}
 

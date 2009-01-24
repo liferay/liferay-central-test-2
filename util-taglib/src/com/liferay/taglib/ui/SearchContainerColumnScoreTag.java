@@ -23,6 +23,7 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.dao.search.ResultRow;
+import com.liferay.portal.kernel.util.ServerDetector;
 
 import java.util.List;
 
@@ -57,9 +58,11 @@ public class SearchContainerColumnScoreTag extends SearchContainerColumnTag {
 			return EVAL_PAGE;
 		}
 		finally {
-			index = -1;
-			_name = DEFAULT_NAME;
-			_score = 0;
+			if (!ServerDetector.isResin()) {
+				index = -1;
+				_name = DEFAULT_NAME;
+				_score = 0;
+			}
 		}
 	}
 

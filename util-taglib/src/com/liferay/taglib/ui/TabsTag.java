@@ -23,6 +23,7 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -182,29 +183,31 @@ public class TabsTag extends ParamAndPropertyAncestorTagImpl {
 			throw new JspException(e);
 		}
 		finally {
-			_startPage = null;
-			_endPage = null;
-			_names = null;
-			_namesPos = 0;
-			_tabsValues = null;
-			_formName = StringPool.BLANK;
-			_param = "tabs1";
-			_value = null;
-			_portletURL = null;
-			_url = null;
-			_url0 = null;
-			_url1 = null;
-			_url2 = null;
-			_url3 = null;
-			_url4 = null;
-			_url5 = null;
-			_url6 = null;
-			_url7 = null;
-			_url8 = null;
-			_url9 = null;
-			_backURL = null;
-			_refresh = true;
-			_onClick = null;
+			if (!ServerDetector.isResin()) {
+				_startPage = null;
+				_endPage = null;
+				_names = null;
+				_namesPos = 0;
+				_tabsValues = null;
+				_formName = StringPool.BLANK;
+				_param = "tabs1";
+				_value = null;
+				_portletURL = null;
+				_url = null;
+				_url0 = null;
+				_url1 = null;
+				_url2 = null;
+				_url3 = null;
+				_url4 = null;
+				_url5 = null;
+				_url6 = null;
+				_url7 = null;
+				_url8 = null;
+				_url9 = null;
+				_backURL = null;
+				_refresh = true;
+				_onClick = null;
+			}
 		}
 	}
 
