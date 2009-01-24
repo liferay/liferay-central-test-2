@@ -248,7 +248,7 @@
 			/>
 			<zipfileset
 				dir="lib/global"
-				includes="container.jar,portlet.jar,portlet-container.jar,saw-api.jar"
+				includes="annotations.jar,container.jar,portlet.jar,portlet-container.jar,saw-api.jar"
 			/>
 			<zipfileset
 				dir="lib/portal"
@@ -803,7 +803,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip</
 		<zip destfile="dist/liferay-portal-dependencies-${lp.version}.zip">
 			<zipfileset
 				dir="lib/global"
-				includes="container.jar,portlet.jar,portlet-container.jar"
+				includes="annotations.jar,container.jar,portlet.jar,portlet-container.jar"
 				prefix="liferay-portal-dependencies-${lp.version}"
 			/>
 			<zipfileset
@@ -869,7 +869,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip</
 		<copy todir="${tstamp.value}/WEB-INF/lib">
 			<fileset
 				dir="${app.server.lib.global.dir}"
-				includes="container.jar,portal-kernel.jar,portal-service.jar,portlet.jar,portlet-container.jar"
+				includes="annotations.jar,container.jar,portal-kernel.jar,portal-service.jar,portlet.jar,portlet-container.jar"
 			/>
 		</copy>
 
@@ -907,7 +907,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip</
 		<copy todir="${tstamp.value}/WEB-INF/lib">
 			<fileset
 				dir="${app.server.lib.global.dir}"
-				includes="container.jar,portal-kernel.jar,portal-service.jar,portlet.jar,portlet-container.jar"
+				includes="annotations.jar,container.jar,portal-kernel.jar,portal-service.jar,portlet.jar,portlet-container.jar"
 			/>
 		</copy>
 
