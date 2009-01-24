@@ -1077,9 +1077,10 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip</
 
 		<taskdef classname="com.liferay.portal.util.PropsUtilTask" classpathref="project.classpath" name="propsutil" />
 
-		<propsutil key="resource.repositories.root" result="propsutil.resource.repositories.root" />
+		<propsutil key="liferay.home" result="propsutil.liferay.home" />
 
-		<delete dir="${propsutil.resource.repositories.root}" />
+		<delete dir="${propsutil.liferay.home}/data" />
+		<delete dir="${propsutil.liferay.home}/deploy" />
 
 		<antcall target="java2html" />
 		<antcall target="dtddoc" />

@@ -25,6 +25,9 @@ package com.liferay.portal.util;
 import com.liferay.portal.configuration.ConfigurationImpl;
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.Filter;
+import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.util.SystemProperties;
 
 import java.util.Properties;
@@ -80,11 +83,19 @@ public class PropsUtil {
 	}
 
 	private PropsUtil() {
+		SystemProperties.set("default.liferay.home", _getDefaultLiferayHome());
+
 		_configuration = new ConfigurationImpl(
 			PropsUtil.class.getClassLoader(), PropsFiles.PORTAL);
 
-		// Set the portal property "resource.repositories.root" as a system
-		// property as well so it can be referenced by Ehcache.
+		// Set the portal property "liferay.home" as a system property as well
+		// so it can be referenced by Ehcache.
+
+		SystemProperties.set(
+			PropsKeys.LIFERAY_HOME, _get(PropsKeys.LIFERAY_HOME));
+
+		// Set the portal property "resource.repositories.root" for backwards
+		// compatibility.
 
 		SystemProperties.set(
 			PropsKeys.RESOURCE_REPOSITORIES_ROOT,
@@ -113,6 +124,57 @@ public class PropsUtil {
 
 	private String[] _getArray(String key, Filter filter) {
 		return _configuration.getArray(key, filter);
+	}
+
+	private String _getDefaultLiferayHome() {
+		String defaultLiferayHome = null;
+
+		if (ServerDetector.isGeronimo()) {
+			defaultLiferayHome =
+				SystemProperties.get("org.apache.geronimo.base.dir") + "/..";
+		}
+		else if (ServerDetector.isGlassfish()) {
+			defaultLiferayHome =
+				SystemProperties.get("com.sun.aas.instanceRoot") + "/..";
+		}
+		else if (ServerDetector.isJBoss()) {
+			defaultLiferayHome =
+				SystemProperties.get("jboss.server.home.dir") + "/..";
+		}
+		else if (ServerDetector.isJOnAS()) {
+			defaultLiferayHome = SystemProperties.get("jonas.base") + "/..";
+		}
+		else if (ServerDetector.isWebLogic()) {
+			defaultLiferayHome =
+				SystemProperties.get("env.DOMAIN_HOME") + "/..";
+		}
+		else if (ServerDetector.isJetty()) {
+			defaultLiferayHome = SystemProperties.get("jetty.home") + "/..";
+		}
+		else if (ServerDetector.isResin()) {
+			defaultLiferayHome = SystemProperties.get("resin.home") + "/..";
+		}
+		else if (ServerDetector.isTomcat()) {
+			defaultLiferayHome = SystemProperties.get("catalina.base") + "/..";
+		}
+		else {
+			defaultLiferayHome = SystemProperties.get("user.home") + "/liferay";
+		}
+
+		defaultLiferayHome = StringUtil.replace(
+			defaultLiferayHome, StringPool.BACK_SLASH, StringPool.SLASH);
+
+		defaultLiferayHome = StringUtil.replace(
+			defaultLiferayHome, StringPool.DOUBLE_SLASH, StringPool.SLASH);
+
+		if (defaultLiferayHome.endsWith("/..")) {
+			int pos = defaultLiferayHome.lastIndexOf(
+				StringPool.SLASH, defaultLiferayHome.length() - 4);
+
+			defaultLiferayHome = defaultLiferayHome.substring(0, pos);
+		}
+
+		return defaultLiferayHome;
 	}
 
 	private Properties _getProperties() {

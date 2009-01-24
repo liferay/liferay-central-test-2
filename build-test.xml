@@ -6,18 +6,15 @@
 	<target name="deploy-plugins">
 		<taskdef classname="com.liferay.portal.util.PropsUtilTask" classpathref="project.classpath" name="propsutil" />
 
-		<propsutil key="resource.repositories.root" result="propsutil.resource.repositories.root" />
+		<propsutil key="liferay.home" result="propsutil.liferay.home" />
 
-		<delete dir="${propsutil.resource.repositories.root}" />
-
-		<taskdef classname="com.liferay.portal.util.PropsUtilTask" classpathref="project.classpath" name="propsutil" />
-
-		<propsutil key="resource.repositories.root" result="propsutil.resource.repositories.root" />
+		<delete dir="${propsutil.liferay.home}/data" />
+		<delete dir="${propsutil.liferay.home}/deploy" />
 
 		<echo file="${lp.plugins.dir}/build.${user.name}.properties">app.server.dir=${app.server.dir}
 app.server.portal.dir=${app.server.portal.dir}
 
-auto.deploy.dir=${propsutil.resource.repositories.root}/deploy
+auto.deploy.dir=${propsutil.liferay.home}/deploy
 
 plugins.includes=${plugins.includes}</echo>
 

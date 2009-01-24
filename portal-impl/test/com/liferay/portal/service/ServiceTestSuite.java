@@ -57,9 +57,7 @@ public class ServiceTestSuite extends TestSuite {
 	public ServiceTestSuite() {
 		InitUtil.initWithSpring();
 
-		// Resource repositories root
-
-		FileUtil.deltree(PropsValues.RESOURCE_REPOSITORIES_ROOT);
+		FileUtil.deltree(PropsValues.LIFERAY_HOME + "/data);
 
 		// JCR
 

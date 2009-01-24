@@ -660,6 +660,9 @@ public class PropsValues {
 	public static final String LDAP_USER_IMPL =
 		PropsUtil.get(PropsKeys.LDAP_USER_IMPL);
 
+	public static final String LIFERAY_HOME =
+		PropsUtil.get(PropsKeys.LIFERAY_HOME);
+
 	public static final boolean LIVE_USERS_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.LIVE_USERS_ENABLED));
 
