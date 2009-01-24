@@ -287,7 +287,10 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 			}
 		}
 
-		if (!lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+		if (lifecycle.equals(PortletRequest.ACTION_PHASE) ||
+			lifecycle.equals(PortletRequest.EVENT_PHASE) ||
+			lifecycle.equals(PortletRequest.RENDER_PHASE)) {
+
 			try {
 				portletURLImpl.setWindowState(
 					_portletRequestImpl.getWindowState());
@@ -304,7 +307,13 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 				_log.error(pme.getMessage());
 			}
 		}
-		else {
+
+		if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
+			portletURLImpl.setCopyCurrentPublicRenderParameters(true);
+		}
+
+		if (lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+			portletURLImpl.setCopyCurrentPublicRenderParameters(true);
 			portletURLImpl.setCopyCurrentRenderParameters(true);
 		}
 

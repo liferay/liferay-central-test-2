@@ -260,6 +260,10 @@ public class PortletURLImpl
 		return _anchor;
 	}
 
+	public boolean isCopyCurrentPublicRenderParameters() {
+		return _copyCurrentPublicRenderParameters;
+	}
+
 	public boolean isCopyCurrentRenderParameters() {
 		return _copyCurrentRenderParameters;
 	}
@@ -340,6 +344,12 @@ public class PortletURLImpl
 		// Clear cache
 
 		_toString = null;
+	}
+
+	public void setCopyCurrentPublicRenderParameters(
+		boolean copyCurrentPublicRenderParameters) {
+
+		_copyCurrentPublicRenderParameters = copyCurrentPublicRenderParameters;
 	}
 
 	public void setCopyCurrentRenderParameters(
@@ -914,7 +924,7 @@ public class PortletURLImpl
 				if (publicRenderParameter != null) {
 					QName qName = publicRenderParameter.getQName();
 
-					if (_copyCurrentRenderParameters) {
+					if (_copyCurrentPublicRenderParameters) {
 						String[] oldValues = _request.getParameterValues(name);
 
 						if (oldValues != null) {
@@ -1068,6 +1078,7 @@ public class PortletURLImpl
 	private String _lifecycle;
 	private boolean _anchor = true;
 	private String _cacheability = ResourceURL.PAGE;
+	private boolean _copyCurrentPublicRenderParameters;
 	private boolean _copyCurrentRenderParameters;
 	private long _doAsUserId;
 	private String _doAsUserLanguageId;
