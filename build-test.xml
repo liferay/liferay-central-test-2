@@ -4,17 +4,13 @@
 	<import file="build.xml" />
 
 	<target name="deploy-plugins">
-		<taskdef classname="com.liferay.portal.util.PropsUtilTask" classpathref="project.classpath" name="propsutil" />
+		<property name="liferay.home" value="${app.server.dir}/.."/>
 
-		<propsutil key="liferay.home" result="propsutil.liferay.home" />
-
-		<delete dir="${propsutil.liferay.home}/data" />
-		<delete dir="${propsutil.liferay.home}/deploy" />
+		<delete dir="${liferay.home}/data" />
+		<delete dir="${liferay.home}/deploy" />
 
 		<echo file="${lp.plugins.dir}/build.${user.name}.properties">app.server.dir=${app.server.dir}
 app.server.portal.dir=${app.server.portal.dir}
-
-auto.deploy.dir=${propsutil.liferay.home}/deploy
 
 plugins.includes=${plugins.includes}</echo>
 

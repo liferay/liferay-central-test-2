@@ -171,7 +171,9 @@ public class PropsUtil {
 			int pos = defaultLiferayHome.lastIndexOf(
 				StringPool.SLASH, defaultLiferayHome.length() - 4);
 
-			defaultLiferayHome = defaultLiferayHome.substring(0, pos);
+			if (pos != -1) {
+				defaultLiferayHome = defaultLiferayHome.substring(0, pos);
+			}
 		}
 
 		return defaultLiferayHome;

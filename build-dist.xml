@@ -1075,12 +1075,10 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip</
 		<ant dir="${lp.plugins.dir}/portlets/wol-portlet" target="all" inheritAll="false" />
 		<ant dir="${lp.plugins.dir}/themes/sevencogs-theme" target="all" inheritAll="false" />
 
-		<taskdef classname="com.liferay.portal.util.PropsUtilTask" classpathref="project.classpath" name="propsutil" />
+		<property name="liferay.home" value="${app.server.dir}/.."/>
 
-		<propsutil key="liferay.home" result="propsutil.liferay.home" />
-
-		<delete dir="${propsutil.liferay.home}/data" />
-		<delete dir="${propsutil.liferay.home}/deploy" />
+		<delete dir="${liferay.home}/data" />
+		<delete dir="${liferay.home}/deploy" />
 
 		<antcall target="java2html" />
 		<antcall target="dtddoc" />
