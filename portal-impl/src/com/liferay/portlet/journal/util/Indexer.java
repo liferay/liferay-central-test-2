@@ -226,13 +226,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 				String text = dynamicContent.getText();
 
 				sb.append(text);
-				sb.append(StringPool.BLANK);
+				sb.append(StringPool.SPACE);
 			}
 			else if (el.getName().equals("static-content")) {
 				String text = el.getText();
 
 				sb.append(text);
-				sb.append(StringPool.BLANK);
+				sb.append(StringPool.SPACE);
 			}
 
 			_getIndexableContent(sb, el);
