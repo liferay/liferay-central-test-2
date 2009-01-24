@@ -33,50 +33,80 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddUserGroupTest extends BaseTestCase {
 	public void testAddUserGroup() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+		int label = 1;
 
-			try {
-				if (selenium.isElementPresent("link=User Groups")) {
-					break;
+		while (label >= 1) {
+			switch (label) {
+			case 1:
+
+				boolean InControlPanel = selenium.isElementPresent(
+						"link=User Groups");
+
+				if (InControlPanel) {
+					label = 2;
+
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.click(RuntimeVariables.replace(
+						"my-community-private-pages"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace("link=Control Panel"));
+				selenium.waitForPageToLoad("30000");
 
-		selenium.click(RuntimeVariables.replace("link=User Groups"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Add"));
-		selenium.waitForPageToLoad("30000");
+			case 2:
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-			try {
-				if (selenium.isElementPresent("_127_name")) {
-					break;
+					try {
+						if (selenium.isElementPresent("link=User Groups")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				selenium.click(RuntimeVariables.replace("link=User Groups"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace("link=Add"));
+				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("_127_name")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.typeKeys("_127_name",
+					RuntimeVariables.replace("Selenium"));
+				selenium.type("_127_name", RuntimeVariables.replace("Selenium"));
+				selenium.type("_127_description",
+					RuntimeVariables.replace("This is a selenium user group."));
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Save']"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isTextPresent(
+						"Your request processed successfully."));
+
+			case 100:
+				label = -1;
+			}
 		}
-
-		selenium.typeKeys("_127_name", RuntimeVariables.replace("Selenium"));
-		selenium.type("_127_name", RuntimeVariables.replace("Selenium"));
-		selenium.type("_127_description",
-			RuntimeVariables.replace("This is a selenium user group."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
 	}
 }

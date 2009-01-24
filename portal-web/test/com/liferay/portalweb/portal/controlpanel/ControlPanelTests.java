@@ -73,6 +73,10 @@ public class ControlPanelTests extends BaseTests {
 		addTestSuite(EditCommunityTest.class);
 		addTestSuite(DeleteTemporaryCommunityTest.class);
 		addTestSuite(DeleteInvalidCommunityTest.class);
+		addTestSuite(AddTemporaryLARCommunityTest.class);
+		addTestSuite(AssertNoLARCommunityContentTest.class);
+		addTestSuite(ImportCommunityLARTest.class);
+		addTestSuite(AssertCommunityLARImportTest.class);
 		addTestSuite(AddUserGroupTest.class);
 		addTestSuite(AddNullUserGroupNameTest.class);
 		addTestSuite(AddNumberUserGroupNameTest.class);
@@ -120,6 +124,7 @@ public class ControlPanelTests extends BaseTests {
 		addTestSuite(AddInvalidServerInstanceVHTest.class);
 		addTestSuite(AddNullServerInstanceMDTest.class);
 		addTestSuite(EditServerInstanceTest.class);
+
 		addTestSuite(TearDownTest.class);
 		addTestSuite(EndControlPanelTest.class);
 	}

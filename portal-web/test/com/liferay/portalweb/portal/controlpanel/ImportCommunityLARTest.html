@@ -4,23 +4,13 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>AddUserGroupTest</title>
+<title>ImportCommunityLARTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddUserGroupTest</td></tr>
+<tr><td rowspan="1" colspan="3">ImportCommunityLARTest</td></tr>
 </thead><tbody>
-<tr>
-	<td>store</td>
-	<td>eval(selenium.isElementPresent('link=User Groups'))</td>
-	<td>InControlPanel</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>${InControlPanel}</td>
-	<td>ToUserGroups</td>
-</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>my-community-private-pages</td>
@@ -32,48 +22,53 @@
 	<td></td>
 </tr>
 <tr>
-	<td>label</td>
-	<td>ToUserGroups</td>
+	<td>clickAndWait</td>
+	<td>link=Communities</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//tr[4]/td[6]/ul/li/strong/span</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=User Groups</td>
+	<td>//body/div[2]/ul/li[2]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=User Groups</td>
+	<td>//body/div[2]/ul/li[2]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Add</td>
+	<td>link=Export / Import</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Import</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>_127_name</td>
+	<td>_134_importFileName</td>
 	<td></td>
 </tr>
 <tr>
-	<td>typeKeys</td>
-	<td>_127_name</td>
-	<td>Selenium</td>
+	<td>type</td>
+	<td>_134_importFileName</td>
+	<td>L:\portal\build\portal-web\test\com\liferay\portalweb\portal\controlpanel\Community.Selenium.portlet.lar</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>_127_name</td>
-	<td>Selenium</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>_127_description</td>
-	<td>This is a selenium user group.</td>
+	<td>click</td>
+	<td>_134_PERMISSIONS</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Save']</td>
+	<td>//input[@value='Import']</td>
 	<td></td>
 </tr>
 <tr>

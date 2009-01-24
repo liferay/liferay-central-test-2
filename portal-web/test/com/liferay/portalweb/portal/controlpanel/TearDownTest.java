@@ -204,11 +204,54 @@ public class TearDownTest extends BaseTestCase {
 						"//input[@value='Search']"));
 				selenium.waitForPageToLoad("30000");
 
-				boolean CommunityPresent = selenium.isElementPresent(
+				boolean TestCommunityPresent = selenium.isElementPresent(
 						"//td[6]/ul/li/strong/span");
 
-				if (!CommunityPresent) {
+				if (!TestCommunityPresent) {
 					label = 4;
+
+					continue;
+				}
+
+				selenium.click("//td[6]/ul/li/strong/span");
+				selenium.click(RuntimeVariables.replace("link=Delete"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+				assertTrue(selenium.isTextPresent(
+						"Your request processed successfully."));
+
+			case 4:
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("_134_name")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.typeKeys("_134_name",
+					RuntimeVariables.replace("LAR Communit"));
+				selenium.type("_134_name",
+					RuntimeVariables.replace("LAR Community"));
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Search']"));
+				selenium.waitForPageToLoad("30000");
+
+				boolean SecondCommunityPresent = selenium.isElementPresent(
+						"//td[6]/ul/li/strong/span");
+
+				if (!SecondCommunityPresent) {
+					label = 5;
 
 					continue;
 				}
@@ -238,7 +281,7 @@ public class TearDownTest extends BaseTestCase {
 				assertTrue(selenium.isTextPresent(
 						"Your request processed successfully."));
 
-			case 4:
+			case 5:
 				selenium.click(RuntimeVariables.replace("link=User Groups"));
 				selenium.waitForPageToLoad("30000");
 
@@ -269,7 +312,7 @@ public class TearDownTest extends BaseTestCase {
 						"_127_rowIds");
 
 				if (!UserGroupPresent) {
-					label = 5;
+					label = 6;
 
 					continue;
 				}
@@ -283,7 +326,7 @@ public class TearDownTest extends BaseTestCase {
 				assertTrue(selenium.isTextPresent(
 						"Your request processed successfully."));
 
-			case 5:
+			case 6:
 				selenium.click(RuntimeVariables.replace(
 						"link=Password Policies"));
 				selenium.waitForPageToLoad("30000");
@@ -314,7 +357,7 @@ public class TearDownTest extends BaseTestCase {
 						"//td[3]/ul/li/strong/span");
 
 				if (!PasswordPolicyPresent) {
-					label = 6;
+					label = 7;
 
 					continue;
 				}
@@ -344,7 +387,7 @@ public class TearDownTest extends BaseTestCase {
 				assertTrue(selenium.isTextPresent(
 						"Your request processed successfully."));
 
-			case 6:
+			case 7:
 				selenium.click(RuntimeVariables.replace("link=Settings"));
 				selenium.waitForPageToLoad("30000");
 
@@ -382,7 +425,7 @@ public class TearDownTest extends BaseTestCase {
 						"//td[4]/ul/li/strong/span");
 
 				if (!EmailAddressPresent) {
-					label = 7;
+					label = 8;
 
 					continue;
 				}
@@ -414,14 +457,14 @@ public class TearDownTest extends BaseTestCase {
 				assertTrue(selenium.isTextPresent(
 						"Your request processed successfully."));
 
-			case 7:
+			case 8:
 				selenium.click("link=Addresses");
 
 				boolean AddressPresent = selenium.isElementPresent(
 						"//td[7]/ul/li/strong");
 
 				if (!AddressPresent) {
-					label = 8;
+					label = 9;
 
 					continue;
 				}
@@ -453,14 +496,14 @@ public class TearDownTest extends BaseTestCase {
 				assertTrue(selenium.isTextPresent(
 						"Your request processed successfully."));
 
-			case 8:
+			case 9:
 				selenium.click("link=Websites");
 
 				boolean WebsitePresent = selenium.isElementPresent(
 						"//td[4]/ul/li/strong/span");
 
 				if (!WebsitePresent) {
-					label = 9;
+					label = 10;
 
 					continue;
 				}
@@ -492,14 +535,14 @@ public class TearDownTest extends BaseTestCase {
 				assertTrue(selenium.isTextPresent(
 						"Your request processed successfully."));
 
-			case 9:
+			case 10:
 				selenium.click("link=Phone Numbers");
 
 				boolean PhoneNumberPresent = selenium.isElementPresent(
 						"//td[5]/ul/li/strong/span");
 
 				if (!PhoneNumberPresent) {
-					label = 10;
+					label = 11;
 
 					continue;
 				}
@@ -531,7 +574,7 @@ public class TearDownTest extends BaseTestCase {
 				assertTrue(selenium.isTextPresent(
 						"Your request processed successfully."));
 
-			case 10:
+			case 11:
 				selenium.click(RuntimeVariables.replace(
 						"link=Reserved Screen Names"));
 				selenium.waitForPageToLoad("30000");
@@ -600,7 +643,7 @@ public class TearDownTest extends BaseTestCase {
 						"_137_logLevelCategoryTest!");
 
 				if (!CategoryPresent) {
-					label = 11;
+					label = 12;
 
 					continue;
 				}
@@ -613,7 +656,7 @@ public class TearDownTest extends BaseTestCase {
 				assertTrue(selenium.isTextPresent(
 						"Your request processed successfully."));
 
-			case 11:
+			case 12:
 			case 100:
 				label = -1;
 			}
