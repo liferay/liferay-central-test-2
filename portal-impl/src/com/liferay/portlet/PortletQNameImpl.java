@@ -139,6 +139,8 @@ public class PortletQNameImpl implements PortletQName {
 			return null;
 		}
 
+		localPart = localPart.substring(prefix.length() + 1);
+
 		return SAXReaderUtil.createQName(localPart, namespace);
 	}
 
