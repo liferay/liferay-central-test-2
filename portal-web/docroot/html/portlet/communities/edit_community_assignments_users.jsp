@@ -83,7 +83,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_community_assignm
 
 		<liferay-ui:search-container-column-text
 			name="screen-name"
-			orderable="true"
+			orderable="<%= true %>"
 			property="screenName"
 		/>
 

@@ -96,7 +96,7 @@ int userIdsPos = ParamUtil.getInteger(request, "userIdsPos");
 
 				<liferay-ui:search-container-column-text
 					name="screen-name"
-					orderable="true"
+					orderable="<%= true %>"
 					property="screenName"
 				/>
 
