@@ -60,7 +60,12 @@ public class DynamicQueryFactoryImpl implements DynamicQueryFactory {
 
 			if (clazz == null) {
 				try {
-					clazz = Class.forName(implClassName);
+					Thread currentThread = Thread.currentThread();
+
+					ClassLoader contextClassLoader =
+						currentThread.getContextClassLoader();
+
+					clazz = contextClassLoader.loadClass(implClassName);
 
 					_classMap.put(implClassName, clazz);
 				}
