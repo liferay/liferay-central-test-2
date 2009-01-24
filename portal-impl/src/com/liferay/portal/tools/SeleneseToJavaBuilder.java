@@ -260,9 +260,9 @@ public class SeleneseToJavaBuilder {
 				sb.append("\"));");
 			}
 			else if (param1.equals("assertChecked")) {
-				sb.append("assertTrue(selenium.isChecked(");
+				sb.append("assertTrue(selenium.isChecked(\"");
 				sb.append(param2);
-				sb.append("));");
+				sb.append("\"));");
 			}
 			else if (param1.equals("assertConfirmation")) {
 				param2 = StringUtil.replace(param2, "?", "[\\\\s\\\\S]");
@@ -271,17 +271,33 @@ public class SeleneseToJavaBuilder {
 				sb.append(param2);
 				sb.append("$\"));");
 			}
-			else if (param1.equals("assertElementPresent") ||
-					 param1.equals("assertElementNotPresent")) {
+			else if (param1.equals("assertElementNotPresent") ||
+					 param1.equals("assertElementPresent")) {
 
-				if (param1.equals("assertElementPresent")) {
-					sb.append("assertTrue");
-				}
-				else if (param1.equals("assertElementNotPresent")) {
+				if (param1.equals("assertElementNotPresent")) {
 					sb.append("assertFalse");
+				}
+				else if (param1.equals("assertElementPresent")) {
+					sb.append("assertTrue");
 				}
 
 				sb.append("(selenium.isElementPresent(\"");
+				sb.append(param2);
+				sb.append("\"));");
+			}
+			else if (param1.equals("assertNotText") ||
+					 param1.equals("assertText")) {
+
+				if (param1.equals("assertNotText")) {
+					sb.append("assertNotEquals");
+				}
+				else if (param1.equals("assertText")) {
+					sb.append("assertEquals");
+				}
+
+				sb.append("(\"");
+				sb.append(param3);
+				sb.append("\", selenium.getText(\"");
 				sb.append(param2);
 				sb.append("\"));");
 			}
@@ -305,14 +321,14 @@ public class SeleneseToJavaBuilder {
 					sb.append("]);");
 				}
 			}
-			else if (param1.equals("assertTextPresent") ||
-					 param1.equals("assertTextNotPresent")) {
+			else if (param1.equals("assertTextNotPresent") ||
+					 param1.equals("assertTextPresent")) {
 
-				if (param1.equals("assertTextPresent")) {
-					sb.append("assertTrue");
-				}
-				else if (param1.equals("assertTextNotPresent")) {
+				if (param1.equals("assertTextNotPresent")) {
 					sb.append("assertFalse");
+				}
+				else if (param1.equals("assertTextPresent")) {
+					sb.append("assertTrue");
 				}
 
 				sb.append("(selenium.isTextPresent(\"");
@@ -415,28 +431,28 @@ public class SeleneseToJavaBuilder {
 				sb.append(param3);
 				sb.append(");");
 			}
-			else if (param1.equals("verifyElementPresent") ||
-					 param1.equals("verifyElementNotPresent")) {
+			else if (param1.equals("verifyElementNotPresent") ||
+					 param1.equals("verifyElementPresent")) {
 
-				if (param1.equals("verifyElementPresent")) {
-					sb.append("verifyTrue");
-				}
-				else if (param1.equals("verifyElementNotPresent")) {
+				if (param1.equals("verifyElementNotPresent")) {
 					sb.append("verifyFalse");
+				}
+				else if (param1.equals("verifyElementPresent")) {
+					sb.append("verifyTrue");
 				}
 
 				sb.append("(selenium.isElementPresent(\"");
 				sb.append(param2);
 				sb.append("\"));");
 			}
-			else if (param1.equals("verifyTextPresent") ||
-					 param1.equals("verifyTextNotPresent")) {
+			else if (param1.equals("verifyTextNotPresent") ||
+					 param1.equals("verifyTextPresent")) {
 
-				if (param1.equals("verifyTextPresent")) {
-					sb.append("verifyTrue");
-				}
-				else if (param1.equals("verifyTextNotPresent")) {
+				if (param1.equals("verifyTextNotPresent")) {
 					sb.append("verifyFalse");
+				}
+				else if (param1.equals("verifyTextPresent")) {
+					sb.append("verifyTrue");
 				}
 
 				sb.append("(selenium.isTextPresent(\"");
