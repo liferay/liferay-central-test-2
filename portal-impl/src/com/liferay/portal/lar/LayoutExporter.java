@@ -101,9 +101,32 @@ import org.apache.commons.lang.time.StopWatch;
  */
 public class LayoutExporter {
 
-	public static String[] ALWAYS_EXPORT_PORTLET_IDS = {
-		PortletKeys.JOURNAL, PortletKeys.POLLS
-	};
+	public static List<Portlet> getAlwaysExportablePortlets(long companyId)
+		throws SystemException {
+
+		List<Portlet> portlets = PortletLocalServiceUtil.getPortlets(companyId);
+
+		Iterator<Portlet> itr = portlets.iterator();
+
+		while (itr.hasNext()) {
+			Portlet portlet = itr.next();
+
+			if (!portlet.isActive()) {
+				itr.remove();
+			}
+
+			PortletDataHandler portletDataHandler =
+				portlet.getPortletDataHandlerInstance();
+
+			if ((portletDataHandler == null) ||
+				(!portletDataHandler.isAlwaysExportable())) {
+
+				itr.remove();
+			}
+		}
+
+		return portlets;
+	}
 
 	public byte[] exportLayouts(
 			long groupId, boolean privateLayout, long[] layoutIds,
@@ -341,13 +364,11 @@ public class LayoutExporter {
 				}
 			}
 
-			for (String portletId : ALWAYS_EXPORT_PORTLET_IDS) {
-				Portlet portlet = PortletLocalServiceUtil.getPortletById(
-					context.getCompanyId(), portletId);
+			List<Portlet> portlets = getAlwaysExportablePortlets(
+				context.getCompanyId());
 
-				if (!portlet.isActive()) {
-					continue;
-				}
+			for (Portlet portlet : portlets) {
+				String portletId = portlet.getRootPortletId();
 
 				if (portlet.isScopeable() && layout.hasScopeGroup()) {
 					String key = PortletPermissionUtil.getPrimaryKey(

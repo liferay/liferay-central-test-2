@@ -30,9 +30,9 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.lar.BasePortletDataHandler;
 import com.liferay.portal.lar.PortletDataContext;
 import com.liferay.portal.lar.PortletDataException;
-import com.liferay.portal.lar.PortletDataHandler;
 import com.liferay.portal.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.lar.PortletDataHandlerControl;
 import com.liferay.portal.model.Layout;
@@ -92,7 +92,7 @@ import javax.portlet.PortletPreferences;
  *
  */
 public class JournalContentPortletDataHandlerImpl
-	implements PortletDataHandler {
+	extends BasePortletDataHandler {
 
 	public PortletPreferences deleteData(
 			PortletDataContext context, String portletId,
@@ -406,8 +406,10 @@ public class JournalContentPortletDataHandlerImpl
 	}
 
 	public boolean isPublishToLiveByDefault() {
-		return true;
+		return 	_PUBLISH_TO_LIVE_BY_DEFAULT;
 	}
+
+	private static final boolean _PUBLISH_TO_LIVE_BY_DEFAULT = true;
 
 	private static final String _NAMESPACE = "journal";
 

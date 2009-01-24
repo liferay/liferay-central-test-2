@@ -68,11 +68,13 @@ while (itr1.hasNext()) {
 	}
 }
 
-for (String curPortletId : LayoutExporter.ALWAYS_EXPORT_PORTLET_IDS) {
-	Portlet curPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), curPortletId);
+List<Portlet> alwaysExportablePortlets = LayoutExporter.getAlwaysExportablePortlets(company.getCompanyId());
 
-	if (curPortlet.isActive()) {
-		portletsList.add(curPortlet);
+for (Portlet alwaysExportablePortlet : alwaysExportablePortlets) {
+	if (!portletIdsSet.contains(alwaysExportablePortlet.getRootPortletId())) {
+		portletIdsSet.add(alwaysExportablePortlet.getRootPortletId());
+
+		portletsList.add(alwaysExportablePortlet);
 	}
 }
 

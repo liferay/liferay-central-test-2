@@ -36,7 +36,7 @@ import javax.portlet.PortletPreferences;
  * section of the <b>liferay-portlet.xml</b> file.
  * </p>
  *
- * @author Raymond Aug�
+ * @author Raymond Augé
  * @author Joel Kozikowski
  * @author Bruno Farache
  *
@@ -118,6 +118,15 @@ public interface PortletDataHandler {
 			PortletDataContext context, String portletId,
 			PortletPreferences preferences, String data)
 		throws PortletDataException;
+
+	/**
+	 * Returns true to allow the user to export data for this portlet even
+	 * though it may not belong to any pages. See LPS-1624.
+	 *
+	 * @return		true to allow the user to export data for this portlet even
+	 *				though it may not belong to any pages
+	 */
+	public boolean isAlwaysExportable();
 
 	/**
 	 * Returns whether the data exported by this handler should be included

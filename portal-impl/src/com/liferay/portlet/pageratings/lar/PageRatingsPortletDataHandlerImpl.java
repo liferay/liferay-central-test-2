@@ -23,9 +23,9 @@
 package com.liferay.portlet.pageratings.lar;
 
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.lar.BasePortletDataHandler;
 import com.liferay.portal.lar.PortletDataContext;
 import com.liferay.portal.lar.PortletDataException;
-import com.liferay.portal.lar.PortletDataHandler;
 import com.liferay.portal.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.lar.PortletDataHandlerControl;
 import com.liferay.portal.model.Layout;
@@ -40,7 +40,7 @@ import javax.portlet.PortletPreferences;
  * @author Bruno Farache
  *
  */
-public class PageRatingsPortletDataHandlerImpl implements PortletDataHandler {
+public class PageRatingsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	public PortletPreferences deleteData(
 			PortletDataContext context, String portletId,
@@ -97,10 +97,6 @@ public class PageRatingsPortletDataHandlerImpl implements PortletDataHandler {
 		catch (Exception e) {
 			throw new PortletDataException(e);
 		}
-	}
-
-	public boolean isPublishToLiveByDefault() {
-		return false;
 	}
 
 	private static final String _NAMESPACE = "page_ratings";

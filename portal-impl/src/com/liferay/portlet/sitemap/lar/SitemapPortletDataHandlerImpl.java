@@ -23,9 +23,9 @@
 package com.liferay.portlet.sitemap.lar;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.lar.BasePortletDataHandler;
 import com.liferay.portal.lar.PortletDataContext;
 import com.liferay.portal.lar.PortletDataException;
-import com.liferay.portal.lar.PortletDataHandler;
 import com.liferay.portal.lar.PortletDataHandlerControl;
 
 import javax.portlet.PortletPreferences;
@@ -37,7 +37,7 @@ import javax.portlet.PortletPreferences;
  * @author Bruno Farache
  *
  */
-public class SitemapPortletDataHandlerImpl implements PortletDataHandler {
+public class SitemapPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	public PortletPreferences deleteData(
 			PortletDataContext context, String portletId,
@@ -79,7 +79,9 @@ public class SitemapPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	public boolean isPublishToLiveByDefault() {
-		return true;
+		return _PUBLISH_TO_LIVE_BY_DEFAULT;
 	}
+
+	private static final boolean _PUBLISH_TO_LIVE_BY_DEFAULT = true;
 
 }

@@ -31,9 +31,9 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.lar.BasePortletDataHandler;
 import com.liferay.portal.lar.PortletDataContext;
 import com.liferay.portal.lar.PortletDataException;
-import com.liferay.portal.lar.PortletDataHandler;
 import com.liferay.portal.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.lar.PortletDataHandlerControl;
 import com.liferay.portal.lar.PortletDataHandlerKeys;
@@ -74,7 +74,7 @@ import javax.portlet.PortletPreferences;
  * @author Raymond Augé
  *
  */
-public class DLPortletDataHandlerImpl implements PortletDataHandler {
+public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	public static void exportFileEntry(
 			PortletDataContext context, Element foldersEl,
@@ -551,10 +551,6 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		catch (Exception e) {
 			throw new PortletDataException(e);
 		}
-	}
-
-	public boolean isPublishToLiveByDefault() {
-		return false;
 	}
 
 	protected static void exportFileRank(

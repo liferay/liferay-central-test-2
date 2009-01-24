@@ -30,9 +30,9 @@ import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.lar.BasePortletDataHandler;
 import com.liferay.portal.lar.PortletDataContext;
 import com.liferay.portal.lar.PortletDataException;
-import com.liferay.portal.lar.PortletDataHandler;
 import com.liferay.portal.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.lar.PortletDataHandlerControl;
 import com.liferay.portal.lar.PortletDataHandlerKeys;
@@ -66,7 +66,7 @@ import javax.portlet.PortletPreferences;
  * @author Bruno Farache
  *
  */
-public class PollsPortletDataHandlerImpl implements PortletDataHandler {
+public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	public PortletPreferences deleteData(
 			PortletDataContext context, String portletId,
@@ -201,8 +201,8 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	public boolean isPublishToLiveByDefault() {
-		return false;
+	public boolean isAlwaysExportable() {
+		return _ALWAYS_EXPORTABLE;
 	}
 
 	protected void exportChoice(
@@ -466,6 +466,8 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 		return sb.toString();
 	}
+
+	private static final boolean _ALWAYS_EXPORTABLE = true;
 
 	private static final String _NAMESPACE = "polls";
 

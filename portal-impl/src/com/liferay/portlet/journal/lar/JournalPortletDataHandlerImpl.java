@@ -37,9 +37,9 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.lar.BasePortletDataHandler;
 import com.liferay.portal.lar.PortletDataContext;
 import com.liferay.portal.lar.PortletDataException;
-import com.liferay.portal.lar.PortletDataHandler;
 import com.liferay.portal.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.lar.PortletDataHandlerControl;
 import com.liferay.portal.lar.PortletDataHandlerKeys;
@@ -117,7 +117,7 @@ import javax.portlet.PortletPreferences;
  * @see com.liferay.portlet.journal.lar.JournalCreationStrategy
  *
  */
-public class JournalPortletDataHandlerImpl implements PortletDataHandler {
+public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	public static void exportArticle(
 			PortletDataContext context, Element articlesEl, Element dlFoldersEl,
@@ -1490,8 +1490,12 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
+	public boolean isAlwaysExportable() {
+		return _ALWAYS_EXPORTABLE;
+	}
+
 	public boolean isPublishToLiveByDefault() {
-		return true;
+		return _PUBLISH_TO_LIVE_BY_DEFAULT;
 	}
 
 	protected static String getArticlePath(
@@ -1644,6 +1648,10 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 		return sb.toString();
 	}
+
+	private static final boolean _ALWAYS_EXPORTABLE = true;
+
+	private static final boolean _PUBLISH_TO_LIVE_BY_DEFAULT = true;
 
 	private static final String _NAMESPACE = "journal";
 
