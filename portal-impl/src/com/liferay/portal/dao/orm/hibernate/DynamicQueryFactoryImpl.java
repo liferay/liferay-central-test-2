@@ -44,13 +44,31 @@ public class DynamicQueryFactoryImpl implements DynamicQueryFactory {
 		return new DynamicQueryImpl(DetachedCriteria.forClass(clazz));
 	}
 
+	public DynamicQuery forClass(Class clazz, ClassLoader classLoader) {
+		clazz = getImplClass(clazz, classLoader);
+
+		return new DynamicQueryImpl(DetachedCriteria.forClass(clazz));
+	}
+
 	public DynamicQuery forClass(Class clazz, String alias) {
 		clazz = getImplClass(clazz);
 
 		return new DynamicQueryImpl(DetachedCriteria.forClass(clazz, alias));
 	}
 
+	public DynamicQuery forClass(
+		Class clazz, String alias, ClassLoader classLoader) {
+
+		clazz = getImplClass(clazz, classLoader);
+
+		return new DynamicQueryImpl(DetachedCriteria.forClass(clazz, alias));
+	}
+
 	protected Class getImplClass(Class clazz) {
+		return getImplClass(clazz, null);
+	}
+
+	protected Class getImplClass(Class clazz, ClassLoader classLoader) {
 		if (!clazz.getName().endsWith("Impl")) {
 			String implClassName =
 				clazz.getPackage().getName() + ".impl." +
@@ -60,12 +78,13 @@ public class DynamicQueryFactoryImpl implements DynamicQueryFactory {
 
 			if (clazz == null) {
 				try {
-					Thread currentThread = Thread.currentThread();
+					if (classLoader == null) {
+						Thread currentThread = Thread.currentThread();
 
-					ClassLoader contextClassLoader =
-						currentThread.getContextClassLoader();
+						classLoader = currentThread.getContextClassLoader();
+					}
 
-					clazz = contextClassLoader.loadClass(implClassName);
+					clazz = classLoader.loadClass(implClassName);
 
 					_classMap.put(implClassName, clazz);
 				}

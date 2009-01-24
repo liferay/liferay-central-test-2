@@ -34,8 +34,20 @@ public class DynamicQueryFactoryUtil {
 		return getDynamicQueryFactory().forClass(clazz);
 	}
 
+	public static DynamicQuery forClass(
+		Class<?> clazz, ClassLoader classLoader) {
+
+		return getDynamicQueryFactory().forClass(clazz, classLoader);
+	}
+
 	public static DynamicQuery forClass(Class<?> clazz, String alias) {
 		return getDynamicQueryFactory().forClass(clazz, alias);
+	}
+
+	public static DynamicQuery forClass(
+		Class<?> clazz, String alias, ClassLoader classLoader) {
+
+		return getDynamicQueryFactory().forClass(clazz, alias, classLoader);
 	}
 
 	public static DynamicQueryFactory getDynamicQueryFactory() {
