@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<project name="portal-dist" basedir="." default="dist">
+<project name="portal-dist" basedir="." default="dist" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build.xml" />
 
 	<target name="deploy-plugins">
@@ -667,17 +667,41 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip</
 	</target>
 
 	<target name="zip-executable">
+		<antelope:stringutil string="${zip.executable.dir}" property="zip.executable.dir.beginindex">
+			<lastindexof string="/" />
+		</antelope:stringutil>
+
+		<math
+			datatype="int"
+			operand1="${zip.executable.dir.beginindex}"
+			operand2="1"
+			operation="+"
+			result="zip.executable.dir.beginindex"
+		/>
+
+		<antelope:stringutil string="${zip.executable.dir}" property="zip.executable.dir.name">
+			<substring beginindex="${zip.executable.dir.beginindex}" />
+		</antelope:stringutil>
+
 		<zip destfile="dist/${zip.executable.file}-${lp.version}.zip">
 			<zipfileset
 				dir="${zip.executable.dir}"
 				excludes="**/*.sh"
-				prefix="${zip.executable.file}-${lp.version}"
+				prefix="liferay-portal-${lp.version}/${zip.executable.dir.name}"
 			/>
 			<zipfileset
 				dir="${zip.executable.dir}"
 				filemode="744"
 				includes="**/*.sh"
-				prefix="${zip.executable.file}-${lp.version}"
+				prefix="liferay-portal-${lp.version}/${zip.executable.dir.name}"
+			/>
+			<zipfileset
+				dir="${zip.executable.dir}/../data"
+				prefix="liferay-portal-${lp.version}/data"
+			/>
+			<zipfileset
+				dir="tools/zip_tmpl"
+				prefix="liferay-portal-${lp.version}"
 			/>
 		</zip>
 	</target>
