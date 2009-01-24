@@ -751,6 +751,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>global/annotations.jar</file-name>
+		<version>1.0</version>
+		<project-name>Common Annotations</project-name>
+		<project-url>http://jsr250.dev.java.net</project-url>
+		<licenses>
+			<license>
+				<license-name>CDDL 1.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>global/container.jar</file-name>
 		<version>2.0 (trunk 817)</version>
 		<project-name>Portlet Container</project-name>
@@ -802,17 +813,6 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>portal/annotations.jar</file-name>
-		<version>1.0</version>
-		<project-name>Common Annotations</project-name>
-		<project-url>http://jsr250.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>CDDL 1.0</license-name>
 			</license>
 		</licenses>
 	</library>
