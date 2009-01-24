@@ -158,51 +158,57 @@ public class PortletRequestUtil {
 
 		PortletSession portletSession = portletRequest.getPortletSession();
 
-		enu = portletSession.getAttributeNames(PortletSession.PORTLET_SCOPE);
+		try {
+			enu = portletSession.getAttributeNames(
+				PortletSession.PORTLET_SCOPE);
 
-		while (enu.hasMoreElements()) {
-			String name = enu.nextElement();
+			while (enu.hasMoreElements()) {
+				String name = enu.nextElement();
 
-			if (!_isValidAttributeName(name)) {
-				continue;
+				if (!_isValidAttributeName(name)) {
+					continue;
+				}
+
+				Object value = portletSession.getAttribute(
+					name, PortletSession.PORTLET_SCOPE);
+
+				if (!_isValidAttributeValue(value)) {
+					continue;
+				}
+
+				Element attributeEl = attributesEl.addElement("attribute");
+
+				DocUtil.add(attributeEl, "name", name);
+				DocUtil.add(attributeEl, "value", String.valueOf(value));
 			}
 
-			Object value = portletSession.getAttribute(
-				name, PortletSession.PORTLET_SCOPE);
+			attributesEl = portletSessionEl.addElement(
+				"application-attributes");
 
-			if (!_isValidAttributeValue(value)) {
-				continue;
+			enu = portletSession.getAttributeNames(
+				PortletSession.APPLICATION_SCOPE);
+
+			while (enu.hasMoreElements()) {
+				String name = enu.nextElement();
+
+				if (!_isValidAttributeName(name)) {
+					continue;
+				}
+
+				Object value = portletSession.getAttribute(
+					name, PortletSession.APPLICATION_SCOPE);
+
+				if (!_isValidAttributeValue(value)) {
+					continue;
+				}
+
+				Element attributeEl = attributesEl.addElement("attribute");
+
+				DocUtil.add(attributeEl, "name", name);
+				DocUtil.add(attributeEl, "value", String.valueOf(value));
 			}
-
-			Element attributeEl = attributesEl.addElement("attribute");
-
-			DocUtil.add(attributeEl, "name", name);
-			DocUtil.add(attributeEl, "value", String.valueOf(value));
 		}
-
-		attributesEl = portletSessionEl.addElement("application-attributes");
-
-		enu = portletSession.getAttributeNames(
-			PortletSession.APPLICATION_SCOPE);
-
-		while (enu.hasMoreElements()) {
-			String name = enu.nextElement();
-
-			if (!_isValidAttributeName(name)) {
-				continue;
-			}
-
-			Object value = portletSession.getAttribute(
-				name, PortletSession.APPLICATION_SCOPE);
-
-			if (!_isValidAttributeValue(value)) {
-				continue;
-			}
-
-			Element attributeEl = attributesEl.addElement("attribute");
-
-			DocUtil.add(attributeEl, "name", name);
-			DocUtil.add(attributeEl, "value", String.valueOf(value));
+		catch (IllegalStateException ise) {
 		}
 
 		try {
