@@ -30,6 +30,8 @@ package com.liferay.portal.util;
  */
 public class PortletKeys {
 
+	public static final String ACTIVITIES = "116";
+
 	public static final String ADMIN = "9";
 
 	public static final String ADMIN_INSTANCE = "135";
@@ -45,6 +47,8 @@ public class PortletKeys {
 	public static final String BOOKMARKS = "28";
 
 	public static final String BLOGS = "33";
+
+	public static final String BLOGS_AGGREGATOR = "115";
 
 	public static final String CALENDAR = "8";
 
@@ -77,6 +81,8 @@ public class PortletKeys {
 	public static final String ENTERPRISE_ADMIN_USERS = "125";
 
 	public static final String EXPANDO = "139";
+
+	public static final String IFRAME = "48";
 
 	public static final String IMAGE_GALLERY = "31";
 
@@ -141,6 +147,12 @@ public class PortletKeys {
 	public static final int PREFS_OWNER_TYPE_ORGANIZATION  = 6;
 
 	public static final long PREFS_PLID_SHARED = 0;
+
+	public static final String RECENT_BLOGGERS = "114";
+
+	public static final String RECENT_DOCUMENTS = "64";
+
+	public static final String REQUESTS = "121";
 
 	public static final String SEARCH = "3";
 
