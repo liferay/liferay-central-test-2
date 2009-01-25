@@ -57,7 +57,7 @@ public class ServiceTestSuite extends TestSuite {
 	public ServiceTestSuite() {
 		InitUtil.initWithSpring();
 
-		FileUtil.deltree(PropsValues.LIFERAY_HOME + "/data);
+		FileUtil.deltree(PropsValues.LIFERAY_HOME + "/data");
 
 		// JCR
 
