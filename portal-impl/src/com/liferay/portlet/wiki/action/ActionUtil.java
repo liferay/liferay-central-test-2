@@ -32,6 +32,7 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsKeys;
@@ -44,6 +45,7 @@ import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
+import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
 import com.liferay.portlet.wiki.util.WikiUtil;
 
@@ -193,8 +195,15 @@ public class ActionUtil {
 			if (title.equals(WikiPageImpl.FRONT_PAGE) && (version == 0)) {
 				ServiceContext serviceContext = new ServiceContext();
 
-				page = WikiPageServiceUtil.addPage(
-					nodeId, title, null, WikiPageImpl.NEW, true,
+				long userId = PortalUtil.getUserId(request);
+
+				if (userId == 0) {
+					userId = UserLocalServiceUtil.getDefaultUserId(
+						PortalUtil.getCompanyId(request));
+				}
+
+				page = WikiPageLocalServiceUtil.addPage(
+					userId, nodeId, title, null, WikiPageImpl.NEW, true,
 					serviceContext);
 			}
 			else {
