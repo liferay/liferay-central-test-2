@@ -140,7 +140,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		PortletApp portletApp = portlet.getPortletApp();
 
-		_portletAppsPool.remove(portletApp.getServletContextName());
+		if (portletApp != null) {
+			_portletAppsPool.remove(portletApp.getServletContextName());
+		}
 
 		_clearCaches();
 	}
