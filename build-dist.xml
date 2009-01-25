@@ -194,7 +194,7 @@
 		<replace
 			file="${app.server.glassfish.dir}/lib/install/templates/default-domain.xml.template"
 			token="&lt;jvm-options&gt;-Xmx512m&lt;/jvm-options&gt;"
-			value="&lt;jvm-options&gt;-Xmx768m&lt;/jvm-options&gt;&lt;jvm-options&gt;-XX:MaxPermSize=256m&lt;/jvm-options&gt;"
+			value="&lt;jvm-options&gt;-Xmx1024m&lt;/jvm-options&gt;&lt;jvm-options&gt;-XX:MaxPermSize=256m&lt;/jvm-options&gt;"
 		/>
 
 		<ant antfile="setup.xml" target="build-jarinstaller-pe" dir="${app.server.glassfish.installer.dir}" >
@@ -335,7 +335,7 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 		<replace
 			file="${app.server.parent.dir}/glassfishv3-prelude/glassfish/domains/domain1/config/domain.xml"
 			token="&lt;jvm-options&gt;-Xmx512m&lt;/jvm-options&gt;"
-			value="&lt;jvm-options&gt;-Xmx768m&lt;/jvm-options&gt;&lt;jvm-options&gt;-XX:MaxPermSize=256m&lt;/jvm-options&gt;"
+			value="&lt;jvm-options&gt;-Xmx1024m&lt;/jvm-options&gt;&lt;jvm-options&gt;-XX:MaxPermSize=256m&lt;/jvm-options&gt;"
 		/>
 
 		<replace
