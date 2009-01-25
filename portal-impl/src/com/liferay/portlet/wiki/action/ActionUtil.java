@@ -44,8 +44,8 @@ import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
-import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
+import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
 import com.liferay.portlet.wiki.util.WikiUtil;
 
@@ -193,14 +193,15 @@ public class ActionUtil {
 		}
 		catch (NoSuchPageException nspe) {
 			if (title.equals(WikiPageImpl.FRONT_PAGE) && (version == 0)) {
-				ServiceContext serviceContext = new ServiceContext();
-
 				long userId = PortalUtil.getUserId(request);
 
 				if (userId == 0) {
-					userId = UserLocalServiceUtil.getDefaultUserId(
-						PortalUtil.getCompanyId(request));
+					long companyId = PortalUtil.getCompanyId(request);
+
+					userId = UserLocalServiceUtil.getDefaultUserId(companyId);
 				}
+
+				ServiceContext serviceContext = new ServiceContext();
 
 				page = WikiPageLocalServiceUtil.addPage(
 					userId, nodeId, title, null, WikiPageImpl.NEW, true,
