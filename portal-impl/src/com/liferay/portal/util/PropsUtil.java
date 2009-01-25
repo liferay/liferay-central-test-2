@@ -135,7 +135,7 @@ public class PropsUtil {
 		}
 		else if (ServerDetector.isGlassfish()) {
 			defaultLiferayHome =
-				SystemProperties.get("com.sun.aas.instanceRoot") + "/..";
+				SystemProperties.get("com.sun.aas.installRoot") + "/..";
 		}
 		else if (ServerDetector.isJBoss()) {
 			defaultLiferayHome =
