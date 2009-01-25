@@ -933,6 +933,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip</
 
 		<delete dir="${lp.plugins.dir}/dist" />
 
+		<ant dir="${lp.plugins.dir}/hooks/sevencogs-hook" target="all" inheritAll="false" />
 		<ant dir="${lp.plugins.dir}/portlets/chat-portlet" target="all" inheritAll="false" />
 		<ant dir="${lp.plugins.dir}/portlets/google-maps-portlet" target="all" inheritAll="false" />
 		<ant dir="${lp.plugins.dir}/portlets/mail-portlet" target="all" inheritAll="false" />
