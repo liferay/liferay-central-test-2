@@ -75,7 +75,6 @@
 						<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
 						<equals arg1="${app.server.type}" arg2="jonas-jetty" />
 						<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
-						<equals arg1="${app.server.type}" arg2="pramati" />
 					</or>
 					<then>
 						<property name="war.file.dest" value="${app.server.deploy.dir}/${war.file}.war" />
@@ -127,10 +126,7 @@
 
 		<if>
 			<and>
-				<or>
-					<equals arg1="${app.server.type}" arg2="glassfish" />
-					<equals arg1="${app.server.type}" arg2="pramati" />
-				</or>
+				<equals arg1="${app.server.type}" arg2="glassfish" />
 				<available file="${war.file.dest}" type="dir" />
 				<not>
 					<equals arg1="${war.file}" arg2="portal-web" />

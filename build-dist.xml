@@ -466,106 +466,6 @@ app.server.jboss-tomcat.lib.global.dir=$${app.server.jboss-tomcat.instance.dir}/
 		</antcall>
 	</target>
 
-	<target name="build-dist-pramati">
-		<delete dir="${app.server.pramati.dir}" />
-
-		<copy file="tools/servers/pramati/silent_install.xml.template" tofile="silent_install.xml" overwrite="yes">
-			<filterset>
-				<filter token="install.path" value="${app.server.pramati.dir}" />
-				<filter token="java.home" value="${env.JAVA_HOME}" />
-			</filterset>
-		</copy>
-
-		<java jar="${app.server.parent.dir}/PServer50.jar" fork="true">
-			<arg value="-silent" />
-			<arg value="silent_install.xml" />
-		</java>
-
-		<delete file="silent_install.xml" />
-
-		<replace
-			file="${app.server.pramati.dir}/server/templates/deploy-config.xml"
-			token="poll-interval-seconds>5"
-			value="poll-interval-seconds>15"
-		/>
-
-		<exec dir="${app.server.pramati.dir}/server/bin" executable="nodecreator.bat" resolveexecutable="true">
-			<arg value="-createj2ee" />
-			<arg value="-name" />
-			<arg value="liferay" />
-			<arg value="-ip" />
-			<arg value="localhost" />
-			<arg value="-namingport" />
-			<arg value="9191" />
-			<arg value="-httpport" />
-			<arg value="8080" />
-		</exec>
-
-		<copy
-			file="${app.server.pramati.dir}/server/bin/runserver.bat"
-			tofile="${app.server.pramati.dir}/server/bin/runliferay.bat"
-		/>
-
-		<replace file="${app.server.pramati.dir}/server/bin/runliferay.bat">
-			<replacefilter
-				token="-server"
-				value="-Xmx768m -XX:MaxPermSize=128m -server"
-			/>
-			<replacefilter
-				token="com.pramati.Server"
-				value="com.pramati.Server -node liferay"
-			/>
-		</replace>
-
-		<delete dir="${app.server.pramati.dir}/server/lf" />
-
-		<copy todir="${app.server.pramati.dir}/server" overwrite="yes">
-			<fileset dir="tools/servers/pramati/server" />
-		</copy>
-
-		<echo file="app.server.${user.name}.properties">app.server.type=pramati</echo>
-
-		<antcall target="deploy" inheritAll="false" />
-
-		<delete file="app.server.${user.name}.properties" />
-
-		<antcall target="deploy-plugins">
-			<param name="deployer.dest.dir" value="${app.server.pramati.deploy.dir}" />
-			<param name="deployer.app.server.type" value="pramati" />
-			<param name="deployer.app.server.lib.portal.dir" value="${app.server.pramati.lib.portal.dir}" />
-		</antcall>
-
-		<parallel>
-			<exec dir="${app.server.pramati.bin.dir}" executable="runliferay.bat" resolveexecutable="true" />
-
-			<sequential>
-				<sleep seconds="300" />
-
-				<copy
-					file="tools/servers/pramati/stop.txt"
-					todir="${app.server.pramati.bin.dir}"
-				/>
-
-				<exec dir="${app.server.pramati.bin.dir}" executable="remoteshell.bat" resolveexecutable="true">
-					<arg value="-file" />
-					<arg value="stop.txt" />
-				</exec>
-
-				<sleep seconds="30" />
-
-				<delete file="${app.server.pramati.bin.dir}/stop.txt" />
-			</sequential>
-		</parallel>
-
-		<delete dir="${app.server.pramati.dir}/server/lf" />
-
-		<copy
-			file="tools/servers/pramati/server/license.key"
-			todir="${app.server.pramati.dir}/server"
-			overwrite="yes"
-		/>
-	</target>
-
 	<target name="build-dist-resin">
 		<delete dir="${app.server.resin.dir}" />
 
@@ -952,74 +852,6 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip</
 		<delete dir="${tstamp.value}" />
 	</target>
 
-	<target name="zip-pramati">
-		<delete file="dist/liferay-portal-pramati-${lp.version}.zip" failonerror="false" />
-
-		<zip
-			basedir="${app.server.pramati.dir}"
-			destfile="dist/liferay-portal-pramati-${lp.version}.zip"
-			excludes="server/nodes/liferay/archives/autodeploy/*.war"
-		/>
-
-		<taskdef
-			classname="org.tp23.antinstaller.taskdefs.Installer"
-			classpathref="project.classpath"
-			name="installer"
-		/>
-
-		<delete file="dist/liferay-portal-pramati-${lp.version}.jar" failonerror="false" />
-
-		<copy file="tools/installer/pramati/installer-config.xml.template" tofile="tools/installer/pramati/installer-config.xml" overwrite="yes">
-			<filterset>
-				<filter token="lp.version" value="${lp.version}" />
-			</filterset>
-		</copy>
-
-		<pathconvert
-			property="java.home.path.unix"
-			targetos="unix"
-		>
-			<path>
-				<pathelement location="${env.JAVA_HOME}" />
-			</path>
-		</pathconvert>
-
-		<copy file="tools/installer/pramati/installer-build.properties.template" tofile="tools/installer/pramati/installer-build.properties" overwrite="yes">
-			<filterset>
-				<filter token="app.server.pramati.dir" value="${app.server.pramati.dir}" />
-				<filter token="java.home" value="${java.home.path.unix}" />
-				<filter token="lp.version" value="${lp.version}" />
-			</filterset>
-		</copy>
-
-		<installer
-			antInstallLib="${ant.installer.dir}/lib"
-			antLib="${env.ANT_HOME}/lib"
-			buildFile="tools/installer/pramati/installer-build.xml"
-			compress="true"
-			extractType="SelfExtractor"
-			failOnError="true"
-			file="dist/liferay-portal-pramati-${lp.version}.jar"
-			installConfig="tools/installer/pramati/installer-config.xml"
-			validateConfig="true"
-		>
-			<fileset dir="tools/installer/pramati" includes="installer-build.properties" />
-			<fileset dir="dist" includes="liferay-portal-pramati-${lp.version}.zip" />
-		</installer>
-
-		<jar
-			destfile="dist/liferay-portal-pramati-${lp.version}.jar"
-			update="yes"
-		>
-			<fileset
-				dir="tools/installer/pramati"
-				includes="resources/extract-image.png"
-			/>
-		</jar>
-
-		<delete file="dist/liferay-portal-pramati-${lp.version}.zip" failonerror="false" />
-	</target>
-
 	<target name="zip-resin">
 		<delete file="dist/liferay-portal-resin-${lp.version}.zip" failonerror="false" />
 
@@ -1118,7 +950,6 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip</
 		<antcall target="build-dist-jetty" />
 		<antcall target="build-dist-jonas-jetty" />
 		<antcall target="build-dist-jonas-tomcat" />
-		<antcall target="build-dist-pramati" />
 		<antcall target="build-dist-resin" />
 		<antcall target="build-dist-tomcat" />
 
@@ -1134,7 +965,6 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip</
 		<antcall target="zip-jonas" />
 		<antcall target="zip-portal-client" />
 		<antcall target="zip-portal-dependencies" />
-		<antcall target="zip-pramati" />
 		<antcall target="zip-resin" />
 		<antcall target="zip-sql" />
 		<antcall target="zip-src" />

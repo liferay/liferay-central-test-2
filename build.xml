@@ -264,10 +264,7 @@
 
 	<target name="deploy">
 		<if>
-			<or>
-				<equals arg1="${app.server.type}" arg2="glassfish" />
-				<equals arg1="${app.server.type}" arg2="pramati" />
-			</or>
+			<equals arg1="${app.server.type}" arg2="glassfish" />
 			<then>
 				<delete dir="${app.server.portal.dir}" />
 				<delete file="${app.server.portal.dir}" />
@@ -474,10 +471,7 @@
 		<mkdir dir="${app.server.work.dir}" />
 
 		<if>
-			<or>
-				<equals arg1="${app.server.type}" arg2="glassfish" />
-				<equals arg1="${app.server.type}" arg2="pramati" />
-			</or>
+			<equals arg1="${app.server.type}" arg2="glassfish" />
 			<then>
 				<tstamp>
 					<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
