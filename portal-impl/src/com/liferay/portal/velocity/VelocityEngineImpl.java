@@ -156,19 +156,22 @@ public class VelocityEngineImpl implements VelocityEngine {
 		throws SystemException, IOException {
 
 		try {
-			if (Validator.isNotNull(velocityTemplateContent) &&
-				!resourceExists(velocityTemplateId)) {
+			if (Validator.isNotNull(velocityTemplateContent)) {
 
-				StringResourceRepository stringResourceRepository =
-					StringResourceLoader.getRepository();
+				if(!PropsValues.LAYOUT_TEMPLATE_CACHE_ENABLED ||
+					!resourceExists(velocityTemplateId)) {
 
-				stringResourceRepository.putStringResource(
-					velocityTemplateId, velocityTemplateContent);
+					StringResourceRepository stringResourceRepository =
+						StringResourceLoader.getRepository();
 
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Added " + velocityTemplateId +
-							" to the Velocity template repository");
+					stringResourceRepository.putStringResource(
+						velocityTemplateId, velocityTemplateContent);
+
+					if (_log.isDebugEnabled()) {
+						_log.debug(
+							"Added " + velocityTemplateId +
+								" to the Velocity template repository");
+					}
 				}
 			}
 
