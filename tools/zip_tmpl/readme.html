@@ -1,0 +1,129 @@
+<html>
+<head>
+	<title>Welcome to Liferay 5.2!</title>
+	<style>
+		h1, h2, h3, h4 {
+			clear: both;
+			font-family: arial,sans-serif;
+		}
+
+		h2 {
+			border-bottom: 1px solid #000;
+			display: block;
+			padding-left: 25px;
+		}
+
+		img {
+			border: none;
+		}
+
+		.header {
+			margin-bottom: 30px;
+		}
+
+		.note {
+			font-size: small;
+			font-style: italic;
+		}
+
+		.image-left {
+			float: left;
+			margin: 0 5px 5px 0;
+		}
+
+		#body {
+			font-family: verdana,arial,sans-serif;
+			margin: 10 100 100 100;
+			width: 600px;
+		}
+
+		#installation {
+			background: url(http://www.liferay.com/image/image_gallery?img_id=1975230) no-repeat 0 50%;
+		}
+
+		#learning {
+			background: url(http://www.liferay.com/image/image_gallery?img_id=1975222) no-repeat 0 50%;
+		}
+
+		#supported {
+			background: url(http://www.liferay.com/image/image_gallery?img_id=1975226) no-repeat 0 50%;
+		}
+	</style>
+</head>
+
+<body>
+<div id="body">
+	<div class="header">
+		<a href="http://www.liferay.com"><img src="http://www.liferay.com/image/image_gallery?img_id=1974910" alt="www.liferay.com"></a>
+	</div>
+
+	<h1>Welcome to Liferay Portal!</h1>
+
+	<ol>
+		<li><a href="#installation">Installation instructions</a>
+		<li><a href="#learning">Learning more</a>
+		<li><a href="#supported">Professionally Supported</a>
+	</ol>
+
+	<h2 id="installation">Installation instructions</h2>
+
+	All Liferay bundles are designed so that they can be installed and used within minutes. Learn more at:
+
+	<blockquote>
+		<a href="http://www.liferay.com/web/guest/community/wiki/-/wiki/Main/Quick%20Installation%20Instructions">Quick Installation Instructions</a>
+	</blockquote>
+
+	After following this instructions you'll have a fully functional Liferay Portal installation with several default users. 
+
+	<h3>Sample data: 7Cogs, Inc</h3>
+
+	<img class="image-left" src="http://www.liferay.com/image/image_gallery?img_id=1975187" alt="Sample Data">
+	This Liferay bundle includes some sample data to showcase Liferay Portal's capabilities. You will find several users, organization and web pages already created belonging to a fictitious company called 7Cogs.
+
+	<h4>Removing the sample data</h4>
+
+	To remove the sample data that is included in the bundle follow these steps:
+	<ol>
+		<li>Go to the <i>Control Panel > Plugin Installation</i>, search for 7cogs-hook and remove it. 
+			
+				<div class="note">Note: some application servers may not support hot undeploy using this method. In those cases follow the instructions of your application server to undeploy 7cogs-hook.war</div></li>
+		
+		<li>Stop the Liferay Portal server
+		<li>Delete the data in your database or point to a new database
+		<li>Start the Liferay Portal server
+		<li>Use a browser to access the server and login using the following credentials:
+			<ul>
+				<li>E-mail: test@liferay.com
+				<li>Password: test
+			</ul>
+	</ol>
+
+	<h3>Preparing for production</h3>
+
+	<a href="http://www.liferay.com/web/guest/community/documentation"><img class="image-left" src="http://www.liferay.com/image/image_gallery?uuid=eb298143-a234-4977-852f-4ae8388a72dc&groupId=14&t=1225748206301" alt="Liferay Portal Administration Guide" width="100"></a>
+
+	The Liferay Portal bundle uses an embedded database to make installation fast and easy. <br/><br/>
+	To find out more about how to install it in a production environment read the <b>Liferay Portal Administration Guide</b> available at <a href="http://www.liferay.com/web/guest/community/documentation">Liferay's documentation pages</a> <br/><br/>
+
+	<h2 id="learning">Learning more</h2>
+
+	The following resources are recommended for learning more about Liferay Portal and getting help if needed:
+	<ul>
+		<li><a href="http://www.liferay.com/web/guest/community/documentation">Official Documentation</a>: Official Guides written by Liferay
+		<li><a href="http://wiki.liferay.com">Community Wiki</a>: Hundreds of articles written by Liferay developers and the community
+		<li><a href="http://forum.liferay.com">Community Forum</a>: Join the Liferay community and participate. You can ask and answer questions in 10 different languages
+	</ul>
+
+	<h2 id="supported">Professionally supported</h2>
+
+	Liferay Portal provides all the benefits of Open Source plus all the benefits of professionally supported software. Liferay offers a variety of services all around the world including:
+
+	<ul>
+		<li>Training
+		<li>Consulting
+		<li>Support
+	</ul>
+
+	Learn more about <a href="http://www.liferay.com/web/guest/services">Liferay's professional services</a> at our website and <a href="http://www.liferay.com/web/guest/services/contact_us">contact us for pricing</a>.
+</div>
+</body>
