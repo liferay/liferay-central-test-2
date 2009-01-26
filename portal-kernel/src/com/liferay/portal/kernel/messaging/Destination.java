@@ -46,4 +46,7 @@ public interface Destination {
 
 	public boolean unregister(MessageListener listener);
 
+    public int getListenerCount();
+
+	public DestinationStatistics getStatistics();
 }

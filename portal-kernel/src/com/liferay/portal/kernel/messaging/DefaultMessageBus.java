@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Collection;
 
 /**
  * <a href="DefaultMessageBus.java.html"><b><i>View Source</i></b></a>
@@ -36,7 +37,8 @@ import java.util.Map;
  * @author Michael C. Han
  *
  */
-public class DefaultMessageBus implements MessageBus {
+public class DefaultMessageBus
+        implements MessageBus, MessageBusManagement {
 
 	public synchronized void addDestination(Destination destination) {
 		_destinations.put(destination.getName(), destination);
@@ -47,7 +49,19 @@ public class DefaultMessageBus implements MessageBus {
 		_destinationEventListeners.add(listener);
 	}
 
-	public boolean hasDestination(String destinationName) {
+    public void destroy() {
+        shutdown(true);
+    }
+
+    public Collection<String> getDestinationNames() {
+        return _destinations.keySet();
+    }
+
+    public Collection<Destination> getDestinations() {
+        return _destinations.values();
+    }
+
+    public boolean hasDestination(String destinationName) {
 		return _destinations.containsKey(destinationName);
 	}
 
