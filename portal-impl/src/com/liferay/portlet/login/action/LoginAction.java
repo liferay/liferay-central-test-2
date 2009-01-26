@@ -72,11 +72,11 @@ public class LoginAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		if (actionRequest.getRemoteUser() != null) {
+		/*if (actionRequest.getRemoteUser() != null) {
 			actionResponse.sendRedirect(themeDisplay.getPathMain());
 
 			return;
-		}
+		}*/
 
 		try {
 			PortletPreferences preferences =
