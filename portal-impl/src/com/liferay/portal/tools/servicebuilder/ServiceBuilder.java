@@ -1185,7 +1185,8 @@ public class ServiceBuilder {
 		String noSuchEntityException = entity.getName();
 
 		if (Validator.isNull(entity.getPortletShortName()) ||
-			noSuchEntityException.startsWith(entity.getPortletShortName())) {
+			noSuchEntityException.startsWith(entity.getPortletShortName()) &&
+			!noSuchEntityException.equals(entity.getPortletShortName())) {
 
 			noSuchEntityException = noSuchEntityException.substring(
 				entity.getPortletShortName().length());
