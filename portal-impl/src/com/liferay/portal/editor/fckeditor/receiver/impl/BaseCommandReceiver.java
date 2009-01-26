@@ -96,7 +96,26 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 			returnValue = createFolder(argument);
 		}
 		catch (FCKException fcke) {
+			Throwable cause = fcke.getCause();
+
 			returnValue = "110";
+
+			if (cause != null) {
+				String causeString = GetterUtil.getString(cause.toString());
+
+				if (causeString.indexOf("DuplicateFolderNameException") != -1) {
+					returnValue = "101";
+				}
+				else if (causeString.indexOf("FolderNameException") != -1) {
+					returnValue = "102";
+				}
+				else if (causeString.indexOf("NoSuchGroupException") != -1) {
+					returnValue = "103";
+				}
+				else {
+					throw fcke;
+				}
+			}
 		}
 
 		errorEl.setAttribute("number", returnValue);
