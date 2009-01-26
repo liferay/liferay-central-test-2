@@ -38,6 +38,8 @@
 
 	<path id="web.classpath">
 		<pathelement location="${project.dir}/ext-service/classes" />
+		<fileset dir="${project.dir}/ext-lib/development" includes="*.jar" />
+		<fileset dir="${project.dir}/ext-lib/global" includes="*.jar" />
 		<fileset dir="${project.dir}/lib/development" includes="jsp-api.jar,mail.jar,servlet-api.jar" />
 		<fileset dir="${project.dir}/lib/global" includes="*.jar" />
 		<path refid="web-lib.classpath" />
