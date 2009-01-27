@@ -61,20 +61,6 @@ public abstract class BaseDestination implements Destination {
 		doClose(force);
 	}
 
-	public DestinationStatistics getStatistics() {
-		return new DestinationStatistics(_threadPoolExecutor.getCompletedTaskCount(),
-									   _threadPoolExecutor.getTaskCount(),
-									   _threadPoolExecutor.getActiveCount(),
-									   _threadPoolExecutor.getPoolSize(),
-									   _threadPoolExecutor.getLargestPoolSize(),
-									   _threadPoolExecutor.getMaximumPoolSize(),
-									   _threadPoolExecutor.getCorePoolSize());
-	}
-
-    public int getListenerCount() {
-        return _listenersCount;
-    }
-
 	public String getName() {
 		return _name;
 	}
