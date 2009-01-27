@@ -73,7 +73,7 @@ public class MinifierFilter extends BasePortalFilter {
 		}
 	}
 
-	protected String aggregateCss(String dir, String content, int level)
+	protected String aggregateCss(String dir, String content)
 		throws IOException {
 
 		StringBuilder sb = new StringBuilder(content.length());
@@ -99,6 +99,9 @@ public class MinifierFilter extends BasePortalFilter {
 				String importContent = FileUtil.read(
 					dir + StringPool.SLASH + importFile);
 
+				int importDepth = StringUtil.count(
+					importFile, StringPool.SLASH);
+
 				String importFilePath = StringPool.BLANK;
 
 				if (importFile.lastIndexOf(StringPool.SLASH) != -1) {
@@ -107,13 +110,13 @@ public class MinifierFilter extends BasePortalFilter {
 				}
 
 				importContent = aggregateCss(
-					dir + importFilePath, importContent, level + 1);
+					dir + importFilePath, importContent);
 
 				// LEP-7540
 
 				String relativePath = StringPool.BLANK;
 
-				for (int i = 0; i < level; i++) {
+				for (int i = 0; i < importDepth; i++) {
 					relativePath += "../";
 				}
 
@@ -365,7 +368,7 @@ public class MinifierFilter extends BasePortalFilter {
 
 		String content = FileUtil.read(file);
 
-		content = aggregateCss(file.getParent(), content, 0);
+		content = aggregateCss(file.getParent(), content);
 
 		return minifyCss(request, content);
 	}
