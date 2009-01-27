@@ -59,7 +59,7 @@ import com.liferay.portalweb.portlet.twitter.TwitterTests;
 import com.liferay.portalweb.portlet.weather.WeatherTests;
 import com.liferay.portalweb.portlet.webform.WebFormTests;
 import com.liferay.portalweb.portlet.westminstercatechism.WestminsterCatechismTests;
-import com.liferay.portalweb.portlet.worldofliferay.WorldOfLiferayTests;
+import com.liferay.portalweb.portlet.worldofliferay.WOLTests;
 
 /**
  * <a href="Plugins2TestSuite.java.html"><b><i>View Source</i></b></a>
@@ -112,7 +112,7 @@ public class Plugins2TestSuite extends BaseTests {
 		//addTestSuite(WebcamTests.class);
 		addTestSuite(WebFormTests.class);
 		addTestSuite(WestminsterCatechismTests.class);
-		addTestSuite(WorldOfLiferayTests.class);
+		addTestSuite(WOLTests.class);
 
 		addTestSuite(StopSeleniumTest.class);
 	}

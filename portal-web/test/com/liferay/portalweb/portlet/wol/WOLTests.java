@@ -20,19 +20,19 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.worldofliferay;
+package com.liferay.portalweb.portlet.wol;
 
 import com.liferay.portalweb.portal.BaseTests;
 
 /**
- * <a href="WikiDisplayTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="WOLTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class WorldOfLiferayTests extends BaseTests {
+public class WOLTests extends BaseTests {
 
-	public WorldOfLiferayTests() {
+	public WOLTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddFriendsPortletTest.class);
 		addTestSuite(RemovePortletTest.class);
