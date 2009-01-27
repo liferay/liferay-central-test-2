@@ -25,7 +25,7 @@ plugins.includes=${plugins.includes}</echo>
 
 		<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
 
-		<ant dir="portal-impl" target="test-class" inheritAll="false">
+		<!--<ant dir="portal-impl" target="test-class" inheritAll="false">
 			<property name="class" value="ServiceTestSuite" />
 		</ant>
 
@@ -39,7 +39,7 @@ plugins.includes=${plugins.includes}</echo>
 
 		<ant dir="portal-kernel" target="test" inheritAll="false" />
 
-		<ant dir="util-java" target="test" inheritAll="false" />
+		<ant dir="util-java" target="test" inheritAll="false" />-->
 
 		<antcall target="test-${app.server.type}" />
 	</target>
@@ -72,15 +72,15 @@ plugins.includes=${plugins.includes}</echo>
 
 		<java jar="lib/development/selenium-server.jar" fork="true" spawn="true" />
 
-		<antcall target="test-tomcat-runtime">
+		<!--<antcall target="test-tomcat-runtime">
 			<param name="test.class" value="PortalWebTestSuite" />
-		</antcall>
+		</antcall>-->
 
 		<antcall target="test-tomcat-runtime">
 			<param name="test.class" value="ControlPanelTestSuite" />
 		</antcall>
 
-		<antcall target="test-tomcat-runtime">
+		<!--<antcall target="test-tomcat-runtime">
 			<param name="test.class" value="PermissionsTestSuite" />
 		</antcall>
 
@@ -91,8 +91,8 @@ plugins.includes=${plugins.includes}</echo>
 
 		<antcall target="test-tomcat-runtime">
 			<param name="test.class" value="Plugins2TestSuite" />
-			<param name="portlet.plugins.includes" value="sample-localized-portlet,sample-orbeon-forms-portlet,sample-permissions-portlet,sample-php-portlet,sample-portal-client-portlet,sample-portal-service-portlet,sample-python-portlet,sample-ruby-portlet,sample-service-builder-portlet,sample-sign-in-portlet,sample-spring-portlet,sample-struts-liferay-portlet,sample-struts-portlet,sample-tapestry-portlet,sample-test-portlet,sample-ui-taglibs-portlet,sample-wap-portlet,sshterm-portlet,sshvnc-portlet,stocks-portlet,sun-bookmark-portlet,sun-elluminate-portlet,sun-flickr-portlet,sun-iframe-portlet,sun-mashup-portlet,sun-notepad-portlet,sun-photoshow-ajax-portlet,sun-privacy-guard-portlet,sun-rss-portlet,sun-showtime-portlet,sun-tour-ipc-portlet,sun-video-portlet,sun-weather-portlet,twitter-portlet,weather-portlet,web-form-portlet,westminster-catechism-portlet,wol-portlet" />
-		</antcall>
+			<param name="portlet.plugins.includes" value="sample-localized-portlet,sample-orbeon-forms-portlet,sample-permissions-portlet,sample-php-portlet,sample-portal-client-portlet,sample-portal-service-portlet,sample-python-portlet,sample-ruby-portlet,sample-service-builder-portlet,sample-sign-in-portlet,sample-spring-portlet,sample-struts-liferay-portlet,sample-struts-portlet,sample-tapestry-portlet,sample-test-portlet,sample-ui-taglibs-portlet,sample-wap-portlet,stocks-portlet,sun-bookmark-portlet,sun-elluminate-portlet,sun-flickr-portlet,sun-iframe-portlet,sun-mashup-portlet,sun-notepad-portlet,sun-photoshow-ajax-portlet,sun-privacy-guard-portlet,sun-rss-portlet,sun-showtime-portlet,sun-tour-ipc-portlet,sun-video-portlet,sun-weather-portlet,twitter-portlet,weather-portlet,web-form-portlet,westminster-catechism-portlet,wol-portlet" />
+		</antcall>-->
 
 		<antelope:post to="http://localhost:4444/selenium-server/driver/?cmd=shutDown" wantresponse="false" />
 	</target>
