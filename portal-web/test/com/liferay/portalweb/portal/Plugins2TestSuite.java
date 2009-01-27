@@ -109,7 +109,6 @@ public class Plugins2TestSuite extends BaseTests {
 		addTestSuite(SunYoutubeTests.class);
 		addTestSuite(TwitterTests.class);
 		addTestSuite(WeatherTests.class);
-		//addTestSuite(WebcamTests.class);
 		addTestSuite(WebFormTests.class);
 		addTestSuite(WestminsterCatechismTests.class);
 		addTestSuite(WOLTests.class);
