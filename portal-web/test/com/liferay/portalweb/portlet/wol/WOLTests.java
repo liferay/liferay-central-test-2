@@ -36,7 +36,7 @@ public class WOLTests extends BaseTests {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddFriendsPortletTest.class);
 		addTestSuite(RemovePortletTest.class);
-		addTestSuite(AddFriendsActivitiesPortlet.class);
+		addTestSuite(AddFriendsActivitiesPortletTest.class);
 		addTestSuite(RemovePortletTest.class);
 		addTestSuite(AddJIRAPortletTest.class);
 		addTestSuite(RemovePortletTest.class);

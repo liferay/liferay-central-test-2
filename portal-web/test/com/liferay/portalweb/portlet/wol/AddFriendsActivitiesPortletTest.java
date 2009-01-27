@@ -20,19 +20,19 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.worldofliferay;
+package com.liferay.portalweb.portlet.wol;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddFriendsActivitiesPortlet.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddFriendsActivitiesPortletTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddFriendsActivitiesPortlet extends BaseTestCase {
-	public void testAddFriendsActivitiesPor() throws Exception {
+public class AddFriendsActivitiesPortletTest extends BaseTestCase {
+	public void testAddFriendsActivitiesPortlet() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
