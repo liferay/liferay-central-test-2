@@ -349,14 +349,6 @@ public class LayoutTemplateLocalServiceImpl
 
 			String layoutTemplateId = layoutTemplate.attributeValue("id");
 
-			for (ObjectValuePair<String, Boolean> ovp : layoutTemplateIds) {
-				if( ovp.getKey().equals( layoutTemplateId ) ) {
-					_log.error( "Ignoring Layout Template with duplicate id \"" 
-							+ layoutTemplateId + "\"." );
-					continue;
-				}
-			}
-
 			if (layoutTemplateIds != null) {
 				ObjectValuePair<String, Boolean> ovp =
 					new ObjectValuePair<String, Boolean>(
