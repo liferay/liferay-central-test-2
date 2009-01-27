@@ -99,9 +99,6 @@ public class MinifierFilter extends BasePortalFilter {
 				String importContent = FileUtil.read(
 					dir + StringPool.SLASH + importFile);
 
-				int importDepth = StringUtil.count(
-					importFile, StringPool.SLASH);
-
 				String importFilePath = StringPool.BLANK;
 
 				if (importFile.lastIndexOf(StringPool.SLASH) != -1) {
@@ -111,6 +108,9 @@ public class MinifierFilter extends BasePortalFilter {
 
 				importContent = aggregateCss(
 					dir + importFilePath, importContent);
+
+				int importDepth = StringUtil.count(
+					importFile, StringPool.SLASH);
 
 				// LEP-7540
 
