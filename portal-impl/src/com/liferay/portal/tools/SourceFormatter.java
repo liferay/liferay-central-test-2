@@ -856,7 +856,7 @@ public class SourceFormatter {
 		ClassLoader classLoader = SourceFormatter.class.getClassLoader();
 
 		URL url = classLoader.getResource(
-			System.getProperty("external-properties"));
+			System.getProperty("source-formatter-exclusions"));
 
 		if (url == null) {
 			return;
@@ -879,4 +879,5 @@ public class SourceFormatter {
 	private static Properties _exclusions;
 	private static Pattern _xssPattern = Pattern.compile(
 		"String\\s+([^\\s]+)\\s*=\\s*ParamUtil\\.getString\\(");
+
 }
