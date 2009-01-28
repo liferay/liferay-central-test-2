@@ -40,7 +40,7 @@ public class SelectThemeTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("link=Look and Feel"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
-				"//input[@name='_88_themeId' and @value='brochure']"));
+				"//a[contains(@href, 'brochure_WAR_brochuretheme')]"));
 		selenium.waitForPageToLoad("30000");
 		FileUtil.mkdirs(RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test-output\\brochure\\"));

@@ -83,9 +83,8 @@ public class RuntimeVariables {
 		// Select theme
 
 		text = StringUtil.replace(
-			text, "//input[@name='_88_themeId' and @value='brochure']",
-			"//input[@name='_88_themeId' and @value='" + ThemeIds.getThemeId() +
-				"']");
+			text, "//a[contains(@href, 'brochure_WAR_brochuretheme')]",
+			text, "//a[contains(@href, '" + ThemeIds.getThemeId() + "')]",
 
 		if (_contextReplace == null) {
 			return text;
