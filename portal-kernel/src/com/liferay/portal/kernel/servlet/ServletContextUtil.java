@@ -92,8 +92,14 @@ public class ServletContextUtil {
 					}
 				}
 				else {
-					File file = new File(
-						servletContext.getRealPath(curResourcePath));
+					String realPath = servletContext.getRealPath(
+						curResourcePath);
+
+					if (realPath == null) {
+						continue;
+					}
+
+					File file = new File(realPath);
 
 					if (file.lastModified() > lastModified) {
 						lastModified = file.lastModified();
