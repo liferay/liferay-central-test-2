@@ -23,6 +23,7 @@
 package com.liferay.portal.log;
 
 import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogWrapper;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -40,11 +41,11 @@ public class Log4jLogImpl implements Log {
 	}
 
 	public void debug(Object msg) {
-		debug(msg, null);
+		_logger.log(_FQCN, Level.DEBUG, msg, null);
 	}
 
 	public void debug(Throwable t) {
-		debug(null, t);
+		_logger.log(_FQCN, Level.DEBUG, null, t);
 	}
 
 	public void debug(Object msg, Throwable t) {
@@ -52,11 +53,11 @@ public class Log4jLogImpl implements Log {
 	}
 
 	public void error(Object msg) {
-		error(msg, null);
+		_logger.log(_FQCN, Level.ERROR, msg, null);
 	}
 
 	public void error(Throwable t) {
-		error(null, t);
+		_logger.log(_FQCN, Level.ERROR, null, t);
 	}
 
 	public void error(Object msg, Throwable t) {
@@ -64,11 +65,11 @@ public class Log4jLogImpl implements Log {
 	}
 
 	public void fatal(Object msg) {
-		fatal(msg, null);
+		_logger.log(_FQCN, Level.FATAL, msg, null);
 	}
 
 	public void fatal(Throwable t) {
-		fatal(null, t);
+		_logger.log(_FQCN, Level.FATAL, null, t);
 	}
 
 	public void fatal(Object msg, Throwable t) {
@@ -76,11 +77,11 @@ public class Log4jLogImpl implements Log {
 	}
 
 	public void info(Object msg) {
-		info(msg, null);
+		_logger.log(_FQCN, Level.INFO, msg, null);
 	}
 
 	public void info(Throwable t) {
-		info(null, t);
+		_logger.log(_FQCN, Level.INFO, null, t);
 	}
 
 	public void info(Object msg, Throwable t) {
@@ -112,11 +113,11 @@ public class Log4jLogImpl implements Log {
 	}
 
 	public void trace(Object msg) {
-		trace(msg, null);
+		_logger.log(_FQCN, Level.TRACE, msg, null);
 	}
 
 	public void trace(Throwable t) {
-		trace(null, t);
+		_logger.log(_FQCN, Level.TRACE, null, t);
 	}
 
 	public void trace(Object msg, Throwable t) {
@@ -124,18 +125,18 @@ public class Log4jLogImpl implements Log {
 	}
 
 	public void warn(Object msg) {
-		warn(msg, null);
+		_logger.log(_FQCN, Level.WARN, msg, null);
 	}
 
 	public void warn(Throwable t) {
-		warn(null, t);
+		_logger.log(_FQCN, Level.WARN, null, t);
 	}
 
 	public void warn(Object msg, Throwable t) {
 		_logger.log(_FQCN, Level.WARN, msg, t);
 	}
 
-	private static final String _FQCN = Log4jLogImpl.class.getName();
+	private static final String _FQCN = LogWrapper.class.getName();
 
 	private Logger _logger;
 
