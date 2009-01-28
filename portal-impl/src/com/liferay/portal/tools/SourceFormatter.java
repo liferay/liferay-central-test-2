@@ -855,8 +855,12 @@ public class SourceFormatter {
 
 		ClassLoader classLoader = SourceFormatter.class.getClassLoader();
 
-		URL url = classLoader.getResource(
-			System.getProperty("source-formatter-exclusions"));
+		String sourceFormatterExclusions = System.getProperty(
+			"source-formatter-exclusions",
+			"com/liferay/portal/tools/dependencies/" +
+				"source_formatter_exclusions.properties");
+
+		URL url = classLoader.getResource(sourceFormatterExclusions);
 
 		if (url == null) {
 			return;

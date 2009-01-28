@@ -767,9 +767,7 @@ ${exception.message}
 			dir="${project.dir}"
 			fork="true"
 			newenvironment="true"
-		>
-			<jvmarg value="-Dsource-formatter-exclusions=com/liferay/portal/tools/dependencies/source_formatter_exclusions.properties" />
-		</java>
+		/>
 
 		<delete file="ServiceBuilder.temp" />
 	</target>
