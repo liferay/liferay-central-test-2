@@ -1043,38 +1043,44 @@ public class PortalImpl implements Portal {
 
 		String portalURL = StringPool.BLANK;
 
-		if (Validator.isNotNull(layoutSet.getVirtualHost())) {
-			portalURL = getPortalURL(
-				layoutSet.getVirtualHost(), themeDisplay.getServerPort(),
-				themeDisplay.isSecure());
+		if (!themeDisplay.getServerName().equals(_LOCALHOST)) {
+			if (Validator.isNotNull(layoutSet.getVirtualHost())) {
+				portalURL = getPortalURL(
+					layoutSet.getVirtualHost(), themeDisplay.getServerPort(),
+					themeDisplay.isSecure());
 
-			if ((layoutSet.getLayoutSetId() != curLayoutSetId) ||
-				(portalURL.startsWith(themeDisplay.getPortalURL()))) {
+				if ((layoutSet.getLayoutSetId() != curLayoutSetId) ||
+					(portalURL.startsWith(themeDisplay.getPortalURL()))) {
 
-				if (themeDisplay.isWidget()) {
-					layoutFriendlyURL =
-						PropsValues.WIDGET_SERVLET_MAPPING + layoutFriendlyURL;
+					if (themeDisplay.isWidget()) {
+						layoutFriendlyURL =
+							PropsValues.WIDGET_SERVLET_MAPPING +
+								layoutFriendlyURL;
+					}
+
+					if (themeDisplay.isI18n()) {
+						layoutFriendlyURL =
+							StringPool.SLASH +
+								themeDisplay.getI18nLanguageId() +
+									layoutFriendlyURL;
+					}
+
+					return portalURL + _pathContext + layoutFriendlyURL;
 				}
-
-				if (themeDisplay.isI18n()) {
-					layoutFriendlyURL =
-						StringPool.SLASH + themeDisplay.getI18nLanguageId() +
-							layoutFriendlyURL;
-				}
-
-				return portalURL + _pathContext + layoutFriendlyURL;
 			}
-		}
-		else {
-			if ((layoutSet.getLayoutSetId() != curLayoutSetId) &&
-				(layout.getGroup().getClassPK() != themeDisplay.getUserId())) {
+			else {
+				if ((layoutSet.getLayoutSetId() != curLayoutSetId) &&
+					(layout.getGroup().getClassPK() !=
+						themeDisplay.getUserId())) {
 
-				String virtualHost = themeDisplay.getCompany().getVirtualHost();
+					String virtualHost =
+						themeDisplay.getCompany().getVirtualHost();
 
-				if (!virtualHost.equalsIgnoreCase(_LOCALHOST)) {
-					portalURL = getPortalURL(
-						virtualHost, themeDisplay.getServerPort(),
-						themeDisplay.isSecure());
+					if (!virtualHost.equalsIgnoreCase(_LOCALHOST)) {
+						portalURL = getPortalURL(
+							virtualHost, themeDisplay.getServerPort(),
+							themeDisplay.isSecure());
+					}
 				}
 			}
 		}
