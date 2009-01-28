@@ -28,26 +28,54 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="SelectThemeTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="ScreengrabAddApplicationTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class SelectThemeTest extends BaseTestCase {
-	public void testSelectTheme() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+public class ScreengrabAddApplicationTest extends BaseTestCase {
+	public void testScreengrabAddApplication() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Test Page 8")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Test Page 8"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Look and Feel"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//a[contains(@href, 'brochure_WAR_brochuretheme')]"));
-		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Add Application");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//div[@id='Collaboration-Blogs']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		FileUtil.mkdirs(RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test-output\\brochure\\"));
 		selenium.captureEntirePageScreenshot(RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test-output\\brochure\\ScreengrabTest00.jpg"),
+				"L:\\portal\\build\\portal-web\\test-output\\brochure\\ScreengrabTest09.jpg"),
 			"");
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
 	}
 }

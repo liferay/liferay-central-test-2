@@ -28,26 +28,66 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="SelectThemeTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="ScreengrabDocumentLibraryTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class SelectThemeTest extends BaseTestCase {
-	public void testSelectTheme() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+public class ScreengrabDocumentLibraryTest extends BaseTestCase {
+	public void testScreengrabDocumentLibrary() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Test Page 3")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Test Page 3"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Look and Feel"));
+		selenium.click(RuntimeVariables.replace("link=Test Folder"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
-				"//a[contains(@href, 'brochure_WAR_brochuretheme')]"));
+				"//input[@value='Add Document']"));
+		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
+		selenium.click("//div[3]/div/div/div/div[2]/div/div/a");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_20_title")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		FileUtil.mkdirs(RuntimeVariables.replace(
+				"L:\\portal\\build\\portal-web\\test-output\\brochure\\"));
+		selenium.captureEntirePageScreenshot(RuntimeVariables.replace(
+				"L:\\portal\\build\\portal-web\\test-output\\brochure\\ScreengrabTest04.jpg"),
+			"");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		FileUtil.mkdirs(RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test-output\\brochure\\"));
 		selenium.captureEntirePageScreenshot(RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test-output\\brochure\\ScreengrabTest00.jpg"),
+				"L:\\portal\\build\\portal-web\\test-output\\brochure\\ScreengrabTest05.jpg"),
 			"");
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
 	}
 }

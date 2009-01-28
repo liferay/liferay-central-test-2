@@ -28,23 +28,20 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddDocumentLibraryTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="ScreengrabPageCommentTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddDocumentLibraryTest extends BaseTestCase {
-	public void testAddDocumentLibrary() throws Exception {
-		selenium.click("link=Add Application");
-
+public class ScreengrabPageCommentTest extends BaseTestCase {
+	public void testScreengrabPageComment() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id=\"CMS-DocumentLibrary\"]")) {
+				if (selenium.isElementPresent("link=Test Page 6")) {
 					break;
 				}
 			}
@@ -54,43 +51,12 @@ public class AddDocumentLibraryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id=\"CMS-DocumentLibrary\"]/p/a");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Add Folder']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Folder']"));
+		selenium.click(RuntimeVariables.replace("link=Test Page 6"));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_20_name", RuntimeVariables.replace("Theme Testing"));
-		selenium.type("_20_description",
-			RuntimeVariables.replace("Screengrab Me!"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Theme Testing"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Document']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Use the classic uploader.");
 		FileUtil.mkdirs(RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test-output\\brochure\\"));
 		selenium.captureEntirePageScreenshot(RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test-output\\brochure\\AddDocumentLibraryTest.jpg"),
+				"L:\\portal\\build\\portal-web\\test-output\\brochure\\ScreengrabTest08.jpg"),
 			"");
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
 	}
 }

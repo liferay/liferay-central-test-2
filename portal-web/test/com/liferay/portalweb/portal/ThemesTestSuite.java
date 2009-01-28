@@ -24,6 +24,7 @@ package com.liferay.portalweb.portal;
 
 import com.liferay.portalweb.portal.login.LoginTests;
 import com.liferay.portalweb.portal.theme.ThemeTests;
+import com.liferay.portalweb.portal.theme.setupthemes.SetupThemesTests;
 import com.liferay.portalweb.portal.util.ThemeIds;
 
 /**
@@ -36,6 +37,7 @@ public class ThemesTestSuite extends BaseTests {
 
 	public ThemesTestSuite() {
 		addTestSuite(LoginTests.class);
+		addTestSuite(SetupThemesTests.class);
 
 		for (int i = 0; i < ThemeIds.getCount(); i++) {
 			addTestSuite(ThemeTests.class);

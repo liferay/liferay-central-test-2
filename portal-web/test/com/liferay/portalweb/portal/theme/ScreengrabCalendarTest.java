@@ -28,23 +28,20 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddCalendarTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="ScreengrabCalendarTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddCalendarTest extends BaseTestCase {
-	public void testAddCalendar() throws Exception {
-		selenium.click("link=Add Application");
-
+public class ScreengrabCalendarTest extends BaseTestCase {
+	public void testScreengrabCalendar() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"document.getElementById('Collaboration-Calendar').getElementsByTagName('p')[0].getElementsByTagName('a')[0]")) {
+				if (selenium.isElementPresent("link=Test Page 2")) {
 					break;
 				}
 			}
@@ -54,33 +51,19 @@ public class AddCalendarTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"document.getElementById('Collaboration-Calendar').getElementsByTagName('p')[0].getElementsByTagName('a')[0]");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Add Event']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=23"));
+		selenium.click(RuntimeVariables.replace("link=Test Page 2"));
 		selenium.waitForPageToLoad("30000");
 		FileUtil.mkdirs(RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test-output\\brochure\\"));
 		selenium.captureEntirePageScreenshot(RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test-output\\brochure\\AddCalendarTest.jpg"),
+				"L:\\portal\\build\\portal-web\\test-output\\brochure\\ScreengrabTest02.jpg"),
 			"");
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.click(RuntimeVariables.replace("link=Month"));
 		selenium.waitForPageToLoad("30000");
+		FileUtil.mkdirs(RuntimeVariables.replace(
+				"L:\\portal\\build\\portal-web\\test-output\\brochure\\"));
+		selenium.captureEntirePageScreenshot(RuntimeVariables.replace(
+				"L:\\portal\\build\\portal-web\\test-output\\brochure\\ScreengrabTest03.jpg"),
+			"");
 	}
 }

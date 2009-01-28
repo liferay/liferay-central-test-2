@@ -33,12 +33,15 @@ import com.liferay.portalweb.portal.BaseTests;
 public class ThemeTests extends BaseTests {
 
 	public ThemeTests() {
-		addTestSuite(AddPageTest.class);
 		addTestSuite(SelectThemeTest.class);
-		addTestSuite(AddDocumentLibraryTest.class);
-		addTestSuite(AddCalendarTest.class);
-		addTestSuite(ScreengrabTest.class);
-		addTestSuite(CleanUpTest.class);
+		addTestSuite(ScreengrabSignInTest.class);
+		addTestSuite(ScreengrabCalendarTest.class);
+		addTestSuite(ScreengrabDocumentLibraryTest.class);
+		addTestSuite(ScreengrabQuickNoteTest.class);
+		addTestSuite(ScreengrabCurrencyConverterTest.class);
+		addTestSuite(ScreengrabPageCommentTest.class);
+		addTestSuite(ScreengrabLayoutTest.class);
+		addTestSuite(ScreengrabAddApplicationTest.class);
 		addTestSuite(IterateThemeTest.class);
 	}
 
