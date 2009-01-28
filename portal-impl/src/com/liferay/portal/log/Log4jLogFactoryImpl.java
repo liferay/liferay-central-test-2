@@ -20,28 +20,27 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.servlet;
+package com.liferay.portal.log;
 
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactory;
 
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.LogManager;
 
 /**
- * <a href="Log4jServletContextListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="Log4jLogFactoryImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class Log4jServletContextListener implements ServletContextListener {
+public class Log4jLogFactoryImpl implements LogFactory {
 
-	public void contextInitialized(ServletContextEvent event) {
+	public Log getLog(Class<?> c) {
+		return getLog(c.getName());
 	}
 
-	public void contextDestroyed(ServletContextEvent event) {
-		Thread currentThread = Thread.currentThread();
-
-		LogFactory.release(currentThread.getContextClassLoader());
+	public Log getLog(String name) {
+		return new Log4jLogImpl(LogManager.getLogger(name));
 	}
 
 }

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.scheduler.quartz;
 
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.tools.sql.DB2Util;
 import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.tools.sql.DerbyUtil;
@@ -41,7 +42,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.quartz.Calendar;
 import org.quartz.CronTrigger;
@@ -733,7 +733,8 @@ public class DynamicDriverDelegate extends StdJDBCDelegate {
 		return driverDelegateClass;
 	}
 
-	private Log _log = LogFactory.getLog(DynamicDriverDelegate.class);
+	private com.liferay.portal.kernel.log.Log _log =
+		LogFactoryUtil.getLog(DynamicDriverDelegate.class);
 
 	private StdJDBCDelegate _jdbcDelegate;
 

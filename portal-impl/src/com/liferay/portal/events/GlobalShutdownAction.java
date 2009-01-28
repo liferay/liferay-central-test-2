@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.job.JobSchedulerUtil;
 import com.liferay.portal.kernel.log.Jdk14LogFactoryImpl;
+import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -44,9 +45,6 @@ import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
 
 import java.sql.Connection;
 import java.sql.Statement;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="GlobalShutdownAction.java.html"><b><i>View Source</i></b></a>
@@ -215,6 +213,6 @@ public class GlobalShutdownAction extends SimpleAction {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(GlobalShutdownAction.class);
+	private static Log _log = LogFactoryUtil.getLog(GlobalShutdownAction.class);
 
 }

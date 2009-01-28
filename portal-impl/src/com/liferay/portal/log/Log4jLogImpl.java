@@ -24,114 +24,119 @@ package com.liferay.portal.log;
 
 import com.liferay.portal.kernel.log.Log;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+
 /**
- * <a href="CommonsLogImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="Log4jLogImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CommonsLogImpl implements Log {
+public class Log4jLogImpl implements Log {
 
-	public CommonsLogImpl(org.apache.commons.logging.Log log) {
-		_log = log;
+	public Log4jLogImpl(Logger logger) {
+		_logger = logger;
 	}
 
 	public void debug(Object msg) {
-		_log.debug(msg);
+		debug(msg, null);
 	}
 
 	public void debug(Throwable t) {
-		_log.debug(t);
+		debug(null, t);
 	}
 
 	public void debug(Object msg, Throwable t) {
-		_log.debug(msg, t);
+		_logger.log(_FQCN, Level.DEBUG, msg, t);
 	}
 
 	public void error(Object msg) {
-		_log.error(msg);
+		error(msg, null);
 	}
 
 	public void error(Throwable t) {
-		_log.error(t);
+		error(null, t);
 	}
 
 	public void error(Object msg, Throwable t) {
-		_log.error(msg, t);
+		_logger.log(_FQCN, Level.ERROR, msg, t);
 	}
 
 	public void fatal(Object msg) {
-		_log.fatal(msg);
+		fatal(msg, null);
 	}
 
 	public void fatal(Throwable t) {
-		_log.fatal(t);
+		fatal(null, t);
 	}
 
 	public void fatal(Object msg, Throwable t) {
-		_log.fatal(msg, t);
+		_logger.log(_FQCN, Level.FATAL, msg, t);
 	}
 
 	public void info(Object msg) {
-		_log.info(msg);
+		info(msg, null);
 	}
 
 	public void info(Throwable t) {
-		_log.info(t);
+		info(null, t);
 	}
 
 	public void info(Object msg, Throwable t) {
-		_log.info(msg, t);
+		_logger.log(_FQCN, Level.INFO, msg, t);
 	}
 
 	public boolean isDebugEnabled() {
-		return _log.isDebugEnabled();
+		return _logger.isDebugEnabled();
 	}
 
 	public boolean isErrorEnabled() {
-		return _log.isErrorEnabled();
+		return _logger.isEnabledFor(Level.ERROR);
 	}
 
 	public boolean isFatalEnabled() {
-		return _log.isFatalEnabled();
+		return _logger.isEnabledFor(Level.FATAL);
 	}
 
 	public boolean isInfoEnabled() {
-		return _log.isInfoEnabled();
+		return _logger.isInfoEnabled();
 	}
 
 	public boolean isTraceEnabled() {
-		return _log.isTraceEnabled();
+		return _logger.isTraceEnabled();
 	}
 
 	public boolean isWarnEnabled() {
-		return _log.isWarnEnabled();
+		return _logger.isEnabledFor(Level.WARN);
 	}
 
 	public void trace(Object msg) {
-		_log.trace(msg);
+		trace(msg, null);
 	}
 
 	public void trace(Throwable t) {
-		_log.trace(t);
+		trace(null, t);
 	}
 
 	public void trace(Object msg, Throwable t) {
-		_log.trace(msg, t);
+		_logger.log(_FQCN, Level.TRACE, msg, t);
 	}
 
 	public void warn(Object msg) {
-		_log.warn(msg);
+		warn(msg, null);
 	}
 
 	public void warn(Throwable t) {
-		_log.warn(t);
+		warn(null, t);
 	}
 
 	public void warn(Object msg, Throwable t) {
-		_log.warn(msg, t);
+		_logger.log(_FQCN, Level.WARN, msg, t);
 	}
 
-	private org.apache.commons.logging.Log _log;
+	private static final String _FQCN = Log4jLogImpl.class.getName();
+
+	private Logger _logger;
 
 }
