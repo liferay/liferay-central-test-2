@@ -80,6 +80,10 @@ public class PortalServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
 				throw new com.liferay.portal.SystemException(e);
 			}
 

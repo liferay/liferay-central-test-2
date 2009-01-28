@@ -71,7 +71,8 @@ import com.liferay.portal.service.PortalServiceUtil;
  *
  */
 public class PortalServiceJSON {
-	public static java.lang.String getAutoDeployDirectory() {
+	public static java.lang.String getAutoDeployDirectory()
+		throws com.liferay.portal.SystemException {
 		java.lang.String returnValue = PortalServiceUtil.getAutoDeployDirectory();
 
 		return returnValue;

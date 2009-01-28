@@ -45,7 +45,8 @@ package com.liferay.portal.service;
  *
  */
 public class PortalServiceUtil {
-	public static java.lang.String getAutoDeployDirectory() {
+	public static java.lang.String getAutoDeployDirectory()
+		throws com.liferay.portal.SystemException {
 		return getService().getAutoDeployDirectory();
 	}
 

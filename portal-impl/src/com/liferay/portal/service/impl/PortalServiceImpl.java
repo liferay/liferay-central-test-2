@@ -31,6 +31,8 @@ import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.service.base.PortalServiceBaseImpl;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.PrefsPropsUtil;
 
 /**
  * <a href="PortalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -40,14 +42,16 @@ import com.liferay.portal.util.PropsUtil;
  */
 public class PortalServiceImpl extends PortalServiceBaseImpl {
 
-	public String getAutoDeployDirectory() {
-		return PropsUtil.get(PropsKeys.AUTO_DEPLOY_DEPLOY_DIR);
+	public String getAutoDeployDirectory() throws SystemException {
+		return PrefsPropsUtil.getString(
+			PropsKeys.AUTO_DEPLOY_DEPLOY_DIR,
+			PropsValues.AUTO_DEPLOY_DEPLOY_DIR);
 	}
 
 	public int getBuildNumber() {
 		return ReleaseInfo.getBuildNumber();
 	}
-	
+
 	public void test() {
 		long userId = 0;
 

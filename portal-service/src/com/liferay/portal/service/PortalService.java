@@ -55,7 +55,8 @@ import com.liferay.portal.kernel.annotation.Transactional;
 	PortalException.class, SystemException.class})
 public interface PortalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.lang.String getAutoDeployDirectory();
+	public java.lang.String getAutoDeployDirectory()
+		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getBuildNumber();
