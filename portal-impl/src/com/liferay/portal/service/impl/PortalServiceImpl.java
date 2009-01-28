@@ -29,10 +29,9 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.service.base.PortalServiceBaseImpl;
-import com.liferay.portal.util.PropsKeys;
-import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.PrefsPropsUtil;
+import com.liferay.portal.util.PropsKeys;
+import com.liferay.portal.util.PropsValues;
 
 /**
  * <a href="PortalServiceImpl.java.html"><b><i>View Source</i></b></a>
