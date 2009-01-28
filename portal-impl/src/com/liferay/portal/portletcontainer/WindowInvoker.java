@@ -58,8 +58,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsKeys;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.wsrp.ProfileMapManager;
@@ -155,8 +153,8 @@ import org.w3c.dom.Element;
  */
 public class WindowInvoker extends InvokerPortletImpl {
 
-	public static final String[] CUSTOM_RESERVED_ATTRS = PropsUtil.getArray(
-		PropsKeys.REQUEST_SHARED_ATTRIBUTES);
+	public static final List<String> REQUEST_SHARED_ATTRIBUTES =
+		ListUtil.toList(PropsValues.REQUEST_SHARED_ATTRIBUTES);
 
 	public void init(PortletConfig portletConfig) throws PortletException {
 		if (_remotePortlet) {
@@ -767,9 +765,6 @@ public class WindowInvoker extends InvokerPortletImpl {
 
 		containerRequest.setUserInfo(userInfoMap);
 
-		containerRequest.setRequestSharedAttributes(
-			ListUtil.toList(CUSTOM_RESERVED_ATTRS));
-
 		containerRequest.setAttribute(
 			WebKeys.THEME_DISPLAY, _getThemeDisplay(portletRequest));
 
@@ -779,6 +774,8 @@ public class WindowInvoker extends InvokerPortletImpl {
 		containerRequest.setAttribute(
 			PortletRequestConstants.ESCAPE_XML_VALUE,
 			Boolean.valueOf(PropsValues.PORTLET_URL_ESCAPE_XML));
+
+		containerRequest.setRequestSharedAttributes(REQUEST_SHARED_ATTRIBUTES);
 	}
 
 	private Map<String, String> _processUserInfoMap(
