@@ -114,6 +114,7 @@ public class LayoutExporter {
 
 			if (!portlet.isActive()) {
 				itr.remove();
+
 				continue;
 			}
 
