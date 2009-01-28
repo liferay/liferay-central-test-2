@@ -97,6 +97,7 @@ import org.apache.commons.lang.time.StopWatch;
  * @author Raymond Augé
  * @author Jorge Ferrer
  * @author Bruno Farache
+ * @author Karthik Sudarshan
  *
  */
 public class LayoutExporter {
@@ -113,6 +114,7 @@ public class LayoutExporter {
 
 			if (!portlet.isActive()) {
 				itr.remove();
+				continue;
 			}
 
 			PortletDataHandler portletDataHandler =
