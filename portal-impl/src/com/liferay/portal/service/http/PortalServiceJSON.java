@@ -71,6 +71,18 @@ import com.liferay.portal.service.PortalServiceUtil;
  *
  */
 public class PortalServiceJSON {
+	public static java.lang.String getAutoDeployDirectory() {
+		java.lang.String returnValue = PortalServiceUtil.getAutoDeployDirectory();
+
+		return returnValue;
+	}
+
+	public static int getBuildNumber() {
+		int returnValue = PortalServiceUtil.getBuildNumber();
+
+		return returnValue;
+	}
+
 	public static void test() {
 		PortalServiceUtil.test();
 	}

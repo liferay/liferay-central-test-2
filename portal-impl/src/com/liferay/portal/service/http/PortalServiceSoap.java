@@ -80,6 +80,33 @@ import java.rmi.RemoteException;
  *
  */
 public class PortalServiceSoap {
+	public static java.lang.String getAutoDeployDirectory()
+		throws RemoteException {
+		try {
+			java.lang.String returnValue = PortalServiceUtil.getAutoDeployDirectory();
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getBuildNumber() throws RemoteException {
+		try {
+			int returnValue = PortalServiceUtil.getBuildNumber();
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void test() throws RemoteException {
 		try {
 			PortalServiceUtil.test();

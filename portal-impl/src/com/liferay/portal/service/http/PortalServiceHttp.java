@@ -68,6 +68,54 @@ import com.liferay.portal.service.PortalServiceUtil;
  *
  */
 public class PortalServiceHttp {
+	public static java.lang.String getAutoDeployDirectory(
+		HttpPrincipal httpPrincipal) throws com.liferay.portal.SystemException {
+		try {
+			MethodWrapper methodWrapper = new MethodWrapper(PortalServiceUtil.class.getName(),
+					"getAutoDeployDirectory", new Object[0]);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.lang.String)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static int getBuildNumber(HttpPrincipal httpPrincipal)
+		throws com.liferay.portal.SystemException {
+		try {
+			MethodWrapper methodWrapper = new MethodWrapper(PortalServiceUtil.class.getName(),
+					"getBuildNumber", new Object[0]);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static void test(HttpPrincipal httpPrincipal)
 		throws com.liferay.portal.SystemException {
 		try {

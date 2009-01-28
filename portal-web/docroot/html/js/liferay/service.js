@@ -772,6 +772,20 @@ Liferay.Service.Portal.Phone = {
 Liferay.Service.Portal.Portal = {
 	serviceClassName: Liferay.Service.Portal.servicePackage + "Portal" + Liferay.Service.classNameSuffix,
 
+	getAutoDeployDirectory: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getAutoDeployDirectory";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getBuildNumber: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getBuildNumber";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	test: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "test";

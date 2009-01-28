@@ -45,6 +45,14 @@ package com.liferay.portal.service;
  *
  */
 public class PortalServiceUtil {
+	public static java.lang.String getAutoDeployDirectory() {
+		return getService().getAutoDeployDirectory();
+	}
+
+	public static int getBuildNumber() {
+		return getService().getBuildNumber();
+	}
+
 	public static void test() {
 		getService().test();
 	}

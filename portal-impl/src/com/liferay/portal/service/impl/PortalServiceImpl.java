@@ -27,7 +27,10 @@ import com.liferay.counter.service.persistence.CounterPersistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.service.base.PortalServiceBaseImpl;
+import com.liferay.portal.util.PropsKeys;
+import com.liferay.portal.util.PropsUtil;
 
 /**
  * <a href="PortalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +40,14 @@ import com.liferay.portal.service.base.PortalServiceBaseImpl;
  */
 public class PortalServiceImpl extends PortalServiceBaseImpl {
 
+	public String getAutoDeployDirectory() {
+		return PropsUtil.get(PropsKeys.AUTO_DEPLOY_DEPLOY_DIR);
+	}
+
+	public int getBuildNumber() {
+		return ReleaseInfo.getBuildNumber();
+	}
+	
 	public void test() {
 		long userId = 0;
 
