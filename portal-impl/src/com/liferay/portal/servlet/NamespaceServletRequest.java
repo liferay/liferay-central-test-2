@@ -23,8 +23,7 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.kernel.util.JavaConstants;
-import com.liferay.portal.util.PropsKeys;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.servlet.DynamicServletRequest;
 
 import java.util.ArrayList;
@@ -60,9 +59,6 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 		reservedAttrs.add(JavaConstants.JAVAX_PORTLET_RESPONSE);
 		reservedAttrs.add(PortletRequest.LIFECYCLE_PHASE);
 	}
-
-	public static final String[] CUSTOM_RESERVED_ATTRS = PropsUtil.getArray(
-		PropsKeys.REQUEST_SHARED_ATTRIBUTES);
 
 	public NamespaceServletRequest(
 		HttpServletRequest request, String attrNamespace,
@@ -156,8 +152,10 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 			return true;
 		}
 		else {
-			for (int i = 0; i < CUSTOM_RESERVED_ATTRS.length; i++) {
-				if (name.startsWith(CUSTOM_RESERVED_ATTRS[i])) {
+			for (String requestSharedAttribute :
+					PropsValues.REQUEST_SHARED_ATTRIBUTES) {
+
+				if (name.startsWith(requestSharedAttribute)) {
 					return true;
 				}
 			}

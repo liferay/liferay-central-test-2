@@ -978,6 +978,9 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.PREFERENCE_VALIDATE_ON_STARTUP));
 
+	public static final String[] REQUEST_SHARED_ATTRIBUTES =
+		PropsUtil.getArray(PropsKeys.REQUEST_SHARED_ATTRIBUTES);
+
 	public static final String RESOURCE_REPOSITORIES_ROOT =
 		PropsUtil.get(PropsKeys.RESOURCE_REPOSITORIES_ROOT);
 
