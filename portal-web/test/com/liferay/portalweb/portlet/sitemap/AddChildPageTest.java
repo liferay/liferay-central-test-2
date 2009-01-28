@@ -26,20 +26,20 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="VerifyLinksTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddChildPageTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class VerifyLinksTest extends BaseTestCase {
-	public void testVerifyLinks() throws Exception {
+public class AddChildPageTest extends BaseTestCase {
+	public void testAddChildPage() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Site Map Test Page")) {
+				if (selenium.isElementPresent("//div[2]/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -49,31 +49,33 @@ public class VerifyLinksTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Site Map Test Page"));
+		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//div[2]/div/div/ul/li[3]/ul/li/a"));
+		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//li[2]/ul/li[3]/a/span"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Children"));
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_88_name_en_US",
+			RuntimeVariables.replace("Site Map Child Page"));
+		selenium.type("_88_name_en_US",
+			RuntimeVariables.replace("Site Map Child Page"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"Site Map Test Page \u00bb Site Map Child Page"));
-		assertFalse(selenium.isTextPresent(
-				"Site Map Test Page \u00bb Site Map Child Page \u00bb Site Map Grand Child"));
-		selenium.click(RuntimeVariables.replace("link=Site Map Test Page"));
+				"Your request processed successfully."));
+		selenium.click(RuntimeVariables.replace("//li[2]/ul/li[3]/ul/li/a/span"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Site Map Grand Child"));
+		selenium.click(RuntimeVariables.replace("link=Children"));
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_88_name_en_US",
+			RuntimeVariables.replace("Site Map Grand Child"));
+		selenium.type("_88_name_en_US",
+			RuntimeVariables.replace("Site Map Grand Child"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"Site Map Test Page \u00bb Site Map Child Page \u00bb Site Map Grand Child"));
-		selenium.click(RuntimeVariables.replace("link=Site Map Test Page"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//div[2]/div/div/ul/li[1]/a"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Admin"));
-		selenium.click(RuntimeVariables.replace("link=Site Map Test Page"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//a[contains(text(),'Plugins')]"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Plugin Installer"));
+				"Your request processed successfully."));
 	}
 }

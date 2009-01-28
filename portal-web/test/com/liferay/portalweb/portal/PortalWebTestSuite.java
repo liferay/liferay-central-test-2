@@ -62,6 +62,7 @@ import com.liferay.portalweb.portlet.reverendfun.ReverendFunTests;
 import com.liferay.portalweb.portlet.rss.RSSTests;
 import com.liferay.portalweb.portlet.search.SearchTests;
 import com.liferay.portalweb.portlet.shopping.ShoppingTests;
+import com.liferay.portalweb.portlet.sitemap.SiteMapTests;
 import com.liferay.portalweb.portlet.smstextmessenger.SMSTextMessengerTests;
 import com.liferay.portalweb.portlet.softwarecatalog.SoftwareCatalogTests;
 import com.liferay.portalweb.portlet.tagsadmin.TagsAdminTests;
@@ -131,7 +132,7 @@ public class PortalWebTestSuite extends BaseTests {
 		addTestSuite(SearchTests.class);
 		addTestSuite(SessionExpirationTests.class);
 		addTestSuite(ShoppingTests.class);
-		//addTestSuite(SiteMapTests.class);
+		addTestSuite(SiteMapTests.class);
 		addTestSuite(SMSTextMessengerTests.class);
 		addTestSuite(SoftwareCatalogTests.class);
 		//addTestSuite(StagingTests.class);

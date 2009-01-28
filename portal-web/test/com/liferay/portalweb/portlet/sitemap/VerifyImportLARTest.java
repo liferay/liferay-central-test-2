@@ -22,26 +22,39 @@
 
 package com.liferay.portalweb.portlet.sitemap;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="SiteMapTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="VerifyImportLARTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class SiteMapTests extends BaseTests {
+public class VerifyImportLARTest extends BaseTestCase {
+	public void testVerifyImportLAR() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-	public SiteMapTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddChildPageTest.class);
-		addTestSuite(AddPortletToChildrenTest.class);
-		addTestSuite(VerifyLinksTest.class);
-		addTestSuite(EditConfigurationTest.class);
-		addTestSuite(ImportLARTest.class);
-		addTestSuite(VerifyImportLARTest.class);
-		addTestSuite(TearDownTest.class);
+			try {
+				if (selenium.isElementPresent("link=Site Map Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Site Map Test Page"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("//a[contains(text(),'Plugins')]"));
+		assertTrue(selenium.isElementPresent(
+				"//a[contains(text(),'Site Map Test Page')]"));
+		assertTrue(selenium.isElementPresent("link=Site Map Child Page"));
+		assertTrue(selenium.isElementPresent("link=Site Map Grand Child"));
 	}
-
 }

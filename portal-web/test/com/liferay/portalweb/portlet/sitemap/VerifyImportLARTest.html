@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>AddPortletTest</title>
+<title>VerifyImportLARTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddPortletTest</td></tr>
+<tr><td rowspan="1" colspan="3">VerifyImportLARTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
@@ -19,23 +19,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>link=Add Application</td>
+	<td>assertElementPresent</td>
+	<td>//a[contains(text(),'Plugins')]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id='ContentManagement-SiteMap']/p/a</td>
+	<td>assertElementPresent</td>
+	<td>//a[contains(text(),'Site Map Test Page')]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>//div[@id='ContentManagement-SiteMap']/p/a</td>
+	<td>assertElementPresent</td>
+	<td>link=Site Map Child Page</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//div[2]/div/div/ul/li[1]/a</td>
+	<td>assertElementPresent</td>
+	<td>link=Site Map Grand Child</td>
 	<td></td>
 </tr>
 
