@@ -48,6 +48,7 @@ import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.ProtectedPrincipal;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
@@ -57,6 +58,8 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsKeys;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.wsrp.ProfileMapManager;
@@ -151,6 +154,9 @@ import org.w3c.dom.Element;
  *
  */
 public class WindowInvoker extends InvokerPortletImpl {
+
+	public static final String[] CUSTOM_RESERVED_ATTRS = PropsUtil.getArray(
+		PropsKeys.REQUEST_SHARED_ATTRIBUTES);
 
 	public void init(PortletConfig portletConfig) throws PortletException {
 		if (_remotePortlet) {
@@ -760,6 +766,9 @@ public class WindowInvoker extends InvokerPortletImpl {
 		}
 
 		containerRequest.setUserInfo(userInfoMap);
+
+		containerRequest.setRequestSharedAttributes(
+			ListUtil.toList(CUSTOM_RESERVED_ATTRS));
 
 		containerRequest.setAttribute(
 			WebKeys.THEME_DISPLAY, _getThemeDisplay(portletRequest));
