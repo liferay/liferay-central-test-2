@@ -856,8 +856,7 @@ public class SourceFormatter {
 		ClassLoader classLoader = SourceFormatter.class.getClassLoader();
 
 		URL url = classLoader.getResource(
-			"com/liferay/portal/tools/dependencies/" +
-				"source_formatter_exclusions.properties");
+			System.getProperty("external-properties"));
 
 		if (url == null) {
 			return;

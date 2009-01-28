@@ -768,7 +768,7 @@ ${exception.message}
 			fork="true"
 			newenvironment="true"
 		>
-			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
+			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/source_formatter_exclusions.properties" />
 		</java>
 
 		<delete file="ServiceBuilder.temp" />
