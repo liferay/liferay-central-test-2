@@ -84,7 +84,7 @@ public class RuntimeVariables {
 
 		text = StringUtil.replace(
 			text, "//a[contains(@href, 'brochure_WAR_brochuretheme')]",
-			text, "//a[contains(@href, '" + ThemeIds.getThemeId() + "')]",
+			"//a[contains(@href, '" + ThemeIds.getThemeId() + "')]");
 
 		if (_contextReplace == null) {
 			return text;
