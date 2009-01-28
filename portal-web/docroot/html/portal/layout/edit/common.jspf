@@ -32,6 +32,9 @@ String metaTagsTitle = LanguageUtil.get(pageContext, "meta-tags");
 
 String javascriptId = portletDisplay.getNamespace() + "javascript";
 String javascriptTitle = LanguageUtil.get(pageContext, "javascript");
+
+String robotsId = portletDisplay.getNamespace() + "robots";
+String robotsTitle = LanguageUtil.get(pageContext, "meta-robots");
 %>
 
 <liferay-ui:panel-container id="<%= userSettingsId %>" persistState="<%= true %>" extended="<%= Boolean.TRUE %>" cssClass="page-extra-settings">
@@ -227,7 +230,7 @@ String javascriptTitle = LanguageUtil.get(pageContext, "javascript");
 		String sitemapTitle = LanguageUtil.get(pageContext, "sitemap-protocol");
 		%>
 
-		<liferay-ui:panel id="<%= metaTagsId %>" title="<%= metaTagsTitle %>" defaultState="closed" persistState="<%= true %>" extended="<%= true %>">
+		<liferay-ui:panel id="<%= robotsId %>" title="<%= robotsTitle %>" defaultState="closed" persistState="<%= true %>" extended="<%= true %>">
 
 			<%
 			boolean include = GetterUtil.getBoolean(selLayout.getTypeSettingsProperties().getProperty("sitemap-include"), true);
