@@ -48,7 +48,7 @@ public class PortletInstanceFactoryUtil {
 	}
 
 	public static void destroy(Portlet portlet) {
-		getPortletInstanceFactory().clear(portlet);
+		getPortletInstanceFactory().destroy(portlet);
 	}
 
 	public static PortletInstanceFactory getPortletInstanceFactory() {
