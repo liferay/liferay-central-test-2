@@ -63,16 +63,14 @@ public class DeploymentProgressListener implements ProgressListener {
 					_deploymentManager.getNonRunningModules(
 						ModuleType.WAR, _deploymentManager.getTargets());
 
-				if (targetModuleIDs != null && targetModuleIDs.length > 0) {
+				if ((targetModuleIDs != null) && (targetModuleIDs.length > 0)) {
 					for (TargetModuleID targetModuleID : targetModuleIDs) {
 						if (!_warContext.equals(targetModuleID.getModuleID())) {
 							continue;
 						}
 
-						ProgressObject startProgress =
-							_deploymentManager.start(new TargetModuleID[] {
-								targetModuleID
-							});
+						ProgressObject startProgress = _deploymentManager.start(
+							new TargetModuleID[] {targetModuleID});
 
 						startProgress.addProgressListener(
 							new StartProgressListener(_deploymentHandler));
@@ -82,20 +80,18 @@ public class DeploymentProgressListener implements ProgressListener {
 
 						break;
 					}
-				} else {
-					targetModuleIDs =
-						_deploymentManager.getAvailableModules(
-							ModuleType.WAR, _deploymentManager.getTargets());
+				}
+				else {
+					targetModuleIDs = _deploymentManager.getAvailableModules(
+						ModuleType.WAR, _deploymentManager.getTargets());
 
 					for (TargetModuleID targetModuleID : targetModuleIDs) {
 						if (!_warContext.equals(targetModuleID.getModuleID())) {
 							continue;
 						}
 
-						ProgressObject startProgress =
-							_deploymentManager.start(new TargetModuleID[] {
-								targetModuleID
-							});
+						ProgressObject startProgress = _deploymentManager.start(
+							new TargetModuleID[] {targetModuleID});
 
 						startProgress.addProgressListener(
 							new StartProgressListener(_deploymentHandler));
@@ -105,7 +101,6 @@ public class DeploymentProgressListener implements ProgressListener {
 
 						break;
 					}
-
 				}
 			}
 			catch (Exception e) {
