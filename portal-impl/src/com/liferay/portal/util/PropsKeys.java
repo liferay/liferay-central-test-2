@@ -124,6 +124,8 @@ public interface PropsKeys {
 
 	public static final String AUTO_DEPLOY_DEPLOY_DIR = "auto.deploy.deploy.dir";
 
+	public static final String AUTO_DEPLOY_DEPLOY_TO_CONTAINER = "auto.deploy.deploy.to.container";
+
 	public static final String AUTO_DEPLOY_DEST_DIR = "auto.deploy.dest.dir";
 
 	public static final String AUTO_DEPLOY_ENABLED = "auto.deploy.enabled";
@@ -141,6 +143,8 @@ public interface PropsKeys {
 	public static final String AUTO_DEPLOY_TOMCAT_LIB_DIR = "auto.deploy.tomcat.lib.dir";
 
 	public static final String AUTO_DEPLOY_UNPACK_WAR = "auto.deploy.unpack.war";
+
+	public static final String AUTO_DEPLOY_UPDATED_WAR_DIR = "auto.deploy.updated.war.dir";
 
 	public static final String AUTO_LOGIN_HOOKS = "auto.login.hooks";
 
