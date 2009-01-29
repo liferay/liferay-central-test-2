@@ -663,10 +663,10 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Resources
 
-		if ((Validator.isNotNull(serviceContext.getCommunityPermissions())) ||
-			(Validator.isNotNull(serviceContext.getGuestPermissions()))) {
+		if ((serviceContext.getCommunityPermissions() != null) ||
+			(serviceContext.getGuestPermissions() != null)) {
 
-			updateResource(
+			updateEntryResources(
 				entry, serviceContext.getCommunityPermissions(),
 				serviceContext.getGuestPermissions());
 		}
@@ -723,12 +723,12 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return entry;
 	}
 
-	public void updateResource(
+	public void updateEntryResources(
 			BlogsEntry entry, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		resourceLocalService.updateResource(
+		resourceLocalService.updateResources(
 			entry.getCompanyId(), entry.getGroupId(),
 			BlogsEntry.class.getName(), entry.getEntryId(),
 			communityPermissions, guestPermissions);

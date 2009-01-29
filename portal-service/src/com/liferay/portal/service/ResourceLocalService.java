@@ -142,17 +142,24 @@ public interface ResourceLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public long getLatestResourceId() throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portal.model.Resource> getResources()
-		throws com.liferay.portal.SystemException;
-
 	public com.liferay.portal.model.Resource getResource(long companyId,
 		java.lang.String name, int scope, java.lang.String primKey)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void updateResource(long companyId, long groupId,
-		java.lang.String name, long classPK,
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portal.model.Resource> getResources()
+		throws com.liferay.portal.SystemException;
+
+	public void updateResources(long companyId, long groupId,
+		java.lang.String name, long primKey,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void updateResources(long companyId, long groupId,
+		java.lang.String name, java.lang.String primKey,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,

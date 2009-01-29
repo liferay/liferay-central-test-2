@@ -514,6 +514,13 @@ Liferay.Service.Portal.Organization = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	deleteLogo: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deleteLogo";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	deleteOrganization: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "deleteOrganization";

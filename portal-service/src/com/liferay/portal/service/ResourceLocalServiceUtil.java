@@ -182,11 +182,6 @@ public class ResourceLocalServiceUtil {
 		return getService().getLatestResourceId();
 	}
 
-	public static java.util.List<com.liferay.portal.model.Resource> getResources()
-		throws com.liferay.portal.SystemException {
-		return getService().getResources();
-	}
-
 	public static com.liferay.portal.model.Resource getResource(
 		long companyId, java.lang.String name, int scope,
 		java.lang.String primKey)
@@ -195,14 +190,30 @@ public class ResourceLocalServiceUtil {
 		return getService().getResource(companyId, name, scope, primKey);
 	}
 
-	public static void updateResource(long companyId, long groupId,
-		java.lang.String name, long classPK,
+	public static java.util.List<com.liferay.portal.model.Resource> getResources()
+		throws com.liferay.portal.SystemException {
+		return getService().getResources();
+	}
+
+	public static void updateResources(long companyId, long groupId,
+		java.lang.String name, long primKey,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		getService()
-			.updateResource(companyId, groupId, name, classPK,
+			.updateResources(companyId, groupId, name, primKey,
+			communityPermissions, guestPermissions);
+	}
+
+	public static void updateResources(long companyId, long groupId,
+		java.lang.String name, java.lang.String primKey,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService()
+			.updateResources(companyId, groupId, name, primKey,
 			communityPermissions, guestPermissions);
 	}
 
