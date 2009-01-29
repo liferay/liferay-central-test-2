@@ -222,6 +222,8 @@ public class CaptchaImpl implements Captcha {
 		session.setAttribute(WebKeys.CAPTCHA_TEXT, captchaText);
 
 		_captchaProducer.createImage(response.getOutputStream(), captchaText);
+
+		response.setContentType("image/jpeg");
 	}
 
 	public void serveImage(
