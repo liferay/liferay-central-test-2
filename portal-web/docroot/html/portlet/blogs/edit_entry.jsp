@@ -320,7 +320,7 @@ boolean allowTrackbacks = BeanParamUtil.getBoolean(entry, request, "allowTrackba
 	</td>
 </tr>
 
-<%--<c:if test="<%= entry == null %>">
+<c:if test="<%= entry == null %>">
 	<tr>
 		<td colspan="2">
 			<br />
@@ -336,7 +336,7 @@ boolean allowTrackbacks = BeanParamUtil.getBoolean(entry, request, "allowTrackba
 			/>
 		</td>
 	</tr>
-</c:if>--%>
+</c:if>
 
 </table>
 

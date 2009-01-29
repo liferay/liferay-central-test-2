@@ -43,6 +43,7 @@ import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.base.ResourceLocalServiceBaseImpl;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.ResourceComparator;
+import com.liferay.portlet.blogs.model.BlogsEntry;
 
 import java.util.List;
 
@@ -559,6 +560,55 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		}
 
 		logAddCommunityPermissions(groupId, name, resourceId, stopWatch, 5);
+	}
+
+	public void updateResource(
+			long companyId, long groupId, String name, long classPK,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		Resource resource = resourceLocalService.getResource(
+			companyId, BlogsEntry.class.getName(),
+			ResourceConstants.SCOPE_INDIVIDUAL, String.valueOf(classPK));
+
+		Role role = roleLocalService.getRole(companyId, RoleConstants.GUEST);
+
+		if (guestPermissions == null) {
+			guestPermissions = new String[0];
+		}
+
+		permissionService.setRolePermissions(
+			role.getRoleId(), groupId, guestPermissions,
+			resource.getResourceId());
+
+		Group group = groupLocalService.getGroup(groupId);
+
+		if (group.isLayout()) {
+			Layout layout = layoutLocalService.getLayout(
+				group.getClassPK());
+
+			group = layout.getGroup();
+		}
+
+		if (group.isCommunity()) {
+			role = roleLocalService.getRole(
+				companyId, RoleConstants.COMMUNITY_MEMBER);
+		}
+		else if (group.isOrganization()) {
+			role = roleLocalService.getRole(
+				companyId, RoleConstants.ORGANIZATION_MEMBER);
+		}
+		else if (group.isUser() || group.isUserGroup()) {
+			role = roleLocalService.getRole(
+				companyId, RoleConstants.POWER_USER);
+		}
+
+		if (communityPermissions == null) {
+			communityPermissions = new String[0];
+		}
+		permissionService.setRolePermissions(
+			role.getRoleId(), groupId, communityPermissions,
+			resource.getResourceId());
 	}
 
 	protected void addGuestPermissions(

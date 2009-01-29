@@ -661,6 +661,16 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		blogsEntryPersistence.update(entry, false);
 
+		// Resources
+
+		if ((Validator.isNotNull(serviceContext.getCommunityPermissions())) ||
+			(Validator.isNotNull(serviceContext.getGuestPermissions()))) {
+
+			updateResource(
+				entry, serviceContext.getCommunityPermissions(),
+				serviceContext.getGuestPermissions());
+		}
+
 		// Statistics
 
 		if (!draft) {
@@ -711,6 +721,17 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		}
 
 		return entry;
+	}
+
+	public void updateResource(
+			BlogsEntry entry, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		resourceLocalService.updateResource(
+			entry.getCompanyId(), entry.getGroupId(),
+			BlogsEntry.class.getName(), entry.getEntryId(),
+			communityPermissions, guestPermissions);
 	}
 
 	public void updateTagsAsset(

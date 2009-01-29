@@ -195,6 +195,17 @@ public class ResourceLocalServiceUtil {
 		return getService().getResource(companyId, name, scope, primKey);
 	}
 
+	public static void updateResource(long companyId, long groupId,
+		java.lang.String name, long classPK,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService()
+			.updateResource(companyId, groupId, name, classPK,
+			communityPermissions, guestPermissions);
+	}
+
 	public static ResourceLocalService getService() {
 		if (_service == null) {
 			throw new RuntimeException("ResourceLocalService is not set");
