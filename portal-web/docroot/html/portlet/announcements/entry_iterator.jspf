@@ -1,0 +1,135 @@
+<%
+/**
+* Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in
+* all copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*/
+%>
+
+<%
+total = AnnouncementsEntryLocalServiceUtil.getEntriesCount(user.getUserId(), scopes, portletName.equals(PortletKeys.ALERTS), flagValue);
+
+searchContainer.setTotal(total);
+
+results = AnnouncementsEntryLocalServiceUtil.getEntries(user.getUserId(), scopes, portletName.equals(PortletKeys.ALERTS), flagValue, searchContainer.getStart(), searchContainer.getEnd());
+
+searchContainer.setResults(results);
+
+for (int i = 0; i < results.size(); i++) {
+	AnnouncementsEntry entry = results.get(i);
+
+	boolean readEntry = false;
+
+	try {
+		AnnouncementsFlagLocalServiceUtil.getFlag(user.getUserId(), entry.getEntryId(), AnnouncementsFlagImpl.READ);
+
+		readEntry = true;
+	}
+	catch (NoSuchFlagException nsfe) {
+		AnnouncementsFlagLocalServiceUtil.addFlag(user.getUserId(), entry.getEntryId(), AnnouncementsFlagImpl.READ);
+	}
+
+	String className = StringPool.BLANK;
+
+	if (i == 0) {
+		className += " first";
+	}
+
+	if ((i + 1) == results.size()) {
+		className += " last";
+	}
+
+	if (readEntry) {
+		className += " read";
+	}
+
+	if (entry.getPriority() > 0) {
+		className += " important";
+	}
+%>
+
+	<div class="entry<%= className %>" id="<portlet:namespace/><%= entry.getEntryId() %>">
+		<h3 class="entry-title">
+			<c:choose>
+				<c:when test="<%= Validator.isNotNull(entry.getUrl()) %>">
+					<a class="entry-url" href="<%= entry.getUrl() %>"><%= entry.getTitle() %></a>
+				</c:when>
+				<c:when test="<%= Validator.isNull(entry.getUrl()) %>">
+					<%= entry.getTitle() %>
+				</c:when>
+			</c:choose>
+
+			<div class="edit-actions">
+				<table class="lfr-table">
+				<tr>
+					<c:if test="<%= AnnouncementsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE) %>">
+						<td class="edit-entry">
+							<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+								<portlet:param name="struts_action" value="/announcements/edit_entry" />
+								<portlet:param name="redirect" value="<%= currentURL %>" />
+								<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
+							</portlet:renderURL>
+
+							<liferay-ui:icon image="edit" url="<%= editURL %>" label="<%= true %>" />
+						</td>
+					</c:if>
+
+					<c:if test="<%= AnnouncementsEntryPermission.contains(permissionChecker, entry, ActionKeys.DELETE) %>">
+						<td class="delete-entry">
+							<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
+								<portlet:param name="struts_action" value="/announcements/edit_entry" />
+								<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+								<portlet:param name="redirect" value="<%= currentURL %>" />
+								<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
+							</portlet:actionURL>
+
+							<liferay-ui:icon-delete url="<%= deleteURL %>" label="<%= true %>" />
+						</td>
+					</c:if>
+
+					<td class="control-entry">
+						<c:if test='<%= tabs1.equals("entries") && themeDisplay.isSignedIn() %>'>
+							<a href="<%= "javascript: " + renderResponse.getNamespace() + "handleEntry(" + entry.getEntryId() + ");" %>"><liferay-ui:message key='<%= ((flagValue == AnnouncementsFlagImpl.NOT_HIDDEN) ? "mark-as-read" : "show") %>' /></a>
+						</c:if>
+					</td>
+				</tr>
+				</table>
+			</div>
+		</h3>
+
+		<p class="entry-content entry-type-<%= entry.getType() %>">
+			<%@ include file="/html/portlet/announcements/entry_scope.jspf" %>
+
+			<%= entry.getContent() %>
+		</p>
+	</div>
+
+<%
+}
+%>
+
+<c:if test="<%= results.size() == 0 && portletName.equals(PortletKeys.ALERTS) && !PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.ANNOUNCEMENTS, ActionKeys.ADD_ENTRY)%>">
+	<script>
+		jQuery(document).ready(
+			function() {
+				jQuery('#p_p_id<portlet:namespace />').hide();
+			}
+		);
+	</script>
+</c:if>

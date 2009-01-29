@@ -165,74 +165,93 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 						<option <%= ((classNameId == 0) && (classPK == 0)) ? "selected" : "" %> value="0,0"><liferay-ui:message key="general" /></option>
 					</c:if>
 
-					<optgroup label="<liferay-ui:message key="communities" />">
+					<%
+					List<Group> groups = GroupLocalServiceUtil.getUserGroups(user.getUserId());
+					%>
 
-						<%
-						List<Group> groups = GroupLocalServiceUtil.getUserGroups(user.getUserId());
+					<c:if test="<%= groups.size() > 0 %>">
+						<optgroup label="<liferay-ui:message key="communities" />">
 
-						for (Group group : groups) {
-							if (group.isCommunity() && GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
-						%>
+							<%
+							for (Group group : groups) {
+								if (group.isCommunity() && GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
+							%>
 
-								<option <%= (classPK == group.getGroupId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(Group.class) %><%= StringPool.COMMA %><%= group.getGroupId() %>"><%= group.getName() %></option>
+									<option <%= (classPK == group.getGroupId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(Group.class) %><%= StringPool.COMMA %><%= group.getGroupId() %>"><%= group.getName() %></option>
 
-						<%
+							<%
+								}
 							}
-						}
-						%>
+							%>
 
-					</optgroup>
-					<optgroup label="<liferay-ui:message key="organizations" />">
+						</optgroup>
+					</c:if>
 
-						<%
-						List<Organization> organizations = OrganizationLocalServiceUtil.getUserOrganizations(user.getUserId());
+					<%
+					List<Organization> organizations = OrganizationLocalServiceUtil.getUserOrganizations(user.getUserId());
+					%>
 
-						for (Organization organization : organizations) {
-							if (OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
-						%>
+					<c:if test="<%= organizations.size() > 0 %>">
+						<optgroup label="<liferay-ui:message key="organizations" />">
 
-								<option <%= (classPK == organization.getOrganizationId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(Organization.class) %><%= StringPool.COMMA %><%= organization.getOrganizationId() %>"><%= organization.getName() %></option>
+							<%
+							for (Organization organization : organizations) {
+								if (OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
+							%>
 
-						<%
+									<option <%= (classPK == organization.getOrganizationId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(Organization.class) %><%= StringPool.COMMA %><%= organization.getOrganizationId() %>"><%= organization.getName() %></option>
+
+							<%
+								}
 							}
-						}
-						%>
+							%>
 
-					</optgroup>
-					<optgroup label="<liferay-ui:message key="roles" />">
+						</optgroup>
+					</c:if>
 
-						<%
-						List<Role> roles = RoleLocalServiceUtil.getRoles(themeDisplay.getCompanyId());
+					<%
+					List<Role> roles = RoleLocalServiceUtil.getRoles(themeDisplay.getCompanyId());
+					%>
 
-						for (Role role : roles) {
-							if (RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
-						%>
+					<c:if test="<%= roles.size() > 0 %>">
+						<optgroup label="<liferay-ui:message key="roles" />">
 
-								<option <%= (classPK == role.getRoleId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(Role.class) %><%= StringPool.COMMA %><%= role.getRoleId() %>"><%= role.getTitle(locale) %></option>
+							<%
+							for (Role role : roles) {
+								if (RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
+							%>
 
-						<%
+									<option <%= (classPK == role.getRoleId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(Role.class) %><%= StringPool.COMMA %><%= role.getRoleId() %>"><%= role.getTitle(locale) %></option>
+
+							<%
+								}
 							}
-						}
-						%>
+							%>
 
-					</optgroup>
-					<optgroup label="<liferay-ui:message key="user-groups" />">
+						</optgroup>
+					</c:if>
 
-						<%
-						List<UserGroup> userGroups = UserGroupLocalServiceUtil.getUserGroups(themeDisplay.getCompanyId());
+					<%
+					List<UserGroup> userGroups = UserGroupLocalServiceUtil.getUserGroups(themeDisplay.getCompanyId());
+					%>
 
-						for (UserGroup userGroup : userGroups) {
-							if (UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
-						%>
+					<c:if test="<%= userGroups.size() > 0 %>">
+						<optgroup label="<liferay-ui:message key="user-groups" />">
 
-								<option <%= (classPK == userGroup.getUserGroupId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(UserGroup.class) %><%= StringPool.COMMA %><%= userGroup.getUserGroupId() %>"><%= userGroup.getName() %></option>
+							<%
+							for (UserGroup userGroup : userGroups) {
+								if (UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
+							%>
 
-						<%
+									<option <%= (classPK == userGroup.getUserGroupId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(UserGroup.class) %><%= StringPool.COMMA %><%= userGroup.getUserGroupId() %>"><%= userGroup.getName() %></option>
+
+							<%
+								}
 							}
-						}
-						%>
+							%>
 
-					</optgroup>
+						</optgroup>
+					</c:if>
 				</select>
 			</c:otherwise>
 		</c:choose>
@@ -303,10 +322,8 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 	</td>
 	<td>
 		<select name="<portlet:namespace />priority">
-			<option value="0" <%= (priority == 0) ? "selected" : "" %>><liferay-ui:message key="low" /></option>
-			<option value="1" <%= (priority == 1) ? "selected" : "" %>><liferay-ui:message key="medium" /></option>
-			<option value="2" <%= (priority == 2) ? "selected" : "" %>><liferay-ui:message key="high" /></option>
-			<option value="3" <%= (priority == 3) ? "selected" : "" %>><liferay-ui:message key="highest" /></option>
+			<option value="0" <%= (priority == 0) ? "selected" : "" %>><liferay-ui:message key="normal" /></option>
+			<option value="1" <%= (priority == 1) ? "selected" : "" %>><liferay-ui:message key="important" /></option>
 		</select>
 	</td>
 </tr>

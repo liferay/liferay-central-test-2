@@ -42,5 +42,9 @@
 <%@ page import="com.liferay.portlet.announcements.util.AnnouncementsUtil" %>
 
 <%
+int delta = 3;
+
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 %>
+
+<%@ include file="/html/portlet/announcements/init-ext.jsp" %>

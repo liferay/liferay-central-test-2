@@ -33,9 +33,6 @@
 	padding: 6px;
 }
 
-.portlet-alerts .read-false .entry-title .entry-url {
-}
-
 .portlet-alerts .entry-content {
 	display: block;
 	padding: 2px 2px 2px 30px;
@@ -62,27 +59,28 @@
 }
 
 .portlet-announcements .entry {
-	border-bottom: 1px solid #ccc;
 	margin: 4px 0px 1.2em;
 	padding-bottom: 0.5em;
 }
 
+.portlet-announcements .important, .portlet-alerts .important {
+	font-weight: normal;
+}
+
 .portlet-announcements .entry.last {
-	border: none;
-	margin-bottom: 0;
-	padding-bottom: 0;
 }
 
 .portlet-announcements .entry-title, .portlet-alerts .entry-title {
 	display: block;
-	margin: 0 135px 0.8em 0;
+	margin-bottom: 0;
+	position: relative;
 }
 
-.portlet-announcements .read-false .entry-title {
-}
-
-.portlet-announcements .read-true .entry-title, .portlet-alerts .read-true .entry-title {
+.portlet-announcements .read-entries .entry-title, .portlet-alerts .read-entries .entry-title{
 	opacity: 0.5;
+}
+
+.portlet-announcements .read .entry-title, .portlet-alerts .read .entry-title {
 }
 
 .portlet-announcements .entry-content {
@@ -91,13 +89,21 @@
 	padding: 2px 2px 2px 30px;
 }
 
+.portlet-announcements .read-entries .entry-content, .portlet-alerts .read-entries .entry-content {
+	display: none;
+}
+
 .portlet-announcements .entry-scope {
 	color: #555;
 	display: block;
 }
 
 .portlet-announcements .edit-actions, .portlet-alerts .edit-actions {
-	float: right;
+	font-size: 0.7em;
+	font-weight: normal;
+	position: absolute;
+	right: 0;
+	top: 0;
 }
 
 .portlet-announcements .delete-entry {

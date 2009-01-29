@@ -29,12 +29,6 @@ themeDisplay.setIncludeServiceJs(true);
 
 String tabs1 = ParamUtil.getString(request, "tabs1", "entries");
 
-String tabs1Names = "entries,old-entries";
-
-if (PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.ANNOUNCEMENTS, ActionKeys.ADD_ENTRY)) {
-	tabs1Names += ",manage-entries";
-}
-
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setWindowState(WindowState.MAXIMIZED);
@@ -44,6 +38,15 @@ portletURL.setParameter("tabs1", tabs1);
 %>
 
 <c:if test="<%= !portletName.equals(PortletKeys.ALERTS) || (portletName.equals(PortletKeys.ALERTS) && PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.ANNOUNCEMENTS, ActionKeys.ADD_ENTRY)) %>">
+
+	<%
+	String tabs1Names = "entries";
+
+	if (PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.ANNOUNCEMENTS, ActionKeys.ADD_ENTRY)) {
+		tabs1Names += ",manage-entries";
+	}
+	%>
+
 	<liferay-ui:tabs
 		names="<%= tabs1Names %>"
 		url="<%= portletURL.toString() %>"
@@ -51,143 +54,83 @@ portletURL.setParameter("tabs1", tabs1);
 </c:if>
 
 <c:choose>
-	<c:when test='<%= tabs1.equals("entries") || tabs1.equals("old-entries") %>'>
+	<c:when test='<%= tabs1.equals("entries") %>'>
 		<script type="text/javascript">
-			function <portlet:namespace />hideEntry(entryId) {
+			function <portlet:namespace />handleEntry(entryId) {
+				var entry = jQuery('#<portlet:namespace/>' + entryId);
+				var container = entry.parent();
+
+				if (container.hasClass('unread-entries')) {
+					<portlet:namespace />_markEntry(entry, entryId);
+				}
+				else {
+					<portlet:namespace />_toggleContent(entry);
+				}
+			}
+
+			function <portlet:namespace />_markEntry(entry, entryId) {
 				Liferay.Service.Announcements.AnnouncementsFlag.addFlag({entryId : entryId, flag: <%= AnnouncementsFlagImpl.HIDDEN %>});
 
-				jQuery('#<portlet:namespace/>' + entryId).hide(
-					'slow',
+				var readContainer = jQuery('.portlet-announcements .read-entries');
+				var control = entry.find('.control-entry a');
+
+				entry.hide(
+					'normal',
 					function() {
-						var container = this.parentNode;
-						var entries = jQuery('.entry', container);
+						entry.appendTo(readContainer);
 
-						jQuery(this).remove();
-
-						entries.slice(entries.length - 2).addClass('last');
+						control.html('<liferay-ui:message key="show" />');
 					}
 				);
+
+				entry.show('normal');
+			}
+
+			function <portlet:namespace />_toggleContent(entry) {
+				var content = entry.find('.entry-content');
+				var control = entry.find('.control-entry a');
+
+				if (entry.hasClass('visable')) {
+					entry.removeClass('visable');
+
+					content.hide();
+
+					control.html('<liferay-ui:message key="show" />');
+				}
+				else {
+					entry.addClass('visable');
+
+					content.show();
+
+					control.html('<liferay-ui:message key="hide" />');
+				}
 			}
 		</script>
 
 		<%
 		LinkedHashMap<Long, long[]> scopes = AnnouncementsUtil.getAnnouncementScopes(user.getUserId());
 
+		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, delta, portletURL, null, "no-entries-were-found");
+
+		List<AnnouncementsEntry> results = null;
+		int total = 0;
+
 		int flagValue = AnnouncementsFlagImpl.NOT_HIDDEN;
-
-		if (tabs1.equals("old-entries")) {
-			flagValue = AnnouncementsFlagImpl.HIDDEN;
-		}
-
-		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, 3, portletURL, null, "no-entries-were-found");
-
-		int total = AnnouncementsEntryLocalServiceUtil.getEntriesCount(user.getUserId(), scopes, portletName.equals(PortletKeys.ALERTS), flagValue);
-
-		searchContainer.setTotal(total);
-
-		List<AnnouncementsEntry> results = AnnouncementsEntryLocalServiceUtil.getEntries(user.getUserId(), scopes, portletName.equals(PortletKeys.ALERTS), flagValue, searchContainer.getStart(), searchContainer.getEnd());
-
-		searchContainer.setResults(results);
-
-		for (int i = 0; i < results.size(); i++) {
-			AnnouncementsEntry entry = results.get(i);
-
-			boolean readEntry = false;
-
-			try {
-				AnnouncementsFlagLocalServiceUtil.getFlag(user.getUserId(), entry.getEntryId(), AnnouncementsFlagImpl.READ);
-
-				readEntry = true;
-			}
-			catch (NoSuchFlagException nsfe) {
-				AnnouncementsFlagLocalServiceUtil.addFlag(user.getUserId(), entry.getEntryId(), AnnouncementsFlagImpl.READ);
-			}
-
-			String className = StringPool.BLANK;
-
-			if (i == 0) {
-				className += " first";
-			}
-
-			if ((i + 1) == results.size()) {
-				className += " last";
-			}
 		%>
 
-			<div class="entry read-<%= readEntry %><%= className %>" id="<portlet:namespace/><%= entry.getEntryId() %>">
-				<div class="edit-actions">
-					<table class="lfr-table">
-					<tr>
-						<c:if test="<%= AnnouncementsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE) %>">
-							<td class="edit-entry">
-								<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
-									<portlet:param name="struts_action" value="/announcements/edit_entry" />
-									<portlet:param name="redirect" value="<%= currentURL %>" />
-									<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
-								</portlet:renderURL>
+		<div class="unread-entries">
+			<%@ include file="/html/portlet/announcements/entry_iterator.jspf" %>
+		</div>
 
-								<liferay-ui:icon image="edit" url="<%= editURL %>" label="<%= true %>" />
-							</td>
-						</c:if>
-
-						<c:if test="<%= AnnouncementsEntryPermission.contains(permissionChecker, entry, ActionKeys.DELETE) %>">
-							<td class="delete-entry">
-								<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
-									<portlet:param name="struts_action" value="/announcements/edit_entry" />
-									<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-									<portlet:param name="redirect" value="<%= currentURL %>" />
-									<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
-								</portlet:actionURL>
-
-								<liferay-ui:icon-delete url="<%= deleteURL %>" label="<%= true %>" />
-							</td>
-						</c:if>
-
-						<td class="hide-entry">
-							<c:if test='<%= tabs1.equals("entries") && themeDisplay.isSignedIn() %>'>
-								<liferay-ui:icon image="close" message="hide" url='<%= "javascript: " + renderResponse.getNamespace() + "hideEntry(" + entry.getEntryId() + ");" %>' />
-							</c:if>
-						</td>
-					</tr>
-					</table>
-				</div>
-
-				<h3 class="entry-title">
-					<c:choose>
-						<c:when test="<%= Validator.isNotNull(entry.getUrl()) %>">
-							<a class="entry-url" href="<%= entry.getUrl() %>"><%= entry.getTitle() %></a>
-						</c:when>
-						<c:when test="<%= Validator.isNull(entry.getUrl()) %>">
-							<%= entry.getTitle() %>
-						</c:when>
-					</c:choose>
-				</h3>
-
-				<p class="entry-content entry-type-<%= entry.getType() %>">
-					<%= entry.getContent() %>
-				</p>
-			</div>
+		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="article" />
 
 		<%
-		}
+		flagValue = AnnouncementsFlagImpl.HIDDEN;
 		%>
 
-		<c:if test="<%= results.size() == 0 %>">
-			<c:choose>
-				<c:when test="<%= portletName.equals(PortletKeys.ALERTS) && !PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.ANNOUNCEMENTS, ActionKeys.ADD_ENTRY) %>">
-					<script>
-						jQuery(document).ready(
-							function() {
-								jQuery('#p_p_id<portlet:namespace />').hide();
-							}
-						);
-					</script>
-				</c:when>
-				<c:otherwise>
-					<liferay-ui:message key="no-entries-were-found" />
-				</c:otherwise>
-			</c:choose>
-		</c:if>
+		<div class="read-entries">
+			<%@ include file="/html/portlet/announcements/entry_iterator.jspf" %>
+		</div>
 
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="article" />
 	</c:when>
@@ -233,74 +176,93 @@ portletURL.setParameter("tabs1", tabs1);
 						<option <%= ((classNameId == 0) && (classPK == 0)) ? "selected" : "" %> value="0,0"><liferay-ui:message key="general" /></option>
 					</c:if>
 
-					<optgroup label="<liferay-ui:message key="communities" />">
+					<%
+					List<Group> groups = GroupLocalServiceUtil.getUserGroups(user.getUserId());
+					%>
 
-						<%
-						List<Group> groups = GroupLocalServiceUtil.getUserGroups(user.getUserId());
+					<c:if test="<%= groups.size() > 0 %>">
+						<optgroup label="<liferay-ui:message key="communities" />">
 
-						for (Group group : groups) {
-							if (group.isCommunity() && GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
-						%>
+							<%
+							for (Group group : groups) {
+								if (group.isCommunity() && GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
+							%>
 
-								<option <%= (classPK == group.getGroupId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(Group.class) %><%= StringPool.COMMA %><%= group.getGroupId() %>"><%= group.getName() %></option>
+									<option <%= (classPK == group.getGroupId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(Group.class) %><%= StringPool.COMMA %><%= group.getGroupId() %>"><%= group.getName() %></option>
 
-						<%
+							<%
+								}
 							}
-						}
-						%>
+							%>
 
-					</optgroup>
-					<optgroup label="<liferay-ui:message key="organizations" />">
+						</optgroup>
+					</c:if>
 
-						<%
-						List<Organization> organizations = OrganizationLocalServiceUtil.getUserOrganizations(user.getUserId());
+					<%
+					List<Organization> organizations = OrganizationLocalServiceUtil.getUserOrganizations(user.getUserId());
+					%>
 
-						for (Organization organization : organizations) {
-							if (OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
-						%>
+					<c:if test="<%= organizations.size() > 0 %>">
+						<optgroup label="<liferay-ui:message key="organizations" />">
 
-								<option <%= (classPK == organization.getOrganizationId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(Organization.class) %><%= StringPool.COMMA %><%= organization.getOrganizationId() %>"><%= organization.getName() %></option>
+							<%
+							for (Organization organization : organizations) {
+								if (OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
+							%>
 
-						<%
+									<option <%= (classPK == organization.getOrganizationId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(Organization.class) %><%= StringPool.COMMA %><%= organization.getOrganizationId() %>"><%= organization.getName() %></option>
+
+							<%
+								}
 							}
-						}
-						%>
+							%>
 
-					</optgroup>
-					<optgroup label="<liferay-ui:message key="roles" />">
+						</optgroup>
+					</c:if>
 
-						<%
-						List<Role> roles = RoleLocalServiceUtil.getRoles(themeDisplay.getCompanyId());
+					<%
+					List<Role> roles = RoleLocalServiceUtil.getRoles(themeDisplay.getCompanyId());
+					%>
 
-						for (Role role : roles) {
-							if (RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
-						%>
+					<c:if test="<%= roles.size() > 0 %>">
+						<optgroup label="<liferay-ui:message key="roles" />">
 
-								<option <%= (classPK == role.getRoleId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(Role.class) %><%= StringPool.COMMA %><%= role.getRoleId() %>"><%= role.getTitle(locale) %></option>
+							<%
+							for (Role role : roles) {
+								if (RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
+							%>
 
-						<%
+									<option <%= (classPK == role.getRoleId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(Role.class) %><%= StringPool.COMMA %><%= role.getRoleId() %>"><%= role.getTitle(locale) %></option>
+
+							<%
+								}
 							}
-						}
-						%>
+							%>
 
-					</optgroup>
-					<optgroup label="<liferay-ui:message key="user-groups" />">
+						</optgroup>
+					</c:if>
 
-						<%
-						List<UserGroup> userGroups = UserGroupLocalServiceUtil.getUserGroups(themeDisplay.getCompanyId());
+					<%
+					List<UserGroup> userGroups = UserGroupLocalServiceUtil.getUserGroups(themeDisplay.getCompanyId());
+					%>
 
-						for (UserGroup userGroup : userGroups) {
-							if (UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
-						%>
+					<c:if test="<%= userGroups.size() > 0 %>">
+						<optgroup label="<liferay-ui:message key="user-groups" />">
 
-								<option <%= (classPK == userGroup.getUserGroupId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(UserGroup.class) %><%= StringPool.COMMA %><%= userGroup.getUserGroupId() %>"><%= userGroup.getName() %></option>
+							<%
+							for (UserGroup userGroup : userGroups) {
+								if (UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
+							%>
 
-						<%
+									<option <%= (classPK == userGroup.getUserGroupId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(UserGroup.class) %><%= StringPool.COMMA %><%= userGroup.getUserGroupId() %>"><%= userGroup.getName() %></option>
+
+							<%
+								}
 							}
-						}
-						%>
+							%>
 
-					</optgroup>
+						</optgroup>
+					</c:if>
 				</select>
 			</td>
 		</tr>
