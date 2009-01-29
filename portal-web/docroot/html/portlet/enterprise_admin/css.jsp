@@ -52,8 +52,8 @@
 }
 
 .portlet-enterprise-admin .avatar {
+	border: 1px solid #88C5D9;
 	clear: both;
-	padding: 15px 0 5px;
 	width: 100px;
 }
 
@@ -63,7 +63,7 @@
 
 .portlet-enterprise-admin .change-avatar img {
 	display: block;
-	margin: 0 auto;
+	margin: 10px auto;
 }
 
 .portlet-enterprise-admin .ctrl-holder.action-ctrl, .portlet-enterprise-admin .ctrl-holder.mailing-ctrl, .portlet-enterprise-admin .ctrl-holder.primary-ctrl {
@@ -238,6 +238,7 @@
 .portlet-enterprise-admin .portrait-icons {
 	margin-bottom: 20px;
 	text-align: center;
+	width: 200px;
 }
 
 .portlet-enterprise-admin table.org-labor-table {

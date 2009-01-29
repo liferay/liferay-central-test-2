@@ -413,6 +413,8 @@ public interface PropsKeys {
 
 	public static final String IMAGE_DEFAULT_COMPANY_LOGO = "image.default.company.logo";
 
+	public static final String IMAGE_DEFAULT_ORGANIZATION_LOGO = "image.default.organization.logo";
+
 	public static final String IMAGE_DEFAULT_SPACER = "image.default.spacer";
 
 	public static final String IMAGE_DEFAULT_USER_FEMALE_PORTRAIT = "image.default.user.female.portrait";

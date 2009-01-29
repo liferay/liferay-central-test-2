@@ -113,7 +113,19 @@ String curSection = mainSections[0];
 				<div class="organization-info">
 					<p class="float-container">
 						<c:if test="<%= organization != null %>">
-							<img alt="<%= organization.getName() %>" class="avatar" src="<%= themeDisplay.getPathThemeImages() %>/control_panel/avatar_organization_small.png" />
+
+							<%
+							LayoutSet publicLayoutSet =	LayoutSetLocalServiceUtil.getLayoutSet(organization.getGroup().getGroupId(), false);
+							LayoutSet privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(organization.getGroup().getGroupId(), true);
+
+							long logoId = publicLayoutSet.getLogoId();
+
+							if (logoId == 0) {
+								logoId = privateLayoutSet.getLogoId();
+							}
+							%>
+
+							<img alt="<%= organization.getName() %>" class="avatar" src="<%= themeDisplay.getPathImage() %>/organization_logo?img_id=<%= logoId %>&t=<%= ImageServletTokenUtil.getToken(logoId) %>" />
 
 							<span><%= organization.getName() %></span>
 						</c:if>

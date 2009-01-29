@@ -161,6 +161,18 @@ public class OrganizationServiceSoap {
 		}
 	}
 
+	public static void deleteLogo(long organizationId)
+		throws RemoteException {
+		try {
+			OrganizationServiceUtil.deleteLogo(organizationId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deleteOrganization(long organizationId)
 		throws RemoteException {
 		try {

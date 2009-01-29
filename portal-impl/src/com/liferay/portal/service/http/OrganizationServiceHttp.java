@@ -339,6 +339,38 @@ public class OrganizationServiceHttp {
 		}
 	}
 
+	public static void deleteLogo(HttpPrincipal httpPrincipal,
+		long organizationId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(organizationId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
+					"deleteLogo", new Object[] { paramObj0 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static void deleteOrganization(HttpPrincipal httpPrincipal,
 		long organizationId)
 		throws com.liferay.portal.PortalException,

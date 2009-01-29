@@ -98,6 +98,9 @@ public interface ImageLocalService {
 	public com.liferay.portal.model.Image getDefaultCompanyLogo();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.model.Image getDefaultOrganizationLogo();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Image getDefaultSpacer();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

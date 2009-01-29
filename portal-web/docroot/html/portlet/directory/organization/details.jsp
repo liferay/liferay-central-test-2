@@ -26,12 +26,21 @@
 
 <%
 Organization organization =  (Organization)request.getAttribute(WebKeys.ORGANIZATION);
+
+LayoutSet publicLayoutSet =	LayoutSetLocalServiceUtil.getLayoutSet(organization.getGroup().getGroupId(), false);
+LayoutSet privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(organization.getGroup().getGroupId(), true);
+
+long logoId = publicLayoutSet.getLogoId();
+
+if (logoId == 0) {
+	logoId = privateLayoutSet.getLogoId();
+}
 %>
 
 <h2><%= organization.getName() %></h2>
 
 <div class="details">
-	<img alt="<%= organization.getName() %>" class="avatar" src="<%= themeDisplay.getPathThemeImages() %>/control_panel/avatar_organization_small.png" />
+	<img alt="<%= organization.getName() %>" class="avatar" src="<%= themeDisplay.getPathImage() %>/organization_logo?img_id=<%= logoId %>&t=<%= ImageServletTokenUtil.getToken(logoId) %>" />
 
 	<dl class="property-list">
 		<dt>

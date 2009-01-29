@@ -114,6 +114,10 @@ public interface OrganizationLocalService {
 	public void addPasswordPolicyOrganizations(long passwordPolicyId,
 		long[] organizationIds) throws com.liferay.portal.SystemException;
 
+	public void deleteLogo(long organizationId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Organization> getGroupOrganizations(
 		long groupId) throws com.liferay.portal.SystemException;

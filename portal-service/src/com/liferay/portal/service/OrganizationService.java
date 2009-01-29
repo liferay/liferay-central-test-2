@@ -84,6 +84,10 @@ public interface OrganizationService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public void deleteLogo(long organizationId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public void deleteOrganization(long organizationId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

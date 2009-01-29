@@ -90,6 +90,12 @@ public class OrganizationServiceUtil {
 			emailAddresses, orgLabors, phones, websites, serviceContext);
 	}
 
+	public static void deleteLogo(long organizationId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().deleteLogo(organizationId);
+	}
+
 	public static void deleteOrganization(long organizationId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

@@ -91,6 +91,22 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 
 		try {
 			InputStream is = classLoader.getResourceAsStream(
+				PropsUtil.get(PropsKeys.IMAGE_DEFAULT_ORGANIZATION_LOGO));
+
+			if (is == null) {
+				_log.error("Default organization logo is not available");
+			}
+
+			_defaultOrganizationLogo = getImage(is);
+		}
+		catch (IOException ioe) {
+			_log.error(
+				"Unable to configure the default organization logo: " +
+					ioe.getMessage());
+		}
+
+		try {
+			InputStream is = classLoader.getResourceAsStream(
 				PropsUtil.get(PropsKeys.IMAGE_DEFAULT_USER_FEMALE_PORTRAIT));
 
 			if (is == null) {
@@ -144,6 +160,10 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 
 	public Image getDefaultCompanyLogo() {
 		return _defaultCompanyLogo;
+	}
+
+	public Image getDefaultOrganizationLogo() {
+		return _defaultOrganizationLogo;
 	}
 
 	public Image getDefaultSpacer() {
@@ -339,6 +359,7 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 
 	private Image _defaultSpacer;
 	private Image _defaultCompanyLogo;
+	private Image _defaultOrganizationLogo;
 	private Image _defaultUserFemalePortrait;
 	private Image _defaultUserMalePortrait;
 

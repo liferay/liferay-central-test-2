@@ -109,6 +109,9 @@ public class ImageServlet extends HttpServlet {
 		if (path.startsWith("/company_logo")) {
 			return ImageLocalServiceUtil.getDefaultCompanyLogo();
 		}
+		else if (path.startsWith("/organization_logo")) {
+			return ImageLocalServiceUtil.getDefaultOrganizationLogo();
+		}
 		else if (path.startsWith("/user_female_portrait")) {
 			return ImageLocalServiceUtil.getDefaultUserFemalePortrait();
 		}

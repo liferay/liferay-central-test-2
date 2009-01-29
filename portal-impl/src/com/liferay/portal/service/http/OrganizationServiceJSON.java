@@ -120,6 +120,12 @@ public class OrganizationServiceJSON {
 		return OrganizationJSONSerializer.toJSONObject(returnValue);
 	}
 
+	public static void deleteLogo(long organizationId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		OrganizationServiceUtil.deleteLogo(organizationId);
+	}
+
 	public static void deleteOrganization(long organizationId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

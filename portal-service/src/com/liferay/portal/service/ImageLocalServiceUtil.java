@@ -108,6 +108,10 @@ public class ImageLocalServiceUtil {
 		return getService().getDefaultCompanyLogo();
 	}
 
+	public static com.liferay.portal.model.Image getDefaultOrganizationLogo() {
+		return getService().getDefaultOrganizationLogo();
+	}
+
 	public static com.liferay.portal.model.Image getDefaultSpacer() {
 		return getService().getDefaultSpacer();
 	}

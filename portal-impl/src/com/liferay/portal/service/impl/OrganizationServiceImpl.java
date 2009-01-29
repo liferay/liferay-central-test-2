@@ -134,6 +134,15 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 		return organization;
 	}
 
+	public void deleteLogo(long organizationId)
+		throws PortalException, SystemException {
+
+		OrganizationPermissionUtil.check(
+			getPermissionChecker(), organizationId, ActionKeys.UPDATE);
+
+		organizationLocalService.deleteLogo(organizationId);
+	}
+
 	public void deleteOrganization(long organizationId)
 		throws PortalException, SystemException {
 

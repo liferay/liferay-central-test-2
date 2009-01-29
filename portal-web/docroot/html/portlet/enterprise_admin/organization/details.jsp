@@ -43,6 +43,8 @@ String type = BeanParamUtil.getString(organization, request, "type", PropsValues
 long regionId = BeanParamUtil.getLong(organization, request, "regionId");
 long countryId = BeanParamUtil.getLong(organization, request, "countryId");
 int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
+
+long groupId = organization.getGroup().getGroupId();
 %>
 
 <liferay-util:buffer var="removeOrganizationIcon">
@@ -50,6 +52,26 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 </liferay-util:buffer>
 
 <script type="text/javascript">
+	function <portlet:namespace />changeOrganizationLogo(newAvatar) {
+		jQuery('#<portlet:namespace />avatar').attr('src', newAvatar);
+		jQuery('.avatar').attr('src', newAvatar);
+
+		jQuery('#<portlet:namespace />deletePortrait').val(false);
+	}
+
+	function <portlet:namespace />deleteOrganizationLogo(defaultAvatar) {
+		jQuery('#<portlet:namespace />deleteOrganizationLogo').val(true);
+
+		jQuery('#<portlet:namespace />avatar').attr('src', defaultAvatar);
+		jQuery('.avatar').attr('src', defaultAvatar);
+	}
+
+	function <portlet:namespace />openEditOrganizationLogoWindow(url) {
+		var editPortraitWindow = window.open(url, '<liferay-ui:message key="change" />', 'directories=no,height=400,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=500');
+
+		editPortraitWindow.focus();
+	}
+
 	function <portlet:namespace />openOrganizationSelector() {
 		var url = '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /></portlet:renderURL>';
 
@@ -131,12 +153,62 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 		<div class="ctrl-holder">
 			<label for="<portlet:namespace />groupId"><liferay-ui:message key="group-id" /></label>
 
-			<%= organization.getGroup().getGroupId() %>
+			<%= groupId %>
 		</div>
 	</c:if>
 </fieldset>
 
 <fieldset class="block-labels col">
+	<div>
+		<c:if test="<%= organization != null %>">
+
+			<%
+			LayoutSet publicLayoutSet =	LayoutSetLocalServiceUtil.getLayoutSet(groupId, false);
+			LayoutSet privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(groupId, true);
+			%>
+
+			<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="changeLogoURL">
+				<portlet:param name="struts_action" value="/enterprise_admin/edit_organization_logo" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
+				<portlet:param name="publicLayoutSetId" value="<%= String.valueOf(publicLayoutSet.getLayoutSetId()) %>" />
+			</portlet:renderURL>
+
+			<a class="change-avatar" href="javascript: <portlet:namespace />openEditPortraitWindow('<%= changeLogoURL %>');">
+
+				<%
+				long logoId = publicLayoutSet.getLogoId();
+
+				if (logoId == 0) {
+					logoId = privateLayoutSet.getLogoId();
+				}
+				%>
+
+				<img alt="<liferay-ui:message key="logo" />" class="avatar" id="<portlet:namespace />avatar" src="<%= themeDisplay.getPathImage() %>/organization_logo?img_id=<%= logoId %>&t=<%= ImageServletTokenUtil.getToken(logoId) %>" />
+			</a>
+
+			<div class="portrait-icons">
+
+				<%
+				String taglibEditURL = "javascript: " + renderResponse.getNamespace() + "openEditOrganizationLogoWindow('" + changeLogoURL +"');";
+				%>
+
+				<liferay-ui:icon image="edit" message="change" url="<%= taglibEditURL %>" label="<%= true %>" />
+
+				<c:if test="<%= logoId != 0 %>">
+
+					<%
+					String taglibDeleteURL = "javascript: " + renderResponse.getNamespace() + "deleteOrganizationLogo('" + themeDisplay.getPathImage() + "/organization_logo?img_id=0&t=0');";
+					%>
+
+					<liferay-ui:icon image="delete" url="<%= taglibDeleteURL %>" label="<%= true %>" />
+
+					<input id="<portlet:namespace />deleteOrganizationLogo" name="<portlet:namespace />deleteOrganizationLogo" type="hidden" value="false" />
+				</c:if>
+			</div>
+		</c:if>
+	</div>
+
 	<c:choose>
 		<c:when test="<%= PropsValues.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_ORGANIZATION_STATUS %>">
 			<liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + Organization.class.getName() + ListTypeImpl.ORGANIZATION_STATUS %>" message="please-select-a-type" />

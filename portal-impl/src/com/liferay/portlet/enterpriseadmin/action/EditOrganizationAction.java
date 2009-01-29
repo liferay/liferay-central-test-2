@@ -246,6 +246,14 @@ public class EditOrganizationAction extends PortletAction {
 				actionRequest, preferences, "reminderQueries");
 
 			preferences.store();
+
+			boolean deleteOrganizationLogo = ParamUtil.getBoolean(
+				actionRequest, "deleteOrganizationLogo");
+
+			if (deleteOrganizationLogo) {
+				OrganizationServiceUtil.deleteLogo(
+					organization.getOrganizationId());
+			}
 		}
 
 		return organization;

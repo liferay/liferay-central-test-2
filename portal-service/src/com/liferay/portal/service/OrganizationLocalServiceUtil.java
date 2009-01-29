@@ -133,6 +133,12 @@ public class OrganizationLocalServiceUtil {
 			.addPasswordPolicyOrganizations(passwordPolicyId, organizationIds);
 	}
 
+	public static void deleteLogo(long organizationId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().deleteLogo(organizationId);
+	}
+
 	public static java.util.List<com.liferay.portal.model.Organization> getGroupOrganizations(
 		long groupId) throws com.liferay.portal.SystemException {
 		return getService().getGroupOrganizations(groupId);

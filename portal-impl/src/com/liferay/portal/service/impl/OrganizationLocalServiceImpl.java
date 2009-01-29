@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.model.ResourceConstants;
@@ -44,6 +45,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ListTypeImpl;
 import com.liferay.portal.model.impl.OrganizationImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
+import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.OrganizationLocalServiceBaseImpl;
 import com.liferay.portal.util.PropsKeys;
@@ -64,6 +66,7 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
+ * @author Julio Camarero
  *
  */
 public class OrganizationLocalServiceImpl
@@ -161,6 +164,42 @@ public class OrganizationLocalServiceImpl
 
 		passwordPolicyRelLocalService.addPasswordPolicyRels(
 			passwordPolicyId, Organization.class.getName(), organizationIds);
+	}
+
+	public void deleteLogo(long organizationId)
+		throws PortalException, SystemException {
+
+		Organization organization = getOrganization(organizationId);
+
+		Group group = organization.getGroup();
+		LayoutSet publicLayoutSet =	LayoutSetLocalServiceUtil.getLayoutSet(
+			group.getGroupId(), false);
+		LayoutSet privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
+			group.getGroupId(), true);
+
+		if (publicLayoutSet.isLogo()) {
+			long logoId = publicLayoutSet.getLogoId();
+
+			publicLayoutSet.setLogoId(0);
+			publicLayoutSet.setLogo(false);
+
+			layoutSetPersistence.update(publicLayoutSet, false);
+
+			imageLocalService.deleteImage(logoId);
+		}
+
+		if (privateLayoutSet.isLogo()) {
+			long logoId = privateLayoutSet.getLogoId();
+
+			privateLayoutSet.setLogoId(0);
+			privateLayoutSet.setLogo(false);
+
+			layoutSetPersistence.update(publicLayoutSet, false);
+
+			if (imageLocalService.getImage(logoId) != null) {
+				imageLocalService.deleteImage(logoId);
+			}
+		}
 	}
 
 	public void deleteOrganization(long organizationId)

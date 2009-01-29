@@ -350,6 +350,10 @@
 		<put name="portlet_content" value="/portlet/enterprise_admin/edit_organization_assignments.jsp" />
 	</definition>
 
+	<definition name="portlet.enterprise_admin.edit_organization_logo" extends="portlet.enterprise_admin">
+		<put name="portlet_content" value="/portlet/enterprise_admin/edit_organization_logo.jsp" />
+	</definition>
+
 	<definition name="portlet.enterprise_admin.edit_password_policy" extends="portlet.enterprise_admin">
 		<put name="portlet_content" value="/portlet/enterprise_admin/edit_password_policy.jsp" />
 	</definition>
