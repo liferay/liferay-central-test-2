@@ -499,32 +499,6 @@ public class BaseDeployer {
 			}
 		}
 
-		if (!GetterUtil.getBoolean(
-				PropsUtil.get(PropsKeys.AUTO_DEPLOY_DEPLOY_TO_CONTAINER))) {
-
-			File updatedWarDir = new File(
-				PropsValues.AUTO_DEPLOY_UPDATED_WAR_DIR);
-
-			if (!updatedWarDir.exists()) {
-				updatedWarDir.mkdirs();
-			}
-
-			File destWar = new File(updatedWarDir, displayName + ".war");
-
-			if (destWar.exists()) {
-				destWar.delete();
-			}
-
-			WarTask.war(srcFile, destWar, "WEB-INF/web.xml", webXml);
-
-			if (_log.isInfoEnabled()) {
-				_log.info("Updated war is copied to : " +
-					destWar.getAbsolutePath());
-			}
-
-			return;
-		}
-
 		if (!unpackWar || appServerType.equals("websphere")) {
 			File tempDir = new File(
 				SystemProperties.get(SystemProperties.TMP_DIR) +

@@ -144,9 +144,6 @@ public class PropsValues {
 	public static final boolean AUTO_DEPLOY_UNPACK_WAR =
 		GetterUtil.getBoolean(PropsUtil.get(PropsKeys.AUTO_DEPLOY_UNPACK_WAR));
 
-	public static final String AUTO_DEPLOY_UPDATED_WAR_DIR =
-		PropsUtil.get(PropsKeys.AUTO_DEPLOY_UPDATED_WAR_DIR);
-
 	public static final String[] AUTO_LOGIN_HOOKS =
 		PropsUtil.getArray(PropsKeys.AUTO_LOGIN_HOOKS);
 
