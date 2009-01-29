@@ -44,7 +44,11 @@ long regionId = BeanParamUtil.getLong(organization, request, "regionId");
 long countryId = BeanParamUtil.getLong(organization, request, "countryId");
 int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 
-long groupId = organization.getGroup().getGroupId();
+long groupId = 0;
+
+if (organization != null) {
+	groupId = organization.getGroup().getGroupId();
+}
 %>
 
 <liferay-util:buffer var="removeOrganizationIcon">
@@ -52,24 +56,24 @@ long groupId = organization.getGroup().getGroupId();
 </liferay-util:buffer>
 
 <script type="text/javascript">
-	function <portlet:namespace />changeOrganizationLogo(newAvatar) {
-		jQuery('#<portlet:namespace />avatar').attr('src', newAvatar);
-		jQuery('.avatar').attr('src', newAvatar);
+	function <portlet:namespace />changeLogo(newLogoURL) {
+		jQuery('#<portlet:namespace />avatar').attr('src', newLogoURL);
+		jQuery('.avatar').attr('src', newLogoURL);
 
-		jQuery('#<portlet:namespace />deletePortrait').val(false);
+		jQuery('#<portlet:namespace />deleteLogo').val(false);
 	}
 
-	function <portlet:namespace />deleteOrganizationLogo(defaultAvatar) {
-		jQuery('#<portlet:namespace />deleteOrganizationLogo').val(true);
+	function <portlet:namespace />deleteLogo(defaultLogoURL) {
+		jQuery('#<portlet:namespace />deleteLogo').val(true);
 
-		jQuery('#<portlet:namespace />avatar').attr('src', defaultAvatar);
-		jQuery('.avatar').attr('src', defaultAvatar);
+		jQuery('#<portlet:namespace />avatar').attr('src', defaultLogoURL);
+		jQuery('.avatar').attr('src', defaultLogoURL);
 	}
 
-	function <portlet:namespace />openEditOrganizationLogoWindow(url) {
-		var editPortraitWindow = window.open(url, '<liferay-ui:message key="change" />', 'directories=no,height=400,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=500');
+	function <portlet:namespace />openEditOrganizationLogoWindow(editOrganizationLogoURL) {
+		var editOrganizationLogoWindow = window.open(editOrganizationLogoURL, '<liferay-ui:message key="change" />', 'directories=no,height=400,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=500');
 
-		editPortraitWindow.focus();
+		editOrganizationLogoWindow.focus();
 	}
 
 	function <portlet:namespace />openOrganizationSelector() {
@@ -167,21 +171,17 @@ long groupId = organization.getGroup().getGroupId();
 			LayoutSet privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(groupId, true);
 			%>
 
-			<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="changeLogoURL">
+			<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="editOrganizationLogoURL">
 				<portlet:param name="struts_action" value="/enterprise_admin/edit_organization_logo" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 				<portlet:param name="publicLayoutSetId" value="<%= String.valueOf(publicLayoutSet.getLayoutSetId()) %>" />
 			</portlet:renderURL>
 
-			<a class="change-avatar" href="javascript: <portlet:namespace />openEditPortraitWindow('<%= changeLogoURL %>');">
+			<a class="change-avatar" href="javascript: <portlet:namespace />openEditOrganizationLogoWindow('<%= editOrganizationLogoURL %>');">
 
 				<%
-				long logoId = publicLayoutSet.getLogoId();
-
-				if (logoId == 0) {
-					logoId = privateLayoutSet.getLogoId();
-				}
+				long logoId = organization.getLogoId();
 				%>
 
 				<img alt="<liferay-ui:message key="logo" />" class="avatar" id="<portlet:namespace />avatar" src="<%= themeDisplay.getPathImage() %>/organization_logo?img_id=<%= logoId %>&t=<%= ImageServletTokenUtil.getToken(logoId) %>" />
@@ -190,7 +190,7 @@ long groupId = organization.getGroup().getGroupId();
 			<div class="portrait-icons">
 
 				<%
-				String taglibEditURL = "javascript: " + renderResponse.getNamespace() + "openEditOrganizationLogoWindow('" + changeLogoURL +"');";
+				String taglibEditURL = "javascript: " + renderResponse.getNamespace() + "openEditOrganizationLogoWindow('" + editOrganizationLogoURL +"');";
 				%>
 
 				<liferay-ui:icon image="edit" message="change" url="<%= taglibEditURL %>" label="<%= true %>" />
@@ -198,12 +198,12 @@ long groupId = organization.getGroup().getGroupId();
 				<c:if test="<%= logoId != 0 %>">
 
 					<%
-					String taglibDeleteURL = "javascript: " + renderResponse.getNamespace() + "deleteOrganizationLogo('" + themeDisplay.getPathImage() + "/organization_logo?img_id=0&t=0');";
+					String taglibDeleteURL = "javascript: " + renderResponse.getNamespace() + "deleteLogo('" + themeDisplay.getPathImage() + "/organization_logo?img_id=0');";
 					%>
 
 					<liferay-ui:icon image="delete" url="<%= taglibDeleteURL %>" label="<%= true %>" />
 
-					<input id="<portlet:namespace />deleteOrganizationLogo" name="<portlet:namespace />deleteOrganizationLogo" type="hidden" value="false" />
+					<input id="<portlet:namespace />deleteLogo" name="<portlet:namespace />deleteLogo" type="hidden" value="false" />
 				</c:if>
 			</div>
 		</c:if>
@@ -292,7 +292,7 @@ if (parentOrganization != null) {
 
 <h3><liferay-ui:message key="parent-organization" /></h3>
 
-<liferay-ui:error exception="<%= OrganizationParentException.class %>" message="please-enter-a-valid-parent" />
+<liferay-ui:error exception="<%= OrganizationParentException.class %>" message="please-enter-a-valid-parent-organization" />
 
 <liferay-ui:search-container
 	headerNames="name,type"

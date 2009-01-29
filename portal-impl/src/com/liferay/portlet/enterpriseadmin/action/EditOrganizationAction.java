@@ -235,6 +235,14 @@ public class EditOrganizationAction extends PortletAction {
 				recursable, regionId, countryId, statusId, comments, addresses,
 				emailAddresses, orgLabors, phones, websites, serviceContext);
 
+			boolean deleteLogo = ParamUtil.getBoolean(
+				actionRequest, "deleteLogo");
+
+			if (deleteLogo) {
+				OrganizationServiceUtil.deleteLogo(
+					organization.getOrganizationId());
+			}
+
 			PortletPreferences preferences = organization.getPreferences();
 
 			String reminderQueries = actionRequest.getParameter(
@@ -246,14 +254,6 @@ public class EditOrganizationAction extends PortletAction {
 				actionRequest, preferences, "reminderQueries");
 
 			preferences.store();
-
-			boolean deleteOrganizationLogo = ParamUtil.getBoolean(
-				actionRequest, "deleteOrganizationLogo");
-
-			if (deleteOrganizationLogo) {
-				OrganizationServiceUtil.deleteLogo(
-					organization.getOrganizationId());
-			}
 		}
 
 		return organization;

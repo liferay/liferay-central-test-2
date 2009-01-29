@@ -66,6 +66,8 @@ public interface Organization extends OrganizationModel {
 
 	public com.liferay.portal.model.Group getGroup();
 
+	public long getLogoId();
+
 	public javax.portlet.PortletPreferences getPreferences()
 		throws com.liferay.portal.SystemException;
 

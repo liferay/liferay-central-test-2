@@ -172,27 +172,29 @@ public class OrganizationLocalServiceImpl
 		Organization organization = getOrganization(organizationId);
 
 		Group group = organization.getGroup();
+
 		LayoutSet publicLayoutSet =	LayoutSetLocalServiceUtil.getLayoutSet(
 			group.getGroupId(), false);
-		LayoutSet privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-			group.getGroupId(), true);
 
 		if (publicLayoutSet.isLogo()) {
 			long logoId = publicLayoutSet.getLogoId();
 
-			publicLayoutSet.setLogoId(0);
 			publicLayoutSet.setLogo(false);
+			publicLayoutSet.setLogoId(0);
 
 			layoutSetPersistence.update(publicLayoutSet, false);
 
 			imageLocalService.deleteImage(logoId);
 		}
 
+		LayoutSet privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
+			group.getGroupId(), true);
+
 		if (privateLayoutSet.isLogo()) {
 			long logoId = privateLayoutSet.getLogoId();
 
-			privateLayoutSet.setLogoId(0);
 			privateLayoutSet.setLogo(false);
+			privateLayoutSet.setLogoId(0);
 
 			layoutSetPersistence.update(publicLayoutSet, false);
 

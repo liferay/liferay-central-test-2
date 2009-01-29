@@ -115,14 +115,7 @@ String curSection = mainSections[0];
 						<c:if test="<%= organization != null %>">
 
 							<%
-							LayoutSet publicLayoutSet =	LayoutSetLocalServiceUtil.getLayoutSet(organization.getGroup().getGroupId(), false);
-							LayoutSet privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(organization.getGroup().getGroupId(), true);
-
-							long logoId = publicLayoutSet.getLogoId();
-
-							if (logoId == 0) {
-								logoId = privateLayoutSet.getLogoId();
-							}
+							long logoId = organization.getLogoId();
 							%>
 
 							<img alt="<%= organization.getName() %>" class="avatar" src="<%= themeDisplay.getPathImage() %>/organization_logo?img_id=<%= logoId %>&t=<%= ImageServletTokenUtil.getToken(logoId) %>" />

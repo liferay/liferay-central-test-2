@@ -33,12 +33,12 @@ long publicLayoutSetId = ParamUtil.getLong(request, "publicLayoutSetId");
 	<c:when test='<%= SessionMessages.contains(renderRequest, "request_processed") %>'>
 
 		<%
-		String newLogo = StringPool.BLANK;
+		String logoURL = StringPool.BLANK;
 
 		if (publicLayoutSetId != 0) {
 			LayoutSet publicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(publicLayoutSetId);
 
-			newLogo = themeDisplay.getPathImage() + "/organization_logo?img_id=" + publicLayoutSet.getLogoId() +"&t=" + ImageServletTokenUtil.getToken(publicLayoutSet.getLogoId() + 1);
+			logoURL = themeDisplay.getPathImage() + "/organization_logo?img_id=" + publicLayoutSet.getLogoId() +"&t=" + ImageServletTokenUtil.getToken(publicLayoutSet.getLogoId());
 		}
 		%>
 
@@ -46,38 +46,25 @@ long publicLayoutSetId = ParamUtil.getLong(request, "publicLayoutSetId");
 			jQuery(
 				function() {
 					window.close();
-					opener.<portlet:namespace />changeOrganizationLogo('<%= newLogo %>');
+					opener.<portlet:namespace />changeLogo('<%= logoURL %>');
 				}
 			);
 		</script>
 	</c:when>
 	<c:otherwise>
-
-		<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin_organizations/edit_organization_logo"  /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-
-		<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="logo" />
+		<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization_logo" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 		<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
-		<input name="<portlet:namespace />pagesRedirect" type="hidden" value="<%= PortalUtil.getCurrentURL(request) %>" />
 		<input name="<portlet:namespace />publicLayoutSetId" type="hidden" value="<%= publicLayoutSetId %>" />
 
 		<liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />
 
-		<%= LanguageUtil.get(pageContext, "upload-a-logo-for-the-organization-pages-that-will-be-used-instead-of-the-default-enterprise-logo-in-both-public-and-private-pages") %>
+		<liferay-ui:message key="upload-a-logo-for-the-organization-pages-that-will-be-used-instead-of-the-default-enterprise-logo-in-both-public-and-private-pages" />
 
 		<br /><br />
 
-		<table class="lfr-table">
-		<tr>
-			<td>
-				<liferay-ui:message key="logo" />
-			</td>
-			<td>
-				<input name="<portlet:namespace />logoFileName" size="30" type="file" />
-			</td>
-		</tr>
-		</table>
+		<input name="<portlet:namespace />fileName" size="50" type="file" />
 
-		<br />
+		<br /><br />
 
 		<input type="submit" value="<liferay-ui:message key="save" />" />
 

@@ -23,8 +23,6 @@
 package com.liferay.portlet.enterpriseadmin.action;
 
 import com.liferay.portal.NoSuchOrganizationException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -93,15 +91,13 @@ public class EditOrganizationLogoAction extends PortletAction {
 			renderRequest, "portlet.enterprise_admin.edit_organization_logo"));
 	}
 
-	protected void updateLogo(ActionRequest actionRequest)
-		throws Exception {
-
+	protected void updateLogo(ActionRequest actionRequest) throws Exception {
 		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
 			actionRequest);
 
-		long groupId = ParamUtil.getLong(actionRequest, "groupId");
+		long groupId = ParamUtil.getLong(uploadRequest, "groupId");
 
-		File file = uploadRequest.getFile("logoFileName");
+		File file = uploadRequest.getFile("fileName");
 		byte[] bytes = FileUtil.getBytes(file);
 
 		if ((bytes == null) || (bytes.length == 0)) {

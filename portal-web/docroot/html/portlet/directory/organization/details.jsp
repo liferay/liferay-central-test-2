@@ -27,14 +27,7 @@
 <%
 Organization organization =  (Organization)request.getAttribute(WebKeys.ORGANIZATION);
 
-LayoutSet publicLayoutSet =	LayoutSetLocalServiceUtil.getLayoutSet(organization.getGroup().getGroupId(), false);
-LayoutSet privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(organization.getGroup().getGroupId(), true);
-
-long logoId = publicLayoutSet.getLogoId();
-
-if (logoId == 0) {
-	logoId = privateLayoutSet.getLogoId();
-}
+long logoId = organization.getLogoId();
 %>
 
 <h2><%= organization.getName() %></h2>
