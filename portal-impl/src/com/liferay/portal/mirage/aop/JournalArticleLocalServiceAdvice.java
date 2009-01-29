@@ -83,8 +83,6 @@ public class JournalArticleLocalServiceAdvice extends BaseMirageAdvice {
 		else if (methodName.equals("approveArticle") ||
 				 methodName.equals("expireArticle")) {
 
-			processWorkflow();
-
 			WorkflowInvoker workflowInvoker = new WorkflowInvoker(
 				proceedingJoinPoint);
 
