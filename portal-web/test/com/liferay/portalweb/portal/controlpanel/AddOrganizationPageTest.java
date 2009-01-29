@@ -26,21 +26,20 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="RemoveApplyOrganizationTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddOrganizationPageTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class RemoveApplyOrganizationTest extends BaseTestCase {
-	public void testRemoveApplyOrganization() throws Exception {
+public class AddOrganizationPageTest extends BaseTestCase {
+	public void testAddOrganizationPage() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//a[@id='my-community-private-pages']")) {
+				if (selenium.isElementPresent("link=Organizations")) {
 					break;
 				}
 			}
@@ -50,11 +49,6 @@ public class RemoveApplyOrganizationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//a[@id='my-community-private-pages']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Control Panel"));
-		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Organizations"));
 		selenium.waitForPageToLoad("30000");
 
@@ -86,7 +80,7 @@ public class RemoveApplyOrganizationTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Assign Members")) {
+				if (selenium.isElementPresent("link=Manage Pages")) {
 					break;
 				}
 			}
@@ -96,11 +90,11 @@ public class RemoveApplyOrganizationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Assign Members"));
+		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("_126_allRowIds");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Update Associations']"));
+		selenium.type("_126_name_en_US",
+			RuntimeVariables.replace("Selenium Test Home Page"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

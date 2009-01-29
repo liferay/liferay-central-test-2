@@ -95,6 +95,9 @@ public class ControlPanelTests extends BaseTests {
 		addTestSuite(AddDuplicateOrganizationTest.class);
 		addTestSuite(ApplyOrganizationTest.class);
 		addTestSuite(AssertApplyOrganizationTest.class);
+		addTestSuite(AddOrganizationPageTest.class);
+		addTestSuite(MergeOrganizationPageTest.class);
+		addTestSuite(AssertMergeOrganizationPageTest.class);
 		addTestSuite(RemoveApplyOrganizationTest.class);
 		addTestSuite(AssertRemoveApplyOrganizationTest.class);
 		addTestSuite(SearchOrganizationTest.class);

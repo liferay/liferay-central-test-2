@@ -1,71 +1,76 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ImportCommunityLARTest</title>
+<title>MergeOrganizationPageTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">ImportCommunityLARTest</td></tr>
+<tr><td rowspan="1" colspan="3">MergeOrganizationPageTest</td></tr>
 </thead><tbody>
 <tr>
-	<td>clickAndWait</td>
-	<td>my-community-private-pages</td>
+	<td>waitForElementPresent</td>
+	<td>link=Organizations</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Control Panel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Communities</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//tr[4]/td[6]/ul/li/strong/span</td>
+	<td>link=Organizations</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//body/div[2]/ul/li[2]/a</td>
+	<td>_126_keywords</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//body/div[2]/ul/li[2]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Export / Import</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Import</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>_134_importFileName</td>
-	<td></td>
+	<td>typeKeys</td>
+	<td>_126_keywords</td>
+	<td>Selenium</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>_134_importFileName</td>
-	<td>L:\portal\build\portal-web\test\com\liferay\portalweb\portal\controlpanel\Community.Selenium.portlet.lar</td>
+	<td>_126_keywords</td>
+	<td>Selenium</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Search']</td>
+	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>_134_PERMISSIONS</td>
+	<td>//td[8]/ul/li/strong/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Manage Pages</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Import']</td>
+	<td>link=Manage Pages</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//li[@id='_126_tabs1settingsTabsId']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Merge Pages</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>_126_mergeGuestPublicPagesCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
 <tr>

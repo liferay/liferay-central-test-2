@@ -26,21 +26,20 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="RemoveApplyOrganizationTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssertMergeOrganizationPageTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class RemoveApplyOrganizationTest extends BaseTestCase {
-	public void testRemoveApplyOrganization() throws Exception {
+public class AssertMergeOrganizationPageTest extends BaseTestCase {
+	public void testAssertMergeOrganizationPage() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//a[@id='my-community-private-pages']")) {
+				if (selenium.isElementPresent("link=Back to My Community")) {
 					break;
 				}
 			}
@@ -50,59 +49,12 @@ public class RemoveApplyOrganizationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Back to My Community"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Selenium"));
 		selenium.click(RuntimeVariables.replace(
-				"//a[@id='my-community-private-pages']"));
+				"//div[@id='banner']/div/div/ul/li[9]/ul/li[2]/ul/li[1]/a[1]"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Control Panel"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Organizations"));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_126_keywords")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.typeKeys("_126_keywords", RuntimeVariables.replace("Selenium"));
-		selenium.type("_126_keywords", RuntimeVariables.replace("Selenium"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("//td[8]/ul/li/strong/span");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Assign Members")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Assign Members"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("_126_allRowIds");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Update Associations']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertTrue(selenium.isElementPresent("link=Selenium Test Home Page"));
 	}
 }
