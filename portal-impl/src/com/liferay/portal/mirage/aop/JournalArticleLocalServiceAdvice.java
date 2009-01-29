@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.sun.saw.Workflow;
 import com.sun.saw.WorkflowException;
 import com.sun.saw.WorkflowFactory;
-import com.sun.saw.vo.SaveTaskVO;
 
 import java.util.Properties;
 
@@ -149,30 +148,7 @@ public class JournalArticleLocalServiceAdvice extends BaseMirageAdvice {
 		return workflowFactory.getWorkflowInstance(properties);
 	}
 
-	protected void processWorkflow() {
-		if (_outputVOError) {
-			return;
-		}
-
-		try {
-			Workflow workflow = getWorkflow();
-
-			SaveTaskVO saveTaskVO = new SaveTaskVO();
-
-			workflow.saveTasks(saveTaskVO);
-		}
-		catch (WorkflowException we) {
-			_outputVOError = true;
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(we, we);
-			}
-		}
-	}
-
 	private static Log _log =
 		LogFactoryUtil.getLog(JournalArticleLocalServiceAdvice.class);
-
-	private boolean _outputVOError;
 
 }
