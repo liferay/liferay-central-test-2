@@ -57,7 +57,7 @@ insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, the
 #set($incOrganizationId = $counter.get())
 #set($incGroupId = $counter.get())
 
-insert into Organization_ (organizationId, companyId, parentOrganizationId, name, type_, recursable, regionId, countryId, statusId, comments) values ($incOrganizationId, $companyId, 0, 'Liferay, Inc.', 'regular', TRUE, 5, 19, 12017, '');
+insert into Organization_ (organizationId, companyId, parentOrganizationId, name, type_, recursable, regionId, countryId, statusId, comments) values ($incOrganizationId, $companyId, 0, 'Liferay, Inc.', 'regular-organization', TRUE, 5, 19, 12017, '');
 
 insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($incGroupId, $companyId, $defaultUserId, $organizationClassNameId, $incOrganizationId, 0, 0, '$incGroupId', '', TRUE);
 insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $incGroupId, TRUE, FALSE, 'classic', '01', 1);
@@ -68,7 +68,7 @@ insert into Layout (plid, groupId, companyId, privateLayout, layoutId, parentLay
 #set($engineeringOrganizationId = $counter.get())
 #set($engineeringGroupId = $counter.get())
 
-insert into Organization_ (organizationId, companyId, parentOrganizationId, name, type_, recursable, regionId, countryId, statusId, comments) values ($engineeringOrganizationId, $companyId, $incOrganizationId, 'Liferay Engineering', 'regular', TRUE, 5, 19, 12017, '');
+insert into Organization_ (organizationId, companyId, parentOrganizationId, name, type_, recursable, regionId, countryId, statusId, comments) values ($engineeringOrganizationId, $companyId, $incOrganizationId, 'Liferay Engineering', 'regular-organization', TRUE, 5, 19, 12017, '');
 
 insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($engineeringGroupId, $companyId, $defaultUserId, $organizationClassNameId, $engineeringOrganizationId, 0, 0, '$engineeringGroupId', '', TRUE);
 insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $engineeringGroupId, TRUE, FALSE, 'classic', '01', 0);
@@ -77,7 +77,7 @@ insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, the
 #set($consultingOrganizationId = $counter.get())
 #set($consultingGroupId = $counter.get())
 
-insert into Organization_ (organizationId, companyId, parentOrganizationId, name, type_, recursable, regionId, countryId, statusId, comments) values ($consultingOrganizationId, $companyId, $incOrganizationId, 'Liferay Consulting', 'regular', TRUE, 5, 19, 12017, '');
+insert into Organization_ (organizationId, companyId, parentOrganizationId, name, type_, recursable, regionId, countryId, statusId, comments) values ($consultingOrganizationId, $companyId, $incOrganizationId, 'Liferay Consulting', 'regular-organization', TRUE, 5, 19, 12017, '');
 
 insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($consultingGroupId, $companyId, $defaultUserId, $organizationClassNameId, $consultingOrganizationId, 0, 0, '$consultingGroupId', '', TRUE);
 insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $consultingGroupId, TRUE, FALSE, 'classic', '01', 0);
@@ -86,7 +86,7 @@ insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, the
 #set($supportOrganizationId = $counter.get())
 #set($supportGroupId = $counter.get())
 
-insert into Organization_ (organizationId, companyId, parentOrganizationId, name, type_, recursable, regionId, countryId, statusId, comments) values ($supportOrganizationId, $companyId, $incOrganizationId, 'Liferay Support', 'regular', TRUE, 5, 19, 12017, '');
+insert into Organization_ (organizationId, companyId, parentOrganizationId, name, type_, recursable, regionId, countryId, statusId, comments) values ($supportOrganizationId, $companyId, $incOrganizationId, 'Liferay Support', 'regular-organization', TRUE, 5, 19, 12017, '');
 
 insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($supportGroupId, $companyId, $defaultUserId, $organizationClassNameId, $supportOrganizationId, 0, 0, '$supportGroupId', '', TRUE);
 insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $supportGroupId, TRUE, FALSE, 'classic', '01', 0);
@@ -95,7 +95,7 @@ insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, the
 #set($salesOrganizationId = $counter.get())
 #set($salesGroupId = $counter.get())
 
-insert into Organization_ (organizationId, companyId, parentOrganizationId, name, type_, recursable, regionId, countryId, statusId, comments) values ($salesOrganizationId, $companyId, $incOrganizationId, 'Liferay Sales', 'regular', TRUE, 5, 19, 12017, '');
+insert into Organization_ (organizationId, companyId, parentOrganizationId, name, type_, recursable, regionId, countryId, statusId, comments) values ($salesOrganizationId, $companyId, $incOrganizationId, 'Liferay Sales', 'regular-organization', TRUE, 5, 19, 12017, '');
 
 insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($salesGroupId, $companyId, $defaultUserId, $organizationClassNameId, $salesOrganizationId, 0, 0, '$salesGroupId', '', TRUE);
 insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $salesGroupId, TRUE, FALSE, 'classic', '01', 0);
@@ -104,7 +104,7 @@ insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, the
 #set($marketingOrganizationId = $counter.get())
 #set($marketingGroupId = $counter.get())
 
-insert into Organization_ (organizationId, companyId, parentOrganizationId, name, type_, recursable, regionId, countryId, statusId, comments) values ($marketingOrganizationId, $companyId, $incOrganizationId, 'Liferay Marketing', 'regular', TRUE, 5, 19, 12017, '');
+insert into Organization_ (organizationId, companyId, parentOrganizationId, name, type_, recursable, regionId, countryId, statusId, comments) values ($marketingOrganizationId, $companyId, $incOrganizationId, 'Liferay Marketing', 'regular-organization', TRUE, 5, 19, 12017, '');
 
 insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values ($marketingGroupId, $companyId, $defaultUserId, $organizationClassNameId, $marketingOrganizationId, 0, 0, '$marketingGroupId', '', TRUE);
 insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, themeId, colorSchemeId, pageCount) values ($counter.get(), $companyId, $marketingGroupId, TRUE, FALSE, 'classic', '01', 0);

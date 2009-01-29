@@ -104,7 +104,8 @@ public abstract class SmartUpgradeSchema extends UpgradeProcess {
 		com.liferay.portal.upgrade.v5_0_0.UpgradeSchema.class,
 		com.liferay.portal.upgrade.v5_1_0.UpgradeSchema.class,
 		com.liferay.portal.upgrade.v5_1_2.UpgradeSchema.class,
-		com.liferay.portal.upgrade.v5_2_0.UpgradeSchema.class
+		com.liferay.portal.upgrade.v5_2_0.UpgradeSchema.class,
+		com.liferay.portal.upgrade.v5_2_1.UpgradeSchema.class
 	};
 
 	private static Log _log = LogFactoryUtil.getLog(SmartUpgradeSchema.class);
