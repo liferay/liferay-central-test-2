@@ -150,20 +150,6 @@ public class DeploymentHandler {
 		if (_error) {
 			return;
 		}
-
-		TargetModuleID[] targetModuleIDs =
-			_deploymentManager.getAvailableModules(
-				ModuleType.WAR, _deploymentManager.getTargets());
-
-		for (TargetModuleID targetModuleID : targetModuleIDs) {
-			if (!targetModuleID.getModuleID().equals(warContext)) {
-				continue;
-			}
-
-			_deploymentManager.start(new TargetModuleID[] {targetModuleID});
-
-			break;
-		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(DeploymentHandler.class);
