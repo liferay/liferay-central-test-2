@@ -676,8 +676,6 @@ public class WindowInvoker extends InvokerPortletImpl {
 		}
 
 		try {
-			long companyId = PortalUtil.getCompanyId(request);
-
 			List<Role> roles = RoleLocalServiceUtil.getUserRoles(_remoteUserId);
 
 			List<String> roleNames = new ArrayList<String>(roles.size());

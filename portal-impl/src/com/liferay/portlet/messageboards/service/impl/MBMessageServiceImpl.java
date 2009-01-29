@@ -24,8 +24,6 @@ package com.liferay.portlet.messageboards.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
@@ -613,7 +611,5 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 	private static final int _RSS_ABSTRACT_LENGTH = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.MESSAGE_BOARDS_RSS_ABSTRACT_LENGTH));
-
-	private static Log _log = LogFactoryUtil.getLog(MBMessageServiceImpl.class);
 
 }

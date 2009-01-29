@@ -22,9 +22,6 @@
 
 package com.liferay.portal.mirage.aop;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
 import com.sun.saw.Workflow;
 import com.sun.saw.WorkflowException;
 import com.sun.saw.WorkflowFactory;
@@ -147,8 +144,5 @@ public class JournalArticleLocalServiceAdvice extends BaseMirageAdvice {
 
 		return workflowFactory.getWorkflowInstance(properties);
 	}
-
-	private static Log _log =
-		LogFactoryUtil.getLog(JournalArticleLocalServiceAdvice.class);
 
 }

@@ -80,16 +80,16 @@ public class ListUtil {
 			return;
 		}
 
-		Set set = null;
+		Set<Object> set = null;
 
 		if (comparator == null) {
-			set = new TreeSet();
+			set = new TreeSet<Object>();
 		}
 		else {
-			set = new TreeSet(comparator);
+			set = new TreeSet<Object>(comparator);
 		}
 
-		Iterator itr = list.iterator();
+		Iterator<Object> itr = list.iterator();
 
 		while (itr.hasNext()) {
 			Object obj = itr.next();

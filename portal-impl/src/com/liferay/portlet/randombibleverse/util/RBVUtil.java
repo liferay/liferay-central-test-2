@@ -116,7 +116,7 @@ public class RBVUtil {
 			_verses.add(verse.attributeValue("location"));
 		}
 
-		_verses = new UnmodifiableList(_verses);
+		_verses = new UnmodifiableList<String>(_verses);
 	}
 
 	private Bible _getBible(PortletPreferences preferences, Locale locale) {

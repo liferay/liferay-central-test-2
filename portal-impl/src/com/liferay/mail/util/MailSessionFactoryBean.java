@@ -41,7 +41,7 @@ import org.springframework.beans.factory.config.AbstractFactoryBean;
  */
 public class MailSessionFactoryBean extends AbstractFactoryBean {
 
-	public Class getObjectType() {
+	public Class<?> getObjectType() {
 		return Session.class;
 	}
 

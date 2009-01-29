@@ -528,7 +528,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				}
 			}
 
-			events = new UnmodifiableList(events);
+			events = new UnmodifiableList<CalEvent>(events);
 
 			eventsPool.put(key, events);
 		}
@@ -585,7 +585,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		if (events == null) {
 			events = calEventPersistence.findByG_R(groupId, true);
 
-			events = new UnmodifiableList(events);
+			events = new UnmodifiableList<CalEvent>(events);
 
 			eventsPool.put(key, events);
 		}

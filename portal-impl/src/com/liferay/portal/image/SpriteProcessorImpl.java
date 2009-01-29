@@ -134,8 +134,6 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 		float y = 0;
 
 		for (File file : images) {
-			String fileName = file.getName();
-
 			if (file.length() > maxSize) {
 				continue;
 			}
@@ -174,7 +172,7 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 		}
 		else {
 			RenderedOp renderedOp = MosaicDescriptor.create(
-				(RenderedImage[])renderedImages.toArray(
+				renderedImages.toArray(
 					new RenderedImage[renderedImages.size()]),
 				MosaicDescriptor.MOSAIC_TYPE_OVERLAY, null, null, null, null,
 				null);

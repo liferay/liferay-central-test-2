@@ -90,7 +90,7 @@ public class WordsUtil {
 			ContentUtil.get("com/liferay/portlet/words/dependencies/words.txt"),
 			"\n"));
 
-		_dictionaryList = new UnmodifiableList(_dictionaryList);
+		_dictionaryList = new UnmodifiableList<String>(_dictionaryList);
 
 		_dictionarySet = new HashSet<String>(_dictionaryList.size());
 

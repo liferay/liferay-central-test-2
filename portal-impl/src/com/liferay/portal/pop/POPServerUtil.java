@@ -134,7 +134,7 @@ public class POPServerUtil {
 			_log.debug("Listeners size " + _listeners.size());
 		}
 
-		return new UnmodifiableList(_listeners);
+		return new UnmodifiableList<MessageListener>(_listeners);
 	}
 
 	private void _start() {

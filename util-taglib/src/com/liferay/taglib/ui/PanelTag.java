@@ -62,17 +62,11 @@ public class PanelTag extends BodyTagSupport {
 
 		_bodyContentString = bodyContent.getString();
 
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
 		return SKIP_BODY;
 	}
 
 	public int doEndTag() throws JspException {
 		try {
-			HttpServletRequest request =
-				(HttpServletRequest)pageContext.getRequest();
-
 			PortalIncludeUtil.include(pageContext, getStartPage());
 
 			pageContext.getOut().print(_bodyContentString);

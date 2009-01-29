@@ -72,7 +72,7 @@ public class Validator {
 	}
 
 	public static boolean isAscii(char c) {
-		int i = (int)c;
+		int i = c;
 
 		if ((i >= 32) && (i <= 126)) {
 			return true;
@@ -479,7 +479,7 @@ public class Validator {
 	}
 
 	public static boolean isWhitespace(char c) {
-		int i = (int)c;
+		int i = c;
 
 		if ((i == 0) || Character.isWhitespace(c)) {
 			return true;

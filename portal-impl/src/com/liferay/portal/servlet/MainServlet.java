@@ -699,8 +699,7 @@ public class MainServlet extends ActionServlet {
 
 			if (cause instanceof NoSuchLayoutException) {
 				sendError(
-					HttpServletResponse.SC_NOT_FOUND, (Exception)cause, request,
-					response);
+					HttpServletResponse.SC_NOT_FOUND, cause, request, response);
 
 				return;
 			}
@@ -1006,7 +1005,5 @@ public class MainServlet extends ActionServlet {
 		"Liferay-Portal";
 
 	private static Log _log = LogFactoryUtil.getLog(MainServlet.class);
-
-	private Set<String> _lastModifiedPaths;
 
 }

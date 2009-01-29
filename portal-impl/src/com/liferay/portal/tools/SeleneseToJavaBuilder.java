@@ -204,7 +204,6 @@ public class SeleneseToJavaBuilder {
 
 			String param1 = params[0];
 			String param2 = fixParam(params[1]);
-			String param3 = fixParam(params[2]);
 
 			if (param1.equals("label")) {
 				String label = labels.get(param2);
