@@ -70,6 +70,14 @@ public class UpgradeTags extends UpgradeProcess {
 	}
 
 	protected long copyEntry(long groupId, long entryId) throws Exception {
+		String key = groupId + StringPool.UNDERLINE + entryId;
+
+		Long newEntryId = _entryIdsMap.get(key);
+
+		if (newEntryId != null) {
+			return newEntryId.longValue();
+		}
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -92,7 +100,7 @@ public class UpgradeTags extends UpgradeProcess {
 				Timestamp modifiedDate = rs.getTimestamp("modifiedDate");
 				String name = rs.getString("name");
 
-				long newEntryId = CounterLocalServiceUtil.increment();
+				newEntryId = CounterLocalServiceUtil.increment();
 
 				ps = con.prepareStatement(
 					"insert into TagsEntry (entryId, groupId, companyId, " +
@@ -113,6 +121,8 @@ public class UpgradeTags extends UpgradeProcess {
 				ps.close();
 
 				copyProperties(entryId, newEntryId);
+
+				_entryIdsMap.put(key, newEntryId);
 
 				return newEntryId;
 			}
@@ -399,6 +409,7 @@ public class UpgradeTags extends UpgradeProcess {
 
 	private static Log _log = LogFactoryUtil.getLog(UpgradeTags.class);
 
+	private Map<String, Long> _entryIdsMap = new HashMap<String, Long>();
 	private Map<String, TagsVocabulary> _vocabulariesMap =
 		new HashMap<String, TagsVocabulary>();
 
