@@ -126,6 +126,52 @@ if (organization != null) {
 		<liferay-ui:input-field model="<%= Organization.class %>" bean="<%= organization %>" field="name" />
 	</div>
 
+	<c:choose>
+		<c:when test="<%= PropsValues.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_ORGANIZATION_STATUS %>">
+			<liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + Organization.class.getName() + ListTypeImpl.ORGANIZATION_STATUS %>" message="please-select-a-type" />
+
+			<div class="ctrl-holder">
+				<label for="<portlet:namespace />statusId"><liferay-ui:message key="status" /></label>
+
+				<select name="<portlet:namespace />statusId">
+					<option value=""></option>
+
+					<%
+					List<ListType> statuses = ListTypeServiceUtil.getListTypes(ListTypeImpl.ORGANIZATION_STATUS);
+
+					for (ListType status : statuses) {
+					%>
+
+						<option <%= (status.getListTypeId() == statusId) ? "selected" : "" %> value="<%= status.getListTypeId() %>"><liferay-ui:message key="<%= status.getName() %>" /></option>
+
+					<%
+					}
+					%>
+
+				</select>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<input name="<portlet:namespace />statusId" type="hidden" value="<%= (organization != null) ? organization.getStatusId() : ListTypeImpl.ORGANIZATION_STATUS_DEFAULT %>" />
+		</c:otherwise>
+	</c:choose>
+
+	<liferay-ui:error exception="<%= NoSuchCountryException.class %>" message="please-select-a-country" />
+
+	<div id="<portlet:namespace />countryDiv" <%= GetterUtil.getBoolean(PropsUtil.get(PropsKeys.ORGANIZATIONS_COUNTRY_ENABLED, new Filter(String.valueOf(type))))? StringPool.BLANK : "style=\"display: none;\"" %>>
+		<div class="ctrl-holder">
+			<label for="<portlet:namespace />countryId"><liferay-ui:message key="country" /> </label>
+
+			<select id="<portlet:namespace />countryId" name="<portlet:namespace />countryId"></select>
+		</div>
+
+		<div class="ctrl-holder">
+			<label for="<portlet:namespace />regionId"><liferay-ui:message key="region" /></label>
+
+			<select id="<portlet:namespace />regionId" name="<portlet:namespace />regionId"></select>
+		</div>
+	</div>
+
 	<div class="ctrl-holder">
 		<label for="<portlet:namespace />type"><liferay-ui:message key="type" /></label>
 
@@ -160,6 +206,7 @@ if (organization != null) {
 			<%= groupId %>
 		</div>
 	</c:if>
+
 </fieldset>
 
 <fieldset class="block-labels col">
@@ -207,52 +254,6 @@ if (organization != null) {
 				</c:if>
 			</div>
 		</c:if>
-	</div>
-
-	<c:choose>
-		<c:when test="<%= PropsValues.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_ORGANIZATION_STATUS %>">
-			<liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + Organization.class.getName() + ListTypeImpl.ORGANIZATION_STATUS %>" message="please-select-a-type" />
-
-			<div class="ctrl-holder">
-				<label for="<portlet:namespace />statusId"><liferay-ui:message key="status" /></label>
-
-				<select name="<portlet:namespace />statusId">
-					<option value=""></option>
-
-					<%
-					List<ListType> statuses = ListTypeServiceUtil.getListTypes(ListTypeImpl.ORGANIZATION_STATUS);
-
-					for (ListType status : statuses) {
-					%>
-
-						<option <%= (status.getListTypeId() == statusId) ? "selected" : "" %> value="<%= status.getListTypeId() %>"><liferay-ui:message key="<%= status.getName() %>" /></option>
-
-					<%
-					}
-					%>
-
-				</select>
-			</div>
-		</c:when>
-		<c:otherwise>
-			<input name="<portlet:namespace />statusId" type="hidden" value="<%= (organization != null) ? organization.getStatusId() : ListTypeImpl.ORGANIZATION_STATUS_DEFAULT %>" />
-		</c:otherwise>
-	</c:choose>
-
-	<liferay-ui:error exception="<%= NoSuchCountryException.class %>" message="please-select-a-country" />
-
-	<div id="<portlet:namespace />countryDiv" <%= GetterUtil.getBoolean(PropsUtil.get(PropsKeys.ORGANIZATIONS_COUNTRY_ENABLED, new Filter(String.valueOf(type))))? StringPool.BLANK : "style=\"display: none;\"" %>>
-		<div class="ctrl-holder">
-			<label for="<portlet:namespace />countryId"><liferay-ui:message key="country" /> </label>
-
-			<select id="<portlet:namespace />countryId" name="<portlet:namespace />countryId"></select>
-		</div>
-
-		<div class="ctrl-holder">
-			<label for="<portlet:namespace />regionId"><liferay-ui:message key="region" /></label>
-
-			<select id="<portlet:namespace />regionId" name="<portlet:namespace />regionId"></select>
-		</div>
 	</div>
 </fieldset>
 
