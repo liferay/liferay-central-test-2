@@ -146,7 +146,7 @@
 				<delete>
 					<fileset
 						dir="${app.server.lib.portal.dir}"
-						includes="commons-logging.jar,j2ee-management.jar"
+						includes="commons-logging.jar"
 					/>
 				</delete>
 			</then>
@@ -158,7 +158,7 @@
 				<delete>
 					<fileset
 						dir="${app.server.lib.portal.dir}"
-						includes="jaxrpc.jar,jmx-remote.jar,jmx-ri.jar,mx4j.jar,stax.jar,xercesImpl.jar,xml-apis.jar"
+						includes="jaxrpc.jar,stax.jar,xercesImpl.jar,xml-apis.jar"
 					/>
 				</delete>
 			</then>
@@ -176,18 +176,6 @@
 						includes="mail.jar"
 					/>
 				</copy>
-			</then>
-		</if>
-
-		<if>
-			<equals arg1="${app.server.type}" arg2="jetty" />
-			<then>
-				<delete>
-					<fileset
-						dir="${app.server.lib.portal.dir}"
-						includes="jmx-remote.jar,jmx-ri.jar,mx4j.jar"
-					/>
-				</delete>
 			</then>
 		</if>
 

@@ -129,7 +129,6 @@
 	<classpathentry kind="lib" path="lib/portal/ical4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/icq.jar"/>
 	<classpathentry kind="lib" path="lib/portal/icu4j.jar"/>
-	<classpathentry kind="lib" path="lib/portal/j2ee-management.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jabsorb.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jackrabbit-api.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jackrabbit-core.jar"/>
@@ -152,8 +151,6 @@
 	<classpathentry kind="lib" path="lib/portal/jets3t.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jfreechart.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jgroups.jar"/>
-	<classpathentry kind="lib" path="lib/portal/jmx-remote.jar"/>
-	<classpathentry kind="lib" path="lib/portal/jmx-ri.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jodconverter.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jrcs-diff.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jsonrpc.jar"/>
@@ -169,7 +166,6 @@
 	<classpathentry kind="lib" path="lib/portal/lucene-highlighter.jar"/>
 	<classpathentry kind="lib" path="lib/portal/mirage-api.jar"/>
 	<classpathentry kind="lib" path="lib/portal/msnm.jar"/>
-	<classpathentry kind="lib" path="lib/portal/mx4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/nekohtml.jar"/>
 	<classpathentry kind="lib" path="lib/portal/odmg.jar"/>
 	<classpathentry kind="lib" path="lib/portal/openid4java.jar"/>
