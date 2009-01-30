@@ -22,7 +22,18 @@
  */
 %>
 
+<%@ include file="/html/portlet/announcements/init.jsp" %>
+
 <%
+String tabs1 = ParamUtil.getString(request, "tabs1", "entries");
+
+PortletURL tabs1URL = renderResponse.createRenderURL();
+
+tabs1URL.setWindowState(WindowState.MAXIMIZED);
+
+tabs1URL.setParameter("struts_action", "/announcements/view");
+tabs1URL.setParameter("tabs1", tabs1);
+
 String tabs1Names = "entries";
 
 if (PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.ANNOUNCEMENTS, ActionKeys.ADD_ENTRY)) {
@@ -32,5 +43,5 @@ if (PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.ANNOUNCE
 
 <liferay-ui:tabs
 	names="<%= tabs1Names %>"
-	url="<%= portletURL.toString() %>"
+	url="<%= tabs1URL.toString() %>"
 />
