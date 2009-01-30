@@ -24,6 +24,7 @@ package com.liferay.portlet.calendar.action;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
@@ -87,7 +88,8 @@ public class ExportEventsAction extends PortletAction {
 			HttpServletResponse response = PortalUtil.getHttpServletResponse(
 				actionResponse);
 
-			ServletResponseUtil.sendFile(response, file.getName(), is);
+			ServletResponseUtil.sendFile(
+				response, file.getName(), is, ContentTypes.TEXT_CALENDAR);
 
 			setForward(actionRequest, ActionConstants.COMMON_NULL);
 		}

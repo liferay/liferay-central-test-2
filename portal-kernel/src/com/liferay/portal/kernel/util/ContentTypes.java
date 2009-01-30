@@ -44,6 +44,8 @@ public interface ContentTypes {
 
 	public static final String MULTIPART_MIXED = "multipart/mixed";
 
+	public static final String TEXT_CALENDAR = "text/calendar";
+
 	public static final String TEXT_CSS = "text/css";
 
 	public static final String TEXT_CSS_UTF8 = "text/css; charset=UTF-8";
