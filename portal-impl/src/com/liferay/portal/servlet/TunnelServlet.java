@@ -155,8 +155,9 @@ public class TunnelServlet extends HttpServlet {
 	protected boolean isValidRequest(MethodWrapper methodWrapper) {
 		String className = methodWrapper.getClassName();
 
-		if (className.contains(".service.http.") &&
-			className.endsWith("ServiceHttp")) {
+		if (className.contains(".service.") &&
+			className.endsWith("ServiceUtil") &&
+			!className.endsWith("LocalServiceUtil")) {
 
 			return true;
 		}
