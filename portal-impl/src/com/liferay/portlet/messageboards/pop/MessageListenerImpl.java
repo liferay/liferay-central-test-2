@@ -64,7 +64,7 @@ public class MessageListenerImpl implements MessageListener {
 			String messageId = getMessageId(recipient, message);
 
 			if ((messageId == null) ||
-				(!messageId.startsWith(MBUtil.POP_PORTLET_PREFIX))) {
+				(!messageId.contains(MBUtil.POP_PORTLET_PREFIX))) {
 
 				return false;
 			}
@@ -205,7 +205,7 @@ public class MessageListenerImpl implements MessageListener {
 		int pos = recipient.indexOf(StringPool.AT);
 
 		String target = recipient.substring(
-			MBUtil.POP_PORTLET_PREFIX.length(), pos);
+			MBUtil.POP_PORTLET_PREFIX.length() + 1, pos);
 
 		String[] parts = StringUtil.split(target, StringPool.PERIOD);
 
