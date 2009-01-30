@@ -374,7 +374,7 @@ public class HookHotDeployListener
 		if (_log.isInfoEnabled()) {
 			_log.info(
 				"Hook for " + servletContextName + " registered " +
-					"successfully. It is now ready to be used.");
+					"successfully. It is available for use.");
 		}
 	}
 

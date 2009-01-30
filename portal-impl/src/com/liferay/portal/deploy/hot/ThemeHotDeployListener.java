@@ -100,7 +100,7 @@ public class ThemeHotDeployListener extends BaseHotDeployListener {
 		if (_log.isInfoEnabled()) {
 			_log.info(
 				"Themes for " + servletContextName +
-					" registered successfully. It is now ready to be used.");
+					" registered successfully. It is available for use.");
 		}
 	}
 
