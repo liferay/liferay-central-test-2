@@ -92,6 +92,7 @@ if (choiceName > 0) {
 <input name="<portlet:namespace />questionId" type="hidden" value="<%= questionId %>" />
 <input name="<portlet:namespace />choicesCount" type="hidden" value="<%= choicesCount %>" />
 <input name="<portlet:namespace />choiceName" type="hidden" value="" />
+<input name="<portlet:namespace /><%= EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + (char)(96 + choicesCount + 1) %>" type="hidden" value="" />
 
 <liferay-ui:tabs
 	names="question"
