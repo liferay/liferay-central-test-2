@@ -36,7 +36,7 @@ import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.tools.SourceFormatter;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.util.SetUtil;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.util.TextFormatter;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.xml.Document;

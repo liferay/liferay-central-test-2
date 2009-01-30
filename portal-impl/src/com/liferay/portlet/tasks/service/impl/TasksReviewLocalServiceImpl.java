@@ -26,13 +26,13 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portlet.tasks.DuplicateReviewUserIdException;
 import com.liferay.portlet.tasks.model.TasksProposal;
 import com.liferay.portlet.tasks.model.TasksReview;
 import com.liferay.portlet.tasks.service.base.TasksReviewLocalServiceBaseImpl;
 import com.liferay.portlet.tasks.social.TasksActivityKeys;
-import com.liferay.util.SetUtil;
 
 import java.util.Date;
 import java.util.HashSet;

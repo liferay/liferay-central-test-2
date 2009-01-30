@@ -22,133 +22,14 @@
 
 package com.liferay.util;
 
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-
-import java.util.Collection;
-import java.util.Enumeration;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-
 /**
  * <a href="SetUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
+ * @deprecated This class has been repackaged at
+ * <code>com.liferay.portal.kernel.util</code>.
+ *
  */
-public class SetUtil {
-
-	public static Set<Long> fromArray(long[] array) {
-		if ((array == null) || (array.length == 0)) {
-			return new HashSet();
-		}
-
-		Set<Long> set = new HashSet<Long>(array.length);
-
-		for (int i = 0; i < array.length; i++) {
-			set.add(array[i]);
-		}
-
-		return set;
-	}
-
-	public static Set fromArray(Object[] array) {
-		if ((array == null) || (array.length == 0)) {
-			return new HashSet();
-		}
-
-		Set set = new HashSet(array.length);
-
-		for (int i = 0; i < array.length; i++) {
-			set.add(array[i]);
-		}
-
-		return set;
-	}
-
-	public static Set fromCollection(Collection c) {
-		if ((c != null) && (c instanceof Set)) {
-			return (Set)c;
-		}
-
-		if ((c == null) || (c.size() == 0)) {
-			return new HashSet();
-		}
-
-		Set set = new HashSet(c.size());
-
-		Iterator itr = c.iterator();
-
-		while (itr.hasNext()) {
-			set.add(itr.next());
-		}
-
-		return set;
-	}
-
-	public static Set fromEnumeration(Enumeration enu) {
-		Set set = new HashSet();
-
-		while (enu.hasMoreElements()) {
-			set.add(enu.nextElement());
-		}
-
-		return set;
-	}
-
-	public static Set fromIterator(Iterator itr) {
-		Set set = new HashSet();
-
-		while (itr.hasNext()) {
-			set.add(itr.next());
-		}
-
-		return set;
-	}
-
-	public static Set fromFile(String fileName) throws IOException {
-		return fromFile(new File(fileName));
-	}
-
-	public static Set fromFile(File file) throws IOException {
-		Set set = new HashSet();
-
-		BufferedReader br = new BufferedReader(new FileReader(file));
-
-		String s = StringPool.BLANK;
-
-		while ((s = br.readLine()) != null) {
-			set.add(s);
-		}
-
-		br.close();
-
-		return set;
-	}
-
-	public static Set fromList(List array) {
-		if ((array == null) || (array.size() == 0)) {
-			return new HashSet();
-		}
-
-		Set set = new HashSet(array.size());
-
-		for (int i = 0; i < array.size(); i++) {
-			set.add(array.get(i));
-		}
-
-		return set;
-	}
-
-	public static Set fromString(String s) {
-		return fromArray(StringUtil.split(s, StringPool.NEW_LINE));
-	}
-
+public class SetUtil extends com.liferay.portal.kernel.util.SetUtil {
 }
