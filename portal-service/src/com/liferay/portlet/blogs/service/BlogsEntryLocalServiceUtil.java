@@ -376,6 +376,16 @@ public class BlogsEntryLocalServiceUtil {
 			serviceContext);
 	}
 
+	public static void updateEntryResources(
+		com.liferay.portlet.blogs.model.BlogsEntry entry,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService()
+			.updateEntryResources(entry, communityPermissions, guestPermissions);
+	}
+
 	public static void updateTagsAsset(long userId,
 		com.liferay.portlet.blogs.model.BlogsEntry entry,
 		java.lang.String[] tagsEntries)
