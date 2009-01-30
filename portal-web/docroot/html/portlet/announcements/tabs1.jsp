@@ -22,30 +22,15 @@
  */
 %>
 
-<%@ include file="/html/portlet/announcements/init.jsp" %>
-
 <%
-themeDisplay.setIncludeServiceJs(true);
+String tabs1Names = "entries";
 
-String tabs1 = ParamUtil.getString(request, "tabs1", "entries");
-
-PortletURL portletURL = renderResponse.createRenderURL();
-
-portletURL.setWindowState(WindowState.MAXIMIZED);
-
-portletURL.setParameter("struts_action", "/announcements/view");
-portletURL.setParameter("tabs1", tabs1);
+if (PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.ANNOUNCEMENTS, ActionKeys.ADD_ENTRY)) {
+	tabs1Names += ",manage-entries";
+}
 %>
 
-<c:if test="<%= !portletName.equals(PortletKeys.ALERTS) || (portletName.equals(PortletKeys.ALERTS) && PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.ANNOUNCEMENTS, ActionKeys.ADD_ENTRY)) %>">
-	<%@ include file="/html/portlet/announcements/tabs1.jsp" %>
-</c:if>
-
-<c:choose>
-	<c:when test='<%= tabs1.equals("entries") %>'>
-		<%@ include file="/html/portlet/announcements/view_entries.jsp" %>
-	</c:when>
-	<c:when test='<%= tabs1.equals("manage-entries") %>'>
-		<%@ include file="/html/portlet/announcements/view_manage_entries.jsp" %>
-	</c:when>
-</c:choose>
+<liferay-ui:tabs
+	names="<%= tabs1Names %>"
+	url="<%= portletURL.toString() %>"
+/>

@@ -75,42 +75,7 @@ for (int i = 0; i < results.size(); i++) {
 				</c:when>
 			</c:choose>
 
-			<div class="edit-actions">
-				<table class="lfr-table">
-				<tr>
-					<c:if test="<%= AnnouncementsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE) %>">
-						<td class="edit-entry">
-							<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
-								<portlet:param name="struts_action" value="/announcements/edit_entry" />
-								<portlet:param name="redirect" value="<%= currentURL %>" />
-								<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
-							</portlet:renderURL>
-
-							<liferay-ui:icon image="edit" url="<%= editURL %>" label="<%= true %>" />
-						</td>
-					</c:if>
-
-					<c:if test="<%= AnnouncementsEntryPermission.contains(permissionChecker, entry, ActionKeys.DELETE) %>">
-						<td class="delete-entry">
-							<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
-								<portlet:param name="struts_action" value="/announcements/edit_entry" />
-								<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-								<portlet:param name="redirect" value="<%= currentURL %>" />
-								<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
-							</portlet:actionURL>
-
-							<liferay-ui:icon-delete url="<%= deleteURL %>" label="<%= true %>" />
-						</td>
-					</c:if>
-
-					<td class="control-entry">
-						<c:if test='<%= tabs1.equals("entries") && themeDisplay.isSignedIn() %>'>
-							<a href="<%= "javascript: " + renderResponse.getNamespace() + "handleEntry(" + entry.getEntryId() + ");" %>"><liferay-ui:message key='<%= ((flagValue == AnnouncementsFlagImpl.NOT_HIDDEN) ? "mark-as-read" : "show") %>' /></a>
-						</c:if>
-					</td>
-				</tr>
-				</table>
-			</div>
+			<%@ include file="/html/portlet/announcements/entry_action.jspf" %>
 		</h3>
 
 		<p class="entry-content entry-type-<%= entry.getType() %>">

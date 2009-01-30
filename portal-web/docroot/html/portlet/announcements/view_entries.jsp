@@ -1,0 +1,102 @@
+<%
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+%>
+
+<script type="text/javascript">
+	function <portlet:namespace />handleEntry(entryId) {
+		var entry = jQuery('#<portlet:namespace/>' + entryId);
+		var container = entry.parent();
+
+		if (container.hasClass('unread-entries')) {
+			<portlet:namespace />_markEntry(entry, entryId);
+		}
+		else {
+			<portlet:namespace />_toggleContent(entry);
+		}
+	}
+
+	function <portlet:namespace />_markEntry(entry, entryId) {
+		Liferay.Service.Announcements.AnnouncementsFlag.addFlag({entryId : entryId, flag: <%= AnnouncementsFlagImpl.HIDDEN %>});
+
+		var readContainer = jQuery('.portlet-announcements .read-entries');
+		var control = entry.find('.control-entry a');
+
+		entry.hide(
+			'normal',
+			function() {
+				entry.appendTo(readContainer);
+
+				control.html('<liferay-ui:message key="show" />');
+			}
+		);
+
+		entry.show('normal');
+	}
+
+	function <portlet:namespace />_toggleContent(entry) {
+		var content = entry.find('.entry-content');
+		var control = entry.find('.control-entry a');
+
+		if (entry.hasClass('visable')) {
+			entry.removeClass('visable');
+
+			content.hide();
+
+			control.html('<liferay-ui:message key="show" />');
+		}
+		else {
+			entry.addClass('visable');
+
+			content.show();
+
+			control.html('<liferay-ui:message key="hide" />');
+		}
+	}
+</script>
+
+<%
+LinkedHashMap<Long, long[]> scopes = AnnouncementsUtil.getAnnouncementScopes(user.getUserId());
+
+SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, delta, portletURL, null, "no-entries-were-found");
+
+List<AnnouncementsEntry> results = null;
+int total = 0;
+
+int flagValue = AnnouncementsFlagImpl.NOT_HIDDEN;
+%>
+
+<div class="unread-entries">
+	<%@ include file="/html/portlet/announcements/entry_iterator.jspf" %>
+</div>
+
+<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="article" />
+
+<%
+flagValue = AnnouncementsFlagImpl.HIDDEN;
+%>
+
+<div class="read-entries">
+	<%@ include file="/html/portlet/announcements/entry_iterator.jspf" %>
+</div>
+
+<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="article" />
