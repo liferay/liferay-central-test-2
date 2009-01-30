@@ -64,7 +64,8 @@ public class MessageListenerImpl implements MessageListener {
 			String messageId = getMessageId(recipient, message);
 
 			if ((messageId == null) ||
-				(!messageId.startsWith(MBUtil.POP_PORTLET_PREFIX, getOffset()))) {
+				(!messageId.startsWith(
+					MBUtil.POP_PORTLET_PREFIX, getOffset()))) {
 
 				return false;
 			}
@@ -237,12 +238,12 @@ public class MessageListenerImpl implements MessageListener {
 		}
 	}
 
-    protected int getOffset() {
-        if (MBUtil.POP_SERVER_SUBDOMAIN_LENGTH == 0) {
-            return 1;
-        }
-        return 0;
-    }
+	protected int getOffset() {
+		if (MBUtil.POP_SERVER_SUBDOMAIN_LENGTH == 0) {
+			return 1;
+		}
+		return 0;
+	}
 
 	protected long getParentMessageId(String recipient, Message message)
 		throws Exception {
