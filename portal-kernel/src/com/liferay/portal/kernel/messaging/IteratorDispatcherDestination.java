@@ -55,7 +55,7 @@ public abstract class IteratorDispatcherDestination extends BaseDestination {
 
 		_listeners.add(listener);
 
-		setListenersCount(_listeners.size());
+		setListenerCount(_listeners.size());
 	}
 
 	public void send(Message message) {
@@ -83,7 +83,7 @@ public abstract class IteratorDispatcherDestination extends BaseDestination {
 
 		boolean value = _listeners.remove(listener);
 
-		setListenersCount(_listeners.size());
+		setListenerCount(_listeners.size());
 
 		return value;
 	}

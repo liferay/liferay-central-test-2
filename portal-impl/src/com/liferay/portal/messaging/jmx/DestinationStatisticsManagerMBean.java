@@ -20,34 +20,38 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.messaging;
+package com.liferay.portal.messaging.jmx;
 
 /**
- * <a href="Destination.java.html"><b><i>View Source</i></b></a>
+ * <a href="DestinationStatisticsManagerMBean.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  *
  */
-public interface Destination {
+public interface DestinationStatisticsManagerMBean {
 
-	public void close();
+	public int getActiveThreadCount();
 
-	public void close(boolean force);
+	public int getCurrentThreadCount();
 
-	public int getListenerCount();
+	public int getLargestThreadCount();
 
-	public String getName();
+	public String getLastRefresh();
 
-	public DestinationStatistics getStatistics();
+	public int getMaxThreadPoolSize();
 
-	public boolean isRegistered();
+	public int getMinThreadPoolSize();
 
-	public void open();
+	public long getPendingMessageCount();
 
-	public void register(MessageListener listener);
+	public long getSentMessageCount();
 
-	public void send(Message message);
+	public boolean isAutoRefresh();
 
-	public boolean unregister(MessageListener listener);
+	public void refresh();
+
+	public void setAutoRefresh(boolean autoRefresh);
 
 }

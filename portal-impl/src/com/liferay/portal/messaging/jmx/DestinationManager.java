@@ -20,34 +20,42 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.messaging;
+package com.liferay.portal.messaging.jmx;
+
+import com.liferay.portal.kernel.messaging.Destination;
+
+import javax.management.MalformedObjectNameException;
+import javax.management.ObjectName;
 
 /**
- * <a href="Destination.java.html"><b><i>View Source</i></b></a>
+ * <a href="DestinationManager.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  *
  */
-public interface Destination {
+public class DestinationManager implements DestinationManagerMBean {
 
-	public void close();
+	public static ObjectName createObjectName(String destinationName) {
+		try {
+			return new ObjectName(_OBJECT_NAME_PREFIX + destinationName);
+		}
+		catch (MalformedObjectNameException mone) {
+			throw new IllegalStateException(mone);
+		}
+	}
 
-	public void close(boolean force);
+	public DestinationManager(Destination destination) {
+		_destination = destination;
+	}
 
-	public int getListenerCount();
+	public int getListenerCount() {
+		return _destination.getListenerCount();
+	}
 
-	public String getName();
+	private static final String _OBJECT_NAME_PREFIX =
+		"com.liferay.portal.kernel.messaging:type=Destination,name=";
 
-	public DestinationStatistics getStatistics();
-
-	public boolean isRegistered();
-
-	public void open();
-
-	public void register(MessageListener listener);
-
-	public void send(Message message);
-
-	public boolean unregister(MessageListener listener);
+	private Destination _destination;
 
 }

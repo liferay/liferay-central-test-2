@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +46,22 @@ public class DefaultMessageBus implements MessageBus {
 
 	public void addDestinationEventListener(DestinationEventListener listener) {
 		_destinationEventListeners.add(listener);
+	}
+
+	public void destroy() {
+		shutdown(true);
+	}
+
+	public int getDestinationCount() {
+		return _destinations.size();
+	}
+
+	public Collection<String> getDestinationNames() {
+		return _destinations.keySet();
+	}
+
+	public Collection<Destination> getDestinations() {
+		return _destinations.values();
 	}
 
 	public boolean hasDestination(String destinationName) {

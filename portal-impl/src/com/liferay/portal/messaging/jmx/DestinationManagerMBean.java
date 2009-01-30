@@ -20,34 +20,17 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.messaging;
+package com.liferay.portal.messaging.jmx;
 
 /**
- * <a href="Destination.java.html"><b><i>View Source</i></b></a>
+ * <a href="DestinationManagerMBean.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  *
  */
-public interface Destination {
-
-	public void close();
-
-	public void close(boolean force);
+public interface DestinationManagerMBean {
 
 	public int getListenerCount();
-
-	public String getName();
-
-	public DestinationStatistics getStatistics();
-
-	public boolean isRegistered();
-
-	public void open();
-
-	public void register(MessageListener listener);
-
-	public void send(Message message);
-
-	public boolean unregister(MessageListener listener);
 
 }

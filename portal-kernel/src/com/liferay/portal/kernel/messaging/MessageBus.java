@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.messaging;
 
+import java.util.Collection;
+
 /**
  * <a href="MessageBus.java.html"><b><i>View Source</i></b></a>
  *
@@ -33,6 +35,12 @@ public interface MessageBus {
 	public void addDestination(Destination destination);
 
 	public void addDestinationEventListener(DestinationEventListener listener);
+
+	public int getDestinationCount();
+
+	public Collection<String> getDestinationNames();
+
+	public Collection<Destination> getDestinations();
 
 	public boolean hasDestination(String destinationName);
 

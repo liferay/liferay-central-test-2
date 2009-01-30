@@ -62,7 +62,7 @@ public abstract class ArrayDispatcherDestination extends BaseDestination {
 		_listeners = listeners.toArray(
 			new MessageListener[listeners.size()]);
 
-		setListenersCount(listeners.size());
+		setListenerCount(listeners.size());
 	}
 
 	public void send(Message message) {
@@ -96,7 +96,7 @@ public abstract class ArrayDispatcherDestination extends BaseDestination {
 			_listeners = listeners.toArray(
 				new MessageListener[listeners.size()]);
 
-			setListenersCount(listeners.size());
+			setListenerCount(listeners.size());
 		}
 
 		return value;

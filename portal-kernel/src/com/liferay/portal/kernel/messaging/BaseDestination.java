@@ -61,12 +61,33 @@ public abstract class BaseDestination implements Destination {
 		doClose(force);
 	}
 
+	public DestinationStatistics getStatistics() {
+		DestinationStatistics statistics = new DestinationStatistics();
+
+		statistics.setActiveThreadCount(_threadPoolExecutor.getActiveCount());
+		statistics.setCurrentThreadCount(_threadPoolExecutor.getPoolSize());
+		statistics.setLargestThreadCount(
+			_threadPoolExecutor.getLargestPoolSize());
+		statistics.setMaxThreadPoolSize(
+			_threadPoolExecutor.getMaximumPoolSize());
+		statistics.setMinThreadPoolSize(_threadPoolExecutor.getCorePoolSize());
+		statistics.setPendingMessageCount(_threadPoolExecutor.getTaskCount());
+		statistics.setSentMessageCount(
+			_threadPoolExecutor.getCompletedTaskCount());
+
+		return statistics;
+	}
+
+	public int getListenerCount() {
+		return _listenerCount;
+	}
+
 	public String getName() {
 		return _name;
 	}
 
 	public boolean isRegistered() {
-		if (_listenersCount > 0) {
+		if (_listenerCount > 0) {
 			return true;
 		}
 		else {
@@ -119,8 +140,8 @@ public abstract class BaseDestination implements Destination {
 		return _workersMaxSize;
 	}
 
-	protected void setListenersCount(int listenersCount) {
-		_listenersCount = listenersCount;
+	protected void setListenerCount(int listenerCount) {
+		_listenerCount = listenerCount;
 	}
 
 	private static final int _WORKERS_CORE_SIZE = 5;
@@ -133,6 +154,6 @@ public abstract class BaseDestination implements Destination {
 	private ThreadPoolExecutor _threadPoolExecutor;
 	private int _workersCoreSize;
 	private int _workersMaxSize;
-	private int _listenersCount;
+	private int _listenerCount;
 
 }
