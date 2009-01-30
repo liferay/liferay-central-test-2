@@ -28,14 +28,14 @@
 		var container = entry.parent();
 
 		if (container.hasClass('unread-entries')) {
-			<portlet:namespace />_markEntry(entry, entryId);
+			<portlet:namespace />markEntry(entry, entryId);
 		}
 		else {
-			<portlet:namespace />_toggleContent(entry);
+			<portlet:namespace />toggleContent(entry);
 		}
 	}
 
-	function <portlet:namespace />_markEntry(entry, entryId) {
+	function <portlet:namespace />markEntry(entry, entryId) {
 		Liferay.Service.Announcements.AnnouncementsFlag.addFlag({entryId : entryId, flag: <%= AnnouncementsFlagImpl.HIDDEN %>});
 
 		var readContainer = jQuery('.portlet-announcements .read-entries');
@@ -53,7 +53,7 @@
 		entry.show('normal');
 	}
 
-	function <portlet:namespace />_toggleContent(entry) {
+	function <portlet:namespace />toggleContent(entry) {
 		var content = entry.find('.entry-content');
 		var control = entry.find('.control-entry a');
 
