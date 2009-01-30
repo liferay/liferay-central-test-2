@@ -206,7 +206,6 @@ if (organization != null) {
 			<%= groupId %>
 		</div>
 	</c:if>
-
 </fieldset>
 
 <fieldset class="block-labels col">
