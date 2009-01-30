@@ -77,6 +77,10 @@ public class TunnelServlet extends HttpServlet {
 			HttpPrincipal httpPrincipal = ovp.getKey();
 			MethodWrapper methodWrapper = ovp.getValue();
 
+			if (!isValidRequest(methodWrapper)) {
+				return;
+			}
+
 			long companyId = PortalInstances.getCompanyId(request);
 
 			CompanyThreadLocal.setCompanyId(companyId);
@@ -145,6 +149,19 @@ public class TunnelServlet extends HttpServlet {
 
 			oos.flush();
 			oos.close();
+		}
+	}
+
+	protected boolean isValidRequest(MethodWrapper methodWrapper) {
+		String className = methodWrapper.getClassName();
+
+		if (className.contains(".service.http.") &&
+			className.endsWith("ServiceHttp")) {
+
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 
