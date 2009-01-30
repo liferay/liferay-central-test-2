@@ -81,7 +81,9 @@ public class ViewAction extends PortletAction {
 				actionRequest, "emailAddress" + i);
 
 			if (Validator.isEmailAddress(emailAddress)) {
-				validEmailAddresses.add(emailAddress);
+				if (!validEmailAddresses.contains(emailAddress)) {
+					validEmailAddresses.add(emailAddress);
+				}
 			}
 			else if (Validator.isNotNull(emailAddress)) {
 				invalidEmailAddresses.add("emailAddress" + i);
