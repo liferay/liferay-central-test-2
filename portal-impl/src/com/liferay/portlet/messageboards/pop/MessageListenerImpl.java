@@ -64,7 +64,7 @@ public class MessageListenerImpl implements MessageListener {
 			String messageId = getMessageId(recipient, message);
 
 			if ((messageId == null) ||
-				(!messageId.contains(MBUtil.POP_PORTLET_PREFIX))) {
+				(!messageId.startsWith(MBUtil.POP_PORTLET_PREFIX, getOffset()))) {
 
 				return false;
 			}
@@ -205,7 +205,7 @@ public class MessageListenerImpl implements MessageListener {
 		int pos = recipient.indexOf(StringPool.AT);
 
 		String target = recipient.substring(
-			MBUtil.POP_PORTLET_PREFIX.length() + 1, pos);
+			MBUtil.POP_PORTLET_PREFIX.length() + getOffset(), pos);
 
 		String[] parts = StringUtil.split(target, StringPool.PERIOD);
 
@@ -236,6 +236,13 @@ public class MessageListenerImpl implements MessageListener {
 			return MBUtil.getParentMessageIdString(message);
 		}
 	}
+
+    protected int getOffset() {
+        if (MBUtil.POP_SERVER_SUBDOMAIN_LENGTH == 0) {
+            return 1;
+        }
+        return 0;
+    }
 
 	protected long getParentMessageId(String recipient, Message message)
 		throws Exception {
