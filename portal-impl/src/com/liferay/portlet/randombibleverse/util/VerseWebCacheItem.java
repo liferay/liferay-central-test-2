@@ -65,6 +65,13 @@ public class VerseWebCacheItem implements WebCacheItem {
 			if (y != -1) {
 				text = text.substring(0, y);
 			}
+			else {
+				y = text.indexOf("Cross references:");
+
+				if (y != -1) {
+					text = text.substring(0, y);
+				}
+			}
 
 			// Strip everything between <span> and </span>
 
