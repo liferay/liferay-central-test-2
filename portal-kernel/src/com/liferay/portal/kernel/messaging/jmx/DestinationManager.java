@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.messaging.jmx;
+package com.liferay.portal.kernel.messaging.jmx;
 
 import com.liferay.portal.kernel.messaging.Destination;
 

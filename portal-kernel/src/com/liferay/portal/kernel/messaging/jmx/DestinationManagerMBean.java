@@ -20,17 +20,17 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.messaging.jmx;
+package com.liferay.portal.kernel.messaging.jmx;
 
 /**
- * <a href="MessageBusManagerMBean.java.html"><b><i>View Source</i></b></a>
+ * <a href="DestinationManagerMBean.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  *
  */
-public interface MessageBusManagerMBean {
+public interface DestinationManagerMBean {
 
-	public int getDestinationCount();
+	public int getListenerCount();
 
 }

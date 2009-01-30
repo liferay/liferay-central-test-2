@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.messaging.jmx;
+package com.liferay.portal.kernel.messaging.jmx;
 
 /**
  * <a href="DestinationStatisticsManagerMBean.java.html"><b><i>View Source</i>

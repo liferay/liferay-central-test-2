@@ -20,17 +20,42 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.messaging.jmx;
+package com.liferay.portal.kernel.messaging.jmx;
+
+import com.liferay.portal.kernel.messaging.MessageBus;
+
+import javax.management.MalformedObjectNameException;
+import javax.management.ObjectName;
 
 /**
- * <a href="DestinationManagerMBean.java.html"><b><i>View Source</i></b></a>
+ * <a href="MessageBusManager.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  *
  */
-public interface DestinationManagerMBean {
+public class MessageBusManager implements MessageBusManagerMBean {
 
-	public int getListenerCount();
+	public static ObjectName createObjectName() {
+		try {
+			return new ObjectName(_OBJECT_NAME);
+		}
+		catch (MalformedObjectNameException mone) {
+			throw new IllegalStateException(mone);
+		}
+	}
+
+	public MessageBusManager(MessageBus messageBus) {
+		_messageBus = messageBus;
+	}
+
+	public int getDestinationCount() {
+		return _messageBus.getDestinationCount();
+	}
+
+	private static final String _OBJECT_NAME =
+		"com.liferay.portal.kernel.messaging:type=MessageBus";
+
+	private MessageBus _messageBus;
 
 }

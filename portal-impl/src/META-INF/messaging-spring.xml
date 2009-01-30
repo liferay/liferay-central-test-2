@@ -20,7 +20,7 @@
 
 	<!-- JMX -->
 
-	<bean id="com.liferay.portal.messaging.jmx.JMXMessageListener" class="com.liferay.portal.messaging.jmx.JMXMessageListener" init-method="init" destroy-method="destroy">
+	<bean id="com.liferay.portal.kernel.messaging.jmx.JMXMessageListener" class="com.liferay.portal.kernel.messaging.jmx.JMXMessageListener" init-method="init" destroy-method="destroy">
 		<property name="MBeanServer" ref="mbeanServer" />
 		<property name="messageBus" ref="com.liferay.portal.kernel.messaging.MessageBus" />
 	</bean>
@@ -101,7 +101,7 @@
 	<bean id="com.liferay.portal.kernel.messaging.config.MessagingConfigurator" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
 		<property name="destinationEventListeners">
 			<list>
-				<ref bean="com.liferay.portal.messaging.jmx.JMXMessageListener" />
+				<ref bean="com.liferay.portal.kernel.messaging.jmx.JMXMessageListener" />
 				<!--<bean class="com.liferay.portal.kernel.messaging.GlobalDestinationEventListener">
 					<constructor-arg index="0" type="com.liferay.portal.kernel.messaging.MessageListener" ref="messageListener.global" />
 					<constructor-arg index="1" type="java.util.List">
