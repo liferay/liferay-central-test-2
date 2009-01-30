@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
@@ -221,9 +222,9 @@ public class CaptchaImpl implements Captcha {
 
 		session.setAttribute(WebKeys.CAPTCHA_TEXT, captchaText);
 
-		_captchaProducer.createImage(response.getOutputStream(), captchaText);
+		response.setContentType(ContentTypes.IMAGE_JPEG);
 
-		response.setContentType("image/jpeg");
+		_captchaProducer.createImage(response.getOutputStream(), captchaText);
 	}
 
 	public void serveImage(
@@ -238,6 +239,8 @@ public class CaptchaImpl implements Captcha {
 
 		HttpServletResponse response = PortalUtil.getHttpServletResponse(
 			portletResponse);
+
+		response.setContentType(ContentTypes.IMAGE_JPEG);
 
 		_captchaProducer.createImage(response.getOutputStream(), captchaText);
 	}

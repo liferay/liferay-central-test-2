@@ -23,6 +23,7 @@
 package com.liferay.portlet.polls.action;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -109,7 +110,7 @@ public class ViewChartAction extends Action {
 					chartName, pieData, true, false, false);
 			}
 
-			response.setContentType("image/jpeg");
+			response.setContentType(ContentTypes.IMAGE_JPEG);
 
 			OutputStream os = response.getOutputStream();
 

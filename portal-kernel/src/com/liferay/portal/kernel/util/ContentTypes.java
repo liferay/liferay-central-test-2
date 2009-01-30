@@ -34,6 +34,8 @@ public interface ContentTypes {
 
 	public static final String HTTPD_UNIX_DIRECTORY = "httpd/unix-directory";
 
+	public static final String IMAGE_JPEG = "image/jpeg";
+
 	public static final String MESSAGE_RFC822 = "message/rfc822";
 
 	public static final String MULTIPART_ALTERNATIVE = "multipart/alternative";
