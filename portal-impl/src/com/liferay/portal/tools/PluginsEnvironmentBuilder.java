@@ -84,16 +84,19 @@ public class PluginsEnvironmentBuilder {
 			String[] fileNames = ds.getIncludedFiles();
 
 			for (String fileName : fileNames) {
-				File propsFile = new File(dirName + "/" + fileName);
-				File libDir = new File(propsFile.getParent() + "/lib");
-				File projectDir = new File(propsFile.getParent() + "/../..");
+				File propertiesFile = new File(dirName + "/" + fileName);
+				File libDir = new File(propertiesFile.getParent() + "/lib");
+				File projectDir = new File(
+					propertiesFile.getParent() + "/../..");
 
-				Properties props = new Properties();
+				Properties properties = new Properties();
 
-				props.load(new FileInputStream(propsFile));
+				properties.load(new FileInputStream(propertiesFile));
 
 				List<String> dependencyJars = ListUtil.toList(StringUtil.split(
-					props.getProperty("portal.dependency.jars")));
+					properties.getProperty(
+						"portal-dependency-jars",
+						properties.getProperty("portal.dependency.jars"))));
 
 				if (svn) {
 					List<String> jars = new ArrayList<String>(dependencyJars);

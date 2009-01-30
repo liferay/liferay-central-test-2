@@ -240,7 +240,9 @@ public class BaseDeployer {
 		// jars
 
 		String[] portalJars = StringUtil.split(
-			properties.getProperty("portal.dependency.jars"));
+			properties.getProperty(
+				"portal-dependency-jars",
+				properties.getProperty("portal.dependency.jars")));
 
 		for (int i = 0; i < portalJars.length; i++) {
 			String portalJar = portalJars[i].trim();
@@ -263,7 +265,9 @@ public class BaseDeployer {
 		// tlds
 
 		String[] portalTlds = StringUtil.split(
-			properties.getProperty("portal.dependency.tlds"));
+			properties.getProperty(
+				"portal-dependency-tlds",
+				properties.getProperty("portal.dependency.tlds")));
 
 		for (int i = 0; i < portalTlds.length; i++) {
 			String portalTld = portalTlds[i].trim();
