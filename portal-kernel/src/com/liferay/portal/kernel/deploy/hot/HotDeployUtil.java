@@ -25,8 +25,10 @@ package com.liferay.portal.kernel.deploy.hot;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Vector;
+import java.util.Set;
 
 /**
  * <a href="HotDeployUtil.java.html"><b><i>View Source</i></b></a>
@@ -45,8 +47,8 @@ public class HotDeployUtil {
 		_instance._fireUndeployEvent(event);
 	}
 
-	public static void flushEvents() {
-		_instance._flushEvents();
+	public static void flushPrematureEvents() {
+		_instance._flushPrematureEvents();
 	}
 
 	public static void registerListener(HotDeployListener listener) {
@@ -62,31 +64,93 @@ public class HotDeployUtil {
 			_log.info("Initializing hot deploy manager " + this.hashCode());
 		}
 
-		_listeners = new Vector<HotDeployListener>();
-		_events = new Vector<HotDeployEvent>();
+		_dependentEvents = new ArrayList<HotDeployEvent>();
+		_deployedServletContextNames = new HashSet<String>();
+		_listeners = new ArrayList<HotDeployListener>();
+		_prematureEvents = new ArrayList<HotDeployEvent>();
 	}
 
-	private synchronized void _fireDeployEvent(HotDeployEvent event) {
+	private void _doFireDeployEvent(HotDeployEvent event) {
+		if (_deployedServletContextNames.contains(
+				event.getServletContextName())) {
+
+			return;
+		}
+
+		boolean hasDependencies = true;
+
+		Set<String> dependentServletContextNames =
+			event.getDependentServletContextNames();
+
+		for (String dependentServletContextName :
+				dependentServletContextNames) {
+
+			if (!_deployedServletContextNames.contains(
+					dependentServletContextName)) {
+
+				hasDependencies = false;
+
+				break;
+			}
+		}
+
+		if (hasDependencies) {
+			if (_dependentEvents.contains(event)) {
+				if (_log.isInfoEnabled()) {
+					_log.info(
+						"Deploy " + event.getServletContextName() +
+							" from queue");
+				}
+			}
+
+			for (HotDeployListener listener : _listeners) {
+				try {
+					listener.invokeDeploy(event);
+				}
+				catch (HotDeployException hde) {
+					_log.error(hde, hde);
+				}
+			}
+
+			_deployedServletContextNames.add(event.getServletContextName());
+
+			_dependentEvents.remove(event);
+
+			List<HotDeployEvent> dependentEvents =
+				new ArrayList<HotDeployEvent>(_dependentEvents);
+
+			for (HotDeployEvent dependentEvent : dependentEvents) {
+				_doFireDeployEvent(dependentEvent);
+			}
+		}
+		else {
+			if (!_dependentEvents.contains(event)) {
+				if (_log.isInfoEnabled()) {
+					_log.info(
+						"Queue " + event.getServletContextName() +
+							" for deploy because its dependencies are not " +
+								"available");
+				}
+
+				_dependentEvents.add(event);
+			}
+		}
+	}
+
+	private void _fireDeployEvent(HotDeployEvent event) {
 
 		// Capture events that are fired before the portal initialized. These
-		// events are later fired by flushEvents.
+		// events are later fired by flushPrematureEvents.
 
-		if (_events != null) {
-			_events.add(event);
+		if (_prematureEvents != null) {
+			_prematureEvents.add(event);
 
 			return;
 		}
 
 		// Fire current event
 
-		for (HotDeployListener listener : _listeners) {
-			try {
-				listener.invokeDeploy(event);
-			}
-			catch (HotDeployException hde) {
-				_log.error(hde, hde);
-			}
-		}
+		_doFireDeployEvent(event);
 	}
 
 	private void _fireUndeployEvent(HotDeployEvent event) {
@@ -98,21 +162,16 @@ public class HotDeployUtil {
 				_log.error(hde, hde);
 			}
 		}
+
+		_deployedServletContextNames.remove(event.getServletContextName());
 	}
 
-	private synchronized void _flushEvents() {
-		for (HotDeployEvent event : _events) {
-			for (HotDeployListener listener : _listeners) {
-				try {
-					listener.invokeDeploy(event);
-				}
-				catch (HotDeployException hde) {
-					_log.error(hde, hde);
-				}
-			}
+	private void _flushPrematureEvents() {
+		for (HotDeployEvent event : _prematureEvents) {
+			_doFireDeployEvent(event);
 		}
 
-		_events = null;
+		_prematureEvents = null;
 	}
 
 	private void _registerListener(HotDeployListener listener) {
@@ -127,7 +186,9 @@ public class HotDeployUtil {
 
 	private static HotDeployUtil _instance = new HotDeployUtil();
 
+	private List<HotDeployEvent> _dependentEvents;
+	private Set<String> _deployedServletContextNames;
 	private List<HotDeployListener> _listeners;
-	private List<HotDeployEvent> _events;
+	private List<HotDeployEvent> _prematureEvents;
 
 }

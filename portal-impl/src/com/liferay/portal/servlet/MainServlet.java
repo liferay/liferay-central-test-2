@@ -495,7 +495,7 @@ public class MainServlet extends ActionServlet {
 		// has initialized.
 
 		PortalInitableUtil.flushInitables();
-		HotDeployUtil.flushEvents();
+		HotDeployUtil.flushPrematureEvents();
 	}
 
 	public void callParentService(
