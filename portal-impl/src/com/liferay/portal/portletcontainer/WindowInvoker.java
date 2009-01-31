@@ -845,12 +845,13 @@ public class WindowInvoker extends InvokerPortletImpl {
 			containerResponse.getStringProperties();
 
 		if (stringProperties != null) {
-
 			Set<Map.Entry<String, List<String>>> entries =
 				stringProperties.entrySet();
-			for(Map.Entry<String, List<String>> mapEntry : entries) {
+
+			for (Map.Entry<String, List<String>> mapEntry : entries) {
 				String headerName = mapEntry.getKey();
-				for(String headerValue : mapEntry.getValue()) {
+
+				for (String headerValue : mapEntry.getValue()) {
 					response.addHeader(headerName, headerValue);
 				}
 			}
