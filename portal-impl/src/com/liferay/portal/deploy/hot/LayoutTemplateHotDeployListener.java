@@ -98,9 +98,16 @@ public class LayoutTemplateHotDeployListener extends BaseHotDeployListener {
 		_vars.put(servletContextName, layoutTemplateIds);
 
 		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Layout templates for " + servletContextName +
-					" registered successfully. It is available for use.");
+			if (layoutTemplateIds.size() == 1) {
+				_log.info(
+					"1 layout template for " + servletContextName +
+						" is available for use");
+			}
+			else {
+				_log.info(
+					layoutTemplateIds.size() + " layout templates for " +
+						servletContextName + " are available for use");
+			}
 		}
 	}
 
@@ -143,12 +150,17 @@ public class LayoutTemplateHotDeployListener extends BaseHotDeployListener {
 			}
 		}
 
-		layoutTemplateIds = null;
-
 		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Layout templates for " + servletContextName +
-					" unregistered successfully");
+			if (layoutTemplateIds.size() == 1) {
+				_log.info(
+					"1 layout template for " + servletContextName +
+						" was unregistered");
+			}
+			else {
+				_log.info(
+					layoutTemplateIds.size() + " layout templates for " +
+						servletContextName + " was unregistered");
+			}
 		}
 	}
 

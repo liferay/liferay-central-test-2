@@ -373,8 +373,7 @@ public class HookHotDeployListener
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Hook for " + servletContextName + " registered " +
-					"successfully. It is available for use.");
+				"Hook for " + servletContextName + " is available for use");
 		}
 	}
 
@@ -434,9 +433,7 @@ public class HookHotDeployListener
 		}
 
 		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Hook for " + servletContextName +
-					" unregistered successfully");
+			_log.info("Hook for " + servletContextName + " was unregistered");
 		}
 	}
 

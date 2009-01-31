@@ -222,12 +222,6 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		List<Portlet> portlets = PortletLocalServiceUtil.initWAR(
 			servletContextName, servletContext, xmls, event.getPluginPackage());
 
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				portlets.size() + " portlets for " + servletContextName +
-					" are ready for registration");
-		}
-
 		// Class loader
 
 		ClassLoader portletClassLoader = event.getContextClassLoader();
@@ -300,9 +294,16 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 				companyIds, portlets));
 
 		if (_log.isInfoEnabled()) {
-			_log.info(
-				portlets.size() + " portlets for " + servletContextName +
-					" registered successfully. It is available for use.");
+			if (portlets.size() == 1) {
+				_log.info(
+					"1 portlet for " + servletContextName +
+						" is available for use");
+			}
+			else {
+				_log.info(
+					portlets.size() + " portlets for " + servletContextName +
+						" are available for use");
+			}
 		}
 	}
 
@@ -357,9 +358,16 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		PortletResourceBundles.remove(servletContextName);
 
 		if (_log.isInfoEnabled()) {
-			_log.info(
-				portlets.size() + " portlets for " + servletContextName +
-					" unregistered successfully");
+			if (portlets.size() == 1) {
+				_log.info(
+					"1 portlet for " + servletContextName +
+						" was unregistered");
+			}
+			else {
+				_log.info(
+					portlets.size() + " portlets for " + servletContextName +
+						" was unregistered");
+			}
 		}
 	}
 

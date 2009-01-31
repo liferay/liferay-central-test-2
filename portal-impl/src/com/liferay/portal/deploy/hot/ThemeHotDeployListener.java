@@ -98,9 +98,16 @@ public class ThemeHotDeployListener extends BaseHotDeployListener {
 		_vars.put(servletContextName, themeIds);
 
 		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Themes for " + servletContextName +
-					" registered successfully. It is available for use.");
+			if (themeIds.size() == 1) {
+				_log.info(
+					"1 theme for " + servletContextName +
+						" is available for use");
+			}
+			else {
+				_log.info(
+					themeIds.size() + " themes for " + servletContextName +
+						" are available for use");
+			}
 		}
 	}
 
@@ -150,9 +157,15 @@ public class ThemeHotDeployListener extends BaseHotDeployListener {
 		}
 
 		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Themes for " + servletContextName +
-					" unregistered successfully");
+			if (themeIds.size() == 1) {
+				_log.info(
+					"1 theme for " + servletContextName + " was unregistered");
+			}
+			else {
+				_log.info(
+					themeIds.size() + " themes for " + servletContextName +
+						" was unregistered");
+			}
 		}
 	}
 
