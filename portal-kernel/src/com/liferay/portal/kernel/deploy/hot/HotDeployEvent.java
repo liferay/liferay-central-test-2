@@ -102,7 +102,9 @@ public class HotDeployEvent {
 			String[] requiredDeploymentContexts = StringUtil.split(
 				properties.getProperty("required-deployment-contexts"));
 
-			if (_log.isInfoEnabled()) {
+			if ((requiredDeploymentContexts.length > 0) &&
+				(_log.isInfoEnabled())) {
+
 				_log.info(
 					"Plugin " + _servletContext.getServletContextName() +
 						" requires " +
