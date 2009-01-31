@@ -289,9 +289,10 @@ public class EditPagesAction extends PortletAction {
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
+		String tabs1 = ParamUtil.getString(portletRequest, "tabs1");
+
 		long groupId = ParamUtil.getLong(portletRequest, "groupId");
-		boolean privateLayout = ParamUtil.getBoolean(
-			portletRequest, "privateLayout");
+		boolean privateLayout = tabs1.equals("private-pages");
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
