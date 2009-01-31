@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+In Liferay 5.2 and beyond, the default configuration mechansim for JDBC and JavaMail
+resources will be via properties set in the portal.properties file which may be
+overriden in portal-ext.properties.
+
+However, some organizations require JEE resources to be configured and managed
+by the container.  If so, you may use this file to override the default behavior.
+Simply override the spring.configs property and add this file to at the end
+of the list.
+
+-->
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+>
+
+    <bean id="liferayDataSource" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
+		<property name="targetDataSource">
+			<bean class="com.liferay.portal.spring.jndi.JndiObjectFactoryBean">
+				<property name="jndiName" value="jdbc/LiferayPool" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="mailSession" class="com.liferay.portal.spring.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="mail/MailSession" />
+	</bean>
+    
+</beans>
