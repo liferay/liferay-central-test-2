@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
@@ -75,9 +76,12 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			String subject, String body, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		User user = getUser();
+
 		MBDiscussionPermission.check(
-			getPermissionChecker(), serviceContext.getScopeGroupId(), className,
-			classPK, ActionKeys.ADD_DISCUSSION);
+			getPermissionChecker(), user.getCompanyId(),
+			serviceContext.getScopeGroupId(), className, classPK,
+			user.getUserId(), ActionKeys.ADD_DISCUSSION);
 
 		return mbMessageLocalService.addDiscussionMessage(
 			getUserId(), null, className, classPK, threadId, parentMessageId,
@@ -142,9 +146,11 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			long groupId, String className, long classPK, long messageId)
 		throws PortalException, SystemException {
 
+		User user = getUser();
+
 		MBDiscussionPermission.check(
-			getPermissionChecker(), groupId, className, classPK, messageId,
-			ActionKeys.DELETE_DISCUSSION);
+			getPermissionChecker(), user.getCompanyId(), groupId, className,
+			classPK, messageId, user.getUserId(), ActionKeys.DELETE_DISCUSSION);
 
 		mbMessageLocalService.deleteDiscussionMessage(messageId);
 	}
@@ -457,9 +463,12 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			String body, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		User user = getUser();
+
 		MBDiscussionPermission.check(
-			getPermissionChecker(), serviceContext.getScopeGroupId(), className,
-			classPK, messageId, ActionKeys.UPDATE_DISCUSSION);
+			getPermissionChecker(), user.getCompanyId(),
+			serviceContext.getScopeGroupId(), className, classPK, messageId,
+			user.getUserId(), ActionKeys.UPDATE_DISCUSSION);
 
 		return mbMessageLocalService.updateDiscussionMessage(
 			getUserId(), messageId, subject, body);

@@ -119,7 +119,7 @@ MBMessage message = rootMessage;
 </tr>
 <tr>
 	<td>
-		<c:if test="<%= themeDisplay.isSignedIn() && MBDiscussionPermission.contains(permissionChecker, scopeGroupId, className, classPK, ActionKeys.ADD_DISCUSSION) %>">
+		<c:if test="<%= themeDisplay.isSignedIn() && MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, className, classPK, userId, ActionKeys.ADD_DISCUSSION) %>">
 
 			<%
 			String taglibPostReplyURL = "javascript: " + namespace + "showForm('" + namespace + "postReplyForm" + i + "', '" + namespace + "postReplyBody" + i + "');";
@@ -151,7 +151,7 @@ List messages = treeWalker.getMessages();
 %>
 
 <c:if test="<%= messages.size() > 1 %>">
-	<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, scopeGroupId, className, classPK, ActionKeys.ADD_DISCUSSION) %>">
+	<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, className, classPK, userId, ActionKeys.ADD_DISCUSSION) %>">
 		<br />
 	</c:if>
 
@@ -288,7 +288,7 @@ List messages = treeWalker.getMessages();
 						</td>
 					</c:if>
 
-					<c:if test="<%= themeDisplay.isSignedIn() && MBDiscussionPermission.contains(permissionChecker, scopeGroupId, className, classPK, ActionKeys.ADD_DISCUSSION) %>">
+					<c:if test="<%= themeDisplay.isSignedIn() && MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, className, classPK, userId, ActionKeys.ADD_DISCUSSION) %>">
 						<td>
 
 							<%
@@ -309,7 +309,7 @@ List messages = treeWalker.getMessages();
 							<liferay-ui:icon image="top" url="<%= taglibTopURL %>" label="<%= true %>" />
 						</td>
 
-						<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, scopeGroupId, className, classPK, ActionKeys.UPDATE_DISCUSSION) %>">
+						<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, className, classPK, userId, ActionKeys.UPDATE_DISCUSSION) %>">
 
 							<%
 							String taglibEditURL = "javascript: " + namespace + "showForm('" + namespace + "editForm" + i + "', '" + namespace + "editBody" + i + "');";
@@ -320,7 +320,7 @@ List messages = treeWalker.getMessages();
 							</td>
 						</c:if>
 
-						<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, scopeGroupId, className, classPK, ActionKeys.DELETE_DISCUSSION) %>">
+						<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, className, classPK, userId, ActionKeys.DELETE_DISCUSSION) %>">
 
 							<%
 							String taglibDeleteURL = "javascript: " + namespace + "deleteMessage(" + i + ");";
@@ -351,7 +351,7 @@ List messages = treeWalker.getMessages();
 					</td>
 				</tr>
 
-				<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, scopeGroupId, className, classPK, ActionKeys.UPDATE_DISCUSSION) %>">
+				<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, className, classPK, userId, ActionKeys.UPDATE_DISCUSSION) %>">
 					<tr id="<%= namespace %>editForm<%= i %>" style="display: none;">
 						<td>
 							<br />

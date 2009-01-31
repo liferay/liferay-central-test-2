@@ -42,33 +42,35 @@ import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 public class MBDiscussionPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, long groupId, String className,
-			long classPK, String actionId)
+			PermissionChecker permissionChecker, long companyId, long groupId,
+			String className, long classPK, long ownerId, String actionId)
 		throws PortalException, SystemException {
 
 		if (!contains(
-				permissionChecker, groupId, className, classPK, actionId)) {
+				permissionChecker, companyId, groupId, className, classPK,
+				ownerId, actionId)) {
 
 			throw new PrincipalException();
 		}
 	}
 
 	public static void check(
-			PermissionChecker permissionChecker, long groupId, String className,
-			long classPK, long messageId, String actionId)
+			PermissionChecker permissionChecker, long companyId, long groupId,
+			String className, long classPK, long messageId, long ownerId,
+			String actionId)
 		throws PortalException, SystemException {
 
 		if (!contains(
-				permissionChecker, groupId, className, classPK, messageId,
-				actionId)) {
+				permissionChecker, companyId, groupId, className, classPK,
+				messageId, ownerId, actionId)) {
 
 			throw new PrincipalException();
 		}
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, long groupId, String className,
-			long classPK, String actionId)
+			PermissionChecker permissionChecker, long companyId, long groupId,
+			String className, long classPK, long ownerId, String actionId)
 		throws SystemException {
 
 		if (MBBanLocalServiceUtil.hasBan(
@@ -77,17 +79,25 @@ public class MBDiscussionPermission {
 			return false;
 		}
 
+		if (permissionChecker.hasOwnerPermission(
+				companyId, className, classPK, ownerId, actionId)) {
+
+			return true;
+		}
+
 		return permissionChecker.hasPermission(
 			groupId, className, classPK, actionId);
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, long groupId, String className,
-			long classPK, long messageId, String actionId)
+			PermissionChecker permissionChecker, long companyId, long groupId,
+			String className, long classPK, long messageId, long ownerId,
+			String actionId)
 		throws PortalException, SystemException {
 
 		if (!contains(
-				permissionChecker, groupId, className, classPK, actionId)) {
+				permissionChecker, companyId, groupId, className, classPK,
+				ownerId, actionId)) {
 
 			return false;
 		}
