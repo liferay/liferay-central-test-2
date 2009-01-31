@@ -131,6 +131,7 @@ import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 import javax.portlet.WindowState;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -301,6 +302,8 @@ public class WindowInvoker extends InvokerPortletImpl {
 				if (eventUpdatedPortlets != null) {
 					_updatePortletModeAndState(request, eventUpdatedPortlets);
 				}
+
+				_transferHeaders(response, executeActionResponse);
 			}
 		}
 		catch (Exception e) {
@@ -833,6 +836,33 @@ public class WindowInvoker extends InvokerPortletImpl {
 			JavaConstants.JAVAX_PORTLET_REQUEST, portletRequest);
 		request.setAttribute(
 			JavaConstants.JAVAX_PORTLET_RESPONSE, portletResponse);
+	}
+
+	private void _transferHeaders(
+		HttpServletResponse response, ContainerResponse containerResponse) {
+
+		Map<String, List<String>> stringProperties =
+			containerResponse.getStringProperties();
+
+		if (stringProperties != null) {
+
+			Set<Map.Entry<String, List<String>>> entries =
+				stringProperties.entrySet();
+			for(Map.Entry<String, List<String>> mapEntry : entries) {
+				String headerName = mapEntry.getKey();
+				for(String headerValue : mapEntry.getValue()) {
+					response.addHeader(headerName, headerValue);
+				}
+			}
+		}
+
+		List<Cookie> cookies = containerResponse.getCookieProperties();
+
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				response.addCookie(cookie);
+			}
+		}
 	}
 
 	private void _updatePortletModeAndState(
