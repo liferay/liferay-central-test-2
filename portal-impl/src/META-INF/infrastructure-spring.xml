@@ -7,15 +7,6 @@
 >
 	<bean id="liferayDataSource" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
 		<property name="targetDataSource">
-
-			<!-- JNDI -->
-
-			<!--<bean class="com.liferay.portal.spring.jndi.JndiObjectFactoryBean">
-				<property name="jndiName" value="jdbc/LiferayPool" />
-			</bean>-->
-
-			<!-- portal.properties -->
-
 			<bean class="com.liferay.portal.dao.jdbc.util.DataSourceFactoryBean">
 				<property name="propertyPrefix" value="jdbc.default." />
 			</bean>
