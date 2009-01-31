@@ -158,6 +158,9 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 <input name="<portlet:namespace />itemId" type="hidden" value="<%= itemId %>" />
 <input name="<portlet:namespace />fieldsCount" type="hidden" value="<%= fieldsCount %>" />
 <input name="<portlet:namespace />fieldId" type="hidden" value="" />
+<input name="<portlet:namespace />fieldName<%= fieldsCount %>" type="hidden" value="" />
+<input name="<portlet:namespace />fieldValues<%= fieldsCount %>" type="hidden" value="" />
+<input name="<portlet:namespace />fieldDescription<%= fieldsCount %>" type="hidden" value="" />
 <input name="<portlet:namespace />fieldsQuantities" type="hidden" value="<%= fieldsQuantities %>" />
 <input name="<portlet:namespace />pricesCount" type="hidden" value="<%= pricesCount %>" />
 <input name="<portlet:namespace />priceId" type="hidden" value="" />
