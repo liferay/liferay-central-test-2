@@ -198,6 +198,11 @@ public class PluginsEnvironmentBuilder {
 			sb.append("\t<classpathentry excluding=\"**/.svn/**|.svn/\" ");
 			sb.append("kind=\"src\" path=\"docroot/WEB-INF/service\" />\n");
 		}
+		
+		if (FileUtil.exists(projectDirName + "/docroot/WEB-INF/test")) {
+			sb.append("\t<classpathentry excluding=\"**/.svn/**|.svn/\" ");
+			sb.append("kind=\"src\" path=\"docroot/WEB-INF/test\" />\n");
+		}
 
 		sb.append("\t<classpathentry excluding=\"**/.svn/**|.svn/\" ");
 		sb.append("kind=\"src\" path=\"docroot/WEB-INF/src\" />\n");
@@ -205,7 +210,7 @@ public class PluginsEnvironmentBuilder {
 		sb.append("\t<classpathentry kind=\"con\" ");
 		sb.append("path=\"org.eclipse.jdt.launching.JRE_CONTAINER\" />\n");
 
-		_addClasspathEntry(sb, "/portal/lib/development/activation.jar");
+		_addClasspathEntry(sb, "/portal/lib/development/activation.jar");	
 		_addClasspathEntry(sb, "/portal/lib/development/jsp-api.jar");
 		_addClasspathEntry(sb, "/portal/lib/development/mail.jar");
 		_addClasspathEntry(sb, "/portal/lib/development/servlet-api.jar");
