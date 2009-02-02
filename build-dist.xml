@@ -227,7 +227,7 @@
 		<antcall target="deploy-plugins">
 			<param name="deployer.dest.dir" value="${tstamp.value}" />
 			<param name="deployer.app.server.type" value="glassfish-tomcat" />
-			<param name="deployer.app.server.lib.portal.dir" value="${app.server.glassfish.lib.portal.dir}" />
+			<param name="deployer.app.server.lib.portal.dir" value="lib/portal" />
 		</antcall>
 
 		<zip destfile="liferay_configurator.jar">
@@ -349,7 +349,7 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 		<antcall target="deploy-plugins">
 			<param name="deployer.dest.dir" value="${app.server.glassfish.deploy.dir}" />
 			<param name="deployer.app.server.type" value="glassfish-tomcat" />
-			<param name="deployer.app.server.lib.portal.dir" value="${app.server.glassfish.lib.portal.dir}" />
+			<param name="deployer.app.server.lib.portal.dir" value="lib/portal" />
 		</antcall>
 	</target>
 
