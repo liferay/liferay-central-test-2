@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
-import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.search.lucene.CleanUpJob;
 import com.liferay.portal.search.lucene.LuceneIndexer;
 import com.liferay.portal.search.lucene.LuceneUtil;
@@ -71,8 +70,7 @@ public class LuceneServlet extends HttpServlet {
 				Thread indexerThread = null;
 
 				if (GetterUtil.getBoolean(
-						PropsUtil.get(PropsKeys.INDEX_WITH_THREAD)) ||
-					ServerDetector.isOrion()) {
+						PropsUtil.get(PropsKeys.INDEX_WITH_THREAD))) {
 
 					indexerThread = new Thread(
 						indexer, THREAD_NAME + "." + companyId);

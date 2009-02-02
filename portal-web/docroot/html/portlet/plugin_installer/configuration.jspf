@@ -104,7 +104,7 @@
 	</td>
 </tr>
 
-<c:if test="<%= !ServerDetector.isGlassfish() && !ServerDetector.isPramati() && !ServerDetector.isWebLogic() %>">
+<c:if test="<%= !ServerDetector.isGlassfish() && !ServerDetector.isWebLogic() %>">
 	<tr>
 		<td>
 			<liferay-ui:message key="unpack-war" />

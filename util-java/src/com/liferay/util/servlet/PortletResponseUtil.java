@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -114,7 +113,7 @@ public class PortletResponseUtil {
 
 			// LEP-3122
 
-			if (!resourceResponse.isCommitted() || ServerDetector.isPramati()) {
+			if (!resourceResponse.isCommitted()) {
 
 				// LEP-536
 
