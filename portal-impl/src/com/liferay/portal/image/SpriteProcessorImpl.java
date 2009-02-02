@@ -170,7 +170,13 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 				}
 			}
 			catch (Exception e) {
-				_log.warn("Unable to convert " + file, e);
+				if (_log.isWarnEnabled()) {
+					_log.warn("Unable to process " + file);
+				}
+
+				if (_log.isDebugEnabled()) {
+					_log.debug(e, e);
+				}
 			}
 		}
 
