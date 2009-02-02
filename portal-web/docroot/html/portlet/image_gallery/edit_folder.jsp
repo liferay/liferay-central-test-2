@@ -116,7 +116,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", I
 				</td>
 				<td>
 					<div id="<portlet:namespace />merge-checkbox-div"
-						<c:if test="<%=folder.getParentFolderId() == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID %>">
+						<c:if test="<%= folder.getParentFolderId() == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID %>">
 							style="display: none;"
 						</c:if>
 					>

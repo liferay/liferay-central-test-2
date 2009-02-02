@@ -118,7 +118,7 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 				</td>
 				<td>
 					<div id="<portlet:namespace />merge-checkbox-div"
-						<c:if test="<%=category.getParentCategoryId() == ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID %>">
+						<c:if test="<%= category.getParentCategoryId() == ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID %>">
 							style="display: none;"
 						</c:if>
 					>

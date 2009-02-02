@@ -132,7 +132,7 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 				</td>
 				<td>
 					<div id="<portlet:namespace />merge-checkbox-div"
-						<c:if test="<%=category.getParentCategoryId() == MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID %>">
+						<c:if test="<%= category.getParentCategoryId() == MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID %>">
 							style="display: none;"
 						</c:if>
 					>

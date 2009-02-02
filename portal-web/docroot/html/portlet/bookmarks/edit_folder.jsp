@@ -119,7 +119,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", B
 				</td>
 				<td>
 					<div id="<portlet:namespace />merge-checkbox-div"
-						<c:if test="<%=folder.getParentFolderId() == BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID %>">
+						<c:if test="<%= folder.getParentFolderId() == BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID %>">
 							style="display: none;"
 						</c:if>
 					>
