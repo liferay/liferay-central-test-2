@@ -43,7 +43,7 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 		nameEl.href = "";
 		nameEl.innerHTML = "";
 
-		jQuery("#<portlet:namespace />merge-checkbox-div").hide();
+		jQuery("#<portlet:namespace />merge-with-parent-checkbox-div").hide();
 		jQuery("#<portlet:namespace />mergeWithParentCategoryCheckbox").attr("checked", false);
 	}
 
@@ -60,8 +60,8 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view" /></portlet:renderURL>&<portlet:namespace />categoryId=" + parentCategoryId;
 		nameEl.innerHTML = parentCategoryName + "&nbsp;";
 
-		if (parentCategoryId != <%=ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID %>) {
-			jQuery("#<portlet:namespace />merge-checkbox-div").show();
+		if (parentCategoryId != <%= ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID %>) {
+			jQuery("#<portlet:namespace />merge-with-parent-checkbox-div").show();
 		}
 	}
 </script>
@@ -117,7 +117,7 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 					<input id="<portlet:namespace />removeCategoryButton" type="button" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeCategory();" />
 				</td>
 				<td>
-					<div id="<portlet:namespace />merge-checkbox-div"
+					<div id="<portlet:namespace />merge-with-parent-checkbox-div"
 						<c:if test="<%= category.getParentCategoryId() == ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID %>">
 							style="display: none;"
 						</c:if>

@@ -55,7 +55,7 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 		nameEl.href = "";
 		nameEl.innerHTML = "";
 
-		jQuery("#<portlet:namespace />merge-checkbox-div").hide();
+		jQuery("#<portlet:namespace />merge-with-parent-checkbox-div").hide();
 		jQuery("#<portlet:namespace />mergeWithParentCategoryCheckbox").attr("checked", false);
 	}
 
@@ -72,8 +72,8 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 		nameEl.href = "<portlet:renderURL><portlet:param name="struts_action" value="/message_boards/view" /></portlet:renderURL>&<portlet:namespace />categoryId=" + parentCategoryId;
 		nameEl.innerHTML = parentCategoryName + "&nbsp;";
 
-		if (parentCategoryId != <%=MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID %>) {
-			jQuery("#<portlet:namespace />merge-checkbox-div").show();
+		if (parentCategoryId != <%= MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID %>) {
+			jQuery("#<portlet:namespace />merge-with-parent-checkbox-div").show();
 		}
 	}
 </script>
@@ -131,7 +131,7 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 					<input id="<portlet:namespace />removeCategoryButton" type="button" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeCategory();" />
 				</td>
 				<td>
-					<div id="<portlet:namespace />merge-checkbox-div"
+					<div id="<portlet:namespace />merge-with-parent-checkbox-div"
 						<c:if test="<%= category.getParentCategoryId() == MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID %>">
 							style="display: none;"
 						</c:if>
