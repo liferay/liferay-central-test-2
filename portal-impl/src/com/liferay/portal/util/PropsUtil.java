@@ -138,8 +138,7 @@ public class PropsUtil {
 				SystemProperties.get("com.sun.aas.installRoot") + "/..";
 		}
 		else if (ServerDetector.isJBoss()) {
-			defaultLiferayHome =
-				SystemProperties.get("jboss.server.home.dir") + "/..";
+			defaultLiferayHome = SystemProperties.get("jboss.home.dir") + "/..";
 		}
 		else if (ServerDetector.isJOnAS()) {
 			defaultLiferayHome = SystemProperties.get("jonas.base") + "/..";
