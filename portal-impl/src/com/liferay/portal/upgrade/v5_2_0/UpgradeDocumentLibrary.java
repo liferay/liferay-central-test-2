@@ -90,7 +90,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			ps = con.prepareStatement(
 				"select portletPreferencesId, ownerId, ownerType, plid, " +
 					"portletId, preferences from PortletPreferences where " +
-						"portletId = 20");
+						"portletId = '20'");
 
 			rs = ps.executeQuery();
 
