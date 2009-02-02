@@ -51,6 +51,7 @@ import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.verify.VerifyProcess;
 
 import java.io.IOException;
@@ -235,6 +236,12 @@ public class StartupAction extends SimpleAction {
 
 		Release release = ReleaseLocalServiceUtil.getRelease();
 
+		// LPS-1880
+
+		boolean tempIndexReadOnly = PropsValues.INDEX_READ_ONLY;
+
+		PropsValues.INDEX_READ_ONLY = true;
+
 		int verifyFrequency = GetterUtil.getInteger(
 			PropsUtil.get(PropsKeys.VERIFY_FREQUENCY));
 		boolean verified = release.isVerified();
@@ -284,6 +291,8 @@ public class StartupAction extends SimpleAction {
 				}
 			}
 		}
+
+		PropsValues.INDEX_READ_ONLY = tempIndexReadOnly;
 
 		// Update release
 
