@@ -42,6 +42,9 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", I
 
 		nameEl.href = "";
 		nameEl.innerHTML = "";
+
+		jQuery("#<portlet:namespace />merge-checkbox-div").hide();
+		jQuery("#<portlet:namespace />mergeWithParentFolderCheckbox").attr("checked", false);
 	}
 
 	function <portlet:namespace />saveFolder() {
@@ -56,6 +59,10 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", I
 
 		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/image_gallery/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + parentFolderId;
 		nameEl.innerHTML = parentFolderName + "&nbsp;";
+
+		if (parentFolderId != <%=IGFolderImpl.DEFAULT_PARENT_FOLDER_ID %>) {
+			jQuery("#<portlet:namespace />merge-checkbox-div").show();
+		}
 	}
 </script>
 
@@ -108,9 +115,15 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", I
 					<input id="<portlet:namespace />removeFolderButton" type="button" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeFolder();" />
 				</td>
 				<td>
-					<liferay-ui:input-checkbox param="mergeWithParentFolder" />
+					<div id="<portlet:namespace />merge-checkbox-div"
+						<c:if test="<%=folder.getParentFolderId() == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID %>">
+							style="display: none;"
+						</c:if>
+					>
+						<liferay-ui:input-checkbox param="mergeWithParentFolder" />
 
-					<liferay-ui:message key="merge-with-parent-folder" />
+						<liferay-ui:message key="merge-with-parent-folder" />
+					</div>
 				</td>
 			</tr>
 			</table>
