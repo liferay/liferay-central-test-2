@@ -1,9 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head profile="http://selenium-ide.openqa.org/profiles/test-case">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="" />
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>TearDownTest</title>
 </head>
 <body>
@@ -34,12 +31,12 @@
 <tr>
 	<td>store</td>
 	<td>eval(selenium.isElementPresent('//strong/span'))</td>
-	<td>LowPriorityAvailable</td>
+	<td>NormalPriorityAvailable</td>
 </tr>
 <tr>
 	<td>gotoIf</td>
-	<td>!${LowPriorityAvailable}</td>
-	<td>No Low Priority</td>
+	<td>!${NormalPriorityAvailable}</td>
+	<td>No Normal Priority</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -63,18 +60,18 @@
 </tr>
 <tr>
 	<td>label</td>
-	<td>No Low Priority</td>
+	<td>No Normal Priority</td>
 	<td></td>
 </tr>
 <tr>
 	<td>store</td>
 	<td>eval(selenium.isElementPresent('//strong/span'))</td>
-	<td>MediumPriorityAvailable</td>
+	<td>ImportantPriorityAvailable</td>
 </tr>
 <tr>
 	<td>gotoIf</td>
-	<td>!${MediumPriorityAvailable}</td>
-	<td>No Medium Priority</td>
+	<td>!${ImportantPriorityAvailable}</td>
+	<td>No Important Priority</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -98,77 +95,7 @@
 </tr>
 <tr>
 	<td>label</td>
-	<td>No Medium Priority</td>
-	<td></td>
-</tr>
-<tr>
-	<td>store</td>
-	<td>eval(selenium.isElementPresent('//strong/span'))</td>
-	<td>HighPriorityAvailable</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>!${HighPriorityAvailable}</td>
-	<td>No High Priority</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//strong/span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//body/div[2]/ul/li[2]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//body/div[2]/ul/li[2]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete this?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>label</td>
-	<td>No High Priority</td>
-	<td></td>
-</tr>
-<tr>
-	<td>store</td>
-	<td>eval(selenium.isElementPresent('//strong/span'))</td>
-	<td>HighestPriorityAvailable</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>!${HighestPriorityAvailable}</td>
-	<td>No Highest Priority</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//strong/span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//body/div[2]/ul/li[2]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//body/div[2]/ul/li[2]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete this?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>label</td>
-	<td>No Highest Priority</td>
+	<td>No Important Priority</td>
 	<td></td>
 </tr>
 <tr>

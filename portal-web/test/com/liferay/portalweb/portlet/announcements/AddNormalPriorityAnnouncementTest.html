@@ -1,15 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head profile="http://selenium-ide.openqa.org/profiles/test-case">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="" />
-<title>AddHighPriorityAnnouncementTest</title>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AddNormalPriorityAnnouncementTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddHighPriorityAnnouncementTest</td></tr>
+<tr><td rowspan="1" colspan="3">AddNormalPriorityAnnouncementTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
@@ -19,11 +16,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Announcements Test Page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Manage Entries</td>
 	<td></td>
 </tr>
 <tr>
@@ -42,19 +34,19 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>_84_title</td>
+	<td></td>
+</tr>
+<tr>
 	<td>typeKeys</td>
 	<td>_84_title</td>
-	<td>High Priorit Announcement</td>
+	<td>Normal Priorit Announcement</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_84_title</td>
-	<td>High Priority Announcement</td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>_84_url</td>
-	<td>www.lifera.com</td>
+	<td>Normal Priority Announcement</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -62,19 +54,14 @@
 	<td>www.liferay.com</td>
 </tr>
 <tr>
-	<td>typeKeys</td>
-	<td>_84_content</td>
-	<td>This is a high priorit announcement!</td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>_84_content</td>
-	<td>This is a high priority announcement!</td>
+	<td>Hi everyone. This is a normal priority announcement.</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>_84_priority</td>
-	<td>label=High</td>
+	<td>label=Normal</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -88,12 +75,12 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>link=High Priority Announcement</td>
+	<td>link=Normal Priority Announcement</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>This is a high priority announcement!</td>
+	<td>Hi everyone. This is a normal priority announcement.</td>
 	<td></td>
 </tr>
 

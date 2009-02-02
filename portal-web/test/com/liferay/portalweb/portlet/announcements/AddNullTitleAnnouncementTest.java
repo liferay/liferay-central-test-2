@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddMediumPriorityAnnouncementTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddNullTitleAnnouncementTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddMediumPriorityAnnouncementTest extends BaseTestCase {
-	public void testAddMediumPriorityAnnouncement() throws Exception {
+public class AddNullTitleAnnouncementTest extends BaseTestCase {
+	public void testAddNullTitleAnnouncement() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,77 +51,20 @@ public class AddMediumPriorityAnnouncementTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Announcements Test Page"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Manage Entries")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("link=Manage Entries"));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_84_distributionScope", "label=General");
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Entry']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_84_title")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.typeKeys("_84_title",
-			RuntimeVariables.replace("Medium Priorit Announcement"));
-		selenium.type("_84_title",
-			RuntimeVariables.replace("Medium Priority Announcement"));
-		selenium.typeKeys("_84_url", RuntimeVariables.replace("www.Lifera.com"));
-		selenium.type("_84_url", RuntimeVariables.replace("www.Liferay.com"));
 		selenium.typeKeys("_84_content",
-			RuntimeVariables.replace("This is a medium priorit announcement!"));
+			RuntimeVariables.replace("Null Title Test Announcement"));
 		selenium.type("_84_content",
-			RuntimeVariables.replace("This is a medium priority announcement!"));
-		selenium.select("_84_priority", RuntimeVariables.replace("label=Medium"));
+			RuntimeVariables.replace("Null Title Test Announcement"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Entries"));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"link=Medium Priority Announcement")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isTextPresent(
+				"You have entered invalid data. Please try again"));
+		assertTrue(selenium.isTextPresent("Please enter a valid title."));
 	}
 }

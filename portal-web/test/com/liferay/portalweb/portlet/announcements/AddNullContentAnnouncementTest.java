@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="OldEntriesTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddNullContentAnnouncementTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class OldEntriesTest extends BaseTestCase {
-	public void testOldEntries() throws Exception {
+public class AddNullContentAnnouncementTest extends BaseTestCase {
+	public void testAddNullContentAnnouncement() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,10 +51,20 @@ public class OldEntriesTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Announcements Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//img[@alt='Hide']");
-		selenium.click(RuntimeVariables.replace("link=Old Entries"));
+		selenium.click(RuntimeVariables.replace("link=Manage Entries"));
+		selenium.waitForPageToLoad("30000");
+		selenium.select("_84_distributionScope", "label=General");
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Entry']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_84_title",
+			RuntimeVariables.replace("Null Content Test Announcement"));
+		selenium.type("_84_title",
+			RuntimeVariables.replace("Null Content Test Announcement"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"This is the highest priority announcement!"));
+				"You have entered invalid data. Please try again"));
+		assertTrue(selenium.isTextPresent("Please enter valid content."));
 	}
 }

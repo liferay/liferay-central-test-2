@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="DeleteAnnouncementTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssertCorrectPriorityOrderTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DeleteAnnouncementTest extends BaseTestCase {
-	public void testDeleteAnnouncement() throws Exception {
+public class AssertCorrectPriorityOrderTest extends BaseTestCase {
+	public void testAssertCorrectPriorityOrder() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,11 +51,9 @@ public class DeleteAnnouncementTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Announcements Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Delete"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-		assertFalse(selenium.isElementPresent(
-				"link=This Test General Annoucement has been edited."));
+		assertEquals("Important Priority Announcement",
+			selenium.getText("//div[1]/h3/a"));
+		assertEquals("Normal Priority Announcement",
+			selenium.getText("//div[2]/h3/a"));
 	}
 }

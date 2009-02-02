@@ -37,12 +37,13 @@ public class AnnouncementsTests extends BaseTests {
 		addTestSuite(AddPortletTest.class);
 		addTestSuite(AddGeneralAnnouncementTest.class);
 		addTestSuite(EditAnnoucementTest.class);
+		addTestSuite(MarkAsReadTest.class);
 		addTestSuite(DeleteAnnouncementTest.class);
-		addTestSuite(AddLowPriorityAnnouncementTest.class);
-		addTestSuite(AddMediumPriorityAnnouncementTest.class);
-		addTestSuite(AddHighPriorityAnnouncementTest.class);
-		addTestSuite(AddHighestPriorityAnnouncementTest.class);
-		addTestSuite(OldEntriesTest.class);
+		addTestSuite(AddImportantPriorityAnnouncementTest.class);
+		addTestSuite(AddNormalPriorityAnnouncementTest.class);
+		addTestSuite(AssertCorrectPriorityOrderTest.class);
+		addTestSuite(AddNullContentAnnouncementTest.class);
+		addTestSuite(AddNullTitleAnnouncementTest.class);
 		addTestSuite(TearDownTest.class);
 	}
 

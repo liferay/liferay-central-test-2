@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddHighPriorityAnnouncementTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="MarkAsReadTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddHighPriorityAnnouncementTest extends BaseTestCase {
-	public void testAddHighPriorityAnnouncement() throws Exception {
+public class MarkAsReadTest extends BaseTestCase {
+	public void testMarkAsRead() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,6 +51,7 @@ public class AddHighPriorityAnnouncementTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Announcements Test Page"));
 		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Mark as Read");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -58,7 +59,7 @@ public class AddHighPriorityAnnouncementTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Manage Entries")) {
+				if (selenium.isElementPresent("link=Show")) {
 					break;
 				}
 			}
@@ -68,29 +69,40 @@ public class AddHighPriorityAnnouncementTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Manage Entries"));
-		selenium.waitForPageToLoad("30000");
-		selenium.select("_84_distributionScope", "label=General");
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Entry']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_84_title",
-			RuntimeVariables.replace("High Priorit Announcement"));
-		selenium.type("_84_title",
-			RuntimeVariables.replace("High Priority Announcement"));
-		selenium.typeKeys("_84_url", RuntimeVariables.replace("www.lifera.com"));
-		selenium.type("_84_url", RuntimeVariables.replace("www.liferay.com"));
-		selenium.typeKeys("_84_content",
-			RuntimeVariables.replace("This is a high priorit announcement!"));
-		selenium.type("_84_content",
-			RuntimeVariables.replace("This is a high priority announcement!"));
-		selenium.select("_84_priority", RuntimeVariables.replace("label=High"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Entries"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=High Priority Announcement"));
-		assertTrue(selenium.isTextPresent(
-				"This is a high priority announcement!"));
+		selenium.click("link=Show");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Hide")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Hide");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Show")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }

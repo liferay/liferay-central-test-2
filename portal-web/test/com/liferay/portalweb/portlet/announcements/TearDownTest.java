@@ -64,10 +64,10 @@ public class TearDownTest extends BaseTestCase {
 				selenium.select("_84_distributionScope", "label=General");
 				selenium.waitForPageToLoad("30000");
 
-				boolean LowPriorityAvailable = selenium.isElementPresent(
+				boolean NormalPriorityAvailable = selenium.isElementPresent(
 						"//strong/span");
 
-				if (!LowPriorityAvailable) {
+				if (!NormalPriorityAvailable) {
 					label = 2;
 
 					continue;
@@ -100,10 +100,10 @@ public class TearDownTest extends BaseTestCase {
 
 			case 2:
 
-				boolean MediumPriorityAvailable = selenium.isElementPresent(
+				boolean ImportantPriorityAvailable = selenium.isElementPresent(
 						"//strong/span");
 
-				if (!MediumPriorityAvailable) {
+				if (!ImportantPriorityAvailable) {
 					label = 3;
 
 					continue;
@@ -135,78 +135,6 @@ public class TearDownTest extends BaseTestCase {
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 			case 3:
-
-				boolean HighPriorityAvailable = selenium.isElementPresent(
-						"//strong/span");
-
-				if (!HighPriorityAvailable) {
-					label = 4;
-
-					continue;
-				}
-
-				selenium.click("//strong/span");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent(
-									"//body/div[2]/ul/li[2]/a")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click(RuntimeVariables.replace(
-						"//body/div[2]/ul/li[2]/a"));
-				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.getConfirmation()
-								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-
-			case 4:
-
-				boolean HighestPriorityAvailable = selenium.isElementPresent(
-						"//strong/span");
-
-				if (!HighestPriorityAvailable) {
-					label = 5;
-
-					continue;
-				}
-
-				selenium.click("//strong/span");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent(
-									"//body/div[2]/ul/li[2]/a")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click(RuntimeVariables.replace(
-						"//body/div[2]/ul/li[2]/a"));
-				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.getConfirmation()
-								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-
-			case 5:
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
