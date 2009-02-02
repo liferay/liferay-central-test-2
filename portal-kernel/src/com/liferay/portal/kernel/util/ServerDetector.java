@@ -143,7 +143,7 @@ public class ServerDetector {
 		ServerDetector sd = _instance;
 
 		if (sd._glassfish2 == null) {
-			if (isGlassfish()) {
+			if (isGlassfish() && !isGlassfish3()) {
 				sd._glassfish2 = Boolean.TRUE;
 			}
 			else {
@@ -166,10 +166,10 @@ public class ServerDetector {
 			}
 
 			if (value.equals("GlassFish/v3")) {
-				sd._glassfish = Boolean.TRUE;
+				sd._glassfish3 = Boolean.TRUE;
 			}
 			else {
-				sd._glassfish = Boolean.FALSE;
+				sd._glassfish3 = Boolean.FALSE;
 			}
 		}
 
