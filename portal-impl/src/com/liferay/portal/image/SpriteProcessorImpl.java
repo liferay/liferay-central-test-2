@@ -23,6 +23,8 @@
 package com.liferay.portal.image;
 
 import com.liferay.portal.kernel.image.SpriteProcessor;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
@@ -138,31 +140,37 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 				continue;
 			}
 
-			RenderedOp renderedOp = FileLoadDescriptor.create(
-				file.toString(), null, null, null);
+			try {
+				RenderedOp renderedOp = FileLoadDescriptor.create(
+					file.toString(), null, null, null);
 
-			RenderedImage renderedImage = convert(renderedOp);
+				RenderedImage renderedImage = convert(renderedOp);
 
-			int height = renderedImage.getHeight();
-			int width = renderedImage.getWidth();
+				int height = renderedImage.getHeight();
+				int width = renderedImage.getWidth();
 
-			if ((height <= maxHeight) && (width <= maxWidth)) {
-				renderedImage = TranslateDescriptor.create(
-					renderedImage, x, y, null, null);
+				if ((height <= maxHeight) && (width <= maxWidth)) {
+					renderedImage = TranslateDescriptor.create(
+						renderedImage, x, y, null, null);
 
-				renderedImages.add(renderedImage);
+					renderedImages.add(renderedImage);
 
-				String key = StringUtil.replace(
-					file.toString(), StringPool.BACK_SLASH, StringPool.SLASH);
+					String key = StringUtil.replace(
+						file.toString(), StringPool.BACK_SLASH,
+						StringPool.SLASH);
 
-				key = key.substring(
-					spritePropertiesRootPath.toString().length());
+					key = key.substring(
+						spritePropertiesRootPath.toString().length());
 
-				String value = (int)y + "," + height + "," + width;
+					String value = (int)y + "," + height + "," + width;
 
-				spriteProperties.setProperty(key, value);
+					spriteProperties.setProperty(key, value);
 
-				y += renderedOp.getHeight();
+					y += renderedOp.getHeight();
+				}
+			}
+			catch (Exception e) {
+				_log.warn("Unable to convert " + file, e);
 			}
 		}
 
@@ -197,7 +205,7 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 		return spriteProperties;
 	}
 
-	protected RenderedImage convert(RenderedOp renderedOp) {
+	protected RenderedImage convert(RenderedOp renderedOp) throws Exception {
 		RenderedImage renderedImage = renderedOp;
 
 		int height = renderedOp.getHeight();
@@ -355,5 +363,7 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 	}
 
 	private static final int _NUM_OF_BANDS = 4;
+
+	private static Log _log = LogFactoryUtil.getLog(SpriteProcessorImpl.class);
 
 }
