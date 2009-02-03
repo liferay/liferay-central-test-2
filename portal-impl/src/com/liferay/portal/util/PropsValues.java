@@ -466,6 +466,9 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.HOT_UNDEPLOY_ON_REDEPLOY));
 
+	public static final String IG_HOOK_IMPL =
+		PropsUtil.get(PropsKeys.IG_HOOK_IMPL);
+
 	public static final int IG_IMAGE_CUSTOM_1_MAX_DIMENSION =
 		GetterUtil.getInteger(
 			PropsUtil.get(PropsKeys.IG_IMAGE_CUSTOM_1_MAX_DIMENSION));

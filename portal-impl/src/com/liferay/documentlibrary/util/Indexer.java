@@ -83,7 +83,9 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
 			properties, modifiedDate, tagsEntries);
 
-		SearchEngineUtil.addDocument(companyId, doc);
+		if (doc != null) {
+			SearchEngineUtil.addDocument(companyId, doc);
+		}
 	}
 
 	public static void deleteFile(

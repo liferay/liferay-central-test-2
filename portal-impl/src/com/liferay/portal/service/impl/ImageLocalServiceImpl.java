@@ -22,7 +22,10 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.imagegallery.util.Hook;
+import com.liferay.imagegallery.util.HookFactory;
 import com.liferay.portal.NoSuchImageException;
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.image.ImageBag;
 import com.liferay.portal.kernel.image.ImageProcessorUtil;
@@ -139,10 +142,18 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 		}
 	}
 
-	public void deleteImage(long imageId) throws SystemException {
+	public void deleteImage(long imageId)
+		throws PortalException, SystemException {
+
 		try {
 			if (imageId > 0) {
+				Image image = getImage(imageId);
+
 				imagePersistence.remove(imageId);
+
+				Hook hook = HookFactory.getInstance();
+
+				hook.deleteImage(image);
 			}
 		}
 		catch (NoSuchImageException nsie) {
@@ -297,11 +308,19 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 		}
 
 		image.setModifiedDate(new Date());
-		image.setTextObj(bytes);
 		image.setType(type);
 		image.setHeight(height);
 		image.setWidth(width);
 		image.setSize(size);
+
+		Hook hook = HookFactory.getInstance();
+
+		try {
+			hook.updateImage(image, type, bytes);
+		}
+		catch (PortalException e) {
+			throw new SystemException(e);
+		}
 
 		imagePersistence.update(image, false);
 

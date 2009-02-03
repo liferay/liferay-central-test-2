@@ -22,7 +22,11 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.imagegallery.util.Hook;
+import com.liferay.imagegallery.util.HookFactory;
 import com.liferay.portal.kernel.image.ImageProcessor;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.model.Image;
 
@@ -52,7 +56,14 @@ public class ImageImpl extends ImageModelImpl implements Image {
 
 	public byte[] getTextObj() {
 		if (_textObj == null) {
-			_textObj = (byte[])Base64.stringToObject(getText());
+			try {
+				Hook hook = HookFactory.getInstance();
+
+				_textObj = hook.getImageAsBytes(this);
+			}
+			catch (Exception e) {
+				_log.error("Error reading image " + getImageId(), e);
+			}
 		}
 
 		return _textObj;
@@ -65,5 +76,7 @@ public class ImageImpl extends ImageModelImpl implements Image {
 	}
 
 	private byte[] _textObj;
+
+	private static Log _log = LogFactoryUtil.getLog(ImageImpl.class);
 
 }
