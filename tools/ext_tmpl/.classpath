@@ -128,7 +128,6 @@
 	<classpathentry kind="lib" path="lib/portal/htmlparser.jar"/>
 	<classpathentry kind="lib" path="lib/portal/ical4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/icq.jar"/>
-	<classpathentry kind="lib" path="lib/portal/icu4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jabsorb.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jackrabbit-api.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jackrabbit-core.jar"/>
@@ -161,6 +160,7 @@
 	<classpathentry kind="lib" path="lib/portal/jug.jar"/>
 	<classpathentry kind="lib" path="lib/portal/juh.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jurt.jar"/>
+	<classpathentry kind="lib" path="lib/portal/liferay-icu4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/log4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/lucene.jar"/>
 	<classpathentry kind="lib" path="lib/portal/lucene-highlighter.jar"/>
