@@ -10,6 +10,10 @@
 		<param-value></param-value>
 	</context-param>
 	<context-param>
+		<param-name>com.ibm.websphere.portletcontainer.PortletDeploymentEnabled</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	<context-param>
 		<param-name>com.sun.portal.container.service.PolicyService</param-name>
 		<param-value>com.liferay.portal.portletcontainer.PolicyServiceImpl</param-value>
 	</context-param>

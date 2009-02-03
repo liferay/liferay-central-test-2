@@ -128,6 +128,16 @@ public class PortletDeployer extends BaseDeployer {
 
 		sb.append(extraContent);
 
+		if (ServerDetector.isWebSphere()) {
+			sb.append("<context-param>");
+			sb.append("<param-name>");
+			sb.append("com.ibm.websphere.portletcontainer.");
+			sb.append("PortletDeploymentEnabled");
+			sb.append("</param-name>");
+			sb.append("<param-value>false</param-value>");
+			sb.append("</context-param>");
+		}
+
 		File facesXML = new File(srcFile + "/WEB-INF/faces-config.xml");
 		File portletXML = new File(
 			srcFile + "/WEB-INF/" + Portal.PORTLET_XML_FILE_NAME_STANDARD);
