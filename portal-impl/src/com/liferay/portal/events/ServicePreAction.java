@@ -42,7 +42,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
@@ -1315,10 +1314,6 @@ public class ServicePreAction extends Action {
 
 		boolean themeJsFastLoad = ParamUtil.getBoolean(
 			request, "js_fast_load", PropsValues.JAVASCRIPT_FAST_LOAD);
-
-		if (ServerDetector.isWebSphere()) {
-			themeJsFastLoad = false;
-		}
 
 		String lifecycle = ParamUtil.getString(request, "p_p_lifecycle");
 
