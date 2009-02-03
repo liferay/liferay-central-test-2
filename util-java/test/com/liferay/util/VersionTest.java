@@ -22,7 +22,9 @@
 
 package com.liferay.util;
 
-import com.liferay.util.BaseTestCase;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 
 /**
  * <a href="VersionTest.java.html"><b><i>View Source</i></b></a>
@@ -30,26 +32,30 @@ import com.liferay.util.BaseTestCase;
  * @author Jorge Ferrer
  *
  */
-public class VersionTest extends BaseTestCase {
+public class VersionTest {
 
+    @Test
 	public void testBugFixNumber() {
 		assertPrevious("1.1.0", "1.1.1");
 		assertLater("1.1.1", "1.1.0");
 		assertLater("1.2.0", "1.1.1");
 	}
 
+    @Test
 	public void testMajorNumber() {
 		assertPrevious("1.1", "1.1.1");
 		assertLater("2", "1.1.1");
 		assertLater("2", "1");
 	}
 
+    @Test
 	public void testMinorNumber() {
 		assertPrevious("1.1", "1.1.1");
 		assertLater("1.2", "1.1.1");
 		assertLater("1.2", "1.1");
 	}
 
+    @Test
 	public void testPlus() {
 		assertNotIncludes("1+", "0");
 		assertIncludes("1+", "1");
@@ -65,6 +71,7 @@ public class VersionTest extends BaseTestCase {
 		assertNotIncludes("1.1.2+", "1.2");
 	}
 
+    @Test
 	public void testStar() {
 		assertIncludes("1.1.*", "1.1.0");
 		assertIncludes("1.*", "1.1");

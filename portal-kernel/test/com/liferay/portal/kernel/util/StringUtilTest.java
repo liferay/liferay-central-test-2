@@ -22,14 +22,19 @@
 
 package com.liferay.portal.kernel.util;
 
+import junit.framework.TestCase;
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+
 /**
  * <a href="StringUtilTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  *
  */
-public class StringUtilTest extends BaseTestCase {
+public class StringUtilTest {
 
+    @Test()
 	public void testReplaceChar() throws Exception {
 		String original = "127.0.0.1";
 		String expected = "127_0_0_1";
@@ -39,6 +44,7 @@ public class StringUtilTest extends BaseTestCase {
 		assertEquals(expected, actual);
 	}
 
+    @Test()
 	public void testReplaceString() throws Exception {
 		String original = "Hello World HELLO WORLD Hello World";
 		String expected = "Aloha World HELLO WORLD Aloha World";
@@ -48,6 +54,7 @@ public class StringUtilTest extends BaseTestCase {
 		assertEquals(expected, actual);
 	}
 
+    @Test()
 	public void testReplaceStringArray() throws Exception {
 		String original = "Hello World HELLO WORLD Hello World";
 		String expected = "Aloha World ALOHA WORLD Aloha World";
