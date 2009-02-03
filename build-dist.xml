@@ -736,7 +736,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip</
 		<zip destfile="dist/liferay-portal-dependencies-${lp.version}.zip">
 			<zipfileset
 				dir="lib/global"
-				includes="annotations.jar,container.jar,portlet.jar,portlet-container.jar"
+				includes="*.jar"
 				prefix="liferay-portal-dependencies-${lp.version}"
 			/>
 			<zipfileset
@@ -993,7 +993,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip</
 
 		<ant dir="${lp.plugins.dir}" target="extract-plugins-sdk" inheritAll="false" />
 
-		<move file="${lp.plugins.dir}/dist/liferay-plugins-sdk-${lp.version}.zip" todir="dist" />
+		<move file="${lp.plugins.dir}/dist/liferay-plugins-sdk-5.2.0.zip" tofile="dist/liferay-plugins-sdk-${lp.version}.zip" />
 
 		<if>
 			<not>
