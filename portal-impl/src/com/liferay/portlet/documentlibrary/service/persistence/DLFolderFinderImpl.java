@@ -190,7 +190,7 @@ public class DLFolderFinderImpl
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar("parentFolderId", Type.LONG);
+			q.addScalar("modelFolderId", Type.LONG);
 			q.addScalar("name", Type.STRING);
 			q.addScalar("title", Type.STRING);
 			q.addScalar("fileShortcutId", Type.LONG);
@@ -263,7 +263,7 @@ public class DLFolderFinderImpl
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar("parentFolderId", Type.LONG);
+			q.addScalar("modelFolderId", Type.LONG);
 			q.addScalar("name", Type.STRING);
 			q.addScalar("title", Type.STRING);
 			q.addScalar("fileShortcutId", Type.LONG);
