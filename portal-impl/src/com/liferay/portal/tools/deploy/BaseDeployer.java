@@ -158,8 +158,6 @@ public class BaseDeployer {
 			!appServerType.startsWith(ServerDetector.JONAS_ID) &&
 			!appServerType.equals(ServerDetector.JETTY_ID) &&
 			!appServerType.equals(ServerDetector.OC4J_ID) &&
-			!appServerType.equals(ServerDetector.ORION_ID) &&
-			!appServerType.equals(ServerDetector.PRAMATI_ID) &&
 			!appServerType.equals(ServerDetector.RESIN_ID) &&
 			!appServerType.equals(ServerDetector.TOMCAT_ID) &&
 			!appServerType.equals(ServerDetector.WEBLOGIC_ID) &&
@@ -170,7 +168,6 @@ public class BaseDeployer {
 		}
 
 		if (appServerType.startsWith(ServerDetector.GLASSFISH_ID) ||
-			appServerType.equals(ServerDetector.PRAMATI_ID) ||
 			appServerType.equals(ServerDetector.WEBLOGIC_ID)) {
 
 			unpackWar = false;
@@ -633,7 +630,6 @@ public class BaseDeployer {
 		}
 		else if (appServerType.equals(ServerDetector.JETTY_ID) ||
 				 appServerType.equals(ServerDetector.OC4J_ID) ||
-				 appServerType.equals(ServerDetector.ORION_ID) ||
 				 appServerType.equals(ServerDetector.RESIN_ID) ||
 				 appServerType.equals(ServerDetector.TOMCAT_ID)) {
 
