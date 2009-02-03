@@ -97,7 +97,7 @@ public class StagingUtil {
 
 		long liveGroupId = stagingGroup.getLiveGroupId();
 
-		Map<String, String[]> parameterMap = getStagingParameters();
+		Map<String, String[]> parameterMap = getStagingParameters(actionRequest);
 
 		_publishLayouts(
 			actionRequest, liveGroupId, stagingGroupId, parameterMap, false);
@@ -435,48 +435,6 @@ public class StagingUtil {
 		return parameterMap;
 	}
 
-	public static void publishLayout(
-			long plid, long liveGroupId, boolean includeChildren)
-		throws Exception {
-
-		Map<String, String[]> parameterMap = getStagingParameters();
-
-		parameterMap.put(
-			PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
-			new String[] {Boolean.FALSE.toString()});
-
-		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
-
-		List<Layout> layouts = new ArrayList<Layout>();
-
-		layouts.add(layout);
-
-		layouts.addAll(getMissingParents(layout, liveGroupId));
-
-		if (includeChildren) {
-			layouts.addAll(layout.getAllChildren());
-		}
-
-		Iterator<Layout> itr = layouts.iterator();
-
-		long[] layoutIds = new long[layouts.size()];
-
-		for (int i = 0; itr.hasNext(); i++) {
-			Layout curLayout = itr.next();
-
-			layoutIds[i] = curLayout.getLayoutId();
-		}
-
-		byte[] bytes = LayoutServiceUtil.exportLayouts(
-			layout.getGroupId(), layout.isPrivateLayout(), layoutIds,
-			parameterMap, null, null);
-
-		ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
-
-		LayoutServiceUtil.importLayouts(
-			liveGroupId, layout.isPrivateLayout(), parameterMap, bais);
-	}
-
 	public static void publishLayouts(
 			long sourceGroupId, long targetGroupId, boolean privateLayout,
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
@@ -613,7 +571,7 @@ public class StagingUtil {
 
 		long liveGroupId = stagingGroup.getLiveGroupId();
 
-		Map<String, String[]> parameterMap = getStagingParameters();
+		Map<String, String[]> parameterMap = getStagingParameters(actionRequest);
 
 		_publishLayouts(
 			actionRequest, liveGroupId, stagingGroupId, parameterMap, true);
