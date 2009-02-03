@@ -97,7 +97,8 @@ public class StagingUtil {
 
 		long liveGroupId = stagingGroup.getLiveGroupId();
 
-		Map<String, String[]> parameterMap = getStagingParameters(actionRequest);
+		Map<String, String[]> parameterMap = getStagingParameters(
+			actionRequest);
 
 		_publishLayouts(
 			actionRequest, liveGroupId, stagingGroupId, parameterMap, false);
@@ -571,7 +572,8 @@ public class StagingUtil {
 
 		long liveGroupId = stagingGroup.getLiveGroupId();
 
-		Map<String, String[]> parameterMap = getStagingParameters(actionRequest);
+		Map<String, String[]> parameterMap = getStagingParameters(
+			actionRequest);
 
 		_publishLayouts(
 			actionRequest, liveGroupId, stagingGroupId, parameterMap, true);
