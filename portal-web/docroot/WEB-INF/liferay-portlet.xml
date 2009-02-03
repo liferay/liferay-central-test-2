@@ -178,7 +178,6 @@
 		<footer-portlet-javascript>/html/portlet/message_boards/javascript.js</footer-portlet-javascript>
 		<css-class-wrapper>portlet-message-boards</css-class-wrapper>
 		<facebook-integration>fbml</facebook-integration>
-		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
 		<portlet-name>20</portlet-name>
@@ -854,8 +853,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>25</render-weight>
-		<header-portlet-css>/html/portlet/asset_publisher/css.jsp</header-portlet-css>
-		<css-class-wrapper>portlet-asset-publisher</css-class-wrapper>
+		<css-class-wrapper>portlet-tagged-content</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>102</portlet-name>

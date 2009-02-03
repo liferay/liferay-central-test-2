@@ -57,37 +57,22 @@ for (int j = 0; j < metadataFields.length; j++) {
 		value = LanguageUtil.get(pageContext, "by") + StringPool.SPACE + asset.getUserName();
 	}
 	else if (metadataFields[j].equals("view-count")) {
-		int viewCount = asset.getViewCount();
-
-		value = viewCount + StringPool.SPACE + LanguageUtil.get(pageContext, (viewCount == 1) ? "view" : "views");
-	}
-	else if (metadataFields[j].equals("tags")) {
-		value = "tags";
+		value = asset.getViewCount() + StringPool.SPACE + LanguageUtil.get(pageContext, "views") ;
 	}
 
 	if (Validator.isNotNull(value)) {
-		if (previous && !(value.equals("tags") && asset.getEntries().isEmpty() )) {
+		if (previous) {
 %>
-
-			<span class="vertical-separator"><!-- --></span>
+			&nbsp;-&nbsp;
 
 <%
 		}
+
 		previous = true;
 %>
 
-		<span class="metadata-entry <%= "metadata-" + metadataFields[j] %>">
-			<c:choose>
-				<c:when test='<%= value.equals("tags") %>' >
-					<liferay-ui:tags-summary
-						className="<%= asset.getClassName() %>"
-						classPK="<%= asset.getClassPK () %>"
-					/>
-				</c:when>
-				<c:otherwise>
-					<%= value %>
-				</c:otherwise>
-			</c:choose>
+		<span class="<%= "portlet-journal-metadata-" + metadataFields[j] %>">
+			<%= value %>
 		</span>
 
 <%

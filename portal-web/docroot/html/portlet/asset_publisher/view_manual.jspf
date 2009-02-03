@@ -83,7 +83,23 @@ for (int assetIndex = 0; assetIndex < results.size(); assetIndex++) {
 	try {
 %>
 
-		<%@ include file="/html/portlet/asset_publisher/view_display.jspf" %>
+		<c:choose>
+			<c:when test='<%= displayStyle.equals("full-content") %>'>
+				<liferay-util:include page="/html/portlet/asset_publisher/display_full_content.jsp" />
+			</c:when>
+			<c:when test='<%= displayStyle.equals("abstracts") %>'>
+				<liferay-util:include page="/html/portlet/asset_publisher/display_abstract.jsp" />
+			</c:when>
+			<c:when test='<%= displayStyle.equals("title-list") %>'>
+				<liferay-util:include page="/html/portlet/asset_publisher/display_title_list.jsp" />
+			</c:when>
+			<c:when test='<%= displayStyle.equals("table") %>'>
+				<liferay-util:include page="/html/portlet/asset_publisher/display_table.jsp" />
+			</c:when>
+			<c:otherwise>
+				<%= LanguageUtil.format(pageContext, "x-is-not-a-display-type", displayStyle) %>
+			</c:otherwise>
+		</c:choose>
 
 <%
 	}

@@ -28,53 +28,12 @@
 		<liferay-ui:message key="display-style" />
 	</td>
 	<td>
-		<select name="<portlet:namespace />displayStyle" id="<portlet:namespace />displayStyle">
+		<select name="<portlet:namespace />displayStyle">
 			<option <%= displayStyle.equals("full-content") ? "selected" : "" %> value="full-content"><liferay-ui:message key="full-content" /></option>
 			<option <%= displayStyle.equals("abstracts") ? "selected" : "" %> value="abstracts"><liferay-ui:message key="abstracts" /></option>
 			<option <%= displayStyle.equals("title-list") ? "selected" : "" %> value="title-list"><liferay-ui:message key="title-list" /></option>
 			<option <%= displayStyle.equals("table") ? "selected" : "" %> value="table"><liferay-ui:message key="table" /></option>
 		</select>
-	</td>
-</tr>
-<tr class="hidden-field" id="abstractLength">
-	<td>
-		<liferay-ui:message key="abstract-length" /> <liferay-ui:icon-help message="abstract-length-key-help" />
-	</td>
-	<td>
-		<select name="<portlet:namespace />abstractLength">
-			<option <%= abstractLength == 100 ? "selected" : "" %> value="100">100</option>
-			<option <%= abstractLength == 200 ? "selected" : "" %> value="200">200</option>
-			<option <%= abstractLength == 300 ? "selected" : "" %> value="300">300</option>
-			<option <%= abstractLength == 400 ? "selected" : "" %> value="400">400</option>
-			<option <%= abstractLength == 500 ? "selected" : "" %> value="500">500</option>
-		</select>
-	</td>
-</tr>
-<tr class="hidden-field" id="showAssetTitle">
-	<td>
-		<liferay-ui:message key="show-asset-title" />
-	</td>
-	<td>
-		<liferay-ui:input-checkbox param="showAssetTitle" defaultValue="<%= showAssetTitle %>" />
-	</td>
-</tr>
-<tr class="hidden-field" id="showContextLink">
-	<td>
-		<liferay-ui:message key="show-link-to-view-in-specific-portlet" />
-	</td>
-	<td>
-		<liferay-ui:input-checkbox param="showContextLink" defaultValue="<%= showContextLink %>" />
-	</td>
-</tr>
-<tr class="hidden-field" id="assetLinkBehaviour">
-	<td>
-		<liferay-ui:message key="asset-link-behaviour" />
-	</td>
-	<td>
-		<select name="<portlet:namespace />assetLinkBehaviour">
-				<option <%= assetLinkBehaviour.equals("showFullContent") ? "selected" : "" %> value="showFullContent"><liferay-ui:message key="show-full-content" /></option>
-				<option <%= assetLinkBehaviour.equals("viewInSpecificPortlet") ? "selected" : "" %> value="viewInSpecificPortlet"><liferay-ui:message key="view-in-specific-portlet" /></option>
-			</select>
 	</td>
 </tr>
 
@@ -268,44 +227,3 @@
 	</td>
 </tr>
 </table>
-
-<script type="text/javascript">
-	jQuery(
-		function() {
-			var selectDisplayStyle = jQuery('#<portlet:namespace />displayStyle');
-
-			function showHiddenFields () {
-				var hiddenLines = jQuery('.hidden-field');
-				var abstractLength = jQuery('#abstractLength');
-				var showAssetTitle = jQuery('#showAssetTitle');
-				var showContextLink = jQuery('#showContextLink');
-				var assetLinkBehaviour = jQuery('#assetLinkBehaviour');
-				var selectDisplayStyle = jQuery('#<portlet:namespace />displayStyle');
-
-				hiddenLines.hide();
-
-				if (selectDisplayStyle.val() == 'full-content') {
-					showAssetTitle.show();
-					showContextLink.show();
-				}
-				else if (selectDisplayStyle.val() == 'abstracts') {
-					abstractLength.show();
-					assetLinkBehaviour.show();
-				}
-				else {
-					assetLinkBehaviour.show();
-				}
-			}
-
-			showHiddenFields();
-
-			selectDisplayStyle.change(
-				function(event) {
-					showHiddenFields();
-				}
-			);
-
-			Liferay.Util.focusFormField(selectDisplayStyle);
-		}
-	);
-</script>

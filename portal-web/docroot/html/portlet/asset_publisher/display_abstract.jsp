@@ -32,30 +32,29 @@ int assetIndex = ((Integer)request.getAttribute("view.jsp-assetIndex")).intValue
 TagsAsset asset = (TagsAsset)request.getAttribute("view.jsp-asset");
 
 String title = (String)request.getAttribute("view.jsp-title");
+String summary = (String)request.getAttribute("view.jsp-summary");
 String viewURL = (String)request.getAttribute("view.jsp-viewURL");
+String viewURLMessage = (String)request.getAttribute("view.jsp-viewURLMessage");
 
 String className = (String)request.getAttribute("view.jsp-className");
 long classPK = ((Long)request.getAttribute("view.jsp-classPK")).longValue();
 
 boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 
-String cssEntry = StringPool.BLANK;
-
-PortletURL viewFullContentURL = renderResponse.createRenderURL();
-
-viewFullContentURL.setParameter("struts_action", "/asset_publisher/view_content");
-viewFullContentURL.setParameter("redirect", currentURL);
-viewFullContentURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
-
 if (className.equals(BlogsEntry.class.getName())) {
-	cssEntry = "blog-entry";
 	BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
 
 	if (Validator.isNull(title)) {
 		title = entry.getTitle();
 	}
 
-	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/blogs/find_entry?entryId=" + entry.getEntryId() + "&notFoundRedirect=" + HttpUtil.encodeURL(viewFullContentURL.toString()) : viewFullContentURL.toString();
+	summary = entry.getTitle();
+
+	PortletURL entryURL = renderResponse.createRenderURL();
+
+	viewURL = themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/blogs/find_entry?entryId=" + entry.getEntryId();
+
+	viewURLMessage = "read-more";
 }
 else if (className.equals(BookmarksEntry.class.getName())) {
 	BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(classPK);
@@ -64,8 +63,9 @@ else if (className.equals(BookmarksEntry.class.getName())) {
 		title = entry.getName();
 	}
 
-	cssEntry = "bookmark-entry";
-	viewURL = viewInContext ? entry.getUrl() :  viewFullContentURL.toString();
+	summary = entry.getComments();
+	viewURL = entry.getUrl();
+	viewURLMessage = "go";
 }
 else if (className.equals(DLFileEntry.class.getName())) {
 	DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(classPK);
@@ -83,11 +83,14 @@ else if (className.equals(DLFileEntry.class.getName())) {
 		title = sb.toString();
 	}
 
-	cssEntry = "dl-file-entry";
-	viewURL = viewInContext ? themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + fileEntry.getFolderId() + "&name=" + HttpUtil.encodeURL(fileEntry.getName()) : viewFullContentURL.toString();
+	summary = fileEntry.getDescription();
+	viewURL = themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + fileEntry.getFolderId() + "&name=" + HttpUtil.encodeURL(fileEntry.getName());
+	viewURLMessage = "download";
 }
 else if (className.equals(IGImage.class.getName())) {
 	IGImage image = IGImageLocalServiceUtil.getImage(classPK);
+
+	summary = image.getDescription();
 
 	PortletURL imageURL = new PortletURLImpl(request, PortletKeys.IMAGE_GALLERY, plid, PortletRequest.RENDER_PHASE);
 
@@ -96,8 +99,9 @@ else if (className.equals(IGImage.class.getName())) {
 	imageURL.setParameter("struts_action", "/image_gallery/view");
 	imageURL.setParameter("folderId", String.valueOf(image.getFolderId()));
 
-	cssEntry = "image";
-	viewURL = viewInContext ? imageURL.toString() : viewFullContentURL.toString();
+	viewURL = imageURL.toString();
+
+	viewURLMessage = "view";
 }
 else if (className.equals(JournalArticle.class.getName())) {
 	JournalArticleResource articleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(classPK);
@@ -111,60 +115,85 @@ else if (className.equals(JournalArticle.class.getName())) {
 			title = articleDisplay.getTitle();
 		}
 
+		StringBuilder sb = new StringBuilder();
+
+		if (articleDisplay.isSmallImage()) {
+			sb.append("<div style=\"float: left; padding-right: 10px;\"><img alt=\"");
+			sb.append(LanguageUtil.get(pageContext, "web-content-image"));
+			sb.append("\" src=\"");
+
+			if (Validator.isNotNull(articleDisplay.getSmallImageURL())) {
+				sb.append(articleDisplay.getSmallImageURL());
+			}
+			else {
+				sb.append(themeDisplay.getPathImage());
+				sb.append("/journal/article?img_id=");
+				sb.append(articleDisplay.getSmallImageId());
+				sb.append("&t=");
+				sb.append(ImageServletTokenUtil.getToken(articleDisplay.getSmallImageId()));
+			}
+
+			sb.append("\" /></div>");
+		}
+
+		sb.append(articleDisplay.getDescription());
+
+		summary = sb.toString();
+
 		PortletURL articleURL = renderResponse.createRenderURL();
 
 		articleURL.setParameter("struts_action", "/asset_publisher/view_content");
 		articleURL.setParameter("redirect", currentURL);
 		articleURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
 
-		cssEntry = "web-content";
 		viewURL = articleURL.toString();
+
+		viewURLMessage = "read-more";
 	}
 	else {
 		show = false;
 	}
-}
-else if (className.equals(MBMessage.class.getName())) {
-	MBMessage message = MBMessageLocalServiceUtil.getMBMessage(classPK);
-
-	cssEntry = "mb-entry";
-	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/message_boards/find_message?messageId=" + message.getMessageId() : viewFullContentURL.toString();
 }
 else if (className.equals(WikiPage.class.getName())) {
 	WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.getPageResource(classPK);
 
 	WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(pageResource.getNodeId(), pageResource.getTitle());
 
-	cssEntry = "wiki-page";
-	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/wiki/find_page?pageResourcePrimKey=" + wikiPage.getResourcePrimKey() : viewFullContentURL.toString();
+	viewURL = themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/wiki/find_page?pageResourcePrimKey=" + wikiPage.getResourcePrimKey();
 }
 
-request.setAttribute ("view.jsp-showIconLabel", false);
+// URLs set through the asset override automatically generated URLs
+
+if (Validator.isNotNull(asset.getUrl())) {
+	viewURL = asset.getUrl();
+}
 %>
 
-	<c:if test="<%= assetIndex == 0 %>">
-		<ul class="title-list">
-	</c:if>
+<c:if test="<%= show %>">
+	<div class="portlet-journal-abstract">
+		<c:choose>
+			<c:when test="<%= Validator.isNotNull(viewURL) %>">
+				<h3 class="journal-content-title"><a href="<%= viewURL %>"><%= title %></a></h3>
+			</c:when>
+			<c:otherwise>
+				<h3 class="journal-content-title"><%= title %></h3>
+			</c:otherwise>
+		</c:choose>
 
-	<c:if test="<%= show %>">
-		<li class="title-list <%= cssEntry %>">
-			<c:choose>
-				<c:when test="<%= Validator.isNotNull(viewURL) %>">
-					<a href="<%= viewURL %>"><%= title %></a>
-				</c:when>
-				<c:otherwise>
-					<%= title %>
-				</c:otherwise>
-			</c:choose>
+		<div class="portlet-journal-metadata">
+			<%@ include file="/html/portlet/asset_publisher/asset_metadata.jspf" %>
+		</div>
 
-				<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
+		<p class="portlet-journal-summary">
+			<%= summary %>
+		</p>
 
-			<div class="asset-metadata">
-				<%@ include file="/html/portlet/asset_publisher/asset_metadata.jspf" %>
+		<c:if test="<%= Validator.isNotNull(viewURL) %>">
+			<div class="portlet-journal-more">
+				<a href="<%= viewURL %>"><liferay-ui:message key="<%= viewURLMessage %>" /></a>
 			</div>
-		</li>
-	</c:if>
+		</c:if>
+	</div>
 
-	<c:if test="<%= (assetIndex + 1) == results.size() %>">
-		</ul>
-	</c:if>
+	<%@ include file="/html/portlet/asset_publisher/asset_actions.jspf" %>
+</c:if>
