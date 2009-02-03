@@ -20,44 +20,22 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.util;
+package com.liferay.util;
+
+import com.liferay.portal.util.InitUtil;
+
+import junit.framework.TestCase;
 
 /**
- * <a href="StringUtilTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseTestCase.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  *
  */
-public class StringUtilTest extends BaseTestCase {
+public class BaseTestCase extends TestCase {
 
-	public void testReplaceChar() throws Exception {
-		String original = "127.0.0.1";
-		String expected = "127_0_0_1";
-
-		String actual = StringUtil.replace(original, '.', '_');
-
-		assertEquals(expected, actual);
-	}
-
-	public void testReplaceString() throws Exception {
-		String original = "Hello World HELLO WORLD Hello World";
-		String expected = "Aloha World HELLO WORLD Aloha World";
-
-		String actual = StringUtil.replace(original, "Hello", "Aloha");
-
-		assertEquals(expected, actual);
-	}
-
-	public void testReplaceStringArray() throws Exception {
-		String original = "Hello World HELLO WORLD Hello World";
-		String expected = "Aloha World ALOHA WORLD Aloha World";
-
-		String actual = StringUtil.replace(
-			original,
-			new String[] {"Hello", "HELLO"},
-			new String[] {"Aloha", "ALOHA"});
-
-		assertEquals(expected, actual);
+	public BaseTestCase() {
+		InitUtil.initWithSpring();
 	}
 
 }

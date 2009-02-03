@@ -20,11 +20,12 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.util.*;
+import com.liferay.portal.kernel.util.BaseTestCase;
 
 import java.io.StringReader;
+
 import java.util.ArrayList;
 import java.util.List;
 

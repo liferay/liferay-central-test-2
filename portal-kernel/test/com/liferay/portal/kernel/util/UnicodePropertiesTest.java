@@ -22,19 +22,14 @@
 
 package com.liferay.portal.kernel.util;
 
-import junit.framework.Assert;
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-
 /**
  * <a href="UnicodePropertiesTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  *
  */
-public class UnicodePropertiesTest {
+public class UnicodePropertiesTest extends BaseTestCase {
 
-    @Test()
 	public void testLength() throws Exception {
 		String key = "hello";
 		String value = "world";
@@ -47,7 +42,6 @@ public class UnicodePropertiesTest {
 		assertEquals(0, props.getToStringLength());
 	}
 
-    @Test()
 	public void testSetNullProperty() throws Exception {
 		UnicodeProperties props = new UnicodeProperties();
 
@@ -55,7 +49,7 @@ public class UnicodePropertiesTest {
 
 		props.setProperty(null, "value");
 
-		Assert.assertEquals(
+		assertEquals(
 			"setProperty() of null key must not change properties", hashCode,
 			props.hashCode());
 

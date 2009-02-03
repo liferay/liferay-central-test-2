@@ -179,28 +179,6 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>development/hamcrest-core.jar</file-name>
-		<version>1.1</version>
-		<project-name>Hamcrest</project-name>
-		<project-url>http://code.google.com/p/hamcrest/</project-url>
-		<licenses>
-			<license>
-				<license-name>BSD</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>development/hamcrest-library.jar</file-name>
-		<version>1.1</version>
-		<project-name>Hamcrest</project-name>
-		<project-url>http://code.google.com/p/hamcrest/</project-url>
-		<licenses>
-			<license>
-				<license-name>BSD</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>development/icefaces-comps.jar</file-name>
 		<version>1.6.0</version>
 		<project-name>ICEfaces</project-name>
@@ -362,28 +340,6 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>development/jmock.jar</file-name>
-		<version>2.5.1</version>
-		<project-name>JMock</project-name>
-		<project-url>http://jmock.org/</project-url>
-		<licenses>
-			<license>
-				<license-name>JMock (like MIT)</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>development/jmock-junit4.jar</file-name>
-		<version>2.5.1</version>
-		<project-name>JMock</project-name>
-		<project-url>http://jmock.org/</project-url>
-		<licenses>
-			<license>
-				<license-name>JMock (like MIT)</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>development/jms.jar</file-name>
 		<version>1.1</version>
 		<project-name>Java Message Services</project-name>
@@ -509,7 +465,7 @@
 	</library>
 	<library>
 		<file-name>development/junit.jar</file-name>
-		<version>4.5</version>
+		<version></version>
 		<project-name>JUnit</project-name>
 		<project-url>http://www.junit.org/index.htm</project-url>
 		<licenses>
@@ -605,17 +561,6 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>development/objenesis.jar</file-name>
-		<version>1.0</version>
-		<project-name>Objenesis</project-name>
-		<project-url>http://objenesis.googlecode.com/svn/docs/index.html</project-url>
-		<licenses>
-			<license>
-				<license-name>MIT</license-name>
 			</license>
 		</licenses>
 	</library>
