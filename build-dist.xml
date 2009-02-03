@@ -372,7 +372,7 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 		<delete file="app.server.${user.name}.properties" />
 
 		<antcall target="deploy-plugins">
-			<param name="deployer.dest.dir" value="${app.server.parent.dir}/jboss-tomcat-4.2.3/server/default/deploy" />
+			<param name="deployer.dest.dir" value="${app.server.jboss-tomcat.deploy.dir}" />
 			<param name="deployer.app.server.type" value="jboss-tomcat" />
 			<param name="deployer.app.server.lib.portal.dir" value="${app.server.jboss-tomcat.lib.portal.dir}" />
 		</antcall>
@@ -400,7 +400,7 @@ app.server.jboss-tomcat.lib.global.dir=$${app.server.jboss-tomcat.instance.dir}/
 		<antcall target="deploy-plugins">
 			<param name="deployer.dest.dir" value="${app.server.parent.dir}/jboss-tomcat-5.0.0/server/default/deploy" />
 			<param name="deployer.app.server.type" value="jboss-tomcat" />
-			<param name="deployer.app.server.lib.portal.dir" value="${app.server.jboss-tomcat.lib.portal.dir}" />
+			<param name="deployer.app.server.lib.portal.dir" value="${app.server.parent.dir}/jboss-tomcat-5.0.0/server/default/deploy/ROOT.war/WEB-INF/lib" />
 		</antcall>
 	</target>
 
@@ -548,7 +548,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip</
 		<antcall target="deploy-plugins">
 			<param name="deployer.dest.dir" value="${app.server.parent.dir}/tomcat-6.0.18/webapps" />
 			<param name="deployer.app.server.type" value="tomcat" />
-			<param name="deployer.app.server.lib.portal.dir" value="${app.server.tomcat.lib.portal.dir}" />
+			<param name="deployer.app.server.lib.portal.dir" value="${app.server.parent.dir}/tomcat-6.0.18/webapps/ROOT/WEB-INF/lib" />
 		</antcall>
 	</target>
 
