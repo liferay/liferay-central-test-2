@@ -87,8 +87,8 @@ public class AssetPublisherTests extends BaseTests {
 		addTestSuite(RestoreArchivedConfigurationTest.class);
 		addTestSuite(DeleteArchivedConfigurationTest.class);
 		addTestSuite(EditConfigurationTest.class);
-		addTestSuite(UploadLARFileTest.class);
-		addTestSuite(VerifyLARUploadTest.class);
+		addTestSuite(ImportLARTest.class);
+		addTestSuite(AssertImportLARTest.class);
 		addTestSuite(EditNumberAssetsShownTest.class);
 		addTestSuite(ConfigureSimplePaginationTest.class);
 		addTestSuite(VerifySimplePaginationTest.class);

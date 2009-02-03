@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="UploadLARFileTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssertImportLARTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class UploadLARFileTest extends BaseTestCase {
-	public void testUploadLARFile() throws Exception {
+public class AssertImportLARTest extends BaseTestCase {
+	public void testAssertImportLAR() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -52,68 +52,12 @@ public class UploadLARFileTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//strong/span");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Export / Import")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Export / Import"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Import");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_86_importFileName")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.type("_86_importFileName",
-			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\assetpublisher\\Asset_Publisher_LAR.portlet.lar"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Import']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("//input[@value='Import']"));
-		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertTrue(selenium.isElementPresent("link=AP Setup Test Entry"));
+		assertTrue(selenium.isElementPresent("link=AP Setup Test Bookmark"));
+		assertTrue(selenium.isElementPresent("link=AP Setup Test Document"));
+		assertTrue(selenium.isElementPresent("link=AP Setup Test Article"));
+		assertTrue(selenium.isTextPresent("AP Setup MB Test Thread"));
+		assertTrue(selenium.isElementPresent("link=AP Setup Test Wiki Page"));
+		assertTrue(selenium.isElementPresent("link=View"));
 	}
 }
