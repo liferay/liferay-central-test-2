@@ -69,7 +69,7 @@ try {
 	</div>
 
 	<div>
-		<liferay-util:include page="/html/portlet/asset_publisher/display_full_content.jsp" />
+		<liferay-util:include page="/html/portlet/asset_publisher/display/full_content.jsp" />
 	</div>
 
 <%

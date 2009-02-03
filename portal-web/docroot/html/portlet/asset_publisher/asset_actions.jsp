@@ -22,10 +22,14 @@
  */
 %>
 
-<%
-boolean showEditIcon = false;
+<%@ include file="/html/portlet/asset_publisher/init.jsp" %>
 
-String editIconMsg = null;
+<%
+String className = (String)request.getAttribute("view.jsp-className");
+long classPK = ((Long)request.getAttribute("view.jsp-classPK")).longValue();
+boolean showIconLabel = ((Boolean)request.getAttribute("view.jsp-showIconLabel")).booleanValue();
+
+boolean showEditIcon = false;
 
 PortletURL editPortletURL = null;
 
@@ -33,8 +37,6 @@ if (className.equals(BlogsEntry.class.getName())) {
 	BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
 
 	showEditIcon = BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE);
-
-	editIconMsg = "edit-blog";
 
 	editPortletURL = new PortletURLImpl(request, PortletKeys.BLOGS, plid, PortletRequest.RENDER_PHASE);
 
@@ -45,8 +47,6 @@ else if (className.equals(BookmarksEntry.class.getName())) {
 	BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(classPK);
 
 	showEditIcon = BookmarksEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE);
-
-	editIconMsg = "edit-bookmark";
 
 	editPortletURL = new PortletURLImpl(request, PortletKeys.BOOKMARKS, plid, PortletRequest.RENDER_PHASE);
 
@@ -59,8 +59,6 @@ else if (className.equals(DLFileEntry.class.getName())) {
 
 	showEditIcon = DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE);
 
-	editIconMsg = "edit-document";
-
 	editPortletURL = new PortletURLImpl(request, PortletKeys.DOCUMENT_LIBRARY, plid, PortletRequest.RENDER_PHASE);
 
 	editPortletURL.setParameter("struts_action", "/document_library/edit_file_entry");
@@ -71,8 +69,6 @@ else if (className.equals(IGImage.class.getName())) {
 	IGImage image = IGImageLocalServiceUtil.getImage(classPK);
 
 	showEditIcon = IGImagePermission.contains(permissionChecker, image, ActionKeys.UPDATE);
-
-	editIconMsg = "edit-image";
 
 	editPortletURL = new PortletURLImpl(request, PortletKeys.IMAGE_GALLERY, plid, PortletRequest.RENDER_PHASE);
 
@@ -90,8 +86,6 @@ else if (className.equals(JournalArticle.class.getName())) {
 	if (articleDisplay != null) {
 		showEditIcon = JournalArticlePermission.contains(permissionChecker, articleDisplay.getGroupId(), articleDisplay.getArticleId(), ActionKeys.UPDATE);
 
-		editIconMsg = "edit-web-content";
-
 		editPortletURL = new PortletURLImpl(request, PortletKeys.JOURNAL, plid, PortletRequest.RENDER_PHASE);
 
 		editPortletURL.setParameter("struts_action", "/journal/edit_article");
@@ -99,6 +93,16 @@ else if (className.equals(JournalArticle.class.getName())) {
 		editPortletURL.setParameter("articleId", articleDisplay.getArticleId());
 		editPortletURL.setParameter("version", String.valueOf(articleDisplay.getVersion()));
 	}
+}
+else if (className.equals(MBMessage.class.getName())) {
+	MBMessage message = MBMessageLocalServiceUtil.getMessage(classPK);
+
+	showEditIcon = MBMessagePermission.contains(permissionChecker, message, ActionKeys.UPDATE);
+
+	editPortletURL = new PortletURLImpl(request, PortletKeys.MESSAGE_BOARDS, plid, PortletRequest.RENDER_PHASE);
+
+	editPortletURL.setParameter("struts_action", "/message_boards/edit_message");
+	editPortletURL.setParameter("messageId", String.valueOf(message.getMessageId()));
 }
 else if (className.equals(WikiPage.class.getName())) {
 	WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.getPageResource(classPK);
@@ -108,8 +112,6 @@ else if (className.equals(WikiPage.class.getName())) {
 	WikiNode node = wikiPage.getNode();
 
 	showEditIcon = WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE);
-
-	editIconMsg = "edit-page";
 
 	editPortletURL = new PortletURLImpl(request, PortletKeys.WIKI, plid, PortletRequest.RENDER_PHASE);
 
@@ -127,9 +129,7 @@ if (editPortletURL != null) {
 %>
 
 <c:if test="<%= showEditIcon %>">
-	<div class="lfr-meta-actions edit-controls">
-		<br />
-
-		<liferay-ui:icon image="edit" message="<%= editIconMsg %>" url="<%= editPortletURL.toString() %>" />
+	<div class="lfr-meta-actions asset-actions">
+		<liferay-ui:icon image="edit" url="<%= editPortletURL.toString() %>" label="<%= showIconLabel %>" />
 	</div>
 </c:if>

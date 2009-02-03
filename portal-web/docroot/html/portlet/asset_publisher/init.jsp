@@ -75,6 +75,7 @@
 <%@ page import="com.liferay.portlet.journal.service.permission.JournalPermission" %>
 <%@ page import="com.liferay.portlet.messageboards.model.MBMessage" %>
 <%@ page import="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.messageboards.service.permission.MBMessagePermission" %>
 <%@ page import="com.liferay.portlet.tags.NoSuchAssetException" %>
 <%@ page import="com.liferay.portlet.tags.NoSuchEntryException" %>
 <%@ page import="com.liferay.portlet.tags.NoSuchPropertyException" %>
@@ -141,6 +142,10 @@ if (Validator.isNull(displayStyle)) {
 	displayStyle = "abstracts";
 }
 
+boolean showAssetTitle = GetterUtil.getBoolean(preferences.getValue("show-asset-title", null), true);
+boolean showContextLink = GetterUtil.getBoolean(preferences.getValue("show-context-link", null), true);
+int abstractLength = GetterUtil.getInteger(preferences.getValue("abstract-length", StringPool.BLANK), 200);
+String assetLinkBehaviour = GetterUtil.getString(preferences.getValue("asset-link-behaviour", "showFullContent"));
 String orderByColumn1 = GetterUtil.getString(preferences.getValue("order-by-column-1", "modifiedDate"));
 String orderByColumn2 = GetterUtil.getString(preferences.getValue("order-by-column-2", "title"));
 String orderByType1 = GetterUtil.getString(preferences.getValue("order-by-type-1", "DESC"));
@@ -155,7 +160,7 @@ boolean enableComments = GetterUtil.getBoolean(preferences.getValue("enable-comm
 boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enable-comment-ratings", null));
 
 String defaultMetadataFields = StringPool.BLANK;
-String allMetadataFields = "create-date,modified-date,publish-date,expiration-date,priority,author,view-count";
+String allMetadataFields = "create-date,modified-date,publish-date,expiration-date,priority,author,view-count,tags";
 
 String[] metadataFields = StringUtil.split(preferences.getValue("metadata-fields", defaultMetadataFields));
 
@@ -166,6 +171,8 @@ String[] manualEntries = preferences.getValues("manual-entries", new String[0]);
 boolean showPortletWithNoResults = false;
 boolean groupByClass = false;
 boolean allowEmptyResults = false;
+
+boolean viewInContext = Validator.equals(assetLinkBehaviour, "viewInSpecificPortlet");
 
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 %>
