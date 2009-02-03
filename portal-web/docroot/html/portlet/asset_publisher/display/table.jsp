@@ -32,14 +32,18 @@ int assetIndex = ((Integer)request.getAttribute("view.jsp-assetIndex")).intValue
 TagsAsset asset = (TagsAsset)request.getAttribute("view.jsp-asset");
 
 String title = (String)request.getAttribute("view.jsp-title");
-String summary = (String)request.getAttribute("view.jsp-summary");
 String viewURL = (String)request.getAttribute("view.jsp-viewURL");
-String viewURLMessage = (String)request.getAttribute("view.jsp-viewURLMessage");
 
 String className = (String)request.getAttribute("view.jsp-className");
 long classPK = ((Long)request.getAttribute("view.jsp-classPK")).longValue();
 
 boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
+
+PortletURL viewFullContentURL = renderResponse.createRenderURL();
+
+viewFullContentURL.setParameter("struts_action", "/asset_publisher/view_content");
+viewFullContentURL.setParameter("redirect", currentURL);
+viewFullContentURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
 
 if (className.equals(BlogsEntry.class.getName())) {
 	BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
@@ -48,11 +52,13 @@ if (className.equals(BlogsEntry.class.getName())) {
 		title = entry.getTitle();
 	}
 
-	summary = entry.getTitle();
+	PortletURL entryURL = renderResponse.createRenderURL();
 
-	viewURL = themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/blogs/find_entry?entryId=" + entry.getEntryId();
+	entryURL.setParameter("struts_action", "/asset_publisher/view_content");
+	entryURL.setParameter("redirect", currentURL);
+	entryURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
 
-	viewURLMessage = "read-more";
+	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/blogs/find_entry?entryId=" + entry.getEntryId() + "&notFoundRedirect=" + HttpUtil.encodeURL(viewFullContentURL.toString()) : viewFullContentURL.toString();
 }
 else if (className.equals(BookmarksEntry.class.getName())) {
 	BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(classPK);
@@ -61,9 +67,7 @@ else if (className.equals(BookmarksEntry.class.getName())) {
 		title = entry.getName();
 	}
 
-	summary = entry.getComments();
-	viewURL = entry.getUrl();
-	viewURLMessage = "go";
+	viewURL = viewInContext? entry.getUrl() : viewFullContentURL.toString();
 }
 else if (className.equals(DLFileEntry.class.getName())) {
 	DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(classPK);
@@ -81,14 +85,10 @@ else if (className.equals(DLFileEntry.class.getName())) {
 		title = sb.toString();
 	}
 
-	summary = fileEntry.getDescription();
-	viewURL = themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + fileEntry.getFolderId() + "&name=" + HttpUtil.encodeURL(fileEntry.getName());
-	viewURLMessage = "download";
+	viewURL = viewInContext? themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + fileEntry.getFolderId() + "&name=" + HttpUtil.encodeURL(fileEntry.getName()) : viewFullContentURL.toString();
 }
 else if (className.equals(IGImage.class.getName())) {
 	IGImage image = IGImageLocalServiceUtil.getImage(classPK);
-
-	summary = image.getDescription();
 
 	PortletURL imageURL = new PortletURLImpl(request, PortletKeys.IMAGE_GALLERY, plid, PortletRequest.RENDER_PHASE);
 
@@ -97,9 +97,7 @@ else if (className.equals(IGImage.class.getName())) {
 	imageURL.setParameter("struts_action", "/image_gallery/view");
 	imageURL.setParameter("folderId", String.valueOf(image.getFolderId()));
 
-	viewURL = imageURL.toString();
-
-	viewURLMessage = "view";
+	viewURL = viewInContext? imageURL.toString() : viewFullContentURL.toString();
 }
 else if (className.equals(JournalArticle.class.getName())) {
 	JournalArticleResource articleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(classPK);
@@ -113,8 +111,6 @@ else if (className.equals(JournalArticle.class.getName())) {
 			title = articleDisplay.getTitle();
 		}
 
-		summary = articleDisplay.getDescription();
-
 		PortletURL articleURL = renderResponse.createRenderURL();
 
 		articleURL.setParameter("struts_action", "/asset_publisher/view_content");
@@ -122,8 +118,6 @@ else if (className.equals(JournalArticle.class.getName())) {
 		articleURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
 
 		viewURL = articleURL.toString();
-
-		viewURLMessage = "read-more";
 	}
 	else {
 		show = false;
@@ -132,48 +126,132 @@ else if (className.equals(JournalArticle.class.getName())) {
 else if (className.equals(MBMessage.class.getName())) {
 	MBMessage message = MBMessageLocalServiceUtil.getMBMessage(classPK);
 
-	viewURL = themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/message_boards/find_message?messageId=" + message.getMessageId();
+	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/message_boards/find_message?messageId=" + message.getMessageId() : viewFullContentURL.toString();
 }
 else if (className.equals(WikiPage.class.getName())) {
 	WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.getPageResource(classPK);
 
 	WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(pageResource.getNodeId(), pageResource.getTitle());
 
-	viewURL = themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/wiki/find_page?pageResourcePrimKey=" + wikiPage.getResourcePrimKey();
-}
+	PortletURL pageURL = new PortletURLImpl(request, PortletKeys.WIKI, plid, PortletRequest.ACTION_PHASE);
 
-// URLs set through the asset override automatically generated URLs
+	pageURL.setWindowState(WindowState.MAXIMIZED);
+	pageURL.setPortletMode(PortletMode.VIEW);
 
-if (Validator.isNotNull(asset.getUrl())) {
-	viewURL = asset.getUrl();
+	pageURL.setParameter("struts_action", "/wiki/view");
+	pageURL.setParameter("title", wikiPage.getTitle());
+
+	viewURL = viewInContext? pageURL.toString() : viewFullContentURL.toString();
 }
 %>
 
 <c:if test="<%= assetIndex == 0 %>">
-	<ul>
+	<table class="taglib-search-iterator">
+	<tr class="portlet-section-header results-header">
+		<th>
+			<liferay-ui:message key="title" />
+		</th>
+
+		<%
+		for (int m = 0; m < metadataFields.length; m++) {
+		%>
+			<th>
+				<liferay-ui:message key="<%= metadataFields[m] %>" />
+			</th>
+		<%
+		}
+		%>
+
+		<th></th>
+	</tr>
 </c:if>
 
 <c:if test="<%= show %>">
-	<li>
-		<c:choose>
-			<c:when test="<%= Validator.isNotNull(viewURL) %>">
-				<a href="<%= viewURL %>"><%= title %></a>
-			</c:when>
-			<c:otherwise>
-				<%= title %>
-			</c:otherwise>
-		</c:choose>
 
-		<div class="lfr-meta-actions edit-controls">
-			<%@ include file="/html/portlet/asset_publisher/asset_actions.jspf" %>
-		</div>
+	<%
+	String style = "class=\"portlet-section-body results-row\" onmouseover=\"this.className = 'portlet-section-body-hover results-row hover';\" onmouseout=\"this.className = 'portlet-section-body results-row';\"";
 
-		<span class="portlet-journal-metadata">
-			<%@ include file="/html/portlet/asset_publisher/asset_metadata.jspf" %>
-		</span>
-	</li>
+	if (assetIndex % 2 == 0) {
+		style = "class=\"portlet-section-alternate results-row alt\" onmouseover=\"this.className = 'portlet-section-alternate-hover results-row alt hover';\" onmouseout=\"this.className = 'portlet-section-alternate results-row alt';\"";
+	}
+	%>
+
+	<tr <%= style %>>
+		<td>
+			<c:choose>
+				<c:when test="<%= Validator.isNotNull(viewURL) %>">
+					<a href="<%= viewURL %>"><%= title %></a>
+				</c:when>
+				<c:otherwise>
+					<%= title %>
+				</c:otherwise>
+			</c:choose>
+		</td>
+
+		<%
+		for (int m = 0; m < metadataFields.length; m++) {
+			String value = null;
+
+			if (metadataFields[m].equals("create-date")) {
+				value = dateFormatDate.format(asset.getCreateDate());
+			}
+			else if (metadataFields[m].equals("modified-date")) {
+				value = dateFormatDate.format(asset.getModifiedDate());
+			}
+			else if (metadataFields[m].equals("publish-date")) {
+				if (asset.getPublishDate() == null) {
+					value = StringPool.BLANK;
+				}
+				else {
+					value = dateFormatDate.format(asset.getPublishDate());
+				}
+			}
+			else if (metadataFields[m].equals("expiration-date")) {
+				if (asset.getExpirationDate() == null) {
+					value = StringPool.BLANK;
+				}
+				else {
+					value = dateFormatDate.format(asset.getExpirationDate());
+				}
+			}
+			else if (metadataFields[m].equals("priority")) {
+				value = String.valueOf(asset.getPriority());
+			}
+			else if (metadataFields[m].equals("author")) {
+				value = asset.getUserName();
+			}
+			else if (metadataFields[m].equals("view-count")) {
+				value = String.valueOf(asset.getViewCount());
+			}
+			else if (metadataFields[m].equals("tags")) {
+			%>
+
+				<td>
+					<liferay-ui:tags-summary
+						className="<%= asset.getClassName() %>"
+						classPK="<%= asset.getClassPK () %>"
+					/>
+				</td>
+
+			<%
+			}
+
+			if (value != null) {
+		%>
+
+				<td>
+					<liferay-ui:message key="<%= value %>" />
+				</td>
+
+		<%
+			}
+		}
+		%>
+
+		<td></td>
+	</tr>
 </c:if>
 
 <c:if test="<%= (assetIndex + 1) == results.size() %>">
-	</ul>
+	</table>
 </c:if>

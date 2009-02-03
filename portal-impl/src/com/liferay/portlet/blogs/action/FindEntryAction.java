@@ -104,7 +104,16 @@ public class FindEntryAction extends Action {
 			return null;
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(e, request, response);
+			String notFoundRedirect = ParamUtil.getString(
+				request, "notFoundRedirect");
+
+			if (e.getClass().equals(NoSuchLayoutException.class) &&
+					Validator.isNotNull(notFoundRedirect) ) {
+				response.sendRedirect(notFoundRedirect);
+			}
+			else {
+				PortalUtil.sendError(e, request, response);
+			}
 
 			return null;
 		}

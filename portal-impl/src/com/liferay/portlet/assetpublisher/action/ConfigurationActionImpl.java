@@ -234,6 +234,14 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String category = ParamUtil.getString(actionRequest, "category");
 		String displayStyle = ParamUtil.getString(
 			actionRequest, "displayStyle");
+		boolean showAssetTitle = ParamUtil.getBoolean(
+			actionRequest, "showAssetTitle");
+		boolean showContextLink = ParamUtil.getBoolean(
+			actionRequest, "showContextLink");
+		int abstractLength = ParamUtil.getInteger(
+			actionRequest, "abstractLength");
+		String assetLinkBehaviour = ParamUtil.getString(
+			actionRequest, "assetLinkBehaviour");
 		String orderByColumn1 = ParamUtil.getString(
 			actionRequest, "orderByColumn1");
 		String orderByColumn2 = ParamUtil.getString(
@@ -270,6 +278,13 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		preferences.setValue("class-name-id", String.valueOf(classNameId));
 		preferences.setValue("category", category);
 		preferences.setValue("display-style", displayStyle);
+		preferences.setValue(
+			"show-asset-title", String.valueOf(showAssetTitle));
+		preferences.setValue(
+			"show-context-link", String.valueOf(showContextLink));
+		preferences.setValue("abstract-length", String.valueOf(abstractLength));
+		preferences.setValue(
+			"asset-link-behaviour", assetLinkBehaviour);
 		preferences.setValue("order-by-column-1", orderByColumn1);
 		preferences.setValue("order-by-column-2", orderByColumn2);
 		preferences.setValue("order-by-type-1", orderByType1);
@@ -298,6 +313,14 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 		String displayStyle = ParamUtil.getString(
 			actionRequest, "displayStyle");
+		boolean showAssetTitle = ParamUtil.getBoolean(
+			actionRequest, "showAssetTitle");
+		boolean showContextLink = ParamUtil.getBoolean(
+			actionRequest, "showContextLink");
+		int abstractLength = ParamUtil.getInteger(
+			actionRequest, "abstractLength");
+		String assetLinkBehaviour = ParamUtil.getString(
+			actionRequest, "assetLinkBehaviour");
 		boolean showAvailableLocales = ParamUtil.getBoolean(
 			actionRequest, "showAvailableLocales");
 		boolean enableComments = ParamUtil.getBoolean(
@@ -309,6 +332,13 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 		preferences.setValue("selection-style", "manual");
 		preferences.setValue("display-style", displayStyle);
+		preferences.setValue(
+			"show-asset-title", String.valueOf(showAssetTitle));
+		preferences.setValue(
+			"show-context-link", String.valueOf(showContextLink));
+		preferences.setValue("abstract-length", String.valueOf(abstractLength));
+		preferences.setValue(
+			"asset-link-behaviour", assetLinkBehaviour);
 		preferences.setValue(
 			"show-available-locales", String.valueOf(showAvailableLocales));
 		preferences.setValue("enable-comments", String.valueOf(enableComments));
