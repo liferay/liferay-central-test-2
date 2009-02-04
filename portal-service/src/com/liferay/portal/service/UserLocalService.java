@@ -630,4 +630,9 @@ public interface UserLocalService {
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
+
+	public void updateTagsAsset(long userId,
+		com.liferay.portal.model.User user, java.lang.String[] tagsEntries)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

@@ -478,6 +478,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 		}
 
+		// Tags
+
+		if (serviceContext != null) {
+			updateTagsAsset(
+				creatorUserId, user, serviceContext.getTagsEntries());
+		}
+
 		// Indexer
 
 		try {
@@ -907,6 +914,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		socialActivityLocalService.deleteUserActivities(userId);
 		socialRequestLocalService.deleteReceiverUserRequests(userId);
 		socialRequestLocalService.deleteUserRequests(userId);
+
+		// Tags
+
+		tagsAssetLocalService.deleteAsset(User.class.getName(), userId);
 
 		// Mail
 
@@ -2384,6 +2395,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		announcementsDeliveryLocalService.getUserDeliveries(user.getUserId());
 
+		// Tags
+
+		if (serviceContext != null) {
+			updateTagsAsset(userId, user, serviceContext.getTagsEntries());
+		}
+
 		// Indexer
 
 		try {
@@ -2399,6 +2416,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		PermissionCacheUtil.clearCache();
 
 		return user;
+	}
+
+	public void updateTagsAsset(long userId, User user, String[] tagsEntries)
+		throws PortalException, SystemException {
+
+		tagsAssetLocalService.updateAsset(
+			userId, 0, User.class.getName(), user.getUserId(), null,
+			tagsEntries, true, null, null, null, null, null, user.getFullName(),
+			null, null, null, 0, 0, null, false);
 	}
 
 	protected int authenticate(

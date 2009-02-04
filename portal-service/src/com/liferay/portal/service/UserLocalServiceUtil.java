@@ -866,6 +866,13 @@ public class UserLocalServiceUtil {
 			userGroupIds, serviceContext);
 	}
 
+	public static void updateTagsAsset(long userId,
+		com.liferay.portal.model.User user, java.lang.String[] tagsEntries)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().updateTagsAsset(userId, user, tagsEntries);
+	}
+
 	public static UserLocalService getService() {
 		if (_service == null) {
 			throw new RuntimeException("UserLocalService is not set");
