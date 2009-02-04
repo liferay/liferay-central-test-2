@@ -74,7 +74,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 			<c:if test="<%= showContextLink %>">
 				<div class="asset-more">
-					<a href="<%= themeDisplay.getPathMain() %>/blogs/find_entry?entryId=<%= entry.getEntryId() %>&notFoundRedirect=<%= HttpUtil.encodeURL(viewFullContentURL.toString()) %>"><liferay-ui:message key="view-blog" /> &raquo;</a>
+					<a href="<%= themeDisplay.getPathMain() %>/blogs/find_entry?entryId=<%= entry.getEntryId() %>&noSuchEntryRedirect=<%= HttpUtil.encodeURL(viewFullContentURL.toString()) %>"><liferay-ui:message key="view-blog" /> &raquo;</a>
 				</div>
 			</c:if>
 
