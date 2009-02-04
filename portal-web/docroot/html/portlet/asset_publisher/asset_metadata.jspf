@@ -23,9 +23,9 @@
 %>
 
 <%
-boolean previous = false;
-
 PortletURL portletURL = renderResponse.createRenderURL();
+
+boolean previous = false;
 
 for (int j = 0; j < metadataFields.length; j++) {
 	String value = null;
@@ -75,6 +75,7 @@ for (int j = 0; j < metadataFields.length; j++) {
 
 <%
 		}
+
 		previous = true;
 %>
 
@@ -84,7 +85,7 @@ for (int j = 0; j < metadataFields.length; j++) {
 					<liferay-ui:tags-summary
 						className="<%= asset.getClassName() %>"
 						classPK="<%= asset.getClassPK () %>"
-					    portletURL="<%= portletURL %>"
+						portletURL="<%= portletURL %>"
 					/>
 				</c:when>
 				<c:otherwise>
