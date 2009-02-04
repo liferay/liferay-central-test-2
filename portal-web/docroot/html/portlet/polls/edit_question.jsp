@@ -84,6 +84,13 @@ if (choiceName > 0) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= question == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
+
+	function <portlet:namespace />addPollChoice() {
+		jQuery('input[name="<portlet:namespace />choicesCount"]').val('<%= choicesCount + 1 %>');
+		jQuery('form[name="<portlet:namespace />fm"]').prepend('<input name="<portlet:namespace /><%= EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + (char)(96 + choicesCount + 1) %>" type="hidden" value="" />');
+
+		submitForm(document.<portlet:namespace />fm);
+	}
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/edit_question" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveQuestion(); return false;">
@@ -92,7 +99,6 @@ if (choiceName > 0) {
 <input name="<portlet:namespace />questionId" type="hidden" value="<%= questionId %>" />
 <input name="<portlet:namespace />choicesCount" type="hidden" value="<%= choicesCount %>" />
 <input name="<portlet:namespace />choiceName" type="hidden" value="" />
-<input name="<portlet:namespace /><%= EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + (char)(96 + choicesCount + 1) %>" type="hidden" value="" />
 
 <liferay-ui:tabs
 	names="question"
@@ -219,7 +225,7 @@ if (choiceName > 0) {
 				</table>
 			</td>
 			<td valign="bottom">
-				<input type="button" value="<liferay-ui:message key="add-choice" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount + 1 %>'; submitForm(document.<portlet:namespace />fm);" />
+				<input type="button" value="<liferay-ui:message key="add-choice" />" onClick="<portlet:namespace />addPollChoice();" />
 			</td>
 		</tr>
 		</table>
