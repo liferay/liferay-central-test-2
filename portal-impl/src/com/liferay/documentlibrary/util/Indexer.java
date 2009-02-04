@@ -70,7 +70,9 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		Document doc = getFileDocument(
 			companyId, portletId, groupId, repositoryId, fileName);
 
-		SearchEngineUtil.addDocument(companyId, doc);
+		if (doc != null) {
+			SearchEngineUtil.addDocument(companyId, doc);
+		}
 	}
 
 	public static void addFile(
@@ -93,8 +95,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			String fileName)
 		throws SearchException {
 
-		SearchEngineUtil.deleteDocument(companyId, getFileUID(
-			portletId, repositoryId, fileName));
+		SearchEngineUtil.deleteDocument(
+			companyId, getFileUID(portletId, repositoryId, fileName));
 	}
 
 	public static Document getFileDocument(
@@ -278,7 +280,9 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
 			properties, modifiedDate, tagsEntries);
 
-		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
+		if (doc != null) {
+			SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
+		}
 	}
 
 	public String[] getClassNames() {
