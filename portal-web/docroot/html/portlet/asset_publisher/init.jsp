@@ -131,7 +131,8 @@ else {
 }
 
 String category = GetterUtil.getString(preferences.getValue("category", StringPool.BLANK));
-String[] entries = preferences.getValues("entries", new String[0]);
+String tag = ParamUtil.getString(request, "tag", StringPool.BLANK);
+String[] entries = Validator.isNull(tag) ? preferences.getValues("entries", new String[0]) : new String[]{tag};
 String[] notEntries = preferences.getValues("not-entries", new String[0]);
 boolean mergeUrlTags = GetterUtil.getBoolean(preferences.getValue("merge-url-tags", null), true);
 boolean andOperator = GetterUtil.getBoolean(preferences.getValue("and-operator", null), false);
