@@ -33,13 +33,14 @@ TagsAsset asset = (TagsAsset)request.getAttribute("view.jsp-asset");
 
 String title = (String)request.getAttribute("view.jsp-title");
 String viewURL = (String)request.getAttribute("view.jsp-viewURL");
+String cssClassName = StringPool.BLANK;
 
 String className = (String)request.getAttribute("view.jsp-className");
 long classPK = ((Long)request.getAttribute("view.jsp-classPK")).longValue();
 
 boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 
-String cssEntry = StringPool.BLANK;
+request.setAttribute("view.jsp-showIconLabel", false);
 
 PortletURL viewFullContentURL = renderResponse.createRenderURL();
 
@@ -48,7 +49,6 @@ viewFullContentURL.setParameter("redirect", currentURL);
 viewFullContentURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
 
 if (className.equals(BlogsEntry.class.getName())) {
-	cssEntry = "blog-entry";
 	BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
 
 	if (Validator.isNull(title)) {
@@ -56,6 +56,7 @@ if (className.equals(BlogsEntry.class.getName())) {
 	}
 
 	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/blogs/find_entry?entryId=" + entry.getEntryId() + "&notFoundRedirect=" + HttpUtil.encodeURL(viewFullContentURL.toString()) : viewFullContentURL.toString();
+	cssClassName = "blog-entry";
 }
 else if (className.equals(BookmarksEntry.class.getName())) {
 	BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(classPK);
@@ -64,8 +65,8 @@ else if (className.equals(BookmarksEntry.class.getName())) {
 		title = entry.getName();
 	}
 
-	cssEntry = "bookmark-entry";
-	viewURL = viewInContext ? entry.getUrl() :  viewFullContentURL.toString();
+	viewURL = viewInContext ? entry.getUrl() : viewFullContentURL.toString();
+	cssClassName = "bookmark-entry";
 }
 else if (className.equals(DLFileEntry.class.getName())) {
 	DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(classPK);
@@ -83,8 +84,8 @@ else if (className.equals(DLFileEntry.class.getName())) {
 		title = sb.toString();
 	}
 
-	cssEntry = "dl-file-entry";
 	viewURL = viewInContext ? themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + fileEntry.getFolderId() + "&name=" + HttpUtil.encodeURL(fileEntry.getName()) : viewFullContentURL.toString();
+	cssClassName = "dl-file-entry";
 }
 else if (className.equals(IGImage.class.getName())) {
 	IGImage image = IGImageLocalServiceUtil.getImage(classPK);
@@ -96,8 +97,8 @@ else if (className.equals(IGImage.class.getName())) {
 	imageURL.setParameter("struts_action", "/image_gallery/view");
 	imageURL.setParameter("folderId", String.valueOf(image.getFolderId()));
 
-	cssEntry = "image";
 	viewURL = viewInContext ? imageURL.toString() : viewFullContentURL.toString();
+	cssClassName = "image";
 }
 else if (className.equals(JournalArticle.class.getName())) {
 	JournalArticleResource articleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(classPK);
@@ -117,8 +118,8 @@ else if (className.equals(JournalArticle.class.getName())) {
 		articleURL.setParameter("redirect", currentURL);
 		articleURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
 
-		cssEntry = "web-content";
 		viewURL = articleURL.toString();
+		cssClassName = "web-content";
 	}
 	else {
 		show = false;
@@ -127,19 +128,17 @@ else if (className.equals(JournalArticle.class.getName())) {
 else if (className.equals(MBMessage.class.getName())) {
 	MBMessage message = MBMessageLocalServiceUtil.getMBMessage(classPK);
 
-	cssEntry = "mb-entry";
 	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/message_boards/find_message?messageId=" + message.getMessageId() : viewFullContentURL.toString();
+	cssClassName = "mb-entry";
 }
 else if (className.equals(WikiPage.class.getName())) {
 	WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.getPageResource(classPK);
 
 	WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(pageResource.getNodeId(), pageResource.getTitle());
 
-	cssEntry = "wiki-page";
 	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/wiki/find_page?pageResourcePrimKey=" + wikiPage.getResourcePrimKey() : viewFullContentURL.toString();
+	cssClassName = "wiki-page";
 }
-
-request.setAttribute ("view.jsp-showIconLabel", false);
 %>
 
 	<c:if test="<%= assetIndex == 0 %>">
@@ -147,7 +146,7 @@ request.setAttribute ("view.jsp-showIconLabel", false);
 	</c:if>
 
 	<c:if test="<%= show %>">
-		<li class="title-list <%= cssEntry %>">
+		<li class="title-list <%= cssClassName %>">
 			<c:choose>
 				<c:when test="<%= Validator.isNotNull(viewURL) %>">
 					<a href="<%= viewURL %>"><%= title %></a>
@@ -157,7 +156,7 @@ request.setAttribute ("view.jsp-showIconLabel", false);
 				</c:otherwise>
 			</c:choose>
 
-				<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
+			<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
 
 			<div class="asset-metadata">
 				<%@ include file="/html/portlet/asset_publisher/asset_metadata.jspf" %>
