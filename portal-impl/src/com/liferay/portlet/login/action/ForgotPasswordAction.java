@@ -74,13 +74,19 @@ public class ForgotPasswordAction extends PortletAction {
 						CaptchaUtil.check(actionRequest);
 					}
 
-					getUser(actionRequest);
+					actionRequest.setAttribute(
+						ForgotPasswordAction.class.getName(),
+						getUser(actionRequest));
 				}
 				else {
 					sendPassword(actionRequest, actionResponse);
 				}
 			}
 			else {
+				if (PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD) {
+					CaptchaUtil.check(actionRequest);
+				}
+
 				sendPassword(actionRequest, actionResponse);
 			}
 		}
@@ -138,8 +144,6 @@ public class ForgotPasswordAction extends PortletAction {
 			user = UserLocalServiceUtil.getUserById(userId);
 		}
 
-		actionRequest.setAttribute(ForgotPasswordAction.class.getName(), user);
-
 		return user;
 	}
 
@@ -151,23 +155,21 @@ public class ForgotPasswordAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		if (PropsValues.USERS_REMINDER_QUERIES_ENABLED) {
-			User user = getUser(actionRequest);
+		User user = getUser(actionRequest);
 
+		if (PropsValues.USERS_REMINDER_QUERIES_ENABLED) {
 			String answer = ParamUtil.getString(actionRequest, "answer");
 
 			if (!user.getReminderQueryAnswer().equals(answer)) {
 				throw new UserReminderQueryException();
 			}
 		}
-		else if (PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD) {
-			CaptchaUtil.check(actionRequest);
-		}
 
 		PortletPreferences preferences = actionRequest.getPreferences();
 
 		String languageId = LanguageUtil.getLanguageId(actionRequest);
 
+		String emailToAddress = user.getEmailAddress();
 		String emailFromName = preferences.getValue("emailFromName", null);
 		String emailFromAddress = preferences.getValue(
 			"emailFromAddress", null);
@@ -177,7 +179,8 @@ public class ForgotPasswordAction extends PortletAction {
 			"emailPasswordSentBody_" + languageId, null);
 
 		LoginUtil.sendPassword(
-			actionRequest, emailFromName, emailFromAddress, subject, body);
+			actionRequest, emailToAddress, emailFromName, emailFromAddress,
+			subject, body);
 
 		sendRedirect(actionRequest, actionResponse);
 	}

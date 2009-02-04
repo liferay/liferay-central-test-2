@@ -332,12 +332,16 @@ public class LoginUtil {
 
 	public static void sendPassword(ActionRequest actionRequest)
 		throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+				actionRequest);
 
-		sendPassword(actionRequest, null, null, null, null);
+		String toAddress = ParamUtil.getString(request, "emailAddress");
+
+		sendPassword(actionRequest, toAddress, null, null, null, null);
 	}
 
 	public static void sendPassword(
-			ActionRequest actionRequest, String fromName,
+			ActionRequest actionRequest, String toAddress, String fromName,
 			String fromAddress, String subject, String body)
 		throws Exception {
 
@@ -353,17 +357,15 @@ public class LoginUtil {
 			return;
 		}
 
-		String emailAddress = ParamUtil.getString(request, "emailAddress");
-
 		String remoteAddr = request.getRemoteAddr();
 		String remoteHost = request.getRemoteHost();
 		String userAgent = request.getHeader(HttpHeaders.USER_AGENT);
 
 		UserLocalServiceUtil.sendPassword(
-			company.getCompanyId(), emailAddress, remoteAddr, remoteHost,
+			company.getCompanyId(), toAddress, remoteAddr, remoteHost,
 			userAgent, fromName, fromAddress, subject, body);
 
-		SessionMessages.add(actionRequest, "request_processed", emailAddress);
+		SessionMessages.add(actionRequest, "request_processed", toAddress);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(LoginUtil.class);
