@@ -56,7 +56,7 @@ if (className.equals(BlogsEntry.class.getName())) {
 	}
 
 	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/blogs/find_entry?entryId=" + entry.getEntryId() + "&noSuchEntryRedirect=" + HttpUtil.encodeURL(viewFullContentURL.toString()) : viewFullContentURL.toString();
-	cssClassName = "blog-entry";
+	cssClassName = "blog";
 }
 else if (className.equals(BookmarksEntry.class.getName())) {
 	BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(classPK);
@@ -66,7 +66,7 @@ else if (className.equals(BookmarksEntry.class.getName())) {
 	}
 
 	viewURL = viewInContext ? entry.getUrl() : viewFullContentURL.toString();
-	cssClassName = "bookmark-entry";
+	cssClassName = "bookmark";
 }
 else if (className.equals(DLFileEntry.class.getName())) {
 	DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(classPK);
@@ -85,7 +85,7 @@ else if (className.equals(DLFileEntry.class.getName())) {
 	}
 
 	viewURL = viewInContext ? themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + fileEntry.getFolderId() + "&name=" + HttpUtil.encodeURL(fileEntry.getName()) : viewFullContentURL.toString();
-	cssClassName = "dl-file-entry";
+	cssClassName = "document";
 }
 else if (className.equals(IGImage.class.getName())) {
 	IGImage image = IGImageLocalServiceUtil.getImage(classPK);
@@ -129,7 +129,7 @@ else if (className.equals(MBMessage.class.getName())) {
 	MBMessage message = MBMessageLocalServiceUtil.getMBMessage(classPK);
 
 	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/message_boards/find_message?messageId=" + message.getMessageId() : viewFullContentURL.toString();
-	cssClassName = "mb-entry";
+	cssClassName = "thread";
 }
 else if (className.equals(WikiPage.class.getName())) {
 	WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.getPageResource(classPK);
@@ -137,7 +137,7 @@ else if (className.equals(WikiPage.class.getName())) {
 	WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(pageResource.getNodeId(), pageResource.getTitle());
 
 	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/wiki/find_page?pageResourcePrimKey=" + wikiPage.getResourcePrimKey() : viewFullContentURL.toString();
-	cssClassName = "wiki-page";
+	cssClassName = "wiki";
 }
 %>
 

@@ -60,7 +60,7 @@ if (className.equals(BlogsEntry.class.getName())) {
 	summary = StringUtil.shorten(HtmlUtil.stripHtml(entry.getContent()), abstractLength);
 	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/blogs/find_entry?entryId=" + entry.getEntryId() + "&noSuchEntryRedirect=" + HttpUtil.encodeURL(viewFullContentURL.toString()) : viewFullContentURL.toString();
 	viewURLMessage = viewInContext ? "view-in-context" : "read-more";
-	cssClassName = "blog-entry";
+	cssClassName = "blog";
 }
 else if (className.equals(BookmarksEntry.class.getName())) {
 	BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(classPK);
@@ -72,7 +72,7 @@ else if (className.equals(BookmarksEntry.class.getName())) {
 	summary = entry.getComments();
 	viewURL = viewInContext ? entry.getUrl() : viewFullContentURL.toString();
 	viewURLMessage = viewInContext ? "go" : "read-more";
-	cssClassName = "bookmark-entry";
+	cssClassName = "bookmark";
 }
 else if (className.equals(DLFileEntry.class.getName())) {
 	DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(classPK);
@@ -105,7 +105,7 @@ else if (className.equals(DLFileEntry.class.getName())) {
 
 	viewURL = viewInContext ? fileEntryURL : viewFullContentURL.toString();
 	viewURLMessage = viewInContext ? "download" : "read-more";
-	cssClassName = "dl-file-entry";
+	cssClassName = "document";
 }
 else if (className.equals(IGImage.class.getName())) {
 	IGImage image = IGImageLocalServiceUtil.getImage(classPK);
@@ -198,7 +198,7 @@ else if (className.equals(MBMessage.class.getName())) {
 	summary = StringUtil.shorten(message.getBody(), abstractLength);
 	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/message_boards/find_message?messageId=" + message.getMessageId() : viewFullContentURL.toString();
 	viewURLMessage = viewInContext ? "view-in-context" : "read-more";
-	cssClassName = "mb-entry";
+	cssClassName = "thread";
 }
 else if (className.equals(WikiPage.class.getName())) {
 	WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.getPageResource(classPK);
@@ -214,7 +214,7 @@ else if (className.equals(WikiPage.class.getName())) {
 	summary = StringUtil.shorten(summary, abstractLength);
 	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/wiki/find_page?pageResourcePrimKey=" + wikiPage.getResourcePrimKey() : viewFullContentURL.toString();
 	viewURLMessage = viewInContext ? "view-in-context" : "read-more";
-	cssClassName = "wiki-page";
+	cssClassName = "wiki";
 }
 %>
 

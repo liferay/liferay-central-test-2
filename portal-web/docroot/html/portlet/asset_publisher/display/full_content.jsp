@@ -56,7 +56,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 		<c:choose>
 			<c:when test="<%= showAssetTitle %>">
-				<h3 class="asset-title blog-entry">
+				<h3 class="asset-title blog">
 					<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
 
 					<%= title %>
@@ -114,7 +114,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 		<c:choose>
 			<c:when test="<%= showAssetTitle %>">
-				<h3 class="asset-title bookmark-entry">
+				<h3 class="asset-title bookmark">
 					<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
 
 					<%= title %>
@@ -157,7 +157,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 		<c:choose>
 			<c:when test="<%= showAssetTitle %>">
-				<h3 class="asset-title dl-file-entry">
+				<h3 class="asset-title document">
 					<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
 
 					<%= title %>
@@ -380,7 +380,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 		<c:choose>
 			<c:when test="<%= showAssetTitle %>">
-				<h3 class="asset-title mb-entry">
+				<h3 class="asset-title thread">
 					<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
 
 					<%= message.getSubject() %>
@@ -406,7 +406,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 	<c:when test="<%= className.equals(WikiPage.class.getName()) %>">
 		<c:choose>
 			<c:when test="<%= showAssetTitle %>">
-				<h3 class="asset-title wiki-page">
+				<h3 class="asset-title wiki">
 					<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
 
 					<%= title %>

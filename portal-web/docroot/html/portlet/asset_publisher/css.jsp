@@ -92,15 +92,15 @@
 	padding-left: 25px;
 }
 
-.portlet-asset-publisher .blog-entry {
+.portlet-asset-publisher .blog {
 	background-image: url(<%= PortalUtil.getPathContext() %>/html/icons/blogs.png);
 }
 
-.portlet-asset-publisher .bookmark-entry {
+.portlet-asset-publisher .bookmark {
 	background-image: url(<%= themeImagesPath %>/ratings/star_hover.png);
 }
 
-.portlet-asset-publisher .dl-file-entry {
+.portlet-asset-publisher .document {
 	background-image: url(<%= themeImagesPath %>/common/clip.png);
 }
 
@@ -125,7 +125,7 @@
 	padding-top: 0;
 }
 
-.portlet-asset-publisher .mb-entry {
+.portlet-asset-publisher .thread {
 	background-image: url(<%= PortalUtil.getPathContext() %>/html/icons/message_boards.png);
 }
 
@@ -193,7 +193,7 @@
 	background-image: url(<%= themeImagesPath %>/common/history.png);
 }
 
-.portlet-asset-publisher .wiki-page {
+.portlet-asset-publisher .wiki {
 	background-image: url(<%= themeImagesPath %>/common/pages.png);
 }
 
