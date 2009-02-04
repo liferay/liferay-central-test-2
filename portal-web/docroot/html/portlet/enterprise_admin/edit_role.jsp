@@ -191,7 +191,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 		</c:choose>
 	</div>
 
-	<c:if test="<%= (role != null) && PortalUtil.isSystemRole(role.getName()) %>">
+	<c:if test="<%= (role != null) && !PortalUtil.isSystemRole(role.getName()) %>">
 
 		<%
 		String[] subtypes = null;
