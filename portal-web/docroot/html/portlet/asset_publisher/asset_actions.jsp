@@ -27,6 +27,7 @@
 <%
 String className = (String)request.getAttribute("view.jsp-className");
 long classPK = ((Long)request.getAttribute("view.jsp-classPK")).longValue();
+
 boolean showIconLabel = ((Boolean)request.getAttribute("view.jsp-showIconLabel")).booleanValue();
 
 boolean showEditIcon = false;

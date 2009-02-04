@@ -28,7 +28,7 @@
 		<liferay-ui:message key="display-style" />
 	</td>
 	<td>
-		<select name="<portlet:namespace />displayStyle" id="<portlet:namespace />displayStyle">
+		<select id="<portlet:namespace />displayStyle" name="<portlet:namespace />displayStyle">
 			<option <%= displayStyle.equals("full-content") ? "selected" : "" %> value="full-content"><liferay-ui:message key="full-content" /></option>
 			<option <%= displayStyle.equals("abstracts") ? "selected" : "" %> value="abstracts"><liferay-ui:message key="abstracts" /></option>
 			<option <%= displayStyle.equals("title-list") ? "selected" : "" %> value="title-list"><liferay-ui:message key="title-list" /></option>
@@ -60,7 +60,7 @@
 </tr>
 <tr class="hidden-field" id="showContextLink">
 	<td>
-		<liferay-ui:message key="show-link-to-view-in-specific-portlet" />
+		<liferay-ui:message key="show-context-link" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="showContextLink" defaultValue="<%= showContextLink %>" />
@@ -72,9 +72,9 @@
 	</td>
 	<td>
 		<select name="<portlet:namespace />assetLinkBehaviour">
-				<option <%= assetLinkBehaviour.equals("showFullContent") ? "selected" : "" %> value="showFullContent"><liferay-ui:message key="show-full-content" /></option>
-				<option <%= assetLinkBehaviour.equals("viewInSpecificPortlet") ? "selected" : "" %> value="viewInSpecificPortlet"><liferay-ui:message key="view-in-specific-portlet" /></option>
-			</select>
+			<option <%= assetLinkBehaviour.equals("showFullContent") ? "selected" : "" %> value="showFullContent"><liferay-ui:message key="show-full-content" /></option>
+			<option <%= assetLinkBehaviour.equals("viewInPortlet") ? "selected" : "" %> value="viewInPortlet"><liferay-ui:message key="view-in-a-specific-portlet" /></option>
+		</select>
 	</td>
 </tr>
 
@@ -275,14 +275,14 @@
 			var selectDisplayStyle = jQuery('#<portlet:namespace />displayStyle');
 
 			function showHiddenFields () {
-				var hiddenLines = jQuery('.hidden-field');
+				var hiddenFields = jQuery('.hidden-field');
 				var abstractLength = jQuery('#abstractLength');
 				var showAssetTitle = jQuery('#showAssetTitle');
 				var showContextLink = jQuery('#showContextLink');
 				var assetLinkBehaviour = jQuery('#assetLinkBehaviour');
 				var selectDisplayStyle = jQuery('#<portlet:namespace />displayStyle');
 
-				hiddenLines.hide();
+				hiddenFields.hide();
 
 				if (selectDisplayStyle.val() == 'full-content') {
 					showAssetTitle.show();

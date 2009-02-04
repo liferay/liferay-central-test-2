@@ -283,8 +283,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		preferences.setValue(
 			"show-context-link", String.valueOf(showContextLink));
 		preferences.setValue("abstract-length", String.valueOf(abstractLength));
-		preferences.setValue(
-			"asset-link-behaviour", assetLinkBehaviour);
+		preferences.setValue("asset-link-behaviour", assetLinkBehaviour);
 		preferences.setValue("order-by-column-1", orderByColumn1);
 		preferences.setValue("order-by-column-2", orderByColumn2);
 		preferences.setValue("order-by-type-1", orderByType1);
@@ -337,8 +336,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		preferences.setValue(
 			"show-context-link", String.valueOf(showContextLink));
 		preferences.setValue("abstract-length", String.valueOf(abstractLength));
-		preferences.setValue(
-			"asset-link-behaviour", assetLinkBehaviour);
+		preferences.setValue("asset-link-behaviour", assetLinkBehaviour);
 		preferences.setValue(
 			"show-available-locales", String.valueOf(showAvailableLocales));
 		preferences.setValue("enable-comments", String.valueOf(enableComments));

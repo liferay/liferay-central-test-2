@@ -38,7 +38,7 @@ long classPK = ((Long)request.getAttribute("view.jsp-classPK")).longValue();
 
 boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 
-request.setAttribute ("view.jsp-showIconLabel", true);
+request.setAttribute("view.jsp-showIconLabel", true);
 %>
 
 <c:choose>
@@ -58,6 +58,7 @@ request.setAttribute ("view.jsp-showIconLabel", true);
 			<c:when test="<%= showAssetTitle %>">
 				<h3 class="asset-title blog-entry">
 					<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
+
 					<%= title %>
 				</h3>
 			</c:when>
@@ -115,6 +116,7 @@ request.setAttribute ("view.jsp-showIconLabel", true);
 			<c:when test="<%= showAssetTitle %>">
 				<h3 class="asset-title bookmark-entry">
 					<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
+
 					<%= title %>
 				</h3>
 			</c:when>
@@ -145,18 +147,19 @@ request.setAttribute ("view.jsp-showIconLabel", true);
 		<%
 		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(classPK);
 
-		PortletURL docURL = new PortletURLImpl(request, PortletKeys.DOCUMENT_LIBRARY, plid, PortletRequest.RENDER_PHASE);
+		PortletURL viewFolderURL = new PortletURLImpl(request, PortletKeys.DOCUMENT_LIBRARY, plid, PortletRequest.RENDER_PHASE);
 
-		docURL.setWindowState(WindowState.MAXIMIZED);
+		viewFolderURL.setWindowState(WindowState.MAXIMIZED);
 
-		docURL.setParameter("struts_action", "/document_library/view");
-		docURL.setParameter("folderId", String.valueOf(fileEntry.getFolderId()));
+		viewFolderURL.setParameter("struts_action", "/document_library/view");
+		viewFolderURL.setParameter("folderId", String.valueOf(fileEntry.getFolderId()));
 		%>
 
 		<c:choose>
 			<c:when test="<%= showAssetTitle %>">
 				<h3 class="asset-title dl-file-entry">
 					<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
+
 					<%= title %>
 				</h3>
 			</c:when>
@@ -176,7 +179,7 @@ request.setAttribute ("view.jsp-showIconLabel", true);
 
 			<c:if test="<%= showContextLink %>">
 				<div class="asset-more">
-					<a href="<%= docURL.toString() %>"><liferay-ui:message key="view-folder" /> &raquo;</a>
+					<a href="<%= viewFolderURL.toString() %>"><liferay-ui:message key="view-folder" /> &raquo;</a>
 				</div>
 			</c:if>
 
@@ -214,18 +217,19 @@ request.setAttribute ("view.jsp-showIconLabel", true);
 		<%
 		IGImage image = IGImageLocalServiceUtil.getImage(classPK);
 
-		PortletURL imageURL = new PortletURLImpl(request, PortletKeys.IMAGE_GALLERY, plid, PortletRequest.RENDER_PHASE);
+		PortletURL viewImageURL = new PortletURLImpl(request, PortletKeys.IMAGE_GALLERY, plid, PortletRequest.RENDER_PHASE);
 
-		imageURL.setWindowState(WindowState.MAXIMIZED);
+		viewImageURL.setWindowState(WindowState.MAXIMIZED);
 
-		imageURL.setParameter("struts_action", "/image_gallery/view");
-		imageURL.setParameter("folderId", String.valueOf(image.getFolderId()));
+		viewImageURL.setParameter("struts_action", "/image_gallery/view");
+		viewImageURL.setParameter("folderId", String.valueOf(image.getFolderId()));
 		%>
 
 		<c:choose>
 			<c:when test="<%= showAssetTitle %>">
 				<h3 class="asset-title image">
 					<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
+
 					<%= title %>
 				</h3>
 			</c:when>
@@ -243,10 +247,9 @@ request.setAttribute ("view.jsp-showIconLabel", true);
 
 			<c:if test="<%= showContextLink %>">
 				<div class="asset-more">
-					<a href="<%= imageURL.toString() %>"><liferay-ui:message key="view-album" /> &raquo;</a>
+					<a href="<%= viewImageURL.toString() %>"><liferay-ui:message key="view-album" /> &raquo;</a>
 				</div>
 			</c:if>
-
 		</div>
 	</c:when>
 	<c:when test="<%= className.equals(JournalArticle.class.getName()) %>">
@@ -270,11 +273,11 @@ request.setAttribute ("view.jsp-showIconLabel", true);
 		%>
 
 		<c:if test="<%= articleDisplay != null %>">
-
 			<c:choose>
 				<c:when test="<%= showAssetTitle %>">
 					<h3 class="asset-title web-content">
 						<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
+
 						<%= title %>
 					</h3>
 				</c:when>
@@ -379,6 +382,7 @@ request.setAttribute ("view.jsp-showIconLabel", true);
 			<c:when test="<%= showAssetTitle %>">
 				<h3 class="asset-title mb-entry">
 					<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
+
 					<%= message.getSubject() %>
 				</h3>
 			</c:when>
@@ -400,11 +404,11 @@ request.setAttribute ("view.jsp-showIconLabel", true);
 		</div>
 	</c:when>
 	<c:when test="<%= className.equals(WikiPage.class.getName()) %>">
-
 		<c:choose>
 			<c:when test="<%= showAssetTitle %>">
 				<h3 class="asset-title wiki-page">
 					<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
+
 					<%= title %>
 				</h3>
 			</c:when>

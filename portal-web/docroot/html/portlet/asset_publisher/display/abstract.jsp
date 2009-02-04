@@ -35,13 +35,14 @@ String title = (String)request.getAttribute("view.jsp-title");
 String summary = (String)request.getAttribute("view.jsp-summary");
 String viewURL = (String)request.getAttribute("view.jsp-viewURL");
 String viewURLMessage = (String)request.getAttribute("view.jsp-viewURLMessage");
+String cssClassName = StringPool.BLANK;
 
 String className = (String)request.getAttribute("view.jsp-className");
 long classPK = ((Long)request.getAttribute("view.jsp-classPK")).longValue();
 
 boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 
-String cssEntry = StringPool.BLANK;
+request.setAttribute("view.jsp-showIconLabel", true);
 
 PortletURL viewFullContentURL = renderResponse.createRenderURL();
 
@@ -56,10 +57,10 @@ if (className.equals(BlogsEntry.class.getName())) {
 		title = entry.getTitle();
 	}
 
-	cssEntry = "blog-entry";
 	summary = StringUtil.shorten(HtmlUtil.stripHtml(entry.getContent()), abstractLength);
-	viewURL = viewInContext ?  themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/blogs/find_entry?entryId=" + entry.getEntryId() + "&notFoundRedirect=" + HttpUtil.encodeURL(viewFullContentURL.toString()) : viewFullContentURL.toString() ;
+	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/blogs/find_entry?entryId=" + entry.getEntryId() + "&notFoundRedirect=" + HttpUtil.encodeURL(viewFullContentURL.toString()) : viewFullContentURL.toString();
 	viewURLMessage = viewInContext ? "view-in-context" : "read-more";
+	cssClassName = "blog-entry";
 }
 else if (className.equals(BookmarksEntry.class.getName())) {
 	BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(classPK);
@@ -68,19 +69,20 @@ else if (className.equals(BookmarksEntry.class.getName())) {
 		title = entry.getName();
 	}
 
-	cssEntry = "bookmark-entry";
 	summary = entry.getComments();
 	viewURL = viewInContext ? entry.getUrl() : viewFullContentURL.toString();
 	viewURLMessage = viewInContext ? "go" : "read-more";
+	cssClassName = "bookmark-entry";
 }
 else if (className.equals(DLFileEntry.class.getName())) {
 	DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(classPK);
-	String downloadURL = themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + fileEntry.getFolderId() + "&name=" + HttpUtil.encodeURL(fileEntry.getName());
+
+	String fileEntryURL = themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + fileEntry.getFolderId() + "&name=" + HttpUtil.encodeURL(fileEntry.getName());
 
 	StringBuilder sb = new StringBuilder();
 
 	sb.append("<a href=\"");
-	sb.append(downloadURL);
+	sb.append(fileEntryURL);
 	sb.append("\"><img align=\"left\" border=\"0\" src=\"");
 	sb.append(themeDisplay.getPathThemeImages());
 	sb.append("/document_library/");
@@ -89,21 +91,21 @@ else if (className.equals(DLFileEntry.class.getName())) {
 	sb.append(fileEntry.getTitle());
 	sb.append("</a>");
 
-	cssEntry = "dl-file-entry";
 	summary = fileEntry.getDescription();
 
 	if (Validator.isNull(title)) {
 		title = sb.toString();
 	}
 	else {
-		sb.append ("<br />");
-		sb.append (summary);
+		sb.append("<br />");
+		sb.append(summary);
 
 		summary = sb.toString();
 	}
 
-	viewURL = viewInContext ? downloadURL : viewFullContentURL.toString();
+	viewURL = viewInContext ? fileEntryURL : viewFullContentURL.toString();
 	viewURLMessage = viewInContext ? "download" : "read-more";
+	cssClassName = "dl-file-entry";
 }
 else if (className.equals(IGImage.class.getName())) {
 	IGImage image = IGImageLocalServiceUtil.getImage(classPK);
@@ -115,27 +117,26 @@ else if (className.equals(IGImage.class.getName())) {
 	imageURL.setParameter("struts_action", "/image_gallery/view");
 	imageURL.setParameter("folderId", String.valueOf(image.getFolderId()));
 
-	cssEntry = "image";
 	viewURL = viewInContext ? imageURL.toString() : viewFullContentURL.toString();
 	viewURLMessage = viewInContext ? "view-album" : "view";
-
-	Image smallImage = ImageLocalServiceUtil.getImage(image.getSmallImageId());
-	long smallImageId = 0;
+	cssClassName = "image";
 
 	StringBuilder sb = new StringBuilder();
 
+	Image smallImage = ImageLocalServiceUtil.getImage(image.getSmallImageId());
+
 	if (smallImage != null) {
-		smallImageId = smallImage.getImageId();
+		long smallImageId = smallImage.getImageId();
+
 		sb.append("<a href=\"");
 		sb.append(viewURL);
-		sb.append("\"><img align=\"left\" border=\"0\" src=\"");
+		sb.append("\"><img align=\"left\" alt=\"");
+		sb.append(LanguageUtil.get(pageContext, viewURLMessage));
+		sb.append("\" border=\"0\" src=\"");
 		sb.append(themeDisplay.getPathImage());
 		sb.append("/image_gallery?img_id=");
 		sb.append(smallImageId);
-		sb.append("\" alt=\"");
-		sb.append(LanguageUtil.get(pageContext, viewURLMessage));
-		sb.append("\"  style=\"float: left; padding-right: 10px;\" />");
-		sb.append("</a> ");
+		sb.append("\" style=\"float: left; padding-right: 10px;\" /></a>");
 	}
 
 	sb.append(StringUtil.shorten(image.getDescription(), abstractLength));
@@ -177,7 +178,6 @@ else if (className.equals(JournalArticle.class.getName())) {
 
 		sb.append(articleDisplay.getDescription());
 
-		cssEntry = "web-content";
 		summary = sb.toString();
 
 		if (Validator.isNull(summary)) {
@@ -186,6 +186,7 @@ else if (className.equals(JournalArticle.class.getName())) {
 
 		viewURL = viewFullContentURL.toString();
 		viewURLMessage = "read-more";
+		cssClassName = "web-content";
 	}
 	else {
 		show = false;
@@ -194,10 +195,10 @@ else if (className.equals(JournalArticle.class.getName())) {
 else if (className.equals(MBMessage.class.getName())) {
 	MBMessage message = MBMessageLocalServiceUtil.getMessage(classPK);
 
-	cssEntry = "mb-entry";
 	summary = StringUtil.shorten(message.getBody(), abstractLength);
-	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/message_boards/find_message?messageId=" + message.getMessageId() :  viewFullContentURL.toString();
+	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/message_boards/find_message?messageId=" + message.getMessageId() : viewFullContentURL.toString();
 	viewURLMessage = viewInContext ? "view-in-context" : "read-more";
+	cssClassName = "mb-entry";
 }
 else if (className.equals(WikiPage.class.getName())) {
 	WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.getPageResource(classPK);
@@ -210,18 +211,16 @@ else if (className.equals(WikiPage.class.getName())) {
 		summary = HtmlUtil.stripHtml(summary);
 	}
 
-	cssEntry = "wiki-page";
 	summary = StringUtil.shorten(summary, abstractLength);
 	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/wiki/find_page?pageResourcePrimKey=" + wikiPage.getResourcePrimKey() : viewFullContentURL.toString();
 	viewURLMessage = viewInContext ? "view-in-context" : "read-more";
+	cssClassName = "wiki-page";
 }
-
-request.setAttribute ("view.jsp-showIconLabel", true);
 %>
 
 <c:if test="<%= show %>">
 	<div class="asset-abstract">
-		<h3 class="asset-title <%= cssEntry %>">
+		<h3 class="asset-title <%= cssClassName %>">
 			<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
 
 			<c:choose>

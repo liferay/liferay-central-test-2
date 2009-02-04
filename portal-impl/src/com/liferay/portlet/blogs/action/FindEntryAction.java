@@ -108,7 +108,8 @@ public class FindEntryAction extends Action {
 				request, "notFoundRedirect");
 
 			if (e.getClass().equals(NoSuchLayoutException.class) &&
-					Validator.isNotNull(notFoundRedirect) ) {
+				Validator.isNotNull(notFoundRedirect)) {
+
 				response.sendRedirect(notFoundRedirect);
 			}
 			else {

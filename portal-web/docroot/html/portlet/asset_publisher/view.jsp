@@ -26,12 +26,13 @@
 
 <c:if test="<%= !showAssetTitle %>">
 	<style type="text/css">
-	.portlet-asset-publisher .asset-metadata, .portlet-asset-publisher .asset-content {
-		margin-left: 10px;
-	}
-	.portlet-asset-publisher .asset-metadata {
-		margin-top: 10px;
-	}
+		.portlet-asset-publisher .asset-metadata, .portlet-asset-publisher .asset-content {
+			margin-left: 10px;
+		}
+
+		.portlet-asset-publisher .asset-metadata {
+			margin-top: 10px;
+		}
 	</style>
 </c:if>
 
@@ -157,7 +158,7 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 </c:choose>
 
 <c:if test='<%= !paginationType.equals("none") && (searchContainer.getTotal() > searchContainer.getResults().size()) %>'>
-	<liferay-ui:search-paginator searchContainer="<%= searchContainer %>"  type="<%= paginationType %>" />
+	<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="<%= paginationType %>" />
 </c:if>
 
 <%!

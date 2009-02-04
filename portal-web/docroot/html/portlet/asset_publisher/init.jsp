@@ -168,11 +168,11 @@ Arrays.sort(entries);
 
 String[] manualEntries = preferences.getValues("manual-entries", new String[0]);
 
+boolean viewInContext = assetLinkBehaviour.equals("viewInPortlet");
+
 boolean showPortletWithNoResults = false;
 boolean groupByClass = false;
 boolean allowEmptyResults = false;
-
-boolean viewInContext = Validator.equals(assetLinkBehaviour, "viewInSpecificPortlet");
 
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 %>
