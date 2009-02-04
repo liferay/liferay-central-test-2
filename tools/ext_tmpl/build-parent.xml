@@ -279,7 +279,6 @@
 	<target name="deploy-properties">
 		<copy todir="${app.server.classes.portal.dir}" overwrite="yes">
 			<fileset dir="ext-impl/src" includes="portal-*.properties,system-*.properties" />
-			<fileset dir="ext-impl/src/content" includes="language-*.properties" />
 		</copy>
 	</target>
 </project>
