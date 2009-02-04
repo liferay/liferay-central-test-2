@@ -71,6 +71,16 @@ if (choiceName > 0) {
 %>
 
 <script type="text/javascript">
+	function <portlet:namespace />addPollChoice() {
+		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addPollChoiceURL">
+			<portlet:param name="struts_action" value="/polls/edit_question" />
+			<portlet:param name="<%= EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + (char)(96 + choicesCount + 1) %>" value="" />
+		</portlet:actionURL>
+
+		document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount + 1 %>';
+		submitForm(document.<portlet:namespace />fm, '<%= addPollChoiceURL %>');
+	}
+
 	function <portlet:namespace />disableInputDate(date, checked) {
 		eval("document.<portlet:namespace />fm.<portlet:namespace />" + date + "Month.disabled = " + checked + ";");
 		eval("document.<portlet:namespace />fm.<portlet:namespace />" + date + "Day.disabled = " + checked + ";");
@@ -82,13 +92,6 @@ if (choiceName > 0) {
 
 	function <portlet:namespace />saveQuestion() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= question == null ? Constants.ADD : Constants.UPDATE %>";
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />addPollChoice() {
-		jQuery('input[name="<portlet:namespace />choicesCount"]').val('<%= choicesCount + 1 %>');
-		jQuery('form[name="<portlet:namespace />fm"]').prepend('<input name="<portlet:namespace /><%= EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + (char)(96 + choicesCount + 1) %>" type="hidden" value="" />');
-
 		submitForm(document.<portlet:namespace />fm);
 	}
 </script>
