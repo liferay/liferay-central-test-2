@@ -332,17 +332,15 @@ public class LoginUtil {
 
 	public static void sendPassword(ActionRequest actionRequest)
 		throws Exception {
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-				actionRequest);
 
-		String toAddress = ParamUtil.getString(request, "emailAddress");
+		String toAddress = ParamUtil.getString(actionRequest, "emailAddress");
 
-		sendPassword(actionRequest, toAddress, null, null, null, null);
+		sendPassword(actionRequest, null, null, toAddress, null, null);
 	}
 
 	public static void sendPassword(
-			ActionRequest actionRequest, String toAddress, String fromName,
-			String fromAddress, String subject, String body)
+			ActionRequest actionRequest, String fromName, String fromAddress,
+			String toAddress, String subject, String body)
 		throws Exception {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(

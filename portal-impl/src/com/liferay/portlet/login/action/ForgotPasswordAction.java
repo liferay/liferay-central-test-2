@@ -74,9 +74,10 @@ public class ForgotPasswordAction extends PortletAction {
 						CaptchaUtil.check(actionRequest);
 					}
 
+					User user = getUser(actionRequest);
+
 					actionRequest.setAttribute(
-						ForgotPasswordAction.class.getName(),
-						getUser(actionRequest));
+						ForgotPasswordAction.class.getName(), user);
 				}
 				else {
 					sendPassword(actionRequest, actionResponse);
@@ -169,17 +170,17 @@ public class ForgotPasswordAction extends PortletAction {
 
 		String languageId = LanguageUtil.getLanguageId(actionRequest);
 
-		String emailToAddress = user.getEmailAddress();
 		String emailFromName = preferences.getValue("emailFromName", null);
 		String emailFromAddress = preferences.getValue(
 			"emailFromAddress", null);
+		String emailToAddress = user.getEmailAddress();
 		String subject = preferences.getValue(
 			"emailPasswordSentSubject_" + languageId, null);
 		String body = preferences.getValue(
 			"emailPasswordSentBody_" + languageId, null);
 
 		LoginUtil.sendPassword(
-			actionRequest, emailToAddress, emailFromName, emailFromAddress,
+			actionRequest, emailFromName, emailFromAddress, emailToAddress,
 			subject, body);
 
 		sendRedirect(actionRequest, actionResponse);
