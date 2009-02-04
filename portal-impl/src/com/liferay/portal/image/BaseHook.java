@@ -20,27 +20,13 @@
  * SOFTWARE.
  */
 
-package com.liferay.imagegallery.util;
-
-import com.liferay.portal.kernel.util.InstancePool;
-import com.liferay.portal.util.PropsValues;
+package com.liferay.portal.image;
 
 /**
- * <a href="HookFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseHook.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  *
  */
-public class HookFactory {
-
-	public static Hook getInstance() {
-		if (_hook == null) {
-			_hook = (Hook)InstancePool.get(PropsValues.IG_HOOK_IMPL);
-		}
-
-		return _hook;
-	}
-
-	private static Hook _hook = null;
-
+public abstract class BaseHook implements Hook {
 }

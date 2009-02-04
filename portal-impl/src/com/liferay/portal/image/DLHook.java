@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.imagegallery.util;
+package com.liferay.portal.image;
 
 import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.documentlibrary.service.DLServiceUtil;
@@ -38,12 +38,12 @@ import java.io.InputStream;
 import java.util.Date;
 
 /**
- * <a href="DocumentLibraryHook.java.html"><b><i>View Source</i></b></a>
+ * <a href="DLHook.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  *
  */
-public class DocumentLibraryHook extends BaseHook {
+public class DLHook extends BaseHook {
 
 	public void deleteImage(Image image)
 		throws PortalException, SystemException {
@@ -67,8 +67,8 @@ public class DocumentLibraryHook extends BaseHook {
 		try {
 			bytes = FileUtil.getBytes(is);
 		}
-		catch (IOException e) {
-			throw new SystemException(e);
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
 		}
 
 		return bytes;

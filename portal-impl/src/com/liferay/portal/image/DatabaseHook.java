@@ -20,15 +20,35 @@
  * SOFTWARE.
  */
 
-package com.liferay.imagegallery.util;
+package com.liferay.portal.image;
+
+import com.liferay.portal.kernel.util.Base64;
+import com.liferay.portal.model.Image;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
 /**
-
- * <a href="BaseHook.java.html"><b><i>View Source</i></b></a>
+ * <a href="DatabaseHook.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  *
  */
-public abstract class BaseHook implements Hook {
+public class DatabaseHook extends BaseHook {
+
+	public void deleteImage(Image image) {
+	}
+
+	public byte[] getImageAsBytes(Image image) {
+		return (byte[])Base64.stringToObject(image.getText());
+	}
+
+	public InputStream getImageAsStream(Image image) {
+		return new ByteArrayInputStream(image.getTextObj());
+	}
+
+	public void updateImage(Image image, String type, byte[] bytes) {
+		image.setTextObj(bytes);
+	}
 
 }

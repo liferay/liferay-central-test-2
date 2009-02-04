@@ -22,11 +22,11 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.imagegallery.util.Hook;
-import com.liferay.imagegallery.util.HookFactory;
 import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.image.Hook;
+import com.liferay.portal.image.HookFactory;
 import com.liferay.portal.kernel.image.ImageBag;
 import com.liferay.portal.kernel.image.ImageProcessorUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -252,7 +252,7 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 	}
 
 	public Image updateImage(long imageId, byte[] bytes)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		try {
 			Image image = getImage(bytes);
@@ -267,7 +267,7 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 	}
 
 	public Image updateImage(long imageId, File file)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		try {
 			Image image = getImage(file);
@@ -282,7 +282,7 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 	}
 
 	public Image updateImage(long imageId, InputStream is)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		try {
 			Image image = getImage(is);
@@ -299,7 +299,7 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 	public Image updateImage(
 			long imageId, byte[] bytes, String type, int height, int width,
 			int size)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		Image image = imagePersistence.fetchByPrimaryKey(imageId);
 
@@ -313,16 +313,11 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 		image.setWidth(width);
 		image.setSize(size);
 
+		imagePersistence.update(image, false);
+
 		Hook hook = HookFactory.getInstance();
 
-		try {
-			hook.updateImage(image, type, bytes);
-		}
-		catch (PortalException e) {
-			throw new SystemException(e);
-		}
-
-		imagePersistence.update(image, false);
+		hook.updateImage(image, type, bytes);
 
 		ImageServletTokenUtil.resetToken(imageId);
 

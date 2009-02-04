@@ -667,7 +667,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			long largeImageId, RenderedImage renderedImage, long smallImageId,
 			long custom1ImageId, long custom2ImageId, byte[] bytes,
 			String contentType)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		try {
 
@@ -701,7 +701,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	protected void saveScaledImage(
 			RenderedImage renderedImage, long imageId, String contentType,
 			int dimension)
-		throws IOException, SystemException {
+		throws IOException, PortalException, SystemException {
 
 		RenderedImage thumbnail = ImageProcessorUtil.scale(
 			renderedImage, dimension, dimension);

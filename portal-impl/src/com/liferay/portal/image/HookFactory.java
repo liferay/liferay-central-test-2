@@ -20,32 +20,27 @@
  * SOFTWARE.
  */
 
-package com.liferay.imagegallery.util;
+package com.liferay.portal.image;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.model.Image;
-
-import java.io.InputStream;
+import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.util.PropsValues;
 
 /**
- * <a href="Hook.java.html"><b><i>View Source</i></b></a>
+ * <a href="HookFactory.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  *
  */
-public interface Hook {
+public class HookFactory {
 
-	public void deleteImage(Image imageId)
-		throws PortalException, SystemException;
+	public static Hook getInstance() {
+		if (_hook == null) {
+			_hook = (Hook)InstancePool.get(PropsValues.IMAGE_HOOK_IMPL);
+		}
 
-	public byte[] getImageAsBytes(Image image)
-		throws PortalException, SystemException;
+		return _hook;
+	}
 
-	public InputStream getImageAsStream(Image image)
-		throws PortalException, SystemException;
-
-	public void updateImage(Image image, String type, byte[] bytes)
-		throws PortalException, SystemException;
+	private static Hook _hook = null;
 
 }

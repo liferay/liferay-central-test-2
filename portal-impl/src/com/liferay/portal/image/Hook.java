@@ -20,58 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.imagegallery.util;
+package com.liferay.portal.image;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.model.Image;
-import com.liferay.portal.util.PropsKeys;
-import com.liferay.portal.util.PropsUtil;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.InputStream;
 
 /**
- * <a href="DatabaseHook.java.html"><b><i>View Source</i></b></a>
+ * <a href="Hook.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  *
  */
-public class DatabaseHook extends BaseHook {
+public interface Hook {
 
-	public DatabaseHook() {
-		_rootDir = new File(_ROOT_DIR);
+	public void deleteImage(Image imageId)
+		throws PortalException, SystemException;
 
-		if (!_rootDir.exists()) {
-			_rootDir.mkdirs();
-		}
-	}
-
-	public void deleteImage(Image image)
-		throws PortalException, SystemException {
-	}
-
-	public byte[] getImageAsBytes(Image image) {
-		return (byte[]) Base64.stringToObject(image.getText());
-	}
+	public byte[] getImageAsBytes(Image image)
+		throws PortalException, SystemException;
 
 	public InputStream getImageAsStream(Image image)
-		throws PortalException, SystemException {
-
-		return new ByteArrayInputStream(image.getTextObj());
-	}
+		throws PortalException, SystemException;
 
 	public void updateImage(Image image, String type, byte[] bytes)
-		throws SystemException {
-
-		image.setTextObj(bytes);
-	}
-
-	private static final String _ROOT_DIR = PropsUtil.get(
-		PropsKeys.IG_HOOK_FILE_SYSTEM_ROOT_DIR);
-
-	private File _rootDir;
+		throws PortalException, SystemException;
 
 }

@@ -466,9 +466,6 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.HOT_UNDEPLOY_ON_REDEPLOY));
 
-	public static final String IG_HOOK_IMPL =
-		PropsUtil.get(PropsKeys.IG_HOOK_IMPL);
-
 	public static final int IG_IMAGE_CUSTOM_1_MAX_DIMENSION =
 		GetterUtil.getInteger(
 			PropsUtil.get(PropsKeys.IG_IMAGE_CUSTOM_1_MAX_DIMENSION));
@@ -487,11 +484,17 @@ public class PropsValues {
 		GetterUtil.getInteger(
 			PropsUtil.get(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION));
 
-	public static boolean INDEX_READ_ONLY = GetterUtil.getBoolean(
-		PropsUtil.get(PropsKeys.INDEX_READ_ONLY));
+	public static final String IMAGE_HOOK_FILE_SYSTEM_ROOT_DIR =
+		PropsUtil.get(PropsKeys.IMAGE_HOOK_FILE_SYSTEM_ROOT_DIR);
+
+	public static final String IMAGE_HOOK_IMPL =
+		PropsUtil.get(PropsKeys.IMAGE_HOOK_IMPL);
 
 	public static final int INDEX_ON_STARTUP_DELAY = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.INDEX_ON_STARTUP_DELAY));
+
+	public static boolean INDEX_READ_ONLY = GetterUtil.getBoolean(
+		PropsUtil.get(PropsKeys.INDEX_READ_ONLY));
 
 	public static final boolean JAVASCRIPT_BAREBONE_ENABLED =
 		GetterUtil.getBoolean(

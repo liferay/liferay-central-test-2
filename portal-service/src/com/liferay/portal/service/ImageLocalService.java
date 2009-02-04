@@ -135,15 +135,21 @@ public interface ImageLocalService {
 	public boolean isNullOrDefaultSpacer(byte[] bytes);
 
 	public com.liferay.portal.model.Image updateImage(long imageId, byte[] bytes)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Image updateImage(long imageId,
-		java.io.File file) throws com.liferay.portal.SystemException;
+		java.io.File file)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Image updateImage(long imageId,
-		java.io.InputStream is) throws com.liferay.portal.SystemException;
+		java.io.InputStream is)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Image updateImage(long imageId,
 		byte[] bytes, java.lang.String type, int height, int width, int size)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }
