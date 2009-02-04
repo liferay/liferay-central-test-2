@@ -357,10 +357,6 @@
 						includes="mail.jar"
 					/>
 				</copy>
-
-				<copy todir="${app.server.dir}">
-					<fileset dir="tools/servers/jonas" />
-				</copy>
 			</then>
 		</if>
 
