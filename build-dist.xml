@@ -998,7 +998,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip</
 
 		<ant dir="${lp.plugins.dir}" target="extract-plugins-sdk" inheritAll="false" />
 
-		<move file="${lp.plugins.dir}/dist/liferay-plugins-sdk-5.2.0.zip" tofile="dist/liferay-plugins-sdk-${lp.version}.zip" />
+		<move file="${lp.plugins.dir}/dist/liferay-plugins-sdk-${lp.version}.zip" tofile="dist/liferay-plugins-sdk-${lp.version}.zip" />
 
 		<if>
 			<not>
