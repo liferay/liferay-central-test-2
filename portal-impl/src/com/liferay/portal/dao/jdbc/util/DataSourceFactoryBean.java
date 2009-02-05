@@ -22,15 +22,19 @@
 
 package com.liferay.portal.dao.jdbc.util;
 
+import com.liferay.portal.kernel.jndi.JNDIUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.SortedProperties;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsUtil;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 import java.util.Enumeration;
 import java.util.Properties;
+
+import javax.naming.InitialContext;
 
 import javax.sql.DataSource;
 
@@ -56,6 +60,17 @@ public class DataSourceFactoryBean extends AbstractFactoryBean {
 
 	protected Object createInstance() throws Exception {
 		Properties properties = PropsUtil.getProperties(_propertyPrefix, true);
+
+		String jndiName = properties.getProperty("jndi.name");
+
+		if (Validator.isNotNull(jndiName)) {
+			try {
+				return JNDIUtil.lookup(new InitialContext(), jndiName);
+			}
+			catch (Exception e) {
+				_log.error("Unable to lookup " + jndiName, e);
+			}
+		}
 
 		DataSource dataSource = new ComboPooledDataSource();
 
