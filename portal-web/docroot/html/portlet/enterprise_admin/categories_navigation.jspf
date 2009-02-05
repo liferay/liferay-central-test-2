@@ -124,6 +124,6 @@ private String _getSectionId(String name) {
 }
 
 private String _getSectionJsp(String name) {
-	return StringUtil.replace(name, StringPool.DASH, StringPool.UNDERLINE);
+	return TextFormatter.format(name, TextFormatter.N);
 }
 %>

@@ -22,24 +22,28 @@
  */
 %>
 
-<c:choose>
-	<c:when test='<%= displayStyle.equals("full-content") %>'>
-		<div>
-			<liferay-util:include page="/html/portlet/asset_publisher/display/full_content.jsp" />
-		</div>
-	</c:when>
-	<c:when test='<%= displayStyle.equals("abstracts") %>'>
-		<div>
-			<liferay-util:include page="/html/portlet/asset_publisher/display/abstract.jsp" />
-		</div>
-	</c:when>
-	<c:when test='<%= displayStyle.equals("title-list") %>'>
-		<liferay-util:include page="/html/portlet/asset_publisher/display/title_list.jsp" />
-	</c:when>
-	<c:when test='<%= displayStyle.equals("table") %>'>
-		<liferay-util:include page="/html/portlet/asset_publisher/display/table.jsp" />
-	</c:when>
-	<c:otherwise>
-		<%= LanguageUtil.format(pageContext, "x-is-not-a-display-type", displayStyle) %>
-	</c:otherwise>
-</c:choose>
+<%
+String[] displayViews = PropsValues.ASSET_DISPLAY_VIEWS;
+
+if (!ArrayUtil.contains(displayViews, displayStyle)) {
+%>
+
+	<%= LanguageUtil.format(pageContext, "x-is-not-a-display-type", displayStyle) %>
+
+<%
+}
+else{
+	for (String displayView : displayViews) {
+		if (displayStyle.equals(displayView)) {
+			String displayName = TextFormatter.format(displayView, TextFormatter.N);
+			String displayJsp = "/html/portlet/asset_publisher/display/" + displayName + ".jsp";
+%>
+
+				<liferay-util:include page="<%= displayJsp %>" />
+
+<%
+			break;
+		}
+	}
+}
+%>

@@ -90,6 +90,10 @@ public class TextFormatter {
 
 	public static final int M = 12;
 
+	// format-id --> format_id
+
+	public static final int N = 13;
+
 	public static String format(String s, int style) {
 		if (Validator.isNull(s)) {
 			return null;
@@ -135,6 +139,9 @@ public class TextFormatter {
 		}
 		else if (style == M) {
 			return _formatM(s);
+		}
+		else if (style == N) {
+			return _formatN(s);
 		}
 		else {
 			return s;
@@ -333,6 +340,10 @@ public class TextFormatter {
 		}
 
 		return sb.toString();
+	}
+
+	private static String _formatN(String s) {
+		return StringUtil.replace(s, StringPool.DASH, StringPool.UNDERLINE);
 	}
 
 }

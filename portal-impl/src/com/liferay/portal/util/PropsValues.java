@@ -86,6 +86,9 @@ public class PropsValues {
 	public static final String[] APPLICATION_STARTUP_EVENTS =
 		PropsUtil.getArray(PropsKeys.APPLICATION_STARTUP_EVENTS);
 
+	public static final String[] ASSET_DISPLAY_VIEWS =
+		PropsUtil.getArray(PropsKeys.ASSET_DISPLAY_VIEWS);
+
 	public static boolean AUTH_FORWARD_BY_LAST_PATH = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.AUTH_FORWARD_BY_LAST_PATH));
 

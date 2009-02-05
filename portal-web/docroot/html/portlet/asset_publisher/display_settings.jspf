@@ -29,10 +29,17 @@
 	</td>
 	<td>
 		<select id="<portlet:namespace />displayStyle" name="<portlet:namespace />displayStyle">
-			<option <%= displayStyle.equals("full-content") ? "selected" : "" %> value="full-content"><liferay-ui:message key="full-content" /></option>
-			<option <%= displayStyle.equals("abstracts") ? "selected" : "" %> value="abstracts"><liferay-ui:message key="abstracts" /></option>
-			<option <%= displayStyle.equals("title-list") ? "selected" : "" %> value="title-list"><liferay-ui:message key="title-list" /></option>
-			<option <%= displayStyle.equals("table") ? "selected" : "" %> value="table"><liferay-ui:message key="table" /></option>
+			<%
+				String[] displayViews = PropsValues.ASSET_DISPLAY_VIEWS;
+
+				for (String displayView : displayViews) {
+			%>
+
+					<option <%= displayStyle.equals(displayView) ? "selected" : "" %> value="<%= displayView %>"><liferay-ui:message key="<%= displayView %>" /></option>
+
+			<%
+				}
+			%>
 		</select>
 	</td>
 </tr>
