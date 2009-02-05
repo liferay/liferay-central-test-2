@@ -242,6 +242,7 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 			Permission permission = (Permission)permissions.get(i);
 
 			Resource resource = ResourceLocalServiceUtil.getResource(permission.getResourceId());
+			ResourceCode resourceCode = ResourceCodeLocalServiceUtil.getResourceCode(resource.getCodeId());
 
 			String curPortletName = null;
 			String curPortletLabel = null;
@@ -249,6 +250,10 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 			String curModelLabel = null;
 			String actionId = permission.getActionId();
 			String actionLabel = ResourceActionsUtil.getAction(pageContext, actionId);
+
+			if (resourceCode.getScope() == ResourceConstants.SCOPE_INDIVIDUAL) {
+				continue;
+			}
 
 			if (PortletLocalServiceUtil.hasPortlet(company.getCompanyId(), resource.getName())) {
 				curPortletName = resource.getName();
