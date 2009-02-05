@@ -23,9 +23,7 @@
 %>
 
 <%
-String[] displayViews = PropsValues.ASSET_DISPLAY_VIEWS;
-
-if (!ArrayUtil.contains(displayViews, displayStyle)) {
+if (!ArrayUtil.contains(PropsValues.ASSET_PUBLISHER_DISPLAY_STYLES, displayStyle)) {
 %>
 
 	<%= LanguageUtil.format(pageContext, "x-is-not-a-display-type", displayStyle) %>
@@ -33,13 +31,12 @@ if (!ArrayUtil.contains(displayViews, displayStyle)) {
 <%
 }
 else{
-	for (String displayView : displayViews) {
-		if (displayStyle.equals(displayView)) {
-			String displayName = TextFormatter.format(displayView, TextFormatter.N);
-			String displayJsp = "/html/portlet/asset_publisher/display/" + displayName + ".jsp";
+	for (String curDisplayStyle : PropsValues.ASSET_PUBLISHER_DISPLAY_STYLES) {
+		if (displayStyle.equals(curDisplayStyle)) {
+			String displayStyleJsp = "/html/portlet/asset_publisher/display/" + TextFormatter.format(displayView, TextFormatter.N) + ".jsp";
 %>
 
-				<liferay-util:include page="<%= displayJsp %>" />
+			<liferay-util:include page="<%= displayStyleJsp %>" />
 
 <%
 			break;

@@ -86,7 +86,7 @@ public interface PropsKeys {
 
 	public static final String APPLICATION_STARTUP_EVENTS = "application.startup.events";
 
-	public static final String ASSET_DISPLAY_VIEWS = "asset.display.views";
+	public static final String ASSET_PUBLISHER_DISPLAY_STYLES = "asset.publisher.display.styles";
 
 	public static final String AUTH_FAILURE = "auth.failure";
 

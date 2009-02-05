@@ -29,17 +29,17 @@
 	</td>
 	<td>
 		<select id="<portlet:namespace />displayStyle" name="<portlet:namespace />displayStyle">
-			<%
-				String[] displayViews = PropsValues.ASSET_DISPLAY_VIEWS;
-
-				for (String displayView : displayViews) {
-			%>
-
-					<option <%= displayStyle.equals(displayView) ? "selected" : "" %> value="<%= displayView %>"><liferay-ui:message key="<%= displayView %>" /></option>
 
 			<%
-				}
+			for (String curDisplayStyle : PropsValues.ASSET_PUBLISHER_DISPLAY_STYLES) {
 			%>
+
+				<option <%= displayStyle.equals(curDisplayStyle) ? "selected" : "" %> value="<%= curDisplayStyle %>"><liferay-ui:message key="<%= curDisplayStyle %>" /></option>
+
+			<%
+			}
+			%>
+
 		</select>
 	</td>
 </tr>
