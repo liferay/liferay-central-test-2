@@ -35,8 +35,8 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -80,6 +80,7 @@ public class ViewAction extends PortletAction {
 
 		String velocityTemplateId = StringPool.BLANK;
 		String velocityTemplateContent = StringPool.BLANK;
+		Map<String,String> velocityColumns = new HashMap<String,String>();
 
 		if (Validator.isNotNull(layoutTemplateId)) {
 			Theme theme = themeDisplay.getTheme();
@@ -87,52 +88,55 @@ public class ViewAction extends PortletAction {
 			LayoutTemplate layoutTemplate =
 				LayoutTemplateLocalServiceUtil.getLayoutTemplate(
 					layoutTemplateId, false, theme.getThemeId());
+			
+			String content = layoutTemplate.getContent();
+			
+			Matcher processColumnMatcher = _processColumnPattern.matcher(content);
+
+			while (processColumnMatcher.find()) {
+				if (Validator.isNotNull(processColumnMatcher.group(2))) {
+					velocityColumns.put(processColumnMatcher.group(2), 
+							portlet.getPortletId() + "_" + processColumnMatcher.group(2) );
+				}
+			}
+
+			processColumnMatcher.reset();
+			
+			content = processColumnMatcher.replaceAll( "$1\\${$2}$3" );
 
 			velocityTemplateId =
 				theme.getThemeId() + LayoutTemplateConstants.CUSTOM_SEPARATOR +
 					layoutTemplateId;
-			velocityTemplateContent = renameTemplateColumnsAndIds(
-				layoutTemplate.getContent(), portlet);
+
+			
+			Matcher tagIdMatcher = _columnIdPattern.matcher(content);
+			
+			velocityTemplateContent = tagIdMatcher.replaceAll( "$1" + portlet.getPortletId() + "$2$3" );
+
 		}
 
 		renderRequest.setAttribute(
-			WebKeys.NESTED_PORTLET_VELOCITY_TEMPLATE_ID, velocityTemplateId);
+				WebKeys.NESTED_PORTLET_VELOCITY_TEMPLATE_ID,
+				velocityTemplateId);
 		renderRequest.setAttribute(
-			WebKeys.NESTED_PORTLET_VELOCITY_TEMPLATE_CONTENT,
-			velocityTemplateContent);
+				WebKeys.NESTED_PORTLET_VELOCITY_TEMPLATE_CONTENT,
+				velocityTemplateContent);
+		renderRequest.setAttribute(
+				WebKeys.VM_VARIABLES,
+				velocityColumns);
 
 		return mapping.findForward("portlet.nested_portlets.view");
 	}
 
-	protected String renameTemplateColumnsAndIds(
-		String content, Portlet portlet) {
+	
 
-		Matcher matcher = _pattern.matcher(content);
 
-		Set<String> columnIds = new HashSet<String>();
+	private static Pattern _processColumnPattern = Pattern.compile(
+			"(processColumn[(]\")(.*?)(\"[)])",
+			Pattern.DOTALL);
 
-		while (matcher.find()) {
-			if (Validator.isNotNull(matcher.group(1))) {
-				columnIds.add(matcher.group(1));
-			}
-
-			if (Validator.isNotNull(matcher.group(2))) {
-				columnIds.add(matcher.group(2));
-			}
-		}
-
-		for (String columnId : columnIds) {
-			if (columnId.indexOf(portlet.getPortletId()) == -1) {
-				content = content.replaceAll(
-					columnId, portlet.getPortletId() + "_" + columnId);
-			}
-		}
-
-		return content;
-	}
-
-	private static Pattern _pattern = Pattern.compile(
-		"processColumn[(]\"(.*?)\"[)]|[<].*?id=[\"']([^ ]*?)[\"'].*?[>]",
-		Pattern.DOTALL);
+	private static Pattern _columnIdPattern = Pattern.compile(
+			"([<].*?id=[\"'])([^ ]*?)([\"'].*?[>])",
+			Pattern.DOTALL);
 
 }
