@@ -187,6 +187,10 @@ public class LayoutAction extends Action {
 
 		long plid = ParamUtil.getLong(request, "p_l_id");
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("p_l_id is " + plid);
+		}
+
 		if (plid > 0) {
 			return processLayout(mapping, request, response, plid);
 		}
