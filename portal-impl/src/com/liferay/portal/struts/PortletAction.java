@@ -24,10 +24,13 @@ package com.liferay.portal.struts;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -237,6 +240,19 @@ public class PortletAction extends Action {
 		}
 
 		if (Validator.isNotNull(redirect)) {
+
+			// LPS-1928
+
+			HttpServletRequest request = PortalUtil.getHttpServletRequest(
+				actionRequest);
+
+			if (BrowserSnifferUtil.isIe(request) &&
+				(BrowserSnifferUtil.getMajorVersion(request) == 6.0)) {
+
+				redirect = StringUtil.replace(
+					redirect, StringPool.POUND, "&#");
+			}
+
 			actionResponse.sendRedirect(redirect);
 		}
 	}
