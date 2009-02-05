@@ -85,7 +85,7 @@ public class ClassLoaderProxy {
 				}
 
 				if (ClassUtil.isSubclass(argClass, NullWrapper.class)) {
-					NullWrapper wrapper = (NullWrapper) arg;
+					NullWrapper wrapper = (NullWrapper)arg;
 
 					argClass = Class.forName(
 						wrapper.getClassName(), true, _classLoader);
