@@ -58,6 +58,6 @@ public class VerifyDisplayToFullContentTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent("AP Setup Test Article"));
 		assertTrue(selenium.isTextPresent("AP Setup MB Test Thread"));
 		assertTrue(selenium.isTextPresent("AP Setup Test Wiki Page"));
-		assertTrue(selenium.isElementPresent("//img[@alt='Edit Image']"));
+		assertTrue(selenium.isTextPresent("AP Setup Test Image"));
 	}
 }

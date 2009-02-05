@@ -52,10 +52,7 @@ public class ViewBookmarkTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//img[@alt='Edit Bookmark']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=AP Setup Test Bookmark Folder"));
+		selenium.click(RuntimeVariables.replace("link=AP Setup Test Bookmark"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=http://www.liferay.com"));
 	}

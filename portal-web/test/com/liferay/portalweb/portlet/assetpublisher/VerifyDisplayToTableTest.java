@@ -56,7 +56,7 @@ public class VerifyDisplayToTableTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=AP Setup Test Bookmark"));
 		assertTrue(selenium.isElementPresent("link=AP Setup Test Document"));
 		assertTrue(selenium.isElementPresent("link=AP Setup Test Article"));
-		assertTrue(selenium.isTextPresent("AP Setup MB Test Thread"));
+		assertTrue(selenium.isElementPresent("link=AP Setup MB Test Thread"));
 		assertTrue(selenium.isElementPresent("link=AP Setup Test Wiki Page"));
 		assertTrue(selenium.isElementPresent("link=AP Setup Test Image"));
 	}

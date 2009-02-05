@@ -52,9 +52,7 @@ public class ViewImageTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//img[@alt='Edit Image']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=AP Setup IG Test Folder"));
+		selenium.click(RuntimeVariables.replace("link=AP Setup Test Image"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("AP Setup Test Image"));
 	}

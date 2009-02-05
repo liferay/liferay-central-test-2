@@ -52,6 +52,8 @@ public class ViewMessageBoardTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("AP Setup MB Test Thread"));
+		selenium.click(RuntimeVariables.replace("link=AP Setup MB Test Thread"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("This is an AP setup MB test thread."));
 	}
 }

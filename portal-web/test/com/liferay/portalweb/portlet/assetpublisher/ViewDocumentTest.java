@@ -52,8 +52,8 @@ public class ViewDocumentTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//img[@alt='Edit Document']"));
+		selenium.click(RuntimeVariables.replace("link=AP Setup Test Document"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=AP Setup Test Document.txt"));
+		assertTrue(selenium.isElementPresent("link=AP Setup Test Document"));
 	}
 }

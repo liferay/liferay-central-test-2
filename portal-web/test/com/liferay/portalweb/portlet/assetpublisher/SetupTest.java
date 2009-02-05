@@ -175,9 +175,7 @@ public class SetupTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Add Blog Entry']"));
-				selenium.waitForPageToLoad("30000");
+				selenium.click("//input[@value='Add Blog Entry']");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {

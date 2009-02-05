@@ -58,6 +58,6 @@ public class VerifyDisplayToAbstractsTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=AP Setup Test Article"));
 		assertTrue(selenium.isTextPresent("AP Setup MB Test Thread"));
 		assertTrue(selenium.isElementPresent("link=AP Setup Test Wiki Page"));
-		assertTrue(selenium.isElementPresent("link=View"));
+		assertTrue(selenium.isElementPresent("link=AP Setup Test Image"));
 	}
 }

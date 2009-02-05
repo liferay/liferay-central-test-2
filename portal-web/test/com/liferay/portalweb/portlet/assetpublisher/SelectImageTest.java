@@ -133,6 +133,6 @@ public class SelectImageTest extends BaseTestCase {
 				"You have successfully updated the setup."));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=View"));
+		assertTrue(selenium.isElementPresent("link=AP Setup Test Image"));
 	}
 }

@@ -52,6 +52,6 @@ public class VerifyDynamicConfigurationImageTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=View"));
+		assertTrue(selenium.isElementPresent("link=AP Setup Test Image"));
 	}
 }
