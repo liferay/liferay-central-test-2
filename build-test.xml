@@ -25,9 +25,9 @@ plugins.includes=${plugins.includes}</echo>
 
 		<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
 
-		<!--<ant dir="portal-impl" target="test-class" inheritAll="false">
+		<ant dir="portal-impl" target="test-class" inheritAll="false">
 			<property name="class" value="ServiceTestSuite" />
-		</ant>-->
+		</ant>
 
 		<ant dir="portal-impl" target="test-class" inheritAll="false">
 			<property name="class" value="PersistenceTestSuite" />
@@ -40,8 +40,6 @@ plugins.includes=${plugins.includes}</echo>
 		<ant dir="portal-kernel" target="test" inheritAll="false" />
 
 		<ant dir="util-java" target="test" inheritAll="false" />
-
-		<antcall target="test-${app.server.type}" />
 	</target>
 
 	<target name="test-themes">

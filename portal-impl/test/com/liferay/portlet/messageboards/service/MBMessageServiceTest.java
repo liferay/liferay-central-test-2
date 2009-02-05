@@ -44,7 +44,7 @@ import java.util.List;
 public class MBMessageServiceTest extends BaseServiceTestCase {
 
 	public void testAddMessagesConcurrently() throws Exception {
-		int threadCount = 50;
+		int threadCount = 5;
 
 		DoAsUserThread[] threads = new DoAsUserThread[threadCount];
 
@@ -59,7 +59,7 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 		}
 
 		for (DoAsUserThread thread : threads) {
-			thread.join();
+			thread.join(5000);
 		}
 
 		int successCount = 0;

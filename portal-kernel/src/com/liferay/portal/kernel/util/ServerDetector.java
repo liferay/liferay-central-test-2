@@ -100,7 +100,12 @@ public class ServerDetector {
 			}
 
 			if (_log.isInfoEnabled()) {
-				_log.info("Detected server " + sd._serverId);
+				if (sd._serverId != null) {
+					_log.info("Detected server " + sd._serverId);
+				}
+				else {
+					_log.info("No server detected");
+				}
 			}
 
 			if (sd._serverId == null) {
