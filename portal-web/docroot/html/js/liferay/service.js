@@ -1,3147 +1,644 @@
-Liferay.Service.Portal = {
-	servicePackage: "com.liferay.portal.service.http."
-};
 
-Liferay.Service.Portal.Address = {
-	serviceClassName: Liferay.Service.Portal.servicePackage + "Address" + Liferay.Service.classNameSuffix,
 
-	addAddress: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addAddress";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteAddress: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteAddress";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getAddress: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getAddress";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getAddresses: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getAddresses";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateAddress: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateAddress";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Portal.ClassName = {
-	serviceClassName: Liferay.Service.Portal.servicePackage + "ClassName" + Liferay.Service.classNameSuffix,
-
-	getClassName: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getClassName";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Portal.Company = {
-	serviceClassName: Liferay.Service.Portal.servicePackage + "Company" + Liferay.Service.classNameSuffix,
-
-	addCompany: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addCompany";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getCompanyById: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getCompanyById";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getCompanyByLogoId: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getCompanyByLogoId";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getCompanyByMx: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getCompanyByMx";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getCompanyByVirtualHost: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getCompanyByVirtualHost";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getCompanyByWebId: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getCompanyByWebId";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateCompany: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateCompany";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateDisplay: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateDisplay";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateSecurity: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateSecurity";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Portal.Country = {
-	serviceClassName: Liferay.Service.Portal.servicePackage + "Country" + Liferay.Service.classNameSuffix,
-
-	addCountry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addCountry";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getCountries: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getCountries";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getCountry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getCountry";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getCountryByA2: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getCountryByA2";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getCountryByA3: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getCountryByA3";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getCountryByName: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getCountryByName";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Portal.EmailAddress = {
-	serviceClassName: Liferay.Service.Portal.servicePackage + "EmailAddress" + Liferay.Service.classNameSuffix,
-
-	addEmailAddress: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addEmailAddress";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteEmailAddress: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteEmailAddress";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getEmailAddress: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getEmailAddress";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getEmailAddresses: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getEmailAddresses";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateEmailAddress: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateEmailAddress";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Portal.Group = {
-	serviceClassName: Liferay.Service.Portal.servicePackage + "Group" + Liferay.Service.classNameSuffix,
-
-	addGroup: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addGroup";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	addRoleGroups: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addRoleGroups";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteGroup: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteGroup";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getGroup: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getGroup";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getManageableGroups: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getManageableGroups";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getOrganizationsGroups: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getOrganizationsGroups";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getUserGroup: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getUserGroup";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getUserGroupsGroups: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getUserGroupsGroups";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getUserOrganizationsGroups: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getUserOrganizationsGroups";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	hasUserGroup: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "hasUserGroup";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	search: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "search";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	searchCount: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "searchCount";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	setRoleGroups: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "setRoleGroups";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	unsetRoleGroups: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "unsetRoleGroups";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateFriendlyURL: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateFriendlyURL";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateGroup: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateGroup";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateWorkflow: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateWorkflow";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Portal.Layout = {
-	serviceClassName: Liferay.Service.Portal.servicePackage + "Layout" + Liferay.Service.classNameSuffix,
-
-	addLayout: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addLayout";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteLayout: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteLayout";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getLayoutName: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getLayoutName";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getLayoutReferences: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getLayoutReferences";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	setLayouts: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "setLayouts";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	unschedulePublishToLive: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "unschedulePublishToLive";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	unschedulePublishToRemote: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "unschedulePublishToRemote";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateLayout: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateLayout";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateLookAndFeel: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateLookAndFeel";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateName: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateName";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateParentLayoutId: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateParentLayoutId";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updatePriority: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updatePriority";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Portal.LayoutSet = {
-	serviceClassName: Liferay.Service.Portal.servicePackage + "LayoutSet" + Liferay.Service.classNameSuffix,
-
-	updateLookAndFeel: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateLookAndFeel";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateVirtualHost: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateVirtualHost";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Portal.ListType = {
-	serviceClassName: Liferay.Service.Portal.servicePackage + "ListType" + Liferay.Service.classNameSuffix,
-
-	getListType: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getListType";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getListTypes: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getListTypes";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	validate: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "validate";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Portal.MembershipRequest = {
-	serviceClassName: Liferay.Service.Portal.servicePackage + "MembershipRequest" + Liferay.Service.classNameSuffix,
-
-	addMembershipRequest: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addMembershipRequest";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteMembershipRequests: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteMembershipRequests";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getMembershipRequest: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getMembershipRequest";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateStatus: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateStatus";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Portal.Organization = {
-	serviceClassName: Liferay.Service.Portal.servicePackage + "Organization" + Liferay.Service.classNameSuffix,
-
-	addGroupOrganizations: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addGroupOrganizations";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	addPasswordPolicyOrganizations: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addPasswordPolicyOrganizations";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	addOrganization: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addOrganization";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteLogo: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteLogo";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteOrganization: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteOrganization";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getManageableOrganizations: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getManageableOrganizations";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getOrganization: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getOrganization";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getOrganizationId: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getOrganizationId";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getUserOrganizations: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getUserOrganizations";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	setGroupOrganizations: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "setGroupOrganizations";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	unsetGroupOrganizations: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "unsetGroupOrganizations";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	unsetPasswordPolicyOrganizations: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "unsetPasswordPolicyOrganizations";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateOrganization: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateOrganization";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Portal.OrgLabor = {
-	serviceClassName: Liferay.Service.Portal.servicePackage + "OrgLabor" + Liferay.Service.classNameSuffix,
-
-	addOrgLabor: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addOrgLabor";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteOrgLabor: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteOrgLabor";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getOrgLabor: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getOrgLabor";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getOrgLabors: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getOrgLabors";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateOrgLabor: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateOrgLabor";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Portal.PasswordPolicy = {
-	serviceClassName: Liferay.Service.Portal.servicePackage + "PasswordPolicy" + Liferay.Service.classNameSuffix,
-
-	addPasswordPolicy: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addPasswordPolicy";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deletePasswordPolicy: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deletePasswordPolicy";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updatePasswordPolicy: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updatePasswordPolicy";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Portal.Permission = {
-	serviceClassName: Liferay.Service.Portal.servicePackage + "Permission" + Liferay.Service.classNameSuffix,
-
-	checkPermission: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "checkPermission";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	hasGroupPermission: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "hasGroupPermission";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	hasUserPermission: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "hasUserPermission";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	hasUserPermissions: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "hasUserPermissions";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	setGroupPermissions: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "setGroupPermissions";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	setOrgGroupPermissions: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "setOrgGroupPermissions";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	setRolePermission: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "setRolePermission";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	setRolePermissions: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "setRolePermissions";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	setUserPermissions: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "setUserPermissions";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	unsetRolePermission: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "unsetRolePermission";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	unsetRolePermissions: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "unsetRolePermissions";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	unsetUserPermissions: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "unsetUserPermissions";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Portal.Phone = {
-	serviceClassName: Liferay.Service.Portal.servicePackage + "Phone" + Liferay.Service.classNameSuffix,
-
-	addPhone: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addPhone";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deletePhone: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deletePhone";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getPhone: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getPhone";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getPhones: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getPhones";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updatePhone: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updatePhone";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Portal.Portal = {
-	serviceClassName: Liferay.Service.Portal.servicePackage + "Portal" + Liferay.Service.classNameSuffix,
-
-	getAutoDeployDirectory: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getAutoDeployDirectory";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getBuildNumber: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getBuildNumber";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	test: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "test";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	testCounterRollback: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "testCounterRollback";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Portal.PluginSetting = {
-	serviceClassName: Liferay.Service.Portal.servicePackage + "PluginSetting" + Liferay.Service.classNameSuffix,
-
-	updatePluginSetting: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updatePluginSetting";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Portal.Portlet = {
-	serviceClassName: Liferay.Service.Portal.servicePackage + "Portlet" + Liferay.Service.classNameSuffix,
-
-	getWARPortlets: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getWARPortlets";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updatePortlet: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updatePortlet";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Portal.PortletPreferences = {
-	serviceClassName: Liferay.Service.Portal.servicePackage + "PortletPreferences" + Liferay.Service.classNameSuffix,
-
-	deleteArchivedPreferences: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteArchivedPreferences";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Portal.Region = {
-	serviceClassName: Liferay.Service.Portal.servicePackage + "Region" + Liferay.Service.classNameSuffix,
-
-	addRegion: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addRegion";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getRegions: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getRegions";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getRegion: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getRegion";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Portal.Resource = {
-	serviceClassName: Liferay.Service.Portal.servicePackage + "Resource" + Liferay.Service.classNameSuffix,
-
-	getResource: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getResource";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Portal.Role = {
-	serviceClassName: Liferay.Service.Portal.servicePackage + "Role" + Liferay.Service.classNameSuffix,
-
-	addRole: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addRole";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	addUserRoles: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addUserRoles";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteRole: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteRole";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getGroupRole: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getGroupRole";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getGroupRoles: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getGroupRoles";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getRole: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getRole";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getUserGroupRoles: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getUserGroupRoles";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getUserRelatedRoles: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getUserRelatedRoles";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getUserRoles: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getUserRoles";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	hasUserRole: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "hasUserRole";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	hasUserRoles: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "hasUserRoles";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	unsetUserRoles: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "unsetUserRoles";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Portal.Theme = {
-	serviceClassName: Liferay.Service.Portal.servicePackage + "Theme" + Liferay.Service.classNameSuffix,
-
-	getThemes: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getThemes";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Portal.User = {
-	serviceClassName: Liferay.Service.Portal.servicePackage + "User" + Liferay.Service.classNameSuffix,
-
-	addGroupUsers: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addGroupUsers";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	addOrganizationUsers: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addOrganizationUsers";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	addPasswordPolicyUsers: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addPasswordPolicyUsers";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	addRoleUsers: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addRoleUsers";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	addUserGroupUsers: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addUserGroupUsers";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	addUser: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addUser";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deletePortrait: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deletePortrait";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteRoleUser: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteRoleUser";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteUser: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteUser";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getDefaultUserId: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getDefaultUserId";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getGroupUserIds: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getGroupUserIds";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getOrganizationUserIds: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getOrganizationUserIds";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getRoleUserIds: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getRoleUserIds";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getUserByEmailAddress: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getUserByEmailAddress";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getUserById: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getUserById";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getUserByScreenName: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getUserByScreenName";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getUserIdByEmailAddress: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getUserIdByEmailAddress";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getUserIdByScreenName: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getUserIdByScreenName";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	hasGroupUser: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "hasGroupUser";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	hasRoleUser: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "hasRoleUser";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	setRoleUsers: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "setRoleUsers";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	setUserGroupUsers: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "setUserGroupUsers";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	unsetGroupUsers: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "unsetGroupUsers";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	unsetOrganizationUsers: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "unsetOrganizationUsers";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	unsetPasswordPolicyUsers: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "unsetPasswordPolicyUsers";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	unsetRoleUsers: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "unsetRoleUsers";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	unsetUserGroupUsers: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "unsetUserGroupUsers";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateActive: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateActive";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateAgreedToTermsOfUse: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateAgreedToTermsOfUse";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateEmailAddress: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateEmailAddress";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateLockout: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateLockout";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateOpenId: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateOpenId";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateOrganizations: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateOrganizations";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updatePassword: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updatePassword";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updatePortrait: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updatePortrait";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateReminderQuery: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateReminderQuery";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateScreenName: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateScreenName";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateUser: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateUser";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Portal.UserGroup = {
-	serviceClassName: Liferay.Service.Portal.servicePackage + "UserGroup" + Liferay.Service.classNameSuffix,
-
-	addGroupUserGroups: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addGroupUserGroups";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	addUserGroup: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addUserGroup";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteUserGroup: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteUserGroup";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getUserGroup: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getUserGroup";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getUserUserGroups: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getUserUserGroups";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	unsetGroupUserGroups: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "unsetGroupUserGroups";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateUserGroup: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateUserGroup";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Portal.UserGroupRole = {
-	serviceClassName: Liferay.Service.Portal.servicePackage + "UserGroupRole" + Liferay.Service.classNameSuffix,
-
-	addUserGroupRoles: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addUserGroupRoles";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteUserGroupRoles: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteUserGroupRoles";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Portal.Website = {
-	serviceClassName: Liferay.Service.Portal.servicePackage + "Website" + Liferay.Service.classNameSuffix,
-
-	addWebsite: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addWebsite";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteWebsite: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteWebsite";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getWebsite: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getWebsite";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getWebsites: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getWebsites";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateWebsite: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateWebsite";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Announcements = {
-	servicePackage: "com.liferay.portlet.announcements.service.http."
-};
-
-Liferay.Service.Announcements.AnnouncementsDelivery = {
-	serviceClassName: Liferay.Service.Announcements.servicePackage + "AnnouncementsDelivery" + Liferay.Service.classNameSuffix,
-
-	updateDelivery: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateDelivery";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Announcements.AnnouncementsEntry = {
-	serviceClassName: Liferay.Service.Announcements.servicePackage + "AnnouncementsEntry" + Liferay.Service.classNameSuffix,
-
-	addEntry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addEntry";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteEntry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteEntry";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateEntry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateEntry";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Announcements.AnnouncementsFlag = {
-	serviceClassName: Liferay.Service.Announcements.servicePackage + "AnnouncementsFlag" + Liferay.Service.classNameSuffix,
-
-	addFlag: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addFlag";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getFlag: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getFlag";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteFlag: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteFlag";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Blogs = {
-	servicePackage: "com.liferay.portlet.blogs.service.http."
-};
-
-Liferay.Service.Blogs.BlogsEntry = {
-	serviceClassName: Liferay.Service.Blogs.servicePackage + "BlogsEntry" + Liferay.Service.classNameSuffix,
-
-	addEntry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addEntry";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteEntry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteEntry";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getCompanyEntries: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getCompanyEntries";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getEntry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getEntry";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getGroupEntries: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getGroupEntries";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getOrganizationEntries: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getOrganizationEntries";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateEntry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateEntry";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Bookmarks = {
-	servicePackage: "com.liferay.portlet.bookmarks.service.http."
-};
-
-Liferay.Service.Bookmarks.BookmarksEntry = {
-	serviceClassName: Liferay.Service.Bookmarks.servicePackage + "BookmarksEntry" + Liferay.Service.classNameSuffix,
-
-	addEntry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addEntry";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteEntry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteEntry";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getEntry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getEntry";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	openEntry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "openEntry";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateEntry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateEntry";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Bookmarks.BookmarksFolder = {
-	serviceClassName: Liferay.Service.Bookmarks.servicePackage + "BookmarksFolder" + Liferay.Service.classNameSuffix,
-
-	addFolder: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addFolder";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteFolder: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteFolder";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getFolder: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getFolder";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateFolder: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateFolder";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Cal = {
-	servicePackage: "com.liferay.portlet.calendar.service.http."
-};
-
-Liferay.Service.Cal.CalEvent = {
-	serviceClassName: Liferay.Service.Cal.servicePackage + "CalEvent" + Liferay.Service.classNameSuffix,
-
-	addEvent: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addEvent";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteEvent: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteEvent";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getEvent: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getEvent";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateEvent: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateEvent";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.DL = {
-	servicePackage: "com.liferay.portlet.documentlibrary.service.http."
-};
-
-Liferay.Service.DL.DLFileEntry = {
-	serviceClassName: Liferay.Service.DL.servicePackage + "DLFileEntry" + Liferay.Service.classNameSuffix,
-
-	addFileEntry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addFileEntry";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteFileEntry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteFileEntry";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteFileEntryByTitle: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteFileEntryByTitle";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getFileEntries: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getFileEntries";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getFileEntry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getFileEntry";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getFileEntryByTitle: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getFileEntryByTitle";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	hasFileEntryLock: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "hasFileEntryLock";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	lockFileEntry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "lockFileEntry";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	refreshFileEntryLock: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "refreshFileEntryLock";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	unlockFileEntry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "unlockFileEntry";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateFileEntry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateFileEntry";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	verifyFileEntryLock: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "verifyFileEntryLock";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.DL.DLFileShortcut = {
-	serviceClassName: Liferay.Service.DL.servicePackage + "DLFileShortcut" + Liferay.Service.classNameSuffix,
-
-	addFileShortcut: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addFileShortcut";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteFileShortcut: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteFileShortcut";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getFileShortcut: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getFileShortcut";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateFileShortcut: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateFileShortcut";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.DL.DLFolder = {
-	serviceClassName: Liferay.Service.DL.servicePackage + "DLFolder" + Liferay.Service.classNameSuffix,
-
-	addFolder: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addFolder";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	copyFolder: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "copyFolder";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteFolder: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteFolder";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getFolder: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getFolder";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getFolderId: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getFolderId";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getFolders: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getFolders";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	hasInheritableLock: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "hasInheritableLock";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	lockFolder: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "lockFolder";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	refreshFolderLock: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "refreshFolderLock";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	reIndexSearch: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "reIndexSearch";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	unlockFolder: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "unlockFolder";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateFolder: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateFolder";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	verifyInheritableLock: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "verifyInheritableLock";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Expando = {
-	servicePackage: "com.liferay.portlet.expando.service.http."
-};
-
-Liferay.Service.Expando.ExpandoColumn = {
-	serviceClassName: Liferay.Service.Expando.servicePackage + "ExpandoColumn" + Liferay.Service.classNameSuffix,
-
-	addColumn: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addColumn";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteColumn: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteColumn";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateColumn: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateColumn";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateTypeSettings: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateTypeSettings";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Expando.ExpandoValue = {
-	serviceClassName: Liferay.Service.Expando.servicePackage + "ExpandoValue" + Liferay.Service.classNameSuffix,
-
-	addValue: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addValue";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.IG = {
-	servicePackage: "com.liferay.portlet.imagegallery.service.http."
-};
-
-Liferay.Service.IG.IGFolder = {
-	serviceClassName: Liferay.Service.IG.servicePackage + "IGFolder" + Liferay.Service.classNameSuffix,
-
-	addFolder: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addFolder";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	copyFolder: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "copyFolder";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteFolder: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteFolder";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getFolder: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getFolder";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getFolders: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getFolders";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateFolder: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateFolder";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.IG.IGImage = {
-	serviceClassName: Liferay.Service.IG.servicePackage + "IGImage" + Liferay.Service.classNameSuffix,
-
-	deleteImage: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteImage";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteImageByFolderIdAndNameWithExtension: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteImageByFolderIdAndNameWithExtension";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getImage: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getImage";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getImageByFolderIdAndNameWithExtension: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getImageByFolderIdAndNameWithExtension";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getImageByLargeImageId: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getImageByLargeImageId";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getImageBySmallImageId: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getImageBySmallImageId";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getImages: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getImages";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Journal = {
-	servicePackage: "com.liferay.portlet.journal.service.http."
-};
-
-Liferay.Service.Journal.JournalArticle = {
-	serviceClassName: Liferay.Service.Journal.servicePackage + "JournalArticle" + Liferay.Service.classNameSuffix,
-
-	addArticle: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addArticle";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	copyArticle: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "copyArticle";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getArticle: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getArticle";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	removeArticleLocale: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "removeArticleLocale";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateContent: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateContent";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Journal.JournalFeed = {
-	serviceClassName: Liferay.Service.Journal.servicePackage + "JournalFeed" + Liferay.Service.classNameSuffix,
-
-	addFeed: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addFeed";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteFeed: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteFeed";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getFeed: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getFeed";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateFeed: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateFeed";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Journal.JournalStructure = {
-	serviceClassName: Liferay.Service.Journal.servicePackage + "JournalStructure" + Liferay.Service.classNameSuffix,
-
-	addStructure: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addStructure";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	copyStructure: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "copyStructure";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteStructure: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteStructure";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getStructure: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getStructure";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateStructure: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateStructure";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Journal.JournalTemplate = {
-	serviceClassName: Liferay.Service.Journal.servicePackage + "JournalTemplate" + Liferay.Service.classNameSuffix,
-
-	copyTemplate: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "copyTemplate";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteTemplate: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteTemplate";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getStructureTemplates: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getStructureTemplates";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getTemplate: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getTemplate";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.MB = {
-	servicePackage: "com.liferay.portlet.messageboards.service.http."
-};
-
-Liferay.Service.MB.MBBan = {
-	serviceClassName: Liferay.Service.MB.servicePackage + "MBBan" + Liferay.Service.classNameSuffix,
-
-	addBan: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addBan";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteBan: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteBan";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.MB.MBCategory = {
-	serviceClassName: Liferay.Service.MB.servicePackage + "MBCategory" + Liferay.Service.classNameSuffix,
-
-	addCategory: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addCategory";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteCategory: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteCategory";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getCategory: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getCategory";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getCategories: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getCategories";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getCategoriesCount: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getCategoriesCount";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	subscribeCategory: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "subscribeCategory";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	unsubscribeCategory: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "unsubscribeCategory";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateCategory: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateCategory";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.MB.MBMessage = {
-	serviceClassName: Liferay.Service.MB.servicePackage + "MBMessage" + Liferay.Service.classNameSuffix,
-
-	addDiscussionMessage: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addDiscussionMessage";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	addMessage: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addMessage";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteDiscussionMessage: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteDiscussionMessage";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteMessage: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteMessage";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getCategoryMessages: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getCategoryMessages";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getCategoryMessagesCount: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getCategoryMessagesCount";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getMessage: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getMessage";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getMessageDisplay: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getMessageDisplay";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	subscribeMessage: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "subscribeMessage";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	unsubscribeMessage: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "unsubscribeMessage";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateDiscussionMessage: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateDiscussionMessage";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateMessage: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateMessage";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.MB.MBMessageFlag = {
-	serviceClassName: Liferay.Service.MB.servicePackage + "MBMessageFlag" + Liferay.Service.classNameSuffix,
-
-	addAnswerFlag: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addAnswerFlag";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteAnswerFlag: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteAnswerFlag";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.MB.MBThread = {
-	serviceClassName: Liferay.Service.MB.servicePackage + "MBThread" + Liferay.Service.classNameSuffix,
-
-	moveThread: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "moveThread";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	splitThread: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "splitThread";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Polls = {
-	servicePackage: "com.liferay.portlet.polls.service.http."
-};
-
-Liferay.Service.Polls.PollsQuestion = {
-	serviceClassName: Liferay.Service.Polls.servicePackage + "PollsQuestion" + Liferay.Service.classNameSuffix,
-
-	addQuestion: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addQuestion";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteQuestion: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteQuestion";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getQuestion: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getQuestion";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateQuestion: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateQuestion";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Polls.PollsVote = {
-	serviceClassName: Liferay.Service.Polls.servicePackage + "PollsVote" + Liferay.Service.classNameSuffix,
-
-	addVote: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addVote";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Ratings = {
-	servicePackage: "com.liferay.portlet.ratings.service.http."
-};
-
-Liferay.Service.Ratings.RatingsEntry = {
-	serviceClassName: Liferay.Service.Ratings.servicePackage + "RatingsEntry" + Liferay.Service.classNameSuffix,
-
-	deleteEntry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteEntry";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateEntry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateEntry";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Shopping = {
-	servicePackage: "com.liferay.portlet.shopping.service.http."
-};
-
-Liferay.Service.Shopping.ShoppingCategory = {
-	serviceClassName: Liferay.Service.Shopping.servicePackage + "ShoppingCategory" + Liferay.Service.classNameSuffix,
-
-	addCategory: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addCategory";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteCategory: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteCategory";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getCategory: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getCategory";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateCategory: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateCategory";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Shopping.ShoppingCoupon = {
-	serviceClassName: Liferay.Service.Shopping.servicePackage + "ShoppingCoupon" + Liferay.Service.classNameSuffix,
-
-	addCoupon: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addCoupon";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteCoupon: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteCoupon";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getCoupon: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getCoupon";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	search: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "search";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateCoupon: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateCoupon";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Shopping.ShoppingItem = {
-	serviceClassName: Liferay.Service.Shopping.servicePackage + "ShoppingItem" + Liferay.Service.classNameSuffix,
-
-	addBookItems: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addBookItems";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteItem: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteItem";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getItem: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getItem";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Shopping.ShoppingOrder = {
-	serviceClassName: Liferay.Service.Shopping.servicePackage + "ShoppingOrder" + Liferay.Service.classNameSuffix,
-
-	completeOrder: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "completeOrder";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteOrder: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteOrder";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getOrder: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getOrder";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	sendEmail: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "sendEmail";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateOrder: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateOrder";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Social = {
-	servicePackage: "com.liferay.portlet.social.service.http."
-};
-
-Liferay.Service.SC = {
-	servicePackage: "com.liferay.portlet.softwarecatalog.service.http."
-};
-
-Liferay.Service.SC.SCLicense = {
-	serviceClassName: Liferay.Service.SC.servicePackage + "SCLicense" + Liferay.Service.classNameSuffix,
-
-	addLicense: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addLicense";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteLicense: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteLicense";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getLicense: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getLicense";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateLicense: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateLicense";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.SC.SCFrameworkVersion = {
-	serviceClassName: Liferay.Service.SC.servicePackage + "SCFrameworkVersion" + Liferay.Service.classNameSuffix,
-
-	addFrameworkVersion: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addFrameworkVersion";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteFrameworkVersion: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteFrameworkVersion";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getFrameworkVersion: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getFrameworkVersion";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getFrameworkVersions: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getFrameworkVersions";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateFrameworkVersion: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateFrameworkVersion";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.SC.SCProductEntry = {
-	serviceClassName: Liferay.Service.SC.servicePackage + "SCProductEntry" + Liferay.Service.classNameSuffix,
-
-	addProductEntry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addProductEntry";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteProductEntry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteProductEntry";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getProductEntry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getProductEntry";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateProductEntry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateProductEntry";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.SC.SCProductVersion = {
-	serviceClassName: Liferay.Service.SC.servicePackage + "SCProductVersion" + Liferay.Service.classNameSuffix,
-
-	addProductVersion: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addProductVersion";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteProductVersion: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteProductVersion";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getProductVersion: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getProductVersion";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getProductVersions: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getProductVersions";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getProductVersionsCount: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getProductVersionsCount";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateProductVersion: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateProductVersion";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Tags = {
-	servicePackage: "com.liferay.portlet.tags.service.http."
-};
-
-Liferay.Service.Tags.TagsAsset = {
-	serviceClassName: Liferay.Service.Tags.servicePackage + "TagsAsset" + Liferay.Service.classNameSuffix,
-
-	deleteAsset: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteAsset";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getAsset: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getAsset";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getAssets: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getAssets";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getAssetsCount: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getAssetsCount";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getAssetsRSS: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getAssetsRSS";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getAssetTypes: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getAssetTypes";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getCompanyAssetDisplays: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getCompanyAssetDisplays";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getCompanyAssets: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getCompanyAssets";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getCompanyAssetsCount: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getCompanyAssetsCount";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getCompanyAssetsRSS: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getCompanyAssetsRSS";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	incrementViewCounter: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "incrementViewCounter";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	searchAssetDisplays: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "searchAssetDisplays";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	searchAssetDisplaysCount: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "searchAssetDisplaysCount";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateAsset: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateAsset";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Tags.TagsEntry = {
-	serviceClassName: Liferay.Service.Tags.servicePackage + "TagsEntry" + Liferay.Service.classNameSuffix,
-
-	addEntry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addEntry";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteEntry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteEntry";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getEntries: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getEntries";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getEntry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getEntry";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getGroupVocabularyEntries: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getGroupVocabularyEntries";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getGroupVocabularyRootEntries: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getGroupVocabularyRootEntries";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	mergeEntries: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "mergeEntries";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	search: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "search";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateEntry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateEntry";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Tags.TagsProperty = {
-	serviceClassName: Liferay.Service.Tags.servicePackage + "TagsProperty" + Liferay.Service.classNameSuffix,
-
-	addProperty: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addProperty";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteProperty: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteProperty";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getProperties: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getProperties";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getPropertyValues: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getPropertyValues";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateProperty: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateProperty";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Tags.TagsVocabulary = {
-	serviceClassName: Liferay.Service.Tags.servicePackage + "TagsVocabulary" + Liferay.Service.classNameSuffix,
-
-	addVocabulary: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addVocabulary";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteVocabulary: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteVocabulary";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getCompanyVocabularies: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getCompanyVocabularies";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getGroupVocabularies: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getGroupVocabularies";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getVocabulary: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getVocabulary";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateVocabulary: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateVocabulary";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Tasks = {
-	servicePackage: "com.liferay.portlet.tasks.service.http."
-};
-
-Liferay.Service.Tasks.TasksReview = {
-	serviceClassName: Liferay.Service.Tasks.servicePackage + "TasksReview" + Liferay.Service.classNameSuffix,
-
-	approveReview: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "approveReview";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	rejectReview: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "rejectReview";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateReviews: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateReviews";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Tasks.TasksProposal = {
-	serviceClassName: Liferay.Service.Tasks.servicePackage + "TasksProposal" + Liferay.Service.classNameSuffix,
-
-	addProposal: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addProposal";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteProposal: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteProposal";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateProposal: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateProposal";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Wiki = {
-	servicePackage: "com.liferay.portlet.wiki.service.http."
-};
-
-Liferay.Service.Wiki.WikiNode = {
-	serviceClassName: Liferay.Service.Wiki.servicePackage + "WikiNode" + Liferay.Service.classNameSuffix,
-
-	addNode: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addNode";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteNode: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteNode";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getNode: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getNode";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	subscribeNode: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "subscribeNode";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	unsubscribeNode: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "unsubscribeNode";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateNode: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateNode";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Wiki.WikiPage = {
-	serviceClassName: Liferay.Service.Wiki.servicePackage + "WikiPage" + Liferay.Service.classNameSuffix,
-
-	addPage: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addPage";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	addPageAttachments: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addPageAttachments";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	changeParent: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "changeParent";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deletePage: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deletePage";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deletePageAttachment: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deletePageAttachment";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getNodePages: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getNodePages";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getNodePagesRSS: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getNodePagesRSS";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getPage: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getPage";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getPagesRSS: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getPagesRSS";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	movePage: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "movePage";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	revertPage: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "revertPage";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	subscribePage: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "subscribePage";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	unsubscribePage: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "unsubscribePage";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updatePage: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updatePage";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
+Liferay.Service.register("Liferay.Service.Portal", "com.liferay.portal.service.http");
+
+Liferay.Service.registerClass(Liferay.Service.Portal, "Address", {
+	addAddress: true,
+	deleteAddress: true,
+	getAddress: true,
+	getAddresses: true,
+	updateAddress: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Portal, "ClassName", {
+	getClassName: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Portal, "Company", {
+	addCompany: true,
+	getCompanyById: true,
+	getCompanyByLogoId: true,
+	getCompanyByMx: true,
+	getCompanyByVirtualHost: true,
+	getCompanyByWebId: true,
+	updateCompany: true,
+	updateDisplay: true,
+	updateSecurity: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Portal, "Country", {
+	addCountry: true,
+	getCountries: true,
+	getCountry: true,
+	getCountryByA2: true,
+	getCountryByA3: true,
+	getCountryByName: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Portal, "EmailAddress", {
+	addEmailAddress: true,
+	deleteEmailAddress: true,
+	getEmailAddress: true,
+	getEmailAddresses: true,
+	updateEmailAddress: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Portal, "Group", {
+	addGroup: true,
+	addRoleGroups: true,
+	deleteGroup: true,
+	getGroup: true,
+	getManageableGroups: true,
+	getOrganizationsGroups: true,
+	getUserGroup: true,
+	getUserGroupsGroups: true,
+	getUserOrganizationsGroups: true,
+	hasUserGroup: true,
+	search: true,
+	searchCount: true,
+	setRoleGroups: true,
+	unsetRoleGroups: true,
+	updateFriendlyURL: true,
+	updateGroup: true,
+	updateWorkflow: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Portal, "Layout", {
+	addLayout: true,
+	deleteLayout: true,
+	getLayoutName: true,
+	getLayoutReferences: true,
+	setLayouts: true,
+	unschedulePublishToLive: true,
+	unschedulePublishToRemote: true,
+	updateLayout: true,
+	updateLookAndFeel: true,
+	updateName: true,
+	updateParentLayoutId: true,
+	updatePriority: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Portal, "LayoutSet", {
+	updateLookAndFeel: true,
+	updateVirtualHost: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Portal, "ListType", {
+	getListType: true,
+	getListTypes: true,
+	validate: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Portal, "MembershipRequest", {
+	addMembershipRequest: true,
+	deleteMembershipRequests: true,
+	getMembershipRequest: true,
+	updateStatus: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Portal, "Organization", {
+	addGroupOrganizations: true,
+	addPasswordPolicyOrganizations: true,
+	addOrganization: true,
+	deleteLogo: true,
+	deleteOrganization: true,
+	getManageableOrganizations: true,
+	getOrganization: true,
+	getOrganizationId: true,
+	getUserOrganizations: true,
+	setGroupOrganizations: true,
+	unsetGroupOrganizations: true,
+	unsetPasswordPolicyOrganizations: true,
+	updateOrganization: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Portal, "OrgLabor", {
+	addOrgLabor: true,
+	deleteOrgLabor: true,
+	getOrgLabor: true,
+	getOrgLabors: true,
+	updateOrgLabor: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Portal, "PasswordPolicy", {
+	addPasswordPolicy: true,
+	deletePasswordPolicy: true,
+	updatePasswordPolicy: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Portal, "Permission", {
+	checkPermission: true,
+	hasGroupPermission: true,
+	hasUserPermission: true,
+	hasUserPermissions: true,
+	setGroupPermissions: true,
+	setOrgGroupPermissions: true,
+	setRolePermission: true,
+	setRolePermissions: true,
+	setUserPermissions: true,
+	unsetRolePermission: true,
+	unsetRolePermissions: true,
+	unsetUserPermissions: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Portal, "Phone", {
+	addPhone: true,
+	deletePhone: true,
+	getPhone: true,
+	getPhones: true,
+	updatePhone: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Portal, "Portal", {
+	getAutoDeployDirectory: true,
+	getBuildNumber: true,
+	test: true,
+	testCounterRollback: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Portal, "PluginSetting", {
+	updatePluginSetting: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Portal, "Portlet", {
+	getWARPortlets: true,
+	updatePortlet: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Portal, "PortletPreferences", {
+	deleteArchivedPreferences: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Portal, "Region", {
+	addRegion: true,
+	getRegions: true,
+	getRegion: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Portal, "Resource", {
+	getResource: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Portal, "Role", {
+	addRole: true,
+	addUserRoles: true,
+	deleteRole: true,
+	getGroupRole: true,
+	getGroupRoles: true,
+	getRole: true,
+	getUserGroupRoles: true,
+	getUserRelatedRoles: true,
+	getUserRoles: true,
+	hasUserRole: true,
+	hasUserRoles: true,
+	unsetUserRoles: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Portal, "Theme", {
+	getThemes: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Portal, "User", {
+	addGroupUsers: true,
+	addOrganizationUsers: true,
+	addPasswordPolicyUsers: true,
+	addRoleUsers: true,
+	addUserGroupUsers: true,
+	addUser: true,
+	deletePortrait: true,
+	deleteRoleUser: true,
+	deleteUser: true,
+	getDefaultUserId: true,
+	getGroupUserIds: true,
+	getOrganizationUserIds: true,
+	getRoleUserIds: true,
+	getUserByEmailAddress: true,
+	getUserById: true,
+	getUserByScreenName: true,
+	getUserIdByEmailAddress: true,
+	getUserIdByScreenName: true,
+	hasGroupUser: true,
+	hasRoleUser: true,
+	setRoleUsers: true,
+	setUserGroupUsers: true,
+	unsetGroupUsers: true,
+	unsetOrganizationUsers: true,
+	unsetPasswordPolicyUsers: true,
+	unsetRoleUsers: true,
+	unsetUserGroupUsers: true,
+	updateActive: true,
+	updateAgreedToTermsOfUse: true,
+	updateEmailAddress: true,
+	updateLockout: true,
+	updateOpenId: true,
+	updateOrganizations: true,
+	updatePassword: true,
+	updatePortrait: true,
+	updateReminderQuery: true,
+	updateScreenName: true,
+	updateUser: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Portal, "UserGroup", {
+	addGroupUserGroups: true,
+	addUserGroup: true,
+	deleteUserGroup: true,
+	getUserGroup: true,
+	getUserUserGroups: true,
+	unsetGroupUserGroups: true,
+	updateUserGroup: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Portal, "UserGroupRole", {
+	addUserGroupRoles: true,
+	deleteUserGroupRoles: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Portal, "Website", {
+	addWebsite: true,
+	deleteWebsite: true,
+	getWebsite: true,
+	getWebsites: true,
+	updateWebsite: true
+});
+
+Liferay.Service.register("Liferay.Service.Announcements", "com.liferay.portlet.announcements.service.http");
+
+Liferay.Service.registerClass(Liferay.Service.Announcements, "AnnouncementsDelivery", {
+	updateDelivery: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Announcements, "AnnouncementsEntry", {
+	addEntry: true,
+	deleteEntry: true,
+	updateEntry: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Announcements, "AnnouncementsFlag", {
+	addFlag: true,
+	getFlag: true,
+	deleteFlag: true
+});
+
+Liferay.Service.register("Liferay.Service.Blogs", "com.liferay.portlet.blogs.service.http");
+
+Liferay.Service.registerClass(Liferay.Service.Blogs, "BlogsEntry", {
+	addEntry: true,
+	deleteEntry: true,
+	getCompanyEntries: true,
+	getEntry: true,
+	getGroupEntries: true,
+	getOrganizationEntries: true,
+	updateEntry: true
+});
+
+Liferay.Service.register("Liferay.Service.Bookmarks", "com.liferay.portlet.bookmarks.service.http");
+
+Liferay.Service.registerClass(Liferay.Service.Bookmarks, "BookmarksEntry", {
+	addEntry: true,
+	deleteEntry: true,
+	getEntry: true,
+	openEntry: true,
+	updateEntry: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Bookmarks, "BookmarksFolder", {
+	addFolder: true,
+	deleteFolder: true,
+	getFolder: true,
+	updateFolder: true
+});
+
+Liferay.Service.register("Liferay.Service.Cal", "com.liferay.portlet.calendar.service.http");
+
+Liferay.Service.registerClass(Liferay.Service.Cal, "CalEvent", {
+	addEvent: true,
+	deleteEvent: true,
+	getEvent: true,
+	updateEvent: true
+});
+
+Liferay.Service.register("Liferay.Service.DL", "com.liferay.portlet.documentlibrary.service.http");
+
+Liferay.Service.registerClass(Liferay.Service.DL, "DLFileEntry", {
+	addFileEntry: true,
+	deleteFileEntry: true,
+	deleteFileEntryByTitle: true,
+	getFileEntries: true,
+	getFileEntry: true,
+	getFileEntryByTitle: true,
+	hasFileEntryLock: true,
+	lockFileEntry: true,
+	refreshFileEntryLock: true,
+	unlockFileEntry: true,
+	updateFileEntry: true,
+	verifyFileEntryLock: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.DL, "DLFileShortcut", {
+	addFileShortcut: true,
+	deleteFileShortcut: true,
+	getFileShortcut: true,
+	updateFileShortcut: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.DL, "DLFolder", {
+	addFolder: true,
+	copyFolder: true,
+	deleteFolder: true,
+	getFolder: true,
+	getFolderId: true,
+	getFolders: true,
+	hasInheritableLock: true,
+	lockFolder: true,
+	refreshFolderLock: true,
+	reIndexSearch: true,
+	unlockFolder: true,
+	updateFolder: true,
+	verifyInheritableLock: true
+});
+
+Liferay.Service.register("Liferay.Service.Expando", "com.liferay.portlet.expando.service.http");
+
+Liferay.Service.registerClass(Liferay.Service.Expando, "ExpandoColumn", {
+	addColumn: true,
+	deleteColumn: true,
+	updateColumn: true,
+	updateTypeSettings: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Expando, "ExpandoValue", {
+	addValue: true
+});
+
+Liferay.Service.register("Liferay.Service.IG", "com.liferay.portlet.imagegallery.service.http");
+
+Liferay.Service.registerClass(Liferay.Service.IG, "IGFolder", {
+	addFolder: true,
+	copyFolder: true,
+	deleteFolder: true,
+	getFolder: true,
+	getFolders: true,
+	updateFolder: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.IG, "IGImage", {
+	deleteImage: true,
+	deleteImageByFolderIdAndNameWithExtension: true,
+	getImage: true,
+	getImageByFolderIdAndNameWithExtension: true,
+	getImageByLargeImageId: true,
+	getImageBySmallImageId: true,
+	getImages: true
+});
+
+Liferay.Service.register("Liferay.Service.Journal", "com.liferay.portlet.journal.service.http");
+
+Liferay.Service.registerClass(Liferay.Service.Journal, "JournalArticle", {
+	addArticle: true,
+	copyArticle: true,
+	getArticle: true,
+	removeArticleLocale: true,
+	updateContent: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Journal, "JournalFeed", {
+	addFeed: true,
+	deleteFeed: true,
+	getFeed: true,
+	updateFeed: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Journal, "JournalStructure", {
+	addStructure: true,
+	copyStructure: true,
+	deleteStructure: true,
+	getStructure: true,
+	updateStructure: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Journal, "JournalTemplate", {
+	copyTemplate: true,
+	deleteTemplate: true,
+	getStructureTemplates: true,
+	getTemplate: true
+});
+
+Liferay.Service.register("Liferay.Service.MB", "com.liferay.portlet.messageboards.service.http");
+
+Liferay.Service.registerClass(Liferay.Service.MB, "MBBan", {
+	addBan: true,
+	deleteBan: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.MB, "MBCategory", {
+	addCategory: true,
+	deleteCategory: true,
+	getCategory: true,
+	getCategories: true,
+	getCategoriesCount: true,
+	subscribeCategory: true,
+	unsubscribeCategory: true,
+	updateCategory: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.MB, "MBMessage", {
+	addDiscussionMessage: true,
+	addMessage: true,
+	deleteDiscussionMessage: true,
+	deleteMessage: true,
+	getCategoryMessages: true,
+	getCategoryMessagesCount: true,
+	getMessage: true,
+	getMessageDisplay: true,
+	subscribeMessage: true,
+	unsubscribeMessage: true,
+	updateDiscussionMessage: true,
+	updateMessage: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.MB, "MBMessageFlag", {
+	addAnswerFlag: true,
+	deleteAnswerFlag: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.MB, "MBThread", {
+	moveThread: true,
+	splitThread: true
+});
+
+Liferay.Service.register("Liferay.Service.Polls", "com.liferay.portlet.polls.service.http");
+
+Liferay.Service.registerClass(Liferay.Service.Polls, "PollsQuestion", {
+	addQuestion: true,
+	deleteQuestion: true,
+	getQuestion: true,
+	updateQuestion: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Polls, "PollsVote", {
+	addVote: true
+});
+
+Liferay.Service.register("Liferay.Service.Ratings", "com.liferay.portlet.ratings.service.http");
+
+Liferay.Service.registerClass(Liferay.Service.Ratings, "RatingsEntry", {
+	deleteEntry: true,
+	updateEntry: true
+});
+
+Liferay.Service.register("Liferay.Service.Shopping", "com.liferay.portlet.shopping.service.http");
+
+Liferay.Service.registerClass(Liferay.Service.Shopping, "ShoppingCategory", {
+	addCategory: true,
+	deleteCategory: true,
+	getCategory: true,
+	updateCategory: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Shopping, "ShoppingCoupon", {
+	addCoupon: true,
+	deleteCoupon: true,
+	getCoupon: true,
+	search: true,
+	updateCoupon: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Shopping, "ShoppingItem", {
+	addBookItems: true,
+	deleteItem: true,
+	getItem: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Shopping, "ShoppingOrder", {
+	completeOrder: true,
+	deleteOrder: true,
+	getOrder: true,
+	sendEmail: true,
+	updateOrder: true
+});
+
+Liferay.Service.register("Liferay.Service.Social", "com.liferay.portlet.social.service.http");
+
+Liferay.Service.register("Liferay.Service.SC", "com.liferay.portlet.softwarecatalog.service.http");
+
+Liferay.Service.registerClass(Liferay.Service.SC, "SCLicense", {
+	addLicense: true,
+	deleteLicense: true,
+	getLicense: true,
+	updateLicense: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.SC, "SCFrameworkVersion", {
+	addFrameworkVersion: true,
+	deleteFrameworkVersion: true,
+	getFrameworkVersion: true,
+	getFrameworkVersions: true,
+	updateFrameworkVersion: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.SC, "SCProductEntry", {
+	addProductEntry: true,
+	deleteProductEntry: true,
+	getProductEntry: true,
+	updateProductEntry: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.SC, "SCProductVersion", {
+	addProductVersion: true,
+	deleteProductVersion: true,
+	getProductVersion: true,
+	getProductVersions: true,
+	getProductVersionsCount: true,
+	updateProductVersion: true
+});
+
+Liferay.Service.register("Liferay.Service.Tags", "com.liferay.portlet.tags.service.http");
+
+Liferay.Service.registerClass(Liferay.Service.Tags, "TagsAsset", {
+	deleteAsset: true,
+	getAsset: true,
+	getAssets: true,
+	getAssetsCount: true,
+	getAssetsRSS: true,
+	getAssetTypes: true,
+	getCompanyAssetDisplays: true,
+	getCompanyAssets: true,
+	getCompanyAssetsCount: true,
+	getCompanyAssetsRSS: true,
+	incrementViewCounter: true,
+	searchAssetDisplays: true,
+	searchAssetDisplaysCount: true,
+	updateAsset: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Tags, "TagsEntry", {
+	addEntry: true,
+	deleteEntry: true,
+	getEntries: true,
+	getEntry: true,
+	getGroupVocabularyEntries: true,
+	getGroupVocabularyRootEntries: true,
+	mergeEntries: true,
+	search: true,
+	updateEntry: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Tags, "TagsProperty", {
+	addProperty: true,
+	deleteProperty: true,
+	getProperties: true,
+	getPropertyValues: true,
+	updateProperty: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Tags, "TagsVocabulary", {
+	addVocabulary: true,
+	deleteVocabulary: true,
+	getCompanyVocabularies: true,
+	getGroupVocabularies: true,
+	getVocabulary: true,
+	updateVocabulary: true
+});
+
+Liferay.Service.register("Liferay.Service.Tasks", "com.liferay.portlet.tasks.service.http");
+
+Liferay.Service.registerClass(Liferay.Service.Tasks, "TasksReview", {
+	approveReview: true,
+	rejectReview: true,
+	updateReviews: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Tasks, "TasksProposal", {
+	addProposal: true,
+	deleteProposal: true,
+	updateProposal: true
+});
+
+Liferay.Service.register("Liferay.Service.Wiki", "com.liferay.portlet.wiki.service.http");
+
+Liferay.Service.registerClass(Liferay.Service.Wiki, "WikiNode", {
+	addNode: true,
+	deleteNode: true,
+	getNode: true,
+	subscribeNode: true,
+	unsubscribeNode: true,
+	updateNode: true
+});
+
+Liferay.Service.registerClass(Liferay.Service.Wiki, "WikiPage", {
+	addPage: true,
+	addPageAttachments: true,
+	changeParent: true,
+	deletePage: true,
+	deletePageAttachment: true,
+	getNodePages: true,
+	getNodePagesRSS: true,
+	getPage: true,
+	getPagesRSS: true,
+	movePage: true,
+	revertPage: true,
+	subscribePage: true,
+	unsubscribePage: true,
+	updatePage: true
+});

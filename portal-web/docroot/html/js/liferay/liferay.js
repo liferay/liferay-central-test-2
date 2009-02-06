@@ -89,6 +89,53 @@ Liferay.Service = {
 		}
 
 		return serviceParameters;
+	},
+
+	namespace: function(namespace) {
+		var curLevel = Liferay || {};
+
+		if (typeof namespace == 'string') {
+			var levels = namespace.split(".");
+
+			for (var i = (levels[0] == "Liferay") ? 1 : 0; i < levels.length; i++) {
+		 		curLevel[levels[i]] = curLevel[levels[i]] || {};
+				curLevel = curLevel[levels[i]];
+			}
+		}
+		else {
+			curLevel = namespace || {};
+		}
+
+		return curLevel;
+	},
+
+	register: function(serviceName, package) {
+		var module = Liferay.Service.namespace(serviceName);
+		module.servicePackage = package.replace(/[.]$/, '') + '.';
+		return module;
+	},
+
+	registerClass: function(serviceName, className, prototype) {
+		var module = Liferay.Service.namespace(serviceName);
+		var moduleClassName = module[className] = {};
+
+		moduleClassName.serviceClassName = module.servicePackage + className + Liferay.Service.classNameSuffix;
+
+		jQuery.each(prototype, function(methodName, value) {
+			if (value) {
+				var handler = function(params, callback) {
+					params.serviceClassName = moduleClassName.serviceClassName;
+					params.serviceMethodName = methodName;
+					return Liferay.Service.ajax(params, callback);
+				};
+
+				if (jQuery.isFunction(value)) {
+					handler = value;
+				}
+
+				moduleClassName[methodName] = handler;
+			}
+		});
 	}
 };
 

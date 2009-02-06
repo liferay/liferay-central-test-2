@@ -1,12 +1,5 @@
-Liferay.Service.${portletShortName}.${entity.name} = {
-	serviceClassName: Liferay.Service.${portletShortName}.servicePackage + "${entity.name}" + Liferay.Service.classNameSuffix,
+Liferay.Service.registerClass(Liferay.Service.${portletShortName}, "${entity.name}", {
 	<#list methods as method>
-
-	${method}: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "${method}";
-
-		return Liferay.Service.ajax(params, callback);
-	}<#if method_has_next>,</#if>
+	${method}: true<#if method_has_next>,</#if>
 	</#list>
-};
+});
