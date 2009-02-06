@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,8 +22,8 @@
 
 package com.liferay.documentlibrary.util;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.File;
@@ -32,6 +32,7 @@ import java.io.File;
  * <a href="AdvancedFileSystemHook.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
 public class AdvancedFileSystemHook extends FileSystemHook {
 
@@ -43,8 +44,9 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 		if (getDepth(sb.toString()) > 3) {
 			return;
 		}
-		
+
 		sb.append(fileNameFragment.substring(0, 2) + StringPool.SLASH);
+
 		buildPath(sb, fileNameFragment.substring(2));
 	}
 
@@ -59,10 +61,7 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 
 		File repositoryDir = getRepositoryDir(companyId, repositoryId);
 
-		File fileNameDir = new File(
-			repositoryDir + StringPool.SLASH + dirName);
-
-		return fileNameDir;
+		return new File(repositoryDir + StringPool.SLASH + dirName);
 	}
 
 	protected File getFileNameVersionFile(
@@ -79,6 +78,7 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 
 			if (fileNameFragment.startsWith("DLFE-")) {
 				fileNameFragment = fileNameFragment.substring(5);
+
 				sb.append("DLFE" + StringPool.SLASH);
 			}
 
@@ -98,11 +98,9 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 			String fileNameFragment = removeExtension(
 				fileName.substring(pos + 1));
 
-			File fileNameVersionFile = new File(
-				fileNameDir + StringPool.SLASH +
-					fileNameFragment + StringPool.UNDERLINE + version + ext);
-
-			return fileNameVersionFile;
+			return new File(
+				fileNameDir + StringPool.SLASH + fileNameFragment +
+					StringPool.UNDERLINE + version + ext);
 		}
 	}
 
@@ -114,7 +112,7 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 				0, fileName.length() - ext.length() - 1);
 		}
 
-		return  fileName;
+		return fileName;
 	}
 
 }
