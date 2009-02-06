@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringPool;
@@ -615,6 +616,10 @@ public class PluginPackageUtil {
 		RemotePluginPackageRepository repository = null;
 
 		StringBuilder sb = new StringBuilder();
+
+		if (!repositoryURL.startsWith(Http.HTTP)) {
+			sb.append(Http.HTTP_WITH_SLASH);
+		}
 
 		sb.append(repositoryURL);
 		sb.append(StringPool.SLASH);
