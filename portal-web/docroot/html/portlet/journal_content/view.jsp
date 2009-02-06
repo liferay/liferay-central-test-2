@@ -129,7 +129,7 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 		boolean isStaged = (layout != null) && layout.getGroup().hasStagingGroup();
 		%>
 
-		<c:if test="<%= ((showEditArticleIcon || showEditTemplateIcon || showSelectArticleIcon || showAddArticleIcon) && !isStaged) || (enableConversions || enablePrint || enableRatings || enableComments) %>">
+		<c:if test="<%= ((showEditArticleIcon || showEditTemplateIcon || showSelectArticleIcon || showAddArticleIcon) && !isStaged) || (enablePrint || enableRatings || enableComments || enableConversions) %>">
 			<div class="lfr-meta-actions edit-controls">
 				<c:if test="<%= themeDisplay.isSignedIn() && ((showEditArticleIcon || showEditTemplateIcon || showSelectArticleIcon || showAddArticleIcon) && !isStaged) %>">
 					<c:if test="<%= showEditArticleIcon %>">
@@ -252,6 +252,5 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 				</c:if>
 			</div>
 		</c:if>
-
 	</c:otherwise>
 </c:choose>
