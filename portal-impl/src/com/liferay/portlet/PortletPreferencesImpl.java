@@ -101,17 +101,12 @@ public class PortletPreferencesImpl
 			values = preference.getValues();
 		}
 
-		String value = null;
-
-		if (Validator.isNotNull(values)) {
-			value = _getActualValue(values[0]);
+		if ((values != null) && (values.length > 0)) {
+			return _getActualValue(values[0]);
 		}
-
-		if (Validator.isNull(value)) {
-			value = _getActualValue(def);
+		else {
+			return _getActualValue(def);
 		}
-
-		return value;
 	}
 
 	public void setValue(String key, String value) throws ReadOnlyException {
@@ -149,7 +144,7 @@ public class PortletPreferencesImpl
 			values = preference.getValues();
 		}
 
-		if (Validator.isNotNull(values)) {
+		if ((values != null) && (values.length > 0)) {
 			return _getActualValues(values);
 		}
 		else {
