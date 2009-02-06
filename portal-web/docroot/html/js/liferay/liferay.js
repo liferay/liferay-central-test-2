@@ -111,7 +111,9 @@ Liferay.Service = {
 
 	register: function(serviceName, package) {
 		var module = Liferay.Service.namespace(serviceName);
+
 		module.servicePackage = package.replace(/[.]$/, '') + '.';
+
 		return module;
 	},
 
@@ -121,21 +123,25 @@ Liferay.Service = {
 
 		moduleClassName.serviceClassName = module.servicePackage + className + Liferay.Service.classNameSuffix;
 
-		jQuery.each(prototype, function(methodName, value) {
-			if (value) {
-				var handler = function(params, callback) {
-					params.serviceClassName = moduleClassName.serviceClassName;
-					params.serviceMethodName = methodName;
-					return Liferay.Service.ajax(params, callback);
-				};
+		jQuery.each(
+			prototype,
+			function(methodName, value) {
+				if (value) {
+					var handler = function(params, callback) {
+						params.serviceClassName = moduleClassName.serviceClassName;
+						params.serviceMethodName = methodName;
 
-				if (jQuery.isFunction(value)) {
-					handler = value;
+						return Liferay.Service.ajax(params, callback);
+					};
+
+					if (jQuery.isFunction(value)) {
+						handler = value;
+					}
+
+					moduleClassName[methodName] = handler;
 				}
-
-				moduleClassName[methodName] = handler;
 			}
-		});
+		);
 	}
 };
 

@@ -1832,20 +1832,20 @@ public class ServiceBuilder {
 		String newContent = new String(oldContent);
 
 		int oldBegin = oldContent.indexOf(
-			"Liferay.Service." + _portletShortName);
+			"Liferay.Service.register(\"Liferay.Service." + _portletShortName);
 
 		int oldEnd = oldContent.lastIndexOf(
 			"Liferay.Service." + _portletShortName);
 
-		oldEnd = oldContent.indexOf("};", oldEnd);
+		oldEnd = oldContent.indexOf(");", oldEnd);
 
 		int newBegin = newContent.indexOf(
-			"Liferay.Service." + _portletShortName);
+			"Liferay.Service.register(\"Liferay.Service." + _portletShortName);
 
 		int newEnd = newContent.lastIndexOf(
 			"Liferay.Service." + _portletShortName);
 
-		newEnd = newContent.indexOf("};", newEnd);
+		newEnd = newContent.indexOf(");", newEnd);
 
 		if (newBegin == -1) {
 			newContent = oldContent + "\n\n" + content.toString().trim();
@@ -1855,6 +1855,8 @@ public class ServiceBuilder {
 				newContent.substring(0, oldBegin) + content.toString().trim() +
 					newContent.substring(oldEnd + 2, newContent.length());
 		}
+
+		newContent = newContent.trim();
 
 		if (!oldContent.equals(newContent)) {
 			FileUtil.write(jsonFile, newContent);
