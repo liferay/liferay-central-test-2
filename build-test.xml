@@ -3,14 +3,18 @@
 <project name="portal-test" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build.xml" />
 
-	<target name="deploy-plugins">
-		<property name="liferay.home" value="${app.server.dir}/.."/>
+	<target name="deploy-simple-server-plugins">
+		<property name="liferay.home" value="${simple.server.dir}/.."/>
 
 		<delete dir="${liferay.home}/data" />
 		<delete dir="${liferay.home}/deploy" />
 
-		<echo file="${lp.plugins.dir}/build.${user.name}.properties">app.server.dir=${app.server.dir}
-app.server.portal.dir=${app.server.portal.dir}
+		<exec dir="${lp.plugins.dir}" executable="cmd.exe" os="${os.windows}">
+			<arg line="/c svn update" />
+		</exec>
+
+		<echo file="${lp.plugins.dir}/build.${user.name}.properties">app.server.dir=${simple.server.dir}
+app.server.portal.dir=${simple.server.portal.dir}
 
 plugins.includes=${plugins.includes}</echo>
 
@@ -18,10 +22,144 @@ plugins.includes=${plugins.includes}</echo>
 			<target name="clean" />
 			<target name="deploy" />
 		</ant>
+
+		<delete dir="${lp.plugins.dir}/dist" />
+		<mkdir dir="${lp.plugins.dir}/dist" />
+	</target>
+
+	<target name="run-jboss-tomcat-5.0">
+		<antcall target="run-simple-server">
+			<param name="simple.server.dir" value="${app.server.parent.dir}/jboss-tomcat-5.0.0" />
+			<param name="simple.server.bin.dir" value="${app.server.parent.dir}/jboss-tomcat-5.0.0/bin" />
+			<param name="simple.server.deploy.dir" value="${app.server.parent.dir}/jboss-tomcat-5.0.0/server/default/deploy" />
+			<param name="simple.server.portal.dir" value="${app.server.parent.dir}/jboss-tomcat-5.0.0/server/default/deploy/ROOT.war" />
+			<param name="simple.server.start.executable" value="run${file.suffix.bat}" />
+			<param name="simple.server.stop.executable" value="shutdown${file.suffix.bat}" />
+			<param name="simple.server.stop.executable.arg.line" value="-S" />
+		</antcall>
+	</target>
+
+	<target name="run-simple-server">
+		<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
+
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset
+				dir="${simple.server.deploy.dir}"
+				includes="*-portlet/**,*-theme/**"
+			/>
+		</delete>
+
+		<if>
+			<not>
+				<equals arg1="${portlet.plugins.includes}" arg2="$${portlet.plugins.includes}" />
+			</not>
+			<then>
+				<antcall target="deploy-simple-server-plugins">
+					<param name="plugin.types" value="portlets" />
+					<param name="plugins.includes" value="${portlet.plugins.includes}" />
+				</antcall>
+			</then>
+		</if>
+
+		<if>
+			<not>
+				<equals arg1="${theme.plugins.includes}" arg2="$${theme.plugins.includes}" />
+			</not>
+			<then>
+				<antcall target="deploy-simple-server-plugins">
+					<param name="plugin.types" value="themes" />
+					<param name="plugins.includes" value="${theme.plugins.includes}" />
+				</antcall>
+			</then>
+		</if>
+
+		<parallel>
+			<exec dir="${simple.server.bin.dir}" executable="${simple.server.start.executable}" resolveexecutable="true" spawn="false" />
+
+			<sequential>
+				<waitfor>
+					<http url="http://localhost:8080" />
+				</waitfor>
+
+				<sleep seconds="30" />
+
+				<if>
+					<equals arg1="${test.class}" arg2="PortalWebTestSuite" />
+					<then>
+						<ant dir="portal-impl" target="test-class" inheritAll="false">
+							<property name="class" value="ServiceHttpTestSuite" />
+						</ant>
+
+						<ant dir="portal-impl" target="test-class" inheritAll="false">
+							<property name="class" value="ServiceSoapTestSuite" />
+						</ant>
+					</then>
+				</if>
+
+				<ant dir="portal-web" target="test-class" inheritAll="false">
+					<property name="class" value="${test.class}" />
+				</ant>
+
+				<exec dir="${simple.server.bin.dir}" executable="${simple.server.stop.executable}" resolveexecutable="true" spawn="true">
+					<arg line="${simple.server.stop.executable.arg.line}" />
+				</exec>
+
+				<sleep seconds="10" />
+			</sequential>
+		</parallel>
+	</target>
+
+	<target name="run-tomcat-5.5">
+		<antcall target="run-simple-server">
+			<param name="simple.server.dir" value="${app.server.tomcat.dir}" />
+			<param name="simple.server.bin.dir" value="${app.server.tomcat.bin.dir}" />
+			<param name="simple.server.deploy.dir" value="${app.server.tomcat.deploy.dir}" />
+			<param name="simple.server.portal.dir" value="${app.server.tomcat.portal.dir}" />
+			<param name="simple.server.start.executable" value="startup${file.suffix.bat}" />
+			<param name="simple.server.stop.executable" value="shutdown${file.suffix.bat}" />
+		</antcall>
+	</target>
+
+	<target name="start-selenium">
+		<java jar="lib/development/selenium-server.jar" fork="true" spawn="true">
+			<arg line="-port 14444" />
+		</java>
+	</target>
+
+	<target name="stop-selenium">
+		<antelope:post to="http://localhost:14444/selenium-server/driver/?cmd=shutDown" wantresponse="true" />
 	</target>
 
 	<target name="test">
-		<antcall target="all" />
+		<echo file="portal-impl/src/portal-ext.properties"><![CDATA[jdbc.default.jndi.name=
+
+jdbc.default.driverClassName=com.mysql.jdbc.Driver
+jdbc.default.url=jdbc:mysql://localhost/lportal?useUnicode=true&characterEncoding=UTF-8&useFastDateParsing=false
+jdbc.default.username=
+jdbc.default.password=
+
+browser.launcher.url=
+
+mail.session.jndi.name=
+
+axis.servlet.hosts.allowed=
+
+tunnel.servlet.hosts.allowed=]]></echo>
+
+		<delete file="portal-web/docroot/WEB-INF/web.xml" />
+
+		<exec dir="." executable="cmd.exe" os="${os.windows}">
+			<arg line="/c svn update portal-web/docroot/WEB-INF/web.xml" />
+		</exec>
+
+		<replace
+			file="portal-web/docroot/WEB-INF/web.xml"
+			token="session-timeout&gt;30&lt;"
+			value="session-timeout&gt;2&lt;"
+		/>
+
+		<antcall target="clean" />
+		<antcall target="start" />
 
 		<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
 
@@ -42,124 +180,63 @@ plugins.includes=${plugins.includes}</echo>
 		<ant dir="util-java" target="test" inheritAll="false" />
 	</target>
 
+	<target name="test-jboss-tomcat-5.0" depends="test">
+		<ant antfile="build-dist.xml" target="build-dist-jboss-tomcat-5.0" />
+
+		<antcall target="start-selenium" />
+
+		<antcall target="run-jboss-tomcat-5.0">
+			<param name="test.class" value="PortalWebTestSuite" />
+		</antcall>
+
+		<antcall target="stop-selenium" />
+	</target>
+
 	<target name="test-themes">
 		<exec dir="${lp.plugins.dir}" executable="cmd.exe" os="${os.windows}">
 			<arg line="/c svn update" />
 		</exec>
 
-		<java jar="lib/development/selenium-server.jar" fork="true" spawn="true" />
+		<antcall target="start-selenium" />
 
-		<antcall target="test-tomcat-runtime">
+		<antcall target="run-tomcat-5.5">
 			<param name="test.class" value="ThemesTestSuite" />
 			<param name="theme.plugins.includes" value="08-gulona-theme,liferay-jedi-theme" />
 		</antcall>
 
-		<antelope:post to="http://localhost:4444/selenium-server/driver/?cmd=shutDown" wantresponse="false" />
+		<antcall target="stop-selenium" />
 	</target>
 
-	<target name="test-tomcat">
-		<replace
-			file="${app.server.tomcat.portal.dir}/WEB-INF/web.xml"
-			token="session-timeout&gt;30&lt;"
-			value="session-timeout&gt;2&lt;"
-		/>
+	<target name="test-tomcat-5.5" depends="test">
+		<ant antfile="build-dist.xml" target="build-dist-tomcat-5.5" />
 
-		<exec dir="${lp.plugins.dir}" executable="cmd.exe" os="${os.windows}">
-			<arg line="/c svn update" />
-		</exec>
+		<antcall target="start-selenium" />
 
-		<java jar="lib/development/selenium-server.jar" fork="true" spawn="true" />
-
-		<antcall target="test-tomcat-runtime">
+		<antcall target="run-tomcat-5.5">
 			<param name="test.class" value="PortalWebTestSuite" />
 		</antcall>
 
-		<antcall target="test-tomcat-runtime">
+		<antcall target="run-tomcat-5.5">
 			<param name="test.class" value="ControlPanelTestSuite" />
 		</antcall>
 
-		<antcall target="test-tomcat-runtime">
+		<antcall target="run-tomcat-5.5">
 			<param name="test.class" value="PermissionsTestSuite" />
 		</antcall>
 
-		<antcall target="test-tomcat-runtime">
+		<antcall target="run-tomcat-5.5">
 			<param name="test.class" value="Plugins1TestSuite" />
 			<param name="portlet.plugins.includes" value="alfresco-content-portlet,analog-clock-portlet,chat-portlet,flash-portlet,google-adsense-portlet,google-gadget-portlet,google-maps-portlet,google-search-portlet,ip-geocoder-portlet,mail-portlet,release-tools-portlet,ruby-console-portlet,sample-dao-portlet,sample-groovy-portlet,sample-hibernate-portlet,sample-icefaces-jsf-1.1-myfaces-jsp-portlet,sample-icefaces-jsf-1.1-sun-facelets-portlet,sample-icefaces-jsf-1.1-sun-jsp-portlet,sample-icefaces-jsf-1.2-sun-facelets-portlet,sample-javascript-portlet,sample-jsf-1.1-myfaces-facelets-portlet,sample-jsf-1.1-myfaces-jsp-portlet,sample-jsf-1.1-sun-facelets-portlet,sample-jsf-1.1-sun-jsp-portlet,sample-jsf-1.2-sun-facelets-portlet,sample-jsf-1.2-sun-jsp-portlet,sample-json-portlet,sample-jsp-portlet,sample-lar-portlet,sample-laszlo-portlet" />
 		</antcall>
 
-		<antcall target="test-tomcat-runtime">
+		<antcall target="run-tomcat-5.5">
 			<param name="test.class" value="Plugins2TestSuite" />
 			<param name="portlet.plugins.includes" value="sample-localized-portlet,sample-orbeon-forms-portlet,sample-permissions-portlet,sample-php-portlet,sample-portal-client-portlet,sample-portal-service-portlet,sample-python-portlet,sample-ruby-portlet,sample-service-builder-portlet,sample-sign-in-portlet,sample-spring-portlet,sample-struts-liferay-portlet,sample-struts-portlet,sample-tapestry-portlet,sample-test-portlet,sample-ui-taglibs-portlet,sample-wap-portlet,stocks-portlet,sun-bookmark-portlet,sun-elluminate-portlet,sun-flickr-portlet,sun-iframe-portlet,sun-mashup-portlet,sun-notepad-portlet,sun-photoshow-ajax-portlet,sun-privacy-guard-portlet,sun-rss-portlet,sun-showtime-portlet,sun-tour-ipc-portlet,sun-video-portlet,sun-weather-portlet,twitter-portlet,weather-portlet,web-form-portlet,westminster-catechism-portlet,wiki-navigation-portlet,wol-portlet" />
 		</antcall>
 
-		<antelope:post to="http://localhost:4444/selenium-server/driver/?cmd=shutDown" wantresponse="false" />
+		<antcall target="stop-selenium" />
 	</target>
 
-	<target name="test-tomcat-runtime">
-		<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
-
-		<delete includeemptydirs="true" failonerror="false">
-			<fileset
-				dir="${app.server.deploy.dir}"
-				includes="*-portlet/**"
-			/>
-		</delete>
-
-		<if>
-			<not>
-				<equals arg1="${portlet.plugins.includes}" arg2="$${portlet.plugins.includes}" />
-			</not>
-			<then>
-				<antcall target="deploy-plugins">
-					<param name="plugin.types" value="portlets" />
-					<param name="plugins.includes" value="${portlet.plugins.includes}" />
-				</antcall>
-			</then>
-		</if>
-
-		<if>
-			<not>
-				<equals arg1="${theme.plugins.includes}" arg2="$${theme.plugins.includes}" />
-			</not>
-			<then>
-				<antcall target="deploy-plugins">
-					<param name="plugin.types" value="themes" />
-					<param name="plugins.includes" value="${theme.plugins.includes}" />
-				</antcall>
-			</then>
-		</if>
-
-		<parallel>
-			<exec dir="${app.server.tomcat.bin.dir}" executable="startup${file.suffix.bat}" resolveexecutable="true" spawn="true" />
-
-			<sequential>
-				<waitfor>
-					<http url="http://localhost:8080" />
-				</waitfor>
-
-				<sleep seconds="60" />
-
-				<if>
-					<equals arg1="${test.class}" arg2="PortalWebTestSuite" />
-					<then>
-						<ant dir="portal-impl" target="test-class" inheritAll="false">
-							<property name="class" value="ServiceHttpTestSuite" />
-						</ant>
-
-						<ant dir="portal-impl" target="test-class" inheritAll="false">
-							<property name="class" value="ServiceSoapTestSuite" />
-						</ant>
-					</then>
-				</if>
-
-				<ant dir="portal-web" target="test-class" inheritAll="false">
-					<property name="class" value="${test.class}" />
-				</ant>
-
-				<exec dir="${app.server.tomcat.bin.dir}" executable="shutdown${file.suffix.bat}" resolveexecutable="true" spawn="true" />
-
-				<sleep seconds="10" />
-			</sequential>
-		</parallel>
+	<target name="test-websphere-6.0" depends="test">
 	</target>
 </project>
