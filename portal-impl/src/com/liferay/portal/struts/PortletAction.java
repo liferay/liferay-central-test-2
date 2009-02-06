@@ -249,8 +249,7 @@ public class PortletAction extends Action {
 			if (BrowserSnifferUtil.isIe(request) &&
 				(BrowserSnifferUtil.getMajorVersion(request) == 6.0)) {
 
-				redirect = StringUtil.replace(
-					redirect, StringPool.POUND, "&#");
+				redirect = StringUtil.replace(redirect, StringPool.POUND, "&#");
 			}
 
 			actionResponse.sendRedirect(redirect);
