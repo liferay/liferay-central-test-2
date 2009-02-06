@@ -38,8 +38,8 @@ import javax.portlet.PortletMode;
 import javax.portlet.WindowState;
 
 /**
- * <a href="AssetPublisherFriendlyURLMapper.java.html">
- * <b><i>View Source</i></b></a>
+ * <a href="AssetPublisherFriendlyURLMapper.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Julio Camarero
  *
@@ -58,8 +58,8 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 			((windowState == null) ||
 			 (!windowState.equals(LiferayWindowState.EXCLUSIVE)))) {
 
-			String assetId = portletURL.getParameter("assetId");
 			String portletId = portletURL.getPortletId();
+			String assetId = portletURL.getParameter("assetId");
 			String type = GetterUtil.getString(
 				portletURL.getParameter("type"), "content");
 

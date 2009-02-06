@@ -59,6 +59,7 @@ if (className.equals(BlogsEntry.class.getName())) {
 	viewFullContentURL.setParameter("type", AssetPublisherUtil.TYPE_BLOG);
 
 	String urlTitle = entry.getUrlTitle();
+
 	if (Validator.isNotNull(urlTitle)) {
 		viewFullContentURL.setParameter("assetId", urlTitle);
 	}

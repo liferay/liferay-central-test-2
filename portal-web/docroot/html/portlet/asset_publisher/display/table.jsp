@@ -51,15 +51,8 @@ if (className.equals(BlogsEntry.class.getName())) {
 		title = entry.getTitle();
 	}
 
-	PortletURL entryURL = renderResponse.createRenderURL();
-
-	entryURL.setParameter("struts_action", "/asset_publisher/view_content");
-	entryURL.setParameter("redirect", currentURL);
+	viewFullContentURL.setParameter("assetId", entry.getUrlTitle());
 	viewFullContentURL.setParameter("type", AssetPublisherUtil.TYPE_BLOG);
-
-	String urlTitle = entry.getUrlTitle();
-
-	viewFullContentURL.setParameter("assetId", urlTitle);
 
 	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/blogs/find_entry?entryId=" + entry.getEntryId() + "&noSuchEntryRedirect=" + HttpUtil.encodeURL(viewFullContentURL.toString()) : viewFullContentURL.toString();
 }

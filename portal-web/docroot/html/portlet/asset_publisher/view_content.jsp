@@ -34,23 +34,25 @@ String urlTitle = ParamUtil.getString (renderRequest, "urlTitle");
 List results = new ArrayList();
 
 int assetIndex = 0;
-long classPK = 0;
+
 TagsAsset asset = null;
+
 String className = StringPool.BLANK;
+long classPK = 0;
 
 try {
 	if (assetId <= 0) {
 		if (type.equals (AssetPublisherUtil.TYPE_BLOG)) {
 			BlogsEntry entry = BlogsEntryServiceUtil.getEntry(scopeGroupId, urlTitle);
 
-			classPK = entry.getPrimaryKey();
 			className = BlogsEntry.class.getName();
+			classPK = entry.getPrimaryKey();
 		}
 		else if (type.equals (AssetPublisherUtil.TYPE_CONTENT)) {
 			JournalArticle article = JournalArticleServiceUtil.getArticle(scopeGroupId, urlTitle);
 
-			classPK = article.getResourcePrimKey();
 			className = JournalArticle.class.getName();
+			classPK = article.getResourcePrimKey();
 		}
 
 		asset = TagsAssetLocalServiceUtil.getAsset(className, classPK);
