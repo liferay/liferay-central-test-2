@@ -25,11 +25,13 @@ package com.liferay.portal.servlet.filters.strip;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.util.MinifierUtil;
@@ -185,8 +187,8 @@ public class StripFilter extends BasePortalFilter {
 
 		boolean removeStartingWhitespace = true;
 
-		StringBuilder scriptSB = new StringBuilder();
-		StringBuilder styleSB = new StringBuilder();
+		ByteArrayMaker scriptBytes = new ByteArrayMaker();
+		ByteArrayMaker styleBytes = new ByteArrayMaker();
 
 		for (int i = 0; i < oldByteArray.length; i++) {
 			byte b = oldByteArray[i];
@@ -232,9 +234,9 @@ public class StripFilter extends BasePortalFilter {
 					if (hasMarker(oldByteArray, i, _MARKER_SCRIPT_CLOSE)) {
 						state = _STATE_NORMAL;
 
-						String scriptContent = scriptSB.toString();
+						String scriptContent = scriptBytes.toString(StringPool.UTF8);
 
-						scriptSB = new StringBuilder();
+						scriptBytes = new ByteArrayMaker();
 
 						scriptContent = scriptContent.substring(
 							_SCRIPT_TYPE_JAVASCRIPT.length()).trim();
@@ -267,9 +269,9 @@ public class StripFilter extends BasePortalFilter {
 					if (hasMarker(oldByteArray, i, _MARKER_STYLE_CLOSE)) {
 						state = _STATE_NORMAL;
 
-						String styleContent = styleSB.toString();
+						String styleContent = styleBytes.toString(StringPool.UTF8);
 
-						styleSB = new StringBuilder();
+						styleBytes = new ByteArrayMaker();
 
 						styleContent = styleContent.substring(
 							_STYLE_TYPE_CSS.length()).trim();
@@ -347,10 +349,10 @@ public class StripFilter extends BasePortalFilter {
 			}
 
 			if (state == _STATE_MINIFY_SCRIPT) {
-				scriptSB.append(c);
+				scriptBytes.write(b);
 			}
 			else if (state == _STATE_MINIFY_STYLE) {
-				styleSB.append(c);
+				styleBytes.write(b);
 			}
 			else {
 				newByteArray[newByteArrayPos++] = b;
