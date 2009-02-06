@@ -27,6 +27,38 @@ plugins.includes=${plugins.includes}</echo>
 		<mkdir dir="${lp.plugins.dir}/dist" />
 	</target>
 
+	<target name="prepare">
+		<echo file="portal-impl/src/portal-ext.properties"><![CDATA[jdbc.default.jndi.name=
+
+jdbc.default.driverClassName=com.mysql.jdbc.Driver
+jdbc.default.url=jdbc:mysql://localhost/lportal?useUnicode=true&characterEncoding=UTF-8&useFastDateParsing=false
+jdbc.default.username=
+jdbc.default.password=
+
+browser.launcher.url=
+
+mail.session.jndi.name=
+
+axis.servlet.hosts.allowed=
+
+tunnel.servlet.hosts.allowed=]]></echo>
+
+		<delete file="portal-web/docroot/WEB-INF/web.xml" />
+
+		<exec dir="." executable="cmd.exe" os="${os.windows}">
+			<arg line="/c svn update portal-web/docroot/WEB-INF/web.xml" />
+		</exec>
+
+		<replace
+			file="portal-web/docroot/WEB-INF/web.xml"
+			token="session-timeout&gt;30&lt;"
+			value="session-timeout&gt;2&lt;"
+		/>
+
+		<antcall target="clean" />
+		<antcall target="start" />
+	</target>
+
 	<target name="run-jboss-tomcat-5.0">
 		<antcall target="run-simple-server">
 			<param name="simple.server.dir" value="${app.server.parent.dir}/jboss-tomcat-5.0.0" />
@@ -130,37 +162,7 @@ plugins.includes=${plugins.includes}</echo>
 		<antelope:post to="http://localhost:14444/selenium-server/driver/?cmd=shutDown" wantresponse="true" />
 	</target>
 
-	<target name="test">
-		<echo file="portal-impl/src/portal-ext.properties"><![CDATA[jdbc.default.jndi.name=
-
-jdbc.default.driverClassName=com.mysql.jdbc.Driver
-jdbc.default.url=jdbc:mysql://localhost/lportal?useUnicode=true&characterEncoding=UTF-8&useFastDateParsing=false
-jdbc.default.username=
-jdbc.default.password=
-
-browser.launcher.url=
-
-mail.session.jndi.name=
-
-axis.servlet.hosts.allowed=
-
-tunnel.servlet.hosts.allowed=]]></echo>
-
-		<delete file="portal-web/docroot/WEB-INF/web.xml" />
-
-		<exec dir="." executable="cmd.exe" os="${os.windows}">
-			<arg line="/c svn update portal-web/docroot/WEB-INF/web.xml" />
-		</exec>
-
-		<replace
-			file="portal-web/docroot/WEB-INF/web.xml"
-			token="session-timeout&gt;30&lt;"
-			value="session-timeout&gt;2&lt;"
-		/>
-
-		<antcall target="clean" />
-		<antcall target="start" />
-
+	<target name="test" depends="prepare">
 		<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
 
 		<ant dir="portal-impl" target="test-class" inheritAll="false">
@@ -180,7 +182,7 @@ tunnel.servlet.hosts.allowed=]]></echo>
 		<ant dir="util-java" target="test" inheritAll="false" />
 	</target>
 
-	<target name="test-jboss-tomcat-5.0" depends="test">
+	<target name="test-jboss-tomcat-5.0" depends="prepare">
 		<ant antfile="build-dist.xml" target="build-dist-jboss-tomcat-5.0" />
 
 		<antcall target="start-selenium" />
@@ -192,7 +194,9 @@ tunnel.servlet.hosts.allowed=]]></echo>
 		<antcall target="stop-selenium" />
 	</target>
 
-	<target name="test-themes">
+	<target name="test-themes" depends="prepare">
+		<ant antfile="build-dist.xml" target="build-dist-tomcat-5.5" />
+
 		<exec dir="${lp.plugins.dir}" executable="cmd.exe" os="${os.windows}">
 			<arg line="/c svn update" />
 		</exec>
@@ -207,7 +211,7 @@ tunnel.servlet.hosts.allowed=]]></echo>
 		<antcall target="stop-selenium" />
 	</target>
 
-	<target name="test-tomcat-5.5" depends="test">
+	<target name="test-tomcat-5.5" depends="prepare">
 		<ant antfile="build-dist.xml" target="build-dist-tomcat-5.5" />
 
 		<antcall target="start-selenium" />
@@ -237,6 +241,6 @@ tunnel.servlet.hosts.allowed=]]></echo>
 		<antcall target="stop-selenium" />
 	</target>
 
-	<target name="test-websphere-6.0" depends="test">
+	<target name="test-websphere-6.0" depends="prepare">
 	</target>
 </project>
