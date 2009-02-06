@@ -42,9 +42,9 @@ public class MessagingHotDeployListener extends BaseHotDeployListener {
 		try {
 			doInvokeDeploy(event);
 		}
-		catch (Exception e) {
+		catch (Throwable t) {
 			throwHotDeployException(
-				event, "Error sending deploy message for ", e);
+				event, "Error sending deploy message for ", t);
 		}
 	}
 
@@ -52,9 +52,9 @@ public class MessagingHotDeployListener extends BaseHotDeployListener {
 		try {
 			doInvokeUndeploy(event);
 		}
-		catch (Exception e) {
+		catch (Throwable t) {
 			throwHotDeployException(
-				event, "Error sending undeploy message for ", e);
+				event, "Error sending undeploy message for ", t);
 		}
 	}
 

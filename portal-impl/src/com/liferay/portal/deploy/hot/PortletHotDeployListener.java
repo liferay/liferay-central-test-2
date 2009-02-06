@@ -120,9 +120,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		try {
 			doInvokeDeploy(event);
 		}
-		catch (Exception e) {
+		catch (Throwable t) {
 			throwHotDeployException(
-				event, "Error registering portlets for ", e);
+				event, "Error registering portlets for ", t);
 		}
 	}
 
@@ -130,9 +130,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		try {
 			doInvokeUndeploy(event);
 		}
-		catch (Exception e) {
+		catch (Throwable t) {
 			throwHotDeployException(
-				event, "Error unregistering portlets for ", e);
+				event, "Error unregistering portlets for ", t);
 		}
 	}
 

@@ -37,14 +37,14 @@ import javax.servlet.ServletContext;
 public abstract class BaseHotDeployListener implements HotDeployListener {
 
 	public void throwHotDeployException(
-			HotDeployEvent event, String msg, Exception e)
+			HotDeployEvent event, String msg, Throwable t)
 		throws HotDeployException {
 
 		ServletContext servletContext = event.getServletContext();
 
 		String servletContextName = servletContext.getServletContextName();
 
-		throw new HotDeployException(msg + servletContextName, e);
+		throw new HotDeployException(msg + servletContextName, t);
 	}
 
 }
