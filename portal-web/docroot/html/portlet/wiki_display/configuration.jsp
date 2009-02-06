@@ -59,33 +59,38 @@ List nodes = WikiNodeLocalServiceUtil.getNodes(scopeGroupId);
 	</td>
 </tr>
 
-<c:if test="<%= nodeId > 0 %>">
-	<tr>
-		<td>
-			<liferay-ui:message key="page" />
-		</td>
-		<td>
-			<select name="<portlet:namespace />title">
+<c:choose>
+	<c:when test="<%= nodeId > 0 %>">
+		<tr>
+			<td>
+				<liferay-ui:message key="page" />
+			</td>
+			<td>
+				<select name="<portlet:namespace />title">
 
-				<%
-				int total = WikiPageLocalServiceUtil.getPagesCount(nodeId, true);
+					<%
+					int total = WikiPageLocalServiceUtil.getPagesCount(nodeId, true);
 
-				List pages = WikiPageLocalServiceUtil.getPages(nodeId, true, 0, total);
+					List pages = WikiPageLocalServiceUtil.getPages(nodeId, true, 0, total);
 
-				for (int i = 0; i < pages.size(); i++) {
-					WikiPage wikiPage = (WikiPage)pages.get(i);
-				%>
+					for (int i = 0; i < pages.size(); i++) {
+						WikiPage wikiPage = (WikiPage)pages.get(i);
+					%>
 
-					<option <%= (wikiPage.getTitle().equals(title) || (Validator.isNull(title) && wikiPage.getTitle().equals(WikiPageImpl.FRONT_PAGE))) ? "selected" : "" %> value="<%= wikiPage.getTitle() %>"><%= wikiPage.getTitle() %></option>
+						<option <%= (wikiPage.getTitle().equals(title) || (Validator.isNull(title) && wikiPage.getTitle().equals(WikiPageImpl.FRONT_PAGE))) ? "selected" : "" %> value="<%= wikiPage.getTitle() %>"><%= wikiPage.getTitle() %></option>
 
-				<%
-				}
-				%>
+					<%
+					}
+					%>
 
-			</select>
-		</td>
-	</tr>
-</c:if>
+				</select>
+			</td>
+		</tr>
+	</c:when>
+	<c:otherwise>
+		<input name="<portlet:namespace />title" type="hidden" value="<%= WikiPageImpl.FRONT_PAGE %>" />
+	</c:otherwise>
+</c:choose>
 
 </table>
 
