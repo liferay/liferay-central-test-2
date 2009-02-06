@@ -1847,7 +1847,12 @@ public class PortalImpl implements Portal {
 				}
 			}
 
-			return layout.getGroupId();
+			if (layout.getGroup().hasStagingGroup()) {
+				return layout.getGroup().getStagingGroup().getGroupId();
+			}
+			else {
+				return layout.getGroupId();
+			}
 		}
 	}
 
