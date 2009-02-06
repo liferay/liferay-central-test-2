@@ -485,9 +485,9 @@ public class JournalArticleLocalServiceImpl
 		try {
 			if (article.isIndexable()) {
 				String[] tagsCategories = tagsEntryLocalService.getEntryNames(
-					JournalArticle.class.getName(), article.getResourcePrimKey(),
+					JournalArticle.class.getName(),
+					article.getResourcePrimKey(),
 					TagsEntryConstants.FOLKSONOMY_CATEGORY);
-
 				String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 					JournalArticle.class.getName(),
 					article.getResourcePrimKey());
@@ -1524,7 +1524,6 @@ public class JournalArticleLocalServiceImpl
 		String[] tagsCategories = tagsEntryLocalService.getEntryNames(
 			JournalArticle.class.getName(), resourcePrimKey,
 			TagsEntryConstants.FOLKSONOMY_CATEGORY);
-
 		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 			JournalArticle.class.getName(), resourcePrimKey);
 
@@ -1567,7 +1566,6 @@ public class JournalArticleLocalServiceImpl
 				String[] tagsCategories = tagsEntryLocalService.getEntryNames(
 					JournalArticle.class.getName(), resourcePrimKey,
 					TagsEntryConstants.FOLKSONOMY_CATEGORY);
-
 				String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 					JournalArticle.class.getName(), resourcePrimKey);
 
