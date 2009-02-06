@@ -35,6 +35,8 @@ jdbc.default.url=jdbc:mysql://${vm.jdbc.mysql.host}/lportal?useUnicode=true&char
 jdbc.default.username=
 jdbc.default.password=
 
+captcha.max.challenges=0
+
 browser.launcher.url=
 
 mail.session.jndi.name=
