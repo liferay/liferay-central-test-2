@@ -55,6 +55,7 @@ import org.apache.struts.action.ActionMapping;
  * @author Berentey Zsolt
  * @author Jorge Ferrer
  * @author Raymond Augé
+ * @author Jesper Weissglas
  *
  */
 public class ViewAction extends PortletAction {
@@ -80,7 +81,8 @@ public class ViewAction extends PortletAction {
 
 		String velocityTemplateId = StringPool.BLANK;
 		String velocityTemplateContent = StringPool.BLANK;
-		Map<String,String> velocityColumns = new HashMap<String,String>();
+
+		Map<String, String> columnIds = new HashMap<String, String>();
 
 		if (Validator.isNotNull(layoutTemplateId)) {
 			Theme theme = themeDisplay.getTheme();
@@ -88,55 +90,61 @@ public class ViewAction extends PortletAction {
 			LayoutTemplate layoutTemplate =
 				LayoutTemplateLocalServiceUtil.getLayoutTemplate(
 					layoutTemplateId, false, theme.getThemeId());
-			
+
 			String content = layoutTemplate.getContent();
-			
-			Matcher processColumnMatcher = _processColumnPattern.matcher(content);
+
+			Matcher processColumnMatcher = _processColumnPattern.matcher(
+				content);
 
 			while (processColumnMatcher.find()) {
-				if (Validator.isNotNull(processColumnMatcher.group(2))) {
-					velocityColumns.put(processColumnMatcher.group(2), 
-							portlet.getPortletId() + "_" + processColumnMatcher.group(2) );
+				String columnId = processColumnMatcher.group(2);
+
+				if (Validator.isNotNull(columnId)) {
+					columnIds.put(
+						columnId,
+						portlet.getPortletId() + StringPool.UNDERLINE +
+							columnId);
 				}
 			}
 
 			processColumnMatcher.reset();
-			
-			content = processColumnMatcher.replaceAll( "$1\\${$2}$3" );
+
+			content = processColumnMatcher.replaceAll("$1\\${$2}$3");
 
 			velocityTemplateId =
 				theme.getThemeId() + LayoutTemplateConstants.CUSTOM_SEPARATOR +
 					layoutTemplateId;
 
-			
-			Matcher tagIdMatcher = _columnIdPattern.matcher(content);
-			
-			velocityTemplateContent = tagIdMatcher.replaceAll( "$1" + portlet.getPortletId() + "$2$3" );
+			Matcher columnIdMatcher = _columnIdPattern.matcher(content);
 
+			velocityTemplateContent = columnIdMatcher.replaceAll(
+				"$1" + portlet.getPortletId() + "$2$3");
 		}
 
 		renderRequest.setAttribute(
-				WebKeys.NESTED_PORTLET_VELOCITY_TEMPLATE_ID,
-				velocityTemplateId);
+			WebKeys.NESTED_PORTLET_VELOCITY_TEMPLATE_ID, velocityTemplateId);
 		renderRequest.setAttribute(
-				WebKeys.NESTED_PORTLET_VELOCITY_TEMPLATE_CONTENT,
-				velocityTemplateContent);
-		renderRequest.setAttribute(
-				WebKeys.VM_VARIABLES,
-				velocityColumns);
+			WebKeys.NESTED_PORTLET_VELOCITY_TEMPLATE_CONTENT,
+			velocityTemplateContent);
+
+		Map<String, Object> vmVariables =
+			(Map<String, Object>)renderRequest.getAttribute(
+				WebKeys.VM_VARIABLES);
+
+		if (vmVariables != null) {
+			vmVariables.putAll(columnIds);
+		}
+		else {
+			renderRequest.setAttribute(WebKeys.VM_VARIABLES, columnIds);
+		}
 
 		return mapping.findForward("portlet.nested_portlets.view");
 	}
 
-	
-
+	private static Pattern _columnIdPattern = Pattern.compile(
+		"([<].*?id=[\"'])([^ ]*?)([\"'].*?[>])", Pattern.DOTALL);
 
 	private static Pattern _processColumnPattern = Pattern.compile(
-			"(processColumn[(]\")(.*?)(\"[)])",
-			Pattern.DOTALL);
-
-	private static Pattern _columnIdPattern = Pattern.compile(
-			"([<].*?id=[\"'])([^ ]*?)([\"'].*?[>])",
-			Pattern.DOTALL);
+		"(processColumn[(]\")(.*?)(\"[)])", Pattern.DOTALL);
 
 }
