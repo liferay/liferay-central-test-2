@@ -57,6 +57,8 @@ public class Field {
 
 	public static final String ROLE_ID = "roleId";
 
+	public static final String TAGS_CATEGORIES = "tagsCategories";
+
 	public static final String TAGS_ENTRIES = "tagsEntries";
 
 	public static final String TITLE = "title";

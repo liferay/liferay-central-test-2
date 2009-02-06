@@ -484,6 +484,10 @@ public class JournalArticleLocalServiceImpl
 
 		try {
 			if (article.isIndexable()) {
+				String[] tagsCategories = tagsEntryLocalService.getEntryNames(
+					JournalArticle.class.getName(), article.getResourcePrimKey(),
+					TagsEntryConstants.FOLKSONOMY_CATEGORY);
+
 				String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 					JournalArticle.class.getName(),
 					article.getResourcePrimKey());
@@ -493,7 +497,7 @@ public class JournalArticleLocalServiceImpl
 					article.getArticleId(), article.getVersion(),
 					article.getTitle(), article.getDescription(),
 					article.getContent(), article.getType(),
-					article.getDisplayDate(), tagsEntries,
+					article.getDisplayDate(), tagsCategories, tagsEntries,
 					article.getExpandoBridge());
 			}
 		}
@@ -1517,13 +1521,17 @@ public class JournalArticleLocalServiceImpl
 		String type = article.getType();
 		Date displayDate = article.getDisplayDate();
 
+		String[] tagsCategories = tagsEntryLocalService.getEntryNames(
+			JournalArticle.class.getName(), resourcePrimKey,
+			TagsEntryConstants.FOLKSONOMY_CATEGORY);
+
 		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 			JournalArticle.class.getName(), resourcePrimKey);
 
 		try {
 			Indexer.updateArticle(
 				companyId, groupId, articleId, version, title, description,
-				content, type, displayDate, tagsEntries,
+				content, type, displayDate, tagsCategories, tagsEntries,
 				article.getExpandoBridge());
 		}
 		catch (SearchException se) {
@@ -1556,13 +1564,17 @@ public class JournalArticleLocalServiceImpl
 				String type = article.getType();
 				Date displayDate = article.getDisplayDate();
 
+				String[] tagsCategories = tagsEntryLocalService.getEntryNames(
+					JournalArticle.class.getName(), resourcePrimKey,
+					TagsEntryConstants.FOLKSONOMY_CATEGORY);
+
 				String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 					JournalArticle.class.getName(), resourcePrimKey);
 
 				try {
 					Indexer.updateArticle(
 						companyId, groupId, articleId, version, title,
-						description, content, type, displayDate,
+						description, content, type, displayDate, tagsCategories,
 						tagsEntries, article.getExpandoBridge());
 				}
 				catch (SearchException se) {
@@ -1640,6 +1652,7 @@ public class JournalArticleLocalServiceImpl
 				searchQuery.addTerm(Field.TITLE, keywords);
 				searchQuery.addTerm(Field.CONTENT, keywords);
 				searchQuery.addTerm(Field.DESCRIPTION, keywords);
+				searchQuery.addTerm(Field.TAGS_CATEGORIES, keywords);
 				searchQuery.addTerm(Field.TAGS_ENTRIES, keywords);
 				searchQuery.addTerm(Field.TYPE, keywords);
 			}
@@ -1899,7 +1912,7 @@ public class JournalArticleLocalServiceImpl
 						article.getArticleId(), article.getVersion(),
 						article.getTitle(), article.getDescription(),
 						article.getContent(), article.getType(),
-						article.getDisplayDate(), tagsEntries,
+						article.getDisplayDate(), tagsCategories, tagsEntries,
 						article.getExpandoBridge());
 				}
 				else {

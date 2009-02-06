@@ -438,6 +438,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				searchQuery.addTerm(Field.CONTENT, keywords);
 				searchQuery.addTerm(Field.DESCRIPTION, keywords);
 				searchQuery.addTerm(Field.PROPERTIES, keywords);
+				searchQuery.addTerm(Field.TAGS_CATEGORIES, keywords);
 				searchQuery.addTerm(Field.TAGS_ENTRIES, keywords);
 			}
 

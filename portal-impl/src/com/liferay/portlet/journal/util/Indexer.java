@@ -59,12 +59,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static void addArticle(
 			long companyId, long groupId, String articleId, double version,
 			String title, String description, String content, String type,
-			Date displayDate, String[] tagsEntries, ExpandoBridge expandoBridge)
+			Date displayDate, String[] tagsCategories, String[] tagsEntries,
+			ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getArticleDocument(
 			companyId, groupId, articleId, version, title, description, content,
-			type, displayDate, tagsEntries, expandoBridge);
+			type, displayDate, tagsCategories, tagsEntries, expandoBridge);
 
 		SearchEngineUtil.addDocument(companyId, doc);
 	}
@@ -78,7 +79,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static Document getArticleDocument(
 		long companyId, long groupId, String articleId, double version,
 		String title, String description, String content, String type,
-		Date displayDate, String[] tagsEntries, ExpandoBridge expandoBridge) {
+		Date displayDate, String[] tagsCategories, String[] tagsEntries,
+		ExpandoBridge expandoBridge) {
 
 		if ((content != null) &&
 			((content.indexOf("<dynamic-content>") != -1) ||
@@ -110,6 +112,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		doc.addText(Field.TITLE, title);
 		doc.addText(Field.CONTENT, content);
 		doc.addText(Field.DESCRIPTION, description);
+		doc.addKeyword(Field.TAGS_CATEGORIES, tagsCategories);
 		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
 		doc.addKeyword(Field.ENTRY_CLASS_NAME, JournalArticle.class.getName());
@@ -133,12 +136,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static void updateArticle(
 			long companyId, long groupId, String articleId, double version,
 			String title, String description, String content, String type,
-			Date displayDate, String[] tagsEntries, ExpandoBridge expandoBridge)
+			Date displayDate, String[] tagsCategories, String[] tagsEntries,
+			ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getArticleDocument(
 			companyId, groupId, articleId, version, title, description, content,
-			type, displayDate, tagsEntries, expandoBridge);
+			type, displayDate, tagsCategories, tagsEntries, expandoBridge);
 
 		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
 	}
