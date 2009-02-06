@@ -24,8 +24,10 @@ package com.liferay.portal.image;
 
 import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.documentlibrary.service.DLServiceUtil;
+import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Image;
@@ -50,8 +52,13 @@ public class DLHook extends BaseHook {
 
 		String fileName = getFileName(image.getImageId(), image.getType());
 
-		DLServiceUtil.deleteFile(
-			_COMPANY_ID, _PORTLET_ID, _REPOSITORY_ID, fileName);
+		try {
+			DLServiceUtil.deleteFile(
+				_COMPANY_ID, _PORTLET_ID, _REPOSITORY_ID, fileName);
+		}
+		catch (NoSuchFileException nsfe) {
+			throw new NoSuchImageException(nsfe);
+		}
 	}
 
 	public byte[] getImageAsBytes(Image image)
