@@ -41,6 +41,7 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 request.setAttribute("view.jsp-showIconLabel", true);
 %>
 
+<div class="asset-full-content">
 <c:choose>
 	<c:when test="<%= className.equals(BlogsEntry.class.getName()) %>">
 
@@ -496,6 +497,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 		<%@ include file="/html/portlet/asset_publisher/asset_metadata.jspf" %>
 	</div>
 </c:if>
+</div>
 
 <c:choose>
 	<c:when test="<%= !showAssetTitle && ((assetIndex + 1) < results.size()) %>">

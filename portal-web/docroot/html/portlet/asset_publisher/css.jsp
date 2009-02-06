@@ -60,6 +60,12 @@
 	clear: left;
 }
 
+.portlet-asset-publisher .asset-tag-label {
+	background-color: #EEE;
+	clear: both;
+	padding: 3px;
+}
+
 .portlet-asset-publisher .asset-title .asset-actions img {
 	margin-left: 5px;
 }
@@ -100,12 +106,16 @@
 	background-image: url(<%= themeImagesPath %>/ratings/star_hover.png);
 }
 
-.portlet-asset-publisher .document {
-	background-image: url(<%= themeImagesPath %>/common/clip.png);
+.portlet-asset-publisher .content {
+	background-image: url(<%= themeImagesPath %>/common/history.png);
 }
 
 .portlet-asset-publisher .dl-file-icon {
 	margin: 0 5px 0 0;
+}
+
+.portlet-asset-publisher .document {
+	background-image: url(<%= themeImagesPath %>/common/clip.png);
 }
 
 .portlet-asset-publisher .edit-controls {
@@ -123,10 +133,6 @@
 
 .portlet-asset-publisher .lfr-meta-actions {
 	padding-top: 0;
-}
-
-.portlet-asset-publisher .thread {
-	background-image: url(<%= PortalUtil.getPathContext() %>/html/icons/message_boards.png);
 }
 
 .portlet-asset-publisher .metadata-author {
@@ -169,6 +175,10 @@
 	float: left;
 }
 
+.portlet-asset-publisher .thread {
+	background-image: url(<%= PortalUtil.getPathContext() %>/html/icons/message_boards.png);
+}
+
 .portlet-asset-publisher .title-list .asset-actions {
 	left: 10px;
 	position: relative;
@@ -187,10 +197,6 @@
 	float: left;
 	margin: 0 10px;
 	padding: 7px 0;
-}
-
-.portlet-asset-publisher .web-content {
-	background-image: url(<%= themeImagesPath %>/common/history.png);
 }
 
 .portlet-asset-publisher .wiki {

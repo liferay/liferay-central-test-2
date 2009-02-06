@@ -102,9 +102,9 @@ while (itr.hasNext()) {
 	request.setAttribute("view.jsp-results", results);
 %>
 
-	<h3 class="journal-content-tag-label"><%= tagLabel %></h3>
+	<h3 class="asset-tag-label"><%= tagLabel %></h3>
 
-	<div class="journal-content-tag-entries">
+	<div class="asset-tag-entries">
 
 		<%
 		for (int assetIndex = 0; (assetIndex < results.size()) && (assetIndex < delta); assetIndex++) {
