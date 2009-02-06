@@ -129,7 +129,7 @@ if (editPortletURL != null) {
 }
 %>
 
-<c:if test="<%= showEditIcon %>">
+<c:if test="<%= showEditIcon && ((layout != null) && !layout.getGroup().hasStagingGroup()) %>">
 	<div class="lfr-meta-actions asset-actions">
 		<liferay-ui:icon image="edit" url="<%= editPortletURL.toString() %>" label="<%= showIconLabel %>" />
 	</div>

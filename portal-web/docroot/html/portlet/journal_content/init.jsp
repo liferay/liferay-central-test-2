@@ -36,6 +36,7 @@
 <%@ page import="com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.journal.service.permission.JournalArticlePermission" %>
+<%@ page import="com.liferay.portlet.journal.service.permission.JournalTemplatePermission" %>
 <%@ page import="com.liferay.portlet.journal.service.permission.JournalPermission" %>
 <%@ page import="com.liferay.portlet.journal.util.JournalUtil" %>
 <%@ page import="com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil" %>
