@@ -617,7 +617,7 @@ public class PluginPackageUtil {
 
 		StringBuilder sb = new StringBuilder();
 
-		if (!repositoryURL.startsWith(Http.HTTP)) {
+		if (!repositoryURL.startsWith(Http.HTTP_WITH_SLASH)) {
 			sb.append(Http.HTTP_WITH_SLASH);
 		}
 
