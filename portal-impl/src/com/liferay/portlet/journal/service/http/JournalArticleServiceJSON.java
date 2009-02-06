@@ -145,6 +145,15 @@ public class JournalArticleServiceJSON {
 		return JournalArticleJSONSerializer.toJSONObject(returnValue);
 	}
 
+	public static JSONObject getArticle(long groupId, java.lang.String articleId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.getArticle(groupId,
+				articleId);
+
+		return JournalArticleJSONSerializer.toJSONObject(returnValue);
+	}
+
 	public static JSONObject getArticle(long groupId,
 		java.lang.String articleId, double version)
 		throws com.liferay.portal.PortalException,

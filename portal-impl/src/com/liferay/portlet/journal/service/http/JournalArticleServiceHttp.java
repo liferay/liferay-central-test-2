@@ -912,6 +912,48 @@ public class JournalArticleServiceHttp {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle getArticle(
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String articleId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = articleId;
+
+			if (articleId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
+					"getArticle", new Object[] { paramObj0, paramObj1 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.journal.model.JournalArticle)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle getArticle(
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String articleId,
 		double version)
 		throws com.liferay.portal.PortalException,

@@ -51,13 +51,20 @@ request.setAttribute("view.jsp-showIconLabel", true);
 		PortletURL viewFullContentURL = renderResponse.createRenderURL();
 
 		viewFullContentURL.setParameter("struts_action", "/asset_publisher/view_content");
-		viewFullContentURL.setParameter("redirect", currentURL);
-		viewFullContentURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
+		viewFullContentURL.setParameter("type", AssetPublisherUtil.TYPE_BLOG);
+
+		String viewFullContent = viewFullContentURL.toString();
+
+		viewFullContent = HttpUtil.setParameter(viewFullContent, "redirect", currentURL);
+
+		String urlTitle = entry.getUrlTitle();
+
+		viewFullContentURL.setParameter("assetId", urlTitle);
 		%>
 
 		<c:choose>
 			<c:when test="<%= showAssetTitle %>">
-				<h3 class="asset-title blog">
+				<h3 class="asset-title <%= AssetPublisherUtil.TYPE_BLOG %>">
 					<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
 
 					<%= title %>
@@ -75,7 +82,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 			<c:if test="<%= showContextLink %>">
 				<div class="asset-more">
-					<a href="<%= themeDisplay.getPathMain() %>/blogs/find_entry?entryId=<%= entry.getEntryId() %>&noSuchEntryRedirect=<%= HttpUtil.encodeURL(viewFullContentURL.toString()) %>"><liferay-ui:message key="view-blog" /> &raquo;</a>
+					<a href="<%= themeDisplay.getPathMain() %>/blogs/find_entry?entryId=<%= entry.getEntryId() %>&noSuchEntryRedirect=<%= HttpUtil.encodeURL(viewFullContent) %>"><liferay-ui:message key="view-blog" /> &raquo;</a>
 				</div>
 			</c:if>
 
@@ -115,7 +122,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 		<c:choose>
 			<c:when test="<%= showAssetTitle %>">
-				<h3 class="asset-title bookmark">
+				<h3 class="asset-title <%= AssetPublisherUtil.TYPE_BOOKMARK %>">
 					<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
 
 					<%= title %>
@@ -158,7 +165,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 		<c:choose>
 			<c:when test="<%= showAssetTitle %>">
-				<h3 class="asset-title document">
+				<h3 class="asset-title <%= AssetPublisherUtil.TYPE_DOCUMENT %>">
 					<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
 
 					<%= title %>
@@ -228,7 +235,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 		<c:choose>
 			<c:when test="<%= showAssetTitle %>">
-				<h3 class="asset-title image">
+				<h3 class="asset-title <%= AssetPublisherUtil.TYPE_IMAGE %>">
 					<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
 
 					<%= title %>
@@ -276,7 +283,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 		<c:if test="<%= articleDisplay != null %>">
 			<c:choose>
 				<c:when test="<%= showAssetTitle %>">
-					<h3 class="asset-title web-content">
+					<h3 class="asset-title <%= AssetPublisherUtil.TYPE_CONTENT %>">
 						<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
 
 						<%= title %>
@@ -324,7 +331,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 					articlePageURL.setParameter("struts_action", "/asset_publisher/view_content");
 					articlePageURL.setParameter("redirect", pageRedirect);
-					articlePageURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
+					articlePageURL.setParameter("assetId", articleDisplay.getArticleId());
 					articlePageURL.setParameter("cur", String.valueOf(cur));
 					%>
 
@@ -381,7 +388,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 		<c:choose>
 			<c:when test="<%= showAssetTitle %>">
-				<h3 class="asset-title thread">
+				<h3 class="asset-title <%= AssetPublisherUtil.TYPE_THREAD %>">
 					<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
 
 					<%= message.getSubject() %>
@@ -407,7 +414,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 	<c:when test="<%= className.equals(WikiPage.class.getName()) %>">
 		<c:choose>
 			<c:when test="<%= showAssetTitle %>">
-				<h3 class="asset-title wiki">
+				<h3 class="asset-title <%= AssetPublisherUtil.TYPE_WIKI %>">
 					<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
 
 					<%= title %>

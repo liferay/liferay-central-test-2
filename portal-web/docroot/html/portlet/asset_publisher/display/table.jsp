@@ -42,7 +42,6 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 PortletURL viewFullContentURL = renderResponse.createRenderURL();
 
 viewFullContentURL.setParameter("struts_action", "/asset_publisher/view_content");
-viewFullContentURL.setParameter("redirect", currentURL);
 viewFullContentURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
 
 if (className.equals(BlogsEntry.class.getName())) {
@@ -56,7 +55,11 @@ if (className.equals(BlogsEntry.class.getName())) {
 
 	entryURL.setParameter("struts_action", "/asset_publisher/view_content");
 	entryURL.setParameter("redirect", currentURL);
-	entryURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
+	viewFullContentURL.setParameter("type", AssetPublisherUtil.TYPE_BLOG);
+
+	String urlTitle = entry.getUrlTitle();
+
+	viewFullContentURL.setParameter("assetId", urlTitle);
 
 	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/blogs/find_entry?entryId=" + entry.getEntryId() + "&noSuchEntryRedirect=" + HttpUtil.encodeURL(viewFullContentURL.toString()) : viewFullContentURL.toString();
 }
@@ -66,6 +69,8 @@ else if (className.equals(BookmarksEntry.class.getName())) {
 	if (Validator.isNull(title)) {
 		title = entry.getName();
 	}
+
+	viewFullContentURL.setParameter("type", AssetPublisherUtil.TYPE_BOOKMARK);
 
 	viewURL = viewInContext? entry.getUrl() : viewFullContentURL.toString();
 }
@@ -85,6 +90,8 @@ else if (className.equals(DLFileEntry.class.getName())) {
 		title = sb.toString();
 	}
 
+	viewFullContentURL.setParameter("type", AssetPublisherUtil.TYPE_DOCUMENT);
+
 	viewURL = viewInContext? themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + fileEntry.getFolderId() + "&name=" + HttpUtil.encodeURL(fileEntry.getName()) : viewFullContentURL.toString();
 }
 else if (className.equals(IGImage.class.getName())) {
@@ -96,6 +103,8 @@ else if (className.equals(IGImage.class.getName())) {
 
 	imageURL.setParameter("struts_action", "/image_gallery/view");
 	imageURL.setParameter("folderId", String.valueOf(image.getFolderId()));
+
+	viewFullContentURL.setParameter("type", AssetPublisherUtil.TYPE_IMAGE);
 
 	viewURL = viewInContext? imageURL.toString() : viewFullContentURL.toString();
 }
@@ -114,8 +123,8 @@ else if (className.equals(JournalArticle.class.getName())) {
 		PortletURL articleURL = renderResponse.createRenderURL();
 
 		articleURL.setParameter("struts_action", "/asset_publisher/view_content");
-		articleURL.setParameter("redirect", currentURL);
-		articleURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
+		articleURL.setParameter("assetId", articleDisplay.getArticleId());
+		articleURL.setParameter("type", AssetPublisherUtil.TYPE_CONTENT);
 
 		viewURL = articleURL.toString();
 	}
@@ -125,6 +134,8 @@ else if (className.equals(JournalArticle.class.getName())) {
 }
 else if (className.equals(MBMessage.class.getName())) {
 	MBMessage message = MBMessageLocalServiceUtil.getMBMessage(classPK);
+
+	viewFullContentURL.setParameter("type", "thread");
 
 	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/message_boards/find_message?messageId=" + message.getMessageId() : viewFullContentURL.toString();
 }
@@ -141,7 +152,13 @@ else if (className.equals(WikiPage.class.getName())) {
 	pageURL.setParameter("struts_action", "/wiki/view");
 	pageURL.setParameter("title", wikiPage.getTitle());
 
+	viewFullContentURL.setParameter("type", AssetPublisherUtil.TYPE_WIKI);
+
 	viewURL = viewInContext? pageURL.toString() : viewFullContentURL.toString();
+}
+
+if (viewURL.startsWith(themeDisplay.getURLPortal())) {
+	viewURL = HttpUtil.setParameter(viewURL, "redirect", currentURL);
 }
 %>
 

@@ -44,6 +44,8 @@ public class PortletKeys {
 
 	public static final String ANNOUNCEMENTS = "84";
 
+	public static final String ASSET_PUBLISHER = "101";
+
 	public static final String BOOKMARKS = "28";
 
 	public static final String BLOGS = "33";

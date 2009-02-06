@@ -847,6 +847,7 @@
 		<icon>/html/icons/default.png</icon>
 		<struts-path>asset_publisher</struts-path>
 		<configuration-action-class>com.liferay.portlet.assetpublisher.action.ConfigurationActionImpl</configuration-action-class>
+		<friendly-url-mapper-class>com.liferay.portlet.assetpublisher.AssetPublisherFriendlyURLMapper</friendly-url-mapper-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<layout-cacheable>true</layout-cacheable>

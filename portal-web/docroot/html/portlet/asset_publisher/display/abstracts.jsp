@@ -47,7 +47,6 @@ request.setAttribute("view.jsp-showIconLabel", true);
 PortletURL viewFullContentURL = renderResponse.createRenderURL();
 
 viewFullContentURL.setParameter("struts_action", "/asset_publisher/view_content");
-viewFullContentURL.setParameter("redirect", currentURL);
 viewFullContentURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
 
 if (className.equals(BlogsEntry.class.getName())) {
@@ -57,10 +56,17 @@ if (className.equals(BlogsEntry.class.getName())) {
 		title = entry.getTitle();
 	}
 
+	viewFullContentURL.setParameter("type", AssetPublisherUtil.TYPE_BLOG);
+
+	String urlTitle = entry.getUrlTitle();
+	if (Validator.isNotNull(urlTitle)) {
+		viewFullContentURL.setParameter("assetId", urlTitle);
+	}
+
 	summary = StringUtil.shorten(HtmlUtil.stripHtml(entry.getContent()), abstractLength);
 	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/blogs/find_entry?entryId=" + entry.getEntryId() + "&noSuchEntryRedirect=" + HttpUtil.encodeURL(viewFullContentURL.toString()) : viewFullContentURL.toString();
 	viewURLMessage = viewInContext ? "view-in-context" : "read-more";
-	cssClassName = "blog";
+	cssClassName = AssetPublisherUtil.TYPE_BLOG;
 }
 else if (className.equals(BookmarksEntry.class.getName())) {
 	BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(classPK);
@@ -69,10 +75,12 @@ else if (className.equals(BookmarksEntry.class.getName())) {
 		title = entry.getName();
 	}
 
+	viewFullContentURL.setParameter("type", AssetPublisherUtil.TYPE_BOOKMARK);
+
 	summary = entry.getComments();
 	viewURL = viewInContext ? entry.getUrl() : viewFullContentURL.toString();
 	viewURLMessage = viewInContext ? "go" : "read-more";
-	cssClassName = "bookmark";
+	cssClassName = AssetPublisherUtil.TYPE_BOOKMARK;
 }
 else if (className.equals(DLFileEntry.class.getName())) {
 	DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(classPK);
@@ -103,9 +111,11 @@ else if (className.equals(DLFileEntry.class.getName())) {
 		summary = sb.toString();
 	}
 
+	viewFullContentURL.setParameter("type", AssetPublisherUtil.TYPE_DOCUMENT);
+
 	viewURL = viewInContext ? fileEntryURL : viewFullContentURL.toString();
 	viewURLMessage = viewInContext ? "download" : "read-more";
-	cssClassName = "document";
+	cssClassName = AssetPublisherUtil.TYPE_DOCUMENT;
 }
 else if (className.equals(IGImage.class.getName())) {
 	IGImage image = IGImageLocalServiceUtil.getImage(classPK);
@@ -117,9 +127,11 @@ else if (className.equals(IGImage.class.getName())) {
 	imageURL.setParameter("struts_action", "/image_gallery/view");
 	imageURL.setParameter("folderId", String.valueOf(image.getFolderId()));
 
+	viewFullContentURL.setParameter("type", AssetPublisherUtil.TYPE_IMAGE);
+
 	viewURL = viewInContext ? imageURL.toString() : viewFullContentURL.toString();
 	viewURLMessage = viewInContext ? "view-album" : "view";
-	cssClassName = "image";
+	cssClassName = AssetPublisherUtil.TYPE_IMAGE;
 
 	StringBuilder sb = new StringBuilder();
 
@@ -184,9 +196,12 @@ else if (className.equals(JournalArticle.class.getName())) {
 			summary = StringUtil.shorten(HtmlUtil.stripHtml(articleDisplay.getContent()), abstractLength);
 		}
 
+		viewFullContentURL.setParameter("assetId", articleDisplay.getArticleId());
+		viewFullContentURL.setParameter("type", AssetPublisherUtil.TYPE_CONTENT);
+
 		viewURL = viewFullContentURL.toString();
 		viewURLMessage = "read-more";
-		cssClassName = "web-content";
+		cssClassName = AssetPublisherUtil.TYPE_CONTENT;
 	}
 	else {
 		show = false;
@@ -194,6 +209,8 @@ else if (className.equals(JournalArticle.class.getName())) {
 }
 else if (className.equals(MBMessage.class.getName())) {
 	MBMessage message = MBMessageLocalServiceUtil.getMessage(classPK);
+
+	viewFullContentURL.setParameter("type", "thread");
 
 	summary = StringUtil.shorten(message.getBody(), abstractLength);
 	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/message_boards/find_message?messageId=" + message.getMessageId() : viewFullContentURL.toString();
@@ -211,10 +228,16 @@ else if (className.equals(WikiPage.class.getName())) {
 		summary = HtmlUtil.stripHtml(summary);
 	}
 
+	viewFullContentURL.setParameter("type", AssetPublisherUtil.TYPE_WIKI);
+
 	summary = StringUtil.shorten(summary, abstractLength);
 	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/wiki/find_page?pageResourcePrimKey=" + wikiPage.getResourcePrimKey() : viewFullContentURL.toString();
 	viewURLMessage = viewInContext ? "view-in-context" : "read-more";
-	cssClassName = "wiki";
+	cssClassName = AssetPublisherUtil.TYPE_WIKI;
+}
+
+if (viewURL.startsWith(themeDisplay.getURLPortal())) {
+	viewURL = HttpUtil.setParameter(viewURL, "redirect", currentURL);
 }
 %>
 

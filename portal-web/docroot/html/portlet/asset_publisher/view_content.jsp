@@ -28,16 +28,40 @@
 String redirect = ParamUtil.getString(request, "redirect");
 
 long assetId = ParamUtil.getLong(renderRequest, "assetId");
+String type = ParamUtil.getString (renderRequest, "type");
+String urlTitle = ParamUtil.getString (renderRequest, "urlTitle");
 
 List results = new ArrayList();
 
 int assetIndex = 0;
+long classPK = 0;
+TagsAsset asset = null;
+String className = StringPool.BLANK;
 
 try {
-	TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(assetId);
+	if (assetId <= 0) {
+		if (type.equals (AssetPublisherUtil.TYPE_BLOG)) {
+			BlogsEntry entry = BlogsEntryServiceUtil.getEntry(scopeGroupId, urlTitle);
 
-	String className = PortalUtil.getClassName(asset.getClassNameId());
-	long classPK = asset.getClassPK();
+			classPK = entry.getPrimaryKey();
+			className = BlogsEntry.class.getName();
+		}
+		else if (type.equals (AssetPublisherUtil.TYPE_CONTENT)) {
+			JournalArticle article = JournalArticleServiceUtil.getArticle(scopeGroupId, urlTitle);
+
+			classPK = article.getResourcePrimKey();
+			className = JournalArticle.class.getName();
+		}
+
+		asset = TagsAssetLocalServiceUtil.getAsset(className, classPK);
+	}
+
+	else {
+		asset = TagsAssetLocalServiceUtil.getAsset(assetId);
+
+		className = PortalUtil.getClassName(asset.getClassNameId());
+		classPK = asset.getClassPK();
+	}
 
 	String title = asset.getTitle();
 	String summary = StringPool.BLANK;

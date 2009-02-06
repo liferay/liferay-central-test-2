@@ -196,6 +196,15 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			version);
 	}
 
+	public JournalArticle getArticle(long groupId, String articleId)
+		throws PortalException, SystemException {
+
+		JournalArticlePermission.check(
+			getPermissionChecker(), groupId, articleId, ActionKeys.VIEW);
+
+		return journalArticleLocalService.getArticle(groupId, articleId);
+	}
+
 	public JournalArticle getArticle(
 			long groupId, String articleId, double version)
 		throws PortalException, SystemException {
