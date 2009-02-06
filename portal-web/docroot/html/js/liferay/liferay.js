@@ -109,10 +109,10 @@ Liferay.Service = {
 		return curLevel;
 	},
 
-	register: function(serviceName, package) {
+	register: function(serviceName, servicePackage) {
 		var module = Liferay.Service.namespace(serviceName);
 
-		module.servicePackage = package.replace(/[.]$/, '') + '.';
+		module.servicePackage = servicePackage.replace(/[.]$/, '') + '.';
 
 		return module;
 	},
