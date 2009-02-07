@@ -23,7 +23,6 @@
 package com.liferay.portal.kernel.servlet;
 
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
@@ -54,20 +53,6 @@ public class ServletContextUtil {
 
 	public static long getLastModified(
 		ServletContext servletContext, String resourcePath, boolean cache) {
-
-		if (resourcePath.startsWith(Http.HTTP) ||
-			resourcePath.startsWith(Http.HTTPS)) {
-
-			int pos = resourcePath.indexOf(Http.PROTOCOL_DELIMITER);
-
-			resourcePath = resourcePath.substring(pos + 3);
-		}
-
-		int pos = resourcePath.indexOf(StringPool.SLASH);
-
-		if (pos != -1) {
-			resourcePath = resourcePath.substring(pos);
-		}
 
 		if (cache) {
 			Long lastModified = (Long)servletContext.getAttribute(
