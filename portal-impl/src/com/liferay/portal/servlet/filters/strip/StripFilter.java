@@ -297,10 +297,10 @@ public class StripFilter extends BasePortalFilter {
 
 						styleContent = _STYLE_TYPE_CSS + styleContent;
 
-						byte[] styleContent = styleContent.getBytes(
+						byte[] styleContentBytes = styleContent.getBytes(
 							StringPool.UTF8);
 
-						for (byte curByte : styleContent) {
+						for (byte curByte : styleContentBytes) {
 							newByteArray[newByteArrayPos++] = curByte;
 						}
 
