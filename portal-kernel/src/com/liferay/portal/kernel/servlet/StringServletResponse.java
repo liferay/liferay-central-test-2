@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 
 import java.util.Locale;
 
@@ -77,7 +78,12 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 			return _string;
 		}
 		else if (_callGetOutputStream) {
-			return _bam.toString();
+			try {
+				return _bam.toString(StringPool.UTF8);
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+				return StringPool.BLANK;
+			}
 		}
 		else if (_callGetWriter) {
 			return _sw.toString();
