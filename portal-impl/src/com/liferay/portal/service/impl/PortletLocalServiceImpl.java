@@ -1716,15 +1716,22 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				_setSpriteImages(servletContext, portletApp, curResourcePath);
 			}
 			else if (curResourcePath.endsWith(".png")) {
-				images.add(
-					new File(servletContext.getRealPath(curResourcePath)));
+				String realPath = ServletContextUtil.getRealPath(
+					servletContext, curResourcePath);
+
+				if (realPath != null) {
+					images.add(new File(realPath));
+				}
+				else {
+					_log.error("Real path for " + curResourcePath + " is null");
+				}
 			}
 		}
 
 		String spriteFileName = ".sprite.png";
 		String spritePropertiesFileName = ".sprite.properties";
-		String spritePropertiesRootPath = servletContext.getRealPath(
-			StringPool.SLASH);
+		String spritePropertiesRootPath = ServletContextUtil.getRealPath(
+			servletContext, StringPool.SLASH);
 
 		Properties spriteProperties = SpriteProcessorUtil.generate(
 			images, spriteFileName, spritePropertiesFileName,

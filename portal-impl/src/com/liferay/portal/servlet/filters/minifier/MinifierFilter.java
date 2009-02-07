@@ -25,6 +25,7 @@ package com.liferay.portal.servlet.filters.minifier;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.BrowserSniffer;
+import com.liferay.portal.kernel.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -162,8 +163,8 @@ public class MinifierFilter extends BasePortalFilter {
 			return null;
 		}
 
-		String bundleDirRealPath = _servletContext.getRealPath(
-			minifierBundleDir);
+		String bundleDirRealPath = ServletContextUtil.getRealPath(
+			_servletContext, minifierBundleDir);
 
 		if (bundleDirRealPath == null) {
 			return null;
@@ -245,13 +246,15 @@ public class MinifierFilter extends BasePortalFilter {
 
 		String requestURI = request.getRequestURI();
 
-		String realPath = StringUtil.replace(
-			_servletContext.getRealPath(requestURI), StringPool.BACK_SLASH,
-			StringPool.SLASH);
+		String realPath = ServletContextUtil.getRealPath(
+			_servletContext, requestURI);
 
 		if (realPath == null) {
 			return null;
 		}
+
+		realPath = StringUtil.replace(
+			realPath, StringPool.BACK_SLASH, StringPool.SLASH);
 
 		File file = new File(realPath);
 

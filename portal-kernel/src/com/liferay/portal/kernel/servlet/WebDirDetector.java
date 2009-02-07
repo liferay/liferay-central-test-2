@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
+package com.liferay.portal.kernel.servlet;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -39,7 +39,7 @@ public class WebDirDetector {
 
 	public static String getLibDir(ClassLoader classLoader) {
 		URL url = classLoader.getResource(
-			"com/liferay/util/WebDirDetector.class");
+			"com/liferay/util/bean/PortletBeanLocatorUtil.class");
 
 		String file = null;
 
@@ -54,7 +54,7 @@ public class WebDirDetector {
 			_log.debug("Lib url " + file);
 		}
 
-		int pos = file.indexOf("/com/liferay/util/");
+		int pos = file.indexOf("/com/liferay/util/bean/");
 
 		String libDir = file.substring(0, pos + 1);
 

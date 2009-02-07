@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.service.ThemeLocalServiceUtil;
@@ -93,7 +94,18 @@ public class ThemeHotDeployListener extends BaseHotDeployListener {
 			servletContextName, servletContext, null, true, xmls,
 			event.getPluginPackage());
 
+		// Class loader
+
+		ClassLoader portletClassLoader = event.getContextClassLoader();
+
+		servletContext.setAttribute(
+			PortletServlet.PORTLET_CLASS_LOADER, portletClassLoader);
+
+		// Velocity
+
 		VelocityContextPool.put(servletContextName, servletContext);
+
+		// Variables
 
 		_vars.put(servletContextName, themeIds);
 

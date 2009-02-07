@@ -701,15 +701,22 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 				_setSpriteImages(servletContext, theme, curResourcePath);
 			}
 			else if (curResourcePath.endsWith(".png")) {
-				images.add(
-					new File(servletContext.getRealPath(curResourcePath)));
+				String realPath = ServletContextUtil.getRealPath(
+					servletContext, curResourcePath);
+
+				if (realPath != null) {
+					images.add(new File(realPath));
+				}
+				else {
+					_log.error("Real path for " + curResourcePath + " is null");
+				}
 			}
 		}
 
 		String spriteFileName = ".sprite.png";
 		String spritePropertiesFileName = ".sprite.properties";
-		String spritePropertiesRootPath = servletContext.getRealPath(
-			theme.getImagesPath());
+		String spritePropertiesRootPath = ServletContextUtil.getRealPath(
+			servletContext, theme.getImagesPath());
 
 		Properties spriteProperties = SpriteProcessorUtil.generate(
 			images, spriteFileName, spritePropertiesFileName,

@@ -22,7 +22,10 @@
 
 package com.liferay.portal.kernel.servlet;
 
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.Http;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.File;
@@ -116,6 +119,50 @@ public class ServletContextUtil {
 		}
 
 		return lastModified;
+	}
+
+	public static String getRealPath(
+		ServletContext servletContext, String path) {
+
+		String realPath = servletContext.getRealPath(path);
+
+		if ((realPath == null) && ServerDetector.isWebLogic()) {
+			String rootDir = getRootDir(servletContext);
+
+			if (path.startsWith(StringPool.SLASH)) {
+				realPath = rootDir + path.substring(1);
+			}
+			else {
+				realPath = rootDir + path;
+			}
+
+			if (!FileUtil.exists(realPath)) {
+				realPath = null;
+			}
+		}
+
+		return realPath;
+	}
+
+	protected static String getRootDir(ServletContext servletContext) {
+		String key = ServletContextUtil.class.getName() + ".rootDir";
+
+		String rootDir = (String)servletContext.getAttribute(key);
+
+		if (rootDir == null) {
+			ClassLoader classLoader = (ClassLoader)servletContext.getAttribute(
+				PortletServlet.PORTLET_CLASS_LOADER);
+
+			if (classLoader == null) {
+				classLoader = PortalClassLoaderUtil.getClassLoader();
+			}
+
+			rootDir = WebDirDetector.getRootDir(classLoader);
+
+			servletContext.setAttribute(key, rootDir);
+		}
+
+		return rootDir;
 	}
 
 }
