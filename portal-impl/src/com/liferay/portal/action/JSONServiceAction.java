@@ -205,7 +205,8 @@ public class JSONServiceAction extends JSONAction {
 
 		String value = ParamUtil.getString(request, parameter);
 
-		if (Validator.isNull(value)) {
+		if (Validator.isNull(value) &&
+				!parameterTypeName.equals("[Ljava.lang.String;")) {
 			return null;
 		}
 		else if (parameterTypeName.equals("boolean") ||
