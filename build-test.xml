@@ -59,6 +59,16 @@ tunnel.servlet.hosts.allowed=]]></echo>
 		<antcall target="start" />
 	</target>
 
+	<target name="revert-test-properties">
+		<exec dir="." executable="cmd.exe" os="${os.windows}">
+			<arg line="/c svn revert portal-impl/test/test-portal-impl.properties" />
+		</exec>
+
+		<exec dir="." executable="cmd.exe" os="${os.windows}">
+			<arg line="/c svn revert portal-web/test/test-portal-web.properties" />
+		</exec>
+	</target>
+
 	<target name="run-jboss-tomcat-5.0">
 		<antcall target="run-simple-server">
 			<param name="simple.server.dir" value="${app.server.parent.dir}/jboss-tomcat-5.0.0" />
@@ -183,6 +193,8 @@ tunnel.servlet.hosts.allowed=]]></echo>
 	<target name="test" depends="prepare">
 		<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
 
+		<antcall target="revert-test-properties" />
+
 		<ant dir="portal-impl" target="test-class" inheritAll="false">
 			<property name="class" value="ServiceTestSuite" />
 		</ant>
@@ -203,9 +215,7 @@ tunnel.servlet.hosts.allowed=]]></echo>
 	<target name="test-jboss-tomcat-5.0" depends="prepare">
 		<ant antfile="build-dist.xml" target="build-dist-jboss-tomcat-5.0" />
 
-		<exec dir="." executable="cmd.exe" os="${os.windows}">
-			<arg line="/c svn revert portal-web/test/test-portal-web.properties" />
-		</exec>
+		<antcall target="revert-test-properties" />
 
 		<antcall target="start-selenium" />
 
@@ -223,9 +233,7 @@ tunnel.servlet.hosts.allowed=]]></echo>
 			<arg line="/c svn update" />
 		</exec>
 
-		<exec dir="." executable="cmd.exe" os="${os.windows}">
-			<arg line="/c svn revert portal-web/test/test-portal-web.properties" />
-		</exec>
+		<antcall target="revert-test-properties" />
 
 		<antcall target="start-selenium" />
 
@@ -240,9 +248,7 @@ tunnel.servlet.hosts.allowed=]]></echo>
 	<target name="test-tomcat-5.5" depends="prepare">
 		<ant antfile="build-dist.xml" target="build-dist-tomcat-5.5" />
 
-		<exec dir="." executable="cmd.exe" os="${os.windows}">
-			<arg line="/c svn revert portal-web/test/test-portal-web.properties" />
-		</exec>
+		<antcall target="revert-test-properties" />
 
 		<antcall target="start-selenium" />
 
@@ -272,7 +278,7 @@ tunnel.servlet.hosts.allowed=]]></echo>
 	</target>
 
 	<target name="test-websphere-6.1" depends="prepare">
-		<antcall target="deploy" />
+		<ant antfile="build-dist.xml" target="build-dist-tomcat-5.5" />
 
 		<delete dir="dist" />
 		<mkdir dir="dist" />
@@ -373,19 +379,13 @@ print AdminControl.invoke(applicationManager, 'startApplication', 'liferay-tunne
 			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\Progra~1\IBM\WebSphere\AppServer\profiles\AppSrv01\bin\stopServer.bat server1" />
 		</exec>
 
-		<exec dir="." executable="cmd.exe" os="${os.windows}">
-			<arg line="/c svn revert portal-impl/test/test-portal-impl.properties" />
-		</exec>
+		<antcall target="revert-test-properties" />
 
 		<replace
 			file="portal-impl/test/test-portal-impl.properties"
 			token="localhost:8080"
 			value="${vm.host}:9080"
 		/>
-
-		<exec dir="." executable="cmd.exe" os="${os.windows}">
-			<arg line="/c svn revert portal-web/test/test-portal-web.properties" />
-		</exec>
 
 		<replace
 			file="portal-web/test/test-portal-web.properties"
