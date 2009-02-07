@@ -245,23 +245,3 @@ if (selContact != null) {
 		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="jobTitle" />
 	</div>
 </fieldset>
-
-<fieldset class="block-labels">
-	<div class="ctrl-holder">
-		<label for="<portlet:namespace />tagsEntries"><liferay-ui:message key="tags" /></label>
-
-		<%
-		long classPK = 0;
-
-		if (selUser != null) {
-			classPK = selUser.getUserId();
-		}
-		%>
-
-		<liferay-ui:tags-selector
-			className="<%= User.class.getName() %>"
-			classPK="<%= classPK %>"
-			hiddenInput="tagsEntries"
-		/>
-	</div>
-</fieldset>
