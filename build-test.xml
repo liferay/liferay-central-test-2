@@ -135,7 +135,7 @@ tunnel.servlet.hosts.allowed=]]></echo>
 		</if>
 
 		<parallel>
-			<exec dir="${simple.server.bin.dir}" executable="${simple.server.start.executable}" resolveexecutable="true" spawn="false" />
+			<exec dir="${simple.server.bin.dir}" executable="${simple.server.start.executable}" resolveexecutable="true" />
 
 			<sequential>
 				<waitfor>
@@ -146,7 +146,7 @@ tunnel.servlet.hosts.allowed=]]></echo>
 
 				<antcall target="run-selenium-test" />
 
-				<exec dir="${simple.server.bin.dir}" executable="${simple.server.stop.executable}" resolveexecutable="true" spawn="true">
+				<exec dir="${simple.server.bin.dir}" executable="${simple.server.stop.executable}" resolveexecutable="true">
 					<arg line="${simple.server.stop.executable.arg.line}" />
 				</exec>
 
@@ -164,6 +164,28 @@ tunnel.servlet.hosts.allowed=]]></echo>
 			<param name="simple.server.start.executable" value="startup${file.suffix.bat}" />
 			<param name="simple.server.stop.executable" value="shutdown${file.suffix.bat}" />
 		</antcall>
+	</target>
+
+	<target name="run-weblogic-10.3">
+		<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
+
+		<parallel>
+			<exec executable="${plink.executable}">
+				<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\bea\user_projects\domains\base_domain\bin\startWebLogic.cmd" />
+			</exec>
+
+			<sequential>
+				<waitfor>
+					<http url="http://${vm.host}:7001/console" />
+				</waitfor>
+
+				<antcall target="run-selenium-test" />
+
+				<exec executable="${plink.executable}">
+					<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\bea\user_projects\domains\base_domain\bin\stopWebLogic.cmd" />
+				</exec>
+			</sequential>
+		</parallel>
 	</target>
 
 	<target name="run-websphere-6.0">
@@ -275,6 +297,143 @@ tunnel.servlet.hosts.allowed=]]></echo>
 		</antcall>
 
 		<antcall target="stop-selenium" />
+	</target>
+
+	<target name="test-weblogic-10.3" depends="prepare">
+		<ant antfile="build-dist.xml" target="build-dist-tomcat-5.5" />
+
+		<delete dir="dist" />
+		<mkdir dir="dist" />
+
+		<ant antfile="build-dist.xml" target="zip-portal-war-2.4" />-->
+
+		<echo>Copying ${vm.drive}\${vm.host}\${vm.host}.vmdk.weblogic-10.3 to ${vm.drive}\${vm.host}\${vm.host}.vmdk</echo>
+
+		<exec executable="cmd">
+			<arg line="/c copy /y ${vm.drive}\${vm.host}\${vm.host}.vmdk.weblogic-10.3 ${vm.drive}\${vm.host}\${vm.host}.vmdk" />
+		</exec>
+
+		<exec dir="${vm.drive}/${vm.host}" executable="${vmware-cmd.executable}">
+			<arg line="${vm.drive}\${vm.host}\${vm.host}.vmx start" />
+		</exec>
+
+		<sleep seconds="30" />
+
+		<echo file="hosts">127.0.0.1	localhost
+127.0.0.1	liferay-b711dd9
+127.0.0.1	www.able.com
+127.0.0.1	www.baker.com
+127.0.0.1	www.charlie.com
+127.0.0.1	www.dog.com
+127.0.0.1	www.easy.com
+127.0.0.1	www.fox.com</echo>
+
+		<exec executable="${pscp.executable}">
+			<arg line="-pw ${vm.password} hosts dist\liferay-portal-${lp.version}.war tunnel-web\tunnel-web.war ${vm.username}@${vm.host}:/" />
+		</exec>
+
+		<delete file="hosts" />
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c move /y C:\hosts C:\WINDOWS\system32\drivers\etc\hosts" />
+		</exec>
+
+		<ant antfile="build-dist.xml" target="zip-portal-dependencies" />
+
+		<tstamp>
+			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+		</tstamp>
+
+		<unzip src="dist/liferay-portal-dependencies-${lp.version}.zip" dest="${tstamp.value}">
+			<mapper type="flatten" />
+		</unzip>
+
+		<exec executable="${pscp.executable}">
+			<arg line="-pw ${vm.password} lib\development\mysql.jar ${tstamp.value}\*.jar ${vm.username}@${vm.host}:/bea/user_projects/domains/base_domain/lib" />
+		</exec>
+
+		<delete dir="${tstamp.value}" />
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c mkdir C:\bea\jdk160_05\jre\lib\endorsed" />
+		</exec>
+
+		<exec executable="${pscp.executable}">
+			<arg line="-pw ${vm.password} lib\portal\rhino.jar lib\portal\serializer.jar lib\portal\xalan.jar ${vm.username}@${vm.host}:/bea/jdk160_05/jre/lib/endorsed" />
+		</exec>
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c mkdir C:\bea\jrockit_160_05\jre\lib\endorsed" />
+		</exec>
+
+		<exec executable="${pscp.executable}">
+			<arg line="-pw ${vm.password} lib\portal\rhino.jar lib\portal\serializer.jar lib\portal\xalan.jar ${vm.username}@${vm.host}:/bea/jrockit_160_05/jre/lib/endorsed" />
+		</exec>
+
+		<exec executable="${pscp.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host}:/bea/user_projects/domains/base_domain/bin/setDomainEnv.cmd setDomainEnv.cmd" />
+		</exec>
+
+		<replace file="setDomainEnv.cmd">
+			<replacefilter token="set MEM_ARGS=-Xms256m -Xmx512m" value="set MEM_ARGS=-Xms256m -Xmx1024m" />
+			<replacefilter token="set MEM_MAX_PERM_SIZE=-XX:MaxPermSize=128m" value="set MEM_MAX_PERM_SIZE=-XX:MaxPermSize=256m" />
+		</replace>
+
+		<exec executable="${pscp.executable}">
+			<arg line="-pw ${vm.password} setDomainEnv.cmd ${vm.username}@${vm.host}:/bea/user_projects/domains/base_domain/bin/setDomainEnv.cmd" />
+		</exec>
+
+		<delete file="setDomainEnv.cmd" />
+
+		<parallel>
+			<exec executable="${plink.executable}">
+				<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\bea\user_projects\domains\base_domain\bin\startWebLogic.cmd" />
+			</exec>
+
+			<sequential>
+				<waitfor>
+					<http url="http://${vm.host}:7001/console" />
+				</waitfor>
+
+				<exec executable="${plink.executable}">
+					<arg line="-pw ${vm.password} ${vm.username}@${vm.host} C:\bea\jdk160_05\bin\java.exe -cp C:\bea\wlserver_10.3\server\lib\weblogic.jar -Xmx256m weblogic.Deployer -adminurl t3://localhost:7001 -user system -password password -deploy -upload C:\liferay-portal-${lp.version}.war" />
+				</exec>
+
+				<exec executable="${plink.executable}">
+					<arg line="-pw ${vm.password} ${vm.username}@${vm.host} C:\bea\jdk160_05\bin\java.exe -cp C:\bea\wlserver_10.3\server\lib\weblogic.jar -Xmx256m weblogic.Deployer -adminurl t3://localhost:7001 -user system -password password -deploy -upload C:\tunnel-web.war" />
+				</exec>
+
+				<exec executable="${plink.executable}">
+					<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\bea\user_projects\domains\base_domain\bin\stopWebLogic.cmd" />
+				</exec>
+			</sequential>
+		</parallel>
+
+		<antcall target="revert-test-properties" />
+
+		<replace
+			file="portal-impl/test/test-portal-impl.properties"
+			token="localhost:8080"
+			value="${vm.host}:7001"
+		/>
+
+		<replace
+			file="portal-web/test/test-portal-web.properties"
+			token="localhost:8080"
+			value="${vm.host}:7001"
+		/>
+
+		<antcall target="start-selenium" />
+
+		<antcall target="run-weblogic-10.3">
+			<param name="test.class" value="PortalWebTestSuite" />
+		</antcall>
+
+		<antcall target="stop-selenium" />
+
+		<exec dir="${vm.drive}/${vm.host}" executable="${vmware-cmd.executable}">
+			<arg line="${vm.drive}\${vm.host}\${vm.host}.vmx stop hard" />
+		</exec>
 	</target>
 
 	<target name="test-websphere-6.1" depends="prepare">
