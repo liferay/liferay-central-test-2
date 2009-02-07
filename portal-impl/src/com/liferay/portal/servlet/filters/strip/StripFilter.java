@@ -259,7 +259,10 @@ public class StripFilter extends BasePortalFilter {
 
 						scriptContent = _SCRIPT_TYPE_JAVASCRIPT + scriptContent;
 
-						for (byte curByte : scriptContent.getBytes(StringPool.UTF8)) {
+						byte[] scriptContentBytes = scriptContent.getBytes(
+							StringPool.UTF8);
+
+						for (byte curByte : scriptContentBytes) {
 							newByteArray[newByteArrayPos++] = curByte;
 						}
 
@@ -294,7 +297,10 @@ public class StripFilter extends BasePortalFilter {
 
 						styleContent = _STYLE_TYPE_CSS + styleContent;
 
-						for (byte curByte : styleContent.getBytes(StringPool.UTF8)) {
+						byte[] styleContent = styleContent.getBytes(
+							StringPool.UTF8);
+
+						for (byte curByte : styleContent) {
 							newByteArray[newByteArrayPos++] = curByte;
 						}
 

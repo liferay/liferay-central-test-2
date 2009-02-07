@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.servlet;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
@@ -80,8 +82,10 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 		else if (_callGetOutputStream) {
 			try {
 				return _bam.toString(StringPool.UTF8);
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
+			}
+			catch (UnsupportedEncodingException uee) {
+				_log.error(uee, uee);
+
 				return StringPool.BLANK;
 			}
 		}
@@ -149,6 +153,9 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 	public void setString(String string) {
 		_string = string;
 	}
+
+	private static Log _log =
+		LogFactoryUtil.getLog(StringServletResponse.class);
 
 	private String _contentType;
 	private int _status = SC_OK;
