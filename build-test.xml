@@ -69,6 +69,48 @@ tunnel.servlet.hosts.allowed=]]></echo>
 		</exec>
 	</target>
 
+	<target name="prepare-vm-server">
+		<ant antfile="build-dist.xml" target="build-dist-tomcat-5.5" />
+
+		<delete dir="dist" />
+		<mkdir dir="dist" />
+
+		<ant antfile="build-dist.xml" target="zip-portal-war-2.4" />
+
+		<echo>Copying ${vm.drive}\${vm.host}\${vm.host}.vmdk.${vm.vmdk.suffix} to ${vm.drive}\${vm.host}\${vm.host}.vmdk</echo>
+
+		<exec executable="cmd">
+			<arg line="/c copy /y ${vm.drive}\${vm.host}\${vm.host}.vmdk.${vm.vmdk.suffix} ${vm.drive}\${vm.host}\${vm.host}.vmdk" />
+		</exec>
+
+		<exec dir="${vm.drive}/${vm.host}" executable="${vmware-cmd.executable}">
+			<arg line="${vm.drive}\${vm.host}\${vm.host}.vmx start" />
+		</exec>
+
+		<sleep seconds="30" />
+
+		<echo file="hosts">127.0.0.1	localhost
+127.0.0.1	liferay-b711dd9
+127.0.0.1	www.able.com
+127.0.0.1	www.baker.com
+127.0.0.1	www.charlie.com
+127.0.0.1	www.dog.com
+127.0.0.1	www.easy.com
+127.0.0.1	www.fox.com</echo>
+
+		<exec executable="${pscp.executable}">
+			<arg line="-pw ${vm.password} hosts dist\liferay-portal-${lp.version}.war tunnel-web\tunnel-web.war ${vm.username}@${vm.host}:/" />
+		</exec>
+
+		<delete file="hosts" />
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c move /y C:\hosts C:\WINDOWS\system32\drivers\etc\hosts" />
+		</exec>
+
+		<ant antfile="build-dist.xml" target="zip-portal-dependencies" />
+	</target>
+
 	<target name="run-jboss-tomcat-5.0">
 		<antcall target="run-simple-server">
 			<param name="simple.server.dir" value="${app.server.parent.dir}/jboss-tomcat-5.0.0" />
@@ -300,45 +342,9 @@ tunnel.servlet.hosts.allowed=]]></echo>
 	</target>
 
 	<target name="test-weblogic-10.3" depends="prepare">
-		<ant antfile="build-dist.xml" target="build-dist-tomcat-5.5" />
-
-		<delete dir="dist" />
-		<mkdir dir="dist" />
-
-		<ant antfile="build-dist.xml" target="zip-portal-war-2.4" />-->
-
-		<echo>Copying ${vm.drive}\${vm.host}\${vm.host}.vmdk.weblogic-10.3 to ${vm.drive}\${vm.host}\${vm.host}.vmdk</echo>
-
-		<exec executable="cmd">
-			<arg line="/c copy /y ${vm.drive}\${vm.host}\${vm.host}.vmdk.weblogic-10.3 ${vm.drive}\${vm.host}\${vm.host}.vmdk" />
-		</exec>
-
-		<exec dir="${vm.drive}/${vm.host}" executable="${vmware-cmd.executable}">
-			<arg line="${vm.drive}\${vm.host}\${vm.host}.vmx start" />
-		</exec>
-
-		<sleep seconds="30" />
-
-		<echo file="hosts">127.0.0.1	localhost
-127.0.0.1	liferay-b711dd9
-127.0.0.1	www.able.com
-127.0.0.1	www.baker.com
-127.0.0.1	www.charlie.com
-127.0.0.1	www.dog.com
-127.0.0.1	www.easy.com
-127.0.0.1	www.fox.com</echo>
-
-		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} hosts dist\liferay-portal-${lp.version}.war tunnel-web\tunnel-web.war ${vm.username}@${vm.host}:/" />
-		</exec>
-
-		<delete file="hosts" />
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c move /y C:\hosts C:\WINDOWS\system32\drivers\etc\hosts" />
-		</exec>
-
-		<ant antfile="build-dist.xml" target="zip-portal-dependencies" />
+		<antcall target="prepare-vm-server">
+			<param name="vm.vmdk.suffix" value="weblogic-10.3" />
+		</antcall>
 
 		<tstamp>
 			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
@@ -437,45 +443,9 @@ tunnel.servlet.hosts.allowed=]]></echo>
 	</target>
 
 	<target name="test-websphere-6.1" depends="prepare">
-		<ant antfile="build-dist.xml" target="build-dist-tomcat-5.5" />
-
-		<delete dir="dist" />
-		<mkdir dir="dist" />
-
-		<ant antfile="build-dist.xml" target="zip-portal-war-2.4" />
-
-		<echo>Copying ${vm.drive}\${vm.host}\${vm.host}.vmdk.websphere-6.1.0.21 to ${vm.drive}\${vm.host}\${vm.host}.vmdk</echo>
-
-		<exec executable="cmd">
-			<arg line="/c copy /y ${vm.drive}\${vm.host}\${vm.host}.vmdk.websphere-6.1.0.21 ${vm.drive}\${vm.host}\${vm.host}.vmdk" />
-		</exec>
-
-		<exec dir="${vm.drive}/${vm.host}" executable="${vmware-cmd.executable}">
-			<arg line="${vm.drive}\${vm.host}\${vm.host}.vmx start" />
-		</exec>
-
-		<sleep seconds="30" />
-
-		<echo file="hosts">127.0.0.1	localhost
-127.0.0.1	liferay-b711dd9
-127.0.0.1	www.able.com
-127.0.0.1	www.baker.com
-127.0.0.1	www.charlie.com
-127.0.0.1	www.dog.com
-127.0.0.1	www.easy.com
-127.0.0.1	www.fox.com</echo>
-
-		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} hosts dist\liferay-portal-${lp.version}.war tunnel-web\tunnel-web.war ${vm.username}@${vm.host}:/" />
-		</exec>
-
-		<delete file="hosts" />
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c move /y C:\hosts C:\WINDOWS\system32\drivers\etc\hosts" />
-		</exec>
-
-		<ant antfile="build-dist.xml" target="zip-portal-dependencies" />
+		<antcall target="prepare-vm-server">
+			<param name="vm.vmdk.suffix" value="websphere-6.1.0.21" />
+		</antcall>
 
 		<tstamp>
 			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
