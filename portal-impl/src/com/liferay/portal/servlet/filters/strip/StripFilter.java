@@ -234,7 +234,8 @@ public class StripFilter extends BasePortalFilter {
 					if (hasMarker(oldByteArray, i, _MARKER_SCRIPT_CLOSE)) {
 						state = _STATE_NORMAL;
 
-						String scriptContent = scriptBytes.toString(StringPool.UTF8);
+						String scriptContent = scriptBytes.toString(
+							StringPool.UTF8);
 
 						scriptBytes = new ByteArrayMaker();
 
@@ -269,7 +270,8 @@ public class StripFilter extends BasePortalFilter {
 					if (hasMarker(oldByteArray, i, _MARKER_STYLE_CLOSE)) {
 						state = _STATE_NORMAL;
 
-						String styleContent = styleBytes.toString(StringPool.UTF8);
+						String styleContent = styleBytes.toString(
+							StringPool.UTF8);
 
 						styleBytes = new ByteArrayMaker();
 
