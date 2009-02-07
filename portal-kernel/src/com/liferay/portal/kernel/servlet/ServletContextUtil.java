@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.servlet;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
@@ -80,10 +82,13 @@ public class ServletContextUtil {
 					}
 				}
 				else {
-					String realPath = servletContext.getRealPath(
-						curResourcePath);
+					String realPath = getRealPath(
+						servletContext, curResourcePath);
 
 					if (realPath == null) {
+						_log.error(
+							"Real path for " + curResourcePath + " is null");
+
 						continue;
 					}
 
@@ -149,5 +154,7 @@ public class ServletContextUtil {
 
 		return rootDir;
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(ServletContextUtil.class);
 
 }
