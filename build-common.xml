@@ -75,6 +75,10 @@
 	<propertycopy name="app.server.temp.dir" from="app.server.${app.server.type}.temp.dir" />
 	<propertycopy name="app.server.work.dir" from="app.server.${app.server.type}.work.dir" />
 
+	<antelope:stringutil string="${basedir}" property="basedir.unix">
+		<antelope:replace regex="\\" replacement="/" />
+	</antelope:stringutil>
+
 	<condition property="file.suffix.bat" value=".bat" else=".sh">
 		<contains string="${os.name}" substring="Windows" casesensitive="false"/>
 	</condition>

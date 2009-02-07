@@ -4,12 +4,12 @@
 	<import file="build.xml" />
 
 	<target name="deploy-simple-server-plugins">
-		<property name="liferay.home" value="${simple.server.dir}/.."/>
+		<property name="liferay.home" value="${simple.server.dir}/.." />
 
 		<delete dir="${liferay.home}/data" />
 		<delete dir="${liferay.home}/deploy" />
 
-		<exec dir="${lp.plugins.dir}" executable="cmd.exe" os="${os.windows}">
+		<exec dir="${lp.plugins.dir}" executable="cmd.exe">
 			<arg line="/c svn update" />
 		</exec>
 
@@ -28,6 +28,23 @@ plugins.includes=${plugins.includes}</echo>
 	</target>
 
 	<target name="prepare">
+		<antcall target="prepare-portal-ext-properties" />
+
+		<exec executable="cmd.exe">
+			<arg line="/c svn revert portal-web/docroot/WEB-INF/web.xml" />
+		</exec>
+
+		<replace
+			file="portal-web/docroot/WEB-INF/web.xml"
+			token="session-timeout&gt;30&lt;"
+			value="session-timeout&gt;2&lt;"
+		/>
+
+		<antcall target="clean" />
+		<antcall target="start" />
+	</target>
+
+	<target name="prepare-portal-ext-properties">
 		<echo file="portal-impl/src/portal-ext.properties"><![CDATA[jdbc.default.jndi.name=
 
 jdbc.default.driverClassName=com.mysql.jdbc.Driver
@@ -44,27 +61,14 @@ mail.session.jndi.name=
 axis.servlet.hosts.allowed=
 
 tunnel.servlet.hosts.allowed=]]></echo>
-
-		<exec dir="." executable="cmd.exe" os="${os.windows}">
-			<arg line="/c svn revert portal-web/docroot/WEB-INF/web.xml" />
-		</exec>
-
-		<replace
-			file="portal-web/docroot/WEB-INF/web.xml"
-			token="session-timeout&gt;30&lt;"
-			value="session-timeout&gt;2&lt;"
-		/>
-
-		<antcall target="clean" />
-		<antcall target="start" />
 	</target>
 
 	<target name="revert-test-properties">
-		<exec dir="." executable="cmd.exe" os="${os.windows}">
+		<exec executable="cmd.exe">
 			<arg line="/c svn revert portal-impl/test/test-portal-impl.properties" />
 		</exec>
 
-		<exec dir="." executable="cmd.exe" os="${os.windows}">
+		<exec executable="cmd.exe">
 			<arg line="/c svn revert portal-web/test/test-portal-web.properties" />
 		</exec>
 	</target>
@@ -177,7 +181,9 @@ tunnel.servlet.hosts.allowed=]]></echo>
 		</if>
 
 		<parallel>
-			<exec dir="${simple.server.bin.dir}" executable="${simple.server.start.executable}" resolveexecutable="true" />
+			<exec dir="${simple.server.bin.dir}" executable="${simple.server.start.executable}" resolveexecutable="true">
+				<arg line="${simple.server.start.executable.arg.line}" />
+			</exec>
 
 			<sequential>
 				<waitfor>
@@ -191,8 +197,6 @@ tunnel.servlet.hosts.allowed=]]></echo>
 				<exec dir="${simple.server.bin.dir}" executable="${simple.server.stop.executable}" resolveexecutable="true">
 					<arg line="${simple.server.stop.executable.arg.line}" />
 				</exec>
-
-				<sleep seconds="10" />
 			</sequential>
 		</parallel>
 	</target>
@@ -203,7 +207,8 @@ tunnel.servlet.hosts.allowed=]]></echo>
 			<param name="simple.server.bin.dir" value="${app.server.tomcat.bin.dir}" />
 			<param name="simple.server.deploy.dir" value="${app.server.tomcat.deploy.dir}" />
 			<param name="simple.server.portal.dir" value="${app.server.tomcat.portal.dir}" />
-			<param name="simple.server.start.executable" value="startup${file.suffix.bat}" />
+			<param name="simple.server.start.executable" value="catalina${file.suffix.bat}" />
+			<param name="simple.server.start.executable.arg.line" value="run" />
 			<param name="simple.server.stop.executable" value="shutdown${file.suffix.bat}" />
 		</antcall>
 	</target>
@@ -290,10 +295,87 @@ tunnel.servlet.hosts.allowed=]]></echo>
 		<antcall target="stop-selenium" />
 	</target>
 
+	<target name="test-tck">
+		<antcall target="prepare-portal-ext-properties" />
+
+		<echo file="portal-impl/src/portal-ext.properties" append="true">
+
+tck.url=true</echo>
+
+		<exec executable="cmd.exe">
+			<arg line="/c svn revert portal-web/docroot/WEB-INF/web.xml" />
+		</exec>
+
+		<antcall target="clean" />
+		<antcall target="start" />
+
+		<ant antfile="build-dist.xml" target="build-dist-tomcat-5.5" />
+
+		<delete dir="tools/tck" />
+
+		<unzip src="tools/portlet-tck070508.zip" dest="tools/tck" />
+
+		<replace file="tools/tck/bin/ts.jte">
+			<replacefilter token="http://localhost:8080/pluto/tck" value="http://localhost:8080/c/portal/tck" />
+		</replace>
+
+		<echo file="tools/tck/bin/build.properties" append="true">
+
+work.dir=${basedir.unix}/tools/tck/work</echo>
+
+		<property name="liferay.home" value="${app.server.dir}/.." />
+
+		<delete dir="${liferay.home}/data" />
+		<delete dir="${liferay.home}/deploy" />
+
+		<copy todir="${liferay.home}/deploy" flatten="true">
+			<fileset
+				dir="tools/tck"
+				includes="**/*.war"
+			/>
+		</copy>
+
+		<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
+
+		<parallel>
+			<exec dir="${app.server.tomcat.bin.dir}" executable="catalina${file.suffix.bat}" resolveexecutable="true">
+				<arg line="run" />
+			</exec>
+
+			<sequential>
+				<waitfor>
+					<http url="http://localhost:8080" />
+				</waitfor>
+
+				<sleep seconds="60" />
+
+				<exec dir="tools/tck/src/com/sun/ts/tests/portlet/ee" executable="${basedir}/tools/tck/bin/tsant.bat">
+					<arg line="runclient" />
+					<env key="TS_HOME" value="${basedir}\tools\tck" />
+				</exec>
+
+				<exec dir="${app.server.tomcat.bin.dir}" executable="shutdown${file.suffix.bat}" resolveexecutable="true" />
+			</sequential>
+		</parallel>
+
+		<mkdir dir="portal-impl/test-results" />
+
+		<java
+			classname="com.liferay.portal.tools.TCKtoJUnitConverter"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true"
+		>
+			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
+			<arg value="tools/tck/work/jtData/harness.trace" />
+			<arg value="portal-impl/test-results" />
+		</java>
+	</target>
+
 	<target name="test-themes" depends="prepare">
 		<ant antfile="build-dist.xml" target="build-dist-tomcat-5.5" />
 
-		<exec dir="${lp.plugins.dir}" executable="cmd.exe" os="${os.windows}">
+		<exec dir="${lp.plugins.dir}" executable="cmd.exe">
 			<arg line="/c svn update" />
 		</exec>
 
