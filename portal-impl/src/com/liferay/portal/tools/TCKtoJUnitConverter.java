@@ -173,7 +173,7 @@ public class TCKtoJUnitConverter {
 			sb.append(failureMessage);
 			sb.append("\" type=\"junit.framework.AssertionFailedError\">\n");
 			sb.append(failureMessage);
-			sb.append("\t\t</failure>\n");
+			sb.append("\n\t\t</failure>\n");
 			sb.append("\t</testcase>\n");
 		}
 
