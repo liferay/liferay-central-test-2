@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+
+<!--
+  ~ Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in
+  ~ all copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  -->
+
+<project name="generator" basedir="." default="package">
+    <import file="../build-common.xml" />
+
+    <property name="src.java" value="${basedir}/src" />
+    <property name="src.test" value="${basedir}/test" />
+    <property name="build.dir" value="${basedir}/build" />
+    <property name="build.dir.generator" value="${build.dir}/generator" />
+    <property name="build.dir.generator.classes"
+              value="${build.dir.generator}/classes" />
+    <property name="build.dir.dist" value="${build.dir.generator}/dist" />
+    <property name="file.name" value="data_generator" />
+
+    <target name="init">
+        <mkdir dir="${build.dir}" />
+        <mkdir dir="${build.dir.generator}" />
+        <mkdir dir="${build.dir.generator.classes}" />
+    </target>
+
+    <target name="compile" depends="init">
+        <javac
+                classpathref="project.classpath"
+                compiler="${javac.compiler}"
+                debug="${javac.debug}"
+                deprecation="${javac.deprecation}"
+                destdir="${build.dir.generator.classes}"
+                fork="${javac.fork}"
+                memoryMaximumSize="${javac.memoryMaximumSize}"
+                nowarn="${javac.nowarn}"
+                srcdir="${src.java}"
+                />
+        <copy todir="${build.dir.generator.classes}">
+            <fileset dir="${src.java}">
+                <include name="**/*.ftl" />
+                <include name="**/*.properties" />
+                <include name="**/*.xml" />
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="package" depends="compile">
+        <jar
+                basedir="${build.dir.generator.classes}"
+                jarfile="${build.dir.dist}/${file.name}.jar"
+                />
+    </target>
+
+    
+</project>
+

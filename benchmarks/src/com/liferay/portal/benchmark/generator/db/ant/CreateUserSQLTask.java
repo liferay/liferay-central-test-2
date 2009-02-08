@@ -59,6 +59,7 @@ public class CreateUserSQLTask extends Task {
 
 	public void execute() throws BuildException {
 		super.execute();
+		_init();
 		log("Generating " + _numUsers + " users for " + _version + " on " +
 				_database);
 		Writer sqlWriter = null;
@@ -106,7 +107,7 @@ public class CreateUserSQLTask extends Task {
 		}
 	}
 
-	public void init()
+	private void _init()
 			throws BuildException {
 		if (_sqlOutput == null) {
 			throw new BuildException("Must specify a output file name " +
