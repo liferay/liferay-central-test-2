@@ -23,7 +23,9 @@
 package com.liferay.portal.benchmark.generator.db.model;
 
 import java.util.Date;
-import java.util.Locale;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * <a href="User.java.html"><b><i>View Source</i></b></a>
@@ -45,8 +47,8 @@ public class User {
 		_createDate = new Date();
 		_modifiedDate = new Date();
 		_passwordModifiedDate = new Date();
-		_languageId = Locale.US.getDisplayLanguage();
-		_timeZoneId = "GMT";
+		_languageId = "en_US";
+		_timeZoneId = "UTC";
 		_greeting = "Welcome " + contact.getFirstName() + " " +
 				contact.getLastName() + "!";
 	}
@@ -183,12 +185,57 @@ public class User {
 		return _contact;
 	}
 
-	public GroupRole getGroupRole() {
-		return _groupGroupRole;
+	public List<GroupRole> getCommunityRoles() {
+		return _communityRoles;
 	}
 
-	public Group getGroup() {
-		return _group;
+	public void addCommunityRole(GroupRole role) {
+		_communityRoles.add(role);
+	}
+
+	public List<OrganizationRole> getOrganizationRoles() {
+		return _organizationRoles;
+	}
+
+	public void addOrganizationRole(OrganizationRole role) {
+		_organizationRoles.add(role);
+	}
+
+	public List<Role> getRoles() {
+		return _roles;
+	}
+
+	public void addRoles(Collection<Role> roles) {
+		for (Role role : roles) {
+			addRole(role);
+		}
+	}
+
+	public void addRole(Role role) {
+		if (role.getRoleType() != Scope.COMPANY) {
+			throw new IllegalArgumentException("Role is not a portal wide role");
+		}
+		_roles.add(role);
+	}
+
+	public void addOrganization(Organization org) {
+		_organizations.add(org);
+	}
+
+	public List<Organization> getOrganizations() {
+		return _organizations;
+	}
+
+	public void addCommunity(Group org) {
+		_communities.add(org);
+	}
+
+	public List<Group> getCommunities() {
+		return _communities;
+	}
+
+	public Group getPrivateGroup() {
+		return _privateGroup;
 	}
 
 	public LayoutSet getPublicLayoutSet() {
@@ -327,12 +374,9 @@ public class User {
 		_modifiedDate = modifiedDate;
 	}
 
-	public void setGroupRole(GroupRole groupRole) {
-		_groupGroupRole = groupRole;
-	}
-
-	public void setGroup(Group group) {
-		_group = group;
+	public void setPrivateGroup(Group privateGroup) {
+		_privateGroup = privateGroup;
+		_privateGroup.setFriendlyURL("/" + _screenName);
 	}
 
 	private String _uuid = "";
@@ -368,8 +412,13 @@ public class User {
 	private boolean _agreedToTermsOfUse;
 	private boolean _active;
 	private Contact _contact;
-	private GroupRole _groupGroupRole;
-	private Group _group;
+	private List<Group> _communities = new ArrayList<Group>();
+	private List<GroupRole> _communityRoles = new ArrayList<GroupRole>();
+	private List<Role> _roles = new ArrayList<Role>();
+	private List<Organization> _organizations = new ArrayList<Organization>();
+	private List<OrganizationRole> _organizationRoles = new ArrayList<OrganizationRole>();
+	private Group _privateGroup;
+
 	private LayoutSet _publicLayoutSet;
 	private LayoutSet _privateLayoutSet;
 }

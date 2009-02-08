@@ -20,17 +20,14 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.benchmark.generator.db;
+package com.liferay.portal.benchmark.generator.db.model;
 
 /**
- * <a href="ResourceAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="OrganizationStatus.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
-public enum ResourceAction {
-	DELETE,
-	IMPERSONATE,
-	PERMISSIONS,
-	UPDATE,
-	VIEW,
+public enum OrganizationStatus {
+	PROVISIONAL,
+	FULL;
 }

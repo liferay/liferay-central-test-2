@@ -30,6 +30,10 @@ import com.liferay.portal.benchmark.generator.db.model.LayoutSet;
 import com.liferay.portal.benchmark.generator.db.model.Permission;
 import com.liferay.portal.benchmark.generator.db.model.Resource;
 import com.liferay.portal.benchmark.generator.db.model.User;
+import com.liferay.portal.benchmark.generator.db.model.common.ResourceAction;
+import com.liferay.portal.benchmark.generator.db.model.common.ResourceCodes;
+import com.liferay.portal.benchmark.generator.db.model.common.CommonRoles;
+import com.liferay.portal.benchmark.generator.db.model.Role;
 import com.liferay.portal.freemarker.FreeMarkerUtil;
 
 import java.io.Writer;
@@ -70,10 +74,30 @@ public class CreateUserSQLGenerator {
 
 	public void generate(Writer sqlWriter, Writer testDataWriter,
 						 String firstName, String lastName,
-						 boolean addUserGroupRole, long userGroupId,
-						 long userRoleId)
+						 boolean addCommunityRole, long communityId,
+						 long communityRoleId)
 			throws Exception {
 		Map<String, Object> context = new HashMap<String, Object>();
+		List<Role> roles = new ArrayList<Role>();
+		roles.add(CommonRoles.POWER_USER(_companyId));
+		roles.add(CommonRoles.USER(_companyId));
+		User user = addRequiredUserValues(firstName, lastName, roles, context);
+
+		if (addCommunityRole) {
+			user.addCommunityRole(new GroupRole(user.getUserId(),
+												communityId, communityRoleId));
+		}
+
+
+		FreeMarkerUtil.process(
+				_sqlTemplateLocation + _CREATE_USER_TEMPLATE_FILE, context, sqlWriter);
+		FreeMarkerUtil.process(
+				_dataTemplateLocation + _USER_LOGINS_TEMPLATE_FILE, context, testDataWriter);
+	}
+
+	private User addRequiredUserValues(String firstName, String lastName,
+									   List<Role> roles,
+									   Map<String, Object> context) {
 		Contact contact =
 				new Contact(_generator.generate(), _companyId,
 							_defaultUserId, _defaultUserName,
@@ -83,11 +107,12 @@ public class CreateUserSQLGenerator {
 							 createEmail(firstName, lastName, _domain),
 							 _defaultPassword, contact);
 		context.put("user", user);
+		user.addRoles(roles);
 		Group group = new Group(_generator.generate(), _companyId,
 								user.getUserId(),
 								ClassName.USER.getClassNameId(),
 								user.getUserId());
-		user.setGroup(group);
+		user.setPrivateGroup(group);
 		user.setPublicLayoutSet(new LayoutSet(_generator.generate(),
 											  group.getGroupId(), _companyId,
 											  false, "classic", "01",
@@ -96,10 +121,6 @@ public class CreateUserSQLGenerator {
 											   group.getGroupId(), _companyId,
 											   true, "classic", "01",
 											   "mobile", "01"));
-		if (addUserGroupRole) {
-			user.setGroupRole(new GroupRole(user.getUserId(),
-											userGroupId, userRoleId));
-		}
 
 		Resource resource =
 				new Resource(_generator.generate(IDGenerator.RESOURCE),
@@ -128,10 +149,7 @@ public class CreateUserSQLGenerator {
 							   _companyId, ResourceAction.VIEW.name(),
 							   resource.getResourceId()));
 		context.put("permissions", permissions);
-		FreeMarkerUtil.process(
-				_sqlTemplateLocation + _CREATE_USER_TEMPLATE_FILE, context, sqlWriter);
-		FreeMarkerUtil.process(
-				_dataTemplateLocation + _USER_LOGINS_TEMPLATE_FILE, context, testDataWriter);
+		return user;
 	}
 
 	private String createScreenName(String firstName, String lastName) {

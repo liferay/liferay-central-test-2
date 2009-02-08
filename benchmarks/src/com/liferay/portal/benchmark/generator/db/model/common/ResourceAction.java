@@ -20,36 +20,17 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.benchmark.generator.db;
+package com.liferay.portal.benchmark.generator.db.model.common;
 
 /**
- * <a href="ResourceCodes.java.html"><b><i>View Source</i></b></a>
+ * <a href="ResourceAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
-public enum ResourceCodes {
-	USER_1(4, "com.liferay.portal.model.User", 1),
-	USER_4(5, "com.liferay.portal.model.User", 4);
-
-	private ResourceCodes(long codeId, String name, long scope) {
-		_codeId = codeId;
-		_name = name;
-		_scope = scope;
-	}
-
-	public long getCodeId() {
-		return _codeId;
-	}
-
-	public String getName() {
-		return _name;
-	}
-
-	public long getScope() {
-		return _scope;
-	}
-
-	private long _codeId;
-	private String _name;
-	private long _scope;
+public enum ResourceAction {
+	DELETE,
+	IMPERSONATE,
+	PERMISSIONS,
+	UPDATE,
+	VIEW,
 }

@@ -49,6 +49,8 @@ public class CreateUserSQLTask extends Task {
 		task.setNumUsers(Integer.parseInt(args[0]));
 		task.setSqlOutput("c:/temp/load_user.sql");
 		task.setTestLoginOutput("c:/temp/user_logins.csv");
+		task.setCompanyId(10108);
+		task.setDefaultUserId(10133);
 		task.setPathToFirstNameFile("/projects/liferay/trunk/portal/benchmarks/data/user/first_names.txt");
 		task.setPathToLastNameFile("/projects/liferay/trunk/portal/benchmarks/data/user/last_names.txt");
 		task.init();

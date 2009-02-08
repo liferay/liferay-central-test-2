@@ -22,14 +22,41 @@ INSERT INTO Resource_ (codeId, primKey, resourceId) VALUES (${resource.codeId}, 
 <#call create_permission(permissions) >
 <#-- Create a group specifically for the user to hold the user's public and private pages -->
 INSERT INTO Group_ (companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, description, type_, typeSettings, friendlyURL, active_, groupId)
-VALUES (${user.group.companyId}, ${user.group.creatorUserId}, ${user.group.classNameId}, ${user.group.classPK}, ${user.group.parentGroupId}, ${user.group.liveGroupId}, '${user.group.name}', '${user.group.description}',${user.group.type},'${user.group.typeSettings}','${user.group.friendlyURL}',${user.group.active?string},${user.group.groupId});
-<#-- assign the user a specific role within a user.group -->
-<#if user.userGroupRole??>
-INSERT INTO UserGroupRole (userId, groupId, roleId) VALUES (${user.userId}, ${user.userGroupRole.groupId}, ${user.userGroupRole.roleId});
-</#if>
+VALUES (${user.privateGroup.companyId}, ${user.privateGroup.creatorUserId}, ${user.privateGroup.classNameId}, ${user.privateGroup.classPK}, ${user.privateGroup.parentGroupId}, ${user.privateGroup.liveGroupId}, '${user.privateGroup.name}', '${user.privateGroup.description}',${user.privateGroup.type},'${user.privateGroup.typeSettings}','${user.privateGroup.friendlyURL}',${user.privateGroup.active?string},${user.privateGroup.groupId});
 <#-- Add public and private page containers for user -->
 <#call create_layout_set(user.publicLayoutSet) >
 <#call create_layout_set(user.privateLayoutSet) >
+<#-- Assign user roles within the portal -->
+<#if user.roles??>
+    <#list user.roles as role>
+INSERT INTO Users_Roles (userId, roleId) VALUES (${user.userId}, ${role.roleId});
+    </#list>
+</#if>
+<#-- Assign users to the proper communities-->
+<#if user.communities??>
+    <#list user.communities as community>
+INSERT INTO Users_Groups (${user.userId}}, ${community.groupId});
+    </#list>   
+</#if>
+<#-- assign the user a specific role within a user.group -->
+<#if user.communityRoles??>
+    <#list user.communityRoles as communityRole>
+INSERT INTO UserGroupRole (userId, groupId, roleId) VALUES (${user.userId}, ${communityRole.groupId}, ${communityRole.roleId});
+    </#list>
+</#if>
+<#-- Assign users to the proper organizations-->
+<#if user.organizations??>
+    <#list user.organizations as organization>
+INSERT INTO User_Orgs (${user.userId}}, ${organization.organizationId});
+    </#list>
+</#if>
+<#-- assign the user a specific role within a user.group -->
+<#if user.organizationRoles??>
+    <#list user.organizationRoles as organizationRole>
+<#--INSERT INTO UserGroupRole (userId, groupId, roleId) VALUES (${user.userId}, ${communityRole.groupId}, ${communityRole.roleId});-->
+    </#list>
+</#if>
+
 <#function create_permission(permissions)>
       <#list permissions as permission>
 INSERT INTO Permission_ (companyId, actionId, resourceId, permissionId) VALUES (${permission.companyId}, '${permission.actionId}', ${permission.resourceId}, ${permission.permissionId});
