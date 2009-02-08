@@ -349,7 +349,7 @@ work.dir=${basedir.unix}/tools/tck/work</echo>
 
 				<sleep seconds="60" />
 
-				<exec dir="tools/tck/src" executable="${basedir}/tools/tck/bin/tsant.bat">
+				<exec dir="tools/tck/src/com" executable="${basedir}/tools/tck/bin/tsant.bat">
 					<arg line="runclient" />
 					<env key="TS_HOME" value="${basedir}\tools\tck" />
 				</exec>
