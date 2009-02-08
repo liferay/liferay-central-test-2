@@ -22,7 +22,7 @@
 
 package com.liferay.util;
 
-import com.liferay.util.BaseTestCase;
+import junit.framework.TestCase;
 
 /**
  * <a href="VersionTest.java.html"><b><i>View Source</i></b></a>
@@ -30,7 +30,7 @@ import com.liferay.util.BaseTestCase;
  * @author Jorge Ferrer
  *
  */
-public class VersionTest extends BaseTestCase {
+public class VersionTest extends TestCase {
 
 	public void testBugFixNumber() {
 		assertPrevious("1.1.0", "1.1.1");

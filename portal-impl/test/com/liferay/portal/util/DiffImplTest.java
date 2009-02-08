@@ -20,9 +20,11 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.util;
+package com.liferay.portal.util;
 
-import com.liferay.portal.kernel.util.BaseTestCase;
+import com.liferay.portal.kernel.util.Diff;
+import com.liferay.portal.kernel.util.DiffResult;
+import com.liferay.portal.kernel.util.DiffUtil;
 
 import java.io.StringReader;
 
@@ -30,12 +32,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <a href="DiffTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="DiffImplTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
  *
  */
-public class DiffTest extends BaseTestCase {
+public class DiffImplTest extends BaseTestCase {
 
 	public void testOne() {
 		StringReader reader1 = new StringReader("liferay");
