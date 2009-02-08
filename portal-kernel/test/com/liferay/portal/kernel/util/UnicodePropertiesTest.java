@@ -51,7 +51,7 @@ public class UnicodePropertiesTest extends TestCase {
 
 		props.setProperty(null, "value");
 
-		Assert.assertEquals(
+		assertEquals(
 			"setProperty() of null key must not change properties", hashCode,
 			props.hashCode());
 
