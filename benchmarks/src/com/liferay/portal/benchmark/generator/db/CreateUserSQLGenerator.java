@@ -79,6 +79,7 @@ public class CreateUserSQLGenerator {
 			throws Exception {
 		Map<String, Object> context = new HashMap<String, Object>();
 		List<Role> roles = new ArrayList<Role>();
+		//TBD we should allow dynamically setting of roles...
 		roles.add(CommonRoles.POWER_USER(_companyId));
 		roles.add(CommonRoles.USER(_companyId));
 		User user = addRequiredUserValues(firstName, lastName, roles, context);
@@ -158,7 +159,7 @@ public class CreateUserSQLGenerator {
 
 	private String createEmail(String firstName, String lastName,
 							   String domain) {
-		return firstName + "." + lastName + "@" + domain;
+		return firstName + lastName + "@" + domain;
 	}
 
 	private static final String _CREATE_USER_TEMPLATE_FILE = "/create_user.ftl";
