@@ -293,7 +293,24 @@ TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(Wiki
 </c:if>
 
 <%
-if (wikiPage != null) {
+if ((wikiPage != null) && !wikiPage.getTitle().equals(WikiPageImpl.FRONT_PAGE)) {
 	PortalUtil.setPageSubtitle(wikiPage.getTitle(), request);
+
+	String description = wikiPage.getContent();
+
+	if (wikiPage.getFormat().equals("html")) {
+		description = HtmlUtil.stripHtml(description);
+	}
+
+	description = StringUtil.shorten(description, 200);
+
+	PortalUtil.setPageDescription(description, request);
+
+	List<TagsEntry> tagsEntries = new ArrayList<TagsEntry>();
+
+	tagsEntries.addAll(TagsEntryLocalServiceUtil.getEntries(WikiPage.class.getName(), wikiPage.getResourcePrimKey(), false));
+	tagsEntries.addAll(TagsEntryLocalServiceUtil.getEntries(WikiPage.class.getName(), wikiPage.getResourcePrimKey(), true));
+
+	PortalUtil.setPageKeywords(ListUtil.toString(tagsEntries, "name"), request);
 }
 %>
