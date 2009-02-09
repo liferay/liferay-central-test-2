@@ -445,7 +445,6 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 			<%
 			PortalUtil.setPageSubtitle(category.getName(), request);
-
 			PortalUtil.setPageDescription(category.getDescription(), request);
 			%>
 

@@ -351,7 +351,6 @@ else {
 MBMessageFlagLocalServiceUtil.addReadFlags(themeDisplay.getUserId(), messages);
 
 PortalUtil.setPageSubtitle(message.getSubject(), request);
-
 PortalUtil.setPageDescription(message.getSubject(), request);
 
 List<TagsEntry> tagsEntries = TagsEntryLocalServiceUtil.getEntries(MBMessage.class.getName(), message.getMessageId(), true);
