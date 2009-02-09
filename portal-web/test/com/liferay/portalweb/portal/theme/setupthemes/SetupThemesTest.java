@@ -178,7 +178,7 @@ public class SetupThemesTest extends BaseTestCase {
 		selenium.click("link=More Options \u00bb");
 		selenium.click("_29_DELETE_MISSING_LAYOUTSCheckbox");
 		selenium.click("_29_DELETE_PORTLET_DATA");
-		selenium.click("_29_copy_as_new");
+		selenium.click("_29_mirror");
 		selenium.click("_29_alwaysCurrentUserId");
 		selenium.click(RuntimeVariables.replace("//input[@value='Import']"));
 		selenium.waitForPageToLoad("30000");

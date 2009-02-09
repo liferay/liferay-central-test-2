@@ -59,7 +59,24 @@ public class ScreengrabDocumentLibraryTest extends BaseTestCase {
 				"//input[@value='Add Document']"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
-		selenium.click("//div[3]/div/div/div/div[2]/div/div/a");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Use the classic uploader.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Use the classic uploader.");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

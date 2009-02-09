@@ -75,7 +75,7 @@ public class ScreengrabAddApplicationTest extends BaseTestCase {
 		FileUtil.mkdirs(RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test-output\\brochure\\"));
 		selenium.captureEntirePageScreenshot(RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test-output\\brochure\\ScreengrabTest09.jpg"),
+				"L:\\portal\\build\\portal-web\\test-output\\brochure\\ScreengrabTest10.jpg"),
 			"");
 	}
 }

@@ -74,7 +74,7 @@ public class ScreengrabLayoutTest extends BaseTestCase {
 		FileUtil.mkdirs(RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test-output\\brochure\\"));
 		selenium.captureEntirePageScreenshot(RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test-output\\brochure\\ScreengrabTest08.jpg"),
+				"L:\\portal\\build\\portal-web\\test-output\\brochure\\ScreengrabTest09.jpg"),
 			"");
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
