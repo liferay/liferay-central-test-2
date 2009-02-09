@@ -98,6 +98,7 @@ try {
 		<liferay-util:include page="/html/portlet/asset_publisher/display/full_content.jsp" />
 	</div>
 
+	<liferay-util:include page="/html/portlet/asset_publisher/asset_html_metadata.jsp" />
 <%
 }
 catch (Exception e) {
