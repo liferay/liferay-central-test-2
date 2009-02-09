@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/site_map/init.jsp" %>
 
 <%
-List rootLayouts = LayoutLocalServiceUtil.getLayouts(layout.getGroupId(), layout.isPrivateLayout(), rootLayoutId);
+List<Layout> rootLayouts = LayoutLocalServiceUtil.getLayouts(layout.getGroupId(), layout.isPrivateLayout(), rootLayoutId);
 
 StringBuilder sb = new StringBuilder();
 
@@ -35,7 +35,34 @@ _buildSiteMap(layout, rootLayouts, rootLayoutId, includeRootInTree, displayDepth
 <%= sb.toString() %>
 
 <%!
-private void _buildSiteMap(Layout layout, List layouts, long rootLayoutId, boolean includeRootInTree, int displayDepth, boolean showCurrentPage, boolean useHtmlTitle, boolean showHiddenPages, int curDepth, ThemeDisplay themeDisplay, StringBuilder sb) throws Exception {
+private void _buildLayoutView(Layout layout, String cssClass, boolean useHtmlTitle, ThemeDisplay themeDisplay, StringBuilder sb) throws Exception {
+	String layoutURL = PortalUtil.getLayoutURL(layout, themeDisplay);
+	String target = PortalUtil.getLayoutTarget(layout);
+
+	sb.append("<a href=\"");
+	sb.append(layoutURL);
+	sb.append("\" ");
+	sb.append(target);
+
+	if (Validator.isNotNull(cssClass)) {
+		sb.append(" class=\"");
+		sb.append(cssClass);
+		sb.append("\" ");
+	}
+
+	sb.append("> ");
+
+	String layoutName = layout.getName(themeDisplay.getLocale());
+
+	if (useHtmlTitle) {
+		layoutName = layout.getHTMLTitle(themeDisplay.getLocale());
+	}
+
+	sb.append(layoutName);
+	sb.append("</a>");
+}
+
+private void _buildSiteMap(Layout layout, List<Layout> layouts, long rootLayoutId, boolean includeRootInTree, int displayDepth, boolean showCurrentPage, boolean useHtmlTitle, boolean showHiddenPages, int curDepth, ThemeDisplay themeDisplay, StringBuilder sb) throws Exception {
 	if (layouts.size() == 0) {
 		return;
 	}
@@ -62,11 +89,10 @@ private void _buildSiteMap(Layout layout, List layouts, long rootLayoutId, boole
 	}
 
 	for (int i = 0; i < layouts.size(); i++) {
-		Layout curLayout = (Layout)layouts.get(i);
+		Layout curLayout = layouts.get(i);
 
 		if ((showHiddenPages || !curLayout.isHidden()) && LayoutPermissionUtil.contains(permissionChecker, curLayout, ActionKeys.VIEW)) {
-
-			String cssClass = null;
+			String cssClass = StringPool.BLANK;
 
 			if (curLayout.getPlid() == layout.getPlid()) {
 				cssClass = "current";
@@ -85,32 +111,5 @@ private void _buildSiteMap(Layout layout, List layouts, long rootLayoutId, boole
 	}
 
 	sb.append("</ul>");
-}
-
-private void _buildLayoutView(Layout layout, String cssClass, boolean useHtmlTitle, ThemeDisplay themeDisplay, StringBuilder sb) throws Exception {
-	String layoutURL = PortalUtil.getLayoutURL(layout, themeDisplay);
-	String target = PortalUtil.getLayoutTarget(layout);
-
-	sb.append("<a href=\"");
-	sb.append(layoutURL);
-	sb.append("\" ");
-	sb.append(target);
-
-	if (Validator.isNotNull(cssClass)) {
-		sb.append(" class=\"");
-		sb.append(cssClass);
-		sb.append("\" ");
-	}
-
-	sb.append("> ");
-
-	String layoutName = layout.getName(themeDisplay.getLocale());
-
-	if (useHtmlTitle) {
-		layoutName = layout.getHTMLTitle(themeDisplay.getLocale());
-	}
-
-	sb.append(layoutName);
-	sb.append("</a>");
 }
 %>
