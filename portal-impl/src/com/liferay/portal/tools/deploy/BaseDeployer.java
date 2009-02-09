@@ -427,8 +427,7 @@ public class BaseDeployer {
 			boolean overwrite, PluginPackage pluginPackage)
 		throws Exception {
 
-		if ((PropsValues.PORTLET_CONTAINER_IMPL_SUN) &&
-			(this instanceof PortletDeployer)) {
+		if (this instanceof PortletDeployer) {
 
 			Properties properties = new Properties();
 
