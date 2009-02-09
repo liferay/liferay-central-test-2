@@ -442,6 +442,13 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 					Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
 				</c:if>
 			</script>
+
+			<%
+			PortalUtil.setPageSubtitle(category.getName(), request);
+
+			PortalUtil.setPageDescription(category.getDescription(), request);
+			%>
+
 		</c:if>
 	</c:when>
 	<c:when test='<%= tabs1.equals("my_posts") || tabs1.equals("my_subscriptions") || tabs1.equals("recent_posts") %>'>
@@ -744,6 +751,11 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			</tr>
 			</table>
 		</c:if>
+
+		<%
+		PortalUtil.setPageSubtitle(LanguageUtil.get(pageContext, StringUtil.replace(tabs1, StringPool.UNDERLINE, StringPool.DASH)), request);
+		%>
+
 	</c:when>
 	<c:when test='<%= tabs1.equals("statistics") %>'>
 		<liferay-ui:tabs
@@ -791,6 +803,11 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 			</c:when>
 		</c:choose>
+
+		<%
+		PortalUtil.setPageSubtitle(LanguageUtil.get(pageContext, StringUtil.replace(tabs1, StringPool.UNDERLINE, StringPool.DASH)), request);
+		%>
+
 	</c:when>
 	<c:when test='<%= tabs1.equals("banned_users") %>'>
 
@@ -853,5 +870,10 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		%>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+		<%
+		PortalUtil.setPageSubtitle(LanguageUtil.get(pageContext, StringUtil.replace(tabs1, StringPool.UNDERLINE, StringPool.DASH)), request);
+		%>
+
 	</c:when>
 </c:choose>
