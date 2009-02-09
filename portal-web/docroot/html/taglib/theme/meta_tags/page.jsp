@@ -56,12 +56,12 @@
 		metaDescriptionLanguageId = w3cDefaultLanguageId;
 	}
 
-	String dynamicDescription = (String)request.getAttribute(WebKeys.PAGE_DESCRIPTION);
+	String dynamicMetaDescription = (String)request.getAttribute(WebKeys.PAGE_DESCRIPTION);
 
-	if (Validator.isNotNull(dynamicDescription)) {
+	if (Validator.isNotNull(dynamicMetaDescription)) {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(dynamicDescription);
+		sb.append(dynamicMetaDescription);
 
 		if (Validator.isNotNull(metaDescription)) {
 			sb.append(StringPool.PERIOD);
@@ -86,12 +86,12 @@
 		metaKeywordsLanguageId = w3cDefaultLanguageId;
 	}
 
-	String dynamicKeywords = (String)request.getAttribute(WebKeys.PAGE_KEYWORDS);
+	String dynamicMetaKeywords = (String)request.getAttribute(WebKeys.PAGE_KEYWORDS);
 
-	if (Validator.isNotNull(dynamicKeywords)) {
+	if (Validator.isNotNull(dynamicMetaKeywords)) {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(dynamicKeywords);
+		sb.append(dynamicMetaKeywords);
 
 		if (Validator.isNotNull(metaKeywords)) {
 			sb.append(StringPool.COMMA);
