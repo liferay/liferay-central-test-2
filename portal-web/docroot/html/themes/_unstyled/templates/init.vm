@@ -225,7 +225,7 @@
 #end
 
 #if ($pageSubtitle)
-	#set ($the_title = $the_title + " - " + $pageSubtitle)
+	#set ($the_title = $pageSubtitle + " - " + $the_title)
 #end
 
 #if ($tilesTitle != "")
