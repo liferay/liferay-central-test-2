@@ -111,6 +111,30 @@ List layoutList = layoutView.getList();
 </tr>
 <tr>
 	<td>
+		<liferay-ui:message key="include-root-in-tree" />
+	</td>
+	<td>
+		<liferay-ui:input-checkbox param="includeRootInTree" defaultValue="<%= includeRootInTree %>" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="show-current-page" />
+	</td>
+	<td>
+		<liferay-ui:input-checkbox param="showCurrentPage" defaultValue="<%= showCurrentPage %>" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="use-html-title" />
+	</td>
+	<td>
+		<liferay-ui:input-checkbox param="useHtmlTitle" defaultValue="<%= useHtmlTitle %>" />
+	</td>
+</tr>
+<tr>
+	<td>
 		<liferay-ui:message key="show-hidden-pages" />
 	</td>
 	<td>

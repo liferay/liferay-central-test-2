@@ -38,5 +38,12 @@ if (Validator.isNotNull(portletResource)) {
 
 long rootLayoutId = GetterUtil.getLong(preferences.getValue("root-layout-id", StringPool.BLANK));
 int displayDepth = GetterUtil.getInteger(preferences.getValue("display-depth", StringPool.BLANK));
+boolean includeRootInTree = GetterUtil.getBoolean(preferences.getValue("include-root-in-tree", StringPool.BLANK));
+boolean showCurrentPage = GetterUtil.getBoolean(preferences.getValue("show-current-page", StringPool.BLANK));
+boolean useHtmlTitle = GetterUtil.getBoolean(preferences.getValue("use-html-title", StringPool.BLANK));
 boolean showHiddenPages = GetterUtil.getBoolean(preferences.getValue("show-hidden-pages", StringPool.BLANK));
+
+if (rootLayoutId == LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
+	includeRootInTree = false;
+}
 %>

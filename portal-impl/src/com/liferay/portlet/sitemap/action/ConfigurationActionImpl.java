@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import javax.portlet.ActionRequest;
@@ -57,8 +58,18 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		long rootLayoutId = ParamUtil.getLong(actionRequest, "rootLayoutId");
 		String displayDepth = ParamUtil.getString(
 			actionRequest, "displayDepth");
+		boolean includeRootInTree = ParamUtil.getBoolean(
+			actionRequest, "includeRootInTree");
+		boolean showCurrentPage = ParamUtil.getBoolean(
+			actionRequest, "showCurrentPage");
+		boolean useHtmlTitle = ParamUtil.getBoolean(
+			actionRequest, "useHtmlTitle");
 		boolean showHiddenPages = ParamUtil.getBoolean(
 			actionRequest, "showHiddenPages");
+
+		if (rootLayoutId == LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
+			includeRootInTree = false;
+		}
 
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
@@ -70,7 +81,11 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		preferences.setValue("root-layout-id", String.valueOf(rootLayoutId));
 		preferences.setValue("display-depth", displayDepth);
 		preferences.setValue(
-			"show-hidden-pages", String.valueOf(showHiddenPages));
+			"include-root-in-tree", String.valueOf(includeRootInTree));
+		preferences.setValue(
+			"show-current-page", String.valueOf(showCurrentPage));
+		preferences.setValue("use-html-title", String.valueOf(useHtmlTitle));
+		preferences.setValue("show-hidden-pages", String.valueOf(showHiddenPages));
 
 		preferences.store();
 
