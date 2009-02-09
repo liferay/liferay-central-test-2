@@ -480,6 +480,24 @@ public interface Portal {
 		throws IOException;
 
 	/**
+	 * Sets the description for a page. This is just a hint and can be
+	 * overridden by subsequent calls. The last call to this method wins.
+	 *
+	 * @param		description the description for a page
+	 * @param		request the HTTP servlet request
+	 */
+	void setPageDescription(String description, HttpServletRequest request);
+
+	/**
+	 * Sets the keywords for a page. This is just a hint and can be overridden
+	 * by subsequent calls. The last call to this method wins.
+	 *
+	 * @param		keywords the keywords for a page
+	 * @param		request the HTTP servlet request
+	 */
+	void setPageKeywords(String keywords, HttpServletRequest request);
+
+	/**
 	 * Sets the subtitle for a page. This is just a hint and can be overridden
 	 * by subsequent calls. The last call to this method wins.
 	 *

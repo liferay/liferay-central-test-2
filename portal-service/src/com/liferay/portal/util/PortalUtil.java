@@ -845,11 +845,37 @@ public class PortalUtil {
 	}
 
 	/**
+	 * Sets the description for a page. This is just a hint and can be
+	 * overridden by subsequent calls. The last call to this method wins.
+	 *
+	 * @param		description the description for a page
+	 * @param		request the HTTP servlet request
+	 */
+	public static void setPageDescription(
+		String description, HttpServletRequest request) {
+
+		getPortal().setPageDescription(description, request);
+	}
+
+	/**
+	 * Sets the keywords for a page. This is just a hint and can be overridden
+	 * by subsequent calls. The last call to this method wins.
+	 *
+	 * @param		keywords the keywords for a page
+	 * @param		request the HTTP servlet request
+	 */
+	public static void setPageKeywords(
+		String keywords, HttpServletRequest request) {
+
+		getPortal().setPageKeywords(keywords, request);
+	}
+
+	/**
 	 * Sets the subtitle for a page. This is just a hint and can be overridden
 	 * by subsequent calls. The last call to this method wins.
 	 *
 	 * @param		subtitle the subtitle for a page
-	 * @param		req the HTTP servlet request
+	 * @param		request the HTTP servlet request
 	 */
 	public static void setPageSubtitle(
 		String subtitle, HttpServletRequest request) {
@@ -862,7 +888,7 @@ public class PortalUtil {
 	 * overridden by subsequent calls. The last call to this method wins.
 	 *
 	 * @param		title the whole title for a page
-	 * @param		req the HTTP servlet request
+	 * @param		request the HTTP servlet request
 	 */
 	public static void setPageTitle(String title, HttpServletRequest request) {
 		getPortal().setPageTitle(title, request);
@@ -871,7 +897,7 @@ public class PortalUtil {
 	/**
 	 * Sets the port obtained on the first request to the portal.
 	 *
-	 * @param		req the HTTP servlet request
+	 * @param		request the HTTP servlet request
 	 */
 	public static void setPortalPort(HttpServletRequest request) {
 		getPortal().setPortalPort(request);

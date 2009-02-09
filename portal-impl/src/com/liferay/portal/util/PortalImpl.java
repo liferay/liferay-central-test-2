@@ -2844,6 +2844,30 @@ public class PortalImpl implements Portal {
 	}
 
 	/**
+	 * Sets the description for a page. This is just a hint and can be
+	 * overridden by subsequent calls. The last call to this method wins.
+	 *
+	 * @param		description the description for a page
+	 * @param		request the HTTP servlet request
+	 */
+	public void setPageDescription(
+		String description, HttpServletRequest request) {
+		request.setAttribute(WebKeys.PAGE_DESCRIPTION, description);
+	}
+
+	/**
+	 * Sets the keywords for a page. This is just a hint and can be overridden
+	 * by subsequent calls. The last call to this method wins.
+	 *
+	 * @param		keywords the keywords for a page
+	 * @param		request the HTTP servlet request
+	 */
+	public void setPageKeywords(
+		String keywords, HttpServletRequest request) {
+		request.setAttribute(WebKeys.PAGE_KEYWORDS, keywords);
+	}
+
+	/**
 	 * Sets the subtitle for a page. This is just a hint and can be overridden
 	 * by subsequent calls. The last call to this method wins.
 	 *

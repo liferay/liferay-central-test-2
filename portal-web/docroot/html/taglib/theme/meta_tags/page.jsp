@@ -55,6 +55,19 @@
 		metaDescription = layout.getTypeSettingsProperties().getProperty("meta-description_" + defaultLanguageId);
 		metaDescriptionLanguageId = w3cDefaultLanguageId;
 	}
+
+	String dynamicDescription = (String) request.getAttribute(WebKeys.PAGE_DESCRIPTION);
+
+	if (Validator.isNotNull(dynamicDescription)) {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(dynamicDescription);
+		sb.append(StringPool.PERIOD);
+		sb.append(StringPool.SPACE);
+		sb.append(metaDescription);
+
+		metaDescription = sb.toString();
+	}
 	%>
 
 	<c:if test="<%= Validator.isNotNull(metaDescription) %>">
@@ -68,6 +81,19 @@
 	if (Validator.isNull(metaKeywords)) {
 		metaKeywords = layout.getTypeSettingsProperties().getProperty("meta-keywords_" + defaultLanguageId);
 		metaKeywordsLanguageId = w3cDefaultLanguageId;
+	}
+
+	String dynamicKeywords = (String) request.getAttribute(WebKeys.PAGE_KEYWORDS);
+
+	if (Validator.isNotNull(dynamicKeywords)) {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(dynamicKeywords);
+		sb.append(StringPool.COMMA);
+		sb.append(StringPool.SPACE);
+		sb.append(metaKeywords);
+
+		metaKeywords = sb.toString();
 	}
 	%>
 

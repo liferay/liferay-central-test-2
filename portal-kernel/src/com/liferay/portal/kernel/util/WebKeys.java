@@ -48,6 +48,10 @@ public interface WebKeys {
 
 	public static final String PAGE_BOTTOM = "LIFERAY_SHARED_PAGE_BOTTOM";
 
+	public static final String PAGE_DESCRIPTION = "LIFERAY_SHARED_PAGE_DESCRIPTION";
+
+	public static final String PAGE_KEYWORDS = "LIFERAY_SHARED_PAGE_KEYWORDS";
+
 	public static final String PAGE_SUBTITLE = "LIFERAY_SHARED_PAGE_SUBTITLE";
 
 	public static final String PAGE_TITLE = "LIFERAY_SHARED_PAGE_TITLE";
