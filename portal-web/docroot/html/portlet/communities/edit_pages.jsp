@@ -469,7 +469,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		<%
 		String tabs2Names = "pages";
 
-		if (permissionChecker.isOmniadmin() || PropsValues.LOOK_AND_FEEL_MODIFIABLE) {
+		if (permissionChecker.isOmniadmin() || (PropsValues.LOOK_AND_FEEL_MODIFIABLE && GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_LAYOUTS))) {
 			tabs2Names += ",look-and-feel";
 		}
 
@@ -483,6 +483,11 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 
 		if (!StringUtil.contains(tabs2Names, tabs2)) {
 			tabs2 = "pages";
+		}
+
+		if (!GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_LAYOUTS)) {
+			tabs2Names = StringUtil.replace(tabs2Names, "pages,", StringPool.BLANK);
+			tabs2 = "proposals";
 		}
 		%>
 

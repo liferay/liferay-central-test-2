@@ -588,11 +588,12 @@ public class ServicePreAction extends Action {
 			PermissionChecker permissionChecker)
 		throws PortalException, SystemException {
 
-		return isViewableGroup(user, groupId, privateLayout, permissionChecker);
+		return isViewableGroup(
+			user, groupId, privateLayout, 0, permissionChecker);
 	}
 
 	protected boolean isViewableGroup(
-			User user, long groupId, boolean privateLayout,
+			User user, long groupId, boolean privateLayout, long layoutId,
 			PermissionChecker permissionChecker)
 		throws PortalException, SystemException {
 
@@ -659,7 +660,10 @@ public class ServicePreAction extends Action {
 				GroupPermissionUtil.contains(
 					permissionChecker, groupId, ActionKeys.MANAGE_STAGING) ||
 				GroupPermissionUtil.contains(
-					permissionChecker, groupId, ActionKeys.PUBLISH_STAGING)) {
+					permissionChecker, groupId, ActionKeys.PUBLISH_STAGING) ||
+				((layoutId > 0) && LayoutPermissionUtil.contains(
+					permissionChecker, groupId, privateLayout, layoutId,
+					ActionKeys.UPDATE))) {
 
 				return true;
 			}
@@ -1092,7 +1096,7 @@ public class ServicePreAction extends Action {
 
 				boolean isViewableCommunity = isViewableGroup(
 					user, layout.getGroupId(), layout.isPrivateLayout(),
-					permissionChecker);
+					layout.getLayoutId(), permissionChecker);
 
 				if (!isViewableCommunity) {
 					StringBuilder sb = new StringBuilder();
@@ -1562,10 +1566,19 @@ public class ServicePreAction extends Action {
 						permissionChecker, scopeGroupId,
 						ActionKeys.APPROVE_PROPOSAL);
 
+				boolean hasUpdateLayoutPermission =
+					LayoutPermissionUtil.contains(
+						permissionChecker, layout.getGroupId(),
+						layout.isPrivateLayout(), layout.getLayoutId(),
+						ActionKeys.UPDATE);
+
 				if (hasManageLayoutsPermission) {
 					themeDisplay.setShowStagingIcon(true);
 				}
 				else if (hasApproveProposalPermission) {
+					themeDisplay.setShowStagingIcon(true);
+				}
+				else if (hasUpdateLayoutPermission) {
 					themeDisplay.setShowStagingIcon(true);
 				}
 			}

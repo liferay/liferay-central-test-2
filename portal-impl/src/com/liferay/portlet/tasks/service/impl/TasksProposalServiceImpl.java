@@ -24,10 +24,13 @@ package com.liferay.portlet.tasks.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
+import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portlet.tasks.model.TasksProposal;
 import com.liferay.portlet.tasks.service.base.TasksProposalServiceBaseImpl;
 import com.liferay.portlet.tasks.service.permission.TasksProposalPermission;
@@ -35,7 +38,7 @@ import com.liferay.portlet.tasks.service.permission.TasksProposalPermission;
 /**
  * <a href="TasksProposalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Aug�
+ * @author Raymond Augé
  * @author Brian Wing Shun Chan
  *
  */
@@ -47,8 +50,17 @@ public class TasksProposalServiceImpl extends TasksProposalServiceBaseImpl {
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException{
 
-		GroupPermissionUtil.check(
-			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
+		PermissionChecker permissionChecker = getPermissionChecker();
+
+		if (!GroupPermissionUtil.contains(
+				permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS) &&
+			(name.equals(Layout.class.getName()) &&
+			 !LayoutPermissionUtil.contains(
+				permissionChecker, GetterUtil.getLong(classPK),
+				ActionKeys.UPDATE))) {
+
+			throw new PrincipalException();
+		}
 
 		return tasksProposalLocalService.addProposal(
 			getUserId(), groupId, className, classPK, name, description,
@@ -61,8 +73,17 @@ public class TasksProposalServiceImpl extends TasksProposalServiceBaseImpl {
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException{
 
-		GroupPermissionUtil.check(
-			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
+		PermissionChecker permissionChecker = getPermissionChecker();
+
+		if (!GroupPermissionUtil.contains(
+				permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS) &&
+			(name.equals(Layout.class.getName()) &&
+			 !LayoutPermissionUtil.contains(
+				permissionChecker, GetterUtil.getLong(classPK),
+				ActionKeys.UPDATE))) {
+
+			throw new PrincipalException();
+		}
 
 		return tasksProposalLocalService.addProposal(
 			getUserId(), groupId, className, classPK, name, description,

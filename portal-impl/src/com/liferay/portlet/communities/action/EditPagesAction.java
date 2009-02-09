@@ -61,6 +61,7 @@ import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
+import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
 import com.liferay.portal.struts.PortletAction;
@@ -295,6 +296,15 @@ public class EditPagesAction extends PortletAction {
 		boolean privateLayout = tabs1.equals("private-pages");
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
+		Layout layout = themeDisplay.getLayout();
+		boolean editLayout = false;
+
+		if (layout != null) {
+			editLayout = LayoutPermissionUtil.contains(
+				permissionChecker, layout.getGroupId(),
+				layout.isPrivateLayout(), layout.getLayoutId(),
+				ActionKeys.UPDATE);
+		}
 
 		if (group.isCommunity()) {
 			if (!GroupPermissionUtil.contains(
@@ -302,7 +312,8 @@ public class EditPagesAction extends PortletAction {
 					ActionKeys.APPROVE_PROPOSAL) &&
 				!GroupPermissionUtil.contains(
 					permissionChecker, group.getGroupId(),
-					ActionKeys.MANAGE_LAYOUTS)) {
+					ActionKeys.MANAGE_LAYOUTS) &&
+				!editLayout) {
 
 				throw new PrincipalException();
 			}
@@ -315,7 +326,8 @@ public class EditPagesAction extends PortletAction {
 					ActionKeys.APPROVE_PROPOSAL) &&
 				!OrganizationPermissionUtil.contains(
 					permissionChecker, organizationId,
-					ActionKeys.MANAGE_LAYOUTS)) {
+					ActionKeys.MANAGE_LAYOUTS) &&
+				!editLayout) {
 
 				throw new PrincipalException();
 			}
