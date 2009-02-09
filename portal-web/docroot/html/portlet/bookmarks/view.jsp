@@ -401,6 +401,12 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 					Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
 				</c:if>
 			</script>
+
+			<%
+			PortalUtil.setPageSubtitle(folder.getName(), request);
+			PortalUtil.setPageDescription(folder.getDescription(), request);
+			%>
+
 		</c:if>
 	</c:when>
 	<c:when test='<%= tabs1.equals("my-entries") || tabs1.equals("recent-entries") %>'>
@@ -473,5 +479,10 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 		</liferay-ui:search-container>
 
 		</form>
+
+		<%
+		PortalUtil.setPageSubtitle(LanguageUtil.get(pageContext, StringUtil.replace(tabs1, StringPool.UNDERLINE, StringPool.DASH)), request);
+		%>
+
 	</c:when>
 </c:choose>
