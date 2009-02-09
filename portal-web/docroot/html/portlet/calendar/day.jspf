@@ -284,5 +284,6 @@ if (partDayResults.size() > 0) {
 
 <%
 cal.add(Calendar.DATE, -1);
+
 PortalUtil.setPageSubtitle(dateFormatDate.format(Time.getDate(cal)), request);
 %>
