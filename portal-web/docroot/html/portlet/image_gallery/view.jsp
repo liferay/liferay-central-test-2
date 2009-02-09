@@ -337,6 +337,9 @@ List scores = null;
 					curFolder = IGFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
 				}
 			}
+
+			PortalUtil.setPageSubtitle(folder.getName(), request);
+			PortalUtil.setPageDescription(folder.getDescription(), request);
 		}
 		%>
 
@@ -365,5 +368,10 @@ List scores = null;
 		<%@ include file="/html/portlet/image_gallery/view_images.jspf" %>
 
 		</form>
+
+		<%
+		PortalUtil.setPageSubtitle(LanguageUtil.get(pageContext, tabs1), request);
+		%>
+
 	</c:when>
 </c:choose>

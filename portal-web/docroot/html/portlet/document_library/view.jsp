@@ -315,6 +315,9 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 					curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
 				}
 			}
+
+			PortalUtil.setPageSubtitle(folder.getName(), request);
+			PortalUtil.setPageDescription(folder.getDescription(), request);
 		}
 		%>
 
@@ -357,5 +360,10 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 		</liferay-ui:search-container>
 
 		</form>
+
+		<%
+		PortalUtil.setPageSubtitle(LanguageUtil.get(pageContext, tabs1), request);
+		%>
+
 	</c:when>
 </c:choose>
