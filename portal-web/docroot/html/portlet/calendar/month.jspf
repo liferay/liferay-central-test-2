@@ -245,3 +245,7 @@ DateFormat timeFormat = new SimpleDateFormat("h:mma", locale);
 	</tr>
 </tbody>
 </table>
+
+<%
+PortalUtil.setPageSubtitle(dateFormat.format(Time.getDate(cal)), request);
+%>

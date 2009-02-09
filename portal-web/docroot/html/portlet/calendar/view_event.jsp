@@ -413,6 +413,11 @@ if ((event.getRepeating()) && (recurrence != null)) {
 	</table>
 </div>
 
+<%
+PortalUtil.setPageSubtitle(event.getTitle(), request);
+PortalUtil.setPageDescription(event.getDescription(), request);
+%>
+
 <%!
 private boolean _getWeeklyDayPos(HttpServletRequest req, int day, CalEvent event, Recurrence recurrence) {
 	boolean weeklyPos = ParamUtil.getBoolean(req, "weeklyDayPos" + day);

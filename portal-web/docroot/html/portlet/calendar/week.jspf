@@ -226,3 +226,15 @@ DateFormat dateFormatMonthAndDay = new SimpleDateFormat("M/d", locale);
 	</tr>
 </tbody>
 </table>
+
+<%
+cal.add(Calendar.DATE, -7);
+
+StringBuilder sb = new StringBuilder();
+
+sb.append(LanguageUtil.get(pageContext, "week-of"));
+sb.append(StringPool.SPACE);
+sb.append(dateFormatDate.format(Time.getDate(cal)));
+
+PortalUtil.setPageSubtitle(sb.toString(), request);
+%>
