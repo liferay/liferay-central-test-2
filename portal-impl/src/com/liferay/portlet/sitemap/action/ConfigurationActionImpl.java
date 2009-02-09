@@ -85,7 +85,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		preferences.setValue(
 			"show-current-page", String.valueOf(showCurrentPage));
 		preferences.setValue("use-html-title", String.valueOf(useHtmlTitle));
-		preferences.setValue("show-hidden-pages", String.valueOf(showHiddenPages));
+		preferences.setValue(
+			"show-hidden-pages", String.valueOf(showHiddenPages));
 
 		preferences.store();
 
