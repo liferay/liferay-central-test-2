@@ -90,4 +90,8 @@ TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(Blog
 
 <%
 PortalUtil.setPageSubtitle(entry.getTitle(), request);
+
+List<TagsEntry> tagsEntries = TagsEntryLocalServiceUtil.getEntries(BlogsEntry.class.getName(), entry.getEntryId(), true);
+
+PortalUtil.setPageKeywords(ListUtil.toString(tagsEntries, "name"), request);
 %>
