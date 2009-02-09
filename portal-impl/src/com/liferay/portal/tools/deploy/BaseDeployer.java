@@ -977,27 +977,25 @@ public class BaseDeployer {
 		return sb.toString();
 	}
 
-	protected String getSpeedFilterFileContent(File srcFile) throws Exception {
+	protected String getSpeedFiltersContent(File srcFile) throws Exception {
+		boolean speedFiltersEnabled = true;
 
 		Properties properties = getPluginPackageProperties(srcFile);
 
-		boolean enableSpeedFilter = false;
-
 		if (properties != null) {
-
-			enableSpeedFilter = Boolean.parseBoolean(
-				properties.getProperty("enable.speed.filters"));
-
+			speedFiltersEnabled = GetterUtil.getBoolean(
+				properties.getProperty("speed-filters-enabled"), true);
 		}
 
-		if (enableSpeedFilter) {
-
+		if (speedFiltersEnabled) {
 			String speedFiltersContent = FileUtil.read(
 				DeployUtil.getResourcePath("speed_filters.xml"));
 
 			return speedFiltersContent;
 		}
-		return StringPool.BLANK;
+		else {
+			return StringPool.BLANK;
+		}
 	}
 
 	protected boolean isJEEDeploymentEnabled() {

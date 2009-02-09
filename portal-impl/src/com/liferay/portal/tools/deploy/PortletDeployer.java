@@ -168,7 +168,7 @@ public class PortletDeployer extends BaseDeployer {
 
 		// Speed filters
 
-		sb.append(getSpeedFilterFileContent(srcFile));
+		sb.append(getSpeedFiltersContent(srcFile));
 
 		return sb.toString();
 	}
@@ -382,9 +382,9 @@ public class PortletDeployer extends BaseDeployer {
 			return;
 		}
 
-		Properties props = getPluginPackageProperties(srcFile);
+		Properties properties = getPluginPackageProperties(srcFile);
 
-		if ((props == null) || (props.size() == 0)) {
+		if ((properties == null) || (properties.size() == 0)) {
 			return;
 		}
 
