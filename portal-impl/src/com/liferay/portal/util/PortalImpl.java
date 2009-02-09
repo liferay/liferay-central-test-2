@@ -1847,16 +1847,7 @@ public class PortalImpl implements Portal {
 				}
 			}
 
-			Group group = layout.getGroup();
-
-			if (group.hasStagingGroup()) {
-				Group stagingGroup = group.getStagingGroup();
-
-				return stagingGroup.getGroupId();
-			}
-			else {
-				return layout.getGroupId();
-			}
+			return layout.getGroupId();
 		}
 	}
 
@@ -1891,6 +1882,19 @@ public class PortalImpl implements Portal {
 				if (doAsGroupId > 0) {
 					scopeGroupId = doAsGroupId;
 				}
+
+				try {
+					group = GroupLocalServiceUtil.getGroup(scopeGroupId);
+
+					if (group.hasStagingGroup()) {
+						Group stagingGroup = group.getStagingGroup();
+
+						scopeGroupId = stagingGroup.getGroupId();
+					}
+				}
+				catch (Exception e) {
+				}
+
 			}
 		}
 
