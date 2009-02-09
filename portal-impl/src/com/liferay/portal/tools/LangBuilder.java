@@ -87,6 +87,7 @@ public class LangBuilder {
 			_createProps(content, "fa"); // Persian
 			_createProps(content, "pl"); // Polish
 			_createProps(content, "pt"); // Portuguese
+			_createProps(content, "pt_BR"); // Brazilian Portuguese
 			_createProps(content, "ru"); // Russian
 			_createProps(content, "es"); // Spanish
 			_createProps(content, "sv"); // Swedish
@@ -122,7 +123,10 @@ public class LangBuilder {
 
 		String translationId = "en_" + languageId;
 
-		if (translationId.equals("en_zh_CN")) {
+		if (translationId.equals("en_pt_BR")) {
+			translationId = "en_pt";
+		}
+		else if (translationId.equals("en_zh_CN")) {
 			translationId = "en_zh";
 		}
 		else if (translationId.equals("en_zh_TW")) {
