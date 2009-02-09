@@ -20,30 +20,35 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.benchmark.generator.db.model;
+package com.liferay.portal.benchmark.model;
 
 /**
- * <a href="Role.java.html"><b><i>View Source</i></b></a>
+ * <a href="Group.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
-public class Role {
-	public Role(long roleId, long companyId, long classNameId, long classPK,
-				String name, Scope roleType) {
-		_roleId = roleId;
+public class Group {
+
+	public Group(long groupId, long companyId, long creatorUserId,
+				 long classNameId, long classPK) {
+		_groupId = groupId;
 		_companyId = companyId;
+		_creatorUserId = creatorUserId;
 		_classNameId = classNameId;
 		_classPK = classPK;
-		_name = name;
-		_roleType = roleType;
+		_active = true;
 	}
 
-	public long getRoleId() {
-		return _roleId;
+	public long getGroupId() {
+		return _groupId;
 	}
 
 	public long getCompanyId() {
 		return _companyId;
+	}
+
+	public long getCreatorUserId() {
+		return _creatorUserId;
 	}
 
 	public long getClassNameId() {
@@ -54,45 +59,81 @@ public class Role {
 		return _classPK;
 	}
 
-	public String getName() {
-		return _name;
+	public long getParentGroupId() {
+		return _parentGroupId;
 	}
 
-	public String getTitle() {
-		return _title;
+	public long getLiveGroupId() {
+		return _liveGroupId;
+	}
+
+	public String getName() {
+		return _name;
 	}
 
 	public String getDescription() {
 		return _description;
 	}
 
-	public Scope getRoleType() {
-		return _roleType;
+	public int getType() {
+		return _type;
 	}
 
-	public String getSubtype() {
-		return _subtype;
+	public String getTypeSettings() {
+		return _typeSettings;
+	}
+
+	public String getFriendlyURL() {
+		return _friendlyURL;
+	}
+
+	public boolean isActive() {
+		return _active;
+	}
+
+	public void setParentGroupId(long parentGroupId) {
+		_parentGroupId = parentGroupId;
+	}
+
+	public void setLiveGroupId(long liveGroupId) {
+		_liveGroupId = liveGroupId;
+	}
+
+	public void setName(String name) {
+		_name = name;
 	}
 
 	public void setDescription(String description) {
 		_description = description;
 	}
 
-	public void setTitle(String title) {
-		_title = title;
+	public void setType(int type) {
+		_type = type;
 	}
 
-	public void setSubtype(String subtype) {
-		_subtype = subtype;
+	public void setTypeSettings(String typeSettings) {
+		_typeSettings = typeSettings;
 	}
 
-	private long _roleId;
+	public void setFriendlyURL(String friendlyURL) {
+		_friendlyURL = friendlyURL;
+	}
+
+	public void setActive(boolean active) {
+		_active = active;
+	}
+
+	private long _groupId;
 	private long _companyId;
+	private long _creatorUserId;
 	private long _classNameId;
 	private long _classPK;
-	private String _name;
-	private String _title;
-	private String _description;
-	private Scope _roleType;
-	private String _subtype;	
+	private long _parentGroupId;
+	private long _liveGroupId;
+	private String _name = "";
+	private String _description = "";
+	private int _type;
+	private String _typeSettings = "";
+	private String _friendlyURL = "";
+	private boolean _active;	
 }

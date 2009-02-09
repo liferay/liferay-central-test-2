@@ -20,11 +20,14 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.benchmark.generator.db.ant;
+package com.liferay.portal.benchmark.ant;
 
-import com.liferay.portal.benchmark.generator.db.CreateUserSQLGenerator;
-import com.liferay.portal.benchmark.generator.db.DefaultIDGenerator;
-import com.liferay.portal.benchmark.generator.db.IDGenerator;
+import com.liferay.portal.benchmark.generator.util.DefaultIDGenerator;
+import com.liferay.portal.benchmark.generator.util.IDGenerator;
+import com.liferay.portal.benchmark.model.builder.ModelBuilderConstants;
+import com.liferay.portal.benchmark.model.builder.ModelBuilderContext;
+import com.liferay.portal.benchmark.model.builder.RBACUserModelBuilder;
+import com.liferay.portal.freemarker.FreeMarkerUtil;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 
@@ -35,31 +38,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
+import java.util.HashMap;
 
 /**
  * <a href="CreateUserTask.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
-public class CreateUserSQLTask extends Task {
-
-	public static void main(String[] args) {
-		CreateUserSQLTask task = new CreateUserSQLTask();
-		task.setNumUsers(Integer.parseInt(args[0]));
-		task.setSqlOutput("c:/temp/load_user.sql");
-		task.setTestLoginOutput("c:/temp/user_logins.csv");
-		task.setCompanyId(10108);
-		task.setDefaultUserId(10133);
-		task.setPathToFirstNameFile("/projects/liferay/trunk/portal/benchmarks/data/user/first_names.txt");
-		task.setPathToLastNameFile("/projects/liferay/trunk/portal/benchmarks/data/user/last_names.txt");
-		task.init();
-		task.execute();
-	}
+public class RBACUserSQLGeneratorTask extends Task {
 
 	public void execute() throws BuildException {
 		super.execute();
-		_init();
+		initialize();
 		log("Generating " + _numUsers + " users for " + _version + " on " +
 				_database);
 		Writer sqlWriter = null;
@@ -69,12 +61,20 @@ public class CreateUserSQLTask extends Task {
 			testLoginWriter =
 					new BufferedWriter(new FileWriter(_testLoginOutput));
 			int counter = 0;
+			ModelBuilderContext context = new ModelBuilderContext();
 			for (String lastName : _lastNames) {
 				for (String firstName : _firstNames) {
-					_generator.generate(sqlWriter, testLoginWriter,
-										firstName, lastName,
-										_addUserGroupRole,
-										_userGroupId, _userRoleId);
+					context.put(ModelBuilderConstants.FIRST_NAME_KEY, firstName);
+					context.put(ModelBuilderConstants.LAST_NAME_KEY, lastName);
+					context.put(ModelBuilderConstants.PASSWORD_KEY,
+								_defaultPassword);
+				   	context.put(ModelBuilderConstants.DOMAIN_KEY, _domain);
+					Map<String, Object> templateContext = 
+							_builder.createProducts(context);
+					FreeMarkerUtil.process(_createUserSQLTemplate,
+										   templateContext, sqlWriter);
+					FreeMarkerUtil.process(_userListTemplate,
+										   templateContext, testLoginWriter);
 					counter++;
 					if (counter >= _numUsers) {
 						return;
@@ -83,6 +83,11 @@ public class CreateUserSQLTask extends Task {
 					sqlWriter.flush();
 				}
 			}
+			Map<String, Object> counters = new HashMap<String, Object>();
+			counters.put("counters", _idGenerator.report());
+			FreeMarkerUtil.process(_updateIdTemplate, counters, sqlWriter);
+			sqlWriter.flush();
+
 		} catch (Exception e) {
 			throw new BuildException(e);
 		}
@@ -107,7 +112,7 @@ public class CreateUserSQLTask extends Task {
 		}
 	}
 
-	private void _init()
+	private void initialize()
 			throws BuildException {
 		if (_sqlOutput == null) {
 			throw new BuildException("Must specify a output file name " +
@@ -119,7 +124,7 @@ public class CreateUserSQLTask extends Task {
 		}
 		if (_numUsers <= 0) {
 			throw new BuildException("Must specify the number of users to " +
-					"generate for the build user SQL file");
+					"createProducts for the build user SQL file");
 		}
 		if ((_pathToFirstNameFile == null) || _pathToFirstNameFile.equals("")) {
 			throw new BuildException("Must specify path to file containining " +
@@ -129,14 +134,23 @@ public class CreateUserSQLTask extends Task {
 			throw new BuildException("Must specify path to file containining " +
 					"last names");
 		}
+
+		_createUserSQLTemplate =
+				_templatePrefix + "/db/" + _database + "/" + _version + "/" +
+						"create_user_rbac.ftl";
+		_createUserSQLTemplate =
+				_templatePrefix + "/" + _database + "/" + "user_list.ftl";
+		_updateIdTemplate =
+				_templatePrefix + "/db/" + _database + "/" + "update_counters.ftl";
+
+
 		_idGenerator = new DefaultIDGenerator();
-		_generator =
-				new CreateUserSQLGenerator(
-						_templatePrefix + "/" + _version + "/" + _database,
-						_templatePrefix,
-						_idGenerator, _companyId,
-						_domain, _defaultPassword, _defaultUserId,
-						_defaultUserName);
+		_builder = new RBACUserModelBuilder();
+		_builder.setCompanyId(_companyId);
+		_builder.setIdGenerator(_idGenerator);
+		_builder.setOwnerName(_ownerUserName);
+		_builder.setOwnerId(_ownerId);
+
 		_firstNames = new HashSet<String>();
 		_lastNames = new HashSet<String>();
 
@@ -223,24 +237,12 @@ public class CreateUserSQLTask extends Task {
 		_defaultPassword = defaultPassword;
 	}
 
-	public void setDefaultUserId(long defaultUserId) {
-		_defaultUserId = defaultUserId;
+	public void setOwnerId(long ownerId) {
+		_ownerId = ownerId;
 	}
 
-	public void setDefaultUserName(String defaultUserName) {
-		_defaultUserName = defaultUserName;
-	}
-
-	public void setAddUserGroupRole(boolean addUserGroupRole) {
-		_addUserGroupRole = addUserGroupRole;
-	}
-
-	public void setUserGroupId(long userGroupId) {
-		_userGroupId = userGroupId;
-	}
-
-	public void setUserRoleId(long userRoleId) {
-		_userRoleId = userRoleId;
+	public void setOwnerUserName(String ownerUserName) {
+		_ownerUserName = ownerUserName;
 	}
 
 	private String _sqlOutput;
@@ -255,19 +257,19 @@ public class CreateUserSQLTask extends Task {
 	private String _pathToLastNameFile;
 
 	private String _templatePrefix =
-			"com/liferay/portal/benchmark/generator/db/ftl";
+			"com/liferay/portal/benchmark/generator/ftl";
 	private String _version = "5_1";
 	private String _database = "mysql";
 	private long _companyId = 10106;
 	private String _domain = "liferay.com";
 	private String _defaultPassword = "test";
-	private long _defaultUserId = 10127;
-	private String _defaultUserName = "Test test";
-	private boolean _addUserGroupRole;
-	private long _userGroupId;
-	private long _userRoleId;
-	private CreateUserSQLGenerator _generator;
+	private long _ownerId = 10127;
+	private String _ownerUserName = "Test test";
 	private IDGenerator _idGenerator;
 	private Set<String> _firstNames;
 	private Set<String> _lastNames;
+	private RBACUserModelBuilder _builder;
+	private String _createUserSQLTemplate;
+	private String _userListTemplate;
+	private String _updateIdTemplate;
 }

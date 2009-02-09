@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,43 +20,22 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.benchmark.generator.db;
-
-import java.util.Map;
-import java.util.HashMap;
+package com.liferay.portal.benchmark.model.builder;
 
 /**
- * <a href="DefaultIDGenerator.java.html"><b><i>View Source</i></b></a>
+ * <a href="BuilderConstants.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
-public class DefaultIDGenerator implements IDGenerator {
+public class ModelBuilderConstants {
+	public static final String USER_KEY = "user";
+	public static final String RESOURCE_KEY = "resource";
+	public static final String PERMISSIONS_KEY = "permissions";
+	
+	public static final String FIRST_NAME_KEY = "firstName";
+	public static final String LAST_NAME_KEY = "lastName";
+	public static final String PASSWORD_KEY = "password";
+	public static final String DOMAIN_KEY = "domain";
+	public static final String ROLES_KEY = "roles";
 
-	public DefaultIDGenerator() {
-		idValues.put(IDGenerator.GENERAL, 15000);
-		idValues.put(IDGenerator.RESOURCE, 500);
-		idValues.put(IDGenerator.PERMISSION, 600);
-		idValues.put(IDGenerator.RESOURCE_CODE, 700);
-		idValues.put(IDGenerator.SOCIAL_ACTIVITY, 800);
-	}
-
-	public long generate() {
-		return generate(IDGenerator.GENERAL);
-	}
-
-	public synchronized long generate(String objectType) {
-		Integer counter = idValues.get(objectType);
-		if (counter == null) {
-			throw new IllegalArgumentException("Invalid counter: " + objectType);
-		}
-		counter++;
-		idValues.put(objectType, counter);
-		return counter;
-	}
-
-	public String report() {
-		return "Current id counter values: " + idValues.toString();
-	}
-
-	private Map<String, Integer> idValues = new HashMap<String, Integer>();
 }

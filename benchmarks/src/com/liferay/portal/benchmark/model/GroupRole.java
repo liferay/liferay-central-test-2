@@ -20,13 +20,33 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.benchmark.generator.db;
+package com.liferay.portal.benchmark.model;
 
 /**
- * <a href="SQLGenerator.java.html"><b><i>View Source</i></b></a>
+ * <a href="Role.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
-public interface SQLGenerator {
-	public String generate(String templateFile);
+public class GroupRole {
+	public GroupRole(long userId, long groupId, long roleId) {
+		_userId = userId;
+		_groupId = groupId;
+		_roleId = roleId;
+	}
+
+	public long getUserId() {
+		return _userId;
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public long getRoleId() {
+		return _roleId;
+	}
+
+	private long _userId;
+	private long _groupId;
+	private long _roleId;
 }

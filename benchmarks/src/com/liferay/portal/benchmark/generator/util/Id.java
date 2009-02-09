@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,34 +20,65 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.benchmark.generator.db.model;
+package com.liferay.portal.benchmark.generator.util;
 
 /**
- * <a href="Resource.java.html"><b><i>View Source</i></b></a>
+ * <a href="Id.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
-public class Resource {
-
-	public Resource(long resourceId, long codeId, String primKey) {
-		_resourceId = resourceId;
-		_codeId = codeId;
-		_primKey = primKey;
+public class Id {
+	public Id(String name) {
+		this(name, 0);
 	}
 
-	public long getResourceId() {
-		return _resourceId;
+	public Id(String name, long start) {
+		_name = name;
+		_currentId = start;
 	}
 
-	public long getCodeId() {
-		return _codeId;
+	public synchronized long next() {
+		return _currentId++;
 	}
 
-	public String getPrimKey() {
-		return _primKey;
+	public synchronized long getCurrentValue() {
+		return _currentId;
 	}
 
-	private long _resourceId;
-	private long _codeId;
-	private String _primKey;
+	public String getName() {
+		return _name;
+	}
+
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+
+		Id id = (Id)o;
+
+		if (_name != null ? !_name.equals(id._name) : id._name != null) {
+			return false;
+		}
+
+		return true;
+	}
+
+	public int hashCode() {
+		int result = _name != null ? _name.hashCode() : 0;
+		result = 31 * result + (int)(_currentId ^ (_currentId >>> 32));
+		return result;
+	}
+
+	public String toString() {
+		return "Id{" +
+				"_name='" + _name + '\'' +
+				", _currentId=" + _currentId +
+				'}';
+	}
+
+	private String _name;
+	private long _currentId;
 }

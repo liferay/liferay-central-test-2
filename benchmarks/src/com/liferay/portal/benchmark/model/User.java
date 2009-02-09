@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.benchmark.generator.db.model;
+package com.liferay.portal.benchmark.model;
 
 import java.util.Date;
 import java.util.List;

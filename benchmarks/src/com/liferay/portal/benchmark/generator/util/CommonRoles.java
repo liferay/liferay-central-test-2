@@ -20,10 +20,10 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.benchmark.generator.db.model.common;
+package com.liferay.portal.benchmark.generator.util;
 
-import com.liferay.portal.benchmark.generator.db.model.Role;
-import com.liferay.portal.benchmark.generator.db.model.Scope;
+import com.liferay.portal.benchmark.model.Role;
+import com.liferay.portal.benchmark.model.Scope;
 
 /**
  * <a href="CommonRoles.java.html"><b><i>View Source</i></b></a>

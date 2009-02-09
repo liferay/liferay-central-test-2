@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.benchmark.generator.db.model;
+package com.liferay.portal.benchmark.model;
 
 /**
  * <a href="LayoutSet.java.html"><b><i>View Source</i></b></a>

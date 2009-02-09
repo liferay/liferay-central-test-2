@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,17 +20,15 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.benchmark.generator.db.model.common;
+package com.liferay.portal.benchmark.model.builder;
+
+import java.util.Map;
 
 /**
- * <a href="ResourceAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="ModelBuilder.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
-public enum ResourceAction {
-	DELETE,
-	IMPERSONATE,
-	PERMISSIONS,
-	UPDATE,
-	VIEW,
+public interface ModelBuilder {
+	public Map<String, Object> createProducts(ModelBuilderContext context);
 }

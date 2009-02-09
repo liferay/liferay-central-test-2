@@ -20,21 +20,17 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.benchmark.generator.db;
+package com.liferay.portal.benchmark.generator.util;
 
 /**
- * <a href="IDGenerator.java.html"><b><i>View Source</i></b></a>
+ * <a href="ResourceAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
-public interface IDGenerator {
-	public static final String GENERAL = "Counter";
-	public static final String PERMISSION = "Permission";
-	public static final String RESOURCE = "Resource";
-	public static final String RESOURCE_CODE = "ResourceCode";
-	public static final String SOCIAL_ACTIVITY = "SocialActivity";
-	
-	long generate();
-	long generate(String objectType);
-	String report();
+public enum ResourceAction {
+	DELETE,
+	IMPERSONATE,
+	PERMISSIONS,
+	UPDATE,
+	VIEW,
 }

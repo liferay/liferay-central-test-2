@@ -20,36 +20,41 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.benchmark.generator.db.model.common;
+package com.liferay.portal.benchmark.model;
 
 /**
- * <a href="ResourceCodes.java.html"><b><i>View Source</i></b></a>
- * TBD this should probably be read from the target database
+ * <a href="Permission.java.html"><b><i>View Source</i></b></a>
+ *
  * @author Michael C. Han
  */
-public enum ResourceCodes {
-	USER_1(4, "com.liferay.portal.model.User", 1),
-	USER_4(5, "com.liferay.portal.model.User", 4);
+public class Permission {
 
-	private ResourceCodes(long codeId, String name, long scope) {
-		_codeId = codeId;
-		_name = name;
-		_scope = scope;
+	public Permission(long permissionId, long companyId, String actionId,
+					  long resourceId) {
+		_permissionId = permissionId;
+		_companyId = companyId;
+		_actionId = actionId;
+		_resourceId = resourceId;
 	}
 
-	public long getCodeId() {
-		return _codeId;
+	public long getPermissionId() {
+		return _permissionId;
 	}
 
-	public String getName() {
-		return _name;
+	public long getCompanyId() {
+		return _companyId;
 	}
 
-	public long getScope() {
-		return _scope;
+	public String getActionId() {
+		return _actionId;
 	}
 
-	private long _codeId;
-	private String _name;
-	private long _scope;
+	public long getResourceId() {
+		return _resourceId;
+	}
+
+	private long _permissionId;
+	private long _companyId;
+	private String _actionId;
+	private long _resourceId;
 }

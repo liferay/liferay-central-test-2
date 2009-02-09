@@ -20,25 +20,14 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.benchmark.generator.db.model;
+package com.liferay.portal.benchmark.model;
 
 /**
- * <a href="Scope.java.html"><b><i>View Source</i></b></a>
+ * <a href="OrganizationStatus.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
-public enum Scope {
-	COMPANY(1),
-	COMMUNITY(2),
-	ORGANIZATION(3);
-
-	public int getScopeId() {
-		return _scopeId;
-	}
-
-	private Scope(int scopeId) {
-		_scopeId = scopeId;
-	}
-
-	private int _scopeId;
+public enum OrganizationStatus {
+	PROVISIONAL,
+	FULL;
 }

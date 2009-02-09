@@ -20,33 +20,79 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.benchmark.generator.db.model;
+package com.liferay.portal.benchmark.model;
 
 /**
  * <a href="Role.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
-public class GroupRole {
-	public GroupRole(long userId, long groupId, long roleId) {
-		_userId = userId;
-		_groupId = groupId;
+public class Role {
+	public Role(long roleId, long companyId, long classNameId, long classPK,
+				String name, Scope roleType) {
 		_roleId = roleId;
-	}
-
-	public long getUserId() {
-		return _userId;
-	}
-
-	public long getGroupId() {
-		return _groupId;
+		_companyId = companyId;
+		_classNameId = classNameId;
+		_classPK = classPK;
+		_name = name;
+		_roleType = roleType;
 	}
 
 	public long getRoleId() {
 		return _roleId;
 	}
 
-	private long _userId;
-	private long _groupId;
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public long getClassNameId() {
+		return _classNameId;
+	}
+
+	public long getClassPK() {
+		return _classPK;
+	}
+
+	public String getName() {
+		return _name;
+	}
+
+	public String getTitle() {
+		return _title;
+	}
+
+	public String getDescription() {
+		return _description;
+	}
+
+	public Scope getRoleType() {
+		return _roleType;
+	}
+
+	public String getSubtype() {
+		return _subtype;
+	}
+
+	public void setDescription(String description) {
+		_description = description;
+	}
+
+	public void setTitle(String title) {
+		_title = title;
+	}
+
+	public void setSubtype(String subtype) {
+		_subtype = subtype;
+	}
+
 	private long _roleId;
+	private long _companyId;
+	private long _classNameId;
+	private long _classPK;
+	private String _name;
+	private String _title;
+	private String _description;
+	private Scope _roleType;
+	private String _subtype;	
 }
