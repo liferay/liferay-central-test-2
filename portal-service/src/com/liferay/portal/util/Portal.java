@@ -82,6 +82,41 @@ public interface Portal {
 
 	public static final Date UP_TIME = new Date();
 
+	/**
+	 * Adds the description for a page. This appends to the existing page
+	 * description.
+	 *
+	 * @param		description the description for a page
+	 * @param		request the HTTP servlet request
+	 */
+	public void addPageDescription(
+		String description, HttpServletRequest request);
+
+	/**
+	 * Adds the keywords for a page. This appends to the existing page keywords.
+	 *
+	 * @param		keywords the keywords for a page
+	 * @param		request the HTTP servlet request
+	 */
+	public void addPageKeywords(String keywords, HttpServletRequest request);
+
+	/**
+	 * Adds the subtitle for a page. This appends to the existing page subtitle.
+	 *
+	 * @param		subtitle the subtitle for a page
+	 * @param		request the HTTP servlet request
+	 */
+	public void addPageSubtitle(String subtitle, HttpServletRequest request);
+
+	/**
+	 * Adds the whole title for a page. This appends to the existing page whole
+	 * title.
+	 *
+	 * @param		title the whole title for a page
+	 * @param		request the HTTP servlet request
+	 */
+	public void addPageTitle(String title, HttpServletRequest request);
+
 	public void clearRequestParameters(RenderRequest renderRequest);
 
 	public void copyRequestParameters(
@@ -480,8 +515,8 @@ public interface Portal {
 		throws IOException;
 
 	/**
-	 * Sets the description for a page. This is just a hint and can be
-	 * overridden by subsequent calls. The last call to this method wins.
+	 * Sets the description for a page. This overrides the existing page
+	 * description.
 	 *
 	 * @param		description the description for a page
 	 * @param		request the HTTP servlet request
@@ -490,8 +525,7 @@ public interface Portal {
 		String description, HttpServletRequest request);
 
 	/**
-	 * Sets the keywords for a page. This is just a hint and can be overridden
-	 * by subsequent calls. The last call to this method wins.
+	 * Sets the keywords for a page. This overrides the existing page keywords.
 	 *
 	 * @param		keywords the keywords for a page
 	 * @param		request the HTTP servlet request
@@ -499,20 +533,19 @@ public interface Portal {
 	public void setPageKeywords(String keywords, HttpServletRequest request);
 
 	/**
-	 * Sets the subtitle for a page. This is just a hint and can be overridden
-	 * by subsequent calls. The last call to this method wins.
+	 * Sets the subtitle for a page. This overrides the existing page subtitle.
 	 *
 	 * @param		subtitle the subtitle for a page
-	 * @param		req the HTTP servlet request
+	 * @param		request the HTTP servlet request
 	 */
 	public void setPageSubtitle(String subtitle, HttpServletRequest request);
 
 	/**
-	 * Sets the whole title for a page. This is just a hint and can be
-	 * overridden by subsequent calls. The last call to this method wins.
+	 * Sets the whole title for a page. This overrides the existing page whole
+	 * title.
 	 *
 	 * @param		title the whole title for a page
-	 * @param		req the HTTP servlet request
+	 * @param		request the HTTP servlet request
 	 */
 	public void setPageTitle(String title, HttpServletRequest request);
 

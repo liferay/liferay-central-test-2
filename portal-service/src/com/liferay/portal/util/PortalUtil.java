@@ -70,6 +70,54 @@ import javax.servlet.jsp.PageContext;
  */
 public class PortalUtil {
 
+	/**
+	 * Adds the description for a page. This appends to the existing page
+	 * description.
+	 *
+	 * @param		description the description for a page
+	 * @param		request the HTTP servlet request
+	 */
+	public static void addPageDescription(
+		String description, HttpServletRequest request) {
+
+		getPortal().addPageDescription(description, request);
+	}
+
+	/**
+	 * Adds the keywords for a page. This appends to the existing page keywords.
+	 *
+	 * @param		keywords the keywords for a page
+	 * @param		request the HTTP servlet request
+	 */
+	public static void addPageKeywords(
+		String keywords, HttpServletRequest request) {
+
+		getPortal().addPageKeywords(keywords, request);
+	}
+
+	/**
+	 * Adds the subtitle for a page. This appends to the existing page subtitle.
+	 *
+	 * @param		subtitle the subtitle for a page
+	 * @param		request the HTTP servlet request
+	 */
+	public static void addPageSubtitle(
+		String subtitle, HttpServletRequest request) {
+
+		getPortal().addPageSubtitle(subtitle, request);
+	}
+
+	/**
+	 * Adds the whole title for a page. This appends to the existing page whole
+	 * title.
+	 *
+	 * @param		title the whole title for a page
+	 * @param		request the HTTP servlet request
+	 */
+	public static void addPageTitle(String title, HttpServletRequest request) {
+		getPortal().addPageTitle(title, request);
+	}
+
 	public static void clearRequestParameters(RenderRequest renderRequest) {
 		getPortal().clearRequestParameters(renderRequest);
 	}
@@ -845,8 +893,8 @@ public class PortalUtil {
 	}
 
 	/**
-	 * Sets the description for a page. This is just a hint and can be
-	 * overridden by subsequent calls. The last call to this method wins.
+	 * Sets the description for a page. This overrides the existing page
+	 * description.
 	 *
 	 * @param		description the description for a page
 	 * @param		request the HTTP servlet request
@@ -858,8 +906,7 @@ public class PortalUtil {
 	}
 
 	/**
-	 * Sets the keywords for a page. This is just a hint and can be overridden
-	 * by subsequent calls. The last call to this method wins.
+	 * Sets the keywords for a page. This overrides the existing page keywords.
 	 *
 	 * @param		keywords the keywords for a page
 	 * @param		request the HTTP servlet request
@@ -871,8 +918,7 @@ public class PortalUtil {
 	}
 
 	/**
-	 * Sets the subtitle for a page. This is just a hint and can be overridden
-	 * by subsequent calls. The last call to this method wins.
+	 * Sets the subtitle for a page. This overrides the existing page subtitle.
 	 *
 	 * @param		subtitle the subtitle for a page
 	 * @param		request the HTTP servlet request
@@ -884,13 +930,15 @@ public class PortalUtil {
 	}
 
 	/**
-	 * Sets the whole title for a page. This is just a hint and can be
-	 * overridden by subsequent calls. The last call to this method wins.
+	 * Sets the whole title for a page. This overrides the existing page whole
+	 * title.
 	 *
 	 * @param		title the whole title for a page
 	 * @param		request the HTTP servlet request
 	 */
-	public static void setPageTitle(String title, HttpServletRequest request) {
+	public static void setPageTitle(
+		String title, HttpServletRequest request) {
+
 		getPortal().setPageTitle(title, request);
 	}
 

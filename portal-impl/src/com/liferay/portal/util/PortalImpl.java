@@ -378,6 +378,77 @@ public class PortalImpl implements Portal {
 		_reservedParams.add("saveLastPath");
 	}
 
+	/**
+	 * Adds the description for a page. This appends to the existing page
+	 * description.
+	 *
+	 * @param		description the description for a page
+	 * @param		request the HTTP servlet request
+	 */
+	public void addPageDescription(
+		String description, HttpServletRequest request) {
+
+		String requestDescription = (String)request.getAttribute(
+			WebKeys.PAGE_DESCRIPTION);
+
+		if (requestDescription != null) {
+			description = requestDescription + StringPool.BLANK + description;
+		}
+
+		request.setAttribute(WebKeys.PAGE_DESCRIPTION, description);
+	}
+
+	/**
+	 * Adds the keywords for a page. This appends to the existing page keywords.
+	 *
+	 * @param		keywords the keywords for a page
+	 * @param		request the HTTP servlet request
+	 */
+	public void addPageKeywords(String keywords, HttpServletRequest request) {
+		String requestKeywords = (String)request.getAttribute(
+			WebKeys.PAGE_KEYWORDS);
+
+		if (requestKeywords != null) {
+			keywords = requestKeywords + StringPool.BLANK + keywords;
+		}
+
+		request.setAttribute(WebKeys.PAGE_KEYWORDS, keywords);
+	}
+
+	/**
+	 * Adds the subtitle for a page. This appends to the existing page subtitle.
+	 *
+	 * @param		subtitle the subtitle for a page
+	 * @param		request the HTTP servlet request
+	 */
+	public void addPageSubtitle(String subtitle, HttpServletRequest request) {
+		String requestSubtitle = (String)request.getAttribute(
+			WebKeys.PAGE_SUBTITLE);
+
+		if (requestSubtitle != null) {
+			subtitle = requestSubtitle + StringPool.BLANK + subtitle;
+		}
+
+		request.setAttribute(WebKeys.PAGE_SUBTITLE, subtitle);
+	}
+
+	/**
+	 * Adds the whole title for a page. This appends to the existing page whole
+	 * title.
+	 *
+	 * @param		title the whole title for a page
+	 * @param		request the HTTP servlet request
+	 */
+	public void addPageTitle(String title, HttpServletRequest request) {
+		String requestTitle = (String)request.getAttribute(WebKeys.PAGE_TITLE);
+
+		if (requestTitle != null) {
+			title = requestTitle + StringPool.BLANK + title;
+		}
+
+		request.setAttribute(WebKeys.PAGE_TITLE, title);
+	}
+
 	public void clearRequestParameters(RenderRequest renderRequest) {
 
 		// Clear the render parameters if they were set during processAction
@@ -2848,8 +2919,8 @@ public class PortalImpl implements Portal {
 	}
 
 	/**
-	 * Sets the description for a page. This is just a hint and can be
-	 * overridden by subsequent calls. The last call to this method wins.
+	 * Sets the description for a page. This overrides the existing page
+	 * description.
 	 *
 	 * @param		description the description for a page
 	 * @param		request the HTTP servlet request
@@ -2861,8 +2932,7 @@ public class PortalImpl implements Portal {
 	}
 
 	/**
-	 * Sets the keywords for a page. This is just a hint and can be overridden
-	 * by subsequent calls. The last call to this method wins.
+	 * Sets the keywords for a page. This overrides the existing page keywords.
 	 *
 	 * @param		keywords the keywords for a page
 	 * @param		request the HTTP servlet request
@@ -2872,8 +2942,7 @@ public class PortalImpl implements Portal {
 	}
 
 	/**
-	 * Sets the subtitle for a page. This is just a hint and can be overridden
-	 * by subsequent calls. The last call to this method wins.
+	 * Sets the subtitle for a page. This overrides the existing page subtitle.
 	 *
 	 * @param		subtitle the subtitle for a page
 	 * @param		request the HTTP servlet request
@@ -2883,8 +2952,8 @@ public class PortalImpl implements Portal {
 	}
 
 	/**
-	 * Sets the whole title for a page. This is just a hint and can be
-	 * overridden by subsequent calls. The last call to this method wins.
+	 * Sets the whole title for a page. This overrides the existing page whole
+	 * title.
 	 *
 	 * @param		title the whole title for a page
 	 * @param		request the HTTP servlet request
