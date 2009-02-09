@@ -56,7 +56,7 @@
 		metaDescriptionLanguageId = w3cDefaultLanguageId;
 	}
 
-	String dynamicDescription = (String) request.getAttribute(WebKeys.PAGE_DESCRIPTION);
+	String dynamicDescription = (String)request.getAttribute(WebKeys.PAGE_DESCRIPTION);
 
 	if (Validator.isNotNull(dynamicDescription)) {
 		StringBuilder sb = new StringBuilder();
@@ -86,7 +86,7 @@
 		metaKeywordsLanguageId = w3cDefaultLanguageId;
 	}
 
-	String dynamicKeywords = (String) request.getAttribute(WebKeys.PAGE_KEYWORDS);
+	String dynamicKeywords = (String)request.getAttribute(WebKeys.PAGE_KEYWORDS);
 
 	if (Validator.isNotNull(dynamicKeywords)) {
 		StringBuilder sb = new StringBuilder();

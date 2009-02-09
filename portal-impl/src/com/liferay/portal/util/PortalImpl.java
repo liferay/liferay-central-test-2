@@ -2852,6 +2852,7 @@ public class PortalImpl implements Portal {
 	 */
 	public void setPageDescription(
 		String description, HttpServletRequest request) {
+
 		request.setAttribute(WebKeys.PAGE_DESCRIPTION, description);
 	}
 
@@ -2862,8 +2863,7 @@ public class PortalImpl implements Portal {
 	 * @param		keywords the keywords for a page
 	 * @param		request the HTTP servlet request
 	 */
-	public void setPageKeywords(
-		String keywords, HttpServletRequest request) {
+	public void setPageKeywords(String keywords, HttpServletRequest request) {
 		request.setAttribute(WebKeys.PAGE_KEYWORDS, keywords);
 	}
 
