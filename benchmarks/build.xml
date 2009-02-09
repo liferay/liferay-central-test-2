@@ -1,36 +1,69 @@
 <?xml version="1.0"?>
 
 <project name="benchmarks" basedir="." default="run">
-	<import file="../build-common.xml" />
+    <import file="../build-common.xml" />
 
-	<path id="grinder.classpath">
-		<fileset dir="lib" includes="*.jar" />
-	</path>
+    <property name="build.dir" value="${basedir}/build" />
 
-	<property name="grinder.file" value="../tools/grinder-3.1.zip" />
+    <path id="grinder.classpath">
+        <fileset dir="lib" includes="*.jar" />
+    </path>
 
-	<target name="run" depends="setup">
-		<java
-			classname="net.grinder.Grinder"
-			classpathref="grinder.classpath"
-			fork="true"
-			newenvironment="true"
-		/>
-	</target>
+    <property name="grinder.file" value="../tools/grinder-3.1.zip" />
 
-	<target name="setup">
-		<if>
-			<not>
-				<available file="lib" />
-			</not>
-			<then>
-				<unzip src="${grinder.file}" dest="lib">
-					<patternset>
-						<include name="**/lib/*.jar"/>
-					</patternset>
-					<mapper type="flatten" />
-				</unzip>
-			</then>
-		</if>
-	</target>
+    <target name="run" depends="setup">
+        <java
+                classname="net.grinder.Grinder"
+                classpathref="grinder.classpath"
+                fork="true"
+                newenvironment="true"
+                />
+    </target>
+
+    <target name="setup">
+        <if>
+            <not>
+                <available file="lib" />
+            </not>
+            <then>
+                <unzip src="${grinder.file}" dest="lib">
+                    <patternset>
+                        <include name="**/lib/*.jar" />
+                    </patternset>
+                    <mapper type="flatten" />
+                </unzip>
+            </then>
+        </if>
+    </target>
+
+    <target name="create-generator">
+        <ant antfile="build-generator.xml" target="package" />
+    </target>
+    
+    <target name="generate" depends="create-generator">
+        <taskdef name="generate_users"
+                 classname="com.liferay.portal.benchmark.ant.RBACUserSQLGeneratorTask">
+            <classpath>
+                <path refid="lib.classpath" />
+                <fileset file="../portal-impl/portal-impl.jar" />
+                <fileset file="${build.dir}/generator/dist/data_generator.jar" />
+            </classpath>
+        </taskdef>
+
+        <mkdir dir="${build.dir}/data"/>
+
+        <generate_users numUsers="1"
+                        sqlOutput="${build.dir}/data/load_users.sql"
+                        testLoginOutput="${build.dir}/data/user_logins.csv"
+                        companyId="10106"
+                        ownerid="10133"
+                        pathToFirstNameFile="${basedir}/data/user/first_names.txt"
+                        pathToLastNameFile="${basedir}/data/user/first_names.txt" />
+    </target>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+
 </project>
