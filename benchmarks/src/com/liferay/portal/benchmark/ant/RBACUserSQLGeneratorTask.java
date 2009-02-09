@@ -24,6 +24,8 @@ package com.liferay.portal.benchmark.ant;
 
 import com.liferay.portal.benchmark.generator.util.DefaultIDGenerator;
 import com.liferay.portal.benchmark.generator.util.IDGenerator;
+import com.liferay.portal.benchmark.generator.util.CommonRoles;
+import com.liferay.portal.benchmark.model.Role;
 import com.liferay.portal.benchmark.model.builder.ModelBuilderConstants;
 import com.liferay.portal.benchmark.model.builder.ModelBuilderContext;
 import com.liferay.portal.benchmark.model.builder.RBACUserModelBuilder;
@@ -37,10 +39,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.HashMap;
 
 /**
  * <a href="CreateUserTask.java.html"><b><i>View Source</i></b></a>
@@ -60,6 +64,8 @@ public class RBACUserSQLGeneratorTask extends Task {
 			sqlWriter = new BufferedWriter(new FileWriter(_sqlOutput));
 			testLoginWriter =
 					new BufferedWriter(new FileWriter(_testLoginOutput));
+			List<Role> defaultRoles = _createDefaultRoles();
+
 			int counter = 0;
 			ModelBuilderContext context = new ModelBuilderContext();
 			for (String lastName : _lastNames) {
@@ -69,7 +75,8 @@ public class RBACUserSQLGeneratorTask extends Task {
 					context.put(ModelBuilderConstants.PASSWORD_KEY,
 								_defaultPassword);
 				   	context.put(ModelBuilderConstants.DOMAIN_KEY, _domain);
-					Map<String, Object> templateContext = 
+					context.put(ModelBuilderConstants.ROLES_KEY, defaultRoles);
+					Map<String, Object> templateContext =
 							_builder.createProducts(context);
 					FreeMarkerUtil.process(_createUserSQLTemplate,
 										   templateContext, sqlWriter);
@@ -108,91 +115,6 @@ public class RBACUserSQLGeneratorTask extends Task {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			}
-		}
-	}
-
-	private void initialize()
-			throws BuildException {
-		if (_sqlOutput == null) {
-			throw new BuildException("Must specify a output file name " +
-					"for the resulting user SQL file");
-		}
-		if (_testLoginOutput == null) {
-			throw new BuildException("Must specify a output file name " +
-					"for the resulting user login and password");
-		}
-		if (_numUsers <= 0) {
-			throw new BuildException("Must specify the number of users to " +
-					"createProducts for the build user SQL file");
-		}
-		if ((_pathToFirstNameFile == null) || _pathToFirstNameFile.equals("")) {
-			throw new BuildException("Must specify path to file containining " +
-					"first names");
-		}
-		if ((_pathToLastNameFile == null) || _pathToLastNameFile.equals("")) {
-			throw new BuildException("Must specify path to file containining " +
-					"last names");
-		}
-
-		_createUserSQLTemplate =
-				_templatePrefix + "/db/" + _database + "/" + _version + "/" +
-						"create_user_rbac.ftl";
-		_createUserSQLTemplate =
-				_templatePrefix + "/" + _database + "/" + "user_list.ftl";
-		_updateIdTemplate =
-				_templatePrefix + "/db/" + _database + "/" + "update_counters.ftl";
-
-
-		_idGenerator = new DefaultIDGenerator();
-		_builder = new RBACUserModelBuilder();
-		_builder.setCompanyId(_companyId);
-		_builder.setIdGenerator(_idGenerator);
-		_builder.setOwnerName(_ownerUserName);
-		_builder.setOwnerId(_ownerId);
-
-		_firstNames = new HashSet<String>();
-		_lastNames = new HashSet<String>();
-
-		BufferedReader firstNameReader = null;
-		try {
-			firstNameReader =
-					new BufferedReader(new FileReader(_pathToFirstNameFile));
-			String value;
-			while ((value = firstNameReader.readLine()) != null) {
-				_firstNames.add(value.trim().toLowerCase());
-			}
-		}
-		catch (Exception e) {
-			throw new BuildException("Unable to read " + _pathToFirstNameFile, e);
-		} finally {
-			try {
-				if (firstNameReader != null) {
-					firstNameReader.close();
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
-		BufferedReader lastNameReader = null;
-		try {
-			lastNameReader =
-					new BufferedReader(new FileReader(_pathToLastNameFile));
-			String value;
-			while ((value = lastNameReader.readLine()) != null) {
-				_lastNames.add(value.trim().toLowerCase());
-			}
-		}
-		catch (Exception e) {
-			throw new BuildException("Unable to read " + _pathToLastNameFile, e);
-		} finally {
-			try {
-				if (lastNameReader != null) {
-					lastNameReader.close();
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
 			}
 		}
 	}
@@ -249,6 +171,98 @@ public class RBACUserSQLGeneratorTask extends Task {
 
 	public void setTestLoginOutput(String testLoginOutput) {
 		_testLoginOutput = testLoginOutput;
+	}
+
+	private List<Role> _createDefaultRoles() {
+		List<Role> roles = new ArrayList<Role>();
+		roles.add(CommonRoles.POWER_USER(_companyId));
+		roles.add(CommonRoles.USER(_companyId));
+		return roles;
+	}
+
+	private void initialize()
+			throws BuildException {
+		if (_sqlOutput == null) {
+			throw new BuildException("Must specify a output file name " +
+					"for the resulting user SQL file");
+		}
+		if (_testLoginOutput == null) {
+			throw new BuildException("Must specify a output file name " +
+					"for the resulting user login and password");
+		}
+		if (_numUsers <= 0) {
+			throw new BuildException("Must specify the number of users to " +
+					"createProducts for the build user SQL file");
+		}
+		if ((_pathToFirstNameFile == null) || _pathToFirstNameFile.equals("")) {
+			throw new BuildException("Must specify path to file containining " +
+					"first names");
+		}
+		if ((_pathToLastNameFile == null) || _pathToLastNameFile.equals("")) {
+			throw new BuildException("Must specify path to file containining " +
+					"last names");
+		}
+
+		_createUserSQLTemplate =
+				_templatePrefix + "/db/" + _database + "/" + _version + "/" +
+						"create_user_rbac.ftl";
+		_userListTemplate =
+				_templatePrefix + "/user_list.ftl";
+		_updateIdTemplate =
+				_templatePrefix + "/db/" + _database + "/" + "update_counters.ftl";
+
+
+		_idGenerator = new DefaultIDGenerator();
+		_builder = new RBACUserModelBuilder();
+		_builder.setCompanyId(_companyId);
+		_builder.setIdGenerator(_idGenerator);
+		_builder.setOwnerName(_ownerUserName);
+		_builder.setOwnerId(_ownerId);
+
+		_firstNames = new HashSet<String>();
+		_lastNames = new HashSet<String>();
+
+		BufferedReader firstNameReader = null;
+		try {
+			firstNameReader =
+					new BufferedReader(new FileReader(_pathToFirstNameFile));
+			String value;
+			while ((value = firstNameReader.readLine()) != null) {
+				_firstNames.add(value.trim().toLowerCase());
+			}
+		}
+		catch (Exception e) {
+			throw new BuildException("Unable to read " + _pathToFirstNameFile, e);
+		} finally {
+			try {
+				if (firstNameReader != null) {
+					firstNameReader.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		BufferedReader lastNameReader = null;
+		try {
+			lastNameReader =
+					new BufferedReader(new FileReader(_pathToLastNameFile));
+			String value;
+			while ((value = lastNameReader.readLine()) != null) {
+				_lastNames.add(value.trim().toLowerCase());
+			}
+		}
+		catch (Exception e) {
+			throw new BuildException("Unable to read " + _pathToLastNameFile, e);
+		} finally {
+			try {
+				if (lastNameReader != null) {
+					lastNameReader.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	private String _testLoginOutput;

@@ -38,9 +38,17 @@
         <mkdir dir="${build.dir}" />
         <mkdir dir="${build.dir.generator}" />
         <mkdir dir="${build.dir.generator.classes}" />
+        <mkdir dir="${build.dir.dist}" />
+        <available file="${basedir}/../portal-impl/portal-impl.jar"
+                   property="portal.impl.exists"/>
     </target>
 
-    <target name="compile" depends="init">
+    <target name="compile.portal.impl" unless="portal.impl.exists">
+        <ant antfile="${basedir}/../build.xml" target="jar"
+             inheritall="false" />
+    </target>
+
+    <target name="compile" depends="init, compile.portal.impl">
         <javac
                 classpathref="project.classpath"
                 compiler="${javac.compiler}"
@@ -62,12 +70,10 @@
     </target>
 
     <target name="package" depends="compile">
-        <jar
-                basedir="${build.dir.generator.classes}"
-                jarfile="${build.dir.dist}/${file.name}.jar"
-                />
+        <jar basedir="${build.dir.generator.classes}"
+             jarfile="${build.dir.dist}/${file.name}.jar" />
     </target>
 
-    
+
 </project>
 

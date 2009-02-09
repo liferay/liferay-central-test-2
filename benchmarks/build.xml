@@ -42,7 +42,7 @@
     
     <target name="generate" depends="create-generator">
         <taskdef name="generate_users"
-                 classname="com.liferay.portal.benchmark.generator.db.ant.CreateUserSQLTask">
+                 classname="com.liferay.portal.benchmark.ant.RBACUserSQLGeneratorTask">
             <classpath>
                 <path refid="lib.classpath" />
                 <fileset file="../portal-impl/portal-impl.jar" />
@@ -55,11 +55,14 @@
         <generate_users numUsers="1"
                         sqlOutput="${build.dir}/data/load_users.sql"
                         testLoginOutput="${build.dir}/data/user_logins.csv"
-                        companyId="10108"
-                        defaultUserId="10133"
+                        companyId="10106"
+                        ownerid="10133"
                         pathToFirstNameFile="${basedir}/data/user/first_names.txt"
                         pathToLastNameFile="${basedir}/data/user/first_names.txt" />
+    </target>
 
+    <target name="clean">
+        <delete dir="${build.dir}"/>
     </target>
 
 
