@@ -140,5 +140,5 @@
 </table>
 
 <%
-PortalUtil.setPageSubtitle(String.valueOf(curYear), request);
+PortalUtil.setPageSubtitle(String.valueOf(selYear), request);
 %>
