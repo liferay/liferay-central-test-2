@@ -62,9 +62,12 @@
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(dynamicDescription);
-		sb.append(StringPool.PERIOD);
-		sb.append(StringPool.SPACE);
-		sb.append(metaDescription);
+
+		if (Validator.isNotNull(metaDescription)) {
+			sb.append(StringPool.PERIOD);
+			sb.append(StringPool.SPACE);
+			sb.append(metaDescription);
+		}
 
 		metaDescription = sb.toString();
 	}
@@ -89,9 +92,12 @@
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(dynamicKeywords);
-		sb.append(StringPool.COMMA);
-		sb.append(StringPool.SPACE);
-		sb.append(metaKeywords);
+
+		if (Validator.isNotNull(metaKeywords)) {
+			sb.append(StringPool.COMMA);
+			sb.append(StringPool.SPACE);
+			sb.append(metaKeywords);
+		}
 
 		metaKeywords = sb.toString();
 	}
