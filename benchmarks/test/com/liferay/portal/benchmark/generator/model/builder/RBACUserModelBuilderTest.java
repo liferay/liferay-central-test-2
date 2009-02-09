@@ -29,13 +29,15 @@ import com.liferay.portal.benchmark.model.builder.ModelBuilderConstants;
 import com.liferay.portal.benchmark.model.builder.ModelBuilderContext;
 import com.liferay.portal.benchmark.model.builder.RBACUserModelBuilder;
 import com.liferay.portal.freemarker.FreeMarkerUtil;
-import org.junit.Test;
 
 import java.io.StringWriter;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.junit.Test;
 
 /**
  * <a href="RBACUserModelBuilder.java.html"><b><i>View Source</i></b></a>
@@ -51,7 +53,6 @@ public class RBACUserModelBuilderTest {
 		builder.setIdGenerator(idGenerator);
 		builder.setOwnerName("test");
 		builder.setOwnerId(10127);
-
 
 		StringWriter sql = new StringWriter();
 		StringWriter logins = new StringWriter();

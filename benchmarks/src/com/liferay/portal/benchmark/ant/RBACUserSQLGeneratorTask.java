@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,16 +22,14 @@
 
 package com.liferay.portal.benchmark.ant;
 
+import com.liferay.portal.benchmark.generator.util.CommonRoles;
 import com.liferay.portal.benchmark.generator.util.DefaultIDGenerator;
 import com.liferay.portal.benchmark.generator.util.IDGenerator;
-import com.liferay.portal.benchmark.generator.util.CommonRoles;
 import com.liferay.portal.benchmark.model.Role;
 import com.liferay.portal.benchmark.model.builder.ModelBuilderConstants;
 import com.liferay.portal.benchmark.model.builder.ModelBuilderContext;
 import com.liferay.portal.benchmark.model.builder.RBACUserModelBuilder;
 import com.liferay.portal.freemarker.FreeMarkerUtil;
-import org.apache.tools.ant.BuildException;
-import org.apache.tools.ant.Task;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -39,12 +37,16 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import org.apache.tools.ant.BuildException;
+import org.apache.tools.ant.Task;
 
 /**
  * <a href="CreateUserTask.java.html"><b><i>View Source</i></b></a>
@@ -210,7 +212,6 @@ public class RBACUserSQLGeneratorTask extends Task {
 				_templatePrefix + "/user_list.ftl";
 		_updateIdTemplate =
 				_templatePrefix + "/db/" + _database + "/" + "update_counters.ftl";
-
 
 		_idGenerator = new DefaultIDGenerator();
 		_builder = new RBACUserModelBuilder();

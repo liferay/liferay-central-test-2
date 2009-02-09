@@ -31,7 +31,7 @@ public class ModelBuilderConstants {
 	public static final String USER_KEY = "user";
 	public static final String RESOURCE_KEY = "resource";
 	public static final String PERMISSIONS_KEY = "permissions";
-	
+
 	public static final String FIRST_NAME_KEY = "firstName";
 	public static final String LAST_NAME_KEY = "lastName";
 	public static final String PASSWORD_KEY = "password";

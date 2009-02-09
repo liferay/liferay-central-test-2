@@ -40,7 +40,7 @@
         <mkdir dir="${build.dir.generator.classes}" />
         <mkdir dir="${build.dir.dist}" />
         <available file="${basedir}/../portal-impl/portal-impl.jar"
-                   property="portal.impl.exists"/>
+                   property="portal.impl.exists" />
     </target>
 
     <target name="compile.portal.impl" unless="portal.impl.exists">
@@ -48,7 +48,17 @@
              inheritall="false" />
     </target>
 
-    <target name="compile" depends="init, compile.portal.impl">
+    <target name="format-source">
+        <java classname="com.liferay.portal.tools.SourceFormatter"
+              classpathref="project.classpath"
+              dir="${basedir}"
+              fork="true"
+              newenvironment="true"
+                />
+    </target>
+
+
+    <target name="compile" depends="init, compile.portal.impl, format-source">
         <javac
                 classpathref="project.classpath"
                 compiler="${javac.compiler}"

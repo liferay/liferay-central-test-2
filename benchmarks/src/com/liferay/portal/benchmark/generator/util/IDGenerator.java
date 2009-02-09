@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,6 @@
 
 package com.liferay.portal.benchmark.generator.util;
 
-import java.util.Map;
 import java.util.Collection;
 
 /**
@@ -36,7 +35,7 @@ public interface IDGenerator {
 	public static final String RESOURCE = "com.liferay.portal.model.Resource";
 	public static final String RESOURCE_CODE = "com.liferay.portal.model.ResourceCode";
 	public static final String SOCIAL_ACTIVITY = "com.liferay.portlet.social.model.SocialActivity";
-	
+
 	long generate();
 	long generate(String objectType);
 	void add(String name, long startValue);

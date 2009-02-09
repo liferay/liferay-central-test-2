@@ -22,22 +22,22 @@
 
 package com.liferay.portal.benchmark.model.builder;
 
-import com.liferay.portal.benchmark.model.Contact;
-import com.liferay.portal.benchmark.model.User;
-import com.liferay.portal.benchmark.model.Group;
-import com.liferay.portal.benchmark.model.ClassName;
-import com.liferay.portal.benchmark.model.LayoutSet;
-import com.liferay.portal.benchmark.model.Resource;
-import com.liferay.portal.benchmark.model.Permission;
-import com.liferay.portal.benchmark.model.Role;
 import com.liferay.portal.benchmark.generator.util.IDGenerator;
-import com.liferay.portal.benchmark.generator.util.ResourceCodes;
 import com.liferay.portal.benchmark.generator.util.ResourceAction;
+import com.liferay.portal.benchmark.generator.util.ResourceCodes;
+import com.liferay.portal.benchmark.model.ClassName;
+import com.liferay.portal.benchmark.model.Contact;
+import com.liferay.portal.benchmark.model.Group;
+import com.liferay.portal.benchmark.model.LayoutSet;
+import com.liferay.portal.benchmark.model.Permission;
+import com.liferay.portal.benchmark.model.Resource;
+import com.liferay.portal.benchmark.model.Role;
+import com.liferay.portal.benchmark.model.User;
 
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <a href="UserBuilder.java.html"><b><i>View Source</i></b></a>
