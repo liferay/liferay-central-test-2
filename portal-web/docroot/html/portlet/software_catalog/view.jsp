@@ -652,3 +652,9 @@ portletURL.setParameter("tabs1", tabs1);
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />keywords);
 	</c:if>
 </script>
+
+<%
+if (!tabs1.equals("products")) {
+	PortalUtil.setPageSubtitle(LanguageUtil.get(pageContext, StringUtil.replace(tabs1, StringPool.UNDERLINE, StringPool.DASH)), request);
+}
+%>

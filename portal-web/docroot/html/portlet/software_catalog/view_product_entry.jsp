@@ -337,6 +337,12 @@ List productScreenshots = SCProductScreenshotLocalServiceUtil.getProductScreensh
 	</c:when>
 </c:choose>
 
+<%
+PortalUtil.setPageSubtitle(productEntry.getName(), request);
+PortalUtil.setPageDescription(productEntry.getShortDescription(), request);
+PortalUtil.setPageKeywords(productEntry.getTags(), request);
+%>
+
 <%!
 public String _getFrameworkVersions(List frameworkVersions) {
 	Iterator itr = frameworkVersions.iterator();
