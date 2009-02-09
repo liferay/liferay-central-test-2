@@ -47,6 +47,9 @@ public class SitemapPortletDataHandlerImpl extends BasePortletDataHandler {
 		try {
 			preferences.setValue("root-layout-id", StringPool.BLANK);
 			preferences.setValue("display-depth", StringPool.BLANK);
+			preferences.setValue("include-root-in-tree", StringPool.BLANK);
+			preferences.setValue("show-current-page", StringPool.BLANK);
+			preferences.setValue("use-html-title", StringPool.BLANK);
 			preferences.setValue("show-hidden-pages", StringPool.BLANK);
 
 			return preferences;
