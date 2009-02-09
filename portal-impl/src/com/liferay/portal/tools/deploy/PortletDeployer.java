@@ -22,7 +22,6 @@
 
 package com.liferay.portal.tools.deploy;
 
-import com.liferay.portal.deploy.DeployUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
@@ -169,10 +168,7 @@ public class PortletDeployer extends BaseDeployer {
 
 		// Speed filters
 
-		String speedFiltersContent = FileUtil.read(
-			DeployUtil.getResourcePath("speed_filters.xml"));
-
-		sb.append(speedFiltersContent);
+		sb.append(getSpeedFilterFileContent(srcFile));
 
 		return sb.toString();
 	}
