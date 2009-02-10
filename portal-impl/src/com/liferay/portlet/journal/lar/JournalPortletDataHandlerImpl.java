@@ -172,10 +172,14 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					Image image = ImageUtil.findByPrimaryKey(
 						articleImage.getArticleImageId());
 
-					context.addZipEntry(
-						getArticleImagePath(
-							context, article, articleImage, image),
-						image.getTextObj());
+					String articleImagePath = getArticleImagePath(
+						context, article, articleImage, image);
+
+					if (!context.isPathNotProcessed(articleImagePath)) {
+						continue;
+					}
+
+					context.addZipEntry(articleImagePath, image.getTextObj());
 				}
 				catch (NoSuchImageException nsie) {
 				}
