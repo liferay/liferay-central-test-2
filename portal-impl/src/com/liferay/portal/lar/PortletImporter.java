@@ -347,7 +347,7 @@ public class PortletImporter {
 			Element portletDataRefEl)
 		throws SystemException {
 
-		long ownerId = PortletKeys. PREFS_OWNER_ID_DEFAULT;
+		long ownerId = PortletKeys.PREFS_OWNER_ID_DEFAULT;
 		int ownerType = PortletKeys.PREFS_OWNER_TYPE_LAYOUT;
 
 		PortletPreferences portletPreferences = null;

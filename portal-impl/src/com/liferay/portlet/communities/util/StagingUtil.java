@@ -140,8 +140,10 @@ public class StagingUtil {
 
 		ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
 
+		Layout targetLayout = LayoutLocalServiceUtil.getLayout(targetPlid);
+
 		LayoutServiceUtil.importPortletInfo(
-			targetPlid, sourceLayout.getGroupId(), portletId, parameterMap,
+			targetPlid, targetLayout.getGroupId(), portletId, parameterMap,
 			bais);
 	}
 
