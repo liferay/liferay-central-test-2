@@ -2122,15 +2122,30 @@ public class PortalImpl implements Portal {
 
 		// Timestamp
 
-		File resourceFile = new File(
-			ServletContextUtil.getRealPath(
-				request.getSession().getServletContext(), uri));
+		boolean appendedTimestamp = false;
 
-		if (uri.startsWith(StrutsUtil.TEXT_HTML_DIR) && resourceFile.exists()) {
-			sb.append("&t=");
-			sb.append(resourceFile.lastModified());
+		if (uri.startsWith(StrutsUtil.TEXT_HTML_DIR)) {
+			ServletContext servletContext =
+				(ServletContext)request.getAttribute(WebKeys.CTX);
+
+			String uriRealPath = ServletContextUtil.getRealPath(
+				servletContext, uri);
+
+			if (uriRealPath != null) {
+				File uriFile = new File(uriRealPath);
+
+				if (uriFile.exists()) {
+					sb.append("&t=");
+					sb.append(uriFile.lastModified());
+
+					appendedTimestamp = true;
+				}
+			}
 		}
-		else if ((parameterMap == null) || (!parameterMap.containsKey("t"))) {
+
+		if ((!appendedTimestamp) && (parameterMap == null) ||
+			(!parameterMap.containsKey("t"))) {
+
 			sb.append("&t=");
 			sb.append(theme.getTimestamp());
 		}
