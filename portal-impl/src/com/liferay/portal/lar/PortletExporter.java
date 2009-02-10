@@ -124,7 +124,8 @@ public class PortletExporter {
 		boolean exportPortletArchivedSetups = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS);
 		boolean exportPortletData = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.PORTLET_DATA);
+			parameterMap, PortletDataHandlerKeys.PORTLET_DATA + "_" +
+			PortletConstants.getRootPortletId(portletId));
 		boolean exportPortletSetup = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_SETUP);
 		boolean exportPortletUserPreferences = MapUtil.getBoolean(
