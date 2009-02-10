@@ -30,15 +30,7 @@
 boolean layoutMaximized = layoutTypePortlet.hasStateMax();
 
 if (!layoutMaximized) {
-	LayoutTemplate layoutTemplate = LayoutTemplateLocalServiceUtil.getLayoutTemplate(layoutTypePortlet.getLayoutTemplateId(), false, theme.getThemeId());
-
-	String themeId = theme.getThemeId();
-
-	if ((layoutTemplate != null) && (!layoutTemplate.getServletContextName().equals(theme.getServletContextName()))) {
-		themeId = "null";
-	}
-
-	String velocityTemplateId = themeId + LayoutTemplateConstants.CUSTOM_SEPARATOR + layoutTypePortlet.getLayoutTemplateId();
+	String velocityTemplateId = theme.getThemeId() + LayoutTemplateConstants.CUSTOM_SEPARATOR + layoutTypePortlet.getLayoutTemplateId();
 	String velocityTemplateContent = LayoutTemplateLocalServiceUtil.getWapContent(layoutTypePortlet.getLayoutTemplateId(), false, theme.getThemeId());
 %>
 
