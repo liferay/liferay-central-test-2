@@ -404,11 +404,11 @@ ${exception.message}
 		</antcall>
 
 		<antcall target="build-lang-native2ascii">
-			<param name="lang.code" value="pt" />
+			<param name="lang.code" value="pt_BR" />
 		</antcall>
 
 		<antcall target="build-lang-native2ascii">
-			<param name="lang.code" value="pt_BR" />
+			<param name="lang.code" value="pt_PT" />
 		</antcall>
 
 		<antcall target="build-lang-native2ascii">
