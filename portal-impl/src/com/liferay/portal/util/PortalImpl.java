@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.HttpMethods;
+import com.liferay.portal.kernel.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.servlet.WebDirDetector;
@@ -90,6 +91,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
+import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upload.UploadPortletRequestImpl;
@@ -122,6 +124,7 @@ import com.liferay.util.Encryptor;
 import com.liferay.util.JS;
 import com.liferay.util.servlet.DynamicServletRequest;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 
@@ -2119,7 +2122,15 @@ public class PortalImpl implements Portal {
 
 		// Timestamp
 
-		if ((parameterMap == null) || (!parameterMap.containsKey("t"))) {
+		File resourceFile = new File(
+			ServletContextUtil.getRealPath(
+				request.getSession().getServletContext(), uri));
+
+		if (uri.startsWith(StrutsUtil.TEXT_HTML_DIR) && resourceFile.exists()) {
+			sb.append("&t=");
+			sb.append(resourceFile.lastModified());
+		}
+		else if ((parameterMap == null) || (!parameterMap.containsKey("t"))) {
 			sb.append("&t=");
 			sb.append(theme.getTimestamp());
 		}
