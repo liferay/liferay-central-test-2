@@ -83,7 +83,6 @@ if (stagingGroup != null) {
 
 long selPlid = ParamUtil.getLong(request, "selPlid", LayoutConstants.DEFAULT_PLID);
 long layoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
-long refererPlid = ParamUtil.getLong(request, "refererPlid", LayoutConstants.DEFAULT_PLID);
 
 boolean privateLayout = tabs1.equals("private-pages");
 
@@ -110,15 +109,10 @@ else {
 UnicodeProperties liveGroupTypeSettings = liveGroup.getTypeSettingsProperties();
 
 Layout selLayout = null;
-Layout refererLayout = null;
 
 try {
 	if (selPlid != LayoutConstants.DEFAULT_PLID) {
 		selLayout = LayoutLocalServiceUtil.getLayout(selPlid);
-	}
-
-	if (refererPlid != LayoutConstants.DEFAULT_PLID) {
-		refererLayout = LayoutLocalServiceUtil.getLayout(refererPlid);
 	}
 }
 catch (NoSuchLayoutException nsle) {
@@ -237,7 +231,6 @@ request.setAttribute("edit_pages.jsp-selPlid", new Long(selPlid));
 request.setAttribute("edit_pages.jsp-privateLayout", new Boolean(privateLayout));
 request.setAttribute("edit_pages.jsp-groupTypeSettings", groupTypeSettings);
 request.setAttribute("edit_pages.jsp-selLayout", selLayout);
-request.setAttribute("edit_pages.jsp-refererLayout", refererLayout);
 
 request.setAttribute("edit_pages.jsp-rootNodeName", rootNodeName);
 

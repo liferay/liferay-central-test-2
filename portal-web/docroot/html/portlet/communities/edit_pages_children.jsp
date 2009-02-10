@@ -33,7 +33,6 @@ long selPlid = ((Long)request.getAttribute("edit_pages.jsp-selPlid")).longValue(
 boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLayout")).booleanValue();
 UnicodeProperties groupTypeSettings = (UnicodeProperties)request.getAttribute("edit_pages.jsp-groupTypeSettings");
 Layout selLayout = (Layout)request.getAttribute("edit_pages.jsp-selLayout");
-Layout refererLayout = (Layout)request.getAttribute("edit_pages.jsp-refererLayout");
 
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portletURL");
 
@@ -195,7 +194,7 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 
 				<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox, 1);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_down.png" vspace="2" width="16" /></a><br />
 
-				<a href="javascript: Liferay.Util.checkAndRemoveItem(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox, <%= ((refererLayout == null) ? layout.getLayoutId() : refererLayout.getLayoutId()) %>);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_x.png" vspace="2" width="16" /></a><br />
+				<a href="javascript: Liferay.Util.removeItem(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_x.png" vspace="2" width="16" /></a><br />
 			</td>
 		</tr>
 		</table>

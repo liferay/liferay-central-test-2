@@ -202,22 +202,6 @@ Liferay.Util = {
 		allBox.checked = (totalBoxes == totalOn);
 	},
 
-	checkAndRemoveItem: function(box, layoutId) {
-
-		var selectEl = jQuery(box);
-
-		if (layoutId == selectEl.find('option:selected').attr('value')) {
-			var message = '';
-
-			message = Liferay.Language.get('you-cannot-delete-the-page-you-are-currently-on');
-
-			alert(message);
-		}
-		else{
-			Liferay.Util.removeItem(box);
-		}
-	},
-
 	checkMaxLength: function(box, maxLength) {
 		if ((box.value.length) >= maxLength) {
 			box.value = box.value.substring(0, maxLength - 1);
