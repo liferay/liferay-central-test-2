@@ -275,6 +275,7 @@ public class SampleSQLBuilder {
 		put(context, "contactId", contactId);
 		put(context, "emailAddress", emailAddress);
 		put(context, "firstName", firstName);
+		put(context, "friendlyURL", "/" + screenName);
 
 		if (groupId > 0) {
 			put(context, "groupId", groupId);
@@ -301,15 +302,14 @@ public class SampleSQLBuilder {
 
 		write(StringPool.NEW_LINE);
 
-		createPermission(
-			ActionKeys.DELETE, _permissionCounter.get(), resourceId);
-		createPermission(
-			ActionKeys.IMPERSONATE, _permissionCounter.get(), resourceId);
-		createPermission(
-			ActionKeys.PERMISSIONS, _permissionCounter.get(), resourceId);
-		createPermission(
-			ActionKeys.UPDATE, _permissionCounter.get(), resourceId);
-		createPermission(ActionKeys.VIEW, _permissionCounter.get(), resourceId);
+		String[] actionIds = new String[] {
+			ActionKeys.DELETE, ActionKeys.IMPERSONATE, ActionKeys.PERMISSIONS,
+			ActionKeys.UPDATE, ActionKeys.VIEW
+		};
+
+		for (String actionId : actionIds) {
+			createPermission(actionId, _permissionCounter.get(), resourceId);
+		}
 	}
 
 	protected void createUsers() throws Exception {
@@ -424,8 +424,6 @@ public class SampleSQLBuilder {
 		}
 
 		br.close();
-
-		//write(StringPool.NEW_LINE);
 	}
 
 	protected void put(Map<String, Object> context, String key, boolean value) {

@@ -2,7 +2,7 @@ insert into User_ (uuid_, userId, companyId, createDate, modifiedDate, defaultUs
 insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, male, birthday) values (${contactId}, ${companyId}, ${userId}, '${userName}', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ${accountId}, 0, '${firstName}', '', '${lastName}', TRUE, '01/01/1970');
 
 <#if groupId??>
-	insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values (${groupId}, ${companyId}, ${userId}, ${userClassNameId}, ${userId}, 0, 0, '${groupId}', '', TRUE);
+	insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values (${groupId}, ${companyId}, ${userId}, ${userClassNameId}, ${userId}, 0, 0, '${groupId}', '${friendlyURL}', TRUE);
 	insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, themeId, colorSchemeId, pageCount) values (${counter.getString()}, ${companyId}, ${groupId}, TRUE, FALSE, 'classic', '01', 0);
 	insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, themeId, colorSchemeId, pageCount) values (${counter.getString()}, ${companyId}, ${groupId}, FALSE, FALSE, 'classic', '01', 0);
 </#if>
