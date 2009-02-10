@@ -56,7 +56,7 @@ else {
 
 	String themeId = theme.getThemeId();
 
-	if (!layoutTemplate.getServletContextName().equals(theme.getServletContextName())) {
+	if ((layoutTemplate != null) && (!layoutTemplate.getServletContextName().equals(theme.getServletContextName()))) {
 		themeId = "null";
 	}
 
