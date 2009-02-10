@@ -2143,8 +2143,8 @@ public class PortalImpl implements Portal {
 			}
 		}
 
-		if ((!appendedTimestamp) && (parameterMap == null) ||
-			(!parameterMap.containsKey("t"))) {
+		if (!appendedTimestamp &&
+			((parameterMap == null) || !parameterMap.containsKey("t"))) {
 
 			sb.append("&t=");
 			sb.append(theme.getTimestamp());
