@@ -377,6 +377,7 @@ public class LayoutTemplateLocalServiceImpl
 			}
 
 			layoutTemplateModel.setStandard(standard);
+			layoutTemplateModel.setThemeId(themeId);
 			layoutTemplateModel.setName(GetterUtil.getString(
 				layoutTemplate.attributeValue("name"),
 				layoutTemplateModel.getName()));

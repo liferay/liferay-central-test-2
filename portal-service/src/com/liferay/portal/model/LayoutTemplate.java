@@ -46,6 +46,10 @@ public interface LayoutTemplate
 
 	public void setStandard(boolean standard);
 
+	public String getThemeId();
+
+	public void setThemeId(String themeId);
+
 	public String getName();
 
 	public void setName(String name);

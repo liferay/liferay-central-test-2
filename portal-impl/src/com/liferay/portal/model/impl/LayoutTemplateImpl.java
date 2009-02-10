@@ -84,6 +84,14 @@ public class LayoutTemplateImpl
 		_standard = standard;
 	}
 
+	public String getThemeId() {
+		return _themeId;
+	}
+
+	public void setThemeId(String themeId) {
+		_themeId = themeId;
+	}
+
 	public String getName() {
 		if (Validator.isNull(_name)) {
 			return _layoutTemplateId;
@@ -281,6 +289,7 @@ public class LayoutTemplateImpl
 
 	private String _layoutTemplateId;
 	private boolean _standard;
+	private String _themeId;
 	private String _name;
 	private String _templatePath;
 	private String _wapTemplatePath;
@@ -291,7 +300,7 @@ public class LayoutTemplateImpl
 	private boolean _setWapContent;
 	private List<String> _columns = new ArrayList<String>();
 	private transient ServletContext _servletContext;
-	private String _servletContextName;
+	private String _servletContextName = StringPool.BLANK;
 	private boolean _warFile;
 
 }

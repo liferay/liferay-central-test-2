@@ -30,7 +30,9 @@
 boolean layoutMaximized = layoutTypePortlet.hasStateMax();
 
 if (!layoutMaximized) {
-	String velocityTemplateId = theme.getThemeId() + LayoutTemplateConstants.CUSTOM_SEPARATOR + layoutTypePortlet.getLayoutTemplateId();
+	LayoutTemplate layoutTemplate = LayoutTemplateLocalServiceUtil.getLayoutTemplate(layoutTypePortlet.getLayoutTemplateId(), false, theme.getThemeId());
+
+	String velocityTemplateId = layoutTemplate.getThemeId() + LayoutTemplateConstants.CUSTOM_SEPARATOR + layoutTypePortlet.getLayoutTemplateId();
 	String velocityTemplateContent = LayoutTemplateLocalServiceUtil.getWapContent(layoutTypePortlet.getLayoutTemplateId(), false, theme.getThemeId());
 %>
 
