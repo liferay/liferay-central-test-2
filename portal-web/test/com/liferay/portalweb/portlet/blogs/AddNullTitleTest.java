@@ -39,8 +39,7 @@ public class AddNullTitleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//input[@value='Add Blog Entry']")) {
+				if (selenium.isElementPresent("link=Blogs Test Page")) {
 					break;
 				}
 			}
@@ -50,6 +49,8 @@ public class AddNullTitleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Blogs Test Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Blog Entry']"));
 		selenium.waitForPageToLoad("30000");

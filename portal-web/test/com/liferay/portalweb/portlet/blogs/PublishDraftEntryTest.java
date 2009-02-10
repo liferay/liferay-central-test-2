@@ -39,7 +39,7 @@ public class PublishDraftEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Edit")) {
+				if (selenium.isElementPresent("link=Blogs Test Page")) {
 					break;
 				}
 			}
@@ -49,6 +49,10 @@ public class PublishDraftEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Blogs Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Draft Test"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
@@ -73,7 +77,7 @@ public class PublishDraftEntryTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isElementPresent("link=Draft Test"));
+		assertTrue(selenium.isTextPresent("Draft Test"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

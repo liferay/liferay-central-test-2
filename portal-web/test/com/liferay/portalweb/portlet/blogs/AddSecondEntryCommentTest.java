@@ -39,7 +39,7 @@ public class AddSecondEntryCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=0 Comments")) {
+				if (selenium.isElementPresent("link=Blogs Test Page")) {
 					break;
 				}
 			}
@@ -49,6 +49,8 @@ public class AddSecondEntryCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Blogs Test Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=0 Comments"));
 		selenium.waitForPageToLoad("30000");
 

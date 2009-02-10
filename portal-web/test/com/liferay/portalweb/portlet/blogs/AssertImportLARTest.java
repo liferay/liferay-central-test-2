@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="EditSecondCommentTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssertImportLARTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EditSecondCommentTest extends BaseTestCase {
-	public void testEditSecondComment() throws Exception {
+public class AssertImportLARTest extends BaseTestCase {
+	public void testAssertImportLAR() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,35 +51,6 @@ public class EditSecondCommentTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Blogs Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Second Test Entry"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("//td[4]/span/a[2]");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_33_editBody1")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.typeKeys("_33_editBody1",
-			RuntimeVariables.replace("This is an edited second entr comment"));
-		selenium.type("_33_editBody1",
-			RuntimeVariables.replace("This is an edited second entry comment!"));
-		selenium.click(RuntimeVariables.replace("_33_updateReplyButton1"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"This is an edited second entry comment!"));
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertTrue(selenium.isElementPresent("link=Test Entry"));
 	}
 }

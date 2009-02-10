@@ -39,6 +39,25 @@ public class SearchBlogsTest extends BaseTestCase {
 			}
 
 			try {
+				if (selenium.isElementPresent("link=Blogs Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Blogs Test Page"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
 				if (selenium.isElementPresent("_33_keywords")) {
 					break;
 				}
