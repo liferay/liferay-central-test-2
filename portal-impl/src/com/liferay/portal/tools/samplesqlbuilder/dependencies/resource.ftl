@@ -1,0 +1,1 @@
+insert into Resource_ (resourceId, codeId, primKey) values (${resourceId}, ${codeId}, '${primKey}');

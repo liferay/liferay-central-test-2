@@ -168,7 +168,7 @@ ${exception.message}
 			<then>
 				<jar
 					basedir="classes"
-					excludes="portal-*.properties,system-*.properties"
+					excludes="portal-*.properties,system-*.properties,**/samplesqlbuilder/dependencies/*.txt"
 					jarfile="${jar.file}.jar"
 				/>
 			</then>

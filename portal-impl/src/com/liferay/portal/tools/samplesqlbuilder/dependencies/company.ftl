@@ -1,0 +1,2 @@
+insert into Company (companyId, accountId, webId, virtualHost, mx) values (${companyId}, ${accountId}, 'liferay.com', 'localhost', 'liferay.com');
+insert into Account_ (accountId, companyId, userId, userName, createDate, modifiedDate, parentAccountId, name, legalName, legalId, legalType, sicCode, tickerSymbol, industry, type_, size_) values (${accountId}, ${companyId}, ${defaultUserId}, '', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 'Liferay', 'Liferay, Inc.', '', '', '', '', '', '', '');

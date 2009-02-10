@@ -1,0 +1,1 @@
+insert into Role_ (roleId, companyId, classNameId, classPK, name, description, type_) values (${roleId}, ${companyId}, 0, 0, '${name}', '', 1);

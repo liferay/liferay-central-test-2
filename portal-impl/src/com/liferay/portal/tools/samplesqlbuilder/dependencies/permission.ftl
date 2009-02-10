@@ -1,0 +1,1 @@
+insert into Permission_ (permissionId, companyId, actionId, resourceId) values (${permissionId}, ${companyId}, '${actionId}', ${resourceId});

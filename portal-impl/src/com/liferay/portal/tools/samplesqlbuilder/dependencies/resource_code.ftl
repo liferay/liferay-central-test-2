@@ -1,0 +1,1 @@
+insert into ResourceCode (codeId, companyId, name, scope) values (${codeId}, ${companyId}, '${name}', ${scope});

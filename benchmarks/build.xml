@@ -9,6 +9,19 @@
 
 	<property name="grinder.file" value="../tools/grinder-3.1.zip" />
 
+	<target name="build-sample-sql">
+		<java
+			classname="com.liferay.portal.tools.samplesqlbuilder.SampleSQLBuilder"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true"
+		>
+			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
+			<jvmarg value="-Dsample.sql.output.dir=${sample.sql.output.dir}" />
+			<jvmarg value="-Dsample.sql.max.user.count=${sample.sql.max.user.count}" />
+		</java>
+	</target>
+
 	<target name="run" depends="setup">
 		<java
 			classname="net.grinder.Grinder"
@@ -26,7 +39,7 @@
 			<then>
 				<unzip src="${grinder.file}" dest="lib">
 					<patternset>
-						<include name="**/lib/*.jar"/>
+						<include name="**/lib/*.jar" />
 					</patternset>
 					<mapper type="flatten" />
 				</unzip>

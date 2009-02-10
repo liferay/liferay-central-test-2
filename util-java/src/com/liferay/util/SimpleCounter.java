@@ -34,6 +34,10 @@ public class SimpleCounter {
 		return _counter++;
 	}
 
+	public String getString() {
+		return String.valueOf(get());
+	}
+
 	private long _counter = 1;
 
 }
