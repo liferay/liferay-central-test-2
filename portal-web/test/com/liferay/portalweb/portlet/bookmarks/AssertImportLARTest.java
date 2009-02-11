@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="VerifyImportLARTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssertImportLARTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class VerifyImportLARTest extends BaseTestCase {
-	public void testVerifyImportLAR() throws Exception {
+public class AssertImportLARTest extends BaseTestCase {
+	public void testAssertImportLAR() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,12 +51,9 @@ public class VerifyImportLARTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Bookmarks Test Page"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Test Folder"));
+		assertTrue(selenium.isTextPresent("Edited Test Folder"));
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Test Subfolder"));
-		selenium.click(RuntimeVariables.replace("//b"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Test Bookmark"));
+		assertTrue(selenium.isElementPresent("link=Edited Test Bookmark"));
 	}
 }

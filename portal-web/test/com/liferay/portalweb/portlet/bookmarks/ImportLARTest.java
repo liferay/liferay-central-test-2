@@ -109,7 +109,7 @@ public class ImportLARTest extends BaseTestCase {
 
 		selenium.type("_86_importFileName",
 			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\bookmarks\\Bookmarks-LAR.portlet.lar"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\bookmarks\\Bookmarks-Selenium.portlet.lar"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

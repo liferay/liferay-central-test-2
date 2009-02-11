@@ -63,18 +63,6 @@ public class TearDownTest extends BaseTestCase {
 				boolean TestFolderAvailable = selenium.isElementPresent("//b");
 
 				if (!TestFolderAvailable) {
-					label = 4;
-
-					continue;
-				}
-
-				selenium.click(RuntimeVariables.replace("//b"));
-				selenium.waitForPageToLoad("30000");
-
-				boolean TestSubfolderAvailable = selenium.isElementPresent(
-						"//b");
-
-				if (!TestSubfolderAvailable) {
 					label = 3;
 
 					continue;
@@ -120,35 +108,6 @@ public class TearDownTest extends BaseTestCase {
 						"Your request processed successfully."));
 
 			case 2:
-				selenium.click(RuntimeVariables.replace("link=Test Folder"));
-				selenium.waitForPageToLoad("30000");
-				selenium.click("//strong/span");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("link=Delete")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click(RuntimeVariables.replace("link=Delete"));
-				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.getConfirmation()
-								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertFalse(selenium.isElementPresent("link=Test Subfolder"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
-
-			case 3:
 				selenium.click(RuntimeVariables.replace("//span[1]/a"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click("//strong/span");
@@ -180,7 +139,7 @@ public class TearDownTest extends BaseTestCase {
 						"link=Return to Full Page"));
 				selenium.waitForPageToLoad("30000");
 
-			case 4:
+			case 3:
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
