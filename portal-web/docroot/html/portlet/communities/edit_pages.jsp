@@ -276,6 +276,15 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		</c:choose>
 	}
 
+	function <portlet:namespace />exportPages() {
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/communities/export_pages" /><portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" /><portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" /></portlet:actionURL>", false);
+	}
+
+	function <portlet:namespace />importPages() {
+		document.<portlet:namespace />fm.encoding = "multipart/form-data";
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/communities/import_pages" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" /></portlet:actionURL>");
+	}
+
 	function <portlet:namespace />removePage(box) {
 		var selectEl = jQuery(box);
 
@@ -287,15 +296,6 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		else {
 			Liferay.Util.removeItem(box);
 		}
-	}
-
-	function <portlet:namespace />exportPages() {
-		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/communities/export_pages" /><portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" /><portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" /></portlet:actionURL>", false);
-	}
-
-	function <portlet:namespace />importPages() {
-		document.<portlet:namespace />fm.encoding = "multipart/form-data";
-		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/communities/import_pages" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" /></portlet:actionURL>");
 	}
 
 	function <portlet:namespace />savePage() {
