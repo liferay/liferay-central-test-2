@@ -218,7 +218,32 @@ if (selContact != null) {
 			<c:when test="<%= PropsValues.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY %>">
 				<label for="<portlet:namespace />birthday"><liferay-ui:message key="birthday" /></label>
 
-				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="birthday" defaultValue="<%= birthday %>" />
+				<%
+				Calendar now = CalendarFactoryUtil.getCalendar(timeZone, locale);
+
+				Map<String, String> hints = ModelHintsUtil.getHints("com.liferay.portal.model.Contact", "birthday");
+
+				int yearRangeDelta = 5;
+
+				if (hints != null) {
+					yearRangeDelta = GetterUtil.getInteger(hints.get("year-range-delta"), yearRangeDelta);
+				}
+
+				int yearRangeStart = birthday.get(Calendar.YEAR) - yearRangeDelta;
+				int yearRangeEnd = now.get(Calendar.YEAR);
+				%>
+
+				<liferay-ui:input-date
+					monthParam="birthdayMonth"
+					monthValue="<%= birthday.get(Calendar.MONTH) %>"
+					dayParam="birthdayDay"
+					dayValue="<%= birthday.get(Calendar.DATE) %>"
+					yearParam="birthdayYear"
+					yearValue="<%= birthday.get(Calendar.YEAR) %>"
+					yearRangeEnd="<%= yearRangeEnd %>"
+					yearRangeStart="<%= yearRangeStart %>"
+					imageInputId="birthdayImageInputId"
+				/>
 			</c:when>
 			<c:otherwise>
 				<input name="<portlet:namespace />birthdayMonth" type="hidden" value="<%= Calendar.JANUARY %>" />
