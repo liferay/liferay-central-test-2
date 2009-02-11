@@ -759,9 +759,11 @@ if ((layout.getType().equals(LayoutConstants.TYPE_PANEL) || layout.getType().equ
 	if (portletDisplay.isStateMin()) {
 		cssClasses += " portlet-minimized";
 	}
+
+	cssClasses = "portlet-boundary portlet-boundary" + PortalUtil.getPortletNamespace(portlet.getRootPortletId()) + " " + cssClasses + " " + portlet.getCssClassWrapper();
 	%>
 
-	<div id="p_p_id<%= renderResponseImpl.getNamespace() %>" class="portlet-boundary portlet-boundary<%= PortalUtil.getPortletNamespace(portlet.getRootPortletId()) %> <%= cssClasses %> <%= portlet.getCssClassWrapper() %>" <%= freeformStyles %>>
+	<div id="p_p_id<%= renderResponseImpl.getNamespace() %>" class="<%= cssClasses %>" <%= freeformStyles %>>
 		<a name="p_<%= portletId %>"></a>
 </c:if>
 
