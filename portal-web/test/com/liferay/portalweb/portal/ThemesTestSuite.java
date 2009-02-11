@@ -36,11 +36,11 @@ import com.liferay.portalweb.portal.util.ThemeIds;
 public class ThemesTestSuite extends BaseTests {
 
 	public ThemesTestSuite() {
-		addTestSuite(LoginTests.class);
-		addTestSuite(SetupThemesTests.class);
+		addTests(LoginTests.class);
+		addTests(SetupThemesTests.class);
 
 		for (int i = 0; i < ThemeIds.getCount(); i++) {
-			addTestSuite(ThemeTests.class);
+			addTests(ThemeTests.class);
 		}
 
 		addTestSuite(StopSeleniumTest.class);

@@ -24,6 +24,9 @@ package com.liferay.portalweb.portal;
 
 import com.liferay.portal.util.InitUtil;
 
+import java.util.Enumeration;
+
+import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
@@ -36,6 +39,23 @@ public class BaseTests extends TestSuite {
 
 	public BaseTests() {
 		InitUtil.initWithSpring();
+	}
+
+	public void addTests(Class<? extends TestSuite> testSuite) {
+		try {
+			TestSuite testSuiteInstance = testSuite.newInstance();
+
+			Enumeration<Test> enu = testSuiteInstance.tests();
+
+			while (enu.hasMoreElements()) {
+				Test test = enu.nextElement();
+
+				addTest(test);
+			}
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e.getMessage());
+		}
 	}
 
 	public void test() {

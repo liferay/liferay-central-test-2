@@ -34,8 +34,8 @@ import com.liferay.portalweb.portal.login.LoginTests;
 public class ControlPanelTestSuite extends BaseTests {
 
 	public ControlPanelTestSuite() {
-		addTestSuite(LoginTests.class);
-		addTestSuite(ControlPanelTests.class);
+		addTests(LoginTests.class);
+		addTests(ControlPanelTests.class);
 
 		addTestSuite(StopSeleniumTest.class);
 	}

@@ -38,12 +38,12 @@ import com.liferay.portalweb.portal.permissions.messageboards.MessageBoardsTests
 public class PermissionsTestSuite extends BaseTests {
 
 	public PermissionsTestSuite() {
-		addTestSuite(LoginTests.class);
-		addTestSuite(ControlPanelTests.class);
-		addTestSuite(AnnouncementsTests.class);
-		addTestSuite(BlogsTests.class);
-		addTestSuite(DocumentLibraryTests.class);
-		addTestSuite(MessageBoardsTests.class);
+		addTests(LoginTests.class);
+		addTests(ControlPanelTests.class);
+		addTests(AnnouncementsTests.class);
+		addTests(BlogsTests.class);
+		addTests(DocumentLibraryTests.class);
+		addTests(MessageBoardsTests.class);
 
 		addTestSuite(StopSeleniumTest.class);
 	}
