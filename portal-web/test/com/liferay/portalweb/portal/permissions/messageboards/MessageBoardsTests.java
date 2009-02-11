@@ -24,6 +24,9 @@ package com.liferay.portalweb.portal.permissions.messageboards;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="MessageBoardsTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,29 +35,33 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class MessageBoardsTests extends BaseTests {
 
-	public MessageBoardsTests() {
-		addTestSuite(CA_LoginTest.class);
-		addTestSuite(CA_AddPageTest.class);
-		addTestSuite(CA_AddPortletTest.class);
-		addTestSuite(CA_AddCategoryTest.class);
-		addTestSuite(CA_AddMessageTest.class);
-		addTestSuite(CA_AssertActionsTest.class);
-		addTestSuite(CA_DeleteMessageTest.class);
-		addTestSuite(CA_DeleteCategoryTest.class);
-		addTestSuite(CA_AddSecondCategoryTest.class);
-		addTestSuite(CA_AddMessageTest.class);
-		addTestSuite(CA_LogoutTest.class);
-		addTestSuite(Member_LoginTest.class);
-		addTestSuite(Member_AssertActionsTest.class);
-		addTestSuite(Member_ViewMessageTest.class);
-		addTestSuite(Member_ReplyMessageTest.class);
-		addTestSuite(Member_PostNewThreadTest.class);
-		addTestSuite(Member_EditThreadTest.class);
-		addTestSuite(Member_DeleteMessageTest.class);
-		addTestSuite(Member_LogoutTest.class);
-		addTestSuite(Guest_ViewTest.class);
-		addTestSuite(Guest_AssertActionsTest.class);
-		addTestSuite(DeletePageTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(CA_LoginTest.class);
+		testSuite.addTestSuite(CA_AddPageTest.class);
+		testSuite.addTestSuite(CA_AddPortletTest.class);
+		testSuite.addTestSuite(CA_AddCategoryTest.class);
+		testSuite.addTestSuite(CA_AddMessageTest.class);
+		testSuite.addTestSuite(CA_AssertActionsTest.class);
+		testSuite.addTestSuite(CA_DeleteMessageTest.class);
+		testSuite.addTestSuite(CA_DeleteCategoryTest.class);
+		testSuite.addTestSuite(CA_AddSecondCategoryTest.class);
+		testSuite.addTestSuite(CA_AddMessageTest.class);
+		testSuite.addTestSuite(CA_LogoutTest.class);
+		testSuite.addTestSuite(Member_LoginTest.class);
+		testSuite.addTestSuite(Member_AssertActionsTest.class);
+		testSuite.addTestSuite(Member_ViewMessageTest.class);
+		testSuite.addTestSuite(Member_ReplyMessageTest.class);
+		testSuite.addTestSuite(Member_PostNewThreadTest.class);
+		testSuite.addTestSuite(Member_EditThreadTest.class);
+		testSuite.addTestSuite(Member_DeleteMessageTest.class);
+		testSuite.addTestSuite(Member_LogoutTest.class);
+		testSuite.addTestSuite(Guest_ViewTest.class);
+		testSuite.addTestSuite(Guest_AssertActionsTest.class);
+		testSuite.addTestSuite(DeletePageTest.class);
+
+		return testSuite;
 	}
 
 }

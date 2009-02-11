@@ -24,6 +24,9 @@ package com.liferay.portalweb.portal.theme.setupthemes;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="SetupThemesTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,9 +35,12 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class SetupThemesTests extends BaseTests {
 
-	public SetupThemesTests() {
-		addTestSuite(SetupThemesTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
 
+		testSuite.addTestSuite(SetupThemesTest.class);
+
+		return testSuite;
 	}
 
 }

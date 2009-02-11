@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.webcontentdisplay;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="WebContentDisplayTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,20 +35,24 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class WebContentDisplayTests extends BaseTests {
 
-	public WebContentDisplayTests() {
-		addTestSuite(SetupTest.class);
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(SelectArticleTest.class);
-		addTestSuite(VerifySelectedArticleTest.class);
-		addTestSuite(ConfigureSettingsTest.class);
-		addTestSuite(CheckRatingTest.class);
-		addTestSuite(AddCommentTest.class);
-		addTestSuite(EditCommentTest.class);
-		addTestSuite(DeleteCommentTest.class);
-		addTestSuite(AddArticleThroughConfigurationTest.class);
-		addTestSuite(SearchArticleTest.class);
-		addTestSuite(TearDownTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(SetupTest.class);
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(SelectArticleTest.class);
+		testSuite.addTestSuite(VerifySelectedArticleTest.class);
+		testSuite.addTestSuite(ConfigureSettingsTest.class);
+		testSuite.addTestSuite(CheckRatingTest.class);
+		testSuite.addTestSuite(AddCommentTest.class);
+		testSuite.addTestSuite(EditCommentTest.class);
+		testSuite.addTestSuite(DeleteCommentTest.class);
+		testSuite.addTestSuite(AddArticleThroughConfigurationTest.class);
+		testSuite.addTestSuite(SearchArticleTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
+
+		return testSuite;
 	}
 
 }

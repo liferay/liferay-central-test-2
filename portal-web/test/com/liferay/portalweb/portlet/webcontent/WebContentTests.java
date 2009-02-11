@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.webcontent;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="WebContentTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,30 +35,34 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class WebContentTests extends BaseTests {
 
-	public WebContentTests() {
-		addTestSuite(ControlPanelTest.class);
-		addTestSuite(AddArticleTest.class);
-		addTestSuite(AddArticle2Test.class);
-		addTestSuite(WorkflowTest.class);
-		addTestSuite(ApproveArticleTest.class);
-		addTestSuite(ExpireArticleTest.class);
-		addTestSuite(DeleteArticleTest.class);
-		addTestSuite(AddStructuresTest.class);
-		addTestSuite(AddTemplateTest.class);
-		//addTestSuite(AddFeedTest.class);
-		addTestSuite(SearchArticleTest.class);
-		addTestSuite(SearchStructuresTest.class);
-		addTestSuite(SearchTemplateTest.class);
-		//addTestSuite(AddNullArticleTest.class);
-		addTestSuite(AddNullTitleTest.class);
-		addTestSuite(RecentPageTest.class);
-		addTestSuite(CancelPopupTest.class);
-		addTestSuite(DeleteAllTest.class);
-		addTestSuite(ImportLARTest.class);
-		addTestSuite(VerifyImportLARTest.class);
-		addTestSuite(AddAssociatedTemplateTest.class);
-		addTestSuite(AssertStructureTemplateAssociationTest.class);
-		addTestSuite(TearDownTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(ControlPanelTest.class);
+		testSuite.addTestSuite(AddArticleTest.class);
+		testSuite.addTestSuite(AddArticle2Test.class);
+		testSuite.addTestSuite(WorkflowTest.class);
+		testSuite.addTestSuite(ApproveArticleTest.class);
+		testSuite.addTestSuite(ExpireArticleTest.class);
+		testSuite.addTestSuite(DeleteArticleTest.class);
+		testSuite.addTestSuite(AddStructuresTest.class);
+		testSuite.addTestSuite(AddTemplateTest.class);
+		//testSuite.addTestSuite(AddFeedTest.class);
+		testSuite.addTestSuite(SearchArticleTest.class);
+		testSuite.addTestSuite(SearchStructuresTest.class);
+		testSuite.addTestSuite(SearchTemplateTest.class);
+		//testSuite.addTestSuite(AddNullArticleTest.class);
+		testSuite.addTestSuite(AddNullTitleTest.class);
+		testSuite.addTestSuite(RecentPageTest.class);
+		testSuite.addTestSuite(CancelPopupTest.class);
+		testSuite.addTestSuite(DeleteAllTest.class);
+		testSuite.addTestSuite(ImportLARTest.class);
+		testSuite.addTestSuite(VerifyImportLARTest.class);
+		testSuite.addTestSuite(AddAssociatedTemplateTest.class);
+		testSuite.addTestSuite(AssertStructureTemplateAssociationTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
+
+		return testSuite;
 	}
 
 }

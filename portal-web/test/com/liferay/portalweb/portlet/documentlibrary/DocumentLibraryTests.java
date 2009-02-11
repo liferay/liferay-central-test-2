@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.documentlibrary;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="DocumentLibraryTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,28 +35,32 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class DocumentLibraryTests extends BaseTests {
 
-	public DocumentLibraryTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddFolderTest.class);
-		addTestSuite(AddSubfolderTest.class);
-		addTestSuite(AddDocumentTest.class);
-		addTestSuite(AddCommentsTest.class);
-		addTestSuite(EditCommentsTest.class);
-		addTestSuite(CompareVersionsTest.class);
-		addTestSuite(DeleteCompareVersionsTest.class);
- 		addTestSuite(SearchTest.class);
-		addTestSuite(GetDocumentsTest.class);
-		addTestSuite(AddSecondFolderTest.class);
-		addTestSuite(AddSecondSubfolderTest.class);
-		addTestSuite(MoveDocumentTest.class);
-		addTestSuite(AssertCommentMoveTest.class);
-		addTestSuite(DeleteCommentsTest.class);
-		addTestSuite(EditSecondFolderTest.class);
-		addTestSuite(DeleteAllTest.class);
-		addTestSuite(ImportLARTest.class);
-		addTestSuite(VerifyImportLARTest.class);
-		addTestSuite(TearDownTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddFolderTest.class);
+		testSuite.addTestSuite(AddSubfolderTest.class);
+		testSuite.addTestSuite(AddDocumentTest.class);
+		testSuite.addTestSuite(AddCommentsTest.class);
+		testSuite.addTestSuite(EditCommentsTest.class);
+		testSuite.addTestSuite(CompareVersionsTest.class);
+		testSuite.addTestSuite(DeleteCompareVersionsTest.class);
+ 		testSuite.addTestSuite(SearchTest.class);
+		testSuite.addTestSuite(GetDocumentsTest.class);
+		testSuite.addTestSuite(AddSecondFolderTest.class);
+		testSuite.addTestSuite(AddSecondSubfolderTest.class);
+		testSuite.addTestSuite(MoveDocumentTest.class);
+		testSuite.addTestSuite(AssertCommentMoveTest.class);
+		testSuite.addTestSuite(DeleteCommentsTest.class);
+		testSuite.addTestSuite(EditSecondFolderTest.class);
+		testSuite.addTestSuite(DeleteAllTest.class);
+		testSuite.addTestSuite(ImportLARTest.class);
+		testSuite.addTestSuite(VerifyImportLARTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
+
+		return testSuite;
 	}
 
 }

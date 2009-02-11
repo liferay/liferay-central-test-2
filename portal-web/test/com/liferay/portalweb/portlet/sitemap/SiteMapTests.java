@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.sitemap;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="SiteMapTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,16 +35,20 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class SiteMapTests extends BaseTests {
 
-	public SiteMapTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddChildPageTest.class);
-		addTestSuite(AddPortletToChildrenTest.class);
-		addTestSuite(VerifyLinksTest.class);
-		addTestSuite(EditConfigurationTest.class);
-		addTestSuite(ImportLARTest.class);
-		addTestSuite(VerifyImportLARTest.class);
-		addTestSuite(TearDownTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddChildPageTest.class);
+		testSuite.addTestSuite(AddPortletToChildrenTest.class);
+		testSuite.addTestSuite(VerifyLinksTest.class);
+		testSuite.addTestSuite(EditConfigurationTest.class);
+		testSuite.addTestSuite(ImportLARTest.class);
+		testSuite.addTestSuite(VerifyImportLARTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
+
+		return testSuite;
 	}
 
 }

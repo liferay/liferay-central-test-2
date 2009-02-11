@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.samplelar;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="SampleLARTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,11 +35,15 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class SampleLARTests extends BaseTests {
 
-	public SampleLARTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(ConfigurationTest.class);
-		addTestSuite(DeletePageTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(ConfigurationTest.class);
+		testSuite.addTestSuite(DeletePageTest.class);
+
+		return testSuite;
 	}
 
 }

@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.samplejavascript;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="SampleJavascriptTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,10 +35,14 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class SampleJavascriptTests extends BaseTests {
 
-	public SampleJavascriptTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(DeletePageTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(DeletePageTest.class);
+
+		return testSuite;
 	}
 
 }

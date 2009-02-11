@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.samplejsf12sunfacelets;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="SampleJSF12SunFaceletsTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,10 +35,14 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class SampleJSF12SunFaceletsTests extends BaseTests {
 
-	public SampleJSF12SunFaceletsTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(DeletePageTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(DeletePageTest.class);
+
+		return testSuite;
 	}
 
 }

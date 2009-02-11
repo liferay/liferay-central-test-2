@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.calendar;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="CalendarTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,23 +35,27 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class CalendarTests extends BaseTests {
 
-	public CalendarTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(SetTimezoneTest.class);
-		addTestSuite(AddAppointmentEventTest.class);
-		addTestSuite(AddConcertEventTest.class);
-		addTestSuite(AddVacationEventTest.class);
-		addTestSuite(GetAppointmentEventsTest.class);
-		addTestSuite(GetConcertEventsTest.class);
-		addTestSuite(GetVacationEventsTest.class);
-		addTestSuite(EditEventTest.class);
-		addTestSuite(AddTemporaryEventTest.class);
-		addTestSuite(DeleteTemporaryEventTest.class);
-		addTestSuite(AssertConfigurationTest.class);
-		addTestSuite(DeleteAllEventsTest.class);
-		addTestSuite(UploadLARFileTest.class);
-		addTestSuite(DeletePageTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(SetTimezoneTest.class);
+		testSuite.addTestSuite(AddAppointmentEventTest.class);
+		testSuite.addTestSuite(AddConcertEventTest.class);
+		testSuite.addTestSuite(AddVacationEventTest.class);
+		testSuite.addTestSuite(GetAppointmentEventsTest.class);
+		testSuite.addTestSuite(GetConcertEventsTest.class);
+		testSuite.addTestSuite(GetVacationEventsTest.class);
+		testSuite.addTestSuite(EditEventTest.class);
+		testSuite.addTestSuite(AddTemporaryEventTest.class);
+		testSuite.addTestSuite(DeleteTemporaryEventTest.class);
+		testSuite.addTestSuite(AssertConfigurationTest.class);
+		testSuite.addTestSuite(DeleteAllEventsTest.class);
+		testSuite.addTestSuite(UploadLARFileTest.class);
+		testSuite.addTestSuite(DeletePageTest.class);
+
+		return testSuite;
 	}
 
 }

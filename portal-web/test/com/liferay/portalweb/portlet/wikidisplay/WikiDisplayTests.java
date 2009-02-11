@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.wikidisplay;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="WikiDisplayTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,12 +35,16 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class WikiDisplayTests extends BaseTests {
 
-	public WikiDisplayTests() {
-		addTestSuite(SetupTest.class);
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(EditConfigurationsTest.class);
-		addTestSuite(TearDownTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(SetupTest.class);
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(EditConfigurationsTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
+
+		return testSuite;
 	}
 
 }

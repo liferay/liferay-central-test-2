@@ -24,6 +24,9 @@ package com.liferay.portalweb.portal.permissions.controlpanel;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="ControlPanelTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,27 +35,31 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class ControlPanelTests extends BaseTests {
 
-	public ControlPanelTests() {
-		addTestSuite(CreateRolesTest.class);
-		addTestSuite(DefineCARolesTest.class);
-		addTestSuite(CA_MessageBoardsRolesTest.class);
-		addTestSuite(CA_AnnouncementsRolesTest.class);
-		addTestSuite(CA_BlogsRolesTest.class);
-		addTestSuite(CA_PortalRolesTest.class);
-		addTestSuite(CA_DocumentLibraryRolesTest.class);
-		addTestSuite(DefineMemberRolesTest.class);
-		addTestSuite(Member_MessageBoardsRolesTest.class);
-		addTestSuite(Member_AnnouncementsRolesTest.class);
-		addTestSuite(Member_BlogsRolesTest.class);
-		addTestSuite(Member_DocumentLibraryRolesTest.class);
-		addTestSuite(DefinePublisherRolesTest.class);
-		addTestSuite(DefineWriterRolesTest.class);
-		addTestSuite(AddCATest.class);
-		addTestSuite(AddMemberTest.class);
-		addTestSuite(AddPublisherTest.class);
-		addTestSuite(AddWriterTest.class);
-		addTestSuite(LoginUsersTest.class);
-		addTestSuite(LogoutTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(CreateRolesTest.class);
+		testSuite.addTestSuite(DefineCARolesTest.class);
+		testSuite.addTestSuite(CA_MessageBoardsRolesTest.class);
+		testSuite.addTestSuite(CA_AnnouncementsRolesTest.class);
+		testSuite.addTestSuite(CA_BlogsRolesTest.class);
+		testSuite.addTestSuite(CA_PortalRolesTest.class);
+		testSuite.addTestSuite(CA_DocumentLibraryRolesTest.class);
+		testSuite.addTestSuite(DefineMemberRolesTest.class);
+		testSuite.addTestSuite(Member_MessageBoardsRolesTest.class);
+		testSuite.addTestSuite(Member_AnnouncementsRolesTest.class);
+		testSuite.addTestSuite(Member_BlogsRolesTest.class);
+		testSuite.addTestSuite(Member_DocumentLibraryRolesTest.class);
+		testSuite.addTestSuite(DefinePublisherRolesTest.class);
+		testSuite.addTestSuite(DefineWriterRolesTest.class);
+		testSuite.addTestSuite(AddCATest.class);
+		testSuite.addTestSuite(AddMemberTest.class);
+		testSuite.addTestSuite(AddPublisherTest.class);
+		testSuite.addTestSuite(AddWriterTest.class);
+		testSuite.addTestSuite(LoginUsersTest.class);
+		testSuite.addTestSuite(LogoutTest.class);
+
+		return testSuite;
 	}
 
 }

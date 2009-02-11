@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.plugininstaller;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="PluginInstallerTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,11 +35,15 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class PluginInstallerTests extends BaseTests {
 
-	public PluginInstallerTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(PluginUpdateTest.class);
-		addTestSuite(DeletePageTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(PluginUpdateTest.class);
+		testSuite.addTestSuite(DeletePageTest.class);
+
+		return testSuite;
 	}
 
 }

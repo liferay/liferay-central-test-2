@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.samplepermissions;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="SamplePermissionsTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,10 +35,14 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class SamplePermissionsTests extends BaseTests {
 
-	public SamplePermissionsTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(DeletePageTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(DeletePageTest.class);
+
+		return testSuite;
 	}
 
 }

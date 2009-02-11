@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.pagecomments;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="PageCommentsTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,12 +35,16 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class PageCommentsTests extends BaseTests {
 
-	public PageCommentsTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddCommentTest.class);
-		addTestSuite(DeleteCommentTest.class);
-		addTestSuite(DeletePageTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddCommentTest.class);
+		testSuite.addTestSuite(DeleteCommentTest.class);
+		testSuite.addTestSuite(DeletePageTest.class);
+
+		return testSuite;
 	}
 
 }

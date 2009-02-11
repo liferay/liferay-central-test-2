@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.wiki;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="WikiTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,33 +35,37 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class WikiTests extends BaseTests {
 
-	public WikiTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddArticleTest.class);
-		addTestSuite(AddChildTest.class);
-		addTestSuite(AddCommentTest.class);
-		addTestSuite(EditCommentTest.class);
-		addTestSuite(SearchTest.class);
-		addTestSuite(AddWikiNodeTest.class);
-		addTestSuite(EditWikiNodeTest.class);
-		addTestSuite(AddSecondArticleTest.class);
-		addTestSuite(EditSecondArticleTest.class);
-		addTestSuite(MinorArticleChangeTest.class);
-		addTestSuite(CompareVersionsTest.class);
-		addTestSuite(RevertMinorArticleChangeTest.class);
-		addTestSuite(AddTemporaryArticleTest.class);
-		addTestSuite(DeleteArticleTest.class);
-		addTestSuite(AddOrphanedArticlesTest.class);
-		addTestSuite(VerifyRecentChangesTest.class);
-		addTestSuite(VerifyAllPagesTest.class);
-		addTestSuite(VerifyOrphanedPagesTest.class);
-		addTestSuite(AddLinksTest.class);
-		addTestSuite(VerifyNoOrphanedPagesTest.class);
-		addTestSuite(DeleteAllTest.class);
-		addTestSuite(ImportLARTest.class);
-		addTestSuite(VerifyImportLARTest.class);
-		addTestSuite(TearDownTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddArticleTest.class);
+		testSuite.addTestSuite(AddChildTest.class);
+		testSuite.addTestSuite(AddCommentTest.class);
+		testSuite.addTestSuite(EditCommentTest.class);
+		testSuite.addTestSuite(SearchTest.class);
+		testSuite.addTestSuite(AddWikiNodeTest.class);
+		testSuite.addTestSuite(EditWikiNodeTest.class);
+		testSuite.addTestSuite(AddSecondArticleTest.class);
+		testSuite.addTestSuite(EditSecondArticleTest.class);
+		testSuite.addTestSuite(MinorArticleChangeTest.class);
+		testSuite.addTestSuite(CompareVersionsTest.class);
+		testSuite.addTestSuite(RevertMinorArticleChangeTest.class);
+		testSuite.addTestSuite(AddTemporaryArticleTest.class);
+		testSuite.addTestSuite(DeleteArticleTest.class);
+		testSuite.addTestSuite(AddOrphanedArticlesTest.class);
+		testSuite.addTestSuite(VerifyRecentChangesTest.class);
+		testSuite.addTestSuite(VerifyAllPagesTest.class);
+		testSuite.addTestSuite(VerifyOrphanedPagesTest.class);
+		testSuite.addTestSuite(AddLinksTest.class);
+		testSuite.addTestSuite(VerifyNoOrphanedPagesTest.class);
+		testSuite.addTestSuite(DeleteAllTest.class);
+		testSuite.addTestSuite(ImportLARTest.class);
+		testSuite.addTestSuite(VerifyImportLARTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
+
+		return testSuite;
 	}
 
 }

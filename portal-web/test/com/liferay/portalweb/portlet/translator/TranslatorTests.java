@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.translator;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="TranslatorTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,30 +35,34 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class TranslatorTests extends BaseTests {
 
-	public TranslatorTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(TranslateEnglishChineseCTest.class);
-		addTestSuite(TranslateEnglishChineseTTest.class);
-		addTestSuite(TranslateEnglishDutchTest.class);
-		addTestSuite(TranslateEnglishFrenchTest.class);
-		addTestSuite(TranslateEnglishGermanTest.class);
-		addTestSuite(TranslateEnglishItalianTest.class);
-		addTestSuite(TranslateEnglishJapaneseTest.class);
-		addTestSuite(TranslateEnglishPortugueseTest.class);
-		addTestSuite(TranslateEnglishSpanishTest.class);
-		addTestSuite(TranslateChineseCEnglishTest.class);
-		addTestSuite(TranslateChineseTEnglishTest.class);
-		addTestSuite(TranslateDutchEnglishTest.class);
-		addTestSuite(TranslateFrenchEnglishTest.class);
-		addTestSuite(TranslateFrenchGermanTest.class);
-		addTestSuite(TranslateGermanEnglishTest.class);
-		addTestSuite(TranslateGermanFrenchTest.class);
-		addTestSuite(TranslateItalianEnglishTest.class);
-		addTestSuite(TranslateJapaneseEnglishTest.class);
-		addTestSuite(TranslatePortugueseEnglishTest.class);
-		addTestSuite(TranslateSpanishEnglishTest.class);
-		addTestSuite(TearDownTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(TranslateEnglishChineseCTest.class);
+		testSuite.addTestSuite(TranslateEnglishChineseTTest.class);
+		testSuite.addTestSuite(TranslateEnglishDutchTest.class);
+		testSuite.addTestSuite(TranslateEnglishFrenchTest.class);
+		testSuite.addTestSuite(TranslateEnglishGermanTest.class);
+		testSuite.addTestSuite(TranslateEnglishItalianTest.class);
+		testSuite.addTestSuite(TranslateEnglishJapaneseTest.class);
+		testSuite.addTestSuite(TranslateEnglishPortugueseTest.class);
+		testSuite.addTestSuite(TranslateEnglishSpanishTest.class);
+		testSuite.addTestSuite(TranslateChineseCEnglishTest.class);
+		testSuite.addTestSuite(TranslateChineseTEnglishTest.class);
+		testSuite.addTestSuite(TranslateDutchEnglishTest.class);
+		testSuite.addTestSuite(TranslateFrenchEnglishTest.class);
+		testSuite.addTestSuite(TranslateFrenchGermanTest.class);
+		testSuite.addTestSuite(TranslateGermanEnglishTest.class);
+		testSuite.addTestSuite(TranslateGermanFrenchTest.class);
+		testSuite.addTestSuite(TranslateItalianEnglishTest.class);
+		testSuite.addTestSuite(TranslateJapaneseEnglishTest.class);
+		testSuite.addTestSuite(TranslatePortugueseEnglishTest.class);
+		testSuite.addTestSuite(TranslateSpanishEnglishTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
+
+		return testSuite;
 	}
 
 }

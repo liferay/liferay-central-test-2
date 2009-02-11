@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.shopping;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="ShoppingTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,54 +35,58 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class ShoppingTests extends BaseTests {
 
-	public ShoppingTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddCategoryTest.class);
-		addTestSuite(EditCategoryTest.class);
-		addTestSuite(AddTemporaryCategoryTest.class);
-		addTestSuite(DeleteTemporaryCategoryTest.class);
-		addTestSuite(AddSecondCategoryTest.class);
-		addTestSuite(AddNullCategoryTest.class);
-		addTestSuite(AddItemTest.class);
-		addTestSuite(EditItemTest.class);
-		addTestSuite(AddTemporaryItemTest.class);
-		addTestSuite(DeleteTemporaryItemTest.class);
-		addTestSuite(AddSecondItemTest.class);
-		addTestSuite(SearchItemsTest.class);
-		addTestSuite(MoveItemTest.class);
-		addTestSuite(AddNullItemTest.class);
-		addTestSuite(AddCouponTest.class);
-		addTestSuite(EditCouponTest.class);
-		addTestSuite(AddTemporaryCouponTest.class);
-		addTestSuite(DeleteTemporaryCouponTest.class);
-		addTestSuite(SearchCouponsTest.class);
-		addTestSuite(AddNullCouponTest.class);
-		addTestSuite(AddItemToCartTest.class);
-		addTestSuite(ConfirmCartTest.class);
-		addTestSuite(RemoveItemFromCartTest.class);
-		addTestSuite(AddSecondItemToCartTest.class);
-		//addTestSuite(UpdateCartQuantityTest.class);
-		addTestSuite(CheckoutTest.class);
-		addTestSuite(ConfirmOrderTest.class);
-		addTestSuite(ViewInvoiceTest.class);
-		addTestSuite(ConfigureAcceptedCCTest.class);
-		addTestSuite(VerifyAcceptedCCTest.class);
-		addTestSuite(ConfigureStateTaxTest.class);
-		addTestSuite(AddThirdItemToCartTest.class);
-		addTestSuite(VerifyStateTaxTest.class);
-		addTestSuite(ConfigureFlatRateShippingCostTest.class);
-		addTestSuite(VerifyFlatRateShippingCostTest.class);
-		addTestSuite(ConfigurePercentageShippingTest.class);
-		addTestSuite(VerifyPercentageShippingTest.class);
-		addTestSuite(ConfigureFlatRateInsuranceTest.class);
-		addTestSuite(VerifyFlatRateInsuranceTest.class);
-		addTestSuite(ConfigurePercentageInsuranceTest.class);
-		addTestSuite(VerifyPercentageInsuranceTest.class);
-		addTestSuite(SaveCurrentSetupTest.class);
-		addTestSuite(ChangeCurrentSetupTest.class);
-		addTestSuite(RestoreArchivedSetupTest.class);
-		addTestSuite(TearDownTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddCategoryTest.class);
+		testSuite.addTestSuite(EditCategoryTest.class);
+		testSuite.addTestSuite(AddTemporaryCategoryTest.class);
+		testSuite.addTestSuite(DeleteTemporaryCategoryTest.class);
+		testSuite.addTestSuite(AddSecondCategoryTest.class);
+		testSuite.addTestSuite(AddNullCategoryTest.class);
+		testSuite.addTestSuite(AddItemTest.class);
+		testSuite.addTestSuite(EditItemTest.class);
+		testSuite.addTestSuite(AddTemporaryItemTest.class);
+		testSuite.addTestSuite(DeleteTemporaryItemTest.class);
+		testSuite.addTestSuite(AddSecondItemTest.class);
+		testSuite.addTestSuite(SearchItemsTest.class);
+		testSuite.addTestSuite(MoveItemTest.class);
+		testSuite.addTestSuite(AddNullItemTest.class);
+		testSuite.addTestSuite(AddCouponTest.class);
+		testSuite.addTestSuite(EditCouponTest.class);
+		testSuite.addTestSuite(AddTemporaryCouponTest.class);
+		testSuite.addTestSuite(DeleteTemporaryCouponTest.class);
+		testSuite.addTestSuite(SearchCouponsTest.class);
+		testSuite.addTestSuite(AddNullCouponTest.class);
+		testSuite.addTestSuite(AddItemToCartTest.class);
+		testSuite.addTestSuite(ConfirmCartTest.class);
+		testSuite.addTestSuite(RemoveItemFromCartTest.class);
+		testSuite.addTestSuite(AddSecondItemToCartTest.class);
+		//testSuite.addTestSuite(UpdateCartQuantityTest.class);
+		testSuite.addTestSuite(CheckoutTest.class);
+		testSuite.addTestSuite(ConfirmOrderTest.class);
+		testSuite.addTestSuite(ViewInvoiceTest.class);
+		testSuite.addTestSuite(ConfigureAcceptedCCTest.class);
+		testSuite.addTestSuite(VerifyAcceptedCCTest.class);
+		testSuite.addTestSuite(ConfigureStateTaxTest.class);
+		testSuite.addTestSuite(AddThirdItemToCartTest.class);
+		testSuite.addTestSuite(VerifyStateTaxTest.class);
+		testSuite.addTestSuite(ConfigureFlatRateShippingCostTest.class);
+		testSuite.addTestSuite(VerifyFlatRateShippingCostTest.class);
+		testSuite.addTestSuite(ConfigurePercentageShippingTest.class);
+		testSuite.addTestSuite(VerifyPercentageShippingTest.class);
+		testSuite.addTestSuite(ConfigureFlatRateInsuranceTest.class);
+		testSuite.addTestSuite(VerifyFlatRateInsuranceTest.class);
+		testSuite.addTestSuite(ConfigurePercentageInsuranceTest.class);
+		testSuite.addTestSuite(VerifyPercentageInsuranceTest.class);
+		testSuite.addTestSuite(SaveCurrentSetupTest.class);
+		testSuite.addTestSuite(ChangeCurrentSetupTest.class);
+		testSuite.addTestSuite(RestoreArchivedSetupTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
+
+		return testSuite;
 	}
 
 }

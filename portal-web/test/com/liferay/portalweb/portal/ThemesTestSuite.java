@@ -27,6 +27,9 @@ import com.liferay.portalweb.portal.theme.ThemeTests;
 import com.liferay.portalweb.portal.theme.setupthemes.SetupThemesTests;
 import com.liferay.portalweb.portal.util.ThemeIds;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="ThemesTestSuite.java.html"><b><i>View Source</i></b></a>
  *
@@ -35,15 +38,19 @@ import com.liferay.portalweb.portal.util.ThemeIds;
  */
 public class ThemesTestSuite extends BaseTests {
 
-	public ThemesTestSuite() {
-		addTests(LoginTests.class);
-		addTests(SetupThemesTests.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTest(LoginTests.suite());
+		testSuite.addTest(SetupThemesTests.suite());
 
 		for (int i = 0; i < ThemeIds.getCount(); i++) {
-			addTests(ThemeTests.class);
+			testSuite.addTest(ThemeTests.suite());
 		}
 
-		addTestSuite(StopSeleniumTest.class);
+		testSuite.addTestSuite(StopSeleniumTest.class);
+
+		return testSuite;
 	}
 
 }

@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.assetpublisher;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="AssetPublisherTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,69 +35,74 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class AssetPublisherTests extends BaseTests {
 
-	public AssetPublisherTests() {
-		addTestSuite(SetupTest.class);
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(ViewBlogsTest.class);
-		addTestSuite(ViewBookmarkTest.class);
-		addTestSuite(ViewDocumentTest.class);
-		addTestSuite(ViewImageTest.class);
-		addTestSuite(ViewWebContentTest.class);
-		addTestSuite(ViewMessageBoardTest.class);
-		addTestSuite(ViewWikiTest.class);
-		addTestSuite(EditDisplayToTitleListTest.class);
-		addTestSuite(VerifyDisplayToTitleListTest.class);
-		addTestSuite(EditDisplayToTableTest.class);
-		addTestSuite(VerifyDisplayToTableTest.class);
-		addTestSuite(EditDisplayToFullContentTest.class);
-		addTestSuite(VerifyDisplayToFullContentTest.class);
-		addTestSuite(EditDisplayToAbstractsTest.class);
-		addTestSuite(VerifyDisplayToAbstractsTest.class);
-		addTestSuite(EditDynamicConfigurationBlogsTest.class);
-		addTestSuite(VerifyDynamicConfigurationBlogsTest.class);
-		addTestSuite(EditDynamicConfigurationBookmarkTest.class);
-		addTestSuite(VerifyDynamicConfigurationBookmarkTest.class);
-		addTestSuite(EditDynamicConfigurationDocumentTest.class);
-		addTestSuite(VerifyDynamicConfigurationDocumentTest.class);
-		addTestSuite(EditDynamicConfigurationImageTest.class);
-		addTestSuite(VerifyDynamicConfigurationImageTest.class);
-		addTestSuite(EditDynamicConfigurationWebContentTest.class);
-		addTestSuite(VerifyDynamicConfigurationWebContentTest.class);
-		addTestSuite(EditDynamicConfigurationMessageBoardTest.class);
-		addTestSuite(VerifyDynamicConfigurationMessageBoardTest.class);
-		addTestSuite(EditDynamicConfigurationWikiTest.class);
-		addTestSuite(VerifyDynamicConfigurationWikiTest.class);
-		addTestSuite(EditManualConfigurationTest.class);
-		addTestSuite(SelectBlogsTest.class);
-		addTestSuite(RemoveBlogsTest.class);
-		addTestSuite(SelectBookmarkTest.class);
-		addTestSuite(RemoveBookmarkTest.class);
-		addTestSuite(SelectDocumentTest.class);
-		addTestSuite(RemoveDocumentTest.class);
-		addTestSuite(SelectImageTest.class);
-		addTestSuite(RemoveImageTest.class);
-		addTestSuite(SelectWebContentTest.class);
-		addTestSuite(RemoveWebContentTest.class);
-		addTestSuite(RevertSettingsTest.class);
-		addTestSuite(AddBlogsTest.class);
-		addTestSuite(AddBookmarkTest.class);
-		addTestSuite(AddDocumentTest.class);
-		addTestSuite(AddImageTest.class);
-		addTestSuite(AddWebContentTest.class);
-		addTestSuite(SaveArchivedConfigurationTest.class);
-		addTestSuite(EditConfigurationTest.class);
-		addTestSuite(RestoreArchivedConfigurationTest.class);
-		addTestSuite(DeleteArchivedConfigurationTest.class);
-		addTestSuite(EditConfigurationTest.class);
-		addTestSuite(ImportLARTest.class);
-		addTestSuite(AssertImportLARTest.class);
-		addTestSuite(EditNumberAssetsShownTest.class);
-		addTestSuite(ConfigureSimplePaginationTest.class);
-		addTestSuite(VerifySimplePaginationTest.class);
-		addTestSuite(ConfigureRegularPaginationTest.class);
-		addTestSuite(VerifyRegularPaginationTest.class);
-		addTestSuite(TearDownTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(SetupTest.class);
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(ViewBlogsTest.class);
+		testSuite.addTestSuite(ViewBookmarkTest.class);
+		testSuite.addTestSuite(ViewDocumentTest.class);
+		testSuite.addTestSuite(ViewImageTest.class);
+		testSuite.addTestSuite(ViewWebContentTest.class);
+		testSuite.addTestSuite(ViewMessageBoardTest.class);
+		testSuite.addTestSuite(ViewWikiTest.class);
+		testSuite.addTestSuite(EditDisplayToTitleListTest.class);
+		testSuite.addTestSuite(VerifyDisplayToTitleListTest.class);
+		testSuite.addTestSuite(EditDisplayToTableTest.class);
+		testSuite.addTestSuite(VerifyDisplayToTableTest.class);
+		testSuite.addTestSuite(EditDisplayToFullContentTest.class);
+		testSuite.addTestSuite(VerifyDisplayToFullContentTest.class);
+		testSuite.addTestSuite(EditDisplayToAbstractsTest.class);
+		testSuite.addTestSuite(VerifyDisplayToAbstractsTest.class);
+		testSuite.addTestSuite(EditDynamicConfigurationBlogsTest.class);
+		testSuite.addTestSuite(VerifyDynamicConfigurationBlogsTest.class);
+		testSuite.addTestSuite(EditDynamicConfigurationBookmarkTest.class);
+		testSuite.addTestSuite(VerifyDynamicConfigurationBookmarkTest.class);
+		testSuite.addTestSuite(EditDynamicConfigurationDocumentTest.class);
+		testSuite.addTestSuite(VerifyDynamicConfigurationDocumentTest.class);
+		testSuite.addTestSuite(EditDynamicConfigurationImageTest.class);
+		testSuite.addTestSuite(VerifyDynamicConfigurationImageTest.class);
+		testSuite.addTestSuite(EditDynamicConfigurationWebContentTest.class);
+		testSuite.addTestSuite(VerifyDynamicConfigurationWebContentTest.class);
+		testSuite.addTestSuite(EditDynamicConfigurationMessageBoardTest.class);
+		testSuite.addTestSuite(
+			VerifyDynamicConfigurationMessageBoardTest.class);
+		testSuite.addTestSuite(EditDynamicConfigurationWikiTest.class);
+		testSuite.addTestSuite(VerifyDynamicConfigurationWikiTest.class);
+		testSuite.addTestSuite(EditManualConfigurationTest.class);
+		testSuite.addTestSuite(SelectBlogsTest.class);
+		testSuite.addTestSuite(RemoveBlogsTest.class);
+		testSuite.addTestSuite(SelectBookmarkTest.class);
+		testSuite.addTestSuite(RemoveBookmarkTest.class);
+		testSuite.addTestSuite(SelectDocumentTest.class);
+		testSuite.addTestSuite(RemoveDocumentTest.class);
+		testSuite.addTestSuite(SelectImageTest.class);
+		testSuite.addTestSuite(RemoveImageTest.class);
+		testSuite.addTestSuite(SelectWebContentTest.class);
+		testSuite.addTestSuite(RemoveWebContentTest.class);
+		testSuite.addTestSuite(RevertSettingsTest.class);
+		testSuite.addTestSuite(AddBlogsTest.class);
+		testSuite.addTestSuite(AddBookmarkTest.class);
+		testSuite.addTestSuite(AddDocumentTest.class);
+		testSuite.addTestSuite(AddImageTest.class);
+		testSuite.addTestSuite(AddWebContentTest.class);
+		testSuite.addTestSuite(SaveArchivedConfigurationTest.class);
+		testSuite.addTestSuite(EditConfigurationTest.class);
+		testSuite.addTestSuite(RestoreArchivedConfigurationTest.class);
+		testSuite.addTestSuite(DeleteArchivedConfigurationTest.class);
+		testSuite.addTestSuite(EditConfigurationTest.class);
+		testSuite.addTestSuite(ImportLARTest.class);
+		testSuite.addTestSuite(AssertImportLARTest.class);
+		testSuite.addTestSuite(EditNumberAssetsShownTest.class);
+		testSuite.addTestSuite(ConfigureSimplePaginationTest.class);
+		testSuite.addTestSuite(VerifySimplePaginationTest.class);
+		testSuite.addTestSuite(ConfigureRegularPaginationTest.class);
+		testSuite.addTestSuite(VerifyRegularPaginationTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
+
+		return testSuite;
 	}
 
 }

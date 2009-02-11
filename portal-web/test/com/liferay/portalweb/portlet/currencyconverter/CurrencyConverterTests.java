@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.currencyconverter;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="CurrencyConverterTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,16 +35,20 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class CurrencyConverterTests extends BaseTests {
 
-	public CurrencyConverterTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(ConvertCurrencyTest.class);
-		addTestSuite(ViewGraphsTest.class);
-		addTestSuite(ConfigurePreferencesTest.class);
-		addTestSuite(VerifyConfigurationTest.class);
-		addTestSuite(ReConfigurePreferencesTest.class);
-		addTestSuite(VerifyReConfigurationTest.class);
-		addTestSuite(TearDownTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(ConvertCurrencyTest.class);
+		testSuite.addTestSuite(ViewGraphsTest.class);
+		testSuite.addTestSuite(ConfigurePreferencesTest.class);
+		testSuite.addTestSuite(VerifyConfigurationTest.class);
+		testSuite.addTestSuite(ReConfigurePreferencesTest.class);
+		testSuite.addTestSuite(VerifyReConfigurationTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
+
+		return testSuite;
 	}
 
 }

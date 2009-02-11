@@ -54,6 +54,9 @@ import com.liferay.portalweb.portlet.samplejsp.SampleJSPTests;
 import com.liferay.portalweb.portlet.samplelar.SampleLARTests;
 import com.liferay.portalweb.portlet.samplelaszlo.SampleLaszloTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="Plugins1TestSuite.java.html"><b><i>View Source</i></b></a>
  *
@@ -62,41 +65,45 @@ import com.liferay.portalweb.portlet.samplelaszlo.SampleLaszloTests;
  */
 public class Plugins1TestSuite extends BaseTests {
 
-	public Plugins1TestSuite() {
-		addTests(LoginTests.class);
-		addTests(AlfrescoContentTests.class);
-		addTests(AnalogClockTests.class);
-		//addTests(ApplicationBuilderTests.class);
-		addTests(ChatTests.class);
-		addTests(FlashTests.class);
-		addTests(GoogleAdSenseTests.class);
-		addTests(GoogleGadgetTests.class);
-		addTests(GoogleMapsTests.class);
-		addTests(GoogleSearchTests.class);
-		addTests(IPGeocoderTests.class);
-		addTests(MailTests.class);
-		addTests(ReleaseToolsTests.class);
-		addTests(RubyConsoleTests.class);
-		addTests(SampleDAOTests.class);
-		addTests(SampleGroovyTests.class);
-		addTests(SampleHibernateTests.class);
-		addTests(SampleIcefacesJSF11SunFaceletsTests.class);
-		addTests(SampleIcefacesJSF11SunJSPTests.class);
-		addTests(SampleIcefacesJSF11SunMyfacesJSPTests.class);
-		addTests(SampleIcefacesJSF12SunFaceletsTests.class);
-		addTests(SampleJavascriptTests.class);
-		addTests(SampleJSF11MyfacesFaceletsTests.class);
-		addTests(SampleJSF11MyfacesJSPTests.class);
-		addTests(SampleJSF11SunFaceletsTests.class);
-		addTests(SampleJSF11SunJSPTests.class);
-		addTests(SampleJSF12SunFaceletsTests.class);
-		addTests(SampleJSF12SunJSPTests.class);
-		addTests(SampleJSONTests.class);
-		addTests(SampleJSPTests.class);
-		addTests(SampleLARTests.class);
-		addTests(SampleLaszloTests.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
 
-		addTestSuite(StopSeleniumTest.class);
+		testSuite.addTest(LoginTests.suite());
+		testSuite.addTest(AlfrescoContentTests.suite());
+		testSuite.addTest(AnalogClockTests.suite());
+		//testSuite.addTest(ApplicationBuilderTests.suite());
+		testSuite.addTest(ChatTests.suite());
+		testSuite.addTest(FlashTests.suite());
+		testSuite.addTest(GoogleAdSenseTests.suite());
+		testSuite.addTest(GoogleGadgetTests.suite());
+		testSuite.addTest(GoogleMapsTests.suite());
+		testSuite.addTest(GoogleSearchTests.suite());
+		testSuite.addTest(IPGeocoderTests.suite());
+		testSuite.addTest(MailTests.suite());
+		testSuite.addTest(ReleaseToolsTests.suite());
+		testSuite.addTest(RubyConsoleTests.suite());
+		testSuite.addTest(SampleDAOTests.suite());
+		testSuite.addTest(SampleGroovyTests.suite());
+		testSuite.addTest(SampleHibernateTests.suite());
+		testSuite.addTest(SampleIcefacesJSF11SunFaceletsTests.suite());
+		testSuite.addTest(SampleIcefacesJSF11SunJSPTests.suite());
+		testSuite.addTest(SampleIcefacesJSF11SunMyfacesJSPTests.suite());
+		testSuite.addTest(SampleIcefacesJSF12SunFaceletsTests.suite());
+		testSuite.addTest(SampleJavascriptTests.suite());
+		testSuite.addTest(SampleJSF11MyfacesFaceletsTests.suite());
+		testSuite.addTest(SampleJSF11MyfacesJSPTests.suite());
+		testSuite.addTest(SampleJSF11SunFaceletsTests.suite());
+		testSuite.addTest(SampleJSF11SunJSPTests.suite());
+		testSuite.addTest(SampleJSF12SunFaceletsTests.suite());
+		testSuite.addTest(SampleJSF12SunJSPTests.suite());
+		testSuite.addTest(SampleJSONTests.suite());
+		testSuite.addTest(SampleJSPTests.suite());
+		testSuite.addTest(SampleLARTests.suite());
+		testSuite.addTest(SampleLaszloTests.suite());
+
+		testSuite.addTestSuite(StopSeleniumTest.class);
+
+		return testSuite;
 	}
 
 }

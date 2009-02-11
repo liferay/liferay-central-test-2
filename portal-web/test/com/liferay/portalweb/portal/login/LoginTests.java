@@ -24,6 +24,9 @@ package com.liferay.portalweb.portal.login;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="LoginTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,8 +35,12 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class LoginTests extends BaseTests {
 
-	public LoginTests() {
-		addTestSuite(LoginTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(LoginTest.class);
+
+		return testSuite;
 	}
 
 }

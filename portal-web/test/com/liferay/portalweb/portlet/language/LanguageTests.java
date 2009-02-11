@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.language;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="LanguageTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,15 +35,19 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class LanguageTests extends BaseTests {
 
-	public LanguageTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(LanguageTest.class);
-		addTestSuite(InternationalizationJapaneseTest.class);
-		addTestSuite(InternationalizationSpanishTest.class);
-		addTestSuite(InternationalizationVerifyTest.class);
-		addTestSuite(ConfirmEnglishTest.class);
-		addTestSuite(DeletePageTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(LanguageTest.class);
+		testSuite.addTestSuite(InternationalizationJapaneseTest.class);
+		testSuite.addTestSuite(InternationalizationSpanishTest.class);
+		testSuite.addTestSuite(InternationalizationVerifyTest.class);
+		testSuite.addTestSuite(ConfirmEnglishTest.class);
+		testSuite.addTestSuite(DeletePageTest.class);
+
+		return testSuite;
 	}
 
 }

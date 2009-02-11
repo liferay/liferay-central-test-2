@@ -79,6 +79,9 @@ import com.liferay.portalweb.portlet.wikidisplay.WikiDisplayTests;
 import com.liferay.portalweb.portlet.words.WordsTests;
 import com.liferay.portalweb.portlet.xslcontent.XSLContentTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="PortalWebTestSuite.java.html"><b><i>View Source</i></b></a>
  *
@@ -87,70 +90,74 @@ import com.liferay.portalweb.portlet.xslcontent.XSLContentTests;
  */
 public class PortalWebTestSuite extends BaseTests {
 
-	public PortalWebTestSuite() {
-		addTests(LoginTests.class);
-		addTests(AnnouncementsTests.class);
-		addTests(AssetPublisherTests.class);
-		addTests(BibleGatewayTests.class);
-		addTests(BlogsTests.class);
-		addTests(BlogsAggregatorTests.class);
-		addTests(BookmarksTests.class);
-		addTests(BreadcrumbTests.class);
-		addTests(CalendarTests.class);
-		addTests(CurrencyConverterTests.class);
-		addTests(DictionaryTests.class);
-		addTests(DirectoryTests.class);
-		addTests(DocumentLibraryTests.class);
-		addTests(DocumentLibraryDisplayTests.class);
-		addTests(GlobalPrayerDigestTests.class);
-		addTests(GospelForAsiaTests.class);
-		addTests(HelloVelocityTests.class);
-		addTests(HelloWorldTests.class);
-		addTests(IFrameTests.class);
-		addTests(ImageGalleryTests.class);
-		addTests(InvitationTests.class);
-		//addTests(LanguageTests.class);
-		addTests(LoanCalculatorTests.class);
-		addTests(ManagePagesTests.class);
-		addTests(MessageBoardsTests.class);
-		addTests(NavigationTests.class);
-		addTests(NestedPortletsTests.class);
-		addTests(NetworkUtilitiesTests.class);
-		//addTests(OrganizationAdminTests.class);
-		addTests(PageCommentsTests.class);
-		addTests(PageRatingsTests.class);
-		addTests(PasswordGeneratorTests.class);
-		//addTests(PluginInstallerTests.class);
-		addTests(PollsTests.class);
-		addTests(PollsDisplayTests.class);
-		addTests(QuickNoteTests.class);
-		//addTests(RandomBibleVerseTests.class);
-		addTests(RecentBloggersTests.class);
-		addTests(RecentDocumentsTests.class);
-		addTests(ReverendFunTests.class);
-		addTests(RSSTests.class);
-		addTests(SearchTests.class);
-		addTests(SessionExpirationTests.class);
-		addTests(ShoppingTests.class);
-		addTests(SiteMapTests.class);
-		addTests(SMSTextMessengerTests.class);
-		addTests(SoftwareCatalogTests.class);
-		//addTests(StagingTests.class);
-		addTests(TagsAdminTests.class);
-		addTests(TranslatorTests.class);
-		addTests(UnitConverterTests.class);
-		addTests(UpdateManagerTests.class);
-		addTests(WebContentTests.class);
-		addTests(WebContentDisplayTests.class);
-		addTests(WebContentListTests.class);
-		addTests(WebContentSearchTests.class);
-		addTests(WebProxyTests.class);
-		addTests(WikiTests.class);
-		addTests(WikiDisplayTests.class);
-		addTests(WordsTests.class);
-		addTests(XSLContentTests.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
 
-		addTestSuite(StopSeleniumTest.class);
+		testSuite.addTest(LoginTests.suite());
+		testSuite.addTest(AnnouncementsTests.suite());
+		testSuite.addTest(AssetPublisherTests.suite());
+		testSuite.addTest(BibleGatewayTests.suite());
+		testSuite.addTest(BlogsTests.suite());
+		testSuite.addTest(BlogsAggregatorTests.suite());
+		testSuite.addTest(BookmarksTests.suite());
+		testSuite.addTest(BreadcrumbTests.suite());
+		testSuite.addTest(CalendarTests.suite());
+		testSuite.addTest(CurrencyConverterTests.suite());
+		testSuite.addTest(DictionaryTests.suite());
+		testSuite.addTest(DirectoryTests.suite());
+		testSuite.addTest(DocumentLibraryTests.suite());
+		testSuite.addTest(DocumentLibraryDisplayTests.suite());
+		testSuite.addTest(GlobalPrayerDigestTests.suite());
+		testSuite.addTest(GospelForAsiaTests.suite());
+		testSuite.addTest(HelloVelocityTests.suite());
+		testSuite.addTest(HelloWorldTests.suite());
+		testSuite.addTest(IFrameTests.suite());
+		testSuite.addTest(ImageGalleryTests.suite());
+		testSuite.addTest(InvitationTests.suite());
+		//testSuite.addTest(LanguageTests.suite());
+		testSuite.addTest(LoanCalculatorTests.suite());
+		testSuite.addTest(ManagePagesTests.suite());
+		testSuite.addTest(MessageBoardsTests.suite());
+		testSuite.addTest(NavigationTests.suite());
+		testSuite.addTest(NestedPortletsTests.suite());
+		testSuite.addTest(NetworkUtilitiesTests.suite());
+		//testSuite.addTest(OrganizationAdminTests.suite());
+		testSuite.addTest(PageCommentsTests.suite());
+		testSuite.addTest(PageRatingsTests.suite());
+		testSuite.addTest(PasswordGeneratorTests.suite());
+		//testSuite.addTest(PluginInstallerTests.suite());
+		testSuite.addTest(PollsTests.suite());
+		testSuite.addTest(PollsDisplayTests.suite());
+		testSuite.addTest(QuickNoteTests.suite());
+		//testSuite.addTest(RandomBibleVerseTests.suite());
+		testSuite.addTest(RecentBloggersTests.suite());
+		testSuite.addTest(RecentDocumentsTests.suite());
+		testSuite.addTest(ReverendFunTests.suite());
+		testSuite.addTest(RSSTests.suite());
+		testSuite.addTest(SearchTests.suite());
+		testSuite.addTest(SessionExpirationTests.suite());
+		testSuite.addTest(ShoppingTests.suite());
+		testSuite.addTest(SiteMapTests.suite());
+		testSuite.addTest(SMSTextMessengerTests.suite());
+		testSuite.addTest(SoftwareCatalogTests.suite());
+		//testSuite.addTest(StagingTests.suite());
+		testSuite.addTest(TagsAdminTests.suite());
+		testSuite.addTest(TranslatorTests.suite());
+		testSuite.addTest(UnitConverterTests.suite());
+		testSuite.addTest(UpdateManagerTests.suite());
+		testSuite.addTest(WebContentTests.suite());
+		testSuite.addTest(WebContentDisplayTests.suite());
+		testSuite.addTest(WebContentListTests.suite());
+		testSuite.addTest(WebContentSearchTests.suite());
+		testSuite.addTest(WebProxyTests.suite());
+		testSuite.addTest(WikiTests.suite());
+		testSuite.addTest(WikiDisplayTests.suite());
+		testSuite.addTest(WordsTests.suite());
+		testSuite.addTest(XSLContentTests.suite());
+
+		testSuite.addTestSuite(StopSeleniumTest.class);
+
+		return testSuite;
 	}
 
 }

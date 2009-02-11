@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.managepages;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="ManagePagesTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,12 +35,16 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class ManagePagesTests extends BaseTests {
 
-	public ManagePagesTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddChildPagesTest.class);
-		addTestSuite(DisplayOrderTest.class);
-		addTestSuite(AddJavaScriptTest.class);
-		addTestSuite(DeletePageTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddChildPagesTest.class);
+		testSuite.addTestSuite(DisplayOrderTest.class);
+		testSuite.addTestSuite(AddJavaScriptTest.class);
+		testSuite.addTestSuite(DeletePageTest.class);
+
+		return testSuite;
 	}
 
 }

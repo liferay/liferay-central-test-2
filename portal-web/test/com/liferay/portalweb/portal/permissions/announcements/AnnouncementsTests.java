@@ -24,6 +24,9 @@ package com.liferay.portalweb.portal.permissions.announcements;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="AnnouncementsTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,27 +35,31 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class AnnouncementsTests extends BaseTests {
 
-	public AnnouncementsTests() {
-		addTestSuite(SA_LoginTest.class);
-		addTestSuite(SA_AddPageTest.class);
-		addTestSuite(SA_AddPortletTest.class);
-		addTestSuite(SA_AddGeneralAnnouncementTest.class);
-		addTestSuite(SA_AddCAAnnouncementTest.class);
-		addTestSuite(SA_AddMemberAnnouncementTest.class);
-		addTestSuite(SA_AddGuestAnnouncementTest.class);
-		addTestSuite(SA_LogoutTest.class);
-		addTestSuite(CA_LoginTest.class);
-		addTestSuite(CA_AssertViewTest.class);
-		addTestSuite(CA_AssertActionsTest.class);
-		addTestSuite(CA_LogoutTest.class);
-		addTestSuite(Member_LoginTest.class);
-		addTestSuite(Member_AssertViewTest.class);
-		addTestSuite(Member_DismissAnnouncementTest.class);
-		addTestSuite(Member_AssertActionsTest.class);
-		addTestSuite(Member_LogoutTest.class);
-		addTestSuite(Guest_AssertViewTest.class);
-		addTestSuite(Guest_AssertActionsTest.class);
-		addTestSuite(DeletePageTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(SA_LoginTest.class);
+		testSuite.addTestSuite(SA_AddPageTest.class);
+		testSuite.addTestSuite(SA_AddPortletTest.class);
+		testSuite.addTestSuite(SA_AddGeneralAnnouncementTest.class);
+		testSuite.addTestSuite(SA_AddCAAnnouncementTest.class);
+		testSuite.addTestSuite(SA_AddMemberAnnouncementTest.class);
+		testSuite.addTestSuite(SA_AddGuestAnnouncementTest.class);
+		testSuite.addTestSuite(SA_LogoutTest.class);
+		testSuite.addTestSuite(CA_LoginTest.class);
+		testSuite.addTestSuite(CA_AssertViewTest.class);
+		testSuite.addTestSuite(CA_AssertActionsTest.class);
+		testSuite.addTestSuite(CA_LogoutTest.class);
+		testSuite.addTestSuite(Member_LoginTest.class);
+		testSuite.addTestSuite(Member_AssertViewTest.class);
+		testSuite.addTestSuite(Member_DismissAnnouncementTest.class);
+		testSuite.addTestSuite(Member_AssertActionsTest.class);
+		testSuite.addTestSuite(Member_LogoutTest.class);
+		testSuite.addTestSuite(Guest_AssertViewTest.class);
+		testSuite.addTestSuite(Guest_AssertActionsTest.class);
+		testSuite.addTestSuite(DeletePageTest.class);
+
+		return testSuite;
 	}
 
 }

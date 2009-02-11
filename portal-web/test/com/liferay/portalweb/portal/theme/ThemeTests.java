@@ -24,6 +24,9 @@ package com.liferay.portalweb.portal.theme;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="ThemeTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,17 +35,21 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class ThemeTests extends BaseTests {
 
-	public ThemeTests() {
-		addTestSuite(SelectThemeTest.class);
-		addTestSuite(ScreengrabSignInTest.class);
-		addTestSuite(ScreengrabCalendarTest.class);
-		addTestSuite(ScreengrabDocumentLibraryTest.class);
-		addTestSuite(ScreengrabQuickNoteTest.class);
-		addTestSuite(ScreengrabCurrencyConverterTest.class);
-		addTestSuite(ScreengrabPageCommentTest.class);
-		addTestSuite(ScreengrabLayoutTest.class);
-		addTestSuite(ScreengrabAddApplicationTest.class);
-		addTestSuite(IterateThemeTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(SelectThemeTest.class);
+		testSuite.addTestSuite(ScreengrabSignInTest.class);
+		testSuite.addTestSuite(ScreengrabCalendarTest.class);
+		testSuite.addTestSuite(ScreengrabDocumentLibraryTest.class);
+		testSuite.addTestSuite(ScreengrabQuickNoteTest.class);
+		testSuite.addTestSuite(ScreengrabCurrencyConverterTest.class);
+		testSuite.addTestSuite(ScreengrabPageCommentTest.class);
+		testSuite.addTestSuite(ScreengrabLayoutTest.class);
+		testSuite.addTestSuite(ScreengrabAddApplicationTest.class);
+		testSuite.addTestSuite(IterateThemeTest.class);
+
+		return testSuite;
 	}
 
 }

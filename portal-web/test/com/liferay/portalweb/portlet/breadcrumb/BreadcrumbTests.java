@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.breadcrumb;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="BreadcrumbTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,19 +35,23 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class BreadcrumbTests extends BaseTests {
 
-	public BreadcrumbTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddChildPageTest.class);
-		addTestSuite(AddPortletToChildTest.class);
-		addTestSuite(AssertBreadCrumbPresentTest.class);
-		addTestSuite(AddContentToChildTest.class);
-		addTestSuite(AssertContentPresentTest.class);
-		addTestSuite(ConfigureDisplayStyleTest.class);
-		addTestSuite(VerifyDisplayStyleTest.class);
-		addTestSuite(ImportLARTest.class);
-		addTestSuite(AssertImportLARTest.class);
-		addTestSuite(TearDownTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddChildPageTest.class);
+		testSuite.addTestSuite(AddPortletToChildTest.class);
+		testSuite.addTestSuite(AssertBreadCrumbPresentTest.class);
+		testSuite.addTestSuite(AddContentToChildTest.class);
+		testSuite.addTestSuite(AssertContentPresentTest.class);
+		testSuite.addTestSuite(ConfigureDisplayStyleTest.class);
+		testSuite.addTestSuite(VerifyDisplayStyleTest.class);
+		testSuite.addTestSuite(ImportLARTest.class);
+		testSuite.addTestSuite(AssertImportLARTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
+
+		return testSuite;
 	}
 
 }

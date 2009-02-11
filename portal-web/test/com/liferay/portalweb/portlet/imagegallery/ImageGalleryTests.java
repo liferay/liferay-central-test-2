@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.imagegallery;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="ImageGalleryTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,22 +35,26 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class ImageGalleryTests extends BaseTests {
 
-	public ImageGalleryTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddFolderTest.class);
-		addTestSuite(AddSubfolderTest.class);
-		addTestSuite(AddImageTest.class);
-		addTestSuite(ViewSlideshowTest.class);
-		addTestSuite(BrowseImageTabsTest.class);
-		addTestSuite(SearchPortletTest.class);
-		addTestSuite(AddSecondTestFoldersTest.class);
-		addTestSuite(MoveImageTest.class);
-		addTestSuite(DeleteFoldersTest.class);
-		addTestSuite(UploadLARFileTest.class);
-		addTestSuite(AssertLARImportTest.class);
-		addTestSuite(ImageEdittingTest.class);
-		addTestSuite(TearDownTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddFolderTest.class);
+		testSuite.addTestSuite(AddSubfolderTest.class);
+		testSuite.addTestSuite(AddImageTest.class);
+		testSuite.addTestSuite(ViewSlideshowTest.class);
+		testSuite.addTestSuite(BrowseImageTabsTest.class);
+		testSuite.addTestSuite(SearchPortletTest.class);
+		testSuite.addTestSuite(AddSecondTestFoldersTest.class);
+		testSuite.addTestSuite(MoveImageTest.class);
+		testSuite.addTestSuite(DeleteFoldersTest.class);
+		testSuite.addTestSuite(UploadLARFileTest.class);
+		testSuite.addTestSuite(AssertLARImportTest.class);
+		testSuite.addTestSuite(ImageEdittingTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
+
+		return testSuite;
 	}
 
 }

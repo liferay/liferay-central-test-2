@@ -29,6 +29,9 @@ import com.liferay.portalweb.portal.permissions.controlpanel.ControlPanelTests;
 import com.liferay.portalweb.portal.permissions.documentlibrary.DocumentLibraryTests;
 import com.liferay.portalweb.portal.permissions.messageboards.MessageBoardsTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="PermissionsTestSuite.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,15 +40,19 @@ import com.liferay.portalweb.portal.permissions.messageboards.MessageBoardsTests
  */
 public class PermissionsTestSuite extends BaseTests {
 
-	public PermissionsTestSuite() {
-		addTests(LoginTests.class);
-		addTests(ControlPanelTests.class);
-		addTests(AnnouncementsTests.class);
-		addTests(BlogsTests.class);
-		addTests(DocumentLibraryTests.class);
-		addTests(MessageBoardsTests.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
 
-		addTestSuite(StopSeleniumTest.class);
+		testSuite.addTest(LoginTests.suite());
+		testSuite.addTest(ControlPanelTests.suite());
+		testSuite.addTest(AnnouncementsTests.suite());
+		testSuite.addTest(BlogsTests.suite());
+		testSuite.addTest(DocumentLibraryTests.suite());
+		testSuite.addTest(MessageBoardsTests.suite());
+
+		testSuite.addTestSuite(StopSeleniumTest.class);
+
+		return testSuite;
 	}
 
 }

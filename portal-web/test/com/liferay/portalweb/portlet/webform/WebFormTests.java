@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.webform;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="WebFormTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,12 +35,16 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class WebFormTests extends BaseTests {
 
-	public WebFormTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(EditFormTest.class);
-		addTestSuite(ArchiveTest.class);
-		addTestSuite(DeletePageTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(EditFormTest.class);
+		testSuite.addTestSuite(ArchiveTest.class);
+		testSuite.addTestSuite(DeletePageTest.class);
+
+		return testSuite;
 	}
 
 }

@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.blogs;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="BlogsTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,27 +35,31 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class BlogsTests extends BaseTests {
 
-	public BlogsTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddEntryTest.class);
-		addTestSuite(AddEntryCommentTest.class);
-		addTestSuite(AddSecondEntryTest.class);
-		addTestSuite(AddSecondEntryCommentTest.class);
-		addTestSuite(EditSecondCommentTest.class);
-		addTestSuite(EditSecondEntryTest.class);
-		addTestSuite(SearchBlogsTest.class);
-		addTestSuite(DeleteSecondCommentTest.class);
-		addTestSuite(DeleteSecondEntryTest.class);
-		addTestSuite(AddNullEntryTest.class);
-		addTestSuite(AddNullTitleTest.class);
-		addTestSuite(AddDraftEntryTest.class);
-		addTestSuite(PublishDraftEntryTest.class);
-		addTestSuite(ConfigureDisplaySettingsTest.class);
-		addTestSuite(DeleteEntryTest.class);
-		addTestSuite(ImportLARTest.class);
-		addTestSuite(AssertImportLARTest.class);
-		addTestSuite(TearDownTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddEntryTest.class);
+		testSuite.addTestSuite(AddEntryCommentTest.class);
+		testSuite.addTestSuite(AddSecondEntryTest.class);
+		testSuite.addTestSuite(AddSecondEntryCommentTest.class);
+		testSuite.addTestSuite(EditSecondCommentTest.class);
+		testSuite.addTestSuite(EditSecondEntryTest.class);
+		testSuite.addTestSuite(SearchBlogsTest.class);
+		testSuite.addTestSuite(DeleteSecondCommentTest.class);
+		testSuite.addTestSuite(DeleteSecondEntryTest.class);
+		testSuite.addTestSuite(AddNullEntryTest.class);
+		testSuite.addTestSuite(AddNullTitleTest.class);
+		testSuite.addTestSuite(AddDraftEntryTest.class);
+		testSuite.addTestSuite(PublishDraftEntryTest.class);
+		testSuite.addTestSuite(ConfigureDisplaySettingsTest.class);
+		testSuite.addTestSuite(DeleteEntryTest.class);
+		testSuite.addTestSuite(ImportLARTest.class);
+		testSuite.addTestSuite(AssertImportLARTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
+
+		return testSuite;
 	}
 
 }

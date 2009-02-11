@@ -62,6 +62,9 @@ import com.liferay.portalweb.portlet.westminstercatechism.WestminsterCatechismTe
 import com.liferay.portalweb.portlet.wikinavigation.WikiNavigationTests;
 import com.liferay.portalweb.portlet.wol.WOLTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="Plugins2TestSuite.java.html"><b><i>View Source</i></b></a>
  *
@@ -70,50 +73,54 @@ import com.liferay.portalweb.portlet.wol.WOLTests;
  */
 public class Plugins2TestSuite extends BaseTests {
 
-	public Plugins2TestSuite() {
-		addTests(LoginTests.class);
-		addTests(SampleLocalizedTests.class);
-		addTests(SampleOrbeonFormsTests.class);
-		addTests(SamplePermissionsTests.class);
-		addTests(SamplePHPTests.class);
-		addTests(SamplePortalClientTests.class);
-		addTests(SamplePortalClientTests.class);
-		addTests(SamplePythonTests.class);
-		addTests(SampleRubyTests.class);
-		addTests(SampleServiceBuilderTests.class);
-		addTests(SampleSignInTests.class);
-		addTests(SampleSpringTests.class);
-		addTests(SampleStrutsTests.class);
-		//addTests(SampleStrutsLiferayTests.class);
-		addTests(SampleTapestryTests.class);
-		addTests(SampleTestTests.class);
-		addTests(SampleUITagLibsTests.class);
-		addTests(SampleWAPTests.class);
-		addTests(StocksTests.class);
-		addTests(SunBookmarkTests.class);
-		addTests(SunElluminateTests.class);
-		addTests(SunFlickrTests.class);
-		addTests(SunIFrameTests.class);
-		addTests(SunMashupTests.class);
-		addTests(SunNotepadTests.class);
-		addTests(SunPhotoShowAjaxTests.class);
-		addTests(SunPrivacyGuardTests.class);
-		addTests(SunRSSTests.class);
-		addTests(SunShowTimeTests.class);
-		addTests(SunSingleVideoTests.class);
-		addTests(SunTourDetailsTests.class);
-		addTests(SunTourListingTests.class);
-		addTests(SunTourMapTests.class);
-		addTests(SunTourWeatherTests.class);
-		addTests(SunYoutubeTests.class);
-		addTests(TwitterTests.class);
-		addTests(WeatherTests.class);
-		addTests(WebFormTests.class);
-		addTests(WestminsterCatechismTests.class);
-		addTests(WikiNavigationTests.class);
-		addTests(WOLTests.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
 
-		addTestSuite(StopSeleniumTest.class);
+		testSuite.addTest(LoginTests.suite());
+		testSuite.addTest(SampleLocalizedTests.suite());
+		testSuite.addTest(SampleOrbeonFormsTests.suite());
+		testSuite.addTest(SamplePermissionsTests.suite());
+		testSuite.addTest(SamplePHPTests.suite());
+		testSuite.addTest(SamplePortalClientTests.suite());
+		testSuite.addTest(SamplePortalClientTests.suite());
+		testSuite.addTest(SamplePythonTests.suite());
+		testSuite.addTest(SampleRubyTests.suite());
+		testSuite.addTest(SampleServiceBuilderTests.suite());
+		testSuite.addTest(SampleSignInTests.suite());
+		testSuite.addTest(SampleSpringTests.suite());
+		testSuite.addTest(SampleStrutsTests.suite());
+		//testSuite.addTest(SampleStrutsLiferayTests.suite());
+		testSuite.addTest(SampleTapestryTests.suite());
+		testSuite.addTest(SampleTestTests.suite());
+		testSuite.addTest(SampleUITagLibsTests.suite());
+		testSuite.addTest(SampleWAPTests.suite());
+		testSuite.addTest(StocksTests.suite());
+		testSuite.addTest(SunBookmarkTests.suite());
+		testSuite.addTest(SunElluminateTests.suite());
+		testSuite.addTest(SunFlickrTests.suite());
+		testSuite.addTest(SunIFrameTests.suite());
+		testSuite.addTest(SunMashupTests.suite());
+		testSuite.addTest(SunNotepadTests.suite());
+		testSuite.addTest(SunPhotoShowAjaxTests.suite());
+		testSuite.addTest(SunPrivacyGuardTests.suite());
+		testSuite.addTest(SunRSSTests.suite());
+		testSuite.addTest(SunShowTimeTests.suite());
+		testSuite.addTest(SunSingleVideoTests.suite());
+		testSuite.addTest(SunTourDetailsTests.suite());
+		testSuite.addTest(SunTourListingTests.suite());
+		testSuite.addTest(SunTourMapTests.suite());
+		testSuite.addTest(SunTourWeatherTests.suite());
+		testSuite.addTest(SunYoutubeTests.suite());
+		testSuite.addTest(TwitterTests.suite());
+		testSuite.addTest(WeatherTests.suite());
+		testSuite.addTest(WebFormTests.suite());
+		testSuite.addTest(WestminsterCatechismTests.suite());
+		testSuite.addTest(WikiNavigationTests.suite());
+		testSuite.addTest(WOLTests.suite());
+
+		testSuite.addTestSuite(StopSeleniumTest.class);
+
+		return testSuite;
 	}
 
 }

@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.announcements;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="AnnouncementsTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,19 +35,23 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class AnnouncementsTests extends BaseTests {
 
-	public AnnouncementsTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddGeneralAnnouncementTest.class);
-		addTestSuite(EditAnnoucementTest.class);
-		addTestSuite(MarkAsReadTest.class);
-		addTestSuite(DeleteAnnouncementTest.class);
-		addTestSuite(AddImportantPriorityAnnouncementTest.class);
-		addTestSuite(AddNormalPriorityAnnouncementTest.class);
-		addTestSuite(AssertCorrectPriorityOrderTest.class);
-		addTestSuite(AddNullContentAnnouncementTest.class);
-		addTestSuite(AddNullTitleAnnouncementTest.class);
-		addTestSuite(TearDownTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddGeneralAnnouncementTest.class);
+		testSuite.addTestSuite(EditAnnoucementTest.class);
+		testSuite.addTestSuite(MarkAsReadTest.class);
+		testSuite.addTestSuite(DeleteAnnouncementTest.class);
+		testSuite.addTestSuite(AddImportantPriorityAnnouncementTest.class);
+		testSuite.addTestSuite(AddNormalPriorityAnnouncementTest.class);
+		testSuite.addTestSuite(AssertCorrectPriorityOrderTest.class);
+		testSuite.addTestSuite(AddNullContentAnnouncementTest.class);
+		testSuite.addTestSuite(AddNullTitleAnnouncementTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
+
+		return testSuite;
 	}
 
 }

@@ -24,6 +24,9 @@ package com.liferay.portalweb.portal.permissions.blogs;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="BlogsTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,23 +35,27 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class BlogsTests extends BaseTests {
 
-	public BlogsTests() {
-		addTestSuite(CA_LoginTest.class);
-		addTestSuite(CA_AddPageTest.class);
-		addTestSuite(CA_AddPortletTest.class);
-		addTestSuite(CA_AddEntryTest.class);
-		addTestSuite(CA_AddCommentTest.class);
-		addTestSuite(CA_AssertActionsTest.class);
-		addTestSuite(CA_LogoutTest.class);
-		addTestSuite(Member_LoginTest.class);
-		addTestSuite(Member_ViewEntryTest.class);
-		addTestSuite(Member_AddCommentTest.class);
-		addTestSuite(Member_AssertActionsTest.class);
-		addTestSuite(Member_LogoutTest.class);
-		addTestSuite(Guest_ViewEntryTest.class);
-		addTestSuite(Guest_ViewCommentsTest.class);
-		addTestSuite(Guest_AssertActionsTest.class);
-		addTestSuite(DeletePageTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(CA_LoginTest.class);
+		testSuite.addTestSuite(CA_AddPageTest.class);
+		testSuite.addTestSuite(CA_AddPortletTest.class);
+		testSuite.addTestSuite(CA_AddEntryTest.class);
+		testSuite.addTestSuite(CA_AddCommentTest.class);
+		testSuite.addTestSuite(CA_AssertActionsTest.class);
+		testSuite.addTestSuite(CA_LogoutTest.class);
+		testSuite.addTestSuite(Member_LoginTest.class);
+		testSuite.addTestSuite(Member_ViewEntryTest.class);
+		testSuite.addTestSuite(Member_AddCommentTest.class);
+		testSuite.addTestSuite(Member_AssertActionsTest.class);
+		testSuite.addTestSuite(Member_LogoutTest.class);
+		testSuite.addTestSuite(Guest_ViewEntryTest.class);
+		testSuite.addTestSuite(Guest_ViewCommentsTest.class);
+		testSuite.addTestSuite(Guest_AssertActionsTest.class);
+		testSuite.addTestSuite(DeletePageTest.class);
+
+		return testSuite;
 	}
 
 }

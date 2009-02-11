@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.wsrpproxy;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="WSRPProxyTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,11 +35,15 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class WSRPProxyTests extends BaseTests {
 
-	public WSRPProxyTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(VerifyTest.class);
-		addTestSuite(DeletePageTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(VerifyTest.class);
+		testSuite.addTestSuite(DeletePageTest.class);
+
+		return testSuite;
 	}
 
 }

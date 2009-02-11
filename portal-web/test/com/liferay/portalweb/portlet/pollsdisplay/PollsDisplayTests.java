@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.pollsdisplay;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="PollsDisplayTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,13 +35,17 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class PollsDisplayTests extends BaseTests {
 
-	public PollsDisplayTests() {
-		addTestSuite(SetupTest.class);
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(EditPreferencesTest.class);
-		addTestSuite(AddVoteTest.class);
-		addTestSuite(TearDownTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(SetupTest.class);
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(EditPreferencesTest.class);
+		testSuite.addTestSuite(AddVoteTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
+
+		return testSuite;
 	}
 
 }

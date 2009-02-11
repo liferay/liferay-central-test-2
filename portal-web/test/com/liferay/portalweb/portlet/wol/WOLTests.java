@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.wol;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="WOLTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,29 +35,33 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class WOLTests extends BaseTests {
 
-	public WOLTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddFriendsPortletTest.class);
-		addTestSuite(RemovePortletTest.class);
-		addTestSuite(AddFriendsActivitiesPortletTest.class);
-		addTestSuite(RemovePortletTest.class);
-		addTestSuite(AddJIRAPortletTest.class);
-		addTestSuite(RemovePortletTest.class);
-		addTestSuite(AddMapPortletTest.class);
-		addTestSuite(RemovePortletTest.class);
-		addTestSuite(AddMeetupsPortletTest.class);
-		addTestSuite(RemovePortletTest.class);
-		addTestSuite(AddMembersPortletTest.class);
-		addTestSuite(RemovePortletTest.class);
-		addTestSuite(AddMembersActivitiesPortletTest.class);
-		addTestSuite(RemovePortletTest.class);
-		addTestSuite(AddSVNPortletTest.class);
-		addTestSuite(RemovePortletTest.class);
-		addTestSuite(AddSummaryPortletTest.class);
-		addTestSuite(RemovePortletTest.class);
-		addTestSuite(AddWallPortletTest.class);
-		addTestSuite(RemovePortletTest.class);
-		addTestSuite(DeletePageTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddFriendsPortletTest.class);
+		testSuite.addTestSuite(RemovePortletTest.class);
+		testSuite.addTestSuite(AddFriendsActivitiesPortletTest.class);
+		testSuite.addTestSuite(RemovePortletTest.class);
+		testSuite.addTestSuite(AddJIRAPortletTest.class);
+		testSuite.addTestSuite(RemovePortletTest.class);
+		testSuite.addTestSuite(AddMapPortletTest.class);
+		testSuite.addTestSuite(RemovePortletTest.class);
+		testSuite.addTestSuite(AddMeetupsPortletTest.class);
+		testSuite.addTestSuite(RemovePortletTest.class);
+		testSuite.addTestSuite(AddMembersPortletTest.class);
+		testSuite.addTestSuite(RemovePortletTest.class);
+		testSuite.addTestSuite(AddMembersActivitiesPortletTest.class);
+		testSuite.addTestSuite(RemovePortletTest.class);
+		testSuite.addTestSuite(AddSVNPortletTest.class);
+		testSuite.addTestSuite(RemovePortletTest.class);
+		testSuite.addTestSuite(AddSummaryPortletTest.class);
+		testSuite.addTestSuite(RemovePortletTest.class);
+		testSuite.addTestSuite(AddWallPortletTest.class);
+		testSuite.addTestSuite(RemovePortletTest.class);
+		testSuite.addTestSuite(DeletePageTest.class);
+
+		return testSuite;
 	}
 
 }

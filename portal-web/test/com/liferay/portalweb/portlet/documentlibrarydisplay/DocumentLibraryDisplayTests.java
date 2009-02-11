@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.documentlibrarydisplay;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="DocumentLibraryDisplayTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,13 +35,17 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class DocumentLibraryDisplayTests extends BaseTests {
 
-	public DocumentLibraryDisplayTests() {
-		addTestSuite(SetupTest.class);
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(ConfigurePortletTest.class);
-		addTestSuite(SearchPortletTest.class);
-		addTestSuite(TearDownTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(SetupTest.class);
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(ConfigurePortletTest.class);
+		testSuite.addTestSuite(SearchPortletTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
+
+		return testSuite;
 	}
 
 }

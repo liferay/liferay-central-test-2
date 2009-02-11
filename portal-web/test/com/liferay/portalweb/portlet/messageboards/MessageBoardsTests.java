@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.messageboards;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="MessageBoardsTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,31 +35,35 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class MessageBoardsTests extends BaseTests {
 
-	public MessageBoardsTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddCategoryTest.class);
-		addTestSuite(AddSubcategoryTest.class);
-		addTestSuite(AddMessageTest.class);
-		addTestSuite(AddReplyMessageTest.class);
-		addTestSuite(AddSecondReplyMessageTest.class);
-		addTestSuite(AddThirdReplyMessageTest.class);
-		addTestSuite(SearchTest.class);
-		addTestSuite(SplitThreadTest.class);
-		addTestSuite(AddSecondSubcategoryTest.class);
-		addTestSuite(AddNullEntryTest.class);
-		addTestSuite(AddNullTitleTest.class);
-		addTestSuite(AddDeletableMessageTest.class);
-		addTestSuite(RecentPostsTest.class);
-		addTestSuite(AddMoveCategoryTest.class);
-		addTestSuite(MoveThreadTest.class);
-		addTestSuite(DeleteMessageTest.class);
-		addTestSuite(EditCategoryTest.class);
-		addTestSuite(EditMessageTest.class);
-		addTestSuite(DeleteAllTest.class);
-		addTestSuite(ImportLARTest.class);
-		addTestSuite(VerifyImportLARTest.class);
-		addTestSuite(TearDownTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddCategoryTest.class);
+		testSuite.addTestSuite(AddSubcategoryTest.class);
+		testSuite.addTestSuite(AddMessageTest.class);
+		testSuite.addTestSuite(AddReplyMessageTest.class);
+		testSuite.addTestSuite(AddSecondReplyMessageTest.class);
+		testSuite.addTestSuite(AddThirdReplyMessageTest.class);
+		testSuite.addTestSuite(SearchTest.class);
+		testSuite.addTestSuite(SplitThreadTest.class);
+		testSuite.addTestSuite(AddSecondSubcategoryTest.class);
+		testSuite.addTestSuite(AddNullEntryTest.class);
+		testSuite.addTestSuite(AddNullTitleTest.class);
+		testSuite.addTestSuite(AddDeletableMessageTest.class);
+		testSuite.addTestSuite(RecentPostsTest.class);
+		testSuite.addTestSuite(AddMoveCategoryTest.class);
+		testSuite.addTestSuite(MoveThreadTest.class);
+		testSuite.addTestSuite(DeleteMessageTest.class);
+		testSuite.addTestSuite(EditCategoryTest.class);
+		testSuite.addTestSuite(EditMessageTest.class);
+		testSuite.addTestSuite(DeleteAllTest.class);
+		testSuite.addTestSuite(ImportLARTest.class);
+		testSuite.addTestSuite(VerifyImportLARTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
+
+		return testSuite;
 	}
 
 }

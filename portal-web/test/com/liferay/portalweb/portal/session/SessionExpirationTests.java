@@ -24,6 +24,9 @@ package com.liferay.portalweb.portal.session;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="SessionExpirationTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,14 +35,18 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class SessionExpirationTests extends BaseTests {
 
-	public SessionExpirationTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(SignInWithOutRememberMeTest.class);
-		addTestSuite(ExtendSessionTest.class);
-		addTestSuite(ConfirmSessionExpireTest.class);
-		addTestSuite(RememberMeLoginTest.class);
-		addTestSuite(ConfirmNoSessionExpireTest.class);
-		addTestSuite(DeletePageTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(SignInWithOutRememberMeTest.class);
+		testSuite.addTestSuite(ExtendSessionTest.class);
+		testSuite.addTestSuite(ConfirmSessionExpireTest.class);
+		testSuite.addTestSuite(RememberMeLoginTest.class);
+		testSuite.addTestSuite(ConfirmNoSessionExpireTest.class);
+		testSuite.addTestSuite(DeletePageTest.class);
+
+		return testSuite;
 	}
 
 }

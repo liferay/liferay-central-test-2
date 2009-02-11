@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.staging;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="StagingTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,46 +35,50 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class StagingTests extends BaseTests {
 
-	public StagingTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddCommunitiesPortletTest.class);
-		addTestSuite(FirstNavigateTestPublicCommunityTest.class);
-		addTestSuite(AddPublicPortletsTest.class);
-		addTestSuite(FirstNavigateTestPrivateCommunityTest.class);
-		addTestSuite(AddPrivatePortletsTest.class);
-		addTestSuite(ActivateStagingTest.class);
-		addTestSuite(NavigateTestCommunityTest.class);
-		addTestSuite(AddStagedBlogTest.class);
-		addTestSuite(ConfirmNoBlogOnLiveTest.class);
-		addTestSuite(PublishBlogToLiveTest.class);
-		addTestSuite(ConfirmBlogOnLiveTest.class);
-		addTestSuite(AddStagedEventTest.class);
-		addTestSuite(ConfirmNoPublicEventTest.class);
-		addTestSuite(PublishEventToLiveTest.class);
-		addTestSuite(ConfirmEventOnLiveTest.class);
-		addTestSuite(AddSecondLiveBlogTest.class);
-		addTestSuite(ConfirmNoSecondBlogOnStagedTest.class);
-		addTestSuite(ManagePagesCopyFromLiveTest.class);
-		addTestSuite(AddThirdStagedBlogTest.class);
-		addTestSuite(ConfirmNoThirdBlogOnLiveTest.class);
-		addTestSuite(ManagePagesPublishToLiveTest.class);
-		addTestSuite(ConfirmThirdBlogOnLiveTest.class);
-		addTestSuite(ConfirmElementsNotPresentTest.class);
-		addTestSuite(NavigatePrivateTestCommunityTest.class);
-		addTestSuite(AddStagedPrivateCalendarTest.class);
-		addTestSuite(AddSecondPrivateEventTest.class);
-		addTestSuite(ConfirmNoPrivateEventTest.class);
-		//addTestSuite(CreateRemoteTestCommunityTest.class);
-		//addTestSuite(StoreCommunityIDTest.class);
-		//addTestSuite(AssertNoSampleDataOnRemoteTest.class);
-		//addTestSuite(RemotePublishStagedPublicPagesTest.class);
-		//addTestSuite(VerifyPublicStagedRemotePublishingTest.class);
-		//addTestSuite(AddNewPrivateSamplePortletDataTest.class);
-		//addTestSuite(PublishNewPrivateSampleDataToLiveTest.class);
-		//addTestSuite(VerifyNewPrivateSampleDataTest.class);
-		//addTestSuite(RemotePublishStagedPrivatePagesTest.class);
-		//addTestSuite(VerifyRemotePublishStagedPrivatePagesTest.class);
-		addTestSuite(DeletePageTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddCommunitiesPortletTest.class);
+		testSuite.addTestSuite(FirstNavigateTestPublicCommunityTest.class);
+		testSuite.addTestSuite(AddPublicPortletsTest.class);
+		testSuite.addTestSuite(FirstNavigateTestPrivateCommunityTest.class);
+		testSuite.addTestSuite(AddPrivatePortletsTest.class);
+		testSuite.addTestSuite(ActivateStagingTest.class);
+		testSuite.addTestSuite(NavigateTestCommunityTest.class);
+		testSuite.addTestSuite(AddStagedBlogTest.class);
+		testSuite.addTestSuite(ConfirmNoBlogOnLiveTest.class);
+		testSuite.addTestSuite(PublishBlogToLiveTest.class);
+		testSuite.addTestSuite(ConfirmBlogOnLiveTest.class);
+		testSuite.addTestSuite(AddStagedEventTest.class);
+		testSuite.addTestSuite(ConfirmNoPublicEventTest.class);
+		testSuite.addTestSuite(PublishEventToLiveTest.class);
+		testSuite.addTestSuite(ConfirmEventOnLiveTest.class);
+		testSuite.addTestSuite(AddSecondLiveBlogTest.class);
+		testSuite.addTestSuite(ConfirmNoSecondBlogOnStagedTest.class);
+		testSuite.addTestSuite(ManagePagesCopyFromLiveTest.class);
+		testSuite.addTestSuite(AddThirdStagedBlogTest.class);
+		testSuite.addTestSuite(ConfirmNoThirdBlogOnLiveTest.class);
+		testSuite.addTestSuite(ManagePagesPublishToLiveTest.class);
+		testSuite.addTestSuite(ConfirmThirdBlogOnLiveTest.class);
+		testSuite.addTestSuite(ConfirmElementsNotPresentTest.class);
+		testSuite.addTestSuite(NavigatePrivateTestCommunityTest.class);
+		testSuite.addTestSuite(AddStagedPrivateCalendarTest.class);
+		testSuite.addTestSuite(AddSecondPrivateEventTest.class);
+		testSuite.addTestSuite(ConfirmNoPrivateEventTest.class);
+		//testSuite.addTestSuite(CreateRemoteTestCommunityTest.class);
+		//testSuite.addTestSuite(StoreCommunityIDTest.class);
+		//testSuite.addTestSuite(AssertNoSampleDataOnRemoteTest.class);
+		//testSuite.addTestSuite(RemotePublishStagedPublicPagesTest.class);
+		//testSuite.addTestSuite(VerifyPublicStagedRemotePublishingTest.class);
+		//testSuite.addTestSuite(AddNewPrivateSamplePortletDataTest.class);
+		//testSuite.addTestSuite(PublishNewPrivateSampleDataToLiveTest.class);
+		//testSuite.addTestSuite(VerifyNewPrivateSampleDataTest.class);
+		//testSuite.addTestSuite(RemotePublishStagedPrivatePagesTest.class);
+		//testSuite.addTestSuite(VerifyRemotePublishStagedPrivatePagesTest.class
+		testSuite.addTestSuite(DeletePageTest.class);
+
+		return testSuite;
 	}
 
 }

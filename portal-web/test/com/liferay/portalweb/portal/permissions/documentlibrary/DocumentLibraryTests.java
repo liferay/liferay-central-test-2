@@ -24,6 +24,9 @@ package com.liferay.portalweb.portal.permissions.documentlibrary;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="DocumentLibraryTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,69 +35,73 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class DocumentLibraryTests extends BaseTests {
 
-	public DocumentLibraryTests() {
-		addTestSuite(SA_LoginTest.class);
-		addTestSuite(SA_SetupTest.class);
-		addTestSuite(SA_LogoutTest.class);
-		addTestSuite(CA_LoginTest.class);
-		addTestSuite(CA_AddFolderTest.class);
-		addTestSuite(CA_AddSubfolderTest.class);
-		addTestSuite(CA_AddMoveFoldersTest.class);
-		addTestSuite(CA_AddDocumentTest.class);
-		addTestSuite(CA_AddCommentTest.class);
-		addTestSuite(CA_AssertEditFolderTest.class);
-		addTestSuite(CA_EditDocumentTest.class);
-		addTestSuite(CA_EditCommentTest.class);
-		addTestSuite(CA_MoveDocumentTest.class);
-		addTestSuite(CA_AssertEditPermissionsTest.class);
-		addTestSuite(CA_AssertDeleteActionsTest.class);
-		addTestSuite(CA_EditConfigurationTest.class);
-		addTestSuite(CA_SearchPortletTest.class);
-		addTestSuite(CA_AssertRemovePortletTest.class);
-		addTestSuite(CA_LogoutTest.class);
-		addTestSuite(Member_LoginTest.class);
-		addTestSuite(Member_AssertViewFoldersTest.class);
-		addTestSuite(Member_AssertViewDocumentTest.class);
-		addTestSuite(Member_AssertViewCommentsTest.class);
-		addTestSuite(Member_AssertAddCommentNotOwnerTest.class);
-		addTestSuite(Member_AddDocumentTest.class);
-		addTestSuite(Member_EditDocumentTest.class);
-		addTestSuite(Member_MoveDocumentTest.class);
-		addTestSuite(Member_AssertDeleteDocumentTest.class);
-		addTestSuite(Member_AddCommentTest.class);
-		addTestSuite(Member_EditCommentTest.class);
-		addTestSuite(Member_AssertDeleteCommentTest.class);
-		addTestSuite(Member_AssertCannotAddFoldersTest.class);
-		addTestSuite(Member_AssertCannotEditFoldersTest.class);
-		addTestSuite(Member_AssertCannotDeleteFoldersTest.class);
-		addTestSuite(Member_AssertCannotEditUserCommentsTest.class);
-		addTestSuite(Member_AssertCannotDeleteUserCommentsTest.class);
-		addTestSuite(Member_AssertCannotEditUserDocumentsTest.class);
-		addTestSuite(Member_AssertCannotDeleteUserDocumentsTest.class);
-		addTestSuite(Member_AssertCannotMoveUserDocumentsTest.class);
-		addTestSuite(Member_AssertCannotEditPermissionsTest.class);
-		addTestSuite(Member_AssertCannotEditConfigurationTest.class);
-		addTestSuite(Member_AssertCannotRemovePortletTest.class);
-		addTestSuite(Member_LogoutTest.class);
-		addTestSuite(Guest_AssertNotSignedInTest.class);
-		addTestSuite(Guest_AssertViewFoldersTest.class);
-		addTestSuite(Guest_AssertViewDocumentsTest.class);
-		addTestSuite(Guest_SearchPortletTest.class);
-		addTestSuite(Guest_AssertCannotAddFoldersTest.class);
-		addTestSuite(Guest_AssertCannotEditFoldersTest.class);
-		addTestSuite(Guest_AssertCannotDeleteFoldersTest.class);
-		addTestSuite(Guest_AssertCannotAddDocumentsTest.class);
-		addTestSuite(Guest_AssertCannotEditDocumentsTest.class);
-		addTestSuite(Guest_AssertCannotDeleteDocumentsTest.class);
-		addTestSuite(Guest_AssertCannotMoveDocumentsTest.class);
-		addTestSuite(Guest_AssertCannotAddCommentsTest.class);
-		addTestSuite(Guest_AssertCannotEditCommentsTest.class);
-		addTestSuite(Guest_AssertCannotDeleteCommentsTest.class);
-		addTestSuite(Guest_AssertCannotEditPermissionsTest.class);
-		addTestSuite(Guest_AssertCannotEditConfigurationTest.class);
-		addTestSuite(Guest_AssertCannotRemovePortletTest.class);
-		addTestSuite(TearDownTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
 
+		testSuite.addTestSuite(SA_LoginTest.class);
+		testSuite.addTestSuite(SA_SetupTest.class);
+		testSuite.addTestSuite(SA_LogoutTest.class);
+		testSuite.addTestSuite(CA_LoginTest.class);
+		testSuite.addTestSuite(CA_AddFolderTest.class);
+		testSuite.addTestSuite(CA_AddSubfolderTest.class);
+		testSuite.addTestSuite(CA_AddMoveFoldersTest.class);
+		testSuite.addTestSuite(CA_AddDocumentTest.class);
+		testSuite.addTestSuite(CA_AddCommentTest.class);
+		testSuite.addTestSuite(CA_AssertEditFolderTest.class);
+		testSuite.addTestSuite(CA_EditDocumentTest.class);
+		testSuite.addTestSuite(CA_EditCommentTest.class);
+		testSuite.addTestSuite(CA_MoveDocumentTest.class);
+		testSuite.addTestSuite(CA_AssertEditPermissionsTest.class);
+		testSuite.addTestSuite(CA_AssertDeleteActionsTest.class);
+		testSuite.addTestSuite(CA_EditConfigurationTest.class);
+		testSuite.addTestSuite(CA_SearchPortletTest.class);
+		testSuite.addTestSuite(CA_AssertRemovePortletTest.class);
+		testSuite.addTestSuite(CA_LogoutTest.class);
+		testSuite.addTestSuite(Member_LoginTest.class);
+		testSuite.addTestSuite(Member_AssertViewFoldersTest.class);
+		testSuite.addTestSuite(Member_AssertViewDocumentTest.class);
+		testSuite.addTestSuite(Member_AssertViewCommentsTest.class);
+		testSuite.addTestSuite(Member_AssertAddCommentNotOwnerTest.class);
+		testSuite.addTestSuite(Member_AddDocumentTest.class);
+		testSuite.addTestSuite(Member_EditDocumentTest.class);
+		testSuite.addTestSuite(Member_MoveDocumentTest.class);
+		testSuite.addTestSuite(Member_AssertDeleteDocumentTest.class);
+		testSuite.addTestSuite(Member_AddCommentTest.class);
+		testSuite.addTestSuite(Member_EditCommentTest.class);
+		testSuite.addTestSuite(Member_AssertDeleteCommentTest.class);
+		testSuite.addTestSuite(Member_AssertCannotAddFoldersTest.class);
+		testSuite.addTestSuite(Member_AssertCannotEditFoldersTest.class);
+		testSuite.addTestSuite(Member_AssertCannotDeleteFoldersTest.class);
+		testSuite.addTestSuite(Member_AssertCannotEditUserCommentsTest.class);
+		testSuite.addTestSuite(Member_AssertCannotDeleteUserCommentsTest.class);
+		testSuite.addTestSuite(Member_AssertCannotEditUserDocumentsTest.class);
+		testSuite.addTestSuite(
+			Member_AssertCannotDeleteUserDocumentsTest.class);
+		testSuite.addTestSuite(Member_AssertCannotMoveUserDocumentsTest.class);
+		testSuite.addTestSuite(Member_AssertCannotEditPermissionsTest.class);
+		testSuite.addTestSuite(Member_AssertCannotEditConfigurationTest.class);
+		testSuite.addTestSuite(Member_AssertCannotRemovePortletTest.class);
+		testSuite.addTestSuite(Member_LogoutTest.class);
+		testSuite.addTestSuite(Guest_AssertNotSignedInTest.class);
+		testSuite.addTestSuite(Guest_AssertViewFoldersTest.class);
+		testSuite.addTestSuite(Guest_AssertViewDocumentsTest.class);
+		testSuite.addTestSuite(Guest_SearchPortletTest.class);
+		testSuite.addTestSuite(Guest_AssertCannotAddFoldersTest.class);
+		testSuite.addTestSuite(Guest_AssertCannotEditFoldersTest.class);
+		testSuite.addTestSuite(Guest_AssertCannotDeleteFoldersTest.class);
+		testSuite.addTestSuite(Guest_AssertCannotAddDocumentsTest.class);
+		testSuite.addTestSuite(Guest_AssertCannotEditDocumentsTest.class);
+		testSuite.addTestSuite(Guest_AssertCannotDeleteDocumentsTest.class);
+		testSuite.addTestSuite(Guest_AssertCannotMoveDocumentsTest.class);
+		testSuite.addTestSuite(Guest_AssertCannotAddCommentsTest.class);
+		testSuite.addTestSuite(Guest_AssertCannotEditCommentsTest.class);
+		testSuite.addTestSuite(Guest_AssertCannotDeleteCommentsTest.class);
+		testSuite.addTestSuite(Guest_AssertCannotEditPermissionsTest.class);
+		testSuite.addTestSuite(Guest_AssertCannotEditConfigurationTest.class);
+		testSuite.addTestSuite(Guest_AssertCannotRemovePortletTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
+
+		return testSuite;
 	}
 
 }

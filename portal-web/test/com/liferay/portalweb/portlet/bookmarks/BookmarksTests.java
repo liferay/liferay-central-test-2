@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.bookmarks;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="BookmarksTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,33 +35,36 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class BookmarksTests extends BaseTests {
 
-	public BookmarksTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddFolderTest.class);
-		addTestSuite(AddSubfolderTest.class);
-		addTestSuite(AddEntryTest.class);
-		addTestSuite(AddSecondEntryTest.class);
-		addTestSuite(VerifyEntriesTest.class);
-		addTestSuite(SearchEntriesTest.class);
-		addTestSuite(SearchNullEntriesTest.class);
-		addTestSuite(MoveEntryTest.class);
-		addTestSuite(DeleteEntryTest.class);
-		addTestSuite(EditFolderTest.class);
-		addTestSuite(EditSubfolderTest.class);
-		addTestSuite(EditEntryTest.class);
-		addTestSuite(CombineToParentFolderTest.class);
-		addTestSuite(AddNullFolderTest.class);
-		addTestSuite(AddNullSubfolderTest.class);
-		addTestSuite(AddNullEntryTest.class);
-		addTestSuite(AddNullURLTest.class);
-		//addTestSuite(AddNullTitleTest.class);
-		addTestSuite(AddIncorrectURLTest.class);
-		addTestSuite(DeleteAllTest.class);
-		addTestSuite(ImportLARTest.class);
-		addTestSuite(AssertImportLARTest.class);
-		addTestSuite(TearDownTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
 
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddFolderTest.class);
+		testSuite.addTestSuite(AddSubfolderTest.class);
+		testSuite.addTestSuite(AddEntryTest.class);
+		testSuite.addTestSuite(AddSecondEntryTest.class);
+		testSuite.addTestSuite(VerifyEntriesTest.class);
+		testSuite.addTestSuite(SearchEntriesTest.class);
+		testSuite.addTestSuite(SearchNullEntriesTest.class);
+		testSuite.addTestSuite(MoveEntryTest.class);
+		testSuite.addTestSuite(DeleteEntryTest.class);
+		testSuite.addTestSuite(EditFolderTest.class);
+		testSuite.addTestSuite(EditSubfolderTest.class);
+		testSuite.addTestSuite(EditEntryTest.class);
+		testSuite.addTestSuite(CombineToParentFolderTest.class);
+		testSuite.addTestSuite(AddNullFolderTest.class);
+		testSuite.addTestSuite(AddNullSubfolderTest.class);
+		testSuite.addTestSuite(AddNullEntryTest.class);
+		testSuite.addTestSuite(AddNullURLTest.class);
+		//testSuite.addTestSuite(AddNullTitleTest.class);
+		testSuite.addTestSuite(AddIncorrectURLTest.class);
+		testSuite.addTestSuite(DeleteAllTest.class);
+		testSuite.addTestSuite(ImportLARTest.class);
+		testSuite.addTestSuite(AssertImportLARTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
+
+		return testSuite;
 	}
 
 }

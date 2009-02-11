@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.directory;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="DirectoryTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,19 +35,24 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class DirectoryTests extends BaseTests {
 
-	public DirectoryTests() {
-		addTestSuite(SetupTest.class);
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(SearchUsersTest.class);
-		addTestSuite(AdvancedSearchUsersTest.class);
-		addTestSuite(SearchOrganizationsTest.class);
-		addTestSuite(AdvancedSearchOrganizationsTest.class);
-		addTestSuite(SearchUserGroupsTest.class);
-		addTestSuite(AssertCorrectUserInOrganizationTest.class);
-		addTestSuite(AssertCorrectSuborganizationInOrganizationTest.class);
-		addTestSuite(AssertCorrectUserInUserGroupTest.class);
-		addTestSuite(TearDownTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(SetupTest.class);
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(SearchUsersTest.class);
+		testSuite.addTestSuite(AdvancedSearchUsersTest.class);
+		testSuite.addTestSuite(SearchOrganizationsTest.class);
+		testSuite.addTestSuite(AdvancedSearchOrganizationsTest.class);
+		testSuite.addTestSuite(SearchUserGroupsTest.class);
+		testSuite.addTestSuite(AssertCorrectUserInOrganizationTest.class);
+		testSuite.addTestSuite(
+			AssertCorrectSuborganizationInOrganizationTest.class);
+		testSuite.addTestSuite(AssertCorrectUserInUserGroupTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
+
+		return testSuite;
 	}
 
 }

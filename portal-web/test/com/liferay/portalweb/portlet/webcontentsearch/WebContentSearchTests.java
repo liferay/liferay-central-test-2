@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.webcontentsearch;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="WebContentSearchTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,13 +35,17 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class WebContentSearchTests extends BaseTests {
 
-	public WebContentSearchTests() {
-		addTestSuite(SetupTest.class);
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(SearchPortletTest.class);
-		addTestSuite(SearchNullPortletTest.class);
-		addTestSuite(TearDownTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(SetupTest.class);
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(SearchPortletTest.class);
+		testSuite.addTestSuite(SearchNullPortletTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
+
+		return testSuite;
 	}
 
 }

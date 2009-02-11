@@ -25,6 +25,9 @@ package com.liferay.portalweb.portal;
 import com.liferay.portalweb.portal.controlpanel.ControlPanelTests;
 import com.liferay.portalweb.portal.login.LoginTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="ControlPanelTestSuite.java.html"><b><i>View Source</i></b></a>
  *
@@ -33,11 +36,15 @@ import com.liferay.portalweb.portal.login.LoginTests;
  */
 public class ControlPanelTestSuite extends BaseTests {
 
-	public ControlPanelTestSuite() {
-		addTests(LoginTests.class);
-		addTests(ControlPanelTests.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
 
-		addTestSuite(StopSeleniumTest.class);
+		testSuite.addTest(LoginTests.suite());
+		testSuite.addTest(ControlPanelTests.suite());
+
+		testSuite.addTestSuite(StopSeleniumTest.class);
+
+		return testSuite;
 	}
 
 }

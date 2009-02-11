@@ -24,6 +24,9 @@ package com.liferay.portalweb.portlet.recentbloggers;
 
 import com.liferay.portalweb.portal.BaseTests;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 /**
  * <a href="RecentBloggersTests.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,13 +35,17 @@ import com.liferay.portalweb.portal.BaseTests;
  */
 public class RecentBloggersTests extends BaseTests {
 
-	public RecentBloggersTests() {
-		addTestSuite(SetupTest.class);
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AssertRecentBloggersTest.class);
-		addTestSuite(DisplayStylesTest.class);
-		addTestSuite(TearDownTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(SetupTest.class);
+		testSuite.addTestSuite(AddPageTest.class);
+		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AssertRecentBloggersTest.class);
+		testSuite.addTestSuite(DisplayStylesTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
+
+		return testSuite;
 	}
 
 }
