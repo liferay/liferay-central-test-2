@@ -251,7 +251,7 @@ tunnel.servlet.hosts.allowed=]]></echo>
 
 	<target name="start-selenium">
 		<java jar="lib/development/selenium-server.jar" fork="true" spawn="true">
-			<arg line="-port 14444" />
+			<arg line="-port 14444 -singleWindow" />
 		</java>
 	</target>
 
