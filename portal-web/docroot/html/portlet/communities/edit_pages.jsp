@@ -83,6 +83,7 @@ if (stagingGroup != null) {
 
 long selPlid = ParamUtil.getLong(request, "selPlid", LayoutConstants.DEFAULT_PLID);
 long layoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
+long refererPlid = ParamUtil.getLong(request, "refererPlid", LayoutConstants.DEFAULT_PLID);
 
 boolean privateLayout = tabs1.equals("private-pages");
 
@@ -109,10 +110,15 @@ else {
 UnicodeProperties liveGroupTypeSettings = liveGroup.getTypeSettingsProperties();
 
 Layout selLayout = null;
+Layout refererLayout = null;
 
 try {
 	if (selPlid != LayoutConstants.DEFAULT_PLID) {
 		selLayout = LayoutLocalServiceUtil.getLayout(selPlid);
+	}
+
+	if (refererPlid != LayoutConstants.DEFAULT_PLID) {
+		refererLayout = LayoutLocalServiceUtil.getLayout(refererPlid);
 	}
 }
 catch (NoSuchLayoutException nsle) {
@@ -257,7 +263,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 
 	function <portlet:namespace />deletePage() {
 		<c:choose>
-			<c:when test="<%= selPlid == themeDisplay.getPlid() %>">
+			<c:when test="<%= (selPlid == themeDisplay.getPlid()) || (selPlid == refererPlid) %>">
 				alert('<%= UnicodeLanguageUtil.get(pageContext, "you-cannot-delete-this-page-because-you-are-currently-accessing-this-page") %>');
 			</c:when>
 			<c:otherwise>
@@ -268,6 +274,19 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 				}
 			</c:otherwise>
 		</c:choose>
+	}
+
+	function <portlet:namespace />removePage(box) {
+		var selectEl = jQuery(box);
+
+		var layoutId = <%= ((refererLayout == null) ? layout.getLayoutId() : refererLayout.getLayoutId()) %>;
+
+		if (layoutId == selectEl.find('option:selected').attr('value')) {
+			alert('<%= UnicodeLanguageUtil.get(pageContext, "you-cannot-delete-this-page-because-you-are-currently-accessing-this-page") %>');
+		}
+		else {
+			Liferay.Util.removeItem(box);
+		}
 	}
 
 	function <portlet:namespace />exportPages() {
