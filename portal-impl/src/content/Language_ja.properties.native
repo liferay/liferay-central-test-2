@@ -659,6 +659,7 @@ archived=アーカイブする
 are-you-sure-you-want-to-approve-this-proposal=この提案を承認しますか？
 are-you-sure-you-want-to-block-the-selected-senders=選択した差出人をブロックしますか？差出人をブロックすることで、ブロックした差出人からのすべてのメッセージの受信を防ぐことができます。
 are-you-sure-you-want-to-copy-from-live-and-overwrite-the-existing-staging-configuration=現行の環境をコピーしてステージング環境に上書きしますか？
+are-you-sure-you-want-to-copy-from-live-and-update-the-existing-staging-portlet-information=確実生きているからコピーし、既存の足場のportlet情報を更新したいと思うであるか。
 are-you-sure-you-want-to-copy-these-pages=これらのページを本当にコピーしますか？
 are-you-sure-you-want-to-deactivate-the-selected-users=選択したユーザーを停止しますか？
 are-you-sure-you-want-to-deactivate-this-language=この言語を無効にしますか？

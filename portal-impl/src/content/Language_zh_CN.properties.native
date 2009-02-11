@@ -659,6 +659,7 @@ archived=已归档
 are-you-sure-you-want-to-approve-this-proposal=是否确实要批准此提案？
 are-you-sure-you-want-to-block-the-selected-senders=是否确实要屏蔽选定的发送者？ 屏蔽发送者会使您无法从此发送者收到消息。
 are-you-sure-you-want-to-copy-from-live-and-overwrite-the-existing-staging-configuration=是否确实要从实时复制和覆盖现有的缓存配置？
+are-you-sure-you-want-to-copy-from-live-and-update-the-existing-staging-portlet-information=是否是从活复制和更新现有的分级法portlet信息？
 are-you-sure-you-want-to-copy-these-pages=是否确实要复制这些页面？
 are-you-sure-you-want-to-deactivate-the-selected-users=是否确实要使选定的用户处于非激活状态？
 are-you-sure-you-want-to-deactivate-this-language=是否确实要使这种语言处于非激活状态？

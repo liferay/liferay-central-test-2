@@ -659,6 +659,7 @@ archived=Αρχειοθετημένος
 are-you-sure-you-want-to-approve-this-proposal=Είστε βέβαιοι εσείς θέλετε να εγκρίνετε αυτήν την πρόταση;
 are-you-sure-you-want-to-block-the-selected-senders=Σίγουρα θέλετε να μπλοκάρεται τους επιλεγμένους αποστολείς; Μπλοκάροντας τον αποστολέα θα σας αποτρέψει από το να λάβετε οποιοδήποτε μύνημα από αυτόν τον αποστολέα.
 are-you-sure-you-want-to-copy-from-live-and-overwrite-the-existing-staging-configuration=Βέβαιοι εσείς θέλετε να αντιγράψετε από ζωντανό και να επικαλύψετε την ύπαρξη οργανώνετε τη διαμόρφωση;
+are-you-sure-you-want-to-copy-from-live-and-update-the-existing-staging-portlet-information=Είστε βέβαιοι εσείς θέλετε να αντιγράψετε από ζωντανό και την αναπροσαρμογή οι υπάρχουσες πληροφορίες portlet οργάνωσης;
 are-you-sure-you-want-to-copy-these-pages=Είστε βέβαιοι εσείς θέλετε το αντίγραφο αυτές οι σελίδες;
 are-you-sure-you-want-to-deactivate-the-selected-users=Είστε βέβαιοι εσείς θέλετε να απενεργοποιήσετε τους επιλεγμένους χρήστες;
 are-you-sure-you-want-to-deactivate-this-language=Είστε βέβαιοι εσείς θέλετε να απενεργοποιήσετε αυτήν την γλώσσα;
