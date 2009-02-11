@@ -156,7 +156,7 @@
 	padding-bottom: 5px;
 }
 
-.portlet-calendar .calendar-current-day.has-events a span {
+.portlet-calendar .has-events.calendar-current-day a span {
 	background-image: url(<%= themeImagesPath %>/calendar/event_indicator_current.png);
 }
 

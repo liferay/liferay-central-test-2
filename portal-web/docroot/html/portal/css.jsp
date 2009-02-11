@@ -1434,7 +1434,7 @@ fieldset:last-child, .uni-form fieldset:last-child {
 	padding-bottom: 5px;
 }
 
-.taglib-calendar .calendar-current-day.has-events a span {
+.taglib-calendar .has-events.calendar-current-day a span {
 	background-image: url(<%= themeImagesPath %>/calendar/event_indicator_current.png);
 }
 
