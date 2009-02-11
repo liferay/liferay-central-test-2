@@ -235,8 +235,17 @@ public class PortletImporter {
 		}
 
 		if (importPortletData) {
-			importPortletData(
-				context, portletId, plid, portletEl.element("portlet-data"));
+			Element portletDataRefEl = portletEl.element("portlet-data");
+
+			if (portletDataRefEl != null) {
+				importPortletData(
+					context, portletId, plid, portletDataRefEl);
+			}
+			else {
+				_log.warn(
+					"Could not import portlet data because it cannot be " +
+						"found in the input");
+			}
 		}
 
 		if (_log.isInfoEnabled()) {

@@ -126,6 +126,8 @@ public class PortletExporter {
 		boolean exportPortletData = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_DATA + "_" +
 			PortletConstants.getRootPortletId(portletId));
+		boolean exportPortletDataAll = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.PORTLET_DATA_ALL);
 		boolean exportPortletSetup = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_SETUP);
 		boolean exportPortletUserPreferences = MapUtil.getBoolean(
@@ -139,11 +141,16 @@ public class PortletExporter {
 				"Export portlet archived setups " +
 					exportPortletArchivedSetups);
 			_log.debug("Export portlet data " + exportPortletData);
+			_log.debug("Export all portlet data " + exportPortletDataAll);
 			_log.debug("Export portlet setup " + exportPortletSetup);
 			_log.debug(
 				"Export portlet user preferences " +
 					exportPortletUserPreferences);
 			_log.debug("Export user permissions " + exportUserPermissions);
+		}
+
+		if (exportPortletDataAll) {
+			exportPortletData = true;
 		}
 
 		StopWatch stopWatch = null;

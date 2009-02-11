@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Time;
@@ -138,10 +139,12 @@ public class StagingUtil {
 			sourcePlid, sourceLayout.getGroupId(), portletId, parameterMap,
 			null, null);
 
+		Layout targetLayout = LayoutLocalServiceUtil.getLayout(targetPlid);
+
 		ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
 
 		LayoutServiceUtil.importPortletInfo(
-			targetPlid, sourceLayout.getGroupId(), portletId, parameterMap,
+			targetPlid, targetLayout.getGroupId(), portletId, parameterMap,
 			bais);
 	}
 
@@ -400,9 +403,16 @@ public class StagingUtil {
 		if (!parameterMap.containsKey(
 				PortletDataHandlerKeys.PORTLET_DATA_ALL)) {
 
+			Boolean b = Boolean.FALSE;
+
+			if (MapUtil.getBoolean(
+					parameterMap, PortletDataHandlerKeys.PORTLET_DATA)) {
+			    b = Boolean.TRUE;
+			}
+
 			parameterMap.put(
 				PortletDataHandlerKeys.PORTLET_DATA_ALL,
-				new String[] {Boolean.FALSE.toString()});
+				new String[] {b.toString()});
 		}
 
 		if (!parameterMap.containsKey(PortletDataHandlerKeys.PORTLET_SETUP)) {
