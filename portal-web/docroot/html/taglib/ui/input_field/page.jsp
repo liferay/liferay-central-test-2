@@ -136,7 +136,11 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 				yearRangeEnd = now.get(Calendar.YEAR) + yearRangeDelta;
 			}
 
-			boolean yearRangePast = GetterUtil.getBoolean(hints.get("year-range-past"), true);
+			boolean yearRangePast = true;
+
+			if (hints != null) {
+				yearRangePast = GetterUtil.getBoolean(hints.get("year-range-past"), true);
+			}
 
 			if (!yearRangePast) {
 				if (yearRangeStart < now.get(Calendar.YEAR)) {
@@ -148,7 +152,11 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 				}
 			}
 
-			boolean yearRangeFuture = GetterUtil.getBoolean(hints.get("year-range-future"), true);
+			boolean yearRangeFuture = true;
+
+			if (hints != null) {
+				yearRangeFuture = GetterUtil.getBoolean(hints.get("year-range-future"), true);
+			}
 
 			if (!yearRangeFuture) {
 				if (yearRangeStart > now.get(Calendar.YEAR)) {
