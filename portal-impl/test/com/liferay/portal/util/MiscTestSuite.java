@@ -24,6 +24,7 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.image.ImageProcessorImplTest;
 
+import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
@@ -34,11 +35,12 @@ import junit.framework.TestSuite;
  */
 public class MiscTestSuite extends TestSuite {
 
-	public MiscTestSuite() {
-		addTestSuite(ImageProcessorImplTest.class);
-	}
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
 
-	public void test() {
+		testSuite.addTestSuite(ImageProcessorImplTest.class);
+
+		return testSuite;
 	}
 
 }

@@ -44,6 +44,7 @@ import com.liferay.portlet.imagegallery.service.IGImageServiceTest;
 import com.liferay.portlet.messageboards.service.MBMessageServiceTest;
 import com.liferay.portlet.social.service.SocialRelationLocalServiceTest;
 
+import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
@@ -54,7 +55,7 @@ import junit.framework.TestSuite;
  */
 public class ServiceTestSuite extends TestSuite {
 
-	public ServiceTestSuite() {
+	public static Test suite() {
 		InitUtil.initWithSpring();
 
 		FileUtil.deltree(PropsValues.LIFERAY_HOME + "/data");
@@ -101,23 +102,6 @@ public class ServiceTestSuite extends TestSuite {
 			e.printStackTrace();
 		}
 
-		// Tests
-
-		addTestSuite(CounterServiceTest.class);
-
-		addTestSuite(UserServiceTest.class);
-
-		addTestSuite(BookmarksFolderServiceTest.class);
-		addTestSuite(BookmarksEntryServiceTest.class);
-
-		addTestSuite(DLFileEntryServiceTest.class);
-
-		addTestSuite(IGImageServiceTest.class);
-
-		addTestSuite(MBMessageServiceTest.class);
-
-		addTestSuite(SocialRelationLocalServiceTest.class);
-
 		// Company
 
 		try {
@@ -127,9 +111,27 @@ public class ServiceTestSuite extends TestSuite {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
 
-	public void test() {
+		// Tests
+
+		TestSuite testSuite = new TestSuite();
+
+		testSuite.addTestSuite(CounterServiceTest.class);
+
+		testSuite.addTestSuite(UserServiceTest.class);
+
+		testSuite.addTestSuite(BookmarksFolderServiceTest.class);
+		testSuite.addTestSuite(BookmarksEntryServiceTest.class);
+
+		testSuite.addTestSuite(DLFileEntryServiceTest.class);
+
+		testSuite.addTestSuite(IGImageServiceTest.class);
+
+		testSuite.addTestSuite(MBMessageServiceTest.class);
+
+		testSuite.addTestSuite(SocialRelationLocalServiceTest.class);
+
+		return testSuite;
 	}
 
 }

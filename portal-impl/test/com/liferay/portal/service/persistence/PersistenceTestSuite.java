@@ -88,6 +88,7 @@ import com.liferay.portlet.wiki.service.persistence.WikiNodePersistenceTest;
 import com.liferay.portlet.wiki.service.persistence.WikiPagePersistenceTest;
 import com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistenceTest;
 
+import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
@@ -98,133 +99,134 @@ import junit.framework.TestSuite;
  */
 public class PersistenceTestSuite extends TestSuite {
 
-	public PersistenceTestSuite() {
-		addTestSuite(AccountPersistenceTest.class);
-		addTestSuite(AddressPersistenceTest.class);
-		addTestSuite(ClassNamePersistenceTest.class);
-		addTestSuite(CompanyPersistenceTest.class);
-		addTestSuite(ContactPersistenceTest.class);
-		addTestSuite(CountryPersistenceTest.class);
-		addTestSuite(EmailAddressPersistenceTest.class);
-		addTestSuite(GroupPersistenceTest.class);
-		addTestSuite(ImagePersistenceTest.class);
-		addTestSuite(LayoutPersistenceTest.class);
-		addTestSuite(LayoutSetPersistenceTest.class);
-		addTestSuite(ListTypePersistenceTest.class);
-		addTestSuite(MembershipRequestPersistenceTest.class);
-		addTestSuite(OrganizationPersistenceTest.class);
-		addTestSuite(OrgGroupPermissionPersistenceTest.class);
-		addTestSuite(OrgGroupRolePersistenceTest.class);
-		addTestSuite(OrgLaborPersistenceTest.class);
-		addTestSuite(PasswordPolicyPersistenceTest.class);
-		addTestSuite(PasswordPolicyRelPersistenceTest.class);
-		addTestSuite(PasswordTrackerPersistenceTest.class);
-		addTestSuite(PermissionPersistenceTest.class);
-		addTestSuite(PhonePersistenceTest.class);
-		addTestSuite(PluginSettingPersistenceTest.class);
-		addTestSuite(PortletItemPersistenceTest.class);
-		addTestSuite(PortletPersistenceTest.class);
-		addTestSuite(PortletPreferencesPersistenceTest.class);
-		addTestSuite(RegionPersistenceTest.class);
-		addTestSuite(ReleasePersistenceTest.class);
-		addTestSuite(ResourceCodePersistenceTest.class);
-		addTestSuite(ResourcePersistenceTest.class);
-		addTestSuite(RolePersistenceTest.class);
-		addTestSuite(ServiceComponentPersistenceTest.class);
-		addTestSuite(SubscriptionPersistenceTest.class);
-		addTestSuite(UserGroupPersistenceTest.class);
-		addTestSuite(UserGroupRolePersistenceTest.class);
-		addTestSuite(UserIdMapperPersistenceTest.class);
-		addTestSuite(UserPersistenceTest.class);
-		addTestSuite(UserTrackerPathPersistenceTest.class);
-		addTestSuite(UserTrackerPersistenceTest.class);
-		addTestSuite(WebDAVPropsPersistenceTest.class);
-		addTestSuite(WebsitePersistenceTest.class);
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
 
-		addTestSuite(AnnouncementsDeliveryPersistenceTest.class);
-		addTestSuite(AnnouncementsEntryPersistenceTest.class);
-		addTestSuite(AnnouncementsFlagPersistenceTest.class);
+		testSuite.addTestSuite(AccountPersistenceTest.class);
+		testSuite.addTestSuite(AddressPersistenceTest.class);
+		testSuite.addTestSuite(ClassNamePersistenceTest.class);
+		testSuite.addTestSuite(CompanyPersistenceTest.class);
+		testSuite.addTestSuite(ContactPersistenceTest.class);
+		testSuite.addTestSuite(CountryPersistenceTest.class);
+		testSuite.addTestSuite(EmailAddressPersistenceTest.class);
+		testSuite.addTestSuite(GroupPersistenceTest.class);
+		testSuite.addTestSuite(ImagePersistenceTest.class);
+		testSuite.addTestSuite(LayoutPersistenceTest.class);
+		testSuite.addTestSuite(LayoutSetPersistenceTest.class);
+		testSuite.addTestSuite(ListTypePersistenceTest.class);
+		testSuite.addTestSuite(MembershipRequestPersistenceTest.class);
+		testSuite.addTestSuite(OrganizationPersistenceTest.class);
+		testSuite.addTestSuite(OrgGroupPermissionPersistenceTest.class);
+		testSuite.addTestSuite(OrgGroupRolePersistenceTest.class);
+		testSuite.addTestSuite(OrgLaborPersistenceTest.class);
+		testSuite.addTestSuite(PasswordPolicyPersistenceTest.class);
+		testSuite.addTestSuite(PasswordPolicyRelPersistenceTest.class);
+		testSuite.addTestSuite(PasswordTrackerPersistenceTest.class);
+		testSuite.addTestSuite(PermissionPersistenceTest.class);
+		testSuite.addTestSuite(PhonePersistenceTest.class);
+		testSuite.addTestSuite(PluginSettingPersistenceTest.class);
+		testSuite.addTestSuite(PortletItemPersistenceTest.class);
+		testSuite.addTestSuite(PortletPersistenceTest.class);
+		testSuite.addTestSuite(PortletPreferencesPersistenceTest.class);
+		testSuite.addTestSuite(RegionPersistenceTest.class);
+		testSuite.addTestSuite(ReleasePersistenceTest.class);
+		testSuite.addTestSuite(ResourceCodePersistenceTest.class);
+		testSuite.addTestSuite(ResourcePersistenceTest.class);
+		testSuite.addTestSuite(RolePersistenceTest.class);
+		testSuite.addTestSuite(ServiceComponentPersistenceTest.class);
+		testSuite.addTestSuite(SubscriptionPersistenceTest.class);
+		testSuite.addTestSuite(UserGroupPersistenceTest.class);
+		testSuite.addTestSuite(UserGroupRolePersistenceTest.class);
+		testSuite.addTestSuite(UserIdMapperPersistenceTest.class);
+		testSuite.addTestSuite(UserPersistenceTest.class);
+		testSuite.addTestSuite(UserTrackerPathPersistenceTest.class);
+		testSuite.addTestSuite(UserTrackerPersistenceTest.class);
+		testSuite.addTestSuite(WebDAVPropsPersistenceTest.class);
+		testSuite.addTestSuite(WebsitePersistenceTest.class);
 
-		addTestSuite(BlogsEntryPersistenceTest.class);
-		addTestSuite(BlogsStatsUserPersistenceTest.class);
+		testSuite.addTestSuite(AnnouncementsDeliveryPersistenceTest.class);
+		testSuite.addTestSuite(AnnouncementsEntryPersistenceTest.class);
+		testSuite.addTestSuite(AnnouncementsFlagPersistenceTest.class);
 
-		addTestSuite(BookmarksEntryPersistenceTest.class);
-		addTestSuite(BookmarksFolderPersistenceTest.class);
+		testSuite.addTestSuite(BlogsEntryPersistenceTest.class);
+		testSuite.addTestSuite(BlogsStatsUserPersistenceTest.class);
 
-		addTestSuite(CalEventPersistenceTest.class);
+		testSuite.addTestSuite(BookmarksEntryPersistenceTest.class);
+		testSuite.addTestSuite(BookmarksFolderPersistenceTest.class);
 
-		addTestSuite(DLFileEntryPersistenceTest.class);
-		addTestSuite(DLFileRankPersistenceTest.class);
-		addTestSuite(DLFileShortcutPersistenceTest.class);
-		addTestSuite(DLFileVersionPersistenceTest.class);
-		addTestSuite(DLFolderPersistenceTest.class);
+		testSuite.addTestSuite(CalEventPersistenceTest.class);
 
-		addTestSuite(ExpandoColumnPersistenceTest.class);
-		addTestSuite(ExpandoRowPersistenceTest.class);
-		addTestSuite(ExpandoTablePersistenceTest.class);
-		addTestSuite(ExpandoValuePersistenceTest.class);
+		testSuite.addTestSuite(DLFileEntryPersistenceTest.class);
+		testSuite.addTestSuite(DLFileRankPersistenceTest.class);
+		testSuite.addTestSuite(DLFileShortcutPersistenceTest.class);
+		testSuite.addTestSuite(DLFileVersionPersistenceTest.class);
+		testSuite.addTestSuite(DLFolderPersistenceTest.class);
 
-		addTestSuite(IGFolderPersistenceTest.class);
-		addTestSuite(IGImagePersistenceTest.class);
+		testSuite.addTestSuite(ExpandoColumnPersistenceTest.class);
+		testSuite.addTestSuite(ExpandoRowPersistenceTest.class);
+		testSuite.addTestSuite(ExpandoTablePersistenceTest.class);
+		testSuite.addTestSuite(ExpandoValuePersistenceTest.class);
 
-		addTestSuite(JournalArticleImagePersistenceTest.class);
-		addTestSuite(JournalArticlePersistenceTest.class);
-		addTestSuite(JournalArticleResourcePersistenceTest.class);
-		addTestSuite(JournalContentSearchPersistenceTest.class);
-		addTestSuite(JournalFeedPersistenceTest.class);
-		addTestSuite(JournalStructurePersistenceTest.class);
-		addTestSuite(JournalTemplatePersistenceTest.class);
+		testSuite.addTestSuite(IGFolderPersistenceTest.class);
+		testSuite.addTestSuite(IGImagePersistenceTest.class);
 
-		addTestSuite(MBBanPersistenceTest.class);
-		addTestSuite(MBCategoryPersistenceTest.class);
-		addTestSuite(MBDiscussionPersistenceTest.class);
-		addTestSuite(MBMailingListPersistenceTest.class);
-		addTestSuite(MBMessageFlagPersistenceTest.class);
-		addTestSuite(MBMessagePersistenceTest.class);
-		addTestSuite(MBStatsUserPersistenceTest.class);
-		addTestSuite(MBThreadPersistenceTest.class);
+		testSuite.addTestSuite(JournalArticleImagePersistenceTest.class);
+		testSuite.addTestSuite(JournalArticlePersistenceTest.class);
+		testSuite.addTestSuite(JournalArticleResourcePersistenceTest.class);
+		testSuite.addTestSuite(JournalContentSearchPersistenceTest.class);
+		testSuite.addTestSuite(JournalFeedPersistenceTest.class);
+		testSuite.addTestSuite(JournalStructurePersistenceTest.class);
+		testSuite.addTestSuite(JournalTemplatePersistenceTest.class);
 
-		addTestSuite(PollsChoicePersistenceTest.class);
-		addTestSuite(PollsQuestionPersistenceTest.class);
-		addTestSuite(PollsVotePersistenceTest.class);
+		testSuite.addTestSuite(MBBanPersistenceTest.class);
+		testSuite.addTestSuite(MBCategoryPersistenceTest.class);
+		testSuite.addTestSuite(MBDiscussionPersistenceTest.class);
+		testSuite.addTestSuite(MBMailingListPersistenceTest.class);
+		testSuite.addTestSuite(MBMessageFlagPersistenceTest.class);
+		testSuite.addTestSuite(MBMessagePersistenceTest.class);
+		testSuite.addTestSuite(MBStatsUserPersistenceTest.class);
+		testSuite.addTestSuite(MBThreadPersistenceTest.class);
 
-		addTestSuite(RatingsEntryPersistenceTest.class);
-		addTestSuite(RatingsStatsPersistenceTest.class);
+		testSuite.addTestSuite(PollsChoicePersistenceTest.class);
+		testSuite.addTestSuite(PollsQuestionPersistenceTest.class);
+		testSuite.addTestSuite(PollsVotePersistenceTest.class);
 
-		addTestSuite(ShoppingCartPersistenceTest.class);
-		addTestSuite(ShoppingCategoryPersistenceTest.class);
-		addTestSuite(ShoppingCouponPersistenceTest.class);
-		addTestSuite(ShoppingItemFieldPersistenceTest.class);
-		addTestSuite(ShoppingItemPersistenceTest.class);
-		addTestSuite(ShoppingItemPricePersistenceTest.class);
-		addTestSuite(ShoppingOrderItemPersistenceTest.class);
-		addTestSuite(ShoppingOrderPersistenceTest.class);
+		testSuite.addTestSuite(RatingsEntryPersistenceTest.class);
+		testSuite.addTestSuite(RatingsStatsPersistenceTest.class);
 
-		addTestSuite(SocialActivityPersistenceTest.class);
-		addTestSuite(SocialRelationPersistenceTest.class);
-		addTestSuite(SocialRequestPersistenceTest.class);
+		testSuite.addTestSuite(ShoppingCartPersistenceTest.class);
+		testSuite.addTestSuite(ShoppingCategoryPersistenceTest.class);
+		testSuite.addTestSuite(ShoppingCouponPersistenceTest.class);
+		testSuite.addTestSuite(ShoppingItemFieldPersistenceTest.class);
+		testSuite.addTestSuite(ShoppingItemPersistenceTest.class);
+		testSuite.addTestSuite(ShoppingItemPricePersistenceTest.class);
+		testSuite.addTestSuite(ShoppingOrderItemPersistenceTest.class);
+		testSuite.addTestSuite(ShoppingOrderPersistenceTest.class);
 
-		addTestSuite(SCFrameworkVersionPersistenceTest.class);
-		addTestSuite(SCLicensePersistenceTest.class);
-		addTestSuite(SCProductEntryPersistenceTest.class);
-		addTestSuite(SCProductScreenshotPersistenceTest.class);
-		addTestSuite(SCProductVersionPersistenceTest.class);
+		testSuite.addTestSuite(SocialActivityPersistenceTest.class);
+		testSuite.addTestSuite(SocialRelationPersistenceTest.class);
+		testSuite.addTestSuite(SocialRequestPersistenceTest.class);
 
-		addTestSuite(TagsAssetPersistenceTest.class);
-		addTestSuite(TagsEntryPersistenceTest.class);
-		addTestSuite(TagsPropertyPersistenceTest.class);
-		addTestSuite(TagsSourcePersistenceTest.class);
-		addTestSuite(TagsVocabularyPersistenceTest.class);
+		testSuite.addTestSuite(SCFrameworkVersionPersistenceTest.class);
+		testSuite.addTestSuite(SCLicensePersistenceTest.class);
+		testSuite.addTestSuite(SCProductEntryPersistenceTest.class);
+		testSuite.addTestSuite(SCProductScreenshotPersistenceTest.class);
+		testSuite.addTestSuite(SCProductVersionPersistenceTest.class);
 
-		addTestSuite(TasksProposalPersistenceTest.class);
-		addTestSuite(TasksReviewPersistenceTest.class);
+		testSuite.addTestSuite(TagsAssetPersistenceTest.class);
+		testSuite.addTestSuite(TagsEntryPersistenceTest.class);
+		testSuite.addTestSuite(TagsPropertyPersistenceTest.class);
+		testSuite.addTestSuite(TagsSourcePersistenceTest.class);
+		testSuite.addTestSuite(TagsVocabularyPersistenceTest.class);
 
-		addTestSuite(WikiNodePersistenceTest.class);
-		addTestSuite(WikiPagePersistenceTest.class);
-		addTestSuite(WikiPageResourcePersistenceTest.class);
-	}
+		testSuite.addTestSuite(TasksProposalPersistenceTest.class);
+		testSuite.addTestSuite(TasksReviewPersistenceTest.class);
 
-	public void test() {
+		testSuite.addTestSuite(WikiNodePersistenceTest.class);
+		testSuite.addTestSuite(WikiPagePersistenceTest.class);
+		testSuite.addTestSuite(WikiPageResourcePersistenceTest.class);
+
+		return testSuite;
 	}
 
 }

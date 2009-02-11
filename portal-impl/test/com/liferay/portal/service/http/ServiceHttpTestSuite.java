@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.http;
 
+import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
@@ -32,11 +33,12 @@ import junit.framework.TestSuite;
  */
 public class ServiceHttpTestSuite extends TestSuite {
 
-	public ServiceHttpTestSuite() {
-		addTestSuite(UserServiceHttpTest.class);
-	}
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
 
-	public void test() {
+		testSuite.addTestSuite(UserServiceHttpTest.class);
+
+		return testSuite;
 	}
 
 }
