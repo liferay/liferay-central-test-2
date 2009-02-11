@@ -88,8 +88,9 @@ public class UpgradeSitemap extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select ownerId, ownerType, plid, portletId, preferences " +
-					"from PortletPreferences where portletId like '85_%'");
+				"select portletPreferencesId, ownerId, ownerType, plid, " +
+					"portletId, preferences from PortletPreferences where " +
+						"portletId like '85_%'");
 
 			rs = ps.executeQuery();
 
