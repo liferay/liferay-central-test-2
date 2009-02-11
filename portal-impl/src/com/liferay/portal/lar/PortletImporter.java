@@ -238,13 +238,14 @@ public class PortletImporter {
 			Element portletDataRefEl = portletEl.element("portlet-data");
 
 			if (portletDataRefEl != null) {
-				importPortletData(
-					context, portletId, plid, portletDataRefEl);
+				importPortletData(context, portletId, plid, portletDataRefEl);
 			}
 			else {
-				_log.warn(
-					"Could not import portlet data because it cannot be " +
-						"found in the input");
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Could not import portlet data because it cannot be " +
+							"found in the input");
+				}
 			}
 		}
 

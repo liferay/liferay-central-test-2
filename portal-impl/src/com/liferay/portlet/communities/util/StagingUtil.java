@@ -403,16 +403,17 @@ public class StagingUtil {
 		if (!parameterMap.containsKey(
 				PortletDataHandlerKeys.PORTLET_DATA_ALL)) {
 
-			Boolean b = Boolean.FALSE;
+			Boolean portletDataAll = Boolean.FALSE;
 
 			if (MapUtil.getBoolean(
 					parameterMap, PortletDataHandlerKeys.PORTLET_DATA)) {
-			    b = Boolean.TRUE;
+
+				portletDataAll = Boolean.TRUE;
 			}
 
 			parameterMap.put(
 				PortletDataHandlerKeys.PORTLET_DATA_ALL,
-				new String[] {b.toString()});
+				new String[] {portletDataAll.toString()});
 		}
 
 		if (!parameterMap.containsKey(PortletDataHandlerKeys.PORTLET_SETUP)) {
