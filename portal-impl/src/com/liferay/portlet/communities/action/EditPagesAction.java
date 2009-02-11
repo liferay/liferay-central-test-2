@@ -38,7 +38,9 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
@@ -73,6 +75,7 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portlet.communities.util.CommunitiesTreeUtil;
 import com.liferay.portlet.communities.util.CommunitiesUtil;
 import com.liferay.portlet.communities.util.StagingUtil;
 import com.liferay.portlet.tasks.NoSuchProposalException;
@@ -270,13 +273,56 @@ public class EditPagesAction extends PortletAction {
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
-		String path =
-			"/html/portlet/communities/scheduled_publishing_events.jsp";
+		String cmd = ParamUtil.getString(resourceRequest, Constants.CMD);
 
-		PortletRequestDispatcher portletRequestDispatcher =
-			portletConfig.getPortletContext().getRequestDispatcher(path);
+		if (cmd.equals("render_tree_html")) {
 
-		portletRequestDispatcher.include(resourceRequest, resourceResponse);
+			String portletURL = ParamUtil.getString(
+					resourceRequest, "portletURL", StringPool.BLANK);
+
+			long nodeId = ParamUtil.getLong(resourceRequest, "nodeId");
+
+			long scopeGroupId = PortalUtil.getScopeGroupId(resourceRequest);
+
+			long parentLayoutId = ParamUtil.getLong(
+				resourceRequest, "parentLayoutId");
+
+			boolean selectableTree = ParamUtil.getBoolean(
+				resourceRequest, "selectableTree");
+
+			boolean privateLayout = ParamUtil.getBoolean(
+				resourceRequest, "privateLayout");
+
+			long[] selectedNodes = StringUtil.split(ParamUtil.getString(
+				resourceRequest, "selectedNodes", StringPool.BLANK), 0L);
+
+			long[] openNodes = StringUtil.split(ParamUtil.getString(
+				resourceRequest, "openNodes", StringPool.BLANK), 0L);
+
+			StringBuilder sb = new StringBuilder();
+
+			ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(
+					WebKeys.THEME_DISPLAY);
+
+			CommunitiesTreeUtil.buildLayoutsTreeHTML(
+				scopeGroupId, privateLayout, parentLayoutId,
+				new LongWrapper(nodeId), openNodes, selectableTree,
+				selectedNodes, portletURL, themeDisplay, sb, true);
+
+			resourceResponse.getWriter().write(sb.toString());
+
+		}
+		else {
+
+			String path =
+				"/html/portlet/communities/scheduled_publishing_events.jsp";
+
+			PortletRequestDispatcher portletRequestDispatcher =
+				portletConfig.getPortletContext().getRequestDispatcher(path);
+
+			portletRequestDispatcher.include(resourceRequest, resourceResponse);
+
+		}
 	}
 
 	protected void checkPermissions(PortletRequest portletRequest)
