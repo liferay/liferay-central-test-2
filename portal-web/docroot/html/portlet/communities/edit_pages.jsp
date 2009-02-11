@@ -82,8 +82,8 @@ if (stagingGroup != null) {
 }
 
 long selPlid = ParamUtil.getLong(request, "selPlid", LayoutConstants.DEFAULT_PLID);
-long layoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
 long refererPlid = ParamUtil.getLong(request, "refererPlid", LayoutConstants.DEFAULT_PLID);
+long layoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
 
 boolean privateLayout = tabs1.equals("private-pages");
 
@@ -110,13 +110,18 @@ else {
 UnicodeProperties liveGroupTypeSettings = liveGroup.getTypeSettingsProperties();
 
 Layout selLayout = null;
-Layout refererLayout = null;
 
 try {
 	if (selPlid != LayoutConstants.DEFAULT_PLID) {
 		selLayout = LayoutLocalServiceUtil.getLayout(selPlid);
 	}
+}
+catch (NoSuchLayoutException nsle) {
+}
 
+Layout refererLayout = null;
+
+try {
 	if (refererPlid != LayoutConstants.DEFAULT_PLID) {
 		refererLayout = LayoutLocalServiceUtil.getLayout(refererPlid);
 	}
