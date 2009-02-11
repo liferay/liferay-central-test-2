@@ -88,18 +88,10 @@ public class PropsUtil {
 		_configuration = new ConfigurationImpl(
 			PropsUtil.class.getClassLoader(), PropsFiles.PORTAL);
 
-		// Set the portal property "liferay.home" as a system property as well
-		// so it can be referenced by Ehcache.
+		String liferayHome = _get(PropsKeys.LIFERAY_HOME);
 
 		SystemProperties.set(
-			PropsKeys.LIFERAY_HOME, _get(PropsKeys.LIFERAY_HOME));
-
-		// Set the portal property "resource.repositories.root" for backwards
-		// compatibility.
-
-		SystemProperties.set(
-			PropsKeys.RESOURCE_REPOSITORIES_ROOT,
-			_get(PropsKeys.RESOURCE_REPOSITORIES_ROOT));
+			"ehcache.disk.store.dir", liferayHome + "/data/ehcache");
 	}
 
 	private void _addProperties(Properties properties) {
