@@ -761,7 +761,7 @@ if ((layout.getType().equals(LayoutConstants.TYPE_PANEL) || layout.getType().equ
 	}
 	%>
 
-	<div id="p_p_id<%= renderResponseImpl.getNamespace() %>" class="portlet-boundary portlet-boundary<%= PortalUtil.getPortletNamespace(portlet.getRootPortletId()) %> <%= cssClasses %> <%= portlet.getCssClassWrapper() %>" <%= freeformStyles %>>
+	<div id="p_p_id<%= renderResponseImpl.getNamespace() %>" class="portlet-boundary <%= "portlet-boundary"+ PortalUtil.getPortletNamespace(portlet.getRootPortletId()) + " " + cssClasses + " " + portlet.getCssClassWrapper() + " " + freeformStyles %>">
 		<a name="p_<%= portletId %>"></a>
 </c:if>
 
