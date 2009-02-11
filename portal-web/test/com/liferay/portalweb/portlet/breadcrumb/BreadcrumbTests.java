@@ -42,8 +42,8 @@ public class BreadcrumbTests extends BaseTests {
 		addTestSuite(AssertContentPresentTest.class);
 		addTestSuite(ConfigureDisplayStyleTest.class);
 		addTestSuite(VerifyDisplayStyleTest.class);
-		addTestSuite(ImportLARFileTest.class);
-		addTestSuite(VerifyImportLARFileTest.class);
+		addTestSuite(ImportLARTest.class);
+		addTestSuite(AssertImportLARTest.class);
 		addTestSuite(TearDownTest.class);
 	}
 
