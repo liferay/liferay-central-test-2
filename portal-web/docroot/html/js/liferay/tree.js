@@ -17,7 +17,6 @@ Liferay.Tree = new Class({
 	 * preRendered {boolean}: Whether to use a pre-rendered html list as the tree
 	 * selectable {boolean}: Whether the tree nodes can be selected with checkboxes.
 	 * selectedNodes {string}: A comma-separated list of which node ids default to open.
-	 * url {string}: URL base for load the node contents using ajax - should retun a valid Tree HTML.
 	 *
 	 * Callbacks
 	 * onSelect {string}: Called when a node is selected (if selectable is true).
@@ -39,7 +38,6 @@ Liferay.Tree = new Class({
 		instance.treeId = options.treeId;
 		instance.selectable = options.selectable || false;
 		instance.selectedNodes = options.selectedNodes || '';
-		instance.url = options.url;
 
 		instance._updateURL = themeDisplay.getPathMain() + '/layout_management/update_page';
 
@@ -309,8 +307,8 @@ Liferay.Tree = new Class({
 
 		jQuery('#lfrExpand').click(
 			function() {
-				tree.find('.tree-item ul:has(.tree-item)').show();
-				tree.find('.tree-item:has(.tree-item) > img').each(
+				tree.find('.tree-item ul').show();
+				tree.find('.tree-item img').each(
 					function() {
 							this.src = this.src.replace(/plus.png$/, 'minus.png');
 					}
@@ -336,8 +334,8 @@ Liferay.Tree = new Class({
 
 		jQuery('#lfrCollapse').click(
 			function() {
-				tree.find('.tree-item ul:has(.tree-item)').hide();
-				tree.find('.tree-item:has(.tree-item) > img').each(
+				tree.find('.tree-item ul').hide();
+				tree.find('.tree-item img').each(
 					function() {
 						this.src = this.src.replace(/minus.png$/, 'plus.png');
 					}
@@ -514,73 +512,38 @@ Liferay.Tree = new Class({
 
 			var currentLi = obj.parentNode;
 
-			var nodeId = jQuery(currentLi).attr('nodeId');
-
-			var parentLayoutId = jQuery(currentLi).attr('layoutId');
-
-			var privateLayout = jQuery(currentLi).attr('privateLayout');
+			var nodeId = currentLi.getAttribute('nodeId');
 
 			var subBranch = jQuery('ul', currentLi).eq(0);
 
-			var isEmpty = subBranch.is(':empty');
-
 			currentLi.childrenDraggable = false;
 
-			var branchInteraction = function() {
-				if (subBranch.is(':hidden')) {
-					subBranch.show();
-					obj.src = icons.minus;
-					openNode = true;
+			if (subBranch.is(':hidden')) {
+				subBranch.show();
+				obj.src = icons.minus;
+				openNode = true;
 
-					if (!currentLi.childrenDraggable) {
-						subBranch.addClass('node-open');
-						instance.setInteraction(currentLi);
-						currentLi.childrenDraggable = true;
-					}
+				if (!currentLi.childrenDraggable) {
+					subBranch.addClass('node-open');
+					instance.setInteraction(currentLi);
+					currentLi.childrenDraggable = true;
 				}
-				else {
-					subBranch.hide();
-					obj.src = icons.plus;
-				}
-			};
-
-			var	sessionClick = function() {
-				jQuery.ajax(
-					{
-						url: themeDisplay.getPathMain() + '/portal/session_tree_js_click',
-						data: {
-							nodeId: nodeId,
-							openNode: openNode,
-							treeId: treeId
-						}
-					}
-				);
-			};
-
-			branchInteraction();
-
-			if (instance.url && isEmpty) {
-				var url = instance.url + '&nodeId=' + nodeId + '&parentLayoutId=' + parentLayoutId + '&privateLayout=' + privateLayout;
-
-				var loadingGif = '/html/themes/classic/images/application/loading_indicator.gif';
-				var pageImg = jQuery(currentLi).find('a img:first');
-				var pageImgSrc = pageImg.attr('src');
-
-				pageImg.attr('src', loadingGif);
-
-				jQuery.get(
-					url,
-					function(html) {
-						subBranch.html(html);
-						branchInteraction();
-						pageImg.attr('src', pageImgSrc);
-						sessionClick();
-					}
-				);
 			}
 			else {
-				sessionClick();
+				subBranch.hide();
+				obj.src = icons.plus;
 			}
+
+			jQuery.ajax(
+				{
+					url: themeDisplay.getPathMain() + '/portal/session_tree_js_click',
+					data: {
+						nodeId: nodeId,
+						openNode: openNode,
+						treeId: treeId
+					}
+				}
+			);
 		}
 	},
 
