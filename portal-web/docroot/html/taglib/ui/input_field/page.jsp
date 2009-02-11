@@ -70,6 +70,8 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 		<c:when test='<%= type.equals("Date") %>'>
 
 			<%
+			Calendar now = CalendarFactoryUtil.getCalendar(timeZone, locale);
+
 			String timeFormatPattern = ((SimpleDateFormat)(DateFormat.getTimeInstance(DateFormat.SHORT))).toPattern();
 
 			boolean timeFormatAmPm = true;
@@ -130,10 +132,32 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 			int yearRangeEnd = year + yearRangeDelta;
 
 			if (year == -1) {
-				Calendar now = CalendarFactoryUtil.getCalendar(timeZone, locale);
-
 				yearRangeStart = now.get(Calendar.YEAR) - yearRangeDelta;
 				yearRangeEnd = now.get(Calendar.YEAR) + yearRangeDelta;
+			}
+
+			boolean yearRangePast = GetterUtil.getBoolean(hints.get("year-range-past"), true);
+
+			if (!yearRangePast) {
+				if (yearRangeStart < now.get(Calendar.YEAR)) {
+					yearRangeStart = now.get(Calendar.YEAR);
+				}
+
+				if (yearRangeEnd < now.get(Calendar.YEAR)) {
+					yearRangeEnd = now.get(Calendar.YEAR);
+				}
+			}
+
+			boolean yearRangeFuture = GetterUtil.getBoolean(hints.get("year-range-future"), true);
+
+			if (!yearRangeFuture) {
+				if (yearRangeStart > now.get(Calendar.YEAR)) {
+					yearRangeStart = now.get(Calendar.YEAR);
+				}
+
+				if (yearRangeEnd > now.get(Calendar.YEAR)) {
+					yearRangeEnd = now.get(Calendar.YEAR);
+				}
 			}
 
 			int firstDayOfWeek = Calendar.SUNDAY - 1;

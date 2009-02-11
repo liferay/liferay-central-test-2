@@ -105,6 +105,7 @@
 		<field name="male" type="boolean" />
 		<field name="birthday" type="Date">
 			<hint name="year-range-delta">70</hint>
+			<hint name="year-range-future">false</hint>
 			<hint name="show-time">false</hint>
 		</field>
 		<field name="smsSn" type="String" />
