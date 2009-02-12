@@ -426,7 +426,7 @@ public class StripFilter extends BasePortalFilter {
 		"/textarea>".toCharArray();
 
 	private static final char[] _MARKER_TEXTAREA_OPEN =
-		"textarea>".toCharArray();
+		"textarea ".toCharArray();
 
 	private static final char[] _MARKER_UL_CLOSE = "/ul>".toCharArray();
 
