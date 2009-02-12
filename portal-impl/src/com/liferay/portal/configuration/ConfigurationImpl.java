@@ -289,12 +289,14 @@ public class ConfigurationImpl
 		// "jar:file:" prefix appended to the path. Use URL.toExternalForm() to
 		// achieve that. When running under WebLogic, the protocol returned is
 		// "zip". When running under WebSphere, the protocol returned is
-		// "wsjar".
+		// "wsjar". When running under oc4j, the protocol returned is 
+		// "code-source". 
 
 		String protocol = url.getProtocol();
 
 		if (protocol.equals("jar") || protocol.equals("vfszip") ||
-			protocol.equals("wsjar") || protocol.equals("zip")) {
+			protocol.equals("wsjar") || protocol.equals("zip") || 
+				protocol.equals("code-source")) {
 
 			name = url.toExternalForm();
 		}
