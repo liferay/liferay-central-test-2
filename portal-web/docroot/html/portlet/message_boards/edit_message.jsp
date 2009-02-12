@@ -473,7 +473,7 @@ if (message != null) {
 </form>
 
 <script type="text/javascript">
-	jQuery(document).ready(
+	jQuery(
 		function() {
 			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) && !themeDisplay.isFacebook() %>">
 				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />subject);

@@ -91,7 +91,7 @@ for (int i = 0; i < results.size(); i++) {
 
 <c:if test="<%= results.size() == 0 && portletName.equals(PortletKeys.ALERTS) && !PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.ANNOUNCEMENTS, ActionKeys.ADD_ENTRY) %>">
 	<script>
-		jQuery(document).ready(
+		jQuery(
 			function() {
 				jQuery('#p_p_id<portlet:namespace />').hide();
 			}

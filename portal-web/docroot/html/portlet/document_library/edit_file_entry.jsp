@@ -136,7 +136,7 @@ portletURL.setParameter("name", name);
 		}
 	}
 
-	jQuery(document).ready(
+	jQuery(
 		function() {
 			<portlet:namespace />initRowsChecked();
 

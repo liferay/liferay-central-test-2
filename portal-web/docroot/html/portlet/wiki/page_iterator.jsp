@@ -111,7 +111,7 @@ if (wikiPage != null) {
 			}
 		}
 
-		jQuery(document).ready(
+		jQuery(
 			function() {
 				<portlet:namespace />initRowsChecked();
 

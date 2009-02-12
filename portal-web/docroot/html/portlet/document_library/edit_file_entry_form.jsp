@@ -272,7 +272,7 @@ if (fileEntry == null) {
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />file);
 	</c:if>
 
-	jQuery(document).ready(
+	jQuery(
 		function() {
 			parent.<%= HtmlUtil.escape(uploadProgressId) %>.updateIFrame(document.<portlet:namespace />fm.offsetHeight);
 
