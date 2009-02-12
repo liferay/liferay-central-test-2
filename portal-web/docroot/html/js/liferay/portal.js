@@ -20,7 +20,7 @@ Liferay.Portal.Tabs = {
 	}
 };
 
-Liferay.Portal.StarRating = new Class({
+Liferay.Portal.StarRating = new Expanse.Class({
 
 	/**
 	 * OPTIONS
@@ -113,7 +113,7 @@ Liferay.Portal.StarRating = new Class({
 	}
 });
 
-Liferay.Portal.ThumbRating = new Class({
+Liferay.Portal.ThumbRating = new Expanse.Class({
 
 	/**
 	 * OPTIONS

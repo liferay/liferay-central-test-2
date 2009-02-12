@@ -1,4 +1,4 @@
-Liferay.Navigation = new Class({
+Liferay.Navigation = new Expanse.Class({
 
 	/**
 	 * OPTIONS
@@ -315,21 +315,19 @@ Liferay.Navigation = new Class({
 
 			items.addClass('sortable-item');
 
-			instance.sortable = navList.sortable(
+			new Expanse.Sortable(
 				{
-					items: '.sortable-item',
-					placeholder: 'navigation-sort-helper',
-					handle: (instance._isUseHandle ? '.sort-handle' : 'a'),
-					opacity: 0.8,
-					revert:	false,
-					tolerance: 'pointer',
-					distance: 5,
-					stop: function(event, ui) {
-						instance._saveSortables(ui.item[0]);
+					container: '#navigation ul',
+					items: 'li',
+					helperClass: 'navigation-sort-helper',
+					stop: function(event, sortableInstance) {
+						var el = this.getEl();
+
+						instance._saveSortables(el);
 
 						Liferay.trigger('navigation',
 							{
-								item: ui.item[0],
+								item: el,
 								type: 'sort'
 							}
 						);
@@ -463,7 +461,6 @@ Liferay.Navigation = new Class({
 
 				newNavItem.addClass('sortable-item');
 
-				instance.sortable.sortable('refresh');
 				instance._deleteButton(newNavItem);
 
 				Liferay.trigger('navigation',

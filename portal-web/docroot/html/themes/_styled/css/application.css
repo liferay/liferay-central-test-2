@@ -128,6 +128,8 @@
 
 .ui-resizable-proxy {
 	border: 1px dashed #828F95;
+	position: absolute;
+	visibility: hidden;
 }
 
 .navigation-sort-helper {
@@ -142,11 +144,19 @@
 
 .ui-resizable {
 	position: relative;
+	z-index: 0;
+}
+
+.ie6 .ui-resizable {
+	zoom: 1;
+}
+
+.ie6 .ui-resizable-wrap {
+    zoom: 1;
 }
 
 .ui-resizable-handle {
 	background: transparent url() no-repeat 50% 50%;
-	display: none;
 	font-size: 0.1px;
 	position: absolute;
 }
@@ -163,24 +173,29 @@
 	display: none;
 }
 
-.ui-resizable-n, .ui-resizable-s {
+.ui-resizable-handle-t, .ui-resizable-handle-b {
 	background-image: url(../images/application/handle_horizontal.png);
 	height: 14px;
 	left: 0;
 	right: 0;
+	width: 100%;
 }
 
-.ui-resizable-n {
+.ui-resizable-handle-t {
 	cursor: n-resize;
 	top: 0;
 }
 
-.ui-resizable-s {
+.ui-resizable-handle-b {
 	bottom: 0;
 	cursor: s-resize;
 }
 
-.ui-resizable-e, .ui-resizable-w {
+.ie6 .ui-resizable-handle-t, .ie6 .ui-resizable-handle-b {
+    zoom: 1;
+}
+
+.ui-resizable-handle-l, .ui-resizable-handle-r {
 	background-image: url(../images/application/handle_vertical.png);
 	background-position: center center;
 	bottom: 0;
@@ -188,50 +203,129 @@
 	width: 14px;
 }
 
-.ui-resizable-e {
+.ui-resizable-handle-r {
 	cursor: e-resize;
 	right: 0;
 }
 
-.ui-resizable-w {
+.ui-resizable-handle-l {
 	cursor: w-resize;
 	left: 0;
 }
 
-.ui-resizable-ne, .ui-resizable-nw {
+.ui-resizable-handle-tr, .ui-resizable-handle-tr {
 	height: 14px;
 	top: 0;
 	width: 14px;
 }
 
-.ui-resizable-ne {
+.ui-resizable-handle-tr {
 	background-image: url(../images/application/handle_ne.png);
 	cursor: ne-resize;
 	right: 0;
 }
 
-.ui-resizable-nw {
+.ui-resizable-handle-tl {
 	background-image: url(../images/application/handle_nw.png);
 	cursor: nw-resize;
 	left: 0;
 }
 
-.ui-resizable-se, .ui-resizable-sw {
+.ui-resizable-handle-bl, .ui-resizable-handle-br {
 	bottom: 0;
 	height: 14px;
 	width: 14px;
 }
 
-.ui-resizable-se {
+.ui-resizable-handle-br {
 	background-image: url(../images/application/handle_se.png);
 	cursor: se-resize;
 	right: 0;
 }
 
-.ui-resizable-sw {
+.ui-resizable-handle-bl {
 	background-image: url(../images/application/handle_sw.png);
 	cursor: sw-resize;
 	left: 0;
+}
+
+.ui-resizable-hover .ui-resizable-handle, .ui-resizable-hidden .ui-resizable-handle {
+    opacity: 0;
+}
+
+.ie .ui-resizable-hover .ui-resizable-handle, .ie .ui-resizable-hidden .ui-resizable-handle {
+	filter: alpha(opacity=0);
+}
+
+.ui-resizable-ghost {
+    opacity: .5;
+}
+
+.ie .ui-resizable-ghost {
+	filter: alpha(opacity=50);
+}
+
+.ui-resizable-knob .ui-resizable-handle {
+	height: 6px;
+	width: 6px;
+}
+
+.ui-resizable-knob .ui-resizable-handle-t {
+	left: 45%;
+	top: -3px;
+}
+
+.ui-resizable-knob .ui-resizable-handle-r {
+	right: -3px;
+	top: 45%;
+}
+
+.ui-resizable-knob .ui-resizable-handle-b {
+	left: 45%;
+	bottom: -3px;
+}
+
+.ui-resizable-knob .ui-resizable-handle-l {
+	left: -3px;
+	top: 45%;
+}
+
+.ui-resizable-knob .ui-resizable-handle-tr {
+	right: -3px;
+	top: -3px;
+}
+
+.ui-resizable-knob .ui-resizable-handle-tl {
+	left: -3px;
+	top: -3px;
+}
+
+.ui-resizable-knob .ui-resizable-handle-bl {
+	left: -3px;
+	bottom: -3px;
+}
+
+.ui-resizable-knob .ui-resizable-handle-br {
+	right: -3px;
+	bottom: -3px;
+}
+
+.ui-resizable-status {
+    display: none;
+    font-size: 80%;
+    left: -999px;
+    padding: 2px;
+    position: absolute;
+    top: -999px;
+    z-index: 9999;
+}
+
+.ui-resizable-status strong, .ui-resizable-status em {
+    padding: 1px;
+}
+
+.ie6 .ui-resizable-status, .ie6 .ui-resizable-status strong, .ie6 .ui-resizable-status em {
+	zoom: 1;
 }
 
 .freeform .portlet-boundary .ui-resizable-handle {
@@ -426,12 +520,12 @@
 	padding-left: 20px;
 }
 
-.ui-dialog.ui-resizable .ui-dialog-content {
-	padding: 14px;
+.ui-dialog .ui-dialog-content {
+	padding: 7px;
 }
 
-.ui-dialog.ui-resizable-disabled .ui-dialog-content {
-	padding: 7px;
+.ui-dialog.ui-resizable .ui-dialog-content {
+	padding: 14px;
 }
 
 .ui-dialog .ui-dialog-buttonpane {

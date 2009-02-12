@@ -1,4 +1,4 @@
-Liferay.Observable = new Class({
+Liferay.Observable = new Expanse.Class({
 	initialize: function() {
 		var instance = this;
 

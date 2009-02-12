@@ -93,6 +93,12 @@
 .ui-resizable {
 }
 
+.ie6 .ui-resizable {
+}
+
+.ie6 .ui-resizable-wrap {
+}
+
 .ui-resizable-handle {
 }
 
@@ -105,40 +111,91 @@
 .js .ui-resizable-autohide .ui-resizable-handle {
 }
 
-.ui-resizable-n, .ui-resizable-s {
+.ui-resizable-handle-t, .ui-resizable-handle-b {
 }
 
-.ui-resizable-n {
+.ui-resizable-handle-t {
 }
 
-.ui-resizable-s {
+.ui-resizable-handle-b {
 }
 
-.ui-resizable-e, .ui-resizable-w {
+.ie6 .ui-resizable-handle-t, .ie6 .ui-resizable-handle-b {
 }
 
-.ui-resizable-e {
+.ui-resizable-handle-l, .ui-resizable-handle-r {
 }
 
-.ui-resizable-w {
+.ui-resizable-handle-r {
 }
 
-.ui-resizable-ne, .ui-resizable-nw {
+.ui-resizable-handle-l {
 }
 
-.ui-resizable-ne {
+.ui-resizable-handle-tr, .ui-resizable-handle-tr {
 }
 
-.ui-resizable-nw {
+.ui-resizable-handle-tr {
 }
 
-.ui-resizable-se, .ui-resizable-sw {
+.ui-resizable-handle-tl {
 }
 
-.ui-resizable-se {
+.ui-resizable-handle-bl, .ui-resizable-handle-br {
 }
 
-.ui-resizable-sw {
+.ui-resizable-handle-br {
+}
+
+.ui-resizable-handle-bl {
+}
+
+.ui-resizable-hover .ui-resizable-handle, .ui-resizable-hidden .ui-resizable-handle {
+}
+
+.ie .ui-resizable-hover .ui-resizable-handle, .ie .ui-resizable-hidden .ui-resizable-handle {
+}
+
+.ui-resizable-ghost {
+}
+
+.ie .ui-resizable-ghost {
+}
+
+.ui-resizable-knob .ui-resizable-handle {
+}
+
+.ui-resizable-knob .ui-resizable-handle-t {
+}
+
+.ui-resizable-knob .ui-resizable-handle-r {
+}
+
+.ui-resizable-knob .ui-resizable-handle-b {
+}
+
+.ui-resizable-knob .ui-resizable-handle-l {
+}
+
+.ui-resizable-knob .ui-resizable-handle-tr {
+}
+
+.ui-resizable-knob .ui-resizable-handle-tl {
+}
+
+.ui-resizable-knob .ui-resizable-handle-bl {
+}
+
+.ui-resizable-knob .ui-resizable-handle-br {
+}
+
+.ui-resizable-status {
+}
+
+.ui-resizable-status strong, .ui-resizable-status em {
+}
+
+.ie6 .ui-resizable-status, .ie6 .ui-resizable-status strong, .ie6 .ui-resizable-status em {
 }
 
 .freeform .portlet-boundary .ui-resizable-handle {
@@ -252,10 +309,10 @@
 .ui-dialog.has-title .ui-dialog-title {
 }
 
-.ui-dialog.ui-resizable .ui-dialog-content {
+.ui-dialog .ui-dialog-content {
 }
 
-.ui-dialog.ui-resizable-disabled .ui-dialog-content {
+.ui-dialog.ui-resizable .ui-dialog-content {
 }
 
 .ui-dialog .ui-dialog-buttonpane {

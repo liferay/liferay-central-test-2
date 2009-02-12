@@ -1,4 +1,4 @@
-Liferay.ColorPicker = new Class({
+Liferay.ColorPicker = new Expanse.Class({
 
 	/**
 	 * OPTIONS

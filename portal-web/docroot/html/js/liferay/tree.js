@@ -1,4 +1,4 @@
-Liferay.Tree = new Class({
+Liferay.Tree = new Expanse.Class({
 
 	/**
 	 * OPTIONS

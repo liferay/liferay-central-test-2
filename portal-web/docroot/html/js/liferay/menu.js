@@ -1,4 +1,4 @@
-Liferay.Menu = new Class({
+Liferay.Menu = new Expanse.Class({
 	initialize: function() {
 		var instance = this;
 
@@ -11,9 +11,9 @@ Liferay.Menu = new Class({
 				trigger: null
 			};
 
-			if (Liferay.Layout && Liferay.Layout.Columns.sortColumns) {
-				Liferay.Layout.Columns.sortColumns.bind(
-					'sortstart.sortable',
+			if (Liferay.Layout) {
+				Liferay.Layout.bind(
+					'b4StartDrag',
 					function(event) {
 						instance._closeActiveMenu();
 					}

@@ -1,4 +1,4 @@
-Liferay.Upload = new Class({
+Liferay.Upload = new Expanse.Class({
 
 	/**
 	 * OPTIONS

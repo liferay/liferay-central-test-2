@@ -69,7 +69,7 @@ if (dateFormatPattern.indexOf("y") == 0) {
 
 <script type="text/javascript">
 	if (!Liferay.DatePicker) {
-		Liferay.DatePicker = new Class({
+		Liferay.DatePicker = new Expanse.Class({
 			initialize: function(options) {
 				var instance = this;
 

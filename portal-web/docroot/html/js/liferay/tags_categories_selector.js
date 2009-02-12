@@ -1,4 +1,4 @@
-Liferay.TagsCategoriesSelector = new Class({
+Liferay.TagsCategoriesSelector = new Expanse.Class({
 
 	/**
 	 * OPTIONS

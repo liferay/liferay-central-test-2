@@ -17,6 +17,8 @@ Liferay.AutoFields = Liferay.Observable.extend({
 	initialize: function(options) {
 		var instance = this;
 
+		instance.options = options;
+
 		var container = jQuery(options.container);
 		var baseRows = jQuery(options.baseRows);
 
@@ -163,6 +165,14 @@ Liferay.AutoFields = Liferay.Observable.extend({
 
 		currentRow.after(clone);
 
+		if (instance.options.sortable) {
+			clone.find('.handle-sort-vertical').attr('id', '');
+
+			clone.resetId();
+
+			instance._sortable.add(clone[0]);
+		}
+
 		clone.find('input:text:first').trigger('focus');
 
 		instance.trigger('addRow', {row: clone, originalRow: currentRow, idSeed: newSeed});
@@ -249,25 +259,11 @@ Liferay.AutoFields = Liferay.Observable.extend({
 			rows.find(sortableHandle).addClass('handle-sort-vertical');
 		}
 
-		instance._rowContainer.sortable(
+		instance._sortable = new Expanse.Sortable(
 			{
 				axis: 'y',
-				helper: function(event, obj) {
-					var height = obj.height();
-					var width = obj.width();
-
-					var helper = obj.clone();
-
-					helper.css(
-						{
-							height: height,
-							width: width
-						}
-					);
-
-					return helper[0];
-				},
-				items: '.lfr-form-row',
+				container: instance._rowContainer,
+				items: rows,
 				handle: sortableHandle
 			}
 		);

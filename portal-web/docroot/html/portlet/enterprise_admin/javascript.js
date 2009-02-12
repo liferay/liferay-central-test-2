@@ -1,7 +1,7 @@
 Liferay.EnterpriseAdmin = {
 }
 
-Liferay.EnterpriseAdmin.FormNavigator = new Class({
+Liferay.EnterpriseAdmin.FormNavigator = new Expanse.Class({
 	initialize: function(options) {
 		var instance = this;
 

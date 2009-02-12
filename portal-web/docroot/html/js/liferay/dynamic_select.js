@@ -1,4 +1,4 @@
-Liferay.DynamicSelect = new Class({
+Liferay.DynamicSelect = new Expanse.Class({
 
 	/**
 	 * OPTIONS

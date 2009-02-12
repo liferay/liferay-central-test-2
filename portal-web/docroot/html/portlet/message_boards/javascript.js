@@ -1,5 +1,5 @@
 if (!Liferay.Editor.bbCode) {
-	Liferay.Editor.bbCode = new Class({
+	Liferay.Editor.bbCode = new Expanse.Class({
 		initialize: function(options) {
 			var instance = this;
 			options = options || {};

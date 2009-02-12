@@ -1,4 +1,4 @@
-Liferay.Notice = new Class({
+Liferay.Notice = new Expanse.Class({
 
 	/**
 	 * OPTIONS

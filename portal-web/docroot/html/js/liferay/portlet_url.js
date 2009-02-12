@@ -1,4 +1,4 @@
-Liferay.PortletURL = new Class({
+Liferay.PortletURL = new Expanse.Class({
 	initialize: function(lifecycle, params) {
 		var instance = this;
 
