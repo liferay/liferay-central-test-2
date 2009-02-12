@@ -22,41 +22,39 @@
 
 package com.liferay.portalweb.portlet.calendar;
 
-import com.liferay.portalweb.portal.BaseTests;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="CalendarTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssertImportLARTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CalendarTests extends BaseTests {
+public class AssertImportLARTest extends BaseTestCase {
+	public void testAssertImportLAR() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
+			try {
+				if (selenium.isElementPresent("link=Calendar Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
-		testSuite.addTestSuite(SetTimezoneTest.class);
-		testSuite.addTestSuite(AddAppointmentEventTest.class);
-		testSuite.addTestSuite(AddConcertEventTest.class);
-		testSuite.addTestSuite(AddVacationEventTest.class);
-		testSuite.addTestSuite(GetAppointmentEventsTest.class);
-		testSuite.addTestSuite(GetConcertEventsTest.class);
-		testSuite.addTestSuite(GetVacationEventsTest.class);
-		testSuite.addTestSuite(EditEventTest.class);
-		testSuite.addTestSuite(AddTemporaryEventTest.class);
-		testSuite.addTestSuite(DeleteTemporaryEventTest.class);
-		testSuite.addTestSuite(AssertConfigurationTest.class);
-		testSuite.addTestSuite(DeleteAllEventsTest.class);
-		testSuite.addTestSuite(ImportLARTest.class);
-		testSuite.addTestSuite(AssertImportLARTest.class);
-		testSuite.addTestSuite(DeletePageTest.class);
+			Thread.sleep(1000);
+		}
 
-		return testSuite;
+		selenium.click(RuntimeVariables.replace("link=Calendar Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Events"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Edited Test Event"));
+		assertTrue(selenium.isElementPresent("link=Test Event"));
+		assertTrue(selenium.isElementPresent("link=Caedmon's Call Concert!"));
 	}
-
 }

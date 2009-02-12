@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="UploadLARFileTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="ImportLARTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class UploadLARFileTest extends BaseTestCase {
-	public void testUploadLARFile() throws Exception {
+public class ImportLARTest extends BaseTestCase {
+	public void testImportLAR() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -93,6 +93,7 @@ public class UploadLARFileTest extends BaseTestCase {
 		selenium.type("_86_importFileName",
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\calendar\\Calendar-Selenium.portlet.lar"));
+		selenium.click("_86_DELETE_PORTLET_DATA");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -110,33 +111,9 @@ public class UploadLARFileTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Import']");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Import']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Events"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Edited Test Event"));
-		assertTrue(selenium.isElementPresent("link=Off to Yosemite!"));
-		assertTrue(selenium.isElementPresent("link=Caedmon's Call Concert!"));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }
