@@ -40,17 +40,19 @@ if (!Liferay.Editor.bbCode) {
 			var value = textarea.val();
 
 			if (Liferay.Browser.isIe()) {
-				var sel = document.selection.createRange();
+				instance._setSelectionRange();
 
 				if (content != null) {
-					sel.text = begTag + content + endTag;
+					instance._selectionRange.text = begTag + content + endTag;
 				}
 				else {
-					sel.text = begTag + sel.text + endTag;
+					instance._selectionRange.text = begTag + instance._selectionRange.text + endTag;
 				}
 
-				sel.moveEnd('character', -endTag.length);
-				sel.select();
+				instance._selectionRange.moveEnd('character', -endTag.length);
+				instance._selectionRange.select();
+
+				instance._selectionRange = null;
 			}
 			else if (field.selectionStart || field.selectionStart == 0) {
 				var startPos = field.selectionStart;
@@ -397,6 +399,8 @@ if (!Liferay.Editor.bbCode) {
 
 			instance._location.click(
 				function(event) {
+					instance._setSelectionRange();
+
 					var target = event.target;
 					var buttonId = event.target.getAttribute('buttonId');
 
@@ -552,6 +556,16 @@ if (!Liferay.Editor.bbCode) {
 			}
 			else if (field.selectionStart) {
 				field.selectionEnd = field.selectionStart;
+			}
+		},
+
+		_setSelectionRange: function() {
+			var instance = this;
+
+			if (Liferay.Browser.isIe() && (instance._selectionRange == null)) {
+				instance._textarea.trigger('focus');
+
+				instance._selectionRange = document.selection.createRange();
 			}
 		}
 	});
