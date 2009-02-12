@@ -167,7 +167,7 @@ List<Group> myPlaces = user.getMyPlaces(max);
 				else if (userCommunity) {
 					showPrivatePlace = PropsValues.MY_PLACES_SHOW_USER_PRIVATE_SITES_WITH_NO_LAYOUTS;
 
-					if (!PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE) {
+					if (!PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE) {
 						showPrivatePlace = false;
 					}
 				}
