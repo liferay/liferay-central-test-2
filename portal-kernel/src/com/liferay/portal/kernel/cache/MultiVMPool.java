@@ -24,9 +24,6 @@ package com.liferay.portal.kernel.cache;
 
 import java.io.Serializable;
 
-import java.util.Map;
-import java.util.Set;
-
 /**
  * <a href="MultiVMPool.java.html"><b><i>View Source</i></b></a>
  *
@@ -40,10 +37,6 @@ public interface MultiVMPool {
 
 	public void clear(String name);
 
-	public void clearGroup(
-		Map<String, Set<String>> groups, String groupKey,
-		PortalCache portalCache);
-
 	public Object get(String name, String key);
 
 	public Object get(PortalCache portalCache, String key);
@@ -54,23 +47,12 @@ public interface MultiVMPool {
 
 	public void put(PortalCache portalCache, String key, Object obj);
 
-	public void put(
-		PortalCache portalCache, String key, Map<String, Set<String>> groups,
-		String groupKey, Object obj);
-
 	public void put(String name, String key, Serializable obj);
 
 	public void put(PortalCache portalCache, String key, Serializable obj);
 
-	public void put(
-		PortalCache portalCache, String key, Map<String, Set<String>> groups,
-		String groupKey, Serializable obj);
-
 	public void remove(String name, String key);
 
 	public void remove(PortalCache portalCache, String key);
-
-	public void updateGroup(
-		Map<String, Set<String>> groups, String groupKey, String key);
 
 }

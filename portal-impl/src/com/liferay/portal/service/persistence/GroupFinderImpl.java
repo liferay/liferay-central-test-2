@@ -30,27 +30,14 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.LayoutSet;
-import com.liferay.portal.model.Permission;
-import com.liferay.portal.model.Resource;
-import com.liferay.portal.model.ResourceCode;
-import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.GroupModelImpl;
-import com.liferay.portal.model.impl.LayoutSetModelImpl;
-import com.liferay.portal.model.impl.PermissionModelImpl;
-import com.liferay.portal.model.impl.ResourceCodeModelImpl;
-import com.liferay.portal.model.impl.ResourceModelImpl;
-import com.liferay.portal.model.impl.RoleModelImpl;
-import com.liferay.portal.model.impl.UserGroupRoleModelImpl;
-import com.liferay.portal.model.impl.UserModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
@@ -118,74 +105,37 @@ public class GroupFinderImpl
 		GroupFinder.class.getName() + ".joinByUsersGroups";
 
 	public int countByG_U(long groupId, long userId) throws SystemException {
-		String finderSQL = Group.class.getName();
-		boolean[] finderClassNamesCacheEnabled = new boolean[] {
-			GroupModelImpl.CACHE_ENABLED,
-			GroupModelImpl.CACHE_ENABLED_GROUPS_ORGS,
-			GroupModelImpl.CACHE_ENABLED_GROUPS_USERGROUPS,
-			UserModelImpl.CACHE_ENABLED_USERS_GROUPS,
-			UserModelImpl.CACHE_ENABLED_USERS_ORGS,
-			UserModelImpl.CACHE_ENABLED_USERS_USERGROUPS
-		};
-		String[] finderClassNames = new String[] {
-			Group.class.getName(), "Groups_Orgs", "Groups_UserGroups",
-			"Users_Groups", "Users_Orgs", "Users_UserGroups"
-		};
-		String finderMethodName = "customCountByG_U";
-		String finderParams[] = new String[] {
-			Long.class.getName(), Long.class.getName()
-		};
-		Object finderArgs[] = new Object[] {groupId, userId};
+		LinkedHashMap<String, Object> params1 =
+			new LinkedHashMap<String, Object>();
 
-		Object result = null;
+		params1.put("usersGroups", userId);
 
-		if (!ArrayUtil.contains(finderClassNamesCacheEnabled, false)) {
-			result = FinderCacheUtil.getResult(
-				finderSQL, finderClassNames, finderMethodName, finderParams,
-				finderArgs, this);
+		LinkedHashMap<String, Object> params2 =
+			new LinkedHashMap<String, Object>();
+
+		params2.put("groupsOrgs", userId);
+
+		LinkedHashMap<String, Object> params3 =
+			new LinkedHashMap<String, Object>();
+
+		params3.put("groupsUserGroups", userId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			int count = countByGroupId(session, groupId, params1);
+			count += countByGroupId(session, groupId, params2);
+			count += countByGroupId(session, groupId, params3);
+
+			return count;
 		}
-
-		if (result == null) {
-			LinkedHashMap<String, Object> params1 =
-				new LinkedHashMap<String, Object>();
-
-			params1.put("usersGroups", userId);
-
-			LinkedHashMap<String, Object> params2 =
-				new LinkedHashMap<String, Object>();
-
-			params2.put("groupsOrgs", userId);
-
-			LinkedHashMap<String, Object> params3 =
-				new LinkedHashMap<String, Object>();
-
-			params3.put("groupsUserGroups", userId);
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				int count = countByGroupId(session, groupId, params1);
-				count += countByGroupId(session, groupId, params2);
-				count += countByGroupId(session, groupId, params3);
-
-				FinderCacheUtil.putResult(
-					finderSQL, finderClassNamesCacheEnabled, finderClassNames,
-					finderMethodName, finderParams, finderArgs,
-					new Long(count));
-
-				return count;
-			}
-			catch (Exception e) {
-				throw new SystemException(e);
-			}
-			finally {
-				closeSession(session);
-			}
+		catch (Exception e) {
+			throw new SystemException(e);
 		}
-		else {
-			return ((Long)result).intValue();
+		finally {
+			closeSession(session);
 		}
 	}
 
@@ -201,103 +151,53 @@ public class GroupFinderImpl
 			params = new LinkedHashMap<String, Object>();
 		}
 
-		String finderSQL = Group.class.getName();
-		boolean[] finderClassNamesCacheEnabled = new boolean[] {
-			GroupModelImpl.CACHE_ENABLED, LayoutSetModelImpl.CACHE_ENABLED,
-			PermissionModelImpl.CACHE_ENABLED, ResourceModelImpl.CACHE_ENABLED,
-			ResourceCodeModelImpl.CACHE_ENABLED,
-			UserGroupRoleModelImpl.CACHE_ENABLED,
-			GroupModelImpl.CACHE_ENABLED_GROUPS_ORGS,
-			GroupModelImpl.CACHE_ENABLED_GROUPS_ROLES,
-			GroupModelImpl.CACHE_ENABLED_GROUPS_USERGROUPS,
-			RoleModelImpl.CACHE_ENABLED_ROLES_PERMISSIONS,
-			UserModelImpl.CACHE_ENABLED_USERS_GROUPS,
-			UserModelImpl.CACHE_ENABLED_USERS_ORGS,
-			UserModelImpl.CACHE_ENABLED_USERS_USERGROUPS
-		};
-		String[] finderClassNames = new String[] {
-			Group.class.getName(), LayoutSet.class.getName(),
-			Permission.class.getName(), Resource.class.getName(),
-			ResourceCode.class.getName(), UserGroupRole.class.getName(),
-			"Groups_Orgs", "Groups_Roles", "Groups_UserGroups",
-			"Roles_Permissions", "Users_Groups", "Users_Orgs",
-			"Users_UserGroups"
-		};
-		String finderMethodName = "customCountByC_N_D";
-		String finderParams[] = new String[] {
-			Long.class.getName(), String.class.getName(),
-			String.class.getName(), LinkedHashMap.class.getName(),
-			String.class.getName(), String.class.getName()
-		};
-		Object finderArgs[] = new Object[] {
-			companyId, name, description, params.toString()
-		};
+		Long userId = (Long)params.get("usersGroups");
 
-		Object result = null;
+		LinkedHashMap<String, Object> params1 = params;
 
-		if (!ArrayUtil.contains(finderClassNamesCacheEnabled, false)) {
-			result = FinderCacheUtil.getResult(
-				finderSQL, finderClassNames, finderMethodName, finderParams,
-				finderArgs, this);
+		LinkedHashMap<String, Object> params2 =
+			new LinkedHashMap<String, Object>();
+
+		params2.putAll(params1);
+
+		if (userId != null) {
+			params2.remove("usersGroups");
+			params2.put("groupsOrgs", userId);
 		}
 
-		if (result == null) {
-			Long userId = (Long)params.get("usersGroups");
+		LinkedHashMap<String, Object> params3 =
+			new LinkedHashMap<String, Object>();
 
-			LinkedHashMap<String, Object> params1 = params;
+		params3.putAll(params1);
 
-			LinkedHashMap<String, Object> params2 =
-				new LinkedHashMap<String, Object>();
-
-			params2.putAll(params1);
-
-			if (userId != null) {
-				params2.remove("usersGroups");
-				params2.put("groupsOrgs", userId);
-			}
-
-			LinkedHashMap<String, Object> params3 =
-				new LinkedHashMap<String, Object>();
-
-			params3.putAll(params1);
-
-			if (userId != null) {
-				params3.remove("usersGroups");
-				params3.put("groupsUserGroups", userId);
-			}
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				int count = countByC_N_D(
-					session, companyId, name, description, params1);
-
-				if (Validator.isNotNull(userId)) {
-					count += countByC_N_D(
-						session, companyId, name, description, params2);
-
-					count += countByC_N_D(
-						session, companyId, name, description, params3);
-				}
-
-				FinderCacheUtil.putResult(
-					finderSQL, finderClassNamesCacheEnabled, finderClassNames,
-					finderMethodName, finderParams, finderArgs,
-					new Long(count));
-
-				return count;
-			}
-			catch (Exception e) {
-				throw new SystemException(e);
-			}
-			finally {
-				closeSession(session);
-			}
+		if (userId != null) {
+			params3.remove("usersGroups");
+			params3.put("groupsUserGroups", userId);
 		}
-		else {
-			return ((Long)result).intValue();
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			int count = countByC_N_D(
+				session, companyId, name, description, params1);
+
+			if (Validator.isNotNull(userId)) {
+				count += countByC_N_D(
+					session, companyId, name, description, params2);
+
+				count += countByC_N_D(
+					session, companyId, name, description, params3);
+			}
+
+			return count;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
 		}
 	}
 
@@ -477,110 +377,60 @@ public class GroupFinderImpl
 		sql = sb.toString();
 		sql = CustomSQLUtil.replaceOrderBy(sql, obc);
 
-		String finderSQL = sql;
-		boolean[] finderClassNamesCacheEnabled = new boolean[] {
-			GroupModelImpl.CACHE_ENABLED, LayoutSetModelImpl.CACHE_ENABLED,
-			PermissionModelImpl.CACHE_ENABLED, ResourceModelImpl.CACHE_ENABLED,
-			ResourceCodeModelImpl.CACHE_ENABLED,
-			UserGroupRoleModelImpl.CACHE_ENABLED,
-			GroupModelImpl.CACHE_ENABLED_GROUPS_ORGS,
-			GroupModelImpl.CACHE_ENABLED_GROUPS_ROLES,
-			GroupModelImpl.CACHE_ENABLED_GROUPS_USERGROUPS,
-			RoleModelImpl.CACHE_ENABLED_ROLES_PERMISSIONS,
-			UserModelImpl.CACHE_ENABLED_USERS_GROUPS,
-			UserModelImpl.CACHE_ENABLED_USERS_ORGS,
-			UserModelImpl.CACHE_ENABLED_USERS_USERGROUPS
-		};
-		String[] finderClassNames = new String[] {
-			Group.class.getName(), LayoutSet.class.getName(),
-			Permission.class.getName(), Resource.class.getName(),
-			ResourceCode.class.getName(), UserGroupRole.class.getName(),
-			"Groups_Orgs", "Groups_Roles", "Groups_UserGroups",
-			"Roles_Permissions", "Users_Groups", "Users_Orgs",
-			"Users_UserGroups"
-		};
-		String finderMethodName = "customFindByC_N_D";
-		String finderParams[] = new String[] {
-			Long.class.getName(), String.class.getName(),
-			String.class.getName(), LinkedHashMap.class.getName(),
-			String.class.getName(), String.class.getName()
-		};
-		Object finderArgs[] = new Object[] {
-			companyId, name, description, params.toString(),
-			String.valueOf(start), String.valueOf(end)
-		};
+		Session session = null;
 
-		Object result = null;
+		try {
+			session = openSession();
 
-		if (!ArrayUtil.contains(finderClassNamesCacheEnabled, false)) {
-			result = FinderCacheUtil.getResult(
-				finderSQL, finderClassNames, finderMethodName, finderParams,
-				finderArgs, this);
-		}
+			SQLQuery q = session.createSQLQuery(sql);
 
-		if (result == null) {
-			Session session = null;
+			q.addScalar("groupId", Type.STRING);
 
-			try {
-				session = openSession();
+			QueryPos qPos = QueryPos.getInstance(q);
 
-				SQLQuery q = session.createSQLQuery(sql);
+			setJoin(qPos, params1);
+			qPos.add(companyId);
+			qPos.add(name);
+			qPos.add(name);
+			qPos.add(description);
+			qPos.add(description);
 
-				q.addScalar("groupId", Type.STRING);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				setJoin(qPos, params1);
+			if (Validator.isNotNull(userId)) {
+				setJoin(qPos, params2);
 				qPos.add(companyId);
 				qPos.add(name);
 				qPos.add(name);
 				qPos.add(description);
 				qPos.add(description);
 
-				if (Validator.isNotNull(userId)) {
-					setJoin(qPos, params2);
-					qPos.add(companyId);
-					qPos.add(name);
-					qPos.add(name);
-					qPos.add(description);
-					qPos.add(description);
-
-					setJoin(qPos, params3);
-					qPos.add(companyId);
-					qPos.add(name);
-					qPos.add(name);
-					qPos.add(description);
-					qPos.add(description);
-				}
-
-				List<Group> groups = new ArrayList<Group>();
-
-				Iterator<String> itr = (Iterator<String>)QueryUtil.iterate(
-					q, getDialect(), start, end);
-
-				while (itr.hasNext()) {
-					long groupId = GetterUtil.getLong(itr.next());
-
-					Group group = GroupUtil.findByPrimaryKey(groupId);
-
-					groups.add(group);
-				}
-
-				FinderCacheUtil.putResult(
-					finderSQL, finderClassNamesCacheEnabled, finderClassNames,
-					finderMethodName, finderParams, finderArgs, groups);
-
-				return groups;
+				setJoin(qPos, params3);
+				qPos.add(companyId);
+				qPos.add(name);
+				qPos.add(name);
+				qPos.add(description);
+				qPos.add(description);
 			}
-			catch (Exception e) {
-				throw new SystemException(e);
+
+			List<Group> groups = new ArrayList<Group>();
+
+			Iterator<String> itr = (Iterator<String>)QueryUtil.iterate(
+				q, getDialect(), start, end);
+
+			while (itr.hasNext()) {
+				long groupId = GetterUtil.getLong(itr.next());
+
+				Group group = GroupUtil.findByPrimaryKey(groupId);
+
+				groups.add(group);
 			}
-			finally {
-				closeSession(session);
-			}
+
+			return groups;
 		}
-		else {
-			return (List<Group>)result;
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
 		}
 	}
 

@@ -25,12 +25,8 @@ package com.liferay.portal.cache;
 import com.liferay.portal.kernel.cache.MultiVMPool;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.cache.PortalCacheManager;
-import com.liferay.portal.kernel.util.ConcurrentHashSet;
 
 import java.io.Serializable;
-
-import java.util.Map;
-import java.util.Set;
 
 /**
  * <a href="MultiVMPoolImpl.java.html"><b><i>View Source</i></b></a>
@@ -49,34 +45,6 @@ public class MultiVMPoolImpl implements MultiVMPool {
 		PortalCache portalCache = getCache(name);
 
 		portalCache.removeAll();
-	}
-
-	public void clearGroup(
-		Map<String, Set<String>> groups, String groupKey,
-		PortalCache portalCache) {
-
-		synchronized (groups) {
-			if (!groups.containsKey(groupKey)) {
-				return;
-			}
-
-			Set<String> groupKeys = groups.get(groupKey);
-
-			String[] keys = groupKeys.toArray(new String[groupKeys.size()]);
-
-			for (int i = 0; i < keys.length; i++) {
-				String key = keys[i];
-
-				// The functionality here pretty much mimics OSCache groups. It
-				// is not necessary to remove the keys in dependent groups
-				// because they will be cleared when the group itself is
-				// cleared, resulting in a performance boost.
-
-				portalCache.remove(key);
-			}
-
-			groupKeys.clear();
-		}
 	}
 
 	public Object get(String name, String key) {
@@ -103,15 +71,6 @@ public class MultiVMPoolImpl implements MultiVMPool {
 		portalCache.put(key, obj);
 	}
 
-	public void put(
-		PortalCache portalCache, String key, Map<String, Set<String>> groups,
-		String groupKey, Object obj) {
-
-		put(portalCache, key, obj);
-
-		updateGroup(groups, groupKey, key);
-	}
-
 	public void put(String name, String key, Serializable obj) {
 		PortalCache portalCache = getCache(name);
 
@@ -120,15 +79,6 @@ public class MultiVMPoolImpl implements MultiVMPool {
 
 	public void put(PortalCache portalCache, String key, Serializable obj) {
 		portalCache.put(key, obj);
-	}
-
-	public void put(
-		PortalCache portalCache, String key, Map<String, Set<String>> groups,
-		String groupKey, Serializable obj) {
-
-		put(portalCache, key, obj);
-
-		updateGroup(groups, groupKey, key);
 	}
 
 	public void remove(String name, String key) {
@@ -143,25 +93,6 @@ public class MultiVMPoolImpl implements MultiVMPool {
 
 	public void setPortalCacheManager(PortalCacheManager portalCacheManager) {
 		_portalCacheManager = portalCacheManager;
-	}
-
-	public void updateGroup(
-		Map<String, Set<String>> groups, String groupKey, String key) {
-
-		synchronized (groups) {
-			Set<String> groupKeys = null;
-
-			if (groups.containsKey(groupKey)) {
-				groupKeys = groups.get(groupKey);
-			}
-			else {
-				groupKeys = new ConcurrentHashSet<String>();
-
-				groups.put(groupKey, groupKeys);
-			}
-
-			groupKeys.add(key);
-		}
 	}
 
 	private PortalCacheManager _portalCacheManager;

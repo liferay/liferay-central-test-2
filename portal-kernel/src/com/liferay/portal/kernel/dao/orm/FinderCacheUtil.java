@@ -50,29 +50,12 @@ public class FinderCacheUtil {
 			className, methodName, params, args, sessionFactory);
 	}
 
-	public static Object getResult(
-		String sql, String[] classNames, String methodName, String[] params,
-		Object[] args, SessionFactory sessionFactory) {
-
-		return getFinderCache().getResult(
-			sql, classNames, methodName, params, args, sessionFactory);
-	}
-
 	public static void putResult(
 		boolean classNameCacheEnabled, String className, String methodName,
 		String[] params, Object[] args, Object result) {
 
 		getFinderCache().putResult(
 			classNameCacheEnabled, className, methodName, params, args, result);
-	}
-
-	public static void putResult(
-		String sql, boolean[] classNamesCacheEnabled, String[] classNames,
-		String methodName, String[] params, Object[] args, Object result) {
-
-		getFinderCache().putResult(
-			sql, classNamesCacheEnabled, classNames, methodName, params, args,
-			result);
 	}
 
 	public static void invalidate() {

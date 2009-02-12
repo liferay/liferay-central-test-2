@@ -30,17 +30,14 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Role;
-import com.liferay.portal.model.impl.GroupModelImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.model.impl.RoleModelImpl;
-import com.liferay.portal.model.impl.UserModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
@@ -96,90 +93,53 @@ public class RoleFinderImpl extends BasePersistenceImpl implements RoleFinder {
 		RoleFinder.class.getName() + ".joinByUsersRoles";
 
 	public int countByR_U(long roleId, long userId) throws SystemException {
-		String finderSQL = Role.class.getName();
-		boolean[] finderClassNamesCacheEnabled = new boolean[] {
-			GroupModelImpl.CACHE_ENABLED, RoleModelImpl.CACHE_ENABLED,
-			GroupModelImpl.CACHE_ENABLED_GROUPS_ROLES,
-			UserModelImpl.CACHE_ENABLED_USERS_GROUPS,
-			UserModelImpl.CACHE_ENABLED_USERS_ORGS,
-			UserModelImpl.CACHE_ENABLED_USERS_ROLES,
-			UserModelImpl.CACHE_ENABLED_USERS_USERGROUPS
-		};
-		String[] finderClassNames = new String[] {
-			Group.class.getName(), Role.class.getName(), "Groups_Roles",
-			"Users_Groups", "Users_Orgs", "Users_Roles", "Users_UserGroups"
-		};
-		String finderMethodName = "customCountByR_U";
-		String finderParams[] = new String[] {
-			Long.class.getName(), Long.class.getName()
-		};
-		Object finderArgs[] = new Object[] {new Long(roleId), new Long(userId)};
+		Session session = null;
 
-		Object result = null;
+		try {
+			session = openSession();
 
-		if (!ArrayUtil.contains(finderClassNamesCacheEnabled, false)) {
-			result = FinderCacheUtil.getResult(
-				finderSQL, finderClassNames, finderMethodName, finderParams,
-				finderArgs, this);
-		}
+			StringBuilder sb = new StringBuilder();
 
-		if (result == null) {
-			Session session = null;
+			sb.append("(");
+			sb.append(CustomSQLUtil.get(COUNT_BY_COMMUNITY));
+			sb.append(") UNION (");
+			sb.append(CustomSQLUtil.get(COUNT_BY_ORGANIZATION));
+			sb.append(") UNION (");
+			sb.append(CustomSQLUtil.get(COUNT_BY_USER));
+			sb.append(") UNION (");
+			sb.append(CustomSQLUtil.get(COUNT_BY_USER_GROUP));
+			sb.append(")");
 
-			try {
-				session = openSession();
+			SQLQuery q = session.createSQLQuery(sb.toString());
 
-				StringBuilder sb = new StringBuilder();
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
-				sb.append("(");
-				sb.append(CustomSQLUtil.get(COUNT_BY_COMMUNITY));
-				sb.append(") UNION (");
-				sb.append(CustomSQLUtil.get(COUNT_BY_ORGANIZATION));
-				sb.append(") UNION (");
-				sb.append(CustomSQLUtil.get(COUNT_BY_USER));
-				sb.append(") UNION (");
-				sb.append(CustomSQLUtil.get(COUNT_BY_USER_GROUP));
-				sb.append(")");
+			QueryPos qPos = QueryPos.getInstance(q);
 
-				SQLQuery q = session.createSQLQuery(sb.toString());
+			for (int i = 0; i < 4; i++) {
+				qPos.add(roleId);
+				qPos.add(userId);
+			}
 
-				q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+			int count = 0;
 
-				QueryPos qPos = QueryPos.getInstance(q);
+			Iterator<Long> itr = q.list().iterator();
 
-				for (int i = 0; i < 4; i++) {
-					qPos.add(roleId);
-					qPos.add(userId);
+			while (itr.hasNext()) {
+				Long l = itr.next();
+
+				if (l != null) {
+					count += l.intValue();
 				}
-
-				int count = 0;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				while (itr.hasNext()) {
-					Long l = itr.next();
-
-					if (l != null) {
-						count += l.intValue();
-					}
-				}
-
-				FinderCacheUtil.putResult(
-					finderSQL, finderClassNamesCacheEnabled, finderClassNames,
-					finderMethodName, finderParams, finderArgs,
-					new Long(count));
-
-				return count;
 			}
-			catch (Exception e) {
-				throw new SystemException(e);
-			}
-			finally {
-				closeSession(session);
-			}
+
+			return count;
 		}
-		else {
-			return ((Long)result).intValue();
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
 		}
 	}
 

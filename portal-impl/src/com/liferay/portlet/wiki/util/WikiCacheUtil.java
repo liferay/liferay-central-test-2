@@ -33,8 +33,6 @@ import com.liferay.portlet.wiki.model.WikiPageDisplay;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 
 import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.portlet.PortletURL;
 
@@ -51,17 +49,11 @@ public class WikiCacheUtil {
 	public static final String CACHE_NAME = WikiCacheUtil.class.getName();
 
 	public static void clearCache(long nodeId) {
-		for (String groupKey : _groups.keySet()) {
-			if (groupKey.startsWith(CACHE_NAME + StringPool.POUND + nodeId)) {
-				MultiVMPoolUtil.clearGroup(_groups, groupKey, _cache);
-			}
-		}
+		_cache.removeAll();
 	}
 
 	public static void clearCache(long nodeId, String title) {
-		String groupKey = _encodeGroupKey(nodeId, title);
-
-		MultiVMPoolUtil.clearGroup(_groups, groupKey, _cache);
+		clearCache(nodeId);
 	}
 
 	public static WikiPageDisplay getDisplay(
@@ -78,8 +70,6 @@ public class WikiCacheUtil {
 
 		String key = _encodeKey(nodeId, title, viewPageURL.toString());
 
-		String groupKey = _encodeGroupKey(nodeId, title);
-
 		WikiPageDisplay pageDisplay = (WikiPageDisplay)MultiVMPoolUtil.get(
 			_cache, key);
 
@@ -87,7 +77,7 @@ public class WikiCacheUtil {
 			pageDisplay = _getPageDisplay(
 				nodeId, title, viewPageURL, editPageURL, attachmentURLPrefix);
 
-			MultiVMPoolUtil.put(_cache, key, _groups, groupKey, pageDisplay);
+			MultiVMPoolUtil.put(_cache, key, pageDisplay);
 		}
 
 		if (_log.isDebugEnabled()) {
@@ -106,22 +96,16 @@ public class WikiCacheUtil {
 		String key = _encodeKey(
 			page.getNodeId(), page.getTitle(), _OUTGOING_LINKS);
 
-		String groupKey = _encodeGroupKey(page.getNodeId(), page.getTitle());
-
 		Map<String, Boolean> links = (Map<String, Boolean>)MultiVMPoolUtil.get(
 			_cache, key);
 
 		if (links == null) {
 			links = WikiUtil.getLinks(page);
 
-			MultiVMPoolUtil.put(_cache, key, _groups, groupKey, links);
+			MultiVMPoolUtil.put(_cache, key, links);
 		}
 
 		return links;
-	}
-
-	private static String _encodeGroupKey(long nodeId, String title) {
-		return _encodeKey(nodeId, title, null);
 	}
 
 	private static String _encodeKey(
@@ -172,8 +156,5 @@ public class WikiCacheUtil {
 	private static Log _log = LogFactoryUtil.getLog(WikiUtil.class);
 
 	private static PortalCache _cache = MultiVMPoolUtil.getCache(CACHE_NAME);
-
-	private static Map<String, Set<String>> _groups =
-		new ConcurrentHashMap<String, Set<String>>();
 
 }

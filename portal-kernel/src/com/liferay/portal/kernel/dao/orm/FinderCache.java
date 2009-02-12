@@ -38,17 +38,9 @@ public interface FinderCache {
 		String className, String methodName, String[] params, Object[] args,
 		SessionFactory sessionFactory);
 
-	public Object getResult(
-		String sql, String[] classNames, String methodName, String[] params,
-		Object[] args, SessionFactory sessionFactory);
-
 	public void putResult(
 		boolean classNameCacheEnabled, String className, String methodName,
 		String[] params, Object[] args, Object result);
-
-	public void putResult(
-		String sql, boolean[] classNamesCacheEnabled, String[] classNames,
-		String methodName, String[] params, Object[] args, Object result);
 
 	public void invalidate();
 

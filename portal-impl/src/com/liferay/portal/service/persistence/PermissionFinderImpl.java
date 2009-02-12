@@ -29,14 +29,12 @@ import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.impl.PermissionImpl;
 import com.liferay.portal.model.impl.PermissionModelImpl;
-import com.liferay.portal.model.impl.RoleModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
@@ -428,85 +426,47 @@ public class PermissionFinderImpl
 			List<Permission> permissions, List<Role> roles)
 		throws SystemException {
 
-		String finderSQL = Permission.class.getName();
-		boolean[] finderClassNamesCacheEnabled = new boolean[] {
-			PermissionModelImpl.CACHE_ENABLED,
-			RoleModelImpl.CACHE_ENABLED,
-			RoleModelImpl.CACHE_ENABLED_ROLES_PERMISSIONS
-		};
-		String[] finderClassNames = new String[] {
-			Permission.class.getName(), Role.class.getName(),
-			"Roles_Permissions"
-		};
-		String finderMethodName = "customCountByRolesPermissions";
-		String finderParams[] = new String[] {
-			java.util.List.class.getName(), java.util.List.class.getName()
-		};
-		Object finderArgs[] = new Object[] {
-			ListUtil.toString(permissions, "permissionId"),
-			ListUtil.toString(roles, "roleId")
-		};
+		Session session = null;
 
-		Object result = null;
+		try {
+			session = openSession();
 
-		if (!ArrayUtil.contains(finderClassNamesCacheEnabled, false)) {
-			result = FinderCacheUtil.getResult(
-				finderSQL, finderClassNames, finderMethodName, finderParams,
-				finderArgs, this);
-		}
+			String sql = CustomSQLUtil.get(COUNT_BY_ROLES_PERMISSIONS);
 
-		if (result == null) {
-			Session session = null;
+			sql = StringUtil.replace(
+				sql, "[$PERMISSION_IDS$]",
+				getPermissionIds(permissions, "Roles_Permissions"));
+			sql = StringUtil.replace(
+				sql, "[$ROLE_IDS$]", getRoleIds(roles, "Roles_Permissions"));
 
-			try {
-				session = openSession();
+			SQLQuery q = session.createSQLQuery(sql);
 
-				String sql = CustomSQLUtil.get(COUNT_BY_ROLES_PERMISSIONS);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
-				sql = StringUtil.replace(
-					sql, "[$PERMISSION_IDS$]",
-					getPermissionIds(permissions, "Roles_Permissions"));
-				sql = StringUtil.replace(
-					sql, "[$ROLE_IDS$]",
-					getRoleIds(roles, "Roles_Permissions"));
+			QueryPos qPos = QueryPos.getInstance(q);
 
-				SQLQuery q = session.createSQLQuery(sql);
+			setPermissionIds(qPos, permissions);
+			setRoleIds(qPos, roles);
 
-				q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+			int count = 0;
 
-				QueryPos qPos = QueryPos.getInstance(q);
+			Iterator<Long> itr = q.list().iterator();
 
-				setPermissionIds(qPos, permissions);
-				setRoleIds(qPos, roles);
+			if (itr.hasNext()) {
+				Long l = itr.next();
 
-				int count = 0;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					Long l = itr.next();
-
-					if (l != null) {
-						count = l.intValue();
-					}
+				if (l != null) {
+					count = l.intValue();
 				}
+			}
 
-				FinderCacheUtil.putResult(
-					finderSQL, finderClassNamesCacheEnabled, finderClassNames,
-					finderMethodName, finderParams, finderArgs,
-					new Long(count));
-
-				return count;
-			}
-			catch (Exception e) {
-				throw new SystemException(e);
-			}
-			finally {
-				closeSession(session);
-			}
+			return count;
 		}
-		else {
-			return ((Long)result).intValue();
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
 		}
 	}
 

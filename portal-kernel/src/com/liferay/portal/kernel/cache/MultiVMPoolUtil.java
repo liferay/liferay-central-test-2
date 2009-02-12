@@ -24,9 +24,6 @@ package com.liferay.portal.kernel.cache;
 
 import java.io.Serializable;
 
-import java.util.Map;
-import java.util.Set;
-
 /**
  * <a href="MultiVMPoolUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -42,13 +39,6 @@ public class MultiVMPoolUtil {
 
 	public static void clear(String name) {
 		getMultiVMPool().clear(name);
-	}
-
-	public static void clearGroup(
-		Map<String, Set<String>> groups, String groupKey,
-		PortalCache portalCache) {
-
-		getMultiVMPool().clearGroup(groups, groupKey, portalCache);
 	}
 
 	public static Object get(String name, String key) {
@@ -75,13 +65,6 @@ public class MultiVMPoolUtil {
 		getMultiVMPool().put(portalCache, key, obj);
 	}
 
-	public static void put(
-		PortalCache portalCache, String key, Map<String, Set<String>> groups,
-		String groupKey, Object obj) {
-
-		getMultiVMPool().put(portalCache, key, groups, groupKey, obj);
-	}
-
 	public static void put(String name, String key, Serializable obj) {
 		getMultiVMPool().put(name, key, obj);
 	}
@@ -92,25 +75,12 @@ public class MultiVMPoolUtil {
 		getMultiVMPool().put(portalCache, key, obj);
 	}
 
-	public static void put(
-		PortalCache portalCache, String key, Map<String, Set<String>> groups,
-		String groupKey, Serializable obj) {
-
-		getMultiVMPool().put(portalCache, key, groups, groupKey, obj);
-	}
-
 	public static void remove(String name, String key) {
 		getMultiVMPool().remove(name, key);
 	}
 
 	public static void remove(PortalCache portalCache, String key) {
 		getMultiVMPool().remove(portalCache, key);
-	}
-
-	public static void updateGroup(
-		Map<String, Set<String>> groups, String groupKey, String key) {
-
-		getMultiVMPool().updateGroup(groups, groupKey, key);
 	}
 
 	public void setMultiVMPool(MultiVMPool multiVMPool) {

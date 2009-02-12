@@ -36,10 +36,6 @@ import com.liferay.portlet.journal.model.JournalArticleDisplay;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.permission.JournalArticlePermission;
 
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-
 import org.apache.commons.lang.time.StopWatch;
 
 /**
@@ -71,12 +67,7 @@ public class JournalContentUtil {
 	public static void clearCache(
 		long groupId, String articleId, String templateId) {
 
-		articleId = GetterUtil.getString(articleId).toUpperCase();
-		templateId = GetterUtil.getString(templateId).toUpperCase();
-
-		String groupKey = encodeGroupKey(groupId, articleId, templateId);
-
-		MultiVMPoolUtil.clearGroup(groups, groupKey, cache);
+		clearCache();
 	}
 
 	public static String getContent(
@@ -203,11 +194,7 @@ public class JournalContentUtil {
 			if ((articleDisplay != null) && (articleDisplay.isCacheable()) &&
 				(themeDisplay.isLifecycleRender())) {
 
-				String groupKey = encodeGroupKey(
-					groupId, articleId, templateId);
-
-				MultiVMPoolUtil.put(
-					cache, key, groups, groupKey, articleDisplay);
+				MultiVMPoolUtil.put(cache, key, articleDisplay);
 			}
 		}
 
@@ -232,12 +219,6 @@ public class JournalContentUtil {
 		}
 
 		return articleDisplay;
-	}
-
-	protected static String encodeGroupKey(
-		long groupId, String articleId, String templateId) {
-
-		return encodeKey(groupId, articleId, templateId, null, null, 0);
 	}
 
 	protected static String encodeKey(
@@ -300,9 +281,6 @@ public class JournalContentUtil {
 	}
 
 	protected static PortalCache cache = MultiVMPoolUtil.getCache(CACHE_NAME);
-
-	protected static Map<String, Set<String>> groups =
-		new ConcurrentHashMap<String, Set<String>>();
 
 	private static Log _log = LogFactoryUtil.getLog(JournalContentUtil.class);
 
