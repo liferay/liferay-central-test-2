@@ -22,6 +22,7 @@
 
 package com.liferay.portalweb.portal;
 
+import com.liferay.portal.util.InitUtil;
 import com.liferay.portalweb.portal.util.SeleniumUtil;
 
 import com.thoughtworks.selenium.SeleneseTestCase;
@@ -33,6 +34,10 @@ import com.thoughtworks.selenium.SeleneseTestCase;
  *
  */
 public class BaseTestCase extends SeleneseTestCase {
+
+	public BaseTestCase() {
+		InitUtil.initWithSpring();
+	}
 
 	public void setUp() throws Exception {
 		selenium = SeleniumUtil.getSelenium();
