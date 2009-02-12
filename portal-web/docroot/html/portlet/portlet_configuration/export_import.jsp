@@ -51,8 +51,12 @@ boolean supportsLAR = Validator.isNotNull(selPortlet.getPortletDataHandlerClass(
 
 boolean supportsSetup = Validator.isNotNull(selPortlet.getConfigurationActionClass());
 
+boolean isControlPanel = false;
+
 if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 	supportsSetup = false;
+	isControlPanel = true;
+	layout = LayoutLocalServiceUtil.getLayout(LayoutLocalServiceUtil.getDefaultPlid(scopeGroupId));
 }
 %>
 
@@ -105,7 +109,7 @@ if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 		<%
 		String tabs2Names = "export,import";
 
-		if (layout.getGroup().isStagingGroup()) {
+		if (themeDisplay.getScopeGroup().isStagingGroup()) {
 			tabs2Names += ",staging";
 		}
 		%>
@@ -178,25 +182,27 @@ if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 			<c:when test='<%= tabs2.equals("staging") %>'>
 
 				<%
-				String errorMesageKey = StringPool.BLANK;
+				String errorMessageKey = StringPool.BLANK;
 
-				Group stagingGroup = layout.getGroup();
+				Group stagingGroup = themeDisplay.getScopeGroup();
 				Group liveGroup = stagingGroup.getLiveGroup();
 
 				Layout targetLayout = null;
 
-				try {
-					targetLayout = LayoutLocalServiceUtil.getLayout(liveGroup.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId());
-				}
-				catch (NoSuchLayoutException nsle) {
-					errorMesageKey = "this-portlet-is-placed-in-a-page-that-does-not-exist-in-the-live-site-publish-the-page-first";
-				}
+				if (!isControlPanel) {
+					try {
+						targetLayout = LayoutLocalServiceUtil.getLayout(liveGroup.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId());
+					}
+					catch (NoSuchLayoutException nsle) {
+						errorMessageKey = "this-portlet-is-placed-in-a-page-that-does-not-exist-in-the-live-site-publish-the-page-first";
+					}
 
-				if (targetLayout != null) {
-					LayoutType layoutType = targetLayout.getLayoutType();
+					if (targetLayout != null) {
+						LayoutType layoutType = targetLayout.getLayoutType();
 
-					if (!(layoutType instanceof LayoutTypePortlet) || !((LayoutTypePortlet)layoutType).hasPortletId(selPortlet.getPortletId())) {
-						errorMesageKey = "this-portlet-has-not-been-added-to-the-live-page-publish-the-page-first";
+						if (!(layoutType instanceof LayoutTypePortlet) || !((LayoutTypePortlet)layoutType).hasPortletId(selPortlet.getPortletId())) {
+							errorMessageKey = "this-portlet-has-not-been-added-to-the-live-page-publish-the-page-first";
+						}
 					}
 				}
 
@@ -214,7 +220,7 @@ if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 				%>
 
 				<c:choose>
-					<c:when test="<%= Validator.isNull(errorMesageKey) %>">
+					<c:when test="<%= Validator.isNull(errorMessageKey) %>">
 						<liferay-ui:message key="what-would-you-like-to-copy-from-live-or-publish-to-live" />
 
 						<br /><br />
@@ -279,7 +285,7 @@ if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 									<input type="button" value="<liferay-ui:message key="propose-publication" />" onClick="Liferay.LayoutExporter.proposeLayout({url: '<%= proposePublicationURL.toString() %>', namespace: '<%= PortalUtil.getPortletNamespace(PortletKeys.LAYOUT_MANAGEMENT) %>', reviewers: <%= StringUtil.replace(jsonReviewers.toString(), '"', '\'') %>, title: '<liferay-ui:message key="proposal-description" />'});" />
 								</c:if>
 							</c:when>
-							<c:when test="<%= themeDisplay.getURLPublishToLive() != null %>">
+							<c:when test="<%= (themeDisplay.getURLPublishToLive() != null) || isControlPanel %>">
 								<input type="button" value="<liferay-ui:message key="publish-to-live" />" onClick="<portlet:namespace />publishToLive();" />
 							</c:when>
 						</c:choose>
@@ -287,7 +293,7 @@ if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 						<input type="button" value="<liferay-ui:message key="copy-from-live" />" onClick="<portlet:namespace />copyFromLive();" />
 					</c:when>
 					<c:otherwise>
-						<liferay-ui:message key="<%= errorMesageKey %>" />
+						<liferay-ui:message key="<%= errorMessageKey %>" />
 					</c:otherwise>
 				</c:choose>
 			</c:when>
