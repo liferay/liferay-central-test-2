@@ -90,6 +90,12 @@ public class ViewAction extends PortletAction {
 			}
 		}
 
+		if ((validEmailAddresses.size() == 0) &&
+			(invalidEmailAddresses.size() == 0)) {
+
+			invalidEmailAddresses.add("emailAddress0");
+		}
+
 		if (invalidEmailAddresses.size() > 0) {
 			SessionErrors.add(
 				actionRequest, "emailAddresses", invalidEmailAddresses);
