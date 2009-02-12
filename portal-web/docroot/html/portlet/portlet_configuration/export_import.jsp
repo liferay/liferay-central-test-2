@@ -51,11 +51,13 @@ boolean supportsLAR = Validator.isNotNull(selPortlet.getPortletDataHandlerClass(
 
 boolean supportsSetup = Validator.isNotNull(selPortlet.getConfigurationActionClass());
 
-boolean isControlPanel = false;
+boolean controlPanel = false;
 
 if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 	supportsSetup = false;
-	isControlPanel = true;
+
+	controlPanel = true;
+
 	layout = LayoutLocalServiceUtil.getLayout(LayoutLocalServiceUtil.getDefaultPlid(scopeGroupId));
 }
 %>
@@ -189,7 +191,7 @@ if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 
 				Layout targetLayout = null;
 
-				if (!isControlPanel) {
+				if (!controlPanel) {
 					try {
 						targetLayout = LayoutLocalServiceUtil.getLayout(liveGroup.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId());
 					}
@@ -285,7 +287,7 @@ if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 									<input type="button" value="<liferay-ui:message key="propose-publication" />" onClick="Liferay.LayoutExporter.proposeLayout({url: '<%= proposePublicationURL.toString() %>', namespace: '<%= PortalUtil.getPortletNamespace(PortletKeys.LAYOUT_MANAGEMENT) %>', reviewers: <%= StringUtil.replace(jsonReviewers.toString(), '"', '\'') %>, title: '<liferay-ui:message key="proposal-description" />'});" />
 								</c:if>
 							</c:when>
-							<c:when test="<%= (themeDisplay.getURLPublishToLive() != null) || isControlPanel %>">
+							<c:when test="<%= (themeDisplay.getURLPublishToLive() != null) || controlPanel %>">
 								<input type="button" value="<liferay-ui:message key="publish-to-live" />" onClick="<portlet:namespace />publishToLive();" />
 							</c:when>
 						</c:choose>
