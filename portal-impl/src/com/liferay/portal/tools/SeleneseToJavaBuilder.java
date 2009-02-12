@@ -300,6 +300,22 @@ public class SeleneseToJavaBuilder {
 				sb.append(param2);
 				sb.append("\"));");
 			}
+			else if (param1.equals("assertNotValue") ||
+					 param1.equals("assertValue")) {
+
+				if (param1.equals("assertNotValue") {
+					sb.append("assertNotEquals");
+				}
+				else if (param1.equals("assertValue") {
+					sb.append("assertEquals");
+				}
+
+				sb.append("(\"");
+				sb.append(param3);
+				sb.append("\", selenium.getValue(\"");
+				sb.append(param2);
+				sb.append("\"));");
+			}
 			else if (param1.equals("assertSelectOptions")) {
 				String[] expectedArray = StringUtil.split(param3);
 
