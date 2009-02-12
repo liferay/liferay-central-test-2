@@ -303,10 +303,10 @@ public class SeleneseToJavaBuilder {
 			else if (param1.equals("assertNotValue") ||
 					 param1.equals("assertValue")) {
 
-				if (param1.equals("assertNotValue") {
+				if (param1.equals("assertNotValue")) {
 					sb.append("assertNotEquals");
 				}
-				else if (param1.equals("assertValue") {
+				else if (param1.equals("assertValue")) {
 					sb.append("assertEquals");
 				}
 
