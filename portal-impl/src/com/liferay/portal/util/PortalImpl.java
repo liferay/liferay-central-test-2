@@ -2217,10 +2217,8 @@ public class PortalImpl implements Portal {
 				uploadRequest,
 				PortalUtil.getPortletNamespace(
 				actionRequestImpl.getPortletName()));
-
 		}
 		else {
-
 			com.sun.portal.portletcontainer.portlet.impl.ActionRequestImpl
 				actionRequestImpl =
 				(com.sun.portal.portletcontainer.portlet.impl.ActionRequestImpl)
@@ -2240,7 +2238,6 @@ public class PortalImpl implements Portal {
 				uploadRequest,
 				PortalUtil.getPortletNamespace(portletWindowName));
 		}
-
 	}
 
 	public UploadServletRequest getUploadServletRequest(

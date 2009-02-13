@@ -22,11 +22,14 @@
 
 package com.liferay.portal.apache.bridges.struts;
 
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.struts.StrutsUtil;
-import com.liferay.portal.upload.LiferayFileItem;
-import com.liferay.portal.upload.UploadServletRequestImpl;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.util.servlet.ByteArrayInputStreamWrapper;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 import java.util.Collections;
 import java.util.Enumeration;
@@ -36,6 +39,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
+import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
@@ -59,14 +63,6 @@ public class LiferayStrutsRequestImpl extends HttpServletRequestWrapper {
 
 			request.setAttribute(
 				WebKeys.STRUTS_BRIDGES_ATTRIBUTES, _strutsAttributes);
-		}
-
-		UploadServletRequestImpl uploadRequest =
-			(UploadServletRequestImpl)PortalUtil.getUploadServletRequest(
-				request);
-
-		if (uploadRequest != null) {
-			_multipartParams = uploadRequest.getMultipartParameterMap();
 		}
 	}
 
@@ -116,58 +112,20 @@ public class LiferayStrutsRequestImpl extends HttpServletRequestWrapper {
 		return Collections.enumeration(attributeNames);
 	}
 
-	public String getParameter(String name) {
-		if (_multipartParams.get(name) != null) {
-			return null;
-		}
-		else {
-			return super.getParameter(name);
-		}
-	}
+	public ServletInputStream getInputStream() throws IOException {
+		if (_bytes == null) {
+			InputStream is = super.getInputStream();
 
-	public Map<String, String[]> getParameterMap() {
-		Map<String, String[]> params = new HashMap<String, String[]>();
+			_bytes = FileUtil.getBytes(is);
 
-		Enumeration<String> enu = getParameterNames();
-
-		while (enu.hasMoreElements()) {
-			String name = enu.nextElement();
-
-			String[] values = super.getParameterValues(name);
-
-			params.put(name, values);
+			is.close();
 		}
 
-		return params;
-	}
-
-	public Enumeration<String> getParameterNames() {
-		List<String> parameterNames = new Vector<String>();
-
-		Enumeration<String> enu = super.getParameterNames();
-
-		while (enu.hasMoreElements()) {
-			String name = enu.nextElement();
-
-			if (!_multipartParams.containsKey(name)) {
-				parameterNames.add(name);
-			}
-		}
-
-		return Collections.enumeration(parameterNames);
-	}
-
-	public String[] getParameterValues(String name) {
-		if (_multipartParams.get(name) != null) {
-			return null;
-		}
-		else {
-			return super.getParameterValues(name);
-		}
+		return new ByteArrayInputStreamWrapper(
+			new ByteArrayInputStream(_bytes));
 	}
 
 	private Map<String, Object> _strutsAttributes;
-	private Map<String, LiferayFileItem[]> _multipartParams =
-		new HashMap<String, LiferayFileItem[]>();
+	private byte[] _bytes;
 
 }

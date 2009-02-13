@@ -521,7 +521,7 @@
 	</category>
 
 	<category name="com.liferay.portlet.enterpriseadmin.action.EditUserPortraitAction">
-		<priority value="INFO" />
+		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portlet.journal">
@@ -592,6 +592,14 @@
 		<priority value="WARN" />
 	</category>
 
+	<category name="com.liferay.samplestruts">
+		<priority value="INFO" />
+	</category>
+
+	<category name="com.liferay.sampletest">
+		<priority value="INFO" />
+	</category>
+
 	<category name="com.liferay.util.JNDIUtil">
 		<priority value="ERROR" />
 	</category>
@@ -606,6 +614,14 @@
 
 	<category name="com.liferay.util.mail">
 		<priority value="WARN" />
+	</category>
+
+	<category name="com.liferay.util.portlet.PortletRequestUtil">
+		<priority value="INFO" />
+	</category>
+
+	<category name="com.liferay.util.servlet.ServletRequestUtil">
+		<priority value="INFO" />
 	</category>
 
 	<category name="com.liferay.util.servlet.ServletResponseUtil">

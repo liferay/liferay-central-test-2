@@ -86,8 +86,8 @@ public class UploadServletRequestImpl
 					fileItem.setString(request.getCharacterEncoding());
 				}
 
-				LiferayFileItem[] fileItems =
-					_params.get(fileItem.getFieldName());
+				LiferayFileItem[] fileItems = _params.get(
+					fileItem.getFieldName());
 
 				if (fileItems == null) {
 					fileItems = new LiferayFileItem[] {fileItem};
@@ -108,7 +108,7 @@ public class UploadServletRequestImpl
 			}
 		}
 		catch (FileUploadException fue) {
-			_log.error(fue.getMessage());
+			_log.error(fue, fue);
 		}
 	}
 

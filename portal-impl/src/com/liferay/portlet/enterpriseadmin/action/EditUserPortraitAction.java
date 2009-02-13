@@ -28,19 +28,16 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
-import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.util.portlet.PortletRequestUtil;
 import com.liferay.util.servlet.UploadException;
 
 import java.io.File;
-import java.io.InputStream;
-
-import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -48,9 +45,6 @@ import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import org.apache.commons.fileupload.disk.DiskFileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.portlet.PortletFileUpload;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -101,76 +95,13 @@ public class EditUserPortraitAction extends PortletAction {
 			renderRequest, "portlet.enterprise_admin.edit_user_portrait"));
 	}
 
-	protected void testRequest(ActionRequest actionRequest) throws Exception {
-
-		// Check if the given request is a multipart request
-
-		boolean multiPartContent = PortletFileUpload.isMultipartContent(
-			actionRequest);
-
-		if (_log.isInfoEnabled()) {
-			if (multiPartContent) {
-				_log.info("The given request is a multipart request");
-			}
-			else {
-				_log.info("The given request is NOT a multipart request");
-			}
-		}
-
-		// Check for the number of file items
-
-		DiskFileItemFactory factory = new DiskFileItemFactory();
-
-		PortletFileUpload upload = new PortletFileUpload(factory);
-
-		List<DiskFileItem> fileItems = upload.parseRequest(actionRequest);
-
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Apache commons upload was able to parse " + fileItems.size() +
-					" items");
-		}
-
-		for (int i = 0; i < fileItems.size(); i++) {
-			DiskFileItem fileItem = fileItems.get(i);
-
-			if (_log.isInfoEnabled()) {
-				_log.info("Item " + i + " " + fileItem);
-			}
-		}
-
-		// Read directly from the portlet input stream
-
-		InputStream is = actionRequest.getPortletInputStream();
-
-		if (is != null) {
-			ByteArrayMaker bam = new ByteArrayMaker();
-
-			int c = -1;
-
-			try {
-				while ((c = is.read()) != -1) {
-					bam.write(c);
-				}
-			}
-			finally {
-				is.close();
-			}
-
-			byte[] bytes = bam.toByteArray();
-
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Byte array size from the raw input stream is " +
-						bytes.length);
-			}
-		}
-	}
-
 	protected void updatePortrait(ActionRequest actionRequest)
 		throws Exception {
 
-		//_testRequest(req);
+		if (_log.isDebugEnabled()) {
+			PortletRequestUtil.testMultipartWithCommonsFileUpload(
+				actionRequest);
+		}
 
 		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
 			actionRequest);
