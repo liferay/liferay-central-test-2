@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.imagegallery.action;
 
-import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
@@ -78,15 +77,9 @@ public class EditImageAction extends PortletAction {
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteImage(actionRequest);
-
-				sendRedirect(actionRequest, actionResponse);
 			}
 
-			String redirect = ParamUtil.getString(actionRequest, "redirect");
-
-			if (Validator.isNotNull(redirect)) {
-				sendRedirect(actionRequest, actionResponse, redirect);
-			}
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchImageException ||
