@@ -2859,6 +2859,10 @@ public class PortalImpl implements Portal {
 			"Current URL " + currentURL + " generates exception: " +
 				e.getMessage());
 
+		if (response.isCommitted()) {
+			return;
+		}
+
 		if (status == 0) {
 			if (e instanceof PrincipalException) {
 				status = HttpServletResponse.SC_FORBIDDEN;
