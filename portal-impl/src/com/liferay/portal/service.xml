@@ -1435,10 +1435,6 @@
 			<finder-column name="companyId" />
 			<finder-column name="defaultUser" />
 		</finder>
-		<finder name="C_P" return-type="Collection">
-			<finder-column name="companyId" />
-			<finder-column name="password" />
-		</finder>
 		<finder name="C_SN" return-type="User">
 			<finder-column name="companyId" />
 			<finder-column name="screenName" />

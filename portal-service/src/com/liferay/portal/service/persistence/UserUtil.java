@@ -276,50 +276,6 @@ public class UserUtil {
 		return getPersistence().fetchByC_DU(companyId, defaultUser);
 	}
 
-	public static java.util.List<com.liferay.portal.model.User> findByC_P(
-		long companyId, java.lang.String password)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_P(companyId, password);
-	}
-
-	public static java.util.List<com.liferay.portal.model.User> findByC_P(
-		long companyId, java.lang.String password, int start, int end)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_P(companyId, password, start, end);
-	}
-
-	public static java.util.List<com.liferay.portal.model.User> findByC_P(
-		long companyId, java.lang.String password, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_P(companyId, password, start, end, obc);
-	}
-
-	public static com.liferay.portal.model.User findByC_P_First(
-		long companyId, java.lang.String password,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchUserException,
-			com.liferay.portal.SystemException {
-		return getPersistence().findByC_P_First(companyId, password, obc);
-	}
-
-	public static com.liferay.portal.model.User findByC_P_Last(long companyId,
-		java.lang.String password,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchUserException,
-			com.liferay.portal.SystemException {
-		return getPersistence().findByC_P_Last(companyId, password, obc);
-	}
-
-	public static com.liferay.portal.model.User[] findByC_P_PrevAndNext(
-		long userId, long companyId, java.lang.String password,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchUserException,
-			com.liferay.portal.SystemException {
-		return getPersistence()
-				   .findByC_P_PrevAndNext(userId, companyId, password, obc);
-	}
-
 	public static com.liferay.portal.model.User findByC_SN(long companyId,
 		java.lang.String screenName)
 		throws com.liferay.portal.NoSuchUserException,
@@ -418,11 +374,6 @@ public class UserUtil {
 		getPersistence().removeByC_DU(companyId, defaultUser);
 	}
 
-	public static void removeByC_P(long companyId, java.lang.String password)
-		throws com.liferay.portal.SystemException {
-		getPersistence().removeByC_P(companyId, password);
-	}
-
 	public static void removeByC_SN(long companyId, java.lang.String screenName)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.SystemException {
@@ -478,11 +429,6 @@ public class UserUtil {
 	public static int countByC_DU(long companyId, boolean defaultUser)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_DU(companyId, defaultUser);
-	}
-
-	public static int countByC_P(long companyId, java.lang.String password)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().countByC_P(companyId, password);
 	}
 
 	public static int countByC_SN(long companyId, java.lang.String screenName)

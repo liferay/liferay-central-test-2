@@ -231,43 +231,6 @@ public interface UserPersistence extends BasePersistence {
 		boolean defaultUser) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portal.model.User> findByC_P(
-		long companyId, java.lang.String password)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portal.model.User> findByC_P(
-		long companyId, java.lang.String password, int start, int end)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portal.model.User> findByC_P(
-		long companyId, java.lang.String password, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.model.User findByC_P_First(long companyId,
-		java.lang.String password,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchUserException,
-			com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.model.User findByC_P_Last(long companyId,
-		java.lang.String password,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchUserException,
-			com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.model.User[] findByC_P_PrevAndNext(long userId,
-		long companyId, java.lang.String password,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchUserException,
-			com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.User findByC_SN(long companyId,
 		java.lang.String screenName)
 		throws com.liferay.portal.NoSuchUserException,
@@ -338,9 +301,6 @@ public interface UserPersistence extends BasePersistence {
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.SystemException;
 
-	public void removeByC_P(long companyId, java.lang.String password)
-		throws com.liferay.portal.SystemException;
-
 	public void removeByC_SN(long companyId, java.lang.String screenName)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.SystemException;
@@ -381,10 +341,6 @@ public interface UserPersistence extends BasePersistence {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByC_DU(long companyId, boolean defaultUser)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int countByC_P(long companyId, java.lang.String password)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
