@@ -284,6 +284,11 @@
 	width: auto;
 }
 
+.portlet-enterprise-admin #addresses .ctrl-holder {
+	float: none;
+	width: auto;
+}
+
 .ie6 .portlet-enterprise-admin .uni-form fieldset.col {
 	width: 33%;
 }
