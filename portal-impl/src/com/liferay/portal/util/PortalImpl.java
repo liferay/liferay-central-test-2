@@ -2853,11 +2853,14 @@ public class PortalImpl implements Portal {
 			HttpServletResponse response)
 		throws IOException, ServletException {
 
-		String currentURL = (String)request.getAttribute(WebKeys.CURRENT_URL);
+		if (_log.isWarnEnabled()) {
+			String currentURL = (String)request.getAttribute(
+				WebKeys.CURRENT_URL);
 
-		_log.error(
-			"Current URL " + currentURL + " generates exception: " +
-				e.getMessage());
+			_log.warn(
+				"Current URL " + currentURL + " generates exception: " +
+					e.getMessage());
+		}
 
 		if (response.isCommitted()) {
 			return;
