@@ -39,6 +39,7 @@
 		<liferay-ui:success key='<%= portletConfig.getPortletName() + ".send" %>' message="you-have-successfully-sent-a-sms-message" />
 
 		<liferay-ui:error key="to" message="please-enter-a-valid-email-address" />
+		<liferay-ui:error key="message" message="please-limit-your-message-to-500-characters" />
 
 		<table class="lfr-table">
 		<tr>
