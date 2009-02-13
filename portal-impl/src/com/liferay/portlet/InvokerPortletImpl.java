@@ -656,8 +656,9 @@ public class InvokerPortletImpl implements InvokerPortlet {
 		LiferayPortletResponse portletResponse =
 			(LiferayPortletResponse)actionResponse;
 
-		List<ActionFilter> actionFilters =
-			_actionFiltersMap.get(_getPortletId(portletResponse));
+		String portletId = _getPortletId(portletResponse);
+
+		List<ActionFilter> actionFilters = _actionFiltersMap.get(portletId);
 
 		invoke(
 			portletRequest, portletResponse, PortletRequest.ACTION_PHASE,
