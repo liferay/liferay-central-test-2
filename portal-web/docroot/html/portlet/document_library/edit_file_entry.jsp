@@ -549,6 +549,10 @@ portletURL.setParameter("name", name);
 
 	</form>
 
+	<c:if test="<%= fileEntry == null %>">
+		<br />
+	</c:if>
+
 	<script type="text/javascript">
 		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 			Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />file);
@@ -585,10 +589,6 @@ portletURL.setParameter("name", name);
 
 	<c:if test="<%= fileEntry == null %>">
 		</div>
-	</c:if>
-
-	<c:if test="<%= fileEntry != null %>">
-		<br />
 	</c:if>
 </c:if>
 

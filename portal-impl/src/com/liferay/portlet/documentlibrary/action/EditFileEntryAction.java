@@ -87,8 +87,6 @@ public class EditFileEntryAction extends PortletAction {
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteFileEntry(actionRequest);
-
-				sendRedirect(actionRequest, actionResponse);
 			}
 			else if (cmd.equals(Constants.LOCK)) {
 				lockFileEntry(actionRequest);
@@ -97,12 +95,7 @@ public class EditFileEntryAction extends PortletAction {
 				unlockFileEntry(actionRequest);
 			}
 
-			String redirect = ParamUtil.getString(actionRequest, "redirect");
-
-			if (Validator.isNotNull(redirect)) {
-				sendRedirect(actionRequest, actionResponse, redirect);
-			}
-
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof DuplicateLockException ||
