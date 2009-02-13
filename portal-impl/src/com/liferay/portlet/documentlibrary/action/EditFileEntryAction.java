@@ -27,12 +27,12 @@ import com.liferay.documentlibrary.FileNameException;
 import com.liferay.documentlibrary.FileSizeException;
 import com.liferay.documentlibrary.SourceFileNameException;
 import com.liferay.lock.DuplicateLockException;
+import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.struts.PortletAction;
@@ -96,13 +96,6 @@ public class EditFileEntryAction extends PortletAction {
 			else if (cmd.equals(Constants.UNLOCK)) {
 				unlockFileEntry(actionRequest);
 			}
-
-			String redirect = ParamUtil.getString(actionRequest, "redirect");
-
-			if (Validator.isNotNull(redirect)) {
-				sendRedirect(actionRequest, actionResponse, redirect);
-			}
-
 		}
 		catch (Exception e) {
 			if (e instanceof DuplicateLockException ||
@@ -161,6 +154,10 @@ public class EditFileEntryAction extends PortletAction {
 		}
 
 		String forward = "portlet.document_library.edit_file_entry";
+
+		if (renderRequest.getWindowState().equals(LiferayWindowState.POP_UP)) {
+			forward = "portlet.document_library.edit_file_entry_form";
+		}
 
 		return mapping.findForward(getForward(renderRequest, forward));
 	}

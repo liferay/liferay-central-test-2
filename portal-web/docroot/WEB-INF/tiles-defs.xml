@@ -281,6 +281,11 @@
 		<put name="portlet_content" value="/portlet/document_library/edit_file_entry.jsp" />
 	</definition>
 
+	<definition name="portlet.document_library.edit_file_entry_form" extends="portlet.document_library">
+		<put name="portlet_content" value="/portlet/document_library/edit_file_entry_form.jsp" />
+		<put name="portlet_padding" value="false" />
+	</definition>
+
 	<definition name="portlet.document_library.edit_file_shortcut" extends="portlet.document_library">
 		<put name="portlet_content" value="/portlet/document_library/edit_file_shortcut.jsp" />
 	</definition>
