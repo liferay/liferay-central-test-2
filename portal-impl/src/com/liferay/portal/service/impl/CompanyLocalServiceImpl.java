@@ -41,6 +41,7 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.model.Company;
@@ -77,6 +78,7 @@ import javax.portlet.PortletPreferences;
  * <a href="CompanyLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Julio Camarero
  *
  */
 public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
@@ -574,6 +576,28 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		long logoId = getLogoId(companyId);
 
 		imageLocalService.updateImage(logoId, is);
+	}
+
+	public void updatePreferences(
+			long companyId, UnicodeProperties props)
+		throws PortalException, SystemException {
+
+		PortletPreferences preferences = PrefsPropsUtil.getPreferences(
+			companyId);
+
+		try {
+			for (String property : props.keySet()) {
+				preferences.setValue(property, props.getProperty(property));
+			}
+
+			preferences.store();
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
+		catch (PortletException pe) {
+			throw new SystemException(pe);
+		}
 	}
 
 	public void updateSecurity(

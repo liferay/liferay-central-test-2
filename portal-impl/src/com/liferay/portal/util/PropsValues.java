@@ -255,6 +255,15 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.COMPANY_SECURITY_STRANGERS_WITH_MX));
 
+	public static final String[] COMPANY_SETTINGS_FORM_IDENTIFICATION =
+		PropsUtil.getArray(PropsKeys.COMPANY_SETTINGS_FORM_IDENTIFICATION);
+
+	public static final String[] COMPANY_SETTINGS_FORM_CONFIGURATION =
+		PropsUtil.getArray(PropsKeys.COMPANY_SETTINGS_FORM_CONFIGURATION);
+
+	public static final String[] COMPANY_SETTINGS_FORM_MISCELLANEOUS =
+		PropsUtil.getArray(PropsKeys.COMPANY_SETTINGS_FORM_MISCELLANEOUS);
+
 	public static final String CONTROL_PANEL_LAYOUT_FRIENDLY_URL =
 		PropsUtil.get(PropsKeys.CONTROL_PANEL_LAYOUT_FRIENDLY_URL);
 

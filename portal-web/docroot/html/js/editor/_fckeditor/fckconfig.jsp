@@ -82,6 +82,17 @@ FCKConfig.ToolbarSets["edit-in-place"] = [
 	['OrderedList','UnorderedList','-','Outdent','Indent'],['Source','RemoveFormat'],
 ] ;
 
+FCKConfig.ToolbarSets["email"] = [
+	['FontSize','TextColor','BGColor','-','Bold','Italic','Underline','StrikeThrough'],
+	['JustifyLeft','JustifyCenter','JustifyRight','JustifyFull'],
+	['SpellCheck'],
+	'/',
+	['Undo','Redo','-','Cut','Copy','Paste','PasteText','PasteWord','-','SelectAll','RemoveFormat'],
+	['Source'],
+	['Link','Unlink'],
+	['Image']
+] ;
+
 FCKConfig.BackgroundBlockerColor = '#000' ;
 FCKConfig.BackgroundBlockerOpacity = 0.70 ;
 

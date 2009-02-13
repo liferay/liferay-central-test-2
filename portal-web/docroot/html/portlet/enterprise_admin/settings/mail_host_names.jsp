@@ -25,31 +25,14 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-String redirect = ParamUtil.getString(request, "redirect");
-
-String className = ParamUtil.getString(request, "className");
-
-ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
-
-Phone phone = (Phone)row.getObject();
+String adminMailHostNames = ParamUtil.getString(request, "settings(" + PropsKeys.ADMIN_MAIL_HOST_NAMES +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_MAIL_HOST_NAMES));
 %>
+<h3><liferay-ui:message key="mail-host-names" /></h3>
 
-<liferay-ui:icon-menu>
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
-		<portlet:param name="struts_action" value="/enterprise_admin/edit_phone" />
-		<portlet:param name="redirect" value="<%= redirect %>" />
-		<portlet:param name="className" value="<%= className %>" />
-		<portlet:param name="phoneId" value="<%= String.valueOf(phone.getPhoneId()) %>" />
-	</portlet:renderURL>
+<fieldset class="block-labels">
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />settings(<%= PropsKeys.ADMIN_MAIL_HOST_NAMES %>)"><%= LanguageUtil.format(pageContext, "enter-one-mail-host-name-per-line-for-all-additional-mail-host-names-besides-x", company.getMx(), false) %></label>
 
-	<liferay-ui:icon image="edit" url="<%= editURL %>" />
-
-	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
-		<portlet:param name="struts_action" value="/enterprise_admin/edit_phone" />
-		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-		<portlet:param name="redirect" value="<%= redirect %>" />
-		<portlet:param name="phoneId" value="<%= String.valueOf(phone.getPhoneId()) %>" />
-	</portlet:actionURL>
-
-	<liferay-ui:icon-delete url="<%= deleteURL %>" />
-</liferay-ui:icon-menu>
+		<textarea class="lfr-textarea" name="<portlet:namespace />settings(<%= PropsKeys.ADMIN_MAIL_HOST_NAMES %>)"><%= HtmlUtil.escape(adminMailHostNames) %></textarea>
+	</div>
+</fieldset>

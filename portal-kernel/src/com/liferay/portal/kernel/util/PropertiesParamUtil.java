@@ -24,6 +24,8 @@ package com.liferay.portal.kernel.util;
 
 import java.util.Properties;
 
+import javax.portlet.PortletRequest;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -176,6 +178,26 @@ public class PropertiesParamUtil {
 			propsValue, defaultValue);
 
 		return ParamUtil.get(request, param, getterUtilValue);
+	}
+
+	public static UnicodeProperties getPropertiesFromParams(
+		PortletRequest portletRequest, String prefix) {
+
+		UnicodeProperties props = new UnicodeProperties(true);
+
+		for (String paramName : portletRequest.getParameterMap().keySet()) {
+			if (paramName.startsWith(prefix) &&
+				!paramName.endsWith(")Checkbox")) {
+
+				String key = paramName.substring(
+					prefix.length(), paramName.length() - 1);
+
+				props.setProperty(
+					key, portletRequest.getParameter(paramName));
+			}
+		}
+
+		return props;
 	}
 
 	public static String getString(

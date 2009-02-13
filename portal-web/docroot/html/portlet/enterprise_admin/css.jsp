@@ -66,8 +66,16 @@
 	margin: 10px auto;
 }
 
+.portlet-enterprise-admin .company-logo {
+	border:none;
+	width: 100px;
+}
 .portlet-enterprise-admin .ctrl-holder.action-ctrl, .portlet-enterprise-admin .ctrl-holder.mailing-ctrl, .portlet-enterprise-admin .ctrl-holder.primary-ctrl {
 	margin: 1.8em 0;
+}
+
+.portlet-enterprise-admin .email-user-add .password-changed-notification {
+	display: none;
 }
 
 .portlet-enterprise-admin .label-holder {
@@ -232,7 +240,7 @@
 	clear: both;
 	font-size: 14px;
 	font-weight: 700;
-	margin: 10px 0 0;
+	margin: 10px 0;
 }
 
 .portlet-enterprise-admin .portrait-icons {

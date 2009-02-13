@@ -97,6 +97,22 @@ public interface CompanyService {
 		java.lang.String legalName, java.lang.String legalId,
 		java.lang.String legalType, java.lang.String sicCode,
 		java.lang.String tickerSymbol, java.lang.String industry,
+		java.lang.String type, java.lang.String size,
+		java.lang.String languageId, java.lang.String timeZoneId,
+		java.util.List<com.liferay.portal.model.Address> addresses,
+		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
+		java.util.List<com.liferay.portal.model.Phone> phones,
+		java.util.List<com.liferay.portal.model.Website> websites,
+		com.liferay.portal.kernel.util.UnicodeProperties props)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Company updateCompany(long companyId,
+		java.lang.String virtualHost, java.lang.String mx,
+		java.lang.String homeURL, java.lang.String name,
+		java.lang.String legalName, java.lang.String legalId,
+		java.lang.String legalType, java.lang.String sicCode,
+		java.lang.String tickerSymbol, java.lang.String industry,
 		java.lang.String type, java.lang.String size)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -107,6 +123,11 @@ public interface CompanyService {
 			com.liferay.portal.SystemException;
 
 	public void updateLogo(long companyId, java.io.File file)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void updatePreferences(long companyId,
+		com.liferay.portal.kernel.util.UnicodeProperties props)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

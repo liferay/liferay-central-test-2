@@ -1,0 +1,607 @@
+<%
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+%>
+
+<%
+boolean ldapAuthEnabled = ParamUtil.getBoolean(request, "settings(" + PropsKeys.LDAP_AUTH_ENABLED +")", PortalLDAPUtil.isAuthEnabled(company.getCompanyId()));
+boolean ldapAuthRequired = ParamUtil.getBoolean(request, "settings(" + PropsKeys.LDAP_AUTH_REQUIRED +")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.LDAP_AUTH_REQUIRED));
+String ldapBaseProviderUrl = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_BASE_PROVIDER_URL +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_BASE_PROVIDER_URL));
+String ldapBaseDN = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_BASE_DN +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_BASE_DN));
+String ldapSecurityPrincipal = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_SECURITY_PRINCIPAL +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_SECURITY_PRINCIPAL));
+String ldapSecurityCredentials = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_SECURITY_CREDENTIALS +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_SECURITY_CREDENTIALS));
+String ldapAuthSearchFilter = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_AUTH_SEARCH_FILTER +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_AUTH_SEARCH_FILTER));
+String ldapImportUserSearchFilter = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER));
+String ldapImportGroupSearchFilter = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER));
+boolean ldapImportEnabled = ParamUtil.getBoolean(request, "settings(" + PropsKeys.LDAP_IMPORT_ENABLED +")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.LDAP_IMPORT_ENABLED, PropsValues.LDAP_IMPORT_ENABLED));
+boolean ldapImportOnStartup = ParamUtil.getBoolean(request, "settings(" + PropsKeys.LDAP_IMPORT_ON_STARTUP +")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.LDAP_IMPORT_ON_STARTUP));
+long ldapImportInterval = ParamUtil.getLong(request, "settings(" + PropsKeys.LDAP_IMPORT_INTERVAL +")", PrefsPropsUtil.getLong(company.getCompanyId(), PropsKeys.LDAP_IMPORT_INTERVAL));
+boolean ldapExportEnabled = ParamUtil.getBoolean(request, "settings(" + PropsKeys.LDAP_EXPORT_ENABLED +")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.LDAP_EXPORT_ENABLED, PropsValues.LDAP_EXPORT_ENABLED));
+String ldapUsersDN = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_USERS_DN +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_USERS_DN));
+String ldapUserDefaultObjectClasses = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES));
+String ldapGroupsDN = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_GROUPS_DN +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_GROUPS_DN));
+boolean ldapPasswordPolicyEnabled = ParamUtil.getBoolean(request, "settings(" + PropsKeys.LDAP_PASSWORD_POLICY_ENABLED +")", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.LDAP_PASSWORD_POLICY_ENABLED));
+
+String ldapUserMappings = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_USER_MAPPINGS +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_USER_MAPPINGS));
+
+String[] userMappingArray = ldapUserMappings.split("\n");
+
+String userMappingScreenName = StringPool.BLANK;
+String userMappingPassword = StringPool.BLANK;
+String userMappingEmailAddress = StringPool.BLANK;
+String userMappingFullName = StringPool.BLANK;
+String userMappingFirstName = StringPool.BLANK;
+String userMappingLastName = StringPool.BLANK;
+String userMappingJobTitle = StringPool.BLANK;
+String userMappingGroup = StringPool.BLANK;
+
+for (int i = 0 ; i < userMappingArray.length ; i++) {
+	if (userMappingArray[i].indexOf("=") == -1) {
+		continue;
+	}
+
+	String mapping[] = userMappingArray[i].split("=");
+
+	if (mapping.length != 2) {
+		continue;
+	}
+
+	if (mapping[0].equals("screenName")) {
+		userMappingScreenName = mapping[1];
+	}
+	else if (mapping[0].equals("password")) {
+		userMappingPassword = mapping[1];
+	}
+	else if (mapping[0].equals("emailAddress")) {
+		userMappingEmailAddress = mapping[1];
+	}
+	else if (mapping[0].equals("fullName")) {
+		userMappingFullName = mapping[1];
+	}
+	else if (mapping[0].equals("firstName")) {
+		userMappingFirstName = mapping[1];
+	}
+	else if (mapping[0].equals("lastName")) {
+		userMappingLastName = mapping[1];
+	}
+	else if (mapping[0].equals("jobTitle")) {
+		userMappingJobTitle = mapping[1];
+	}
+	else if (mapping[0].equals("group")) {
+		userMappingGroup = mapping[1];
+	}
+
+	mapping[1] = "";
+}
+
+String ldapGroupMappings = ParamUtil.getString(request, "settings(" + PropsKeys.LDAP_GROUP_MAPPINGS +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_GROUP_MAPPINGS));
+
+String[] groupMappingArray = ldapGroupMappings.split("\n");
+
+String groupMappingGroupName = StringPool.BLANK;
+String groupMappingDescription = StringPool.BLANK;
+String groupMappingUser = StringPool.BLANK;
+
+for (int i = 0 ; i < groupMappingArray.length ; i++) {
+	if (userMappingArray[i].indexOf("=") == -1) {
+		continue;
+	}
+
+	String mapping[] = groupMappingArray[i].split("=");
+
+	if (mapping.length != 2) {
+		continue;
+	}
+
+	if (mapping[0].equals("groupName")) {
+		groupMappingGroupName = mapping[1];
+	}
+	else if (mapping[0].equals("description")) {
+		groupMappingDescription = mapping[1];
+	}
+	else if (mapping[0].equals("user")) {
+		groupMappingUser = mapping[1];
+	}
+}
+%>
+
+<script type="text/javascript">
+	<portlet:namespace/>testSettings = function(type) {
+		var url = null;
+
+		var data = {};
+
+  		if (type == "ldapConnection") {
+  			url = "<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/test_ldap_connection" /></portlet:renderURL>";
+		}
+		else if (type == "ldapGroups") {
+  			url = "<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/test_ldap_groups" /></portlet:renderURL>";
+
+			data.<portlet:namespace />importGroupSearchFilter = document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER %>)'].value;
+			data.<portlet:namespace />groupMappingGroupName = document.<portlet:namespace />fm['<portlet:namespace />groupMappingGroupName'].value;
+			data.<portlet:namespace />groupMappingDescription = document.<portlet:namespace />fm['<portlet:namespace />groupMappingDescription'].value;
+			data.<portlet:namespace />groupMappingUser = document.<portlet:namespace />fm['<portlet:namespace />groupMappingUser'].value;
+		}
+		else if (type == "ldapUsers") {
+  			url = "<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/test_ldap_users" /></portlet:renderURL>";
+
+			data.<portlet:namespace />importUserSearchFilter = document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER %>)'].value;
+			data.<portlet:namespace />userMappingScreenName = document.<portlet:namespace />fm['<portlet:namespace />userMappingScreenName'].value;
+			data.<portlet:namespace />userMappingPassword = document.<portlet:namespace />fm['<portlet:namespace />userMappingPassword'].value;
+			data.<portlet:namespace />userMappingEmailAddress = document.<portlet:namespace />fm['<portlet:namespace />userMappingEmailAddress'].value;
+			data.<portlet:namespace />userMappingFullName = document.<portlet:namespace />fm['<portlet:namespace />userMappingFullName'].value;
+			data.<portlet:namespace />userMappingFirstName = document.<portlet:namespace />fm['<portlet:namespace />userMappingFirstName'].value;
+			data.<portlet:namespace />userMappingLastName = document.<portlet:namespace />fm['<portlet:namespace />userMappingLastName'].value;
+			data.<portlet:namespace />userMappingJobTitle = document.<portlet:namespace />fm['<portlet:namespace />userMappingJobTitle'].value;
+			data.<portlet:namespace />userMappingGroup = document.<portlet:namespace />fm['<portlet:namespace />userMappingGroup'].value;
+		}
+
+		if (url != null) {
+			data.<portlet:namespace />baseProviderURL = document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.LDAP_BASE_PROVIDER_URL %>)'].value;
+			data.<portlet:namespace />baseDN = document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.LDAP_BASE_DN %>)'].value;
+			data.<portlet:namespace />principal = document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.LDAP_SECURITY_PRINCIPAL %>)'].value;
+			data.<portlet:namespace />credentials = document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.LDAP_SECURITY_CREDENTIALS %>)'].value;
+
+			var popup = Liferay.Popup(
+				{
+					modal: true,
+					url: url,
+					urlData: data,
+					width: 600
+				}
+			);
+		}
+	}
+
+	function <portlet:namespace />updateDefaultLdap() {
+		var baseProviderURL = "";
+		var baseDN = "";
+		var principal = "";
+		var credentials = "";
+		var searchFilter = "";
+		var importUserSearchFilter = "";
+		var userMappingScreenName = "";
+		var userMappingPassword = "";
+		var userMappingEmailAddress = "";
+		var userMappingFullName = "";
+		var userMappingFirstName = "";
+		var userMappingLastName = "";
+		var userMappingJobTitle = "";
+		var userMappingGroup = "";
+		var importGroupSearchFilter = "";
+		var groupMappingGroupName = "";
+		var groupMappingDescription = "";
+		var groupMappingUser = "";
+
+		var ldapType = Liferay.Util.getSelectedRadioValue(document.<portlet:namespace />fm.<portlet:namespace />defaultLdap);
+
+		if (ldapType == "apache") {
+			baseProviderURL = "ldap://localhost:10389";
+			baseDN = "dc=example,dc=com";
+			principal = "uid=admin,ou=system";
+			credentials = "secret";
+			searchFilter = "(mail=@email_address@)";
+			importUserSearchFilter = "(objectClass=person)";
+			userMappingScreenName = "cn";
+			userMappingPassword = "userPassword";
+			userMappingEmailAddress = "mail";
+			userMappingFullName = "";
+			userMappingFirstName = "givenName";
+			userMappingLastName = "sn";
+			userMappingJobTitle = "";
+			userMappingGroup = "";
+			importGroupSearchFilter = "";
+			groupMappingGroupName = "";
+			groupMappingDescription = "";
+			groupMappingUser = "";
+		}
+		else if (ldapType == "fedora") {
+			baseProviderURL = "ldap://localhost:19389";
+			baseDN = "dc=localdomain";
+			principal = "cn=Directory Manager";
+			credentials = "";
+			searchFilter = "(mail=@email_address@)";
+			importUserSearchFilter = "(objectClass=inetOrgPerson)";
+			userMappingScreenName = "uid";
+			userMappingPassword = "userPassword";
+			userMappingEmailAddress = "mail";
+			userMappingFullName = "cn";
+			userMappingFirstName = "givenName";
+			userMappingLastName = "sn";
+			userMappingJobTitle = "title";
+			userMappingGroup = "";
+			importGroupSearchFilter = "";
+			groupMappingGroupName = "";
+			groupMappingDescription = "";
+			groupMappingUser = "";
+		}
+		else if (ldapType == "microsoft") {
+			baseProviderURL = "ldap://localhost:389";
+			baseDN = "dc=example,dc=com";
+			principal = "admin";
+			credentials = "secret";
+			searchFilter = "(&(objectCategory=person)(sAMAccountName=@user_id@))";
+			importUserSearchFilter = "(objectClass=person)";
+			userMappingScreenName = "sAMAccountName";
+			userMappingPassword = "userPassword";
+			userMappingEmailAddress = "userprincipalname";
+			userMappingFullName = "cn";
+			userMappingFirstName = "givenName";
+			userMappingLastName = "sn";
+			userMappingJobTitle = "";
+			userMappingGroup = "memberOf";
+			importGroupSearchFilter = "(objectClass=group)";
+			groupMappingGroupName = "cn";
+			groupMappingDescription = "sAMAccountName";
+			groupMappingUser = "member";
+		}
+		else if (ldapType == "novell") {
+			url = "ldap://localhost:389";
+			baseDN = "";
+			principal = "cn=admin,ou=test";
+			credentials = "secret";
+			searchFilter = "(mail=@email_address@)";
+			importUserSearchFilter = "";
+			userMappingScreenName = "cn";
+			userMappingPassword = "userPassword";
+			userMappingEmailAddress = "mail";
+			userMappingFullName = "";
+			userMappingFirstName = "givenName";
+			userMappingLastName = "sn";
+			userMappingJobTitle = "title";
+			userMappingGroup = "";
+			importGroupSearchFilter = "";
+			groupMappingGroupName = "";
+			groupMappingDescription = "";
+			groupMappingUser = "";
+		}
+		else if (ldapType == "open") {
+			url = "ldap://localhost:389";
+			baseDN = "dc=example,dc=com";
+			principal = "cn=admin,ou=test";
+			credentials = "secret";
+			searchFilter = "(mail=@email_address@)";
+			importUserSearchFilter = "(objectClass=inetOrgPerson)";
+			userMappingScreenName = "cn";
+			userMappingPassword = "userPassword";
+			userMappingEmailAddress = "mail";
+			userMappingFullName = "";
+			userMappingFirstName = "givenName";
+			userMappingLastName = "sn";
+			userMappingJobTitle = "title";
+			userMappingGroup = "";
+			importGroupSearchFilter = "(objectClass=groupOfUniqueNames)";
+			groupMappingGroupName = "cn";
+			groupMappingDescription = "description";
+			groupMappingUser = "uniqueMember";
+		}
+
+		document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.LDAP_BASE_PROVIDER_URL %>)'].value = baseProviderURL;
+		document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.LDAP_BASE_DN %>)'].value = baseDN;
+		document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.LDAP_SECURITY_PRINCIPAL %>)'].value = principal;
+		document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.LDAP_SECURITY_CREDENTIALS %>)'].value = credentials;
+		document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.LDAP_AUTH_SEARCH_FILTER %>)'].value = searchFilter;
+		document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER %>)'].value = importUserSearchFilter;
+		document.<portlet:namespace />fm['<portlet:namespace />userMappingScreenName'].value = userMappingScreenName;
+		document.<portlet:namespace />fm['<portlet:namespace />userMappingPassword'].value = userMappingPassword;
+		document.<portlet:namespace />fm['<portlet:namespace />userMappingEmailAddress'].value = userMappingEmailAddress;
+		document.<portlet:namespace />fm['<portlet:namespace />userMappingFullName'].value = userMappingFullName;
+		document.<portlet:namespace />fm['<portlet:namespace />userMappingFirstName'].value = userMappingFirstName;
+		document.<portlet:namespace />fm['<portlet:namespace />userMappingLastName'].value = userMappingLastName;
+		document.<portlet:namespace />fm['<portlet:namespace />userMappingJobTitle'].value = userMappingJobTitle;
+		document.<portlet:namespace />fm['<portlet:namespace />userMappingGroup'].value = userMappingGroup;
+		document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER %>)'].value = importGroupSearchFilter;
+		document.<portlet:namespace />fm['<portlet:namespace />groupMappingGroupName'].value = groupMappingGroupName;
+		document.<portlet:namespace />fm['<portlet:namespace />groupMappingDescription'].value = groupMappingDescription;
+		document.<portlet:namespace />fm['<portlet:namespace />groupMappingUser'].value = groupMappingUser;
+		document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.LDAP_USERS_DN %>)'].value = baseDN;
+		document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.LDAP_GROUPS_DN %>)'].value = baseDN;
+	}
+
+	jQuery(
+		function() {
+			Liferay.Util.toggleBoxes('<portlet:namespace />ldapImportEnabledCheckbox', '<portlet:namespace />importEnabledSettings');
+			Liferay.Util.toggleBoxes('<portlet:namespace />ldapExportEnabledCheckbox', '<portlet:namespace />exportEnabledSettings');
+		}
+	);
+</script>
+
+<liferay-ui:error key="ldapAuthentication" message="failed-to-bind-to-the-ldap-server-with-given-values" />
+
+<fieldset class="block-labels">
+	<div class="ctrl-holder">
+		<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.LDAP_AUTH_ENABLED %>)"><liferay-ui:message key="enabled" /></label>
+
+		<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.LDAP_AUTH_ENABLED +")" %>' defaultValue='<%= ldapAuthEnabled %>' />
+	</div>
+
+	<div class="ctrl-holder">
+		<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.LDAP_AUTH_REQUIRED %>)"><liferay-ui:message key="required" /></label>
+
+		<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.LDAP_AUTH_REQUIRED + ")" %>' defaultValue='<%= ldapAuthRequired %>' />
+	</div>
+</fieldset>
+
+<h3><liferay-ui:message key="default-values" /></h3>
+
+<fieldset class="block-labels">
+	<div class="ctrl-holder">
+		<input name="<portlet:namespace />defaultLdap" type="radio" value="apache"> Apache Directory Server <br />
+		<input name="<portlet:namespace />defaultLdap" type="radio" value="fedora"> Fedora Directory Server <br />
+		<input name="<portlet:namespace />defaultLdap" type="radio" value="microsoft"> Microsoft Active Directory Server <br />
+		<input name="<portlet:namespace />defaultLdap" type="radio" value="novell"> Novell eDirectory <br />
+		<input name="<portlet:namespace />defaultLdap" type="radio" value="open"> OpenLDAP <br />
+		<input name="<portlet:namespace />defaultLdap" type="radio" value="other"> <liferay-ui:message key="other-directory-server" />
+	</div>
+
+	<div class="button-holder">
+		<input type="button" value="<liferay-ui:message key="reset-values" />" onClick="<portlet:namespace />updateDefaultLdap();" />
+	</div>
+</fieldset>
+
+<h3><liferay-ui:message key="connection" /></h3>
+
+<fieldset class="block-labels">
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />settings(<%= PropsKeys.LDAP_BASE_PROVIDER_URL %>)"><liferay-ui:message key="base-provider-url" /></label>
+
+		<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LDAP_BASE_PROVIDER_URL %>)" type="text" value='<%= HtmlUtil.escape(ldapBaseProviderUrl) %>' />
+
+		<liferay-ui:icon-help message="the-ldap-url-format-is" />
+	</div>
+
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />settings(<%= PropsKeys.LDAP_BASE_DN %>)"><liferay-ui:message key="base-dn" /></label>
+
+		<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LDAP_BASE_DN %>)" type="text" value='<%= HtmlUtil.escape(ldapBaseDN) %>' />
+
+		<liferay-ui:icon-help message="the-ldap-url-format-is" />
+	</div>
+
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />settings(<%= PropsKeys.LDAP_SECURITY_PRINCIPAL %>)"><liferay-ui:message key="principal" /></label>
+
+		<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LDAP_SECURITY_PRINCIPAL %>)" type="text" value='<%= HtmlUtil.escape(ldapSecurityPrincipal) %>' />
+	</div>
+
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />settings(<%= PropsKeys.LDAP_SECURITY_CREDENTIALS %>)"><liferay-ui:message key="credentials" /></label>
+
+		<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LDAP_SECURITY_CREDENTIALS %>)" type="password" value='<%= HtmlUtil.escape(ldapSecurityCredentials) %>' />
+	</div>
+
+	<div class="button-holder">
+		<input type="button" value="<liferay-ui:message key="test-ldap-connection" />" onClick="<portlet:namespace/>testSettings('ldapConnection');" />
+	</div>
+</fieldset>
+
+<h3><liferay-ui:message key="users" /></h3>
+
+<fieldset class="block-labels">
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />settings(<%= PropsKeys.LDAP_AUTH_SEARCH_FILTER %>)"><liferay-ui:message key="authentication-search-filter" /></label>
+
+		<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LDAP_AUTH_SEARCH_FILTER %>)" type="text" value='<%= HtmlUtil.escape(ldapAuthSearchFilter) %>' />
+
+		<liferay-ui:icon-help message="enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user" />
+	</div>
+
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />settings(<%= PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER %>)"><liferay-ui:message key="import-search-filter" /></label>
+
+		<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER %>)" type="text" value='<%= HtmlUtil.escape(ldapImportUserSearchFilter) %>' />
+	</div>
+
+	<h4><liferay-ui:message key="user-mapping" /></h4>
+
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />userMappingScreenName"><liferay-ui:message key="screen-name" /></label>
+
+		<input class="lfr-input-text" name="<portlet:namespace />userMappingScreenName" type="text" value='<%= userMappingScreenName %>' />
+	</div>
+
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />userMappingPassword"><liferay-ui:message key="password" /></label>
+
+		<input class="lfr-input-text" name="<portlet:namespace />userMappingPassword" type="text" value='<%= userMappingPassword %>' />
+	</div>
+
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />userMappingEmailAddress"><liferay-ui:message key="email-address" /></label>
+
+		<input class="lfr-input-text" name="<portlet:namespace />userMappingEmailAddress" type="text" value='<%= userMappingEmailAddress %>' />
+	</div>
+
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />userMappingFullName"><liferay-ui:message key="full-name" /></label>
+
+		<input class="lfr-input-text" name="<portlet:namespace />userMappingFullName" type="text" value='<%= userMappingFullName %>' />
+	</div>
+
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />userMappingFirstName"><liferay-ui:message key="first-name" /></label>
+
+		<input class="lfr-input-text" name="<portlet:namespace />userMappingFirstName" type="text" value='<%= userMappingFirstName %>' />
+	</div>
+
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />userMappingLastName"><liferay-ui:message key="last-name" /></label>
+
+		<input class="lfr-input-text" name="<portlet:namespace />userMappingLastName" type="text" value='<%= userMappingLastName %>' />
+	</div>
+
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />userMappingJobTitle"><liferay-ui:message key="job-title" /></label>
+
+		<input class="lfr-input-text" name="<portlet:namespace />userMappingJobTitle" type="text" value='<%= userMappingJobTitle %>' />
+	</div>
+
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />userMappingGroup"><liferay-ui:message key="group" /></label>
+
+		<input class="lfr-input-text" name="<portlet:namespace />userMappingGroup" type="text" value='<%= userMappingGroup %>' />
+	</div>
+
+	<input name="<portlet:namespace />settings(<%= PropsKeys.LDAP_USER_MAPPINGS %>)" type="hidden" value='' />
+
+	<div class="button-holder">
+		<input type="button" value="<liferay-ui:message key="test-ldap-users" />" onClick="<portlet:namespace />testSettings('ldapUsers');" />
+	</div>
+</fieldset>
+
+<h3><liferay-ui:message key="groups" /></h3>
+
+<fieldset class="block-labels">
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />settings(<%= PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER %>)"><liferay-ui:message key="import-search-filter" /></label>
+
+		<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER %>)" type="text" value='<%= HtmlUtil.escape(ldapImportGroupSearchFilter) %>' />
+	</div>
+
+	<h4><liferay-ui:message key="group-mapping" /></h4>
+
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />groupMappingGroupName"><liferay-ui:message key="group-name" /></label>
+
+		<input class="lfr-input-text" name="<portlet:namespace />groupMappingGroupName" type="text" value='<%= groupMappingGroupName %>' />
+	</div>
+
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />groupMappingDescription"><liferay-ui:message key="description" /></label>
+
+		<input class="lfr-input-text" name="<portlet:namespace />groupMappingDescription" type="text" value='<%= groupMappingDescription %>' />
+	</div>
+
+	<div class="ctrl-holder">
+		<label for="<portlet:namespace />groupMappingUser"><liferay-ui:message key="user" /></label>
+
+		<input class="lfr-input-text" name="<portlet:namespace />groupMappingUser" type="text" value='<%= groupMappingUser %>' />
+	</div>
+
+	<input name="<portlet:namespace />settings(<%= PropsKeys.LDAP_GROUP_MAPPINGS %>)" type="hidden" value='' />
+
+	<div class="button-holder">
+		<input type="button" value="<liferay-ui:message key="test-ldap-groups" />" onClick="<portlet:namespace />testSettings('ldapGroups');" />
+	</div>
+</fieldset>
+
+<h3><liferay-ui:message key="import-export" /></h3>
+
+<fieldset class="block-labels">
+	<div class="ctrl-holder">
+		<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.LDAP_IMPORT_ENABLED %>)"><liferay-ui:message key="import-enabled" /></label>
+
+		<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.LDAP_IMPORT_ENABLED + ")" %>' id='ldapImportEnabled' defaultValue='<%= ldapImportEnabled %>' />
+	</div>
+
+	<div id="<portlet:namespace />importEnabledSettings">
+		<div class="ctrl-holder">
+			<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.LDAP_IMPORT_ON_STARTUP %>)"><liferay-ui:message key="import-on-startup-enabled" /></label>
+
+			<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.LDAP_IMPORT_ON_STARTUP + ")" %>' defaultValue='<%= ldapImportOnStartup %>' />
+		</div>
+
+		<div class="ctrl-holder">
+			<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.LDAP_IMPORT_INTERVAL %>)"><liferay-ui:message key="import-interval" /></label>
+
+			<select name="<portlet:namespace />settings(<%= PropsKeys.LDAP_IMPORT_INTERVAL %>)">
+				<option value="0" <%= (ldapImportInterval == 0) ? " selected " : "" %>><liferay-ui:message key="disabled" /></option>
+				<option value="5" <%= (ldapImportInterval == 5) ? " selected " : "" %>>5 <liferay-ui:message key="minutes" /></option>
+				<option value="10" <%= (ldapImportInterval == 10) ? " selected " : "" %>>10 <liferay-ui:message key="minutes" /></option>
+				<option value="30" <%= (ldapImportInterval == 30) ? " selected " : "" %>>30 <liferay-ui:message key="minutes" /></option>
+				<option value="60" <%= (ldapImportInterval == 60) ? " selected " : "" %>>1 <liferay-ui:message key="hour" /></option>
+				<option value="120" <%= (ldapImportInterval == 120) ? " selected " : "" %>>2 <liferay-ui:message key="hours" /></option>
+				<option value="180" <%= (ldapImportInterval == 180) ? " selected " : "" %>>3 <liferay-ui:message key="hours" /></option>
+			</select>
+		</div>
+	</div>
+
+	<div class="ctrl-holder">
+		<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.LDAP_EXPORT_ENABLED %>)"><liferay-ui:message key="export-enabled" /></label>
+
+		<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.LDAP_EXPORT_ENABLED + ")" %>' id='ldapExportEnabled' defaultValue='<%= ldapExportEnabled %>' />
+	</div>
+
+	<div id="<portlet:namespace />exportEnabledSettings">
+		<div class="ctrl-holder">
+			<label for="<portlet:namespace />settings(<%= PropsKeys.LDAP_USERS_DN %>)"><liferay-ui:message key="users-dn" /></label>
+
+			<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LDAP_USERS_DN %>)" type="text" value='<%= HtmlUtil.escape(ldapUsersDN) %>' />
+		</div>
+
+		<div class="ctrl-holder">
+			<label for="<portlet:namespace />settings(<%= PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES %>)"><liferay-ui:message key="user-default-object-classes" /></label>
+
+			<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES %>)" type="text" value='<%= HtmlUtil.escape(ldapUserDefaultObjectClasses) %>' />
+		</div>
+
+		<div class="ctrl-holder">
+			<label for="<portlet:namespace />settings(<%= PropsKeys.LDAP_GROUPS_DN %>)"><liferay-ui:message key="groups-dn" /></label>
+
+			<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LDAP_GROUPS_DN %>)" type="text" value='<%= HtmlUtil.escape(ldapGroupsDN) %>' />
+		</div>
+	</div>
+</fieldset>
+
+<h3><liferay-ui:message key="password-policy" /></h3>
+
+<fieldset class="block-labels">
+	<div class="ctrl-holder">
+		<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.LDAP_PASSWORD_POLICY_ENABLED %>)"><liferay-ui:message key="use-ldap-password-policy" /></label>
+
+		<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.LDAP_PASSWORD_POLICY_ENABLED + ")" %>' defaultValue='<%= ldapPasswordPolicyEnabled %>' />
+	</div>
+</fieldset>
+
+<script type="text/javascript">
+function <portlet:namespace />saveLdap() {
+	var userMappingFields = ['screenName','password','emailAddress','fullName','firstName','lastName','jobTitle','group'];
+	var userMappingFieldValues = ['userMappingScreenName','userMappingPassword','userMappingEmailAddress','userMappingFullName','userMappingFirstName','userMappingLastName','userMappingJobTitle','userMappingGroup'];
+	var userMappingInput = document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.LDAP_USER_MAPPINGS %>)'];
+
+	userMappingInput.value = '';
+
+	for (var i = 0; i < userMappingFields.length; i++) {
+		var userMappingField = userMappingFields[i];
+		var userMappingValue = document.<portlet:namespace />fm['<portlet:namespace />' + userMappingFieldValues[i]].value;
+
+		if (userMappingValue) {
+			userMappingInput.value += userMappingFields[i] + '=' + userMappingValue + '\n';
+		}
+	}
+
+	var groupMappingFields = ['groupName','description','user'];
+	var groupMappingFieldValues = ['groupMappingGroupName','groupMappingDescription','groupMappingUser'];
+	var groupMappingInput = document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.LDAP_GROUP_MAPPINGS %>)'];
+
+	groupMappingInput.value = '';
+
+	for (var i = 0; i<groupMappingFields.length; i++) {
+		var groupMappingField = groupMappingFields[i];
+		var groupMappingValue = document.<portlet:namespace />fm['<portlet:namespace />' + groupMappingFieldValues[i]].value;
+
+		if (groupMappingValue) {
+			groupMappingInput.value += groupMappingFields[i] + '=' + groupMappingValue + '\n';
+		}
+	}
+}
+</script>

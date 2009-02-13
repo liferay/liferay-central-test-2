@@ -326,16 +326,8 @@
 
 	<definition name="portlet.enterprise_admin" extends="portlet" />
 
-	<definition name="portlet.enterprise_admin.edit_address" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/edit_address.jsp" />
-	</definition>
-
 	<definition name="portlet.enterprise_admin.edit_company_logo" extends="portlet.enterprise_admin">
 		<put name="portlet_content" value="/portlet/enterprise_admin/edit_company_logo.jsp" />
-	</definition>
-
-	<definition name="portlet.enterprise_admin.edit_email_address" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/edit_email_address.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.edit_org_labor" extends="portlet.enterprise_admin">
@@ -360,10 +352,6 @@
 
 	<definition name="portlet.enterprise_admin.edit_password_policy_assignments" extends="portlet.enterprise_admin">
 		<put name="portlet_content" value="/portlet/enterprise_admin/edit_password_policy_assignments.jsp" />
-	</definition>
-
-	<definition name="portlet.enterprise_admin.edit_phone" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/edit_phone.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.edit_plugin" extends="portlet.enterprise_admin">
@@ -404,10 +392,6 @@
 
 	<definition name="portlet.enterprise_admin.edit_user_regular_role_assignments" extends="portlet.enterprise_admin">
 		<put name="portlet_content" value="/portlet/enterprise_admin/edit_user_regular_role_assignments.jsp" />
-	</definition>
-
-	<definition name="portlet.enterprise_admin.edit_website" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/edit_website.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.error" extends="portlet.enterprise_admin">

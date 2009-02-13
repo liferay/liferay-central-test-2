@@ -23,17 +23,35 @@
 package com.liferay.portlet.enterpriseadmin.action;
 
 import com.liferay.portal.AccountNameException;
+import com.liferay.portal.AddressCityException;
+import com.liferay.portal.AddressStreetException;
+import com.liferay.portal.AddressZipException;
 import com.liferay.portal.CompanyMxException;
 import com.liferay.portal.CompanyVirtualHostException;
 import com.liferay.portal.CompanyWebIdException;
+import com.liferay.portal.EmailAddressException;
+import com.liferay.portal.NoSuchCountryException;
+import com.liferay.portal.NoSuchListTypeException;
+import com.liferay.portal.NoSuchRegionException;
+import com.liferay.portal.PhoneNumberException;
+import com.liferay.portal.WebsiteURLException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PropertiesParamUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.EmailAddress;
+import com.liferay.portal.model.Phone;
+import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.CompanyServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
+
+import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -46,6 +64,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="EditCompanyAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Julio Camarero
  *
  */
 public class EditCompanyAction extends PortletAction {
@@ -72,11 +91,29 @@ public class EditCompanyAction extends PortletAction {
 				setForward(actionRequest, "portlet.enterprise_admin.error");
 			}
 			else if (e instanceof AccountNameException ||
+					 e instanceof AddressCityException ||
+				 	 e instanceof AddressStreetException ||
+					 e instanceof AddressZipException ||
 					 e instanceof CompanyMxException ||
 					 e instanceof CompanyVirtualHostException ||
-					 e instanceof CompanyWebIdException) {
+					 e instanceof CompanyWebIdException ||
+					 e instanceof EmailAddressException ||
+					 e instanceof NoSuchCountryException ||
+					 e instanceof NoSuchListTypeException ||
+					 e instanceof NoSuchRegionException ||
+					 e instanceof PhoneNumberException ||
+					 e instanceof WebsiteURLException) {
 
-				SessionErrors.add(actionRequest, e.getClass().getName(), e);
+				if (e instanceof NoSuchListTypeException) {
+					NoSuchListTypeException nslte = (NoSuchListTypeException)e;
+
+					SessionErrors.add(
+						actionRequest,
+						e.getClass().getName() + nslte.getType());
+				}
+				else {
+					SessionErrors.add(actionRequest, e.getClass().getName(), e);
+				}
 
 				setForward(actionRequest, "portlet.enterprise_admin.view");
 			}
@@ -102,10 +139,22 @@ public class EditCompanyAction extends PortletAction {
 		String industry = ParamUtil.getString(actionRequest, "industry");
 		String type = ParamUtil.getString(actionRequest, "type");
 		String size = ParamUtil.getString(actionRequest, "size");
+		String languageId = ParamUtil.getString(actionRequest, "languageId");
+		String timeZoneId = ParamUtil.getString(actionRequest, "timeZoneId");
+		List<Address> addresses = EnterpriseAdminUtil.getAddresses(
+			actionRequest);
+		List<EmailAddress> emailAddresses =
+			EnterpriseAdminUtil.getEmailAddresses(actionRequest);
+		List<Phone> phones = EnterpriseAdminUtil.getPhones(actionRequest);
+		List<Website> websites = EnterpriseAdminUtil.getWebsites(actionRequest);
+		UnicodeProperties props =
+			PropertiesParamUtil.getPropertiesFromParams(
+			actionRequest, "settings(");
 
 		CompanyServiceUtil.updateCompany(
 			companyId, virtualHost, mx, homeURL, name, legalName, legalId,
-			legalType, sicCode, tickerSymbol, industry, type, size);
+			legalType, sicCode, tickerSymbol, industry, type, size, languageId,
+			timeZoneId, addresses, emailAddresses, phones, websites, props);
 	}
 
 	protected void updateDisplay(ActionRequest actionRequest) throws Exception {

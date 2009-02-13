@@ -230,6 +230,13 @@ public class CompanyLocalServiceUtil {
 		getService().updateLogo(companyId, is);
 	}
 
+	public static void updatePreferences(long companyId,
+		com.liferay.portal.kernel.util.UnicodeProperties props)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().updatePreferences(companyId, props);
+	}
+
 	public static void updateSecurity(long companyId,
 		java.lang.String authType, boolean autoLogin, boolean sendPassword,
 		boolean strangers, boolean strangersWithMx, boolean strangersVerify,

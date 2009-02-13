@@ -29,6 +29,7 @@ Liferay.Service.registerClass(
 		getCompanyByWebId: true,
 		updateCompany: true,
 		updateDisplay: true,
+		updatePreferences: true,
 		updateSecurity: true
 	}
 );

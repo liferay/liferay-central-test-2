@@ -24,17 +24,27 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.model.Account;
+import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.EmailAddress;
+import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.RoleConstants;
+import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.base.CompanyServiceBaseImpl;
+import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 
 import java.io.File;
+
+import java.util.List;
 
 /**
  * <a href="CompanyServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Julio Camarero
  *
  */
 public class CompanyServiceImpl extends CompanyServiceBaseImpl {
@@ -93,6 +103,39 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 			long companyId, String virtualHost, String mx, String homeURL,
 			String name, String legalName, String legalId, String legalType,
 			String sicCode, String tickerSymbol, String industry, String type,
+			String size, String languageId, String timeZoneId,
+			List<Address> addresses, List<EmailAddress> emailAddresses,
+			List<Phone> phones, List<Website> websites,
+			UnicodeProperties props)
+		throws PortalException, SystemException {
+
+		Company company = updateCompany(
+			companyId, virtualHost, mx, homeURL, name, legalName, legalId,
+			legalType, sicCode, tickerSymbol, industry, type, size);
+
+		updateDisplay(company.getCompanyId(), languageId, timeZoneId);
+
+		updatePreferences(company.getCompanyId(), props);
+
+		EnterpriseAdminUtil.updateAddresses(
+			Account.class.getName(), company.getAccountId(), addresses);
+
+		EnterpriseAdminUtil.updateEmailAddresses(
+			Account.class.getName(), company.getAccountId(), emailAddresses);
+
+		EnterpriseAdminUtil.updatePhones(
+			Account.class.getName(), company.getAccountId(), phones);
+
+		EnterpriseAdminUtil.updateWebsites(
+			Account.class.getName(), company.getAccountId(), websites);
+
+		return company;
+	}
+
+	public Company updateCompany(
+			long companyId, String virtualHost, String mx, String homeURL,
+			String name, String legalName, String legalId, String legalType,
+			String sicCode, String tickerSymbol, String industry, String type,
 			String size)
 		throws PortalException, SystemException {
 
@@ -130,6 +173,19 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 		}
 
 		companyLocalService.updateLogo(companyId, file);
+	}
+
+	public void updatePreferences(
+			long companyId, UnicodeProperties props)
+		throws PortalException, SystemException {
+
+		if (!roleLocalService.hasUserRole(
+				getUserId(), companyId, RoleConstants.ADMINISTRATOR, true)) {
+
+			throw new PrincipalException();
+		}
+
+		companyLocalService.updatePreferences(companyId, props);
 	}
 
 	public void updateSecurity(

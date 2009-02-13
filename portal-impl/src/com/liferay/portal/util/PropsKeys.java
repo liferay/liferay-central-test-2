@@ -246,6 +246,12 @@ public interface PropsKeys {
 
 	public static final String COMPANY_SECURITY_STRANGERS_WITH_MX = "company.security.strangers.with.mx";
 
+	public static final String COMPANY_SETTINGS_FORM_IDENTIFICATION = "company.settings.form.identification";
+
+	public static final String COMPANY_SETTINGS_FORM_CONFIGURATION = "company.settings.form.configuration";
+
+	public static final String COMPANY_SETTINGS_FORM_MISCELLANEOUS = "company.settings.form.miscellaneous";
+
 	public static final String CONTROL_PANEL_LAYOUT_FRIENDLY_URL = "control.panel.layout.friendly.url";
 
 	public static final String CONTROL_PANEL_LAYOUT_NAME = "control.panel.layout.name";

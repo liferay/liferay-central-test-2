@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PropertiesParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
@@ -416,21 +417,8 @@ public class EditPagesAction extends PortletAction {
 	protected UnicodeProperties getTypeSettingsProperties(
 		ActionRequest actionRequest) {
 
-		UnicodeProperties typeSettingsProperties = new UnicodeProperties(true);
-
-		String prefix = "TypeSettingsProperties(";
-
-		for (String paramName: actionRequest.getParameterMap().keySet()) {
-			if (paramName.startsWith(prefix)) {
-				String key = paramName.substring(
-					prefix.length(), paramName.length() - 1);
-
-				typeSettingsProperties.setProperty(
-					key, actionRequest.getParameter(paramName));
-			}
-		}
-
-		return typeSettingsProperties;
+		return PropertiesParamUtil.getPropertiesFromParams(
+			actionRequest, "TypeSettingsProperties(");
 	}
 
 	protected void updateDisplayOrder(ActionRequest actionRequest)
