@@ -263,6 +263,7 @@ public class PluginsEnvironmentBuilder {
 			}
 
 			_exec(_SVN_SET_IGNORES + "bin \"" + projectDirName + "\"");
+			_exec(_SVN_SET_IGNORES + "tmp \"" + projectDirName + "\"");
 		}
 	}
 
