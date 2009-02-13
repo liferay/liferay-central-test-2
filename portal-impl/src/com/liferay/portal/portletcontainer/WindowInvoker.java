@@ -57,10 +57,10 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.wsrp.ProfileMapManager;
 import com.liferay.portal.wsrp.WSRPFactoryUtil;
 import com.liferay.portlet.ActionRequestImpl;
@@ -840,7 +840,7 @@ public class WindowInvoker extends InvokerPortletImpl {
 	}
 
 	private void _transferHeaders(
-	    HttpServletRequest request, HttpServletResponse response,
+		HttpServletRequest request, HttpServletResponse response,
 		ContainerResponse containerResponse) {
 
 		Map<String, List<String>> stringProperties =
