@@ -46,6 +46,10 @@ public class SessionFactoryImpl implements SessionFactory {
 		return new DialectImpl(_sessionFactoryImplementor.getDialect());
 	}
 
+	public SessionFactoryImplementor getSessionFactoryImplementor() {
+		return _sessionFactoryImplementor;
+	}
+
 	public Session openSession() throws ORMException {
 		org.hibernate.Session session =
 			_sessionFactoryImplementor.getCurrentSession();
@@ -70,11 +74,6 @@ public class SessionFactoryImpl implements SessionFactory {
 		SessionFactoryImplementor sessionFactoryImplementor) {
 
 		_sessionFactoryImplementor = sessionFactoryImplementor;
-	}
-
-	public SessionFactoryImplementor getSessionFactoryImplementor() {
-
-		return _sessionFactoryImplementor;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(SessionFactoryImpl.class);

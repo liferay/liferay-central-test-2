@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,19 +23,20 @@
 package com.liferay.portal.dao.orm.hibernate.jmx;
 
 import com.liferay.portal.dao.orm.hibernate.SessionFactoryImpl;
+
 import org.hibernate.jmx.StatisticsService;
 
 /**
  * <a href="HibernateStatisticsService.java.html"><b><i>View Source</i></b></a>
- * <p/>
- * This adaptation of the StatisticsService from Hibernate will properly inject
- * a Hibernate SessionFactory using the Liferay SessionFactoryImplementor
  *
  * @author Shuyang Zhou
+ *
  */
 public class HibernateStatisticsService extends StatisticsService {
-	public void setSessionFactory(SessionFactoryImpl liferaySessionFactory) {
+
+	public void setSessionFactory(SessionFactoryImpl sessionFactoryImpl) {
 		super.setSessionFactory(
-				liferaySessionFactory.getSessionFactoryImplementor());
+			sessionFactoryImpl.getSessionFactoryImplementor());
 	}
+
 }

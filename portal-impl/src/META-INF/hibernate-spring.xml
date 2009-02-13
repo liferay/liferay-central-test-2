@@ -16,24 +16,18 @@
 		<property name="globalRollbackOnParticipationFailure" value="false" />
 		<property name="sessionFactory" ref="liferayHibernateSessionFactory" />
 	</bean>
-    <bean id="mbean.hibernate.statistics"
-          class="com.liferay.portal.dao.orm.hibernate.jmx.HibernateStatisticsService">
-        <property name="statisticsEnabled">
-            <value>true</value>
-        </property>
-        <property name="sessionFactory">
-            <ref local="liferaySessionFactory"/>
-        </property>
-    </bean>
-
-    <bean id="exporter" class="org.springframework.jmx.export.MBeanExporter">
-        <property name="server" ref="mbeanServer"/>
-        <property name="beans">
-            <map>
-                <entry key="Hibernate:name=statistics">
-                    <ref local="mbean.hibernate.statistics"/>
-                </entry>
-            </map>
-        </property>
-    </bean>
+	<bean id="hibernateStatisticsService" class="com.liferay.portal.dao.orm.hibernate.jmx.HibernateStatisticsService">
+		<property name="sessionFactory" ref="liferaySessionFactory" />
+		<property name="statisticsEnabled" value="true" />
+	</bean>
+	<bean id="hibernateMBeanExporter" class="org.springframework.jmx.export.MBeanExporter">
+		<property name="server" ref="mbeanServer" />
+		<property name="beans">
+			<map>
+				<entry key="Hibernate:name=statistics">
+					<ref local="hibernateStatisticsService" />
+				</entry>
+			</map>
+		</property>
+	</bean>
 </beans>
