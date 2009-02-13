@@ -19,7 +19,6 @@ Expanse.extend(Expanse,
 			}
 		},
 
-		// Generic methods
 		generateId: function(el, prefix) {
 			prefix = prefix || 'exp-gen-';
 
