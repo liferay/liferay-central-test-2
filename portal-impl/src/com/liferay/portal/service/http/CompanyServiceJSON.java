@@ -145,13 +145,14 @@ public class CompanyServiceJSON {
 		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
 		java.util.List<com.liferay.portal.model.Phone> phones,
 		java.util.List<com.liferay.portal.model.Website> websites,
-		com.liferay.portal.kernel.util.UnicodeProperties props)
+		com.liferay.portal.kernel.util.UnicodeProperties properties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Company returnValue = CompanyServiceUtil.updateCompany(companyId,
 				virtualHost, mx, homeURL, name, legalName, legalId, legalType,
 				sicCode, tickerSymbol, industry, type, size, languageId,
-				timeZoneId, addresses, emailAddresses, phones, websites, props);
+				timeZoneId, addresses, emailAddresses, phones, websites,
+				properties);
 
 		return CompanyJSONSerializer.toJSONObject(returnValue);
 	}
@@ -180,10 +181,10 @@ public class CompanyServiceJSON {
 	}
 
 	public static void updatePreferences(long companyId,
-		com.liferay.portal.kernel.util.UnicodeProperties props)
+		com.liferay.portal.kernel.util.UnicodeProperties properties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		CompanyServiceUtil.updatePreferences(companyId, props);
+		CompanyServiceUtil.updatePreferences(companyId, properties);
 	}
 
 	public static void updateSecurity(long companyId,

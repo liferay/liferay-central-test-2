@@ -380,7 +380,7 @@ public class CompanyServiceHttp {
 		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
 		java.util.List<com.liferay.portal.model.Phone> phones,
 		java.util.List<com.liferay.portal.model.Website> websites,
-		com.liferay.portal.kernel.util.UnicodeProperties props)
+		com.liferay.portal.kernel.util.UnicodeProperties properties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -494,9 +494,9 @@ public class CompanyServiceHttp {
 				paramObj18 = new NullWrapper("java.util.List");
 			}
 
-			Object paramObj19 = props;
+			Object paramObj19 = properties;
 
-			if (props == null) {
+			if (properties == null) {
 				paramObj19 = new NullWrapper(
 						"com.liferay.portal.kernel.util.UnicodeProperties");
 			}
@@ -740,15 +740,16 @@ public class CompanyServiceHttp {
 	}
 
 	public static void updatePreferences(HttpPrincipal httpPrincipal,
-		long companyId, com.liferay.portal.kernel.util.UnicodeProperties props)
+		long companyId,
+		com.liferay.portal.kernel.util.UnicodeProperties properties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
 
-			Object paramObj1 = props;
+			Object paramObj1 = properties;
 
-			if (props == null) {
+			if (properties == null) {
 				paramObj1 = new NullWrapper(
 						"com.liferay.portal.kernel.util.UnicodeProperties");
 			}

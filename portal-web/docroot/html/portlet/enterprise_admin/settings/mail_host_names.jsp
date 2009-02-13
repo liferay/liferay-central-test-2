@@ -27,6 +27,7 @@
 <%
 String adminMailHostNames = ParamUtil.getString(request, "settings(" + PropsKeys.ADMIN_MAIL_HOST_NAMES +")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_MAIL_HOST_NAMES));
 %>
+
 <h3><liferay-ui:message key="mail-host-names" /></h3>
 
 <fieldset class="block-labels">

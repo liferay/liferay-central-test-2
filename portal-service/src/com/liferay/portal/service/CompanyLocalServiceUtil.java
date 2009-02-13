@@ -231,10 +231,9 @@ public class CompanyLocalServiceUtil {
 	}
 
 	public static void updatePreferences(long companyId,
-		com.liferay.portal.kernel.util.UnicodeProperties props)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService().updatePreferences(companyId, props);
+		com.liferay.portal.kernel.util.UnicodeProperties properties)
+		throws com.liferay.portal.SystemException {
+		getService().updatePreferences(companyId, properties);
 	}
 
 	public static void updateSecurity(long companyId,

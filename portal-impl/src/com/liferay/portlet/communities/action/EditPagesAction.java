@@ -417,7 +417,7 @@ public class EditPagesAction extends PortletAction {
 	protected UnicodeProperties getTypeSettingsProperties(
 		ActionRequest actionRequest) {
 
-		return PropertiesParamUtil.getPropertiesFromParams(
+		return PropertiesParamUtil.getProperties(
 			actionRequest, "TypeSettingsProperties(");
 	}
 

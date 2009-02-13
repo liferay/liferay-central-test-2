@@ -103,7 +103,7 @@ public interface CompanyService {
 		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
 		java.util.List<com.liferay.portal.model.Phone> phones,
 		java.util.List<com.liferay.portal.model.Website> websites,
-		com.liferay.portal.kernel.util.UnicodeProperties props)
+		com.liferay.portal.kernel.util.UnicodeProperties properties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -127,7 +127,7 @@ public interface CompanyService {
 			com.liferay.portal.SystemException;
 
 	public void updatePreferences(long companyId,
-		com.liferay.portal.kernel.util.UnicodeProperties props)
+		com.liferay.portal.kernel.util.UnicodeProperties properties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

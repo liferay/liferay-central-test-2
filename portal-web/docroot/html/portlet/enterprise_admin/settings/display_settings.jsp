@@ -26,6 +26,7 @@
 
 <%
 User user2 = company.getDefaultUser();
+
 String timeZoneId = ParamUtil.getString(request, "timeZoneId", user2.getTimeZoneId());
 String languageId = ParamUtil.getString(request, "languageId", user2.getLanguageId());
 boolean companySecurityCommunityLogo = ParamUtil.getBoolean(request, "settings(" + PropsKeys.COMPANY_SECURITY_COMMUNITY_LOGO + ")", company.isCommunityLogo());

@@ -1,96 +1,92 @@
 <b><liferay-ui:message key="definition-of-terms" /></b>
 
 <table class="lfr-table">
-	<tr>
-		<td>
-			<b>[$FROM_ADDRESS$]</b>
-		</td>
-		<td>
-			<%= adminEmailFromAddress %>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<b>[$FROM_NAME$]</b>
-		</td>
-		<td>
-			<%= adminEmailFromName %>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<b>[$PORTAL_URL$]</b>
-		</td>
-		<td>
-			<%= company.getVirtualHost() %>
-		</td>
-	</tr>
-
-	<tr class="password-changed-notification">
-		<td>
-			<b>[$REMOTE_ADDRESS$]</b>
-		</td>
-		<td>
-			<liferay-ui:message key="the-browser's-remote-address" />
-		</td>
-	</tr>
-	<tr class="password-changed-notification">
-		<td>
-			<b>[$REMOTE_HOST$]</b>
-		</td>
-		<td>
-			<liferay-ui:message key="the-browser's-remote-host" />
-		</td>
-	</tr>
-
-	<tr>
-		<td>
-			<b>[$TO_ADDRESS$]</b>
-		</td>
-		<td>
-			<liferay-ui:message key="the-address-of-the-email-recipient" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<b>[$TO_NAME$]</b>
-		</td>
-		<td>
-			<liferay-ui:message key="the-name-of-the-email-recipient" />
-		</td>
-	</tr>
-
-	<tr class="password-changed-notification">
-		<td>
-			<b>[$USER_AGENT$]</b>
-		</td>
-		<td>
-			<liferay-ui:message key="the-browser's-user-agent" />
-		</td>
-	</tr>
-
-	<tr>
-		<td>
-			<b>[$USER_ID$]</b>
-		</td>
-		<td>
-			<liferay-ui:message key="the-user-id" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<b>[$USER_PASSWORD$]</b>
-		</td>
-		<td>
-			<liferay-ui:message key="the-user-password" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<b>[$USER_SCREENNAME$]</b>
-		</td>
-		<td>
-			<liferay-ui:message key="the-user-screen-name" />
-		</td>
-	</tr>
+<tr>
+	<td>
+		<b>[$FROM_ADDRESS$]</b>
+	</td>
+	<td>
+		<%= adminEmailFromAddress %>
+	</td>
+</tr>
+<tr>
+	<td>
+		<b>[$FROM_NAME$]</b>
+	</td>
+	<td>
+		<%= adminEmailFromName %>
+	</td>
+</tr>
+<tr>
+	<td>
+		<b>[$PORTAL_URL$]</b>
+	</td>
+	<td>
+		<%= company.getVirtualHost() %>
+	</td>
+</tr>
+<tr class="password-changed-notification">
+	<td>
+		<b>[$REMOTE_ADDRESS$]</b>
+	</td>
+	<td>
+		<liferay-ui:message key="the-browser's-remote-address" />
+	</td>
+</tr>
+<tr class="password-changed-notification">
+	<td>
+		<b>[$REMOTE_HOST$]</b>
+	</td>
+	<td>
+		<liferay-ui:message key="the-browser's-remote-host" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<b>[$TO_ADDRESS$]</b>
+	</td>
+	<td>
+		<liferay-ui:message key="the-address-of-the-email-recipient" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<b>[$TO_NAME$]</b>
+	</td>
+	<td>
+		<liferay-ui:message key="the-name-of-the-email-recipient" />
+	</td>
+</tr>
+<tr class="password-changed-notification">
+	<td>
+		<b>[$USER_AGENT$]</b>
+	</td>
+	<td>
+		<liferay-ui:message key="the-browser's-user-agent" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<b>[$USER_ID$]</b>
+	</td>
+	<td>
+		<liferay-ui:message key="the-user-id" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<b>[$USER_PASSWORD$]</b>
+	</td>
+	<td>
+		<liferay-ui:message key="the-user-password" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<b>[$USER_SCREENNAME$]</b>
+	</td>
+	<td>
+		<liferay-ui:message key="the-user-screen-name" />
+	</td>
+</tr>
 </table>

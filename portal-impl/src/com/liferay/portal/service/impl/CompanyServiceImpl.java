@@ -103,10 +103,28 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 			long companyId, String virtualHost, String mx, String homeURL,
 			String name, String legalName, String legalId, String legalType,
 			String sicCode, String tickerSymbol, String industry, String type,
+			String size)
+		throws PortalException, SystemException {
+
+		if (!roleLocalService.hasUserRole(
+				getUserId(), companyId, RoleConstants.ADMINISTRATOR, true)) {
+
+			throw new PrincipalException();
+		}
+
+		return companyLocalService.updateCompany(
+			companyId, virtualHost, mx, homeURL, name, legalName, legalId,
+			legalType, sicCode, tickerSymbol, industry, type, size);
+	}
+
+	public Company updateCompany(
+			long companyId, String virtualHost, String mx, String homeURL,
+			String name, String legalName, String legalId, String legalType,
+			String sicCode, String tickerSymbol, String industry, String type,
 			String size, String languageId, String timeZoneId,
 			List<Address> addresses, List<EmailAddress> emailAddresses,
 			List<Phone> phones, List<Website> websites,
-			UnicodeProperties props)
+			UnicodeProperties properties)
 		throws PortalException, SystemException {
 
 		Company company = updateCompany(
@@ -115,7 +133,7 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 
 		updateDisplay(company.getCompanyId(), languageId, timeZoneId);
 
-		updatePreferences(company.getCompanyId(), props);
+		updatePreferences(company.getCompanyId(), properties);
 
 		EnterpriseAdminUtil.updateAddresses(
 			Account.class.getName(), company.getAccountId(), addresses);
@@ -130,24 +148,6 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 			Account.class.getName(), company.getAccountId(), websites);
 
 		return company;
-	}
-
-	public Company updateCompany(
-			long companyId, String virtualHost, String mx, String homeURL,
-			String name, String legalName, String legalId, String legalType,
-			String sicCode, String tickerSymbol, String industry, String type,
-			String size)
-		throws PortalException, SystemException {
-
-		if (!roleLocalService.hasUserRole(
-				getUserId(), companyId, RoleConstants.ADMINISTRATOR, true)) {
-
-			throw new PrincipalException();
-		}
-
-		return companyLocalService.updateCompany(
-			companyId, virtualHost, mx, homeURL, name, legalName, legalId,
-			legalType, sicCode, tickerSymbol, industry, type, size);
 	}
 
 	public void updateDisplay(
@@ -175,8 +175,7 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 		companyLocalService.updateLogo(companyId, file);
 	}
 
-	public void updatePreferences(
-			long companyId, UnicodeProperties props)
+	public void updatePreferences(long companyId, UnicodeProperties properties)
 		throws PortalException, SystemException {
 
 		if (!roleLocalService.hasUserRole(
@@ -185,7 +184,7 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 			throw new PrincipalException();
 		}
 
-		companyLocalService.updatePreferences(companyId, props);
+		companyLocalService.updatePreferences(companyId, properties);
 	}
 
 	public void updateSecurity(

@@ -578,25 +578,23 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		imageLocalService.updateImage(logoId, is);
 	}
 
-	public void updatePreferences(
-			long companyId, UnicodeProperties props)
-		throws PortalException, SystemException {
+	public void updatePreferences(long companyId, UnicodeProperties properties)
+		throws SystemException {
 
 		PortletPreferences preferences = PrefsPropsUtil.getPreferences(
 			companyId);
 
 		try {
-			for (String property : props.keySet()) {
-				preferences.setValue(property, props.getProperty(property));
+			for (String key : properties.keySet()) {
+				String value = properties.getProperty(key);
+
+				preferences.setValue(key, value);
 			}
 
 			preferences.store();
 		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
-		catch (PortletException pe) {
-			throw new SystemException(pe);
+		catch (Exception e) {
+			throw new SystemException(e);
 		}
 	}
 

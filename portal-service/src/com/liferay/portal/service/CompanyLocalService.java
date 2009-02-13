@@ -184,9 +184,8 @@ public interface CompanyLocalService {
 			com.liferay.portal.SystemException;
 
 	public void updatePreferences(long companyId,
-		com.liferay.portal.kernel.util.UnicodeProperties props)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		com.liferay.portal.kernel.util.UnicodeProperties properties)
+		throws com.liferay.portal.SystemException;
 
 	public void updateSecurity(long companyId, java.lang.String authType,
 		boolean autoLogin, boolean sendPassword, boolean strangers,

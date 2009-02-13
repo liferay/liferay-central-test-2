@@ -119,13 +119,13 @@ String siteminderUserHeader = ParamUtil.getString(request, "settings(" + PropsKe
 			<div class="ctrl-holder">
 				<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.CAS_AUTH_ENABLED %>)"><liferay-ui:message key="enabled" /></label>
 
-				<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.CAS_AUTH_ENABLED + ")" %>' defaultValue='<%= casAuthEnabled %>' />
+				<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.CAS_AUTH_ENABLED + ")" %>' defaultValue="<%= casAuthEnabled %>" />
 			</div>
 
 			<div class="ctrl-holder">
 				<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.CAS_IMPORT_FROM_LDAP %>)"><liferay-ui:message key="import-cas-users-from-ldap" /></label>
 
-				<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.CAS_IMPORT_FROM_LDAP + ")" %>' defaultValue='<%= casImportFromLdap %>' />
+				<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.CAS_IMPORT_FROM_LDAP + ")" %>' defaultValue="<%= casImportFromLdap %>" />
 				<liferay-ui:icon-help message="import-cas-users-from-ldap-help" />
 			</div>
 
@@ -166,7 +166,7 @@ String siteminderUserHeader = ParamUtil.getString(request, "settings(" + PropsKe
 			<div class="ctrl-holder">
 				<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.NTLM_AUTH_ENABLED %>)"><liferay-ui:message key="enabled" /></label>
 
-				<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.NTLM_AUTH_ENABLED + ")" %>' defaultValue='<%= ntlmAuthEnabled %>' />
+				<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.NTLM_AUTH_ENABLED + ")" %>' defaultValue="<%= ntlmAuthEnabled %>" />
 			</div>
 
 			<div class="ctrl-holder">
@@ -188,7 +188,7 @@ String siteminderUserHeader = ParamUtil.getString(request, "settings(" + PropsKe
 			<div class="ctrl-holder">
 				<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.OPEN_ID_AUTH_ENABLED %>)"><liferay-ui:message key="enabled" /></label>
 
-				<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.OPEN_ID_AUTH_ENABLED + ")" %>' defaultValue='<%= openIdAuthEnabled %>' />
+				<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.OPEN_ID_AUTH_ENABLED + ")" %>' defaultValue="<%= openIdAuthEnabled %>" />
 			</div>
 		</fieldset>
 	</liferay-ui:section>
@@ -198,7 +198,7 @@ String siteminderUserHeader = ParamUtil.getString(request, "settings(" + PropsKe
 			<div class="ctrl-holder">
 				<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.OPEN_SSO_AUTH_ENABLED %>)"><liferay-ui:message key="enabled" /></label>
 
-				<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.OPEN_SSO_AUTH_ENABLED + ")" %>' defaultValue='<%= openSsoAuthEnabled %>' />
+				<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.OPEN_SSO_AUTH_ENABLED + ")" %>' defaultValue="<%= openSsoAuthEnabled %>" />
 			</div>
 
 			<div class="ctrl-holder">
@@ -250,13 +250,13 @@ String siteminderUserHeader = ParamUtil.getString(request, "settings(" + PropsKe
 				<div class="ctrl-holder">
 					<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.SITEMINDER_AUTH_ENABLED %>)"><liferay-ui:message key="enabled" /></label>
 
-					<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.SITEMINDER_AUTH_ENABLED + ")" %>' defaultValue='<%= siteminderAuthEnabled %>' />
+					<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.SITEMINDER_AUTH_ENABLED + ")" %>' defaultValue="<%= siteminderAuthEnabled %>" />
 				</div>
 
 				<div class="ctrl-holder">
 					<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.SITEMINDER_IMPORT_FROM_LDAP %>)"><liferay-ui:message key="import-siteminder-users-from-ldap" /></label>
 
-					<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.SITEMINDER_IMPORT_FROM_LDAP + ")" %>' defaultValue='<%= siteminderImportFromLdap %>' />
+					<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.SITEMINDER_IMPORT_FROM_LDAP + ")" %>' defaultValue="<%= siteminderImportFromLdap %>" />
 					<liferay-ui:icon-help message="import-siteminder-users-from-ldap-help" />
 				</div>
 

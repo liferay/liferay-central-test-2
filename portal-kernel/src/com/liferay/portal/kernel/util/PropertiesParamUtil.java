@@ -37,201 +37,208 @@ import javax.servlet.http.HttpServletRequest;
 public class PropertiesParamUtil {
 
 	public static boolean getBoolean(
-		Properties props, HttpServletRequest request, String param) {
+		Properties properties, HttpServletRequest request, String param) {
 
-		return getBoolean(props, request, param, GetterUtil.DEFAULT_BOOLEAN);
+		return getBoolean(
+			properties, request, param, GetterUtil.DEFAULT_BOOLEAN);
 	}
 
 	public static boolean getBoolean(
-		Properties props, HttpServletRequest request, String param,
+		Properties properties, HttpServletRequest request, String param,
 		boolean defaultValue) {
 
-		String propsValue = props.getProperty(param, null);
+		String propertiesValue = properties.getProperty(param, null);
 
 		boolean getterUtilValue = GetterUtil.getBoolean(
-			propsValue, defaultValue);
+			propertiesValue, defaultValue);
 
 		return ParamUtil.get(request, param, getterUtilValue);
 	}
 
 	public static boolean getBoolean(
-		UnicodeProperties props, HttpServletRequest request, String param) {
+		UnicodeProperties properties, HttpServletRequest request,
+		String param) {
 
-		return getBoolean(props, request, param, GetterUtil.DEFAULT_BOOLEAN);
+		return getBoolean(
+			properties, request, param, GetterUtil.DEFAULT_BOOLEAN);
 	}
 
 	public static boolean getBoolean(
-		UnicodeProperties props, HttpServletRequest request, String param,
+		UnicodeProperties properties, HttpServletRequest request, String param,
 		boolean defaultValue) {
 
-		String propsValue = props.getProperty(param, null);
+		String propertiesValue = properties.getProperty(param, null);
 
 		boolean getterUtilValue = GetterUtil.getBoolean(
-			propsValue, defaultValue);
+			propertiesValue, defaultValue);
 
 		return ParamUtil.get(request, param, getterUtilValue);
 	}
 
 	public static double getDouble(
-		Properties props, HttpServletRequest request, String param) {
+		Properties properties, HttpServletRequest request, String param) {
 
-		return getDouble(props, request, param, GetterUtil.DEFAULT_DOUBLE);
+		return getDouble(properties, request, param, GetterUtil.DEFAULT_DOUBLE);
 	}
 
 	public static double getDouble(
-		Properties props, HttpServletRequest request, String param,
+		Properties properties, HttpServletRequest request, String param,
 		double defaultValue) {
 
-		String propsValue = props.getProperty(param, null);
+		String propertiesValue = properties.getProperty(param, null);
 
 		double getterUtilValue = GetterUtil.getDouble(
-			propsValue, defaultValue);
+			propertiesValue, defaultValue);
 
 		return ParamUtil.get(request, param, getterUtilValue);
 	}
 
 	public static double getDouble(
-		UnicodeProperties props, HttpServletRequest request, String param) {
+		UnicodeProperties properties, HttpServletRequest request,
+		String param) {
 
-		return getDouble(props, request, param, GetterUtil.DEFAULT_DOUBLE);
+		return getDouble(properties, request, param, GetterUtil.DEFAULT_DOUBLE);
 	}
 
 	public static double getDouble(
-		UnicodeProperties props, HttpServletRequest request, String param,
+		UnicodeProperties properties, HttpServletRequest request, String param,
 		double defaultValue) {
 
-		String propsValue = props.getProperty(param, null);
+		String propertiesValue = properties.getProperty(param, null);
 
 		double getterUtilValue = GetterUtil.getDouble(
-			propsValue, defaultValue);
+			propertiesValue, defaultValue);
 
 		return ParamUtil.get(request, param, getterUtilValue);
 	}
 
 	public static int getInteger(
-		Properties props, HttpServletRequest request, String param) {
+		Properties properties, HttpServletRequest request, String param) {
 
-		return getInteger(props, request, param, GetterUtil.DEFAULT_INTEGER);
+		return getInteger(
+			properties, request, param, GetterUtil.DEFAULT_INTEGER);
 	}
 
 	public static int getInteger(
-		Properties props, HttpServletRequest request, String param,
+		Properties properties, HttpServletRequest request, String param,
 		int defaultValue) {
 
-		String propsValue = props.getProperty(param, null);
+		String propertiesValue = properties.getProperty(param, null);
 
 		int getterUtilValue = GetterUtil.getInteger(
-			propsValue, defaultValue);
+			propertiesValue, defaultValue);
 
 		return ParamUtil.get(request, param, getterUtilValue);
 	}
 
 	public static int getInteger(
-		UnicodeProperties props, HttpServletRequest request, String param) {
+		UnicodeProperties properties, HttpServletRequest request,
+		String param) {
 
-		return getInteger(props, request, param, GetterUtil.DEFAULT_INTEGER);
+		return getInteger(
+			properties, request, param, GetterUtil.DEFAULT_INTEGER);
 	}
 
 	public static int getInteger(
-		UnicodeProperties props, HttpServletRequest request, String param,
+		UnicodeProperties properties, HttpServletRequest request, String param,
 		int defaultValue) {
 
-		String propsValue = props.getProperty(param, null);
+		String propertiesValue = properties.getProperty(param, null);
 
 		int getterUtilValue = GetterUtil.getInteger(
-			propsValue, defaultValue);
+			propertiesValue, defaultValue);
 
 		return ParamUtil.get(request, param, getterUtilValue);
 	}
 
 	public static long getLong(
-		Properties props, HttpServletRequest request, String param) {
+		Properties properties, HttpServletRequest request, String param) {
 
-		return getLong(props, request, param, GetterUtil.DEFAULT_LONG);
+		return getLong(properties, request, param, GetterUtil.DEFAULT_LONG);
 	}
 
 	public static long getLong(
-		Properties props, HttpServletRequest request, String param,
+		Properties properties, HttpServletRequest request, String param,
 		long defaultValue) {
 
-		String propsValue = props.getProperty(param, null);
+		String propertiesValue = properties.getProperty(param, null);
 
 		long getterUtilValue = GetterUtil.getLong(
-			propsValue, defaultValue);
+			propertiesValue, defaultValue);
 
 		return ParamUtil.get(request, param, getterUtilValue);
 	}
 
 	public static long getLong(
-		UnicodeProperties props, HttpServletRequest request, String param) {
+		UnicodeProperties properties, HttpServletRequest request,
+		String param) {
 
-		return getLong(props, request, param, GetterUtil.DEFAULT_LONG);
+		return getLong(properties, request, param, GetterUtil.DEFAULT_LONG);
 	}
 
 	public static long getLong(
-		UnicodeProperties props, HttpServletRequest request, String param,
+		UnicodeProperties properties, HttpServletRequest request, String param,
 		long defaultValue) {
 
-		String propsValue = props.getProperty(param, null);
+		String propertiesValue = properties.getProperty(param, null);
 
 		long getterUtilValue = GetterUtil.getLong(
-			propsValue, defaultValue);
+			propertiesValue, defaultValue);
 
 		return ParamUtil.get(request, param, getterUtilValue);
 	}
 
-	public static UnicodeProperties getPropertiesFromParams(
+	public static UnicodeProperties getProperties(
 		PortletRequest portletRequest, String prefix) {
 
-		UnicodeProperties props = new UnicodeProperties(true);
+		UnicodeProperties properties = new UnicodeProperties(true);
 
-		for (String paramName : portletRequest.getParameterMap().keySet()) {
-			if (paramName.startsWith(prefix) &&
-				!paramName.endsWith(")Checkbox")) {
+		for (String param : portletRequest.getParameterMap().keySet()) {
+			if (param.startsWith(prefix) && !param.endsWith(")Checkbox")) {
+				String key = param.substring(
+					prefix.length(), param.length() - 1);
+				String value = portletRequest.getParameter(param);
 
-				String key = paramName.substring(
-					prefix.length(), paramName.length() - 1);
-
-				props.setProperty(
-					key, portletRequest.getParameter(paramName));
+				properties.setProperty(key, value);
 			}
 		}
 
-		return props;
+		return properties;
 	}
 
 	public static String getString(
-		Properties props, HttpServletRequest request, String param) {
+		Properties properties, HttpServletRequest request, String param) {
 
-		return getString(props, request, param, GetterUtil.DEFAULT_STRING);
+		return getString(properties, request, param, GetterUtil.DEFAULT_STRING);
 	}
 
 	public static String getString(
-		Properties props, HttpServletRequest request, String param,
+		Properties properties, HttpServletRequest request, String param,
 		String defaultValue) {
 
-		String propsValue = props.getProperty(param, null);
+		String propertiesValue = properties.getProperty(param, null);
 
 		String getterUtilValue = GetterUtil.getString(
-			propsValue, defaultValue);
+			propertiesValue, defaultValue);
 
 		return ParamUtil.get(request, param, getterUtilValue);
 	}
 
 	public static String getString(
-		UnicodeProperties props, HttpServletRequest request, String param) {
+		UnicodeProperties properties, HttpServletRequest request,
+		String param) {
 
-		return getString(props, request, param, GetterUtil.DEFAULT_STRING);
+		return getString(properties, request, param, GetterUtil.DEFAULT_STRING);
 	}
 
 	public static String getString(
-		UnicodeProperties props, HttpServletRequest request, String param,
+		UnicodeProperties properties, HttpServletRequest request, String param,
 		String defaultValue) {
 
-		String propsValue = props.getProperty(param, null);
+		String propertiesValue = properties.getProperty(param, null);
 
 		String getterUtilValue = GetterUtil.getString(
-			propsValue, defaultValue);
+			propertiesValue, defaultValue);
 
 		return ParamUtil.get(request, param, getterUtilValue);
 	}

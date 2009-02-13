@@ -40,24 +40,23 @@ String adminEmailPasswordSentBody = ParamUtil.getString(request, "emailPasswordS
 %>
 
 <script type="text/javascript">
+	function <portlet:namespace />initEmailUserAddedBodyEditor() {
+		return "<%= UnicodeFormatter.toString(adminEmailUserAddedBody) %>";
+	}
 
-		function <portlet:namespace />initEmailUserAddedBodyEditor() {
-			return "<%= UnicodeFormatter.toString(adminEmailUserAddedBody) %>";
-		}
+	function <portlet:namespace />initEmailPasswordSentBodyEditor() {
+		return "<%= UnicodeFormatter.toString(adminEmailPasswordSentBody) %>";
+	}
 
-		function <portlet:namespace />initEmailPasswordSentBodyEditor() {
-			return "<%= UnicodeFormatter.toString(adminEmailPasswordSentBody) %>";
+	function <portlet:namespace />saveEmails() {
+		try {
+			document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY %>)'].value = window.emailUserAddedBody.getHTML();
+			document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY %>)'].value = window.emailPasswordSentBody.getHTML();
 		}
-
-		function <portlet:namespace />saveEmails() {
-			try {
-				document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY %>)'].value = window.emailUserAddedBody.getHTML();
-				document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY %>)'].value = window.emailPasswordSentBody.getHTML();
-			}
-			catch(error) {
-			}
+		catch(error) {
 		}
-	</script>
+	}
+</script>
 
 <liferay-ui:error-marker key="errorSection" value="email_notifications" />
 

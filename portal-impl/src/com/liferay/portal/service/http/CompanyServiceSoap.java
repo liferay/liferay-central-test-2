@@ -194,7 +194,7 @@ public class CompanyServiceSoap {
 		com.liferay.portal.model.EmailAddressSoap[] emailAddresses,
 		com.liferay.portal.model.PhoneSoap[] phones,
 		com.liferay.portal.model.WebsiteSoap[] websites,
-		com.liferay.portal.kernel.util.UnicodeProperties props)
+		com.liferay.portal.kernel.util.UnicodeProperties properties)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.Company returnValue = CompanyServiceUtil.updateCompany(companyId,
@@ -208,7 +208,7 @@ public class CompanyServiceSoap {
 					com.liferay.portal.model.impl.PhoneModelImpl.toModels(
 						phones),
 					com.liferay.portal.model.impl.WebsiteModelImpl.toModels(
-						websites), props);
+						websites), properties);
 
 			return com.liferay.portal.model.CompanySoap.toSoapModel(returnValue);
 		}
@@ -254,10 +254,10 @@ public class CompanyServiceSoap {
 	}
 
 	public static void updatePreferences(long companyId,
-		com.liferay.portal.kernel.util.UnicodeProperties props)
+		com.liferay.portal.kernel.util.UnicodeProperties properties)
 		throws RemoteException {
 		try {
-			CompanyServiceUtil.updatePreferences(companyId, props);
+			CompanyServiceUtil.updatePreferences(companyId, properties);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

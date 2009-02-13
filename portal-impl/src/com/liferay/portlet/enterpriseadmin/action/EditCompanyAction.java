@@ -90,9 +90,9 @@ public class EditCompanyAction extends PortletAction {
 
 				setForward(actionRequest, "portlet.enterprise_admin.error");
 			}
-			else if (e instanceof AccountNameException ||
-					 e instanceof AddressCityException ||
-				 	 e instanceof AddressStreetException ||
+			else if (e instanceof AddressCityException ||
+					 e instanceof AccountNameException ||
+					 e instanceof AddressStreetException ||
 					 e instanceof AddressZipException ||
 					 e instanceof CompanyMxException ||
 					 e instanceof CompanyVirtualHostException ||
@@ -147,14 +147,14 @@ public class EditCompanyAction extends PortletAction {
 			EnterpriseAdminUtil.getEmailAddresses(actionRequest);
 		List<Phone> phones = EnterpriseAdminUtil.getPhones(actionRequest);
 		List<Website> websites = EnterpriseAdminUtil.getWebsites(actionRequest);
-		UnicodeProperties props =
-			PropertiesParamUtil.getPropertiesFromParams(
+		UnicodeProperties properties = PropertiesParamUtil.getProperties(
 			actionRequest, "settings(");
 
 		CompanyServiceUtil.updateCompany(
 			companyId, virtualHost, mx, homeURL, name, legalName, legalId,
 			legalType, sicCode, tickerSymbol, industry, type, size, languageId,
-			timeZoneId, addresses, emailAddresses, phones, websites, props);
+			timeZoneId, addresses, emailAddresses, phones, websites,
+			properties);
 	}
 
 	protected void updateDisplay(ActionRequest actionRequest) throws Exception {
