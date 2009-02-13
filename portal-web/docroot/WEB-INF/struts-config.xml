@@ -848,7 +848,6 @@
 
 		<action path="/image_gallery/edit_image" type="com.liferay.portlet.imagegallery.action.EditImageAction">
 			<forward name="portlet.image_gallery.edit_image" path="portlet.image_gallery.edit_image" />
-			<forward name="portlet.image_gallery.edit_image_form" path="portlet.image_gallery.edit_image_form" />
 			<forward name="portlet.image_gallery.error" path="portlet.image_gallery.error" />
 		</action>
 

@@ -81,6 +81,12 @@ public class EditImageAction extends PortletAction {
 
 				sendRedirect(actionRequest, actionResponse);
 			}
+
+			String redirect = ParamUtil.getString(actionRequest, "redirect");
+
+			if (Validator.isNotNull(redirect)) {
+				sendRedirect(actionRequest, actionResponse, redirect);
+			}
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchImageException ||
@@ -128,10 +134,6 @@ public class EditImageAction extends PortletAction {
 		}
 
 		String forward = "portlet.image_gallery.edit_image";
-
-		if (renderRequest.getWindowState().equals(LiferayWindowState.POP_UP)) {
-			forward = "portlet.image_gallery.edit_image_form";
-		}
 
 		return mapping.findForward(getForward(renderRequest, forward));
 	}
