@@ -40,7 +40,11 @@ DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRA
 long folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
 String name = BeanParamUtil.getString(fileEntry, request, "name");
 
-String extension = FileUtil.getExtension(name);
+String extension = StringPool.BLANK;
+
+if (Validator.isNotNull(name)) {
+	extension = FileUtil.getExtension(name);
+}
 
 String titleWithExtension = BeanParamUtil.getString(fileEntry, request, "titleWithExtension");
 
@@ -137,7 +141,7 @@ portletURL.setParameter("name", name);
 
 		var nameEl = document.getElementById("<portlet:namespace />folderName");
 
-		nameEl.href = "javascript: parent.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + folderId + "'; void('');";
+		nameEl.href = "javascript: location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + folderId + "'; void('');";
 		nameEl.innerHTML = folderName + "&nbsp;";
 	}
 
@@ -426,7 +430,7 @@ portletURL.setParameter("name", name);
 
 				%>
 
-				<a href="javascript: parent.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/view" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>'; void('');" id="<portlet:namespace />folderName">
+				<a href="javascript: window.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/view" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>'; void('');" id="<portlet:namespace />folderName">
 				<%= folderName %></a>
 
 				<input type="button" value="<liferay-ui:message key="select" />" onClick="var folderWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/select_folder" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();" />
@@ -533,15 +537,15 @@ portletURL.setParameter("name", name);
 	<c:if test="<%= (fileEntry != null) && ((isLocked.booleanValue() && hasLock.booleanValue()) || !isLocked.booleanValue()) %>">
 		<c:choose>
 			<c:when test="<%= !hasLock.booleanValue() %>">
-				<input type="button" value="<liferay-ui:message key="lock" />" onClick="parent.<portlet:namespace />lock();" />
+				<input type="button" value="<liferay-ui:message key="lock" />" onClick="<portlet:namespace />lock();" />
 			</c:when>
 			<c:otherwise>
-				<input type="button" value="<liferay-ui:message key="unlock" />" onClick="parent.<portlet:namespace />unlock();" />
+				<input type="button" value="<liferay-ui:message key="unlock" />" onClick="<portlet:namespace />unlock();" />
 			</c:otherwise>
 		</c:choose>
 	</c:if>
 
-	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="parent.location = '<%= HtmlUtil.escape(redirect) %>';" />
+	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location = '<%= HtmlUtil.escape(redirect) %>';" />
 
 	</form>
 
