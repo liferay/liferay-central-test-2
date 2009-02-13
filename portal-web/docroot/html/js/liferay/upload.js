@@ -524,9 +524,11 @@ Liferay.Upload = new Expanse.Class({
 		if (!instance._fallbackIframe) {
 			instance._fallbackIframe = instance._fallbackContainer.find('iframe[id$=-iframe]');
 
-			var frameHeight = jQuery('#content-wrapper', instance._fallbackIframe[0].contentWindow).height() || 250;
+			if (instance._fallbackIframe.length) {
+				var frameHeight = jQuery('#content-wrapper', instance._fallbackIframe[0].contentWindow).height() || 250;
 
-			instance._fallbackIframe.height(frameHeight + 150);
+				instance._fallbackIframe.height(frameHeight + 150);
+			}
 		}
 	},
 
