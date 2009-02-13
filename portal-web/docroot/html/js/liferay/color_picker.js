@@ -35,7 +35,7 @@ Liferay.ColorPicker = new Expanse.Class({
 		var instance = this;
 
 		var baseDiv = jQuery('<div class="lfr-colorpicker" />');
-		var closeButton = jQuery('<div class="ui-colorpicker-close" />')
+		var closeButton = jQuery('<div class="ui-colorpicker-close" />');
 
 		baseDiv.append(closeButton);
 
