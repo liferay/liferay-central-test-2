@@ -72,6 +72,11 @@ public class SessionFactoryImpl implements SessionFactory {
 		_sessionFactoryImplementor = sessionFactoryImplementor;
 	}
 
+	public SessionFactoryImplementor getSessionFactoryImplementor() {
+
+		return _sessionFactoryImplementor;
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(SessionFactoryImpl.class);
 
 	private SessionFactoryImplementor _sessionFactoryImplementor;
