@@ -2579,6 +2579,7 @@ please-enter-valid-content=Veuillez entrer un contenu valide.
 please-import-a-lar-file-for-the-current-portlet=Veuillez importer un dossier de LAR pour le portlet courant.
 please-import-a-lar-file-of-the-correct-type=Veuillez importer un dossier de LAR du type correct.
 please-import-a-lar-file=Veuillez importer un dossier de LAR.
+please-limit-your-message-to-500-characters=Veuillez limiter votre message à 500 caractères.
 please-login-to-view-user-profiles=Ouvrez une session svp pour regarder des profils d'utilisateur.
 please-map-each-of-the-group-properties-group-name-and-user-to-an-ldap-attribute=Please map each of the group properties <i>Group Name</i> and <i>User</i> to an LDAP attribute.
 please-map-each-of-the-user-properties-screen-name,-password,-email-address,-first-name,-and-last-name-to-an-ldap-attribute=Please map each of the user properties <i>Screen Name</i>, <i>Password</i>, <i>Email Address</i>, <i>First Name</i>, and <i>Last Name</i> to an LDAP attribute.

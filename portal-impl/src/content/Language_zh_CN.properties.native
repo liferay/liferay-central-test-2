@@ -2579,6 +2579,7 @@ please-enter-valid-content=请输入有效的内容。
 please-import-a-lar-file-for-the-current-portlet=请为当前 portlet 导入 LAR 文件。
 please-import-a-lar-file-of-the-correct-type=请导入正确类型的 LAR 文件。
 please-import-a-lar-file=请导入 LAR 文件。
+please-limit-your-message-to-500-characters=请限制您的消息到500个字符。
 please-login-to-view-user-profiles=请登陆查看用户配置文件。
 please-map-each-of-the-group-properties-group-name-and-user-to-an-ldap-attribute=请将每个组属性（<b>组名称</b>和<b>用户</b>）映射到 LDAP 属性。
 please-map-each-of-the-user-properties-screen-name,-password,-email-address,-first-name,-and-last-name-to-an-ldap-attribute=请将每个用户属性（<b>屏幕名称</b>、<b>密码</b>、<b>电子邮件地址</b>、<b>名字</b>和<b>姓</b>）映射到 LDAP 属性。

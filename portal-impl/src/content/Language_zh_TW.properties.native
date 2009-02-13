@@ -2579,6 +2579,7 @@ please-enter-valid-content=請輸入有效的內容。
 please-import-a-lar-file-for-the-current-portlet=請進口當前portlet的家神文件。
 please-import-a-lar-file-of-the-correct-type=請進口正確類型的家神文件。
 please-import-a-lar-file=請進口家神文件。
+please-limit-your-message-to-500-characters=請限制您的消息到500個字符。
 please-login-to-view-user-profiles=請登錄觀看用户概况。
 please-map-each-of-the-group-properties-group-name-and-user-to-an-ldap-attribute=Please map each of the group properties <i>Group Name</i> and <i>User</i> to an LDAP attribute.
 please-map-each-of-the-user-properties-screen-name,-password,-email-address,-first-name,-and-last-name-to-an-ldap-attribute=Please map each of the user properties <i>Screen Name</i>, <i>Password</i>, <i>Email Address</i>, <i>First Name</i>, and <i>Last Name</i> to an LDAP attribute.

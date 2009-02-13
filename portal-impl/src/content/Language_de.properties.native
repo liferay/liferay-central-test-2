@@ -2579,6 +2579,7 @@ please-enter-valid-content=Bitte geben Sie einen gültigen Inhalt ein.
 please-import-a-lar-file-for-the-current-portlet=Bitte importieren Sie eine LAR-Datei für das aktuelle Portlet.
 please-import-a-lar-file-of-the-correct-type=Bitte importieren Sie eine LAR-Datei vom richtigen Typ.
 please-import-a-lar-file=Bitte importieren Sie eine LAR-Datei.
+please-limit-your-message-to-500-characters=Begrenzen Sie bitte Ihre Mitteilung auf 500 Buchstaben.
 please-login-to-view-user-profiles=Bitte melden Sie sich an um sich Benutzerprofile anzusehen.
 please-map-each-of-the-group-properties-group-name-and-user-to-an-ldap-attribute=Bitte verknüpfen Sie jede der Gruppen-Eigenschaften <i>Gruppenname</i> und <i>Benutzer</i> mit einem LDAP Attribut.
 please-map-each-of-the-user-properties-screen-name,-password,-email-address,-first-name,-and-last-name-to-an-ldap-attribute=Bitte verknüpfen Sie jede der Benutzereigenschaften <i>Anzeigenname</i>, <i>Passwort</i>, <i>E-Mail Adresse</i>, <i>Vorname</i>, and <i>Nachname</i> mit einem LDAP Attribut.

@@ -61,8 +61,10 @@ public class SMSPortlet extends JSPPortlet {
 				String message = ParamUtil.getString(actionRequest, "message");
 
 				if (!Validator.isEmailAddress(to)) {
-
 					SessionErrors.add(actionRequest, "to");
+				}
+				else if (message.length() > 500) {
+					SessionErrors.add(actionRequest, "message");
 				}
 
 				if (SessionErrors.isEmpty(actionRequest)) {
