@@ -251,8 +251,8 @@ public class UserImpl extends UserModelImpl implements User {
 			groupParams.put("usersGroups", new Long(getUserId()));
 			//groupParams.put("pageCount", StringPool.BLANK);
 
-			myPlaces = GroupLocalServiceUtil.search(
-				getCompanyId(), null, null, groupParams, start, end);
+			myPlaces.addAll(GroupLocalServiceUtil.search(
+				getCompanyId(), null, null, groupParams, start, end));
 
 			List<Organization> userOrgs =
 				OrganizationLocalServiceUtil.getUserOrganizations(
