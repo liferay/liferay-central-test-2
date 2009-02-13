@@ -152,8 +152,8 @@
 					item.remove();
 				}
 				else {
-					if (instance._sortColumns) {
-						instance._sortColumns.filter(':first').prepend(placeHolder);
+					if (instance._dropZones && instance._dropZones.length) {
+						jQuery(instance._dropZones[0]).prepend(placeHolder);
 					}
 				}
 
@@ -235,8 +235,11 @@
 
 			var portletItem = columnPortletItem;
 
-			if (Liferay.Layout && Liferay.Layout.isFreeForm) {
+			if (Liferay.Layout.isFreeForm) {
 				portletItem = freeFormPortletItem;
+			}
+			else {
+				instance._dropZones = Liferay.Layout.Columns.dropZones;
 			}
 
 			for (var i = instance._portletItems.length - 1; i >= 0; i--){
