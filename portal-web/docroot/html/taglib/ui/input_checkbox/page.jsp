@@ -27,13 +27,18 @@
 <%
 String formName = namespace + request.getAttribute("liferay-ui:input-checkbox:formName");
 String param = (String)request.getAttribute("liferay-ui:input-checkbox:param");
+String id = (String)request.getAttribute("liferay-ui:input-checkbox:id");
 Boolean defaultValue = (Boolean)request.getAttribute("liferay-ui:input-checkbox:defaultValue");
 String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-checkbox:onClick"));
 boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-checkbox:disabled"));
 
 boolean value = ParamUtil.getBoolean(request, param, defaultValue.booleanValue());
+
+if (Validator.isNull(id)){
+	id = param;
+}
 %>
 
-<input id="<%= namespace %><%= param %>" name="<%= namespace %><%= param %>" type="hidden" value="<%= value %>" />
+<input id="<%= namespace %><%= id %>" name="<%= namespace %><%= param %>" type="hidden" value="<%= value %>" />
 
-<input <%= value ? "checked" : "" %> <%= disabled ? "disabled" : "" %> id="<%= namespace %><%= param %>Checkbox" name="<%= namespace %><%= param %>Checkbox" type="checkbox" onClick="jQuery(this).prev().val(this.checked); <%= onClick %>">
+<input <%= value ? "checked" : "" %> <%= disabled ? "disabled" : "" %> id="<%= namespace %><%= id %>Checkbox" name="<%= namespace %><%= param %>Checkbox" type="checkbox" onClick="jQuery(this).prev().val(this.checked); <%= onClick %>">

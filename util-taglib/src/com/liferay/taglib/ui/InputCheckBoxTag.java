@@ -40,6 +40,7 @@ public class InputCheckBoxTag extends IncludeTag {
 
 		request.setAttribute("liferay-ui:input-checkbox:formName", _formName);
 		request.setAttribute("liferay-ui:input-checkbox:param", _param);
+		request.setAttribute("liferay-ui:input-checkbox:id", _id);
 		request.setAttribute(
 			"liferay-ui:input-checkbox:defaultValue", _defaultValue);
 		request.setAttribute("liferay-ui:input-checkbox:onClick", _onClick);
@@ -55,6 +56,10 @@ public class InputCheckBoxTag extends IncludeTag {
 
 	public void setParam(String param) {
 		_param = param;
+	}
+
+	public void setId(String id) {
+		_id = id;
 	}
 
 	public void setDefaultValue(boolean defaultValue) {
@@ -78,6 +83,7 @@ public class InputCheckBoxTag extends IncludeTag {
 
 	private String _formName = "fm";
 	private String _param;
+	private String _id;
 	private Boolean _defaultValue = Boolean.FALSE;
 	private String _onClick;
 	private boolean _disabled;
