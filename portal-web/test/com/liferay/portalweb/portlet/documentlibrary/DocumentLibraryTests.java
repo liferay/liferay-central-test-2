@@ -57,7 +57,7 @@ public class DocumentLibraryTests extends BaseTests {
 		testSuite.addTestSuite(EditSecondFolderTest.class);
 		testSuite.addTestSuite(DeleteAllTest.class);
 		testSuite.addTestSuite(ImportLARTest.class);
-		testSuite.addTestSuite(VerifyImportLARTest.class);
+		testSuite.addTestSuite(AssertImportLARTest.class);
 		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
