@@ -65,8 +65,6 @@ Liferay.Upload = new Expanse.Class({
 		if (loc.indexOf(instance._classicUploaderParam) > -1 && instance._fallbackContainer.length) {
 			instance._fallbackContainer.show();
 
-			instance._setupIframe();
-
 			return;
 		}
 
@@ -90,8 +88,6 @@ Liferay.Upload = new Expanse.Class({
 
 		if (instance._flashVersion < 9 && instance._fallbackContainer.length) {
 			instance._fallbackContainer.show();
-
-			instance._setupIframe();
 
 			return;
 		}
@@ -492,8 +488,6 @@ Liferay.Upload = new Expanse.Class({
 							fallback.text(instance._useNewUploaderText);
 							fallback.removeClass(newUploaderClass).addClass(fallbackClass);
 
-							instance._setupIframe();
-
 							var classicUploaderUrl = '';
 
 							if (location.hash.length) {
@@ -515,18 +509,6 @@ Liferay.Upload = new Expanse.Class({
 			}
 
 			instance._hasControls = true;
-		}
-	},
-
-	_setupIframe: function() {
-		var instance = this;
-
-		if (!instance._fallbackIframe) {
-			instance._fallbackIframe = instance._fallbackContainer.find('iframe[id$=-iframe]');
-
-			var frameHeight = jQuery('#content-wrapper', instance._fallbackIframe[0].contentWindow).height() || 250;
-
-			instance._fallbackIframe.height(frameHeight + 150);
 		}
 	},
 
