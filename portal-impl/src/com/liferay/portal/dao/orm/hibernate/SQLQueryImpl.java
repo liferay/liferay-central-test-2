@@ -92,7 +92,7 @@ public class SQLQueryImpl implements SQLQuery {
 			List list = _sqlQuery.list();
 
 			if (unmodifiable) {
-				return new UnmodifiableList(_sqlQuery.list());
+				return new UnmodifiableList(list);
 			}
 			else {
 				return ListUtil.copy(list);
