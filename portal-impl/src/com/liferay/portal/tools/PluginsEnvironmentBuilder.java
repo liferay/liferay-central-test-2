@@ -262,8 +262,18 @@ public class PluginsEnvironmentBuilder {
 				_exec(_SVN_ADD + classpathFileName);
 			}
 
-			_exec(_SVN_SET_IGNORES + "bin \"" + projectDirName + "\"");
-			_exec(_SVN_SET_IGNORES + "tmp \"" + projectDirName + "\"");
+			File tempFile = File.createTempFile("svn-ignores-", null, null);
+
+			try {
+				FileUtil.write(tempFile, "bin\ntmp");
+
+				_exec(
+					_SVN_SET_IGNORES + "-F \"" + tempFile.getCanonicalPath() +
+						"\" \"" + projectDirName + "\"");
+			}
+			finally {
+				FileUtil.delete(tempFile);
+			}
 		}
 	}
 
@@ -299,9 +309,10 @@ public class PluginsEnvironmentBuilder {
 
 			_exec(
 				_SVN_SET_IGNORES + "-F \"" + tempFile.getCanonicalPath() +
-					"\" " + libDirName);
+					"\" \"" + libDirName + "\"");
 
-			String[] newIgnores = _exec(_SVN_GET_IGNORES + libDirName);
+			String[] newIgnores = _exec(
+				_SVN_GET_IGNORES + "\"" + libDirName + "\"");
 
 			if (newIgnores.length > 0) {
 				Arrays.sort(newIgnores);
@@ -309,7 +320,7 @@ public class PluginsEnvironmentBuilder {
 		}
 		finally {
 			if (tempFile != null) {
-				tempFile.delete();
+				FileUtil.delete(tempFile);
 			}
 		}
 	}
