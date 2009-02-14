@@ -28,7 +28,12 @@
 List statsUsers = null;
 
 if (organizationId > 0) {
+	
 	statsUsers = BlogsStatsUserLocalServiceUtil.getOrganizationStatsUsers(organizationId, 0, max, new StatsUserLastPostDateComparator());
+}
+else if ( themeDisplay.getScopeGroupId() != themeDisplay.getLayout().getGroupId() ) {
+	
+	statsUsers = BlogsStatsUserLocalServiceUtil.getGroupStatsUsers(themeDisplay.getScopeGroupId(), 0, max);
 }
 else {
 	statsUsers = BlogsStatsUserLocalServiceUtil.getCompanyStatsUsers(company.getCompanyId(), 0, max, new StatsUserLastPostDateComparator());
