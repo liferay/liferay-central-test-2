@@ -151,7 +151,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		catch (Exception e) {
 			group = new GroupImpl();
 
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		return group;
@@ -205,7 +205,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			}
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		return plid;
@@ -231,7 +231,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			}
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		return layoutId;
@@ -486,7 +486,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		catch (Exception e) {
 			layoutSet = new LayoutSetImpl();
 
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		return layoutSet;
@@ -594,12 +594,14 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			try {
 				List<Layout> ancestors = layout.getAncestors();
 
-				for (Layout ancestor : ancestors) {
-					if (plid == ancestor.getPlid()) {
+				for (Layout curLayout : ancestors) {
+					if (plid == curLayout.getPlid()) {
 						return true;
 					}
 				}
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
+				_log.error(e, e);
 			}
 		}
 
