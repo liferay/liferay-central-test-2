@@ -587,6 +587,25 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		return PortalUtil.getLayoutTarget(this);
 	}
 
+	public boolean isChildSelected(boolean selectable, Layout layout) {
+		if (selectable) {
+			long plid = getPlid();
+
+			try {
+				List<Layout> ancestors = layout.getAncestors();
+
+				for (Layout ancestor : ancestors) {
+					if (plid == ancestor.getPlid()) {
+						return true;
+					}
+				}
+			} catch (Exception e) {
+			}
+		}
+
+		return false;
+	}
+
 	public boolean isSelected(
 		boolean selectable, Layout layout, long ancestorPlid) {
 

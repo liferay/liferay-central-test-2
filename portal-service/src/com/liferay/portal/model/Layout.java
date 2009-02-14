@@ -157,6 +157,9 @@ public interface Layout extends LayoutModel {
 
 	public java.lang.String getTarget();
 
+	public boolean isChildSelected(boolean selectable,
+		com.liferay.portal.model.Layout layout);
+
 	public boolean isSelected(boolean selectable,
 		com.liferay.portal.model.Layout layout, long ancestorPlid);
 }
