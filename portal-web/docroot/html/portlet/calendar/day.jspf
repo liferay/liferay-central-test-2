@@ -141,7 +141,7 @@ if (partDayResults.size() > 0) {
 
 				break;
 			}
-			else if (sortedResults.size() < (j + 1)) {
+			else if (sortedResults.size() <= (j + 1)) {
 				sortedResults.add(new ArrayList<CalEvent>());
 
 				sortedResults.get(j + 1).add(event);
