@@ -31,32 +31,38 @@ import java.util.Map;
  * <a href="CommandReceiverFactory.java.html"><b><i>View Source</i></b></a>
  *
  * @author Ivica Cardic
+ * @author Michael C. Han
  *
  */
 public class CommandReceiverFactory {
 
-	public static CommandReceiver getCommandReceiver(String typeStr) {
-		CommandReceiver receiver = _instances.get(typeStr);
-		if (receiver == null) {
-			receiver = (CommandReceiver)InstancePool.get(
-				"com.liferay.portal.editor.fckeditor.receiver.impl." +
-					typeStr + "CommandReceiver");
+	public static CommandReceiver getCommandReceiver(String type) {
+		CommandReceiver commandReceiver = _commandReceivers.get(type);
+
+		if (commandReceiver == null) {
+			commandReceiver = (CommandReceiver)InstancePool.get(
+				"com.liferay.portal.editor.fckeditor.commandReceiver.impl." +
+					type + "CommandReceiver");
+
+			_commandReceivers.put(type, commandReceiver);
 		}
-		return receiver;
+
+		return commandReceiver;
 	}
 
-    public void setCommandReceiver(String typeStr,
-								   CommandReceiver receiver) {
-		_instances.put(typeStr, receiver);
+	public void setCommandReceiver(
+		String type, CommandReceiver commandReceiver) {
+
+		_commandReceivers.put(type, commandReceiver);
 	}
 
-	public void setCommandReceivers(Map<String, CommandReceiver> receivers) {
-		for (Map.Entry<String, CommandReceiver> receiverEntry : receivers.entrySet()) {
-			setCommandReceiver(
-					receiverEntry.getKey(), receiverEntry.getValue());
-		}
+	public void setCommandReceivers(
+		Map<String, CommandReceiver> commandReceivers) {
+
+		_commandReceivers.putAll(commandReceivers);
 	}
 
-	private static Map<String, CommandReceiver> _instances =
-			new HashMap<String, CommandReceiver>();
+	private static Map<String, CommandReceiver> _commandReceivers =
+		new HashMap<String, CommandReceiver>();
+
 }
