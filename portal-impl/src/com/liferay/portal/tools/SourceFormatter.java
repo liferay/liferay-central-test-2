@@ -748,7 +748,7 @@ public class SourceFormatter {
 				"**\\service\\persistence\\*Finder.java",
 				"**\\service\\persistence\\*Persistence.java",
 				"**\\service\\persistence\\*PersistenceImpl.java",
-				"**\\service\\persistence\\*Util.java"
+				"**\\service\\persistence\\*Util.java", "**\\tmp\\**"
 			});
 		ds.setIncludes(new String[] {"**\\*.java"});
 
