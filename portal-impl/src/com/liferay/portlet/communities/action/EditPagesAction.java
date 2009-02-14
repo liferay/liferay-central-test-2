@@ -38,8 +38,10 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
@@ -271,13 +273,77 @@ public class EditPagesAction extends PortletAction {
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
-		String path =
-			"/html/portlet/communities/scheduled_publishing_events.jsp";
+		String cmd = ParamUtil.getString(resourceRequest, Constants.CMD);
 
-		PortletRequestDispatcher portletRequestDispatcher =
-			portletConfig.getPortletContext().getRequestDispatcher(path);
+		if (cmd.equals("render_tree_html")) {
 
-		portletRequestDispatcher.include(resourceRequest, resourceResponse);
+			String portletURL = ParamUtil.getString(
+				resourceRequest, "portletURL", StringPool.BLANK);
+
+			LongWrapper nodeId = new LongWrapper(
+				ParamUtil.getLong(resourceRequest, "nodeId"));
+
+			long scopeGroupId = PortalUtil.getScopeGroupId(resourceRequest);
+
+			long parentLayoutId = ParamUtil.getLong(
+				resourceRequest, "parentLayoutId");
+
+			boolean selectableTree = ParamUtil.getBoolean(
+				resourceRequest, "selectableTree");
+
+			boolean privateLayout = ParamUtil.getBoolean(
+				resourceRequest, "privateLayout");
+
+			long[] selectedNodes = StringUtil.split(ParamUtil.getString(
+				resourceRequest, "selectedNodes", StringPool.BLANK), 0L);
+
+			long[] openNodes = StringUtil.split(ParamUtil.getString(
+				resourceRequest, "openNodes", StringPool.BLANK), 0L);
+
+			resourceRequest.setAttribute(
+				WebKeys.TREE_GROUP_ID, String.valueOf(scopeGroupId));
+
+			resourceRequest.setAttribute(
+				WebKeys.TREE_PRIVATE_LAYOUT, String.valueOf(privateLayout));
+
+			resourceRequest.setAttribute(
+				WebKeys.TREE_PARENT_LAYOUT_ID, String.valueOf(parentLayoutId));
+
+			resourceRequest.setAttribute(WebKeys.TREE_NODE_ID, nodeId);
+
+			resourceRequest.setAttribute(WebKeys.TREE_OPEN_NODES, openNodes);
+
+			resourceRequest.setAttribute(
+				WebKeys.TREE_SELECTABLE_TREE, String.valueOf(selectableTree));
+
+			resourceRequest.setAttribute(
+				WebKeys.TREE_SELECTED_NODES, selectedNodes);
+
+			resourceRequest.setAttribute(WebKeys.TREE_PORTLET_URL, portletURL);
+
+			resourceRequest.setAttribute(
+				WebKeys.TREE_AJAX_RENDER, String.valueOf(true));
+
+			String path =
+				"/html/portlet/communities/tree_js_content_el.jsp";
+
+			PortletRequestDispatcher portletRequestDispatcher =
+				portletConfig.getPortletContext().getRequestDispatcher(path);
+
+			portletRequestDispatcher.include(resourceRequest, resourceResponse);
+
+		}
+		else {
+
+			String path =
+				"/html/portlet/communities/scheduled_publishing_events.jsp";
+
+			PortletRequestDispatcher portletRequestDispatcher =
+				portletConfig.getPortletContext().getRequestDispatcher(path);
+
+			portletRequestDispatcher.include(resourceRequest, resourceResponse);
+
+		}
 	}
 
 	protected void checkPermissions(PortletRequest portletRequest)
