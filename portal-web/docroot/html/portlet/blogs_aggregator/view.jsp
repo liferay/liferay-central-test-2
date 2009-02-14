@@ -36,15 +36,11 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 List entries = null;
 
 if (organizationId > 0) {
-	
 	entries = BlogsEntryServiceUtil.getOrganizationEntries(organizationId, max);
 }
-
-else if ( themeDisplay.getScopeGroupId() != themeDisplay.getLayout().getGroupId() ) {
-
-	entries = BlogsEntryServiceUtil.getGroupEntries(themeDisplay.getScopeGroupId(), max);
+else if (scopeGroupId != layout.getGroupId()) {
+	entries = BlogsEntryServiceUtil.getGroupEntries(scopeGroupId, max);
 }
-
 else {
 	entries = BlogsEntryServiceUtil.getCompanyEntries(company.getCompanyId(), max);
 }
