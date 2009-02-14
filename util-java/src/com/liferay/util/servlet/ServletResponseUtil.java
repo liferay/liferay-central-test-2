@@ -25,6 +25,7 @@ package com.liferay.util.servlet;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsUtil;
@@ -276,21 +277,23 @@ public class ServletResponseUtil {
 			}
 
 			String extension = GetterUtil.getString(
-				FileUtil.getExtension(fileName));
+				FileUtil.getExtension(fileName)).toLowerCase();
+
+			String[] mimeTypesContentDispositionInline = null;
 
 			try {
-				String inlineExts =
-					PropsUtil.get("mime.types.content.disposition.inline");
-
-				if (inlineExts.indexOf(extension.toLowerCase()) >= 0) {
-					contentDisposition = StringUtil.replace(
-						contentDisposition, "attachment; ", "inline; ");
-				}
+				mimeTypesContentDispositionInline = PropsUtil.getArray(
+					"mime.types.content.disposition.inline");
 			}
 			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(e);
-				}
+				mimeTypesContentDispositionInline = new String[0];
+			}
+
+			if (ArrayUtil.contains(
+					mimeTypesContentDispositionInline, extension)) {
+
+				contentDisposition = StringUtil.replace(
+					contentDisposition, "attachment; ", "inline; ");
 			}
 
 			response.setHeader(

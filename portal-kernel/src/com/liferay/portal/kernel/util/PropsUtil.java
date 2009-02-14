@@ -42,8 +42,22 @@ public class PropsUtil {
 		}
 	}
 
+	public static String[] getArray(String key) throws Exception {
+		Object returnObj = PortalClassInvoker.invoke(
+			_CLASS, _METHOD_GET_ARRAY, key, false);
+
+		if (returnObj != null) {
+			return (String[])returnObj;
+		}
+		else {
+			return null;
+		}
+	}
+
 	private static final String _CLASS = "com.liferay.portal.util.PropsUtil";
 
 	private static final String _METHOD_GET = "get";
+
+	private static final String _METHOD_GET_ARRAY = "getArray";
 
 }

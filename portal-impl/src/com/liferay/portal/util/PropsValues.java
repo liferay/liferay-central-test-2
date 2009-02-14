@@ -780,6 +780,12 @@ public class PropsValues {
 		GetterUtil.getLong(
 			PropsUtil.get(PropsKeys.MESSAGE_BOARDS_EXPIRE_BAN_JOB_INTERVAL));
 
+	public static final String[] MIME_TYPES =
+		PropsUtil.getArray(PropsKeys.MIME_TYPES);
+
+	public static final String[] MIME_TYPES_CONTENT_DISPOSITION_INLINE =
+		PropsUtil.getArray(PropsKeys.MIME_TYPES_CONTENT_DISPOSITION_INLINE);
+
 	public static final int MY_PLACES_MAX_ELEMENTS =
 		GetterUtil.getInteger(PropsUtil.get(PropsKeys.MY_PLACES_MAX_ELEMENTS));
 

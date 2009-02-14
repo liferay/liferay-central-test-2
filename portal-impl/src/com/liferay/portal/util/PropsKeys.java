@@ -789,6 +789,8 @@ public interface PropsKeys {
 
 	public static final String MIME_TYPES = "mime.types";
 
+	public static final String MIME_TYPES_CONTENT_DISPOSITION_INLINE = "mime.types.content.disposition.inline";
+
 	public static final String MODEL_HINTS_CONFIGS = "model.hints.configs";
 
 	public static final String MSN_LOGIN = "msn.login";
