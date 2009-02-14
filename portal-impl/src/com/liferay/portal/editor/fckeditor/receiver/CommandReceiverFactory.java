@@ -24,6 +24,9 @@ package com.liferay.portal.editor.fckeditor.receiver;
 
 import com.liferay.portal.kernel.util.InstancePool;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * <a href="CommandReceiverFactory.java.html"><b><i>View Source</i></b></a>
  *
@@ -33,9 +36,27 @@ import com.liferay.portal.kernel.util.InstancePool;
 public class CommandReceiverFactory {
 
 	public static CommandReceiver getCommandReceiver(String typeStr) {
-		return (CommandReceiver)InstancePool.get(
-			"com.liferay.portal.editor.fckeditor.receiver.impl." +
-				typeStr + "CommandReceiver");
+		CommandReceiver receiver = _instances.get(typeStr);
+		if (receiver == null) {
+			receiver = (CommandReceiver)InstancePool.get(
+				"com.liferay.portal.editor.fckeditor.receiver.impl." +
+					typeStr + "CommandReceiver");
+		}
+		return receiver;
 	}
 
+    public void setCommandReceiver(String typeStr,
+								   CommandReceiver receiver) {
+		_instances.put(typeStr, receiver);
+	}
+
+	public void setCommandReceivers(Map<String, CommandReceiver> receivers) {
+		for (Map.Entry<String, CommandReceiver> receiverEntry : receivers.entrySet()) {
+			setCommandReceiver(
+					receiverEntry.getKey(), receiverEntry.getValue());
+		}
+	}
+
+	private static Map<String, CommandReceiver> _instances =
+			new HashMap<String, CommandReceiver>();
 }
