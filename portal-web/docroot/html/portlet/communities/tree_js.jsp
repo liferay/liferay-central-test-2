@@ -122,17 +122,35 @@ long[] selectedNodes = StringUtil.split(SessionTreeJSClicks.getOpenNodes(request
 
 Arrays.sort(selectedNodes);
 
-StringBuilder sb = new StringBuilder();
+ResourceURL renderTreeURL = renderResponse.createResourceURL();
 
-_buildLayoutsTreeHTML(groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, new LongWrapper(1), openNodes, selectableTree, selectedNodes, portletURL, themeDisplay, sb);
+renderTreeURL.setParameter(Constants.CMD, "render_tree_html");
+renderTreeURL.setParameter("selectableTree", Boolean.toString(selectableTree));
+renderTreeURL.setParameter("selectedNodes", StringUtil.merge(selectedNodes));
+renderTreeURL.setParameter("openNodes", StringUtil.merge(openNodes));
+renderTreeURL.setParameter("portletURL", portletURL.toString());
+%>
+<%!
+private void _buildLayoutsTreeHTML(long groupId, boolean privateLayout, long parentLayoutId, long nodeId, long[] openNodes, boolean selectableTree, long[] selectedNodes, String portletURL, ThemeDisplay themeDisplay, boolean renderChildrenOnly, PageContext pageContext, HttpServletRequest request) throws Exception {
+	request.setAttribute(WebKeys.TREE_GROUP_ID, String.valueOf(groupId));
+	request.setAttribute(WebKeys.TREE_PRIVATE_LAYOUT, String.valueOf(privateLayout));
+	request.setAttribute(WebKeys.TREE_PARENT_LAYOUT_ID, String.valueOf(parentLayoutId));
+	request.setAttribute(WebKeys.TREE_NODE_ID, String.valueOf(nodeId));
+	request.setAttribute(WebKeys.TREE_OPEN_NODES, openNodes);
+	request.setAttribute(WebKeys.TREE_SELECTABLE_TREE, String.valueOf(selectableTree));
+	request.setAttribute(WebKeys.TREE_SELECTED_NODES, selectedNodes);
+	request.setAttribute(WebKeys.TREE_PORTLET_URL, portletURL);
+	request.setAttribute(WebKeys.TREE_RENDER_CHILDREN_ONLY, String.valueOf(renderChildrenOnly));
+
+	pageContext.include("/html/portlet/communities/tree_js_node.jsp");
+}
 %>
 
 <div class="lfr-tree" id="<portlet:namespace /><%= HtmlUtil.escape(treeId) %>Output">
 	<ul class="lfr-component">
 		<li class="root-container">
 			<a class="community" href="<%= portletURL.toString() %>&<portlet:namespace />selPlid=<%= LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>"><img height="20" src="<%= themeDisplay.getPathThemeImages() %>/trees/root.png" width="19" /><span><%= rootNodeName %></span></a>
-
-			<%= sb %>
+			<% _buildLayoutsTreeHTML(groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, 1, openNodes, selectableTree, selectedNodes, portletURL.toString(), themeDisplay, false, pageContext, request); %>
 		</li>
 	</ul>
 </div>
@@ -142,6 +160,7 @@ _buildLayoutsTreeHTML(groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAY
 		function() {
 			new Liferay.Tree(
 				{
+					url: '<%= renderTreeURL %>',
 					icons: <portlet:namespace />layoutIcons,
 					nodes: <portlet:namespace />layoutArray,
 					nodeIds: <portlet:namespace />nodeIds,
@@ -155,94 +174,3 @@ _buildLayoutsTreeHTML(groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAY
 		}
 	);
 </script>
-
-<%!
-private void _buildLayoutsTreeHTML(long groupId, boolean privateLayout, long parentLayoutId, LongWrapper nodeId, long[] openNodes, boolean selectableTree, long[] selectedNodes, PortletURL portletURL, ThemeDisplay themeDisplay, StringBuilder sb) throws Exception {
-	PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
-
-	List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(groupId, privateLayout, parentLayoutId);
-
-	if (layouts.size() == 0) {
-		return;
-	}
-
-	boolean nodeOpen = false;
-
-	sb.append("<ul class=\"has-children ");
-
-	if ((Arrays.binarySearch(openNodes, nodeId.getValue()) >= 0) || nodeId.getValue() == 1) {
-		nodeOpen = true;
-
-		sb.append("node-open ");
-	}
-
-	sb.append("\" ");
-
-	if (!nodeOpen) {
-		sb.append("style=\"display: none\" ");
-	}
-
-	sb.append(">");
-
-	for (Layout layout : layouts) {
-		nodeId.increment();
-
-		List<Layout> childLayouts = layout.getChildren();
-
-		String image = "spacer.png";
-
-		sb.append("<li branchid=\"");
-		sb.append(layout.getPlid());
-		sb.append("\" class=\"tree-item ");
-
-		if (childLayouts.size() > 0) {
-			image = "plus.png";
-
-			sb.append("has-children ");
-
-			if (Arrays.binarySearch(openNodes, nodeId.getValue()) >= 0) {
-				image = "minus.png";
-
-				sb.append("node-open ");
-			}
-		}
-
-		sb.append("\" nodeid=\"");
-		sb.append(nodeId.getValue());
-		sb.append("\"><img class=\"expand-image\" height=\"20\" src=\"");
-		sb.append(themeDisplay.getPathThemeImages() + "/trees/" + image);
-		sb.append("\" width=\"19\" />");
-
-		if (selectableTree && Validator.isNotNull(selectedNodes)) {
-			sb.append("<img class=\"select-state\" height=\"20\" src=\"");
-
-			if (Arrays.binarySearch(selectedNodes, layout.getPlid()) >= 0) {
-				sb.append(themeDisplay.getPathThemeImages() + "/trees/checked.png");
-			}
-			else {
-				sb.append(themeDisplay.getPathThemeImages() + "/trees/checkbox.png");
-			}
-
-			sb.append("\" width=\"19\" />");
-		}
-
-		sb.append("<a href=\"");
-		sb.append(portletURL.toString());
-		sb.append(StringPool.AMPERSAND);
-		sb.append(portletDisplay.getNamespace());
-		sb.append("selPlid=");
-		sb.append(layout.getPlid());
-		sb.append("\"><img height=\"20\" src=\"");
-		sb.append(themeDisplay.getPathThemeImages() + "/trees/page.png");
-		sb.append("\" width=\"19\" /><span>");
-		sb.append(layout.getName(themeDisplay.getLocale()));
-		sb.append("</span></a>");
-
-		_buildLayoutsTreeHTML(groupId, privateLayout, layout.getLayoutId(), nodeId, openNodes, selectableTree, selectedNodes, portletURL, themeDisplay, sb);
-
-		sb.append("</li>");
-	}
-
-	sb.append("</ul>");
-}
-%>

@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
@@ -271,8 +272,61 @@ public class EditPagesAction extends PortletAction {
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
-		String path =
-			"/html/portlet/communities/scheduled_publishing_events.jsp";
+		String cmd = ParamUtil.getString(resourceRequest, Constants.CMD);
+
+		String path = null;
+
+		if (cmd.equals("render_tree_html")) {
+			path = "/html/portlet/communities/tree_js_node.jsp";
+
+			resourceRequest.setAttribute(
+				WebKeys.TREE_GROUP_ID,
+				String.valueOf(PortalUtil.getScopeGroupId(resourceRequest)));
+
+			resourceRequest.setAttribute(
+				WebKeys.TREE_PRIVATE_LAYOUT,
+				String.valueOf(
+					ParamUtil.getBoolean(resourceRequest, "privateLayout")));
+
+			resourceRequest.setAttribute(
+				WebKeys.TREE_PARENT_LAYOUT_ID,
+				String.valueOf(
+					ParamUtil.getLong(resourceRequest, "parentLayoutId")));
+
+			resourceRequest.setAttribute(
+				WebKeys.TREE_NODE_ID,
+				String.valueOf(ParamUtil.getLong(resourceRequest, "nodeId")));
+
+			resourceRequest.setAttribute(
+				WebKeys.TREE_OPEN_NODES,
+				StringUtil.split(
+					ParamUtil.getString(
+						resourceRequest, "openNodes", StringPool.BLANK),
+					0L));
+
+			resourceRequest.setAttribute(
+				WebKeys.TREE_SELECTABLE_TREE,
+				String.valueOf(
+					ParamUtil.getBoolean(resourceRequest, "selectableTree")));
+
+			resourceRequest.setAttribute(
+				WebKeys.TREE_SELECTED_NODES,
+				StringUtil.split(
+					ParamUtil.getString(
+						resourceRequest, "selectedNodes", StringPool.BLANK),
+					0L));
+
+			resourceRequest.setAttribute(
+				WebKeys.TREE_PORTLET_URL,
+				ParamUtil.getString(
+					resourceRequest, "portletURL", StringPool.BLANK));
+
+			resourceRequest.setAttribute(
+				WebKeys.TREE_RENDER_CHILDREN_ONLY, String.valueOf(true));
+		}
+		else {
+			path = "/html/portlet/communities/scheduled_publishing_events.jsp";
+		}
 
 		PortletRequestDispatcher portletRequestDispatcher =
 			portletConfig.getPortletContext().getRequestDispatcher(path);

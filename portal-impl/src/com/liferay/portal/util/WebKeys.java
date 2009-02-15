@@ -330,6 +330,24 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 	public static final String THEME = "THEME";
 
 	public static final String TRANSLATOR_TRANSLATION = "TRANSLATOR_TRANSLATION";
+		
+	public static final String TREE_GROUP_ID = "TREE_GROUP_ID";
+	
+	public static final String TREE_NODE_ID = "TREE_NODE_ID";
+	
+	public static final String TREE_OPEN_NODES = "TREE_OPEN_NODES";
+	
+	public static final String TREE_PARENT_LAYOUT_ID = "TREE_PARENT_LAYOUT_ID";
+	
+	public static final String TREE_PORTLET_URL = "TREE_PORTLET_URL";
+	
+	public static final String TREE_PRIVATE_LAYOUT = "TREE_PRIVATE_LAYOUT";
+	
+	public static final String TREE_RENDER_CHILDREN_ONLY = "TREE_RENDER_CHILDREN_ONLY";
+	
+	public static final String TREE_SELECTABLE_TREE = "TREE_SELECTABLE_TREE";
+	
+	public static final String TREE_SELECTED_NODES = "TREE_SELECTED_NODES";
 
 	public static final String USER = "USER";
 
