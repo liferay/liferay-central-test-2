@@ -65,6 +65,17 @@ if (organizationId > 0) {
 <table class="lfr-table">
 <tr>
 	<td>
+		<liferay-ui:message key="selection-method" />
+	</td>
+	<td>
+		<select id="<portlet:namespace />selectionMethod" name="<portlet:namespace />selectionMethod">
+			<option <%= (selectionMethod.equals("users")) ? "selected" : "" %> value="users"><liferay-ui:message key="users" /></option>
+			<option <%= (selectionMethod.equals("scope")) ? "selected" : "" %> value="scope"><liferay-ui:message key="scope" /></option>
+		</select>
+	</td>
+</tr>
+<tr id="<portlet:namespace />organization">
+	<td>
 		<liferay-ui:message key="organization" />
 	</td>
 	<td>
@@ -119,3 +130,30 @@ if (organizationId > 0) {
 <input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>
+
+<script type="text/javascript">
+	jQuery(
+		function() {
+			var selectionMethod = jQuery('#<portlet:namespace />selectionMethod');
+
+			function showHiddenFields() {
+				var organization = jQuery('#<portlet:namespace />organization');
+
+				if (selectionMethod.val() == 'users') {
+					organization.show();
+				}
+				else {
+					organization.hide();
+				}
+			}
+
+			showHiddenFields();
+
+			selectionMethod.change(
+				function(event) {
+					showHiddenFields();
+				}
+			);
+		}
+	);
+</script>

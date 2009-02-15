@@ -54,6 +54,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			return;
 		}
 
+		String selectionMethod = ParamUtil.getString(
+			actionRequest, "selectionMethod");
 		String organizationId = ParamUtil.getString(
 			actionRequest, "organizationId");
 		String displayStyle = ParamUtil.getString(
@@ -69,6 +71,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				actionRequest, portletResource);
 
+		preferences.setValue("selection-method", selectionMethod);
 		preferences.setValue("organization-id", organizationId);
 		preferences.setValue("display-style", displayStyle);
 		preferences.setValue("max", String.valueOf(max));

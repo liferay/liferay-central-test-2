@@ -35,14 +35,17 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 
 List entries = null;
 
-if (organizationId > 0) {
-	entries = BlogsEntryServiceUtil.getOrganizationEntries(organizationId, max);
-}
-else if (scopeGroupId != layout.getGroupId()) {
-	entries = BlogsEntryServiceUtil.getGroupEntries(scopeGroupId, max);
+if (selectionMethod.equals("users")) {
+	if (organizationId > 0) {
+
+		entries = BlogsEntryServiceUtil.getOrganizationEntries(organizationId, max);
+	}
+	else {
+		entries = BlogsEntryServiceUtil.getCompanyEntries(company.getCompanyId(), max);
+	}
 }
 else {
-	entries = BlogsEntryServiceUtil.getCompanyEntries(company.getCompanyId(), max);
+	entries = BlogsEntryServiceUtil.getGroupEntries(themeDisplay.getScopeGroupId(), max);
 }
 
 int total = entries.size();
