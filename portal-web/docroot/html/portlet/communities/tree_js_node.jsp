@@ -119,5 +119,4 @@ boolean nodeOpen = false;
 	<c:if test="<%= !renderChildrenOnly %>">
 		</ul>
 	</c:if>
-
 </c:if>

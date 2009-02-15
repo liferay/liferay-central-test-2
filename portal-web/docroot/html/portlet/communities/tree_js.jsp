@@ -130,21 +130,6 @@ renderTreeURL.setParameter("selectedNodes", StringUtil.merge(selectedNodes));
 renderTreeURL.setParameter("openNodes", StringUtil.merge(openNodes));
 renderTreeURL.setParameter("portletURL", portletURL.toString());
 %>
-<%!
-private void _buildLayoutsTreeHTML(long groupId, boolean privateLayout, long parentLayoutId, long nodeId, long[] openNodes, boolean selectableTree, long[] selectedNodes, String portletURL, ThemeDisplay themeDisplay, boolean renderChildrenOnly, PageContext pageContext, HttpServletRequest request) throws Exception {
-	request.setAttribute(WebKeys.TREE_GROUP_ID, String.valueOf(groupId));
-	request.setAttribute(WebKeys.TREE_PRIVATE_LAYOUT, String.valueOf(privateLayout));
-	request.setAttribute(WebKeys.TREE_PARENT_LAYOUT_ID, String.valueOf(parentLayoutId));
-	request.setAttribute(WebKeys.TREE_NODE_ID, String.valueOf(nodeId));
-	request.setAttribute(WebKeys.TREE_OPEN_NODES, openNodes);
-	request.setAttribute(WebKeys.TREE_SELECTABLE_TREE, String.valueOf(selectableTree));
-	request.setAttribute(WebKeys.TREE_SELECTED_NODES, selectedNodes);
-	request.setAttribute(WebKeys.TREE_PORTLET_URL, portletURL);
-	request.setAttribute(WebKeys.TREE_RENDER_CHILDREN_ONLY, String.valueOf(renderChildrenOnly));
-
-	pageContext.include("/html/portlet/communities/tree_js_node.jsp");
-}
-%>
 
 <div class="lfr-tree" id="<portlet:namespace /><%= HtmlUtil.escape(treeId) %>Output">
 	<ul class="lfr-component">
@@ -174,3 +159,19 @@ private void _buildLayoutsTreeHTML(long groupId, boolean privateLayout, long par
 		}
 	);
 </script>
+
+<%!
+private void _buildLayoutsTreeHTML(long groupId, boolean privateLayout, long parentLayoutId, long nodeId, long[] openNodes, boolean selectableTree, long[] selectedNodes, String portletURL, ThemeDisplay themeDisplay, boolean renderChildrenOnly, PageContext pageContext, HttpServletRequest request) throws Exception {
+	request.setAttribute(WebKeys.TREE_GROUP_ID, String.valueOf(groupId));
+	request.setAttribute(WebKeys.TREE_PRIVATE_LAYOUT, String.valueOf(privateLayout));
+	request.setAttribute(WebKeys.TREE_PARENT_LAYOUT_ID, String.valueOf(parentLayoutId));
+	request.setAttribute(WebKeys.TREE_NODE_ID, String.valueOf(nodeId));
+	request.setAttribute(WebKeys.TREE_OPEN_NODES, openNodes);
+	request.setAttribute(WebKeys.TREE_SELECTABLE_TREE, String.valueOf(selectableTree));
+	request.setAttribute(WebKeys.TREE_SELECTED_NODES, selectedNodes);
+	request.setAttribute(WebKeys.TREE_PORTLET_URL, portletURL);
+	request.setAttribute(WebKeys.TREE_RENDER_CHILDREN_ONLY, String.valueOf(renderChildrenOnly));
+
+	pageContext.include("/html/portlet/communities/tree_js_node.jsp");
+}
+%>
