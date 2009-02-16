@@ -44,7 +44,7 @@ if (step == 1) {
 	organizations = selUser.getOrganizations();
 
 	if (filterManageableOrganizations) {
-		EnterpriseAdminUtil.filterOrganizations(permissionChecker, organizations);
+		organizations = EnterpriseAdminUtil.filterOrganizations(permissionChecker, organizations);
 	}
 
 	if (organizations.size() == 1) {
@@ -205,7 +205,7 @@ if (step == 1) {
 
 					List<Role> roles = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(),  RoleConstants.TYPE_ORGANIZATION, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 
-					EnterpriseAdminUtil.filterRoles(permissionChecker, roles);
+					roles = EnterpriseAdminUtil.filterRoles(permissionChecker, roles);
 
 					total = roles.size();
 					results = ListUtil.subList(roles, searchContainer.getStart(), searchContainer.getEnd());

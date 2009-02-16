@@ -55,7 +55,7 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_user_group");
 		if (filterManageableUserGroups) {
 			List<UserGroup> userGroups = UserGroupLocalServiceUtil.getUserGroups(company.getCompanyId());
 
-			EnterpriseAdminUtil.filterUserGroups(permissionChecker, userGroups);
+			userGroups = EnterpriseAdminUtil.filterUserGroups(permissionChecker, userGroups);
 
 			total = userGroups.size();
 			results = ListUtil.subList(userGroups, searchContainer.getStart(), searchContainer.getEnd());
