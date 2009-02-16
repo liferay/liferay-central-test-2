@@ -29,7 +29,6 @@ List statsUsers = null;
 
 if (selectionMethod.equals("users")) {
 	if (organizationId > 0) {
-
 		statsUsers = BlogsStatsUserLocalServiceUtil.getOrganizationStatsUsers(organizationId, 0, max, new StatsUserLastPostDateComparator());
 	}
 	else {

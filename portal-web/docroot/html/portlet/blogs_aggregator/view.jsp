@@ -37,7 +37,6 @@ List entries = null;
 
 if (selectionMethod.equals("users")) {
 	if (organizationId > 0) {
-
 		entries = BlogsEntryServiceUtil.getOrganizationEntries(organizationId, max);
 	}
 	else {
