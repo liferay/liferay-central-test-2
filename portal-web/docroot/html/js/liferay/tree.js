@@ -562,7 +562,7 @@ Liferay.Tree = new Expanse.Class({
 			if (instance.url && empty) {
 				var url = instance.url + '&nodeId=' + nodeId + '&parentLayoutId=' + parentLayoutId + '&privateLayout=' + privateLayout;
 
-				var loadingGif = '/html/themes/classic/images/application/loading_indicator.gif';
+				var loadingGif = themeDisplay.getPathContext() + '/html/themes/classic/images/application/loading_indicator.gif';
 				var pageImg = jQuery(currentLi).find('a img:first');
 				var pageImgSrc = pageImg.attr('src');
 

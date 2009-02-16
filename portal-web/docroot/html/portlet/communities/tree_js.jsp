@@ -124,7 +124,9 @@ Arrays.sort(selectedNodes);
 
 ResourceURL renderTreeURL = renderResponse.createResourceURL();
 
-renderTreeURL.setParameter(Constants.CMD, "render_tree_html");
+renderTreeURL.setResourceID("/html/portlet/communities/tree_js_node.jsp");
+
+renderTreeURL.setParameter("struts_action", "/communities/edit_pages");
 renderTreeURL.setParameter("selectableTree", Boolean.toString(selectableTree));
 renderTreeURL.setParameter("selectedNodes", StringUtil.merge(selectedNodes));
 renderTreeURL.setParameter("openNodes", StringUtil.merge(openNodes));
@@ -135,7 +137,11 @@ renderTreeURL.setParameter("portletURL", portletURL.toString());
 	<ul class="lfr-component">
 		<li class="root-container">
 			<a class="community" href="<%= portletURL.toString() %>&<portlet:namespace />selPlid=<%= LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>"><img height="20" src="<%= themeDisplay.getPathThemeImages() %>/trees/root.png" width="19" /><span><%= rootNodeName %></span></a>
-			<% _buildLayoutsTreeHTML(groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, 1, openNodes, selectableTree, selectedNodes, portletURL.toString(), themeDisplay, false, pageContext, request); %>
+
+			<%
+			_buildLayoutsTreeHTML(groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, 1, openNodes, selectableTree, selectedNodes, portletURL.toString(), themeDisplay, false, pageContext, request);
+			%>
+
 		</li>
 	</ul>
 </div>
@@ -162,15 +168,15 @@ renderTreeURL.setParameter("portletURL", portletURL.toString());
 
 <%!
 private void _buildLayoutsTreeHTML(long groupId, boolean privateLayout, long parentLayoutId, long nodeId, long[] openNodes, boolean selectableTree, long[] selectedNodes, String portletURL, ThemeDisplay themeDisplay, boolean renderChildrenOnly, PageContext pageContext, HttpServletRequest request) throws Exception {
-	request.setAttribute(WebKeys.TREE_GROUP_ID, String.valueOf(groupId));
-	request.setAttribute(WebKeys.TREE_PRIVATE_LAYOUT, String.valueOf(privateLayout));
-	request.setAttribute(WebKeys.TREE_PARENT_LAYOUT_ID, String.valueOf(parentLayoutId));
-	request.setAttribute(WebKeys.TREE_NODE_ID, String.valueOf(nodeId));
+	request.setAttribute(WebKeys.TREE_GROUP_ID, groupId);
+	request.setAttribute(WebKeys.TREE_PRIVATE_LAYOUT, privateLayout);
+	request.setAttribute(WebKeys.TREE_PARENT_LAYOUT_ID, parentLayoutId);
+	request.setAttribute(WebKeys.TREE_NODE_ID, nodeId);
 	request.setAttribute(WebKeys.TREE_OPEN_NODES, openNodes);
-	request.setAttribute(WebKeys.TREE_SELECTABLE_TREE, String.valueOf(selectableTree));
+	request.setAttribute(WebKeys.TREE_SELECTABLE_TREE, selectableTree);
 	request.setAttribute(WebKeys.TREE_SELECTED_NODES, selectedNodes);
 	request.setAttribute(WebKeys.TREE_PORTLET_URL, portletURL);
-	request.setAttribute(WebKeys.TREE_RENDER_CHILDREN_ONLY, String.valueOf(renderChildrenOnly));
+	request.setAttribute(WebKeys.TREE_RENDER_CHILDREN_ONLY, renderChildrenOnly);
 
 	pageContext.include("/html/portlet/communities/tree_js_node.jsp");
 }

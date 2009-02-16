@@ -25,92 +25,97 @@
 <%@ include file="/html/portlet/communities/init.jsp" %>
 
 <%
-long groupId = GetterUtil.getLong((String)request.getAttribute(WebKeys.TREE_GROUP_ID));
-String portletURL = (String)request.getAttribute(WebKeys.TREE_PORTLET_URL);
-
-boolean privateLayout = GetterUtil.getBoolean((String)request.getAttribute(WebKeys.TREE_PRIVATE_LAYOUT));
-long parentLayoutId = GetterUtil.getLong((String)request.getAttribute(WebKeys.TREE_PARENT_LAYOUT_ID));
-long nodeId = GetterUtil.getLong((String)request.getAttribute(WebKeys.TREE_NODE_ID));
-
+long groupId = (Long)request.getAttribute(WebKeys.TREE_GROUP_ID);
+boolean privateLayout = (Boolean)request.getAttribute(WebKeys.TREE_PRIVATE_LAYOUT);
+long parentLayoutId = (Long)request.getAttribute(WebKeys.TREE_PARENT_LAYOUT_ID);
+long nodeId = (Long)request.getAttribute(WebKeys.TREE_NODE_ID);
 long[] openNodes = (long[])request.getAttribute(WebKeys.TREE_OPEN_NODES);
-boolean selectableTree = GetterUtil.getBoolean((String)request.getAttribute(WebKeys.TREE_SELECTABLE_TREE));
+boolean selectableTree = (Boolean)request.getAttribute(WebKeys.TREE_SELECTABLE_TREE);
 long[] selectedNodes = (long[])request.getAttribute(WebKeys.TREE_SELECTED_NODES);
+String portletURL = (String)request.getAttribute(WebKeys.TREE_PORTLET_URL);
+boolean renderChildrenOnly = (Boolean)request.getAttribute(WebKeys.TREE_RENDER_CHILDREN_ONLY);
 
-boolean renderChildrenOnly = GetterUtil.getBoolean((String)request.getAttribute(WebKeys.TREE_RENDER_CHILDREN_ONLY));
-
-List<Layout> layoutsTree = LayoutLocalServiceUtil.getLayouts(groupId, privateLayout, parentLayoutId);
+List<Layout> treeLayouts = LayoutLocalServiceUtil.getLayouts(groupId, privateLayout, parentLayoutId);
 
 boolean nodeOpen = false;
 %>
 
-<c:if test="<%= layoutsTree.size() > 0 %>">
+<c:if test="<%= treeLayouts.size() > 0 %>">
 	<c:if test="<%= !renderChildrenOnly %>">
+
 		<%
-		StringBuilder ulClass = new StringBuilder("has-children ");
+		String cssClass = "has-children";
 
 		if ((Arrays.binarySearch(openNodes, nodeId) >= 0) || (nodeId == 1)) {
 			nodeOpen = true;
-			ulClass.append("node-open ");
+
+			cssClass += " node-open";
 		}
 		%>
-		<ul class="<%= ulClass.toString() %>">
+
+		<ul class="<%= cssClass %>">
 	</c:if>
+
 	<%
-	for (Layout layoutTree : layoutsTree) {
+	for (Layout treeLayout : treeLayouts) {
 		nodeId++;
 
-		List<Layout> childLayouts = layoutTree.getChildren();
+		List<Layout> childLayouts = treeLayout.getChildren();
 
 		String image = "spacer.png";
-
-		StringBuilder liClass = new StringBuilder("tree-item ");
+		String cssClass = "tree-item";
 
 		if (nodeOpen || renderChildrenOnly) {
-
 			if (childLayouts.size() > 0) {
 				image = "plus.png";
-				liClass.append("has-children ");
+				cssClass += " has-children";
 
 				if (Arrays.binarySearch(openNodes, nodeId) >= 0) {
 					image = "minus.png";
-					liClass.append("node-open ");
+					cssClass += " node-open";
 				}
 			}
 		%>
-			<li class="<%= liClass.toString() %>" branchid="<%= layoutTree.getPlid() %>" layoutid="<%= layoutTree.getLayoutId() %>" privateLayout="<%= layoutTree.getPrivateLayout() %>" class="<%= liClass.toString() %>" nodeid="<%= nodeId %>">
 
-			<img class="expand-image" src="<%= themeDisplay.getPathThemeImages() + "/trees/" + image %>" />
+			<li branchid="<%= treeLayout.getPlid() %>" class="<%= cssClass %>" layoutid="<%= treeLayout.getLayoutId() %>" nodeid="<%= nodeId %>" privateLayout="<%= treeLayout.getPrivateLayout() %>">
+				<img class="expand-image" src="<%= themeDisplay.getPathThemeImages() + "/trees/" + image %>" />
 
-			<%
-			if (selectableTree && Validator.isNotNull(selectedNodes)) {
-				String selectableImagePath = "/trees/checkbox.png";
+				<%
+				if (selectableTree && Validator.isNotNull(selectedNodes)) {
+					String selectableImagePath = "/trees/checkbox.png";
 
-				if (Arrays.binarySearch(selectedNodes, layoutTree.getPlid()) >= 0) {
-					selectableImagePath = "/trees/checked.png";
+					if (Arrays.binarySearch(selectedNodes, treeLayout.getPlid()) >= 0) {
+						selectableImagePath = "/trees/checked.png";
+					}
+				%>
+
+					<img class="select-state" src="<%= themeDisplay.getPathThemeImages() + selectableImagePath %>" />
+
+				<%
 				}
-			%>
-				<img class="select-state" src="<%= themeDisplay.getPathThemeImages() + selectableImagePath %>" />
-			<%
-			}
-			%>
-			<a href="<%= portletURL + StringPool.AMPERSAND + portletDisplay.getNamespace() + "selPlid=" + layoutTree.getPlid() %>">
-				<img src="<%= themeDisplay.getPathThemeImages() + "/trees/page.png" %>"  />
-				<span><%= layoutTree.getName(themeDisplay.getLocale()) %></span>
-			</a>
-			<%
-			request.setAttribute(WebKeys.TREE_GROUP_ID, String.valueOf(groupId));
-			request.setAttribute(WebKeys.TREE_PRIVATE_LAYOUT, String.valueOf(privateLayout));
-			request.setAttribute(WebKeys.TREE_PARENT_LAYOUT_ID, String.valueOf(layoutTree.getLayoutId()));
-			request.setAttribute(WebKeys.TREE_NODE_ID, String.valueOf(nodeId));
-			request.setAttribute(WebKeys.TREE_OPEN_NODES, openNodes);
-			request.setAttribute(WebKeys.TREE_SELECTABLE_TREE, String.valueOf(selectableTree));
-			request.setAttribute(WebKeys.TREE_SELECTED_NODES, selectedNodes);
-			request.setAttribute(WebKeys.TREE_PORTLET_URL, portletURL);
-			request.setAttribute(WebKeys.TREE_RENDER_CHILDREN_ONLY, String.valueOf(false));
+				%>
 
-			pageContext.include("/html/portlet/communities/tree_js_node.jsp");
-			%>
+				<a href="<%= portletURL + StringPool.AMPERSAND + portletDisplay.getNamespace() + "selPlid=" + treeLayout.getPlid() %>">
+					<img src="<%= themeDisplay.getPathThemeImages() + "/trees/page.png" %>"  />
+					<span><%= treeLayout.getName(themeDisplay.getLocale()) %></span>
+				</a>
+
+				<%
+				request.setAttribute(WebKeys.TREE_GROUP_ID, groupId);
+				request.setAttribute(WebKeys.TREE_PRIVATE_LAYOUT, privateLayout);
+				request.setAttribute(WebKeys.TREE_PARENT_LAYOUT_ID, treeLayout.getLayoutId());
+				request.setAttribute(WebKeys.TREE_NODE_ID, nodeId);
+				request.setAttribute(WebKeys.TREE_OPEN_NODES, openNodes);
+				request.setAttribute(WebKeys.TREE_SELECTABLE_TREE, selectableTree);
+				request.setAttribute(WebKeys.TREE_SELECTED_NODES, selectedNodes);
+				request.setAttribute(WebKeys.TREE_PORTLET_URL, portletURL);
+				request.setAttribute(WebKeys.TREE_RENDER_CHILDREN_ONLY, false);
+
+				pageContext.include("/html/portlet/communities/tree_js_node.jsp");
+				%>
+
 			</li>
+
 	<%
 		}
 	}

@@ -38,9 +38,9 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
@@ -272,64 +272,47 @@ public class EditPagesAction extends PortletAction {
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(resourceRequest, Constants.CMD);
+		String resourceId = GetterUtil.getString(
+			resourceRequest.getResourceID());
 
-		String path = null;
+		if (resourceId.equals("/html/portlet/communities/tree_js_node.jsp")) {
+			long groupId = ParamUtil.getLong(resourceRequest, "groupId");
+			boolean privateLayout = ParamUtil.getBoolean(
+				resourceRequest, "privateLayout");
+			long parentLayoutId = ParamUtil.getLong(
+				resourceRequest, "parentLayoutId");
+			long nodeId = ParamUtil.getLong(resourceRequest, "nodeId");
+			long[] openNodes = StringUtil.split(
+				ParamUtil.getString(resourceRequest, "openNodes"), 0L);
+			boolean selectableTree = ParamUtil.getBoolean(
+				resourceRequest, "selectableTree");
+			long[] selectedNodes = StringUtil.split(
+				ParamUtil.getString(resourceRequest, "selectedNodes"), 0L);
+			String portletURL = ParamUtil.getString(
+				resourceRequest, "portletURL");
 
-		if (cmd.equals("render_tree_html")) {
-			path = "/html/portlet/communities/tree_js_node.jsp";
-
+			resourceRequest.setAttribute(WebKeys.TREE_GROUP_ID, groupId);
 			resourceRequest.setAttribute(
-				WebKeys.TREE_GROUP_ID,
-				String.valueOf(PortalUtil.getScopeGroupId(resourceRequest)));
-
+				WebKeys.TREE_PRIVATE_LAYOUT, privateLayout);
 			resourceRequest.setAttribute(
-				WebKeys.TREE_PRIVATE_LAYOUT,
-				String.valueOf(
-					ParamUtil.getBoolean(resourceRequest, "privateLayout")));
-
+				WebKeys.TREE_PARENT_LAYOUT_ID, parentLayoutId);
+			resourceRequest.setAttribute(WebKeys.TREE_NODE_ID, nodeId);
+			resourceRequest.setAttribute(WebKeys.TREE_OPEN_NODES, openNodes);
 			resourceRequest.setAttribute(
-				WebKeys.TREE_PARENT_LAYOUT_ID,
-				String.valueOf(
-					ParamUtil.getLong(resourceRequest, "parentLayoutId")));
-
+				WebKeys.TREE_SELECTABLE_TREE, selectableTree);
 			resourceRequest.setAttribute(
-				WebKeys.TREE_NODE_ID,
-				String.valueOf(ParamUtil.getLong(resourceRequest, "nodeId")));
-
+				WebKeys.TREE_SELECTED_NODES, selectedNodes);
+			resourceRequest.setAttribute(WebKeys.TREE_PORTLET_URL, portletURL);
 			resourceRequest.setAttribute(
-				WebKeys.TREE_OPEN_NODES,
-				StringUtil.split(
-					ParamUtil.getString(
-						resourceRequest, "openNodes", StringPool.BLANK),
-					0L));
-
-			resourceRequest.setAttribute(
-				WebKeys.TREE_SELECTABLE_TREE,
-				String.valueOf(
-					ParamUtil.getBoolean(resourceRequest, "selectableTree")));
-
-			resourceRequest.setAttribute(
-				WebKeys.TREE_SELECTED_NODES,
-				StringUtil.split(
-					ParamUtil.getString(
-						resourceRequest, "selectedNodes", StringPool.BLANK),
-					0L));
-
-			resourceRequest.setAttribute(
-				WebKeys.TREE_PORTLET_URL,
-				ParamUtil.getString(
-					resourceRequest, "portletURL", StringPool.BLANK));
-
-			resourceRequest.setAttribute(
-				WebKeys.TREE_RENDER_CHILDREN_ONLY, String.valueOf(true));
+				WebKeys.TREE_RENDER_CHILDREN_ONLY, true);
 		}
 		else {
-			path = "/html/portlet/communities/scheduled_publishing_events.jsp";
+			resourceId =
+				"/html/portlet/communities/scheduled_publishing_events.jsp";
 		}
 
 		PortletRequestDispatcher portletRequestDispatcher =
-			portletConfig.getPortletContext().getRequestDispatcher(path);
+			portletConfig.getPortletContext().getRequestDispatcher(resourceId);
 
 		portletRequestDispatcher.include(resourceRequest, resourceResponse);
 	}
