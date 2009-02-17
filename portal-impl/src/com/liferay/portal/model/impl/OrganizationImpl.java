@@ -171,7 +171,6 @@ public class OrganizationImpl
 	}
 
 	public List<Organization> getDescendants() throws SystemException {
-
 		List<Organization> descendants = new UniqueList<Organization>();
 
 		for (Organization suborganization : getSuborganizations()) {
