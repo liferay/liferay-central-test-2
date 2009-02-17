@@ -133,7 +133,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(CACHE_NAME);
-		sb.append(StringPool.POUND);
+		sb.append(StringPool.PERIOD);
 		sb.append(className);
 
 		return sb.toString();
@@ -145,21 +145,21 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(CACHE_NAME);
-		sb.append(StringPool.POUND);
+		sb.append(StringPool.PERIOD);
 		sb.append(className);
-		sb.append(StringPool.POUND);
+		sb.append(StringPool.PERIOD);
 		sb.append(methodName);
 		sb.append(_PARAMS_SEPARATOR);
 
 		for (String param : params) {
-			sb.append(StringPool.POUND);
+			sb.append(StringPool.PERIOD);
 			sb.append(param);
 		}
 
 		sb.append(_ARGS_SEPARATOR);
 
 		for (Object arg : args) {
-			sb.append(StringPool.POUND);
+			sb.append(StringPool.PERIOD);
 			sb.append(String.valueOf(arg));
 		}
 
