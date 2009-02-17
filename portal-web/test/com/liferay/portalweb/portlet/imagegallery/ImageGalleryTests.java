@@ -49,8 +49,8 @@ public class ImageGalleryTests extends BaseTests {
 		testSuite.addTestSuite(AddSecondTestFoldersTest.class);
 		testSuite.addTestSuite(MoveImageTest.class);
 		testSuite.addTestSuite(DeleteFoldersTest.class);
-		testSuite.addTestSuite(UploadLARFileTest.class);
-		testSuite.addTestSuite(AssertLARImportTest.class);
+		testSuite.addTestSuite(ImportLARTest.class);
+		testSuite.addTestSuite(AssertImportLARTest.class);
 		testSuite.addTestSuite(ImageEdittingTest.class);
 		testSuite.addTestSuite(TearDownTest.class);
 
