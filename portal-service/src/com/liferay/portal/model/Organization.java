@@ -64,6 +64,9 @@ public interface Organization extends OrganizationModel {
 
 	public java.lang.String[] getChildrenTypes();
 
+	public java.util.List<com.liferay.portal.model.Organization> getDescendants()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Group getGroup();
 
 	public long getLogoId();

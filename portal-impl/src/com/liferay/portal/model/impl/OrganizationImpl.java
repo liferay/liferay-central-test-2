@@ -48,6 +48,7 @@ import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.LocalizationUtil;
+import com.liferay.util.UniqueList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -167,6 +168,18 @@ public class OrganizationImpl
 
 	public String[] getChildrenTypes() {
 		return getChildrenTypes(getType());
+	}
+
+	public List<Organization> getDescendants() throws SystemException {
+
+		List<Organization> descendants = new UniqueList<Organization>();
+
+		for (Organization suborganization : getSuborganizations()) {
+			descendants.add(suborganization);
+			descendants.addAll(suborganization.getDescendants());
+		}
+
+		return descendants;
 	}
 
 	public Group getGroup() {

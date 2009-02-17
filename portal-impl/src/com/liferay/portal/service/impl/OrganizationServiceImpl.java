@@ -195,7 +195,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 					ActionKeys.MANAGE_SUBORGANIZATIONS)) {
 
 				manageableOrganizations.addAll(
-					userOrganization.getSuborganizations());
+					userOrganization.getDescendants());
 			}
 		}
 
