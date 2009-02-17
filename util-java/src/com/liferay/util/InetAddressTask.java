@@ -22,6 +22,10 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -40,14 +44,22 @@ public class InetAddressTask extends Task {
 		try {
 			InetAddress localHost = InetAddress.getLocalHost();
 
-			if (_hostAddressProperty != null) {
+			if (Validator.isNotNull(_hostAddressProperty)) {
 				getProject().setUserProperty(
 					_hostAddressProperty, localHost.getHostAddress());
 			}
 
-			if (_hostNameProperty != null) {
+			if (Validator.isNotNull(_hostNameProperty)) {
 				getProject().setUserProperty(
 					_hostNameProperty, localHost.getHostName());
+			}
+
+			if (Validator.isNotNull(_vmIdProperty)) {
+				int id = GetterUtil.getInteger(
+					StringUtil.extractDigits(localHost.getHostName()));
+
+				getProject().setUserProperty(
+					_vmIdProperty, String.valueOf((id * 2) - 1));
 			}
 		}
 		catch (UnknownHostException uhe) {
@@ -63,7 +75,12 @@ public class InetAddressTask extends Task {
 		_hostNameProperty = hostNameProperty;
 	}
 
+	public void setVmIdProperty(String vmIdProperty) {
+		_vmIdProperty = vmIdProperty;
+	}
+
 	private String _hostAddressProperty;
 	private String _hostNameProperty;
+	private String _vmIdProperty;
 
 }
