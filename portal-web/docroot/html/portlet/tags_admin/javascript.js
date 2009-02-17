@@ -416,7 +416,7 @@
 
 			var	entryList = jQuery(instance._entryListClass);
 
-			entryList.mousedown(
+			entryList.click(
 				function() {
 					var entryId = instance._getEntryId(this);
 					var editContainer = jQuery('.vocabulary-edit');
@@ -1447,6 +1447,8 @@
 
 	var droppableTag = Expanse.Droppable;
 
+	var scrollParent = jQuery('.vocabulary-entries')[0];
+
 	var draggableTag = Expanse.DragProxy.extend({
 		initialize: function() {
 			var instance = this;
@@ -1454,6 +1456,74 @@
 			instance.parent.apply(instance, arguments);
 
 			instance.removeInvalidHandleType('a');
+
+			instance.goingUp = false;
+			instance.lastY = 0;
+
+			instance._scrollParent = scrollParent;
+
+            instance._scrollHeight = scrollParent.scrollHeight;
+            instance._clientHeight = scrollParent.clientHeight;
+            instance._xy = Dom.getXY(scrollParent);
+		},
+
+		endDrag: function(event) {
+			var instance = this;
+
+			var proxy = instance.getDragEl();
+
+			Dom.setStyle(proxy, 'top', 0);
+			Dom.setStyle(proxy, 'left', 0);
+
+			instance._removeScrollInterval();
+		},
+
+		onDrag: function(event) {
+			var instance = this;
+
+			instance.parent.apply(instance, arguments);
+
+			var y = Event.getPageY(event);
+
+			if (y < instance.lastY) {
+				instance.goingUp = true;
+			}
+			else if (y > instance.lastY) {
+				instance.goingUp = false;
+			}
+
+			instance.lastY = y;
+
+			var pageY = Event.getPageY(event);
+			var clientHeight = instance.getEl().clientHeight;
+			var scrollTop = false;
+
+			instance._scrollBy = (clientHeight * 2) + instance._overflow;
+
+			if (instance.goingUp) {
+				var deltaTop = instance._xy[1] + (clientHeight + instance._overflow);
+
+				if (pageY < deltaTop) {
+					scrollTop = instance._scrollParent.scrollTop - instance._scrollBy;
+				}
+			}
+			else {
+				var deltaBottom = instance._clientHeight + instance._xy[1] - (clientHeight + instance._overflow);
+
+				if (pageY > deltaBottom) {
+					scrollTop = instance._scrollParent.scrollTop + instance._scrollBy;
+				}
+			}
+
+			instance._scrollTo(scrollTop);
+		},
+
+		onDragDrop: function() {
+			var instance = this;
+
+			instance.parent.apply(this, arguments);
+
+			instance._removeScrollInterval();
 		},
 
 		onDragEnter: function(event, id) {
@@ -1495,14 +1565,47 @@
 			Dom.addClass(clone, 'portlet-tags-admin-helper');
 		},
 
-		endDrag: function(event) {
+		_removeScrollInterval: function() {
 			var instance = this;
 
-			var proxy = instance.getDragEl();
+			if (instance._scrollInterval) {
+				clearInterval(instance._scrollInterval);
+			}
+		},
 
-			Dom.setStyle(proxy, 'top', 0);
-			Dom.setStyle(proxy, 'left', 0);
-		}
+		_scrollTo: function(scrollTop) {
+			var instance = this;
+
+			instance._currentScrollTop = scrollTop;
+
+			instance._removeScrollInterval();
+
+			if (scrollTop) {
+				instance._scrollInterval = setInterval(
+					function() {
+						if ((instance._currentScrollTop < 0) || (instance._currentScrollTop > instance._scrollHeight)) {
+							instance._removeScrollInterval();
+						}
+
+						instance._scrollParent.scrollTop = instance._currentScrollTop;
+
+						DDM.refreshCache();
+
+						if (instance.goingUp) {
+							instance._currentScrollTop -= instance._scrollBy;
+						}
+						else {
+							instance._currentScrollTop += instance._scrollBy;
+						}
+					},
+					10
+				);
+			}
+		},
+
+		_overflow: 5,
+		_scrollBy: 0,
+		_scrollInterval: null
 	});
 
 	Liferay.Portlet.TagsAdmin = TagsAdmin;
