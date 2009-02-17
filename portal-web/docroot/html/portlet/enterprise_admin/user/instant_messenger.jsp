@@ -30,52 +30,59 @@ Contact selContact = (Contact)request.getAttribute("user.selContact");
 
 <h3><liferay-ui:message key="instant-messenger" /></h3>
 
-<fieldset class="block-labels">
-	<div class="ctrl-holder">
-		<label for="<portlet:namespace />aimSn"><liferay-ui:message key="aim" /></label>
+<c:choose>
+	<c:when test="<%= selContact != null %>">
+		<fieldset class="block-labels">
+			<div class="ctrl-holder">
+				<label for="<portlet:namespace />aimSn"><liferay-ui:message key="aim" /></label>
 
-		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="aimSn" />
-	</div>
+				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="aimSn" />
+			</div>
 
-	<div class="ctrl-holder">
-		<label for="<portlet:namespace />icqSn"><liferay-ui:message key="icq" /></label>
+			<div class="ctrl-holder">
+				<label for="<portlet:namespace />icqSn"><liferay-ui:message key="icq" /></label>
 
-		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="icqSn" />
+				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="icqSn" />
 
-		<c:if test="<%= Validator.isNotNull(selContact.getIcqSn()) %>">
-			<img class="instant-messenger-logo" src="http://web.icq.com/whitepages/online?icq=<%= selContact.getIcqSn() %>&img=5" />
-		</c:if>
-	</div>
+				<c:if test="<%= Validator.isNotNull(selContact.getIcqSn()) %>">
+					<img class="instant-messenger-logo" src="http://web.icq.com/whitepages/online?icq=<%= selContact.getIcqSn() %>&img=5" />
+				</c:if>
+			</div>
 
-	<div class="ctrl-holder">
-		<label for="<portlet:namespace />jabberSn">	<liferay-ui:message key="jabber" /></label>
+			<div class="ctrl-holder">
+				<label for="<portlet:namespace />jabberSn">	<liferay-ui:message key="jabber" /></label>
 
-		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="jabberSn" />
-	</div>
+				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="jabberSn" />
+			</div>
 
-	<div class="ctrl-holder">
-		<label for="<portlet:namespace />msnSn"><liferay-ui:message key="msn" /></label>
+			<div class="ctrl-holder">
+				<label for="<portlet:namespace />msnSn"><liferay-ui:message key="msn" /></label>
 
-		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="msnSn" />
-	</div>
+				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="msnSn" />
+			</div>
 
-	<div class="ctrl-holder">
-		<label for="<portlet:namespace />skypeSn"><liferay-ui:message key="skype" /></label>
+			<div class="ctrl-holder">
+				<label for="<portlet:namespace />skypeSn"><liferay-ui:message key="skype" /></label>
 
-		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="skypeSn" />
+				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="skypeSn" />
 
-		<c:if test="<%= Validator.isNotNull(selContact.getSkypeSn()) %>">
-			<a href="callto://<%= selContact.getSkypeSn() %>"><img alt="<liferay-ui:message key="skype" />" class="instant-messenger-logo" src="http://mystatus.skype.com/smallicon/<%= selContact.getSkypeSn() %>" /></a>
-		</c:if>
-	</div>
+				<c:if test="<%= Validator.isNotNull(selContact.getSkypeSn()) %>">
+					<a href="callto://<%= selContact.getSkypeSn() %>"><img alt="<liferay-ui:message key="skype" />" class="instant-messenger-logo" src="http://mystatus.skype.com/smallicon/<%= selContact.getSkypeSn() %>" /></a>
+				</c:if>
+			</div>
 
-	<div class="ctrl-holder">
-		<label for="<portlet:namespace />ymSn"><liferay-ui:message key="ym" /></label>
+			<div class="ctrl-holder">
+				<label for="<portlet:namespace />ymSn"><liferay-ui:message key="ym" /></label>
 
-		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="ymSn" />
+				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="ymSn" />
 
-		<c:if test="<%= Validator.isNotNull(selContact.getYmSn()) %>">
-			<img class="instant-messenger-logo" src="http://opi.yahoo.com/online?u=<%= selContact.getYmSn() %>&m=g&t=0" />
-		</c:if>
-	</div>
-</fieldset>
+				<c:if test="<%= Validator.isNotNull(selContact.getYmSn()) %>">
+					<img class="instant-messenger-logo" src="http://opi.yahoo.com/online?u=<%= selContact.getYmSn() %>&m=g&t=0" />
+				</c:if>
+			</div>
+		</fieldset>
+	</c:when>
+	<c:otherwise>
+		<span class="portlet-msg-info"><liferay-ui:message key="this-section-will-be-editable-after-creating-the-user" /></span>
+	</c:otherwise>
+</c:choose>

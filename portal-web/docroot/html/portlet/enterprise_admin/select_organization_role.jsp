@@ -26,12 +26,11 @@
 
 <%
 int step = ParamUtil.getInteger(request, "step");
-long userId = ParamUtil.getLong(request, "userId");
+String organizationIds = ParamUtil.getString(request, "organizationIds", StringPool.BLANK);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/enterprise_admin/select_organization_role");
-portletURL.setParameter("userId", String.valueOf(userId));
 
 User selUser = null;
 long uniqueOrganizationId = 0;
@@ -39,9 +38,9 @@ long uniqueOrganizationId = 0;
 List<Organization> organizations = null;
 
 if (step == 1) {
-	selUser = UserServiceUtil.getUserById(userId);
+	long[] organizationIdsArray = StringUtil.split(organizationIds, 0L);
 
-	organizations = selUser.getOrganizations();
+	organizations = OrganizationLocalServiceUtil.getOrganizations(organizationIdsArray);
 
 	if (filterManageableOrganizations) {
 		organizations = EnterpriseAdminUtil.filterOrganizations(permissionChecker, organizations);

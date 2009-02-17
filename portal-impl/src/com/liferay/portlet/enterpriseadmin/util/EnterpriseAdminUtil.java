@@ -665,6 +665,12 @@ public class EnterpriseAdminUtil {
 
 		User user = PortalUtil.getSelectedUser(portletRequest);
 
+		long userId = 0;
+
+		if (user != null) {
+			userId = user.getUserId();
+		}
+
 		for (int i = 0; i < groupRolesGroupIds.length; i++) {
 			if ((groupRolesGroupIds[i] == 0) ||
 				(groupRolesRoleIds[i] == 0)) {
@@ -674,7 +680,7 @@ public class EnterpriseAdminUtil {
 
 			UserGroupRole userGroupRole = new UserGroupRoleImpl();
 
-			userGroupRole.setUserId(user.getUserId());
+			userGroupRole.setUserId(userId);
 			userGroupRole.setGroupId(groupRolesGroupIds[i]);
 			userGroupRole.setRoleId(groupRolesRoleIds[i]);
 

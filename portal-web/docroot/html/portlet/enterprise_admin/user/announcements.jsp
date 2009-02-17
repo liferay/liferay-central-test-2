@@ -26,6 +26,21 @@
 
 <%
 User selUser = (User)request.getAttribute("user.selUser");
+List<AnnouncementsDelivery> deliveries = null;
+
+if (selUser != null) {
+	deliveries = AnnouncementsDeliveryLocalServiceUtil.getUserDeliveries(selUser.getUserId());
+}
+else {
+	deliveries = new ArrayList<AnnouncementsDelivery>(AnnouncementsEntryImpl.TYPES.length);
+
+	for (String type : AnnouncementsEntryImpl.TYPES) {
+		AnnouncementsDelivery delivery = new AnnouncementsDeliveryImpl();
+		delivery.setType(type);
+		delivery.setWebsite(true);
+		deliveries.add(delivery);
+	}
+}
 %>
 
 <h3><liferay-ui:message key="alerts-and-announcements" /></h3>
@@ -36,7 +51,7 @@ User selUser = (User)request.getAttribute("user.selUser");
 
 <liferay-ui:search-container>
 	<liferay-ui:search-container-results
-		results="<%= AnnouncementsDeliveryLocalServiceUtil.getUserDeliveries(selUser.getUserId()) %>"
+		results="<%= deliveries  %>"
 	/>
 
 	<liferay-ui:search-container-row
@@ -65,47 +80,3 @@ User selUser = (User)request.getAttribute("user.selUser");
 
 	<liferay-ui:search-iterator />
 </liferay-ui:search-container>
-
-<%--
-SearchContainer searchContainer = new SearchContainer();
-
-List<String> headerNames = new ArrayList<String>();
-
-headerNames.add("type");
-headerNames.add("email");
-headerNames.add("sms");
-headerNames.add("website");
-
-searchContainer.setHeaderNames(headerNames);
-
-List<AnnouncementsDelivery> results = AnnouncementsDeliveryLocalServiceUtil.getUserDeliveries(selUser.getUserId());
-List<ResultRow> resultRows = searchContainer.getResultRows();
-
-for (int i = 0; i < results.size(); i++) {
-	AnnouncementsDelivery delivery = results.get(i);
-
-	ResultRow row = new ResultRow(delivery, delivery.getDeliveryId(), i);
-
-	// Type
-
-	row.addText(LanguageUtil.get(pageContext, delivery.getType()));
-
-	// Email
-
-	row.addJSP("/html/portlet/enterprise_admin/user/announcements_checkbox.jsp");
-
-	// SMS
-
-	row.addJSP("/html/portlet/enterprise_admin/user/announcements_checkbox.jsp");
-
-	// Website
-
-	row.addJSP("/html/portlet/enterprise_admin/user/announcements_checkbox.jsp");
-
-	// Add result row
-
-	resultRows.add(row);
-}
-%>
-
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />--%>

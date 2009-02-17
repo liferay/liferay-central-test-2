@@ -88,7 +88,7 @@ boolean passwordReset = BeanParamUtil.getBoolean(selUser, request, "passwordRese
 		<input name="<portlet:namespace />password2" size="30" type="password" value="" />
 	</div>
 
-	<c:if test="<%= user.getUserId() != selUser.getUserId() %>">
+	<c:if test="<%= (selUser != null) && (user.getUserId() != selUser.getUserId()) %>">
 		<div class="ctrl-holder">
 			<liferay-ui:input-checkbox param="passwordReset" defaultValue="<%= passwordReset %>" />
 

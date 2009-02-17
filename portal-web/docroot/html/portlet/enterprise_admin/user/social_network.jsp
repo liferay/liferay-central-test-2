@@ -30,28 +30,37 @@ Contact selContact = (Contact)request.getAttribute("user.selContact");
 
 <h3><liferay-ui:message key="social-network" /></h3>
 
-<fieldset class="block-labels">
-	<div class="ctrl-holder">
-		<label for="<portlet:namespace />facebookSn"><liferay-ui:message key="facebook" /></label>
+<c:choose>
+	<c:when test="<%= selContact != null %>">
+		<fieldset class="block-labels">
+			<div class="ctrl-holder">
+				<label for="<portlet:namespace />facebookSn"><liferay-ui:message key="facebook" /></label>
 
-		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="facebookSn" />
+				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="facebookSn" />
 
-		<img alt="<liferay-ui:message key="facebook" />" class="social-network-logo" src="<%= themeDisplay.getPathThemeImages() %>/enterprise_admin/facebook.jpg" />
-	</div>
+				<img alt="<liferay-ui:message key="facebook" />" class="social-network-logo" src="<%= themeDisplay.getPathThemeImages() %>/enterprise_admin/facebook.jpg" />
+			</div>
 
-	<div class="ctrl-holder">
-		<label for="<portlet:namespace />mySpaceSn"><liferay-ui:message key="myspace" /></label>
+			<div class="ctrl-holder">
+				<label for="<portlet:namespace />mySpaceSn"><liferay-ui:message key="myspace" /></label>
 
-		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="mySpaceSn" />
+				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="mySpaceSn" />
 
-		<img alt="<liferay-ui:message key="myspace" />" class="social-network-logo" src="<%= themeDisplay.getPathThemeImages() %>/enterprise_admin/myspace.jpg" />
-	</div>
+				<img alt="<liferay-ui:message key="myspace" />" class="social-network-logo" src="<%= themeDisplay.getPathThemeImages() %>/enterprise_admin/myspace.jpg" />
+			</div>
 
-	<div class="ctrl-holder">
-		<label for="<portlet:namespace />twitterSn"><liferay-ui:message key="twitter" /></label>
+			<div class="ctrl-holder">
+				<label for="<portlet:namespace />twitterSn"><liferay-ui:message key="twitter" /></label>
 
-		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="twitterSn" />
+				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="twitterSn" />
 
-		<img alt="<liferay-ui:message key="twitter" />" class="social-network-logo" src="<%= themeDisplay.getPathThemeImages() %>/enterprise_admin/twitter.jpg" />
-	</div>
-</fieldset>
+				<img alt="<liferay-ui:message key="twitter" />" class="social-network-logo" src="<%= themeDisplay.getPathThemeImages() %>/enterprise_admin/twitter.jpg" />
+			</div>
+		</fieldset>
+	</c:when>
+	<c:otherwise>
+		<div class="portlet-msg-info">
+			<liferay-ui:message key="this-section-will-be-editable-after-creating-the-user" />
+		</div>
+	</c:otherwise>
+</c:choose>

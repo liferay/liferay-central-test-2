@@ -30,8 +30,17 @@ User selUser = (User)request.getAttribute("user.selUser");
 
 <h3><liferay-ui:message key="comments" /></h3>
 
-<fieldset class="block-labels">
-	<div class="ctrl-holder">
-		<liferay-ui:input-field model="<%= User.class %>" bean="<%= selUser %>" field="comments" />
-	</div>
-</fieldset>
+<c:choose>
+	<c:when test="<%= selUser != null %>">
+		<fieldset class="block-labels">
+			<div class="ctrl-holder">
+				<liferay-ui:input-field model="<%= User.class %>" bean="<%= selUser %>" field="comments" />
+			</div>
+		</fieldset>
+	</c:when>
+	<c:otherwise>
+		<div class="portlet-msg-info">
+			<liferay-ui:message key="this-section-will-be-editable-after-creating-the-user" />
+		</div>
+	</c:otherwise>
+</c:choose>

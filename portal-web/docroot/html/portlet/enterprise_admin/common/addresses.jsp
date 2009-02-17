@@ -28,7 +28,11 @@
 themeDisplay.setIncludeServiceJs(true);
 
 String className = (String)request.getAttribute("addresses.className");
-long classPK = (Long)request.getAttribute("addresses.classPK");
+Long classPK = (Long)request.getAttribute("addresses.classPK");
+
+if (classPK == null) {
+	classPK = 0L;
+}
 
 List<Address> addresses = Collections.EMPTY_LIST;
 

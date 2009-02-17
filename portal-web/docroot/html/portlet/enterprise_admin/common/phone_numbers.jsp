@@ -26,7 +26,11 @@
 
 <%
 String className = (String)request.getAttribute("phones.className");
-long classPK = (Long)request.getAttribute("phones.classPK");
+Long classPK = (Long)request.getAttribute("phones.classPK");
+
+if (classPK == null) {
+	classPK = 0L;
+}
 
 List<Phone> phones = Collections.EMPTY_LIST;
 

@@ -34,6 +34,12 @@ List<UserGroupRole> organizationRoles = (List<UserGroupRole>)request.getAttribut
 
 List <UserGroupRole> userGroupRoles = new ArrayList<UserGroupRole>();
 
+Long[] organizationIds = new Long[0];
+
+if (organizations != null) {
+	organizationIds = EnterpriseAdminUtil.getOrganizationIds(organizations);
+}
+
 userGroupRoles.addAll(communityRoles);
 userGroupRoles.addAll(organizationRoles);
 %>
@@ -65,7 +71,7 @@ userGroupRoles.addAll(organizationRoles);
 	}
 
 	function <portlet:namespace />openOrganizationRoleSelector() {
-		<portlet:namespace />openRoleSelector('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization_role" /><portlet:param name="step" value="1" /><portlet:param name="userId" value="<%= String.valueOf(selUser.getUserId()) %>" /></portlet:renderURL>');
+		<portlet:namespace />openRoleSelector('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization_role" /><portlet:param name="step" value="1" /><portlet:param name="organizationIds" value="<%= StringUtil.merge(organizationIds) %>" /></portlet:renderURL>');
 	}
 
 	function <portlet:namespace />openRegularRoleSelector() {

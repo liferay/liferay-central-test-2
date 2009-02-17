@@ -35,7 +35,7 @@ String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
 Locale[] locales = LanguageUtil.getAvailableLocales();
 
-if (Validator.isNull(reminderQueries)) {
+if ((organization != null) && Validator.isNull(reminderQueries)) {
 	reminderQueries = StringUtil.merge(organization.getReminderQueryQuestions(defaultLocale), StringPool.NEW_LINE);
 }
 
@@ -71,7 +71,7 @@ Map<Locale, String> reminderQueriesMap = LocalizationUtil.getLocalizedParameter(
 
 				String curReminderQueries = reminderQueriesMap.get(locales[i]);
 
-				if (Validator.isNull(curReminderQueries)) {
+				if ((organization != null) && Validator.isNull(curReminderQueries)) {
 					curReminderQueries = StringUtil.merge(organization.getReminderQueryQuestions(locales[i]), StringPool.NEW_LINE);
 				}
 
@@ -96,7 +96,7 @@ Map<Locale, String> reminderQueriesMap = LocalizationUtil.getLocalizedParameter(
 
 			String curReminderQueries = reminderQueriesMap.get(locales[i]);
 
-			if (Validator.isNull(curReminderQueries)) {
+			if ((organization != null) && Validator.isNull(curReminderQueries)) {
 				curReminderQueries = StringUtil.merge(organization.getReminderQueryQuestions(locales[i]), StringPool.NEW_LINE);
 			}
 		%>

@@ -298,6 +298,7 @@ public class EditUserAction extends PortletAction {
 			AnnouncementsDelivery announcementsDelivery =
 				new AnnouncementsDeliveryImpl();
 
+			announcementsDelivery.setType(type);
 			announcementsDelivery.setEmail(email);
 			announcementsDelivery.setSms(sms);
 			announcementsDelivery.setWebsite(website);
@@ -408,6 +409,25 @@ public class EditUserAction extends PortletAction {
 				birthdayYear, jobTitle, groupIds, organizationIds,
 				roleIds, userGroupIds, sendEmail, addresses, emailAddresses,
 				phones, websites, announcementsDeliveries, serviceContext);
+
+			if (!userGroupRoles.isEmpty()) {
+				for (UserGroupRole role : userGroupRoles) {
+					role.setUserId(user.getUserId());
+				}
+
+				user = UserServiceUtil.updateUser(
+					user.getUserId(), StringPool.BLANK, StringPool.BLANK,
+					StringPool.BLANK, false, reminderQueryQuestion,
+					reminderQueryAnswer, screenName, emailAddress, openId,
+					languageId, timeZoneId, greeting, comments, firstName,
+					middleName, lastName, prefixId, suffixId, male,
+					birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn,
+					facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn,
+					twitterSn, ymSn, jobTitle, groupIds, organizationIds,
+					roleIds, userGroupRoles, userGroupIds, addresses,
+					emailAddresses, phones, websites, announcementsDeliveries,
+					serviceContext);
+			}
 		}
 		else {
 

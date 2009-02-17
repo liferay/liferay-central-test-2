@@ -32,10 +32,19 @@ Contact selContact = (Contact)request.getAttribute("user.selContact");
 
 <h3><liferay-ui:message key="sms" /></h3>
 
-<liferay-ui:error exception="<%= UserSmsException.class %>" message="please-enter-a-sms-id-that-is-a-valid-email-address" />
+<c:choose>
+	<c:when test="<%= selContact != null %>">
+		<liferay-ui:error exception="<%= UserSmsException.class %>" message="please-enter-a-sms-id-that-is-a-valid-email-address" />
 
-<fieldset class="block-labels">
-	<div class="ctrl-holder">
-		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="smsSn" />
-	</div>
-</fieldset>
+		<fieldset class="block-labels">
+			<div class="ctrl-holder">
+				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="smsSn" />
+			</div>
+		</fieldset>
+	</c:when>
+	<c:otherwise>
+		<div class="portlet-msg-info">
+			<liferay-ui:message key="this-section-will-be-editable-after-creating-the-user" />
+		</div>
+	</c:otherwise>
+</c:choose>
