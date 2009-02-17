@@ -211,8 +211,6 @@ public class EditOrganizationAction extends PortletAction {
 			actionRequest);
 		List<Phone> phones = EnterpriseAdminUtil.getPhones(actionRequest);
 		List<Website> websites = EnterpriseAdminUtil.getWebsites(actionRequest);
-		String reminderQueries = actionRequest.getParameter(
-					"reminderQueries");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			Organization.class.getName(), actionRequest);
@@ -245,6 +243,8 @@ public class EditOrganizationAction extends PortletAction {
 					organization.getOrganizationId());
 			}
 		}
+
+		String reminderQueries = actionRequest.getParameter("reminderQueries");
 
 		PortletPreferences preferences = organization.getPreferences();
 

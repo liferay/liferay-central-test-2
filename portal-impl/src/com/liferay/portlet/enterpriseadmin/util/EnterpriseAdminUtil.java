@@ -422,6 +422,10 @@ public class EnterpriseAdminUtil {
 	}
 
 	public static Long[] getOrganizationIds(List<Organization> organizations) {
+		if ((organizations == null) || organizations.isEmpty()) {
+			return new Long[0];
+		}
+
 		Long[] organizationIds = new Long[organizations.size()];
 
 		for (int i = 0; i < organizations.size(); i++) {

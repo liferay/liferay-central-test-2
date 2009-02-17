@@ -224,6 +224,12 @@ String curSection = mainSections[0];
 				request.setAttribute("phones.classPK", selContact.getContactId());
 				request.setAttribute("websites.classPK", selContact.getContactId());
 			}
+			else {
+				request.setAttribute("addresses.classPK", 0L);
+				request.setAttribute("emailAddresses.classPK", 0L);
+				request.setAttribute("phones.classPK", 0L);
+				request.setAttribute("websites.classPK", 0L);
+			}
 
 			for (String section : allSections) {
 				String sectionId = _getSectionId(section);

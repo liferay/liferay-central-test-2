@@ -26,11 +26,7 @@
 
 <%
 String className = (String)request.getAttribute("emailAddresses.className");
-Long classPK = (Long)request.getAttribute("emailAddresses.classPK");
-
-if (classPK == null) {
-	classPK = 0L;
-}
+long classPK = (Long)request.getAttribute("emailAddresses.classPK");
 
 List<EmailAddress> emailAddresses = Collections.EMPTY_LIST;
 

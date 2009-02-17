@@ -411,8 +411,8 @@ public class EditUserAction extends PortletAction {
 				phones, websites, announcementsDeliveries, serviceContext);
 
 			if (!userGroupRoles.isEmpty()) {
-				for (UserGroupRole role : userGroupRoles) {
-					role.setUserId(user.getUserId());
+				for (UserGroupRole userGroupRole : userGroupRoles) {
+					userGroupRole.setUserId(user.getUserId());
 				}
 
 				user = UserServiceUtil.updateUser(

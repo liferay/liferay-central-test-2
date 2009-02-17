@@ -26,11 +26,7 @@
 
 <%
 String className = (String)request.getAttribute("websites.className");
-Long classPK = (Long)request.getAttribute("websites.classPK");
-
-if (classPK == null) {
-	classPK = 0L;
-}
+long classPK = (Long)request.getAttribute("websites.classPK");
 
 List<Website> websites = Collections.EMPTY_LIST;
 

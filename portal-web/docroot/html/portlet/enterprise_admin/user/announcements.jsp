@@ -26,6 +26,7 @@
 
 <%
 User selUser = (User)request.getAttribute("user.selUser");
+
 List<AnnouncementsDelivery> deliveries = null;
 
 if (selUser != null) {
@@ -36,8 +37,10 @@ else {
 
 	for (String type : AnnouncementsEntryImpl.TYPES) {
 		AnnouncementsDelivery delivery = new AnnouncementsDeliveryImpl();
+
 		delivery.setType(type);
 		delivery.setWebsite(true);
+
 		deliveries.add(delivery);
 	}
 }

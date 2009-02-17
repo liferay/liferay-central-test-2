@@ -26,7 +26,6 @@
 
 <%
 int step = ParamUtil.getInteger(request, "step");
-String organizationIds = ParamUtil.getString(request, "organizationIds", StringPool.BLANK);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -38,9 +37,9 @@ long uniqueOrganizationId = 0;
 List<Organization> organizations = null;
 
 if (step == 1) {
-	long[] organizationIdsArray = StringUtil.split(organizationIds, 0L);
+	long[] organizationIds = StringUtil.split(ParamUtil.getString(request, "organizationIds"), 0L);
 
-	organizations = OrganizationLocalServiceUtil.getOrganizations(organizationIdsArray);
+	organizations = OrganizationLocalServiceUtil.getOrganizations(organizationIds);
 
 	if (filterManageableOrganizations) {
 		organizations = EnterpriseAdminUtil.filterOrganizations(permissionChecker, organizations);

@@ -28,17 +28,12 @@
 User selUser = (User)request.getAttribute("user.selUser");
 List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 List<Organization> organizations = (List<Organization>)request.getAttribute("user.organizations");
+Long[] organizationIds = EnterpriseAdminUtil.getOrganizationIds(organizations);
 List<Role> roles = (List<Role>)request.getAttribute("user.roles");
 List<UserGroupRole> communityRoles = (List<UserGroupRole>)request.getAttribute("user.communityRoles");
 List<UserGroupRole> organizationRoles = (List<UserGroupRole>)request.getAttribute("user.organizationRoles");
 
 List <UserGroupRole> userGroupRoles = new ArrayList<UserGroupRole>();
-
-Long[] organizationIds = new Long[0];
-
-if (organizations != null) {
-	organizationIds = EnterpriseAdminUtil.getOrganizationIds(organizations);
-}
 
 userGroupRoles.addAll(communityRoles);
 userGroupRoles.addAll(organizationRoles);
