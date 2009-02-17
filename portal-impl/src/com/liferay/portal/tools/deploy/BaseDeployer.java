@@ -810,6 +810,17 @@ public class BaseDeployer {
 		sb.append(displayName);
 		sb.append("</display-name>");
 
+		File serviceXml = new File(srcFile + "/WEB-INF/service.xml");
+
+		if (serviceXml.exists()) {
+			sb.append("<listener>");
+			sb.append("<listener-class>");
+			sb.append("com.liferay.portal.kernel.spring.context.");
+			sb.append("PortletContextLoaderListener");
+			sb.append("</listener-class>");
+			sb.append("</listener>");
+		}
+
 		boolean hasTaglib = false;
 
 		if (Validator.isNotNull(portletTaglibDTD) ||
