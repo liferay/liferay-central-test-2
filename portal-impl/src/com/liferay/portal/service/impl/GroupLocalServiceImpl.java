@@ -1028,7 +1028,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	protected void validateFriendlyURL(
-			long groupId, long companyId, long classNameId, long classPK,
+			long companyId, long groupId, long classNameId, long classPK,
 			String friendlyURL)
 		throws PortalException, SystemException {
 
