@@ -356,7 +356,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		if (user.hasCompanyMx()) {
 			mailService.addUser(
-				userId, password1, firstName, middleName, lastName,
+				companyId, userId, password1, firstName, middleName, lastName,
 				emailAddress);
 		}
 
@@ -921,7 +921,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Mail
 
-		mailService.deleteUser(userId, user.getCompanyMx());
+		mailService.deleteUser(user.getCompanyId(), userId);
 
 		// Contact
 
@@ -2065,7 +2065,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		String newEncPwd = PwdEncryptor.encrypt(password1);
 
 		if (user.hasCompanyMx()) {
-			mailService.updatePassword(userId, password1);
+			mailService.updatePassword(user.getCompanyId(), userId, password1);
 		}
 
 		user.setPassword(newEncPwd);
@@ -3106,20 +3106,21 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		if (!user.hasCompanyMx() && user.hasCompanyMx(emailAddress)) {
 			mailService.addUser(
-				userId, password, firstName, middleName, lastName,
-				emailAddress);
+				user.getCompanyId(), userId, password, firstName, middleName,
+				lastName, emailAddress);
 		}
 
 		// test@liferay.com -> bob@liferay.com
 
 		else if (user.hasCompanyMx() && user.hasCompanyMx(emailAddress)) {
-			mailService.updateEmailAddress(userId, emailAddress);
+			mailService.updateEmailAddress(
+				user.getCompanyId(), userId, emailAddress);
 		}
 
 		// test@liferay.com -> test@test.com
 
 		else if (user.hasCompanyMx() && !user.hasCompanyMx(emailAddress)) {
-			mailService.deleteEmailAddress(userId);
+			mailService.deleteEmailAddress(user.getCompanyId(), userId);
 		}
 
 		user.setEmailAddress(emailAddress);

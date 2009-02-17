@@ -26,7 +26,9 @@ import com.liferay.mail.model.Filter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
@@ -50,16 +52,16 @@ public class FuseMailHook implements Hook {
 	}
 
 	public void addForward(
-		long userId, List<Filter> filters, List<String> emailAddresses,
-		boolean leaveCopy) {
+		long companyId, long userId, List<Filter> filters,
+		List<String> emailAddresses, boolean leaveCopy) {
 	}
 
 	public void addUser(
-		long userId, String password, String firstName, String middleName,
-		String lastName, String emailAddress) {
+		long companyId, long userId, String password, String firstName,
+		String middleName, String lastName, String emailAddress) {
 
 		try {
-			String mailUserId = getMailUserId(userId);
+			String mailUserId = getMailUserId(companyId, userId);
 
 			PostMethod method = getPostMethod();
 
@@ -80,14 +82,15 @@ public class FuseMailHook implements Hook {
 	}
 
 	public void addVacationMessage(
-		long userId, String emailAddress, String vacationMessage) {
+		long companyId, long userId, String emailAddress,
+		String vacationMessage) {
 	}
 
-	public void deleteEmailAddress(long userId) {
+	public void deleteEmailAddress(long companyId, long userId) {
 		try {
 			User user = UserLocalServiceUtil.getUserById(userId);
 
-			String mailUserId = getMailUserId(userId);
+			String mailUserId = getMailUserId(companyId, userId);
 
 			PostMethod method = getPostMethod();
 
@@ -102,9 +105,9 @@ public class FuseMailHook implements Hook {
 		}
 	}
 
-	public void deleteUser(long userId, String companyMx) {
+	public void deleteUser(long companyId, long userId) {
 		try {
-			String mailUserId = getMailUserId(userId, companyMx);
+			String mailUserId = getMailUserId(companyId, userId);
 
 			PostMethod method = getPostMethod();
 
@@ -118,14 +121,17 @@ public class FuseMailHook implements Hook {
 		}
 	}
 
-	public void updateBlocked(long userId, List<String> blocked) {
+	public void updateBlocked(
+		long companyId, long userId, List<String> blocked) {
 	}
 
-	public void updateEmailAddress(long userId, String emailAddress) {
-		try {
-			deleteEmailAddress(userId);
+	public void updateEmailAddress(
+		long companyId, long userId, String emailAddress) {
 
-			String mailUserId = getMailUserId(userId);
+		try {
+			deleteEmailAddress(companyId, userId);
+
+			String mailUserId = getMailUserId(companyId, userId);
 
 			PostMethod method = getPostMethod();
 
@@ -140,9 +146,9 @@ public class FuseMailHook implements Hook {
 		}
 	}
 
-	public void updatePassword(long userId, String password) {
+	public void updatePassword(long companyId, long userId, String password) {
 		try {
-			String mailUserId = getMailUserId(userId);
+			String mailUserId = getMailUserId(companyId, userId);
 
 			PostMethod method = getPostMethod();
 
@@ -188,28 +194,14 @@ public class FuseMailHook implements Hook {
 		return status;
 	}
 
-	protected String getMailUserId(long userId) throws Exception {
-		User user = UserLocalServiceUtil.getUserById(userId);
+	protected String getMailUserId(long companyId, long userId)
+		throws Exception {
+
+		Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(user.getCompanyMx());
-		sb.append(StringPool.PERIOD);
-		sb.append(user.getUserId());
-
-		String mailUserId = sb.toString();
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Mail user id " + mailUserId + " for user id " + userId);
-		}
-
-		return mailUserId;
-	}
-
-	protected String getMailUserId(long userId, String companyMx) {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(companyMx);
+		sb.append(company.getMx());
 		sb.append(StringPool.PERIOD);
 		sb.append(userId);
 

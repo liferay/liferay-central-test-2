@@ -45,8 +45,8 @@ import java.util.List;
 public class MailServiceImpl implements MailService {
 
 	public void addForward(
-		long userId, List<Filter> filters, List<String> emailAddresses,
-		boolean leaveCopy) {
+		long companyId, long userId, List<Filter> filters,
+		List<String> emailAddresses, boolean leaveCopy) {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("addForward");
@@ -55,16 +55,16 @@ public class MailServiceImpl implements MailService {
 		MethodWrapper methodWrapper = new MethodWrapper(
 			PropsValues.MAIL_HOOK_IMPL, "addForward",
 			new Object[] {
-				new LongWrapper(userId), filters, emailAddresses,
-				new BooleanWrapper(leaveCopy)
+				new LongWrapper(companyId), new LongWrapper(userId), filters,
+				emailAddresses, new BooleanWrapper(leaveCopy)
 			});
 
 		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
 	}
 
 	public void addUser(
-		long userId, String password, String firstName, String middleName,
-		String lastName, String emailAddress) {
+		long companyId, long userId, String password, String firstName,
+		String middleName, String lastName, String emailAddress) {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("addUser");
@@ -73,15 +73,16 @@ public class MailServiceImpl implements MailService {
 		MethodWrapper methodWrapper = new MethodWrapper(
 			PropsValues.MAIL_HOOK_IMPL, "addUser",
 			new Object[] {
-				new LongWrapper(userId), password, firstName, middleName,
-				lastName, emailAddress
+				new LongWrapper(companyId), new LongWrapper(userId), password,
+				firstName, middleName, lastName, emailAddress
 			});
 
 		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
 	}
 
 	public void addVacationMessage(
-		long userId, String emailAddress, String vacationMessage) {
+		long companyId, long userId, String emailAddress,
+		String vacationMessage) {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("addVacationMessage");
@@ -90,13 +91,14 @@ public class MailServiceImpl implements MailService {
 		MethodWrapper methodWrapper = new MethodWrapper(
 			PropsValues.MAIL_HOOK_IMPL, "addVacationMessage",
 			new Object[] {
-				new LongWrapper(userId), emailAddress, vacationMessage
+				new LongWrapper(companyId), new LongWrapper(userId),
+				emailAddress, vacationMessage
 			});
 
 		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
 	}
 
-	public void deleteEmailAddress(long userId) {
+	public void deleteEmailAddress(long companyId, long userId) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("deleteEmailAddress");
 		}
@@ -108,14 +110,14 @@ public class MailServiceImpl implements MailService {
 		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
 	}
 
-	public void deleteUser(long userId, String companyMx) {
+	public void deleteUser(long companyId, long userId) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("deleteUser");
 		}
 
 		MethodWrapper methodWrapper = new MethodWrapper(
 			PropsValues.MAIL_HOOK_IMPL, "deleteUser",
-			new Object[] {new LongWrapper(userId), companyMx});
+			new Object[] {new LongWrapper(companyId), new LongWrapper(userId)});
 
 		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
 	}
@@ -128,38 +130,49 @@ public class MailServiceImpl implements MailService {
 		MessageBusUtil.sendMessage(DestinationNames.MAIL, mailMessage);
 	}
 
-	public void updateBlocked(long userId, List<String> blocked) {
+	public void updateBlocked(
+		long companyId, long userId, List<String> blocked) {
+
 		if (_log.isDebugEnabled()) {
 			_log.debug("updateBlocked");
 		}
 
 		MethodWrapper methodWrapper = new MethodWrapper(
 			PropsValues.MAIL_HOOK_IMPL, "updateBlocked",
-			new Object[] {new LongWrapper(userId), blocked});
+			new Object[] {
+				new LongWrapper(companyId), new LongWrapper(userId), blocked
+			});
 
 		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
 	}
 
-	public void updateEmailAddress(long userId, String emailAddress) {
+	public void updateEmailAddress(
+		long companyId, long userId, String emailAddress) {
+
 		if (_log.isDebugEnabled()) {
 			_log.debug("updateEmailAddress");
 		}
 
 		MethodWrapper methodWrapper = new MethodWrapper(
 			PropsValues.MAIL_HOOK_IMPL, "updateEmailAddress",
-			new Object[] {new LongWrapper(userId), emailAddress});
+			new Object[] {
+				new LongWrapper(companyId), new LongWrapper(userId),
+				emailAddress
+			});
 
 		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
 	}
 
-	public void updatePassword(long userId, String password) {
+	public void updatePassword(long companyId, long userId, String password) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("updatePassword");
 		}
 
 		MethodWrapper methodWrapper = new MethodWrapper(
 			PropsValues.MAIL_HOOK_IMPL, "updatePassword",
-			new Object[] {new LongWrapper(userId), password});
+			new Object[] {
+				new LongWrapper(companyId), new LongWrapper(userId), password
+			});
 
 		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
 	}

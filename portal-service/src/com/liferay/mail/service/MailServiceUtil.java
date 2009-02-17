@@ -36,48 +36,58 @@ import java.util.List;
 public class MailServiceUtil {
 
 	public static void addForward(
-		long userId, List<Filter> filters, List<String> emailAddresses,
-		boolean leaveCopy) {
+		long companyId, long userId, List<Filter> filters,
+		List<String> emailAddresses, boolean leaveCopy) {
 
-		_service.addForward(userId, filters, emailAddresses, leaveCopy);
+		_service.addForward(
+			companyId, userId, filters, emailAddresses, leaveCopy);
 	}
 
 	public static void addUser(
-		long userId, String password, String firstName, String middleName,
-		String lastName, String emailAddress) {
+		long companyId, long userId, String password, String firstName,
+		String middleName, String lastName, String emailAddress) {
 
 		_service.addUser(
-			userId, password, firstName, middleName, lastName, emailAddress);
+			companyId, userId, password, firstName, middleName, lastName,
+			emailAddress);
 	}
 
 	public static void addVacationMessage(
-		long userId, String emailAddress, String vacationMessage) {
+		long companyId, long userId, String emailAddress,
+		String vacationMessage) {
 
-		_service.addVacationMessage(userId, emailAddress, vacationMessage);
+		_service.addVacationMessage(
+			companyId, userId, emailAddress, vacationMessage);
 	}
 
-	public static void deleteEmailAddress(long userId) {
-		_service.deleteEmailAddress(userId);
+	public static void deleteEmailAddress(long companyId, long userId) {
+		_service.deleteEmailAddress(companyId, userId);
 	}
 
-	public static void deleteUser(long userId, String companyMx) {
-		_service.deleteUser(userId, companyMx);
+	public static void deleteUser(long companyId, long userId) {
+		_service.deleteUser(companyId, userId);
 	}
 
 	public static void sendEmail(MailMessage mailMessage) {
 		_service.sendEmail(mailMessage);
 	}
 
-	public static void updateBlocked(long userId, List<String> blocked) {
-		_service.updateBlocked(userId, blocked);
+	public static void updateBlocked(
+		long companyId, long userId, List<String> blocked) {
+
+		_service.updateBlocked(companyId, userId, blocked);
 	}
 
-	public static void updateEmailAddress(long userId, String emailAddress) {
-		_service.updateEmailAddress(userId, emailAddress);
+	public static void updateEmailAddress(
+		long companyId, long userId, String emailAddress) {
+
+		_service.updateEmailAddress(companyId, userId, emailAddress);
 	}
 
-	public static void updatePassword(long userId, String password) {
-		_service.updatePassword(userId, password);
+	public static void updatePassword(
+		long companyId, long userId, String password) {
+
+		_service.updatePassword(companyId, userId, password);
 	}
 
 	public void setService(MailService service) {

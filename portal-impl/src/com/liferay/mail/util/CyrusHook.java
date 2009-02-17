@@ -50,8 +50,8 @@ import java.util.List;
 public class CyrusHook implements Hook {
 
 	public void addForward(
-		long userId, List<Filter> filters, List<String> emailAddresses,
-		boolean leaveCopy) {
+		long companyId, long userId, List<Filter> filters,
+		List<String> emailAddresses, boolean leaveCopy) {
 
 		try {
 			if (emailAddresses != null) {
@@ -110,8 +110,8 @@ public class CyrusHook implements Hook {
 	}
 
 	public void addUser(
-		long userId, String password, String firstName, String middleName,
-		String lastName, String emailAddress) {
+		long companyId, long userId, String password, String firstName,
+		String middleName, String lastName, String emailAddress) {
 
 		try {
 
@@ -147,7 +147,8 @@ public class CyrusHook implements Hook {
 	}
 
 	public void addVacationMessage(
-		long userId, String emailAddress, String vacationMessage) {
+		long companyId, long userId, String emailAddress,
+		String vacationMessage) {
 
 		try {
 			String home = PropsUtil.get(PropsKeys.MAIL_HOOK_CYRUS_HOME);
@@ -172,7 +173,7 @@ public class CyrusHook implements Hook {
 		}
 	}
 
-	public void deleteEmailAddress(long userId) {
+	public void deleteEmailAddress(long companyId, long userId) {
 		try {
 			CyrusVirtualUtil.removeByUserId(userId);
 		}
@@ -181,7 +182,7 @@ public class CyrusHook implements Hook {
 		}
 	}
 
-	public void deleteUser(long userId, String companyMx) {
+	public void deleteUser(long companyId, long userId) {
 		try {
 
 			// User
@@ -243,7 +244,9 @@ public class CyrusHook implements Hook {
 		}
 	}
 
-	public void updateBlocked(long userId, List<String> blocked) {
+	public void updateBlocked(
+		long companyId, long userId, List<String> blocked) {
+
 		String home = PropsUtil.get(PropsKeys.MAIL_HOOK_CYRUS_HOME);
 
 		File file = new File(home + "/" + userId + ".procmail.blocked");
@@ -276,7 +279,9 @@ public class CyrusHook implements Hook {
 		}
 	}
 
-	public void updateEmailAddress(long userId, String emailAddress) {
+	public void updateEmailAddress(
+		long companyId, long userId, String emailAddress) {
+
 		try {
 			CyrusVirtualUtil.removeByUserId(userId);
 
@@ -289,7 +294,7 @@ public class CyrusHook implements Hook {
 		}
 	}
 
-	public void updatePassword(long userId, String password) {
+	public void updatePassword(long companyId, long userId, String password) {
 		CyrusUser user = null;
 
 		try {

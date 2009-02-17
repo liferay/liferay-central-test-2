@@ -46,8 +46,8 @@ import java.util.List;
 public class SendmailHook implements Hook {
 
 	public void addForward(
-		long userId, List<Filter> filters, List<String> emailAddresses,
-		boolean leaveCopy) {
+		long companyId, long userId, List<Filter> filters,
+		List<String> emailAddresses, boolean leaveCopy) {
 
 		try {
 			if (emailAddresses != null) {
@@ -78,8 +78,8 @@ public class SendmailHook implements Hook {
 	}
 
 	public void addUser(
-		long userId, String password, String firstName, String middleName,
-		String lastName, String emailAddress) {
+		long companyId, long userId, String password, String firstName,
+		String middleName, String lastName, String emailAddress) {
 
 		// Get add user command
 
@@ -102,20 +102,21 @@ public class SendmailHook implements Hook {
 			_log.error(e, e);
 		}
 
-		updatePassword(userId, password);
-		updateEmailAddress(userId, emailAddress);
+		updatePassword(companyId, userId, password);
+		updateEmailAddress(companyId, userId, emailAddress);
 	}
 
 	public void addVacationMessage(
-		long userId, String emailAddress, String vacationMessage) {
+		long companyId, long userId, String emailAddress,
+		String vacationMessage) {
 	}
 
-	public void deleteEmailAddress(long userId) {
-		updateEmailAddress(userId, "");
+	public void deleteEmailAddress(long companyId, long userId) {
+		updateEmailAddress(companyId, userId, "");
 	}
 
-	public void deleteUser(long userId, String companyMx) {
-		deleteEmailAddress(userId);
+	public void deleteUser(long companyId, long userId) {
+		deleteEmailAddress(companyId, userId);
 
 		// Get delete user command
 
@@ -139,7 +140,9 @@ public class SendmailHook implements Hook {
 		}
 	}
 
-	public void updateBlocked(long userId, List<String> blocked) {
+	public void updateBlocked(
+		long companyId, long userId, List<String> blocked) {
+
 		String home = PropsUtil.get(PropsKeys.MAIL_HOOK_SENDMAIL_HOME);
 
 		File file = new File(home + "/" + userId + "/.procmailrc");
@@ -178,7 +181,9 @@ public class SendmailHook implements Hook {
 		}
 	}
 
-	public void updateEmailAddress(long userId, String emailAddress) {
+	public void updateEmailAddress(
+		long companyId, long userId, String emailAddress) {
+
 		try {
 			String virtusertable =
 				PropsUtil.get(PropsKeys.MAIL_HOOK_SENDMAIL_VIRTUSERTABLE);
@@ -222,7 +227,7 @@ public class SendmailHook implements Hook {
 		}
 	}
 
-	public void updatePassword(long userId, String password) {
+	public void updatePassword(long companyId, long userId, String password) {
 
 		// Get change password command
 

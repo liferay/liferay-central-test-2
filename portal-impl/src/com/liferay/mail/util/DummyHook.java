@@ -37,8 +37,8 @@ import java.util.List;
 public class DummyHook implements Hook {
 
 	public void addForward(
-		long userId, List<Filter> filters, List<String> emailAddresses,
-		boolean leaveCopy) {
+		long companyId, long userId, List<Filter> filters,
+		List<String> emailAddresses, boolean leaveCopy) {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("addForward");
@@ -46,8 +46,8 @@ public class DummyHook implements Hook {
 	}
 
 	public void addUser(
-		long userId, String password, String firstName, String middleName,
-		String lastName, String emailAddress) {
+		long companyId, long userId, String password, String firstName,
+		String middleName, String lastName, String emailAddress) {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("addUser");
@@ -55,38 +55,43 @@ public class DummyHook implements Hook {
 	}
 
 	public void addVacationMessage(
-		long userId, String emailAddress, String vacationMessage) {
+		long companyId, long userId, String emailAddress,
+		String vacationMessage) {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("addVacationMessage");
 		}
 	}
 
-	public void deleteEmailAddress(long userId) {
+	public void deleteEmailAddress(long companyId, long userId) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("deleteEmailAddress");
 		}
 	}
 
-	public void deleteUser(long userId, String companyMx) {
+	public void deleteUser(long companyId, long userId) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("deleteUser");
 		}
 	}
 
-	public void updateBlocked(long userId, List<String> blocked) {
+	public void updateBlocked(
+		long companyId, long userId, List<String> blocked) {
+
 		if (_log.isDebugEnabled()) {
 			_log.debug("updateBlocked");
 		}
 	}
 
-	public void updateEmailAddress(long userId, String emailAddress) {
+	public void updateEmailAddress(
+		long companyId, long userId, String emailAddress) {
+
 		if (_log.isDebugEnabled()) {
 			_log.debug("updateEmailAddress");
 		}
 	}
 
-	public void updatePassword(long userId, String password) {
+	public void updatePassword(long companyId, long userId, String password) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("updatePassword");
 		}
