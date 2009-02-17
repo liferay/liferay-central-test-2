@@ -135,7 +135,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 
 		validateFriendlyURL(
-			groupId, user.getCompanyId(), classNameId, classPK, friendlyURL);
+			user.getCompanyId(), groupId, classNameId, classPK, friendlyURL);
 
 		Group group = groupPersistence.create(groupId);
 
@@ -663,7 +663,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			group.getClassPK(), StringPool.BLANK, friendlyURL);
 
 		validateFriendlyURL(
-			group.getGroupId(), group.getCompanyId(), group.getClassNameId(),
+			group.getCompanyId(), group.getGroupId(), group.getClassNameId(),
 			group.getClassPK(), friendlyURL);
 
 		group.setFriendlyURL(friendlyURL);
@@ -697,7 +697,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 
 		validateFriendlyURL(
-			group.getGroupId(), group.getCompanyId(), group.getClassNameId(),
+			group.getCompanyId(), group.getGroupId(), group.getClassNameId(),
 			group.getClassPK(), friendlyURL);
 
 		group.setName(name);
