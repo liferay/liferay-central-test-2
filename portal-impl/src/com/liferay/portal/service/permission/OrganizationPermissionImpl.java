@@ -76,9 +76,16 @@ public class OrganizationPermissionImpl implements OrganizationPermission {
 		if ((!actionId.equals(ActionKeys.MANAGE_SUBORGANIZATIONS)) &&
 			(organization != null)) {
 
+			Organization parentOrganization =
+				organization.getParentOrganization();
+
+			Group parentGroup = parentOrganization.getGroup();
+
+			long parentGroupId = parentGroup.getGroupId();
+
 			if (contains(
-					permissionChecker, groupId,
-					organization.getParentOrganizationId(),
+					permissionChecker, parentGroupId,
+					parentOrganization.getOrganizationId(),
 					ActionKeys.MANAGE_SUBORGANIZATIONS)) {
 
 				return true;
