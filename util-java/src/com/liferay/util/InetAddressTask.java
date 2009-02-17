@@ -22,8 +22,6 @@
 
 package com.liferay.util;
 
-import com.liferay.portal.kernel.util.Validator;
-
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -42,12 +40,12 @@ public class InetAddressTask extends Task {
 		try {
 			InetAddress localHost = InetAddress.getLocalHost();
 
-			if (Validator.isNotNull(_hostAddressProperty)) {
+			if (_hostAddressProperty != null) {
 				getProject().setUserProperty(
 					_hostAddressProperty, localHost.getHostAddress());
 			}
 
-			if (Validator.isNotNull(_hostNameProperty)) {
+			if (_hostNameProperty != null) {
 				getProject().setUserProperty(
 					_hostNameProperty, localHost.getHostName());
 			}
