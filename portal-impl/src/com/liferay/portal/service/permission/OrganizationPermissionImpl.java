@@ -59,7 +59,6 @@ public class OrganizationPermissionImpl implements OrganizationPermission {
 		Organization organization = null;
 
 		long groupId = 0;
-
 		long parentOrganizationId =
 			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID;
 
@@ -70,7 +69,6 @@ public class OrganizationPermissionImpl implements OrganizationPermission {
 			Group group = organization.getGroup();
 
 			groupId = group.getGroupId();
-
 			parentOrganizationId = organization.getParentOrganizationId();
 		}
 
@@ -81,14 +79,13 @@ public class OrganizationPermissionImpl implements OrganizationPermission {
 		if ((!actionId.equals(ActionKeys.MANAGE_SUBORGANIZATIONS)) &&
 			(organization != null)) {
 
-			Organization parentOrganization =
-				organization.getParentOrganization();
+			if (!organization.isRoot()) {
+				Organization parentOrganization =
+					organization.getParentOrganization();
 
-			if (parentOrganization != null) {
 				Group parentGroup = parentOrganization.getGroup();
 
 				groupId = parentGroup.getGroupId();
-
 				parentOrganizationId = parentOrganization.getOrganizationId();
 			}
 
