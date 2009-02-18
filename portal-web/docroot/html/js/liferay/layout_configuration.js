@@ -90,31 +90,35 @@
 
 				body.addClass('lfr-has-sidebar');
 
-				instance._dialog = new Expanse.Popup(
+				instance._dialog = Liferay.Popup(
 					{
-						header: Liferay.Language.get('add-application'),
+						width: popupWidth,
+						message: '<div class="loading-animation" />',
+						position: [5,5],
+						resizable: false,
+						title: Liferay.Language.get("add-application"),
 						onClose: function() {
 							instance.menu = null;
 							body.removeClass('lfr-has-sidebar');
-						},
-						resizable: false,
+						}
+					}
+				);
+
+				jQuery.ajax(
+					{
 						url: url,
-						urlData: {
+						data: {
 							p_l_id: plid,
 							p_p_id: ppid,
 							p_p_state: 'exclusive',
 							doAsUserId: doAsUserId
 						},
-						urlSuccess: function(message) {
-							instance._dialog.setBody(message);
+						success: function(message) {
+							instance._dialog.html(message);
 							instance._loadContent();
-						},
-						xy: [5,5],
-						width: popupWidth
+						}
 					}
 				);
-
-				instance._dialogBody = jQuery(instance._dialog.body);
 			}
 		},
 
@@ -212,7 +216,7 @@
 
 			Liferay.bind('closePortlet', instance._onPortletClose, instance);
 
-			instance._portletItems = instance._dialogBody.find('div.lfr-portlet-item');
+			instance._portletItems = instance._dialog.find('div.lfr-portlet-item');
 			var portlets = instance._portletItems;
 
 			portlets.find('a').click(
@@ -224,7 +228,7 @@
 				}
 			);
 
-			var zIndex = instance._dialogBody.parents('.ui-dialog').css('z-index');
+			var zIndex = instance._dialog.parents('.ui-dialog').css('z-index');
 
 			instance._helper = jQuery(Liferay.Template.PORTLET).css('z-index', zIndex + 10);
 			instance._helper.addClass('ui-proxy generic-portlet not-intersecting');

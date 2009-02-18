@@ -283,60 +283,45 @@
 .ui-tabs .last.toggle {
 }
 
-/* ---------- Container ---------- */
+/* ---------- Dialog ---------- */
 
-.exp-overlay, .exp-panel-container {
+.ui-dialog {
 }
 
-.exp-panel {
+.ui-dialog .ui-dialog-titlebar {
 }
 
-.exp-panel .exp-header {
+.ie .ui-dialog .ui-dialog-container {
 }
 
-.ie6 .exp-panel .exp-header {
+.ie6 .ui-dialog .ui-dialog-titlebar {
 }
 
-.exp-panel .container-close {
+.ui-dialog.ui-draggable .ui-dialog-titlebar {
 }
 
-.exp-panel .exp-body {
+.ui-dialog .ui-dialog-titlebar-close {
 }
 
-.exp-panel.ui-resizable .exp-body {
+.ui-dialog .ui-dialog-titlebar-close span {
 }
 
-.ie6 body.masked select {
+.ui-dialog.has-title .ui-dialog-title {
 }
 
-.ie6 div.exp-panel-container select {
+.ui-dialog .ui-dialog-content {
 }
 
-.ie6 div.drag select {
+.ui-dialog.ui-resizable .ui-dialog-content {
 }
 
-.ie6 div.hide-select select {
+.ui-dialog .ui-dialog-buttonpane {
 }
 
-.mask {
+.ui-dialog .ui-dialog-buttonpane button {
 }
 
-.ie .mask {
-}
-
-.hide-scrollbars, .hide-scrollbars * {
-}
-
-.hide-scrollbars select {
-}
-
-.show-scrollbars {
-}
-
-.exp-panel-container.show-scrollbars {
-}
-
-.exp-panel-container.show-scrollbars .underlay {
+.ui-dialog.generic-dialog .ui-resizable-handle {
 }
 
 /* ---------- Date picker ---------- */

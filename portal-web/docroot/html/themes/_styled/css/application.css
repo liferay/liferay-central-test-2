@@ -152,7 +152,7 @@
 }
 
 .ie6 .ui-resizable-wrap {
-	zoom: 1;
+    zoom: 1;
 }
 
 .ui-resizable-handle {
@@ -192,7 +192,7 @@
 }
 
 .ie6 .ui-resizable-handle-t, .ie6 .ui-resizable-handle-b {
-	zoom: 1;
+    zoom: 1;
 }
 
 .ui-resizable-handle-l, .ui-resizable-handle-r {
@@ -250,7 +250,7 @@
 }
 
 .ui-resizable-hover .ui-resizable-handle, .ui-resizable-hidden .ui-resizable-handle {
-	opacity: 0;
+    opacity: 0;
 }
 
 .ie .ui-resizable-hover .ui-resizable-handle, .ie .ui-resizable-hidden .ui-resizable-handle {
@@ -258,7 +258,7 @@
 }
 
 .ui-resizable-ghost {
-	opacity: .5;
+    opacity: .5;
 }
 
 .ie .ui-resizable-ghost {
@@ -311,17 +311,17 @@
 }
 
 .ui-resizable-status {
-	display: none;
-	font-size: 80%;
-	left: -999px;
-	padding: 2px;
-	position: absolute;
-	top: -999px;
-	z-index: 9999;
+    display: none;
+    font-size: 80%;
+    left: -999px;
+    padding: 2px;
+    position: absolute;
+    top: -999px;
+    z-index: 9999;
 }
 
 .ui-resizable-status strong, .ui-resizable-status em {
-	padding: 1px;
+    padding: 1px;
 }
 
 .ie6 .ui-resizable-status, .ie6 .ui-resizable-status strong, .ie6 .ui-resizable-status em {
@@ -468,110 +468,79 @@
 	float: right;
 }
 
-/* ---------- Container ---------- */
+/* ---------- Dialog ---------- */
 
-.exp-overlay, .exp-panel-container {
-	position: absolute;
-	visibility: hidden;
-	z-index: 2;
-}
-
-.exp-panel {
+.ui-dialog {
 	background-color: #FFF;
 	border: 2px solid #828F95;
-	left: 0;
 	padding: 4px;
-	top: 0;
 }
 
-.exp-panel .exp-header {
-	background: #1E2529 url(../images/arrows/04_right.png) no-repeat 7px 50%;
+.ui-dialog .ui-dialog-titlebar {
+	background: #1E2529;
 	color: #FFF;
 	font-size: 14px;
 	font-weight: bold;
-	padding: 5px;
-	padding-left: 20px;
+	min-height: 28px;
+	padding: 0;
 	position: relative;
 	z-index: 1;
 }
 
-.ie6 .exp-panel .exp-header {
-	height: 29px;
-}
-
-.exp-panel .container-close {
-	background: url(../images/application/close.png) no-repeat;
-	cursor: pointer;
-	height: 15px;
-	margin: 0px;
-	overflow: hidden;
-	padding: 0px;
-	position: absolute;
-	right: 10px;
-	text-decoration: none;
-	text-indent: -9999em;
-	top: 10px;
-	visibility: inherit;
-	width: 15px;
-	z-index: 6;
-}
-
-.exp-panel .exp-body {
-	padding: 7px;
-}
-
-.exp-panel.ui-resizable .exp-body {
-	padding: 14px;
-}
-
-.ie6 body.masked select {
-	visibility:hidden;
-}
-
-.ie6 div.exp-panel-container select {
-	visibility:inherit;
-}
-
-.ie6 div.drag select {
-	visibility:hidden;
-}
-
-.ie6 div.hide-select select {
-	visibility:hidden;
-}
-
-.mask {
-	background-color: #000;
-	display: none;
-	left: 0;
-	opacity: 0.5;
-	position: absolute;
-	top: 0;
+.ie .ui-dialog .ui-dialog-container {
 	z-index: 1;
 }
 
-.ie .mask {
-	filter: alpha(opacity=25);
+.ie6 .ui-dialog .ui-dialog-titlebar {
+	height: 29px;
 }
 
-.hide-scrollbars, .hide-scrollbars * {
-	overflow: hidden;
+.ui-dialog.ui-draggable .ui-dialog-titlebar {
+	cursor: move;
 }
 
-.hide-scrollbars select {
+.ui-dialog .ui-dialog-titlebar-close {
+	background: url(../images/application/close.png) no-repeat;
+	height: 16px;
+	position: absolute;
+	right: 5px;
+	top: 6px;
+	width: 16px;
+}
+
+.ui-dialog .ui-dialog-titlebar-close span {
 	display: none;
 }
 
-.show-scrollbars {
-	overflow: auto;
+.ui-dialog.has-title .ui-dialog-title {
+	background: url(../images/arrows/04_right.png) no-repeat 7px 50%;
+	display: block;
+	font-weight: bold;
+	padding: 5px;
+	padding-left: 20px;
 }
 
-.exp-panel-container.show-scrollbars {
-	overflow: visible;
+.ui-dialog .ui-dialog-content {
+	padding: 7px;
 }
 
-.exp-panel-container.show-scrollbars .underlay {
-	overflow: auto;
+.ui-dialog.ui-resizable .ui-dialog-content {
+	padding: 14px;
+}
+
+.ui-dialog .ui-dialog-buttonpane {
+	bottom: 8px;
+	position: absolute;
+	right: 12px;
+	text-align: right;
+	width: 100%;
+}
+
+.ui-dialog .ui-dialog-buttonpane button {
+	margin: 6px;
+}
+
+.ui-dialog.generic-dialog .ui-resizable-handle {
 }
 
 /* ---------- Date picker ---------- */

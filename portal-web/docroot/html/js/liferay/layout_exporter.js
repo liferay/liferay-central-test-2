@@ -67,19 +67,17 @@ Liferay.LayoutExporter = {
 
 		contents +=
 					"<input type='submit' value='" + Liferay.Language.get('proceed') + "' />" +
-					"<input type='button' value='" + Liferay.Language.get('cancel') + "' onClick='Expanse.Popup.close(this);' />" +
+					"<input type='button' value='" + Liferay.Language.get('cancel') + "' onClick='Liferay.Popup.close(this);' />" +
 				"</form>" +
 			"</div>";
 
-		new Expanse.Popup(
-			{
-				body: contents,
-				fixedcenter: true,
-				header: title,
-				modal: true,
-				width: 300
-			}
-		);
+		Liferay.Popup({
+			'title': title,
+			message: contents,
+			noCenter: false,
+			modal: true,
+			width: 300
+		});
 	},
 
 	publishToLive: function(options) {
@@ -93,14 +91,22 @@ Liferay.LayoutExporter = {
 			title = Liferay.Language.get(messageId);
 		}
 
-		var exportLayoutsPopup = new Expanse.Popup(
+		var exportLayoutsPopup = Liferay.Popup(
 			{
-				fixedcenter: true,
-				header: title,
+				title: title,
 				modal: true,
-				messageId: messageId,
+				width: 600,
+				overflow: 'auto',
+				messageId: messageId
+			}
+		);
+
+		jQuery.ajax(
+			{
 				url: url,
-				width: 600
+				success: function(response) {
+					jQuery(exportLayoutsPopup).html(response);
+				}
 			}
 		);
 	},

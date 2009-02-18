@@ -63,24 +63,21 @@
 		var messageId = "<portlet:namespace />popup_" + id;
 		var buttonsId = "<portlet:namespace />buttons_" + id;
 
-		var popup = new Expanse.Popup(
-			{
-				body: html,
-				draggable: false,
-				header: false,
-				messageId: messageId,
-				modal: true,
-				onClose: function() {
-					var buttons = jQuery("#<portlet:namespace />buttons_" + id);
+		var popup = Liferay.Popup({
+			width: winWidth,
+			modal: true,
+			noDraggable: true,
+			noTitleBar: true,
+			message: html,
+			messageId: messageId,
+			onClose: function() {
+				var buttons = jQuery("#<portlet:namespace />buttons_" + id);
 
-					jQuery("#<portlet:namespace />buttonsContainer_" + id).append(buttons);
-				},
-				width: winWidth,
-				xy: ['center', 20]
+				jQuery("#<portlet:namespace />buttonsContainer_" + id).append(buttons);
 			}
-		);
+		});
 
-		jQuery(popup.body).addClass('image-popup');
+		jQuery(popup).addClass('image-popup');
 
 		var buttons = jQuery("#" + buttonsId);
 

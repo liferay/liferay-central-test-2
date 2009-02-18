@@ -1,5 +1,8 @@
 YAHOO.util.DDProxy.dragElId = 'EXP_PROXY';
 
+Expanse.Dom = YAHOO.util.Dom;
+Expanse.Event = YAHOO.util.Event;
+
 Expanse.DragDrop = YAHOO.util.DragDropMgr;
 
 Expanse.Draggable = new Expanse.Class(YAHOO.util.DD);

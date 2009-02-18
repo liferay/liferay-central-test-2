@@ -161,9 +161,8 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			data.<portlet:namespace />principal = document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.LDAP_SECURITY_PRINCIPAL %>)'].value;
 			data.<portlet:namespace />credentials = document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.LDAP_SECURITY_CREDENTIALS %>)'].value;
 
-			var popup = new Expanse.Popup(
+			var popup = Liferay.Popup(
 				{
-					fixedcenter: true,
 					modal: true,
 					url: url,
 					urlData: data,

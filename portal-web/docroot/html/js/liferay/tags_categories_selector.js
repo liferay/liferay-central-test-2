@@ -47,7 +47,7 @@ Liferay.TagsCategoriesSelector = new Expanse.Class({
 		var value = curTagsCategories.splice(id, 1);
 
 		if (instance._popupVisible) {
-			jQuery('input[type=checkbox][value$=' + value + ']', instance.selectTagCategoryPopup.body).attr('checked', false);
+			jQuery('input[type=checkbox][value$=' + value + ']', instance.selectTagCategoryPopup).attr('checked', false);
 		}
 
 		instance._update();
@@ -126,21 +126,23 @@ Liferay.TagsCategoriesSelector = new Expanse.Class({
 				);
 
 				instance._update();
-				instance.selectTagCategoryPopup.closePopup();
+				Liferay.Popup.close(instance.selectTagCategoryPopup);
 			}
 		);
 
 		mainContainer.append(searchContainer).append(container).append(saveBtn);
 
 		if (!instance.selectTagCategoryPopup) {
-			var popup = new Expanse.Popup(
+			var popup = Liferay.Popup(
 				{
-					body: mainContainer[0],
 					className: 'lfr-tag-selector',
-					fixedcenter: true,
-					header: Liferay.Language.get('categories'),
+					message: mainContainer[0],
 					modal: false,
-					onOpen: function() {
+					position: 'center',
+					resizable: false,
+					title: Liferay.Language.get('categories'),
+					width: 400,
+					open: function() {
  						var inputSearch = jQuery('.lfr-tag-search-input');
 
 						Liferay.Util.defaultValue(inputSearch, Liferay.Language.get('search'));
@@ -148,12 +150,9 @@ Liferay.TagsCategoriesSelector = new Expanse.Class({
 					onClose: function() {
 						instance._popupVisible = false;
 						instance.selectTagCategoryPopup = null;
-					},
-					resizable: false,
-					width: 400
+					}
 				}
 			);
-
 			instance.selectTagCategoryPopup = popup;
 		}
 		instance._popupVisible = true;

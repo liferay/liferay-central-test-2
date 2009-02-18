@@ -25,24 +25,22 @@ Liferay.PortletCSS = {
 			}
 
 			if (!instance._currentPopup) {
-				instance._currentPopup = new Expanse.Popup(
-					{
-						body: content[0],
-						onClose: function() {
-							instance._newPanel.removeClass('instantiated');
-							instance._newPanel.hide().appendTo('body');
-							instance._currentPopup = null;
+				instance._currentPopup = Liferay.Popup({
+					width: 820,
+					message: content,
+					modal: false,
+					noCenter: true,
+					position: [20, 20],
+					onClose: function() {
+						instance._newPanel.removeClass('instantiated');
+						instance._newPanel.hide().appendTo('body');
+						instance._currentPopup = null;
 
-							if (Liferay.Browser.isIe() && Liferay.Browser.getMajorVersion() == 6) {
-								window.location.reload(true);
-							}
-						},
-						width: 820,
-						xy: [20, 20]
+						if (Liferay.Browser.isIe() && Liferay.Browser.getMajorVersion() == 6) {
+							window.location.reload(true);
+						}
 					}
-				);
-
-				instance._currentPopupBody = jQuery(instance._currentPopup.body);
+				});
 			}
 
 			if (!instance._newPanel.length) {
@@ -56,8 +54,8 @@ Liferay.PortletCSS = {
 							doAsUserId: themeDisplay.getDoAsUserIdEncoded()
 						},
 						success: function(message) {
-							instance._currentPopupBody.html(message);
-							instance._newPanel = instance._currentPopupBody.find('#portlet-set-properties');
+							instance._currentPopup.html(message);
+							instance._newPanel = instance._currentPopup.find('#portlet-set-properties');
 							instance._loadContent();
 						}
 					}

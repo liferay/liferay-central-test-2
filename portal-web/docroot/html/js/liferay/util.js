@@ -480,36 +480,47 @@ Liferay.Util = {
 					if (!clicked) {
 						var form = jQuery([]);
 
-						var popup = new Expanse.Popup(
+						var popup = Liferay.Popup(
 							{
 								height: 640,
 								width: 680,
-								onClose: function() {
-									Expanse.getDocument().unbind('popupResize.liferay');
-									clicked = false;
-								},
-								onResize: function(options) {
-									var panelBody = this.body;
+								noCenter: true,
+								title: '',
+								resize: function(e, ui) {
+									var cssData = ui.size;
+									var dimensions = {};
 
-									var dimensions = {
-										height: panelBody.offsetHeight,
-										width: panelBody.offsetWidth - 20
-									};
+									if (cssData.height) {
+										dimensions.height = cssData.height - 130;
+									}
+
+									if (cssData.width) {
+										dimensions.width = cssData.width - 20;
+									}
 
 									form.css(dimensions);
 
-									Expanse.getDocument().trigger('popupResize');
+									jQuery(document).trigger('popupResize');
 								},
+								onClose: function() {
+									jQuery(document).unbind('popupResize.liferay');
+									clicked = false;
+								}
+							}
+						);
+
+						jQuery.ajax(
+							{
 								url: url + '&rt=' + Liferay.Util.randomInt(),
-								urlSuccess: function(message) {
-									var body = jQuery(popup.body);
+								success: function(message) {
+									popup.find('.loading-animation').remove();
 
-									body.html(message);
+									popup.append(message);
 
-									form = body.find('form');
+									form = popup.find('form');
 
 									if (textarea) {
-										var usingPlainEditor = body.find('.lfr-textarea').length;
+										var usingPlainEditor = popup.find('.lfr-textarea').length;
 
 										Liferay.Util.resizeTextarea(textarea, !usingPlainEditor, true);
 									}
@@ -750,7 +761,7 @@ Liferay.Util = {
 				var pageBody;
 
 				if (resizeToInlinePopup) {
-					pageBody = el.parents('.exp-body:first');
+					pageBody = el.parents('.ui-dialog:first');
 				}
 				else {
 					pageBody = jQuery('body');
