@@ -64,6 +64,10 @@ import javax.servlet.http.HttpSession;
 public class SharepointFilter extends BasePortalFilter {
 
 	protected boolean isSharepointRequest(String uri) {
+		if (uri == null) {
+			return false;
+		}
+
 		if (uri.endsWith("*.asmx")) {
 			return true;
 		}
@@ -174,7 +178,8 @@ public class SharepointFilter extends BasePortalFilter {
 
 		String userAgent = request.getHeader(HttpHeaders.USER_AGENT);
 
-		if ((userAgent.startsWith(
+		if ((userAgent != null) &&
+			(userAgent.startsWith(
 				"Microsoft Data Access Internet Publishing") ||
 			 userAgent.startsWith("Microsoft Office Protocol Discovery")) &&
 			method.equals(HttpMethods.OPTIONS)) {
