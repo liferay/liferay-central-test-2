@@ -53,18 +53,18 @@
 
 			var url = themeDisplay.getPathMain() + '/layout_configuration/templates';
 
-			Liferay.Popup(
+			new Expanse.Popup(
 				{
+					header: Liferay.Language.get('layout'),
 					modal: true,
-					position: ['center', 100],
-					title: Liferay.Language.get('layout'),
 					url: url,
 					urlData: {
 						p_l_id: themeDisplay.getPlid(),
 						doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 						redirect: Liferay.currentURL
 					},
-					width: 700
+					width: 700,
+					xy: ['center', 100]
 				}
 			);
 		},
@@ -474,7 +474,6 @@
 			instance.goingUp = false;
 
 			instance.lastY = 0;
-
 		},
 
 		endDrag: function(event) {
