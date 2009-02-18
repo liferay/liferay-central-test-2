@@ -47,17 +47,30 @@ public class ContentUtil {
 		return _instance._get(location, all);
 	}
 
+	public static String get(ClassLoader classLoader, String location) {
+		return _instance._get(classLoader, location, false);
+	}
+
+	public static String get(
+		ClassLoader classLoader, String location, boolean all) {
+
+		return _instance._get(classLoader, location, all);
+	}
+
 	private ContentUtil() {
 		_contentPool = new HashMap<String, String>();
 	}
 
 	private String _get(String location, boolean all) {
+		return _get(getClass().getClassLoader(), location, all);
+	}
+
+	private String _get(ClassLoader classLoader, String location, boolean all) {
 		String content = _contentPool.get(location);
 
 		if (content == null) {
 			try {
-				content = StringUtil.read(
-					getClass().getClassLoader(), location, all);
+				content = StringUtil.read(classLoader, location, all);
 
 				_put(location, content);
 			}
