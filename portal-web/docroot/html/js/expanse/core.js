@@ -5,6 +5,12 @@ window.Expanse = {
 
 	extend: jQuery.extend,
 
+	generateId: function(el, prefix) {
+		prefix = prefix || 'exp-gen-';
+
+		return YAHOO.util.Dom.generateId(el, prefix);
+	},
+
 	get: function(el) {
 		var obj = el;
 
@@ -94,6 +100,9 @@ window.Expanse = {
 		return baseObject;
 	}
 };
+
+Expanse.Dom = YAHOO.util.Dom;
+Expanse.Event = YAHOO.util.Event;
 
 Expanse.onReady = function(fn, obj, scope) {
 	if (obj || scope) {

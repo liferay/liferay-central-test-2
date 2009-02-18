@@ -19,12 +19,6 @@ Expanse.extend(Expanse,
 			}
 		},
 
-		generateId: function(el, prefix) {
-			prefix = prefix || 'exp-gen-';
-
-			return YAHOO.util.Dom.generateId(el, prefix);
-		},
-
 		urlEncode: function(obj) {
 			var buffer = [];
 

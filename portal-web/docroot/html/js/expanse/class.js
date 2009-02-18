@@ -1,19 +1,7 @@
-Expanse.extend(Function.prototype,
-	{
-		parentize: function(current) {
-			var instance = this;
-
-			return function() {
-				this.parent = instance;
-
-				return current.apply(this, arguments);
-			}
-		}
-	}
-);
-
 Expanse.Class = function(properties) {
 	var instance = this;
+
+	var superclass = instance;
 
 	if (typeof properties == 'function') {
 		var initialize = properties;
@@ -21,6 +9,8 @@ Expanse.Class = function(properties) {
 		properties = properties.prototype;
 
 		properties.initialize = initialize;
+
+		superclass = initialize.superclass || superclass;
 	}
 
 	if (!properties.implement) {
@@ -45,6 +35,7 @@ Expanse.Class = function(properties) {
 			properties = properties.prototype;
 
 			properties.initialize = initialize;
+
 		}
 
 		for (var p in instance) {
@@ -78,11 +69,11 @@ Expanse.Class = function(properties) {
 	Class.implement = this.implement;
 	Class.prototype = properties;
 
-	Class.prototype.superclass = instance;
-	Class.superclass = instance;
+	Class.prototype.superclass = superclass;
+	Class.superclass = superclass;
 
-	Class.prototype.constructor = Class;
-	Class.constructor = Class;
+	Class.prototype.constructor = Class.prototype.constructor || Class;
+	Class.constructor = Class.constructor || Class;
 
 	return Class;
 };
@@ -98,7 +89,7 @@ Expanse.Class.prototype = {
 			var current = properties[property];
 
 			if (typeof previous == 'function' && previous && previous != current) {
-				current = previous.parentize(current) || current;
+				current = Expanse.Class.parentize(previous, current) || current;
 			}
 
 			proto[property] = current;
@@ -109,8 +100,8 @@ Expanse.Class.prototype = {
 		Class.prototype.superclass = instance;
 		Class.superclass = instance;
 
-		Class.prototype.constructor = Class;
-		Class.constructor = Class;
+		Class.prototype.constructor = Class.prototype.constructor || Class;
+		Class.constructor = Class.constructor || Class;
 
 		return Class;
 	},
@@ -121,5 +112,13 @@ Expanse.Class.prototype = {
 		for (var property in properties) {
 			instance.prototype[property] = properties[property];
 		}
+	}
+};
+
+Expanse.Class.parentize = function(previous, current) {
+	return function() {
+		this.parent = previous;
+
+		return current.apply(this, arguments);
 	}
 };
