@@ -113,18 +113,23 @@ public class PasswordTrackerLocalServiceImpl
 	}
 
 	public void trackPassword(long userId, String encPassword)
-		throws SystemException {
+		throws PortalException, SystemException {
 
-		long passwordTrackerId = counterLocalService.increment();
+		PasswordPolicy passwordPolicy =
+			passwordPolicyLocalService.getPasswordPolicyByUserId(userId);
 
-		PasswordTracker passwordTracker = passwordTrackerPersistence.create(
-			passwordTrackerId);
+		if (passwordPolicy.getHistory()) {
+			long passwordTrackerId = counterLocalService.increment();
 
-		passwordTracker.setUserId(userId);
-		passwordTracker.setCreateDate(new Date());
-		passwordTracker.setPassword(encPassword);
+			PasswordTracker passwordTracker = passwordTrackerPersistence.create(
+				passwordTrackerId);
 
-		passwordTrackerPersistence.update(passwordTracker, false);
+			passwordTracker.setUserId(userId);
+			passwordTracker.setCreateDate(new Date());
+			passwordTracker.setPassword(encPassword);
+
+			passwordTrackerPersistence.update(passwordTracker, false);
+		}
 	}
 
 }
