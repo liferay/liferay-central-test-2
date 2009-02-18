@@ -62,7 +62,7 @@ public class CombineToParentFolderTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//body/div[2]/ul/li[1]/a")) {
+				if (selenium.isElementPresent("link=Edit")) {
 					break;
 				}
 			}
@@ -72,7 +72,7 @@ public class CombineToParentFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[1]/a"));
+		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("_28_mergeWithParentFolderCheckbox");
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
