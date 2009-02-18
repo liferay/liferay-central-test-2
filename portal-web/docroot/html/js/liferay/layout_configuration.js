@@ -342,7 +342,7 @@
 		startDrag: function() {
 			var instance = this;
 
-			instance.parent.apply(instance, arguments);
+			instance._super.apply(instance, arguments);
 
 			Dom.setStyle(instance.getEl(), 'visibility', '');
 		},
@@ -372,7 +372,7 @@
 		_updateProxy: function() {
 			var instance = this;
 
-			instance.parent.apply(instance, arguments);
+			instance._super.apply(instance, arguments);
 
 			var original = instance.getEl();
 			var proxy = instance._getProxy();
@@ -440,7 +440,7 @@
 
 			jQuery('#column-1').append(instance.getDragEl());
 
-			instance.parent.apply(instance, arguments);
+			instance._super.apply(instance, arguments);
 		},
 
 		startDrag: function() {
@@ -474,7 +474,7 @@
 		_updateProxy: function() {
 			var instance = this;
 
-			instance.parent.apply(instance, arguments);
+			instance._super.apply(instance, arguments);
 
 			var original = instance.getEl();
 			var proxy = instance._getProxy();

@@ -32,7 +32,7 @@ Liferay.PanelFloating = Liferay.Panel.extend({
 		instance._trigger = jQuery(options.trigger);
 		instance._containerWidth = options.width;
 
-		instance.parent(options);
+		instance._super(options);
 
 		if (!instance._inContainer) {
 			instance._container = jQuery('<div class="lfr-floating-container"></div>');
@@ -92,7 +92,7 @@ Liferay.PanelFloating = Liferay.Panel.extend({
 	onTitleClick: function(el) {
 		var instance = this;
 
-		instance.parent(el);
+		instance._super(el);
 
 		var currentContainer = jQuery(el).parents('.lfr-panel');
 		var sets = currentContainer.find('ul');

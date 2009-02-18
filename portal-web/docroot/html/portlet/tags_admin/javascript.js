@@ -1453,7 +1453,7 @@
 		initialize: function() {
 			var instance = this;
 
-			instance.parent.apply(instance, arguments);
+			instance._super.apply(instance, arguments);
 
 			instance.removeInvalidHandleType('a');
 
@@ -1481,7 +1481,7 @@
 		onDrag: function(event) {
 			var instance = this;
 
-			instance.parent.apply(instance, arguments);
+			instance._super.apply(instance, arguments);
 
 			var y = Event.getPageY(event);
 
@@ -1521,7 +1521,7 @@
 		onDragDrop: function() {
 			var instance = this;
 
-			instance.parent.apply(this, arguments);
+			instance._super.apply(this, arguments);
 
 			instance._removeScrollInterval();
 		},

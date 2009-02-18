@@ -88,8 +88,8 @@ Expanse.Class.prototype = {
 			var previous = proto[property];
 			var current = properties[property];
 
-			if (typeof previous == 'function' && previous && previous != current) {
-				current = Expanse.Class.parentize(previous, current) || current;
+			if (previous && typeof previous == 'function' && previous != current) {
+				current = Expanse.Class.createSuper(previous, current) || current;
 			}
 
 			proto[property] = current;
@@ -115,9 +115,9 @@ Expanse.Class.prototype = {
 	}
 };
 
-Expanse.Class.parentize = function(previous, current) {
+Expanse.Class.createSuper = function(previous, current) {
 	return function() {
-		this.parent = previous;
+		this._super = previous;
 
 		return current.apply(this, arguments);
 	}

@@ -361,7 +361,7 @@
 		initialize: function() {
 			var instance = this;
 
-			instance.parent.apply(instance, arguments);
+			instance._super.apply(instance, arguments);
 
 			var el = instance.getDragEl();
 
@@ -378,7 +378,7 @@
 		startDrag: function(x, y) {
 			var instance = this;
 
-			instance.parent.apply(instance, arguments);
+			instance._super.apply(instance, arguments);
 
 			var proxy = instance.getDragEl();
 			var original = instance.getEl();
@@ -469,7 +469,7 @@
 		initialize: function() {
 			var instance = this;
 
-			instance.parent.apply(this, arguments);
+			instance._super.apply(this, arguments);
 
 			instance.goingUp = false;
 
@@ -644,7 +644,7 @@
 		startDrag: function(x, y) {
 			var instance = this;
 
-			instance.parent.apply(instance, arguments);
+			instance._super.apply(instance, arguments);
 
 			var proxy = instance.getDragEl();
 			var original = instance.getEl();
@@ -685,7 +685,7 @@
 		endDrag: function(event) {
 			var instance = this;
 
-			instance.parent.apply(instance, arguments);
+			instance._super.apply(instance, arguments);
 
 			var portlet = instance.getEl();
 			var proxy = instance.getDragEl();
@@ -705,7 +705,7 @@
 		startDrag: function(x, y) {
 			var instance = this;
 
-			instance.parent.apply(instance, arguments);
+			instance._super.apply(instance, arguments);
 
 			var original = instance.getEl();
 

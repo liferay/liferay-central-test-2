@@ -159,7 +159,7 @@ Expanse.Resize.implement({
 		initialize: function(el, group, options) {
 			var instance = this;
 
-			instance.parent.apply(instance, arguments);
+			instance._super.apply(instance, arguments);
 
 			instance.goingUp = false;
 			var el = instance.getEl();
@@ -267,7 +267,7 @@ Expanse.Resize.implement({
 		startDrag: function(x, y) {
 			var instance = this;
 
-			instance.parent.apply(instance, arguments);
+			instance._super.apply(instance, arguments);
 
 			var proxy = instance.getDragEl();
 			var original = instance.getEl();

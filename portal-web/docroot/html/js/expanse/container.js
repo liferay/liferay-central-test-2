@@ -103,7 +103,7 @@
 
 			var el = options.el || Expanse.generateId();
 
-			instance.parent(el, options);
+			instance._super(el, options);
 
 			if (options.header) {
 				instance.setHeader(options.header);
