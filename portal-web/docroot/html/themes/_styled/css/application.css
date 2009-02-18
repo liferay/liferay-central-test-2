@@ -152,7 +152,7 @@
 }
 
 .ie6 .ui-resizable-wrap {
-    zoom: 1;
+	zoom: 1;
 }
 
 .ui-resizable-handle {
@@ -192,7 +192,7 @@
 }
 
 .ie6 .ui-resizable-handle-t, .ie6 .ui-resizable-handle-b {
-    zoom: 1;
+	zoom: 1;
 }
 
 .ui-resizable-handle-l, .ui-resizable-handle-r {
@@ -250,7 +250,7 @@
 }
 
 .ui-resizable-hover .ui-resizable-handle, .ui-resizable-hidden .ui-resizable-handle {
-    opacity: 0;
+	opacity: 0;
 }
 
 .ie .ui-resizable-hover .ui-resizable-handle, .ie .ui-resizable-hidden .ui-resizable-handle {
@@ -258,7 +258,7 @@
 }
 
 .ui-resizable-ghost {
-    opacity: .5;
+	opacity: .5;
 }
 
 .ie .ui-resizable-ghost {
@@ -311,17 +311,17 @@
 }
 
 .ui-resizable-status {
-    display: none;
-    font-size: 80%;
-    left: -999px;
-    padding: 2px;
-    position: absolute;
-    top: -999px;
-    z-index: 9999;
+	display: none;
+	font-size: 80%;
+	left: -999px;
+	padding: 2px;
+	position: absolute;
+	top: -999px;
+	z-index: 9999;
 }
 
 .ui-resizable-status strong, .ui-resizable-status em {
-    padding: 1px;
+	padding: 1px;
 }
 
 .ie6 .ui-resizable-status, .ie6 .ui-resizable-status strong, .ie6 .ui-resizable-status em {
@@ -468,79 +468,110 @@
 	float: right;
 }
 
-/* ---------- Dialog ---------- */
+/* ---------- Container ---------- */
 
-.ui-dialog {
-	background-color: #FFF;
-	border: 2px solid #828F95;
-	padding: 4px;
+.exp-overlay, .exp-panel-container {
+	position: absolute;
+	visibility: hidden;
+	z-index: 2;
 }
 
-.ui-dialog .ui-dialog-titlebar {
-	background: #1E2529;
+.exp-panel {
+	background-color: #FFF;
+	border: 2px solid #828F95;
+	left: 0;
+	padding: 4px;
+	top: 0;
+}
+
+.exp-panel .exp-header {
+	background: #1E2529 url(../images/arrows/04_right.png) no-repeat 7px 50%;
 	color: #FFF;
 	font-size: 14px;
 	font-weight: bold;
-	min-height: 28px;
-	padding: 0;
+	padding: 5px;
+	padding-left: 20px;
 	position: relative;
 	z-index: 1;
 }
 
-.ie .ui-dialog .ui-dialog-container {
-	z-index: 1;
-}
-
-.ie6 .ui-dialog .ui-dialog-titlebar {
+.ie6 .exp-panel .exp-header {
 	height: 29px;
 }
 
-.ui-dialog.ui-draggable .ui-dialog-titlebar {
-	cursor: move;
-}
-
-.ui-dialog .ui-dialog-titlebar-close {
+.exp-panel .container-close {
 	background: url(../images/application/close.png) no-repeat;
-	height: 16px;
+	cursor: pointer;
+	height: 15px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
 	position: absolute;
-	right: 5px;
-	top: 6px;
-	width: 16px;
+	right: 10px;
+	text-decoration: none;
+	text-indent: -9999em;
+	top: 10px;
+	visibility: inherit;
+	width: 15px;
+	z-index: 6;
 }
 
-.ui-dialog .ui-dialog-titlebar-close span {
-	display: none;
-}
-
-.ui-dialog.has-title .ui-dialog-title {
-	background: url(../images/arrows/04_right.png) no-repeat 7px 50%;
-	display: block;
-	font-weight: bold;
-	padding: 5px;
-	padding-left: 20px;
-}
-
-.ui-dialog .ui-dialog-content {
+.exp-panel .exp-body {
 	padding: 7px;
 }
 
-.ui-dialog.ui-resizable .ui-dialog-content {
+.exp-panel.ui-resizable .exp-body {
 	padding: 14px;
 }
 
-.ui-dialog .ui-dialog-buttonpane {
-	bottom: 8px;
+.ie6 body.masked select {
+	visibility:hidden;
+}
+
+.ie6 div.exp-panel-container select {
+	visibility:inherit;
+}
+
+.ie6 div.drag select {
+	visibility:hidden;
+}
+
+.ie6 div.hide-select select {
+	visibility:hidden;
+}
+
+.mask {
+	background-color: #000;
+	display: none;
+	left: 0;
+	opacity: 0.5;
 	position: absolute;
-	right: 12px;
-	text-align: right;
-	width: 100%;
+	top: 0;
+	z-index: 1;
 }
 
-.ui-dialog .ui-dialog-buttonpane button {
-	margin: 6px;
+.ie .mask {
+	filter: alpha(opacity=25);
 }
 
-.ui-dialog.generic-dialog .ui-resizable-handle {
+.hide-scrollbars, .hide-scrollbars * {
+	overflow: hidden;
+}
+
+.hide-scrollbars select {
+	display: none;
+}
+
+.show-scrollbars {
+	overflow: auto;
+}
+
+.exp-panel-container.show-scrollbars {
+	overflow: visible;
+}
+
+.exp-panel-container.show-scrollbars .underlay {
+	overflow: auto;
 }
 
 /* ---------- Date picker ---------- */

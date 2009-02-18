@@ -92,7 +92,7 @@ Liferay.TagsEntriesSelector = new Expanse.Class({
 									curTagsEntries.push(n);
 
 									if (instance._popupVisible) {
-										jQuery('input[type=checkbox][value$=' + n + ']', instance.selectTagEntryPopup).attr('checked', true);
+										jQuery('input[type=checkbox][value$=' + n + ']', instance.selectTagEntryPopup.body).attr('checked', true);
 									}
 								}
 							}
@@ -155,7 +155,7 @@ Liferay.TagsEntriesSelector = new Expanse.Class({
 		var value = curTagsEntries.splice(id, 1);
 
 		if (instance._popupVisible) {
-			jQuery('input[type=checkbox][value$=' + value + ']', instance.selectTagEntryPopup).attr('checked', false);
+			jQuery('input[type=checkbox][value$=' + value + ']', instance.selectTagEntryPopup.body).attr('checked', false);
 		}
 
 		instance._update();
@@ -192,23 +192,21 @@ Liferay.TagsEntriesSelector = new Expanse.Class({
 				);
 
 				instance._update();
-				Liferay.Popup.close(instance.selectTagEntryPopup);
+				instance.selectTagEntryPopup.closePopup();
 			}
 		);
 
 		mainContainer.append(searchContainer).append(container).append(saveBtn);
 
 		if (!instance.selectTagEntryPopup) {
-			var popup = Liferay.Popup(
+			var popup = new Expanse.Popup(
 				{
+					body: mainContainer[0],
 					className: 'lfr-tag-selector',
-					message: mainContainer[0],
+					fixedcenter: true,
 					modal: false,
-					position: 'center',
-					resizable: false,
-					title: Liferay.Language.get('tags'),
-					width: 400,
-					open: function() {
+					header: Liferay.Language.get('tags'),
+					onOpen: function() {
  						var inputSearch = jQuery('.lfr-tag-search-input');
 
 						Liferay.Util.defaultValue(inputSearch, Liferay.Language.get('search'));
@@ -216,9 +214,12 @@ Liferay.TagsEntriesSelector = new Expanse.Class({
 					onClose: function() {
 						instance._popupVisible = false;
 						instance.selectTagEntryPopup = null;
-					}
+					},
+					resizable: false,
+					width: 400
 				}
 			);
+
 			instance.selectTagEntryPopup = popup;
 		}
 		instance._popupVisible = true;
