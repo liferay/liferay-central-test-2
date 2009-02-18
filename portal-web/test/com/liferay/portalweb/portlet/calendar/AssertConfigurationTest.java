@@ -51,39 +51,9 @@ public class AssertConfigurationTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("Joe Bloggs")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertEquals("Joe Bloggs", selenium.getValue("_86_emailFromName"));
+		assertEquals("test@liferay.com",
+			selenium.getValue("_86_emailFromAddress"));
 		selenium.click(RuntimeVariables.replace("link=Archived"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=Test"));

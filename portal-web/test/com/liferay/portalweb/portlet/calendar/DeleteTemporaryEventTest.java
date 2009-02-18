@@ -66,7 +66,7 @@ public class DeleteTemporaryEventTest extends BaseTestCase {
 		}
 
 		selenium.click("//tr[5]/td[4]/ul/li/strong/span");
-		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[4]/a"));
+		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[4]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));

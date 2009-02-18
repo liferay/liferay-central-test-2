@@ -66,7 +66,7 @@ public class EditEventTest extends BaseTestCase {
 		}
 
 		selenium.click("//tr[5]/td[4]/ul/li/strong/span");
-		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/a/img"));
+		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
