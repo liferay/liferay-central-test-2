@@ -1,20 +1,5 @@
 <Context path="" crossContext="true">
 
-	<!--MySQL c3p0 connection pool-->
-	<Resource 
-		auth="Container" 
-		description="Portal DB Connection" 
-		driverClass="com.mysql.jdbc.Driver" 
-		maxPoolSize="50" 
-		minPoolSize="5" 
-		acquireIncrement="5" 
-		name="jdbc/LiferayPool" 
-		user="" 
-		password="" 
-		factory="org.apache.naming.factory.BeanFactory" 
-		type="com.mchange.v2.c3p0.ComboPooledDataSource" 
-		jdbcUrl="jdbc:mysql://localhost/lportal?useUnicode=true&amp;characterEncoding=UTF-8&amp;useFastDateParsing=false" 
-	/>
 	<!-- JAAS -->
 
 	<Realm
