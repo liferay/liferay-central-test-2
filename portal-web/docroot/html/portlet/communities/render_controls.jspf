@@ -117,7 +117,7 @@ private String _renderControls(String namespace, ResourceBundle resourceBundle, 
 				sb.append("\" type=\"radio\" value=\"");
 				sb.append(choices[j]);
 				sb.append("\" />");
-				sb.append(resourceBundle.getString(choice));
+				sb.append(choice);
 				sb.append("</label>");
 			}
 		}
