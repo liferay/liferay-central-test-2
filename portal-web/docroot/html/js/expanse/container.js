@@ -120,6 +120,7 @@
 				instance.setBody('<div class="loading-animation" />');
 
 				var onSuccess = options.urlSuccess;
+				var url = options.url.replace(/p_p_state=(maximized|pop_up)/g, 'p_p_state=exclusive');
 
 				if (!onSuccess) {
 					onSuccess = function(message) {
@@ -131,7 +132,7 @@
 
 				jQuery.ajax(
 					{
-						url: options.url,
+						url: url,
 						data: options.urlData,
 						success: onSuccess
 					}
@@ -146,14 +147,44 @@
 				instance.setFooter(options.footer);
 			}
 
+			instance._options = options;
+			instance._options._el = el;
+
 			if (!options.deferRender) {
 				instance.render(options.renderTo || document.body);
 
 				instance.show();
 
-				if (options.center) {
-					instance.center();
-				}
+				instance._onRender();
+			}
+			else {
+				instance.renderEvent.subscribe(instance._onRender, instance, true);
+			}
+
+			Expanse.Popup.Manager.register(instance);
+
+			return instance;
+		},
+
+		closePopup: function() {
+			var instance = this;
+
+			if (instance._destroyOnClose !== false) {
+				instance.destroy();
+			}
+			else {
+				instance.hide();
+			}
+		},
+
+		_onRender: function() {
+			var instance = this;
+
+			var options = instance._options;
+			var el = options._el;
+
+			if (options.center) {
+				instance.center();
 			}
 
 			var closeEvent = 'destroy';
@@ -177,18 +208,15 @@
 				instance.body.id = options.messageId;
 			}
 
-			Expanse.Popup.Manager.register(instance);
-
-			instance._options = options;
-
 			if (options.resizable !== false && Expanse.Resize) {
 
 				var resize = new Expanse.Resize(
 					el,
 					{
+						handles: options.handles,
 						height: options.height,
-						width: options.width,
-						proxy: true
+						proxy: true,
+						width: options.width
 					}
 				);
 
@@ -206,25 +234,13 @@
 					resize.on('resize', options.onResize, instance, true);
 				}
 
+				instance.resizable = resize;
 			}
 
 			if (options.draggable !== false) {
 				var el = Dom.get(instance.id);
 
 				Dom.setStyle(el, 'position', 'relative');
-			}
-
-			return instance;
-		},
-
-		closePopup: function() {
-			var instance = this;
-
-			if (instance._destroyOnClose !== false) {
-				instance.destroy();
-			}
-			else {
-				instance.hide();
 			}
 		},
 
