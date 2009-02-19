@@ -82,26 +82,26 @@
 	background: #FFC;
 }
 
-.ui-proxy {
+.exp-proxy {
 	cursor: move;
 	opacity: 0.65;
 	position: relative;
 }
 
-.ie .ui-proxy {
+.ie .exp-proxy {
 	filter: alpha(opacity=65);
 }
 
-.ui-proxy.generic-portlet {
+.exp-proxy.generic-portlet {
 	height: 200px;
 	width: 300px;
 }
 
-.ui-proxy.generic-portlet .portlet-title {
+.exp-proxy.generic-portlet .portlet-title {
 	padding: 10px;
 }
 
-.ui-proxy.not-intersecting .forbidden-action {
+.exp-proxy.not-intersecting .forbidden-action {
 	background: url(../images/application/forbidden_action.png) no-repeat;
 	display: block;
 	height: 32px;
@@ -111,7 +111,7 @@
 	width: 32px;
 }
 
-.ie .ui-proxy.not-intersecting .forbidden-action {
+.ie .exp-proxy.not-intersecting .forbidden-action {
 	right: 2px;
 	top: 2px;
 }

@@ -55,22 +55,22 @@
 .active-area {
 }
 
-.ui-proxy {
+.exp-proxy {
 }
 
-.ie .ui-proxy {
+.ie .exp-proxy {
 }
 
-.ui-proxy.generic-portlet {
+.exp-proxy.generic-portlet {
 }
 
-.ui-proxy.generic-portlet .portlet-title {
+.exp-proxy.generic-portlet .portlet-title {
 }
 
-.ui-proxy.not-intersecting .forbidden-action {
+.exp-proxy.not-intersecting .forbidden-action {
 }
 
-.ie .ui-proxy.not-intersecting .forbidden-action {
+.ie .exp-proxy.not-intersecting .forbidden-action {
 }
 
 .exp-resizable-proxy {
