@@ -518,7 +518,9 @@
 		<field name="portraitId" type="long" />
 		<field name="languageId" type="String" />
 		<field name="timeZoneId" type="String" />
-		<field name="greeting" type="String" />
+		<field name="greeting" type="String">
+			<hint name="max-length">300</hint>
+		</field>
 		<field name="comments" type="String">
 			<hint-collection name="TEXTAREA" />
 			<hint name="display-width">400</hint>
@@ -1683,7 +1685,9 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="nodeId" type="long" />
-		<field name="title" type="String" />
+		<field name="title" type="String">
+			<hint name="max-length">300</hint>
+		</field>
 		<field name="version" type="double" />
 		<field name="minorEdit" type="boolean" />
 		<field name="content" type="String">
