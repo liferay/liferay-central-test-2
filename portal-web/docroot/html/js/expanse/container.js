@@ -6,10 +6,22 @@
 	Expanse.Module = new Expanse.Class(Widget.Module);
 	Expanse.Overlay = new Expanse.Class(Widget.Overlay);
 	Expanse.OverlayManager = new Expanse.Class(Widget.OverlayManager);
-	Expanse.Panel = new Expanse.Class(Widget.Panel);
 	Expanse.Dialog = new Expanse.Class(Widget.Dialog);
 	Expanse.SimpleDialog = new Expanse.Class(Widget.SimpleDialog);
 	Expanse.Tooltip = new Expanse.Class(Widget.Tooltip);
+	Expanse._Panel = new Expanse.Class(Widget.Panel);
+
+	Expanse.Panel = Expanse._Panel.extend(
+		{
+			buildMask: function() {
+				var instance = this;
+
+				instance._super.apply(instance, arguments);
+
+				Dom.addClass(instance.mask, 'exp-mask');
+			}
+		}
+	);
 
 	Expanse.KeyListener = new Expanse.Class(YAHOO.util.KeyListener);
 

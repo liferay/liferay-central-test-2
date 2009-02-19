@@ -8,16 +8,6 @@
 	border: 0;
 }
 
-.ui-dialog-overlay {
-	background: #000;
-	opacity: 0.8;
-	z-index: 400;
-}
-
-.ie .ui-dialog-overlay {
-	filter: alpha(opacity=80);
-}
-
 .results-grid {
 	border: 1px solid #DEDEDE;
 	border-left: none;
@@ -540,17 +530,17 @@
 	visibility:hidden;
 }
 
-.mask {
+.exp-mask {
 	background-color: #000;
 	display: none;
 	left: 0;
 	opacity: 0.5;
 	position: absolute;
 	top: 0;
-	z-index: 1;
+	z-index: 400;
 }
 
-.ie .mask {
+.ie .exp-mask {
 	filter: alpha(opacity=25);
 }
 

@@ -100,6 +100,10 @@ Expanse.Class.createSuper = function(previous, current) {
 		Dom.addClass(dialog.body, 'ui-dialog-content');
 		Dom.addClass(dialog.close, 'ui-dialog-close');
 
+		if (options.modal) {
+			Dom.addClass(dialog.mask, 'ui-dialog-overlay');
+		}
+
 		return jQuery(dialog.body);
 	};
 

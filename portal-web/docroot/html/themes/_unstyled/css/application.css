@@ -6,12 +6,6 @@
 .ui-wrapper input, .ui-wrapper textarea {
 }
 
-.ui-dialog-overlay {
-}
-
-.ie .ui-dialog-overlay {
-}
-
 .results-grid {
 }
 
@@ -318,10 +312,10 @@
 .ie6 div.hide-select select {
 }
 
-.mask {
+.exp-mask {
 }
 
-.ie .mask {
+.ie .exp-mask {
 }
 
 .hide-scrollbars, .hide-scrollbars * {
