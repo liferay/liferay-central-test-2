@@ -188,6 +188,27 @@ public class CompanyServiceSoap {
 		java.lang.String legalName, java.lang.String legalId,
 		java.lang.String legalType, java.lang.String sicCode,
 		java.lang.String tickerSymbol, java.lang.String industry,
+		java.lang.String type, java.lang.String size) throws RemoteException {
+		try {
+			com.liferay.portal.model.Company returnValue = CompanyServiceUtil.updateCompany(companyId,
+					virtualHost, mx, homeURL, name, legalName, legalId,
+					legalType, sicCode, tickerSymbol, industry, type, size);
+
+			return com.liferay.portal.model.CompanySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.CompanySoap updateCompany(
+		long companyId, java.lang.String virtualHost, java.lang.String mx,
+		java.lang.String homeURL, java.lang.String name,
+		java.lang.String legalName, java.lang.String legalId,
+		java.lang.String legalType, java.lang.String sicCode,
+		java.lang.String tickerSymbol, java.lang.String industry,
 		java.lang.String type, java.lang.String size,
 		java.lang.String languageId, java.lang.String timeZoneId,
 		com.liferay.portal.model.AddressSoap[] addresses,
@@ -209,27 +230,6 @@ public class CompanyServiceSoap {
 						phones),
 					com.liferay.portal.model.impl.WebsiteModelImpl.toModels(
 						websites), properties);
-
-			return com.liferay.portal.model.CompanySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portal.model.CompanySoap updateCompany(
-		long companyId, java.lang.String virtualHost, java.lang.String mx,
-		java.lang.String homeURL, java.lang.String name,
-		java.lang.String legalName, java.lang.String legalId,
-		java.lang.String legalType, java.lang.String sicCode,
-		java.lang.String tickerSymbol, java.lang.String industry,
-		java.lang.String type, java.lang.String size) throws RemoteException {
-		try {
-			com.liferay.portal.model.Company returnValue = CompanyServiceUtil.updateCompany(companyId,
-					virtualHost, mx, homeURL, name, legalName, legalId,
-					legalType, sicCode, tickerSymbol, industry, type, size);
 
 			return com.liferay.portal.model.CompanySoap.toSoapModel(returnValue);
 		}

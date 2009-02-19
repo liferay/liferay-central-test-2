@@ -374,6 +374,125 @@ public class CompanyServiceHttp {
 		java.lang.String legalName, java.lang.String legalId,
 		java.lang.String legalType, java.lang.String sicCode,
 		java.lang.String tickerSymbol, java.lang.String industry,
+		java.lang.String type, java.lang.String size)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(companyId);
+
+			Object paramObj1 = virtualHost;
+
+			if (virtualHost == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = mx;
+
+			if (mx == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = homeURL;
+
+			if (homeURL == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = name;
+
+			if (name == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = legalName;
+
+			if (legalName == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = legalId;
+
+			if (legalId == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj7 = legalType;
+
+			if (legalType == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj8 = sicCode;
+
+			if (sicCode == null) {
+				paramObj8 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj9 = tickerSymbol;
+
+			if (tickerSymbol == null) {
+				paramObj9 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj10 = industry;
+
+			if (industry == null) {
+				paramObj10 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj11 = type;
+
+			if (type == null) {
+				paramObj11 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj12 = size;
+
+			if (size == null) {
+				paramObj12 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(CompanyServiceUtil.class.getName(),
+					"updateCompany",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10, paramObj11, paramObj12
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portal.model.Company)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portal.model.Company updateCompany(
+		HttpPrincipal httpPrincipal, long companyId,
+		java.lang.String virtualHost, java.lang.String mx,
+		java.lang.String homeURL, java.lang.String name,
+		java.lang.String legalName, java.lang.String legalId,
+		java.lang.String legalType, java.lang.String sicCode,
+		java.lang.String tickerSymbol, java.lang.String industry,
 		java.lang.String type, java.lang.String size,
 		java.lang.String languageId, java.lang.String timeZoneId,
 		java.util.List<com.liferay.portal.model.Address> addresses,
@@ -509,125 +628,6 @@ public class CompanyServiceHttp {
 						paramObj10, paramObj11, paramObj12, paramObj13,
 						paramObj14, paramObj15, paramObj16, paramObj17,
 						paramObj18, paramObj19
-					});
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portal.model.Company)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.portal.model.Company updateCompany(
-		HttpPrincipal httpPrincipal, long companyId,
-		java.lang.String virtualHost, java.lang.String mx,
-		java.lang.String homeURL, java.lang.String name,
-		java.lang.String legalName, java.lang.String legalId,
-		java.lang.String legalType, java.lang.String sicCode,
-		java.lang.String tickerSymbol, java.lang.String industry,
-		java.lang.String type, java.lang.String size)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(companyId);
-
-			Object paramObj1 = virtualHost;
-
-			if (virtualHost == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = mx;
-
-			if (mx == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = homeURL;
-
-			if (homeURL == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = name;
-
-			if (name == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = legalName;
-
-			if (legalName == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = legalId;
-
-			if (legalId == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = legalType;
-
-			if (legalType == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj8 = sicCode;
-
-			if (sicCode == null) {
-				paramObj8 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj9 = tickerSymbol;
-
-			if (tickerSymbol == null) {
-				paramObj9 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj10 = industry;
-
-			if (industry == null) {
-				paramObj10 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj11 = type;
-
-			if (type == null) {
-				paramObj11 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj12 = size;
-
-			if (size == null) {
-				paramObj12 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(CompanyServiceUtil.class.getName(),
-					"updateCompany",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12
 					});
 
 			Object returnObj = null;
