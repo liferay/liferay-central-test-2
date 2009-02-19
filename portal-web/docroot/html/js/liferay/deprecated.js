@@ -94,6 +94,8 @@ Expanse.Class.createSuper = function(previous, current) {
 			dialog.cfg.setProperty('zindex', options.zIndex);
 		}
 
+		// LPS-2166
+
 		Dom.addClass(dialog.element, 'ui-dialog');
 		Dom.addClass(dialog.innerElement, 'ui-dialog-container');
 		Dom.addClass(dialog.header, 'ui-dialog-title');
@@ -109,4 +111,23 @@ Expanse.Class.createSuper = function(previous, current) {
 
 	Liferay.Popup.close = Expanse.Popup.close;
 	Liferay.Popup.update = Expanse.Popup.update;
+})();
+
+// LPS-2166
+
+(function() {
+	var Resize = Expanse.Resize.prototype;
+
+	Resize.CSS_RESIZE += ' ui-resizable';
+	Resize.CSS_DRAG += ' ui-draggable';
+    Resize.CSS_HOVER += ' ui-resizable-hover';
+    Resize.CSS_PROXY += ' ui-resizable-proxy';
+    Resize.CSS_WRAP += ' ui-resizable-wrap';
+    Resize.CSS_KNOB += ' ui-resizable-knob';
+    Resize.CSS_HIDDEN += ' ui-resizable-hidden';
+    Resize.CSS_STATUS += ' ui-resizable-status';
+    Resize.CSS_GHOST += ' ui-resizable-ghost';
+    Resize.CSS_RESIZING += ' ui-resizable-resizing';
+
+    Resize.CSS_HANDLE = 'ui-resizable-handle ' + Resize.CSS_HANDLE;
 })();

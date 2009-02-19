@@ -393,7 +393,7 @@
 
 			var proxy = jQuery(Liferay.Template.PORTLET);
 
-			proxy.addClass('ui-proxy');
+			proxy.addClass('exp-proxy');
 
 			return proxy;
 		},
@@ -410,7 +410,7 @@
 			if (!instance._proxy) {
 				var proxy = instance.getDragEl();
 
-				var proxyDisplay = jQuery('.ui-proxy', proxy);
+				var proxyDisplay = jQuery('.exp-proxy', proxy);
 
 				instance._proxy = proxyDisplay;
 			}
@@ -432,7 +432,7 @@
 
 			proxy = jQuery(proxy);
 
-			var proxyDisplay = proxy.find('.ui-proxy');
+			var proxyDisplay = proxy.find('.exp-proxy');
 
 			if (!proxyDisplay.length) {
 				proxyDisplay = instance._createProxy();

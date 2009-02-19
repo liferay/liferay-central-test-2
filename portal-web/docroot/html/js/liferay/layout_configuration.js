@@ -227,7 +227,7 @@
 			var zIndex = instance._dialogBody.parents('.ui-dialog').css('z-index');
 
 			instance._helper = jQuery(Liferay.Template.PORTLET).css('z-index', zIndex + 10);
-			instance._helper.addClass('ui-proxy generic-portlet not-intersecting');
+			instance._helper.addClass('exp-proxy generic-portlet not-intersecting');
 
 			var portletItem = columnPortletItem;
 
@@ -401,7 +401,7 @@
 			var proxyStyle = proxy.style;
 
 			portlet = jQuery(portlet);
-			proxy = jQuery('.ui-proxy', proxy);
+			proxy = jQuery('.exp-proxy', proxy);
 
 			var proxyHeight = proxy.height();
 			var proxyWidth = proxy.width();

@@ -73,7 +73,7 @@
 .ie .ui-proxy.not-intersecting .forbidden-action {
 }
 
-.ui-resizable-proxy {
+.exp-resizable-proxy {
 }
 
 .navigation-sort-helper {
@@ -84,115 +84,109 @@
 
 /* ---------- Resizables ---------- */
 
-.ui-resizable {
+.exp-resizable {
 }
 
-.ie6 .ui-resizable {
+.ie6 .exp-resizable {
 }
 
-.ie6 .ui-resizable-wrap {
+.ie6 .exp-resizable-wrap {
 }
 
-.ui-resizable-handle {
+.exp-resizable-handle {
 }
 
-.ui-resizable .ui-resizable-handle {
+.exp-resizable .exp-resizable-handle {
 }
 
-.js .ui-resizable-disabled .ui-resizable-handle {
+.exp-resizable-handle-t, .exp-resizable-handle-b {
 }
 
-.js .ui-resizable-autohide .ui-resizable-handle {
+.exp-resizable-handle-t {
 }
 
-.ui-resizable-handle-t, .ui-resizable-handle-b {
+.exp-resizable-handle-b {
 }
 
-.ui-resizable-handle-t {
+.ie6 .exp-resizable-handle-t, .ie6 .exp-resizable-handle-b {
 }
 
-.ui-resizable-handle-b {
+.exp-resizable-handle-l, .exp-resizable-handle-r {
 }
 
-.ie6 .ui-resizable-handle-t, .ie6 .ui-resizable-handle-b {
+.exp-resizable-handle-r {
 }
 
-.ui-resizable-handle-l, .ui-resizable-handle-r {
+.exp-resizable-handle-l {
 }
 
-.ui-resizable-handle-r {
+.exp-resizable-handle-tr, .exp-resizable-handle-tr {
 }
 
-.ui-resizable-handle-l {
+.exp-resizable-handle-tr {
 }
 
-.ui-resizable-handle-tr, .ui-resizable-handle-tr {
+.exp-resizable-handle-tl {
 }
 
-.ui-resizable-handle-tr {
+.exp-resizable-handle-bl, .exp-resizable-handle-br {
 }
 
-.ui-resizable-handle-tl {
+.exp-resizable-handle-br {
 }
 
-.ui-resizable-handle-bl, .ui-resizable-handle-br {
+.exp-resizable-handle-bl {
 }
 
-.ui-resizable-handle-br {
+.exp-resizable-hover .exp-resizable-handle, .exp-resizable-hidden .exp-resizable-handle {
 }
 
-.ui-resizable-handle-bl {
+.ie .exp-resizable-hover .exp-resizable-handle, .ie .exp-resizable-hidden .exp-resizable-handle {
 }
 
-.ui-resizable-hover .ui-resizable-handle, .ui-resizable-hidden .ui-resizable-handle {
+.exp-resizable-ghost {
 }
 
-.ie .ui-resizable-hover .ui-resizable-handle, .ie .ui-resizable-hidden .ui-resizable-handle {
+.ie .exp-resizable-ghost {
 }
 
-.ui-resizable-ghost {
+.exp-resizable-knob .exp-resizable-handle {
 }
 
-.ie .ui-resizable-ghost {
+.exp-resizable-knob .exp-resizable-handle-t {
 }
 
-.ui-resizable-knob .ui-resizable-handle {
+.exp-resizable-knob .exp-resizable-handle-r {
 }
 
-.ui-resizable-knob .ui-resizable-handle-t {
+.exp-resizable-knob .exp-resizable-handle-b {
 }
 
-.ui-resizable-knob .ui-resizable-handle-r {
+.exp-resizable-knob .exp-resizable-handle-l {
 }
 
-.ui-resizable-knob .ui-resizable-handle-b {
+.exp-resizable-knob .exp-resizable-handle-tr {
 }
 
-.ui-resizable-knob .ui-resizable-handle-l {
+.exp-resizable-knob .exp-resizable-handle-tl {
 }
 
-.ui-resizable-knob .ui-resizable-handle-tr {
+.exp-resizable-knob .exp-resizable-handle-bl {
 }
 
-.ui-resizable-knob .ui-resizable-handle-tl {
+.exp-resizable-knob .exp-resizable-handle-br {
 }
 
-.ui-resizable-knob .ui-resizable-handle-bl {
+.exp-resizable-status {
 }
 
-.ui-resizable-knob .ui-resizable-handle-br {
+.exp-resizable-status strong, .exp-resizable-status em {
 }
 
-.ui-resizable-status {
+.ie6 .exp-resizable-status, .ie6 .exp-resizable-status strong, .ie6 .exp-resizable-status em {
 }
 
-.ui-resizable-status strong, .ui-resizable-status em {
-}
-
-.ie6 .ui-resizable-status, .ie6 .ui-resizable-status strong, .ie6 .ui-resizable-status em {
-}
-
-.freeform .portlet-boundary .ui-resizable-handle {
+.freeform .portlet-boundary .exp-resizable-handle {
 }
 
 /* ---------- Slider ---------- */
@@ -297,7 +291,7 @@
 .exp-panel .exp-body {
 }
 
-.exp-panel.ui-resizable .exp-body {
+.exp-panel.exp-resizable .exp-body {
 }
 
 .ie6 body.masked select {

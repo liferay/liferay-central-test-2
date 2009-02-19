@@ -116,7 +116,7 @@
 	top: 2px;
 }
 
-.ui-resizable-proxy {
+.exp-resizable-proxy {
 	border: 1px dashed #828F95;
 	position: absolute;
 	visibility: hidden;
@@ -132,38 +132,30 @@
 
 /* ---------- Resizables ---------- */
 
-.ui-resizable {
+.exp-resizable {
 	position: relative;
 	z-index: 0;
 }
 
-.ie6 .ui-resizable {
+.ie6 .exp-resizable {
 	zoom: 1;
 }
 
-.ie6 .ui-resizable-wrap {
+.ie6 .exp-resizable-wrap {
 	zoom: 1;
 }
 
-.ui-resizable-handle {
+.exp-resizable-handle {
 	background: transparent url() no-repeat 50% 50%;
 	font-size: 0.1px;
 	position: absolute;
 }
 
-.ui-resizable .ui-resizable-handle {
+.exp-resizable .exp-resizable-handle {
 	display: block;
 }
 
-.js .ui-resizable-disabled .ui-resizable-handle {
-	display: none;
-}
-
-.js .ui-resizable-autohide .ui-resizable-handle {
-	display: none;
-}
-
-.ui-resizable-handle-t, .ui-resizable-handle-b {
+.exp-resizable-handle-t, .exp-resizable-handle-b {
 	background-image: url(../images/application/handle_horizontal.png);
 	height: 14px;
 	left: 0;
@@ -171,21 +163,21 @@
 	width: 100%;
 }
 
-.ui-resizable-handle-t {
+.exp-resizable-handle-t {
 	cursor: n-resize;
 	top: 0;
 }
 
-.ui-resizable-handle-b {
+.exp-resizable-handle-b {
 	bottom: 0;
 	cursor: s-resize;
 }
 
-.ie6 .ui-resizable-handle-t, .ie6 .ui-resizable-handle-b {
+.ie6 .exp-resizable-handle-t, .ie6 .exp-resizable-handle-b {
 	zoom: 1;
 }
 
-.ui-resizable-handle-l, .ui-resizable-handle-r {
+.exp-resizable-handle-l, .exp-resizable-handle-r {
 	background-image: url(../images/application/handle_vertical.png);
 	background-position: center center;
 	bottom: 0;
@@ -193,132 +185,132 @@
 	width: 14px;
 }
 
-.ui-resizable-handle-r {
+.exp-resizable-handle-r {
 	cursor: e-resize;
 	right: 0;
 }
 
-.ui-resizable-handle-l {
+.exp-resizable-handle-l {
 	cursor: w-resize;
 	left: 0;
 }
 
-.ui-resizable-handle-tr, .ui-resizable-handle-tr {
+.exp-resizable-handle-tr, .exp-resizable-handle-tr {
 	height: 14px;
 	top: 0;
 	width: 14px;
 }
 
-.ui-resizable-handle-tr {
+.exp-resizable-handle-tr {
 	background-image: url(../images/application/handle_ne.png);
 	cursor: ne-resize;
 	right: 0;
 }
 
-.ui-resizable-handle-tl {
+.exp-resizable-handle-tl {
 	background-image: url(../images/application/handle_nw.png);
 	cursor: nw-resize;
 	left: 0;
 }
 
-.ui-resizable-handle-bl, .ui-resizable-handle-br {
+.exp-resizable-handle-bl, .exp-resizable-handle-br {
 	bottom: 0;
 	height: 14px;
 	width: 14px;
 }
 
-.ui-resizable-handle-br {
+.exp-resizable-handle-br {
 	background-image: url(../images/application/handle_se.png);
 	cursor: se-resize;
 	right: 0;
 }
 
-.ui-resizable-handle-bl {
+.exp-resizable-handle-bl {
 	background-image: url(../images/application/handle_sw.png);
 	cursor: sw-resize;
 	left: 0;
 }
 
-.ui-resizable-hover .ui-resizable-handle, .ui-resizable-hidden .ui-resizable-handle {
+.exp-resizable-hover .exp-resizable-handle, .exp-resizable-hidden .exp-resizable-handle {
 	opacity: 0;
 }
 
-.ie .ui-resizable-hover .ui-resizable-handle, .ie .ui-resizable-hidden .ui-resizable-handle {
+.ie .exp-resizable-hover .exp-resizable-handle, .ie .exp-resizable-hidden .exp-resizable-handle {
 	filter: alpha(opacity=0);
 }
 
-.ui-resizable-ghost {
+.exp-resizable-ghost {
 	opacity: .5;
 }
 
-.ie .ui-resizable-ghost {
+.ie .exp-resizable-ghost {
 	filter: alpha(opacity=50);
 }
 
-.ui-resizable-knob .ui-resizable-handle {
+.exp-resizable-knob .exp-resizable-handle {
 	height: 6px;
 	width: 6px;
 }
 
-.ui-resizable-knob .ui-resizable-handle-t {
+.exp-resizable-knob .exp-resizable-handle-t {
 	left: 45%;
 	top: -3px;
 }
 
-.ui-resizable-knob .ui-resizable-handle-r {
+.exp-resizable-knob .exp-resizable-handle-r {
 	right: -3px;
 	top: 45%;
 }
 
-.ui-resizable-knob .ui-resizable-handle-b {
+.exp-resizable-knob .exp-resizable-handle-b {
 	left: 45%;
 	bottom: -3px;
 }
 
-.ui-resizable-knob .ui-resizable-handle-l {
+.exp-resizable-knob .exp-resizable-handle-l {
 	left: -3px;
 	top: 45%;
 }
 
-.ui-resizable-knob .ui-resizable-handle-tr {
+.exp-resizable-knob .exp-resizable-handle-tr {
 	right: -3px;
 	top: -3px;
 }
 
-.ui-resizable-knob .ui-resizable-handle-tl {
+.exp-resizable-knob .exp-resizable-handle-tl {
 	left: -3px;
 	top: -3px;
 }
 
-.ui-resizable-knob .ui-resizable-handle-bl {
+.exp-resizable-knob .exp-resizable-handle-bl {
 	left: -3px;
 	bottom: -3px;
 }
 
-.ui-resizable-knob .ui-resizable-handle-br {
+.exp-resizable-knob .exp-resizable-handle-br {
 	right: -3px;
 	bottom: -3px;
 }
 
-.ui-resizable-status {
+.exp-resizable-status {
+	background: #fff;
 	display: none;
-	font-size: 80%;
 	left: -999px;
 	padding: 2px;
 	position: absolute;
 	top: -999px;
-	z-index: 9999;
+	z-index: 99999;
 }
 
-.ui-resizable-status strong, .ui-resizable-status em {
+.exp-resizable-status strong, .exp-resizable-status em {
 	padding: 1px;
 }
 
-.ie6 .ui-resizable-status, .ie6 .ui-resizable-status strong, .ie6 .ui-resizable-status em {
+.ie6 .exp-resizable-status, .ie6 .exp-resizable-status strong, .ie6 .exp-resizable-status em {
 	zoom: 1;
 }
 
-.freeform .portlet-boundary .ui-resizable-handle {
+.freeform .portlet-boundary .exp-resizable-handle {
 	margin: 3px;
 }
 
@@ -510,7 +502,7 @@
 	padding: 7px;
 }
 
-.exp-panel.ui-resizable .exp-body {
+.exp-panel.exp-resizable .exp-body {
 	padding: 14px;
 }
 

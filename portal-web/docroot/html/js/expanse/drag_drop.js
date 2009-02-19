@@ -7,18 +7,19 @@ Expanse.DragProxy = new Expanse.Class(YAHOO.util.DDProxy);
 Expanse.Droppable = new Expanse.Class(YAHOO.util.DDTarget);
 
 Expanse.Resize = new Expanse.Class(YAHOO.util.Resize);
+
 Expanse.Resize.implement({
-    CSS_RESIZE: 'ui-resizable',
-    CSS_DRAG: 'ui-draggable',
-    CSS_HOVER: 'ui-resizable-hover',
-    CSS_PROXY: 'ui-resizable-proxy',
-    CSS_WRAP: 'ui-resizable-wrap',
-    CSS_KNOB: 'ui-resizable-knob',
-    CSS_HIDDEN: 'ui-resizable-hidden',
-    CSS_HANDLE: 'ui-resizable-handle',
-    CSS_STATUS: 'ui-resizable-status',
-    CSS_GHOST: 'ui-resizable-ghost',
-    CSS_RESIZING: 'ui-resizable-resizing'
+    CSS_RESIZE: 'exp-resizable',
+    CSS_DRAG: 'exp-draggable',
+    CSS_HOVER: 'exp-resizable-hover',
+    CSS_PROXY: 'exp-resizable-proxy',
+    CSS_WRAP: 'exp-resizable-wrap',
+    CSS_KNOB: 'exp-resizable-knob',
+    CSS_HIDDEN: 'exp-resizable-hidden',
+    CSS_HANDLE: 'exp-resizable-handle',
+    CSS_STATUS: 'exp-resizable-status',
+    CSS_GHOST: 'exp-resizable-ghost',
+    CSS_RESIZING: 'exp-resizable-resizing'
 });
 
 (function() {
