@@ -27,6 +27,14 @@ private String _renderControls(String namespace, ResourceBundle resourceBundle, 
 	StringBuilder sb = new StringBuilder();
 
 	for (int i = 0; i < controls.length; i++) {
+		String controlName = controls[i].getControlName();
+
+		try {
+			controlName = resourceBundle.getString(controlName);
+		}
+		catch (MissingResourceException mre) {
+		}
+
 		sb.append("<li class=\"");
 		sb.append(namespace);
 		sb.append("handler-control\">");
@@ -65,7 +73,7 @@ private String _renderControls(String namespace, ResourceBundle resourceBundle, 
 			}
 
 			sb.append("type=\"checkbox\" /> ");
-			sb.append(resourceBundle.getString(control.getControlName()));
+			sb.append(controlName);
 			sb.append("</label>");
 
 			if (children != null) {
@@ -84,12 +92,20 @@ private String _renderControls(String namespace, ResourceBundle resourceBundle, 
 			sb.append(namespace);
 			sb.append("handler-control-label\">");
 			sb.append("<strong>&#9632;</strong> ");
-			sb.append(resourceBundle.getString(control.getControlName()));
+			sb.append(controlName);
 			sb.append("</span>");
 
 			String[] choices = control.getChoices();
 
 			for (int j = 0; j < choices.length; j++) {
+				String choice = choices[j];
+
+				try {
+					choice = resourceBundle.getString(choice);
+				}
+				catch (MissingResourceException mre) {
+				}
+
 				sb.append("<label class=\"");
 				sb.append(namespace);
 				sb.append("handler-control-label\">");
@@ -101,7 +117,7 @@ private String _renderControls(String namespace, ResourceBundle resourceBundle, 
 				sb.append("\" type=\"radio\" value=\"");
 				sb.append(choices[j]);
 				sb.append("\" />");
-				sb.append(resourceBundle.getString(choices[j]));
+				sb.append(resourceBundle.getString(choice));
 				sb.append("</label>");
 			}
 		}

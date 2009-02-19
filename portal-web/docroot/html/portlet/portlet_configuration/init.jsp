@@ -60,6 +60,8 @@
 <%@ page import="com.liferay.portlet.tasks.model.TasksProposal" %>
 <%@ page import="com.liferay.portlet.tasks.service.TasksProposalLocalServiceUtil" %>
 
+<%@ page import="java.util.MissingResourceException" %>
+
 <%
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>
