@@ -41,7 +41,7 @@ public class ManagePagesTests extends BaseTests {
 		testSuite.addTestSuite(AddPageTest.class);
 		testSuite.addTestSuite(AddChildPagesTest.class);
 		testSuite.addTestSuite(DisplayOrderTest.class);
-		testSuite.addTestSuite(AddJavaScriptTest.class);
+		//testSuite.addTestSuite(AddJavaScriptTest.class);
 		testSuite.addTestSuite(DeletePageTest.class);
 
 		return testSuite;
