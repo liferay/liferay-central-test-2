@@ -131,7 +131,6 @@ public class AddChildPageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isElementPresent("//li[2]/ul/li[3]/ul/li/a/span"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -151,6 +150,7 @@ public class AddChildPageTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Breadcrumb Test Page"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Child Test Page"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

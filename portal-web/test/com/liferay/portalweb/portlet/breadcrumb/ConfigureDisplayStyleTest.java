@@ -78,7 +78,7 @@ public class ConfigureDisplayStyleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//body/div[2]/ul/li[2]/a")) {
+				if (selenium.isElementPresent("//div[4]/ul/li[2]/a")) {
 					break;
 				}
 			}
@@ -88,7 +88,7 @@ public class ConfigureDisplayStyleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[2]/a"));
+		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[2]/a"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
