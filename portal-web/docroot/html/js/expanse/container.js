@@ -221,11 +221,10 @@
 			}
 
 			if (options.resizable !== false && Expanse.Resize) {
-
 				var resize = new Expanse.Resize(
 					el,
 					{
-						handles: options.handles,
+						handles: options.handles || ['r', 'b', 'br'],
 						height: options.height,
 						proxy: true,
 						width: options.width
