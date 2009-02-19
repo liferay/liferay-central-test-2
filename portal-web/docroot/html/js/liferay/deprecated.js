@@ -94,11 +94,11 @@ Expanse.Class.createSuper = function(previous, current) {
 			dialog.cfg.setProperty('zindex', options.zIndex);
 		}
 
-		Dom.addClass(panel.element, 'ui-dialog');
-		Dom.addClass(panel.innerElement, 'ui-dialog-container');
-		Dom.addClass(panel.header, 'ui-dialog-title');
-		Dom.addClass(panel.body, 'ui-dialog-content');
-		Dom.addClass(panel.close, 'ui-dialog-close');
+		Dom.addClass(dialog.element, 'ui-dialog');
+		Dom.addClass(dialog.innerElement, 'ui-dialog-container');
+		Dom.addClass(dialog.header, 'ui-dialog-title');
+		Dom.addClass(dialog.body, 'ui-dialog-content');
+		Dom.addClass(dialog.close, 'ui-dialog-close');
 
 		return jQuery(dialog.body);
 	};
