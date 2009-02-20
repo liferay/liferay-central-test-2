@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
-import com.liferay.portal.kernel.util.PortletClassInvoker;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -703,10 +702,10 @@ public class PortletExporter {
 			Element parentEl)
 		throws SystemException {
 
-		String portletDataHandlerClass =
-			portlet.getPortletDataHandlerClass();
+		PortletDataHandler portletDataHandler =
+			portlet.getPortletDataHandlerInstance();
 
-		if (Validator.isNull(portletDataHandlerClass)) {
+		if (portletDataHandler == null) {
 			return;
 		}
 
@@ -723,9 +722,8 @@ public class PortletExporter {
 		context.setGroupId(context.getScopeGroupId());
 
 		try {
-			data = (String)PortletClassInvoker.invoke(
-				portletId, portletDataHandlerClass, "exportData", context,
-				portletId, portletPreferences);
+			data = portletDataHandler.exportData(
+				context, portletId, portletPreferences);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

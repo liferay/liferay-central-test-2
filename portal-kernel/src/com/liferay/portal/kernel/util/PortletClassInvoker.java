@@ -37,111 +37,115 @@ import javax.servlet.ServletContext;
 public class PortletClassInvoker {
 
 	public static Object invoke(
-			String portletId, String className, String methodName)
+			String rootPortletId, String className, String methodName)
 		throws Exception {
 
-		return invoke(portletId, className, methodName, new Object[] {});
+		return invoke(rootPortletId, className, methodName, new Object[] {});
 	}
 
 	public static Object invoke(
-			String portletId, String className, String methodName, Object arg)
+			String rootPortletId, String className, String methodName,
+			Object arg)
 		throws Exception {
 
-		return invoke(portletId, className, methodName, new Object[] {arg});
+		return invoke(rootPortletId, className, methodName, new Object[] {arg});
 	}
 
 	public static Object invoke(
-			String portletId, String className, String methodName, Object arg1,
-			Object arg2)
+			String rootPortletId, String className, String methodName,
+			Object arg1, Object arg2)
 		throws Exception {
 
 		return invoke(
-			portletId, className, methodName, new Object[] {arg1, arg2});
+			rootPortletId, className, methodName, new Object[] {arg1, arg2});
 	}
 
 	public static Object invoke(
-			String portletId, String className, String methodName, Object arg1,
-			Object arg2, Object arg3)
+			String rootPortletId, String className, String methodName,
+			Object arg1, Object arg2, Object arg3)
 		throws Exception {
 
 		return invoke(
-			portletId, className, methodName, new Object[] {arg1, arg2, arg3});
+			rootPortletId, className, methodName,
+			new Object[] {arg1, arg2, arg3});
 	}
 
 	public static Object invoke(
-			String portletId, String className, String methodName, Object arg1,
-			Object arg2, Object arg3, Object arg4)
+			String rootPortletId, String className, String methodName,
+			Object arg1, Object arg2, Object arg3, Object arg4)
 		throws Exception {
 
 		return invoke(
-			portletId, className, methodName,
+			rootPortletId, className, methodName,
 			new Object[] {arg1, arg2, arg3, arg4});
 	}
 
 	public static Object invoke(
-			String portletId, String className, String methodName,
+			String rootPortletId, String className, String methodName,
 			Object[] args)
 		throws Exception {
 
-		return invoke(portletId, className, methodName, args, true);
+		return invoke(rootPortletId, className, methodName, args, true);
 	}
 
 	public static Object invoke(
-		String portletId,String className, String methodName,
+		String rootPortletId,String className, String methodName,
 		boolean newInstance)
 		throws Exception {
 
 		return invoke(
-			portletId, className, methodName, new Object[] {}, newInstance);
+			rootPortletId, className, methodName, new Object[] {}, newInstance);
 	}
 
 	public static Object invoke(
-			String portletId, String className, String methodName, Object arg,
+			String rootPortletId, String className, String methodName,
+			Object arg, boolean newInstance)
+		throws Exception {
+
+		return invoke(
+			rootPortletId, className, methodName, new Object[] {arg},
+			newInstance);
+	}
+
+	public static Object invoke(
+			String rootPortletId, String className, String methodName,
+			Object arg1, Object arg2, boolean newInstance)
+		throws Exception {
+
+		return invoke(
+			rootPortletId, className, methodName, new Object[] {arg1, arg2},
+			newInstance);
+	}
+
+	public static Object invoke(
+			String rootPortletId, String className, String methodName,
+			Object arg1, Object arg2, Object arg3, boolean newInstance)
+		throws Exception {
+
+		return invoke(
+			rootPortletId, className, methodName,
+			new Object[] {arg1, arg2, arg3}, newInstance);
+	}
+
+	public static Object invoke(
+			String rootPortletId, String className, String methodName,
+			Object arg1, Object arg2, Object arg3, Object arg4,
 			boolean newInstance)
 		throws Exception {
 
 		return invoke(
-			portletId, className, methodName, new Object[] {arg}, newInstance);
-	}
-
-	public static Object invoke(
-			String portletId, String className, String methodName, Object arg1,
-			Object arg2, boolean newInstance)
-		throws Exception {
-
-		return invoke(
-			portletId, className, methodName, new Object[] {arg1, arg2},
-			newInstance);
-	}
-
-	public static Object invoke(
-			String portletId, String className, String methodName, Object arg1,
-			Object arg2, Object arg3, boolean newInstance)
-		throws Exception {
-
-		return invoke(
-			portletId, className, methodName, new Object[] {arg1, arg2, arg3},
-			newInstance);
-	}
-
-	public static Object invoke(
-			String portletId, String className, String methodName, Object arg1,
-			Object arg2, Object arg3, Object arg4, boolean newInstance)
-		throws Exception {
-
-		return invoke(
-			portletId, className, methodName,
+			rootPortletId, className, methodName,
 			new Object[] {arg1, arg2, arg3, arg4}, newInstance);
 	}
 
 	public static Object invoke(
-			String portletId, String className, String methodName,
+			String rootPortletId, String className, String methodName,
 			Object[] args, boolean newInstance)
 		throws Exception {
 
 		ClassLoader portletClassLoader = PortalClassLoaderUtil.getClassLoader();
 
-		PortletBag portletBag = PortletBagPool.get(portletId);
+		PortletBag portletBag = PortletBagPool.get(rootPortletId);
 
 		if (portletBag != null) {
 			ServletContext servletContext = portletBag.getServletContext();

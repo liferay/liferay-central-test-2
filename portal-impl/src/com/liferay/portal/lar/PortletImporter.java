@@ -34,10 +34,8 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
-import com.liferay.portal.kernel.util.PortletClassInvoker;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
@@ -300,10 +298,10 @@ public class PortletImporter {
 			return null;
 		}
 
-		String portletDataHandlerClass =
-			portlet.getPortletDataHandlerClass();
+		PortletDataHandler portletDataHandler =
+			portlet.getPortletDataHandlerInstance();
 
-		if (Validator.isNull(portletDataHandlerClass)) {
+		if (portletDataHandler == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Do not delete portlet data for " + portletId +
@@ -324,9 +322,8 @@ public class PortletImporter {
 
 		try {
 			preferencesImpl =
-				(PortletPreferencesImpl)PortletClassInvoker.invoke(
-					portletId, portletDataHandlerClass, "deleteData", context,
-					portletId, preferencesImpl);
+				(PortletPreferencesImpl)portletDataHandler.deleteData(
+					context, portletId, preferencesImpl);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -398,10 +395,10 @@ public class PortletImporter {
 			return null;
 		}
 
-		String portletDataHandlerClass =
-			portlet.getPortletDataHandlerClass();
+		PortletDataHandler portletDataHandler =
+			portlet.getPortletDataHandlerInstance();
 
-		if (Validator.isNull(portletDataHandlerClass)) {
+		if (portletDataHandler == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Do not import portlet data for " + portletId +
@@ -465,9 +462,8 @@ public class PortletImporter {
 
 		try {
 			preferencesImpl =
-				(PortletPreferencesImpl)PortletClassInvoker.invoke(
-					portletId, portletDataHandlerClass, "importData", context,
-					portletId, preferencesImpl, portletData);
+				(PortletPreferencesImpl)portletDataHandler.importData(
+					context, portletId, preferencesImpl, portletData);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

@@ -52,6 +52,7 @@ import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lar.PortletDataHandler;
+import com.liferay.portal.lar.PortletDataHandlerWrapper;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletCategory;
@@ -460,6 +461,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			portletDataHandlerInstance =
 				(PortletDataHandler)portletClassLoader.loadClass(
 					portlet.getPortletDataHandlerClass()).newInstance();
+
+			portletDataHandlerInstance = new PortletDataHandlerWrapper(
+				portletDataHandlerInstance, portletClassLoader);
 		}
 
 		PortletLayoutListener portletLayoutListenerInstance = null;
