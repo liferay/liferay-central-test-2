@@ -124,6 +124,7 @@ public class ControlPanelTests extends BaseTests {
 		testSuite.addTestSuite(EditServerCategoryTest.class);
 		testSuite.addTestSuite(BrowseServerTest.class);
 		testSuite.addTestSuite(BrowseServerPluginsInstallationTest.class);
+		testSuite.addTestSuite(BrowseInstallMorePluginsTest.class);
 		testSuite.addTestSuite(BrowseServerInstanceTest.class);
 		testSuite.addTestSuite(AddServerInstanceTest.class);
 		testSuite.addTestSuite(AddNullServerInstanceWebIDTest.class);

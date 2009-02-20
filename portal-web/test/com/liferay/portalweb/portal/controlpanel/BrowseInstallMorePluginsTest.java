@@ -20,32 +20,54 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.updatemanager;
+package com.liferay.portalweb.portal.controlpanel;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="DeletePageTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="BrowseInstallMorePluginsTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DeletePageTest extends BaseTestCase {
-	public void testDeletePage() throws Exception {
+public class BrowseInstallMorePluginsTest extends BaseTestCase {
+	public void testBrowseInstallMorePlugins() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Plugins Installation")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Plugins Installation"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
-				"//div[@id='navigation']/ul/li[1]/a/span"));
+				"//input[@value='Install More Portlets']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+		selenium.click(RuntimeVariables.replace("link=Portlet Plugins"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[3]/a/span"));
+		assertTrue(selenium.isElementPresent("link=Portlet Plugin"));
+		selenium.click(RuntimeVariables.replace("link=Theme Plugins"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
+		assertTrue(selenium.isElementPresent("link=Theme Plugin"));
+		selenium.click(RuntimeVariables.replace("link=Layout Template Plugins"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		assertTrue(selenium.isElementPresent("link=Layout Template Plugin"));
+		selenium.click(RuntimeVariables.replace("link=Hook Plugins"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Hook Plugin"));
+		selenium.click(RuntimeVariables.replace("link=Web Plugins"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Web Plugin"));
 	}
 }
