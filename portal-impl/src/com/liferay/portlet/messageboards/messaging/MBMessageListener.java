@@ -237,13 +237,14 @@ public class MBMessageListener implements MessageListener {
 				continue;
 			}
 
-			//TODO: Add view permission checks for message, thread, category, and group
-			if (user.isActive()) {
-				InternetAddress userAddress = new InternetAddress(
-					user.getEmailAddress(), user.getFullName());
+			if (!user.isActive()) {
+				continue;
+			}
 
-				addresses.add(userAddress);
-            }
+			InternetAddress userAddress = new InternetAddress(
+				user.getEmailAddress(), user.getFullName());
+
+			addresses.add(userAddress);
 		}
 
 		InternetAddress[] bulkAddresses = addresses.toArray(
