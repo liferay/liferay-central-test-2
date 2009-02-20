@@ -2050,7 +2050,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		User user = userPersistence.findByPrimaryKey(userId);
 
 		// Use silentUpdate so that imported user passwords are not exported
-		// or validated
+		// validated or tracked
 
 		if (!silentUpdate) {
 			validatePassword(user.getCompanyId(), userId, password1, password2);
@@ -2101,9 +2101,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		if (!silentUpdate) {
 			user.setPasswordModified(false);
-		}
 
-		passwordTrackerLocalService.trackPassword(userId, oldEncPwd);
+			passwordTrackerLocalService.trackPassword(userId, oldEncPwd);
+		}
 
 		return user;
 	}
