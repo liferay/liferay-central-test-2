@@ -56,8 +56,16 @@ public class CalendarUtil {
 	};
 
 	public static boolean afterByDay(Date date1, Date date2) {
-		long millis1 = date1.getTime() / 86400000;
-		long millis2 = date2.getTime() / 86400000;
+		Calendar cal1 = CalendarFactoryUtil.getCalendar();
+		cal1.setTime(date1);
+		Calendar cal2 = CalendarFactoryUtil.getCalendar();
+		cal2.setTime(date2);
+
+		cal1.set(cal1.get(Calendar.YEAR), cal1.get(Calendar.MONTH), cal1.get(Calendar.DATE), 0, 0, 0);
+		cal2.set(cal2.get(Calendar.YEAR), cal2.get(Calendar.MONTH), cal2.get(Calendar.DATE), 0, 0, 0);
+
+		long millis1 = cal1.getTimeInMillis() / 86400000;
+		long millis2 = cal2.getTimeInMillis() / 86400000;
 
 		if (millis1 > millis2) {
 			return true;
@@ -68,8 +76,16 @@ public class CalendarUtil {
 	}
 
 	public static boolean beforeByDay(Date date1, Date date2) {
-		long millis1 = date1.getTime() / 86400000;
-		long millis2 = date2.getTime() / 86400000;
+		Calendar cal1 = CalendarFactoryUtil.getCalendar();
+		cal1.setTime(date1);
+		Calendar cal2 = CalendarFactoryUtil.getCalendar();
+		cal2.setTime(date2);
+
+		cal1.set(cal1.get(Calendar.YEAR), cal1.get(Calendar.MONTH), cal1.get(Calendar.DATE), 0, 0, 0);
+		cal2.set(cal2.get(Calendar.YEAR), cal2.get(Calendar.MONTH), cal2.get(Calendar.DATE), 0, 0, 0);
+
+		long millis1 = cal1.getTimeInMillis() / 86400000;
+		long millis2 = cal2.getTimeInMillis() / 86400000;
 
 		if (millis1 < millis2) {
 			return true;
@@ -80,8 +96,16 @@ public class CalendarUtil {
 	}
 
 	public static boolean equalsByDay(Date date1, Date date2) {
-		long millis1 = date1.getTime() / 86400000;
-		long millis2 = date2.getTime() / 86400000;
+		Calendar cal1 = CalendarFactoryUtil.getCalendar();
+		cal1.setTime(date1);
+		Calendar cal2 = CalendarFactoryUtil.getCalendar();
+		cal2.setTime(date2);
+
+		cal1.set(cal1.get(Calendar.YEAR), cal1.get(Calendar.MONTH), cal1.get(Calendar.DATE), 0, 0, 0);
+		cal2.set(cal2.get(Calendar.YEAR), cal2.get(Calendar.MONTH), cal2.get(Calendar.DATE), 0, 0, 0);
+
+		long millis1 = cal1.getTimeInMillis() / 86400000;
+		long millis2 = cal2.getTimeInMillis() / 86400000;
 
 		if (millis1 == millis2) {
 			return true;
