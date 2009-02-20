@@ -21,16 +21,16 @@
 			<bean class="com.liferay.portal.bean.BeanPropertiesImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.cache.MultiVMPortalCacheManager" class="com.liferay.portal.cache.EhcachePortalCacheManager">
-		<property name="configPropertyKey" value="ehcache.multi.vm.config.location" />
-		<property name="MBeanServer" ref="mbeanServer" />
-	</bean>
 	<bean id="com.liferay.portal.kernel.bean.Renderer" class="com.liferay.portal.bean.RendererImpl" />
 	<bean id="com.liferay.portal.kernel.bean.RendererUtil" class="com.liferay.portal.kernel.bean.RendererUtil">
 		<property name="renderer" ref="com.liferay.portal.kernel.bean.Renderer" />
 	</bean>
 	<bean id="com.liferay.portal.kernel.bean.RendererUtil.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityUtil">
 		<property name="target" ref="com.liferay.portal.kernel.bean.Renderer" />
+	</bean>
+	<bean id="com.liferay.portal.cache.MultiVMPortalCacheManager" class="com.liferay.portal.cache.EhcachePortalCacheManager">
+		<property name="configPropertyKey" value="ehcache.multi.vm.config.location" />
+		<property name="MBeanServer" ref="mbeanServer" />
 	</bean>
 	<bean id="com.liferay.portal.kernel.cache.MultiVMPool" class="com.liferay.portal.cache.MultiVMPoolImpl">
 		<property name="portalCacheManager" ref="com.liferay.portal.cache.MultiVMPortalCacheManager" />

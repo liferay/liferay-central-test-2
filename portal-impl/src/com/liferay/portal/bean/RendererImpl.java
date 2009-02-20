@@ -24,10 +24,10 @@ package com.liferay.portal.bean;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.BeanLocator;
-import com.liferay.portal.kernel.bean.RendererException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.bean.Renderer;
+import com.liferay.portal.kernel.bean.RendererException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -43,9 +43,9 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.velocity.VelocityVariables;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
-import java.lang.reflect.Method;
-
 import java.io.StringWriter;
+
+import java.lang.reflect.Method;
 
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
@@ -97,13 +97,13 @@ public class RendererImpl implements Renderer {
 			return null;
 		}
 
+		long companyId = PortalUtil.getCompanyId(request);
+
 		String className = _normalizeClassName(bean.getClass().getName());
 
 		if (Validator.isNotNull(varientSuffix)) {
 			className = varientSuffix;
 		}
-
-		long companyId = PortalUtil.getCompanyId(request);
 
 		String velocityTemplateContent = null;
 
@@ -205,13 +205,13 @@ public class RendererImpl implements Renderer {
 			String servletContextName, Object bean, String varientSuffix)
 		throws RendererException {
 
-		HttpServletRequest httpRequest = PortalUtil.getHttpServletRequest(
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			portletRequest);
-		HttpServletResponse httpResponse = PortalUtil.getHttpServletResponse(
+		HttpServletResponse response = PortalUtil.getHttpServletResponse(
 			portletResponse);
 
 		return renderBean(
-			httpRequest, httpResponse, servletContextName, bean, varientSuffix);
+			request, response, servletContextName, bean, varientSuffix);
 	}
 
 	public String renderEntity(
@@ -219,8 +219,7 @@ public class RendererImpl implements Renderer {
 			String className, Object classPK)
 		throws RendererException {
 
-		return renderEntity(
-			request, response, null, className, classPK, null);
+		return renderEntity(request, response, null, className, classPK, null);
 	}
 
 	public String renderEntity(
@@ -289,7 +288,8 @@ public class RendererImpl implements Renderer {
 			try {
 				getMethod = serviceBean.getClass().getDeclaredMethod(
 					"get" + beanNameParts[1], classPK.getClass());
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 			}
 
 			if (getMethod == null) {
@@ -297,7 +297,8 @@ public class RendererImpl implements Renderer {
 					getMethod = serviceBean.getClass().getDeclaredMethod(
 						"get" + beanNameParts[1],
 						_mapToPrimitive(classPK.getClass()));
-				} catch (Exception e) {
+				}
+				catch (Exception e) {
 				}
 			}
 
@@ -350,13 +351,13 @@ public class RendererImpl implements Renderer {
 			String varientSuffix)
 		throws RendererException {
 
-		HttpServletRequest httpRequest = PortalUtil.getHttpServletRequest(
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			portletRequest);
-		HttpServletResponse httpResponse = PortalUtil.getHttpServletResponse(
+		HttpServletResponse response = PortalUtil.getHttpServletResponse(
 			portletResponse);
 
 		return renderEntity(
-			httpRequest, httpResponse, servletContextName, className, classPK,
+			request, response, servletContextName, className, classPK,
 			varientSuffix);
 	}
 
@@ -373,7 +374,7 @@ public class RendererImpl implements Renderer {
 				preferences = PortletPreferencesFactoryUtil.getPortletSetup(
 					request, portletResource);
 			}
-			catch (SystemException e) {
+			catch (SystemException se) {
 			}
 		}
 
@@ -410,8 +411,11 @@ public class RendererImpl implements Renderer {
 	}
 
 	private static final String _BEAN = "bean";
+
 	private static final String _LOCAL_SERVICE_UTIL = "LocalServiceUtil";
+
 	private static final String _MODEL = ".model.";
+
 	private static final String _SERVICE = ".service.";
 
 	private static Log _log = LogFactoryUtil.getLog(RendererImpl.class);

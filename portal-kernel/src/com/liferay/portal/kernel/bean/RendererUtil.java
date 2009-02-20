@@ -53,8 +53,7 @@ public class RendererUtil {
 			Object bean, String varientSuffix)
 		throws RendererException {
 
-		return getRenderer().renderBean(
-			request, response, bean, varientSuffix);
+		return getRenderer().renderBean(request, response, bean, varientSuffix);
 	}
 
 	public static String renderBean(
@@ -80,8 +79,7 @@ public class RendererUtil {
 			Object bean)
 		throws RendererException {
 
-		return getRenderer().renderBean(
-			portletRequest, portletResponse, bean);
+		return getRenderer().renderBean(portletRequest, portletResponse, bean);
 	}
 
 	public static String renderBean(
