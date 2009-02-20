@@ -62,7 +62,7 @@ public class WikiTests extends BaseTests {
 		testSuite.addTestSuite(VerifyNoOrphanedPagesTest.class);
 		testSuite.addTestSuite(DeleteAllTest.class);
 		testSuite.addTestSuite(ImportLARTest.class);
-		testSuite.addTestSuite(VerifyImportLARTest.class);
+		testSuite.addTestSuite(AssertImportLARTest.class);
 		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;

@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="VerifyImportLARTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssertImportLARTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class VerifyImportLARTest extends BaseTestCase {
-	public void testVerifyImportLAR() throws Exception {
+public class AssertImportLARTest extends BaseTestCase {
+	public void testAssertImportLAR() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -52,7 +52,7 @@ public class VerifyImportLARTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Wiki Article"));
-		assertTrue(selenium.isTextPresent("this is italics "));
+		assertTrue(selenium.isTextPresent("this is italics"));
 		assertTrue(selenium.isTextPresent("bold"));
 		assertTrue(selenium.isElementPresent("link=Link to website"));
 		assertTrue(selenium.isTextPresent("this is a list item"));
@@ -63,7 +63,7 @@ public class VerifyImportLARTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("link=Test"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Child Article"));
-		assertTrue(selenium.isTextPresent("this is italics "));
+		assertTrue(selenium.isTextPresent("this is italics"));
 		assertTrue(selenium.isTextPresent("bold"));
 		assertTrue(selenium.isElementPresent("link=Link to website"));
 		assertTrue(selenium.isTextPresent("this is a list item"));
