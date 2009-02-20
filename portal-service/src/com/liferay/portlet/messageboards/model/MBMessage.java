@@ -56,6 +56,10 @@ public interface MBMessage extends MBMessageModel {
 
 	public com.liferay.portlet.messageboards.model.MBCategory getCategory();
 
+	public com.liferay.portlet.messageboards.model.MBThread getThread()
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public boolean isRoot();
 
 	public boolean isReply();

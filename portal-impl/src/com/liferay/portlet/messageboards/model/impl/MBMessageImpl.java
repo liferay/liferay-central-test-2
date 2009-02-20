@@ -32,6 +32,7 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.portlet.messageboards.util.BBCodeUtil;
@@ -77,6 +78,10 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 		}
 
 		return category;
+	}
+
+	public MBThread getThread() throws PortalException, SystemException {
+		return MBThreadLocalServiceUtil.getThread(getThreadId());
 	}
 
 	public boolean isRoot() {
@@ -147,8 +152,9 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 
 	public double getPriority() throws PortalException, SystemException {
 		if (_priority == -1) {
-			_priority = MBThreadLocalServiceUtil.getThread(getThreadId()).
-				getPriority();
+			MBThread thread = getThread();
+
+			_priority = thread.getPriority();
 		}
 
 		return _priority;
