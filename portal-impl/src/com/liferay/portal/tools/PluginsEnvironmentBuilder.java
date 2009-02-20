@@ -161,7 +161,6 @@ public class PluginsEnvironmentBuilder {
 
 		List<String> portalJars = new ArrayList<String>(dependencyJars);
 
-		portalJars.add("annotations.jar");
 		portalJars.add("commons-logging.jar");
 		portalJars.add("log4j.jar");
 
@@ -214,6 +213,7 @@ public class PluginsEnvironmentBuilder {
 		_addClasspathEntry(sb, "/portal/lib/development/jsp-api.jar");
 		_addClasspathEntry(sb, "/portal/lib/development/mail.jar");
 		_addClasspathEntry(sb, "/portal/lib/development/servlet-api.jar");
+		_addClasspathEntry(sb, "/portal/lib/global/annotations.jar");
 		_addClasspathEntry(sb, "/portal/lib/global/container.jar");
 		_addClasspathEntry(sb, "/portal/lib/global/portlet-container.jar");
 		_addClasspathEntry(sb, "/portal/lib/global/portlet.jar");
