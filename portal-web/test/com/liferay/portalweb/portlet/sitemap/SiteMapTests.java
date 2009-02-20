@@ -41,11 +41,11 @@ public class SiteMapTests extends BaseTests {
 		testSuite.addTestSuite(AddPageTest.class);
 		testSuite.addTestSuite(AddPortletTest.class);
 		testSuite.addTestSuite(AddChildPageTest.class);
-		testSuite.addTestSuite(AddPortletToChildrenTest.class);
+		testSuite.addTestSuite(AddPortletToChildTest.class);
 		testSuite.addTestSuite(VerifyLinksTest.class);
 		testSuite.addTestSuite(EditConfigurationTest.class);
 		testSuite.addTestSuite(ImportLARTest.class);
-		testSuite.addTestSuite(VerifyImportLARTest.class);
+		testSuite.addTestSuite(AssertImportLARTest.class);
 		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;

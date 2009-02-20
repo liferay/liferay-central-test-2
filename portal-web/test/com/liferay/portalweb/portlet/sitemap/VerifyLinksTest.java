@@ -56,24 +56,15 @@ public class VerifyLinksTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Site Map Test Page \u00bb Site Map Child Page"));
-		assertFalse(selenium.isTextPresent(
-				"Site Map Test Page \u00bb Site Map Child Page \u00bb Site Map Grand Child"));
-		selenium.click(RuntimeVariables.replace("link=Site Map Test Page"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Site Map Grand Child"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Site Map Test Page \u00bb Site Map Child Page \u00bb Site Map Grand Child"));
 		selenium.click(RuntimeVariables.replace("link=Site Map Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//div[2]/div/div/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Admin"));
-		selenium.click(RuntimeVariables.replace("link=Site Map Test Page"));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Enterprise Admin"));
 		selenium.click(RuntimeVariables.replace(
 				"//a[contains(text(),'Plugins')]"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Plugin Installer"));
+		assertTrue(selenium.isElementPresent(
+				"//input[@value='Install More Portlets']"));
 	}
 }

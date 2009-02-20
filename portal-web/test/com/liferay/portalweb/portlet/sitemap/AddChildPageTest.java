@@ -65,17 +65,8 @@ public class AddChildPageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		selenium.click(RuntimeVariables.replace("//li[2]/ul/li[3]/ul/li/a/span"));
+		selenium.click(RuntimeVariables.replace("link=Site Map Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Children"));
-		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_88_name_en_US",
-			RuntimeVariables.replace("Site Map Grand Child"));
-		selenium.type("_88_name_en_US",
-			RuntimeVariables.replace("Site Map Grand Child"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertTrue(selenium.isElementPresent("link=Site Map Child Page"));
 	}
 }

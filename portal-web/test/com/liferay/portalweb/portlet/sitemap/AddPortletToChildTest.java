@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddPortletToChildrenTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddPortletToChildTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddPortletToChildrenTest extends BaseTestCase {
-	public void testAddPortletToChildren() throws Exception {
+public class AddPortletToChildTest extends BaseTestCase {
+	public void testAddPortletToChild() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -53,45 +53,6 @@ public class AddPortletToChildrenTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
 				"//div[2]/div/div/ul/li[3]/ul/li/a"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Add Application");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//div[@id='ContentManagement-Navigation']/p/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("//div[@id='ContentManagement-Navigation']/p/a");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Site Map Grand Child")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Site Map Grand Child"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Add Application");
 

@@ -63,6 +63,6 @@ public class EditConfigurationTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("link=Site Map Test Page"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Site Map Child Page"));
-		assertFalse(selenium.isElementPresent("link=Site Map Grand Child Page"));
+		assertFalse(selenium.isElementPresent("//a[contains(text(),'Plugins')]"));
 	}
 }
