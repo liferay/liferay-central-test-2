@@ -152,6 +152,10 @@ public class WikiMessageListener implements MessageListener {
 				continue;
 			}
 
+			if (!user.isActive()) {
+				continue;
+			}
+
 			try {
 				InternetAddress from = new InternetAddress(
 					fromAddress, fromName);
