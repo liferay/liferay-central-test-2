@@ -225,11 +225,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			while (itr.hasNext() && (messages.size() < max)) {
 				MBMessage message = itr.next();
 
-				MBThread thread = mbThreadLocalService.getThread(message.getThreadId());
-
 				if (MBMessagePermission.contains(
-						getPermissionChecker(), message, ActionKeys.VIEW) && MBMessagePermission.contains(
-					getPermissionChecker(), thread.getRootMessageId(), ActionKeys.VIEW)) {
+						getPermissionChecker(), message, ActionKeys.VIEW)) {
 
 					messages.add(message);
 				}
@@ -272,11 +269,9 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 			while (itr.hasNext() && (messages.size() < max)) {
 				MBMessage message = itr.next();
-				MBThread thread = mbThreadLocalService.getThread(message.getThreadId());
 
 				if (MBMessagePermission.contains(
-						getPermissionChecker(), message, ActionKeys.VIEW) && MBMessagePermission.contains(
-					getPermissionChecker(), thread.getRootMessageId(), ActionKeys.VIEW)) {
+						getPermissionChecker(), message, ActionKeys.VIEW)) {
 
 					messages.add(message);
 				}
@@ -317,11 +312,9 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 			while (itr.hasNext() && (messages.size() < max)) {
 				MBMessage message = itr.next();
-				MBThread thread = mbThreadLocalService.getThread(message.getThreadId());
 
 				if (MBMessagePermission.contains(
-						getPermissionChecker(), message, ActionKeys.VIEW) && MBMessagePermission.contains(
-					getPermissionChecker(), thread.getRootMessageId(), ActionKeys.VIEW)) {
+						getPermissionChecker(), message, ActionKeys.VIEW)) {
 
 					messages.add(message);
 				}
@@ -370,11 +363,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			while (itr.hasNext() && (messages.size() < max)) {
 				MBMessage message = itr.next();
 
-				MBThread thread = mbThreadLocalService.getThread(message.getThreadId());
-
 				if (MBMessagePermission.contains(
-						getPermissionChecker(), message, ActionKeys.VIEW) && MBMessagePermission.contains(
-					getPermissionChecker(), thread.getRootMessageId(), ActionKeys.VIEW)) {
+						getPermissionChecker(), message, ActionKeys.VIEW)) {
 
 					messages.add(message);
 				}
@@ -425,23 +415,18 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		MessageCreateDateComparator comparator =
 			new MessageCreateDateComparator(false, true);
 
-		MBThread thread = mbThreadLocalService.getThread(threadId);
+		Iterator<MBMessage> itr = mbMessageLocalService.getThreadMessages(
+			threadId, comparator).iterator();
 
-		if (MBMessagePermission.contains(
-					getPermissionChecker(), thread.getRootMessageId(), ActionKeys.VIEW)) {
-			Iterator<MBMessage> itr = mbMessageLocalService.getThreadMessages(
-				threadId, comparator).iterator();
+		while (itr.hasNext() && (messages.size() < max)) {
+			MBMessage message = itr.next();
 
-			while (itr.hasNext() && (messages.size() < max)) {
-				MBMessage message = itr.next();
+			if (MBMessagePermission.contains(
+					getPermissionChecker(), message, ActionKeys.VIEW)) {
 
-				if (MBMessagePermission.contains(
-						getPermissionChecker(), message, ActionKeys.VIEW)) {
-
-					messages.add(message);
-				}
+				messages.add(message);
 			}
-        }
+		}
 
 		if (messages.size() > 0) {
 			MBMessage message = messages.get(messages.size() - 1);
