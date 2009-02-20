@@ -61,6 +61,8 @@ public class MessageBoardsTests extends BaseTests {
 		testSuite.addTestSuite(DeleteAllTest.class);
 		testSuite.addTestSuite(ImportLARTest.class);
 		testSuite.addTestSuite(AssertImportLARTest.class);
+		testSuite.addTestSuite(AddQuestionThreadTest.class);
+		testSuite.addTestSuite(AddAnswerThreadTest.class);
 		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
