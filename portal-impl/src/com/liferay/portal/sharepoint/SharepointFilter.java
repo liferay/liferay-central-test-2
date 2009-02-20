@@ -176,10 +176,10 @@ public class SharepointFilter extends BasePortalFilter {
 
 		String method = request.getMethod();
 
-		String userAgent = request.getHeader(HttpHeaders.USER_AGENT);
+		String userAgent = GetterUtil.getString(
+			request.getHeader(HttpHeaders.USER_AGENT));
 
-		if ((userAgent != null) &&
-			(userAgent.startsWith(
+		if ((userAgent.startsWith(
 				"Microsoft Data Access Internet Publishing") ||
 			 userAgent.startsWith("Microsoft Office Protocol Discovery")) &&
 			method.equals(HttpMethods.OPTIONS)) {
