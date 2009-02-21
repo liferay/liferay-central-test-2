@@ -92,7 +92,7 @@ if (dateFormatPattern.indexOf("y") == 0) {
 
 				var month = null;
 				var day = null;
-				var year = null;;
+				var year = null;
 
 				if (!instance._combinedMonthYear) {
 					month = instance._monthField.val();
