@@ -558,6 +558,10 @@ urlMax.setEscapeXml(false);
 if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
 	String portletNamespace = portletDisplay.getNamespace();
 
+	Enumeration<String> enu = portletConfig.getPublicRenderParameterNames();
+
+	List<String> publicRenderParameterNames = ListUtil.fromEnumeration(enu);
+
 	Map renderParameters = RenderParametersPool.get(request, plid, portletDisplay.getId());
 
 	Iterator itr = renderParameters.entrySet().iterator();
@@ -567,8 +571,8 @@ if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
 
 		String key = (String)entry.getKey();
 
-		if (key.startsWith(portletNamespace)) {
-			key = key.substring(portletNamespace.length(), key.length());
+		if (key.startsWith(portletNamespace) || publicRenderParameterNames.contains(key)) {
+			key = key.startsWith(portletNamespace) ? key.substring(portletNamespace.length(), key.length()) : key;
 
 			String[] values = (String[])entry.getValue();
 
