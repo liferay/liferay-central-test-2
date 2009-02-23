@@ -71,7 +71,7 @@ public class UpdatePasswordAction extends Action {
 			if (e instanceof UserPasswordException) {
 				SessionErrors.add(request, e.getClass().getName(), e);
 
-				return mapping.findForward("portal.update_password");
+				return mapping.findForward(ActionConstants.COMMON_REFERER);
 			}
 			else if (e instanceof NoSuchUserException ||
 					 e instanceof PrincipalException) {
