@@ -66,15 +66,15 @@ public class ForgotPasswordAction extends PortletAction {
 		throws Exception {
 
 		try {
-			if (PropsValues.USERS_REMINDER_QUERIES_ENABLED) {
+			User user = getUser(actionRequest);
+
+			if (PropsValues.USERS_REMINDER_QUERIES_ENABLED && Validator.isNotNull(user.getReminderQueryQuestion()) && Validator.isNotNull(user.getReminderQueryAnswer())) {
 				int step = ParamUtil.getInteger(actionRequest, "step");
 
 				if (step == 1) {
 					if (PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD) {
 						CaptchaUtil.check(actionRequest);
 					}
-
-					User user = getUser(actionRequest);
 
 					actionRequest.setAttribute(
 						ForgotPasswordAction.class.getName(), user);
