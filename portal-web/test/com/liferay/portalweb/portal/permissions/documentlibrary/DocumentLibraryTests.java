@@ -75,8 +75,7 @@ public class DocumentLibraryTests extends BaseTests {
 		testSuite.addTestSuite(Member_AssertCannotEditUserCommentsTest.class);
 		testSuite.addTestSuite(Member_AssertCannotDeleteUserCommentsTest.class);
 		testSuite.addTestSuite(Member_AssertCannotEditUserDocumentsTest.class);
-		testSuite.addTestSuite(
-			Member_AssertCannotDeleteUserDocumentsTest.class);
+		testSuite.addTestSuite(Member_AssertCannotDeleteUserDocumentsTest.class);
 		testSuite.addTestSuite(Member_AssertCannotMoveUserDocumentsTest.class);
 		testSuite.addTestSuite(Member_AssertCannotEditPermissionsTest.class);
 		testSuite.addTestSuite(Member_AssertCannotEditConfigurationTest.class);

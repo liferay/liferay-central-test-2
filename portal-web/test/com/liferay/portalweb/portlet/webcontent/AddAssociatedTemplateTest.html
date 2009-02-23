@@ -84,6 +84,46 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('link=TEST'))</td>
+	<td>TemplateRestoredA</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${TemplateRestoredA}</td>
+	<td>TemplatePresentA</td>
+</tr>
+<tr>
+	<td>close</td>
+	<td>name=structure</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>TemplatePresentA</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('link=TEST'))</td>
+	<td>TemplateRestoredB</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${TemplateRestoredB}</td>
+	<td>NoTemplatePresentB</td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=TEST</td>
 	<td></td>
@@ -96,6 +136,11 @@
 <tr>
 	<td>selectWindow</td>
 	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>NoTemplatePresentB</td>
 	<td></td>
 </tr>
 <tr>

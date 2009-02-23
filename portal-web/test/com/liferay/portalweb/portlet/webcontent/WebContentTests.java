@@ -60,6 +60,11 @@ public class WebContentTests extends BaseTests {
 		testSuite.addTestSuite(VerifyImportLARTest.class);
 		testSuite.addTestSuite(AddAssociatedTemplateTest.class);
 		testSuite.addTestSuite(AssertStructureTemplateAssociationTest.class);
+		testSuite.addTestSuite(AddLocalizedStructureTest.class);
+		testSuite.addTestSuite(AddLocalizedTemplateTest.class);
+		testSuite.addTestSuite(AddLocalizedArticleTest.class);
+		testSuite.addTestSuite(AssertSavedLocalizationTest.class);
+		testSuite.addTestSuite(AssertWebContentDisplayLocalizationTest.class);
 		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;

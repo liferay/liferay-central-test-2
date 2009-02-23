@@ -34,74 +34,115 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class AssertStructureTemplateAssociationTest extends BaseTestCase {
 	public void testAssertStructureTemplateAssociation()
 		throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+		int label = 1;
 
-			try {
-				if (selenium.isElementPresent("link=Web Content")) {
-					break;
+		while (label >= 1) {
+			switch (label) {
+			case 1:
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("link=Web Content")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.click(RuntimeVariables.replace("link=Web Content"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace(
+						"//li[@id='_15_tabs1web-contentTabsId']/a"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Add Web Content']"));
+				selenium.waitForPageToLoad("30000");
+				Thread.sleep(5000);
 
-		selenium.click(RuntimeVariables.replace("link=Web Content"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//li[@id='_15_tabs1web-contentTabsId']/a"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Web Content']"));
-		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+					try {
+						if (selenium.isElementPresent(
+									"//input[@value='Select']")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
 
-			try {
-				if (selenium.isElementPresent("//input[@value='Select']")) {
-					break;
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.click("//input[@value='Select']");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Selecting a new structure will change the available input fields and available templates[\\s\\S] Do you want to proceed[\\s\\S]$"));
+				selenium.waitForPopUp("structure",
+					RuntimeVariables.replace("30000"));
+				selenium.selectWindow("name=structure");
+				Thread.sleep(5000);
 
-		selenium.click("//input[@value='Select']");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Selecting a new structure will change the available input fields and available templates[\\s\\S] Do you want to proceed[\\s\\S]$"));
-		selenium.waitForPopUp("structure", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("name=structure");
+				boolean TemplateRestoredA = selenium.isElementPresent(
+						"link=TEST");
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				if (TemplateRestoredA) {
+					label = 2;
 
-			try {
-				if (selenium.isElementPresent("link=TEST")) {
-					break;
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				selenium.close();
+				selenium.selectWindow("null");
+
+			case 2:
+
+				boolean TemplateRestoredB = selenium.isElementPresent(
+						"link=TEST");
+
+				if (!TemplateRestoredB) {
+					label = 3;
+
+					continue;
+				}
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("link=TEST")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.click("link=TEST");
+				selenium.selectWindow("null");
+
+			case 3:
+				Thread.sleep(5000);
+				assertTrue(selenium.isElementPresent(
+						"link=Test Web Content TemplateB"));
+				assertFalse(selenium.isElementPresent(
+						"link=Test Web Content Template"));
+
+			case 100:
+				label = -1;
+			}
 		}
-
-		selenium.click("link=TEST");
-		selenium.selectWindow("null");
-		Thread.sleep(5000);
-		assertTrue(selenium.isElementPresent("link=Test Web Content TemplateB"));
-		assertFalse(selenium.isElementPresent("link=Test Web Content Template"));
 	}
 }

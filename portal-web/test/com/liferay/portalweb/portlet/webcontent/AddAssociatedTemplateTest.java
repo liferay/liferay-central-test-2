@@ -33,119 +33,164 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddAssociatedTemplateTest extends BaseTestCase {
 	public void testAddAssociatedTemplate() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+		int label = 1;
 
-			try {
-				if (selenium.isElementPresent("link=Web Content")) {
-					break;
+		while (label >= 1) {
+			switch (label) {
+			case 1:
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("link=Web Content")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.click(RuntimeVariables.replace("link=Web Content"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace("link=Templates"));
+				selenium.waitForPageToLoad("30000");
 
-		selenium.click(RuntimeVariables.replace("link=Web Content"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Templates"));
-		selenium.waitForPageToLoad("30000");
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+					try {
+						if (selenium.isElementPresent(
+									"//input[@value='Add Template']")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
 
-			try {
-				if (selenium.isElementPresent("//input[@value='Add Template']")) {
-					break;
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Add Template']"));
+				selenium.waitForPageToLoad("30000");
 
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Template']"));
-		selenium.waitForPageToLoad("30000");
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+					try {
+						if (selenium.isElementPresent("_15_newTemplateId")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
 
-			try {
-				if (selenium.isElementPresent("_15_newTemplateId")) {
-					break;
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.typeKeys("_15_newTemplateId",
+					RuntimeVariables.replace("testb"));
+				selenium.type("_15_newTemplateId",
+					RuntimeVariables.replace("testb"));
+				selenium.typeKeys("_15_name",
+					RuntimeVariables.replace("Test Web Content TemplateB"));
+				selenium.type("_15_name",
+					RuntimeVariables.replace("Test Web Content TemplateB"));
+				selenium.typeKeys("_15_description",
+					RuntimeVariables.replace(
+						"This is a test web content templateB!"));
+				selenium.type("_15_description",
+					RuntimeVariables.replace(
+						"This is a test web content templateB!"));
+				selenium.click("//input[@value='Select']");
+				selenium.waitForPopUp("structure",
+					RuntimeVariables.replace("30000"));
+				selenium.selectWindow("name=structure");
+				Thread.sleep(5000);
 
-		selenium.typeKeys("_15_newTemplateId", RuntimeVariables.replace("testb"));
-		selenium.type("_15_newTemplateId", RuntimeVariables.replace("testb"));
-		selenium.typeKeys("_15_name",
-			RuntimeVariables.replace("Test Web Content TemplateB"));
-		selenium.type("_15_name",
-			RuntimeVariables.replace("Test Web Content TemplateB"));
-		selenium.typeKeys("_15_description",
-			RuntimeVariables.replace("This is a test web content templateB!"));
-		selenium.type("_15_description",
-			RuntimeVariables.replace("This is a test web content templateB!"));
-		selenium.click("//input[@value='Select']");
-		selenium.waitForPopUp("structure", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("name=structure");
+				boolean TemplateRestoredA = selenium.isElementPresent(
+						"link=TEST");
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				if (TemplateRestoredA) {
+					label = 2;
 
-			try {
-				if (selenium.isElementPresent("link=TEST")) {
-					break;
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.close();
+				selenium.selectWindow("null");
 
-		selenium.click("link=TEST");
-		selenium.selectWindow("null");
+			case 2:
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				boolean TemplateRestoredB = selenium.isElementPresent(
+						"link=TEST");
 
-			try {
-				if (selenium.isElementPresent("link=Test Web Content Structure")) {
-					break;
+				if (!TemplateRestoredB) {
+					label = 3;
+
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("link=TEST")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.click("link=TEST");
+				selenium.selectWindow("null");
+
+			case 3:
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent(
+									"link=Test Web Content Structure")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.type("_15_xsl",
+					RuntimeVariables.replace(
+						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\webcontent\\Template.htm"));
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Save']"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isTextPresent(
+						"Your request processed successfully."));
+				assertTrue(selenium.isTextPresent("Test Web Content TemplateB"));
+
+			case 100:
+				label = -1;
+			}
 		}
-
-		selenium.type("_15_xsl",
-			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\webcontent\\Template.htm"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertTrue(selenium.isTextPresent("Test Web Content TemplateB"));
 	}
 }
