@@ -106,6 +106,12 @@ public class MBMessagePermission {
 			return false;
 		}
 
+		if (!permissionChecker.hasPermission(
+				message.getCompanyId(), MBCategory.class.getName(),
+				category.getPrimaryKey(), actionId)) {
+			return false;
+		}
+
 		return permissionChecker.hasPermission(
 			groupId, MBMessage.class.getName(), message.getMessageId(),
 			actionId);
