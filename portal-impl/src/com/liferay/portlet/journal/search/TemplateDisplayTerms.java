@@ -53,7 +53,8 @@ public class TemplateDisplayTerms extends DisplayTerms {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		groupId = themeDisplay.getScopeGroupId();
+		groupId = ParamUtil.getLong(
+			portletRequest, GROUP_ID, themeDisplay.getScopeGroupId());
 		templateId = ParamUtil.getString(portletRequest, TEMPLATE_ID);
 		structureId = ParamUtil.getString(portletRequest, STRUCTURE_ID);
 		name = ParamUtil.getString(portletRequest, NAME);

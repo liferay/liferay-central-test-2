@@ -45,7 +45,8 @@ public class ArticleSearchTerms extends ArticleDisplayTerms {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		groupId = themeDisplay.getScopeGroupId();
+		groupId = ParamUtil.getLong(
+			portletRequest, GROUP_ID, themeDisplay.getScopeGroupId());
 		articleId = DAOParamUtil.getLike(portletRequest, ARTICLE_ID);
 		version = ParamUtil.getDouble(portletRequest, VERSION);
 		title = DAOParamUtil.getLike(portletRequest, TITLE);

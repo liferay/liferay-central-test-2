@@ -23,6 +23,7 @@
 package com.liferay.portlet.journal.search;
 
 import com.liferay.portal.kernel.dao.search.DAOParamUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 
@@ -42,7 +43,8 @@ public class TemplateSearchTerms extends TemplateDisplayTerms {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		groupId = themeDisplay.getScopeGroupId();
+		groupId = ParamUtil.getLong(
+			portletRequest, GROUP_ID, themeDisplay.getScopeGroupId());
 		templateId = DAOParamUtil.getLike(portletRequest, TEMPLATE_ID);
 		structureId = DAOParamUtil.getString(portletRequest, STRUCTURE_ID);
 		name = DAOParamUtil.getLike(portletRequest, NAME);

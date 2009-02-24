@@ -42,7 +42,8 @@ public class FeedSearchTerms extends FeedDisplayTerms {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		groupId = themeDisplay.getScopeGroupId();
+		groupId = ParamUtil.getLong(
+			portletRequest, GROUP_ID, themeDisplay.getScopeGroupId());
 		feedId = ParamUtil.getString(portletRequest, FEED_ID);
 		name = ParamUtil.getString(portletRequest, NAME);
 		description = ParamUtil.getString(portletRequest, DESCRIPTION);

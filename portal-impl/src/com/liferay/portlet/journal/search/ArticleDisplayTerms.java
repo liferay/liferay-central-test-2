@@ -70,7 +70,8 @@ public class ArticleDisplayTerms extends DisplayTerms {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		groupId = themeDisplay.getScopeGroupId();
+		groupId = ParamUtil.getLong(
+			portletRequest, GROUP_ID, themeDisplay.getScopeGroupId());
 		articleId = ParamUtil.getString(portletRequest, ARTICLE_ID);
 		version = ParamUtil.getDouble(portletRequest, VERSION);
 		title = ParamUtil.getString(portletRequest, TITLE);
