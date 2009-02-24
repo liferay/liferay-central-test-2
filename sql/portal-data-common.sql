@@ -310,6 +310,22 @@ insert into Region (regionId, countryId, regionCode, name, active_) values (81, 
 insert into Region (regionId, countryId, regionCode, name, active_) values (82, 15, 'MU', 'Murcia', TRUE);
 insert into Region (regionId, countryId, regionCode, name, active_) values (83, 15, 'NA', 'Navarra', TRUE);
 insert into Region (regionId, countryId, regionCode, name, active_) values (84, 15, 'VC', 'Valencia', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (85, 4, 'BW', 'Baden-Württemberg', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (86, 4, 'BY', 'Bayern', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (87, 4, 'BE', 'Berlin', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (88, 4, 'BR', 'Brandenburg', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (89, 4, 'HB', 'Bremen', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (90, 4, 'HH', 'Hamburg', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (91, 4, 'HE', 'Hessen', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (92, 4, 'MV', 'Mecklenburg-Vorpommern', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (93, 4, 'NI', 'Niedersachsen', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (94, 4, 'NW', 'Nordrhein-Westfalen', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (95, 4, 'RP', 'Rheinland-Pfalz', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (96, 4, 'SL', 'Saarland', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (97, 4, 'SN', 'Sachsen', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (98, 4, 'ST', 'Sachsen-Anhalt', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (99, 4, 'SH', 'Schleswig-Holstein', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (100, 4, 'TH', 'Thüringen', TRUE);
 
 ##
 ## List types for accounts
