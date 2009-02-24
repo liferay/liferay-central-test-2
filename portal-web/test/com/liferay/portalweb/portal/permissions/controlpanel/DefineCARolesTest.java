@@ -57,5 +57,8 @@ public class DefineCARolesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent(
 				"//input[@value='Add Portlet Permissions']"));
+		assertTrue(selenium.isElementPresent(
+				"//input[@value='Add Portal Permissions']"));
+		assertTrue(selenium.isElementPresent("link=Community Admin"));
 	}
 }

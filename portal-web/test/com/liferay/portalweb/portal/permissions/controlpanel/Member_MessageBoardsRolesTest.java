@@ -40,20 +40,44 @@ public class Member_MessageBoardsRolesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//tr[12]/td/a"));
 		selenium.waitForPageToLoad("30000");
+		selenium.select("_128_scope19CONFIGURATION",
+			RuntimeVariables.replace("label="));
 		selenium.select("_128_scope19VIEW",
 			RuntimeVariables.replace("label=Enterprise"));
+		selenium.select("_128_scopecom.liferay.portlet.messageboardsADD_CATEGORY",
+			RuntimeVariables.replace("label="));
+		selenium.select("_128_scopecom.liferay.portlet.messageboardsBAN_USER",
+			RuntimeVariables.replace("label="));
 		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategoryADD_FILE",
 			RuntimeVariables.replace("label=Enterprise"));
 		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategoryADD_MESSAGE",
 			RuntimeVariables.replace("label=Enterprise"));
+		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategoryADD_SUBCATEGORY",
+			RuntimeVariables.replace("label="));
+		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategoryDELETE",
+			RuntimeVariables.replace("label="));
+		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategoryMOVE_THREAD",
+			RuntimeVariables.replace("label="));
+		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategoryPERMISSIONS",
+			RuntimeVariables.replace("label="));
 		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategoryREPLY_TO_MESSAGE",
 			RuntimeVariables.replace("label=Enterprise"));
 		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategorySUBSCRIBE",
 			RuntimeVariables.replace("label=Enterprise"));
+		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategoryUPDATE",
+			RuntimeVariables.replace("label="));
+		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategoryUPDATE_THREAD_PRIORITY",
+			RuntimeVariables.replace("label="));
 		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBCategoryVIEW",
 			RuntimeVariables.replace("label=Enterprise"));
+		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBMessageDELETE",
+			RuntimeVariables.replace("label="));
+		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBMessagePERMISSIONS",
+			RuntimeVariables.replace("label="));
 		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBMessageSUBSCRIBE",
 			RuntimeVariables.replace("label=Enterprise"));
+		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBMessageUPDATE",
+			RuntimeVariables.replace("label="));
 		selenium.select("_128_scopecom.liferay.portlet.messageboards.model.MBMessageVIEW",
 			RuntimeVariables.replace("label=Enterprise"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));

@@ -55,5 +55,10 @@ public class DefineWriterRolesTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[3]/a"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent(
+				"//input[@value='Add Portlet Permissions']"));
+		assertTrue(selenium.isElementPresent(
+				"//input[@value='Add Portal Permissions']"));
+		assertTrue(selenium.isElementPresent("link=Writer"));
 	}
 }

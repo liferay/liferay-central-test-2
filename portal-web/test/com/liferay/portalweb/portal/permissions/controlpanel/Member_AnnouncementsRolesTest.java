@@ -38,8 +38,16 @@ public class Member_AnnouncementsRolesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Announcements"));
 		selenium.waitForPageToLoad("30000");
+		selenium.select("_128_scope84ADD_ENTRY",
+			RuntimeVariables.replace("label="));
+		selenium.select("_128_scope84CONFIGURATION",
+			RuntimeVariables.replace("label="));
 		selenium.select("_128_scope84VIEW",
 			RuntimeVariables.replace("label=Enterprise"));
+		selenium.select("_128_scopecom.liferay.portlet.announcements.model.AnnouncementsEntryDELETE",
+			RuntimeVariables.replace("label="));
+		selenium.select("_128_scopecom.liferay.portlet.announcements.model.AnnouncementsEntryUPDATE",
+			RuntimeVariables.replace("label="));
 		selenium.select("_128_scopecom.liferay.portlet.announcements.model.AnnouncementsEntryVIEW",
 			RuntimeVariables.replace("label=Enterprise"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));

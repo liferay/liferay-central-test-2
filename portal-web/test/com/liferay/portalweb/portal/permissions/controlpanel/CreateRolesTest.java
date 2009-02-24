@@ -33,7 +33,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CreateRolesTest extends BaseTestCase {
 	public void testCreateRoles() throws Exception {
-		selenium.click(RuntimeVariables.replace("//li[5]/ul/li[1]/a[1]"));
+		selenium.click(RuntimeVariables.replace("//li[4]/ul/li[1]/a[1]"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

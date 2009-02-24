@@ -38,10 +38,24 @@ public class Member_BlogsRolesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//tr[10]/td/a"));
 		selenium.waitForPageToLoad("30000");
+		selenium.select("_128_scope33CONFIGURATION",
+			RuntimeVariables.replace("label="));
 		selenium.select("_128_scope33VIEW",
 			RuntimeVariables.replace("label=Enterprise"));
+		selenium.select("_128_scopecom.liferay.portlet.blogsADD_ENTRY",
+			RuntimeVariables.replace("label="));
 		selenium.select("_128_scopecom.liferay.portlet.blogs.model.BlogsEntryADD_DISCUSSION",
 			RuntimeVariables.replace("label=Enterprise"));
+		selenium.select("_128_scopecom.liferay.portlet.blogs.model.BlogsEntryDELETE",
+			RuntimeVariables.replace("label="));
+		selenium.select("_128_scopecom.liferay.portlet.blogs.model.BlogsEntryDELETE_DISCUSSION",
+			RuntimeVariables.replace("label="));
+		selenium.select("_128_scopecom.liferay.portlet.blogs.model.BlogsEntryPERMISSIONS",
+			RuntimeVariables.replace("label="));
+		selenium.select("_128_scopecom.liferay.portlet.blogs.model.BlogsEntryUPDATE",
+			RuntimeVariables.replace("label="));
+		selenium.select("_128_scopecom.liferay.portlet.blogs.model.BlogsEntryUPDATE_DISCUSSION",
+			RuntimeVariables.replace("label="));
 		selenium.select("_128_scopecom.liferay.portlet.blogs.model.BlogsEntryVIEW",
 			RuntimeVariables.replace("label=Enterprise"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));

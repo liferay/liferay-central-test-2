@@ -46,7 +46,7 @@ public class AddPublisherTest extends BaseTestCase {
 		selenium.typeKeys("_125_firstName",
 			RuntimeVariables.replace("Publisher"));
 		selenium.type("_125_firstName", RuntimeVariables.replace("Publisher"));
-		selenium.typeKeys("_125_lastName", RuntimeVariables.replace("Liferay"));
+		selenium.typeKeys("_125_lastName", RuntimeVariables.replace("Lifera"));
 		selenium.type("_125_lastName", RuntimeVariables.replace("Liferay"));
 		selenium.select("_125_suffixId", RuntimeVariables.replace("label=PhD."));
 		selenium.select("_125_birthdayMonth",
@@ -122,5 +122,8 @@ public class AddPublisherTest extends BaseTestCase {
 		selenium.selectWindow("null");
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertTrue(selenium.isTextPresent("Publisher"));
 	}
 }

@@ -60,5 +60,6 @@ public class CA_BlogsRolesTest extends BaseTestCase {
 			RuntimeVariables.replace("label=Enterprise"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("The role permissions were updated."));
 	}
 }
