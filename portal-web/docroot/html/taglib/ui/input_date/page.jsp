@@ -69,97 +69,89 @@ if (dateFormatPattern.indexOf("y") == 0) {
 
 <script type="text/javascript">
 	if (!Liferay.DatePicker) {
-		Liferay.DatePicker = new Expanse.Class({
-			initialize: function(options) {
-				var instance = this;
+		Liferay.DatePicker = Expanse.DatePicker.extend(
+			{
+				initialize: function(options) {
+					var instance = this;
 
-				instance._input = jQuery(options.input);
-				instance._monthField = jQuery(options.monthField);
-				instance._dayField = jQuery(options.dayField);
-				instance._yearField = jQuery(options.yearField);
-				instance._monthYearField = jQuery(options.monthAndYearField);
-				instance._combinedMonthYear = options.combinedMonthYear;
-				instance._yearRange = options.yearRange.join(':');
-				instance._firstDay = options.firstDay;
+					instance._input = jQuery(options.input);
+					instance._monthField = jQuery(options.monthField);
+					instance._dayField = jQuery(options.dayField);
+					instance._yearField = jQuery(options.yearField);
+					instance._monthYearField = jQuery(options.monthAndYearField);
+					instance._combinedMonthYear = options.combinedMonthYear;
+					instance._yearRange = options.yearRange.join(':');
+					instance._firstDay = options.firstDay;
 
-				if (!instance._input.is('.disabled')) {
-					instance._createDatepicker();
-				}
-			},
+					var button = jQuery('<img class="exp-datepicker-button" src="<%= themeDisplay.getPathThemeImages() %>/common/calendar.png" />');
 
-			_beforeShow: function() {
-				var instance = this;
+					instance._input.after(button);
 
-				var month = null;
-				var day = null;
-				var year = null;
+					options.button = button[0];
 
-				if (!instance._combinedMonthYear) {
-					month = instance._monthField.val();
-					year = instance._yearField.val();
-				}
-				else {
-					var value = instance._monthYearField.val();
+					options.mindate = '1/1/' + options.yearRange[0];
+					options.maxdate = '12/31/' + options.yearRange[1];
 
-					value = value.split('_');
-
-					month = value[0];
-					year = value[1];
-				}
-
-				month++;
-
-				day = instance._dayField.val();
-
-				instance._input.val(
-					month + '/' + day + '/' + year
-				);
-
-				return {};
-			},
-
-			_createDatepicker: function() {
-				var instance = this;
-
-				instance._input.datepicker(
-					{
-						buttonImage: '<%= themeDisplay.getPathThemeImages() %>/common/calendar.png',
-						buttonImageOnly: true,
-						clearText: ' ',
-						firstDay: instance._firstDay,
-						showOn: 'both',
-						showOtherMonths: true,
-						showWeeks: true,
-						yearRange: instance._yearRange,
-						beforeShow: function() {
-							instance._beforeShow();
-						},
-						onSelect: function(date, datepicker) {
-							instance._onSelect(date, datepicker);
-						}
+					if (!instance._input.is('.disabled')) {
+						instance._super(options);
 					}
-				);
-			},
 
-			_onSelect: function(date, datepicker) {
-				var instance = this;
+					instance.selectEvent.subscribe(instance._onSelect, instance, true);
 
-				var day = datepicker.selectedDay;
-				var month = datepicker.selectedMonth;
-				var year = datepicker.selectedYear;
+					instance.panel.beforeShowEvent.subscribe(instance._beforeShow, instance, true);
+				},
 
-				if (!instance._combinedMonthYear) {
-					instance._monthField.val(month);
-					instance._yearField.val(year);
+				_beforeShow: function() {
+					var instance = this;
+
+					var month = null;
+					var day = null;
+					var year = null;
+
+					if (!instance._combinedMonthYear) {
+						month = instance._monthField.val();
+						year = instance._yearField.val();
+					}
+					else {
+						var value = instance._monthYearField.val();
+
+						value = value.split('_');
+
+						month = value[0];
+						year = value[1];
+					}
+
+					month++;
+
+					day = instance._dayField.val();
+
+					instance._input.val(
+						month + '/' + day + '/' + year
+					);
+				},
+
+				_onSelect: function(eventName, dates) {
+					var instance = this;
+
+					var selectedDate = dates[0][0];
+
+					var year = selectedDate[0];
+					var month = selectedDate[1] - 1;
+					var day = selectedDate[2];
+
+					if (!instance._combinedMonthYear) {
+						instance._monthField.val(month);
+						instance._yearField.val(year);
+					}
+					else {
+						var monthYearValue = month + '_' + year;
+						instance._monthYearField.val(monthYearValue);
+					}
+
+					instance._dayField.val(day);
 				}
-				else {
-					var monthYearValue = month + '_' + year;
-					instance._monthYearField.val(monthYearValue);
-				}
-
-				instance._dayField.val(day);
 			}
-		});
+		);
 	}
 
 	jQuery(

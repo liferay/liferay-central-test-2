@@ -329,121 +329,168 @@
 
 /* ---------- Date picker ---------- */
 
-#ui-datepicker-div, .ui-datepicker-inline {
+.exp-calendar-container {
 }
 
-#ui-datepicker-div {
+.ie6 .exp-calendar-container {
 }
 
-.ui-datepicker-inline {
+.exp-calendar-container iframe {
 }
 
-.ui-datepicker-dialog {
+.ie6 .exp-calendar-container iframe.fixedsize {
 }
 
-img.ui-datepicker-trigger {
+.exp-calendar-container.exp-calendar-multiple {
 }
 
-.ui-datepicker-prompt {
+.exp-calendar-container.exp-calendar-multiple .groupcal {
 }
 
-.ie6 .ui-datepicker-prompt {
+.exp-calendar-container .exp-calendar-title {
 }
 
-.ui-datepicker-control, .ui-datepicker-links, .ui-datepicker-header, .ui-datepicker {
+.exp-calendar-container.exp-calendar-multiple .exp-calendar-title {
 }
 
-.ui-datepicker-control {
+.exp-calendar-container .exp-calendar-close {
 }
 
-.ui-datepicker-links {
+.exp-calendar-container .exp-calendar-close {
 }
 
-.ui-datepicker-links a {
+/* Calendar element styles */
+
+img.exp-datepicker-button {
 }
 
-.ui-datepicker-control, .ui-datepicker-links {
+.exp-calendar {
 }
 
-.ui-datepicker-links label {
+.exp-calendar.withtitle {
 }
 
-.ui-datepicker-clear, .ui-datepicker-prev {
+.exp-calendar .exp-calendar-nav-left, .exp-calendar .exp-calendar-nav-right {
 }
 
-.ui-datepicker-prev a, .ui-datepicker-next a {
+.exp-calendar .exp-calendar-nav-left {
 }
 
-.ui-datepicker-prev a {
+.exp-calendar .exp-calendar-nav-right {
 }
 
-.ui-datepicker-next a {
+.exp-calendar td.exp-calendar-cell {
 }
 
-.ui-datepicker-current {
+.exp-calendar td.exp-calendar-cell a {
 }
 
-.ui-datepicker-close a {
+.exp-calendar td.exp-calendar-today a {
 }
 
-.ui-datepicker-next {
+.exp-calendar td.exp-calendar-oom {
 }
 
-.ui-datepicker-header {
+.exp-calendar td.exp-calendar-selected a {
 }
 
-.ui-datepicker-header select {
+.exp-calendar td.exp-calendar-cell-hover a {
 }
 
-.ui-datepicker-header .ui-datepicker-new-month {
+.exp-calendar td.exp-calendar-previous {
 }
 
-.ui-datepicker-header .ui-datepicker-new-year {
+.exp-calendar td.exp-calendar-restricted {
 }
 
-.ui-datepicker {
+.exp-calendar td.exp-calendar-previous {
 }
 
-.ui-datepicker a {
+.exp-calendar td.exp-calendar-highlight1 {
 }
 
-.ui-datepicker .ui-datepicker-title-row a {
+.exp-calendar td.exp-calendar-highlight2 {
 }
 
-.ui-datepicker .ui-datepicker-days-row {
+.exp-calendar td.exp-calendar-highlight3 {
 }
 
-.ui-datepicker-week-col {
+.exp-calendar td.exp-calendar-highlight4 {
 }
 
-.ui-datepicker-days-cell a {
+.exp-calendar .exp-calendar-head {
 }
 
-.ui-datepicker-days-cell a:hover {
+.exp-calendar .exp-calendar-header {
 }
 
-.ui-datepicker-current-day a {
+.exp-calendar .exp-calendar-header img {
 }
 
-.ui-datepicker-current-day a:hover {
+.exp-calendar .exp-calendar-weekday-row {
 }
 
-.ui-datepicker .ui-datepicker-unselectable {
+.exp-calendar .exp-calendar-weekday-row th {
 }
 
-#ui-datepicker-div a, .ui-datepicker-inline a {
+.exp-calendar .exp-calendar-foot {
 }
 
-.ui-datepicker-one-month:after {
+.exp-calendar .exp-calendar-rowhead, .exp-calendar .exp-calendar-rowfoot {
 }
 
-.ie .ui-datepicker-one-month {
+.exp-calendar .exp-calendar-rowhead, .exp-calendar .exp-calendar-rowfoot {
 }
 
-.ui-datepicker-new-row {
+.exp-calendar .exp-calendar-rowhead {
 }
 
-.ie6 .ui-datepicker-cover {
+.exp-calendar .exp-calendar-rowfoot {
+}
+
+.exp-calendar a.exp-calendar-nav {
+}
+
+.ie .exp-calendar a.exp-calendar-nav {
+}
+
+.ie .exp-calendar a.exp-calendar-nav {
+}
+
+.exp-calendar-container .exp-calendar-navigator-mask {
+}
+
+.ie .exp-calendar-container .exp-calendar-navigator-mask {
+}
+
+.ie6 .exp-calendar-container .exp-calendar-navigator-mask {
+}
+
+.exp-calendar-container .exp-calendar-navigator {
+}
+
+.exp-calendar-container.withtitle .exp-calendar-navigator {
+}
+
+.exp-calendar-container.exp-calendar-multiple .exp-calendar-navigator {
+}
+
+.exp-calendar-container .exp-calendar-navigator-year, .exp-calendar-container .exp-calendar-navigator-month, .exp-calendar-container .exp-calendar-navigator-buttons {
+}
+
+.exp-calendar-container .exp-calendar-navigator-buttons {
+}
+
+.exp-calendar-container .exp-calendar-navigator-error {
+}
+
+.exp-calendar-container .exp-calendar-navigator label {
+}
+
+.exp-calendar-container .exp-calendar-navigator-month-control {
+}
+
+.ie6 .exp-calendar-container .exp-calendar-navigator-month-control {
 }
 
 /* ---------- Color picker ---------- */

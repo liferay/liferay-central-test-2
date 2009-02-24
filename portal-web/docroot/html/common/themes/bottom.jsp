@@ -26,46 +26,37 @@
 
 <c:if test="<%= themeDisplay.isIncludeCalendarJs() %>">
 	<script type="text/javascript">
-		jQuery.datepicker.setDefaults(
-			{
-				clearText: '<%= UnicodeLanguageUtil.get(pageContext, "clear") %>',
-				clearStatus: '<%= UnicodeLanguageUtil.get(pageContext, "erase-the-current-date") %>',
-				closeText: '<%= UnicodeLanguageUtil.get(pageContext, "close") %>',
-				closeStatus: '<%= UnicodeLanguageUtil.get(pageContext, "cancel") %>',
-				prevText: '&#x3c;<%= UnicodeLanguageUtil.get(pageContext, "previous") %>',
-				prevStatus: '<%= UnicodeLanguageUtil.get(pageContext, "previous") %>',
-				nextText: '<%= UnicodeLanguageUtil.get(pageContext, "next") %>&#x3e;',
-				nextStatus: '<%= UnicodeLanguageUtil.get(pageContext, "next") %>',
-				currentText: '<%= UnicodeLanguageUtil.get(pageContext, "today") %>',
-				currentStatus: '<%= UnicodeLanguageUtil.get(pageContext, "current-month") %>',
-				monthNames: <%= JS.toScript(CalendarUtil.getMonths(locale)) %>,
-				monthNamesShort: <%= JS.toScript(CalendarUtil.getMonths(locale, "MMM")) %>,
-				monthStatus: '<%= UnicodeLanguageUtil.get(pageContext, "show-a-different-month") %>',
-				yearStatus: '<%= UnicodeLanguageUtil.get(pageContext, "show-a-different-year") %>',
-				weekHeader: '<%= UnicodeLanguageUtil.get(pageContext, "week-abbreviation") %>',
-				weekStatus: '<%= UnicodeLanguageUtil.get(pageContext, "wekk-of-the-year") %>',
-				dayNames: <%= JS.toScript(CalendarUtil.getDays(locale)) %>,
-				dayNamesShort: <%= JS.toScript(CalendarUtil.getDays(locale, "EEE")) %>,
+		<%
+		String[] calendarDays = new String[CalendarUtil.DAYS_ABBREVIATION.length];
 
-				<%
-				String[] calendarDays = new String[CalendarUtil.DAYS_ABBREVIATION.length];
+		Calendar cal = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
-				Calendar cal = CalendarFactoryUtil.getCalendar(timeZone, locale);
+		for (int i = 0; i < CalendarUtil.DAYS_ABBREVIATION.length; i++) {
+			calendarDays[i] = LanguageUtil.get(pageContext, CalendarUtil.DAYS_ABBREVIATION[i]);
+		}
+		%>
 
-				for (int i = 0; i < CalendarUtil.DAYS_ABBREVIATION.length; i++) {
-					calendarDays[i] = LanguageUtil.get(pageContext, CalendarUtil.DAYS_ABBREVIATION[i]);
-				}
-				%>
+		(function() {
+			var defaultConfig = YAHOO.widget.Calendar._DEFAULT_CONFIG;
 
-				dayNamesMin: <%= JS.toScript(calendarDays) %>,
-				dayStatus: '',
-				dateStatus: '',
-				dateFormat: 'mm/dd/yy',
-				firstDay: <%= (cal.getFirstDayOfWeek() - 1) % 7 %>,
-				initStatus: '<%= UnicodeLanguageUtil.get(pageContext, "select-date") %>',
-				isRTL: ('<liferay-ui:message key="lang.dir" />' === 'rtl')
-			}
-		);
+			defaultConfig.MONTHS_LONG.value = <%= JS.toScript(CalendarUtil.getMonths(locale)) %>;
+			defaultConfig.MONTHS_SHORT.value = <%= JS.toScript(CalendarUtil.getMonths(locale, "MMM")) %>;
+
+			defaultConfig.WEEKDAYS_LONG.value = <%= JS.toScript(CalendarUtil.getDays(locale)) %>;
+			defaultConfig.WEEKDAYS_MEDIUM.value = <%= JS.toScript(CalendarUtil.getDays(locale, "EEE")) %>;
+			defaultConfig.WEEKDAYS_SHORT.value = <%= JS.toScript(CalendarUtil.getDays(locale, "EE")) %>;
+			defaultConfig.WEEKDAYS_1CHAR.value = <%= JS.toScript(calendarDays) %>;
+
+			defaultConfig.START_WEEKDAY.value = <%= (cal.getFirstDayOfWeek() - 1) % 7 %>;
+
+			defaultConfig.NAV.value = true;
+
+			defaultConfig.STRINGS.value = {
+				close: '<%= UnicodeLanguageUtil.get(pageContext, "close") %>',
+				nextMonth: '<%= UnicodeLanguageUtil.get(pageContext, "next") %>',
+				previousMonth: '<%= UnicodeLanguageUtil.get(pageContext, "previous") %>'
+			};
+		})();
 	</script>
 </c:if>
 
