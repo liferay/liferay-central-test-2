@@ -99,6 +99,11 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 				false, false, false);
 		}
 
+		// LPS-2214
+		if (userId > 0) {
+			userLocalService.reIndex(userId);
+		}
+
 		return role;
 	}
 
@@ -108,6 +113,8 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		userPersistence.addRoles(userId, roleIds);
 
 		PermissionCacheUtil.clearCache();
+
+		userLocalService.reIndex(userId);
 	}
 
 	public void checkSystemRoles(long companyId)
@@ -409,6 +416,9 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		}
 
 		PermissionCacheUtil.clearCache();
+
+		//LPS-2214
+		userLocalService.reIndex(userId);
 	}
 
 	public void unsetUserRoles(long userId, long[] roleIds)
@@ -417,6 +427,9 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		userPersistence.removeRoles(userId, roleIds);
 
 		PermissionCacheUtil.clearCache();
+
+		//LPS-2214
+		userLocalService.reIndex(userId);
 	}
 
 	public Role updateRole(
