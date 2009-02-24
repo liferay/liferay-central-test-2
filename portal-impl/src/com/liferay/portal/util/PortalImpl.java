@@ -60,6 +60,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Company;
@@ -72,6 +73,7 @@ import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
+import com.liferay.portal.model.PublicRenderParameter;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
@@ -104,6 +106,7 @@ import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesWrapper;
+import com.liferay.portlet.PortletQNameUtil;
 import com.liferay.portlet.PortletRequestImpl;
 import com.liferay.portlet.PortletResponseImpl;
 import com.liferay.portlet.PortletURLImpl;
@@ -139,6 +142,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -1563,13 +1567,12 @@ public class PortalImpl implements Portal {
 		String friendlyURL = url;
 		String queryString = StringPool.BLANK;
 
-		List<FriendlyURLMapper> friendlyURLMappers =
-			PortletLocalServiceUtil.getFriendlyURLMappers();
+		LinkedHashMap<FriendlyURLMapper, Portlet>
+			friendlyURLMappersAndPortlets =
+				PortletLocalServiceUtil.getFriendlyURLMappersAndPortlets();
 
-		Iterator<FriendlyURLMapper> itr = friendlyURLMappers.iterator();
-
-		while (itr.hasNext()) {
-			FriendlyURLMapper friendlyURLMapper = itr.next();
+		for (FriendlyURLMapper friendlyURLMapper :
+				friendlyURLMappersAndPortlets.keySet()) {
 
 			if (url.endsWith(
 					StringPool.SLASH + friendlyURLMapper.getMapping())) {
@@ -1618,13 +1621,40 @@ public class PortalImpl implements Portal {
 						"p_p_state", WindowState.MAXIMIZED.toString());
 				}*/
 
+				Portlet portlet = friendlyURLMappersAndPortlets.get(
+					friendlyURLMapper);
+
+				Map<String, String> prpIdentifiers =
+					new HashMap<String, String>();
+
+				if (portlet != null) {
+					Set<PublicRenderParameter> publicRenderParameters =
+						portlet.getPublicRenderParameters();
+
+					for (PublicRenderParameter publicRenderParameter :
+							publicRenderParameters) {
+
+						QName qName = publicRenderParameter.getQName();
+
+						String publicRenderParameterIdentifier =
+							qName.getLocalPart();
+
+						String publicRenderParameterName =
+							PortletQNameUtil.getPublicRenderParameterName(qName);
+
+						prpIdentifiers.put(
+							publicRenderParameterIdentifier,
+							publicRenderParameterName);
+					}
+				}
+
 				if (friendlyURLMapper.isCheckMappingWithPrefix()) {
 					friendlyURLMapper.populateParams(
-						url.substring(pos + 2), actualParams);
+						url.substring(pos + 2), actualParams, prpIdentifiers);
 				}
 				else {
 					friendlyURLMapper.populateParams(
-						url.substring(pos), actualParams);
+						url.substring(pos), actualParams, prpIdentifiers);
 				}
 
 				queryString =

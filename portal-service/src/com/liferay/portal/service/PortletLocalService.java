@@ -109,6 +109,9 @@ public interface PortletLocalService {
 	public java.util.List<com.liferay.portal.kernel.portlet.FriendlyURLMapper> getFriendlyURLMappers();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.LinkedHashMap<com.liferay.portal.kernel.portlet.FriendlyURLMapper, com.liferay.portal.model.Portlet> getFriendlyURLMappersAndPortlets();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Portlet getPortletById(long companyId,
 		java.lang.String portletId) throws com.liferay.portal.SystemException;
 

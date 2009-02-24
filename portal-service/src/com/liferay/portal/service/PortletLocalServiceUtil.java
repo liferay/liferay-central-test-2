@@ -124,6 +124,10 @@ public class PortletLocalServiceUtil {
 		return getService().getFriendlyURLMappers();
 	}
 
+	public static java.util.LinkedHashMap<com.liferay.portal.kernel.portlet.FriendlyURLMapper, com.liferay.portal.model.Portlet> getFriendlyURLMappersAndPortlets() {
+		return getService().getFriendlyURLMappersAndPortlets();
+	}
+
 	public static com.liferay.portal.model.Portlet getPortletById(
 		long companyId, java.lang.String portletId)
 		throws com.liferay.portal.SystemException {

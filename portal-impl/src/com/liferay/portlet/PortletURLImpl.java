@@ -918,6 +918,8 @@ public class PortletURLImpl
 			String name = entry.getKey();
 			String[] values = entry.getValue();
 
+			String identifier = null;
+
 			if (portlet != null) {
 				PublicRenderParameter publicRenderParameter =
 					portlet.getPublicRenderParameter(name);
@@ -938,7 +940,7 @@ public class PortletURLImpl
 						}
 					}
 
-					String identifier = name;
+					identifier = name;
 
 					name = PortletQNameUtil.getPublicRenderParameterName(qName);
 
@@ -954,7 +956,13 @@ public class PortletURLImpl
 			//}
 
 			for (int i = 0; i < values.length; i++) {
-				if (isParameterIncludedInPath(name)) {
+				String parameterName = name;
+
+				if (identifier != null) {
+					parameterName = identifier;
+				}
+
+				if (isParameterIncludedInPath(parameterName)) {
 					continue;
 				}
 

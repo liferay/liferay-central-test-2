@@ -147,16 +147,17 @@ public class SCFriendlyURLMapper extends BaseFriendlyURLMapper {
 	}
 
 	public void populateParams(
-		String friendlyURLPath, Map<String, String[]> params) {
+		String friendlyURLPath, Map<String, String[]> params,
+		Map<String, String> prpIdentifiers) {
 
-		addParam(params, "p_p_id", _PORTLET_ID);
+		addParam(params, prpIdentifiers, "p_p_id", _PORTLET_ID);
 
 		if (!params.containsKey("p_p_lifecycle")) {
-			addParam(params, "p_p_lifecycle", "0");
+			addParam(params, prpIdentifiers, "p_p_lifecycle", "0");
 		}
 
-		addParam(params, "p_p_state", WindowState.MAXIMIZED);
-		addParam(params, "p_p_mode", PortletMode.VIEW);
+		addParam(params, prpIdentifiers, "p_p_state", WindowState.MAXIMIZED);
+		addParam(params, prpIdentifiers, "p_p_mode", PortletMode.VIEW);
 
 		int x = friendlyURLPath.indexOf(StringPool.SLASH, 1);
 
@@ -166,37 +167,45 @@ public class SCFriendlyURLMapper extends BaseFriendlyURLMapper {
 		String resourceIdParam = getResourceIdParam(urlFragments[0]);
 
 		if (urlFragments.length == 1) {
-			addParam(params, "struts_action", "/software_catalog/view");
-			addParam(params, "tabs1", urlFragments[0]);
+			addParam(
+				params, prpIdentifiers, "struts_action",
+				"/software_catalog/view");
+			addParam(params, prpIdentifiers, "tabs1", urlFragments[0]);
 		}
 		else if (urlFragments.length == 2) {
 			if (urlFragments[1].equals("new")) {
 				addParam(
-					params, "struts_action", getEditAction(urlFragments[0]));
-				addParam(params, "tabs1", urlFragments[0]);
+					params, prpIdentifiers, "struts_action",
+					getEditAction(urlFragments[0]));
+				addParam(params, prpIdentifiers, "tabs1", urlFragments[0]);
 			}
 			else if (urlFragments[0].equals("products")) {
 				addParam(
-					params,
-					"struts_action", "/software_catalog/view_product_entry");
-				addParam(params, "tabs1", urlFragments[0]);
-				addParam(params, resourceIdParam, urlFragments[1]);
+					params, prpIdentifiers, "struts_action",
+					"/software_catalog/view_product_entry");
+				addParam(params, prpIdentifiers, "tabs1", urlFragments[0]);
+				addParam(
+					params, prpIdentifiers, resourceIdParam, urlFragments[1]);
 			}
 		}
 		else if (urlFragments.length == 3) {
 			if (urlFragments[2].equals("edit")) {
 				addParam(
-					params, "struts_action", getEditAction(urlFragments[0]));
-				addParam(params, "tabs1", urlFragments[0]);
-				addParam(params, resourceIdParam, urlFragments[1]);
+					params, prpIdentifiers, "struts_action",
+					getEditAction(urlFragments[0]));
+				addParam(params, prpIdentifiers, "tabs1", urlFragments[0]);
+				addParam(
+					params, prpIdentifiers, resourceIdParam, urlFragments[1]);
 			}
 		}
 		else if (urlFragments.length == 4) {
 			if (urlFragments[3].equals("new")) {
 				addParam(
-					params, "struts_action", getEditAction(urlFragments[2]));
-				addParam(params, "tabs1", urlFragments[0]);
-				addParam(params, resourceIdParam, urlFragments[1]);
+					params, prpIdentifiers, "struts_action",
+					getEditAction(urlFragments[2]));
+				addParam(params, prpIdentifiers, "tabs1", urlFragments[0]);
+				addParam(
+					params, prpIdentifiers, resourceIdParam, urlFragments[1]);
 			}
 		}
 		else if (urlFragments.length == 5) {
@@ -204,11 +213,13 @@ public class SCFriendlyURLMapper extends BaseFriendlyURLMapper {
 				urlFragments[4].equals("edit")) {
 
 				addParam(
-					params, "struts_action", getEditAction(urlFragments[2]));
-				addParam(params, "tabs1", urlFragments[0]);
-				addParam(params, resourceIdParam, urlFragments[1]);
+					params, prpIdentifiers, "struts_action",
+					getEditAction(urlFragments[2]));
+				addParam(params, prpIdentifiers, "tabs1", urlFragments[0]);
 				addParam(
-					params, getResourceIdParam(urlFragments[2]),
+					params, prpIdentifiers, resourceIdParam, urlFragments[1]);
+				addParam(
+					params, prpIdentifiers, getResourceIdParam(urlFragments[2]),
 					urlFragments[3]);
 			}
 		}
