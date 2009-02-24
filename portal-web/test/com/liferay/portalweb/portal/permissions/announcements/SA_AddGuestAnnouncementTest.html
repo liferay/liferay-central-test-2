@@ -1,9 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head profile="http://selenium-ide.openqa.org/profiles/test-case">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="" />
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>SA_AddGuestAnnouncementTest</title>
 </head>
 <body>
@@ -11,6 +8,21 @@
 <thead>
 <tr><td rowspan="1" colspan="3">SA_AddGuestAnnouncementTest</td></tr>
 </thead><tbody>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Announcements Permissions Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Announcements Permissions Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Manage Entries</td>
+	<td></td>
+</tr>
 <tr>
 	<td>selectAndWait</td>
 	<td>_84_distributionScope</td>
@@ -20,6 +32,11 @@
 	<td>clickAndWait</td>
 	<td>//input[@value='Add Entry']</td>
 	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_84_title</td>
+	<td>Test Guest Announcement</td>
 </tr>
 <tr>
 	<td>type</td>

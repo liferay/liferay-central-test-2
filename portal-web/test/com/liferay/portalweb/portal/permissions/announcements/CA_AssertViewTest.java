@@ -33,6 +33,23 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_AssertViewTest extends BaseTestCase {
 	public void testCA_AssertView() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=Announcements Permissions Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"link=Announcements Permissions Page"));
 		selenium.waitForPageToLoad("30000");
@@ -47,7 +64,5 @@ public class CA_AssertViewTest extends BaseTestCase {
 		selenium.select("_84_distributionScope", "label=Member");
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Member Announcement"));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
 	}
 }

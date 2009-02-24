@@ -39,7 +39,8 @@ public class Member_DismissAnnouncementTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Entries")) {
+				if (selenium.isElementPresent(
+							"link=Announcements Permissions Page")) {
 					break;
 				}
 			}
@@ -49,17 +50,93 @@ public class Member_DismissAnnouncementTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//img[@alt='Hide']");
-		Thread.sleep(3000);
-		assertFalse(selenium.isTextPresent("Test General Announcement"));
-		selenium.click(RuntimeVariables.replace("link=Old Entries"));
+		selenium.click(RuntimeVariables.replace(
+				"link=Announcements Permissions Page"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Test General Announcement"));
-		assertTrue(selenium.isTextPresent(
-				"This is a test General Announcement."));
-		assertFalse(selenium.isElementPresent("link=Edit"));
-		assertFalse(selenium.isElementPresent("link=Delete"));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Mark as Read");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (!selenium.isElementPresent("link=Mark as Read")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Show");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (!selenium.isElementPresent("link=Show")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Hide")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Hide");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (!selenium.isElementPresent("link=Hide")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Show")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }

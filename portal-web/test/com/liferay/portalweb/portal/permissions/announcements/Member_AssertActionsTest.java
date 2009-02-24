@@ -39,7 +39,8 @@ public class Member_AssertActionsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Entries")) {
+				if (selenium.isElementPresent(
+							"link=Announcements Permissions Page")) {
 					break;
 				}
 			}
@@ -49,15 +50,11 @@ public class Member_AssertActionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertFalse(selenium.isElementPresent("link=Manage Entries"));
-		assertFalse(selenium.isElementPresent("link=Edit"));
-		assertFalse(selenium.isElementPresent("link=Delete"));
-		selenium.click(RuntimeVariables.replace("link=Old Entries"));
+		selenium.click(RuntimeVariables.replace(
+				"link=Announcements Permissions Page"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=Manage Entries"));
 		assertFalse(selenium.isElementPresent("link=Edit"));
 		assertFalse(selenium.isElementPresent("link=Delete"));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
 	}
 }

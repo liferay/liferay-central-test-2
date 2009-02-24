@@ -33,10 +33,34 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SA_AddCAAnnouncementTest extends BaseTestCase {
 	public void testSA_AddCAAnnouncement() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=Announcements Permissions Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace(
+				"link=Announcements Permissions Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Manage Entries"));
+		selenium.waitForPageToLoad("30000");
 		selenium.select("_84_distributionScope", "label=Community Admin");
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Entry']"));
 		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_84_title",
+			RuntimeVariables.replace("Test CA Announcement"));
 		selenium.type("_84_title",
 			RuntimeVariables.replace("Test CA Announcement"));
 		selenium.type("_84_content",

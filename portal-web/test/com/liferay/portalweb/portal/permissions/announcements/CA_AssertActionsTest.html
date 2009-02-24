@@ -1,9 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head profile="http://selenium-ide.openqa.org/profiles/test-case">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="" />
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>CA_AssertActionsTest</title>
 </head>
 <body>
@@ -13,37 +10,12 @@
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Entries</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>link=Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>link=Delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//img[@alt='Hide']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//img[@alt='Hide']</td>
+	<td>link=Announcements Permissions Page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Old Entries</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Test General Announcement</td>
+	<td>link=Announcements Permissions Page</td>
 	<td></td>
 </tr>
 <tr>
@@ -54,6 +26,46 @@
 <tr>
 	<td>assertElementPresent</td>
 	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Mark as Read</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Mark as Read</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>link=Mark as Read</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Show</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Hide</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Hide</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Show</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>link=Hide</td>
 	<td></td>
 </tr>
 <tr>
@@ -64,11 +76,6 @@
 <tr>
 	<td>assertElementPresent</td>
 	<td>//input[@value='Add Entry']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Return to Full Page</td>
 	<td></td>
 </tr>
 

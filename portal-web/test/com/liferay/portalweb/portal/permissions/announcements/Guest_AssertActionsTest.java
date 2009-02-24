@@ -50,16 +50,12 @@ public class Guest_AssertActionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace(
+				"link=Announcements Permissions Page"));
+		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=Edit"));
 		assertFalse(selenium.isElementPresent("link=Delete"));
 		assertFalse(selenium.isElementPresent("link=Manage Entries"));
-		assertFalse(selenium.isElementPresent("//img[@alt='Hide']"));
-		selenium.click(RuntimeVariables.replace("link=Old Entries"));
-		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("link=Edit"));
-		assertFalse(selenium.isElementPresent("link=Delete"));
-		assertFalse(selenium.isElementPresent("//img[@alt='Hide']"));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isElementPresent("link=Mark as Read"));
 	}
 }

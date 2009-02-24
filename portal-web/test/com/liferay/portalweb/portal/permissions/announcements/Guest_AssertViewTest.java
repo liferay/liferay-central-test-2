@@ -33,6 +33,23 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Guest_AssertViewTest extends BaseTestCase {
 	public void testGuest_AssertView() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=Announcements Permissions Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"link=Announcements Permissions Page"));
 		selenium.waitForPageToLoad("30000");
@@ -41,10 +58,5 @@ public class Guest_AssertViewTest extends BaseTestCase {
 				"This is a test General Announcement."));
 		assertFalse(selenium.isTextPresent("Test CA Announcement"));
 		assertFalse(selenium.isTextPresent("Test Member Announcement"));
-		selenium.click(RuntimeVariables.replace("link=Old Entries"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("No entries were found."));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
 	}
 }
