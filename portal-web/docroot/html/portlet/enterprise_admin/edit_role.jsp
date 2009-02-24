@@ -46,39 +46,33 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 	<liferay-util:param name="toolbarItem" value='<%= (role == null) ? "add" : "view-all" %>' />
 </liferay-util:include>
 
-<script type="text/javascript">
-	function <portlet:namespace />saveRole() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= role == null ? Constants.ADD : Constants.UPDATE %>";
 
-		<c:if test="<%= role != null %>">
-			<portlet:namespace />updateLanguage();
-		</c:if>
+<c:choose>
+	<c:when test="<%= (role != null) && PortalUtil.isSystemRole(role.getName()) %>">
+		<%= LanguageUtil.format(pageContext, "x-is-a-required-system-role", role.getTitle(locale)) %>
+	</c:when>
+	<c:otherwise>
+		<script type="text/javascript">
+			function <portlet:namespace />saveRole() {
+				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= role == null ? Constants.ADD : Constants.UPDATE %>";
 
-		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role" /></portlet:actionURL>");
-	}
-</script>
+				// console.log("Submittin: " + document.<portlet:namespace />fm.<portlet:namespace />title_ca_AD.value);
+				// console.log("Submittin: " + document.<portlet:namespace />fm.<portlet:namespace />title_en_US.value);
 
-<form class="uni-form" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveRole(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
-<input name="<portlet:namespace />roleId" type="hidden" value="<%= roleId %>" />
+				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role" /></portlet:actionURL>");
+			}
+		</script>
 
-<liferay-ui:error exception="<%= DuplicateRoleException.class %>" message="please-enter-a-unique-name" />
-<liferay-ui:error exception="<%= RequiredRoleException.class %>" message="old-role-name-is-a-required-system-role" />
-<liferay-ui:error exception="<%= RoleNameException.class %>" message="please-enter-a-valid-name" />
+		<form class="uni-form" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveRole(); return false;">
+		<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+		<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
+		<input name="<portlet:namespace />roleId" type="hidden" value="<%= roleId %>" />
 
-<fieldset class="block-labels">
-	<c:choose>
-		<c:when test="<%= (role != null) && PortalUtil.isSystemRole(role.getName()) %>">
-			<div class="ctrl-holder">
-				<label><liferay-ui:message key="name" /></label>
+		<liferay-ui:error exception="<%= DuplicateRoleException.class %>" message="please-enter-a-unique-name" />
+		<liferay-ui:error exception="<%= RequiredRoleException.class %>" message="old-role-name-is-a-required-system-role" />
+		<liferay-ui:error exception="<%= RoleNameException.class %>" message="please-enter-a-valid-name" />
 
-				<%= role.getName() %>
-
-				<input name="<portlet:namespace />name" type="hidden" value="<%= role.getName() %>" />
-			</div>
-		</c:when>
-		<c:otherwise>
+		<fieldset class="block-labels">
 			<c:if test="<%= role != null %>">
 				<div class="ctrl-holder">
 					<label><liferay-ui:message key="old-name" /></label>
@@ -92,225 +86,305 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 
 				<liferay-ui:input-field model="<%= Role.class %>" bean="<%= role %>" field="name" />
 			</div>
-		</c:otherwise>
-	</c:choose>
 
-	<c:if test="<%= role != null %>">
-		<div class="ctrl-holder">
-			<label><liferay-ui:message key="title" /></label>
+			<c:if test="<%= role != null %>">
+				<div class="ctrl-holder">
+					<label><liferay-ui:message key="title" /></label>
 
-			<table class="lfr-table">
-			<tr>
-				<td>
-					<liferay-ui:message key="default-language" />: <%= defaultLocale.getDisplayName(defaultLocale) %>
-				</td>
-				<td>
-					<liferay-ui:message key="localized-language" />:
+					<input id="<portlet:namespace />title_<%= defaultLanguageId %>" name="<portlet:namespace />title_<%= defaultLanguageId %>" size="30" type="text" value="<%= role.getTitle(defaultLocale) %>" />
+					<img class="default-language" src="<%= themeDisplay.getPathThemeImages() %>/language/<%= defaultLanguageId %>.png" />&nbsp;
 
-					<select id="<portlet:namespace />languageId" onChange="<portlet:namespace />updateLanguage();">
-						<option value="" />
+					<%
+						List<String> langArr = new ArrayList<String>();
 
-						<%
 						for (int i = 0; i < locales.length; i++) {
 							if (locales[i].equals(defaultLocale)) {
 								continue;
 							}
 
-							String optionStyle = StringPool.BLANK;
-
 							if (Validator.isNotNull(role.getTitle(locales[i], false))) {
-								optionStyle = "style=\"font-weight: bold;\"";
+								langArr.add(LanguageUtil.getLanguageId(locales[i]));
 							}
-						%>
-
-							<option <%= (currentLanguageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> <%= optionStyle %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locale) %></option>
-
-						<%
 						}
-						%>
-
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<input id="<portlet:namespace />title_<%= defaultLanguageId %>" name="<portlet:namespace />title_<%= defaultLanguageId %>" size="30" type="text" value="<%= role.getTitle(defaultLocale) %>" />
-				</td>
-				<td>
-
-					<%
-					for (int i = 0; i < locales.length; i++) {
-						if (locales[i].equals(defaultLocale)) {
-							continue;
+						if (langArr.isEmpty()) {
+							langArr.add("");
 						}
+
 					%>
+					<a class="lfr-floating-trigger" href="javascript: ;" id="<portlet:namespace />languageSelectorTrigger">
+						<liferay-ui:message key="other-languages" /> (<%= langArr.size() %>)
+					</a>
 
-						<input id="<portlet:namespace />title_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="<portlet:namespace />title_<%= LocaleUtil.toLanguageId(locales[i]) %>" type="hidden" value="<%= role.getTitle(locales[i], false) %>" />
+					<div class="lfr-floating-container" id="<portlet:namespace />languageSelector">
+						<div class="lfr-panel">
+							<div class="lfr-panel-titlebar">
+								<h3 class="lfr-panel-title"><span><liferay-ui:message key="other-languages" /></span></h3>
+							</div>
 
-					<%
-					}
-					%>
+							<div class="lfr-panel-content">
+								<%
 
-					<input id="<portlet:namespace />title_temp" size="30" type="text" <%= currentLocale.equals(defaultLocale) ? "style='display: none'" : "" %> onChange="<portlet:namespace />onTitleChanged();" />
-				</td>
-			</tr>
-			<tr>
-				<td colspan="3">
-					<br />
-				</td>
-			</tr>
-			</table>
-		</div>
-	</c:if>
+								for (int i = 0; i < langArr.size(); i++) {
 
-	<div class="ctrl-holder">
-		<label><liferay-ui:message key="description" /></label>
+									String languageId = langArr.get(i);
+								%>
+									<div class="lfr-form-row">
+										<div class="row-fields">
+											<div class="ctrl-holder col">
+												<img class="language-flag" src="<%= themeDisplay.getPathThemeImages() %>/language/<%= languageId %>.png" />
+												<select id="<portlet:namespace />languageId<%= i %>">
+													<option value="" />
 
-		<liferay-ui:input-field model="<%= Role.class %>" bean="<%= role %>" field="description" />
-	</div>
+													<%
+													for (int j = 0; j < locales.length; j++) {
+														if (locales[j].equals(defaultLocale)) {
+															continue;
+														}
 
-	<div class="ctrl-holder">
-		<label><liferay-ui:message key="type" /></label>
+														String optionStyle = StringPool.BLANK;
 
-		<c:choose>
-			<c:when test="<%= ((role == null) && (type == 0)) %>">
-				<select name="<portlet:namespace/>type">
-					<option value="<%= RoleConstants.TYPE_REGULAR %>"><liferay-ui:message key="regular" /></option>
-					<option value="<%= RoleConstants.TYPE_COMMUNITY %>"><liferay-ui:message key="community" /></option>
-					<option value="<%= RoleConstants.TYPE_ORGANIZATION %>"><liferay-ui:message key="organization" /></option>
-				</select>
-			</c:when>
-			<c:when test="<%= (role == null) %>">
-				<input type="hidden" name="<portlet:namespace/>type" value="<%= String.valueOf(type) %>" />
+														if (Validator.isNotNull(role.getTitle(locales[j], false))) {
 
-				<%= LanguageUtil.get(pageContext, RoleConstants.getTypeLabel(type)) %>
-			</c:when>
-			<c:otherwise>
-				<%= LanguageUtil.get(pageContext, role.getTypeLabel()) %>
-			</c:otherwise>
-		</c:choose>
-	</div>
+															optionStyle = "style=\"font-weight: bold\"";
+														}
+													%>
 
-	<c:if test="<%= (role != null) && !PortalUtil.isSystemRole(role.getName()) %>">
+														<option <%= (languageId.equals(LocaleUtil.toLanguageId(locales[j]))) ? "selected" : "" %> <%= optionStyle %> value="<%= LocaleUtil.toLanguageId(locales[j]) %>"><%= locales[j].getDisplayName(locale) %></option>
 
-		<%
-		String[] subtypes = null;
+													<%
+													}
+													%>
 
-		if (role.getType() == RoleConstants.TYPE_COMMUNITY) {
-			subtypes = PropsValues.ROLES_COMMUNITY_SUBTYPES;
-		}
-		else if (role.getType() == RoleConstants.TYPE_ORGANIZATION) {
-			subtypes = PropsValues.ROLES_ORGANIZATION_SUBTYPES;
-		}
-		else if (role.getType() == RoleConstants.TYPE_REGULAR) {
-			subtypes = PropsValues.ROLES_REGULAR_SUBTYPES;
-		}
-		else {
-			subtypes = new String[0];
-		}
-		%>
+												</select>
+											</div>
 
-		<c:if test="<%= subtypes.length > 0 %>">
+
+											<div class="ctrl-holder col">
+												<label><liferay-ui:message key="title" /></label>
+
+												<input class="language-value" id="<portlet:namespace />title_" name="<portlet:namespace />title_<%= languageId %>" type="text" value="<%= role.getTitle(languageId, false) %>" />
+											</div>
+										</div>
+									</div>
+								<%
+								}
+								%>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</c:if>
+
+			<c:if test="<%= false %>">
+				<div class="ctrl-holder">
+					<label><liferay-ui:message key="title" /></label>
+
+					<table class="lfr-table">
+					<tr>
+						<td>
+							<liferay-ui:message key="default-language" />: <%= defaultLocale.getDisplayName(defaultLocale) %>
+						</td>
+						<td>
+							<liferay-ui:message key="localized-language" />:
+
+							<select id="<portlet:namespace />languageId" onChange="<portlet:namespace />updateLanguage();">
+								<option value="" />
+
+								<%
+								for (int i = 0; i < locales.length; i++) {
+									if (locales[i].equals(defaultLocale)) {
+										continue;
+									}
+
+									String optionStyle = StringPool.BLANK;
+
+									if (Validator.isNotNull(role.getTitle(locales[i], false))) {
+										optionStyle = "style=\"font-weight: bold;\"";
+									}
+								%>
+
+									<option <%= (currentLanguageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> <%= optionStyle %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locale) %></option>
+
+								<%
+								}
+								%>
+
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input id="<portlet:namespace />title_<%= defaultLanguageId %>" name="<portlet:namespace />title_<%= defaultLanguageId %>" size="30" type="text" value="<%= role.getTitle(defaultLocale) %>" />
+						</td>
+						<td>
+
+							<%
+							for (int i = 0; i < locales.length; i++) {
+								if (locales[i].equals(defaultLocale)) {
+									continue;
+								}
+							%>
+
+								<input id="<portlet:namespace />title_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="<portlet:namespace />title_<%= LocaleUtil.toLanguageId(locales[i]) %>" type="hidden" value="<%= role.getTitle(locales[i], false) %>" />
+
+							<%
+							}
+							%>
+
+							<input id="<portlet:namespace />title_temp" size="30" type="text" <%= currentLocale.equals(defaultLocale) ? "style='display: none'" : "" %> onChange="<portlet:namespace />onTitleChanged();" />
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<br />
+						</td>
+					</tr>
+					</table>
+				</div>
+			</c:if>
+
 			<div class="ctrl-holder">
-				<label><liferay-ui:message key="subtype" /></label>
+				<label><liferay-ui:message key="description" /></label>
 
-				<select name="<portlet:namespace/>subtype">
-					<option value=""></option>
-
-					<%
-					for (String curSubtype : subtypes) {
-					%>
-
-						<option <%= subtype.equals(curSubtype) ? "selected" : "" %> value="<%= curSubtype %>"><liferay-ui:message key="<%= curSubtype %>" /></option>
-
-					<%
-					}
-					%>
-
-				</select>
+				<liferay-ui:input-field model="<%= Role.class %>" bean="<%= role %>" field="description" />
 			</div>
+
+			<div class="ctrl-holder">
+				<label><liferay-ui:message key="type" /></label>
+
+				<c:choose>
+					<c:when test="<%= ((role == null) && (type == 0)) %>">
+						<select name="<portlet:namespace/>type">
+							<option value="<%= RoleConstants.TYPE_REGULAR %>"><liferay-ui:message key="regular" /></option>
+							<option value="<%= RoleConstants.TYPE_COMMUNITY %>"><liferay-ui:message key="community" /></option>
+							<option value="<%= RoleConstants.TYPE_ORGANIZATION %>"><liferay-ui:message key="organization" /></option>
+						</select>
+					</c:when>
+					<c:when test="<%= (role == null) %>">
+						<input type="hidden" name="<portlet:namespace/>type" value="<%= String.valueOf(type) %>" />
+
+						<%= LanguageUtil.get(pageContext, RoleConstants.getTypeLabel(type)) %>
+					</c:when>
+					<c:otherwise>
+						<%= LanguageUtil.get(pageContext, role.getTypeLabel()) %>
+					</c:otherwise>
+				</c:choose>
+			</div>
+
+			<c:if test="<%= role != null %>">
+
+				<%
+				String[] subtypes = null;
+
+				if (role.getType() == RoleConstants.TYPE_COMMUNITY) {
+					subtypes = PropsValues.ROLES_COMMUNITY_SUBTYPES;
+				}
+				else if (role.getType() == RoleConstants.TYPE_ORGANIZATION) {
+					subtypes = PropsValues.ROLES_ORGANIZATION_SUBTYPES;
+				}
+				else if (role.getType() == RoleConstants.TYPE_REGULAR) {
+					subtypes = PropsValues.ROLES_REGULAR_SUBTYPES;
+				}
+				else {
+					subtypes = new String[0];
+				}
+				%>
+
+				<c:if test="<%= subtypes.length > 0 %>">
+					<div class="ctrl-holder">
+						<label><liferay-ui:message key="subtype" /></label>
+
+						<select name="<portlet:namespace/>subtype">
+							<option value=""></option>
+
+							<%
+							for (String curSubtype : subtypes) {
+							%>
+
+								<option <%= subtype.equals(curSubtype) ? "selected" : "" %> value="<%= curSubtype %>"><liferay-ui:message key="<%= curSubtype %>" /></option>
+
+							<%
+							}
+							%>
+
+						</select>
+					</div>
+				</c:if>
+			</c:if>
+
+			<div class="button-holder">
+				<input type="submit" value="<liferay-ui:message key="save" />" />
+
+				<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+			</div>
+		</fieldset>
+
+		</form>
+
+		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+			<script type="text/javascript">
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
+			</script>
 		</c:if>
-	</c:if>
-
-	<div class="button-holder">
-		<input type="submit" value="<liferay-ui:message key="save" />" />
-
-		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
-	</div>
-</fieldset>
-
-</form>
-
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
-	</script>
-</c:if>
+	</c:otherwise>
+</c:choose>
 
 <script type="text/javascript">
-	var titleChanged = false;
-	var lastLanguageId = "<%= currentLanguageId %>";
-
-	function <portlet:namespace />onTitleChanged() {
-		titleChanged = true;
-	}
-
-	function <portlet:namespace />updateLanguage() {
-		if (lastLanguageId != "<%= defaultLanguageId %>") {
-			if (titleChanged) {
-				var titleValue = jQuery("#<portlet:namespace />title_temp").attr("value");
-
-				if (titleValue == null) {
-					titleValue = "";
+	jQuery(
+		function () {
+			new Liferay.AutoFields(
+				{
+					container: '#<portlet:namespace />languageSelector .lfr-panel-content',
+					baseRows: '#<portlet:namespace />languageSelector .lfr-form-row'
 				}
+			);
 
-				jQuery("#<portlet:namespace />title_" + lastLanguageId).attr("value", titleValue);
+			var panel = new Liferay.PanelFloating(
+				{
+					container: '#<portlet:namespace />languageSelector',
+					trigger: '#<portlet:namespace />languageSelectorTrigger',
+					width: 500,
+					isCollapsible: false
+				}
+			);
 
-				titleChanged = false;
-			}
+			jQuery('#<portlet:namespace />languageSelector select').change(
+				function(event) {
+					var selectedOption = this[this.selectedIndex];
+					var selectedValue = selectedOption.value;
+
+					var imagePath = '<%= themeDisplay.getPathThemeImages() %>/language/';
+					var newName = '<portlet:namespace />title_';
+
+					var currentRow = jQuery(this).parents('.lfr-form-row:first');
+
+					var inputField = currentRow.find('.language-value');
+
+					var img = currentRow.find('img.language-flag');
+					var imgSrc = 'unknown';
+
+					if (selectedValue) {
+						imgSrc = selectedValue;
+
+						newName ='<portlet:namespace />title_' + selectedValue;
+					}
+
+					console.log('name: ' + newName);
+					inputField.attr('name', newName);
+					inputField.attr('id', newName);
+
+					img.attr('src', imagePath + imgSrc + '.png');
+				}
+			);
+
+			panel.bind('hide', function() {
+				var instance = this;
+
+				var container = instance.get('container');
+
+				jQuery(document.<portlet:namespace />fm).append(container);
+			});
 		}
-
-		var selLanguageId = "";
-
-		for (var i = 0; i < document.<portlet:namespace />fm.<portlet:namespace />languageId.length; i++) {
-			if (document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].selected) {
-				selLanguageId = document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].value;
-
-				break;
-			}
-		}
-
-		if (selLanguageId != "") {
-			<portlet:namespace />updateLanguageTemps(selLanguageId);
-
-			jQuery("#<portlet:namespace />title_temp").show();
-		}
-		else {
-			jQuery("#<portlet:namespace />title_temp").hide();
-		}
-
-		lastLanguageId = selLanguageId;
-
-		return null;
-	}
-
-	function <portlet:namespace />updateLanguageTemps(lang) {
-		if (lang != "<%= defaultLanguageId %>") {
-			var titleValue = jQuery("#<portlet:namespace />title_" + lang).attr("value");
-			var defaultTitleValue = jQuery("#<portlet:namespace />title_<%= defaultLanguageId %>").attr("value");
-
-			if (defaultTitleValue == null) {
-				defaultTitleValue = "";
-			}
-
-			if ((titleValue == null) || (titleValue == "")) {
-				jQuery("#<portlet:namespace />title_temp").attr("value", defaultTitleValue);
-			}
-			else {
-				jQuery("#<portlet:namespace />title_temp").attr("value", titleValue);
-			}
-		}
-	}
-
-	<portlet:namespace />updateLanguageTemps(lastLanguageId);
+	);
 </script>
