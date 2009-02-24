@@ -46,7 +46,6 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 	<liferay-util:param name="toolbarItem" value='<%= (role == null) ? "add" : "view-all" %>' />
 </liferay-util:include>
 
-
 <c:choose>
 	<c:when test="<%= (role != null) && PortalUtil.isSystemRole(role.getName()) %>">
 		<%= LanguageUtil.format(pageContext, "x-is-a-required-system-role", role.getTitle(locale)) %>
@@ -55,9 +54,6 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 		<script type="text/javascript">
 			function <portlet:namespace />saveRole() {
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= role == null ? Constants.ADD : Constants.UPDATE %>";
-
-				// console.log("Submittin: " + document.<portlet:namespace />fm.<portlet:namespace />title_ca_AD.value);
-				// console.log("Submittin: " + document.<portlet:namespace />fm.<portlet:namespace />title_en_US.value);
 
 				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role" /></portlet:actionURL>");
 			}
@@ -92,7 +88,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 					<label><liferay-ui:message key="title" /></label>
 
 					<input id="<portlet:namespace />title_<%= defaultLanguageId %>" name="<portlet:namespace />title_<%= defaultLanguageId %>" size="30" type="text" value="<%= role.getTitle(defaultLocale) %>" />
-					<img class="default-language" src="<%= themeDisplay.getPathThemeImages() %>/language/<%= defaultLanguageId %>.png" />&nbsp;
+					<img class="default-language" src="<%= themeDisplay.getPathThemeImages() %>/language/<%= defaultLanguageId %>.png" />
 
 					<%
 						List<String> langArr = new ArrayList<String>();
@@ -111,6 +107,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 						}
 
 					%>
+
 					<a class="lfr-floating-trigger" href="javascript: ;" id="<portlet:namespace />languageSelectorTrigger">
 						<liferay-ui:message key="other-languages" /> (<%= langArr.size() %>)
 					</a>
@@ -122,8 +119,8 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 							</div>
 
 							<div class="lfr-panel-content">
-								<%
 
+								<%
 								for (int i = 0; i < langArr.size(); i++) {
 
 									String languageId = langArr.get(i);
@@ -157,7 +154,6 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 
 												</select>
 											</div>
-
 
 											<div class="ctrl-holder col">
 												<label><liferay-ui:message key="title" /></label>
@@ -354,7 +350,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 					var selectedOption = this[this.selectedIndex];
 					var selectedValue = selectedOption.value;
 
-					var imagePath = '<%= themeDisplay.getPathThemeImages() %>/language/';
+					var imagePath = '<%= themeDisplay.getPathThemeImages() %>/';
 					var newName = '<portlet:namespace />title_';
 
 					var currentRow = jQuery(this).parents('.lfr-form-row:first');
@@ -362,15 +358,14 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 					var inputField = currentRow.find('.language-value');
 
 					var img = currentRow.find('img.language-flag');
-					var imgSrc = 'unknown';
+					var imgSrc = 'spacer';
 
 					if (selectedValue) {
-						imgSrc = selectedValue;
+						imgSrc = 'language/' + selectedValue;
 
 						newName ='<portlet:namespace />title_' + selectedValue;
 					}
 
-					console.log('name: ' + newName);
 					inputField.attr('name', newName);
 					inputField.attr('id', newName);
 
@@ -378,13 +373,15 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 				}
 			);
 
-			panel.bind('hide', function() {
-				var instance = this;
+			panel.bind('hide',
+				function(event) {
+					var instance = this;
 
-				var container = instance.get('container');
+					var container = instance.get('container');
 
-				jQuery(document.<portlet:namespace />fm).append(container);
-			});
+					jQuery(document.<portlet:namespace />fm).append(container);
+				}
+			);
 		}
 	);
 </script>
