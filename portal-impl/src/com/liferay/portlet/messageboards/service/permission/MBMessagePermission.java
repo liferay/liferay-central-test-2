@@ -107,7 +107,7 @@ public class MBMessagePermission {
 		}
 
 		if (!permissionChecker.hasPermission(
-				message.getCompanyId(), MBCategory.class.getName(),
+				category.getGroupId(), MBCategory.class.getName(),
 				category.getPrimaryKey(), actionId)) {
 			return false;
 		}
