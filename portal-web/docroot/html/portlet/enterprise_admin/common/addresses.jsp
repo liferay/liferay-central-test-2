@@ -25,8 +25,6 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-themeDisplay.setIncludeServiceJs(true);
-
 String className = (String)request.getAttribute("addresses.className");
 long classPK = (Long)request.getAttribute("addresses.classPK");
 
