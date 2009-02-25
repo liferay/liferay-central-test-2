@@ -37,8 +37,25 @@ import com.liferay.portlet.social.model.SocialActivityInterpreter;
 import com.liferay.portlet.social.model.impl.SocialActivityInterpreterImpl;
 import com.liferay.portlet.social.service.SocialActivityLocalServiceUtil;
 import com.liferay.portlet.social.service.base.SocialActivityInterpreterLocalServiceBaseImpl;
+import com.liferay.portlet.social.util.PortalActivityInterpreter;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
+import com.liferay.portlet.blogs.model.BlogsEntry;
+import com.liferay.portlet.blogs.service.permission.BlogsEntryPermission;
+import com.liferay.portlet.wiki.service.permission.WikiPermission;
+import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
+import com.liferay.portlet.wiki.service.permission.WikiPagePermission;
+import com.liferay.portlet.wiki.service.impl.WikiNodeLocalServiceImpl;
+import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
+import com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil;
+import com.liferay.portlet.wiki.model.WikiNode;
+import com.liferay.portlet.wiki.model.WikiPage;
+import com.liferay.portlet.wiki.model.WikiPageResource;
+import com.liferay.portlet.tasks.social.TasksActivityInterpreter;
+import com.liferay.portlet.tasks.model.TasksProposal;
+import com.liferay.portlet.tasks.service.permission.TasksProposalPermission;
+import com.liferay.portlet.calendar.model.CalEvent;
+import com.liferay.portlet.calendar.service.permission.CalEventPermission;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,6 +128,16 @@ public class SocialActivityInterpreterLocalServiceImpl
 		try {
 			if (className.equals(MBMessage.class.getName())) {
 				return MBMessagePermission.contains(getPermissionChecker(), pkid, ActionKeys.VIEW);
+			} else if (className.equals(BlogsEntry.class.getName())) {
+				return BlogsEntryPermission.contains(getPermissionChecker(), pkid, ActionKeys.VIEW);
+			} else if (className.equals(WikiPage.class.getName())) {
+				WikiPageResource resource = WikiPageResourceLocalServiceUtil.getPageResource(pkid);
+				WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(resource.getNodeId(), resource.getTitle());
+				return WikiPagePermission.contains(getPermissionChecker(), wikiPage, ActionKeys.VIEW);
+			} else if (className.equals(TasksProposal.class.getName())) {
+				return TasksProposalPermission.contains(getPermissionChecker(), pkid, ActionKeys.VIEW);
+			} else if (className.equals(CalEvent.class.getName())) {
+				return CalEventPermission.contains(getPermissionChecker(), pkid, ActionKeys.VIEW);
 			}
 		} catch (Exception e) {
 			return false;
