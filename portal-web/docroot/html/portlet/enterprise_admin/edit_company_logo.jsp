@@ -24,33 +24,39 @@
 
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
-<%
-String redirect = ParamUtil.getString(request, "redirect");
+<c:choose>
+	<c:when test='<%= SessionMessages.contains(renderRequest, "request_processed") %>'>
+		<script type="text/javascript">
+			jQuery(
+				function() {
+					window.close();
+					opener.<portlet:namespace />changeLogo('<%= themeDisplay.getPathImage() + "/company_logo?img_id=" + company.getLogoId() +"&t=" + ImageServletTokenUtil.getToken(company.getLogoId()) %>');
+				}
+			);
+		</script>
+	</c:when>
+	<c:otherwise>
+		<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_company_logo" /></portlet:actionURL>" class="uni-form" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 
-%>
+		<liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_company_logo" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
+		<div class="ctrl-holder">
+			<input name="<portlet:namespace />fileName" size="50" type="file" />
+		</div>
 
-<liferay-ui:tabs
-	names="enterprise-logo"
-	backURL="<%= redirect %>"
-/>
+		<br />
 
-<liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />
+		<div class="button-holder">
+			<input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input name="<portlet:namespace />fileName" size="50" type="file" />
+			<input type="button" value="<liferay-ui:message key="cancel" />" onClick="window.close();" />
+		</div>
+		</form>
 
-<br /><br />
-
-<input type="submit" value="<liferay-ui:message key="save" />" />
-
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
-
-</form>
-
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />fileName);
-	</script>
-</c:if>
+		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+			<script type="text/javascript">
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />fileName);
+			</script>
+		</c:if>
+	</c:otherwise>
+</c:choose>

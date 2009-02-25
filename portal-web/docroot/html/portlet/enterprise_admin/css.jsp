@@ -66,6 +66,12 @@
 	margin: 10px auto;
 }
 
+.portlet-enterprise-admin .change-company-logo img {
+	display: block;
+	margin: 10px 10px;
+	width: 300px;
+}
+
 .portlet-enterprise-admin .company-logo {
 	border:none;
 	width: 100px;

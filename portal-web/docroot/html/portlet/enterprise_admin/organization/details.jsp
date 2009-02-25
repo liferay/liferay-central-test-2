@@ -31,6 +31,8 @@ long parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationSearch
 
 String parentOrganizationName = ParamUtil.getString(request, "parentOrganizationName");
 
+boolean deleteLogo = ParamUtil.getBoolean(request, "deleteLogo");
+
 if (parentOrganizationId <= 0) {
 	parentOrganizationId = OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID;
 
@@ -110,6 +112,14 @@ if (organization != null) {
 
 		jQuery('.selected .modify-link').trigger('change');
 	}
+
+	jQuery(
+		function(){
+			jQuery('span.modify-link').bind('click', function(){
+				jQuery(this).trigger('change');
+			});
+		}
+	);
 </script>
 
 <liferay-ui:error-marker key="errorSection" value="details" />
@@ -230,7 +240,7 @@ if (organization != null) {
 				long logoId = organization.getLogoId();
 				%>
 
-				<img alt="<liferay-ui:message key="logo" />" class="avatar" id="<portlet:namespace />avatar" src="<%= themeDisplay.getPathImage() %>/organization_logo?img_id=<%= logoId %>&t=<%= ImageServletTokenUtil.getToken(logoId) %>" />
+				<img alt="<liferay-ui:message key="logo" />" class="avatar" id="<portlet:namespace />avatar" src="<%= themeDisplay.getPathImage() %>/organization_logo?img_id=<%= deleteLogo ? 0 : logoId %>&t=<%= ImageServletTokenUtil.getToken(logoId) %>" />
 			</a>
 
 			<div class="portrait-icons">
@@ -247,9 +257,9 @@ if (organization != null) {
 					String taglibDeleteURL = "javascript: " + renderResponse.getNamespace() + "deleteLogo('" + themeDisplay.getPathImage() + "/organization_logo?img_id=0');";
 					%>
 
-					<liferay-ui:icon image="delete" url="<%= taglibDeleteURL %>" label="<%= true %>" />
+					<liferay-ui:icon image="delete" url="<%= taglibDeleteURL %>" label="<%= true %>" cssClass="modify-link" />
 
-					<input id="<portlet:namespace />deleteLogo" name="<portlet:namespace />deleteLogo" type="hidden" value="false" />
+					<input id="<portlet:namespace />deleteLogo" name="<portlet:namespace />deleteLogo" type="hidden" value="<%= deleteLogo %>" />
 				</c:if>
 			</div>
 		</c:if>

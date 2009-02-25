@@ -40,24 +40,25 @@ User selUser = PortalUtil.getSelectedUser(request);
 		</script>
 	</c:when>
 	<c:otherwise>
-		<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_portrait" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+		<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_portrait" /></portlet:actionURL>" class="uni-form" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 		<input name="<portlet:namespace />p_u_i_d" type="hidden" value="<%= selUser.getUserId() %>" />
 
 		<liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />
 		<liferay-ui:error exception="<%= UserPortraitException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
 
-		<%= LanguageUtil.format(pageContext, "upload-a-gif-or-jpeg-that-is-x-pixels-tall-and-x-pixels-wide", new Object[] {"120", "100"}, false) %>
+		<div class="ctrl-holder">
+			<label for="<portlet:namespace />fileName"><%= LanguageUtil.format(pageContext, "upload-a-gif-or-jpeg-that-is-x-pixels-tall-and-x-pixels-wide", new Object[] {"120", "100"}, false) %></label><br />
 
-		<br /><br />
+			<input name="<portlet:namespace />fileName" size="50" type="file" />
+		</div>
 
-		<input name="<portlet:namespace />fileName" size="50" type="file" />
+		<br />
 
-		<br /><br />
+		<div class="button-holder">
+			<input type="submit" value="<liferay-ui:message key="save" />" />
 
-		<input type="submit" value="<liferay-ui:message key="save" />" />
-
-		<input type="button" value="<liferay-ui:message key="close" />" onClick="window.close();" />
-
+			<input type="button" value="<liferay-ui:message key="close" />" onClick="window.close();" />
+		</div>
 		</form>
 
 		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">

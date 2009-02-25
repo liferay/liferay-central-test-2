@@ -28,6 +28,8 @@
 User selUser = (User)request.getAttribute("user.selUser");
 Contact selContact = (Contact)request.getAttribute("user.selContact");
 
+boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
+
 int prefixId = BeanParamUtil.getInteger(selContact, request, "prefixId");
 int suffixId = BeanParamUtil.getInteger(selContact, request, "suffixId");
 boolean male = BeanParamUtil.getBoolean(selContact, request, "male", true);
@@ -63,6 +65,14 @@ if (selContact != null) {
 
 		editUserPortraitWindow.focus();
 	}
+
+	jQuery(
+		function(){
+			jQuery('span.modify-link').bind('click', function(){
+				jQuery(this).trigger('change');
+			});
+		}
+	);
 </script>
 
 <liferay-ui:error-marker key="errorSection" value="details" />
@@ -175,7 +185,7 @@ if (selContact != null) {
 				<portlet:param name="portrait_id" value="<%= String.valueOf(selUser.getPortraitId()) %>" />
 			</portlet:renderURL>
 
-			<a class="change-avatar" href="javascript: <portlet:namespace />openEditUserPortraitWindow('<%= editUserPortraitURL %>');"><img alt="<liferay-ui:message key="avatar" />" class="avatar" id="<portlet:namespace />avatar" src='<%= themeDisplay.getPathImage() %>/user_<%= selUser.isFemale() ? "female" : "male" %>_portrait?img_id=<%= selUser.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(selUser.getPortraitId()) %>' /></a>
+			<a class="change-avatar" href="javascript: <portlet:namespace />openEditUserPortraitWindow('<%= editUserPortraitURL %>');"><img alt="<liferay-ui:message key="avatar" />" class="avatar" id="<portlet:namespace />avatar" src='<%= themeDisplay.getPathImage() %>/user_<%= selUser.isFemale() ? "female" : "male" %>_portrait?img_id=<%= deletePortrait ? 0 : selUser.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(selUser.getPortraitId()) %>' /></a>
 
 			<div class="portrait-icons">
 
@@ -191,9 +201,9 @@ if (selContact != null) {
 					String taglibDeleteURL = "javascript: " + renderResponse.getNamespace() + "deletePortrait('" + themeDisplay.getPathImage() + "/user_" + (selUser.isFemale() ? "female" : "male") + "_portrait?img_id=0');";
 					%>
 
-					<liferay-ui:icon image="delete" url="<%= taglibDeleteURL %>" label="<%= true %>" />
+					<liferay-ui:icon image="delete" url="<%= taglibDeleteURL %>" label="<%= true %>" cssClass="modify-link" />
 
-					<input id="<portlet:namespace />deletePortrait" name="<portlet:namespace />deletePortrait" type="hidden" value="false" />
+					<input id="<portlet:namespace />deletePortrait" name="<portlet:namespace />deletePortrait" type="hidden" value="<%= deletePortrait %>" />
 				</c:if>
 			</div>
 		</c:if>
