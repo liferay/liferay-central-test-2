@@ -2125,16 +2125,21 @@ public class PortalImpl implements Portal {
 
 		// Minifier
 
-		if (themeDisplay.isThemeCssFastLoad()) {
-			if ((parameterMap == null) ||
-				(!parameterMap.containsKey("minifierType"))) {
+		if ((parameterMap == null) ||
+			(!parameterMap.containsKey("minifierType"))) {
 
-				String minifierType = "js";
+			String minifierType = StringPool.BLANK;
 
-				if (uri.endsWith(".css") || uri.endsWith("css.jsp")) {
+			if (uri.endsWith(".css") || uri.endsWith("css.jsp")) {
+				if (themeDisplay.isThemeCssFastLoad()) {
 					minifierType = "css";
 				}
+			}
+			else if (themeDisplay.isThemeJsFastLoad()){
+				minifierType = "js";
+			}
 
+			if (Validator.isNotNull(minifierType)) {
 				sb.append("&minifierType=");
 				sb.append(minifierType);
 			}
