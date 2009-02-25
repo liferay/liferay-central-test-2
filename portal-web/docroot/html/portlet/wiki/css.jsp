@@ -63,6 +63,10 @@
 	margin-left: 30px;
 }
 
+.portlet-wiki .taglib-discussion {
+	margin-top: 18px;
+}
+
 .portlet-wiki .taglib-tags-summary {
 	margin: -10px 0px 10px 0px;
 	color: #7d7d7d;
@@ -138,6 +142,17 @@
 
 .portlet-wiki .page-actions {
 	margin-top: 1.5em;
+}
+
+.portlet-wiki .page-actions .article-actions {
+	border-right: 1px solid #999;
+	float: left;
+	margin-right: 10px;
+	padding-right: 10px;
+}
+
+.portlet-wiki .page-actions .stats {
+	color: #999;
 }
 
 .portlet-wiki .page-title .page-actions {

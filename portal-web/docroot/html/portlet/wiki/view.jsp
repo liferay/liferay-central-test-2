@@ -233,29 +233,31 @@ TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(Wiki
 	</c:if>
 
 	<div class="page-actions">
+		<div class="article-actions">
+			<c:if test="<%= WikiNodePermission.contains(permissionChecker, node, ActionKeys.ADD_PAGE) %>">
+				<liferay-ui:icon image="add_article" message="add-child-page" url="<%= addPageURL.toString() %>" method="get" label="<%= true %>" />,
+			</c:if>
 
-		<%
-		TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(WikiPage.class.getName(), wikiPage.getResourcePrimKey());
-		%>
+			<liferay-ui:icon image="clip" message='<%= attachments.length + " " + LanguageUtil.get(pageContext, "attachments") %>' url="<%= viewAttachmentsURL.toString() %>" method="get" label="<%= true %>" />
+		</div>
+		<div class="stats">
 
-		<c:choose>
-			<c:when test="<%= asset.getViewCount() == 1 %>">
-				<%= asset.getViewCount() %> <liferay-ui:message key="view" />,
-			</c:when>
-			<c:when test="<%= asset.getViewCount() > 1 %>">
-				<%= asset.getViewCount() %> <liferay-ui:message key="views" />,
-			</c:when>
-		</c:choose>
+			<%
+			TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(WikiPage.class.getName(), wikiPage.getResourcePrimKey());
+			%>
 
-		<c:if test="<%= WikiNodePermission.contains(permissionChecker, node, ActionKeys.ADD_PAGE) %>">
-			<liferay-ui:icon image="add_article" message="add-child-page" url="<%= addPageURL.toString() %>" method="get" label="<%= true %>" />,
-		</c:if>
-
-		<liferay-ui:icon image="clip" message='<%= attachments.length + " " + LanguageUtil.get(pageContext, "attachments") %>' url="<%= viewAttachmentsURL.toString() %>" method="get" label="<%= true %>" />
+			<c:choose>
+				<c:when test="<%= asset.getViewCount() == 1 %>">
+					<%= asset.getViewCount() %> <liferay-ui:message key="view" />
+				</c:when>
+				<c:when test="<%= asset.getViewCount() > 1 %>">
+					<%= asset.getViewCount() %> <liferay-ui:message key="views" />
+				</c:when>
+			</c:choose>
+		</div>
 	</div>
 
 	<c:if test="<%= enableComments %>">
-		<br />
 
 		<%
 		int discussionMessagesCount = 0;
@@ -266,6 +268,8 @@ TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(Wiki
 		%>
 
 		<c:if test="<%= discussionMessagesCount > 0 %>">
+			<br />
+
 			<liferay-ui:tabs names="comments" />
 		</c:if>
 
