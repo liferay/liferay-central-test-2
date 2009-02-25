@@ -24,6 +24,7 @@ package com.liferay.portlet.shopping.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -33,9 +34,11 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.shopping.CouponCodeException;
 import com.liferay.portlet.shopping.CouponDateException;
 import com.liferay.portlet.shopping.CouponDescriptionException;
+import com.liferay.portlet.shopping.CouponDiscountException;
 import com.liferay.portlet.shopping.CouponEndDateException;
 import com.liferay.portlet.shopping.CouponLimitCategoriesException;
 import com.liferay.portlet.shopping.CouponLimitSKUsException;
+import com.liferay.portlet.shopping.CouponMinimumOrderException;
 import com.liferay.portlet.shopping.CouponNameException;
 import com.liferay.portlet.shopping.CouponStartDateException;
 import com.liferay.portlet.shopping.DuplicateCouponCodeException;
@@ -68,6 +71,25 @@ public class ShoppingCouponLocalServiceImpl
 			int endDateMinute, boolean neverExpire, boolean active,
 			String limitCategories, String limitSkus, double minOrder,
 			double discount, String discountType, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		return addCoupon(
+			userId, code, autoCode, name, description, startDateMonth,
+			startDateDay, startDateYear, startDateHour, startDateMinute,
+			endDateMonth, endDateDay, endDateYear, endDateHour, endDateMinute,
+			neverExpire, active, limitCategories, limitSkus,
+			String.valueOf(minOrder),String.valueOf(discount), discountType,
+			serviceContext);
+	}
+
+	public ShoppingCoupon addCoupon(
+			long userId, String code, boolean autoCode, String name,
+			String description, int startDateMonth, int startDateDay,
+			int startDateYear, int startDateHour, int startDateMinute,
+			int endDateMonth, int endDateDay, int endDateYear, int endDateHour,
+			int endDateMinute, boolean neverExpire, boolean active,
+			String limitCategories, String limitSkus, String minOrder,
+			String discount, String discountType, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Coupon
@@ -103,7 +125,7 @@ public class ShoppingCouponLocalServiceImpl
 
 		validate(
 			user.getCompanyId(), groupId, code, autoCode, name, description,
-			limitCategories, limitSkus);
+			limitCategories, limitSkus, minOrder, discount);
 
 		long couponId = counterLocalService.increment();
 
@@ -123,8 +145,8 @@ public class ShoppingCouponLocalServiceImpl
 		coupon.setActive(active);
 		coupon.setLimitCategories(limitCategories);
 		coupon.setLimitSkus(limitSkus);
-		coupon.setMinOrder(minOrder);
-		coupon.setDiscount(discount);
+		coupon.setMinOrder(GetterUtil.getDouble(minOrder));
+		coupon.setDiscount(GetterUtil.getDouble(discount));
 		coupon.setDiscountType(discountType);
 
 		shoppingCouponPersistence.update(coupon, false);
@@ -185,6 +207,25 @@ public class ShoppingCouponLocalServiceImpl
 			String discountType, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		return updateCoupon(userId, couponId, name, description, startDateMonth,
+			startDateDay, startDateYear, startDateHour, startDateMinute,
+			endDateMonth, endDateDay, endDateYear, endDateHour, endDateMinute,
+			neverExpire, active, limitCategories, limitSkus,
+			String.valueOf(minOrder), String.valueOf(discount), discountType,
+			serviceContext);
+
+	}
+
+	public ShoppingCoupon updateCoupon(
+			long userId, long couponId, String name, String description,
+			int startDateMonth, int startDateDay, int startDateYear,
+			int startDateHour, int startDateMinute, int endDateMonth,
+			int endDateDay, int endDateYear, int endDateHour, int endDateMinute,
+			boolean neverExpire, boolean active, String limitCategories,
+			String limitSkus, String minOrder, String discount,
+			String discountType, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
 		User user = userPersistence.findByPrimaryKey(userId);
 
 		ShoppingCoupon coupon = shoppingCouponPersistence.findByPrimaryKey(
@@ -210,7 +251,7 @@ public class ShoppingCouponLocalServiceImpl
 
 		validate(
 			coupon.getCompanyId(), coupon.getGroupId(), name, description,
-			limitCategories, limitSkus);
+			limitCategories, limitSkus, minOrder, discount);
 
 		coupon.setModifiedDate(new Date());
 		coupon.setName(name);
@@ -220,8 +261,8 @@ public class ShoppingCouponLocalServiceImpl
 		coupon.setActive(active);
 		coupon.setLimitCategories(limitCategories);
 		coupon.setLimitSkus(limitSkus);
-		coupon.setMinOrder(minOrder);
-		coupon.setDiscount(discount);
+		coupon.setMinOrder(GetterUtil.getDouble(minOrder));
+		coupon.setDiscount(GetterUtil.getDouble(discount));
 		coupon.setDiscountType(discountType);
 
 		shoppingCouponPersistence.update(coupon, false);
@@ -246,7 +287,7 @@ public class ShoppingCouponLocalServiceImpl
 	protected void validate(
 			long companyId, long groupId, String code, boolean autoCode,
 			String name, String description, String limitCategories,
-			String limitSkus)
+			String limitSkus,String minOrder,String discount)
 		throws PortalException, SystemException {
 
 		if (!autoCode) {
@@ -263,19 +304,29 @@ public class ShoppingCouponLocalServiceImpl
 		}
 
 		validate(
-			companyId, groupId, name, description, limitCategories, limitSkus);
+			companyId, groupId, name, description, limitCategories, limitSkus,
+			minOrder, discount);
 	}
 
 	protected void validate(
 			long companyId, long groupId, String name, String description,
-			String limitCategories, String limitSkus)
+			String limitCategories, String limitSkus, String minOrder,
+			String discount)
 		throws PortalException, SystemException {
+
+		minOrder = minOrder.replaceFirst("[^0-9\\.]+", "");
 
 		if (Validator.isNull(name)) {
 			throw new CouponNameException();
 		}
 		else if (Validator.isNull(description)) {
 			throw new CouponDescriptionException();
+		}
+		else if (!Validator.isNumeric(minOrder)){
+			throw new CouponMinimumOrderException();
+		}
+		else if (!Validator.isNumeric(discount)){
+			throw new CouponDiscountException();
 		}
 
 		// Category IDs
