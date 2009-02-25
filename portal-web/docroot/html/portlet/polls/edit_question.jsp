@@ -210,7 +210,7 @@ if (choiceName > 0) {
 						<td>
 							<input name="<portlet:namespace /><%= EditQuestionAction.CHOICE_NAME_PREFIX %><%= c %>" type="hidden" value="<%= c %>" />
 
-							<liferay-ui:input-field model="<%= PollsChoice.class %>" field="description" fieldParam="<%= EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + c %>" defaultValue="<%= choiceDesc %>" />
+							<input name="<%= EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + c %>" type="text" value="<%= choiceDesc %>" />
 						</td>
 
 						<c:if test="<%= ((question == null) && (i > 2)) || ((question != null) && (i > oldChoicesCount)) %>">
