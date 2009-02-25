@@ -1110,18 +1110,6 @@
 		<put name="portlet_content" value="/portlet/update_manager/view.jsp" />
 	</definition>
 
-	<!-- Web Form -->
-
-	<definition name="portlet.web_form" extends="portlet" />
-
-	<definition name="portlet.web_form.error" extends="portlet.web_form">
-		<put name="portlet_content" value="/portlet/web_form/error.jsp" />
-	</definition>
-
-	<definition name="portlet.web_form.view" extends="portlet.web_form">
-		<put name="portlet_content" value="/portlet/web_form/view.jsp" />
-	</definition>
-
 	<!-- Wiki -->
 
 	<definition name="portlet.wiki" extends="portlet" />
