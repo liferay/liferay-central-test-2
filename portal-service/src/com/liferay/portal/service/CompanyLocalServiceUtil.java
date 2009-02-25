@@ -169,18 +169,18 @@ public class CompanyLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
-		java.lang.String keywords, int start, int end)
+		long userId, java.lang.String keywords, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getService().search(companyId, keywords, start, end);
+		return getService().search(companyId, userId, keywords, start, end);
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
-		java.lang.String portletId, long groupId, java.lang.String type,
-		java.lang.String keywords, int start, int end)
+		long userId, java.lang.String portletId, long groupId,
+		java.lang.String type, java.lang.String keywords, int start, int end)
 		throws com.liferay.portal.SystemException {
 		return getService()
-				   .search(companyId, portletId, groupId, type, keywords,
-			start, end);
+				   .search(companyId, userId, portletId, groupId, type,
+			keywords, start, end);
 	}
 
 	public static com.liferay.portal.model.Company updateCompany(

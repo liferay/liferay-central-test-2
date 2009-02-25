@@ -53,8 +53,8 @@ public class DirectoryOpenSearchImpl extends BaseOpenSearchImpl {
 	public static final String SEARCH_PATH = "/c/directory/open_search";
 
 	public String search(
-			HttpServletRequest request, String keywords, int startPage,
-			int itemsPerPage, String format)
+			HttpServletRequest request, long userId, String keywords,
+			int startPage, int itemsPerPage, String format)
 		throws SearchException {
 
 		try {

@@ -38,8 +38,8 @@ public interface OpenSearch {
 		throws SearchException;
 
 	public String search(
-			HttpServletRequest request, String keywords, int startPage,
-			int itemsPerPage, String format)
+			HttpServletRequest request, long userId, String keywords,
+			int startPage, int itemsPerPage, String format)
 		throws SearchException;
 
 }

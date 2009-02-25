@@ -50,7 +50,7 @@ public class JournalOpenSearchImpl extends HitsOpenSearchImpl {
 	public static final String TITLE = "Liferay Journal Search: ";
 
 	public Hits getHits(
-			long companyId, String keywords, int start, int end)
+			long companyId, long userId, String keywords, int start, int end)
 		throws Exception {
 
 		return JournalArticleLocalServiceUtil.search(

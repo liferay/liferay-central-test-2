@@ -65,8 +65,8 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 	public static final String SEARCH_PATH = "/c/search/open_search";
 
 	public String search(
-			HttpServletRequest request, String keywords, int startPage,
-			int itemsPerPage, String format)
+			HttpServletRequest request, long userId, String keywords,
+			int startPage, int itemsPerPage, String format)
 		throws SearchException {
 
 		try {
@@ -77,7 +77,7 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 			int end = startPage * itemsPerPage;
 
 			Hits results = CompanyLocalServiceUtil.search(
-				themeDisplay.getCompanyId(), keywords, start, end);
+				themeDisplay.getCompanyId(), userId, keywords, start, end);
 
 			int total = results.getLength();
 

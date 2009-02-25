@@ -39,11 +39,11 @@ public class BookmarksOpenSearchImpl extends HitsOpenSearchImpl {
 	public static final String TITLE = "Liferay Bookmarks Search: ";
 
 	public Hits getHits(
-			long companyId, String keywords, int start, int end)
+			long companyId, long userId, String keywords, int start, int end)
 		throws Exception {
 
 		return BookmarksFolderLocalServiceUtil.search(
-			companyId, 0, 0, null, keywords, start, end);
+			companyId, 0, userId, null, keywords, start, end);
 	}
 
 	public String getSearchPath() {

@@ -405,15 +405,16 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		return companyPersistence.findByWebId(webId);
 	}
 
-	public Hits search(long companyId, String keywords, int start, int end)
+	public Hits search(
+			long companyId, long userId, String keywords, int start, int end)
 		throws SystemException {
 
-		return search(companyId, null, 0, null, keywords, start, end);
+		return search(companyId, userId, null, 0, null, keywords, start, end);
 	}
 
 	public Hits search(
-			long companyId, String portletId, long groupId, String type,
-			String keywords, int start, int end)
+			long companyId, long userId, String portletId, long groupId,
+			String type, String keywords, int start, int end)
 		throws SystemException {
 
 		try {
@@ -452,7 +453,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 			}
 
-			return SearchEngineUtil.search(companyId, fullQuery, start, end);
+			return SearchEngineUtil.search(
+				companyId, groupId, userId, null, fullQuery, start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

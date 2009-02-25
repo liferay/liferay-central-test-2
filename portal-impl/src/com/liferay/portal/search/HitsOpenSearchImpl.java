@@ -57,7 +57,7 @@ import javax.servlet.http.HttpServletRequest;
 public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 
 	public abstract Hits getHits(
-			long companyId, String keywords, int start, int end)
+			long companyId, long userId, String keywords, int start, int end)
 		throws Exception;
 
 	public abstract String getSearchPath();
@@ -65,8 +65,8 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 	public abstract String getTitle(String keywords);
 
 	public String search(
-			HttpServletRequest request, String keywords, int startPage,
-			int itemsPerPage, String format)
+			HttpServletRequest request, long userId, String keywords,
+			int startPage, int itemsPerPage, String format)
 		throws SearchException {
 
 		try {
@@ -77,7 +77,7 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 			int end = startPage * itemsPerPage;
 
 			Hits results = getHits(
-				themeDisplay.getCompanyId(), keywords, start, end);
+				themeDisplay.getCompanyId(), userId, keywords, start, end);
 
 			int total = results.getLength();
 

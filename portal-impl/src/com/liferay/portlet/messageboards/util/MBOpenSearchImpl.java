@@ -39,7 +39,7 @@ public class MBOpenSearchImpl extends HitsOpenSearchImpl {
 	public static final String TITLE = "Liferay Message Boards Search: ";
 
 	public Hits getHits(
-			long companyId, String keywords, int start, int end)
+			long companyId, long userId, String keywords, int start, int end)
 		throws Exception {
 
 		return MBCategoryLocalServiceUtil.search(

@@ -35,7 +35,9 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLImpl;
 
@@ -66,22 +68,36 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 	public String search(HttpServletRequest request, String url)
 		throws SearchException {
 
-		String keywords = GetterUtil.getString(
-			HttpUtil.getParameter(url, "keywords", false));
-		int startPage = GetterUtil.getInteger(
-			HttpUtil.getParameter(url, "p", false), 1);
-		int itemsPerPage = GetterUtil.getInteger(
-			HttpUtil.getParameter(url, "c", false),
-			SearchContainer.DEFAULT_DELTA);
-		String format = GetterUtil.getString(
-			HttpUtil.getParameter(url, "format", false));
+		try {
+			String keywords = GetterUtil.getString(
+				HttpUtil.getParameter(url, "keywords", false));
+			int startPage = GetterUtil.getInteger(
+				HttpUtil.getParameter(url, "p", false), 1);
+			int itemsPerPage = GetterUtil.getInteger(
+				HttpUtil.getParameter(url, "c", false),
+				SearchContainer.DEFAULT_DELTA);
+			String format = GetterUtil.getString(
+				HttpUtil.getParameter(url, "format", false));
 
-		return search(request, keywords, startPage, itemsPerPage, format);
+			long userId = PortalUtil.getUserId(request);
+
+			if (userId == 0) {
+				long companyId = PortalUtil.getCompanyId(request);
+
+				userId = UserLocalServiceUtil.getDefaultUserId(companyId);
+			}
+
+			return search(
+				request, userId, keywords, startPage, itemsPerPage, format);
+		}
+		catch (Exception e) {
+			throw new SearchException(e);
+		}
 	}
 
 	public abstract String search(
-			HttpServletRequest request, String keywords, int startPage,
-			int itemsPerPage, String format)
+			HttpServletRequest request, long userId, String keywords,
+			int startPage, int itemsPerPage, String format)
 		throws SearchException;
 
 	protected void addSearchResult(
