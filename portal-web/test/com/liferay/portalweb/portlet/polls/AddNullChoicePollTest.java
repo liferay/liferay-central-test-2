@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddVote2Test.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddNullChoicePollTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddVote2Test extends BaseTestCase {
-	public void testAddVote2() throws Exception {
+public class AddNullChoicePollTest extends BaseTestCase {
+	public void testAddNullChoicePoll() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,16 +51,26 @@ public class AddVote2Test extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Polls"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Test Poll Question 2"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Question']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("_25_choiceId");
-		selenium.click(RuntimeVariables.replace("//input[@value='Vote']"));
+		selenium.typeKeys("_25_title",
+			RuntimeVariables.replace("Null Choice Poll Test Title"));
+		selenium.type("_25_title",
+			RuntimeVariables.replace("Null Choice Poll Test Title"));
+		selenium.type("_25_description",
+			RuntimeVariables.replace("Null Choice Poll Test Description"));
+		selenium.type("_25_choiceDescriptiona",
+			RuntimeVariables.replace("Null Choice Poll Test Choice A"));
+		selenium.type("_25_choiceDescriptionb",
+			RuntimeVariables.replace("Null Choice Poll Test Choice B"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Choice']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_25_choiceDescriptionc", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertTrue(selenium.isTextPresent("100%"));
-		selenium.click(RuntimeVariables.replace("link=Polls"));
-		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("link=0"));
+				"You have entered invalid data. Please try again"));
+		assertTrue(selenium.isTextPresent("Please enter valid choices."));
 	}
 }

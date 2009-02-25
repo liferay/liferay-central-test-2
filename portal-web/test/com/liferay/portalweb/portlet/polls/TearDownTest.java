@@ -133,52 +133,9 @@ public class TearDownTest extends BaseTestCase {
 						"Your request processed successfully."));
 
 			case 3:
-
-				boolean Question3Present = selenium.isElementPresent(
-						"//td[5]/ul/li/strong/span");
-
-				if (!Question3Present) {
-					label = 4;
-
-					continue;
-				}
-
-				selenium.click("//td[5]/ul/li/strong/span");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent(
-									"//body/div[2]/ul/li[3]/a")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click(RuntimeVariables.replace(
-						"//body/div[2]/ul/li[3]/a"));
-				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.getConfirmation()
-								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
-
-			case 4:
 				assertFalse(selenium.isElementPresent("link=Test Poll Question"));
 				assertFalse(selenium.isElementPresent(
-						"link=Test Poll Question 2"));
-				assertFalse(selenium.isElementPresent(
-						"link=Test Choice Question"));
-				selenium.click(RuntimeVariables.replace(
-						"link=Back to My Community"));
-				selenium.waitForPageToLoad("30000");
+						"link=Edited Test Question 2"));
 
 			case 100:
 				label = -1;

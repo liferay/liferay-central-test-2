@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AssertDeleteChoiceTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddNullTitlePollTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AssertDeleteChoiceTest extends BaseTestCase {
-	public void testAssertDeleteChoice() throws Exception {
+public class AddNullTitlePollTest extends BaseTestCase {
+	public void testAddNullTitlePoll() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -54,45 +54,19 @@ public class AssertDeleteChoiceTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Question']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_25_title",
-			RuntimeVariables.replace("Delete Choice Title Test"));
-		selenium.type("_25_title",
-			RuntimeVariables.replace("Delete Choice Title Test"));
+		selenium.typeKeys("_25_description",
+			RuntimeVariables.replace("Null Title Poll Test Description"));
 		selenium.type("_25_description",
-			RuntimeVariables.replace("Delete Choice Description Test"));
+			RuntimeVariables.replace("Null Title Poll Test Description"));
+		selenium.type("_25_title", RuntimeVariables.replace(""));
 		selenium.type("_25_choiceDescriptiona",
-			RuntimeVariables.replace("Delete Choice A"));
+			RuntimeVariables.replace("Null Title Poll Test Choice A"));
 		selenium.type("_25_choiceDescriptionb",
-			RuntimeVariables.replace("Delete Choice B"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Choice']"));
+			RuntimeVariables.replace("Null Title Poll Test Choice B"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_25_choiceDescriptionc",
-			RuntimeVariables.replace("Delete Choice C"));
-		selenium.type("_25_choiceDescriptionc",
-			RuntimeVariables.replace("Delete Choice C"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Choice']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_25_choiceDescriptiond",
-			RuntimeVariables.replace("Delete Choice D"));
-		selenium.type("_25_choiceDescriptiond",
-			RuntimeVariables.replace("Delete Choice D"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Choice']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_25_choiceDescriptione",
-			RuntimeVariables.replace("Delete Choice E"));
-		selenium.type("_25_choiceDescriptione",
-			RuntimeVariables.replace("Delete Choice E"));
-		assertEquals("Delete Choice C",
-			selenium.getValue("_25_choiceDescriptionc"));
-		assertEquals("Delete Choice D",
-			selenium.getValue("_25_choiceDescriptiond"));
-		assertEquals("Delete Choice E",
-			selenium.getValue("_25_choiceDescriptione"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
-		selenium.waitForPageToLoad("30000");
-		assertEquals("Delete Choice D",
-			selenium.getValue("_25_choiceDescriptionc"));
-		assertEquals("Delete Choice E",
-			selenium.getValue("_25_choiceDescriptiond"));
+		assertTrue(selenium.isTextPresent(
+				"You have entered invalid data. Please try again"));
+		assertTrue(selenium.isTextPresent("Please enter a valid title."));
 	}
 }

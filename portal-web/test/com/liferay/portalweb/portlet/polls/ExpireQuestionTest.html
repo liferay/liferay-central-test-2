@@ -1,0 +1,119 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ExpireQuestionTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">ExpireQuestionTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Polls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Polls</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edited Test Question 2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//td[1]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//tr[2]/td[1]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//tr[3]/td[1]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//tr[4]/td[1]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Cancel']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//td[5]/ul/li/strong/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body/div[2]/ul/li[1]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//body/div[2]/ul/li[1]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>_25_neverExpireCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>_25_expirationDateMonth</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_25_expirationDateMonth</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_25_expirationDateDay</td>
+	<td>label=1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_25_expirationDateYear</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_25_expirationDateHour</td>
+	<td>label=12</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_25_expirationDateMinute</td>
+	<td>label=:00</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_25_expirationDateAmPm</td>
+	<td>label=AM</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

@@ -1,9 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head profile="http://selenium-ide.openqa.org/profiles/test-case">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="" />
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>AssertDeleteChoiceTest</title>
 </head>
 <body>
@@ -29,27 +26,27 @@
 <tr>
 	<td>typeKeys</td>
 	<td>_25_title</td>
-	<td>Test Choice Question</td>
+	<td>Delete Choice Title Test</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_25_title</td>
-	<td>Test Choice Question</td>
+	<td>Delete Choice Title Test</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_25_description</td>
-	<td>This is a test to delete choice!</td>
+	<td>Delete Choice Description Test</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_25_choiceDescriptiona</td>
-	<td>Test Choice A</td>
+	<td>Delete Choice A</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_25_choiceDescriptionb</td>
-	<td>Test Choice B</td>
+	<td>Delete Choice B</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -57,19 +54,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>_25_choiceDescriptionc</td>
-	<td></td>
-</tr>
-<tr>
 	<td>typeKeys</td>
 	<td>_25_choiceDescriptionc</td>
-	<td>Test Choice C</td>
+	<td>Delete Choice C</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_25_choiceDescriptionc</td>
-	<td>Test Choice C</td>
+	<td>Delete Choice C</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -77,19 +69,44 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>_25_choiceDescriptiond</td>
-	<td></td>
-</tr>
-<tr>
 	<td>typeKeys</td>
 	<td>_25_choiceDescriptiond</td>
-	<td>Test Choice D</td>
+	<td>Delete Choice D</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_25_choiceDescriptiond</td>
-	<td>Test Choice D</td>
+	<td>Delete Choice D</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Add Choice']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_25_choiceDescriptione</td>
+	<td>Delete Choice E</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_25_choiceDescriptione</td>
+	<td>Delete Choice E</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>_25_choiceDescriptionc</td>
+	<td>Delete Choice C</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>_25_choiceDescriptiond</td>
+	<td>Delete Choice D</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>_25_choiceDescriptione</td>
+	<td>Delete Choice E</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -97,29 +114,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Save']</td>
-	<td></td>
+	<td>assertValue</td>
+	<td>_25_choiceDescriptionc</td>
+	<td>Delete Choice D</td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>link=Test Poll Question 2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Test Choice Question</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>Test Choice C</td>
-	<td></td>
+	<td>assertValue</td>
+	<td>_25_choiceDescriptiond</td>
+	<td>Delete Choice E</td>
 </tr>
 
 </tbody></table>

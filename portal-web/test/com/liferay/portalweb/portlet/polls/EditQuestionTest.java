@@ -26,20 +26,32 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="ViewQuestionGraphs2Test.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditQuestionTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ViewQuestionGraphs2Test extends BaseTestCase {
-	public void testViewQuestionGraphs2() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Test Poll Question 2"));
+public class EditQuestionTest extends BaseTestCase {
+	public void testEditQuestion() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Polls")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Polls"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Area");
-		selenium.waitForPopUp("viewChart", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("viewChartWindow");
-		selenium.close();
-		selenium.selectWindow("null");
+		selenium.click("//td[5]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -47,7 +59,7 @@ public class ViewQuestionGraphs2Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Horizontal Bar")) {
+				if (selenium.isElementPresent("//body/div[2]/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -57,78 +69,44 @@ public class ViewQuestionGraphs2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Horizontal Bar");
-		selenium.waitForPopUp("viewChart", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("viewChartWindow");
-		selenium.close();
-		selenium.selectWindow("null");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Line")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("link=Line");
-		selenium.waitForPopUp("viewChart", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("viewChartWindow");
-		selenium.close();
-		selenium.selectWindow("null");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Pie")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("link=Pie");
-		selenium.waitForPopUp("viewChart", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("viewChartWindow");
-		selenium.close();
-		selenium.selectWindow("null");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Vertical Bar")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("link=Vertical Bar");
-		selenium.waitForPopUp("viewChart", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("viewChartWindow");
-		selenium.close();
-		selenium.selectWindow("null");
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_25_title",
+			RuntimeVariables.replace("Edited Test Question 2"));
+		selenium.type("_25_title",
+			RuntimeVariables.replace("Edited Test Question 2"));
+		selenium.type("_25_description",
+			RuntimeVariables.replace(
+				"This is an edited test poll 2 description!"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Choice']"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_25_choiceDescriptiond")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_25_choiceDescriptiond",
+			RuntimeVariables.replace("NEW Test Choice D"));
+		selenium.type("_25_choiceDescriptiond",
+			RuntimeVariables.replace("NEW Test Choice D"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		selenium.click(RuntimeVariables.replace("link=Edited Test Question 2"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("NEW Test Choice D"));
 	}
 }

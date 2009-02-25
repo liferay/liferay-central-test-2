@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>AddQuestionTest</title>
+<title>EditQuestionTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddQuestionTest</td></tr>
+<tr><td rowspan="1" colspan="3">EditQuestionTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
@@ -19,34 +19,34 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>//td[5]/ul/li/strong/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body/div[2]/ul/li[1]/a</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Add Question']</td>
+	<td>//body/div[2]/ul/li[1]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>typeKeys</td>
 	<td>_25_title</td>
-	<td>Test Poll Question</td>
+	<td>Edited Test Question 2</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_25_title</td>
-	<td>Test Poll Question</td>
+	<td>Edited Test Question 2</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_25_description</td>
-	<td>This is a test poll description!</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>_25_choiceDescriptiona</td>
-	<td>Test Choice A</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>_25_choiceDescriptionb</td>
-	<td>Test Choice B</td>
+	<td>This is an edited test poll 2 description!</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -55,18 +55,18 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>_25_choiceDescriptionc</td>
+	<td>_25_choiceDescriptiond</td>
 	<td></td>
 </tr>
 <tr>
 	<td>typeKeys</td>
-	<td>_25_choiceDescriptionc</td>
-	<td>Test Choice C</td>
+	<td>_25_choiceDescriptiond</td>
+	<td>NEW Test Choice D</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>_25_choiceDescriptionc</td>
-	<td>Test Choice C</td>
+	<td>_25_choiceDescriptiond</td>
+	<td>NEW Test Choice D</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -79,8 +79,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>link=Test Poll Question</td>
+	<td>clickAndWait</td>
+	<td>link=Edited Test Question 2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>NEW Test Choice D</td>
 	<td></td>
 </tr>
 

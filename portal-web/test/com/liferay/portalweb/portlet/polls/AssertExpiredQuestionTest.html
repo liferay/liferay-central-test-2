@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>AddVoteTest</title>
+<title>AssertExpiredQuestionTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddVoteTest</td></tr>
+<tr><td rowspan="1" colspan="3">AssertExpiredQuestionTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
@@ -20,37 +20,32 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Test Poll Question</td>
+	<td>link=Edited Test Question 2</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>_25_choiceId</td>
+	<td>assertElementNotPresent</td>
+	<td>//td[1]/input</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Vote']</td>
+	<td>assertElementNotPresent</td>
+	<td>//tr[2]/td[1]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//tr[3]/td[1]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//tr[4]/td[1]/input</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>100%</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Polls</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>link=1</td>
+	<td>Voting is disabled because this poll expired on 1/1/08 12:00 AM</td>
 	<td></td>
 </tr>
 

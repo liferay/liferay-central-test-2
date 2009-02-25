@@ -22,38 +22,34 @@
 
 package com.liferay.portalweb.portlet.polls;
 
-import com.liferay.portalweb.portal.BaseTests;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="PollsTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="EndControlPanelTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PollsTests extends BaseTests {
+public class EndControlPanelTest extends BaseTestCase {
+	public void testEndControlPanel() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
+			try {
+				if (selenium.isElementPresent("link=Back to My Community")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
 
-		testSuite.addTestSuite(ControlPanelTest.class);
-		testSuite.addTestSuite(AddQuestionTest.class);
-		testSuite.addTestSuite(AddVoteTest.class);
-		//testSuite.addTestSuite(ViewQuestionGraphsTest.class);
-		testSuite.addTestSuite(AddQuestion2Test.class);
-		testSuite.addTestSuite(EditQuestionTest.class);
-		testSuite.addTestSuite(ExpireQuestionTest.class);
-		testSuite.addTestSuite(AssertExpiredQuestionTest.class);
-		testSuite.addTestSuite(AssertDeleteChoiceTest.class);
-		testSuite.addTestSuite(AddNullTitlePollTest.class);
-		testSuite.addTestSuite(AddNullDescriptionPollTest.class);
-		testSuite.addTestSuite(AddNullChoicePollTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
-		testSuite.addTestSuite(EndControlPanelTest.class);
+			Thread.sleep(1000);
+		}
 
-		return testSuite;
+		selenium.click(RuntimeVariables.replace("link=Back to My Community"));
+		selenium.waitForPageToLoad("30000");
 	}
-
 }
