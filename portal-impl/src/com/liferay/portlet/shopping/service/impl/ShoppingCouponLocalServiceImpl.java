@@ -78,7 +78,7 @@ public class ShoppingCouponLocalServiceImpl
 			startDateDay, startDateYear, startDateHour, startDateMinute,
 			endDateMonth, endDateDay, endDateYear, endDateHour, endDateMinute,
 			neverExpire, active, limitCategories, limitSkus,
-			String.valueOf(minOrder),String.valueOf(discount), discountType,
+			String.valueOf(minOrder), String.valueOf(discount), discountType,
 			serviceContext);
 	}
 
@@ -287,7 +287,7 @@ public class ShoppingCouponLocalServiceImpl
 	protected void validate(
 			long companyId, long groupId, String code, boolean autoCode,
 			String name, String description, String limitCategories,
-			String limitSkus,String minOrder,String discount)
+			String limitSkus, String minOrder, String discount)
 		throws PortalException, SystemException {
 
 		if (!autoCode) {

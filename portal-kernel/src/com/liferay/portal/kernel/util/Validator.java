@@ -450,10 +450,6 @@ public class Validator {
 			return false;
 		}
 
-		if (number.indexOf(_CHAR_PERIOD) == -1){
-			return isNumber(number);
-		}
-
 		return isNumber(number.replaceFirst("\\.", StringPool.BLANK));
 	}
 
