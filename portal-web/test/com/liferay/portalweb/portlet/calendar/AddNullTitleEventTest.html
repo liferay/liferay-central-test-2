@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>AddPortletTest</title>
+<title>AddNullTitleEventTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddPortletTest</td></tr>
+<tr><td rowspan="1" colspan="3">AddNullTitleEventTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
@@ -19,28 +19,28 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Add Application</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Add Application</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id='Collaboration-Calendar']/p/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@id='Collaboration-Calendar']/p/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
+	<td>clickAndWait</td>
 	<td>//input[@value='Add Event']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_8_title</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You have entered invalid data. Please try again.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please enter a valid title.</td>
 	<td></td>
 </tr>
 

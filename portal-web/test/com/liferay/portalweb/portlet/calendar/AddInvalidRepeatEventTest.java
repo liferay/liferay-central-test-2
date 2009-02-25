@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddPortletTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddInvalidRepeatEventTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddPortletTest extends BaseTestCase {
-	public void testAddPortlet() throws Exception {
+public class AddInvalidRepeatEventTest extends BaseTestCase {
+	public void testAddInvalidRepeatEvent() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,6 +51,19 @@ public class AddPortletTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Calendar Test Page"));
 		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Event']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("_8_allDayCheckbox");
+		selenium.typeKeys("_8_title",
+			RuntimeVariables.replace("Invalid Repeat Test Event"));
+		selenium.type("_8_title",
+			RuntimeVariables.replace("Invalid Repeat Test Event"));
+		selenium.select("_8_startDateMonth",
+			RuntimeVariables.replace("label=February"));
+		selenium.select("_8_startDateDay", RuntimeVariables.replace("label=25"));
+		selenium.select("_8_startDateYear",
+			RuntimeVariables.replace("label=2009"));
+		selenium.click("//input[@name='_8_recurrenceType' and @value='3']");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -58,7 +71,7 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Add Application")) {
+				if (selenium.isElementPresent("_8_dailyInterval")) {
 					break;
 				}
 			}
@@ -68,41 +81,16 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Add Application");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//div[@id='Collaboration-Calendar']/p/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("//div[@id='Collaboration-Calendar']/p/a");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Add Event']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		selenium.type("_8_dailyInterval", RuntimeVariables.replace("1"));
+		selenium.click("//input[@name='_8_endDateType' and @value='2']");
+		selenium.select("_8_endDateMonth",
+			RuntimeVariables.replace("label=February"));
+		selenium.select("_8_endDateDay", RuntimeVariables.replace("label=24"));
+		selenium.select("_8_endDateYear", RuntimeVariables.replace("label=2009"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"You have entered invalid data. Please try again."));
+		assertTrue(selenium.isTextPresent("Please enter a valid end date."));
 	}
 }

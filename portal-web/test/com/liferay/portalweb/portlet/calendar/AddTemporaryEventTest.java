@@ -33,16 +33,13 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddTemporaryEventTest extends BaseTestCase {
 	public void testAddTemporaryEvent() throws Exception {
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Event']"));
-		selenium.waitForPageToLoad("30000");
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("_8_timeZoneSensitiveCheckbox")) {
+				if (selenium.isElementPresent("link=Calendar Test Page")) {
 					break;
 				}
 			}
@@ -52,13 +49,21 @@ public class AddTemporaryEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("_8_timeZoneSensitiveCheckbox");
+		selenium.click(RuntimeVariables.replace("link=Calendar Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Event']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_8_title",
+			RuntimeVariables.replace("Temporary Event"));
 		selenium.type("_8_title", RuntimeVariables.replace("Temporary Event"));
 		selenium.type("_8_description",
 			RuntimeVariables.replace("This is a temporary event!"));
+		selenium.click("_8_timeZoneSensitiveCheckbox");
 		selenium.select("_8_type", RuntimeVariables.replace("label=Appointment"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent("Link=Temporary Event"));
 	}
 }

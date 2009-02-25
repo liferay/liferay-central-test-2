@@ -9,23 +9,38 @@
 <tr><td rowspan="1" colspan="3">GetAppointmentEventsTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Calendar Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Calendar Test Page</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Day</td>
 	<td></td>
 </tr>
 <tr>
 	<td>selectAndWait</td>
-	<td>//div[@id='portlet-wrapper-8']/div[2]/div/div/form/div[1]/div/select</td>
+	<td>//select</td>
 	<td>label=Appointment</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Test Event</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Off to Yosemite!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=Caedmon's Call Concert!</td>
 	<td></td>
 </tr>
 <tr>
@@ -35,17 +50,22 @@
 </tr>
 <tr>
 	<td>selectAndWait</td>
-	<td>//div[@id='portlet-wrapper-8']/div[2]/div/div/form/div[1]/div/select</td>
+	<td>//select</td>
 	<td>label=Appointment</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Test Event</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Off to Yosemite!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=Caedmon's Call Concert!</td>
 	<td></td>
 </tr>
 <tr>
@@ -55,17 +75,22 @@
 </tr>
 <tr>
 	<td>selectAndWait</td>
-	<td>//div[@id='portlet-wrapper-8']/div[2]/div/div/form/div[1]/div/select</td>
+	<td>//select</td>
 	<td>label=Appointment</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Test Event</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementNotPresent</td>
+	<td>assertElementNotPresent</td>
 	<td>link=Off to Yosemite!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=Caedmon's Call Concert!</td>
 	<td></td>
 </tr>
 <tr>
@@ -74,13 +99,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>link=Test Event</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Return to Full Page</td>
 	<td></td>
 </tr>
 

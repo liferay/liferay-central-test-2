@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddPortletTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddRepeatingEventTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddPortletTest extends BaseTestCase {
-	public void testAddPortlet() throws Exception {
+public class AddRepeatingEventTest extends BaseTestCase {
+	public void testAddRepeatingEvent() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,58 +51,26 @@ public class AddPortletTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Calendar Test Page"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Add Application")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("link=Add Application");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//div[@id='Collaboration-Calendar']/p/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("//div[@id='Collaboration-Calendar']/p/a");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Add Event']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Event']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_8_title",
+			RuntimeVariables.replace("Repeating Test Event"));
+		selenium.type("_8_title",
+			RuntimeVariables.replace("Repeating Test Event"));
+		selenium.click("_8_allDayCheckbox");
+		selenium.click("_8_timeZoneSensitiveCheckbox");
+		selenium.select("_8_startDateMonth",
+			RuntimeVariables.replace("label=January"));
+		selenium.select("_8_startDateDay", RuntimeVariables.replace("label=1"));
+		selenium.select("_8_startDateYear",
+			RuntimeVariables.replace("label=2009"));
+		selenium.select("_8_type", RuntimeVariables.replace("label=Event"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		selenium.click(RuntimeVariables.replace("link=Events"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Repeating Test Event"));
 	}
 }

@@ -33,16 +33,13 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddConcertEventTest extends BaseTestCase {
 	public void testAddConcertEvent() throws Exception {
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Event']"));
-		selenium.waitForPageToLoad("30000");
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("_8_timeZoneSensitiveCheckbox")) {
+				if (selenium.isElementPresent("link=Calendar Test Page")) {
 					break;
 				}
 			}
@@ -52,15 +49,23 @@ public class AddConcertEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("_8_timeZoneSensitiveCheckbox");
+		selenium.click(RuntimeVariables.replace("link=Calendar Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Event']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_8_title",
+			RuntimeVariables.replace("Caedmon's Call Concert!"));
 		selenium.type("_8_title",
 			RuntimeVariables.replace("Caedmon's Call Concert!"));
 		selenium.type("_8_description",
 			RuntimeVariables.replace(
 				"I love this band guys! Everyone should see them! I've never seen them before. :("));
+		selenium.click("_8_timeZoneSensitiveCheckbox");
 		selenium.select("_8_type", RuntimeVariables.replace("label=Concert"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent("Link=Caedmon's Call Concert!"));
 	}
 }

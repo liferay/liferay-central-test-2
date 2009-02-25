@@ -33,140 +33,47 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class GetConcertEventsTest extends BaseTestCase {
 	public void testGetConcertEvents() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Calendar Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Calendar Test Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Day"));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("//div[@id='portlet-wrapper-8']/div[2]/div/div/form/div[1]/div/select",
-			"label=Concert");
+		selenium.select("//select", "label=Concert");
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Caedmon's Call Concert!")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (!selenium.isElementPresent("link=Off to Yosemite!")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isElementPresent("link=Caedmon's Call Concert!"));
+		assertFalse(selenium.isElementPresent("link=Off to Yosemite!"));
+		assertFalse(selenium.isElementPresent("link=Test Event"));
 		selenium.click(RuntimeVariables.replace("link=Week"));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("//div[@id='portlet-wrapper-8']/div[2]/div/div/form/div[1]/div/select",
-			"label=Concert");
+		selenium.select("//select", "label=Concert");
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Caedmon's Call Concert!")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (!selenium.isElementPresent("link=Off to Yosemite!")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isElementPresent("link=Caedmon's Call Concert!"));
+		assertFalse(selenium.isElementPresent("link=Off to Yosemite!"));
+		assertFalse(selenium.isElementPresent("link=Test Event"));
 		selenium.click(RuntimeVariables.replace("link=Month"));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("//div[@id='portlet-wrapper-8']/div[2]/div/div/form/div[1]/div/select",
-			"label=Concert");
+		selenium.select("//select", "label=Concert");
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Caedmon's Call Concert!")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (!selenium.isElementPresent("link=Off to Yosemite!")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isElementPresent("link=Caedmon's Call Concert!"));
+		assertFalse(selenium.isElementPresent("link=Off to Yosemite!"));
+		assertFalse(selenium.isElementPresent("link=Test Event"));
 		selenium.click(RuntimeVariables.replace("link=Events"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Test Event")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Caedmon's Call Concert!"));
 	}
 }

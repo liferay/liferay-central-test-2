@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="DeleteAllEventsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="TearDownTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DeleteAllEventsTest extends BaseTestCase {
-	public void testDeleteAllEvents() throws Exception {
+public class TearDownTest extends BaseTestCase {
+	public void testTearDown() throws Exception {
 		int label = 1;
 
 		while (label >= 1) {
@@ -168,10 +168,74 @@ public class DeleteAllEventsTest extends BaseTestCase {
 						"Your request processed successfully."));
 
 			case 4:
+
+				boolean EventDPresent = selenium.isElementPresent(
+						"//strong/span");
+
+				if (!EventDPresent) {
+					label = 5;
+
+					continue;
+				}
+
+				selenium.click("//strong/span");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("//div[3]/ul/li[4]/a")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.click(RuntimeVariables.replace("//div[3]/ul/li[4]/a"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+				assertTrue(selenium.isTextPresent(
+						"Your request processed successfully."));
+
+			case 5:
+				assertFalse(selenium.isElementPresent(
+						"link=Repeating Test Event"));
 				assertFalse(selenium.isElementPresent("link=Edited Test Event"));
 				assertFalse(selenium.isElementPresent(
 						"link=Caedmon's Call Concert!"));
 				assertFalse(selenium.isElementPresent("link=Off to Yosemite!"));
+				selenium.click(RuntimeVariables.replace(
+						"link=Calendar Test Page"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click("//img[@alt='Remove']");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
+				assertFalse(selenium.isElementPresent("link=Configuration"));
+				selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/a"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace(
+						"//li[2]/ul/li[3]/a/span"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace("link=Page"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Delete']"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
+				assertTrue(selenium.isTextPresent(
+						"Your request processed successfully."));
+				selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/a"));
+				selenium.waitForPageToLoad("30000");
+				assertFalse(selenium.isElementPresent("link=Calendar Test Page"));
 
 			case 100:
 				label = -1;

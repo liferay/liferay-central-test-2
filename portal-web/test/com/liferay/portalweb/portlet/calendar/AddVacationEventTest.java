@@ -33,16 +33,13 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddVacationEventTest extends BaseTestCase {
 	public void testAddVacationEvent() throws Exception {
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Event']"));
-		selenium.waitForPageToLoad("30000");
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("_8_timeZoneSensitiveCheckbox")) {
+				if (selenium.isElementPresent("link=Calendar Test Page")) {
 					break;
 				}
 			}
@@ -52,10 +49,16 @@ public class AddVacationEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("_8_timeZoneSensitiveCheckbox");
+		selenium.click(RuntimeVariables.replace("link=Calendar Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Event']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_8_title",
+			RuntimeVariables.replace("Off to Yosemite!"));
 		selenium.type("_8_title", RuntimeVariables.replace("Off to Yosemite!"));
 		selenium.type("_8_description",
 			RuntimeVariables.replace("Looking forward to camping!"));
+		selenium.click("_8_timeZoneSensitiveCheckbox");
 		selenium.select("_8_type", RuntimeVariables.replace("label=Vacation"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");

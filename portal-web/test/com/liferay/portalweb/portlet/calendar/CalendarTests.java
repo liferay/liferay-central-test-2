@@ -51,10 +51,23 @@ public class CalendarTests extends BaseTests {
 		testSuite.addTestSuite(AddTemporaryEventTest.class);
 		testSuite.addTestSuite(DeleteTemporaryEventTest.class);
 		testSuite.addTestSuite(AssertConfigurationTest.class);
+		testSuite.addTestSuite(AddNullTitleEventTest.class);
+		testSuite.addTestSuite(AddInvalidStartDateEventTest.class);
+		testSuite.addTestSuite(AddInvalidEndDateEventTest.class);
+		testSuite.addTestSuite(AddInvalidDurationEventTest.class);
+		testSuite.addTestSuite(AddInvalidRepeatEventTest.class);
 		testSuite.addTestSuite(DeleteAllEventsTest.class);
 		testSuite.addTestSuite(ImportLARTest.class);
 		testSuite.addTestSuite(AssertImportLARTest.class);
-		testSuite.addTestSuite(DeletePageTest.class);
+		testSuite.addTestSuite(AddRepeatingEventTest.class);
+		testSuite.addTestSuite(AddDailyRepeatingEventTest.class);
+		testSuite.addTestSuite(AddWeeklyRepeatingEventTest.class);
+		testSuite.addTestSuite(AddWeekDayRepeatingEventTest.class);
+		testSuite.addTestSuite(AddMonthlyDateRepeatingEventTest.class);
+		testSuite.addTestSuite(AddMonthlyDayRepeatingEventTest.class);
+		testSuite.addTestSuite(AddYearlyDateRepeatingEventTest.class);
+		testSuite.addTestSuite(AddYearlyDayRepeatingEventTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
 	}

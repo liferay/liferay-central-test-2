@@ -33,32 +33,50 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddAppointmentEventTest extends BaseTestCase {
 	public void testAddAppointmentEvent() throws Exception {
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Event']"));
-		selenium.waitForPageToLoad("30000");
+		int label = 1;
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+		while (label >= 1) {
+			switch (label) {
+			case 1:
 
-			try {
-				if (selenium.isElementPresent("_8_timeZoneSensitiveCheckbox")) {
-					break;
+				boolean BackAtMyCommunity = selenium.isElementPresent(
+						"link=Back to My Community");
+
+				if (!BackAtMyCommunity) {
+					label = 2;
+
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				selenium.click(RuntimeVariables.replace(
+						"link=Back to My Community"));
+				selenium.waitForPageToLoad("30000");
+
+			case 2:
+				selenium.click(RuntimeVariables.replace(
+						"link=Calendar Test Page"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Add Event']"));
+				selenium.waitForPageToLoad("30000");
+				selenium.typeKeys("_8_title",
+					RuntimeVariables.replace("Test Event"));
+				selenium.type("_8_title", RuntimeVariables.replace("Test Event"));
+				selenium.type("_8_description",
+					RuntimeVariables.replace("This is a test event!"));
+				selenium.click("_8_timeZoneSensitiveCheckbox");
+				selenium.select("_8_type",
+					RuntimeVariables.replace("label=Appointment"));
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Save']"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isTextPresent(
+						"Your request processed successfully."));
+				assertTrue(selenium.isElementPresent("Link=Test Event"));
+
+			case 100:
+				label = -1;
+			}
 		}
-
-		selenium.click("_8_timeZoneSensitiveCheckbox");
-		selenium.type("_8_title", RuntimeVariables.replace("Test Event"));
-		selenium.type("_8_description",
-			RuntimeVariables.replace("This is a test event!"));
-		selenium.select("_8_type", RuntimeVariables.replace("label=Appointment"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("Link=Test Event"));
 	}
 }

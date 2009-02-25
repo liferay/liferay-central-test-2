@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>AddVacationEventTest</title>
+<title>AddInvalidDurationEventTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddVacationEventTest</td></tr>
+<tr><td rowspan="1" colspan="3">AddInvalidDurationEventTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
@@ -24,29 +24,24 @@
 	<td></td>
 </tr>
 <tr>
-	<td>typeKeys</td>
-	<td>_8_title</td>
-	<td>Off to Yosemite!</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>_8_title</td>
-	<td>Off to Yosemite!</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>_8_description</td>
-	<td>Looking forward to camping!</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>_8_timeZoneSensitiveCheckbox</td>
-	<td></td>
+	<td>select</td>
+	<td>_8_durationHour</td>
+	<td>label=0</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>_8_type</td>
-	<td>label=Vacation</td>
+	<td>_8_durationMinute</td>
+	<td>label=:00</td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_8_title</td>
+	<td>Invalid Duration Test Event</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_8_title</td>
+	<td>Invalid Duration Test Event</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -54,8 +49,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>Link=Off to Yosemite!</td>
+	<td>assertTextPresent</td>
+	<td>You have entered invalid data. Please try again.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please enter a longer duration.</td>
 	<td></td>
 </tr>
 

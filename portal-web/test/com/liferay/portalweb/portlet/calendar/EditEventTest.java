@@ -39,7 +39,7 @@ public class EditEventTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Test Event")) {
+				if (selenium.isElementPresent("link=Calendar Test Page")) {
 					break;
 				}
 			}
@@ -48,6 +48,10 @@ public class EditEventTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click(RuntimeVariables.replace("link=Calendar Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//tr[5]/td[4]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -55,7 +59,7 @@ public class EditEventTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//tr[5]/td[4]/ul/li/strong/span")) {
+				if (selenium.isElementPresent("//div[4]/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -65,34 +69,20 @@ public class EditEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//tr[5]/td[4]/ul/li/strong/span");
 		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_8_description")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		selenium.typeKeys("_8_title",
+			RuntimeVariables.replace("Edited Test Event"));
+		selenium.type("_8_title", RuntimeVariables.replace("Edited Test Event"));
 		selenium.type("_8_description",
 			RuntimeVariables.replace(
 				"This is a test event! This test event has been edited."));
-		selenium.type("_8_title", RuntimeVariables.replace("Edited Test Event"));
 		selenium.select("_8_startDateHour", RuntimeVariables.replace("label=5"));
 		selenium.select("_8_startDateAmPm", RuntimeVariables.replace("label=AM"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent("link=Edited Test Event"));
 	}
 }
