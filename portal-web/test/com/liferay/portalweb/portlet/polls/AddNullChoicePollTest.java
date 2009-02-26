@@ -60,13 +60,13 @@ public class AddNullChoicePollTest extends BaseTestCase {
 			RuntimeVariables.replace("Null Choice Poll Test Title"));
 		selenium.type("_25_description",
 			RuntimeVariables.replace("Null Choice Poll Test Description"));
-		selenium.type("_25_choiceDescriptiona",
+		selenium.type("choiceDescriptiona",
 			RuntimeVariables.replace("Null Choice Poll Test Choice A"));
-		selenium.type("_25_choiceDescriptionb",
+		selenium.type("choiceDescriptionb",
 			RuntimeVariables.replace("Null Choice Poll Test Choice B"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Choice']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_25_choiceDescriptionc", RuntimeVariables.replace(""));
+		selenium.type("choiceDescriptionc", RuntimeVariables.replace(""));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

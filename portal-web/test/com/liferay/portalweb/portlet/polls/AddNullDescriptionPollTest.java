@@ -59,9 +59,9 @@ public class AddNullDescriptionPollTest extends BaseTestCase {
 		selenium.type("_25_title",
 			RuntimeVariables.replace("Null Description Poll Test Title"));
 		selenium.type("_25_description", RuntimeVariables.replace(""));
-		selenium.type("_25_choiceDescriptiona",
+		selenium.type("choiceDescriptiona",
 			RuntimeVariables.replace("Null Description Poll Test Choice A"));
-		selenium.type("_25_choiceDescriptionb",
+		selenium.type("choiceDescriptionb",
 			RuntimeVariables.replace("Null Description Poll Test Choice B"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");

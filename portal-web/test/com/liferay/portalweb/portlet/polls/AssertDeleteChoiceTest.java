@@ -60,39 +60,34 @@ public class AssertDeleteChoiceTest extends BaseTestCase {
 			RuntimeVariables.replace("Delete Choice Title Test"));
 		selenium.type("_25_description",
 			RuntimeVariables.replace("Delete Choice Description Test"));
-		selenium.type("_25_choiceDescriptiona",
+		selenium.type("choiceDescriptiona",
 			RuntimeVariables.replace("Delete Choice A"));
-		selenium.type("_25_choiceDescriptionb",
+		selenium.type("choiceDescriptionb",
 			RuntimeVariables.replace("Delete Choice B"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Choice']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_25_choiceDescriptionc",
+		selenium.typeKeys("choiceDescriptionc",
 			RuntimeVariables.replace("Delete Choice C"));
-		selenium.type("_25_choiceDescriptionc",
+		selenium.type("choiceDescriptionc",
 			RuntimeVariables.replace("Delete Choice C"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Choice']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_25_choiceDescriptiond",
+		selenium.typeKeys("choiceDescriptiond",
 			RuntimeVariables.replace("Delete Choice D"));
-		selenium.type("_25_choiceDescriptiond",
+		selenium.type("choiceDescriptiond",
 			RuntimeVariables.replace("Delete Choice D"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Choice']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_25_choiceDescriptione",
+		selenium.typeKeys("choiceDescriptione",
 			RuntimeVariables.replace("Delete Choice E"));
-		selenium.type("_25_choiceDescriptione",
+		selenium.type("choiceDescriptione",
 			RuntimeVariables.replace("Delete Choice E"));
-		assertEquals("Delete Choice C",
-			selenium.getValue("_25_choiceDescriptionc"));
-		assertEquals("Delete Choice D",
-			selenium.getValue("_25_choiceDescriptiond"));
-		assertEquals("Delete Choice E",
-			selenium.getValue("_25_choiceDescriptione"));
+		assertEquals("Delete Choice C", selenium.getValue("choiceDescriptionc"));
+		assertEquals("Delete Choice D", selenium.getValue("choiceDescriptiond"));
+		assertEquals("Delete Choice E", selenium.getValue("choiceDescriptione"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals("Delete Choice D",
-			selenium.getValue("_25_choiceDescriptionc"));
-		assertEquals("Delete Choice E",
-			selenium.getValue("_25_choiceDescriptiond"));
+		assertEquals("Delete Choice D", selenium.getValue("choiceDescriptionc"));
+		assertEquals("Delete Choice E", selenium.getValue("choiceDescriptiond"));
 	}
 }

@@ -60,9 +60,9 @@ public class AddQuestion2Test extends BaseTestCase {
 			RuntimeVariables.replace("Test Poll Question 2"));
 		selenium.type("_25_description",
 			RuntimeVariables.replace("This is a test poll 2 description!"));
-		selenium.type("_25_choiceDescriptiona",
+		selenium.type("choiceDescriptiona",
 			RuntimeVariables.replace("Test Choice A"));
-		selenium.type("_25_choiceDescriptionb",
+		selenium.type("choiceDescriptionb",
 			RuntimeVariables.replace("Test Choice B"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Choice']"));
 		selenium.waitForPageToLoad("30000");
@@ -73,7 +73,7 @@ public class AddQuestion2Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_25_choiceDescriptionc")) {
+				if (selenium.isElementPresent("choiceDescriptionc")) {
 					break;
 				}
 			}
@@ -83,9 +83,9 @@ public class AddQuestion2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_25_choiceDescriptionc",
+		selenium.typeKeys("choiceDescriptionc",
 			RuntimeVariables.replace("Test Choice C"));
-		selenium.type("_25_choiceDescriptionc",
+		selenium.type("choiceDescriptionc",
 			RuntimeVariables.replace("Test Choice C"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");

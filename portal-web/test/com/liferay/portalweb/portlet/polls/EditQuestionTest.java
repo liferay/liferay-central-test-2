@@ -87,7 +87,7 @@ public class EditQuestionTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_25_choiceDescriptiond")) {
+				if (selenium.isElementPresent("choiceDescriptiond")) {
 					break;
 				}
 			}
@@ -97,9 +97,9 @@ public class EditQuestionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_25_choiceDescriptiond",
+		selenium.typeKeys("choiceDescriptiond",
 			RuntimeVariables.replace("NEW Test Choice D"));
-		selenium.type("_25_choiceDescriptiond",
+		selenium.type("choiceDescriptiond",
 			RuntimeVariables.replace("NEW Test Choice D"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");

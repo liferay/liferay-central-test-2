@@ -64,9 +64,9 @@ public class SetupTest extends BaseTestCase {
 			RuntimeVariables.replace("PD Setup Test Question"));
 		selenium.type("_25_description",
 			RuntimeVariables.replace("This is a PD setup test question."));
-		selenium.type("_25_choiceDescriptiona",
+		selenium.type("choiceDescriptiona",
 			RuntimeVariables.replace("PD Setup Choice A"));
-		selenium.type("_25_choiceDescriptionb",
+		selenium.type("choiceDescriptionb",
 			RuntimeVariables.replace("PD Setup Choice B"));
 		selenium.click("//input[@value='Add Choice']");
 
@@ -76,7 +76,7 @@ public class SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_25_choiceDescriptionc")) {
+				if (selenium.isElementPresent("choiceDescriptionc")) {
 					break;
 				}
 			}
@@ -86,9 +86,9 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_25_choiceDescriptionc",
+		selenium.typeKeys("choiceDescriptionc",
 			RuntimeVariables.replace("PD Setup Choice C"));
-		selenium.type("_25_choiceDescriptionc",
+		selenium.type("choiceDescriptionc",
 			RuntimeVariables.replace("PD Setup Choice C"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
