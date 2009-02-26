@@ -166,6 +166,7 @@ public class SearchEngineUtil {
 	}
 
 	private static final Sort[] _DEFAULT_SORT = new Sort[] {
+		new Sort(null, Sort.SCORE_TYPE, false),
 		new Sort(Field.MODIFIED, Sort.LONG_TYPE, true)
 	};
 
