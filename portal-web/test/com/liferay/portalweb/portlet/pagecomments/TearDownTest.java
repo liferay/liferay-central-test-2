@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="DeleteCommentTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="TearDownTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DeleteCommentTest extends BaseTestCase {
-	public void testDeleteComment() throws Exception {
+public class TearDownTest extends BaseTestCase {
+	public void testTearDown() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,13 +51,26 @@ public class DeleteCommentTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Page Comments Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//tr[8]/td[2]/table[1]/tbody/tr/td[5]/span/a[2]"));
+		selenium.click(RuntimeVariables.replace("//td[5]/span/a[2]"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertFalse(selenium.isTextPresent("This is a test page comment 2!"));
+		selenium.click("//td[5]/span/a[2]");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='navigation']/ul/li[1]/a/span"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[3]/a/span"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.waitForPageToLoad("30000");
 	}
 }

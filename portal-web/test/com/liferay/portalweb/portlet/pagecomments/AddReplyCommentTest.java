@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="DeleteCommentTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddReplyCommentTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DeleteCommentTest extends BaseTestCase {
-	public void testDeleteComment() throws Exception {
+public class AddReplyCommentTest extends BaseTestCase {
+	public void testAddReplyComment() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,13 +51,49 @@ public class DeleteCommentTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Page Comments Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//tr[8]/td[2]/table[1]/tbody/tr/td[5]/span/a[2]"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//td[2]/span/a[2]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//td[2]/span/a[2]");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_107_postReplyBody1")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_107_postReplyBody1",
+			RuntimeVariables.replace("This is a test reply comment!"));
+		selenium.type("_107_postReplyBody1",
+			RuntimeVariables.replace("This is a test reply comment!"));
+		selenium.click(RuntimeVariables.replace("_107_postReplyButton1"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertFalse(selenium.isTextPresent("This is a test page comment 2!"));
+		assertEquals("This is a test reply comment!",
+			selenium.getText("//tr[3]/td[1]/a/b"));
+		assertTrue(selenium.isTextPresent("This is a test reply comment!"));
 	}
 }

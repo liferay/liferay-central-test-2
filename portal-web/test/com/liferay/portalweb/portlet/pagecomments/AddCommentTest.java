@@ -39,7 +39,7 @@ public class AddCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Add Comment")) {
+				if (selenium.isElementPresent("link=Page Comments Test Page")) {
 					break;
 				}
 			}
@@ -49,7 +49,26 @@ public class AddCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Add Comment");
+		selenium.click(RuntimeVariables.replace("link=Page Comments Test Page"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//span/a[2]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//span/a[2]");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -73,54 +92,8 @@ public class AddCommentTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a test page comment!"));
 		selenium.click(RuntimeVariables.replace("_107_postReplyButton0"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("This is a test page comment!")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Delete")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertTrue(selenium.isTextPresent("This is a test page comment!"));
 	}
 }

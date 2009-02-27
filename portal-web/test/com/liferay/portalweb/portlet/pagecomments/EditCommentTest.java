@@ -26,26 +26,59 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="DeletePageTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditCommentTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DeletePageTest extends BaseTestCase {
-	public void testDeletePage() throws Exception {
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='navigation']/ul/li[1]/a/span"));
+public class EditCommentTest extends BaseTestCase {
+	public void testEditComment() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Page Comments Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Page Comments Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+		selenium.click("//td[4]/span/a[2]");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_107_editBody1")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_107_editBody1",
+			RuntimeVariables.replace("This is a edited test page comment!"));
+		selenium.type("_107_editBody1",
+			RuntimeVariables.replace("This is a edited test page comment!"));
+		selenium.click(RuntimeVariables.replace("_107_updateReplyButton1"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[3]/a/span"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertEquals("This is a edited test page comment!",
+			selenium.getText(
+				"//div[@id='portlet-wrapper-107']/div[2]/div/div/div[2]/form/table[2]/tbody/tr[2]/td[1]/a/b"));
 	}
 }

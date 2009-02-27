@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="DeleteCommentTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssertRatingsTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DeleteCommentTest extends BaseTestCase {
-	public void testDeleteComment() throws Exception {
+public class AssertRatingsTest extends BaseTestCase {
+	public void testAssertRatings() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,13 +51,27 @@ public class DeleteCommentTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Page Comments Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//tr[8]/td[2]/table[1]/tbody/tr/td[5]/span/a[2]"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertFalse(selenium.isTextPresent("This is a test page comment 2!"));
+		selenium.click("//td[1]/ul/li[2]/a[1]");
+		selenium.click("//tr[5]/td[2]/table[1]/tbody/tr/td[1]/ul/li[2]/a[2]");
+		Thread.sleep(5000);
+		assertEquals("+1", selenium.getText("//td[1]/ul/li[1]/span"));
+		assertEquals("(1 Vote)", selenium.getText("//li[3]/span"));
+		assertEquals("-1",
+			selenium.getText(
+				"//tr[5]/td[2]/table[1]/tbody/tr/td[1]/ul/li[1]/span"));
+		assertEquals("(1 Vote)",
+			selenium.getText(
+				"//tr[5]/td[2]/table[1]/tbody/tr/td[1]/ul/li[3]/span"));
+		selenium.click("//td[1]/ul/li[2]/a[1]");
+		selenium.click("//tr[5]/td[2]/table[1]/tbody/tr/td[1]/ul/li[2]/a[2]");
+		Thread.sleep(5000);
+		assertEquals("\u00b10", selenium.getText("//td[1]/ul/li[1]/span"));
+		assertEquals("(0 Votes)", selenium.getText("//li[3]/span"));
+		assertEquals("\u00b10",
+			selenium.getText(
+				"//tr[5]/td[2]/table[1]/tbody/tr/td[1]/ul/li[1]/span"));
+		assertEquals("(0 Votes)",
+			selenium.getText(
+				"//tr[5]/td[2]/table[1]/tbody/tr/td[1]/ul/li[3]/span"));
 	}
 }

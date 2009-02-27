@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>AddCommentTest</title>
+<title>AddNullCommentTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddCommentTest</td></tr>
+<tr><td rowspan="1" colspan="3">AddNullCommentTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
@@ -36,12 +36,12 @@
 <tr>
 	<td>typeKeys</td>
 	<td>_107_postReplyBody0</td>
-	<td>This is a test page comment!</td>
+	<td>This is a null test.</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_107_postReplyBody0</td>
-	<td>This is a test page comment!</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -50,12 +50,7 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>This is a test page comment!</td>
+	<td>You have entered invalid data. Please try again.</td>
 	<td></td>
 </tr>
 

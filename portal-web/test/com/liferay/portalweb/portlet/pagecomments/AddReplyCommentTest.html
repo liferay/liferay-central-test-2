@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>AddCommentTest</title>
+<title>AddReplyCommentTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddCommentTest</td></tr>
+<tr><td rowspan="1" colspan="3">AddReplyCommentTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
@@ -20,42 +20,42 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//span/a[2]</td>
+	<td>//td[2]/span/a[2]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//span/a[2]</td>
+	<td>//td[2]/span/a[2]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>_107_postReplyBody0</td>
+	<td>_107_postReplyBody1</td>
 	<td></td>
 </tr>
 <tr>
 	<td>typeKeys</td>
-	<td>_107_postReplyBody0</td>
-	<td>This is a test page comment!</td>
+	<td>_107_postReplyBody1</td>
+	<td>This is a test reply comment!</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>_107_postReplyBody0</td>
-	<td>This is a test page comment!</td>
+	<td>_107_postReplyBody1</td>
+	<td>This is a test reply comment!</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>_107_postReplyButton0</td>
+	<td>_107_postReplyButton1</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//tr[3]/td[1]/a/b</td>
+	<td>This is a test reply comment!</td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>This is a test page comment!</td>
+	<td>This is a test reply comment!</td>
 	<td></td>
 </tr>
 
