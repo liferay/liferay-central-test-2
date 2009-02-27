@@ -258,6 +258,20 @@ public class SeleneseToJavaBuilder {
 				sb.append(param3);
 				sb.append("\"));");
 			}
+			else if (param1.equals("assertAlert") ||
+					 param1.equals("assertNotAlert")) {
+
+				if (param1.equals("assertAlert")) {
+					sb.append("assertEquals");
+				}
+				else if (param1.equals("assertNotAlert")) {
+					sb.append("assertNotEquals");
+				}
+
+				sb.append("(\"");
+				sb.append(param2);
+				sb.append("\", selenium.getAlert());");
+			}
 			else if (param1.equals("assertChecked")) {
 				sb.append("assertTrue(selenium.isChecked(\"");
 				sb.append(param2);
