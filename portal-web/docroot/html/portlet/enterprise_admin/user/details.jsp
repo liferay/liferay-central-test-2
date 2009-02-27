@@ -67,10 +67,12 @@ if (selContact != null) {
 	}
 
 	jQuery(
-		function(){
-			jQuery('span.modify-link').bind('click', function(){
-				jQuery(this).trigger('change');
-			});
+		function() {
+			jQuery('span.modify-link').bind('click',
+				function() {
+					jQuery(this).trigger('change');
+				}
+			);
 		}
 	);
 </script>

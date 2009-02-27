@@ -68,7 +68,7 @@
 
 .portlet-enterprise-admin .change-company-logo img {
 	display: block;
-	margin: 10px 10px;
+	margin: 10px;
 	width: 300px;
 }
 
