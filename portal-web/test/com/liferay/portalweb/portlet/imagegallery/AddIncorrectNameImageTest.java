@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="SearchPortletTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddIncorrectNameImageTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class SearchPortletTest extends BaseTestCase {
-	public void testSearchPortlet() throws Exception {
+public class AddIncorrectNameImageTest extends BaseTestCase {
+	public void testAddIncorrectNameImage() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,17 +51,52 @@ public class SearchPortletTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_31_keywords1", RuntimeVariables.replace("lifera"));
-		selenium.type("_31_keywords1", RuntimeVariables.replace("liferay"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Images']"));
+		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a[1]/b"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Test Image"));
-		selenium.typeKeys("_31_keywords", RuntimeVariables.replace("lifera1"));
-		selenium.type("_31_keywords", RuntimeVariables.replace("liferay1"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Images']"));
+		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isTextPresent("Test Image"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Image']"));
+		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Use the classic uploader.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Use the classic uploader.");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_31_file")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_31_file",
+			RuntimeVariables.replace(
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\imagegallery\\test_image.jp"));
+		assertEquals("Image names must end with one of the following extensions: .bmp, .gif, .jpeg, .jpg, .png, .tif, .tiff",
+			selenium.getAlert());
 	}
 }

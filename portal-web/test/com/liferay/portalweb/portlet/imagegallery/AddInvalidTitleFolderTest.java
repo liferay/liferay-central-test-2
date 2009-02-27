@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="SearchPortletTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddInvalidTitleFolderTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class SearchPortletTest extends BaseTestCase {
-	public void testSearchPortlet() throws Exception {
+public class AddInvalidTitleFolderTest extends BaseTestCase {
+	public void testAddInvalidTitleFolder() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,17 +51,16 @@ public class SearchPortletTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_31_keywords1", RuntimeVariables.replace("lifera"));
-		selenium.type("_31_keywords1", RuntimeVariables.replace("liferay"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Images']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Folder']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Test Image"));
-		selenium.typeKeys("_31_keywords", RuntimeVariables.replace("lifera1"));
-		selenium.type("_31_keywords", RuntimeVariables.replace("liferay1"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Images']"));
+		selenium.typeKeys("_31_name", RuntimeVariables.replace("!@#$%^&amp;*"));
+		selenium.type("_31_name", RuntimeVariables.replace("!@#$%^&amp;*"));
+		selenium.type("_31_description",
+			RuntimeVariables.replace("Invaild Title Folder Test"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isTextPresent("Test Image"));
+		assertTrue(selenium.isTextPresent(
+				"You have entered invalid data. Please try again."));
+		assertTrue(selenium.isTextPresent("Please enter a valid name."));
 	}
 }

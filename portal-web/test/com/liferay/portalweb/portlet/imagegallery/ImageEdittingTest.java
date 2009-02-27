@@ -80,8 +80,7 @@ public class ImageEdittingTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@class=\"ui-dialog-titlebar\"]")) {
+				if (selenium.isElementPresent("link=Close")) {
 					break;
 				}
 			}
@@ -95,7 +94,7 @@ public class ImageEdittingTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Edit"));
 		assertTrue(selenium.isElementPresent("link=Permissions"));
 		assertTrue(selenium.isElementPresent("link=Delete"));
-		selenium.click("link=X");
+		selenium.click("link=Close");
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -122,7 +121,7 @@ public class ImageEdittingTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[5]/div[1]/div[1]/a")) {
+				if (selenium.isElementPresent("link=Close")) {
 					break;
 				}
 			}
@@ -132,13 +131,11 @@ public class ImageEdittingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		Thread.sleep(2000);
-		assertTrue(selenium.isElementPresent("link=Edit"));
-		assertTrue(selenium.isElementPresent("link=Permissions"));
-		assertTrue(selenium.isElementPresent("link=Delete"));
-		selenium.click("//div[5]/div[1]/div[1]/a");
-		Thread.sleep(2000);
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
+		assertFalse(selenium.isElementPresent("link=Edit"));
+		assertFalse(selenium.isElementPresent("link=Permissions"));
+		assertFalse(selenium.isElementPresent("link=Delete"));
+		selenium.click("link=Close");
+		Thread.sleep(5000);
 	}
 }

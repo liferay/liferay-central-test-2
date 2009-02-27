@@ -48,6 +48,14 @@ public class ImageGalleryTests extends BaseTests {
 		testSuite.addTestSuite(SearchPortletTest.class);
 		testSuite.addTestSuite(AddSecondTestFoldersTest.class);
 		testSuite.addTestSuite(MoveImageTest.class);
+		testSuite.addTestSuite(AddNullTitleFolderTest.class);
+		testSuite.addTestSuite(AddInvalidTitleFolderTest.class);
+		testSuite.addTestSuite(AddDuplicateTitleFolderTest.class);
+		testSuite.addTestSuite(AddImageNameFolderTest.class);
+		testSuite.addTestSuite(AddNullImageTest.class);
+		testSuite.addTestSuite(AddDuplicateImageNameTest.class);
+		testSuite.addTestSuite(AddIncorrectNameImageTest.class);
+		testSuite.addTestSuite(AddInvalidImageTest.class);
 		testSuite.addTestSuite(DeleteFoldersTest.class);
 		testSuite.addTestSuite(ImportLARTest.class);
 		testSuite.addTestSuite(AssertImportLARTest.class);

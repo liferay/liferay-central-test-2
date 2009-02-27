@@ -76,36 +76,19 @@ public class AddImageTest extends BaseTestCase {
 		}
 
 		selenium.click("link=Use the classic uploader.");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_31_file")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_31_file",
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\imagegallery\\test_image.jpg"));
-		selenium.typeKeys("_31_name", RuntimeVariables.replace("test_image"));
-		selenium.type("_31_name", RuntimeVariables.replace("test_image"));
-		selenium.typeKeys("_31_description",
-			RuntimeVariables.replace("This is the Lifera logo!"));
+		selenium.typeKeys("_31_name", RuntimeVariables.replace("Test Image"));
+		selenium.type("_31_name", RuntimeVariables.replace("Test Image"));
 		selenium.type("_31_description",
 			RuntimeVariables.replace("This is the Liferay logo!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent("//img[@alt='Image']"));
-		assertTrue(selenium.isTextPresent("test_image"));
+		assertTrue(selenium.isTextPresent("Test Image"));
 	}
 }

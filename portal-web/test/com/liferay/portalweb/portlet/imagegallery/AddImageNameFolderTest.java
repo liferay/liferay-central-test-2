@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="SearchPortletTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddImageNameFolderTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class SearchPortletTest extends BaseTestCase {
-	public void testSearchPortlet() throws Exception {
+public class AddImageNameFolderTest extends BaseTestCase {
+	public void testAddImageNameFolder() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,17 +51,21 @@ public class SearchPortletTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_31_keywords1", RuntimeVariables.replace("lifera"));
-		selenium.type("_31_keywords1", RuntimeVariables.replace("liferay"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Images']"));
+		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a[1]/b"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Test Image"));
-		selenium.typeKeys("_31_keywords", RuntimeVariables.replace("lifera1"));
-		selenium.type("_31_keywords", RuntimeVariables.replace("liferay1"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Images']"));
+		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isTextPresent("Test Image"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Subfolder']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_31_name", RuntimeVariables.replace("Test Image.jpg"));
+		selenium.type("_31_name", RuntimeVariables.replace("Test Image.jpg"));
+		selenium.type("_31_description",
+			RuntimeVariables.replace("Duplicate Title Folder Test"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"You have entered invalid data. Please try again."));
+		assertTrue(selenium.isTextPresent("Please enter a unique folder name."));
 	}
 }

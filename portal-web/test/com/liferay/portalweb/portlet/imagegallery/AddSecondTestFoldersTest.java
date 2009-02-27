@@ -53,27 +53,8 @@ public class AddSecondTestFoldersTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Folder']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_31_name")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.typeKeys("_31_name", RuntimeVariables.replace("Test Folder 2"));
 		selenium.type("_31_name", RuntimeVariables.replace("Test Folder 2"));
-		selenium.typeKeys("_31_description",
-			RuntimeVariables.replace("This is a second test folder."));
 		selenium.type("_31_description",
 			RuntimeVariables.replace("This is a second test folder."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
@@ -104,28 +85,9 @@ public class AddSecondTestFoldersTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Subfolder']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_31_name")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.typeKeys("_31_name",
 			RuntimeVariables.replace("Test Subfolder 2"));
 		selenium.type("_31_name", RuntimeVariables.replace("Test Subfolder 2"));
-		selenium.typeKeys("_31_description",
-			RuntimeVariables.replace("This is a second test subfolder."));
 		selenium.type("_31_description",
 			RuntimeVariables.replace("This is a second test subfolder."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
