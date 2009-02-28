@@ -28,6 +28,7 @@ Liferay.PortletCSS = {
 				instance._currentPopup = new Expanse.Popup(
 					{
 						body: content[0],
+						height: 'auto',
 						onClose: function() {
 							instance._newPanel.removeClass('instantiated');
 							instance._newPanel.hide().appendTo('body');
