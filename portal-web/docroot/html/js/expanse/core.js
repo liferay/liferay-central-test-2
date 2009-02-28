@@ -19,8 +19,9 @@ window.Expanse = {
 		var element = null;
 
 		if(el) {
-			if (Expanse.lang.isString(el)) {
-				el = Expanse.get('#' + el)[0];
+			if (typeof el == 'string') {
+				el = Expanse.prefix(el, "#");
+				el = Expanse.get(el)[0];
 			}
 
 			if (el.jquery && el.length) {
@@ -92,6 +93,22 @@ window.Expanse = {
 		}
 
 		return baseObject;
+	},
+
+	prefix: function() {
+		var instance = this;
+
+		if (typeof str != "string") {
+			str = String(str);
+		}
+
+		prefix = prefix || "";
+
+		if (str.indexOf(prefix) !== 0) {
+			str = prefix + str;
+		}
+
+		return str;
 	}
 };
 

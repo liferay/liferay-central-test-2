@@ -75,9 +75,9 @@ Liferay.PortletCSS = {
 
 		instance._newPanel.find('.use-colorpicker').each(
 			function() {
-				new Liferay.ColorPicker(
+				new Expanse.ColorPickerPanel(
 					{
-						context: jQuery('#portlet-set-properties')[0],
+						buttonbuttonContext: jQuery('#portlet-set-properties')[0],
 						item: this
 					}
 				);
@@ -111,9 +111,9 @@ Liferay.PortletCSS = {
 			bgData.backgroundColor = color;
 		};
 
-		var colorPicker = new Liferay.ColorPicker(
+		var colorPicker = new Expanse.ColorPickerPanel(
 			{
-				context: instance._newPanel[0],
+				buttonContext: instance._newPanel[0],
 				item: backgroundColor[0],
 				onChange: function() {
 					setColor(backgroundColor[0]);
@@ -371,33 +371,33 @@ Liferay.PortletCSS = {
 			portlet.css(styling);
 		};
 
-		var colorPickerTop = new Liferay.ColorPicker(
+		var colorPickerTop = new Expanse.ColorPickerPanel(
 			{
-				context: jQuery('#portlet-set-properties')[0],
+				buttonContext: jQuery('#portlet-set-properties')[0],
 				item: cTopColor[0],
 				onChange: changeColor
 			}
 		);
 
-		var colorPickerRight = new Liferay.ColorPicker(
+		var colorPickerRight = new Expanse.ColorPickerPanel(
 			{
-				context: jQuery('#portlet-set-properties')[0],
+				buttonContext: jQuery('#portlet-set-properties')[0],
 				item: cRightColor[0],
 				onChange: changeColor
 			}
 		);
 
-		var colorPickerBottom = new Liferay.ColorPicker(
+		var colorPickerBottom = new Expanse.ColorPickerPanel(
 			{
-				context: jQuery('#portlet-set-properties')[0],
+				buttonContext: jQuery('#portlet-set-properties')[0],
 				item: cBottomColor[0],
 				onChange: changeColor
 			}
 		);
 
-		var colorPickerLeft = new Liferay.ColorPicker(
+		var colorPickerLeft = new Expanse.ColorPickerPanel(
 			{
-				context: jQuery('#portlet-set-properties')[0],
+				buttonContext: jQuery('#portlet-set-properties')[0],
 				item: cLeftColor[0],
 				onChange: changeColor
 			}
@@ -1516,9 +1516,9 @@ Liferay.PortletCSS = {
 			}
 		};
 
-		var colorPicker = new Liferay.ColorPicker(
+		var colorPicker = new Expanse.ColorPickerPanel(
 			{
-				context: jQuery('#portlet-set-properties')[0],
+				buttonContext: jQuery('#portlet-set-properties')[0],
 				item: fontColor[0],
 				onChange: function() {
 					setColor(fontColor[0]);

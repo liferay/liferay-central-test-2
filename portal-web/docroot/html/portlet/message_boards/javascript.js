@@ -426,7 +426,7 @@ if (!Liferay.Editor.bbCode) {
 
 			instance._location.find('.use-colorpicker').before(instance._fontColorInput);
 
-			var colorPicker = new Liferay.ColorPicker(
+			var colorPicker = new Expanse.ColorPickerPanel(
 				{
 					hasImage: true,
 					onClose: function() {

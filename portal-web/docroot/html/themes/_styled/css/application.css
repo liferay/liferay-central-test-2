@@ -892,93 +892,127 @@ img.exp-datepicker-button {
 
 /* ---------- Color picker ---------- */
 
-.ui-colorpicker {
-	background-image: url(../images/color_picker/picker_container_bg.png);
-	font: 11px Arial,Helvetica,sans-serif;
+.exp-picker-panel .exp-panel {
+	background: url(../images/color_picker/picker_container_bg.png) no-repeat;
+	border-width: 0;
+	padding: 0;
+}
+
+.exp-picker-panel .exp-header, .exp-picker-panel .exp-footer {
+	display: none;
+}
+
+.exp-picker-panel .exp-body {
 	height: 192px;
+	padding: 0;
 	position: relative;
 	width: 305px;
 }
 
-.ui-colorpicker-color {
-	background-color: #F00;
-	background-image: url(../images/color_picker/picker_bg.png);
-	background-position: center;
-	background-repeat: no-repeat;
+.exp-picker-panel .container-close {
+	background: url(../images/color_picker/close.png) no-repeat 0 0;
+	height: 23px;
+	right: 3px;
+	top: 3px;
+	width: 23px;
+}
+
+.yui-picker {
+	position: relative;
+}
+
+.yui-picker-bg {
+	background-color: #f00;
+	background: #f00 url(../images/color_picker/picker_bg.png);
 	height: 184px;
-	left: 8px;
+	outline: 0 none;
+	left: 5px;
 	position: absolute;
 	top: 5px;
 	width: 184px;
 }
 
-.ui-colorpicker-color-handle {
-	background-image: url(../images/color_picker/select.png);
-	height: 11px;
+.yui-picker-controls {
+	left: 226px;
 	position: absolute;
-	width: 11px;
+	top: 95px;
 }
 
-.ui-colorpicker-hue {
-	background-image: url(../images/color_picker/hue.png);
+.yui-picker-controls ul, .yui-picker-controls li  {
+	margin: 0;
+	padding: 0;
+}
+
+.yui-picker-controls .hd {
+	background: transparent;
+	border-width: 0 !important;
+}
+
+.yui-picker-controls .bd {
+	border-width: 0 !important;
+	height: 100px;
+}
+
+.yui-picker-controls ul {
+	float: left;
+	padding: 0;
+}
+
+.yui-picker-controls li {
+	list-style: none;
+}
+
+.exp-picker-panel .yui-picker-controls input {
+	padding: 3px 1px;
+}
+
+.yui-picker-hex-controls {
+	clear: both;
+	padding: 2px;
+}
+
+.yui-picker-hue-thumb {
+	cursor: default;
+	height: 7px;
+	left: -2px;
+	position: absolute;
+	top: -2px;
+	width: 18px;
+	z-index: 9;
+}
+
+.yui-picker-hue-bg {
+	background: url(../images/color_picker/hue.png) no-repeat -2px -2px;
 	height: 186px;
 	left: 200px;
+	outline: 0 none;
 	position: absolute;
-	top: 3px;
-	width: 18px;
+	top: 5px;
+	width: 14px;
 }
 
-.ui-colorpicker-hue-handle {
-	background-image: url(../images/color_picker/color_indic.png);
-	height: 7px;
+.yui-picker-mask {
+	left: 0;
 	position: absolute;
-	width: 18px;
+	top: 0;
 }
 
-.ui-colorpicker-current {
-	background: #FFF;
+.yui-picker-swatch {
 	border: 2px solid #727C81;
 	height: 60px;
+	left: 226px;
 	position: absolute;
-	right: 10px;
-	top: 31px;
+	top: 28px;
 	width: 60px;
 }
 
-.ui-colorpicker-values {
-	left: 230px;
+.yui-picker-thumb {
+	cursor: default;
+	height: 11px;
+	left: -4px;
 	position: absolute;
-	top: 100px;
-	width: 60px;
-}
-
-.ui-colorpicker-values table {
-	width: 100%;
-}
-
-.ui-colorpicker-values table input {
-	margin-bottom: 1px;
-	padding: 3px 1px;
-	width: 100%;
-}
-
-.ui-colorpicker-rgbR, .ui-colorpicker-rgbG, .ui-colorpicker-rgbB {
-	width: 20px;
-}
-
-.ui-colorpicker-hex {
-	width: 40px;
-}
-
-.ui-colorpicker-close {
-	background: url(../images/color_picker/close.png) no-repeat 0 0;
-	cursor: pointer;
-	height: 23px;
-	position: absolute;
-	right: 3px;
-	text-indent: -9999em;
-	top: 3px;
-	width: 23px;
+	top: -4px;
+	width: 11px;
 }
 
 /* ---------- Autocomplete ---------- */

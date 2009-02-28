@@ -495,40 +495,61 @@ img.exp-datepicker-button {
 
 /* ---------- Color picker ---------- */
 
-.ui-colorpicker {
+.exp-picker-panel .exp-panel {
 }
 
-.ui-colorpicker-color {
+.exp-picker-panel .exp-header, .exp-picker-panel .exp-footer {
 }
 
-.ui-colorpicker-color-handle {
+.exp-picker-panel .exp-body {
 }
 
-.ui-colorpicker-hue {
+.exp-picker-panel .container-close {
 }
 
-.ui-colorpicker-hue-handle {
+.yui-picker {
 }
 
-.ui-colorpicker-current {
+.yui-picker-bg {
 }
 
-.ui-colorpicker-values {
+.yui-picker-controls {
 }
 
-.ui-colorpicker-values table {
+.yui-picker-controls ul, .yui-picker-controls li  {
 }
 
-.ui-colorpicker-values table input {
+.yui-picker-controls .hd {
 }
 
-.ui-colorpicker-rgbR, .ui-colorpicker-rgbG, .ui-colorpicker-rgbB {
+.yui-picker-controls .bd {
 }
 
-.ui-colorpicker-hex {
+.yui-picker-controls ul {
 }
 
-.ui-colorpicker-close {
+.yui-picker-controls li {
+}
+
+.exp-picker-panel .yui-picker-controls input {
+}
+
+.yui-picker-hex-controls {
+}
+
+.yui-picker-hue-thumb {
+}
+
+.yui-picker-hue-bg {
+}
+
+.yui-picker-mask {
+}
+
+.yui-picker-swatch {
+}
+
+.yui-picker-thumb {
 }
 
 /* ---------- Autocomplete ---------- */

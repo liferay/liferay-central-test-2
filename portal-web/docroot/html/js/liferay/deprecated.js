@@ -135,3 +135,19 @@ Expanse.Class.createSuper = function(previous, current) {
 
     Resize.CSS_HANDLE = 'ui-resizable-handle ' + Resize.CSS_HANDLE;
 })();
+
+// LPS-2267
+
+Liferay.ColorPicker = Expanse.ColorPickerPanel.extend({
+	initialize: function(options) {
+		var instance = this;
+
+		if (options.context) {
+			options.buttonContext = options.context;
+
+			delete options.context;
+		}
+
+		instance._super(options);
+	}
+});
