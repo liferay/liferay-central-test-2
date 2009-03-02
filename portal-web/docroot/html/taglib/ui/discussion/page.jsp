@@ -55,7 +55,7 @@ List<MBMessage> messages = treeWalker.getMessages();
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>
 
-<c:if test="<%= !messages.isEmpty() || MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, className, classPK, userId, ActionKeys.ADD_DISCUSSION) %>">
+<c:if test="<%= (messages.size() > 1) || MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, className, classPK, userId, ActionKeys.ADD_DISCUSSION) %>">
 	<div class="taglib-discussion">
 		<script type="text/javascript">
 			function <%= namespace %>deleteMessage(i) {
@@ -148,7 +148,7 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 			</table>
 		</c:if>
 
-		<c:if test="<%= !messages.isEmpty() %>">
+		<c:if test="<%= messages.size() > 1 %>">
 			<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, className, classPK, userId, ActionKeys.ADD_DISCUSSION) %>">
 				<br />
 			</c:if>
