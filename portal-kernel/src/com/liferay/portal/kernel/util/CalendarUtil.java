@@ -56,16 +56,8 @@ public class CalendarUtil {
 	};
 
 	public static boolean afterByDay(Date date1, Date date2) {
-		Calendar cal1 = CalendarFactoryUtil.getCalendar();
-		cal1.setTime(date1);
-		Calendar cal2 = CalendarFactoryUtil.getCalendar();
-		cal2.setTime(date2);
-
-		cal1.set(cal1.get(Calendar.YEAR), cal1.get(Calendar.MONTH), cal1.get(Calendar.DATE), 0, 0, 0);
-		cal2.set(cal2.get(Calendar.YEAR), cal2.get(Calendar.MONTH), cal2.get(Calendar.DATE), 0, 0, 0);
-
-		long millis1 = cal1.getTimeInMillis() / 86400000;
-		long millis2 = cal2.getTimeInMillis() / 86400000;
+		long millis1 = _getTimeInMillis(date1);
+		long millis2 = _getTimeInMillis(date2);
 
 		if (millis1 > millis2) {
 			return true;
@@ -76,16 +68,8 @@ public class CalendarUtil {
 	}
 
 	public static boolean beforeByDay(Date date1, Date date2) {
-		Calendar cal1 = CalendarFactoryUtil.getCalendar();
-		cal1.setTime(date1);
-		Calendar cal2 = CalendarFactoryUtil.getCalendar();
-		cal2.setTime(date2);
-
-		cal1.set(cal1.get(Calendar.YEAR), cal1.get(Calendar.MONTH), cal1.get(Calendar.DATE), 0, 0, 0);
-		cal2.set(cal2.get(Calendar.YEAR), cal2.get(Calendar.MONTH), cal2.get(Calendar.DATE), 0, 0, 0);
-
-		long millis1 = cal1.getTimeInMillis() / 86400000;
-		long millis2 = cal2.getTimeInMillis() / 86400000;
+		long millis1 = _getTimeInMillis(date1);
+		long millis2 = _getTimeInMillis(date2);
 
 		if (millis1 < millis2) {
 			return true;
@@ -96,16 +80,8 @@ public class CalendarUtil {
 	}
 
 	public static boolean equalsByDay(Date date1, Date date2) {
-		Calendar cal1 = CalendarFactoryUtil.getCalendar();
-		cal1.setTime(date1);
-		Calendar cal2 = CalendarFactoryUtil.getCalendar();
-		cal2.setTime(date2);
-
-		cal1.set(cal1.get(Calendar.YEAR), cal1.get(Calendar.MONTH), cal1.get(Calendar.DATE), 0, 0, 0);
-		cal2.set(cal2.get(Calendar.YEAR), cal2.get(Calendar.MONTH), cal2.get(Calendar.DATE), 0, 0, 0);
-
-		long millis1 = cal1.getTimeInMillis() / 86400000;
-		long millis2 = cal2.getTimeInMillis() / 86400000;
+		long millis1 = _getTimeInMillis(date1);
+		long millis2 = _getTimeInMillis(date2);
 
 		if (millis1 == millis2) {
 			return true;
@@ -484,6 +460,25 @@ public class CalendarUtil {
 		cal.add(Calendar.MINUTE, delta);
 
 		return cal;
+	}
+
+	private static long _getTimeInMillis(Date date) {
+		Calendar cal = CalendarFactoryUtil.getCalendar();
+
+		cal.setTime(date);
+
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH);
+		int day = cal.get(Calendar.DATE);
+		int hour = 0;
+		int minute = 0;
+		int second = 0;
+
+		cal.set(year, month, day, hour, minute, second);
+
+		long millis = cal.getTimeInMillis() / Time.DAY;
+
+		return millis;
 	}
 
 	private static Map<String, String[]> _calendarPool =
