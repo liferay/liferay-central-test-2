@@ -152,14 +152,13 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 	}
 
 	public void populateParams(
-		String friendlyURLPath, Map<String, String[]> params,
-		Map<String, String> prpIdentifiers) {
+		String friendlyURLPath, Map<String, String[]> params) {
 
-		addParam(params, prpIdentifiers, "p_p_id", _PORTLET_ID);
-		addParam(params, prpIdentifiers, "p_p_lifecycle", "0");
-		addParam(params, prpIdentifiers, "p_p_mode", PortletMode.VIEW);
+		addParam(params, "p_p_id", _PORTLET_ID);
+		addParam(params, "p_p_lifecycle", "0");
+		addParam(params, "p_p_mode", PortletMode.VIEW);
 
-		addParam(params, prpIdentifiers, "struts_action", "/wiki/view");
+		addParam(params, "struts_action", "/wiki/view");
 
 		int x = friendlyURLPath.indexOf(StringPool.SLASH, 1);
 
@@ -172,8 +171,7 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 			if (urlFragment0.equals("category") || urlFragment0.equals("tag")) {
 				if (urlFragments.length >= 2) {
 					addParam(
-						params, prpIdentifiers, "struts_action",
-						"/wiki/view_tagged_pages");
+						params, "struts_action", "/wiki/view_tagged_pages");
 
 					String tag = HttpUtil.decodeURL(urlFragments[1]);
 
@@ -183,16 +181,16 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 						folksonomy = TagsEntryConstants.FOLKSONOMY_CATEGORY;
 					}
 
-					addParam(params, prpIdentifiers, "tag", tag);
-					addParam(params, prpIdentifiers, "folksonomy", folksonomy);
+					addParam(params, "tag", tag);
+					addParam(params, "folksonomy", folksonomy);
 				}
 			}
 			else {
 				if (Validator.isNumber(urlFragment0)) {
-					addParam(params, prpIdentifiers, "nodeId", urlFragment0);
+					addParam(params, "nodeId", urlFragment0);
 				}
 				else {
-					addParam(params, prpIdentifiers, "nodeName", urlFragment0);
+					addParam(params, "nodeName", urlFragment0);
 				}
 
 				if (urlFragments.length >= 2) {
@@ -203,17 +201,16 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 						urlFragments1.equals("recent_changes")) {
 
 						addParam(
-							params, prpIdentifiers, "struts_action",
+							params, "struts_action",
 							"/wiki/view_" + urlFragments1);
 					}
 					else {
-						addParam(params, prpIdentifiers, "title", urlFragments1);
+						addParam(params, "title", urlFragments1);
 
 						if (urlFragments.length >= 3) {
 							String windowState = urlFragments[2];
 
-							addParam(
-								params, prpIdentifiers, "p_p_state", windowState);
+							addParam(params, "p_p_state", windowState);
 						}
 					}
 				}

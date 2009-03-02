@@ -41,7 +41,6 @@ public interface FriendlyURLMapper {
 	public boolean isCheckMappingWithPrefix();
 
 	public void populateParams(
-		String friendlyURLPath, Map<String, String[]> params,
-		Map<String, String> prpIdentifiers);
+		String friendlyURLPath, Map<String, String[]> params);
 
 }

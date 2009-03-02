@@ -59,13 +59,12 @@ public class TagsCompilerFriendlyURLMapper extends BaseFriendlyURLMapper {
 	}
 
 	public void populateParams(
-		String friendlyURLPath, Map<String, String[]> params,
-		Map<String, String> prpIdentifiers) {
+		String friendlyURLPath, Map<String, String[]> params) {
 
-		addParam(params, prpIdentifiers, "p_p_id", _PORTLET_ID);
-		addParam(params, prpIdentifiers, "p_p_lifecycle", "0");
-		addParam(params, prpIdentifiers, "p_p_state", WindowState.NORMAL);
-		addParam(params, prpIdentifiers, "p_p_mode", PortletMode.VIEW);
+		addParam(params, "p_p_id", _PORTLET_ID);
+		addParam(params, "p_p_lifecycle", "0");
+		addParam(params, "p_p_state", WindowState.NORMAL);
+		addParam(params, "p_p_mode", PortletMode.VIEW);
 
 		int x = friendlyURLPath.indexOf(StringPool.SLASH, 1);
 		int y = friendlyURLPath.length();
@@ -87,7 +86,7 @@ public class TagsCompilerFriendlyURLMapper extends BaseFriendlyURLMapper {
 				sb.append(entry);
 			}
 
-			addParam(params, prpIdentifiers, "entries", sb.toString());
+			addParam(params, "entries", sb.toString());
 		}
 	}
 

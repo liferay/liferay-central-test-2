@@ -126,20 +126,18 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 	}
 
 	public void populateParams(
-		String friendlyURLPath, Map<String, String[]> params,
-		Map<String, String> prpIdentifiers) {
+		String friendlyURLPath, Map<String, String[]> params) {
 
-		addParam(params, prpIdentifiers, "p_p_id", _PORTLET_ID);
-		addParam(params, prpIdentifiers, "p_p_lifecycle", "0");
-		addParam(params, prpIdentifiers, "p_p_mode", PortletMode.VIEW);
+		addParam(params, "p_p_id", _PORTLET_ID);
+		addParam(params, "p_p_lifecycle", "0");
+		addParam(params, "p_p_mode", PortletMode.VIEW);
 
 		int x = friendlyURLPath.indexOf("/", 1);
 
 		if ((x + 1) == friendlyURLPath.length()) {
+			addParam(params, "struts_action", "/message_boards/view");
 			addParam(
-				params, prpIdentifiers, "struts_action", "/message_boards/view");
-			addParam(
-				params, prpIdentifiers, "categoryId",
+				params, "categoryId",
 				MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 
 			return;
@@ -163,36 +161,30 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 			String categoryId =
 				friendlyURLPath.substring(y + 1, z);
 
-			addParam(
-				params, prpIdentifiers, "struts_action", "/message_boards/view");
-			addParam(params, prpIdentifiers, "categoryId", categoryId);
+			addParam(params, "struts_action", "/message_boards/view");
+			addParam(params, "categoryId", categoryId);
 		}
 		else if (type.equals("message")) {
 			String messageId =
 				friendlyURLPath.substring(y + 1, z);
 
-			addParam(
-				params, prpIdentifiers, "struts_action",
-				"/message_boards/view_message");
-			addParam(params, prpIdentifiers, "messageId", messageId);
+			addParam(params, "struts_action", "/message_boards/view_message");
+			addParam(params, "messageId", messageId);
 		}
 		else if (type.equals("my_posts") || type.equals("my_subscriptions") ||
 				 type.equals("recent_posts") || type.equals("statistics") ||
 				 type.equals("banned_users")) {
 
-			addParam(
-				params, prpIdentifiers, "struts_action", "/message_boards/view");
-			addParam(params, prpIdentifiers, "tabs1", type);
+			addParam(params, "struts_action", "/message_boards/view");
+			addParam(params, "tabs1", type);
 		}
 		else if (type.equals("search")) {
-			addParam(
-				params, prpIdentifiers, "struts_action",
-				"/message_boards/search");
-			addParam(params, prpIdentifiers, "tabs1", "category");
+			addParam(params, "struts_action", "/message_boards/search");
+			addParam(params, "tabs1", "category");
 		}
 
 		if (friendlyURLPath.indexOf("maximized", x) != -1) {
-			addParam(params, prpIdentifiers, "p_p_state", WindowState.MAXIMIZED);
+			addParam(params, "p_p_state", WindowState.MAXIMIZED);
 		}
 	}
 

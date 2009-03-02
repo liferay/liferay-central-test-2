@@ -108,8 +108,7 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 	}
 
 	public void populateParams(
-		String friendlyURLPath, Map<String, String[]> params,
-		Map<String, String> prpIdentifiers) {
+		String friendlyURLPath, Map<String, String[]> params) {
 
 		int x = friendlyURLPath.indexOf(StringPool.SLASH, 1);
 

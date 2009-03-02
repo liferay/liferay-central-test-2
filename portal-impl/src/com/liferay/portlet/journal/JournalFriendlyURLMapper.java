@@ -83,25 +83,23 @@ public class JournalFriendlyURLMapper extends BaseFriendlyURLMapper {
 	}
 
 	public void populateParams(
-		String friendlyURLPath, Map<String, String[]> params,
-		Map<String, String> prpIdentifiers) {
+		String friendlyURLPath, Map<String, String[]> params) {
 
 		String[] parts = StringUtil.split(friendlyURLPath, StringPool.SLASH);
 
 		if ((parts.length >= 4) && parts[2].equals("rss")) {
-			addParam(params, prpIdentifiers, "p_p_id", _PORTLET_ID);
-			addParam(params, prpIdentifiers, "p_p_lifecycle", "2");
-			addParam(
-				params, prpIdentifiers, "p_p_cacheability", ResourceURL.FULL);
+			addParam(params, "p_p_id", _PORTLET_ID);
+			addParam(params, "p_p_lifecycle", "2");
+			addParam(params, "p_p_cacheability", ResourceURL.FULL);
 
-			addParam(params, prpIdentifiers, "struts_action", "/journal/rss");
+			addParam(params, "struts_action", "/journal/rss");
 
 			if (parts.length == 4) {
-				addParam(params, prpIdentifiers, "feedId", parts[3]);
+				addParam(params, "feedId", parts[3]);
 			}
 			else if (parts.length == 5) {
-				addParam(params, prpIdentifiers, "groupId", parts[3]);
-				addParam(params, prpIdentifiers, "feedId", parts[4]);
+				addParam(params, "groupId", parts[3]);
+				addParam(params, "feedId", parts[4]);
 			}
 		}
 	}

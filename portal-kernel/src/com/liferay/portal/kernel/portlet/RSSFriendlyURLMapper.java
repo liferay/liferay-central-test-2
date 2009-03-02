@@ -57,8 +57,7 @@ public abstract class RSSFriendlyURLMapper extends BaseFriendlyURLMapper {
 	}
 
 	public void populateParams(
-		String friendlyURLPath, Map<String, String[]> params,
-		Map<String, String> prpIdentifiers) {
+		String friendlyURLPath, Map<String, String[]> params) {
 
 		int x = friendlyURLPath.indexOf(StringPool.SLASH, 1);
 
@@ -72,11 +71,10 @@ public abstract class RSSFriendlyURLMapper extends BaseFriendlyURLMapper {
 			return;
 		}
 
-		addParam(params, prpIdentifiers, "p_p_id", getPortletId());
-		addParam(params, prpIdentifiers, "p_p_lifecycle", "0");
-		addParam(
-			params, prpIdentifiers, "p_p_state", LiferayWindowState.EXCLUSIVE);
-		addParam(params, prpIdentifiers, "p_p_mode", PortletMode.VIEW);
+		addParam(params, "p_p_id", getPortletId());
+		addParam(params, "p_p_lifecycle", "0");
+		addParam(params, "p_p_state", LiferayWindowState.EXCLUSIVE);
+		addParam(params, "p_p_mode", PortletMode.VIEW);
 	}
 
 }

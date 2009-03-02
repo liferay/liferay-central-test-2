@@ -44,59 +44,47 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 	}
 
 	protected void addParam(
-		Map<String, String[]> params, Map<String, String> prpIdentifers,
-		String name, boolean value) {
+		Map<String, String[]> params, String name, boolean value) {
 
-		addParam(params, prpIdentifers, name, String.valueOf(value));
+		addParam(params, name, String.valueOf(value));
 	}
 
 	protected void addParam(
-		Map<String, String[]> params, Map<String, String> prpIdentifers,
-		String name, double value) {
+		Map<String, String[]> params, String name, double value) {
 
-		addParam(params, prpIdentifers, name, String.valueOf(value));
+		addParam(params, name, String.valueOf(value));
 	}
 
 	protected void addParam(
-		Map<String, String[]> params, Map<String, String> prpIdentifers,
-		String name, int value) {
+		Map<String, String[]> params, String name, int value) {
 
-		addParam(params, prpIdentifers, name, String.valueOf(value));
+		addParam(params, name, String.valueOf(value));
 	}
 
 	protected void addParam(
-		Map<String, String[]> params, Map<String, String> prpIdentifers,
-		String name, long value) {
+		Map<String, String[]> params, String name, long value) {
 
-		addParam(params, prpIdentifers, name, String.valueOf(value));
+		addParam(params, name, String.valueOf(value));
 	}
 
 	protected void addParam(
-		Map<String, String[]> params, Map<String, String> prpIdentifers,
-		String name, short value) {
+		Map<String, String[]> params, String name, short value) {
 
-		addParam(params, prpIdentifers, name, String.valueOf(value));
+		addParam(params, name, String.valueOf(value));
 	}
 
 	protected void addParam(
-		Map<String, String[]> params, Map<String, String> prpIdentifers,
-		String name, Object value) {
+		Map<String, String[]> params, String name, Object value) {
 
-		addParam(params, prpIdentifers, name, String.valueOf(value));
+		addParam(params, name, String.valueOf(value));
 	}
 
 	protected void addParam(
-		Map<String, String[]> params, Map<String, String> prpIdentifers,
-		String name, String value) {
+		Map<String, String[]> params, String name, String value) {
 
 		try {
 			if (!_isReservedParameter(name)) {
-				if (prpIdentifers.containsKey(name)) {
-					name = prpIdentifers.get(name);
-				}
-				else {
-					name = getNamespace() + name;
-				}
+				name = getNamespace() + name;
 			}
 
 			params.put(name, new String[] {value});

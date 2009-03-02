@@ -74,7 +74,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -170,12 +169,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 	public List<FriendlyURLMapper> getFriendlyURLMappers() {
 		return _getFriendlyURLMappers();
-	}
-
-	public LinkedHashMap<FriendlyURLMapper, Portlet>
-		getFriendlyURLMappersAndPortlets() {
-
-		return _getFriendlyURLMappersAndPortlets();
 	}
 
 	public Portlet getPortletById(long companyId, String portletId)
@@ -554,7 +547,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	private List<FriendlyURLMapper> _getFriendlyURLMappers() {
 		List<FriendlyURLMapper> friendlyURLMappers =
 			new ArrayList<FriendlyURLMapper>(
-				_friendlyURLMapperPortlets.size());
+							_friendlyURLMapperPortlets.size());
 
 		Iterator<Map.Entry<String, Portlet>> itr =
 			_friendlyURLMapperPortlets.entrySet().iterator();
@@ -573,32 +566,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		}
 
 		return friendlyURLMappers;
-	}
-
-	private LinkedHashMap<FriendlyURLMapper, Portlet>
-		_getFriendlyURLMappersAndPortlets() {
-
-		LinkedHashMap<FriendlyURLMapper, Portlet>
-			friendlyURLMappersAndPortlets =
-				new LinkedHashMap<FriendlyURLMapper, Portlet>();
-
-		Iterator<Map.Entry<String, Portlet>> itr =
-			_friendlyURLMapperPortlets.entrySet().iterator();
-
-		while (itr.hasNext()) {
-			Map.Entry<String, Portlet> entry = itr.next();
-
-			Portlet portlet = entry.getValue();
-
-			FriendlyURLMapper friendlyURLMapper =
-				portlet.getFriendlyURLMapperInstance();
-
-			if (friendlyURLMapper != null) {
-				friendlyURLMappersAndPortlets.put(friendlyURLMapper, portlet);
-			}
-		}
-
-		return friendlyURLMappersAndPortlets;
 	}
 
 	private PortletApp _getPortletApp(String servletContextName) {
