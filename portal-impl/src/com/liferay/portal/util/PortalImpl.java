@@ -1122,13 +1122,15 @@ public class PortalImpl implements Portal {
 		String portalURL = StringPool.BLANK;
 
 		if (!themeDisplay.getServerName().equals(_LOCALHOST)) {
-			if (Validator.isNotNull(layoutSet.getVirtualHost())) {
-				String layoutSetVirtualHost = getPortalURL(
-					layoutSet.getVirtualHost(), themeDisplay.getServerPort(),
+			String virtualHost = layoutSet.getVirtualHost();
+
+			if (Validator.isNotNull(virtualHost)) {
+				virtualHost = getPortalURL(
+					virtualHost, themeDisplay.getServerPort(),
 					themeDisplay.isSecure());
 
 				if ((layoutSet.getLayoutSetId() != curLayoutSetId) ||
-					(layoutSetVirtualHost.startsWith(themeDisplay.getPortalURL()))) {
+					(virtualHost.startsWith(themeDisplay.getPortalURL()))) {
 
 					if (themeDisplay.isWidget()) {
 						layoutFriendlyURL =
@@ -1143,7 +1145,7 @@ public class PortalImpl implements Portal {
 									layoutFriendlyURL;
 					}
 
-					return layoutSetVirtualHost + _pathContext + layoutFriendlyURL;
+					return virtualHost + _pathContext + layoutFriendlyURL;
 				}
 			}
 			else {
@@ -1151,8 +1153,7 @@ public class PortalImpl implements Portal {
 					(layout.getGroup().getClassPK() !=
 						themeDisplay.getUserId())) {
 
-					String virtualHost =
-						themeDisplay.getCompany().getVirtualHost();
+					virtualHost = themeDisplay.getCompany().getVirtualHost();
 
 					if (!virtualHost.equalsIgnoreCase(_LOCALHOST)) {
 						portalURL = getPortalURL(
@@ -1197,9 +1198,11 @@ public class PortalImpl implements Portal {
 			LayoutSet layoutSet, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
-		if (Validator.isNotNull(layoutSet.getVirtualHost())) {
+		String virtualHost = layoutSet.getVirtualHost();
+
+		if (Validator.isNotNull(virtualHost)) {
 			String portalURL = getPortalURL(
-				layoutSet.getVirtualHost(), themeDisplay.getServerPort(),
+				virtualHost, themeDisplay.getServerPort(),
 				themeDisplay.isSecure());
 
 			// Use the layout set's virtual host setting only if the layout set
@@ -1458,8 +1461,10 @@ public class PortalImpl implements Portal {
 		if (layout != null) {
 			LayoutSet layoutSet = layout.getLayoutSet();
 
-			if (Validator.isNotNull(layoutSet.getVirtualHost())) {
-				serverName = layoutSet.getVirtualHost();
+			String virtualHost = layoutSet.getVirtualHost();
+
+			if (Validator.isNotNull(virtualHost)) {
+				serverName = virtualHost;
 			}
 		}
 
