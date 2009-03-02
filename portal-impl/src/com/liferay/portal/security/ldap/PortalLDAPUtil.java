@@ -247,7 +247,7 @@ public class PortalLDAPUtil {
 			}
 		}
 		catch (Exception e) {
-			_log.error(e,e);
+			_log.error(e, e);
 		}
 		finally {
 			if (ctx != null) {
