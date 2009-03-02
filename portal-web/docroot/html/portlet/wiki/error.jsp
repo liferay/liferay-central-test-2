@@ -27,11 +27,10 @@
 <liferay-ui:tabs names="error" backURL="javascript: history.go(-1);" />
 
 <liferay-ui:error exception="<%= NoSuchNodeException.class %>" message="the-wiki-could-not-be-found" />
-<liferay-ui:error exception="<%= PageTitleException.class %>" message="please-enter-a-valid-page-title" />
-<liferay-ui:error exception="<%= PrincipalException.class %>" message="you-do-not-have-the-required-permissions" />
 
-<%
-if (SessionErrors.contains(renderRequest, NoSuchPageException.class.getName())) {
+<c:if test="<%= SessionErrors.contains(renderRequest, NoSuchPageException.class.getName()) %>">
+
+	<%
 	String nodeId = ParamUtil.getString(request, "nodeId");
 	String title = ParamUtil.getString(request, "title");
 
@@ -59,14 +58,15 @@ if (SessionErrors.contains(renderRequest, NoSuchPageException.class.getName())) 
 	%>
 
 	<div class="portlet-msg-info">
-		<liferay-ui:message key="this-page-is-empty-use-the-buttons-below-to-create-it-or-to-search-for-the-words-in-the-title" />
+		<liferay-ui:message key="this-page-is-empty.-use-the-buttons-below-to-create-it-or-to-search-for-the-words-in-the-title" />
 	</div>
 
 	<div>
-		<input type="button" onClick="document.location='<%= searchURL.toString()%>'" value="<%= LanguageUtil.format(pageContext, "search-for-x", title) %>" />
-		<input type="button" onClick="document.location='<%= editPageURL.toString()%>'" value="<%= LanguageUtil.format(pageContext, "create-page-x", title) %>" />
-	</div>
+		<input onclick="location.href = '<%= searchURL.toString()%>'" type="button" value="<%= LanguageUtil.format(pageContext, "search-for-x", title) %>" />
 
-<%
-}
-%>
+		<input onclick="location.href = '<%= editPageURL.toString()%>'" type="button" value="<%= LanguageUtil.format(pageContext, "create-page-x", title) %>" />
+	</div>
+</c:if>
+
+<liferay-ui:error exception="<%= PageTitleException.class %>" message="please-enter-a-valid-page-title" />
+<liferay-ui:error exception="<%= PrincipalException.class %>" message="you-do-not-have-the-required-permissions" />
