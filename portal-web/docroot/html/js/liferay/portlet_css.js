@@ -83,7 +83,6 @@ Liferay.PortletCSS = {
 				);
 			}
 		);
-
 	},
 
 	_backgroundStyles: function() {
