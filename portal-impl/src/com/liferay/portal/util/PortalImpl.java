@@ -1123,12 +1123,12 @@ public class PortalImpl implements Portal {
 
 		if (!themeDisplay.getServerName().equals(_LOCALHOST)) {
 			if (Validator.isNotNull(layoutSet.getVirtualHost())) {
-				portalURL = getPortalURL(
+				String layoutSetVirtualHost = getPortalURL(
 					layoutSet.getVirtualHost(), themeDisplay.getServerPort(),
 					themeDisplay.isSecure());
 
 				if ((layoutSet.getLayoutSetId() != curLayoutSetId) ||
-					(portalURL.startsWith(themeDisplay.getPortalURL()))) {
+					(layoutSetVirtualHost.startsWith(themeDisplay.getPortalURL()))) {
 
 					if (themeDisplay.isWidget()) {
 						layoutFriendlyURL =
@@ -1143,7 +1143,7 @@ public class PortalImpl implements Portal {
 									layoutFriendlyURL;
 					}
 
-					return portalURL + _pathContext + layoutFriendlyURL;
+					return layoutSetVirtualHost + _pathContext + layoutFriendlyURL;
 				}
 			}
 			else {
