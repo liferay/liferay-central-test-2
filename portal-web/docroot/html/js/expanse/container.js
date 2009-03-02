@@ -9,9 +9,9 @@
 	Expanse.Dialog = new Expanse.Class(Widget.Dialog);
 	Expanse.SimpleDialog = new Expanse.Class(Widget.SimpleDialog);
 	Expanse.Tooltip = new Expanse.Class(Widget.Tooltip);
-	Expanse._Panel = new Expanse.Class(Widget.Panel);
+	Expanse.Panel = new Expanse.Class(Widget.Panel);
 
-	Expanse.Panel = Expanse._Panel.extend(
+	Expanse.Panel = Expanse.Panel.extend(
 		{
 			buildMask: function() {
 				var instance = this;
@@ -22,8 +22,6 @@
 			}
 		}
 	);
-
-	Expanse.KeyListener = new Expanse.Class(YAHOO.util.KeyListener);
 
 	Expanse.extend(
 		Widget.Module,
