@@ -10,8 +10,7 @@
 	CalendarGroup.CSS_2UPTITLE = 'exp-calendar-title';
 	CalendarGroup.CSS_2UPCLOSE = 'exp-calendar-close';
 
-	Expanse.extend(
-		CalendarNavigator.CLASSES,
+	Expanse.extend(CalendarNavigator.CLASSES,
 		{
 			BUTTON: 'exp-calendar-navigator-button',
 			BUTTONS: 'exp-calendar-navigator-buttons',
@@ -32,42 +31,46 @@
 
 	Expanse.Calendar = Expanse.Calendar.extend({
 		initStyles: function() {
-			this_super();
+			var instance = this;
 
-			this.Style = {
-				CSS_BODY : 'exp-calendar-body',
-				CSS_CALENDAR : 'exp-calendar',
-				CSS_CELL : 'exp-calendar-cell',
-				CSS_CELL_BOTTOM : 'exp-calendar-cell-bottom',
-				CSS_CELL_HIGHLIGHT1 : 'exp-calendar-highlight1',
-				CSS_CELL_HIGHLIGHT2 : 'exp-calendar-highlight2',
-				CSS_CELL_HIGHLIGHT3 : 'exp-calendar-highlight3',
-				CSS_CELL_HIGHLIGHT4 : 'exp-calendar-highlight4',
-				CSS_CELL_HOVER : 'exp-calendar-cell-hover',
-				CSS_CELL_LEFT : 'exp-calendar-cell-left',
-				CSS_CELL_OOB : 'exp-calendar-previous',
-				CSS_CELL_OOM : 'exp-calendar-oom',
-				CSS_CELL_RESTRICTED : 'exp-calendar-restricted',
-				CSS_CELL_RIGHT : 'exp-calendar-cell-right',
-				CSS_CELL_SELECTABLE : 'exp-calendar-selectable',
-				CSS_CELL_SELECTED : 'exp-calendar-selected',
-				CSS_CELL_SELECTOR : 'exp-calendar-selector',
-				CSS_CELL_TODAY : 'exp-calendar-today',
-				CSS_CELL_TOP : 'exp-calendar-cell-top',
-				CSS_CLOSE : 'exp-calendar-close',
-				CSS_CONTAINER : 'exp-calendar-container',
-				CSS_FOOTER : 'exp-calendar-foot',
-				CSS_HEADER : 'exp-calendar-header',
-				CSS_HEADER_TEXT : 'exp-calendar-head',
-				CSS_NAV : 'exp-calendar-nav',
-				CSS_NAV_LEFT : 'exp-calendar-nav-left',
-				CSS_NAV_RIGHT : 'exp-calendar-nav-right',
-				CSS_ROW_FOOTER: 'exp-calendar-rowfoot',
-				CSS_ROW_HEADER: 'exp-calendar-rowhead',
-				CSS_SINGLE : 'exp-calendar-single',
-				CSS_WEEKDAY_CELL : 'exp-calendar-weekday-cell',
-				CSS_WEEKDAY_ROW : 'exp-calendar-weekday-row'
-			};
+			instance._super.apply(instance, arguments);
+
+			Expanse.extend(instance.Style,
+				{
+					CSS_BODY : 'exp-calendar-body',
+					CSS_CALENDAR : 'exp-calendar',
+					CSS_CELL : 'exp-calendar-cell',
+					CSS_CELL_BOTTOM : 'exp-calendar-cell-bottom',
+					CSS_CELL_HIGHLIGHT1 : 'exp-calendar-highlight1',
+					CSS_CELL_HIGHLIGHT2 : 'exp-calendar-highlight2',
+					CSS_CELL_HIGHLIGHT3 : 'exp-calendar-highlight3',
+					CSS_CELL_HIGHLIGHT4 : 'exp-calendar-highlight4',
+					CSS_CELL_HOVER : 'exp-calendar-cell-hover',
+					CSS_CELL_LEFT : 'exp-calendar-cell-left',
+					CSS_CELL_OOB : 'exp-calendar-previous',
+					CSS_CELL_OOM : 'exp-calendar-oom',
+					CSS_CELL_RESTRICTED : 'exp-calendar-restricted',
+					CSS_CELL_RIGHT : 'exp-calendar-cell-right',
+					CSS_CELL_SELECTABLE : 'exp-calendar-selectable',
+					CSS_CELL_SELECTED : 'exp-calendar-selected',
+					CSS_CELL_SELECTOR : 'exp-calendar-selector',
+					CSS_CELL_TODAY : 'exp-calendar-today',
+					CSS_CELL_TOP : 'exp-calendar-cell-top',
+					CSS_CLOSE : 'exp-calendar-close',
+					CSS_CONTAINER : 'exp-calendar-container',
+					CSS_FOOTER : 'exp-calendar-foot',
+					CSS_HEADER : 'exp-calendar-header',
+					CSS_HEADER_TEXT : 'exp-calendar-head',
+					CSS_NAV : 'exp-calendar-nav',
+					CSS_NAV_LEFT : 'exp-calendar-nav-left',
+					CSS_NAV_RIGHT : 'exp-calendar-nav-right',
+					CSS_ROW_FOOTER: 'exp-calendar-rowfoot',
+					CSS_ROW_HEADER: 'exp-calendar-rowhead',
+					CSS_SINGLE : 'exp-calendar-single',
+					CSS_WEEKDAY_CELL : 'exp-calendar-weekday-cell',
+					CSS_WEEKDAY_ROW : 'exp-calendar-weekday-row'
+				}
+			);
 		}
 	});
 
