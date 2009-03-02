@@ -24,7 +24,6 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.ContactConstants;
-import com.liferay.portal.util.HtmlImpl;
 
 /**
  * <a href="ContactImpl.java.html"><b><i>View Source</i></b></a>
@@ -38,10 +37,8 @@ public class ContactImpl extends ContactModelImpl implements Contact {
 	}
 
 	public String getFullName() {
-		HtmlImpl html = new HtmlImpl();
-
-		return html.escape(ContactConstants.getFullName(
-			getFirstName(), getMiddleName(), getLastName()));
+		return ContactConstants.getFullName(
+			getFirstName(), getMiddleName(), getLastName());
 	}
 
 }
