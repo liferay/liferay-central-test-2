@@ -34,10 +34,11 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
-import java.lang.reflect.Field;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.Writer;
+
+import java.lang.reflect.Field;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -69,7 +70,7 @@ public class ConfigurationImpl
 			URL url = classLoader.getResource(
 				name + Conventions.PROPERTIES_EXTENSION);
 
-			if (url != null && url.getProtocol().equals("file")) {
+			if ((url != null) && url.getProtocol().equals("file")) {
 				String basePath = url.getPath();
 
 				int pos = name.lastIndexOf(
@@ -79,20 +80,22 @@ public class ConfigurationImpl
 					basePath = basePath.substring(0, pos);
 				}
 
-				Properties serviceProps = new Properties();
-				serviceProps.load(url.openStream());
+				Properties properties = new Properties();
 
-				if (!serviceProps.containsKey("base.path")) {
-					BufferedWriter out = new BufferedWriter(
+				properties.load(url.openStream());
+
+				if (!properties.containsKey("base.path")) {
+					Writer writer = new BufferedWriter(
 						new FileWriter(url.getFile(), true));
 
-					out.write("\n\nbase.path=" + basePath);
-					out.close();
+					writer.write("\n\nbase.path=" + basePath);
+
+					writer.close();
 				}
 			}
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		_componentConfiguration = EasyConf.getConfiguration(
