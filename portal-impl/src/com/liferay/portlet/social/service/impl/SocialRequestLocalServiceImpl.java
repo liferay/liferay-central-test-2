@@ -217,17 +217,28 @@ public class SocialRequestLocalServiceImpl
 				request, themeDisplay);
 		}
 
-		List<SocialRequest> requests = socialRequestPersistence.findByU_C_C_T_S(
-			request.getUserId(), request.getClassNameId(), request.getClassPK(),
-			request.getType(), oldStatus);
+		if (_processSimilarRequests(request)) {
+			List<SocialRequest> requests =
+					socialRequestPersistence.findByU_C_C_T_S(
+							request.getUserId(), request.getClassNameId(),
+							request.getClassPK(),request.getType(), oldStatus);
 
-		for (SocialRequest curRequest : requests) {
-			curRequest.setStatus(status);
+			for (SocialRequest curRequest : requests) {
+				curRequest.setStatus(status);
 
-			socialRequestPersistence.update(curRequest, false);
+				socialRequestPersistence.update(curRequest, false);
+			}
 		}
 
 		return request;
+	}
+
+	private boolean _processSimilarRequests(SocialRequest request) {
+		String className = PortalUtil.getClassName(request.getClassNameId());
+		if (className.equalsIgnoreCase(User.class.getName())){
+			return false;
+		}
+		return true;
 	}
 
 }
