@@ -166,17 +166,9 @@ public class PortletExporter {
 
 		String type = layout.getType();
 
-		if (type.equals(LayoutConstants.TYPE_PORTLET)) {
-			LayoutTypePortlet layoutTypePortlet =
-				(LayoutTypePortlet)layout.getLayoutType();
-
-			if (!layoutTypePortlet.hasPortletId(portletId)) {
-				throw new LayoutImportException(
-					"The specified layout does not have portlet " + portletId);
-			}
-		}
-		else if (!type.equals(LayoutConstants.TYPE_CONTROL_PANEL) &&
-				 !type.equals(LayoutConstants.TYPE_PANEL)) {
+		if (!type.equals(LayoutConstants.TYPE_CONTROL_PANEL) &&
+			!type.equals(LayoutConstants.TYPE_PANEL) &&
+			!type.equals(LayoutConstants.TYPE_PORTLET)) {
 
 			throw new LayoutImportException(
 				"Layout type " + type + " is not valid");

@@ -28,7 +28,15 @@
 String ppid = ParamUtil.getString(request, "p_p_id");
 
 if (ppid.equals(PortletKeys.PORTLET_CONFIGURATION)) {
-	ppid = ParamUtil.getString(request, PortalUtil.getPortletNamespace(ppid) + "portletResource");
+	String portletResource = ParamUtil.getString(request, PortalUtil.getPortletNamespace(ppid) + "portletResource");
+
+	if (Validator.isNull(portletResource)) {
+		portletResource = ParamUtil.getString(request, "portletResource");
+	}
+
+	if (Validator.isNotNull(portletResource)) {
+		ppid = portletResource;
+	}
 }
 
 if (ppid.equals(PortletKeys.EXPANDO)) {
