@@ -1,198 +1,200 @@
-Liferay.PortletURL = new Expanse.Class({
-	initialize: function(lifecycle, params) {
-		var instance = this;
+Liferay.PortletURL = new Expanse.Class(
+	{
+		initialize: function(lifecycle, params) {
+			var instance = this;
 
-		instance.params = params || {};
+			instance.params = params || {};
 
-		instance.options = {
-			copyCurrentRenderParameters: null,
-			doAsUserId: null,
-			encrypt: null,
-			escapeXML: null,
-			lifecycle: lifecycle,
-			name: null,
-			p_l_id: themeDisplay.getPlid(),
-			portletConfiguration: false,
-			portletId: null,
-			portletMode: null,
-			resourceId: null,
-			secure: null,
-			windowState: null
-		};
+			instance.options = {
+				copyCurrentRenderParameters: null,
+				doAsUserId: null,
+				encrypt: null,
+				escapeXML: null,
+				lifecycle: lifecycle,
+				name: null,
+				p_l_id: themeDisplay.getPlid(),
+				portletConfiguration: false,
+				portletId: null,
+				portletMode: null,
+				resourceId: null,
+				secure: null,
+				windowState: null
+			};
 
-		instance._parameterMap = {
-			javaClass: 'java.util.HashMap',
-			map: {}
-		};
-	},
+			instance._parameterMap = {
+				javaClass: 'java.util.HashMap',
+				map: {}
+			};
+		},
 
-	setCopyCurrentRenderParameters: function(copyCurrentRenderParameters) {
-		var instance = this;
+		setCopyCurrentRenderParameters: function(copyCurrentRenderParameters) {
+			var instance = this;
 
-		instance.options.copyCurrentRenderParameters = copyCurrentRenderParameters;
+			instance.options.copyCurrentRenderParameters = copyCurrentRenderParameters;
 
-		return instance;
-	},
+			return instance;
+		},
 
-	setDoAsUserId: function(doAsUserId) {
-		var instance = this;
+		setDoAsUserId: function(doAsUserId) {
+			var instance = this;
 
-		instance.options.doAsUserId = doAsUserId;
+			instance.options.doAsUserId = doAsUserId;
 
-		return instance;
-	},
+			return instance;
+		},
 
-	setEncrypt: function(encrypt) {
-		var instance = this;
+		setEncrypt: function(encrypt) {
+			var instance = this;
 
-		instance.options.encrypt = encrypt;
+			instance.options.encrypt = encrypt;
 
-		return instance;
-	},
+			return instance;
+		},
 
-	setEscapeXML: function(escapeXML) {
-		var instance = this;
+		setEscapeXML: function(escapeXML) {
+			var instance = this;
 
-		instance.options.escapeXML = escapeXML;
+			instance.options.escapeXML = escapeXML;
 
-		return instance;
-	},
+			return instance;
+		},
 
-	setLifecycle: function(lifecycle) {
-		var instance = this;
+		setLifecycle: function(lifecycle) {
+			var instance = this;
 
-		instance.options.lifecycle = lifecycle;
+			instance.options.lifecycle = lifecycle;
 
-		return instance;
-	},
+			return instance;
+		},
 
-	setName: function(name) {
-		var instance = this;
+		setName: function(name) {
+			var instance = this;
 
-		instance.options.name = name;
+			instance.options.name = name;
 
-		return instance;
-	},
+			return instance;
+		},
 
-	setParameter: function(key, value) {
-		var instance = this;
+		setParameter: function(key, value) {
+			var instance = this;
 
-		instance.params[key] = value;
+			instance.params[key] = value;
 
-		return instance;
-	},
+			return instance;
+		},
 
-	setPlid: function(plid) {
-		var instance = this;
+		setPlid: function(plid) {
+			var instance = this;
 
-		instance.options.p_l_id = plid;
+			instance.options.p_l_id = plid;
 
-		return instance;
-	},
+			return instance;
+		},
 
-	setPortletConfiguration: function(portletConfiguration) {
-		var instance = this;
+		setPortletConfiguration: function(portletConfiguration) {
+			var instance = this;
 
-		instance.options.portletConfiguration = portletConfiguration;
+			instance.options.portletConfiguration = portletConfiguration;
 
-		return instance;
-	},
+			return instance;
+		},
 
-	setPortletId: function(portletId) {
-		var instance = this;
+		setPortletId: function(portletId) {
+			var instance = this;
 
-		instance.options.portletId = portletId;
+			instance.options.portletId = portletId;
 
-		return instance;
-	},
+			return instance;
+		},
 
-	setPortletMode: function(portletMode) {
-		var instance = this;
+		setPortletMode: function(portletMode) {
+			var instance = this;
 
-		instance.options.portletMode = portletMode;
+			instance.options.portletMode = portletMode;
 
-		return instance;
-	},
+			return instance;
+		},
 
-	setResourceId: function(resourceId) {
-		var instance = this;
+		setResourceId: function(resourceId) {
+			var instance = this;
 
-		instance.options.resourceId = resourceId;
+			instance.options.resourceId = resourceId;
 
-		return instance;
-	},
+			return instance;
+		},
 
-	setSecure: function(secure) {
-		var instance = this;
+		setSecure: function(secure) {
+			var instance = this;
 
-		instance.options.secure = secure;
+			instance.options.secure = secure;
 
-		return instance;
-	},
+			return instance;
+		},
 
-	setWindowState: function(windowState) {
-		var instance = this;
+		setWindowState: function(windowState) {
+			var instance = this;
 
-		instance.options.windowState = windowState;
+			instance.options.windowState = windowState;
 
-		return instance;
-	},
+			return instance;
+		},
 
-	toString: function() {
-		var instance = this;
+		toString: function() {
+			var instance = this;
 
-		instance._forceStringValues(instance.params);
-		instance._forceStringValues(instance.options);
+			instance._forceStringValues(instance.params);
+			instance._forceStringValues(instance.options);
 
-		jQuery.extend(
-			instance._parameterMap.map,
-			instance.params
-		);
+			jQuery.extend(
+				instance._parameterMap.map,
+				instance.params
+			);
 
-		var xHR = jQuery.ajax(
-			{
-				async: false,
-				data: instance._buildRequestData(),
-				type: 'GET',
-				url: themeDisplay.getPathContext() + '/c/portal/portlet_url'
-			}
-		);
-
-		return xHR.responseText;
-	},
-
-	_buildRequestData: function() {
-		var instance = this;
-
-		var data = {};
-
-		jQuery.each(
-			instance.options,
-			function (key, value) {
-				if (value !== null) {
-					data[key] = [value].join('');
+			var xHR = jQuery.ajax(
+				{
+					async: false,
+					data: instance._buildRequestData(),
+					type: 'GET',
+					url: themeDisplay.getPathContext() + '/c/portal/portlet_url'
 				}
-			}
-		);
+			);
 
-		data.parameterMap = jQuery.toJSON(instance._parameterMap);
+			return xHR.responseText;
+		},
 
-		return data;
-	},
+		_buildRequestData: function() {
+			var instance = this;
 
-	_forceStringValues: function(obj) {
-		jQuery.each(
-			obj,
-			function (key, value) {
-				if (value !== null) {
-					obj[key] = [value].join('');
+			var data = {};
+
+			jQuery.each(
+				instance.options,
+				function (key, value) {
+					if (value !== null) {
+						data[key] = [value].join('');
+					}
 				}
-			}
-		);
+			);
 
-		return obj;
+			data.parameterMap = jQuery.toJSON(instance._parameterMap);
+
+			return data;
+		},
+
+		_forceStringValues: function(obj) {
+			jQuery.each(
+				obj,
+				function (key, value) {
+					if (value !== null) {
+						obj[key] = [value].join('');
+					}
+				}
+			);
+
+			return obj;
+		}
 	}
-});
+);
 
 jQuery.extend(
 	Liferay.PortletURL,

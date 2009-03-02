@@ -169,14 +169,16 @@ Liferay.Session = {
 	warn: function() {
 		var instance = this;
 
-		instance.banner = new Liferay.Notice({
-			content: instance._warningText,
-			closeText: instance._extendText,
-			onClose: function() {
-				instance.extend();
-			},
-			toggleText: false
-		});
+		instance.banner = new Liferay.Notice(
+			{
+				content: instance._warningText,
+				closeText: instance._extendText,
+				onClose: function() {
+					instance.extend();
+				},
+				toggleText: false
+			}
+		);
 
 		instance._counter();
 

@@ -72,209 +72,211 @@
 
 	var IE_SYNC = (Liferay.Browser.isIe() && Liferay.Browser.getMajorVersion() < 7);
 
-	Expanse.Popup = Expanse.Panel.extend({
-		initialize: function(options) {
-			var instance = this;
+	Expanse.Popup = Expanse.Panel.extend(
+		{
+			initialize: function(options) {
+				var instance = this;
 
-			if (options.width && (options.width != 'auto')) {
-				options.width = (parseInt(options.width, 10) || 300) + 'px';
-			}
-
-			if (options.height && (options.height != 'auto')) {
-				options.height = (parseInt(options.height, 10) || 300) + 'px';
-			}
-
-			options.zIndex = options.zIndex || 9999;
-
-			if (options.xy) {
-				var position = options.xy;
-
-				var x = position[0];
-				var y = position[1];
-
-				var centerValue = 'center';
-
-				if (x == centerValue || y == centerValue) {
-					var win = Expanse.getWindow();
-
-					var width = parseInt(options.width, 10) || 0;
-					var height = parseInt(options.width, 10) || 0;
-
-					if (x == centerValue) {
-						x = (win.width() / 2 - width / 2);
-					}
-					else if (y == centerValue) {
-						y = (win.height() / 2 - height / 2);
-					}
-
-					options.xy = [x, y];
-				}
-			}
-
-			var el = options.el || Expanse.generateId();
-
-			instance._super(el, options);
-
-			if (options.header) {
-				instance.setHeader(options.header);
-			}
-
-			if (options.className) {
-				Dom.addClass(instance.element, options.className);
-			}
-
-			if (options.body) {
-				instance.setBody(options.body);
-			}
-			else if (options.url) {
-				instance.setBody('<div class="loading-animation" />');
-
-				var onSuccess = options.urlSuccess;
-				var url = options.url.replace(/p_p_state=(maximized|pop_up)/g, 'p_p_state=exclusive');
-
-				if (!onSuccess) {
-					onSuccess = function(message) {
-						instance.setBody('');
-
-						jQuery(instance.body).html(message);
-					};
+				if (options.width && (options.width != 'auto')) {
+					options.width = (parseInt(options.width, 10) || 300) + 'px';
 				}
 
-				jQuery.ajax(
-					{
-						url: url,
-						data: options.urlData,
-						success: onSuccess
+				if (options.height && (options.height != 'auto')) {
+					options.height = (parseInt(options.height, 10) || 300) + 'px';
+				}
+
+				options.zIndex = options.zIndex || 9999;
+
+				if (options.xy) {
+					var position = options.xy;
+
+					var x = position[0];
+					var y = position[1];
+
+					var centerValue = 'center';
+
+					if (x == centerValue || y == centerValue) {
+						var win = Expanse.getWindow();
+
+						var width = parseInt(options.width, 10) || 0;
+						var height = parseInt(options.width, 10) || 0;
+
+						if (x == centerValue) {
+							x = (win.width() / 2 - width / 2);
+						}
+						else if (y == centerValue) {
+							y = (win.height() / 2 - height / 2);
+						}
+
+						options.xy = [x, y];
 					}
-				);
-			}
+				}
 
-			if (options.onOpen) {
-				instance.subscribe('render', options.onOpen, instance, true);
-			}
+				var el = options.el || Expanse.generateId();
 
-			if (options.footer) {
-				instance.setFooter(options.footer);
-			}
+				instance._super(el, options);
 
-			instance._options = options;
-			instance._options._el = el;
+				if (options.header) {
+					instance.setHeader(options.header);
+				}
 
-			if (!options.deferRender) {
-				instance.render(options.renderTo || document.body);
+				if (options.className) {
+					Dom.addClass(instance.element, options.className);
+				}
 
-				instance.show();
+				if (options.body) {
+					instance.setBody(options.body);
+				}
+				else if (options.url) {
+					instance.setBody('<div class="loading-animation" />');
 
-				instance._onRender();
-			}
-			else {
-				instance.renderEvent.subscribe(instance._onRender, instance, true);
-			}
+					var onSuccess = options.urlSuccess;
+					var url = options.url.replace(/p_p_state=(maximized|pop_up)/g, 'p_p_state=exclusive');
 
-			Expanse.Popup.Manager.register(instance);
+					if (!onSuccess) {
+						onSuccess = function(message) {
+							instance.setBody('');
 
-			return instance;
-		},
+							jQuery(instance.body).html(message);
+						};
+					}
 
-		closePopup: function() {
-			var instance = this;
+					jQuery.ajax(
+						{
+							url: url,
+							data: options.urlData,
+							success: onSuccess
+						}
+					);
+				}
 
-			if (instance._destroyOnClose !== false) {
-				instance.destroy();
-			}
-			else {
-				instance.hide();
-			}
-		},
+				if (options.onOpen) {
+					instance.subscribe('render', options.onOpen, instance, true);
+				}
 
-		_onRender: function() {
-			var instance = this;
+				if (options.footer) {
+					instance.setFooter(options.footer);
+				}
 
-			var options = instance._options;
-			var el = options._el;
+				instance._options = options;
+				instance._options._el = el;
 
-			if (options.center) {
-				instance.center();
-			}
+				if (!options.deferRender) {
+					instance.render(options.renderTo || document.body);
 
-			var closeEvent = 'destroy';
+					instance.show();
 
-			instance._destroyOnClose = options.destroyOnClose;
+					instance._onRender();
+				}
+				else {
+					instance.renderEvent.subscribe(instance._onRender, instance, true);
+				}
 
-			if (options.destroyOnClose !== false) {
-				Event.on(instance.close, 'click', instance.destroy, instance, true);
-			}
-			else {
+				Expanse.Popup.Manager.register(instance);
+
+				return instance;
+			},
+
+			closePopup: function() {
+				var instance = this;
+
+				if (instance._destroyOnClose !== false) {
+					instance.destroy();
+				}
+				else {
+					instance.hide();
+				}
+			},
+
+			_onRender: function() {
+				var instance = this;
+
+				var options = instance._options;
+				var el = options._el;
+
+				if (options.center) {
+					instance.center();
+				}
+
+				var closeEvent = 'destroy';
+
+				instance._destroyOnClose = options.destroyOnClose;
+
+				if (options.destroyOnClose !== false) {
+					Event.on(instance.close, 'click', instance.destroy, instance, true);
+				}
+				else {
+					if (options.onClose) {
+						closeEvent = 'hide';
+					}
+				}
+
 				if (options.onClose) {
-					closeEvent = 'hide';
+					instance.subscribe(closeEvent, options.onClose, instance, true);
 				}
-			}
 
-			if (options.onClose) {
-				instance.subscribe(closeEvent, options.onClose, instance, true);
-			}
+				if (options.messageId) {
+					instance.body.id = options.messageId;
+				}
 
-			if (options.messageId) {
-				instance.body.id = options.messageId;
-			}
+				if (options.resizable !== false && Expanse.Resize) {
+					var resize = new Expanse.Resize(
+						el,
+						{
+							handles: options.handles || ['r', 'b', 'br'],
+							height: options.height,
+							proxy: true,
+							width: options.width
+						}
+					);
 
-			if (options.resizable !== false && Expanse.Resize) {
-				var resize = new Expanse.Resize(
-					el,
-					{
-						handles: options.handles || ['r', 'b', 'br'],
-						height: options.height,
-						proxy: true,
-						width: options.width
+					var paddingTop = Dom.getStyle(instance.body, 'padding-top');
+					var paddingBottom = Dom.getStyle(instance.body, 'padding-bottom');
+
+					paddingTop = parseInt(paddingTop, 10) || 10;
+					paddingBottom = parseInt(paddingBottom, 10) || 10;
+
+					instance._panelPaddingVertical = paddingTop + paddingBottom;
+
+					resize.on('resize', instance._resizeBody, instance, true);
+
+					if (options.onResize) {
+						resize.on('resize', options.onResize, instance, true);
 					}
-				);
 
-				var paddingTop = Dom.getStyle(instance.body, 'padding-top');
-				var paddingBottom = Dom.getStyle(instance.body, 'padding-bottom');
-
-				paddingTop = parseInt(paddingTop, 10) || 10;
-				paddingBottom = parseInt(paddingBottom, 10) || 10;
-
-				instance._panelPaddingVertical = paddingTop + paddingBottom;
-
-				resize.on('resize', instance._resizeBody, instance, true);
-
-				if (options.onResize) {
-					resize.on('resize', options.onResize, instance, true);
+					instance.resizable = resize;
 				}
 
-				instance.resizable = resize;
-			}
+				if (options.draggable !== false) {
+					var el = Dom.get(instance.id);
 
-			if (options.draggable !== false) {
-				var el = Dom.get(instance.id);
+					Dom.setStyle(el, 'position', 'relative');
+				}
+			},
 
-				Dom.setStyle(el, 'position', 'relative');
-			}
-		},
+			_resizeBody: function(options) {
+				var instance = this;
 
-		_resizeBody: function(options) {
-			var instance = this;
+				var panelHeight = options.height;
 
-			var panelHeight = options.height;
+				var headerHeight = instance.header.offsetHeight;
+				var footerHeight = 0;
 
-			var headerHeight = instance.header.offsetHeight;
-			var footerHeight = 0;
+				if (instance.footer) {
+					footerHeight = instance.footer.offsetHeight;
+				}
 
-			if (instance.footer) {
-				footerHeight = instance.footer.offsetHeight;
-			}
+				var bodyHeight = panelHeight - headerHeight - footerHeight;
 
-			var bodyHeight = panelHeight - headerHeight - footerHeight;
+				Dom.setStyle(instance.body, 'height', (bodyHeight - instance._panelPaddingVertical) + 'px');
 
-			Dom.setStyle(instance.body, 'height', (bodyHeight - instance._panelPaddingVertical) + 'px');
-
-			if (IE_SYNC) {
-				instance.sizeUnderlay();
-				instance.syncIframe();
+				if (IE_SYNC) {
+					instance.sizeUnderlay();
+					instance.syncIframe();
+				}
 			}
 		}
-	});
+	);
 
 	Expanse.Popup.Manager = new Expanse.OverlayManager();
 

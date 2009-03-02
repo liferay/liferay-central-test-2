@@ -34,15 +34,17 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 <script type="text/javascript">
 	jQuery(
 		function() {
-			new Liferay.Upload({
-				allowedFileTypes: '<%= StringUtil.merge(PropsValues.DL_FILE_EXTENSIONS) %>',
-				container: '#<portlet:namespace />fileUpload',
-				fileDescription: '<%= StringUtil.merge(PropsValues.DL_FILE_EXTENSIONS) %>',
-				fallbackContainer: '#<portlet:namespace />fallback',
-				maxFileSize: <%= PropsValues.DL_FILE_MAX_SIZE %>,
-				namespace: '<portlet:namespace />',
-				uploadFile: '<liferay-portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" doAsUserId="<%= user.getUserId() %>"><portlet:param name="struts_action" value="/wiki/edit_page_attachment" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" /><portlet:param name="title" value="<%= wikiPage.getTitle() %>" /></liferay-portlet:actionURL><liferay-ui:input-permissions-params modelName="<%= WikiPage.class.getName() %>" />'
-			});
+			new Liferay.Upload(
+				{
+					allowedFileTypes: '<%= StringUtil.merge(PropsValues.DL_FILE_EXTENSIONS) %>',
+					container: '#<portlet:namespace />fileUpload',
+					fileDescription: '<%= StringUtil.merge(PropsValues.DL_FILE_EXTENSIONS) %>',
+					fallbackContainer: '#<portlet:namespace />fallback',
+					maxFileSize: <%= PropsValues.DL_FILE_MAX_SIZE %>,
+					namespace: '<portlet:namespace />',
+					uploadFile: '<liferay-portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" doAsUserId="<%= user.getUserId() %>"><portlet:param name="struts_action" value="/wiki/edit_page_attachment" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" /><portlet:param name="title" value="<%= wikiPage.getTitle() %>" /></liferay-portlet:actionURL><liferay-ui:input-permissions-params modelName="<%= WikiPage.class.getName() %>" />'
+				}
+			);
 		}
 	);
 </script>

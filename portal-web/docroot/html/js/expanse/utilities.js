@@ -1,5 +1,6 @@
 (function() {
-	Expanse.extend(Expanse,
+	Expanse.extend(
+		Expanse,
 		{
 			destroy: function() {
 				var args = arguments;

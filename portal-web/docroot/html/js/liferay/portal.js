@@ -20,150 +20,154 @@ Liferay.Portal.Tabs = {
 	}
 };
 
-Liferay.Portal.StarRating = new Expanse.Class({
+Liferay.Portal.StarRating = new Expanse.Class(
+	{
 
-	/**
-	 * OPTIONS
-	 *
-	 * Required
-	 * displayOnly {boolean}: Whether the display is modifiable.
-	 *
-	 * Optional
-	 * rating {number}: The rating to initialize to.
-	 *
-	 * Callbacks
-	 * onComplete {function}: Called when a rating is selected.
-	 */
+		/**
+		 * OPTIONS
+		 *
+		 * Required
+		 * displayOnly {boolean}: Whether the display is modifiable.
+		 *
+		 * Optional
+		 * rating {number}: The rating to initialize to.
+		 *
+		 * Callbacks
+		 * onComplete {function}: Called when a rating is selected.
+		 */
 
-	initialize: function(id, options) {
-		this.options = options || {};
-		this.rating = this.options.rating || 0;
-		var item = jQuery('#' + id);
-		this.stars = item.find('img');
-		var self = this;
+		initialize: function(id, options) {
+			this.options = options || {};
+			this.rating = this.options.rating || 0;
+			var item = jQuery('#' + id);
+			this.stars = item.find('img');
+			var self = this;
 
-		if (!this.options.displayOnly) {
-			item.bind('mouseout', {self: this}, this.onHoverOut);
+			if (!this.options.displayOnly) {
+				item.bind('mouseout', {self: this}, this.onHoverOut);
+
+				this.stars.each(function(index) {
+					this.index = index + 1;
+					jQuery(this).bind('click', {self: self}, self.onClick)
+						.bind('mouseover', {self: self}, self.onHoverOver);
+				})
+			}
+
+			this.display(this.rating, 'rating');
+		},
+
+		display: function(rating, mode) {
+			var self = this;
+			rating = rating == null ? this.rating : rating;
+
+			var whole = Math.floor(rating);
+			var fraction = rating - whole;
 
 			this.stars.each(function(index) {
-				this.index = index + 1;
-				jQuery(this).bind('click', {self: self}, self.onClick)
-					.bind('mouseover', {self: self}, self.onHoverOver);
-			})
-		}
-
-		this.display(this.rating, 'rating');
-	},
-
-	display: function(rating, mode) {
-		var self = this;
-		rating = rating == null ? this.rating : rating;
-
-		var whole = Math.floor(rating);
-		var fraction = rating - whole;
-
-		this.stars.each(function(index) {
-			image = this;
-			if (index < whole) {
-				if (mode == 'hover') {
-					image.src = image.src.replace(/\bstar_.*\./, 'star_hover.');
+				image = this;
+				if (index < whole) {
+					if (mode == 'hover') {
+						image.src = image.src.replace(/\bstar_.*\./, 'star_hover.');
+					}
+					else {
+						image.src = image.src.replace(/\bstar_.*\./, 'star_on.');
+					}
 				}
 				else {
-					image.src = image.src.replace(/\bstar_.*\./, 'star_on.');
+					if (fraction < 0.25) {
+						image.src = image.src.replace(/\bstar_.*\./, 'star_off.');
+					}
+					else if (fraction < 0.50) {
+						image.src = image.src.replace(/\bstar_.*\./, 'star_on_quarter.');
+					}
+					else if (fraction < 0.75) {
+						image.src = image.src.replace(/\bstar_.*\./, 'star_on_half.');
+					}
+					else if (fraction < 1.00) {
+						image.src = image.src.replace(/\bstar_.*\./, 'star_on_threequarters.');
+					}
+					fraction = 0;
 				}
+			});
+		},
+
+		onHoverOver: function(event) {
+			event.data.self.display(this.index, 'hover');
+		},
+
+		onHoverOut: function(event) {
+			event.data.self.display();
+		},
+
+		onClick: function(event) {
+			var target = this;
+			var newRating = target.index;
+			var self = event.data.self;
+
+			self.rating = newRating;
+
+			if (self.options.onComplete) {
+				self.options.onComplete(newRating);
 			}
-			else {
-				if (fraction < 0.25) {
-					image.src = image.src.replace(/\bstar_.*\./, 'star_off.');
-				}
-				else if (fraction < 0.50) {
-					image.src = image.src.replace(/\bstar_.*\./, 'star_on_quarter.');
-				}
-				else if (fraction < 0.75) {
-					image.src = image.src.replace(/\bstar_.*\./, 'star_on_half.');
-				}
-				else if (fraction < 1.00) {
-					image.src = image.src.replace(/\bstar_.*\./, 'star_on_threequarters.');
-				}
-				fraction = 0;
-			}
-		});
-	},
 
-	onHoverOver: function(event) {
-		event.data.self.display(this.index, 'hover');
-	},
-
-	onHoverOut: function(event) {
-		event.data.self.display();
-	},
-
-	onClick: function(event) {
-		var target = this;
-		var newRating = target.index;
-		var self = event.data.self;
-
-		self.rating = newRating;
-
-		if (self.options.onComplete) {
-			self.options.onComplete(newRating);
-		}
-
-		self.display(newRating);
-	}
-});
-
-Liferay.Portal.ThumbRating = new Expanse.Class({
-
-	/**
-	 * OPTIONS
-	 *
-	 * Required
-	 * displayOnly {boolean}: Whether the display is modifiable.
-	 *
-	 * Optional
-	 * rating {number}: The rating to initialize to.
-	 *
-	 * Callbacks
-	 * onComplete {function}: Called when a rating is selected.
-	 */
-
-	initialize: function(options) {
-		var instance = this;
-
-		options = options || {};
-		instance.rating = options.rating || 0;
-
-		var item = jQuery('#' + options.id);
-		instance.triggers = item.find('.rating');
-		instance._onComplete = options.onComplete;
-
-		if (!options.displayOnly) {
-			instance.triggers.click(
-				function(event) {
-					instance._click(event, this);
-				}
-			);
-		}
-	},
-
-	_click: function(event, obj) {
-		var instance = this;
-		var trigger = jQuery(obj);
-		var rating = trigger.is('.rate-up') ? 1 : -1;
-
-		if (trigger.is('.rated')) {
-			rating = 0;
-		}
-
-		instance.triggers.not(obj).removeClass('rated');
-		trigger.toggleClass('rated');
-
-		if (instance._onComplete) {
-			instance._onComplete(rating);
+			self.display(newRating);
 		}
 	}
-});
+);
+
+Liferay.Portal.ThumbRating = new Expanse.Class(
+	{
+
+		/**
+		 * OPTIONS
+		 *
+		 * Required
+		 * displayOnly {boolean}: Whether the display is modifiable.
+		 *
+		 * Optional
+		 * rating {number}: The rating to initialize to.
+		 *
+		 * Callbacks
+		 * onComplete {function}: Called when a rating is selected.
+		 */
+
+		initialize: function(options) {
+			var instance = this;
+
+			options = options || {};
+			instance.rating = options.rating || 0;
+
+			var item = jQuery('#' + options.id);
+			instance.triggers = item.find('.rating');
+			instance._onComplete = options.onComplete;
+
+			if (!options.displayOnly) {
+				instance.triggers.click(
+					function(event) {
+						instance._click(event, this);
+					}
+				);
+			}
+		},
+
+		_click: function(event, obj) {
+			var instance = this;
+			var trigger = jQuery(obj);
+			var rating = trigger.is('.rate-up') ? 1 : -1;
+
+			if (trigger.is('.rated')) {
+				rating = 0;
+			}
+
+			instance.triggers.not(obj).removeClass('rated');
+			trigger.toggleClass('rated');
+
+			if (instance._onComplete) {
+				instance._onComplete(rating);
+			}
+		}
+	}
+);
 
 Liferay.Portal.ToolTip = {
 	container: null,

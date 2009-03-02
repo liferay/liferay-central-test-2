@@ -1,85 +1,87 @@
-Liferay.Observable = new Expanse.Class({
-	initialize: function() {
-		var instance = this;
+Liferay.Observable = new Expanse.Class(
+	{
+		initialize: function() {
+			var instance = this;
 
-		instance._eventObj = jQuery(instance);
-	},
+			instance._eventObj = jQuery(instance);
+		},
 
-	bind: function(event, handler, scope) {
-		var instance = this;
+		bind: function(event, handler, scope) {
+			var instance = this;
 
-		if (handler && event) {
-			instance._createEventObj();
+			if (handler && event) {
+				instance._createEventObj();
 
-			var method = handler;
+				var method = handler;
 
-			if (scope) {
-				method = function(event) {
-					handler.apply(scope || instance, arguments);
-				};
+				if (scope) {
+					method = function(event) {
+						handler.apply(scope || instance, arguments);
+					};
+				}
+
+				instance._eventObj.bind(event, method);
 			}
 
-			instance._eventObj.bind(event, method);
-		}
+		},
 
-	},
+		get: function(key, defaultValue) {
+			var instance = this;
 
-	get: function(key, defaultValue) {
-		var instance = this;
+			var prop = '__' + key;
+			var value = defaultValue;
 
-		var prop = '__' + key;
-		var value = defaultValue;
+			if (prop in instance) {
+				value = instance[prop];
+			}
 
-		if (prop in instance) {
-			value = instance[prop];
-		}
+			return value;
+		},
 
-		return value;
-	},
+		set: function(key, value) {
+			var instance = this;
 
-	set: function(key, value) {
-		var instance = this;
+			var prop = '__' + key;
 
-		var prop = '__' + key;
+			var oldValue = instance[prop];
 
-		var oldValue = instance[prop];
+			if (value != oldValue) {
+				instance[prop] = value;
 
-		if (value != oldValue) {
-			instance[prop] = value;
+				instance.trigger('update', [instance, {value: value}]);
+			}
+		},
 
-			instance.trigger('update', [instance, {value: value}]);
-		}
-	},
+		trigger: function(event, data){
+			var instance = this;
 
-	trigger: function(event, data){
-		var instance = this;
+			if (instance._eventsSuspended == false) {
+				instance._createEventObj();
 
-		if (instance._eventsSuspended == false) {
-			instance._createEventObj();
+				instance._eventObj.triggerHandler(event, data);
+			}
+		},
 
-			instance._eventObj.triggerHandler(event, data);
-		}
-	},
+		resumeEvents: function(){
+			var instance = this;
 
-	resumeEvents: function(){
-		var instance = this;
+			instance._eventsSuspended = false;
+		},
 
-		instance._eventsSuspended = false;
-	},
+		suspendEvents: function(){
+			var instance = this;
 
-	suspendEvents: function(){
-		var instance = this;
+			instance._eventsSuspended = true;
+		},
 
-		instance._eventsSuspended = true;
-	},
+		_createEventObj: function() {
+			var instance = this;
 
-	_createEventObj: function() {
-		var instance = this;
+			if (!instance._eventObj) {
+				instance._eventObj = jQuery(instance);
+			}
+		},
 
-		if (!instance._eventObj) {
-			instance._eventObj = jQuery(instance);
-		}
-	},
-
-	_eventsSuspended: false
-});
+		_eventsSuspended: false
+	}
+);

@@ -1,108 +1,110 @@
 Liferay.EnterpriseAdmin = {
 }
 
-Liferay.EnterpriseAdmin.FormNavigator = new Expanse.Class({
-	initialize: function(options) {
-		var instance = this;
+Liferay.EnterpriseAdmin.FormNavigator = new Expanse.Class(
+	{
+		initialize: function(options) {
+			var instance = this;
 
-		instance._container = jQuery(options.container);
+			instance._container = jQuery(options.container);
 
-		instance._navigation = instance._container.find('.form-navigation');
-		instance._sections = instance._container.find('.form-section');
+			instance._navigation = instance._container.find('.form-navigation');
+			instance._sections = instance._container.find('.form-section');
 
-		instance._navigation.find('li a').click(
-			function(event) {
-				var li = jQuery(this.parentNode);
+			instance._navigation.find('li a').click(
+				function(event) {
+					var li = jQuery(this.parentNode);
 
-				if (!li.is('.selected')) {
-					instance._revealSection(this.href, li);
+					if (!li.is('.selected')) {
+						instance._revealSection(this.href, li);
 
-					var currentSection = this.href.split('#');
+						var currentSection = this.href.split('#');
 
-					if (currentSection[1]) {
-						location.hash = currentSection[1];
+						if (currentSection[1]) {
+							location.hash = currentSection[1];
+						}
 					}
+
+					return false;
 				}
+			);
 
-				return false;
+			if (options.modifiedSections) {
+				instance._modifiedSections = jQuery('[name=' + options.modifiedSections+ ']');
+
+				if (!instance._modifiedSections.length) {
+					instance._modifiedSections = jQuery('<input name="' + options.modifiedSections+ '" type="hidden" />')
+					instance._container.append(instance._modifiedSections);
+				}
 			}
-		);
-
-		if (options.modifiedSections) {
-			instance._modifiedSections = jQuery('[name=' + options.modifiedSections+ ']');
-
-			if (!instance._modifiedSections.length) {
-				instance._modifiedSections = jQuery('<input name="' + options.modifiedSections+ '" type="hidden" />')
-				instance._container.append(instance._modifiedSections);
+			else {
+				instance._modifiedSections = jQuery([]);
 			}
-		}
-		else {
-			instance._modifiedSections = jQuery([]);
-		}
 
-		if (options.defaultModifiedSections) {
-			instance._modifiedSectionsArray = options.defaultModifiedSections;
-		}
-		else {
-			instance._modifiedSectionsArray = [];
-		}
-
-		instance._revealSection(location.hash);
-
-		instance._container.find('input, select, textarea, .modify-link').change(
-			function(event) {
-				instance._trackChanges(this);
+			if (options.defaultModifiedSections) {
+				instance._modifiedSectionsArray = options.defaultModifiedSections;
 			}
-		);
-
-		Liferay.bind(
-			'submitForm',
-			function(event, data) {
-				var form = jQuery(data.form);
-
-				instance._modifiedSections.val(instance._modifiedSectionsArray.join(','));
+			else {
+				instance._modifiedSectionsArray = [];
 			}
-		);
-	},
 
-	_revealSection: function(id, currentNavItem) {
-		var instance = this;
+			instance._revealSection(location.hash);
 
-		var li = currentNavItem || instance._navigation.find('[href$=' + id + ']').parent();
+			instance._container.find('input, select, textarea, .modify-link').change(
+				function(event) {
+					instance._trackChanges(this);
+				}
+			);
 
-		id = id.split('#');
+			Liferay.bind(
+				'submitForm',
+				function(event, data) {
+					var form = jQuery(data.form);
 
-		if (!id[1]) {
-			return;
-		}
+					instance._modifiedSections.val(instance._modifiedSectionsArray.join(','));
+				}
+			);
+		},
 
-		id = '#' + id[1];
+		_revealSection: function(id, currentNavItem) {
+			var instance = this;
 
-		var section = jQuery(id);
+			var li = currentNavItem || instance._navigation.find('[href$=' + id + ']').parent();
 
-		instance._navigation.find('.selected').removeClass('selected');
-		instance._sections.removeClass('selected');
+			id = id.split('#');
 
-		section.addClass('selected');
-		li.addClass('selected');
-	},
+			if (!id[1]) {
+				return;
+			}
 
-	_trackChanges: function(el) {
-		var instance = this;
+			id = '#' + id[1];
 
-		var currentSection = jQuery(el).parents('.form-section:first').attr('id');
+			var section = jQuery(id);
 
-		var currentSectionLink = jQuery('#' + currentSection + 'Link');
-		currentSectionLink.parent().addClass('section-modified');
+			instance._navigation.find('.selected').removeClass('selected');
+			instance._sections.removeClass('selected');
 
-		instance._addModifiedSection(currentSection);
-	},
+			section.addClass('selected');
+			li.addClass('selected');
+		},
 
-	_addModifiedSection: function (section) {
-		var instance = this;
+		_trackChanges: function(el) {
+			var instance = this;
 
-		if (jQuery.inArray(section, instance._modifiedSectionsArray) == -1) {
-			instance._modifiedSectionsArray.push(section);
+			var currentSection = jQuery(el).parents('.form-section:first').attr('id');
+
+			var currentSectionLink = jQuery('#' + currentSection + 'Link');
+			currentSectionLink.parent().addClass('section-modified');
+
+			instance._addModifiedSection(currentSection);
+		},
+
+		_addModifiedSection: function (section) {
+			var instance = this;
+
+			if (jQuery.inArray(section, instance._modifiedSectionsArray) == -1) {
+				instance._modifiedSectionsArray.push(section);
+			}
 		}
 	}
-});
+);
