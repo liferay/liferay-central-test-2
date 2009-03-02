@@ -69,6 +69,14 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 		throws SearchException {
 
 		try {
+			long userId = PortalUtil.getUserId(request);
+
+			if (userId == 0) {
+				long companyId = PortalUtil.getCompanyId(request);
+
+				userId = UserLocalServiceUtil.getDefaultUserId(companyId);
+			}
+
 			String keywords = GetterUtil.getString(
 				HttpUtil.getParameter(url, "keywords", false));
 			int startPage = GetterUtil.getInteger(
@@ -79,16 +87,11 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 			String format = GetterUtil.getString(
 				HttpUtil.getParameter(url, "format", false));
 
-			long userId = PortalUtil.getUserId(request);
-
-			if (userId == 0) {
-				long companyId = PortalUtil.getCompanyId(request);
-
-				userId = UserLocalServiceUtil.getDefaultUserId(companyId);
-			}
-
 			return search(
 				request, userId, keywords, startPage, itemsPerPage, format);
+		}
+		catch (SearchException se) {
+			throw se;
 		}
 		catch (Exception e) {
 			throw new SearchException(e);
