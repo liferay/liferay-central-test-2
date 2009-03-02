@@ -26,6 +26,7 @@
 
 <c:if test="<%= themeDisplay.isIncludeCalendarJs() %>">
 	<script type="text/javascript">
+
 		<%
 		String[] calendarDays = new String[CalendarUtil.DAYS_ABBREVIATION.length];
 
