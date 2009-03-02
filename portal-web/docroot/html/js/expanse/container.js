@@ -78,11 +78,11 @@
 		initialize: function(options) {
 			var instance = this;
 
-			if (options.width && options.width != 'auto') {
+			if (options.width && (options.width != 'auto')) {
 				options.width = (parseInt(options.width, 10) || 300) + 'px';
 			}
 
-			if (options.height && options.height != 'auto') {
+			if (options.height && (options.height != 'auto')) {
 				options.height = (parseInt(options.height, 10) || 300) + 'px';
 			}
 
