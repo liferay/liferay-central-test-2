@@ -63,9 +63,9 @@ public class UpgradeWebForm extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select * from ClassName_ where value = ?");
+				"select classNameId from ClassName_ where value = ?");
 
-			ps.setString(1, _OLD_WEBFORM_CLASSNAME);
+			ps.setString(1, _OLD_WEBFORM_CLASS_NAME);
 
 			rs = ps.executeQuery();
 
@@ -78,9 +78,9 @@ public class UpgradeWebForm extends UpgradeProcess {
 			oldClassNameId = rs.getLong("classNameId");
 
 			ps = con.prepareStatement(
-				"select * from ClassName_ where value = ?");
+				"select classNameId from ClassName_ where value = ?");
 
-			ps.setString(1, _NEW_WEBFORM_CLASSNAME);
+			ps.setString(1, _NEW_WEBFORM_CLASS_NAME);
 
 			rs = ps.executeQuery();
 
@@ -88,9 +88,8 @@ public class UpgradeWebForm extends UpgradeProcess {
 				ps = con.prepareStatement(
 					"update ClassName_ set value = ? where value = ?");
 
-				ps.setString(1, _NEW_WEBFORM_CLASSNAME);
-
-				ps.setString(2, _OLD_WEBFORM_CLASSNAME);
+				ps.setString(1, _NEW_WEBFORM_CLASS_NAME);
+				ps.setString(2, _OLD_WEBFORM_CLASS_NAME);
 
 				ps.executeUpdate();
 
@@ -106,7 +105,6 @@ public class UpgradeWebForm extends UpgradeProcess {
 					"classNameId = ?");
 
 			ps.setLong(1, newClassNameId);
-
 			ps.setLong(2, oldClassNameId);
 
 			ps.executeUpdate();
@@ -116,7 +114,6 @@ public class UpgradeWebForm extends UpgradeProcess {
 					"classNameId = ?");
 
 			ps.setLong(1, newClassNameId);
-
 			ps.setLong(2, oldClassNameId);
 
 			ps.executeUpdate();
@@ -124,23 +121,22 @@ public class UpgradeWebForm extends UpgradeProcess {
 			ps = con.prepareStatement(
 				"delete from ClassName_ where value = ?");
 
-			ps.setString(1, _OLD_WEBFORM_CLASSNAME);
+			ps.setString(1, _OLD_WEBFORM_CLASS_NAME);
 
 			ps.executeUpdate();
 
 			ps.close();
-
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
 
-	private static final String _OLD_WEBFORM_CLASSNAME =
-		"com.liferay.portlet.webform.util.WebFormUtil";
-
-	private static final String _NEW_WEBFORM_CLASSNAME =
+	private static final String _NEW_WEBFORM_CLASS_NAME =
 		"com.liferay.webform.util.WebFormUtil";
+
+	private static final String _OLD_WEBFORM_CLASS_NAME =
+		"com.liferay.portlet.webform.util.WebFormUtil";
 
 	private static Log _log = LogFactoryUtil.getLog(UpgradeWebForm.class);
 
