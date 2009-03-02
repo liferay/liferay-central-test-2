@@ -523,11 +523,11 @@
 
 		<copy file="lib/readme.txt" todir="${lp.ext.dir}/ext-lib" />
 
-		<sync includeEmptyDirs="true" todir="${lp.ext.dir}/lib" verbose="true">
-			<fileset dir="lib"/>
+		<sync includeemptydirs="true" todir="${lp.ext.dir}/lib" verbose="true">
+			<fileset dir="lib" />
 			<preserveintarget>
 				<include name="**/.svn" />
-				<include name="**/.svn/**"/>
+				<include name="**/.svn/**" />
 			</preserveintarget>
 		</sync>
 
