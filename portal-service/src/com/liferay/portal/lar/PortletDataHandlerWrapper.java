@@ -41,7 +41,7 @@ public class PortletDataHandlerWrapper implements PortletDataHandler {
 
 	public PortletPreferences deleteData(
 			PortletDataContext context, String portletId,
-			PortletPreferences prefs)
+			PortletPreferences preferences)
 		throws PortletDataException {
 
 		Thread currentThread = Thread.currentThread();
@@ -51,7 +51,7 @@ public class PortletDataHandlerWrapper implements PortletDataHandler {
 		try {
 			currentThread.setContextClassLoader(_classLoader);
 
-			return _portletDataHandler.deleteData(context, portletId, prefs);
+			return _portletDataHandler.deleteData(context, portletId, preferences);
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
@@ -60,7 +60,7 @@ public class PortletDataHandlerWrapper implements PortletDataHandler {
 
 	public String exportData(
 			PortletDataContext context, String portletId,
-			PortletPreferences prefs)
+			PortletPreferences preferences)
 		throws PortletDataException {
 
 		Thread currentThread = Thread.currentThread();
@@ -70,7 +70,8 @@ public class PortletDataHandlerWrapper implements PortletDataHandler {
 		try {
 			currentThread.setContextClassLoader(_classLoader);
 
-			return _portletDataHandler.exportData(context, portletId, prefs);
+			return _portletDataHandler.exportData(
+				context, portletId, preferences);
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
@@ -113,7 +114,7 @@ public class PortletDataHandlerWrapper implements PortletDataHandler {
 
 	public PortletPreferences importData(
 			PortletDataContext context, String portletId,
-			PortletPreferences prefs, String data)
+			PortletPreferences preferences, String data)
 		throws PortletDataException {
 
 		Thread currentThread = Thread.currentThread();
@@ -124,7 +125,7 @@ public class PortletDataHandlerWrapper implements PortletDataHandler {
 			currentThread.setContextClassLoader(_classLoader);
 
 			return _portletDataHandler.importData(
-				context, portletId, prefs, data);
+				context, portletId, preferences, data);
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
@@ -161,7 +162,7 @@ public class PortletDataHandlerWrapper implements PortletDataHandler {
 		}
 	}
 
-	PortletDataHandler _portletDataHandler;
+	private PortletDataHandler _portletDataHandler;
 	private ClassLoader _classLoader;
 
 }
