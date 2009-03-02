@@ -128,12 +128,10 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 		boolean showSelectArticleIcon = PortletPermissionUtil.contains(permissionChecker, plid, portletDisplay.getId(), ActionKeys.CONFIGURATION);
 		boolean showAddArticleIcon = PortletPermissionUtil.contains(permissionChecker, plid, portletDisplay.getId(), ActionKeys.CONFIGURATION) && JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ARTICLE) && JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.APPROVE_ARTICLE);
 		boolean showIconsActions = themeDisplay.isSignedIn() && ((showEditArticleIcon || showEditTemplateIcon || showSelectArticleIcon || showAddArticleIcon) && !staged);
-
-		boolean showIconsContainerDiv = showIconsActions || ((articleDisplay != null) && (enableConversions || enablePrint));
 		%>
 
 		<c:if test="<%= ((showEditArticleIcon || showEditTemplateIcon || showSelectArticleIcon || showAddArticleIcon) && !staged) || (enablePrint || enableRatings || enableComments || enableConversions) %>">
-			<c:if test="<%= showIconsContainerDiv %>">
+			<c:if test="<%= showIconsActions || ((articleDisplay != null) && (enableConversions || enablePrint)) %>">
 				<div class="icons-container">
 					<div class="icon-actions">
 						<c:if test="<%= showIconsActions %>">
