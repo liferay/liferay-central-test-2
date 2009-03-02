@@ -51,7 +51,8 @@ public class PortletDataHandlerWrapper implements PortletDataHandler {
 		try {
 			currentThread.setContextClassLoader(_classLoader);
 
-			return _portletDataHandler.deleteData(context, portletId, preferences);
+			return _portletDataHandler.deleteData(
+				context, portletId, preferences);
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
