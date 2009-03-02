@@ -36,11 +36,9 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.shopping.CouponCodeException;
 import com.liferay.portlet.shopping.CouponDateException;
 import com.liferay.portlet.shopping.CouponDescriptionException;
-import com.liferay.portlet.shopping.CouponDiscountException;
 import com.liferay.portlet.shopping.CouponEndDateException;
 import com.liferay.portlet.shopping.CouponLimitCategoriesException;
 import com.liferay.portlet.shopping.CouponLimitSKUsException;
-import com.liferay.portlet.shopping.CouponMinimumOrderException;
 import com.liferay.portlet.shopping.CouponNameException;
 import com.liferay.portlet.shopping.CouponStartDateException;
 import com.liferay.portlet.shopping.DuplicateCouponCodeException;
@@ -96,11 +94,9 @@ public class EditCouponAction extends PortletAction {
 			else if (e instanceof CouponCodeException ||
 					 e instanceof CouponDateException ||
 					 e instanceof CouponDescriptionException ||
-					 e instanceof CouponDiscountException ||
 					 e instanceof CouponEndDateException ||
 					 e instanceof CouponLimitCategoriesException ||
 					 e instanceof CouponLimitSKUsException ||
-					 e instanceof CouponMinimumOrderException ||
 					 e instanceof CouponNameException ||
 					 e instanceof CouponStartDateException ||
 					 e instanceof DuplicateCouponCodeException) {
@@ -214,8 +210,8 @@ public class EditCouponAction extends PortletAction {
 		String limitCategories = ParamUtil.getString(
 			actionRequest, "limitCategories");
 		String limitSkus = ParamUtil.getString(actionRequest, "limitSkus");
-		String minOrder = ParamUtil.getString(actionRequest, "minOrder");
-		String discount = ParamUtil.getString(actionRequest, "discount");
+		double minOrder = ParamUtil.getDouble(actionRequest, "minOrder");
+		double discount = ParamUtil.getDouble(actionRequest, "discount");
 		String discountType = ParamUtil.getString(
 			actionRequest, "discountType");
 

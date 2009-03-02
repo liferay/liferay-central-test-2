@@ -50,24 +50,6 @@ public class ShoppingCouponServiceImpl extends ShoppingCouponServiceBaseImpl {
 			String discountType, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		return addCoupon(
-			code, autoCode, name, description, startDateMonth, startDateDay,
-			startDateYear, startDateHour, startDateMinute, endDateMonth,
-			endDateDay, endDateYear, endDateHour, endDateMinute, neverExpire,
-			active, limitCategories, limitSkus, String.valueOf(minOrder),
-			String.valueOf(discount), discountType, serviceContext);
-	}
-
-	public ShoppingCoupon addCoupon(
-			String code, boolean autoCode, String name, String description,
-			int startDateMonth, int startDateDay, int startDateYear,
-			int startDateHour, int startDateMinute, int endDateMonth,
-			int endDateDay, int endDateYear, int endDateHour, int endDateMinute,
-			boolean neverExpire, boolean active, String limitCategories,
-			String limitSkus, String minOrder, String discount,
-			String discountType, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
 		ShoppingPermission.check(
 			getPermissionChecker(), serviceContext.getScopeGroupId(),
 			ActionKeys.MANAGE_COUPONS);
@@ -118,24 +100,6 @@ public class ShoppingCouponServiceImpl extends ShoppingCouponServiceBaseImpl {
 			int endDateYear, int endDateHour, int endDateMinute,
 			boolean neverExpire, boolean active, String limitCategories,
 			String limitSkus, double minOrder, double discount,
-			String discountType, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return updateCoupon(couponId, name, description, startDateMonth,
-			startDateDay, startDateYear, startDateHour, startDateMinute,
-			endDateMonth, endDateDay, endDateYear, endDateHour, endDateMinute,
-			neverExpire, active, limitCategories, limitSkus,
-			String.valueOf(minOrder), String.valueOf(discount),discountType,
-			serviceContext);
-	}
-
-	public ShoppingCoupon updateCoupon(
-			long couponId, String name, String description, int startDateMonth,
-			int startDateDay, int startDateYear, int startDateHour,
-			int startDateMinute, int endDateMonth, int endDateDay,
-			int endDateYear, int endDateHour, int endDateMinute,
-			boolean neverExpire, boolean active, String limitCategories,
-			String limitSkus, String minOrder, String discount,
 			String discountType, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 

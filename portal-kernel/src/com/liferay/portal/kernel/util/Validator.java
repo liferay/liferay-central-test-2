@@ -445,14 +445,6 @@ public class Validator {
 		return true;
 	}
 
-	public static boolean isNumeric(String number){
-		if (isNull(number)) {
-			return false;
-		}
-
-		return isNumber(number.replaceFirst("\\.", StringPool.BLANK));
-	}
-
 	public static boolean isPassword(String password) {
 		if (isNull(password)) {
 			return false;
@@ -500,8 +492,6 @@ public class Validator {
 	private static final int _CHAR_BEGIN = 65;
 
 	private static final int _CHAR_END = 122;
-
-	private static final int _CHAR_PERIOD = 46;
 
 	private static final int _DIGIT_BEGIN = 48;
 
