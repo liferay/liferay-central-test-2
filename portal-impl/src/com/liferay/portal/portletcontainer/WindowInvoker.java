@@ -44,7 +44,9 @@ package com.liferay.portal.portletcontainer;
 import com.liferay.portal.ccpp.PortalProfileFactory;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.portlet.LiferayPortletSession;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.servlet.PortletSessionTracker;
 import com.liferay.portal.kernel.servlet.ProtectedPrincipal;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -135,6 +137,7 @@ import javax.portlet.WindowState;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -305,6 +308,8 @@ public class WindowInvoker extends InvokerPortletImpl {
 				}
 
 				_transferHeaders(request, response, executeActionResponse);
+
+				_setHttpSession(executeActionRequest, actionRequest);
 			}
 		}
 		catch (Exception e) {
@@ -411,6 +416,8 @@ public class WindowInvoker extends InvokerPortletImpl {
 					MimeResponse.MARKUP_HEAD_ELEMENT, allMarkupHeaders);
 			}
 
+			_setHttpSession(getMarkupRequest, renderRequest);
+
 			return title;
 		}
 		catch (Exception e) {
@@ -469,6 +476,8 @@ public class WindowInvoker extends InvokerPortletImpl {
 			}
 
 			_transferHeaders(request, response, getResourceResponse);
+
+			_setHttpSession(getResourceRequest, resourceRequest);
 
 			StringBuffer sb = getResourceResponse.getContentAsBuffer();
 
@@ -777,6 +786,11 @@ public class WindowInvoker extends InvokerPortletImpl {
 		containerRequest.setAttribute(
 			PortletRequest.CCPP_PROFILE, _getCCPPProfile(request));
 
+		containerRequest.setAttribute(WebKeys.RENDER_PORTLET, _portletModel);
+
+		containerRequest.setAttribute(
+			WebKeys.PORTLET_ID, _portletModel.getPortletId());
+
 		containerRequest.setAttribute(
 			PortletRequestConstants.ESCAPE_XML_VALUE,
 			Boolean.valueOf(PropsValues.PORTLET_URL_ESCAPE_XML));
@@ -820,6 +834,21 @@ public class WindowInvoker extends InvokerPortletImpl {
 		}
 
 		return wsrpUserInfoMap;
+	}
+
+	private void _setHttpSession(
+		ContainerRequest containerRequest, PortletRequest portletRequest) {
+
+		HttpSession session = containerRequest.getHttpSession();
+
+		if(session != null) {
+			LiferayPortletSession portletSession =
+				(LiferayPortletSession)portletRequest.getPortletSession();
+
+			portletSession.setHttpSession(session);
+
+			PortletSessionTracker.add(session);
+		}
 	}
 
 	private void _setPortletAttributes(
