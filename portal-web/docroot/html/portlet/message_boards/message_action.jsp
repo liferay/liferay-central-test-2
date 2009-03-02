@@ -30,8 +30,6 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 MBMessage message = (MBMessage)row.getObject();
 
 MBCategory category = message.getCategory();
-
-long categoryId = BeanParamUtil.getLong(category, request, "categoryId");
 %>
 
 <liferay-ui:icon-menu>
@@ -95,11 +93,10 @@ long categoryId = BeanParamUtil.getLong(category, request, "categoryId");
 
 	<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.DELETE) %>">
 		<portlet:actionURL var="deleteURL">
-			<portlet:param name="struts_action" value="/message_boards/delete_thread" />
+			<portlet:param name="struts_action" value="/message_boards/edit_message" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="categoryId" value="<%= String.valueOf(category.getCategoryId()) %>" />
-			<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
+			<portlet:param name="messageId" value="<%= String.valueOf(message.getMessageId()) %>" />
 		</portlet:actionURL>
 
 		<liferay-ui:icon-delete url="<%= deleteURL %>" />
