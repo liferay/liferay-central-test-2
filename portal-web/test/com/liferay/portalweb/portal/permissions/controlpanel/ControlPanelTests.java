@@ -44,11 +44,13 @@ public class ControlPanelTests extends BaseTests {
 		testSuite.addTestSuite(CA_AnnouncementsRolesTest.class);
 		testSuite.addTestSuite(CA_BlogsRolesTest.class);
 		testSuite.addTestSuite(CA_DocumentLibraryRolesTest.class);
+		testSuite.addTestSuite(CA_ImageGalleryRolesTest.class);
 		testSuite.addTestSuite(CA_MessageBoardsRolesTest.class);
 		testSuite.addTestSuite(DefineMemberRolesTest.class);
 		testSuite.addTestSuite(Member_AnnouncementsRolesTest.class);
 		testSuite.addTestSuite(Member_BlogsRolesTest.class);
 		testSuite.addTestSuite(Member_DocumentLibraryRolesTest.class);
+		testSuite.addTestSuite(Member_ImageGalleryRolesTest.class);
 		testSuite.addTestSuite(Member_MessageBoardsRolesTest.class);
 		testSuite.addTestSuite(DefinePublisherRolesTest.class);
 		testSuite.addTestSuite(DefineWriterRolesTest.class);
