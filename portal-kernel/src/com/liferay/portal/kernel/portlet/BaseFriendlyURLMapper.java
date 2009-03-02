@@ -84,7 +84,15 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 
 		try {
 			if (!_isReservedParameter(name)) {
-				name = getNamespace() + name;
+				Map<String, String> prpIdentifers =
+					FriendlyURLMapperThreadLocal.getPRPIdentifiers();
+
+				if (prpIdentifers.containsKey(name)) {
+					name = prpIdentifers.get(name);
+				}
+				else {
+					name = getNamespace() + name;
+				}
 			}
 
 			params.put(name, new String[] {value});

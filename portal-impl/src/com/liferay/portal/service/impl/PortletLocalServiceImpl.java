@@ -167,8 +167,50 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		}
 	}
 
+	public List<Portlet> getFriendlyURLMapperPortlets() {
+		List<Portlet> portlets = new ArrayList<Portlet>(
+			_friendlyURLMapperPortlets.size());
+
+		Iterator<Map.Entry<String, Portlet>> itr =
+			_friendlyURLMapperPortlets.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry<String, Portlet> entry = itr.next();
+
+			Portlet portlet = entry.getValue();
+
+			FriendlyURLMapper friendlyURLMapper =
+				portlet.getFriendlyURLMapperInstance();
+
+			if (friendlyURLMapper != null) {
+				portlets.add(portlet);
+			}
+		}
+
+		return portlets;
+	}
+
 	public List<FriendlyURLMapper> getFriendlyURLMappers() {
-		return _getFriendlyURLMappers();
+		List<FriendlyURLMapper> friendlyURLMappers =
+			new ArrayList<FriendlyURLMapper>(_friendlyURLMapperPortlets.size());
+
+		Iterator<Map.Entry<String, Portlet>> itr =
+			_friendlyURLMapperPortlets.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry<String, Portlet> entry = itr.next();
+
+			Portlet portlet = entry.getValue();
+
+			FriendlyURLMapper friendlyURLMapper =
+				portlet.getFriendlyURLMapperInstance();
+
+			if (friendlyURLMapper != null) {
+				friendlyURLMappers.add(friendlyURLMapper);
+			}
+		}
+
+		return friendlyURLMappers;
 	}
 
 	public Portlet getPortletById(long companyId, String portletId)
@@ -542,30 +584,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		// Refresh company portlets
 
 		_companyPortletsPool.clear();
-	}
-
-	private List<FriendlyURLMapper> _getFriendlyURLMappers() {
-		List<FriendlyURLMapper> friendlyURLMappers =
-			new ArrayList<FriendlyURLMapper>(
-							_friendlyURLMapperPortlets.size());
-
-		Iterator<Map.Entry<String, Portlet>> itr =
-			_friendlyURLMapperPortlets.entrySet().iterator();
-
-		while (itr.hasNext()) {
-			Map.Entry<String, Portlet> entry = itr.next();
-
-			Portlet portlet = entry.getValue();
-
-			FriendlyURLMapper friendlyURLMapper =
-				portlet.getFriendlyURLMapperInstance();
-
-			if (friendlyURLMapper != null) {
-				friendlyURLMappers.add(friendlyURLMapper);
-			}
-		}
-
-		return friendlyURLMappers;
 	}
 
 	private PortletApp _getPortletApp(String servletContextName) {

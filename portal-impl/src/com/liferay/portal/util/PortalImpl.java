@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
+import com.liferay.portal.kernel.portlet.FriendlyURLMapperThreadLocal;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
 import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
@@ -60,6 +61,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Company;
@@ -72,6 +74,7 @@ import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
+import com.liferay.portal.model.PublicRenderParameter;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
@@ -104,6 +107,7 @@ import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesWrapper;
+import com.liferay.portlet.PortletQNameUtil;
 import com.liferay.portlet.PortletRequestImpl;
 import com.liferay.portlet.PortletResponseImpl;
 import com.liferay.portlet.PortletURLImpl;
@@ -1563,13 +1567,16 @@ public class PortalImpl implements Portal {
 		String friendlyURL = url;
 		String queryString = StringPool.BLANK;
 
-		List<FriendlyURLMapper> friendlyURLMappers =
-			PortletLocalServiceUtil.getFriendlyURLMappers();
+		List<Portlet> portlets =
+			PortletLocalServiceUtil.getFriendlyURLMapperPortlets();
 
-		Iterator<FriendlyURLMapper> itr = friendlyURLMappers.iterator();
+		Iterator<Portlet> itr = portlets.iterator();
 
 		while (itr.hasNext()) {
-			FriendlyURLMapper friendlyURLMapper = itr.next();
+			Portlet portlet = itr.next();
+
+			FriendlyURLMapper friendlyURLMapper =
+				portlet.getFriendlyURLMapperInstance();
 
 			if (url.endsWith(
 					StringPool.SLASH + friendlyURLMapper.getMapping())) {
@@ -1617,6 +1624,29 @@ public class PortalImpl implements Portal {
 					actualParams.put(
 						"p_p_state", WindowState.MAXIMIZED.toString());
 				}*/
+
+				Map<String, String> prpIdentifiers =
+					new HashMap<String, String>();
+
+				Set<PublicRenderParameter> publicRenderParameters =
+					portlet.getPublicRenderParameters();
+
+				for (PublicRenderParameter publicRenderParameter :
+						publicRenderParameters) {
+
+					QName qName = publicRenderParameter.getQName();
+
+					String publicRenderParameterIdentifier =
+						qName.getLocalPart();
+					String publicRenderParameterName =
+						PortletQNameUtil.getPublicRenderParameterName(qName);
+
+					prpIdentifiers.put(
+						publicRenderParameterIdentifier,
+						publicRenderParameterName);
+				}
+
+				FriendlyURLMapperThreadLocal.setPRPIdentifiers(prpIdentifiers);
 
 				if (friendlyURLMapper.isCheckMappingWithPrefix()) {
 					friendlyURLMapper.populateParams(

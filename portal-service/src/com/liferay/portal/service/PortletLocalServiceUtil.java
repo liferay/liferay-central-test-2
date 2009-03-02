@@ -120,6 +120,10 @@ public class PortletLocalServiceUtil {
 		return getService().getWARDisplay(servletContextName, xml);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Portlet> getFriendlyURLMapperPortlets() {
+		return getService().getFriendlyURLMapperPortlets();
+	}
+
 	public static java.util.List<com.liferay.portal.kernel.portlet.FriendlyURLMapper> getFriendlyURLMappers() {
 		return getService().getFriendlyURLMappers();
 	}
