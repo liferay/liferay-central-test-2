@@ -25,10 +25,13 @@ package com.liferay.portlet.calendar.social;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
+import com.liferay.portlet.calendar.service.permission.CalEventPermission;
 import com.liferay.portlet.social.model.BaseSocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.SocialActivityFeedEntry;
@@ -48,6 +51,15 @@ public class CalendarActivityInterpreter extends BaseSocialActivityInterpreter {
 	protected SocialActivityFeedEntry doInterpret(
 			SocialActivity activity, ThemeDisplay themeDisplay)
 		throws Exception {
+
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
+
+		if (CalEventPermission.contains(
+				permissionChecker, activity.getClassPK(), ActionKeys.VIEW)) {
+
+			return null;
+		}
 
 		String creatorUserName = getUserName(
 			activity.getUserId(), themeDisplay);

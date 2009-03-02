@@ -187,6 +187,10 @@ public interface WikiPageLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.wiki.model.WikiPage getPage(long resourcePrimKey)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
 		java.lang.String title)
 		throws com.liferay.portal.PortalException,

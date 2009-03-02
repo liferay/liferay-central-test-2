@@ -41,6 +41,16 @@ import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 public class WikiPagePermission {
 
 	public static void check(
+			PermissionChecker permissionChecker, long resourcePrimKey,
+			String actionId)
+		throws PortalException, SystemException {
+
+		if (!contains(permissionChecker, resourcePrimKey, actionId)) {
+			throw new PrincipalException();
+		}
+	}
+
+	public static void check(
 			PermissionChecker permissionChecker, long nodeId, String title,
 			String actionId)
 		throws PortalException, SystemException {
@@ -57,6 +67,16 @@ public class WikiPagePermission {
 		if (!contains(permissionChecker, page, actionId)) {
 			throw new PrincipalException();
 		}
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long resourcePrimKey,
+			String actionId)
+		throws PortalException, SystemException {
+
+		WikiPage page = WikiPageLocalServiceUtil.getPage(resourcePrimKey);
+
+		return contains(permissionChecker, page, actionId);
 	}
 
 	public static boolean contains(

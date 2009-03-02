@@ -25,6 +25,8 @@ package com.liferay.portlet.wiki.social;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.social.model.BaseSocialActivityInterpreter;
@@ -33,6 +35,7 @@ import com.liferay.portlet.social.model.SocialActivityFeedEntry;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.WikiPageResource;
 import com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil;
+import com.liferay.portlet.wiki.service.permission.WikiPagePermission;
 
 /**
  * <a href="WikiActivityInterpreter.java.html"><b><i>View Source</i></b></a>
@@ -49,6 +52,15 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 	protected SocialActivityFeedEntry doInterpret(
 			SocialActivity activity, ThemeDisplay themeDisplay)
 		throws Exception {
+
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
+
+		if (WikiPagePermission.contains(
+				permissionChecker, activity.getClassPK(), ActionKeys.VIEW)) {
+
+			return null;
+		}
 
 		String creatorUserName = getUserName(
 			activity.getUserId(), themeDisplay);

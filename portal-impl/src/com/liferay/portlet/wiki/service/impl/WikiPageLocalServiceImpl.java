@@ -583,6 +583,16 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		return ListUtil.fromCollection(pages.values());
 	}
 
+	public WikiPage getPage(long resourcePrimKey)
+		throws PortalException, SystemException {
+
+		WikiPageResource wikiPageResource =
+			wikiPageResourceLocalService.getPageResource(resourcePrimKey);
+
+		return getPage(
+			wikiPageResource.getNodeId(), wikiPageResource.getTitle());
+	}
+
 	public WikiPage getPage(long nodeId, String title)
 		throws PortalException, SystemException {
 

@@ -243,6 +243,13 @@ public class WikiPageLocalServiceUtil {
 		return getService().getOutgoingLinks(nodeId, title);
 	}
 
+	public static com.liferay.portlet.wiki.model.WikiPage getPage(
+		long resourcePrimKey)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getPage(resourcePrimKey);
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
 		java.lang.String title)
 		throws com.liferay.portal.PortalException,
