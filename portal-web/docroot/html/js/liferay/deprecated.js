@@ -6,18 +6,16 @@
 
 window.Class = Expanse.Class;
 
-/*
-See note on LPS-2135
+// LPS-2135
 
-Expanse.Class.createSuper = function(previous, current) {
+/*Expanse.Class.createSuper = function(previous, current) {
 	return function() {
 		this.parent = previous;
 		this._super = previous;
 
 		return current.apply(this, arguments);
 	};
-};
-*/
+};*/
 
 // LPS-2129
 
