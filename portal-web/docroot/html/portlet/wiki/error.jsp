@@ -62,9 +62,9 @@
 	</div>
 
 	<div>
-		<input onclick="location.href = '<%= searchURL.toString()%>'" type="button" value="<%= LanguageUtil.format(pageContext, "search-for-x", title) %>" />
+		<input onclick="location.href = '<%= searchURL.toString() %>'" type="button" value="<%= LanguageUtil.format(pageContext, "search-for-x", title) %>" />
 
-		<input onclick="location.href = '<%= editPageURL.toString()%>'" type="button" value="<%= LanguageUtil.format(pageContext, "create-page-x", title) %>" />
+		<input onclick="location.href = '<%= editPageURL.toString() %>'" type="button" value="<%= LanguageUtil.format(pageContext, "create-page-x", title) %>" />
 	</div>
 </c:if>
 
