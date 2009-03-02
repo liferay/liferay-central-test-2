@@ -503,6 +503,8 @@ public class WindowInvoker extends InvokerPortletImpl {
 			transformer.setOutputProperty(
 				OutputKeys.OMIT_XML_DECLARATION, "yes");
 
+			transformer.setOutputProperty(OutputKeys.METHOD, "html");
+
 			StringWriter sw = new StringWriter();
 
 			transformer.transform(new DOMSource(element), new StreamResult(sw));
