@@ -25,14 +25,19 @@ package com.liferay.portal.configuration;
 import com.germinus.easyconf.AggregatedProperties;
 import com.germinus.easyconf.ComponentConfiguration;
 import com.germinus.easyconf.ComponentProperties;
+import com.germinus.easyconf.Conventions;
 import com.germinus.easyconf.EasyConf;
 
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.lang.reflect.Field;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -60,6 +65,36 @@ public class ConfigurationImpl
 	implements com.liferay.portal.kernel.configuration.Configuration {
 
 	public ConfigurationImpl(ClassLoader classLoader, String name) {
+		try {
+			URL url = classLoader.getResource(
+				name + Conventions.PROPERTIES_EXTENSION);
+
+			if (url != null && url.getProtocol().equals("file")) {
+				String basePath = url.getPath();
+
+				int pos = name.lastIndexOf(
+					StringPool.SLASH + name + Conventions.PROPERTIES_EXTENSION);
+
+				if (pos != -1) {
+					basePath = basePath.substring(0, pos);
+				}
+
+				Properties serviceProps = new Properties();
+				serviceProps.load(url.openStream());
+
+				if (!serviceProps.containsKey("base.path")) {
+					BufferedWriter out = new BufferedWriter(
+						new FileWriter(url.getFile(), true));
+
+					out.write("\n\nbase.path=" + basePath);
+					out.close();
+				}
+			}
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
 		_componentConfiguration = EasyConf.getConfiguration(
 			getFileName(classLoader, name));
 
