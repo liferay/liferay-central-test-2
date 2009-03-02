@@ -468,6 +468,8 @@ public class WindowInvoker extends InvokerPortletImpl {
 				resourceResponseImpl.setContentType(contentType);
 			}
 
+			_transferHeaders(request, response, getResourceResponse);
+
 			StringBuffer sb = getResourceResponse.getContentAsBuffer();
 
 			byte[] bytes = getResourceResponse.getContentAsBytes();
