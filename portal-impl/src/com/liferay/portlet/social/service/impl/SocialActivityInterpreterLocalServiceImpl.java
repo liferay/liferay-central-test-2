@@ -24,21 +24,12 @@ package com.liferay.portlet.social.service.impl;
 
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.security.permission.PermissionCheckerUtil;
-import com.liferay.portal.security.permission.PermissionThreadLocal;
-import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.PortalException;
 import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.SocialActivityFeedEntry;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
 import com.liferay.portlet.social.model.impl.SocialActivityInterpreterImpl;
 import com.liferay.portlet.social.service.SocialActivityLocalServiceUtil;
 import com.liferay.portlet.social.service.base.SocialActivityInterpreterLocalServiceBaseImpl;
-import com.liferay.portlet.messageboards.model.MBMessage;
-import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,7 +86,7 @@ public class SocialActivityInterpreterLocalServiceImpl
 				SocialActivityFeedEntry activityFeedEntry =
 					activityInterpreter.interpret(activity, themeDisplay);
 
-				if (activityFeedEntry != null && hasPermission(className, activity.getClassPK())) {
+				if (activityFeedEntry != null) {
 					activityFeedEntry.setPortletId(
 						activityInterpreter.getPortletId());
 
@@ -105,28 +96,6 @@ public class SocialActivityInterpreterLocalServiceImpl
 		}
 
 		return null;
-	}
-
-	boolean hasPermission(String className, long pkid) {
-		try {
-			if (className.equals(MBMessage.class.getName())) {
-				return MBMessagePermission.contains(getPermissionChecker(), pkid, ActionKeys.VIEW);
-			}
-		} catch (Exception e) {
-			return false;
-		}
-		return false;
-	}
-
-	private PermissionChecker getPermissionChecker() throws PrincipalException {
-		PermissionChecker permissionChecker =
-			PermissionThreadLocal.getPermissionChecker();
-
-		if (permissionChecker == null) {
-			throw new PrincipalException("PermissionChecker not initialized");
-		}
-
-		return permissionChecker;
 	}
 
 	private List<SocialActivityInterpreter> _activityInterpreters =
