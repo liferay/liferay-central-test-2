@@ -509,10 +509,9 @@ public class WindowInvoker extends InvokerPortletImpl {
 
 			Transformer transformer = transformerFactory.newTransformer();
 
+			transformer.setOutputProperty(OutputKeys.METHOD, "html");
 			transformer.setOutputProperty(
 				OutputKeys.OMIT_XML_DECLARATION, "yes");
-
-			transformer.setOutputProperty(OutputKeys.METHOD, "html");
 
 			StringWriter sw = new StringWriter();
 
@@ -786,10 +785,10 @@ public class WindowInvoker extends InvokerPortletImpl {
 		containerRequest.setAttribute(
 			PortletRequest.CCPP_PROFILE, _getCCPPProfile(request));
 
-		containerRequest.setAttribute(WebKeys.RENDER_PORTLET, _portletModel);
-
 		containerRequest.setAttribute(
 			WebKeys.PORTLET_ID, _portletModel.getPortletId());
+
+		containerRequest.setAttribute(WebKeys.RENDER_PORTLET, _portletModel);
 
 		containerRequest.setAttribute(
 			PortletRequestConstants.ESCAPE_XML_VALUE,
@@ -841,7 +840,7 @@ public class WindowInvoker extends InvokerPortletImpl {
 
 		HttpSession session = containerRequest.getHttpSession();
 
-		if(session != null) {
+		if (session != null) {
 			LiferayPortletSession portletSession =
 				(LiferayPortletSession)portletRequest.getPortletSession();
 
