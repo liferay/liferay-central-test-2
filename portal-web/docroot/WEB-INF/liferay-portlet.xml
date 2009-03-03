@@ -419,7 +419,7 @@
 	<portlet>
 		<portlet-name>46</portlet-name>
 		<icon>/html/icons/default.png</icon>
-		<struts-path>gospel_for_asia</struts-path>
+		<struts-path>iframe</struts-path>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
