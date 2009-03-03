@@ -27,7 +27,7 @@ import com.liferay.portal.PortalException;
 /**
  * <a href="CouponMinimumOrderException.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Huang Jie
  *
  */
 public class CouponMinimumOrderException extends PortalException {

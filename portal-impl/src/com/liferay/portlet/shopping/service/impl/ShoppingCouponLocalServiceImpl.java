@@ -57,6 +57,7 @@ import java.util.List;
  * </a>
  *
  * @author Brian Wing Shun Chan
+ * @author Huang Jie
  *
  */
 public class ShoppingCouponLocalServiceImpl
@@ -275,14 +276,6 @@ public class ShoppingCouponLocalServiceImpl
 			double discount)
 		throws PortalException, SystemException {
 
-		if (minOrder < 0) {
-			throw new CouponMinimumOrderException();
-		}
-
-		if (discount < 0) {
-			throw new CouponDiscountException();
-		}
-
 		if (Validator.isNull(name)) {
 			throw new CouponNameException();
 		}
@@ -342,6 +335,14 @@ public class ShoppingCouponLocalServiceImpl
 			clskue.setSkus(invalidSkus);
 
 			throw clskue;
+		}
+
+		if (minOrder < 0) {
+			throw new CouponMinimumOrderException();
+		}
+
+		if (discount < 0) {
+			throw new CouponDiscountException();
 		}
 	}
 
