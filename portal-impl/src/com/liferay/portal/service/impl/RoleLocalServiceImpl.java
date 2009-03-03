@@ -405,11 +405,13 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		User user = userLocalService.getUser(userId);
 
-		Role role = roleLocalService.getRole(
-			user.getCompanyId(), RoleConstants.USER);
+		if (!user.isDefaultUser()) {
+			Role role = roleLocalService.getRole(
+				user.getCompanyId(), RoleConstants.USER);
 
-		if (!ArrayUtil.contains(roleIds, role.getRoleId())) {
-			userPersistence.addRole(userId, role.getRoleId());
+			if (!ArrayUtil.contains(roleIds, role.getRoleId())) {
+				userPersistence.addRole(userId, role.getRoleId());
+			}
 		}
 
 		userLocalService.reIndex(userId);
