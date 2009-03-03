@@ -2003,7 +2003,6 @@ public class PortalImpl implements Portal {
 				}
 				catch (Exception e) {
 				}
-
 			}
 		}
 
