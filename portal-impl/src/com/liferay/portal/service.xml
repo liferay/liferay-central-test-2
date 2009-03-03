@@ -499,10 +499,6 @@
 		<reference package-path="com.liferay.portlet.messageboards" entity="MBMessage" />
 		<reference package-path="com.liferay.portlet.ratings" entity="RatingsStats" />
 		<reference package-path="com.liferay.portlet.tasks" entity="TasksProposal" />
-
-		<!-- Transactions -->
-
-		<tx-required>getFriendlyURLLayout</tx-required>
 	</entity>
 	<entity name="LayoutSet" local-service="true" remote-service="true">
 
@@ -1057,10 +1053,6 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
-
-		<!-- Transactions -->
-
-		<tx-required>getPreferences</tx-required>
 	</entity>
 	<entity name="Quartz" local-service="true" remote-service="false" />
 	<entity name="Region" local-service="false" remote-service="true">
@@ -1145,10 +1137,6 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
-
-		<!-- Transactions -->
-
-		<tx-required>getResource</tx-required>
 	</entity>
 	<entity name="ResourceCode" local-service="true" remote-service="false">
 
@@ -1182,10 +1170,6 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
-
-		<!-- Transactions -->
-
-		<tx-required>getResourceCode</tx-required>
 	</entity>
 	<entity name="Role" local-service="true" remote-service="true">
 

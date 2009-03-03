@@ -24,8 +24,6 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.annotation.Propagation;
-import com.liferay.portal.kernel.annotation.Transactional;
 import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.service.base.ResourceCodeLocalServiceBaseImpl;
 
@@ -42,14 +40,29 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ResourceCodeLocalServiceImpl
 	extends ResourceCodeLocalServiceBaseImpl {
 
-	@Transactional(propagation = Propagation.REQUIRES_NEW)
+	public ResourceCode addResourceCode(long companyId, String name, int scope)
+		throws SystemException {
+
+		long codeId = counterLocalService.increment(
+			ResourceCode.class.getName());
+
+		ResourceCode resourceCode = resourceCodePersistence.create(codeId);
+
+		resourceCode.setCompanyId(companyId);
+		resourceCode.setName(name);
+		resourceCode.setScope(scope);
+
+		resourceCodePersistence.update(resourceCode, false);
+
+		return resourceCode;
+	}
+
 	public ResourceCode getResourceCode(long codeId)
 		throws PortalException, SystemException {
 
 		return resourceCodePersistence.findByPrimaryKey(codeId);
 	}
 
-	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public ResourceCode getResourceCode(long companyId, String name, int scope)
 		throws SystemException {
 
@@ -65,16 +78,8 @@ public class ResourceCodeLocalServiceImpl
 				companyId, name, scope);
 
 			if (resourceCode == null) {
-				long codeId = counterLocalService.increment(
-					ResourceCode.class.getName());
-
-				resourceCode = resourceCodePersistence.create(codeId);
-
-				resourceCode.setCompanyId(companyId);
-				resourceCode.setName(name);
-				resourceCode.setScope(scope);
-
-				resourceCodePersistence.update(resourceCode, false);
+				resourceCode = resourceCodeLocalService.addResourceCode(
+					companyId, name, scope);
 			}
 
 			_resourceCodes.put(key, resourceCode);

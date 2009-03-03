@@ -1031,10 +1031,6 @@ public class PropsValues {
 		GetterUtil.getIntegerValues(
 			PropsUtil.getArray(PropsKeys.SEARCH_CONTAINER_PAGE_DELTA_VALUES));
 
-	public static final String[]
-		SERVICE_BUILDER_PERSISTENCE_READ_ONLY_PREFIXES = PropsUtil.getArray(
-			PropsKeys.SERVICE_BUILDER_PERSISTENCE_READ_ONLY_PREFIXES);
-
 	public static final String[] SERVICE_BUILDER_SERVICE_READ_ONLY_PREFIXES =
 		PropsUtil.getArray(
 			PropsKeys.SERVICE_BUILDER_SERVICE_READ_ONLY_PREFIXES);
@@ -1114,6 +1110,10 @@ public class PropsValues {
 
 	public static final String SITEMINDER_USER_HEADER = PropsUtil.get(
 		PropsKeys.SITEMINDER_USER_HEADER);
+
+	public static boolean SPRING_HIBERNATE_SESSION_DELEGATED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.SPRING_HIBERNATE_SESSION_DELEGATED));
 
 	public static final String STRUTS_PORTLET_REQUEST_PROCESSOR = PropsUtil.get(
 		PropsKeys.STRUTS_PORTLET_REQUEST_PROCESSOR);

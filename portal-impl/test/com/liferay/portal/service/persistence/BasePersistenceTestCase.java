@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.util.BaseTestCase;
+import com.liferay.portal.util.PropsValues;
 
 /**
  * <a href="BasePersistenceTestCase.java.html"><b><i>View Source</i></b></a>
@@ -31,4 +32,17 @@ import com.liferay.portal.util.BaseTestCase;
  *
  */
 public class BasePersistenceTestCase extends BaseTestCase {
+
+	protected void setUp() throws Exception {
+		super.setUp();
+
+		PropsValues.SPRING_HIBERNATE_SESSION_DELEGATED = false;
+	}
+
+	public void tearDown() throws Exception {
+		super.tearDown();
+
+		PropsValues.SPRING_HIBERNATE_SESSION_DELEGATED = true;
+	}
+
 }

@@ -42,6 +42,18 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class ClassNameLocalServiceImpl extends ClassNameLocalServiceBaseImpl {
 
+	public ClassName addClassName(String value) throws SystemException {
+		long classNameId = counterLocalService.increment();
+
+		ClassName className = classNamePersistence.create(classNameId);
+
+		className.setValue(value);
+
+		classNamePersistence.update(className, false);
+
+		return className;
+	}
+
 	public void checkClassNames() throws SystemException {
 		List<String> models = ModelHintsUtil.getModels();
 
@@ -66,25 +78,19 @@ public class ClassNameLocalServiceImpl extends ClassNameLocalServiceBaseImpl {
 		// Always cache the class name. This table exists to improve
 		// performance. Create the class name if one does not exist.
 
-		ClassName classNameModel = _classNames.get(value);
+		ClassName className = _classNames.get(value);
 
-		if (classNameModel == null) {
-			classNameModel = classNamePersistence.fetchByValue(value);
+		if (className == null) {
+			className = classNamePersistence.fetchByValue(value);
 
-			if (classNameModel == null) {
-				long classNameId = counterLocalService.increment();
-
-				classNameModel = classNamePersistence.create(classNameId);
-
-				classNameModel.setValue(value);
-
-				classNamePersistence.update(classNameModel, false);
+			if (className == null) {
+				className = classNameLocalService.addClassName(value);
 			}
 
-			_classNames.put(value, classNameModel);
+			_classNames.put(value, className);
 		}
 
-		return classNameModel;
+		return className;
 	}
 
 	private static ClassName _nullClassName = new ClassNameImpl();

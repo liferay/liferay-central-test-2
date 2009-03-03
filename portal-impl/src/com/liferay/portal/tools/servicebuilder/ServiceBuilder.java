@@ -1409,12 +1409,6 @@ public class ServiceBuilder {
 		}
 	}
 
-	public boolean isPersistenceReadOnlyMethod(JavaMethod method) {
-		return isReadOnlyMethod(
-			method, null,
-			PropsValues.SERVICE_BUILDER_PERSISTENCE_READ_ONLY_PREFIXES);
-	}
-
 	public boolean isServiceReadOnlyMethod(
 		JavaMethod method, List<String> txRequiredList) {
 

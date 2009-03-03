@@ -10,7 +10,7 @@
 >
 	<bean id="beanReferenceAnnotationBeanPostProcessor" class="com.liferay.portal.spring.annotation.BeanReferenceAnnotationBeanPostProcessor" />
 	<aop:config>
-		<aop:pointcut id="transactionOperation" expression="bean(*Service.impl) or bean(*Persistence.impl)" />
+		<aop:pointcut id="transactionOperation" expression="bean(*Service.impl)" />
 		<aop:advisor advice-ref="transactionAdvice" pointcut-ref="transactionOperation" />
 	</aop:config>
 	<bean id="transactionAdvice" class="org.springframework.transaction.interceptor.TransactionInterceptor">

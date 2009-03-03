@@ -8,7 +8,6 @@ import com.liferay.portal.service.persistence.BasePersistence;
 
 import java.util.Date;
 
-@Transactional(rollbackFor = {PortalException.class, SystemException.class})
 public interface ${entity.name}Persistence extends BasePersistence {
 
 	<#list methods as method>
@@ -33,10 +32,6 @@ public interface ${entity.name}Persistence extends BasePersistence {
 	 * @return		true if the portlet can be displayed via Ajax
 	 */
 				</#if>
-			</#if>
-
-			<#if serviceBuilder.isPersistenceReadOnlyMethod(method)>
-				@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 			</#if>
 
 			public ${method.returns.value}${method.returnsGenericsName}${serviceBuilder.getDimensions("${method.returns.dimensions}")} ${method.name} (

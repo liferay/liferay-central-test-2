@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.SessionFactory;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.util.PropsValues;
 
 import org.hibernate.engine.SessionFactoryImplementor;
 
@@ -40,6 +41,9 @@ import org.hibernate.engine.SessionFactoryImplementor;
 public class SessionFactoryImpl implements SessionFactory {
 
 	public void closeSession(Session session) throws ORMException {
+		if (!PropsValues.SPRING_HIBERNATE_SESSION_DELEGATED) {
+			session.close();
+		}
 	}
 
 	public Dialect getDialect() throws ORMException {
@@ -51,8 +55,14 @@ public class SessionFactoryImpl implements SessionFactory {
 	}
 
 	public Session openSession() throws ORMException {
-		org.hibernate.Session session =
-			_sessionFactoryImplementor.getCurrentSession();
+		org.hibernate.Session session = null;
+
+		if (PropsValues.SPRING_HIBERNATE_SESSION_DELEGATED) {
+			session = _sessionFactoryImplementor.getCurrentSession();
+		}
+		else {
+			session = _sessionFactoryImplementor.openSession();
+		}
 
 		if (_log.isDebugEnabled()) {
 			LiferayClassicSession classicSession =

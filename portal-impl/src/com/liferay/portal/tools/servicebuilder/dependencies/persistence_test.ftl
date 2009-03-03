@@ -6,6 +6,7 @@ import ${packagePath}.${noSuchEntity}Exception;
 import ${packagePath}.model.${entity.name};
 
 import ${beanLocatorUtil};
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
@@ -136,7 +137,11 @@ public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
 		${entity.name} existing${entity.name} = _persistence.findByPrimaryKey(new${entity.name}.getPrimaryKey());
 
 		<#list entity.regularColList as column>
-			assertEquals(existing${entity.name}.get${column.methodName}(), new${entity.name}.get${column.methodName}());
+			<#if column.type == "Date">
+				assertEquals(Time.getShortTimestamp(existing${entity.name}.get${column.methodName}()), Time.getShortTimestamp(new${entity.name}.get${column.methodName}()));
+			<#else>
+				assertEquals(existing${entity.name}.get${column.methodName}(), new${entity.name}.get${column.methodName}());
+			</#if>
 		</#list>
 	}
 

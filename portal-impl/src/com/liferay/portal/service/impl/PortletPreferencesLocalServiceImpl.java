@@ -47,6 +47,38 @@ import java.util.Map;
 public class PortletPreferencesLocalServiceImpl
 	extends PortletPreferencesLocalServiceBaseImpl {
 
+	public PortletPreferences addPortletPreferences(
+			long companyId, long ownerId, int ownerType, long plid,
+			String portletId, Portlet portlet, String defaultPreferences)
+		throws SystemException {
+
+		long portletPreferencesId = counterLocalService.increment();
+
+		PortletPreferences portletPreferences =
+			portletPreferencesPersistence.create(portletPreferencesId);
+
+		portletPreferences.setOwnerId(ownerId);
+		portletPreferences.setOwnerType(ownerType);
+		portletPreferences.setPlid(plid);
+		portletPreferences.setPortletId(portletId);
+
+		if (Validator.isNull(defaultPreferences)) {
+			if (portlet == null) {
+				defaultPreferences =
+					PortletConstants.DEFAULT_PREFERENCES;
+			}
+			else {
+				defaultPreferences = portlet.getDefaultPreferences();
+			}
+		}
+
+		portletPreferences.setPreferences(defaultPreferences);
+
+		portletPreferencesPersistence.update(portletPreferences, false);
+
+		return portletPreferences;
+	}
+
 	public void deletePortletPreferences(long portletPreferencesId)
 		throws PortalException, SystemException {
 
@@ -169,29 +201,10 @@ public class PortletPreferencesLocalServiceImpl
 					ownerId, ownerType, plid, portletId);
 
 			if (portletPreferences == null) {
-				long portletPreferencesId = counterLocalService.increment();
-
-				portletPreferences = portletPreferencesPersistence.create(
-					portletPreferencesId);
-
-				portletPreferences.setOwnerId(ownerId);
-				portletPreferences.setOwnerType(ownerType);
-				portletPreferences.setPlid(plid);
-				portletPreferences.setPortletId(portletId);
-
-				if (Validator.isNull(defaultPreferences)) {
-					if (portlet == null) {
-						defaultPreferences =
-							PortletConstants.DEFAULT_PREFERENCES;
-					}
-					else {
-						defaultPreferences = portlet.getDefaultPreferences();
-					}
-				}
-
-				portletPreferences.setPreferences(defaultPreferences);
-
-				portletPreferencesPersistence.update(portletPreferences, false);
+				portletPreferences =
+					portletPreferencesLocalService.addPortletPreferences(
+						companyId, ownerId, ownerType, plid, portletId, portlet,
+						defaultPreferences);
 			}
 
 			preferences = PortletPreferencesSerializer.fromXML(
