@@ -93,7 +93,9 @@ public class AddLocalizedTemplateTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//input[@value=\"Save\"]"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent("link=LOCALIZED"));
-		assertTrue(selenium.isTextPresent(""));
+		assertTrue(selenium.isTextPresent("Test Localized Template"));
 	}
 }

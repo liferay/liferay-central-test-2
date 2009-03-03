@@ -108,17 +108,13 @@ public class CancelPopupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent(
-				"//div[@class=\"ui-dialog-container\"]"));
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//input[@value='Cancel' and @type='button' and @onclick='Liferay.Popup.close(this);']")) {
+				if (selenium.isElementPresent("//input[@value='Cancel']")) {
 					break;
 				}
 			}
@@ -128,8 +124,7 @@ public class CancelPopupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"//input[@value='Cancel' and @type='button' and @onclick='Liferay.Popup.close(this);']");
+		selenium.click("//input[@value='Cancel']");
 		Thread.sleep(5000);
 		assertFalse(selenium.isElementPresent("_15_xsdContent"));
 	}

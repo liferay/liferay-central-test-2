@@ -57,7 +57,7 @@ public class WebContentTests extends BaseTests {
 		testSuite.addTestSuite(CancelPopupTest.class);
 		testSuite.addTestSuite(DeleteAllTest.class);
 		testSuite.addTestSuite(ImportLARTest.class);
-		testSuite.addTestSuite(VerifyImportLARTest.class);
+		testSuite.addTestSuite(AssertImportLARTest.class);
 		testSuite.addTestSuite(AddAssociatedTemplateTest.class);
 		testSuite.addTestSuite(AssertStructureTemplateAssociationTest.class);
 		testSuite.addTestSuite(AddLocalizedStructureTest.class);
