@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.PortletConstants;
@@ -39,6 +40,7 @@ import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.security.permission.comparator.PermissionActionIdComparator;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
@@ -111,7 +113,8 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		Group group = null;
 
 		// If the current group is staging, the live group should be checked for
-		// permissions instead
+		// permissions instead. If group is a scope group for a layout, the
+		// original group should be checked.
 
 		try {
 			if (groupId > 0) {
@@ -124,6 +127,12 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 					groupId = group.getLiveGroupId();
 					group = group.getLiveGroup();
+				}
+				else if (group.isLayout()) {
+					Layout layout =
+						LayoutLocalServiceUtil.getLayout(group.getClassPK());
+
+					groupId = layout.getGroupId();
 				}
 			}
 		}
