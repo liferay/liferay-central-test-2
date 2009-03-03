@@ -54,7 +54,6 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 		<script type="text/javascript">
 			function <portlet:namespace />saveRole() {
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= role == null ? Constants.ADD : Constants.UPDATE %>";
-
 				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role" /></portlet:actionURL>");
 			}
 		</script>
@@ -88,28 +87,29 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 					<label><liferay-ui:message key="title" /></label>
 
 					<input id="<portlet:namespace />title_<%= defaultLanguageId %>" name="<portlet:namespace />title_<%= defaultLanguageId %>" size="30" type="text" value="<%= role.getTitle(defaultLocale) %>" />
+
 					<img class="default-language" src="<%= themeDisplay.getPathThemeImages() %>/language/<%= defaultLanguageId %>.png" />
 
 					<%
-						List<String> langArr = new ArrayList<String>();
+					List<String> languageIds = new ArrayList<String>();
 
-						for (int i = 0; i < locales.length; i++) {
-							if (locales[i].equals(defaultLocale)) {
-								continue;
-							}
-
-							if (Validator.isNotNull(role.getTitle(locales[i], false))) {
-								langArr.add(LanguageUtil.getLanguageId(locales[i]));
-							}
-						}
-						if (langArr.isEmpty()) {
-							langArr.add("");
+					for (int i = 0; i < locales.length; i++) {
+						if (locales[i].equals(defaultLocale)) {
+							continue;
 						}
 
+						if (Validator.isNotNull(role.getTitle(locales[i], false))) {
+							languageIds.add(LanguageUtil.getLanguageId(locales[i]));
+						}
+					}
+
+					if (languageIds.isEmpty()) {
+						languageIds.add(StringPool.BLANK);
+					}
 					%>
 
 					<a class="lfr-floating-trigger" href="javascript: ;" id="<portlet:namespace />languageSelectorTrigger">
-						<liferay-ui:message key="other-languages" /> (<%= langArr.size() %>)
+						<liferay-ui:message key="other-languages" /> (<%= languageIds.size() %>)
 					</a>
 
 					<div class="lfr-floating-container" id="<portlet:namespace />languageSelector">
@@ -121,14 +121,15 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 							<div class="lfr-panel-content">
 
 								<%
-								for (int i = 0; i < langArr.size(); i++) {
-
-									String languageId = langArr.get(i);
+								for (int i = 0; i < languageIds.size(); i++) {
+									String languageId = languageIds.get(i);
 								%>
+
 									<div class="lfr-form-row">
 										<div class="row-fields">
 											<div class="ctrl-holder col">
-												<img class="language-flag" src="<%= themeDisplay.getPathThemeImages() %>/language/<%= languageId %>.png" />
+												<img class="language-flag" src="<%= themeDisplay.getPathThemeImages() %>/language/<%= Validator.isNotNull(languageId) ? languageId : "../spacer" %>.png" />
+
 												<select id="<portlet:namespace />languageId<%= i %>">
 													<option value="" />
 
@@ -141,7 +142,6 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 														String optionStyle = StringPool.BLANK;
 
 														if (Validator.isNotNull(role.getTitle(locales[j], false))) {
-
 															optionStyle = "style=\"font-weight: bold\"";
 														}
 													%>
@@ -158,85 +158,19 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 											<div class="ctrl-holder col">
 												<label><liferay-ui:message key="title" /></label>
 
-												<input class="language-value" id="<portlet:namespace />title_" name="<portlet:namespace />title_<%= languageId %>" type="text" value="<%= role.getTitle(languageId, false) %>" />
+												<input class="language-value" name="<portlet:namespace />title_" type="text" value="<%= role.getTitle(languageId, false) %>" />
 											</div>
 										</div>
 									</div>
+
 								<%
 								}
 								%>
+
 							</div>
 						</div>
 					</div>
 
-				</div>
-			</c:if>
-
-			<c:if test="<%= false %>">
-				<div class="ctrl-holder">
-					<label><liferay-ui:message key="title" /></label>
-
-					<table class="lfr-table">
-					<tr>
-						<td>
-							<liferay-ui:message key="default-language" />: <%= defaultLocale.getDisplayName(defaultLocale) %>
-						</td>
-						<td>
-							<liferay-ui:message key="localized-language" />:
-
-							<select id="<portlet:namespace />languageId" onChange="<portlet:namespace />updateLanguage();">
-								<option value="" />
-
-								<%
-								for (int i = 0; i < locales.length; i++) {
-									if (locales[i].equals(defaultLocale)) {
-										continue;
-									}
-
-									String optionStyle = StringPool.BLANK;
-
-									if (Validator.isNotNull(role.getTitle(locales[i], false))) {
-										optionStyle = "style=\"font-weight: bold;\"";
-									}
-								%>
-
-									<option <%= (currentLanguageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> <%= optionStyle %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locale) %></option>
-
-								<%
-								}
-								%>
-
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<input id="<portlet:namespace />title_<%= defaultLanguageId %>" name="<portlet:namespace />title_<%= defaultLanguageId %>" size="30" type="text" value="<%= role.getTitle(defaultLocale) %>" />
-						</td>
-						<td>
-
-							<%
-							for (int i = 0; i < locales.length; i++) {
-								if (locales[i].equals(defaultLocale)) {
-									continue;
-								}
-							%>
-
-								<input id="<portlet:namespace />title_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="<portlet:namespace />title_<%= LocaleUtil.toLanguageId(locales[i]) %>" type="hidden" value="<%= role.getTitle(locales[i], false) %>" />
-
-							<%
-							}
-							%>
-
-							<input id="<portlet:namespace />title_temp" size="30" type="text" <%= currentLocale.equals(defaultLocale) ? "style='display: none'" : "" %> onChange="<portlet:namespace />onTitleChanged();" />
-						</td>
-					</tr>
-					<tr>
-						<td colspan="3">
-							<br />
-						</td>
-					</tr>
-					</table>
 				</div>
 			</c:if>
 
@@ -345,41 +279,41 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 				}
 			);
 
-			jQuery('#<portlet:namespace />languageSelector select').change(
-				function(event) {
-					var selectedOption = this[this.selectedIndex];
-					var selectedValue = selectedOption.value;
-
-					var imagePath = '<%= themeDisplay.getPathThemeImages() %>/';
-					var newName = '<portlet:namespace />title_';
-
-					var currentRow = jQuery(this).parents('.lfr-form-row:first');
-
-					var inputField = currentRow.find('.language-value');
-
-					var img = currentRow.find('img.language-flag');
-					var imgSrc = 'spacer';
-
-					if (selectedValue) {
-						imgSrc = 'language/' + selectedValue;
-
-						newName ='<portlet:namespace />title_' + selectedValue;
-					}
-
-					inputField.attr('name', newName);
-					inputField.attr('id', newName);
-
-					img.attr('src', imagePath + imgSrc + '.png');
-				}
-			);
-
-			panel.bind('hide',
+			panel.bind(
+				'hide',
 				function(event) {
 					var instance = this;
 
 					var container = instance.get('container');
 
 					jQuery(document.<portlet:namespace />fm).append(container);
+				}
+			);
+
+			jQuery('#<portlet:namespace />languageSelector select').change(
+				function(event) {
+					var selectedOption = this[this.selectedIndex];
+					var selectedValue = selectedOption.value;
+
+					var newName = '<portlet:namespace />title_';
+
+					var currentRow = jQuery(this).parents('.lfr-form-row:first');
+
+					var img = currentRow.find('img.language-flag');
+					var imgSrc = 'spacer';
+
+					if (selectedValue) {
+						newName ='<portlet:namespace />title_' + selectedValue;
+
+						imgSrc = 'language/' + selectedValue;
+					}
+
+					var inputField = currentRow.find('.language-value');
+
+					inputField.attr('name', newName);
+					inputField.attr('id', newName);
+
+					img.attr('src', '<%= themeDisplay.getPathThemeImages() %>/' + imgSrc + '.png');
 				}
 			);
 		}
