@@ -28,8 +28,6 @@
 User selUser = (User)request.getAttribute("user.selUser");
 Contact selContact = (Contact)request.getAttribute("user.selContact");
 
-boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
-
 int prefixId = BeanParamUtil.getInteger(selContact, request, "prefixId");
 int suffixId = BeanParamUtil.getInteger(selContact, request, "suffixId");
 boolean male = BeanParamUtil.getBoolean(selContact, request, "male", true);
@@ -43,6 +41,8 @@ birthday.set(Calendar.YEAR, 1970);
 if (selContact != null) {
 	birthday.setTime(selContact.getBirthday());
 }
+
+boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 %>
 
 <script type="text/javascript">
@@ -68,7 +68,8 @@ if (selContact != null) {
 
 	jQuery(
 		function() {
-			jQuery('span.modify-link').bind('click',
+			jQuery('span.modify-link').bind(
+				'click',
 				function() {
 					jQuery(this).trigger('change');
 				}

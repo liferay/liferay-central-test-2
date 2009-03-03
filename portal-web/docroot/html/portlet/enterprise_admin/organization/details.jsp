@@ -31,8 +31,6 @@ long parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationSearch
 
 String parentOrganizationName = ParamUtil.getString(request, "parentOrganizationName");
 
-boolean deleteLogo = ParamUtil.getBoolean(request, "deleteLogo");
-
 if (parentOrganizationId <= 0) {
 	parentOrganizationId = OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID;
 
@@ -45,6 +43,8 @@ String type = BeanParamUtil.getString(organization, request, "type", PropsValues
 long regionId = BeanParamUtil.getLong(organization, request, "regionId");
 long countryId = BeanParamUtil.getLong(organization, request, "countryId");
 int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
+
+boolean deleteLogo = ParamUtil.getBoolean(request, "deleteLogo");
 
 long groupId = 0;
 
@@ -115,7 +115,8 @@ if (organization != null) {
 
 	jQuery(
 		function() {
-			jQuery('span.modify-link').bind('click',
+			jQuery('span.modify-link').bind(
+				'click',
 				function() {
 					jQuery(this).trigger('change');
 				}

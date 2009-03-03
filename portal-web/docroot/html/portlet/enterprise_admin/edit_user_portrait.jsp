@@ -59,6 +59,7 @@ User selUser = PortalUtil.getSelectedUser(request);
 
 			<input type="button" value="<liferay-ui:message key="close" />" onClick="window.close();" />
 		</div>
+
 		</form>
 
 		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">

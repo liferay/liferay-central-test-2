@@ -51,6 +51,7 @@
 
 			<input type="button" value="<liferay-ui:message key="cancel" />" onClick="window.close();" />
 		</div>
+
 		</form>
 
 		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
