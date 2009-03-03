@@ -126,13 +126,13 @@ public class JournalStructureLocalServiceImpl
 			throw new StructureXsdException();
 		}
 
-		validate(
-			groupId, structureId, autoStructureId, parentStructureId, name,
-			description, xsd);
-
 		if (autoStructureId) {
 			structureId = String.valueOf(counterLocalService.increment());
 		}
+
+		validate(
+			groupId, structureId, autoStructureId, parentStructureId, name,
+			description, xsd);
 
 		long id = counterLocalService.increment();
 
