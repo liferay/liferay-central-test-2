@@ -465,6 +465,10 @@ public class PropsValues {
 	public static final String HIBERNATE_DIALECT =
 		PropsUtil.get(PropsKeys.HIBERNATE_DIALECT);
 
+	public static final boolean HIBERNATE_GENERATE_STATISTICS =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.HIBERNATE_GENERATE_STATISTICS));
+
 	public static final int HIBERNATE_JDBC_BATCH_SIZE = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.HIBERNATE_JDBC_BATCH_SIZE));
 

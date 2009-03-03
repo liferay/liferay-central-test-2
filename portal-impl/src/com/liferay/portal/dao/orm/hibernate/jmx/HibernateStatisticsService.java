@@ -23,6 +23,7 @@
 package com.liferay.portal.dao.orm.hibernate.jmx;
 
 import com.liferay.portal.dao.orm.hibernate.SessionFactoryImpl;
+import com.liferay.portal.util.PropsValues;
 
 import org.hibernate.jmx.StatisticsService;
 
@@ -33,6 +34,10 @@ import org.hibernate.jmx.StatisticsService;
  *
  */
 public class HibernateStatisticsService extends StatisticsService {
+
+	public HibernateStatisticsService() {
+		setStatisticsEnabled(PropsValues.HIBERNATE_GENERATE_STATISTICS);
+	}
 
 	public void setSessionFactory(SessionFactoryImpl sessionFactoryImpl) {
 		super.setSessionFactory(

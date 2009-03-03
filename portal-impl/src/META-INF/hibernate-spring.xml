@@ -18,7 +18,6 @@
 	</bean>
 	<bean id="hibernateStatisticsService" class="com.liferay.portal.dao.orm.hibernate.jmx.HibernateStatisticsService">
 		<property name="sessionFactory" ref="liferaySessionFactory" />
-		<property name="statisticsEnabled" value="true" />
 	</bean>
 	<bean id="hibernateMBeanExporter" class="org.springframework.jmx.export.MBeanExporter">
 		<property name="server" ref="mbeanServer" />
