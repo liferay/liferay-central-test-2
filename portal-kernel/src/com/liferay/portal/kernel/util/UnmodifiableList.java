@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.util;
 
+import java.io.Serializable;
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -40,7 +42,7 @@ import java.util.ListIterator;
  * @author Alexander Chow
  *
  */
-public class UnmodifiableList<E> implements List<E> {
+public class UnmodifiableList<E> implements List<E>, Serializable {
 
 	public UnmodifiableList(List<? extends E> list) {
 		if (list == null) {
