@@ -112,9 +112,9 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 		Group group = null;
 
-		// If the current group is staging, the live group should be checked for
-		// permissions instead. If group is a scope group for a layout, the
-		// original group should be checked.
+		// If the current group is a staging group, check the live group. If the
+		// current group is a scope group for a layout, check the original
+		// group.
 
 		try {
 			if (groupId > 0) {
@@ -129,8 +129,8 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 					group = group.getLiveGroup();
 				}
 				else if (group.isLayout()) {
-					Layout layout =
-						LayoutLocalServiceUtil.getLayout(group.getClassPK());
+					Layout layout = LayoutLocalServiceUtil.getLayout(
+						group.getClassPK());
 
 					groupId = layout.getGroupId();
 				}
