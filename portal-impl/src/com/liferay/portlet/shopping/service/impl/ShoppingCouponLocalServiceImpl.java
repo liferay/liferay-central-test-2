@@ -33,9 +33,11 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.shopping.CouponCodeException;
 import com.liferay.portlet.shopping.CouponDateException;
 import com.liferay.portlet.shopping.CouponDescriptionException;
+import com.liferay.portlet.shopping.CouponDiscountException;
 import com.liferay.portlet.shopping.CouponEndDateException;
 import com.liferay.portlet.shopping.CouponLimitCategoriesException;
 import com.liferay.portlet.shopping.CouponLimitSKUsException;
+import com.liferay.portlet.shopping.CouponMinimumOrderException;
 import com.liferay.portlet.shopping.CouponNameException;
 import com.liferay.portlet.shopping.CouponStartDateException;
 import com.liferay.portlet.shopping.DuplicateCouponCodeException;
@@ -103,7 +105,7 @@ public class ShoppingCouponLocalServiceImpl
 
 		validate(
 			user.getCompanyId(), groupId, code, autoCode, name, description,
-			limitCategories, limitSkus);
+			limitCategories, limitSkus, minOrder, discount);
 
 		long couponId = counterLocalService.increment();
 
@@ -210,7 +212,7 @@ public class ShoppingCouponLocalServiceImpl
 
 		validate(
 			coupon.getCompanyId(), coupon.getGroupId(), name, description,
-			limitCategories, limitSkus);
+			limitCategories, limitSkus, minOrder, discount);
 
 		coupon.setModifiedDate(new Date());
 		coupon.setName(name);
@@ -246,7 +248,7 @@ public class ShoppingCouponLocalServiceImpl
 	protected void validate(
 			long companyId, long groupId, String code, boolean autoCode,
 			String name, String description, String limitCategories,
-			String limitSkus)
+			String limitSkus, double minOrder, double discount)
 		throws PortalException, SystemException {
 
 		if (!autoCode) {
@@ -263,13 +265,23 @@ public class ShoppingCouponLocalServiceImpl
 		}
 
 		validate(
-			companyId, groupId, name, description, limitCategories, limitSkus);
+			companyId, groupId, name, description, limitCategories, limitSkus,
+			minOrder, discount);
 	}
 
 	protected void validate(
 			long companyId, long groupId, String name, String description,
-			String limitCategories, String limitSkus)
+			String limitCategories, String limitSkus, double minOrder,
+			double discount)
 		throws PortalException, SystemException {
+
+		if (minOrder < 0) {
+			throw new CouponMinimumOrderException();
+		}
+
+		if (discount < 0) {
+			throw new CouponDiscountException();
+		}
 
 		if (Validator.isNull(name)) {
 			throw new CouponNameException();

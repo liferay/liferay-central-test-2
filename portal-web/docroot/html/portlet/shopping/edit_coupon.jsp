@@ -91,7 +91,9 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 <liferay-ui:error exception="<%= CouponCodeException.class %>" message="please-enter-a-valid-code" />
 <liferay-ui:error exception="<%= CouponDateException.class %>" message="please-enter-a-start-date-that-comes-before-the-expiration-date" />
 <liferay-ui:error exception="<%= CouponDescriptionException.class %>" message="please-enter-a-valid-description" />
+<liferay-ui:error exception="<%= CouponDiscountException.class %>" message="please-enter-a-valid-number" />
 <liferay-ui:error exception="<%= CouponEndDateException.class %>" message="please-enter-a-valid-expiration-date" />
+<liferay-ui:error exception="<%= CouponMinimumOrderException.class %>" message="please-enter-a-valid-number" />
 <liferay-ui:error exception="<%= CouponNameException.class %>" message="please-enter-a-valid-name" />
 <liferay-ui:error exception="<%= CouponStartDateException.class %>" message="please-enter-a-valid-start-date" />
 <liferay-ui:error exception="<%= DuplicateCouponCodeException.class %>" message="please-enter-a-unique-code" />
