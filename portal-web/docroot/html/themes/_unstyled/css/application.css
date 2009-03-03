@@ -490,7 +490,6 @@ img.exp-datepicker-button {
 
 /* ---------- Color picker ---------- */
 
-
 .exp-picker-panel .exp-panel {
 }
 
@@ -512,7 +511,7 @@ img.exp-datepicker-button {
 .yui-picker-controls {
 }
 
-.yui-picker-controls ul, .yui-picker-controls li  {
+.yui-picker-controls ul, .yui-picker-controls li {
 }
 
 .yui-picker-controls .hd {

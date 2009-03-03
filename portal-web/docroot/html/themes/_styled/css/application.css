@@ -263,8 +263,8 @@
 }
 
 .exp-resizable-knob .exp-resizable-handle-b {
-	left: 45%;
 	bottom: -3px;
+	left: 45%;
 }
 
 .exp-resizable-knob .exp-resizable-handle-l {
@@ -283,13 +283,13 @@
 }
 
 .exp-resizable-knob .exp-resizable-handle-bl {
-	left: -3px;
 	bottom: -3px;
+	left: -3px;
 }
 
 .exp-resizable-knob .exp-resizable-handle-br {
-	right: -3px;
 	bottom: -3px;
+	right: -3px;
 }
 
 .exp-resizable-status {
@@ -507,19 +507,19 @@
 }
 
 .ie6 body.masked select {
-	visibility:hidden;
+	visibility: hidden;
 }
 
 .ie6 div.exp-panel-container select {
-	visibility:inherit;
+	visibility: inherit;
 }
 
 .ie6 div.drag select {
-	visibility:hidden;
+	visibility: hidden;
 }
 
 .ie6 div.hide-select select {
-	visibility:hidden;
+	visibility: hidden;
 }
 
 .exp-mask {
@@ -719,7 +719,7 @@ img.exp-datepicker-button {
 }
 
 .exp-calendar td.exp-calendar-previous {
-	color: #e0e0e0;
+	color: #E0E0E0;
 }
 
 .exp-calendar td.exp-calendar-highlight1 {
@@ -784,7 +784,7 @@ img.exp-datepicker-button {
 
 .exp-calendar .exp-calendar-rowhead, .exp-calendar .exp-calendar-rowfoot {
 	border-width: 0;
-	color: #a6a6a6;
+	color: #A6A6A6;
 	font-size: 8px;
 	font-style: normal;
 	font-weight: normal;
@@ -839,7 +839,7 @@ img.exp-datepicker-button {
 }
 
 .exp-calendar-container .exp-calendar-navigator {
-	background-color: #f2f2f2;
+	background-color: #F2F2F2;
 	border: 1px solid #808080;
 	display: none;
 	font-size: 9px;
@@ -892,7 +892,6 @@ img.exp-datepicker-button {
 
 /* ---------- Color picker ---------- */
 
-
 .exp-picker-panel .exp-panel {
 	background: url(../images/color_picker/picker_container_bg.png) no-repeat;
 	border-width: 0;
@@ -923,11 +922,11 @@ img.exp-datepicker-button {
 }
 
 .yui-picker-bg {
-	background-color: #f00;
 	background: #f00 url(../images/color_picker/picker_bg.png);
+	background-color: #f00;
 	height: 184px;
-	outline: 0 none;
 	left: 5px;
+	outline: 0 none;
 	position: absolute;
 	top: 5px;
 	width: 184px;
@@ -939,7 +938,7 @@ img.exp-datepicker-button {
 	top: 95px;
 }
 
-.yui-picker-controls ul, .yui-picker-controls li  {
+.yui-picker-controls ul, .yui-picker-controls li {
 	margin: 0;
 	padding: 0;
 }
