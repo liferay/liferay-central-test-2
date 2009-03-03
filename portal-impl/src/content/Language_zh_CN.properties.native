@@ -1773,6 +1773,7 @@ incoming-port=传入端口
 incoming=传入
 increment-version-on-save=保存时递增版本
 increment-version=递增版本
+indefinite=不确定
 indent=缩进
 indexed=已索引
 indexes=索引

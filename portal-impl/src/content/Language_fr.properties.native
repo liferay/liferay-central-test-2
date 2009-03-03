@@ -1773,6 +1773,7 @@ incoming-port=Port entrant
 incoming=Entrant
 increment-version-on-save=Incrémenter la version lors de la sauvegarde
 increment-version=Incrémenter la version
+indefinite=Indéfini
 indent=Creux
 indexed=Classé
 indexes=Index

@@ -1773,6 +1773,7 @@ incoming-port=들어오는 항구
 incoming=들어오는
 increment-version-on-save=증분 버전을 제외하고에
 increment-version=증분 버전
+indefinite=불명확한
 indent=톱니 모양의 자국
 indexed=색인을 붙이는
 indexes=색인

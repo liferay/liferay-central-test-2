@@ -1773,6 +1773,7 @@ incoming-port=受信ポート
 incoming=受信
 increment-version-on-save=保存時にバージョンをインクリメントする
 increment-version=バージョンのインクリメント
+indefinite=不明確
 indent=インデント
 indexed=インデックス付き
 indexes=インデックス

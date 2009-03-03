@@ -1773,6 +1773,7 @@ incoming-port=Ankommender Hafen
 incoming=Ankommend
 increment-version-on-save=Versionsnummer beim Speichern erhöhen
 increment-version=Versionsnummer erhöhen
+indefinite=Unbestimmt
 indent=Einrücken
 indexed=Indexiert
 indexes=Indizes
