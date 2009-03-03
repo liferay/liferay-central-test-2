@@ -3008,6 +3008,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				}
 			}
 		}
+		else if (Validator.isNotNull(key) && Validator.isNotNull(value)) {
+			if (andSearch) {
+				searchQuery.addRequiredTerm(key, String.valueOf(value));
+			}
+			else {
+				searchQuery.addTerm(key, String.valueOf(value));
+			}
+		}
 	}
 
 	protected void sendEmail(User user, String password)
