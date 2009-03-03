@@ -31,7 +31,9 @@ Liferay.PortletCSS = {
 						height: 'auto',
 						onClose: function() {
 							instance._newPanel.removeClass('instantiated');
-							instance._newPanel.hide().appendTo('body');
+							instance._newPanel.appendTo('body');
+							instance._newPanel.hide();
+
 							instance._currentPopup = null;
 
 							if (Liferay.Browser.isIe() && Liferay.Browser.getMajorVersion() == 6) {
@@ -616,7 +618,7 @@ Liferay.PortletCSS = {
 		var newPanel = instance._newPanel;
 		var newPanelTabs = newPanel.find('> ul.ui-tabs');
 
-		var tabTrigger = 1;
+		var tabTrigger = 0;
 
 		if (!instantiated) {
 			newPanel.addClass('instantiated');
@@ -722,7 +724,10 @@ Liferay.PortletCSS = {
 		}
 
 		newPanel.show();
-		newPanel.tabs();
+
+		var tabs = new Expanse.TabView(newPanel[0]);
+
+		tabs.selectTab(tabTrigger);
 
 		newPanel.find('.lfr-colorpicker-img').remove();
 
@@ -894,8 +899,6 @@ Liferay.PortletCSS = {
 		instance._borderStyles();
 		instance._spacingStyles();
 		instance._cssStyles();
-
-		newPanelTabs.tabs('select', tabTrigger);
 
 		var useForAll = newPanel.find('.lfr-use-for-all');
 

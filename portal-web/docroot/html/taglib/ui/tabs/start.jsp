@@ -101,7 +101,7 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 		<c:otherwise>
 			<input name="<%= namespace %><%= param %>TabsScroll" type="hidden" />
 
-			<ul class="tabs ui-tabs">
+			<ul class="exp-tabs ui-tabs">
 		</c:otherwise>
 	</c:choose>
 
@@ -154,7 +154,7 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 		String cssClassName = StringPool.BLANK;
 
 		if (selected) {
-			cssClassName = "current";
+			cssClassName = "current exp-selected";
 		}
 
 		if (i == 0) {

@@ -211,64 +211,64 @@
 
 /* ---------- Tabs ---------- */
 
-.ui-tabs {
+.exp-tabs {
 }
 
-.ui-tabs:after {
+.exp-tabs:after {
 }
 
-.ie .ui-tabs {
+.ie .exp-tabs {
 }
 
-.ie6 .ui-tabs {
+.ie6 .exp-tabs {
 }
 
-.ui-tabs li {
+.exp-tabs li {
 }
 
-.ui-tabs li.last {
+.exp-tabs li.last {
 }
 
-.ui-tabs li a, .tabs li span {
+.exp-tabs li a, .exp-tabs li span {
 }
 
-.ie6 .ui-tabs li a, .ie6 .tabs li span {
+.ie6 .exp-tabs li a, .ie6 .exp-tabs li span {
 }
 
-.ui-tabs li a:hover {
+.exp-tabs li a:hover {
 }
 
-.ui-tabs li a:hover, .ui-tabs li span:hover {
+.exp-tabs li a:hover, .exp-tabs li span:hover {
 }
 
-.ui-tabs li.current {
+.exp-tabs li.exp-selected {
 }
 
-.ui-tabs li.current a, .ui-tabs li.current span {
+.exp-tabs li.exp-selected a, .exp-tabs li.exp-selected span {
 }
 
-.ie6 .ui-tabs li.current a, .ie6 .ui-tabs li.current span {
+.ie6 .exp-tabs li.exp-selected a, .ie6 .exp-tabs li.exp-selected span {
 }
 
-.ui-tabs li.current:hover, .ui-tabs li.current a:hover {
+.exp-tabs li.exp-selected:hover, .exp-tabs li.exp-selected a:hover {
 }
 
-.ui-tabs .ui-tabs-disabled a {
+.exp-tabs .exp-disabled a {
 }
 
-.ui-tabs-disabled {
+.exp-tabs .exp-disabled {
 }
 
-.ie .ui-tabs-disabled {
+.ie .exp-tabs .exp-disabled {
 }
 
-.ui-tabs .ui-tabs-disabled a:link, .ui-tabs .ui-tabs-disabled a:visited {
+.exp-tabs .exp-disabled a:link, .exp-tabs .exp-disabled a:visited {
 }
 
-.ui-tabs-hide {
+.exp-hidden {
 }
 
-.ui-tabs .last.toggle {
+.exp-tabs .last.toggle {
 }
 
 /* ---------- Container ---------- */
@@ -359,8 +359,6 @@
 .exp-calendar-container .exp-calendar-close {
 }
 
-/* Calendar element styles */
-
 img.exp-datepicker-button {
 }
 
@@ -395,9 +393,6 @@ img.exp-datepicker-button {
 }
 
 .exp-calendar td.exp-calendar-cell-hover a {
-}
-
-.exp-calendar td.exp-calendar-previous {
 }
 
 .exp-calendar td.exp-calendar-restricted {
@@ -494,6 +489,7 @@ img.exp-datepicker-button {
 }
 
 /* ---------- Color picker ---------- */
+
 
 .exp-picker-panel .exp-panel {
 }

@@ -149,3 +149,50 @@ Liferay.ColorPicker = Expanse.ColorPickerPanel.extend({
 		instance._super(options);
 	}
 });
+
+// LPS-2296
+
+Expanse.Tab.prototype.DISABLED_CLASSNAME += ' ui-tabs-disabled';
+
+Expanse.TabView = Expanse.TabView.extend(
+	{
+		initialize: function() {
+			var instance = this;
+
+			instance._super.apply(instance, arguments);
+
+			instance.subscribe('activeTabChange', instance._activeClassChange);
+		},
+
+		_activeClassChange: function(event) {
+			var instance = this;
+
+			var previousTab = event.prevValue;
+			var currentTab = event.newValue;
+
+			if (previousTab) {
+				previousTab.removeClass('current');
+			}
+
+			currentTab.addClass('current');
+		}
+	}
+);
+
+(function() {
+	var tabShow = Liferay.Portal.Tabs.show;
+
+	Liferay.Portal.Tabs = {
+		show: function(namespace, names, id) {
+			var instance = this;
+
+			tabShow.apply(instance, arguments);
+
+			var tab = jQuery('#' + namespace + id + 'TabsId');
+			var panel = jQuery('#' + namespace + id + 'TabsSection');
+
+			tab.siblings().removeClass('current');
+			tab.addClass('current');
+		}
+	};
+})();

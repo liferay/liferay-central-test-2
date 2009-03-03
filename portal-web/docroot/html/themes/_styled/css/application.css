@@ -346,13 +346,13 @@
 
 /* ---------- Tabs ---------- */
 
-.ui-tabs {
+.exp-tabs {
 	border-bottom: 1px solid #DEDEDE;
 	margin: 0 0 18px 0;
 	padding: 0 0 0 10px;
 }
 
-.ui-tabs:after {
+.exp-tabs:after {
 	clear: both;
 	content: ".";
 	display: block;
@@ -360,15 +360,15 @@
 	visibility: hidden;
 }
 
-.ie .ui-tabs {
+.ie .exp-tabs {
 	overflow: hidden;
 }
 
-.ie6 .ui-tabs {
+.ie6 .exp-tabs {
 	height: 1%;
 }
 
-.ui-tabs li {
+.exp-tabs li {
 	display: inline;
 	float: left;
 	line-height: 1;
@@ -376,11 +376,11 @@
 	text-decoration: none;
 }
 
-.ui-tabs li.last {
+.exp-tabs li.last {
 	border-right: none;
 }
 
-.ui-tabs li a, .tabs li span {
+.exp-tabs li a, .exp-tabs li span {
 	background: #878F93 url(../images/application/tabs_bg.png) repeat-x 0 100%;
 	border-right: 1px solid #304049;
 	color: #FFF;
@@ -392,25 +392,25 @@
 	top: 1px;
 }
 
-.ie6 .ui-tabs li a, .ie6 .tabs li span {
+.ie6 .exp-tabs li a, .ie6 .exp-tabs li span {
 	background-image: none;
 	border-bottom: 3px solid #304049;
 	padding-bottom: 7px;
 }
 
-.ui-tabs li a:hover {
+.exp-tabs li a:hover {
 	text-decoration: underline;
 }
 
-.ui-tabs li a:hover, .ui-tabs li span:hover {
+.exp-tabs li a:hover, .exp-tabs li span:hover {
 	background: #1E2529;
 	color: #9EBAC8;
 }
 
-.ui-tabs li.current {
+.exp-tabs li.exp-selected {
 }
 
-.ui-tabs li.current a, .ui-tabs li.current span {
+.exp-tabs li.exp-selected a, .exp-tabs li.exp-selected span {
 	background: #FFF;
 	border: 1px solid #DEDEDE;
 	border-bottom: none;
@@ -418,35 +418,35 @@
 	font-weight: bold;
 }
 
-.ie6 .ui-tabs li.current a, .ie6 .ui-tabs li.current span {
+.ie6 .exp-tabs li.exp-selected a, .ie6 .exp-tabs li.exp-selected span {
 	padding-bottom: 10px;
 }
 
-.ui-tabs li.current:hover, .ui-tabs li.current a:hover {
+.exp-tabs li.exp-selected:hover, .exp-tabs li.exp-selected a:hover {
 	background-color: #FFF;
 }
 
-.ui-tabs .ui-tabs-disabled a {
+.exp-tabs .exp-disabled a {
 	cursor: text;
 }
 
-.ui-tabs-disabled {
+.exp-tabs .exp-disabled {
 	opacity: 0.4;
 }
 
-.ie .ui-tabs-disabled {
+.ie .exp-tabs .exp-disabled {
 	filter: alpha(opacity=40);
 }
 
-.ui-tabs .ui-tabs-disabled a:link, .ui-tabs .ui-tabs-disabled a:visited {
+.exp-tabs .exp-disabled a:link, .exp-tabs .exp-disabled a:visited {
 	color: #000;
 }
 
-.ui-tabs-hide {
+.exp-hidden {
 	display: none;
 }
 
-.ui-tabs .last.toggle {
+.exp-tabs .last.toggle {
 	float: right;
 }
 
@@ -891,6 +891,7 @@ img.exp-datepicker-button {
 }
 
 /* ---------- Color picker ---------- */
+
 
 .exp-picker-panel .exp-panel {
 	background: url(../images/color_picker/picker_container_bg.png) no-repeat;

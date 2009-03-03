@@ -5,8 +5,8 @@ Liferay.Portal.Tabs = {
 		var tab = jQuery('#' + namespace + id + 'TabsId');
 		var panel = jQuery('#' + namespace + id + 'TabsSection');
 
-		tab.siblings().removeClass('current');
-		tab.addClass('current');
+		tab.siblings().removeClass('exp-selected');
+		tab.addClass('exp-selected');
 
 		panel.show();
 
