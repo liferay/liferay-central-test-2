@@ -741,6 +741,7 @@ portletURL.setParameter("name", name);
 				</portlet:actionURL>
 
 				<liferay-ui:discussion
+					formName="fm2"
 					formAction="<%= discussionURL %>"
 					className="<%= DLFileEntry.class.getName() %>"
 					classPK="<%= fileEntry.getFileEntryId() %>"
