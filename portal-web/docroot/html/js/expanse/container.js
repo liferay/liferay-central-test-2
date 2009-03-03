@@ -194,10 +194,6 @@
 				var options = instance._options;
 				var el = options._el;
 
-				if (options.center) {
-					instance.center();
-				}
-
 				var closeEvent = 'destroy';
 
 				instance._destroyOnClose = options.destroyOnClose;
@@ -251,6 +247,10 @@
 					var el = Dom.get(instance.id);
 
 					Dom.setStyle(el, 'position', 'relative');
+				}
+
+				if (options.center || options.fixedcenter) {
+					instance.center();
 				}
 			},
 
