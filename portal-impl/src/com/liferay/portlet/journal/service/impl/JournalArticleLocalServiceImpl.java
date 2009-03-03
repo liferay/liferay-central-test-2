@@ -1113,9 +1113,15 @@ public class JournalArticleLocalServiceImpl
 			"article_resource_pk",
 			String.valueOf(article.getResourcePrimKey()));
 
+		String defaultTemplateId = article.getTemplateId();
+
 		if (article.isTemplateDriven()) {
+			if (Validator.isNull(templateId)) {
+				templateId = defaultTemplateId;
+			}
+
 			tokens.put("structure_id", article.getStructureId());
-			tokens.put("template_id", article.getTemplateId());
+			tokens.put("template_id", templateId);
 		}
 
 		String xml = article.getContent();
@@ -1203,12 +1209,6 @@ public class JournalArticleLocalServiceImpl
 				// specified, use the default one. If the specified template
 				// does not exit, use the default one. If the default one does
 				// not exist, throw an exception.
-
-				String defaultTemplateId = article.getTemplateId();
-
-				if (Validator.isNull(templateId)) {
-					templateId = defaultTemplateId;
-				}
 
 				JournalTemplate template = null;
 
