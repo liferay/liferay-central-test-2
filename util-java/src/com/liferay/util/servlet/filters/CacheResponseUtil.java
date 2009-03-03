@@ -41,8 +41,7 @@ import javax.servlet.http.HttpServletResponse;
 public class CacheResponseUtil {
 
 	public static void addHeaders(
-			HttpServletResponse response, Map<String, List<Header>> headers)
-		throws IOException {
+		HttpServletResponse response, Map<String, List<Header>> headers) {
 
 		for (Map.Entry<String, List<Header>> entry : headers.entrySet()) {
 			String headerKey = entry.getKey();

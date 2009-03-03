@@ -29,7 +29,6 @@ import com.yahoo.platform.yui.compressor.CssCompressor;
 import com.yahoo.platform.yui.compressor.JavaScriptCompressor;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 
@@ -44,18 +43,18 @@ import org.mozilla.javascript.EvaluatorException;
  */
 public class MinifierUtil {
 
-	public static String minifyCss(String content) throws IOException {
+	public static String minifyCss(String content) {
 		return _instance._minifyCss(content);
 	}
 
-	public static String minifyJavaScript(String content) throws IOException {
+	public static String minifyJavaScript(String content) {
 		return _instance._minifyJavaScript(content);
 	}
 
 	private MinifierUtil() {
 	}
 
-	private String _minifyCss(String content) throws IOException {
+	private String _minifyCss(String content) {
 		StringWriter stringWriter = new StringWriter();
 
 		try {
@@ -73,7 +72,7 @@ public class MinifierUtil {
 		return stringWriter.toString();
 	}
 
-	private String _minifyJavaScript(String content) throws IOException {
+	private String _minifyJavaScript(String content) {
 		StringWriter stringWriter = new StringWriter();
 
 		try {

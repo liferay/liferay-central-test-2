@@ -22,7 +22,6 @@
 
 package com.liferay.portal.plugin;
 
-import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Plugin;
 import com.liferay.portal.model.PluginSetting;
@@ -41,16 +40,16 @@ import java.util.List;
 public class PluginUtil {
 
 	public static List restrictPlugins(List plugins, User user)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return restrictPlugins(plugins, user.getCompanyId(), user.getUserId());
 	}
 
 	public static List restrictPlugins(
 			List plugins, long companyId, long userId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
-		List visiblePlugins = new ArrayList(plugins.size());
+		List<Plugin> visiblePlugins = new ArrayList<Plugin>(plugins.size());
 
 		for (int i = 0; i < plugins.size(); i++) {
 			Plugin plugin = (Plugin)plugins.get(i);

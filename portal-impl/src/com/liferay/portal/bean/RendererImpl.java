@@ -381,8 +381,8 @@ public class RendererImpl implements Renderer {
 		return preferences;
 	}
 
-	protected Class _mapToPrimitive(Class clazz) {
-		Class mapping = clazz;
+	protected Class<?> _mapToPrimitive(Class<?> clazz) {
+		Class<?> mapping = clazz;
 
 		if (clazz == Integer.class) {
 			mapping = int.class;

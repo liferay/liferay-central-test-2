@@ -22,8 +22,6 @@
 
 package com.liferay.portal.struts;
 
-import javax.servlet.ServletException;
-
 import org.apache.struts.config.ModuleConfig;
 import org.apache.struts.tiles.TilesPlugin;
 
@@ -35,8 +33,7 @@ import org.apache.struts.tiles.TilesPlugin;
  */
 public class PortalTilesPlugin extends TilesPlugin {
 
-	protected void initRequestProcessorClass(ModuleConfig moduleConfig)
-		throws ServletException {
-   }
+	protected void initRequestProcessorClass(ModuleConfig moduleConfig) {
+	}
 
 }

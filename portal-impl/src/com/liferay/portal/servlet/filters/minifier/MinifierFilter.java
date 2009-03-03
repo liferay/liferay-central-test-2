@@ -376,9 +376,7 @@ public class MinifierFilter extends BasePortalFilter {
 		return minifyCss(request, content);
 	}
 
-	protected String minifyCss(HttpServletRequest request, String content)
-		throws IOException {
-
+	protected String minifyCss(HttpServletRequest request, String content) {
 		String browserId = ParamUtil.getString(request, "browserId");
 
 		if (!browserId.equals(BrowserSniffer.BROWSER_ID_IE)) {
@@ -396,7 +394,7 @@ public class MinifierFilter extends BasePortalFilter {
 		return minifyJavaScript(content);
 	}
 
-	protected String minifyJavaScript(String content) throws IOException {
+	protected String minifyJavaScript(String content) {
 		return MinifierUtil.minifyJavaScript(content);
 	}
 
