@@ -312,6 +312,10 @@
 	top: 9px;
 }
 
+.lfr-floating-container .ctrl-holder input, .lfr-floating-container .ctrl-holder img {
+	vertical-align: top;
+}
+
 .lfr-portlet-toolbar {
 	background: #F6F8FB;
 	margin-bottom: 5px;
