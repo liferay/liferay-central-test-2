@@ -1633,7 +1633,7 @@
 	</library>
 	<library>
 		<file-name>portal/jaxen.jar</file-name>
-		<version>1.1 B4</version>
+		<version>1.1.1</version>
 		<project-name>Jaxen</project-name>
 		<project-url>http://jaxen.org</project-url>
 		<licenses>
@@ -1678,7 +1678,7 @@
 	</library>
 	<library>
 		<file-name>portal/jcommon.jar</file-name>
-		<version>1.0.6</version>
+		<version>1.0.15</version>
 		<project-name>JCommon</project-name>
 		<project-url>http://www.jfree.org/jcommon/index.php</project-url>
 		<licenses>
@@ -1748,7 +1748,7 @@
 	</library>
 	<library>
 		<file-name>portal/jfreechart.jar</file-name>
-		<version>1.0.3</version>
+		<version>1.0.12</version>
 		<project-name>JFreeChart</project-name>
 		<project-url>http://www.jfree.org/jfreechart</project-url>
 		<licenses>
@@ -2052,7 +2052,7 @@
 	</library>
 	<library>
 		<file-name>portal/poi.jar</file-name>
-		<version>3.0.1</version>
+		<version>3.2</version>
 		<project-name>POI</project-name>
 		<project-url>http://poi.apache.org</project-url>
 		<licenses>
@@ -2064,7 +2064,7 @@
 	</library>
 	<library>
 		<file-name>portal/poi-contrib.jar</file-name>
-		<version>3.0.1</version>
+		<version>3.2</version>
 		<project-name>POI</project-name>
 		<licenses>
 			<license>
@@ -2075,7 +2075,7 @@
 	</library>
 	<library>
 		<file-name>portal/poi-scratchpad.jar</file-name>
-		<version>3.0.1</version>
+		<version>3.2</version>
 		<project-name>POI</project-name>
 		<project-url>http://poi.apache.org</project-url>
 		<licenses>
@@ -2364,22 +2364,6 @@
 				<bundled-project-name>POI</bundled-project-name>
 				<license-name>Apache License 2.0</license-name>
 				<copyright-notice>Copyright (c) 2001-2007 The Apache Software Foundation</copyright-notice>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>portal/trove.jar</file-name>
-		<version>2.0.3</version>
-		<project-name>Trove</project-name>
-		<project-url>http://trove4j.sourceforge.net</project-url>
-		<licenses>
-			<license>
-				<license-name>LGPL 2.1</license-name>
-				<copyright-notice>Copyright (c) 2001, Eric D. Friedman All Rights Reserved.</copyright-notice>
-			</license>
-			<license>
-				<license-name>CERN License</license-name>
-				<copyright-notice>Copyright (c) 1999 CERN - European Organization for Nuclear Research.</copyright-notice>
 			</license>
 		</licenses>
 	</library>
