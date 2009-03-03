@@ -914,7 +914,7 @@ else {
 </c:if>
 
 <%
-themeDisplay.setScopeGroupId(PortalUtil.getScopeGroupId(request));
+themeDisplay.setScopeGroupId(PortalUtil.getScopeGroupId(layout));
 
 if (showPortletCssIcon) {
 	themeDisplay.setIncludePortletCssJs(true);
