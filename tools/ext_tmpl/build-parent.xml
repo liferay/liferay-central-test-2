@@ -281,4 +281,69 @@
 			<fileset dir="ext-impl/src" includes="portal-*.properties,system-*.properties" />
 		</copy>
 	</target>
+
+	<target name="upgrade-ext">
+		<available file="${lp.ext.dir}/modules" type="dir" property="lp.ext.dir.available" />
+
+		<antcall target="build-ext-dir" />
+
+		<if>
+			<not>
+				<available file="${lp.ext.dir}/ext-service" type="dir" />
+			</not>
+			<then>
+				<mkdir dir="${lp.ext.dir}/ext-service" />
+
+				<copy todir="${lp.ext.dir}/ext-service" filtering="true">
+					<fileset dir="ext-service" />
+				</copy>
+			</then>
+		</if>
+
+		<copy todir="${lp.ext.dir}" preservelastmodified="true">
+			<fileset
+				dir="."
+				includes="app.server.properties"
+			/>
+			<fileset
+				dir="."
+				includes=".classpath,.project,build.properties,**/build-common*.xml,**/build-parent.xml"
+			/>
+		</copy>
+
+		<mkdir dir="${lp.ext.dir}/ext-lib" />
+		<mkdir dir="${lp.ext.dir}/ext-lib/development" />
+		<mkdir dir="${lp.ext.dir}/ext-lib/global" />
+		<mkdir dir="${lp.ext.dir}/ext-lib/portal" />
+
+		<copy file="lib/readme.txt" todir="${lp.ext.dir}/ext-lib" />
+
+		<sync includeemptydirs="true" todir="${lp.ext.dir}/lib" verbose="true">
+			<fileset dir="lib" />
+			<preserveintarget>
+				<include name="**/.svn" />
+				<include name="**/.svn/**" />
+			</preserveintarget>
+		</sync>
+
+		<copy todir="${lp.ext.dir}/modules" preservelastmodified="true">
+			<fileset dir="modules" />
+		</copy>
+
+		<copy todir="${lp.ext.dir}/sql" overwrite="yes">
+			<fileset dir="sql">
+				<exclude name="**/log/**" />
+			</fileset>
+		</copy>
+
+		<copy todir="${lp.ext.dir}/tools" overwrite="yes">
+			<fileset dir="tools" includes="javadoc.css" />
+		</copy>
+	</target>
+
+	<target name="build-ext-dir" unless="lp.ext.dir.available">
+		<copy todir="${lp.ext.dir}" filtering="true" preservelastmodified="true">
+			<fileset dir="." />
+		</copy>
+	</target>
 </project>
