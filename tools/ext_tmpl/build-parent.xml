@@ -282,6 +282,12 @@
 		</copy>
 	</target>
 
+	<target name="build-ext-dir" unless="lp.ext.dir.available">
+		<copy todir="${lp.ext.dir}" filtering="true" preservelastmodified="true">
+			<fileset dir="." />
+		</copy>
+	</target>
+
 	<target name="upgrade-ext">
 		<available file="${lp.ext.dir}/modules" type="dir" property="lp.ext.dir.available" />
 
@@ -338,12 +344,6 @@
 
 		<copy todir="${lp.ext.dir}/tools" overwrite="yes">
 			<fileset dir="tools" includes="javadoc.css" />
-		</copy>
-	</target>
-
-	<target name="build-ext-dir" unless="lp.ext.dir.available">
-		<copy todir="${lp.ext.dir}" filtering="true" preservelastmodified="true">
-			<fileset dir="." />
 		</copy>
 	</target>
 </project>
