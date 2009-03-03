@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Resource;
@@ -40,6 +41,7 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.GroupImpl;
+import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.tools.sql.DBUtil;
@@ -228,6 +230,19 @@ public class SampleSQLBuilder {
 
 	protected void createResourceCodes() throws Exception {
 		createResourceCode(
+			_layoutCompanyResourceCodeId, Layout.class.getName(),
+			ResourceConstants.SCOPE_COMPANY);
+		createResourceCode(
+			_layoutGroupResourceCodeId, Layout.class.getName(),
+			ResourceConstants.SCOPE_GROUP);
+		createResourceCode(
+			_layoutGroupTemplateResourceCodeId, Layout.class.getName(),
+			ResourceConstants.SCOPE_GROUP_TEMPLATE);
+		createResourceCode(
+			_layoutIndividualResourceCodeId, Layout.class.getName(),
+			ResourceConstants.SCOPE_INDIVIDUAL);
+
+		createResourceCode(
 			_userCompanyResourceCodeId, User.class.getName(),
 			ResourceConstants.SCOPE_COMPANY);
 		createResourceCode(
@@ -257,9 +272,10 @@ public class SampleSQLBuilder {
 
 	protected void createUser(
 			long contactId, String emailAddress, String firstName, long groupId,
-			String lastName, String screenName, List<Group> userGroups,
-			long userId, List<Organization> userOrganizations,
-			List<Role> userRoles)
+			List<Group> groups, String lastName,
+			List<Organization> organizations, List<Layout> privateLayouts,
+			List<Layout> publicLayouts, List<Role> roles, String screenName,
+			long userId)
 		throws Exception {
 
 		String userName = firstName + StringPool.SPACE + lastName;
@@ -268,7 +284,7 @@ public class SampleSQLBuilder {
 			userName = StringPool.BLANK;
 		}
 
-		String userUuid = PortalUUIDUtil.generate();
+		String uuid = PortalUUIDUtil.generate();
 
 		Map<String, Object> context = getContext();
 
@@ -281,15 +297,17 @@ public class SampleSQLBuilder {
 			put(context, "groupId", groupId);
 		}
 
+		put(context, "groups", groups);
 		put(context, "lastName", lastName);
+		put(context, "organizations", organizations);
+		put(context, "privateLayouts", privateLayouts);
+		put(context, "publicLayouts", publicLayouts);
+		put(context, "roles", roles);
 		put(context, "screenName", screenName);
 		put(context, "userClassNameId", _userClassNameId);
-		put(context, "userGroups", userGroups);
 		put(context, "userId", userId);
 		put(context, "userName", userName);
-		put(context, "userOrganizations", userOrganizations);
-		put(context, "userRoles", userRoles);
-		put(context, "userUuid", userUuid);
+		put(context, "uuid", uuid);
 
 		processTemplate(_tplUser, context);
 
@@ -315,8 +333,8 @@ public class SampleSQLBuilder {
 	protected void createUsers() throws Exception {
 		createUser(
 			_defaultContactId, "default@liferay.com", StringPool.BLANK, 0,
-			StringPool.BLANK, String.valueOf(_defaultUserId), null,
-			_defaultUserId, null, null);
+			null, StringPool.BLANK, null, null, null, null,
+			String.valueOf(_defaultUserId), _defaultUserId);
 
 		write(StringPool.NEW_LINE);
 
@@ -329,23 +347,23 @@ public class SampleSQLBuilder {
 		List<String> lastNames = ListUtil.fromFile(
 			dependenciesDir + "last_names.txt");
 
-		List<Group> userGroups = new ArrayList<Group>();
+		List<Group> groups = new ArrayList<Group>();
 
 		Group group = new GroupImpl();
 
 		group.setGroupId(_guestGroupId);
 		group.setName(GroupConstants.GUEST);
 
-		userGroups.add(group);
+		groups.add(group);
 
-		List<Role> userRoles = new ArrayList<Role>();
+		List<Role> roles = new ArrayList<Role>();
 
 		Role role = new RoleImpl();
 
 		role.setRoleId(_userRoleId);
 		role.setName(RoleConstants.USER);
 
-		userRoles.add(role);
+		roles.add(role);
 
 		int userCount = 0;
 
@@ -357,10 +375,22 @@ public class SampleSQLBuilder {
 				long groupId = _counter.get();
 				long userId = _counter.get();
 
+				List<Layout> privateLayouts = new ArrayList<Layout>();
+
+				List<Layout> publicLayouts = new ArrayList<Layout>();
+
+				Layout layout = new LayoutImpl();
+
+				layout.setPrivateLayout(false);
+				layout.setName("Home");
+				layout.setFriendlyURL("/home");
+
+				publicLayouts.add(layout);
+
 				createUser(
 					contactId, userId + "@liferay.com", firstName, groupId,
-					lastName, String.valueOf(userId), userGroups, userId, null,
-					userRoles);
+					groups, lastName, null, privateLayouts, publicLayouts,
+					roles, String.valueOf(userId), userId);
 
 				write(StringPool.NEW_LINE);
 
@@ -427,7 +457,7 @@ public class SampleSQLBuilder {
 	}
 
 	protected void put(Map<String, Object> context, String key, boolean value) {
-		context.put(key, String.valueOf(value));
+		context.put(key, value ? "TRUE" : "FALSE");
 	}
 
 	protected void put(Map<String, Object> context, String key, int value) {
@@ -475,6 +505,11 @@ public class SampleSQLBuilder {
 	private long _defaultContactId = _counter.get();
 	private long _defaultUserId = _counter.get();
 	private long _companyId = _counter.get();
+	private long _layoutCompanyResourceCodeId = _resourceCodeCounter.get();
+	private long _layoutIndividualResourceCodeId = _resourceCodeCounter.get();
+	private long _layoutGroupResourceCodeId = _resourceCodeCounter.get();
+	private long _layoutGroupTemplateResourceCodeId =
+		_resourceCodeCounter.get();
 	private long _guestGroupId = _counter.get();
 	private long _guestRoleId = _counter.get();
 	private long _organizationClassNameId = _counter.get();
