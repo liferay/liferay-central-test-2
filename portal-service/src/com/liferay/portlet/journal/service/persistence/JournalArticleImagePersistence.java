@@ -22,10 +22,6 @@
 
 package com.liferay.portlet.journal.service.persistence;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.annotation.Propagation;
-import com.liferay.portal.kernel.annotation.Transactional;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 /**
@@ -34,8 +30,6 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @author Brian Wing Shun Chan
  *
  */
-@Transactional(rollbackFor =  {
-	PortalException.class, SystemException.class})
 public interface JournalArticleImagePersistence extends BasePersistence {
 	public com.liferay.portlet.journal.model.JournalArticleImage create(
 		long articleImageId);
@@ -77,7 +71,6 @@ public interface JournalArticleImagePersistence extends BasePersistence {
 		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage,
 		boolean merge) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.journal.model.JournalArticleImage findByPrimaryKey(
 		long articleImageId)
 		throws com.liferay.portal.SystemException,
@@ -86,112 +79,93 @@ public interface JournalArticleImagePersistence extends BasePersistence {
 	public com.liferay.portlet.journal.model.JournalArticleImage fetchByPrimaryKey(
 		long articleImageId) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> findByGroupId(
 		long groupId) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> findByGroupId(
 		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> findByGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.journal.model.JournalArticleImage findByGroupId_First(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleImageException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.journal.model.JournalArticleImage findByGroupId_Last(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleImageException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.journal.model.JournalArticleImage[] findByGroupId_PrevAndNext(
 		long articleImageId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleImageException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> findByTempImage(
 		boolean tempImage) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> findByTempImage(
 		boolean tempImage, int start, int end)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> findByTempImage(
 		boolean tempImage, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.journal.model.JournalArticleImage findByTempImage_First(
 		boolean tempImage, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleImageException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.journal.model.JournalArticleImage findByTempImage_Last(
 		boolean tempImage, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleImageException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.journal.model.JournalArticleImage[] findByTempImage_PrevAndNext(
 		long articleImageId, boolean tempImage,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleImageException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> findByG_A_V(
 		long groupId, java.lang.String articleId, double version)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> findByG_A_V(
 		long groupId, java.lang.String articleId, double version, int start,
 		int end) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> findByG_A_V(
 		long groupId, java.lang.String articleId, double version, int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.journal.model.JournalArticleImage findByG_A_V_First(
 		long groupId, java.lang.String articleId, double version,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleImageException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.journal.model.JournalArticleImage findByG_A_V_Last(
 		long groupId, java.lang.String articleId, double version,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleImageException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.journal.model.JournalArticleImage[] findByG_A_V_PrevAndNext(
 		long articleImageId, long groupId, java.lang.String articleId,
 		double version, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleImageException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.journal.model.JournalArticleImage findByG_A_V_E_E_L(
 		long groupId, java.lang.String articleId, double version,
 		java.lang.String elInstanceId, java.lang.String elName,
@@ -204,25 +178,20 @@ public interface JournalArticleImagePersistence extends BasePersistence {
 		java.lang.String elInstanceId, java.lang.String elName,
 		java.lang.String languageId) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> findAll()
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> findAll(
 		int start, int end) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
@@ -244,23 +213,18 @@ public interface JournalArticleImagePersistence extends BasePersistence {
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByTempImage(boolean tempImage)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByG_A_V(long groupId, java.lang.String articleId,
 		double version) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByG_A_V_E_E_L(long groupId, java.lang.String articleId,
 		double version, java.lang.String elInstanceId, java.lang.String elName,
 		java.lang.String languageId) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countAll() throws com.liferay.portal.SystemException;
 }

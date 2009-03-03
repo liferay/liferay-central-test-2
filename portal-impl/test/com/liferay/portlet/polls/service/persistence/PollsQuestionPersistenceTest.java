@@ -23,6 +23,7 @@
 package com.liferay.portlet.polls.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.polls.NoSuchQuestionException;
@@ -98,18 +99,22 @@ public class PollsQuestionPersistenceTest extends BasePersistenceTestCase {
 			newPollsQuestion.getUserId());
 		assertEquals(existingPollsQuestion.getUserName(),
 			newPollsQuestion.getUserName());
-		assertEquals(existingPollsQuestion.getCreateDate(),
-			newPollsQuestion.getCreateDate());
-		assertEquals(existingPollsQuestion.getModifiedDate(),
-			newPollsQuestion.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(
+				existingPollsQuestion.getCreateDate()),
+			Time.getShortTimestamp(newPollsQuestion.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingPollsQuestion.getModifiedDate()),
+			Time.getShortTimestamp(newPollsQuestion.getModifiedDate()));
 		assertEquals(existingPollsQuestion.getTitle(),
 			newPollsQuestion.getTitle());
 		assertEquals(existingPollsQuestion.getDescription(),
 			newPollsQuestion.getDescription());
-		assertEquals(existingPollsQuestion.getExpirationDate(),
-			newPollsQuestion.getExpirationDate());
-		assertEquals(existingPollsQuestion.getLastVoteDate(),
-			newPollsQuestion.getLastVoteDate());
+		assertEquals(Time.getShortTimestamp(
+				existingPollsQuestion.getExpirationDate()),
+			Time.getShortTimestamp(newPollsQuestion.getExpirationDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingPollsQuestion.getLastVoteDate()),
+			Time.getShortTimestamp(newPollsQuestion.getLastVoteDate()));
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {

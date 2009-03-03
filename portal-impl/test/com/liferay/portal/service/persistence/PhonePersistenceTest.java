@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchPhoneException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
@@ -90,8 +91,10 @@ public class PhonePersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingPhone.getCompanyId(), newPhone.getCompanyId());
 		assertEquals(existingPhone.getUserId(), newPhone.getUserId());
 		assertEquals(existingPhone.getUserName(), newPhone.getUserName());
-		assertEquals(existingPhone.getCreateDate(), newPhone.getCreateDate());
-		assertEquals(existingPhone.getModifiedDate(), newPhone.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(existingPhone.getCreateDate()),
+			Time.getShortTimestamp(newPhone.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(existingPhone.getModifiedDate()),
+			Time.getShortTimestamp(newPhone.getModifiedDate()));
 		assertEquals(existingPhone.getClassNameId(), newPhone.getClassNameId());
 		assertEquals(existingPhone.getClassPK(), newPhone.getClassPK());
 		assertEquals(existingPhone.getNumber(), newPhone.getNumber());

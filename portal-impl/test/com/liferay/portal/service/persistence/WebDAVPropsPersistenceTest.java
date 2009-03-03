@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchWebDAVPropsException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.WebDAVProps;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
@@ -85,10 +86,11 @@ public class WebDAVPropsPersistenceTest extends BasePersistenceTestCase {
 			newWebDAVProps.getWebDavPropsId());
 		assertEquals(existingWebDAVProps.getCompanyId(),
 			newWebDAVProps.getCompanyId());
-		assertEquals(existingWebDAVProps.getCreateDate(),
-			newWebDAVProps.getCreateDate());
-		assertEquals(existingWebDAVProps.getModifiedDate(),
-			newWebDAVProps.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(existingWebDAVProps.getCreateDate()),
+			Time.getShortTimestamp(newWebDAVProps.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingWebDAVProps.getModifiedDate()),
+			Time.getShortTimestamp(newWebDAVProps.getModifiedDate()));
 		assertEquals(existingWebDAVProps.getClassNameId(),
 			newWebDAVProps.getClassNameId());
 		assertEquals(existingWebDAVProps.getClassPK(),

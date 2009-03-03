@@ -103,6 +103,11 @@ public class ClassNameLocalServiceUtil {
 		return getService().updateClassName(className);
 	}
 
+	public static com.liferay.portal.model.ClassName addClassName(
+		java.lang.String value) throws com.liferay.portal.SystemException {
+		return getService().addClassName(value);
+	}
+
 	public static void checkClassNames()
 		throws com.liferay.portal.SystemException {
 		getService().checkClassNames();

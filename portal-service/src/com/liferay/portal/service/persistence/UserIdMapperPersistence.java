@@ -22,19 +22,12 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.annotation.Propagation;
-import com.liferay.portal.kernel.annotation.Transactional;
-
 /**
  * <a href="UserIdMapperPersistence.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-@Transactional(rollbackFor =  {
-	PortalException.class, SystemException.class})
 public interface UserIdMapperPersistence extends BasePersistence {
 	public com.liferay.portal.model.UserIdMapper create(long userIdMapperId);
 
@@ -74,7 +67,6 @@ public interface UserIdMapperPersistence extends BasePersistence {
 		com.liferay.portal.model.UserIdMapper userIdMapper, boolean merge)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.UserIdMapper findByPrimaryKey(
 		long userIdMapperId)
 		throws com.liferay.portal.NoSuchUserIdMapperException,
@@ -83,41 +75,34 @@ public interface UserIdMapperPersistence extends BasePersistence {
 	public com.liferay.portal.model.UserIdMapper fetchByPrimaryKey(
 		long userIdMapperId) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.UserIdMapper> findByUserId(
 		long userId) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.UserIdMapper> findByUserId(
 		long userId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.UserIdMapper> findByUserId(
 		long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.UserIdMapper findByUserId_First(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchUserIdMapperException,
 			com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.UserIdMapper findByUserId_Last(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchUserIdMapperException,
 			com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.UserIdMapper[] findByUserId_PrevAndNext(
 		long userIdMapperId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchUserIdMapperException,
 			com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.UserIdMapper findByU_T(long userId,
 		java.lang.String type)
 		throws com.liferay.portal.NoSuchUserIdMapperException,
@@ -126,7 +111,6 @@ public interface UserIdMapperPersistence extends BasePersistence {
 	public com.liferay.portal.model.UserIdMapper fetchByU_T(long userId,
 		java.lang.String type) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.UserIdMapper findByT_E(
 		java.lang.String type, java.lang.String externalUserId)
 		throws com.liferay.portal.NoSuchUserIdMapperException,
@@ -136,25 +120,20 @@ public interface UserIdMapperPersistence extends BasePersistence {
 		java.lang.String type, java.lang.String externalUserId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.UserIdMapper> findAll()
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.UserIdMapper> findAll(
 		int start, int end) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.UserIdMapper> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
@@ -173,18 +152,14 @@ public interface UserIdMapperPersistence extends BasePersistence {
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByUserId(long userId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByU_T(long userId, java.lang.String type)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByT_E(java.lang.String type, java.lang.String externalUserId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countAll() throws com.liferay.portal.SystemException;
 }

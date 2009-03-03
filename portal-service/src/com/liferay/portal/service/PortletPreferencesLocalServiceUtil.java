@@ -103,6 +103,16 @@ public class PortletPreferencesLocalServiceUtil {
 		return getService().updatePortletPreferences(portletPreferences);
 	}
 
+	public static com.liferay.portal.model.PortletPreferences addPortletPreferences(
+		long companyId, long ownerId, int ownerType, long plid,
+		java.lang.String portletId, com.liferay.portal.model.Portlet portlet,
+		java.lang.String defaultPreferences)
+		throws com.liferay.portal.SystemException {
+		return getService()
+				   .addPortletPreferences(companyId, ownerId, ownerType, plid,
+			portletId, portlet, defaultPreferences);
+	}
+
 	public static void deletePortletPreferences(long ownerId, int ownerType,
 		long plid) throws com.liferay.portal.SystemException {
 		getService().deletePortletPreferences(ownerId, ownerType, plid);

@@ -23,6 +23,7 @@
 package com.liferay.portlet.social.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.social.NoSuchRequestException;
@@ -97,10 +98,12 @@ public class SocialRequestPersistenceTest extends BasePersistenceTestCase {
 			newSocialRequest.getCompanyId());
 		assertEquals(existingSocialRequest.getUserId(),
 			newSocialRequest.getUserId());
-		assertEquals(existingSocialRequest.getCreateDate(),
-			newSocialRequest.getCreateDate());
-		assertEquals(existingSocialRequest.getModifiedDate(),
-			newSocialRequest.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(
+				existingSocialRequest.getCreateDate()),
+			Time.getShortTimestamp(newSocialRequest.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingSocialRequest.getModifiedDate()),
+			Time.getShortTimestamp(newSocialRequest.getModifiedDate()));
 		assertEquals(existingSocialRequest.getClassNameId(),
 			newSocialRequest.getClassNameId());
 		assertEquals(existingSocialRequest.getClassPK(),

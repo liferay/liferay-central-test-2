@@ -23,6 +23,7 @@
 package com.liferay.portlet.blogs.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.blogs.NoSuchEntryException;
@@ -98,16 +99,17 @@ public class BlogsEntryPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingBlogsEntry.getUserId(), newBlogsEntry.getUserId());
 		assertEquals(existingBlogsEntry.getUserName(),
 			newBlogsEntry.getUserName());
-		assertEquals(existingBlogsEntry.getCreateDate(),
-			newBlogsEntry.getCreateDate());
-		assertEquals(existingBlogsEntry.getModifiedDate(),
-			newBlogsEntry.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(existingBlogsEntry.getCreateDate()),
+			Time.getShortTimestamp(newBlogsEntry.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingBlogsEntry.getModifiedDate()),
+			Time.getShortTimestamp(newBlogsEntry.getModifiedDate()));
 		assertEquals(existingBlogsEntry.getTitle(), newBlogsEntry.getTitle());
 		assertEquals(existingBlogsEntry.getUrlTitle(),
 			newBlogsEntry.getUrlTitle());
 		assertEquals(existingBlogsEntry.getContent(), newBlogsEntry.getContent());
-		assertEquals(existingBlogsEntry.getDisplayDate(),
-			newBlogsEntry.getDisplayDate());
+		assertEquals(Time.getShortTimestamp(existingBlogsEntry.getDisplayDate()),
+			Time.getShortTimestamp(newBlogsEntry.getDisplayDate()));
 		assertEquals(existingBlogsEntry.getDraft(), newBlogsEntry.getDraft());
 		assertEquals(existingBlogsEntry.getAllowTrackbacks(),
 			newBlogsEntry.getAllowTrackbacks());

@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchContactException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
@@ -108,9 +109,10 @@ public class ContactPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingContact.getCompanyId(), newContact.getCompanyId());
 		assertEquals(existingContact.getUserId(), newContact.getUserId());
 		assertEquals(existingContact.getUserName(), newContact.getUserName());
-		assertEquals(existingContact.getCreateDate(), newContact.getCreateDate());
-		assertEquals(existingContact.getModifiedDate(),
-			newContact.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(existingContact.getCreateDate()),
+			Time.getShortTimestamp(newContact.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(existingContact.getModifiedDate()),
+			Time.getShortTimestamp(newContact.getModifiedDate()));
 		assertEquals(existingContact.getAccountId(), newContact.getAccountId());
 		assertEquals(existingContact.getParentContactId(),
 			newContact.getParentContactId());
@@ -120,7 +122,8 @@ public class ContactPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingContact.getPrefixId(), newContact.getPrefixId());
 		assertEquals(existingContact.getSuffixId(), newContact.getSuffixId());
 		assertEquals(existingContact.getMale(), newContact.getMale());
-		assertEquals(existingContact.getBirthday(), newContact.getBirthday());
+		assertEquals(Time.getShortTimestamp(existingContact.getBirthday()),
+			Time.getShortTimestamp(newContact.getBirthday()));
 		assertEquals(existingContact.getSmsSn(), newContact.getSmsSn());
 		assertEquals(existingContact.getAimSn(), newContact.getAimSn());
 		assertEquals(existingContact.getFacebookSn(), newContact.getFacebookSn());

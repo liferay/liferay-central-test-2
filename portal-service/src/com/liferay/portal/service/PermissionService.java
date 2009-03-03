@@ -24,6 +24,7 @@ package com.liferay.portal.service;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
@@ -58,12 +59,15 @@ public interface PermissionService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasGroupPermission(long groupId, java.lang.String actionId,
 		long resourceId) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasUserPermission(long userId, java.lang.String actionId,
 		long resourceId) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasUserPermissions(long userId, long groupId,
 		java.lang.String actionId, long[] resourceIds,
 		com.liferay.portal.security.permission.PermissionCheckerBag permissionCheckerBag)

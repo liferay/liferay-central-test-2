@@ -23,6 +23,7 @@
 package com.liferay.portlet.social.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.social.NoSuchActivityException;
@@ -94,8 +95,9 @@ public class SocialActivityPersistenceTest extends BasePersistenceTestCase {
 			newSocialActivity.getCompanyId());
 		assertEquals(existingSocialActivity.getUserId(),
 			newSocialActivity.getUserId());
-		assertEquals(existingSocialActivity.getCreateDate(),
-			newSocialActivity.getCreateDate());
+		assertEquals(Time.getShortTimestamp(
+				existingSocialActivity.getCreateDate()),
+			Time.getShortTimestamp(newSocialActivity.getCreateDate()));
 		assertEquals(existingSocialActivity.getMirrorActivityId(),
 			newSocialActivity.getMirrorActivityId());
 		assertEquals(existingSocialActivity.getClassNameId(),

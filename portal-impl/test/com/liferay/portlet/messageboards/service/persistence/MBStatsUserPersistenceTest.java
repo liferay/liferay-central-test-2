@@ -23,6 +23,7 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.messageboards.NoSuchStatsUserException;
@@ -87,8 +88,9 @@ public class MBStatsUserPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingMBStatsUser.getUserId(), newMBStatsUser.getUserId());
 		assertEquals(existingMBStatsUser.getMessageCount(),
 			newMBStatsUser.getMessageCount());
-		assertEquals(existingMBStatsUser.getLastPostDate(),
-			newMBStatsUser.getLastPostDate());
+		assertEquals(Time.getShortTimestamp(
+				existingMBStatsUser.getLastPostDate()),
+			Time.getShortTimestamp(newMBStatsUser.getLastPostDate()));
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {

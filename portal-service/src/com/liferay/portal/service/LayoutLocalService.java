@@ -187,6 +187,7 @@ public interface LayoutLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Layout getFriendlyURLLayout(long groupId,
 		boolean privateLayout, java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException,

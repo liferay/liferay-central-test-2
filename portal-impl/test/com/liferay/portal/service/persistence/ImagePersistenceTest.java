@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
@@ -82,7 +83,8 @@ public class ImagePersistenceTest extends BasePersistenceTestCase {
 		Image existingImage = _persistence.findByPrimaryKey(newImage.getPrimaryKey());
 
 		assertEquals(existingImage.getImageId(), newImage.getImageId());
-		assertEquals(existingImage.getModifiedDate(), newImage.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(existingImage.getModifiedDate()),
+			Time.getShortTimestamp(newImage.getModifiedDate()));
 		assertEquals(existingImage.getText(), newImage.getText());
 		assertEquals(existingImage.getType(), newImage.getType());
 		assertEquals(existingImage.getHeight(), newImage.getHeight());

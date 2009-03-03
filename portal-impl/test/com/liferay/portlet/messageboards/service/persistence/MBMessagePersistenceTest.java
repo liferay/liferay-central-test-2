@@ -23,6 +23,7 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.messageboards.NoSuchMessageException;
@@ -96,10 +97,10 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 			newMBMessage.getCompanyId());
 		assertEquals(existingMBMessage.getUserId(), newMBMessage.getUserId());
 		assertEquals(existingMBMessage.getUserName(), newMBMessage.getUserName());
-		assertEquals(existingMBMessage.getCreateDate(),
-			newMBMessage.getCreateDate());
-		assertEquals(existingMBMessage.getModifiedDate(),
-			newMBMessage.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(existingMBMessage.getCreateDate()),
+			Time.getShortTimestamp(newMBMessage.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(existingMBMessage.getModifiedDate()),
+			Time.getShortTimestamp(newMBMessage.getModifiedDate()));
 		assertEquals(existingMBMessage.getCategoryId(),
 			newMBMessage.getCategoryId());
 		assertEquals(existingMBMessage.getThreadId(), newMBMessage.getThreadId());

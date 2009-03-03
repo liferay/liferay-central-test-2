@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchAddressException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
@@ -96,9 +97,10 @@ public class AddressPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingAddress.getCompanyId(), newAddress.getCompanyId());
 		assertEquals(existingAddress.getUserId(), newAddress.getUserId());
 		assertEquals(existingAddress.getUserName(), newAddress.getUserName());
-		assertEquals(existingAddress.getCreateDate(), newAddress.getCreateDate());
-		assertEquals(existingAddress.getModifiedDate(),
-			newAddress.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(existingAddress.getCreateDate()),
+			Time.getShortTimestamp(newAddress.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(existingAddress.getModifiedDate()),
+			Time.getShortTimestamp(newAddress.getModifiedDate()));
 		assertEquals(existingAddress.getClassNameId(),
 			newAddress.getClassNameId());
 		assertEquals(existingAddress.getClassPK(), newAddress.getClassPK());

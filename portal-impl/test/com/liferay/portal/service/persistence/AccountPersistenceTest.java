@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchAccountException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
@@ -94,9 +95,10 @@ public class AccountPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingAccount.getCompanyId(), newAccount.getCompanyId());
 		assertEquals(existingAccount.getUserId(), newAccount.getUserId());
 		assertEquals(existingAccount.getUserName(), newAccount.getUserName());
-		assertEquals(existingAccount.getCreateDate(), newAccount.getCreateDate());
-		assertEquals(existingAccount.getModifiedDate(),
-			newAccount.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(existingAccount.getCreateDate()),
+			Time.getShortTimestamp(newAccount.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(existingAccount.getModifiedDate()),
+			Time.getShortTimestamp(newAccount.getModifiedDate()));
 		assertEquals(existingAccount.getParentAccountId(),
 			newAccount.getParentAccountId());
 		assertEquals(existingAccount.getName(), newAccount.getName());

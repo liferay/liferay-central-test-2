@@ -22,10 +22,6 @@
 
 package com.liferay.portlet.ratings.service.persistence;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.annotation.Propagation;
-import com.liferay.portal.kernel.annotation.Transactional;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 /**
@@ -34,8 +30,6 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @author Brian Wing Shun Chan
  *
  */
-@Transactional(rollbackFor =  {
-	PortalException.class, SystemException.class})
 public interface RatingsEntryPersistence extends BasePersistence {
 	public com.liferay.portlet.ratings.model.RatingsEntry create(long entryId);
 
@@ -75,7 +69,6 @@ public interface RatingsEntryPersistence extends BasePersistence {
 		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry,
 		boolean merge) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.ratings.model.RatingsEntry findByPrimaryKey(
 		long entryId)
 		throws com.liferay.portal.SystemException,
@@ -84,44 +77,37 @@ public interface RatingsEntryPersistence extends BasePersistence {
 	public com.liferay.portlet.ratings.model.RatingsEntry fetchByPrimaryKey(
 		long entryId) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> findByC_C(
 		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> findByC_C(
 		long classNameId, long classPK, int start, int end)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> findByC_C(
 		long classNameId, long classPK, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.ratings.model.RatingsEntry findByC_C_First(
 		long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.ratings.NoSuchEntryException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.ratings.model.RatingsEntry findByC_C_Last(
 		long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.ratings.NoSuchEntryException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.ratings.model.RatingsEntry[] findByC_C_PrevAndNext(
 		long entryId, long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.ratings.NoSuchEntryException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.ratings.model.RatingsEntry findByU_C_C(
 		long userId, long classNameId, long classPK)
 		throws com.liferay.portal.SystemException,
@@ -131,25 +117,20 @@ public interface RatingsEntryPersistence extends BasePersistence {
 		long userId, long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> findAll()
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> findAll(
 		int start, int end) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
@@ -163,14 +144,11 @@ public interface RatingsEntryPersistence extends BasePersistence {
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByC_C(long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByU_C_C(long userId, long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countAll() throws com.liferay.portal.SystemException;
 }

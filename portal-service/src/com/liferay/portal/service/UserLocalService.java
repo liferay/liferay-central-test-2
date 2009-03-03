@@ -398,18 +398,23 @@ public interface UserLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasGroupUser(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasOrganizationUser(long organizationId, long userId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasPasswordPolicyUser(long passwordPolicyId, long userId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasRoleUser(long roleId, long userId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasUserGroupUser(long userGroupId, long userId)
 		throws com.liferay.portal.SystemException;
 

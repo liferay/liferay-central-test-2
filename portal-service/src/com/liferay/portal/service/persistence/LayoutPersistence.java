@@ -22,19 +22,12 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.annotation.Propagation;
-import com.liferay.portal.kernel.annotation.Transactional;
-
 /**
  * <a href="LayoutPersistence.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-@Transactional(rollbackFor =  {
-	PortalException.class, SystemException.class})
 public interface LayoutPersistence extends BasePersistence {
 	public com.liferay.portal.model.Layout create(long plid);
 
@@ -74,7 +67,6 @@ public interface LayoutPersistence extends BasePersistence {
 		com.liferay.portal.model.Layout layout, boolean merge)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Layout findByPrimaryKey(long plid)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.SystemException;
@@ -82,75 +74,62 @@ public interface LayoutPersistence extends BasePersistence {
 	public com.liferay.portal.model.Layout fetchByPrimaryKey(long plid)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Layout> findByGroupId(
 		long groupId) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Layout> findByGroupId(
 		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Layout> findByGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Layout findByGroupId_First(long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Layout findByGroupId_Last(long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Layout[] findByGroupId_PrevAndNext(
 		long plid, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Layout> findByCompanyId(
 		long companyId) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Layout> findByCompanyId(
 		long companyId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Layout> findByCompanyId(
 		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Layout findByCompanyId_First(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Layout findByCompanyId_Last(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Layout[] findByCompanyId_PrevAndNext(
 		long plid, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Layout findByDLFolderId(long dlFolderId)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.SystemException;
@@ -158,7 +137,6 @@ public interface LayoutPersistence extends BasePersistence {
 	public com.liferay.portal.model.Layout fetchByDLFolderId(long dlFolderId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Layout findByIconImageId(long iconImageId)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.SystemException;
@@ -166,44 +144,37 @@ public interface LayoutPersistence extends BasePersistence {
 	public com.liferay.portal.model.Layout fetchByIconImageId(long iconImageId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Layout> findByG_P(
 		long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Layout> findByG_P(
 		long groupId, boolean privateLayout, int start, int end)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Layout> findByG_P(
 		long groupId, boolean privateLayout, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Layout findByG_P_First(long groupId,
 		boolean privateLayout,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Layout findByG_P_Last(long groupId,
 		boolean privateLayout,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Layout[] findByG_P_PrevAndNext(long plid,
 		long groupId, boolean privateLayout,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Layout findByG_P_L(long groupId,
 		boolean privateLayout, long layoutId)
 		throws com.liferay.portal.NoSuchLayoutException,
@@ -213,44 +184,37 @@ public interface LayoutPersistence extends BasePersistence {
 		boolean privateLayout, long layoutId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Layout> findByG_P_P(
 		long groupId, boolean privateLayout, long parentLayoutId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Layout> findByG_P_P(
 		long groupId, boolean privateLayout, long parentLayoutId, int start,
 		int end) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Layout> findByG_P_P(
 		long groupId, boolean privateLayout, long parentLayoutId, int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Layout findByG_P_P_First(long groupId,
 		boolean privateLayout, long parentLayoutId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Layout findByG_P_P_Last(long groupId,
 		boolean privateLayout, long parentLayoutId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Layout[] findByG_P_P_PrevAndNext(
 		long plid, long groupId, boolean privateLayout, long parentLayoutId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Layout findByG_P_F(long groupId,
 		boolean privateLayout, java.lang.String friendlyURL)
 		throws com.liferay.portal.NoSuchLayoutException,
@@ -260,62 +224,51 @@ public interface LayoutPersistence extends BasePersistence {
 		boolean privateLayout, java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Layout> findByG_P_T(
 		long groupId, boolean privateLayout, java.lang.String type)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Layout> findByG_P_T(
 		long groupId, boolean privateLayout, java.lang.String type, int start,
 		int end) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Layout> findByG_P_T(
 		long groupId, boolean privateLayout, java.lang.String type, int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Layout findByG_P_T_First(long groupId,
 		boolean privateLayout, java.lang.String type,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Layout findByG_P_T_Last(long groupId,
 		boolean privateLayout, java.lang.String type,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Layout[] findByG_P_T_PrevAndNext(
 		long plid, long groupId, boolean privateLayout, java.lang.String type,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Layout> findAll()
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Layout> findAll(int start,
 		int end) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Layout> findAll(int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
@@ -354,42 +307,32 @@ public interface LayoutPersistence extends BasePersistence {
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByDLFolderId(long dlFolderId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByIconImageId(long iconImageId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByG_P(long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByG_P_L(long groupId, boolean privateLayout, long layoutId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByG_P_P(long groupId, boolean privateLayout,
 		long parentLayoutId) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByG_P_F(long groupId, boolean privateLayout,
 		java.lang.String friendlyURL) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByG_P_T(long groupId, boolean privateLayout,
 		java.lang.String type) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countAll() throws com.liferay.portal.SystemException;
 }

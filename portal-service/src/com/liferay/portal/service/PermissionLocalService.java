@@ -150,20 +150,25 @@ public interface PermissionLocalService {
 		long userId, long companyId, java.lang.String name, int scope,
 		java.lang.String primKey) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasGroupPermission(long groupId, java.lang.String actionId,
 		long resourceId) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasRolePermission(long roleId, long companyId,
 		java.lang.String name, int scope, java.lang.String actionId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasRolePermission(long roleId, long companyId,
 		java.lang.String name, int scope, java.lang.String primKey,
 		java.lang.String actionId) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasUserPermission(long userId, java.lang.String actionId,
 		long resourceId) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasUserPermissions(long userId, long groupId,
 		java.lang.String actionId, long[] resourceIds,
 		com.liferay.portal.security.permission.PermissionCheckerBag permissionCheckerBag)

@@ -23,6 +23,7 @@
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.softwarecatalog.NoSuchProductVersionException;
@@ -95,10 +96,12 @@ public class SCProductVersionPersistenceTest extends BasePersistenceTestCase {
 			newSCProductVersion.getUserId());
 		assertEquals(existingSCProductVersion.getUserName(),
 			newSCProductVersion.getUserName());
-		assertEquals(existingSCProductVersion.getCreateDate(),
-			newSCProductVersion.getCreateDate());
-		assertEquals(existingSCProductVersion.getModifiedDate(),
-			newSCProductVersion.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(
+				existingSCProductVersion.getCreateDate()),
+			Time.getShortTimestamp(newSCProductVersion.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingSCProductVersion.getModifiedDate()),
+			Time.getShortTimestamp(newSCProductVersion.getModifiedDate()));
 		assertEquals(existingSCProductVersion.getProductEntryId(),
 			newSCProductVersion.getProductEntryId());
 		assertEquals(existingSCProductVersion.getVersion(),

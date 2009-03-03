@@ -23,6 +23,7 @@
 package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.documentlibrary.NoSuchFileRankException;
@@ -86,8 +87,8 @@ public class DLFileRankPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingDLFileRank.getCompanyId(),
 			newDLFileRank.getCompanyId());
 		assertEquals(existingDLFileRank.getUserId(), newDLFileRank.getUserId());
-		assertEquals(existingDLFileRank.getCreateDate(),
-			newDLFileRank.getCreateDate());
+		assertEquals(Time.getShortTimestamp(existingDLFileRank.getCreateDate()),
+			Time.getShortTimestamp(newDLFileRank.getCreateDate()));
 		assertEquals(existingDLFileRank.getFolderId(),
 			newDLFileRank.getFolderId());
 		assertEquals(existingDLFileRank.getName(), newDLFileRank.getName());

@@ -23,6 +23,7 @@
 package com.liferay.portlet.shopping.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.shopping.NoSuchOrderItemException;
@@ -103,8 +104,9 @@ public class ShoppingOrderItemPersistenceTest extends BasePersistenceTestCase {
 			newShoppingOrderItem.getPrice());
 		assertEquals(existingShoppingOrderItem.getQuantity(),
 			newShoppingOrderItem.getQuantity());
-		assertEquals(existingShoppingOrderItem.getShippedDate(),
-			newShoppingOrderItem.getShippedDate());
+		assertEquals(Time.getShortTimestamp(
+				existingShoppingOrderItem.getShippedDate()),
+			Time.getShortTimestamp(newShoppingOrderItem.getShippedDate()));
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {

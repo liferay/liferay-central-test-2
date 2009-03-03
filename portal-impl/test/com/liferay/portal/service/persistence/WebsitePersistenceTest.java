@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchWebsiteException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
@@ -89,9 +90,10 @@ public class WebsitePersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingWebsite.getCompanyId(), newWebsite.getCompanyId());
 		assertEquals(existingWebsite.getUserId(), newWebsite.getUserId());
 		assertEquals(existingWebsite.getUserName(), newWebsite.getUserName());
-		assertEquals(existingWebsite.getCreateDate(), newWebsite.getCreateDate());
-		assertEquals(existingWebsite.getModifiedDate(),
-			newWebsite.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(existingWebsite.getCreateDate()),
+			Time.getShortTimestamp(newWebsite.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(existingWebsite.getModifiedDate()),
+			Time.getShortTimestamp(newWebsite.getModifiedDate()));
 		assertEquals(existingWebsite.getClassNameId(),
 			newWebsite.getClassNameId());
 		assertEquals(existingWebsite.getClassPK(), newWebsite.getClassPK());

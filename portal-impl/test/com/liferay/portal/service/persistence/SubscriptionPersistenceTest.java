@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchSubscriptionException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Subscription;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
@@ -91,10 +92,12 @@ public class SubscriptionPersistenceTest extends BasePersistenceTestCase {
 			newSubscription.getUserId());
 		assertEquals(existingSubscription.getUserName(),
 			newSubscription.getUserName());
-		assertEquals(existingSubscription.getCreateDate(),
-			newSubscription.getCreateDate());
-		assertEquals(existingSubscription.getModifiedDate(),
-			newSubscription.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(
+				existingSubscription.getCreateDate()),
+			Time.getShortTimestamp(newSubscription.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingSubscription.getModifiedDate()),
+			Time.getShortTimestamp(newSubscription.getModifiedDate()));
 		assertEquals(existingSubscription.getClassNameId(),
 			newSubscription.getClassNameId());
 		assertEquals(existingSubscription.getClassPK(),

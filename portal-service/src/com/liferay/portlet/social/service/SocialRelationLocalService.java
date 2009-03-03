@@ -132,6 +132,7 @@ public interface SocialRelationLocalService {
 	public int getRelationsCount(long userId, int type)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasRelation(long userId1, long userId2, int type)
 		throws com.liferay.portal.SystemException;
 

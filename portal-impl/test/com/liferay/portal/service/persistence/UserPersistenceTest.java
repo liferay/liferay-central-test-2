@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
@@ -109,16 +110,19 @@ public class UserPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingUser.getUuid(), newUser.getUuid());
 		assertEquals(existingUser.getUserId(), newUser.getUserId());
 		assertEquals(existingUser.getCompanyId(), newUser.getCompanyId());
-		assertEquals(existingUser.getCreateDate(), newUser.getCreateDate());
-		assertEquals(existingUser.getModifiedDate(), newUser.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(existingUser.getCreateDate()),
+			Time.getShortTimestamp(newUser.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(existingUser.getModifiedDate()),
+			Time.getShortTimestamp(newUser.getModifiedDate()));
 		assertEquals(existingUser.getDefaultUser(), newUser.getDefaultUser());
 		assertEquals(existingUser.getContactId(), newUser.getContactId());
 		assertEquals(existingUser.getPassword(), newUser.getPassword());
 		assertEquals(existingUser.getPasswordEncrypted(),
 			newUser.getPasswordEncrypted());
 		assertEquals(existingUser.getPasswordReset(), newUser.getPasswordReset());
-		assertEquals(existingUser.getPasswordModifiedDate(),
-			newUser.getPasswordModifiedDate());
+		assertEquals(Time.getShortTimestamp(
+				existingUser.getPasswordModifiedDate()),
+			Time.getShortTimestamp(newUser.getPasswordModifiedDate()));
 		assertEquals(existingUser.getReminderQueryQuestion(),
 			newUser.getReminderQueryQuestion());
 		assertEquals(existingUser.getReminderQueryAnswer(),
@@ -133,16 +137,20 @@ public class UserPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingUser.getTimeZoneId(), newUser.getTimeZoneId());
 		assertEquals(existingUser.getGreeting(), newUser.getGreeting());
 		assertEquals(existingUser.getComments(), newUser.getComments());
-		assertEquals(existingUser.getLoginDate(), newUser.getLoginDate());
+		assertEquals(Time.getShortTimestamp(existingUser.getLoginDate()),
+			Time.getShortTimestamp(newUser.getLoginDate()));
 		assertEquals(existingUser.getLoginIP(), newUser.getLoginIP());
-		assertEquals(existingUser.getLastLoginDate(), newUser.getLastLoginDate());
+		assertEquals(Time.getShortTimestamp(existingUser.getLastLoginDate()),
+			Time.getShortTimestamp(newUser.getLastLoginDate()));
 		assertEquals(existingUser.getLastLoginIP(), newUser.getLastLoginIP());
-		assertEquals(existingUser.getLastFailedLoginDate(),
-			newUser.getLastFailedLoginDate());
+		assertEquals(Time.getShortTimestamp(
+				existingUser.getLastFailedLoginDate()),
+			Time.getShortTimestamp(newUser.getLastFailedLoginDate()));
 		assertEquals(existingUser.getFailedLoginAttempts(),
 			newUser.getFailedLoginAttempts());
 		assertEquals(existingUser.getLockout(), newUser.getLockout());
-		assertEquals(existingUser.getLockoutDate(), newUser.getLockoutDate());
+		assertEquals(Time.getShortTimestamp(existingUser.getLockoutDate()),
+			Time.getShortTimestamp(newUser.getLockoutDate()));
 		assertEquals(existingUser.getAgreedToTermsOfUse(),
 			newUser.getAgreedToTermsOfUse());
 		assertEquals(existingUser.getActive(), newUser.getActive());

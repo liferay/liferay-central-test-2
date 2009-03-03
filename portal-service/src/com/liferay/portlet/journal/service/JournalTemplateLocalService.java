@@ -238,6 +238,7 @@ public interface JournalTemplateLocalService {
 	public int getTemplatesCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasTemplate(long groupId, java.lang.String templateId)
 		throws com.liferay.portal.SystemException;
 

@@ -22,19 +22,12 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.annotation.Propagation;
-import com.liferay.portal.kernel.annotation.Transactional;
-
 /**
  * <a href="RolePersistence.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-@Transactional(rollbackFor =  {
-	PortalException.class, SystemException.class})
 public interface RolePersistence extends BasePersistence {
 	public com.liferay.portal.model.Role create(long roleId);
 
@@ -74,7 +67,6 @@ public interface RolePersistence extends BasePersistence {
 		com.liferay.portal.model.Role role, boolean merge)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Role findByPrimaryKey(long roleId)
 		throws com.liferay.portal.NoSuchRoleException,
 			com.liferay.portal.SystemException;
@@ -82,41 +74,34 @@ public interface RolePersistence extends BasePersistence {
 	public com.liferay.portal.model.Role fetchByPrimaryKey(long roleId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Role> findByCompanyId(
 		long companyId) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Role> findByCompanyId(
 		long companyId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Role> findByCompanyId(
 		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Role findByCompanyId_First(long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchRoleException,
 			com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Role findByCompanyId_Last(long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchRoleException,
 			com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Role[] findByCompanyId_PrevAndNext(
 		long roleId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchRoleException,
 			com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Role findByC_N(long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.NoSuchRoleException,
@@ -125,7 +110,6 @@ public interface RolePersistence extends BasePersistence {
 	public com.liferay.portal.model.Role fetchByC_N(long companyId,
 		java.lang.String name) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Role findByC_C_C(long companyId,
 		long classNameId, long classPK)
 		throws com.liferay.portal.NoSuchRoleException,
@@ -135,25 +119,20 @@ public interface RolePersistence extends BasePersistence {
 		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Role> findAll()
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Role> findAll(int start,
 		int end) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Role> findAll(int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
@@ -171,42 +150,32 @@ public interface RolePersistence extends BasePersistence {
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByC_N(long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByC_C_C(long companyId, long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countAll() throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Group> getGroups(long pk)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Group> getGroups(long pk,
 		int start, int end) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Group> getGroups(long pk,
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getGroupsSize(long pk) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean containsGroup(long pk, long groupPK)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean containsGroups(long pk)
 		throws com.liferay.portal.SystemException;
 
@@ -245,29 +214,23 @@ public interface RolePersistence extends BasePersistence {
 		java.util.List<com.liferay.portal.model.Group> groups)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Permission> getPermissions(
 		long pk) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Permission> getPermissions(
 		long pk, int start, int end) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Permission> getPermissions(
 		long pk, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getPermissionsSize(long pk)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean containsPermission(long pk, long permissionPK)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean containsPermissions(long pk)
 		throws com.liferay.portal.SystemException;
 
@@ -309,27 +272,21 @@ public interface RolePersistence extends BasePersistence {
 		java.util.List<com.liferay.portal.model.Permission> permissions)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.User> getUsers(long pk)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.User> getUsers(long pk,
 		int start, int end) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.User> getUsers(long pk,
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getUsersSize(long pk) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean containsUser(long pk, long userPK)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean containsUsers(long pk)
 		throws com.liferay.portal.SystemException;
 

@@ -22,10 +22,6 @@
 
 package com.liferay.portlet.imagegallery.service.persistence;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.annotation.Propagation;
-import com.liferay.portal.kernel.annotation.Transactional;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 /**
@@ -34,8 +30,6 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @author Brian Wing Shun Chan
  *
  */
-@Transactional(rollbackFor =  {
-	PortalException.class, SystemException.class})
 public interface IGImagePersistence extends BasePersistence {
 	public com.liferay.portlet.imagegallery.model.IGImage create(long imageId);
 
@@ -75,7 +69,6 @@ public interface IGImagePersistence extends BasePersistence {
 		com.liferay.portlet.imagegallery.model.IGImage igImage, boolean merge)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.imagegallery.model.IGImage findByPrimaryKey(
 		long imageId)
 		throws com.liferay.portal.SystemException,
@@ -84,77 +77,64 @@ public interface IGImagePersistence extends BasePersistence {
 	public com.liferay.portlet.imagegallery.model.IGImage fetchByPrimaryKey(
 		long imageId) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByUuid(
 		java.lang.String uuid) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByUuid(
 		java.lang.String uuid, int start, int end)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByUuid(
 		java.lang.String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.imagegallery.model.IGImage findByUuid_First(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.imagegallery.model.IGImage findByUuid_Last(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.imagegallery.model.IGImage[] findByUuid_PrevAndNext(
 		long imageId, java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByFolderId(
 		long folderId) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByFolderId(
 		long folderId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByFolderId(
 		long folderId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.imagegallery.model.IGImage findByFolderId_First(
 		long folderId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.imagegallery.model.IGImage findByFolderId_Last(
 		long folderId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.imagegallery.model.IGImage[] findByFolderId_PrevAndNext(
 		long imageId, long folderId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.imagegallery.model.IGImage findBySmallImageId(
 		long smallImageId)
 		throws com.liferay.portal.SystemException,
@@ -163,7 +143,6 @@ public interface IGImagePersistence extends BasePersistence {
 	public com.liferay.portlet.imagegallery.model.IGImage fetchBySmallImageId(
 		long smallImageId) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.imagegallery.model.IGImage findByLargeImageId(
 		long largeImageId)
 		throws com.liferay.portal.SystemException,
@@ -172,7 +151,6 @@ public interface IGImagePersistence extends BasePersistence {
 	public com.liferay.portlet.imagegallery.model.IGImage fetchByLargeImageId(
 		long largeImageId) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.imagegallery.model.IGImage findByCustom1ImageId(
 		long custom1ImageId)
 		throws com.liferay.portal.SystemException,
@@ -181,7 +159,6 @@ public interface IGImagePersistence extends BasePersistence {
 	public com.liferay.portlet.imagegallery.model.IGImage fetchByCustom1ImageId(
 		long custom1ImageId) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.imagegallery.model.IGImage findByCustom2ImageId(
 		long custom2ImageId)
 		throws com.liferay.portal.SystemException,
@@ -190,62 +167,51 @@ public interface IGImagePersistence extends BasePersistence {
 	public com.liferay.portlet.imagegallery.model.IGImage fetchByCustom2ImageId(
 		long custom2ImageId) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByF_N(
 		long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByF_N(
 		long folderId, java.lang.String name, int start, int end)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByF_N(
 		long folderId, java.lang.String name, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.imagegallery.model.IGImage findByF_N_First(
 		long folderId, java.lang.String name,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.imagegallery.model.IGImage findByF_N_Last(
 		long folderId, java.lang.String name,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.imagegallery.model.IGImage[] findByF_N_PrevAndNext(
 		long imageId, long folderId, java.lang.String name,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findAll()
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findAll(
 		int start, int end) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
@@ -277,34 +243,26 @@ public interface IGImagePersistence extends BasePersistence {
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByUuid(java.lang.String uuid)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByFolderId(long folderId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countBySmallImageId(long smallImageId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByLargeImageId(long largeImageId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByCustom1ImageId(long custom1ImageId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByCustom2ImageId(long custom2ImageId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByF_N(long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countAll() throws com.liferay.portal.SystemException;
 }

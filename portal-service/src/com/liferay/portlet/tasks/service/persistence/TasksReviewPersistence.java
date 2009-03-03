@@ -22,10 +22,6 @@
 
 package com.liferay.portlet.tasks.service.persistence;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.annotation.Propagation;
-import com.liferay.portal.kernel.annotation.Transactional;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 /**
@@ -34,8 +30,6 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @author Brian Wing Shun Chan
  *
  */
-@Transactional(rollbackFor =  {
-	PortalException.class, SystemException.class})
 public interface TasksReviewPersistence extends BasePersistence {
 	public com.liferay.portlet.tasks.model.TasksReview create(long reviewId);
 
@@ -75,7 +69,6 @@ public interface TasksReviewPersistence extends BasePersistence {
 		com.liferay.portlet.tasks.model.TasksReview tasksReview, boolean merge)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tasks.model.TasksReview findByPrimaryKey(
 		long reviewId)
 		throws com.liferay.portal.SystemException,
@@ -84,75 +77,62 @@ public interface TasksReviewPersistence extends BasePersistence {
 	public com.liferay.portlet.tasks.model.TasksReview fetchByPrimaryKey(
 		long reviewId) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByUserId(
 		long userId) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByUserId(
 		long userId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByUserId(
 		long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tasks.model.TasksReview findByUserId_First(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tasks.model.TasksReview findByUserId_Last(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tasks.model.TasksReview[] findByUserId_PrevAndNext(
 		long reviewId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByProposalId(
 		long proposalId) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByProposalId(
 		long proposalId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByProposalId(
 		long proposalId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tasks.model.TasksReview findByProposalId_First(
 		long proposalId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tasks.model.TasksReview findByProposalId_Last(
 		long proposalId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tasks.model.TasksReview[] findByProposalId_PrevAndNext(
 		long reviewId, long proposalId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tasks.model.TasksReview findByU_P(long userId,
 		long proposalId)
 		throws com.liferay.portal.SystemException,
@@ -161,135 +141,112 @@ public interface TasksReviewPersistence extends BasePersistence {
 	public com.liferay.portlet.tasks.model.TasksReview fetchByU_P(long userId,
 		long proposalId) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S(
 		long proposalId, int stage) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S(
 		long proposalId, int stage, int start, int end)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S(
 		long proposalId, int stage, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tasks.model.TasksReview findByP_S_First(
 		long proposalId, int stage,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tasks.model.TasksReview findByP_S_Last(
 		long proposalId, int stage,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tasks.model.TasksReview[] findByP_S_PrevAndNext(
 		long reviewId, long proposalId, int stage,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S_C(
 		long proposalId, int stage, boolean completed)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S_C(
 		long proposalId, int stage, boolean completed, int start, int end)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S_C(
 		long proposalId, int stage, boolean completed, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tasks.model.TasksReview findByP_S_C_First(
 		long proposalId, int stage, boolean completed,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tasks.model.TasksReview findByP_S_C_Last(
 		long proposalId, int stage, boolean completed,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tasks.model.TasksReview[] findByP_S_C_PrevAndNext(
 		long reviewId, long proposalId, int stage, boolean completed,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S_C_R(
 		long proposalId, int stage, boolean completed, boolean rejected)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S_C_R(
 		long proposalId, int stage, boolean completed, boolean rejected,
 		int start, int end) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S_C_R(
 		long proposalId, int stage, boolean completed, boolean rejected,
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tasks.model.TasksReview findByP_S_C_R_First(
 		long proposalId, int stage, boolean completed, boolean rejected,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tasks.model.TasksReview findByP_S_C_R_Last(
 		long proposalId, int stage, boolean completed, boolean rejected,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.tasks.model.TasksReview[] findByP_S_C_R_PrevAndNext(
 		long reviewId, long proposalId, int stage, boolean completed,
 		boolean rejected, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findAll()
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findAll(
 		int start, int end) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
@@ -315,30 +272,23 @@ public interface TasksReviewPersistence extends BasePersistence {
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByUserId(long userId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByProposalId(long proposalId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByU_P(long userId, long proposalId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByP_S(long proposalId, int stage)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByP_S_C(long proposalId, int stage, boolean completed)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByP_S_C_R(long proposalId, int stage, boolean completed,
 		boolean rejected) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countAll() throws com.liferay.portal.SystemException;
 }

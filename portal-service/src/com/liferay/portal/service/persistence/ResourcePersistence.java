@@ -22,19 +22,12 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.annotation.Propagation;
-import com.liferay.portal.kernel.annotation.Transactional;
-
 /**
  * <a href="ResourcePersistence.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-@Transactional(rollbackFor =  {
-	PortalException.class, SystemException.class})
 public interface ResourcePersistence extends BasePersistence {
 	public com.liferay.portal.model.Resource create(long resourceId);
 
@@ -74,7 +67,6 @@ public interface ResourcePersistence extends BasePersistence {
 		com.liferay.portal.model.Resource resource, boolean merge)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Resource findByPrimaryKey(long resourceId)
 		throws com.liferay.portal.NoSuchResourceException,
 			com.liferay.portal.SystemException;
@@ -82,41 +74,34 @@ public interface ResourcePersistence extends BasePersistence {
 	public com.liferay.portal.model.Resource fetchByPrimaryKey(long resourceId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Resource> findByCodeId(
 		long codeId) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Resource> findByCodeId(
 		long codeId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Resource> findByCodeId(
 		long codeId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Resource findByCodeId_First(long codeId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchResourceException,
 			com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Resource findByCodeId_Last(long codeId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchResourceException,
 			com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Resource[] findByCodeId_PrevAndNext(
 		long resourceId, long codeId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.NoSuchResourceException,
 			com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Resource findByC_P(long codeId,
 		java.lang.String primKey)
 		throws com.liferay.portal.NoSuchResourceException,
@@ -125,25 +110,20 @@ public interface ResourcePersistence extends BasePersistence {
 	public com.liferay.portal.model.Resource fetchByC_P(long codeId,
 		java.lang.String primKey) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Resource> findAll()
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Resource> findAll(
 		int start, int end) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Resource> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
@@ -157,14 +137,11 @@ public interface ResourcePersistence extends BasePersistence {
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByCodeId(long codeId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByC_P(long codeId, java.lang.String primKey)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countAll() throws com.liferay.portal.SystemException;
 }

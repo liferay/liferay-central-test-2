@@ -111,6 +111,7 @@ public interface GroupService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasUserGroup(long userId, long groupId)
 		throws com.liferay.portal.SystemException;
 

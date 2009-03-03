@@ -23,6 +23,7 @@
 package com.liferay.portlet.bookmarks.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.bookmarks.NoSuchFolderException;
@@ -95,10 +96,12 @@ public class BookmarksFolderPersistenceTest extends BasePersistenceTestCase {
 			newBookmarksFolder.getCompanyId());
 		assertEquals(existingBookmarksFolder.getUserId(),
 			newBookmarksFolder.getUserId());
-		assertEquals(existingBookmarksFolder.getCreateDate(),
-			newBookmarksFolder.getCreateDate());
-		assertEquals(existingBookmarksFolder.getModifiedDate(),
-			newBookmarksFolder.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(
+				existingBookmarksFolder.getCreateDate()),
+			Time.getShortTimestamp(newBookmarksFolder.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingBookmarksFolder.getModifiedDate()),
+			Time.getShortTimestamp(newBookmarksFolder.getModifiedDate()));
 		assertEquals(existingBookmarksFolder.getParentFolderId(),
 			newBookmarksFolder.getParentFolderId());
 		assertEquals(existingBookmarksFolder.getName(),

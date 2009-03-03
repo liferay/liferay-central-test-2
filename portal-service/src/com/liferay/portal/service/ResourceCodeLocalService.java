@@ -76,6 +76,7 @@ public interface ResourceCodeLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.ResourceCode getResourceCode(long codeId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
@@ -92,6 +93,11 @@ public interface ResourceCodeLocalService {
 		com.liferay.portal.model.ResourceCode resourceCode)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.ResourceCode addResourceCode(
+		long companyId, java.lang.String name, int scope)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.ResourceCode getResourceCode(
 		long companyId, java.lang.String name, int scope)
 		throws com.liferay.portal.SystemException;

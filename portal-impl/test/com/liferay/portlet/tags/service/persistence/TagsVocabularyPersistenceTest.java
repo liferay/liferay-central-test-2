@@ -23,6 +23,7 @@
 package com.liferay.portlet.tags.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.tags.NoSuchVocabularyException;
@@ -95,10 +96,12 @@ public class TagsVocabularyPersistenceTest extends BasePersistenceTestCase {
 			newTagsVocabulary.getUserId());
 		assertEquals(existingTagsVocabulary.getUserName(),
 			newTagsVocabulary.getUserName());
-		assertEquals(existingTagsVocabulary.getCreateDate(),
-			newTagsVocabulary.getCreateDate());
-		assertEquals(existingTagsVocabulary.getModifiedDate(),
-			newTagsVocabulary.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(
+				existingTagsVocabulary.getCreateDate()),
+			Time.getShortTimestamp(newTagsVocabulary.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingTagsVocabulary.getModifiedDate()),
+			Time.getShortTimestamp(newTagsVocabulary.getModifiedDate()));
 		assertEquals(existingTagsVocabulary.getName(),
 			newTagsVocabulary.getName());
 		assertEquals(existingTagsVocabulary.getDescription(),

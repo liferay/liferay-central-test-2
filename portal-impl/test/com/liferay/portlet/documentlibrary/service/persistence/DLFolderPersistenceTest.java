@@ -23,6 +23,7 @@
 package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
@@ -93,17 +94,17 @@ public class DLFolderPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingDLFolder.getCompanyId(), newDLFolder.getCompanyId());
 		assertEquals(existingDLFolder.getUserId(), newDLFolder.getUserId());
 		assertEquals(existingDLFolder.getUserName(), newDLFolder.getUserName());
-		assertEquals(existingDLFolder.getCreateDate(),
-			newDLFolder.getCreateDate());
-		assertEquals(existingDLFolder.getModifiedDate(),
-			newDLFolder.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(existingDLFolder.getCreateDate()),
+			Time.getShortTimestamp(newDLFolder.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(existingDLFolder.getModifiedDate()),
+			Time.getShortTimestamp(newDLFolder.getModifiedDate()));
 		assertEquals(existingDLFolder.getParentFolderId(),
 			newDLFolder.getParentFolderId());
 		assertEquals(existingDLFolder.getName(), newDLFolder.getName());
 		assertEquals(existingDLFolder.getDescription(),
 			newDLFolder.getDescription());
-		assertEquals(existingDLFolder.getLastPostDate(),
-			newDLFolder.getLastPostDate());
+		assertEquals(Time.getShortTimestamp(existingDLFolder.getLastPostDate()),
+			Time.getShortTimestamp(newDLFolder.getLastPostDate()));
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {

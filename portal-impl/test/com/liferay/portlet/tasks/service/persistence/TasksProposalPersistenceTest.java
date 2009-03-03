@@ -23,6 +23,7 @@
 package com.liferay.portlet.tasks.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.tasks.NoSuchProposalException;
@@ -98,10 +99,12 @@ public class TasksProposalPersistenceTest extends BasePersistenceTestCase {
 			newTasksProposal.getUserId());
 		assertEquals(existingTasksProposal.getUserName(),
 			newTasksProposal.getUserName());
-		assertEquals(existingTasksProposal.getCreateDate(),
-			newTasksProposal.getCreateDate());
-		assertEquals(existingTasksProposal.getModifiedDate(),
-			newTasksProposal.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(
+				existingTasksProposal.getCreateDate()),
+			Time.getShortTimestamp(newTasksProposal.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingTasksProposal.getModifiedDate()),
+			Time.getShortTimestamp(newTasksProposal.getModifiedDate()));
 		assertEquals(existingTasksProposal.getClassNameId(),
 			newTasksProposal.getClassNameId());
 		assertEquals(existingTasksProposal.getClassPK(),
@@ -109,10 +112,11 @@ public class TasksProposalPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingTasksProposal.getName(), newTasksProposal.getName());
 		assertEquals(existingTasksProposal.getDescription(),
 			newTasksProposal.getDescription());
-		assertEquals(existingTasksProposal.getPublishDate(),
-			newTasksProposal.getPublishDate());
-		assertEquals(existingTasksProposal.getDueDate(),
-			newTasksProposal.getDueDate());
+		assertEquals(Time.getShortTimestamp(
+				existingTasksProposal.getPublishDate()),
+			Time.getShortTimestamp(newTasksProposal.getPublishDate()));
+		assertEquals(Time.getShortTimestamp(existingTasksProposal.getDueDate()),
+			Time.getShortTimestamp(newTasksProposal.getDueDate()));
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {

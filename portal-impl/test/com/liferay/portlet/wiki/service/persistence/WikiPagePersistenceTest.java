@@ -23,6 +23,7 @@
 package com.liferay.portlet.wiki.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.wiki.NoSuchPageException;
@@ -100,10 +101,10 @@ public class WikiPagePersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingWikiPage.getCompanyId(), newWikiPage.getCompanyId());
 		assertEquals(existingWikiPage.getUserId(), newWikiPage.getUserId());
 		assertEquals(existingWikiPage.getUserName(), newWikiPage.getUserName());
-		assertEquals(existingWikiPage.getCreateDate(),
-			newWikiPage.getCreateDate());
-		assertEquals(existingWikiPage.getModifiedDate(),
-			newWikiPage.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(existingWikiPage.getCreateDate()),
+			Time.getShortTimestamp(newWikiPage.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(existingWikiPage.getModifiedDate()),
+			Time.getShortTimestamp(newWikiPage.getModifiedDate()));
 		assertEquals(existingWikiPage.getNodeId(), newWikiPage.getNodeId());
 		assertEquals(existingWikiPage.getTitle(), newWikiPage.getTitle());
 		assertEquals(existingWikiPage.getVersion(), newWikiPage.getVersion());

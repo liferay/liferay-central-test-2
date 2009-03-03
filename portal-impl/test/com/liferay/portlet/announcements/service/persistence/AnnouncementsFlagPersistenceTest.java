@@ -23,6 +23,7 @@
 package com.liferay.portlet.announcements.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.announcements.NoSuchFlagException;
@@ -84,8 +85,9 @@ public class AnnouncementsFlagPersistenceTest extends BasePersistenceTestCase {
 			newAnnouncementsFlag.getFlagId());
 		assertEquals(existingAnnouncementsFlag.getUserId(),
 			newAnnouncementsFlag.getUserId());
-		assertEquals(existingAnnouncementsFlag.getCreateDate(),
-			newAnnouncementsFlag.getCreateDate());
+		assertEquals(Time.getShortTimestamp(
+				existingAnnouncementsFlag.getCreateDate()),
+			Time.getShortTimestamp(newAnnouncementsFlag.getCreateDate()));
 		assertEquals(existingAnnouncementsFlag.getEntryId(),
 			newAnnouncementsFlag.getEntryId());
 		assertEquals(existingAnnouncementsFlag.getValue(),

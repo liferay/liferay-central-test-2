@@ -23,6 +23,7 @@
 package com.liferay.portlet.tags.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.tags.NoSuchAssetException;
@@ -104,21 +105,23 @@ public class TagsAssetPersistenceTest extends BasePersistenceTestCase {
 			newTagsAsset.getCompanyId());
 		assertEquals(existingTagsAsset.getUserId(), newTagsAsset.getUserId());
 		assertEquals(existingTagsAsset.getUserName(), newTagsAsset.getUserName());
-		assertEquals(existingTagsAsset.getCreateDate(),
-			newTagsAsset.getCreateDate());
-		assertEquals(existingTagsAsset.getModifiedDate(),
-			newTagsAsset.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(existingTagsAsset.getCreateDate()),
+			Time.getShortTimestamp(newTagsAsset.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(existingTagsAsset.getModifiedDate()),
+			Time.getShortTimestamp(newTagsAsset.getModifiedDate()));
 		assertEquals(existingTagsAsset.getClassNameId(),
 			newTagsAsset.getClassNameId());
 		assertEquals(existingTagsAsset.getClassPK(), newTagsAsset.getClassPK());
 		assertEquals(existingTagsAsset.getVisible(), newTagsAsset.getVisible());
-		assertEquals(existingTagsAsset.getStartDate(),
-			newTagsAsset.getStartDate());
-		assertEquals(existingTagsAsset.getEndDate(), newTagsAsset.getEndDate());
-		assertEquals(existingTagsAsset.getPublishDate(),
-			newTagsAsset.getPublishDate());
-		assertEquals(existingTagsAsset.getExpirationDate(),
-			newTagsAsset.getExpirationDate());
+		assertEquals(Time.getShortTimestamp(existingTagsAsset.getStartDate()),
+			Time.getShortTimestamp(newTagsAsset.getStartDate()));
+		assertEquals(Time.getShortTimestamp(existingTagsAsset.getEndDate()),
+			Time.getShortTimestamp(newTagsAsset.getEndDate()));
+		assertEquals(Time.getShortTimestamp(existingTagsAsset.getPublishDate()),
+			Time.getShortTimestamp(newTagsAsset.getPublishDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingTagsAsset.getExpirationDate()),
+			Time.getShortTimestamp(newTagsAsset.getExpirationDate()));
 		assertEquals(existingTagsAsset.getMimeType(), newTagsAsset.getMimeType());
 		assertEquals(existingTagsAsset.getTitle(), newTagsAsset.getTitle());
 		assertEquals(existingTagsAsset.getDescription(),

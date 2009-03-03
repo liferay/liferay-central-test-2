@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchPortletItemException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.PortletItem;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
@@ -93,10 +94,11 @@ public class PortletItemPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingPortletItem.getUserId(), newPortletItem.getUserId());
 		assertEquals(existingPortletItem.getUserName(),
 			newPortletItem.getUserName());
-		assertEquals(existingPortletItem.getCreateDate(),
-			newPortletItem.getCreateDate());
-		assertEquals(existingPortletItem.getModifiedDate(),
-			newPortletItem.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(existingPortletItem.getCreateDate()),
+			Time.getShortTimestamp(newPortletItem.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingPortletItem.getModifiedDate()),
+			Time.getShortTimestamp(newPortletItem.getModifiedDate()));
 		assertEquals(existingPortletItem.getName(), newPortletItem.getName());
 		assertEquals(existingPortletItem.getPortletId(),
 			newPortletItem.getPortletId());

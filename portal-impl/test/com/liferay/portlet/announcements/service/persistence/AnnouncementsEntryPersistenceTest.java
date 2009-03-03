@@ -23,6 +23,7 @@
 package com.liferay.portlet.announcements.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.announcements.NoSuchEntryException;
@@ -102,10 +103,12 @@ public class AnnouncementsEntryPersistenceTest extends BasePersistenceTestCase {
 			newAnnouncementsEntry.getUserId());
 		assertEquals(existingAnnouncementsEntry.getUserName(),
 			newAnnouncementsEntry.getUserName());
-		assertEquals(existingAnnouncementsEntry.getCreateDate(),
-			newAnnouncementsEntry.getCreateDate());
-		assertEquals(existingAnnouncementsEntry.getModifiedDate(),
-			newAnnouncementsEntry.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(
+				existingAnnouncementsEntry.getCreateDate()),
+			Time.getShortTimestamp(newAnnouncementsEntry.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingAnnouncementsEntry.getModifiedDate()),
+			Time.getShortTimestamp(newAnnouncementsEntry.getModifiedDate()));
 		assertEquals(existingAnnouncementsEntry.getClassNameId(),
 			newAnnouncementsEntry.getClassNameId());
 		assertEquals(existingAnnouncementsEntry.getClassPK(),
@@ -118,10 +121,12 @@ public class AnnouncementsEntryPersistenceTest extends BasePersistenceTestCase {
 			newAnnouncementsEntry.getUrl());
 		assertEquals(existingAnnouncementsEntry.getType(),
 			newAnnouncementsEntry.getType());
-		assertEquals(existingAnnouncementsEntry.getDisplayDate(),
-			newAnnouncementsEntry.getDisplayDate());
-		assertEquals(existingAnnouncementsEntry.getExpirationDate(),
-			newAnnouncementsEntry.getExpirationDate());
+		assertEquals(Time.getShortTimestamp(
+				existingAnnouncementsEntry.getDisplayDate()),
+			Time.getShortTimestamp(newAnnouncementsEntry.getDisplayDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingAnnouncementsEntry.getExpirationDate()),
+			Time.getShortTimestamp(newAnnouncementsEntry.getExpirationDate()));
 		assertEquals(existingAnnouncementsEntry.getPriority(),
 			newAnnouncementsEntry.getPriority());
 		assertEquals(existingAnnouncementsEntry.getAlert(),

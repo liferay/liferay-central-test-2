@@ -132,6 +132,7 @@ public interface PortletLocalService {
 		long companyId, boolean showSystem, boolean showPortal)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasPortlet(long companyId, java.lang.String portletId)
 		throws com.liferay.portal.SystemException;
 

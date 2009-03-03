@@ -23,6 +23,7 @@
 package com.liferay.portlet.polls.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.polls.NoSuchVoteException;
@@ -85,7 +86,8 @@ public class PollsVotePersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingPollsVote.getQuestionId(),
 			newPollsVote.getQuestionId());
 		assertEquals(existingPollsVote.getChoiceId(), newPollsVote.getChoiceId());
-		assertEquals(existingPollsVote.getVoteDate(), newPollsVote.getVoteDate());
+		assertEquals(Time.getShortTimestamp(existingPollsVote.getVoteDate()),
+			Time.getShortTimestamp(newPollsVote.getVoteDate()));
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {

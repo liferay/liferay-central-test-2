@@ -23,6 +23,7 @@
 package com.liferay.portlet.tasks.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.tasks.NoSuchReviewException;
@@ -97,10 +98,11 @@ public class TasksReviewPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingTasksReview.getUserId(), newTasksReview.getUserId());
 		assertEquals(existingTasksReview.getUserName(),
 			newTasksReview.getUserName());
-		assertEquals(existingTasksReview.getCreateDate(),
-			newTasksReview.getCreateDate());
-		assertEquals(existingTasksReview.getModifiedDate(),
-			newTasksReview.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(existingTasksReview.getCreateDate()),
+			Time.getShortTimestamp(newTasksReview.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingTasksReview.getModifiedDate()),
+			Time.getShortTimestamp(newTasksReview.getModifiedDate()));
 		assertEquals(existingTasksReview.getProposalId(),
 			newTasksReview.getProposalId());
 		assertEquals(existingTasksReview.getAssignedByUserId(),

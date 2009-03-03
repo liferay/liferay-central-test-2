@@ -23,6 +23,7 @@
 package com.liferay.portlet.imagegallery.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.imagegallery.NoSuchImageException;
@@ -92,9 +93,10 @@ public class IGImagePersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingIGImage.getImageId(), newIGImage.getImageId());
 		assertEquals(existingIGImage.getCompanyId(), newIGImage.getCompanyId());
 		assertEquals(existingIGImage.getUserId(), newIGImage.getUserId());
-		assertEquals(existingIGImage.getCreateDate(), newIGImage.getCreateDate());
-		assertEquals(existingIGImage.getModifiedDate(),
-			newIGImage.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(existingIGImage.getCreateDate()),
+			Time.getShortTimestamp(newIGImage.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(existingIGImage.getModifiedDate()),
+			Time.getShortTimestamp(newIGImage.getModifiedDate()));
 		assertEquals(existingIGImage.getFolderId(), newIGImage.getFolderId());
 		assertEquals(existingIGImage.getName(), newIGImage.getName());
 		assertEquals(existingIGImage.getDescription(),

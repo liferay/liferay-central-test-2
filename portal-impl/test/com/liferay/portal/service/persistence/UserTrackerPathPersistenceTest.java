@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchUserTrackerPathException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.UserTrackerPath;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
@@ -84,8 +85,9 @@ public class UserTrackerPathPersistenceTest extends BasePersistenceTestCase {
 			newUserTrackerPath.getUserTrackerId());
 		assertEquals(existingUserTrackerPath.getPath(),
 			newUserTrackerPath.getPath());
-		assertEquals(existingUserTrackerPath.getPathDate(),
-			newUserTrackerPath.getPathDate());
+		assertEquals(Time.getShortTimestamp(
+				existingUserTrackerPath.getPathDate()),
+			Time.getShortTimestamp(newUserTrackerPath.getPathDate()));
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {

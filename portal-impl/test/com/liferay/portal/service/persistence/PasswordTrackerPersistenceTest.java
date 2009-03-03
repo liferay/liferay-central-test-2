@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchPasswordTrackerException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.PasswordTracker;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
@@ -82,8 +83,9 @@ public class PasswordTrackerPersistenceTest extends BasePersistenceTestCase {
 			newPasswordTracker.getPasswordTrackerId());
 		assertEquals(existingPasswordTracker.getUserId(),
 			newPasswordTracker.getUserId());
-		assertEquals(existingPasswordTracker.getCreateDate(),
-			newPasswordTracker.getCreateDate());
+		assertEquals(Time.getShortTimestamp(
+				existingPasswordTracker.getCreateDate()),
+			Time.getShortTimestamp(newPasswordTracker.getCreateDate()));
 		assertEquals(existingPasswordTracker.getPassword(),
 			newPasswordTracker.getPassword());
 	}

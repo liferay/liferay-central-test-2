@@ -23,6 +23,7 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.messageboards.NoSuchThreadException;
@@ -93,8 +94,8 @@ public class MBThreadPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingMBThread.getViewCount(), newMBThread.getViewCount());
 		assertEquals(existingMBThread.getLastPostByUserId(),
 			newMBThread.getLastPostByUserId());
-		assertEquals(existingMBThread.getLastPostDate(),
-			newMBThread.getLastPostDate());
+		assertEquals(Time.getShortTimestamp(existingMBThread.getLastPostDate()),
+			Time.getShortTimestamp(newMBThread.getLastPostDate()));
 		assertEquals(existingMBThread.getPriority(), newMBThread.getPriority());
 	}
 

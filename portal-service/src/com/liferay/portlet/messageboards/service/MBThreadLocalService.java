@@ -164,6 +164,7 @@ public interface MBThreadLocalService {
 	public int getThreadsCount(long categoryId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasReadThread(long userId, long threadId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

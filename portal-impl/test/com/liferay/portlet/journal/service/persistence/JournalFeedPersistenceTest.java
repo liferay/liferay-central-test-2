@@ -23,6 +23,7 @@
 package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.journal.NoSuchFeedException;
@@ -107,10 +108,11 @@ public class JournalFeedPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingJournalFeed.getUserId(), newJournalFeed.getUserId());
 		assertEquals(existingJournalFeed.getUserName(),
 			newJournalFeed.getUserName());
-		assertEquals(existingJournalFeed.getCreateDate(),
-			newJournalFeed.getCreateDate());
-		assertEquals(existingJournalFeed.getModifiedDate(),
-			newJournalFeed.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(existingJournalFeed.getCreateDate()),
+			Time.getShortTimestamp(newJournalFeed.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingJournalFeed.getModifiedDate()),
+			Time.getShortTimestamp(newJournalFeed.getModifiedDate()));
 		assertEquals(existingJournalFeed.getFeedId(), newJournalFeed.getFeedId());
 		assertEquals(existingJournalFeed.getName(), newJournalFeed.getName());
 		assertEquals(existingJournalFeed.getDescription(),

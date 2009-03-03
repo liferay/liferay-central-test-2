@@ -22,10 +22,6 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.annotation.Propagation;
-import com.liferay.portal.kernel.annotation.Transactional;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 /**
@@ -34,8 +30,6 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @author Brian Wing Shun Chan
  *
  */
-@Transactional(rollbackFor =  {
-	PortalException.class, SystemException.class})
 public interface ShoppingOrderPersistence extends BasePersistence {
 	public com.liferay.portlet.shopping.model.ShoppingOrder create(long orderId);
 
@@ -75,7 +69,6 @@ public interface ShoppingOrderPersistence extends BasePersistence {
 		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder,
 		boolean merge) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.shopping.model.ShoppingOrder findByPrimaryKey(
 		long orderId)
 		throws com.liferay.portal.SystemException,
@@ -84,41 +77,34 @@ public interface ShoppingOrderPersistence extends BasePersistence {
 	public com.liferay.portlet.shopping.model.ShoppingOrder fetchByPrimaryKey(
 		long orderId) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findByGroupId(
 		long groupId) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findByGroupId(
 		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findByGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.shopping.model.ShoppingOrder findByGroupId_First(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchOrderException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.shopping.model.ShoppingOrder findByGroupId_Last(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchOrderException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.shopping.model.ShoppingOrder[] findByGroupId_PrevAndNext(
 		long orderId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchOrderException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.shopping.model.ShoppingOrder findByNumber(
 		java.lang.String number)
 		throws com.liferay.portal.SystemException,
@@ -127,7 +113,6 @@ public interface ShoppingOrderPersistence extends BasePersistence {
 	public com.liferay.portlet.shopping.model.ShoppingOrder fetchByNumber(
 		java.lang.String number) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.shopping.model.ShoppingOrder findByPPTxnId(
 		java.lang.String ppTxnId)
 		throws com.liferay.portal.SystemException,
@@ -136,37 +121,31 @@ public interface ShoppingOrderPersistence extends BasePersistence {
 	public com.liferay.portlet.shopping.model.ShoppingOrder fetchByPPTxnId(
 		java.lang.String ppTxnId) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findByG_U_PPPS(
 		long groupId, long userId, java.lang.String ppPaymentStatus)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findByG_U_PPPS(
 		long groupId, long userId, java.lang.String ppPaymentStatus, int start,
 		int end) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findByG_U_PPPS(
 		long groupId, long userId, java.lang.String ppPaymentStatus, int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.shopping.model.ShoppingOrder findByG_U_PPPS_First(
 		long groupId, long userId, java.lang.String ppPaymentStatus,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchOrderException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.shopping.model.ShoppingOrder findByG_U_PPPS_Last(
 		long groupId, long userId, java.lang.String ppPaymentStatus,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchOrderException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.shopping.model.ShoppingOrder[] findByG_U_PPPS_PrevAndNext(
 		long orderId, long groupId, long userId,
 		java.lang.String ppPaymentStatus,
@@ -174,25 +153,20 @@ public interface ShoppingOrderPersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchOrderException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findAll()
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findAll(
 		int start, int end) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findAll(
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
@@ -214,23 +188,18 @@ public interface ShoppingOrderPersistence extends BasePersistence {
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByNumber(java.lang.String number)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByPPTxnId(java.lang.String ppTxnId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByG_U_PPPS(long groupId, long userId,
 		java.lang.String ppPaymentStatus)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countAll() throws com.liferay.portal.SystemException;
 }

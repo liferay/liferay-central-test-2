@@ -108,6 +108,7 @@ public interface DLFolderService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasInheritableLock(long folderId)
 		throws com.liferay.portal.PortalException;
 

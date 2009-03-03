@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchEmailAddressException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
@@ -93,10 +94,12 @@ public class EmailAddressPersistenceTest extends BasePersistenceTestCase {
 			newEmailAddress.getUserId());
 		assertEquals(existingEmailAddress.getUserName(),
 			newEmailAddress.getUserName());
-		assertEquals(existingEmailAddress.getCreateDate(),
-			newEmailAddress.getCreateDate());
-		assertEquals(existingEmailAddress.getModifiedDate(),
-			newEmailAddress.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(
+				existingEmailAddress.getCreateDate()),
+			Time.getShortTimestamp(newEmailAddress.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingEmailAddress.getModifiedDate()),
+			Time.getShortTimestamp(newEmailAddress.getModifiedDate()));
 		assertEquals(existingEmailAddress.getClassNameId(),
 			newEmailAddress.getClassNameId());
 		assertEquals(existingEmailAddress.getClassPK(),

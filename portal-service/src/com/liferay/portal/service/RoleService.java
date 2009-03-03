@@ -101,11 +101,13 @@ public interface RoleService {
 	public java.util.List<com.liferay.portal.model.Role> getUserRoles(
 		long userId) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasUserRole(long userId, long companyId,
 		java.lang.String name, boolean inherited)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasUserRoles(long userId, long companyId,
 		java.lang.String[] names, boolean inherited)
 		throws com.liferay.portal.PortalException,

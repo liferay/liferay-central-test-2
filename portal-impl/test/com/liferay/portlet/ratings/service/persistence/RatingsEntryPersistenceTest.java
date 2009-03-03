@@ -23,6 +23,7 @@
 package com.liferay.portlet.ratings.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.ratings.NoSuchEntryException;
@@ -92,10 +93,12 @@ public class RatingsEntryPersistenceTest extends BasePersistenceTestCase {
 			newRatingsEntry.getUserId());
 		assertEquals(existingRatingsEntry.getUserName(),
 			newRatingsEntry.getUserName());
-		assertEquals(existingRatingsEntry.getCreateDate(),
-			newRatingsEntry.getCreateDate());
-		assertEquals(existingRatingsEntry.getModifiedDate(),
-			newRatingsEntry.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(
+				existingRatingsEntry.getCreateDate()),
+			Time.getShortTimestamp(newRatingsEntry.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingRatingsEntry.getModifiedDate()),
+			Time.getShortTimestamp(newRatingsEntry.getModifiedDate()));
 		assertEquals(existingRatingsEntry.getClassNameId(),
 			newRatingsEntry.getClassNameId());
 		assertEquals(existingRatingsEntry.getClassPK(),

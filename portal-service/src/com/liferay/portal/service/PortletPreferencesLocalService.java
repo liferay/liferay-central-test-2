@@ -95,6 +95,12 @@ public interface PortletPreferencesLocalService {
 		com.liferay.portal.model.PortletPreferences portletPreferences)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.PortletPreferences addPortletPreferences(
+		long companyId, long ownerId, int ownerType, long plid,
+		java.lang.String portletId, com.liferay.portal.model.Portlet portlet,
+		java.lang.String defaultPreferences)
+		throws com.liferay.portal.SystemException;
+
 	public void deletePortletPreferences(long ownerId, int ownerType, long plid)
 		throws com.liferay.portal.SystemException;
 
@@ -132,14 +138,17 @@ public interface PortletPreferencesLocalService {
 	public java.util.List<com.liferay.portal.model.PortletPreferences> getPortletPreferencesByPlid(
 		long plid) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public javax.portlet.PortletPreferences getPreferences(
 		com.liferay.portal.model.PortletPreferencesIds portletPreferencesIds)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public javax.portlet.PortletPreferences getPreferences(long companyId,
 		long ownerId, int ownerType, long plid, java.lang.String portletId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public javax.portlet.PortletPreferences getPreferences(long companyId,
 		long ownerId, int ownerType, long plid, java.lang.String portletId,
 		java.lang.String defaultPreferences)

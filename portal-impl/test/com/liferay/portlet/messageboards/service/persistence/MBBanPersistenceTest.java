@@ -23,6 +23,7 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.messageboards.NoSuchBanException;
@@ -88,8 +89,10 @@ public class MBBanPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingMBBan.getCompanyId(), newMBBan.getCompanyId());
 		assertEquals(existingMBBan.getUserId(), newMBBan.getUserId());
 		assertEquals(existingMBBan.getUserName(), newMBBan.getUserName());
-		assertEquals(existingMBBan.getCreateDate(), newMBBan.getCreateDate());
-		assertEquals(existingMBBan.getModifiedDate(), newMBBan.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(existingMBBan.getCreateDate()),
+			Time.getShortTimestamp(newMBBan.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(existingMBBan.getModifiedDate()),
+			Time.getShortTimestamp(newMBBan.getModifiedDate()));
 		assertEquals(existingMBBan.getBanUserId(), newMBBan.getBanUserId());
 	}
 

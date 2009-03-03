@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchPasswordPolicyException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
@@ -108,10 +109,12 @@ public class PasswordPolicyPersistenceTest extends BasePersistenceTestCase {
 			newPasswordPolicy.getUserId());
 		assertEquals(existingPasswordPolicy.getUserName(),
 			newPasswordPolicy.getUserName());
-		assertEquals(existingPasswordPolicy.getCreateDate(),
-			newPasswordPolicy.getCreateDate());
-		assertEquals(existingPasswordPolicy.getModifiedDate(),
-			newPasswordPolicy.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(
+				existingPasswordPolicy.getCreateDate()),
+			Time.getShortTimestamp(newPasswordPolicy.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingPasswordPolicy.getModifiedDate()),
+			Time.getShortTimestamp(newPasswordPolicy.getModifiedDate()));
 		assertEquals(existingPasswordPolicy.getDefaultPolicy(),
 			newPasswordPolicy.getDefaultPolicy());
 		assertEquals(existingPasswordPolicy.getName(),

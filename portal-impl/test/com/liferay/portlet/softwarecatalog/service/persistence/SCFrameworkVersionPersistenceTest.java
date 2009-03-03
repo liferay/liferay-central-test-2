@@ -23,6 +23,7 @@
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException;
@@ -96,10 +97,12 @@ public class SCFrameworkVersionPersistenceTest extends BasePersistenceTestCase {
 			newSCFrameworkVersion.getUserId());
 		assertEquals(existingSCFrameworkVersion.getUserName(),
 			newSCFrameworkVersion.getUserName());
-		assertEquals(existingSCFrameworkVersion.getCreateDate(),
-			newSCFrameworkVersion.getCreateDate());
-		assertEquals(existingSCFrameworkVersion.getModifiedDate(),
-			newSCFrameworkVersion.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(
+				existingSCFrameworkVersion.getCreateDate()),
+			Time.getShortTimestamp(newSCFrameworkVersion.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingSCFrameworkVersion.getModifiedDate()),
+			Time.getShortTimestamp(newSCFrameworkVersion.getModifiedDate()));
 		assertEquals(existingSCFrameworkVersion.getName(),
 			newSCFrameworkVersion.getName());
 		assertEquals(existingSCFrameworkVersion.getUrl(),

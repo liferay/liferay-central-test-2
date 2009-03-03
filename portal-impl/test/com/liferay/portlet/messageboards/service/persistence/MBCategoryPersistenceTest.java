@@ -23,6 +23,7 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.messageboards.NoSuchCategoryException;
@@ -96,17 +97,19 @@ public class MBCategoryPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingMBCategory.getUserId(), newMBCategory.getUserId());
 		assertEquals(existingMBCategory.getUserName(),
 			newMBCategory.getUserName());
-		assertEquals(existingMBCategory.getCreateDate(),
-			newMBCategory.getCreateDate());
-		assertEquals(existingMBCategory.getModifiedDate(),
-			newMBCategory.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(existingMBCategory.getCreateDate()),
+			Time.getShortTimestamp(newMBCategory.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingMBCategory.getModifiedDate()),
+			Time.getShortTimestamp(newMBCategory.getModifiedDate()));
 		assertEquals(existingMBCategory.getParentCategoryId(),
 			newMBCategory.getParentCategoryId());
 		assertEquals(existingMBCategory.getName(), newMBCategory.getName());
 		assertEquals(existingMBCategory.getDescription(),
 			newMBCategory.getDescription());
-		assertEquals(existingMBCategory.getLastPostDate(),
-			newMBCategory.getLastPostDate());
+		assertEquals(Time.getShortTimestamp(
+				existingMBCategory.getLastPostDate()),
+			Time.getShortTimestamp(newMBCategory.getLastPostDate()));
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {

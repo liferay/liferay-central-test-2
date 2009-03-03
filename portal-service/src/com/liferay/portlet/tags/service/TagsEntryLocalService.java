@@ -129,6 +129,7 @@ public interface TagsEntryLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasEntry(long groupId, java.lang.String name,
 		boolean folksonomy)
 		throws com.liferay.portal.PortalException,

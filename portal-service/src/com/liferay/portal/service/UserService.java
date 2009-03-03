@@ -165,9 +165,11 @@ public interface UserService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasGroupUser(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasRoleUser(long roleId, long userId)
 		throws com.liferay.portal.SystemException;
 

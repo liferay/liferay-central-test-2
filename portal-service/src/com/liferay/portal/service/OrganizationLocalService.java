@@ -171,12 +171,15 @@ public interface OrganizationLocalService {
 	public int getUserOrganizationsCount(long userId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasGroupOrganization(long groupId, long organizationId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasUserOrganization(long userId, long organizationId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasPasswordPolicyOrganization(long passwordPolicyId,
 		long organizationId) throws com.liferay.portal.SystemException;
 

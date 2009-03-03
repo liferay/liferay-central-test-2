@@ -22,19 +22,12 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.annotation.Propagation;
-import com.liferay.portal.kernel.annotation.Transactional;
-
 /**
  * <a href="CompanyPersistence.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-@Transactional(rollbackFor =  {
-	PortalException.class, SystemException.class})
 public interface CompanyPersistence extends BasePersistence {
 	public com.liferay.portal.model.Company create(long companyId);
 
@@ -74,7 +67,6 @@ public interface CompanyPersistence extends BasePersistence {
 		com.liferay.portal.model.Company company, boolean merge)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Company findByPrimaryKey(long companyId)
 		throws com.liferay.portal.NoSuchCompanyException,
 			com.liferay.portal.SystemException;
@@ -82,7 +74,6 @@ public interface CompanyPersistence extends BasePersistence {
 	public com.liferay.portal.model.Company fetchByPrimaryKey(long companyId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Company findByWebId(java.lang.String webId)
 		throws com.liferay.portal.NoSuchCompanyException,
 			com.liferay.portal.SystemException;
@@ -90,7 +81,6 @@ public interface CompanyPersistence extends BasePersistence {
 	public com.liferay.portal.model.Company fetchByWebId(java.lang.String webId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Company findByVirtualHost(
 		java.lang.String virtualHost)
 		throws com.liferay.portal.NoSuchCompanyException,
@@ -99,7 +89,6 @@ public interface CompanyPersistence extends BasePersistence {
 	public com.liferay.portal.model.Company fetchByVirtualHost(
 		java.lang.String virtualHost) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Company findByMx(java.lang.String mx)
 		throws com.liferay.portal.NoSuchCompanyException,
 			com.liferay.portal.SystemException;
@@ -107,7 +96,6 @@ public interface CompanyPersistence extends BasePersistence {
 	public com.liferay.portal.model.Company fetchByMx(java.lang.String mx)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Company findByLogoId(long logoId)
 		throws com.liferay.portal.NoSuchCompanyException,
 			com.liferay.portal.SystemException;
@@ -115,25 +103,20 @@ public interface CompanyPersistence extends BasePersistence {
 	public com.liferay.portal.model.Company fetchByLogoId(long logoId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Company> findAll()
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Company> findAll(int start,
 		int end) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Company> findAll(int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
@@ -156,22 +139,17 @@ public interface CompanyPersistence extends BasePersistence {
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByWebId(java.lang.String webId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByVirtualHost(java.lang.String virtualHost)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByMx(java.lang.String mx)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countByLogoId(long logoId)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int countAll() throws com.liferay.portal.SystemException;
 }

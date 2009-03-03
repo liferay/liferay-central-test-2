@@ -120,6 +120,7 @@ public interface DLFileEntryService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasFileEntryLock(long folderId, java.lang.String name)
 		throws com.liferay.portal.PortalException;
 

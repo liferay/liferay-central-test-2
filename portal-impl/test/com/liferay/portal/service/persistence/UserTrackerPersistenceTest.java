@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchUserTrackerException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
@@ -87,8 +88,9 @@ public class UserTrackerPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingUserTracker.getCompanyId(),
 			newUserTracker.getCompanyId());
 		assertEquals(existingUserTracker.getUserId(), newUserTracker.getUserId());
-		assertEquals(existingUserTracker.getModifiedDate(),
-			newUserTracker.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(
+				existingUserTracker.getModifiedDate()),
+			Time.getShortTimestamp(newUserTracker.getModifiedDate()));
 		assertEquals(existingUserTracker.getSessionId(),
 			newUserTracker.getSessionId());
 		assertEquals(existingUserTracker.getRemoteAddr(),

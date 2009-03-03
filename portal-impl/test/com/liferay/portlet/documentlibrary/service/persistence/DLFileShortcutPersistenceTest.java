@@ -23,6 +23,7 @@
 package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
@@ -95,10 +96,12 @@ public class DLFileShortcutPersistenceTest extends BasePersistenceTestCase {
 			newDLFileShortcut.getUserId());
 		assertEquals(existingDLFileShortcut.getUserName(),
 			newDLFileShortcut.getUserName());
-		assertEquals(existingDLFileShortcut.getCreateDate(),
-			newDLFileShortcut.getCreateDate());
-		assertEquals(existingDLFileShortcut.getModifiedDate(),
-			newDLFileShortcut.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(
+				existingDLFileShortcut.getCreateDate()),
+			Time.getShortTimestamp(newDLFileShortcut.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingDLFileShortcut.getModifiedDate()),
+			Time.getShortTimestamp(newDLFileShortcut.getModifiedDate()));
 		assertEquals(existingDLFileShortcut.getFolderId(),
 			newDLFileShortcut.getFolderId());
 		assertEquals(existingDLFileShortcut.getToFolderId(),

@@ -23,6 +23,7 @@
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
@@ -101,10 +102,12 @@ public class SCProductEntryPersistenceTest extends BasePersistenceTestCase {
 			newSCProductEntry.getUserId());
 		assertEquals(existingSCProductEntry.getUserName(),
 			newSCProductEntry.getUserName());
-		assertEquals(existingSCProductEntry.getCreateDate(),
-			newSCProductEntry.getCreateDate());
-		assertEquals(existingSCProductEntry.getModifiedDate(),
-			newSCProductEntry.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(
+				existingSCProductEntry.getCreateDate()),
+			Time.getShortTimestamp(newSCProductEntry.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingSCProductEntry.getModifiedDate()),
+			Time.getShortTimestamp(newSCProductEntry.getModifiedDate()));
 		assertEquals(existingSCProductEntry.getName(),
 			newSCProductEntry.getName());
 		assertEquals(existingSCProductEntry.getType(),

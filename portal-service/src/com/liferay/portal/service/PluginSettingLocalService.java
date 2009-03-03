@@ -106,6 +106,7 @@ public interface PluginSettingLocalService {
 		long companyId, java.lang.String pluginId, java.lang.String pluginType)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasPermission(long userId, java.lang.String pluginId,
 		java.lang.String pluginType);
 

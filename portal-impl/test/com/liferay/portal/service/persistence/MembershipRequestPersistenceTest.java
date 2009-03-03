@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchMembershipRequestException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.MembershipRequest;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
@@ -90,16 +91,18 @@ public class MembershipRequestPersistenceTest extends BasePersistenceTestCase {
 			newMembershipRequest.getCompanyId());
 		assertEquals(existingMembershipRequest.getUserId(),
 			newMembershipRequest.getUserId());
-		assertEquals(existingMembershipRequest.getCreateDate(),
-			newMembershipRequest.getCreateDate());
+		assertEquals(Time.getShortTimestamp(
+				existingMembershipRequest.getCreateDate()),
+			Time.getShortTimestamp(newMembershipRequest.getCreateDate()));
 		assertEquals(existingMembershipRequest.getGroupId(),
 			newMembershipRequest.getGroupId());
 		assertEquals(existingMembershipRequest.getComments(),
 			newMembershipRequest.getComments());
 		assertEquals(existingMembershipRequest.getReplyComments(),
 			newMembershipRequest.getReplyComments());
-		assertEquals(existingMembershipRequest.getReplyDate(),
-			newMembershipRequest.getReplyDate());
+		assertEquals(Time.getShortTimestamp(
+				existingMembershipRequest.getReplyDate()),
+			Time.getShortTimestamp(newMembershipRequest.getReplyDate()));
 		assertEquals(existingMembershipRequest.getReplierUserId(),
 			newMembershipRequest.getReplierUserId());
 		assertEquals(existingMembershipRequest.getStatusId(),

@@ -23,6 +23,7 @@
 package com.liferay.portlet.wiki.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.wiki.NoSuchNodeException;
@@ -92,15 +93,15 @@ public class WikiNodePersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingWikiNode.getCompanyId(), newWikiNode.getCompanyId());
 		assertEquals(existingWikiNode.getUserId(), newWikiNode.getUserId());
 		assertEquals(existingWikiNode.getUserName(), newWikiNode.getUserName());
-		assertEquals(existingWikiNode.getCreateDate(),
-			newWikiNode.getCreateDate());
-		assertEquals(existingWikiNode.getModifiedDate(),
-			newWikiNode.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(existingWikiNode.getCreateDate()),
+			Time.getShortTimestamp(newWikiNode.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(existingWikiNode.getModifiedDate()),
+			Time.getShortTimestamp(newWikiNode.getModifiedDate()));
 		assertEquals(existingWikiNode.getName(), newWikiNode.getName());
 		assertEquals(existingWikiNode.getDescription(),
 			newWikiNode.getDescription());
-		assertEquals(existingWikiNode.getLastPostDate(),
-			newWikiNode.getLastPostDate());
+		assertEquals(Time.getShortTimestamp(existingWikiNode.getLastPostDate()),
+			Time.getShortTimestamp(newWikiNode.getLastPostDate()));
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {

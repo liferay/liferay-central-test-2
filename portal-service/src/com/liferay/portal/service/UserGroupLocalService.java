@@ -122,6 +122,7 @@ public interface UserGroupLocalService {
 	public java.util.List<com.liferay.portal.model.UserGroup> getUserUserGroups(
 		long userId) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasGroupUserGroup(long groupId, long userGroupId)
 		throws com.liferay.portal.SystemException;
 

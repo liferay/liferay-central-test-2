@@ -23,6 +23,7 @@
 package com.liferay.portlet.shopping.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.shopping.NoSuchItemException;
@@ -116,10 +117,12 @@ public class ShoppingItemPersistenceTest extends BasePersistenceTestCase {
 			newShoppingItem.getUserId());
 		assertEquals(existingShoppingItem.getUserName(),
 			newShoppingItem.getUserName());
-		assertEquals(existingShoppingItem.getCreateDate(),
-			newShoppingItem.getCreateDate());
-		assertEquals(existingShoppingItem.getModifiedDate(),
-			newShoppingItem.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(
+				existingShoppingItem.getCreateDate()),
+			Time.getShortTimestamp(newShoppingItem.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingShoppingItem.getModifiedDate()),
+			Time.getShortTimestamp(newShoppingItem.getModifiedDate()));
 		assertEquals(existingShoppingItem.getCategoryId(),
 			newShoppingItem.getCategoryId());
 		assertEquals(existingShoppingItem.getSku(), newShoppingItem.getSku());

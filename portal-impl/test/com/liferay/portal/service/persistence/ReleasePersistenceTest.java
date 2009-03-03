@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchReleaseException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
@@ -81,12 +82,14 @@ public class ReleasePersistenceTest extends BasePersistenceTestCase {
 		Release existingRelease = _persistence.findByPrimaryKey(newRelease.getPrimaryKey());
 
 		assertEquals(existingRelease.getReleaseId(), newRelease.getReleaseId());
-		assertEquals(existingRelease.getCreateDate(), newRelease.getCreateDate());
-		assertEquals(existingRelease.getModifiedDate(),
-			newRelease.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(existingRelease.getCreateDate()),
+			Time.getShortTimestamp(newRelease.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(existingRelease.getModifiedDate()),
+			Time.getShortTimestamp(newRelease.getModifiedDate()));
 		assertEquals(existingRelease.getBuildNumber(),
 			newRelease.getBuildNumber());
-		assertEquals(existingRelease.getBuildDate(), newRelease.getBuildDate());
+		assertEquals(Time.getShortTimestamp(existingRelease.getBuildDate()),
+			Time.getShortTimestamp(newRelease.getBuildDate()));
 		assertEquals(existingRelease.getVerified(), newRelease.getVerified());
 	}
 

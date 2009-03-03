@@ -23,6 +23,7 @@
 package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.journal.NoSuchStructureException;
@@ -100,10 +101,12 @@ public class JournalStructurePersistenceTest extends BasePersistenceTestCase {
 			newJournalStructure.getUserId());
 		assertEquals(existingJournalStructure.getUserName(),
 			newJournalStructure.getUserName());
-		assertEquals(existingJournalStructure.getCreateDate(),
-			newJournalStructure.getCreateDate());
-		assertEquals(existingJournalStructure.getModifiedDate(),
-			newJournalStructure.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(
+				existingJournalStructure.getCreateDate()),
+			Time.getShortTimestamp(newJournalStructure.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingJournalStructure.getModifiedDate()),
+			Time.getShortTimestamp(newJournalStructure.getModifiedDate()));
 		assertEquals(existingJournalStructure.getStructureId(),
 			newJournalStructure.getStructureId());
 		assertEquals(existingJournalStructure.getParentStructureId(),

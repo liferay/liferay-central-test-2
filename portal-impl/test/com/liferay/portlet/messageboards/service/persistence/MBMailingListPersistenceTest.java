@@ -23,6 +23,7 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.messageboards.NoSuchMailingListException;
@@ -111,10 +112,12 @@ public class MBMailingListPersistenceTest extends BasePersistenceTestCase {
 			newMBMailingList.getUserId());
 		assertEquals(existingMBMailingList.getUserName(),
 			newMBMailingList.getUserName());
-		assertEquals(existingMBMailingList.getCreateDate(),
-			newMBMailingList.getCreateDate());
-		assertEquals(existingMBMailingList.getModifiedDate(),
-			newMBMailingList.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(
+				existingMBMailingList.getCreateDate()),
+			Time.getShortTimestamp(newMBMailingList.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingMBMailingList.getModifiedDate()),
+			Time.getShortTimestamp(newMBMailingList.getModifiedDate()));
 		assertEquals(existingMBMailingList.getCategoryId(),
 			newMBMailingList.getCategoryId());
 		assertEquals(existingMBMailingList.getEmailAddress(),

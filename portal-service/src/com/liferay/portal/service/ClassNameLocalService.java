@@ -91,6 +91,9 @@ public interface ClassNameLocalService {
 		com.liferay.portal.model.ClassName className)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.ClassName addClassName(
+		java.lang.String value) throws com.liferay.portal.SystemException;
+
 	public void checkClassNames() throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

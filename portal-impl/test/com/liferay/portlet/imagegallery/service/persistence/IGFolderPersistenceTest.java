@@ -23,6 +23,7 @@
 package com.liferay.portlet.imagegallery.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
@@ -90,10 +91,10 @@ public class IGFolderPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingIGFolder.getGroupId(), newIGFolder.getGroupId());
 		assertEquals(existingIGFolder.getCompanyId(), newIGFolder.getCompanyId());
 		assertEquals(existingIGFolder.getUserId(), newIGFolder.getUserId());
-		assertEquals(existingIGFolder.getCreateDate(),
-			newIGFolder.getCreateDate());
-		assertEquals(existingIGFolder.getModifiedDate(),
-			newIGFolder.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(existingIGFolder.getCreateDate()),
+			Time.getShortTimestamp(newIGFolder.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(existingIGFolder.getModifiedDate()),
+			Time.getShortTimestamp(newIGFolder.getModifiedDate()));
 		assertEquals(existingIGFolder.getParentFolderId(),
 			newIGFolder.getParentFolderId());
 		assertEquals(existingIGFolder.getName(), newIGFolder.getName());

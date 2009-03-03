@@ -23,6 +23,7 @@
 package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.journal.NoSuchArticleException;
@@ -117,10 +118,12 @@ public class JournalArticlePersistenceTest extends BasePersistenceTestCase {
 			newJournalArticle.getUserId());
 		assertEquals(existingJournalArticle.getUserName(),
 			newJournalArticle.getUserName());
-		assertEquals(existingJournalArticle.getCreateDate(),
-			newJournalArticle.getCreateDate());
-		assertEquals(existingJournalArticle.getModifiedDate(),
-			newJournalArticle.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(
+				existingJournalArticle.getCreateDate()),
+			Time.getShortTimestamp(newJournalArticle.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingJournalArticle.getModifiedDate()),
+			Time.getShortTimestamp(newJournalArticle.getModifiedDate()));
 		assertEquals(existingJournalArticle.getArticleId(),
 			newJournalArticle.getArticleId());
 		assertEquals(existingJournalArticle.getVersion(),
@@ -137,22 +140,26 @@ public class JournalArticlePersistenceTest extends BasePersistenceTestCase {
 			newJournalArticle.getStructureId());
 		assertEquals(existingJournalArticle.getTemplateId(),
 			newJournalArticle.getTemplateId());
-		assertEquals(existingJournalArticle.getDisplayDate(),
-			newJournalArticle.getDisplayDate());
+		assertEquals(Time.getShortTimestamp(
+				existingJournalArticle.getDisplayDate()),
+			Time.getShortTimestamp(newJournalArticle.getDisplayDate()));
 		assertEquals(existingJournalArticle.getApproved(),
 			newJournalArticle.getApproved());
 		assertEquals(existingJournalArticle.getApprovedByUserId(),
 			newJournalArticle.getApprovedByUserId());
 		assertEquals(existingJournalArticle.getApprovedByUserName(),
 			newJournalArticle.getApprovedByUserName());
-		assertEquals(existingJournalArticle.getApprovedDate(),
-			newJournalArticle.getApprovedDate());
+		assertEquals(Time.getShortTimestamp(
+				existingJournalArticle.getApprovedDate()),
+			Time.getShortTimestamp(newJournalArticle.getApprovedDate()));
 		assertEquals(existingJournalArticle.getExpired(),
 			newJournalArticle.getExpired());
-		assertEquals(existingJournalArticle.getExpirationDate(),
-			newJournalArticle.getExpirationDate());
-		assertEquals(existingJournalArticle.getReviewDate(),
-			newJournalArticle.getReviewDate());
+		assertEquals(Time.getShortTimestamp(
+				existingJournalArticle.getExpirationDate()),
+			Time.getShortTimestamp(newJournalArticle.getExpirationDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingJournalArticle.getReviewDate()),
+			Time.getShortTimestamp(newJournalArticle.getReviewDate()));
 		assertEquals(existingJournalArticle.getIndexable(),
 			newJournalArticle.getIndexable());
 		assertEquals(existingJournalArticle.getSmallImage(),

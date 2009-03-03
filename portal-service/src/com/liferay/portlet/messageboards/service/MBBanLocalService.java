@@ -121,6 +121,7 @@ public interface MBBanLocalService {
 	public int getBansCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasBan(long groupId, long banUserId)
 		throws com.liferay.portal.SystemException;
 }

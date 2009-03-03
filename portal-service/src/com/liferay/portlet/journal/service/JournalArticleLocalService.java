@@ -506,6 +506,7 @@ public interface JournalArticleLocalService {
 	public int getTemplateArticlesCount(long groupId,
 		java.lang.String templateId) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasArticle(long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException;
 

@@ -23,6 +23,7 @@
 package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
@@ -104,10 +105,11 @@ public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
 			newDLFileEntry.getVersionUserId());
 		assertEquals(existingDLFileEntry.getVersionUserName(),
 			newDLFileEntry.getVersionUserName());
-		assertEquals(existingDLFileEntry.getCreateDate(),
-			newDLFileEntry.getCreateDate());
-		assertEquals(existingDLFileEntry.getModifiedDate(),
-			newDLFileEntry.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(existingDLFileEntry.getCreateDate()),
+			Time.getShortTimestamp(newDLFileEntry.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingDLFileEntry.getModifiedDate()),
+			Time.getShortTimestamp(newDLFileEntry.getModifiedDate()));
 		assertEquals(existingDLFileEntry.getFolderId(),
 			newDLFileEntry.getFolderId());
 		assertEquals(existingDLFileEntry.getName(), newDLFileEntry.getName());

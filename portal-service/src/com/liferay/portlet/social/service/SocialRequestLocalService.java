@@ -147,10 +147,12 @@ public interface SocialRequestLocalService {
 	public int getUserRequestsCount(long userId, int status)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasRequest(long userId, java.lang.String className,
 		long classPK, int type, int status)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasRequest(long userId, java.lang.String className,
 		long classPK, int type, long receiverUserId, int status)
 		throws com.liferay.portal.SystemException;

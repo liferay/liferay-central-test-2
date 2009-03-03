@@ -23,6 +23,7 @@
 package com.liferay.portlet.shopping.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.shopping.NoSuchCouponException;
@@ -103,20 +104,23 @@ public class ShoppingCouponPersistenceTest extends BasePersistenceTestCase {
 			newShoppingCoupon.getUserId());
 		assertEquals(existingShoppingCoupon.getUserName(),
 			newShoppingCoupon.getUserName());
-		assertEquals(existingShoppingCoupon.getCreateDate(),
-			newShoppingCoupon.getCreateDate());
-		assertEquals(existingShoppingCoupon.getModifiedDate(),
-			newShoppingCoupon.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(
+				existingShoppingCoupon.getCreateDate()),
+			Time.getShortTimestamp(newShoppingCoupon.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingShoppingCoupon.getModifiedDate()),
+			Time.getShortTimestamp(newShoppingCoupon.getModifiedDate()));
 		assertEquals(existingShoppingCoupon.getCode(),
 			newShoppingCoupon.getCode());
 		assertEquals(existingShoppingCoupon.getName(),
 			newShoppingCoupon.getName());
 		assertEquals(existingShoppingCoupon.getDescription(),
 			newShoppingCoupon.getDescription());
-		assertEquals(existingShoppingCoupon.getStartDate(),
-			newShoppingCoupon.getStartDate());
-		assertEquals(existingShoppingCoupon.getEndDate(),
-			newShoppingCoupon.getEndDate());
+		assertEquals(Time.getShortTimestamp(
+				existingShoppingCoupon.getStartDate()),
+			Time.getShortTimestamp(newShoppingCoupon.getStartDate()));
+		assertEquals(Time.getShortTimestamp(existingShoppingCoupon.getEndDate()),
+			Time.getShortTimestamp(newShoppingCoupon.getEndDate()));
 		assertEquals(existingShoppingCoupon.getActive(),
 			newShoppingCoupon.getActive());
 		assertEquals(existingShoppingCoupon.getLimitCategories(),

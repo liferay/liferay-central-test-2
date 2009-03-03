@@ -23,6 +23,7 @@
 package com.liferay.portlet.tags.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.tags.NoSuchPropertyException;
@@ -92,10 +93,12 @@ public class TagsPropertyPersistenceTest extends BasePersistenceTestCase {
 			newTagsProperty.getUserId());
 		assertEquals(existingTagsProperty.getUserName(),
 			newTagsProperty.getUserName());
-		assertEquals(existingTagsProperty.getCreateDate(),
-			newTagsProperty.getCreateDate());
-		assertEquals(existingTagsProperty.getModifiedDate(),
-			newTagsProperty.getModifiedDate());
+		assertEquals(Time.getShortTimestamp(
+				existingTagsProperty.getCreateDate()),
+			Time.getShortTimestamp(newTagsProperty.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingTagsProperty.getModifiedDate()),
+			Time.getShortTimestamp(newTagsProperty.getModifiedDate()));
 		assertEquals(existingTagsProperty.getEntryId(),
 			newTagsProperty.getEntryId());
 		assertEquals(existingTagsProperty.getKey(), newTagsProperty.getKey());
