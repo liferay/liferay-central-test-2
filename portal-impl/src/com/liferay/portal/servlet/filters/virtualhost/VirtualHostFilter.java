@@ -182,7 +182,9 @@ public class VirtualHostFilter extends BasePortalFilter {
 			_log.debug("Friendly URL " + friendlyURL);
 		}
 
-		if (!isValidFriendlyURL(friendlyURL)) {
+		if (!friendlyURL.equals(StringPool.SLASH) &&
+			!isValidFriendlyURL(friendlyURL)) {
+
 			_log.debug("Friendly URL is not valid");
 
 			processFilter(
