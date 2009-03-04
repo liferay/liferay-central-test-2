@@ -77,7 +77,11 @@ public class PublishDraftEntryTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isTextPresent("Draft Test"));
+		selenium.click(RuntimeVariables.replace("link=Blogs Test Page"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Draft Test"));
+		selenium.click(RuntimeVariables.replace("link=Draft Test"));
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

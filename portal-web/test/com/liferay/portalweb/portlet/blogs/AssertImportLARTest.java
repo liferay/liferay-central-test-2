@@ -52,5 +52,8 @@ public class AssertImportLARTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("link=Blogs Test Page"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Entry"));
+		selenium.click(RuntimeVariables.replace("link=Test Entry"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("This is a test entry comment!"));
 	}
 }
