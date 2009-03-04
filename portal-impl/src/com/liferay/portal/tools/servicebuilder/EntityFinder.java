@@ -52,7 +52,7 @@ public class EntityFinder {
 	}
 
 	public boolean isCollection() {
-		if (_returnType != null && _returnType.equals("Collection")) {
+		if ((_returnType != null) && _returnType.equals("Collection")) {
 			return true;
 		}
 		else {

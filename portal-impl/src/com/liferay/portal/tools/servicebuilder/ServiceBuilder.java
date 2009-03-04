@@ -2858,7 +2858,13 @@ public class ServiceBuilder {
 
 					sb = new StringBuilder();
 
-					sb.append("create index " + indexName + " on ");
+					sb.append("create ");
+
+					if (!finder.isCollection()) {
+						sb.append("unique ");
+					}
+
+					sb.append("index " + indexName + " on ");
 					sb.append(indexSpec);
 
 					indexSQLs.put(indexSpec, sb.toString());
@@ -2881,7 +2887,11 @@ public class ServiceBuilder {
 		while (itr.hasNext()) {
 			String indexSQL = itr.next();
 
-			String entityName = indexSQL.split(" ")[4];
+			int pos = indexSQL.indexOf(" on ");
+
+			String indexSQLSuffix = indexSQL.substring(pos + 4);
+
+			String entityName = indexSQLSuffix.split(" ")[0];
 
 			if ((prevEntityName != null) &&
 				(!prevEntityName.equals(entityName))) {
