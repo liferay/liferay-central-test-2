@@ -38,16 +38,16 @@
 	background-image: url(../images/arrows/06_down.png);
 }
 
-.ui-autocomplete-even, .results-row td {
+.results-row td {
 	background: #F0F5F7;
 	padding: 5px 10px;
 }
 
-.ui-autocomplete-odd, .results-row.alt td {
+.results-row.alt td {
 	background: #D3DADD;
 }
 
-.ui-autocomplete-over, .results-row.hover td {
+.results-row.hover td {
 	background: #A8D6ED;
 }
 
@@ -1017,15 +1017,51 @@ img.exp-datepicker-button {
 
 /* ---------- Autocomplete ---------- */
 
-.ui-autocomplete-results {
+.exp-autocomplete-input {
+	width: 100%;
+}
+
+.exp-autocomplete-container {
+	position: absolute;
+	top: 1.6em;
+	width: 100%;
+}
+
+.exp-autocomplete-content {
+	background: #fff;
 	border: 1px solid;
-	border-color: #BFBFBF #DEDEDE #DEDEDE #BFBFBF;
+	border-color: #bfbfbf #dedede #dedede #bfbfbf;
 	overflow: hidden;
 	padding: 0;
+	position: absolute;
+	width: 100%;
 	z-index: 300;
 }
 
-.ui-autocomplete-results ul {
+.exp-autocomplete-shadow {
+	background: #000;	
+	margin: 0.3em;
+	opacity: 0.10;
+	position: absolute;
+	width: 100%;
+	z-index: 299;
+}
+
+.ie .exp-autocomplete-shadow{
+	filter: alpha(opacity=10);
+}
+
+.exp-autocomplete-iframe {
+	opacity: 0;
+	padding-bottom: 0.3em;
+	padding-right: 0.3em;
+}
+
+.ie6 .exp-autocomplete-iframe {
+	filter: alpha(opacity=0);
+}
+
+.exp-autocomplete-content ul {
 	list-style: none;
 	list-style-position: outside;
 	margin: 0;
@@ -1033,24 +1069,38 @@ img.exp-datepicker-button {
 	width: 100%;
 }
 
-.ui-autocomplete-results li {
-	cursor: default;
+.exp-autocomplete-content li {
+	cursor: pointer;
 	display: block;
 	line-height: 16px;
 	margin: 0;
 	overflow: hidden;
 	padding: 2px 5px;
+	white-space: nowrap;
 }
 
-.ui-autocomplete-loading, .ui-autocomplete-loading.focus {
+.ie .exp-autocomplete-content li {
+	zoom: 1;
+}
+
+.exp-autocomplete-content li strong {
+	color: #06c;
+	font-weight: bold;
+}
+
+.exp-autocomplete-highlight {
+	background: #06c;
+	color: #fff;
+}
+
+li.exp-autocomplete-highlight strong {
+	color: #fff;
+}
+
+.exp-autocomplete-loading, .exp-autocomplete-loading.focus {
 	background-image: url(../images/application/loading_indicator.gif);
 	background-position: right center;
 	background-repeat: no-repeat;
-}
-
-.ui-autocomplete-results li strong {
-	color: #06c;
-	font-weight: bold;
 }
 
 /* ---------- Tags ---------- */

@@ -24,13 +24,13 @@
 .results-header .sort-desc .result-column-name {
 }
 
-.ui-autocomplete-even, .results-row td {
+.results-row td {
 }
 
-.ui-autocomplete-odd, .results-row.alt td {
+.results-row.alt td {
 }
 
-.ui-autocomplete-over, .results-row.hover td {
+.results-row.hover td {
 }
 
 /* ---------- Breadcrumbs ---------- */
@@ -549,19 +549,46 @@ img.exp-datepicker-button {
 
 /* ---------- Autocomplete ---------- */
 
-.ui-autocomplete-results {
+.exp-autocomplete-input {
 }
 
-.ui-autocomplete-results ul {
+.exp-autocomplete-container {
 }
 
-.ui-autocomplete-results li {
+.exp-autocomplete-content {
 }
 
-.ui-autocomplete-loading, .ui-autocomplete-loading.focus {
+.exp-autocomplete-shadow {
 }
 
-.ui-autocomplete-results li strong {
+.ie .exp-autocomplete-shadow{
+}
+
+.exp-autocomplete-iframe {
+}
+
+.ie6 .exp-autocomplete-iframe {
+}
+
+.exp-autocomplete-content ul {
+}
+
+.exp-autocomplete-content li {
+}
+
+.ie .exp-autocomplete-content li {
+}
+
+.exp-autocomplete-content li strong {
+}
+
+.exp-autocomplete-highlight {
+}
+
+li.exp-autocomplete-highlight strong {
+}
+
+.exp-autocomplete-loading, .exp-autocomplete-loading.focus {
 }
 
 /* ---------- Tags ---------- */

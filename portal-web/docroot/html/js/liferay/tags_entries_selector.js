@@ -35,39 +35,29 @@ Liferay.TagsEntriesSelector = new Expanse.Class(
 
 			var textInput = jQuery('#' + options.textInput);
 
-			textInput.autocomplete(
+			var autoComplete = new Expanse.AutoComplete(
 				{
-					source: instance._getTagsEntries,
-					width: textInput.width() + 20,
-					formatItem: function(row, i, max, term) {
-						return row;
-					},
-					dataType: 'json',
-					delay: 0,
-					multiple: true,
-					mutipleSeparator: ',',
-					minChars: 1,
-					hide: function(event, ui) {
-						jQuery(this).removeClass('showing-list');
-					},
-					show: function(event, ui) {
-						jQuery(this).addClass('showing-list');
-						this._LFR_listShowing = true;
-					},
-					result: function(event, ui) {
-						var caretPos = this.value.length;
-
-						if (this.createTextRange) {
-							var textRange = this.createTextRange();
-
-							textRange.moveStart('character', caretPos);
-							textRange.select();
+					dataSource: {
+						source: instance._getTagsEntries,
+						responseSchema: {
+							fields: ['text', 'value']
 						}
-						else if (this.selectionStart) {
-							this.selectionStart = caretPos;
-							this.selectionEnd = caretPos;
-						}
-					}
+					},
+					delimChar: ',',
+					input: options.textInput
+				}
+			);
+
+			autoComplete.containerExpandEvent.subscribe(
+				function(event) {
+					textInput.addClass('showing-list');
+					this._LFR_listShowing = true;
+				}
+			);
+
+			autoComplete.containerCollapseEvent.subscribe(
+				function(event) {
+					textInput.removeClass('showing-list');
 				}
 			);
 
@@ -110,11 +100,11 @@ Liferay.TagsEntriesSelector = new Expanse.Class(
 			textInput.keypress(
 				function(event) {
 					if (event.keyCode == 13) {
-						if (!this._LFR_listShowing) {
+						if (!autoComplete._LFR_listShowing) {
 							addTagEntryButton.trigger('click');
 						}
 
-						this._LFR_listShowing = null;
+						autoComplete._LFR_listShowing = null;
 
 						return false;
 					}
@@ -223,6 +213,7 @@ Liferay.TagsEntriesSelector = new Expanse.Class(
 
 				instance.selectTagEntryPopup = popup;
 			}
+
 			instance._popupVisible = true;
 
 			if (Liferay.Browser.isIe()) {
@@ -240,24 +231,13 @@ Liferay.TagsEntriesSelector = new Expanse.Class(
 			var beginning = 0;
 			var end = 20;
 
-			var data = Liferay.Service.Tags.TagsEntry.search(
+			return Liferay.Service.Tags.TagsEntry.search(
 				{
 					groupId: themeDisplay.getScopeGroupId(),
 					name: "%" + term + "%",
 					properties: "",
 					begin: beginning,
 					end: end
-				}
-			);
-
-			return jQuery.map(
-				data,
-				function(row) {
-					return {
-						data: row.text,
-						value: row.value,
-						result: row.text
-					}
 				}
 			);
 		},
