@@ -278,11 +278,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		tagsAssetLocalService.deleteAsset(
 			BlogsEntry.class.getName(), entry.getEntryId());
 
-		// Expando
-
-		expandoValueLocalService.deleteValues(
-			BlogsEntry.class.getName(), entry.getEntryId());
-
 		// Social
 
 		socialActivityLocalService.deleteActivities(
@@ -296,6 +291,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		// Message boards
 
 		mbMessageLocalService.deleteDiscussionMessages(
+			BlogsEntry.class.getName(), entry.getEntryId());
+
+		// Expando
+
+		expandoValueLocalService.deleteValues(
 			BlogsEntry.class.getName(), entry.getEntryId());
 
 		// Resources
