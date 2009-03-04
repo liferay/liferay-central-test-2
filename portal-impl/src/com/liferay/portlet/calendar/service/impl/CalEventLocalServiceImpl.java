@@ -252,7 +252,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				serviceContext.getGuestPermissions());
 		}
 
-		// Custom Attributes
+		// Expando
 
 		ExpandoBridge expandoBridge = event.getExpandoBridge();
 
@@ -396,14 +396,14 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		CalEventLocalUtil.clearEventsPool(event.getGroupId());
 
-		// Expando
-
-		expandoValueLocalService.deleteValues(
-			CalEvent.class.getName(), event.getEventId());
-
 		// Social
 
 		socialActivityLocalService.deleteActivities(
+			CalEvent.class.getName(), event.getEventId());
+
+		// Expando
+
+		expandoValueLocalService.deleteValues(
 			CalEvent.class.getName(), event.getEventId());
 
 		// Resources
@@ -728,7 +728,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		calEventPersistence.update(event, false);
 
-		// Custom Attributes
+		// Expando
 
 		ExpandoBridge expandoBridge = event.getExpandoBridge();
 
