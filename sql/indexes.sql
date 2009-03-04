@@ -498,18 +498,6 @@ create index IX_C1A01806 on Users_Roles (userId);
 create index IX_66FF2503 on Users_UserGroups (userGroupId);
 create index IX_BE8102D6 on Users_UserGroups (userId);
 
-create index IX_D571A4A0 on WSRPConfiguredProducer (portalId, namespace);
-
-create index IX_6ADFB82E on WSRPConsumerRegistration (producerKey);
-create index IX_6EB47359 on WSRPConsumerRegistration (registrationHandle, producerKey);
-
-create index IX_C9AAD85 on WSRPPortlet (name);
-create index IX_806BDBCA on WSRPPortlet (producerEntityId);
-create index IX_80290BE8 on WSRPPortlet (producerEntityId, portletHandle);
-
-create index IX_60638BC6 on WSRPProducer (instanceName);
-create index IX_5A0B5E3E on WSRPProducer (portalId, namespace);
-
 create unique index IX_97DFA146 on WebDAVProps (classNameId, classPK);
 
 create index IX_96F07007 on Website (companyId);
