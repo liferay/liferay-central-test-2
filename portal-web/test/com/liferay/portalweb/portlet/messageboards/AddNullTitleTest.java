@@ -40,7 +40,7 @@ public class AddNullTitleTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//input[@value='Post New Thread']")) {
+							"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9")) {
 					break;
 				}
 			}
@@ -51,70 +51,22 @@ public class AddNullTitleTest extends BaseTestCase {
 		}
 
 		selenium.click(RuntimeVariables.replace(
+				"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Post New Thread']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_19_textArea")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.typeKeys("_19_textArea",
 			RuntimeVariables.replace("This is a Null Test Entr"));
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("This is a Null Test Entry!"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		selenium.type("_19_subject", RuntimeVariables.replace(""));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
 		assertTrue(selenium.isTextPresent("Please enter a valid subject."));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Cancel']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("//input[@value='Cancel']"));
-		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isTextPresent("This is a Null Test Entry!"));
 	}
 }

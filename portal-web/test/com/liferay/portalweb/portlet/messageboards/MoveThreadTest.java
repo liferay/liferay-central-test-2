@@ -33,8 +33,29 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class MoveThreadTest extends BaseTestCase {
 	public void testMoveThread() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
-				"link=T\u00e9st Subcat\u00e9gory"));
+				"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a[1]/b"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
@@ -42,7 +63,7 @@ public class MoveThreadTest extends BaseTestCase {
 				"link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"This m\u00e9ssag\u00e9 will b\u00e9 d\u00e9l\u00e9t\u00e9d! "));
+				"This m\u00e9ssag\u00e9 will b\u00e9 d\u00e9l\u00e9t\u00e9d!"));
 		selenium.click(RuntimeVariables.replace("link=Move Thread"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("_19_addExplanationPost");
@@ -63,6 +84,8 @@ public class MoveThreadTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("_19_subject",
+			RuntimeVariables.replace("Moved to Sujr"));
 		selenium.type("_19_subject", RuntimeVariables.replace("Moved to Sujr"));
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("Trust and paths will be straightened."));
@@ -88,23 +111,6 @@ public class MoveThreadTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Categories"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Choose']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click("//input[@value='Choose']");
 		selenium.selectWindow("null");
 		assertTrue(selenium.isElementPresent("link=Sujr"));
@@ -115,9 +121,9 @@ public class MoveThreadTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent(
 				"link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d"));
 		assertTrue(selenium.isTextPresent(
-				"This m\u00e9ssag\u00e9 will b\u00e9 d\u00e9l\u00e9t\u00e9d! "));
+				"This m\u00e9ssag\u00e9 will b\u00e9 d\u00e9l\u00e9t\u00e9d!"));
 		assertTrue(selenium.isTextPresent(
-				"Trust and paths will be straightened. "));
+				"Trust and paths will be straightened."));
 		assertFalse(selenium.isElementPresent("link=T\u00e9st Subcat\u00e9gory"));
 		assertFalse(selenium.isElementPresent("link=T\u00e9st Cat\u00e9gory"));
 	}

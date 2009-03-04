@@ -40,7 +40,7 @@ public class AddThirdReplyMessageTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[6]/table/tbody/tr[1]/td[2]/div[1]/ul/li[1]/span/a[2]")) {
+							"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9")) {
 					break;
 				}
 			}
@@ -51,46 +51,22 @@ public class AddThirdReplyMessageTest extends BaseTestCase {
 		}
 
 		selenium.click(RuntimeVariables.replace(
+				"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
+				"link=T\u00e9st M\u00e9ssag\u00e9"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
 				"//div[6]/table/tbody/tr[1]/td[2]/div[1]/ul/li[1]/span/a[2]"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_19_textArea")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.typeKeys("_19_textArea",
 			RuntimeVariables.replace("This is a third repl message."));
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("This is a third reply message."));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("This is a third reply message."));

@@ -72,6 +72,7 @@ public class AddAnswerThreadTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=T\u00e9st Cat\u00e9gory Edit\u00e9d"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Resolved"));
 		assertFalse(selenium.isElementPresent("link=Waiting for an Answer"));
 	}
 }

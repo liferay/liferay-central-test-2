@@ -60,10 +60,10 @@ public class TearDownTest extends BaseTestCase {
 						"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9"));
 				selenium.waitForPageToLoad("30000");
 
-				boolean FolderAPresent = selenium.isElementPresent(
+				boolean CategoryAPresent = selenium.isElementPresent(
 						"//td[5]/ul/li/strong/span");
 
-				if (!FolderAPresent) {
+				if (!CategoryAPresent) {
 					label = 2;
 
 					continue;
@@ -96,10 +96,10 @@ public class TearDownTest extends BaseTestCase {
 
 			case 2:
 
-				boolean FolderBPresent = selenium.isElementPresent(
+				boolean CategoryBPresent = selenium.isElementPresent(
 						"//td[5]/ul/li/strong/span");
 
-				if (!FolderBPresent) {
+				if (!CategoryBPresent) {
 					label = 3;
 
 					continue;
@@ -148,8 +148,7 @@ public class TearDownTest extends BaseTestCase {
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
 				assertTrue(selenium.isTextPresent(
 						"Your request processed successfully."));
-				selenium.click(RuntimeVariables.replace(
-						"link=Return to Full Page"));
+				selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertFalse(selenium.isElementPresent(
 						"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9"));

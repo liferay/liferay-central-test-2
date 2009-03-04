@@ -39,46 +39,8 @@ public class SearchTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=T\u00e9st Cat\u00e9gory")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=T\u00e9st Cat\u00e9gory"));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_19_keywords1")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.typeKeys("_19_keywords1", RuntimeVariables.replace("T\u00e9st"));
-		selenium.type("_19_keywords1", RuntimeVariables.replace("T\u00e9st"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
 				if (selenium.isElementPresent(
-							"//input[@value='Search Messages']")) {
+							"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9")) {
 					break;
 				}
 			}
@@ -89,9 +51,15 @@ public class SearchTest extends BaseTestCase {
 		}
 
 		selenium.click(RuntimeVariables.replace(
+				"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_19_keywords1", RuntimeVariables.replace("T\u00e9st"));
+		selenium.type("_19_keywords1", RuntimeVariables.replace("T\u00e9st"));
+		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Search Messages']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent(
-				"link=RE: T\u00e9st M\u00e9ssag\u00e9"));
+		assertTrue(selenium.isElementPresent("link=T\u00e9st M\u00e9ssag\u00e9"));
 	}
 }

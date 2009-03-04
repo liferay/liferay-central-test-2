@@ -33,11 +33,30 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddMoveCategoryTest extends BaseTestCase {
 	public void testAddMoveCategory() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Categories"));
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace(
+				"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Category']"));
 		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_19_name", RuntimeVariables.replace("Sujr"));
 		selenium.type("_19_name", RuntimeVariables.replace("Sujr"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");

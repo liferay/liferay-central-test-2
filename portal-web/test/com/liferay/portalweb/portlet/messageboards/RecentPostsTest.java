@@ -39,7 +39,8 @@ public class RecentPostsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Recent Posts")) {
+				if (selenium.isElementPresent(
+							"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9")) {
 					break;
 				}
 			}
@@ -49,6 +50,9 @@ public class RecentPostsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace(
+				"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Recent Posts"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent(
