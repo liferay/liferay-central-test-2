@@ -348,11 +348,11 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 								<textarea class="lfr-input-text" id="<%= randomNamespace %><%= name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)"
 									style="
 										<c:if test="<%= propertyHeight > 0 %>">
-											height: <%= propertyHeight %>;
+											height: <%= propertyHeight %>px;
 										</c:if>
 
 										<c:if test="<%= propertyWidth > 0 %>">
-											width: <%= propertyWidth %>;
+											width: <%= propertyWidth %>px;
 										</c:if>"
 								><%= value %></textarea>
 							</c:when>
@@ -360,7 +360,7 @@ ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
 								<input class="lfr-input-text" id="<%= randomNamespace %><%= name %>" name="<portlet:namespace />ExpandoAttribute(<%= name %>)"
 									style="
 										<c:if test="<%= propertyWidth > 0 %>">
-											width: <%= propertyWidth %>;
+											width: <%= propertyWidth %>px;
 										</c:if>"
 									type="<%= propertySecret ? "password" : "text" %>" value="<%= value %>"
 								/>
