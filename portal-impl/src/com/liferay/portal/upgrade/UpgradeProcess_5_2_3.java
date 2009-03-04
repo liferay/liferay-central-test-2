@@ -55,6 +55,7 @@ public class UpgradeProcess_5_2_3 extends UpgradeProcess {
 		upgrade(UpgradeSoftwareCatalog.class);
 		upgrade(UpgradeTags.class);
 		upgrade(UpgradeWiki.class);
+		upgrade(DropIndexes.class);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(UpgradeProcess_5_2_3.class);
