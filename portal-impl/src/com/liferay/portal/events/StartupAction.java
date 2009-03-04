@@ -195,6 +195,10 @@ public class StartupAction extends SimpleAction {
 
 		if (ranUpgradeProcess) {
 			try {
+				if (_log.isInfoEnabled()) {
+					_log.info("Adding indexes");
+				}
+
 				DBUtil.getInstance().runSQLTemplate("indexes.sql", false);
 			}
 			catch (Exception e) {
