@@ -430,7 +430,14 @@ public abstract class DBUtil {
 									sqle.getMessage());
 
 								if (!message.startsWith("Duplicate key name")) {
-									_log.warn(sqle.getMessage());
+									_log.warn(message);
+								}
+
+								if (message.startsWith("Duplicate entry") ||
+									message.startsWith(
+										"Specified key was too long")) {
+
+									_log.error(line);
 								}
 							}
 						}

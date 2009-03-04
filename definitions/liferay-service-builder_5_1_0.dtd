@@ -54,7 +54,7 @@ The name value specifies the name of the entity.
 
 The table value specifies the name of the table that this entity maps to in the
 database. If this value is not set, then the name of the table is the same as
-the name of the entity name.
+the name of the entity.
 
 If the uuid value is true, then the service will generate a UUID column for the
 service. This column will automatically be populated with a UUID. Developers
@@ -322,10 +322,22 @@ The finder element represents a generated finder method.
 <!ELEMENT finder (finder-column+)>
 
 <!--
+The name value specifies the name of the finder method.
+
+The return-type value specifies the return type of the finder. Valid values are
+"Collection" or the name of the entity. If the value is "Collection", then this
+finder returns a list of entities. If the value is the name of the entity, then
+this finder returns at most one entity.
+
+If the unique value is true, then the finder must return a unique entity.
+
+If the db-index value is true, then the service will automatically generate a
+SQL index for this finder. The default value is true.
 -->
 <!ATTLIST finder
 	name CDATA #REQUIRED
 	return-type CDATA #REQUIRED
+	unique CDATA #IMPLIED
 	where CDATA #IMPLIED
 	db-index CDATA #IMPLIED
 >

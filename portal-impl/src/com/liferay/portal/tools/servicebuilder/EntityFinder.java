@@ -33,14 +33,15 @@ import java.util.List;
 public class EntityFinder {
 
 	public EntityFinder(
-		String name, String returnType, List<EntityColumn> columns,
-		String where, boolean dbIndex) {
+		String name, String returnType, boolean unique, String where,
+		boolean dbIndex, List<EntityColumn> columns) {
 
 		_name = name;
 		_returnType = returnType;
-		_columns = columns;
+		_unique = unique;
 		_where = where;
 		_dbIndex = dbIndex;
+		_columns = columns;
 	}
 
 	public String getName() {
@@ -60,8 +61,8 @@ public class EntityFinder {
 		}
 	}
 
-	public List<EntityColumn> getColumns() {
-		return _columns;
+	public boolean isUnique() {
+		return _unique;
 	}
 
 	public String getWhere() {
@@ -72,10 +73,15 @@ public class EntityFinder {
 		return _dbIndex;
 	}
 
+	public List<EntityColumn> getColumns() {
+		return _columns;
+	}
+
 	private String _name;
 	private String _returnType;
-	private List<EntityColumn> _columns;
+	private boolean _unique;
 	private String _where;
 	private boolean _dbIndex;
+	private List<EntityColumn> _columns;
 
 }

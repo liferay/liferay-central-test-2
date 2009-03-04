@@ -805,6 +805,8 @@ public class ServiceBuilder {
 					String finderName = finderEl.attributeValue("name");
 					String finderReturn =
 						finderEl.attributeValue("return-type");
+					boolean finderUnique = GetterUtil.getBoolean(
+						finderEl.attributeValue("unique"), false);
 					String finderWhere =
 						finderEl.attributeValue("where");
 					boolean finderDBIndex = GetterUtil.getBoolean(
@@ -844,8 +846,8 @@ public class ServiceBuilder {
 
 					finderList.add(
 						new EntityFinder(
-							finderName, finderReturn, finderColsList,
-							finderWhere, finderDBIndex));
+							finderName, finderReturn, finderUnique, finderWhere,
+							finderDBIndex, finderColsList));
 				}
 
 				List<Entity> referenceList = new ArrayList<Entity>();
@@ -2860,7 +2862,7 @@ public class ServiceBuilder {
 
 					sb.append("create ");
 
-					if (!finder.isCollection()) {
+					if (finder.isUnique()) {
 						sb.append("unique ");
 					}
 
