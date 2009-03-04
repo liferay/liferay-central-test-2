@@ -23,7 +23,6 @@
 package com.liferay.portlet.blogs.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.blogs.NoSuchStatsUserException;
@@ -95,9 +94,8 @@ public class BlogsStatsUserPersistenceTest extends BasePersistenceTestCase {
 			newBlogsStatsUser.getUserId());
 		assertEquals(existingBlogsStatsUser.getEntryCount(),
 			newBlogsStatsUser.getEntryCount());
-		assertEquals(Time.getShortTimestamp(
-				existingBlogsStatsUser.getLastPostDate()),
-			Time.getShortTimestamp(newBlogsStatsUser.getLastPostDate()));
+		assertEquals(existingBlogsStatsUser.getLastPostDate(),
+			newBlogsStatsUser.getLastPostDate());
 		assertEquals(existingBlogsStatsUser.getRatingsTotalEntries(),
 			newBlogsStatsUser.getRatingsTotalEntries());
 		assertEquals(existingBlogsStatsUser.getRatingsTotalScore(),

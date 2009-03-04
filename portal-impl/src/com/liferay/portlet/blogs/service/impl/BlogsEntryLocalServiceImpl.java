@@ -57,6 +57,7 @@ import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.base.BlogsEntryLocalServiceBaseImpl;
 import com.liferay.portlet.blogs.social.BlogsActivityKeys;
 import com.liferay.portlet.blogs.util.Indexer;
+import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -157,6 +158,13 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		if (!draft) {
 			blogsStatsUserLocalService.updateStatsUser(groupId, userId, now);
 		}
+
+		// Expando
+
+		ExpandoBridge expandoBridge = entry.getExpandoBridge();
+
+		expandoBridge.setIndexEnabled(false);
+		expandoBridge.setAttributes(serviceContext);
 
 		// Social
 
@@ -268,6 +276,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		// Tags
 
 		tagsAssetLocalService.deleteAsset(
+			BlogsEntry.class.getName(), entry.getEntryId());
+
+		// Expando
+
+		expandoValueLocalService.deleteValues(
 			BlogsEntry.class.getName(), entry.getEntryId());
 
 		// Social
@@ -677,6 +690,13 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			blogsStatsUserLocalService.updateStatsUser(
 				entry.getGroupId(), entry.getUserId(), displayDate);
 		}
+
+		// Expando
+
+		ExpandoBridge expandoBridge = entry.getExpandoBridge();
+
+		expandoBridge.setIndexEnabled(false);
+		expandoBridge.setAttributes(serviceContext);
 
 		// Social
 
