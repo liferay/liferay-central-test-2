@@ -100,7 +100,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 
 			{ "priority", new Integer(Types.INTEGER) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table BookmarksEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(300) null,url STRING null,comments STRING null,visits INTEGER,priority INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table BookmarksEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(255) null,url STRING null,comments STRING null,visits INTEGER,priority INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table BookmarksEntry";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";

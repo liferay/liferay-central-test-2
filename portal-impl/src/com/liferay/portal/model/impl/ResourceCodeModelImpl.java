@@ -74,7 +74,7 @@ public class ResourceCodeModelImpl extends BaseModelImpl {
 
 			{ "scope", new Integer(Types.INTEGER) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table ResourceCode (codeId LONG not null primary key,companyId LONG,name VARCHAR(300) null,scope INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table ResourceCode (codeId LONG not null primary key,companyId LONG,name VARCHAR(255) null,scope INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table ResourceCode";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";

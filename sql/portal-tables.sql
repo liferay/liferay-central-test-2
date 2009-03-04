@@ -126,7 +126,7 @@ create table BookmarksEntry (
 	createDate DATE null,
 	modifiedDate DATE null,
 	folderId LONG,
-	name VARCHAR(300) null,
+	name VARCHAR(255) null,
 	url STRING null,
 	comments STRING null,
 	visits INTEGER,
@@ -256,8 +256,8 @@ create table DLFileEntry (
 	createDate DATE null,
 	modifiedDate DATE null,
 	folderId LONG,
-	name VARCHAR(300) null,
-	title VARCHAR(300) null,
+	name VARCHAR(255) null,
+	title VARCHAR(255) null,
 	description STRING null,
 	version DOUBLE,
 	size_ INTEGER,
@@ -271,7 +271,7 @@ create table DLFileRank (
 	userId LONG,
 	createDate DATE null,
 	folderId LONG,
-	name VARCHAR(300) null
+	name VARCHAR(255) null
 );
 
 create table DLFileShortcut (
@@ -284,7 +284,7 @@ create table DLFileShortcut (
 	modifiedDate DATE null,
 	folderId LONG,
 	toFolderId LONG,
-	toName VARCHAR(300) null
+	toName VARCHAR(255) null
 );
 
 create table DLFileVersion (
@@ -294,7 +294,7 @@ create table DLFileVersion (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	folderId LONG,
-	name VARCHAR(300) null,
+	name VARCHAR(255) null,
 	version DOUBLE,
 	size_ INTEGER
 );
@@ -951,13 +951,13 @@ create table Release_ (
 create table Resource_ (
 	resourceId LONG not null primary key,
 	codeId LONG,
-	primKey VARCHAR(300) null
+	primKey VARCHAR(255) null
 );
 
 create table ResourceCode (
 	codeId LONG not null primary key,
 	companyId LONG,
-	name VARCHAR(300) null,
+	name VARCHAR(255) null,
 	scope INTEGER
 );
 
@@ -1024,7 +1024,7 @@ create table SCProductEntry (
 	modifiedDate DATE null,
 	name VARCHAR(75) null,
 	type_ VARCHAR(75) null,
-	tags VARCHAR(300) null,
+	tags VARCHAR(255) null,
 	shortDescription STRING null,
 	longDescription STRING null,
 	pageURL STRING null,
@@ -1306,7 +1306,7 @@ create table TagsAsset (
 	publishDate DATE null,
 	expirationDate DATE null,
 	mimeType VARCHAR(75) null,
-	title VARCHAR(300) null,
+	title VARCHAR(255) null,
 	description STRING null,
 	summary STRING null,
 	url STRING null,
@@ -1344,7 +1344,7 @@ create table TagsProperty (
 	modifiedDate DATE null,
 	entryId LONG,
 	key_ VARCHAR(75) null,
-	value VARCHAR(300) null
+	value VARCHAR(255) null
 );
 
 create table TagsSource (
@@ -1420,7 +1420,7 @@ create table User_ (
 	portraitId LONG,
 	languageId VARCHAR(75) null,
 	timeZoneId VARCHAR(75) null,
-	greeting VARCHAR(300) null,
+	greeting VARCHAR(255) null,
 	comments STRING null,
 	loginDate DATE null,
 	loginIP VARCHAR(75) null,
@@ -1566,7 +1566,7 @@ create table WikiPage (
 	createDate DATE null,
 	modifiedDate DATE null,
 	nodeId LONG,
-	title VARCHAR(300) null,
+	title VARCHAR(255) null,
 	version DOUBLE,
 	minorEdit BOOLEAN,
 	content TEXT null,
