@@ -169,101 +169,50 @@ Liferay.Portal.ThumbRating = new Expanse.Class(
 	}
 );
 
-Liferay.Portal.ToolTip = {
-	container: null,
+(function() {
+	var Dom = Expanse.Dom;
+	var Event = Expanse.Event;
 
-	show: function(event, obj, text) {
-		var instance = this;
+	var elementsCache = {};
 
-		var container = instance.container;
-		var currentItem = jQuery(obj);
-		var position = currentItem.offset();
+	Liferay.Portal.ToolTip = {
+		show: function(event, obj, text) {
+			var instance = this;
 
-		var dimensions = instance._windowCalculation();
+			var itemId = Dom.generateId(obj);
 
-		if (!container) {
-			container = jQuery('<div class="portal-tool-tip"></div>').appendTo('body');
+			var container = instance._container;
 
-			instance.container = container;
-		}
+			if (!elementsCache[itemId]) {
+				if (!container) {
+					container = new Expanse.Tooltip(
+						Dom.generateId(),
+						{
+							autodismissdelay: 10000,
+							context: obj,
+							hidedelay: 0,
+							showdelay: 0
+						}
+					);
 
-		container.html(text);
+					container.render(document.body);
 
-		container.show();
+					Dom.addClass(container.element, 'portal-tool-tip');
 
-		var boxWidth = container.width();
-		var width = currentItem.width();
-		var height = currentItem.height();
-		var boxHeight = container.height();
-		var left = position.left - (boxWidth / 2);
-		var top = position.top + height + 5;
-
-		if (left < 0) {
-			left = 5;
-		}
-		else {
-			left += 5;
-		}
-
-		if (left + boxWidth > dimensions.right) {
-			left = (left - (boxWidth / 2 )) + width;
-		}
-
-		if (top + boxHeight > dimensions.bottom) {
-			top = top - (height + boxHeight + 5);
-		}
-
-		container.css(
-			{
-				cursor: 'default',
-				left: left + 'px',
-				position: 'absolute',
-				top: top + 'px',
-				zIndex: Liferay.zIndex.TOOLTIP
-			}
-		);
-
-		currentItem.one(
-			'mouseout',
-			function() {
-				instance.hide();
-			}
-		);
-	},
-
-	hide: function(event) {
-		var instance = this;
-
-		instance.container.hide();
-	},
-
-	_windowCalculation: function() {
-		var instance = this;
-
-		if (instance._window.right == null) {
-			var windowSize = {};
-			var body = instance._body;
-			if (!body) {
-				body = jQuery('body');
-				instance._body = body;
-			}
-
-			instance._window = {
-				bottom: body.height(),
-				left: 0,
-				right: body.width(),
-				top: 0
-			};
-
-			jQuery(window).resize(
-				function() {
-					instance._window.bottom = body.height();
-					instance._window.right = body.width();
+					instance._container = container;
 				}
-			);
+
+				var context = container.cfg.getProperty('context') || [];
+
+				context.push(obj);
+
+				container.cfg.setProperty('context', context);
+				container.doShow(event, obj);
+
+				elementsCache[itemId] = obj;
+			}
+
+			container.cfg.setProperty('text', text, true);
 		}
-		return instance._window;
-	},
-	_body: null,
-	_window: {}
-};
+	};
+})();

@@ -42,7 +42,7 @@ String scoreString = numberFormat.format(score);
 		<%= scoreString %> Stars
 	</c:when>
 	<c:otherwise>
-		<div id="<%= randomNamespace %>averageRating" onmousemove="Liferay.Portal.ToolTip.show(event, this, '<%= scoreString %> Stars')">
+		<div id="<%= randomNamespace %>averageRating" onmouseover="Liferay.Portal.ToolTip.show(event, this, '<%= scoreString %> Stars')">
 			<img alt="<liferay-ui:message key="star-off" />" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" />
 		</div>
 

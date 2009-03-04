@@ -327,6 +327,11 @@
 .exp-panel-container.show-scrollbars .underlay {
 }
 
+/* ---------- Portal tool tips ---------- */
+
+.exp-tooltip {
+}
+
 /* ---------- Date picker ---------- */
 
 .exp-calendar-container {

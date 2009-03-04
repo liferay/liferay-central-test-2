@@ -226,17 +226,6 @@ body.staging {
 	text-decoration: none;
 }
 
-/* ---------- Portal tool tips ---------- */
-
-.portal-tool-tip {
-	background: #FFF url(../images/forms/button.png) repeat-x 0 100%;
-	border: 1px solid;
-	border-color: #DEDEDE #BFBFBF #BFBFBF #DEDEDE;
-	color: #1E2529;
-	max-width: 200px;
-	padding: 6px 4px;
-}
-
 /* ---------- Loading animation ---------- */
 
 .loading-animation {
