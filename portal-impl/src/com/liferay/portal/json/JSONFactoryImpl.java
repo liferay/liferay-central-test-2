@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.LongWrapper;
 
 import org.jabsorb.JSONSerializer;
 import org.jabsorb.serializer.MarshallException;
@@ -74,7 +75,16 @@ public class JSONFactoryImpl implements JSONFactory {
 
 	public Object deserialize(String json) {
 		try {
-			return _serializer.fromJSON(json);
+			Object obj = _serializer.fromJSON(json);
+
+			if (obj instanceof LongWrapper) {
+				LongWrapper longWrapper = (LongWrapper)obj;
+
+				return longWrapper.getValue();
+			}
+			else {
+				return obj;
+			}
 		}
 		catch (UnmarshallException ue) {
 			 _log.error(ue, ue);
@@ -85,6 +95,10 @@ public class JSONFactoryImpl implements JSONFactory {
 
 	public String serialize(Object obj) {
 		try {
+			if (obj instanceof Long) {
+				obj = new LongWrapper((Long)obj);
+			}
+
 			return _serializer.toJSON(obj);
 		}
 		catch (MarshallException me) {
