@@ -49,6 +49,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.CompanyServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 
 import java.util.List;
@@ -163,7 +164,8 @@ public class EditCompanyAction extends PortletAction {
 		String languageId = ParamUtil.getString(actionRequest, "languageId");
 		String timeZoneId = ParamUtil.getString(actionRequest, "timeZoneId");
 		boolean communityLogo = ParamUtil.getBoolean(
-			actionRequest, "communityLogo");
+			actionRequest,
+			"settings(" + PropsKeys.COMPANY_SECURITY_COMMUNITY_LOGO + ")");
 
 		CompanyServiceUtil.updateDisplay(
 			company.getCompanyId(), languageId, timeZoneId);
