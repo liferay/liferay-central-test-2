@@ -27,6 +27,7 @@ import com.liferay.portal.freemarker.FreeMarkerUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil_IW;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.Group;
@@ -164,6 +165,66 @@ public class SampleSQLBuilder {
 		createGroup("/guest", _guestGroupId, GroupConstants.GUEST);
 
 		write(StringPool.NEW_LINE);
+	}
+
+	protected long createMBCategory(
+			String description, long groupId, String name, long userId)
+		throws Exception {
+
+		long categoryId = _counter.get();
+		String uuid = PortalUUIDUtil.generate();
+
+		Map<String, Object> context = getContext();
+
+		put(context, "categoryId", categoryId);
+		put(context, "description", description);
+		put(context, "groupId", groupId);
+		put(context, "name", name);
+		put(context, "userId", userId);
+		put(context, "uuid", uuid);
+
+		processTemplate(_tplMBCategory, context);
+
+		return categoryId;
+	}
+
+	protected long createMBMessage(
+			String body, long categoryId, String subject, long threadId,
+			long userId)
+		throws Exception {
+
+		long messageId = _counter.get();
+		String uuid = PortalUUIDUtil.generate();
+
+		Map<String, Object> context = getContext();
+
+		put(context, "body", body);
+		put(context, "categoryId", categoryId);
+		put(context, "messageId", messageId);
+		put(context, "subject", subject);
+		put(context, "threadId", threadId);
+		put(context, "userId", userId);
+		put(context, "uuid", uuid);
+
+		processTemplate(_tplMBMessage, context);
+
+		return messageId;
+	}
+
+	protected void createMBThread(
+			long categoryId, int messageCount, long rootMessageId,
+			long threadId, long userId)
+		throws Exception {
+
+		Map<String, Object> context = getContext();
+
+		put(context, "categoryId", categoryId);
+		put(context, "messageCount", messageCount);
+		put(context, "rootMessageId", rootMessageId);
+		put(context, "threadId", threadId);
+		put(context, "userId", userId);
+
+		processTemplate(_tplMBThread, context);
 	}
 
 	protected void createOrganization(
@@ -381,6 +442,7 @@ public class SampleSQLBuilder {
 
 				Layout layout = new LayoutImpl();
 
+				layout.setPlid(_counter.get());
 				layout.setPrivateLayout(false);
 				layout.setName("Home");
 				layout.setFriendlyURL("/home");
@@ -393,6 +455,27 @@ public class SampleSQLBuilder {
 					roles, String.valueOf(userId), userId);
 
 				write(StringPool.NEW_LINE);
+
+				long categoryId = createMBCategory(
+					"Test description", groupId, "Test name", userId);
+
+				long threadId = _counter.get();
+
+				long rootMessageId = 0;
+				int messageCount = 10;
+
+				for (int i = 0; i < messageCount; i++) {
+					long messageId = createMBMessage(
+						"Test body " + i, categoryId, "Test subject " + i,
+						threadId, userId);
+
+					if (i == 0) {
+						rootMessageId = messageId;
+					}
+				}
+
+				createMBThread(
+					categoryId, messageCount, rootMessageId, threadId, userId);
 
 				if (userCount >= _maxUserCount) {
 					break;
@@ -418,6 +501,7 @@ public class SampleSQLBuilder {
 		put(context, "guestRoleId", _guestRoleId);
 		put(context, "organizationClassNameId", _organizationClassNameId);
 		put(context, "powerUserRoleId", _powerUserRoleId);
+		context.put("stringUtil", StringUtil_IW.getInstance());
 		put(context, "userClassNameId", _userClassNameId);
 		put(context, "userRoleId", _userRoleId);
 
@@ -487,6 +571,9 @@ public class SampleSQLBuilder {
 	private String _tplCompany = _TPL_ROOT + "company.ftl";
 	private String _tplCounter = _TPL_ROOT + "counter.ftl";
 	private String _tplGroup = _TPL_ROOT + "group.ftl";
+	private String _tplMBCategory = _TPL_ROOT + "mb_category.ftl";
+	private String _tplMBMessage = _TPL_ROOT + "mb_message.ftl";
+	private String _tplMBThread = _TPL_ROOT + "mb_thread.ftl";
 	private String _tplOrganization = _TPL_ROOT + "organization.ftl";
 	private String _tplPermission = _TPL_ROOT + "permission.ftl";
 	private String _tplResource = _TPL_ROOT + "resource.ftl";

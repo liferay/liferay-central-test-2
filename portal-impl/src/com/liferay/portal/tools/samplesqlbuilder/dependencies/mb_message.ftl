@@ -1,0 +1,1 @@
+insert into MBMessage (uuid_, messageId, companyId, userId, createDate, modifiedDate, categoryId, threadId, parentMessageId, subject, body, attachments, anonymous) values ('${uuid}', ${messageId}, ${companyId}, ${userId}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ${categoryId}, ${threadId}, 0, '${subject}', '${body}', FALSE, FALSE);

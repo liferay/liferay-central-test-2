@@ -1,0 +1,1 @@
+insert into MBCategory (uuid_, categoryId, groupId, companyId, userId, createDate, modifiedDate, parentCategoryId, name, description) values ('${uuid}', ${categoryId}, ${groupId}, ${companyId}, ${userId}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, '${name}', '${description}');
