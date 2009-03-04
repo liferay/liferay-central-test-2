@@ -38,6 +38,30 @@
 				var buttons = jQuery('.vocabulary-buttons')
 				var toolbar = jQuery('.vocabulary-toolbar');
 
+				var entryToolbarSection = jQuery('.entry-toolbar-section');
+				var vocabularyToolbarSection = jQuery('.vocabulary-toolbar-section');
+
+				var addEntryButton = jQuery('.add-entry-btn');
+				var addVocabularyButton = jQuery('.add-vocabulary-btn');
+
+				instance._toolbarEntryPanel = new Expanse.Overlay(
+					entryToolbarSection[0],
+					{
+						context: [addEntryButton[0], 'tr', 'br'],
+						preventcontextoverlap: true,
+						visible: false
+					}
+				);
+
+				instance._vocabularyEntryPanel = new Expanse.Overlay(
+					vocabularyToolbarSection[0],
+					{
+						context: [addVocabularyButton[0], 'tr', 'br'],
+						preventcontextoverlap: true,
+						visible: false
+					}
+				);
+
 				var changeAddLabel = function(label) {
 					label = Liferay.Language.get(label);
 					toolbar.find('.vocabulary-label').html(label);
@@ -54,7 +78,7 @@
 					toolbar.find('.add-vocabulary-btn').val(label);
 				};
 
-				var changeVocabularyDeleteBtnLabel = function(label){
+				var changeVocabularyDeleteBtnLabel = function(label) {
 					label = Liferay.Language.get(label);
 					jQuery('.vocabulary-delete-list-button').val(label);
 				};
@@ -69,17 +93,17 @@
 					jQuery('.vocabulary-toolbar-section .panel-content label:first').html(label);
 				};
 
-				var changeVocabularyHeaderLabel = function(label){
+				var changeVocabularyHeaderLabel = function(label) {
 					label = Liferay.Language.get(label);
 					jQuery('.vocabulary-list-container .results-header').html(label);
 				};
 
-				var changeEntryHeaderLabel = function(label){
+				var changeEntryHeaderLabel = function(label) {
 					label = Liferay.Language.get(label);
 					jQuery('.vocabulary-entries-container .results-header').html(label);
 				};
 
-				var changeEditEntryHeaderLabel = function(label){
+				var changeEditEntryHeaderLabel = function(label) {
 					label = Liferay.Language.get(label);
 					jQuery('.vocabulary-edit-entry .results-header').html(label);
 				};
@@ -293,7 +317,7 @@
 					}
 				);
 
-				jQuery('.lfr-floating-panel input:text').keyup(
+				jQuery('.exp-overlay input:text').keyup(
 					function(event) {
 						var ESC_KEY_CODE = 27;
 						var keyCode = event.keyCode;
@@ -463,7 +487,7 @@
 								buffer.push('<li');
 								buffer.push(' class="vocabulary-category results-row');
 
-								if (i == 0){
+								if (i == 0) {
 									buffer.push(' selected ');
 								}
 
@@ -570,7 +594,7 @@
 				instance._getProperties(
 					entryId,
 					function(properties) {
-						if (!properties.length){
+						if (!properties.length) {
 							properties = [{ key: '', value: '' }];
 						}
 
@@ -653,7 +677,7 @@
 								function() {
 									var entry = instance._selectEntry(message.entryId);
 
-									if (entry.length){
+									if (entry.length) {
 										jQuery(instance._entryScopeClass).scrollTo(entry);
 									}
 
@@ -1026,8 +1050,11 @@
 				jQuery(exp).parent().removeClass('vocabulary-editing-tag');
 			},
 
-			_hideToolbarSections: function(){
-				jQuery('.vocabulary-toolbar-section, .entry-toolbar-section').hide();
+			_hideToolbarSections: function() {
+				var instance = this;
+
+				instance._toolbarEntryPanel.hide();
+				instance._vocabularyEntryPanel.hide();
 			},
 
 			_loadData: function() {
@@ -1180,7 +1207,8 @@
 				var instance = this;
 
 				jQuery('.vocabulary-actions input:text').val('');
-				jQuery('.vocabulary-actions .vocabulary-toolbar-section').hide();
+
+				instance._vocabularyEntryPanel.hide();
 			},
 
 			_saveProperties: function() {
@@ -1271,7 +1299,12 @@
 				if (!noAutoHide) {
 					instance._messageTimeout = setTimeout(
 						function() {
-							output.fadeOut('slow');
+							output.fadeOut('slow',
+								function(event) {
+									instance._toolbarEntryPanel.align();
+									instance._vocabularyEntryPanel.align();
+								}
+							);
 						}, 7000);
 				}
 			},
@@ -1294,73 +1327,44 @@
 				}
 			},
 
-			_showToolBarEntrySection: function(){
+			_showToolBarEntrySection: function() {
 				var instance = this;
 
 				var toolbar = jQuery('.vocabulary-toolbar');
-				var entryToolbarSection = toolbar.find('.entry-toolbar-section');
-				var entryToolbarButton = jQuery('.add-entry-btn');
-				var vocabularyToolbarSection = toolbar.find('.vocabulary-toolbar-section');
+
+				var entryPanel = instance._toolbarEntryPanel;
 
 				if (!instance._selectedVocabularyName) {
 					instance._resetActionValues();
 
-					jQuery('.entry-toolbar-section').hide();
+					entryPanel.hide();
 
-					instance._sendMessage("info", Liferay.Language.get('you-must-first-add-a-vocabulary'));
-					instance._positionToolbarSection(entryToolbarButton, entryToolbarSection);
+					instance._sendMessage('info', Liferay.Language.get('you-must-first-add-a-vocabulary'));
+
 					instance._showToolBarVocabularySection();
 
 					return;
 				}
 
-				instance._positionToolbarSection(entryToolbarButton, entryToolbarSection);
+				entryPanel.show();
+				entryPanel.align();
 
-				entryToolbarSection.show().find('.vocabulary-entry-name').focus();
-				vocabularyToolbarSection.hide();
+				jQuery('.vocabulary-entry-name', entryPanel.body).focus();
+
+				instance._vocabularyEntryPanel.hide();
 			},
 
-			_showToolBarVocabularySection: function(){
+			_showToolBarVocabularySection: function() {
 				var instance = this;
 
-				var toolbar = jQuery('.vocabulary-toolbar');
-				var entryToolbarSection = toolbar.find('.entry-toolbar-section');
-				var vocabularyToolbarButton = jQuery('.add-vocabulary-btn');
-				var vocabularyToolbarSection = toolbar.find('.vocabulary-toolbar-section');
+				var vocabularyEntryPanel = instance._vocabularyEntryPanel;
 
-				instance._positionToolbarSection(vocabularyToolbarButton, vocabularyToolbarSection);
+				vocabularyEntryPanel.show();
+				vocabularyEntryPanel.align();
 
-				vocabularyToolbarSection.show().find('.vocabulary-name').focus();
-				entryToolbarSection.hide();
-			},
+				jQuery('.vocabulary-name', vocabularyEntryPanel.body).focus();
 
-			_positionToolbarSection: function(referenceElement, section){
-				var btnOffset = referenceElement.offset();
-				var vocabularyContainer = jQuery('.vocabulary-container');
-				var indicator = section.find('.direction-indicator');
-
-				var refHeight = referenceElement.outerHeight();
-				var refWidth = referenceElement.outerWidth();
-				var sectionHeight = section.outerHeight();
-				var sectionWidth = section.outerWidth();
-
-				var indicatorPosition = refWidth / 2;
-
-				btnOffset.left += (refWidth - sectionWidth);
-				btnOffset.top += (refHeight + 25);
-
-				section.css(
-					{
-						left: btnOffset.left,
-						top: btnOffset.top
-					}
-				);
-
-				indicator.css(
-					{
-						right: indicatorPosition
-					}
-				);
+				instance._toolbarEntryPanel.hide();
 			},
 
 			_unselectAllEntries: function() {

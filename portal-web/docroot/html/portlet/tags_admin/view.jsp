@@ -69,8 +69,10 @@
 
 					<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionsURL %>';" />
 				</c:if>
-				<div class="lfr-floating-panel entry-toolbar-section">
-					<div class="direction-indicator"></div>
+				<div class="exp-overlay entry-toolbar-section">
+					<div class="exp-header">
+						<span class="knob"></span>
+					</div>
 					<div class="panel-content">
 						<div class="ctrl-holder">
 							<label class="vocabulary-label" for="vocabulary-entry-name">
@@ -102,8 +104,10 @@
 					</div>
 				</div>
 
-				<div class="lfr-floating-panel vocabulary-toolbar-section">
-					<div class="direction-indicator"></div>
+				<div class="exp-overlay vocabulary-toolbar-section">
+					<div class="exp-header">
+						<span class="knob"></span>
+					</div>
 					<div class="panel-content">
 						<div class="ctrl-holder">
 							<label for="vocabulary-name">

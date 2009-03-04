@@ -224,12 +224,6 @@
 	padding: 10px 0 0;
 }
 
-.portlet-tags-admin .lfr-floating-panel {
-	display: none;
-	position: absolute;
-	width: 230px;
-}
-
 .portlet-tags-admin .panel-content {
 	background: #FFFFFF none repeat scroll 0 0;
 	border: 2px solid #727C81;
@@ -262,13 +256,22 @@
 	margin-top: 5px;
 }
 
-.portlet-tags-admin .lfr-floating-panel .direction-indicator {
+.portlet-tags-admin .exp-overlay {
+	overflow: visible;
+	width: 230px;
+}
+
+.portlet-tags-admin .exp-overlay .exp-header {
+	margin-top: 18px;
+	position: relative;
+}
+
+.portlet-tags-admin .exp-overlay .exp-header .knob {
 	background: url(<%= themeImagesPath %>/application/panel_direction_indicator.png) no-repeat scroll;
-	height: 26px;
-	right: 20px;
-	margin-right: -18px;
+	height: 18px;
+	right: 10px;
 	position: absolute;
-	top: -19px;
+	top: -16px;
 	width: 36px;
 	z-index: 430;
 }
