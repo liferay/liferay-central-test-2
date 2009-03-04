@@ -2878,6 +2878,14 @@ public class ServiceBuilder {
 			}
 		}
 
+		for (Map.Entry<String, EntityMapping> entry :
+				_entityMappings.entrySet()) {
+
+			EntityMapping entityMapping = entry.getValue();
+
+			_getCreateMappingTableIndex(entityMapping, indexSQLs, indexProps);
+		}
+
 		StringBuilder sb = new StringBuilder();
 
 		Iterator<String> itr = indexSQLs.values().iterator();
@@ -3305,6 +3313,54 @@ public class ServiceBuilder {
 			staticModels.get("com.liferay.portal.kernel.util.Validator"));
 
 		return context;
+	}
+
+	private void _getCreateMappingTableIndex(
+			EntityMapping entityMapping, Map<String, String> indexSQLs,
+			Map<String, String> indexProps)
+		throws IOException {
+
+		Entity[] entities = new Entity[2];
+
+		for (int i = 0; i < entities.length; i++) {
+			entities[i] = getEntity(entityMapping.getEntity(i));
+
+			if (entities[i] == null) {
+				return;
+			}
+		}
+
+		for (int i = 0; i < entities.length; i++) {
+			Entity entity = entities[i];
+
+			List<EntityColumn> pkList = entity.getPKList();
+
+			for (int j = 0; j < pkList.size(); j++) {
+				EntityColumn col = pkList.get(j);
+
+				String colName = col.getName();
+
+				String indexSpec =
+					entityMapping.getTable() + " (" + colName + ");";
+
+				String indexHash =
+					Integer.toHexString(indexSpec.hashCode()).toUpperCase();
+
+				String indexName = "IX_" + indexHash;
+
+				StringBuilder sb = new StringBuilder();
+
+				sb.append("create index " + indexName + " on ");
+				sb.append(indexSpec);
+
+				indexSQLs.put(indexSpec, sb.toString());
+
+				String finderName =
+					entityMapping.getTable() + StringPool.PERIOD + colName;
+
+				indexProps.put(finderName, indexName);
+			}
+		}
 	}
 
 	private String _getCreateMappingTableSQL(EntityMapping entityMapping)

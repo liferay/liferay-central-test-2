@@ -115,7 +115,17 @@ create unique index IX_5BDDB872 on Group_ (companyId, friendlyURL);
 create unique index IX_5AA68501 on Group_ (companyId, name);
 create unique index IX_16218A38 on Group_ (liveGroupId);
 
-create index LIFERAY_001 on Groups_Permissions (permissionId);
+create index IX_75267DCA on Groups_Orgs (groupId);
+create index IX_6BBB7682 on Groups_Orgs (organizationId);
+
+create index IX_C48736B on Groups_Permissions (groupId);
+create index IX_EC97689D on Groups_Permissions (permissionId);
+
+create index IX_84471FD2 on Groups_Roles (groupId);
+create index IX_3103EF3D on Groups_Roles (roleId);
+
+create index IX_31FB749A on Groups_UserGroups (groupId);
+create index IX_3B69160F on Groups_UserGroups (userGroupId);
 
 create index IX_60214CF6 on IGFolder (companyId);
 create index IX_206498F8 on IGFolder (groupId);
@@ -319,7 +329,11 @@ create index IX_449A10B9 on Role_ (companyId);
 create unique index IX_A88E424E on Role_ (companyId, classNameId, classPK);
 create unique index IX_EBC931B8 on Role_ (companyId, name);
 
-create index LIFERAY_002 on Roles_Permissions (permissionId);
+create index IX_7A3619C6 on Roles_Permissions (permissionId);
+create index IX_E04E486D on Roles_Permissions (roleId);
+
+create index IX_3BB93ECA on SCFrameworkVersi_SCProductVers (frameworkVersionId);
+create index IX_E8D33FF9 on SCFrameworkVersi_SCProductVers (productVersionId);
 
 create index IX_C98C0D78 on SCFrameworkVersion (companyId);
 create index IX_272991FA on SCFrameworkVersion (groupId);
@@ -327,6 +341,9 @@ create index IX_6E1764F on SCFrameworkVersion (groupId, active_);
 
 create index IX_1C841592 on SCLicense (active_);
 create index IX_5327BB79 on SCLicense (active_, recommended);
+
+create index IX_27006638 on SCLicenses_SCProductEntries (licenseId);
+create index IX_D7710A66 on SCLicenses_SCProductEntries (productEntryId);
 
 create index IX_5D25244F on SCProductEntry (companyId);
 create index IX_72F87291 on SCProductEntry (groupId);
@@ -409,6 +426,9 @@ create index IX_54243AFD on Subscription (userId);
 create unique index IX_1AB6D6D2 on TagsAsset (classNameId, classPK);
 create index IX_AB3D8BCB on TagsAsset (companyId);
 
+create index IX_B22F3A1 on TagsAssets_TagsEntries (assetId);
+create index IX_A02A8023 on TagsAssets_TagsEntries (entryId);
+
 create index IX_EE55ED49 on TagsEntry (parentEntryId, vocabularyId);
 create index IX_28E8954 on TagsEntry (vocabularyId);
 
@@ -463,7 +483,20 @@ create unique index IX_A9ED7DD3 on User_ (openId);
 create unique index IX_A18034A4 on User_ (portraitId);
 create index IX_E0422BDA on User_ (uuid_);
 
-create index LIFERAY_003 on Users_Permissions (permissionId);
+create index IX_C4F9E699 on Users_Groups (groupId);
+create index IX_F10B6C6B on Users_Groups (userId);
+
+create index IX_7EF4EC0E on Users_Orgs (organizationId);
+create index IX_FB646CA6 on Users_Orgs (userId);
+
+create index IX_8AE58A91 on Users_Permissions (permissionId);
+create index IX_C26AA64D on Users_Permissions (userId);
+
+create index IX_C19E5F31 on Users_Roles (roleId);
+create index IX_C1A01806 on Users_Roles (userId);
+
+create index IX_66FF2503 on Users_UserGroups (userGroupId);
+create index IX_BE8102D6 on Users_UserGroups (userId);
 
 create index IX_D571A4A0 on WSRPConfiguredProducer (portalId, namespace);
 
