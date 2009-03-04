@@ -132,6 +132,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.events.StartupAction">
+		<priority value="INFO" />
+	</category>
+
 	<category name="com.liferay.portal.events.ShutdownHook">
 		<priority value="ERROR" />
 	</category>

@@ -155,14 +155,14 @@ public class StartupAction extends SimpleAction {
 			if ((upgradeProcess.getThreshold() == 0) ||
 				(upgradeProcess.getThreshold() > buildNumber)) {
 
-				if (_log.isInfoEnabled()) {
-					_log.info("Running upgrade " + upgradeProcesses[i]);
+				if (_log.isDebugEnabled()) {
+					_log.debug("Running upgrade " + upgradeProcesses[i]);
 				}
 
 				upgradeProcess.upgrade();
 
-				if (_log.isInfoEnabled()) {
-					_log.info("Finished upgrade " + upgradeProcesses[i]);
+				if (_log.isDebugEnabled()) {
+					_log.debug("Finished upgrade " + upgradeProcesses[i]);
 				}
 
 				ranUpgradeProcess = true;
@@ -271,14 +271,14 @@ public class StartupAction extends SimpleAction {
 					VerifyProcess verifyProcess = (VerifyProcess)Class.forName(
 						verifyProcesses[i]).newInstance();
 
-					if (_log.isInfoEnabled()) {
-						_log.info("Running verification " + verifyProcesses[i]);
+					if (_log.isDebugEnabled()) {
+						_log.debug("Running verification " + verifyProcesses[i]);
 					}
 
 					verifyProcess.verify();
 
-					if (_log.isInfoEnabled()) {
-						_log.info(
+					if (_log.isDebugEnabled()) {
+						_log.debug(
 							"Finished verification " + verifyProcesses[i]);
 					}
 
