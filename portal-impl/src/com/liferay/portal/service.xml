@@ -111,7 +111,7 @@
 
 		<!-- Finder methods -->
 
-		<finder name="Value" return-type="ClassName">
+		<finder name="Value" return-type="ClassName" unique="true">
 			<finder-column name="value" />
 		</finder>
 
@@ -137,10 +137,10 @@
 
 		<!-- Finder methods -->
 
-		<finder name="WebId" return-type="Company">
+		<finder name="WebId" return-type="Company" unique="true">
 			<finder-column name="webId" />
 		</finder>
-		<finder name="VirtualHost" return-type="Company">
+		<finder name="VirtualHost" return-type="Company" unique="true">
 			<finder-column name="virtualHost" />
 		</finder>
 		<finder name="Mx" return-type="Company">
@@ -224,13 +224,13 @@
 
 		<!-- Finder methods -->
 
-		<finder name="Name" return-type="Country">
+		<finder name="Name" return-type="Country" unique="true">
 			<finder-column name="name" />
 		</finder>
-		<finder name="A2" return-type="Country">
+		<finder name="A2" return-type="Country" unique="true">
 			<finder-column name="a2" />
 		</finder>
-		<finder name="A3" return-type="Country">
+		<finder name="A3" return-type="Country" unique="true">
 			<finder-column name="a3" />
 		</finder>
 		<finder name="Active" return-type="Collection">
@@ -340,7 +340,7 @@
 		<finder name="LiveGroupId" return-type="Group">
 			<finder-column name="liveGroupId" />
 		</finder>
-		<finder name="C_N" return-type="Group">
+		<finder name="C_N" return-type="Group" unique="true">
 			<finder-column name="companyId" />
 			<finder-column name="name" />
 		</finder>
@@ -470,7 +470,7 @@
 			<finder-column name="groupId" />
 			<finder-column name="privateLayout" />
 		</finder>
-		<finder name="G_P_L" return-type="Layout">
+		<finder name="G_P_L" return-type="Layout" unique="true">
 			<finder-column name="groupId" />
 			<finder-column name="privateLayout" />
 			<finder-column name="layoutId" />
@@ -535,7 +535,7 @@
 		<finder name="VirtualHost" return-type="LayoutSet">
 			<finder-column name="virtualHost" />
 		</finder>
-		<finder name="G_P" return-type="LayoutSet">
+		<finder name="G_P" return-type="LayoutSet" unique="true">
 			<finder-column name="groupId" />
 			<finder-column name="privateLayout" />
 		</finder>
@@ -657,7 +657,7 @@
 			<finder-column name="companyId" />
 			<finder-column name="parentOrganizationId" />
 		</finder>
-		<finder name="C_N" return-type="Organization">
+		<finder name="C_N" return-type="Organization" unique="true">
 			<finder-column name="companyId" />
 			<finder-column name="name" />
 		</finder>
@@ -785,7 +785,7 @@
 			<finder-column name="companyId" />
 			<finder-column name="defaultPolicy" />
 		</finder>
-		<finder name="C_N" return-type="PasswordPolicy">
+		<finder name="C_N" return-type="PasswordPolicy" unique="true">
 			<finder-column name="companyId" />
 			<finder-column name="name" />
 		</finder>
@@ -880,7 +880,7 @@
 		<finder name="ResourceId" return-type="Collection">
 			<finder-column name="resourceId" />
 		</finder>
-		<finder name="A_R" return-type="Permission">
+		<finder name="A_R" return-type="Permission" unique="true">
 			<finder-column name="actionId" />
 			<finder-column name="resourceId" />
 		</finder>
@@ -975,7 +975,7 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
-		<finder name="C_I_T" return-type="PluginSetting">
+		<finder name="C_I_T" return-type="PluginSetting" unique="true">
 			<finder-column name="companyId" />
 			<finder-column name="pluginId" />
 			<finder-column name="pluginType" />
@@ -1006,7 +1006,7 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
-		<finder name="C_P" return-type="Portlet">
+		<finder name="C_P" return-type="Portlet" unique="true">
 			<finder-column name="companyId" />
 			<finder-column name="portletId" />
 		</finder>
@@ -1043,7 +1043,7 @@
 			<finder-column name="ownerType" />
 			<finder-column name="plid" />
 		</finder>
-		<finder name="O_O_P_P" return-type="PortletPreferences">
+		<finder name="O_O_P_P" return-type="PortletPreferences" unique="true">
 			<finder-column name="ownerId" />
 			<finder-column name="ownerType" />
 			<finder-column name="plid" />
@@ -1129,7 +1129,7 @@
 		<finder name="CodeId" return-type="Collection">
 			<finder-column name="codeId" />
 		</finder>
-		<finder name="C_P" return-type="Resource">
+		<finder name="C_P" return-type="Resource" unique="true">
 			<finder-column name="codeId" />
 			<finder-column name="primKey" />
 		</finder>
@@ -1161,7 +1161,7 @@
 		<finder name="Name" return-type="Collection">
 			<finder-column name="name" />
 		</finder>
-		<finder name="C_N_S" return-type="ResourceCode">
+		<finder name="C_N_S" return-type="ResourceCode" unique="true">
 			<finder-column name="companyId" />
 			<finder-column name="name" />
 			<finder-column name="scope" />
@@ -1208,7 +1208,7 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
-		<finder name="C_N" return-type="Role">
+		<finder name="C_N" return-type="Role" unique="true">
 			<finder-column name="companyId" />
 			<finder-column name="name" />
 		</finder>
@@ -1247,7 +1247,7 @@
 		<finder name="BuildNamespace" return-type="Collection">
 			<finder-column name="buildNamespace" />
 		</finder>
-		<finder name="BNS_BNU" return-type="ServiceComponent">
+		<finder name="BNS_BNU" return-type="ServiceComponent" unique="true">
 			<finder-column name="buildNamespace" />
 			<finder-column name="buildNumber" />
 		</finder>
@@ -1332,7 +1332,7 @@
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
-		<finder name="C_U_C_C" return-type="Subscription">
+		<finder name="C_U_C_C" return-type="Subscription" unique="true">
 			<finder-column name="companyId" />
 			<finder-column name="userId" />
 			<finder-column name="classNameId" />
@@ -1399,7 +1399,7 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
-		<finder name="ContactId" return-type="User">
+		<finder name="ContactId" return-type="User" unique="true">
 			<finder-column name="contactId" />
 		</finder>
 		<finder name="EmailAddress" return-type="Collection">
@@ -1411,7 +1411,7 @@
 		<finder name="PortraitId" return-type="User">
 			<finder-column name="portraitId" />
 		</finder>
-		<finder name="C_U" return-type="User">
+		<finder name="C_U" return-type="User" unique="true">
 			<finder-column name="companyId" />
 			<finder-column name="userId" />
 		</finder>
@@ -1419,11 +1419,11 @@
 			<finder-column name="companyId" />
 			<finder-column name="defaultUser" />
 		</finder>
-		<finder name="C_SN" return-type="User">
+		<finder name="C_SN" return-type="User" unique="true">
 			<finder-column name="companyId" />
 			<finder-column name="screenName" />
 		</finder>
-		<finder name="C_EA" return-type="User">
+		<finder name="C_EA" return-type="User" unique="true">
 			<finder-column name="companyId" />
 			<finder-column name="emailAddress" />
 		</finder>
@@ -1479,7 +1479,7 @@
 			<finder-column name="companyId" />
 			<finder-column name="parentUserGroupId" />
 		</finder>
-		<finder name="C_N" return-type="UserGroup">
+		<finder name="C_N" return-type="UserGroup" unique="true">
 			<finder-column name="companyId" />
 			<finder-column name="name" />
 		</finder>
@@ -1537,11 +1537,11 @@
 		<finder name="UserId" return-type="Collection">
 			<finder-column name="userId" />
 		</finder>
-		<finder name="U_T" return-type="UserIdMapper">
+		<finder name="U_T" return-type="UserIdMapper" unique="true">
 			<finder-column name="userId" />
 			<finder-column name="type" />
 		</finder>
-		<finder name="T_E" return-type="UserIdMapper">
+		<finder name="T_E" return-type="UserIdMapper" unique="true">
 			<finder-column name="type" />
 			<finder-column name="externalUserId" />
 		</finder>
@@ -1627,7 +1627,7 @@
 
 		<!-- Finder methods -->
 
-		<finder name="C_C" return-type="WebDAVProps">
+		<finder name="C_C" return-type="WebDAVProps" unique="true">
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>

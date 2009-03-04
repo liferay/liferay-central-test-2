@@ -45,7 +45,7 @@
 		<finder name="FolderId" return-type="Collection">
 			<finder-column name="folderId" />
 		</finder>
-		<finder name="F_N" return-type="DLFileEntry">
+		<finder name="F_N" return-type="DLFileEntry" unique="true">
 			<finder-column name="folderId" />
 			<finder-column name="name" />
 		</finder>
@@ -105,7 +105,7 @@
 			<finder-column name="folderId" />
 			<finder-column name="name" />
 		</finder>
-		<finder name="C_U_F_N" return-type="DLFileRank">
+		<finder name="C_U_F_N" return-type="DLFileRank" unique="true">
 			<finder-column name="companyId" />
 			<finder-column name="userId" />
 			<finder-column name="folderId" />
@@ -187,7 +187,7 @@
 			<finder-column name="folderId" />
 			<finder-column name="name" />
 		</finder>
-		<finder name="F_N_V" return-type="DLFileVersion">
+		<finder name="F_N_V" return-type="DLFileVersion" unique="true">
 			<finder-column name="folderId" />
 			<finder-column name="name" />
 			<finder-column name="version" />
@@ -241,7 +241,7 @@
 			<finder-column name="parentFolderId" />
 			<finder-column name="name" />
 		</finder>
-		<finder name="G_P_N" return-type="DLFolder">
+		<finder name="G_P_N" return-type="DLFolder" unique="true">
 			<finder-column name="groupId" />
 			<finder-column name="parentFolderId" />
 			<finder-column name="name" />
