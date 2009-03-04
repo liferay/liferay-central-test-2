@@ -36,21 +36,21 @@ if (Validator.isNotNull(refererParam) && HttpUtil.hasDomain(refererParam)) {
 		String domain = StringUtil.split(HttpUtil.getDomain(refererParam), StringPool.COLON)[0];
 
 		if (securityMode.equals("domain")) {
-			String[] allowedDomains = PropsValues.REFERER_URL_DOMAIN_ALLOWED;
+			String[] allowedDomains = PropsValues.REFERER_URL_DOMAINS_ALLOWED;
 
 			if ((allowedDomains.length > 0) && !ArrayUtil.contains(allowedDomains, domain)) {
 				refererParam = null;
 			}
 		}
 		else if (securityMode.equals("ip")) {
-			String[] allowedIp = PropsValues.REFERER_URL_IP_ALLOWED;
+			String[] allowedIps = PropsValues.REFERER_URL_IPS_ALLOWED;
 
 			String serverIp = request.getServerName();
 
 			InetAddress inetAddress = InetAddress.getByName(domain);
 
-			if ((allowedIp.length > 0) && !ArrayUtil.contains(allowedIp, inetAddress.getHostAddress())) {
-				if (!serverIp.equals(inetAddress.getHostAddress()) || !ArrayUtil.contains(allowedIp, "SERVER_IP")) {
+			if ((allowedIps.length > 0) && !ArrayUtil.contains(allowedIps, inetAddress.getHostAddress())) {
+				if (!serverIp.equals(inetAddress.getHostAddress()) || !ArrayUtil.contains(allowedIps, "SERVER_IP")) {
 					refererParam = null;
 				}
 			}

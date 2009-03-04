@@ -947,13 +947,13 @@ public interface PropsKeys {
 
 	public static final String PREFERENCE_VALIDATE_ON_STARTUP = "preference.validate.on.startup";
 
-	public static final String REQUEST_SHARED_ATTRIBUTES = "request.shared.attributes";
+	public static final String REFERER_URL_DOMAINS_ALLOWED = "referer.url.domains.allowed";
 
-	public static final String REFERER_URL_DOMAIN_ALLOWED = "referer.url.domain.allowed";
-
-	public static final String REFERER_URL_IP_ALLOWED = "referer.url.ip.allowed";
+	public static final String REFERER_URL_IPS_ALLOWED = "referer.url.ips.allowed";
 
 	public static final String REFERER_URL_SECURITY_MODE = "referer.url.security.mode";
+
+	public static final String REQUEST_SHARED_ATTRIBUTES = "request.shared.attributes";
 
 	public static final String RESOURCE_ACTIONS_CONFIGS = "resource.actions.configs";
 

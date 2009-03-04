@@ -1006,17 +1006,17 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.PREFERENCE_VALIDATE_ON_STARTUP));
 
-	public static final String[] REQUEST_SHARED_ATTRIBUTES =
-		PropsUtil.getArray(PropsKeys.REQUEST_SHARED_ATTRIBUTES);
+	public static final String[] REFERER_URL_DOMAINS_ALLOWED =
+		PropsUtil.getArray(PropsKeys.REFERER_URL_DOMAINS_ALLOWED);
 
-	public static final String[] REFERER_URL_DOMAIN_ALLOWED =
-		PropsUtil.getArray(PropsKeys.REFERER_URL_DOMAIN_ALLOWED);
-
-	public static final String[] REFERER_URL_IP_ALLOWED = PropsUtil.getArray(
-		PropsKeys.REFERER_URL_IP_ALLOWED);
+	public static final String[] REFERER_URL_IPS_ALLOWED = PropsUtil.getArray(
+		PropsKeys.REFERER_URL_IPS_ALLOWED);
 
 	public static final String REFERER_URL_SECURITY_MODE = PropsUtil.get(
 		PropsKeys.REFERER_URL_SECURITY_MODE);
+
+	public static final String[] REQUEST_SHARED_ATTRIBUTES =
+		PropsUtil.getArray(PropsKeys.REQUEST_SHARED_ATTRIBUTES);
 
 	public static final String RESOURCE_REPOSITORIES_ROOT =
 		PropsUtil.get(PropsKeys.RESOURCE_REPOSITORIES_ROOT);
