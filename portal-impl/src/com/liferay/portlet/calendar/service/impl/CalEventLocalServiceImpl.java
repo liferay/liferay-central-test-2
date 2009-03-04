@@ -65,6 +65,7 @@ import com.liferay.portlet.calendar.model.impl.CalEventImpl;
 import com.liferay.portlet.calendar.service.base.CalEventLocalServiceBaseImpl;
 import com.liferay.portlet.calendar.social.CalendarActivityKeys;
 import com.liferay.portlet.calendar.util.CalUtil;
+import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.util.TimeZoneSensitive;
 import com.liferay.util.servlet.ServletResponseUtil;
 
@@ -251,6 +252,12 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				serviceContext.getGuestPermissions());
 		}
 
+		// Custom Attributes
+
+		ExpandoBridge expandoBridge = event.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
+
 		// Social
 
 		socialActivityLocalService.addActivity(
@@ -388,6 +395,11 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		// Pool
 
 		CalEventLocalUtil.clearEventsPool(event.getGroupId());
+
+		// Expando
+
+		expandoValueLocalService.deleteValues(
+			CalEvent.class.getName(), event.getEventId());
 
 		// Social
 
@@ -643,7 +655,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			int endDateDay, int endDateYear, int durationHour,
 			int durationMinute, boolean allDay, boolean timeZoneSensitive,
 			String type, boolean repeating, TZSRecurrence recurrence,
-			String remindBy, int firstReminder, int secondReminder)
+			String remindBy, int firstReminder, int secondReminder,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Event
@@ -714,6 +727,12 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		event.setSecondReminder(secondReminder);
 
 		calEventPersistence.update(event, false);
+
+		// Custom Attributes
+
+		ExpandoBridge expandoBridge = event.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 
 		// Social
 

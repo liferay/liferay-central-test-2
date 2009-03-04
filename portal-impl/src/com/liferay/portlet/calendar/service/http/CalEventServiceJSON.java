@@ -115,7 +115,8 @@ public class CalEventServiceJSON {
 		int durationMinute, boolean allDay, boolean timeZoneSensitive,
 		java.lang.String type, boolean repeating,
 		com.liferay.portal.kernel.cal.TZSRecurrence recurrence,
-		java.lang.String remindBy, int firstReminder, int secondReminder)
+		java.lang.String remindBy, int firstReminder, int secondReminder,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.calendar.model.CalEvent returnValue = CalEventServiceUtil.updateEvent(eventId,
@@ -123,7 +124,7 @@ public class CalEventServiceJSON {
 				startDateYear, startDateHour, startDateMinute, endDateMonth,
 				endDateDay, endDateYear, durationHour, durationMinute, allDay,
 				timeZoneSensitive, type, repeating, recurrence, remindBy,
-				firstReminder, secondReminder);
+				firstReminder, secondReminder, serviceContext);
 
 		return CalEventJSONSerializer.toJSONObject(returnValue);
 	}

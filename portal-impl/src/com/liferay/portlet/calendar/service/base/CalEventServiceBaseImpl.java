@@ -49,6 +49,10 @@ import com.liferay.portlet.calendar.service.CalEventLocalService;
 import com.liferay.portlet.calendar.service.CalEventService;
 import com.liferay.portlet.calendar.service.persistence.CalEventFinder;
 import com.liferay.portlet.calendar.service.persistence.CalEventPersistence;
+import com.liferay.portlet.expando.service.ExpandoValueLocalService;
+import com.liferay.portlet.expando.service.ExpandoValueService;
+import com.liferay.portlet.expando.service.persistence.ExpandoValueFinder;
+import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 import com.liferay.portlet.social.service.SocialActivityLocalService;
 import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
 import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
@@ -211,6 +215,40 @@ public abstract class CalEventServiceBaseImpl extends PrincipalBean
 		this.resourceFinder = resourceFinder;
 	}
 
+	public ExpandoValueLocalService getExpandoValueLocalService() {
+		return expandoValueLocalService;
+	}
+
+	public void setExpandoValueLocalService(
+		ExpandoValueLocalService expandoValueLocalService) {
+		this.expandoValueLocalService = expandoValueLocalService;
+	}
+
+	public ExpandoValueService getExpandoValueService() {
+		return expandoValueService;
+	}
+
+	public void setExpandoValueService(ExpandoValueService expandoValueService) {
+		this.expandoValueService = expandoValueService;
+	}
+
+	public ExpandoValuePersistence getExpandoValuePersistence() {
+		return expandoValuePersistence;
+	}
+
+	public void setExpandoValuePersistence(
+		ExpandoValuePersistence expandoValuePersistence) {
+		this.expandoValuePersistence = expandoValuePersistence;
+	}
+
+	public ExpandoValueFinder getExpandoValueFinder() {
+		return expandoValueFinder;
+	}
+
+	public void setExpandoValueFinder(ExpandoValueFinder expandoValueFinder) {
+		this.expandoValueFinder = expandoValueFinder;
+	}
+
 	public SocialActivityLocalService getSocialActivityLocalService() {
 		return socialActivityLocalService;
 	}
@@ -306,6 +344,14 @@ public abstract class CalEventServiceBaseImpl extends PrincipalBean
 	protected ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceFinder.impl")
 	protected ResourceFinder resourceFinder;
+	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoValueLocalService.impl")
+	protected ExpandoValueLocalService expandoValueLocalService;
+	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoValueService.impl")
+	protected ExpandoValueService expandoValueService;
+	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl")
+	protected ExpandoValuePersistence expandoValuePersistence;
+	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.impl")
+	protected ExpandoValueFinder expandoValueFinder;
 	@BeanReference(name = "com.liferay.portlet.social.service.SocialActivityLocalService.impl")
 	protected SocialActivityLocalService socialActivityLocalService;
 	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence.impl")

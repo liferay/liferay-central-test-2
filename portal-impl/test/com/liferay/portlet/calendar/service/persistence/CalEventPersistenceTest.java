@@ -23,7 +23,6 @@
 package com.liferay.portlet.calendar.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.calendar.NoSuchEventException;
@@ -104,17 +103,15 @@ public class CalEventPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingCalEvent.getCompanyId(), newCalEvent.getCompanyId());
 		assertEquals(existingCalEvent.getUserId(), newCalEvent.getUserId());
 		assertEquals(existingCalEvent.getUserName(), newCalEvent.getUserName());
-		assertEquals(Time.getShortTimestamp(existingCalEvent.getCreateDate()),
-			Time.getShortTimestamp(newCalEvent.getCreateDate()));
-		assertEquals(Time.getShortTimestamp(existingCalEvent.getModifiedDate()),
-			Time.getShortTimestamp(newCalEvent.getModifiedDate()));
+		assertEquals(existingCalEvent.getCreateDate(),
+			newCalEvent.getCreateDate());
+		assertEquals(existingCalEvent.getModifiedDate(),
+			newCalEvent.getModifiedDate());
 		assertEquals(existingCalEvent.getTitle(), newCalEvent.getTitle());
 		assertEquals(existingCalEvent.getDescription(),
 			newCalEvent.getDescription());
-		assertEquals(Time.getShortTimestamp(existingCalEvent.getStartDate()),
-			Time.getShortTimestamp(newCalEvent.getStartDate()));
-		assertEquals(Time.getShortTimestamp(existingCalEvent.getEndDate()),
-			Time.getShortTimestamp(newCalEvent.getEndDate()));
+		assertEquals(existingCalEvent.getStartDate(), newCalEvent.getStartDate());
+		assertEquals(existingCalEvent.getEndDate(), newCalEvent.getEndDate());
 		assertEquals(existingCalEvent.getDurationHour(),
 			newCalEvent.getDurationHour());
 		assertEquals(existingCalEvent.getDurationMinute(),

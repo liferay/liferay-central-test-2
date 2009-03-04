@@ -278,7 +278,8 @@ public class CalEventLocalServiceUtil {
 		int durationMinute, boolean allDay, boolean timeZoneSensitive,
 		java.lang.String type, boolean repeating,
 		com.liferay.portal.kernel.cal.TZSRecurrence recurrence,
-		java.lang.String remindBy, int firstReminder, int secondReminder)
+		java.lang.String remindBy, int firstReminder, int secondReminder,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
@@ -286,7 +287,8 @@ public class CalEventLocalServiceUtil {
 			startDateMonth, startDateDay, startDateYear, startDateHour,
 			startDateMinute, endDateMonth, endDateDay, endDateYear,
 			durationHour, durationMinute, allDay, timeZoneSensitive, type,
-			repeating, recurrence, remindBy, firstReminder, secondReminder);
+			repeating, recurrence, remindBy, firstReminder, secondReminder,
+			serviceContext);
 	}
 
 	public static CalEventLocalService getService() {

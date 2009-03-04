@@ -422,7 +422,7 @@ public class EditEventAction extends PortletAction {
 				startDateYear, startDateHour, startDateMinute, endDateMonth,
 				endDateDay, endDateYear, durationHour, durationMinute,
 				allDay, timeZoneSensitive, type, repeating, recurrence,
-				remindBy, firstReminder, secondReminder);
+				remindBy, firstReminder, secondReminder, serviceContext);
 		}
 	}
 

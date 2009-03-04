@@ -196,11 +196,9 @@ public interface CalEventLocalService {
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getRepeatingEvents(
 		long groupId) throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasEvents(long groupId, java.util.Calendar cal)
 		throws com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasEvents(long groupId, java.util.Calendar cal,
 		java.lang.String type) throws com.liferay.portal.SystemException;
 
@@ -216,7 +214,8 @@ public interface CalEventLocalService {
 		int durationMinute, boolean allDay, boolean timeZoneSensitive,
 		java.lang.String type, boolean repeating,
 		com.liferay.portal.kernel.cal.TZSRecurrence recurrence,
-		java.lang.String remindBy, int firstReminder, int secondReminder)
+		java.lang.String remindBy, int firstReminder, int secondReminder,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

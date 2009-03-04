@@ -382,7 +382,8 @@ public class CalEventServiceHttp {
 		int durationMinute, boolean allDay, boolean timeZoneSensitive,
 		java.lang.String type, boolean repeating,
 		com.liferay.portal.kernel.cal.TZSRecurrence recurrence,
-		java.lang.String remindBy, int firstReminder, int secondReminder)
+		java.lang.String remindBy, int firstReminder, int secondReminder,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -449,6 +450,13 @@ public class CalEventServiceHttp {
 
 			Object paramObj20 = new IntegerWrapper(secondReminder);
 
+			Object paramObj21 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj21 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(CalEventServiceUtil.class.getName(),
 					"updateEvent",
 					new Object[] {
@@ -456,7 +464,7 @@ public class CalEventServiceHttp {
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
 						paramObj10, paramObj11, paramObj12, paramObj13,
 						paramObj14, paramObj15, paramObj16, paramObj17,
-						paramObj18, paramObj19, paramObj20
+						paramObj18, paramObj19, paramObj20, paramObj21
 					});
 
 			Object returnObj = null;

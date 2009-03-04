@@ -253,7 +253,7 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 					event.getTimeZoneSensitive(), event.getType(),
 					event.getRepeating(), event.getRecurrenceObj(),
 					event.getRemindBy(), event.getFirstReminder(),
-					event.getSecondReminder());
+					event.getSecondReminder(), serviceContext);
 			}
 		}
 		else {
