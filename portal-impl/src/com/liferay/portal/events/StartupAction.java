@@ -272,7 +272,8 @@ public class StartupAction extends SimpleAction {
 						verifyProcesses[i]).newInstance();
 
 					if (_log.isDebugEnabled()) {
-						_log.debug("Running verification " + verifyProcesses[i]);
+						_log.debug(
+							"Running verification " + verifyProcesses[i]);
 					}
 
 					verifyProcess.verify();
