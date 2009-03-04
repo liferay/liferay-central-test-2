@@ -204,6 +204,9 @@
 
 <%@ page import="java.math.BigDecimal" %>
 
+<%@ page import="java.net.InetAddress" %>
+<%@ page import="java.net.UnknownHostException" %>
+
 <%@ page import="java.text.DateFormat" %>
 <%@ page import="java.text.DecimalFormat" %>
 <%@ page import="java.text.MessageFormat" %>

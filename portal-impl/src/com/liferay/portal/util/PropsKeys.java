@@ -949,6 +949,12 @@ public interface PropsKeys {
 
 	public static final String REQUEST_SHARED_ATTRIBUTES = "request.shared.attributes";
 
+	public static final String REFERER_URL_DOMAIN_ALLOWED = "referer.url.domain.allowed";
+
+	public static final String REFERER_URL_IP_ALLOWED = "referer.url.ip.allowed";
+
+	public static final String REFERER_URL_SECURITY_MODE = "referer.url.security.mode";
+
 	public static final String RESOURCE_ACTIONS_CONFIGS = "resource.actions.configs";
 
 	public static final String RESOURCE_REPOSITORIES_ROOT = "resource.repositories.root";
