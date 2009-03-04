@@ -36,6 +36,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.ContentTypeUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
@@ -237,7 +238,8 @@ public class ImageServlet extends HttpServlet {
 		}
 		else {
 			if (!image.getType().equals(ImageImpl.TYPE_NOT_AVAILABLE)) {
-				response.setContentType("image/" + image.getType());
+				response.setContentType(
+					ContentTypeUtil.getContentType(image.getType()));
 			}
 
 			try {

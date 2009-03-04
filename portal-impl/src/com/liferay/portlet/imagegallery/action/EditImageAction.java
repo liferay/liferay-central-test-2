@@ -33,6 +33,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.util.ContentTypeUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.imagegallery.DuplicateImageNameException;
@@ -148,14 +149,7 @@ public class EditImageAction extends PortletAction {
 				FileUtil.getExtension(file.getName())).toLowerCase();
 
 			if (Validator.isNotNull(ext)) {
-				if (ext.equals("jpg")) {
-					ext = "jpeg";
-				}
-				else if (ext.equals("tif")) {
-					ext = "tiff";
-				}
-
-				contentType = "image/" + ext;
+				contentType = ContentTypeUtil.getContentType(ext);
 			}
 		}
 
@@ -182,14 +176,7 @@ public class EditImageAction extends PortletAction {
 				FileUtil.getExtension(file.getName())).toLowerCase();
 
 			if (Validator.isNotNull(ext)) {
-				if (ext.equals("jpg")) {
-					ext = "jpeg";
-				}
-				else if (ext.equals("tif")) {
-					ext = "tiff";
-				}
-
-				contentType = "image/" + ext;
+				contentType = ContentTypeUtil.getContentType(ext);
 			}
 		}
 
