@@ -349,7 +349,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		ExpandoBridge expandoBridge = user.getExpandoBridge();
 
-		expandoBridge.setIndexEnabled(false);
 		expandoBridge.setAttributes(serviceContext);
 
 		// Mail
@@ -2284,7 +2283,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		ExpandoBridge expandoBridge = user.getExpandoBridge();
 
-		expandoBridge.setIndexEnabled(false);
 		expandoBridge.setAttributes(serviceContext);
 
 		// Contact

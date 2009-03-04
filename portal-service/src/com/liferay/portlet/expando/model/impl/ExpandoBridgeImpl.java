@@ -66,6 +66,10 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 	public ExpandoBridgeImpl(String className, long classPK) {
 		_className = className;
 		_classPK = classPK;
+
+		if (IndexerRegistryUtil.getIndexer(className) == null) {
+			setIndexEnabled(true);
+		}
 	}
 
 	public void addAttribute(String name) throws PortalException {
@@ -361,6 +365,6 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 
 	private String _className;
 	private long _classPK;
-	private boolean _indexEnabled = true;
+	private boolean _indexEnabled;
 
 }

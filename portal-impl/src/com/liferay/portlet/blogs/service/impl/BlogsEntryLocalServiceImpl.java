@@ -163,7 +163,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		ExpandoBridge expandoBridge = entry.getExpandoBridge();
 
-		expandoBridge.setIndexEnabled(false);
 		expandoBridge.setAttributes(serviceContext);
 
 		// Social
@@ -695,7 +694,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		ExpandoBridge expandoBridge = entry.getExpandoBridge();
 
-		expandoBridge.setIndexEnabled(false);
 		expandoBridge.setAttributes(serviceContext);
 
 		// Social
