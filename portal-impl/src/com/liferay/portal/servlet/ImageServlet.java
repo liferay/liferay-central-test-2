@@ -238,8 +238,10 @@ public class ImageServlet extends HttpServlet {
 		}
 		else {
 			if (!image.getType().equals(ImageImpl.TYPE_NOT_AVAILABLE)) {
-				response.setContentType(
-					ContentTypeUtil.getContentType(image.getType()));
+				String contentType = ContentTypeUtil.getContentType(
+					image.getType());
+
+				response.setContentType(contentType);
 			}
 
 			try {
