@@ -7,11 +7,11 @@ insert into Contact_ (contactId, companyId, userId, userName, createDate, modifi
 	insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, themeId, colorSchemeId, pageCount) values (${counter.getString()}, ${companyId}, ${groupId}, FALSE, FALSE, 'classic', '01', ${publicLayouts?size});
 
 	<#list privateLayouts as layout>
-		insert into Layout (plid, groupId, companyId, privateLayout, layoutId, parentLayoutId, name, type_, typeSettings, hidden_, friendlyURL, priority) values (${counter.get()}, ${groupId}, ${companyId}, TRUE, 1, 0, '<?xml version="1.0"?>\n\n<root>\n  <name>${layout.name}</name>\n</root>', 'portlet', 'layout-template-id=2_columns_ii\ncolumn-1=3,\ncolumn-2=19,', FALSE, '${layout.friendlyURL}', 0);
+		insert into Layout (plid, groupId, companyId, privateLayout, layoutId, parentLayoutId, name, type_, typeSettings, hidden_, friendlyURL, priority) values (${counter.getString()}, ${groupId}, ${companyId}, TRUE, 1, 0, '<?xml version="1.0"?>\n\n<root>\n  <name>${layout.name}</name>\n</root>', 'portlet', 'layout-template-id=2_columns_ii\ncolumn-1=3,\ncolumn-2=19,', FALSE, '${layout.friendlyURL}', 0);
 	</#list>
 
 	<#list publicLayouts as layout>
-		insert into Layout (plid, groupId, companyId, privateLayout, layoutId, parentLayoutId, name, type_, typeSettings, hidden_, friendlyURL, priority) values (${counter.get()}, ${groupId}, ${companyId}, FALSE, 1, 0, '<?xml version="1.0"?>\n\n<root>\n  <name>${layout.name}</name>\n</root>', 'portlet', 'layout-template-id=2_columns_ii\ncolumn-1=3,\ncolumn-2=19,', FALSE, '${layout.friendlyURL}', 0);
+		insert into Layout (plid, groupId, companyId, privateLayout, layoutId, parentLayoutId, name, type_, typeSettings, hidden_, friendlyURL, priority) values (${counter.getString()}, ${groupId}, ${companyId}, FALSE, 1, 0, '<?xml version="1.0"?>\n\n<root>\n  <name>${layout.name}</name>\n</root>', 'portlet', 'layout-template-id=2_columns_ii\ncolumn-1=3,\ncolumn-2=19,', FALSE, '${layout.friendlyURL}', 0);
 	</#list>
 </#if>
 
