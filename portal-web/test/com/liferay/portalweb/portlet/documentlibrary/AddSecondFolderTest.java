@@ -52,47 +52,11 @@ public class AddSecondFolderTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Test Page"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Add Folder']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Folder']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_20_name")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.typeKeys("_20_name",
 			RuntimeVariables.replace("Second Test Folder"));
 		selenium.type("_20_name", RuntimeVariables.replace("Second Test Folder"));
-		selenium.typeKeys("_20_description",
-			RuntimeVariables.replace("This is a second test folder!"));
 		selenium.type("_20_description",
 			RuntimeVariables.replace("This is a second test folder!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));

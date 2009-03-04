@@ -33,96 +33,114 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class DeleteCompareVersionsTest extends BaseTestCase {
 	public void testDeleteCompareVersions() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+		int label = 1;
 
-			try {
-				if (selenium.isElementPresent("link=Document Library Test Page")) {
-					break;
+		while (label >= 1) {
+			switch (label) {
+			case 1:
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent(
+									"link=Document Library Test Page")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.click(RuntimeVariables.replace(
+						"link=Document Library Test Page"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace("//b"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace("//b"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click("//td[5]/ul/li/strong/span");
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Test Page"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//b"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//b"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("//td[5]/ul/li/strong/span");
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+					try {
+						if (selenium.isElementPresent("link=Edit")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
 
-			try {
-				if (selenium.isElementPresent("link=Edit")) {
-					break;
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.click(RuntimeVariables.replace("link=Edit"));
+				selenium.waitForPageToLoad("30000");
 
-		selenium.click(RuntimeVariables.replace("link=Edit"));
-		selenium.waitForPageToLoad("30000");
+				boolean DocumentsPresentA = selenium.isElementPresent(
+						"link=Delete");
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				if (!DocumentsPresentA) {
+					label = 2;
 
-			try {
-				if (selenium.isElementPresent("link=Delete")) {
-					break;
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.click(RuntimeVariables.replace("link=Delete"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+				assertTrue(selenium.isTextPresent(
+						"Your request processed successfully."));
 
-		selenium.click(RuntimeVariables.replace("link=Delete"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-		assertFalse(selenium.isElementPresent("link=1.1"));
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+			case 2:
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				boolean DocumentsPresentB = selenium.isElementPresent(
+						"link=Delete");
 
-			try {
-				if (selenium.isElementPresent("link=Delete")) {
-					break;
+				if (!DocumentsPresentB) {
+					label = 3;
+
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("link=Delete")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.click(RuntimeVariables.replace("link=Delete"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+				assertTrue(selenium.isTextPresent(
+						"Your request processed successfully."));
+
+			case 3:
+				assertFalse(selenium.isElementPresent("link=1.0"));
+				assertFalse(selenium.isElementPresent("link=1.1"));
+
+			case 100:
+				label = -1;
+			}
 		}
-
-		selenium.click(RuntimeVariables.replace("link=Delete"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-		assertFalse(selenium.isElementPresent("link=1.0"));
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
 	}
 }

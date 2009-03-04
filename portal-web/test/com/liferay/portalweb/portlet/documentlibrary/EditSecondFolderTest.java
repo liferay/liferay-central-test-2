@@ -72,29 +72,10 @@ public class EditSecondFolderTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_20_name")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.typeKeys("_20_name",
 			RuntimeVariables.replace("Edited Second Folder Test"));
 		selenium.type("_20_name",
 			RuntimeVariables.replace("Edited Second Folder Test"));
-		selenium.typeKeys("_20_description",
-			RuntimeVariables.replace("This second folder was edited!"));
 		selenium.type("_20_description",
 			RuntimeVariables.replace("This second folder was edited!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));

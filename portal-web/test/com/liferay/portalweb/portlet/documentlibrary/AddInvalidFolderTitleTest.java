@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AssertCommentMoveTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddInvalidFolderTitleTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AssertCommentMoveTest extends BaseTestCase {
-	public void testAssertCommentMove() throws Exception {
+public class AddInvalidFolderTitleTest extends BaseTestCase {
+	public void testAddInvalidFolderTitle() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -52,32 +52,16 @@ public class AssertCommentMoveTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Folder']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.typeKeys("_20_name", RuntimeVariables.replace("!@#$%^&amp;*"));
+		selenium.type("_20_name", RuntimeVariables.replace("!@#$%^&amp;*"));
+		selenium.type("_20_description",
+			RuntimeVariables.replace("Invalid Title Folder"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//td[5]/ul/li/strong/span");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Edit")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Edit"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Comments"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Edited comments test!!!"));
+		assertTrue(selenium.isTextPresent(
+				"You have entered invalid data. Please try again."));
+		assertTrue(selenium.isTextPresent("Please enter a valid name."));
 	}
 }

@@ -55,6 +55,13 @@ public class DocumentLibraryTests extends BaseTests {
 		testSuite.addTestSuite(AssertCommentMoveTest.class);
 		testSuite.addTestSuite(DeleteCommentsTest.class);
 		testSuite.addTestSuite(EditSecondFolderTest.class);
+		testSuite.addTestSuite(EditDocumentTest.class);
+		testSuite.addTestSuite(AddNullFolderTitleTest.class);
+		testSuite.addTestSuite(AddInvalidFolderTitleTest.class);
+		testSuite.addTestSuite(AddDuplicateFolderTitleTest.class);
+		testSuite.addTestSuite(AddDocumentNameFolderTitleTest.class);
+		testSuite.addTestSuite(AddNullDocumentTest.class);
+		testSuite.addTestSuite(AddDuplicateDocumentNameTest.class);
 		testSuite.addTestSuite(DeleteAllTest.class);
 		testSuite.addTestSuite(ImportLARTest.class);
 		testSuite.addTestSuite(AssertImportLARTest.class);

@@ -52,44 +52,9 @@ public class SearchTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Test Page"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_20_keywords1")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.typeKeys("_20_keywords1",
 			RuntimeVariables.replace("Test Document"));
 		selenium.type("_20_keywords1", RuntimeVariables.replace("Test Document"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//input[@value='Search File Entries']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Search File Entries']"));
 		selenium.waitForPageToLoad("30000");

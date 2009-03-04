@@ -100,8 +100,6 @@ public class AddDocumentTest extends BaseTestCase {
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\documentlibrary\\test_document.txt"));
 		selenium.typeKeys("_20_title", RuntimeVariables.replace("Test Document"));
 		selenium.type("_20_title", RuntimeVariables.replace("Test Document"));
-		selenium.typeKeys("_20_description",
-			RuntimeVariables.replace("This is a test document!"));
 		selenium.type("_20_description",
 			RuntimeVariables.replace("This is a test document!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));

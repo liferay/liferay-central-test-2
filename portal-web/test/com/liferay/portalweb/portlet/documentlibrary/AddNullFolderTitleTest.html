@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>AddSecondSubfolderTest</title>
+<title>AddNullFolderTitleTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddSecondSubfolderTest</td></tr>
+<tr><td rowspan="1" colspan="3">AddNullFolderTitleTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
@@ -20,28 +20,23 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//b</td>
+	<td>//input[@value='Add Folder']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Add Subfolder']</td>
+	<td>type</td>
+	<td>_20_name</td>
 	<td></td>
 </tr>
 <tr>
 	<td>typeKeys</td>
-	<td>_20_name</td>
-	<td>Second Test Subfolder</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>_20_name</td>
-	<td>Second Test Subfolder</td>
+	<td>_20_description</td>
+	<td>Null Title Folder</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_20_description</td>
-	<td>This is a second test subfolder!</td>
+	<td>Null Title Folder</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -50,17 +45,12 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
+	<td>You have entered invalid data. Please try again.</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Second Test Subfolder</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>This is a second test subfolder!</td>
+	<td>Please enter a valid name.</td>
 	<td></td>
 </tr>
 

@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AssertCommentMoveTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddDuplicateDocumentNameTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AssertCommentMoveTest extends BaseTestCase {
-	public void testAssertCommentMove() throws Exception {
+public class AddDuplicateDocumentNameTest extends BaseTestCase {
+	public void testAddDuplicateDocumentName() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -56,7 +56,9 @@ public class AssertCommentMoveTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//td[5]/ul/li/strong/span");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Document']"));
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -64,7 +66,7 @@ public class AssertCommentMoveTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Edit")) {
+				if (selenium.isElementPresent("link=Use the classic uploader.")) {
 					break;
 				}
 			}
@@ -74,10 +76,36 @@ public class AssertCommentMoveTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Edit"));
+		selenium.click("link=Use the classic uploader.");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_20_file")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_20_file",
+			RuntimeVariables.replace(
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\documentlibrary\\test_document.txt"));
+		selenium.typeKeys("_20_title",
+			RuntimeVariables.replace("Edited Test Document.txt"));
+		selenium.type("_20_title",
+			RuntimeVariables.replace("Edited Test Document.txt"));
+		selenium.type("_20_description",
+			RuntimeVariables.replace("Duplicate Document Test"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Comments"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Edited comments test!!!"));
+		assertTrue(selenium.isTextPresent(
+				"You have entered invalid data. Please try again."));
 	}
 }

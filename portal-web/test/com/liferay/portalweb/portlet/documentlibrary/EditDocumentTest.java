@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AssertCommentMoveTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditDocumentTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AssertCommentMoveTest extends BaseTestCase {
-	public void testAssertCommentMove() throws Exception {
+public class EditDocumentTest extends BaseTestCase {
+	public void testEditDocument() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -56,7 +56,7 @@ public class AssertCommentMoveTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//td[5]/ul/li/strong/span");
+		selenium.click("//strong");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -76,8 +76,17 @@ public class AssertCommentMoveTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Comments"));
+		selenium.typeKeys("_20_title",
+			RuntimeVariables.replace("Edited Test Document"));
+		selenium.type("_20_title",
+			RuntimeVariables.replace("Edited Test Document"));
+		selenium.type("_20_description",
+			RuntimeVariables.replace("This is an edited test document!"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Edited comments test!!!"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertTrue(selenium.isTextPresent("Edited Test Document.txt"));
+		assertTrue(selenium.isTextPresent("This is an edited test document!"));
 	}
 }
