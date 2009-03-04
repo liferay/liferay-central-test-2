@@ -80,10 +80,11 @@ public class SampleSQLBuilder {
 
 	public SampleSQLBuilder(String outputDir, int maxUserCount) {
 		try {
+			_outputDir = outputDir;
 			_maxUserCount = maxUserCount;
 
-			_mysqlWriter = new FileWriter(new File(
-				outputDir +  "/sample-mysql.sql"));
+			_mysqlWriter = new FileWriter(
+				new File(_outputDir +  "/sample-mysql.sql"));
 
 			_mysqlDBUtil = DBUtil.getInstance(DBUtil.TYPE_MYSQL);
 
@@ -391,6 +392,67 @@ public class SampleSQLBuilder {
 		}
 	}
 
+	protected void createUser(
+			String firstName, List<Group> groups, String lastName,
+			List<Role> roles, int userCount, Writer loginCsvWriter)
+		throws Exception {
+
+		long contactId = _counter.get();
+		String emailAddress =
+			(firstName + lastName + "@liferay.com").toLowerCase();
+		long groupId = _counter.get();
+		long userId = _counter.get();
+
+		List<Layout> privateLayouts = new ArrayList<Layout>();
+
+		List<Layout> publicLayouts = new ArrayList<Layout>();
+
+		Layout layout = new LayoutImpl();
+
+		layout.setPlid(_counter.get());
+		layout.setPrivateLayout(false);
+		layout.setName("Home");
+		layout.setFriendlyURL("/home");
+
+		publicLayouts.add(layout);
+
+		createUser(
+			contactId, emailAddress, firstName, groupId, groups, lastName, null,
+			privateLayouts, publicLayouts, roles, String.valueOf(userId),
+			userId);
+
+		write(StringPool.NEW_LINE);
+
+		long categoryId = createMBCategory(
+			"Test description", groupId, "Test name", userId);
+
+		long threadId = _counter.get();
+
+		long rootMessageId = 0;
+		int messageCount = 10;
+
+		for (int i = 0; i < messageCount; i++) {
+			long messageId = createMBMessage(
+				"Test body " + i, categoryId, "Test subject " + i, threadId,
+				userId);
+
+			if (i == 0) {
+				rootMessageId = messageId;
+			}
+		}
+
+		createMBThread(
+			categoryId, messageCount, rootMessageId, threadId, userId);
+
+		String csvLine = (firstName + lastName).toLowerCase() + "," + groupId;
+
+		if (userCount < _maxUserCount) {
+			csvLine += "\n";
+		}
+
+		loginCsvWriter.write(csvLine);
+	}
+
 	protected void createUsers() throws Exception {
 		createUser(
 			_defaultContactId, "default@liferay.com", StringPool.BLANK, 0,
@@ -426,56 +488,18 @@ public class SampleSQLBuilder {
 
 		roles.add(role);
 
+		Writer loginCsvWriter = new FileWriter(
+			new File(_outputDir +  "/login.csv"));
+
 		int userCount = 0;
 
 		for (String lastName : lastNames) {
 			for (String firstName : firstNames) {
 				userCount++;
 
-				long contactId = _counter.get();
-				long groupId = _counter.get();
-				long userId = _counter.get();
-
-				List<Layout> privateLayouts = new ArrayList<Layout>();
-
-				List<Layout> publicLayouts = new ArrayList<Layout>();
-
-				Layout layout = new LayoutImpl();
-
-				layout.setPlid(_counter.get());
-				layout.setPrivateLayout(false);
-				layout.setName("Home");
-				layout.setFriendlyURL("/home");
-
-				publicLayouts.add(layout);
-
 				createUser(
-					contactId, userId + "@liferay.com", firstName, groupId,
-					groups, lastName, null, privateLayouts, publicLayouts,
-					roles, String.valueOf(userId), userId);
-
-				write(StringPool.NEW_LINE);
-
-				long categoryId = createMBCategory(
-					"Test description", groupId, "Test name", userId);
-
-				long threadId = _counter.get();
-
-				long rootMessageId = 0;
-				int messageCount = 10;
-
-				for (int i = 0; i < messageCount; i++) {
-					long messageId = createMBMessage(
-						"Test body " + i, categoryId, "Test subject " + i,
-						threadId, userId);
-
-					if (i == 0) {
-						rootMessageId = messageId;
-					}
-				}
-
-				createMBThread(
-					categoryId, messageCount, rootMessageId, threadId, userId);
+					firstName, groups, lastName, roles, userCount,
+					loginCsvWriter);
 
 				if (userCount >= _maxUserCount) {
 					break;
@@ -486,6 +510,8 @@ public class SampleSQLBuilder {
 				break;
 			}
 		}
+
+		loginCsvWriter.flush();
 	}
 
 	protected Map<String, Object> getContext() {
@@ -582,6 +608,7 @@ public class SampleSQLBuilder {
 	private String _tplUser = _TPL_ROOT + "user.ftl";
 	private Writer _mysqlWriter;
 	private DBUtil _mysqlDBUtil;
+	private String _outputDir;
 	private int _maxUserCount;
 	private SimpleCounter _counter = new SimpleCounter();
 	private SimpleCounter _permissionCounter = new SimpleCounter();
