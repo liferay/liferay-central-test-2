@@ -35,11 +35,6 @@
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
 		<reference package-path="com.liferay.portal" entity="User" />
-
-		<!-- Transactions -->
-
-		<tx-required>getUserDeliveries</tx-required>
-		<tx-required>getUserDelivery</tx-required>
 	</entity>
 	<entity name="AnnouncementsEntry" uuid="true" local-service="true" remote-service="true">
 

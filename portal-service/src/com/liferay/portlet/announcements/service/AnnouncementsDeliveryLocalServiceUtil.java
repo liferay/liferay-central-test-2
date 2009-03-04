@@ -103,6 +103,13 @@ public class AnnouncementsDeliveryLocalServiceUtil {
 		return getService().updateAnnouncementsDelivery(announcementsDelivery);
 	}
 
+	public static com.liferay.portlet.announcements.model.AnnouncementsDelivery addUserDelivery(
+		long userId, java.lang.String type)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().addUserDelivery(userId, type);
+	}
+
 	public static void deleteDeliveries(long userId)
 		throws com.liferay.portal.SystemException {
 		getService().deleteDeliveries(userId);

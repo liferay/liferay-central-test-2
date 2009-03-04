@@ -41,6 +41,24 @@ import com.liferay.portlet.ratings.service.base.RatingsStatsLocalServiceBaseImpl
 public class RatingsStatsLocalServiceImpl
 	extends RatingsStatsLocalServiceBaseImpl {
 
+	public RatingsStats addStats(long classNameId, long classPK)
+		throws SystemException {
+
+		long statsId = counterLocalService.increment();
+
+		RatingsStats stats = ratingsStatsPersistence.create(statsId);
+
+		stats.setClassNameId(classNameId);
+		stats.setClassPK(classPK);
+		stats.setTotalEntries(0);
+		stats.setTotalScore(0.0);
+		stats.setAverageScore(0.0);
+
+		ratingsStatsPersistence.update(stats, false);
+
+		return stats;
+	}
+
 	public void deleteStats(String className, long classPK)
 		throws SystemException {
 
@@ -71,17 +89,7 @@ public class RatingsStatsLocalServiceImpl
 			classNameId, classPK);
 
 		if (stats == null) {
-			long statsId = counterLocalService.increment();
-
-			stats = ratingsStatsPersistence.create(statsId);
-
-			stats.setClassNameId(classNameId);
-			stats.setClassPK(classPK);
-			stats.setTotalEntries(0);
-			stats.setTotalScore(0.0);
-			stats.setAverageScore(0.0);
-
-			ratingsStatsPersistence.update(stats, false);
+			stats = ratingsStatsLocalService.addStats(classNameId, classPK);
 		}
 
 		return stats;

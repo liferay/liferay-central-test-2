@@ -43,6 +43,28 @@ import java.util.List;
 public class AnnouncementsDeliveryLocalServiceImpl
 	extends AnnouncementsDeliveryLocalServiceBaseImpl {
 
+	public AnnouncementsDelivery addUserDelivery(long userId, String type)
+		throws PortalException, SystemException {
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		long deliveryId = counterLocalService.increment();
+
+		AnnouncementsDelivery delivery =
+			announcementsDeliveryPersistence.create(deliveryId);
+
+		delivery.setCompanyId(user.getCompanyId());
+		delivery.setUserId(user.getUserId());
+		delivery.setType(type);
+		delivery.setEmail(false);
+		delivery.setSms(false);
+		delivery.setWebsite(true);
+
+		announcementsDeliveryPersistence.update(delivery, false);
+
+		return delivery;
+	}
+
 	public void deleteDeliveries(long userId) throws SystemException {
 		announcementsDeliveryPersistence.removeByUserId(userId);
 	}
@@ -90,20 +112,8 @@ public class AnnouncementsDeliveryLocalServiceImpl
 			announcementsDeliveryPersistence.fetchByU_T(userId, type);
 
 		if (delivery == null) {
-			User user = userPersistence.findByPrimaryKey(userId);
-
-			long deliveryId = counterLocalService.increment();
-
-			delivery = announcementsDeliveryPersistence.create(deliveryId);
-
-			delivery.setCompanyId(user.getCompanyId());
-			delivery.setUserId(user.getUserId());
-			delivery.setType(type);
-			delivery.setEmail(false);
-			delivery.setSms(false);
-			delivery.setWebsite(true);
-
-			announcementsDeliveryPersistence.update(delivery, false);
+			delivery = announcementsDeliveryLocalService.addUserDelivery(
+				userId, type);
 		}
 
 		return delivery;

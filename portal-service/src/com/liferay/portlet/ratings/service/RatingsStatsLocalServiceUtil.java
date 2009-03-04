@@ -103,6 +103,12 @@ public class RatingsStatsLocalServiceUtil {
 		return getService().updateRatingsStats(ratingsStats);
 	}
 
+	public static com.liferay.portlet.ratings.model.RatingsStats addStats(
+		long classNameId, long classPK)
+		throws com.liferay.portal.SystemException {
+		return getService().addStats(classNameId, classPK);
+	}
+
 	public static void deleteStats(java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
 		getService().deleteStats(className, classPK);
