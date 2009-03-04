@@ -29,23 +29,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Add Entry']</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Add Entry']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Save']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>_28_name</td>
 	<td></td>
 </tr>
 <tr>
@@ -59,19 +44,9 @@
 	<td>Test Bookmark 2</td>
 </tr>
 <tr>
-	<td>typeKeys</td>
-	<td>_28_url</td>
-	<td>http://www.digg.com</td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>_28_url</td>
 	<td>http://www.digg.com</td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>_28_comments</td>
-	<td>This is a test bookmark that will be deleted!</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -81,6 +56,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Test Bookmark 2</td>
 	<td></td>
 </tr>
 <tr>

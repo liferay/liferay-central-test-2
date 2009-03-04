@@ -77,9 +77,9 @@ public class CombineToParentFolderTest extends BaseTestCase {
 		selenium.click("_28_mergeWithParentFolderCheckbox");
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=http://www.narutofan.com"));
-		assertFalse(selenium.isElementPresent("link=Edited Test SubFolder"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertTrue(selenium.isElementPresent("link=http://www.narutofan.com"));
+		assertFalse(selenium.isElementPresent("link=Edited Test SubFolder"));
 	}
 }

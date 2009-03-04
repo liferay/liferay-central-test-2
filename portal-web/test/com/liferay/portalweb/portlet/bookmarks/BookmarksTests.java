@@ -44,7 +44,7 @@ public class BookmarksTests extends BaseTests {
 		testSuite.addTestSuite(AddSubfolderTest.class);
 		testSuite.addTestSuite(AddEntryTest.class);
 		testSuite.addTestSuite(AddSecondEntryTest.class);
-		testSuite.addTestSuite(VerifyEntriesTest.class);
+		testSuite.addTestSuite(AssertEntriesTest.class);
 		testSuite.addTestSuite(SearchEntriesTest.class);
 		testSuite.addTestSuite(SearchNullEntriesTest.class);
 		testSuite.addTestSuite(MoveEntryTest.class);

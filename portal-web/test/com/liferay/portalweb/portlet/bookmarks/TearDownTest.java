@@ -60,27 +60,15 @@ public class TearDownTest extends BaseTestCase {
 						"link=Bookmarks Test Page"));
 				selenium.waitForPageToLoad("30000");
 
-				boolean TestFolderAvailable = selenium.isElementPresent("//b");
+				boolean FolderPresent = selenium.isElementPresent("//b");
 
-				if (!TestFolderAvailable) {
-					label = 3;
-
-					continue;
-				}
-
-				selenium.click(RuntimeVariables.replace("//b"));
-				selenium.waitForPageToLoad("30000");
-
-				boolean TestEntryAvailable = selenium.isElementPresent(
-						"//strong/span");
-
-				if (!TestEntryAvailable) {
+				if (!FolderPresent) {
 					label = 2;
 
 					continue;
 				}
 
-				selenium.click("//strong/span");
+				selenium.click("//td[4]/ul/li/strong/span");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -88,7 +76,7 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("//img[@alt='Delete']")) {
+						if (selenium.isElementPresent("//div[4]/ul/li[3]/a")) {
 							break;
 						}
 					}
@@ -98,48 +86,14 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("//img[@alt='Delete']"));
+				selenium.click(RuntimeVariables.replace("//div[4]/ul/li[3]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertFalse(selenium.isElementPresent(
-						"link=http://www.narutofan.com"));
 				assertTrue(selenium.isTextPresent(
 						"Your request processed successfully."));
 
 			case 2:
-				selenium.click(RuntimeVariables.replace("//span[1]/a"));
-				selenium.waitForPageToLoad("30000");
-				selenium.click("//strong/span");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("link=Delete")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click(RuntimeVariables.replace("link=Delete"));
-				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.getConfirmation()
-								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertFalse(selenium.isElementPresent("link=Test Folder"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
-				selenium.click(RuntimeVariables.replace(
-						"link=Return to Full Page"));
-				selenium.waitForPageToLoad("30000");
-
-			case 3:
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -183,82 +137,13 @@ public class TearDownTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//div[2]/ul/li[1]/a/span"));
 				selenium.waitForPageToLoad("30000");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("link=Manage Pages")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
 				selenium.click(RuntimeVariables.replace("link=Manage Pages"));
 				selenium.waitForPageToLoad("30000");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("//li[2]/ul/li[3]/a/span")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
 				selenium.click(RuntimeVariables.replace(
 						"//li[2]/ul/li[3]/a/span"));
 				selenium.waitForPageToLoad("30000");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("link=Page")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
 				selenium.click(RuntimeVariables.replace("link=Page"));
 				selenium.waitForPageToLoad("30000");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent(
-									"//input[@value='Delete']")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Delete']"));
 				selenium.waitForPageToLoad("30000");
@@ -266,24 +151,6 @@ public class TearDownTest extends BaseTestCase {
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
 				assertTrue(selenium.isTextPresent(
 						"Your request processed successfully."));
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent(
-									"//div[2]/ul/li[1]/a/span")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
 				selenium.click(RuntimeVariables.replace(
 						"//div[2]/ul/li[1]/a/span"));
 				selenium.waitForPageToLoad("30000");

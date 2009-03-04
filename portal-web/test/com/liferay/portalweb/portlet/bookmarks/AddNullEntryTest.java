@@ -55,9 +55,11 @@ public class AddNullEntryTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Entry']"));
 		selenium.waitForPageToLoad("30000");
+		selenium.type("_28_name", RuntimeVariables.replace(""));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
+		assertTrue(selenium.isTextPresent("Please enter a valid URL."));
 	}
 }

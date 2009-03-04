@@ -55,72 +55,18 @@ public class AddSecondEntryTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Add Entry']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Entry']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_28_name")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.typeKeys("_28_name",
 			RuntimeVariables.replace("Test Bookmark 2"));
 		selenium.type("_28_name", RuntimeVariables.replace("Test Bookmark 2"));
-		selenium.typeKeys("_28_url",
-			RuntimeVariables.replace("http://www.digg.com"));
 		selenium.type("_28_url", RuntimeVariables.replace("http://www.digg.com"));
-		selenium.typeKeys("_28_comments",
-			RuntimeVariables.replace(
-				"This is a test bookmark that will be deleted!"));
 		selenium.type("_28_comments",
 			RuntimeVariables.replace(
 				"This is a test bookmark that will be deleted!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Test Bookmark 2"));
 		assertTrue(selenium.isElementPresent("link=http://www.digg.com"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

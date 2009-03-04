@@ -55,5 +55,6 @@ public class AssertImportLARTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Edited Test Bookmark"));
+		assertTrue(selenium.isElementPresent("link=http://www.narutofan.com"));
 	}
 }

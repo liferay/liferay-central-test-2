@@ -55,23 +55,6 @@ public class AddIncorrectURLTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Entry']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_28_url")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.typeKeys("_28_url", RuntimeVariables.replace("www.movies.com"));
 		selenium.type("_28_url", RuntimeVariables.replace("www.movies.com"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
@@ -79,8 +62,5 @@ public class AddIncorrectURLTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
 		assertTrue(selenium.isTextPresent("Please enter a valid URL."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Cancel']"));
-		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("www.movies.com"));
 	}
 }

@@ -53,7 +53,6 @@ public class DeleteEntryTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=http://www.digg.com"));
 		selenium.click("//td[6]/ul/li/strong");
 
 		for (int second = 0;; second++) {
@@ -76,8 +75,8 @@ public class DeleteEntryTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-		assertFalse(selenium.isElementPresent("link=http://www.digg.com"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertFalse(selenium.isElementPresent("link=http://www.digg.com"));
 	}
 }
