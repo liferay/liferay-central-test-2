@@ -2443,6 +2443,7 @@ please-complete-your-order=注文を{0}完結{1}してください。
 please-configure-a-valid-jira-database=有効な JIRA のデータベースを設定してください。
 please-contact-the-administrator-because-you-do-not-have-any-pages-configured=編集できるページがありません。システム管理者にご連絡ください。
 please-contact-the-administrator-because-you-do-not-have-any-roles=権限が設定されていません。システム管理者にご連絡ください。
+please-contact-the-administrator-to-assign-reviewers=評論家を割り当てるために管理者に連絡しなさい。
 please-contact-the-administrator-to-configure-a-google-license=Googleライセンスが設定されていません。システム管理者にご連絡ください。
 please-contact-the-administrator-to-configure-a-valid-mail-server=メールサーバーが設定されていません。システム管理者にご連絡ください。
 please-contact-the-administrator-to-configure-an-amazon-license=アマゾンのライセンスを設定するため管理者に連絡してください。

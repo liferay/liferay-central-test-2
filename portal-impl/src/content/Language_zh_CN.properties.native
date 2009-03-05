@@ -2443,6 +2443,7 @@ please-complete-your-order=请 {0} 完成 {1} 您的订单。
 please-configure-a-valid-jira-database=请配置一个有效的 JIRA 数据库。
 please-contact-the-administrator-because-you-do-not-have-any-pages-configured=请联系管理员，因为您没有配置任何页面。
 please-contact-the-administrator-because-you-do-not-have-any-roles=请联系管理员，因为您没有任何角色。
+please-contact-the-administrator-to-assign-reviewers=请与管理员联系分配评论者。
 please-contact-the-administrator-to-configure-a-google-license=请联系管理员配置 Google 许可协议。
 please-contact-the-administrator-to-configure-a-valid-mail-server=请联系管理员配置有效的邮件服务器。
 please-contact-the-administrator-to-configure-an-amazon-license=请与管理员联系以配置亚马逊许可。

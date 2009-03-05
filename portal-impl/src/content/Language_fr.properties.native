@@ -2443,6 +2443,7 @@ please-complete-your-order=Veuillez {0}compléter{1} votre commande.
 please-configure-a-valid-jira-database=Veuillez configurer une base de données valide de JIRA.
 please-contact-the-administrator-because-you-do-not-have-any-pages-configured=Veuillez contacter l'administrateur pour lui signaler qu'aucune de vos pages n'est configurée.
 please-contact-the-administrator-because-you-do-not-have-any-roles=Veuillez contacter l'administrateur parce que vous n'avez aucun rôle.
+please-contact-the-administrator-to-assign-reviewers=Veuillez contacter l'administrateur pour affecter des critiques.
 please-contact-the-administrator-to-configure-a-google-license=Veuillez contacter l'administrateur pour configurer un permis de Google.
 please-contact-the-administrator-to-configure-a-valid-mail-server=Veuillez contacter l'administrateur pour configurer un serveur mail valide.
 please-contact-the-administrator-to-configure-an-amazon-license=Veuillez contacter l'administrateur pour configurer un permis d'Amazone.
