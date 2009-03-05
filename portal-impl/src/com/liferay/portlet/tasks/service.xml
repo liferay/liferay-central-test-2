@@ -44,7 +44,7 @@
 		<finder name="ProposalId" return-type="Collection">
 			<finder-column name="proposalId" />
 		</finder>
-		<finder name="U_P" return-type="TasksReview">
+		<finder name="U_P" return-type="TasksReview" unique="true">
 			<finder-column name="userId" />
 			<finder-column name="proposalId" />
 		</finder>
@@ -113,7 +113,7 @@
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
 		</finder>
-		<finder name="C_C" return-type="TasksProposal">
+		<finder name="C_C" return-type="TasksProposal" unique="true">
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>

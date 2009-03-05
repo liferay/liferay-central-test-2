@@ -82,7 +82,7 @@
 			<finder-column name="groupId" />
 			<finder-column name="templateId" />
 		</finder>
-		<finder name="G_A_V" return-type="JournalArticle">
+		<finder name="G_A_V" return-type="JournalArticle" unique="true">
 			<finder-column name="groupId" />
 			<finder-column name="articleId" />
 			<finder-column name="version" />
@@ -139,7 +139,7 @@
 			<finder-column name="articleId" />
 			<finder-column name="version" />
 		</finder>
-		<finder name="G_A_V_E_E_L" return-type="JournalArticleImage">
+		<finder name="G_A_V_E_E_L" return-type="JournalArticleImage" unique="true">
 			<finder-column name="groupId" />
 			<finder-column name="articleId" />
 			<finder-column name="version" />
@@ -169,7 +169,7 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
-		<finder name="G_A" return-type="JournalArticleResource">
+		<finder name="G_A" return-type="JournalArticleResource" unique="true">
 			<finder-column name="groupId" />
 			<finder-column name="articleId" />
 		</finder>
@@ -225,7 +225,7 @@
 			<finder-column name="layoutId" />
 			<finder-column name="portletId" />
 		</finder>
-		<finder name="G_P_L_P_A" return-type="JournalContentSearch">
+		<finder name="G_P_L_P_A" return-type="JournalContentSearch" unique="true">
 			<finder-column name="groupId" />
 			<finder-column name="privateLayout" />
 			<finder-column name="layoutId" />
@@ -287,7 +287,7 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
-		<finder name="G_F" return-type="JournalFeed">
+		<finder name="G_F" return-type="JournalFeed" unique="true">
 			<finder-column name="groupId" />
 			<finder-column name="feedId" />
 		</finder>
@@ -338,7 +338,7 @@
 		<finder name="StructureId" return-type="Collection">
 			<finder-column name="structureId" />
 		</finder>
-		<finder name="G_S" return-type="JournalStructure">
+		<finder name="G_S" return-type="JournalStructure" unique="true">
 			<finder-column name="groupId" />
 			<finder-column name="structureId" />
 		</finder>
@@ -402,7 +402,7 @@
 		<finder name="SmallImageId" return-type="JournalTemplate">
 			<finder-column name="smallImageId" />
 		</finder>
-		<finder name="G_T" return-type="JournalTemplate">
+		<finder name="G_T" return-type="JournalTemplate" unique="true">
 			<finder-column name="groupId" />
 			<finder-column name="templateId" />
 		</finder>

@@ -29,7 +29,7 @@
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
-		<finder name="U_C_C" return-type="Ratings">
+		<finder name="U_C_C" return-type="Ratings" unique="true">
 			<finder-column name="userId" />
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
@@ -58,7 +58,7 @@
 
 		<!-- Finder methods -->
 
-		<finder name="C_C" return-type="RatingsStats">
+		<finder name="C_C" return-type="RatingsStats" unique="true">
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>

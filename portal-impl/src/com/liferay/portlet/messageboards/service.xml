@@ -36,7 +36,7 @@
 		<finder name="BanUserId" return-type="Collection">
 			<finder-column name="banUserId" />
 		</finder>
-		<finder name="G_B" return-type="MBBan">
+		<finder name="G_B" return-type="MBBan" unique="true">
 			<finder-column name="groupId" />
 			<finder-column name="banUserId" />
 		</finder>
@@ -116,10 +116,10 @@
 		<finder name="ClassNameId" return-type="Collection">
 			<finder-column name="classNameId" />
 		</finder>
-		<finder name="ThreadId" return-type="MBDiscussion">
+		<finder name="ThreadId" return-type="MBDiscussion" unique="true">
 			<finder-column name="threadId" />
 		</finder>
-		<finder name="C_C" return-type="MBDiscussion">
+		<finder name="C_C" return-type="MBDiscussion" unique="true">
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
@@ -164,7 +164,7 @@
 
 		<!-- Finder methods -->
 
-		<finder name="CategoryId" return-type="MBMailingList">
+		<finder name="CategoryId" return-type="MBMailingList" unique="true">
 			<finder-column name="categoryId" />
 		</finder>
 		<finder name="Active" return-type="Collection">
@@ -276,7 +276,7 @@
 			<finder-column name="messageId" />
 			<finder-column name="flag" />
 		</finder>
-		<finder name="U_M_F" return-type="MBMessageFlag">
+		<finder name="U_M_F" return-type="MBMessageFlag" unique="true">
 			<finder-column name="userId" />
 			<finder-column name="messageId" />
 			<finder-column name="flag" />
@@ -320,7 +320,7 @@
 		<finder name="UserId" return-type="Collection">
 			<finder-column name="userId" />
 		</finder>
-		<finder name="G_U" return-type="MBStatsUser">
+		<finder name="G_U" return-type="MBStatsUser" unique="true">
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
 		</finder>

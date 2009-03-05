@@ -49,7 +49,7 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
-		<finder name="C_C" return-type="TagsAsset">
+		<finder name="C_C" return-type="TagsAsset" unique="true">
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
@@ -157,7 +157,7 @@
 			<finder-column name="companyId" />
 			<finder-column name="key" />
 		</finder>
-		<finder name="E_K" return-type="TagsProperty">
+		<finder name="E_K" return-type="TagsProperty" unique="true">
 			<finder-column name="entryId" />
 			<finder-column name="key" />
 		</finder>
@@ -212,7 +212,7 @@
 
 		<!-- Finder methods -->
 
-		<finder name="G_N" return-type="TagsVocabulary">
+		<finder name="G_N" return-type="TagsVocabulary" unique="true">
 			<finder-column name="groupId" />
 			<finder-column name="name" />
 		</finder>

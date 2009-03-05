@@ -32,7 +32,7 @@
 		<finder name="TableId" return-type="Collection">
 			<finder-column name="tableId" />
 		</finder>
-		<finder name="T_N" return-type="ExpandoColumn">
+		<finder name="T_N" return-type="ExpandoColumn" unique="true">
 			<finder-column name="tableId" />
 			<finder-column name="name" />
 		</finder>
@@ -62,7 +62,7 @@
 		<finder name="TableId" return-type="Collection">
 			<finder-column name="tableId" />
 		</finder>
-		<finder name="T_C" return-type="ExpandoRow">
+		<finder name="T_C" return-type="ExpandoRow" unique="true">
 			<finder-column name="tableId" />
 			<finder-column name="classPK" />
 		</finder>
@@ -92,7 +92,7 @@
 			<finder-column name="companyId" />
 			<finder-column name="classNameId" />
 		</finder>
-		<finder name="C_C_N" return-type="ExpandoTable">
+		<finder name="C_C_N" return-type="ExpandoTable" unique="true">
 			<finder-column name="companyId" />
 			<finder-column name="classNameId" />
 			<finder-column name="name" />
@@ -144,7 +144,7 @@
 			<finder-column name="tableId" />
 			<finder-column name="rowId" />
 		</finder>
-		<finder name="C_R" return-type="ExpandoValue">
+		<finder name="C_R" return-type="ExpandoValue" unique="true">
 			<finder-column name="columnId" />
 			<finder-column name="rowId" />
 		</finder>
@@ -152,7 +152,7 @@
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
-		<finder name="T_C_R" return-type="ExpandoValue">
+		<finder name="T_C_R" return-type="ExpandoValue" unique="true">
 			<finder-column name="tableId" />
 			<finder-column name="columnId" />
 			<finder-column name="rowId" />

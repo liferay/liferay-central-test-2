@@ -27,7 +27,7 @@
 		<finder name="QuestionId" return-type="Collection">
 			<finder-column name="questionId" />
 		</finder>
-		<finder name="Q_N" return-type="PollsChoice">
+		<finder name="Q_N" return-type="PollsChoice" unique="true">
 			<finder-column name="questionId" />
 			<finder-column name="name" />
 		</finder>
@@ -103,7 +103,7 @@
 		<finder name="ChoiceId" return-type="Collection">
 			<finder-column name="choiceId" />
 		</finder>
-		<finder name="Q_U" return-type="PollsVote">
+		<finder name="Q_U" return-type="PollsVote" unique="true">
 			<finder-column name="questionId" />
 			<finder-column name="userId" />
 		</finder>

@@ -36,7 +36,7 @@
 		<finder name="UserId" return-type="Collection">
 			<finder-column name="userId" />
 		</finder>
-		<finder name="G_U" return-type="ShoppingCart">
+		<finder name="G_U" return-type="ShoppingCart" unique="true">
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
 		</finder>
@@ -136,7 +136,7 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
-		<finder name="Code" return-type="ShoppingCoupon">
+		<finder name="Code" return-type="ShoppingCoupon" unique="true">
 			<finder-column name="code" />
 		</finder>
 
@@ -213,7 +213,7 @@
 		<finder name="LargeImageId" return-type="ShoppingItem">
 			<finder-column name="largeImageId" />
 		</finder>
-		<finder name="C_S" return-type="ShoppingItem">
+		<finder name="C_S" return-type="ShoppingItem" unique="true">
 			<finder-column name="companyId" />
 			<finder-column name="sku" />
 		</finder>
@@ -358,7 +358,7 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
-		<finder name="Number" return-type="ShoppingOrder">
+		<finder name="Number" return-type="ShoppingOrder" unique="true">
 			<finder-column name="number" />
 		</finder>
 		<finder name="PPTxnId" return-type="ShoppingOrder">

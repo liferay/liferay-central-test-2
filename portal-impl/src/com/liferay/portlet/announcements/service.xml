@@ -26,7 +26,7 @@
 		<finder name="UserId" return-type="Collection">
 			<finder-column name="userId" />
 		</finder>
-		<finder name="U_T" return-type="AnnouncementsDelivery">
+		<finder name="U_T" return-type="AnnouncementsDelivery" unique="true">
 			<finder-column name="userId" />
 			<finder-column name="type" />
 		</finder>
@@ -125,7 +125,7 @@
 		<finder name="EntryId" return-type="Collection">
 			<finder-column name="entryId" />
 		</finder>
-		<finder name="U_E_V" return-type="AnnouncementFlag">
+		<finder name="U_E_V" return-type="AnnouncementFlag" unique="true">
 			<finder-column name="userId" />
 			<finder-column name="entryId" />
 			<finder-column name="value" />

@@ -41,7 +41,7 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
-		<finder name="G_N" return-type="WikiNode">
+		<finder name="G_N" return-type="WikiNode" unique="true">
 			<finder-column name="groupId" />
 			<finder-column name="name" />
 		</finder>
@@ -117,7 +117,7 @@
 			<finder-column name="nodeId" />
 			<finder-column name="redirectTitle" />
 		</finder>
-		<finder name="N_T_V" return-type="WikiPage">
+		<finder name="N_T_V" return-type="WikiPage" unique="true">
 			<finder-column name="nodeId" />
 			<finder-column name="title" />
 			<finder-column name="version" />
@@ -165,7 +165,7 @@
 
 		<!-- Finder methods -->
 
-		<finder name="N_T" return-type="WikiPageResource">
+		<finder name="N_T" return-type="WikiPageResource" unique="true">
 			<finder-column name="nodeId" />
 			<finder-column name="title" />
 		</finder>

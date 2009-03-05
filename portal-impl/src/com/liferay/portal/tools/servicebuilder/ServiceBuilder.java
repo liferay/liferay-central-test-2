@@ -784,6 +784,7 @@ public class ServiceBuilder {
 
 						finderEl.addAttribute("name", "UUID_G");
 						finderEl.addAttribute("return-type", ejbName);
+						finderEl.addAttribute("unique", "true");
 
 						finderColEl = finderEl.addElement("finder-column");
 
