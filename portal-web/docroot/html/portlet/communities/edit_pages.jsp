@@ -29,7 +29,8 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "public-pages");
 String tabs2 = ParamUtil.getString(request, "tabs2");
 String tabs3 = ParamUtil.getString(request, "tabs3");
 String tabs4 = ParamUtil.getString(request, "tabs4");
-
+Locale defaultLocale = LocaleUtil.getDefault();
+String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 String redirect = ParamUtil.getString(request, "redirect");
 String backURL = ParamUtil.getString(request, "backURL", redirect);
 
@@ -259,6 +260,16 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		submitForm(document.<portlet:namespace />fm, '<%= currentURL %>');
 	}
 
+	function <portlet:namespace />checkPageName() {
+		var pageNameValue = document.getElementById("<portlet:namespace />name_<%= defaultLanguageId %>").value;
+		if (pageNameValue != null && pageNameValue.replace(/(^\s*)|(\s*$)/g,"") != "") {
+			<portlet:namespace />savePage();
+		}
+		else {
+			alert('<%= UnicodeLanguageUtil.get(pageContext, "please-enter-a-valid-page-name") %>');
+		}
+	}
+
 	function <portlet:namespace />copyFromLive() {
 		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-copy-from-live-and-overwrite-the-existing-staging-configuration") %>')) {
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "copy_from_live";
@@ -409,7 +420,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 	}
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_pages" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />savePage(); return false;">
+<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_pages" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />checkPageName(); return false;">
 <input name="<portlet:namespace />tabs1" type="hidden" value="<%= HtmlUtil.escape(tabs1) %>" />
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escape(tabs2) %>" />
 <input name="<portlet:namespace />tabs3" type="hidden" value="<%= HtmlUtil.escape(tabs3) %>" />
