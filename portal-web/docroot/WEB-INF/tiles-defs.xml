@@ -453,6 +453,10 @@
 		<put name="portlet_content" value="/portlet/expando/view.jsp" />
 	</definition>
 
+	<!-- Flags -->
+
+	<definition name="portlet.flags.edit_flags_entry" path="/portlet/flags/edit_flags_entry.jsp" />
+
 	<!-- IFrame -->
 
 	<definition name="portlet.iframe" extends="portlet" />

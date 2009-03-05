@@ -2391,4 +2391,14 @@
 	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageResourceUtil" class="com.liferay.portlet.wiki.service.persistence.WikiPageResourceUtil">
 		<property name="persistence" ref="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence.impl" />
 	</bean>
+	<bean id="com.liferay.portlet.flags.service.FlagsEntryService.impl" class="com.liferay.portlet.flags.service.impl.FlagsEntryServiceImpl" />
+	<bean id="com.liferay.portlet.flags.service.FlagsEntryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portlet.flags.service.FlagsEntryService.impl" />
+	</bean>
+	<bean id="com.liferay.portlet.flags.service.FlagsEntryServiceFactory" class="com.liferay.portlet.flags.service.FlagsEntryServiceFactory">
+		<property name="service" ref="com.liferay.portlet.flags.service.FlagsEntryService.impl" />
+	</bean>
+	<bean id="com.liferay.portlet.flags.service.FlagsEntryServiceUtil" class="com.liferay.portlet.flags.service.FlagsEntryServiceUtil">
+		<property name="service" ref="com.liferay.portlet.flags.service.FlagsEntryService.impl" />
+	</bean>
 </beans>

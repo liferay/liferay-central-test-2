@@ -1320,6 +1320,19 @@
 		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-tags-navigation</css-class-wrapper>
 	</portlet>
+	<portlet>
+		<portlet-name>142</portlet-name>
+		<icon>/html/icons/default.png</icon>
+		<struts-path>flags</struts-path>
+		<use-default-template>false</use-default-template>
+		<restore-current-view>false</restore-current-view>
+		<private-request-attributes>false</private-request-attributes>
+		<private-session-attributes>false</private-session-attributes>
+		<render-weight>50</render-weight>
+		<css-class-wrapper>portlet-flags</css-class-wrapper>
+		<add-default-resource>true</add-default-resource>
+		<system>true</system>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

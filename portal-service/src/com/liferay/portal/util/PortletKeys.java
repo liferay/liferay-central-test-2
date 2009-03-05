@@ -84,6 +84,8 @@ public class PortletKeys {
 
 	public static final String EXPANDO = "139";
 
+	public static final String FLAGS = "142";
+
 	public static final String IFRAME = "48";
 
 	public static final String IMAGE_GALLERY = "31";

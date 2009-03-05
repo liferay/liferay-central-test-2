@@ -95,6 +95,14 @@
 			<liferay-ui:input-checkbox param="enableCommentRatings" defaultValue="<%= enableCommentRatings %>" />
 		</td>
 	</tr>
+	<tr>
+		<td class="lfr-label">
+			<liferay-ui:message key="enable-flags" />
+		</td>
+		<td>
+			<liferay-ui:input-checkbox param="enableFlags" defaultValue="<%= enableFlags %>" />
+		</td>
+	</tr>
 	</table>
 </fieldset>
 
