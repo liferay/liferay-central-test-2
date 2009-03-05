@@ -87,7 +87,13 @@ publishToRemoteURL.setParameter("localPublishing", "0");
 
 						LinkedHashMap userParams = new LinkedHashMap();
 
-						userParams.put("usersGroups", new Long(liveGroupId));
+						if (liveGroup.isOrganization()) {
+							userParams.put("usersOrgs", new Long(liveGroup.getClassPK()));
+						}
+						else {
+							userParams.put("usersGroups", new Long(liveGroupId));
+						}
+
 						userParams.put("userGroupRole", new Long[] {new Long(liveGroupId), new Long(role.getRoleId())});
 
 						List<User> reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);

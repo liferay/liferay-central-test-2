@@ -256,7 +256,13 @@ if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 
 									LinkedHashMap userParams = new LinkedHashMap();
 
-									userParams.put("usersGroups", new Long(liveGroup.getGroupId()));
+									if (liveGroup.isOrganization()) {
+										userParams.put("usersOrgs", new Long(liveGroup.getClassPK()));
+									}
+									else {
+										userParams.put("usersGroups", new Long(liveGroup.getGroupId()));
+									}
+
 									userParams.put("userGroupRole", new Long[] {new Long(liveGroup.getGroupId()), new Long(role.getRoleId())});
 
 									List<User> reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);

@@ -260,7 +260,13 @@ for (int i = 2; i <= workflowStages; i++) {
 
 					LinkedHashMap userParams = new LinkedHashMap();
 
-					userParams.put("usersGroups", new Long(groupId));
+					if (group.isOrganization()) {
+						userParams.put("usersOrgs", new Long(group.getClassPK()));
+					}
+					else {
+						userParams.put("usersGroups", new Long(groupId));
+					}
+
 					userParams.put("userGroupRole", new Long[] {new Long(groupId), new Long(role.getRoleId())});
 
 					List<User> reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
