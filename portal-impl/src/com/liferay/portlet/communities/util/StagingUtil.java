@@ -220,7 +220,7 @@ public class StagingUtil {
 			while (itr1.hasNext()) {
 				Entry<Long, Boolean> entry = itr1.next();
 
-				long plid = entry.getKey();
+				long plid = Long.valueOf(entry.getKey());
 				boolean includeChildren = entry.getValue();
 
 				Layout layout = LayoutLocalServiceUtil.getLayout(plid);
