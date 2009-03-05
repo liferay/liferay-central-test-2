@@ -272,8 +272,17 @@ public class SeleneseToJavaBuilder {
 				sb.append(param2);
 				sb.append("\", selenium.getAlert());");
 			}
-			else if (param1.equals("assertChecked")) {
-				sb.append("assertTrue(selenium.isChecked(\"");
+			else if (param1.equals("assertChecked") ||
+					 param1.equals("assertNotChecked")) {
+
+				if (param1.equals("assertChecked")) {
+					sb.append("assertTrue");
+				}
+				else if (param1.equals("assertNotChecked")) {
+					sb.append("assertFalse");
+				}
+
+				sb.append("(selenium.isChecked(\"");
 				sb.append(param2);
 				sb.append("\"));");
 			}
