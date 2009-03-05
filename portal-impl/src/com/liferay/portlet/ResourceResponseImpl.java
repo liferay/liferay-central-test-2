@@ -43,26 +43,18 @@ public class ResourceResponseImpl
 	extends MimeResponseImpl implements ResourceResponse {
 
 	public void addDateHeader(String name, long date) {
-		super.addDateHeader(name, date);
-
 		_response.addDateHeader(name, date);
 	}
 
 	public void addHeader(String name, String value) {
-		super.addHeader(name, value);
-
 		_response.addHeader(name, value);
 	}
 
 	public void addIntHeader(String name, int value) {
-		super.addIntHeader(name, value);
-
 		_response.addIntHeader(name, value);
 	}
 
 	public void addProperty(Cookie cookie) {
-		super.addProperty(cookie);
-
 		_response.addCookie(cookie);
 	}
 
@@ -118,20 +110,14 @@ public class ResourceResponseImpl
 	}
 
 	public void setDateHeader(String name, long date) {
-		super.setDateHeader(name, date);
-
 		_response.setDateHeader(name, date);
 	}
 
 	public void setHeader(String name, String value) {
-		super.setHeader(name, value);
-
 		_response.setHeader(name, value);
 	}
 
 	public void setIntHeader(String name, int value) {
-		super.setIntHeader(name, value);
-
 		_response.setIntHeader(name, value);
 	}
 
