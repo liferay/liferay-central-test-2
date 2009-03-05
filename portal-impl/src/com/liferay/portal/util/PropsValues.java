@@ -873,6 +873,9 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.OPENOFFICE_SERVER_ENABLED));
 
+	public static final String OPENOFFICE_SERVER_HOST =
+		PropsUtil.get(PropsKeys.OPENOFFICE_SERVER_HOST);
+
 	public static final int OPENOFFICE_SERVER_PORT = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.OPENOFFICE_SERVER_PORT));
 

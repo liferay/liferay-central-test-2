@@ -29,11 +29,13 @@ import com.artofsolving.jodconverter.DocumentFormatRegistry;
 import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConverter;
+import com.artofsolving.jodconverter.openoffice.converter.StreamOpenOfficeDocumentConverter;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
@@ -193,16 +195,35 @@ public class DocumentConversionUtil {
 		throws SystemException {
 
 		if ((_connection == null) || (_converter == null)) {
+			String host = PrefsPropsUtil.getString(
+				PropsKeys.OPENOFFICE_SERVER_HOST);
+
 			int port = PrefsPropsUtil.getInteger(
 				PropsKeys.OPENOFFICE_SERVER_PORT,
 				PropsValues.OPENOFFICE_SERVER_PORT);
 
-			_connection = new SocketOpenOfficeConnection(port);
-			_converter = new OpenOfficeDocumentConverter(_connection);
+			if (_isRemoteOpenOfficeHost(host)) {
+				_connection = new SocketOpenOfficeConnection(host, port);
+				_converter = new StreamOpenOfficeDocumentConverter(_connection);
+			}
+			else {
+				_connection = new SocketOpenOfficeConnection(port);
+				_converter = new OpenOfficeDocumentConverter(_connection);
+			}
 		}
 
 		return _converter;
 	}
+
+	private boolean _isRemoteOpenOfficeHost(String host) {
+		return (Validator.isNotNull(host) &&
+				!host.equals(_LOCALHOST_IP) &&
+				!host.startsWith(_LOCALHOST));
+	}
+
+	private static final String _LOCALHOST = "localhost";
+
+	private static final String _LOCALHOST_IP = "127.0.0.1";
 
 	private static final String[] _DEFAULT_CONVERSIONS = new String[0];
 
