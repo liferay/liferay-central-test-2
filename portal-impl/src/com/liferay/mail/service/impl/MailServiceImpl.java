@@ -105,7 +105,7 @@ public class MailServiceImpl implements MailService {
 
 		MethodWrapper methodWrapper = new MethodWrapper(
 			PropsValues.MAIL_HOOK_IMPL, "deleteEmailAddress",
-			new Object[] {new LongWrapper(userId)});
+			new Object[] {new LongWrapper(companyId), new LongWrapper(userId)});
 
 		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
 	}
