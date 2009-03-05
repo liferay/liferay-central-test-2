@@ -95,9 +95,9 @@
 
 					var centerValue = 'center';
 
-					if (x == centerValue || y == centerValue) {
-						var win = Expanse.getWindow();
+					var win = Expanse.getWindow();
 
+					if (x == centerValue || y == centerValue) {
 						var width = parseInt(options.width, 10) || 0;
 						var height = parseInt(options.width, 10) || 0;
 
@@ -107,9 +107,17 @@
 						else if (y == centerValue) {
 							y = (win.height() / 2 - height / 2);
 						}
-
-						options.xy = [x, y];
 					}
+
+					if (options.absoluteXY !== true) {
+						var scrollLeft = win.scrollLeft();
+						var scrollTop = win.scrollTop();
+
+						x += scrollLeft;
+						y += scrollTop;
+					}
+
+					options.xy = [x, y];
 				}
 
 				var el = options.el || Expanse.generateId();
