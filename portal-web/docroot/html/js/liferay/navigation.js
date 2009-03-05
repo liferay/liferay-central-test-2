@@ -386,101 +386,105 @@ Liferay.Navigation = new Expanse.Class(
 			var name = newNavItem.find('input').val();
 			var enterPage = newNavItem.find('.enter-page');
 
-			if (oldName) {
+			name = jQuery.trim(name);
 
-				// Updating an existing page
+			if (name) {
+				if (oldName) {
 
-				if (name != oldName) {
-					data = {
-						doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-						cmd: 'name',
-						groupId: themeDisplay.getScopeGroupId(),
-						privateLayout: themeDisplay.isPrivateLayout(),
-						layoutId: themeDisplay.getLayoutId(),
-						name: name,
-						languageId: themeDisplay.getLanguageId()
-					};
+					// Updating an existing page
 
-					onSuccess = function(data) {
+					if (name != oldName) {
+						data = {
+							doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+							cmd: 'name',
+							groupId: themeDisplay.getScopeGroupId(),
+							privateLayout: themeDisplay.isPrivateLayout(),
+							layoutId: themeDisplay.getLayoutId(),
+							name: name,
+							languageId: themeDisplay.getLanguageId()
+						};
+
+						onSuccess = function(data) {
+							var currentTab = enterPage.prev();
+							var currentSpan = currentTab.find('span');
+
+							currentSpan.text(name);
+							currentTab.show();
+
+							enterPage.remove();
+
+							var oldTitle = jQuery(document).attr('title');
+
+							var regex = new RegExp(oldName, 'g');
+
+							newTitle = oldTitle.replace(regex, name);
+
+							jQuery(document).attr('title', newTitle);
+						}
+					}
+					else {
+
+						// The new name is the same as the old one
+
 						var currentTab = enterPage.prev();
-						var currentSpan = currentTab.find('span');
 
-						currentSpan.text(name);
 						currentTab.show();
-
 						enterPage.remove();
 
-						var oldTitle = jQuery(document).attr('title');
-
-						var regex = new RegExp(oldName, 'g');
-
-						newTitle = oldTitle.replace(regex, name);
-
-						jQuery(document).attr('title', newTitle);
+						return false;
 					}
 				}
 				else {
 
-					// The new name is the same as the old one
+					// Adding a new page
 
-					var currentTab = enterPage.prev();
+					data = {
+						mainPath: themeDisplay.getPathMain(),
+						doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+						cmd: 'add',
+						groupId: themeDisplay.getScopeGroupId(),
+						privateLayout: themeDisplay.isPrivateLayout(),
+						parentLayoutId: themeDisplay.getParentLayoutId(),
+						name: name
+					};
 
-					currentTab.show();
-					enterPage.remove();
+					onSuccess = function(data) {
+						var newTab = jQuery('<a href="' + data.url + '"><span>' + name + '</span></a>');
 
-					return false;
-				}
-			}
-			else {
-
-				// Adding a new page
-
-				data = {
-					mainPath: themeDisplay.getPathMain(),
-					doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-					cmd: 'add',
-					groupId: themeDisplay.getScopeGroupId(),
-					privateLayout: themeDisplay.isPrivateLayout(),
-					parentLayoutId: themeDisplay.getParentLayoutId(),
-					name: name
-				};
-
-				onSuccess = function(data) {
-					var newTab = jQuery('<a href="' + data.url + '"><span>' + name + '</span></a>');
-
-					if (instance._isUseHandle) {
-						enterPage.before('<span class="sort-handle">+</span>');
-					}
-					else {
-						newTab.css('cursor', 'move');
-					}
-
-					newNavItem[0]._LFR_layoutId = data.layoutId;
-
-					enterPage.before(newTab);
-					enterPage.remove();
-
-					newNavItem.addClass('sortable-item');
-
-					instance._deleteButton(newNavItem);
-
-					Liferay.trigger('navigation',
-						{
-							item: newNavItem,
-							type: 'add'
+						if (instance._isUseHandle) {
+							enterPage.before('<span class="sort-handle">+</span>');
 						}
-					)
-				}
-			}
+						else {
+							newTab.css('cursor', 'move');
+						}
 
-			jQuery.ajax(
-				{
-					data: data,
-					dataType: 'json',
-					success: onSuccess,
-					url: instance._updateURL
+						newNavItem[0]._LFR_layoutId = data.layoutId;
+
+						enterPage.before(newTab);
+						enterPage.remove();
+
+						newNavItem.addClass('sortable-item');
+
+						instance._deleteButton(newNavItem);
+
+						Liferay.trigger('navigation',
+							{
+								item: newNavItem,
+								type: 'add'
+							}
+						)
+					}
 				}
-			);
+
+				jQuery.ajax(
+					{
+						data: data,
+						dataType: 'json',
+						success: onSuccess,
+						url: instance._updateURL
+					}
+				);
+			}
 		},
 
 		_saveSortables: function(obj) {
