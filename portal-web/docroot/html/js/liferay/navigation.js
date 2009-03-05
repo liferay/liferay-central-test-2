@@ -473,23 +473,14 @@ Liferay.Navigation = new Expanse.Class(
 				}
 			}
 
-			//This is to stop saving a page without any name
-
-			if (name != null && name.replace(/(^\s*)|(\s*$)/g,"") != "") {
-				jQuery.ajax(
-					{
-						data: data,
-						dataType: 'json',
-						success: onSuccess,
-						url: instance._updateURL
-					}
-				);
-			}
-			else {
-				var message = Liferay.Language.get('please-enter-a-valid-page-name');
-				alert(message);
-				enterPage.remove();
-			}
+			jQuery.ajax(
+				{
+					data: data,
+					dataType: 'json',
+					success: onSuccess,
+					url: instance._updateURL
+				}
+			);
 		},
 
 		_saveSortables: function(obj) {
