@@ -28,18 +28,18 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
-import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
+import com.liferay.portal.upgrade.util.UpgradeTable;
+import com.liferay.portlet.PortletPreferencesImpl;
+import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl;
-import com.liferay.portlet.PortletPreferencesImpl;
-import com.liferay.portlet.PortletPreferencesSerializer;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -126,6 +126,10 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		// PortletPreferences
 
+		updatePortletPreferences();
+	}
+
+	protected void updatePortletPreferences() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -137,8 +141,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				"select portletPreferencesId, ownerId, ownerType, plid, " +
 					"portletId, preferences from PortletPreferences where " +
 						"portletId = '20' and preferences like " +
-							"'%<name>fileEntryColumns</name>" +
-								"<value></value>%'");
+							"'%<name>fileEntryColumns</name><value></value>%'");
 
 			rs = ps.executeQuery();
 
