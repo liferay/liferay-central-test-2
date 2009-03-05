@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
@@ -157,10 +158,12 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		String fileEntryColumns = preferences.getValue(
 			"fileEntryColumns", StringPool.BLANK);
 
-		fileEntryColumns = StringUtil.replace(
-			fileEntryColumns, "document", "name");
+		if (Validator.isNotNull(fileEntryColumns)) {
+			fileEntryColumns = StringUtil.replace(
+				fileEntryColumns, "document", "name");
 
-		preferences.setValue("fileEntryColumns", fileEntryColumns);
+			preferences.setValue("fileEntryColumns", fileEntryColumns);
+		}
 
 		return PortletPreferencesSerializer.toXML(preferences);
 	}

@@ -22,21 +22,35 @@
 
 package com.liferay.portal.upgrade.v5_2_3;
 
+import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.upgrade.UpgradeException;
-import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
+import com.liferay.portal.model.Layout;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.upgrade.UpgradeException;
+import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl;
+import com.liferay.portlet.PortletPreferencesImpl;
+import com.liferay.portlet.PortletPreferencesSerializer;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  * <a href="UpgradeDocumentLibrary.java.html"><b><i>View Source</i></b></a>
  *
+ * @author Samuel Kong
  * @author Brian Wing Shun Chan
+ * @author Douglas Wong
  *
  */
 public class UpgradeDocumentLibrary extends UpgradeProcess {
@@ -49,6 +63,26 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
+		}
+	}
+
+	protected void deletePortletPreferences(long portletPreferencesId)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"delete from PortletPreferences where portletPreferencesId = " +
+					portletPreferencesId);
+
+			ps.executeUpdate();
+		}
+		finally {
+			DataAccess.cleanUp(con, ps);
 		}
 	}
 
@@ -89,6 +123,93 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		upgradeTable.setCreateSQL(DLFileVersionImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
+
+		// PortletPreferences
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"select portletPreferencesId, ownerId, ownerType, plid, " +
+					"portletId, preferences from PortletPreferences where " +
+						"portletId = '20' and preferences like " +
+							"'%<name>fileEntryColumns</name>" +
+								"<value></value>%'");
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long portletPreferencesId = rs.getLong("portletPreferencesId");
+				long ownerId = rs.getLong("ownerId");
+				int ownerType = rs.getInt("ownerType");
+				long plid = rs.getLong("plid");
+				String portletId = rs.getString("portletId");
+				String preferences = rs.getString("preferences");
+
+				try {
+					Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+
+					String newPreferences = upgradePreferences(
+						layout.getCompanyId(), ownerId, ownerType, plid,
+						portletId, preferences);
+
+					updatePortletPreferences(
+						portletPreferencesId, newPreferences);
+				}
+				catch (NoSuchLayoutException nsle) {
+					deletePortletPreferences(portletPreferencesId);
+				}
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void updatePortletPreferences(
+			long portletPreferencesId, String preferences)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"update PortletPreferences set preferences = ? where " +
+					"portletPreferencesId = " + portletPreferencesId);
+
+			ps.setString(1, preferences);
+
+			ps.executeUpdate();
+		}
+		finally {
+			DataAccess.cleanUp(con, ps);
+		}
+	}
+
+	protected String upgradePreferences(
+			long companyId, long ownerId, int ownerType, long plid,
+			String portletId, String xml)
+		throws Exception {
+
+		PortletPreferencesImpl preferences =
+			PortletPreferencesSerializer.fromXML(
+				companyId, ownerId, ownerType, plid, portletId, xml);
+
+		String fileEntryColumns = preferences.getValue(
+			"fileEntryColumns", StringPool.BLANK);
+
+		if (Validator.isNull(fileEntryColumns)) {
+			preferences.reset("fileEntryColumns");
+		}
+
+		return PortletPreferencesSerializer.toXML(preferences);
 	}
 
 	private static Log _log =
