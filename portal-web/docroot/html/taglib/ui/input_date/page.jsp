@@ -92,9 +92,7 @@ if (dateFormatPattern.indexOf("y") == 0) {
 					options.mindate = '1/1/' + options.yearRange[0];
 					options.maxdate = '12/31/' + options.yearRange[1];
 
-					if (!instance._input.is('.disabled')) {
-						instance._super(options);
-					}
+					instance._super(options);
 
 					instance.selectEvent.subscribe(instance._onSelect, instance, true);
 
@@ -149,6 +147,14 @@ if (dateFormatPattern.indexOf("y") == 0) {
 					}
 
 					instance._dayField.val(day);
+				},
+
+				_showDatePicker: function() {
+					var instance = this;
+
+					if (!instance._input.is('.disabled')) {
+						instance._super.apply(instance, arguments);
+					}
 				}
 			}
 		);
