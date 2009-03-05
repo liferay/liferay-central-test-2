@@ -68,7 +68,7 @@ public class I18nServlet extends HttpServlet {
 
 			String servletName = el.elementText("servlet-name");
 
-			if (servletName.equals("I18nServlet")) {
+			if (servletName.equals("I18n Servlet")) {
 				String urlPattern = el.elementText("url-pattern");
 
 				String languageId = urlPattern.substring(
