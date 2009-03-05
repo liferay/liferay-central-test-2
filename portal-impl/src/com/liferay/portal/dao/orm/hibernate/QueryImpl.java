@@ -22,6 +22,7 @@
 
 package com.liferay.portal.dao.orm.hibernate;
 
+import com.liferay.portal.kernel.dao.orm.CacheMode;
 import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.ScrollableResults;
@@ -100,6 +101,24 @@ public class QueryImpl implements Query {
 
 	public Query setBoolean(int pos, boolean value) {
 		_query.setBoolean(pos, value);
+
+		return this;
+	}
+
+	public Query setCacheable(boolean cacheable) {
+		_query.setCacheable(cacheable);
+
+		return this;
+	}
+
+	public Query setCacheMode(CacheMode cacheMode) {
+		_query.setCacheMode(CacheModeTranslator.translate(cacheMode));
+
+		return this;
+	}
+
+	public Query setCacheRegion(String cacheRegion) {
+		_query.setCacheRegion(cacheRegion);
 
 		return this;
 	}

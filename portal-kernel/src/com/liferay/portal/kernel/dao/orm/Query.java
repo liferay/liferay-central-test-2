@@ -51,6 +51,12 @@ public interface Query {
 
 	public Query setBoolean(int pos, boolean value);
 
+	public Query setCacheable(boolean cacheable);
+
+	public Query setCacheMode(CacheMode cacheMode);
+
+	public Query setCacheRegion(String cacheRegion);
+
 	public Query setDouble(int pos, double value);
 
 	public Query setFirstResult(int firstResult);

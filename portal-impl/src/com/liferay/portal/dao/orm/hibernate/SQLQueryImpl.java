@@ -22,6 +22,7 @@
 
 package com.liferay.portal.dao.orm.hibernate;
 
+import com.liferay.portal.kernel.dao.orm.CacheMode;
 import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
@@ -114,6 +115,24 @@ public class SQLQueryImpl implements SQLQuery {
 
 	public Query setBoolean(int pos, boolean value) {
 		_sqlQuery.setBoolean(pos, value);
+
+		return this;
+	}
+
+	public Query setCacheable(boolean cacheable) {
+		_sqlQuery.setCacheable(cacheable);
+
+		return this;
+	}
+
+	public Query setCacheMode(CacheMode cacheMode) {
+		_sqlQuery.setCacheMode(CacheModeTranslator.translate(cacheMode));
+
+		return this;
+	}
+
+	public Query setCacheRegion(String cacheRegion) {
+		_sqlQuery.setCacheRegion(cacheRegion);
 
 		return this;
 	}
