@@ -27,7 +27,9 @@ import com.liferay.portal.freemarker.FreeMarkerUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.StringUtil_IW;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.Group;
@@ -43,6 +45,7 @@ import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.model.impl.LayoutTypePortletImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.tools.sql.DBUtil;
@@ -150,7 +153,9 @@ public class SampleSQLBuilder {
 		write(StringPool.NEW_LINE);
 	}
 
-	protected void createGroup(String friendlyURL, long groupId, String name)
+	protected void createGroup(
+			String friendlyURL, long groupId, String name,
+			List<Layout> privateLayouts, List<Layout> publicLayouts)
 		throws Exception {
 
 		Map<String, Object> context = getContext();
@@ -158,12 +163,23 @@ public class SampleSQLBuilder {
 		put(context, "friendlyURL", friendlyURL);
 		put(context, "groupId", groupId);
 		put(context, "name", name);
+		put(context, "privateLayouts", privateLayouts);
+		put(context, "publicLayouts", publicLayouts);
 
 		processTemplate(_tplGroup, context);
 	}
 
 	protected void createGroups() throws Exception {
-		createGroup("/guest", _guestGroupId, GroupConstants.GUEST);
+		List<Layout> privateLayouts = new ArrayList<Layout>();
+
+		List<Layout> publicLayouts = new ArrayList<Layout>();
+
+		publicLayouts.add(getLayout(1, "Welcome", "/welcome", "58,", "47,"));
+		publicLayouts.add(getLayout(2, "Forums", "/forums", "", "19,"));
+
+		createGroup(
+			"/guest", _guestGroupId, GroupConstants.GUEST, privateLayouts,
+			publicLayouts);
 
 		write(StringPool.NEW_LINE);
 	}
@@ -333,8 +349,8 @@ public class SampleSQLBuilder {
 	}
 
 	protected void createUser(
-			long contactId, String emailAddress, String firstName, long groupId,
-			List<Group> groups, String lastName,
+			long contactId, boolean defaultUser, String emailAddress,
+			String firstName, long groupId, List<Group> groups, String lastName,
 			List<Organization> organizations, List<Layout> privateLayouts,
 			List<Layout> publicLayouts, List<Role> roles, String screenName,
 			long userId)
@@ -351,6 +367,7 @@ public class SampleSQLBuilder {
 		Map<String, Object> context = getContext();
 
 		put(context, "contactId", contactId);
+		put(context, "defaultUser", defaultUser);
 		put(context, "emailAddress", emailAddress);
 		put(context, "firstName", firstName);
 		put(context, "friendlyURL", "/" + screenName);
@@ -392,7 +409,7 @@ public class SampleSQLBuilder {
 		}
 	}
 
-	protected void createUser(
+	protected long createUser(
 			String firstName, List<Group> groups, String lastName,
 			List<Role> roles, int userCount, Writer loginCsvWriter)
 		throws Exception {
@@ -407,42 +424,14 @@ public class SampleSQLBuilder {
 
 		List<Layout> publicLayouts = new ArrayList<Layout>();
 
-		Layout layout = new LayoutImpl();
-
-		layout.setPlid(_counter.get());
-		layout.setPrivateLayout(false);
-		layout.setName("Home");
-		layout.setFriendlyURL("/home");
-
-		publicLayouts.add(layout);
+		publicLayouts.add(getLayout(1, "Home", "/home", "", "33,"));
 
 		createUser(
-			contactId, emailAddress, firstName, groupId, groups, lastName, null,
-			privateLayouts, publicLayouts, roles, String.valueOf(userId),
-			userId);
+			contactId, false, emailAddress, firstName, groupId, groups,
+			lastName, null, privateLayouts, publicLayouts, roles,
+			String.valueOf(userId), userId);
 
 		write(StringPool.NEW_LINE);
-
-		long categoryId = createMBCategory(
-			"Test description", groupId, "Test name", userId);
-
-		long threadId = _counter.get();
-
-		long rootMessageId = 0;
-		int messageCount = 10;
-
-		for (int i = 0; i < messageCount; i++) {
-			long messageId = createMBMessage(
-				"Test body " + i, categoryId, "Test subject " + i, threadId,
-				userId);
-
-			if (i == 0) {
-				rootMessageId = messageId;
-			}
-		}
-
-		createMBThread(
-			categoryId, messageCount, rootMessageId, threadId, userId);
 
 		String csvLine = (firstName + lastName).toLowerCase() + "," + groupId;
 
@@ -451,11 +440,13 @@ public class SampleSQLBuilder {
 		}
 
 		loginCsvWriter.write(csvLine);
+
+		return userId;
 	}
 
 	protected void createUsers() throws Exception {
 		createUser(
-			_defaultContactId, "default@liferay.com", StringPool.BLANK, 0,
+			_defaultContactId, true, "default@liferay.com", StringPool.BLANK, 0,
 			null, StringPool.BLANK, null, null, null, null,
 			String.valueOf(_defaultUserId), _defaultUserId);
 
@@ -491,15 +482,21 @@ public class SampleSQLBuilder {
 		Writer loginCsvWriter = new FileWriter(
 			new File(_outputDir +  "/login.csv"));
 
+		long firstUserId = 0;
+
 		int userCount = 0;
 
 		for (String lastName : lastNames) {
 			for (String firstName : firstNames) {
 				userCount++;
 
-				createUser(
+				long userId = createUser(
 					firstName, groups, lastName, roles, userCount,
 					loginCsvWriter);
+
+				if (userCount == 1) {
+					firstUserId = userId;
+				}
 
 				if (userCount >= _maxUserCount) {
 					break;
@@ -510,6 +507,27 @@ public class SampleSQLBuilder {
 				break;
 			}
 		}
+
+		long categoryId = createMBCategory(
+			"Test description", _guestGroupId, "Test name", firstUserId);
+
+		long threadId = _counter.get();
+
+		long rootMessageId = 0;
+		int messageCount = 10;
+
+		for (int i = 0; i < messageCount; i++) {
+			long messageId = createMBMessage(
+				"Test body " + i, categoryId, "Test subject " + i, threadId,
+				firstUserId);
+
+			if (i == 0) {
+				rootMessageId = messageId;
+			}
+		}
+
+		createMBThread(
+			categoryId, messageCount, rootMessageId, threadId, firstUserId);
 
 		loginCsvWriter.flush();
 	}
@@ -532,6 +550,32 @@ public class SampleSQLBuilder {
 		put(context, "userRoleId", _userRoleId);
 
 		return context;
+	}
+
+	protected Layout getLayout(
+			int layoutId, String name, String friendlyURL, String column1,
+			String column2)
+		throws Exception {
+
+		Layout layout = new LayoutImpl();
+
+		layout.setPlid(_counter.get());
+		layout.setPrivateLayout(false);
+		layout.setLayoutId(layoutId);
+		layout.setName(name);
+		layout.setFriendlyURL(friendlyURL);
+
+		UnicodeProperties typeSettingsProperties = new UnicodeProperties(true);
+
+		typeSettingsProperties.setProperty(
+			LayoutTypePortletImpl.LAYOUT_TEMPLATE_ID, "2_columns_ii");
+		typeSettingsProperties.setProperty("column-1", column1);
+		typeSettingsProperties.setProperty("column-2", column2);
+
+		layout.setTypeSettings(
+			StringUtil.replace(typeSettingsProperties.toString(), "\n", "\\n"));
+
+		return layout;
 	}
 
 	protected void processTemplate(String name, Map<String, Object> context)
