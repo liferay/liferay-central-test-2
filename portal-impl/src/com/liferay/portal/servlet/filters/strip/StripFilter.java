@@ -216,7 +216,9 @@ public class StripFilter extends BasePortalFilter {
 
 						state = _STATE_FOUND_ELEMENT;
 					}
-					else if (hasMarker(oldByteArray, i, _MARKER_SCRIPT_OPEN)) {
+					else if (hasMarker(oldByteArray, i, _MARKER_SCRIPT_OPEN) ||
+						hasMarker(oldByteArray, i, _MARKER_JAVASCRIPT_OPEN)) {
+
 						state = _STATE_MINIFY_SCRIPT;
 					}
 					else if (hasMarker(oldByteArray, i, _MARKER_STYLE_OPEN)) {
@@ -240,7 +242,7 @@ public class StripFilter extends BasePortalFilter {
 						scriptBytes = new ByteArrayMaker();
 
 						scriptContent = scriptContent.substring(
-							_SCRIPT_TYPE_JAVASCRIPT.length()).trim();
+							scriptContent.indexOf('>') + 1).trim();
 
 						if (Validator.isNull(scriptContent)) {
 							i += _MARKER_SCRIPT_CLOSE.length;
@@ -396,6 +398,9 @@ public class StripFilter extends BasePortalFilter {
 
 	private static final char[] _MARKER_FORM_CLOSE = "/form>".toCharArray();
 
+	private static final char[] _MARKER_JAVASCRIPT_OPEN =
+		"script type=\"text/javascript\">".toCharArray();
+
 	private static final char[] _MARKER_LI_CLOSE = "/li>".toCharArray();
 
 	private static final char[] _MARKER_PRE_CLOSE = "/pre>".toCharArray();
@@ -403,7 +408,7 @@ public class StripFilter extends BasePortalFilter {
 	private static final char[] _MARKER_PRE_OPEN = "pre>".toCharArray();
 
 	private static final char[] _MARKER_SCRIPT_OPEN =
-		"script type=\"text/javascript\">".toCharArray();
+		"script>".toCharArray();
 
 	private static final char[] _MARKER_SCRIPT_CLOSE = "/script>".toCharArray();
 
