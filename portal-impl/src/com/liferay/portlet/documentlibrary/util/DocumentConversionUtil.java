@@ -197,7 +197,6 @@ public class DocumentConversionUtil {
 		if ((_connection == null) || (_converter == null)) {
 			String host = PrefsPropsUtil.getString(
 				PropsKeys.OPENOFFICE_SERVER_HOST);
-
 			int port = PrefsPropsUtil.getInteger(
 				PropsKeys.OPENOFFICE_SERVER_PORT,
 				PropsValues.OPENOFFICE_SERVER_PORT);
@@ -216,18 +215,23 @@ public class DocumentConversionUtil {
 	}
 
 	private boolean _isRemoteOpenOfficeHost(String host) {
-		return (Validator.isNotNull(host) &&
-				!host.equals(_LOCALHOST_IP) &&
-				!host.startsWith(_LOCALHOST));
+		if (Validator.isNotNull(host) && !host.equals(_LOCALHOST_IP) &&
+			!host.startsWith(_LOCALHOST)) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
-
-	private static final String _LOCALHOST = "localhost";
-
-	private static final String _LOCALHOST_IP = "127.0.0.1";
 
 	private static final String[] _DEFAULT_CONVERSIONS = new String[0];
 
 	private static final String[] _DRAWING_CONVERSIONS = new String[] {"odg"};
+
+	private static final String _LOCALHOST = "localhost";
+
+	private static final String _LOCALHOST_IP = "127.0.0.1";
 
 	private static final String[] _PRESENTATION_CONVERSIONS = new String[] {
 		"odp", "pdf", "ppt", "swf", "sxi"
