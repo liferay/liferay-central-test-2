@@ -339,6 +339,21 @@ public class SeleneseToJavaBuilder {
 				sb.append(param2);
 				sb.append("\"));");
 			}
+			else if (param1.equals("assertNotVisible") ||
+					 param1.equals("assertVisible")) {
+
+				if (param1.equals("assertNotVisible")) {
+					sb.append("assertFalse");
+				}
+				else if (param1.equals("assertVisible")) {
+					sb.append("assertTrue");
+				}
+
+				sb.append("(");
+				sb.append("selenium.isVisible(\"");
+				sb.append(param2);
+				sb.append("\"));");
+			}
 			else if (param1.equals("assertSelectOptions")) {
 				String[] expectedArray = StringUtil.split(param3);
 
@@ -534,6 +549,34 @@ public class SeleneseToJavaBuilder {
 					sb.append("isTextPresent");
 				}
 
+				sb.append("(\"");
+				sb.append(param2);
+				sb.append("\")) {");
+				sb.append("break;");
+				sb.append("}");
+				sb.append("}");
+				sb.append("catch (Exception e) {");
+				sb.append("}");
+
+				sb.append("Thread.sleep(1000);");
+				sb.append("}");
+			}
+			else if (param1.equals("waitForNotVisible") ||
+					 param1.equals("waitForVisible")) {
+
+				sb.append("for (int second = 0;; second++) {");
+				sb.append("if (second >= 60) {");
+				sb.append("fail(\"timeout\");");
+				sb.append("}");
+
+				sb.append("try {");
+				sb.append("if (");
+
+				if (param1.equals("waitForNotVisible")) {
+					sb.append("!");
+				}
+
+				sb.append("selenium.isVisible");
 				sb.append("(\"");
 				sb.append(param2);
 				sb.append("\")) {");
