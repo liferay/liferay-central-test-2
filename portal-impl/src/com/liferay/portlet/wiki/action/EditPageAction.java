@@ -37,6 +37,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.tags.TagsEntryException;
+import com.liferay.portlet.wiki.DuplicatePageException;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.PageContentException;
@@ -123,7 +124,8 @@ public class EditPageAction extends PortletAction {
 
 				setForward(actionRequest, "portlet.wiki.error");
 			}
-			else if (e instanceof PageContentException ||
+			else if (e instanceof DuplicatePageException ||
+					 e instanceof PageContentException ||
 					 e instanceof PageVersionException ||
 					 e instanceof PageTitleException) {
 
@@ -283,6 +285,8 @@ public class EditPageAction extends PortletAction {
 	protected WikiPage updatePage(ActionRequest actionRequest)
 		throws Exception {
 
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
+
 		long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
 		String title = ParamUtil.getString(actionRequest, "title");
 		double version = ParamUtil.getDouble(actionRequest, "version");
@@ -297,9 +301,16 @@ public class EditPageAction extends PortletAction {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			WikiPage.class.getName(), actionRequest);
 
-		return WikiPageServiceUtil.updatePage(
-			nodeId, title, version, content, summary, minorEdit, format,
-			parentTitle, redirectTitle, serviceContext);
+		if (cmd.equals(Constants.ADD)) {
+			return WikiPageServiceUtil.addPage(
+				nodeId, title, content, summary, minorEdit, format,
+				parentTitle, redirectTitle, serviceContext);
+		}
+		else {
+			return WikiPageServiceUtil.updatePage(
+				nodeId, title, version, content, summary, minorEdit, format,
+				parentTitle, redirectTitle, serviceContext);
+		}
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {

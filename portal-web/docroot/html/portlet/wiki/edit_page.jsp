@@ -195,7 +195,7 @@ if (Validator.isNull(redirect)) {
 	}
 
 	function <portlet:namespace />savePage() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= newPage ? Constants.ADD : Constants.UPDATE %>";
 
 		if (window.<portlet:namespace />editor) {
 			document.<portlet:namespace />fm.<portlet:namespace />content.value = window.<portlet:namespace />editor.getHTML();
@@ -230,6 +230,7 @@ if (Validator.isNull(redirect)) {
 <input name="<portlet:namespace />preview" type="hidden" value="<%= preview %>" />
 <input name="<portlet:namespace />saveAndContinue" type="hidden" value="" />
 
+<liferay-ui:error exception="<%= DuplicatePageException.class %>" message="there-is-already-a-page-with-the-specified-title" />
 <liferay-ui:error exception="<%= PageContentException.class %>" message="the-content-is-not-valid" />
 <liferay-ui:error exception="<%= PageTitleException.class %>" message="please-enter-a-valid-title" />
 <liferay-ui:error exception="<%= PageVersionException.class %>" message="another-user-has-made-changes-since-you-started-editing-please-copy-your-changes-and-try-again" />
