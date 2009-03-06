@@ -1091,27 +1091,25 @@ Liferay.Util = {
 		);
 	},
 
-	toggleSelectBox: function(selectBoxId, value, toggleBoxId) {
+	toggleSelectBox: function(selectBoxId, value, toggleBoxId){
 		var selectBox = jQuery('#' + selectBoxId);
 		var toggleBox = jQuery('#' + toggleBoxId);
 
-		if (selectBox.val() != value) {
+		if (selectBox.val()!=value) {
 			toggleBox.hide();
 		}
 		else {
 			toggleBox.show();
 		}
 
-		selectBox.change(
-			function(event) {
-				if (selectBox.val() != value) {
-					toggleBox.hide();
-				}
-				else {
-					toggleBox.show();
-				}
+		selectBox.change(function(event){
+			if (selectBox.val()!=value){
+				toggleBox.hide();
 			}
-		);
+			else {
+				toggleBox.show();
+			}
+		});
 	},
 
 	uncamelize: function(value, separator) {

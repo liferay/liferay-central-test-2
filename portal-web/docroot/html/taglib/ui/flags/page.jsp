@@ -29,13 +29,12 @@ String className = (String)request.getAttribute("liferay-ui:flags:className");
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:flags:classPK"));
 long userId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:flags:userId"));
 String title = GetterUtil.getString((String)request.getAttribute("liferay-ui:flags:title"));
-String message = GetterUtil.getString((String)request.getAttribute("liferay-ui:flags:message"), "flag");
-boolean label = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:flags:label"), true);
+
 String randomClass = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 String contentType = LanguageUtil.get(pageContext, "model.resource." + className);
 %>
 
-<liferay-ui:icon image="../ratings/flagged_icon" imageHover="../ratings/flagged_icon_hover" message="<%= message %>" cssClass="<%= randomClass  %>" label="<%= label %>" url="javascript: ;" />
+<liferay-ui:icon image="../ratings/flagged_icon" imageHover="../ratings/flagged_icon_hover" cssClass="<%= randomClass  %>" label="<%= true %>" message="flag" url="javascript: ;" />
 
 <c:choose>
 	<c:when test="<%= PropsValues.FLAGS_GUEST_USERS || themeDisplay.isSignedIn() %>">

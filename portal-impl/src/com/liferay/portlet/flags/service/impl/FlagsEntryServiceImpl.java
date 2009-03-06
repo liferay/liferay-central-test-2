@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
@@ -72,13 +71,6 @@ public class FlagsEntryServiceImpl extends FlagsEntryServiceBaseImpl {
 		Company company = companyPersistence.findByPrimaryKey(
 			serviceContext.getCompanyId());
 
-		// Group
-
-		Layout layout = layoutPersistence.findByPrimaryKey(
-			serviceContext.getPlid());
-
-		Group group = layout.getGroup();
-
 		// Reporter User
 
 		String reporterUserName = null;
@@ -106,22 +98,20 @@ public class FlagsEntryServiceImpl extends FlagsEntryServiceBaseImpl {
 		}
 
 		// Reported User
-		String reportedUserName = StringPool.BLANK;
-		String reportedUserEmailAddress = StringPool.BLANK;
-		String reportedUserURL = StringPool.BLANK;
 
 		User reportedUser = userPersistence.findByPrimaryKey(reportedUserId);
-		if (reportedUser.isDefaultUser()){
-			reportedUserName = group.getDescriptiveName();
-		}
-		else {
-			reportedUserName = reportedUser.getFullName();
-			reportedUserEmailAddress = reportedUser.getEmailAddress();
-			reportedUserURL = reportedUser.getDisplayURL(
+
+		String reportedUserName = reportedUser.getFullName();
+		String reportedUserEmailAddress = reportedUser.getEmailAddress();
+		String reportedUserURL = reportedUser.getDisplayURL(
 			serviceContext.getPortalURL(), serviceContext.getPathMain());
-		}
 
+		// Group
 
+		Layout layout = layoutPersistence.findByPrimaryKey(
+			serviceContext.getPlid());
+
+		Group group = layout.getGroup();
 
 		// Email
 

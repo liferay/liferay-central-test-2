@@ -487,15 +487,6 @@ Liferay.Service.registerClass(
 	}
 );
 
-Liferay.Service.register("Liferay.Service.Flags", "com.liferay.portlet.flags.service.http");
-
-Liferay.Service.registerClass(
-	Liferay.Service.Flags, "FlagsEntry",
-	{
-		addFlagEntry: true
-	}
-);
-
 Liferay.Service.register("Liferay.Service.IG", "com.liferay.portlet.imagegallery.service.http");
 
 Liferay.Service.registerClass(
@@ -855,5 +846,14 @@ Liferay.Service.registerClass(
 		subscribePage: true,
 		unsubscribePage: true,
 		updatePage: true
+	}
+);
+
+Liferay.Service.register("Liferay.Service.Flags", "com.liferay.portlet.flags.service.http");
+
+Liferay.Service.registerClass(
+	Liferay.Service.Flags, "FlagsEntry",
+	{
+		addFlagEntry: true
 	}
 );
