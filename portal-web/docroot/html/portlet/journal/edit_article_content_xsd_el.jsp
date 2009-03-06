@@ -126,8 +126,8 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 									while (itr.hasNext()) {
 										Element child = (Element)itr.next();
 
-										String listElName = child.attributeValue("name", StringPool.BLANK);
-										String listElValue = child.attributeValue("type", StringPool.BLANK);
+										String listElName = JS.decodeURIComponent(child.attributeValue("name", StringPool.BLANK));
+										String listElValue = JS.decodeURIComponent(child.attributeValue("type", StringPool.BLANK));
 									%>
 
 										<option <%= elContent.equals(listElName) ? "selected" : "" %> value="<%= listElName %>"><%= listElValue %></option>
@@ -148,8 +148,8 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 									while (itr1.hasNext()) {
 										Element child = (Element)itr1.next();
 
-										String listElName = child.attributeValue("name", StringPool.BLANK);
-										String listElValue = child.attributeValue("type", StringPool.BLANK);
+										String listElName = JS.decodeURIComponent(child.attributeValue("name", StringPool.BLANK));
+										String listElValue = JS.decodeURIComponent(child.attributeValue("type", StringPool.BLANK));
 
 										boolean contains = false;
 
