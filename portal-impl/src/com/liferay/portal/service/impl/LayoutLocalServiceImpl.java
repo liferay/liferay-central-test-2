@@ -158,14 +158,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		long layoutId = getNextLayoutId(groupId, privateLayout);
 		parentLayoutId = getParentLayoutId(
 			groupId, privateLayout, parentLayoutId);
-		String friendlyName = localeNamesMap.get(LocaleUtil.getDefault());
+		String name = localeNamesMap.get(LocaleUtil.getDefault());
 		friendlyURL = getFriendlyURL(
-			groupId, privateLayout, layoutId, friendlyName, friendlyURL);
+			groupId, privateLayout, layoutId, name, friendlyURL);
 		int priority = getNextPriority(groupId, privateLayout, parentLayoutId);
 
 		validate(
-			groupId, privateLayout, layoutId, parentLayoutId, friendlyName,
-			type, hidden, friendlyURL);
+			groupId, privateLayout, layoutId, parentLayoutId, name, type,
+			hidden, friendlyURL);
 
 		long plid = counterLocalService.increment();
 
@@ -763,13 +763,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		parentLayoutId = getParentLayoutId(
 			groupId, privateLayout, parentLayoutId);
-		String friendlyName = localeNamesMap.get(LocaleUtil.getDefault());
+		String name = localeNamesMap.get(LocaleUtil.getDefault());
 		friendlyURL = getFriendlyURL(
 			groupId, privateLayout, layoutId, StringPool.BLANK, friendlyURL);
 
 		validate(
-			groupId, privateLayout, layoutId, parentLayoutId, friendlyName,
-			type, hidden, friendlyURL);
+			groupId, privateLayout, layoutId, parentLayoutId, name, type,
+			hidden, friendlyURL);
 
 		validateParentLayoutId(
 			groupId, privateLayout, layoutId, parentLayoutId);
@@ -822,8 +822,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			if (layout.getDlFolderId() > 0) {
 				DLFolder folder = dlFolderLocalService.getFolder(
 					layout.getDlFolderId());
-
-				String name = layout.getName(LocaleUtil.getDefault());
 
 				if (!name.equals(folder.getName())) {
 					dlFolderLocalService.updateFolder(
@@ -1052,13 +1050,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	protected String getFriendlyURL(
 			long groupId, boolean privateLayout, long layoutId,
-			String friendlyName, String friendlyURL)
+			String name, String friendlyURL)
 		throws PortalException, SystemException {
 
 		friendlyURL = getFriendlyURL(friendlyURL);
 
 		if (Validator.isNull(friendlyURL)) {
-			friendlyURL = StringPool.SLASH + getFriendlyURL(friendlyName);
+			friendlyURL = StringPool.SLASH + getFriendlyURL(name);
 
 			String originalFriendlyURL = friendlyURL;
 
@@ -1181,11 +1179,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	protected void validate(
 			long groupId, boolean privateLayout, long layoutId,
-			long parentLayoutId, String friendlyName, String type,
-			boolean hidden, String friendlyURL)
+			long parentLayoutId, String name, String type, boolean hidden,
+			String friendlyURL)
 		throws PortalException, SystemException {
 
-		validateName(friendlyName);
+		validateName(name);
 
 		boolean firstLayout = false;
 
@@ -1287,16 +1285,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 	}
 
-	protected void validateName(String name)
-		throws PortalException, SystemException {
-
+	protected void validateName(String name) throws PortalException {
 		if (Validator.isNull(name)) {
 			throw new LayoutNameException();
 		}
 	}
 
 	protected void validateName(String name, String languageId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		String defaultLanguageId = LocaleUtil.toLanguageId(
 			LocaleUtil.getDefault());
