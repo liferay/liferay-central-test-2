@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.shopping.CategoryNameException;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.ShoppingItem;
@@ -94,6 +95,12 @@ public class ShoppingCategoryLocalServiceImpl
 				category, serviceContext.getCommunityPermissions(),
 				serviceContext.getGuestPermissions());
 		}
+
+		// Expando
+
+		ExpandoBridge expandoBridge = category.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 
 		return category;
 	}
@@ -180,6 +187,11 @@ public class ShoppingCategoryLocalServiceImpl
 		// Items
 
 		shoppingItemLocalService.deleteItems(category.getCategoryId());
+
+		// Expando
+
+		expandoValueLocalService.deleteValues(
+			ShoppingCategory.class.getName(), category.getCategoryId());
 
 		// Resources
 
@@ -308,6 +320,12 @@ public class ShoppingCategoryLocalServiceImpl
 
 			mergeCategories(category, parentCategoryId);
 		}
+
+		// Expando
+
+		ExpandoBridge expandoBridge = category.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 
 		return category;
 	}

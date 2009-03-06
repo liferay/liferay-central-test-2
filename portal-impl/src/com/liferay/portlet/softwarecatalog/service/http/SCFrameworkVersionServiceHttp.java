@@ -279,7 +279,7 @@ public class SCFrameworkVersionServiceHttp {
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion updateFrameworkVersion(
 		HttpPrincipal httpPrincipal, long frameworkVersionId,
 		java.lang.String name, java.lang.String url, boolean active,
-		int priority)
+		int priority, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -301,10 +301,18 @@ public class SCFrameworkVersionServiceHttp {
 
 			Object paramObj4 = new IntegerWrapper(priority);
 
+			Object paramObj5 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj5 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(SCFrameworkVersionServiceUtil.class.getName(),
 					"updateFrameworkVersion",
 					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5
 					});
 
 			Object returnObj = null;

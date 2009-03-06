@@ -100,11 +100,13 @@ public class BookmarksFolderServiceJSON {
 
 	public static JSONObject updateFolder(long folderId, long parentFolderId,
 		java.lang.String name, java.lang.String description,
-		boolean mergeWithParentFolder)
+		boolean mergeWithParentFolder,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.bookmarks.model.BookmarksFolder returnValue = BookmarksFolderServiceUtil.updateFolder(folderId,
-				parentFolderId, name, description, mergeWithParentFolder);
+				parentFolderId, name, description, mergeWithParentFolder,
+				serviceContext);
 
 		return BookmarksFolderJSONSerializer.toJSONObject(returnValue);
 	}

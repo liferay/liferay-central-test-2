@@ -42,6 +42,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.imagegallery.DuplicateFolderNameException;
 import com.liferay.portlet.imagegallery.FolderNameException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
@@ -99,6 +100,12 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		folder.setDescription(description);
 
 		igFolderPersistence.update(folder, false);
+
+		// Expando
+
+		ExpandoBridge expandoBridge = folder.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 
 		// Resources
 
@@ -184,6 +191,11 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		// Images
 
 		igImageLocalService.deleteImages(folder.getFolderId());
+
+		// Expando
+
+		expandoValueLocalService.deleteValues(
+			IGFolder.class.getName(), folder.getFolderId());
 
 		// Resources
 
@@ -357,7 +369,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 	public IGFolder updateFolder(
 			long folderId, long parentFolderId, String name, String description,
-			boolean mergeWithParentFolder)
+			boolean mergeWithParentFolder, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Folder
@@ -383,6 +395,12 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 			mergeFolders(folder, parentFolderId);
 		}
+
+		// Expando
+
+		ExpandoBridge expandoBridge = folder.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 
 		return folder;
 	}

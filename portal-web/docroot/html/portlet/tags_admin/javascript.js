@@ -1389,7 +1389,8 @@
 						parentEntryName: parentEntryName,
 						name: name,
 						vocabularyName: vocabularyName,
-						properties: properties
+						properties: properties,
+						serviceContext: null
 					},
 					function(message) {
 						var exception = message.exception;
@@ -1433,7 +1434,8 @@
 					{
 						vocabularyId: vocabularyId,
 						name: vocabularyName,
-						folksonomy: folksonomy
+						folksonomy: folksonomy,
+						serviceContext: null
 					},
 					callback
 				);

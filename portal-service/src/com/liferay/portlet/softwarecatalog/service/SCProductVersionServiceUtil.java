@@ -89,13 +89,14 @@ public class SCProductVersionServiceUtil {
 		long productVersionId, java.lang.String version,
 		java.lang.String changeLog, java.lang.String downloadPageURL,
 		java.lang.String directDownloadURL, boolean testDirectDownloadURL,
-		boolean repoStoreArtifact, long[] frameworkVersionIds)
+		boolean repoStoreArtifact, long[] frameworkVersionIds,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .updateProductVersion(productVersionId, version, changeLog,
 			downloadPageURL, directDownloadURL, testDirectDownloadURL,
-			repoStoreArtifact, frameworkVersionIds);
+			repoStoreArtifact, frameworkVersionIds, serviceContext);
 	}
 
 	public static SCProductVersionService getService() {

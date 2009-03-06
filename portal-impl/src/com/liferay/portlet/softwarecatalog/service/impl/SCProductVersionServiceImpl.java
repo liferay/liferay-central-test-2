@@ -109,7 +109,7 @@ public class SCProductVersionServiceImpl
 			long productVersionId, String version, String changeLog,
 			String downloadPageURL, String directDownloadURL,
 			boolean testDirectDownloadURL, boolean repoStoreArtifact,
-			long[] frameworkVersionIds)
+			long[] frameworkVersionIds, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		SCProductVersion productVersion =
@@ -122,7 +122,7 @@ public class SCProductVersionServiceImpl
 		return scProductVersionLocalService.updateProductVersion(
 			productVersionId, version, changeLog, downloadPageURL,
 			directDownloadURL, testDirectDownloadURL, repoStoreArtifact,
-			frameworkVersionIds);
+			frameworkVersionIds, serviceContext);
 	}
 
 }

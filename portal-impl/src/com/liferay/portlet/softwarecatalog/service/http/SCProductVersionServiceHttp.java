@@ -310,7 +310,8 @@ public class SCProductVersionServiceHttp {
 		java.lang.String version, java.lang.String changeLog,
 		java.lang.String downloadPageURL, java.lang.String directDownloadURL,
 		boolean testDirectDownloadURL, boolean repoStoreArtifact,
-		long[] frameworkVersionIds)
+		long[] frameworkVersionIds,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -350,11 +351,18 @@ public class SCProductVersionServiceHttp {
 				paramObj7 = new NullWrapper("[J");
 			}
 
+			Object paramObj8 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj8 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(SCProductVersionServiceUtil.class.getName(),
 					"updateProductVersion",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7
+						paramObj5, paramObj6, paramObj7, paramObj8
 					});
 
 			Object returnObj = null;

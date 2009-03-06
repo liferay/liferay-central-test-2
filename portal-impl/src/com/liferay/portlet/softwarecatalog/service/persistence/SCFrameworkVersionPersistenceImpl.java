@@ -1862,6 +1862,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl")
+	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
 	protected ContainsSCProductVersion containsSCProductVersion;
 	protected AddSCProductVersion addSCProductVersion;
 	protected ClearSCProductVersions clearSCProductVersions;

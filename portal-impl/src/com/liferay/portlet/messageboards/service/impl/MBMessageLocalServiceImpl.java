@@ -62,6 +62,7 @@ import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.social.BlogsActivityKeys;
+import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.messageboards.MessageBodyException;
 import com.liferay.portlet.messageboards.MessageSubjectException;
 import com.liferay.portlet.messageboards.NoSuchDiscussionException;
@@ -386,6 +387,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		mbMessagePersistence.update(message, false);
 
 		logAddMessage(messageId, stopWatch, 4);
+
+		// Expando
+
+		ExpandoBridge expandoBridge = message.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 
 		// Resources
 
@@ -757,6 +764,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		// Message flags
 
 		mbMessageFlagPersistence.removeByMessageId(message.getMessageId());
+
+		// Expando
+
+		expandoValueLocalService.deleteValues(
+			MBMessage.class.getName(), message.getMessageId());
 
 		// Resources
 
@@ -1197,6 +1209,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		category.setLastPostDate(now);
 
 		mbCategoryPersistence.update(category, false);
+
+		// Expando
+
+		ExpandoBridge expandoBridge = message.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 
 		// Subscriptions
 

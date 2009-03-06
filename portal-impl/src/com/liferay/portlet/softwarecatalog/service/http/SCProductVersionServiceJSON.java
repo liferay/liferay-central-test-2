@@ -127,12 +127,14 @@ public class SCProductVersionServiceJSON {
 		java.lang.String version, java.lang.String changeLog,
 		java.lang.String downloadPageURL, java.lang.String directDownloadURL,
 		boolean testDirectDownloadURL, boolean repoStoreArtifact,
-		long[] frameworkVersionIds)
+		long[] frameworkVersionIds,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion returnValue = SCProductVersionServiceUtil.updateProductVersion(productVersionId,
 				version, changeLog, downloadPageURL, directDownloadURL,
-				testDirectDownloadURL, repoStoreArtifact, frameworkVersionIds);
+				testDirectDownloadURL, repoStoreArtifact, frameworkVersionIds,
+				serviceContext);
 
 		return SCProductVersionJSONSerializer.toJSONObject(returnValue);
 	}

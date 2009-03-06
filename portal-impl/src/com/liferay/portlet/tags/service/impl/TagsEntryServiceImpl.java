@@ -159,7 +159,8 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 
 	public TagsEntry updateEntry(
 			long entryId, String parentEntryName, String name,
-			String vocabularyName, String[] properties)
+			String vocabularyName, String[] properties,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		TagsEntryPermission.check(
@@ -167,7 +168,7 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 
 		return tagsEntryLocalService.updateEntry(
 			getUserId(), entryId, parentEntryName, name, vocabularyName,
-			properties);
+			properties, serviceContext);
 	}
 
 	protected List<TagsEntry> getEntries(List<TagsEntry> entries)

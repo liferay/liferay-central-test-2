@@ -422,7 +422,8 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 					existingFolder =
 						BookmarksFolderLocalServiceUtil.updateFolder(
 							existingFolder.getFolderId(), parentFolderId,
-							folder.getName(), folder.getDescription(), false);
+							folder.getName(), folder.getDescription(), false,
+							serviceContext);
 				}
 			}
 			else {

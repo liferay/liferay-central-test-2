@@ -148,7 +148,8 @@ public class EditFrameworkVersionAction extends PortletAction {
 			// Update framework version
 
 			SCFrameworkVersionServiceUtil.updateFrameworkVersion(
-				frameworkVersionId, name, url, active, priority);
+				frameworkVersionId, name, url, active, priority,
+				serviceContext);
 		}
 	}
 

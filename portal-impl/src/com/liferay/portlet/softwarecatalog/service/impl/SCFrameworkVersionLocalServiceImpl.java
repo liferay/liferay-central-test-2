@@ -27,6 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.softwarecatalog.FrameworkVersionNameException;
 import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
 import com.liferay.portlet.softwarecatalog.service.base.SCFrameworkVersionLocalServiceBaseImpl;
@@ -92,6 +93,12 @@ public class SCFrameworkVersionLocalServiceImpl
 				serviceContext.getGuestPermissions());
 		}
 
+		// Expando
+
+		ExpandoBridge expandoBridge = frameworkVersion.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
+
 		return frameworkVersion;
 	}
 
@@ -146,11 +153,20 @@ public class SCFrameworkVersionLocalServiceImpl
 	public void deleteFrameworkVersion(long frameworkVersionId)
 		throws PortalException, SystemException {
 
-		scFrameworkVersionPersistence.remove(frameworkVersionId);
+		SCFrameworkVersion frameworkVersion =
+			scFrameworkVersionPersistence.findByPrimaryKey(frameworkVersionId);
+
+		deleteFrameworkVersion(frameworkVersion);
 	}
 
 	public void deleteFrameworkVersion(SCFrameworkVersion frameworkVersion)
 		throws SystemException {
+
+		// Expando
+
+		expandoValueLocalService.deleteValues(
+			SCFrameworkVersion.class.getName(),
+			frameworkVersion.getFrameworkVersionId());
 
 		scFrameworkVersionPersistence.remove(frameworkVersion);
 	}
@@ -215,7 +231,7 @@ public class SCFrameworkVersionLocalServiceImpl
 
 	public SCFrameworkVersion updateFrameworkVersion(
 			long frameworkVersionId, String name, String url, boolean active,
-			int priority)
+			int priority, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		validate(name);
@@ -229,6 +245,12 @@ public class SCFrameworkVersionLocalServiceImpl
 		frameworkVersion.setPriority(priority);
 
 		scFrameworkVersionPersistence.update(frameworkVersion, false);
+
+		// Expando
+
+		ExpandoBridge expandoBridge = frameworkVersion.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 
 		return frameworkVersion;
 	}

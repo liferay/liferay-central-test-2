@@ -120,11 +120,12 @@ public class WikiNodeServiceJSON {
 	}
 
 	public static JSONObject updateNode(long nodeId, java.lang.String name,
-		java.lang.String description)
+		java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.wiki.model.WikiNode returnValue = WikiNodeServiceUtil.updateNode(nodeId,
-				name, description);
+				name, description, serviceContext);
 
 		return WikiNodeJSONSerializer.toJSONObject(returnValue);
 	}

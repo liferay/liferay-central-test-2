@@ -111,13 +111,14 @@ public class SCProductEntryServiceJSON {
 		java.lang.String pageURL, java.lang.String author,
 		java.lang.String repoGroupId, java.lang.String repoArtifactId,
 		long[] licenseIds, java.util.List<byte[]> thumbnails,
-		java.util.List<byte[]> fullImages)
+		java.util.List<byte[]> fullImages,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry returnValue = SCProductEntryServiceUtil.updateProductEntry(productEntryId,
 				name, type, tags, shortDescription, longDescription, pageURL,
 				author, repoGroupId, repoArtifactId, licenseIds, thumbnails,
-				fullImages);
+				fullImages, serviceContext);
 
 		return SCProductEntryJSONSerializer.toJSONObject(returnValue);
 	}

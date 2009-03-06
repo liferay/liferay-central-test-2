@@ -1536,5 +1536,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence mbThreadPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl")
+	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
 	private static Log _log = LogFactoryUtil.getLog(MBBanPersistenceImpl.class);
 }

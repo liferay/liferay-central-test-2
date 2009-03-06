@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.shopping.CouponCodeException;
 import com.liferay.portlet.shopping.CouponDateException;
 import com.liferay.portlet.shopping.CouponDescriptionException;
@@ -132,17 +133,35 @@ public class ShoppingCouponLocalServiceImpl
 
 		shoppingCouponPersistence.update(coupon, false);
 
+		// Expando
+
+		ExpandoBridge expandoBridge = coupon.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
+
 		return coupon;
 	}
 
 	public void deleteCoupon(long couponId)
 		throws PortalException, SystemException {
 
+		// Expando
+
+		expandoValueLocalService.deleteValues(
+			ShoppingCoupon.class.getName(), couponId);
+
 		shoppingCouponPersistence.remove(couponId);
 	}
 
-	public void deleteCoupons(long groupId) throws SystemException {
-		shoppingCouponPersistence.removeByGroupId(groupId);
+	public void deleteCoupons(long groupId)
+		throws PortalException, SystemException {
+
+		List<ShoppingCoupon> coupons = shoppingCouponPersistence.findByGroupId(
+			groupId);
+
+		for (ShoppingCoupon coupon : coupons) {
+			deleteCoupon(coupon.getCouponId());
+		}
 	}
 
 	public ShoppingCoupon getCoupon(long couponId)
@@ -228,6 +247,12 @@ public class ShoppingCouponLocalServiceImpl
 		coupon.setDiscountType(discountType);
 
 		shoppingCouponPersistence.update(coupon, false);
+
+		// Expando
+
+		ExpandoBridge expandoBridge = coupon.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 
 		return coupon;
 	}

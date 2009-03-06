@@ -174,7 +174,7 @@ public class EditProductVersionAction extends PortletAction {
 			SCProductVersionServiceUtil.updateProductVersion(
 				productVersionId, version, changeLog, downloadPageURL,
 				directDownloadURL, testDirectDownloadURL, repoStoreArtifact,
-				frameworkVersionIds);
+				frameworkVersionIds, serviceContext);
 		}
 	}
 

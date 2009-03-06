@@ -239,10 +239,11 @@ public class WikiNodeLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode updateNode(
-		long nodeId, java.lang.String name, java.lang.String description)
+		long nodeId, java.lang.String name, java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().updateNode(nodeId, name, description);
+		return getService().updateNode(nodeId, name, description, serviceContext);
 	}
 
 	public static WikiNodeLocalService getService() {

@@ -113,7 +113,8 @@ public interface ShoppingCouponLocalService {
 			com.liferay.portal.SystemException;
 
 	public void deleteCoupons(long groupId)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon(

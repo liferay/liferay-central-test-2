@@ -120,12 +120,12 @@ public class SCFrameworkVersionServiceJSON {
 
 	public static JSONObject updateFrameworkVersion(long frameworkVersionId,
 		java.lang.String name, java.lang.String url, boolean active,
-		int priority)
+		int priority, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion returnValue =
 			SCFrameworkVersionServiceUtil.updateFrameworkVersion(frameworkVersionId,
-				name, url, active, priority);
+				name, url, active, priority, serviceContext);
 
 		return SCFrameworkVersionJSONSerializer.toJSONObject(returnValue);
 	}

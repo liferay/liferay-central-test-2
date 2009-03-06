@@ -351,7 +351,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 	public int moveCollectionResource(
 			WebDAVRequest webDavRequest, Resource resource, String destination,
-			boolean overwrite)
+			boolean overwrite, ServiceContext serviceContext)
 		throws WebDAVException {
 
 		try {
@@ -375,7 +375,8 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			}
 
 			IGFolderServiceUtil.updateFolder(
-				folderId, parentFolderId, name, description, false);
+				folderId, parentFolderId, name, description, false,
+				serviceContext);
 
 			return status;
 		}

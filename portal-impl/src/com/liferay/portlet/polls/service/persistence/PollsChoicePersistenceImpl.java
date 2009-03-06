@@ -1345,5 +1345,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence pollsQuestionPersistence;
 	@BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsVotePersistence.impl")
 	protected com.liferay.portlet.polls.service.persistence.PollsVotePersistence pollsVotePersistence;
+	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl")
+	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
 	private static Log _log = LogFactoryUtil.getLog(PollsChoicePersistenceImpl.class);
 }

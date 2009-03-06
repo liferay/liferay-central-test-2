@@ -212,12 +212,13 @@ public class SCFrameworkVersionLocalServiceUtil {
 
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion updateFrameworkVersion(
 		long frameworkVersionId, java.lang.String name, java.lang.String url,
-		boolean active, int priority)
+		boolean active, int priority,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .updateFrameworkVersion(frameworkVersionId, name, url,
-			active, priority);
+			active, priority, serviceContext);
 	}
 
 	public static SCFrameworkVersionLocalService getService() {

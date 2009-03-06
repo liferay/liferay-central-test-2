@@ -41,6 +41,7 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.messageboards.CategoryNameException;
 import com.liferay.portlet.messageboards.NoSuchMailingListException;
 import com.liferay.portlet.messageboards.model.MBCategory;
@@ -132,6 +133,12 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 				category, serviceContext.getCommunityPermissions(),
 				serviceContext.getGuestPermissions());
 		}
+
+		// Expando
+
+		ExpandoBridge expandoBridge = category.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 
 		// Mailing list
 
@@ -245,6 +252,11 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		}
 		catch (NoSuchMailingListException nsmle) {
 		}
+
+		// Expando
+
+		expandoValueLocalService.deleteValues(
+			MBCategory.class.getName(), category.getCategoryId());
 
 		// Resources
 
@@ -449,7 +461,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			String outEmailAddress, boolean outCustom, String outServerName,
 			int outServerPort, boolean outUseSSL, String outUserName,
 			String outPassword, boolean mailingListActive,
-			boolean mergeWithParentCategory)
+			boolean mergeWithParentCategory, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Category
@@ -476,6 +488,12 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 			mergeCategories(category, parentCategoryId);
 		}
+
+		// Expando
+
+		ExpandoBridge expandoBridge = category.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 
 		// Mailing list
 

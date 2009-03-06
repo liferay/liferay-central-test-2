@@ -126,11 +126,13 @@ public class BookmarksFolderServiceSoap {
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolderSoap updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,
-		java.lang.String description, boolean mergeWithParentFolder)
+		java.lang.String description, boolean mergeWithParentFolder,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.bookmarks.model.BookmarksFolder returnValue = BookmarksFolderServiceUtil.updateFolder(folderId,
-					parentFolderId, name, description, mergeWithParentFolder);
+					parentFolderId, name, description, mergeWithParentFolder,
+					serviceContext);
 
 			return com.liferay.portlet.bookmarks.model.BookmarksFolderSoap.toSoapModel(returnValue);
 		}

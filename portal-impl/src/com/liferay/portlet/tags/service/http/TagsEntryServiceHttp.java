@@ -525,7 +525,8 @@ public class TagsEntryServiceHttp {
 	public static com.liferay.portlet.tags.model.TagsEntry updateEntry(
 		HttpPrincipal httpPrincipal, long entryId,
 		java.lang.String parentEntryName, java.lang.String name,
-		java.lang.String vocabularyName, java.lang.String[] properties)
+		java.lang.String vocabularyName, java.lang.String[] properties,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -555,10 +556,18 @@ public class TagsEntryServiceHttp {
 				paramObj4 = new NullWrapper("[Ljava.lang.String;");
 			}
 
+			Object paramObj5 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj5 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(TagsEntryServiceUtil.class.getName(),
 					"updateEntry",
 					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5
 					});
 
 			Object returnObj = null;

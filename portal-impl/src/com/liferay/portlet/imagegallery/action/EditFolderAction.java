@@ -147,7 +147,7 @@ public class EditFolderAction extends PortletAction {
 
 			IGFolderServiceUtil.updateFolder(
 				folderId, parentFolderId, name, description,
-				mergeWithParentFolder);
+				mergeWithParentFolder, serviceContext);
 		}
 	}
 

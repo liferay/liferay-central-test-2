@@ -297,7 +297,7 @@ public class EditProductEntryAction extends PortletAction {
 			SCProductEntryServiceUtil.updateProductEntry(
 				productEntryId, name, type, tags, shortDescription,
 				longDescription, pageURL, author, repoGroupId, repoArtifactId,
-				licenseIds, thumbnails, fullImages);
+				licenseIds, thumbnails, fullImages, serviceContext);
 		}
 	}
 

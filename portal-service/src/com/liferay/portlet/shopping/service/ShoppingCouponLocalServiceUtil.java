@@ -130,7 +130,8 @@ public class ShoppingCouponLocalServiceUtil {
 	}
 
 	public static void deleteCoupons(long groupId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		getService().deleteCoupons(groupId);
 	}
 

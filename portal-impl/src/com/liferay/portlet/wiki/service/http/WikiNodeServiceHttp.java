@@ -352,7 +352,8 @@ public class WikiNodeServiceHttp {
 
 	public static com.liferay.portlet.wiki.model.WikiNode updateNode(
 		HttpPrincipal httpPrincipal, long nodeId, java.lang.String name,
-		java.lang.String description)
+		java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -370,9 +371,16 @@ public class WikiNodeServiceHttp {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj3 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj3 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(WikiNodeServiceUtil.class.getName(),
 					"updateNode",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			Object returnObj = null;
 

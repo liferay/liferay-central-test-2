@@ -518,7 +518,8 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 	public TagsEntry updateEntry(
 			long userId, long entryId, String parentEntryName, String name,
-			String vocabularyName, String[] properties)
+			String vocabularyName, String[] properties,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Entry

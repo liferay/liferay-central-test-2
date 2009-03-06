@@ -122,12 +122,13 @@ public class TagsEntryServiceUtil {
 
 	public static com.liferay.portlet.tags.model.TagsEntry updateEntry(
 		long entryId, java.lang.String parentEntryName, java.lang.String name,
-		java.lang.String vocabularyName, java.lang.String[] properties)
+		java.lang.String vocabularyName, java.lang.String[] properties,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .updateEntry(entryId, parentEntryName, name, vocabularyName,
-			properties);
+			properties, serviceContext);
 	}
 
 	public static TagsEntryService getService() {
