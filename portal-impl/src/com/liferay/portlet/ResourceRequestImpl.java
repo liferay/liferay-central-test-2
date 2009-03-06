@@ -32,6 +32,7 @@ import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceURL;
 import javax.portlet.WindowState;
 
 import javax.servlet.http.HttpServletRequest;
@@ -75,7 +76,8 @@ public class ResourceRequestImpl
 			request, portlet, invokerPortlet, portletContext, windowState,
 			portletMode, preferences, plid);
 
-		_cacheablity = ParamUtil.getString(request, "p_p_cacheability");
+		_cacheablity = ParamUtil.getString(
+			request, "p_p_cacheability", ResourceURL.PAGE);
 		_resourceID = request.getParameter("p_p_resource_id");
 	}
 
