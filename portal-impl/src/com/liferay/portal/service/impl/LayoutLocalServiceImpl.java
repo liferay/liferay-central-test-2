@@ -24,6 +24,7 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.LayoutFriendlyURLException;
 import com.liferay.portal.LayoutHiddenException;
+import com.liferay.portal.LayoutNameException;
 import com.liferay.portal.LayoutParentLayoutIdException;
 import com.liferay.portal.LayoutTypeException;
 import com.liferay.portal.NoSuchLayoutException;
@@ -163,8 +164,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		int priority = getNextPriority(groupId, privateLayout, parentLayoutId);
 
 		validate(
-			groupId, privateLayout, layoutId, parentLayoutId, type, hidden,
-			friendlyURL);
+			groupId, privateLayout, layoutId, parentLayoutId, friendlyName,
+			type, hidden, friendlyURL);
 
 		long plid = counterLocalService.increment();
 
@@ -762,12 +763,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		parentLayoutId = getParentLayoutId(
 			groupId, privateLayout, parentLayoutId);
+		String friendlyName = localeNamesMap.get(LocaleUtil.getDefault());
 		friendlyURL = getFriendlyURL(
 			groupId, privateLayout, layoutId, StringPool.BLANK, friendlyURL);
 
 		validate(
-			groupId, privateLayout, layoutId, parentLayoutId, type, hidden,
-			friendlyURL);
+			groupId, privateLayout, layoutId, parentLayoutId, friendlyName,
+			type, hidden, friendlyURL);
 
 		validateParentLayoutId(
 			groupId, privateLayout, layoutId, parentLayoutId);
@@ -900,6 +902,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	public Layout updateName(Layout layout, String name, String languageId)
 		throws PortalException, SystemException {
+
+		validateName(name, languageId);
 
 		layout.setName(name, LocaleUtil.fromLanguageId(languageId));
 
@@ -1177,9 +1181,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	protected void validate(
 			long groupId, boolean privateLayout, long layoutId,
-			long parentLayoutId, String type, boolean hidden,
-			String friendlyURL)
+			long parentLayoutId, String friendlyName, String type,
+			boolean hidden, String friendlyURL)
 		throws PortalException, SystemException {
+
+		validateName(friendlyName);
 
 		boolean firstLayout = false;
 
@@ -1278,6 +1284,25 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			lfurle.setKeywordConflict(layoutIdFriendlyURL);
 
 			throw lfurle;
+		}
+	}
+
+	protected void validateName(String name)
+		throws PortalException, SystemException {
+
+		if (Validator.isNull(name)) {
+			throw new LayoutNameException();
+		}
+	}
+
+	protected void validateName(String name, String languageId)
+		throws PortalException, SystemException {
+
+		String defaultLanguageId = LocaleUtil.toLanguageId(
+			LocaleUtil.getDefault());
+
+		if (defaultLanguageId.equals(languageId)) {
+			validateName(name);
 		}
 	}
 
