@@ -1319,7 +1319,7 @@ public class ServicePreAction extends Action {
 		boolean themeJsFastLoad = ParamUtil.getBoolean(
 			request, "js_fast_load", PropsValues.JAVASCRIPT_FAST_LOAD);
 
-		String lifecycle = ParamUtil.getString(request, "p_p_lifecycle");
+		String lifecycle = ParamUtil.getString(request, "p_p_lifecycle", "0");
 
 		String facebookCanvasPageURL = (String)request.getAttribute(
 			WebKeys.FACEBOOK_CANVAS_PAGE_URL);
