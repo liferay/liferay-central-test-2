@@ -63,8 +63,6 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			actionRequest, "enableComments");
 		boolean enableCommentRatings = ParamUtil.getBoolean(
 			actionRequest, "enableCommentRatings");
-		boolean enableFlags = ParamUtil.getBoolean(
-			actionRequest, "enableFlags");
 
 		int rssDelta = ParamUtil.getInteger(actionRequest, "rssDelta");
 		String rssDisplayStyle = ParamUtil.getString(
@@ -84,7 +82,6 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		preferences.setValue("enable-comments", String.valueOf(enableComments));
 		preferences.setValue(
 			"enable-comment-ratings", String.valueOf(enableCommentRatings));
-		preferences.setValue("enable-flags", String.valueOf(enableFlags));
 
 		preferences.setValue("rss-delta", String.valueOf(rssDelta));
 		preferences.setValue("rss-display-style", rssDisplayStyle);

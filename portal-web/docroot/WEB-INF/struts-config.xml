@@ -835,12 +835,6 @@
 
 		<action path="/expando/view" forward="portlet.expando.view" />
 
-		<!-- Flags -->
-
-		<action path="/flags/edit_flags_entry" type="com.liferay.portlet.flags.action.EditFlagsEntryAction">
-			<forward name="portlet.flags.edit_flags_entry" path="portlet.flags.edit_flags_entry" />
-		</action>
-
 		<!-- Global Prayer Digest -->
 
 		<action path="/global_prayer_digest/view" type="com.liferay.portlet.globalprayerdigest.action.ViewAction">

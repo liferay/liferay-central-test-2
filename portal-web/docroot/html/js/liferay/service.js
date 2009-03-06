@@ -848,12 +848,3 @@ Liferay.Service.registerClass(
 		updatePage: true
 	}
 );
-
-Liferay.Service.register("Liferay.Service.Flags", "com.liferay.portlet.flags.service.http");
-
-Liferay.Service.registerClass(
-	Liferay.Service.Flags, "FlagsEntry",
-	{
-		addFlagEntry: true
-	}
-);

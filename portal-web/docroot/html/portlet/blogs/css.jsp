@@ -57,7 +57,6 @@
 }
 
 .portlet-blogs .entry-tags {
-	clear: both;
 	margin: 1.5em 0 0 0;
 }
 
@@ -75,13 +74,6 @@
 	padding: 5px;
 }
 
-.portlet-blogs .entry-flags {
-	border-left: 1px solid #999;
-	color: #999;
-	float: left;
-	padding-left: 10px;
-}
-
 .portlet-blogs .entry.draft h3 {
 	background: url(<%= themeImagesPath %>/common/page.png) no-repeat 0 50%;
 	margin-top: 0;
@@ -94,8 +86,6 @@
 
 .portlet-blogs .stats {
 	color: #999;
-	float: left;
-	padding-right: 10px;
 }
 
 .portlet-blogs .subscribe {
