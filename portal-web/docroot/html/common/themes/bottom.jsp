@@ -24,6 +24,8 @@
 
 <%@ include file="/html/common/init.jsp" %>
 
+<%-- Portal JavaScript --%>
+
 <c:if test="<%= themeDisplay.isIncludeCalendarJs() %>">
 	<script type="text/javascript">
 
@@ -73,6 +75,8 @@
 <%
 List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORTLETS);
 %>
+
+<%-- Portlet CSS & JavaScript --%>
 
 <c:if test="<%= portlets != null %>">
 
@@ -164,6 +168,10 @@ List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORT
 
 </c:if>
 
+<%-- Raw Text --%>
+
+<%-- Taglib Text --%>
+
 <%
 StringBuilder pageBottomSB = (StringBuilder)request.getAttribute(WebKeys.PAGE_BOTTOM);
 %>
@@ -172,14 +180,37 @@ StringBuilder pageBottomSB = (StringBuilder)request.getAttribute(WebKeys.PAGE_BO
 	<%= pageBottomSB.toString() %>
 </c:if>
 
-<%
-if (layout != null) {
+<%-- Custom JavaScript --%>
+
+<%-- Theme JavaScript --%>
+
+<script src="<%= PortalUtil.getStaticResourceURL(request, themeDisplay.getPathThemeJavaScript() + "/javascript.js") %>" type="text/javascript"></script>
+
+<c:if test="<%= layout != null %>">
+
+	<%-- Custom Layout JavaScript --%>
+
+	<%
+	UnicodeProperties typeSettings = layout.getTypeSettingsProperties();
+	%>
+
+	<script type="text/javascript">
+		// <![CDATA[
+			<%= typeSettings.getProperty("javascript-1") %>
+			<%= typeSettings.getProperty("javascript-2") %>
+			<%= typeSettings.getProperty("javascript-3") %>
+		// ]]>
+	</script>
+
+	<%-- Google Analytics --%>
+
+	<%
 	UnicodeProperties groupTypeSettings = layout.getGroup().getTypeSettingsProperties();
 
 	String googleAnalyticsId = groupTypeSettings.getProperty("googleAnalyticsId");
 
 	if (Validator.isNotNull(googleAnalyticsId)) {
-%>
+	%>
 
 		<script type="text/javascript">
 			var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
@@ -193,10 +224,10 @@ if (layout != null) {
 			pageTracker._trackPageview();
 		</script>
 
-<%
+	<%
 	}
-}
-%>
+	%>
+</c:if>
 
 <%@ include file="/html/common/themes/session_timeout.jspf" %>
 
