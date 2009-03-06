@@ -11,6 +11,12 @@
 
 	#css ($css_main_file)
 
+	#if ($page_css != "")
+		<style type="text/css">
+			$page_css
+		</style>
+	#end
+
 	<script type="text/javascript">
 		// <![CDATA[
 			$page_javascript_1

@@ -178,6 +178,8 @@
 		#end
 	#end
 
+	#set ($page_css = $layout.getCssText())
+
 	#set ($typeSettingsProperties = $layout.getTypeSettingsProperties())
 
 	#set ($page_javascript_1 = $typeSettingsProperties.getProperty("javascript-1"))
