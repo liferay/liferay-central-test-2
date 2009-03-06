@@ -138,6 +138,8 @@
 				else if (options.url) {
 					instance.setBody('<div class="loading-animation" />');
 
+					var onComplete = options.urlComplete;
+					var onError = options.urlError;
 					var onSuccess = options.urlSuccess;
 					var url = options.url.replace(/p_p_state=(maximized|pop_up)/g, 'p_p_state=exclusive');
 
@@ -153,6 +155,8 @@
 						{
 							url: url,
 							data: options.urlData,
+							complete: onComplete,
+							error: onError,
 							success: onSuccess
 						}
 					);
