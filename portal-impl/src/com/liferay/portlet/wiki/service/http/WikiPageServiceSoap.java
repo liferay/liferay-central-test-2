@@ -99,26 +99,6 @@ public class WikiPageServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.wiki.model.WikiPageSoap addPage(
-		long nodeId, java.lang.String title, java.lang.String content,
-		java.lang.String summary, boolean minorEdit, java.lang.String format,
-		java.lang.String parentTitle, java.lang.String redirectTitle,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.addPage(nodeId,
-					title, content, summary, minorEdit, format, parentTitle,
-					redirectTitle, serviceContext);
-
-			return com.liferay.portlet.wiki.model.WikiPageSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static void addPageAttachments(long nodeId, java.lang.String title,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files)
 		throws RemoteException {
