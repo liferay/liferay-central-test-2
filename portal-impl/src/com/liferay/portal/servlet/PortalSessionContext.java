@@ -39,6 +39,10 @@ public class PortalSessionContext {
 		return _instance._get(sessionId);
 	}
 
+	public static int getSessionCount() {
+		return _instance._getSessionCount();
+	}
+
 	public static void put(String sessionId, HttpSession session) {
 		_instance._put(sessionId, session);
 	}
@@ -55,6 +59,10 @@ public class PortalSessionContext {
 		return _sessionPool.get(sessionId);
 	}
 
+	private int _getSessionCount() {
+		return _sessionPool.size();
+	}
+	
 	private void _put(String sessionId, HttpSession session) {
 		_sessionPool.put(sessionId, session);
 	}
