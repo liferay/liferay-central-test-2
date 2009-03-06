@@ -945,7 +945,7 @@ public class JournalArticleLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return getArticleContent(
-			groupId, articleId, null, viewMode, languageId, themeDisplay);
+			groupId, articleId, viewMode, null, languageId, themeDisplay);
 	}
 
 	public String getArticleContent(
@@ -965,7 +965,7 @@ public class JournalArticleLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return getArticleContent(
-			groupId, articleId, version, null, viewMode, languageId,
+			groupId, articleId, version, viewMode, null, languageId,
 			themeDisplay);
 	}
 
