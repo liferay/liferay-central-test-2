@@ -56,7 +56,7 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
-		if (WikiPagePermission.contains(
+		if (!WikiPagePermission.contains(
 				permissionChecker, activity.getClassPK(), ActionKeys.VIEW)) {
 
 			return null;

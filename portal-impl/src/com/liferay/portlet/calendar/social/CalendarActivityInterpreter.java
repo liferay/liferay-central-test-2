@@ -55,7 +55,7 @@ public class CalendarActivityInterpreter extends BaseSocialActivityInterpreter {
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
-		if (CalEventPermission.contains(
+		if (!CalEventPermission.contains(
 				permissionChecker, activity.getClassPK(), ActionKeys.VIEW)) {
 
 			return null;

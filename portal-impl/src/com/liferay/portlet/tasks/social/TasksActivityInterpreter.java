@@ -57,7 +57,7 @@ public class TasksActivityInterpreter extends BaseSocialActivityInterpreter {
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
-		if (TasksProposalPermission.contains(
+		if (!TasksProposalPermission.contains(
 				permissionChecker, activity.getClassPK(), ActionKeys.VIEW)) {
 
 			return null;

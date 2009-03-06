@@ -56,7 +56,7 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
-		if (MBMessagePermission.contains(
+		if (!MBMessagePermission.contains(
 				permissionChecker, activity.getClassPK(), ActionKeys.VIEW)) {
 
 			return null;

@@ -61,7 +61,7 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
-		if (BlogsEntryPermission.contains(
+		if (!BlogsEntryPermission.contains(
 				permissionChecker, activity.getClassPK(), ActionKeys.VIEW)) {
 
 			return null;
