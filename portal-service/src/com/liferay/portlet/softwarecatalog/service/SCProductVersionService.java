@@ -88,8 +88,7 @@ public interface SCProductVersionService {
 		long productVersionId, java.lang.String version,
 		java.lang.String changeLog, java.lang.String downloadPageURL,
 		java.lang.String directDownloadURL, boolean testDirectDownloadURL,
-		boolean repoStoreArtifact, long[] frameworkVersionIds,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		boolean repoStoreArtifact, long[] frameworkVersionIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

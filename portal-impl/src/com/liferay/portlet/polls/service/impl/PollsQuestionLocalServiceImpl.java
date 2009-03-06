@@ -29,7 +29,6 @@ import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.polls.QuestionChoiceException;
 import com.liferay.portlet.polls.QuestionDescriptionException;
 import com.liferay.portlet.polls.QuestionExpirationDateException;
@@ -123,12 +122,6 @@ public class PollsQuestionLocalServiceImpl
 				serviceContext.getGuestPermissions());
 		}
 
-		// Expando
-
-		ExpandoBridge expandoBridge = question.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
-
 		// Choices
 
 		if (choices != null) {
@@ -206,11 +199,6 @@ public class PollsQuestionLocalServiceImpl
 		// Choices
 
 		pollsChoicePersistence.removeByQuestionId(question.getQuestionId());
-
-		// Expando
-
-		expandoValueLocalService.deleteValues(
-			PollsQuestion.class.getName(), question.getQuestionId());
 
 		// Resources
 
@@ -300,12 +288,6 @@ public class PollsQuestionLocalServiceImpl
 		question.setExpirationDate(expirationDate);
 
 		pollsQuestionPersistence.update(question, false);
-
-		// Expando
-
-		ExpandoBridge expandoBridge = question.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
 
 		// Choices
 

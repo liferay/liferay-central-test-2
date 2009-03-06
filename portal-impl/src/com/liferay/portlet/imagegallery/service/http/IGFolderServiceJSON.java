@@ -132,13 +132,11 @@ public class IGFolderServiceJSON {
 
 	public static JSONObject updateFolder(long folderId, long parentFolderId,
 		java.lang.String name, java.lang.String description,
-		boolean mergeWithParentFolder,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		boolean mergeWithParentFolder)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.imagegallery.model.IGFolder returnValue = IGFolderServiceUtil.updateFolder(folderId,
-				parentFolderId, name, description, mergeWithParentFolder,
-				serviceContext);
+				parentFolderId, name, description, mergeWithParentFolder);
 
 		return IGFolderJSONSerializer.toJSONObject(returnValue);
 	}

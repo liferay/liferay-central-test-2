@@ -81,13 +81,10 @@ public class TagsVocabularyServiceUtil {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsVocabulary updateVocabulary(
-		long vocabularyId, java.lang.String name, boolean folksonomy,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		long vocabularyId, java.lang.String name, boolean folksonomy)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService()
-				   .updateVocabulary(vocabularyId, name, folksonomy,
-			serviceContext);
+		return getService().updateVocabulary(vocabularyId, name, folksonomy);
 	}
 
 	public static TagsVocabularyService getService() {

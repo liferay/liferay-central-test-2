@@ -44,7 +44,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.wiki.DuplicateNodeNameException;
 import com.liferay.portlet.wiki.NodeNameException;
 import com.liferay.portlet.wiki.importers.WikiImporter;
@@ -123,12 +122,6 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 				serviceContext.getGuestPermissions());
 		}
 
-		// Expando
-
-		ExpandoBridge expandoBridge = node.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
-
 		return node;
 	}
 
@@ -202,11 +195,6 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		// Pages
 
 		wikiPageLocalService.deletePages(node.getNodeId());
-
-		// Expando
-
-		expandoValueLocalService.deleteValues(
-			WikiNode.class.getName(), node.getNodeId());
 
 		// Resources
 
@@ -394,8 +382,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 			userId, WikiNode.class.getName(), nodeId);
 	}
 
-	public WikiNode updateNode(long nodeId, String name, String description,
-			ServiceContext serviceContext)
+	public WikiNode updateNode(long nodeId, String name, String description)
 		throws PortalException, SystemException {
 
 		WikiNode node = wikiNodePersistence.findByPrimaryKey(nodeId);
@@ -407,12 +394,6 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		node.setDescription(description);
 
 		wikiNodePersistence.update(node, false);
-
-		// Expando
-
-		ExpandoBridge expandoBridge = node.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
 
 		return node;
 	}

@@ -272,8 +272,7 @@ public class SCProductEntryServiceHttp {
 		java.lang.String pageURL, java.lang.String author,
 		java.lang.String repoGroupId, java.lang.String repoArtifactId,
 		long[] licenseIds, java.util.List<byte[]> thumbnails,
-		java.util.List<byte[]> fullImages,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		java.util.List<byte[]> fullImages)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -351,19 +350,12 @@ public class SCProductEntryServiceHttp {
 				paramObj12 = new NullWrapper("java.util.List");
 			}
 
-			Object paramObj13 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj13 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
 			MethodWrapper methodWrapper = new MethodWrapper(SCProductEntryServiceUtil.class.getName(),
 					"updateProductEntry",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13
+						paramObj10, paramObj11, paramObj12
 					});
 
 			Object returnObj = null;

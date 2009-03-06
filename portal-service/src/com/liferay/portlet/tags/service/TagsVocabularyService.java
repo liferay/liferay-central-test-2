@@ -83,8 +83,7 @@ public interface TagsVocabularyService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsVocabulary updateVocabulary(
-		long vocabularyId, java.lang.String name, boolean folksonomy,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		long vocabularyId, java.lang.String name, boolean folksonomy)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

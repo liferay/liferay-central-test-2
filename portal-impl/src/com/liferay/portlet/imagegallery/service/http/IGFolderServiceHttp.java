@@ -347,8 +347,7 @@ public class IGFolderServiceHttp {
 	public static com.liferay.portlet.imagegallery.model.IGFolder updateFolder(
 		HttpPrincipal httpPrincipal, long folderId, long parentFolderId,
 		java.lang.String name, java.lang.String description,
-		boolean mergeWithParentFolder,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		boolean mergeWithParentFolder)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -370,18 +369,10 @@ public class IGFolderServiceHttp {
 
 			Object paramObj4 = new BooleanWrapper(mergeWithParentFolder);
 
-			Object paramObj5 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj5 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
 			MethodWrapper methodWrapper = new MethodWrapper(IGFolderServiceUtil.class.getName(),
 					"updateFolder",
 					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
 					});
 
 			Object returnObj = null;

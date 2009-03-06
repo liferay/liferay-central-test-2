@@ -329,7 +329,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			else {
 				existingNode = WikiNodeLocalServiceUtil.updateNode(
 					existingNode.getNodeId(), node.getName(),
-					node.getDescription(), serviceContext);
+					node.getDescription());
 			}
 		}
 		else {

@@ -263,14 +263,13 @@ public class SCProductEntryLocalServiceUtil {
 		java.lang.String longDescription, java.lang.String pageURL,
 		java.lang.String author, java.lang.String repoGroupId,
 		java.lang.String repoArtifactId, long[] licenseIds,
-		java.util.List<byte[]> thumbnails, java.util.List<byte[]> fullImages,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		java.util.List<byte[]> thumbnails, java.util.List<byte[]> fullImages)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .updateProductEntry(productEntryId, name, type, tags,
 			shortDescription, longDescription, pageURL, author, repoGroupId,
-			repoArtifactId, licenseIds, thumbnails, fullImages, serviceContext);
+			repoArtifactId, licenseIds, thumbnails, fullImages);
 	}
 
 	public static SCProductEntryLocalService getService() {

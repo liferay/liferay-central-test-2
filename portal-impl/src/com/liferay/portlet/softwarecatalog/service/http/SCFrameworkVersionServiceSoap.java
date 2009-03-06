@@ -161,13 +161,11 @@ public class SCFrameworkVersionServiceSoap {
 
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionSoap updateFrameworkVersion(
 		long frameworkVersionId, java.lang.String name, java.lang.String url,
-		boolean active, int priority,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
+		boolean active, int priority) throws RemoteException {
 		try {
 			com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion returnValue =
 				SCFrameworkVersionServiceUtil.updateFrameworkVersion(frameworkVersionId,
-					name, url, active, priority, serviceContext);
+					name, url, active, priority);
 
 			return com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionSoap.toSoapModel(returnValue);
 		}

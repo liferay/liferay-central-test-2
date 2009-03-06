@@ -82,8 +82,7 @@ public class SCProductEntryServiceImpl extends SCProductEntryServiceBaseImpl {
 			long productEntryId, String name, String type, String tags,
 			String shortDescription, String longDescription, String pageURL,
 			String author, String repoGroupId, String repoArtifactId,
-			long[] licenseIds, List<byte[]> thumbnails, List<byte[]> fullImages,
-			ServiceContext serviceContext)
+			long[] licenseIds, List<byte[]> thumbnails, List<byte[]> fullImages)
 		throws PortalException, SystemException {
 
 		SCProductEntryPermission.check(
@@ -92,7 +91,7 @@ public class SCProductEntryServiceImpl extends SCProductEntryServiceBaseImpl {
 		return scProductEntryLocalService.updateProductEntry(
 			productEntryId, name, type, tags, shortDescription, longDescription,
 			pageURL, author, repoGroupId, repoArtifactId, licenseIds,
-			thumbnails, fullImages, serviceContext);
+			thumbnails, fullImages);
 	}
 
 }

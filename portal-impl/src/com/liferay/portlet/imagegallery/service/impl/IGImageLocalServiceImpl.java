@@ -44,7 +44,6 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.imagegallery.DuplicateImageNameException;
 import com.liferay.portlet.imagegallery.ImageNameException;
 import com.liferay.portlet.imagegallery.ImageSizeException;
@@ -208,12 +207,6 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 					serviceContext.getGuestPermissions());
 			}
 
-			// Expando
-
-			ExpandoBridge expandoBridge = image.getExpandoBridge();
-
-			expandoBridge.setAttributes(serviceContext);
-
 			// Tags
 
 			updateTagsAsset(userId, image, serviceContext.getTagsEntries());
@@ -320,11 +313,6 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		catch (SearchException se) {
 			_log.error("Deleting index " + image.getImageId(), se);
 		}
-
-		// Expando
-
-		expandoValueLocalService.deleteValues(
-			IGImage.class.getName(), image.getImageId());
 
 		// Tags
 
@@ -567,12 +555,6 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 					image.getSmallImageId(), image.getCustom1ImageId(),
 					image.getCustom2ImageId(), bytes, contentType);
 			}
-
-			// Expando
-
-			ExpandoBridge expandoBridge = image.getExpandoBridge();
-
-			expandoBridge.setAttributes(serviceContext);
 
 			// Tags
 

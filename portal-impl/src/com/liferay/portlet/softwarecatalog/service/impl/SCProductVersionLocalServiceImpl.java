@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.HttpImpl;
-import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.softwarecatalog.DuplicateProductVersionDirectDownloadURLException;
 import com.liferay.portlet.softwarecatalog.ProductVersionChangeLogException;
 import com.liferay.portlet.softwarecatalog.ProductVersionDownloadURLException;
@@ -102,12 +101,6 @@ public class SCProductVersionLocalServiceImpl
 
 		scProductVersionPersistence.update(productVersion, false);
 
-		// Expando
-
-		ExpandoBridge expandoBridge = productVersion.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
-
 		// Product entry
 
 		productEntry.setModifiedDate(now);
@@ -151,12 +144,6 @@ public class SCProductVersionLocalServiceImpl
 
 	public void deleteProductVersion(SCProductVersion productVersion)
 		throws SystemException {
-
-		// Expando
-
-		expandoValueLocalService.deleteValues(
-			SCProductVersion.class.getName(),
-			productVersion.getProductVersionId());
 
 		scProductVersionPersistence.remove(productVersion);
 	}
@@ -205,7 +192,7 @@ public class SCProductVersionLocalServiceImpl
 			long productVersionId, String version, String changeLog,
 			String downloadPageURL, String directDownloadURL,
 			boolean testDirectDownloadURL, boolean repoStoreArtifact,
-			long[] frameworkVersionIds, ServiceContext serviceContext)
+			long[] frameworkVersionIds)
 		throws PortalException, SystemException {
 
 		// Product version
@@ -228,12 +215,6 @@ public class SCProductVersionLocalServiceImpl
 		productVersion.setRepoStoreArtifact(repoStoreArtifact);
 
 		scProductVersionPersistence.update(productVersion, false);
-
-		// Expando
-
-		ExpandoBridge expandoBridge = productVersion.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
 
 		// Product entry
 

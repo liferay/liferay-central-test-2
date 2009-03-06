@@ -174,8 +174,7 @@ public class TagsVocabularyLocalServiceImpl
 	}
 
 	public TagsVocabulary updateVocabulary(
-			long vocabularyId, String name, boolean folksonomy,
-			ServiceContext serviceContext)
+			long vocabularyId, String name, boolean folksonomy)
 		throws PortalException, SystemException {
 
 		name = name.trim();

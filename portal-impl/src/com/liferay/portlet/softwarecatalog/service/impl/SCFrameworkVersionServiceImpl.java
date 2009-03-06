@@ -92,14 +92,14 @@ public class SCFrameworkVersionServiceImpl
 
 	public SCFrameworkVersion updateFrameworkVersion(
 			long frameworkVersionId, String name, String url, boolean active,
-			int priority, ServiceContext serviceContext)
+			int priority)
 		throws PortalException, SystemException {
 
 		SCFrameworkVersionPermission.check(
 			getPermissionChecker(), frameworkVersionId, ActionKeys.UPDATE);
 
 		return scFrameworkVersionLocalService.updateFrameworkVersion(
-			frameworkVersionId, name, url, active, priority, serviceContext);
+			frameworkVersionId, name, url, active, priority);
 	}
 
 }

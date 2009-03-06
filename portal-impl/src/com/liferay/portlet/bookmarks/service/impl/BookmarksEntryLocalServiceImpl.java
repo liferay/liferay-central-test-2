@@ -39,7 +39,6 @@ import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.base.BookmarksEntryLocalServiceBaseImpl;
 import com.liferay.portlet.bookmarks.util.Indexer;
-import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -117,12 +116,6 @@ public class BookmarksEntryLocalServiceImpl
 				folder, entry, serviceContext.getCommunityPermissions(),
 				serviceContext.getGuestPermissions());
 		}
-
-		// Expando
-
-		ExpandoBridge expandoBridge = entry.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
 
 		// Tags
 
@@ -226,11 +219,6 @@ public class BookmarksEntryLocalServiceImpl
 		catch (SearchException se) {
 			_log.error("Deleting index " + entry.getEntryId(), se);
 		}
-
-		// Expando
-
-		expandoValueLocalService.deleteValues(
-			BookmarksEntry.class.getName(), entry.getEntryId());
 
 		// Tags
 
@@ -391,12 +379,6 @@ public class BookmarksEntryLocalServiceImpl
 		entry.setComments(comments);
 
 		bookmarksEntryPersistence.update(entry, false);
-
-		// Expando
-
-		ExpandoBridge expandoBridge = entry.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
 
 		// Tags
 

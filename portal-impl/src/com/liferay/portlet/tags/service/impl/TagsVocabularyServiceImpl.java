@@ -94,15 +94,14 @@ public class TagsVocabularyServiceImpl extends TagsVocabularyServiceBaseImpl {
 	}
 
 	public TagsVocabulary updateVocabulary(
-			long vocabularyId, String name, boolean folksonomy,
-			ServiceContext serviceContext)
+			long vocabularyId, String name, boolean folksonomy)
 		throws PortalException, SystemException {
 
 		TagsVocabularyPermission.check(
 			getPermissionChecker(), vocabularyId, ActionKeys.UPDATE);
 
 		return tagsVocabularyLocalService.updateVocabulary(
-			vocabularyId, name, folksonomy, serviceContext);
+			vocabularyId, name, folksonomy);
 	}
 
 	protected List<TagsVocabulary> getVocabularies(

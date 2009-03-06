@@ -201,8 +201,7 @@ public class MBCategoryServiceSoap {
 		java.lang.String outEmailAddress, boolean outCustom,
 		java.lang.String outServerName, int outServerPort, boolean outUseSSL,
 		java.lang.String outUserName, java.lang.String outPassword,
-		boolean mailingListActive, boolean mergeWithParentCategory,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		boolean mailingListActive, boolean mergeWithParentCategory)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBCategory returnValue = MBCategoryServiceUtil.updateCategory(categoryId,
@@ -211,7 +210,7 @@ public class MBCategoryServiceSoap {
 					inUserName, inPassword, inReadInterval, outEmailAddress,
 					outCustom, outServerName, outServerPort, outUseSSL,
 					outUserName, outPassword, mailingListActive,
-					mergeWithParentCategory, serviceContext);
+					mergeWithParentCategory);
 
 			return com.liferay.portlet.messageboards.model.MBCategorySoap.toSoapModel(returnValue);
 		}

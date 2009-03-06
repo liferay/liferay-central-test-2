@@ -169,8 +169,7 @@ public class EditNodeAction extends PortletAction {
 
 			// Update node
 
-			WikiNodeServiceUtil.updateNode(
-				nodeId, name, description, serviceContext);
+			WikiNodeServiceUtil.updateNode(nodeId, name, description);
 		}
 	}
 

@@ -272,8 +272,7 @@ public class TagsVocabularyServiceHttp {
 
 	public static com.liferay.portlet.tags.model.TagsVocabulary updateVocabulary(
 		HttpPrincipal httpPrincipal, long vocabularyId, java.lang.String name,
-		boolean folksonomy,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		boolean folksonomy)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -287,16 +286,9 @@ public class TagsVocabularyServiceHttp {
 
 			Object paramObj2 = new BooleanWrapper(folksonomy);
 
-			Object paramObj3 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj3 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
 			MethodWrapper methodWrapper = new MethodWrapper(TagsVocabularyServiceUtil.class.getName(),
 					"updateVocabulary",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			Object returnObj = null;
 

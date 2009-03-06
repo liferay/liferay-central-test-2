@@ -236,13 +236,11 @@ public class TagsEntryServiceSoap {
 
 	public static com.liferay.portlet.tags.model.TagsEntrySoap updateEntry(
 		long entryId, java.lang.String parentEntryName, java.lang.String name,
-		java.lang.String vocabularyName, java.lang.String[] properties,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		java.lang.String vocabularyName, java.lang.String[] properties)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.updateEntry(entryId,
-					parentEntryName, name, vocabularyName, properties,
-					serviceContext);
+					parentEntryName, name, vocabularyName, properties);
 
 			return com.liferay.portlet.tags.model.TagsEntrySoap.toSoapModel(returnValue);
 		}

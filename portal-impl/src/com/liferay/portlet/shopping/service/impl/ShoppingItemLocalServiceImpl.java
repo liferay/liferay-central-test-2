@@ -38,7 +38,6 @@ import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.amazonrankings.model.AmazonRankings;
 import com.liferay.portlet.amazonrankings.util.AmazonRankingsUtil;
-import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.shopping.DuplicateItemSKUException;
 import com.liferay.portlet.shopping.ItemLargeImageNameException;
 import com.liferay.portlet.shopping.ItemLargeImageSizeException;
@@ -229,12 +228,6 @@ public class ShoppingItemLocalServiceImpl
 				serviceContext.getGuestPermissions());
 		}
 
-		// Expando
-
-		ExpandoBridge expandoBridge = item.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
-
 		return item;
 	}
 
@@ -308,11 +301,6 @@ public class ShoppingItemLocalServiceImpl
 		imageLocalService.deleteImage(item.getSmallImageId());
 		imageLocalService.deleteImage(item.getMediumImageId());
 		imageLocalService.deleteImage(item.getLargeImageId());
-
-		// Expando
-
-		expandoValueLocalService.deleteValues(
-			ShoppingItem.class.getName(), item.getItemId());
 
 		// Resources
 
@@ -588,12 +576,6 @@ public class ShoppingItemLocalServiceImpl
 			smallImage, item.getSmallImageId(), smallFile, smallBytes,
 			mediumImage, item.getMediumImageId(), mediumFile, mediumBytes,
 			largeImage, item.getLargeImageId(), largeFile, largeBytes);
-
-		// Expando
-
-		ExpandoBridge expandoBridge = item.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
 
 		return item;
 	}

@@ -330,13 +330,12 @@ public class TagsEntryLocalServiceUtil {
 	public static com.liferay.portlet.tags.model.TagsEntry updateEntry(
 		long userId, long entryId, java.lang.String parentEntryName,
 		java.lang.String name, java.lang.String vocabularyName,
-		java.lang.String[] properties,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		java.lang.String[] properties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .updateEntry(userId, entryId, parentEntryName, name,
-			vocabularyName, properties, serviceContext);
+			vocabularyName, properties);
 	}
 
 	public static TagsEntryLocalService getService() {

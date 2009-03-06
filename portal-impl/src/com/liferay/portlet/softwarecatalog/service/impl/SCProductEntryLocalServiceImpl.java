@@ -47,7 +47,6 @@ import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.plugin.ModuleId;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.softwarecatalog.DuplicateProductEntryModuleIdException;
 import com.liferay.portlet.softwarecatalog.ProductEntryAuthorException;
 import com.liferay.portlet.softwarecatalog.ProductEntryLicenseException;
@@ -144,12 +143,6 @@ public class SCProductEntryLocalServiceImpl
 				productEntry, serviceContext.getCommunityPermissions(),
 				serviceContext.getGuestPermissions());
 		}
-
-		// Expando
-
-		ExpandoBridge expandoBridge = productEntry.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
 
 		// Licenses
 
@@ -275,11 +268,6 @@ public class SCProductEntryLocalServiceImpl
 		// Message boards
 
 		mbMessageLocalService.deleteDiscussionMessages(
-			SCProductEntry.class.getName(), productEntry.getProductEntryId());
-
-		// Expando
-
-		expandoValueLocalService.deleteValues(
 			SCProductEntry.class.getName(), productEntry.getProductEntryId());
 
 		// Resources
@@ -546,8 +534,7 @@ public class SCProductEntryLocalServiceImpl
 			long productEntryId, String name, String type, String tags,
 			String shortDescription, String longDescription, String pageURL,
 			String author, String repoGroupId, String repoArtifactId,
-			long[] licenseIds, List<byte[]> thumbnails, List<byte[]> fullImages,
-			ServiceContext serviceContext)
+			long[] licenseIds, List<byte[]> thumbnails, List<byte[]> fullImages)
 		throws PortalException, SystemException {
 
 		// Product entry
@@ -576,12 +563,6 @@ public class SCProductEntryLocalServiceImpl
 		productEntry.setRepoArtifactId(repoArtifactId);
 
 		scProductEntryPersistence.update(productEntry, false);
-
-		// Expando
-
-		ExpandoBridge expandoBridge = productEntry.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
 
 		// Licenses
 

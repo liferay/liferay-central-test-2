@@ -121,12 +121,11 @@ public class TagsVocabularyServiceJSON {
 	}
 
 	public static JSONObject updateVocabulary(long vocabularyId,
-		java.lang.String name, boolean folksonomy,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		java.lang.String name, boolean folksonomy)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.tags.model.TagsVocabulary returnValue = TagsVocabularyServiceUtil.updateVocabulary(vocabularyId,
-				name, folksonomy, serviceContext);
+				name, folksonomy);
 
 		return TagsVocabularyJSONSerializer.toJSONObject(returnValue);
 	}

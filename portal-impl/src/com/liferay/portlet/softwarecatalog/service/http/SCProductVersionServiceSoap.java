@@ -165,15 +165,14 @@ public class SCProductVersionServiceSoap {
 		long productVersionId, java.lang.String version,
 		java.lang.String changeLog, java.lang.String downloadPageURL,
 		java.lang.String directDownloadURL, boolean testDirectDownloadURL,
-		boolean repoStoreArtifact, long[] frameworkVersionIds,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		boolean repoStoreArtifact, long[] frameworkVersionIds)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.softwarecatalog.model.SCProductVersion returnValue =
 				SCProductVersionServiceUtil.updateProductVersion(productVersionId,
 					version, changeLog, downloadPageURL, directDownloadURL,
 					testDirectDownloadURL, repoStoreArtifact,
-					frameworkVersionIds, serviceContext);
+					frameworkVersionIds);
 
 			return com.liferay.portlet.softwarecatalog.model.SCProductVersionSoap.toSoapModel(returnValue);
 		}

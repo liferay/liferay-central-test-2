@@ -89,8 +89,7 @@ public interface WikiNodeService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.wiki.model.WikiNode updateNode(long nodeId,
-		java.lang.String name, java.lang.String description,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

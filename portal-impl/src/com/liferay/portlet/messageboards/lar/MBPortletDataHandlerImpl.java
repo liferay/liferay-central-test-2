@@ -529,8 +529,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 							inServerPort, inUseSSL, inUserName, inPassword,
 							inReadInterval, outEmailAddress, outCustom,
 							outServerName, outServerPort, outUseSSL,
-							outUserName, outPassword, mailingListActive, false,
-							serviceContext);
+							outUserName, outPassword, mailingListActive, false);
 				}
 			}
 			else {

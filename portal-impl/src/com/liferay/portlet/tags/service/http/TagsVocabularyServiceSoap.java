@@ -157,12 +157,11 @@ public class TagsVocabularyServiceSoap {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsVocabularySoap updateVocabulary(
-		long vocabularyId, java.lang.String name, boolean folksonomy,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		long vocabularyId, java.lang.String name, boolean folksonomy)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.tags.model.TagsVocabulary returnValue = TagsVocabularyServiceUtil.updateVocabulary(vocabularyId,
-					name, folksonomy, serviceContext);
+					name, folksonomy);
 
 			return com.liferay.portlet.tags.model.TagsVocabularySoap.toSoapModel(returnValue);
 		}

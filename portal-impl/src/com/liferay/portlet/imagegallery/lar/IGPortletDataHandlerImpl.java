@@ -161,8 +161,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 				else {
 					existingFolder = IGFolderLocalServiceUtil.updateFolder(
 						existingFolder.getFolderId(), parentFolderId,
-						folder.getName(), folder.getDescription(), false,
-						serviceContext);
+						folder.getName(), folder.getDescription(), false);
 				}
 			}
 			else {

@@ -175,13 +175,11 @@ public class IGFolderServiceSoap {
 
 	public static com.liferay.portlet.imagegallery.model.IGFolderSoap updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,
-		java.lang.String description, boolean mergeWithParentFolder,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		java.lang.String description, boolean mergeWithParentFolder)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.imagegallery.model.IGFolder returnValue = IGFolderServiceUtil.updateFolder(folderId,
-					parentFolderId, name, description, mergeWithParentFolder,
-					serviceContext);
+					parentFolderId, name, description, mergeWithParentFolder);
 
 			return com.liferay.portlet.imagegallery.model.IGFolderSoap.toSoapModel(returnValue);
 		}

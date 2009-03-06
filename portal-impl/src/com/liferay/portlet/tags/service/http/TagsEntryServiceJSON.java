@@ -166,13 +166,11 @@ public class TagsEntryServiceJSON {
 
 	public static JSONObject updateEntry(long entryId,
 		java.lang.String parentEntryName, java.lang.String name,
-		java.lang.String vocabularyName, java.lang.String[] properties,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		java.lang.String vocabularyName, java.lang.String[] properties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.updateEntry(entryId,
-				parentEntryName, name, vocabularyName, properties,
-				serviceContext);
+				parentEntryName, name, vocabularyName, properties);
 
 		return TagsEntryJSONSerializer.toJSONObject(returnValue);
 	}

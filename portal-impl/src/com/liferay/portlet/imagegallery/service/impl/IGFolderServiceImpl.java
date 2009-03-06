@@ -135,15 +135,14 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 
 	public IGFolder updateFolder(
 			long folderId, long parentFolderId, String name, String description,
-			boolean mergeWithParentFolder, ServiceContext serviceContext)
+			boolean mergeWithParentFolder)
 		throws PortalException, SystemException {
 
 		IGFolderPermission.check(
 			getPermissionChecker(), folderId, ActionKeys.UPDATE);
 
 		return igFolderLocalService.updateFolder(
-			folderId, parentFolderId, name, description, mergeWithParentFolder,
-			serviceContext);
+			folderId, parentFolderId, name, description, mergeWithParentFolder);
 	}
 
 	protected void copyFolder(

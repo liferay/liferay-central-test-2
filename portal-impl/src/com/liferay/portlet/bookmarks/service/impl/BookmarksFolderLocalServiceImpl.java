@@ -46,7 +46,6 @@ import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
 import com.liferay.portlet.bookmarks.service.base.BookmarksFolderLocalServiceBaseImpl;
 import com.liferay.portlet.bookmarks.util.Indexer;
-import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -100,12 +99,6 @@ public class BookmarksFolderLocalServiceImpl
 		folder.setDescription(description);
 
 		bookmarksFolderPersistence.update(folder, false);
-
-		// Expando
-
-		ExpandoBridge expandoBridge = folder.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
 
 		// Resources
 
@@ -194,11 +187,6 @@ public class BookmarksFolderLocalServiceImpl
 		// Entries
 
 		bookmarksEntryLocalService.deleteEntries(folder.getFolderId());
-
-		// Expando
-
-		expandoValueLocalService.deleteValues(
-			BookmarksEntry.class.getName(), folder.getFolderId());
 
 		// Resources
 
@@ -368,8 +356,8 @@ public class BookmarksFolderLocalServiceImpl
 	}
 
 	public BookmarksFolder updateFolder(
-			long folderId, long parentFolderId, String name, String description,
-			boolean mergeWithParentFolder, ServiceContext serviceContext)
+			long folderId, long parentFolderId, String name,
+			String description, boolean mergeWithParentFolder)
 		throws PortalException, SystemException {
 
 		// Folder
@@ -395,12 +383,6 @@ public class BookmarksFolderLocalServiceImpl
 
 			mergeFolders(folder, parentFolderId);
 		}
-
-		// Expando
-
-		ExpandoBridge expandoBridge = folder.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
 
 		return folder;
 	}

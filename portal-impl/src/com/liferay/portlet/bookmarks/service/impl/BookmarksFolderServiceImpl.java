@@ -70,16 +70,15 @@ public class BookmarksFolderServiceImpl extends BookmarksFolderServiceBaseImpl {
 	}
 
 	public BookmarksFolder updateFolder(
-			long folderId, long parentFolderId, String name, String description,
-			boolean mergeWithParentFolder, ServiceContext serviceContext)
+			long folderId, long parentFolderId, String name,
+			String description, boolean mergeWithParentFolder)
 		throws PortalException, SystemException {
 
 		BookmarksFolderPermission.check(
 			getPermissionChecker(), folderId, ActionKeys.UPDATE);
 
 		return bookmarksFolderLocalService.updateFolder(
-			folderId, parentFolderId, name, description, mergeWithParentFolder,
-			serviceContext);
+			folderId, parentFolderId, name, description, mergeWithParentFolder);
 	}
 
 }
