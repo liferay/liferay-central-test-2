@@ -295,6 +295,9 @@ public class PortletRequestUtil {
 			}
 		}
 		catch (IllegalStateException ise) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(ise.getMessage());
+			}
 		}
 
 		try {
