@@ -313,52 +313,66 @@ public class PortletRequestUtil {
 
 		DocUtil.add(reqEl, "portlet-namespace", namespace);
 
-		PortletURL actionUrl = mimeResponse.createActionURL();
-
-		DocUtil.add(reqEl, "action-url", actionUrl);
-
-		PortletURL renderUrl = mimeResponse.createRenderURL();
-
-		DocUtil.add(reqEl, "render-url", renderUrl);
-
 		try {
-			renderUrl.setWindowState(LiferayWindowState.EXCLUSIVE);
+			PortletURL actionUrl = mimeResponse.createActionURL();
 
-			DocUtil.add(reqEl, "render-url-exclusive", renderUrl);
+			DocUtil.add(reqEl, "action-url", actionUrl);
 		}
-		catch (WindowStateException wse) {
+		catch (IllegalStateException ise) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(ise.getMessage());
+			}
 		}
 
 		try {
-			renderUrl.setWindowState(LiferayWindowState.MAXIMIZED);
+			PortletURL renderUrl = mimeResponse.createRenderURL();
 
-			DocUtil.add(reqEl, "render-url-maximized", renderUrl);
-		}
-		catch (WindowStateException wse) {
-		}
+			DocUtil.add(reqEl, "render-url", renderUrl);
 
-		try {
-			renderUrl.setWindowState(LiferayWindowState.MINIMIZED);
+			try {
+				renderUrl.setWindowState(LiferayWindowState.EXCLUSIVE);
 
-			DocUtil.add(reqEl, "render-url-minimized", renderUrl);
-		}
-		catch (WindowStateException wse) {
-		}
+				DocUtil.add(reqEl, "render-url-exclusive", renderUrl);
+			}
+			catch (WindowStateException wse) {
+			}
 
-		try {
-			renderUrl.setWindowState(LiferayWindowState.NORMAL);
+			try {
+				renderUrl.setWindowState(LiferayWindowState.MAXIMIZED);
 
-			DocUtil.add(reqEl, "render-url-normal", renderUrl);
-		}
-		catch (WindowStateException wse) {
-		}
+				DocUtil.add(reqEl, "render-url-maximized", renderUrl);
+			}
+			catch (WindowStateException wse) {
+			}
 
-		try {
-			renderUrl.setWindowState(LiferayWindowState.POP_UP);
+			try {
+				renderUrl.setWindowState(LiferayWindowState.MINIMIZED);
 
-			DocUtil.add(reqEl, "render-url-pop-up", renderUrl);
+				DocUtil.add(reqEl, "render-url-minimized", renderUrl);
+			}
+			catch (WindowStateException wse) {
+			}
+
+			try {
+				renderUrl.setWindowState(LiferayWindowState.NORMAL);
+
+				DocUtil.add(reqEl, "render-url-normal", renderUrl);
+			}
+			catch (WindowStateException wse) {
+			}
+
+			try {
+				renderUrl.setWindowState(LiferayWindowState.POP_UP);
+
+				DocUtil.add(reqEl, "render-url-pop-up", renderUrl);
+			}
+			catch (WindowStateException wse) {
+			}
 		}
-		catch (WindowStateException wse) {
+		catch (IllegalStateException ise) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(ise.getMessage());
+			}
 		}
 
 		ResourceURL resourceURL = mimeResponse.createResourceURL();
