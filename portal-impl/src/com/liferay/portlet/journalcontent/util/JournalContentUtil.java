@@ -189,11 +189,11 @@ public class JournalContentUtil {
 		if (_log.isDebugEnabled()) {
 			StringBuilder sb = new StringBuilder();
 
-			sb.append("lifecycle {action: ");
+			sb.append("Lifecycle {action=");
 			sb.append(themeDisplay.isLifecycleAction());
-			sb.append(", render: ");
+			sb.append(", render=");
 			sb.append(themeDisplay.isLifecycleRender());
-			sb.append(", resource: ");
+			sb.append(", resource=");
 			sb.append(themeDisplay.isLifecycleResource());
 			sb.append("}");
 
