@@ -216,8 +216,9 @@ public class StripFilter extends BasePortalFilter {
 
 						state = _STATE_FOUND_ELEMENT;
 					}
-					else if (hasMarker(oldByteArray, i, _MARKER_SCRIPT_OPEN) ||
-						hasMarker(oldByteArray, i, _MARKER_JAVASCRIPT_OPEN)) {
+					else if (hasMarker(
+								oldByteArray, i, _MARKER_JAVASCRIPT_OPEN) ||
+							 hasMarker(oldByteArray, i, _MARKER_SCRIPT_OPEN)) {
 
 						state = _STATE_MINIFY_SCRIPT;
 					}
@@ -241,8 +242,9 @@ public class StripFilter extends BasePortalFilter {
 
 						scriptBytes = new ByteArrayMaker();
 
-						scriptContent = scriptContent.substring(
-							scriptContent.indexOf('>') + 1).trim();
+						int pos = scriptContent.indexOf(CharPool.GREATER_THAN);
+
+						scriptContent = scriptContent.substring(pos + 1).trim();
 
 						if (Validator.isNull(scriptContent)) {
 							i += _MARKER_SCRIPT_CLOSE.length;
@@ -407,8 +409,7 @@ public class StripFilter extends BasePortalFilter {
 
 	private static final char[] _MARKER_PRE_OPEN = "pre>".toCharArray();
 
-	private static final char[] _MARKER_SCRIPT_OPEN =
-		"script>".toCharArray();
+	private static final char[] _MARKER_SCRIPT_OPEN = "script>".toCharArray();
 
 	private static final char[] _MARKER_SCRIPT_CLOSE = "/script>".toCharArray();
 
