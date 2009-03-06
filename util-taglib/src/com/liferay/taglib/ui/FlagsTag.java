@@ -44,6 +44,8 @@ public class FlagsTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-ui:flags:userId", String.valueOf(_userId));
 		request.setAttribute("liferay-ui:flags:title", _title);
+		request.setAttribute("liferay-ui:flags:message", _message);
+		request.setAttribute("liferay-ui:flags:label", String.valueOf(_label));
 
 		return EVAL_BODY_BUFFERED;
 	}
@@ -64,6 +66,14 @@ public class FlagsTag extends IncludeTag {
 		_title = title;
 	}
 
+	public void setMessage(String message) {
+		_message = message;
+	}
+
+	public void setLabel(boolean label) {
+		_label = label;
+	}
+
 	protected String getDefaultPage() {
 		return _PAGE;
 	}
@@ -74,5 +84,7 @@ public class FlagsTag extends IncludeTag {
 	private long _classPK;
 	private long _userId;
 	private String _title;
+	private String _message;
+	private boolean _label = true;
 
 }
