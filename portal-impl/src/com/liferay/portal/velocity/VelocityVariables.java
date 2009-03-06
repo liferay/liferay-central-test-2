@@ -73,7 +73,7 @@ import com.liferay.portlet.expando.service.ExpandoColumnLocalService;
 import com.liferay.portlet.expando.service.ExpandoRowLocalService;
 import com.liferay.portlet.expando.service.ExpandoTableLocalService;
 import com.liferay.portlet.expando.service.ExpandoValueLocalService;
-import com.liferay.portlet.journalcontent.util.JournalContentUtil;
+import com.liferay.portlet.journalcontent.util.JournalContentUtil_IW;
 import com.liferay.util.portlet.PortletRequestUtil;
 
 import java.util.List;
@@ -186,7 +186,7 @@ public class VelocityVariables {
 		// Journal content util
 
 		velocityContext.put(
-			"journalContentUtil", JournalContentUtil.getJournalContent());
+			"journalContentUtil", JournalContentUtil_IW.getInstance());
 
 		// Language util
 
