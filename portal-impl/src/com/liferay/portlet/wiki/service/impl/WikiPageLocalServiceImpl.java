@@ -1341,10 +1341,14 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 	protected void validate(
 			String title, long nodeId, String content, String format)
-		throws PortalException {
+		throws PortalException, SystemException {
 
 		if (Validator.isNull(title)) {
 			throw new PageTitleException();
+		}
+
+		if (isUsedTitle(nodeId, title)) {
+			throw new DuplicatePageException();
 		}
 
 		validateTitle(title);

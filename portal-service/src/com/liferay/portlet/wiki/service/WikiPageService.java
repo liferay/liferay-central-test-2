@@ -61,6 +61,14 @@ public interface WikiPageService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.wiki.model.WikiPage addPage(long nodeId,
+		java.lang.String title, java.lang.String content,
+		java.lang.String summary, boolean minorEdit, java.lang.String format,
+		java.lang.String parentTitle, java.lang.String redirectTitle,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public void addPageAttachments(long nodeId, java.lang.String title,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files)
 		throws com.liferay.portal.PortalException,
