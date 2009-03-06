@@ -171,6 +171,12 @@ if (layout != null) {
 	</style>
 </c:if>
 
+<c:if test="<%= (layout != null) && Validator.isNotNull(layout.getCssText()) %>">
+	<style type="text/css">
+		<%= layout.getCssText() %>
+	</style>
+</c:if>
+
 <%@ include file="/html/common/themes/top_js.jspf" %>
 <%@ include file="/html/common/themes/top_js-ext.jspf" %>
 
