@@ -186,13 +186,34 @@ public class JournalContentUtil {
 		JournalArticleDisplay articleDisplay =
 			(JournalArticleDisplay)MultiVMPoolUtil.get(cache, key);
 
-		if ((articleDisplay == null) || (!themeDisplay.isLifecycleRender())) {
+		if (_log.isDebugEnabled()) {
+			StringBuilder sb = new StringBuilder();
+
+			sb.append("lifecycle {action: ");
+			sb.append(themeDisplay.isLifecycleAction());
+			sb.append(", render: ");
+			sb.append(themeDisplay.isLifecycleRender());
+			sb.append(", resource: ");
+			sb.append(themeDisplay.isLifecycleResource());
+			sb.append("}");
+
+			_log.debug(sb.toString());
+		}
+
+		if ((articleDisplay == null) || (themeDisplay.isLifecycleAction()) ||
+			(themeDisplay.isLifecycleResource())) {
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Not cached");
+			}
+
 			articleDisplay = getArticleDisplay(
 				groupId, articleId, templateId, viewMode, languageId, page,
 				xmlRequest, themeDisplay);
 
 			if ((articleDisplay != null) && (articleDisplay.isCacheable()) &&
-				(themeDisplay.isLifecycleRender())) {
+				(!themeDisplay.isLifecycleAction()) &&
+				(!themeDisplay.isLifecycleResource())) {
 
 				MultiVMPoolUtil.put(cache, key, articleDisplay);
 			}
