@@ -61,6 +61,16 @@ while (itr1.hasNext()) {
 	}
 }
 
+List<Portlet> alwaysExportablePortlets = LayoutExporter.getAlwaysExportablePortlets(company.getCompanyId());
+
+for (Portlet alwaysExportablePortlet : alwaysExportablePortlets) {
+	if (!portletIdsSet.contains(alwaysExportablePortlet.getRootPortletId())) {
+		portletIdsSet.add(alwaysExportablePortlet.getRootPortletId());
+
+		portletsList.add(alwaysExportablePortlet);
+	}
+}
+
 portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(application, locale));
 %>
 
