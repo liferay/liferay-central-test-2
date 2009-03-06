@@ -87,5 +87,5 @@ public class EditFlagsEntryAction extends PortletAction {
 		return mapping.findForward(
 			getForward(renderRequest, "portlet.flags.edit_flags_entry"));
 	}
-	
+
 }

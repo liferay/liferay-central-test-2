@@ -493,6 +493,18 @@
 		<property name="service" ref="com.liferay.portlet.expando.service.ExpandoValueService.impl" />
 		<property name="serviceInterface" value="com.liferay.portlet.expando.service.ExpandoValueService" />
 	</bean>
+	<bean name="/com_liferay_portlet_flags_service_spring_FlagsEntryService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.flags.service.FlagsEntryService.impl" />
+		<property name="serviceInterface" value="com.liferay.portlet.flags.service.FlagsEntryService" />
+	</bean>
+	<bean name="/com_liferay_portlet_flags_service_spring_FlagsEntryService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.flags.service.FlagsEntryService.impl" />
+		<property name="serviceInterface" value="com.liferay.portlet.flags.service.FlagsEntryService" />
+	</bean>
+	<bean name="/com_liferay_portlet_flags_service_spring_FlagsEntryService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.flags.service.FlagsEntryService.impl" />
+		<property name="serviceInterface" value="com.liferay.portlet.flags.service.FlagsEntryService" />
+	</bean>
 	<bean name="/com_liferay_portlet_imagegallery_service_spring_IGFolderService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portlet.imagegallery.service.IGFolderService.impl" />
 		<property name="serviceInterface" value="com.liferay.portlet.imagegallery.service.IGFolderService" />
@@ -864,17 +876,5 @@
 	<bean name="/com_liferay_portlet_wiki_service_spring_WikiPageService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
 		<property name="service" ref="com.liferay.portlet.wiki.service.WikiPageService.impl" />
 		<property name="serviceInterface" value="com.liferay.portlet.wiki.service.WikiPageService" />
-	</bean>
-	<bean name="/com_liferay_portlet_flags_service_spring_FlagsEntryService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.flags.service.FlagsEntryService.impl" />
-		<property name="serviceInterface" value="com.liferay.portlet.flags.service.FlagsEntryService" />
-	</bean>
-	<bean name="/com_liferay_portlet_flags_service_spring_FlagsEntryService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.flags.service.FlagsEntryService.impl" />
-		<property name="serviceInterface" value="com.liferay.portlet.flags.service.FlagsEntryService" />
-	</bean>
-	<bean name="/com_liferay_portlet_flags_service_spring_FlagsEntryService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.flags.service.FlagsEntryService.impl" />
-		<property name="serviceInterface" value="com.liferay.portlet.flags.service.FlagsEntryService" />
 	</bean>
 </beans>
