@@ -1,1 +1,1 @@
-insert into Resource_ (resourceId, codeId, primKey) values (${resourceId}, ${codeId}, '${primKey}');
+insert into Resource_ (resourceId, codeId, primKey) values (${resource.resourceId}, ${resource.codeId}, '${resource.primKey}');

@@ -1,1 +1,1 @@
-insert into Permission_ (permissionId, companyId, actionId, resourceId) values (${permissionId}, ${companyId}, '${actionId}', ${resourceId});
+insert into Permission_ (permissionId, companyId, actionId, resourceId) values (${permission.permissionId}, ${companyId}, '${permission.actionId}', ${permission.resourceId});

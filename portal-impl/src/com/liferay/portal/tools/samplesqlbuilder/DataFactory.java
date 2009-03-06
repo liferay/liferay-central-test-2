@@ -1,0 +1,554 @@
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.liferay.portal.tools.samplesqlbuilder;
+
+import com.liferay.counter.model.Counter;
+import com.liferay.portal.kernel.util.IntegerWrapper;
+import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.model.ClassName;
+import com.liferay.portal.model.Company;
+import com.liferay.portal.model.Contact;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
+import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.ModelHintsUtil;
+import com.liferay.portal.model.Permission;
+import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.ResourceCode;
+import com.liferay.portal.model.ResourceConstants;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleConstants;
+import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.ClassNameImpl;
+import com.liferay.portal.model.impl.CompanyImpl;
+import com.liferay.portal.model.impl.ContactImpl;
+import com.liferay.portal.model.impl.GroupImpl;
+import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.model.impl.LayoutTypePortletImpl;
+import com.liferay.portal.model.impl.ResourceCodeImpl;
+import com.liferay.portal.model.impl.RoleImpl;
+import com.liferay.portal.model.impl.UserImpl;
+import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.MBThread;
+import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
+import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
+import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
+import com.liferay.util.SimpleCounter;
+
+import java.io.File;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+/**
+ * <a href="DataFactory.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class DataFactory {
+
+	public DataFactory(
+		SimpleCounter counter, SimpleCounter permissionCounter,
+		SimpleCounter resourceCounter, SimpleCounter resourceCodeCounter) {
+
+		try {
+			_counter = counter;
+			_permissionCounter = permissionCounter;
+			_resourceCounter = resourceCounter;
+			_resourceCodeCounter = resourceCodeCounter;
+
+			initClassNames();
+			initCompany();
+			initDefaultUser();
+			initGroups();
+			initResourceCodes();
+			initRoles();
+			initUserNames();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public Contact addContact(String firstName, String lastName)
+		throws Exception {
+
+		Contact contact = new ContactImpl();
+
+		contact.setContactId(_counter.get());
+		contact.setAccountId(_company.getAccountId());
+		contact.setFirstName(firstName);
+		contact.setLastName(lastName);
+
+		return contact;
+	}
+
+	public Group addGroup(
+			long classNameId, long classPK, String name, String friendlyURL)
+		throws Exception {
+
+		Group group = new GroupImpl();
+
+		group.setGroupId(_counter.get());
+		group.setClassNameId(classNameId);
+		group.setClassPK(classPK);
+		group.setName(name);
+		group.setFriendlyURL(friendlyURL);
+
+		return group;
+	}
+
+	public Layout addLayout(
+			int layoutId, String name, String friendlyURL, String column1,
+			String column2)
+		throws Exception {
+
+		Layout layout = new LayoutImpl();
+
+		layout.setPlid(_counter.get());
+		layout.setPrivateLayout(false);
+		layout.setLayoutId(layoutId);
+		layout.setName(name);
+		layout.setFriendlyURL(friendlyURL);
+
+		UnicodeProperties typeSettingsProperties = new UnicodeProperties(true);
+
+		typeSettingsProperties.setProperty(
+			LayoutTypePortletImpl.LAYOUT_TEMPLATE_ID, "2_columns_ii");
+		typeSettingsProperties.setProperty("column-1", column1);
+		typeSettingsProperties.setProperty("column-2", column2);
+
+		String typeSettings = StringUtil.replace(
+			typeSettingsProperties.toString(), "\n", "\\n");
+
+		layout.setTypeSettings(typeSettings);
+
+		return layout;
+	}
+
+	public MBCategory addMBCategory(
+			long groupId, long userId, String name, String description)
+		throws Exception {
+
+		MBCategory mbCategory = new MBCategoryImpl();
+
+		mbCategory.setCategoryId(_counter.get());
+		mbCategory.setGroupId(groupId);
+		mbCategory.setUserId(userId);
+		mbCategory.setName(name);
+		mbCategory.setDescription(description);
+
+		return mbCategory;
+	}
+
+	public MBMessage addMBMessage(
+			long userId, long categoryId, long threadId, String subject,
+			String body)
+		throws Exception {
+
+		MBMessage mbMessage = new MBMessageImpl();
+
+		mbMessage.setMessageId(_counter.get());
+		mbMessage.setUserId(userId);
+		mbMessage.setCategoryId(categoryId);
+		mbMessage.setThreadId(threadId);
+		mbMessage.setSubject(subject);
+		mbMessage.setBody(body);
+
+		return mbMessage;
+	}
+
+	public MBThread addMBThread(
+			long threadId, long categoryId, long rootMessageId,
+			int messageCount, long lastPostByUserId)
+		throws Exception {
+
+		MBThread mbThread = new MBThreadImpl();
+
+		mbThread.setThreadId(threadId);
+		mbThread.setCategoryId(categoryId);
+		mbThread.setRootMessageId(rootMessageId);
+		mbThread.setMessageCount(messageCount);
+		mbThread.setLastPostByUserId(lastPostByUserId);
+
+		return mbThread;
+	}
+
+	public User addUser(boolean defaultUser, Contact contact)
+		throws Exception {
+
+		User user = new UserImpl();
+
+		user.setUserId(_counter.get());
+		user.setDefaultUser(defaultUser);
+		user.setScreenName(String.valueOf(user.getUserId()));
+
+		String emailAddress = "@liferay.com";
+
+		if (defaultUser) {
+			emailAddress = "default" + emailAddress;
+		}
+		else {
+			emailAddress =
+				contact.getFirstName() + contact.getLastName() + emailAddress;
+			emailAddress = emailAddress.toLowerCase();
+		}
+
+		user.setEmailAddress(emailAddress);
+
+		return user;
+	}
+
+	public Role getAdministratorRole() {
+		return _administratorRole;
+	}
+
+	public List<ClassName> getClassNames() {
+		return _classNames;
+	}
+
+	public Company getCompany() {
+		return _company;
+	}
+
+	public List<Counter> getCounters() {
+		return _counters;
+	}
+
+	public User getDefaultUser() {
+		return _defaultUser;
+	}
+
+	public List<Group> getGroups() {
+		return _groups;
+	}
+
+	public Group getGuestGroup() {
+		return _guestGroup;
+	}
+
+	public Role getGuestRole() {
+		return _guestRole;
+	}
+
+	public Role getPowerUserRole() {
+		return _powerUserRole;
+	}
+
+	public List<ResourceCode> getResourceCodes() {
+		return _resourceCodes;
+	}
+
+	public List<Role> getRoles() {
+		return _roles;
+	}
+
+	public ClassName getUserClassName() {
+		return _userClassName;
+	}
+
+	public Object[] getUserNames() {
+		return _userNames;
+	}
+
+	public Role getUserRole() {
+		return _userRole;
+	}
+
+	public void initClassNames() throws Exception {
+		if (_classNames != null) {
+			return;
+		}
+
+		_classNames = new ArrayList<ClassName>();
+
+		List<String> models = ModelHintsUtil.getModels();
+
+		for (String model : models) {
+			ClassName className = new ClassNameImpl();
+
+			className.setClassNameId(_counter.get());
+			className.setValue(model);
+
+			_classNames.add(className);
+
+			if (model.equals(User.class.getName())) {
+				_userClassName = className;
+			}
+		}
+	}
+
+	public void initCompany() throws Exception {
+		_company = new CompanyImpl();
+
+		_company.setCompanyId(_counter.get());
+		_company.setAccountId(_counter.get());
+	}
+
+	public void initCounters() throws Exception {
+		if (_counters != null) {
+			return;
+		}
+
+		_counters = new ArrayList<Counter>();
+
+		// Counter
+
+		Counter counter = new Counter();
+
+		counter.setName(Counter.class.getName());
+		counter.setCurrentId(_counter.get());
+
+		_counters.add(counter);
+
+		// Permission
+
+		counter = new Counter();
+
+		counter.setName(Permission.class.getName());
+		counter.setCurrentId(_permissionCounter.get());
+
+		_counters.add(counter);
+
+		// Resource
+
+		counter = new Counter();
+
+		counter.setName(Resource.class.getName());
+		counter.setCurrentId(_resourceCounter.get());
+
+		_counters.add(counter);
+
+		// ResourceCode
+
+		counter = new Counter();
+
+		counter.setName(ResourceCode.class.getName());
+		counter.setCurrentId(_resourceCodeCounter.get());
+
+		_counters.add(counter);
+	}
+
+	public void initDefaultUser() throws Exception {
+		_defaultUser = new UserImpl();
+
+		_defaultUser.setUserId(_counter.get());
+	}
+
+	public void initGroups() throws Exception {
+		if (_groups != null) {
+			return;
+		}
+
+		_groups = new ArrayList<Group>();
+
+		// Guest
+
+		Group group = new GroupImpl();
+
+		group.setGroupId(_counter.get());
+		group.setName(GroupConstants.GUEST);
+		group.setFriendlyURL("/guest");
+
+		_groups.add(group);
+
+		_guestGroup = group;
+	}
+
+	public void initResourceCodes() throws Exception {
+		if (_resourceCodes != null) {
+			return;
+		}
+
+		_resourceCodes = new ArrayList<ResourceCode>();
+
+		List<String> models = ModelHintsUtil.getModels();
+
+		for (String model : models) {
+			initResourceCodes(model);
+		}
+
+		Document doc = SAXReaderUtil.read(
+			new File("../portal-web/docroot/WEB-INF/portlet-custom.xml"),
+			false);
+
+		Element root = doc.getRootElement();
+
+		Iterator<Element> itr = root.elements("portlet").iterator();
+
+		while (itr.hasNext()) {
+			Element portlet = itr.next();
+
+			String portletName = portlet.elementText("portlet-name");
+
+			initResourceCodes(portletName);
+		}
+	}
+
+	public void initResourceCodes(String name) throws Exception {
+
+		// Company
+
+		ResourceCode resourceCode = new ResourceCodeImpl();
+
+		resourceCode.setCodeId(_resourceCodeCounter.get());
+		resourceCode.setName(name);
+		resourceCode.setScope(ResourceConstants.SCOPE_COMPANY);
+
+		_resourceCodes.add(resourceCode);
+
+		// Group
+
+		resourceCode = new ResourceCodeImpl();
+
+		resourceCode.setCodeId(_resourceCodeCounter.get());
+		resourceCode.setName(name);
+		resourceCode.setScope(ResourceConstants.SCOPE_GROUP);
+
+		_resourceCodes.add(resourceCode);
+
+		// Group template
+
+		resourceCode = new ResourceCodeImpl();
+
+		resourceCode.setCodeId(_resourceCodeCounter.get());
+		resourceCode.setName(name);
+		resourceCode.setScope(ResourceConstants.SCOPE_GROUP_TEMPLATE);
+
+		_resourceCodes.add(resourceCode);
+
+		// Individual
+
+		resourceCode = new ResourceCodeImpl();
+
+		resourceCode.setCodeId(_resourceCodeCounter.get());
+		resourceCode.setName(name);
+		resourceCode.setScope(ResourceConstants.SCOPE_INDIVIDUAL);
+
+		_resourceCodes.add(resourceCode);
+	}
+
+	public void initRoles() throws Exception {
+		if (_roles != null) {
+			return;
+		}
+
+		_roles = new ArrayList<Role>();
+
+		// Administrator
+
+		Role role = new RoleImpl();
+
+		role.setRoleId(_counter.get());
+		role.setName(RoleConstants.ADMINISTRATOR);
+
+		_roles.add(role);
+
+		_administratorRole = role;
+
+		// Guest
+
+		role = new RoleImpl();
+
+		role.setRoleId(_counter.get());
+		role.setName(RoleConstants.GUEST);
+
+		_roles.add(role);
+
+		_guestRole = role;
+
+		// Power user
+
+		role = new RoleImpl();
+
+		role.setRoleId(_counter.get());
+		role.setName(RoleConstants.POWER_USER);
+
+		_roles.add(role);
+
+		_powerUserRole = role;
+
+		// User
+
+		role = new RoleImpl();
+
+		role.setRoleId(_counter.get());
+		role.setName(RoleConstants.USER);
+
+		_roles.add(role);
+
+		_userRole = role;
+	}
+
+	public void initUserNames() throws Exception {
+		if (_userNames != null) {
+			return;
+		}
+
+		_userNames = new Object[2];
+
+		String dependenciesDir =
+			"../portal-impl/src/com/liferay/portal/tools/samplesqlbuilder/" +
+				"dependencies/";
+
+		List<String> firstNames = ListUtil.fromFile(
+			dependenciesDir + "first_names.txt");
+		List<String> lastNames = ListUtil.fromFile(
+			dependenciesDir + "last_names.txt");
+
+		_userNames[0] = firstNames;
+		_userNames[1] = lastNames;
+	}
+
+	public IntegerWrapper newInteger() {
+		return new IntegerWrapper();
+	}
+
+	private Role _administratorRole;
+	private List<ClassName> _classNames;
+	private Company _company;
+	private SimpleCounter _counter;
+	private List<Counter> _counters;
+	private User _defaultUser;
+	private List<Group> _groups;
+	private Group _guestGroup;
+	private Role _guestRole;
+	private SimpleCounter _permissionCounter;
+	private Role _powerUserRole;
+	private SimpleCounter _resourceCodeCounter;
+	private List<ResourceCode> _resourceCodes;
+	private SimpleCounter _resourceCounter;
+	private List<Role> _roles;
+	private ClassName _userClassName;
+	private Object[] _userNames;
+	private Role _userRole;
+
+}

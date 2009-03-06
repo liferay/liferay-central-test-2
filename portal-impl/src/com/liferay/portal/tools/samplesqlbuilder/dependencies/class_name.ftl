@@ -1,1 +1,0 @@
-insert into ClassName_ (classNameId, value) values (${classNameId}, '${value}');
