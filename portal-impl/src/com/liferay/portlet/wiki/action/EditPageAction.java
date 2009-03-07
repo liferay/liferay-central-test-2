@@ -301,16 +301,20 @@ public class EditPageAction extends PortletAction {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			WikiPage.class.getName(), actionRequest);
 
+		WikiPage page = null;
+
 		if (cmd.equals(Constants.ADD)) {
-			return WikiPageServiceUtil.addPage(
+			page = WikiPageServiceUtil.addPage(
 				nodeId, title, content, summary, minorEdit, format, parentTitle,
 				redirectTitle, serviceContext);
 		}
 		else {
-			return WikiPageServiceUtil.updatePage(
+			page = WikiPageServiceUtil.updatePage(
 				nodeId, title, version, content, summary, minorEdit, format,
 				parentTitle, redirectTitle, serviceContext);
 		}
+
+		return page;
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {
