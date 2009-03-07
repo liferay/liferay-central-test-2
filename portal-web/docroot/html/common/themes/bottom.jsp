@@ -72,11 +72,11 @@
 	<script src="<%= PortalUtil.getStaticResourceURL(request, themeDisplay.getPathJavaScript() + "/liferay/portlet_css.js", javaScriptLastModified) %>" type="text/javascript"></script>
 </c:if>
 
+<%-- Portlet CSS and JavaScript References --%>
+
 <%
 List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORTLETS);
 %>
-
-<%-- Portlet CSS & JavaScript --%>
 
 <c:if test="<%= portlets != null %>">
 
@@ -170,8 +170,6 @@ List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORT
 
 <%-- Raw Text --%>
 
-<%-- Taglib Text --%>
-
 <%
 StringBuilder pageBottomSB = (StringBuilder)request.getAttribute(WebKeys.PAGE_BOTTOM);
 %>
@@ -180,15 +178,13 @@ StringBuilder pageBottomSB = (StringBuilder)request.getAttribute(WebKeys.PAGE_BO
 	<%= pageBottomSB.toString() %>
 </c:if>
 
-<%-- Custom JavaScript --%>
-
 <%-- Theme JavaScript --%>
 
 <script src="<%= PortalUtil.getStaticResourceURL(request, themeDisplay.getPathThemeJavaScript() + "/javascript.js") %>" type="text/javascript"></script>
 
 <c:if test="<%= layout != null %>">
 
-	<%-- Custom Layout JavaScript --%>
+	<%-- User Inputted Layout JavaScript --%>
 
 	<%
 	UnicodeProperties typeSettings = layout.getTypeSettingsProperties();
@@ -227,6 +223,7 @@ StringBuilder pageBottomSB = (StringBuilder)request.getAttribute(WebKeys.PAGE_BO
 	<%
 	}
 	%>
+
 </c:if>
 
 <%@ include file="/html/common/themes/session_timeout.jspf" %>

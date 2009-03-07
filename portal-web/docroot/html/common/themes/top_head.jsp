@@ -72,7 +72,7 @@ if (layout != null) {
 }
 %>
 
-<%-- Portlet CSS Links --%>
+<%-- Portlet CSS References --%>
 
 <c:if test="<%= portlets != null %>">
 
@@ -122,12 +122,12 @@ if (layout != null) {
 
 </c:if>
 
-<%-- Portal JavaScript Links --%>
+<%-- Portal JavaScript References --%>
 
 <%@ include file="/html/common/themes/top_js.jspf" %>
 <%@ include file="/html/common/themes/top_js-ext.jspf" %>
 
-<%-- Portlet JavaScript Links --%>
+<%-- Portlet JavaScript References --%>
 
 <c:if test="<%= portlets != null %>">
 
@@ -179,8 +179,6 @@ if (layout != null) {
 
 <%-- Raw Text --%>
 
-<%-- JSR-286 Text --%>
-
 <%
 List<String> markupHeaders = (List<String>)request.getAttribute(MimeResponse.MARKUP_HEAD_ELEMENT);
 
@@ -197,13 +195,9 @@ if (markupHeaders != null) {
 StringBuilder pageTopSB = (StringBuilder)request.getAttribute(WebKeys.PAGE_TOP);
 %>
 
-<%-- Taglib Text --%>
-
 <c:if test="<%= pageTopSB != null %>">
 	<%= pageTopSB.toString() %>
 </c:if>
-
-<%-- Customized CSS --%>
 
 <%-- Theme CSS --%>
 
@@ -211,38 +205,33 @@ StringBuilder pageTopSB = (StringBuilder)request.getAttribute(WebKeys.PAGE_TOP);
 
 <style type="text/css">
 	/* <![CDATA[ */
+		<c:if test="<%= !themeDisplay.getCompanyLogo().equals(StringPool.BLANK) %>">
+			#banner .logo a {
+				background: url(<%= themeDisplay.getCompanyLogo() %>) no-repeat;
+				display: block;
+				font-size: 0;
+				height: <%= themeDisplay.getCompanyLogoHeight() %>px;
+				text-indent: -9999em;
+				width: <%= themeDisplay.getCompanyLogoWidth() %>px;
+			}
+		</c:if>
 
-	<c:if test="<%= !themeDisplay.getCompanyLogo().equals(StringPool.BLANK) %>">
-		#banner .logo a {
-			background: url(themeDisplay.getCompanyLogo()) no-repeat;
-			display: block;
-			font-size: 0;
-			height: ${company_logo_height}px;
-			text-indent: -9999em;
-			width: ${company_logo_width}px;
-		}
-	</c:if>
-
-	<c:if test="<%= BrowserSnifferUtil.isIe(request) && BrowserSnifferUtil.getMajorVersion(request) < 7 %>">
-
-		/* ---------- IE6 PNG image fix ---------- */
-
-		img, .png{
-			position: relative;
-			behavior: expression(
-				(this.runtimeStyle.behavior="none")&&(this.pngSet?this.pngSet=true:(this.nodeName == "IMG" && (this.src.toLowerCase().indexOf('.png')>-1||(this.className && ([''].concat(this.className.split(' ')).concat(['']).join('|').indexOf('|png|')) > -1))?(this.runtimeStyle.backgroundImage = "none",
-				this.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + this.src + "', sizingMethod='image')",
-				this.src = "$images_folder/spacer.png"):(this.origBg = this.origBg? this.origBg :this.currentStyle.backgroundImage.toString().replace('url("','').replace('")',''),
-				this.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + this.origBg + "', sizingMethod='crop')",
-				this.runtimeStyle.backgroundImage = "none")),this.pngSet=true)
-			);
-		}
-	</c:if>
-
+		<c:if test="<%= BrowserSnifferUtil.isIe(request) && (BrowserSnifferUtil.getMajorVersion(request) < 7) %>">
+			img, .png{
+				position: relative;
+				behavior: expression(
+					(this.runtimeStyle.behavior="none")&&(this.pngSet?this.pngSet=true:(this.nodeName == "IMG" && (this.src.toLowerCase().indexOf('.png')>-1||(this.className && ([''].concat(this.className.split(' ')).concat(['']).join('|').indexOf('|png|')) > -1))?(this.runtimeStyle.backgroundImage = "none",
+					this.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + this.src + "', sizingMethod='image')",
+					this.src = "$images_folder/spacer.png"):(this.origBg = this.origBg? this.origBg :this.currentStyle.backgroundImage.toString().replace('url("','').replace('")',''),
+					this.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + this.origBg + "', sizingMethod='crop')",
+					this.runtimeStyle.backgroundImage = "none")),this.pngSet=true)
+				);
+			}
+		</c:if>
 	/* ]]> */
 </style>
 
-<%-- Custom Layout CSS --%>
+<%-- User Inputted Layout CSS --%>
 
 <c:if test="<%= (layout != null) && Validator.isNotNull(layout.getCssText()) %>">
 	<style type="text/css">
@@ -250,7 +239,7 @@ StringBuilder pageTopSB = (StringBuilder)request.getAttribute(WebKeys.PAGE_TOP);
 	</style>
 </c:if>
 
-<%-- Custom Portlet CSS --%>
+<%-- User Inputted Portlet CSS --%>
 
 <c:if test="<%= portlets != null %>">
 	<style type="text/css">
