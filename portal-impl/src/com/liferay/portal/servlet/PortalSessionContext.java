@@ -35,12 +35,12 @@ import javax.servlet.http.HttpSession;
  */
 public class PortalSessionContext {
 
-	public static HttpSession get(String sessionId) {
-		return _instance._get(sessionId);
+	public static int count() {
+		return _instance._count();
 	}
 
-	public static int getSessionCount() {
-		return _instance._getSessionCount();
+	public static HttpSession get(String sessionId) {
+		return _instance._get(sessionId);
 	}
 
 	public static void put(String sessionId, HttpSession session) {
@@ -55,14 +55,14 @@ public class PortalSessionContext {
 		_sessionPool = new ConcurrentHashMap<String, HttpSession>();
 	}
 
+	private int _count() {
+		return _sessionPool.size();
+	}
+
 	private HttpSession _get(String sessionId) {
 		return _sessionPool.get(sessionId);
 	}
 
-	private int _getSessionCount() {
-		return _sessionPool.size();
-	}
-	
 	private void _put(String sessionId, HttpSession session) {
 		_sessionPool.put(sessionId, session);
 	}
