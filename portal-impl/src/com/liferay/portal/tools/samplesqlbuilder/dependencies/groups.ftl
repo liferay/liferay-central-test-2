@@ -1,3 +1,5 @@
+<#setting number_format = "0">
+
 <#list dataFactory.groups as group>
 	<#assign privateLayouts = []>
 

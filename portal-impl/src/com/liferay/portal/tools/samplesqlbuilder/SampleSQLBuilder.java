@@ -64,15 +64,29 @@ public class SampleSQLBuilder {
 		InitUtil.initWithSpring();
 
 		String outputDir = System.getProperty("sample.sql.output.dir");
+		int maxMBCategoryCount = GetterUtil.getInteger(
+			System.getProperty("sample.sql.max.mb.category.count"));
+		int maxMBMessageCount = GetterUtil.getInteger(
+			System.getProperty("sample.sql.max.mb.message.count"));
+		int maxMBThreadCount = GetterUtil.getInteger(
+			System.getProperty("sample.sql.max.mb.thread.count"));
 		int maxUserCount = GetterUtil.getInteger(
 			System.getProperty("sample.sql.max.user.count"));
 
-		new SampleSQLBuilder(outputDir, maxUserCount);
+		new SampleSQLBuilder(
+			outputDir, maxMBCategoryCount, maxMBMessageCount, maxMBThreadCount,
+			maxUserCount);
 	}
 
-	public SampleSQLBuilder(String outputDir, int maxUserCount) {
+	public SampleSQLBuilder(
+		String outputDir, int maxMBCategoryCount, int maxMBMessageCount,
+		int maxMBThreadCount, int maxUserCount) {
+
 		try {
 			_outputDir = outputDir;
+			_maxMBCategoryCount = maxMBCategoryCount;
+			_maxMBMessageCount = maxMBMessageCount;
+			_maxMBThreadCount = maxMBThreadCount;
 			_maxUserCount = maxUserCount;
 
 			_counter = new SimpleCounter();
@@ -191,13 +205,17 @@ public class SampleSQLBuilder {
 	protected void createSample() throws Exception {
 		Map<String, Object> context = getContext();
 
+		Writer mbMessagesCsvWriter = new FileWriter(
+			new File(_outputDir + "/mb_messages.csv"));
 		Writer usersCsvWriter = new FileWriter(
 			new File(_outputDir +  "/users.csv"));
 
+		put(context, "mbMessagesCsvWriter", mbMessagesCsvWriter);
 		put(context, "usersCsvWriter", usersCsvWriter);
 
 		processTemplate(_tplSample, context);
 
+		mbMessagesCsvWriter.flush();
 		usersCsvWriter.flush();
 	}
 
@@ -211,6 +229,9 @@ public class SampleSQLBuilder {
 		put(context, "counter", _counter);
 		put(context, "dataFactory", _dataFactory);
 		put(context, "defaultUserId", defaultUser.getCompanyId());
+		put(context, "maxMBCategoryCount", _maxMBCategoryCount);
+		put(context, "maxMBMessageCount", _maxMBMessageCount);
+		put(context, "maxMBThreadCount", _maxMBThreadCount);
 		put(context, "maxUserCount", _maxUserCount);
 		put(context, "portalUUIDUtil", PortalUUIDUtil.getPortalUUID());
 		put(context, "sampleSQLBuilder", this);
@@ -234,6 +255,9 @@ public class SampleSQLBuilder {
 
 	private SimpleCounter _counter;
 	private DataFactory _dataFactory;
+	private int _maxMBCategoryCount;
+	private int _maxMBMessageCount;
+	private int _maxMBThreadCount;
 	private int _maxUserCount;
 	private String _outputDir;
 	private SimpleCounter _permissionCounter;

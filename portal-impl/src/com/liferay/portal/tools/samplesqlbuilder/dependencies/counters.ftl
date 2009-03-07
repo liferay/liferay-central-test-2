@@ -1,3 +1,5 @@
+<#setting number_format = "0">
+
 ${dataFactory.initCounters()}
 
 <#list dataFactory.counters as counter>

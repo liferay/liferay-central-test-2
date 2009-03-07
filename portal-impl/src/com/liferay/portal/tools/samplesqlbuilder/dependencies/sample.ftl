@@ -12,4 +12,6 @@
 
 <#include "counters.ftl">
 
+update Release_ set verified = TRUE;
+
 COMMIT_TRANSACTION
