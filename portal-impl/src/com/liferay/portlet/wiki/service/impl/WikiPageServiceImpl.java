@@ -92,19 +92,18 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 	}
 
 	public WikiPage addPage(
-			long nodeId, String title, String content,
-			String summary, boolean minorEdit, String format,
-			String parentTitle, String redirectTitle,
-			ServiceContext serviceContext)
+			long nodeId, String title, String content, String summary,
+			boolean minorEdit, String format, String parentTitle,
+			String redirectTitle, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		WikiNodePermission.check(
 			getPermissionChecker(), nodeId, ActionKeys.ADD_PAGE);
 
 		return wikiPageLocalService.addPage(
-			null, getUserId(), nodeId, title,
-			WikiPageImpl.DEFAULT_VERSION, content, summary, minorEdit,
-			format, true, parentTitle, redirectTitle, serviceContext);
+			null, getUserId(), nodeId, title, WikiPageImpl.DEFAULT_VERSION,
+			content, summary, minorEdit, format, true, parentTitle,
+			redirectTitle, serviceContext);
 	}
 
 	public void addPageAttachments(

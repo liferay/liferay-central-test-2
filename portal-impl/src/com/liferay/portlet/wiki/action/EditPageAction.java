@@ -303,8 +303,8 @@ public class EditPageAction extends PortletAction {
 
 		if (cmd.equals(Constants.ADD)) {
 			return WikiPageServiceUtil.addPage(
-				nodeId, title, content, summary, minorEdit, format,
-				parentTitle, redirectTitle, serviceContext);
+				nodeId, title, content, summary, minorEdit, format, parentTitle,
+				redirectTitle, serviceContext);
 		}
 		else {
 			return WikiPageServiceUtil.updatePage(
