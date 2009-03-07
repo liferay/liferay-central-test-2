@@ -223,7 +223,7 @@ StringBuilder pageTopSB = (StringBuilder)request.getAttribute(WebKeys.PAGE_TOP);
 		}
 	</c:if>
 
-	<c:if test="<%= BrowserSnifferUtil.isIe(request) && BrowserSnifferUtil.getMajorVersion(request) %>">
+	<c:if test="<%= BrowserSnifferUtil.isIe(request) && BrowserSnifferUtil.getMajorVersion(request) < 7 %>">
 
 		/* ---------- IE6 PNG image fix ---------- */
 
