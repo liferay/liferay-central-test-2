@@ -1025,6 +1025,10 @@ public interface PropsKeys {
 
 	public static final String SESSION_TRACKER_PERSISTENCE_ENABLED = "session.tracker.persistence.enabled";
 
+	public static final String SHARD_DEFAULT = "shard.default";
+
+	public static final String SHARD_AVAILABLE = "shard.available";
+
 	public static final String SHAREPOINT_STORAGE_CLASS = "sharepoint.storage.class";
 
 	public static final String SHAREPOINT_STORAGE_TOKENS = "sharepoint.storage.tokens";

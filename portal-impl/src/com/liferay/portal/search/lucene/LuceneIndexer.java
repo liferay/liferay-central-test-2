@@ -22,6 +22,7 @@
 
 package com.liferay.portal.search.lucene;
 
+import com.liferay.portal.dao.shards.ShardedUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Indexer;
@@ -67,102 +68,113 @@ public class LuceneIndexer implements Runnable {
 	}
 
 	public void reIndex(int delay) {
-		if (PropsValues.INDEX_READ_ONLY) {
-			return;
-		}
-
-		if (_log.isInfoEnabled()) {
-			_log.info("Reindexing Lucene started");
-		}
-
-		if (delay < 0) {
-			delay = 0;
-		}
+		ShardedUtil.pushCompanyService(_companyId);
 
 		try {
-			if (delay > 0) {
-				Thread.sleep(Time.SECOND * delay);
+			if (PropsValues.INDEX_READ_ONLY) {
+				return;
 			}
-		}
-		catch (InterruptedException ie) {
-		}
 
-		StopWatch stopWatch1 = null;
+			if (_log.isInfoEnabled()) {
+				_log.info("Reindexing Lucene started");
+			}
 
-		if (_log.isInfoEnabled()) {
-			stopWatch1 = new StopWatch();
+			if (delay < 0) {
+				delay = 0;
+			}
 
-			stopWatch1.start();
-		}
-
-		LuceneUtil.delete(_companyId);
-
-		try {
-			IndexWriter writer = LuceneUtil.getWriter(_companyId, true);
-
-			LuceneUtil.write(writer);
-		}
-		catch (IOException ioe) {
-			_log.error(ioe.getMessage(), ioe);
-		}
-
-		String[] indexIds = new String[] {String.valueOf(_companyId)};
-
-		try {
-			List<Portlet> portlets = PortletLocalServiceUtil.getPortlets(
-				_companyId);
-
-			portlets = ListUtil.sort(portlets, new PortletLuceneComparator());
-
-			for (Portlet portlet : portlets) {
-				if (!portlet.isActive()) {
-					continue;
+			try {
+				if (delay > 0) {
+					Thread.sleep(Time.SECOND * delay);
 				}
+			}
+			catch (InterruptedException ie) {
+			}
 
-				Indexer indexer = portlet.getIndexerInstance();
+			StopWatch stopWatch1 = null;
 
-				if (indexer == null) {
-					continue;
+			if (_log.isInfoEnabled()) {
+				stopWatch1 = new StopWatch();
+
+				stopWatch1.start();
+			}
+
+			LuceneUtil.delete(_companyId);
+
+			try {
+				IndexWriter writer = LuceneUtil.getWriter(_companyId, true);
+
+				LuceneUtil.write(writer);
+			}
+			catch (IOException ioe) {
+				_log.error(ioe.getMessage(), ioe);
+			}
+
+			String[] indexIds = new String[] {String.valueOf(_companyId)};
+
+			try {
+				List<Portlet> portlets = PortletLocalServiceUtil.getPortlets(
+					_companyId);
+
+				portlets =
+					ListUtil.sort(portlets, new PortletLuceneComparator());
+
+				for (Portlet portlet : portlets) {
+					if (!portlet.isActive()) {
+						continue;
+					}
+
+					Indexer indexer = portlet.getIndexerInstance();
+
+					if (indexer == null) {
+						continue;
+					}
+
+					String indexerClass = portlet.getIndexerClass();
+
+					StopWatch stopWatch2 = null;
+
+					if (_log.isInfoEnabled()) {
+						stopWatch2 = new StopWatch();
+
+						stopWatch2.start();
+					}
+
+					if (_log.isInfoEnabled()) {
+						_log.info(
+							"Reindexing with " + indexerClass + " started");
+					}
+
+					indexer.reIndex(indexIds);
+
+					if (_log.isInfoEnabled()) {
+						_log.info(
+							"Reindexing with " + indexerClass +
+								" completed in " +
+								(stopWatch2.getTime() / Time.SECOND) +
+								" seconds");
+					}
 				}
-
-				String indexerClass = portlet.getIndexerClass();
-
-				StopWatch stopWatch2 = null;
-
-				if (_log.isInfoEnabled()) {
-					stopWatch2 = new StopWatch();
-
-					stopWatch2.start();
-				}
-
-				if (_log.isInfoEnabled()) {
-					_log.info("Reindexing with " + indexerClass + " started");
-				}
-
-				indexer.reIndex(indexIds);
 
 				if (_log.isInfoEnabled()) {
 					_log.info(
-						"Reindexing with " + indexerClass + " completed in " +
-							(stopWatch2.getTime() / Time.SECOND) + " seconds");
+						"Reindexing Lucene completed in " +
+							(stopWatch1.getTime() / Time.SECOND) + " seconds");
+				}
+			}
+			catch (Exception e) {
+				_log.error("Error encountered while reindexing", e);
+
+				if (_log.isInfoEnabled()) {
+					_log.info("Reindexing Lucene failed");
 				}
 			}
 
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Reindexing Lucene completed in " +
-						(stopWatch1.getTime() / Time.SECOND) + " seconds");
-			}
+			_finished = true;
 		}
-		catch (Exception e) {
-			_log.error("Error encountered while reindexing", e);
-
-			if (_log.isInfoEnabled()) {
-				_log.info("Reindexing Lucene failed");
-			}
+		finally {
+			ShardedUtil.popCompanyService();
 		}
-
-		_finished = true;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(LuceneIndexer.class);

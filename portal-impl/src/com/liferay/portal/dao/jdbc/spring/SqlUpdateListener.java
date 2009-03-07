@@ -24,43 +24,16 @@ package com.liferay.portal.dao.jdbc.spring;
 
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 
-import javax.sql.DataSource;
-
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.SqlParameter;
-
 /**
- * <a href="SqlUpdateImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="SqlUpdateListener.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  *
  */
-public class SqlUpdateImpl
-	extends org.springframework.jdbc.object.SqlUpdate implements SqlUpdate {
+public interface SqlUpdateListener {
 
-	public SqlUpdateImpl(DataSource dataSource, String sql, int[] types) {
-		super(dataSource, sql);
+	public void onAfterUpdate(SqlUpdate sqlUpdate);
 
-		for (int type : types) {
-			declareParameter(new SqlParameter(type));
-		}
-
-		compile();
-	}
-
-	public int update(Object[] params) throws DataAccessException {
-		int retVal = 0;
-
-		SqlUpdateListenerUtil.onBeforeUpdate(this);
-
-		try {
-			retVal = super.update(params);
-		}
-		finally {
-			SqlUpdateListenerUtil.onAfterUpdate(this);
-		}
-
-		return retVal;
-	}
+	public void onBeforeUpdate(SqlUpdate sqlUpdate);
 
 }

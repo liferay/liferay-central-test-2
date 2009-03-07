@@ -24,43 +24,34 @@ package com.liferay.portal.dao.jdbc.spring;
 
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 
-import javax.sql.DataSource;
-
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.SqlParameter;
-
 /**
- * <a href="SqlUpdateImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="SqlUpdateListenerUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  *
  */
-public class SqlUpdateImpl
-	extends org.springframework.jdbc.object.SqlUpdate implements SqlUpdate {
+public class SqlUpdateListenerUtil {
 
-	public SqlUpdateImpl(DataSource dataSource, String sql, int[] types) {
-		super(dataSource, sql);
-
-		for (int type : types) {
-			declareParameter(new SqlParameter(type));
+	public static void onAfterUpdate(SqlUpdate sqlUpdate) {
+		if (getSqlUpdateListener() != null) {
+			getSqlUpdateListener().onAfterUpdate(sqlUpdate);
 		}
-
-		compile();
 	}
 
-	public int update(Object[] params) throws DataAccessException {
-		int retVal = 0;
-
-		SqlUpdateListenerUtil.onBeforeUpdate(this);
-
-		try {
-			retVal = super.update(params);
+	public static void onBeforeUpdate(SqlUpdate sqlUpdate) {
+		if (getSqlUpdateListener() != null) {
+			getSqlUpdateListener().onBeforeUpdate(sqlUpdate);
 		}
-		finally {
-			SqlUpdateListenerUtil.onAfterUpdate(this);
-		}
-
-		return retVal;
 	}
+
+	public static SqlUpdateListener getSqlUpdateListener() {
+		return _sqlUpdateListener;
+	}
+
+	public void setSqlUpdateHelper(SqlUpdateListener sqlUpdateListener) {
+		_sqlUpdateListener = sqlUpdateListener;
+	}
+
+	private static SqlUpdateListener _sqlUpdateListener;
 
 }

@@ -20,47 +20,34 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.dao.jdbc.spring;
+package com.liferay.portal.dao.shards;
 
-import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.service.impl.UserLocalServiceImpl;
 
-import javax.sql.DataSource;
-
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.SqlParameter;
+import java.util.LinkedHashMap;
 
 /**
- * <a href="SqlUpdateImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="ShardedUserLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  *
  */
-public class SqlUpdateImpl
-	extends org.springframework.jdbc.object.SqlUpdate implements SqlUpdate {
+public class ShardedUserLocalServiceImpl extends UserLocalServiceImpl {
 
-	public SqlUpdateImpl(DataSource dataSource, String sql, int[] types) {
-		super(dataSource, sql);
+	public int searchCount(
+			long companyId, String keywords, Boolean active,
+			LinkedHashMap<String, Object> params)
+		throws SystemException {
 
-		for (int type : types) {
-			declareParameter(new SqlParameter(type));
-		}
-
-		compile();
-	}
-
-	public int update(Object[] params) throws DataAccessException {
-		int retVal = 0;
-
-		SqlUpdateListenerUtil.onBeforeUpdate(this);
+		ShardedUtil.pushCompanyService(companyId);
 
 		try {
-			retVal = super.update(params);
+			return super.searchCount(companyId, keywords, active, params);
 		}
 		finally {
-			SqlUpdateListenerUtil.onAfterUpdate(this);
+			ShardedUtil.popCompanyService();
 		}
-
-		return retVal;
 	}
 
 }

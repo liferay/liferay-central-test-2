@@ -84,9 +84,12 @@ public class CompanyModelImpl extends BaseModelImpl {
 			{ "homeURL", new Integer(Types.VARCHAR) },
 			
 
-			{ "logoId", new Integer(Types.BIGINT) }
+			{ "logoId", new Integer(Types.BIGINT) },
+			
+
+			{ "shardId", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Company (companyId LONG not null primary key,accountId LONG,webId VARCHAR(75) null,key_ TEXT null,virtualHost VARCHAR(75) null,mx VARCHAR(75) null,homeURL STRING null,logoId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table Company (companyId LONG not null primary key,accountId LONG,webId VARCHAR(75) null,key_ TEXT null,virtualHost VARCHAR(75) null,mx VARCHAR(75) null,homeURL STRING null,logoId LONG,shardId VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table Company";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -106,6 +109,7 @@ public class CompanyModelImpl extends BaseModelImpl {
 		model.setMx(soapModel.getMx());
 		model.setHomeURL(soapModel.getHomeURL());
 		model.setLogoId(soapModel.getLogoId());
+		model.setShardId(soapModel.getShardId());
 
 		return model;
 	}
@@ -229,6 +233,19 @@ public class CompanyModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public String getShardId() {
+		return GetterUtil.getString(_shardId);
+	}
+
+	public void setShardId(String shardId) {
+		if (((shardId == null) && (_shardId != null)) ||
+				((shardId != null) && (_shardId == null)) ||
+				((shardId != null) && (_shardId != null) &&
+				!shardId.equals(_shardId))) {
+			_shardId = shardId;
+		}
+	}
+
 	public Company toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Company)this;
@@ -247,6 +264,7 @@ public class CompanyModelImpl extends BaseModelImpl {
 			model.setMx(HtmlUtil.escape(getMx()));
 			model.setHomeURL(HtmlUtil.escape(getHomeURL()));
 			model.setLogoId(getLogoId());
+			model.setShardId(HtmlUtil.escape(getShardId()));
 
 			model = (Company)Proxy.newProxyInstance(Company.class.getClassLoader(),
 					new Class[] { Company.class },
@@ -276,6 +294,7 @@ public class CompanyModelImpl extends BaseModelImpl {
 		clone.setMx(getMx());
 		clone.setHomeURL(getHomeURL());
 		clone.setLogoId(getLogoId());
+		clone.setShardId(getShardId());
 
 		return clone;
 	}
@@ -336,5 +355,6 @@ public class CompanyModelImpl extends BaseModelImpl {
 	private String _mx;
 	private String _homeURL;
 	private long _logoId;
+	private String _shardId;
 	private transient ExpandoBridge _expandoBridge;
 }

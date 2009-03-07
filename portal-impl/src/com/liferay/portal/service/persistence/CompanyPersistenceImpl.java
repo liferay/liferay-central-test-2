@@ -629,6 +629,102 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public Company findByShardId(String shardId)
+		throws NoSuchCompanyException, SystemException {
+		Company company = fetchByShardId(shardId);
+
+		if (company == null) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No Company exists with the key {");
+
+			msg.append("shardId=" + shardId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchCompanyException(msg.toString());
+		}
+
+		return company;
+	}
+
+	public Company fetchByShardId(String shardId) throws SystemException {
+		boolean finderClassNameCacheEnabled = CompanyModelImpl.CACHE_ENABLED;
+		String finderClassName = Company.class.getName();
+		String finderMethodName = "fetchByShardId";
+		String[] finderParams = new String[] { String.class.getName() };
+		Object[] finderArgs = new Object[] { shardId };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("FROM com.liferay.portal.model.Company WHERE ");
+
+				if (shardId == null) {
+					query.append("shardId IS NULL");
+				}
+				else {
+					query.append("shardId = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (shardId != null) {
+					qPos.add(shardId);
+				}
+
+				List<Company> list = q.list();
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List<Company> list = (List<Company>)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return list.get(0);
+			}
+		}
+	}
+
 	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		Session session = null;
@@ -769,6 +865,13 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 	public void removeByLogoId(long logoId)
 		throws NoSuchCompanyException, SystemException {
 		Company company = findByLogoId(logoId);
+
+		remove(company);
+	}
+
+	public void removeByShardId(String shardId)
+		throws NoSuchCompanyException, SystemException {
+		Company company = findByShardId(shardId);
 
 		remove(company);
 	}
@@ -1029,6 +1132,78 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 				QueryPos qPos = QueryPos.getInstance(q);
 
 				qPos.add(logoId);
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByShardId(String shardId) throws SystemException {
+		boolean finderClassNameCacheEnabled = CompanyModelImpl.CACHE_ENABLED;
+		String finderClassName = Company.class.getName();
+		String finderMethodName = "countByShardId";
+		String[] finderParams = new String[] { String.class.getName() };
+		Object[] finderArgs = new Object[] { shardId };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(*) ");
+				query.append("FROM com.liferay.portal.model.Company WHERE ");
+
+				if (shardId == null) {
+					query.append("shardId IS NULL");
+				}
+				else {
+					query.append("shardId = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (shardId != null) {
+					qPos.add(shardId);
+				}
 
 				Long count = null;
 
