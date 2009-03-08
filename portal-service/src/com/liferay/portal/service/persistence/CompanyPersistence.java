@@ -103,14 +103,6 @@ public interface CompanyPersistence extends BasePersistence {
 	public com.liferay.portal.model.Company fetchByLogoId(long logoId)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Company findByShardId(
-		java.lang.String shardId)
-		throws com.liferay.portal.NoSuchCompanyException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.Company fetchByShardId(
-		java.lang.String shardId) throws com.liferay.portal.SystemException;
-
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
@@ -145,10 +137,6 @@ public interface CompanyPersistence extends BasePersistence {
 		throws com.liferay.portal.NoSuchCompanyException,
 			com.liferay.portal.SystemException;
 
-	public void removeByShardId(java.lang.String shardId)
-		throws com.liferay.portal.NoSuchCompanyException,
-			com.liferay.portal.SystemException;
-
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByWebId(java.lang.String webId)
@@ -161,9 +149,6 @@ public interface CompanyPersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByLogoId(long logoId)
-		throws com.liferay.portal.SystemException;
-
-	public int countByShardId(java.lang.String shardId)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

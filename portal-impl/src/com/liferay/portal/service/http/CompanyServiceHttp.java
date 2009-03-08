@@ -125,67 +125,6 @@ public class CompanyServiceHttp {
 		}
 	}
 
-	public static com.liferay.portal.model.Company addCompany(
-		HttpPrincipal httpPrincipal, java.lang.String webId,
-		java.lang.String virtualHost, java.lang.String mx,
-		java.lang.String shardId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = webId;
-
-			if (webId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = virtualHost;
-
-			if (virtualHost == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = mx;
-
-			if (mx == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = shardId;
-
-			if (shardId == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(CompanyServiceUtil.class.getName(),
-					"addCompany",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portal.model.Company)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
 	public static com.liferay.portal.model.Company getCompanyById(
 		HttpPrincipal httpPrincipal, long companyId)
 		throws com.liferay.portal.PortalException,

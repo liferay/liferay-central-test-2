@@ -84,7 +84,6 @@
 			<hint-collection name="URL" />
 		</field>
 		<field name="logoId" type="long" />
-		<field name="shardId" type="String" />
 	</model>
 	<model name="com.liferay.portal.model.Contact">
 		<default-hints>

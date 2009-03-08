@@ -92,8 +92,7 @@ public interface CompanyLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Company addCompany(java.lang.String webId,
-		java.lang.String virtualHost, java.lang.String mx,
-		java.lang.String shardId)
+		java.lang.String virtualHost, java.lang.String mx)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -103,11 +102,6 @@ public interface CompanyLocalService {
 
 	public com.liferay.portal.model.Company checkCompany(
 		java.lang.String webId, java.lang.String mx)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.Company checkCompany(
-		java.lang.String webId, java.lang.String mx, java.lang.String shardId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

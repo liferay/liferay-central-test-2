@@ -80,9 +80,5 @@ public interface CompanyModel extends BaseModel {
 
 	public void setLogoId(long logoId);
 
-	public String getShardId();
-
-	public void setShardId(String shardId);
-
 	public Company toEscapedModel();
 }

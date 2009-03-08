@@ -116,7 +116,6 @@ public class EditInstanceAction extends PortletAction {
 		long companyId = ParamUtil.getLong(actionRequest, "companyId");
 
 		String webId = ParamUtil.getString(actionRequest, "webId");
-		String shardId = ParamUtil.getString(actionRequest, "shardId");
 		String virtualHost = ParamUtil.getString(actionRequest, "virtualHost");
 		String mx = ParamUtil.getString(actionRequest, "mx");
 
@@ -125,7 +124,7 @@ public class EditInstanceAction extends PortletAction {
 			// Add instance
 
 			Company company = CompanyServiceUtil.addCompany(
-				webId, virtualHost, mx, shardId);
+				webId, virtualHost, mx);
 
 			ServletContext servletContext =
 				(ServletContext)actionRequest.getAttribute(WebKeys.CTX);

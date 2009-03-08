@@ -55,37 +55,35 @@ long companyId = BeanParamUtil.getLong(company2, request, "companyId");
 
 <table class="lfr-table">
 
-<c:choose>
-	<c:when test="<%= company2 != null %>">
-		<tr>
-			<td>
-				<liferay-ui:message key="id" />
-			</td>
-			<td>
-				<%= companyId %>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="web-id" />
-			</td>
-			<td>
-				<%= company2.getWebId() %>
-			</td>
-		</tr>
-	</c:when>
+<c:if test="<%= company2 != null %>">
+	<tr>
+		<td>
+			<liferay-ui:message key="id" />
+		</td>
+		<td>
+			<%= companyId %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="web-id" />
+		</td>
+		<td>
+			<%= company2.getWebId() %>
+		</td>
+	</tr>
+</c:if>
 
-	<c:otherwise>
-		<tr>
-			<td>
-				<liferay-ui:message key="web-id" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company2 %>" field="webId" />
-			</td>
-		</tr>
-	</c:otherwise>
-</c:choose>
+<c:if test="<%= company2 == null %>">
+	<tr>
+		<td>
+			<liferay-ui:message key="web-id" />
+		</td>
+		<td>
+			<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company2 %>" field="webId" />
+		</td>
+	</tr>
+</c:if>
 
 <tr>
 	<td>
@@ -103,38 +101,6 @@ long companyId = BeanParamUtil.getLong(company2, request, "companyId");
 		<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company2 %>" field="mx" />
 	</td>
 </tr>
-
-<c:if test="<%= PropsValues.SHARD_AVAILABLE.length > 1 %>">
-	<tr>
-		<td>
-			<liferay-ui:message key="shard-id" />
-		</td>
-		<td>
-
-		<c:choose>
-			<c:when test="<%= company2 != null %>">
-				<%= company2.getShardId() %>
-			</c:when>
-
-			<c:otherwise>
-				<select name="<portlet:namespace />shardId">
-
-					<%
-					for (String shardId : PropsValues.SHARD_AVAILABLE) {
-					%>
-						<option <%= shardId.equals(PropsValues.SHARD_DEFAULT) ? "selected" : "" %> value="<%= shardId %>"><liferay-ui:message key="<%= shardId %>" /></option>
-					<%
-					}
-					%>
-
-				</select>
-			</c:otherwise>
-		</c:choose>
-
-		</td>
-	</tr>
-</c:if>
-
 </table>
 
 <br />

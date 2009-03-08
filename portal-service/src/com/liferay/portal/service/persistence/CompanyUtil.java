@@ -137,18 +137,6 @@ public class CompanyUtil {
 		return getPersistence().fetchByLogoId(logoId);
 	}
 
-	public static com.liferay.portal.model.Company findByShardId(
-		java.lang.String shardId)
-		throws com.liferay.portal.NoSuchCompanyException,
-			com.liferay.portal.SystemException {
-		return getPersistence().findByShardId(shardId);
-	}
-
-	public static com.liferay.portal.model.Company fetchByShardId(
-		java.lang.String shardId) throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByShardId(shardId);
-	}
-
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
@@ -201,12 +189,6 @@ public class CompanyUtil {
 		getPersistence().removeByLogoId(logoId);
 	}
 
-	public static void removeByShardId(java.lang.String shardId)
-		throws com.liferay.portal.NoSuchCompanyException,
-			com.liferay.portal.SystemException {
-		getPersistence().removeByShardId(shardId);
-	}
-
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
@@ -229,11 +211,6 @@ public class CompanyUtil {
 	public static int countByLogoId(long logoId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByLogoId(logoId);
-	}
-
-	public static int countByShardId(java.lang.String shardId)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().countByShardId(shardId);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

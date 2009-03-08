@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.dao.jdbc;
 
-import javax.sql.DataSource;
-
 /**
  * <a href="SqlUpdate.java.html"><b><i>View Source</i></b></a>
  *
@@ -33,7 +31,5 @@ import javax.sql.DataSource;
 public interface SqlUpdate {
 
 	public int update(Object[] params);
-
-	public void setDataSource(DataSource dataSource);
 
 }

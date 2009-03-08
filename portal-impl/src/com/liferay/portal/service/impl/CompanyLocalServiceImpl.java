@@ -83,8 +83,7 @@ import javax.portlet.PortletPreferences;
  */
 public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
-	public Company addCompany(
-			String webId, String virtualHost, String mx, String shardId)
+	public Company addCompany(String webId, String virtualHost, String mx)
 		throws PortalException, SystemException {
 
 		// Company
@@ -100,11 +99,10 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		validate(webId, virtualHost, mx);
 
-		Company company = checkCompany(webId, mx, shardId);
+		Company company = checkCompany(webId, mx);
 
 		company.setVirtualHost(virtualHost);
 		company.setMx(mx);
-		company.setShardId(shardId);
 
 		companyPersistence.update(company, false);
 
@@ -120,12 +118,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	}
 
 	public Company checkCompany(String webId, String mx)
-		throws PortalException, SystemException {
-
-		return checkCompany(webId, mx, PropsValues.SHARD_DEFAULT);
-	}
-
-	public Company checkCompany(String webId, String mx, String shardId)
 		throws PortalException, SystemException {
 
 		// Company
@@ -166,7 +158,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			company.setWebId(webId);
 			company.setVirtualHost(virtualHost);
 			company.setMx(mx);
-			company.setShardId(shardId);
 
 			companyPersistence.update(company, false);
 
