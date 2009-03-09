@@ -146,6 +146,13 @@ public abstract class DLFileEntryLocalServiceBaseImpl
 		return dlFileEntryPersistence.update(dlFileEntry, true);
 	}
 
+	public DLFileEntry updateDLFileEntry(DLFileEntry dlFileEntry, boolean merge)
+		throws SystemException {
+		dlFileEntry.setNew(false);
+
+		return dlFileEntryPersistence.update(dlFileEntry, merge);
+	}
+
 	public DLFileEntryLocalService getDLFileEntryLocalService() {
 		return dlFileEntryLocalService;
 	}

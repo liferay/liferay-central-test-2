@@ -218,6 +218,14 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 		return membershipRequestPersistence.update(membershipRequest, true);
 	}
 
+	public MembershipRequest updateMembershipRequest(
+		MembershipRequest membershipRequest, boolean merge)
+		throws SystemException {
+		membershipRequest.setNew(false);
+
+		return membershipRequestPersistence.update(membershipRequest, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

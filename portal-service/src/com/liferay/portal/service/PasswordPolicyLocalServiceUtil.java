@@ -103,6 +103,12 @@ public class PasswordPolicyLocalServiceUtil {
 		return getService().updatePasswordPolicy(passwordPolicy);
 	}
 
+	public static com.liferay.portal.model.PasswordPolicy updatePasswordPolicy(
+		com.liferay.portal.model.PasswordPolicy passwordPolicy, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updatePasswordPolicy(passwordPolicy, merge);
+	}
+
 	public static com.liferay.portal.model.PasswordPolicy addPasswordPolicy(
 		long userId, boolean defaultPolicy, java.lang.String name,
 		java.lang.String description, boolean changeable,

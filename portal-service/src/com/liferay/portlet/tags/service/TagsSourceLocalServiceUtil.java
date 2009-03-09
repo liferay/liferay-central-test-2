@@ -103,6 +103,12 @@ public class TagsSourceLocalServiceUtil {
 		return getService().updateTagsSource(tagsSource);
 	}
 
+	public static com.liferay.portlet.tags.model.TagsSource updateTagsSource(
+		com.liferay.portlet.tags.model.TagsSource tagsSource, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateTagsSource(tagsSource, merge);
+	}
+
 	public static TagsSourceLocalService getService() {
 		if (_service == null) {
 			throw new RuntimeException("TagsSourceLocalService is not set");

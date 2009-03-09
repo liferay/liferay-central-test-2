@@ -103,6 +103,12 @@ public class ExpandoValueLocalServiceUtil {
 		return getService().updateExpandoValue(expandoValue);
 	}
 
+	public static com.liferay.portlet.expando.model.ExpandoValue updateExpandoValue(
+		com.liferay.portlet.expando.model.ExpandoValue expandoValue,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateExpandoValue(expandoValue, merge);
+	}
+
 	public static com.liferay.portlet.expando.model.ExpandoValue addValue(
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, boolean data)

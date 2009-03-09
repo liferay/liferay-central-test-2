@@ -120,6 +120,13 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 		return mbStatsUserPersistence.update(mbStatsUser, true);
 	}
 
+	public MBStatsUser updateMBStatsUser(MBStatsUser mbStatsUser, boolean merge)
+		throws SystemException {
+		mbStatsUser.setNew(false);
+
+		return mbStatsUserPersistence.update(mbStatsUser, merge);
+	}
+
 	public MBBanLocalService getMBBanLocalService() {
 		return mbBanLocalService;
 	}

@@ -103,6 +103,12 @@ public class BlogsStatsUserLocalServiceUtil {
 		return getService().updateBlogsStatsUser(blogsStatsUser);
 	}
 
+	public static com.liferay.portlet.blogs.model.BlogsStatsUser updateBlogsStatsUser(
+		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateBlogsStatsUser(blogsStatsUser, merge);
+	}
+
 	public static void deleteStatsUserByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
 		getService().deleteStatsUserByGroupId(groupId);

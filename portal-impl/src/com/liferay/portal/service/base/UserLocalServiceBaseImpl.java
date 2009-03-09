@@ -244,6 +244,12 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService {
 		return userPersistence.update(user, true);
 	}
 
+	public User updateUser(User user, boolean merge) throws SystemException {
+		user.setNew(false);
+
+		return userPersistence.update(user, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

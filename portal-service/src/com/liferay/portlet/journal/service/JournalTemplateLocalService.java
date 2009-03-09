@@ -95,6 +95,10 @@ public interface JournalTemplateLocalService {
 		com.liferay.portlet.journal.model.JournalTemplate journalTemplate)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.journal.model.JournalTemplate updateJournalTemplate(
+		com.liferay.portlet.journal.model.JournalTemplate journalTemplate,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.journal.model.JournalTemplate addTemplate(
 		long userId, long groupId, java.lang.String templateId,
 		boolean autoTemplateId, java.lang.String structureId,

@@ -103,6 +103,12 @@ public class ExpandoRowLocalServiceUtil {
 		return getService().updateExpandoRow(expandoRow);
 	}
 
+	public static com.liferay.portlet.expando.model.ExpandoRow updateExpandoRow(
+		com.liferay.portlet.expando.model.ExpandoRow expandoRow, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateExpandoRow(expandoRow, merge);
+	}
+
 	public static com.liferay.portlet.expando.model.ExpandoRow addRow(
 		long tableId, long classPK)
 		throws com.liferay.portal.PortalException,

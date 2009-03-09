@@ -122,6 +122,13 @@ public abstract class ShoppingCouponLocalServiceBaseImpl
 		return shoppingCouponPersistence.update(shoppingCoupon, true);
 	}
 
+	public ShoppingCoupon updateShoppingCoupon(ShoppingCoupon shoppingCoupon,
+		boolean merge) throws SystemException {
+		shoppingCoupon.setNew(false);
+
+		return shoppingCouponPersistence.update(shoppingCoupon, merge);
+	}
+
 	public ShoppingCartLocalService getShoppingCartLocalService() {
 		return shoppingCartLocalService;
 	}

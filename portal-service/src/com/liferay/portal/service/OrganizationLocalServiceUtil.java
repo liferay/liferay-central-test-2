@@ -103,6 +103,12 @@ public class OrganizationLocalServiceUtil {
 		return getService().updateOrganization(organization);
 	}
 
+	public static com.liferay.portal.model.Organization updateOrganization(
+		com.liferay.portal.model.Organization organization, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateOrganization(organization, merge);
+	}
+
 	public static void addGroupOrganizations(long groupId,
 		long[] organizationIds) throws com.liferay.portal.SystemException {
 		getService().addGroupOrganizations(groupId, organizationIds);

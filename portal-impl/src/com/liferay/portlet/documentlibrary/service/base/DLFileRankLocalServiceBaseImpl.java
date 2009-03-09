@@ -116,6 +116,13 @@ public abstract class DLFileRankLocalServiceBaseImpl
 		return dlFileRankPersistence.update(dlFileRank, true);
 	}
 
+	public DLFileRank updateDLFileRank(DLFileRank dlFileRank, boolean merge)
+		throws SystemException {
+		dlFileRank.setNew(false);
+
+		return dlFileRankPersistence.update(dlFileRank, merge);
+	}
+
 	public DLFileEntryLocalService getDLFileEntryLocalService() {
 		return dlFileEntryLocalService;
 	}

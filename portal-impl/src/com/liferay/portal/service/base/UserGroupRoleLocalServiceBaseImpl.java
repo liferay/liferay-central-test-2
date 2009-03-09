@@ -214,6 +214,13 @@ public abstract class UserGroupRoleLocalServiceBaseImpl
 		return userGroupRolePersistence.update(userGroupRole, true);
 	}
 
+	public UserGroupRole updateUserGroupRole(UserGroupRole userGroupRole,
+		boolean merge) throws SystemException {
+		userGroupRole.setNew(false);
+
+		return userGroupRolePersistence.update(userGroupRole, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

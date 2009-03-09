@@ -95,6 +95,10 @@ public interface SubscriptionLocalService {
 		com.liferay.portal.model.Subscription subscription)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Subscription updateSubscription(
+		com.liferay.portal.model.Subscription subscription, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Subscription addSubscription(long userId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
@@ -127,6 +131,7 @@ public interface SubscriptionLocalService {
 		long companyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean isSubscribed(long companyId, long userId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException;

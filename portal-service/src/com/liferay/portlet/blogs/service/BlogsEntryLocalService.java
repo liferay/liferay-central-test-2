@@ -94,6 +94,10 @@ public interface BlogsEntryLocalService {
 		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.blogs.model.BlogsEntry updateBlogsEntry(
+		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(long userId,
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,

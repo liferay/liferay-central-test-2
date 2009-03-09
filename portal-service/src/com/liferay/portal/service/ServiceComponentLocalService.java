@@ -95,6 +95,10 @@ public interface ServiceComponentLocalService {
 		com.liferay.portal.model.ServiceComponent serviceComponent)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.ServiceComponent updateServiceComponent(
+		com.liferay.portal.model.ServiceComponent serviceComponent,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public void destroyServiceComponent(
 		javax.servlet.ServletContext servletContext,
 		java.lang.ClassLoader classLoader)

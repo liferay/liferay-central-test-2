@@ -103,6 +103,12 @@ public class SCProductScreenshotLocalServiceUtil {
 		return getService().updateSCProductScreenshot(scProductScreenshot);
 	}
 
+	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot updateSCProductScreenshot(
+		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateSCProductScreenshot(scProductScreenshot, merge);
+	}
+
 	public static void deleteProductScreenshot(
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot productScreenshot)
 		throws com.liferay.portal.PortalException,

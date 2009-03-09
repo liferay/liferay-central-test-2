@@ -103,6 +103,12 @@ public class UserGroupLocalServiceUtil {
 		return getService().updateUserGroup(userGroup);
 	}
 
+	public static com.liferay.portal.model.UserGroup updateUserGroup(
+		com.liferay.portal.model.UserGroup userGroup, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateUserGroup(userGroup, merge);
+	}
+
 	public static void addGroupUserGroups(long groupId, long[] userGroupIds)
 		throws com.liferay.portal.SystemException {
 		getService().addGroupUserGroups(groupId, userGroupIds);

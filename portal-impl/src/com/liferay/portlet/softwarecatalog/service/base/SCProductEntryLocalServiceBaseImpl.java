@@ -125,6 +125,13 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 		return scProductEntryPersistence.update(scProductEntry, true);
 	}
 
+	public SCProductEntry updateSCProductEntry(SCProductEntry scProductEntry,
+		boolean merge) throws SystemException {
+		scProductEntry.setNew(false);
+
+		return scProductEntryPersistence.update(scProductEntry, merge);
+	}
+
 	public SCLicenseLocalService getSCLicenseLocalService() {
 		return scLicenseLocalService;
 	}

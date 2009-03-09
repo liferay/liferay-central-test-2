@@ -116,6 +116,13 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService {
 		return mbBanPersistence.update(mbBan, true);
 	}
 
+	public MBBan updateMBBan(MBBan mbBan, boolean merge)
+		throws SystemException {
+		mbBan.setNew(false);
+
+		return mbBanPersistence.update(mbBan, merge);
+	}
+
 	public MBBanLocalService getMBBanLocalService() {
 		return mbBanLocalService;
 	}

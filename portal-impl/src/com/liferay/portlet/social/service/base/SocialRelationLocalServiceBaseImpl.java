@@ -108,6 +108,13 @@ public abstract class SocialRelationLocalServiceBaseImpl
 		return socialRelationPersistence.update(socialRelation, true);
 	}
 
+	public SocialRelation updateSocialRelation(SocialRelation socialRelation,
+		boolean merge) throws SystemException {
+		socialRelation.setNew(false);
+
+		return socialRelationPersistence.update(socialRelation, merge);
+	}
+
 	public SocialActivityLocalService getSocialActivityLocalService() {
 		return socialActivityLocalService;
 	}

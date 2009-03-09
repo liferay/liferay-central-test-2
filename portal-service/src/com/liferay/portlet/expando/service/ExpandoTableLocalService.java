@@ -95,6 +95,10 @@ public interface ExpandoTableLocalService {
 		com.liferay.portlet.expando.model.ExpandoTable expandoTable)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.expando.model.ExpandoTable updateExpandoTable(
+		com.liferay.portlet.expando.model.ExpandoTable expandoTable,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.expando.model.ExpandoTable addDefaultTable(
 		java.lang.String className)
 		throws com.liferay.portal.PortalException,

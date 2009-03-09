@@ -212,6 +212,13 @@ public abstract class OrgLaborLocalServiceBaseImpl
 		return orgLaborPersistence.update(orgLabor, true);
 	}
 
+	public OrgLabor updateOrgLabor(OrgLabor orgLabor, boolean merge)
+		throws SystemException {
+		orgLabor.setNew(false);
+
+		return orgLaborPersistence.update(orgLabor, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

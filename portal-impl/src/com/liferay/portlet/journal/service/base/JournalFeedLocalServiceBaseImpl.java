@@ -125,6 +125,13 @@ public abstract class JournalFeedLocalServiceBaseImpl
 		return journalFeedPersistence.update(journalFeed, true);
 	}
 
+	public JournalFeed updateJournalFeed(JournalFeed journalFeed, boolean merge)
+		throws SystemException {
+		journalFeed.setNew(false);
+
+		return journalFeedPersistence.update(journalFeed, merge);
+	}
+
 	public JournalArticleLocalService getJournalArticleLocalService() {
 		return journalArticleLocalService;
 	}

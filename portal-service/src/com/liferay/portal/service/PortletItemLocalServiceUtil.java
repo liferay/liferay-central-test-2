@@ -103,6 +103,12 @@ public class PortletItemLocalServiceUtil {
 		return getService().updatePortletItem(portletItem);
 	}
 
+	public static com.liferay.portal.model.PortletItem updatePortletItem(
+		com.liferay.portal.model.PortletItem portletItem, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updatePortletItem(portletItem, merge);
+	}
+
 	public static com.liferay.portal.model.PortletItem addPortletItem(
 		long userId, long groupId, java.lang.String name,
 		java.lang.String portletId, java.lang.String className)

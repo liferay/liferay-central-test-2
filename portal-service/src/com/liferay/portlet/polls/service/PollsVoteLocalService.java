@@ -93,6 +93,10 @@ public interface PollsVoteLocalService {
 		com.liferay.portlet.polls.model.PollsVote pollsVote)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.polls.model.PollsVote updatePollsVote(
+		com.liferay.portlet.polls.model.PollsVote pollsVote, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.polls.model.PollsVote addVote(long userId,
 		long questionId, long choiceId)
 		throws com.liferay.portal.PortalException,

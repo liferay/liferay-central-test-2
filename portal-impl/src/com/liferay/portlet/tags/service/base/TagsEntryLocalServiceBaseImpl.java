@@ -121,6 +121,13 @@ public abstract class TagsEntryLocalServiceBaseImpl
 		return tagsEntryPersistence.update(tagsEntry, true);
 	}
 
+	public TagsEntry updateTagsEntry(TagsEntry tagsEntry, boolean merge)
+		throws SystemException {
+		tagsEntry.setNew(false);
+
+		return tagsEntryPersistence.update(tagsEntry, merge);
+	}
+
 	public TagsAssetLocalService getTagsAssetLocalService() {
 		return tagsAssetLocalService;
 	}

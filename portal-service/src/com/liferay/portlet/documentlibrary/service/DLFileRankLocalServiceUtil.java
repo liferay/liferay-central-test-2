@@ -103,6 +103,12 @@ public class DLFileRankLocalServiceUtil {
 		return getService().updateDLFileRank(dlFileRank);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileRank updateDLFileRank(
+		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateDLFileRank(dlFileRank, merge);
+	}
+
 	public static void deleteFileRanks(long userId)
 		throws com.liferay.portal.SystemException {
 		getService().deleteFileRanks(userId);

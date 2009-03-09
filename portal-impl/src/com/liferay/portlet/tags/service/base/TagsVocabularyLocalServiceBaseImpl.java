@@ -122,6 +122,13 @@ public abstract class TagsVocabularyLocalServiceBaseImpl
 		return tagsVocabularyPersistence.update(tagsVocabulary, true);
 	}
 
+	public TagsVocabulary updateTagsVocabulary(TagsVocabulary tagsVocabulary,
+		boolean merge) throws SystemException {
+		tagsVocabulary.setNew(false);
+
+		return tagsVocabularyPersistence.update(tagsVocabulary, merge);
+	}
+
 	public TagsAssetLocalService getTagsAssetLocalService() {
 		return tagsAssetLocalService;
 	}

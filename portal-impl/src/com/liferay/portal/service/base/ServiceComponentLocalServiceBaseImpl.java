@@ -216,6 +216,14 @@ public abstract class ServiceComponentLocalServiceBaseImpl
 		return serviceComponentPersistence.update(serviceComponent, true);
 	}
 
+	public ServiceComponent updateServiceComponent(
+		ServiceComponent serviceComponent, boolean merge)
+		throws SystemException {
+		serviceComponent.setNew(false);
+
+		return serviceComponentPersistence.update(serviceComponent, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

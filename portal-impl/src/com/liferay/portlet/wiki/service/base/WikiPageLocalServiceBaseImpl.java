@@ -139,6 +139,13 @@ public abstract class WikiPageLocalServiceBaseImpl
 		return wikiPagePersistence.update(wikiPage, true);
 	}
 
+	public WikiPage updateWikiPage(WikiPage wikiPage, boolean merge)
+		throws SystemException {
+		wikiPage.setNew(false);
+
+		return wikiPagePersistence.update(wikiPage, merge);
+	}
+
 	public WikiNodeLocalService getWikiNodeLocalService() {
 		return wikiNodeLocalService;
 	}

@@ -216,6 +216,13 @@ public abstract class PasswordPolicyLocalServiceBaseImpl
 		return passwordPolicyPersistence.update(passwordPolicy, true);
 	}
 
+	public PasswordPolicy updatePasswordPolicy(PasswordPolicy passwordPolicy,
+		boolean merge) throws SystemException {
+		passwordPolicy.setNew(false);
+
+		return passwordPolicyPersistence.update(passwordPolicy, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

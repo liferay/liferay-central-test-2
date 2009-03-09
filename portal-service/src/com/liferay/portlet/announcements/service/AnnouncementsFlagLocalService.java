@@ -95,6 +95,10 @@ public interface AnnouncementsFlagLocalService {
 		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.announcements.model.AnnouncementsFlag updateAnnouncementsFlag(
+		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.announcements.model.AnnouncementsFlag addFlag(
 		long userId, long entryId, int value)
 		throws com.liferay.portal.SystemException;

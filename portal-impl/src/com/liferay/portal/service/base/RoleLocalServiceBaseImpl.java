@@ -208,6 +208,12 @@ public abstract class RoleLocalServiceBaseImpl implements RoleLocalService {
 		return rolePersistence.update(role, true);
 	}
 
+	public Role updateRole(Role role, boolean merge) throws SystemException {
+		role.setNew(false);
+
+		return rolePersistence.update(role, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

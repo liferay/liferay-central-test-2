@@ -95,6 +95,10 @@ public interface PasswordPolicyRelLocalService {
 		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.PasswordPolicyRel updatePasswordPolicyRel(
+		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.PasswordPolicyRel addPasswordPolicyRel(
 		long passwordPolicyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException;

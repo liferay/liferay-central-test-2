@@ -95,6 +95,10 @@ public interface TagsPropertyLocalService {
 		com.liferay.portlet.tags.model.TagsProperty tagsProperty)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.tags.model.TagsProperty updateTagsProperty(
+		com.liferay.portlet.tags.model.TagsProperty tagsProperty, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.tags.model.TagsProperty addProperty(
 		long userId, long entryId, java.lang.String key, java.lang.String value)
 		throws com.liferay.portal.PortalException,

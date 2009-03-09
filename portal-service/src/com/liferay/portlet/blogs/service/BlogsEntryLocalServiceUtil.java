@@ -103,6 +103,12 @@ public class BlogsEntryLocalServiceUtil {
 		return getService().updateBlogsEntry(blogsEntry);
 	}
 
+	public static com.liferay.portlet.blogs.model.BlogsEntry updateBlogsEntry(
+		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateBlogsEntry(blogsEntry, merge);
+	}
+
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
 		long userId, java.lang.String title, java.lang.String content,
 		int displayDateMonth, int displayDateDay, int displayDateYear,

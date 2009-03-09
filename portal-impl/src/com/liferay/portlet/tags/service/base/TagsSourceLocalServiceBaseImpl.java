@@ -111,6 +111,13 @@ public abstract class TagsSourceLocalServiceBaseImpl
 		return tagsSourcePersistence.update(tagsSource, true);
 	}
 
+	public TagsSource updateTagsSource(TagsSource tagsSource, boolean merge)
+		throws SystemException {
+		tagsSource.setNew(false);
+
+		return tagsSourcePersistence.update(tagsSource, merge);
+	}
+
 	public TagsAssetLocalService getTagsAssetLocalService() {
 		return tagsAssetLocalService;
 	}

@@ -95,14 +95,20 @@ public interface PasswordTrackerLocalService {
 		com.liferay.portal.model.PasswordTracker passwordTracker)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.PasswordTracker updatePasswordTracker(
+		com.liferay.portal.model.PasswordTracker passwordTracker, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public void deletePasswordTrackers(long userId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean isSameAsCurrentPassword(long userId,
 		java.lang.String newClearTextPwd)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean isValidPassword(long userId, java.lang.String newClearTextPwd)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

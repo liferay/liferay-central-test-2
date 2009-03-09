@@ -94,6 +94,10 @@ public interface MBCategoryLocalService {
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.messageboards.model.MBCategory updateMBCategory(
+		com.liferay.portlet.messageboards.model.MBCategory mbCategory,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.messageboards.model.MBCategory addCategory(
 		long userId, long parentCategoryId, java.lang.String name,
 		java.lang.String description, java.lang.String emailAddress,

@@ -216,6 +216,13 @@ public abstract class PluginSettingLocalServiceBaseImpl
 		return pluginSettingPersistence.update(pluginSetting, true);
 	}
 
+	public PluginSetting updatePluginSetting(PluginSetting pluginSetting,
+		boolean merge) throws SystemException {
+		pluginSetting.setNew(false);
+
+		return pluginSettingPersistence.update(pluginSetting, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

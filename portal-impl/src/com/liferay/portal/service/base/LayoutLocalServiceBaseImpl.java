@@ -226,6 +226,13 @@ public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService {
 		return layoutPersistence.update(layout, true);
 	}
 
+	public Layout updateLayout(Layout layout, boolean merge)
+		throws SystemException {
+		layout.setNew(false);
+
+		return layoutPersistence.update(layout, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

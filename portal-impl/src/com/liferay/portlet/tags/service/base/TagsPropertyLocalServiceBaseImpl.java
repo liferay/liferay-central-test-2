@@ -118,6 +118,13 @@ public abstract class TagsPropertyLocalServiceBaseImpl
 		return tagsPropertyPersistence.update(tagsProperty, true);
 	}
 
+	public TagsProperty updateTagsProperty(TagsProperty tagsProperty,
+		boolean merge) throws SystemException {
+		tagsProperty.setNew(false);
+
+		return tagsPropertyPersistence.update(tagsProperty, merge);
+	}
+
 	public TagsAssetLocalService getTagsAssetLocalService() {
 		return tagsAssetLocalService;
 	}

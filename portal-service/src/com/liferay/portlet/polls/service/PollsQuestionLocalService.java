@@ -95,6 +95,10 @@ public interface PollsQuestionLocalService {
 		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.polls.model.PollsQuestion updatePollsQuestion(
+		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
 		long userId, java.lang.String title, java.lang.String description,
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,

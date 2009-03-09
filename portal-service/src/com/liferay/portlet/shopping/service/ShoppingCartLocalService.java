@@ -95,6 +95,10 @@ public interface ShoppingCartLocalService {
 		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.shopping.model.ShoppingCart updateShoppingCart(
+		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public void deleteGroupCarts(long groupId)
 		throws com.liferay.portal.SystemException;
 

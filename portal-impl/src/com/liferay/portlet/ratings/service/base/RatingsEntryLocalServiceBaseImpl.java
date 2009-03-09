@@ -111,6 +111,13 @@ public abstract class RatingsEntryLocalServiceBaseImpl
 		return ratingsEntryPersistence.update(ratingsEntry, true);
 	}
 
+	public RatingsEntry updateRatingsEntry(RatingsEntry ratingsEntry,
+		boolean merge) throws SystemException {
+		ratingsEntry.setNew(false);
+
+		return ratingsEntryPersistence.update(ratingsEntry, merge);
+	}
+
 	public RatingsEntryLocalService getRatingsEntryLocalService() {
 		return ratingsEntryLocalService;
 	}

@@ -103,6 +103,12 @@ public class LayoutSetLocalServiceUtil {
 		return getService().updateLayoutSet(layoutSet);
 	}
 
+	public static com.liferay.portal.model.LayoutSet updateLayoutSet(
+		com.liferay.portal.model.LayoutSet layoutSet, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateLayoutSet(layoutSet, merge);
+	}
+
 	public static com.liferay.portal.model.LayoutSet addLayoutSet(
 		long groupId, boolean privateLayout)
 		throws com.liferay.portal.PortalException,

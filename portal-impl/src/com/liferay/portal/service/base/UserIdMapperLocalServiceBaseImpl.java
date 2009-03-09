@@ -216,6 +216,13 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 		return userIdMapperPersistence.update(userIdMapper, true);
 	}
 
+	public UserIdMapper updateUserIdMapper(UserIdMapper userIdMapper,
+		boolean merge) throws SystemException {
+		userIdMapper.setNew(false);
+
+		return userIdMapperPersistence.update(userIdMapper, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

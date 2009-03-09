@@ -215,6 +215,13 @@ public abstract class ClassNameLocalServiceBaseImpl
 		return classNamePersistence.update(className, true);
 	}
 
+	public ClassName updateClassName(ClassName className, boolean merge)
+		throws SystemException {
+		className.setNew(false);
+
+		return classNamePersistence.update(className, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

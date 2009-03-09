@@ -105,6 +105,14 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 		return announcementsFlagPersistence.update(announcementsFlag, true);
 	}
 
+	public AnnouncementsFlag updateAnnouncementsFlag(
+		AnnouncementsFlag announcementsFlag, boolean merge)
+		throws SystemException {
+		announcementsFlag.setNew(false);
+
+		return announcementsFlagPersistence.update(announcementsFlag, merge);
+	}
+
 	public AnnouncementsDeliveryLocalService getAnnouncementsDeliveryLocalService() {
 		return announcementsDeliveryLocalService;
 	}

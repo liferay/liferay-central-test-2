@@ -103,6 +103,12 @@ public class DLFileShortcutLocalServiceUtil {
 		return getService().updateDLFileShortcut(dlFileShortcut);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut updateDLFileShortcut(
+		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateDLFileShortcut(dlFileShortcut, merge);
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
 		long userId, long folderId, long toFolderId, java.lang.String toName,
 		boolean addCommunityPermissions, boolean addGuestPermissions)

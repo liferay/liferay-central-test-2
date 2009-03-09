@@ -208,6 +208,13 @@ public abstract class AccountLocalServiceBaseImpl implements AccountLocalService
 		return accountPersistence.update(account, true);
 	}
 
+	public Account updateAccount(Account account, boolean merge)
+		throws SystemException {
+		account.setNew(false);
+
+		return accountPersistence.update(account, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

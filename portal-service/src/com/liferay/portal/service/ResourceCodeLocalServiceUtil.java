@@ -103,6 +103,12 @@ public class ResourceCodeLocalServiceUtil {
 		return getService().updateResourceCode(resourceCode);
 	}
 
+	public static com.liferay.portal.model.ResourceCode updateResourceCode(
+		com.liferay.portal.model.ResourceCode resourceCode, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateResourceCode(resourceCode, merge);
+	}
+
 	public static com.liferay.portal.model.ResourceCode addResourceCode(
 		long companyId, java.lang.String name, int scope)
 		throws com.liferay.portal.SystemException {

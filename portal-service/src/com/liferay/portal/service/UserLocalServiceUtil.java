@@ -99,6 +99,12 @@ public class UserLocalServiceUtil {
 		return getService().updateUser(user);
 	}
 
+	public static com.liferay.portal.model.User updateUser(
+		com.liferay.portal.model.User user, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateUser(user, merge);
+	}
+
 	public static void addGroupUsers(long groupId, long[] userIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

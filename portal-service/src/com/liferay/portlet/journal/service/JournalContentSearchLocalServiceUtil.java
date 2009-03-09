@@ -103,6 +103,13 @@ public class JournalContentSearchLocalServiceUtil {
 		return getService().updateJournalContentSearch(journalContentSearch);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalContentSearch updateJournalContentSearch(
+		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService()
+				   .updateJournalContentSearch(journalContentSearch, merge);
+	}
+
 	public static void checkContentSearches(long companyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

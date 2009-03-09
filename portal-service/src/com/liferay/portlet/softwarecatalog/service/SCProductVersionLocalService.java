@@ -95,6 +95,10 @@ public interface SCProductVersionLocalService {
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.softwarecatalog.model.SCProductVersion updateSCProductVersion(
+		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion addProductVersion(
 		long userId, long productEntryId, java.lang.String version,
 		java.lang.String changeLog, java.lang.String downloadPageURL,

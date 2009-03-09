@@ -104,6 +104,13 @@ public abstract class PollsChoiceLocalServiceBaseImpl
 		return pollsChoicePersistence.update(pollsChoice, true);
 	}
 
+	public PollsChoice updatePollsChoice(PollsChoice pollsChoice, boolean merge)
+		throws SystemException {
+		pollsChoice.setNew(false);
+
+		return pollsChoicePersistence.update(pollsChoice, merge);
+	}
+
 	public PollsChoiceLocalService getPollsChoiceLocalService() {
 		return pollsChoiceLocalService;
 	}

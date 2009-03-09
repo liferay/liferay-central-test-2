@@ -91,6 +91,10 @@ public interface AddressLocalService {
 		com.liferay.portal.model.Address address)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Address updateAddress(
+		com.liferay.portal.model.Address address, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Address addAddress(long userId,
 		java.lang.String className, long classPK, java.lang.String street1,
 		java.lang.String street2, java.lang.String street3,

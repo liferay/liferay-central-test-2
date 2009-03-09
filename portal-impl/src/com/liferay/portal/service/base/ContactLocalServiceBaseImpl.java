@@ -208,6 +208,13 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 		return contactPersistence.update(contact, true);
 	}
 
+	public Contact updateContact(Contact contact, boolean merge)
+		throws SystemException {
+		contact.setNew(false);
+
+		return contactPersistence.update(contact, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

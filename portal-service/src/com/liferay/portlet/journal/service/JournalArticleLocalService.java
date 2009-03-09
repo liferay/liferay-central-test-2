@@ -95,6 +95,10 @@ public interface JournalArticleLocalService {
 		com.liferay.portlet.journal.model.JournalArticle journalArticle)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.journal.model.JournalArticle updateJournalArticle(
+		com.liferay.portlet.journal.model.JournalArticle journalArticle,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.journal.model.JournalArticle addArticle(
 		long userId, long groupId, java.lang.String articleId,
 		boolean autoArticleId, java.lang.String title,
@@ -510,11 +514,13 @@ public interface JournalArticleLocalService {
 	public boolean hasArticle(long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean isLatestVersion(long groupId, java.lang.String articleId,
 		double version)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean isLatestVersion(long groupId, java.lang.String articleId,
 		double version, java.lang.Boolean active)
 		throws com.liferay.portal.PortalException,

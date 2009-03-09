@@ -162,6 +162,13 @@ public abstract class MBMessageLocalServiceBaseImpl
 		return mbMessagePersistence.update(mbMessage, true);
 	}
 
+	public MBMessage updateMBMessage(MBMessage mbMessage, boolean merge)
+		throws SystemException {
+		mbMessage.setNew(false);
+
+		return mbMessagePersistence.update(mbMessage, merge);
+	}
+
 	public MBBanLocalService getMBBanLocalService() {
 		return mbBanLocalService;
 	}

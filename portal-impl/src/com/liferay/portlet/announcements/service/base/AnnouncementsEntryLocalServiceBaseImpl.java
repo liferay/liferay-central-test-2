@@ -134,6 +134,14 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 		return announcementsEntryPersistence.update(announcementsEntry, true);
 	}
 
+	public AnnouncementsEntry updateAnnouncementsEntry(
+		AnnouncementsEntry announcementsEntry, boolean merge)
+		throws SystemException {
+		announcementsEntry.setNew(false);
+
+		return announcementsEntryPersistence.update(announcementsEntry, merge);
+	}
+
 	public AnnouncementsDeliveryLocalService getAnnouncementsDeliveryLocalService() {
 		return announcementsDeliveryLocalService;
 	}

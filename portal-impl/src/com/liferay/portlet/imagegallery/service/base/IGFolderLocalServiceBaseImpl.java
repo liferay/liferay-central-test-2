@@ -116,6 +116,13 @@ public abstract class IGFolderLocalServiceBaseImpl
 		return igFolderPersistence.update(igFolder, true);
 	}
 
+	public IGFolder updateIGFolder(IGFolder igFolder, boolean merge)
+		throws SystemException {
+		igFolder.setNew(false);
+
+		return igFolderPersistence.update(igFolder, merge);
+	}
+
 	public IGFolderLocalService getIGFolderLocalService() {
 		return igFolderLocalService;
 	}

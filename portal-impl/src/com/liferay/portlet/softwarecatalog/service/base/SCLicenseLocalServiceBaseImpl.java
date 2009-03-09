@@ -108,6 +108,13 @@ public abstract class SCLicenseLocalServiceBaseImpl
 		return scLicensePersistence.update(scLicense, true);
 	}
 
+	public SCLicense updateSCLicense(SCLicense scLicense, boolean merge)
+		throws SystemException {
+		scLicense.setNew(false);
+
+		return scLicensePersistence.update(scLicense, merge);
+	}
+
 	public SCLicenseLocalService getSCLicenseLocalService() {
 		return scLicenseLocalService;
 	}

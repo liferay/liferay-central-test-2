@@ -103,6 +103,12 @@ public class PasswordTrackerLocalServiceUtil {
 		return getService().updatePasswordTracker(passwordTracker);
 	}
 
+	public static com.liferay.portal.model.PasswordTracker updatePasswordTracker(
+		com.liferay.portal.model.PasswordTracker passwordTracker, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updatePasswordTracker(passwordTracker, merge);
+	}
+
 	public static void deletePasswordTrackers(long userId)
 		throws com.liferay.portal.SystemException {
 		getService().deletePasswordTrackers(userId);

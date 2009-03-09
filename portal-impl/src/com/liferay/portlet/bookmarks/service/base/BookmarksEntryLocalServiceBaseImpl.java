@@ -118,6 +118,13 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 		return bookmarksEntryPersistence.update(bookmarksEntry, true);
 	}
 
+	public BookmarksEntry updateBookmarksEntry(BookmarksEntry bookmarksEntry,
+		boolean merge) throws SystemException {
+		bookmarksEntry.setNew(false);
+
+		return bookmarksEntryPersistence.update(bookmarksEntry, merge);
+	}
+
 	public BookmarksEntryLocalService getBookmarksEntryLocalService() {
 		return bookmarksEntryLocalService;
 	}

@@ -103,6 +103,12 @@ public class PluginSettingLocalServiceUtil {
 		return getService().updatePluginSetting(pluginSetting);
 	}
 
+	public static com.liferay.portal.model.PluginSetting updatePluginSetting(
+		com.liferay.portal.model.PluginSetting pluginSetting, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updatePluginSetting(pluginSetting, merge);
+	}
+
 	public static void checkPermission(long userId, java.lang.String pluginId,
 		java.lang.String pluginType) throws com.liferay.portal.PortalException {
 		getService().checkPermission(userId, pluginId, pluginType);

@@ -211,6 +211,13 @@ public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService
 		return websitePersistence.update(website, true);
 	}
 
+	public Website updateWebsite(Website website, boolean merge)
+		throws SystemException {
+		website.setNew(false);
+
+		return websitePersistence.update(website, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

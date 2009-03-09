@@ -103,6 +103,12 @@ public class TagsPropertyLocalServiceUtil {
 		return getService().updateTagsProperty(tagsProperty);
 	}
 
+	public static com.liferay.portlet.tags.model.TagsProperty updateTagsProperty(
+		com.liferay.portlet.tags.model.TagsProperty tagsProperty, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateTagsProperty(tagsProperty, merge);
+	}
+
 	public static com.liferay.portlet.tags.model.TagsProperty addProperty(
 		long userId, long entryId, java.lang.String key, java.lang.String value)
 		throws com.liferay.portal.PortalException,

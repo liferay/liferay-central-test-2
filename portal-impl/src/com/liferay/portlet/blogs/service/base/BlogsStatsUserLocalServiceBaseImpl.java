@@ -106,6 +106,13 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 		return blogsStatsUserPersistence.update(blogsStatsUser, true);
 	}
 
+	public BlogsStatsUser updateBlogsStatsUser(BlogsStatsUser blogsStatsUser,
+		boolean merge) throws SystemException {
+		blogsStatsUser.setNew(false);
+
+		return blogsStatsUserPersistence.update(blogsStatsUser, merge);
+	}
+
 	public BlogsEntryLocalService getBlogsEntryLocalService() {
 		return blogsEntryLocalService;
 	}

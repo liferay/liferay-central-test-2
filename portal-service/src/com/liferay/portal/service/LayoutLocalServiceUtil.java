@@ -100,6 +100,12 @@ public class LayoutLocalServiceUtil {
 		return getService().updateLayout(layout);
 	}
 
+	public static com.liferay.portal.model.Layout updateLayout(
+		com.liferay.portal.model.Layout layout, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateLayout(layout, merge);
+	}
+
 	public static com.liferay.portal.model.Layout addLayout(long userId,
 		long groupId, boolean privateLayout, long parentLayoutId,
 		java.lang.String name, java.lang.String title,

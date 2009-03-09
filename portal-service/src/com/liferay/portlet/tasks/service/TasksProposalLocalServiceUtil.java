@@ -103,6 +103,12 @@ public class TasksProposalLocalServiceUtil {
 		return getService().updateTasksProposal(tasksProposal);
 	}
 
+	public static com.liferay.portlet.tasks.model.TasksProposal updateTasksProposal(
+		com.liferay.portlet.tasks.model.TasksProposal tasksProposal,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateTasksProposal(tasksProposal, merge);
+	}
+
 	public static com.liferay.portlet.tasks.model.TasksProposal addProposal(
 		long userId, long groupId, java.lang.String className,
 		java.lang.String classPK, java.lang.String name,

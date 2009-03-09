@@ -103,6 +103,12 @@ public class WikiPageLocalServiceUtil {
 		return getService().updateWikiPage(wikiPage);
 	}
 
+	public static com.liferay.portlet.wiki.model.WikiPage updateWikiPage(
+		com.liferay.portlet.wiki.model.WikiPage wikiPage, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateWikiPage(wikiPage, merge);
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiPage addPage(long userId,
 		long nodeId, java.lang.String title, java.lang.String content,
 		java.lang.String summary, boolean minorEdit,

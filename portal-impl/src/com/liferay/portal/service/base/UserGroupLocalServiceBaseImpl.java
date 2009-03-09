@@ -215,6 +215,13 @@ public abstract class UserGroupLocalServiceBaseImpl
 		return userGroupPersistence.update(userGroup, true);
 	}
 
+	public UserGroup updateUserGroup(UserGroup userGroup, boolean merge)
+		throws SystemException {
+		userGroup.setNew(false);
+
+		return userGroupPersistence.update(userGroup, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

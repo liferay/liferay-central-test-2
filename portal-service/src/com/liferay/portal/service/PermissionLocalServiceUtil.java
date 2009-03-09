@@ -103,6 +103,12 @@ public class PermissionLocalServiceUtil {
 		return getService().updatePermission(permission);
 	}
 
+	public static com.liferay.portal.model.Permission updatePermission(
+		com.liferay.portal.model.Permission permission, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updatePermission(permission, merge);
+	}
+
 	public static com.liferay.portal.model.Permission addPermission(
 		long companyId, java.lang.String actionId, long resourceId)
 		throws com.liferay.portal.SystemException {

@@ -95,6 +95,10 @@ public interface MBMailingListLocalService {
 		com.liferay.portlet.messageboards.model.MBMailingList mbMailingList)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.messageboards.model.MBMailingList updateMBMailingList(
+		com.liferay.portlet.messageboards.model.MBMailingList mbMailingList,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.messageboards.model.MBMailingList addMailingList(
 		java.lang.String uuid, long userId, long categoryId,
 		java.lang.String emailAddress, java.lang.String inProtocol,

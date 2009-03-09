@@ -94,6 +94,10 @@ public interface TasksReviewLocalService {
 		com.liferay.portlet.tasks.model.TasksReview tasksReview)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.tasks.model.TasksReview updateTasksReview(
+		com.liferay.portlet.tasks.model.TasksReview tasksReview, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.tasks.model.TasksReview addReview(long userId,
 		long proposalId, long assignedByUserId, int stage)
 		throws com.liferay.portal.PortalException,

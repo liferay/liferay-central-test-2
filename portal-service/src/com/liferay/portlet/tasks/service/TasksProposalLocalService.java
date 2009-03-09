@@ -95,6 +95,10 @@ public interface TasksProposalLocalService {
 		com.liferay.portlet.tasks.model.TasksProposal tasksProposal)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.tasks.model.TasksProposal updateTasksProposal(
+		com.liferay.portlet.tasks.model.TasksProposal tasksProposal,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.tasks.model.TasksProposal addProposal(
 		long userId, long groupId, java.lang.String className,
 		java.lang.String classPK, java.lang.String name,

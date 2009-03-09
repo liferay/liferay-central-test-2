@@ -95,6 +95,10 @@ public interface AnnouncementsEntryLocalService {
 		com.liferay.portlet.announcements.model.AnnouncementsEntry announcementsEntry)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.announcements.model.AnnouncementsEntry updateAnnouncementsEntry(
+		com.liferay.portlet.announcements.model.AnnouncementsEntry announcementsEntry,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.announcements.model.AnnouncementsEntry addEntry(
 		long userId, long classNameId, long classPK, java.lang.String title,
 		java.lang.String content, java.lang.String url, java.lang.String type,

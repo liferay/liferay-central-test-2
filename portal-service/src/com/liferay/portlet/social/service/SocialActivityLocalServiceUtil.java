@@ -103,6 +103,12 @@ public class SocialActivityLocalServiceUtil {
 		return getService().updateSocialActivity(socialActivity);
 	}
 
+	public static com.liferay.portlet.social.model.SocialActivity updateSocialActivity(
+		com.liferay.portlet.social.model.SocialActivity socialActivity,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateSocialActivity(socialActivity, merge);
+	}
+
 	public static com.liferay.portlet.social.model.SocialActivity addActivity(
 		long userId, long groupId, java.lang.String className, long classPK,
 		int type, java.lang.String extraData, long receiverUserId)

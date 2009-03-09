@@ -103,6 +103,12 @@ public class PollsVoteLocalServiceUtil {
 		return getService().updatePollsVote(pollsVote);
 	}
 
+	public static com.liferay.portlet.polls.model.PollsVote updatePollsVote(
+		com.liferay.portlet.polls.model.PollsVote pollsVote, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updatePollsVote(pollsVote, merge);
+	}
+
 	public static com.liferay.portlet.polls.model.PollsVote addVote(
 		long userId, long questionId, long choiceId)
 		throws com.liferay.portal.PortalException,

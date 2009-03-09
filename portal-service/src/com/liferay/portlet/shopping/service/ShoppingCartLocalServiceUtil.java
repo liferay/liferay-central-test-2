@@ -103,6 +103,12 @@ public class ShoppingCartLocalServiceUtil {
 		return getService().updateShoppingCart(shoppingCart);
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingCart updateShoppingCart(
+		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateShoppingCart(shoppingCart, merge);
+	}
+
 	public static void deleteGroupCarts(long groupId)
 		throws com.liferay.portal.SystemException {
 		getService().deleteGroupCarts(groupId);

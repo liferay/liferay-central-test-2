@@ -103,6 +103,12 @@ public class TasksReviewLocalServiceUtil {
 		return getService().updateTasksReview(tasksReview);
 	}
 
+	public static com.liferay.portlet.tasks.model.TasksReview updateTasksReview(
+		com.liferay.portlet.tasks.model.TasksReview tasksReview, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateTasksReview(tasksReview, merge);
+	}
+
 	public static com.liferay.portlet.tasks.model.TasksReview addReview(
 		long userId, long proposalId, long assignedByUserId, int stage)
 		throws com.liferay.portal.PortalException,

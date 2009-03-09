@@ -91,6 +91,10 @@ public interface LayoutSetLocalService {
 		com.liferay.portal.model.LayoutSet layoutSet)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.LayoutSet updateLayoutSet(
+		com.liferay.portal.model.LayoutSet layoutSet, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.LayoutSet addLayoutSet(long groupId,
 		boolean privateLayout)
 		throws com.liferay.portal.PortalException,

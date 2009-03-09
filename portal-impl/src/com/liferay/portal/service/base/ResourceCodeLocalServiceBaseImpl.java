@@ -216,6 +216,13 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 		return resourceCodePersistence.update(resourceCode, true);
 	}
 
+	public ResourceCode updateResourceCode(ResourceCode resourceCode,
+		boolean merge) throws SystemException {
+		resourceCode.setNew(false);
+
+		return resourceCodePersistence.update(resourceCode, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

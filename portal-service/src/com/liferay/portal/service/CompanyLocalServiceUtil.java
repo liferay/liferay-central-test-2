@@ -100,6 +100,12 @@ public class CompanyLocalServiceUtil {
 		return getService().updateCompany(company);
 	}
 
+	public static com.liferay.portal.model.Company updateCompany(
+		com.liferay.portal.model.Company company, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateCompany(company, merge);
+	}
+
 	public static com.liferay.portal.model.Company addCompany(
 		java.lang.String webId, java.lang.String virtualHost,
 		java.lang.String mx)

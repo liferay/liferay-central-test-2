@@ -109,6 +109,13 @@ public abstract class DLFileVersionLocalServiceBaseImpl
 		return dlFileVersionPersistence.update(dlFileVersion, true);
 	}
 
+	public DLFileVersion updateDLFileVersion(DLFileVersion dlFileVersion,
+		boolean merge) throws SystemException {
+		dlFileVersion.setNew(false);
+
+		return dlFileVersionPersistence.update(dlFileVersion, merge);
+	}
+
 	public DLFileEntryLocalService getDLFileEntryLocalService() {
 		return dlFileEntryLocalService;
 	}

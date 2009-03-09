@@ -103,6 +103,12 @@ public class PollsQuestionLocalServiceUtil {
 		return getService().updatePollsQuestion(pollsQuestion);
 	}
 
+	public static com.liferay.portlet.polls.model.PollsQuestion updatePollsQuestion(
+		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updatePollsQuestion(pollsQuestion, merge);
+	}
+
 	public static com.liferay.portlet.polls.model.PollsQuestion addQuestion(
 		long userId, java.lang.String title, java.lang.String description,
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,

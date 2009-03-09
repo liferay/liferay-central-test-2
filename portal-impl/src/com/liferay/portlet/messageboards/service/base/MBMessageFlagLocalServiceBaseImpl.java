@@ -124,6 +124,13 @@ public abstract class MBMessageFlagLocalServiceBaseImpl
 		return mbMessageFlagPersistence.update(mbMessageFlag, true);
 	}
 
+	public MBMessageFlag updateMBMessageFlag(MBMessageFlag mbMessageFlag,
+		boolean merge) throws SystemException {
+		mbMessageFlag.setNew(false);
+
+		return mbMessageFlagPersistence.update(mbMessageFlag, merge);
+	}
+
 	public MBBanLocalService getMBBanLocalService() {
 		return mbBanLocalService;
 	}

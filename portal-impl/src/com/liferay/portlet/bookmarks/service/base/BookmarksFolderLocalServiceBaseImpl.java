@@ -114,6 +114,14 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 		return bookmarksFolderPersistence.update(bookmarksFolder, true);
 	}
 
+	public BookmarksFolder updateBookmarksFolder(
+		BookmarksFolder bookmarksFolder, boolean merge)
+		throws SystemException {
+		bookmarksFolder.setNew(false);
+
+		return bookmarksFolderPersistence.update(bookmarksFolder, merge);
+	}
+
 	public BookmarksEntryLocalService getBookmarksEntryLocalService() {
 		return bookmarksEntryLocalService;
 	}

@@ -95,6 +95,10 @@ public interface WebDAVPropsLocalService {
 		com.liferay.portal.model.WebDAVProps webDAVProps)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.WebDAVProps updateWebDAVProps(
+		com.liferay.portal.model.WebDAVProps webDAVProps, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public void deleteWebDAVProps(java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException;
 

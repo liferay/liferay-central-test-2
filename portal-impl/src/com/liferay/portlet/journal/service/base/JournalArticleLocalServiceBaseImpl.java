@@ -150,6 +150,13 @@ public abstract class JournalArticleLocalServiceBaseImpl
 		return journalArticlePersistence.update(journalArticle, true);
 	}
 
+	public JournalArticle updateJournalArticle(JournalArticle journalArticle,
+		boolean merge) throws SystemException {
+		journalArticle.setNew(false);
+
+		return journalArticlePersistence.update(journalArticle, merge);
+	}
+
 	public JournalArticleLocalService getJournalArticleLocalService() {
 		return journalArticleLocalService;
 	}

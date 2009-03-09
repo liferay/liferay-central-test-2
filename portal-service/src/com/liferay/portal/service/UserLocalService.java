@@ -91,6 +91,10 @@ public interface UserLocalService {
 		com.liferay.portal.model.User user)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.User updateUser(
+		com.liferay.portal.model.User user, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public void addGroupUsers(long groupId, long[] userIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -418,10 +422,12 @@ public interface UserLocalService {
 	public boolean hasUserGroupUser(long userGroupId, long userId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean isPasswordExpired(com.liferay.portal.model.User user)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean isPasswordExpiringSoon(com.liferay.portal.model.User user)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

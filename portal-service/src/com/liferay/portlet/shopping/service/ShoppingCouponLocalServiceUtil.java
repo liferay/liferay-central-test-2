@@ -103,6 +103,12 @@ public class ShoppingCouponLocalServiceUtil {
 		return getService().updateShoppingCoupon(shoppingCoupon);
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingCoupon updateShoppingCoupon(
+		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateShoppingCoupon(shoppingCoupon, merge);
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon addCoupon(
 		long userId, java.lang.String code, boolean autoCode,
 		java.lang.String name, java.lang.String description,

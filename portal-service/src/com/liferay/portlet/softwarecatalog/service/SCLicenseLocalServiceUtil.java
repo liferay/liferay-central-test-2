@@ -103,6 +103,12 @@ public class SCLicenseLocalServiceUtil {
 		return getService().updateSCLicense(scLicense);
 	}
 
+	public static com.liferay.portlet.softwarecatalog.model.SCLicense updateSCLicense(
+		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateSCLicense(scLicense, merge);
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense addLicense(
 		java.lang.String name, java.lang.String url, boolean openSource,
 		boolean active, boolean recommended)

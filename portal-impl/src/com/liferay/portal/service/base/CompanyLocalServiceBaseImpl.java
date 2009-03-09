@@ -211,6 +211,13 @@ public abstract class CompanyLocalServiceBaseImpl implements CompanyLocalService
 		return companyPersistence.update(company, true);
 	}
 
+	public Company updateCompany(Company company, boolean merge)
+		throws SystemException {
+		company.setNew(false);
+
+		return companyPersistence.update(company, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

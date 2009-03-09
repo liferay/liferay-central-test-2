@@ -95,6 +95,10 @@ public interface PluginSettingLocalService {
 		com.liferay.portal.model.PluginSetting pluginSetting)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.PluginSetting updatePluginSetting(
+		com.liferay.portal.model.PluginSetting pluginSetting, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public void checkPermission(long userId, java.lang.String pluginId,
 		java.lang.String pluginType) throws com.liferay.portal.PortalException;
 

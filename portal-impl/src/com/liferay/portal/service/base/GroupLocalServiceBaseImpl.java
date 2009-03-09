@@ -281,6 +281,13 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService {
 		return groupPersistence.update(group, true);
 	}
 
+	public Group updateGroup(Group group, boolean merge)
+		throws SystemException {
+		group.setNew(false);
+
+		return groupPersistence.update(group, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

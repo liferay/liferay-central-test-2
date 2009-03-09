@@ -103,6 +103,12 @@ public class MBMessageFlagLocalServiceUtil {
 		return getService().updateMBMessageFlag(mbMessageFlag);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBMessageFlag updateMBMessageFlag(
+		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateMBMessageFlag(mbMessageFlag, merge);
+	}
+
 	public static void addReadFlags(long userId,
 		java.util.List<com.liferay.portlet.messageboards.model.MBMessage> messages)
 		throws com.liferay.portal.PortalException,

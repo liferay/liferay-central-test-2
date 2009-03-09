@@ -216,6 +216,14 @@ public abstract class UserTrackerPathLocalServiceBaseImpl
 		return userTrackerPathPersistence.update(userTrackerPath, true);
 	}
 
+	public UserTrackerPath updateUserTrackerPath(
+		UserTrackerPath userTrackerPath, boolean merge)
+		throws SystemException {
+		userTrackerPath.setNew(false);
+
+		return userTrackerPathPersistence.update(userTrackerPath, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

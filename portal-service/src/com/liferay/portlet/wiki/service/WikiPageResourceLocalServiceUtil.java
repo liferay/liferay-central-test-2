@@ -103,6 +103,12 @@ public class WikiPageResourceLocalServiceUtil {
 		return getService().updateWikiPageResource(wikiPageResource);
 	}
 
+	public static com.liferay.portlet.wiki.model.WikiPageResource updateWikiPageResource(
+		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateWikiPageResource(wikiPageResource, merge);
+	}
+
 	public static void deletePageResource(long nodeId, java.lang.String title)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

@@ -103,6 +103,12 @@ public class SocialRequestLocalServiceUtil {
 		return getService().updateSocialRequest(socialRequest);
 	}
 
+	public static com.liferay.portlet.social.model.SocialRequest updateSocialRequest(
+		com.liferay.portlet.social.model.SocialRequest socialRequest,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateSocialRequest(socialRequest, merge);
+	}
+
 	public static com.liferay.portlet.social.model.SocialRequest addRequest(
 		long userId, long groupId, java.lang.String className, long classPK,
 		int type, java.lang.String extraData, long receiverUserId)

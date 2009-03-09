@@ -103,6 +103,12 @@ public class MBDiscussionLocalServiceUtil {
 		return getService().updateMBDiscussion(mbDiscussion);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBDiscussion updateMBDiscussion(
+		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateMBDiscussion(mbDiscussion, merge);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBDiscussion getDiscussion(
 		long discussionId)
 		throws com.liferay.portal.PortalException,

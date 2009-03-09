@@ -94,6 +94,10 @@ public interface UserTrackerLocalService {
 		com.liferay.portal.model.UserTracker userTracker)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.UserTracker updateUserTracker(
+		com.liferay.portal.model.UserTracker userTracker, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.UserTracker addUserTracker(long companyId,
 		long userId, java.util.Date modifiedDate, java.lang.String sessionId,
 		java.lang.String remoteAddr, java.lang.String remoteHost,

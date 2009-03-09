@@ -95,6 +95,10 @@ public interface PortletPreferencesLocalService {
 		com.liferay.portal.model.PortletPreferences portletPreferences)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.PortletPreferences updatePortletPreferences(
+		com.liferay.portal.model.PortletPreferences portletPreferences,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.PortletPreferences addPortletPreferences(
 		long companyId, long ownerId, int ownerType, long plid,
 		java.lang.String portletId, com.liferay.portal.model.Portlet portlet,

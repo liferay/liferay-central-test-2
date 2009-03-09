@@ -95,6 +95,10 @@ public interface SocialActivityLocalService {
 		com.liferay.portlet.social.model.SocialActivity socialActivity)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.social.model.SocialActivity updateSocialActivity(
+		com.liferay.portlet.social.model.SocialActivity socialActivity,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.social.model.SocialActivity addActivity(
 		long userId, long groupId, java.lang.String className, long classPK,
 		int type, java.lang.String extraData, long receiverUserId)

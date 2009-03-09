@@ -115,6 +115,14 @@ public abstract class ShoppingOrderItemLocalServiceBaseImpl
 		return shoppingOrderItemPersistence.update(shoppingOrderItem, true);
 	}
 
+	public ShoppingOrderItem updateShoppingOrderItem(
+		ShoppingOrderItem shoppingOrderItem, boolean merge)
+		throws SystemException {
+		shoppingOrderItem.setNew(false);
+
+		return shoppingOrderItemPersistence.update(shoppingOrderItem, merge);
+	}
+
 	public ShoppingCartLocalService getShoppingCartLocalService() {
 		return shoppingCartLocalService;
 	}

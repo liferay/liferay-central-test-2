@@ -103,6 +103,12 @@ public class BookmarksEntryLocalServiceUtil {
 		return getService().updateBookmarksEntry(bookmarksEntry);
 	}
 
+	public static com.liferay.portlet.bookmarks.model.BookmarksEntry updateBookmarksEntry(
+		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateBookmarksEntry(bookmarksEntry, merge);
+	}
+
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
 		long userId, long folderId, java.lang.String name,
 		java.lang.String url, java.lang.String comments,

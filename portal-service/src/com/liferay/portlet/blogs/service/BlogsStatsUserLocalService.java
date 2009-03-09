@@ -95,6 +95,10 @@ public interface BlogsStatsUserLocalService {
 		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.blogs.model.BlogsStatsUser updateBlogsStatsUser(
+		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public void deleteStatsUserByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 

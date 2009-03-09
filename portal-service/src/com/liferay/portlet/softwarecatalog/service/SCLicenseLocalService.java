@@ -94,6 +94,10 @@ public interface SCLicenseLocalService {
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.softwarecatalog.model.SCLicense updateSCLicense(
+		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.softwarecatalog.model.SCLicense addLicense(
 		java.lang.String name, java.lang.String url, boolean openSource,
 		boolean active, boolean recommended)

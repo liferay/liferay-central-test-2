@@ -216,6 +216,13 @@ public abstract class SubscriptionLocalServiceBaseImpl
 		return subscriptionPersistence.update(subscription, true);
 	}
 
+	public Subscription updateSubscription(Subscription subscription,
+		boolean merge) throws SystemException {
+		subscription.setNew(false);
+
+		return subscriptionPersistence.update(subscription, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

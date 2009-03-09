@@ -103,6 +103,12 @@ public class SocialRelationLocalServiceUtil {
 		return getService().updateSocialRelation(socialRelation);
 	}
 
+	public static com.liferay.portlet.social.model.SocialRelation updateSocialRelation(
+		com.liferay.portlet.social.model.SocialRelation socialRelation,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateSocialRelation(socialRelation, merge);
+	}
+
 	public static com.liferay.portlet.social.model.SocialRelation addRelation(
 		long userId1, long userId2, int type)
 		throws com.liferay.portal.PortalException,

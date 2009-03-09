@@ -95,6 +95,10 @@ public interface RatingsStatsLocalService {
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.ratings.model.RatingsStats updateRatingsStats(
+		com.liferay.portlet.ratings.model.RatingsStats ratingsStats,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.ratings.model.RatingsStats addStats(
 		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;

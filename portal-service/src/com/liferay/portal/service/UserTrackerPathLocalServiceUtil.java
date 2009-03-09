@@ -103,6 +103,12 @@ public class UserTrackerPathLocalServiceUtil {
 		return getService().updateUserTrackerPath(userTrackerPath);
 	}
 
+	public static com.liferay.portal.model.UserTrackerPath updateUserTrackerPath(
+		com.liferay.portal.model.UserTrackerPath userTrackerPath, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateUserTrackerPath(userTrackerPath, merge);
+	}
+
 	public static java.util.List<com.liferay.portal.model.UserTrackerPath> getUserTrackerPaths(
 		long userTrackerId, int start, int end)
 		throws com.liferay.portal.SystemException {

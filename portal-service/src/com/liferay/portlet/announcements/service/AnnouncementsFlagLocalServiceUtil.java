@@ -103,6 +103,12 @@ public class AnnouncementsFlagLocalServiceUtil {
 		return getService().updateAnnouncementsFlag(announcementsFlag);
 	}
 
+	public static com.liferay.portlet.announcements.model.AnnouncementsFlag updateAnnouncementsFlag(
+		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateAnnouncementsFlag(announcementsFlag, merge);
+	}
+
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag addFlag(
 		long userId, long entryId, int value)
 		throws com.liferay.portal.SystemException {

@@ -103,6 +103,12 @@ public class CalEventLocalServiceUtil {
 		return getService().updateCalEvent(calEvent);
 	}
 
+	public static com.liferay.portlet.calendar.model.CalEvent updateCalEvent(
+		com.liferay.portlet.calendar.model.CalEvent calEvent, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateCalEvent(calEvent, merge);
+	}
+
 	public static com.liferay.portlet.calendar.model.CalEvent addEvent(
 		long userId, java.lang.String title, java.lang.String description,
 		int startDateMonth, int startDateDay, int startDateYear,

@@ -95,6 +95,10 @@ public interface UserIdMapperLocalService {
 		com.liferay.portal.model.UserIdMapper userIdMapper)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.UserIdMapper updateUserIdMapper(
+		com.liferay.portal.model.UserIdMapper userIdMapper, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public void deleteUserIdMappers(long userId)
 		throws com.liferay.portal.SystemException;
 

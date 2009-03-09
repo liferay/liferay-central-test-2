@@ -103,6 +103,12 @@ public class UserIdMapperLocalServiceUtil {
 		return getService().updateUserIdMapper(userIdMapper);
 	}
 
+	public static com.liferay.portal.model.UserIdMapper updateUserIdMapper(
+		com.liferay.portal.model.UserIdMapper userIdMapper, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateUserIdMapper(userIdMapper, merge);
+	}
+
 	public static void deleteUserIdMappers(long userId)
 		throws com.liferay.portal.SystemException {
 		getService().deleteUserIdMappers(userId);

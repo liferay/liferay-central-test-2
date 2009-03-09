@@ -103,6 +103,12 @@ public class EmailAddressLocalServiceUtil {
 		return getService().updateEmailAddress(emailAddress);
 	}
 
+	public static com.liferay.portal.model.EmailAddress updateEmailAddress(
+		com.liferay.portal.model.EmailAddress emailAddress, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateEmailAddress(emailAddress, merge);
+	}
+
 	public static com.liferay.portal.model.EmailAddress addEmailAddress(
 		long userId, java.lang.String className, long classPK,
 		java.lang.String address, int typeId, boolean primary)

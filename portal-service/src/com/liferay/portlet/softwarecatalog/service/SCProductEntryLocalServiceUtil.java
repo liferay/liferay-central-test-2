@@ -103,6 +103,12 @@ public class SCProductEntryLocalServiceUtil {
 		return getService().updateSCProductEntry(scProductEntry);
 	}
 
+	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry updateSCProductEntry(
+		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateSCProductEntry(scProductEntry, merge);
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry addProductEntry(
 		long userId, java.lang.String name, java.lang.String type,
 		java.lang.String tags, java.lang.String shortDescription,

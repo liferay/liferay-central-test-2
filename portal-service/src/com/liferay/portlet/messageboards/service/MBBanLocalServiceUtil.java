@@ -103,6 +103,12 @@ public class MBBanLocalServiceUtil {
 		return getService().updateMBBan(mbBan);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBBan updateMBBan(
+		com.liferay.portlet.messageboards.model.MBBan mbBan, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateMBBan(mbBan, merge);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBBan addBan(
 		long userId, long banUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)

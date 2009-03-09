@@ -91,6 +91,10 @@ public interface UserGroupLocalService {
 		com.liferay.portal.model.UserGroup userGroup)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.UserGroup updateUserGroup(
+		com.liferay.portal.model.UserGroup userGroup, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public void addGroupUserGroups(long groupId, long[] userGroupIds)
 		throws com.liferay.portal.SystemException;
 

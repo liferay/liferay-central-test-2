@@ -94,6 +94,10 @@ public interface IGFolderLocalService {
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.imagegallery.model.IGFolder updateIGFolder(
+		com.liferay.portlet.imagegallery.model.IGFolder igFolder, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.imagegallery.model.IGFolder addFolder(
 		long userId, long parentFolderId, java.lang.String name,
 		java.lang.String description,

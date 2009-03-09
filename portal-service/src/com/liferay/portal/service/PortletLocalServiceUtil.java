@@ -100,6 +100,12 @@ public class PortletLocalServiceUtil {
 		return getService().updatePortlet(portlet);
 	}
 
+	public static com.liferay.portal.model.Portlet updatePortlet(
+		com.liferay.portal.model.Portlet portlet, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updatePortlet(portlet, merge);
+	}
+
 	public static com.liferay.portal.model.Portlet deployRemotePortlet(
 		com.liferay.portal.model.Portlet portlet) {
 		return getService().deployRemotePortlet(portlet);

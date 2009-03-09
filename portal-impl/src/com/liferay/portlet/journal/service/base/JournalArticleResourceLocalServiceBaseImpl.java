@@ -123,6 +123,15 @@ public abstract class JournalArticleResourceLocalServiceBaseImpl
 			true);
 	}
 
+	public JournalArticleResource updateJournalArticleResource(
+		JournalArticleResource journalArticleResource, boolean merge)
+		throws SystemException {
+		journalArticleResource.setNew(false);
+
+		return journalArticleResourcePersistence.update(journalArticleResource,
+			merge);
+	}
+
 	public JournalArticleLocalService getJournalArticleLocalService() {
 		return journalArticleLocalService;
 	}

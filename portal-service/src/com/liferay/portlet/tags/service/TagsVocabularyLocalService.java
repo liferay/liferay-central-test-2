@@ -95,6 +95,10 @@ public interface TagsVocabularyLocalService {
 		com.liferay.portlet.tags.model.TagsVocabulary tagsVocabulary)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.tags.model.TagsVocabulary updateTagsVocabulary(
+		com.liferay.portlet.tags.model.TagsVocabulary tagsVocabulary,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.tags.model.TagsVocabulary addVocabulary(
 		long userId, java.lang.String name, boolean folksonomy,
 		com.liferay.portal.service.ServiceContext serviceContext)

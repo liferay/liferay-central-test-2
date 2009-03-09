@@ -209,6 +209,13 @@ public abstract class PortletLocalServiceBaseImpl implements PortletLocalService
 		return portletPersistence.update(portlet, true);
 	}
 
+	public Portlet updatePortlet(Portlet portlet, boolean merge)
+		throws SystemException {
+		portlet.setNew(false);
+
+		return portletPersistence.update(portlet, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

@@ -103,6 +103,12 @@ public class WikiNodeLocalServiceUtil {
 		return getService().updateWikiNode(wikiNode);
 	}
 
+	public static com.liferay.portlet.wiki.model.WikiNode updateWikiNode(
+		com.liferay.portlet.wiki.model.WikiNode wikiNode, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateWikiNode(wikiNode, merge);
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiNode addNode(long userId,
 		java.lang.String name, java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)

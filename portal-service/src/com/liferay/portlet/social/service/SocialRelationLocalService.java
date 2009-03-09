@@ -95,6 +95,10 @@ public interface SocialRelationLocalService {
 		com.liferay.portlet.social.model.SocialRelation socialRelation)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.social.model.SocialRelation updateSocialRelation(
+		com.liferay.portlet.social.model.SocialRelation socialRelation,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.social.model.SocialRelation addRelation(
 		long userId1, long userId2, int type)
 		throws com.liferay.portal.PortalException,
@@ -136,6 +140,7 @@ public interface SocialRelationLocalService {
 	public boolean hasRelation(long userId1, long userId2, int type)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean isRelatable(long userId1, long userId2, int type)
 		throws com.liferay.portal.SystemException;
 }

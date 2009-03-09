@@ -103,6 +103,12 @@ public class SubscriptionLocalServiceUtil {
 		return getService().updateSubscription(subscription);
 	}
 
+	public static com.liferay.portal.model.Subscription updateSubscription(
+		com.liferay.portal.model.Subscription subscription, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateSubscription(subscription, merge);
+	}
+
 	public static com.liferay.portal.model.Subscription addSubscription(
 		long userId, java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,

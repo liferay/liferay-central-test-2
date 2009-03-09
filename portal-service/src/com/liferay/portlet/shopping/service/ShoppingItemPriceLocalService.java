@@ -95,6 +95,10 @@ public interface ShoppingItemPriceLocalService {
 		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.shopping.model.ShoppingItemPrice updateShoppingItemPrice(
+		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getItemPrices(
 		long itemId)

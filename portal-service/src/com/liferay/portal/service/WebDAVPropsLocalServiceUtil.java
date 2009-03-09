@@ -103,6 +103,12 @@ public class WebDAVPropsLocalServiceUtil {
 		return getService().updateWebDAVProps(webDAVProps);
 	}
 
+	public static com.liferay.portal.model.WebDAVProps updateWebDAVProps(
+		com.liferay.portal.model.WebDAVProps webDAVProps, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateWebDAVProps(webDAVProps, merge);
+	}
+
 	public static void deleteWebDAVProps(java.lang.String className,
 		long classPK) throws com.liferay.portal.SystemException {
 		getService().deleteWebDAVProps(className, classPK);

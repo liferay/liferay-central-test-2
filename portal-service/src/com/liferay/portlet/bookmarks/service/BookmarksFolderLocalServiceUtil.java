@@ -103,6 +103,12 @@ public class BookmarksFolderLocalServiceUtil {
 		return getService().updateBookmarksFolder(bookmarksFolder);
 	}
 
+	public static com.liferay.portlet.bookmarks.model.BookmarksFolder updateBookmarksFolder(
+		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateBookmarksFolder(bookmarksFolder, merge);
+	}
+
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder addFolder(
 		long userId, long parentFolderId, java.lang.String name,
 		java.lang.String description,

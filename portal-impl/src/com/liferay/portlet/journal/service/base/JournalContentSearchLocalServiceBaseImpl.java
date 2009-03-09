@@ -130,6 +130,15 @@ public abstract class JournalContentSearchLocalServiceBaseImpl
 		return journalContentSearchPersistence.update(journalContentSearch, true);
 	}
 
+	public JournalContentSearch updateJournalContentSearch(
+		JournalContentSearch journalContentSearch, boolean merge)
+		throws SystemException {
+		journalContentSearch.setNew(false);
+
+		return journalContentSearchPersistence.update(journalContentSearch,
+			merge);
+	}
+
 	public JournalArticleLocalService getJournalArticleLocalService() {
 		return journalArticleLocalService;
 	}

@@ -100,6 +100,12 @@ public class ImageLocalServiceUtil {
 		return getService().updateImage(image);
 	}
 
+	public static com.liferay.portal.model.Image updateImage(
+		com.liferay.portal.model.Image image, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateImage(image, merge);
+	}
+
 	public static com.liferay.portal.model.Image getCompanyLogo(long imageId) {
 		return getService().getCompanyLogo(imageId);
 	}

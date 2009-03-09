@@ -103,6 +103,12 @@ public class TagsVocabularyLocalServiceUtil {
 		return getService().updateTagsVocabulary(tagsVocabulary);
 	}
 
+	public static com.liferay.portlet.tags.model.TagsVocabulary updateTagsVocabulary(
+		com.liferay.portlet.tags.model.TagsVocabulary tagsVocabulary,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateTagsVocabulary(tagsVocabulary, merge);
+	}
+
 	public static com.liferay.portlet.tags.model.TagsVocabulary addVocabulary(
 		long userId, java.lang.String name, boolean folksonomy,
 		com.liferay.portal.service.ServiceContext serviceContext)

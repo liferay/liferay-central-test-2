@@ -95,6 +95,10 @@ public interface ExpandoColumnLocalService {
 		com.liferay.portlet.expando.model.ExpandoColumn expandoColumn)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.expando.model.ExpandoColumn updateExpandoColumn(
+		com.liferay.portlet.expando.model.ExpandoColumn expandoColumn,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.expando.model.ExpandoColumn addColumn(
 		long tableId, java.lang.String name, int type)
 		throws com.liferay.portal.PortalException,

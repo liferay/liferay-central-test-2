@@ -119,6 +119,14 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 		return journalArticleImagePersistence.update(journalArticleImage, true);
 	}
 
+	public JournalArticleImage updateJournalArticleImage(
+		JournalArticleImage journalArticleImage, boolean merge)
+		throws SystemException {
+		journalArticleImage.setNew(false);
+
+		return journalArticleImagePersistence.update(journalArticleImage, merge);
+	}
+
 	public JournalArticleLocalService getJournalArticleLocalService() {
 		return journalArticleLocalService;
 	}

@@ -127,6 +127,13 @@ public abstract class DLFolderLocalServiceBaseImpl
 		return dlFolderPersistence.update(dlFolder, true);
 	}
 
+	public DLFolder updateDLFolder(DLFolder dlFolder, boolean merge)
+		throws SystemException {
+		dlFolder.setNew(false);
+
+		return dlFolderPersistence.update(dlFolder, merge);
+	}
+
 	public DLFileEntryLocalService getDLFileEntryLocalService() {
 		return dlFileEntryLocalService;
 	}

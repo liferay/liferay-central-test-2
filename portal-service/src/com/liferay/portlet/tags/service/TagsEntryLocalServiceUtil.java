@@ -103,6 +103,12 @@ public class TagsEntryLocalServiceUtil {
 		return getService().updateTagsEntry(tagsEntry);
 	}
 
+	public static com.liferay.portlet.tags.model.TagsEntry updateTagsEntry(
+		com.liferay.portlet.tags.model.TagsEntry tagsEntry, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateTagsEntry(tagsEntry, merge);
+	}
+
 	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
 		long userId, java.lang.String parentEntryName, java.lang.String name,
 		java.lang.String vocabularyName, java.lang.String[] properties,

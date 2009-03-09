@@ -103,6 +103,12 @@ public class JournalFeedLocalServiceUtil {
 		return getService().updateJournalFeed(journalFeed);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalFeed updateJournalFeed(
+		com.liferay.portlet.journal.model.JournalFeed journalFeed, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateJournalFeed(journalFeed, merge);
+	}
+
 	public static com.liferay.portlet.journal.model.JournalFeed addFeed(
 		long userId, long groupId, java.lang.String feedId, boolean autoFeedId,
 		java.lang.String name, java.lang.String description,

@@ -95,6 +95,10 @@ public interface OrganizationLocalService {
 		com.liferay.portal.model.Organization organization)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Organization updateOrganization(
+		com.liferay.portal.model.Organization organization, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public void addGroupOrganizations(long groupId, long[] organizationIds)
 		throws com.liferay.portal.SystemException;
 

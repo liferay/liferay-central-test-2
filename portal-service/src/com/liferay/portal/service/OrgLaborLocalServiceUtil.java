@@ -102,6 +102,12 @@ public class OrgLaborLocalServiceUtil {
 		return getService().updateOrgLabor(orgLabor);
 	}
 
+	public static com.liferay.portal.model.OrgLabor updateOrgLabor(
+		com.liferay.portal.model.OrgLabor orgLabor, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateOrgLabor(orgLabor, merge);
+	}
+
 	public static com.liferay.portal.model.OrgLabor addOrgLabor(
 		long organizationId, int typeId, int sunOpen, int sunClose,
 		int monOpen, int monClose, int tueOpen, int tueClose, int wedOpen,

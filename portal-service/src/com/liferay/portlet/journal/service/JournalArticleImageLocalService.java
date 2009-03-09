@@ -95,6 +95,10 @@ public interface JournalArticleImageLocalService {
 		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.journal.model.JournalArticleImage updateJournalArticleImage(
+		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public void addArticleImageId(long articleImageId, long groupId,
 		java.lang.String articleId, double version,
 		java.lang.String elInstanceId, java.lang.String elName,

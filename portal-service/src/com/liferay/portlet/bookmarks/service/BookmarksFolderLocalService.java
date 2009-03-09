@@ -95,6 +95,10 @@ public interface BookmarksFolderLocalService {
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.bookmarks.model.BookmarksFolder updateBookmarksFolder(
+		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder addFolder(
 		long userId, long parentFolderId, java.lang.String name,
 		java.lang.String description,

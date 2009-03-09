@@ -100,6 +100,12 @@ public class ContactLocalServiceUtil {
 		return getService().updateContact(contact);
 	}
 
+	public static com.liferay.portal.model.Contact updateContact(
+		com.liferay.portal.model.Contact contact, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateContact(contact, merge);
+	}
+
 	public static ContactLocalService getService() {
 		if (_service == null) {
 			throw new RuntimeException("ContactLocalService is not set");

@@ -93,6 +93,10 @@ public interface TagsAssetLocalService {
 		com.liferay.portlet.tags.model.TagsAsset tagsAsset)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.tags.model.TagsAsset updateTagsAsset(
+		com.liferay.portlet.tags.model.TagsAsset tagsAsset, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public void deleteAsset(long assetId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

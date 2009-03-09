@@ -111,6 +111,15 @@ public abstract class AnnouncementsDeliveryLocalServiceBaseImpl
 			true);
 	}
 
+	public AnnouncementsDelivery updateAnnouncementsDelivery(
+		AnnouncementsDelivery announcementsDelivery, boolean merge)
+		throws SystemException {
+		announcementsDelivery.setNew(false);
+
+		return announcementsDeliveryPersistence.update(announcementsDelivery,
+			merge);
+	}
+
 	public AnnouncementsDeliveryLocalService getAnnouncementsDeliveryLocalService() {
 		return announcementsDeliveryLocalService;
 	}

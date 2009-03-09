@@ -103,6 +103,13 @@ public class JournalArticleResourceLocalServiceUtil {
 		return getService().updateJournalArticleResource(journalArticleResource);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalArticleResource updateJournalArticleResource(
+		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService()
+				   .updateJournalArticleResource(journalArticleResource, merge);
+	}
+
 	public static void deleteArticleResource(long groupId,
 		java.lang.String articleId)
 		throws com.liferay.portal.PortalException,

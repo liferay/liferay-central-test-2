@@ -117,6 +117,14 @@ public abstract class SCFrameworkVersionLocalServiceBaseImpl
 		return scFrameworkVersionPersistence.update(scFrameworkVersion, true);
 	}
 
+	public SCFrameworkVersion updateSCFrameworkVersion(
+		SCFrameworkVersion scFrameworkVersion, boolean merge)
+		throws SystemException {
+		scFrameworkVersion.setNew(false);
+
+		return scFrameworkVersionPersistence.update(scFrameworkVersion, merge);
+	}
+
 	public SCLicenseLocalService getSCLicenseLocalService() {
 		return scLicenseLocalService;
 	}

@@ -120,6 +120,13 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 		return dlFileShortcutPersistence.update(dlFileShortcut, true);
 	}
 
+	public DLFileShortcut updateDLFileShortcut(DLFileShortcut dlFileShortcut,
+		boolean merge) throws SystemException {
+		dlFileShortcut.setNew(false);
+
+		return dlFileShortcutPersistence.update(dlFileShortcut, merge);
+	}
+
 	public DLFileEntryLocalService getDLFileEntryLocalService() {
 		return dlFileEntryLocalService;
 	}

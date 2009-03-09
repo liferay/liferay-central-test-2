@@ -95,6 +95,10 @@ public interface ShoppingOrderItemLocalService {
 		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.shopping.model.ShoppingOrderItem updateShoppingOrderItem(
+		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrderItem> getOrderItems(
 		long orderId) throws com.liferay.portal.SystemException;

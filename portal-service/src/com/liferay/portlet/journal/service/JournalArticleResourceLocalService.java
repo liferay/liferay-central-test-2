@@ -95,6 +95,10 @@ public interface JournalArticleResourceLocalService {
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.journal.model.JournalArticleResource updateJournalArticleResource(
+		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public void deleteArticleResource(long groupId, java.lang.String articleId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

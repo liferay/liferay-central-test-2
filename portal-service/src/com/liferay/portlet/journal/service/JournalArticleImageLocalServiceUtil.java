@@ -103,6 +103,12 @@ public class JournalArticleImageLocalServiceUtil {
 		return getService().updateJournalArticleImage(journalArticleImage);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalArticleImage updateJournalArticleImage(
+		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateJournalArticleImage(journalArticleImage, merge);
+	}
+
 	public static void addArticleImageId(long articleImageId, long groupId,
 		java.lang.String articleId, double version,
 		java.lang.String elInstanceId, java.lang.String elName,

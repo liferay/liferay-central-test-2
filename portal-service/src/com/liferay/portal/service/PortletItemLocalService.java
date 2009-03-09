@@ -94,6 +94,10 @@ public interface PortletItemLocalService {
 		com.liferay.portal.model.PortletItem portletItem)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.PortletItem updatePortletItem(
+		com.liferay.portal.model.PortletItem portletItem, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.PortletItem addPortletItem(long userId,
 		long groupId, java.lang.String name, java.lang.String portletId,
 		java.lang.String className)

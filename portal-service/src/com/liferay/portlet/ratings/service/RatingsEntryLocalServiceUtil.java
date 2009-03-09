@@ -103,6 +103,12 @@ public class RatingsEntryLocalServiceUtil {
 		return getService().updateRatingsEntry(ratingsEntry);
 	}
 
+	public static com.liferay.portlet.ratings.model.RatingsEntry updateRatingsEntry(
+		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateRatingsEntry(ratingsEntry, merge);
+	}
+
 	public static void deleteEntry(long userId, java.lang.String className,
 		long classPK)
 		throws com.liferay.portal.PortalException,

@@ -95,6 +95,10 @@ public interface MBMessageFlagLocalService {
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.messageboards.model.MBMessageFlag updateMBMessageFlag(
+		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public void addReadFlags(long userId,
 		java.util.List<com.liferay.portlet.messageboards.model.MBMessage> messages)
 		throws com.liferay.portal.PortalException,

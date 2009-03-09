@@ -109,6 +109,14 @@ public abstract class SCProductScreenshotLocalServiceBaseImpl
 		return scProductScreenshotPersistence.update(scProductScreenshot, true);
 	}
 
+	public SCProductScreenshot updateSCProductScreenshot(
+		SCProductScreenshot scProductScreenshot, boolean merge)
+		throws SystemException {
+		scProductScreenshot.setNew(false);
+
+		return scProductScreenshotPersistence.update(scProductScreenshot, merge);
+	}
+
 	public SCLicenseLocalService getSCLicenseLocalService() {
 		return scLicenseLocalService;
 	}

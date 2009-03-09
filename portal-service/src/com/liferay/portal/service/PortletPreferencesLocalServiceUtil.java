@@ -103,6 +103,12 @@ public class PortletPreferencesLocalServiceUtil {
 		return getService().updatePortletPreferences(portletPreferences);
 	}
 
+	public static com.liferay.portal.model.PortletPreferences updatePortletPreferences(
+		com.liferay.portal.model.PortletPreferences portletPreferences,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updatePortletPreferences(portletPreferences, merge);
+	}
+
 	public static com.liferay.portal.model.PortletPreferences addPortletPreferences(
 		long companyId, long ownerId, int ownerType, long plid,
 		java.lang.String portletId, com.liferay.portal.model.Portlet portlet,

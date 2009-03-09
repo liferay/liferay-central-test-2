@@ -91,6 +91,10 @@ public interface WikiNodeLocalService {
 		com.liferay.portlet.wiki.model.WikiNode wikiNode)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.wiki.model.WikiNode updateWikiNode(
+		com.liferay.portlet.wiki.model.WikiNode wikiNode, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.wiki.model.WikiNode addNode(long userId,
 		java.lang.String name, java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)

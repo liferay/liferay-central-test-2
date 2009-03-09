@@ -95,6 +95,10 @@ public interface UserTrackerPathLocalService {
 		com.liferay.portal.model.UserTrackerPath userTrackerPath)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.UserTrackerPath updateUserTrackerPath(
+		com.liferay.portal.model.UserTrackerPath userTrackerPath, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.UserTrackerPath> getUserTrackerPaths(
 		long userTrackerId, int start, int end)

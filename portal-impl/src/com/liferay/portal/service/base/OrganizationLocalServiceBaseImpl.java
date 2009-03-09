@@ -216,6 +216,13 @@ public abstract class OrganizationLocalServiceBaseImpl
 		return organizationPersistence.update(organization, true);
 	}
 
+	public Organization updateOrganization(Organization organization,
+		boolean merge) throws SystemException {
+		organization.setNew(false);
+
+		return organizationPersistence.update(organization, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

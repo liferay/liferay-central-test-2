@@ -136,6 +136,13 @@ public abstract class MBThreadLocalServiceBaseImpl
 		return mbThreadPersistence.update(mbThread, true);
 	}
 
+	public MBThread updateMBThread(MBThread mbThread, boolean merge)
+		throws SystemException {
+		mbThread.setNew(false);
+
+		return mbThreadPersistence.update(mbThread, merge);
+	}
+
 	public MBBanLocalService getMBBanLocalService() {
 		return mbBanLocalService;
 	}

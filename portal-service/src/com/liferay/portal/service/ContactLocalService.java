@@ -90,4 +90,8 @@ public interface ContactLocalService {
 	public com.liferay.portal.model.Contact updateContact(
 		com.liferay.portal.model.Contact contact)
 		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Contact updateContact(
+		com.liferay.portal.model.Contact contact, boolean merge)
+		throws com.liferay.portal.SystemException;
 }

@@ -117,6 +117,13 @@ public abstract class MBDiscussionLocalServiceBaseImpl
 		return mbDiscussionPersistence.update(mbDiscussion, true);
 	}
 
+	public MBDiscussion updateMBDiscussion(MBDiscussion mbDiscussion,
+		boolean merge) throws SystemException {
+		mbDiscussion.setNew(false);
+
+		return mbDiscussionPersistence.update(mbDiscussion, merge);
+	}
+
 	public MBBanLocalService getMBBanLocalService() {
 		return mbBanLocalService;
 	}

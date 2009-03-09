@@ -103,6 +103,12 @@ public class ShoppingItemFieldLocalServiceUtil {
 		return getService().updateShoppingItemField(shoppingItemField);
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingItemField updateShoppingItemField(
+		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateShoppingItemField(shoppingItemField, merge);
+	}
+
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> getItemFields(
 		long itemId) throws com.liferay.portal.SystemException {
 		return getService().getItemFields(itemId);

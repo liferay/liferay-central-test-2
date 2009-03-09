@@ -95,6 +95,10 @@ public interface RatingsEntryLocalService {
 		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.ratings.model.RatingsEntry updateRatingsEntry(
+		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public void deleteEntry(long userId, java.lang.String className,
 		long classPK)
 		throws com.liferay.portal.PortalException,

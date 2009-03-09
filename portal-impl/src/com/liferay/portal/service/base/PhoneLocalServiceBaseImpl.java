@@ -209,6 +209,13 @@ public abstract class PhoneLocalServiceBaseImpl implements PhoneLocalService {
 		return phonePersistence.update(phone, true);
 	}
 
+	public Phone updatePhone(Phone phone, boolean merge)
+		throws SystemException {
+		phone.setNew(false);
+
+		return phonePersistence.update(phone, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

@@ -117,6 +117,13 @@ public abstract class TasksProposalLocalServiceBaseImpl
 		return tasksProposalPersistence.update(tasksProposal, true);
 	}
 
+	public TasksProposal updateTasksProposal(TasksProposal tasksProposal,
+		boolean merge) throws SystemException {
+		tasksProposal.setNew(false);
+
+		return tasksProposalPersistence.update(tasksProposal, merge);
+	}
+
 	public TasksReviewLocalService getTasksReviewLocalService() {
 		return tasksReviewLocalService;
 	}

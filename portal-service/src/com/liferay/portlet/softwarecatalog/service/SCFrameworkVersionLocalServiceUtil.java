@@ -103,6 +103,12 @@ public class SCFrameworkVersionLocalServiceUtil {
 		return getService().updateSCFrameworkVersion(scFrameworkVersion);
 	}
 
+	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion updateSCFrameworkVersion(
+		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateSCFrameworkVersion(scFrameworkVersion, merge);
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion addFrameworkVersion(
 		long userId, java.lang.String name, java.lang.String url,
 		boolean active, int priority,

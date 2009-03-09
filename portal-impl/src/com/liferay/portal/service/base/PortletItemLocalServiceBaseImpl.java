@@ -216,6 +216,13 @@ public abstract class PortletItemLocalServiceBaseImpl
 		return portletItemPersistence.update(portletItem, true);
 	}
 
+	public PortletItem updatePortletItem(PortletItem portletItem, boolean merge)
+		throws SystemException {
+		portletItem.setNew(false);
+
+		return portletItemPersistence.update(portletItem, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

@@ -103,6 +103,12 @@ public class ExpandoTableLocalServiceUtil {
 		return getService().updateExpandoTable(expandoTable);
 	}
 
+	public static com.liferay.portlet.expando.model.ExpandoTable updateExpandoTable(
+		com.liferay.portlet.expando.model.ExpandoTable expandoTable,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateExpandoTable(expandoTable, merge);
+	}
+
 	public static com.liferay.portlet.expando.model.ExpandoTable addDefaultTable(
 		java.lang.String className)
 		throws com.liferay.portal.PortalException,

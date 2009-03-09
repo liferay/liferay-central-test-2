@@ -216,6 +216,13 @@ public abstract class PermissionLocalServiceBaseImpl
 		return permissionPersistence.update(permission, true);
 	}
 
+	public Permission updatePermission(Permission permission, boolean merge)
+		throws SystemException {
+		permission.setNew(false);
+
+		return permissionPersistence.update(permission, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

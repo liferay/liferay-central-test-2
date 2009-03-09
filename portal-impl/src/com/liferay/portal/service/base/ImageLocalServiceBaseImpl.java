@@ -206,6 +206,13 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService {
 		return imagePersistence.update(image, true);
 	}
 
+	public Image updateImage(Image image, boolean merge)
+		throws SystemException {
+		image.setNew(false);
+
+		return imagePersistence.update(image, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

@@ -94,6 +94,10 @@ public interface MBMessageLocalService {
 		com.liferay.portlet.messageboards.model.MBMessage mbMessage)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.messageboards.model.MBMessage updateMBMessage(
+		com.liferay.portlet.messageboards.model.MBMessage mbMessage,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
 		long userId, java.lang.String userName, java.lang.String subject,
 		java.lang.String body)

@@ -103,6 +103,12 @@ public class ShoppingCategoryLocalServiceUtil {
 		return getService().updateShoppingCategory(shoppingCategory);
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingCategory updateShoppingCategory(
+		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateShoppingCategory(shoppingCategory, merge);
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
 		long userId, long parentCategoryId, java.lang.String name,
 		java.lang.String description,

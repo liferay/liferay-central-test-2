@@ -103,6 +103,12 @@ public class ClassNameLocalServiceUtil {
 		return getService().updateClassName(className);
 	}
 
+	public static com.liferay.portal.model.ClassName updateClassName(
+		com.liferay.portal.model.ClassName className, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateClassName(className, merge);
+	}
+
 	public static com.liferay.portal.model.ClassName addClassName(
 		java.lang.String value) throws com.liferay.portal.SystemException {
 		return getService().addClassName(value);

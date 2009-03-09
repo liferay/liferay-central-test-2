@@ -91,6 +91,10 @@ public interface ResourceLocalService {
 		com.liferay.portal.model.Resource resource)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Resource updateResource(
+		com.liferay.portal.model.Resource resource, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public void addModelResources(long companyId, long groupId, long userId,
 		java.lang.String name, long primKey,
 		java.lang.String[] communityPermissions,

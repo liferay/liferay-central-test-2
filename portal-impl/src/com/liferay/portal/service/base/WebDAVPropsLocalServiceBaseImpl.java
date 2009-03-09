@@ -216,6 +216,13 @@ public abstract class WebDAVPropsLocalServiceBaseImpl
 		return webDAVPropsPersistence.update(webDAVProps, true);
 	}
 
+	public WebDAVProps updateWebDAVProps(WebDAVProps webDAVProps, boolean merge)
+		throws SystemException {
+		webDAVProps.setNew(false);
+
+		return webDAVPropsPersistence.update(webDAVProps, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

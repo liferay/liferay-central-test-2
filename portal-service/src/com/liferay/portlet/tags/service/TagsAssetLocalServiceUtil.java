@@ -103,6 +103,12 @@ public class TagsAssetLocalServiceUtil {
 		return getService().updateTagsAsset(tagsAsset);
 	}
 
+	public static com.liferay.portlet.tags.model.TagsAsset updateTagsAsset(
+		com.liferay.portlet.tags.model.TagsAsset tagsAsset, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateTagsAsset(tagsAsset, merge);
+	}
+
 	public static void deleteAsset(long assetId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

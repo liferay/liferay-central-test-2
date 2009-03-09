@@ -216,6 +216,13 @@ public abstract class EmailAddressLocalServiceBaseImpl
 		return emailAddressPersistence.update(emailAddress, true);
 	}
 
+	public EmailAddress updateEmailAddress(EmailAddress emailAddress,
+		boolean merge) throws SystemException {
+		emailAddress.setNew(false);
+
+		return emailAddressPersistence.update(emailAddress, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

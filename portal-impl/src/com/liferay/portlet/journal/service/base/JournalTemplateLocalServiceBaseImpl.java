@@ -129,6 +129,14 @@ public abstract class JournalTemplateLocalServiceBaseImpl
 		return journalTemplatePersistence.update(journalTemplate, true);
 	}
 
+	public JournalTemplate updateJournalTemplate(
+		JournalTemplate journalTemplate, boolean merge)
+		throws SystemException {
+		journalTemplate.setNew(false);
+
+		return journalTemplatePersistence.update(journalTemplate, merge);
+	}
+
 	public JournalArticleLocalService getJournalArticleLocalService() {
 		return journalArticleLocalService;
 	}

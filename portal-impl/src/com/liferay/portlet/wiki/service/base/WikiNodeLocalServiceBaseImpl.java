@@ -114,6 +114,13 @@ public abstract class WikiNodeLocalServiceBaseImpl
 		return wikiNodePersistence.update(wikiNode, true);
 	}
 
+	public WikiNode updateWikiNode(WikiNode wikiNode, boolean merge)
+		throws SystemException {
+		wikiNode.setNew(false);
+
+		return wikiNodePersistence.update(wikiNode, merge);
+	}
+
 	public WikiNodeLocalService getWikiNodeLocalService() {
 		return wikiNodeLocalService;
 	}

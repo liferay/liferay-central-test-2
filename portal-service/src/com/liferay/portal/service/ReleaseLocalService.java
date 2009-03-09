@@ -90,6 +90,10 @@ public interface ReleaseLocalService {
 		com.liferay.portal.model.Release release)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Release updateRelease(
+		com.liferay.portal.model.Release release, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public int getBuildNumberOrCreate()
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

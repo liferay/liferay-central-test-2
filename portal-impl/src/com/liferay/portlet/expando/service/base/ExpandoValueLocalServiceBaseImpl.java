@@ -108,6 +108,13 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 		return expandoValuePersistence.update(expandoValue, true);
 	}
 
+	public ExpandoValue updateExpandoValue(ExpandoValue expandoValue,
+		boolean merge) throws SystemException {
+		expandoValue.setNew(false);
+
+		return expandoValuePersistence.update(expandoValue, merge);
+	}
+
 	public ExpandoColumnLocalService getExpandoColumnLocalService() {
 		return expandoColumnLocalService;
 	}

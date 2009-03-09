@@ -93,6 +93,10 @@ public interface ResourceCodeLocalService {
 		com.liferay.portal.model.ResourceCode resourceCode)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.ResourceCode updateResourceCode(
+		com.liferay.portal.model.ResourceCode resourceCode, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.ResourceCode addResourceCode(
 		long companyId, java.lang.String name, int scope)
 		throws com.liferay.portal.SystemException;

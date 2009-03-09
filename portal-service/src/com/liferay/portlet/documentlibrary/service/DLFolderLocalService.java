@@ -94,6 +94,10 @@ public interface DLFolderLocalService {
 		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.documentlibrary.model.DLFolder updateDLFolder(
+		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
 		long userId, long groupId, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,

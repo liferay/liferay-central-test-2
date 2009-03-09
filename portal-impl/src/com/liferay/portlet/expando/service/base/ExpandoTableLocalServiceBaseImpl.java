@@ -108,6 +108,13 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 		return expandoTablePersistence.update(expandoTable, true);
 	}
 
+	public ExpandoTable updateExpandoTable(ExpandoTable expandoTable,
+		boolean merge) throws SystemException {
+		expandoTable.setNew(false);
+
+		return expandoTablePersistence.update(expandoTable, merge);
+	}
+
 	public ExpandoColumnLocalService getExpandoColumnLocalService() {
 		return expandoColumnLocalService;
 	}

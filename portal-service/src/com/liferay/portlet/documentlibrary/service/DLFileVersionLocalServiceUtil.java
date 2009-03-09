@@ -103,6 +103,12 @@ public class DLFileVersionLocalServiceUtil {
 		return getService().updateDLFileVersion(dlFileVersion);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileVersion updateDLFileVersion(
+		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateDLFileVersion(dlFileVersion, merge);
+	}
+
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> getFileVersions(
 		long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException {

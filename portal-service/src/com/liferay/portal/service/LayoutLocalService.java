@@ -91,6 +91,10 @@ public interface LayoutLocalService {
 		com.liferay.portal.model.Layout layout)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Layout updateLayout(
+		com.liferay.portal.model.Layout layout, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Layout addLayout(long userId, long groupId,
 		boolean privateLayout, long parentLayoutId, java.lang.String name,
 		java.lang.String title, java.lang.String description,

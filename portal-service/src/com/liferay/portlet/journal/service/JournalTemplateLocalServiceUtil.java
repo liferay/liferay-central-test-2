@@ -103,6 +103,12 @@ public class JournalTemplateLocalServiceUtil {
 		return getService().updateJournalTemplate(journalTemplate);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalTemplate updateJournalTemplate(
+		com.liferay.portlet.journal.model.JournalTemplate journalTemplate,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateJournalTemplate(journalTemplate, merge);
+	}
+
 	public static com.liferay.portlet.journal.model.JournalTemplate addTemplate(
 		long userId, long groupId, java.lang.String templateId,
 		boolean autoTemplateId, java.lang.String structureId,

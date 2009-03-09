@@ -95,6 +95,10 @@ public interface PasswordPolicyLocalService {
 		com.liferay.portal.model.PasswordPolicy passwordPolicy)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.PasswordPolicy updatePasswordPolicy(
+		com.liferay.portal.model.PasswordPolicy passwordPolicy, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.PasswordPolicy addPasswordPolicy(
 		long userId, boolean defaultPolicy, java.lang.String name,
 		java.lang.String description, boolean changeable,

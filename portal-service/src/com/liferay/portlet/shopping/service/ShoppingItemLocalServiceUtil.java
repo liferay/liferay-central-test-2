@@ -103,6 +103,12 @@ public class ShoppingItemLocalServiceUtil {
 		return getService().updateShoppingItem(shoppingItem);
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingItem updateShoppingItem(
+		com.liferay.portlet.shopping.model.ShoppingItem shoppingItem,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateShoppingItem(shoppingItem, merge);
+	}
+
 	public static void addBookItems(long userId, long categoryId,
 		java.lang.String[] isbns)
 		throws com.liferay.portal.PortalException,

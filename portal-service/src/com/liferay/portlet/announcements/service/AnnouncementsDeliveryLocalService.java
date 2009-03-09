@@ -95,6 +95,10 @@ public interface AnnouncementsDeliveryLocalService {
 		com.liferay.portlet.announcements.model.AnnouncementsDelivery announcementsDelivery)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.announcements.model.AnnouncementsDelivery updateAnnouncementsDelivery(
+		com.liferay.portlet.announcements.model.AnnouncementsDelivery announcementsDelivery,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.announcements.model.AnnouncementsDelivery addUserDelivery(
 		long userId, java.lang.String type)
 		throws com.liferay.portal.PortalException,

@@ -94,6 +94,10 @@ public interface MBStatsUserLocalService {
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.messageboards.model.MBStatsUser updateMBStatsUser(
+		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public void deleteStatsUserByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 

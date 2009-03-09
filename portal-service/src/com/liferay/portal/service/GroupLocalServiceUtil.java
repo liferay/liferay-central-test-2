@@ -100,6 +100,12 @@ public class GroupLocalServiceUtil {
 		return getService().updateGroup(group);
 	}
 
+	public static com.liferay.portal.model.Group updateGroup(
+		com.liferay.portal.model.Group group, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateGroup(group, merge);
+	}
+
 	public static com.liferay.portal.model.Group addGroup(long userId,
 		java.lang.String className, long classPK, java.lang.String name,
 		java.lang.String description, int type, java.lang.String friendlyURL,

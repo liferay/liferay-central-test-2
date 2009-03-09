@@ -115,6 +115,13 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 		return igImagePersistence.update(igImage, true);
 	}
 
+	public IGImage updateIGImage(IGImage igImage, boolean merge)
+		throws SystemException {
+		igImage.setNew(false);
+
+		return igImagePersistence.update(igImage, merge);
+	}
+
 	public IGFolderLocalService getIGFolderLocalService() {
 		return igFolderLocalService;
 	}

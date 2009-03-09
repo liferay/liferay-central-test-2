@@ -103,6 +103,12 @@ public class ServiceComponentLocalServiceUtil {
 		return getService().updateServiceComponent(serviceComponent);
 	}
 
+	public static com.liferay.portal.model.ServiceComponent updateServiceComponent(
+		com.liferay.portal.model.ServiceComponent serviceComponent,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateServiceComponent(serviceComponent, merge);
+	}
+
 	public static void destroyServiceComponent(
 		javax.servlet.ServletContext servletContext,
 		java.lang.ClassLoader classLoader)

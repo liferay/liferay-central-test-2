@@ -103,6 +103,12 @@ public class ShoppingItemPriceLocalServiceUtil {
 		return getService().updateShoppingItemPrice(shoppingItemPrice);
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingItemPrice updateShoppingItemPrice(
+		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateShoppingItemPrice(shoppingItemPrice, merge);
+	}
+
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getItemPrices(
 		long itemId)
 		throws com.liferay.portal.PortalException,

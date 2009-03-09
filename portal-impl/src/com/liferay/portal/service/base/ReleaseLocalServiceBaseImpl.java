@@ -208,6 +208,13 @@ public abstract class ReleaseLocalServiceBaseImpl implements ReleaseLocalService
 		return releasePersistence.update(release, true);
 	}
 
+	public Release updateRelease(Release release, boolean merge)
+		throws SystemException {
+		release.setNew(false);
+
+		return releasePersistence.update(release, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

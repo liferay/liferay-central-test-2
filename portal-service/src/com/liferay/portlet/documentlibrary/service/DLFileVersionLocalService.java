@@ -95,6 +95,10 @@ public interface DLFileVersionLocalService {
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.documentlibrary.model.DLFileVersion updateDLFileVersion(
+		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> getFileVersions(
 		long folderId, java.lang.String name)

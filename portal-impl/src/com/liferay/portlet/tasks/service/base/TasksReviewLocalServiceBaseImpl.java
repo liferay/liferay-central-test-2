@@ -109,6 +109,13 @@ public abstract class TasksReviewLocalServiceBaseImpl
 		return tasksReviewPersistence.update(tasksReview, true);
 	}
 
+	public TasksReview updateTasksReview(TasksReview tasksReview, boolean merge)
+		throws SystemException {
+		tasksReview.setNew(false);
+
+		return tasksReviewPersistence.update(tasksReview, merge);
+	}
+
 	public TasksReviewLocalService getTasksReviewLocalService() {
 		return tasksReviewLocalService;
 	}

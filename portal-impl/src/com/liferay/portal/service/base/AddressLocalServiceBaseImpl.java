@@ -211,6 +211,13 @@ public abstract class AddressLocalServiceBaseImpl implements AddressLocalService
 		return addressPersistence.update(address, true);
 	}
 
+	public Address updateAddress(Address address, boolean merge)
+		throws SystemException {
+		address.setNew(false);
+
+		return addressPersistence.update(address, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

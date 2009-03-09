@@ -103,6 +103,12 @@ public class ShoppingOrderLocalServiceUtil {
 		return getService().updateShoppingOrder(shoppingOrder);
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingOrder updateShoppingOrder(
+		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateShoppingOrder(shoppingOrder, merge);
+	}
+
 	public static void completeOrder(java.lang.String number,
 		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
 		double ppPaymentGross, java.lang.String ppReceiverEmail,

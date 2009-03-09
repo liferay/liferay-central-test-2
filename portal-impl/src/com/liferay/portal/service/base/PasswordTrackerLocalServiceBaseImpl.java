@@ -216,6 +216,14 @@ public abstract class PasswordTrackerLocalServiceBaseImpl
 		return passwordTrackerPersistence.update(passwordTracker, true);
 	}
 
+	public PasswordTracker updatePasswordTracker(
+		PasswordTracker passwordTracker, boolean merge)
+		throws SystemException {
+		passwordTracker.setNew(false);
+
+		return passwordTrackerPersistence.update(passwordTracker, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

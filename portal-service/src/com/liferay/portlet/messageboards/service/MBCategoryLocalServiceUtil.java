@@ -103,6 +103,12 @@ public class MBCategoryLocalServiceUtil {
 		return getService().updateMBCategory(mbCategory);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBCategory updateMBCategory(
+		com.liferay.portlet.messageboards.model.MBCategory mbCategory,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateMBCategory(mbCategory, merge);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBCategory addCategory(
 		long userId, long parentCategoryId, java.lang.String name,
 		java.lang.String description, java.lang.String emailAddress,

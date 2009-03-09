@@ -126,6 +126,14 @@ public abstract class ShoppingCategoryLocalServiceBaseImpl
 		return shoppingCategoryPersistence.update(shoppingCategory, true);
 	}
 
+	public ShoppingCategory updateShoppingCategory(
+		ShoppingCategory shoppingCategory, boolean merge)
+		throws SystemException {
+		shoppingCategory.setNew(false);
+
+		return shoppingCategoryPersistence.update(shoppingCategory, merge);
+	}
+
 	public ShoppingCartLocalService getShoppingCartLocalService() {
 		return shoppingCartLocalService;
 	}

@@ -95,6 +95,10 @@ public interface ShoppingItemLocalService {
 		com.liferay.portlet.shopping.model.ShoppingItem shoppingItem)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.shopping.model.ShoppingItem updateShoppingItem(
+		com.liferay.portlet.shopping.model.ShoppingItem shoppingItem,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public void addBookItems(long userId, long categoryId,
 		java.lang.String[] isbns)
 		throws com.liferay.portal.PortalException,

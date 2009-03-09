@@ -96,6 +96,10 @@ public interface UserGroupRoleLocalService {
 		com.liferay.portal.model.UserGroupRole userGroupRole)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.UserGroupRole updateUserGroupRole(
+		com.liferay.portal.model.UserGroupRole userGroupRole, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public void addUserGroupRoles(long userId, long groupId, long[] roleIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

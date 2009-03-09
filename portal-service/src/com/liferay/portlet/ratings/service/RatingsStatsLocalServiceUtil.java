@@ -103,6 +103,12 @@ public class RatingsStatsLocalServiceUtil {
 		return getService().updateRatingsStats(ratingsStats);
 	}
 
+	public static com.liferay.portlet.ratings.model.RatingsStats updateRatingsStats(
+		com.liferay.portlet.ratings.model.RatingsStats ratingsStats,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateRatingsStats(ratingsStats, merge);
+	}
+
 	public static com.liferay.portlet.ratings.model.RatingsStats addStats(
 		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException {

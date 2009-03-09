@@ -100,6 +100,13 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 		return ratingsStatsPersistence.update(ratingsStats, true);
 	}
 
+	public RatingsStats updateRatingsStats(RatingsStats ratingsStats,
+		boolean merge) throws SystemException {
+		ratingsStats.setNew(false);
+
+		return ratingsStatsPersistence.update(ratingsStats, merge);
+	}
+
 	public RatingsEntryLocalService getRatingsEntryLocalService() {
 		return ratingsEntryLocalService;
 	}

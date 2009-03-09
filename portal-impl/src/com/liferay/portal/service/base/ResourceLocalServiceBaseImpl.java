@@ -212,6 +212,13 @@ public abstract class ResourceLocalServiceBaseImpl
 		return resourcePersistence.update(resource, true);
 	}
 
+	public Resource updateResource(Resource resource, boolean merge)
+		throws SystemException {
+		resource.setNew(false);
+
+		return resourcePersistence.update(resource, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

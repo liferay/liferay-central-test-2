@@ -134,6 +134,13 @@ public abstract class MBCategoryLocalServiceBaseImpl
 		return mbCategoryPersistence.update(mbCategory, true);
 	}
 
+	public MBCategory updateMBCategory(MBCategory mbCategory, boolean merge)
+		throws SystemException {
+		mbCategory.setNew(false);
+
+		return mbCategoryPersistence.update(mbCategory, merge);
+	}
+
 	public MBBanLocalService getMBBanLocalService() {
 		return mbBanLocalService;
 	}

@@ -100,6 +100,12 @@ public class WebsiteLocalServiceUtil {
 		return getService().updateWebsite(website);
 	}
 
+	public static com.liferay.portal.model.Website updateWebsite(
+		com.liferay.portal.model.Website website, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateWebsite(website, merge);
+	}
+
 	public static com.liferay.portal.model.Website addWebsite(long userId,
 		java.lang.String className, long classPK, java.lang.String url,
 		int typeId, boolean primary)

@@ -113,6 +113,14 @@ public abstract class SCProductVersionLocalServiceBaseImpl
 		return scProductVersionPersistence.update(scProductVersion, true);
 	}
 
+	public SCProductVersion updateSCProductVersion(
+		SCProductVersion scProductVersion, boolean merge)
+		throws SystemException {
+		scProductVersion.setNew(false);
+
+		return scProductVersionPersistence.update(scProductVersion, merge);
+	}
+
 	public SCLicenseLocalService getSCLicenseLocalService() {
 		return scLicenseLocalService;
 	}

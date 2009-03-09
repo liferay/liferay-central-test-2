@@ -119,6 +119,13 @@ public abstract class CalEventLocalServiceBaseImpl
 		return calEventPersistence.update(calEvent, true);
 	}
 
+	public CalEvent updateCalEvent(CalEvent calEvent, boolean merge)
+		throws SystemException {
+		calEvent.setNew(false);
+
+		return calEventPersistence.update(calEvent, merge);
+	}
+
 	public CalEventLocalService getCalEventLocalService() {
 		return calEventLocalService;
 	}

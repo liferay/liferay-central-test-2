@@ -217,6 +217,14 @@ public abstract class PortletPreferencesLocalServiceBaseImpl
 		return portletPreferencesPersistence.update(portletPreferences, true);
 	}
 
+	public PortletPreferences updatePortletPreferences(
+		PortletPreferences portletPreferences, boolean merge)
+		throws SystemException {
+		portletPreferences.setNew(false);
+
+		return portletPreferencesPersistence.update(portletPreferences, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

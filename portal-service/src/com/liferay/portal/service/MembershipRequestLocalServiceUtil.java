@@ -103,6 +103,12 @@ public class MembershipRequestLocalServiceUtil {
 		return getService().updateMembershipRequest(membershipRequest);
 	}
 
+	public static com.liferay.portal.model.MembershipRequest updateMembershipRequest(
+		com.liferay.portal.model.MembershipRequest membershipRequest,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateMembershipRequest(membershipRequest, merge);
+	}
+
 	public static com.liferay.portal.model.MembershipRequest addMembershipRequest(
 		long userId, long groupId, java.lang.String comments)
 		throws com.liferay.portal.PortalException,

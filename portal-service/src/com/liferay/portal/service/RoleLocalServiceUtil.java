@@ -99,6 +99,12 @@ public class RoleLocalServiceUtil {
 		return getService().updateRole(role);
 	}
 
+	public static com.liferay.portal.model.Role updateRole(
+		com.liferay.portal.model.Role role, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateRole(role, merge);
+	}
+
 	public static com.liferay.portal.model.Role addRole(long userId,
 		long companyId, java.lang.String name, java.lang.String description,
 		int type)

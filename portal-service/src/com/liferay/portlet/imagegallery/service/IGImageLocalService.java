@@ -94,6 +94,10 @@ public interface IGImageLocalService {
 		com.liferay.portlet.imagegallery.model.IGImage igImage)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.imagegallery.model.IGImage updateIGImage(
+		com.liferay.portlet.imagegallery.model.IGImage igImage, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
 		long userId, long folderId, java.lang.String name,
 		java.lang.String description, java.io.File file,

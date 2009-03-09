@@ -103,6 +103,12 @@ public class DLFileEntryLocalServiceUtil {
 		return getService().updateDLFileEntry(dlFileEntry);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateDLFileEntry(
+		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getService().updateDLFileEntry(dlFileEntry, merge);
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
 		long userId, long folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,

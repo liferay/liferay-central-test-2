@@ -152,6 +152,13 @@ public abstract class TagsAssetLocalServiceBaseImpl
 		return tagsAssetPersistence.update(tagsAsset, true);
 	}
 
+	public TagsAsset updateTagsAsset(TagsAsset tagsAsset, boolean merge)
+		throws SystemException {
+		tagsAsset.setNew(false);
+
+		return tagsAssetPersistence.update(tagsAsset, merge);
+	}
+
 	public TagsAssetLocalService getTagsAssetLocalService() {
 		return tagsAssetLocalService;
 	}

@@ -91,6 +91,10 @@ public interface ImageLocalService {
 		com.liferay.portal.model.Image image)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Image updateImage(
+		com.liferay.portal.model.Image image, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Image getCompanyLogo(long imageId);
 
@@ -132,6 +136,7 @@ public interface ImageLocalService {
 	public java.util.List<com.liferay.portal.model.Image> getImagesBySize(
 		int size) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean isNullOrDefaultSpacer(byte[] bytes);
 
 	public com.liferay.portal.model.Image updateImage(long imageId, byte[] bytes)

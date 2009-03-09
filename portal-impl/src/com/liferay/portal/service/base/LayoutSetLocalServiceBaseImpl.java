@@ -215,6 +215,13 @@ public abstract class LayoutSetLocalServiceBaseImpl
 		return layoutSetPersistence.update(layoutSet, true);
 	}
 
+	public LayoutSet updateLayoutSet(LayoutSet layoutSet, boolean merge)
+		throws SystemException {
+		layoutSet.setNew(false);
+
+		return layoutSetPersistence.update(layoutSet, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

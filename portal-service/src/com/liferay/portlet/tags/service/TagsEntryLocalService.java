@@ -93,6 +93,10 @@ public interface TagsEntryLocalService {
 		com.liferay.portlet.tags.model.TagsEntry tagsEntry)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.tags.model.TagsEntry updateTagsEntry(
+		com.liferay.portlet.tags.model.TagsEntry tagsEntry, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.tags.model.TagsEntry addEntry(long userId,
 		java.lang.String parentEntryName, java.lang.String name,
 		java.lang.String vocabularyName, java.lang.String[] properties,

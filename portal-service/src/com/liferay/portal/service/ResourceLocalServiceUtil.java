@@ -102,6 +102,12 @@ public class ResourceLocalServiceUtil {
 		return getService().updateResource(resource);
 	}
 
+	public static com.liferay.portal.model.Resource updateResource(
+		com.liferay.portal.model.Resource resource, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateResource(resource, merge);
+	}
+
 	public static void addModelResources(long companyId, long groupId,
 		long userId, java.lang.String name, long primKey,
 		java.lang.String[] communityPermissions,

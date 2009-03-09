@@ -103,6 +103,12 @@ public class MBThreadLocalServiceUtil {
 		return getService().updateMBThread(mbThread);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBThread updateMBThread(
+		com.liferay.portlet.messageboards.model.MBThread mbThread, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateMBThread(mbThread, merge);
+	}
+
 	public static void deleteThread(long threadId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

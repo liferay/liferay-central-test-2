@@ -124,6 +124,13 @@ public abstract class MBMailingListLocalServiceBaseImpl
 		return mbMailingListPersistence.update(mbMailingList, true);
 	}
 
+	public MBMailingList updateMBMailingList(MBMailingList mbMailingList,
+		boolean merge) throws SystemException {
+		mbMailingList.setNew(false);
+
+		return mbMailingListPersistence.update(mbMailingList, merge);
+	}
+
 	public MBBanLocalService getMBBanLocalService() {
 		return mbBanLocalService;
 	}

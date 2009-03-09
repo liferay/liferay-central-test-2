@@ -216,6 +216,13 @@ public abstract class UserTrackerLocalServiceBaseImpl
 		return userTrackerPersistence.update(userTracker, true);
 	}
 
+	public UserTracker updateUserTracker(UserTracker userTracker, boolean merge)
+		throws SystemException {
+		userTracker.setNew(false);
+
+		return userTrackerPersistence.update(userTracker, merge);
+	}
+
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}

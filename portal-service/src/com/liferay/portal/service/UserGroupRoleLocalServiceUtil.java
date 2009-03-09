@@ -104,6 +104,12 @@ public class UserGroupRoleLocalServiceUtil {
 		return getService().updateUserGroupRole(userGroupRole);
 	}
 
+	public static com.liferay.portal.model.UserGroupRole updateUserGroupRole(
+		com.liferay.portal.model.UserGroupRole userGroupRole, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getService().updateUserGroupRole(userGroupRole, merge);
+	}
+
 	public static void addUserGroupRoles(long userId, long groupId,
 		long[] roleIds)
 		throws com.liferay.portal.PortalException,
