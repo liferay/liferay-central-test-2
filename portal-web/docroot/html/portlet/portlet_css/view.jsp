@@ -87,7 +87,7 @@
 						<option value=""><liferay-ui:message key="current-page" /></option>
 
 						<%
-						long linkToPlid = 0;
+						long linkToLayoutId = 0;
 
 						LayoutLister layoutLister = new LayoutLister();
 
@@ -130,7 +130,7 @@
 							if (linkableLayout != null) {
 						%>
 
-								<option <%= (linkableLayout.getPlid() == linkToPlid) ? "selected" : "" %> value="<%= linkableLayout.getPlid() %>"><%= name %></option>
+								<option <%= (linkableLayout.getLayoutId() == linkToLayoutId) ? "selected" : "" %> value="<%= linkableLayout.getLayoutId() %>"><%= name %></option>
 
 						<%
 							}

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -35,6 +36,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletURLListener;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
@@ -215,8 +217,27 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 				PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 					layout, _portletName);
 
-			plid = GetterUtil.getLong(portletSetup.getValue(
-				"portlet-setup-link-to-plid", String.valueOf(_plid)));
+			long layoutId = GetterUtil.getLong(portletSetup.getValue(
+				"portlet-setup-link-to-layout-id", null));
+
+			if (layoutId > 0) {
+				try {
+					Layout linkedLayout = LayoutLocalServiceUtil.getLayout(
+						layout.getGroupId(), layout.isPrivateLayout(),
+						layoutId);
+
+					plid = linkedLayout.getPlid();
+				}
+				catch (PortalException e) {
+				}
+			}
+			else {
+
+				// Backwards compatibility
+
+				plid = GetterUtil.getLong(portletSetup.getValue(
+					"portlet-setup-link-to-plid", String.valueOf(_plid)));
+			}
 
 			if (plid <= 0) {
 				plid = _plid;

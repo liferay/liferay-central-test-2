@@ -105,7 +105,7 @@ public class UpdateLookAndFeelAction extends JSONAction {
 
 		boolean useCustomTitle = portletData.getBoolean("useCustomTitle");
 		boolean showBorders = portletData.getBoolean("showBorders");
-		long linkToPlid = GetterUtil.getLong(
+		long linkToLayoutId = GetterUtil.getLong(
 			portletData.getString("portletLinksTarget"));
 
 		JSONObject titles = portletData.getJSONObject("titles");
@@ -135,12 +135,13 @@ public class UpdateLookAndFeelAction extends JSONAction {
 		portletSetup.setValue(
 			"portlet-setup-show-borders", String.valueOf(showBorders));
 
-		if (linkToPlid > 0) {
+		if (linkToLayoutId > 0) {
 			portletSetup.setValue(
-				"portlet-setup-link-to-plid", String.valueOf(linkToPlid));
+				"portlet-setup-link-to-layout-id",
+				String.valueOf(linkToLayoutId));
 		}
 		else {
-			portletSetup.reset("portlet-setup-link-to-plid");
+			portletSetup.reset("portlet-setup-link-to-layout-id");
 		}
 
 		portletSetup.setValue("portlet-setup-css", css);
