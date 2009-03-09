@@ -51,6 +51,8 @@ public class AdvancedSearchUsersTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Directory Test Page"));
 		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Users"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Advanced \u00bb");
 
 		for (int second = 0;; second++) {
@@ -70,62 +72,62 @@ public class AdvancedSearchUsersTest extends BaseTestCase {
 		}
 
 		selenium.type("_11_firstName", RuntimeVariables.replace("TestFirst"));
-		selenium.click(RuntimeVariables.replace("//div[2]/input"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=TestFirst1"));
 		assertTrue(selenium.isElementPresent("link=TestFirst2"));
 		selenium.type("_11_firstName", RuntimeVariables.replace("TestFirstA"));
-		selenium.click(RuntimeVariables.replace("//div[2]/input"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=TestFirst1"));
 		assertFalse(selenium.isElementPresent("link=TestFirst2"));
 		selenium.type("_11_firstName", RuntimeVariables.replace(""));
 		selenium.type("_11_middleName", RuntimeVariables.replace("TestMiddle"));
-		selenium.click(RuntimeVariables.replace("//div[2]/input"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=TestFirst1"));
 		assertTrue(selenium.isElementPresent("link=TestFirst2"));
 		selenium.type("_11_middleName", RuntimeVariables.replace("TestMiddleA"));
-		selenium.click(RuntimeVariables.replace("//div[2]/input"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=TestFirst1"));
 		assertFalse(selenium.isElementPresent("link=TestFirst2"));
 		selenium.type("_11_middleName", RuntimeVariables.replace(""));
 		selenium.type("_11_lastName", RuntimeVariables.replace("TestLast"));
-		selenium.click(RuntimeVariables.replace("//div[2]/input"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=TestFirst1"));
 		assertTrue(selenium.isElementPresent("link=TestFirst2"));
 		selenium.type("_11_lastName", RuntimeVariables.replace("TestLastA"));
-		selenium.click(RuntimeVariables.replace("//div[2]/input"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=TestFirst1"));
 		assertFalse(selenium.isElementPresent("link=TestFirst2"));
 		selenium.type("_11_lastName", RuntimeVariables.replace(""));
 		selenium.type("_11_screenName", RuntimeVariables.replace("TestSN"));
-		selenium.click(RuntimeVariables.replace("//div[2]/input"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=TestFirst1"));
 		assertTrue(selenium.isElementPresent("link=TestFirst2"));
 		selenium.type("_11_screenName", RuntimeVariables.replace("TestSNA"));
-		selenium.click(RuntimeVariables.replace("//div[2]/input"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=TestFirst1"));
 		assertFalse(selenium.isElementPresent("link=TestFirst2"));
 		selenium.type("_11_screenName", RuntimeVariables.replace(""));
 		selenium.type("_11_emailAddress",
 			RuntimeVariables.replace("TestEMail1@liferay.com"));
-		selenium.click(RuntimeVariables.replace("//div[2]/input"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=TestFirst1"));
 		selenium.type("_11_emailAddress",
 			RuntimeVariables.replace("TestEMail2@liferay.com"));
-		selenium.click(RuntimeVariables.replace("//div[2]/input"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=TestFirst2"));
 		selenium.type("_11_emailAddress",
 			RuntimeVariables.replace("TestEMail@liferay.com"));
-		selenium.click(RuntimeVariables.replace("//div[2]/input"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=TestFirst1"));
 		assertFalse(selenium.isElementPresent("link=TestFirst2"));

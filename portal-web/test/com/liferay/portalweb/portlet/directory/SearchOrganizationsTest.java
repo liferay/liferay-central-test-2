@@ -57,12 +57,10 @@ public class SearchOrganizationsTest extends BaseTestCase {
 		selenium.type("_11_keywords", RuntimeVariables.replace("Test"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Test Child"));
-		assertTrue(selenium.isElementPresent("link=Test Organization"));
+		assertTrue(selenium.isElementPresent("link=Diamond Bar"));
 		selenium.type("_11_keywords", RuntimeVariables.replace("Test1"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("link=Test Child"));
-		assertFalse(selenium.isElementPresent("link=Test Organization"));
+		assertFalse(selenium.isElementPresent("link=Diamond Bar"));
 	}
 }

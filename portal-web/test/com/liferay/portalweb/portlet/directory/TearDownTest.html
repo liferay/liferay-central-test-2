@@ -39,6 +39,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('_125_rowIds'))</td>
+	<td>UsersPresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${UsersPresent}</td>
+	<td>No Users Present</td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>_125_allRowIds</td>
 	<td></td>
@@ -104,6 +114,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>label</td>
+	<td>No Users Present</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Organizations</td>
 	<td></td>
@@ -111,12 +126,162 @@
 <tr>
 	<td>typeKeys</td>
 	<td>_126_keywords</td>
-	<td>Test Organizatio</td>
+	<td>Cerritos</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_126_keywords</td>
-	<td>Test Organizatio</td>
+	<td>Cerritos</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Search']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('_126_rowIds'))</td>
+	<td>SuborganizationPresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${SuborganizationPresent}</td>
+	<td>No Suborganization Present</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//strong/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Assign Members</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Assign Members</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>_126_allRowIds</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Update Associations']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>_126_tabs2TabsBack</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>_126_allRowIds</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete this?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>No Suborganization Present</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_126_keywords</td>
+	<td>Diamond Bar</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_126_keywords</td>
+	<td>Diamond Bar</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Search']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//strong/span'))</td>
+	<td>OrganizationPresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${OrganizationPresent}</td>
+	<td>No Organization Present</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//strong/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Assign Members</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Assign Members</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>_126_allRowIds</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Update Associations']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_126_keywords</td>
+	<td>Diamond Bar</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_126_keywords</td>
+	<td>Diamond Bar</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -144,9 +309,24 @@
 	<td></td>
 </tr>
 <tr>
+	<td>label</td>
+	<td>No Organization Present</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=User Groups</td>
 	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('_127_rowIds'))</td>
+	<td>UserGroupPresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${UserGroupPresent}</td>
+	<td>No User Group Present</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -169,6 +349,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>label</td>
+	<td>No User Group Present</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Back to My Community</td>
 	<td></td>
@@ -181,6 +366,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Directory Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//img[@alt='Remove']</td>
 	<td></td>
 </tr>
 <tr>
@@ -236,11 +426,6 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Your request processed successfully.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[2]/ul/li[1]/a</td>
 	<td></td>
 </tr>
 <tr>

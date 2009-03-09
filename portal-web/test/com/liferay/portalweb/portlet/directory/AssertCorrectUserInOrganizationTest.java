@@ -78,7 +78,6 @@ public class AssertCorrectUserInOrganizationTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=View Users"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("link=TestFirst1"));
-		assertTrue(selenium.isElementPresent("link=TestFirst2"));
+		assertTrue(selenium.isElementPresent("link=joebloggs"));
 	}
 }

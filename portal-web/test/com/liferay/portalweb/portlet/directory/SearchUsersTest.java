@@ -51,16 +51,18 @@ public class SearchUsersTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Directory Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_11_keywords", RuntimeVariables.replace("testsn"));
-		selenium.type("_11_keywords", RuntimeVariables.replace("testsn"));
+		selenium.click(RuntimeVariables.replace("link=Users"));
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_11_keywords", RuntimeVariables.replace("TestFirst"));
+		selenium.type("_11_keywords", RuntimeVariables.replace("TestFirst"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=TestFirst1"));
-		assertTrue(selenium.isElementPresent("link=TestFirst2"));
-		selenium.type("_11_keywords", RuntimeVariables.replace("testsnA"));
+		assertTrue(selenium.isTextPresent("TestFirst1"));
+		assertTrue(selenium.isTextPresent("TestFirst2"));
+		selenium.type("_11_keywords", RuntimeVariables.replace("TestFirstA"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("link=TestFirst1"));
-		assertFalse(selenium.isElementPresent("link=TestFirst2"));
+		assertFalse(selenium.isTextPresent("TestFirst1"));
+		assertFalse(selenium.isTextPresent("TestFirst2"));
 	}
 }
