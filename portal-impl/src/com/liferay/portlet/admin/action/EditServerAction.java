@@ -22,14 +22,18 @@
 
 package com.liferay.portlet.admin.action;
 
+import com.liferay.portal.kernel.bean.BeanLocator;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.mail.Account;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.InfrastructureUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Time;
@@ -45,11 +49,15 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.ShutdownUtil;
 import com.liferay.portal.util.WebKeys;
 
 import java.util.Enumeration;
 import java.util.Map;
+import java.util.Properties;
+
+import javax.mail.Session;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -119,6 +127,9 @@ public class EditServerAction extends PortletAction {
 		}
 		else if (cmd.equals("updateLogLevels")) {
 			updateLogLevels(actionRequest);
+		}
+		else if (cmd.equals("updateMail")) {
+			updateMail(actionRequest, preferences);
 		}
 		else if (cmd.equals("updateOpenOffice")) {
 			updateOpenOffice(actionRequest, preferences);
@@ -276,6 +287,64 @@ public class EditServerAction extends PortletAction {
 				logger.setLevel(Level.toLevel(priority));
 			}
 		}
+	}
+
+	protected void updateMail(ActionRequest actionRequest,
+							  PortletPreferences preferences) throws Exception {
+		String auth = ParamUtil.getString(actionRequest, "auth", "false");
+		String host = ParamUtil.getString(
+				actionRequest, "host", StringPool.BLANK);
+		String password = ParamUtil.getString(
+				actionRequest, "password", StringPool.BLANK);
+		String port = ParamUtil.getString(
+				actionRequest, "port", StringPool.BLANK);
+		String username = ParamUtil.getString(
+				actionRequest, "username", StringPool.BLANK);
+		String require_ssl = ParamUtil.getString(
+				actionRequest, "require_ssl", "false");
+
+		preferences.setValue(PropsKeys.MAIL_SESSION_MAIL_SMTP_AUTH, auth);
+		preferences.setValue(PropsKeys.MAIL_SESSION_MAIL_SMTP_HOST, host);
+		preferences.setValue(
+				PropsKeys.MAIL_SESSION_MAIL_SMTP_PASSWORD, password);
+		preferences.setValue(PropsKeys.MAIL_SESSION_MAIL_SMTP_PORT, port);
+		preferences.setValue(PropsKeys.MAIL_SESSION_MAIL_SMTP_USER, username);
+		preferences.setValue(
+			PropsKeys.MAIL_SESSION_MAIL_SMTP_STARTTLS_ENABLE, require_ssl);
+
+		preferences.store();
+
+		Properties properties = PropsUtil.getProperties("mail.session.", true);
+
+		if (require_ssl.equals("true")) {
+			properties.setProperty(
+					"mail.transport.protocol", Account.PROTOCOL_SMTPS);
+			properties.setProperty("mail.smtp.starttls.enable", require_ssl);
+
+			properties.setProperty("mail.smtps.auth", auth);
+			properties.setProperty("mail.smtps.host", host);
+			properties.setProperty("mail.smtps.password", password);
+			properties.setProperty("mail.smtps.port", port);
+			properties.setProperty("mail.smtps.user", username);
+		}
+		else {
+			properties.setProperty(
+					"mail.transport.protocol", Account.PROTOCOL_SMTP);
+			properties.setProperty("mail.smtp.starttls.enable", require_ssl);
+			properties.setProperty("mail.smtp.auth", auth);
+			properties.setProperty("mail.smtp.host", host);
+			properties.setProperty("mail.smtp.password", password);
+			properties.setProperty("mail.smtp.port", port);
+			properties.setProperty("mail.smtp.user", username);
+		}
+
+		Session session = Session.getInstance(properties);
+
+		BeanLocator locator = PortalBeanLocatorUtil.getBeanLocator();
+		InfrastructureUtil infrastructureUtil =
+				(InfrastructureUtil)locator.locate(
+					InfrastructureUtil.class.getName());
+		infrastructureUtil.setMailSession(session);
 	}
 
 	protected void updateOpenOffice(

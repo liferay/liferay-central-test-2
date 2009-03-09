@@ -755,6 +755,20 @@ public interface PropsKeys {
 
 	public static final String MAIL_HOOK_SHELL_SCRIPT = "mail.hook.shell.script";
 
+	public static final String MAIL_SESSION_MAIL_SMTP_AUTH = "mail.session.mail.smtp.auth";
+
+	public static final String MAIL_SESSION_MAIL_SMTP_HOST = "mail.session.mail.smtp.host";
+
+	public static final String MAIL_SESSION_MAIL_SMTP_PASSWORD = "mail.session.mail.smtp.password";
+
+	public static final String MAIL_SESSION_MAIL_SMTP_PORT = "mail.session.mail.smtp.port";
+
+	public static final String MAIL_SESSION_MAIL_SMTP_STARTTLS_ENABLE = "mail.session.mail.smtp.starttls.enable";
+
+	public static final String MAIL_SESSION_MAIL_SMTP_USER = "mail.session.mail.smtp.user";
+
+	public static final String MAIL_SESSION_MAIL_TRANSPORT_PROTOCOL = "mail.session.mail.transport.protocol";
+
 	public static final String MAIL_MX_UPDATE = "mail.mx.update";
 
 	public static final String MESSAGE_BOARDS_ALLOW_ANONYMOUS_POSTING = "message.boards.anonymous.posting.enabled";

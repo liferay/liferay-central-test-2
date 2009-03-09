@@ -53,7 +53,7 @@ numberFormat.setMinimumIntegerDigits(2);
 	</c:when>
 	<c:otherwise>
 		<liferay-ui:tabs
-			names="resources,log-levels,system-properties,portal-properties,shutdown,OpenOffice"
+			names="resources,log-levels,system-properties,portal-properties,shutdown,OpenOffice,mail"
 			param="tabs2"
 			url="<%= portletURL.toString() %>"
 		/>
@@ -344,6 +344,65 @@ numberFormat.setMinimumIntegerDigits(2);
 				<br />
 
 				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveServer('updateOpenOffice');" />
+			</c:when>
+			<c:when test='<%= tabs2.equals("mail") %>'>
+				<liferay-ui:message key="outgoing-smtp-server" />
+
+				<br /><br />
+
+				<table class="lfr-table">
+				<tr>
+					<td>
+						<liferay-ui:message key="host" />
+					</td>
+					<td>
+						<input class="lfr-input-text" name="<portlet:namespace />host" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_SMTP_HOST) %>" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="port" />
+					</td>
+					<td>
+						<input class="lfr-input-text" name="<portlet:namespace />port" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_SMTP_PORT) %>" />
+					</td>
+				<tr>
+					<td>
+						<liferay-ui:message key="authorization-required" />
+					</td>
+					<td>
+						<input class="lfr-input-text" name="<portlet:namespace />auth" type="checkbox" <%=PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_SMTP_AUTH).equals("true") ? "checked=\"yes\"" : "" %> value="true" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="username" />
+					</td>
+					<td>
+						<input class="lfr-input-text" name="<portlet:namespace />username" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_SMTP_USER) %>" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="password" />
+					</td>
+					<td>
+						<input class="lfr-input-text" name="<portlet:namespace />password" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_SMTP_PASSWORD) %>" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="require-ssl" />
+					</td>
+					<td>
+						<input class="lfr-input-text" name="<portlet:namespace />require_ssl" type="checkbox" <%=PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_SMTP_STARTTLS_ENABLE, "false").equals("true") ? "checked=\"yes\"" : "" %> value="true" />
+					</td>
+				</tr>
+				</table>
+
+				<br />
+
+				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveServer('updateMail');" />
 			</c:when>
 			<c:otherwise>
 

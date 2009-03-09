@@ -22,6 +22,8 @@
 
 package com.liferay.util.mail;
 
+import com.liferay.mail.service.MailServiceUtil;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.Account;
@@ -65,6 +67,7 @@ import org.apache.commons.lang.time.StopWatch;
  * @author Jorge Ferrer
  * @author Neil Griffin
  * @author Thiago Moreira
+ * @author Brett Swaim
  *
  */
 public class MailEngine {
@@ -74,15 +77,20 @@ public class MailEngine {
 	}
 
 	public static Session getSession(boolean cache) {
-		Session session = InfrastructureUtil.getMailSession();
+		try {
+			Session session = MailServiceUtil.getMailSession("mail.session.");
 
-		if (_log.isDebugEnabled()) {
-			session.setDebug(true);
+			if (_log.isDebugEnabled()) {
+				session.setDebug(true);
 
-			session.getProperties().list(System.out);
+				session.getProperties().list(System.out);
+			}
+
+			return session;
 		}
-
-		return session;
+		catch (SystemException se) {
+			return InfrastructureUtil.getMailSession();
+		}
 	}
 
 	public static Session getSession(Account account) {
@@ -419,13 +427,13 @@ public class MailEngine {
 	}
 
 	private static String _getSMTPProperty(Session session, String suffix) {
-		String value = session.getProperty("mail.smtp." + suffix);
-
-		if (value == null) {
-			value = session.getProperty("mail.smtps." + suffix);
+		if (session.getProperty(
+				"mail.transport.protocol").equals(Account.PROTOCOL_SMTPS)) {
+			return session.getProperty("mail.smtps." + suffix);
 		}
-
-		return value;
+		else {
+			return session.getProperty("mail.smtp." + suffix);
+		}
 	}
 
 	private static void _send(

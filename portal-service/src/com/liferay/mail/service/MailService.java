@@ -30,6 +30,8 @@ import com.liferay.portal.kernel.mail.MailMessage;
 
 import java.util.List;
 
+import javax.mail.Session;
+
 /**
  * <a href="MailService.java.html"><b><i>View Source</i></b></a>
  *
@@ -54,6 +56,9 @@ public interface MailService {
 	public void deleteEmailAddress(long companyId, long userId);
 
 	public void deleteUser(long companyId, long userId);
+
+	public Session getMailSession(String _propertyPrefix)
+			throws SystemException;
 
 	public void sendEmail(MailMessage mailMessage);
 

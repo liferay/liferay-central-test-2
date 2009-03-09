@@ -23,9 +23,12 @@
 package com.liferay.mail.service;
 
 import com.liferay.mail.model.Filter;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.mail.MailMessage;
 
 import java.util.List;
+
+import javax.mail.Session;
 
 /**
  * <a href="MailServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -66,6 +69,11 @@ public class MailServiceUtil {
 
 	public static void deleteUser(long companyId, long userId) {
 		_service.deleteUser(companyId, userId);
+	}
+
+	public static Session getMailSession(String _propertyPrefix)
+			throws SystemException {
+		return _service.getMailSession(_propertyPrefix);
 	}
 
 	public static void sendEmail(MailMessage mailMessage) {
