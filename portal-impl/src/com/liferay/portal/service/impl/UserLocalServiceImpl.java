@@ -1381,7 +1381,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			if (user.getPasswordModifiedDate() == null) {
 				user.setPasswordModifiedDate(now);
 
-				userPersistence.update(user, false);
+				userLocalService.updateUser(user, false);
 			}
 
 			long passwordStartTime = user.getPasswordModifiedDate().getTime();
@@ -1409,7 +1409,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			if (user.getPasswordModifiedDate() == null) {
 				user.setPasswordModifiedDate(now);
 
-				userPersistence.update(user, false);
+				userLocalService.updateUser(user, false);
 			}
 
 			long timeModified = user.getPasswordModifiedDate().getTime();

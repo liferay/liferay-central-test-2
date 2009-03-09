@@ -93,6 +93,12 @@ import ${beanLocatorUtil};
 
 		return ${entity.varName}Persistence.update(${entity.varName}, true);
 	}
+
+	public ${entity.name} update${entity.name}(${entity.name} ${entity.varName}, boolean merge) throws SystemException {
+		${entity.varName}.setNew(false);
+
+		return ${entity.varName}Persistence.update(${entity.varName}, merge);
+	}
 </#if>
 
 <#list referenceList as tempEntity>
