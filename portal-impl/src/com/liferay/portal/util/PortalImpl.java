@@ -3400,6 +3400,20 @@ public class PortalImpl implements Portal {
 	private long _getPlidFromPortletId(
 		long groupId, boolean privateLayout, String portletId) {
 
+		long scopeGroupId = groupId;
+
+		try {
+			Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+			if (group.isLayout()) {
+				Layout scopeLayout = LayoutLocalServiceUtil.getLayout(
+					group.getClassPK());
+				groupId = scopeLayout.getGroupId();
+			}
+		}
+		catch (Exception e) {
+		}
+
 		long plid = LayoutConstants.DEFAULT_PLID;
 
 		try {
@@ -3411,7 +3425,7 @@ public class PortalImpl implements Portal {
 					(LayoutTypePortlet)layout.getLayoutType();
 
 				if (layoutTypePortlet.hasPortletId(portletId)) {
-					if (getScopeGroupId(layout, portletId) == groupId) {
+					if (getScopeGroupId(layout, portletId) == scopeGroupId) {
 						plid = layout.getPlid();
 
 						break;
