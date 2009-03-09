@@ -3408,6 +3408,7 @@ public class PortalImpl implements Portal {
 			if (group.isLayout()) {
 				Layout scopeLayout = LayoutLocalServiceUtil.getLayout(
 					group.getClassPK());
+
 				groupId = scopeLayout.getGroupId();
 			}
 		}
