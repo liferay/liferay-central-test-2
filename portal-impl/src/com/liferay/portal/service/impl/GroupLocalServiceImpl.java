@@ -133,6 +133,9 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		if ((classNameId <= 0) || (classPK <= 0)) {
 			validateName(groupId, user.getCompanyId(), name);
 		}
+		else {
+			name = String.valueOf(classPK);
+		}
 
 		validateFriendlyURL(
 			user.getCompanyId(), groupId, classNameId, classPK, friendlyURL);
@@ -688,6 +691,9 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		if ((classNameId <= 0) || (classPK <= 0)) {
 			validateName(group.getGroupId(), group.getCompanyId(), name);
+		}
+		else {
+			name = String.valueOf(classPK);
 		}
 
 		if (PortalUtil.isSystemGroup(group.getName()) &&

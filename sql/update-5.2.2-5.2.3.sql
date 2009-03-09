@@ -1,0 +1,1 @@
+update Group_ set name = classPK where classPK > 0;
