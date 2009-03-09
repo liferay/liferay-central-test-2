@@ -98,17 +98,17 @@ public class UpgradeTags extends UpgradeProcess {
 				String userName = rs.getString("userName");
 				Timestamp createDate = rs.getTimestamp("createDate");
 				Timestamp modifiedDate = rs.getTimestamp("modifiedDate");
-				String name = rs.getString("name");
 				long parentEntryId = rs.getLong("parentEntryId");
+				String name = rs.getString("name");
 				long vocabularyId = rs.getLong("vocabularyId");
 
 				newEntryId = CounterLocalServiceUtil.increment();
 
 				ps = con.prepareStatement(
 					"insert into TagsEntry (entryId, groupId, companyId, " +
-						"userId, userName, createDate, modifiedDate, name, " +
-							"parentEntryId, vocabularyId) values (?, ?, ?, " +
-								"?, ?, ?, ?, ?, ?, ?)");
+						"userId, userName, createDate, modifiedDate, " +
+							"parentEntryId, name, vocabularyId) values (?, " +
+								"?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
 				ps.setLong(1, newEntryId);
 				ps.setLong(2, groupId);
@@ -117,8 +117,8 @@ public class UpgradeTags extends UpgradeProcess {
 				ps.setString(5, userName);
 				ps.setTimestamp(6, createDate);
 				ps.setTimestamp(7, modifiedDate);
-				ps.setString(8, name);
-				ps.setLong(9, parentEntryId);
+				ps.setLong(8, parentEntryId);
+				ps.setString(9, name);
 				ps.setLong(10, vocabularyId);
 
 				ps.executeUpdate();
