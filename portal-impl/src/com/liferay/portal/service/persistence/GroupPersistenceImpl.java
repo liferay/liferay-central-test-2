@@ -579,7 +579,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 					query.append("friendlyURL IS NULL");
 				}
 				else {
-					query.append("lower(friendlyURL) = ?");
+					query.append("friendlyURL = ?");
 				}
 
 				query.append(" ");
@@ -1084,7 +1084,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 					query.append("friendlyURL IS NULL");
 				}
 				else {
-					query.append("lower(friendlyURL) = ?");
+					query.append("friendlyURL = ?");
 				}
 
 				query.append(" ");

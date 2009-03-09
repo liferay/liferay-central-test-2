@@ -1677,7 +1677,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 					query.append("friendlyURL IS NULL");
 				}
 				else {
-					query.append("lower(friendlyURL) = ?");
+					query.append("friendlyURL = ?");
 				}
 
 				query.append(" ");
@@ -2793,7 +2793,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 					query.append("friendlyURL IS NULL");
 				}
 				else {
-					query.append("lower(friendlyURL) = ?");
+					query.append("friendlyURL = ?");
 				}
 
 				query.append(" ");

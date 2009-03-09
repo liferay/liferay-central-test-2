@@ -111,7 +111,7 @@ create unique index IX_B5984EDA on ExpandoValue (tableId, columnId, rowId_);
 create index IX_B71E92D5 on ExpandoValue (tableId, rowId_);
 
 create index IX_D0D5E397 on Group_ (companyId, classNameId, classPK);
-create index IX_5BDDB872 on Group_ (companyId, friendlyURL);
+create unique index IX_5BDDB872 on Group_ (companyId, friendlyURL);
 create unique index IX_5AA68501 on Group_ (companyId, name);
 create index IX_16218A38 on Group_ (liveGroupId);
 
@@ -195,7 +195,7 @@ create index IX_C7FBC998 on Layout (companyId);
 create index IX_FAD05595 on Layout (dlFolderId);
 create index IX_C099D61A on Layout (groupId);
 create index IX_705F5AA3 on Layout (groupId, privateLayout);
-create index IX_BC2C4231 on Layout (groupId, privateLayout, friendlyURL);
+create unique index IX_BC2C4231 on Layout (groupId, privateLayout, friendlyURL);
 create unique index IX_7162C27C on Layout (groupId, privateLayout, layoutId);
 create index IX_6DE88B06 on Layout (groupId, privateLayout, parentLayoutId);
 create index IX_1A1B61D2 on Layout (groupId, privateLayout, type_);

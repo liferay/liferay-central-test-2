@@ -344,9 +344,9 @@
 			<finder-column name="companyId" />
 			<finder-column name="name" />
 		</finder>
-		<finder name="C_F" return-type="Group">
+		<finder name="C_F" return-type="Group" unique="true">
 			<finder-column name="companyId" />
-			<finder-column name="friendlyURL" case-sensitive="false" />
+			<finder-column name="friendlyURL" />
 		</finder>
 		<finder name="C_C_C" return-type="Group">
 			<finder-column name="companyId" />
@@ -480,10 +480,10 @@
 			<finder-column name="privateLayout" />
 			<finder-column name="parentLayoutId" />
 		</finder>
-		<finder name="G_P_F" return-type="Layout">
+		<finder name="G_P_F" return-type="Layout" unique="true">
 			<finder-column name="groupId" />
 			<finder-column name="privateLayout" />
-			<finder-column name="friendlyURL" case-sensitive="false" />
+			<finder-column name="friendlyURL" />
 		</finder>
 		<finder name="G_P_T" return-type="Collection">
 			<finder-column name="groupId" />
