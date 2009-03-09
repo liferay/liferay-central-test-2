@@ -48,7 +48,7 @@
 		overflowToDisk="false"
 	/>
 	<cache
-		name="com.liferay.portlet.journalcontent.util.JournalContentUtil"
+		name="com.liferay.portlet.journalcontent.util.JournalContent"
 		maxElementsInMemory="1000"
 		eternal="false"
 		timeToLiveSeconds="3600"

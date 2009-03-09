@@ -39,38 +39,26 @@ import com.liferay.portlet.journal.service.permission.JournalArticlePermission;
 import org.apache.commons.lang.time.StopWatch;
 
 /**
- * <a href="JournalContentUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="JournalContentImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
  * @author Michael Young
  *
  */
-public class JournalContentUtil {
+public class JournalContentImpl implements JournalContent {
 
-	public static final String CACHE_NAME = JournalContentUtil.class.getName();
-
-	public static String ARTICLE_SEPARATOR = "_ARTICLE_";
-
-	public static String LANGUAGE_SEPARATOR = "_LANGUAGE_";
-
-	public static String PAGE_SEPARATOR = "_PAGE_";
-
-	public static String TEMPLATE_SEPARATOR = "_TEMPLATE_";
-
-	public static String VIEW_MODE_SEPARATOR = "_VIEW_MODE_";
-
-	public static void clearCache() {
+	public void clearCache() {
 		cache.removeAll();
 	}
 
-	public static void clearCache(
+	public void clearCache(
 		long groupId, String articleId, String templateId) {
 
 		clearCache();
 	}
 
-	public static String getContent(
+	public String getContent(
 		long groupId, String articleId, String viewMode, String languageId,
 		String xmlRequest) {
 
@@ -78,7 +66,7 @@ public class JournalContentUtil {
 			groupId, articleId, null, viewMode, languageId, null, xmlRequest);
 	}
 
-	public static String getContent(
+	public String getContent(
 		long groupId, String articleId, String viewMode, String languageId,
 		ThemeDisplay themeDisplay) {
 
@@ -86,7 +74,7 @@ public class JournalContentUtil {
 			groupId, articleId, null, viewMode, languageId, themeDisplay);
 	}
 
-	public static String getContent(
+	public String getContent(
 		long groupId, String articleId, String templateId, String viewMode,
 		String languageId, String xmlRequest) {
 
@@ -95,7 +83,7 @@ public class JournalContentUtil {
 			xmlRequest);
 	}
 
-	public static String getContent(
+	public String getContent(
 		long groupId, String articleId, String templateId, String viewMode,
 		String languageId, ThemeDisplay themeDisplay) {
 
@@ -104,7 +92,7 @@ public class JournalContentUtil {
 			null);
 	}
 
-	public static String getContent(
+	public String getContent(
 		long groupId, String articleId, String templateId, String viewMode,
 		String languageId, ThemeDisplay themeDisplay, String xmlRequest) {
 
@@ -120,7 +108,7 @@ public class JournalContentUtil {
 		}
 	}
 
-	public static JournalArticleDisplay getDisplay(
+	public JournalArticleDisplay getDisplay(
 		long groupId, String articleId, String viewMode, String languageId,
 		String xmlRequest) {
 
@@ -129,7 +117,7 @@ public class JournalContentUtil {
 			xmlRequest);
 	}
 
-	public static JournalArticleDisplay getDisplay(
+	public JournalArticleDisplay getDisplay(
 		long groupId, String articleId, String viewMode, String languageId,
 		ThemeDisplay themeDisplay) {
 
@@ -137,7 +125,7 @@ public class JournalContentUtil {
 			groupId, articleId, viewMode, languageId, themeDisplay, 1);
 	}
 
-	public static JournalArticleDisplay getDisplay(
+	public JournalArticleDisplay getDisplay(
 		long groupId, String articleId, String viewMode, String languageId,
 		ThemeDisplay themeDisplay, int page) {
 
@@ -146,7 +134,7 @@ public class JournalContentUtil {
 			null);
 	}
 
-	public static JournalArticleDisplay getDisplay(
+	public JournalArticleDisplay getDisplay(
 		long groupId, String articleId, String templateId, String viewMode,
 		String languageId, String xmlRequest) {
 
@@ -155,7 +143,7 @@ public class JournalContentUtil {
 			xmlRequest);
 	}
 
-	public static JournalArticleDisplay getDisplay(
+	public JournalArticleDisplay getDisplay(
 		long groupId, String articleId, String templateId, String viewMode,
 		String languageId, ThemeDisplay themeDisplay) {
 
@@ -164,7 +152,7 @@ public class JournalContentUtil {
 			1, null);
 	}
 
-	public static JournalArticleDisplay getDisplay(
+	public JournalArticleDisplay getDisplay(
 		long groupId, String articleId, String templateId, String viewMode,
 		String languageId, ThemeDisplay themeDisplay, int page,
 		String xmlRequest) {
@@ -221,7 +209,7 @@ public class JournalContentUtil {
 		return articleDisplay;
 	}
 
-	protected static String encodeKey(
+	protected String encodeKey(
 		long groupId, String articleId, String templateId, String viewMode,
 		String languageId, int page) {
 
@@ -253,7 +241,7 @@ public class JournalContentUtil {
 		return sb.toString();
 	}
 
-	protected static JournalArticleDisplay getArticleDisplay(
+	protected JournalArticleDisplay getArticleDisplay(
 		long groupId, String articleId, String templateId, String viewMode,
 		String languageId, int page, String xmlRequest,
 		ThemeDisplay themeDisplay) {
