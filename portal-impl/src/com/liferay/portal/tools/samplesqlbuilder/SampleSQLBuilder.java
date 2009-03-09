@@ -33,6 +33,7 @@ import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.tools.sql.DBUtil;
@@ -182,6 +183,20 @@ public class SampleSQLBuilder {
 		processTemplate(_tplMBThread, context);
 	}
 
+	public void insertSecurity(String name, long primKey) throws Exception {
+		insertSecurity(name, String.valueOf(primKey));
+	}
+
+	public void insertSecurity(String name, String primKey) throws Exception {
+		Map<String, Object> context = getContext();
+
+		Resource resource = _dataFactory.addResource(name, primKey);
+
+		put(context, "resource", resource);
+
+		processTemplate(_tplSecurity, context);
+	}
+
 	public void insertUser(
 			Contact contact, Group group, List<Group> groups,
 			List<Organization> organizations, List<Layout> privateLayouts,
@@ -268,6 +283,7 @@ public class SampleSQLBuilder {
 	private String _tplMBMessage = _TPL_ROOT + "mb_message.ftl";
 	private String _tplMBThread = _TPL_ROOT + "mb_thread.ftl";
 	private String _tplSample = _TPL_ROOT + "sample.ftl";
+	private String _tplSecurity = _TPL_ROOT + "security.ftl";
 	private String _tplUser = _TPL_ROOT + "user.ftl";
 	private Writer _writerGeneric;
 	private Writer _writerMySQL;

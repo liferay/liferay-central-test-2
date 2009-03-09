@@ -24,6 +24,7 @@ package com.liferay.portal.tools.samplesqlbuilder;
 
 import com.liferay.counter.model.Counter;
 import com.liferay.portal.kernel.util.IntegerWrapper;
+import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
@@ -50,9 +51,12 @@ import com.liferay.portal.model.impl.ContactImpl;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.LayoutTypePortletImpl;
+import com.liferay.portal.model.impl.PermissionImpl;
 import com.liferay.portal.model.impl.ResourceCodeImpl;
+import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.model.impl.UserImpl;
+import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
@@ -64,8 +68,10 @@ import com.liferay.util.SimpleCounter;
 import java.io.File;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <a href="DataFactory.java.html"><b><i>View Source</i></b></a>
@@ -202,9 +208,98 @@ public class DataFactory {
 		return mbThread;
 	}
 
-	public User addUser(boolean defaultUser, Contact contact)
+	public List<Permission> addPermissions(Resource resource) throws Exception {
+		List<Permission> permissions = new ArrayList<Permission>();
+
+		String name = _individualResourceNames.get(resource.getCodeId());
+
+		List<String> actions = ResourceActionsUtil.getModelResourceActions(
+			name);
+
+		for (String action : actions) {
+			Permission permission = new PermissionImpl();
+
+			permission.setPermissionId(_permissionCounter.get());
+			permission.setCompanyId(_company.getCompanyId());
+			permission.setActionId(action);
+			permission.setResourceId(resource.getResourceId());
+
+			permissions.add(permission);
+		}
+
+		return permissions;
+	}
+
+	public Resource addResource(String name, String primKey) throws Exception {
+		Long codeId = _individualResourceCodeIds.get(name);
+
+		Resource resource = new ResourceImpl();
+
+		resource.setResourceId(_resourceCounter.get());
+		resource.setCodeId(codeId);
+		resource.setPrimKey(primKey);
+
+		return resource;
+	}
+
+	public List<KeyValuePair> addRolesPermissions(
+			Resource resource, List<Permission> permissions, Role memberRole)
 		throws Exception {
 
+		List<KeyValuePair> rolesPermissions = new ArrayList<KeyValuePair>();
+
+		for (Permission permission : permissions) {
+			KeyValuePair kvp = new KeyValuePair();
+
+			kvp.setKey(String.valueOf(_ownerRole.getRoleId()));
+			kvp.setValue(String.valueOf(permission.getPermissionId()));
+
+			rolesPermissions.add(kvp);
+		}
+
+		String name = _individualResourceNames.get(resource.getCodeId());
+
+		if (memberRole != null) {
+			List<String> communityDefaultactions =
+				ResourceActionsUtil.getModelResourceCommunityDefaultActions(
+					name);
+
+			for (Permission permission : permissions) {
+				if (!communityDefaultactions.contains(
+						permission.getActionId())) {
+
+					continue;
+				}
+
+				KeyValuePair kvp = new KeyValuePair();
+
+				kvp.setKey(String.valueOf(memberRole.getRoleId()));
+				kvp.setValue(String.valueOf(permission.getPermissionId()));
+
+				rolesPermissions.add(kvp);
+			}
+		}
+
+		List<String> guestDefaultactions =
+			ResourceActionsUtil.getModelResourceGuestDefaultActions(name);
+
+		for (Permission permission : permissions) {
+			if (!guestDefaultactions.contains(permission.getActionId())) {
+				continue;
+			}
+
+			KeyValuePair kvp = new KeyValuePair();
+
+			kvp.setKey(String.valueOf(_guestRole.getRoleId()));
+			kvp.setValue(String.valueOf(permission.getPermissionId()));
+
+			rolesPermissions.add(kvp);
+		}
+
+		return rolesPermissions;
+	}
+
+	public User addUser(boolean defaultUser, Contact contact) throws Exception {
 		User user = new UserImpl();
 
 		user.setUserId(_counter.get());
@@ -235,6 +330,18 @@ public class DataFactory {
 		return _classNames;
 	}
 
+	public Role getCommunityAdministratorRole() {
+		return _communityAdministratorRole;
+	}
+
+	public Role getCommunityMemberRole() {
+		return _communityMemberRole;
+	}
+
+	public Role getCommunityOwnerRole() {
+		return _communityOwnerRole;
+	}
+
 	public Company getCompany() {
 		return _company;
 	}
@@ -257,6 +364,18 @@ public class DataFactory {
 
 	public Role getGuestRole() {
 		return _guestRole;
+	}
+
+	public Role getOrganizationAdministratorRole() {
+		return _organizationAdministratorRole;
+	}
+
+	public Role getOrganizationMemberRole() {
+		return _organizationMemberRole;
+	}
+
+	public Role getOrganizationOwnerRole() {
+		return _organizationOwnerRole;
 	}
 
 	public Role getPowerUserRole() {
@@ -390,6 +509,9 @@ public class DataFactory {
 
 		_resourceCodes = new ArrayList<ResourceCode>();
 
+		_individualResourceCodeIds = new HashMap<String, Long>();
+		_individualResourceNames = new HashMap<Long, String>();
+
 		List<String> models = ModelHintsUtil.getModels();
 
 		for (String model : models) {
@@ -454,6 +576,9 @@ public class DataFactory {
 		resourceCode.setScope(ResourceConstants.SCOPE_INDIVIDUAL);
 
 		_resourceCodes.add(resourceCode);
+
+		_individualResourceCodeIds.put(name, resourceCode.getCodeId());
+		_individualResourceNames.put(resourceCode.getCodeId(), name);
 	}
 
 	public void initRoles() throws Exception {
@@ -469,10 +594,47 @@ public class DataFactory {
 
 		role.setRoleId(_counter.get());
 		role.setName(RoleConstants.ADMINISTRATOR);
+		role.setType(RoleConstants.TYPE_REGULAR);
 
 		_roles.add(role);
 
 		_administratorRole = role;
+
+		// Community Administrator
+
+		role = new RoleImpl();
+
+		role.setRoleId(_counter.get());
+		role.setName(RoleConstants.COMMUNITY_ADMINISTRATOR);
+		role.setType(RoleConstants.TYPE_COMMUNITY);
+
+		_roles.add(role);
+
+		_communityAdministratorRole = role;
+
+		// Community Member
+
+		role = new RoleImpl();
+
+		role.setRoleId(_counter.get());
+		role.setName(RoleConstants.COMMUNITY_MEMBER);
+		role.setType(RoleConstants.TYPE_COMMUNITY);
+
+		_roles.add(role);
+
+		_communityMemberRole = role;
+
+		// Community Owner
+
+		role = new RoleImpl();
+
+		role.setRoleId(_counter.get());
+		role.setName(RoleConstants.COMMUNITY_OWNER);
+		role.setType(RoleConstants.TYPE_COMMUNITY);
+
+		_roles.add(role);
+
+		_communityOwnerRole = role;
 
 		// Guest
 
@@ -480,17 +642,67 @@ public class DataFactory {
 
 		role.setRoleId(_counter.get());
 		role.setName(RoleConstants.GUEST);
+		role.setType(RoleConstants.TYPE_REGULAR);
 
 		_roles.add(role);
 
 		_guestRole = role;
 
-		// Power user
+		// Organization Administrator
+
+		role = new RoleImpl();
+
+		role.setRoleId(_counter.get());
+		role.setName(RoleConstants.ORGANIZATION_ADMINISTRATOR);
+		role.setType(RoleConstants.TYPE_ORGANIZATION);
+
+		_roles.add(role);
+
+		_communityAdministratorRole = role;
+
+		// Organization Member
+
+		role = new RoleImpl();
+
+		role.setRoleId(_counter.get());
+		role.setName(RoleConstants.ORGANIZATION_MEMBER);
+		role.setType(RoleConstants.TYPE_ORGANIZATION);
+
+		_roles.add(role);
+
+		_communityMemberRole = role;
+
+		// Organization Owner
+
+		role = new RoleImpl();
+
+		role.setRoleId(_counter.get());
+		role.setName(RoleConstants.ORGANIZATION_OWNER);
+		role.setType(RoleConstants.TYPE_ORGANIZATION);
+
+		_roles.add(role);
+
+		_communityOwnerRole = role;
+
+		// Owner
+
+		role = new RoleImpl();
+
+		role.setRoleId(_counter.get());
+		role.setName(RoleConstants.OWNER);
+		role.setType(RoleConstants.TYPE_REGULAR);
+
+		_roles.add(role);
+
+		_ownerRole = role;
+
+		// Power User
 
 		role = new RoleImpl();
 
 		role.setRoleId(_counter.get());
 		role.setName(RoleConstants.POWER_USER);
+		role.setType(RoleConstants.TYPE_REGULAR);
 
 		_roles.add(role);
 
@@ -502,6 +714,7 @@ public class DataFactory {
 
 		role.setRoleId(_counter.get());
 		role.setName(RoleConstants.USER);
+		role.setType(RoleConstants.TYPE_REGULAR);
 
 		_roles.add(role);
 
@@ -534,6 +747,9 @@ public class DataFactory {
 
 	private Role _administratorRole;
 	private List<ClassName> _classNames;
+	private Role _communityAdministratorRole;
+	private Role _communityMemberRole;
+	private Role _communityOwnerRole;
 	private Company _company;
 	private SimpleCounter _counter;
 	private List<Counter> _counters;
@@ -541,6 +757,12 @@ public class DataFactory {
 	private List<Group> _groups;
 	private Group _guestGroup;
 	private Role _guestRole;
+	private Map<String, Long> _individualResourceCodeIds;
+	private Map<Long, String> _individualResourceNames;
+	private Role _organizationAdministratorRole;
+	private Role _organizationMemberRole;
+	private Role _organizationOwnerRole;
+	private Role _ownerRole;
 	private SimpleCounter _permissionCounter;
 	private Role _powerUserRole;
 	private SimpleCounter _resourceCodeCounter;
