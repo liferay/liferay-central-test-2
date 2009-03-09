@@ -31,7 +31,13 @@ body {
 #banner h1.logo a {
 	background: url(../images/common/company_logo.png) no-repeat 0 50%;
 	color: #fff;
+	display: inline;
+	font-size: 1em;
+	height: auto;
+	line-height: 1.1;
 	padding-left: 35px;
+	text-indent: 0;
+	width: auto;
 }
 
 /* ---------- Control panel ---------- */
