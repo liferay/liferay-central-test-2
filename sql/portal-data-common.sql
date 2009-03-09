@@ -326,6 +326,26 @@ insert into Region (regionId, countryId, regionCode, name, active_) values (97, 
 insert into Region (regionId, countryId, regionCode, name, active_) values (98, 4, 'ST', 'Sachsen-Anhalt', TRUE);
 insert into Region (regionId, countryId, regionCode, name, active_) values (99, 4, 'SH', 'Schleswig-Holstein', TRUE);
 insert into Region (regionId, countryId, regionCode, name, active_) values (100, 4, 'TH', 'Thüringen', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (101, 8, '13', 'Abruzzo', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (102, 8, '17', 'Basilicata', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (103, 8, '18', 'Calabria', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (104, 8, '15', 'Campania', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (105, 8, '08', 'Emilia-Romagna', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (106, 8, '06', 'Friuli-Venezia Giulia', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (107, 8, '12', 'Lazio', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (108, 8, '07', 'Liguria', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (109, 8, '03', 'Lombardia', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (110, 8, '11', 'Marche', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (111, 8, '14', 'Molise', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (112, 8, '01', 'Piemonte', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (113, 8, '16', 'Puglia', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (114, 8, '20', 'Sardegna', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (115, 8, '19', 'Sicilia', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (116, 8, '09', 'Toscana', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (117, 8, '04', 'Trentino-Alto Adige', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (118, 8, '10', 'Umbria', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (119, 8, '02', 'Valle d\'Aosta', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (120, 8, '05', 'Veneto', TRUE);
 
 ##
 ## List types for accounts
