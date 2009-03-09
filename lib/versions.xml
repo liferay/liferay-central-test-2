@@ -1523,7 +1523,7 @@
 	</library>
 	<library>
 		<file-name>portal/jackrabbit-api.jar</file-name>
-		<version>1.4.0</version>
+		<version>1.5.0</version>
 		<project-name>Jackrabbit</project-name>
 		<project-url>http://jackrabbit.apache.org</project-url>
 		<licenses>
@@ -1535,7 +1535,7 @@
 	</library>
 	<library>
 		<file-name>portal/jackrabbit-core.jar</file-name>
-		<version>1.4.1</version>
+		<version>1.5.3</version>
 		<project-name>Jackrabbit</project-name>
 		<project-url>http://jackrabbit.apache.org</project-url>
 		<licenses>
@@ -1552,7 +1552,7 @@
 	</library>
 	<library>
 		<file-name>portal/jackrabbit-jcr-commons.jar</file-name>
-		<version>1.4.0</version>
+		<version>1.5.3</version>
 		<project-name>Jackrabbit</project-name>
 		<project-url>http://jackrabbit.apache.org</project-url>
 		<licenses>
@@ -1564,7 +1564,7 @@
 	</library>
 	<library>
 		<file-name>portal/jackrabbit-spi.jar</file-name>
-		<version>1.4.0</version>
+		<version>1.5.0</version>
 		<project-name>Jackrabbit</project-name>
 		<project-url>http://jackrabbit.apache.org</project-url>
 		<licenses>
@@ -1576,7 +1576,7 @@
 	</library>
 	<library>
 		<file-name>portal/jackrabbit-spi-commons.jar</file-name>
-		<version>1.4.0</version>
+		<version>1.5.0</version>
 		<project-name>Jackrabbit</project-name>
 		<project-url>http://jackrabbit.apache.org</project-url>
 		<licenses>
@@ -1588,7 +1588,7 @@
 	</library>
 	<library>
 		<file-name>portal/jackrabbit-text-extractors.jar</file-name>
-		<version>1.4.0</version>
+		<version>1.5.0</version>
 		<project-name>Jackrabbit</project-name>
 		<project-url>http://jackrabbit.apache.org</project-url>
 		<licenses>
@@ -2347,23 +2347,6 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>portal/textmining.jar</file-name>
-		<version>0.4</version>
-		<project-name>TextMining</project-name>
-		<project-url>http://www.textmining.org</project-url>
-		<licenses>
-			<license>
-				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright (c) 2004 Ryan Ackley</copyright-notice>
-			</license>
-			<license>
-				<bundled-project-name>POI</bundled-project-name>
-				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright (c) 2001-2007 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
 	</library>
