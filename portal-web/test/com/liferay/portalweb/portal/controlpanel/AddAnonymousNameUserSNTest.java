@@ -156,9 +156,8 @@ public class AddAnonymousNameUserSNTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("_125_screenName",
-			RuntimeVariables.replace("&lt;anonmous&gt;"));
-		selenium.type("_125_screenName",
-			RuntimeVariables.replace("&lt;anonymous&gt;"));
+			RuntimeVariables.replace("<anonmous>"));
+		selenium.type("_125_screenName", RuntimeVariables.replace("<anonymous>"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

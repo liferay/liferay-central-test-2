@@ -69,7 +69,7 @@ public class EditCommunityTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("_134_name",
-			RuntimeVariables.replace("Test Community 2"));
+			RuntimeVariables.replace("Test Communit 2"));
 		selenium.type("_134_name", RuntimeVariables.replace("Test Community 2"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");

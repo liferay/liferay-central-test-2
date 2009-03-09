@@ -62,8 +62,8 @@ public class ControlPanelTests extends BaseTests {
 		testSuite.addTestSuite(SearchUserTest.class);
 		testSuite.addTestSuite(AdvancedSearchUserTest.class);
 		testSuite.addTestSuite(AddTemporaryUserTest.class);
-		testSuite.addTestSuite(DeactivateTemporaryUserTest.class);
-		testSuite.addTestSuite(DeleteTemporaryUserTest.class);
+		//testSuite.addTestSuite(DeactivateTemporaryUserTest.class);
+		//testSuite.addTestSuite(DeleteTemporaryUserTest.class);
 		testSuite.addTestSuite(AddCommunitiesTest.class);
 		testSuite.addTestSuite(AddNullCommunityNameTest.class);
 		testSuite.addTestSuite(AddNumberCommunityNameTest.class);

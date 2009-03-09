@@ -69,7 +69,7 @@ public class DeleteTemporaryCommunityTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("_134_name",
-			RuntimeVariables.replace("Test Community 2 Edited"));
+			RuntimeVariables.replace("Test Communit 2 Edited"));
 		selenium.type("_134_name",
 			RuntimeVariables.replace("Test Community 2 Edited"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
