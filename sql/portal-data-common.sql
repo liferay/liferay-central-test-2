@@ -278,7 +278,7 @@ insert into Region (regionId, countryId, regionCode, name, active_) values (49, 
 insert into Region (regionId, countryId, regionCode, name, active_) values (50, 19, 'WV', 'West Virginia', TRUE);
 insert into Region (regionId, countryId, regionCode, name, active_) values (51, 19, 'WI', 'Wisconsin', TRUE);
 insert into Region (regionId, countryId, regionCode, name, active_) values (52, 19, 'WY', 'Wyoming', TRUE);
-insert into Region (regionId, countryId, regionCode, name, active_) values (53, 1, 'AL', 'Alberta', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) values (53, 1, 'AB', 'Alberta', TRUE);
 insert into Region (regionId, countryId, regionCode, name, active_) values (54, 1, 'BC', 'British Columbia', TRUE);
 insert into Region (regionId, countryId, regionCode, name, active_) values (55, 1, 'MB', 'Manitoba', TRUE);
 insert into Region (regionId, countryId, regionCode, name, active_) values (56, 1, 'NB', 'New Brunswick', TRUE);
