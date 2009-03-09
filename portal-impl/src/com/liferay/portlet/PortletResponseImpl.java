@@ -228,7 +228,7 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 
 					plid = linkedLayout.getPlid();
 				}
-				catch (PortalException e) {
+				catch (PortalException pe) {
 				}
 			}
 			else {
