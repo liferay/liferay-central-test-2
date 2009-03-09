@@ -37,6 +37,7 @@
 			</list>
 		</property>
 	</bean>
+	<bean id="baseModelExtensionAdvice" class="com.liferay.portal.spring.aop.ModelExtensionAdvice" abstract="true" />
 	<bean id="basePersistence" abstract="true">
 		<property name="dataSource" ref="liferayDataSource" />
 		<property name="sessionFactory" ref="liferaySessionFactory" />
