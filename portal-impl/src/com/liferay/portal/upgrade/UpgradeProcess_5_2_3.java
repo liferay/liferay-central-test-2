@@ -29,6 +29,7 @@ import com.liferay.portal.upgrade.v5_2_3.UpgradeBookmarks;
 import com.liferay.portal.upgrade.v5_2_3.UpgradeDocumentLibrary;
 import com.liferay.portal.upgrade.v5_2_3.UpgradeResource;
 import com.liferay.portal.upgrade.v5_2_3.UpgradeResourceCode;
+import com.liferay.portal.upgrade.v5_2_3.UpgradeSchema;
 import com.liferay.portal.upgrade.v5_2_3.UpgradeSoftwareCatalog;
 import com.liferay.portal.upgrade.v5_2_3.UpgradeTags;
 import com.liferay.portal.upgrade.v5_2_3.UpgradeWiki;
@@ -48,6 +49,7 @@ public class UpgradeProcess_5_2_3 extends UpgradeProcess {
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
 
+		upgrade(UpgradeSchema.class);
 		upgrade(UpgradeBookmarks.class);
 		upgrade(UpgradeDocumentLibrary.class);
 		upgrade(UpgradeResource.class);
