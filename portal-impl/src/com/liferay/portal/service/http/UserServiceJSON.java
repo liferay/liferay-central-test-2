@@ -262,6 +262,16 @@ public class UserServiceJSON {
 		return returnValue;
 	}
 
+	public static boolean hasRoleUser(long companyId, java.lang.String name,
+		long userId, boolean inherited)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		boolean returnValue = UserServiceUtil.hasRoleUser(companyId, name,
+				userId, inherited);
+
+		return returnValue;
+	}
+
 	public static void setRoleUsers(long roleId, long[] userIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

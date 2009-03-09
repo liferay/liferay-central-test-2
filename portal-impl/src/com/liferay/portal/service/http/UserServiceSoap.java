@@ -407,6 +407,21 @@ public class UserServiceSoap {
 		}
 	}
 
+	public static boolean hasRoleUser(long companyId, java.lang.String name,
+		long userId, boolean inherited) throws RemoteException {
+		try {
+			boolean returnValue = UserServiceUtil.hasRoleUser(companyId, name,
+					userId, inherited);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void setRoleUsers(long roleId, long[] userIds)
 		throws RemoteException {
 		try {

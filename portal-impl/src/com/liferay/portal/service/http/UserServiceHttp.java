@@ -1120,6 +1120,53 @@ public class UserServiceHttp {
 		}
 	}
 
+	public static boolean hasRoleUser(HttpPrincipal httpPrincipal,
+		long companyId, java.lang.String name, long userId, boolean inherited)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(companyId);
+
+			Object paramObj1 = name;
+
+			if (name == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = new LongWrapper(userId);
+
+			Object paramObj3 = new BooleanWrapper(inherited);
+
+			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
+					"hasRoleUser",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return ((Boolean)returnObj).booleanValue();
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static void setRoleUsers(HttpPrincipal httpPrincipal, long roleId,
 		long[] userIds)
 		throws com.liferay.portal.PortalException,

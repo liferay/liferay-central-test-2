@@ -1364,6 +1364,23 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return rolePersistence.containsUser(roleId, userId);
 	}
 
+	/**
+	 * Returns true if the user has the role.
+	 *
+	 * @param		companyId the company id of the company
+	 * @param		name the name of the role
+	 * @param		userId the user id of the user
+	 * @param		inherited boolean value for whether to check roles inherited
+	 *				from the community, organization, location, or user group
+	 * @return		true if the user has the role
+	 */
+	public boolean hasRoleUser(
+			long companyId, String name, long userId, boolean inherited)
+		throws PortalException, SystemException {
+
+		return roleLocalService.hasUserRole(userId, companyId, name, inherited);
+	}
+
 	public boolean hasUserGroupUser(long userGroupId, long userId)
 		throws SystemException {
 

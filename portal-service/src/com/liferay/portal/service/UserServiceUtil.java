@@ -208,6 +208,13 @@ public class UserServiceUtil {
 		return getService().hasRoleUser(roleId, userId);
 	}
 
+	public static boolean hasRoleUser(long companyId, java.lang.String name,
+		long userId, boolean inherited)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().hasRoleUser(companyId, name, userId, inherited);
+	}
+
 	public static void setRoleUsers(long roleId, long[] userIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

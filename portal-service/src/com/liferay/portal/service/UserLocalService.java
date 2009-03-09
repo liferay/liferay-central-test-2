@@ -419,6 +419,12 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean hasRoleUser(long companyId, java.lang.String name,
+		long userId, boolean inherited)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasUserGroupUser(long userGroupId, long userId)
 		throws com.liferay.portal.SystemException;
 

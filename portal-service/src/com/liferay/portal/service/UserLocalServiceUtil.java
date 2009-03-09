@@ -543,6 +543,13 @@ public class UserLocalServiceUtil {
 		return getService().hasRoleUser(roleId, userId);
 	}
 
+	public static boolean hasRoleUser(long companyId, java.lang.String name,
+		long userId, boolean inherited)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().hasRoleUser(companyId, name, userId, inherited);
+	}
+
 	public static boolean hasUserGroupUser(long userGroupId, long userId)
 		throws com.liferay.portal.SystemException {
 		return getService().hasUserGroupUser(userGroupId, userId);

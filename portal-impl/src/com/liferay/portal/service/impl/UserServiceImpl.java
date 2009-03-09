@@ -343,6 +343,13 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		return userLocalService.hasRoleUser(roleId, userId);
 	}
 
+	public boolean hasRoleUser(
+			long companyId, String name, long userId, boolean inherited)
+		throws PortalException, SystemException {
+
+		return userLocalService.hasRoleUser(companyId, name, userId, inherited);
+	}
+
 	public void setRoleUsers(long roleId, long[] userIds)
 		throws PortalException, SystemException {
 

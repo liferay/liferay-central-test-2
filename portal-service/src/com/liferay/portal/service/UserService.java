@@ -173,6 +173,12 @@ public interface UserService {
 	public boolean hasRoleUser(long roleId, long userId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean hasRoleUser(long companyId, java.lang.String name,
+		long userId, boolean inherited)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public void setRoleUsers(long roleId, long[] userIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
