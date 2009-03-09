@@ -170,7 +170,6 @@
 	<classpathentry kind="lib" path="lib/portal/jsr107cache.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jstl.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jstl-impl.jar"/>
-	<classpathentry kind="lib" path="lib/portal/jug.jar"/>
 	<classpathentry kind="lib" path="lib/portal/juh.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jurt.jar"/>
 	<classpathentry kind="lib" path="lib/portal/liferay-icu4j.jar"/>

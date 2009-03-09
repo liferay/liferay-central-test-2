@@ -24,7 +24,7 @@ package com.liferay.portal.uuid;
 
 import com.liferay.portal.kernel.uuid.PortalUUID;
 
-import org.safehaus.uuid.UUIDGenerator;
+import java.util.UUID;
 
 /**
  * <a href="PortalUUIDImpl.java.html"><b><i>View Source</i></b></a>
@@ -35,9 +35,7 @@ import org.safehaus.uuid.UUIDGenerator;
 public class PortalUUIDImpl implements PortalUUID {
 
 	public String generate() {
-		return _uuidGenerator.generateRandomBasedUUID().toString();
+		return UUID.randomUUID().toString();
 	}
-
-	private UUIDGenerator _uuidGenerator = UUIDGenerator.getInstance();
 
 }

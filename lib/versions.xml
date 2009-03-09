@@ -1851,17 +1851,6 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>portal/jug.jar</file-name>
-		<version>2.0</version>
-		<project-name>Java Uuid Generator</project-name>
-		<project-url>http://jug.safehaus.org</project-url>
-		<licenses>
-			<license>
-				<license-name>Apache License 2.0</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>portal/juh.jar</file-name>
 		<version>2.3.0</version>
 		<project-name>OpenOffice.org Java Uno</project-name>
