@@ -98,6 +98,9 @@ public interface MBStatsUserLocalService {
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser,
 		boolean merge) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.messageboards.model.MBStatsUser addStatsUser(
+		long groupId, long userId) throws com.liferay.portal.SystemException;
+
 	public void deleteStatsUserByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
@@ -116,6 +119,6 @@ public interface MBStatsUserLocalService {
 	public int getStatsUsersCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public void updateStatsUser(long groupId, long userId)
-		throws com.liferay.portal.SystemException;
+	public com.liferay.portlet.messageboards.model.MBStatsUser updateStatsUser(
+		long groupId, long userId) throws com.liferay.portal.SystemException;
 }

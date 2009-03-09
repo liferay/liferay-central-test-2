@@ -38,6 +38,21 @@ import java.util.List;
 public class MBStatsUserLocalServiceImpl
 	extends MBStatsUserLocalServiceBaseImpl {
 
+	public MBStatsUser addStatsUser(long groupId, long userId)
+		throws SystemException {
+
+		long statsUserId = counterLocalService.increment();
+
+		MBStatsUser statsUser = mbStatsUserPersistence.create(statsUserId);
+
+		statsUser.setGroupId(groupId);
+		statsUser.setUserId(userId);
+
+		mbStatsUserPersistence.update(statsUser, false);
+
+		return statsUser;
+	}
+
 	public void deleteStatsUserByGroupId(long groupId)
 		throws SystemException {
 
@@ -55,14 +70,7 @@ public class MBStatsUserLocalServiceImpl
 			groupId, userId);
 
 		if (statsUser == null) {
-			long statsUserId = counterLocalService.increment();
-
-			statsUser = mbStatsUserPersistence.create(statsUserId);
-
-			statsUser.setGroupId(groupId);
-			statsUser.setUserId(userId);
-
-			mbStatsUserPersistence.update(statsUser, false);
+			statsUser = mbStatsUserLocalService.addStatsUser(groupId, userId);
 		}
 
 		return statsUser;
@@ -78,7 +86,7 @@ public class MBStatsUserLocalServiceImpl
 		return mbStatsUserPersistence.countByG_M(groupId, 0);
 	}
 
-	public void updateStatsUser(long groupId, long userId)
+	public MBStatsUser updateStatsUser(long groupId, long userId)
 		throws SystemException {
 
 		MBStatsUser statsUser = getStatsUser(groupId, userId);
@@ -87,6 +95,8 @@ public class MBStatsUserLocalServiceImpl
 		statsUser.setLastPostDate(new Date());
 
 		mbStatsUserPersistence.update(statsUser, false);
+
+		return statsUser;
 	}
 
 }

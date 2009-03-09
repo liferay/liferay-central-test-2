@@ -109,6 +109,11 @@ public class MBStatsUserLocalServiceUtil {
 		return getService().updateMBStatsUser(mbStatsUser, merge);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBStatsUser addStatsUser(
+		long groupId, long userId) throws com.liferay.portal.SystemException {
+		return getService().addStatsUser(groupId, userId);
+	}
+
 	public static void deleteStatsUserByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
 		getService().deleteStatsUserByGroupId(groupId);
@@ -135,9 +140,9 @@ public class MBStatsUserLocalServiceUtil {
 		return getService().getStatsUsersCount(groupId);
 	}
 
-	public static void updateStatsUser(long groupId, long userId)
-		throws com.liferay.portal.SystemException {
-		getService().updateStatsUser(groupId, userId);
+	public static com.liferay.portlet.messageboards.model.MBStatsUser updateStatsUser(
+		long groupId, long userId) throws com.liferay.portal.SystemException {
+		return getService().updateStatsUser(groupId, userId);
 	}
 
 	public static MBStatsUserLocalService getService() {
