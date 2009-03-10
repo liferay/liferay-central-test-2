@@ -25,5 +25,5 @@
 <%@ include file="/html/common/referer_common.jsp" %>
 
 <script type="text/javascript">
-	location.href = '<%= referer %>';
+	location.href = '<%= UnicodeFormatter.toString(referer) %>';
 </script>

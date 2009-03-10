@@ -112,7 +112,7 @@
 				</c:if>
 
 				getDoAsUserIdEncoded: function() {
-					return "<%= themeDisplay.getDoAsUserId() %>";
+					return "<%= UnicodeFormatter.toString(themeDisplay.getDoAsUserId()) %>";
 				},
 				getPlid: function() {
 					return "<%= themeDisplay.getPlid() %>";

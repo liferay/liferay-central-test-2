@@ -25,7 +25,7 @@
 <%@ include file="/html/portal/init.jsp" %>
 
 <form action="<%= themeDisplay.getPathMain() %>/portal/update_terms_of_use" name="fm">
-<input name="doAsUserId" type="hidden" value="<%= themeDisplay.getDoAsUserId() %>" />
+<input name="doAsUserId" type="hidden" value="<%= HtmlUtil.escape(themeDisplay.getDoAsUserId()) %>" />
 <input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= themeDisplay.getPathMain() %>?doAsUserId=<%= themeDisplay.getDoAsUserId() %>" />
 
 <c:choose>

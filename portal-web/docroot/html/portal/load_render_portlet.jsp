@@ -75,7 +75,7 @@ String currentURL = PortalUtil.getCurrentURL(request);
 
 		if (Validator.isNotNull(doAsUserId)) {
 			url.append("&doAsUserId=");
-			url.append(doAsUserId);
+			url.append(HttpUtil.encodeURL(doAsUserId));
 		}
 
 		url.append("&currentURL=");
