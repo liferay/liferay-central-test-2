@@ -30,6 +30,7 @@ import com.liferay.portal.tools.sql.DBUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * <a href="DropIndexes.java.html"><b><i>View Source</i></b></a>
@@ -75,7 +76,8 @@ public class DropIndexes extends UpgradeProcess {
 			ps = con.prepareStatement(
 				"select distinct(index_name), table_name from " +
 					"information_schema.statistics where index_name like " +
-						"'LIFERAY_%' or index_name like 'IX_%'");
+						"'LIFERAY_%' or index_name like 'IX_%' " +
+							"and index_schema = database()");
 
 			rs = ps.executeQuery();
 
@@ -86,9 +88,15 @@ public class DropIndexes extends UpgradeProcess {
 				ps = con.prepareStatement(
 					"drop index " + indexName + " on " + tableName);
 
-				ps.executeUpdate();
-
-				ps.close();
+				try{
+					ps.executeUpdate();
+				}
+				catch (SQLException sqle) {
+					_log.warn(sqle.getMessage());
+				}
+				finally {
+					ps.close();
+				}
 			}
 		}
 		finally {
