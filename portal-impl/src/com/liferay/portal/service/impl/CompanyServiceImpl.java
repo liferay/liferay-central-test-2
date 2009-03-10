@@ -34,7 +34,6 @@ import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.base.CompanyServiceBaseImpl;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 
 import java.io.File;
@@ -53,18 +52,11 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 	public Company addCompany(String webId, String virtualHost, String mx)
 		throws PortalException, SystemException {
 
-		return addCompany(webId, virtualHost, mx, PropsValues.SHARD_DEFAULT);
-	}
-
-	public Company addCompany(
-			String webId, String virtualHost, String mx, String shardId)
-		throws PortalException, SystemException {
-
 		if (!getPermissionChecker().isOmniadmin()) {
 			throw new PrincipalException();
 		}
 
-		return companyLocalService.addCompany(webId, virtualHost, mx, shardId);
+		return companyLocalService.addCompany(webId, virtualHost, mx);
 	}
 
 	public Company getCompanyById(long companyId)

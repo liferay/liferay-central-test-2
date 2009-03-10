@@ -37,6 +37,8 @@ import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.sender.MessageSender;
 import com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
 import com.liferay.portal.model.CompanyConstants;
@@ -45,6 +47,18 @@ import com.liferay.portal.scheduler.SchedulerEngineProxy;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.ReleaseLocalServiceUtil;
+import com.liferay.portal.tools.sql.DBUtil;
+import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.util.PropsKeys;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.verify.VerifyProcess;
+
+import java.io.IOException;
+
+import java.sql.SQLException;
+
+import javax.naming.NamingException;
 
 /**
  * <a href="StartupAction.java.html"><b><i>View Source</i></b></a>
@@ -69,6 +83,15 @@ public class StartupAction extends SimpleAction {
 		finally {
 			LuceneUtil.checkLuceneDir(CompanyConstants.SYSTEM);
 		}
+	}
+
+	protected void deleteTemporaryImages()
+		throws IOException, NamingException, SQLException {
+
+		DBUtil dbUtil = DBUtil.getInstance();
+
+		dbUtil.runSQL(_DELETE_TEMP_IMAGES_1);
+		dbUtil.runSQL(_DELETE_TEMP_IMAGES_2);
 	}
 
 	protected void doRun(String[] ids) throws PortalException, SystemException {
@@ -110,17 +133,86 @@ public class StartupAction extends SimpleAction {
 			throw new RuntimeException(msg);
 		}
 
-		StartupHelperUtil.upgradeProcess(buildNumber);
+		boolean ranUpgradeProcess = false;
+
+		String[] upgradeProcesses = PropsUtil.getArray(
+			PropsKeys.UPGRADE_PROCESSES);
+
+		for (int i = 0; i < upgradeProcesses.length; i++) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Initializing upgrade " + upgradeProcesses[i]);
+			}
+
+			UpgradeProcess upgradeProcess = (UpgradeProcess)InstancePool.get(
+				upgradeProcesses[i]);
+
+			if (upgradeProcess == null) {
+				_log.error(upgradeProcesses[i] + " cannot be found");
+
+				continue;
+			}
+
+			if ((upgradeProcess.getThreshold() == 0) ||
+				(upgradeProcess.getThreshold() > buildNumber)) {
+
+				if (_log.isDebugEnabled()) {
+					_log.debug("Running upgrade " + upgradeProcesses[i]);
+				}
+
+				upgradeProcess.upgrade();
+
+				if (_log.isDebugEnabled()) {
+					_log.debug("Finished upgrade " + upgradeProcesses[i]);
+				}
+
+				ranUpgradeProcess = true;
+			}
+			else {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Upgrade threshold " + upgradeProcess.getThreshold() +
+							" will not trigger upgrade");
+
+					_log.debug("Skipping upgrade " + upgradeProcesses[i]);
+				}
+			}
+		}
 
 		// Class names
 
 		ClassNameLocalServiceUtil.checkClassNames();
 
-		StartupHelperUtil.cleanupDatabase();
+		// Delete temporary images
+
+		try {
+			deleteTemporaryImages();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		// Update indexes
+
+		if (ranUpgradeProcess) {
+			try {
+				if (_log.isInfoEnabled()) {
+					_log.info("Adding indexes");
+				}
+
+				DBUtil.getInstance().runSQLTemplate("indexes.sql", false);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+		}
+
+		// Enable database caching after upgrade
+
+		CacheRegistry.setActive(true);
 
 		// Clear the caches only if the upgrade process was run
 
-		if (StartupHelperUtil.isUpgraded()) {
+		if (ranUpgradeProcess) {
 			MultiVMPoolUtil.clear();
 		}
 
@@ -148,16 +240,76 @@ public class StartupAction extends SimpleAction {
 
 		Release release = ReleaseLocalServiceUtil.getRelease();
 
-		StartupHelperUtil.verifyProcess(release.isVerified());
+		// LPS-1880
+
+		boolean tempIndexReadOnly = PropsValues.INDEX_READ_ONLY;
+
+		PropsValues.INDEX_READ_ONLY = true;
+
+		int verifyFrequency = GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.VERIFY_FREQUENCY));
+		boolean verified = release.isVerified();
+
+		if ((verifyFrequency == VerifyProcess.ALWAYS) ||
+			((verifyFrequency == VerifyProcess.ONCE) && !verified) ||
+			(ranUpgradeProcess)) {
+
+			if (!ranUpgradeProcess) {
+				PropsUtil.set(PropsKeys.INDEX_ON_STARTUP, "true");
+			}
+
+			String[] verifyProcesses = PropsUtil.getArray(
+				PropsKeys.VERIFY_PROCESSES);
+
+			for (int i = 0; i < verifyProcesses.length; i++) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Initializing verification " + verifyProcesses[i]);
+				}
+
+				try {
+					VerifyProcess verifyProcess = (VerifyProcess)Class.forName(
+						verifyProcesses[i]).newInstance();
+
+					if (_log.isDebugEnabled()) {
+						_log.debug(
+							"Running verification " + verifyProcesses[i]);
+					}
+
+					verifyProcess.verify();
+
+					if (_log.isDebugEnabled()) {
+						_log.debug(
+							"Finished verification " + verifyProcesses[i]);
+					}
+
+					verified = true;
+				}
+				catch (ClassNotFoundException cnfe) {
+					_log.error(verifyProcesses[i] + " cannot be found");
+				}
+				catch (IllegalAccessException iae) {
+					_log.error(verifyProcesses[i] + " cannot be accessed");
+				}
+				catch (InstantiationException ie) {
+					_log.error(verifyProcesses[i] + " cannot be initiated");
+				}
+			}
+		}
+
+		PropsValues.INDEX_READ_ONLY = tempIndexReadOnly;
 
 		// Update release
 
-		ReleaseLocalServiceUtil.updateRelease(StartupHelperUtil.isVerified());
-
-		// Enable database caching after verify
-
-		CacheRegistry.setActive(true);
+		ReleaseLocalServiceUtil.updateRelease(verified);
 	}
+
+	private static final String _DELETE_TEMP_IMAGES_1 =
+		"DELETE FROM Image WHERE imageId IN (SELECT articleImageId FROM " +
+			"JournalArticleImage WHERE tempImage = TRUE)";
+
+	private static final String _DELETE_TEMP_IMAGES_2 =
+		"DELETE FROM JournalArticleImage where tempImage = TRUE";
 
 	private static Log _log = LogFactoryUtil.getLog(StartupAction.class);
 

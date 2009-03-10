@@ -51,7 +51,6 @@ create unique index IX_B27A301F on ClassName_ (value);
 
 create index IX_38EFE3FD on Company (logoId);
 create index IX_12566EC2 on Company (mx);
-create index IX_E4EDA106 on Company (shardId);
 create unique index IX_975996C0 on Company (virtualHost);
 create unique index IX_EC00543C on Company (webId);
 
@@ -300,7 +299,10 @@ create unique index IX_12B5E51D on Portlet (companyId, portletId);
 
 create index IX_96BDD537 on PortletItem (groupId, classNameId);
 create index IX_D699243F on PortletItem (groupId, name, portletId, classNameId);
+create index IX_2C61314E on PortletItem (groupId, portletId);
 create index IX_E922D6C0 on PortletItem (groupId, portletId, classNameId);
+create index IX_8E71167F on PortletItem (groupId, portletId, classNameId, name);
+create index IX_33B8CE8D on PortletItem (groupId, portletId, name);
 
 create index IX_E4F13E6E on PortletPreferences (ownerId, ownerType, plid);
 create unique index IX_C7057FF7 on PortletPreferences (ownerId, ownerType, plid, portletId);
