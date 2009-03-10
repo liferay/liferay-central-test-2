@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.mail.MailEngine;
@@ -111,13 +112,32 @@ public class POPNotificationsJob implements IntervalJob {
 		if ((_store == null) || !_store.isConnected()) {
 			Session session = MailEngine.getSession();
 
-			_store = session.getStore("pop3");
+			String storeProtocol = GetterUtil.getString(
+				session.getProperty("mail.store.protocol"));
 
-			String popHost = session.getProperty("mail.pop3.host");
-			String smtpUser = session.getProperty("mail.smtp.user");
-			String smtpPassword = session.getProperty("mail.smtp.password");
+			if (!storeProtocol.equals("pop3s")) {
+				storeProtocol = "pop3";
+			}
 
-			_store.connect(popHost, smtpUser, smtpPassword);
+			_store = session.getStore(storeProtocol);
+
+			String prefix = "mail." + storeProtocol + ".";
+
+			String host = session.getProperty(prefix + "host");
+
+			String user = session.getProperty(prefix + "user");
+
+			if (Validator.isNull(user)) {
+				user = session.getProperty("mail.smtp.user");
+			}
+
+			String password = session.getProperty(prefix + "password");
+
+			if (Validator.isNull(password)) {
+				password = session.getProperty("mail.smtp.password");
+			}
+
+			_store.connect(host, user, password);
 		}
 	}
 
