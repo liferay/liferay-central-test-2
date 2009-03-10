@@ -33,9 +33,28 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_SearchPortletTest extends BaseTestCase {
 	public void testCA_SearchPortlet() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=Document Library Permissions Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_20_keywords1",
+			RuntimeVariables.replace("Permissions"));
 		selenium.type("_20_keywords1", RuntimeVariables.replace("Permissions"));
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Search File Entries']"));

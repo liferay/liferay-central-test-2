@@ -33,25 +33,50 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_AddMoveFoldersTest extends BaseTestCase {
 	public void testCA_AddMoveFolders() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=Document Library Permissions Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Folder']"));
 		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_20_name",
+			RuntimeVariables.replace("Admin Permissions 2"));
 		selenium.type("_20_name",
 			RuntimeVariables.replace("Admin Permissions 2"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent("link=Admin Permissions 2"));
 		selenium.click(RuntimeVariables.replace("link=Admin Permissions 2"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Subfolder']"));
 		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_20_name",
+			RuntimeVariables.replace("Admin Permissions Subfolder 2"));
 		selenium.type("_20_name",
 			RuntimeVariables.replace("Admin Permissions Subfolder 2"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent(
 				"link=Admin Permissions Subfolder 2"));
 	}

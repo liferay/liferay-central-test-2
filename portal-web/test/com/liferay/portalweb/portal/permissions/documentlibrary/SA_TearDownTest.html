@@ -1,44 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head profile="http://selenium-ide.openqa.org/profiles/test-case">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="" />
-<title>TearDownTest</title>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>SA_TearDownTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">TearDownTest</td></tr>
+<tr><td rowspan="1" colspan="3">SA_TearDownTest</td></tr>
 </thead><tbody>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Welcome</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>_58_login</td>
-	<td>test@liferay.com</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>_58_password</td>
-	<td>test</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>_58_rememberMeCheckbox</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Sign In']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//li[5]/ul/li[1]/a[1]</td>
+	<td>waitForElementPresent</td>
+	<td>link=Document Library Permissions Test Page</td>
 	<td></td>
 </tr>
 <tr>
@@ -54,7 +26,7 @@
 <tr>
 	<td>gotoIf</td>
 	<td>!${DLFoldersNotPresent1}</td>
-	<td>NoFoldersPresent</td>
+	<td>NoFoldersPresent1</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -63,12 +35,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[2]/ul/li[3]/a</td>
+	<td>//div[4]/ul/li[3]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[2]/ul/li[3]/a</td>
+	<td>//div[4]/ul/li[3]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -82,6 +54,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>label</td>
+	<td>NoFoldersPresent1</td>
+	<td></td>
+</tr>
+<tr>
 	<td>store</td>
 	<td>eval(selenium.isElementPresent('//td[4]/ul/li/strong/span'))</td>
 	<td>DLFoldersNotPresent2</td>
@@ -89,7 +66,7 @@
 <tr>
 	<td>gotoIf</td>
 	<td>!${DLFoldersNotPresent2}</td>
-	<td>NoFoldersPresent</td>
+	<td>NoFoldersPresent2</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -98,12 +75,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[2]/ul/li[3]/a</td>
+	<td>//div[4]/ul/li[3]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[2]/ul/li[3]/a</td>
+	<td>//div[4]/ul/li[3]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -113,17 +90,12 @@
 </tr>
 <tr>
 	<td>label</td>
-	<td>NoFoldersPresent</td>
+	<td>NoFoldersPresent2</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Document Library Permissions Test Page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//img[@alt='Remove']</td>
 	<td></td>
 </tr>
 <tr>
@@ -172,8 +144,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Sign Out</td>
+	<td>assertElementNotPresent</td>
+	<td>link=Document Library Permissions Test Page</td>
 	<td></td>
 </tr>
 

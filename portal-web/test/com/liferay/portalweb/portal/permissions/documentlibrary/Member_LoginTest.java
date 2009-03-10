@@ -39,7 +39,7 @@ public class Member_LoginTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_58_login")) {
+				if (selenium.isElementPresent("link=Welcome")) {
 					break;
 				}
 			}
@@ -49,10 +49,15 @@ public class Member_LoginTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Welcome"));
+		selenium.waitForPageToLoad("30000");
 		selenium.type("_58_login",
 			RuntimeVariables.replace("member@liferay.com"));
 		selenium.type("_58_password", RuntimeVariables.replace("test"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
+				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

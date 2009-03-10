@@ -33,6 +33,23 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Member_AssertDeleteDocumentTest extends BaseTestCase {
 	public void testMember_AssertDeleteDocument() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=Document Library Permissions Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
@@ -41,8 +58,6 @@ public class Member_AssertDeleteDocumentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent(
 				"link=Member Permissions Upload Edited.txt"));
-		assertTrue(selenium.isElementPresent("//strong/span"));
-		selenium.click("//strong/span");
-		assertTrue(selenium.isElementPresent("//div[2]/ul/li[4]/a"));
+		assertTrue(selenium.isElementPresent("link=Delete"));
 	}
 }

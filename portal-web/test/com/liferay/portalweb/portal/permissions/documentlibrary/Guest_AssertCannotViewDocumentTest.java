@@ -26,23 +26,40 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="CA_AssertEditFolderTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="Guest_AssertCannotViewDocumentTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CA_AssertEditFolderTest extends BaseTestCase {
-	public void testCA_AssertEditFolder() throws Exception {
+public class Guest_AssertCannotViewDocumentTest extends BaseTestCase {
+	public void testGuest_AssertCannotViewDocument() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=Document Library Permissions Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//td[4]/ul/li/strong/span");
-		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[1]/a"));
+		selenium.click(RuntimeVariables.replace("link=My Documents"));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_20_name",
-			RuntimeVariables.replace("Admin Permissions Edited 1"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.click(RuntimeVariables.replace(
+				"link=Member Permissions Upload Edited.txt"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Admin Permissions Edited 1"));
+		assertTrue(selenium.isTextPresent("Forbidden"));
+		assertTrue(selenium.isTextPresent(
+				"You do not have permission to access the requested resource"));
 	}
 }

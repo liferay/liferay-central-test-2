@@ -33,6 +33,23 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Member_AssertAddCommentNotOwnerTest extends BaseTestCase {
 	public void testMember_AssertAddCommentNotOwner() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=Document Library Permissions Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
@@ -69,6 +86,8 @@ public class Member_AssertAddCommentNotOwnerTest extends BaseTestCase {
 				"I am a Member and I can write a comment on a different user's uploaded document!"));
 		selenium.click(RuntimeVariables.replace("_20_postReplyButton1"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent(
 				"I am a Member and I can write a comment on a different user's uploaded document!"));
 	}

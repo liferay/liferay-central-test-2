@@ -33,6 +33,23 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_AddCommentTest extends BaseTestCase {
 	public void testCA_AddComment() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=Document Library Permissions Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
@@ -42,6 +59,23 @@ public class CA_AddCommentTest extends BaseTestCase {
 				"link=Admin Permissions Subfolder 1"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//strong/span");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=View")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=View"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Comments"));
@@ -72,6 +106,8 @@ public class CA_AddCommentTest extends BaseTestCase {
 				"I am a Community Admin and I can write comments!"));
 		selenium.click(RuntimeVariables.replace("_20_postReplyButton0"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent(
 				"link=I am a Community Admin and I can write comments!"));
 	}

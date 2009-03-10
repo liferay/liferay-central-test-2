@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="Member_AssertDeleteCommentTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="CA_EditFolderTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class Member_AssertDeleteCommentTest extends BaseTestCase {
-	public void testMember_AssertDeleteComment() throws Exception {
+public class CA_EditFolderTest extends BaseTestCase {
+	public void testCA_EditFolder() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -53,10 +53,7 @@ public class Member_AssertDeleteCommentTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Admin Permissions Subfolder 2"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("//strong/span");
+		selenium.click("//td[4]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -64,7 +61,7 @@ public class Member_AssertDeleteCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//li[1]/a/img")) {
+				if (selenium.isElementPresent("//div[4]/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -74,10 +71,16 @@ public class Member_AssertDeleteCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//li[1]/a/img"));
+		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Comments"));
+		selenium.typeKeys("_20_name",
+			RuntimeVariables.replace("Admin Permissions Edited 1"));
+		selenium.type("_20_name",
+			RuntimeVariables.replace("Admin Permissions Edited 1"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Delete"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertTrue(selenium.isElementPresent("link=Admin Permissions Edited 1"));
 	}
 }

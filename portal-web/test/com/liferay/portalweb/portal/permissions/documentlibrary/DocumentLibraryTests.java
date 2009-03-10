@@ -47,7 +47,7 @@ public class DocumentLibraryTests extends BaseTests {
 		testSuite.addTestSuite(CA_AddMoveFoldersTest.class);
 		testSuite.addTestSuite(CA_AddDocumentTest.class);
 		testSuite.addTestSuite(CA_AddCommentTest.class);
-		testSuite.addTestSuite(CA_AssertEditFolderTest.class);
+		testSuite.addTestSuite(CA_EditFolderTest.class);
 		testSuite.addTestSuite(CA_EditDocumentTest.class);
 		testSuite.addTestSuite(CA_EditCommentTest.class);
 		testSuite.addTestSuite(CA_MoveDocumentTest.class);
@@ -56,6 +56,7 @@ public class DocumentLibraryTests extends BaseTests {
 		testSuite.addTestSuite(CA_EditConfigurationTest.class);
 		testSuite.addTestSuite(CA_SearchPortletTest.class);
 		testSuite.addTestSuite(CA_AssertRemovePortletTest.class);
+		testSuite.addTestSuite(CA_EditPermissionsTest.class);
 		testSuite.addTestSuite(CA_LogoutTest.class);
 		testSuite.addTestSuite(Member_LoginTest.class);
 		testSuite.addTestSuite(Member_AssertViewFoldersTest.class);
@@ -85,6 +86,8 @@ public class DocumentLibraryTests extends BaseTests {
 		testSuite.addTestSuite(Guest_AssertNotSignedInTest.class);
 		testSuite.addTestSuite(Guest_AssertViewFoldersTest.class);
 		testSuite.addTestSuite(Guest_AssertViewDocumentsTest.class);
+		testSuite.addTestSuite(Guest_AssertCannotViewFolderTest.class);
+		testSuite.addTestSuite(Guest_AssertCannotViewDocumentTest.class);
 		testSuite.addTestSuite(Guest_SearchPortletTest.class);
 		testSuite.addTestSuite(Guest_AssertCannotAddFoldersTest.class);
 		testSuite.addTestSuite(Guest_AssertCannotEditFoldersTest.class);
@@ -99,7 +102,9 @@ public class DocumentLibraryTests extends BaseTests {
 		testSuite.addTestSuite(Guest_AssertCannotEditPermissionsTest.class);
 		testSuite.addTestSuite(Guest_AssertCannotEditConfigurationTest.class);
 		testSuite.addTestSuite(Guest_AssertCannotRemovePortletTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(SA_LoginTest.class);
+		testSuite.addTestSuite(SA_TearDownTest.class);
+		testSuite.addTestSuite(SA_LogoutTest.class);
 
 		return testSuite;
 	}

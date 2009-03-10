@@ -33,20 +33,57 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Member_EditDocumentTest extends BaseTestCase {
 	public void testMember_EditDocument() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=Document Library Permissions Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Admin Permissions Subfolder 1"));
+		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a[2]/b"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//strong");
-		selenium.click(RuntimeVariables.replace("//img[@alt='Edit']"));
+		selenium.click("//td[5]/ul/li/strong/span");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Edit")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_20_title",
+			RuntimeVariables.replace("Member Permissions Upload Edited"));
 		selenium.type("_20_title",
 			RuntimeVariables.replace("Member Permissions Upload Edited"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent(
 				"link=Member Permissions Upload Edited.txt"));
 	}

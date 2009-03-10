@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>CA_AddSubfolderTest</title>
+<title>Guest_AssertCannotViewDocumentTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">CA_AddSubfolderTest</td></tr>
+<tr><td rowspan="1" colspan="3">Guest_AssertCannotViewDocumentTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
@@ -20,37 +20,22 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Admin Permissions 1</td>
+	<td>link=My Documents</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Add Subfolder']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>_20_name</td>
-	<td>Admin Permissions Subfolder 1</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>_20_name</td>
-	<td>Admin Permissions Subfolder 1</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Save']</td>
+	<td>link=Member Permissions Upload Edited.txt</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
+	<td>Forbidden</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>link=Admin Permissions Subfolder 1</td>
+	<td>assertTextPresent</td>
+	<td>You do not have permission to access the requested resource</td>
 	<td></td>
 </tr>
 

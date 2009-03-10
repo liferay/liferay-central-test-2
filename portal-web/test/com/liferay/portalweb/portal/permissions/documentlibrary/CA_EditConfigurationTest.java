@@ -33,6 +33,23 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_EditConfigurationTest extends BaseTestCase {
 	public void testCA_EditConfiguration() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=Document Library Permissions Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
@@ -40,7 +57,7 @@ public class CA_EditConfigurationTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("link=Configuration"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("//input[@value='Select']"));
-		assertTrue(selenium.isTextPresent("Show Columns "));
+		assertTrue(selenium.isTextPresent("Show Columns"));
 		assertTrue(selenium.isTextPresent("Documents Listing"));
 		selenium.click("_86_showFoldersSearchCheckbox");
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
@@ -54,6 +71,8 @@ public class CA_EditConfigurationTest extends BaseTestCase {
 		selenium.click("_86_showFoldersSearchCheckbox");
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"You have successfully updated the setup."));
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");

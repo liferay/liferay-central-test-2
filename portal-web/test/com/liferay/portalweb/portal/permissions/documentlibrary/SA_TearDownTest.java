@@ -26,29 +26,36 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="TearDownTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="SA_TearDownTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class TearDownTest extends BaseTestCase {
-	public void testTearDown() throws Exception {
+public class SA_TearDownTest extends BaseTestCase {
+	public void testSA_TearDown() throws Exception {
 		int label = 1;
 
 		while (label >= 1) {
 			switch (label) {
 			case 1:
-				selenium.click(RuntimeVariables.replace("link=Welcome"));
-				selenium.waitForPageToLoad("30000");
-				selenium.type("_58_login",
-					RuntimeVariables.replace("test@liferay.com"));
-				selenium.type("_58_password", RuntimeVariables.replace("test"));
-				selenium.click("_58_rememberMeCheckbox");
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Sign In']"));
-				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("//li[5]/ul/li[1]/a[1]"));
-				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent(
+									"link=Document Library Permissions Test Page")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.click(RuntimeVariables.replace(
 						"link=Document Library Permissions Test Page"));
 				selenium.waitForPageToLoad("30000");
@@ -70,7 +77,7 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("//div[2]/ul/li[3]/a")) {
+						if (selenium.isElementPresent("//div[4]/ul/li[3]/a")) {
 							break;
 						}
 					}
@@ -80,7 +87,7 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("//div[2]/ul/li[3]/a"));
+				selenium.click(RuntimeVariables.replace("//div[4]/ul/li[3]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -102,11 +109,13 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+			case 2:
+
 				boolean DLFoldersNotPresent2 = selenium.isElementPresent(
 						"//td[4]/ul/li/strong/span");
 
 				if (!DLFoldersNotPresent2) {
-					label = 2;
+					label = 3;
 
 					continue;
 				}
@@ -119,7 +128,7 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("//div[2]/ul/li[3]/a")) {
+						if (selenium.isElementPresent("//div[4]/ul/li[3]/a")) {
 							break;
 						}
 					}
@@ -129,32 +138,15 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("//div[2]/ul/li[3]/a"));
+				selenium.click(RuntimeVariables.replace("//div[4]/ul/li[3]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
-			case 2:
+			case 3:
 				selenium.click(RuntimeVariables.replace(
 						"link=Document Library Permissions Test Page"));
 				selenium.waitForPageToLoad("30000");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("//img[@alt='Remove']")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
 				selenium.click("//img[@alt='Remove']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
@@ -174,8 +166,8 @@ public class TearDownTest extends BaseTestCase {
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
 				selenium.click(RuntimeVariables.replace("link=Welcome"));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("link=Sign Out"));
-				selenium.waitForPageToLoad("30000");
+				assertFalse(selenium.isElementPresent(
+						"link=Document Library Permissions Test Page"));
 
 			case 100:
 				label = -1;

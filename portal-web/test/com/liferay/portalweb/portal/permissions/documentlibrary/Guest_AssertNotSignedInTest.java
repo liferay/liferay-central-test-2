@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portal.permissions.documentlibrary;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="Guest_AssertNotSignedInTest.java.html"><b><i>View Source</i></b></a>
@@ -32,6 +33,25 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class Guest_AssertNotSignedInTest extends BaseTestCase {
 	public void testGuest_AssertNotSignedIn() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Welcome")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Welcome"));
+		selenium.waitForPageToLoad("30000");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");

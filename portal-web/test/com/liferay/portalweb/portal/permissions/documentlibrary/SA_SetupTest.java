@@ -39,7 +39,7 @@ public class SA_SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Welcome")) {
+				if (selenium.isElementPresent("//div[@id='add-page']/a/span")) {
 					break;
 				}
 			}
@@ -67,6 +67,8 @@ public class SA_SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("new_page",
+			RuntimeVariables.replace("Document Library Permissions Test Page"));
 		selenium.type("new_page",
 			RuntimeVariables.replace("Document Library Permissions Test Page"));
 		selenium.click("link=Save");

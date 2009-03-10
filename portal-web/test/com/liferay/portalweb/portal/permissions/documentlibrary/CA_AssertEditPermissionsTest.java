@@ -33,12 +33,28 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_AssertEditPermissionsTest extends BaseTestCase {
 	public void testCA_AssertEditPermissions() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=Document Library Permissions Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Configuration"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Permissions"));
 		selenium.click(RuntimeVariables.replace("link=Permissions"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("//input[@value='Submit']"));
@@ -53,7 +69,7 @@ public class CA_AssertEditPermissionsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//body/div[2]/ul/li[2]/a")) {
+				if (selenium.isElementPresent("//div[4]/ul/li[2]/a")) {
 					break;
 				}
 			}
@@ -63,7 +79,7 @@ public class CA_AssertEditPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[2]/a"));
+		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[2]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("//input[@value='Submit']"));
 		selenium.click(RuntimeVariables.replace(
@@ -95,8 +111,5 @@ public class CA_AssertEditPermissionsTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("//input[@value='Submit']"));
 		assertTrue(selenium.isTextPresent(
 				"Edit Permissions for Document Library Document: Admin Permissions Upload Edited 1.txt"));
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Permissions Test Page"));
-		selenium.waitForPageToLoad("30000");
 	}
 }

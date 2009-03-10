@@ -33,23 +33,32 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Guest_AssertCannotEditCommentsTest extends BaseTestCase {
 	public void testGuest_AssertCannotEditComments() throws Exception {
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Permissions Test Page"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Admin Permissions Subfolder 2"));
-		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("link=View"));
-		assertFalse(selenium.isElementPresent("//strong/span"));
-		assertFalse(selenium.isElementPresent("link=Edit"));
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=Document Library Permissions Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
 				"link=Admin Permissions Subfolder 1"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("link=View"));
-		assertFalse(selenium.isElementPresent("//strong/span"));
+		selenium.click(RuntimeVariables.replace("link=View"));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isElementPresent("link=Comments"));
 		assertFalse(selenium.isElementPresent("link=Edit"));
 	}
 }

@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="Member_MoveDocumentTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="CA_EditPermissionsTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class Member_MoveDocumentTest extends BaseTestCase {
-	public void testMember_MoveDocument() throws Exception {
+public class CA_EditPermissionsTest extends BaseTestCase {
+	public void testCA_EditPermissions() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -53,9 +53,38 @@ public class Member_MoveDocumentTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
+		selenium.click("//tr[4]/td[4]/ul/li/strong/span");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//div[4]/ul/li[2]/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[2]/a"));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isChecked("11_ACTION_VIEW"));
+		selenium.click("11_ACTION_VIEW");
+		selenium.click(RuntimeVariables.replace("//input[@value='Submit']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		selenium.click(RuntimeVariables.replace(
+				"link=Document Library Permissions Test Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a[2]/b"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//td[5]/ul/li/strong/span");
+		selenium.click("//strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -63,7 +92,7 @@ public class Member_MoveDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Edit")) {
+				if (selenium.isElementPresent("link=Permissions")) {
 					break;
 				}
 			}
@@ -73,35 +102,11 @@ public class Member_MoveDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Edit"));
+		selenium.click(RuntimeVariables.replace("link=Permissions"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Select']");
-		selenium.waitForPopUp("folder", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("name=folder");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Folders")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Folders"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Admin Permissions 2"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Choose']");
-		selenium.selectWindow("null");
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		assertFalse(selenium.isChecked("11_ACTION_VIEW"));
+		selenium.click("11_ACTION_VIEW");
+		selenium.click(RuntimeVariables.replace("//input[@value='Submit']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
@@ -109,9 +114,33 @@ public class Member_MoveDocumentTest extends BaseTestCase {
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
-				"link=Admin Permissions Subfolder 2"));
+				"link=Admin Permissions Subfolder 1"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent(
-				"link=Member Permissions Upload Edited.txt"));
+		selenium.click("//strong/span");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Permissions")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Permissions"));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isChecked("11_ACTION_VIEW"));
+		selenium.click("11_ACTION_VIEW");
+		selenium.click(RuntimeVariables.replace("//input[@value='Submit']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }
