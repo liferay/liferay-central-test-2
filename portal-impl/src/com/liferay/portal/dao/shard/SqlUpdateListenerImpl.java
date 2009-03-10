@@ -20,47 +20,51 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.dao.jdbc.spring;
+package com.liferay.portal.dao.shard;
 
+import com.liferay.portal.dao.jdbc.spring.SqlUpdateListener;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import javax.sql.DataSource;
 
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.SqlParameter;
-
 /**
- * <a href="SqlUpdateImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="SqlUpdateListenerImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  *
  */
-public class SqlUpdateImpl
-	extends org.springframework.jdbc.object.SqlUpdate implements SqlUpdate {
+public class SqlUpdateListenerImpl implements SqlUpdateListener {
 
-	public SqlUpdateImpl(DataSource dataSource, String sql, int[] types) {
-		super(dataSource, sql);
-
-		for (int type : types) {
-			declareParameter(new SqlParameter(type));
+	public void onAfterUpdate(SqlUpdate sqlUpdate) {
+		if (_log.isDebugEnabled()) {
+			_log.debug("onAfterUpdate()");
 		}
-
-		compile();
 	}
 
-	public int update(Object[] params) throws DataAccessException {
-		int retVal = 0;
-
-		SqlUpdateListenerUtil.onBeforeUpdate(this);
-
-		try {
-			retVal = super.update(params);
-		}
-		finally {
-			SqlUpdateListenerUtil.onAfterUpdate(this);
+	public void onBeforeUpdate(SqlUpdate sqlUpdate) {
+		if (_log.isDebugEnabled()) {
+			_log.debug("onBeforeUpdate()");
 		}
 
-		return retVal;
+		// Ensure the sharded datasource is chosen before the update is called.
+		// Since SqlUpdate.update() is always a nested call in a
+		// *PersistenceImpl, the shard ID has already been properly set prior to
+		// this call and does not need to be manipulated by this listener.
+
+		DataSource dataSource = _shardedAdvice.getDataSource();
+
+		sqlUpdate.setDataSource(dataSource);
 	}
+
+	public void setShardedAdvice(ShardedAdvice shardedAdvice) {
+		_shardedAdvice = shardedAdvice;
+	}
+
+	private ShardedAdvice _shardedAdvice;
+
+	private static Log _log =
+		LogFactoryUtil.getLog(SqlUpdateListenerImpl.class);
 
 }

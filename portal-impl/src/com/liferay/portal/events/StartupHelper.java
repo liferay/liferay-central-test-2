@@ -20,47 +20,29 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.dao.jdbc.spring;
+package com.liferay.portal.events;
 
-import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
-
-import javax.sql.DataSource;
-
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.SqlParameter;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.upgrade.UpgradeException;
+import com.liferay.portal.verify.VerifyException;
 
 /**
- * <a href="SqlUpdateImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="StartupHelper.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  *
  */
-public class SqlUpdateImpl
-	extends org.springframework.jdbc.object.SqlUpdate implements SqlUpdate {
+public interface StartupHelper {
 
-	public SqlUpdateImpl(DataSource dataSource, String sql, int[] types) {
-		super(dataSource, sql);
+	public void cleanupDatabase();
 
-		for (int type : types) {
-			declareParameter(new SqlParameter(type));
-		}
+	public void upgradeProcess(int buildNumber) throws UpgradeException;
 
-		compile();
-	}
+	public void verifyProcess(boolean verified)
+		throws SystemException, VerifyException;
 
-	public int update(Object[] params) throws DataAccessException {
-		int retVal = 0;
+	public boolean isVerified();
 
-		SqlUpdateListenerUtil.onBeforeUpdate(this);
-
-		try {
-			retVal = super.update(params);
-		}
-		finally {
-			SqlUpdateListenerUtil.onAfterUpdate(this);
-		}
-
-		return retVal;
-	}
+	public boolean isUpgraded();
 
 }

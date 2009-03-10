@@ -20,47 +20,50 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.dao.jdbc.spring;
+package com.liferay.portal.events;
 
-import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
-
-import javax.sql.DataSource;
-
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.SqlParameter;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.upgrade.UpgradeException;
+import com.liferay.portal.verify.VerifyException;
 
 /**
- * <a href="SqlUpdateImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="StartupHelperUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  *
  */
-public class SqlUpdateImpl
-	extends org.springframework.jdbc.object.SqlUpdate implements SqlUpdate {
+public class StartupHelperUtil {
 
-	public SqlUpdateImpl(DataSource dataSource, String sql, int[] types) {
-		super(dataSource, sql);
-
-		for (int type : types) {
-			declareParameter(new SqlParameter(type));
-		}
-
-		compile();
+	public static void cleanupDatabase() {
+		getStartupHelper().cleanupDatabase();
 	}
 
-	public int update(Object[] params) throws DataAccessException {
-		int retVal = 0;
-
-		SqlUpdateListenerUtil.onBeforeUpdate(this);
-
-		try {
-			retVal = super.update(params);
-		}
-		finally {
-			SqlUpdateListenerUtil.onAfterUpdate(this);
-		}
-
-		return retVal;
+	public static void upgradeProcess(int buildNumber) throws UpgradeException {
+		getStartupHelper().upgradeProcess(buildNumber);
 	}
+
+	public static void verifyProcess(boolean verified)
+		throws SystemException, VerifyException {
+
+		getStartupHelper().verifyProcess(verified);
+	}
+
+	public static boolean isVerified() {
+		return getStartupHelper().isVerified();
+	}
+
+	public static boolean isUpgraded() {
+		return getStartupHelper().isUpgraded();
+	}
+
+	public static StartupHelper getStartupHelper() {
+		return _startupHelper;
+	}
+
+	public void setStartupHelper(StartupHelper startupHelper) {
+		_startupHelper = startupHelper;
+	}
+
+	private static StartupHelper _startupHelper;
 
 }

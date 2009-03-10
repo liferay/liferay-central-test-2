@@ -134,6 +134,7 @@
 		<column name="mx" type="String" />
 		<column name="homeURL" type="String" />
 		<column name="logoId" type="long" />
+		<column name="shardId" type="String" />
 
 		<!-- Finder methods -->
 
@@ -148,6 +149,9 @@
 		</finder>
 		<finder name="LogoId" return-type="Company">
 			<finder-column name="logoId" />
+		</finder>
+		<finder name="ShardId" return-type="Company">
+			<finder-column name="shardId" />
 		</finder>
 
 		<!-- References -->

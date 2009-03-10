@@ -20,47 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.dao.jdbc.spring;
+package com.liferay.portal.dao.shard;
 
-import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
-
-import javax.sql.DataSource;
-
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.SqlParameter;
+import com.liferay.portal.util.PortalInstances;
+import com.liferay.portal.util.PropsValues;
 
 /**
- * <a href="SqlUpdateImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="RoundRobinShardSelector.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  *
  */
-public class SqlUpdateImpl
-	extends org.springframework.jdbc.object.SqlUpdate implements SqlUpdate {
+public class RoundRobinShardSelector implements ShardSelector {
 
-	public SqlUpdateImpl(DataSource dataSource, String sql, int[] types) {
-		super(dataSource, sql);
+	public String getShardId(
+		String webId, String virtualHost, String mx, String shardId) {
 
-		for (int type : types) {
-			declareParameter(new SqlParameter(type));
-		}
+		int instances = PortalInstances.getCompanyIds().length;
+		int shards = PropsValues.SHARD_AVAILABLE.length;
 
-		compile();
-	}
-
-	public int update(Object[] params) throws DataAccessException {
-		int retVal = 0;
-
-		SqlUpdateListenerUtil.onBeforeUpdate(this);
-
-		try {
-			retVal = super.update(params);
-		}
-		finally {
-			SqlUpdateListenerUtil.onAfterUpdate(this);
-		}
-
-		return retVal;
+		return PropsValues.SHARD_AVAILABLE[instances % shards];
 	}
 
 }

@@ -20,47 +20,62 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.dao.jdbc.spring;
+package com.liferay.portal.dao.shard;
 
-import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
+import com.liferay.portal.util.PropsValues;
+
+import java.util.Map;
 
 import javax.sql.DataSource;
 
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.SqlParameter;
+import org.springframework.aop.TargetSource;
 
 /**
- * <a href="SqlUpdateImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="ShardedDataSourceTargetSource.java.html"><b><i>View Source</i></b>
+ * </a>
  *
- * @author Brian Wing Shun Chan
+ * @author Michael Young
  *
  */
-public class SqlUpdateImpl
-	extends org.springframework.jdbc.object.SqlUpdate implements SqlUpdate {
+public class ShardedDataSourceTargetSource implements TargetSource {
 
-	public SqlUpdateImpl(DataSource dataSource, String sql, int[] types) {
-		super(dataSource, sql);
-
-		for (int type : types) {
-			declareParameter(new SqlParameter(type));
-		}
-
-		compile();
+	public DataSource getDataSource() {
+		return _dataSourceThreadLocal.get();
 	}
 
-	public int update(Object[] params) throws DataAccessException {
-		int retVal = 0;
-
-		SqlUpdateListenerUtil.onBeforeUpdate(this);
-
-		try {
-			retVal = super.update(params);
-		}
-		finally {
-			SqlUpdateListenerUtil.onAfterUpdate(this);
-		}
-
-		return retVal;
+	public Object getTarget() throws Exception {
+		return getDataSource();
 	}
+
+	public Class<DataSource> getTargetClass() {
+		return DataSource.class;
+	}
+
+	public boolean isStatic() {
+		return false;
+	}
+
+	public void releaseTarget(Object target) throws Exception {
+	}
+
+	public void setDataSource(String shardId) {
+		_dataSourceThreadLocal.set(_shardedDataSources.get(shardId));
+	}
+
+	public void setShardedDataSources(
+		Map<String, DataSource> shardedDataSources) {
+
+		_shardedDataSources = shardedDataSources;
+	}
+
+	private static ThreadLocal<DataSource> _dataSourceThreadLocal =
+		new ThreadLocal<DataSource>() {
+
+		protected DataSource initialValue() {
+			return _shardedDataSources.get(PropsValues.SHARD_DEFAULT);
+		}
+	};
+
+	private static Map<String, DataSource> _shardedDataSources;
 
 }

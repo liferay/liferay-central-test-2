@@ -184,7 +184,8 @@ create table Company (
 	virtualHost VARCHAR(75) null,
 	mx VARCHAR(75) null,
 	homeURL STRING null,
-	logoId LONG
+	logoId LONG,
+	shardId VARCHAR(75) null
 );
 
 create table Contact_ (

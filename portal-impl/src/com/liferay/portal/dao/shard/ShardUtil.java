@@ -20,47 +20,46 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.dao.jdbc.spring;
-
-import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
-
-import javax.sql.DataSource;
-
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.SqlParameter;
+package com.liferay.portal.dao.shard;
 
 /**
- * <a href="SqlUpdateImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="ShardUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  *
  */
-public class SqlUpdateImpl
-	extends org.springframework.jdbc.object.SqlUpdate implements SqlUpdate {
+public class ShardUtil {
 
-	public SqlUpdateImpl(DataSource dataSource, String sql, int[] types) {
-		super(dataSource, sql);
+	public static String popCompanyService() {
+		String retVal = null;
 
-		for (int type : types) {
-			declareParameter(new SqlParameter(type));
-		}
-
-		compile();
-	}
-
-	public int update(Object[] params) throws DataAccessException {
-		int retVal = 0;
-
-		SqlUpdateListenerUtil.onBeforeUpdate(this);
-
-		try {
-			retVal = super.update(params);
-		}
-		finally {
-			SqlUpdateListenerUtil.onAfterUpdate(this);
+		if (_getShardedAdvice() != null) {
+			retVal = _getShardedAdvice().popCompanyService();
 		}
 
 		return retVal;
 	}
+
+	public static void pushCompanyService(String shardId) {
+		if (_getShardedAdvice() != null) {
+			_getShardedAdvice().pushCompanyService(shardId);
+		}
+	}
+
+	public static void pushCompanyService(long companyId) {
+		if (_getShardedAdvice() != null) {
+			_getShardedAdvice().pushCompanyService(companyId);
+		}
+	}
+
+	private static ShardedAdvice _getShardedAdvice() {
+		return _shardedAdvice;
+	}
+
+	public void setShardedAdvice(ShardedAdvice shardedAdvice) {
+		_shardedAdvice = shardedAdvice;
+	}
+
+	private static ShardedAdvice _shardedAdvice;
 
 }
