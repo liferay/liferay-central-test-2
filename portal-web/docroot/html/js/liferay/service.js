@@ -194,19 +194,19 @@ Liferay.Service.registerClass(
 );
 
 Liferay.Service.registerClass(
+	Liferay.Service.Portal, "PluginSetting",
+	{
+		updatePluginSetting: true
+	}
+);
+
+Liferay.Service.registerClass(
 	Liferay.Service.Portal, "Portal",
 	{
 		getAutoDeployDirectory: true,
 		getBuildNumber: true,
 		test: true,
 		testCounterRollback: true
-	}
-);
-
-Liferay.Service.registerClass(
-	Liferay.Service.Portal, "PluginSetting",
-	{
-		updatePluginSetting: true
 	}
 );
 

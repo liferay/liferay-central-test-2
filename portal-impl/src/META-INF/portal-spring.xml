@@ -477,26 +477,6 @@
 	<bean id="com.liferay.portal.service.persistence.PhoneUtil" class="com.liferay.portal.service.persistence.PhoneUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.PhonePersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portal.service.PortalLocalService.impl" class="com.liferay.portal.service.impl.PortalLocalServiceImpl" />
-	<bean id="com.liferay.portal.service.PortalLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
-		<property name="target" ref="com.liferay.portal.service.PortalLocalService.impl" />
-	</bean>
-	<bean id="com.liferay.portal.service.PortalLocalServiceFactory" class="com.liferay.portal.service.PortalLocalServiceFactory">
-		<property name="service" ref="com.liferay.portal.service.PortalLocalService.impl" />
-	</bean>
-	<bean id="com.liferay.portal.service.PortalLocalServiceUtil" class="com.liferay.portal.service.PortalLocalServiceUtil">
-		<property name="service" ref="com.liferay.portal.service.PortalLocalService.impl" />
-	</bean>
-	<bean id="com.liferay.portal.service.PortalService.impl" class="com.liferay.portal.service.impl.PortalServiceImpl" />
-	<bean id="com.liferay.portal.service.PortalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
-		<property name="target" ref="com.liferay.portal.service.PortalService.impl" />
-	</bean>
-	<bean id="com.liferay.portal.service.PortalServiceFactory" class="com.liferay.portal.service.PortalServiceFactory">
-		<property name="service" ref="com.liferay.portal.service.PortalService.impl" />
-	</bean>
-	<bean id="com.liferay.portal.service.PortalServiceUtil" class="com.liferay.portal.service.PortalServiceUtil">
-		<property name="service" ref="com.liferay.portal.service.PortalService.impl" />
-	</bean>
 	<bean id="com.liferay.portal.service.PluginSettingLocalService.impl" class="com.liferay.portal.service.impl.PluginSettingLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.PluginSettingLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.liferay.portal.service.PluginSettingLocalService.impl" />
@@ -521,6 +501,26 @@
 	<bean id="com.liferay.portal.service.persistence.PluginSettingUtil" class="com.liferay.portal.service.persistence.PluginSettingUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.PluginSettingPersistence.impl" />
 	</bean>
+	<bean id="com.liferay.portal.service.PortalLocalService.impl" class="com.liferay.portal.service.impl.PortalLocalServiceImpl" />
+	<bean id="com.liferay.portal.service.PortalLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portal.service.PortalLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.PortalLocalServiceFactory" class="com.liferay.portal.service.PortalLocalServiceFactory">
+		<property name="service" ref="com.liferay.portal.service.PortalLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.PortalLocalServiceUtil" class="com.liferay.portal.service.PortalLocalServiceUtil">
+		<property name="service" ref="com.liferay.portal.service.PortalLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.PortalService.impl" class="com.liferay.portal.service.impl.PortalServiceImpl" />
+	<bean id="com.liferay.portal.service.PortalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portal.service.PortalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.PortalServiceFactory" class="com.liferay.portal.service.PortalServiceFactory">
+		<property name="service" ref="com.liferay.portal.service.PortalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.PortalServiceUtil" class="com.liferay.portal.service.PortalServiceUtil">
+		<property name="service" ref="com.liferay.portal.service.PortalService.impl" />
+	</bean>
 	<bean id="com.liferay.portal.service.PortletLocalService.impl" class="com.liferay.portal.service.impl.PortletLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.PortletLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.liferay.portal.service.PortletLocalService.impl" />
@@ -544,6 +544,20 @@
 	<bean id="com.liferay.portal.service.persistence.PortletPersistence.impl" class="com.liferay.portal.service.persistence.PortletPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.PortletUtil" class="com.liferay.portal.service.persistence.PortletUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.PortletPersistence.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.PortletItemLocalService.impl" class="com.liferay.portal.service.impl.PortletItemLocalServiceImpl" />
+	<bean id="com.liferay.portal.service.PortletItemLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portal.service.PortletItemLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.PortletItemLocalServiceFactory" class="com.liferay.portal.service.PortletItemLocalServiceFactory">
+		<property name="service" ref="com.liferay.portal.service.PortletItemLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.PortletItemLocalServiceUtil" class="com.liferay.portal.service.PortletItemLocalServiceUtil">
+		<property name="service" ref="com.liferay.portal.service.PortletItemLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.PortletItemPersistence.impl" class="com.liferay.portal.service.persistence.PortletItemPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portal.service.persistence.PortletItemUtil" class="com.liferay.portal.service.persistence.PortletItemUtil">
+		<property name="persistence" ref="com.liferay.portal.service.persistence.PortletItemPersistence.impl" />
 	</bean>
 	<bean id="com.liferay.portal.service.PortletPreferencesLocalService.impl" class="com.liferay.portal.service.impl.PortletPreferencesLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.PortletPreferencesLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
@@ -694,20 +708,6 @@
 	<bean id="com.liferay.portal.service.persistence.ServiceComponentPersistence.impl" class="com.liferay.portal.service.persistence.ServiceComponentPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.ServiceComponentUtil" class="com.liferay.portal.service.persistence.ServiceComponentUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.ServiceComponentPersistence.impl" />
-	</bean>
-	<bean id="com.liferay.portal.service.PortletItemLocalService.impl" class="com.liferay.portal.service.impl.PortletItemLocalServiceImpl" />
-	<bean id="com.liferay.portal.service.PortletItemLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
-		<property name="target" ref="com.liferay.portal.service.PortletItemLocalService.impl" />
-	</bean>
-	<bean id="com.liferay.portal.service.PortletItemLocalServiceFactory" class="com.liferay.portal.service.PortletItemLocalServiceFactory">
-		<property name="service" ref="com.liferay.portal.service.PortletItemLocalService.impl" />
-	</bean>
-	<bean id="com.liferay.portal.service.PortletItemLocalServiceUtil" class="com.liferay.portal.service.PortletItemLocalServiceUtil">
-		<property name="service" ref="com.liferay.portal.service.PortletItemLocalService.impl" />
-	</bean>
-	<bean id="com.liferay.portal.service.persistence.PortletItemPersistence.impl" class="com.liferay.portal.service.persistence.PortletItemPersistenceImpl" parent="basePersistence" />
-	<bean id="com.liferay.portal.service.persistence.PortletItemUtil" class="com.liferay.portal.service.persistence.PortletItemUtil">
-		<property name="persistence" ref="com.liferay.portal.service.persistence.PortletItemPersistence.impl" />
 	</bean>
 	<bean id="com.liferay.portal.service.SubscriptionLocalService.impl" class="com.liferay.portal.service.impl.SubscriptionLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.SubscriptionLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">

@@ -205,18 +205,6 @@
 		<property name="service" ref="com.liferay.portal.service.PhoneService.impl" />
 		<property name="serviceInterface" value="com.liferay.portal.service.PhoneService" />
 	</bean>
-	<bean name="/com_liferay_portal_service_spring_PortalService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.PortalService.impl" />
-		<property name="serviceInterface" value="com.liferay.portal.service.PortalService" />
-	</bean>
-	<bean name="/com_liferay_portal_service_spring_PortalService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.PortalService.impl" />
-		<property name="serviceInterface" value="com.liferay.portal.service.PortalService" />
-	</bean>
-	<bean name="/com_liferay_portal_service_spring_PortalService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.PortalService.impl" />
-		<property name="serviceInterface" value="com.liferay.portal.service.PortalService" />
-	</bean>
 	<bean name="/com_liferay_portal_service_spring_PluginSettingService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portal.service.PluginSettingService.impl" />
 		<property name="serviceInterface" value="com.liferay.portal.service.PluginSettingService" />
@@ -228,6 +216,18 @@
 	<bean name="/com_liferay_portal_service_spring_PluginSettingService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
 		<property name="service" ref="com.liferay.portal.service.PluginSettingService.impl" />
 		<property name="serviceInterface" value="com.liferay.portal.service.PluginSettingService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_PortalService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.PortalService.impl" />
+		<property name="serviceInterface" value="com.liferay.portal.service.PortalService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_PortalService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.PortalService.impl" />
+		<property name="serviceInterface" value="com.liferay.portal.service.PortalService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_PortalService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.PortalService.impl" />
+		<property name="serviceInterface" value="com.liferay.portal.service.PortalService" />
 	</bean>
 	<bean name="/com_liferay_portal_service_spring_PortletService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portal.service.PortletService.impl" />

@@ -721,22 +721,6 @@ public abstract class LayoutServiceBaseImpl extends PrincipalBean
 		this.phonePersistence = phonePersistence;
 	}
 
-	public PortalLocalService getPortalLocalService() {
-		return portalLocalService;
-	}
-
-	public void setPortalLocalService(PortalLocalService portalLocalService) {
-		this.portalLocalService = portalLocalService;
-	}
-
-	public PortalService getPortalService() {
-		return portalService;
-	}
-
-	public void setPortalService(PortalService portalService) {
-		this.portalService = portalService;
-	}
-
 	public PluginSettingLocalService getPluginSettingLocalService() {
 		return pluginSettingLocalService;
 	}
@@ -764,6 +748,22 @@ public abstract class LayoutServiceBaseImpl extends PrincipalBean
 		this.pluginSettingPersistence = pluginSettingPersistence;
 	}
 
+	public PortalLocalService getPortalLocalService() {
+		return portalLocalService;
+	}
+
+	public void setPortalLocalService(PortalLocalService portalLocalService) {
+		this.portalLocalService = portalLocalService;
+	}
+
+	public PortalService getPortalService() {
+		return portalService;
+	}
+
+	public void setPortalService(PortalService portalService) {
+		this.portalService = portalService;
+	}
+
 	public PortletLocalService getPortletLocalService() {
 		return portletLocalService;
 	}
@@ -786,6 +786,24 @@ public abstract class LayoutServiceBaseImpl extends PrincipalBean
 
 	public void setPortletPersistence(PortletPersistence portletPersistence) {
 		this.portletPersistence = portletPersistence;
+	}
+
+	public PortletItemLocalService getPortletItemLocalService() {
+		return portletItemLocalService;
+	}
+
+	public void setPortletItemLocalService(
+		PortletItemLocalService portletItemLocalService) {
+		this.portletItemLocalService = portletItemLocalService;
+	}
+
+	public PortletItemPersistence getPortletItemPersistence() {
+		return portletItemPersistence;
+	}
+
+	public void setPortletItemPersistence(
+		PortletItemPersistence portletItemPersistence) {
+		this.portletItemPersistence = portletItemPersistence;
 	}
 
 	public PortletPreferencesLocalService getPortletPreferencesLocalService() {
@@ -963,24 +981,6 @@ public abstract class LayoutServiceBaseImpl extends PrincipalBean
 	public void setServiceComponentPersistence(
 		ServiceComponentPersistence serviceComponentPersistence) {
 		this.serviceComponentPersistence = serviceComponentPersistence;
-	}
-
-	public PortletItemLocalService getPortletItemLocalService() {
-		return portletItemLocalService;
-	}
-
-	public void setPortletItemLocalService(
-		PortletItemLocalService portletItemLocalService) {
-		this.portletItemLocalService = portletItemLocalService;
-	}
-
-	public PortletItemPersistence getPortletItemPersistence() {
-		return portletItemPersistence;
-	}
-
-	public void setPortletItemPersistence(
-		PortletItemPersistence portletItemPersistence) {
-		this.portletItemPersistence = portletItemPersistence;
 	}
 
 	public SubscriptionLocalService getSubscriptionLocalService() {
@@ -1490,22 +1490,26 @@ public abstract class LayoutServiceBaseImpl extends PrincipalBean
 	protected PhoneService phoneService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.PhonePersistence.impl")
 	protected PhonePersistence phonePersistence;
-	@BeanReference(name = "com.liferay.portal.service.PortalLocalService.impl")
-	protected PortalLocalService portalLocalService;
-	@BeanReference(name = "com.liferay.portal.service.PortalService.impl")
-	protected PortalService portalService;
 	@BeanReference(name = "com.liferay.portal.service.PluginSettingLocalService.impl")
 	protected PluginSettingLocalService pluginSettingLocalService;
 	@BeanReference(name = "com.liferay.portal.service.PluginSettingService.impl")
 	protected PluginSettingService pluginSettingService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.PluginSettingPersistence.impl")
 	protected PluginSettingPersistence pluginSettingPersistence;
+	@BeanReference(name = "com.liferay.portal.service.PortalLocalService.impl")
+	protected PortalLocalService portalLocalService;
+	@BeanReference(name = "com.liferay.portal.service.PortalService.impl")
+	protected PortalService portalService;
 	@BeanReference(name = "com.liferay.portal.service.PortletLocalService.impl")
 	protected PortletLocalService portletLocalService;
 	@BeanReference(name = "com.liferay.portal.service.PortletService.impl")
 	protected PortletService portletService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.PortletPersistence.impl")
 	protected PortletPersistence portletPersistence;
+	@BeanReference(name = "com.liferay.portal.service.PortletItemLocalService.impl")
+	protected PortletItemLocalService portletItemLocalService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.PortletItemPersistence.impl")
+	protected PortletItemPersistence portletItemPersistence;
 	@BeanReference(name = "com.liferay.portal.service.PortletPreferencesLocalService.impl")
 	protected PortletPreferencesLocalService portletPreferencesLocalService;
 	@BeanReference(name = "com.liferay.portal.service.PortletPreferencesService.impl")
@@ -1548,10 +1552,6 @@ public abstract class LayoutServiceBaseImpl extends PrincipalBean
 	protected ServiceComponentLocalService serviceComponentLocalService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ServiceComponentPersistence.impl")
 	protected ServiceComponentPersistence serviceComponentPersistence;
-	@BeanReference(name = "com.liferay.portal.service.PortletItemLocalService.impl")
-	protected PortletItemLocalService portletItemLocalService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.PortletItemPersistence.impl")
-	protected PortletItemPersistence portletItemPersistence;
 	@BeanReference(name = "com.liferay.portal.service.SubscriptionLocalService.impl")
 	protected SubscriptionLocalService subscriptionLocalService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.SubscriptionPersistence.impl")
