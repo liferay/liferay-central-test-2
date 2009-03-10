@@ -497,6 +497,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return user;
 	}
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int authenticateByEmailAddress(
 			long companyId, String emailAddress, String password,
 			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
@@ -507,6 +508,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			headerMap, parameterMap);
 	}
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int authenticateByScreenName(
 			long companyId, String screenName, String password,
 			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
@@ -517,6 +519,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			headerMap, parameterMap);
 	}
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int authenticateByUserId(
 			long companyId, long userId, String password,
 			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
@@ -527,6 +530,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			CompanyConstants.AUTH_TYPE_ID, headerMap, parameterMap);
 	}
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public long authenticateForBasic(
 			long companyId, String authType, String login, String password)
 		throws PortalException, SystemException {
@@ -564,6 +568,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return 0;
 	}
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean authenticateForJAAS(long userId, String encPassword) {
 		try {
 			User user = userPersistence.findByPrimaryKey(userId);
