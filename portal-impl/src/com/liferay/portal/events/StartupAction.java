@@ -191,21 +191,6 @@ public class StartupAction extends SimpleAction {
 			_log.error(e, e);
 		}
 
-		// Update indexes
-
-		if (ranUpgradeProcess) {
-			try {
-				if (_log.isInfoEnabled()) {
-					_log.info("Adding indexes");
-				}
-
-				DBUtil.getInstance().runSQLTemplate("indexes.sql", false);
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
-		}
-
 		// Enable database caching after upgrade
 
 		CacheRegistry.setActive(true);
@@ -298,6 +283,21 @@ public class StartupAction extends SimpleAction {
 		}
 
 		PropsValues.INDEX_READ_ONLY = tempIndexReadOnly;
+
+		// Update indexes
+
+		if (ranUpgradeProcess) {
+			try {
+				if (_log.isInfoEnabled()) {
+					_log.info("Adding indexes");
+				}
+
+				DBUtil.getInstance().runSQLTemplate("indexes.sql", false);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+		}
 
 		// Update release
 
