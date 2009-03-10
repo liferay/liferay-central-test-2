@@ -1066,6 +1066,17 @@ create table ServiceComponent (
 	data_ TEXT null
 );
 
+create table Shard (
+	shardId LONG not null primary key,
+	name VARCHAR(75) null
+);
+
+create table Shards_Companies (
+	shardId LONG not null,
+	companyId LONG not null,
+	primary key (shardId, companyId)
+);
+
 create table ShoppingCart (
 	cartId LONG not null primary key,
 	groupId LONG,

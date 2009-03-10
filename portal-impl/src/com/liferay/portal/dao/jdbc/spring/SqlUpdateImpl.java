@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 
 import javax.sql.DataSource;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.SqlParameter;
 
 /**
@@ -45,6 +46,21 @@ public class SqlUpdateImpl
 		}
 
 		compile();
+	}
+
+	public int update(Object[] params) throws DataAccessException {
+		int retVal = 0;
+
+		SqlUpdateListenerUtil.onBeforeUpdate(this);
+
+		try {
+			retVal = super.update(params);
+		}
+		finally {
+			SqlUpdateListenerUtil.onAfterUpdate(this);
+		}
+
+		return retVal;
 	}
 
 }

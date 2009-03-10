@@ -77,6 +77,8 @@ import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.RoleLocalService;
 import com.liferay.portal.service.RoleService;
 import com.liferay.portal.service.ServiceComponentLocalService;
+import com.liferay.portal.service.ShardLocalService;
+import com.liferay.portal.service.ShardService;
 import com.liferay.portal.service.SubscriptionLocalService;
 import com.liferay.portal.service.ThemeLocalService;
 import com.liferay.portal.service.ThemeService;
@@ -134,6 +136,7 @@ import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.RoleFinder;
 import com.liferay.portal.service.persistence.RolePersistence;
 import com.liferay.portal.service.persistence.ServiceComponentPersistence;
+import com.liferay.portal.service.persistence.ShardPersistence;
 import com.liferay.portal.service.persistence.SubscriptionPersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserGroupFinder;
@@ -701,22 +704,6 @@ public abstract class LayoutTemplateLocalServiceBaseImpl
 		this.phonePersistence = phonePersistence;
 	}
 
-	public PortalLocalService getPortalLocalService() {
-		return portalLocalService;
-	}
-
-	public void setPortalLocalService(PortalLocalService portalLocalService) {
-		this.portalLocalService = portalLocalService;
-	}
-
-	public PortalService getPortalService() {
-		return portalService;
-	}
-
-	public void setPortalService(PortalService portalService) {
-		this.portalService = portalService;
-	}
-
 	public PluginSettingLocalService getPluginSettingLocalService() {
 		return pluginSettingLocalService;
 	}
@@ -744,6 +731,22 @@ public abstract class LayoutTemplateLocalServiceBaseImpl
 		this.pluginSettingPersistence = pluginSettingPersistence;
 	}
 
+	public PortalLocalService getPortalLocalService() {
+		return portalLocalService;
+	}
+
+	public void setPortalLocalService(PortalLocalService portalLocalService) {
+		this.portalLocalService = portalLocalService;
+	}
+
+	public PortalService getPortalService() {
+		return portalService;
+	}
+
+	public void setPortalService(PortalService portalService) {
+		this.portalService = portalService;
+	}
+
 	public PortletLocalService getPortletLocalService() {
 		return portletLocalService;
 	}
@@ -766,6 +769,24 @@ public abstract class LayoutTemplateLocalServiceBaseImpl
 
 	public void setPortletPersistence(PortletPersistence portletPersistence) {
 		this.portletPersistence = portletPersistence;
+	}
+
+	public PortletItemLocalService getPortletItemLocalService() {
+		return portletItemLocalService;
+	}
+
+	public void setPortletItemLocalService(
+		PortletItemLocalService portletItemLocalService) {
+		this.portletItemLocalService = portletItemLocalService;
+	}
+
+	public PortletItemPersistence getPortletItemPersistence() {
+		return portletItemPersistence;
+	}
+
+	public void setPortletItemPersistence(
+		PortletItemPersistence portletItemPersistence) {
+		this.portletItemPersistence = portletItemPersistence;
 	}
 
 	public PortletPreferencesLocalService getPortletPreferencesLocalService() {
@@ -945,22 +966,28 @@ public abstract class LayoutTemplateLocalServiceBaseImpl
 		this.serviceComponentPersistence = serviceComponentPersistence;
 	}
 
-	public PortletItemLocalService getPortletItemLocalService() {
-		return portletItemLocalService;
+	public ShardLocalService getShardLocalService() {
+		return shardLocalService;
 	}
 
-	public void setPortletItemLocalService(
-		PortletItemLocalService portletItemLocalService) {
-		this.portletItemLocalService = portletItemLocalService;
+	public void setShardLocalService(ShardLocalService shardLocalService) {
+		this.shardLocalService = shardLocalService;
 	}
 
-	public PortletItemPersistence getPortletItemPersistence() {
-		return portletItemPersistence;
+	public ShardService getShardService() {
+		return shardService;
 	}
 
-	public void setPortletItemPersistence(
-		PortletItemPersistence portletItemPersistence) {
-		this.portletItemPersistence = portletItemPersistence;
+	public void setShardService(ShardService shardService) {
+		this.shardService = shardService;
+	}
+
+	public ShardPersistence getShardPersistence() {
+		return shardPersistence;
+	}
+
+	public void setShardPersistence(ShardPersistence shardPersistence) {
+		this.shardPersistence = shardPersistence;
 	}
 
 	public SubscriptionLocalService getSubscriptionLocalService() {
@@ -1316,22 +1343,26 @@ public abstract class LayoutTemplateLocalServiceBaseImpl
 	protected PhoneService phoneService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.PhonePersistence.impl")
 	protected PhonePersistence phonePersistence;
-	@BeanReference(name = "com.liferay.portal.service.PortalLocalService.impl")
-	protected PortalLocalService portalLocalService;
-	@BeanReference(name = "com.liferay.portal.service.PortalService.impl")
-	protected PortalService portalService;
 	@BeanReference(name = "com.liferay.portal.service.PluginSettingLocalService.impl")
 	protected PluginSettingLocalService pluginSettingLocalService;
 	@BeanReference(name = "com.liferay.portal.service.PluginSettingService.impl")
 	protected PluginSettingService pluginSettingService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.PluginSettingPersistence.impl")
 	protected PluginSettingPersistence pluginSettingPersistence;
+	@BeanReference(name = "com.liferay.portal.service.PortalLocalService.impl")
+	protected PortalLocalService portalLocalService;
+	@BeanReference(name = "com.liferay.portal.service.PortalService.impl")
+	protected PortalService portalService;
 	@BeanReference(name = "com.liferay.portal.service.PortletLocalService.impl")
 	protected PortletLocalService portletLocalService;
 	@BeanReference(name = "com.liferay.portal.service.PortletService.impl")
 	protected PortletService portletService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.PortletPersistence.impl")
 	protected PortletPersistence portletPersistence;
+	@BeanReference(name = "com.liferay.portal.service.PortletItemLocalService.impl")
+	protected PortletItemLocalService portletItemLocalService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.PortletItemPersistence.impl")
+	protected PortletItemPersistence portletItemPersistence;
 	@BeanReference(name = "com.liferay.portal.service.PortletPreferencesLocalService.impl")
 	protected PortletPreferencesLocalService portletPreferencesLocalService;
 	@BeanReference(name = "com.liferay.portal.service.PortletPreferencesService.impl")
@@ -1374,10 +1405,12 @@ public abstract class LayoutTemplateLocalServiceBaseImpl
 	protected ServiceComponentLocalService serviceComponentLocalService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ServiceComponentPersistence.impl")
 	protected ServiceComponentPersistence serviceComponentPersistence;
-	@BeanReference(name = "com.liferay.portal.service.PortletItemLocalService.impl")
-	protected PortletItemLocalService portletItemLocalService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.PortletItemPersistence.impl")
-	protected PortletItemPersistence portletItemPersistence;
+	@BeanReference(name = "com.liferay.portal.service.ShardLocalService.impl")
+	protected ShardLocalService shardLocalService;
+	@BeanReference(name = "com.liferay.portal.service.ShardService.impl")
+	protected ShardService shardService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ShardPersistence.impl")
+	protected ShardPersistence shardPersistence;
 	@BeanReference(name = "com.liferay.portal.service.SubscriptionLocalService.impl")
 	protected SubscriptionLocalService subscriptionLocalService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.SubscriptionPersistence.impl")

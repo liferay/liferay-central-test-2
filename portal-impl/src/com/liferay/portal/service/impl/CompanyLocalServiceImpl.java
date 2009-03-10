@@ -52,6 +52,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
+import com.liferay.portal.model.Shard;
 import com.liferay.portal.model.User;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.service.ServiceContext;
@@ -83,7 +84,8 @@ import javax.portlet.PortletPreferences;
  */
 public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
-	public Company addCompany(String webId, String virtualHost, String mx)
+	public Company addCompany(
+			String webId, String virtualHost, String mx, String shardName)
 		throws PortalException, SystemException {
 
 		// Company
@@ -99,7 +101,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		validate(webId, virtualHost, mx);
 
-		Company company = checkCompany(webId, mx);
+		Company company = checkCompany(webId, mx, shardName);
 
 		company.setVirtualHost(virtualHost);
 		company.setMx(mx);
@@ -118,6 +120,12 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	}
 
 	public Company checkCompany(String webId, String mx)
+		throws PortalException, SystemException {
+
+		return checkCompany(webId, mx, PropsValues.SHARD_DEFAULT);
+	}
+
+	public Company checkCompany(String webId, String mx, String shardName)
 		throws PortalException, SystemException {
 
 		// Company
@@ -160,6 +168,14 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			company.setMx(mx);
 
 			companyPersistence.update(company, false);
+
+			// Update shard data before continuing
+
+			Shard shard = shardPersistence.findByName(shardName);
+
+			shardPersistence.addCompany(shard.getPrimaryKey(), companyId);
+
+			// Continue with remaining company data
 
 			updateCompany(
 				companyId, virtualHost, mx, homeURL, name, legalName, legalId,
@@ -405,6 +421,12 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return companyPersistence.findByWebId(webId);
+	}
+
+	public String getShardNameByCompanyId(long companyId)
+		throws PortalException, SystemException {
+
+		return companyPersistence.getShards(companyId).get(0).getName();
 	}
 
 	public Hits search(
