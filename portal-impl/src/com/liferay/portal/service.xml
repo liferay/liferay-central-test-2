@@ -348,7 +348,7 @@
 			<finder-column name="companyId" />
 			<finder-column name="friendlyURL" />
 		</finder>
-		<finder name="C_C_C" return-type="Group">
+		<finder name="C_C_C" return-type="Group" unique="true">
 			<finder-column name="companyId" />
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
@@ -1212,7 +1212,7 @@
 			<finder-column name="companyId" />
 			<finder-column name="name" />
 		</finder>
-		<finder name="C_C_C" return-type="Role">
+		<finder name="C_C_C" return-type="Role" unique="true">
 			<finder-column name="companyId" />
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />

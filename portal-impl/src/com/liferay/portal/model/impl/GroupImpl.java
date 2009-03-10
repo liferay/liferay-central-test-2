@@ -60,78 +60,23 @@ public class GroupImpl extends GroupModelImpl implements Group {
 	}
 
 	public boolean isCommunity() {
-		long classNameId = getClassNameId();
-		long classPK = getClassPK();
-
-		if ((classNameId <= 0) && (classPK <= 0)) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return hasClassName(Group.class);
 	}
 
 	public boolean isLayout() {
-		long classNameId = getClassNameId();
-		long classPK = getClassPK();
-
-		if ((classNameId > 0) && (classPK > 0)) {
-			long layoutClassNameId = PortalUtil.getClassNameId(
-				Layout.class);
-
-			if (classNameId == layoutClassNameId) {
-				return true;
-			}
-		}
-
-		return false;
+		return hasClassName(Layout.class);
 	}
 
 	public boolean isOrganization() {
-		long classNameId = getClassNameId();
-		long classPK = getClassPK();
-
-		if ((classNameId > 0) && (classPK > 0)) {
-			long organizationClassNameId = PortalUtil.getClassNameId(
-				Organization.class);
-
-			if (classNameId == organizationClassNameId) {
-				return true;
-			}
-		}
-
-		return false;
+		return hasClassName(Organization.class);
 	}
 
 	public boolean isUser() {
-		long classNameId = getClassNameId();
-		long classPK = getClassPK();
-
-		if ((classNameId > 0) && (classPK > 0)) {
-			long userClassNameId = PortalUtil.getClassNameId(User.class);
-
-			if (classNameId == userClassNameId) {
-				return true;
-			}
-		}
-
-		return false;
+		return hasClassName(User.class);
 	}
 
 	public boolean isUserGroup() {
-		long classNameId = getClassNameId();
-		long classPK = getClassPK();
-
-		if ((classNameId > 0) && (classPK > 0)) {
-			long userGroupClassNameId = PortalUtil.getClassNameId(
-				UserGroup.class);
-
-			if (classNameId == userGroupClassNameId) {
-				return true;
-			}
-		}
-
-		return false;
+		return hasClassName(UserGroup.class);
 	}
 
 	public Group getLiveGroup() {
@@ -396,6 +341,17 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		}
 
 		return LayoutConstants.DEFAULT_PLID;
+	}
+
+	protected boolean hasClassName(Class<?> classObj) {
+		long classNameId = getClassNameId();
+
+		if (classNameId == PortalUtil.getClassNameId(classObj)) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(GroupImpl.class);

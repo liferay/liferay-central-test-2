@@ -110,7 +110,7 @@ create index IX_886B68D1 on ExpandoValue (tableId, columnId, classNameId, classP
 create unique index IX_B5984EDA on ExpandoValue (tableId, columnId, rowId_);
 create index IX_B71E92D5 on ExpandoValue (tableId, rowId_);
 
-create index IX_D0D5E397 on Group_ (companyId, classNameId, classPK);
+create unique index IX_D0D5E397 on Group_ (companyId, classNameId, classPK);
 create unique index IX_5BDDB872 on Group_ (companyId, friendlyURL);
 create unique index IX_5AA68501 on Group_ (companyId, name);
 create index IX_16218A38 on Group_ (liveGroupId);
@@ -326,7 +326,7 @@ create index IX_2578FBD3 on Resource_ (codeId);
 create unique index IX_67DE7856 on Resource_ (codeId, primKey);
 
 create index IX_449A10B9 on Role_ (companyId);
-create index IX_A88E424E on Role_ (companyId, classNameId, classPK);
+create unique index IX_A88E424E on Role_ (companyId, classNameId, classPK);
 create unique index IX_EBC931B8 on Role_ (companyId, name);
 
 create index IX_7A3619C6 on Roles_Permissions (permissionId);

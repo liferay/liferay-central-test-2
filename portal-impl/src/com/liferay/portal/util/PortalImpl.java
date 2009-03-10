@@ -75,6 +75,7 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PublicRenderParameter;
+import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
@@ -3489,7 +3490,9 @@ public class PortalImpl implements Portal {
 
 	private void _initCustomSQL() {
 		_customSqlClassNames = new String[] {
+			"[$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.GROUP$]",
 			"[$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ORGANIZATION$]",
+			"[$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ROLE$]",
 			"[$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.USER$]",
 			"[$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.USERGROUP$]",
 			"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.BLOGS.MODEL.BLOGSENTRY$]",
@@ -3508,7 +3511,9 @@ public class PortalImpl implements Portal {
 		DBUtil dbUtil = DBUtil.getInstance();
 
 		_customSqlClassNameIds = new String[] {
+			String.valueOf(PortalUtil.getClassNameId(Group.class)),
 			String.valueOf(PortalUtil.getClassNameId(Organization.class)),
+			String.valueOf(PortalUtil.getClassNameId(Role.class)),
 			String.valueOf(PortalUtil.getClassNameId(User.class)),
 			String.valueOf(PortalUtil.getClassNameId(UserGroup.class)),
 			String.valueOf(PortalUtil.getClassNameId(BlogsEntry.class)),

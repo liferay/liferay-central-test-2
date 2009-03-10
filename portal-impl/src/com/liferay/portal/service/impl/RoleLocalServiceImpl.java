@@ -30,6 +30,7 @@ import com.liferay.portal.RoleNameException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -74,11 +75,17 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		// Role
 
+		className = GetterUtil.getString(className);
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		validate(0, companyId, name);
 
 		long roleId = counterLocalService.increment();
+
+		if ((classNameId <= 0) || className.equals(Role.class.getName())) {
+			classNameId = PortalUtil.getClassNameId(Role.class);
+			classPK = roleId;
+		}
 
 		Role role = rolePersistence.create(roleId);
 
@@ -205,7 +212,10 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		// Resources
 
-		if ((role.getClassNameId() <= 0) && (role.getClassPK() <= 0)) {
+		String className = role.getClassName();
+		long classNameId = role.getClassNameId();
+
+		if ((classNameId <= 0) || className.equals(Role.class.getName())) {
 			resourceLocalService.deleteResource(
 				role.getCompanyId(), Role.class.getName(),
 				ResourceConstants.SCOPE_INDIVIDUAL, role.getRoleId());

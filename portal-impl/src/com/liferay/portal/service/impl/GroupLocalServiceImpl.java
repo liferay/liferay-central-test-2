@@ -130,8 +130,11 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			user.getCompanyId(), groupId, classNameId, classPK, friendlyName,
 			friendlyURL);
 
-		if ((classNameId <= 0) || (classPK <= 0)) {
+		if ((classNameId <= 0) || className.equals(Group.class.getName())) {
 			validateName(groupId, user.getCompanyId(), name);
+
+			classNameId = PortalUtil.getClassNameId(Group.class);
+			classPK = groupId;
 		}
 		else {
 			name = String.valueOf(classPK);
@@ -683,13 +686,14 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		Group group = groupPersistence.findByPrimaryKey(groupId);
 
+		String className = group.getClassName();
 		long classNameId = group.getClassNameId();
 		long classPK = group.getClassPK();
 		friendlyURL = getFriendlyURL(
 			group.getCompanyId(), groupId, classNameId, classPK,
 			StringPool.BLANK, friendlyURL);
 
-		if ((classNameId <= 0) || (classPK <= 0)) {
+		if ((classNameId <= 0) || className.equals(Group.class.getName())) {
 			validateName(group.getGroupId(), group.getCompanyId(), name);
 		}
 		else {
@@ -1058,9 +1062,11 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		String groupIdFriendlyURL = friendlyURL.substring(1);
 
 		if (Validator.isNumber(groupIdFriendlyURL)) {
-			if (((classPK > 0) &&
+			long groupClassNameId = PortalUtil.getClassNameId(Group.class);
+
+			if (((classNameId != groupClassNameId) &&
 				 (!groupIdFriendlyURL.equals(String.valueOf(classPK)))) ||
-				((classPK == 0) &&
+				((classNameId == groupClassNameId) &&
 				 (!groupIdFriendlyURL.equals(String.valueOf(groupId))))) {
 
 				GroupFriendlyURLException gfurle =
@@ -1078,8 +1084,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		User user = userPersistence.fetchByC_SN(companyId, screenName);
 
 		if (user != null) {
-			long userClassNameId = PortalUtil.getClassNameId(
-				User.class.getName());
+			long userClassNameId = PortalUtil.getClassNameId(User.class);
 
 			if ((classNameId == userClassNameId) &&
 				(classPK == user.getUserId())) {

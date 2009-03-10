@@ -20,50 +20,44 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade;
+package com.liferay.portal.upgrade.v5_2_3;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.upgrade.v5_2_3.UpgradeBookmarks;
-import com.liferay.portal.upgrade.v5_2_3.UpgradeDocumentLibrary;
-import com.liferay.portal.upgrade.v5_2_3.UpgradeGroup;
-import com.liferay.portal.upgrade.v5_2_3.UpgradeResource;
-import com.liferay.portal.upgrade.v5_2_3.UpgradeResourceCode;
-import com.liferay.portal.upgrade.v5_2_3.UpgradeRole;
-import com.liferay.portal.upgrade.v5_2_3.UpgradeSchema;
-import com.liferay.portal.upgrade.v5_2_3.UpgradeSoftwareCatalog;
-import com.liferay.portal.upgrade.v5_2_3.UpgradeTags;
-import com.liferay.portal.upgrade.v5_2_3.UpgradeWiki;
+import com.liferay.portal.model.ClassName;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.service.ClassNameLocalServiceUtil;
+import com.liferay.portal.upgrade.UpgradeException;
+import com.liferay.portal.upgrade.UpgradeProcess;
 
 /**
- * <a href="UpgradeProcess_5_2_3.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeRole.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class UpgradeProcess_5_2_3 extends UpgradeProcess {
-
-	public int getThreshold() {
-		return ReleaseInfo.RELEASE_5_2_3_BUILD_NUMBER;
-	}
+public class UpgradeRole extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
 
-		upgrade(UpgradeSchema.class);
-		upgrade(UpgradeBookmarks.class);
-		upgrade(UpgradeDocumentLibrary.class);
-		upgrade(UpgradeGroup.class);
-		upgrade(UpgradeResource.class);
-		upgrade(UpgradeResourceCode.class);
-		upgrade(UpgradeRole.class);
-		upgrade(UpgradeSoftwareCatalog.class);
-		upgrade(UpgradeTags.class);
-		upgrade(UpgradeWiki.class);
-		upgrade(DropIndexes.class);
+		try {
+			doUpgrade();
+		}
+		catch (Exception e) {
+			throw new UpgradeException(e);
+		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(UpgradeProcess_5_2_3.class);
+	protected void doUpgrade() throws Exception {
+		ClassName className = ClassNameLocalServiceUtil.getClassName(
+			Role.class.getName());
+
+		runSQL(
+			"update Role_ set classNameId = " + className.getClassNameId() +
+				", classPK = roleId where classNameId = 0");
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(UpgradeRole.class);
 
 }

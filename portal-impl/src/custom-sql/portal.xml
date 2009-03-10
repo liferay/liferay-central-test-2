@@ -24,8 +24,7 @@
 			WHERE
 				[$WHERE$]
 				(Group_.companyId = ?) AND
-				(Group_.classNameId = 0) AND
-				(Group_.classPK = 0) AND
+				(Group_.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.GROUP$]) AND
 				(Group_.liveGroupId = 0) AND
 				(Group_.name != 'Control Panel') AND
 				(lower(Group_.name) LIKE ? OR ? IS NULL) AND
@@ -64,8 +63,7 @@
 			WHERE
 				[$WHERE$]
 				(Group_.companyId = ?) AND
-				(Group_.classNameId = 0) AND
-				(Group_.classPK = 0) AND
+				(Group_.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.GROUP$]) AND
 				(Group_.liveGroupId = 0) AND
 				(Group_.name != 'Control Panel') AND
 				(lower(Group_.name) LIKE ? OR ? IS NULL) AND
@@ -787,8 +785,7 @@
 			WHERE
 				[$WHERE$]
 				(Role_.companyId = ?) AND
-				(Role_.classNameId = 0) AND
-				(Role_.classPK = 0) AND
+				(Role_.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ROLE$]) AND
 				(lower(Role_.name) LIKE ? OR ? IS NULL) AND
 				(lower(Role_.description) LIKE ? OR ? IS NULL) AND (Role_.type_ = ?)
 		]]>
@@ -856,8 +853,7 @@
 			WHERE
 				[$WHERE$]
 				(Role_.companyId = ?) AND
-				(Role_.classNameId = 0) AND
-				(Role_.classPK = 0) AND
+				(Role_.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ROLE$]) AND
 				(lower(Role_.name) LIKE ? OR ? IS NULL) AND
 				(lower(Role_.description) LIKE ? OR ? IS NULL) AND (Role_.type_ = ?)
 			ORDER BY
