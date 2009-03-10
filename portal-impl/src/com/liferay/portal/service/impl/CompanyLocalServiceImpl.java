@@ -357,16 +357,18 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
 
-		if (company.getKeyObj() == null) {
+		if ((Validator.isNull(company.getKey())) &&
+			(company.getKeyObj() == null)) {
+
 			try {
 				company.setKeyObj(Encryptor.generateKey());
 			}
 			catch (EncryptorException ee) {
 				throw new SystemException(ee);
 			}
-		}
 
-		companyPersistence.update(company, false);
+			companyPersistence.update(company, false);
+		}
 	}
 
 	public List<Company> getCompanies() throws SystemException {
