@@ -126,6 +126,7 @@ String siteminderUserHeader = ParamUtil.getString(request, "settings(" + PropsKe
 				<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.CAS_IMPORT_FROM_LDAP %>)"><liferay-ui:message key="import-cas-users-from-ldap" /></label>
 
 				<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.CAS_IMPORT_FROM_LDAP + ")" %>' defaultValue="<%= casImportFromLdap %>" />
+
 				<liferay-ui:icon-help message="import-cas-users-from-ldap-help" />
 			</div>
 
@@ -257,6 +258,7 @@ String siteminderUserHeader = ParamUtil.getString(request, "settings(" + PropsKe
 					<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.SITEMINDER_IMPORT_FROM_LDAP %>)"><liferay-ui:message key="import-siteminder-users-from-ldap" /></label>
 
 					<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.SITEMINDER_IMPORT_FROM_LDAP + ")" %>' defaultValue="<%= siteminderImportFromLdap %>" />
+
 					<liferay-ui:icon-help message="import-siteminder-users-from-ldap-help" />
 				</div>
 
