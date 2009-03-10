@@ -151,7 +151,7 @@ if (!StringUtil.contains(tabs2Names, tabs2)) {
 				String publicVirtualHost = ParamUtil.getString(request, "publicVirtualHost", BeanParamUtil.getString(publicLayoutSet, request, "virtualHost"));
 				%>
 
-				<input name="<portlet:namespace />publicVirtualHost" size="50" type="text" value="<%= publicVirtualHost %>" />
+				<input name="<portlet:namespace />publicVirtualHost" size="50" type="text" value="<%= HtmlUtil.escape(publicVirtualHost) %>" />
 			</td>
 		</tr>
 		<tr>
@@ -166,7 +166,7 @@ if (!StringUtil.contains(tabs2Names, tabs2)) {
 				String privateVirtualHost = ParamUtil.getString(request, "privateVirtualHost", BeanParamUtil.getString(privateLayoutSet, request, "virtualHost"));
 				%>
 
-				<input name="<portlet:namespace />privateVirtualHost" size="50" type="text" value="<%= privateVirtualHost %>" />
+				<input name="<portlet:namespace />privateVirtualHost" size="50" type="text" value="<%= HtmlUtil.escape(privateVirtualHost) %>" />
 			</td>
 		</tr>
 		</table>
@@ -191,7 +191,7 @@ if (!StringUtil.contains(tabs2Names, tabs2)) {
 					String friendlyURL = BeanParamUtil.getString(liveGroup, request, "friendlyURL");
 					%>
 
-					<input name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= friendlyURL %>" />
+					<input name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= HtmlUtil.escape(friendlyURL) %>" />
 				</td>
 			</tr>
 			</table>
@@ -217,7 +217,7 @@ if (!StringUtil.contains(tabs2Names, tabs2)) {
 					String stagingPublicVirtualHost = ParamUtil.getString(request, "stagingPublicVirtualHost", stagingPublicLayoutSet.getVirtualHost());
 					%>
 
-					<input name="<portlet:namespace />stagingPublicVirtualHost" size="50" type="text" value="<%= stagingPublicVirtualHost %>" />
+					<input name="<portlet:namespace />stagingPublicVirtualHost" size="50" type="text" value="<%= HtmlUtil.escape(stagingPublicVirtualHost) %>" />
 				</td>
 			</tr>
 			<tr>
@@ -232,7 +232,7 @@ if (!StringUtil.contains(tabs2Names, tabs2)) {
 					String stagingPrivateVirtualHost = ParamUtil.getString(request, "stagingPrivateVirtualHost", stagingPrivateLayoutSet.getVirtualHost());
 					%>
 
-					<input name="<portlet:namespace />stagingPrivateVirtualHost" size="50" type="text" value="<%= stagingPrivateVirtualHost %>" />
+					<input name="<portlet:namespace />stagingPrivateVirtualHost" size="50" type="text" value="<%= HtmlUtil.escape(stagingPrivateVirtualHost) %>" />
 				</td>
 			</tr>
 			</table>
@@ -251,7 +251,7 @@ if (!StringUtil.contains(tabs2Names, tabs2)) {
 						String friendlyURL = ParamUtil.getString(request, "stagingFriendlyURL", stagingGroup.getFriendlyURL());
 						%>
 
-						<input name="<portlet:namespace />stagingFriendlyURL" size="30" type="text" value="<%= friendlyURL %>" />
+						<input name="<portlet:namespace />stagingFriendlyURL" size="30" type="text" value="<%= HtmlUtil.escape(friendlyURL) %>" />
 					</td>
 				</tr>
 				</table>
@@ -305,7 +305,7 @@ if (!StringUtil.contains(tabs2Names, tabs2)) {
 				String googleAnalyticsId = PropertiesParamUtil.getString(groupTypeSettings, request, "googleAnalyticsId");
 				%>
 
-				<input name="<portlet:namespace />googleAnalyticsId" size="30" type="text" value="<%= googleAnalyticsId %>" />
+				<input name="<portlet:namespace />googleAnalyticsId" size="30" type="text" value="<%= HtmlUtil.escape(googleAnalyticsId) %>" />
 			</td>
 		</tr>
 		</table>

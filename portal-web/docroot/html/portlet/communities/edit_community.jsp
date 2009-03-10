@@ -46,7 +46,7 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
-<input name="<portlet:namespace />friendlyURL" type="hidden" value="<%= friendlyURL %>" />
+<input name="<portlet:namespace />friendlyURL" type="hidden" value="<%= HtmlUtil.escape(friendlyURL) %>" />
 
 <liferay-util:include page="/html/portlet/communities/toolbar.jsp">
 	<liferay-util:param name="toolbarItem" value='<%= (group == null) ? "add" : "view-all" %>' />

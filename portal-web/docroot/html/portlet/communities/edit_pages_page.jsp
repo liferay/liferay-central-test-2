@@ -230,7 +230,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 
 					<%= friendlyURLBase.toString() %>
 
-					<input name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= friendlyURL %>" />
+					<input name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= HtmlUtil.escape(friendlyURL) %>" />
 				</td>
 			</tr>
 			<tr>

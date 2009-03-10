@@ -70,9 +70,9 @@ breadcrumbsURL.setParameter("tabs1", tabs1);
 breadcrumbsURL.setParameter("redirect", redirect);
 breadcrumbsURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
-String breadcrumbs = "<a href=\"" + redirect + "\">" + LanguageUtil.get(pageContext, group.isOrganization() ? "organizations" : "communities") + "</a> &raquo; ";
+String breadcrumbs = "<a href=\"" + HtmlUtil.escape(redirect) + "\">" + LanguageUtil.get(pageContext, group.isOrganization() ? "organizations" : "communities") + "</a> &raquo; ";
 
-breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + groupName + "</a>";
+breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + HtmlUtil.escape(groupName) + "</a>";
 
 if (role != null) {
 	breadcrumbsURL.setParameter("roleId", String.valueOf(roleId));

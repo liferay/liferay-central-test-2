@@ -87,7 +87,7 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 				<liferay-ui:message key="name" />
 			</td>
 			<td>
-				<input name="<portlet:namespace />name_<%= defaultLanguageId %>" size="30" type="text" value="<%= name %>" />
+				<input name="<portlet:namespace />name_<%= defaultLanguageId %>" size="30" type="text" value="<%= HtmlUtil.escape(name) %>" />
 			</td>
 		</tr>
 		<tr>
