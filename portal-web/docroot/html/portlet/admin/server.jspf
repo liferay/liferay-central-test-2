@@ -53,7 +53,7 @@ numberFormat.setMinimumIntegerDigits(2);
 	</c:when>
 	<c:otherwise>
 		<liferay-ui:tabs
-			names="resources,log-levels,system-properties,portal-properties,shutdown,OpenOffice,mail"
+			names="resources,log-levels,system-properties,portal-properties,shutdown,mail,OpenOffice"
 			param="tabs2"
 			url="<%= portletURL.toString() %>"
 		/>
@@ -328,7 +328,7 @@ numberFormat.setMinimumIntegerDigits(2);
 						<liferay-ui:message key="enabled" />
 					</td>
 					<td>
-						<liferay-ui:input-checkbox param="enabled" defaultValue="<%= PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED, PropsValues.OPENOFFICE_SERVER_ENABLED) %>" />
+						<liferay-ui:input-checkbox param="enabled" defaultValue="<%= PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -346,40 +346,41 @@ numberFormat.setMinimumIntegerDigits(2);
 				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveServer('updateOpenOffice');" />
 			</c:when>
 			<c:when test='<%= tabs2.equals("mail") %>'>
-				<liferay-ui:message key="outgoing-smtp-server" />
+				<liferay-ui:message key="configure-the-mail-server-settings" />
 
 				<br /><br />
 
 				<table class="lfr-table">
 				<tr>
 					<td>
-						<liferay-ui:message key="host" />
+						<liferay-ui:message key="incoming-pop-server" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />host" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_SMTP_HOST) %>" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="port" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />port" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_SMTP_PORT) %>" />
-					</td>
-				<tr>
-					<td>
-						<liferay-ui:message key="authorization-required" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />auth" type="checkbox" <%=PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_SMTP_AUTH).equals("true") ? "checked=\"yes\"" : "" %> value="true" />
+						<input class="lfr-input-text" name="<portlet:namespace />pop3Host" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_POP3_HOST) %>" />
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<liferay-ui:message key="username" />
+						<liferay-ui:message key="incoming-port" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />username" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_SMTP_USER) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />pop3Port" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_POP3_PORT) %>" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="use-a-secure-network-connection" />
+					</td>
+					<td>
+						<liferay-ui:input-checkbox param="pop3Secure" defaultValue='<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_STORE_PROTOCOL).equals("pop3s") %>' />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="user-name" />
+					</td>
+					<td>
+						<input class="lfr-input-text" name="<portlet:namespace />pop3User" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_SMTP_USER) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -387,15 +388,69 @@ numberFormat.setMinimumIntegerDigits(2);
 						<liferay-ui:message key="password" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />password" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_SMTP_PASSWORD) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />pop3Password" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_SMTP_PASSWORD) %>" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<br />
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<liferay-ui:message key="require-ssl" />
+						<liferay-ui:message key="outgoing-smtp-server" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />require_ssl" type="checkbox" <%=PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_SMTP_STARTTLS_ENABLE, "false").equals("true") ? "checked=\"yes\"" : "" %> value="true" />
+						<input class="lfr-input-text" name="<portlet:namespace />smtpHost" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_SMTP_HOST) %>" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="outgoing-port" />
+					</td>
+					<td>
+						<input class="lfr-input-text" name="<portlet:namespace />smtpPort" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_SMTP_PORT) %>" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="use-a-secure-network-connection" />
+					</td>
+					<td>
+						<liferay-ui:input-checkbox param="smtpSecure" defaultValue='<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_TRANSPORT_PROTOCOL).equals("smtps") %>' />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="user-name" />
+					</td>
+					<td>
+						<input class="lfr-input-text" name="<portlet:namespace />smtpUser" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_SMTP_USER) %>" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="password" />
+					</td>
+					<td>
+						<input class="lfr-input-text" name="<portlet:namespace />smtpPassword" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_SMTP_PASSWORD) %>" />
+					</td>
+				</tr>
+				</table>
+
+				<br />
+
+				<liferay-ui:message key="manually-specify-additional-javamail-properties-to-override-the-above-configuration" />
+
+				<br /><br />
+
+				<table class="lfr-table">
+				<tr>
+					<td>
+						<liferay-ui:message key="advanced-properties" />
+					</td>
+					<td>
+						<textarea class="lfr-textarea" name="<portlet:namespace />advancedProperties"><%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_ADVANCED_PROPERTIES, StringPool.BLANK) %></textarea>
 					</td>
 				</tr>
 				</table>

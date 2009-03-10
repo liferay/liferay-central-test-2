@@ -77,20 +77,26 @@ public class MailEngine {
 	}
 
 	public static Session getSession(boolean cache) {
+		Session session = null;
+
 		try {
-			Session session = MailServiceUtil.getMailSession("mail.session.");
-
-			if (_log.isDebugEnabled()) {
-				session.setDebug(true);
-
-				session.getProperties().list(System.out);
-			}
-
-			return session;
+			session = MailServiceUtil.getSession();
 		}
 		catch (SystemException se) {
-			return InfrastructureUtil.getMailSession();
+			if (_log.isWarnEnabled()) {
+				_log.warn(se, se);
+			}
+
+			session = InfrastructureUtil.getMailSession();
 		}
+
+		if (_log.isDebugEnabled()) {
+			session.setDebug(true);
+
+			session.getProperties().list(System.out);
+		}
+
+		return session;
 	}
 
 	public static Session getSession(Account account) {
@@ -427,8 +433,10 @@ public class MailEngine {
 	}
 
 	private static String _getSMTPProperty(Session session, String suffix) {
-		if (session.getProperty(
-				"mail.transport.protocol").equals(Account.PROTOCOL_SMTPS)) {
+		String protocol = GetterUtil.getString(
+			session.getProperty("mail.transport.protocol"));
+
+		if (protocol.equals(Account.PROTOCOL_SMTPS)) {
 			return session.getProperty("mail.smtps." + suffix);
 		}
 		else {

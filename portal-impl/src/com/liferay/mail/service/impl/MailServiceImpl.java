@@ -25,8 +25,6 @@ package com.liferay.mail.service.impl;
 import com.liferay.mail.model.Filter;
 import com.liferay.mail.service.MailService;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.BeanLocator;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.Account;
@@ -37,13 +35,17 @@ import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 
+import java.io.IOException;
+
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.Session;
@@ -110,6 +112,10 @@ public class MailServiceImpl implements MailService {
 		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
 	}
 
+	public void clearSession() {
+		_session = null;
+	}
+
 	public void deleteEmailAddress(long companyId, long userId) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("deleteEmailAddress");
@@ -134,130 +140,127 @@ public class MailServiceImpl implements MailService {
 		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
 	}
 
-	public Session getMailSession(String _propertyPrefix)
-			throws SystemException {
-		Session session = InfrastructureUtil.getMailSession();
-		Properties properties = PropsUtil.getProperties(
-			_propertyPrefix, true);
-
-		if (Validator.isNotNull(PrefsPropsUtil.getString(
-				PropsKeys.MAIL_SESSION_MAIL_SMTP_HOST))) {
-			if (PrefsPropsUtil.getString(
-					PropsKeys.MAIL_SESSION_MAIL_SMTP_STARTTLS_ENABLE,
-					"false").equals("true")) {
-					properties.setProperty("mail.transport.protocol",
-							Account.PROTOCOL_SMTPS);
-				if (Validator.isNotNull(
-						PrefsPropsUtil.getString(
-						PropsKeys.MAIL_SESSION_MAIL_SMTP_AUTH))) {
-					properties.setProperty(
-						"mail.smtps.auth",
-						PrefsPropsUtil.getString(
-						PropsKeys.MAIL_SESSION_MAIL_SMTP_AUTH));
-				}
-				if (Validator.isNotNull(
-						PrefsPropsUtil.getString(
-						PropsKeys.MAIL_SESSION_MAIL_SMTP_HOST))) {
-					properties.setProperty(
-						"mail.smtps.host",
-						PrefsPropsUtil.getString(
-						PropsKeys.MAIL_SESSION_MAIL_SMTP_HOST));
-				}
-				if (Validator.isNotNull(
-						PrefsPropsUtil.getString(
-						PropsKeys.MAIL_SESSION_MAIL_SMTP_PASSWORD))) {
-					properties.setProperty(
-						"mail.smtps.password",
-						PrefsPropsUtil.getString(
-						PropsKeys.MAIL_SESSION_MAIL_SMTP_PASSWORD));
-				}
-				if (Validator.isNotNull(
-						PrefsPropsUtil.getString(
-						PropsKeys.MAIL_SESSION_MAIL_SMTP_PORT))) {
-					properties.setProperty(
-						"mail.smtps.port",
-						PrefsPropsUtil.getString(
-						PropsKeys.MAIL_SESSION_MAIL_SMTP_PORT));
-				}
-				if (Validator.isNotNull(
-						PrefsPropsUtil.getString(
-						PropsKeys.MAIL_SESSION_MAIL_SMTP_STARTTLS_ENABLE))) {
-					properties.setProperty(
-						"mail.smtps.starttls.enable",
-						PrefsPropsUtil.getString(
-							PropsKeys.MAIL_SESSION_MAIL_SMTP_STARTTLS_ENABLE));
-				}
-				if (Validator.isNotNull(
-						PrefsPropsUtil.getString(
-						PropsKeys.MAIL_SESSION_MAIL_SMTP_USER))) {
-					properties.setProperty(
-						"mail.smtps.user",
-							PrefsPropsUtil.getString(
-							PropsKeys.MAIL_SESSION_MAIL_SMTP_USER));
-				}
-			}
-			else {
-				properties.setProperty(
-						"mail.transport.protocol", Account.PROTOCOL_SMTP);
-				if (Validator.isNotNull(
-						PrefsPropsUtil.getString(
-						PropsKeys.MAIL_SESSION_MAIL_SMTP_AUTH))) {
-					properties.setProperty(
-						"mail.smtp.auth",
-						PrefsPropsUtil.getString(
-							PropsKeys.MAIL_SESSION_MAIL_SMTP_AUTH));
-				}
-				if (Validator.isNotNull(
-						PrefsPropsUtil.getString(
-						PropsKeys.MAIL_SESSION_MAIL_SMTP_HOST))) {
-					properties.setProperty(
-						"mail.smtp.host",
-						PrefsPropsUtil.getString(
-							PropsKeys.MAIL_SESSION_MAIL_SMTP_HOST));
-				}
-				if (Validator.isNotNull(
-						PrefsPropsUtil.getString(
-						PropsKeys.MAIL_SESSION_MAIL_SMTP_PASSWORD))) {
-					properties.setProperty(
-						"mail.smtp.password",
-							PrefsPropsUtil.getString(
-							PropsKeys.MAIL_SESSION_MAIL_SMTP_PASSWORD));
-				}
-				if (Validator.isNotNull(
-						PrefsPropsUtil.getString(
-						PropsKeys.MAIL_SESSION_MAIL_SMTP_PORT))) {
-					properties.setProperty(
-						"mail.smtp.port",
-						PrefsPropsUtil.getString(
-						PropsKeys.MAIL_SESSION_MAIL_SMTP_PORT));
-				}
-				if (Validator.isNotNull(
-						PrefsPropsUtil.getString(
-						PropsKeys.MAIL_SESSION_MAIL_SMTP_STARTTLS_ENABLE))) {
-					properties.setProperty(
-						"mail.smtp.starttls.enable",
-						PrefsPropsUtil.getString(
-							PropsKeys.MAIL_SESSION_MAIL_SMTP_STARTTLS_ENABLE));
-				}
-				if (Validator.isNotNull(
-						PrefsPropsUtil.getString(
-						PropsKeys.MAIL_SESSION_MAIL_SMTP_USER))) {
-					properties.setProperty(
-						"mail.smtp.user",
-							PrefsPropsUtil.getString(
-							PropsKeys.MAIL_SESSION_MAIL_SMTP_USER));
-				}
-			}
-			session = Session.getInstance(properties);
-
-			BeanLocator locator = PortalBeanLocatorUtil.getBeanLocator();
-			InfrastructureUtil infrastructureUtil =
-				(InfrastructureUtil)locator.locate(
-				InfrastructureUtil.class.getName());
-			infrastructureUtil.setMailSession(session);
+	public Session getSession() throws SystemException {
+		if (_session != null) {
+			return _session;
 		}
 
-		return session;
+		Session session = InfrastructureUtil.getMailSession();
+
+		if (!PrefsPropsUtil.getBoolean(PropsKeys.MAIL_SESSION_MAIL)) {
+			_session = session;
+
+			return _session;
+		}
+
+		String advancedPropertiesString = PrefsPropsUtil.getString(
+			PropsKeys.MAIL_SESSION_MAIL_ADVANCED_PROPERTIES,
+			PropsValues.MAIL_SESSION_MAIL_ADVANCED_PROPERTIES);
+		String pop3Host = PrefsPropsUtil.getString(
+			PropsKeys.MAIL_SESSION_MAIL_POP3_HOST,
+			PropsValues.MAIL_SESSION_MAIL_POP3_HOST);
+		String pop3Password = PrefsPropsUtil.getString(
+			PropsKeys.MAIL_SESSION_MAIL_POP3_PASSWORD,
+			PropsValues.MAIL_SESSION_MAIL_POP3_PASSWORD);
+		int pop3Port = PrefsPropsUtil.getInteger(
+			PropsKeys.MAIL_SESSION_MAIL_POP3_PORT,
+			PropsValues.MAIL_SESSION_MAIL_POP3_PORT);
+		String pop3User = PrefsPropsUtil.getString(
+			PropsKeys.MAIL_SESSION_MAIL_POP3_USER,
+			PropsValues.MAIL_SESSION_MAIL_POP3_USER);
+		String smtpHost = PrefsPropsUtil.getString(
+			PropsKeys.MAIL_SESSION_MAIL_SMTP_HOST,
+			PropsValues.MAIL_SESSION_MAIL_SMTP_HOST);
+		String smtpPassword = PrefsPropsUtil.getString(
+			PropsKeys.MAIL_SESSION_MAIL_SMTP_PASSWORD,
+			PropsValues.MAIL_SESSION_MAIL_SMTP_PASSWORD);
+		int smtpPort = PrefsPropsUtil.getInteger(
+			PropsKeys.MAIL_SESSION_MAIL_SMTP_PORT,
+			PropsValues.MAIL_SESSION_MAIL_SMTP_PORT);
+		String smtpUser = PrefsPropsUtil.getString(
+			PropsKeys.MAIL_SESSION_MAIL_SMTP_USER,
+			PropsValues.MAIL_SESSION_MAIL_SMTP_USER);
+		String storeProtocol = PrefsPropsUtil.getString(
+			PropsKeys.MAIL_SESSION_MAIL_STORE_PROTOCOL,
+			PropsValues.MAIL_SESSION_MAIL_STORE_PROTOCOL);
+		String transportProtocol = PrefsPropsUtil.getString(
+			PropsKeys.MAIL_SESSION_MAIL_TRANSPORT_PROTOCOL,
+			PropsValues.MAIL_SESSION_MAIL_TRANSPORT_PROTOCOL);
+
+		Properties properties = session.getProperties();
+
+		// Incoming
+
+		if (!storeProtocol.equals(Account.PROTOCOL_POPS)) {
+			storeProtocol = Account.PROTOCOL_POP;
+		}
+
+		properties.setProperty(
+			"mail.session.mail.store.protocol", storeProtocol);
+
+		String storePrefix = "mail." + storeProtocol + ".";
+
+		properties.setProperty(storePrefix + "host", pop3Host);
+		properties.setProperty(storePrefix + "password", pop3Password);
+		properties.setProperty(storePrefix + "port", String.valueOf(pop3Port));
+		properties.setProperty(storePrefix + "user", pop3User);
+
+		// Outgoing
+
+		if (!transportProtocol.equals(Account.PROTOCOL_SMTPS)) {
+			transportProtocol = Account.PROTOCOL_SMTP;
+		}
+
+		properties.setProperty(
+			"mail.session.mail.transport.protocol", transportProtocol);
+
+		String transportPrefix = "mail." + transportProtocol + ".";
+
+		boolean smtpAuth = false;
+
+		if (Validator.isNotNull(smtpPassword) ||
+			Validator.isNotNull(smtpUser)) {
+
+			smtpAuth = true;
+		}
+
+		properties.setProperty(
+			transportPrefix + "auth", String.valueOf(smtpAuth));
+		properties.setProperty(transportPrefix + "host", smtpHost);
+		properties.setProperty(transportPrefix + "password", smtpPassword);
+		properties.setProperty(
+			transportPrefix + "port", String.valueOf(smtpPort));
+		properties.setProperty(transportPrefix + "user", smtpUser);
+
+		// Advanced
+
+		try {
+			if (Validator.isNotNull(advancedPropertiesString)) {
+				Properties advancedProperties = PropertiesUtil.load(
+					advancedPropertiesString);
+
+				Iterator<Map.Entry<Object, Object>> itr =
+					advancedProperties.entrySet().iterator();
+
+				while (itr.hasNext()) {
+					Map.Entry<Object, Object> entry = itr.next();
+
+					String key = (String)entry.getKey();
+					String value = (String)entry.getValue();
+
+					properties.setProperty(key, value);
+				}
+			}
+		}
+		catch (IOException ioe) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(ioe, ioe);
+			}
+		}
+
+		_session = Session.getInstance(properties);
+
+		return _session;
 	}
 
 	public void sendEmail(MailMessage mailMessage) {
@@ -316,5 +319,7 @@ public class MailServiceImpl implements MailService {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(MailServiceImpl.class);
+
+	private Session _session;
 
 }

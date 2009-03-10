@@ -730,6 +730,39 @@ public class PropsValues {
 	public static final boolean MAIL_MX_UPDATE = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.MAIL_MX_UPDATE));
 
+	public static final String MAIL_SESSION_MAIL_ADVANCED_PROPERTIES =
+		PropsUtil.get(PropsKeys.MAIL_SESSION_MAIL_ADVANCED_PROPERTIES);
+
+	public static final String MAIL_SESSION_MAIL_POP3_HOST = PropsUtil.get(
+		PropsKeys.MAIL_SESSION_MAIL_POP3_HOST);
+
+	public static final String MAIL_SESSION_MAIL_POP3_PASSWORD = PropsUtil.get(
+		PropsKeys.MAIL_SESSION_MAIL_POP3_PASSWORD);
+
+	public static final int MAIL_SESSION_MAIL_POP3_PORT = GetterUtil.getInteger(
+		PropsUtil.get(PropsKeys.MAIL_SESSION_MAIL_POP3_PORT));
+
+	public static final String MAIL_SESSION_MAIL_POP3_USER = PropsUtil.get(
+		PropsKeys.MAIL_SESSION_MAIL_POP3_USER);
+
+	public static final String MAIL_SESSION_MAIL_SMTP_HOST = PropsUtil.get(
+		PropsKeys.MAIL_SESSION_MAIL_SMTP_HOST);
+
+	public static final String MAIL_SESSION_MAIL_SMTP_PASSWORD = PropsUtil.get(
+		PropsKeys.MAIL_SESSION_MAIL_SMTP_PASSWORD);
+
+	public static final int MAIL_SESSION_MAIL_SMTP_PORT = GetterUtil.getInteger(
+		PropsUtil.get(PropsKeys.MAIL_SESSION_MAIL_SMTP_PORT));
+
+	public static final String MAIL_SESSION_MAIL_SMTP_USER = PropsUtil.get(
+		PropsKeys.MAIL_SESSION_MAIL_SMTP_USER);
+
+	public static final String MAIL_SESSION_MAIL_STORE_PROTOCOL =
+		PropsUtil.get(PropsKeys.MAIL_SESSION_MAIL_STORE_PROTOCOL);
+
+	public static final String MAIL_SESSION_MAIL_TRANSPORT_PROTOCOL =
+		PropsUtil.get(PropsKeys.MAIL_SESSION_MAIL_TRANSPORT_PROTOCOL);
+
 	public static final boolean MESSAGE_BOARDS_ANONYMOUS_POSTING_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.MESSAGE_BOARDS_ANONYMOUS_POSTING_ENABLED));

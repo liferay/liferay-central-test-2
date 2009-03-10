@@ -53,12 +53,13 @@ public interface MailService {
 		long companyId, long userId, String emailAddress,
 		String vacationMessage);
 
+	public void clearSession();
+
 	public void deleteEmailAddress(long companyId, long userId);
 
 	public void deleteUser(long companyId, long userId);
 
-	public Session getMailSession(String _propertyPrefix)
-			throws SystemException;
+	public Session getSession() throws SystemException;
 
 	public void sendEmail(MailMessage mailMessage);
 

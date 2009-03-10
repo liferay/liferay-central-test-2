@@ -63,6 +63,10 @@ public class MailServiceUtil {
 			companyId, userId, emailAddress, vacationMessage);
 	}
 
+	public static void clearSession() {
+		_service.clearSession();
+	}
+
 	public static void deleteEmailAddress(long companyId, long userId) {
 		_service.deleteEmailAddress(companyId, userId);
 	}
@@ -71,9 +75,8 @@ public class MailServiceUtil {
 		_service.deleteUser(companyId, userId);
 	}
 
-	public static Session getMailSession(String _propertyPrefix)
-			throws SystemException {
-		return _service.getMailSession(_propertyPrefix);
+	public static Session getSession() throws SystemException {
+		return _service.getSession();
 	}
 
 	public static void sendEmail(MailMessage mailMessage) {
