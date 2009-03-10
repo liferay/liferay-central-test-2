@@ -4149,6 +4149,8 @@ you-have-been-logged-off-because-you-signed-on-with-this-account-using-a-differe
 you-have-entered-invalid-data=您输入了无效数据。请重试。
 you-have-failed-to-connect-to-the-imap-and-smtp-server=您未连接到 IMAP 和 SMTP 服务器。
 you-have-failed-to-connect-to-the-imap-server-but-successfully-connected-to-the-smtp-server=您未连接到 IMAP 服务器，而是顺利地连接了到 SMTP 服务器。
+you-have-invited-x-friend=You have invited {0} friend.
+you-have-invited-x-friends=You have invited {0} friends.
 you-have-no-comics-selected=您没有选择漫画。
 you-have-no-personalized-pages=您没有个性化的页面。请创建页面。
 you-have-not-configured-any-community-tags=您未配置任何社区标签。

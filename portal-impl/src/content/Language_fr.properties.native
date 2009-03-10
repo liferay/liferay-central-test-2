@@ -4149,6 +4149,8 @@ you-have-been-logged-off-because-you-signed-on-with-this-account-using-a-differe
 you-have-entered-invalid-data=Vous avez saisi des données invalides. Veuillez réessayer.
 you-have-failed-to-connect-to-the-imap-and-smtp-server=Vous ne vous êtes pas relié au serveur d'IMAP et de smtp.
 you-have-failed-to-connect-to-the-imap-server-but-successfully-connected-to-the-smtp-server=Vous ne vous êtes pas relié au serveur d'IMAP mais vous êtes avec succès relié au serveur de smtp.
+you-have-invited-x-friend=You have invited {0} friend.
+you-have-invited-x-friends=You have invited {0} friends.
 you-have-no-comics-selected=Vous n'avez choisi aucune bande dessinée.
 you-have-no-personalized-pages=Vous n'avez aucune page personnalisée. Veuillez créer une page.
 you-have-not-configured-any-community-tags=Vous n'avez pas configuré d'étiquettes de communauté.

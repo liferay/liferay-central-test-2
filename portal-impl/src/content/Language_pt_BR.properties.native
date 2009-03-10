@@ -4149,6 +4149,8 @@ you-have-been-logged-off-because-you-signed-on-with-this-account-using-a-differe
 you-have-entered-invalid-data=Você incorporou dados inválidos. Por favor tentativa outra vez.
 you-have-failed-to-connect-to-the-imap-and-smtp-server=Você não conectou ao usuário do IMAP e do smtp.
 you-have-failed-to-connect-to-the-imap-server-but-successfully-connected-to-the-smtp-server=Você não conectou ao usuário do IMAP mas conectou com sucesso ao usuário do smtp.
+you-have-invited-x-friend=You have invited {0} friend.
+you-have-invited-x-friends=You have invited {0} friends.
 you-have-no-comics-selected=Você não tem nenhum comics selecionado.
 you-have-no-personalized-pages=Você não tem nenhuma página personalizada. Críe por favor uma página.
 you-have-not-configured-any-community-tags=Você não configurarou nenhuns Tag da comunidade.

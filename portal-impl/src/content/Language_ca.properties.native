@@ -3714,6 +3714,8 @@ you-have-been-logged-off-because-you-signed-on-with-this-account-using-a-differe
 you-have-entered-invalid-data=Heu introduït dades invàlides. Intenteu-ho una altra vegada.
 you-have-failed-to-connect-to-the-imap-and-smtp-server=No us heu connectat al servidor IMAP i SMTP.
 you-have-failed-to-connect-to-the-imap-server-but-successfully-connected-to-the-smtp-server=No us heu connectat al servidor IMAP però si al servidor SMTP.
+you-have-invited-x-friend=You have invited {0} friend.
+you-have-invited-x-friends=You have invited {0} friends.
 you-have-no-comics-selected=No teniu cap còmic seleccionat.
 you-have-no-personalized-pages=No teniu cap pàgina personalitzada. Si us plau, creeu-ne una.
 you-have-not-configured-any-community-tags=No teniu configurades les etiquetes de comunitat.

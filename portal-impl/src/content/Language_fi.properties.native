@@ -4139,6 +4139,8 @@ you-have-been-logged-off-because-you-signed-on-with-this-account-using-a-differe
 you-have-entered-invalid-data=Syötteessäsi oli virheitä, yritä uudelleen.
 you-have-failed-to-connect-to-the-imap-and-smtp-server=Yhteydenotto IMAP ja SMTP palvelimeen epäonnistui.
 you-have-failed-to-connect-to-the-imap-server-but-successfully-connected-to-the-smtp-server=Yhteydenotto SMTP palvelimeen onnistui, mutta IMAP pavelimeen epäonnistui.
+you-have-invited-x-friend=You have invited {0} friend.
+you-have-invited-x-friends=You have invited {0} friends.
 you-have-no-comics-selected=Sinulla ei ole yhtään sarjakuvaa valittuna.
 you-have-no-personalized-pages=Sinulla ei ole personoituja sivuja. Luo sivu.
 you-have-not-configured-any-community-tags=Et ole konfiguroinut yhteisö tageja.

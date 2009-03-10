@@ -4060,6 +4060,8 @@ you-have-been-logged-off-because-you-signed-on-with-this-account-using-a-differe
 you-have-entered-invalid-data=Вы ввели неверные данные. Пожалуйста попробуйте еще раз.
 you-have-failed-to-connect-to-the-imap-and-smtp-server=У вас не получилось соединиться с серверами IMAP и SMTP.
 you-have-failed-to-connect-to-the-imap-server-but-successfully-connected-to-the-smtp-server=У вас не получилось соединиться с сервером IMAP, но вы успешно соединились с сервером SMTP.
+you-have-invited-x-friend=You have invited {0} friend.
+you-have-invited-x-friends=You have invited {0} friends.
 you-have-no-comics-selected=Вы не выбрали комиксов.
 you-have-no-personalized-pages=Вы не имеете персонализированных страниц. Пожалуйста создайте страницу.
 you-have-not-configured-any-community-tags=Вы не настроили никаких тегов сообщества.

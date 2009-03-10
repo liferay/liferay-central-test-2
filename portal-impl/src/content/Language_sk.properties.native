@@ -3726,6 +3726,8 @@ you-have-been-logged-off-because-you-signed-on-with-this-account-using-a-differe
 you-have-entered-invalid-data=Zadali ste neplatné údaje. Skúste opäť.
 you-have-failed-to-connect-to-the-imap-and-smtp-server=Spojenie s IMAP a SMTP serverom zlyhalo.
 you-have-failed-to-connect-to-the-imap-server-but-successfully-connected-to-the-smtp-server=Spojenie s IMAP serverom zlyhalo, ale bolo úspešne vykonané s SMTP serverom.
+you-have-invited-x-friend=You have invited {0} friend.
+you-have-invited-x-friends=You have invited {0} friends.
 you-have-no-comics-selected=Nemáte vybraný žiadny komiks.
 you-have-no-personalized-pages=Nemáte žiadnu personalizovanú stránku. Vytvorte si stránku prosím.
 you-have-not-configured-any-community-tags=Nemáte nakonfigurovanú žiadnu komunitnú značku.

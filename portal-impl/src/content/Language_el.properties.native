@@ -4148,6 +4148,8 @@ you-have-been-logged-off-because-you-signed-on-with-this-account-using-a-differe
 you-have-entered-invalid-data=Έχετε εισάγει μη έγκυρα δεδομένα. Παρακαλώ προσπαθήστε ξανά.
 you-have-failed-to-connect-to-the-imap-and-smtp-server=Έχετε αποτύχει να συνδέσετε με τον κεντρικό υπολογιστή IMAP και SMTP.
 you-have-failed-to-connect-to-the-imap-server-but-successfully-connected-to-the-smtp-server=Έχετε αποτύχει να συνδέσετε με τον κεντρικό υπολογιστή IMAP αλλά επιτυχώς έχετε συνδέσει με τον κεντρικό υπολογιστή SMTP.
+you-have-invited-x-friend=You have invited {0} friend.
+you-have-invited-x-friends=You have invited {0} friends.
 you-have-no-comics-selected=Δεν επιλέγετε κανένα comics.
 you-have-no-personalized-pages=Δεν έχετε καμία εξατομικευμένη σελίδα. Παρακαλώ δημιουργήστε μια σελίδα.
 you-have-not-configured-any-community-tags=Δεν έχετε διαμορφώσει οποιεσδήποτε κοινοτικές ετικέττες.

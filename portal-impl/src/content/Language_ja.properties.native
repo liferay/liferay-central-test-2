@@ -4148,6 +4148,8 @@ you-have-been-logged-off-because-you-signed-on-with-this-account-using-a-differe
 you-have-entered-invalid-data=エラーが発生しました。もう一度お願いします。
 you-have-failed-to-connect-to-the-imap-and-smtp-server=IMAP および SMTP サーバーへの接続に失敗しました。
 you-have-failed-to-connect-to-the-imap-server-but-successfully-connected-to-the-smtp-server=IMAP サーバーへの接続は失敗しましたが、SMTP サーバーへの接続は成功しました。
+you-have-invited-x-friend=You have invited {0} friend.
+you-have-invited-x-friends=You have invited {0} friends.
 you-have-no-comics-selected=選択したマンガがありません。
 you-have-no-personalized-pages=パーソナライズページがありません。ページを作成してください。
 you-have-not-configured-any-community-tags=コミュニティタグがありません。
