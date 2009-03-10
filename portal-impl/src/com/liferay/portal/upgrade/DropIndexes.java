@@ -77,7 +77,7 @@ public class DropIndexes extends UpgradeProcess {
 				"select distinct(index_name), table_name from " +
 					"information_schema.statistics where index_schema = " +
 						"database() and index_name like 'LIFERAY_%' or " +
-							"index_name like 'IX_%');
+							"index_name like 'IX_%'");
 
 			rs = ps.executeQuery();
 
