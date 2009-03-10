@@ -24,6 +24,7 @@ package com.liferay.portal.servlet.taglib.portlet;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -99,7 +100,7 @@ public class RenderURLParamsTagUtil {
 					sb.append("<input name=\"");
 					sb.append(key);
 					sb.append("\" type=\"hidden\" value=\"");
-					sb.append(value);
+					sb.append(HtmlUtil.escape(value));
 					sb.append("\" />");
 				}
 			}
