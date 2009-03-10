@@ -188,10 +188,17 @@ if (!StringUtil.contains(tabs2Names, tabs2)) {
 				<td>
 
 					<%
-					String friendlyURL = BeanParamUtil.getString(liveGroup, request, "friendlyURL");
+					String friendlyURL = ParamUtil.getString(request, "friendlyURL");
+
+					if (Validator.isNull(friendlyURL)) {
+						friendlyURL = liveGroup.getFriendlyURL();
+					}
+					else {
+						friendlyURL = HtmlUtil.escape(friendlyURL);
+					}
 					%>
 
-					<input name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= HtmlUtil.escape(friendlyURL) %>" />
+					<input name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= friendlyURL %>" />
 				</td>
 			</tr>
 			</table>
