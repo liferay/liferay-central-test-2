@@ -354,6 +354,10 @@ public class DataFactory {
 		return _defaultUser;
 	}
 
+	public ClassName getGroupClassName() {
+		return _groupClassName;
+	}
+
 	public List<Group> getGroups() {
 		return _groups;
 	}
@@ -384,6 +388,10 @@ public class DataFactory {
 
 	public List<ResourceCode> getResourceCodes() {
 		return _resourceCodes;
+	}
+
+	public ClassName getRoleClassName() {
+		return _roleClassName;
 	}
 
 	public List<Role> getRoles() {
@@ -419,7 +427,13 @@ public class DataFactory {
 
 			_classNames.add(className);
 
-			if (model.equals(User.class.getName())) {
+			if (model.equals(Group.class.getName())) {
+				_groupClassName = className;
+			}
+			else if (model.equals(Role.class.getName())) {
+				_roleClassName = className;
+			}
+			else if (model.equals(User.class.getName())) {
 				_userClassName = className;
 			}
 		}
@@ -494,6 +508,8 @@ public class DataFactory {
 		Group group = new GroupImpl();
 
 		group.setGroupId(_counter.get());
+		group.setClassNameId(_groupClassName.getClassNameId());
+		group.setClassPK(group.getGroupId());
 		group.setName(GroupConstants.GUEST);
 		group.setFriendlyURL("/guest");
 
@@ -539,9 +555,8 @@ public class DataFactory {
 
 		// Company
 
-		ResourceCode resourceCode = new ResourceCodeImpl();
+		ResourceCode resourceCode = newResourceCode();
 
-		resourceCode.setCodeId(_resourceCodeCounter.get());
 		resourceCode.setName(name);
 		resourceCode.setScope(ResourceConstants.SCOPE_COMPANY);
 
@@ -549,9 +564,8 @@ public class DataFactory {
 
 		// Group
 
-		resourceCode = new ResourceCodeImpl();
+		resourceCode = newResourceCode();
 
-		resourceCode.setCodeId(_resourceCodeCounter.get());
 		resourceCode.setName(name);
 		resourceCode.setScope(ResourceConstants.SCOPE_GROUP);
 
@@ -559,9 +573,8 @@ public class DataFactory {
 
 		// Group template
 
-		resourceCode = new ResourceCodeImpl();
+		resourceCode = newResourceCode();
 
-		resourceCode.setCodeId(_resourceCodeCounter.get());
 		resourceCode.setName(name);
 		resourceCode.setScope(ResourceConstants.SCOPE_GROUP_TEMPLATE);
 
@@ -569,9 +582,8 @@ public class DataFactory {
 
 		// Individual
 
-		resourceCode = new ResourceCodeImpl();
+		resourceCode = newResourceCode();
 
-		resourceCode.setCodeId(_resourceCodeCounter.get());
 		resourceCode.setName(name);
 		resourceCode.setScope(ResourceConstants.SCOPE_INDIVIDUAL);
 
@@ -590,9 +602,8 @@ public class DataFactory {
 
 		// Administrator
 
-		Role role = new RoleImpl();
+		Role role = newRole();
 
-		role.setRoleId(_counter.get());
 		role.setName(RoleConstants.ADMINISTRATOR);
 		role.setType(RoleConstants.TYPE_REGULAR);
 
@@ -602,9 +613,8 @@ public class DataFactory {
 
 		// Community Administrator
 
-		role = new RoleImpl();
+		role = newRole();
 
-		role.setRoleId(_counter.get());
 		role.setName(RoleConstants.COMMUNITY_ADMINISTRATOR);
 		role.setType(RoleConstants.TYPE_COMMUNITY);
 
@@ -614,9 +624,8 @@ public class DataFactory {
 
 		// Community Member
 
-		role = new RoleImpl();
+		role = newRole();
 
-		role.setRoleId(_counter.get());
 		role.setName(RoleConstants.COMMUNITY_MEMBER);
 		role.setType(RoleConstants.TYPE_COMMUNITY);
 
@@ -626,9 +635,8 @@ public class DataFactory {
 
 		// Community Owner
 
-		role = new RoleImpl();
+		role = newRole();
 
-		role.setRoleId(_counter.get());
 		role.setName(RoleConstants.COMMUNITY_OWNER);
 		role.setType(RoleConstants.TYPE_COMMUNITY);
 
@@ -638,9 +646,8 @@ public class DataFactory {
 
 		// Guest
 
-		role = new RoleImpl();
+		role = newRole();
 
-		role.setRoleId(_counter.get());
 		role.setName(RoleConstants.GUEST);
 		role.setType(RoleConstants.TYPE_REGULAR);
 
@@ -650,9 +657,8 @@ public class DataFactory {
 
 		// Organization Administrator
 
-		role = new RoleImpl();
+		role = newRole();
 
-		role.setRoleId(_counter.get());
 		role.setName(RoleConstants.ORGANIZATION_ADMINISTRATOR);
 		role.setType(RoleConstants.TYPE_ORGANIZATION);
 
@@ -662,9 +668,8 @@ public class DataFactory {
 
 		// Organization Member
 
-		role = new RoleImpl();
+		role = newRole();
 
-		role.setRoleId(_counter.get());
 		role.setName(RoleConstants.ORGANIZATION_MEMBER);
 		role.setType(RoleConstants.TYPE_ORGANIZATION);
 
@@ -674,9 +679,8 @@ public class DataFactory {
 
 		// Organization Owner
 
-		role = new RoleImpl();
+		role = newRole();
 
-		role.setRoleId(_counter.get());
 		role.setName(RoleConstants.ORGANIZATION_OWNER);
 		role.setType(RoleConstants.TYPE_ORGANIZATION);
 
@@ -686,9 +690,8 @@ public class DataFactory {
 
 		// Owner
 
-		role = new RoleImpl();
+		role = newRole();
 
-		role.setRoleId(_counter.get());
 		role.setName(RoleConstants.OWNER);
 		role.setType(RoleConstants.TYPE_REGULAR);
 
@@ -698,9 +701,8 @@ public class DataFactory {
 
 		// Power User
 
-		role = new RoleImpl();
+		role = newRole();
 
-		role.setRoleId(_counter.get());
 		role.setName(RoleConstants.POWER_USER);
 		role.setType(RoleConstants.TYPE_REGULAR);
 
@@ -710,9 +712,8 @@ public class DataFactory {
 
 		// User
 
-		role = new RoleImpl();
+		role = newRole();
 
-		role.setRoleId(_counter.get());
 		role.setName(RoleConstants.USER);
 		role.setType(RoleConstants.TYPE_REGULAR);
 
@@ -745,6 +746,24 @@ public class DataFactory {
 		return new IntegerWrapper();
 	}
 
+	protected ResourceCode newResourceCode() {
+		ResourceCode resourceCode = new ResourceCodeImpl();
+
+		resourceCode.setCodeId(_resourceCodeCounter.get());
+
+		return resourceCode;
+	}
+
+	protected Role newRole() {
+		Role role = new RoleImpl();
+
+		role.setRoleId(_counter.get());
+		role.setClassNameId(_roleClassName.getClassNameId());
+		role.setClassPK(role.getRoleId());
+
+		return role;
+	}
+
 	private Role _administratorRole;
 	private List<ClassName> _classNames;
 	private Role _communityAdministratorRole;
@@ -754,6 +773,7 @@ public class DataFactory {
 	private SimpleCounter _counter;
 	private List<Counter> _counters;
 	private User _defaultUser;
+	private ClassName _groupClassName;
 	private List<Group> _groups;
 	private Group _guestGroup;
 	private Role _guestRole;
@@ -768,6 +788,7 @@ public class DataFactory {
 	private SimpleCounter _resourceCodeCounter;
 	private List<ResourceCode> _resourceCodes;
 	private SimpleCounter _resourceCounter;
+	private ClassName _roleClassName;
 	private List<Role> _roles;
 	private ClassName _userClassName;
 	private Object[] _userNames;
