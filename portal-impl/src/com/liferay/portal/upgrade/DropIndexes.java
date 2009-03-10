@@ -75,9 +75,9 @@ public class DropIndexes extends UpgradeProcess {
 
 			ps = con.prepareStatement(
 				"select distinct(index_name), table_name from " +
-					"information_schema.statistics where index_name like " +
-						"'LIFERAY_%' or index_name like 'IX_%' " +
-							"and index_schema = database()");
+					"information_schema.statistics where index_schema = " +
+						"database() and index_name like 'LIFERAY_%' or " +
+							"index_name like 'IX_%');
 
 			rs = ps.executeQuery();
 
@@ -92,7 +92,9 @@ public class DropIndexes extends UpgradeProcess {
 					ps.executeUpdate();
 				}
 				catch (SQLException sqle) {
-					_log.warn(sqle.getMessage());
+					if (_log.isWarnEnabled()) {
+						_log.warn(sqle.getMessage());
+					}
 				}
 				finally {
 					ps.close();
