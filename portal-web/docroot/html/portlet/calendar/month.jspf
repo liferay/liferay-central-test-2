@@ -58,7 +58,7 @@ DateFormat timeFormat = new SimpleDateFormat("h:mma", locale);
 	<table class="date-selector">
 	<tr>
 		<td>
-			<a href="<%= portletURL.toString() %>&<portlet:namespace />month=<%= cal.get(Calendar.MONTH) - 1 %>&<portlet:namespace />day=<%= selDay %>&<portlet:namespace />year=<%= selYear %>&<portlet:namespace />eventType=<%= eventType %>">
+			<a href="<%= portletURL.toString() %>&<portlet:namespace />month=<%= cal.get(Calendar.MONTH) - 1 %>&<portlet:namespace />day=<%= selDay %>&<portlet:namespace />year=<%= selYear %>&<portlet:namespace />eventType=<%= HtmlUtil.escape(eventType) %>">
 			<img border="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_left.png" />
 			</a>
 		</td>
@@ -66,7 +66,7 @@ DateFormat timeFormat = new SimpleDateFormat("h:mma", locale);
 			<%= dateFormat.format(Time.getDate(cal)) %>
 		</td>
 		<td>
-			<a href="<%= portletURL.toString() %>&<portlet:namespace />month=<%= cal.get(Calendar.MONTH) + 1 %>&<portlet:namespace />day=<%= selDay %>&<portlet:namespace />year=<%= selYear %>&<portlet:namespace />eventType=<%= eventType %>">
+			<a href="<%= portletURL.toString() %>&<portlet:namespace />month=<%= cal.get(Calendar.MONTH) + 1 %>&<portlet:namespace />day=<%= selDay %>&<portlet:namespace />year=<%= selYear %>&<portlet:namespace />eventType=<%= HtmlUtil.escape(eventType) %>">
 			<img border="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_right.png" />
 			</a>
 		</td>

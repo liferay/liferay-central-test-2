@@ -85,7 +85,7 @@ String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminder
 				<liferay-ui:message key="name" />
 			</td>
 			<td>
-				<input class="lfr-input-text" name="<portlet:namespace />emailFromName" type="text" value="<%= emailFromName %>" />
+				<input class="lfr-input-text" name="<portlet:namespace />emailFromName" type="text" value="<%= HtmlUtil.escape(emailFromName) %>" />
 			</td>
 		</tr>
 		<tr>
@@ -93,7 +93,7 @@ String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminder
 				<liferay-ui:message key="address" />
 			</td>
 			<td>
-				<input class="lfr-input-text" name="<portlet:namespace />emailFromAddress" type="text" value="<%= emailFromAddress %>" />
+				<input class="lfr-input-text" name="<portlet:namespace />emailFromAddress" type="text" value="<%= HtmlUtil.escape(emailFromAddress) %>" />
 			</td>
 		</tr>
 		</table>
@@ -118,7 +118,7 @@ String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminder
 				<liferay-ui:message key="subject" />
 			</td>
 			<td>
-				<input class="lfr-input-text" name="<portlet:namespace />emailEventReminderSubject" type="text" value="<%= emailEventReminderSubject %>" />
+				<input class="lfr-input-text" name="<portlet:namespace />emailEventReminderSubject" type="text" value="<%= HtmlUtil.escape(emailEventReminderSubject) %>" />
 			</td>
 		</tr>
 		<tr>
@@ -166,7 +166,7 @@ String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminder
 				<b>[$FROM_ADDRESS$]</b>
 			</td>
 			<td>
-				<%= emailFromAddress %>
+				<%= HtmlUtil.escape(emailFromAddress) %>
 			</td>
 		</tr>
 		<tr>
@@ -174,7 +174,7 @@ String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminder
 				<b>[$FROM_NAME$]</b>
 			</td>
 			<td>
-				<%= emailFromName %>
+				<%= HtmlUtil.escape(emailFromName) %>
 			</td>
 		</tr>
 		<tr>

@@ -59,7 +59,7 @@ DateFormat dateFormatMonthAndDay = new SimpleDateFormat("M/d", locale);
 			cal.add(Calendar.DATE, -7);
 			%>
 
-			<a href="<%= portletURL.toString() %>&<portlet:namespace />month=<%= cal.get(Calendar.MONTH) %>&<portlet:namespace />day=<%= cal.get(Calendar.DATE) %>&<portlet:namespace />year=<%= cal.get(Calendar.YEAR) %>&<portlet:namespace />eventType=<%= eventType %>">
+			<a href="<%= portletURL.toString() %>&<portlet:namespace />month=<%= cal.get(Calendar.MONTH) %>&<portlet:namespace />day=<%= cal.get(Calendar.DATE) %>&<portlet:namespace />year=<%= cal.get(Calendar.YEAR) %>&<portlet:namespace />eventType=<%= HtmlUtil.escape(eventType) %>">
 			<img border="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_left.png" />
 			</a>
 		</td>
@@ -79,7 +79,7 @@ DateFormat dateFormatMonthAndDay = new SimpleDateFormat("M/d", locale);
 			cal.add(Calendar.DATE, 7);
 			%>
 
-			<a href="<%= portletURL.toString() %>&<portlet:namespace />month=<%= cal.get(Calendar.MONTH) %>&<portlet:namespace />day=<%= cal.get(Calendar.DATE) %>&<portlet:namespace />year=<%= cal.get(Calendar.YEAR) %>&<portlet:namespace />eventType=<%= eventType %>">
+			<a href="<%= portletURL.toString() %>&<portlet:namespace />month=<%= cal.get(Calendar.MONTH) %>&<portlet:namespace />day=<%= cal.get(Calendar.DATE) %>&<portlet:namespace />year=<%= cal.get(Calendar.YEAR) %>&<portlet:namespace />eventType=<%= HtmlUtil.escape(eventType) %>">
 			<img border="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_right.png" />
 			</a>
 		</td>
