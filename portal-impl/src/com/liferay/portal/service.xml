@@ -135,11 +135,6 @@
 		<column name="homeURL" type="String" />
 		<column name="logoId" type="long" />
 
-		<!-- Relationships -->
-
-		<column name="shards" type="Collection" entity="Shard"
-			mapping-table="Shards_Companies" />
-
 		<!-- Finder methods -->
 
 		<finder name="WebId" return-type="Company" unique="true">
@@ -952,6 +947,12 @@
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
+	<entity name="Portal" local-service="true" remote-service="true">
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.lock" entity="Lock" />
+	</entity>
 	<entity name="PluginSetting" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
@@ -984,12 +985,6 @@
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
-	<entity name="Portal" local-service="true" remote-service="true">
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.lock" entity="Lock" />
-	</entity>
 	<entity name="Portlet" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
@@ -1014,52 +1009,6 @@
 		<finder name="C_P" return-type="Portlet" unique="true">
 			<finder-column name="companyId" />
 			<finder-column name="portletId" />
-		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
-	</entity>
-	<entity name="PortletItem" local-service="true" remote-service="false">
-
-		<!-- PK fields -->
-
-		<column name="portletItemId" type="long" primary="true" />
-
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
-
-		<!-- Audit fields -->
-
-		<column name="companyId" type="long" />
-		<column name="userId" type="long" />
-		<column name="userName" type="String" />
-		<column name="createDate" type="Date" />
-		<column name="modifiedDate" type="Date" />
-
-		<!-- Other fields -->
-
-		<column name="name" type="String" />
-		<column name="portletId" type="String" />
-		<column name="classNameId" type="long" />
-
-		<!-- Finder methods -->
-
-		<finder name="G_C" return-type="Collection">
-			<finder-column name="groupId" />
-			<finder-column name="classNameId" />
-		</finder>
-		<finder name="G_P_C" return-type="Collection">
-			<finder-column name="groupId" />
-			<finder-column name="portletId" />
-			<finder-column name="classNameId" />
-		</finder>
-		<finder name="G_N_P_C" return-type="PortletItem">
-			<finder-column name="groupId" />
-			<finder-column name="name" case-sensitive="false" />
-			<finder-column name="portletId" />
-			<finder-column name="classNameId" />
 		</finder>
 
 		<!-- References -->
@@ -1307,25 +1256,46 @@
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
-	<entity name="Shard" local-service="true">
+	<entity name="PortletItem" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
 
-		<column name="shardId" type="long" primary="true" />
+		<column name="portletItemId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
 
 		<!-- Other fields -->
 
 		<column name="name" type="String" />
-		
-		<!-- Relationships -->
-
-		<column name="companies" type="Collection" entity="Company"
-			mapping-table="Shards_Companies" />
+		<column name="portletId" type="String" />
+		<column name="classNameId" type="long" />
 
 		<!-- Finder methods -->
 
-		<finder name="Name" return-type="Shard">
-			<finder-column name="name" />
+		<finder name="G_C" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="classNameId" />
+		</finder>
+		<finder name="G_P_C" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="portletId" />
+			<finder-column name="classNameId" />
+		</finder>
+		<finder name="G_N_P_C" return-type="PortletItem">
+			<finder-column name="groupId" />
+			<finder-column name="name" case-sensitive="false" />
+			<finder-column name="portletId" />
+			<finder-column name="classNameId" />
 		</finder>
 
 		<!-- References -->

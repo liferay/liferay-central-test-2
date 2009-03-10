@@ -28,7 +28,6 @@
 <%@ page import="com.liferay.portal.CompanyMxException" %>
 <%@ page import="com.liferay.portal.CompanyVirtualHostException" %>
 <%@ page import="com.liferay.portal.CompanyWebIdException" %>
-<%@ page import="com.liferay.portal.dao.shard.ShardUtil" %>
 <%@ page import="com.liferay.portal.kernel.plugin.PluginPackage" %>
 <%@ page import="com.liferay.portal.servlet.PortalSessionContext" %>
 
@@ -47,11 +46,3 @@
 <%@ page import="org.jfree.chart.servlet.ServletUtilities" %>
 <%@ page import="org.jfree.data.Range" %>
 <%@ page import="org.jfree.data.general.DefaultValueDataset" %>
-
-<%
-boolean showShardSelector = false;
-
-if (PropsValues.SHARD_SELECTOR.equals("com.liferay.portal.dao.shard.ManualShardSelector") && PropsValues.SHARD_AVAILABLE.length > 1) {
-	showShardSelector = true;
-}
-%>

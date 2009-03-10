@@ -82,17 +82,6 @@ public class CompanyServiceJSON {
 		return CompanyJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject addCompany(java.lang.String webId,
-		java.lang.String virtualHost, java.lang.String mx,
-		java.lang.String shardName)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		com.liferay.portal.model.Company returnValue = CompanyServiceUtil.addCompany(webId,
-				virtualHost, mx, shardName);
-
-		return CompanyJSONSerializer.toJSONObject(returnValue);
-	}
-
 	public static JSONObject getCompanyById(long companyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

@@ -376,21 +376,6 @@
 		<property name="roles" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="active" column="active_" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
-	<class name="com.liferay.portal.model.impl.PortletItemImpl" table="PortletItem">
-		<cache usage="read-write" />
-		<id name="portletItemId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="createDate" type="org.hibernate.type.TimestampType" />
-		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
-		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="portletId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="classNameId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-	</class>
 	<class name="com.liferay.portal.model.impl.PortletPreferencesImpl" table="PortletPreferences">
 		<cache usage="read-write" />
 		<id name="portletPreferencesId" type="long">
@@ -464,12 +449,20 @@
 		<property name="buildDate" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="data" column="data_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
-	<class name="com.liferay.portal.model.impl.ShardImpl" table="Shard">
+	<class name="com.liferay.portal.model.impl.PortletItemImpl" table="PortletItem">
 		<cache usage="read-write" />
-		<id name="shardId" type="long">
+		<id name="portletItemId" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="portletId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="classNameId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.SubscriptionImpl" table="Subscription">
 		<cache usage="read-write" />

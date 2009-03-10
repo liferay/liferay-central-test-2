@@ -33,7 +33,6 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.CompanyServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalInstances;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 
 import javax.portlet.ActionRequest;
@@ -119,15 +118,13 @@ public class EditInstanceAction extends PortletAction {
 		String webId = ParamUtil.getString(actionRequest, "webId");
 		String virtualHost = ParamUtil.getString(actionRequest, "virtualHost");
 		String mx = ParamUtil.getString(actionRequest, "mx");
-		String shardName = ParamUtil.getString(
-			actionRequest, "shardName", PropsValues.SHARD_DEFAULT);
 
 		if (companyId <= 0) {
 
 			// Add instance
 
 			Company company = CompanyServiceUtil.addCompany(
-				webId, virtualHost, mx, shardName);
+				webId, virtualHost, mx);
 
 			ServletContext servletContext =
 				(ServletContext)actionRequest.getAttribute(WebKeys.CTX);

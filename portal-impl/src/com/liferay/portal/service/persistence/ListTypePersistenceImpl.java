@@ -837,8 +837,6 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portal.service.persistence.PluginSettingPersistence pluginSettingPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.PortletPersistence.impl")
 	protected com.liferay.portal.service.persistence.PortletPersistence portletPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.PortletItemPersistence.impl")
-	protected com.liferay.portal.service.persistence.PortletItemPersistence portletItemPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.PortletPreferencesPersistence.impl")
 	protected com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.RegionPersistence.impl")
@@ -853,8 +851,8 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portal.service.persistence.RolePersistence rolePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ServiceComponentPersistence.impl")
 	protected com.liferay.portal.service.persistence.ServiceComponentPersistence serviceComponentPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ShardPersistence.impl")
-	protected com.liferay.portal.service.persistence.ShardPersistence shardPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.PortletItemPersistence.impl")
+	protected com.liferay.portal.service.persistence.PortletItemPersistence portletItemPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.SubscriptionPersistence.impl")
 	protected com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")

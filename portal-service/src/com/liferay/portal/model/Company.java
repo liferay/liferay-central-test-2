@@ -69,8 +69,6 @@ public interface Company extends CompanyModel {
 
 	public java.util.Locale getLocale();
 
-	public java.lang.String getShardName();
-
 	public java.util.TimeZone getTimeZone();
 
 	public java.lang.String getAdminName();

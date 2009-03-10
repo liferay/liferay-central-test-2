@@ -299,7 +299,10 @@ create unique index IX_12B5E51D on Portlet (companyId, portletId);
 
 create index IX_96BDD537 on PortletItem (groupId, classNameId);
 create index IX_D699243F on PortletItem (groupId, name, portletId, classNameId);
+create index IX_2C61314E on PortletItem (groupId, portletId);
 create index IX_E922D6C0 on PortletItem (groupId, portletId, classNameId);
+create index IX_8E71167F on PortletItem (groupId, portletId, classNameId, name);
+create index IX_33B8CE8D on PortletItem (groupId, portletId, name);
 
 create index IX_E4F13E6E on PortletPreferences (ownerId, ownerType, plid);
 create unique index IX_C7057FF7 on PortletPreferences (ownerId, ownerType, plid, portletId);
@@ -357,11 +360,6 @@ create index IX_8377A211 on SCProductVersion (productEntryId);
 
 create index IX_7338606F on ServiceComponent (buildNamespace);
 create unique index IX_4F0315B8 on ServiceComponent (buildNamespace, buildNumber);
-
-create index IX_941BA8C3 on Shard (name);
-
-create index IX_E32981D1 on Shards_Companies (companyId);
-create index IX_3424DA72 on Shards_Companies (shardId);
 
 create index IX_C28B41DC on ShoppingCart (groupId);
 create unique index IX_FC46FE16 on ShoppingCart (groupId, userId);

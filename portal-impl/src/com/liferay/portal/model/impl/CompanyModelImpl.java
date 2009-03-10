@@ -120,7 +120,6 @@ public class CompanyModelImpl extends BaseModelImpl {
 		return models;
 	}
 
-	public static final boolean CACHE_ENABLED_SHARDS_COMPANIES = com.liferay.portal.model.impl.ShardModelImpl.CACHE_ENABLED_SHARDS_COMPANIES;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Company"));
 

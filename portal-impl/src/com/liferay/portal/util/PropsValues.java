@@ -1143,15 +1143,6 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.SESSION_TRACKER_PERSISTENCE_ENABLED));
 
-	public static final String SHARD_DEFAULT =
-		PropsUtil.get(PropsKeys.SHARD_DEFAULT);
-
-	public static final String[] SHARD_AVAILABLE =
-		PropsUtil.getArray(PropsKeys.SHARD_AVAILABLE);
-
-	public static final String SHARD_SELECTOR =
-		PropsUtil.get(PropsKeys.SHARD_SELECTOR);
-
 	public static final String[] SHARED_SESSION_ATTRIBUTES =
 		PropsUtil.getArray(PropsKeys.SESSION_SHARED_ATTRIBUTES);
 

@@ -400,18 +400,6 @@
 		</field>
 		<field name="active" type="boolean" />
 	</model>
-	<model name="com.liferay.portal.model.PortletItem">
-		<field name="portletItemId" type="long" />
-		<field name="groupId" type="long" />
-		<field name="companyId" type="long" />
-		<field name="userId" type="long" />
-		<field name="userName" type="String" />
-		<field name="createDate" type="Date" />
-		<field name="modifiedDate" type="Date" />
-		<field name="name" type="String" />
-		<field name="portletId" type="String" />
-		<field name="classNameId" type="long" />
-	</model>
 	<model name="com.liferay.portal.model.PortletPreferences">
 		<field name="portletPreferencesId" type="long" />
 		<field name="ownerId" type="long" />
@@ -480,9 +468,17 @@
 			<hint-collection name="CLOB" />
 		</field>
 	</model>
-	<model name="com.liferay.portal.model.Shard">
-		<field name="shardId" type="long" />
+	<model name="com.liferay.portal.model.PortletItem">
+		<field name="portletItemId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
 		<field name="name" type="String" />
+		<field name="portletId" type="String" />
+		<field name="classNameId" type="long" />
 	</model>
 	<model name="com.liferay.portal.model.Subscription">
 		<field name="subscriptionId" type="long" />

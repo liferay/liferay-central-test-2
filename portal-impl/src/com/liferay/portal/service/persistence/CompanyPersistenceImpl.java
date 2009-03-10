@@ -25,19 +25,12 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.NoSuchCompanyException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
-import com.liferay.portal.kernel.dao.jdbc.MappingSqlQuery;
-import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
-import com.liferay.portal.kernel.dao.jdbc.RowMapper;
-import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
-import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
-import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
-import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -49,8 +42,6 @@ import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.CompanyModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
-
-import java.sql.Types;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -122,16 +113,6 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 	}
 
 	protected Company removeImpl(Company company) throws SystemException {
-		try {
-			clearShards.clear(company.getPrimaryKey());
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			FinderCacheUtil.clearCache("Shards_Companies");
-		}
-
 		Session session = null;
 
 		try {
@@ -216,8 +197,6 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 
 	public Company updateImpl(com.liferay.portal.model.Company company,
 		boolean merge) throws SystemException {
-		FinderCacheUtil.clearCache("Shards_Companies");
-
 		Session session = null;
 
 		try {
@@ -1134,350 +1113,6 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<com.liferay.portal.model.Shard> getShards(long pk)
-		throws SystemException {
-		return getShards(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-	}
-
-	public List<com.liferay.portal.model.Shard> getShards(long pk, int start,
-		int end) throws SystemException {
-		return getShards(pk, start, end, null);
-	}
-
-	public List<com.liferay.portal.model.Shard> getShards(long pk, int start,
-		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = CompanyModelImpl.CACHE_ENABLED_SHARDS_COMPANIES;
-
-		String finderClassName = "Shards_Companies";
-
-		String finderMethodName = "getShards";
-		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
-		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(start), String.valueOf(end),
-				String.valueOf(obc)
-			};
-
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBuilder sb = new StringBuilder();
-
-				sb.append(_SQL_GETSHARDS);
-
-				if (obc != null) {
-					sb.append("ORDER BY ");
-					sb.append(obc.getOrderBy());
-				}
-
-				String sql = sb.toString();
-
-				SQLQuery q = session.createSQLQuery(sql);
-
-				q.addEntity("Shard",
-					com.liferay.portal.model.impl.ShardImpl.class);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(pk);
-
-				List<com.liferay.portal.model.Shard> list = (List<com.liferay.portal.model.Shard>)QueryUtil.list(q,
-						getDialect(), start, end);
-
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
-
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-		else {
-			return (List<com.liferay.portal.model.Shard>)result;
-		}
-	}
-
-	public int getShardsSize(long pk) throws SystemException {
-		boolean finderClassNameCacheEnabled = CompanyModelImpl.CACHE_ENABLED_SHARDS_COMPANIES;
-
-		String finderClassName = "Shards_Companies";
-
-		String finderMethodName = "getShardsSize";
-		String[] finderParams = new String[] { Long.class.getName() };
-		Object[] finderArgs = new Object[] { new Long(pk) };
-
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				SQLQuery q = session.createSQLQuery(_SQL_GETSHARDSSIZE);
-
-				q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(pk);
-
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
-
-				return count.intValue();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-		else {
-			return ((Long)result).intValue();
-		}
-	}
-
-	public boolean containsShard(long pk, long shardPK)
-		throws SystemException {
-		boolean finderClassNameCacheEnabled = CompanyModelImpl.CACHE_ENABLED_SHARDS_COMPANIES;
-
-		String finderClassName = "Shards_Companies";
-
-		String finderMethodName = "containsShards";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				Long.class.getName()
-			};
-		Object[] finderArgs = new Object[] { new Long(pk), new Long(shardPK) };
-
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
-
-		if (result == null) {
-			try {
-				Boolean value = Boolean.valueOf(containsShard.contains(pk,
-							shardPK));
-
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, value);
-
-				return value.booleanValue();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-		}
-		else {
-			return ((Boolean)result).booleanValue();
-		}
-	}
-
-	public boolean containsShards(long pk) throws SystemException {
-		if (getShardsSize(pk) > 0) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public void addShard(long pk, long shardPK) throws SystemException {
-		try {
-			addShard.add(pk, shardPK);
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			FinderCacheUtil.clearCache("Shards_Companies");
-		}
-	}
-
-	public void addShard(long pk, com.liferay.portal.model.Shard shard)
-		throws SystemException {
-		try {
-			addShard.add(pk, shard.getPrimaryKey());
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			FinderCacheUtil.clearCache("Shards_Companies");
-		}
-	}
-
-	public void addShards(long pk, long[] shardPKs) throws SystemException {
-		try {
-			for (long shardPK : shardPKs) {
-				addShard.add(pk, shardPK);
-			}
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			FinderCacheUtil.clearCache("Shards_Companies");
-		}
-	}
-
-	public void addShards(long pk, List<com.liferay.portal.model.Shard> shards)
-		throws SystemException {
-		try {
-			for (com.liferay.portal.model.Shard shard : shards) {
-				addShard.add(pk, shard.getPrimaryKey());
-			}
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			FinderCacheUtil.clearCache("Shards_Companies");
-		}
-	}
-
-	public void clearShards(long pk) throws SystemException {
-		try {
-			clearShards.clear(pk);
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			FinderCacheUtil.clearCache("Shards_Companies");
-		}
-	}
-
-	public void removeShard(long pk, long shardPK) throws SystemException {
-		try {
-			removeShard.remove(pk, shardPK);
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			FinderCacheUtil.clearCache("Shards_Companies");
-		}
-	}
-
-	public void removeShard(long pk, com.liferay.portal.model.Shard shard)
-		throws SystemException {
-		try {
-			removeShard.remove(pk, shard.getPrimaryKey());
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			FinderCacheUtil.clearCache("Shards_Companies");
-		}
-	}
-
-	public void removeShards(long pk, long[] shardPKs)
-		throws SystemException {
-		try {
-			for (long shardPK : shardPKs) {
-				removeShard.remove(pk, shardPK);
-			}
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			FinderCacheUtil.clearCache("Shards_Companies");
-		}
-	}
-
-	public void removeShards(long pk,
-		List<com.liferay.portal.model.Shard> shards) throws SystemException {
-		try {
-			for (com.liferay.portal.model.Shard shard : shards) {
-				removeShard.remove(pk, shard.getPrimaryKey());
-			}
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			FinderCacheUtil.clearCache("Shards_Companies");
-		}
-	}
-
-	public void setShards(long pk, long[] shardPKs) throws SystemException {
-		try {
-			clearShards.clear(pk);
-
-			for (long shardPK : shardPKs) {
-				addShard.add(pk, shardPK);
-			}
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			FinderCacheUtil.clearCache("Shards_Companies");
-		}
-	}
-
-	public void setShards(long pk, List<com.liferay.portal.model.Shard> shards)
-		throws SystemException {
-		try {
-			clearShards.clear(pk);
-
-			for (com.liferay.portal.model.Shard shard : shards) {
-				addShard.add(pk, shard.getPrimaryKey());
-			}
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			FinderCacheUtil.clearCache("Shards_Companies");
-		}
-	}
-
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(
@@ -1498,12 +1133,6 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 				_log.error(e);
 			}
 		}
-
-		containsShard = new ContainsShard(this);
-
-		addShard = new AddShard(this);
-		clearShards = new ClearShards(this);
-		removeShard = new RemoveShard(this);
 	}
 
 	@BeanReference(name = "com.liferay.portal.service.persistence.AccountPersistence.impl")
@@ -1554,8 +1183,6 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portal.service.persistence.PluginSettingPersistence pluginSettingPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.PortletPersistence.impl")
 	protected com.liferay.portal.service.persistence.PortletPersistence portletPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.PortletItemPersistence.impl")
-	protected com.liferay.portal.service.persistence.PortletItemPersistence portletItemPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.PortletPreferencesPersistence.impl")
 	protected com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.RegionPersistence.impl")
@@ -1570,8 +1197,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portal.service.persistence.RolePersistence rolePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ServiceComponentPersistence.impl")
 	protected com.liferay.portal.service.persistence.ServiceComponentPersistence serviceComponentPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ShardPersistence.impl")
-	protected com.liferay.portal.service.persistence.ShardPersistence shardPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.PortletItemPersistence.impl")
+	protected com.liferay.portal.service.persistence.PortletItemPersistence portletItemPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.SubscriptionPersistence.impl")
 	protected com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
@@ -1590,177 +1217,5 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portal.service.persistence.WebDAVPropsPersistence webDAVPropsPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WebsitePersistence.impl")
 	protected com.liferay.portal.service.persistence.WebsitePersistence websitePersistence;
-	protected ContainsShard containsShard;
-	protected AddShard addShard;
-	protected ClearShards clearShards;
-	protected RemoveShard removeShard;
-
-	protected class ContainsShard {
-		protected ContainsShard(CompanyPersistenceImpl persistenceImpl) {
-			super();
-
-			_mappingSqlQuery = MappingSqlQueryFactoryUtil.getMappingSqlQuery(getDataSource(),
-					_SQL_CONTAINSSHARD,
-					new int[] { Types.BIGINT, Types.BIGINT }, RowMapper.COUNT);
-		}
-
-		protected boolean contains(long companyId, long shardId) {
-			List<Integer> results = _mappingSqlQuery.execute(new Object[] {
-						new Long(companyId), new Long(shardId)
-					});
-
-			if (results.size() > 0) {
-				Integer count = results.get(0);
-
-				if (count.intValue() > 0) {
-					return true;
-				}
-			}
-
-			return false;
-		}
-
-		private MappingSqlQuery _mappingSqlQuery;
-	}
-
-	protected class AddShard {
-		protected AddShard(CompanyPersistenceImpl persistenceImpl) {
-			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
-					"INSERT INTO Shards_Companies (companyId, shardId) VALUES (?, ?)",
-					new int[] { Types.BIGINT, Types.BIGINT });
-			_persistenceImpl = persistenceImpl;
-		}
-
-		protected void add(long companyId, long shardId)
-			throws SystemException {
-			if (!_persistenceImpl.containsShard.contains(companyId, shardId)) {
-				ModelListener[] shardListeners = shardPersistence.getListeners();
-
-				for (ModelListener listener : listeners) {
-					listener.onBeforeAddAssociation(companyId,
-						com.liferay.portal.model.Shard.class.getName(), shardId);
-				}
-
-				for (ModelListener listener : shardListeners) {
-					listener.onBeforeAddAssociation(shardId,
-						Company.class.getName(), companyId);
-				}
-
-				_sqlUpdate.update(new Object[] {
-						new Long(companyId), new Long(shardId)
-					});
-
-				for (ModelListener listener : listeners) {
-					listener.onAfterAddAssociation(companyId,
-						com.liferay.portal.model.Shard.class.getName(), shardId);
-				}
-
-				for (ModelListener listener : shardListeners) {
-					listener.onAfterAddAssociation(shardId,
-						Company.class.getName(), companyId);
-				}
-			}
-		}
-
-		private SqlUpdate _sqlUpdate;
-		private CompanyPersistenceImpl _persistenceImpl;
-	}
-
-	protected class ClearShards {
-		protected ClearShards(CompanyPersistenceImpl persistenceImpl) {
-			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
-					"DELETE FROM Shards_Companies WHERE companyId = ?",
-					new int[] { Types.BIGINT });
-		}
-
-		protected void clear(long companyId) throws SystemException {
-			ModelListener[] shardListeners = shardPersistence.getListeners();
-
-			List<com.liferay.portal.model.Shard> shards = null;
-
-			if ((listeners.length > 0) || (shardListeners.length > 0)) {
-				shards = getShards(companyId);
-
-				for (com.liferay.portal.model.Shard shard : shards) {
-					for (ModelListener listener : listeners) {
-						listener.onBeforeRemoveAssociation(companyId,
-							com.liferay.portal.model.Shard.class.getName(),
-							shard.getPrimaryKey());
-					}
-
-					for (ModelListener listener : shardListeners) {
-						listener.onBeforeRemoveAssociation(shard.getPrimaryKey(),
-							Company.class.getName(), companyId);
-					}
-				}
-			}
-
-			_sqlUpdate.update(new Object[] { new Long(companyId) });
-
-			if ((listeners.length > 0) || (shardListeners.length > 0)) {
-				for (com.liferay.portal.model.Shard shard : shards) {
-					for (ModelListener listener : listeners) {
-						listener.onAfterRemoveAssociation(companyId,
-							com.liferay.portal.model.Shard.class.getName(),
-							shard.getPrimaryKey());
-					}
-
-					for (ModelListener listener : shardListeners) {
-						listener.onBeforeRemoveAssociation(shard.getPrimaryKey(),
-							Company.class.getName(), companyId);
-					}
-				}
-			}
-		}
-
-		private SqlUpdate _sqlUpdate;
-	}
-
-	protected class RemoveShard {
-		protected RemoveShard(CompanyPersistenceImpl persistenceImpl) {
-			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
-					"DELETE FROM Shards_Companies WHERE companyId = ? AND shardId = ?",
-					new int[] { Types.BIGINT, Types.BIGINT });
-			_persistenceImpl = persistenceImpl;
-		}
-
-		protected void remove(long companyId, long shardId)
-			throws SystemException {
-			if (_persistenceImpl.containsShard.contains(companyId, shardId)) {
-				ModelListener[] shardListeners = shardPersistence.getListeners();
-
-				for (ModelListener listener : listeners) {
-					listener.onBeforeRemoveAssociation(companyId,
-						com.liferay.portal.model.Shard.class.getName(), shardId);
-				}
-
-				for (ModelListener listener : shardListeners) {
-					listener.onBeforeRemoveAssociation(shardId,
-						Company.class.getName(), companyId);
-				}
-
-				_sqlUpdate.update(new Object[] {
-						new Long(companyId), new Long(shardId)
-					});
-
-				for (ModelListener listener : listeners) {
-					listener.onAfterRemoveAssociation(companyId,
-						com.liferay.portal.model.Shard.class.getName(), shardId);
-				}
-
-				for (ModelListener listener : shardListeners) {
-					listener.onAfterRemoveAssociation(shardId,
-						Company.class.getName(), companyId);
-				}
-			}
-		}
-
-		private SqlUpdate _sqlUpdate;
-		private CompanyPersistenceImpl _persistenceImpl;
-	}
-
-	private static final String _SQL_GETSHARDS = "SELECT {Shard.*} FROM Shard INNER JOIN Shards_Companies ON (Shards_Companies.shardId = Shard.shardId) WHERE (Shards_Companies.companyId = ?)";
-	private static final String _SQL_GETSHARDSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Shards_Companies WHERE companyId = ?";
-	private static final String _SQL_CONTAINSSHARD = "SELECT COUNT(*) AS COUNT_VALUE FROM Shards_Companies WHERE companyId = ? AND shardId = ?";
 	private static Log _log = LogFactoryUtil.getLog(CompanyPersistenceImpl.class);
 }
