@@ -144,10 +144,6 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(CACHE_NAME);
-		sb.append(StringPool.PERIOD);
-		sb.append(className);
-		sb.append(StringPool.PERIOD);
 		sb.append(methodName);
 		sb.append(_PARAMS_SEPARATOR);
 
