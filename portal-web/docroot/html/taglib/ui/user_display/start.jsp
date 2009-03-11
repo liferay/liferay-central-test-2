@@ -117,6 +117,7 @@ if ((presences != null) && (presences.size() > 0)) {
 				<%= userName %>
 			</c:otherwise>
 		</c:choose>
+	</div>
 
 <%!
 private static final String _REQUEST_ATTRIBUTE_PREFIX = "taglib:ui:user_display:";
