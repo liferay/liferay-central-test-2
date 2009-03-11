@@ -24,6 +24,8 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.ModelHintsUtil;
@@ -54,7 +56,16 @@ public class ClassNameLocalServiceImpl extends ClassNameLocalServiceBaseImpl {
 		return className;
 	}
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void checkClassNames() throws SystemException {
+		if (_classNames.isEmpty()) {
+			List<ClassName> classNames = classNamePersistence.findAll();
+
+			for (ClassName className : classNames) {
+				_classNames.put(className.getValue(), className);
+			}
+		}
+
 		List<String> models = ModelHintsUtil.getModels();
 
 		for (int i = 0; i < models.size(); i++) {
