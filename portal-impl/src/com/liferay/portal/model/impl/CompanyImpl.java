@@ -32,7 +32,6 @@ import com.liferay.portal.model.Account;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.AccountLocalServiceUtil;
-import com.liferay.portal.service.ShardLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
@@ -127,20 +126,6 @@ public class CompanyImpl extends CompanyModelImpl implements Company {
 
 	public Locale getLocale() {
 		return getDefaultUser().getLocale();
-	}
-
-	public String getShardName() {
-		String shardName = PropsValues.SHARD_DEFAULT;
-
-		try {
-			shardName =
-				ShardLocalServiceUtil.getShardNameByCompanyId(getCompanyId());
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
-
-		return shardName;
 	}
 
 	public TimeZone getTimeZone() {
