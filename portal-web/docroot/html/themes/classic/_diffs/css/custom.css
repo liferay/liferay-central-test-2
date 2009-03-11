@@ -47,7 +47,7 @@ body {
 	zoom: 1;
 }
 
-.current-community {
+.logo .current-community {
 	background: url(../images/dock/my_places_public.png) no-repeat 15px 50%;
 	border-left: 1px solid #D3DADD;
 	color: #D3DADD;
@@ -60,11 +60,11 @@ body {
 	padding-left: 40px;
 }
 
-.guest-community .current-community {
+.guest-community .logo .current-community {
 	display: none;
 }
 
-.private-page .current-community {
+.private-page .logo .current-community {
 	background-image: url(../images/dock/my_places_private.png);
 }
 
