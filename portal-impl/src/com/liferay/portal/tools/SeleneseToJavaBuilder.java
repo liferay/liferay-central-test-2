@@ -293,6 +293,20 @@ public class SeleneseToJavaBuilder {
 				sb.append(param2);
 				sb.append("$\"));");
 			}
+			else if (param1.equals("assertLocation") ||
+					 param1.equals("assertNotLocation")) {
+
+				if (param1.equals("assertLocation")) {
+					sb.append("assertEquals");
+				}
+				else if (param1.equals("assertNotLocation")) {
+					sb.append("assertNotEquals");
+				}
+
+				sb.append("(\"");
+				sb.append(param2);
+				sb.append("\", selenium.getLocation());");
+			}
 			else if (param1.equals("assertElementNotPresent") ||
 					 param1.equals("assertElementPresent")) {
 
