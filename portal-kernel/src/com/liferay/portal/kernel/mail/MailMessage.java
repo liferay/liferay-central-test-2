@@ -45,11 +45,25 @@ public class MailMessage implements Serializable {
 	}
 
 	public MailMessage(
+		InternetAddress from, String subject, String body,
+		boolean htmlFormat) {
+
+		this(from, null, subject, body, htmlFormat);
+	}
+
+	public MailMessage(
 		InternetAddress from, InternetAddress to, String subject, String body,
 		boolean htmlFormat) {
 
 		_from = from;
-		_to = new InternetAddress[] {to};
+
+		if (to != null) {
+			_to = new InternetAddress[] {to};
+		}
+		else {
+			_to = new InternetAddress[0];
+		}
+
 		_subject = subject;
 		_body = body;
 		_htmlFormat = htmlFormat;
