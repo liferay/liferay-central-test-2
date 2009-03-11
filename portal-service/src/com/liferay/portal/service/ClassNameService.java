@@ -62,4 +62,10 @@ public interface ClassNameService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.ClassName getClassName(
 		java.lang.String value) throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public long getClassNameId(java.lang.Class<?> classObj);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public long getClassNameId(java.lang.String value);
 }

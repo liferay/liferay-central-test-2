@@ -86,4 +86,16 @@ public class ClassNameServiceJSON {
 
 		return ClassNameJSONSerializer.toJSONObject(returnValue);
 	}
+
+	public static long getClassNameId(java.lang.Class<?> classObj) {
+		long returnValue = ClassNameServiceUtil.getClassNameId(classObj);
+
+		return returnValue;
+	}
+
+	public static long getClassNameId(java.lang.String value) {
+		long returnValue = ClassNameServiceUtil.getClassNameId(value);
+
+		return returnValue;
+	}
 }

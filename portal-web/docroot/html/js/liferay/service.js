@@ -14,7 +14,8 @@ Liferay.Service.registerClass(
 Liferay.Service.registerClass(
 	Liferay.Service.Portal, "ClassName",
 	{
-		getClassName: true
+		getClassName: true,
+		getClassNameId: true
 	}
 );
 

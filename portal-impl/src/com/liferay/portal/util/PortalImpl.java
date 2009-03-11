@@ -520,19 +520,11 @@ public class PortalImpl implements Portal {
 	}
 
 	public long getClassNameId(Class<?> classObj) {
-		return getClassNameId(classObj.getName());
+		return ClassNameServiceUtil.getClassNameId(classObj);
 	}
 
 	public long getClassNameId(String value) {
-		try {
-			ClassName className = ClassNameServiceUtil.getClassName(value);
-
-			return className.getClassNameId();
-		}
-		catch (Exception e) {
-			throw new RuntimeException(
-				"Unable to get class name from value " + value, e);
-		}
+		return ClassNameServiceUtil.getClassNameId(value);
 	}
 
 	public String getClassNamePortletId(String className) {

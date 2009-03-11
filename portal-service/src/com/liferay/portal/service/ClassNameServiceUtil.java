@@ -57,6 +57,14 @@ public class ClassNameServiceUtil {
 		return getService().getClassName(value);
 	}
 
+	public static long getClassNameId(java.lang.Class<?> classObj) {
+		return getService().getClassNameId(classObj);
+	}
+
+	public static long getClassNameId(java.lang.String value) {
+		return getService().getClassNameId(value);
+	}
+
 	public static ClassNameService getService() {
 		if (_service == null) {
 			throw new RuntimeException("ClassNameService is not set");

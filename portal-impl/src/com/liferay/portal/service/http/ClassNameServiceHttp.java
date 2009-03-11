@@ -141,5 +141,65 @@ public class ClassNameServiceHttp {
 		}
 	}
 
+	public static long getClassNameId(HttpPrincipal httpPrincipal,
+		java.lang.Class<?> classObj) throws com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = classObj;
+
+			if (classObj == null) {
+				paramObj0 = new NullWrapper("java.lang.Class");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(ClassNameServiceUtil.class.getName(),
+					"getClassNameId", new Object[] { paramObj0 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return ((Long)returnObj).longValue();
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static long getClassNameId(HttpPrincipal httpPrincipal,
+		java.lang.String value) throws com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = value;
+
+			if (value == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(ClassNameServiceUtil.class.getName(),
+					"getClassNameId", new Object[] { paramObj0 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return ((Long)returnObj).longValue();
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(ClassNameServiceHttp.class);
 }

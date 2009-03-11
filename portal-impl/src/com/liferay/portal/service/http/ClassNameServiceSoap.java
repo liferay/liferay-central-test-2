@@ -108,5 +108,33 @@ public class ClassNameServiceSoap {
 		}
 	}
 
+	public static long getClassNameId(java.lang.Class<?> classObj)
+		throws RemoteException {
+		try {
+			long returnValue = ClassNameServiceUtil.getClassNameId(classObj);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static long getClassNameId(java.lang.String value)
+		throws RemoteException {
+		try {
+			long returnValue = ClassNameServiceUtil.getClassNameId(value);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(ClassNameServiceSoap.class);
 }

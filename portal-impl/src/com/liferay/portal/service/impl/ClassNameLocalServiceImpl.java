@@ -93,6 +93,22 @@ public class ClassNameLocalServiceImpl extends ClassNameLocalServiceBaseImpl {
 		return className;
 	}
 
+	public long getClassNameId(Class<?> classObj) {
+		return getClassNameId(classObj.getName());
+	}
+
+	public long getClassNameId(String value) {
+		try {
+			ClassName className = getClassName(value);
+
+			return className.getClassNameId();
+		}
+		catch (Exception e) {
+			throw new RuntimeException(
+				"Unable to get class name from value " + value, e);
+		}
+	}
+
 	private static ClassName _nullClassName = new ClassNameImpl();
 	private static Map<String, ClassName> _classNames =
 		new ConcurrentHashMap<String, ClassName>();
