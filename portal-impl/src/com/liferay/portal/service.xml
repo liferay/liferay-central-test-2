@@ -1302,6 +1302,32 @@
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
+	<entity name="Shard" local-service="true">
+
+		<!-- PK fields -->
+
+		<column name="shardId" type="long" primary="true" />
+
+		<!-- Other fields -->
+		
+		<column name="classNameId" type="long" />
+		<column name="classPK" type="long" />
+		<column name="jdbcName" type="String" />
+		
+		<!-- Finder methods -->
+
+		<finder name="JdbcName" return-type="Shard">
+			<finder-column name="jdbcName" />
+		</finder>
+		<finder name="C_C" return-type="Shard">
+			<finder-column name="classNameId" />
+			<finder-column name="classPK" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+	</entity>
 	<entity name="Subscription" local-service="true" remote-service="false">
 
 		<!-- PK fields -->

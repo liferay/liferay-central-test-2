@@ -480,6 +480,12 @@
 			<hint-collection name="CLOB" />
 		</field>
 	</model>
+	<model name="com.liferay.portal.model.Shard">
+		<field name="shardId" type="long" />
+		<field name="classNameId" type="long" />
+		<field name="classPK" type="long" />
+		<field name="jdbcName" type="String" />
+	</model>
 	<model name="com.liferay.portal.model.Subscription">
 		<field name="subscriptionId" type="long" />
 		<field name="companyId" type="long" />

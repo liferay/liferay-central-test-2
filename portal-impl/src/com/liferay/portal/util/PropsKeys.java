@@ -477,6 +477,12 @@ public interface PropsKeys {
 
 	public static final String JCR_WORKSPACE_NAME = "jcr.workspace.name";
 
+	public static final String SHARD_AVAILABLE = "shard.available";
+
+	public static final String SHARD_DEFAULT = "shard.default";
+	
+	public static final String SHARD_SELECTOR = "shard.selector";
+
 	public static final String JOURNAL_ARTICLE_CHECK_INTERVAL = "journal.article.check.interval";
 
 	public static final String JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID = "journal.article.force.autogenerate.id";

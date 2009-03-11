@@ -119,17 +119,17 @@ public class ClassNameLocalServiceUtil {
 		getService().checkClassNames();
 	}
 
+	public static com.liferay.portal.model.ClassName getClassName(
+		java.lang.String value) throws com.liferay.portal.SystemException {
+		return getService().getClassName(value);
+	}
+
 	public static long getClassNameId(java.lang.Class<?> classObj) {
 		return getService().getClassNameId(classObj);
 	}
 
 	public static long getClassNameId(java.lang.String value) {
 		return getService().getClassNameId(value);
-	}
-
-	public static com.liferay.portal.model.ClassName getClassName(
-		java.lang.String value) throws com.liferay.portal.SystemException {
-		return getService().getClassName(value);
 	}
 
 	public static ClassNameLocalService getService() {

@@ -709,6 +709,30 @@
 	<bean id="com.liferay.portal.service.persistence.ServiceComponentUtil" class="com.liferay.portal.service.persistence.ServiceComponentUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.ServiceComponentPersistence.impl" />
 	</bean>
+	<bean id="com.liferay.portal.service.ShardLocalService.impl" class="com.liferay.portal.service.impl.ShardLocalServiceImpl" />
+	<bean id="com.liferay.portal.service.ShardLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portal.service.ShardLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.ShardLocalServiceFactory" class="com.liferay.portal.service.ShardLocalServiceFactory">
+		<property name="service" ref="com.liferay.portal.service.ShardLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.ShardLocalServiceUtil" class="com.liferay.portal.service.ShardLocalServiceUtil">
+		<property name="service" ref="com.liferay.portal.service.ShardLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.ShardService.impl" class="com.liferay.portal.service.impl.ShardServiceImpl" />
+	<bean id="com.liferay.portal.service.ShardService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portal.service.ShardService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.ShardServiceFactory" class="com.liferay.portal.service.ShardServiceFactory">
+		<property name="service" ref="com.liferay.portal.service.ShardService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.ShardServiceUtil" class="com.liferay.portal.service.ShardServiceUtil">
+		<property name="service" ref="com.liferay.portal.service.ShardService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.ShardPersistence.impl" class="com.liferay.portal.service.persistence.ShardPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portal.service.persistence.ShardUtil" class="com.liferay.portal.service.persistence.ShardUtil">
+		<property name="persistence" ref="com.liferay.portal.service.persistence.ShardPersistence.impl" />
+	</bean>
 	<bean id="com.liferay.portal.service.SubscriptionLocalService.impl" class="com.liferay.portal.service.impl.SubscriptionLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.SubscriptionLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.liferay.portal.service.SubscriptionLocalService.impl" />

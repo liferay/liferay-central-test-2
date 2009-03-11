@@ -289,6 +289,18 @@
 		<property name="service" ref="com.liferay.portal.service.RoleService.impl" />
 		<property name="serviceInterface" value="com.liferay.portal.service.RoleService" />
 	</bean>
+	<bean name="/com_liferay_portal_service_spring_ShardService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.ShardService.impl" />
+		<property name="serviceInterface" value="com.liferay.portal.service.ShardService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_ShardService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.ShardService.impl" />
+		<property name="serviceInterface" value="com.liferay.portal.service.ShardService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_ShardService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.ShardService.impl" />
+		<property name="serviceInterface" value="com.liferay.portal.service.ShardService" />
+	</bean>
 	<bean name="/com_liferay_portal_service_spring_ThemeService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portal.service.ThemeService.impl" />
 		<property name="serviceInterface" value="com.liferay.portal.service.ThemeService" />

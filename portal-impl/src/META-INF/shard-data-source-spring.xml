@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+>
+
+	<bean id="liferayDataSource" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
+		<property name="targetDataSource">
+			<bean class="org.springframework.aop.framework.ProxyFactoryBean">
+				<property name="targetSource" ref="shardDataSourceTargetSource" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="liferayHibernateSessionFactory" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="targetSource" ref="shardSessionFactoryTargetSource" />
+	</bean>
+	<bean id="shardDataSource0" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
+		<property name="targetDataSource">
+			<bean class="com.liferay.portal.dao.jdbc.util.DataSourceFactoryBean">
+				<property name="propertyPrefix" value="jdbc.default." />
+			</bean>
+		</property>
+	</bean>
+	<bean id="shardDataSource1" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
+		<property name="targetDataSource">
+			<bean class="com.liferay.portal.dao.jdbc.util.DataSourceFactoryBean">
+				<property name="propertyPrefix" value="jdbc.one." />
+			</bean>
+		</property>
+	</bean>
+	<bean id="shardDataSource2" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
+		<property name="targetDataSource">
+			<bean class="com.liferay.portal.dao.jdbc.util.DataSourceFactoryBean">
+				<property name="propertyPrefix" value="jdbc.two." />
+			</bean>
+		</property>
+	</bean>
+	<bean id="shardDataSourceTargetSource" class="com.liferay.portal.dao.shard.ShardDataSourceTargetSource">
+		<property name="shardDataSources">
+			<map>
+				<entry>
+					<key>
+						<value>default</value>
+					</key>
+					<ref bean="shardDataSource0" />
+				</entry>
+				<entry>
+					<key>
+						<value>one</value>
+					</key>
+					<ref bean="shardDataSource1" />
+				</entry>
+				<entry>
+					<key>
+						<value>two</value>
+					</key>
+					<ref bean="shardDataSource2" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="shardSessionFactoryTargetSource" class="com.liferay.portal.dao.shard.ShardSessionFactoryTargetSource">
+		<property name="sessionFactories">
+			<map>
+				<entry>
+					<key>
+						<value>default</value>
+					</key>
+					<bean class="com.liferay.portal.spring.hibernate.PortalHibernateConfiguration">
+						<property name="dataSource" ref="shardDataSource0" />
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<value>one</value>
+					</key>
+					<bean class="com.liferay.portal.spring.hibernate.PortalHibernateConfiguration">
+						<property name="dataSource" ref="shardDataSource1" />
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<value>two</value>
+					</key>
+					<bean class="com.liferay.portal.spring.hibernate.PortalHibernateConfiguration">
+						<property name="dataSource" ref="shardDataSource2" />
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil" class="com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil">
+		<property name="sqlUpdateFactory">
+			<bean class="com.liferay.portal.dao.shard.ShardSqlUpdateFactoryImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.dao.shard.ShardAdvice" class="com.liferay.portal.dao.shard.ShardAdvice">
+		<property name="shardDataSourceTargetSource" ref="shardDataSourceTargetSource" />
+		<property name="shardSessionFactoryTargetSource" ref="shardSessionFactoryTargetSource" />
+	</bean>
+	<bean id="com.liferay.portal.dao.shard.ShardUtil" class="com.liferay.portal.dao.shard.ShardUtil">
+		<property name="shardAdvice" ref="com.liferay.portal.dao.shard.ShardAdvice" />
+	</bean>
+	<bean id="com.liferay.portal.service.CompanyLocalService.impl" class="com.liferay.portal.dao.shard.ShardCompanyLocalServiceImpl" />
+	<bean id="com.liferay.portal.service.UserLocalService.impl" class="com.liferay.portal.dao.shard.ShardUserLocalServiceImpl" />
+	<aop:config>
+		<aop:aspect ref="com.liferay.portal.dao.shard.ShardAdvice">
+			<aop:around pointcut="bean(*Persistence.impl) or bean(*Finder.impl)" method="invokePersistence" />
+		</aop:aspect>
+		<aop:aspect ref="com.liferay.portal.dao.shard.ShardAdvice">
+			<aop:around pointcut="execution(void com.liferay.portal.events.StartupHelper.*(..))" method="invokeGlobally" />
+		</aop:aspect>
+	</aop:config>
+</beans>

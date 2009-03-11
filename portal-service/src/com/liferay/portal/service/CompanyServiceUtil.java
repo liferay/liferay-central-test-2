@@ -53,6 +53,14 @@ public class CompanyServiceUtil {
 		return getService().addCompany(webId, virtualHost, mx);
 	}
 
+	public static com.liferay.portal.model.Company addCompany(
+		java.lang.String webId, java.lang.String virtualHost,
+		java.lang.String mx, java.lang.String shardName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().addCompany(webId, virtualHost, mx, shardName);
+	}
+
 	public static com.liferay.portal.model.Company getCompanyById(
 		long companyId)
 		throws com.liferay.portal.PortalException,
