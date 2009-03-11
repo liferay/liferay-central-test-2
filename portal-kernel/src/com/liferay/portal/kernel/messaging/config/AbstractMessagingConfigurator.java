@@ -75,14 +75,24 @@ public abstract class AbstractMessagingConfigurator
 			messageBus.addDestination(destination);
 		}
 
-		for (Map.Entry<String, List<MessageListener>> listeners :
-				_messageListeners.entrySet()) {
+		ClassLoader previousClassLoader =
+			Thread.currentThread().getContextClassLoader();
+		try {
+			ClassLoader classLoader = getOperatingClassloader();
+			Thread.currentThread().setContextClassLoader(classLoader);
 
-			String destination = listeners.getKey();
+			for (Map.Entry<String, List<MessageListener>> listeners :
+					_messageListeners.entrySet()) {
 
-			for (MessageListener listener : listeners.getValue()) {
-				messageBus.registerMessageListener(destination, listener);
+				String destination = listeners.getKey();
+
+				for (MessageListener listener : listeners.getValue()) {
+					messageBus.registerMessageListener(destination, listener);
+				}
 			}
+		}
+		finally {
+			Thread.currentThread().setContextClassLoader(previousClassLoader);
 		}
 	}
 
@@ -103,6 +113,8 @@ public abstract class AbstractMessagingConfigurator
 	}
 
 	protected abstract MessageBus getMessageBus();
+
+	protected abstract ClassLoader getOperatingClassloader();
 
 	private List<DestinationEventListener> _destinationEventListeners =
 		new ArrayList<DestinationEventListener>();

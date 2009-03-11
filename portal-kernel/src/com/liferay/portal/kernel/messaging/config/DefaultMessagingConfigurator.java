@@ -42,6 +42,10 @@ public class DefaultMessagingConfigurator
 		return _messageBus;
 	}
 
+	protected ClassLoader getOperatingClassloader() {
+		return Thread.currentThread().getContextClassLoader();
+	}
+
 	private MessageBus _messageBus;
 
 }
