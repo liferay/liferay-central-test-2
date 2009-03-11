@@ -117,6 +117,10 @@ public class MailMessage implements Serializable {
 		return _htmlFormat;
 	}
 
+	public void setBCC(InternetAddress bcc) {
+		_bcc = new InternetAddress[] {bcc};
+	}
+
 	public void setBCC(InternetAddress[] bcc) {
 		_bcc = bcc;
 	}
@@ -127,6 +131,10 @@ public class MailMessage implements Serializable {
 
 	public void setBulkAddresses(InternetAddress[] bulkAddresses) {
 		_bulkAddresses = bulkAddresses;
+	}
+
+	public void setCC(InternetAddress cc) {
+		_cc = new InternetAddress[] {cc};
 	}
 
 	public void setCC(InternetAddress[] cc) {
@@ -159,6 +167,10 @@ public class MailMessage implements Serializable {
 
 	public void setSubject(String subject) {
 		_subject = subject;
+	}
+
+	public void setTo(InternetAddress to) {
+		_to = new InternetAddress[] {to};
 	}
 
 	public void setTo(InternetAddress[] to) {
