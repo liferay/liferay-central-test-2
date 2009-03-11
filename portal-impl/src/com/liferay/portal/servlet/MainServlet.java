@@ -600,10 +600,6 @@ public class MainServlet extends ActionServlet {
 			}
 		}
 
-		// Current URL
-
-		PortalUtil.getCurrentURL(request);
-
 		// Login
 
 		long userId = PortalUtil.getUserId(request);
