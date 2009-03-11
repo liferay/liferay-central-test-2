@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.job.IntervalJob;
 import com.liferay.portal.kernel.job.JobExecutionContext;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.mail.Account;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -115,8 +116,8 @@ public class POPNotificationsJob implements IntervalJob {
 			String storeProtocol = GetterUtil.getString(
 				session.getProperty("mail.store.protocol"));
 
-			if (!storeProtocol.equals("pop3s")) {
-				storeProtocol = "pop3";
+			if (!storeProtocol.equals(Account.PROTOCOL_POPS)) {
+				storeProtocol = Account.PROTOCOL_POP;
 			}
 
 			_store = session.getStore(storeProtocol);
