@@ -41,4 +41,5 @@ public class PluginMessagingConfigurator extends AbstractMessagingConfigurator {
 	protected ClassLoader getOperatingClassloader() {
 		return PortletClassLoaderUtil.getClassLoader();
 	}
+
 }
