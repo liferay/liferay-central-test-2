@@ -75,6 +75,7 @@ public interface ReleaseLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Release getRelease(long releaseId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
@@ -94,10 +95,18 @@ public interface ReleaseLocalService {
 		com.liferay.portal.model.Release release, boolean merge)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Release addRelease()
+		throws com.liferay.portal.SystemException;
+
+	public void createTablesAndPopulate()
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getBuildNumberOrCreate()
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Release getRelease()
 		throws com.liferay.portal.SystemException;
 

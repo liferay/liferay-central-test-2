@@ -51,6 +51,45 @@ import java.util.Date;
  */
 public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 
+	public Release addRelease() throws SystemException {
+		Release release = releasePersistence.create(ReleaseImpl.DEFAULT_ID);
+
+		Date now = new Date();
+
+		release.setCreateDate(now);
+		release.setModifiedDate(now);
+
+		releasePersistence.update(release, false);
+
+		return release;
+	}
+
+	public void createTablesAndPopulate() throws SystemException {
+		try {
+			DBUtil dbUtil = DBUtil.getInstance();
+
+			dbUtil.runSQLTemplate("portal-tables.sql", false);
+			dbUtil.runSQLTemplate("portal-data-common.sql", false);
+			dbUtil.runSQLTemplate("portal-data-counter.sql", false);
+
+			if (!GetterUtil.getBoolean(
+					PropsUtil.get(PropsKeys.SCHEMA_RUN_MINIMAL))) {
+
+				dbUtil.runSQLTemplate("portal-data-sample.vm", false);
+			}
+
+			dbUtil.runSQLTemplate("portal-data-release.sql", false);
+			dbUtil.runSQLTemplate("indexes.sql", false);
+			dbUtil.runSQLTemplate("sequences.sql", false);
+			dbUtil.runSQLTemplate("quartz-tables.sql", false);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new SystemException(e);
+		}
+	}
+
 	public int getBuildNumberOrCreate()
 		throws PortalException, SystemException {
 
@@ -95,7 +134,7 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 				_log.info("Create tables and populate with default data");
 			}
 
-			createTablesAndPopulate();
+			releaseLocalService.createTablesAndPopulate();
 
 			return getRelease().getBuildNumber();
 		}
@@ -110,14 +149,7 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 			ReleaseImpl.DEFAULT_ID);
 
 		if (release == null) {
-			release = releasePersistence.create(ReleaseImpl.DEFAULT_ID);
-
-			Date now = new Date();
-
-			release.setCreateDate(now);
-			release.setModifiedDate(now);
-
-			releasePersistence.update(release, false);
+			release = releaseLocalService.addRelease();
 		}
 
 		return release;
@@ -134,32 +166,6 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 		releasePersistence.update(release, false);
 
 		return release;
-	}
-
-	protected void createTablesAndPopulate() throws SystemException {
-		try {
-			DBUtil dbUtil = DBUtil.getInstance();
-
-			dbUtil.runSQLTemplate("portal-tables.sql", false);
-			dbUtil.runSQLTemplate("portal-data-common.sql", false);
-			dbUtil.runSQLTemplate("portal-data-counter.sql", false);
-
-			if (!GetterUtil.getBoolean(
-					PropsUtil.get(PropsKeys.SCHEMA_RUN_MINIMAL))) {
-
-				dbUtil.runSQLTemplate("portal-data-sample.vm", false);
-			}
-
-			dbUtil.runSQLTemplate("portal-data-release.sql", false);
-			dbUtil.runSQLTemplate("indexes.sql", false);
-			dbUtil.runSQLTemplate("sequences.sql", false);
-			dbUtil.runSQLTemplate("quartz-tables.sql", false);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new SystemException(e);
-		}
 	}
 
 	private static final String _GET_BUILD_NUMBER =

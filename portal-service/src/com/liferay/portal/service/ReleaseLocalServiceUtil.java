@@ -106,6 +106,16 @@ public class ReleaseLocalServiceUtil {
 		return getService().updateRelease(release, merge);
 	}
 
+	public static com.liferay.portal.model.Release addRelease()
+		throws com.liferay.portal.SystemException {
+		return getService().addRelease();
+	}
+
+	public static void createTablesAndPopulate()
+		throws com.liferay.portal.SystemException {
+		getService().createTablesAndPopulate();
+	}
+
 	public static int getBuildNumberOrCreate()
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
