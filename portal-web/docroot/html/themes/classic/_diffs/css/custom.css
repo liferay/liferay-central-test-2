@@ -47,7 +47,7 @@ body {
 	zoom: 1;
 }
 
-.logo .current-community {
+.current-community {
 	background: url(../images/dock/my_places_public.png) no-repeat 15px 50%;
 	border-left: 1px solid #D3DADD;
 	color: #D3DADD;
