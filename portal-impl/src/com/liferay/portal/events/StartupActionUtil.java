@@ -36,16 +36,41 @@ import com.liferay.portal.verify.VerifyException;
 import com.liferay.portal.verify.VerifyProcess;
 
 /**
- * <a href="StartupHelperImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="StartupActionUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Alexander Chow
  * @author Raymond Augé
  *
  */
-public class StartupHelperImpl implements StartupHelper {
+public class StartupActionUtil {
 
-	public void upgradeProcess(int buildNumber) throws UpgradeException {
+	public static void deleteTempImages() {
+		try {
+			DBUtil dbUtil = DBUtil.getInstance();
+
+			dbUtil.runSQL(_DELETE_TEMP_IMAGES_1);
+			dbUtil.runSQL(_DELETE_TEMP_IMAGES_2);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
+
+	public static void updateIndexes() {
+		try {
+			if (_log.isInfoEnabled()) {
+				_log.info("Adding indexes");
+			}
+
+			DBUtil.getInstance().runSQLTemplate("indexes.sql", false);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
+
+	public static void upgradeProcess(int buildNumber) throws UpgradeException {
 		String[] upgradeProcesses = PropsUtil.getArray(
 			PropsKeys.UPGRADE_PROCESSES);
 
@@ -90,20 +115,7 @@ public class StartupHelperImpl implements StartupHelper {
 		}
 	}
 
-	public void updateIndexes() {
-		try {
-			if (_log.isInfoEnabled()) {
-				_log.info("Adding indexes");
-			}
-
-			DBUtil.getInstance().runSQLTemplate("indexes.sql", false);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-	}
-
-	public void verifyProcess(boolean verified) throws VerifyException {
+	public static void verifyProcess(boolean verified) throws VerifyException {
 
 		// LPS-1880
 
@@ -164,28 +176,13 @@ public class StartupHelperImpl implements StartupHelper {
 		PropsValues.INDEX_READ_ONLY = tempIndexReadOnly;
 	}
 
-	public void deleteTempImages() {
-		try {
-			DBUtil dbUtil = DBUtil.getInstance();
-
-			dbUtil.runSQL(_DELETE_TEMP_IMAGES_1);
-			dbUtil.runSQL(_DELETE_TEMP_IMAGES_2);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-	}
-
-	public boolean isUpgraded() {
+	public static boolean isUpgraded() {
 		return _upgraded;
 	}
 
-	public boolean isVerified() {
+	public static boolean isVerified() {
 		return _verified;
 	}
-
-	private boolean _upgraded = false;
-	private boolean _verified = false;
 
 	private static final String _DELETE_TEMP_IMAGES_1 =
 		"DELETE FROM Image WHERE imageId IN (SELECT articleImageId FROM " +
@@ -194,6 +191,9 @@ public class StartupHelperImpl implements StartupHelper {
 	private static final String _DELETE_TEMP_IMAGES_2 =
 		"DELETE FROM JournalArticleImage where tempImage = TRUE";
 
-	private static Log _log = LogFactoryUtil.getLog(StartupAction.class);
+	private static Log _log = LogFactoryUtil.getLog(StartupActionUtil.class);
+
+	private static boolean _upgraded;
+	private static boolean _verified;
 
 }

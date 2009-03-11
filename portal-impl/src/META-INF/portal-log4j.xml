@@ -136,7 +136,7 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.portal.events.StartupAction">
+	<category name="com.liferay.portal.events.StartupActionUtil">
 		<priority value="INFO" />
 	</category>
 

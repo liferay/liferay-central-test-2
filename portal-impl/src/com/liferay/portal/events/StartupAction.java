@@ -110,7 +110,7 @@ public class StartupAction extends SimpleAction {
 			throw new RuntimeException(msg);
 		}
 
-		StartupHelperUtil.upgradeProcess(buildNumber);
+		StartupActionUtil.upgradeProcess(buildNumber);
 
 		// Class names
 
@@ -118,11 +118,11 @@ public class StartupAction extends SimpleAction {
 
 		// Delete temporary images
 
-		StartupHelperUtil.deleteTempImages();
+		StartupActionUtil.deleteTempImages();
 
 		// Clear the caches only if the upgrade process was run
 
-		if (StartupHelperUtil.isUpgraded()) {
+		if (StartupActionUtil.isUpgraded()) {
 			MultiVMPoolUtil.clear();
 		}
 
@@ -150,17 +150,17 @@ public class StartupAction extends SimpleAction {
 
 		Release release = ReleaseLocalServiceUtil.getRelease();
 
-		StartupHelperUtil.verifyProcess(release.isVerified());
+		StartupActionUtil.verifyProcess(release.isVerified());
 
 		// Update indexes
 
-		if (StartupHelperUtil.isUpgraded()) {
-			StartupHelperUtil.updateIndexes();
+		if (StartupActionUtil.isUpgraded()) {
+			StartupActionUtil.updateIndexes();
 		}
 
 		// Update release
 
-		ReleaseLocalServiceUtil.updateRelease(StartupHelperUtil.isVerified());
+		ReleaseLocalServiceUtil.updateRelease(StartupActionUtil.isVerified());
 
 		// Enable database caching after verify
 
