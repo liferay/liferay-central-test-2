@@ -24,7 +24,6 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
@@ -37,7 +36,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.impl.RoleImpl;
-import com.liferay.portal.model.impl.RoleModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
@@ -261,60 +259,44 @@ public class RoleFinderImpl extends BasePersistenceImpl implements RoleFinder {
 
 		name = StringUtil.lowerCase(name);
 
-		boolean finderClassNameCacheEnabled = RoleModelImpl.CACHE_ENABLED;
-		String finderClassName = Role.class.getName();
-		String finderMethodName = "customFindByC_N";
-		String finderParams[] = new String[] {
-			Long.class.getName(), String.class.getName()
-		};
-		Object finderArgs[] = new Object[] {new Long(companyId), name};
+		Session session = null;
 
-		Object result = FinderCacheUtil.getResult(
-			finderClassName, finderMethodName, finderParams, finderArgs, this);
+		try {
+			session = openSession();
 
-		if (result == null) {
-			Session session = null;
+			String sql = CustomSQLUtil.get(FIND_BY_C_N);
 
-			try {
-				session = openSession();
+			SQLQuery q = session.createSQLQuery(sql);
 
-				String sql = CustomSQLUtil.get(FIND_BY_C_N);
+			q.addEntity("Role_", RoleImpl.class);
 
-				SQLQuery q = session.createSQLQuery(sql);
+			QueryPos qPos = QueryPos.getInstance(q);
 
-				q.addEntity("Role_", RoleImpl.class);
+			qPos.add(companyId);
+			qPos.add(name);
 
-				QueryPos qPos = QueryPos.getInstance(q);
+			List<Role> list = q.list();
 
-				qPos.add(companyId);
-				qPos.add(name);
-
-				Iterator<Role> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					Role role = itr.next();
-
-					FinderCacheUtil.putResult(
-						finderClassNameCacheEnabled, finderClassName,
-						finderMethodName, finderParams, finderArgs, role);
-
-					return role;
-				}
+			if (!list.isEmpty()) {
+				return list.get(0);
 			}
-			catch (Exception e) {
-				throw new SystemException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-
-			throw new NoSuchRoleException(
-				"No Role exists with the key {companyId=" + companyId +
-					", name=" + name + "}");
 		}
-		else {
-			return (Role)result;
+		catch (Exception e) {
+			throw new SystemException(e);
 		}
+		finally {
+			closeSession(session);
+		}
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("No Role exists with the key {companyId=");
+		sb.append(companyId);
+		sb.append(", name=");
+		sb.append(name);
+		sb.append("}");
+
+		throw new NoSuchRoleException(sb.toString());
 	}
 
 	public List<Role> findByU_G(long userId, long groupId)

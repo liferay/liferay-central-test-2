@@ -241,7 +241,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			return role;
 		}
 
-		return roleFinder.findByC_N(companyId, name);
+		return rolePersistence.findByC_N(companyId, name);
 	}
 
 	public List<Role> getRoles(long companyId) throws SystemException {
@@ -310,7 +310,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			long userId, long companyId, String name, boolean inherited)
 		throws PortalException, SystemException {
 
-		Role role = roleFinder.findByC_N(companyId, name);
+		Role role = rolePersistence.findByC_N(companyId, name);
 
 		if (inherited) {
 			if (roleFinder.countByR_U(role.getRoleId(), userId) > 0) {
@@ -450,7 +450,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		try {
 			if (role == null) {
-				role = roleFinder.findByC_N(companyId, name);
+				role = rolePersistence.findByC_N(companyId, name);
 			}
 
 			if (!role.getDescription().equals(description)) {

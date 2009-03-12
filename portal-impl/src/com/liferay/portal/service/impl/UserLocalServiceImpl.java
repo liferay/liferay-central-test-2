@@ -403,7 +403,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		for (String defaultGroupName : defaultGroupNames) {
 			try {
-				Group group = groupFinder.findByC_N(
+				Group group = groupPersistence.findByC_N(
 					companyId, defaultGroupName);
 
 				groupIdsSet.add(group.getGroupId());
@@ -431,7 +431,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		for (String defaultRoleName : defaultRoleNames) {
 			try {
-				Role role = roleFinder.findByC_N(companyId, defaultRoleName);
+				Role role = rolePersistence.findByC_N(
+					companyId, defaultRoleName);
 
 				roleIdsSet.add(role.getRoleId());
 			}
@@ -454,7 +455,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		for (int i = 0; i < defaultUserGroupNames.length; i++) {
 			try {
-				UserGroup userGroup = userGroupFinder.findByC_N(
+				UserGroup userGroup = userGroupPersistence.findByC_N(
 					companyId, defaultUserGroupNames[i]);
 
 				userGroups.add(userGroup);

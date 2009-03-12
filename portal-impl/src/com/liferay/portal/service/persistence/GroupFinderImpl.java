@@ -24,7 +24,6 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
@@ -37,7 +36,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.impl.GroupImpl;
-import com.liferay.portal.model.impl.GroupModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
@@ -253,66 +251,44 @@ public class GroupFinderImpl
 
 		name = StringUtil.lowerCase(name);
 
-		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED;
-		String finderClassName = Group.class.getName();
-		String finderMethodName = "customFindByC_N";
-		String finderParams[] = new String[] {
-			Long.class.getName(), String.class.getName()
-		};
-		Object finderArgs[] = new Object[] {companyId, name};
+		Session session = null;
 
-		Object result = FinderCacheUtil.getResult(
-			finderClassName, finderMethodName, finderParams, finderArgs, this);
+		try {
+			session = openSession();
 
-		if (result == null) {
-			Session session = null;
+			String sql = CustomSQLUtil.get(FIND_BY_C_N);
 
-			try {
-				session = openSession();
+			SQLQuery q = session.createSQLQuery(sql);
 
-				String sql = CustomSQLUtil.get(FIND_BY_C_N);
+			q.addEntity("Group_", GroupImpl.class);
 
-				SQLQuery q = session.createSQLQuery(sql);
+			QueryPos qPos = QueryPos.getInstance(q);
 
-				q.addEntity("Group_", GroupImpl.class);
+			qPos.add(companyId);
+			qPos.add(name);
 
-				QueryPos qPos = QueryPos.getInstance(q);
+			List<Group> list = q.list();
 
-				qPos.add(companyId);
-				qPos.add(name);
-
-				Iterator<Group> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					Group group = itr.next();
-
-					FinderCacheUtil.putResult(
-						finderClassNameCacheEnabled, finderClassName,
-						finderMethodName, finderParams, finderArgs, group);
-
-					return group;
-				}
+			if (!list.isEmpty()) {
+				return list.get(0);
 			}
-			catch (Exception e) {
-				throw new SystemException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-
-			StringBuilder sb = new StringBuilder();
-
-			sb.append("No Group exists with the key {companyId=");
-			sb.append(companyId);
-			sb.append(", name=");
-			sb.append(name);
-			sb.append("}");
-
-			throw new NoSuchGroupException(sb.toString());
 		}
-		else {
-			return (Group)result;
+		catch (Exception e) {
+			throw new SystemException(e);
 		}
+		finally {
+			closeSession(session);
+		}
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("No Group exists with the key {companyId=");
+		sb.append(companyId);
+		sb.append(", name=");
+		sb.append(name);
+		sb.append("}");
+
+		throw new NoSuchGroupException(sb.toString());
 	}
 
 	public List<Group> findByC_N_D(

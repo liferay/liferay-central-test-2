@@ -247,7 +247,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 			try {
 				if (group == null) {
-					group = groupFinder.findByC_N(companyId, name);
+					group = groupPersistence.findByC_N(companyId, name);
 				}
 			}
 			catch (NoSuchGroupException nsge) {
@@ -444,7 +444,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			return group;
 		}
 
-		return groupFinder.findByC_N(companyId, name);
+		return groupPersistence.findByC_N(companyId, name);
 	}
 
 	public List<Group> getGroups(long[] groupIds)

@@ -143,7 +143,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	public UserGroup getUserGroup(long companyId, String name)
 		throws PortalException, SystemException {
 
-		return userGroupFinder.findByC_N(companyId, name);
+		return userGroupPersistence.findByC_N(companyId, name);
 	}
 
 	public List<UserGroup> getUserGroups(long companyId)
