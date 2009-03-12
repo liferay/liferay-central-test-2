@@ -361,6 +361,9 @@ create index IX_8377A211 on SCProductVersion (productEntryId);
 create index IX_7338606F on ServiceComponent (buildNamespace);
 create unique index IX_4F0315B8 on ServiceComponent (buildNamespace, buildNumber);
 
+create index IX_DA5F4359 on Shard (classNameId, classPK);
+create index IX_A55F8C9E on Shard (jdbcName);
+
 create index IX_C28B41DC on ShoppingCart (groupId);
 create unique index IX_FC46FE16 on ShoppingCart (groupId, userId);
 create index IX_54101CC8 on ShoppingCart (userId);

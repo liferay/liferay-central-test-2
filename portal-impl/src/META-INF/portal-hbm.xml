@@ -464,6 +464,15 @@
 		<property name="buildDate" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="data" column="data_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
+	<class name="com.liferay.portal.model.impl.ShardImpl" table="Shard">
+		<cache usage="read-write" />
+		<id name="shardId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="classNameId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="classPK" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="jdbcName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
 	<class name="com.liferay.portal.model.impl.SubscriptionImpl" table="Subscription">
 		<cache usage="read-write" />
 		<id name="subscriptionId" type="long">

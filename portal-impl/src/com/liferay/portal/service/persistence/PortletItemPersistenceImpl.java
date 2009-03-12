@@ -1519,6 +1519,8 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portal.service.persistence.RolePersistence rolePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ServiceComponentPersistence.impl")
 	protected com.liferay.portal.service.persistence.ServiceComponentPersistence serviceComponentPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ShardPersistence.impl")
+	protected com.liferay.portal.service.persistence.ShardPersistence shardPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.SubscriptionPersistence.impl")
 	protected com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")

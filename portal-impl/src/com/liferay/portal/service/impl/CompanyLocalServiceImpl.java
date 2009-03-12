@@ -31,6 +31,7 @@ import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.dao.shard.ShardUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
@@ -68,8 +69,10 @@ import java.io.InputStream;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.portlet.PortletException;
 import javax.portlet.PortletPreferences;
@@ -83,7 +86,8 @@ import javax.portlet.PortletPreferences;
  */
 public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
-	public Company addCompany(String webId, String virtualHost, String mx)
+	public Company addCompany(
+			String webId, String virtualHost, String mx, String shardName)
 		throws PortalException, SystemException {
 
 		// Company
@@ -99,7 +103,16 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		validate(webId, virtualHost, mx);
 
-		Company company = checkCompany(webId, mx);
+		Map<String, String> shardParams = new HashMap<String, String>();
+
+		shardParams.put("webId", webId);
+		shardParams.put("virtualHost", virtualHost);
+		shardParams.put("mx", mx);
+
+		shardName = ShardUtil.getShardSelector().getShardName(
+			ShardUtil.COMPANY_SCOPE, shardName, shardParams);
+
+		Company company = checkCompany(webId, mx, shardName);
 
 		company.setVirtualHost(virtualHost);
 		company.setMx(mx);
@@ -118,6 +131,12 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	}
 
 	public Company checkCompany(String webId, String mx)
+		throws PortalException, SystemException {
+
+		return checkCompany(webId, mx, PropsValues.SHARD_DEFAULT);
+	}
+
+	public Company checkCompany(String webId, String mx, String shardName)
 		throws PortalException, SystemException {
 
 		// Company
@@ -160,6 +179,12 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			company.setMx(mx);
 
 			companyPersistence.update(company, false);
+
+			// Update shard data before continuing
+
+			shardLocalService.addCompany(companyId, shardName);
+
+			// Continue with remaining company data
 
 			updateCompany(
 				companyId, virtualHost, mx, homeURL, name, legalName, legalId,
