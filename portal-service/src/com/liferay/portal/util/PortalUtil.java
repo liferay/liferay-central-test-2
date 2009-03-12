@@ -401,6 +401,10 @@ public class PortalUtil {
 		return getPortal().getPlidFromFriendlyURL(companyId, friendlyURL);
 	}
 
+	public static long getPlidFromPortletId(long groupId, String portletId) {
+		return getPortal().getPlidFromPortletId(groupId, portletId);
+	}
+
 	public static long getPlidFromPortletId(
 		long groupId, boolean privateLayout, String portletId) {
 

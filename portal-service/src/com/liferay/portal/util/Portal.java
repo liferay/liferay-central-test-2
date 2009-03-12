@@ -260,6 +260,8 @@ public interface Portal {
 
 	public long getPlidFromFriendlyURL(long companyId, String friendlyURL);
 
+	public long getPlidFromPortletId(long groupId, String portletId);
+
 	public long getPlidFromPortletId(
 		long groupId, boolean privateLayout, String portletId);
 

@@ -1378,6 +1378,16 @@ public class PortalImpl implements Portal {
 		return LayoutConstants.DEFAULT_PLID;
 	}
 
+	public long getPlidFromPortletId(long groupId, String portletId) {
+		long plid = getPlidFromPortletId(groupId, false, portletId);
+
+		if (plid != 0) {
+			return plid;
+		}
+
+		return getPlidFromPortletId(groupId, true, portletId);
+	}
+
 	public long getPlidFromPortletId(
 		long groupId, boolean privateLayout, String portletId) {
 

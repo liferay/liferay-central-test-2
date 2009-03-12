@@ -49,8 +49,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
 
 			if (showContextLink) {
-				if ((PortalUtil.getPlidFromPortletId(entry.getGroupId(), false, PortletKeys.BLOGS) == 0) &&
-					(PortalUtil.getPlidFromPortletId(entry.getGroupId(), true, PortletKeys.BLOGS) == 0)) {
+				if (PortalUtil.getPlidFromPortletId(entry.getGroupId(), PortletKeys.BLOGS) == 0) {
 					showContextLink = false;
 				}
 			}
@@ -393,8 +392,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			MBMessage message = MBMessageLocalServiceUtil.getMessage(classPK);
 
 			if (showContextLink) {
-				if ((PortalUtil.getPlidFromPortletId(message.getCategory().getGroupId(), false, PortletKeys.MESSAGE_BOARDS) == 0) &&
-					(PortalUtil.getPlidFromPortletId(message.getCategory().getGroupId(), true, PortletKeys.MESSAGE_BOARDS) == 0)) {
+				if (PortalUtil.getPlidFromPortletId(categoryGroupId, message.getCategory().getGroupId(), PortletKeys.MESSAGE_BOARDS) == 0) {
 					showContextLink = false;
 				}
 			}
@@ -452,8 +450,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 					if (showContextLink) {
 						WikiNode node = WikiNodeLocalServiceUtil.getNode(pageResource.getNodeId());
 
-						if ((PortalUtil.getPlidFromPortletId(node.getGroupId(), false, PortletKeys.WIKI) == 0) &&
-							(PortalUtil.getPlidFromPortletId(node.getGroupId(), true, PortletKeys.WIKI) == 0)) {
+						if (PortalUtil.getPlidFromPortletId(node.getGroupId(), PortletKeys.WIKI) == 0) {
 							showContextLink = false;
 						}
 					}
