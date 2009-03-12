@@ -166,7 +166,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		layoutSetLocalService.addLayoutSet(groupId, false);
 
-		if ((classNameId <= 0) && (classPK <= 0) && !user.isDefaultUser()) {
+		if ((classNameId == PortalUtil.getClassNameId(Group.class)) &&
+			!user.isDefaultUser()) {
 
 			// Resources
 
