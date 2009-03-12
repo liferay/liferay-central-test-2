@@ -79,7 +79,7 @@ public class OrganizationPermissionImpl implements OrganizationPermission {
 		if ((!actionId.equals(ActionKeys.MANAGE_SUBORGANIZATIONS)) &&
 			(organization != null)) {
 
-			if (!organization.isRoot()) {
+			while (!organization.isRoot()) {
 				Organization parentOrganization =
 					organization.getParentOrganization();
 
@@ -87,13 +87,15 @@ public class OrganizationPermissionImpl implements OrganizationPermission {
 
 				groupId = parentGroup.getGroupId();
 				parentOrganizationId = parentOrganization.getOrganizationId();
-			}
 
-			if (contains(
-					permissionChecker, groupId, parentOrganizationId,
-					ActionKeys.MANAGE_SUBORGANIZATIONS)) {
+				if (contains(
+						permissionChecker, groupId, parentOrganizationId,
+						ActionKeys.MANAGE_SUBORGANIZATIONS)) {
 
-				return true;
+					return true;
+				}
+
+				organization = parentOrganization;
 			}
 		}
 
