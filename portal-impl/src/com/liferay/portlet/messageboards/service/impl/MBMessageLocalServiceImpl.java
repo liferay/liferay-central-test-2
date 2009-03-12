@@ -844,17 +844,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				userId, null, className, classPK, 0,
 				MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID,
 				subject, subject, new ServiceContext());
-
-			long discussionId = counterLocalService.increment();
-
-			discussion = mbDiscussionPersistence.create(
-				discussionId);
-
-			discussion.setClassNameId(classNameId);
-			discussion.setClassPK(classPK);
-			discussion.setThreadId(message.getThreadId());
-
-			mbDiscussionPersistence.update(discussion, false);
 		}
 
 		return getMessageDisplay(message);
