@@ -26,6 +26,11 @@
 	<div class="entry-content">
 
 		<%
+		PortletURL showBlogEntryURL = renderResponse.createRenderURL();
+
+		showBlogEntryURL.setParameter("struts_action", "/blogs_aggregator/view_entry");
+		showBlogEntryURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
+
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(themeDisplay.getPathMain());
@@ -33,6 +38,8 @@
 		sb.append(HttpUtil.encodeURL(currentURL));
 		sb.append("&entryId=");
 		sb.append(entry.getEntryId());
+		sb.append("&noSuchEntryRedirect=");
+		sb.append(HttpUtil.encodeURL(showBlogEntryURL.toString()));
 
 		String viewEntryURL = sb.toString();
 

@@ -241,6 +241,11 @@
 
 		<action path="/blogs_aggregator/view" forward="portlet.blogs_aggregator.view" />
 
+		<action path="/blogs_aggregator/view_entry" type="com.liferay.portlet.blogs.action.EditEntryAction">
+			<forward name="portlet.blogs.edit_entry" path="portlet.blogs.view_entry" />
+			<forward name="portlet.blogs.error" path="portlet.blogs.error" />
+		</action>
+
 		<!-- Bookmarks -->
 
 		<action path="/bookmarks/edit_folder" type="com.liferay.portlet.bookmarks.action.EditFolderAction">
