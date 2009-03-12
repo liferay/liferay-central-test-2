@@ -36,16 +36,16 @@ import com.liferay.portal.verify.VerifyException;
 import com.liferay.portal.verify.VerifyProcess;
 
 /**
- * <a href="StartupActionUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="StartupHelper.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Alexander Chow
  * @author Raymond Augé
  *
  */
-public class StartupActionUtil {
+public class StartupHelper {
 
-	public static void deleteTempImages() {
+	public void deleteTempImages() {
 		try {
 			DBUtil dbUtil = DBUtil.getInstance();
 
@@ -57,7 +57,7 @@ public class StartupActionUtil {
 		}
 	}
 
-	public static void updateIndexes() {
+	public void updateIndexes() {
 		try {
 			if (_log.isInfoEnabled()) {
 				_log.info("Adding indexes");
@@ -70,7 +70,7 @@ public class StartupActionUtil {
 		}
 	}
 
-	public static void upgradeProcess(int buildNumber) throws UpgradeException {
+	public void upgradeProcess(int buildNumber) throws UpgradeException {
 		String[] upgradeProcesses = PropsUtil.getArray(
 			PropsKeys.UPGRADE_PROCESSES);
 
@@ -115,7 +115,7 @@ public class StartupActionUtil {
 		}
 	}
 
-	public static void verifyProcess(boolean verified) throws VerifyException {
+	public void verifyProcess(boolean verified) throws VerifyException {
 
 		// LPS-1880
 
@@ -176,14 +176,18 @@ public class StartupActionUtil {
 		PropsValues.INDEX_READ_ONLY = tempIndexReadOnly;
 	}
 
-	public static boolean isUpgraded() {
+	public boolean isUpgraded() {
 		return _upgraded;
 	}
 
-	public static boolean isVerified() {
+	public boolean isVerified() {
 		return _verified;
 	}
 
+	private boolean _upgraded;
+
+	private boolean _verified;
+	
 	private static final String _DELETE_TEMP_IMAGES_1 =
 		"DELETE FROM Image WHERE imageId IN (SELECT articleImageId FROM " +
 			"JournalArticleImage WHERE tempImage = TRUE)";
@@ -191,9 +195,6 @@ public class StartupActionUtil {
 	private static final String _DELETE_TEMP_IMAGES_2 =
 		"DELETE FROM JournalArticleImage where tempImage = TRUE";
 
-	private static Log _log = LogFactoryUtil.getLog(StartupActionUtil.class);
-
-	private static boolean _upgraded;
-	private static boolean _verified;
+	private static Log _log = LogFactoryUtil.getLog(StartupHelper.class);
 
 }
