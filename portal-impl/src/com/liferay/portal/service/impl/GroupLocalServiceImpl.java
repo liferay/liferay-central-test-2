@@ -131,10 +131,12 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			user.getCompanyId(), groupId, classNameId, classPK, friendlyName,
 			friendlyURL);
 
+		long groupClassNameId = PortalUtil.getClassNameId(Group.class);
+
 		if ((classNameId <= 0) || className.equals(Group.class.getName())) {
 			validateName(groupId, user.getCompanyId(), name);
 
-			classNameId = PortalUtil.getClassNameId(Group.class);
+			classNameId = groupClassNameId;
 			classPK = groupId;
 		}
 		else {
@@ -166,8 +168,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		layoutSetLocalService.addLayoutSet(groupId, false);
 
-		if ((classNameId == PortalUtil.getClassNameId(Group.class)) &&
-			!user.isDefaultUser()) {
+		if ((classNameId == groupClassNameId) && !user.isDefaultUser()) {
 
 			// Resources
 
