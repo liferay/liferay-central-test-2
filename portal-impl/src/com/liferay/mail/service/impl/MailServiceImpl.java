@@ -195,8 +195,7 @@ public class MailServiceImpl implements MailService {
 			storeProtocol = Account.PROTOCOL_POP;
 		}
 
-		properties.setProperty(
-			"mail.store.protocol", storeProtocol);
+		properties.setProperty("mail.store.protocol", storeProtocol);
 
 		String storePrefix = "mail." + storeProtocol + ".";
 
@@ -211,8 +210,7 @@ public class MailServiceImpl implements MailService {
 			transportProtocol = Account.PROTOCOL_SMTP;
 		}
 
-		properties.setProperty(
-			"mail.transport.protocol", transportProtocol);
+		properties.setProperty("mail.transport.protocol", transportProtocol);
 
 		String transportPrefix = "mail." + transportProtocol + ".";
 
