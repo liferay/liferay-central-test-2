@@ -80,6 +80,8 @@ public class ExpireQuestionTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("_25_neverExpireCheckbox");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
