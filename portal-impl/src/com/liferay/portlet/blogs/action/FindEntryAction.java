@@ -139,14 +139,7 @@ public class FindEntryAction extends Action {
 		BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(entryId);
 
 		plid = PortalUtil.getPlidFromPortletId(
-			entry.getGroupId(), false, PortletKeys.BLOGS);
-
-		if (plid != LayoutConstants.DEFAULT_PLID) {
-			return plid;
-		}
-
-		plid = PortalUtil.getPlidFromPortletId(
-			entry.getGroupId(), true, PortletKeys.BLOGS);
+			entry.getGroupId(), PortletKeys.BLOGS);
 
 		if (plid != LayoutConstants.DEFAULT_PLID) {
 			return plid;

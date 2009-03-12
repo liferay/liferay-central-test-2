@@ -109,16 +109,7 @@ public class FindMessageAction extends Action {
 		MBMessage message = MBMessageLocalServiceUtil.getMessage(messageId);
 
 		plid = PortalUtil.getPlidFromPortletId(
-			message.getCategory().getGroupId(), false,
-			PortletKeys.MESSAGE_BOARDS);
-
-		if (plid != LayoutConstants.DEFAULT_PLID) {
-			return plid;
-		}
-
-		plid = PortalUtil.getPlidFromPortletId(
-			message.getCategory().getGroupId(), true,
-			PortletKeys.MESSAGE_BOARDS);
+			message.getCategory().getGroupId(), PortletKeys.MESSAGE_BOARDS);
 
 		if (plid != LayoutConstants.DEFAULT_PLID) {
 			return plid;

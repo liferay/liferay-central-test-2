@@ -106,14 +106,7 @@ public class FindEventAction extends Action {
 		CalEvent event = CalEventLocalServiceUtil.getEvent(eventId);
 
 		plid = PortalUtil.getPlidFromPortletId(
-			event.getGroupId(), false, PortletKeys.CALENDAR);
-
-		if (plid != LayoutConstants.DEFAULT_PLID) {
-			return plid;
-		}
-
-		plid = PortalUtil.getPlidFromPortletId(
-			event.getGroupId(), true, PortletKeys.CALENDAR);
+			event.getGroupId(), PortletKeys.CALENDAR);
 
 		if (plid != LayoutConstants.DEFAULT_PLID) {
 			return plid;

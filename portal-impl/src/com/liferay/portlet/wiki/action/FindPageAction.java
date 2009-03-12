@@ -123,14 +123,7 @@ public class FindPageAction extends Action {
 			pageResource.getNodeId());
 
 		plid = PortalUtil.getPlidFromPortletId(
-			node.getGroupId(), false, PortletKeys.WIKI);
-
-		if (plid != LayoutConstants.DEFAULT_PLID) {
-			return plid;
-		}
-
-		plid = PortalUtil.getPlidFromPortletId(
-			node.getGroupId(), true, PortletKeys.WIKI);
+			node.getGroupId(), PortletKeys.WIKI);
 
 		if (plid != LayoutConstants.DEFAULT_PLID) {
 			return plid;
