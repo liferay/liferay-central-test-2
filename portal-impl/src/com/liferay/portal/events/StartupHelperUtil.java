@@ -26,7 +26,7 @@ import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.verify.VerifyException;
 
 /**
- * <a href="StartupHelper.java.html"><b><i>View Source</i></b></a>
+ * <a href="StartupHelperUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Alexander Chow
@@ -36,31 +36,31 @@ import com.liferay.portal.verify.VerifyException;
 public class StartupHelperUtil {
 
 	public static void deleteTempImages() {
-		_getStartupHelper().deleteTempImages();
+		getStartupHelper().deleteTempImages();
+	}
+
+	public static StartupHelper getStartupHelper() {
+		return _startupHelper;
 	}
 
 	public static void updateIndexes() {
-		_getStartupHelper().updateIndexes();
+		getStartupHelper().updateIndexes();
 	}
 
 	public static void upgradeProcess(int buildNumber) throws UpgradeException {
-		_getStartupHelper().upgradeProcess(buildNumber);
+		getStartupHelper().upgradeProcess(buildNumber);
 	}
 
 	public static void verifyProcess(boolean verified) throws VerifyException {
-		_getStartupHelper().verifyProcess(verified);
+		getStartupHelper().verifyProcess(verified);
 	}
 
 	public static boolean isUpgraded() {
-		return _getStartupHelper().isUpgraded();
+		return getStartupHelper().isUpgraded();
 	}
 
 	public static boolean isVerified() {
-		return _getStartupHelper().isVerified();
-	}
-
-	private static StartupHelper _getStartupHelper() {
-		return _startupHelper;
+		return getStartupHelper().isVerified();
 	}
 
 	public void setStartupHelper(StartupHelper startupHelper) {

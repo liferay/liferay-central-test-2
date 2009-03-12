@@ -136,12 +136,12 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.portal.events.StartupActionUtil">
-		<priority value="INFO" />
-	</category>
-
 	<category name="com.liferay.portal.events.ShutdownHook">
 		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.portal.events.StartupHelper">
+		<priority value="INFO" />
 	</category>
 
 	<category name="com.liferay.portal.image.ImageProcessorImpl">

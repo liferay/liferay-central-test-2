@@ -184,10 +184,6 @@ public class StartupHelper {
 		return _verified;
 	}
 
-	private boolean _upgraded;
-
-	private boolean _verified;
-	
 	private static final String _DELETE_TEMP_IMAGES_1 =
 		"DELETE FROM Image WHERE imageId IN (SELECT articleImageId FROM " +
 			"JournalArticleImage WHERE tempImage = TRUE)";
@@ -196,5 +192,8 @@ public class StartupHelper {
 		"DELETE FROM JournalArticleImage where tempImage = TRUE";
 
 	private static Log _log = LogFactoryUtil.getLog(StartupHelper.class);
+
+	private boolean _upgraded;
+	private boolean _verified;
 
 }
