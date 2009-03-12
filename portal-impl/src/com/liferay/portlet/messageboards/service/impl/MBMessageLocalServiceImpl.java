@@ -842,8 +842,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			message = addDiscussionMessage(
 				userId, null, className, classPK, 0,
-				MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID,
-				subject, subject, new ServiceContext());
+				MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID, subject, subject,
+				new ServiceContext());
 		}
 
 		return getMessageDisplay(message);
