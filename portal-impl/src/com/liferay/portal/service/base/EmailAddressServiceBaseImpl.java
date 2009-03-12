@@ -80,6 +80,7 @@ import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.RoleLocalService;
 import com.liferay.portal.service.RoleService;
 import com.liferay.portal.service.ServiceComponentLocalService;
+import com.liferay.portal.service.ShardLocalService;
 import com.liferay.portal.service.SubscriptionLocalService;
 import com.liferay.portal.service.ThemeLocalService;
 import com.liferay.portal.service.ThemeService;
@@ -137,6 +138,7 @@ import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.RoleFinder;
 import com.liferay.portal.service.persistence.RolePersistence;
 import com.liferay.portal.service.persistence.ServiceComponentPersistence;
+import com.liferay.portal.service.persistence.ShardPersistence;
 import com.liferay.portal.service.persistence.SubscriptionPersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserGroupFinder;
@@ -966,6 +968,22 @@ public abstract class EmailAddressServiceBaseImpl extends PrincipalBean
 		this.serviceComponentPersistence = serviceComponentPersistence;
 	}
 
+	public ShardLocalService getShardLocalService() {
+		return shardLocalService;
+	}
+
+	public void setShardLocalService(ShardLocalService shardLocalService) {
+		this.shardLocalService = shardLocalService;
+	}
+
+	public ShardPersistence getShardPersistence() {
+		return shardPersistence;
+	}
+
+	public void setShardPersistence(ShardPersistence shardPersistence) {
+		this.shardPersistence = shardPersistence;
+	}
+
 	public SubscriptionLocalService getSubscriptionLocalService() {
 		return subscriptionLocalService;
 	}
@@ -1397,6 +1415,10 @@ public abstract class EmailAddressServiceBaseImpl extends PrincipalBean
 	protected ServiceComponentLocalService serviceComponentLocalService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ServiceComponentPersistence.impl")
 	protected ServiceComponentPersistence serviceComponentPersistence;
+	@BeanReference(name = "com.liferay.portal.service.ShardLocalService.impl")
+	protected ShardLocalService shardLocalService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ShardPersistence.impl")
+	protected ShardPersistence shardPersistence;
 	@BeanReference(name = "com.liferay.portal.service.SubscriptionLocalService.impl")
 	protected SubscriptionLocalService subscriptionLocalService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.SubscriptionPersistence.impl")

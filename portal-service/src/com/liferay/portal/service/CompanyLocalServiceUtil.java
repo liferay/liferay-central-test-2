@@ -108,10 +108,10 @@ public class CompanyLocalServiceUtil {
 
 	public static com.liferay.portal.model.Company addCompany(
 		java.lang.String webId, java.lang.String virtualHost,
-		java.lang.String mx)
+		java.lang.String mx, java.lang.String shardName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().addCompany(webId, virtualHost, mx);
+		return getService().addCompany(webId, virtualHost, mx, shardName);
 	}
 
 	public static com.liferay.portal.model.Company checkCompany(
@@ -126,6 +126,13 @@ public class CompanyLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService().checkCompany(webId, mx);
+	}
+
+	public static com.liferay.portal.model.Company checkCompany(
+		java.lang.String webId, java.lang.String mx, java.lang.String shardName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().checkCompany(webId, mx, shardName);
 	}
 
 	public static void checkCompanyKey(long companyId)
