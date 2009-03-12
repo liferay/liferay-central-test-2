@@ -2062,6 +2062,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence ratingsEntryPersistence;
 	@BeanReference(name = "com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence.impl")
 	protected com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence ratingsStatsPersistence;
+	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence.impl")
+	protected com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence;
 	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsAssetPersistence.impl")
 	protected com.liferay.portlet.tags.service.persistence.TagsAssetPersistence tagsAssetPersistence;
 	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsEntryPersistence.impl")

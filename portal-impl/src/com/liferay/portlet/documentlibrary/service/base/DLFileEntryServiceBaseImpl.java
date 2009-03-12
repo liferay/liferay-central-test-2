@@ -71,6 +71,9 @@ import com.liferay.portlet.ratings.service.RatingsEntryService;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
 import com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
+import com.liferay.portlet.social.service.SocialActivityLocalService;
+import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
+import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
 import com.liferay.portlet.tags.service.TagsAssetLocalService;
 import com.liferay.portlet.tags.service.TagsAssetService;
 import com.liferay.portlet.tags.service.TagsEntryLocalService;
@@ -454,6 +457,33 @@ public abstract class DLFileEntryServiceBaseImpl extends PrincipalBean
 		this.ratingsStatsPersistence = ratingsStatsPersistence;
 	}
 
+	public SocialActivityLocalService getSocialActivityLocalService() {
+		return socialActivityLocalService;
+	}
+
+	public void setSocialActivityLocalService(
+		SocialActivityLocalService socialActivityLocalService) {
+		this.socialActivityLocalService = socialActivityLocalService;
+	}
+
+	public SocialActivityPersistence getSocialActivityPersistence() {
+		return socialActivityPersistence;
+	}
+
+	public void setSocialActivityPersistence(
+		SocialActivityPersistence socialActivityPersistence) {
+		this.socialActivityPersistence = socialActivityPersistence;
+	}
+
+	public SocialActivityFinder getSocialActivityFinder() {
+		return socialActivityFinder;
+	}
+
+	public void setSocialActivityFinder(
+		SocialActivityFinder socialActivityFinder) {
+		this.socialActivityFinder = socialActivityFinder;
+	}
+
 	public TagsAssetLocalService getTagsAssetLocalService() {
 		return tagsAssetLocalService;
 	}
@@ -608,6 +638,12 @@ public abstract class DLFileEntryServiceBaseImpl extends PrincipalBean
 	protected RatingsStatsLocalService ratingsStatsLocalService;
 	@BeanReference(name = "com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence.impl")
 	protected RatingsStatsPersistence ratingsStatsPersistence;
+	@BeanReference(name = "com.liferay.portlet.social.service.SocialActivityLocalService.impl")
+	protected SocialActivityLocalService socialActivityLocalService;
+	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence.impl")
+	protected SocialActivityPersistence socialActivityPersistence;
+	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityFinder.impl")
+	protected SocialActivityFinder socialActivityFinder;
 	@BeanReference(name = "com.liferay.portlet.tags.service.TagsAssetLocalService.impl")
 	protected TagsAssetLocalService tagsAssetLocalService;
 	@BeanReference(name = "com.liferay.portlet.tags.service.TagsAssetService.impl")

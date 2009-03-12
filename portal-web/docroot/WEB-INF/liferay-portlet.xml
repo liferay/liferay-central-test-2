@@ -188,6 +188,7 @@
 		<indexer-class>com.liferay.portlet.documentlibrary.util.Indexer</indexer-class>
 		<open-search-class>com.liferay.portlet.documentlibrary.util.DLOpenSearchImpl</open-search-class>
 		<portlet-data-handler-class>com.liferay.portlet.documentlibrary.lar.DLPortletDataHandlerImpl</portlet-data-handler-class>
+		<social-activity-interpreter-class>com.liferay.portlet.documentlibrary.social.DLActivityInterpreter</social-activity-interpreter-class>
 		<webdav-storage-token>document_library</webdav-storage-token>
 		<webdav-storage-class>com.liferay.portlet.documentlibrary.webdav.DLWebDAVStorageImpl</webdav-storage-class>
 		<control-panel-entry-category>content</control-panel-entry-category>

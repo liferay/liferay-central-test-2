@@ -54,6 +54,7 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.base.DLFileEntryLocalServiceBaseImpl;
+import com.liferay.portlet.documentlibrary.social.DLActivityKeys;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.model.RatingsStats;
@@ -281,6 +282,12 @@ public class DLFileEntryLocalServiceImpl
 			fileEntry.getLuceneProperties(), fileEntry.getModifiedDate(),
 			tagsEntries, is);
 
+		// Social
+
+		socialActivityLocalService.addActivity(
+			userId, folder.getGroupId(), DLFileEntry.class.getName(),
+			fileEntryId, DLActivityKeys.ADD_FILE_ENTRY, StringPool.BLANK, 0);
+
 		// Tags
 
 		updateTagsAsset(userId, fileEntry, tagsEntries);
@@ -469,6 +476,11 @@ public class DLFileEntryLocalServiceImpl
 		// Tags
 
 		tagsAssetLocalService.deleteAsset(
+			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+
+		// Social
+
+		socialActivityLocalService.deleteActivities(
 			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
 		// Ratings
@@ -929,6 +941,11 @@ public class DLFileEntryLocalServiceImpl
 				mbDiscussionPersistence.update(discussion, false);
 			}
 
+			// Social
+
+			socialActivityLocalService.deleteActivities(
+				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+
 			// Tags
 
 			tagsAssetLocalService.deleteAsset(
@@ -938,6 +955,13 @@ public class DLFileEntryLocalServiceImpl
 			folder = newFolder;
 			fileEntry = newFileEntry;
 		}
+
+		// Social
+
+		socialActivityLocalService.addActivity(
+			userId, folder.getGroupId(), DLFileEntry.class.getName(),
+			fileEntry.getFileEntryId(), DLActivityKeys.UPDATE_FILE_ENTRY,
+			StringPool.BLANK, 0);
 
 		// Tags
 
