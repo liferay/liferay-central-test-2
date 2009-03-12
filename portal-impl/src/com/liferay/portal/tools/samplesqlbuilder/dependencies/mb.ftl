@@ -8,15 +8,17 @@
 
 	<#list 1..maxMBThreadCount as mbThreadCount>
 		<#assign threadId = counter.get()>
+		<#assign parentMessageId = 0>
 
 		<#list 1..maxMBMessageCount as mbMessageCount>
 			<#assign mbMessageCounterIncrement = mbMessageCounter.increment()>
 
-			<#assign mbMessage = dataFactory.addMBMessage(firstUserId, mbCategory.categoryId, threadId, "Test Message " + mbMessageCount, "This is a test message " + mbMessageCount + ".")>
+			<#assign mbMessage = dataFactory.addMBMessage(firstUserId, mbCategory.categoryId, threadId, parentMessageId, "Test Message " + mbMessageCount, "This is a test message " + mbMessageCount + ".")>
 
 			${sampleSQLBuilder.insertMBMessage(mbMessage)}
 
 			<#if (mbMessageCount_index = 0)>
+				<#assign parentMessageId = mbMessage.messageId>
 				<#assign rootMessageId = mbMessage.messageId>
 			</#if>
 		</#list>

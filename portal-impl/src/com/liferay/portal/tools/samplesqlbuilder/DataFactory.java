@@ -176,8 +176,8 @@ public class DataFactory {
 	}
 
 	public MBMessage addMBMessage(
-			long userId, long categoryId, long threadId, String subject,
-			String body)
+			long userId, long categoryId, long threadId, long parentMessageId,
+			String subject, String body)
 		throws Exception {
 
 		MBMessage mbMessage = new MBMessageImpl();
@@ -186,6 +186,7 @@ public class DataFactory {
 		mbMessage.setUserId(userId);
 		mbMessage.setCategoryId(categoryId);
 		mbMessage.setThreadId(threadId);
+		mbMessage.setParentMessageId(parentMessageId);
 		mbMessage.setSubject(subject);
 		mbMessage.setBody(body);
 
