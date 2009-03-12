@@ -1066,13 +1066,6 @@ create table ServiceComponent (
 	data_ TEXT null
 );
 
-create table Shard (
-	shardId LONG not null primary key,
-	classNameId LONG,
-	classPK LONG,
-	jdbcName VARCHAR(75) null
-);
-
 create table ShoppingCart (
 	cartId LONG not null primary key,
 	groupId LONG,

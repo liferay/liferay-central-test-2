@@ -101,38 +101,6 @@ long companyId = BeanParamUtil.getLong(company2, request, "companyId");
 		<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company2 %>" field="mx" />
 	</td>
 </tr>
-
-<c:if test="<%= showShardSelector %>">
-	<tr>
-		<td>
-			<liferay-ui:message key="shard" />
-		</td>
-		<td>
-
-		<c:choose>
-			<c:when test="<%= company2 != null %>">
-				<%= company2.getShardName() %>
-			</c:when>
-
-			<c:otherwise>
-				<select name="<portlet:namespace />shardName">
-
-					<%
-					for (String shardName : PropsValues.SHARD_AVAILABLE) {
-					%>
-						<option <%= shardName.equals(PropsValues.SHARD_DEFAULT) ? "selected" : "" %> value="<%= shardName %>"><liferay-ui:message key="<%= shardName %>" /></option>
-					<%
-					}
-					%>
-
-				</select>
-			</c:otherwise>
-		</c:choose>
-
-		</td>
-	</tr>
-</c:if>
-
 </table>
 
 <br />

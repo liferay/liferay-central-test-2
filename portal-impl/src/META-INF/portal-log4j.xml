@@ -64,10 +64,6 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.portal.dao.shard">
-		<priority value="ERROR" />
-	</category>
-
 	<category name="com.liferay.portal.deploy">
 		<priority value="INFO" />
 	</category>

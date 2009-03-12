@@ -96,23 +96,6 @@ public class CompanyServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.CompanySoap addCompany(
-		java.lang.String webId, java.lang.String virtualHost,
-		java.lang.String mx, java.lang.String shardName)
-		throws RemoteException {
-		try {
-			com.liferay.portal.model.Company returnValue = CompanyServiceUtil.addCompany(webId,
-					virtualHost, mx, shardName);
-
-			return com.liferay.portal.model.CompanySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.portal.model.CompanySoap getCompanyById(
 		long companyId) throws RemoteException {
 		try {

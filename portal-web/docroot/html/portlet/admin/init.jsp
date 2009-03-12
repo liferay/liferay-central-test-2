@@ -46,11 +46,3 @@
 <%@ page import="org.jfree.chart.servlet.ServletUtilities" %>
 <%@ page import="org.jfree.data.Range" %>
 <%@ page import="org.jfree.data.general.DefaultValueDataset" %>
-
-<%
-boolean showShardSelector = false;
-
-if (PropsValues.SHARD_SELECTOR.equals("com.liferay.portal.dao.shard.ManualShardSelector") && PropsValues.SHARD_AVAILABLE.length > 1) {
-	showShardSelector = true;
-}
-%>
