@@ -392,7 +392,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			MBMessage message = MBMessageLocalServiceUtil.getMessage(classPK);
 
 			if (showContextLink) {
-				if (PortalUtil.getPlidFromPortletId(categoryGroupId, message.getCategory().getGroupId(), PortletKeys.MESSAGE_BOARDS) == 0) {
+				if (PortalUtil.getPlidFromPortletId(message.getCategory().getGroupId(), PortletKeys.MESSAGE_BOARDS) == 0) {
 					showContextLink = false;
 				}
 			}
