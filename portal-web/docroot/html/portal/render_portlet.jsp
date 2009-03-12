@@ -690,6 +690,11 @@ if (group.getName().equals(GroupConstants.CONTROL_PANEL)) {
 if ((invokerPortlet != null) && invokerPortlet.isStrutsPortlet()) {
 	request.removeAttribute(ComponentConstants.COMPONENT_CONTEXT);
 }
+%>
+
+<%@ include file="/html/portal/render_portlet-ext.jsp" %>
+
+<%
 
 // Render portlet
 
@@ -726,8 +731,6 @@ if ((layout.getType().equals(LayoutConstants.TYPE_PANEL) || layout.getType().equ
 	PortalUtil.setPageTitle(portletDisplay.getTitle(), request);
 }
 %>
-
-<%@ include file="/html/portal/render_portlet-ext.jsp" %>
 
 <c:if test="<%= !themeDisplay.isFacebook() && !themeDisplay.isStateExclusive() && !themeDisplay.isWapTheme() %>">
 
