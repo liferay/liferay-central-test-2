@@ -48,18 +48,25 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			<%
 			BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
 
+			if (showContextLink) {
+				if ((PortalUtil.getPlidFromPortletId(entry.getGroupId(), false, PortletKeys.BLOGS) == 0) &&
+					(PortalUtil.getPlidFromPortletId(entry.getGroupId(), true, PortletKeys.BLOGS) == 0)) {
+					showContextLink = false;
+				}
+			}
+
 			PortletURL viewFullContentURL = renderResponse.createRenderURL();
 
 			viewFullContentURL.setParameter("struts_action", "/asset_publisher/view_content");
 			viewFullContentURL.setParameter("type", AssetPublisherUtil.TYPE_BLOG);
 
-			String viewFullContent = viewFullContentURL.toString();
-
-			viewFullContent = HttpUtil.setParameter(viewFullContent, "redirect", currentURL);
-
 			String urlTitle = entry.getUrlTitle();
 
 			viewFullContentURL.setParameter("assetId", urlTitle);
+
+			String viewFullContent = viewFullContentURL.toString();
+
+			viewFullContent = HttpUtil.setParameter(viewFullContent, "redirect", currentURL);
 			%>
 
 			<c:choose>
@@ -384,6 +391,13 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 			<%
 			MBMessage message = MBMessageLocalServiceUtil.getMessage(classPK);
+
+			if (showContextLink) {
+				if ((PortalUtil.getPlidFromPortletId(message.getCategory().getGroupId(), false, PortletKeys.MESSAGE_BOARDS) == 0) &&
+					(PortalUtil.getPlidFromPortletId(message.getCategory().getGroupId(), true, PortletKeys.MESSAGE_BOARDS) == 0)) {
+					showContextLink = false;
+				}
+			}
 			%>
 
 			<c:choose>
@@ -434,6 +448,15 @@ request.setAttribute("view.jsp-showIconLabel", true);
 					WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.getPageResource(classPK);
 
 					WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(pageResource.getNodeId(), pageResource.getTitle());
+
+					if (showContextLink) {
+						WikiNode node = WikiNodeLocalServiceUtil.getNode(pageResource.getNodeId());
+
+						if ((PortalUtil.getPlidFromPortletId(node.getGroupId(), false, PortletKeys.WIKI) == 0) &&
+							(PortalUtil.getPlidFromPortletId(node.getGroupId(), true, PortletKeys.WIKI) == 0)) {
+							showContextLink = false;
+						}
+					}
 
 					try {
 						PortletURL viewPageURL = new PortletURLImpl(request, PortletKeys.WIKI, plid, PortletRequest.ACTION_PHASE);
