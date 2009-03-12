@@ -23,18 +23,15 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.impl.PermissionImpl;
-import com.liferay.portal.model.impl.PermissionModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
@@ -605,56 +602,32 @@ public class PermissionFinderImpl
 	public List<Permission> findByA_R(String actionId, long[] resourceIds)
 		throws SystemException {
 
-		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED;
-		String finderClassName = Permission.class.getName();
-		String finderMethodName = "customFindByA_R";
-		String finderParams[] = new String[] {
-			String.class.getName(), "[L" + Long.class.getName()
-		};
-		Object finderArgs[] = new Object[] {
-			actionId, StringUtil.merge(ArrayUtil.toArray(resourceIds))
-		};
+		Session session = null;
 
-		Object result = FinderCacheUtil.getResult(
-			finderClassName, finderMethodName, finderParams, finderArgs, this);
+		try {
+			session = openSession();
 
-		if (result == null) {
-			Session session = null;
+			String sql = CustomSQLUtil.get(FIND_BY_A_R);
 
-			try {
-				session = openSession();
+			sql = StringUtil.replace(
+				sql, "[$RESOURCE_IDS$]", getResourceIds(resourceIds));
 
-				String sql = CustomSQLUtil.get(FIND_BY_A_R);
+			SQLQuery q = session.createSQLQuery(sql);
 
-				sql = StringUtil.replace(
-					sql, "[$RESOURCE_IDS$]", getResourceIds(resourceIds));
+			q.addEntity("Permission_", PermissionImpl.class);
 
-				SQLQuery q = session.createSQLQuery(sql);
+			QueryPos qPos = QueryPos.getInstance(q);
 
-				q.addEntity("Permission_", PermissionImpl.class);
+			qPos.add(actionId);
+			setResourceIds(qPos, resourceIds);
 
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(actionId);
-				setResourceIds(qPos, resourceIds);
-
-				List<Permission> permissions = q.list();
-
-				FinderCacheUtil.putResult(
-					finderClassNameCacheEnabled, finderClassName,
-					finderMethodName, finderParams, finderArgs, permissions);
-
-				return permissions;
-			}
-			catch (Exception e) {
-				throw new SystemException(e);
-			}
-			finally {
-				closeSession(session);
-			}
+			return q.list();
 		}
-		else {
-			return (List<Permission>)result;
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
 		}
 	}
 
