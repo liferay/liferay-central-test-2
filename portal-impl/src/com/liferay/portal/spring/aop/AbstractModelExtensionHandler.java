@@ -33,11 +33,15 @@ import java.util.List;
  * <a href="AbstractModelExtensionHandler.java.html"><b><i>View Source</i></b>
  * </a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  *
  */
 public abstract class AbstractModelExtensionHandler
 	implements ModelExtensionHandler {
+
+	public Object extendList(List<BaseModel> models) {
+		return new WrappedList((List<BaseModel>)models);
+	}
 
 	public BaseModelExtension getBaseModelExtension() {
 		return _baseModelExtension;
