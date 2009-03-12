@@ -36,10 +36,10 @@
 		sb.append(themeDisplay.getPathMain());
 		sb.append("/blogs/find_entry?redirect=");
 		sb.append(HttpUtil.encodeURL(currentURL));
-		sb.append("&entryId=");
-		sb.append(entry.getEntryId());
 		sb.append("&noSuchEntryRedirect=");
 		sb.append(HttpUtil.encodeURL(showBlogEntryURL.toString()));
+		sb.append("&entryId=");
+		sb.append(entry.getEntryId());
 
 		String viewEntryURL = sb.toString();
 

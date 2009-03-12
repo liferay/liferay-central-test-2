@@ -62,7 +62,7 @@ if (className.equals(BlogsEntry.class.getName())) {
 
 	viewFullContentURL.setParameter("type", AssetPublisherUtil.TYPE_BLOG);
 
-	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/blogs/find_entry?entryId=" + entry.getEntryId() + "&noSuchEntryRedirect=" + HttpUtil.encodeURL(viewFullContentURL.toString()) : viewFullContentURL.toString();
+	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/blogs/find_entry?noSuchEntryRedirect=" + HttpUtil.encodeURL(viewFullContentURL.toString()) + "&entryId=" + entry.getEntryId() : viewFullContentURL.toString();
 	cssClassName = AssetPublisherUtil.TYPE_BLOG;
 }
 else if (className.equals(BookmarksEntry.class.getName())) {
