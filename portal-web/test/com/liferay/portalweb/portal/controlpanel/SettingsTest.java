@@ -87,7 +87,7 @@ public class SettingsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@value='Add']")) {
+				if (selenium.isElementPresent("additionalEmailAddressesLink")) {
 					break;
 				}
 			}
@@ -97,8 +97,7 @@ public class SettingsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//input[@value='Add']"));
-		selenium.waitForPageToLoad("30000");
+		selenium.click("additionalEmailAddressesLink");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -106,7 +105,7 @@ public class SettingsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_130_address")) {
+				if (selenium.isElementPresent("_130_emailAddressAddress0")) {
 					break;
 				}
 			}
@@ -116,18 +115,17 @@ public class SettingsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_130_address",
+		selenium.typeKeys("_130_emailAddressAddress0",
 			RuntimeVariables.replace("Admin@Lifera.com"));
-		selenium.type("_130_address",
+		selenium.type("_130_emailAddressAddress0",
 			RuntimeVariables.replace("Admin@Liferay.com"));
-		selenium.select("_130_typeId", RuntimeVariables.replace("label=E-mail"));
-		selenium.click("_130_primaryCheckbox");
+		selenium.select("_130_emailAddressTypeId0",
+			RuntimeVariables.replace("label=E-mail"));
+		selenium.click("_130_emailAddressPrimary0");
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isTextPresent("Admin@Liferay.com"));
-		selenium.click("link=Addresses");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -135,7 +133,7 @@ public class SettingsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[2]/div[1]/input")) {
+				if (selenium.isElementPresent("addressesLink")) {
 					break;
 				}
 			}
@@ -145,8 +143,7 @@ public class SettingsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[2]/div[1]/input"));
-		selenium.waitForPageToLoad("30000");
+		selenium.click("addressesLink");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -154,7 +151,7 @@ public class SettingsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_130_street1")) {
+				if (selenium.isElementPresent("_130_addressStreet10")) {
 					break;
 				}
 			}
@@ -164,28 +161,26 @@ public class SettingsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_130_street1",
+		selenium.typeKeys("_130_addressStreet10",
 			RuntimeVariables.replace("123. Lifera Ln."));
-		selenium.type("_130_street1",
+		selenium.type("_130_addressStreet10",
 			RuntimeVariables.replace("123. Liferay Ln."));
-		selenium.type("_130_city", RuntimeVariables.replace("Diamond Bar"));
-		selenium.type("_130_city", RuntimeVariables.replace("Rays of Light"));
-		selenium.type("_130_zip", RuntimeVariables.replace("12345"));
-		selenium.select("_130_countryId",
+		selenium.type("_130_addressCity0",
+			RuntimeVariables.replace("Rays of Light"));
+		selenium.type("_130_addressZip0", RuntimeVariables.replace("12345"));
+		selenium.select("_130_addressCountryId0",
 			RuntimeVariables.replace("label=United States"));
 		Thread.sleep(5000);
-		selenium.select("_130_regionId",
+		selenium.select("_130_addressRegionId0",
 			RuntimeVariables.replace("label=California"));
-		selenium.select("_130_typeId", RuntimeVariables.replace("label=Billing"));
-		selenium.click("_130_mailingCheckbox");
-		selenium.click("_130_primaryCheckbox");
+		selenium.select("_130_addressTypeId0",
+			RuntimeVariables.replace("label=Billing"));
+		selenium.click("_130_addressPrimary0");
+		selenium.click("_130_addressMailing0Checkbox");
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		selenium.click("link=Addresses");
-		assertTrue(selenium.isTextPresent("Rays of Light"));
-		selenium.click("link=Websites");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -193,7 +188,7 @@ public class SettingsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[3]/div[1]/input")) {
+				if (selenium.isElementPresent("websitesLink")) {
 					break;
 				}
 			}
@@ -203,8 +198,7 @@ public class SettingsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[3]/div[1]/input"));
-		selenium.waitForPageToLoad("30000");
+		selenium.click("websitesLink");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -212,7 +206,7 @@ public class SettingsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_130_url")) {
+				if (selenium.isElementPresent("_130_websiteUrl0")) {
 					break;
 				}
 			}
@@ -222,19 +216,17 @@ public class SettingsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_130_url",
+		selenium.typeKeys("_130_websiteUrl0",
 			RuntimeVariables.replace("http://www.lifera.com"));
-		selenium.type("_130_url",
+		selenium.type("_130_websiteUrl0",
 			RuntimeVariables.replace("http://www.liferay.com"));
-		selenium.select("_130_typeId", RuntimeVariables.replace("label=Public"));
-		selenium.click("_130_primaryCheckbox");
+		selenium.select("_130_websiteTypeId0",
+			RuntimeVariables.replace("label=Public"));
+		selenium.click("_130_websitePrimary0");
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		selenium.click("link=Websites");
-		assertTrue(selenium.isTextPresent("http://www.liferay.com"));
-		selenium.click("link=Phone Numbers");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -242,7 +234,7 @@ public class SettingsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[4]/div[1]/input")) {
+				if (selenium.isElementPresent("phoneNumbersLink")) {
 					break;
 				}
 			}
@@ -252,8 +244,7 @@ public class SettingsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[4]/div[1]/input"));
-		selenium.waitForPageToLoad("30000");
+		selenium.click("phoneNumbersLink");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -261,7 +252,7 @@ public class SettingsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_130_number")) {
+				if (selenium.isElementPresent("_130_phoneNumber0")) {
 					break;
 				}
 			}
@@ -271,47 +262,21 @@ public class SettingsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_130_number",
+		selenium.typeKeys("_130_phoneNumber0",
 			RuntimeVariables.replace("123-123-1234"));
-		selenium.type("_130_number", RuntimeVariables.replace("123-123-1234"));
-		selenium.type("_130_extension", RuntimeVariables.replace("123"));
-		selenium.select("_130_typeId", RuntimeVariables.replace("label=Other"));
-		selenium.click("_130_primaryCheckbox");
+		selenium.type("_130_phoneNumber0",
+			RuntimeVariables.replace("123-123-1234"));
+		selenium.type("_130_phoneExtension0", RuntimeVariables.replace("123"));
+		selenium.select("_130_phoneTypeId0",
+			RuntimeVariables.replace("label=Other"));
+		selenium.click("_130_phonePrimary0");
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		selenium.click("link=Phone Numbers");
-		assertTrue(selenium.isTextPresent("1231231234"));
-		selenium.click(RuntimeVariables.replace("link=Authentication"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("_130_authType"));
-		selenium.click(RuntimeVariables.replace("link=LDAP"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("_130_enabledCheckbox"));
-		selenium.click(RuntimeVariables.replace("link=CAS"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("_130_enabledCheckbox"));
-		selenium.click(RuntimeVariables.replace("link=NTLM"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("_130_enabledCheckbox"));
-		selenium.click(RuntimeVariables.replace("link=OpenID"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("_130_enabledCheckbox"));
-		selenium.click(RuntimeVariables.replace("link=Open SSO"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("_130_enabledCheckbox"));
-		selenium.click(RuntimeVariables.replace("link=SiteMinder"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("_130_enabledCheckbox"));
-		selenium.click(RuntimeVariables.replace(
-				"link=Default User Associations"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("_130_defaultGroupNames"));
-		assertTrue(selenium.isElementPresent("_130_defaultRoleNames"));
-		assertTrue(selenium.isElementPresent("_130_defaultUserGroupNames"));
-		selenium.click(RuntimeVariables.replace("link=Reserved Screen Names"));
-		selenium.waitForPageToLoad("30000");
+		selenium.click("authenticationLink");
+		assertTrue(selenium.isElementPresent(
+				"_130_settings(company.security.auto.login)Checkbox"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -319,7 +284,7 @@ public class SettingsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_130_reservedScreenNames")) {
+				if (selenium.isElementPresent("link=LDAP")) {
 					break;
 				}
 			}
@@ -329,18 +294,179 @@ public class SettingsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_130_reservedScreenNames",
+		selenium.click("link=LDAP");
+		assertTrue(selenium.isElementPresent(
+				"_130_settings(ldap.auth.enabled)Checkbox"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=CAS")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=CAS");
+		assertTrue(selenium.isElementPresent(
+				"_130_settings(cas.auth.enabled)Checkbox"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=NTLM")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=NTLM");
+		assertTrue(selenium.isElementPresent(
+				"_130_settings(ntlm.auth.enabled)Checkbox"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=OpenID")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=OpenID");
+		assertTrue(selenium.isElementPresent(
+				"_130_settings(open.id.auth.enabled)Checkbox"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Open SSO")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Open SSO");
+		assertTrue(selenium.isElementPresent(
+				"_130_settings(open.sso.auth.enabled)Checkbox"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=SiteMinder")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=SiteMinder");
+		assertTrue(selenium.isElementPresent(
+				"_130_settings(siteminder.auth.enabled)Checkbox"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("defaultUserAssociationsLink")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("defaultUserAssociationsLink");
+		assertTrue(selenium.isElementPresent(
+				"_130_settings(admin.default.group.names)"));
+		assertTrue(selenium.isElementPresent(
+				"_130_settings(admin.default.role.names)"));
+		assertTrue(selenium.isElementPresent(
+				"_130_settings(admin.default.user.group.names)"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("reservedCredentialsLink")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("reservedCredentialsLink");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"_130_settings(admin.reserved.screen.names)")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_130_settings(admin.reserved.screen.names)",
 			RuntimeVariables.replace("Lifera"));
-		selenium.type("_130_reservedScreenNames",
+		selenium.type("_130_settings(admin.reserved.screen.names)",
 			RuntimeVariables.replace("Liferay"));
-		selenium.type("_130_reservedEmailAddresses",
+		selenium.type("_130_settings(admin.reserved.email.addresses)",
 			RuntimeVariables.replace("liferay@liferay.com"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		selenium.click(RuntimeVariables.replace("link=Mail Host Names"));
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -348,7 +474,7 @@ public class SettingsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_130_mailHostNames")) {
+				if (selenium.isElementPresent("mailHostNamesLink")) {
 					break;
 				}
 			}
@@ -358,21 +484,124 @@ public class SettingsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_130_mailHostNames",
+		selenium.click("mailHostNamesLink");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"_130_settings(admin.mail.host.names)")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_130_settings(admin.mail.host.names)",
 			RuntimeVariables.replace("rasoflight.com"));
-		selenium.type("_130_mailHostNames",
+		selenium.type("_130_settings(admin.mail.host.names)",
 			RuntimeVariables.replace("raysoflight.com"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		selenium.click(RuntimeVariables.replace("link=Email Notifications"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Account Created Notification"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Password Changed Notification"));
-		selenium.waitForPageToLoad("30000");
+		selenium.click("emailNotificationsLink");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"_130_settings(admin.email.from.name)")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=Account Created Notification")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Account Created Notification");
+		assertTrue(selenium.isElementPresent(
+				"_130_settings(admin.email.user.added.enabled)Checkbox"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=Password Changed Notification")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Password Changed Notification");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("phoneNumbersLink")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("phoneNumbersLink");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_130_phoneNumber0")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }

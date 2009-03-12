@@ -116,6 +116,7 @@ public class ControlPanelTests extends BaseTests {
 		testSuite.addTestSuite(AddAsteriskPasswordPolicyNameTest.class);
 		testSuite.addTestSuite(AddDuplicatePasswordPolicyNameTest.class);
 		testSuite.addTestSuite(SettingsTest.class);
+		testSuite.addTestSuite(SettingsMiscellaneousDisplaySettingsTest.class);
 		testSuite.addTestSuite(MonitoringTest.class);
 		testSuite.addTestSuite(PluginsConfigurationTest.class);
 		testSuite.addTestSuite(AddReservedUserSNTest.class);

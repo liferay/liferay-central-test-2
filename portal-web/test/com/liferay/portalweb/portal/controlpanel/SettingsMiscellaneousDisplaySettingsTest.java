@@ -26,20 +26,21 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="RemoveApplyCommunityTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="SettingsMiscellaneousDisplaySettingsTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class RemoveApplyCommunityTest extends BaseTestCase {
-	public void testRemoveApplyCommunity() throws Exception {
+public class SettingsMiscellaneousDisplaySettingsTest extends BaseTestCase {
+	public void testSettingsMiscellaneousDisplaySettings()
+		throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Communities")) {
+				if (selenium.isElementPresent("link=Settings")) {
 					break;
 				}
 			}
@@ -49,8 +50,9 @@ public class RemoveApplyCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Communities"));
+		selenium.click(RuntimeVariables.replace("link=Settings"));
 		selenium.waitForPageToLoad("30000");
+		selenium.click("displaySettingsLink");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -58,7 +60,8 @@ public class RemoveApplyCommunityTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_134_name")) {
+				if (selenium.isElementPresent(
+							"_130_settings(company.security.community.logo)Checkbox")) {
 					break;
 				}
 			}
@@ -68,36 +71,39 @@ public class RemoveApplyCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_134_name", RuntimeVariables.replace("Test Communit"));
-		selenium.type("_134_name", RuntimeVariables.replace("Test Community"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("//td[6]/ul/li/strong/span");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Assign Members")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Assign Members"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("//div[5]/table/tbody/tr[4]/td[1]/input");
-		selenium.click("//tr[3]/td[1]/input");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Update Associations']"));
+		selenium.click("_130_settings(company.security.community.logo)Checkbox");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request processed successfully. "));
+		selenium.click("displaySettingsLink");
+		assertFalse(selenium.isChecked(
+				"_130_settings(company.security.community.logo)Checkbox"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"_130_settings(company.security.community.logo)Checkbox")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("_130_settings(company.security.community.logo)Checkbox");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully. "));
+		selenium.click("displaySettingsLink");
+		assertTrue(selenium.isChecked(
+				"_130_settings(company.security.community.logo)Checkbox"));
 	}
 }

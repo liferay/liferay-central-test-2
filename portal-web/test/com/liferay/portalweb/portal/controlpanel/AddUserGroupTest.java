@@ -40,7 +40,7 @@ public class AddUserGroupTest extends BaseTestCase {
 			case 1:
 
 				boolean InControlPanel = selenium.isElementPresent(
-						"link=User Groups");
+						"link=Back to My Community");
 
 				if (InControlPanel) {
 					label = 2;
