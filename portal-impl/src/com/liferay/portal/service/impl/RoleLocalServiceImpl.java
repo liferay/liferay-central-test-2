@@ -28,6 +28,8 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredRoleException;
 import com.liferay.portal.RoleNameException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -47,6 +49,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -121,57 +124,38 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		PermissionCacheUtil.clearCache();
 	}
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void checkSystemRoles(long companyId)
 		throws PortalException, SystemException {
+
+		for (Role role : roleFinder.findBySystem()) {
+			_systemRolesMap.put(companyId + role.getName(), role);
+		}
 
 		// Regular roles
 
 		String[] systemRoles = PortalUtil.getSystemRoles();
 
-		for (int i = 0; i < systemRoles.length; i++) {
-			String roleName = systemRoles[i];
-			String roleDescription = PropsUtil.get(
-				"system.role." + StringUtil.replace(roleName, " ", ".") +
+		for (String name : systemRoles) {
+			String description = PropsUtil.get(
+				"system.role." + StringUtil.replace(name, " ", ".") +
 					".description");
-			int roleType = RoleConstants.TYPE_REGULAR;
+			int type = RoleConstants.TYPE_REGULAR;
 
-			try {
-				Role role = roleFinder.findByC_N(companyId, roleName);
-
-				if (!role.getDescription().equals(roleDescription)) {
-					role.setDescription(roleDescription);
-
-					rolePersistence.update(role, false);
-				}
-			}
-			catch (NoSuchRoleException nsre) {
-				addRole(0, companyId, roleName, roleDescription, roleType);
-			}
+			checkSystemRole(companyId, name, description, type);
 		}
 
 		// Community roles
 
 		String[] systemCommunityRoles = PortalUtil.getSystemCommunityRoles();
 
-		for (int i = 0; i < systemCommunityRoles.length; i++) {
-			String roleName = systemCommunityRoles[i];
-			String roleDescription = PropsUtil.get(
+		for (String name : systemCommunityRoles) {
+			String description = PropsUtil.get(
 				"system.community.role." +
-					StringUtil.replace(roleName, " ", ".") + ".description");
-			int roleType = RoleConstants.TYPE_COMMUNITY;
+					StringUtil.replace(name, " ", ".") + ".description");
+			int type = RoleConstants.TYPE_COMMUNITY;
 
-			try {
-				Role role = roleFinder.findByC_N(companyId, roleName);
-
-				if (!role.getDescription().equals(roleDescription)) {
-					role.setDescription(roleDescription);
-
-					rolePersistence.update(role, false);
-				}
-			}
-			catch (NoSuchRoleException nsre) {
-				addRole(0, companyId, roleName, roleDescription, roleType);
-			}
+			checkSystemRole(companyId, name, description, type);
 		}
 
 		// Organization roles
@@ -179,25 +163,13 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		String[] systemOrganizationRoles =
 			PortalUtil.getSystemOrganizationRoles();
 
-		for (int i = 0; i < systemOrganizationRoles.length; i++) {
-			String roleName = systemOrganizationRoles[i];
-			String roleDescription = PropsUtil.get(
+		for (String name : systemOrganizationRoles) {
+			String description = PropsUtil.get(
 				"system.organization.role." +
-					StringUtil.replace(roleName, " ", ".") + ".description");
-			int roleType = RoleConstants.TYPE_ORGANIZATION;
+					StringUtil.replace(name, " ", ".") + ".description");
+			int type = RoleConstants.TYPE_ORGANIZATION;
 
-			try {
-				Role role = roleFinder.findByC_N(companyId, roleName);
-
-				if (!role.getDescription().equals(roleDescription)) {
-					role.setDescription(roleDescription);
-
-					rolePersistence.update(role, false);
-				}
-			}
-			catch (NoSuchRoleException nsre) {
-				addRole(0, companyId, roleName, roleDescription, roleType);
-			}
+			checkSystemRole(companyId, name, description, type);
 		}
 	}
 
@@ -262,6 +234,12 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 	public Role getRole(long companyId, String name)
 		throws PortalException, SystemException {
+
+		Role role = _systemRolesMap.get(companyId + name);
+
+		if (role != null) {
+			return role;
+		}
 
 		return roleFinder.findByC_N(companyId, name);
 	}
@@ -464,6 +442,31 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		return role;
 	}
 
+	protected void checkSystemRole(
+			long companyId, String name, String description, int type)
+		throws PortalException, SystemException {
+
+		Role role = _systemRolesMap.get(companyId + name);
+
+		try {
+			if (role == null) {
+				role = roleFinder.findByC_N(companyId, name);
+			}
+
+			if (!role.getDescription().equals(description)) {
+				role.setDescription(description);
+
+				roleLocalService.updateRole(role, false);
+			}
+		}
+		catch (NoSuchRoleException nsre) {
+			role = roleLocalService.addRole(
+				0, companyId, name, description, type);
+		}
+
+		_systemRolesMap.put(companyId + name, role);
+	}
+
 	protected void setLocalizedAttributes(
 		Role role, Map<Locale, String> localeTitlesMap) {
 
@@ -517,5 +520,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		catch (NoSuchRoleException nsge) {
 		}
 	}
+
+	private Map<String, Role> _systemRolesMap = new HashMap<String, Role>();
 
 }

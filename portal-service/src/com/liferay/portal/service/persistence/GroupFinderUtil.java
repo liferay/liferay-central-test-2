@@ -46,6 +46,11 @@ public class GroupFinderUtil {
 		return getFinder().findByNullFriendlyURL();
 	}
 
+	public static java.util.List<com.liferay.portal.model.Group> findBySystem()
+		throws com.liferay.portal.SystemException {
+		return getFinder().findBySystem();
+	}
+
 	public static com.liferay.portal.model.Group findByC_N(long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.NoSuchGroupException,

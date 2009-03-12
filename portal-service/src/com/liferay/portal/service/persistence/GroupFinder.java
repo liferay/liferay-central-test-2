@@ -40,6 +40,9 @@ public interface GroupFinder {
 	public java.util.List<com.liferay.portal.model.Group> findByNullFriendlyURL()
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portal.model.Group> findBySystem()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Group findByC_N(long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.NoSuchGroupException,

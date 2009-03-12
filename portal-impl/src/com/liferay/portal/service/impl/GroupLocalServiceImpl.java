@@ -31,6 +31,8 @@ import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredGroupException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
@@ -59,7 +61,6 @@ import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
-import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.base.GroupLocalServiceBaseImpl;
 import com.liferay.portal.util.FriendlyURLNormalizer;
 import com.liferay.portal.util.PortalUtil;
@@ -227,34 +228,41 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		PermissionCacheUtil.clearCache();
 	}
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void checkSystemGroups(long companyId)
 		throws PortalException, SystemException {
+
+		for (Group group : groupFinder.findBySystem()) {
+			_systemGroupsMap.put(companyId + group.getName(), group);
+		}
 
 		long defaultUserId = userLocalService.getDefaultUserId(companyId);
 
 		String[] systemGroups = PortalUtil.getSystemGroups();
 
-		for (int i = 0; i < systemGroups.length; i++) {
-			Group group = null;
+		for (String name : systemGroups) {
+			Group group = _systemGroupsMap.get(companyId + name);
 
 			try {
-				group = groupFinder.findByC_N(companyId, systemGroups[i]);
+				if (group == null) {
+					group = groupFinder.findByC_N(companyId, name);
+				}
 			}
 			catch (NoSuchGroupException nsge) {
 				int type = GroupConstants.TYPE_COMMUNITY_OPEN;
 				String friendlyURL = null;
 
-				if (systemGroups[i].equals(GroupConstants.CONTROL_PANEL)) {
+				if (name.equals(GroupConstants.CONTROL_PANEL)) {
 					type = GroupConstants.TYPE_COMMUNITY_PRIVATE;
 					friendlyURL = "/control_panel";
 				}
-				else if (systemGroups[i].equals(GroupConstants.GUEST)) {
+				else if (name.equals(GroupConstants.GUEST)) {
 					friendlyURL = "/guest";
 				}
 
-				group = addGroup(
-					defaultUserId, null, 0, systemGroups[i], null,
-					type, friendlyURL, true);
+				group = groupLocalService.addGroup(
+					defaultUserId, null, 0, name, null, type, friendlyURL,
+					true);
 			}
 
 			if (group.getName().equals(GroupConstants.CONTROL_PANEL)) {
@@ -274,6 +282,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 					addDefaultGuestPublicLayouts(group);
 				}
 			}
+
+			_systemGroupsMap.put(companyId + name, group);
 		}
 	}
 
@@ -425,6 +435,12 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 	public Group getGroup(long companyId, String name)
 		throws PortalException, SystemException {
+
+		Group group = _systemGroupsMap.get(companyId + name);
+
+		if (group != null) {
+			return group;
+		}
 
 		return groupFinder.findByC_N(companyId, name);
 	}
@@ -861,7 +877,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 
 		if (updateLayoutSet) {
-			LayoutSetLocalServiceUtil.updateLayoutSet(layoutSet);
+			layoutSetLocalService.updateLayoutSet(layoutSet);
 		}
 	}
 
@@ -1121,5 +1137,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 	private static Log _log =
 		 LogFactoryUtil.getLog(GroupLocalServiceImpl.class);
+
+	private Map<String, Group> _systemGroupsMap = new HashMap<String, Group>();
 
 }

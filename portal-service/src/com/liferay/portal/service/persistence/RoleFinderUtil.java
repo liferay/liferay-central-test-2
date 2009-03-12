@@ -42,6 +42,11 @@ public class RoleFinderUtil {
 				   .countByC_N_D_T(companyId, name, description, type, params);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Role> findBySystem()
+		throws com.liferay.portal.SystemException {
+		return getFinder().findBySystem();
+	}
+
 	public static java.util.List<com.liferay.portal.model.Role> findByUserGroupRole(
 		long userId, long groupId) throws com.liferay.portal.SystemException {
 		return getFinder().findByUserGroupRole(userId, groupId);

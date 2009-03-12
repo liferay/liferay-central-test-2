@@ -71,6 +71,9 @@ public class RoleFinderImpl extends BasePersistenceImpl implements RoleFinder {
 	public static String COUNT_BY_USER_GROUP =
 		RoleFinder.class.getName() + ".countByUserGroup";
 
+	public static String FIND_BY_SYSTEM =
+		RoleFinder.class.getName() + ".findBySystem";
+
 	public static String FIND_BY_USER_GROUP_ROLE =
 		RoleFinder.class.getName() + ".findByUserGroupRole";
 
@@ -193,6 +196,28 @@ public class RoleFinderImpl extends BasePersistenceImpl implements RoleFinder {
 			}
 
 			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<Role> findBySystem() throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_SYSTEM);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("Role_", RoleImpl.class);
+
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

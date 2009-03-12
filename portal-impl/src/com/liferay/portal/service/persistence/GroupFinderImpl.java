@@ -65,6 +65,9 @@ public class GroupFinderImpl
 	public static String FIND_BY_NULL_FRIENDLY_URL =
 		GroupFinder.class.getName() + ".findByNullFriendlyURL";
 
+	public static String FIND_BY_SYSTEM =
+		GroupFinder.class.getName() + ".findBySystem";
+
 	public static String FIND_BY_C_N =
 		GroupFinder.class.getName() + ".findByC_N";
 
@@ -208,6 +211,28 @@ public class GroupFinderImpl
 			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_NULL_FRIENDLY_URL);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("Group_", GroupImpl.class);
+
+			return q.list();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<Group> findBySystem() throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_SYSTEM);
 
 			SQLQuery q = session.createSQLQuery(sql);
 

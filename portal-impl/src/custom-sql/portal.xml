@@ -41,6 +41,19 @@
 				(friendlyURL = '' OR friendlyURL IS NULL)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.GroupFinder.findBySystem">
+		<![CDATA[
+			(
+				SELECT
+					{Group_.*}
+				FROM
+					Group_
+				WHERE
+					(Group_.name = 'Control Panel') OR
+					(Group_.name = 'Guest')
+			)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.findByC_N">
 		<![CDATA[
 			SELECT
@@ -788,6 +801,28 @@
 				(Role_.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ROLE$]) AND
 				(lower(Role_.name) LIKE ? OR ? IS NULL) AND
 				(lower(Role_.description) LIKE ? OR ? IS NULL) AND (Role_.type_ = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portal.service.persistence.RoleFinder.findBySystem">
+		<![CDATA[
+			(
+				SELECT
+					{Role_.*}
+				FROM
+					Role_
+				WHERE
+					(Role_.name = 'Administrator') OR
+					(Role_.name = 'Community Administrator') OR
+					(Role_.name = 'Community Member') OR
+					(Role_.name = 'Community Owner') OR
+					(Role_.name = 'Guest') OR
+					(Role_.name = 'Organization Administrator') OR
+					(Role_.name = 'Organization Member') OR
+					(Role_.name = 'Organization Owner') OR
+					(Role_.name = 'Owner') OR
+					(Role_.name = 'Power User') OR
+					(Role_.name = 'User')
+			)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.RoleFinder.findByUserGroupRole">
