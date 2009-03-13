@@ -769,6 +769,10 @@ public class LayoutImporter {
 			String xml = context.getZipEntryAsString(
 				context.getSourceRootPath() + "/categories-hierarchy.xml");
 
+			if (Validator.isNull(xml)) {
+				return;
+			}
+
 			Document doc = SAXReaderUtil.read(xml);
 
 			Element root = doc.getRootElement();
