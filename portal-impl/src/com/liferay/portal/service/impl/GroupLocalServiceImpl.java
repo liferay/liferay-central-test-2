@@ -263,8 +263,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				}
 
 				group = groupLocalService.addGroup(
-					defaultUserId, Group.class.getName(), 0, name, null, type,
-					friendlyURL, true);
+					defaultUserId, null, 0, name, null, type, friendlyURL,
+					true);
 			}
 
 			if (group.getName().equals(GroupConstants.CONTROL_PANEL)) {
