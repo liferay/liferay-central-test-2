@@ -24,23 +24,19 @@ package com.liferay.portal.tools.sql;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 
 /**
- * <a href="DerbyUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="IngresUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
- * @author Sandeep Soni
- * @author Ganesh Ram
+ * @author David Maier
  *
  */
-public class DerbyUtil extends DBUtil {
+public class IngresUtil extends DBUtil {
 
 	public static DBUtil getInstance() {
 		return _instance;
@@ -50,50 +46,52 @@ public class DerbyUtil extends DBUtil {
 		template = convertTimestamp(template);
 		template = replaceTemplate(template, getTemplate());
 
-		template = reword(template );
-		//template = _removeLongInserts(derby);
-		template = removeNull(template);
-		template = StringUtil.replace(template , "\\'", "''");
+		template = reword(template);
 
 		return template;
 	}
 
-	protected DerbyUtil() {
-		super(TYPE_DERBY);
+	protected IngresUtil() {
+		super(TYPE_INGRES);
 	}
 
-	protected void buildCreateFile(String databaseName, boolean minimal)
-		throws IOException {
-
-		String minimalSuffix = getMinimalSuffix(minimal);
-
-		File file = new File(
-			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
-				"-derby.sql");
-
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("drop database " + databaseName + ";\n");
-		sb.append("create database " + databaseName + ";\n");
-		sb.append("connect to " + databaseName + ";\n");
-		sb.append(
-			FileUtil.read(
-				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
-					"-derby.sql"));
-		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/indexes/indexes-derby.sql"));
-		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/sequences/sequences-derby.sql"));
-
-		FileUtil.write(file, sb.toString());
+	protected void buildCreateFile(String databaseName, boolean minimal) {
 	}
 
 	protected String getServerName() {
-		return "derby";
+		return "ingres";
 	}
 
 	protected String[] getTemplate() {
-		return _DERBY;
+		return _INGRES;
+	}
+
+	protected String replaceTemplate(String template, String[] actual) {
+		if ((template == null) || (TEMPLATE == null) || (actual == null)) {
+			return null;
+		}
+
+		if (TEMPLATE.length != actual.length) {
+			return template;
+		}
+
+		for (int i = 0; i < TEMPLATE.length; i++) {
+			if (TEMPLATE[i].equals("##") ||
+				TEMPLATE[i].equals("'01/01/1970'")) {
+
+				template = template.replaceAll(TEMPLATE[i], actual[i]);
+			}
+			else if (TEMPLATE[i].equals("COMMIT_TRANSACTION")) {
+				template = StringUtil.replace(
+					template, TEMPLATE[i] + ";", actual[i]);
+			}
+			else {
+				template = template.replaceAll(
+					"\\b" + TEMPLATE[i] + "\\b", actual[i]);
+			}
+		}
+
+		return template;
 	}
 
 	protected String reword(String data) throws IOException {
@@ -104,15 +102,27 @@ public class DerbyUtil extends DBUtil {
 		String line = null;
 
 		while ((line = br.readLine()) != null) {
-			if (line.startsWith(ALTER_COLUMN_TYPE) ||
-				line.startsWith(ALTER_COLUMN_NAME)) {
+			if (line.startsWith(ALTER_COLUMN_TYPE)) {
+				String[] template = buildColumnTypeTokens(line);
 
+				line = StringUtil.replace(
+					"alter table @table@ alter @old-column@ @type@;",
+					REWORD_TEMPLATE, template);
+			}
+			else if (line.startsWith(ALTER_COLUMN_NAME)) {
 				line = "-- " + line;
 
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"This statement is not supported by Derby: " + line);
+						"This statement is not supported by Ingres: " + line);
 				}
+			}
+			else if (line.indexOf(DROP_PRIMARY_KEY) != -1) {
+				String[] tokens = StringUtil.split(line, " ");
+
+				line = StringUtil.replace(
+					"alter table @table@ drop constraint @table@_pkey;",
+					"@table@", tokens[2]);
 			}
 
 			sb.append(line);
@@ -124,17 +134,17 @@ public class DerbyUtil extends DBUtil {
 		return sb.toString();
 	}
 
-	private static String[] _DERBY = {
+	private static String[] _INGRES = {
 		"--", "1", "0",
-		"'1970-01-01-00.00.00.000000'", "current timestamp",
-		" blob", " smallint", " timestamp",
-		" double", " integer", " bigint",
-		" varchar(4000)", " clob", " varchar",
-		" generated always as identity", "commit"
+		"'1970-01-01'", "date('now')",
+		" byte varying", " tinyint", " timestamp",
+		" float", " integer", " bigint",
+		" varchar(1000)", " long varchar", " varchar",
+		"", "commit;\\g"
 	};
 
-	private static Log _log = LogFactoryUtil.getLog(DerbyUtil.class);
+	private static IngresUtil _instance = new IngresUtil();
 
-	private static DerbyUtil _instance = new DerbyUtil();
+	private static Log _log = LogFactoryUtil.getLog(IngresUtil.class);
 
 }

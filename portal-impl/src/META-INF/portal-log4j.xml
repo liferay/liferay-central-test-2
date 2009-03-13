@@ -420,7 +420,7 @@
 		<priority value="INFO" />
 	</category>
 
-	<category name="com.liferay.portal.tools.sql.DBUtil">
+	<category name="com.liferay.portal.tools.sql">
 		<priority value="INFO" />
 	</category>
 

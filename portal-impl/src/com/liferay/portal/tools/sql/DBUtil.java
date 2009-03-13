@@ -55,6 +55,7 @@ import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.FirebirdDialect;
 import org.hibernate.dialect.HSQLDialect;
 import org.hibernate.dialect.InformixDialect;
+import org.hibernate.dialect.IngresDialect;
 import org.hibernate.dialect.InterbaseDialect;
 import org.hibernate.dialect.JDataStoreDialect;
 import org.hibernate.dialect.MySQLDialect;
@@ -87,6 +88,8 @@ public abstract class DBUtil {
 
 	public static final String TYPE_INFORMIX = "informix";
 
+	public static final String TYPE_INGRES = "ingres";
+
 	public static final String TYPE_INTERBASE = "interbase";
 
 	public static final String TYPE_JDATASTORE = "jdatastore";
@@ -105,7 +108,7 @@ public abstract class DBUtil {
 
 	public static final String[] TYPE_ALL = {
 		TYPE_DB2, TYPE_DERBY, TYPE_FIREBIRD, TYPE_HYPERSONIC, TYPE_INFORMIX,
-		TYPE_INTERBASE, TYPE_JDATASTORE, TYPE_MYSQL, TYPE_ORACLE,
+		TYPE_INGRES, TYPE_INTERBASE, TYPE_JDATASTORE, TYPE_MYSQL, TYPE_ORACLE,
 		TYPE_POSTGRESQL, TYPE_SAP, TYPE_SQLSERVER, TYPE_SYBASE
 	};
 
@@ -146,6 +149,9 @@ public abstract class DBUtil {
 		}
 		else if (type.equals(TYPE_INFORMIX)) {
 			dbUtil = InformixUtil.getInstance();
+		}
+		else if (type.equals(TYPE_INGRES)) {
+			dbUtil = IngresUtil.getInstance();
 		}
 		else if (type.equals(TYPE_INTERBASE)) {
 			dbUtil = InterBaseUtil.getInstance();
@@ -193,6 +199,9 @@ public abstract class DBUtil {
 		}
 		else if (dialect instanceof InformixDialect) {
 			_dbUtil = InformixUtil.getInstance();
+		}
+		else if (dialect instanceof IngresDialect) {
+			_dbUtil = IngresUtil.getInstance();
 		}
 		else if (dialect instanceof InterbaseDialect) {
 			if (dialect instanceof FirebirdDialect) {
