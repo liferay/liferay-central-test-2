@@ -79,7 +79,7 @@ public class PortletExplodedTomcatListener extends BaseExplodedTomcatListener {
 				"Portlets for " + file.getPath() + " modified successfully");
 		}
 
-		if (ServerDetector.isTomcat()) {
+		if (ServerDetector.isTomcat() && !ServerDetector.isGlassfish()) {
 			copyContextFile(file);
 		}
 	}
