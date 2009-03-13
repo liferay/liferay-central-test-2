@@ -70,7 +70,14 @@ public class ShardUtil {
 
 	public void setShardAdvice(ShardAdvice shardAdvice) {
 		_shardAdvice = shardAdvice;
+	}
 
+	private static Log _log = LogFactoryUtil.getLog(ShardUtil.class);
+
+	private static ShardAdvice _shardAdvice;
+	private static ShardSelector _shardSelector;
+
+	static {
 		try {
 			_shardSelector = (ShardSelector)Class.forName(
 				PropsValues.SHARD_SELECTOR).newInstance();
@@ -79,10 +86,5 @@ public class ShardUtil {
 			_log.error(e, e);
 		}
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(ShardUtil.class);
-
-	private static ShardAdvice _shardAdvice;
-	private static ShardSelector _shardSelector;
 
 }
