@@ -86,7 +86,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
-import com.liferay.portal.service.ClassNameServiceUtil;
+import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
@@ -508,7 +508,7 @@ public class PortalImpl implements Portal {
 
 	public String getClassName(long classNameId) {
 		try {
-			ClassName className = ClassNameServiceUtil.getClassName(
+			ClassName className = ClassNameLocalServiceUtil.getClassName(
 				classNameId);
 
 			return className.getValue();
@@ -520,11 +520,11 @@ public class PortalImpl implements Portal {
 	}
 
 	public long getClassNameId(Class<?> classObj) {
-		return ClassNameServiceUtil.getClassNameId(classObj);
+		return ClassNameLocalServiceUtil.getClassNameId(classObj);
 	}
 
 	public long getClassNameId(String value) {
-		return ClassNameServiceUtil.getClassNameId(value);
+		return ClassNameLocalServiceUtil.getClassNameId(value);
 	}
 
 	public String getClassNamePortletId(String className) {
