@@ -143,8 +143,8 @@ public class IngresUtil extends DBUtil {
 		"", "commit;\\g"
 	};
 
-	private static IngresUtil _instance = new IngresUtil();
-
 	private static Log _log = LogFactoryUtil.getLog(IngresUtil.class);
+
+	private static IngresUtil _instance = new IngresUtil();
 
 }
