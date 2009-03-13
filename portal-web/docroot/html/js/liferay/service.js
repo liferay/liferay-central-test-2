@@ -1,4 +1,4 @@
-Liferay.Service.register("Liferay.Service.Portal", "com.liferay.portal.service.http");
+Liferay.Service.register("Liferay.Service.Portal", "com.liferay.portal.service");
 
 Liferay.Service.registerClass(
 	Liferay.Service.Portal, "Address",
@@ -304,7 +304,6 @@ Liferay.Service.registerClass(
 		updateOpenId: true,
 		updateOrganizations: true,
 		updatePassword: true,
-		updatePortrait: true,
 		updateReminderQuery: true,
 		updateScreenName: true,
 		updateUser: true
@@ -343,7 +342,7 @@ Liferay.Service.registerClass(
 	}
 );
 
-Liferay.Service.register("Liferay.Service.Announcements", "com.liferay.portlet.announcements.service.http");
+Liferay.Service.register("Liferay.Service.Announcements", "com.liferay.portlet.announcements.service");
 
 Liferay.Service.registerClass(
 	Liferay.Service.Announcements, "AnnouncementsDelivery",
@@ -370,7 +369,7 @@ Liferay.Service.registerClass(
 	}
 );
 
-Liferay.Service.register("Liferay.Service.Blogs", "com.liferay.portlet.blogs.service.http");
+Liferay.Service.register("Liferay.Service.Blogs", "com.liferay.portlet.blogs.service");
 
 Liferay.Service.registerClass(
 	Liferay.Service.Blogs, "BlogsEntry",
@@ -385,7 +384,7 @@ Liferay.Service.registerClass(
 	}
 );
 
-Liferay.Service.register("Liferay.Service.Bookmarks", "com.liferay.portlet.bookmarks.service.http");
+Liferay.Service.register("Liferay.Service.Bookmarks", "com.liferay.portlet.bookmarks.service");
 
 Liferay.Service.registerClass(
 	Liferay.Service.Bookmarks, "BookmarksEntry",
@@ -408,7 +407,7 @@ Liferay.Service.registerClass(
 	}
 );
 
-Liferay.Service.register("Liferay.Service.Cal", "com.liferay.portlet.calendar.service.http");
+Liferay.Service.register("Liferay.Service.Cal", "com.liferay.portlet.calendar.service");
 
 Liferay.Service.registerClass(
 	Liferay.Service.Cal, "CalEvent",
@@ -420,12 +419,11 @@ Liferay.Service.registerClass(
 	}
 );
 
-Liferay.Service.register("Liferay.Service.DL", "com.liferay.portlet.documentlibrary.service.http");
+Liferay.Service.register("Liferay.Service.DL", "com.liferay.portlet.documentlibrary.service");
 
 Liferay.Service.registerClass(
 	Liferay.Service.DL, "DLFileEntry",
 	{
-		addFileEntry: true,
 		deleteFileEntry: true,
 		deleteFileEntryByTitle: true,
 		getFileEntries: true,
@@ -435,7 +433,6 @@ Liferay.Service.registerClass(
 		lockFileEntry: true,
 		refreshFileEntryLock: true,
 		unlockFileEntry: true,
-		updateFileEntry: true,
 		verifyFileEntryLock: true
 	}
 );
@@ -469,7 +466,7 @@ Liferay.Service.registerClass(
 	}
 );
 
-Liferay.Service.register("Liferay.Service.Expando", "com.liferay.portlet.expando.service.http");
+Liferay.Service.register("Liferay.Service.Expando", "com.liferay.portlet.expando.service");
 
 Liferay.Service.registerClass(
 	Liferay.Service.Expando, "ExpandoColumn",
@@ -484,11 +481,12 @@ Liferay.Service.registerClass(
 Liferay.Service.registerClass(
 	Liferay.Service.Expando, "ExpandoValue",
 	{
-		addValue: true
+		addValue: true,
+		getData: true
 	}
 );
 
-Liferay.Service.register("Liferay.Service.IG", "com.liferay.portlet.imagegallery.service.http");
+Liferay.Service.register("Liferay.Service.IG", "com.liferay.portlet.imagegallery.service");
 
 Liferay.Service.registerClass(
 	Liferay.Service.IG, "IGFolder",
@@ -515,7 +513,7 @@ Liferay.Service.registerClass(
 	}
 );
 
-Liferay.Service.register("Liferay.Service.Journal", "com.liferay.portlet.journal.service.http");
+Liferay.Service.register("Liferay.Service.Journal", "com.liferay.portlet.journal.service");
 
 Liferay.Service.registerClass(
 	Liferay.Service.Journal, "JournalArticle",
@@ -559,7 +557,7 @@ Liferay.Service.registerClass(
 	}
 );
 
-Liferay.Service.register("Liferay.Service.MB", "com.liferay.portlet.messageboards.service.http");
+Liferay.Service.register("Liferay.Service.MB", "com.liferay.portlet.messageboards.service");
 
 Liferay.Service.registerClass(
 	Liferay.Service.MB, "MBBan",
@@ -617,7 +615,7 @@ Liferay.Service.registerClass(
 	}
 );
 
-Liferay.Service.register("Liferay.Service.Polls", "com.liferay.portlet.polls.service.http");
+Liferay.Service.register("Liferay.Service.Polls", "com.liferay.portlet.polls.service");
 
 Liferay.Service.registerClass(
 	Liferay.Service.Polls, "PollsQuestion",
@@ -636,7 +634,7 @@ Liferay.Service.registerClass(
 	}
 );
 
-Liferay.Service.register("Liferay.Service.Ratings", "com.liferay.portlet.ratings.service.http");
+Liferay.Service.register("Liferay.Service.Ratings", "com.liferay.portlet.ratings.service");
 
 Liferay.Service.registerClass(
 	Liferay.Service.Ratings, "RatingsEntry",
@@ -646,7 +644,7 @@ Liferay.Service.registerClass(
 	}
 );
 
-Liferay.Service.register("Liferay.Service.Shopping", "com.liferay.portlet.shopping.service.http");
+Liferay.Service.register("Liferay.Service.Shopping", "com.liferay.portlet.shopping.service");
 
 Liferay.Service.registerClass(
 	Liferay.Service.Shopping, "ShoppingCategory",
@@ -689,9 +687,9 @@ Liferay.Service.registerClass(
 	}
 );
 
-Liferay.Service.register("Liferay.Service.Social", "com.liferay.portlet.social.service.http");
+Liferay.Service.register("Liferay.Service.Social", "com.liferay.portlet.social.service");
 
-Liferay.Service.register("Liferay.Service.SC", "com.liferay.portlet.softwarecatalog.service.http");
+Liferay.Service.register("Liferay.Service.SC", "com.liferay.portlet.softwarecatalog.service");
 
 Liferay.Service.registerClass(
 	Liferay.Service.SC, "SCLicense",
@@ -736,7 +734,7 @@ Liferay.Service.registerClass(
 	}
 );
 
-Liferay.Service.register("Liferay.Service.Tags", "com.liferay.portlet.tags.service.http");
+Liferay.Service.register("Liferay.Service.Tags", "com.liferay.portlet.tags.service");
 
 Liferay.Service.registerClass(
 	Liferay.Service.Tags, "TagsAsset",
@@ -796,7 +794,7 @@ Liferay.Service.registerClass(
 	}
 );
 
-Liferay.Service.register("Liferay.Service.Tasks", "com.liferay.portlet.tasks.service.http");
+Liferay.Service.register("Liferay.Service.Tasks", "com.liferay.portlet.tasks.service");
 
 Liferay.Service.registerClass(
 	Liferay.Service.Tasks, "TasksReview",
@@ -816,7 +814,7 @@ Liferay.Service.registerClass(
 	}
 );
 
-Liferay.Service.register("Liferay.Service.Wiki", "com.liferay.portlet.wiki.service.http");
+Liferay.Service.register("Liferay.Service.Wiki", "com.liferay.portlet.wiki.service");
 
 Liferay.Service.registerClass(
 	Liferay.Service.Wiki, "WikiNode",
