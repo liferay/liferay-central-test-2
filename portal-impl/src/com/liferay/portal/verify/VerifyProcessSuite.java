@@ -53,7 +53,6 @@ public class VerifyProcessSuite extends VerifyProcess {
 		verify(new VerifyLayout());
 		verify(new VerifyMessageBoards());
 		verify(new VerifySocial());
-		verify(new VerifyUser());
 		verify(new VerifyWiki());
 
 		// VerifyBlogsTrackbacks looks at every blog comment to see if it is a
