@@ -769,7 +769,6 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				searchQuery.addTerm(Field.USER_NAME, keywords);
 				searchQuery.addTerm(Field.TITLE, keywords);
 				searchQuery.addTerm(Field.DESCRIPTION, keywords);
-				searchQuery.addTerm(Field.CONTENT, keywords);
 				searchQuery.addTerm(Field.TAGS_ENTRIES, keywords);
 			}
 
@@ -782,8 +781,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			}
 
 			return SearchEngineUtil.search(
-				companyId, groupId, userId, CalEvent.class.getName(),
-				fullQuery, start, end);
+				companyId, groupId, userId, CalEvent.class.getName(), fullQuery,
+				start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

@@ -32,10 +32,10 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
 import java.util.Date;
 
@@ -134,11 +134,11 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		String title = doc.get(Field.TITLE);
 
-		// Description
+		// Content
 
-		String description = doc.get(Field.DESCRIPTION);
+		String content = doc.get(Field.DESCRIPTION);
 
-		description = StringUtil.shorten(description, 200);
+		content = StringUtil.shorten(content, 200);
 
 		// Portlet URL
 

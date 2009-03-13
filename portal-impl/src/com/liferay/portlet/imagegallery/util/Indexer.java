@@ -133,7 +133,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		// Content
 
-		String content = doc.get(Field.CONTENT);
+		String content = doc.get(Field.DESCRIPTION);
 
 		content = StringUtil.shorten(content, 200);
 
