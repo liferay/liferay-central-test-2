@@ -174,7 +174,7 @@ public class AddDraftEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("Pacific Standard Time")) {
+				if (selenium.isTextPresent("Pacific Daylight Time")) {
 					break;
 				}
 			}
