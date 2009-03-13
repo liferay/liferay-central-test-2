@@ -35,8 +35,8 @@ public class InitialThreadLocal<T> extends ThreadLocal<T> {
 	}
 
 	protected T initialValue() {
-        return _initialValue;
-    }
+		return _initialValue;
+	}
 
 	private T _initialValue;
 
