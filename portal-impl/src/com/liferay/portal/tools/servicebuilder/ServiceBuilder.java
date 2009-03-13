@@ -90,6 +90,7 @@ import org.dom4j.DocumentException;
  * @author Harry Mark
  * @author Tariq Dweik
  * @author Glenn Powell
+ * @author Raymond Augé
  *
  */
 public class ServiceBuilder {
@@ -415,6 +416,9 @@ public class ServiceBuilder {
 			"bad_column_names", _tplBadColumnNames);
 		_tplBadTableNames = _getTplProperty(
 			"bad_table_names", _tplBadTableNames);
+		_tplBadJSONReturnOrParameterTypes = _getTplProperty(
+			"bad_json_return_or_parameter_types",
+			_tplBadJSONReturnOrParameterTypes);
 		_tplEjbPk = _getTplProperty("ejb_pk", _tplEjbPk);
 		_tplException = _getTplProperty("exception", _tplException);
 		_tplExtendedModel = _getTplProperty(
@@ -449,7 +453,6 @@ public class ServiceBuilder {
 			"service_factory", _tplServiceFactory);
 		_tplServiceHttp = _getTplProperty("service_http", _tplServiceHttp);
 		_tplServiceImpl = _getTplProperty("service_impl", _tplServiceImpl);
-		_tplServiceJson = _getTplProperty("service_json", _tplServiceJson);
 		_tplServiceJsonSerializer = _getTplProperty(
 			"service_json_serializer", _tplServiceJsonSerializer);
 		_tplServiceSoap = _getTplProperty("service_soap", _tplServiceSoap);
@@ -469,6 +472,9 @@ public class ServiceBuilder {
 				getClass().getClassLoader(), _tplBadTableNames));
 			_badColumnNames = SetUtil.fromString(StringUtil.read(
 				getClass().getClassLoader(), _tplBadColumnNames));
+			_badJSONReturnOrParameterTypes = SetUtil.fromString(StringUtil.read(
+				getClass().getClassLoader(),
+				_tplBadJSONReturnOrParameterTypes));
 			_hbmFileName = hbmFileName;
 			_modelHintsFileName = modelHintsFileName;
 			_springFileName = springFileName;
@@ -971,7 +977,6 @@ public class ServiceBuilder {
 
 							if (Validator.isNotNull(_jsonFileName)) {
 								_createServiceHttp(entity);
-								_createServiceJson(entity);
 
 								if (entity.hasColumns()) {
 									_createServiceJsonSerializer(entity);
@@ -1200,6 +1205,17 @@ public class ServiceBuilder {
 		return noSuchEntityException;
 	}
 
+	public String getParameterType(JavaParameter parameter) {
+		Type returnType = parameter.getType();
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(returnType.getValue());
+		sb.append(parameter.getGenericsName());
+		sb.append(getDimensions(returnType.getDimensions()));
+
+		return sb.toString();
+	}
+
 	public String getPrimitiveObj(String type) {
 		if (type.equals("boolean")) {
 			return "Boolean";
@@ -1245,6 +1261,17 @@ public class ServiceBuilder {
 		}
 
 		return StringPool.BLANK;
+	}
+
+	public String getReturnType(JavaMethod method) {
+		Type returnType = method.getReturns();
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(returnType.getValue());
+		sb.append(method.getReturnsGenericsName());
+		sb.append(getDimensions(returnType.getDimensions()));
+
+		return sb.toString();
 	}
 
 	public String getSqlType(String model, String field, String type) {
@@ -1790,19 +1817,33 @@ public class ServiceBuilder {
 
 			if (entity.hasRemoteService()) {
 				JavaClass javaClass = _getJavaClass(
-					_outputPath + "/service/http/" + entity.getName() +
-						"ServiceJSON.java");
+					_serviceOutputPath + "/service/" + entity.getName() +
+						"Service.java");
 
 				JavaMethod[] methods = _getMethods(javaClass);
 
 				Set<String> jsonMethods = new LinkedHashSet<String>();
 
-				for (int j = 0; j < methods.length; j++) {
-					JavaMethod javaMethod = methods[j];
+				for (JavaMethod method : methods) {
+					String methodName = method.getName();
+					String returnValue = getReturnType(method);
 
-					String methodName = javaMethod.getName();
+					boolean hasBadParameter = false;
 
-					if (javaMethod.isPublic()) {
+					for (JavaParameter parameter: method.getParameters()) {
+						String paramValue = getParameterType(parameter);
+
+						if (_badJSONReturnOrParameterTypes.contains(
+								paramValue)) {
+							hasBadParameter = true;
+						}
+					}
+
+					if ((method.isPublic()) &&
+						(!_badJSONReturnOrParameterTypes.contains(
+							returnValue)) &&
+						(!hasBadParameter)) {
+
 						jsonMethods.add(methodName);
 					}
 				}
@@ -2502,33 +2543,6 @@ public class ServiceBuilder {
 		if (!ejbFile.exists()) {
 			writeFile(ejbFile, content, _author);
 		}
-	}
-
-	private void _createServiceJson(Entity entity) throws Exception {
-		JavaClass javaClass = _getJavaClass(
-			_outputPath + "/service/impl/" + entity.getName() +
-				"ServiceImpl.java");
-
-		Map<String, Object> context = _getContext();
-
-		context.put("entity", entity);
-		context.put("methods", _getMethods(javaClass));
-
-		// Content
-
-		String content = _processTemplate(_tplServiceJson, context);
-
-		// Write file
-
-		File ejbFile = new File(
-			_outputPath + "/service/http/" + entity.getName() +
-				"ServiceJSON.java");
-
-		Map<String, Object> jalopySettings = new HashMap<String, Object>();
-
-		jalopySettings.put("keepJavadoc", Boolean.TRUE);
-
-		writeFile(ejbFile, content, _author, jalopySettings);
 	}
 
 	private void _createServiceJsonSerializer(Entity entity) throws Exception {
@@ -3697,6 +3711,8 @@ public class ServiceBuilder {
 
 	private String _tplBadColumnNames = _TPL_ROOT + "bad_column_names.txt";
 	private String _tplBadTableNames = _TPL_ROOT + "bad_table_names.txt";
+	private String _tplBadJSONReturnOrParameterTypes =
+		_TPL_ROOT + "bad_json_return_or_parameter_types.txt";
 	private String _tplEjbPk = _TPL_ROOT + "ejb_pk.ftl";
 	private String _tplException = _TPL_ROOT + "exception.ftl";
 	private String _tplExtendedModel = _TPL_ROOT + "extended_model.ftl";
@@ -3741,6 +3757,7 @@ public class ServiceBuilder {
 	private String _tplSpringXml = _TPL_ROOT + "spring_xml.ftl";
 	private Set<String> _badTableNames;
 	private Set<String> _badColumnNames;
+	private Set<String> _badJSONReturnOrParameterTypes;
 	private String _hbmFileName;
 	private String _modelHintsFileName;
 	private String _springFileName;

@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextUtil;
 import com.liferay.portal.struts.JSONAction;
@@ -41,6 +42,7 @@ import java.lang.reflect.Method;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -117,10 +119,14 @@ public class JSONServiceAction extends JSONAction {
 			return null;
 		}
 
-		Class<?> classObj = Class.forName(className);
+		String serlializerClassName = StringUtil.replace(
+			className, "ServiceUtil", "JSONSerializer");
+
+		Class<?> serviceClassObj = Class.forName(className);
+		Class<?> serializerClassObj = Class.forName(serlializerClassName);
 
 		Object[] methodAndParameterTypes = getMethodAndParameterTypes(
-			classObj, methodName, serviceParameters, serviceParameterTypes);
+			serviceClassObj, methodName, serviceParameters, serviceParameterTypes);
 
 		if (methodAndParameterTypes != null) {
 			Method method = (Method)methodAndParameterTypes[0];
@@ -129,22 +135,31 @@ public class JSONServiceAction extends JSONAction {
 
 			for (int i = 0; i < serviceParameters.length; i++) {
 				args[i] = getArgValue(
-					request, classObj, methodName, serviceParameters[i],
+					request, serviceClassObj, methodName, serviceParameters[i],
 					parameterTypes[i]);
 			}
 
 			try {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"Invoking class " + classObj + " on method " +
+						"Invoking class " + serviceClassObj + " on method " +
 							method.getName() + " with args " + args);
 				}
 
-				Object returnObj = method.invoke(classObj, args);
+				Object returnObj = method.invoke(serviceClassObj, args);
 
 				if (returnObj != null) {
-					if (returnObj instanceof JSONArray) {
-						JSONArray jsonArray = (JSONArray)returnObj;
+					if (returnObj instanceof BaseModel) {
+						Method toJSONObject = serializerClassObj.getMethod("toJSONObject", BaseModel.class);
+
+						JSONObject jsonObj = (JSONObject)toJSONObject.invoke(null, returnObj);
+
+						return jsonObj.toString();
+					}
+					else if (returnObj instanceof List) {
+						Method toJSONArray = serializerClassObj.getMethod("toJSONArray", List.class);
+
+						JSONArray jsonArray = (JSONArray)toJSONArray.invoke(null, returnObj);
 
 						return jsonArray.toString();
 					}
@@ -172,7 +187,7 @@ public class JSONServiceAction extends JSONAction {
 						if (returnValue == null) {
 							_log.error(
 								"Unsupported return type for class " +
-									classObj + " and method " + methodName);
+									serviceClassObj + " and method " + methodName);
 						}
 
 						return returnValue;
@@ -357,8 +372,9 @@ public class JSONServiceAction extends JSONAction {
 		else if (returnObj instanceof TagsAssetType[]) {
 			return getReturnValue((TagsAssetType[])returnObj);
 		}
-
-		return null;
+		else {
+			return JSONFactoryUtil.serialize(returnObj);
+		}
 	}
 
 	protected String getReturnValue(TagsAssetDisplay assetDisplay)
@@ -408,8 +424,8 @@ public class JSONServiceAction extends JSONAction {
 	protected boolean isValidRequest(HttpServletRequest request) {
 		String className = ParamUtil.getString(request, "serviceClassName");
 
-		if (className.contains(".service.http.") &&
-			className.endsWith("ServiceJSON")) {
+		if (className.contains(".service.") &&
+			className.endsWith("ServiceUtil")) {
 
 			return true;
 		}

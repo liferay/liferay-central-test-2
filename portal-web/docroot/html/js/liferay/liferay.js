@@ -30,7 +30,7 @@ Liferay.Service = {
 
 	tunnelUrl: themeDisplay.getPathContext() + '/tunnel-web/secure/json',
 
-	classNameSuffix: 'ServiceJSON',
+	classNameSuffix: 'ServiceUtil',
 
 	ajax: function(options, callback) {
 		var instance = this;

@@ -1,1 +1,1 @@
-Liferay.Service.register("Liferay.Service.${portletShortName}", "${packagePath}.service.http");
+Liferay.Service.register("Liferay.Service.${portletShortName}", "${packagePath}.service");
