@@ -147,7 +147,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		portletURL.setParameter("struts_action", "/calendar/view_event");
 		portletURL.setParameter("eventId", eventId);
 
-		return new DocumentSummary(title, description, portletURL);
+		return new DocumentSummary(title, content, portletURL);
 	}
 
 	public void reIndex(String className, long classPK) throws SearchException {
