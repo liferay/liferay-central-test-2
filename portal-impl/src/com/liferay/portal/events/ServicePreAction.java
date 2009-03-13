@@ -1702,6 +1702,7 @@ public class ServicePreAction extends Action {
 			if (hasPowerUserRole == null) {
 				hasPowerUserRole = hasPowerUserRole(user);
 			}
+
 			if (!hasPowerUserRole.booleanValue()) {
 				deleteDefaultUserPrivateLayouts = true;
 			}
@@ -1724,6 +1725,7 @@ public class ServicePreAction extends Action {
 				if (hasPowerUserRole == null) {
 					hasPowerUserRole = hasPowerUserRole(user);
 				}
+
 				if (!hasPowerUserRole.booleanValue()) {
 					addDefaultUserPublicLayouts = false;
 				}
@@ -1743,6 +1745,7 @@ public class ServicePreAction extends Action {
 			if (hasPowerUserRole == null) {
 				hasPowerUserRole = hasPowerUserRole(user);
 			}
+
 			if (!hasPowerUserRole.booleanValue()) {
 				deleteDefaultUserPublicLayouts = true;
 			}
