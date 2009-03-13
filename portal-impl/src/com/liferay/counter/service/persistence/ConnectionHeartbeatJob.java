@@ -69,6 +69,8 @@ public class ConnectionHeartbeatJob implements IntervalJob {
 		Statement statement = connection.createStatement();
 
 		statement.execute(_SELECT_RELEASE);
+		
+		statement.close();
 	}
 
 	private static String _SELECT_RELEASE = "SELECT releaseId FROM Release_";
