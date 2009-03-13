@@ -51,7 +51,7 @@
 <%
 boolean showShardSelector = false;
 
-if (PropsValues.SHARD_SELECTOR.equals(ManualShardSelector.class.getName()) && PropsValues.SHARD_AVAILABLE.length > 1) {
+if (PropsValues.SHARD_SELECTOR.equals(ManualShardSelector.class.getName()) && PropsValues.SHARD_AVAILABLE_NAMES.length > 1) {
 	showShardSelector = true;
 }
 %>
