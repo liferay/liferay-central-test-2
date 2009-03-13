@@ -431,6 +431,8 @@ public class LayoutExporter {
 
 		// Export Portlets
 
+		long previousScopeGroupId = context.getScopeGroupId();
+
 		Element portletsEl = root.addElement("portlets");
 
 		for (Map.Entry<String, Object[]> portletIdsEntry :
@@ -457,6 +459,8 @@ public class LayoutExporter {
 				exportPortletControls[0], exportPortletControls[1],
 				exportPortletUserPreferences, exportUserPermissions);
 		}
+
+		context.setScopeGroupId(previousScopeGroupId);
 
 		// Categories
 
