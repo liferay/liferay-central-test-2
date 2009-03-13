@@ -276,6 +276,24 @@ public class CalEventLocalServiceUtil {
 		getService().importICal4j(userId, groupId, file);
 	}
 
+	public static void reIndex(long eventId)
+		throws com.liferay.portal.SystemException {
+		getService().reIndex(eventId);
+	}
+
+	public static void reIndex(java.lang.String[] ids)
+		throws com.liferay.portal.SystemException {
+		getService().reIndex(ids);
+	}
+
+	public static com.liferay.portal.kernel.search.Hits search(long companyId,
+		long groupId, long userId, long ownerUserId, java.lang.String keywords,
+		int start, int end) throws com.liferay.portal.SystemException {
+		return getService()
+				   .search(companyId, groupId, userId, ownerUserId, keywords,
+			start, end);
+	}
+
 	public static com.liferay.portlet.calendar.model.CalEvent updateEvent(
 		long userId, long eventId, java.lang.String title,
 		java.lang.String description, int startDateMonth, int startDateDay,

@@ -641,6 +641,248 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public List<CalEvent> findByCompanyId(long companyId)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = CalEventModelImpl.CACHE_ENABLED;
+		String finderClassName = CalEvent.class.getName();
+		String finderMethodName = "findByCompanyId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(companyId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+
+				query.append("companyId = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("startDate ASC, ");
+				query.append("title ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				List<CalEvent> list = q.list();
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<CalEvent>)result;
+		}
+	}
+
+	public List<CalEvent> findByCompanyId(long companyId, int start, int end)
+		throws SystemException {
+		return findByCompanyId(companyId, start, end, null);
+	}
+
+	public List<CalEvent> findByCompanyId(long companyId, int start, int end,
+		OrderByComparator obc) throws SystemException {
+		boolean finderClassNameCacheEnabled = CalEventModelImpl.CACHE_ENABLED;
+		String finderClassName = CalEvent.class.getName();
+		String finderMethodName = "findByCompanyId";
+		String[] finderParams = new String[] {
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(companyId),
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+
+				query.append("companyId = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("startDate ASC, ");
+					query.append("title ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				List<CalEvent> list = (List<CalEvent>)QueryUtil.list(q,
+						getDialect(), start, end);
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<CalEvent>)result;
+		}
+	}
+
+	public CalEvent findByCompanyId_First(long companyId, OrderByComparator obc)
+		throws NoSuchEventException, SystemException {
+		List<CalEvent> list = findByCompanyId(companyId, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No CalEvent exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEventException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public CalEvent findByCompanyId_Last(long companyId, OrderByComparator obc)
+		throws NoSuchEventException, SystemException {
+		int count = countByCompanyId(companyId);
+
+		List<CalEvent> list = findByCompanyId(companyId, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No CalEvent exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEventException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public CalEvent[] findByCompanyId_PrevAndNext(long eventId, long companyId,
+		OrderByComparator obc) throws NoSuchEventException, SystemException {
+		CalEvent calEvent = findByPrimaryKey(eventId);
+
+		int count = countByCompanyId(companyId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append(
+				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+
+			query.append("companyId = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("startDate ASC, ");
+				query.append("title ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, calEvent);
+
+			CalEvent[] array = new CalEventImpl[3];
+
+			array[0] = (CalEvent)objArray[0];
+			array[1] = (CalEvent)objArray[1];
+			array[2] = (CalEvent)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<CalEvent> findByGroupId(long groupId) throws SystemException {
 		boolean finderClassNameCacheEnabled = CalEventModelImpl.CACHE_ENABLED;
 		String finderClassName = CalEvent.class.getName();
@@ -1583,6 +1825,12 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 		remove(calEvent);
 	}
 
+	public void removeByCompanyId(long companyId) throws SystemException {
+		for (CalEvent calEvent : findByCompanyId(companyId)) {
+			remove(calEvent);
+		}
+	}
+
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (CalEvent calEvent : findByGroupId(groupId)) {
 			remove(calEvent);
@@ -1733,6 +1981,72 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 				}
 
 				qPos.add(groupId);
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByCompanyId(long companyId) throws SystemException {
+		boolean finderClassNameCacheEnabled = CalEventModelImpl.CACHE_ENABLED;
+		String finderClassName = CalEvent.class.getName();
+		String finderMethodName = "countByCompanyId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(companyId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+
+				query.append("companyId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
 
 				Long count = null;
 
@@ -2075,6 +2389,10 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
 	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence.impl")
 	protected com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence;
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsAssetPersistence.impl")
+	protected com.liferay.portlet.tags.service.persistence.TagsAssetPersistence tagsAssetPersistence;
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsEntryPersistence.impl")
+	protected com.liferay.portlet.tags.service.persistence.TagsEntryPersistence tagsEntryPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
 	private static Log _log = LogFactoryUtil.getLog(CalEventPersistenceImpl.class);

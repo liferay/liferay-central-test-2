@@ -148,6 +148,47 @@ public class CalEventUtil {
 		return getPersistence().fetchByUUID_G(uuid, groupId);
 	}
 
+	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByCompanyId(
+		long companyId) throws com.liferay.portal.SystemException {
+		return getPersistence().findByCompanyId(companyId);
+	}
+
+	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByCompanyId(
+		long companyId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByCompanyId(companyId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByCompanyId(
+		long companyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByCompanyId(companyId, start, end, obc);
+	}
+
+	public static com.liferay.portlet.calendar.model.CalEvent findByCompanyId_First(
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.calendar.NoSuchEventException {
+		return getPersistence().findByCompanyId_First(companyId, obc);
+	}
+
+	public static com.liferay.portlet.calendar.model.CalEvent findByCompanyId_Last(
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.calendar.NoSuchEventException {
+		return getPersistence().findByCompanyId_Last(companyId, obc);
+	}
+
+	public static com.liferay.portlet.calendar.model.CalEvent[] findByCompanyId_PrevAndNext(
+		long eventId, long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.calendar.NoSuchEventException {
+		return getPersistence()
+				   .findByCompanyId_PrevAndNext(eventId, companyId, obc);
+	}
+
 	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByGroupId(
 		long groupId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId);
@@ -315,6 +356,11 @@ public class CalEventUtil {
 		getPersistence().removeByUUID_G(uuid, groupId);
 	}
 
+	public static void removeByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByCompanyId(companyId);
+	}
+
 	public static void removeByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByGroupId(groupId);
@@ -342,6 +388,11 @@ public class CalEventUtil {
 	public static int countByUUID_G(java.lang.String uuid, long groupId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByUUID_G(uuid, groupId);
+	}
+
+	public static int countByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByCompanyId(companyId);
 	}
 
 	public static int countByGroupId(long groupId)
