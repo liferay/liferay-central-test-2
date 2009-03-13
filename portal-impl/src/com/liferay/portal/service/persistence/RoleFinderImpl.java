@@ -63,11 +63,17 @@ public class RoleFinderImpl extends BasePersistenceImpl implements RoleFinder {
 	public static String COUNT_BY_ORGANIZATION =
 		RoleFinder.class.getName() + ".countByOrganization";
 
+	public static String COUNT_BY_ORGANIZATION_COMMUNITY =
+		RoleFinder.class.getName() + ".countByOrganizationCommunity";
+
 	public static String COUNT_BY_USER =
 		RoleFinder.class.getName() + ".countByUser";
 
 	public static String COUNT_BY_USER_GROUP =
 		RoleFinder.class.getName() + ".countByUserGroup";
+
+	public static String COUNT_BY_USER_GROUP_COMMUNITY =
+		RoleFinder.class.getName() + ".countByUserGroupCommunity";
 
 	public static String FIND_BY_SYSTEM =
 		RoleFinder.class.getName() + ".findBySystem";
@@ -106,9 +112,13 @@ public class RoleFinderImpl extends BasePersistenceImpl implements RoleFinder {
 			sb.append(") UNION (");
 			sb.append(CustomSQLUtil.get(COUNT_BY_ORGANIZATION));
 			sb.append(") UNION (");
+			sb.append(CustomSQLUtil.get(COUNT_BY_ORGANIZATION_COMMUNITY));
+			sb.append(") UNION (");
 			sb.append(CustomSQLUtil.get(COUNT_BY_USER));
 			sb.append(") UNION (");
 			sb.append(CustomSQLUtil.get(COUNT_BY_USER_GROUP));
+			sb.append(") UNION (");
+			sb.append(CustomSQLUtil.get(COUNT_BY_USER_GROUP_COMMUNITY));
 			sb.append(")");
 
 			SQLQuery q = session.createSQLQuery(sb.toString());
@@ -117,7 +127,7 @@ public class RoleFinderImpl extends BasePersistenceImpl implements RoleFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			for (int i = 0; i < 4; i++) {
+			for (int i = 0; i < 6; i++) {
 				qPos.add(roleId);
 				qPos.add(userId);
 			}

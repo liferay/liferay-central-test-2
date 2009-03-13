@@ -57,7 +57,6 @@ import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Organization;
-import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
@@ -531,6 +530,12 @@ public class ServicePreAction extends Action {
 		}
 
 		return new Object[] {layout, layouts};
+	}
+
+	protected Boolean hasPowerUserRole(User user) throws Exception {
+		return RoleLocalServiceUtil.hasUserRole(
+			user.getUserId(), user.getCompanyId(), RoleConstants.POWER_USER,
+			true);
 	}
 
 	protected void initImportLARFiles() {
@@ -1662,6 +1667,7 @@ public class ServicePreAction extends Action {
 	}
 
 	protected void updateUserLayouts(User user) throws Exception {
+		Boolean hasPowerUserRole = null;
 
 		// Private layouts
 
@@ -1673,12 +1679,11 @@ public class ServicePreAction extends Action {
 			addDefaultUserPrivateLayouts = true;
 
 			if (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_POWER_USER_REQUIRED) {
-				Role powerUserRole = RoleLocalServiceUtil.getRole(
-					user.getCompanyId(), RoleConstants.POWER_USER);
+				if (hasPowerUserRole == null) {
+					hasPowerUserRole = hasPowerUserRole(user);
+				}
 
-				if (!UserLocalServiceUtil.hasRoleUser(
-						powerUserRole.getRoleId(), user.getUserId())) {
-
+				if (!hasPowerUserRole.booleanValue()) {
 					addDefaultUserPrivateLayouts = false;
 				}
 			}
@@ -1694,12 +1699,10 @@ public class ServicePreAction extends Action {
 			deleteDefaultUserPrivateLayouts = true;
 		}
 		else if (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_POWER_USER_REQUIRED) {
-			Role powerUserRole = RoleLocalServiceUtil.getRole(
-				user.getCompanyId(), RoleConstants.POWER_USER);
-
-			if (!UserLocalServiceUtil.hasRoleUser(
-					powerUserRole.getRoleId(), user.getUserId())) {
-
+			if (hasPowerUserRole == null) {
+				hasPowerUserRole = hasPowerUserRole(user);
+			}
+			if (!hasPowerUserRole.booleanValue()) {
 				deleteDefaultUserPrivateLayouts = true;
 			}
 		}
@@ -1718,12 +1721,10 @@ public class ServicePreAction extends Action {
 			addDefaultUserPublicLayouts = true;
 
 			if (PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_POWER_USER_REQUIRED) {
-				Role powerUserRole = RoleLocalServiceUtil.getRole(
-					user.getCompanyId(), RoleConstants.POWER_USER);
-
-				if (!UserLocalServiceUtil.hasRoleUser(
-						powerUserRole.getRoleId(), user.getUserId())) {
-
+				if (hasPowerUserRole == null) {
+					hasPowerUserRole = hasPowerUserRole(user);
+				}
+				if (!hasPowerUserRole.booleanValue()) {
 					addDefaultUserPublicLayouts = false;
 				}
 			}
@@ -1739,12 +1740,10 @@ public class ServicePreAction extends Action {
 			deleteDefaultUserPublicLayouts = true;
 		}
 		else if (PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_POWER_USER_REQUIRED) {
-			Role powerUserRole = RoleLocalServiceUtil.getRole(
-				user.getCompanyId(), RoleConstants.POWER_USER);
-
-			if (!UserLocalServiceUtil.hasRoleUser(
-					powerUserRole.getRoleId(), user.getUserId())) {
-
+			if (hasPowerUserRole == null) {
+				hasPowerUserRole = hasPowerUserRole(user);
+			}
+			if (!hasPowerUserRole.booleanValue()) {
 				deleteDefaultUserPublicLayouts = true;
 			}
 		}
