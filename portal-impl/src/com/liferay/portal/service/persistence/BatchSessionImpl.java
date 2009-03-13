@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.util.InitialThreadLocal;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.util.PropsValues;
 
@@ -80,14 +81,18 @@ public class BatchSessionImpl implements BatchSession {
 			_counter.set(_counter.get() + 1);
 		}
 		else {
-			_counter.set(BatchSessionCounter.INITIAL_VALUE);
+			_counter.set(_INITIAL_COUNTER);
 
 			session.flush();
 			session.clear();
 		}
 	}
 
-	private BatchSessionCounter _counter = new BatchSessionCounter();
-	private BatchSessionEnabled _enabled = new BatchSessionEnabled();
+	private static final Integer _INITIAL_COUNTER = new Integer(1);
+
+	private static ThreadLocal<Integer> _counter =
+		new InitialThreadLocal<Integer>(_INITIAL_COUNTER);
+	private static ThreadLocal<Boolean> _enabled =
+		new InitialThreadLocal<Boolean>(Boolean.FALSE);
 
 }
