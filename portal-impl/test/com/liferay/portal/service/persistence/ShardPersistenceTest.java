@@ -72,7 +72,7 @@ public class ShardPersistenceTest extends BasePersistenceTestCase {
 
 		newShard.setClassNameId(nextLong());
 		newShard.setClassPK(nextLong());
-		newShard.setJdbcName(randomString());
+		newShard.setName(randomString());
 
 		_persistence.update(newShard, false);
 
@@ -81,7 +81,7 @@ public class ShardPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingShard.getShardId(), newShard.getShardId());
 		assertEquals(existingShard.getClassNameId(), newShard.getClassNameId());
 		assertEquals(existingShard.getClassPK(), newShard.getClassPK());
-		assertEquals(existingShard.getJdbcName(), newShard.getJdbcName());
+		assertEquals(existingShard.getName(), newShard.getName());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -127,7 +127,7 @@ public class ShardPersistenceTest extends BasePersistenceTestCase {
 
 		shard.setClassNameId(nextLong());
 		shard.setClassPK(nextLong());
-		shard.setJdbcName(randomString());
+		shard.setName(randomString());
 
 		_persistence.update(shard, false);
 

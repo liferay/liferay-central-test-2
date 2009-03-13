@@ -31,13 +31,6 @@ import org.springframework.dao.DataAccessException;
 /**
  * <a href="ShardSqlUpdateImpl.java.html"><b><i>View Source</i></b></a>
  *
- * <p>
- * The main purpose of this class is to ensure the sharded datasource is chosen
- * before the update is called.  Since SqlUpdate.update() is always a nested
- * call in a *PersistenceImpl, the shard ID has already been properly set prior
- * to this call and does not need to be manipulated by this listener.
- * </p>
- *
  * @author Alexander Chow
  *
  */

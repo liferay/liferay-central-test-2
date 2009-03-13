@@ -90,16 +90,16 @@ public class ShardUtil {
 		return getPersistence().fetchByPrimaryKey(shardId);
 	}
 
-	public static com.liferay.portal.model.Shard findByJdbcName(
-		java.lang.String jdbcName)
+	public static com.liferay.portal.model.Shard findByName(
+		java.lang.String name)
 		throws com.liferay.portal.NoSuchShardException,
 			com.liferay.portal.SystemException {
-		return getPersistence().findByJdbcName(jdbcName);
+		return getPersistence().findByName(name);
 	}
 
-	public static com.liferay.portal.model.Shard fetchByJdbcName(
-		java.lang.String jdbcName) throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByJdbcName(jdbcName);
+	public static com.liferay.portal.model.Shard fetchByName(
+		java.lang.String name) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByName(name);
 	}
 
 	public static com.liferay.portal.model.Shard findByC_C(long classNameId,
@@ -142,10 +142,10 @@ public class ShardUtil {
 		return getPersistence().findAll(start, end, obc);
 	}
 
-	public static void removeByJdbcName(java.lang.String jdbcName)
+	public static void removeByName(java.lang.String name)
 		throws com.liferay.portal.NoSuchShardException,
 			com.liferay.portal.SystemException {
-		getPersistence().removeByJdbcName(jdbcName);
+		getPersistence().removeByName(name);
 	}
 
 	public static void removeByC_C(long classNameId, long classPK)
@@ -158,9 +158,9 @@ public class ShardUtil {
 		getPersistence().removeAll();
 	}
 
-	public static int countByJdbcName(java.lang.String jdbcName)
+	public static int countByName(java.lang.String name)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().countByJdbcName(jdbcName);
+		return getPersistence().countByName(name);
 	}
 
 	public static int countByC_C(long classNameId, long classPK)

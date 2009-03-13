@@ -74,13 +74,12 @@ public interface ShardPersistence extends BasePersistence {
 	public com.liferay.portal.model.Shard fetchByPrimaryKey(long shardId)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Shard findByJdbcName(
-		java.lang.String jdbcName)
+	public com.liferay.portal.model.Shard findByName(java.lang.String name)
 		throws com.liferay.portal.NoSuchShardException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Shard fetchByJdbcName(
-		java.lang.String jdbcName) throws com.liferay.portal.SystemException;
+	public com.liferay.portal.model.Shard fetchByName(java.lang.String name)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Shard findByC_C(long classNameId,
 		long classPK)
@@ -108,7 +107,7 @@ public interface ShardPersistence extends BasePersistence {
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByJdbcName(java.lang.String jdbcName)
+	public void removeByName(java.lang.String name)
 		throws com.liferay.portal.NoSuchShardException,
 			com.liferay.portal.SystemException;
 
@@ -118,7 +117,7 @@ public interface ShardPersistence extends BasePersistence {
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 
-	public int countByJdbcName(java.lang.String jdbcName)
+	public int countByName(java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
 	public int countByC_C(long classNameId, long classPK)

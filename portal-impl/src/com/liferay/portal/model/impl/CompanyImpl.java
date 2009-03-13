@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.Shard;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.AccountLocalServiceUtil;
 import com.liferay.portal.service.ShardLocalServiceUtil;
@@ -54,14 +55,70 @@ public class CompanyImpl extends CompanyModelImpl implements Company {
 	public CompanyImpl() {
 	}
 
+	public int compareTo(Object obj) {
+		Company company = (Company)obj;
+
+		String webId1 = getWebId();
+		String webId2 = company.getWebId();
+
+		if (webId1.equals(PropsValues.COMPANY_DEFAULT_WEB_ID)) {
+			return -1;
+		}
+		else if (webId2.equals(PropsValues.COMPANY_DEFAULT_WEB_ID)) {
+			return 1;
+		}
+		else {
+			return webId1.compareTo(webId2);
+		}
+	}
+
+	public Account getAccount() {
+		Account account = null;
+
+		try {
+			account = AccountLocalServiceUtil.getAccount(getAccountId());
+		}
+		catch (Exception e) {
+			account = new AccountImpl();
+
+			_log.error(e, e);
+		}
+
+		return account;
+	}
+
+	public String getAdminName() {
+		return "Administrator";
+	}
+
+	public String getAuthType() throws SystemException {
+		return PrefsPropsUtil.getString(
+			getCompanyId(), PropsKeys.COMPANY_SECURITY_AUTH_TYPE,
+			PropsValues.COMPANY_SECURITY_AUTH_TYPE);
+	}
+
+	public User getDefaultUser() {
+		User defaultUser = null;
+
+		try {
+			defaultUser = UserLocalServiceUtil.getDefaultUser(getCompanyId());
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		return defaultUser;
+	}
+
 	public String getDefaultWebId() {
 		return PropsValues.COMPANY_DEFAULT_WEB_ID;
 	}
 
-	public void setKey(String key) {
-		_keyObj = null;
+	public String getEmailAddress() {
 
-		super.setKey(key);
+		// Primary email address
+
+		return "admin@" + getMx();
 	}
 
 	public Key getKeyObj() {
@@ -76,121 +133,36 @@ public class CompanyImpl extends CompanyModelImpl implements Company {
 		return _keyObj;
 	}
 
-	public void setKeyObj(Key keyObj) {
-		_keyObj = keyObj;
-
-		super.setKey(Base64.objectToString(keyObj));
-	}
-
-	public Account getAccount() {
-		Account account = null;
-
-		try {
-			account = AccountLocalServiceUtil.getAccount(getAccountId());
-		}
-		catch (Exception e) {
-			account = new AccountImpl();
-
-			_log.error(e);
-		}
-
-		return account;
+	public Locale getLocale() {
+		return getDefaultUser().getLocale();
 	}
 
 	public String getName() {
 		return getAccount().getName();
 	}
 
-	public String getShortName() {
-		return getName();
-	}
-
-	public String getEmailAddress() {
-
-		// Primary email address
-
-		return "admin@" + getMx();
-	}
-
-	public User getDefaultUser() {
-		User defaultUser = null;
-
-		try {
-			defaultUser = UserLocalServiceUtil.getDefaultUser(getCompanyId());
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
-
-		return defaultUser;
-	}
-
-	public Locale getLocale() {
-		return getDefaultUser().getLocale();
-	}
-
 	public String getShardName() {
-		String shardName = PropsValues.SHARD_DEFAULT;
+		String shardName = PropsValues.SHARD_DEFAULT_NAME;
 
 		try {
-			shardName =
-				ShardLocalServiceUtil.getShardNameByCompanyId(getCompanyId());
+			Shard shard = ShardLocalServiceUtil.getShard(
+				Company.class.getName(), getCompanyId());
+
+			shardName = shard.getName();
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		return shardName;
 	}
 
+	public String getShortName() {
+		return getName();
+	}
+
 	public TimeZone getTimeZone() {
 		return getDefaultUser().getTimeZone();
-	}
-
-	public String getAdminName() {
-		return "Administrator";
-	}
-
-	public String getAuthType() throws SystemException {
-		return PrefsPropsUtil.getString(
-			getCompanyId(), PropsKeys.COMPANY_SECURITY_AUTH_TYPE,
-			PropsValues.COMPANY_SECURITY_AUTH_TYPE);
-	}
-
-	public boolean isAutoLogin() throws SystemException {
-		return PrefsPropsUtil.getBoolean(
-			getCompanyId(), PropsKeys.COMPANY_SECURITY_AUTO_LOGIN,
-			PropsValues.COMPANY_SECURITY_AUTO_LOGIN);
-	}
-
-	public boolean isSendPassword() throws SystemException {
-		return PrefsPropsUtil.getBoolean(
-			getCompanyId(), PropsKeys.COMPANY_SECURITY_SEND_PASSWORD,
-			PropsValues.COMPANY_SECURITY_SEND_PASSWORD);
-	}
-
-	public boolean isStrangers() throws SystemException {
-		return PrefsPropsUtil.getBoolean(
-			getCompanyId(), PropsKeys.COMPANY_SECURITY_STRANGERS,
-			PropsValues.COMPANY_SECURITY_STRANGERS);
-	}
-
-	public boolean isStrangersWithMx() throws SystemException {
-		return PrefsPropsUtil.getBoolean(
-			getCompanyId(), PropsKeys.COMPANY_SECURITY_STRANGERS_WITH_MX,
-			PropsValues.COMPANY_SECURITY_STRANGERS_WITH_MX);
-	}
-
-	public boolean isStrangersVerify() throws SystemException {
-		return PrefsPropsUtil.getBoolean(
-			getCompanyId(), PropsKeys.COMPANY_SECURITY_STRANGERS_VERIFY,
-			PropsValues.COMPANY_SECURITY_STRANGERS_VERIFY);
-	}
-
-	public boolean isCommunityLogo() throws SystemException {
-		return PrefsPropsUtil.getBoolean(
-			getCompanyId(), PropsKeys.COMPANY_SECURITY_COMMUNITY_LOGO,
-			PropsValues.COMPANY_SECURITY_COMMUNITY_LOGO);
 	}
 
 	public boolean hasCompanyMx(String emailAddress) {
@@ -220,27 +192,58 @@ public class CompanyImpl extends CompanyModelImpl implements Company {
 			}
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		return false;
 	}
 
-	public int compareTo(Object obj) {
-		Company company = (Company)obj;
+	public boolean isAutoLogin() throws SystemException {
+		return PrefsPropsUtil.getBoolean(
+			getCompanyId(), PropsKeys.COMPANY_SECURITY_AUTO_LOGIN,
+			PropsValues.COMPANY_SECURITY_AUTO_LOGIN);
+	}
 
-		String webId1 = getWebId();
-		String webId2 = company.getWebId();
+	public boolean isCommunityLogo() throws SystemException {
+		return PrefsPropsUtil.getBoolean(
+			getCompanyId(), PropsKeys.COMPANY_SECURITY_COMMUNITY_LOGO,
+			PropsValues.COMPANY_SECURITY_COMMUNITY_LOGO);
+	}
 
-		if (webId1.equals(PropsValues.COMPANY_DEFAULT_WEB_ID)) {
-			return -1;
-		}
-		else if (webId2.equals(PropsValues.COMPANY_DEFAULT_WEB_ID)) {
-			return 1;
-		}
-		else {
-			return webId1.compareTo(webId2);
-		}
+	public boolean isSendPassword() throws SystemException {
+		return PrefsPropsUtil.getBoolean(
+			getCompanyId(), PropsKeys.COMPANY_SECURITY_SEND_PASSWORD,
+			PropsValues.COMPANY_SECURITY_SEND_PASSWORD);
+	}
+
+	public boolean isStrangers() throws SystemException {
+		return PrefsPropsUtil.getBoolean(
+			getCompanyId(), PropsKeys.COMPANY_SECURITY_STRANGERS,
+			PropsValues.COMPANY_SECURITY_STRANGERS);
+	}
+
+	public boolean isStrangersVerify() throws SystemException {
+		return PrefsPropsUtil.getBoolean(
+			getCompanyId(), PropsKeys.COMPANY_SECURITY_STRANGERS_VERIFY,
+			PropsValues.COMPANY_SECURITY_STRANGERS_VERIFY);
+	}
+
+	public boolean isStrangersWithMx() throws SystemException {
+		return PrefsPropsUtil.getBoolean(
+			getCompanyId(), PropsKeys.COMPANY_SECURITY_STRANGERS_WITH_MX,
+			PropsValues.COMPANY_SECURITY_STRANGERS_WITH_MX);
+	}
+
+	public void setKey(String key) {
+		_keyObj = null;
+
+		super.setKey(key);
+	}
+
+	public void setKeyObj(Key keyObj) {
+		_keyObj = keyObj;
+
+		super.setKey(Base64.objectToString(keyObj));
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(CompanyImpl.class);

@@ -477,12 +477,6 @@ public interface PropsKeys {
 
 	public static final String JCR_WORKSPACE_NAME = "jcr.workspace.name";
 
-	public static final String SHARD_AVAILABLE = "shard.available";
-
-	public static final String SHARD_DEFAULT = "shard.default";
-	
-	public static final String SHARD_SELECTOR = "shard.selector";
-
 	public static final String JOURNAL_ARTICLE_CHECK_INTERVAL = "journal.article.check.interval";
 
 	public static final String JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID = "journal.article.force.autogenerate.id";
@@ -1054,6 +1048,12 @@ public interface PropsKeys {
 	public static final String SESSION_TRACKER_MEMORY_ENABLED = "session.tracker.memory.enabled";
 
 	public static final String SESSION_TRACKER_PERSISTENCE_ENABLED = "session.tracker.persistence.enabled";
+
+	public static final String SHARD_AVAILABLE_NAMES = "shard.available.names";
+
+	public static final String SHARD_DEFAULT_NAME = "shard.default.name";
+
+	public static final String SHARD_SELECTOR = "shard.selector";
 
 	public static final String SHAREPOINT_STORAGE_CLASS = "sharepoint.storage.class";
 

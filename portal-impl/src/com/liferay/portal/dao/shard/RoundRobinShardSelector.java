@@ -40,12 +40,12 @@ public class RoundRobinShardSelector implements ShardSelector {
 
 		if (scope.equals(ShardUtil.COMPANY_SCOPE)) {
 			int instances = PortalInstances.getCompanyIds().length;
-			int shards = PropsValues.SHARD_AVAILABLE.length;
+			int shards = PropsValues.SHARD_AVAILABLE_NAMES.length;
 
-			return PropsValues.SHARD_AVAILABLE[instances % shards];
+			return PropsValues.SHARD_AVAILABLE_NAMES[instances % shards];
 		}
 		else {
-			return PropsValues.SHARD_DEFAULT;
+			return PropsValues.SHARD_DEFAULT_NAME;
 		}
 	}
 

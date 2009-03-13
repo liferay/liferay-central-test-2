@@ -52,7 +52,7 @@ public class ShardSoap implements Serializable {
 		soapModel.setShardId(model.getShardId());
 		soapModel.setClassNameId(model.getClassNameId());
 		soapModel.setClassPK(model.getClassPK());
-		soapModel.setJdbcName(model.getJdbcName());
+		soapModel.setName(model.getName());
 
 		return soapModel;
 	}
@@ -102,16 +102,16 @@ public class ShardSoap implements Serializable {
 		_classPK = classPK;
 	}
 
-	public String getJdbcName() {
-		return _jdbcName;
+	public String getName() {
+		return _name;
 	}
 
-	public void setJdbcName(String jdbcName) {
-		_jdbcName = jdbcName;
+	public void setName(String name) {
+		_name = name;
 	}
 
 	private long _shardId;
 	private long _classNameId;
 	private long _classPK;
-	private String _jdbcName;
+	private String _name;
 }

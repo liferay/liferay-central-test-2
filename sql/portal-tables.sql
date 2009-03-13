@@ -1070,7 +1070,7 @@ create table Shard (
 	shardId LONG not null primary key,
 	classNameId LONG,
 	classPK LONG,
-	jdbcName VARCHAR(75) null
+	name VARCHAR(75) null
 );
 
 create table ShoppingCart (

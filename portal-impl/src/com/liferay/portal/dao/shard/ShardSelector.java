@@ -27,24 +27,11 @@ import java.util.Map;
 /**
  * <a href="ShardSelector.java.html"><b><i>View Source</i></b></a>
  *
- * <p>
- * Interface that provides a specific algorithm for selecting a new shard for
- * the specific scope.
- * </p>
- *
  * @author Alexander Chow
  *
  */
 public interface ShardSelector {
 
-	/**
-	 * Obtain the shard specific to the scope and parameters.
-	 *
-	 * @param scope to base the sharding of the database.
-	 * @param shardName that is suggested to the selector.
-	 * @param params that may be needed by different implementors.
-	 * @return Selected shardName.
-	 */
 	public String getShardName(
 		String scope, String shardName, Map<String, String> params);
 

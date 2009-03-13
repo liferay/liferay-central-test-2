@@ -6,7 +6,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
 >
-
 	<bean id="liferayDataSource" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
 		<property name="targetDataSource">
 			<bean class="org.springframework.aop.framework.ProxyFactoryBean">
@@ -39,7 +38,7 @@
 		</property>
 	</bean>
 	<bean id="shardDataSourceTargetSource" class="com.liferay.portal.dao.shard.ShardDataSourceTargetSource">
-		<property name="shardDataSources">
+		<property name="dataSources">
 			<map>
 				<entry>
 					<key>

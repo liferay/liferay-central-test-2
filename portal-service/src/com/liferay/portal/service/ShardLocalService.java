@@ -95,11 +95,13 @@ public interface ShardLocalService {
 		com.liferay.portal.model.Shard shard, boolean merge)
 		throws com.liferay.portal.SystemException;
 
-	public void addCompany(long companyId, java.lang.String shardName)
+	public com.liferay.portal.model.Shard addShard(java.lang.String className,
+		long classPK, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.lang.String getShardNameByCompanyId(long companyId)
+	public com.liferay.portal.model.Shard getShard(java.lang.String className,
+		long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

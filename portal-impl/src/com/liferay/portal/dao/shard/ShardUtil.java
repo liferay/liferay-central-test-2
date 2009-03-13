@@ -39,7 +39,7 @@ public class ShardUtil {
 	public static String COMPANY_SCOPE = "COMPANY_SCOPE";
 
 	public static DataSource getDataSource() {
-		return _getShardAdvice().getDataSource();
+		return _shardAdvice.getDataSource();
 	}
 
 	public static ShardSelector getShardSelector() {
@@ -47,49 +47,42 @@ public class ShardUtil {
 	}
 
 	public static String popCompanyService() {
-		String retVal = null;
+		String value = null;
 
-		if (_getShardAdvice() != null) {
-			retVal = _getShardAdvice().popCompanyService();
+		if (_shardAdvice != null) {
+			value = _shardAdvice.popCompanyService();
 		}
 
-		return retVal;
+		return value;
 	}
 
 	public static void pushCompanyService(long companyId) {
-		if (_getShardAdvice() != null) {
-			_getShardAdvice().pushCompanyService(companyId);
+		if (_shardAdvice != null) {
+			_shardAdvice.pushCompanyService(companyId);
 		}
 	}
 
 	public static void pushCompanyService(String shardName) {
-		if (_getShardAdvice() != null) {
-			_getShardAdvice().pushCompanyService(shardName);
+		if (_shardAdvice != null) {
+			_shardAdvice.pushCompanyService(shardName);
 		}
 	}
 
 	public void setShardAdvice(ShardAdvice shardAdvice) {
 		_shardAdvice = shardAdvice;
-	}
 
-	private static ShardAdvice _getShardAdvice() {
-		return _shardAdvice;
+		try {
+			_shardSelector = (ShardSelector)Class.forName(
+				PropsValues.SHARD_SELECTOR).newInstance();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(ShardUtil.class);
 
 	private static ShardAdvice _shardAdvice;
-
 	private static ShardSelector _shardSelector;
-
-	static {
-		try {
-			_shardSelector = (ShardSelector)
-				Class.forName(PropsValues.SHARD_SELECTOR).newInstance();
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
-	}
 
 }

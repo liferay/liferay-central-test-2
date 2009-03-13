@@ -62,9 +62,9 @@ public interface ShardModel extends BaseModel {
 
 	public void setClassPK(long classPK);
 
-	public String getJdbcName();
+	public String getName();
 
-	public void setJdbcName(String jdbcName);
+	public void setName(String name);
 
 	public Shard toEscapedModel();
 }

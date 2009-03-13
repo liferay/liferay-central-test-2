@@ -28,9 +28,11 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.InitialThreadLocal;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.Shard;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.ShardLocalServiceUtil;
@@ -49,32 +51,19 @@ import org.aspectj.lang.ProceedingJoinPoint;
 /**
  * <a href="ShardAdvice.java.html"><b><i>View Source</i></b></a>
  *
- * <p>
- * This is where the main logic for sharded data sources occurs.  Using AOP,
- * any calls to the persistence tier will need to pick a specific shard based on
- * the corresponding company ID of the caller.  Additionally, calls to the
- * CompanyLocalService and UserLocalService have corresponding pointcuts to
- * determine the correct shard to select based on the method signature.
- * </p>
- *
  * @author Michael Young
  * @author Alexander Chow
  *
  */
 public class ShardAdvice {
 
-	/**
-	 * Pointcuts calls made to the CompanyLocalService.
-	 */
-	public Object invokeCompanyService(ProceedingJoinPoint call)
+	public Object invokeCompanyService(ProceedingJoinPoint proceedingJointPoint)
 		throws Throwable {
 
-		String shardName = PropsValues.SHARD_DEFAULT;
+		String methodName = proceedingJointPoint.getSignature().getName();
+		Object[] arguments = proceedingJointPoint.getArgs();
 
-		// Look for shard data in method signature
-
-		String methodName = call.getSignature().getName();
-		Object[] arguments = call.getArgs();
+		String shardName = PropsValues.SHARD_DEFAULT_NAME;
 
 		if (methodName.equals("addCompany")) {
 			shardName = (String)arguments[3];
@@ -88,8 +77,8 @@ public class ShardAdvice {
 				}
 
 				try {
-					Company company =
-						CompanyLocalServiceUtil.getCompanyByWebId(webId);
+					Company company = CompanyLocalServiceUtil.getCompanyByWebId(
+						webId);
 
 					shardName = company.getShardName();
 				}
@@ -98,74 +87,61 @@ public class ShardAdvice {
 			}
 		}
 		else if (methodName.startsWith("update")) {
-			Long companyId = (Long)arguments[0];
+			long companyId = (Long)arguments[0];
 
-			shardName =
-				ShardLocalServiceUtil.getShardNameByCompanyId(companyId);
+			Shard shard = ShardLocalServiceUtil.getShard(
+				Company.class.getName(), companyId);
+
+			shardName = shard.getName();
 		}
 		else {
-
-			// All other methods do not require any special shard selection
-
-			return call.proceed();
+			return proceedingJointPoint.proceed();
 		}
 
-		// Set the shard prior to invoking the method
-
-		Object retVal = null;
+		Object returnValue = null;
 
 		pushCompanyService(shardName);
 
 		try {
-			retVal = call.proceed();
+			returnValue = proceedingJointPoint.proceed();
 		}
 		finally {
 			popCompanyService();
 		}
 
-		return retVal;
+		return returnValue;
 	}
 
-	/**
-	 * Calls the given method for each available shard.  This method will always
-	 * return null since it cannot combine the results of each method into one
-	 * return.  Hence, any method that is invoked globally must not be expecting
-	 * value in return except null.
-	 */
-	public Object invokeGlobally(ProceedingJoinPoint call) throws Throwable {
-		_globalCall.set(new Object());
+	public Object invokeGlobally(ProceedingJoinPoint proceedingJoinPoint)
+		throws Throwable {
+
+		_globalCallThreadLocal.set(new Object());
 
 		try {
 			if (_log.isInfoEnabled()) {
-				_log.info("All shards invoked for " + _getSignature(call));
+				_log.info(
+					"All shards invoked for " +
+						_getSignature(proceedingJoinPoint));
 			}
 
-			// Iterate the call through each shard
+			for (String shardName : PropsValues.SHARD_AVAILABLE_NAMES) {
+				_shardDataSourceTargetSource.setDataSource(shardName);
+				_shardSessionFactoryTargetSource.setSessionFactory(shardName);
 
-			for (String shardId : PropsValues.SHARD_AVAILABLE) {
-				_shardDataSourceTargetSource.setDataSource(shardId);
-				_shardSessionFactoryTargetSource.setSessionFactory(shardId);
-
-				call.proceed();
+				proceedingJoinPoint.proceed();
 			}
 		}
 		finally {
-			_globalCall.set(null);
+			_globalCallThreadLocal.set(null);
 		}
 
 		return null;
 	}
 
-	/**
-	 * Calls the given method with a company-specific shard with two exceptions:
-	 * (1) the persistence table that is being used is used globally across all
-	 * shards and is therefore only valid on the default shard or (2) a global
-	 * invocation is being made.
-	 */
-	public Object invokePersistence(ProceedingJoinPoint call) throws Throwable {
-		Object target = call.getTarget();
+	public Object invokePersistence(ProceedingJoinPoint proceedingJoinPoint)
+		throws Throwable {
 
-		// These tables are all managed by the default shard
+		Object target = proceedingJoinPoint.getTarget();
 
 		if (target instanceof ClassNamePersistence ||
 			target instanceof CompanyPersistence ||
@@ -174,89 +150,83 @@ public class ShardAdvice {
 			target instanceof ShardPersistence) {
 
 			_shardDataSourceTargetSource.setDataSource(
-				PropsValues.SHARD_DEFAULT);
+				PropsValues.SHARD_DEFAULT_NAME);
 			_shardSessionFactoryTargetSource.setSessionFactory(
-				PropsValues.SHARD_DEFAULT);
+				PropsValues.SHARD_DEFAULT_NAME);
 
 			if (_log.isDebugEnabled()) {
-				_log.debug("Using default shard for " + _getSignature(call));
+				_log.debug(
+					"Using default shard for " +
+						_getSignature(proceedingJoinPoint));
 			}
 
-			return call.proceed();
+			return proceedingJoinPoint.proceed();
 		}
 
-		// Do not specify shard ID if currently making a global call
+		if (_globalCallThreadLocal.get() == null) {
+			_setShardNameByCompany();
 
-		if (_globalCall.get() == null) {
-			_setShardIdByCompany();
+			String shardName = _getShardName();
 
-			String shardId = _getShardId();
-
-			_shardDataSourceTargetSource.setDataSource(shardId);
-			_shardSessionFactoryTargetSource.setSessionFactory(shardId);
+			_shardDataSourceTargetSource.setDataSource(shardName);
+			_shardSessionFactoryTargetSource.setSessionFactory(shardName);
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"Using shardId " + shardId + " for " + _getSignature(call));
+					"Using shard name " + shardName + " for " +
+						_getSignature(proceedingJoinPoint));
 			}
 
-			Object retVal = call.proceed();
-
-			return retVal;
+			return proceedingJoinPoint.proceed();
 		}
 		else {
-			return call.proceed();
+			return proceedingJoinPoint.proceed();
 		}
 	}
 
-	/**
-	 * Pointcuts calls made to the UserLocalService.
-	 */
-	public Object invokeUserService(ProceedingJoinPoint call) throws Throwable {
-		String shardName = PropsValues.SHARD_DEFAULT;
+	public Object invokeUserService(ProceedingJoinPoint proceedingJoinPoint)
+		throws Throwable {
 
-		// Look for shard data in method signature
+		String methodName = proceedingJoinPoint.getSignature().getName();
+		Object[] arguments = proceedingJoinPoint.getArgs();
 
-		String methodName = call.getSignature().getName();
-		Object[] arguments = call.getArgs();
+		String shardName = PropsValues.SHARD_DEFAULT_NAME;
 
 		if (methodName.equals("searchCount")) {
-			Long companyId = (Long)arguments[0];
+			long companyId = (Long)arguments[0];
 
-			shardName =
-				ShardLocalServiceUtil.getShardNameByCompanyId(companyId);
+			Shard shard = ShardLocalServiceUtil.getShard(
+				Company.class.getName(), companyId);
+
+			shardName = shard.getName();
 		}
 		else {
-
-			// All other methods do not require any special shard selection
-
-			return call.proceed();
+			return proceedingJoinPoint.proceed();
 		}
 
-		// Set the shard prior to invoking the method
-
-		Object retVal = null;
+		Object returnValue = null;
 
 		pushCompanyService(shardName);
 
 		try {
-			retVal = call.proceed();
+			returnValue = proceedingJoinPoint.proceed();
 		}
 		finally {
 			popCompanyService();
 		}
 
-		return retVal;
+		return returnValue;
 	}
 
 	public void setShardDataSourceTargetSource(
-			ShardDataSourceTargetSource shardDataSourceTargetSource) {
+		ShardDataSourceTargetSource shardDataSourceTargetSource) {
 
 		_shardDataSourceTargetSource = shardDataSourceTargetSource;
 	}
 
 	public void setShardSessionFactoryTargetSource(
-			ShardSessionFactoryTargetSource shardSessionFactoryTargetSource) {
+		ShardSessionFactoryTargetSource shardSessionFactoryTargetSource) {
+
 		_shardSessionFactoryTargetSource = shardSessionFactoryTargetSource;
 	}
 
@@ -270,13 +240,15 @@ public class ShardAdvice {
 
 	protected void pushCompanyService(long companyId) {
 		try {
-			String shardName =
-				ShardLocalServiceUtil.getShardNameByCompanyId(companyId);
+			Shard shard = ShardLocalServiceUtil.getShard(
+				Company.class.getName(), companyId);
+
+			String shardName = shard.getName();
 
 			pushCompanyService(shardName);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 	}
 
@@ -296,71 +268,67 @@ public class ShardAdvice {
 		return companyServiceStack;
 	}
 
-	private String _getShardId() {
-		return _shardId.get();
+	private String _getShardName() {
+		return _shardNameThreadLocal.get();
 	}
 
-	private String _getSignature(ProceedingJoinPoint call) {
+	private String _getSignature(ProceedingJoinPoint proceedingJoinPoint) {
 		String methodName = StringUtil.extractLast(
-			call.getTarget().getClass().getName(), StringPool.PERIOD);
+			proceedingJoinPoint.getTarget().getClass().getName(),
+			StringPool.PERIOD);
 
-		methodName += StringPool.PERIOD + call.getSignature().getName() + "()";
+		methodName +=
+			StringPool.PERIOD + proceedingJoinPoint.getSignature().getName() +
+				"()";
 
 		return methodName;
 	}
 
-	private void _setShardId(String shardId) {
-		_shardId.set(shardId);
+	private void _setShardName(String shardName) {
+		_shardNameThreadLocal.set(shardName);
 	}
 
-	private void _setShardIdByCompany() throws Throwable {
+	private void _setShardNameByCompany() throws Throwable {
 		Stack<String> companyServiceStack = _getCompanyServiceStack();
 
 		if (companyServiceStack.isEmpty()) {
 			long companyId = CompanyThreadLocal.getCompanyId();
 
-			_setShardIdByCompanyId(companyId);
+			_setShardNameByCompanyId(companyId);
 		}
 		else {
-			String shardId = companyServiceStack.peek();
+			String shardName = companyServiceStack.peek();
 
-			_setShardId(shardId);
+			_setShardName(shardName);
 		}
 	}
 
-	private void _setShardIdByCompanyId(long companyId)
+	private void _setShardNameByCompanyId(long companyId)
 		throws PortalException, SystemException {
 
 		if (companyId == 0) {
-
-			// PortalInstances have not been instantiated yet
-
-			_setShardId(PropsValues.SHARD_DEFAULT);
+			_setShardName(PropsValues.SHARD_DEFAULT_NAME);
 		}
 		else {
-			String shardName =
-				ShardLocalServiceUtil.getShardNameByCompanyId(companyId);
+			Shard shard = ShardLocalServiceUtil.getShard(
+				Company.class.getName(), companyId);
 
-			_setShardId(shardName);
+			String shardName = shard.getName();
+
+			_setShardName(shardName);
 		}
 	}
 
-	private static ThreadLocal<Object> _globalCall = new ThreadLocal<Object>();
-
-	private static ThreadLocal<String> _shardId = new ThreadLocal<String>() {
-		protected String initialValue() {
-			return PropsValues.SHARD_DEFAULT;
-		}
-	};
+	private static Log _log = LogFactoryUtil.getLog(ShardAdvice.class);
 
 	private static ThreadLocal<Stack<String>> _companyServiceStack =
 		new ThreadLocal<Stack<String>>();
+	private static ThreadLocal<Object> _globalCallThreadLocal =
+		new ThreadLocal<Object>();
+	private static ThreadLocal<String> _shardNameThreadLocal =
+		new InitialThreadLocal<String>(PropsValues.SHARD_DEFAULT_NAME);
 
 	private ShardDataSourceTargetSource _shardDataSourceTargetSource;
-
-	private ShardSessionFactoryTargetSource
-		_shardSessionFactoryTargetSource;
-
-	private static Log _log = LogFactoryUtil.getLog(ShardAdvice.class);
+	private ShardSessionFactoryTargetSource _shardSessionFactoryTargetSource;
 
 }

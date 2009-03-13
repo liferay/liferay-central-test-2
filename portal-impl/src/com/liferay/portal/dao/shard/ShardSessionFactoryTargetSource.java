@@ -48,7 +48,7 @@ public class ShardSessionFactoryTargetSource implements TargetSource {
 	}
 
 	public Class<?> getTargetClass() {
-		return _sessionFactories.get(PropsValues.SHARD_DEFAULT).getClass();
+		return _sessionFactories.get(PropsValues.SHARD_DEFAULT_NAME).getClass();
 	}
 
 	public boolean isStatic() {
@@ -58,8 +58,8 @@ public class ShardSessionFactoryTargetSource implements TargetSource {
 	public void releaseTarget(Object target) throws Exception {
 	}
 
-	public void setSessionFactory(String shardId) {
-		_sessionFactoryThreadLocal.set(_sessionFactories.get(shardId));
+	public void setSessionFactory(String shardName) {
+		_sessionFactoryThreadLocal.set(_sessionFactories.get(shardName));
 	}
 
 	public void setSessionFactories(
@@ -68,14 +68,15 @@ public class ShardSessionFactoryTargetSource implements TargetSource {
 		_sessionFactories = sessionFactories;
 	}
 
+	private static Map<String, SessionFactory> _sessionFactories;
+
 	private static ThreadLocal<SessionFactory> _sessionFactoryThreadLocal =
 		new ThreadLocal<SessionFactory>() {
 
 		protected SessionFactory initialValue() {
-			return _sessionFactories.get(PropsValues.SHARD_DEFAULT);
+			return _sessionFactories.get(PropsValues.SHARD_DEFAULT_NAME);
 		}
-	};
 
-	private static Map<String,SessionFactory> _sessionFactories;
+	};
 
 }

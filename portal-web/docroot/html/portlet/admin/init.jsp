@@ -28,6 +28,7 @@
 <%@ page import="com.liferay.portal.CompanyMxException" %>
 <%@ page import="com.liferay.portal.CompanyVirtualHostException" %>
 <%@ page import="com.liferay.portal.CompanyWebIdException" %>
+<%@ page import="com.liferay.portal.dao.shard.ManualShardSelector" %>
 <%@ page import="com.liferay.portal.kernel.plugin.PluginPackage" %>
 <%@ page import="com.liferay.portal.servlet.PortalSessionContext" %>
 
@@ -50,7 +51,7 @@
 <%
 boolean showShardSelector = false;
 
-if (PropsValues.SHARD_SELECTOR.equals("com.liferay.portal.dao.shard.ManualShardSelector") && PropsValues.SHARD_AVAILABLE.length > 1) {
+if (PropsValues.SHARD_SELECTOR.equals(ManualShardSelector.class.getName()) && PropsValues.SHARD_AVAILABLE.length > 1) {
 	showShardSelector = true;
 }
 %>

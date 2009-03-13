@@ -103,15 +103,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		validate(webId, virtualHost, mx);
 
-		Map<String, String> shardParams = new HashMap<String, String>();
-
-		shardParams.put("webId", webId);
-		shardParams.put("virtualHost", virtualHost);
-		shardParams.put("mx", mx);
-
-		shardName = ShardUtil.getShardSelector().getShardName(
-			ShardUtil.COMPANY_SCOPE, shardName, shardParams);
-
 		Company company = checkCompany(webId, mx, shardName);
 
 		company.setVirtualHost(virtualHost);
@@ -127,13 +118,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		String mx = webId;
 
-		return checkCompany(webId, mx);
-	}
-
-	public Company checkCompany(String webId, String mx)
-		throws PortalException, SystemException {
-
-		return checkCompany(webId, mx, PropsValues.SHARD_DEFAULT);
+		return checkCompany(webId, mx, PropsValues.SHARD_DEFAULT_NAME);
 	}
 
 	public Company checkCompany(String webId, String mx, String shardName)
@@ -180,11 +165,21 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			companyPersistence.update(company, false);
 
-			// Update shard data before continuing
+			// Shard
 
-			shardLocalService.addCompany(companyId, shardName);
+			Map<String, String> shardParams = new HashMap<String, String>();
 
-			// Continue with remaining company data
+			shardParams.put("webId", webId);
+			shardParams.put("virtualHost", virtualHost);
+			shardParams.put("mx", mx);
+
+			shardName = ShardUtil.getShardSelector().getShardName(
+				ShardUtil.COMPANY_SCOPE, shardName, shardParams);
+
+			shardLocalService.addShard(
+				Company.class.getName(), companyId, shardName);
+
+			// Company
 
 			updateCompany(
 				companyId, virtualHost, mx, homeURL, name, legalName, legalId,

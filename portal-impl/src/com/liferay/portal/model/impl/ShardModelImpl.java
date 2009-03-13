@@ -74,9 +74,9 @@ public class ShardModelImpl extends BaseModelImpl {
 			{ "classPK", new Integer(Types.BIGINT) },
 			
 
-			{ "jdbcName", new Integer(Types.VARCHAR) }
+			{ "name", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Shard (shardId LONG not null primary key,classNameId LONG,classPK LONG,jdbcName VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table Shard (shardId LONG not null primary key,classNameId LONG,classPK LONG,name VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table Shard";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -91,7 +91,7 @@ public class ShardModelImpl extends BaseModelImpl {
 		model.setShardId(soapModel.getShardId());
 		model.setClassNameId(soapModel.getClassNameId());
 		model.setClassPK(soapModel.getClassPK());
-		model.setJdbcName(soapModel.getJdbcName());
+		model.setName(soapModel.getName());
 
 		return model;
 	}
@@ -162,16 +162,15 @@ public class ShardModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getJdbcName() {
-		return GetterUtil.getString(_jdbcName);
+	public String getName() {
+		return GetterUtil.getString(_name);
 	}
 
-	public void setJdbcName(String jdbcName) {
-		if (((jdbcName == null) && (_jdbcName != null)) ||
-				((jdbcName != null) && (_jdbcName == null)) ||
-				((jdbcName != null) && (_jdbcName != null) &&
-				!jdbcName.equals(_jdbcName))) {
-			_jdbcName = jdbcName;
+	public void setName(String name) {
+		if (((name == null) && (_name != null)) ||
+				((name != null) && (_name == null)) ||
+				((name != null) && (_name != null) && !name.equals(_name))) {
+			_name = name;
 		}
 	}
 
@@ -188,7 +187,7 @@ public class ShardModelImpl extends BaseModelImpl {
 			model.setShardId(getShardId());
 			model.setClassNameId(getClassNameId());
 			model.setClassPK(getClassPK());
-			model.setJdbcName(HtmlUtil.escape(getJdbcName()));
+			model.setName(HtmlUtil.escape(getName()));
 
 			model = (Shard)Proxy.newProxyInstance(Shard.class.getClassLoader(),
 					new Class[] { Shard.class }, new ReadOnlyBeanHandler(model));
@@ -212,7 +211,7 @@ public class ShardModelImpl extends BaseModelImpl {
 		clone.setShardId(getShardId());
 		clone.setClassNameId(getClassNameId());
 		clone.setClassPK(getClassPK());
-		clone.setJdbcName(getJdbcName());
+		clone.setName(getName());
 
 		return clone;
 	}
@@ -268,6 +267,6 @@ public class ShardModelImpl extends BaseModelImpl {
 	private long _shardId;
 	private long _classNameId;
 	private long _classPK;
-	private String _jdbcName;
+	private String _name;
 	private transient ExpandoBridge _expandoBridge;
 }

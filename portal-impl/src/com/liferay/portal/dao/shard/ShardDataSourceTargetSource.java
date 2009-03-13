@@ -31,8 +31,7 @@ import javax.sql.DataSource;
 import org.springframework.aop.TargetSource;
 
 /**
- * <a href="ShardDataSourceTargetSource.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="ShardDataSourceTargetSource.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael Young
  *
@@ -58,22 +57,23 @@ public class ShardDataSourceTargetSource implements TargetSource {
 	public void releaseTarget(Object target) throws Exception {
 	}
 
-	public void setDataSource(String shardId) {
-		_dataSourceThreadLocal.set(_shardDataSources.get(shardId));
+	public void setDataSource(String shardName) {
+		_dataSourceThreadLocal.set(_dataSources.get(shardName));
 	}
 
-	public void setShardDataSources(Map<String, DataSource> shardDataSources) {
-		_shardDataSources = shardDataSources;
+	public void setDataSources(Map<String, DataSource> dataSources) {
+		_dataSources = dataSources;
 	}
+
+	private static Map<String, DataSource> _dataSources;
 
 	private static ThreadLocal<DataSource> _dataSourceThreadLocal =
 		new ThreadLocal<DataSource>() {
 
 		protected DataSource initialValue() {
-			return _shardDataSources.get(PropsValues.SHARD_DEFAULT);
+			return _dataSources.get(PropsValues.SHARD_DEFAULT_NAME);
 		}
-	};
 
-	private static Map<String, DataSource> _shardDataSources;
+	};
 
 }

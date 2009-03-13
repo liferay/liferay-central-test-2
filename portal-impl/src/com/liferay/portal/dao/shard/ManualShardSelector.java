@@ -27,10 +27,6 @@ import java.util.Map;
 /**
  * <a href="ManualShardSelector.java.html"><b><i>View Source</i></b></a>
  *
- * <p>
- * Selection must be made manually and is generally done via EditInstanceAction.
- * </p>
- *
  * @author Alexander Chow
  *
  */

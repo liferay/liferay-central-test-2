@@ -120,7 +120,7 @@ public class EditInstanceAction extends PortletAction {
 		String virtualHost = ParamUtil.getString(actionRequest, "virtualHost");
 		String mx = ParamUtil.getString(actionRequest, "mx");
 		String shardName = ParamUtil.getString(
-			actionRequest, "shardName", PropsValues.SHARD_DEFAULT);
+			actionRequest, "shardName", PropsValues.SHARD_DEFAULT_NAME);
 
 		if (companyId <= 0) {
 

@@ -106,15 +106,17 @@ public class ShardLocalServiceUtil {
 		return getService().updateShard(shard, merge);
 	}
 
-	public static void addCompany(long companyId, java.lang.String shardName)
+	public static com.liferay.portal.model.Shard addShard(
+		java.lang.String className, long classPK, java.lang.String name)
 		throws com.liferay.portal.SystemException {
-		getService().addCompany(companyId, shardName);
+		return getService().addShard(className, classPK, name);
 	}
 
-	public static java.lang.String getShardNameByCompanyId(long companyId)
+	public static com.liferay.portal.model.Shard getShard(
+		java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().getShardNameByCompanyId(companyId);
+		return getService().getShard(className, classPK);
 	}
 
 	public static ShardLocalService getService() {

@@ -1307,12 +1307,12 @@
 		
 		<column name="classNameId" type="long" />
 		<column name="classPK" type="long" />
-		<column name="jdbcName" type="String" />
+		<column name="name" type="String" />
 		
 		<!-- Finder methods -->
 
-		<finder name="JdbcName" return-type="Shard">
-			<finder-column name="jdbcName" />
+		<finder name="Name" return-type="Shard">
+			<finder-column name="name" />
 		</finder>
 		<finder name="C_C" return-type="Shard">
 			<finder-column name="classNameId" />

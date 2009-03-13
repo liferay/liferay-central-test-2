@@ -248,16 +248,16 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public Shard findByJdbcName(String jdbcName)
+	public Shard findByName(String name)
 		throws NoSuchShardException, SystemException {
-		Shard shard = fetchByJdbcName(jdbcName);
+		Shard shard = fetchByName(name);
 
 		if (shard == null) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Shard exists with the key {");
 
-			msg.append("jdbcName=" + jdbcName);
+			msg.append("name=" + name);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -271,12 +271,12 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 		return shard;
 	}
 
-	public Shard fetchByJdbcName(String jdbcName) throws SystemException {
+	public Shard fetchByName(String name) throws SystemException {
 		boolean finderClassNameCacheEnabled = ShardModelImpl.CACHE_ENABLED;
 		String finderClassName = Shard.class.getName();
-		String finderMethodName = "fetchByJdbcName";
+		String finderMethodName = "fetchByName";
 		String[] finderParams = new String[] { String.class.getName() };
-		Object[] finderArgs = new Object[] { jdbcName };
+		Object[] finderArgs = new Object[] { name };
 
 		Object result = null;
 
@@ -295,11 +295,11 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 
 				query.append("FROM com.liferay.portal.model.Shard WHERE ");
 
-				if (jdbcName == null) {
-					query.append("jdbcName IS NULL");
+				if (name == null) {
+					query.append("name IS NULL");
 				}
 				else {
-					query.append("jdbcName = ?");
+					query.append("name = ?");
 				}
 
 				query.append(" ");
@@ -308,8 +308,8 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (jdbcName != null) {
-					qPos.add(jdbcName);
+				if (name != null) {
+					qPos.add(name);
 				}
 
 				List<Shard> list = q.list();
@@ -563,9 +563,9 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public void removeByJdbcName(String jdbcName)
+	public void removeByName(String name)
 		throws NoSuchShardException, SystemException {
-		Shard shard = findByJdbcName(jdbcName);
+		Shard shard = findByName(name);
 
 		remove(shard);
 	}
@@ -583,12 +583,12 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public int countByJdbcName(String jdbcName) throws SystemException {
+	public int countByName(String name) throws SystemException {
 		boolean finderClassNameCacheEnabled = ShardModelImpl.CACHE_ENABLED;
 		String finderClassName = Shard.class.getName();
-		String finderMethodName = "countByJdbcName";
+		String finderMethodName = "countByName";
 		String[] finderParams = new String[] { String.class.getName() };
-		Object[] finderArgs = new Object[] { jdbcName };
+		Object[] finderArgs = new Object[] { name };
 
 		Object result = null;
 
@@ -608,11 +608,11 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.Shard WHERE ");
 
-				if (jdbcName == null) {
-					query.append("jdbcName IS NULL");
+				if (name == null) {
+					query.append("name IS NULL");
 				}
 				else {
-					query.append("jdbcName = ?");
+					query.append("name = ?");
 				}
 
 				query.append(" ");
@@ -621,8 +621,8 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (jdbcName != null) {
-					qPos.add(jdbcName);
+				if (name != null) {
+					qPos.add(name);
 				}
 
 				Long count = null;

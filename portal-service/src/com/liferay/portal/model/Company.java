@@ -49,50 +49,50 @@ package com.liferay.portal.model;
  *
  */
 public interface Company extends CompanyModel {
-	public java.lang.String getDefaultWebId();
-
-	public void setKey(java.lang.String key);
-
-	public java.security.Key getKeyObj();
-
-	public void setKeyObj(java.security.Key keyObj);
+	public int compareTo(java.lang.Object obj);
 
 	public com.liferay.portal.model.Account getAccount();
-
-	public java.lang.String getName();
-
-	public java.lang.String getShortName();
-
-	public java.lang.String getEmailAddress();
-
-	public com.liferay.portal.model.User getDefaultUser();
-
-	public java.util.Locale getLocale();
-
-	public java.lang.String getShardName();
-
-	public java.util.TimeZone getTimeZone();
 
 	public java.lang.String getAdminName();
 
 	public java.lang.String getAuthType()
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.User getDefaultUser();
+
+	public java.lang.String getDefaultWebId();
+
+	public java.lang.String getEmailAddress();
+
+	public java.security.Key getKeyObj();
+
+	public java.util.Locale getLocale();
+
+	public java.lang.String getName();
+
+	public java.lang.String getShardName();
+
+	public java.lang.String getShortName();
+
+	public java.util.TimeZone getTimeZone();
+
+	public boolean hasCompanyMx(java.lang.String emailAddress);
+
 	public boolean isAutoLogin() throws com.liferay.portal.SystemException;
+
+	public boolean isCommunityLogo() throws com.liferay.portal.SystemException;
 
 	public boolean isSendPassword() throws com.liferay.portal.SystemException;
 
 	public boolean isStrangers() throws com.liferay.portal.SystemException;
 
-	public boolean isStrangersWithMx()
-		throws com.liferay.portal.SystemException;
-
 	public boolean isStrangersVerify()
 		throws com.liferay.portal.SystemException;
 
-	public boolean isCommunityLogo() throws com.liferay.portal.SystemException;
+	public boolean isStrangersWithMx()
+		throws com.liferay.portal.SystemException;
 
-	public boolean hasCompanyMx(java.lang.String emailAddress);
+	public void setKey(java.lang.String key);
 
-	public int compareTo(java.lang.Object obj);
+	public void setKeyObj(java.security.Key keyObj);
 }

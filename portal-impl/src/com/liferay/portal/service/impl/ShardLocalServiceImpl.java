@@ -24,9 +24,9 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Shard;
 import com.liferay.portal.service.base.ShardLocalServiceBaseImpl;
+import com.liferay.portal.util.PortalUtil;
 
 /**
  * <a href="ShardLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -36,32 +36,30 @@ import com.liferay.portal.service.base.ShardLocalServiceBaseImpl;
  */
 public class ShardLocalServiceImpl extends ShardLocalServiceBaseImpl {
 
-	public void addCompany(long companyId, String shardName)
+	public Shard addShard(String className, long classPK, String name)
 		throws SystemException {
 
-		long classNameId =
-			classNameLocalService.getClassNameId(Company.class);
+		long classNameId = PortalUtil.getClassNameId(className);
 
 		long shardId = counterLocalService.increment();
 
 		Shard shard = shardPersistence.create(shardId);
 
-		shard.setClassPK(companyId);
 		shard.setClassNameId(classNameId);
-		shard.setJdbcName(shardName);
+		shard.setClassPK(classPK);
+		shard.setName(name);
 
 		shardPersistence.update(shard, false);
+
+		return shard;
 	}
 
-	public String getShardNameByCompanyId(long companyId)
+	public Shard getShard(String className, long classPK)
 		throws PortalException, SystemException {
 
-		long classNameId =
-			classNameLocalService.getClassNameId(Company.class);
+		long classNameId = PortalUtil.getClassNameId(className);
 
-		Shard shard = shardPersistence.findByC_C(classNameId, companyId);
-
-		return shard.getJdbcName();
+		return shardPersistence.findByC_C(classNameId, classPK);
 	}
 
 }
