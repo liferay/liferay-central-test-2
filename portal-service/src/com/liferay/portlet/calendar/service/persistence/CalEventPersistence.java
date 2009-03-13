@@ -116,6 +116,34 @@ public interface CalEventPersistence extends BasePersistence {
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByCompanyId(
+		long companyId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByCompanyId(
+		long companyId, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByCompanyId(
+		long companyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.calendar.model.CalEvent findByCompanyId_First(
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.calendar.NoSuchEventException;
+
+	public com.liferay.portlet.calendar.model.CalEvent findByCompanyId_Last(
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.calendar.NoSuchEventException;
+
+	public com.liferay.portlet.calendar.model.CalEvent[] findByCompanyId_PrevAndNext(
+		long eventId, long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.calendar.NoSuchEventException;
+
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByGroupId(
 		long groupId) throws com.liferay.portal.SystemException;
 
@@ -231,6 +259,9 @@ public interface CalEventPersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
 
+	public void removeByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
@@ -246,6 +277,9 @@ public interface CalEventPersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException;
 
 	public int countByGroupId(long groupId)

@@ -59,6 +59,8 @@
 		<icon>/html/icons/calendar.png</icon>
 		<struts-path>calendar</struts-path>
 		<configuration-action-class>com.liferay.portlet.calendar.action.ConfigurationActionImpl</configuration-action-class>
+		<indexer-class>com.liferay.portlet.calendar.util.Indexer</indexer-class>
+		<open-search-class>com.liferay.portlet.calendar.util.CalendarOpenSearchImpl</open-search-class>
 		<scheduler-class>com.liferay.portlet.calendar.job.CalendarScheduler</scheduler-class>
 		<portlet-data-handler-class>com.liferay.portlet.calendar.lar.CalendarPortletDataHandlerImpl</portlet-data-handler-class>
 		<social-activity-interpreter-class>com.liferay.portlet.calendar.social.CalendarActivityInterpreter</social-activity-interpreter-class>

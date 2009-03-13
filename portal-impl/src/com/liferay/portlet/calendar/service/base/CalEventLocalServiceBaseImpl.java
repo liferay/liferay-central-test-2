@@ -59,6 +59,14 @@ import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 import com.liferay.portlet.social.service.SocialActivityLocalService;
 import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
 import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
+import com.liferay.portlet.tags.service.TagsAssetLocalService;
+import com.liferay.portlet.tags.service.TagsAssetService;
+import com.liferay.portlet.tags.service.TagsEntryLocalService;
+import com.liferay.portlet.tags.service.TagsEntryService;
+import com.liferay.portlet.tags.service.persistence.TagsAssetFinder;
+import com.liferay.portlet.tags.service.persistence.TagsAssetPersistence;
+import com.liferay.portlet.tags.service.persistence.TagsEntryFinder;
+import com.liferay.portlet.tags.service.persistence.TagsEntryPersistence;
 
 import java.util.List;
 
@@ -337,6 +345,74 @@ public abstract class CalEventLocalServiceBaseImpl
 		this.socialActivityFinder = socialActivityFinder;
 	}
 
+	public TagsAssetLocalService getTagsAssetLocalService() {
+		return tagsAssetLocalService;
+	}
+
+	public void setTagsAssetLocalService(
+		TagsAssetLocalService tagsAssetLocalService) {
+		this.tagsAssetLocalService = tagsAssetLocalService;
+	}
+
+	public TagsAssetService getTagsAssetService() {
+		return tagsAssetService;
+	}
+
+	public void setTagsAssetService(TagsAssetService tagsAssetService) {
+		this.tagsAssetService = tagsAssetService;
+	}
+
+	public TagsAssetPersistence getTagsAssetPersistence() {
+		return tagsAssetPersistence;
+	}
+
+	public void setTagsAssetPersistence(
+		TagsAssetPersistence tagsAssetPersistence) {
+		this.tagsAssetPersistence = tagsAssetPersistence;
+	}
+
+	public TagsAssetFinder getTagsAssetFinder() {
+		return tagsAssetFinder;
+	}
+
+	public void setTagsAssetFinder(TagsAssetFinder tagsAssetFinder) {
+		this.tagsAssetFinder = tagsAssetFinder;
+	}
+
+	public TagsEntryLocalService getTagsEntryLocalService() {
+		return tagsEntryLocalService;
+	}
+
+	public void setTagsEntryLocalService(
+		TagsEntryLocalService tagsEntryLocalService) {
+		this.tagsEntryLocalService = tagsEntryLocalService;
+	}
+
+	public TagsEntryService getTagsEntryService() {
+		return tagsEntryService;
+	}
+
+	public void setTagsEntryService(TagsEntryService tagsEntryService) {
+		this.tagsEntryService = tagsEntryService;
+	}
+
+	public TagsEntryPersistence getTagsEntryPersistence() {
+		return tagsEntryPersistence;
+	}
+
+	public void setTagsEntryPersistence(
+		TagsEntryPersistence tagsEntryPersistence) {
+		this.tagsEntryPersistence = tagsEntryPersistence;
+	}
+
+	public TagsEntryFinder getTagsEntryFinder() {
+		return tagsEntryFinder;
+	}
+
+	public void setTagsEntryFinder(TagsEntryFinder tagsEntryFinder) {
+		this.tagsEntryFinder = tagsEntryFinder;
+	}
+
 	public UserLocalService getUserLocalService() {
 		return userLocalService;
 	}
@@ -419,6 +495,22 @@ public abstract class CalEventLocalServiceBaseImpl
 	protected SocialActivityPersistence socialActivityPersistence;
 	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityFinder.impl")
 	protected SocialActivityFinder socialActivityFinder;
+	@BeanReference(name = "com.liferay.portlet.tags.service.TagsAssetLocalService.impl")
+	protected TagsAssetLocalService tagsAssetLocalService;
+	@BeanReference(name = "com.liferay.portlet.tags.service.TagsAssetService.impl")
+	protected TagsAssetService tagsAssetService;
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsAssetPersistence.impl")
+	protected TagsAssetPersistence tagsAssetPersistence;
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsAssetFinder.impl")
+	protected TagsAssetFinder tagsAssetFinder;
+	@BeanReference(name = "com.liferay.portlet.tags.service.TagsEntryLocalService.impl")
+	protected TagsEntryLocalService tagsEntryLocalService;
+	@BeanReference(name = "com.liferay.portlet.tags.service.TagsEntryService.impl")
+	protected TagsEntryService tagsEntryService;
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsEntryPersistence.impl")
+	protected TagsEntryPersistence tagsEntryPersistence;
+	@BeanReference(name = "com.liferay.portlet.tags.service.persistence.TagsEntryFinder.impl")
+	protected TagsEntryFinder tagsEntryFinder;
 	@BeanReference(name = "com.liferay.portal.service.UserLocalService.impl")
 	protected UserLocalService userLocalService;
 	@BeanReference(name = "com.liferay.portal.service.UserService.impl")
