@@ -1111,6 +1111,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		validate(subject, body);
 
+		message.setModifiedDate(now);
+		message.setSubject(subject);
+		message.setBody(body);
+		message.setAttachments(!files.isEmpty() || !existingFiles.isEmpty());
+
 		// Attachments
 
 		long companyId = message.getCompanyId();
@@ -1160,13 +1165,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			catch (NoSuchDirectoryException nsde) {
 			}
 		}
-
-		// Message
-
-		message.setModifiedDate(now);
-		message.setSubject(subject);
-		message.setBody(body);
-		message.setAttachments(!files.isEmpty() || !existingFiles.isEmpty());
 
 		mbMessagePersistence.update(message, false);
 
