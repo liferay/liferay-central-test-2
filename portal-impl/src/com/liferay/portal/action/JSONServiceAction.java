@@ -122,7 +122,14 @@ public class JSONServiceAction extends JSONAction {
 		}
 
 		String serlializerClassName = StringUtil.replace(
-			className, "ServiceUtil", "JSONSerializer");
+			className,
+			new String[] {
+					".service.",
+					"ServiceUtil"
+				},
+			new String[] {
+					".service.http.",
+					"JSONSerializer"});
 
 		Class<?> classObj = Class.forName(className);
 
@@ -203,6 +210,13 @@ public class JSONServiceAction extends JSONAction {
 
 					return jsonObj.toString();
 				}
+			}
+			catch (IllegalArgumentException iae) {
+				JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+
+				jsonObj.put("exception", iae.getMessage());
+
+				return jsonObj.toString();
 			}
 			catch (InvocationTargetException ite) {
 				JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
