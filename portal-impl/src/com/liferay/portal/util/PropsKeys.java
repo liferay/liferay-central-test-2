@@ -1189,17 +1189,17 @@ public interface PropsKeys {
 
 	public static final String USERS_FORM_ADD_MISCELLANEOUS = "users.form.add.miscellaneous";
 
-	public static final String USERS_FORM_UPDATE_IDENTIFICATION = "users.form.update.identification";
-
-	public static final String USERS_FORM_UPDATE_MAIN = "users.form.update.main";
-
-	public static final String USERS_FORM_UPDATE_MISCELLANEOUS = "users.form.update.miscellaneous";
-
 	public static final String USERS_FORM_MY_ACCOUNT_IDENTIFICATION = "users.form.my.account.identification";
 
 	public static final String USERS_FORM_MY_ACCOUNT_MAIN = "users.form.my.account.main";
 
 	public static final String USERS_FORM_MY_ACCOUNT_MISCELLANEOUS = "users.form.my.account.miscellaneous";
+
+	public static final String USERS_FORM_UPDATE_IDENTIFICATION = "users.form.update.identification";
+
+	public static final String USERS_FORM_UPDATE_MAIN = "users.form.update.main";
+
+	public static final String USERS_FORM_UPDATE_MISCELLANEOUS = "users.form.update.miscellaneous";
 
 	public static final String USERS_IMAGE_MAX_SIZE = "users.image.max.size";
 

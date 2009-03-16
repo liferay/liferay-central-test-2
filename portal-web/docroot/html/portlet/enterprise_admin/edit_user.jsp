@@ -167,8 +167,6 @@ if (selUser != null) {
 	}
 }
 
-
-
 String[] allSections = ArrayUtil.append(mainSections, ArrayUtil.append(identificationSections, miscellaneousSections));
 
 String[][] categorySections = {mainSections, identificationSections, miscellaneousSections};
