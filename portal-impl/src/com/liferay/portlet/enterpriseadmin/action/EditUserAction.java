@@ -371,34 +371,12 @@ public class EditUserAction extends PortletAction {
 		String twitterSn = ParamUtil.getString(actionRequest, "twitterSn");
 		String ymSn = ParamUtil.getString(actionRequest, "ymSn");
 		String jobTitle = ParamUtil.getString(actionRequest, "jobTitle");
-
-		boolean groupIdsEdited = ParamUtil.getBoolean(
-			actionRequest, "groupsSearchContainerPrimaryKeysEdited");
-		long[] groupIds = null;
-
-		if (groupIdsEdited) {
-			groupIds = StringUtil.split(ParamUtil.getString(
-				actionRequest, "groupsSearchContainerPrimaryKeys"), 0L);
-		}
-
-		boolean organizationIdsEdited = ParamUtil.getBoolean(
-			actionRequest, "organizationsSearchContainerPrimaryKeysEdited");
-		long[] organizationIds = null;
-
-		if (organizationIdsEdited) {
-			organizationIds = StringUtil.split(ParamUtil.getString(
-				actionRequest, "organizationsSearchContainerPrimaryKeys"), 0L);
-		}
-
-		boolean roleIdsEdited = ParamUtil.getBoolean(
-			actionRequest, "rolesSearchContainerPrimaryKeysEdited");
-		long[] roleIds = null;
-
-		if (roleIdsEdited) {
-			roleIds = StringUtil.split(ParamUtil.getString(
-				actionRequest, "rolesSearchContainerPrimaryKeys"), 0L);
-		}
-
+		long[] groupIds = StringUtil.split(ParamUtil.getString(
+			actionRequest, "groupsSearchContainerPrimaryKeys"), 0L);
+		long[] organizationIds = StringUtil.split(ParamUtil.getString(
+			actionRequest, "organizationsSearchContainerPrimaryKeys"), 0L);
+		long[] roleIds = StringUtil.split(ParamUtil.getString(
+			actionRequest, "rolesSearchContainerPrimaryKeys"), 0L);
 		List<UserGroupRole> userGroupRoles =
 			EnterpriseAdminUtil.getUserGroupRoles(actionRequest);
 		long[] userGroupIds = StringUtil.split(ParamUtil.getString(
