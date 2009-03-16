@@ -47,6 +47,7 @@ import com.liferay.portal.UserSmsException;
 import com.liferay.portal.WebsiteURLException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -81,6 +82,7 @@ import java.util.List;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletSession;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -309,6 +311,16 @@ public class EditUserAction extends PortletAction {
 		return announcementsDeliveries;
 	}
 
+	protected long[] getLongArray(PortletRequest portletRequest, String name) {
+		String value = portletRequest.getParameter(name);
+
+		if (value == null) {
+			return null;
+		}
+
+		return StringUtil.split(GetterUtil.getString(value), 0L);
+	}
+
 	protected User updateLockout(ActionRequest actionRequest) throws Exception {
 		User user = PortalUtil.getSelectedUser(actionRequest);
 
@@ -371,16 +383,16 @@ public class EditUserAction extends PortletAction {
 		String twitterSn = ParamUtil.getString(actionRequest, "twitterSn");
 		String ymSn = ParamUtil.getString(actionRequest, "ymSn");
 		String jobTitle = ParamUtil.getString(actionRequest, "jobTitle");
-		long[] groupIds = StringUtil.split(ParamUtil.getString(
-			actionRequest, "groupsSearchContainerPrimaryKeys"), 0L);
-		long[] organizationIds = StringUtil.split(ParamUtil.getString(
-			actionRequest, "organizationsSearchContainerPrimaryKeys"), 0L);
-		long[] roleIds = StringUtil.split(ParamUtil.getString(
-			actionRequest, "rolesSearchContainerPrimaryKeys"), 0L);
+		long[] groupIds = getLongArray(
+			actionRequest, "groupsSearchContainerPrimaryKeys");
+		long[] organizationIds = getLongArray(
+			actionRequest, "organizationsSearchContainerPrimaryKeys");
+		long[] roleIds = getLongArray(
+			actionRequest, "rolesSearchContainerPrimaryKeys");
 		List<UserGroupRole> userGroupRoles =
 			EnterpriseAdminUtil.getUserGroupRoles(actionRequest);
-		long[] userGroupIds = StringUtil.split(ParamUtil.getString(
-			actionRequest, "userGroupsSearchContainerPrimaryKeys"), 0L);
+		long[] userGroupIds = getLongArray(
+			actionRequest, "userGroupsSearchContainerPrimaryKeys");
 		boolean sendEmail = true;
 		List<Address> addresses = EnterpriseAdminUtil.getAddresses(
 			actionRequest);
