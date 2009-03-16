@@ -118,11 +118,9 @@ try {
 
 		row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
 
-		// Category, thread, and message
+		// Category
 
 		long categoryId = GetterUtil.getLong(doc.get("categoryId"));
-		long curThreadId = GetterUtil.getLong(doc.get("threadId"));
-		long messageId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
 
 		MBCategory category = null;
 
@@ -136,6 +134,19 @@ try {
 
 			continue;
 		}
+
+		PortletURL categoryUrl = renderResponse.createRenderURL();
+
+		categoryUrl.setParameter("struts_action", "/message_boards/view");
+		categoryUrl.setParameter("redirect", currentURL);
+		categoryUrl.setParameter("categoryId", String.valueOf(categoryId));
+
+		row.addText(category.getName(), categoryUrl);
+
+		// Thread and message
+
+		long curThreadId = GetterUtil.getLong(doc.get("threadId"));
+		long messageId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
 
 		MBThread thread = null;
 
@@ -169,7 +180,6 @@ try {
 		rowURL.setParameter("redirect", currentURL);
 		rowURL.setParameter("messageId", String.valueOf(messageId));
 
-		row.addText(category.getName(), rowURL);
 		row.addText(message.getSubject(), rowURL);
 		row.addText(String.valueOf(thread.getMessageCount()), rowURL);
 		row.addText(String.valueOf(thread.getViewCount()), rowURL);
