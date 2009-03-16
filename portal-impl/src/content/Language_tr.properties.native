@@ -837,6 +837,7 @@ search-documents=Döküman Araştır
 search-for-x=Search for '{0}'
 search-results=Sonuçları Araştır
 search-took-x-seconds=Araştırma {0} saniye sürdü.
+search-x=Search {0}
 search=Araştır
 searched-for-pages-similar-to=Benzer Sayfaları araştır
 searched-the-web-for=İnternet'de ara

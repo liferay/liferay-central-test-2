@@ -2988,6 +2988,7 @@ search-took-x-seconds=Поиск занял {0} секунд.
 search-topics=Найти темы
 search-user-groups=Найти группы пользователей
 search-users=Найти пользователей
+search-x=Search {0}
 search=Поиск
 searchable=Можно искать
 searched-for-pages-similar-to=Поиск страниц, похожих на

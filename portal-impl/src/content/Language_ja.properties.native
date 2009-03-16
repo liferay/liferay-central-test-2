@@ -3030,6 +3030,7 @@ search-topics=トピックの検索
 search-user-groups=ユーザーグループの検索
 search-users=ユーザーの検索
 search-web-content=Web コンテンツの検索
+search-x=Search {0}
 search=検索
 searchable=検索対象にする
 searched-for-pages-similar-to=似ているページの検索:

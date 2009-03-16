@@ -177,6 +177,7 @@ results-of-about=Results {0} of about {1}.
 results-of=Results {0} of {1}.
 search-for-x=Search for '{0}'
 search-took-x-seconds=Search took {0} seconds.
+search-x=Search {0}
 see-x-for-more-information=See {0} for more information.
 select-at-least-one-community-for-each-action-with-scope-set-to-communities=Select at least one community for each action with scope set to <i>Communities</i>.
 select-the-action-that-this-role-can-perform-on-the-x-portlet=Select the action that this role can perform on the <i>{0}</i> portlet.
