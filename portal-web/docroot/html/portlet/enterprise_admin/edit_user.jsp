@@ -155,10 +155,19 @@ String[] identificationSections = PropsValues.USERS_FORM_ADD_IDENTIFICATION;
 String[] miscellaneousSections = PropsValues.USERS_FORM_ADD_MISCELLANEOUS;
 
 if (selUser != null) {
-	mainSections = PropsValues.USERS_FORM_UPDATE_MAIN;
-	identificationSections = PropsValues.USERS_FORM_UPDATE_IDENTIFICATION;
-	miscellaneousSections = PropsValues.USERS_FORM_UPDATE_MISCELLANEOUS;
+	if (portletName.equals(PortletKeys.MY_ACCOUNT)) {
+		mainSections = PropsValues.USERS_FORM_MY_ACCOUNT_MAIN;
+		identificationSections = PropsValues.USERS_FORM_MY_ACCOUNT_IDENTIFICATION;
+		miscellaneousSections = PropsValues.USERS_FORM_MY_ACCOUNT_MISCELLANEOUS;
+	}
+	else {
+		mainSections = PropsValues.USERS_FORM_UPDATE_MAIN;
+		identificationSections = PropsValues.USERS_FORM_UPDATE_IDENTIFICATION;
+		miscellaneousSections = PropsValues.USERS_FORM_UPDATE_MISCELLANEOUS;
+	}
 }
+
+
 
 String[] allSections = ArrayUtil.append(mainSections, ArrayUtil.append(identificationSections, miscellaneousSections));
 

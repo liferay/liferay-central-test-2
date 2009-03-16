@@ -1249,6 +1249,15 @@ public class PropsValues {
 	public static final String[] USERS_FORM_ADD_MISCELLANEOUS =
 		PropsUtil.getArray(PropsKeys.USERS_FORM_ADD_MISCELLANEOUS);
 
+	public static final String[] USERS_FORM_MY_ACCOUNT_IDENTIFICATION =
+		PropsUtil.getArray(PropsKeys.USERS_FORM_MY_ACCOUNT_IDENTIFICATION);
+
+	public static final String[] USERS_FORM_MY_ACCOUNT_MAIN =
+		PropsUtil.getArray(PropsKeys.USERS_FORM_MY_ACCOUNT_MAIN);
+
+	public static final String[] USERS_FORM_MY_ACCOUNT_MISCELLANEOUS =
+		PropsUtil.getArray(PropsKeys.USERS_FORM_MY_ACCOUNT_MISCELLANEOUS);
+
 	public static final String[] USERS_FORM_UPDATE_IDENTIFICATION =
 		PropsUtil.getArray(PropsKeys.USERS_FORM_UPDATE_IDENTIFICATION);
 
