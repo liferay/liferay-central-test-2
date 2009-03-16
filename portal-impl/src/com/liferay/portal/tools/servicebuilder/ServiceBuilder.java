@@ -190,6 +190,7 @@ public class ServiceBuilder {
 				"You can also customize the generated code by overriding the default templates with these optional properties:\n" +
 				"\n" +
 				"\t-Dservice.tpl.bad_column_names=" + _TPL_ROOT + "bad_column_names.txt\n"+
+				"\t-Dservice.tpl.bad_json_types=" + _TPL_ROOT + "bad_json_types.txt\n"+
 				"\t-Dservice.tpl.bad_table_names=" + _TPL_ROOT + "bad_table_names.txt\n"+
 				"\t-Dservice.tpl.base_mode_impl=" + _TPL_ROOT + "base_mode_impl.ftl\n"+
 				"\t-Dservice.tpl.copyright.txt=copyright.txt\n"+
@@ -216,7 +217,6 @@ public class ServiceBuilder {
 				"\t-Dservice.tpl.service_factory=" + _TPL_ROOT + "service_factory.ftl\n"+
 				"\t-Dservice.tpl.service_http=" + _TPL_ROOT + "service_http.ftl\n"+
 				"\t-Dservice.tpl.service_impl=" + _TPL_ROOT + "service_impl.ftl\n"+
-				"\t-Dservice.tpl.service_json=" + _TPL_ROOT + "service_json.ftl\n"+
 				"\t-Dservice.tpl.service_json_serializer=" + _TPL_ROOT + "service_json_serializer.ftl\n"+
 				"\t-Dservice.tpl.service_soap=" + _TPL_ROOT + "service_soap.ftl\n"+
 				"\t-Dservice.tpl.service_util=" + _TPL_ROOT + "service_util.ftl\n"+
@@ -414,11 +414,9 @@ public class ServiceBuilder {
 
 		_tplBadColumnNames = _getTplProperty(
 			"bad_column_names", _tplBadColumnNames);
+		_tplBadJsonTypes = _getTplProperty("bad_json_types", _tplBadJsonTypes);
 		_tplBadTableNames = _getTplProperty(
 			"bad_table_names", _tplBadTableNames);
-		_tplBadJSONReturnOrParameterTypes = _getTplProperty(
-			"bad_json_return_or_parameter_types",
-			_tplBadJSONReturnOrParameterTypes);
 		_tplEjbPk = _getTplProperty("ejb_pk", _tplEjbPk);
 		_tplException = _getTplProperty("exception", _tplException);
 		_tplExtendedModel = _getTplProperty(
@@ -472,9 +470,8 @@ public class ServiceBuilder {
 				getClass().getClassLoader(), _tplBadTableNames));
 			_badColumnNames = SetUtil.fromString(StringUtil.read(
 				getClass().getClassLoader(), _tplBadColumnNames));
-			_badJSONReturnOrParameterTypes = SetUtil.fromString(StringUtil.read(
-				getClass().getClassLoader(),
-				_tplBadJSONReturnOrParameterTypes));
+			_badJsonTypes = SetUtil.fromString(StringUtil.read(
+				getClass().getClassLoader(), _tplBadJsonTypes));
 			_hbmFileName = hbmFileName;
 			_modelHintsFileName = modelHintsFileName;
 			_springFileName = springFileName;
@@ -977,6 +974,7 @@ public class ServiceBuilder {
 
 							if (Validator.isNotNull(_jsonFileName)) {
 								_createServiceHttp(entity);
+								_createServiceJson(entity);
 
 								if (entity.hasColumns()) {
 									_createServiceJsonSerializer(entity);
@@ -1206,8 +1204,9 @@ public class ServiceBuilder {
 	}
 
 	public String getParameterType(JavaParameter parameter) {
-		Type returnType = parameter.getType();
 		StringBuilder sb = new StringBuilder();
+
+		Type returnType = parameter.getType();
 
 		sb.append(returnType.getValue());
 		sb.append(parameter.getGenericsName());
@@ -1264,8 +1263,9 @@ public class ServiceBuilder {
 	}
 
 	public String getReturnType(JavaMethod method) {
-		Type returnType = method.getReturns();
 		StringBuilder sb = new StringBuilder();
+
+		Type returnType = method.getReturns();
 
 		sb.append(returnType.getValue());
 		sb.append(method.getReturnsGenericsName());
@@ -1828,21 +1828,18 @@ public class ServiceBuilder {
 					String methodName = method.getName();
 					String returnValue = getReturnType(method);
 
-					boolean hasBadParameter = false;
+					boolean badJsonType = false;
 
 					for (JavaParameter parameter: method.getParameters()) {
-						String paramValue = getParameterType(parameter);
+						String parameterType = getParameterType(parameter);
 
-						if (_badJSONReturnOrParameterTypes.contains(
-								paramValue)) {
-							hasBadParameter = true;
+						if (_badJsonTypes.contains(parameterType)) {
+							badJsonType = true;
 						}
 					}
 
-					if ((method.isPublic()) &&
-						(!_badJSONReturnOrParameterTypes.contains(
-							returnValue)) &&
-						(!hasBadParameter)) {
+					if (method.isPublic() &&
+						!_badJsonTypes.contains(returnValue) && !badJsonType) {
 
 						jsonMethods.add(methodName);
 					}
@@ -2542,6 +2539,18 @@ public class ServiceBuilder {
 
 		if (!ejbFile.exists()) {
 			writeFile(ejbFile, content, _author);
+		}
+	}
+
+	private void _createServiceJson(Entity entity) throws Exception {
+		File ejbFile = new File(
+			_outputPath + "/service/http/" + entity.getName() +
+				"ServiceJSON.java");
+
+		if (ejbFile.exists()) {
+			System.out.println("Removing deprecated " + ejbFile);
+
+			ejbFile.delete();
 		}
 	}
 
@@ -3710,9 +3719,8 @@ public class ServiceBuilder {
 		"com/liferay/portal/tools/servicebuilder/dependencies/";
 
 	private String _tplBadColumnNames = _TPL_ROOT + "bad_column_names.txt";
+	private String _tplBadJsonTypes = _TPL_ROOT + "bad_json_types.txt";
 	private String _tplBadTableNames = _TPL_ROOT + "bad_table_names.txt";
-	private String _tplBadJSONReturnOrParameterTypes =
-		_TPL_ROOT + "bad_json_return_or_parameter_types.txt";
 	private String _tplEjbPk = _TPL_ROOT + "ejb_pk.ftl";
 	private String _tplException = _TPL_ROOT + "exception.ftl";
 	private String _tplExtendedModel = _TPL_ROOT + "extended_model.ftl";
@@ -3757,7 +3765,7 @@ public class ServiceBuilder {
 	private String _tplSpringXml = _TPL_ROOT + "spring_xml.ftl";
 	private Set<String> _badTableNames;
 	private Set<String> _badColumnNames;
-	private Set<String> _badJSONReturnOrParameterTypes;
+	private Set<String> _badJsonTypes;
 	private String _hbmFileName;
 	private String _modelHintsFileName;
 	private String _springFileName;

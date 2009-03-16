@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.MethodInvoker;
+import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -122,11 +124,10 @@ public class JSONServiceAction extends JSONAction {
 		String serlializerClassName = StringUtil.replace(
 			className, "ServiceUtil", "JSONSerializer");
 
-		Class<?> serviceClassObj = Class.forName(className);
-		Class<?> serializerClassObj = Class.forName(serlializerClassName);
+		Class<?> classObj = Class.forName(className);
 
 		Object[] methodAndParameterTypes = getMethodAndParameterTypes(
-			serviceClassObj, methodName, serviceParameters, serviceParameterTypes);
+			classObj, methodName, serviceParameters, serviceParameterTypes);
 
 		if (methodAndParameterTypes != null) {
 			Method method = (Method)methodAndParameterTypes[0];
@@ -135,31 +136,35 @@ public class JSONServiceAction extends JSONAction {
 
 			for (int i = 0; i < serviceParameters.length; i++) {
 				args[i] = getArgValue(
-					request, serviceClassObj, methodName, serviceParameters[i],
+					request, classObj, methodName, serviceParameters[i],
 					parameterTypes[i]);
 			}
 
 			try {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"Invoking class " + serviceClassObj + " on method " +
+						"Invoking class " + classObj + " on method " +
 							method.getName() + " with args " + args);
 				}
 
-				Object returnObj = method.invoke(serviceClassObj, args);
+				Object returnObj = method.invoke(classObj, args);
 
 				if (returnObj != null) {
 					if (returnObj instanceof BaseModel) {
-						Method toJSONObject = serializerClassObj.getMethod("toJSONObject", BaseModel.class);
+						MethodWrapper methodWrapper = new MethodWrapper(
+							serlializerClassName, "toJSONObject", returnObj);
 
-						JSONObject jsonObj = (JSONObject)toJSONObject.invoke(null, returnObj);
+						JSONObject jsonObj = (JSONObject)MethodInvoker.invoke(
+							methodWrapper);
 
 						return jsonObj.toString();
 					}
 					else if (returnObj instanceof List) {
-						Method toJSONArray = serializerClassObj.getMethod("toJSONArray", List.class);
+						MethodWrapper methodWrapper = new MethodWrapper(
+							serlializerClassName, "toJSONArray", returnObj);
 
-						JSONArray jsonArray = (JSONArray)toJSONArray.invoke(null, returnObj);
+						JSONArray jsonArray = (JSONArray)MethodInvoker.invoke(
+							methodWrapper);
 
 						return jsonArray.toString();
 					}
@@ -187,7 +192,7 @@ public class JSONServiceAction extends JSONAction {
 						if (returnValue == null) {
 							_log.error(
 								"Unsupported return type for class " +
-									serviceClassObj + " and method " + methodName);
+									classObj + " and method " + methodName);
 						}
 
 						return returnValue;
@@ -425,7 +430,8 @@ public class JSONServiceAction extends JSONAction {
 		String className = ParamUtil.getString(request, "serviceClassName");
 
 		if (className.contains(".service.") &&
-			className.endsWith("ServiceUtil")) {
+			className.endsWith("ServiceUtil") &&
+			!className.endsWith("LocalServiceUtil")) {
 
 			return true;
 		}
