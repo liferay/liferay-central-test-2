@@ -61,18 +61,10 @@ public class DataAccess {
 		return ds.getConnection();
 	}
 
-	public static void cleanUp(Connection con) {
-		cleanUp(con, null, null);
-	}
-
-	public static void cleanUp(Connection con, Statement s) {
-		cleanUp(con, s, null);
-	}
-
-	public static void cleanUp(Connection con, Statement s, ResultSet rs) {
+	public static void cleanUp(Connection connection) {
 		try {
-			if (rs != null) {
-				rs.close();
+			if (connection != null) {
+				connection.close();
 			}
 		}
 		catch (SQLException sqle) {
@@ -80,10 +72,25 @@ public class DataAccess {
 				_log.warn(sqle.getMessage());
 			}
 		}
+	}
 
+	public static void cleanUp(Connection connection, Statement statement) {
+		cleanUp(statement);
+		cleanUp(connection);
+	}
+
+	public static void cleanUp(
+		Connection connection, Statement statement, ResultSet resultSet) {
+
+		cleanUp(resultSet);
+		cleanUp(statement);
+		cleanUp(connection);
+	}
+
+	public static void cleanUp(ResultSet resultSet) {
 		try {
-			if (s != null) {
-				s.close();
+			if (resultSet != null) {
+				resultSet.close();
 			}
 		}
 		catch (SQLException sqle) {
@@ -91,10 +98,12 @@ public class DataAccess {
 				_log.warn(sqle.getMessage());
 			}
 		}
+	}
 
+	public static void cleanUp(Statement statement) {
 		try {
-			if (con != null) {
-				con.close();
+			if (statement != null) {
+				statement.close();
 			}
 		}
 		catch (SQLException sqle) {

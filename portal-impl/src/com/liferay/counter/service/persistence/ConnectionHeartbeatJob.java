@@ -22,6 +22,7 @@
 
 package com.liferay.counter.service.persistence;
 
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.job.IntervalJob;
 import com.liferay.portal.kernel.job.JobExecutionContext;
 import com.liferay.portal.kernel.job.JobExecutionException;
@@ -66,11 +67,16 @@ public class ConnectionHeartbeatJob implements IntervalJob {
 
 		Connection connection = CounterUtil.getPersistence().getConnection();
 
-		Statement statement = connection.createStatement();
+		Statement statement = null;
 
-		statement.execute(_SELECT_RELEASE);
-		
-		statement.close();
+		try {
+			statement = connection.createStatement();
+
+			statement.execute(_SELECT_RELEASE);
+		}
+		finally {
+			DataAccess.cleanUp(statement);
+		}
 	}
 
 	private static String _SELECT_RELEASE = "SELECT releaseId FROM Release_";
