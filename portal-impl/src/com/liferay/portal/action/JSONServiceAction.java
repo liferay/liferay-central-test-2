@@ -155,7 +155,7 @@ public class JSONServiceAction extends JSONAction {
 							serlializerClassName, "toJSONObject", returnObj);
 
 						JSONObject jsonObj = (JSONObject)MethodInvoker.invoke(
-							methodWrapper);
+							methodWrapper, false);
 
 						return jsonObj.toString();
 					}
@@ -164,7 +164,7 @@ public class JSONServiceAction extends JSONAction {
 							serlializerClassName, "toJSONArray", returnObj);
 
 						JSONArray jsonArray = (JSONArray)MethodInvoker.invoke(
-							methodWrapper);
+							methodWrapper, false);
 
 						return jsonArray.toString();
 					}
