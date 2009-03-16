@@ -275,6 +275,7 @@ List<String> primaryKeys = new ArrayList<String>();
 </c:if>
 
 <c:if test="<%= Validator.isNotNull(id) %>">
+	<input id="<%= id %>PrimaryKeysEdited" name="<%= id %>PrimaryKeysEdited" type="hidden" value="1" />
 	<input id="<%= id %>PrimaryKeys" name="<%= id %>PrimaryKeys" type="hidden" value="<%= StringUtil.merge(primaryKeys) %>" />
 
 	<script type="text/javascript">
