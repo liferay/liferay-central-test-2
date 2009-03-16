@@ -22,11 +22,14 @@
 
 package com.liferay.portal.tools.servicebuilder;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.freemarker.FreeMarkerUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ArrayUtil_IW;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -69,6 +72,7 @@ import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -953,8 +957,8 @@ public class ServiceBuilder {
 						_createFinderUtil(entity);
 
 						if (entity.hasLocalService()) {
-							_createServiceBaseImpl(entity, _SESSION_TYPE_LOCAL);
 							_createServiceImpl(entity, _SESSION_TYPE_LOCAL);
+							_createServiceBaseImpl(entity, _SESSION_TYPE_LOCAL);
 							_createService(entity, _SESSION_TYPE_LOCAL);
 							_createServiceFactory(entity, _SESSION_TYPE_LOCAL);
 							_createServiceUtil(entity, _SESSION_TYPE_LOCAL);
@@ -963,9 +967,9 @@ public class ServiceBuilder {
 						}
 
 						if (entity.hasRemoteService()) {
+							_createServiceImpl(entity, _SESSION_TYPE_REMOTE);
 							_createServiceBaseImpl(
 								entity, _SESSION_TYPE_REMOTE);
-							_createServiceImpl(entity, _SESSION_TYPE_REMOTE);
 							_createService(entity, _SESSION_TYPE_REMOTE);
 							_createServiceFactory(entity, _SESSION_TYPE_REMOTE);
 							_createServiceUtil(entity, _SESSION_TYPE_REMOTE);
@@ -1274,6 +1278,70 @@ public class ServiceBuilder {
 		return sb.toString();
 	}
 
+	public String getServiceBaseThrowsExceptions(
+		List<JavaMethod> methods, String methodName, List<String> args,
+		List<String> exceptions) {
+
+		boolean foundMethod = false;
+
+		for (JavaMethod method : methods) {
+			JavaParameter[] parameters = method.getParameters();
+
+			if ((method.getName().equals(methodName)) &&
+				(parameters.length == args.size())) {
+
+				for (int i = 0; i < parameters.length; i++) {
+					JavaParameter parameter = parameters[i];
+
+					String arg = args.get(i);
+
+					if (getParameterType(parameter).equals(arg)) {
+						exceptions = ListUtil.copy(exceptions);
+
+						Type[] methodExceptions = method.getExceptions();
+
+						for (Type methodException : methodExceptions) {
+							String exception = methodException.getValue();
+
+							if (exception.equals(
+									PortalException.class.getName())) {
+
+								exception = "PortalException";
+							}
+
+							if (exception.equals(
+									SystemException.class.getName())) {
+
+								exception = "SystemException";
+							}
+
+							if (!exceptions.contains(exception)) {
+								exceptions.add(exception);
+							}
+						}
+
+						Collections.sort(exceptions);
+
+						foundMethod = true;
+
+						break;
+					}
+				}
+			}
+
+			if (foundMethod) {
+				break;
+			}
+		}
+
+		if (!exceptions.isEmpty()) {
+			return "throws " + StringUtil.merge(exceptions);
+		}
+		else {
+			return StringPool.BLANK;
+		}
+	}
+
 	public String getSqlType(String model, String field, String type) {
 		if (type.equals("boolean") || type.equals("Boolean")) {
 			return "BOOLEAN";
@@ -1365,8 +1433,8 @@ public class ServiceBuilder {
 		else if (methodName.equals("getPermissionChecker")) {
 			return false;
 		}
-		else if (methodName.equals("getUser") &&
-				 method.getParameters().length == 0) {
+		else if ((methodName.equals("getUser")) &&
+				 (method.getParameters().length == 0)) {
 
 			return false;
 		}
@@ -2371,9 +2439,14 @@ public class ServiceBuilder {
 	private void _createServiceBaseImpl(Entity entity, int sessionType)
 		throws Exception {
 
+		JavaClass javaClass = _getJavaClass(_outputPath + "/service/impl/" + entity.getName() + (sessionType != _SESSION_TYPE_REMOTE ? "Local" : "") + "ServiceImpl.java");
+
+		JavaMethod[] methods = _getMethods(javaClass);
+
 		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
+		context.put("methods", methods);
 		context.put("sessionTypeName",_getSessionTypeName(sessionType));
 		context.put(
 			"referenceList", _mergeReferenceList(entity.getReferenceList()));
@@ -3750,7 +3823,6 @@ public class ServiceBuilder {
 	private String _tplServiceFactory = _TPL_ROOT + "service_factory.ftl";
 	private String _tplServiceHttp = _TPL_ROOT + "service_http.ftl";
 	private String _tplServiceImpl = _TPL_ROOT + "service_impl.ftl";
-	private String _tplServiceJson = _TPL_ROOT + "service_json.ftl";
 	private String _tplServiceJsonSerializer =
 		_TPL_ROOT + "service_json_serializer.ftl";
 	private String _tplServiceSoap = _TPL_ROOT + "service_soap.ftl";

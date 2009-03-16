@@ -50,7 +50,7 @@ import ${beanLocatorUtil};
 </#if>
 
 <#if sessionTypeName == "Local" && entity.hasColumns()>
-	public ${entity.name} add${entity.name}(${entity.name} ${entity.varName}) throws SystemException {
+	public ${entity.name} add${entity.name}(${entity.name} ${entity.varName}) ${serviceBuilder.getServiceBaseThrowsExceptions(methods, "add" + entity.name, [packagePath + ".model." + entity.name], ["SystemException"])} {
 		${entity.varName}.setNew(true);
 
 		return ${entity.varName}Persistence.update(${entity.varName}, false);
@@ -60,11 +60,11 @@ import ${beanLocatorUtil};
 		return ${entity.varName}Persistence.create(${entity.PKVarName});
 	}
 
-	public void delete${entity.name}(${entity.PKClassName} ${entity.PKVarName}) throws PortalException, SystemException {
+	public void delete${entity.name}(${entity.PKClassName} ${entity.PKVarName}) ${serviceBuilder.getServiceBaseThrowsExceptions(methods, "delete" + entity.name, [entity.PKClassName], ["PortalException", "SystemException"])} {
 		${entity.varName}Persistence.remove(${entity.PKVarName});
 	}
 
-	public void delete${entity.name}(${entity.name} ${entity.varName}) throws SystemException {
+	public void delete${entity.name}(${entity.name} ${entity.varName}) ${serviceBuilder.getServiceBaseThrowsExceptions(methods, "delete" + entity.name, [packagePath + ".model." + entity.name], ["SystemException"])} {
 		${entity.varName}Persistence.remove(${entity.varName});
 	}
 
@@ -76,7 +76,7 @@ import ${beanLocatorUtil};
 		return ${entity.varName}Persistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
-	public ${entity.name} get${entity.name}(${entity.PKClassName} ${entity.PKVarName}) throws PortalException, SystemException {
+	public ${entity.name} get${entity.name}(${entity.PKClassName} ${entity.PKVarName}) ${serviceBuilder.getServiceBaseThrowsExceptions(methods, "get" + entity.name, [entity.PKClassName], ["PortalException", "SystemException"])} {
 		return ${entity.varName}Persistence.findByPrimaryKey(${entity.PKVarName});
 	}
 
@@ -88,13 +88,13 @@ import ${beanLocatorUtil};
 		return ${entity.varName}Persistence.countAll();
 	}
 
-	public ${entity.name} update${entity.name}(${entity.name} ${entity.varName}) throws SystemException {
+	public ${entity.name} update${entity.name}(${entity.name} ${entity.varName}) ${serviceBuilder.getServiceBaseThrowsExceptions(methods, "update" + entity.name, [packagePath + ".model." + entity.name], ["SystemException"])} {
 		${entity.varName}.setNew(false);
 
 		return ${entity.varName}Persistence.update(${entity.varName}, true);
 	}
 
-	public ${entity.name} update${entity.name}(${entity.name} ${entity.varName}, boolean merge) throws SystemException {
+	public ${entity.name} update${entity.name}(${entity.name} ${entity.varName}, boolean merge) ${serviceBuilder.getServiceBaseThrowsExceptions(methods, "update" + entity.name, [packagePath + ".model." + entity.name, "boolean"], ["SystemException"])} {
 		${entity.varName}.setNew(false);
 
 		return ${entity.varName}Persistence.update(${entity.varName}, merge);
