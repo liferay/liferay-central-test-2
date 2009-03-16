@@ -43,6 +43,10 @@ public class StartupHelperUtil {
 		return _startupHelper;
 	}
 
+	public static void setDropIndexes(boolean dropIndexes) {
+		getStartupHelper().setDropIndexes(dropIndexes);
+	}
+
 	public static void updateIndexes() {
 		getStartupHelper().updateIndexes();
 	}

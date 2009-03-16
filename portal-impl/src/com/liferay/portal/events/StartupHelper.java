@@ -22,6 +22,7 @@
 
 package com.liferay.portal.events;
 
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -34,6 +35,11 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.verify.VerifyException;
 import com.liferay.portal.verify.VerifyProcess;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * <a href="StartupHelper.java.html"><b><i>View Source</i></b></a>
@@ -57,13 +63,20 @@ public class StartupHelper {
 		}
 	}
 
+	public void setDropIndexes(boolean dropIndexes) {
+		_dropIndexes = dropIndexes;
+	}
+
 	public void updateIndexes() {
 		try {
-			if (_log.isInfoEnabled()) {
-				_log.info("Adding indexes");
-			}
+			dropIndexes();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
 
-			DBUtil.getInstance().runSQLTemplate("indexes.sql", false);
+		try {
+			addIndexes();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -184,6 +197,69 @@ public class StartupHelper {
 		return _verified;
 	}
 
+	protected void addIndexes() throws Exception {
+		if (_log.isInfoEnabled()) {
+			_log.info("Adding indexes");
+		}
+
+		DBUtil.getInstance().runSQLTemplate("indexes.sql", false);
+	}
+
+	protected void dropIndexes() throws Exception {
+		if (_dropIndexes) {
+			return;
+		}
+
+		DBUtil dbUtil = DBUtil.getInstance();
+
+		if (dbUtil.getType().equals(DBUtil.TYPE_MYSQL)) {
+			dropMySQLIndexes();
+		}
+	}
+
+	protected void dropMySQLIndexes() throws Exception {
+		_log.info("Dropping MySQL indexes");
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"select distinct(index_name), table_name from " +
+					"information_schema.statistics where index_schema = " +
+						"database() and (index_name like 'LIFERAY_%' or " +
+							"index_name like 'IX_%')");
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				String indexName = rs.getString("index_name");
+				String tableName = rs.getString("table_name");
+
+				ps = con.prepareStatement(
+					"drop index " + indexName + " on " + tableName);
+
+				try{
+					ps.executeUpdate();
+				}
+				catch (SQLException sqle) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(sqle.getMessage());
+					}
+				}
+				finally {
+					ps.close();
+				}
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
 	private static final String _DELETE_TEMP_IMAGES_1 =
 		"DELETE FROM Image WHERE imageId IN (SELECT articleImageId FROM " +
 			"JournalArticleImage WHERE tempImage = TRUE)";
@@ -193,6 +269,7 @@ public class StartupHelper {
 
 	private static Log _log = LogFactoryUtil.getLog(StartupHelper.class);
 
+	private boolean _dropIndexes;
 	private boolean _upgraded;
 	private boolean _verified;
 
