@@ -38,8 +38,6 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 ActionUtil.getMembershipRequest(request);
 
 MembershipRequest membershipRequest = (MembershipRequest)request.getAttribute(WebKeys.MEMBERSHIP_REQUEST);
-
-User user2 = UserLocalServiceUtil.getUserById(membershipRequest.getUserId());
 %>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/reply_membership_request" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
@@ -89,7 +87,7 @@ User user2 = UserLocalServiceUtil.getUserById(membershipRequest.getUserId());
 		<liferay-ui:message key="user-name" />
 	</td>
 	<td>
-		<%= user2.getFullName() %>
+		<%= PortalUtil.getUserName(membershipRequest.getUserId(), StringPool.BLANK) %>
 	</td>
 </tr>
 <tr>
