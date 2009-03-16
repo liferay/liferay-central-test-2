@@ -123,13 +123,8 @@ public class JSONServiceAction extends JSONAction {
 
 		String serlializerClassName = StringUtil.replace(
 			className,
-			new String[] {
-					".service.",
-					"ServiceUtil"
-				},
-			new String[] {
-					".service.http.",
-					"JSONSerializer"});
+			new String[] {".service.", "ServiceUtil"},
+			new String[] {".service.http.", "JSONSerializer"});
 
 		Class<?> classObj = Class.forName(className);
 
