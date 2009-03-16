@@ -2373,6 +2373,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// Roles
 
 		if (roleIds != null) {
+			Role userRole = roleLocalService.getRole(
+				company.getCompanyId(), RoleConstants.USER);
+
+			long userRoleId = userRole.getRoleId();
+
+			if (!ArrayUtil.contains(roleIds, userRoleId)) {
+				roleIds = ArrayUtil.append(roleIds, userRoleId);
+			}
+
 			userPersistence.setRoles(userId, roleIds);
 		}
 
