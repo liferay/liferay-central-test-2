@@ -690,7 +690,8 @@ public class StagingUtil {
 			Group liveGroup = GroupServiceUtil.getGroup(liveGroupId);
 
 			Group stagingGroup = GroupServiceUtil.addGroup(
-				liveGroup.getGroupId(), liveGroup.getName() + " (Staging)",
+				liveGroup.getGroupId(),
+				liveGroup.getDescriptiveName() + " (Staging)",
 				liveGroup.getDescription(),
 				GroupConstants.TYPE_COMMUNITY_PRIVATE, null,
 				liveGroup.isActive());
