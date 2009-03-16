@@ -855,9 +855,9 @@
 		<friendly-url-mapper-class>com.liferay.portlet.assetpublisher.AssetPublisherFriendlyURLMapper</friendly-url-mapper-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
-		<scopeable>true</scopeable>
 		<layout-cacheable>true</layout-cacheable>
 		<instanceable>true</instanceable>
+		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>25</render-weight>
