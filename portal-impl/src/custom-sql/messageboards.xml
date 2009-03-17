@@ -208,11 +208,8 @@
 			FROM
 				MBThread
 			INNER JOIN
-				MBMessage ON
-					(MBMessage.threadId = MBThread.threadId)
-			INNER JOIN
 				MBCategory ON
-					(MBCategory.categoryId = MBMessage.categoryId)
+					(MBCategory.categoryId = MBThread.categoryId)
 			WHERE
 				(MBCategory.groupId = ?)
 		]]>
@@ -280,11 +277,8 @@
 			FROM
 				MBThread
 			INNER JOIN
-				MBMessage ON
-					(MBMessage.threadId = MBThread.threadId)
-			INNER JOIN
 				MBCategory ON
-					(MBCategory.categoryId = MBMessage.categoryId)
+					(MBCategory.categoryId = MBThread.categoryId)
 			WHERE
 				(MBCategory.groupId = ?)
 			ORDER BY
