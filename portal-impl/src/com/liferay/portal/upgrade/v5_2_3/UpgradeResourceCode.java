@@ -50,7 +50,7 @@ public class UpgradeResourceCode extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
-		if (dbUtil.isSupportsAlterColumnName()) {
+		if (isSupportsAlterColumnName()) {
 			runSQL("alter_column_type ResourceCode name VARCHAR(255) null");
 		}
 		else {

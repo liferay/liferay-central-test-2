@@ -52,28 +52,36 @@ public abstract class UpgradeProcess {
 		return 0;
 	}
 
+	public boolean isSupportsAlterColumnName() {
+		return DBUtil.getInstance().isSupportsAlterColumnName();
+	}
+
+	public boolean isSupportsAlterColumnType() {
+		return DBUtil.getInstance().isSupportsAlterColumnType();
+	}
+
 	public void runSQL(String template)
 		throws IOException, NamingException, SQLException {
 
-		dbUtil.runSQL(template);
+		DBUtil.getInstance().runSQL(template);
 	}
 
 	public void runSQL(String[] templates)
 		throws IOException, NamingException, SQLException {
 
-		dbUtil.runSQL(templates);
+		DBUtil.getInstance().runSQL(templates);
 	}
 
 	public void runSQLTemplate(String path)
 		throws IOException, NamingException, SQLException {
 
-		dbUtil.runSQLTemplate(path);
+		DBUtil.getInstance().runSQLTemplate(path);
 	}
 
 	public void runSQLTemplate(String path, boolean failOnError)
 		throws IOException, NamingException, SQLException {
 
-		dbUtil.runSQLTemplate(path, failOnError);
+		DBUtil.getInstance().runSQLTemplate(path, failOnError);
 	}
 
 	public abstract void upgrade() throws UpgradeException;
@@ -92,7 +100,5 @@ public abstract class UpgradeProcess {
 
 		upgradeProcess.upgrade();
 	}
-
-	protected DBUtil dbUtil = DBUtil.getInstance();
 
 }

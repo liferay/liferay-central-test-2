@@ -87,7 +87,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
-		if (dbUtil.isSupportsAlterColumnName()) {
+		if (isSupportsAlterColumnName()) {
 			runSQL("alter_column_type DLFileEntry name VARCHAR(255) null");
 			runSQL("alter_column_type DLFileEntry title VARCHAR(255) null");
 			runSQL("alter_column_type DLFileRank name VARCHAR(255) null");

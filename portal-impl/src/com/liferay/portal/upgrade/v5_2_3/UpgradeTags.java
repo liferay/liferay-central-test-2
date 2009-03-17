@@ -51,7 +51,7 @@ public class UpgradeTags extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
-		if (dbUtil.isSupportsAlterColumnName()) {
+		if (isSupportsAlterColumnName()) {
 			runSQL("alter_column_type TagsAsset title VARCHAR(255) null");
 			runSQL("alter_column_type TagsProperty value VARCHAR(255) null");
 		}
