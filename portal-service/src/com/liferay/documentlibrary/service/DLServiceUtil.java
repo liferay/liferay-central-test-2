@@ -47,23 +47,25 @@ public class DLServiceUtil {
 	public static void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, String[] tagsEntries, File file)
+			Date modifiedDate, String[] tagsCategories, String[] tagsEntries,
+			File file)
 		throws PortalException, SystemException {
 
 		_service.addFile(
 			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
-			properties, modifiedDate, tagsEntries, file);
+			properties, modifiedDate, tagsCategories, tagsEntries, file);
 	}
 
 	public static void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, String[] tagsEntries, byte[] bytes)
+			Date modifiedDate, String[] tagsCategories, String[] tagsEntries,
+			byte[] bytes)
 		throws PortalException, SystemException {
 
 		_service.addFile(
 			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
-			properties, modifiedDate, tagsEntries, bytes);
+			properties, modifiedDate, tagsCategories, tagsEntries, bytes);
 	}
 
 	public static void deleteDirectory(
@@ -132,20 +134,20 @@ public class DLServiceUtil {
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
-			String[] tagsEntries, File file)
+			String[] tagsCategories, String[] tagsEntries, File file)
 		throws PortalException, SystemException {
 
 		_service.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
 			versionNumber, sourceFileName, fileEntryId, properties,
-			modifiedDate, tagsEntries, file);
+			modifiedDate, tagsCategories, tagsEntries, file);
 	}
 
 	public static void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
-			String[] tagsEntries, byte[] bytes)
+			String[] tagsCategories, String[] tagsEntries, byte[] bytes)
 		throws PortalException, SystemException {
 
 		DLService _service = DLServiceFactory.getService();
@@ -153,7 +155,7 @@ public class DLServiceUtil {
 		_service.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
 			versionNumber, sourceFileName, fileEntryId, properties,
-			modifiedDate, tagsEntries, bytes);
+			modifiedDate, tagsCategories, tagsEntries, bytes);
 	}
 
 	public static void updateFile(

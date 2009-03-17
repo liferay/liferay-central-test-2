@@ -27,12 +27,16 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.FolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
+import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
 
 import javax.portlet.ActionRequest;
@@ -133,10 +137,8 @@ public class EditFolderAction extends PortletAction {
 		String name = ParamUtil.getString(actionRequest, "name");
 		String description = ParamUtil.getString(actionRequest, "description");
 
-		String[] communityPermissions = actionRequest.getParameterValues(
-			"communityPermissions");
-		String[] guestPermissions = actionRequest.getParameterValues(
-			"guestPermissions");
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			DLFolder.class.getName(), actionRequest);
 
 		if (folderId <= 0) {
 
@@ -144,14 +146,14 @@ public class EditFolderAction extends PortletAction {
 
 			DLFolderServiceUtil.addFolder(
 				themeDisplay.getScopeGroupId(), parentFolderId, name,
-				description, communityPermissions, guestPermissions);
+				description, serviceContext);
 		}
 		else {
 
 			// Update folder
 
 			DLFolderServiceUtil.updateFolder(
-				folderId, parentFolderId, name, description);
+				folderId, parentFolderId, name, description, serviceContext);
 		}
 	}
 

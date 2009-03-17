@@ -44,7 +44,8 @@ public interface DLLocalService {
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, String[] tagsEntries, InputStream is)
+			Date modifiedDate, String[] tagsCategories, String[] tagsEntries,
+			InputStream is)
 		throws PortalException, SystemException;
 
 	public void checkRoot(long companyId) throws SystemException;
@@ -75,7 +76,7 @@ public interface DLLocalService {
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
-			String[] tagsEntries, InputStream is)
+			String[] tagsCategories, String[] tagsEntries, InputStream is)
 		throws PortalException, SystemException;
 
 	public void validate(String fileName, File file) throws PortalException;

@@ -55,6 +55,7 @@ import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.LayoutLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.util.FriendlyURLNormalizer;
@@ -823,10 +824,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				DLFolder folder = dlFolderLocalService.getFolder(
 					layout.getDlFolderId());
 
+				ServiceContext serviceContext = new ServiceContext();
+
 				if (!name.equals(folder.getName())) {
 					dlFolderLocalService.updateFolder(
 						folder.getFolderId(), folder.getParentFolderId(), name,
-						folder.getDescription());
+						folder.getDescription(), serviceContext);
 				}
 			}
 		}
@@ -912,10 +915,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				DLFolder folder = dlFolderLocalService.getFolder(
 					layout.getDlFolderId());
 
+				ServiceContext serviceContext = new ServiceContext();
+
 				dlFolderLocalService.updateFolder(
 					folder.getFolderId(), folder.getParentFolderId(),
 					layout.getName(LocaleUtil.getDefault()),
-					folder.getDescription());
+					folder.getDescription(), serviceContext);
 			}
 		}
 		catch (NoSuchFolderException nsfe) {

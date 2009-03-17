@@ -76,7 +76,7 @@ public class DLFolderServiceHttp {
 	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
 		HttpPrincipal httpPrincipal, long groupId, long parentFolderId,
 		java.lang.String name, java.lang.String description,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -96,84 +96,17 @@ public class DLFolderServiceHttp {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = new BooleanWrapper(addCommunityPermissions);
+			Object paramObj4 = serviceContext;
 
-			Object paramObj5 = new BooleanWrapper(addGuestPermissions);
-
-			MethodWrapper methodWrapper = new MethodWrapper(DLFolderServiceUtil.class.getName(),
-					"addFolder",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
-					});
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portlet.documentlibrary.model.DLFolder)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
-		HttpPrincipal httpPrincipal, long groupId, long parentFolderId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(parentFolderId);
-
-			Object paramObj2 = name;
-
-			if (name == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = description;
-
-			if (description == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = communityPermissions;
-
-			if (communityPermissions == null) {
-				paramObj4 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			Object paramObj5 = guestPermissions;
-
-			if (guestPermissions == null) {
-				paramObj5 = new NullWrapper("[Ljava.lang.String;");
+			if (serviceContext == null) {
+				paramObj4 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(DLFolderServiceUtil.class.getName(),
 					"addFolder",
 					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
 					});
 
 			Object returnObj = null;
@@ -205,8 +138,8 @@ public class DLFolderServiceHttp {
 	public static com.liferay.portlet.documentlibrary.model.DLFolder copyFolder(
 		HttpPrincipal httpPrincipal, long groupId, long sourceFolderId,
 		long parentFolderId, java.lang.String name,
-		java.lang.String description, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		try {
@@ -228,15 +161,18 @@ public class DLFolderServiceHttp {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = new BooleanWrapper(addCommunityPermissions);
+			Object paramObj5 = serviceContext;
 
-			Object paramObj6 = new BooleanWrapper(addGuestPermissions);
+			if (serviceContext == null) {
+				paramObj5 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(DLFolderServiceUtil.class.getName(),
 					"copyFolder",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
+						paramObj5
 					});
 
 			Object returnObj = null;
@@ -791,7 +727,8 @@ public class DLFolderServiceHttp {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder updateFolder(
 		HttpPrincipal httpPrincipal, long folderId, long parentFolderId,
-		java.lang.String name, java.lang.String description)
+		java.lang.String name, java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		try {
@@ -811,9 +748,18 @@ public class DLFolderServiceHttp {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj4 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj4 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(DLFolderServiceUtil.class.getName(),
 					"updateFolder",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 
 			Object returnObj = null;
 

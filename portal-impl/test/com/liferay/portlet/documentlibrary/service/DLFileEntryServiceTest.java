@@ -25,6 +25,7 @@ package com.liferay.portlet.documentlibrary.service;
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.BaseServiceTestCase;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
@@ -42,26 +43,24 @@ public class DLFileEntryServiceTest extends BaseServiceTestCase {
 	public void testAddFileEntryWithDuplicateName() throws Exception {
 		String fileName = "helloworld.txt";
 		String description = StringPool.BLANK;
-		String[] tagsEntries = null;
 		String extraSettings = StringPool.BLANK;
 
 		String content = "Hello World!";
 
 		byte[] bytes = content.getBytes();
 
-		boolean addCommunityPermissions = true;
-		boolean addGuestPermissions = true;
+		ServiceContext serviceContext = new ServiceContext();
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
 
 		DLFileEntryServiceUtil.addFileEntry(
 			_folder.getFolderId(), fileName, fileName, description,
-			tagsEntries, extraSettings, bytes, addCommunityPermissions,
-			addGuestPermissions);
+			extraSettings, bytes, serviceContext);
 
 		try {
 			DLFileEntryServiceUtil.addFileEntry(
 				_folder.getFolderId(), fileName, fileName, description,
-				tagsEntries, extraSettings, bytes, addCommunityPermissions,
-				addGuestPermissions);
+				extraSettings, bytes, serviceContext);
 
 			fail("Able to add two files of the name " + fileName);
 		}
@@ -77,8 +76,10 @@ public class DLFileEntryServiceTest extends BaseServiceTestCase {
 		String name = "Test Folder";
 		String description = "This is a test folder.";
 
-		boolean addCommunityPermissions = true;
-		boolean addGuestPermissions = true;
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
 
 		try {
 			DLFolderServiceUtil.deleteFolder(
@@ -89,7 +90,7 @@ public class DLFileEntryServiceTest extends BaseServiceTestCase {
 
 		_folder = DLFolderServiceUtil.addFolder(
 			groupId, DLFolderImpl.DEFAULT_PARENT_FOLDER_ID,
-			name, description, addCommunityPermissions, addGuestPermissions);
+			name, description, serviceContext);
 	}
 
 	protected void tearDown() throws Exception {

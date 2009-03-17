@@ -111,50 +111,24 @@ public class DLFolderLocalServiceUtil {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
 		long userId, long groupId, long parentFolderId, java.lang.String name,
-		java.lang.String description, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .addFolder(userId, groupId, parentFolderId, name,
-			description, addCommunityPermissions, addGuestPermissions);
+			description, serviceContext);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
 		java.lang.String uuid, long userId, long groupId, long parentFolderId,
 		java.lang.String name, java.lang.String description,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .addFolder(uuid, userId, groupId, parentFolderId, name,
-			description, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
-		long userId, long groupId, long parentFolderId, java.lang.String name,
-		java.lang.String description, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addFolder(userId, groupId, parentFolderId, name,
-			description, communityPermissions, guestPermissions);
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
-		java.lang.String uuid, long userId, long groupId, long parentFolderId,
-		java.lang.String name, java.lang.String description,
-		java.lang.Boolean addCommunityPermissions,
-		java.lang.Boolean addGuestPermissions,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addFolder(uuid, userId, groupId, parentFolderId, name,
-			description, addCommunityPermissions, addGuestPermissions,
-			communityPermissions, guestPermissions);
+			description, serviceContext);
 	}
 
 	public static void addFolderResources(long folderId,
@@ -322,11 +296,13 @@ public class DLFolderLocalServiceUtil {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,
-		java.lang.String description)
+		java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .updateFolder(folderId, parentFolderId, name, description);
+				   .updateFolder(folderId, parentFolderId, name, description,
+			serviceContext);
 	}
 
 	public static DLFolderLocalService getService() {

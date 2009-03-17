@@ -34,6 +34,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
@@ -44,6 +45,7 @@ import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.base.DLFolderLocalServiceBaseImpl;
+import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.tags.util.TagsUtil;
 
 import java.util.ArrayList;
@@ -60,44 +62,17 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 	public DLFolder addFolder(
 			long userId, long groupId, long parentFolderId, String name,
-			String description, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			String description, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return addFolder(
 			null, userId, groupId, parentFolderId, name, description,
-			Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
+			serviceContext);
 	}
 
 	public DLFolder addFolder(
 			String uuid, long userId, long groupId, long parentFolderId,
-			String name, String description, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		return addFolder(
-			uuid, userId, groupId, parentFolderId, name, description,
-			Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
-	}
-
-	public DLFolder addFolder(
-			long userId, long groupId, long parentFolderId, String name,
-			String description, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		return addFolder(
-			null, userId, groupId, parentFolderId, name, description, null,
-			null, communityPermissions, guestPermissions);
-	}
-
-	public DLFolder addFolder(
-			String uuid, long userId, long groupId, long parentFolderId,
-			String name, String description, Boolean addCommunityPermissions,
-			Boolean addGuestPermissions, String[] communityPermissions,
-			String[] guestPermissions)
+			String name, String description, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Folder
@@ -126,16 +101,24 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		// Resources
 
-		if ((addCommunityPermissions != null) &&
-			(addGuestPermissions != null)) {
+		if (serviceContext.getAddCommunityPermissions() ||
+			serviceContext.getAddGuestPermissions()) {
 
 			addFolderResources(
-				folder, addCommunityPermissions.booleanValue(),
-				addGuestPermissions.booleanValue());
+				folder, serviceContext.getAddCommunityPermissions(),
+				serviceContext.getAddGuestPermissions());
 		}
 		else {
-			addFolderResources(folder, communityPermissions, guestPermissions);
+			addFolderResources(
+				folder, serviceContext.getCommunityPermissions(),
+				serviceContext.getGuestPermissions());
 		}
+
+		// Expando
+
+		ExpandoBridge expandoBridge = folder.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 
 		// Parent folder
 
@@ -259,6 +242,11 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		for (DLFolder curFolder : folders) {
 			deleteFolder(curFolder);
 		}
+
+		// Expando
+
+		expandoValueLocalService.deleteValues(
+			DLFolder.class.getName(), folder.getFolderId());
 
 		// File entries
 
@@ -450,7 +438,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 	public DLFolder updateFolder(
 			long folderId, long parentFolderId, String name,
-			String description)
+			String description, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
@@ -466,6 +454,12 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		folder.setDescription(description);
 
 		dlFolderPersistence.update(folder, false);
+
+		// Expando
+
+		ExpandoBridge expandoBridge = folder.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 
 		if (PropsValues.DL_LAYOUTS_SYNC_ENABLED) {
 			String privateFolder = GetterUtil.getString(PropsUtil.get(

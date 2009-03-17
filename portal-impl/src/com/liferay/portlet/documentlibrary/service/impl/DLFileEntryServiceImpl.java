@@ -31,6 +31,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.service.base.DLFileEntryServiceBaseImpl;
@@ -53,60 +54,28 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 
 	public DLFileEntry addFileEntry(
 			long folderId, String name, String title, String description,
-			String[] tagsEntries, String extraSettings, File file,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			String extraSettings, File file, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DLFolderPermission.check(
 			getPermissionChecker(), folderId, ActionKeys.ADD_DOCUMENT);
 
 		return dlFileEntryLocalService.addFileEntry(
-			getUserId(), folderId, name, title, description, tagsEntries,
-			extraSettings, file, addCommunityPermissions,
-			addGuestPermissions);
+			getUserId(), folderId, name, title, description, extraSettings,
+			file, serviceContext);
 	}
 
 	public DLFileEntry addFileEntry(
 			long folderId, String name, String title, String description,
-			String[] tagsEntries, String extraSettings, byte[] bytes,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			String extraSettings, byte[] bytes, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DLFolderPermission.check(
 			getPermissionChecker(), folderId, ActionKeys.ADD_DOCUMENT);
 
 		return dlFileEntryLocalService.addFileEntry(
-			getUserId(), folderId, name, title, description, tagsEntries,
-			extraSettings, bytes, addCommunityPermissions,
-			addGuestPermissions);
-	}
-
-	public DLFileEntry addFileEntry(
-			long folderId, String name, String title, String description,
-			String[] tagsEntries, String extraSettings, File file,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		DLFolderPermission.check(
-			getPermissionChecker(), folderId, ActionKeys.ADD_DOCUMENT);
-
-		return dlFileEntryLocalService.addFileEntry(
-			getUserId(), folderId, name, title, description, tagsEntries,
-			extraSettings, file, communityPermissions, guestPermissions);
-	}
-
-	public DLFileEntry addFileEntry(
-			long folderId, String name, String title, String description,
-			String[] tagsEntries, String extraSettings, byte[] bytes,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		DLFolderPermission.check(
-			getPermissionChecker(), folderId, ActionKeys.ADD_DOCUMENT);
-
-		return dlFileEntryLocalService.addFileEntry(
-			getUserId(), folderId, name, title, description, tagsEntries,
-			extraSettings, bytes, communityPermissions, guestPermissions);
+			getUserId(), folderId, name, title, description, extraSettings,
+			bytes, serviceContext);
 	}
 
 	public void deleteFileEntry(long folderId, String name)
@@ -299,8 +268,8 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 
 	public DLFileEntry updateFileEntry(
 			long folderId, long newFolderId, String name, String sourceFileName,
-			String title, String description, String[] tagsEntries,
-			String extraSettings, byte[] bytes)
+			String title, String description, String extraSettings,
+			byte[] bytes, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DLFileEntryPermission.check(
@@ -320,7 +289,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		try {
 			fileEntry = dlFileEntryLocalService.updateFileEntry(
 				getUserId(), folderId, newFolderId, name, sourceFileName, title,
-				description, tagsEntries, extraSettings, bytes);
+				description, extraSettings, bytes, serviceContext);
 		}
 		finally {
 			if (!hasLock) {

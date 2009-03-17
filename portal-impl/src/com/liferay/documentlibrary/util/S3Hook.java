@@ -88,7 +88,8 @@ public class S3Hook extends BaseHook {
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, String[] tagsEntries, InputStream is)
+			Date modifiedDate, String[] tagsCategories, String[] tagsEntries,
+			InputStream is)
 		throws SystemException {
 
 		try {
@@ -102,7 +103,8 @@ public class S3Hook extends BaseHook {
 
 			Indexer.addFile(
 				companyId, portletId, groupId, repositoryId, fileName,
-				fileEntryId, properties, modifiedDate, tagsEntries);
+				fileEntryId, properties, modifiedDate, tagsCategories,
+				tagsEntries);
 		}
 		catch (S3ServiceException s3se) {
 			throw new SystemException(s3se);
@@ -320,7 +322,7 @@ public class S3Hook extends BaseHook {
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
-			String[] tagsEntries, InputStream is)
+			String[] tagsCategories, String[] tagsEntries, InputStream is)
 		throws SystemException {
 
 		try {
@@ -334,7 +336,8 @@ public class S3Hook extends BaseHook {
 
 			Indexer.updateFile(
 				companyId, portletId, groupId, repositoryId, fileName,
-				fileEntryId, properties, modifiedDate, tagsEntries);
+				fileEntryId, properties, modifiedDate, tagsCategories,
+				tagsEntries);
 		}
 		catch (S3ServiceException s3se) {
 			throw new SystemException(s3se);

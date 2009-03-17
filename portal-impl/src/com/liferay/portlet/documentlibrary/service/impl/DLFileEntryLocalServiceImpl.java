@@ -42,6 +42,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
@@ -55,9 +56,11 @@ import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.base.DLFileEntryLocalServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.social.DLActivityKeys;
+import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.model.RatingsStats;
+import com.liferay.portlet.tags.model.TagsEntryConstants;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -90,74 +93,19 @@ public class DLFileEntryLocalServiceImpl
 
 	public DLFileEntry addFileEntry(
 			long userId, long folderId, String name, String title,
-			String description, String[] tagsEntries, String extraSettings,
-			File file, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			String description, String extraSettings,
+			byte[] bytes, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return addFileEntry(
-			userId, folderId, name, title, description, tagsEntries,
-			extraSettings, file, Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
+			null, userId, folderId, name, title, description,
+			extraSettings, bytes, serviceContext);
 	}
 
 	public DLFileEntry addFileEntry(
 			long userId, long folderId, String name, String title,
-			String description, String[] tagsEntries, String extraSettings,
-			byte[] bytes, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		return addFileEntry(
-			null, userId, folderId, name, title, description, tagsEntries,
-			extraSettings, bytes, Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
-	}
-
-	public DLFileEntry addFileEntry(
-			String uuid, long userId, long folderId, String name, String title,
-			String description, String[] tagsEntries, String extraSettings,
-			byte[] bytes, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		return addFileEntry(
-			uuid, userId, folderId, name, title, description, tagsEntries,
-			extraSettings, bytes, Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
-	}
-
-	public DLFileEntry addFileEntry(
-			long userId, long folderId, String name, String title,
-			String description, String[] tagsEntries, String extraSettings,
-			File file, String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		return addFileEntry(
-			userId, folderId, name, title, description, tagsEntries,
-			extraSettings, file, null, null, communityPermissions,
-			guestPermissions);
-	}
-
-	public DLFileEntry addFileEntry(
-			long userId, long folderId, String name, String title,
-			String description, String[] tagsEntries, String extraSettings,
-			byte[] bytes, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		return addFileEntry(
-			null, userId, folderId, name, title, description, tagsEntries,
-			extraSettings, bytes, null, null, communityPermissions,
-			guestPermissions);
-	}
-
-	public DLFileEntry addFileEntry(
-			long userId, long folderId, String name, String title,
-			String description,	String[] tagsEntries, String extraSettings,
-			File file, Boolean addCommunityPermissions,
-			Boolean addGuestPermissions, String[] communityPermissions,
-			String[] guestPermissions)
+			String description, String extraSettings, File file,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		if (!PropsValues.WEBDAV_LITMUS) {
@@ -172,9 +120,8 @@ public class DLFileEntryLocalServiceImpl
 			is = new BufferedInputStream(new FileInputStream(file));
 
 			return addFileEntry(
-				null, userId, folderId, name, title, description, tagsEntries,
-				extraSettings, is, file.length(), addCommunityPermissions,
-				addGuestPermissions, communityPermissions, guestPermissions);
+				null, userId, folderId, name, title, description,
+				extraSettings, is, file.length(), serviceContext);
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new FileSizeException();
@@ -193,10 +140,8 @@ public class DLFileEntryLocalServiceImpl
 
 	public DLFileEntry addFileEntry(
 			String uuid, long userId, long folderId, String name, String title,
-			String description,	String[] tagsEntries, String extraSettings,
-			byte[] bytes, Boolean addCommunityPermissions,
-			Boolean addGuestPermissions, String[] communityPermissions,
-			String[] guestPermissions)
+			String description, String extraSettings,
+			byte[] bytes, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		if (!PropsValues.WEBDAV_LITMUS) {
@@ -208,17 +153,14 @@ public class DLFileEntryLocalServiceImpl
 		InputStream is = new ByteArrayInputStream(bytes);
 
 		return addFileEntry(
-			uuid, userId, folderId, name, title, description, tagsEntries,
-			extraSettings, is, bytes.length, addCommunityPermissions,
-			addGuestPermissions, communityPermissions, guestPermissions);
+			uuid, userId, folderId, name, title, description, extraSettings, is,
+			bytes.length, serviceContext);
 	}
 
 	public DLFileEntry addFileEntry(
 			String uuid, long userId, long folderId, String name, String title,
-			String description,	String[] tagsEntries, String extraSettings,
-			InputStream is, long size, Boolean addCommunityPermissions,
-			Boolean addGuestPermissions, String[] communityPermissions,
-			String[] guestPermissions)
+			String description, String extraSettings, InputStream is, long size,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// File entry
@@ -262,17 +204,24 @@ public class DLFileEntryLocalServiceImpl
 
 		// Resources
 
-		if ((addCommunityPermissions != null) &&
-			(addGuestPermissions != null)) {
+		if (serviceContext.getAddCommunityPermissions() ||
+				serviceContext.getAddGuestPermissions()) {
 
 			addFileEntryResources(
-				folder, fileEntry, addCommunityPermissions.booleanValue(),
-				addGuestPermissions.booleanValue());
+				folder, fileEntry, serviceContext.getAddCommunityPermissions(),
+				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addFileEntryResources(
-				folder, fileEntry, communityPermissions, guestPermissions);
+				folder, fileEntry, serviceContext.getCommunityPermissions(),
+				serviceContext.getGuestPermissions());
 		}
+
+		// Expando
+
+		ExpandoBridge expandoBridge = fileEntry.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 
 		// File
 
@@ -280,7 +229,8 @@ public class DLFileEntryLocalServiceImpl
 			user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 			folder.getGroupId(), folderId, name, fileEntryId,
 			fileEntry.getLuceneProperties(), fileEntry.getModifiedDate(),
-			tagsEntries, is);
+			serviceContext.getTagsCategories(), serviceContext.getTagsEntries(),
+			is);
 
 		// Social
 
@@ -290,7 +240,9 @@ public class DLFileEntryLocalServiceImpl
 
 		// Tags
 
-		updateTagsAsset(userId, fileEntry, tagsEntries);
+		updateTagsAsset(
+			userId, fileEntry, serviceContext.getTagsCategories(),
+			serviceContext.getTagsEntries());
 
 		// Folder
 
@@ -352,9 +304,8 @@ public class DLFileEntryLocalServiceImpl
 
 	public DLFileEntry addOrOverwriteFileEntry(
 			long userId, long folderId, String name, String sourceName,
-			String title, String description, String[] tagsEntries,
-			String extraSettings, File file, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			String title, String description, String extraSettings, File file,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		boolean update = false;
@@ -386,13 +337,12 @@ public class DLFileEntryLocalServiceImpl
 		if (update) {
 			return updateFileEntry(
 				userId, folderId, folderId, name, sourceName, title,
-				description, tagsEntries, extraSettings, file);
+				description, extraSettings, file, serviceContext);
 		}
 		else {
 			return addFileEntry(
-				userId, folderId, name, title, description, tagsEntries,
-				extraSettings, file, addCommunityPermissions,
-				addGuestPermissions);
+				userId, folderId, name, title, description,
+				extraSettings, file, serviceContext);
 		}
 	}
 
@@ -472,6 +422,11 @@ public class DLFileEntryLocalServiceImpl
 		for (DLFileVersion fileVersion : fileVersions) {
 			dlFileVersionPersistence.remove(fileVersion);
 		}
+
+		// Expando
+
+		expandoValueLocalService.deleteValues(
+			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
 		// Tags
 
@@ -720,13 +675,16 @@ public class DLFileEntryLocalServiceImpl
 		String properties = fileEntry.getLuceneProperties();
 		Date modifiedDate = fileEntry.getModifiedDate();
 
+		String[] tagsCategories = tagsEntryLocalService.getEntryNames(
+			DLFileEntry.class.getName(), fileEntryId,
+			TagsEntryConstants.FOLKSONOMY_CATEGORY);
 		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 			DLFileEntry.class.getName(), fileEntryId);
 
 		try {
 			Indexer.updateFile(
 				companyId, portletId, groupId, folderId, fileName, fileEntryId,
-				properties, modifiedDate, tagsEntries);
+				properties, modifiedDate, tagsCategories, tagsEntries);
 		}
 		catch (SearchException se) {
 			_log.error("Reindexing " + fileEntryId, se);
@@ -736,7 +694,7 @@ public class DLFileEntryLocalServiceImpl
 	public DLFileEntry updateFileEntry(
 			long userId, long folderId, long newFolderId, String name,
 			String sourceFileName, String title, String description,
-			String[] tagsEntries, String extraSettings, File file)
+			String extraSettings, File file, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		InputStream is = null;
@@ -751,7 +709,7 @@ public class DLFileEntryLocalServiceImpl
 
 			return updateFileEntry(
 				userId, folderId, newFolderId, name, sourceFileName, title,
-				description, tagsEntries, extraSettings, is, size);
+				description, extraSettings, is, size, serviceContext);
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new NoSuchFileException();
@@ -771,7 +729,7 @@ public class DLFileEntryLocalServiceImpl
 	public DLFileEntry updateFileEntry(
 			long userId, long folderId, long newFolderId, String name,
 			String sourceFileName, String title, String description,
-			String[] tagsEntries, String extraSettings, byte[] bytes)
+			String extraSettings, byte[] bytes, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		InputStream is = null;
@@ -784,14 +742,14 @@ public class DLFileEntryLocalServiceImpl
 
 		return updateFileEntry(
 			userId, folderId, newFolderId, name, sourceFileName, title,
-			description, tagsEntries, extraSettings, is, size);
+			description, extraSettings, is, size, serviceContext);
 	}
 
 	public DLFileEntry updateFileEntry(
 			long userId, long folderId, long newFolderId, String name,
 			String sourceFileName, String title, String description,
-			String[] tagsEntries, String extraSettings, InputStream is,
-			long size)
+			String extraSettings, InputStream is, long size,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// File entry
@@ -941,6 +899,11 @@ public class DLFileEntryLocalServiceImpl
 				mbDiscussionPersistence.update(discussion, false);
 			}
 
+			// Expando
+
+			expandoValueLocalService.deleteValues(
+				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+
 			// Social
 
 			socialActivityLocalService.deleteActivities(
@@ -956,6 +919,12 @@ public class DLFileEntryLocalServiceImpl
 			fileEntry = newFileEntry;
 		}
 
+		// Expando
+
+		ExpandoBridge expandoBridge = fileEntry.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
+
 		// Social
 
 		socialActivityLocalService.addActivity(
@@ -965,7 +934,9 @@ public class DLFileEntryLocalServiceImpl
 
 		// Tags
 
-		updateTagsAsset(userId, fileEntry, tagsEntries);
+		updateTagsAsset(
+			userId, fileEntry, serviceContext.getTagsCategories(),
+			serviceContext.getTagsEntries());
 
 		// File version
 
@@ -984,7 +955,8 @@ public class DLFileEntryLocalServiceImpl
 				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 				folder.getGroupId(), folderId, name, newVersion, name,
 				fileEntry.getFileEntryId(), fileEntry.getLuceneProperties(),
-				fileEntry.getModifiedDate(), tagsEntries, is);
+				fileEntry.getModifiedDate(), serviceContext.getTagsCategories(),
+				serviceContext.getTagsEntries(), is);
 
 			return fileEntry;
 		}
@@ -1030,7 +1002,8 @@ public class DLFileEntryLocalServiceImpl
 			user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 			folder.getGroupId(), folderId, name, newVersion, sourceFileName,
 			fileEntry.getFileEntryId(), fileEntry.getLuceneProperties(),
-			fileEntry.getModifiedDate(), tagsEntries, is);
+			fileEntry.getModifiedDate(), serviceContext.getTagsCategories(),
+			serviceContext.getTagsEntries(), is);
 
 		// Folder
 
@@ -1042,15 +1015,16 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	public void updateTagsAsset(
-			long userId, DLFileEntry fileEntry, String[] tagsEntries)
+			long userId, DLFileEntry fileEntry, String[] tagsCategories,
+			String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		String mimeType = MimeTypesUtil.getContentType(fileEntry.getName());
 
 		tagsAssetLocalService.updateAsset(
 			userId, fileEntry.getFolder().getGroupId(),
-			DLFileEntry.class.getName(), fileEntry.getFileEntryId(), null,
-			tagsEntries, true, null, null, null, null, mimeType,
+			DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
+			tagsCategories, tagsEntries, true, null, null, null, null, mimeType,
 			fileEntry.getTitle(), fileEntry.getDescription(), null, null, 0, 0,
 			null, false);
 	}

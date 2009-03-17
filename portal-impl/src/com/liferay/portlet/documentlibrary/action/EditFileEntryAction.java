@@ -34,11 +34,14 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
+import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
@@ -204,17 +207,13 @@ public class EditFileEntryAction extends PortletAction {
 		String title = ParamUtil.getString(uploadRequest, "title");
 		String description = ParamUtil.getString(uploadRequest, "description");
 
-		String[] tagsEntries = PortalUtil.getTagsEntries(actionRequest);
-
 		String extraSettings = PropertiesUtil.toString(
 			fileEntryForm.getExtraSettingsProperties());
 
 		File file = uploadRequest.getFile("file");
 
-		String[] communityPermissions = actionRequest.getParameterValues(
-			"communityPermissions");
-		String[] guestPermissions = actionRequest.getParameterValues(
-			"guestPermissions");
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			DLFileEntry.class.getName(), actionRequest);
 
 		if (cmd.equals(Constants.ADD)) {
 
@@ -226,8 +225,7 @@ public class EditFileEntryAction extends PortletAction {
 
 			DLFileEntry entry = DLFileEntryLocalServiceUtil.addFileEntry(
 				themeDisplay.getUserId(), folderId, sourceFileName, title,
-				description, tagsEntries, extraSettings, file,
-				communityPermissions, guestPermissions);
+				description, extraSettings, file, serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(
 				actionRequest, DLFileEntry.class.getName(),
@@ -243,8 +241,8 @@ public class EditFileEntryAction extends PortletAction {
 
 			DLFileEntryLocalServiceUtil.updateFileEntry(
 				themeDisplay.getUserId(), folderId, newFolderId, name,
-				sourceFileName, title, description, tagsEntries, extraSettings,
-				file);
+				sourceFileName, title, description, extraSettings, file,
+				serviceContext);
 		}
 
 		AssetPublisherUtil.addRecentFolderId(

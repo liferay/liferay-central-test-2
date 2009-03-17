@@ -64,6 +64,10 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPer
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence;
+import com.liferay.portlet.expando.service.ExpandoValueLocalService;
+import com.liferay.portlet.expando.service.ExpandoValueService;
+import com.liferay.portlet.expando.service.persistence.ExpandoValueFinder;
+import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 
 /**
  * <a href="DLFolderServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
@@ -375,6 +379,40 @@ public abstract class DLFolderServiceBaseImpl extends PrincipalBean
 		this.webDAVPropsPersistence = webDAVPropsPersistence;
 	}
 
+	public ExpandoValueLocalService getExpandoValueLocalService() {
+		return expandoValueLocalService;
+	}
+
+	public void setExpandoValueLocalService(
+		ExpandoValueLocalService expandoValueLocalService) {
+		this.expandoValueLocalService = expandoValueLocalService;
+	}
+
+	public ExpandoValueService getExpandoValueService() {
+		return expandoValueService;
+	}
+
+	public void setExpandoValueService(ExpandoValueService expandoValueService) {
+		this.expandoValueService = expandoValueService;
+	}
+
+	public ExpandoValuePersistence getExpandoValuePersistence() {
+		return expandoValuePersistence;
+	}
+
+	public void setExpandoValuePersistence(
+		ExpandoValuePersistence expandoValuePersistence) {
+		this.expandoValuePersistence = expandoValuePersistence;
+	}
+
+	public ExpandoValueFinder getExpandoValueFinder() {
+		return expandoValueFinder;
+	}
+
+	public void setExpandoValueFinder(ExpandoValueFinder expandoValueFinder) {
+		this.expandoValueFinder = expandoValueFinder;
+	}
+
 	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.impl")
 	protected DLFileEntryLocalService dlFileEntryLocalService;
 	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFileEntryService.impl")
@@ -447,4 +485,12 @@ public abstract class DLFolderServiceBaseImpl extends PrincipalBean
 	protected WebDAVPropsLocalService webDAVPropsLocalService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WebDAVPropsPersistence.impl")
 	protected WebDAVPropsPersistence webDAVPropsPersistence;
+	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoValueLocalService.impl")
+	protected ExpandoValueLocalService expandoValueLocalService;
+	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoValueService.impl")
+	protected ExpandoValueService expandoValueService;
+	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl")
+	protected ExpandoValuePersistence expandoValuePersistence;
+	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.impl")
+	protected ExpandoValueFinder expandoValueFinder;
 }

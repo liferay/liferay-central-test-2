@@ -83,30 +83,12 @@ import java.rmi.RemoteException;
 public class DLFolderServiceSoap {
 	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap addFolder(
 		long groupId, long parentFolderId, java.lang.String name,
-		java.lang.String description, boolean addCommunityPermissions,
-		boolean addGuestPermissions) throws RemoteException {
+		java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.addFolder(groupId,
-					parentFolderId, name, description, addCommunityPermissions,
-					addGuestPermissions);
-
-			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap addFolder(
-		long groupId, long parentFolderId, java.lang.String name,
-		java.lang.String description, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions) throws RemoteException {
-		try {
-			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.addFolder(groupId,
-					parentFolderId, name, description, communityPermissions,
-					guestPermissions);
+					parentFolderId, name, description, serviceContext);
 
 			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModel(returnValue);
 		}
@@ -120,12 +102,12 @@ public class DLFolderServiceSoap {
 	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap copyFolder(
 		long groupId, long sourceFolderId, long parentFolderId,
 		java.lang.String name, java.lang.String description,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.copyFolder(groupId,
 					sourceFolderId, parentFolderId, name, description,
-					addCommunityPermissions, addGuestPermissions);
+					serviceContext);
 
 			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModel(returnValue);
 		}
@@ -318,10 +300,12 @@ public class DLFolderServiceSoap {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,
-		java.lang.String description) throws RemoteException {
+		java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.updateFolder(folderId,
-					parentFolderId, name, description);
+					parentFolderId, name, description, serviceContext);
 
 			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModel(returnValue);
 		}

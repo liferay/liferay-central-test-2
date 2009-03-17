@@ -83,34 +83,13 @@ import java.rmi.RemoteException;
 public class DLFileEntryServiceSoap {
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap addFileEntry(
 		long folderId, java.lang.String name, java.lang.String title,
-		java.lang.String description, java.lang.String[] tagsEntries,
-		java.lang.String extraSettings, byte[] bytes,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String description, java.lang.String extraSettings,
+		byte[] bytes, com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.addFileEntry(folderId,
-					name, title, description, tagsEntries, extraSettings,
-					bytes, addCommunityPermissions, addGuestPermissions);
-
-			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap addFileEntry(
-		long folderId, java.lang.String name, java.lang.String title,
-		java.lang.String description, java.lang.String[] tagsEntries,
-		java.lang.String extraSettings, byte[] bytes,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions) throws RemoteException {
-		try {
-			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.addFileEntry(folderId,
-					name, title, description, tagsEntries, extraSettings,
-					bytes, communityPermissions, guestPermissions);
+					name, title, description, extraSettings, bytes,
+					serviceContext);
 
 			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
 		}
@@ -293,12 +272,13 @@ public class DLFileEntryServiceSoap {
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap updateFileEntry(
 		long folderId, long newFolderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,
-		java.lang.String description, java.lang.String[] tagsEntries,
-		java.lang.String extraSettings, byte[] bytes) throws RemoteException {
+		java.lang.String description, java.lang.String extraSettings,
+		byte[] bytes, com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.updateFileEntry(folderId,
 					newFolderId, name, sourceFileName, title, description,
-					tagsEntries, extraSettings, bytes);
+					extraSettings, bytes, serviceContext);
 
 			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
 		}

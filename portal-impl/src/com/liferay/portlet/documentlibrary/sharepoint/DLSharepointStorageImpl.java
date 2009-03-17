@@ -25,6 +25,7 @@ package com.liferay.portlet.documentlibrary.sharepoint;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.sharepoint.BaseSharepointStorageImpl;
 import com.liferay.portal.sharepoint.SharepointRequest;
 import com.liferay.portal.sharepoint.SharepointUtil;
@@ -93,12 +94,14 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 			groupId, parentFolderPath, DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
 		String folderName = getResourceName(folderPath);
 		String description = StringPool.BLANK;
-		boolean addCommunityPermissions = true;
-		boolean addGuestPermissions = true;
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
 
 		DLFolderServiceUtil.addFolder(
-			groupId, parentFolderId, folderName, description,
-			addCommunityPermissions, addGuestPermissions);
+			groupId, parentFolderId, folderName, description, serviceContext);
 	}
 
 	public InputStream getDocumentInputStream(
@@ -241,6 +244,8 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 		String newPath = sharepointRequest.getParameterValue("newUrl");
 		String newParentFolderPath = getParentFolderPath(newPath);
 
+		ServiceContext serviceContext = new ServiceContext();
+
 		long newGroupId = SharepointUtil.getGroupId(newParentFolderPath);
 
 		long newParentFolderId = getLastFolderId(
@@ -255,6 +260,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 			String description = fileEntry.getDescription();
 			String[] tagsEntries = TagsEntryLocalServiceUtil.getEntryNames(
 				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+			serviceContext.setTagsEntries(tagsEntries);
 			String extraSettings = fileEntry.getExtraSettings();
 
 			InputStream is = DLFileEntryLocalServiceUtil.getFileAsStream(
@@ -265,7 +271,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 
 			fileEntry = DLFileEntryServiceUtil.updateFileEntry(
 				folderId, newParentFolderId, name, newName, newName,
-				description, tagsEntries, extraSettings, bytes);
+				description, extraSettings, bytes, serviceContext);
 
 			Tree documentTree = getFileEntryTree(
 				fileEntry, newParentFolderPath);
@@ -277,7 +283,8 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 			String description = folder.getDescription();
 
 			folder = DLFolderServiceUtil.updateFolder(
-				folderId, newParentFolderId, newName, description);
+				folderId, newParentFolderId, newName, description,
+				serviceContext);
 
 			Tree folderTree = getFolderTree(folder, newParentFolderPath);
 
@@ -299,24 +306,27 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 		String name = getResourceName(documentPath);
 		String title = name;
 		String description = StringPool.BLANK;
-		String[] tagsEntries = null;
 		String extraSettings = StringPool.BLANK;
-		boolean addCommunityPermissions = true;
-		boolean addGuestPermissions = true;
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
 
 		try {
 			DLFileEntry fileEntry = getFileEntry(sharepointRequest);
 
 			name = fileEntry.getName();
 			description = fileEntry.getDescription();
-			tagsEntries = TagsEntryLocalServiceUtil.getEntryNames(
+			String[] tagsEntries = TagsEntryLocalServiceUtil.getEntryNames(
 				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+			serviceContext.setTagsEntries(tagsEntries);
 			extraSettings = fileEntry.getExtraSettings();
 
 			DLFileEntryServiceUtil.updateFileEntry(
 				parentFolderId, parentFolderId, name, title, title,
-				description, tagsEntries, extraSettings,
-				sharepointRequest.getBytes());
+				description, extraSettings, sharepointRequest.getBytes(),
+				serviceContext);
 		}
 		catch (NoSuchFileEntryException nsfee) {
 			File file = FileUtil.createTempFile(FileUtil.getExtension(name));
@@ -324,9 +334,8 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 			FileUtil.write(file, sharepointRequest.getBytes());
 
 			DLFileEntryServiceUtil.addFileEntry(
-				parentFolderId, name, title, description, tagsEntries,
-				extraSettings, file, addCommunityPermissions,
-				addGuestPermissions);
+				parentFolderId, name, title, description, extraSettings, file,
+				serviceContext);
 		}
 	}
 

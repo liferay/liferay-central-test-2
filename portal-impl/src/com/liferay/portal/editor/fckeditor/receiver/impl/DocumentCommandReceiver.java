@@ -27,6 +27,7 @@ import com.liferay.portal.editor.fckeditor.exception.FCKException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
@@ -61,12 +62,15 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 			long parentFolderId = folder.getFolderId();
 			String name = arg.getNewFolder();
 			String description = StringPool.BLANK;
-			boolean addCommunityPermissions = true;
-			boolean addGuestPermissions = true;
+
+			ServiceContext serviceContext = new ServiceContext();
+
+			serviceContext.setAddCommunityPermissions(true);
+			serviceContext.setAddGuestPermissions(true);
 
 			DLFolderServiceUtil.addFolder(
 				group.getGroupId(), parentFolderId, name, description,
-				addCommunityPermissions, addGuestPermissions);
+				serviceContext);
 		}
 		catch (Exception e) {
 			throw new FCKException(e);
@@ -88,14 +92,16 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 			String name = fileName;
 			String title = fileName;
 			String description = StringPool.BLANK;
-			String[] tagsEntries = null;
 			String extraSettings = StringPool.BLANK;
-			boolean addCommunityPermissions = true;
-			boolean addGuestPermissions = true;
+
+			ServiceContext serviceContext = new ServiceContext();
+
+			serviceContext.setAddCommunityPermissions(true);
+			serviceContext.setAddGuestPermissions(true);
 
 			DLFileEntryServiceUtil.addFileEntry(
-				folderId, name, title, description, tagsEntries, extraSettings,
-				file, addCommunityPermissions, addGuestPermissions);
+				folderId, name, title, description, extraSettings,
+				file, serviceContext);
 		}
 		catch (Exception e) {
 			throw new FCKException(e);

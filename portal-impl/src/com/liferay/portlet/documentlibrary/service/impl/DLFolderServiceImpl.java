@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
@@ -61,7 +62,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 	public DLFolder addFolder(
 			long groupId, long parentFolderId, String name, String description,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DLFolderPermission.check(
@@ -70,38 +71,21 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 		return dlFolderLocalService.addFolder(
 			getUserId(), groupId, parentFolderId, name, description,
-			addCommunityPermissions, addGuestPermissions);
-	}
-
-	public DLFolder addFolder(
-			long groupId, long parentFolderId, String name, String description,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		DLFolderPermission.check(
-			getPermissionChecker(), groupId, parentFolderId,
-			ActionKeys.ADD_FOLDER);
-
-		return dlFolderLocalService.addFolder(
-			getUserId(), groupId, parentFolderId, name, description,
-			communityPermissions, guestPermissions);
+			serviceContext);
 	}
 
 	public DLFolder copyFolder(
 			long groupId, long sourceFolderId, long parentFolderId, String name,
-			String description, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			String description, ServiceContext serviceContext)
 		throws PortalException, RemoteException, SystemException {
 
 		DLFolder srcFolder = getFolder(sourceFolderId);
 
 		DLFolder destFolder = addFolder(
-			groupId, parentFolderId, name, description, addCommunityPermissions,
-			addGuestPermissions);
+			groupId, parentFolderId, name, description, serviceContext);
 
 		copyFolder(
-			srcFolder, destFolder, addCommunityPermissions,
-			addGuestPermissions);
+			srcFolder, destFolder, serviceContext);
 
 		return destFolder;
 	}
@@ -339,7 +323,8 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 	}
 
 	public DLFolder updateFolder(
-			long folderId, long parentFolderId, String name, String description)
+			long folderId, long parentFolderId, String name, String description,
+			ServiceContext serviceContext)
 		throws PortalException, RemoteException, SystemException {
 
 		DLFolderPermission.check(
@@ -359,7 +344,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 		try {
 			return dlFolderLocalService.updateFolder(
-				folderId, parentFolderId, name, description);
+				folderId, parentFolderId, name, description, serviceContext);
 		}
 		finally {
 			if (!hasLock) {
@@ -396,7 +381,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 	protected void copyFolder(
 			DLFolder srcFolder, DLFolder destFolder,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			ServiceContext serviceContext)
 		throws PortalException, RemoteException, SystemException {
 
 		List<DLFileEntry> srcFileEntries = dlFileEntryService.getFileEntries(
@@ -426,9 +411,8 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			}
 
 			dlFileEntryService.addFileEntry(
-				destFolder.getFolderId(), name, title, description, tagsEntries,
-				extraSettings, file, addCommunityPermissions,
-				addGuestPermissions);
+				destFolder.getFolderId(), name, title, description,
+				extraSettings, file, serviceContext);
 
 			file.delete();
 		}
@@ -442,11 +426,10 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 			DLFolder destSubfolder = addFolder(
 				destFolder.getGroupId(), destFolder.getFolderId(), name,
-				description, addCommunityPermissions, addGuestPermissions);
+				description, serviceContext);
 
 			copyFolder(
-				srcSubfolder, destSubfolder, addCommunityPermissions,
-				addGuestPermissions);
+				srcSubfolder, destSubfolder, serviceContext);
 		}
 	}
 

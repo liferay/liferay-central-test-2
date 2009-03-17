@@ -38,6 +38,7 @@ import com.liferay.portal.lar.PortletDataException;
 import com.liferay.portal.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.lar.PortletDataHandlerControl;
 import com.liferay.portal.lar.PortletDataHandlerKeys;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
@@ -199,8 +200,12 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				DLFileEntry.class, fileEntry.getFileEntryId());
 		}
 
-		boolean addCommunityPermissions = true;
-		boolean addGuestPermissions = true;
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setScopeGroupId(context.getGroupId());
+		serviceContext.setTagsEntries(tagsEntries);
 
 		byte[] bytes = context.getZipEntryAsByteArray(binPath);
 
@@ -234,24 +239,24 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 							userId, existingFileEntry.getFolderId(), folderId,
 							existingFileEntry.getName(), fileEntry.getName(),
 							fileEntry.getTitle(), fileEntry.getDescription(),
-							tagsEntries, fileEntry.getExtraSettings(), bytes);
+							fileEntry.getExtraSettings(), bytes,
+							serviceContext);
 				}
 				catch (NoSuchFileEntryException nsfee) {
 					existingFileEntry =
 						DLFileEntryLocalServiceUtil.addFileEntry(
 							fileEntry.getUuid(), userId, folderId,
 							fileEntry.getName(), fileEntry.getTitle(),
-							fileEntry.getDescription(), tagsEntries,
+							fileEntry.getDescription(),
 							fileEntry.getExtraSettings(), bytes,
-							addCommunityPermissions, addGuestPermissions);
+							serviceContext);
 				}
 			}
 			else {
 				existingFileEntry = DLFileEntryLocalServiceUtil.addFileEntry(
 					userId, folderId, fileEntry.getName(), fileEntry.getTitle(),
-					fileEntry.getDescription(), tagsEntries,
-					fileEntry.getExtraSettings(), bytes,
-					addCommunityPermissions, addGuestPermissions);
+					fileEntry.getDescription(), fileEntry.getExtraSettings(),
+					bytes, serviceContext);
 			}
 
 			fileEntryNames.put(
@@ -327,8 +332,10 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		long parentFolderId = MapUtil.getLong(
 			folderPKs, folder.getParentFolderId(), folder.getParentFolderId());
 
-		boolean addCommunityPermissions = true;
-		boolean addGuestPermissions = true;
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
 
 		if ((parentFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) &&
 			(parentFolderId == folder.getParentFolderId())) {
@@ -364,13 +371,13 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 					existingFolder = DLFolderLocalServiceUtil.addFolder(
 						folder.getUuid(), userId, groupId, parentFolderId,
-						name, folder.getDescription(), addCommunityPermissions,
-						addGuestPermissions);
+						name, folder.getDescription(), serviceContext);
 				}
 				else {
 					existingFolder = DLFolderLocalServiceUtil.updateFolder(
 						existingFolder.getFolderId(), parentFolderId,
-						folder.getName(), folder.getDescription());
+						folder.getName(), folder.getDescription(),
+						serviceContext);
 				}
 			}
 			else {
@@ -380,8 +387,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				existingFolder = DLFolderLocalServiceUtil.addFolder(
 					userId, groupId, parentFolderId, name,
-					folder.getDescription(), addCommunityPermissions,
-					addGuestPermissions);
+					folder.getDescription(), serviceContext);
 			}
 
 			folderPKs.put(folder.getFolderId(), existingFolder.getFolderId());
