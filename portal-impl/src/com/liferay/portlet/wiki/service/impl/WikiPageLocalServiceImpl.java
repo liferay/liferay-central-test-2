@@ -201,6 +201,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			Indexer.addPage(
 				page.getCompanyId(), node.getGroupId(), resourcePrimKey, nodeId,
 				title, content, page.getModifiedDate(),
+				serviceContext.getTagsCategories(),
 				serviceContext.getTagsEntries(), page.getExpandoBridge());
 		}
 		catch (SearchException se) {
@@ -842,7 +843,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			Indexer.updatePage(
 				page.getCompanyId(), node.getGroupId(), resourcePrimKey, nodeId,
 				newTitle, page.getContent(), page.getModifiedDate(),
-				tagsEntries, page.getExpandoBridge());
+				tagsCategories, tagsEntries, page.getExpandoBridge());
 
 			Indexer.deletePage(page.getCompanyId(), node.getGroupId(), title);
 		}
@@ -874,6 +875,9 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		String content = page.getContent();
 		Date modifiedDate = page.getModifiedDate();
 
+		String[] tagsCategories = tagsEntryLocalService.getEntryNames(
+			WikiPage.class.getName(), resourcePrimKey,
+			TagsEntryConstants.FOLKSONOMY_CATEGORY);
 		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 			WikiPage.class.getName(), resourcePrimKey);
 
@@ -881,7 +885,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			if (Validator.isNull(page.getRedirectTitle())) {
 				Indexer.updatePage(
 					companyId, groupId, resourcePrimKey, nodeId, title, content,
-					modifiedDate, tagsEntries, page.getExpandoBridge());
+					modifiedDate, tagsCategories, tagsEntries,
+					page.getExpandoBridge());
 			}
 		}
 		catch (SearchException se) {
@@ -1025,6 +1030,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				Indexer.updatePage(
 					node.getCompanyId(), node.getGroupId(), resourcePrimKey,
 					nodeId, title, content, page.getModifiedDate(),
+					serviceContext.getTagsCategories(),
 					serviceContext.getTagsEntries(), page.getExpandoBridge());
 			}
 		}

@@ -44,6 +44,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portlet.tags.model.TagsEntryConstants;
 import com.liferay.portlet.wiki.DuplicateNodeNameException;
 import com.liferay.portlet.wiki.NodeNameException;
 import com.liferay.portlet.wiki.importers.WikiImporter;
@@ -284,13 +285,16 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 					String content = page.getContent();
 					Date modifiedDate = page.getModifiedDate();
 
+					String[] tagsCategories = tagsEntryLocalService.getEntryNames(
+						WikiPage.class.getName(), resourcePrimKey,
+						TagsEntryConstants.FOLKSONOMY_CATEGORY);
 					String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 						WikiPage.class.getName(), resourcePrimKey);
 
 					try {
 						Indexer.updatePage(
 							companyId, groupId, resourcePrimKey, nodeId, title,
-							content, modifiedDate, tagsEntries,
+							content, modifiedDate, tagsCategories, tagsEntries,
 							page.getExpandoBridge());
 					}
 					catch (SearchException se) {

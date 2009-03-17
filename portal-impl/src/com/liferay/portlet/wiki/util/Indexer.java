@@ -61,7 +61,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static void addPage(
 			long companyId, long groupId, long resourcePrimKey, long nodeId,
 			String title, String content, Date modifiedDate,
-			String[] tagsEntries, ExpandoBridge expandoBridge)
+			String[] tagsCategories, String[] tagsEntries,
+			ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		try {
@@ -72,7 +73,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		Document doc = getPageDocument(
 			companyId, groupId, resourcePrimKey, nodeId, title, content,
-			modifiedDate, tagsEntries, expandoBridge);
+			modifiedDate, tagsCategories, tagsEntries, expandoBridge);
 
 		SearchEngineUtil.addDocument(companyId, doc);
 	}
@@ -104,7 +105,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static Document getPageDocument(
 		long companyId, long groupId, long resourcePrimKey, long nodeId,
-		String title, String content, Date modifiedDate, String[] tagsEntries,
+		String title, String content, Date modifiedDate,
+		String[] tagsCategories, String[] tagsEntries,
 		ExpandoBridge expandoBridge) {
 
 		content = HtmlUtil.extractText(content);
@@ -121,6 +123,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		doc.addText(Field.TITLE, title);
 		doc.addText(Field.CONTENT, content);
+		doc.addKeyword(Field.TAGS_CATEGORIES, tagsCategories);
 		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
 		doc.addKeyword(Field.ENTRY_CLASS_NAME, WikiPage.class.getName());
@@ -143,12 +146,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static void updatePage(
 			long companyId, long groupId, long resourcePrimKey, long nodeId,
 			String title, String content, Date modifiedDate,
-			String[] tagsEntries, ExpandoBridge expandoBridge)
+			String[] tagsCategories, String[] tagsEntries,
+			ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getPageDocument(
 			companyId, groupId, resourcePrimKey, nodeId, title, content,
-			modifiedDate, tagsEntries, expandoBridge);
+			modifiedDate, tagsCategories, tagsEntries, expandoBridge);
 
 		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
 	}
