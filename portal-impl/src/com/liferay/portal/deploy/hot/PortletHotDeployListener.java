@@ -383,7 +383,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			portletClass = portletClassLoader.loadClass(
 				portlet.getPortletClass());
 		}
-		catch (Exception e) {
+		catch (Throwable e) {
 			_log.error(e, e);
 
 			portletsItr.remove();
