@@ -67,11 +67,22 @@ public class XMLFormatter {
 	}
 
 	public static String fromCompactSafe(String xml) {
-		return StringUtil.replace(xml, "[$NEW_LINE$]", "\n");
+		return StringUtil.replace(xml, "[$NEW_LINE$]", StringPool.NEW_LINE);
 	}
 
 	public static String toCompactSafe(String xml) {
-		return StringUtil.replace(xml, "\n", "[$NEW_LINE$]");
+		return StringUtil.replace(
+			xml,
+			new String[] {
+				StringPool.RETURN_NEW_LINE,
+				StringPool.NEW_LINE,
+				StringPool.RETURN
+			},
+			new String[] {
+				"[$NEW_LINE$]",
+				"[$NEW_LINE$]",
+				"[$NEW_LINE$]"
+			});
 	}
 
 	public static String toString(String xml)
