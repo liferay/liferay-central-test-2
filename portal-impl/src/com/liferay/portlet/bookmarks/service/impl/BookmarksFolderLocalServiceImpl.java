@@ -195,7 +195,7 @@ public class BookmarksFolderLocalServiceImpl
 
 		bookmarksEntryLocalService.deleteEntries(folder.getFolderId());
 
-		// Expandos
+		// Expando
 
 		expandoValueLocalService.deleteValues(
 			BookmarksFolder.class.getName(), folder.getFolderId());

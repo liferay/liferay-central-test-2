@@ -227,14 +227,14 @@ public class BookmarksEntryLocalServiceImpl
 			_log.error("Deleting index " + entry.getEntryId(), se);
 		}
 
-		// Expandos
-
-		expandoValueLocalService.deleteValues(
-			BookmarksEntry.class.getName(), entry.getEntryId());
-
 		// Tags
 
 		tagsAssetLocalService.deleteAsset(
+			BookmarksEntry.class.getName(), entry.getEntryId());
+
+		// Expando
+
+		expandoValueLocalService.deleteValues(
 			BookmarksEntry.class.getName(), entry.getEntryId());
 
 		// Resources
