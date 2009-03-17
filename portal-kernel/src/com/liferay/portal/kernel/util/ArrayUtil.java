@@ -428,7 +428,7 @@ public class ArrayUtil {
 		}
 	}
 
-	public static boolean contains(long[] array, long value) {
+	public static boolean contains(int[] array, int value) {
 		if ((array == null) || (array.length == 0)) {
 			return false;
 		}
@@ -443,7 +443,7 @@ public class ArrayUtil {
 		}
 	}
 
-	public static boolean contains(int[] array, int value) {
+	public static boolean contains(long[] array, long value) {
 		if ((array == null) || (array.length == 0)) {
 			return false;
 		}
@@ -535,6 +535,90 @@ public class ArrayUtil {
 		else {
 			return array[pos];
 		}
+	}
+
+	public static boolean[] remove(boolean[] array, boolean value) {
+		List<Boolean> list = new ArrayList<Boolean>();
+
+		for (int i = 0; i < array.length; i++) {
+			if (value != array[i]) {
+				list.add(new Boolean(array[i]));
+			}
+		}
+
+		return toArray(list.toArray(new Boolean[list.size()]));
+	}
+
+	public static byte[] remove(byte[] array, byte value) {
+		List<Byte> list = new ArrayList<Byte>();
+
+		for (int i = 0; i < array.length; i++) {
+			if (value != array[i]) {
+				list.add(new Byte(array[i]));
+			}
+		}
+
+		return toArray(list.toArray(new Byte[list.size()]));
+	}
+
+	public static char[] remove(char[] array, char value) {
+		List<Character> list = new ArrayList<Character>();
+
+		for (int i = 0; i < array.length; i++) {
+			if (value != array[i]) {
+				list.add(new Character(array[i]));
+			}
+		}
+
+		return toArray(list.toArray(new Character[list.size()]));
+	}
+
+	public static double[] remove(double[] array, double value) {
+		List<Double> list = new ArrayList<Double>();
+
+		for (int i = 0; i < array.length; i++) {
+			if (value != array[i]) {
+				list.add(new Double(array[i]));
+			}
+		}
+
+		return toArray(list.toArray(new Double[list.size()]));
+	}
+
+	public static int[] remove(int[] array, int value) {
+		List<Integer> list = new ArrayList<Integer>();
+
+		for (int i = 0; i < array.length; i++) {
+			if (value != array[i]) {
+				list.add(new Integer(array[i]));
+			}
+		}
+
+		return toArray(list.toArray(new Integer[list.size()]));
+	}
+
+	public static long[] remove(long[] array, long value) {
+		List<Long> list = new ArrayList<Long>();
+
+		for (int i = 0; i < array.length; i++) {
+			if (value != array[i]) {
+				list.add(new Long(array[i]));
+			}
+		}
+
+		return toArray(list.toArray(new Long[list.size()]));
+	}
+
+	public static short[] remove(short[] array, short value) {
+		List<Short> list = new ArrayList<Short>();
+
+		for (int i = 0; i < array.length; i++) {
+			if (value != array[i]) {
+				list.add(new Short(array[i]));
+			}
+		}
+
+		return toArray(list.toArray(new Short[list.size()]));
 	}
 
 	public static String[] remove(String[] array, String value) {

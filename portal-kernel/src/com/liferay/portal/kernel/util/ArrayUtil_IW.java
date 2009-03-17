@@ -209,11 +209,11 @@ public class ArrayUtil_IW {
 		return ArrayUtil.contains(array, value);
 	}
 
-	public boolean contains(long[] array, long value) {
+	public boolean contains(int[] array, int value) {
 		return ArrayUtil.contains(array, value);
 	}
 
-	public boolean contains(int[] array, int value) {
+	public boolean contains(long[] array, long value) {
 		return ArrayUtil.contains(array, value);
 	}
 
@@ -240,6 +240,34 @@ public class ArrayUtil_IW {
 
 	public java.lang.Object getValue(java.lang.Object[] array, int pos) {
 		return ArrayUtil.getValue(array, pos);
+	}
+
+	public boolean[] remove(boolean[] array, boolean value) {
+		return ArrayUtil.remove(array, value);
+	}
+
+	public byte[] remove(byte[] array, byte value) {
+		return ArrayUtil.remove(array, value);
+	}
+
+	public char[] remove(char[] array, char value) {
+		return ArrayUtil.remove(array, value);
+	}
+
+	public double[] remove(double[] array, double value) {
+		return ArrayUtil.remove(array, value);
+	}
+
+	public int[] remove(int[] array, int value) {
+		return ArrayUtil.remove(array, value);
+	}
+
+	public long[] remove(long[] array, long value) {
+		return ArrayUtil.remove(array, value);
+	}
+
+	public short[] remove(short[] array, short value) {
+		return ArrayUtil.remove(array, value);
 	}
 
 	public java.lang.String[] remove(java.lang.String[] array,
