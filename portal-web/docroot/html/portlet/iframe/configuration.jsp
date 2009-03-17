@@ -43,11 +43,77 @@ String htmlAttributes =
 	}
 </style>
 
+<script type="text/javascript">
+	jQuery(
+		function() {
+			var authCheckbox = jQuery('#<portlet:namespace />authCheckbox');
+			var auth = jQuery('#<portlet:namespace />auth');
+
+			function toggleAuthOptions() {
+				var authType = jQuery('#<portlet:namespace />authType');
+				var formFields = jQuery('#<portlet:namespace />formFields');
+				var basicFields = jQuery('#<portlet:namespace />basicFields');
+				var currentLoginMsg = jQuery('#<portlet:namespace />currentLoginMsg');
+
+				if (auth.val() == 'true') {
+					authType.show();
+					currentLoginMsg.show();
+
+					toggleAuthTypeOptions();
+				}
+				else {
+					authType.hide();
+					formFields.hide();
+					basicFields.hide();
+					currentLoginMsg.hide();
+				}
+			}
+
+			var authType = jQuery('select[@name=<portlet:namespace />authType]');
+
+			function toggleAuthTypeOptions() {
+				var formFields = jQuery('#<portlet:namespace />formFields');
+				var basicFields = jQuery('#<portlet:namespace />basicFields');
+
+				if (authType.val() == 'form') {
+					formFields.show();
+					formFields.find('input').attr('disabled', false);
+
+					basicFields.hide();
+					basicFields.find('input').attr('disabled', true);
+				}
+				else {
+					formFields.hide();
+					formFields.find('input').attr('disabled', true);
+
+					basicFields.show();
+					basicFields.find('input').attr('disabled', false);
+				}
+			}
+
+			toggleAuthOptions();
+
+			authCheckbox.click(
+				function(event) {
+					toggleAuthOptions();
+				}
+			);
+
+			authType.change(
+				function(event) {
+					toggleAuthTypeOptions();
+				}
+			);
+		}
+	);
+</script>
+
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
 <fieldset>
 	<legend><liferay-ui:message key="general" /></legend>
+
 	<table class="lfr-table">
 	<tr>
 		<td>
@@ -62,12 +128,7 @@ String htmlAttributes =
 			<liferay-ui:message key="relative-to-context-path" />
 		</td>
 		<td>
-
-			<%
-			String relativeOnClick = "jQuery(\"#" + renderResponse.getNamespace() + "context-path-text\").toggle();";
-			%>
-
-			<liferay-ui:input-checkbox param="relative" defaultValue="<%= relative %>" onClick="<%= relativeOnClick %>" />
+			<liferay-ui:input-checkbox param="relative" defaultValue="<%= relative %>" />
 		</td>
 	</tr>
 	</table>
@@ -117,23 +178,23 @@ String htmlAttributes =
 				<liferay-ui:message key="user-name" />
 			</td>
 			<td>
-				<table>
-					<tr id="<portlet:namespace />userName">
-						<td>
-							<liferay-ui:message key="field-name" />
-						</td>
-						<td>
-							<liferay-ui:message key="value" />
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<input class="lfr-input-text" name="<portlet:namespace />userNameField" size="10" type="text" value="<%= userNameField %>" />
-						</td>
-						<td>
-							<input class="lfr-input-text" name="<portlet:namespace />userName" size="10" type="text" value="<%= userName %>" />
-						</td>
-					</tr>
+				<table class="lfr-table">
+				<tr id="<portlet:namespace />userName">
+					<td>
+						<liferay-ui:message key="field-name" />
+					</td>
+					<td>
+						<liferay-ui:message key="value" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input class="lfr-input-text" name="<portlet:namespace />userNameField" size="10" type="text" value="<%= userNameField %>" />
+					</td>
+					<td>
+						<input class="lfr-input-text" name="<portlet:namespace />userName" size="10" type="text" value="<%= userName %>" />
+					</td>
+				</tr>
 				</table>
 			</td>
 		</tr>
@@ -142,23 +203,23 @@ String htmlAttributes =
 				<liferay-ui:message key="password" />
 			</td>
 			<td>
-				<table>
-					<tr id="<portlet:namespace />userName">
-						<td>
-							<liferay-ui:message key="field-name" />
-						</td>
-						<td>
-							<liferay-ui:message key="value" />
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<input class="lfr-input-text" name="<portlet:namespace />passwordField" size="10" type="text" value="<%= passwordField %>" />
-						</td>
-						<td>
-							<input class="lfr-input-text" name="<portlet:namespace />password" size="10" type="text" value="<%= password %>" />
-						</td>
-					</tr>
+				<table class="lfr-table">
+				<tr id="<portlet:namespace />userName">
+					<td>
+						<liferay-ui:message key="field-name" />
+					</td>
+					<td>
+						<liferay-ui:message key="value" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input class="lfr-input-text" name="<portlet:namespace />passwordField" size="10" type="text" value="<%= passwordField %>" />
+					</td>
+					<td>
+						<input class="lfr-input-text" name="<portlet:namespace />password" size="10" type="text" value="<%= password %>" />
+					</td>
+				</tr>
 				</table>
 			</td>
 		</tr>
@@ -186,31 +247,31 @@ String htmlAttributes =
 
 <fieldset>
 	<legend><liferay-ui:message key="advanced" /></legend>
-		<table class="lfr-table">
-		<tr>
-			<td>
-				<liferay-ui:message key="hidden-variables" />
-			</td>
-			<td>
-				<input class="lfr-input-text" name="<portlet:namespace />hiddenVariables" type="text" value="<%= hiddenVariables %>" />
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<br />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="html-attributes" />
-			</td>
-			<td>
-				<textarea class="lfr-textarea" name="<portlet:namespace />htmlAttributes" wrap="soft" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"><%= htmlAttributes %></textarea>
-			</td>
-		</tr>
-		</table>
+
+	<table class="lfr-table">
+	<tr>
+		<td>
+			<liferay-ui:message key="hidden-variables" />
+		</td>
+		<td>
+			<input class="lfr-input-text" name="<portlet:namespace />hiddenVariables" type="text" value="<%= hiddenVariables %>" />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<br />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="html-attributes" />
+		</td>
+		<td>
+			<textarea class="lfr-textarea" name="<portlet:namespace />htmlAttributes" wrap="soft" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"><%= htmlAttributes %></textarea>
+		</td>
+	</tr>
+	</table>
 </fieldset>
-</table>
 
 <br />
 
@@ -223,68 +284,3 @@ String htmlAttributes =
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />src);
 	</script>
 </c:if>
-
-<script type="text/javascript">
-	jQuery(
-		function() {
-			var authCheckbox = jQuery('#<portlet:namespace />authCheckbox');
-			var auth = jQuery('#<portlet:namespace />auth');
-
-			function toggleAuthOptions() {
-				var authType = jQuery('#<portlet:namespace />authType');
-				var formFields = jQuery('#<portlet:namespace />formFields');
-				var basicFields = jQuery('#<portlet:namespace />basicFields');
-				var currentLoginMsg = jQuery('#<portlet:namespace />currentLoginMsg');
-
-				if (auth.val() == 'true') {
-					authType.show();
-					currentLoginMsg.show();
-
-					toggleAuthTypeOptions();
-				}
-				else {
-					authType.hide();
-					formFields.hide();
-					basicFields.hide();
-					currentLoginMsg.hide();
-				}
-			}
-
-			var authType = jQuery('select[@name=<portlet:namespace />authType]');
-
-			function toggleAuthTypeOptions() {
-				var formFields = jQuery('#<portlet:namespace />formFields');
-				var basicFields = jQuery('#<portlet:namespace />basicFields');
-
-				if (authType.val() == 'form') {
-					formFields.show();
-					formFields.find('input').attr('disabled', false);
-					basicFields.hide();
-					basicFields.find('input').attr('disabled', true);
-				}
-				else {
-					formFields.hide();
-					formFields.find('input').attr('disabled', true);
-					basicFields.show();
-					basicFields.find('input').attr('disabled', false);
-				}
-			}
-
-			toggleAuthOptions();
-
-			authCheckbox.change(
-				function(event) {
-					toggleAuthOptions();
-				}
-			);
-
-			authType.change(
-				function(event) {
-					toggleAuthTypeOptions();
-				}
-			);
-
-
-		}
-	);
-</script>

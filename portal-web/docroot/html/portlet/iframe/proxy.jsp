@@ -59,12 +59,13 @@ for (int i = 0; i < hiddenVariablesArray.length; i++) {
 }
 
 if (Validator.isNull(userNameField)) {
-	int pos = userName.indexOf("=");
+	int pos = userName.indexOf(StringPool.EQUAL);
+
 	if (pos != -1) {
 		String fieldValuePair = userName;
 
 		userNameField = fieldValuePair.substring(0, pos);
-		userName = fieldValuePair.substring(pos + 1, fieldValuePair.length());
+		userName = fieldValuePair.substring(pos + 1);
 
 		preferences.setValue("user-name", userName);
 		preferences.setValue("user-name-field", userNameField);
@@ -73,7 +74,7 @@ if (Validator.isNull(userNameField)) {
 	}
 }
 
-if ((Validator.isNull(userName)) && (Validator.isNotNull(userNameField))) {
+if (Validator.isNull(userName) && Validator.isNotNull(userNameField)) {
 	userName = renderRequest.getRemoteUser();
 }
 %>
@@ -82,12 +83,13 @@ if ((Validator.isNull(userName)) && (Validator.isNotNull(userNameField))) {
 
 <%
 if (Validator.isNull(passwordField)) {
-	int pos = password.indexOf("=");
+	int pos = password.indexOf(StringPool.EQUAL);
+
 	if (pos != -1) {
 		String fieldValuePair = password;
 
 		passwordField = fieldValuePair.substring(0, pos);
-		password = fieldValuePair.substring(pos + 1, fieldValuePair.length());
+		password = fieldValuePair.substring(pos + 1);
 
 		preferences.setValue("password", password);
 		preferences.setValue("password-field", passwordField);
@@ -96,7 +98,7 @@ if (Validator.isNull(passwordField)) {
 	}
 }
 
-if ((Validator.isNull(password)) && (Validator.isNotNull(passwordField))) {
+if (Validator.isNull(password) && Validator.isNotNull(passwordField)) {
 	password = PortalUtil.getUserPassword(renderRequest);
 }
 %>
