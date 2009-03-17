@@ -58,6 +58,14 @@ public class DerbyUtil extends DBUtil {
 		return template;
 	}
 
+	public boolean isSupportsAlterColumnName() {
+		return _SUPPORTS_ALTER_COLUMN_NAME;
+	}
+
+	public boolean isSupportsAlterColumnType() {
+		return _SUPPORTS_ALTER_COLUMN_TYPE;
+	}
+
 	protected DerbyUtil() {
 		super(TYPE_DERBY);
 	}
@@ -104,8 +112,8 @@ public class DerbyUtil extends DBUtil {
 		String line = null;
 
 		while ((line = br.readLine()) != null) {
-			if (line.startsWith(ALTER_COLUMN_TYPE) ||
-				line.startsWith(ALTER_COLUMN_NAME)) {
+			if (line.startsWith(ALTER_COLUMN_NAME) ||
+				line.startsWith(ALTER_COLUMN_TYPE)) {
 
 				line = "-- " + line;
 
@@ -132,6 +140,10 @@ public class DerbyUtil extends DBUtil {
 		" varchar(4000)", " clob", " varchar",
 		" generated always as identity", "commit"
 	};
+
+	private static boolean _SUPPORTS_ALTER_COLUMN_NAME;
+
+	private static boolean _SUPPORTS_ALTER_COLUMN_TYPE;
 
 	private static Log _log = LogFactoryUtil.getLog(DerbyUtil.class);
 

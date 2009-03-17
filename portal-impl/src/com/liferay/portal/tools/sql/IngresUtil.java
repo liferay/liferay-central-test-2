@@ -51,6 +51,10 @@ public class IngresUtil extends DBUtil {
 		return template;
 	}
 
+	public boolean isSupportsAlterColumnName() {
+		return _SUPPORTS_ALTER_COLUMN_NAME;
+	}
+
 	protected IngresUtil() {
 		super(TYPE_INGRES);
 	}
@@ -102,20 +106,20 @@ public class IngresUtil extends DBUtil {
 		String line = null;
 
 		while ((line = br.readLine()) != null) {
-			if (line.startsWith(ALTER_COLUMN_TYPE)) {
-				String[] template = buildColumnTypeTokens(line);
-
-				line = StringUtil.replace(
-					"alter table @table@ alter @old-column@ @type@;",
-					REWORD_TEMPLATE, template);
-			}
-			else if (line.startsWith(ALTER_COLUMN_NAME)) {
+			if (line.startsWith(ALTER_COLUMN_NAME)) {
 				line = "-- " + line;
 
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"This statement is not supported by Ingres: " + line);
 				}
+			}
+			else if (line.startsWith(ALTER_COLUMN_TYPE)) {
+				String[] template = buildColumnTypeTokens(line);
+
+				line = StringUtil.replace(
+					"alter table @table@ alter @old-column@ @type@;",
+					REWORD_TEMPLATE, template);
 			}
 			else if (line.indexOf(DROP_PRIMARY_KEY) != -1) {
 				String[] tokens = StringUtil.split(line, " ");
@@ -142,6 +146,8 @@ public class IngresUtil extends DBUtil {
 		" varchar(1000)", " long varchar", " varchar",
 		"", "commit;\\g"
 	};
+
+	private static boolean _SUPPORTS_ALTER_COLUMN_NAME;
 
 	private static Log _log = LogFactoryUtil.getLog(IngresUtil.class);
 

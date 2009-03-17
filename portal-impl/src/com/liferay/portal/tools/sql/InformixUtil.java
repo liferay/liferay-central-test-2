@@ -113,18 +113,18 @@ public class InformixUtil extends DBUtil {
 		boolean createTable = false;
 
 		while ((line = br.readLine()) != null) {
-			if (line.startsWith(ALTER_COLUMN_TYPE)) {
-				String[] template = buildColumnTypeTokens(line);
-
-				line = StringUtil.replace(
-					"alter table @table@ modify (@old-column@ @type@);",
-					REWORD_TEMPLATE, template);
-			}
-			else if (line.startsWith(ALTER_COLUMN_NAME)) {
+			if (line.startsWith(ALTER_COLUMN_NAME)) {
 				String[] template = buildColumnNameTokens(line);
 
 				line = StringUtil.replace(
 					"rename column @table@.@old-column@ TO @new-column@;",
+					REWORD_TEMPLATE, template);
+			}
+			else if (line.startsWith(ALTER_COLUMN_TYPE)) {
+				String[] template = buildColumnTypeTokens(line);
+
+				line = StringUtil.replace(
+					"alter table @table@ modify (@old-column@ @type@);",
 					REWORD_TEMPLATE, template);
 			}
 			else if (line.indexOf("typeSettings text") > 0) {

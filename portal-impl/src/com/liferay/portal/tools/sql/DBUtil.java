@@ -271,6 +271,14 @@ public abstract class DBUtil {
 		return _type;
 	}
 
+	public boolean isSupportsAlterColumnName() {
+		return _SUPPORTS_ALTER_COLUMN_NAME;
+	}
+
+	public boolean isSupportsAlterColumnType() {
+		return _SUPPORTS_ALTER_COLUMN_TYPE;
+	}
+
 	public void runSQL(String sql)
 		throws IOException, NamingException, SQLException {
 
@@ -803,6 +811,10 @@ public abstract class DBUtil {
 		" STRING", " TEXT", " VARCHAR",
 		" IDENTITY", "COMMIT_TRANSACTION"
 	};
+
+	private static boolean _SUPPORTS_ALTER_COLUMN_NAME = true;
+
+	private static boolean _SUPPORTS_ALTER_COLUMN_TYPE = true;
 
 	private static Log _log = LogFactoryUtil.getLog(DBUtil.class);
 

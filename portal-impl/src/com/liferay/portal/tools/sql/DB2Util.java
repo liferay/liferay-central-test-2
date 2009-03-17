@@ -67,6 +67,10 @@ public class DB2Util extends DBUtil {
 		return template;
 	}
 
+	public boolean isSupportsAlterColumnType() {
+		return _SUPPORTS_ALTER_COLUMN_TYPE;
+	}
+
 	public void runSQL(String template)
 		throws IOException, NamingException, SQLException {
 
@@ -135,10 +139,7 @@ public class DB2Util extends DBUtil {
 		String line = null;
 
 		while ((line = br.readLine()) != null) {
-			if (line.startsWith(ALTER_COLUMN_TYPE)) {
-				line = "-- " + line;
-			}
-			else if (line.startsWith(ALTER_COLUMN_NAME)) {
+			if (line.startsWith(ALTER_COLUMN_NAME)) {
 				String[] template = buildColumnNameTokens(line);
 
 				line = StringUtil.replace(
@@ -152,6 +153,9 @@ public class DB2Util extends DBUtil {
 				line = line + StringUtil.replace(
 					"alter table @table@ drop column @old-column@",
 					REWORD_TEMPLATE, template);
+			}
+			else if (line.startsWith(ALTER_COLUMN_TYPE)) {
+				line = "-- " + line;
 			}
 
 			sb.append(line);
@@ -207,6 +211,8 @@ public class DB2Util extends DBUtil {
 		" varchar(500)", " clob", " varchar",
 		" generated always as identity", "commit"
 	};
+
+	private static boolean _SUPPORTS_ALTER_COLUMN_TYPE;
 
 	private static DB2Util _instance = new DB2Util();
 

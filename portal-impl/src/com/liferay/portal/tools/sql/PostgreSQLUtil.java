@@ -100,18 +100,18 @@ public class PostgreSQLUtil extends DBUtil {
 		String line = null;
 
 		while ((line = br.readLine()) != null) {
-			if (line.startsWith(ALTER_COLUMN_TYPE)) {
-				String[] template = buildColumnTypeTokens(line);
-
-				line = StringUtil.replace(
-					"alter table @table@ alter @old-column@ type @type@;",
-					REWORD_TEMPLATE, template);
-			}
-			else if (line.startsWith(ALTER_COLUMN_NAME)) {
+			if (line.startsWith(ALTER_COLUMN_NAME)) {
 				String[] template = buildColumnNameTokens(line);
 
 				line = StringUtil.replace(
 					"alter table @table@ rename @old-column@ to @new-column@;",
+					REWORD_TEMPLATE, template);
+			}
+			else if (line.startsWith(ALTER_COLUMN_TYPE)) {
+				String[] template = buildColumnTypeTokens(line);
+
+				line = StringUtil.replace(
+					"alter table @table@ alter @old-column@ type @type@;",
 					REWORD_TEMPLATE, template);
 			}
 			else if (line.indexOf(DROP_PRIMARY_KEY) != -1) {
