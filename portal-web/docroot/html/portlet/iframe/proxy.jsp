@@ -58,30 +58,50 @@ for (int i = 0; i < hiddenVariablesArray.length; i++) {
 <%
 }
 
-String userNameKey = StringPool.BLANK;
-String userNameValue = StringPool.BLANK;
+if (Validator.isNull(userNameField)) {
+	int pos = userName.indexOf("=");
+	if (pos != -1) {
+		String fieldValuePair = userName;
 
-int pos = userName.indexOf("=");
-if (pos != -1) {
-	userNameKey = userName.substring(0, pos);
-	userNameValue = userName.substring(pos + 1, userName.length());
+		userNameField = fieldValuePair.substring(0, pos);
+		userName = fieldValuePair.substring(pos + 1, fieldValuePair.length());
+
+		preferences.setValue("user-name", userName);
+		preferences.setValue("user-name-field", userNameField);
+
+		preferences.store();
+	}
+}
+
+if ((Validator.isNull(userName)) && (Validator.isNotNull(userNameField))) {
+	userName = renderRequest.getRemoteUser();
 }
 %>
 
-<input name="<%= userNameKey %>" type="hidden" value="<%= userNameValue %>" />
+<input name="<%= userNameField %>" type="hidden" value="<%= userName %>" />
 
 <%
-String passwordKey = StringPool.BLANK;
-String passwordValue = StringPool.BLANK;
+if (Validator.isNull(passwordField)) {
+	int pos = password.indexOf("=");
+	if (pos != -1) {
+		String fieldValuePair = password;
 
-pos = password.indexOf("=");
-if (pos != -1) {
-	passwordKey = password.substring(0, pos);
-	passwordValue = password.substring(pos + 1, password.length());
+		passwordField = fieldValuePair.substring(0, pos);
+		password = fieldValuePair.substring(pos + 1, fieldValuePair.length());
+
+		preferences.setValue("password", password);
+		preferences.setValue("password-field", passwordField);
+
+		preferences.store();
+	}
+}
+
+if ((Validator.isNull(password)) && (Validator.isNotNull(passwordField))) {
+	password = PortalUtil.getUserPassword(renderRequest);
 }
 %>
 
-<input name="<%= passwordKey %>" type="hidden" value="<%= passwordValue %>" />
+<input name="<%= passwordField %>" type="hidden" value="<%= password %>" />
 
 </form>
 

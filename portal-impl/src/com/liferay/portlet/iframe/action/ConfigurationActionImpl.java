@@ -72,7 +72,11 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String authType = ParamUtil.getString(actionRequest, "authType");
 		String formMethod = ParamUtil.getString(actionRequest, "formMethod");
 		String userName = ParamUtil.getString(actionRequest, "userName");
+		String userNameField = ParamUtil.getString(
+			actionRequest, "userNameField");
 		String password = ParamUtil.getString(actionRequest, "password");
+		String passwordField = ParamUtil.getString(
+			actionRequest, "passwordField");
 		String hiddenVariables = ParamUtil.getString(
 			actionRequest, "hiddenVariables");
 
@@ -93,7 +97,9 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		preferences.setValue("auth-type", authType);
 		preferences.setValue("form-method", formMethod);
 		preferences.setValue("user-name", userName);
+		preferences.setValue("user-name-field", userNameField);
 		preferences.setValue("password", password);
+		preferences.setValue("password-field", passwordField);
 		preferences.setValue("hidden-variables", hiddenVariables);
 
 		for (int i = 0; i < htmlAttributes.length; i++) {

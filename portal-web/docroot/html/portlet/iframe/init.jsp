@@ -40,7 +40,9 @@ boolean auth = GetterUtil.getBoolean(preferences.getValue("auth", StringPool.BLA
 String authType = preferences.getValue("auth-type", StringPool.BLANK);
 String formMethod = preferences.getValue("form-method", StringPool.BLANK);
 String userName = preferences.getValue("user-name", StringPool.BLANK);
+String userNameField = preferences.getValue("user-name-field", StringPool.BLANK);
 String password = preferences.getValue("password", StringPool.BLANK);
+String passwordField = preferences.getValue("password-field", StringPool.BLANK);
 String hiddenVariables = preferences.getValue("hidden-variables", StringPool.BLANK);
 
 String border = preferences.getValue("border", "0");
