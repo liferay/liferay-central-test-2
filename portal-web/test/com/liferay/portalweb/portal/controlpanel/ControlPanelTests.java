@@ -134,6 +134,12 @@ public class ControlPanelTests extends BaseTests {
 		testSuite.addTestSuite(AddInvalidServerInstanceVHTest.class);
 		testSuite.addTestSuite(AddNullServerInstanceMDTest.class);
 		testSuite.addTestSuite(EditServerInstanceTest.class);
+		testSuite.addTestSuite(AddVirtualHostCommunityTest.class);
+		testSuite.addTestSuite(AddContentVirtualHostCommunityTest.class);
+		testSuite.addTestSuite(AssertVirtualHostDefaultsTest.class);
+		testSuite.addTestSuite(EnableVirtualHostingTest.class);
+		testSuite.addTestSuite(AssertVirtualHostingAddressTest.class);
+		testSuite.addTestSuite(DeleteVirtualHostCommunityTest.class);
 
 		testSuite.addTestSuite(TearDownTest.class);
 		testSuite.addTestSuite(EndControlPanelTest.class);
