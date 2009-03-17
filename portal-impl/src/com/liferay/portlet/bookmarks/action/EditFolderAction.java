@@ -148,7 +148,7 @@ public class EditFolderAction extends PortletAction {
 
 			BookmarksFolderServiceUtil.updateFolder(
 				folderId, parentFolderId, name, description,
-				mergeWithParentFolder);
+				mergeWithParentFolder, serviceContext);
 		}
 	}
 
