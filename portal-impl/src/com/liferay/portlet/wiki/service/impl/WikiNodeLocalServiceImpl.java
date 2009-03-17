@@ -285,9 +285,10 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 					String content = page.getContent();
 					Date modifiedDate = page.getModifiedDate();
 
-					String[] tagsCategories = tagsEntryLocalService.getEntryNames(
-						WikiPage.class.getName(), resourcePrimKey,
-						TagsEntryConstants.FOLKSONOMY_CATEGORY);
+					String[] tagsCategories =
+						tagsEntryLocalService.getEntryNames(
+							WikiPage.class.getName(), resourcePrimKey,
+							TagsEntryConstants.FOLKSONOMY_CATEGORY);
 					String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 						WikiPage.class.getName(), resourcePrimKey);
 
