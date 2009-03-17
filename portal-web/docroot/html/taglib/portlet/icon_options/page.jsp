@@ -67,21 +67,22 @@
 			facebookShowAddAppLink = false;
 		}
 
-		boolean appShowShareWithFriendsLink = GetterUtil.getBoolean(portletSetup.getValue("lfr-app-show-share-with-friends-link", StringPool.BLANK));
 		boolean iGoogleShowAddAppLink = GetterUtil.getBoolean(portletSetup.getValue("lfr-igoogle-show-add-app-link", StringPool.BLANK));
+
+		boolean appShowShareWithFriendsLink = GetterUtil.getBoolean(portletSetup.getValue("lfr-app-show-share-with-friends-link", StringPool.BLANK));
 		%>
 
-		<c:if test="<%= widgetShowAddAppLink || facebookShowAddAppLink || appShowShareWithFriendsLink || iGoogleShowAddAppLink%>">
+		<c:if test="<%= widgetShowAddAppLink || facebookShowAddAppLink || iGoogleShowAddAppLink || appShowShareWithFriendsLink %>">
 			<c:if test="<%= widgetShowAddAppLink %>">
 
 				<%
-				String portletSharingHREF = "javascript: Liferay.PortletSharing.showWidgetInfo('" + PortalUtil.getWidgetURL(portlet, themeDisplay) + "');";
+				String widgetHREF = "javascript: Liferay.PortletSharing.showWidgetInfo('" + PortalUtil.getWidgetURL(portlet, themeDisplay) + "');";
 				%>
 
 				<liferay-ui:icon
 					image="../dock/add_content"
 					message="add-to-any-website"
-					url="<%= portletSharingHREF %>"
+					url="<%= widgetHREF %>"
 					label="<%= true %>"
 					cssClass='<%= portletDisplay.getNamespace() + "expose-as-widget" %>'
 				/>
@@ -97,6 +98,21 @@
 				/>
 			</c:if>
 
+			<c:if test="<%= iGoogleShowAddAppLink %>">
+
+				<%
+				String googleGadgetHREF = "http://fusion.google.com/add?source=atgs&moduleurl=" + PortalUtil.getGoogleGadgetURL(portlet, themeDisplay);
+				%>
+
+				<liferay-ui:icon
+					image="../dock/add_content"
+					message="add-to-igoogle"
+					url="<%= googleGadgetHREF %>"
+					label="<%= true %>"
+					cssClass='<%= portletDisplay.getNamespace() + "expose-as-widget" %>'
+				/>
+			</c:if>
+
 			<c:if test="<%= appShowShareWithFriendsLink %>">
 				<liferay-ui:icon
 					image="share"
@@ -104,20 +120,6 @@
 					url="javascript: ;"
 					method="get"
 					label="<%= true %>"
-				/>
-			</c:if>
-			<c:if test="<%= iGoogleShowAddAppLink %>">
-				<%
-				String googleGadgetURL = PortalUtil.getGoogleGadgetURL(portlet, themeDisplay);
-				String portletAsGoogleGadgetHREF = "http://fusion.google.com/add?source=atgs&moduleurl=" + googleGadgetURL;
-				%>
-
-				<liferay-ui:icon
-					image="../dock/add_content"
-					message="add-to-your-personal-igoogle-page"
-					url="<%= portletAsGoogleGadgetHREF %>"
-					label="<%= true %>"
-					cssClass='<%= portletDisplay.getNamespace() + "expose-as-widget" %>'
 				/>
 			</c:if>
 		</c:if>

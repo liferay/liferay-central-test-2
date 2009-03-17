@@ -170,11 +170,10 @@ Liferay.Widget({ url: &#x27;<%= widgetURL %>&#x27;});
 
 		<%
 		boolean iGoogleShowAddAppLink = PrefsParamUtil.getBoolean(preferences, request, "lfr-igoogle-show-add-app-link");
-		String googleGadgetURL = PortalUtil.getGoogleGadgetURL(portlet, themeDisplay);
 		%>
 
 		<div class="portlet-msg-info">
-			<liferay-ui:message key="to-create-a-google-gadget-use-the-url-below-as-gadget-url" />
+			<liferay-ui:message key="use-the-google-gadget-url-to-create-a-google-gadget" />
 		</div>
 
 		<table class="lfr-table">
@@ -183,15 +182,15 @@ Liferay.Widget({ url: &#x27;<%= widgetURL %>&#x27;});
 					<liferay-ui:message key="google-gadget-url" />
 				</td>
 				<td>
-					<liferay-ui:input-resource url="<%= googleGadgetURL %>" />
+					<liferay-ui:input-resource url="<%= PortalUtil.getGoogleGadgetURL(portlet, themeDisplay) %>" />
 				</td>
 			</tr>
 		</table>
 
-		<br /><br />
+		<br />
 
 		<div>
-			<%= LanguageUtil.format(pageContext, "allow-users-to-add-x-to-igoogle-personal-pages", portletDisplay.getTitle()) %> <liferay-ui:input-checkbox param="iGoogleShowAddAppLink" defaultValue="<%= iGoogleShowAddAppLink %>" />
+			<%= LanguageUtil.format(pageContext, "allow-users-to-add-x-to-igoogle", portletDisplay.getTitle()) %> <liferay-ui:input-checkbox param="iGoogleShowAddAppLink" defaultValue="<%= iGoogleShowAddAppLink %>" />
 		</div>
 	</c:when>
 	<c:when test='<%= tabs2.equals("friends") %>'>
@@ -200,7 +199,9 @@ Liferay.Widget({ url: &#x27;<%= widgetURL %>&#x27;});
 		boolean appShowShareWithFriendsLink = GetterUtil.getBoolean(preferences.getValue("lfr-app-show-share-with-friends-link", null));
 		%>
 
-		<%= LanguageUtil.format(pageContext, "allow-users-to-share-x-with-friends", portletDisplay.getTitle()) %> <liferay-ui:input-checkbox param="appShowShareWithFriendsLink" defaultValue="<%= appShowShareWithFriendsLink %>" />
+		<div>
+			<%= LanguageUtil.format(pageContext, "allow-users-to-share-x-with-friends", portletDisplay.getTitle()) %> <liferay-ui:input-checkbox param="appShowShareWithFriendsLink" defaultValue="<%= appShowShareWithFriendsLink %>" />
+		</div>
 	</c:when>
 </c:choose>
 

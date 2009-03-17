@@ -586,10 +586,10 @@
 		</init-param>
 		<load-on-startup>2</load-on-startup>
 	</servlet>
-		<servlet>
-			<servlet-name>Google Gadget Servlet</servlet-name>
-			<servlet-class>com.liferay.portal.servlet.GoogleGadgetServlet</servlet-class>
-			<load-on-startup>2</load-on-startup>
+	<servlet>
+		<servlet-name>Google Gadget Servlet</servlet-name>
+		<servlet-class>com.liferay.portal.servlet.GoogleGadgetServlet</servlet-class>
+		<load-on-startup>2</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>I18n Servlet</servlet-name>
@@ -699,9 +699,9 @@
 		<servlet-name>Friendly URL Servlet - Public</servlet-name>
 		<url-pattern>/web/*</url-pattern>
 	</servlet-mapping>
-		<servlet-mapping>
-			<servlet-name>Google Gadget Servlet</servlet-name>
-			<url-pattern>/google_gadget/*</url-pattern>
+	<servlet-mapping>
+		<servlet-name>Google Gadget Servlet</servlet-name>
+		<url-pattern>/google_gadget/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>I18n Servlet</servlet-name>

@@ -3429,7 +3429,7 @@ public class PortalImpl implements Portal {
 	}
 
 	private String _getServletURL(
-			Portlet portlet, String servletPath, ThemeDisplay themeDisplay) {
+		Portlet portlet, String servletPath, ThemeDisplay themeDisplay) {
 
 		String layoutURL = getLayoutURL(themeDisplay);
 

@@ -30,9 +30,11 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.IOException;
 
@@ -45,6 +47,7 @@ import javax.servlet.http.HttpServletResponse;
  * <a href="GoogleGadgetServlet.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alberto Montero
+ *
  */
 public class GoogleGadgetServlet extends HttpServlet {
 
@@ -53,9 +56,9 @@ public class GoogleGadgetServlet extends HttpServlet {
 		throws IOException, ServletException {
 
 		try {
-			String redirect = getRedirect(request);
+			String content = getContent(request);
 
-			if (redirect == null) {
+			if (content == null) {
 				PortalUtil.sendError(
 					HttpServletResponse.SC_NOT_FOUND,
 					new NoSuchLayoutException(), request, response);
@@ -63,42 +66,9 @@ public class GoogleGadgetServlet extends HttpServlet {
 			else {
 				request.setAttribute(WebKeys.GOOGLE_GADGET, Boolean.TRUE);
 
-				String path = GetterUtil.getString(request.getPathInfo());
-				String portletId = path.substring(
-					path.indexOf(_SEPARATOR) + _SEPARATOR.length());
-
-				Portlet portlet = PortletLocalServiceUtil.getPortletById(
-					PortalUtil.getCompanyId(request), portletId);
-
-				String gagdetTitle = portlet.getDisplayName();
-
-				String widgetJsURL =
-					PortalUtil.getPortalURL(request) +
-					PortalUtil.getPathContext() + "/html/js/liferay/widget.js";
-
-				String widgetURL =
-					request.getRequestURL().toString().replaceFirst(
-						PropsValues.GOOGLE_GADGET_SERVLET_MAPPING,
-						PropsValues.WIDGET_SERVLET_MAPPING);
-
 				response.setContentType(ContentTypes.TEXT_XML);
 
-				StringBuilder sb = new StringBuilder();
-				sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-				sb.append("<Module>\n");
-				sb.append("\t<ModulePrefs title=\"" + gagdetTitle + "\"/>\n");
-				sb.append("\t<Content type=\"html\">\n");
-				sb.append("\t<![CDATA[\n");
-				sb.append("\t\t<script src=\"" + widgetJsURL + "\"");
-				sb.append("\t\t\ttype=\"text/javascript\"></script>\n");
-				sb.append("\t\t<script type=\"text/javascript\">\n");
-				sb.append("\t\t\twindow.Liferay.Widget({url:'" + widgetURL + "'});\n");
-				sb.append("\t\t</script>\n");
-				sb.append("\t]]>\n");
-				sb.append("\t</Content>\n");
-				sb.append("</Module>\n");
-
-				response.getOutputStream().print(sb.toString());
+				ServletResponseUtil.write(response, content);
 			}
 		}
 		catch (Exception e) {
@@ -110,23 +80,57 @@ public class GoogleGadgetServlet extends HttpServlet {
 		}
 	}
 
-	protected String getRedirect(HttpServletRequest request) {
+	protected String getContent(HttpServletRequest request) throws Exception {
 		String path = GetterUtil.getString(request.getPathInfo());
 
 		if (Validator.isNull(path)) {
 			return null;
 		}
 
-		int pos = path.indexOf(_SEPARATOR);
+		int pos = path.indexOf(Portal.FRIENDLY_URL_SEPARATOR);
 
 		if (pos == -1) {
 			return null;
 		}
 
-		return path;
-	}
+		long companyId = PortalUtil.getCompanyId(request);
 
-	private static final String _SEPARATOR = "/-/";
+		String portletId = path.substring(
+			pos + Portal.FRIENDLY_URL_SEPARATOR.length());
+
+		Portlet portlet = PortletLocalServiceUtil.getPortletById(
+			companyId, portletId);
+
+		String title = portlet.getDisplayName();
+
+		String widgetJsURL =
+			PortalUtil.getPortalURL(request) + PortalUtil.getPathContext() +
+				"/html/js/liferay/widget.js";
+
+		String widgetURL = request.getRequestURL().toString();
+
+		widgetURL = widgetURL.replaceFirst(
+			PropsValues.GOOGLE_GADGET_SERVLET_MAPPING,
+			PropsValues.WIDGET_SERVLET_MAPPING);
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+		sb.append("<Module>");
+		sb.append("<ModulePrefs title=\"" + title + "\"/>");
+		sb.append("<Content type=\"html\">");
+		sb.append("<![CDATA[");
+		sb.append("<script src=\"" + widgetJsURL + "\"");
+		sb.append("type=\"text/javascript\"></script>");
+		sb.append("<script type=\"text/javascript\">");
+		sb.append("window.Liferay.Widget({url:'" + widgetURL + "'});");
+		sb.append("</script>");
+		sb.append("]]>");
+		sb.append("</Content>");
+		sb.append("</Module>");
+
+		return sb.toString();
+	}
 
 	private static Log _log = LogFactoryUtil.getLog(GoogleGadgetServlet.class);
 

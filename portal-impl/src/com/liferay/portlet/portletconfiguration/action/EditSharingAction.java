@@ -166,12 +166,12 @@ public class EditSharingAction extends EditConfigurationAction {
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
-		boolean googleGadgetShowAddAppLink = ParamUtil.getBoolean(
+		boolean iGoogleShowAddAppLink = ParamUtil.getBoolean(
 			actionRequest, "iGoogleShowAddAppLink");
 
 		preferences.setValue(
 			"lfr-igoogle-show-add-app-link",
-			String.valueOf(googleGadgetShowAddAppLink));
+			String.valueOf(iGoogleShowAddAppLink));
 	}
 
 }
