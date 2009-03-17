@@ -43,6 +43,7 @@ package com.liferay.portal.servlet.taglib.portlet;
 
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.portletcontainer.LiferayPortletURLImpl;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsValues;
@@ -63,7 +64,8 @@ import javax.servlet.http.HttpServletRequest;
 public class TagUtil {
 
 	public static LiferayPortletURL getLiferayPortletURL(
-		HttpServletRequest request, String portletName, String lifecycle) {
+		HttpServletRequest request, long plid, String portletName,
+		String lifecycle) {
 
 		PortletRequest portletRequest = (PortletRequest)request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_REQUEST);
@@ -79,7 +81,8 @@ public class TagUtil {
 
 			portletURL = new LiferayPortletURLImpl(
 				request, portletName, portletRequest.getWindowState(),
-				portletRequest.getPortletMode(), _getPlid(request), lifecycle);
+				portletRequest.getPortletMode(), _getPlid(request, plid),
+				lifecycle);
 		}
 		else {
 			PortletResponseImpl portletResponse =
@@ -120,11 +123,15 @@ public class TagUtil {
 		return portletName;
 	}
 
-	private static long _getPlid(HttpServletRequest request) {
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
+	private static long _getPlid(HttpServletRequest request, long plid) {
+		if (plid == LayoutConstants.DEFAULT_PLID) {
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
-		return themeDisplay.getPlid();
+			plid = themeDisplay.getPlid();
+		}
+
+		return plid;
 	}
 
 	private static boolean _isWARFile(PortletRequest portletRequest) {

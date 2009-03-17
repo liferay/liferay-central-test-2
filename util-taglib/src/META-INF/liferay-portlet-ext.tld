@@ -9,10 +9,13 @@
 
 	<!--
 	liferay-portlet:actionURL is similar to portlet:actionURL except it has the
-	additional attributes portletName, anchor, and encrypt.
+	additional attributes plid, portletName, anchor, and encrypt.
 
 	Set varImpl to set the PortletURL object. This gives you an object reference
 	to the underlying URL implementation.
+
+	Set plid to the plid of another layout. This allows you to post the URL to
+	another layout.
 
 	Set portletName to the name of a portlet other than the current portlet.
 	This allows you to post the URL to another portlet.
@@ -72,6 +75,11 @@
 		</attribute>
 		<attribute>
 			<name>name</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>plid</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -259,10 +267,13 @@
 
 	<!--
 	liferay-portlet:renderURL is similar to portlet:renderURL except it has the
-	additional attributes portletName, anchor, and encrypt.
+	additional attributes plid, portletName, anchor, and encrypt.
 
 	Set varImpl to set the PortletURL object. This gives you an object reference
 	to the underlying URL implementation.
+
+	Set plid to the plid of another layout. This allows you to post the URL to
+	another layout.
 
 	Set portletName to the name of a portlet other than the current portlet.
 	This allows you to post the URL to another portlet.
@@ -321,6 +332,11 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<name>plid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>portletName</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -359,10 +375,13 @@
 
 	<!--
 	liferay-portlet:resourceURL is similar to portlet:resourceURL except it has
-	the additional attributes portletName, anchor, and encrypt.
+	the additional attributes plid, portletName, anchor, and encrypt.
 
 	Set varImpl to set the PortletURL object. This gives you an object reference
 	to the underlying URL implementation.
+
+	Set plid to the plid of another layout. This allows you to post the URL to
+	another layout.
 
 	Set portletName to the name of a portlet other than the current portlet.
 	This allows you to post the URL to another portlet.
@@ -417,6 +436,11 @@
 		</attribute>
 		<attribute>
 			<name>escapeXml</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>plid</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>

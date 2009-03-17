@@ -53,10 +53,11 @@ public class ActionURLTagUtil {
 			String lifecycle, String windowState, String portletMode,
 			String var, String varImpl, Boolean secure,
 			Boolean copyCurrentRenderParameters, Boolean escapeXml, String name,
-			String resourceID, String cacheability, String portletName,
-			Boolean anchor, Boolean encrypt, long doAsUserId,
-			Boolean portletConfiguration, Map<String, String[]> params,
-			boolean writeOutput, PageContext pageContext)
+			String resourceID, String cacheability, long plid,
+			String portletName, Boolean anchor, Boolean encrypt,
+			long doAsUserId, Boolean portletConfiguration,
+			Map<String, String[]> params, boolean writeOutput,
+			PageContext pageContext)
 		throws JspException {
 
 		try {
@@ -68,7 +69,7 @@ public class ActionURLTagUtil {
 			}
 
 			LiferayPortletURL portletURL = TagUtil.getLiferayPortletURL(
-				request, portletName, lifecycle);
+				request, plid, portletName, lifecycle);
 
 			if (portletURL == null) {
 				_log.error(

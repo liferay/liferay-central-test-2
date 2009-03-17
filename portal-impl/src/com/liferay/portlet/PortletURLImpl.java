@@ -484,6 +484,14 @@ public class PortletURLImpl
 		_toString = null;
 	}
 
+	public void setPlid(long plid) {
+		_plid = plid;
+
+		// Clear cache
+
+		_toString = null;
+	}
+
 	public void setPortletId(String portletId) {
 		_portletId = portletId;
 

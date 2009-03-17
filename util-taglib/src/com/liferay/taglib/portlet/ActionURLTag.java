@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 
 import java.util.Map;
@@ -52,10 +53,11 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 			String lifecycle, String windowState, String portletMode,
 			String var, String varImpl, Boolean secure,
 			Boolean copyCurrentRenderParameters, Boolean escapeXml, String name,
-			String resourceID, String cacheability, String portletName,
-			Boolean anchor, Boolean encrypt, long doAsUserId,
-			Boolean portletConfiguration, Map<String, String[]> params,
-			boolean writeOutput, PageContext pageContext)
+			String resourceID, String cacheability, long plid,
+			String portletName, Boolean anchor, Boolean encrypt,
+			long doAsUserId, Boolean portletConfiguration,
+			Map<String, String[]> params, boolean writeOutput,
+			PageContext pageContext)
 		throws Exception {
 
 		Object returnObj = null;
@@ -168,9 +170,10 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 					varWrapper, varImplWrapper, secureWrapper,
 					copyCurrentRenderParametersWrapper, escapeXmlWrapper,
 					nameWrapper, resourceIDWrapper, cacheabilityWrapper,
-					portletNameWrapper, anchorWrapper, encryptWrapper,
-					new LongWrapper(doAsUserId), portletConfigurationWrapper,
-					paramsWrapper, new BooleanWrapper(writeOutput), pageContext
+					new LongWrapper(plid), portletNameWrapper, anchorWrapper,
+					encryptWrapper, new LongWrapper(doAsUserId),
+					portletConfigurationWrapper, paramsWrapper,
+					new BooleanWrapper(writeOutput), pageContext
 				});
 
 			returnObj = MethodInvoker.invoke(methodWrapper);
@@ -197,8 +200,8 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 			doTag(
 				getLifecycle(), _windowState, _portletMode, _var, _varImpl,
 				_secure, _copyCurrentRenderParameters, _escapeXml, _name,
-				_resourceID, _cacheability, _portletName, _anchor, _encrypt,
-				_doAsUserId, _portletConfiguration, getParams(), true,
+				_resourceID, _cacheability, _plid, _portletName, _anchor,
+				_encrypt, _doAsUserId, _portletConfiguration, getParams(), true,
 				pageContext);
 		}
 		catch (Exception e) {
@@ -212,6 +215,8 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 		finally {
 			clearParams();
 			clearProperties();
+
+			_plid = LayoutConstants.DEFAULT_PLID;
 		}
 
 		return EVAL_PAGE;
@@ -264,6 +269,10 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 		_cacheability = cacheability;
 	}
 
+	public void setPlid(long plid) {
+		_plid = plid;
+	}
+
 	public void setPortletName(String portletName) {
 		_portletName = portletName;
 	}
@@ -301,6 +310,7 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 	private String  _name;
 	private String _resourceID;
 	private String _cacheability;
+	private long _plid = LayoutConstants.DEFAULT_PLID;
 	private String _portletName;
 	private Boolean _anchor;
 	private Boolean _encrypt;

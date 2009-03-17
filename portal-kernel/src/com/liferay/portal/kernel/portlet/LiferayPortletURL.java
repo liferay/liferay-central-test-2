@@ -83,6 +83,8 @@ public interface LiferayPortletURL
 
 	public void setEscapeXml(boolean escapeXml);
 
+	public void setPlid(long plid);
+
 	public void setPortletId(String portletId);
 
 	public void setURLType(ChannelURLType urlType);
