@@ -9,6 +9,31 @@
 <tr><td rowspan="1" colspan="3">RememberMeLoginTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('link=Sign Out'))</td>
+	<td>NotSignedOut</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${NotSignedOut}</td>
+	<td>SignedIn</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Sign Out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>SignedIn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//li[2]/a</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>_58_login</td>
 	<td>test@liferay.com</td>

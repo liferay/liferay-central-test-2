@@ -33,69 +33,98 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class RememberMeLoginTest extends BaseTestCase {
 	public void testRememberMeLogin() throws Exception {
-		selenium.type("_58_login", RuntimeVariables.replace("test@liferay.com"));
-		selenium.type("_58_password", RuntimeVariables.replace("test"));
-		selenium.click("_58_rememberMeCheckbox");
+		int label = 1;
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+		while (label >= 1) {
+			switch (label) {
+			case 1:
 
-			try {
-				if (selenium.isElementPresent("//input[@value='Sign In']")) {
-					break;
+				boolean NotSignedOut = selenium.isElementPresent(
+						"link=Sign Out");
+
+				if (!NotSignedOut) {
+					label = 2;
+
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.click(RuntimeVariables.replace("link=Sign Out"));
+				selenium.waitForPageToLoad("30000");
 
-		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
-		selenium.waitForPageToLoad("30000");
+			case 2:
+				selenium.click(RuntimeVariables.replace("//li[2]/a"));
+				selenium.waitForPageToLoad("30000");
+				selenium.type("_58_login",
+					RuntimeVariables.replace("test@liferay.com"));
+				selenium.type("_58_password", RuntimeVariables.replace("test"));
+				selenium.click("_58_rememberMeCheckbox");
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-			try {
-				if (selenium.isElementPresent(
-							"//a[@id=\"my-community-private-pages\"]")) {
-					break;
+					try {
+						if (selenium.isElementPresent(
+									"//input[@value='Sign In']")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Sign In']"));
+				selenium.waitForPageToLoad("30000");
 
-		selenium.click(RuntimeVariables.replace(
-				"//a[@id=\"my-community-private-pages\"]"));
-		selenium.waitForPageToLoad("30000");
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+					try {
+						if (selenium.isElementPresent(
+									"//a[@id=\"my-community-private-pages\"]")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
 
-			try {
-				if (selenium.isElementPresent(
-							"link=Session Expiration Test Page")) {
-					break;
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				selenium.click(RuntimeVariables.replace(
+						"//a[@id=\"my-community-private-pages\"]"));
+				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent(
+									"link=Session Expiration Test Page")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.click(RuntimeVariables.replace(
+						"link=Session Expiration Test Page"));
+				selenium.waitForPageToLoad("30000");
+
+			case 100:
+				label = -1;
+			}
 		}
-
-		selenium.click(RuntimeVariables.replace(
-				"link=Session Expiration Test Page"));
-		selenium.waitForPageToLoad("30000");
 	}
 }
