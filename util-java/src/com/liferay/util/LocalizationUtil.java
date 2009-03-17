@@ -72,6 +72,7 @@ import org.apache.commons.collections.map.ReferenceMap;
  *
  * @author Alexander Chow
  * @author Jorge Ferrer
+ * @author Mauro Mariuzzo
  *
  */
 public class LocalizationUtil {
@@ -108,7 +109,7 @@ public class LocalizationUtil {
 			value = StringPool.BLANK;
 		}
 
-		String defaultLanguageId = LocaleUtil.toLanguageId(
+		String systemDefaultLanguageId = LocaleUtil.toLanguageId(
 			LocaleUtil.getDefault());
 
 		String defaultValue = StringPool.BLANK;
@@ -120,10 +121,19 @@ public class LocalizationUtil {
 
 			reader = factory.createXMLStreamReader(new StringReader(xml));
 
+			String defaultLanguageId = StringPool.BLANK;
+
 			// Skip root node
 
 			if (reader.hasNext()) {
 				reader.nextTag();
+
+				defaultLanguageId = reader.getAttributeValue(
+					null, _DEFAULT_LOCALE);
+
+				if (Validator.isNull(defaultLanguageId)) {
+					defaultLanguageId = systemDefaultLanguageId;
+				}
 			}
 
 			// Find specified language and/or default language
