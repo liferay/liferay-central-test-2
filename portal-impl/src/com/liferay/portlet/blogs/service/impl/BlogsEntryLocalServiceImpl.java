@@ -48,6 +48,7 @@ import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.FriendlyURLNormalizer;
+import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.blogs.EntryContentException;
@@ -804,8 +805,10 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		StringBuilder sb = new StringBuilder();
 
 		String name = group.getDescriptiveName();
-		String url = portalURL + layoutURL + "/-/blogs";
-		String changesURL = portalURL + layoutURL + "/-/blogs/rss";
+		String url =
+			portalURL + layoutURL + Portal.FRIENDLY_URL_SEPARATOR + "blogs";
+		String changesURL =
+			portalURL + layoutURL + Portal.FRIENDLY_URL_SEPARATOR + "blogs/rss";
 
 		sb.append("http://blogsearch.google.com/ping?name=");
 		sb.append(HttpUtil.encodeURL(name));
@@ -907,7 +910,9 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		String excerpt = StringUtil.shorten(
 			HtmlUtil.extractText(entry.getContent()),
 			PropsValues.BLOGS_TRACKBACK_EXCERPT_LENGTH);
-		String url = portalURL + layoutURL + "/-/blogs/" + entry.getUrlTitle();
+		String url =
+			portalURL + layoutURL + Portal.FRIENDLY_URL_SEPARATOR + "blogs/" +
+				entry.getUrlTitle();
 
 		parts.put("title", entry.getTitle());
 		parts.put("excerpt", excerpt);

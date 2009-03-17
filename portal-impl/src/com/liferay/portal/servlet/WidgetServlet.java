@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
@@ -89,7 +90,7 @@ public class WidgetServlet extends HttpServlet {
 
 		String ppid = ParamUtil.getString(request, "p_p_id");
 
-		int pos = path.indexOf("/-/");
+		int pos = path.indexOf(Portal.FRIENDLY_URL_SEPARATOR);
 
 		if (Validator.isNull(ppid) && (pos == -1)) {
 			return null;

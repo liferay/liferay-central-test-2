@@ -1603,7 +1603,8 @@ public class PortalImpl implements Portal {
 
 			if (friendlyURLMapper.isCheckMappingWithPrefix()) {
 				pos = url.indexOf(
-					"/-/" + friendlyURLMapper.getMapping() + StringPool.SLASH);
+					FRIENDLY_URL_SEPARATOR + friendlyURLMapper.getMapping() +
+						StringPool.SLASH);
 			}
 			else {
 				pos = url.indexOf(
@@ -1681,7 +1682,7 @@ public class PortalImpl implements Portal {
 		}
 
 		if (!foundFriendlyURLMapper) {
-			int x = url.indexOf("/-/");
+			int x = url.indexOf(FRIENDLY_URL_SEPARATOR);
 
 			if (x != -1) {
 				int y = url.indexOf(StringPool.SLASH, x + 3);
@@ -3489,7 +3490,7 @@ public class PortalImpl implements Portal {
 			sb.append(layout.getFriendlyURL());
 		}
 
-		sb.append("/-/");
+		sb.append(FRIENDLY_URL_SEPARATOR);
 
 		FriendlyURLMapper friendlyURLMapper =
 			portlet.getFriendlyURLMapperInstance();

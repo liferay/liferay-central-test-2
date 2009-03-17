@@ -30,6 +30,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
@@ -149,7 +150,8 @@ public class RSSAction extends PortletAction {
 
 			feedURL =
 				themeDisplay.getURLPortal() +
-					PortalUtil.getLayoutURL(themeDisplay) + "/-/blogs/rss";
+					PortalUtil.getLayoutURL(themeDisplay) +
+						Portal.FRIENDLY_URL_SEPARATOR + "blogs/rss";
 
 			entryURL = feedURL;
 

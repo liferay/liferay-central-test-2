@@ -35,6 +35,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
@@ -147,8 +148,9 @@ public class TrackbackAction extends PortletAction {
 
 		String entryURL =
 			themeDisplay.getPortalURL() +
-				PortalUtil.getLayoutURL(themeDisplay) + "/-/blogs/" +
-					entry.getUrlTitle();
+				PortalUtil.getLayoutURL(themeDisplay) +
+					Portal.FRIENDLY_URL_SEPARATOR + "blogs/" +
+						entry.getUrlTitle();
 
 		TrackbackVerifierUtil.addNewPost(
 			message.getMessageId(), url, entryURL);

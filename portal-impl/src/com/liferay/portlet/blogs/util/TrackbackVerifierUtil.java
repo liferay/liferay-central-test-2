@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.Portal;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
@@ -70,7 +71,8 @@ public class TrackbackVerifierUtil {
 		throws Exception {
 
 		long messageId = message.getMessageId();
-		String entryURL = "/-/blogs/" + entry.getUrlTitle();
+		String entryURL =
+			Portal.FRIENDLY_URL_SEPARATOR + "blogs/" + entry.getUrlTitle();
 		String body = message.getBody();
 		String url = null;
 

@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.Portal;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -98,7 +99,7 @@ public class FacebookUtil {
 			return null;
 		}
 
-		pos = path.indexOf("/-/");
+		pos = path.indexOf(Portal.FRIENDLY_URL_SEPARATOR);
 
 		String appPath = StringPool.BLANK;
 

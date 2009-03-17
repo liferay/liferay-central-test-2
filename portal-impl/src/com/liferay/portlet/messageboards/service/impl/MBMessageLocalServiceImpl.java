@@ -55,6 +55,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextUtil;
+import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -1414,8 +1415,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		String messageURL = StringPool.BLANK;
 
 		messageURL =
-			portalURL + layoutURL + "/-/message_boards/message/" +
-				message.getMessageId();
+			portalURL + layoutURL + Portal.FRIENDLY_URL_SEPARATOR +
+				"message_boards/message/" + message.getMessageId();
 
 		String portletName = PortalUtil.getPortletTitle(
 			PortletKeys.MESSAGE_BOARDS, user);
@@ -1634,7 +1635,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		String layoutURL = serviceContext.getLayoutURL();
 
 		String blogsEntryURL =
-			portalURL + layoutURL + "/-/blogs/" + entry.getUrlTitle();
+			portalURL + layoutURL + Portal.FRIENDLY_URL_SEPARATOR + "blogs/" +
+				entry.getUrlTitle();
 
 		User blogsUser = userPersistence.findByPrimaryKey(entry.getUserId());
 		User commentsUser = userPersistence.findByPrimaryKey(userId);

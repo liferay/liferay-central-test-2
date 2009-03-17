@@ -55,6 +55,7 @@ import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextUtil;
+import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
@@ -1160,8 +1161,9 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		if (Validator.isNotNull(layoutURL) && Validator.isNotNull(portalURL)) {
 			pageURL =
-				portalURL + layoutURL + "/-/wiki/" + node.getNodeId() + "/" +
-					HttpUtil.encodeURL(page.getTitle());
+				portalURL + layoutURL + Portal.FRIENDLY_URL_SEPARATOR +
+					"wiki/" + node.getNodeId() + StringPool.SLASH +
+						HttpUtil.encodeURL(page.getTitle());
 		}
 
 		String portletName = PortalUtil.getPortletTitle(
