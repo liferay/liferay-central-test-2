@@ -129,7 +129,7 @@ public class EnterpriseAdminUtil {
 
 		User user = UserLocalServiceUtil.getUser(userId);
 
-		return addRequiredRoles(user.getUserId(), roleIds);
+		return addRequiredRoles(user, roleIds);
 	}
 
 	public static long[] addRequiredRoles(User user, long[] roleIds)
