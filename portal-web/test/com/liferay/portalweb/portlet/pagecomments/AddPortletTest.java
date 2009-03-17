@@ -71,5 +71,21 @@ public class AddPortletTest extends BaseTestCase {
 		}
 
 		selenium.click("//div[@id=\"Community-PageComments\"]/p/a");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//span/a[2]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }

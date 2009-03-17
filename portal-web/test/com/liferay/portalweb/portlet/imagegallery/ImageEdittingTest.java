@@ -55,23 +55,6 @@ public class ImageEdittingTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//img[@alt='Image']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click("//img[@alt='Image']");
 
 		for (int second = 0;; second++) {
@@ -121,7 +104,7 @@ public class ImageEdittingTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Close")) {
+				if (selenium.isElementPresent("//a")) {
 					break;
 				}
 			}
@@ -135,7 +118,7 @@ public class ImageEdittingTest extends BaseTestCase {
 		assertFalse(selenium.isElementPresent("link=Edit"));
 		assertFalse(selenium.isElementPresent("link=Permissions"));
 		assertFalse(selenium.isElementPresent("link=Delete"));
-		selenium.click("link=Close");
+		selenium.click("//a");
 		Thread.sleep(5000);
 	}
 }
