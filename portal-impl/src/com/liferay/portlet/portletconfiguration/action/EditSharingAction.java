@@ -87,6 +87,9 @@ public class EditSharingAction extends EditConfigurationAction {
 		else if (tabs2.equals("friends")) {
 			updateFriends(actionRequest, preferences);
 		}
+		else if (tabs2.equals("google-gadget")) {
+			updateGoogleGadget(actionRequest, preferences);
+		}
 
 		preferences.store();
 
@@ -157,6 +160,18 @@ public class EditSharingAction extends EditConfigurationAction {
 		preferences.setValue(
 			"lfr-app-show-share-with-friends-link",
 			String.valueOf(appShowShareWithFriendsLink));
+	}
+
+	protected void updateGoogleGadget(
+			ActionRequest actionRequest, PortletPreferences preferences)
+		throws Exception {
+
+		boolean googleGadgetShowAddAppLink = ParamUtil.getBoolean(
+			actionRequest, "iGoogleShowAddAppLink");
+
+		preferences.setValue(
+			"lfr-igoogle-show-add-app-link",
+			String.valueOf(googleGadgetShowAddAppLink));
 	}
 
 }

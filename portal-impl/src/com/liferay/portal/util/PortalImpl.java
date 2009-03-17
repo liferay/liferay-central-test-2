@@ -846,6 +846,13 @@ public class PortalImpl implements Portal {
 		return sb.substring(0, sb.length() - 2);
 	}
 
+	public String getGoogleGadgetURL(
+		Portlet portlet, ThemeDisplay themeDisplay) {
+
+		return _getServletURL(
+			portlet, PropsValues.GOOGLE_GADGET_SERVLET_MAPPING, themeDisplay);
+	}
+
 	public String getHomeURL(HttpServletRequest request)
 		throws PortalException, SystemException {
 
@@ -2571,78 +2578,8 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getWidgetURL(Portlet portlet, ThemeDisplay themeDisplay) {
-		String layoutURL = getLayoutURL(themeDisplay);
-
-		Layout layout = themeDisplay.getLayout();
-
-		StringBuilder sb = new StringBuilder();
-
-		if (HttpUtil.hasDomain(layoutURL)) {
-			String protocol = HttpUtil.getProtocol(layoutURL);
-			String domain = HttpUtil.getDomain(layoutURL);
-			HttpUtil.removeDomain(layoutURL);
-
-			sb.append(protocol);
-			sb.append(Http.PROTOCOL_DELIMITER);
-			sb.append(domain);
-
-			if (Validator.isNotNull(_pathContext)) {
-				sb.append(_pathContext);
-			}
-
-			if (themeDisplay.isI18n()) {
-				sb.append(StringPool.SLASH);
-				sb.append(themeDisplay.getI18nLanguageId());
-			}
-
-			sb.append(PropsValues.WIDGET_SERVLET_MAPPING);
-			sb.append(layout.getFriendlyURL());
-		}
-		else {
-			sb.append(themeDisplay.getPortalURL());
-
-			if (Validator.isNotNull(_pathContext)) {
-				sb.append(_pathContext);
-			}
-
-			if (themeDisplay.isI18n()) {
-				sb.append(StringPool.SLASH);
-				sb.append(themeDisplay.getI18nLanguageId());
-			}
-
-			sb.append(PropsValues.WIDGET_SERVLET_MAPPING);
-
-			Group group = layout.getGroup();
-
-			if (layout.isPrivateLayout()) {
-				if (group.isUser()) {
-					sb.append(_PRIVATE_USER_SERVLET_MAPPING);
-				}
-				else {
-					sb.append(_PRIVATE_GROUP_SERVLET_MAPPING);
-				}
-			}
-			else {
-				sb.append(_PUBLIC_GROUP_SERVLET_MAPPING);
-			}
-
-			sb.append(group.getFriendlyURL());
-			sb.append(layout.getFriendlyURL());
-		}
-
-		sb.append("/-/");
-
-		FriendlyURLMapper friendlyURLMapper =
-			portlet.getFriendlyURLMapperInstance();
-
-		if ((friendlyURLMapper != null) && !portlet.isInstanceable()) {
-			sb.append(friendlyURLMapper.getMapping());
-		}
-		else {
-			sb.append(portlet.getPortletId());
-		}
-
-		return sb.toString();
+		return _getServletURL(
+			portlet, PropsValues.WIDGET_SERVLET_MAPPING, themeDisplay);
 	}
 
 	public boolean isLayoutFirstPageable(String type) {
@@ -3488,6 +3425,83 @@ public class PortalImpl implements Portal {
 		}
 
 		return value;
+	}
+
+	private String _getServletURL(
+			Portlet portlet, String servletPath, ThemeDisplay themeDisplay) {
+
+		String layoutURL = getLayoutURL(themeDisplay);
+
+		Layout layout = themeDisplay.getLayout();
+
+		StringBuilder sb = new StringBuilder();
+
+		if (HttpUtil.hasDomain(layoutURL)) {
+			String protocol = HttpUtil.getProtocol(layoutURL);
+			String domain = HttpUtil.getDomain(layoutURL);
+			HttpUtil.removeDomain(layoutURL);
+
+			sb.append(protocol);
+			sb.append(Http.PROTOCOL_DELIMITER);
+			sb.append(domain);
+
+			if (Validator.isNotNull(_pathContext)) {
+				sb.append(_pathContext);
+			}
+
+			if (themeDisplay.isI18n()) {
+				sb.append(StringPool.SLASH);
+				sb.append(themeDisplay.getI18nLanguageId());
+			}
+
+			sb.append(servletPath);
+			sb.append(layout.getFriendlyURL());
+		}
+		else {
+			sb.append(themeDisplay.getPortalURL());
+
+			if (Validator.isNotNull(_pathContext)) {
+				sb.append(_pathContext);
+			}
+
+			if (themeDisplay.isI18n()) {
+				sb.append(StringPool.SLASH);
+				sb.append(themeDisplay.getI18nLanguageId());
+			}
+
+			sb.append(servletPath);
+
+			Group group = layout.getGroup();
+
+			if (layout.isPrivateLayout()) {
+				if (group.isUser()) {
+					sb.append(_PRIVATE_USER_SERVLET_MAPPING);
+				}
+				else {
+					sb.append(_PRIVATE_GROUP_SERVLET_MAPPING);
+				}
+			}
+			else {
+				sb.append(_PUBLIC_GROUP_SERVLET_MAPPING);
+			}
+
+			sb.append(group.getFriendlyURL());
+			sb.append(layout.getFriendlyURL());
+		}
+
+		sb.append("/-/");
+
+		FriendlyURLMapper friendlyURLMapper =
+			portlet.getFriendlyURLMapperInstance();
+
+		if ((friendlyURLMapper != null) && !portlet.isInstanceable()) {
+			sb.append(friendlyURLMapper.getMapping());
+		}
+		else {
+			sb.append(portlet.getPortletId());
+		}
+
+		return sb.toString();
 	}
 
 	private void _initCustomSQL() {

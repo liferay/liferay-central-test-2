@@ -190,6 +190,9 @@ public interface Portal {
 
 	public String getFirstPageLayoutTypes(PageContext pageContext);
 
+	public String getGoogleGadgetURL(
+		Portlet portlet, ThemeDisplay themeDisplay);
+
 	public String getHomeURL(HttpServletRequest request)
 		throws PortalException, SystemException;
 

@@ -389,6 +389,8 @@ public interface PropsKeys {
 
 	public static final String GLOBAL_STARTUP_EVENTS = "global.startup.events";
 
+	public static final String GOOGLE_GADGET_SERVLET_MAPPING = "google.gadget.servlet.mapping";
+
 	public static final String HIBERNATE_CONFIGS = "hibernate.configs";
 
 	public static final String HIBERNATE_DIALECT = "hibernate.dialect";

@@ -53,7 +53,7 @@ String widgetURL = PortalUtil.getWidgetURL(portlet, themeDisplay);
 </liferay-util:include>
 
 <liferay-ui:tabs
-	names="any-website,facebook,friends"
+	names="any-website,facebook,google-gadget,friends"
 	param="tabs2"
 	url="<%= portletURL.toString() %>"
 />
@@ -165,6 +165,34 @@ Liferay.Widget({ url: &#x27;<%= widgetURL %>&#x27;});
 				<%= LanguageUtil.format(pageContext, "allow-users-to-add-x-to-facebook", portletDisplay.getTitle()) %> <liferay-ui:input-checkbox param="facebookShowAddAppLink" defaultValue="<%= facebookShowAddAppLink %>" />
 			</div>
 		</c:if>
+	</c:when>
+	<c:when test='<%= tabs2.equals("google-gadget") %>'>
+
+		<%
+		boolean iGoogleShowAddAppLink = PrefsParamUtil.getBoolean(preferences, request, "lfr-igoogle-show-add-app-link");
+		String googleGadgetURL = PortalUtil.getGoogleGadgetURL(portlet, themeDisplay);
+		%>
+
+		<div class="portlet-msg-info">
+			<liferay-ui:message key="to-create-a-google-gadget-use-the-url-below-as-gadget-url" />
+		</div>
+
+		<table class="lfr-table">
+			<tr>
+				<td>
+					<liferay-ui:message key="google-gadget-url" />
+				</td>
+				<td>
+					<liferay-ui:input-resource url="<%= googleGadgetURL %>" />
+				</td>
+			</tr>
+		</table>
+
+		<br /><br />
+
+		<div>
+			<%= LanguageUtil.format(pageContext, "allow-users-to-add-x-to-igoogle-personal-pages", portletDisplay.getTitle()) %> <liferay-ui:input-checkbox param="iGoogleShowAddAppLink" defaultValue="<%= iGoogleShowAddAppLink %>" />
+		</div>
 	</c:when>
 	<c:when test='<%= tabs2.equals("friends") %>'>
 

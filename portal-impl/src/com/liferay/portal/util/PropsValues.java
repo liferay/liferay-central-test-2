@@ -462,6 +462,9 @@ public class PropsValues {
 	public static final String[] GLOBAL_STARTUP_EVENTS =
 		PropsUtil.getArray(PropsKeys.GLOBAL_STARTUP_EVENTS);
 
+	public static final String GOOGLE_GADGET_SERVLET_MAPPING =
+		PropsUtil.get(PropsKeys.GOOGLE_GADGET_SERVLET_MAPPING);
+
 	public static final String HIBERNATE_DIALECT =
 		PropsUtil.get(PropsKeys.HIBERNATE_DIALECT);
 

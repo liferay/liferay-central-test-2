@@ -68,9 +68,10 @@
 		}
 
 		boolean appShowShareWithFriendsLink = GetterUtil.getBoolean(portletSetup.getValue("lfr-app-show-share-with-friends-link", StringPool.BLANK));
+		boolean iGoogleShowAddAppLink = GetterUtil.getBoolean(portletSetup.getValue("lfr-igoogle-show-add-app-link", StringPool.BLANK));
 		%>
 
-		<c:if test="<%= widgetShowAddAppLink || facebookShowAddAppLink || appShowShareWithFriendsLink %>">
+		<c:if test="<%= widgetShowAddAppLink || facebookShowAddAppLink || appShowShareWithFriendsLink || iGoogleShowAddAppLink%>">
 			<c:if test="<%= widgetShowAddAppLink %>">
 
 				<%
@@ -103,6 +104,20 @@
 					url="javascript: ;"
 					method="get"
 					label="<%= true %>"
+				/>
+			</c:if>
+			<c:if test="<%= iGoogleShowAddAppLink %>">
+				<%
+				String googleGadgetURL = PortalUtil.getGoogleGadgetURL(portlet, themeDisplay);
+				String portletAsGoogleGadgetHREF = "http://fusion.google.com/add?source=atgs&moduleurl=" + googleGadgetURL;
+				%>
+
+				<liferay-ui:icon
+					image="../dock/add_content"
+					message="add-to-your-personal-igoogle-page"
+					url="<%= portletAsGoogleGadgetHREF %>"
+					label="<%= true %>"
+					cssClass='<%= portletDisplay.getNamespace() + "expose-as-widget" %>'
 				/>
 			</c:if>
 		</c:if>

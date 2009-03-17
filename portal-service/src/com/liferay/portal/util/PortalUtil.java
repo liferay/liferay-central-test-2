@@ -260,6 +260,12 @@ public class PortalUtil {
 		return getPortal().getFirstPageLayoutTypes(pageContext);
 	}
 
+	public static String getGoogleGadgetURL(
+		Portlet portlet, ThemeDisplay themeDisplay) {
+
+		return getPortal().getGoogleGadgetURL(portlet, themeDisplay);
+	}
+
 	public static String getHomeURL(HttpServletRequest request)
 		throws PortalException, SystemException {
 
