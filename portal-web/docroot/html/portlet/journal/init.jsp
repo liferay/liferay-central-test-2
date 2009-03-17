@@ -31,7 +31,6 @@
 <%@ page import="com.liferay.portal.kernel.xml.XPath" %>
 <%@ page import="com.liferay.portal.util.LayoutLister" %>
 <%@ page import="com.liferay.portal.util.LayoutView" %>
-<%@ page import="com.liferay.portal.util.PortletKeys" %>
 <%@ page import="com.liferay.portlet.documentlibrary.util.DLUtil" %>
 <%@ page import="com.liferay.portlet.journal.ArticleContentException" %>
 <%@ page import="com.liferay.portlet.journal.ArticleDisplayDateException" %>

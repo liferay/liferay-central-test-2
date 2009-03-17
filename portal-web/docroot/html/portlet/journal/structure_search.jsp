@@ -64,9 +64,8 @@ StructureDisplayTerms displayTerms = (StructureDisplayTerms)searchContainer.getD
 <br />
 
 <%
-boolean isWebContentPortlet = portletDisplay.getPortletName().equals(PortletKeys.JOURNAL);
-boolean showAddStructureButton = JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_STRUCTURE) && isWebContentPortlet;
-boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS) && isWebContentPortlet;
+boolean showAddStructureButton = JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_STRUCTURE);
+boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
 %>
 
 <c:if test="<%= showAddStructureButton || showPermissionsButton %>">
