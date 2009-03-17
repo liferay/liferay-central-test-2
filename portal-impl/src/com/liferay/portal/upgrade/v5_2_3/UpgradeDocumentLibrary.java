@@ -87,42 +87,52 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
+		if (dbUtil.isSupportsAlterColumnName()) {
+			runSQL("alter_column_type DLFileEntry name VARCHAR(255) null");
+			runSQL("alter_column_type DLFileEntry title VARCHAR(255) null");
+			runSQL("alter_column_type DLFileRank name VARCHAR(255) null");
+			runSQL("alter_column_type DLFileShortcut name VARCHAR(255) null");
+			runSQL("alter_column_type DLFileVersion name VARCHAR(255) null");
+		}
+		else {
 
-		// DLFileEntry
+			// DLFileEntry
 
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			DLFileEntryImpl.TABLE_NAME, DLFileEntryImpl.TABLE_COLUMNS);
+			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+				DLFileEntryImpl.TABLE_NAME, DLFileEntryImpl.TABLE_COLUMNS);
 
-		upgradeTable.setCreateSQL(DLFileEntryImpl.TABLE_SQL_CREATE);
+			upgradeTable.setCreateSQL(DLFileEntryImpl.TABLE_SQL_CREATE);
 
-		upgradeTable.updateTable();
+			upgradeTable.updateTable();
 
-		// DLFileRank
+			// DLFileRank
 
-		upgradeTable = new DefaultUpgradeTableImpl(
-			DLFileRankImpl.TABLE_NAME, DLFileRankImpl.TABLE_COLUMNS);
+			upgradeTable = new DefaultUpgradeTableImpl(
+				DLFileRankImpl.TABLE_NAME, DLFileRankImpl.TABLE_COLUMNS);
 
-		upgradeTable.setCreateSQL(DLFileRankImpl.TABLE_SQL_CREATE);
+			upgradeTable.setCreateSQL(DLFileRankImpl.TABLE_SQL_CREATE);
 
-		upgradeTable.updateTable();
+			upgradeTable.updateTable();
 
-		// DLFileShortcut
+			// DLFileShortcut
 
-		upgradeTable = new DefaultUpgradeTableImpl(
-			DLFileShortcutImpl.TABLE_NAME, DLFileShortcutImpl.TABLE_COLUMNS);
+			upgradeTable = new DefaultUpgradeTableImpl(
+				DLFileShortcutImpl.TABLE_NAME,
+				DLFileShortcutImpl.TABLE_COLUMNS);
 
-		upgradeTable.setCreateSQL(DLFileShortcutImpl.TABLE_SQL_CREATE);
+			upgradeTable.setCreateSQL(DLFileShortcutImpl.TABLE_SQL_CREATE);
 
-		upgradeTable.updateTable();
+			upgradeTable.updateTable();
 
-		// DLFileVersion
+			// DLFileVersion
 
-		upgradeTable = new DefaultUpgradeTableImpl(
-			DLFileVersionImpl.TABLE_NAME, DLFileVersionImpl.TABLE_COLUMNS);
+			upgradeTable = new DefaultUpgradeTableImpl(
+				DLFileVersionImpl.TABLE_NAME, DLFileVersionImpl.TABLE_COLUMNS);
 
-		upgradeTable.setCreateSQL(DLFileVersionImpl.TABLE_SQL_CREATE);
+			upgradeTable.setCreateSQL(DLFileVersionImpl.TABLE_SQL_CREATE);
 
-		upgradeTable.updateTable();
+			upgradeTable.updateTable();
+		}
 
 		// PortletPreferences
 

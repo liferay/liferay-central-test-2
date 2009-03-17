@@ -24,19 +24,19 @@ package com.liferay.portal.upgrade.v5_2_3;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.model.impl.ResourceCodeImpl;
+import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 
 /**
- * <a href="UpgradeResourceCode.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeUser.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class UpgradeResourceCode extends UpgradeProcess {
+public class UpgradeUser extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
@@ -51,21 +51,21 @@ public class UpgradeResourceCode extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
 		if (dbUtil.isSupportsAlterColumnName()) {
-			runSQL("alter_column_type ResourceCode name VARCHAR(255) null");
+			runSQL("alter_column_type User_ greeting VARCHAR(255) null");
 		}
 		else {
 
-			// ResourceCode
+			// User_
 
 			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-				ResourceCodeImpl.TABLE_NAME, ResourceCodeImpl.TABLE_COLUMNS);
+				UserImpl.TABLE_NAME, UserImpl.TABLE_COLUMNS);
 
-			upgradeTable.setCreateSQL(ResourceCodeImpl.TABLE_SQL_CREATE);
+			upgradeTable.setCreateSQL(UserImpl.TABLE_SQL_CREATE);
 
 			upgradeTable.updateTable();
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(UpgradeResourceCode.class);
+	private static Log _log = LogFactoryUtil.getLog(UpgradeUser.class);
 
 }

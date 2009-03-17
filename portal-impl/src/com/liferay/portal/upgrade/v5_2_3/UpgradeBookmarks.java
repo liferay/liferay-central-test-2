@@ -50,15 +50,21 @@ public class UpgradeBookmarks extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
+		if (dbUtil.isSupportsAlterColumnName()) {
+			runSQL("alter_column_type BookmarksEntry name VARCHAR(255) null");
+		}
+		else {
 
-		// BookmarksEntry
+			// BookmarksEntry
 
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			BookmarksEntryImpl.TABLE_NAME, BookmarksEntryImpl.TABLE_COLUMNS);
+			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+				BookmarksEntryImpl.TABLE_NAME,
+				BookmarksEntryImpl.TABLE_COLUMNS);
 
-		upgradeTable.setCreateSQL(BookmarksEntryImpl.TABLE_SQL_CREATE);
+			upgradeTable.setCreateSQL(BookmarksEntryImpl.TABLE_SQL_CREATE);
 
-		upgradeTable.updateTable();
+			upgradeTable.updateTable();
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(UpgradeBookmarks.class);

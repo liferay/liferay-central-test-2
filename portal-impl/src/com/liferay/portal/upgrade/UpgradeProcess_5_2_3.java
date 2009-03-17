@@ -34,6 +34,7 @@ import com.liferay.portal.upgrade.v5_2_3.UpgradeRole;
 import com.liferay.portal.upgrade.v5_2_3.UpgradeSchema;
 import com.liferay.portal.upgrade.v5_2_3.UpgradeSoftwareCatalog;
 import com.liferay.portal.upgrade.v5_2_3.UpgradeTags;
+import com.liferay.portal.upgrade.v5_2_3.UpgradeUser;
 import com.liferay.portal.upgrade.v5_2_3.UpgradeWiki;
 
 /**
@@ -60,6 +61,7 @@ public class UpgradeProcess_5_2_3 extends UpgradeProcess {
 		upgrade(UpgradeRole.class);
 		upgrade(UpgradeSoftwareCatalog.class);
 		upgrade(UpgradeTags.class);
+		upgrade(UpgradeUser.class);
 		upgrade(UpgradeWiki.class);
 		upgrade(DropIndexes.class);
 	}

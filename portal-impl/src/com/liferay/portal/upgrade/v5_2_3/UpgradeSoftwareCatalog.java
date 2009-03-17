@@ -50,15 +50,21 @@ public class UpgradeSoftwareCatalog extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
+		if (dbUtil.isSupportsAlterColumnName()) {
+			runSQL("alter_column_type SCProductEntry tags VARCHAR(255) null");
+		}
+		else {
 
-		// SCProductEntry
+			// SCProductEntry
 
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			SCProductEntryImpl.TABLE_NAME, SCProductEntryImpl.TABLE_COLUMNS);
+			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+				SCProductEntryImpl.TABLE_NAME,
+				SCProductEntryImpl.TABLE_COLUMNS);
 
-		upgradeTable.setCreateSQL(SCProductEntryImpl.TABLE_SQL_CREATE);
+			upgradeTable.setCreateSQL(SCProductEntryImpl.TABLE_SQL_CREATE);
 
-		upgradeTable.updateTable();
+			upgradeTable.updateTable();
+		}
 	}
 
 	private static Log _log =

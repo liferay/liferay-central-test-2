@@ -55,25 +55,25 @@ public abstract class UpgradeProcess {
 	public void runSQL(String template)
 		throws IOException, NamingException, SQLException {
 
-		DBUtil.getInstance().runSQL(template);
+		dbUtil.runSQL(template);
 	}
 
 	public void runSQL(String[] templates)
 		throws IOException, NamingException, SQLException {
 
-		DBUtil.getInstance().runSQL(templates);
+		dbUtil.runSQL(templates);
 	}
 
 	public void runSQLTemplate(String path)
 		throws IOException, NamingException, SQLException {
 
-		DBUtil.getInstance().runSQLTemplate(path);
+		dbUtil.runSQLTemplate(path);
 	}
 
 	public void runSQLTemplate(String path, boolean failOnError)
 		throws IOException, NamingException, SQLException {
 
-		DBUtil.getInstance().runSQLTemplate(path, failOnError);
+		dbUtil.runSQLTemplate(path, failOnError);
 	}
 
 	public abstract void upgrade() throws UpgradeException;
@@ -92,5 +92,7 @@ public abstract class UpgradeProcess {
 
 		upgradeProcess.upgrade();
 	}
+
+	protected DBUtil dbUtil = DBUtil.getInstance();
 
 }

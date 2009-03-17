@@ -50,15 +50,20 @@ public class UpgradeResource extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
+		if (dbUtil.isSupportsAlterColumnName()) {
+			runSQL("alter_column_type Resource_ primKey VARCHAR(255) null");
+		}
+		else {
 
-		// Resource
+			// Resource
 
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			ResourceImpl.TABLE_NAME, ResourceImpl.TABLE_COLUMNS);
+			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+				ResourceImpl.TABLE_NAME, ResourceImpl.TABLE_COLUMNS);
 
-		upgradeTable.setCreateSQL(ResourceImpl.TABLE_SQL_CREATE);
+			upgradeTable.setCreateSQL(ResourceImpl.TABLE_SQL_CREATE);
 
-		upgradeTable.updateTable();
+			upgradeTable.updateTable();
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(UpgradeResource.class);

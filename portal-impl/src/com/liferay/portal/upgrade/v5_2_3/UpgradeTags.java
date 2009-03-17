@@ -51,24 +51,30 @@ public class UpgradeTags extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
+		if (dbUtil.isSupportsAlterColumnName()) {
+			runSQL("alter_column_type TagsAsset title VARCHAR(255) null");
+			runSQL("alter_column_type TagsProperty value VARCHAR(255) null");
+		}
+		else {
 
-		// TagsAsset
+			// TagsAsset
 
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			TagsAssetImpl.TABLE_NAME, TagsAssetImpl.TABLE_COLUMNS);
+			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+				TagsAssetImpl.TABLE_NAME, TagsAssetImpl.TABLE_COLUMNS);
 
-		upgradeTable.setCreateSQL(TagsAssetImpl.TABLE_SQL_CREATE);
+			upgradeTable.setCreateSQL(TagsAssetImpl.TABLE_SQL_CREATE);
 
-		upgradeTable.updateTable();
+			upgradeTable.updateTable();
 
-		// TagsProperty
+			// TagsProperty
 
-		upgradeTable = new DefaultUpgradeTableImpl(
-			TagsPropertyImpl.TABLE_NAME, TagsPropertyImpl.TABLE_COLUMNS);
+			upgradeTable = new DefaultUpgradeTableImpl(
+				TagsPropertyImpl.TABLE_NAME, TagsPropertyImpl.TABLE_COLUMNS);
 
-		upgradeTable.setCreateSQL(TagsPropertyImpl.TABLE_SQL_CREATE);
+			upgradeTable.setCreateSQL(TagsPropertyImpl.TABLE_SQL_CREATE);
 
-		upgradeTable.updateTable();
+			upgradeTable.updateTable();
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(UpgradeTags.class);

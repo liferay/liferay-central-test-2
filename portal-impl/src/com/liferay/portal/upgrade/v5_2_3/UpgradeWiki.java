@@ -50,15 +50,20 @@ public class UpgradeWiki extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
+		if (dbUtil.isSupportsAlterColumnName()) {
+			runSQL("alter_column_type WikiPage title VARCHAR(255) null");
+		}
+		else {
 
-		// WikiPage
+			// WikiPage
 
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			WikiPageImpl.TABLE_NAME, WikiPageImpl.TABLE_COLUMNS);
+			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+				WikiPageImpl.TABLE_NAME, WikiPageImpl.TABLE_COLUMNS);
 
-		upgradeTable.setCreateSQL(WikiPageImpl.TABLE_SQL_CREATE);
+			upgradeTable.setCreateSQL(WikiPageImpl.TABLE_SQL_CREATE);
 
-		upgradeTable.updateTable();
+			upgradeTable.updateTable();
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(UpgradeWiki.class);
