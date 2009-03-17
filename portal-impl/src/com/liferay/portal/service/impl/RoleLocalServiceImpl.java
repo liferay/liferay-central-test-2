@@ -31,7 +31,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
@@ -42,11 +41,11 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
-import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.RoleLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -389,18 +388,9 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	public void setUserRoles(long userId, long[] roleIds)
 		throws PortalException, SystemException {
 
+		roleIds = EnterpriseAdminUtil.addRequiredRoles(userId, roleIds);
+
 		userPersistence.setRoles(userId, roleIds);
-
-		User user = userLocalService.getUser(userId);
-
-		if (!user.isDefaultUser()) {
-			Role role = roleLocalService.getRole(
-				user.getCompanyId(), RoleConstants.USER);
-
-			if (!ArrayUtil.contains(roleIds, role.getRoleId())) {
-				userPersistence.addRole(userId, role.getRoleId());
-			}
-		}
 
 		userLocalService.reIndex(userId);
 
@@ -408,7 +398,9 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	}
 
 	public void unsetUserRoles(long userId, long[] roleIds)
-		throws SystemException {
+		throws PortalException, SystemException {
+
+		roleIds = EnterpriseAdminUtil.removeRequiredRoles(userId, roleIds);
 
 		userPersistence.removeRoles(userId, roleIds);
 

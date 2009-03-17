@@ -110,6 +110,7 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 import com.liferay.portlet.enterpriseadmin.util.UserIndexer;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
@@ -442,6 +443,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		roleIds = ArrayUtil.toArray(
 			roleIdsSet.toArray(new Long[roleIdsSet.size()]));
+
+		roleIds = EnterpriseAdminUtil.addRequiredRoles(userId, roleIds);
 
 		userPersistence.setRoles(userId, roleIds);
 
@@ -2373,14 +2376,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// Roles
 
 		if (roleIds != null) {
-			Role userRole = roleLocalService.getRole(
-				company.getCompanyId(), RoleConstants.USER);
-
-			long userRoleId = userRole.getRoleId();
-
-			if (!ArrayUtil.contains(roleIds, userRoleId)) {
-				roleIds = ArrayUtil.append(roleIds, userRoleId);
-			}
+			roleIds = EnterpriseAdminUtil.addRequiredRoles(userId, roleIds);
 
 			userPersistence.setRoles(userId, roleIds);
 		}

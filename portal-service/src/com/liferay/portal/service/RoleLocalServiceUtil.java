@@ -256,7 +256,8 @@ public class RoleLocalServiceUtil {
 	}
 
 	public static void unsetUserRoles(long userId, long[] roleIds)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		getService().unsetUserRoles(userId, roleIds);
 	}
 

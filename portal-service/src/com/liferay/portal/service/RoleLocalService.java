@@ -211,7 +211,8 @@ public interface RoleLocalService {
 			com.liferay.portal.SystemException;
 
 	public void unsetUserRoles(long userId, long[] roleIds)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Role updateRole(long roleId,
 		java.lang.String name,

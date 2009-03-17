@@ -24,6 +24,7 @@ package com.liferay.portlet.enterpriseadmin.util;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -54,6 +55,8 @@ import com.liferay.portal.service.AddressServiceUtil;
 import com.liferay.portal.service.EmailAddressServiceUtil;
 import com.liferay.portal.service.OrgLaborServiceUtil;
 import com.liferay.portal.service.PhoneServiceUtil;
+import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.WebsiteServiceUtil;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
@@ -119,6 +122,31 @@ public class EnterpriseAdminUtil {
 		}
 
 		return "lfr-role " + cssClassName;
+	}
+
+	public static long[] addRequiredRoles(long userId, long[] roleIds)
+		throws PortalException, SystemException {
+
+		User user = UserLocalServiceUtil.getUser(userId);
+
+		return addRequiredRoles(user.getUserId(), roleIds);
+	}
+
+	public static long[] addRequiredRoles(User user, long[] roleIds)
+		throws PortalException, SystemException {
+
+		if (user.isDefaultUser()) {
+			return removeRequiredRoles(user, roleIds);
+		}
+
+		Role role = RoleLocalServiceUtil.getRole(
+			user.getCompanyId(), RoleConstants.USER);
+
+		if (!ArrayUtil.contains(roleIds, role.getRoleId())) {
+			roleIds = ArrayUtil.append(roleIds, role.getRoleId());
+		}
+
+		return roleIds;
 	}
 
 	public static List<Group> filterGroups(
@@ -767,6 +795,25 @@ public class EnterpriseAdminUtil {
 		}
 
 		return websites;
+	}
+
+	public static long[] removeRequiredRoles(long userId, long[] roleIds)
+		throws PortalException, SystemException {
+
+		User user = UserLocalServiceUtil.getUser(userId);
+
+		return removeRequiredRoles(user, roleIds);
+	}
+
+	public static long[] removeRequiredRoles(User user, long[] roleIds)
+		throws PortalException, SystemException {
+
+		Role role = RoleLocalServiceUtil.getRole(
+			user.getCompanyId(), RoleConstants.USER);
+
+		roleIds = ArrayUtil.remove(roleIds, role.getRoleId());
+
+		return roleIds;
 	}
 
 	public static void updateAddresses(
