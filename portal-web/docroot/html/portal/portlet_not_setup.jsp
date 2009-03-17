@@ -22,6 +22,14 @@
  */
 %>
 
-<%@ include file="/html/portal/init.jsp" %>
+<%@ include file="/html/portlet/init.jsp" %>
 
-<liferay-ui:message key="please-contact-the-administrator-to-setup-this-portlet" />
+<%
+renderRequest.setAttribute(WebKeys.PORTLET_CONFIGURATOR_VISIBILITY, Boolean.TRUE);
+%>
+
+<div class="portlet-msg-info">
+	<a href="<%= portletDisplay.getURLConfiguration() %>">
+		<liferay-ui:message key="please-configure-this-portlet-to-make-it-visible-to-all-users" />
+	</a>
+</div>
