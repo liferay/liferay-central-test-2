@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletURLListener;
@@ -207,7 +208,11 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 	public PortletURLImpl createPortletURLImpl(
 		String portletName, String lifecycle) {
 
-		long plid = _plid;
+		return createPortletURLImpl(_plid, portletName, lifecycle);
+	}
+
+	public PortletURLImpl createPortletURLImpl(
+		long plid, String portletName, String lifecycle) {
 
 		try {
 			Layout layout = (Layout)_portletRequestImpl.getAttribute(
@@ -236,17 +241,17 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 				// Backwards compatibility
 
 				plid = GetterUtil.getLong(portletSetup.getValue(
-					"portlet-setup-link-to-plid", String.valueOf(_plid)));
-			}
-
-			if (plid <= 0) {
-				plid = _plid;
+					"portlet-setup-link-to-plid", String.valueOf(plid)));
 			}
 		}
 		catch (SystemException e) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(e);
 			}
+		}
+
+		if (plid == LayoutConstants.DEFAULT_PLID) {
+			plid = _plid;
 		}
 
 		PortletURLImpl portletURLImpl = null;

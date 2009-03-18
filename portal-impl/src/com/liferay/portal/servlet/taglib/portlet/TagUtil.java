@@ -90,7 +90,7 @@ public class TagUtil {
 					JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 			portletURL = portletResponse.createPortletURLImpl(
-				portletName, lifecycle);
+				plid, portletName, lifecycle);
 		}
 
 		return portletURL;
