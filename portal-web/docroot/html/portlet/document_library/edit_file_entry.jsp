@@ -103,7 +103,7 @@ portletURL.setParameter("name", name);
 			targetVersion.val(rowIds[0].value);
 		}
 
-		submitForm(document.<portlet:namespace />fm);
+		submitForm(document.<portlet:namespace />fm2);
 	}
 
 	function <portlet:namespace />initRowsChecked() {
