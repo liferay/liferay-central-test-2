@@ -200,6 +200,10 @@ public class PortalUtil {
 		return getPortal().getControlPanelPortlets(companyId, category);
 	}
 
+	public static String getCurrentCompleteURL(HttpServletRequest request) {
+		return getPortal().getCurrentCompleteURL(request);
+	}
+
 	public static String getCurrentURL(HttpServletRequest request) {
 		return getPortal().getCurrentURL(request);
 	}

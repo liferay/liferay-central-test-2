@@ -65,6 +65,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String CONFIGURATION_ACTION_PATH = "CONFIGURATION_ACTION_PATH";
 
+	public static final String CURRENT_COMPLETE_URL = "CURRENT_COMPLETE_URL";
+
 	public static final String CURRENT_URL = "CURRENT_URL";
 
 	public static final String DIFF_RESULTS = "DIFF_RESULTS";

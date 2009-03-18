@@ -161,6 +161,8 @@ public interface Portal {
 			long companyId, String category)
 		throws SystemException;
 
+	public String getCurrentCompleteURL(HttpServletRequest request);
+
 	public String getCurrentURL(HttpServletRequest request);
 
 	public String getCurrentURL(PortletRequest portletRequest);

@@ -113,6 +113,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 			_log.debug("Company id " + companyId);
 		}
 
+		PortalUtil.getCurrentCompleteURL(request);
 		PortalUtil.getCurrentURL(request);
 
 		HttpSession session = request.getSession();

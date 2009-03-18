@@ -672,6 +672,20 @@ public class PortalImpl implements Portal {
 		return new ArrayList<Portlet>(portletsSet);
 	}
 
+	public String getCurrentCompleteURL(HttpServletRequest request) {
+		String currentCompleteURL = (String)request.getAttribute(
+			WebKeys.CURRENT_COMPLETE_URL);
+
+		if (currentCompleteURL == null) {
+			currentCompleteURL = HttpUtil.getCompleteURL(request);
+
+			request.setAttribute(
+				WebKeys.CURRENT_COMPLETE_URL, currentCompleteURL);
+		}
+
+		return currentCompleteURL;
+	}
+
 	public String getCurrentURL(HttpServletRequest request) {
 		String currentURL = (String)request.getAttribute(WebKeys.CURRENT_URL);
 
@@ -679,24 +693,17 @@ public class PortalImpl implements Portal {
 			currentURL = ParamUtil.getString(request, "currentURL");
 
 			if (Validator.isNull(currentURL)) {
-				if (true) {
-					currentURL = HttpUtil.getCompleteURL(request);
-				}
-				else {
-
-					// Do we need to trim redirects?
-
-					currentURL = _getCurrentURL(request);
-				}
+				currentURL = HttpUtil.getCompleteURL(request);
 
 				if ((Validator.isNotNull(currentURL)) &&
-					(currentURL.indexOf("j_security_check") == -1)) {
+					(currentURL.indexOf(_J_SECURITY_CHECK) == -1)) {
 
 					currentURL = currentURL.substring(
-						currentURL.indexOf("://") + 3, currentURL.length());
+						currentURL.indexOf(Http.PROTOCOL_DELIMITER) +
+							Http.PROTOCOL_DELIMITER.length());
 
 					currentURL = currentURL.substring(
-						currentURL.indexOf("/"), currentURL.length());
+						currentURL.indexOf(StringPool.SLASH));
 				}
 
 				if (Validator.isNotNull(currentURL) &&
@@ -3270,74 +3277,6 @@ public class PortalImpl implements Portal {
 		}
 	}
 
-	private String _getCurrentURL(HttpServletRequest request) {
-		StringBuilder sb = new StringBuilder();
-
-		StringBuffer requestURL = request.getRequestURL();
-
-		if (requestURL != null) {
-			sb.append(requestURL.toString());
-		}
-
-		String queryString = request.getQueryString();
-
-		if (Validator.isNull(queryString)) {
-			return sb.toString();
-		}
-
-		String portletId = request.getParameter("p_p_id");
-
-		String redirectParam = "redirect";
-
-		if (Validator.isNotNull(portletId)) {
-			redirectParam = getPortletNamespace(portletId) + redirectParam;
-		}
-
-		Map<String, String[]> parameterMap = HttpUtil.parameterMapFromString(
-			queryString);
-
-		String[] redirectValues = parameterMap.get(redirectParam);
-
-		if ((redirectValues != null) && (redirectValues.length > 0)) {
-
-			// Prevent the redirect for GET requests from growing indefinitely
-			// and using up all the available space by remembering only the
-			// first redirect.
-
-			String redirect = HttpUtil.decodeURL(
-				GetterUtil.getString(redirectValues[0]));
-
-			int pos = redirect.indexOf(StringPool.QUESTION);
-
-			if (pos != -1) {
-				String subqueryString = redirect.substring(
-					pos + 1, redirect.length());
-
-				Map<String, String[]> subparameterMap =
-					HttpUtil.parameterMapFromString(subqueryString);
-
-				String[] subredirectValues = subparameterMap.get(redirectParam);
-
-				if ((subredirectValues != null) &&
-					(subredirectValues.length > 0)) {
-
-					String subredirect = HttpUtil.decodeURL(
-						GetterUtil.getString(subredirectValues[0]));
-
-					parameterMap.put(redirectParam, new String[] {subredirect});
-
-					queryString = HttpUtil.parameterMapToString(
-						parameterMap, false);
-				}
-			}
-		}
-
-		sb.append(StringPool.QUESTION);
-		sb.append(queryString);
-
-		return sb.toString();
-	}
-
 	private long _getPlidFromPortletId(
 		long groupId, boolean privateLayout, String portletId) {
 
@@ -3543,6 +3482,8 @@ public class PortalImpl implements Portal {
 			dbUtil.getTemplateTrue()
 		};
 	}
+
+	private static final String _J_SECURITY_CHECK = "j_security_check";
 
 	private static final String _JSESSIONID = ";jsessionid=";
 
