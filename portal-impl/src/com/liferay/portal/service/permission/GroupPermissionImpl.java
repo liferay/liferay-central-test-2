@@ -88,6 +88,16 @@ public class GroupPermissionImpl implements GroupPermission {
 				}
 			}
 		}
+		else if (actionId.equals(ActionKeys.ASSIGN_MEMBERS)) {
+			Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+			if (group.isOrganization()) {
+				long organizationId = group.getClassPK();
+
+				return OrganizationPermissionUtil.contains(
+					permissionChecker, organizationId, ActionKeys.MANAGE_USERS);
+			}
+		}
 
 		// Group id must be set so that users can modify their personal pages
 
