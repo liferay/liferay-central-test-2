@@ -63,6 +63,9 @@ public class AbsoluteRedirectsResponse extends HttpServletResponseWrapper {
 				redirect, _request.getSession().getId());
 		}
 
+		_request.setAttribute(
+			AbsoluteRedirectsResponse.class.getName(), redirect);
+
 		super.sendRedirect(redirect);
 	}
 

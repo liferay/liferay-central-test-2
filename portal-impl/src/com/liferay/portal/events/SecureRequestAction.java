@@ -27,8 +27,8 @@ import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Http;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.util.PortalUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -59,9 +59,19 @@ public class SecureRequestAction extends Action {
 				return;
 			}
 
+			if (response.isCommitted()) {
+				return;
+			}
+
 			String redirect = getRedirect(request);
 
-			response.sendRedirect(redirect);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Redirect " + redirect);
+			}
+
+			if (redirect != null) {
+				response.sendRedirect(redirect);
+			}
 		}
 		catch (Exception e) {
 			throw new ActionException(e);
@@ -69,20 +79,25 @@ public class SecureRequestAction extends Action {
 	}
 
 	protected String getRedirect(HttpServletRequest request) {
-		String currentURL = PortalUtil.getCurrentURL(request);
+		String unsecureCompleteURL = HttpUtil.getCompleteURL(request);
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Unsecure URL " + currentURL);
+			_log.debug("Unsecure URL " + unsecureCompleteURL);
 		}
 
-		currentURL = StringUtil.replaceFirst(
-			currentURL, Http.HTTP_WITH_SLASH, Http.HTTPS_WITH_SLASH);
+		String secureCompleteURL = StringUtil.replaceFirst(
+			unsecureCompleteURL, Http.HTTP_WITH_SLASH, Http.HTTPS_WITH_SLASH);
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Secure URL " + currentURL);
+			_log.debug("Secure URL " + secureCompleteURL);
 		}
 
-		return currentURL;
+		if (unsecureCompleteURL.equals(secureCompleteURL)) {
+			return null;
+		}
+		else {
+			return secureCompleteURL;
+		}
 	}
 
 	protected boolean isRequiresSecure(HttpServletRequest request) {

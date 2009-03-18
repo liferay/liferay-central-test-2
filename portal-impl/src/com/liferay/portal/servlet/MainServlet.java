@@ -717,6 +717,12 @@ public class MainServlet extends ActionServlet {
 			return;
 		}
 
+		if (request.getAttribute(
+				AbsoluteRedirectsResponse.class.getName()) != null) {
+
+			return;
+		}
+
 		if (request.getAttribute(WebKeys.THEME_DISPLAY) == null) {
 			return;
 		}
