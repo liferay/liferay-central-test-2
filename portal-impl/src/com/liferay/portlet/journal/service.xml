@@ -102,6 +102,7 @@
 		<reference package-path="com.liferay.portal" entity="PortletPreferences" />
 		<reference package-path="com.liferay.portal" entity="Resource" />
 		<reference package-path="com.liferay.portal" entity="User" />
+		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
 		<reference package-path="com.liferay.portlet.messageboards" entity="MBMessage" />
 		<reference package-path="com.liferay.portlet.ratings" entity="RatingsStats" />
 		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
@@ -297,6 +298,7 @@
 		<reference package-path="com.liferay.counter" entity="Counter" />
 		<reference package-path="com.liferay.portal" entity="Resource" />
 		<reference package-path="com.liferay.portal" entity="User" />
+		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
 	</entity>
 	<entity name="JournalStructure" uuid="true" local-service="true" remote-service="true">
 
@@ -353,6 +355,7 @@
 		<reference package-path="com.liferay.portal" entity="Resource" />
 		<reference package-path="com.liferay.portal" entity="User" />
 		<reference package-path="com.liferay.portal" entity="WebDAVProps" />
+		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
 	</entity>
 	<entity name="JournalTemplate" uuid="true" local-service="true" remote-service="true">
 
@@ -418,6 +421,7 @@
 		<reference package-path="com.liferay.portal" entity="Resource" />
 		<reference package-path="com.liferay.portal" entity="User" />
 		<reference package-path="com.liferay.portal" entity="WebDAVProps" />
+		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
 	</entity>
 	<exceptions>
 		<exception>ArticleContent</exception>

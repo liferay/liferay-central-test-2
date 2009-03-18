@@ -35,8 +35,10 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.journal.DuplicateTemplateIdException;
 import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.RequiredTemplateException;
@@ -62,6 +64,7 @@ import java.util.List;
  * </a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
 public class JournalTemplateLocalServiceImpl
@@ -72,15 +75,13 @@ public class JournalTemplateLocalServiceImpl
 			boolean autoTemplateId, String structureId, String name,
 			String description, String xsl, boolean formatXsl, String langType,
 			boolean cacheable, boolean smallImage, String smallImageURL,
-			File smallFile, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			File smallFile, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return addTemplate(
 			null, userId, groupId, templateId, autoTemplateId, structureId,
 			name, description, xsl, formatXsl, langType, cacheable, smallImage,
-			smallImageURL, smallFile, Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
+			smallImageURL, smallFile, serviceContext);
 	}
 
 	public JournalTemplate addTemplate(
@@ -88,41 +89,7 @@ public class JournalTemplateLocalServiceImpl
 			boolean autoTemplateId, String structureId, String name,
 			String description, String xsl, boolean formatXsl, String langType,
 			boolean cacheable, boolean smallImage, String smallImageURL,
-			File smallFile, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		return addTemplate(
-			uuid, userId, groupId, templateId, autoTemplateId, structureId,
-			name, description, xsl, formatXsl, langType, cacheable, smallImage,
-			smallImageURL, smallFile, Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
-	}
-
-	public JournalTemplate addTemplate(
-			long userId, long groupId, String templateId,
-			boolean autoTemplateId, String structureId, String name,
-			String description, String xsl, boolean formatXsl, String langType,
-			boolean cacheable, boolean smallImage, String smallImageURL,
-			File smallFile, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		return addTemplate(
-			null, userId, groupId, templateId, autoTemplateId, structureId,
-			name, description, xsl, formatXsl, langType, cacheable, smallImage,
-			smallImageURL, smallFile, null, null, communityPermissions,
-			guestPermissions);
-	}
-
-	public JournalTemplate addTemplate(
-			String uuid, long userId, long groupId, String templateId,
-			boolean autoTemplateId, String structureId, String name,
-			String description, String xsl, boolean formatXsl, String langType,
-			boolean cacheable, boolean smallImage, String smallImageURL,
-			File smallFile, Boolean addCommunityPermissions,
-			Boolean addGuestPermissions, String[] communityPermissions,
-			String[] guestPermissions)
+			File smallFile, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Template
@@ -192,17 +159,24 @@ public class JournalTemplateLocalServiceImpl
 
 		// Resources
 
-		if ((addCommunityPermissions != null) &&
-			(addGuestPermissions != null)) {
+		if (serviceContext.getAddCommunityPermissions() ||
+			serviceContext.getAddGuestPermissions()) {
 
 			addTemplateResources(
-				template, addCommunityPermissions.booleanValue(),
-				addGuestPermissions.booleanValue());
+				template, serviceContext.getAddCommunityPermissions(),
+				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addTemplateResources(
-				template, communityPermissions, guestPermissions);
+				template, serviceContext.getCommunityPermissions(),
+				serviceContext.getGuestPermissions());
 		}
+
+		// Expando
+
+		ExpandoBridge expandoBridge = template.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 
 		return template;
 	}
@@ -367,6 +341,11 @@ public class JournalTemplateLocalServiceImpl
 		// Small image
 
 		imageLocalService.deleteImage(template.getSmallImageId());
+
+		// Expando
+
+		expandoValueLocalService.deleteValues(
+			JournalTemplate.class.getName(), template.getPrimaryKey());
 
 		// WebDAVProps
 
@@ -535,7 +514,7 @@ public class JournalTemplateLocalServiceImpl
 			long groupId, String templateId, String structureId, String name,
 			String description, String xsl, boolean formatXsl, String langType,
 			boolean cacheable, boolean smallImage, String smallImageURL,
-			File smallFile)
+			File smallFile, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Template
@@ -598,6 +577,12 @@ public class JournalTemplateLocalServiceImpl
 
 		saveImages(
 			smallImage, template.getSmallImageId(), smallFile, smallBytes);
+
+		// Expando
+
+		ExpandoBridge expandoBridge = template.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 
 		return template;
 	}

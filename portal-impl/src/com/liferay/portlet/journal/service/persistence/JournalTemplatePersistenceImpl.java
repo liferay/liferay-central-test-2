@@ -2444,5 +2444,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WebDAVPropsPersistence.impl")
 	protected com.liferay.portal.service.persistence.WebDAVPropsPersistence webDAVPropsPersistence;
+	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl")
+	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
 	private static Log _log = LogFactoryUtil.getLog(JournalTemplatePersistenceImpl.class);
 }

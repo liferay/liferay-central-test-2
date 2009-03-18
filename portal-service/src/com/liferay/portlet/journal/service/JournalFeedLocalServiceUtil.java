@@ -118,36 +118,14 @@ public class JournalFeedLocalServiceUtil {
 		java.lang.String targetLayoutFriendlyUrl,
 		java.lang.String targetPortletId, java.lang.String contentField,
 		java.lang.String feedType, double feedVersion,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .addFeed(userId, groupId, feedId, autoFeedId, name,
 			description, type, structureId, templateId, rendererTemplateId,
 			delta, orderByCol, orderByType, targetLayoutFriendlyUrl,
-			targetPortletId, contentField, feedType, feedVersion,
-			addCommunityPermissions, addGuestPermissions);
-	}
-
-	public static com.liferay.portlet.journal.model.JournalFeed addFeed(
-		long userId, long groupId, java.lang.String feedId, boolean autoFeedId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String type, java.lang.String structureId,
-		java.lang.String templateId, java.lang.String rendererTemplateId,
-		int delta, java.lang.String orderByCol, java.lang.String orderByType,
-		java.lang.String targetLayoutFriendlyUrl,
-		java.lang.String targetPortletId, java.lang.String contentField,
-		java.lang.String feedType, double feedVersion,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addFeed(userId, groupId, feedId, autoFeedId, name,
-			description, type, structureId, templateId, rendererTemplateId,
-			delta, orderByCol, orderByType, targetLayoutFriendlyUrl,
-			targetPortletId, contentField, feedType, feedVersion,
-			communityPermissions, guestPermissions);
+			targetPortletId, contentField, feedType, feedVersion, serviceContext);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalFeed addFeed(
@@ -160,62 +138,14 @@ public class JournalFeedLocalServiceUtil {
 		java.lang.String targetLayoutFriendlyUrl,
 		java.lang.String targetPortletId, java.lang.String contentField,
 		java.lang.String feedType, double feedVersion,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .addFeed(uuid, userId, groupId, feedId, autoFeedId, name,
 			description, type, structureId, templateId, rendererTemplateId,
 			delta, orderByCol, orderByType, targetLayoutFriendlyUrl,
-			targetPortletId, contentField, feedType, feedVersion,
-			addCommunityPermissions, addGuestPermissions);
-	}
-
-	public static com.liferay.portlet.journal.model.JournalFeed addFeed(
-		java.lang.String uuid, long userId, long groupId,
-		java.lang.String feedId, boolean autoFeedId, java.lang.String name,
-		java.lang.String description, java.lang.String type,
-		java.lang.String structureId, java.lang.String templateId,
-		java.lang.String rendererTemplateId, int delta,
-		java.lang.String orderByCol, java.lang.String orderByType,
-		java.lang.String targetLayoutFriendlyUrl,
-		java.lang.String targetPortletId, java.lang.String contentField,
-		java.lang.String feedType, double feedVersion,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addFeed(uuid, userId, groupId, feedId, autoFeedId, name,
-			description, type, structureId, templateId, rendererTemplateId,
-			delta, orderByCol, orderByType, targetLayoutFriendlyUrl,
-			targetPortletId, contentField, feedType, feedVersion,
-			communityPermissions, guestPermissions);
-	}
-
-	public static com.liferay.portlet.journal.model.JournalFeed addFeed(
-		java.lang.String uuid, long userId, long groupId,
-		java.lang.String feedId, boolean autoFeedId, java.lang.String name,
-		java.lang.String description, java.lang.String type,
-		java.lang.String structureId, java.lang.String templateId,
-		java.lang.String rendererTemplateId, int delta,
-		java.lang.String orderByCol, java.lang.String orderByType,
-		java.lang.String targetLayoutFriendlyUrl,
-		java.lang.String targetPortletId, java.lang.String contentField,
-		java.lang.String feedType, double feedVersion,
-		java.lang.Boolean addCommunityPermissions,
-		java.lang.Boolean addGuestPermissions,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addFeed(uuid, userId, groupId, feedId, autoFeedId, name,
-			description, type, structureId, templateId, rendererTemplateId,
-			delta, orderByCol, orderByType, targetLayoutFriendlyUrl,
-			targetPortletId, contentField, feedType, feedVersion,
-			addCommunityPermissions, addGuestPermissions, communityPermissions,
-			guestPermissions);
+			targetPortletId, contentField, feedType, feedVersion, serviceContext);
 	}
 
 	public static void addFeedResources(long feedId,
@@ -349,14 +279,15 @@ public class JournalFeedLocalServiceUtil {
 		java.lang.String orderByCol, java.lang.String orderByType,
 		java.lang.String targetLayoutFriendlyUrl,
 		java.lang.String targetPortletId, java.lang.String contentField,
-		java.lang.String feedType, double feedVersion)
+		java.lang.String feedType, double feedVersion,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .updateFeed(groupId, feedId, name, description, type,
 			structureId, templateId, rendererTemplateId, delta, orderByCol,
 			orderByType, targetLayoutFriendlyUrl, targetPortletId,
-			contentField, feedType, feedVersion);
+			contentField, feedType, feedVersion, serviceContext);
 	}
 
 	public static JournalFeedLocalService getService() {

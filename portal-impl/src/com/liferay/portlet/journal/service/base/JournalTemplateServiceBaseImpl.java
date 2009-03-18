@@ -40,6 +40,10 @@ import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
 
+import com.liferay.portlet.expando.service.ExpandoValueLocalService;
+import com.liferay.portlet.expando.service.ExpandoValueService;
+import com.liferay.portlet.expando.service.persistence.ExpandoValueFinder;
+import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalService;
 import com.liferay.portlet.journal.service.JournalArticleLocalService;
 import com.liferay.portlet.journal.service.JournalArticleResourceLocalService;
@@ -382,6 +386,40 @@ public abstract class JournalTemplateServiceBaseImpl extends PrincipalBean
 		this.webDAVPropsPersistence = webDAVPropsPersistence;
 	}
 
+	public ExpandoValueLocalService getExpandoValueLocalService() {
+		return expandoValueLocalService;
+	}
+
+	public void setExpandoValueLocalService(
+		ExpandoValueLocalService expandoValueLocalService) {
+		this.expandoValueLocalService = expandoValueLocalService;
+	}
+
+	public ExpandoValueService getExpandoValueService() {
+		return expandoValueService;
+	}
+
+	public void setExpandoValueService(ExpandoValueService expandoValueService) {
+		this.expandoValueService = expandoValueService;
+	}
+
+	public ExpandoValuePersistence getExpandoValuePersistence() {
+		return expandoValuePersistence;
+	}
+
+	public void setExpandoValuePersistence(
+		ExpandoValuePersistence expandoValuePersistence) {
+		this.expandoValuePersistence = expandoValuePersistence;
+	}
+
+	public ExpandoValueFinder getExpandoValueFinder() {
+		return expandoValueFinder;
+	}
+
+	public void setExpandoValueFinder(ExpandoValueFinder expandoValueFinder) {
+		this.expandoValueFinder = expandoValueFinder;
+	}
+
 	@BeanReference(name = "com.liferay.portlet.journal.service.JournalArticleLocalService.impl")
 	protected JournalArticleLocalService journalArticleLocalService;
 	@BeanReference(name = "com.liferay.portlet.journal.service.JournalArticleService.impl")
@@ -454,4 +492,12 @@ public abstract class JournalTemplateServiceBaseImpl extends PrincipalBean
 	protected WebDAVPropsLocalService webDAVPropsLocalService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WebDAVPropsPersistence.impl")
 	protected WebDAVPropsPersistence webDAVPropsPersistence;
+	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoValueLocalService.impl")
+	protected ExpandoValueLocalService expandoValueLocalService;
+	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoValueService.impl")
+	protected ExpandoValueService expandoValueService;
+	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl")
+	protected ExpandoValuePersistence expandoValuePersistence;
+	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.impl")
+	protected ExpandoValueFinder expandoValueFinder;
 }
