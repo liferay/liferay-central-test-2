@@ -87,26 +87,19 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 		}
 
 		String titlePattern = null;
-		Object[] titleArguments = null;
 
 		if (activityType == DLActivityKeys.ADD_FILE_ENTRY) {
 			titlePattern = "activity-document-library-add-file";
-
-			if (Validator.isNotNull(groupName)) {
-				titlePattern += "-in";
-			}
-
-			titleArguments = new Object[] {creatorUserName, groupName};
 		}
 		else if (activityType == DLActivityKeys.UPDATE_FILE_ENTRY) {
 			titlePattern = "activity-document-library-update-file";
-
-			if (Validator.isNotNull(groupName)) {
-				titlePattern += "-in";
-			}
-
-			titleArguments = new Object[] {creatorUserName, groupName};
 		}
+
+		if (Validator.isNotNull(groupName)) {
+			titlePattern += "-in";
+		}
+
+		Object[] titleArguments = new Object[] {creatorUserName, groupName};
 
 		String title = themeDisplay.translate(titlePattern, titleArguments);
 

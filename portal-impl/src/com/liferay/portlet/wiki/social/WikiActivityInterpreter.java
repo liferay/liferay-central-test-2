@@ -88,26 +88,19 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 		}
 
 		String titlePattern = null;
-		Object[] titleArguments = null;
 
 		if (activityType == WikiActivityKeys.ADD_PAGE) {
 			titlePattern = "activity-wiki-add-page";
-
-			if (Validator.isNotNull(groupName)) {
-				titlePattern += "-in";
-			}
-
-			titleArguments = new Object[] {creatorUserName, groupName};
 		}
 		else if (activityType == WikiActivityKeys.UPDATE_PAGE) {
 			titlePattern = "activity-wiki-update-page";
-
-			if (Validator.isNotNull(groupName)) {
-				titlePattern += "-in";
-			}
-
-			titleArguments = new Object[] {creatorUserName, groupName};
 		}
+
+		if (Validator.isNotNull(groupName)) {
+			titlePattern += "-in";
+		}
+
+		Object[] titleArguments = new Object[] {creatorUserName, groupName};
 
 		String title = themeDisplay.translate(titlePattern, titleArguments);
 
