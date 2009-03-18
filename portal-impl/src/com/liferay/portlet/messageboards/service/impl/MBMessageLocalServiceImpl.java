@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
@@ -416,7 +417,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		if (!category.isDiscussion()) {
 			mbStatsUserLocalService.updateStatsUser(
-				category.getGroupId(), userId);
+				category.getGroupId(), userId, Constants.ADD);
 		}
 
 		logAddMessage(messageId, stopWatch, 6);
@@ -759,6 +760,16 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		// Message flags
 
 		mbMessageFlagPersistence.removeByMessageId(message.getMessageId());
+
+		// Statistics
+
+		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
+			message.getCategoryId());
+
+		if (!category.isDiscussion()) {
+			mbStatsUserLocalService.updateStatsUser(
+				category.getGroupId(), message.getUserId(), Constants.DELETE);
+		}
 
 		// Resources
 

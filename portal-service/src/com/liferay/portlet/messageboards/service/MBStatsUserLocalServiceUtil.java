@@ -145,6 +145,12 @@ public class MBStatsUserLocalServiceUtil {
 		return getService().updateStatsUser(groupId, userId);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBStatsUser updateStatsUser(
+		long groupId, long userId, java.lang.String action)
+		throws com.liferay.portal.SystemException {
+		return getService().updateStatsUser(groupId, userId, action);
+	}
+
 	public static MBStatsUserLocalService getService() {
 		if (_service == null) {
 			throw new RuntimeException("MBStatsUserLocalService is not set");
