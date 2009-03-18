@@ -112,27 +112,11 @@ public class AddNullTitleTest extends BaseTestCase {
 		selenium.type("//body",
 			RuntimeVariables.replace("This is a test null article!"));
 		selenium.selectFrame("relative=top");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//input[@value='Save and Approve']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Save and Approve']"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"You have entered invalid data. Please try again."));
 		assertTrue(selenium.isTextPresent("Please enter a valid name."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Cancel']"));
 		selenium.waitForPageToLoad("30000");

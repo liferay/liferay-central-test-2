@@ -54,23 +54,6 @@ public class ApproveArticleTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//li[@id='_15_tabs1web-contentTabsId']/a"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=1.1")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("link=1.1"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
@@ -96,21 +79,5 @@ public class ApproveArticleTest extends BaseTestCase {
 		assertFalse(selenium.isElementPresent("link=Not Approved"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=1.1")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
 	}
 }

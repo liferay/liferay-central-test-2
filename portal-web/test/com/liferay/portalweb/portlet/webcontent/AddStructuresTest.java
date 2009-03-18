@@ -53,72 +53,17 @@ public class AddStructuresTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Structures"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Add Structure']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Structure']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_15_newStructureId")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.typeKeys("_15_newStructureId", RuntimeVariables.replace("test"));
 		selenium.type("_15_newStructureId", RuntimeVariables.replace("test"));
-		selenium.typeKeys("_15_name",
-			RuntimeVariables.replace("Test Web Content Structure"));
 		selenium.type("_15_name",
 			RuntimeVariables.replace("Test Web Content Structure"));
-		selenium.typeKeys("_15_description",
-			RuntimeVariables.replace("This is a test web content structure!"));
 		selenium.type("_15_description",
 			RuntimeVariables.replace("This is a test web content structure!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Row']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_15_structure_el0_name")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.typeKeys("_15_structure_el0_name",
 			RuntimeVariables.replace("Itp"));
 		selenium.type("_15_structure_el0_name", RuntimeVariables.replace("Itp"));
@@ -126,23 +71,6 @@ public class AddStructuresTest extends BaseTestCase {
 			RuntimeVariables.replace("label=Link to Page"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Row']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_15_structure_el0_name")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.typeKeys("_15_structure_el0_name",
 			RuntimeVariables.replace("title"));
 		selenium.type("_15_structure_el0_name",

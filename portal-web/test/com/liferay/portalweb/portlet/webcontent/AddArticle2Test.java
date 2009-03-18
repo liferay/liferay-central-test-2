@@ -51,44 +51,9 @@ public class AddArticle2Test extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Web Content"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//input[@value='Add Web Content']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Web Content']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_15_title")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.typeKeys("_15_title",
 			RuntimeVariables.replace("Test Web Content Article 2"));
 		selenium.type("_15_title",
@@ -185,23 +150,6 @@ public class AddArticle2Test extends BaseTestCase {
 			RuntimeVariables.replace("label=12"));
 		selenium.select("_15_reviewDateMinute",
 			RuntimeVariables.replace("label=:00"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_15_description")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_15_description",
 			RuntimeVariables.replace("Test Description!"));
 

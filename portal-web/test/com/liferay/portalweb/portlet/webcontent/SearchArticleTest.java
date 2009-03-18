@@ -79,261 +79,56 @@ public class SearchArticleTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("No Web Content was found."));
 		selenium.type("_15_searchArticleId", RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_15_version")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_15_version", RuntimeVariables.replace("1.0"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Web Content Article"));
-		selenium.type("_15_version", RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_15_version")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_15_version", RuntimeVariables.replace("1.1"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("No Web Content was found."));
 		selenium.type("_15_version", RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_15_title")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_15_title", RuntimeVariables.replace("Test"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Web Content Article"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_15_title")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_15_title", RuntimeVariables.replace("Test1"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("No Web Content was found."));
 		selenium.type("_15_title", RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_15_description")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_15_description", RuntimeVariables.replace("test"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Web Content Article"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_15_description")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_15_description", RuntimeVariables.replace("test1"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("No Web Content was found."));
 		selenium.type("_15_description", RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_15_content")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_15_content", RuntimeVariables.replace("test"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Web Content Article"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_15_content")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_15_content", RuntimeVariables.replace("test1"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("No Web Content was found."));
 		selenium.type("_15_content", RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_15_type")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.select("_15_type",
 			RuntimeVariables.replace("label=Announcements"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Web Content Article"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_15_type")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.select("_15_type", RuntimeVariables.replace("label=Blogs"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("No Web Content was found."));
 		selenium.select("_15_type", RuntimeVariables.replace("label="));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_15_status")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.select("_15_status", RuntimeVariables.replace("label=Approved"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Web Content Article"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_15_status")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.select("_15_status",
 			RuntimeVariables.replace("label=Not Approved"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));

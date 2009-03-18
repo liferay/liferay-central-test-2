@@ -77,110 +77,25 @@ public class SearchStructuresTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Web Content Structure"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_15_searchStructureId")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_15_searchStructureId", RuntimeVariables.replace("Test1"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("No structures were found."));
 		selenium.type("_15_searchStructureId", RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_15_name")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_15_name", RuntimeVariables.replace("Test"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Web Content Structure"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_15_name")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_15_name", RuntimeVariables.replace("Test1"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("No structures were found."));
 		selenium.type("_15_name", RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_15_description")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_15_description",
 			RuntimeVariables.replace("This is a test Web Content Structure!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Web Content Structure"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_15_description")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_15_description",
 			RuntimeVariables.replace("This is a test Web Content Structure!!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));

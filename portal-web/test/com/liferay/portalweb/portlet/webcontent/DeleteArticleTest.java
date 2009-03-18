@@ -54,23 +54,6 @@ public class DeleteArticleTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//li[@id='_15_tabs1web-contentTabsId']/a"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=1.1")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("link=1.1"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
@@ -95,8 +78,8 @@ public class DeleteArticleTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to deactivate this[\\s\\S]$"));
-		assertFalse(selenium.isElementPresent("link=1.1"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertFalse(selenium.isElementPresent("link=1.1"));
 	}
 }

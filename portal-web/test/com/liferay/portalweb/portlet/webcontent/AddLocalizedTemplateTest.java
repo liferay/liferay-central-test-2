@@ -40,6 +40,8 @@ public class AddLocalizedTemplateTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Template']"));
 		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_15_newTemplateId",
+			RuntimeVariables.replace("LOCALIZED"));
 		selenium.type("_15_newTemplateId", RuntimeVariables.replace("LOCALIZED"));
 		selenium.type("_15_name",
 			RuntimeVariables.replace("Test Localized Template"));

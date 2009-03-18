@@ -53,51 +53,13 @@ public class AddTemplateTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Templates"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Add Template']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Template']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_15_newTemplateId")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.typeKeys("_15_newTemplateId", RuntimeVariables.replace("Test"));
 		selenium.type("_15_newTemplateId", RuntimeVariables.replace("Test"));
-		selenium.typeKeys("_15_name",
-			RuntimeVariables.replace("Test Web Content Template"));
 		selenium.type("_15_name",
 			RuntimeVariables.replace("Test Web Content Template"));
-		selenium.typeKeys("_15_description",
-			RuntimeVariables.replace("This is a test web content template!"));
 		selenium.type("_15_description",
 			RuntimeVariables.replace("This is a test web content template!"));
 		selenium.type("_15_xsl",

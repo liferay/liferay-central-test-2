@@ -55,69 +55,21 @@ public class AddNullArticleTest extends BaseTestCase {
 				"//input[@value='Add Web Content']"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_15_title")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.typeKeys("_15_title",
-			RuntimeVariables.replace("Null Test Article"));
-		selenium.type("_15_title", RuntimeVariables.replace("Null Test Article"));
+			RuntimeVariables.replace("Null Content Test Article"));
+		selenium.type("_15_title",
+			RuntimeVariables.replace("Null Content Test Article"));
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Save and Approve']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Cancel']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isTextPresent("Please enter valid content."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Cancel']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Web Content")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Web Content"));
+		selenium.click(RuntimeVariables.replace(
+				"//li[@id='_15_tabs1web-contentTabsId']/a"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("link=Null Test Article"));
+		assertFalse(selenium.isElementPresent("link=Null Content Test Article"));
 	}
 }

@@ -54,23 +54,6 @@ public class WorkflowTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//li[@id='_15_tabs1web-contentTabsId']/a"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Test Web Content Article 2")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace(
 				"Link=Test Web Content Article 2"));
 		selenium.waitForPageToLoad("30000");
@@ -93,23 +76,6 @@ public class WorkflowTest extends BaseTestCase {
 		}
 
 		selenium.click("_15_incrementVersionCheckbox");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("Link=1.1"));

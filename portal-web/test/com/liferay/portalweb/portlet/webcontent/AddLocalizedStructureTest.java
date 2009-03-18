@@ -40,10 +40,10 @@ public class AddLocalizedStructureTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Structure']"));
 		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_15_newStructureId",
+			RuntimeVariables.replace("LOCALIZED"));
 		selenium.type("_15_newStructureId",
 			RuntimeVariables.replace("LOCALIZED"));
-		selenium.typeKeys("_15_name",
-			RuntimeVariables.replace("Test Localized Structure"));
 		selenium.type("_15_name",
 			RuntimeVariables.replace("Test Localized Structure"));
 		selenium.type("_15_description",
