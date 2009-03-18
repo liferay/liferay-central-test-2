@@ -300,7 +300,7 @@ public interface IGImageLocalService {
 
 	public void updateTagsAsset(long userId,
 		com.liferay.portlet.imagegallery.model.IGImage image,
-		java.lang.String[] tagsEntries)
+		java.lang.String[] tagsCategories, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

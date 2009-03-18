@@ -44,6 +44,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.imagegallery.DuplicateImageNameException;
 import com.liferay.portlet.imagegallery.ImageNameException;
 import com.liferay.portlet.imagegallery.ImageSizeException;
@@ -53,6 +54,7 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
 import com.liferay.portlet.imagegallery.service.base.IGImageLocalServiceBaseImpl;
 import com.liferay.portlet.imagegallery.util.Indexer;
+import com.liferay.portlet.tags.model.TagsEntryConstants;
 
 import com.sun.media.jai.codec.ImageCodec;
 import com.sun.media.jai.codec.ImageEncoder;
@@ -207,9 +209,17 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 					serviceContext.getGuestPermissions());
 			}
 
+			// Expando
+
+			ExpandoBridge expandoBridge = image.getExpandoBridge();
+
+			expandoBridge.setAttributes(serviceContext);
+
 			// Tags
 
-			updateTagsAsset(userId, image, serviceContext.getTagsEntries());
+			updateTagsAsset(
+				userId, image, serviceContext.getTagsCategories(),
+				serviceContext.getTagsEntries());
 
 			// Indexer
 
@@ -217,6 +227,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 				Indexer.addImage(
 					image.getCompanyId(), folder.getGroupId(), folderId,
 					imageId, name, description, image.getModifiedDate(),
+					serviceContext.getTagsCategories(),
 					serviceContext.getTagsEntries(), image.getExpandoBridge());
 			}
 			catch (SearchException se) {
@@ -317,6 +328,11 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		// Tags
 
 		tagsAssetLocalService.deleteAsset(
+			IGImage.class.getName(), image.getImageId());
+
+		// Expando
+
+		expandoValueLocalService.deleteValues(
 			IGImage.class.getName(), image.getImageId());
 
 		// Resources
@@ -493,13 +509,16 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		String description = image.getDescription();
 		Date modifiedDate = image.getModifiedDate();
 
+		String[] tagsCategories = tagsEntryLocalService.getEntryNames(
+			IGImage.class.getName(), imageId,
+			TagsEntryConstants.FOLKSONOMY_CATEGORY);
 		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 			IGImage.class.getName(), imageId);
 
 		try {
 			Indexer.updateImage(
 				companyId, groupId, folderId, imageId, name,
-				description, modifiedDate, tagsEntries,
+				description, modifiedDate, tagsCategories, tagsEntries,
 				image.getExpandoBridge());
 		}
 		catch (SearchException se) {
@@ -556,11 +575,18 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 					image.getCustom2ImageId(), bytes, contentType);
 			}
 
+			// Expando
+
+			ExpandoBridge expandoBridge = image.getExpandoBridge();
+
+			expandoBridge.setAttributes(serviceContext);
+
 			// Tags
 
+			String[] tagsCategories = serviceContext.getTagsCategories();
 			String[] tagsEntries = serviceContext.getTagsEntries();
 
-			updateTagsAsset(userId, image, tagsEntries);
+			updateTagsAsset(userId, image, tagsCategories, tagsEntries);
 
 			// Indexer
 
@@ -568,7 +594,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 				Indexer.updateImage(
 					image.getCompanyId(), folder.getGroupId(),
 					folder.getFolderId(), imageId, name, description,
-					image.getModifiedDate(), tagsEntries,
+					image.getModifiedDate(), tagsCategories, tagsEntries,
 					image.getExpandoBridge());
 			}
 			catch (SearchException se) {
@@ -627,7 +653,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	public void updateTagsAsset(
-			long userId, IGImage image, String[] tagsEntries)
+			long userId, IGImage image, String[] tagsCategories,
+			String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		Image largeImage = imageLocalService.getImage(image.getLargeImageId());
@@ -638,9 +665,10 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 		tagsAssetLocalService.updateAsset(
 			userId, image.getFolder().getGroupId(), IGImage.class.getName(),
-			image.getImageId(), null, tagsEntries, true, null, null, null, null,
-			largeImage.getType(), image.getName(), image.getDescription(), null,
-			null, largeImage.getHeight(), largeImage.getWidth(), null, false);
+			image.getImageId(), tagsCategories, tagsEntries, true, null, null,
+			null, null, largeImage.getType(), image.getName(),
+			image.getDescription(), null, null, largeImage.getHeight(),
+			largeImage.getWidth(), null, false);
 	}
 
 	protected IGFolder getFolder(IGImage image, long folderId)

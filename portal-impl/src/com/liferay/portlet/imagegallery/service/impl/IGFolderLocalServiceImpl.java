@@ -42,6 +42,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.imagegallery.DuplicateFolderNameException;
 import com.liferay.portlet.imagegallery.FolderNameException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
@@ -49,6 +50,7 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.service.base.IGFolderLocalServiceBaseImpl;
 import com.liferay.portlet.imagegallery.util.Indexer;
+import com.liferay.portlet.tags.model.TagsEntryConstants;
 import com.liferay.portlet.tags.util.TagsUtil;
 
 import java.util.ArrayList;
@@ -114,6 +116,12 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 				folder, serviceContext.getCommunityPermissions(),
 				serviceContext.getGuestPermissions());
 		}
+
+		// Expando
+
+		ExpandoBridge expandoBridge = folder.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 
 		return folder;
 	}
@@ -184,6 +192,11 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		// Images
 
 		igImageLocalService.deleteImages(folder.getFolderId());
+
+		// Expando
+
+		expandoValueLocalService.deleteValues(
+			IGFolder.class.getName(), folder.getFolderId());
 
 		// Resources
 
@@ -282,14 +295,17 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 					String description = image.getDescription();
 					Date modifiedDate = image.getModifiedDate();
 
+					String[] tagsCategories = tagsEntryLocalService.getEntryNames(
+						IGImage.class.getName(), imageId,
+						TagsEntryConstants.FOLKSONOMY_CATEGORY);
 					String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 						IGImage.class.getName(), imageId);
 
 					try {
 						Indexer.updateImage(
 							companyId, groupId, folderId, imageId, name,
-							description, modifiedDate, tagsEntries,
-							image.getExpandoBridge());
+							description, modifiedDate, tagsCategories,
+							tagsEntries, image.getExpandoBridge());
 					}
 					catch (SearchException se) {
 						_log.error("Reindexing " + imageId, se);
@@ -357,7 +373,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 	public IGFolder updateFolder(
 			long folderId, long parentFolderId, String name, String description,
-			boolean mergeWithParentFolder)
+			boolean mergeWithParentFolder, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Folder
@@ -375,6 +391,12 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		folder.setDescription(description);
 
 		igFolderPersistence.update(folder, false);
+
+		// Expando
+
+		ExpandoBridge expandoBridge = folder.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 
 		// Merge folders
 

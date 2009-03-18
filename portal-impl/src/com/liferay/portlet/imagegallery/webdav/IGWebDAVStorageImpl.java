@@ -366,6 +366,8 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			String name = WebDAVUtil.getResourceName(destinationArray);
 			String description = folder.getDescription();
 
+			ServiceContext serviceContext = new ServiceContext();
+
 			int status = HttpServletResponse.SC_CREATED;
 
 			if (overwrite) {
@@ -375,7 +377,8 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			}
 
 			IGFolderServiceUtil.updateFolder(
-				folderId, parentFolderId, name, description, false);
+				folderId, parentFolderId, name, description, false,
+				serviceContext);
 
 			return status;
 		}
