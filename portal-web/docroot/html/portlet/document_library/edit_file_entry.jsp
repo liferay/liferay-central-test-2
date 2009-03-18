@@ -103,7 +103,7 @@ portletURL.setParameter("name", name);
 			targetVersion.val(rowIds[0].value);
 		}
 
-		submitForm(document.<portlet:namespace />fm2);
+		submitForm(document.<portlet:namespace />fm1);
 	}
 
 	function <portlet:namespace />initRowsChecked() {
@@ -713,7 +713,7 @@ portletURL.setParameter("name", name);
 				DLFileVersion fileVersion = (DLFileVersion)results.get(0);
 			%>
 
-				<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/compare_versions" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm2" onSubmit="<portlet:namespace />compare(); return false;">
+				<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/compare_versions" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm1" onSubmit="<portlet:namespace />compare(); return false;">
 				<input name="<portlet:namespace />backURL" type="hidden" value="<%= HtmlUtil.escape(currentURL) %>" />
 				<input name="<portlet:namespace />fileEntryId" type="hidden" value="<%= fileEntry.getFileEntryId() %>" />
 				<input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>" />
