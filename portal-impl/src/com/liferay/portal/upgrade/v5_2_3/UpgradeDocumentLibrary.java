@@ -91,7 +91,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			runSQL("alter_column_type DLFileEntry name VARCHAR(255) null");
 			runSQL("alter_column_type DLFileEntry title VARCHAR(255) null");
 			runSQL("alter_column_type DLFileRank name VARCHAR(255) null");
-			runSQL("alter_column_type DLFileShortcut name VARCHAR(255) null");
+			runSQL("alter_column_type DLFileShortcut toName VARCHAR(255) null");
 			runSQL("alter_column_type DLFileVersion name VARCHAR(255) null");
 		}
 		else {
