@@ -295,9 +295,10 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 					String description = image.getDescription();
 					Date modifiedDate = image.getModifiedDate();
 
-					String[] tagsCategories = tagsEntryLocalService.getEntryNames(
-						IGImage.class.getName(), imageId,
-						TagsEntryConstants.FOLKSONOMY_CATEGORY);
+					String[] tagsCategories =
+						tagsEntryLocalService.getEntryNames(
+							IGImage.class.getName(), imageId,
+							TagsEntryConstants.FOLKSONOMY_CATEGORY);
 					String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 						IGImage.class.getName(), imageId);
 
