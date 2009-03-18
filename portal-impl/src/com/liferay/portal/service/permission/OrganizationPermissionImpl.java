@@ -77,7 +77,6 @@ public class OrganizationPermissionImpl implements OrganizationPermission {
 		}
 
 		if (organization != null) {
-
 			while (!organization.isRoot()) {
 				Organization parentOrganization =
 					organization.getParentOrganization();
