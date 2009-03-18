@@ -27,8 +27,8 @@ import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Http;
-import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.util.PortalUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -79,7 +79,7 @@ public class SecureRequestAction extends Action {
 	}
 
 	protected String getRedirect(HttpServletRequest request) {
-		String unsecureCompleteURL = HttpUtil.getCompleteURL(request);
+		String unsecureCompleteURL = PortalUtil.getCurrentCompleteURL(request);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Unsecure URL " + unsecureCompleteURL);
