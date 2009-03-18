@@ -47,7 +47,7 @@ public class TagsPropertyValueUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 			return StringPool.BLANK;
 		}
 		else {
-			return StringUtil.shorten(value, 255);
+			return StringUtil.shorten(value, 255, StringPool.BLANK);
 		}
 	}
 
