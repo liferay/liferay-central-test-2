@@ -419,7 +419,11 @@ work.dir=${basedir.unix}/tools/tck/work</echo>
 			<param name="test.class" value="Plugins2TestSuite" />
 			<param name="portlet.plugins.includes" value="sample-localized-portlet,sample-orbeon-forms-portlet,sample-permissions-portlet,sample-php-portlet,sample-portal-client-portlet,sample-portal-service-portlet,sample-python-portlet,sample-ruby-portlet,sample-service-builder-portlet,sample-sign-in-portlet,sample-spring-portlet,sample-struts-liferay-portlet,sample-struts-portlet,sample-tapestry-portlet,sample-test-portlet,sample-ui-taglibs-portlet,sample-wap-portlet,stocks-portlet,sun-bookmark-portlet,sun-elluminate-portlet,sun-flickr-portlet,sun-iframe-portlet,sun-mashup-portlet,sun-notepad-portlet,sun-photoshow-ajax-portlet,sun-privacy-guard-portlet,sun-rss-portlet,sun-showtime-portlet,sun-tour-ipc-portlet,sun-video-portlet,sun-weather-portlet,twitter-portlet,weather-portlet,web-form-portlet,westminster-catechism-portlet,wiki-navigation-portlet,wol-portlet" />
 		</antcall>
-
+		
+		<antcall target="run-tomcat-5.5">
+			<param name="test.class" value="StagingTestSuite" />
+		</antcall>
+		
 		<antcall target="stop-selenium" />
 	</target>
 
