@@ -76,8 +76,7 @@ public class OrganizationPermissionImpl implements OrganizationPermission {
 			return true;
 		}
 
-		if ((!actionId.equals(ActionKeys.MANAGE_SUBORGANIZATIONS)) &&
-			(organization != null)) {
+		if (organization != null) {
 
 			while (!organization.isRoot()) {
 				Organization parentOrganization =
