@@ -87,7 +87,8 @@ public class HypersonicUtil extends DBUtil {
 				String[] template = buildColumnTypeTokens(line);
 
 				line = StringUtil.replace(
-					"alter table @table@ alter column @type@ @nullable@;",
+					"alter table @table@ alter column @old-column@ @type@ " +
+						"@nullable@;",
 					REWORD_TEMPLATE, template);
 			}
 
