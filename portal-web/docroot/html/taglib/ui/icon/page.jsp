@@ -25,16 +25,16 @@
 <%@ include file="/html/taglib/ui/icon/init.jsp" %>
 
 <%
-String onClickHtml = StringPool.BLANK;
-
-if (method.equals("post") && (url.startsWith(Http.HTTP_WITH_SLASH) || url.startsWith(Http.HTTPS_WITH_SLASH))) {
-	onClickHtml = "onclick=\"Liferay.Util.forcePost(this); return false;\"";
-}
-
 String cssClassHtml = StringPool.BLANK;
 
 if (Validator.isNotNull(cssClass)) {
 	cssClassHtml = "class=\"nobr " + cssClass + "\"";
+}
+
+String onClickHtml = StringPool.BLANK;
+
+if (method.equals("post") && (url.startsWith(Http.HTTP_WITH_SLASH) || url.startsWith(Http.HTTPS_WITH_SLASH))) {
+	onClickHtml = "onclick=\"Liferay.Util.forcePost(this); return false;\"";
 }
 
 String targetHtml = StringPool.BLANK;

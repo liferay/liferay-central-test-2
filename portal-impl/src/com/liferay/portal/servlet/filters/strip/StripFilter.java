@@ -252,8 +252,11 @@ public class StripFilter extends BasePortalFilter {
 							continue;
 						}
 
-						scriptContent = "/*<![CDATA[*/" + MinifierUtil.minifyJavaScript(
-							scriptContent) + "/*]]>*/";
+						scriptContent = MinifierUtil.minifyJavaScript(
+							scriptContent);
+
+						scriptContent =
+							_CDATA_OPEN + scriptContent + _CDATA_CLOSE;
 
 						if (Validator.isNull(scriptContent)) {
 							i += _MARKER_SCRIPT_CLOSE.length;
@@ -395,6 +398,10 @@ public class StripFilter extends BasePortalFilter {
 
 		return new Object[] {newByteArray, newByteArrayPos};
 	}
+
+	private static final String _CDATA_CLOSE = "/*]]>*/";
+
+	private static final String _CDATA_OPEN = "/*<![CDATA[*/";
 
 	private static final char[] _MARKER_DIV_CLOSE = "/div>".toCharArray();
 
