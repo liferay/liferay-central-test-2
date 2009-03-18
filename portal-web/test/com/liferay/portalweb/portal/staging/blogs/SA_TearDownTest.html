@@ -1,0 +1,149 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>SA_TearDownTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">SA_TearDownTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//li[4]/ul/li[1]/a[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//li[4]/ul/li[1]/a[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Communities</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//strong/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Manage Pages</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Manage Pages</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//form/ul[1]/li[3]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Staging</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>_134_stagingEnabled</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete the staging public and private pages?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Back to Guest</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Blogs Staging Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('link=Delete'))</td>
+	<td>BlogsPresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${BlogsPresent}</td>
+	<td>NoBlogsPresent</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete this?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>NoBlogsPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Remove']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to remove this component?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Welcome</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Manage Pages</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div/ul/li[2]/ul/li[2]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete the selected page?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Welcome</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AddContentCreatorTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">AddContentCreatorTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_125_screenName</td>
+	<td>ContentCreator</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_125_screenName</td>
+	<td>ContentCreator</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_125_emailAddress</td>
+	<td>CC@liferay.com</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_125_prefixId</td>
+	<td>label=Mr.</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_125_firstName</td>
+	<td>Creator</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_125_lastName</td>
+	<td>Liferay</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_125_suffixId</td>
+	<td>label=PhD.</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_125_birthdayMonth</td>
+	<td>label=April</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_125_birthdayDay</td>
+	<td>label=10</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_125_birthdayYear</td>
+	<td>label=1986</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_125_male</td>
+	<td>label=Male</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>passwordLink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>_125_password1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_125_password1</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_125_password2</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>rolesLink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='roles']/span/a[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='roles']/span/a[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPopUp</td>
+	<td>role</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>name=role</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Content Creator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Content Creator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
