@@ -29,8 +29,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -70,7 +68,6 @@ import org.apache.struts.action.ActionMapping;
  * <a href="EditTemplateAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
  *
  */
 public class EditTemplateAction extends PortletAction {
@@ -253,8 +250,10 @@ public class EditTemplateAction extends PortletAction {
 			uploadRequest, "smallImageURL");
 		File smallFile = uploadRequest.getFile("smallFile");
 
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			JournalTemplate.class.getName(), actionRequest);
+		String[] communityPermissions = uploadRequest.getParameterValues(
+			"communityPermissions");
+		String[] guestPermissions = uploadRequest.getParameterValues(
+			"guestPermissions");
 
 		JournalTemplate template = null;
 
@@ -265,7 +264,8 @@ public class EditTemplateAction extends PortletAction {
 			template = JournalTemplateServiceUtil.addTemplate(
 				groupId, templateId, autoTemplateId, structureId, name,
 				description, xsl, formatXsl, langType, cacheable, smallImage,
-				smallImageURL, smallFile, serviceContext);
+				smallImageURL, smallFile, communityPermissions,
+				guestPermissions);
 		}
 		else {
 
@@ -274,7 +274,7 @@ public class EditTemplateAction extends PortletAction {
 			template = JournalTemplateServiceUtil.updateTemplate(
 				groupId, templateId, structureId, name, description, xsl,
 				formatXsl, langType, cacheable, smallImage, smallImageURL,
-				smallFile, serviceContext);
+				smallFile);
 		}
 
 		// Recent templates

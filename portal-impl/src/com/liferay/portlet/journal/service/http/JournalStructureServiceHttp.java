@@ -78,7 +78,7 @@ public class JournalStructureServiceHttp {
 		java.lang.String structureId, boolean autoStructureId,
 		java.lang.String parentStructureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -116,18 +116,104 @@ public class JournalStructureServiceHttp {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = serviceContext;
+			Object paramObj7 = new BooleanWrapper(addCommunityPermissions);
 
-			if (serviceContext == null) {
-				paramObj7 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
+			Object paramObj8 = new BooleanWrapper(addGuestPermissions);
+
+			MethodWrapper methodWrapper = new MethodWrapper(JournalStructureServiceUtil.class.getName(),
+					"addStructure",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.journal.model.JournalStructure)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.journal.model.JournalStructure addStructure(
+		HttpPrincipal httpPrincipal, long groupId,
+		java.lang.String structureId, boolean autoStructureId,
+		java.lang.String parentStructureId, java.lang.String name,
+		java.lang.String description, java.lang.String xsd,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = structureId;
+
+			if (structureId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = new BooleanWrapper(autoStructureId);
+
+			Object paramObj3 = parentStructureId;
+
+			if (parentStructureId == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = name;
+
+			if (name == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = description;
+
+			if (description == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = xsd;
+
+			if (xsd == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj7 = communityPermissions;
+
+			if (communityPermissions == null) {
+				paramObj7 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj8 = guestPermissions;
+
+			if (guestPermissions == null) {
+				paramObj8 = new NullWrapper("[Ljava.lang.String;");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(JournalStructureServiceUtil.class.getName(),
 					"addStructure",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7
+						paramObj5, paramObj6, paramObj7, paramObj8
 					});
 
 			Object returnObj = null;
@@ -293,8 +379,7 @@ public class JournalStructureServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId,
 		java.lang.String structureId, java.lang.String parentStructureId,
 		java.lang.String name, java.lang.String description,
-		java.lang.String xsd,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		java.lang.String xsd)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -330,18 +415,11 @@ public class JournalStructureServiceHttp {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj6 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
 			MethodWrapper methodWrapper = new MethodWrapper(JournalStructureServiceUtil.class.getName(),
 					"updateStructure",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
+						paramObj5
 					});
 
 			Object returnObj = null;

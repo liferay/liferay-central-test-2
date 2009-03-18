@@ -90,14 +90,43 @@ public class JournalFeedServiceSoap {
 		java.lang.String targetLayoutFriendlyUrl,
 		java.lang.String targetPortletId, java.lang.String contentField,
 		java.lang.String feedType, double feedVersion,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.journal.model.JournalFeed returnValue = JournalFeedServiceUtil.addFeed(groupId,
 					feedId, autoFeedId, name, description, type, structureId,
 					templateId, rendererTemplateId, delta, orderByCol,
 					orderByType, targetLayoutFriendlyUrl, targetPortletId,
-					contentField, feedType, feedVersion, serviceContext);
+					contentField, feedType, feedVersion,
+					addCommunityPermissions, addGuestPermissions);
+
+			return com.liferay.portlet.journal.model.JournalFeedSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.journal.model.JournalFeedSoap addFeed(
+		long groupId, java.lang.String feedId, boolean autoFeedId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String type, java.lang.String structureId,
+		java.lang.String templateId, java.lang.String rendererTemplateId,
+		int delta, java.lang.String orderByCol, java.lang.String orderByType,
+		java.lang.String targetLayoutFriendlyUrl,
+		java.lang.String targetPortletId, java.lang.String contentField,
+		java.lang.String feedType, double feedVersion,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions) throws RemoteException {
+		try {
+			com.liferay.portlet.journal.model.JournalFeed returnValue = JournalFeedServiceUtil.addFeed(groupId,
+					feedId, autoFeedId, name, description, type, structureId,
+					templateId, rendererTemplateId, delta, orderByCol,
+					orderByType, targetLayoutFriendlyUrl, targetPortletId,
+					contentField, feedType, feedVersion, communityPermissions,
+					guestPermissions);
 
 			return com.liferay.portlet.journal.model.JournalFeedSoap.toSoapModel(returnValue);
 		}
@@ -170,15 +199,14 @@ public class JournalFeedServiceSoap {
 		java.lang.String orderByCol, java.lang.String orderByType,
 		java.lang.String targetLayoutFriendlyUrl,
 		java.lang.String targetPortletId, java.lang.String contentField,
-		java.lang.String feedType, double feedVersion,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		java.lang.String feedType, double feedVersion)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.journal.model.JournalFeed returnValue = JournalFeedServiceUtil.updateFeed(groupId,
 					feedId, name, description, type, structureId, templateId,
 					rendererTemplateId, delta, orderByCol, orderByType,
 					targetLayoutFriendlyUrl, targetPortletId, contentField,
-					feedType, feedVersion, serviceContext);
+					feedType, feedVersion);
 
 			return com.liferay.portlet.journal.model.JournalFeedSoap.toSoapModel(returnValue);
 		}

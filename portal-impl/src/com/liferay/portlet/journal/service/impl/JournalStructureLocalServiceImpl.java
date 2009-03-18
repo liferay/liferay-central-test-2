@@ -36,8 +36,6 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.ServiceContext;
-import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.journal.DuplicateStructureIdException;
 import com.liferay.portlet.journal.NoSuchStructureException;
 import com.liferay.portlet.journal.RequiredStructureException;
@@ -61,7 +59,6 @@ import java.util.Set;
  * </b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
  *
  */
 public class JournalStructureLocalServiceImpl
@@ -70,19 +67,50 @@ public class JournalStructureLocalServiceImpl
 	public JournalStructure addStructure(
 			long userId, long groupId, String structureId,
 			boolean autoStructureId, String parentStructureId, String name,
-			String description, String xsd, ServiceContext serviceContext)
+			String description, String xsd, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addStructure(
 			null, userId, groupId, structureId, autoStructureId,
-			parentStructureId, name, description, xsd, serviceContext);
+			parentStructureId, name, description, xsd,
+			Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
+	}
+
+	public JournalStructure addStructure(
+			String uuid, long userId, long groupId, String structureId,
+			boolean autoStructureId, String parentStructureId, String name,
+			String description, String xsd, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		return addStructure(
+			uuid, userId, groupId, structureId, autoStructureId,
+			parentStructureId, name, description, xsd,
+			Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
+	}
+
+	public JournalStructure addStructure(
+			long userId, long groupId, String structureId,
+			boolean autoStructureId, String parentStructureId, String name,
+			String description, String xsd, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		return addStructure(
+			null, userId, groupId, structureId, autoStructureId,
+			parentStructureId, name, description, xsd, null, null,
+			communityPermissions, guestPermissions);
 	}
 
 	public JournalStructure addStructure(
 			String uuid, long userId, long groupId, String structureId,
 			boolean autoStructureId, String parentStructureId,
 			String name, String description, String xsd,
-			ServiceContext serviceContext)
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		// Structure
@@ -127,24 +155,17 @@ public class JournalStructureLocalServiceImpl
 
 		// Resources
 
-		if (serviceContext.getAddCommunityPermissions() ||
-			serviceContext.getAddGuestPermissions()) {
+		if ((addCommunityPermissions != null) &&
+			(addGuestPermissions != null)) {
 
 			addStructureResources(
-				structure, serviceContext.getAddCommunityPermissions(),
-				serviceContext.getAddGuestPermissions());
+				structure, addCommunityPermissions.booleanValue(),
+				addGuestPermissions.booleanValue());
 		}
 		else {
 			addStructureResources(
-				structure, serviceContext.getCommunityPermissions(),
-				serviceContext.getGuestPermissions());
+				structure, communityPermissions, guestPermissions);
 		}
-
-		// Expando
-
-		ExpandoBridge expandoBridge = structure.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
 
 		return structure;
 	}
@@ -301,11 +322,6 @@ public class JournalStructureLocalServiceImpl
 			throw new RequiredStructureException();
 		}
 
-		// Expando
-
-		expandoValueLocalService.deleteValues(
-			JournalStructure.class.getName(), structure.getPrimaryKey());
-
 		// WebDAVProps
 
 		webDAVPropsLocalService.deleteWebDAVProps(
@@ -425,8 +441,7 @@ public class JournalStructureLocalServiceImpl
 
 	public JournalStructure updateStructure(
 			long groupId, String structureId, String parentStructureId,
-			String name, String description, String xsd,
-			ServiceContext serviceContext)
+			String name, String description, String xsd)
 		throws PortalException, SystemException {
 
 		structureId = structureId.trim().toUpperCase();
@@ -451,12 +466,6 @@ public class JournalStructureLocalServiceImpl
 		structure.setXsd(xsd);
 
 		journalStructurePersistence.update(structure, false);
-
-		// Expando
-
-		ExpandoBridge expandoBridge = structure.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
 
 		return structure;
 	}

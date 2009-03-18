@@ -30,8 +30,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.journal.DuplicateFeedIdException;
 import com.liferay.portlet.journal.FeedContentFieldException;
@@ -41,7 +39,6 @@ import com.liferay.portlet.journal.FeedNameException;
 import com.liferay.portlet.journal.FeedTargetLayoutFriendlyUrlException;
 import com.liferay.portlet.journal.FeedTargetPortletIdException;
 import com.liferay.portlet.journal.NoSuchFeedException;
-import com.liferay.portlet.journal.model.JournalFeed;
 import com.liferay.portlet.journal.service.JournalFeedServiceUtil;
 import com.liferay.util.RSSUtil;
 
@@ -195,18 +192,21 @@ public class EditFeedAction extends PortletAction {
 				actionRequest, "feedVersion", feedVersion);
 		}
 
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			JournalFeed.class.getName(), actionRequest);
+		String[] communityPermissions = actionRequest.getParameterValues(
+			"communityPermissions");
+		String[] guestPermissions = actionRequest.getParameterValues(
+			"guestPermissions");
 
 		if (cmd.equals(Constants.ADD)) {
 
 			// Add feed
 
 			JournalFeedServiceUtil.addFeed(
-				groupId, feedId, autoFeedId, name, description, type,
-				structureId, templateId, rendererTemplateId, delta, orderByCol,
-				orderByType, targetLayoutFriendlyUrl, targetPortletId,
-				contentField, feedType, feedVersion, serviceContext);
+				groupId, feedId, autoFeedId, name, description,
+				type, structureId, templateId, rendererTemplateId, delta,
+				orderByCol, orderByType, targetLayoutFriendlyUrl,
+				targetPortletId, contentField, feedType, feedVersion,
+				communityPermissions, guestPermissions);
 		}
 		else {
 
@@ -216,7 +216,7 @@ public class EditFeedAction extends PortletAction {
 				groupId, feedId, name, description, type, structureId,
 				templateId, rendererTemplateId, delta, orderByCol, orderByType,
 				targetLayoutFriendlyUrl, targetPortletId, contentField,
-				feedType, feedVersion, serviceContext);
+				feedType, feedVersion);
 		}
 	}
 

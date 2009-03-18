@@ -33,9 +33,7 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.xml.XPath;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.journal.DuplicateFeedIdException;
 import com.liferay.portlet.journal.FeedContentFieldException;
 import com.liferay.portlet.journal.FeedDescriptionException;
@@ -67,24 +65,80 @@ public class JournalFeedLocalServiceImpl
 			String orderByCol, String orderByType,
 			String targetLayoutFriendlyUrl, String targetPortletId,
 			String contentField, String feedType, double feedVersion,
-			ServiceContext serviceContext)
+			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addFeed(
 			null, userId, groupId, feedId, autoFeedId, name, description, type,
 			structureId, templateId, rendererTemplateId, delta, orderByCol,
 			orderByType, targetLayoutFriendlyUrl, targetPortletId, contentField,
-			feedType, feedVersion, serviceContext);
+			feedType, feedVersion, Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
+	}
+
+	public JournalFeed addFeed(
+			long userId, long groupId, String feedId, boolean autoFeedId,
+			String name, String description, String type, String structureId,
+			String templateId, String rendererTemplateId, int delta,
+			String orderByCol, String orderByType,
+			String targetLayoutFriendlyUrl, String targetPortletId,
+			String contentField, String feedType, double feedVersion,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		return addFeed(
+			null, userId, groupId, feedId, autoFeedId, name, description, type,
+			structureId, templateId, rendererTemplateId, delta, orderByCol,
+			orderByType, targetLayoutFriendlyUrl, targetPortletId, contentField,
+			feedType, feedVersion, null, null, communityPermissions,
+			guestPermissions);
 	}
 
 	public JournalFeed addFeed(
 			String uuid, long userId, long groupId, String feedId,
-			boolean autoFeedId, String name, String description,
-			String type, String structureId, String templateId,
-			String rendererTemplateId, int delta, String orderByCol,
-			String orderByType, String targetLayoutFriendlyUrl,
-			String targetPortletId, String contentField, String feedType,
-			double feedVersion, ServiceContext serviceContext)
+			boolean autoFeedId, String name, String description, String type,
+			String structureId, String templateId, String rendererTemplateId,
+			int delta, String orderByCol, String orderByType,
+			String targetLayoutFriendlyUrl, String targetPortletId,
+			String contentField, String feedType, double feedVersion,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		return addFeed(
+			uuid, userId, groupId, feedId, autoFeedId, name, description, type,
+			structureId, templateId, rendererTemplateId, delta, orderByCol,
+			orderByType, targetLayoutFriendlyUrl, targetPortletId, contentField,
+			feedType, feedVersion, Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
+	}
+
+	public JournalFeed addFeed(
+			String uuid, long userId, long groupId, String feedId,
+			boolean autoFeedId, String name, String description, String type,
+			String structureId, String templateId, String rendererTemplateId,
+			int delta, String orderByCol, String orderByType,
+			String targetLayoutFriendlyUrl, String targetPortletId,
+			String contentField, String feedType, double feedVersion,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		return addFeed(
+			uuid, userId, groupId, feedId, autoFeedId, name, description, type,
+			structureId, templateId, rendererTemplateId, delta, orderByCol,
+			orderByType,targetLayoutFriendlyUrl, targetPortletId, contentField,
+			feedType, feedVersion, null, null, communityPermissions,
+			guestPermissions);
+	}
+
+	public JournalFeed addFeed(
+			String uuid, long userId, long groupId, String feedId,
+			boolean autoFeedId, String name, String description, String type,
+			String structureId, String templateId, String rendererTemplateId,
+			int delta, String orderByCol, String orderByType,
+			String targetLayoutFriendlyUrl, String targetPortletId,
+			String contentField, String feedType, double feedVersion,
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		// Feed
@@ -139,24 +193,16 @@ public class JournalFeedLocalServiceImpl
 
 		// Resources
 
-		if (serviceContext.getAddCommunityPermissions() ||
-			serviceContext.getAddGuestPermissions()) {
+		if ((addCommunityPermissions != null) &&
+			(addGuestPermissions != null)) {
 
 			addFeedResources(
-				feed, serviceContext.getAddCommunityPermissions(),
-				serviceContext.getAddGuestPermissions());
+				feed, addCommunityPermissions.booleanValue(),
+				addGuestPermissions.booleanValue());
 		}
 		else {
-			addFeedResources(
-				feed, serviceContext.getCommunityPermissions(),
-				serviceContext.getGuestPermissions());
+			addFeedResources(feed, communityPermissions, guestPermissions);
 		}
-
-		// Expando
-
-		ExpandoBridge expandoBridge = feed.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
 
 		return feed;
 	}
@@ -221,11 +267,6 @@ public class JournalFeedLocalServiceImpl
 
 	public void deleteFeed(JournalFeed feed)
 		throws PortalException, SystemException {
-
-		// Expando
-
-		expandoValueLocalService.deleteValues(
-			JournalFeed.class.getName(), feed.getId());
 
 		// Resources
 
@@ -310,7 +351,7 @@ public class JournalFeedLocalServiceImpl
 			String rendererTemplateId, int delta, String orderByCol,
 			String orderByType, String targetLayoutFriendlyUrl,
 			String targetPortletId, String contentField, String feedType,
-			double feedVersion, ServiceContext serviceContext)
+			double feedVersion)
 		throws PortalException, SystemException{
 
 		// Feed
@@ -345,12 +386,6 @@ public class JournalFeedLocalServiceImpl
 		}
 
 		journalFeedPersistence.update(feed, false);
-
-		// Expando
-
-		ExpandoBridge expandoBridge = feed.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
 
 		return feed;
 	}

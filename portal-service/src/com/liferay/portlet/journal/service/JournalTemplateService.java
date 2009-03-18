@@ -58,8 +58,9 @@ public interface JournalTemplateService {
 		long groupId, java.lang.String templateId, boolean autoTemplateId,
 		java.lang.String structureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsl, boolean formatXsl,
-		java.lang.String langType, boolean cacheable,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		java.lang.String langType, boolean cacheable, boolean smallImage,
+		java.lang.String smallImageURL, java.io.File smallFile,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -69,7 +70,8 @@ public interface JournalTemplateService {
 		java.lang.String description, java.lang.String xsl, boolean formatXsl,
 		java.lang.String langType, boolean cacheable, boolean smallImage,
 		java.lang.String smallImageURL, java.io.File smallFile,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -99,18 +101,8 @@ public interface JournalTemplateService {
 		long groupId, java.lang.String templateId,
 		java.lang.String structureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsl, boolean formatXsl,
-		java.lang.String langType, boolean cacheable,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.journal.model.JournalTemplate updateTemplate(
-		long groupId, java.lang.String templateId,
-		java.lang.String structureId, java.lang.String name,
-		java.lang.String description, java.lang.String xsl, boolean formatXsl,
 		java.lang.String langType, boolean cacheable, boolean smallImage,
-		java.lang.String smallImageURL, java.io.File smallFile,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		java.lang.String smallImageURL, java.io.File smallFile)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

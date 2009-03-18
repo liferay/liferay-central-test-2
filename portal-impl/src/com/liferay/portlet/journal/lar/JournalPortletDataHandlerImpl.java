@@ -46,7 +46,6 @@ import com.liferay.portal.lar.PortletDataHandlerControl;
 import com.liferay.portal.lar.PortletDataHandlerKeys;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.persistence.ImageUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -227,7 +226,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	public static void exportFeed(
 			PortletDataContext context, Element feedsEl, JournalFeed feed)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (!context.isWithinDateRange(feed.getModifiedDate())) {
 			return;
@@ -741,6 +740,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		String articleURL = null;
 
+		PortletPreferences preferences = null;
+
 		String[] tagsCategories = null;
 		String[] tagsEntries = null;
 
@@ -774,13 +775,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			creationStrategy.addCommunityPermissions(context, article);
 		boolean addGuestPermissions = creationStrategy.addGuestPermissions(
 			context, article);
-
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddCommunityPermissions(addCommunityPermissions);
-		serviceContext.setAddGuestPermissions(addGuestPermissions);
-		serviceContext.setTagsCategories(tagsCategories);
-		serviceContext.setTagsEntries(tagsEntries);
 
 		JournalArticle existingArticle = null;
 
@@ -832,7 +826,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					reviewDateDay, reviewDateYear, reviewDateHour,
 					reviewDateMinute, neverReview, article.getIndexable(),
 					article.getSmallImage(), article.getSmallImageURL(),
-					smallFile, images, articleURL, serviceContext);
+					smallFile, images, articleURL, preferences, tagsCategories,
+					tagsEntries, addCommunityPermissions, addGuestPermissions);
 			}
 			else {
 				existingArticle = JournalArticleLocalServiceUtil.updateArticle(
@@ -850,7 +845,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					reviewDateDay, reviewDateYear, reviewDateHour,
 					reviewDateMinute, neverReview, article.getIndexable(),
 					article.getSmallImage(), article.getSmallImageURL(),
-					smallFile, images, articleURL, serviceContext);
+					smallFile, images, articleURL, preferences, tagsCategories,
+					tagsEntries);
 			}
 		}
 		else {
@@ -865,7 +861,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
 				reviewDateMinute, neverReview, article.getIndexable(),
 				article.getSmallImage(), article.getSmallImageURL(), smallFile,
-				images, articleURL, serviceContext);
+				images, articleURL, preferences, tagsCategories, tagsEntries,
+				addCommunityPermissions, addGuestPermissions);
 		}
 
 		long strategyApprovalUserId = creationStrategy.getApprovalUserId(
@@ -884,7 +881,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			JournalArticleLocalServiceUtil.approveArticle(
 				approvedByUserId, groupId, existingArticle.getArticleId(),
-				existingArticle.getVersion(), articleURL, serviceContext);
+				existingArticle.getVersion(), articleURL, preferences);
 		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "comments")) {
@@ -959,11 +956,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		boolean addGuestPermissions = creationStrategy.addGuestPermissions(
 			context, feed);
 
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddCommunityPermissions(addCommunityPermissions);
-		serviceContext.setAddGuestPermissions(addGuestPermissions);
-
 		JournalFeed existingFeed = null;
 
 		if (context.getDataStrategy().equals(
@@ -981,7 +973,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					feed.getOrderByType(), feed.getTargetLayoutFriendlyUrl(),
 					feed.getTargetPortletId(), feed.getContentField(),
 					feed.getFeedType(), feed.getFeedVersion(),
-					serviceContext);
+					addCommunityPermissions, addGuestPermissions);
 			}
 			else {
 				existingFeed = JournalFeedLocalServiceUtil.updateFeed(
@@ -991,7 +983,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					feed.getDelta(), feed.getOrderByCol(),
 					feed.getOrderByType(), feed.getTargetLayoutFriendlyUrl(),
 					feed.getTargetPortletId(), feed.getContentField(),
-					feed.getFeedType(), feed.getFeedVersion(), serviceContext);
+					feed.getFeedType(), feed.getFeedVersion());
 			}
 		}
 		else {
@@ -1002,7 +994,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				feed.getOrderByCol(), feed.getOrderByType(),
 				feed.getTargetLayoutFriendlyUrl(), feed.getTargetPortletId(),
 				feed.getContentField(), feed.getFeedType(),
-				feed.getFeedVersion(), serviceContext);
+				feed.getFeedVersion(), addCommunityPermissions,
+				addGuestPermissions);
 		}
 
 		feedIds.put(feedId, existingFeed.getFeedId());
@@ -1065,11 +1058,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		boolean addGuestPermissions = creationStrategy.addGuestPermissions(
 			context, structure);
 
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddCommunityPermissions(addCommunityPermissions);
-		serviceContext.setAddGuestPermissions(addGuestPermissions);
-
 		JournalStructure existingStructure = null;
 
 		if (context.getDataStrategy().equals(
@@ -1084,7 +1072,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 						structure.getUuid(), userId, groupId, structureId,
 						autoStructureId, structure.getParentStructureId(),
 						structure.getName(), structure.getDescription(),
-						structure.getXsd(), serviceContext);
+						structure.getXsd(), addCommunityPermissions,
+						addGuestPermissions);
 			}
 			else {
 				existingStructure =
@@ -1092,15 +1081,15 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 						existingStructure.getGroupId(),
 						existingStructure.getStructureId(),
 						structure.getParentStructureId(), structure.getName(),
-						structure.getDescription(), structure.getXsd(),
-						serviceContext);
+						structure.getDescription(), structure.getXsd());
 			}
 		}
 		else {
 			existingStructure = JournalStructureLocalServiceUtil.addStructure(
 				userId, groupId, structureId, autoStructureId,
 				structure.getParentStructureId(), structure.getName(),
-				structure.getDescription(), structure.getXsd(), serviceContext);
+				structure.getDescription(), structure.getXsd(),
+				addCommunityPermissions, addGuestPermissions);
 		}
 
 		structureIds.put(structureId, existingStructure.getStructureId());
@@ -1170,11 +1159,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		boolean addGuestPermissions = creationStrategy.addGuestPermissions(
 			context, template);
 
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddCommunityPermissions(addCommunityPermissions);
-		serviceContext.setAddGuestPermissions(addGuestPermissions);
-
 		File smallFile = null;
 
 		if (template.isSmallImage() && Validator.isNotNull(smallImagePath)) {
@@ -1204,7 +1188,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					template.getDescription(), template.getXsl(), formatXsl,
 					template.getLangType(), template.getCacheable(),
 					template.isSmallImage(), template.getSmallImageURL(),
-					smallFile, serviceContext);
+					smallFile, addCommunityPermissions, addGuestPermissions);
 			}
 			else {
 				existingTemplate =
@@ -1215,7 +1199,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 						template.getDescription(), template.getXsl(), formatXsl,
 						template.getLangType(), template.getCacheable(),
 						template.isSmallImage(), template.getSmallImageURL(),
-						smallFile, serviceContext);
+						smallFile);
 			}
 		}
 		else {
@@ -1224,7 +1208,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				template.getName(), template.getDescription(),
 				template.getXsl(), formatXsl, template.getLangType(),
 				template.getCacheable(), template.isSmallImage(),
-				template.getSmallImageURL(), smallFile, serviceContext);
+				template.getSmallImageURL(), smallFile, addCommunityPermissions,
+				addGuestPermissions);
 		}
 
 		templateIds.put(templateId, existingTemplate.getTemplateId());
@@ -1650,7 +1635,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
 		sb.append("/templates/thumbnail-");
 		sb.append(template.getTemplateId());
-		sb.append(StringPool.PERIOD);
 		sb.append(template.getSmallImageType());
 
 		return sb.toString();

@@ -33,8 +33,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -88,7 +86,6 @@ import org.apache.struts.action.ActionMapping;
  * <a href="EditArticleAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
  *
  */
 public class EditArticleAction extends PortletAction {
@@ -213,11 +210,9 @@ public class EditArticleAction extends PortletAction {
 
 		String articleURL = ParamUtil.getString(actionRequest, "articleURL");
 
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			JournalArticle.class.getName(), actionRequest);
-
 		JournalArticleServiceUtil.approveArticle(
-			groupId, articleId, version, articleURL, serviceContext);
+			groupId, articleId, version, articleURL,
+			actionRequest.getPreferences());
 	}
 
 	protected void deleteArticles(ActionRequest actionRequest)
@@ -227,9 +222,6 @@ public class EditArticleAction extends PortletAction {
 
 		String[] deleteArticleIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "deleteArticleIds"));
-
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			JournalArticle.class.getName(), actionRequest);
 
 		for (int i = 0; i < deleteArticleIds.length; i++) {
 			int pos = deleteArticleIds[i].lastIndexOf(VERSION_SEPARATOR);
@@ -243,7 +235,8 @@ public class EditArticleAction extends PortletAction {
 				actionRequest, "articleURL");
 
 			JournalArticleServiceUtil.deleteArticle(
-				groupId, articleId, version, articleURL, serviceContext);
+				groupId, articleId, version, articleURL,
+				actionRequest.getPreferences());
 
 			JournalUtil.removeRecentArticle(actionRequest, deleteArticleIds[i]);
 		}
@@ -257,9 +250,6 @@ public class EditArticleAction extends PortletAction {
 		String[] expireArticleIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "expireArticleIds"));
 
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			JournalArticle.class.getName(), actionRequest);
-
 		for (int i = 0; i < expireArticleIds.length; i++) {
 			int pos = expireArticleIds[i].lastIndexOf(VERSION_SEPARATOR);
 
@@ -272,7 +262,8 @@ public class EditArticleAction extends PortletAction {
 				actionRequest, "articleURL");
 
 			JournalArticleServiceUtil.expireArticle(
-				groupId, articleId, version, articleURL, serviceContext);
+				groupId, articleId, version, articleURL,
+				actionRequest.getPreferences());
 		}
 	}
 
@@ -452,8 +443,13 @@ public class EditArticleAction extends PortletAction {
 
 		String articleURL = ParamUtil.getString(uploadRequest, "articleURL");
 
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			JournalArticle.class.getName(), actionRequest);
+		String[] tagsCategories = PortalUtil.getTagsCategories(actionRequest);
+		String[] tagsEntries = PortalUtil.getTagsEntries(actionRequest);
+
+		String[] communityPermissions = uploadRequest.getParameterValues(
+			"communityPermissions");
+		String[] guestPermissions = uploadRequest.getParameterValues(
+			"guestPermissions");
 
 		boolean approve = ParamUtil.getBoolean(uploadRequest, "approve");
 
@@ -477,7 +473,8 @@ public class EditArticleAction extends PortletAction {
 				neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
 				reviewDateHour, reviewDateMinute, neverReview, indexable,
 				smallImage, smallImageURL, smallFile, images, articleURL,
-				serviceContext);
+				actionRequest.getPreferences(), tagsCategories, tagsEntries,
+				communityPermissions, guestPermissions);
 
 			AssetPublisherUtil.addAndStoreSelection(
 				actionRequest, JournalArticle.class.getName(),
@@ -521,13 +518,15 @@ public class EditArticleAction extends PortletAction {
 				expirationDateMinute, neverExpire, reviewDateMonth,
 				reviewDateDay, reviewDateYear, reviewDateHour, reviewDateMinute,
 				neverReview, indexable, smallImage, smallImageURL, smallFile,
-				images, articleURL, serviceContext);
+				images, articleURL, actionRequest.getPreferences(),
+				tagsCategories, tagsEntries);
 		}
 
 		if (approve) {
 			article = JournalArticleServiceUtil.approveArticle(
 				article.getGroupId(), article.getArticleId(),
-				article.getVersion(), articleURL, serviceContext);
+				article.getVersion(), articleURL,
+				actionRequest.getPreferences());
 		}
 
 		// Recent articles

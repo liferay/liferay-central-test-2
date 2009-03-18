@@ -113,13 +113,14 @@ public class JournalStructureLocalServiceUtil {
 		long userId, long groupId, java.lang.String structureId,
 		boolean autoStructureId, java.lang.String parentStructureId,
 		java.lang.String name, java.lang.String description,
-		java.lang.String xsd,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		java.lang.String xsd, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .addStructure(userId, groupId, structureId, autoStructureId,
-			parentStructureId, name, description, xsd, serviceContext);
+			parentStructureId, name, description, xsd, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure addStructure(
@@ -127,13 +128,45 @@ public class JournalStructureLocalServiceUtil {
 		java.lang.String structureId, boolean autoStructureId,
 		java.lang.String parentStructureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .addStructure(uuid, userId, groupId, structureId,
 			autoStructureId, parentStructureId, name, description, xsd,
-			serviceContext);
+			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalStructure addStructure(
+		long userId, long groupId, java.lang.String structureId,
+		boolean autoStructureId, java.lang.String parentStructureId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String xsd, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .addStructure(userId, groupId, structureId, autoStructureId,
+			parentStructureId, name, description, xsd, communityPermissions,
+			guestPermissions);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalStructure addStructure(
+		java.lang.String uuid, long userId, long groupId,
+		java.lang.String structureId, boolean autoStructureId,
+		java.lang.String parentStructureId, java.lang.String name,
+		java.lang.String description, java.lang.String xsd,
+		java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .addStructure(uuid, userId, groupId, structureId,
+			autoStructureId, parentStructureId, name, description, xsd,
+			addCommunityPermissions, addGuestPermissions, communityPermissions,
+			guestPermissions);
 	}
 
 	public static void addStructureResources(long groupId,
@@ -283,13 +316,12 @@ public class JournalStructureLocalServiceUtil {
 	public static com.liferay.portlet.journal.model.JournalStructure updateStructure(
 		long groupId, java.lang.String structureId,
 		java.lang.String parentStructureId, java.lang.String name,
-		java.lang.String description, java.lang.String xsd,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		java.lang.String description, java.lang.String xsd)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .updateStructure(groupId, structureId, parentStructureId,
-			name, description, xsd, serviceContext);
+			name, description, xsd);
 	}
 
 	public static JournalStructureLocalService getService() {

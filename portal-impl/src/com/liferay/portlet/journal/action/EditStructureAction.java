@@ -28,8 +28,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
@@ -63,7 +61,6 @@ import org.apache.struts.action.ActionMapping;
  * <a href="EditStructureAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
  *
  */
 public class EditStructureAction extends PortletAction {
@@ -229,8 +226,10 @@ public class EditStructureAction extends PortletAction {
 		String description = ParamUtil.getString(actionRequest, "description");
 		String xsd = ParamUtil.getString(actionRequest, "xsd");
 
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			JournalStructure.class.getName(), actionRequest);
+		String[] communityPermissions = actionRequest.getParameterValues(
+			"communityPermissions");
+		String[] guestPermissions = actionRequest.getParameterValues(
+			"guestPermissions");
 
 		JournalStructure structure = null;
 
@@ -240,7 +239,7 @@ public class EditStructureAction extends PortletAction {
 
 			structure = JournalStructureServiceUtil.addStructure(
 				groupId, structureId, autoStructureId, parentStructureId, name,
-				description, xsd, serviceContext);
+				description, xsd, communityPermissions, guestPermissions);
 		}
 		else {
 
@@ -248,7 +247,7 @@ public class EditStructureAction extends PortletAction {
 
 			structure = JournalStructureServiceUtil.updateStructure(
 				groupId, structureId, parentStructureId, name, description,
-				xsd, serviceContext);
+				xsd);
 		}
 
 		// Recent structures

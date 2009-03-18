@@ -25,7 +25,6 @@ package com.liferay.portlet.journal.webdav;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.webdav.BaseResourceImpl;
 import com.liferay.portal.webdav.BaseWebDAVStorageImpl;
 import com.liferay.portal.webdav.Resource;
@@ -52,7 +51,6 @@ import javax.servlet.http.HttpServletResponse;
  * <a href="JournalWebDAVStorageImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
  *
  */
 public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
@@ -187,8 +185,6 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				return HttpServletResponse.SC_NOT_FOUND;
 			}
 
-			ServiceContext serviceContext = new ServiceContext();
-
 			Object model = resource.getModel();
 
 			if (model instanceof JournalStructure) {
@@ -202,7 +198,7 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				JournalStructureServiceUtil.updateStructure(
 					structure.getGroupId(), structure.getStructureId(),
 					structure.getParentStructureId(), structure.getName(),
-					structure.getDescription(), xsd, serviceContext);
+					structure.getDescription(), xsd);
 
 				return HttpServletResponse.SC_CREATED;
 			}
@@ -222,7 +218,7 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 					template.getDescription(), xsl, formatXsl,
 					template.getLangType(), template.isCacheable(),
 					template.isSmallImage(), template.getSmallImageURL(),
-					smallFile, serviceContext);
+					smallFile);
 
 				return HttpServletResponse.SC_CREATED;
 			}
