@@ -44,6 +44,8 @@ window.Class = Expanse.Class;
 		options.body = options.message;
 		options.header = options.title;
 		options.fixedcenter = !options.noCenter;
+		options.onClose = options.close;
+		options.onOpen = options.open;
 
 		if (options.position) {
 			options.xy = options.position;
