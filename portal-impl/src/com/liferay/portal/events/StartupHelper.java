@@ -206,7 +206,7 @@ public class StartupHelper {
 	}
 
 	protected void dropIndexes() throws Exception {
-		if (_dropIndexes) {
+		if (!_dropIndexes) {
 			return;
 		}
 
