@@ -244,8 +244,6 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 		String newPath = sharepointRequest.getParameterValue("newUrl");
 		String newParentFolderPath = getParentFolderPath(newPath);
 
-		ServiceContext serviceContext = new ServiceContext();
-
 		long newGroupId = SharepointUtil.getGroupId(newParentFolderPath);
 
 		long newParentFolderId = getLastFolderId(
@@ -254,13 +252,12 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 
 		String newName = getResourceName(newPath);
 
+		ServiceContext serviceContext = new ServiceContext();
+
 		if (fileEntry != null) {
 			long folderId = fileEntry.getFolderId();
 			String name = fileEntry.getName();
 			String description = fileEntry.getDescription();
-			String[] tagsEntries = TagsEntryLocalServiceUtil.getEntryNames(
-				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
-			serviceContext.setTagsEntries(tagsEntries);
 			String extraSettings = fileEntry.getExtraSettings();
 
 			InputStream is = DLFileEntryLocalServiceUtil.getFileAsStream(
@@ -268,6 +265,11 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 				fileEntry.getFolderId(), fileEntry.getName());
 
 			byte[] bytes = FileUtil.getBytes(is);
+
+			String[] tagsEntries = TagsEntryLocalServiceUtil.getEntryNames(
+				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+
+			serviceContext.setTagsEntries(tagsEntries);
 
 			fileEntry = DLFileEntryServiceUtil.updateFileEntry(
 				folderId, newParentFolderId, name, newName, newName,
@@ -318,10 +320,12 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 
 			name = fileEntry.getName();
 			description = fileEntry.getDescription();
+			extraSettings = fileEntry.getExtraSettings();
+
 			String[] tagsEntries = TagsEntryLocalServiceUtil.getEntryNames(
 				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+
 			serviceContext.setTagsEntries(tagsEntries);
-			extraSettings = fileEntry.getExtraSettings();
 
 			DLFileEntryServiceUtil.updateFileEntry(
 				parentFolderId, parentFolderId, name, title, title,

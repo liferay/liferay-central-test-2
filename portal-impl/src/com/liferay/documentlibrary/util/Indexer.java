@@ -42,7 +42,6 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
-import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.tags.model.TagsEntryConstants;
 import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 

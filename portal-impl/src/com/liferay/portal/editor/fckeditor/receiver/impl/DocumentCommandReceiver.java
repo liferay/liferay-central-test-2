@@ -100,8 +100,8 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 			serviceContext.setAddGuestPermissions(true);
 
 			DLFileEntryServiceUtil.addFileEntry(
-				folderId, name, title, description, extraSettings,
-				file, serviceContext);
+				folderId, name, title, description, extraSettings, file,
+				serviceContext);
 		}
 		catch (Exception e) {
 			throw new FCKException(e);

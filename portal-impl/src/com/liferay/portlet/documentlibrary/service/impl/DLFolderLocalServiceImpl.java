@@ -133,10 +133,10 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		// Layout
 
-		String[] pathArray = folder.getPathArray();
-
 		if (PropsValues.DL_LAYOUTS_SYNC_ENABLED &&
 			(parentFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+
+			String[] pathArray = folder.getPathArray();
 
 			String layoutsSyncPrivateFolder = GetterUtil.getString(
 				PropsUtil.get(PropsKeys.DL_LAYOUTS_SYNC_PRIVATE_FOLDER));
@@ -243,11 +243,6 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			deleteFolder(curFolder);
 		}
 
-		// Expando
-
-		expandoValueLocalService.deleteValues(
-			DLFolder.class.getName(), folder.getFolderId());
-
 		// File entries
 
 		dlFileEntryLocalService.deleteFileEntries(folder.getFolderId());
@@ -256,6 +251,11 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		webDAVPropsLocalService.deleteWebDAVProps(
 			DLFolder.class.getName(), folder.getPrimaryKey());
+
+		// Expando
+
+		expandoValueLocalService.deleteValues(
+			DLFolder.class.getName(), folder.getFolderId());
 
 		// Resources
 
@@ -441,6 +441,8 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			String description, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		// Folder
+
 		DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
 
 		parentFolderId = getParentFolderId(folder, parentFolderId);
@@ -460,6 +462,8 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		ExpandoBridge expandoBridge = folder.getExpandoBridge();
 
 		expandoBridge.setAttributes(serviceContext);
+
+		// Layout
 
 		if (PropsValues.DL_LAYOUTS_SYNC_ENABLED) {
 			String privateFolder = GetterUtil.getString(PropsUtil.get(

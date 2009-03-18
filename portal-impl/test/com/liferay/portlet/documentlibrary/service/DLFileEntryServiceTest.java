@@ -50,6 +50,7 @@ public class DLFileEntryServiceTest extends BaseServiceTestCase {
 		byte[] bytes = content.getBytes();
 
 		ServiceContext serviceContext = new ServiceContext();
+
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 

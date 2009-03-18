@@ -93,13 +93,13 @@ public class DLFileEntryLocalServiceImpl
 
 	public DLFileEntry addFileEntry(
 			long userId, long folderId, String name, String title,
-			String description, String extraSettings,
-			byte[] bytes, ServiceContext serviceContext)
+			String description, String extraSettings, byte[] bytes,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return addFileEntry(
-			null, userId, folderId, name, title, description,
-			extraSettings, bytes, serviceContext);
+			null, userId, folderId, name, title, description, extraSettings,
+			bytes, serviceContext);
 	}
 
 	public DLFileEntry addFileEntry(
@@ -140,8 +140,8 @@ public class DLFileEntryLocalServiceImpl
 
 	public DLFileEntry addFileEntry(
 			String uuid, long userId, long folderId, String name, String title,
-			String description, String extraSettings,
-			byte[] bytes, ServiceContext serviceContext)
+			String description, String extraSettings, byte[] bytes,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		if (!PropsValues.WEBDAV_LITMUS) {
@@ -341,8 +341,8 @@ public class DLFileEntryLocalServiceImpl
 		}
 		else {
 			return addFileEntry(
-				userId, folderId, name, title, description,
-				extraSettings, file, serviceContext);
+				userId, folderId, name, title, description, extraSettings, file,
+				serviceContext);
 		}
 	}
 
@@ -423,11 +423,6 @@ public class DLFileEntryLocalServiceImpl
 			dlFileVersionPersistence.remove(fileVersion);
 		}
 
-		// Expando
-
-		expandoValueLocalService.deleteValues(
-			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
-
 		// Tags
 
 		tagsAssetLocalService.deleteAsset(
@@ -452,6 +447,11 @@ public class DLFileEntryLocalServiceImpl
 
 		webDAVPropsLocalService.deleteWebDAVProps(
 			DLFileEntry.class.getName(), fileEntry.getPrimaryKey());
+
+		// Expando
+
+		expandoValueLocalService.deleteValues(
+			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
 		// Resources
 
@@ -860,6 +860,11 @@ public class DLFileEntryLocalServiceImpl
 
 			resourcePersistence.update(resource, false);
 
+			// Expando
+
+			expandoValueLocalService.deleteValues(
+				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+
 			// File
 
 			dlService.updateFile(
@@ -898,11 +903,6 @@ public class DLFileEntryLocalServiceImpl
 
 				mbDiscussionPersistence.update(discussion, false);
 			}
-
-			// Expando
-
-			expandoValueLocalService.deleteValues(
-				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
 			// Social
 

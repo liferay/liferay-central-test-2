@@ -84,8 +84,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		DLFolder destFolder = addFolder(
 			groupId, parentFolderId, name, description, serviceContext);
 
-		copyFolder(
-			srcFolder, destFolder, serviceContext);
+		copyFolder(srcFolder, destFolder, serviceContext);
 
 		return destFolder;
 	}
@@ -428,8 +427,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 				destFolder.getGroupId(), destFolder.getFolderId(), name,
 				description, serviceContext);
 
-			copyFolder(
-				srcSubfolder, destSubfolder, serviceContext);
+			copyFolder(srcSubfolder, destSubfolder, serviceContext);
 		}
 	}
 
