@@ -43,9 +43,6 @@ public class StagingTestSuite extends BaseTests {
 		testSuite.addTest(LoginTests.suite());
 		testSuite.addTest(ControlPanelTests.suite());
 		testSuite.addTest(BlogsTests.suite());
-		testSuite.addTest(BlogsTests.suite());
-		testSuite.addTest(BlogsTests.suite());
-		testSuite.addTest(BlogsTests.suite());
 
 		testSuite.addTestSuite(StopSeleniumTest.class);
 
