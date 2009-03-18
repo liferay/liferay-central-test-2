@@ -346,6 +346,10 @@ public abstract class DBUtil {
 			is = classLoader.getResourceAsStream(path);
 		}
 
+		if (is == null) {
+			_log.error("Invalid path " + path);
+		}
+
 		String template = StringUtil.read(is);
 
 		is.close();
