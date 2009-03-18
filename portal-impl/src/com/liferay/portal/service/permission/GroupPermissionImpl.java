@@ -56,7 +56,17 @@ public class GroupPermissionImpl implements GroupPermission {
 			PermissionChecker permissionChecker, long groupId, String actionId)
 		throws PortalException, SystemException {
 
-		if (actionId.equals(ActionKeys.MANAGE_LAYOUTS)) {
+		if (actionId.equals(ActionKeys.ASSIGN_MEMBERS)) {
+			Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+			if (group.isOrganization()) {
+				long organizationId = group.getClassPK();
+
+				return OrganizationPermissionUtil.contains(
+					permissionChecker, organizationId, ActionKeys.MANAGE_USERS);
+			}
+		}
+		else if (actionId.equals(ActionKeys.MANAGE_LAYOUTS)) {
 			Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 			if (group.isOrganization()) {
@@ -86,16 +96,6 @@ public class GroupPermissionImpl implements GroupPermission {
 						return true;
 					}
 				}
-			}
-		}
-		else if (actionId.equals(ActionKeys.ASSIGN_MEMBERS)) {
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-			if (group.isOrganization()) {
-				long organizationId = group.getClassPK();
-
-				return OrganizationPermissionUtil.contains(
-					permissionChecker, organizationId, ActionKeys.MANAGE_USERS);
 			}
 		}
 
