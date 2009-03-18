@@ -66,6 +66,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				actionRequest, "orderByCol");
 			String orderByType = ParamUtil.getString(
 				actionRequest, "orderByType");
+			String structureId = ParamUtil.getString(
+				actionRequest, "structureId");
 
 			GroupLocalServiceUtil.getGroup(groupId);
 
@@ -82,6 +84,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			preferences.setValue("page-delta", String.valueOf(pageDelta));
 			preferences.setValue("order-by-col", orderByCol);
 			preferences.setValue("order-by-type", orderByType);
+			preferences.setValue("structure-id", structureId);
 
 			preferences.store();
 

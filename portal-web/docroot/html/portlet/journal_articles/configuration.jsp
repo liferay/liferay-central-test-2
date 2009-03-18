@@ -26,10 +26,40 @@
 
 <%
 groupId = ParamUtil.getLong(request, "groupId", groupId);
+PortletURL portletURL = renderResponse.createRenderURL();
+
+JournalStructure journalStructure = null;
+
+String structureName = StringPool.BLANK;
+
+if (Validator.isNotNull(structureId)) {
+	try {
+		journalStructure = JournalStructureLocalServiceUtil.getStructure(groupId, structureId);
+
+		structureName = journalStructure.getName();
+	}
+	catch (NoSuchStructureException nsse) {
+	}
+}
 %>
+
+<script type="text/javascript">
+	function <portlet:namespace />removeStructure() {
+		document.<portlet:namespace />fm.<portlet:namespace />structureId.value = "";
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />selectStructure(structureId) {
+	if (document.<portlet:namespace />fm.<portlet:namespace />structureId.value != structureId) {
+			document.<portlet:namespace />fm.<portlet:namespace />structureId.value = structureId;
+			submitForm(document.<portlet:namespace />fm);
+		}
+	}
+</script>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+<input name="<portlet:namespace />structureId" type="hidden" value="<%= structureId %>" />
 
 <liferay-ui:error exception="<%= NoSuchGroupException.class %>" message="the-community-could-not-be-found" />
 
@@ -146,10 +176,89 @@ groupId = ParamUtil.getLong(request, "groupId", groupId);
 		</select>
 	</td>
 </tr>
+<tr>
+	<td>
+		<liferay-ui:message key="structure" />
+	</td>
+	<td>
+		<%= structureName %>
+		<span style="display:<%= Validator.isNull(structureId) ? "none" : "inline" %>">
+			<input id="<portlet:namespace />removeStructureButton" type="button" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeStructure();" />
+		</span>
+	</td>
+</tr>
 </table>
 
 <br />
 
 <input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+
+<div class="separator"><!-- --></div>
+
+<input name="<portlet:namespace />groupId" type="hidden" value="" />
+
+<liferay-ui:tabs names="structures" />
+
+<%
+StructureSearch searchContainer = new StructureSearch(renderRequest, portletURL);
+
+searchContainer.setDelta(10);
+%>
+
+<liferay-ui:search-form
+	page="/html/portlet/journal/structure_search.jsp"
+	searchContainer="<%= searchContainer %>"
+/>
+
+<%
+StructureSearchTerms searchTerms = (StructureSearchTerms)searchContainer.getSearchTerms();
+%>
+
+<%@ include file="/html/portlet/journal/structure_search_results.jspf" %>
+
+<div class="separator"><!-- --></div>
+
+<%
+List resultRows = searchContainer.getResultRows();
+
+for (int i = 0; i < results.size(); i++) {
+	JournalStructure structure = (JournalStructure)results.get(i);
+
+	ResultRow row = new ResultRow(structure, structure.getStructureId(), i);
+
+	StringBuilder href = new StringBuilder();
+
+	href.append("javascript: ");
+	href.append(renderResponse.getNamespace());
+	href.append("selectStructure('");
+	href.append(structure.getStructureId());
+	href.append("');");
+
+	String rowHREF = href.toString();
+
+	// Structure id
+
+	row.addText(structure.getStructureId(), rowHREF);
+
+	// Name and description
+
+	StringBuilder sb = new StringBuilder();
+
+	sb.append(structure.getName());
+
+	if (Validator.isNotNull(structure.getDescription())) {
+		sb.append("<br />");
+		sb.append(structure.getDescription());
+	}
+
+	row.addText(sb.toString(), rowHREF);
+
+	// Add result row
+
+	resultRows.add(row);
+}
+%>
+
+<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
 </form>

@@ -74,6 +74,9 @@ double version = ParamUtil.getDouble(request, "version");
 		searchTerms.setGroupId(groupId);
 		searchTerms.setType(type);
 		searchTerms.setStatus("approved");
+		if (Validator.isNotNull(structureId)) {
+			searchTerms.setStructureId(structureId);
+		}
 		%>
 
 		<%@ include file="/html/portlet/journal/article_search_results.jspf" %>
