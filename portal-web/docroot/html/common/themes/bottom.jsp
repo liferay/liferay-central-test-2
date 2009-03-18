@@ -28,7 +28,7 @@
 
 <c:if test="<%= themeDisplay.isIncludeCalendarJs() %>">
 	<script type="text/javascript">
-
+		// <![CDATA[
 		<%
 		String[] calendarDays = new String[CalendarUtil.DAYS_ABBREVIATION.length];
 
@@ -60,6 +60,7 @@
 				previousMonth: '<%= UnicodeLanguageUtil.get(pageContext, "previous") %>'
 			};
 		})();
+		// ]]>
 	</script>
 </c:if>
 
@@ -69,7 +70,7 @@
 	long javaScriptLastModified = ServletContextUtil.getLastModified(application, "/html/js", true);
 	%>
 
-	<script src="<%= PortalUtil.getStaticResourceURL(request, themeDisplay.getPathJavaScript() + "/liferay/portlet_css.js", javaScriptLastModified) %>" type="text/javascript"></script>
+	<script src="<%= HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, themeDisplay.getPathJavaScript() + "/liferay/portlet_css.js", javaScriptLastModified)) %>" type="text/javascript"></script>
 </c:if>
 
 <%-- Portlet CSS and JavaScript References --%>
@@ -92,7 +93,7 @@ List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORT
 			if (!footerPortalCssPaths.contains(footerPortalCssPath)) {
 				footerPortalCssPaths.add(footerPortalCssPath);
 
-				footerPortalCssPath = PortalUtil.getStaticResourceURL(request, footerPortalCssPath, portlet.getTimestamp());
+				footerPortalCssPath = HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, footerPortalCssPath, portlet.getTimestamp()));
 	%>
 
 				<link href="<%= footerPortalCssPath %>" rel="stylesheet" type="text/css" />
@@ -113,7 +114,7 @@ List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORT
 			if (!footerPortletCssPaths.contains(footerPortletCssPath)) {
 				footerPortletCssPaths.add(footerPortletCssPath);
 
-				footerPortletCssPath = PortalUtil.getStaticResourceURL(request, footerPortletCssPath, portlet.getTimestamp());
+				footerPortletCssPath = HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, footerPortletCssPath, portlet.getTimestamp()));
 	%>
 
 				<link href="<%= footerPortletCssPath %>" rel="stylesheet" type="text/css" />
@@ -134,7 +135,7 @@ List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORT
 			if (!footerPortalJavaScriptPaths.contains(footerPortalJavaScriptPath) && !themeDisplay.isIncludedJs(footerPortalJavaScriptPath)) {
 				footerPortalJavaScriptPaths.add(footerPortalJavaScriptPath);
 
-				footerPortalJavaScriptPath = PortalUtil.getStaticResourceURL(request, footerPortalJavaScriptPath, portlet.getTimestamp());
+				footerPortalJavaScriptPath = HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, footerPortalJavaScriptPath, portlet.getTimestamp()));
 	%>
 
 				<script src="<%= footerPortalJavaScriptPath %>" type="text/javascript"></script>
@@ -155,7 +156,7 @@ List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORT
 			if (!footerPortletJavaScriptPaths.contains(footerPortletJavaScriptPath)) {
 				footerPortletJavaScriptPaths.add(footerPortletJavaScriptPath);
 
-				footerPortletJavaScriptPath = PortalUtil.getStaticResourceURL(request, footerPortletJavaScriptPath, portlet.getTimestamp());
+				footerPortletJavaScriptPath = HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, footerPortletJavaScriptPath, portlet.getTimestamp()));
 	%>
 
 				<script src="<%= footerPortletJavaScriptPath %>" type="text/javascript"></script>
@@ -180,7 +181,7 @@ StringBuilder pageBottomSB = (StringBuilder)request.getAttribute(WebKeys.PAGE_BO
 
 <%-- Theme JavaScript --%>
 
-<script src="<%= PortalUtil.getStaticResourceURL(request, themeDisplay.getPathThemeJavaScript() + "/javascript.js") %>" type="text/javascript"></script>
+<script src="<%= HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, themeDisplay.getPathThemeJavaScript() + "/javascript.js")) %>" type="text/javascript"></script>
 
 <c:if test="<%= layout != null %>">
 

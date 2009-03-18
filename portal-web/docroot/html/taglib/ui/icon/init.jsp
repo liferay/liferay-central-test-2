@@ -61,6 +61,8 @@ if (Validator.isNull(src)) {
 
 String url = GetterUtil.getString((String)request.getAttribute("liferay-ui:icon:url"));
 
+url = HtmlUtil.escape(url);
+
 String method = (String)request.getAttribute("liferay-ui:icon:method");
 
 if (Validator.isNull(method)) {

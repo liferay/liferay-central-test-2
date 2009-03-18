@@ -397,6 +397,16 @@ Liferay.Util = {
 		);
 	},
 
+	forcePost: function(link) {
+		var instance = this;
+
+		if (link) {
+			var url = jQuery(link).attr('href');
+
+			submitForm(document.hrefFm, url);
+		}
+	},
+
 	getColumnId: function(str) {
 		var columnId = str.replace(/layout-column_/, '');
 

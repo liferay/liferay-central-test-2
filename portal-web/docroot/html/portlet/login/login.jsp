@@ -31,7 +31,7 @@
 		String signedInAs = user.getFullName();
 
 		if (themeDisplay.isShowMyAccountIcon()) {
-			signedInAs = "<a href=\"" + themeDisplay.getURLMyAccount().toString() + "\">" + signedInAs + "</a>";
+			signedInAs = "<a href=\"" + HtmlUtil.escape(themeDisplay.getURLMyAccount().toString()) + "\">" + signedInAs + "</a>";
 		}
 		%>
 

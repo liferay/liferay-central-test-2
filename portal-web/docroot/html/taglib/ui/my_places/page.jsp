@@ -218,16 +218,20 @@ List<Group> myPlaces = user.getMyPlaces(max);
 
 						<c:if test="<%= showPublicPlace %>">
 							<li class="public <%= selectedPlace ? "current" : "" %>">
-								<a href="<%= publicLayoutsPageCount > 0 ? "javascript: submitForm(document.hrefFm, '" + portletURL.toString() + "');" : "javascript: ;" %>"
+								<a href="<%= publicLayoutsPageCount > 0 ? HtmlUtil.escape(portletURL.toString()) : "javascript: ;" %>"
 
 								<c:if test="<%= userCommunity %>">
 									id="my-community-public-pages"
 								</c:if>
 
+								<c:if test="<%= publicLayoutsPageCount > 0 %>">
+									onclick="Liferay.Util.forcePost(this); return false;"
+								</c:if>
+
 								><liferay-ui:message key="public-pages" /> <span class="page-count">(<%= publicLayoutsPageCount %>)</span></a>
 
 								<c:if test="<%= publicAddPageHREF != null %>">
-									<a class="add-page" href="javascript: submitForm(document.hrefFm, '<%= publicAddPageHREF %>');"><liferay-ui:message key="manage-pages" /></a>
+									<a class="add-page" href="<%= HtmlUtil.escape(publicAddPageHREF) %>" onclick="Liferay.Util.forcePost(this); return false;"><liferay-ui:message key="manage-pages" /></a>
 								</c:if>
 							</li>
 						</c:if>
@@ -245,16 +249,20 @@ List<Group> myPlaces = user.getMyPlaces(max);
 
 						<c:if test="<%= showPrivatePlace %>">
 							<li class="private <%= selectedPlace ? "current" : "" %>">
-								<a href="<%= privateLayoutsPageCount > 0 ? "javascript: submitForm(document.hrefFm, '" + portletURL.toString() + "');" : "javascript: ;" %>"
+								<a href="<%= privateLayoutsPageCount > 0 ? HtmlUtil.escape(portletURL.toString()) : "javascript: ;" %>"
 
 								<c:if test="<%= userCommunity %>">
 									id="my-community-private-pages"
 								</c:if>
 
+								<c:if test="<%= privateLayoutsPageCount > 0 %>">
+									onclick="Liferay.Util.forcePost(this); return false;"
+								</c:if>
+
 								><liferay-ui:message key="private-pages" /> <span class="page-count">(<%= privateLayoutsPageCount %>)</span></a>
 
 								<c:if test="<%= privateAddPageHREF != null %>">
-									<a class="add-page" href="javascript: submitForm(document.hrefFm, '<%= privateAddPageHREF %>');"><liferay-ui:message key="manage-pages" /></a>
+									<a class="add-page" href="<%= HtmlUtil.escape(privateAddPageHREF) %>" onclick="Liferay.Util.forcePost(this); return false;"><liferay-ui:message key="manage-pages" /></a>
 								</c:if>
 							</li>
 						</c:if>
@@ -265,6 +273,5 @@ List<Group> myPlaces = user.getMyPlaces(max);
 		<%
 		}
 		%>
-
 	</ul>
 </c:if>

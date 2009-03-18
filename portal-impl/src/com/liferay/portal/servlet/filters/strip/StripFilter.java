@@ -252,8 +252,8 @@ public class StripFilter extends BasePortalFilter {
 							continue;
 						}
 
-						scriptContent = MinifierUtil.minifyJavaScript(
-							scriptContent);
+						scriptContent = "/*<![CDATA[*/" + MinifierUtil.minifyJavaScript(
+							scriptContent) + "/*]]>*/";
 
 						if (Validator.isNull(scriptContent)) {
 							i += _MARKER_SCRIPT_CLOSE.length;

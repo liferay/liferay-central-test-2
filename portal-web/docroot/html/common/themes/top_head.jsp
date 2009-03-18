@@ -31,7 +31,7 @@
 
 <%-- Portal CSS --%>
 
-<link href="<%= PortalUtil.getStaticResourceURL(request, themeDisplay.getCDNHost() + themeDisplay.getPathContext() + "/html/portal/css.jsp") %>" rel="stylesheet" type="text/css" />
+<link href="<%= HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, themeDisplay.getCDNHost() + themeDisplay.getPathContext() + "/html/portal/css.jsp")) %>" rel="stylesheet" type="text/css" />
 
 <%
 List<Portlet> portlets = null;
@@ -88,7 +88,7 @@ if (layout != null) {
 			if (!headerPortalCssPaths.contains(headerPortalCssPath)) {
 				headerPortalCssPaths.add(headerPortalCssPath);
 
-				headerPortalCssPath = PortalUtil.getStaticResourceURL(request, headerPortalCssPath, portlet.getTimestamp());
+				headerPortalCssPath = HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, headerPortalCssPath, portlet.getTimestamp()));
 	%>
 
 				<link href="<%= headerPortalCssPath %>" rel="stylesheet" type="text/css" />
@@ -109,7 +109,7 @@ if (layout != null) {
 			if (!headerPortletCssPaths.contains(headerPortletCssPath)) {
 				headerPortletCssPaths.add(headerPortletCssPath);
 
-				headerPortletCssPath = PortalUtil.getStaticResourceURL(request, headerPortletCssPath, portlet.getTimestamp());
+				headerPortletCssPath = HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, headerPortletCssPath, portlet.getTimestamp()));
 	%>
 
 				<link href="<%= headerPortletCssPath %>" rel="stylesheet" type="text/css" />
@@ -143,7 +143,7 @@ if (layout != null) {
 			if (!headerPortalJavaScriptPaths.contains(headerPortalJavaScriptPath) && !themeDisplay.isIncludedJs(headerPortalJavaScriptPath)) {
 				headerPortalJavaScriptPaths.add(headerPortalJavaScriptPath);
 
-				headerPortalJavaScriptPath = PortalUtil.getStaticResourceURL(request, headerPortalJavaScriptPath, portlet.getTimestamp());
+				headerPortalJavaScriptPath = HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, headerPortalJavaScriptPath, portlet.getTimestamp()));
 	%>
 
 				<script src="<%= headerPortalJavaScriptPath %>" type="text/javascript"></script>
@@ -164,7 +164,7 @@ if (layout != null) {
 			if (!headerPortletJavaScriptPaths.contains(headerPortletJavaScriptPath)) {
 				headerPortletJavaScriptPaths.add(headerPortletJavaScriptPath);
 
-				headerPortletJavaScriptPath = PortalUtil.getStaticResourceURL(request, headerPortletJavaScriptPath, portlet.getTimestamp());
+				headerPortletJavaScriptPath = HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, headerPortletJavaScriptPath, portlet.getTimestamp()));
 	%>
 
 				<script src="<%= headerPortletJavaScriptPath %>" type="text/javascript"></script>
@@ -201,13 +201,13 @@ StringBuilder pageTopSB = (StringBuilder)request.getAttribute(WebKeys.PAGE_TOP);
 
 <%-- Theme CSS --%>
 
-<link href="<%= PortalUtil.getStaticResourceURL(request, themeDisplay.getPathThemeCss() + "/main.css") %>" rel="stylesheet" type="text/css" />
+<link href="<%= HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, themeDisplay.getPathThemeCss() + "/main.css")) %>" rel="stylesheet" type="text/css" />
 
 <style type="text/css">
 	/* <![CDATA[ */
 		<c:if test="<%= !themeDisplay.getCompanyLogo().equals(StringPool.BLANK) %>">
 			#banner .logo a {
-				background: url(<%= themeDisplay.getCompanyLogo() %>) no-repeat;
+				background: url(<%= HtmlUtil.escape(themeDisplay.getCompanyLogo()) %>) no-repeat;
 				display: block;
 				font-size: 0;
 				height: <%= themeDisplay.getCompanyLogoHeight() %>px;
