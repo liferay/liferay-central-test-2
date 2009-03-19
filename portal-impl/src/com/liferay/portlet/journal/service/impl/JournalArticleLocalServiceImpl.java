@@ -58,13 +58,15 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.ImageLocalServiceUtil;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextUtil;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.journal.ArticleContentException;
 import com.liferay.portlet.journal.ArticleDisplayDateException;
 import com.liferay.portlet.journal.ArticleExpirationDateException;
@@ -131,9 +133,7 @@ public class JournalArticleLocalServiceImpl
 			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
 			boolean neverReview, boolean indexable, boolean smallImage,
 			String smallImageURL, File smallFile, Map<String, byte[]> images,
-			String articleURL, PortletPreferences preferences,
-			String[] tagsCategories, String[] tagsEntries,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			String articleURL, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		double version = JournalArticleImpl.DEFAULT_VERSION;
@@ -147,8 +147,7 @@ public class JournalArticleLocalServiceImpl
 			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
 			reviewDateHour, reviewDateMinute, neverReview, indexable,
 			smallImage, smallImageURL, smallFile, images, articleURL,
-			preferences, tagsCategories, tagsEntries, addCommunityPermissions,
-			addGuestPermissions);
+			serviceContext);
 	}
 
 	public JournalArticle addArticle(
@@ -163,9 +162,7 @@ public class JournalArticleLocalServiceImpl
 			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
 			boolean neverReview, boolean indexable, boolean smallImage,
 			String smallImageURL, File smallFile, Map<String, byte[]> images,
-			String articleURL, PortletPreferences preferences,
-			String[] tagsCategories, String[] tagsEntries,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			String articleURL, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return addArticle(
@@ -177,9 +174,7 @@ public class JournalArticleLocalServiceImpl
 			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
 			reviewDateHour, reviewDateMinute, neverReview, indexable,
 			smallImage, smallImageURL, smallFile, images, articleURL,
-			preferences, tagsCategories, tagsEntries,
-			Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
+			serviceContext);
 	}
 
 	public JournalArticle addArticle(
@@ -195,74 +190,7 @@ public class JournalArticleLocalServiceImpl
 			int reviewDateMinute, boolean neverReview, boolean indexable,
 			boolean smallImage, String smallImageURL, File smallFile,
 			Map<String, byte[]> images, String articleURL,
-			PortletPreferences preferences, String[] tagsCategories,
-			String[] tagsEntries, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		return addArticle(
-			uuid, userId, groupId, articleId, autoArticleId, version, title,
-			description, content, type, structureId, templateId,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, expirationDateMonth, expirationDateDay,
-			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
-			reviewDateHour, reviewDateMinute, neverReview, indexable,
-			smallImage, smallImageURL, smallFile, images, articleURL,
-			preferences, tagsCategories, tagsEntries,
-			Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
-	}
-
-	public JournalArticle addArticle(
-			long userId, long groupId,String articleId, boolean autoArticleId,
-			String title, String description, String content, String type,
-			String structureId, String templateId, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, int expirationDateMonth,
-			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
-			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
-			boolean neverReview, boolean indexable, boolean smallImage,
-			String smallImageURL, File smallFile, Map<String, byte[]> images,
-			String articleURL, PortletPreferences preferences,
-			String[] tagsCategories, String[] tagsEntries,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		double version = JournalArticleImpl.DEFAULT_VERSION;
-
-		return addArticle(
-			null, userId, groupId, articleId, autoArticleId,
-			version, title, description, content, type, structureId,
-			templateId, displayDateMonth, displayDateDay, displayDateYear,
-			displayDateHour, displayDateMinute, expirationDateMonth,
-			expirationDateDay, expirationDateYear, expirationDateHour,
-			expirationDateMinute, neverExpire, reviewDateMonth, reviewDateDay,
-			reviewDateYear, reviewDateHour, reviewDateMinute, neverReview,
-			indexable, smallImage, smallImageURL, smallFile, images, articleURL,
-			preferences, tagsCategories, tagsEntries, null, null,
-			communityPermissions, guestPermissions);
-	}
-
-	public JournalArticle addArticle(
-			String uuid, long userId, long groupId, String articleId,
-			boolean autoArticleId, double version, String title,
-			String description, String content, String type, String structureId,
-			String templateId, int displayDateMonth, int displayDateDay,
-			int displayDateYear, int displayDateHour, int displayDateMinute,
-			int expirationDateMonth, int expirationDateDay,
-			int expirationDateYear, int expirationDateHour,
-			int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
-			int reviewDateDay, int reviewDateYear, int reviewDateHour,
-			int reviewDateMinute, boolean neverReview, boolean indexable,
-			boolean smallImage, String smallImageURL, File smallFile,
-			Map<String, byte[]> images, String articleURL,
-			PortletPreferences preferences, String[] tagsCategories,
-			String[] tagsEntries, Boolean addCommunityPermissions,
-			Boolean addGuestPermissions, String[] communityPermissions,
-			String[] guestPermissions)
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Article
@@ -365,23 +293,35 @@ public class JournalArticleLocalServiceImpl
 
 		// Resources
 
-		if ((addCommunityPermissions != null) &&
-			(addGuestPermissions != null)) {
+		if (serviceContext.getAddCommunityPermissions() ||
+			serviceContext.getAddGuestPermissions()) {
 
 			addArticleResources(
-				article, addCommunityPermissions.booleanValue(),
-				addGuestPermissions.booleanValue());
+				article, serviceContext.getAddCommunityPermissions(),
+				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addArticleResources(
-				article, communityPermissions, guestPermissions);
+				article, serviceContext.getCommunityPermissions(),
+				serviceContext.getGuestPermissions());
 		}
+
+		// Expando
+
+		ExpandoBridge expandoBridge = article.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 
 		// Tags
 
-		updateTagsAsset(userId, article, tagsCategories, tagsEntries);
+		updateTagsAsset(
+			userId, article, serviceContext.getTagsCategories(),
+			serviceContext.getTagsEntries());
 
 		// Email
+
+		PortletPreferences preferences =
+			ServiceContextUtil.getPortletPreferences(serviceContext);
 
 		try {
 			sendEmail(article, articleURL, preferences, "requested");
@@ -440,7 +380,7 @@ public class JournalArticleLocalServiceImpl
 
 	public JournalArticle approveArticle(
 			long userId, long groupId, String articleId, double version,
-			String articleURL, PortletPreferences preferences)
+			String articleURL, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Article
@@ -466,12 +406,21 @@ public class JournalArticleLocalServiceImpl
 
 		journalArticlePersistence.update(article, false);
 
+		// Expando
+
+		ExpandoBridge expandoBridge = article.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
+
 		// Tags
 
 		tagsAssetLocalService.updateVisible(
 			JournalArticle.class.getName(), article.getResourcePrimKey(), true);
 
 		// Email
+
+		PortletPreferences preferences =
+			ServiceContextUtil.getPortletPreferences(serviceContext);
 
 		try {
 			sendEmail(article, articleURL, preferences, "granted");
@@ -498,7 +447,7 @@ public class JournalArticleLocalServiceImpl
 					article.getTitle(), article.getDescription(),
 					article.getContent(), article.getType(),
 					article.getDisplayDate(), tagsCategories, tagsEntries,
-					article.getExpandoBridge());
+					expandoBridge);
 			}
 		}
 		catch (SearchException se) {
@@ -743,18 +692,18 @@ public class JournalArticleLocalServiceImpl
 
 	public void deleteArticle(
 			long groupId, String articleId, double version, String articleURL,
-			PortletPreferences preferences)
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		JournalArticle article = journalArticlePersistence.findByG_A_V(
 			groupId, articleId, version);
 
-		deleteArticle(article, articleURL, preferences);
+		deleteArticle(article, articleURL, serviceContext);
 	}
 
 	public void deleteArticle(
 			JournalArticle article, String articleURL,
-			PortletPreferences preferences)
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Indexer
@@ -770,6 +719,9 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		// Email
+		
+		PortletPreferences preferences =
+			ServiceContextUtil.getPortletPreferences(serviceContext);
 
 		if ((preferences != null) && !article.isApproved() &&
 			isLatestVersion(
@@ -787,6 +739,11 @@ public class JournalArticleLocalServiceImpl
 		// Tags
 
 		tagsAssetLocalService.deleteAsset(
+			JournalArticle.class.getName(), article.getResourcePrimKey());
+
+		// Expando
+
+		expandoValueLocalService.deleteValues(
 			JournalArticle.class.getName(), article.getResourcePrimKey());
 
 		// Ratings
@@ -854,21 +811,24 @@ public class JournalArticleLocalServiceImpl
 
 	public void expireArticle(
 			long groupId, String articleId, double version, String articleURL,
-			PortletPreferences preferences)
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		JournalArticle article = journalArticlePersistence.findByG_A_V(
 			groupId, articleId, version);
 
-		expireArticle(article, articleURL, preferences);
+		expireArticle(article, articleURL, serviceContext);
 	}
 
 	public void expireArticle(
 			JournalArticle article, String articleURL,
-			PortletPreferences preferences)
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Email
+
+		PortletPreferences preferences =
+			ServiceContextUtil.getPortletPreferences(serviceContext);
 
 		if ((preferences != null) && !article.isApproved() &&
 			isLatestVersion(
@@ -1768,8 +1728,7 @@ public class JournalArticleLocalServiceImpl
 			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
 			boolean neverReview, boolean indexable, boolean smallImage,
 			String smallImageURL, File smallFile, Map<String, byte[]> images,
-			String articleURL, PortletPreferences preferences,
-			String[] tagsCategories, String[] tagsEntries)
+			String articleURL, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Article
@@ -1885,11 +1844,23 @@ public class JournalArticleLocalServiceImpl
 		saveImages(
 			smallImage, article.getSmallImageId(), smallFile, smallBytes);
 
+		// Expando
+
+		ExpandoBridge expandoBridge = article.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
+
 		// Tags
+
+		String[] tagsCategories = serviceContext.getTagsCategories();
+		String[] tagsEntries = serviceContext.getTagsEntries();
 
 		updateTagsAsset(userId, article, tagsCategories, tagsEntries);
 
 		// Email
+
+		PortletPreferences preferences =
+			ServiceContextUtil.getPortletPreferences(serviceContext);
 
 		if (incrementVersion) {
 			try {
@@ -1911,7 +1882,7 @@ public class JournalArticleLocalServiceImpl
 						article.getTitle(), article.getDescription(),
 						article.getContent(), article.getType(),
 						article.getDisplayDate(), tagsCategories, tagsEntries,
-						article.getExpandoBridge());
+						expandoBridge);
 				}
 				else {
 					Indexer.deleteArticle(
@@ -2084,7 +2055,7 @@ public class JournalArticleLocalServiceImpl
 				Image oldImage = null;
 
 				try {
-					oldImage = ImageLocalServiceUtil.getImage(imageId);
+					oldImage = imageLocalService.getImage(imageId);
 				}
 				catch (NoSuchImageException nsie) {
 					continue;
@@ -2094,7 +2065,7 @@ public class JournalArticleLocalServiceImpl
 					newArticle.getGroupId(), newArticle.getArticleId(),
 					newArticle.getVersion(), instanceId, name, languageId);
 
-				ImageLocalServiceUtil.updateImage(
+				imageLocalService.updateImage(
 					imageId, oldImage.getTextObj());
 
 				String elContent =

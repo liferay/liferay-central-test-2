@@ -519,8 +519,11 @@ Liferay.Service.registerClass(
 	Liferay.Service.Journal, "JournalArticle",
 	{
 		addArticle: true,
+		approveArticle: true,
 		copyArticle: true,
 		getArticle: true,
+		deleteArticle: true,
+		expireArticle: true,
 		removeArticleLocale: true,
 		updateContent: true
 	}
@@ -550,10 +553,12 @@ Liferay.Service.registerClass(
 Liferay.Service.registerClass(
 	Liferay.Service.Journal, "JournalTemplate",
 	{
+		addTemplate: true,
 		copyTemplate: true,
 		deleteTemplate: true,
 		getStructureTemplates: true,
-		getTemplate: true
+		getTemplate: true,
+		updateTemplate: true
 	}
 );
 

@@ -49,16 +49,14 @@ public class JournalTemplateServiceUtil {
 		long groupId, java.lang.String templateId, boolean autoTemplateId,
 		java.lang.String structureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsl, boolean formatXsl,
-		java.lang.String langType, boolean cacheable, boolean smallImage,
-		java.lang.String smallImageURL, java.io.File smallFile,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String langType, boolean cacheable,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .addTemplate(groupId, templateId, autoTemplateId,
 			structureId, name, description, xsl, formatXsl, langType,
-			cacheable, smallImage, smallImageURL, smallFile,
-			addCommunityPermissions, addGuestPermissions);
+			cacheable, serviceContext);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate addTemplate(
@@ -67,15 +65,13 @@ public class JournalTemplateServiceUtil {
 		java.lang.String description, java.lang.String xsl, boolean formatXsl,
 		java.lang.String langType, boolean cacheable, boolean smallImage,
 		java.lang.String smallImageURL, java.io.File smallFile,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .addTemplate(groupId, templateId, autoTemplateId,
 			structureId, name, description, xsl, formatXsl, langType,
-			cacheable, smallImage, smallImageURL, smallFile,
-			communityPermissions, guestPermissions);
+			cacheable, smallImage, smallImageURL, smallFile, serviceContext);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate copyTemplate(
@@ -112,14 +108,28 @@ public class JournalTemplateServiceUtil {
 		long groupId, java.lang.String templateId,
 		java.lang.String structureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsl, boolean formatXsl,
+		java.lang.String langType, boolean cacheable,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .updateTemplate(groupId, templateId, structureId, name,
+			description, xsl, formatXsl, langType, cacheable, serviceContext);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalTemplate updateTemplate(
+		long groupId, java.lang.String templateId,
+		java.lang.String structureId, java.lang.String name,
+		java.lang.String description, java.lang.String xsl, boolean formatXsl,
 		java.lang.String langType, boolean cacheable, boolean smallImage,
-		java.lang.String smallImageURL, java.io.File smallFile)
+		java.lang.String smallImageURL, java.io.File smallFile,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .updateTemplate(groupId, templateId, structureId, name,
 			description, xsl, formatXsl, langType, cacheable, smallImage,
-			smallImageURL, smallFile);
+			smallImageURL, smallFile, serviceContext);
 	}
 
 	public static JournalTemplateService getService() {
