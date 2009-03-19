@@ -41,7 +41,7 @@ public class CommandReceiverFactory {
 
 		if (commandReceiver == null) {
 			commandReceiver = (CommandReceiver)InstancePool.get(
-				"com.liferay.portal.editor.fckeditor.commandReceiver.impl." +
+				"com.liferay.portal.editor.fckeditor.receiver.impl." +
 					type + "CommandReceiver");
 
 			_commandReceivers.put(type, commandReceiver);
