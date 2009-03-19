@@ -1379,9 +1379,15 @@ public class PortalImpl implements Portal {
 			Layout layout = null;
 
 			try {
+				String layoutFriendlytURL = "1";
+
+				if (urlParts.length == 4) {
+					layoutFriendlytURL = urlParts[3];
+				}
+
 				layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
 					group.getGroupId(), privateLayout,
-					StringPool.SLASH + urlParts[3]);
+					StringPool.SLASH + layoutFriendlytURL);
 
 				return layout.getPlid();
 			}
