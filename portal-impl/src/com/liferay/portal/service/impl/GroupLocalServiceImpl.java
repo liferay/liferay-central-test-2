@@ -234,7 +234,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	public void checkSystemGroups(long companyId)
 		throws PortalException, SystemException {
 
-		for (Group group : groupFinder.findBySystem()) {
+		for (Group group : groupFinder.findBySystem(companyId)) {
 			_systemGroupsMap.put(companyId + group.getName(), group);
 		}
 

@@ -224,7 +224,7 @@ public class GroupFinderImpl
 		}
 	}
 
-	public List<Group> findBySystem() throws SystemException {
+	public List<Group> findBySystem(long companyId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -235,6 +235,10 @@ public class GroupFinderImpl
 			SQLQuery q = session.createSQLQuery(sql);
 
 			q.addEntity("Group_", GroupImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
 
 			return q.list();
 		}

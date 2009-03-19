@@ -213,7 +213,7 @@ public class RoleFinderImpl extends BasePersistenceImpl implements RoleFinder {
 		}
 	}
 
-	public List<Role> findBySystem() throws SystemException {
+	public List<Role> findBySystem(long companyId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -224,6 +224,10 @@ public class RoleFinderImpl extends BasePersistenceImpl implements RoleFinder {
 			SQLQuery q = session.createSQLQuery(sql);
 
 			q.addEntity("Role_", RoleImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
 
 			return q.list();
 		}

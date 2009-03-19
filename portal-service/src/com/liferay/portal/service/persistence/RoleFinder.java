@@ -37,8 +37,8 @@ public interface RoleFinder {
 		java.util.LinkedHashMap<String, Object> params)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Role> findBySystem()
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portal.model.Role> findBySystem(
+		long companyId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Role> findByUserGroupRole(
 		long userId, long groupId) throws com.liferay.portal.SystemException;

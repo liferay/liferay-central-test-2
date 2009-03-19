@@ -49,8 +49,11 @@
 				FROM
 					Group_
 				WHERE
-					(Group_.name = 'Control Panel') OR
-					(Group_.name = 'Guest')
+					(Group_.companyId = ?) AND
+					(
+						(Group_.name = 'Control Panel') OR
+						(Group_.name = 'Guest')
+					)
 			)
 		]]>
 	</sql>
@@ -851,17 +854,20 @@
 				FROM
 					Role_
 				WHERE
-					(Role_.name = 'Administrator') OR
-					(Role_.name = 'Community Administrator') OR
-					(Role_.name = 'Community Member') OR
-					(Role_.name = 'Community Owner') OR
-					(Role_.name = 'Guest') OR
-					(Role_.name = 'Organization Administrator') OR
-					(Role_.name = 'Organization Member') OR
-					(Role_.name = 'Organization Owner') OR
-					(Role_.name = 'Owner') OR
-					(Role_.name = 'Power User') OR
-					(Role_.name = 'User')
+					(Role_.companyId = ?) AND
+					(
+						(Role_.name = 'Administrator') OR
+						(Role_.name = 'Community Administrator') OR
+						(Role_.name = 'Community Member') OR
+						(Role_.name = 'Community Owner') OR
+						(Role_.name = 'Guest') OR
+						(Role_.name = 'Organization Administrator') OR
+						(Role_.name = 'Organization Member') OR
+						(Role_.name = 'Organization Owner') OR
+						(Role_.name = 'Owner') OR
+						(Role_.name = 'Power User') OR
+						(Role_.name = 'User')
+					)
 			)
 		]]>
 	</sql>

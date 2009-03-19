@@ -127,7 +127,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	public void checkSystemRoles(long companyId)
 		throws PortalException, SystemException {
 
-		for (Role role : roleFinder.findBySystem()) {
+		for (Role role : roleFinder.findBySystem(companyId)) {
 			_systemRolesMap.put(companyId + role.getName(), role);
 		}
 

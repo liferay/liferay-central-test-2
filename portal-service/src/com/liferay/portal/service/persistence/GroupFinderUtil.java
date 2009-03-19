@@ -46,9 +46,9 @@ public class GroupFinderUtil {
 		return getFinder().findByNullFriendlyURL();
 	}
 
-	public static java.util.List<com.liferay.portal.model.Group> findBySystem()
-		throws com.liferay.portal.SystemException {
-		return getFinder().findBySystem();
+	public static java.util.List<com.liferay.portal.model.Group> findBySystem(
+		long companyId) throws com.liferay.portal.SystemException {
+		return getFinder().findBySystem(companyId);
 	}
 
 	public static com.liferay.portal.model.Group findByC_N(long companyId,
