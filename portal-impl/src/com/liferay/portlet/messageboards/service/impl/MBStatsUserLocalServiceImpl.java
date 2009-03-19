@@ -23,7 +23,6 @@
 package com.liferay.portlet.messageboards.service.impl;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portlet.messageboards.model.MBStatsUser;
 import com.liferay.portlet.messageboards.service.base.MBStatsUserLocalServiceBaseImpl;
 
@@ -90,21 +89,10 @@ public class MBStatsUserLocalServiceImpl
 	public MBStatsUser updateStatsUser(long groupId, long userId)
 		throws SystemException {
 
-		return updateStatsUser(groupId, userId, Constants.ADD);
-	}
-
-	public MBStatsUser updateStatsUser(long groupId, long userId, String action)
-		throws SystemException {
-
 		MBStatsUser statsUser = getStatsUser(groupId, userId);
 
-		if (action.equals(Constants.ADD)) {
-			statsUser.setMessageCount(statsUser.getMessageCount() + 1);
-			statsUser.setLastPostDate(new Date());
-		}
-		else if (action.equals(Constants.DELETE)) {
-			statsUser.setMessageCount(statsUser.getMessageCount() - 1);
-		}
+		statsUser.setMessageCount(statsUser.getMessageCount() + 1);
+		statsUser.setLastPostDate(new Date());
 
 		mbStatsUserPersistence.update(statsUser, false);
 
