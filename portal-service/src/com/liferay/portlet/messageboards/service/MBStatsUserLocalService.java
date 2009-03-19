@@ -121,4 +121,8 @@ public interface MBStatsUserLocalService {
 
 	public com.liferay.portlet.messageboards.model.MBStatsUser updateStatsUser(
 		long groupId, long userId) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.messageboards.model.MBStatsUser updateStatsUser(
+		long groupId, long userId, java.util.Date lastPostDate)
+		throws com.liferay.portal.SystemException;
 }

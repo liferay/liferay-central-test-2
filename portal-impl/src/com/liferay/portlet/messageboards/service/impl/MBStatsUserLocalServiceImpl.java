@@ -89,10 +89,22 @@ public class MBStatsUserLocalServiceImpl
 	public MBStatsUser updateStatsUser(long groupId, long userId)
 		throws SystemException {
 
+		return updateStatsUser(groupId, userId, null);
+	}
+
+	public MBStatsUser updateStatsUser(
+			long groupId, long userId, Date lastPostDate)
+		throws SystemException {
+
+		int messageCount = mbMessageFinder.countByG_U(groupId, userId);
+
 		MBStatsUser statsUser = getStatsUser(groupId, userId);
 
-		statsUser.setMessageCount(statsUser.getMessageCount() + 1);
-		statsUser.setLastPostDate(new Date());
+		statsUser.setMessageCount(messageCount);
+
+		if (lastPostDate != null) {
+			statsUser.setLastPostDate(lastPostDate);
+		}
 
 		mbStatsUserPersistence.update(statsUser, false);
 

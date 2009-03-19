@@ -72,7 +72,6 @@ import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageDisplay;
-import com.liferay.portlet.messageboards.model.MBStatsUser;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.MBTreeWalker;
 import com.liferay.portlet.messageboards.model.impl.MBMessageDisplayImpl;
@@ -416,7 +415,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		if (!category.isDiscussion()) {
 			mbStatsUserLocalService.updateStatsUser(
-				category.getGroupId(), userId);
+				category.getGroupId(), userId, now);
 		}
 
 		logAddMessage(messageId, stopWatch, 6);
@@ -755,6 +754,16 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		ratingsStatsLocalService.deleteStats(
 			MBMessage.class.getName(), message.getMessageId());
+
+		// Statistics
+
+		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
+			message.getCategoryId());
+
+		if (!category.isDiscussion()) {
+			mbStatsUserLocalService.updateStatsUser(
+				category.getGroupId(), message.getUserId());
+		}
 
 		// Message flags
 
@@ -1256,13 +1265,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Statistics
 
-		MBStatsUser statsUser = mbStatsUserPersistence.fetchByG_U(
-			category.getGroupId(), message.getUserId());
-
-		if (statsUser != null) {
-			statsUser.setLastPostDate(modifiedDate);
-
-			mbStatsUserPersistence.update(statsUser, false);
+		if (!category.isDiscussion()) {
+			mbStatsUserLocalService.updateStatsUser(
+				category.getGroupId(), message.getUserId(), modifiedDate);
 		}
 
 		return message;
