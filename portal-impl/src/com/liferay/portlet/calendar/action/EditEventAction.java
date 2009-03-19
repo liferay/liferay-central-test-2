@@ -148,7 +148,6 @@ public class EditEventAction extends PortletAction {
 	}
 
 	protected void updateEvent(ActionRequest actionRequest) throws Exception {
-
 		long eventId = ParamUtil.getLong(actionRequest, "eventId");
 
 		String title = ParamUtil.getString(actionRequest, "title");
