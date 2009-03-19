@@ -42,6 +42,8 @@ import com.liferay.portal.service.persistence.ReleasePersistence;
 import com.liferay.portal.service.persistence.ShardPersistence;
 import com.liferay.portal.util.PropsValues;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 import javax.sql.DataSource;
@@ -57,23 +59,37 @@ import org.aspectj.lang.ProceedingJoinPoint;
  */
 public class ShardAdvice {
 
-	public Object invokeCompanyService(ProceedingJoinPoint proceedingJointPoint)
+	public Object invokeCompanyService(ProceedingJoinPoint call)
 		throws Throwable {
 
-		String methodName = proceedingJointPoint.getSignature().getName();
-		Object[] arguments = proceedingJointPoint.getArgs();
+		String methodName = call.getSignature().getName();
+		Object[] arguments = call.getArgs();
 
 		String shardName = PropsValues.SHARD_DEFAULT_NAME;
 
 		if (methodName.equals("addCompany")) {
+			String webId = (String)arguments[0];
+			String virtualHost = (String)arguments[1];
+			String mx = (String)arguments[2];
 			shardName = (String)arguments[3];
+
+			shardName =
+				_getCompanyShardSelection(webId, virtualHost, mx, shardName);
+
+			arguments[3] = shardName;
 		}
 		else if (methodName.equals("checkCompany")) {
 			String webId = (String)arguments[0];
 
 			if (!webId.equals(PropsValues.COMPANY_DEFAULT_WEB_ID)) {
 				if (arguments.length == 3) {
+					String mx = (String)arguments[1];
 					shardName = (String)arguments[2];
+
+					shardName =
+						_getCompanyShardSelection(webId, null, mx, shardName);
+
+					arguments[2] = shardName;
 				}
 
 				try {
@@ -95,7 +111,13 @@ public class ShardAdvice {
 			shardName = shard.getName();
 		}
 		else {
-			return proceedingJointPoint.proceed();
+			return call.proceed();
+		}
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Company service being set to shard " + shardName + " for "+
+					_getSignature(call));
 		}
 
 		Object returnValue = null;
@@ -103,7 +125,7 @@ public class ShardAdvice {
 		pushCompanyService(shardName);
 
 		try {
-			returnValue = proceedingJointPoint.proceed();
+			returnValue = call.proceed(arguments);
 		}
 		finally {
 			popCompanyService();
@@ -112,23 +134,20 @@ public class ShardAdvice {
 		return returnValue;
 	}
 
-	public Object invokeGlobally(ProceedingJoinPoint proceedingJoinPoint)
-		throws Throwable {
-
+	public Object invokeGlobally(ProceedingJoinPoint call) throws Throwable {
 		_globalCallThreadLocal.set(new Object());
 
 		try {
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"All shards invoked for " +
-						_getSignature(proceedingJoinPoint));
+					"All shards invoked for " + _getSignature(call));
 			}
 
 			for (String shardName : PropsValues.SHARD_AVAILABLE_NAMES) {
 				_shardDataSourceTargetSource.setDataSource(shardName);
 				_shardSessionFactoryTargetSource.setSessionFactory(shardName);
 
-				proceedingJoinPoint.proceed();
+				call.proceed();
 			}
 		}
 		finally {
@@ -138,10 +157,8 @@ public class ShardAdvice {
 		return null;
 	}
 
-	public Object invokePersistence(ProceedingJoinPoint proceedingJoinPoint)
-		throws Throwable {
-
-		Object target = proceedingJoinPoint.getTarget();
+	public Object invokePersistence(ProceedingJoinPoint call) throws Throwable {
+		Object target = call.getTarget();
 
 		if (target instanceof ClassNamePersistence ||
 			target instanceof CompanyPersistence ||
@@ -157,10 +174,10 @@ public class ShardAdvice {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Using default shard for " +
-						_getSignature(proceedingJoinPoint));
+						_getSignature(call));
 			}
 
-			return proceedingJoinPoint.proceed();
+			return call.proceed();
 		}
 
 		if (_globalCallThreadLocal.get() == null) {
@@ -174,21 +191,19 @@ public class ShardAdvice {
 			if (_log.isInfoEnabled()) {
 				_log.info(
 					"Using shard name " + shardName + " for " +
-						_getSignature(proceedingJoinPoint));
+						_getSignature(call));
 			}
 
-			return proceedingJoinPoint.proceed();
+			return call.proceed();
 		}
 		else {
-			return proceedingJoinPoint.proceed();
+			return call.proceed();
 		}
 	}
 
-	public Object invokeUserService(ProceedingJoinPoint proceedingJoinPoint)
-		throws Throwable {
-
-		String methodName = proceedingJoinPoint.getSignature().getName();
-		Object[] arguments = proceedingJoinPoint.getArgs();
+	public Object invokeUserService(ProceedingJoinPoint call) throws Throwable {
+		String methodName = call.getSignature().getName();
+		Object[] arguments = call.getArgs();
 
 		String shardName = PropsValues.SHARD_DEFAULT_NAME;
 
@@ -201,7 +216,13 @@ public class ShardAdvice {
 			shardName = shard.getName();
 		}
 		else {
-			return proceedingJoinPoint.proceed();
+			return call.proceed();
+		}
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Company service being set to shard " + shardName + " for "+
+					_getSignature(call));
 		}
 
 		Object returnValue = null;
@@ -209,7 +230,7 @@ public class ShardAdvice {
 		pushCompanyService(shardName);
 
 		try {
-			returnValue = proceedingJoinPoint.proceed();
+			returnValue = call.proceed();
 		}
 		finally {
 			popCompanyService();
@@ -266,6 +287,23 @@ public class ShardAdvice {
 		}
 
 		return companyServiceStack;
+	}
+
+	private String _getCompanyShardSelection(
+		String webId, String virtualHost, String mx, String shardName) {
+
+		Map<String, String> shardParams = new HashMap<String, String>();
+
+		shardParams.put("webId", webId);
+		shardParams.put("mx", mx);
+
+		if (virtualHost != null) {
+			shardParams.put("virtualHost", virtualHost);
+		}
+
+		shardName = ShardUtil.getShardSelector().getShardName(
+			ShardUtil.COMPANY_SCOPE, shardName, shardParams);
+		return shardName;
 	}
 
 	private String _getShardName() {
