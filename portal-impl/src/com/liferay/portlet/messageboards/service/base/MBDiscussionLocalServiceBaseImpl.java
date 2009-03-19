@@ -22,6 +22,9 @@
 
 package com.liferay.portlet.messageboards.service.base;
 
+import com.liferay.counter.service.CounterLocalService;
+import com.liferay.counter.service.CounterService;
+
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
@@ -338,6 +341,22 @@ public abstract class MBDiscussionLocalServiceBaseImpl
 		this.mbThreadFinder = mbThreadFinder;
 	}
 
+	public CounterLocalService getCounterLocalService() {
+		return counterLocalService;
+	}
+
+	public void setCounterLocalService(CounterLocalService counterLocalService) {
+		this.counterLocalService = counterLocalService;
+	}
+
+	public CounterService getCounterService() {
+		return counterService;
+	}
+
+	public void setCounterService(CounterService counterService) {
+		this.counterService = counterService;
+	}
+
 	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBBanLocalService.impl")
 	protected MBBanLocalService mbBanLocalService;
 	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBBanService.impl")
@@ -388,4 +407,8 @@ public abstract class MBDiscussionLocalServiceBaseImpl
 	protected MBThreadPersistence mbThreadPersistence;
 	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.impl")
 	protected MBThreadFinder mbThreadFinder;
+	@BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
+	protected CounterLocalService counterLocalService;
+	@BeanReference(name = "com.liferay.counter.service.CounterService.impl")
+	protected CounterService counterService;
 }

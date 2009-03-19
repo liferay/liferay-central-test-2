@@ -109,6 +109,12 @@ public class MBDiscussionLocalServiceUtil {
 		return getService().updateMBDiscussion(mbDiscussion, merge);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBDiscussion addDiscussion(
+		long classNameId, long classPK, long threadId)
+		throws com.liferay.portal.SystemException {
+		return getService().addDiscussion(classNameId, classPK, threadId);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBDiscussion getDiscussion(
 		long discussionId)
 		throws com.liferay.portal.PortalException,

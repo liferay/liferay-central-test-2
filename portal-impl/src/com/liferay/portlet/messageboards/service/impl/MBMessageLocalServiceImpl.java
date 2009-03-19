@@ -186,17 +186,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				classNameId, classPK);
 
 			if (discussion == null) {
-				long discussionId = counterLocalService.increment();
-
-				discussion = mbDiscussionPersistence.create(discussionId);
-
-				discussion.setClassNameId(classNameId);
-				discussion.setClassPK(classPK);
+				discussion = mbDiscussionLocalService.addDiscussion(
+					classNameId, classPK, message.getThreadId());
 			}
-
-			discussion.setThreadId(message.getThreadId());
-
-			mbDiscussionPersistence.update(discussion, false);
 		}
 
 		return message;

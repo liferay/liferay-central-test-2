@@ -99,6 +99,10 @@ public interface MBDiscussionLocalService {
 		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion,
 		boolean merge) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.messageboards.model.MBDiscussion addDiscussion(
+		long classNameId, long classPK, long threadId)
+		throws com.liferay.portal.SystemException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.messageboards.model.MBDiscussion getDiscussion(
 		long discussionId)

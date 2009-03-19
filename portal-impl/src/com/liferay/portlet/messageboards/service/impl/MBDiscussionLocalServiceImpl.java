@@ -38,6 +38,23 @@ import com.liferay.portlet.messageboards.service.base.MBDiscussionLocalServiceBa
 public class MBDiscussionLocalServiceImpl
 	extends MBDiscussionLocalServiceBaseImpl {
 
+	public MBDiscussion addDiscussion(
+			long classNameId, long classPK, long threadId)
+		throws SystemException {
+
+		long discussionId = counterLocalService.increment();
+
+		MBDiscussion discussion = mbDiscussionPersistence.create(discussionId);
+
+		discussion.setClassNameId(classNameId);
+		discussion.setClassPK(classPK);
+		discussion.setThreadId(threadId);
+
+		mbDiscussionPersistence.update(discussion, false);
+
+		return discussion;
+	}
+
 	public MBDiscussion getDiscussion(long discussionId)
 		throws PortalException, SystemException {
 

@@ -24,6 +24,8 @@ package com.liferay.portlet.messageboards.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.User;
@@ -76,6 +78,7 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 		return ban;
 	}
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void checkBan(long groupId, long banUserId)
 		throws PortalException, SystemException {
 
