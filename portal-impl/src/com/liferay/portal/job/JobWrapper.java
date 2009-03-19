@@ -22,9 +22,11 @@
 
 package com.liferay.portal.job;
 
+import com.liferay.portal.dao.shard.ShardUtil;
 import com.liferay.portal.kernel.job.IntervalJob;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.util.PropsValues;
 
 import org.quartz.JobDetail;
 import org.quartz.JobExecutionContext;
@@ -60,7 +62,16 @@ public class JobWrapper implements StatefulJob {
 			try {
 				currentThread.setContextClassLoader(_classLoader);
 
-				_job.execute(new JobExecutionContextImpl(context));
+				for (String shardName : PropsValues.SHARD_AVAILABLE_NAMES) {
+					ShardUtil.pushCompanyService(shardName);
+
+					try {
+						_job.execute(new JobExecutionContextImpl(context));
+					}
+					finally {
+						ShardUtil.popCompanyService();
+					}
+				}
 			}
 			finally {
 				currentThread.setContextClassLoader(contextClassLoader);
