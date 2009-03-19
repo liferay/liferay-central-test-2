@@ -971,6 +971,8 @@
 		<property name="parentCategoryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="threadCount" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="messageCount" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="lastPostDate" type="org.hibernate.type.TimestampType" />
 	</class>
 	<class name="com.liferay.portlet.messageboards.model.impl.MBDiscussionImpl" table="MBDiscussion">

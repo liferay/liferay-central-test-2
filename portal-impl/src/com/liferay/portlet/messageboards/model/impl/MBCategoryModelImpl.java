@@ -98,9 +98,15 @@ public class MBCategoryModelImpl extends BaseModelImpl {
 			{ "description", new Integer(Types.VARCHAR) },
 			
 
+			{ "threadCount", new Integer(Types.INTEGER) },
+			
+
+			{ "messageCount", new Integer(Types.INTEGER) },
+			
+
 			{ "lastPostDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table MBCategory (uuid_ VARCHAR(75) null,categoryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentCategoryId LONG,name VARCHAR(75) null,description STRING null,lastPostDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table MBCategory (uuid_ VARCHAR(75) null,categoryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentCategoryId LONG,name VARCHAR(75) null,description STRING null,threadCount INTEGER,messageCount INTEGER,lastPostDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table MBCategory";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -123,6 +129,8 @@ public class MBCategoryModelImpl extends BaseModelImpl {
 		model.setParentCategoryId(soapModel.getParentCategoryId());
 		model.setName(soapModel.getName());
 		model.setDescription(soapModel.getDescription());
+		model.setThreadCount(soapModel.getThreadCount());
+		model.setMessageCount(soapModel.getMessageCount());
 		model.setLastPostDate(soapModel.getLastPostDate());
 
 		return model;
@@ -280,6 +288,26 @@ public class MBCategoryModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public int getThreadCount() {
+		return _threadCount;
+	}
+
+	public void setThreadCount(int threadCount) {
+		if (threadCount != _threadCount) {
+			_threadCount = threadCount;
+		}
+	}
+
+	public int getMessageCount() {
+		return _messageCount;
+	}
+
+	public void setMessageCount(int messageCount) {
+		if (messageCount != _messageCount) {
+			_messageCount = messageCount;
+		}
+	}
+
 	public Date getLastPostDate() {
 		return _lastPostDate;
 	}
@@ -314,6 +342,8 @@ public class MBCategoryModelImpl extends BaseModelImpl {
 			model.setParentCategoryId(getParentCategoryId());
 			model.setName(HtmlUtil.escape(getName()));
 			model.setDescription(HtmlUtil.escape(getDescription()));
+			model.setThreadCount(getThreadCount());
+			model.setMessageCount(getMessageCount());
 			model.setLastPostDate(getLastPostDate());
 
 			model = (MBCategory)Proxy.newProxyInstance(MBCategory.class.getClassLoader(),
@@ -347,6 +377,8 @@ public class MBCategoryModelImpl extends BaseModelImpl {
 		clone.setParentCategoryId(getParentCategoryId());
 		clone.setName(getName());
 		clone.setDescription(getDescription());
+		clone.setThreadCount(getThreadCount());
+		clone.setMessageCount(getMessageCount());
 		clone.setLastPostDate(getLastPostDate());
 
 		return clone;
@@ -424,6 +456,8 @@ public class MBCategoryModelImpl extends BaseModelImpl {
 	private long _parentCategoryId;
 	private String _name;
 	private String _description;
+	private int _threadCount;
+	private int _messageCount;
 	private Date _lastPostDate;
 	private transient ExpandoBridge _expandoBridge;
 }

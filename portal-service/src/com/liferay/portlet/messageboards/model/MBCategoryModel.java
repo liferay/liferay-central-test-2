@@ -95,6 +95,14 @@ public interface MBCategoryModel extends BaseModel {
 
 	public void setDescription(String description);
 
+	public int getThreadCount();
+
+	public void setThreadCount(int threadCount);
+
+	public int getMessageCount();
+
+	public void setMessageCount(int messageCount);
+
 	public Date getLastPostDate();
 
 	public void setLastPostDate(Date lastPostDate);

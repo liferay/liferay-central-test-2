@@ -1085,6 +1085,8 @@
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
+		<field name="threadCount" type="int" />
+		<field name="messageCount" type="int" />
 		<field name="lastPostDate" type="Date" />
 	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBDiscussion">

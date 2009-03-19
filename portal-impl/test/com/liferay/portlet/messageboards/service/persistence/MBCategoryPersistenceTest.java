@@ -82,6 +82,8 @@ public class MBCategoryPersistenceTest extends BasePersistenceTestCase {
 		newMBCategory.setParentCategoryId(nextLong());
 		newMBCategory.setName(randomString());
 		newMBCategory.setDescription(randomString());
+		newMBCategory.setThreadCount(nextInt());
+		newMBCategory.setMessageCount(nextInt());
 		newMBCategory.setLastPostDate(nextDate());
 
 		_persistence.update(newMBCategory, false);
@@ -107,6 +109,10 @@ public class MBCategoryPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingMBCategory.getName(), newMBCategory.getName());
 		assertEquals(existingMBCategory.getDescription(),
 			newMBCategory.getDescription());
+		assertEquals(existingMBCategory.getThreadCount(),
+			newMBCategory.getThreadCount());
+		assertEquals(existingMBCategory.getMessageCount(),
+			newMBCategory.getMessageCount());
 		assertEquals(Time.getShortTimestamp(
 				existingMBCategory.getLastPostDate()),
 			Time.getShortTimestamp(newMBCategory.getLastPostDate()));
@@ -163,6 +169,8 @@ public class MBCategoryPersistenceTest extends BasePersistenceTestCase {
 		mbCategory.setParentCategoryId(nextLong());
 		mbCategory.setName(randomString());
 		mbCategory.setDescription(randomString());
+		mbCategory.setThreadCount(nextInt());
+		mbCategory.setMessageCount(nextInt());
 		mbCategory.setLastPostDate(nextDate());
 
 		_persistence.update(mbCategory, false);

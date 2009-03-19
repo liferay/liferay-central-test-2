@@ -84,6 +84,8 @@ public class MBCategoryJSONSerializer {
 		jsonObj.put("parentCategoryId", model.getParentCategoryId());
 		jsonObj.put("name", model.getName());
 		jsonObj.put("description", model.getDescription());
+		jsonObj.put("threadCount", model.getThreadCount());
+		jsonObj.put("messageCount", model.getMessageCount());
 
 		Date lastPostDate = model.getLastPostDate();
 
