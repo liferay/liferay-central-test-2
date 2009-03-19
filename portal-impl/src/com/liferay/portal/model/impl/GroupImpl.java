@@ -25,6 +25,7 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
@@ -153,7 +154,7 @@ public class GroupImpl extends GroupModelImpl implements Group {
 				Layout layout = LayoutLocalServiceUtil.getLayout(
 					getClassPK());
 
-				name = layout.getName();
+				name = layout.getName(LocaleUtil.getDefault());
 			}
 			else if (isOrganization()) {
 				long organizationId = getClassPK();
