@@ -28,6 +28,7 @@ import java.io.Serializable;
  * <a href="MBMessageDisplay.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  *
  */
 public interface MBMessageDisplay extends Serializable {
@@ -45,25 +46,5 @@ public interface MBMessageDisplay extends Serializable {
 	public MBThread getPreviousThread();
 
 	public MBThread getNextThread();
-
-	public MBThread getFirstThread();
-
-	public MBThread getLastThread();
-
-	public boolean isFirstThread();
-
-	public boolean isLastThread();
-
-	public MBMessage getPreviousMessage();
-
-	public MBMessage getNextMessage();
-
-	public MBMessage getFirstMessage();
-
-	public MBMessage getLastMessage();
-
-	public boolean isFirstMessage();
-
-	public boolean isLastMessage();
 
 }

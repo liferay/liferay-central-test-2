@@ -28,13 +28,11 @@ import com.liferay.portlet.messageboards.model.MBMessageDisplay;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.MBTreeWalker;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * <a href="MBMessageDisplayImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  *
  */
 public class MBMessageDisplayImpl implements MBMessageDisplay {
@@ -42,7 +40,7 @@ public class MBMessageDisplayImpl implements MBMessageDisplay {
 	public MBMessageDisplayImpl(
 		MBMessage message, MBMessage parentMessage, MBCategory category,
 		MBThread thread, MBTreeWalker treeWalker, MBThread previousThread,
-		MBThread nextThread, MBThread firstThread, MBThread lastThread) {
+		MBThread nextThread) {
 
 		_message = message;
 		_parentMessage = parentMessage;
@@ -51,34 +49,6 @@ public class MBMessageDisplayImpl implements MBMessageDisplay {
 		_treeWalker = new MBTreeWalkerImpl(message);
 		_previousThread = previousThread;
 		_nextThread = nextThread;
-		_firstThread = firstThread;
-		_lastThread = lastThread;
-
-		List<MBMessage> orderedMessages = new ArrayList<MBMessage>();
-
-		_orderMessages(_treeWalker, treeWalker.getRoot(), orderedMessages);
-
-		for (int i = 0; i < orderedMessages.size(); i++) {
-			MBMessage curMessage = orderedMessages.get(i);
-
-			if (i == 0) {
-				_firstMessage = curMessage;
-			}
-
-			if (curMessage.equals(message)) {
-				if ((i - 1) >= 0) {
-					_previousMessage = orderedMessages.get(i - 1);
-				}
-
-				if ((i + 1) < orderedMessages.size()) {
-					_nextMessage = orderedMessages.get(i + 1);
-				}
-			}
-
-			if ((i + 1) == orderedMessages.size()) {
-				_lastMessage = curMessage;
-			}
-		}
 	}
 
 	public MBMessage getMessage() {
@@ -109,94 +79,6 @@ public class MBMessageDisplayImpl implements MBMessageDisplay {
 		return _nextThread;
 	}
 
-	public MBThread getFirstThread() {
-		return _firstThread;
-	}
-
-	public MBThread getLastThread() {
-		return _lastThread;
-	}
-
-	public boolean isFirstThread() {
-		if (_firstThread == null) {
-			return false;
-		}
-		else if (_firstThread.equals(_thread)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public boolean isLastThread() {
-		if (_lastThread == null) {
-			return false;
-		}
-		else if (_lastThread.equals(_thread)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public MBMessage getPreviousMessage() {
-		return _previousMessage;
-	}
-
-	public MBMessage getNextMessage() {
-		return _nextMessage;
-	}
-
-	public MBMessage getFirstMessage() {
-		return _firstMessage;
-	}
-
-	public MBMessage getLastMessage() {
-		return _lastMessage;
-	}
-
-	public boolean isFirstMessage() {
-		if (_firstMessage == null) {
-			return false;
-		}
-		else if (_firstMessage.equals(_message)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public boolean isLastMessage() {
-		if (_lastMessage == null) {
-			return false;
-		}
-		else if (_lastMessage.equals(_message)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	private void _orderMessages(
-		MBTreeWalker treeWalker, MBMessage message,
-		List<MBMessage> orderedMessages) {
-
-		orderedMessages.add(message);
-
-		List<MBMessage> messages = treeWalker.getMessages();
-		int[] range = treeWalker.getChildrenRange(message);
-
-		for (int i = range[0]; i < range[1]; i++) {
-			MBMessage curMessage = messages.get(i);
-
-			_orderMessages(treeWalker, curMessage, orderedMessages);
-		}
-	}
-
 	private MBMessage _message;
 	private MBMessage _parentMessage;
 	private MBCategory _category;
@@ -204,11 +86,5 @@ public class MBMessageDisplayImpl implements MBMessageDisplay {
 	private MBTreeWalker _treeWalker;
 	private MBThread _previousThread;
 	private MBThread _nextThread;
-	private MBThread _firstThread;
-	private MBThread _lastThread;
-	private MBMessage _previousMessage;
-	private MBMessage _nextMessage;
-	private MBMessage _firstMessage;
-	private MBMessage _lastMessage;
 
 }

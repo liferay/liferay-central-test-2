@@ -35,23 +35,8 @@ MBCategory category = messageDisplay.getCategory();
 
 MBThread thread = messageDisplay.getThread();
 
-MBMessage previousMessage = messageDisplay.getPreviousMessage();
-MBMessage nextMessage = messageDisplay.getNextMessage();
-
-MBMessage firstMessage = messageDisplay.getFirstMessage();
-MBMessage lastMessage = messageDisplay.getLastMessage();
-
-boolean isFirstMessage = messageDisplay.isFirstMessage();
-boolean isLastMessage = messageDisplay.isLastMessage();
-
 MBThread previousThread = messageDisplay.getPreviousThread();
 MBThread nextThread = messageDisplay.getNextThread();
-
-MBThread firstThread = messageDisplay.getFirstThread();
-MBThread lastThread = messageDisplay.getLastThread();
-
-boolean isFirstThread = messageDisplay.isFirstThread();
-boolean isLastThread = messageDisplay.isLastThread();
 
 PortalPreferences portalPrefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
@@ -299,7 +284,7 @@ else {
 
 	messages = ListUtil.sort(messages, new MessageCreateDateComparator(true, false));
 
-	TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(MBMessage.class.getName(), firstMessage.getMessageId(), true));
+	TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(MBMessage.class.getName(), thread.getRootMessageId(), true));
 	%>
 
 	<div class="message-scroll" id="<portlet:namespace />message_0"></div>

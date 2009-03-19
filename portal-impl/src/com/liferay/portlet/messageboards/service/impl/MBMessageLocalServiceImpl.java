@@ -66,7 +66,6 @@ import com.liferay.portlet.blogs.social.BlogsActivityKeys;
 import com.liferay.portlet.messageboards.MessageBodyException;
 import com.liferay.portlet.messageboards.MessageSubjectException;
 import com.liferay.portlet.messageboards.NoSuchDiscussionException;
-import com.liferay.portlet.messageboards.NoSuchThreadException;
 import com.liferay.portlet.messageboards.RequiredMessageException;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
@@ -972,27 +971,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		MBThread previousThread = prevAndNextThreads[0];
 		MBThread nextThread = prevAndNextThreads[2];
 
-		MBThread firstThread = null;
-
-		try {
-			firstThread = mbThreadPersistence.findByCategoryId_First(
-				message.getCategoryId(), comparator);
-		}
-		catch (NoSuchThreadException nste) {
-		}
-
-		MBThread lastThread = null;
-
-		try {
-			lastThread = mbThreadPersistence.findByCategoryId_Last(
-				message.getCategoryId(), comparator);
-		}
-		catch (NoSuchThreadException nste) {
-		}
-
 		return new MBMessageDisplayImpl(
 			message, parentMessage, category, thread, treeWalker,
-			previousThread, nextThread, firstThread, lastThread);
+			previousThread, nextThread);
 	}
 
 	public List<MBMessage> getNoAssetMessages() throws SystemException {
