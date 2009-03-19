@@ -233,12 +233,12 @@ type = ParamUtil.getString(request, "type", type);
 <liferay-ui:error exception="<%= NoSuchArticleException.class %>" message="the-web-content-could-not-be-found" />
 
 <%
-DynamicRenderRequest dynamicRenderReq = new DynamicRenderRequest(renderRequest);
+DynamicRenderRequest dynamicRenderRequest = new DynamicRenderRequest(renderRequest);
 
-dynamicRenderReq.setParameter("type", type);
-dynamicRenderReq.setParameter("groupId", String.valueOf(groupId));
+dynamicRenderRequest.setParameter("type", type);
+dynamicRenderRequest.setParameter("groupId", String.valueOf(groupId));
 
-ArticleSearch searchContainer = new ArticleSearch(dynamicRenderReq, portletURL);
+ArticleSearch searchContainer = new ArticleSearch(dynamicRenderRequest, portletURL);
 %>
 
 <liferay-ui:search-form
@@ -249,7 +249,7 @@ ArticleSearch searchContainer = new ArticleSearch(dynamicRenderReq, portletURL);
 	<liferay-ui:param name="type" value="<%= type %>" />
 </liferay-ui:search-form>
 
-<div class="separator"><!-- --></div>
+<br />
 
 <%
 OrderByComparator orderByComparator = JournalUtil.getArticleOrderByComparator(searchContainer.getOrderByCol(), searchContainer.getOrderByType());

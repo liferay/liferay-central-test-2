@@ -56,7 +56,7 @@ if (Validator.isNotNull(portletResource)) {
 	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-long groupId = GetterUtil.getLong(preferences.getValue("group-id", StringPool.BLANK));
+long groupId = GetterUtil.getLong(preferences.getValue("group-id", String.valueOf(themeDisplay.getScopeGroupId())));
 String structureId = GetterUtil.getString(preferences.getValue("structure-id", StringPool.BLANK));
 String type = preferences.getValue("type", StringPool.BLANK);
 String pageURL = preferences.getValue("page-url", "maximized");

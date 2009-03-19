@@ -61,15 +61,19 @@ StructureDisplayTerms displayTerms = (StructureDisplayTerms)searchContainer.getD
 	</table>
 </liferay-ui:search-toggle>
 
-<br />
-
 <%
-boolean isWebContentPortlet = portletDisplay.getPortletName().equals(PortletKeys.JOURNAL);
-boolean showAddStructureButton = JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_STRUCTURE) && isWebContentPortlet;
-boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS) && isWebContentPortlet;
+boolean showAddStructureButton = false;
+boolean showPermissionsButton = false;
+
+if (portletName.equals(PortletKeys.JOURNAL)) {
+	showAddStructureButton = JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_STRUCTURE);
+	showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
+}
 %>
 
 <c:if test="<%= showAddStructureButton || showPermissionsButton %>">
+	<br />
+
 	<div>
 		<c:if test="<%= showAddStructureButton %>">
 			<input type="button" value="<liferay-ui:message key="add-structure" />" onClick="<portlet:namespace />addStructure();" />

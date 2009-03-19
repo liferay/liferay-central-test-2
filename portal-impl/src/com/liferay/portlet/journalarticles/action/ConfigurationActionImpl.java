@@ -25,7 +25,6 @@ package com.liferay.portlet.journalarticles.action;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -60,14 +59,14 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 			long groupId = ParamUtil.getLong(actionRequest, "groupId");
 			String type = ParamUtil.getString(actionRequest, "type");
+			String structureId = ParamUtil.getString(
+				actionRequest, "structureId");
 			String pageURL = ParamUtil.getString(actionRequest, "pageURL");
 			int pageDelta = ParamUtil.getInteger(actionRequest, "pageDelta");
 			String orderByCol = ParamUtil.getString(
 				actionRequest, "orderByCol");
 			String orderByType = ParamUtil.getString(
 				actionRequest, "orderByType");
-			String structureId = ParamUtil.getString(
-				actionRequest, "structureId");
 
 			GroupLocalServiceUtil.getGroup(groupId);
 
@@ -80,16 +79,16 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 			preferences.setValue("group-id", String.valueOf(groupId));
 			preferences.setValue("type", type);
+			preferences.setValue("structure-id", structureId);
 			preferences.setValue("page-url", pageURL);
 			preferences.setValue("page-delta", String.valueOf(pageDelta));
 			preferences.setValue("order-by-col", orderByCol);
 			preferences.setValue("order-by-type", orderByType);
-			preferences.setValue("structure-id", structureId);
 
 			preferences.store();
 
-			SessionMessages.add(
-				actionRequest, portletConfig.getPortletName() + ".doConfigure");
+			actionResponse.sendRedirect(
+				ParamUtil.getString(actionRequest, "redirect"));
 		}
 		catch (NoSuchGroupException nsge) {
 			SessionErrors.add(actionRequest, nsge.getClass().getName());

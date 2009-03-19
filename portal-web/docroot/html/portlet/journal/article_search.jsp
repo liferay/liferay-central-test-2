@@ -149,8 +149,13 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 </liferay-ui:search-toggle>
 
 <%
-boolean showAddArticleButtonButton = JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ARTICLE);
-boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
+boolean showAddArticleButtonButton = false;
+boolean showPermissionsButton = false;
+
+if (portletName.equals(PortletKeys.JOURNAL)) {
+	showAddArticleButtonButton = JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ARTICLE);
+	showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
+}
 %>
 
 <c:if test="<%= showAddArticleButtonButton || showPermissionsButton %>">

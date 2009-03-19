@@ -75,12 +75,12 @@ public class ArticleSearchTerms extends ArticleDisplayTerms {
 		this.type = type;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
 	public void setStructureId(String structureId) {
 		this.structureId = structureId;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public Boolean getApprovedObj() {
