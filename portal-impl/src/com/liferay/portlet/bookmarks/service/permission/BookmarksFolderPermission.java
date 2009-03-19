@@ -107,10 +107,6 @@ public class BookmarksFolderPermission {
 		long folderId = folder.getFolderId();
 
 		while (folderId != BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
-			folder = BookmarksFolderLocalServiceUtil.getFolder(folderId);
-
-			folderId = folder.getParentFolderId();
-
 			if (permissionChecker.hasOwnerPermission(
 					folder.getCompanyId(), BookmarksFolder.class.getName(),
 					folder.getFolderId(), folder.getUserId(), actionId)) {
@@ -128,6 +124,10 @@ public class BookmarksFolderPermission {
 			if (actionId.equals(ActionKeys.VIEW)) {
 				break;
 			}
+
+			folder = BookmarksFolderLocalServiceUtil.getFolder(folderId);
+
+			folderId = folder.getParentFolderId();
 		}
 
 		return false;

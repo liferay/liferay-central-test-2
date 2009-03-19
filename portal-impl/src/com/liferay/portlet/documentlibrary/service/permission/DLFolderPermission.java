@@ -102,10 +102,6 @@ public class DLFolderPermission {
 		long folderId = folder.getFolderId();
 
 		while (folderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
-			folder = DLFolderLocalServiceUtil.getFolder(folderId);
-
-			folderId = folder.getParentFolderId();
-
 			if (permissionChecker.hasOwnerPermission(
 					folder.getCompanyId(), DLFolder.class.getName(),
 					folder.getFolderId(), folder.getUserId(), actionId)) {
@@ -123,6 +119,10 @@ public class DLFolderPermission {
 			if (actionId.equals(ActionKeys.VIEW)) {
 				break;
 			}
+
+			folder = DLFolderLocalServiceUtil.getFolder(folderId);
+
+			folderId = folder.getParentFolderId();
 		}
 
 		return false;

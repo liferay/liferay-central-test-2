@@ -106,10 +106,6 @@ public class ShoppingCategoryPermission {
 		long categoryId = category.getCategoryId();
 
 		while (categoryId != ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
-			category = ShoppingCategoryLocalServiceUtil.getCategory(categoryId);
-
-			categoryId = category.getParentCategoryId();
-
 			if (permissionChecker.hasOwnerPermission(
 					category.getCompanyId(), ShoppingCategory.class.getName(),
 					category.getCategoryId(), category.getUserId(), actionId)) {
@@ -127,6 +123,10 @@ public class ShoppingCategoryPermission {
 			if (actionId.equals(ActionKeys.VIEW)) {
 				break;
 			}
+
+			category = ShoppingCategoryLocalServiceUtil.getCategory(categoryId);
+
+			categoryId = category.getParentCategoryId();
 		}
 
 		return false;
