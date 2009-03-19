@@ -75,7 +75,7 @@ if (rssURLParams.length() > 0) {
 %>
 
 <div class="subscribe">
-	<liferay-ui:icon image="rss" message="subscribe-to-this-blog" url="<%= rssURL %>" target="_blank" label="<%= true %>" />
+	<liferay-ui:icon image="rss" message="subscribe-to-this-blog" url="<%= rssURL %>" method="get" target="_blank" label="<%= true %>" />
 </div>
 
 <liferay-util:html-top>
