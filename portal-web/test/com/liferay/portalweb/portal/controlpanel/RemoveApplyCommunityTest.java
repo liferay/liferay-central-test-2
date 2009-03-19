@@ -93,7 +93,7 @@ public class RemoveApplyCommunityTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("link=Assign Members"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//div[5]/table/tbody/tr[4]/td[1]/input");
-		selenium.click("//tr[3]/td[1]/input");
+		selenium.click("//tr[5]/td[1]/input");
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Update Associations']"));
 		selenium.waitForPageToLoad("30000");

@@ -37,7 +37,7 @@ public class AddContentVirtualHostCommunityTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Back to My Community"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//li[6]/ul/li[1]/a[2]"));
+		selenium.click(RuntimeVariables.replace("//li[7]/ul/li[1]/a[2]"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//div[2]/ul/li/a/span"));
 		selenium.waitForPageToLoad("30000");
