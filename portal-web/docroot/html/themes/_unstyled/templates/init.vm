@@ -107,7 +107,7 @@
 
 #if ($show_my_account)
 	#set ($my_account_text = $languageUtil.get($company_id, $locale, "my-account"))
-	#set ($my_account_url = $htmlUtil.escape($theme_display.getURLMyAccount()))
+	#set ($my_account_url = $htmlUtil.escape($theme_display.getURLMyAccount().toString()))
 #end
 
 #set ($show_page_settings = $theme_display.isShowPageSettingsIcon())
@@ -139,7 +139,7 @@
 #end
 
 #if ($permissionChecker.isOmniadmin() && $portalUtil.isUpdateAvailable())
-	#set ($update_available_url = $htmlUtil.escape($theme_display.getURLUpdateManager()))
+	#set ($update_available_url = $htmlUtil.escape($theme_display.getURLUpdateManager().toString()))
 #end
 
 ## ---------- Page ---------- ##
