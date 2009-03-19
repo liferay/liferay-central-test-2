@@ -22,12 +22,9 @@
 
 package com.liferay.portlet.journalarticles.action;
 
-import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
-import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import javax.portlet.ActionRequest;
@@ -50,49 +47,39 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			ActionResponse actionResponse)
 		throws Exception {
 
-		try {
-			String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
-			if (!cmd.equals(Constants.UPDATE)) {
-				return;
-			}
-
-			long groupId = ParamUtil.getLong(actionRequest, "groupId");
-			String type = ParamUtil.getString(actionRequest, "type");
-			String structureId = ParamUtil.getString(
-				actionRequest, "structureId");
-			String pageURL = ParamUtil.getString(actionRequest, "pageURL");
-			int pageDelta = ParamUtil.getInteger(actionRequest, "pageDelta");
-			String orderByCol = ParamUtil.getString(
-				actionRequest, "orderByCol");
-			String orderByType = ParamUtil.getString(
-				actionRequest, "orderByType");
-
-			GroupLocalServiceUtil.getGroup(groupId);
-
-			String portletResource = ParamUtil.getString(
-				actionRequest, "portletResource");
-
-			PortletPreferences preferences =
-				PortletPreferencesFactoryUtil.getPortletSetup(
-					actionRequest, portletResource);
-
-			preferences.setValue("group-id", String.valueOf(groupId));
-			preferences.setValue("type", type);
-			preferences.setValue("structure-id", structureId);
-			preferences.setValue("page-url", pageURL);
-			preferences.setValue("page-delta", String.valueOf(pageDelta));
-			preferences.setValue("order-by-col", orderByCol);
-			preferences.setValue("order-by-type", orderByType);
-
-			preferences.store();
-
-			actionResponse.sendRedirect(
-				ParamUtil.getString(actionRequest, "redirect"));
+		if (!cmd.equals(Constants.UPDATE)) {
+			return;
 		}
-		catch (NoSuchGroupException nsge) {
-			SessionErrors.add(actionRequest, nsge.getClass().getName());
-		}
+
+		long groupId = ParamUtil.getLong(actionRequest, "groupId");
+		String type = ParamUtil.getString(actionRequest, "type");
+		String structureId = ParamUtil.getString(actionRequest, "structureId");
+		String pageURL = ParamUtil.getString(actionRequest, "pageURL");
+		int pageDelta = ParamUtil.getInteger(actionRequest, "pageDelta");
+		String orderByCol = ParamUtil.getString(actionRequest, "orderByCol");
+		String orderByType = ParamUtil.getString(actionRequest, "orderByType");
+
+		String portletResource = ParamUtil.getString(
+			actionRequest, "portletResource");
+
+		PortletPreferences preferences =
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				actionRequest, portletResource);
+
+		preferences.setValue("group-id", String.valueOf(groupId));
+		preferences.setValue("type", type);
+		preferences.setValue("structure-id", structureId);
+		preferences.setValue("page-url", pageURL);
+		preferences.setValue("page-delta", String.valueOf(pageDelta));
+		preferences.setValue("order-by-col", orderByCol);
+		preferences.setValue("order-by-type", orderByType);
+
+		preferences.store();
+
+		actionResponse.sendRedirect(
+			ParamUtil.getString(actionRequest, "redirect"));
 	}
 
 	public String render(
