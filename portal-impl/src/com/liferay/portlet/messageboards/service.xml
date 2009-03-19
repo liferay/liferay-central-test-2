@@ -260,11 +260,6 @@
 		<reference package-path="com.liferay.portlet.social" entity="SocialActivity" />
 		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
 		<reference package-path="com.liferay.portlet.tags" entity="TagsEntry" />
-
-		<!-- Transactions -->
-
-		<tx-required>getDiscussionMessageDisplay</tx-required>
-		<tx-required>getMessageDisplay</tx-required>
 	</entity>
 	<entity name="MBMessageFlag" local-service="true" remote-service="true">
 
@@ -349,10 +344,6 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
-
-		<!-- Transactions -->
-
-		<tx-required>getStatsUser</tx-required>
 	</entity>
 	<entity name="MBThread" local-service="true" remote-service="true">
 

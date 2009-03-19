@@ -107,6 +107,7 @@ public interface MBStatsUserLocalService {
 	public void deleteStatsUserByUserId(long userId)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.messageboards.model.MBStatsUser getStatsUser(
 		long groupId, long userId) throws com.liferay.portal.SystemException;
 
