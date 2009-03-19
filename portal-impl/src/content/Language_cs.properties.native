@@ -597,6 +597,7 @@ file=Soubor
 fill-out-the-following-form-to-get-driving-directions-to=Vyplňte následující formulář pro vyhledání cesty do
 filter-by-locations-valid-for=Filtrovat podle lokací platných pro: {0}.
 filter-settings=Nastavení filtru
+filter-web-content-list-by-structure-x=Filter web content list by structure {0}.
 find=Hledání
 finished=Dokončeno
 firm-name=Název společnosti

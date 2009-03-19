@@ -1534,6 +1534,7 @@ filter-by-template=Suodata pohjan mukaan
 filter-by-user-group=Suodata käyttäjäryhmän mukaan
 filter-by-user=Suodata käyttäjän mukaan
 filter-settings=Suodattimen asetukset
+filter-web-content-list-by-structure-x=Filter web content list by structure {0}.
 filters=Suodattimet
 find-members=Hae jäseniä
 find-potential-recipients-from-the-following=Etsi mahdollisia vastaanottajia seuraavasta:

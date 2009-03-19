@@ -1509,6 +1509,7 @@ filter-by-template=Filtrera efter mall
 filter-by-user-group=Filtrera efter användargrupp
 filter-by-user=Filtrera efter användare
 filter-settings=Filterinställningar
+filter-web-content-list-by-structure-x=Filter web content list by structure {0}.
 filters=Filter
 find-members=Hitta medlemmar
 find-potential-recipients-from-the-following=Sök mottagare bland följande:

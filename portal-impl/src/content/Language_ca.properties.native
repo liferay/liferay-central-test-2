@@ -1387,6 +1387,7 @@ filter-by-template=Filtre per plantilla
 filter-by-user-group=Filtre per grup d'usuaris
 filter-by-user=Filtre per usuari
 filter-settings=Filtre per paràmetres
+filter-web-content-list-by-structure-x=Filter web content list by structure {0}.
 filters=Filtres
 find-potential-recipients-from-the-following=Cerca recipients potencials per als següents:
 find=Troba

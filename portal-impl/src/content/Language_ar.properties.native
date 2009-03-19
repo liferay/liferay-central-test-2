@@ -1018,6 +1018,7 @@ filter-by-organization=إفرز بناء على المنظمة
 filter-by-structure=إفرز بناء على الهيكل
 filter-by-template=إفرز بناء على القالب
 filter-settings=إعدادات الفرز
+filter-web-content-list-by-structure-x=Filter web content list by structure {0}.
 filters=المفرزات
 find=إبحث
 finished=إنتهى

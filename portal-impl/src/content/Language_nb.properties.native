@@ -1180,6 +1180,7 @@ filter-by-structure=Filtrere etter struktur
 filter-by-template=Filtrere etter mal
 filter-by-user-group=Filtrere etter brukergruppe
 filter-settings=Filterinnstillinger
+filter-web-content-list-by-structure-x=Filter web content list by structure {0}.
 filters=Filter
 find-potential-recipients-from-the-following=Søk etter potensielle mottagere blandt følgende:
 find=Søk

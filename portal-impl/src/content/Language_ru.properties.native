@@ -1519,6 +1519,7 @@ filter-by-template=Фильтр по шаблону
 filter-by-user-group=Фильтр по группе пользователей
 filter-by-user=Фильтр по пользователю
 filter-settings=Настройки фильтра
+filter-web-content-list-by-structure-x=Filter web content list by structure {0}.
 filters=Фильтры
 find-members=Найти участников
 find-potential-recipients-from-the-following=Выберите потенциальных получателей из следующих:

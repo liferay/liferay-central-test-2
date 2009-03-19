@@ -1530,6 +1530,7 @@ filter-by-template=Filtr ze względu na szablon
 filter-by-user-group=Filtr ze względu na grupę użytkownika
 filter-by-user=Filtrowane ze względu na użytkownika
 filter-settings=Ustawienia filtra
+filter-web-content-list-by-structure-x=Filter web content list by structure {0}.
 filters=Filtry
 find-members=Znajdź członków
 find-potential-recipients-from-the-following=Znajdź potencjalnych odbiorców spośród następujących:
