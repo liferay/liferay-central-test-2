@@ -54,7 +54,6 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.search.lucene.LuceneUtil;
-import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.CompanyLocalServiceBaseImpl;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -116,9 +115,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		String mx = webId;
 
-		// Must be called via Spring to ensure shard advice gets invoked
-
-		return CompanyLocalServiceUtil.checkCompany(
+		return companyLocalService.checkCompany(
 			webId, mx, PropsValues.SHARD_DEFAULT_NAME);
 	}
 
