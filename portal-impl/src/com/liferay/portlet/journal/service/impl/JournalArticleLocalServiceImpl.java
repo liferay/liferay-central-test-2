@@ -286,11 +286,6 @@ public class JournalArticleLocalServiceImpl
 
 		journalArticlePersistence.update(article, false);
 
-		// Small image
-
-		saveImages(
-			smallImage, article.getSmallImageId(), smallFile, smallBytes);
-
 		// Resources
 
 		if (serviceContext.getAddCommunityPermissions() ||
@@ -311,6 +306,11 @@ public class JournalArticleLocalServiceImpl
 		ExpandoBridge expandoBridge = article.getExpandoBridge();
 
 		expandoBridge.setAttributes(serviceContext);
+
+		// Small image
+
+		saveImages(
+			smallImage, article.getSmallImageId(), smallFile, smallBytes);
 
 		// Tags
 
@@ -660,6 +660,10 @@ public class JournalArticleLocalServiceImpl
 
 		journalArticlePersistence.update(newArticle, false);
 
+		// Resources
+
+		addArticleResources(newArticle, true, true);
+
 		// Small image
 
 		if (oldArticle.getSmallImage()) {
@@ -671,10 +675,6 @@ public class JournalArticleLocalServiceImpl
 			imageLocalService.updateImage(
 				newArticle.getSmallImageId(), smallBytes);
 		}
-
-		// Resources
-
-		addArticleResources(newArticle, true, true);
 
 		// Tags
 
@@ -719,7 +719,7 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		// Email
-		
+
 		PortletPreferences preferences =
 			ServiceContextUtil.getPortletPreferences(serviceContext);
 
@@ -739,11 +739,6 @@ public class JournalArticleLocalServiceImpl
 		// Tags
 
 		tagsAssetLocalService.deleteAsset(
-			JournalArticle.class.getName(), article.getResourcePrimKey());
-
-		// Expando
-
-		expandoValueLocalService.deleteValues(
 			JournalArticle.class.getName(), article.getResourcePrimKey());
 
 		// Ratings
@@ -769,6 +764,11 @@ public class JournalArticleLocalServiceImpl
 		// Small image
 
 		imageLocalService.deleteImage(article.getSmallImageId());
+
+		// Expando
+
+		expandoValueLocalService.deleteValues(
+			JournalArticle.class.getName(), article.getResourcePrimKey());
 
 		// Resources
 
@@ -1839,16 +1839,16 @@ public class JournalArticleLocalServiceImpl
 
 		journalArticlePersistence.update(article, false);
 
-		// Small image
-
-		saveImages(
-			smallImage, article.getSmallImageId(), smallFile, smallBytes);
-
 		// Expando
 
 		ExpandoBridge expandoBridge = article.getExpandoBridge();
 
 		expandoBridge.setAttributes(serviceContext);
+
+		// Small image
+
+		saveImages(
+			smallImage, article.getSmallImageId(), smallFile, smallBytes);
 
 		// Tags
 
@@ -2065,8 +2065,7 @@ public class JournalArticleLocalServiceImpl
 					newArticle.getGroupId(), newArticle.getArticleId(),
 					newArticle.getVersion(), instanceId, name, languageId);
 
-				imageLocalService.updateImage(
-					imageId, oldImage.getTextObj());
+				imageLocalService.updateImage(imageId, oldImage.getTextObj());
 
 				String elContent =
 					"/image/journal/article?img_id=" + imageId + "&t=" +

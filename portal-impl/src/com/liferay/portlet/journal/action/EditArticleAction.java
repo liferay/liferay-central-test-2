@@ -455,8 +455,6 @@ public class EditArticleAction extends PortletAction {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			JournalArticle.class.getName(), actionRequest);
 
-		boolean approve = ParamUtil.getBoolean(uploadRequest, "approve");
-
 		JournalArticle article = null;
 
 		if (cmd.equals(Constants.ADD)) {
@@ -523,6 +521,8 @@ public class EditArticleAction extends PortletAction {
 				neverReview, indexable, smallImage, smallImageURL, smallFile,
 				images, articleURL, serviceContext);
 		}
+
+		boolean approve = ParamUtil.getBoolean(uploadRequest, "approve");
 
 		if (approve) {
 			article = JournalArticleServiceUtil.approveArticle(

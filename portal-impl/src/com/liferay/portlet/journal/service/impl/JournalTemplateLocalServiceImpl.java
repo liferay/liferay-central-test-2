@@ -152,11 +152,6 @@ public class JournalTemplateLocalServiceImpl
 
 		journalTemplatePersistence.update(template, false);
 
-		// Small image
-
-		saveImages(
-			smallImage, template.getSmallImageId(), smallFile, smallBytes);
-
 		// Resources
 
 		if (serviceContext.getAddCommunityPermissions() ||
@@ -177,6 +172,11 @@ public class JournalTemplateLocalServiceImpl
 		ExpandoBridge expandoBridge = template.getExpandoBridge();
 
 		expandoBridge.setAttributes(serviceContext);
+
+		// Small image
+
+		saveImages(
+			smallImage, template.getSmallImageId(), smallFile, smallBytes);
 
 		return template;
 	}
@@ -338,14 +338,14 @@ public class JournalTemplateLocalServiceImpl
 			throw new RequiredTemplateException();
 		}
 
-		// Small image
-
-		imageLocalService.deleteImage(template.getSmallImageId());
-
 		// WebDAVProps
 
 		webDAVPropsLocalService.deleteWebDAVProps(
 			JournalTemplate.class.getName(), template.getPrimaryKey());
+
+		// Small image
+
+		imageLocalService.deleteImage(template.getSmallImageId());
 
 		// Expando
 
@@ -573,16 +573,16 @@ public class JournalTemplateLocalServiceImpl
 
 		journalTemplatePersistence.update(template, false);
 
-		// Small image
-
-		saveImages(
-			smallImage, template.getSmallImageId(), smallFile, smallBytes);
-
 		// Expando
 
 		ExpandoBridge expandoBridge = template.getExpandoBridge();
 
 		expandoBridge.setAttributes(serviceContext);
+
+		// Small image
+
+		saveImages(
+			smallImage, template.getSmallImageId(), smallFile, smallBytes);
 
 		return template;
 	}
