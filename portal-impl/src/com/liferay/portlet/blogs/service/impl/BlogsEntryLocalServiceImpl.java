@@ -154,17 +154,17 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				serviceContext.getGuestPermissions());
 		}
 
-		// Statistics
-
-		if (!draft) {
-			blogsStatsUserLocalService.updateStatsUser(groupId, userId, now);
-		}
-
 		// Expando
 
 		ExpandoBridge expandoBridge = entry.getExpandoBridge();
 
 		expandoBridge.setAttributes(serviceContext);
+
+		// Statistics
+
+		if (!draft) {
+			blogsStatsUserLocalService.updateStatsUser(groupId, userId, now);
+		}
 
 		// Social
 
@@ -293,6 +293,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		mbMessageLocalService.deleteDiscussionMessages(
 			BlogsEntry.class.getName(), entry.getEntryId());
 
+		// Statistics
+
+		blogsStatsUserLocalService.updateStatsUser(
+			entry.getGroupId(), entry.getUserId());
+
 		// Expando
 
 		expandoValueLocalService.deleteValues(
@@ -307,11 +312,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		// Entry
 
 		blogsEntryPersistence.remove(entry);
-
-		// Statistics
-
-		blogsStatsUserLocalService.updateStatsUser(
-			entry.getGroupId(), entry.getUserId());
 	}
 
 	public List<BlogsEntry> getCompanyEntries(
