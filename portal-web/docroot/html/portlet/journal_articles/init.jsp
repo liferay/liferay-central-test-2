@@ -61,7 +61,6 @@ String structureId = GetterUtil.getString(preferences.getValue("structure-id", S
 String type = preferences.getValue("type", StringPool.BLANK);
 String pageURL = preferences.getValue("page-url", "maximized");
 int pageDelta = GetterUtil.getInteger(preferences.getValue("page-delta", StringPool.BLANK));
-
 String orderByCol = preferences.getValue("order-by-col", StringPool.BLANK);
 String orderByType = preferences.getValue("order-by-type", StringPool.BLANK);
 
