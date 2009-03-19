@@ -78,34 +78,10 @@ if (treeWalker.isOdd()) {
 		}
 		%>
 
-		<a href="<%= rowHREF %>">
-
-		<%
-		boolean readFlag = true;
-
-		if (themeDisplay.isSignedIn()) {
-			readFlag = MBMessageFlagLocalServiceUtil.hasReadFlag(themeDisplay.getUserId(), message.getMessageId());
-		}
-		%>
-
-		<c:if test="<%= !readFlag %>">
-			<b>
-		</c:if>
-
-		<%= HtmlUtil.escape(message.getSubject()) %>
-
-		<c:if test="<%= !readFlag %>">
-			</b>
-		</c:if>
-
-		</a>
+		<a href="<%= rowHREF %>"><%= HtmlUtil.escape(message.getSubject()) %></a>
 	</td>
 	<td nowrap>
 		<a href="<%= rowHREF %>">
-
-		<c:if test="<%= !readFlag %>">
-			<b>
-		</c:if>
 
 		<c:choose>
 			<c:when test="<%= message.isAnonymous() %>">
@@ -116,16 +92,10 @@ if (treeWalker.isOdd()) {
 			</c:otherwise>
 		</c:choose>
 
-		<c:if test="<%= !readFlag %>">
-			</b>
-		</c:if>
-
 		</a>
 	</td>
 	<td nowrap>
-		<a href="<%= rowHREF %>">
-		<%= dateFormatDateTime.format(message.getModifiedDate()) %>
-		</a>
+		<a href="<%= rowHREF %>"><%= dateFormatDateTime.format(message.getModifiedDate()) %></a>
 	</td>
 </tr>
 

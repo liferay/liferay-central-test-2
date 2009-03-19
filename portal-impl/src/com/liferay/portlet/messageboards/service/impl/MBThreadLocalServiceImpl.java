@@ -263,7 +263,8 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		return mbThreadPersistence.countByCategoryId(categoryId);
 	}
 
-	public boolean hasReadThread(long userId, long threadId)
+	public boolean hasReadThread(
+			long userId, long threadId, int threadMessageCount)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -272,11 +273,10 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			return true;
 		}
 
-		int total = mbMessagePersistence.countByThreadId(threadId);
-		int read = mbMessageFlagFinder.countByU_T_F(
+		int readThreadMessageCount = mbMessageFlagFinder.countByU_T_F(
 			userId, threadId, MBMessageFlagImpl.READ_FLAG);
 
-		if (total != read) {
+		if (readThreadMessageCount != threadMessageCount) {
 			return false;
 		}
 		else {

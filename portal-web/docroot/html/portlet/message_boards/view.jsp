@@ -322,7 +322,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 				message = message.toEscapedModel();
 
-				boolean readThread = MBThreadLocalServiceUtil.hasReadThread(themeDisplay.getUserId(), thread.getThreadId());
+				boolean readThread = MBThreadLocalServiceUtil.hasReadThread(themeDisplay.getUserId(), thread.getThreadId(), thread.getMessageCount());
 
 				ResultRow row = new ResultRow(new Object[] {message, threadSubscriptionClassPKs}, thread.getThreadId(), i, !readThread);
 
@@ -656,7 +656,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 			message = message.toEscapedModel();
 
-			boolean readThread = MBThreadLocalServiceUtil.hasReadThread(themeDisplay.getUserId(), thread.getThreadId());
+			boolean readThread = MBThreadLocalServiceUtil.hasReadThread(themeDisplay.getUserId(), thread.getThreadId(), thread.getMessageCount());
 
 			ResultRow row = new ResultRow(new Object[] {message, threadSubscriptionClassPKs}, thread.getThreadId(), i, !readThread);
 

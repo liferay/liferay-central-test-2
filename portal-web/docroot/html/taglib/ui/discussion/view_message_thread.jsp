@@ -59,27 +59,7 @@ if (treeWalker.isOdd()) {
 		String rowHREF = "#" + renderResponse.getNamespace() + "message_" + message.getMessageId();
 		%>
 
-		<a href="<%= rowHREF %>">
-
-		<%
-		boolean readFlag = false;
-
-		if (themeDisplay.isSignedIn()) {
-			readFlag = MBMessageFlagLocalServiceUtil.hasReadFlag(themeDisplay.getUserId(), message.getMessageId());
-		}
-		%>
-
-		<c:if test="<%= !readFlag %>">
-			<b>
-		</c:if>
-
-		<%= HtmlUtil.escape(StringUtil.shorten(message.getBody(), 50, "...")) %>
-
-		<c:if test="<%= !readFlag %>">
-			</b>
-		</c:if>
-
-		</a>
+		<a href="<%= rowHREF %>"><%= HtmlUtil.escape(StringUtil.shorten(message.getBody(), 50, "...")) %></a>
 	</td>
 	<td></td>
 	<td nowrap="nowrap">
