@@ -150,7 +150,6 @@ public class EditEventAction extends PortletAction {
 	}
 
 	protected void updateEvent(ActionRequest actionRequest) throws Exception {
-		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
 
 		long eventId = ParamUtil.getLong(actionRequest, "eventId");
 
