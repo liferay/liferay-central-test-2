@@ -132,6 +132,11 @@ public interface SubscriptionLocalService {
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portal.model.Subscription> getUserSubscriptions(
+		long userId, java.lang.String className)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean isSubscribed(long companyId, long userId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException;

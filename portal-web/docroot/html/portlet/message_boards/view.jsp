@@ -34,6 +34,29 @@ MBCategory category = (MBCategory)request.getAttribute(WebKeys.MESSAGE_BOARDS_CA
 
 long categoryId = BeanParamUtil.getLong(category, request, "categoryId", MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 
+Set<Long> categorySubscriptionClassPKs = null;
+Set<Long> threadSubscriptionClassPKs = null;
+
+if (themeDisplay.isSignedIn()) {
+	List<Subscription> categorySubscriptions = SubscriptionLocalServiceUtil.getUserSubscriptions(user.getUserId(), MBCategory.class.getName());
+
+	categorySubscriptionClassPKs = new HashSet<Long>(categorySubscriptions.size());
+
+	for (Subscription subscription : categorySubscriptions) {
+		categorySubscriptionClassPKs.add(subscription.getClassPK());
+	}
+
+	threadSubscriptionClassPKs = new HashSet<Long>();
+
+	List<Subscription> threadSubscriptions = SubscriptionLocalServiceUtil.getUserSubscriptions(user.getUserId(), MBThread.class.getName());
+
+	threadSubscriptionClassPKs = new HashSet<Long>(threadSubscriptions.size());
+
+	for (Subscription subscription : threadSubscriptions) {
+		threadSubscriptionClassPKs.add(subscription.getClassPK());
+	}
+}
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/message_boards/view");
@@ -86,7 +109,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 			curCategory = curCategory.toEscapedModel();
 
-			ResultRow row = new ResultRow(curCategory, curCategory.getCategoryId(), i);
+			ResultRow row = new ResultRow(new Object[] {curCategory, categorySubscriptionClassPKs}, curCategory.getCategoryId(), i);
 
 			boolean restricted = !MBCategoryPermission.contains(permissionChecker, curCategory, ActionKeys.VIEW);
 
@@ -301,7 +324,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 				boolean readThread = MBThreadLocalServiceUtil.hasReadThread(themeDisplay.getUserId(), thread.getThreadId());
 
-				ResultRow row = new ResultRow(message, thread.getThreadId(), i, !readThread);
+				ResultRow row = new ResultRow(new Object[] {message, threadSubscriptionClassPKs}, thread.getThreadId(), i, !readThread);
 
 				row.setRestricted(!MBMessagePermission.contains(permissionChecker, message, ActionKeys.VIEW));
 
@@ -504,7 +527,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 				curCategory = curCategory.toEscapedModel();
 
-				ResultRow row = new ResultRow(curCategory, curCategory.getCategoryId(), i);
+				ResultRow row = new ResultRow(new Object[] {curCategory, categorySubscriptionClassPKs}, curCategory.getCategoryId(), i);
 
 				boolean restricted = !MBCategoryPermission.contains(permissionChecker, curCategory, ActionKeys.VIEW);
 
@@ -635,7 +658,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 			boolean readThread = MBThreadLocalServiceUtil.hasReadThread(themeDisplay.getUserId(), thread.getThreadId());
 
-			ResultRow row = new ResultRow(message, thread.getThreadId(), i, !readThread);
+			ResultRow row = new ResultRow(new Object[] {message, threadSubscriptionClassPKs}, thread.getThreadId(), i, !readThread);
 
 			row.setRestricted(!MBMessagePermission.contains(permissionChecker, message, ActionKeys.VIEW));
 

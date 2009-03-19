@@ -128,6 +128,15 @@ public class SubscriptionLocalServiceImpl
 			companyId, classNameId, classPK);
 	}
 
+	public List<Subscription> getUserSubscriptions(
+			long userId, String className)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return subscriptionPersistence.findByU_C(userId, classNameId);
+	}
+
 	public boolean isSubscribed(
 			long companyId, long userId, String className, long classPK)
 		throws SystemException {

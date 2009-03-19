@@ -483,6 +483,261 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public List<Subscription> findByU_C(long userId, long classNameId)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = SubscriptionModelImpl.CACHE_ENABLED;
+		String finderClassName = Subscription.class.getName();
+		String finderMethodName = "findByU_C";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(userId), new Long(classNameId)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portal.model.Subscription WHERE ");
+
+				query.append("userId = ?");
+
+				query.append(" AND ");
+
+				query.append("classNameId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(userId);
+
+				qPos.add(classNameId);
+
+				List<Subscription> list = q.list();
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<Subscription>)result;
+		}
+	}
+
+	public List<Subscription> findByU_C(long userId, long classNameId,
+		int start, int end) throws SystemException {
+		return findByU_C(userId, classNameId, start, end, null);
+	}
+
+	public List<Subscription> findByU_C(long userId, long classNameId,
+		int start, int end, OrderByComparator obc) throws SystemException {
+		boolean finderClassNameCacheEnabled = SubscriptionModelImpl.CACHE_ENABLED;
+		String finderClassName = Subscription.class.getName();
+		String finderMethodName = "findByU_C";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(userId), new Long(classNameId),
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portal.model.Subscription WHERE ");
+
+				query.append("userId = ?");
+
+				query.append(" AND ");
+
+				query.append("classNameId = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(userId);
+
+				qPos.add(classNameId);
+
+				List<Subscription> list = (List<Subscription>)QueryUtil.list(q,
+						getDialect(), start, end);
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<Subscription>)result;
+		}
+	}
+
+	public Subscription findByU_C_First(long userId, long classNameId,
+		OrderByComparator obc)
+		throws NoSuchSubscriptionException, SystemException {
+		List<Subscription> list = findByU_C(userId, classNameId, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No Subscription exists with the key {");
+
+			msg.append("userId=" + userId);
+
+			msg.append(", ");
+			msg.append("classNameId=" + classNameId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchSubscriptionException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public Subscription findByU_C_Last(long userId, long classNameId,
+		OrderByComparator obc)
+		throws NoSuchSubscriptionException, SystemException {
+		int count = countByU_C(userId, classNameId);
+
+		List<Subscription> list = findByU_C(userId, classNameId, count - 1,
+				count, obc);
+
+		if (list.size() == 0) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No Subscription exists with the key {");
+
+			msg.append("userId=" + userId);
+
+			msg.append(", ");
+			msg.append("classNameId=" + classNameId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchSubscriptionException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public Subscription[] findByU_C_PrevAndNext(long subscriptionId,
+		long userId, long classNameId, OrderByComparator obc)
+		throws NoSuchSubscriptionException, SystemException {
+		Subscription subscription = findByPrimaryKey(subscriptionId);
+
+		int count = countByU_C(userId, classNameId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append("FROM com.liferay.portal.model.Subscription WHERE ");
+
+			query.append("userId = ?");
+
+			query.append(" AND ");
+
+			query.append("classNameId = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(userId);
+
+			qPos.add(classNameId);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					subscription);
+
+			Subscription[] array = new SubscriptionImpl[3];
+
+			array[0] = (Subscription)objArray[0];
+			array[1] = (Subscription)objArray[1];
+			array[2] = (Subscription)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<Subscription> findByC_C_C(long companyId, long classNameId,
 		long classPK) throws SystemException {
 		boolean finderClassNameCacheEnabled = SubscriptionModelImpl.CACHE_ENABLED;
@@ -1013,6 +1268,13 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public void removeByU_C(long userId, long classNameId)
+		throws SystemException {
+		for (Subscription subscription : findByU_C(userId, classNameId)) {
+			remove(subscription);
+		}
+	}
+
 	public void removeByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
 		for (Subscription subscription : findByC_C_C(companyId, classNameId,
@@ -1070,6 +1332,83 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 				QueryPos qPos = QueryPos.getInstance(q);
 
 				qPos.add(userId);
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByU_C(long userId, long classNameId)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = SubscriptionModelImpl.CACHE_ENABLED;
+		String finderClassName = Subscription.class.getName();
+		String finderMethodName = "countByU_C";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(userId), new Long(classNameId)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portal.model.Subscription WHERE ");
+
+				query.append("userId = ?");
+
+				query.append(" AND ");
+
+				query.append("classNameId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(userId);
+
+				qPos.add(classNameId);
 
 				Long count = null;
 

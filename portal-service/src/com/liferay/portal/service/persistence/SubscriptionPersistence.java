@@ -103,6 +103,35 @@ public interface SubscriptionPersistence extends BasePersistence {
 		throws com.liferay.portal.NoSuchSubscriptionException,
 			com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portal.model.Subscription> findByU_C(
+		long userId, long classNameId)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Subscription> findByU_C(
+		long userId, long classNameId, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Subscription> findByU_C(
+		long userId, long classNameId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Subscription findByU_C_First(long userId,
+		long classNameId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchSubscriptionException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Subscription findByU_C_Last(long userId,
+		long classNameId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchSubscriptionException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Subscription[] findByU_C_PrevAndNext(
+		long subscriptionId, long userId, long classNameId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchSubscriptionException,
+			com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portal.model.Subscription> findByC_C_C(
 		long companyId, long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
@@ -164,6 +193,9 @@ public interface SubscriptionPersistence extends BasePersistence {
 	public void removeByUserId(long userId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByU_C(long userId, long classNameId)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByC_C_C(long companyId, long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
@@ -175,6 +207,9 @@ public interface SubscriptionPersistence extends BasePersistence {
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByUserId(long userId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByU_C(long userId, long classNameId)
 		throws com.liferay.portal.SystemException;
 
 	public int countByC_C_C(long companyId, long classNameId, long classPK)

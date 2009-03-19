@@ -27,7 +27,10 @@
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-MBCategory category = (MBCategory)row.getObject();
+Object[] objArray = (Object[])row.getObject();
+
+MBCategory category = (MBCategory)objArray[0];
+Set<Long> categorySubscriptionClassPKs = (Set<Long>)objArray[1];
 %>
 
 <liferay-ui:icon-menu>
@@ -56,7 +59,7 @@ MBCategory category = (MBCategory)row.getObject();
 
 	<c:if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.SUBSCRIBE) %>">
 		<c:choose>
-			<c:when test="<%= SubscriptionLocalServiceUtil.isSubscribed(user.getCompanyId(), user.getUserId(), MBCategory.class.getName(), category.getCategoryId()) %>">
+			<c:when test="<%= (categorySubscriptionClassPKs != null) && categorySubscriptionClassPKs.contains(category.getCategoryId()) %>">
 				<portlet:actionURL var="unsubscribeURL">
 					<portlet:param name="struts_action" value="/message_boards/edit_category" />
 					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNSUBSCRIBE %>" />

@@ -157,6 +157,12 @@ public class SubscriptionLocalServiceUtil {
 		return getService().getSubscriptions(companyId, className, classPK);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Subscription> getUserSubscriptions(
+		long userId, java.lang.String className)
+		throws com.liferay.portal.SystemException {
+		return getService().getUserSubscriptions(userId, className);
+	}
+
 	public static boolean isSubscribed(long companyId, long userId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
