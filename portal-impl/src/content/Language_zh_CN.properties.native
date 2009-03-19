@@ -3151,6 +3151,7 @@ severity-1=严重级别 1
 severity-2=严重级别 2
 severity-3=严重级别 3
 sex=性别
+shard=碎片
 share-this-application-on-any-website=在任何 Web 站点上共享此应用程序。请复制下面代码并将其粘贴到您的 Web 页面，则会显示此应用程序。
 share-this-application-with-friends=与朋友共享此应用程序。
 sharing=分享
