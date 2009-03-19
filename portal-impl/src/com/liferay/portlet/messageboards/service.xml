@@ -184,6 +184,10 @@
 
 		<column name="messageId" type="long" primary="true" />
 
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
 		<!-- Audit fields -->
 
 		<column name="companyId" type="long" />
@@ -214,11 +218,18 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
 		<finder name="CategoryId" return-type="Collection">
 			<finder-column name="categoryId" />
 		</finder>
 		<finder name="ThreadId" return-type="Collection">
 			<finder-column name="threadId" />
+		</finder>
+		<finder name="G_U" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="userId" />
 		</finder>
 		<finder name="C_T" return-type="Collection">
 			<finder-column name="categoryId" />
@@ -345,6 +356,10 @@
 
 		<column name="threadId" type="long" primary="true" />
 
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
 		<!-- Other fields -->
 
 		<column name="categoryId" type="long" />
@@ -364,6 +379,9 @@
 
 		<!-- Finder methods -->
 
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
 		<finder name="CategoryId" return-type="Collection">
 			<finder-column name="categoryId" />
 		</finder>

@@ -165,7 +165,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 	public List<MBThread> getGroupThreads(long groupId, int start, int end)
 		throws SystemException {
 
-		return mbThreadFinder.findByGroupId(groupId, start, end);
+		return mbThreadPersistence.findByGroupId(groupId, start, end);
 	}
 
 	public List<MBThread> getGroupThreads(
@@ -188,7 +188,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		throws SystemException {
 
 		if (userId <= 0) {
-			return mbThreadFinder.findByGroupId(groupId, start, end);
+			return mbThreadPersistence.findByGroupId(groupId, start, end);
 		}
 		else {
 			if (subscribed) {
@@ -208,7 +208,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 	}
 
 	public int getGroupThreadsCount(long groupId) throws SystemException {
-		return mbThreadFinder.countByGroupId(groupId);
+		return mbThreadPersistence.countByGroupId(groupId);
 	}
 
 	public int getGroupThreadsCount(long groupId, long userId)
@@ -230,7 +230,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		throws SystemException {
 
 		if (userId <= 0) {
-			return mbThreadFinder.countByGroupId(groupId);
+			return mbThreadPersistence.countByGroupId(groupId);
 		}
 		else {
 			if (subscribed) {

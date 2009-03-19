@@ -60,7 +60,6 @@ import com.liferay.portlet.messageboards.service.MBMessageFlagLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBBanUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBCategoryUtil;
-import com.liferay.portlet.messageboards.service.persistence.MBMessageFinderUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
@@ -657,7 +656,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
 				try {
-					existingMessage = MBMessageFinderUtil.findByUuid_G(
+					existingMessage = MBMessageUtil.findByUUID_G(
 						message.getUuid(), context.getGroupId());
 
 					MBMessageLocalServiceUtil.updateMessage(

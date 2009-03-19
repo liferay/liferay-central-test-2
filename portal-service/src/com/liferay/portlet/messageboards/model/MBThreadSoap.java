@@ -51,6 +51,7 @@ public class MBThreadSoap implements Serializable {
 		MBThreadSoap soapModel = new MBThreadSoap();
 
 		soapModel.setThreadId(model.getThreadId());
+		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCategoryId(model.getCategoryId());
 		soapModel.setRootMessageId(model.getRootMessageId());
 		soapModel.setMessageCount(model.getMessageCount());
@@ -89,6 +90,14 @@ public class MBThreadSoap implements Serializable {
 
 	public void setThreadId(long threadId) {
 		_threadId = threadId;
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
 	}
 
 	public long getCategoryId() {
@@ -148,6 +157,7 @@ public class MBThreadSoap implements Serializable {
 	}
 
 	private long _threadId;
+	private long _groupId;
 	private long _categoryId;
 	private long _rootMessageId;
 	private int _messageCount;

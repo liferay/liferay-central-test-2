@@ -254,6 +254,247 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public List<MBThread> findByGroupId(long groupId) throws SystemException {
+		boolean finderClassNameCacheEnabled = MBThreadModelImpl.CACHE_ENABLED;
+		String finderClassName = MBThread.class.getName();
+		String finderMethodName = "findByGroupId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(groupId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBThread WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("priority DESC, ");
+				query.append("lastPostDate DESC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				List<MBThread> list = q.list();
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<MBThread>)result;
+		}
+	}
+
+	public List<MBThread> findByGroupId(long groupId, int start, int end)
+		throws SystemException {
+		return findByGroupId(groupId, start, end, null);
+	}
+
+	public List<MBThread> findByGroupId(long groupId, int start, int end,
+		OrderByComparator obc) throws SystemException {
+		boolean finderClassNameCacheEnabled = MBThreadModelImpl.CACHE_ENABLED;
+		String finderClassName = MBThread.class.getName();
+		String finderMethodName = "findByGroupId";
+		String[] finderParams = new String[] {
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(groupId),
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBThread WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("priority DESC, ");
+					query.append("lastPostDate DESC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				List<MBThread> list = (List<MBThread>)QueryUtil.list(q,
+						getDialect(), start, end);
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<MBThread>)result;
+		}
+	}
+
+	public MBThread findByGroupId_First(long groupId, OrderByComparator obc)
+		throws NoSuchThreadException, SystemException {
+		List<MBThread> list = findByGroupId(groupId, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No MBThread exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchThreadException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public MBThread findByGroupId_Last(long groupId, OrderByComparator obc)
+		throws NoSuchThreadException, SystemException {
+		int count = countByGroupId(groupId);
+
+		List<MBThread> list = findByGroupId(groupId, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No MBThread exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchThreadException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public MBThread[] findByGroupId_PrevAndNext(long threadId, long groupId,
+		OrderByComparator obc) throws NoSuchThreadException, SystemException {
+		MBThread mbThread = findByPrimaryKey(threadId);
+
+		int count = countByGroupId(groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append(
+				"FROM com.liferay.portlet.messageboards.model.MBThread WHERE ");
+
+			query.append("groupId = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("priority DESC, ");
+				query.append("lastPostDate DESC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, mbThread);
+
+			MBThread[] array = new MBThreadImpl[3];
+
+			array[0] = (MBThread)objArray[0];
+			array[1] = (MBThread)objArray[1];
+			array[2] = (MBThread)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<MBThread> findByCategoryId(long categoryId)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = MBThreadModelImpl.CACHE_ENABLED;
@@ -621,6 +862,12 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public void removeByGroupId(long groupId) throws SystemException {
+		for (MBThread mbThread : findByGroupId(groupId)) {
+			remove(mbThread);
+		}
+	}
+
 	public void removeByCategoryId(long categoryId) throws SystemException {
 		for (MBThread mbThread : findByCategoryId(categoryId)) {
 			remove(mbThread);
@@ -630,6 +877,72 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 	public void removeAll() throws SystemException {
 		for (MBThread mbThread : findAll()) {
 			remove(mbThread);
+		}
+	}
+
+	public int countByGroupId(long groupId) throws SystemException {
+		boolean finderClassNameCacheEnabled = MBThreadModelImpl.CACHE_ENABLED;
+		String finderClassName = MBThread.class.getName();
+		String finderMethodName = "countByGroupId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(groupId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.messageboards.model.MBThread WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
 		}
 	}
 

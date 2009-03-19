@@ -24,14 +24,11 @@ package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
-import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
-import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
@@ -51,23 +48,8 @@ public class MBMessageFinderImpl
 	public static String COUNT_BY_CATEGORY_IDS =
 		MBMessageFinder.class.getName() + ".countByCategoryIds";
 
-	public static String COUNT_BY_GROUP_ID =
-		MBMessageFinder.class.getName() + ".countByGroupId";
-
-	public static String COUNT_BY_G_U =
-		MBMessageFinder.class.getName() + ".countByG_U";
-
-	public static String FIND_BY_GROUP_ID =
-		MBMessageFinder.class.getName() + ".findByGroupId";
-
 	public static String FIND_BY_NO_ASSETS =
 		MBMessageFinder.class.getName() + ".findByNoAssets";
-
-	public static String FIND_BY_UUID_G =
-		MBMessageFinder.class.getName() + ".findByUuid_G";
-
-	public static String FIND_BY_G_U =
-		MBMessageFinder.class.getName() + ".findByG_U";
 
 	public static String FIND_BY_C_C =
 		MBMessageFinder.class.getName() + ".findByC_C";
@@ -117,116 +99,6 @@ public class MBMessageFinderImpl
 		}
 	}
 
-	public int countByGroupId(long groupId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(COUNT_BY_GROUP_ID);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			Iterator<Long> itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countByG_U(long groupId, long userId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(COUNT_BY_G_U);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-			qPos.add(userId);
-
-			Iterator<Long> itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<MBMessage> findByGroupId(long groupId, int start, int end)
-		throws SystemException {
-
-		return findByGroupId(groupId, start, end, null);
-	}
-
-	public List<MBMessage> findByGroupId(
-			long groupId, int start, int end, OrderByComparator obc)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_GROUP_ID);
-
-			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("MBMessage", MBMessageImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			return (List<MBMessage>)QueryUtil.list(q, getDialect(), start, end);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<MBMessage> findByNoAssets() throws SystemException {
 		Session session = null;
 
@@ -240,93 +112,6 @@ public class MBMessageFinderImpl
 			q.addEntity("MBMessage", MBMessageImpl.class);
 
 			return q.list();
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public MBMessage findByUuid_G(String uuid, long groupId)
-		throws NoSuchMessageException, SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_UUID_G);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("MBMessage", MBMessageImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(uuid);
-			qPos.add(groupId);
-
-			List<MBMessage> list = q.list();
-
-			if (list.size() == 0) {
-				StringBuilder sb = new StringBuilder();
-
-				sb.append("No MBMessage exists with the key {uuid=");
-				sb.append(uuid);
-				sb.append(", groupId=");
-				sb.append(groupId);
-				sb.append("}");
-
-				throw new NoSuchMessageException(sb.toString());
-			}
-			else {
-				return list.get(0);
-			}
-		}
-		catch (NoSuchMessageException nsme) {
-			throw nsme;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<MBMessage> findByG_U(
-			long groupId, long userId, int start, int end)
-		throws SystemException {
-
-		return findByG_U(groupId, userId, start, end, null);
-	}
-
-	public List<MBMessage> findByG_U(
-			long groupId, long userId, int start, int end,
-			OrderByComparator obc)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_G_U);
-
-			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("MBMessage", MBMessageImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-			qPos.add(userId);
-
-			return (List<MBMessage>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

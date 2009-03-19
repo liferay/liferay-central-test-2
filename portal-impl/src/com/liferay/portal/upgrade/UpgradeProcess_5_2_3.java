@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.upgrade.v5_2_3.UpgradeBookmarks;
 import com.liferay.portal.upgrade.v5_2_3.UpgradeDocumentLibrary;
 import com.liferay.portal.upgrade.v5_2_3.UpgradeGroup;
+import com.liferay.portal.upgrade.v5_2_3.UpgradeMessageBoards;
 import com.liferay.portal.upgrade.v5_2_3.UpgradeResource;
 import com.liferay.portal.upgrade.v5_2_3.UpgradeResourceCode;
 import com.liferay.portal.upgrade.v5_2_3.UpgradeRole;
@@ -56,6 +57,7 @@ public class UpgradeProcess_5_2_3 extends UpgradeProcess {
 		upgrade(UpgradeBookmarks.class);
 		upgrade(UpgradeDocumentLibrary.class);
 		upgrade(UpgradeGroup.class);
+		upgrade(UpgradeMessageBoards.class);
 		upgrade(UpgradeResource.class);
 		upgrade(UpgradeResourceCode.class);
 		upgrade(UpgradeRole.class);

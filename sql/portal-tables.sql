@@ -677,6 +677,7 @@ create table MBMailingList (
 create table MBMessage (
 	uuid_ VARCHAR(75) null,
 	messageId LONG not null primary key,
+	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -708,6 +709,7 @@ create table MBStatsUser (
 
 create table MBThread (
 	threadId LONG not null primary key,
+	groupId LONG,
 	categoryId LONG,
 	rootMessageId LONG,
 	messageCount INTEGER,

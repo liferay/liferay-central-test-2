@@ -135,6 +135,19 @@ public class MBMessageUtil {
 		return getPersistence().findByUuid_PrevAndNext(messageId, uuid, obc);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBMessage findByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException {
+		return getPersistence().findByUUID_G(uuid, groupId);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage fetchByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByUUID_G(uuid, groupId);
+	}
+
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByCompanyId(
 		long companyId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId);
@@ -174,6 +187,47 @@ public class MBMessageUtil {
 			com.liferay.portlet.messageboards.NoSuchMessageException {
 		return getPersistence()
 				   .findByCompanyId_PrevAndNext(messageId, companyId, obc);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByGroupId(
+		long groupId) throws com.liferay.portal.SystemException {
+		return getPersistence().findByGroupId(groupId);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByGroupId(groupId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByGroupId(groupId, start, end, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage findByGroupId_First(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException {
+		return getPersistence().findByGroupId_First(groupId, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage findByGroupId_Last(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException {
+		return getPersistence().findByGroupId_Last(groupId, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage[] findByGroupId_PrevAndNext(
+		long messageId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException {
+		return getPersistence()
+				   .findByGroupId_PrevAndNext(messageId, groupId, obc);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByCategoryId(
@@ -256,6 +310,49 @@ public class MBMessageUtil {
 			com.liferay.portlet.messageboards.NoSuchMessageException {
 		return getPersistence()
 				   .findByThreadId_PrevAndNext(messageId, threadId, obc);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByG_U(
+		long groupId, long userId) throws com.liferay.portal.SystemException {
+		return getPersistence().findByG_U(groupId, userId);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByG_U(
+		long groupId, long userId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByG_U(groupId, userId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByG_U(
+		long groupId, long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByG_U(groupId, userId, start, end, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage findByG_U_First(
+		long groupId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException {
+		return getPersistence().findByG_U_First(groupId, userId, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage findByG_U_Last(
+		long groupId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException {
+		return getPersistence().findByG_U_Last(groupId, userId, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage[] findByG_U_PrevAndNext(
+		long messageId, long groupId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException {
+		return getPersistence()
+				   .findByG_U_PrevAndNext(messageId, groupId, userId, obc);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByC_T(
@@ -381,9 +478,20 @@ public class MBMessageUtil {
 		getPersistence().removeByUuid(uuid);
 	}
 
+	public static void removeByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException {
+		getPersistence().removeByUUID_G(uuid, groupId);
+	}
+
 	public static void removeByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByCompanyId(companyId);
+	}
+
+	public static void removeByGroupId(long groupId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByGroupId(groupId);
 	}
 
 	public static void removeByCategoryId(long categoryId)
@@ -394,6 +502,11 @@ public class MBMessageUtil {
 	public static void removeByThreadId(long threadId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByThreadId(threadId);
+	}
+
+	public static void removeByG_U(long groupId, long userId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByG_U(groupId, userId);
 	}
 
 	public static void removeByC_T(long categoryId, long threadId)
@@ -415,9 +528,19 @@ public class MBMessageUtil {
 		return getPersistence().countByUuid(uuid);
 	}
 
+	public static int countByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByUUID_G(uuid, groupId);
+	}
+
 	public static int countByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByCompanyId(companyId);
+	}
+
+	public static int countByGroupId(long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByGroupId(groupId);
 	}
 
 	public static int countByCategoryId(long categoryId)
@@ -428,6 +551,11 @@ public class MBMessageUtil {
 	public static int countByThreadId(long threadId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByThreadId(threadId);
+	}
+
+	public static int countByG_U(long groupId, long userId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByG_U(groupId, userId);
 	}
 
 	public static int countByC_T(long categoryId, long threadId)

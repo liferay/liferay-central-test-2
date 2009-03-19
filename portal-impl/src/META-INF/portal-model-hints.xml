@@ -1129,6 +1129,7 @@
 	<model name="com.liferay.portlet.messageboards.model.MBMessage">
 		<field name="uuid" type="String" />
 		<field name="messageId" type="long" />
+		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
@@ -1159,6 +1160,7 @@
 	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBThread">
 		<field name="threadId" type="long" />
+		<field name="groupId" type="long" />
 		<field name="categoryId" type="long" />
 		<field name="rootMessageId" type="long" />
 		<field name="messageCount" type="int" />

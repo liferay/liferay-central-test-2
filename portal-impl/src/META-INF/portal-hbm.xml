@@ -1020,6 +1020,7 @@
 			<generator class="assigned" />
 		</id>
 		<property name="uuid" column="uuid_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -1057,6 +1058,7 @@
 		<id name="threadId" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="categoryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="rootMessageId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="messageCount" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />

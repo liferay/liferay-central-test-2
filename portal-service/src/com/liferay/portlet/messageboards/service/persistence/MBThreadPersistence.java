@@ -79,6 +79,34 @@ public interface MBThreadPersistence extends BasePersistence {
 	public com.liferay.portlet.messageboards.model.MBThread fetchByPrimaryKey(
 		long threadId) throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByGroupId(
+		long groupId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.messageboards.model.MBThread findByGroupId_First(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException;
+
+	public com.liferay.portlet.messageboards.model.MBThread findByGroupId_Last(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException;
+
+	public com.liferay.portlet.messageboards.model.MBThread[] findByGroupId_PrevAndNext(
+		long threadId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException;
+
 	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByCategoryId(
 		long categoryId) throws com.liferay.portal.SystemException;
 
@@ -125,10 +153,16 @@ public interface MBThreadPersistence extends BasePersistence {
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByGroupId(long groupId)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByCategoryId(long categoryId)
 		throws com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
+
+	public int countByGroupId(long groupId)
+		throws com.liferay.portal.SystemException;
 
 	public int countByCategoryId(long categoryId)
 		throws com.liferay.portal.SystemException;

@@ -56,6 +56,7 @@ public class MBThreadJSONSerializer {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
 		jsonObj.put("threadId", model.getThreadId());
+		jsonObj.put("groupId", model.getGroupId());
 		jsonObj.put("categoryId", model.getCategoryId());
 		jsonObj.put("rootMessageId", model.getRootMessageId());
 		jsonObj.put("messageCount", model.getMessageCount());

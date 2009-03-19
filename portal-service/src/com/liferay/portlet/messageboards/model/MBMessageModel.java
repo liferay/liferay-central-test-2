@@ -59,6 +59,10 @@ public interface MBMessageModel extends BaseModel {
 
 	public void setMessageId(long messageId);
 
+	public long getGroupId();
+
+	public void setGroupId(long groupId);
+
 	public long getCompanyId();
 
 	public void setCompanyId(long companyId);

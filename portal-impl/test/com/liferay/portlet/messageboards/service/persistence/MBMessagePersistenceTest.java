@@ -73,6 +73,7 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 		MBMessage newMBMessage = _persistence.create(pk);
 
 		newMBMessage.setUuid(randomString());
+		newMBMessage.setGroupId(nextLong());
 		newMBMessage.setCompanyId(nextLong());
 		newMBMessage.setUserId(nextLong());
 		newMBMessage.setUserName(randomString());
@@ -93,6 +94,7 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingMBMessage.getUuid(), newMBMessage.getUuid());
 		assertEquals(existingMBMessage.getMessageId(),
 			newMBMessage.getMessageId());
+		assertEquals(existingMBMessage.getGroupId(), newMBMessage.getGroupId());
 		assertEquals(existingMBMessage.getCompanyId(),
 			newMBMessage.getCompanyId());
 		assertEquals(existingMBMessage.getUserId(), newMBMessage.getUserId());
@@ -156,6 +158,7 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 		MBMessage mbMessage = _persistence.create(pk);
 
 		mbMessage.setUuid(randomString());
+		mbMessage.setGroupId(nextLong());
 		mbMessage.setCompanyId(nextLong());
 		mbMessage.setUserId(nextLong());
 		mbMessage.setUserName(randomString());

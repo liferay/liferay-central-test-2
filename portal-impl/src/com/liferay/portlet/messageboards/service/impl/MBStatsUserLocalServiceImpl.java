@@ -96,7 +96,7 @@ public class MBStatsUserLocalServiceImpl
 			long groupId, long userId, Date lastPostDate)
 		throws SystemException {
 
-		int messageCount = mbMessageFinder.countByG_U(groupId, userId);
+		int messageCount = mbMessagePersistence.countByG_U(groupId, userId);
 
 		MBStatsUser statsUser = getStatsUser(groupId, userId);
 

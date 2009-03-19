@@ -50,9 +50,6 @@ public class MBThreadFinderImpl
 	public static String COUNT_BY_CATEGORY_IDS =
 		MBThreadFinder.class.getName() + ".countByCategoryIds";
 
-	public static String COUNT_BY_GROUP_ID =
-		MBThreadFinder.class.getName() + ".countByGroupId";
-
 	public static String COUNT_BY_G_U =
 		MBThreadFinder.class.getName() + ".countByG_U";
 
@@ -61,9 +58,6 @@ public class MBThreadFinderImpl
 
 	public static String COUNT_BY_S_G_U =
 		MBThreadFinder.class.getName() + ".countByS_G_U";
-
-	public static String FIND_BY_GROUP_ID =
-		MBThreadFinder.class.getName() + ".findByGroupId";
 
 	public static String FIND_BY_G_U =
 		MBThreadFinder.class.getName() + ".findByG_U";
@@ -103,42 +97,6 @@ public class MBThreadFinderImpl
 
 			if (itr.hasNext()) {
 				Integer count = itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countByGroupId(long groupId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(COUNT_BY_GROUP_ID);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			Iterator<Long> itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -262,34 +220,6 @@ public class MBThreadFinderImpl
 			}
 
 			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<MBThread> findByGroupId(long groupId, int start, int end)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_GROUP_ID);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("MBThread", MBThreadImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			return (List<MBThread>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

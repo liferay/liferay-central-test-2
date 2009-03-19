@@ -72,6 +72,9 @@ public class MBMessageModelImpl extends BaseModelImpl {
 			{ "messageId", new Integer(Types.BIGINT) },
 			
 
+			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
 			
 
@@ -107,7 +110,7 @@ public class MBMessageModelImpl extends BaseModelImpl {
 
 			{ "anonymous", new Integer(Types.BOOLEAN) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table MBMessage (uuid_ VARCHAR(75) null,messageId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,categoryId LONG,threadId LONG,parentMessageId LONG,subject VARCHAR(75) null,body TEXT null,attachments BOOLEAN,anonymous BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table MBMessage (uuid_ VARCHAR(75) null,messageId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,categoryId LONG,threadId LONG,parentMessageId LONG,subject VARCHAR(75) null,body TEXT null,attachments BOOLEAN,anonymous BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table MBMessage";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -121,6 +124,7 @@ public class MBMessageModelImpl extends BaseModelImpl {
 
 		model.setUuid(soapModel.getUuid());
 		model.setMessageId(soapModel.getMessageId());
+		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -182,6 +186,16 @@ public class MBMessageModelImpl extends BaseModelImpl {
 	public void setMessageId(long messageId) {
 		if (messageId != _messageId) {
 			_messageId = messageId;
+		}
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		if (groupId != _groupId) {
+			_groupId = groupId;
 		}
 	}
 
@@ -339,6 +353,7 @@ public class MBMessageModelImpl extends BaseModelImpl {
 
 			model.setUuid(HtmlUtil.escape(getUuid()));
 			model.setMessageId(getMessageId());
+			model.setGroupId(getGroupId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
 			model.setUserName(HtmlUtil.escape(getUserName()));
@@ -374,6 +389,7 @@ public class MBMessageModelImpl extends BaseModelImpl {
 
 		clone.setUuid(getUuid());
 		clone.setMessageId(getMessageId());
+		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
@@ -452,6 +468,7 @@ public class MBMessageModelImpl extends BaseModelImpl {
 
 	private String _uuid;
 	private long _messageId;
+	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;

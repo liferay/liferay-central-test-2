@@ -72,6 +72,7 @@ public class MBThreadPersistenceTest extends BasePersistenceTestCase {
 
 		MBThread newMBThread = _persistence.create(pk);
 
+		newMBThread.setGroupId(nextLong());
 		newMBThread.setCategoryId(nextLong());
 		newMBThread.setRootMessageId(nextLong());
 		newMBThread.setMessageCount(nextInt());
@@ -85,6 +86,7 @@ public class MBThreadPersistenceTest extends BasePersistenceTestCase {
 		MBThread existingMBThread = _persistence.findByPrimaryKey(newMBThread.getPrimaryKey());
 
 		assertEquals(existingMBThread.getThreadId(), newMBThread.getThreadId());
+		assertEquals(existingMBThread.getGroupId(), newMBThread.getGroupId());
 		assertEquals(existingMBThread.getCategoryId(),
 			newMBThread.getCategoryId());
 		assertEquals(existingMBThread.getRootMessageId(),
@@ -140,6 +142,7 @@ public class MBThreadPersistenceTest extends BasePersistenceTestCase {
 
 		MBThread mbThread = _persistence.create(pk);
 
+		mbThread.setGroupId(nextLong());
 		mbThread.setCategoryId(nextLong());
 		mbThread.setRootMessageId(nextLong());
 		mbThread.setMessageCount(nextInt());

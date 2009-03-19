@@ -892,21 +892,21 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	public List<MBMessage> getGroupMessages(long groupId, int start, int end)
 		throws SystemException {
 
-		return mbMessageFinder.findByGroupId(groupId, start, end);
+		return mbMessagePersistence.findByGroupId(groupId, start, end);
 	}
 
 	public List<MBMessage> getGroupMessages(
 			long groupId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return mbMessageFinder.findByGroupId(groupId, start, end, obc);
+		return mbMessagePersistence.findByGroupId(groupId, start, end, obc);
 	}
 
 	public List<MBMessage> getGroupMessages(
 			long groupId, long userId, int start, int end)
 		throws SystemException {
 
-		return mbMessageFinder.findByG_U(groupId, userId, start, end);
+		return mbMessagePersistence.findByG_U(groupId, userId, start, end);
 	}
 
 	public List<MBMessage> getGroupMessages(
@@ -914,17 +914,17 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			OrderByComparator obc)
 		throws SystemException {
 
-		return mbMessageFinder.findByG_U(groupId, userId, start, end, obc);
+		return mbMessagePersistence.findByG_U(groupId, userId, start, end, obc);
 	}
 
 	public int getGroupMessagesCount(long groupId) throws SystemException {
-		return mbMessageFinder.countByGroupId(groupId);
+		return mbMessagePersistence.countByGroupId(groupId);
 	}
 
 	public int getGroupMessagesCount(long groupId, long userId)
 		throws SystemException {
 
-		return mbMessageFinder.countByG_U(groupId, userId);
+		return mbMessagePersistence.countByG_U(groupId, userId);
 	}
 
 	public MBMessage getMessage(long messageId)

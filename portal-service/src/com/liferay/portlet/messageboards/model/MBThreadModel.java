@@ -55,6 +55,10 @@ public interface MBThreadModel extends BaseModel {
 
 	public void setThreadId(long threadId);
 
+	public long getGroupId();
+
+	public void setGroupId(long groupId);
+
 	public long getCategoryId();
 
 	public void setCategoryId(long categoryId);

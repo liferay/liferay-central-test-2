@@ -68,6 +68,9 @@ public class MBThreadModelImpl extends BaseModelImpl {
 			{ "threadId", new Integer(Types.BIGINT) },
 			
 
+			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "categoryId", new Integer(Types.BIGINT) },
 			
 
@@ -88,7 +91,7 @@ public class MBThreadModelImpl extends BaseModelImpl {
 
 			{ "priority", new Integer(Types.DOUBLE) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table MBThread (threadId LONG not null primary key,categoryId LONG,rootMessageId LONG,messageCount INTEGER,viewCount INTEGER,lastPostByUserId LONG,lastPostDate DATE null,priority DOUBLE)";
+	public static final String TABLE_SQL_CREATE = "create table MBThread (threadId LONG not null primary key,groupId LONG,categoryId LONG,rootMessageId LONG,messageCount INTEGER,viewCount INTEGER,lastPostByUserId LONG,lastPostDate DATE null,priority DOUBLE)";
 	public static final String TABLE_SQL_DROP = "drop table MBThread";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -101,6 +104,7 @@ public class MBThreadModelImpl extends BaseModelImpl {
 		MBThread model = new MBThreadImpl();
 
 		model.setThreadId(soapModel.getThreadId());
+		model.setGroupId(soapModel.getGroupId());
 		model.setCategoryId(soapModel.getCategoryId());
 		model.setRootMessageId(soapModel.getRootMessageId());
 		model.setMessageCount(soapModel.getMessageCount());
@@ -147,6 +151,16 @@ public class MBThreadModelImpl extends BaseModelImpl {
 	public void setThreadId(long threadId) {
 		if (threadId != _threadId) {
 			_threadId = threadId;
+		}
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		if (groupId != _groupId) {
+			_groupId = groupId;
 		}
 	}
 
@@ -234,6 +248,7 @@ public class MBThreadModelImpl extends BaseModelImpl {
 			model.setEscapedModel(true);
 
 			model.setThreadId(getThreadId());
+			model.setGroupId(getGroupId());
 			model.setCategoryId(getCategoryId());
 			model.setRootMessageId(getRootMessageId());
 			model.setMessageCount(getMessageCount());
@@ -263,6 +278,7 @@ public class MBThreadModelImpl extends BaseModelImpl {
 		MBThreadImpl clone = new MBThreadImpl();
 
 		clone.setThreadId(getThreadId());
+		clone.setGroupId(getGroupId());
 		clone.setCategoryId(getCategoryId());
 		clone.setRootMessageId(getRootMessageId());
 		clone.setMessageCount(getMessageCount());
@@ -339,6 +355,7 @@ public class MBThreadModelImpl extends BaseModelImpl {
 	}
 
 	private long _threadId;
+	private long _groupId;
 	private long _categoryId;
 	private long _rootMessageId;
 	private int _messageCount;

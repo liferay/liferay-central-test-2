@@ -93,6 +93,46 @@ public class MBThreadUtil {
 		return getPersistence().fetchByPrimaryKey(threadId);
 	}
 
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByGroupId(
+		long groupId) throws com.liferay.portal.SystemException {
+		return getPersistence().findByGroupId(groupId);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByGroupId(groupId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByGroupId(groupId, start, end, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBThread findByGroupId_First(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException {
+		return getPersistence().findByGroupId_First(groupId, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBThread findByGroupId_Last(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException {
+		return getPersistence().findByGroupId_Last(groupId, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBThread[] findByGroupId_PrevAndNext(
+		long threadId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException {
+		return getPersistence().findByGroupId_PrevAndNext(threadId, groupId, obc);
+	}
+
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByCategoryId(
 		long categoryId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByCategoryId(categoryId);
@@ -162,6 +202,11 @@ public class MBThreadUtil {
 		return getPersistence().findAll(start, end, obc);
 	}
 
+	public static void removeByGroupId(long groupId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByGroupId(groupId);
+	}
+
 	public static void removeByCategoryId(long categoryId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByCategoryId(categoryId);
@@ -169,6 +214,11 @@ public class MBThreadUtil {
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
+	}
+
+	public static int countByGroupId(long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByGroupId(groupId);
 	}
 
 	public static int countByCategoryId(long categoryId)
