@@ -45,8 +45,6 @@ import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.impl.ColorSchemeImpl;
 import com.liferay.portal.model.impl.ThemeImpl;
 import com.liferay.portal.plugin.PluginUtil;
-import com.liferay.portal.service.LayoutTemplateLocalServiceUtil;
-import com.liferay.portal.service.PluginSettingLocalServiceUtil;
 import com.liferay.portal.service.base.ThemeLocalServiceBaseImpl;
 import com.liferay.portal.theme.ThemeCompanyId;
 import com.liferay.portal.theme.ThemeCompanyLimit;
@@ -249,7 +247,7 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 
 			_themes.remove(themeId);
 
-			LayoutTemplateLocalServiceUtil.uninstallLayoutTemplates(themeId);
+			layoutTemplateLocalService.uninstallLayoutTemplates(themeId);
 		}
 
 		_themesPool.clear();
@@ -543,7 +541,7 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 			themeModel.setTimestamp(timestamp);
 
 			PluginSetting pluginSetting =
-				PluginSettingLocalServiceUtil.getDefaultPluginSetting();
+				pluginSettingLocalService.getDefaultPluginSetting();
 
 			themeModel.setPluginPackage(pluginPackage);
 			themeModel.setDefaultPluginSetting(pluginSetting);
@@ -661,7 +659,7 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 				Element standardEl = layoutTemplatesEl.element("standard");
 
 				if (standardEl != null) {
-					LayoutTemplateLocalServiceUtil.readLayoutTemplate(
+					layoutTemplateLocalService.readLayoutTemplate(
 						servletContextName, servletContext, null,
 						standardEl, true, themeId, pluginPackage);
 				}
@@ -669,7 +667,7 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 				Element customEl = layoutTemplatesEl.element("custom");
 
 				if (customEl != null) {
-					LayoutTemplateLocalServiceUtil.readLayoutTemplate(
+					layoutTemplateLocalService.readLayoutTemplate(
 						servletContextName, servletContext, null,
 						customEl, false, themeId, pluginPackage);
 				}

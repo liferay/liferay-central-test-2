@@ -30,6 +30,7 @@ import com.liferay.documentlibrary.util.Hook;
 import com.liferay.documentlibrary.util.HookFactory;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
@@ -44,7 +45,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFolderService;
 
 import java.io.File;
 import java.io.IOException;
@@ -141,7 +142,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 					try {
 						if (userId > 0) {
 							try {
-								DLFolderServiceUtil.getFolder(repositoryId);
+								dlFolderService.getFolder(repositoryId);
 							}
 							catch (Exception e) {
 								continue;
@@ -305,5 +306,11 @@ public class DLLocalServiceImpl implements DLLocalService {
 			throw new FileSizeException(fileName);
 		}
 	}
+
+	@BeanReference(name = _DL_FOLDER_SERVICE)
+	protected DLFolderService dlFolderService;
+
+	private static final String _DL_FOLDER_SERVICE =
+		"com.liferay.portlet.documentlibrary.service.DLFolderService.impl";
 
 }

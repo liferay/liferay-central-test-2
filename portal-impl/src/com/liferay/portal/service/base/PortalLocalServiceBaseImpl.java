@@ -22,6 +22,9 @@
 
 package com.liferay.portal.service.base;
 
+import com.liferay.counter.service.CounterLocalService;
+import com.liferay.counter.service.CounterService;
+
 import com.liferay.lock.service.LockService;
 
 import com.liferay.portal.kernel.annotation.BeanReference;
@@ -1205,6 +1208,22 @@ public abstract class PortalLocalServiceBaseImpl implements PortalLocalService {
 		this.websitePersistence = websitePersistence;
 	}
 
+	public CounterLocalService getCounterLocalService() {
+		return counterLocalService;
+	}
+
+	public void setCounterLocalService(CounterLocalService counterLocalService) {
+		this.counterLocalService = counterLocalService;
+	}
+
+	public CounterService getCounterService() {
+		return counterService;
+	}
+
+	public void setCounterService(CounterService counterService) {
+		this.counterService = counterService;
+	}
+
 	public LockService getLockService() {
 		return lockService;
 	}
@@ -1461,6 +1480,10 @@ public abstract class PortalLocalServiceBaseImpl implements PortalLocalService {
 	protected WebsiteService websiteService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.WebsitePersistence.impl")
 	protected WebsitePersistence websitePersistence;
+	@BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
+	protected CounterLocalService counterLocalService;
+	@BeanReference(name = "com.liferay.counter.service.CounterService.impl")
+	protected CounterService counterService;
 	@BeanReference(name = "com.liferay.lock.service.LockService.impl")
 	protected LockService lockService;
 }

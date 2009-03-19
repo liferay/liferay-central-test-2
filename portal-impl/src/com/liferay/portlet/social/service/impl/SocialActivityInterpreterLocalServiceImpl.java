@@ -28,7 +28,6 @@ import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.SocialActivityFeedEntry;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
 import com.liferay.portlet.social.model.impl.SocialActivityInterpreterImpl;
-import com.liferay.portlet.social.service.SocialActivityLocalServiceUtil;
 import com.liferay.portlet.social.service.base.SocialActivityInterpreterLocalServiceBaseImpl;
 
 import java.util.ArrayList;
@@ -65,7 +64,7 @@ public class SocialActivityInterpreterLocalServiceImpl
 			SocialActivity mirrorActivity = null;
 
 			try {
-				mirrorActivity = SocialActivityLocalServiceUtil.getActivity(
+				mirrorActivity = socialActivityLocalService.getActivity(
 					activity.getMirrorActivityId());
 			}
 			catch (Exception e) {

@@ -41,7 +41,6 @@ import com.liferay.portal.model.LayoutTemplate;
 import com.liferay.portal.model.LayoutTemplateConstants;
 import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.model.impl.LayoutTemplateImpl;
-import com.liferay.portal.service.PluginSettingLocalServiceUtil;
 import com.liferay.portal.service.base.LayoutTemplateLocalServiceBaseImpl;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.layoutconfiguration.util.velocity.InitColumnProcessor;
@@ -367,7 +366,7 @@ public class LayoutTemplateLocalServiceImpl
 			}
 
 			PluginSetting pluginSetting =
-				PluginSettingLocalServiceUtil.getDefaultPluginSetting();
+				pluginSettingLocalService.getDefaultPluginSetting();
 
 			layoutTemplateModel.setPluginPackage(pluginPackage);
 			layoutTemplateModel.setServletContext(servletContext);

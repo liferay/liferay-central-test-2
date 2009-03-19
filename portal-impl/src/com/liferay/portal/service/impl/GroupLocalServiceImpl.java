@@ -60,7 +60,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
-import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.base.GroupLocalServiceBaseImpl;
 import com.liferay.portal.util.FriendlyURLNormalizer;
 import com.liferay.portal.util.PortalUtil;
@@ -921,7 +920,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			PortletDataHandlerKeys.USER_PERMISSIONS,
 			new String[] {Boolean.FALSE.toString()});
 
-		LayoutLocalServiceUtil.importLayouts(
+		layoutLocalService.importLayouts(
 			defaultUserId, group.getGroupId(), false, parameterMap, larFile);
 	}
 

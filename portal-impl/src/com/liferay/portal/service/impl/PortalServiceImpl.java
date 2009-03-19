@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.counter.service.persistence.CounterPersistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -70,7 +69,7 @@ public class PortalServiceImpl extends PortalServiceBaseImpl {
 		int counterIncrement = CounterPersistence.getCounterIncrement();
 
 		for (int i = 0; i < counterIncrement * 2; i++) {
-			CounterLocalServiceUtil.increment();
+			counterLocalService.increment();
 		}
 
 		throw new SystemException();

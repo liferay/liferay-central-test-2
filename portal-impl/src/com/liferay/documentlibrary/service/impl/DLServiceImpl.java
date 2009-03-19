@@ -23,13 +23,14 @@
 package com.liferay.documentlibrary.service.impl;
 
 import com.liferay.documentlibrary.DirectoryNameException;
-import com.liferay.documentlibrary.service.DLLocalServiceUtil;
+import com.liferay.documentlibrary.service.DLLocalService;
 import com.liferay.documentlibrary.service.DLService;
 import com.liferay.documentlibrary.util.Hook;
 import com.liferay.documentlibrary.util.HookFactory;
 import com.liferay.documentlibrary.util.Indexer;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.search.SearchException;
 
 import java.io.File;
@@ -84,7 +85,7 @@ public class DLServiceImpl implements DLService {
 			File file)
 		throws PortalException, SystemException {
 
-		DLLocalServiceUtil.validate(fileName, file);
+		dlLocalService.validate(fileName, file);
 
 		Hook hook = HookFactory.getInstance();
 
@@ -100,7 +101,7 @@ public class DLServiceImpl implements DLService {
 			byte[] bytes)
 		throws PortalException, SystemException {
 
-		DLLocalServiceUtil.validate(fileName, bytes);
+		dlLocalService.validate(fileName, bytes);
 
 		Hook hook = HookFactory.getInstance();
 
@@ -193,7 +194,7 @@ public class DLServiceImpl implements DLService {
 			String[] tagsCategories, String[] tagsEntries, File file)
 		throws PortalException, SystemException {
 
-		DLLocalServiceUtil.validate(fileName, file);
+		dlLocalService.validate(fileName, file);
 
 		Hook hook = HookFactory.getInstance();
 
@@ -210,7 +211,7 @@ public class DLServiceImpl implements DLService {
 			String[] tagsCategories, String[] tagsEntries, byte[] bytes)
 		throws PortalException, SystemException {
 
-		DLLocalServiceUtil.validate(fileName, bytes);
+		dlLocalService.validate(fileName, bytes);
 
 		Hook hook = HookFactory.getInstance();
 
@@ -231,5 +232,11 @@ public class DLServiceImpl implements DLService {
 			companyId, portletId, groupId, repositoryId, newRepositoryId,
 			fileName, fileEntryId);
 	}
+
+	@BeanReference(name = _DL_LOCAL_SERVICE)
+	protected DLLocalService dlLocalService;
+
+	private static final String _DL_LOCAL_SERVICE =
+		"com.liferay.documentlibrary.service.DLLocalService.impl";
 
 }

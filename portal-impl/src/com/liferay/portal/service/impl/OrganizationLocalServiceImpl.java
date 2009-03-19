@@ -45,7 +45,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ListTypeImpl;
 import com.liferay.portal.model.impl.OrganizationImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
-import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.OrganizationLocalServiceBaseImpl;
 import com.liferay.portal.util.PropsKeys;
@@ -173,7 +172,7 @@ public class OrganizationLocalServiceImpl
 
 		Group group = organization.getGroup();
 
-		LayoutSet publicLayoutSet =	LayoutSetLocalServiceUtil.getLayoutSet(
+		LayoutSet publicLayoutSet =	layoutSetLocalService.getLayoutSet(
 			group.getGroupId(), false);
 
 		if (publicLayoutSet.isLogo()) {
@@ -187,7 +186,7 @@ public class OrganizationLocalServiceImpl
 			imageLocalService.deleteImage(logoId);
 		}
 
-		LayoutSet privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
+		LayoutSet privateLayoutSet = layoutSetLocalService.getLayoutSet(
 			group.getGroupId(), true);
 
 		if (privateLayoutSet.isLogo()) {

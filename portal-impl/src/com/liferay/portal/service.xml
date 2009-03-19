@@ -983,6 +983,7 @@
 
 		<!-- References -->
 
+		<reference package-path="com.liferay.counter" entity="Counter" />
 		<reference package-path="com.liferay.lock" entity="Lock" />
 	</entity>
 	<entity name="Portlet" local-service="true" remote-service="true">

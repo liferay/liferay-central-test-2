@@ -23,7 +23,6 @@
 package com.liferay.portal.service.impl;
 
 import com.liferay.portal.model.Theme;
-import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.service.base.ThemeServiceBaseImpl;
 
 import java.util.List;
@@ -37,7 +36,7 @@ import java.util.List;
 public class ThemeServiceImpl extends ThemeServiceBaseImpl {
 
 	public List<Theme> getThemes(long companyId) {
-		return ThemeLocalServiceUtil.getThemes(companyId);
+		return themeLocalService.getThemes(companyId);
 	}
 
 }

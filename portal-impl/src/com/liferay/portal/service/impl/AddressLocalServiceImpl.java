@@ -170,17 +170,6 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 			throw new AddressZipException();
 		}
 
-		// Relax region and country requirement. See LEP-978.
-
-		/*try {
-			RegionServiceUtil.getRegion(regionId);
-
-			CountryServiceUtil.getCountry(countryId);
-		}
-		catch (RemoteException re) {
-			throw new SystemException(re);
-		}*/
-
 		if (addressId > 0) {
 			Address address = addressPersistence.findByPrimaryKey(addressId);
 

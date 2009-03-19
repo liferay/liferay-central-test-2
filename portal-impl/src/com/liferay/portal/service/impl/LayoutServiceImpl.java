@@ -37,7 +37,6 @@ import com.liferay.portal.model.Plugin;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.base.LayoutServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
@@ -316,7 +315,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 		PermissionChecker permissionChecker = getPermissionChecker();
 
-		Group group = GroupLocalServiceUtil.getGroup(sourceGroupId);
+		Group group = groupLocalService.getGroup(sourceGroupId);
 
 		if (group.isStagingGroup()) {
 			group = group.getLiveGroup();
@@ -382,7 +381,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 		PermissionChecker permissionChecker = getPermissionChecker();
 
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
+		Group group = groupLocalService.getGroup(groupId);
 
 		if (group.isStagingGroup()) {
 			group = group.getLiveGroup();

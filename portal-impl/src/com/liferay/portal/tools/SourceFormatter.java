@@ -319,12 +319,16 @@ public class SourceFormatter {
 
 		String copyright = _getCopyright();
 
+		boolean portalJavaFiles = true;
+
 		String[] files = null;
 
 		if (_fileUtil.exists(basedir + "portal-impl")) {
 			files = _getPortalJavaFiles();
 		}
 		else {
+			portalJavaFiles = false;
+
 			files = _getPluginJavaFiles();
 		}
 
@@ -437,6 +441,12 @@ public class SourceFormatter {
 				!newContent.endsWith("{\n}")) {
 
 				System.out.println("}: " + files[i]);
+			}
+
+			if (portalJavaFiles && className.endsWith("ServiceImpl") &&
+				(newContent.indexOf("ServiceUtil.") != -1)) {
+
+				System.out.println("ServiceUtil: " + files[i]);
 			}
 
 			if ((newContent != null) && !content.equals(newContent)) {
