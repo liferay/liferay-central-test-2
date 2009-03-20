@@ -128,26 +128,32 @@ public class PortletPreferencesServiceImpl
 				targetPreferences.getMap().keySet().iterator();
 
 			while (itr.hasNext()) {
-				String key = itr.next();
+				try {
+					String key = itr.next();
 
-				targetPreferences.reset(key);
+					targetPreferences.reset(key);
+				}
+				catch (ReadOnlyException roe) {
+				}
 			}
 
 			itr = sourcePreferences.getMap().keySet().iterator();
 
 			while (itr.hasNext()) {
-				String key = itr.next();
+				try {
+					String key = itr.next();
 
-				targetPreferences.setValues(
-					key, sourcePreferences.getValues(key, new String[0]));
+					targetPreferences.setValues(
+						key, sourcePreferences.getValues(key, new String[0]));
+				}
+				catch (ReadOnlyException roe) {
+				}
 			}
 
 			targetPreferences.store();
 		}
 		catch (IOException ioe) {
 			_log.error(ioe);
-		}
-		catch (ReadOnlyException roe) {
 		}
 		catch (ValidatorException ve) {
 			throw new SystemException(ve);
