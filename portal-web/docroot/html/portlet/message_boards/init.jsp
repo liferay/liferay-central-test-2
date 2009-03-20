@@ -141,10 +141,11 @@ if ((rssDelta != SearchContainer.DEFAULT_DELTA) || !rssFormatType.equals(RSSUtil
 	}
 }
 
+boolean childrenMessagesTaggable = true;
+boolean includeFormTag = true;
 boolean showSearch = true;
 boolean showSearchCategory = showSearch;
 boolean showSearchThread = showSearch;
-boolean childrenMessagesTaggable = true;
 
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);

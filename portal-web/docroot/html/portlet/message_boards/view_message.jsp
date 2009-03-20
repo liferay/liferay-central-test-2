@@ -122,10 +122,12 @@ else {
 	/>
 </div>
 
-<form>
-<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= category.getCategoryId() %>" />
-<input name="<portlet:namespace />breadcrumbsMessageId" type="hidden" value="<%= message.getMessageId() %>" />
-<input name="<portlet:namespace />threadId" type="hidden" value="<%= message.getThreadId() %>" />
+<c:if test="<%= includeFormTag %>">
+	<form>
+	<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= category.getCategoryId() %>" />
+	<input name="<portlet:namespace />breadcrumbsMessageId" type="hidden" value="<%= message.getMessageId() %>" />
+	<input name="<portlet:namespace />threadId" type="hidden" value="<%= message.getThreadId() %>" />
+</c:if>
 
 <liferay-util:include page="/html/portlet/message_boards/tabs1.jsp" />
 
@@ -330,7 +332,9 @@ else {
 	</c:choose>
 </div>
 
-</form>
+<c:if test="<%= includeFormTag %>">
+	</form>
+</c:if>
 
 <%
 MBMessageFlagLocalServiceUtil.addReadFlags(themeDisplay.getUserId(), messages);
