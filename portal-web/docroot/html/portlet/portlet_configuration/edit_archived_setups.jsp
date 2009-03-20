@@ -66,6 +66,8 @@ List archivedSetups = PortletItemLocalServiceUtil.getPortletItems(layout.getGrou
 
 int total = archivedSetups.size();
 
+searchContainer.setTotal(total);
+
 List results = ListUtil.subList(archivedSetups, searchContainer.getStart(), searchContainer.getEnd());
 
 searchContainer.setResults(results);
