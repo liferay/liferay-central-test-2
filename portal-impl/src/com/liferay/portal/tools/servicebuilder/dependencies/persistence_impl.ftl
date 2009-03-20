@@ -104,13 +104,13 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 	}
 
 	public ${entity.name} remove(${entity.name} ${entity.varName}) throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<${entity.name}> listener : listeners) {
 			listener.onBeforeRemove(${entity.varName});
 		}
 
 		${entity.varName} = removeImpl(${entity.varName});
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<${entity.name}> listener : listeners) {
 			listener.onAfterRemove(${entity.varName});
 		}
 
@@ -190,7 +190,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 	public ${entity.name} update(${entity.name} ${entity.varName}, boolean merge) throws SystemException {
 		boolean isNew = ${entity.varName}.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<${entity.name}> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(${entity.varName});
 			}
@@ -201,7 +201,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 		${entity.varName} = updateImpl(${entity.varName}, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<${entity.name}> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(${entity.varName});
 			}
@@ -1881,10 +1881,10 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<${entity.name}>> listenersList = new ArrayList<ModelListener<${entity.name}>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(listenerClassName).newInstance());
+					listenersList.add((ModelListener<${entity.name}>)Class.forName(listenerClassName).newInstance());
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);
@@ -1984,23 +1984,23 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 					protected void add(${entity.PKClassName} ${entity.PKVarName}, ${tempEntity.PKClassName} ${tempEntity.PKVarName}) throws SystemException {
 						if (!_persistenceImpl.contains${tempEntity.name}.contains(${entity.PKVarName}, ${tempEntity.PKVarName})) {
-							ModelListener[] ${tempEntity.varName}Listeners = ${tempEntity.varName}Persistence.getListeners();
+							ModelListener<${tempEntity.packagePath}.model.${tempEntity.name}>[] ${tempEntity.varName}Listeners = ${tempEntity.varName}Persistence.getListeners();
 
-							for (ModelListener listener : listeners) {
+							for (ModelListener<${entity.name}> listener : listeners) {
 								listener.onBeforeAddAssociation(${entity.PKVarName}, ${tempEntity.packagePath}.model.${tempEntity.name}.class.getName(), ${tempEntity.PKVarName});
 							}
 
-							for (ModelListener listener : ${tempEntity.varName}Listeners) {
+							for (ModelListener<${tempEntity.packagePath}.model.${tempEntity.name}> listener : ${tempEntity.varName}Listeners) {
 								listener.onBeforeAddAssociation(${tempEntity.PKVarName}, ${entity.name}.class.getName(), ${entity.PKVarName});
 							}
 
 							_sqlUpdate.update(new Object[] {${pkVarNameWrapper}, ${tempEntityPkVarNameWrapper}});
 
-							for (ModelListener listener : listeners) {
+							for (ModelListener<${entity.name}> listener : listeners) {
 								listener.onAfterAddAssociation(${entity.PKVarName}, ${tempEntity.packagePath}.model.${tempEntity.name}.class.getName(), ${tempEntity.PKVarName});
 							}
 
-							for (ModelListener listener : ${tempEntity.varName}Listeners) {
+							for (ModelListener<${tempEntity.packagePath}.model.${tempEntity.name}> listener : ${tempEntity.varName}Listeners) {
 								listener.onAfterAddAssociation(${tempEntity.PKVarName}, ${entity.name}.class.getName(), ${entity.PKVarName});
 							}
 						}
@@ -2018,7 +2018,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					}
 
 					protected void clear(${entity.PKClassName} ${entity.PKVarName}) throws SystemException {
-						ModelListener[] ${tempEntity.varName}Listeners = ${tempEntity.varName}Persistence.getListeners();
+						ModelListener<${tempEntity.packagePath}.model.${tempEntity.name}>[] ${tempEntity.varName}Listeners = ${tempEntity.varName}Persistence.getListeners();
 
 						List<${tempEntity.packagePath}.model.${tempEntity.name}> ${tempEntity.varNames} = null;
 
@@ -2026,11 +2026,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 							${tempEntity.varNames} = get${tempEntity.names}(${entity.PKVarName});
 
 							for (${tempEntity.packagePath}.model.${tempEntity.name} ${tempEntity.varName} : ${tempEntity.varNames}) {
-								for (ModelListener listener : listeners) {
+								for (ModelListener<${entity.name}> listener : listeners) {
 									listener.onBeforeRemoveAssociation(${entity.PKVarName}, ${tempEntity.packagePath}.model.${tempEntity.name}.class.getName(), ${tempEntity.varName}.getPrimaryKey());
 								}
 
-								for (ModelListener listener : ${tempEntity.varName}Listeners) {
+								for (ModelListener<${tempEntity.packagePath}.model.${tempEntity.name}> listener : ${tempEntity.varName}Listeners) {
 									listener.onBeforeRemoveAssociation(${tempEntity.varName}.getPrimaryKey(), ${entity.name}.class.getName(), ${entity.PKVarName});
 								}
 							}
@@ -2040,11 +2040,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 						if ((listeners.length > 0) || (${tempEntity.varName}Listeners.length > 0)) {
 							for (${tempEntity.packagePath}.model.${tempEntity.name} ${tempEntity.varName} : ${tempEntity.varNames}) {
-								for (ModelListener listener : listeners) {
+								for (ModelListener<${entity.name}> listener : listeners) {
 									listener.onAfterRemoveAssociation(${entity.PKVarName}, ${tempEntity.packagePath}.model.${tempEntity.name}.class.getName(), ${tempEntity.varName}.getPrimaryKey());
 								}
 
-								for (ModelListener listener : ${tempEntity.varName}Listeners) {
+								for (ModelListener<${tempEntity.packagePath}.model.${tempEntity.name}> listener : ${tempEntity.varName}Listeners) {
 									listener.onBeforeRemoveAssociation(${tempEntity.varName}.getPrimaryKey(), ${entity.name}.class.getName(), ${entity.PKVarName});
 								}
 							}
@@ -2064,23 +2064,23 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 					protected void remove(${entity.PKClassName} ${entity.PKVarName}, ${tempEntity.PKClassName} ${tempEntity.PKVarName}) throws SystemException {
 						if (_persistenceImpl.contains${tempEntity.name}.contains(${entity.PKVarName}, ${tempEntity.PKVarName})) {
-							ModelListener[] ${tempEntity.varName}Listeners = ${tempEntity.varName}Persistence.getListeners();
+							ModelListener<${tempEntity.packagePath}.model.${tempEntity.name}>[] ${tempEntity.varName}Listeners = ${tempEntity.varName}Persistence.getListeners();
 
-							for (ModelListener listener : listeners) {
+							for (ModelListener<${entity.name}> listener : listeners) {
 								listener.onBeforeRemoveAssociation(${entity.PKVarName}, ${tempEntity.packagePath}.model.${tempEntity.name}.class.getName(), ${tempEntity.PKVarName});
 							}
 
-							for (ModelListener listener : ${tempEntity.varName}Listeners) {
+							for (ModelListener<${tempEntity.packagePath}.model.${tempEntity.name}> listener : ${tempEntity.varName}Listeners) {
 								listener.onBeforeRemoveAssociation(${tempEntity.PKVarName}, ${entity.name}.class.getName(), ${entity.PKVarName});
 							}
 
 							_sqlUpdate.update(new Object[] {${pkVarNameWrapper}, ${tempEntityPkVarNameWrapper}});
 
-							for (ModelListener listener : listeners) {
+							for (ModelListener<${entity.name}> listener : listeners) {
 								listener.onAfterRemoveAssociation(${entity.PKVarName}, ${tempEntity.packagePath}.model.${tempEntity.name}.class.getName(), ${tempEntity.PKVarName});
 							}
 
-							for (ModelListener listener : ${tempEntity.varName}Listeners) {
+							for (ModelListener<${tempEntity.packagePath}.model.${tempEntity.name}> listener : ${tempEntity.varName}Listeners) {
 								listener.onAfterRemoveAssociation(${tempEntity.PKVarName}, ${entity.name}.class.getName(), ${entity.PKVarName});
 							}
 						}

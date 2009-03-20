@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
 
 /**
  * <a href="JndiObjectFactoryBean.java.html"><b><i>View Source</i></b></a>
@@ -38,7 +37,7 @@ import javax.naming.NamingException;
 public class JndiObjectFactoryBean
 	extends org.springframework.jndi.JndiObjectFactoryBean {
 
-	protected Object lookup() throws NamingException {
+	protected Object lookup() {
 		try {
 			return JNDIUtil.lookup(new InitialContext(), getJndiName());
 		}

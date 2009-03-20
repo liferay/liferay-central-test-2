@@ -32,22 +32,21 @@ import com.liferay.portal.servlet.filters.cache.CacheUtil;
  * @author Raymond Augé
  *
  */
-public class PortletPreferencesListener extends BaseModelListener {
+public class PortletPreferencesListener
+	extends BaseModelListener<PortletPreferences> {
 
-	public void onAfterRemove(BaseModel model) {
-		clearCache(model);
+	public void onAfterRemove(PortletPreferences portletPreferences) {
+		clearCache(portletPreferences);
 	}
 
-	public void onAfterUpdate(BaseModel model) {
-		clearCache(model);
+	public void onAfterUpdate(PortletPreferences portletPreferences) {
+		clearCache(portletPreferences);
 	}
 
-	protected void clearCache(BaseModel model) {
-		PortletPreferencesModel preferences = (PortletPreferencesModel)model;
-
+	protected void clearCache(PortletPreferences portletPreferences) {
 		try {
 			Layout layout = LayoutLocalServiceUtil.getLayout(
-				preferences.getPlid());
+				portletPreferences.getPlid());
 
 			if (!layout.isPrivateLayout()) {
 				CacheUtil.clearCache(layout.getCompanyId());

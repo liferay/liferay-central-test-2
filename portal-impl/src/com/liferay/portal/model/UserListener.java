@@ -33,12 +33,10 @@ import com.liferay.portal.security.ldap.PortalLDAPUtil;
  * @author Raymond Augé
  *
  */
-public class UserListener extends BaseModelListener {
+public class UserListener extends BaseModelListener<User> {
 
-	public void onAfterCreate(BaseModel model) throws ModelListenerException {
+	public void onAfterCreate(User user) throws ModelListenerException {
 		try {
-			User user = (User)model;
-
 			PortalLDAPUtil.exportToLDAP(user);
 		}
 		catch (Exception e) {
@@ -46,10 +44,8 @@ public class UserListener extends BaseModelListener {
 		}
 	}
 
-	public void onAfterUpdate(BaseModel model) throws ModelListenerException {
+	public void onAfterUpdate(User user) throws ModelListenerException {
 		try {
-			User user = (User)model;
-
 			PortalLDAPUtil.exportToLDAP(user);
 		}
 		catch (Exception e) {

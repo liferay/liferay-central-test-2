@@ -30,7 +30,8 @@ import com.liferay.portal.ModelListenerException;
  * @author Brian Wing Shun Chan
  *
  */
-public class BaseModelListener implements ModelListener {
+public class BaseModelListener<T extends BaseModel<T>>
+	implements ModelListener<T> {
 
 	public void onAfterAddAssociation(
 			Object classPK, String associationClassName,
@@ -38,10 +39,10 @@ public class BaseModelListener implements ModelListener {
 		throws ModelListenerException {
 	}
 
-	public void onAfterCreate(BaseModel model) throws ModelListenerException {
+	public void onAfterCreate(T model) throws ModelListenerException {
 	}
 
-	public void onAfterRemove(BaseModel model) throws ModelListenerException {
+	public void onAfterRemove(T model) throws ModelListenerException {
 	}
 
 	public void onAfterRemoveAssociation(
@@ -50,7 +51,7 @@ public class BaseModelListener implements ModelListener {
 		throws ModelListenerException {
 	}
 
-	public void onAfterUpdate(BaseModel model) throws ModelListenerException {
+	public void onAfterUpdate(T model) throws ModelListenerException {
 	}
 
 	public void onBeforeAddAssociation(
@@ -59,10 +60,10 @@ public class BaseModelListener implements ModelListener {
 		throws ModelListenerException {
 	}
 
-	public void onBeforeCreate(BaseModel model) throws ModelListenerException {
+	public void onBeforeCreate(T model) throws ModelListenerException {
 	}
 
-	public void onBeforeRemove(BaseModel model) throws ModelListenerException {
+	public void onBeforeRemove(T model) throws ModelListenerException {
 	}
 
 	public void onBeforeRemoveAssociation(
@@ -71,7 +72,7 @@ public class BaseModelListener implements ModelListener {
 		throws ModelListenerException {
 	}
 
-	public void onBeforeUpdate(BaseModel model) throws ModelListenerException {
+	public void onBeforeUpdate(T model) throws ModelListenerException {
 	}
 
 }

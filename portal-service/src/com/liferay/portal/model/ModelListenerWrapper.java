@@ -30,10 +30,10 @@ import com.liferay.portal.ModelListenerException;
  * @author Brian Wing Shun Chan
  *
  */
-public class ModelListenerWrapper implements ModelListener {
+public class ModelListenerWrapper<T> implements ModelListener<T> {
 
 	public ModelListenerWrapper(
-		ModelListener modelListener, ClassLoader classLoader) {
+		ModelListener<T> modelListener, ClassLoader classLoader) {
 
 		_modelListener = modelListener;
 		_classLoader = classLoader;
@@ -59,7 +59,7 @@ public class ModelListenerWrapper implements ModelListener {
 		}
 	}
 
-	public void onAfterCreate(BaseModel model) throws ModelListenerException {
+	public void onAfterCreate(T model) throws ModelListenerException {
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
@@ -74,7 +74,7 @@ public class ModelListenerWrapper implements ModelListener {
 		}
 	}
 
-	public void onAfterRemove(BaseModel model) throws ModelListenerException {
+	public void onAfterRemove(T model) throws ModelListenerException {
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
@@ -109,7 +109,7 @@ public class ModelListenerWrapper implements ModelListener {
 		}
 	}
 
-	public void onAfterUpdate(BaseModel model) throws ModelListenerException {
+	public void onAfterUpdate(T model) throws ModelListenerException {
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
@@ -144,7 +144,7 @@ public class ModelListenerWrapper implements ModelListener {
 		}
 	}
 
-	public void onBeforeCreate(BaseModel model) throws ModelListenerException {
+	public void onBeforeCreate(T model) throws ModelListenerException {
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
@@ -159,7 +159,7 @@ public class ModelListenerWrapper implements ModelListener {
 		}
 	}
 
-	public void onBeforeRemove(BaseModel model) throws ModelListenerException {
+	public void onBeforeRemove(T model) throws ModelListenerException {
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
@@ -194,7 +194,7 @@ public class ModelListenerWrapper implements ModelListener {
 		}
 	}
 
-	public void onBeforeUpdate(BaseModel model) throws ModelListenerException {
+	public void onBeforeUpdate(T model) throws ModelListenerException {
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
@@ -209,7 +209,7 @@ public class ModelListenerWrapper implements ModelListener {
 		}
 	}
 
-	private ModelListener _modelListener;
+	private ModelListener<T> _modelListener;
 	private ClassLoader _classLoader;
 
 }

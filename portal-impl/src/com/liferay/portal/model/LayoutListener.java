@@ -31,23 +31,21 @@ import com.liferay.portal.servlet.filters.cache.CacheUtil;
  * @author Raymond Augé
  *
  */
-public class LayoutListener extends BaseModelListener {
+public class LayoutListener extends BaseModelListener<Layout> {
 
-	public void onAfterCreate(BaseModel model) {
-		clearCache(model);
+	public void onAfterCreate(Layout layout) {
+		clearCache(layout);
 	}
 
-	public void onAfterRemove(BaseModel model) {
-		clearCache(model);
+	public void onAfterRemove(Layout layout) {
+		clearCache(layout);
 	}
 
-	public void onAfterUpdate(BaseModel model) {
-		clearCache(model);
+	public void onAfterUpdate(Layout layout) {
+		clearCache(layout);
 	}
 
-	protected void clearCache(BaseModel model) {
-		LayoutModel layout = (LayoutModel)model;
-
+	protected void clearCache(Layout layout) {
 		if (!layout.isPrivateLayout()) {
 			CacheUtil.clearCache(layout.getCompanyId());
 		}

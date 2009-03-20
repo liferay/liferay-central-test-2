@@ -47,6 +47,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.ModelListenerWrapper;
 import com.liferay.portal.security.auth.AutoLogin;
@@ -338,7 +339,7 @@ public class HookHotDeployListener
 			String modelListenerClass = modelListenerEl.elementText(
 				"model-listener-class");
 
-			ModelListener modelListener = initModelListener(
+			ModelListener<BaseModel<?>> modelListener = initModelListener(
 				modelName, modelListenerClass, portletClassLoader);
 
 			if (modelListener != null) {
@@ -632,16 +633,16 @@ public class HookHotDeployListener
 		}
 	}
 
-	protected ModelListener initModelListener(
+	protected ModelListener<BaseModel<?>> initModelListener(
 			String modelName, String modelListenerClass,
 			ClassLoader portletClassLoader)
 		throws Exception {
 
-		ModelListener modelListener =
-			(ModelListener)portletClassLoader.loadClass(
+		ModelListener<BaseModel<?>> modelListener =
+			(ModelListener<BaseModel<?>>)portletClassLoader.loadClass(
 				modelListenerClass).newInstance();
 
-		modelListener = new ModelListenerWrapper(
+		modelListener = new ModelListenerWrapper<BaseModel<?>>(
 			modelListener, portletClassLoader);
 
 		BasePersistence persistence = getPersistence(modelName);
@@ -674,7 +675,7 @@ public class HookHotDeployListener
 			String modelName = key.substring(VALUE_OBJECT_LISTENER.length());
 			String modelListenerClass = portalProperties.getProperty(key);
 
-			ModelListener modelListener = initModelListener(
+			ModelListener<BaseModel<?>> modelListener = initModelListener(
 				modelName, modelListenerClass, portletClassLoader);
 
 			if (modelListener != null) {
@@ -993,13 +994,13 @@ public class HookHotDeployListener
 	private class ModelListenersContainer {
 
 		public void registerModelListener(
-			String modelName, ModelListener modelListener) {
+			String modelName, ModelListener<BaseModel<?>> modelListener) {
 
-			List<ModelListener> modelListeners = _modelListenersMap.get(
-				modelName);
+			List<ModelListener<BaseModel<?>>> modelListeners =
+				_modelListenersMap.get(modelName);
 
 			if (modelListeners == null) {
-				modelListeners = new ArrayList<ModelListener>();
+				modelListeners = new ArrayList<ModelListener<BaseModel<?>>>();
 
 				_modelListenersMap.put(modelName, modelListeners);
 			}
@@ -1008,22 +1009,26 @@ public class HookHotDeployListener
 		}
 
 		public void unregisterModelListeners() {
-			for (Map.Entry<String, List<ModelListener>> entry :
+			for (Map.Entry<String, List<ModelListener<BaseModel<?>>>> entry :
 					_modelListenersMap.entrySet()) {
 
 				String modelName = entry.getKey();
-				List<ModelListener> modelListeners = entry.getValue();
+				List<ModelListener<BaseModel<?>>> modelListeners =
+					entry.getValue();
 
 				BasePersistence persistence = getPersistence(modelName);
 
-				for (ModelListener modelListener : modelListeners) {
+				for (ModelListener<BaseModel<?>> modelListener :
+						modelListeners) {
+
 					persistence.unregisterListener(modelListener);
 				}
 			}
 		}
 
-		private Map<String, List<ModelListener>> _modelListenersMap =
-			new HashMap<String, List<ModelListener>>();
+		private Map<String, List<ModelListener<BaseModel<?>>>>
+			_modelListenersMap =
+				new HashMap<String, List<ModelListener<BaseModel<?>>>>();
 
 	}
 
