@@ -167,7 +167,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 
 		if (permissionChecker.isCompanyAdmin()) {
 			return organizationLocalService.search(
-				permissionChecker.getCompanyId(), 0, null, null, null, null,
+				permissionChecker.getCompanyId(), -1, null, null, null, null,
 				null, 0,
 				PropsValues.CONTROL_PANEL_NAVIGATION_MAX_ORGANIZATIONS);
 		}
