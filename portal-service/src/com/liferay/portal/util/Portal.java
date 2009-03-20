@@ -476,7 +476,7 @@ public interface Portal {
 
 	public boolean isSystemRole(String roleName);
 
-	public boolean isUpdateAvailable() throws PortalException, SystemException;
+	public boolean isUpdateAvailable() throws SystemException;
 
 	public void renderPage(
 			StringBuilder sb, ServletContext servletContext,

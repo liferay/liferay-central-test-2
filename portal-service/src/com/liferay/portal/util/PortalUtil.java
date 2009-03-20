@@ -825,9 +825,7 @@ public class PortalUtil {
 		return getPortal().isSystemRole(roleName);
 	}
 
-	public static boolean isUpdateAvailable()
-		throws PortalException, SystemException {
-
+	public static boolean isUpdateAvailable() throws SystemException {
 		return getPortal().isUpdateAvailable();
 	}
 

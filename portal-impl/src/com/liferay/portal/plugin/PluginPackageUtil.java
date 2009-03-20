@@ -22,7 +22,6 @@
 
 package com.liferay.portal.plugin;
 
-import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -172,7 +171,7 @@ public class PluginPackageUtil {
 	}
 
 	public static boolean isIgnored(PluginPackage pluginPackage)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return _instance._isIgnored(pluginPackage);
 	}
@@ -187,9 +186,7 @@ public class PluginPackageUtil {
 		return _instance._isTrusted(repositoryURL);
 	}
 
-	public static boolean isUpdateAvailable()
-		throws PortalException, SystemException {
-
+	public static boolean isUpdateAvailable() throws SystemException {
 		return _instance._isUpdateAvailable();
 	}
 
@@ -521,7 +518,7 @@ public class PluginPackageUtil {
 	}
 
 	private boolean _isIgnored(PluginPackage pluginPackage)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		String packageId = pluginPackage.getPackageId();
 
@@ -583,9 +580,7 @@ public class PluginPackageUtil {
 		}
 	}
 
-	private boolean _isUpdateAvailable()
-		throws PortalException, SystemException {
-
+	private boolean _isUpdateAvailable() throws SystemException {
 		if (!PrefsPropsUtil.getBoolean(
 				PropsKeys.PLUGIN_NOTIFICATIONS_ENABLED,
 				PropsValues.PLUGIN_NOTIFICATIONS_ENABLED)) {

@@ -2712,9 +2712,7 @@ public class PortalImpl implements Portal {
 		return false;
 	}
 
-	public boolean isUpdateAvailable()
-		throws PortalException, SystemException {
-
+	public boolean isUpdateAvailable() throws SystemException {
 		return PluginPackageUtil.isUpdateAvailable();
 	}
 
