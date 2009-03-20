@@ -207,7 +207,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 
 	private Object _resultToPrimaryKey(Object result) {
 		if (result instanceof BaseModel) {
-			BaseModel model = (BaseModel)result;
+			BaseModel<?> model = (BaseModel<?>)result;
 
 			Class<?> modelClass = model.getClass();
 			Serializable primaryKeyObj = model.getPrimaryKeyObj();

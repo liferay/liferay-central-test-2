@@ -39,7 +39,7 @@ public interface BatchSession {
 
 	public void setEnabled(boolean enabled);
 
-	public void update(Session session, BaseModel model, boolean merge)
+	public void update(Session session, BaseModel<?> model, boolean merge)
 		throws ORMException;
 
 }

@@ -35,14 +35,15 @@ import java.util.List;
  * @author Raymond Aug�
  *
  */
-public class BaseModelExtensionHandler extends AbstractModelExtensionHandler {
+public class BaseModelExtensionHandler<T>
+	extends AbstractModelExtensionHandler<T> {
 
-	public Object extendSingle(BaseModel model) {
+	public Object extendSingle(BaseModel<T> model) {
 		if (model instanceof BaseModelExtension) {
 			return model;
 		}
 		else {
-			BaseModelExtension extension = getBaseModelExtension().extend(
+			BaseModelExtension<T> extension = getBaseModelExtension().extend(
 				model);
 
 			if (_log.isDebugEnabled()) {
@@ -60,8 +61,8 @@ public class BaseModelExtensionHandler extends AbstractModelExtensionHandler {
 		}
 	}
 
-	public Object extendList(List<BaseModel> models) {
-		return new WrappedList((List<BaseModel>)models);
+	public Object extendList(List<BaseModel<T>> models) {
+		return new WrappedList(models);
 	}
 
 	private static final Log _log =

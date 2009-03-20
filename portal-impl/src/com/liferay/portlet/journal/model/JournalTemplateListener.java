@@ -23,7 +23,6 @@
 package com.liferay.portlet.journal.model;
 
 import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
-import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.BaseModelListener;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
 import com.liferay.portal.velocity.LiferayResourceCacheUtil;
@@ -37,25 +36,24 @@ import com.liferay.portlet.journalcontent.util.JournalContentUtil;
  * @author Raymond Augé
  *
  */
-public class JournalTemplateListener extends BaseModelListener {
+public class JournalTemplateListener
+	extends BaseModelListener<JournalTemplate> {
 
-	public void onAfterRemove(BaseModel model) {
-		clearCache(model);
+	public void onAfterRemove(JournalTemplate template) {
+		clearCache(template);
 	}
 
-	public void onAfterUpdate(BaseModel model) {
-		clearCache(model);
+	public void onAfterUpdate(JournalTemplate template) {
+		clearCache(template);
 	}
 
-	protected void clearCache(BaseModel model) {
+	protected void clearCache(JournalTemplate template) {
 
 		// Journal content
 
 		JournalContentUtil.clearCache();
 
 		// Layout cache
-
-		JournalTemplateModel template = (JournalTemplateModel)model;
 
 		CacheUtil.clearCache(template.getCompanyId());
 

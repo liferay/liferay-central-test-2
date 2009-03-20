@@ -27,17 +27,17 @@ import java.util.List;
 /**
  * <a href="ModelExtensionHandler.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  *
  */
-public interface ModelExtensionHandler {
+public interface ModelExtensionHandler<T> {
 
 	public List<String> getExtensionMethodNames();
 
 	public void setExtensionMethodNames(List<String> extensionMethodNames);
 
-	public Object extendList(List<BaseModel> models);
+	public Object extendList(List<BaseModel<T>> models);
 
-	public Object extendSingle(BaseModel model);
+	public Object extendSingle(BaseModel<T> model);
 
 }

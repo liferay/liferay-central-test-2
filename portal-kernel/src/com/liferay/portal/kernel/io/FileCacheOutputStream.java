@@ -78,7 +78,7 @@ public class FileCacheOutputStream extends OutputStream {
 		return new FileInputStream(_tempFile);
 	}
 
-	public long getSize() throws IOException {
+	public long getSize() {
 		return _tempFile.length();
 	}
 

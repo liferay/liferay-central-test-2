@@ -28,8 +28,8 @@ package com.liferay.portal.model;
  * @author Raymond Augé
  *
  */
-public interface BaseModelExtension extends BaseModel {
+public interface BaseModelExtension<T> extends BaseModel<T> {
 
-	public BaseModelExtension extend(BaseModel baseModel);
+	public BaseModelExtension<T> extend(BaseModel<T> baseModel);
 
 }

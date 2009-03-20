@@ -36,14 +36,14 @@ import java.util.List;
  * @author Raymond Augé
  *
  */
-public abstract class AbstractModelExtensionHandler
-	implements ModelExtensionHandler {
+public abstract class AbstractModelExtensionHandler<T>
+	implements ModelExtensionHandler<T> {
 
-	public Object extendList(List<BaseModel> models) {
-		return new WrappedList((List<BaseModel>)models);
+	public Object extendList(List<BaseModel<T>> models) {
+		return new WrappedList(models);
 	}
 
-	public BaseModelExtension getBaseModelExtension() {
+	public BaseModelExtension<T> getBaseModelExtension() {
 		return _baseModelExtension;
 	}
 
@@ -52,7 +52,7 @@ public abstract class AbstractModelExtensionHandler
 	}
 
 	public void setBaseModelExtensionClass(
-		BaseModelExtension baseModelExtension) {
+		BaseModelExtension<T> baseModelExtension) {
 
 		_baseModelExtension = baseModelExtension;
 	}
@@ -61,19 +61,19 @@ public abstract class AbstractModelExtensionHandler
 		_extensionMethodNames = extensionMethodNames;
 	}
 
-	public class WrappedList extends ArrayList<BaseModel> {
+	public class WrappedList extends ArrayList<BaseModel<T>> {
 
-		public WrappedList(List<BaseModel> models) {
+		public WrappedList(List<BaseModel<T>> models) {
 			super(models);
 		}
 
-		public BaseModel get(int index) {
-			return (BaseModel)extendSingle((BaseModel)super.get(index));
+		public BaseModel<T> get(int index) {
+			return (BaseModel<T>)extendSingle(super.get(index));
 		}
 
 	}
 
-	private BaseModelExtension _baseModelExtension;
+	private BaseModelExtension<T> _baseModelExtension;
 	private List<String> _extensionMethodNames;
 
 }

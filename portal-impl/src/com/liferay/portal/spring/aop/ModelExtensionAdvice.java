@@ -39,9 +39,9 @@ import org.aspectj.lang.Signature;
  * @author Raymond Augé
  *
  */
-public class ModelExtensionAdvice {
+public class ModelExtensionAdvice<T> {
 
-	public ModelExtensionHandler getModelExtensionHandler() {
+	public ModelExtensionHandler<T> getModelExtensionHandler() {
 		return _modelExtensionHandler;
 	}
 
@@ -80,11 +80,12 @@ public class ModelExtensionAdvice {
 			}
 
 			if (result instanceof BaseModel) {
-				result = _modelExtensionHandler.extendSingle((BaseModel)result);
+				result = _modelExtensionHandler.extendSingle(
+					(BaseModel<T>)result);
 			}
 			else if (result instanceof List) {
-				result =
-					_modelExtensionHandler.extendList((List<BaseModel>)result);
+				result = _modelExtensionHandler.extendList(
+					(List<BaseModel<T>>)result);
 			}
 		}
 
@@ -92,7 +93,7 @@ public class ModelExtensionAdvice {
 	}
 
 	public void setModelExtensionHandler(
-		ModelExtensionHandler modelExtensionHandler) {
+		ModelExtensionHandler<T> modelExtensionHandler) {
 
 		_modelExtensionHandler = modelExtensionHandler;
 
@@ -109,6 +110,6 @@ public class ModelExtensionAdvice {
 		LogFactoryUtil.getLog(ModelExtensionAdvice.class);
 
 	private List<String> _extensionMethodNames;
-	private ModelExtensionHandler _modelExtensionHandler;
+	private ModelExtensionHandler<T> _modelExtensionHandler;
 
 }
