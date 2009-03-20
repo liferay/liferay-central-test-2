@@ -101,13 +101,13 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public DLFileRank remove(DLFileRank dlFileRank) throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<DLFileRank> listener : listeners) {
 			listener.onBeforeRemove(dlFileRank);
 		}
 
 		dlFileRank = removeImpl(dlFileRank);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<DLFileRank> listener : listeners) {
 			listener.onAfterRemove(dlFileRank);
 		}
 
@@ -175,7 +175,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = dlFileRank.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<DLFileRank> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(dlFileRank);
 			}
@@ -186,7 +186,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 
 		dlFileRank = updateImpl(dlFileRank, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<DLFileRank> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(dlFileRank);
 			}
@@ -1378,10 +1378,10 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<DLFileRank>> listenersList = new ArrayList<ModelListener<DLFileRank>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<DLFileRank>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

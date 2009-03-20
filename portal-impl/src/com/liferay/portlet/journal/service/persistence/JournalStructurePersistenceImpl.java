@@ -109,13 +109,13 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 	public JournalStructure remove(JournalStructure journalStructure)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<JournalStructure> listener : listeners) {
 			listener.onBeforeRemove(journalStructure);
 		}
 
 		journalStructure = removeImpl(journalStructure);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<JournalStructure> listener : listeners) {
 			listener.onAfterRemove(journalStructure);
 		}
 
@@ -184,7 +184,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = journalStructure.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<JournalStructure> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(journalStructure);
 			}
@@ -195,7 +195,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 		journalStructure = updateImpl(journalStructure, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<JournalStructure> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(journalStructure);
 			}
@@ -2247,10 +2247,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<JournalStructure>> listenersList = new ArrayList<ModelListener<JournalStructure>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<JournalStructure>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

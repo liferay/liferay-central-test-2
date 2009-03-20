@@ -103,13 +103,13 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 
 	public TasksProposal remove(TasksProposal tasksProposal)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<TasksProposal> listener : listeners) {
 			listener.onBeforeRemove(tasksProposal);
 		}
 
 		tasksProposal = removeImpl(tasksProposal);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<TasksProposal> listener : listeners) {
 			listener.onAfterRemove(tasksProposal);
 		}
 
@@ -178,7 +178,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = tasksProposal.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<TasksProposal> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(tasksProposal);
 			}
@@ -189,7 +189,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 
 		tasksProposal = updateImpl(tasksProposal, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<TasksProposal> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(tasksProposal);
 			}
@@ -1322,10 +1322,10 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<TasksProposal>> listenersList = new ArrayList<ModelListener<TasksProposal>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<TasksProposal>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

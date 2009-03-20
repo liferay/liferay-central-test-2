@@ -102,13 +102,13 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 
 	public ExpandoColumn remove(ExpandoColumn expandoColumn)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<ExpandoColumn> listener : listeners) {
 			listener.onBeforeRemove(expandoColumn);
 		}
 
 		expandoColumn = removeImpl(expandoColumn);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<ExpandoColumn> listener : listeners) {
 			listener.onAfterRemove(expandoColumn);
 		}
 
@@ -177,7 +177,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = expandoColumn.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<ExpandoColumn> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(expandoColumn);
 			}
@@ -188,7 +188,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 
 		expandoColumn = updateImpl(expandoColumn, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<ExpandoColumn> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(expandoColumn);
 			}
@@ -963,10 +963,10 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<ExpandoColumn>> listenersList = new ArrayList<ModelListener<ExpandoColumn>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<ExpandoColumn>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

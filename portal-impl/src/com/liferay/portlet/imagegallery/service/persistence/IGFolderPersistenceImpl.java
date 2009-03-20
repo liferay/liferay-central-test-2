@@ -107,13 +107,13 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public IGFolder remove(IGFolder igFolder) throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<IGFolder> listener : listeners) {
 			listener.onBeforeRemove(igFolder);
 		}
 
 		igFolder = removeImpl(igFolder);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<IGFolder> listener : listeners) {
 			listener.onAfterRemove(igFolder);
 		}
 
@@ -180,7 +180,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = igFolder.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<IGFolder> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(igFolder);
 			}
@@ -191,7 +191,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 		igFolder = updateImpl(igFolder, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<IGFolder> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(igFolder);
 			}
@@ -2212,10 +2212,10 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<IGFolder>> listenersList = new ArrayList<ModelListener<IGFolder>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<IGFolder>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

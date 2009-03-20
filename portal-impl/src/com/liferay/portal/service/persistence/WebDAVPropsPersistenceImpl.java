@@ -101,13 +101,13 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 
 	public WebDAVProps remove(WebDAVProps webDAVProps)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<WebDAVProps> listener : listeners) {
 			listener.onBeforeRemove(webDAVProps);
 		}
 
 		webDAVProps = removeImpl(webDAVProps);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<WebDAVProps> listener : listeners) {
 			listener.onAfterRemove(webDAVProps);
 		}
 
@@ -176,7 +176,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = webDAVProps.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<WebDAVProps> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(webDAVProps);
 			}
@@ -187,7 +187,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 
 		webDAVProps = updateImpl(webDAVProps, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<WebDAVProps> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(webDAVProps);
 			}
@@ -627,10 +627,10 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<WebDAVProps>> listenersList = new ArrayList<ModelListener<WebDAVProps>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<WebDAVProps>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

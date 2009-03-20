@@ -102,13 +102,13 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 	public TasksReview remove(TasksReview tasksReview)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<TasksReview> listener : listeners) {
 			listener.onBeforeRemove(tasksReview);
 		}
 
 		tasksReview = removeImpl(tasksReview);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<TasksReview> listener : listeners) {
 			listener.onAfterRemove(tasksReview);
 		}
 
@@ -177,7 +177,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = tasksReview.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<TasksReview> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(tasksReview);
 			}
@@ -188,7 +188,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 		tasksReview = updateImpl(tasksReview, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<TasksReview> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(tasksReview);
 			}
@@ -2441,10 +2441,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<TasksReview>> listenersList = new ArrayList<ModelListener<TasksReview>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<TasksReview>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

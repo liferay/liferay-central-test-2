@@ -101,13 +101,13 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 
 	public PortletItem remove(PortletItem portletItem)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<PortletItem> listener : listeners) {
 			listener.onBeforeRemove(portletItem);
 		}
 
 		portletItem = removeImpl(portletItem);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<PortletItem> listener : listeners) {
 			listener.onAfterRemove(portletItem);
 		}
 
@@ -176,7 +176,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = portletItem.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<PortletItem> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(portletItem);
 			}
@@ -187,7 +187,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 
 		portletItem = updateImpl(portletItem, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<PortletItem> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(portletItem);
 			}
@@ -1440,10 +1440,10 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<PortletItem>> listenersList = new ArrayList<ModelListener<PortletItem>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<PortletItem>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

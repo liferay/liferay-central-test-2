@@ -109,13 +109,13 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl
 
 	public BookmarksFolder remove(BookmarksFolder bookmarksFolder)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<BookmarksFolder> listener : listeners) {
 			listener.onBeforeRemove(bookmarksFolder);
 		}
 
 		bookmarksFolder = removeImpl(bookmarksFolder);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<BookmarksFolder> listener : listeners) {
 			listener.onAfterRemove(bookmarksFolder);
 		}
 
@@ -184,7 +184,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = bookmarksFolder.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<BookmarksFolder> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(bookmarksFolder);
 			}
@@ -195,7 +195,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl
 
 		bookmarksFolder = updateImpl(bookmarksFolder, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<BookmarksFolder> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(bookmarksFolder);
 			}
@@ -2001,10 +2001,10 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<BookmarksFolder>> listenersList = new ArrayList<ModelListener<BookmarksFolder>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<BookmarksFolder>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

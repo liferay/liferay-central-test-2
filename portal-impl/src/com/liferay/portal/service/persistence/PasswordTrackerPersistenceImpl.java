@@ -101,13 +101,13 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 
 	public PasswordTracker remove(PasswordTracker passwordTracker)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<PasswordTracker> listener : listeners) {
 			listener.onBeforeRemove(passwordTracker);
 		}
 
 		passwordTracker = removeImpl(passwordTracker);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<PasswordTracker> listener : listeners) {
 			listener.onAfterRemove(passwordTracker);
 		}
 
@@ -176,7 +176,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = passwordTracker.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<PasswordTracker> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(passwordTracker);
 			}
@@ -187,7 +187,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 
 		passwordTracker = updateImpl(passwordTracker, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<PasswordTracker> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(passwordTracker);
 			}
@@ -764,10 +764,10 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<PasswordTracker>> listenersList = new ArrayList<ModelListener<PasswordTracker>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<PasswordTracker>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

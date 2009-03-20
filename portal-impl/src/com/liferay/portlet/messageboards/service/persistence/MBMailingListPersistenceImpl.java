@@ -109,13 +109,13 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 	public MBMailingList remove(MBMailingList mbMailingList)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<MBMailingList> listener : listeners) {
 			listener.onBeforeRemove(mbMailingList);
 		}
 
 		mbMailingList = removeImpl(mbMailingList);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<MBMailingList> listener : listeners) {
 			listener.onAfterRemove(mbMailingList);
 		}
 
@@ -184,7 +184,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = mbMailingList.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<MBMailingList> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(mbMailingList);
 			}
@@ -195,7 +195,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 		mbMailingList = updateImpl(mbMailingList, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<MBMailingList> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(mbMailingList);
 			}
@@ -1442,10 +1442,10 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<MBMailingList>> listenersList = new ArrayList<ModelListener<MBMailingList>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<MBMailingList>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

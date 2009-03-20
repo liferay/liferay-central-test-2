@@ -102,13 +102,13 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 
 	public PortletPreferences remove(PortletPreferences portletPreferences)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<PortletPreferences> listener : listeners) {
 			listener.onBeforeRemove(portletPreferences);
 		}
 
 		portletPreferences = removeImpl(portletPreferences);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<PortletPreferences> listener : listeners) {
 			listener.onAfterRemove(portletPreferences);
 		}
 
@@ -177,7 +177,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = portletPreferences.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<PortletPreferences> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(portletPreferences);
 			}
@@ -188,7 +188,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 
 		portletPreferences = updateImpl(portletPreferences, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<PortletPreferences> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(portletPreferences);
 			}
@@ -1727,10 +1727,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<PortletPreferences>> listenersList = new ArrayList<ModelListener<PortletPreferences>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<PortletPreferences>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

@@ -101,13 +101,13 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 
 	public OrgGroupRole remove(OrgGroupRole orgGroupRole)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<OrgGroupRole> listener : listeners) {
 			listener.onBeforeRemove(orgGroupRole);
 		}
 
 		orgGroupRole = removeImpl(orgGroupRole);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<OrgGroupRole> listener : listeners) {
 			listener.onAfterRemove(orgGroupRole);
 		}
 
@@ -176,7 +176,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = orgGroupRole.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<OrgGroupRole> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(orgGroupRole);
 			}
@@ -187,7 +187,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 
 		orgGroupRole = updateImpl(orgGroupRole, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<OrgGroupRole> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(orgGroupRole);
 			}
@@ -1034,10 +1034,10 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<OrgGroupRole>> listenersList = new ArrayList<ModelListener<OrgGroupRole>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<OrgGroupRole>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

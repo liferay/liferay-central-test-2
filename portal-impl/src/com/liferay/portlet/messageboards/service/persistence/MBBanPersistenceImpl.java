@@ -98,13 +98,13 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public MBBan remove(MBBan mbBan) throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<MBBan> listener : listeners) {
 			listener.onBeforeRemove(mbBan);
 		}
 
 		mbBan = removeImpl(mbBan);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<MBBan> listener : listeners) {
 			listener.onAfterRemove(mbBan);
 		}
 
@@ -170,7 +170,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 	public MBBan update(MBBan mbBan, boolean merge) throws SystemException {
 		boolean isNew = mbBan.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<MBBan> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(mbBan);
 			}
@@ -181,7 +181,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 		mbBan = updateImpl(mbBan, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<MBBan> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(mbBan);
 			}
@@ -1503,10 +1503,10 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<MBBan>> listenersList = new ArrayList<ModelListener<MBBan>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<MBBan>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

@@ -103,13 +103,13 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 	public DLFileVersion remove(DLFileVersion dlFileVersion)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<DLFileVersion> listener : listeners) {
 			listener.onBeforeRemove(dlFileVersion);
 		}
 
 		dlFileVersion = removeImpl(dlFileVersion);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<DLFileVersion> listener : listeners) {
 			listener.onAfterRemove(dlFileVersion);
 		}
 
@@ -178,7 +178,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = dlFileVersion.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<DLFileVersion> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(dlFileVersion);
 			}
@@ -189,7 +189,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 		dlFileVersion = updateImpl(dlFileVersion, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<DLFileVersion> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(dlFileVersion);
 			}
@@ -1069,10 +1069,10 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<DLFileVersion>> listenersList = new ArrayList<ModelListener<DLFileVersion>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<DLFileVersion>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

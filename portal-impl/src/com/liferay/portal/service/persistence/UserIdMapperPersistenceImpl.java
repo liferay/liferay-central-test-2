@@ -101,13 +101,13 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 
 	public UserIdMapper remove(UserIdMapper userIdMapper)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<UserIdMapper> listener : listeners) {
 			listener.onBeforeRemove(userIdMapper);
 		}
 
 		userIdMapper = removeImpl(userIdMapper);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<UserIdMapper> listener : listeners) {
 			listener.onAfterRemove(userIdMapper);
 		}
 
@@ -176,7 +176,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = userIdMapper.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<UserIdMapper> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(userIdMapper);
 			}
@@ -187,7 +187,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 
 		userIdMapper = updateImpl(userIdMapper, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<UserIdMapper> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(userIdMapper);
 			}
@@ -1147,10 +1147,10 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<UserIdMapper>> listenersList = new ArrayList<ModelListener<UserIdMapper>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<UserIdMapper>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

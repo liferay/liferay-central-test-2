@@ -101,13 +101,13 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 
 	public UserTrackerPath remove(UserTrackerPath userTrackerPath)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<UserTrackerPath> listener : listeners) {
 			listener.onBeforeRemove(userTrackerPath);
 		}
 
 		userTrackerPath = removeImpl(userTrackerPath);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<UserTrackerPath> listener : listeners) {
 			listener.onAfterRemove(userTrackerPath);
 		}
 
@@ -176,7 +176,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = userTrackerPath.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<UserTrackerPath> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(userTrackerPath);
 			}
@@ -187,7 +187,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 
 		userTrackerPath = updateImpl(userTrackerPath, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<UserTrackerPath> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(userTrackerPath);
 			}
@@ -745,10 +745,10 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<UserTrackerPath>> listenersList = new ArrayList<ModelListener<UserTrackerPath>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<UserTrackerPath>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

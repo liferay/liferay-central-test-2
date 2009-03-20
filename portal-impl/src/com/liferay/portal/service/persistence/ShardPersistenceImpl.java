@@ -98,13 +98,13 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Shard remove(Shard shard) throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Shard> listener : listeners) {
 			listener.onBeforeRemove(shard);
 		}
 
 		shard = removeImpl(shard);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Shard> listener : listeners) {
 			listener.onAfterRemove(shard);
 		}
 
@@ -170,7 +170,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 	public Shard update(Shard shard, boolean merge) throws SystemException {
 		boolean isNew = shard.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Shard> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(shard);
 			}
@@ -181,7 +181,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 
 		shard = updateImpl(shard, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Shard> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(shard);
 			}
@@ -791,10 +791,10 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<Shard>> listenersList = new ArrayList<ModelListener<Shard>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<Shard>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

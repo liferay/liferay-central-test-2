@@ -110,13 +110,13 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 
 	public AnnouncementsEntry remove(AnnouncementsEntry announcementsEntry)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<AnnouncementsEntry> listener : listeners) {
 			listener.onBeforeRemove(announcementsEntry);
 		}
 
 		announcementsEntry = removeImpl(announcementsEntry);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<AnnouncementsEntry> listener : listeners) {
 			listener.onAfterRemove(announcementsEntry);
 		}
 
@@ -185,7 +185,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = announcementsEntry.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<AnnouncementsEntry> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(announcementsEntry);
 			}
@@ -196,7 +196,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 
 		announcementsEntry = updateImpl(announcementsEntry, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<AnnouncementsEntry> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(announcementsEntry);
 			}
@@ -1879,10 +1879,10 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<AnnouncementsEntry>> listenersList = new ArrayList<ModelListener<AnnouncementsEntry>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<AnnouncementsEntry>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

@@ -108,13 +108,13 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl
 
 	public JournalFeed remove(JournalFeed journalFeed)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<JournalFeed> listener : listeners) {
 			listener.onBeforeRemove(journalFeed);
 		}
 
 		journalFeed = removeImpl(journalFeed);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<JournalFeed> listener : listeners) {
 			listener.onAfterRemove(journalFeed);
 		}
 
@@ -183,7 +183,7 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = journalFeed.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<JournalFeed> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(journalFeed);
 			}
@@ -194,7 +194,7 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl
 
 		journalFeed = updateImpl(journalFeed, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<JournalFeed> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(journalFeed);
 			}
@@ -1513,10 +1513,10 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<JournalFeed>> listenersList = new ArrayList<ModelListener<JournalFeed>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<JournalFeed>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

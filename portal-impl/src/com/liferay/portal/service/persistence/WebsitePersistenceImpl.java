@@ -99,13 +99,13 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Website remove(Website website) throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Website> listener : listeners) {
 			listener.onBeforeRemove(website);
 		}
 
 		website = removeImpl(website);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Website> listener : listeners) {
 			listener.onAfterRemove(website);
 		}
 
@@ -172,7 +172,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = website.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Website> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(website);
 			}
@@ -183,7 +183,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 		website = updateImpl(website, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Website> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(website);
 			}
@@ -2207,10 +2207,10 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<Website>> listenersList = new ArrayList<ModelListener<Website>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<Website>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

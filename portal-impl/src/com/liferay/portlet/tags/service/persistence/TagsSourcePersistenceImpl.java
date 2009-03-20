@@ -99,13 +99,13 @@ public class TagsSourcePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public TagsSource remove(TagsSource tagsSource) throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<TagsSource> listener : listeners) {
 			listener.onBeforeRemove(tagsSource);
 		}
 
 		tagsSource = removeImpl(tagsSource);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<TagsSource> listener : listeners) {
 			listener.onAfterRemove(tagsSource);
 		}
 
@@ -173,7 +173,7 @@ public class TagsSourcePersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = tagsSource.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<TagsSource> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(tagsSource);
 			}
@@ -184,7 +184,7 @@ public class TagsSourcePersistenceImpl extends BasePersistenceImpl
 
 		tagsSource = updateImpl(tagsSource, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<TagsSource> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(tagsSource);
 			}
@@ -438,10 +438,10 @@ public class TagsSourcePersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<TagsSource>> listenersList = new ArrayList<ModelListener<TagsSource>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<TagsSource>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

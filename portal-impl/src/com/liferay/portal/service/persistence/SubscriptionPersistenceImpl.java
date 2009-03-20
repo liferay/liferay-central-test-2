@@ -101,13 +101,13 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 
 	public Subscription remove(Subscription subscription)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Subscription> listener : listeners) {
 			listener.onBeforeRemove(subscription);
 		}
 
 		subscription = removeImpl(subscription);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Subscription> listener : listeners) {
 			listener.onAfterRemove(subscription);
 		}
 
@@ -176,7 +176,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = subscription.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Subscription> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(subscription);
 			}
@@ -187,7 +187,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 
 		subscription = updateImpl(subscription, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Subscription> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(subscription);
 			}
@@ -1674,10 +1674,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<Subscription>> listenersList = new ArrayList<ModelListener<Subscription>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<Subscription>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

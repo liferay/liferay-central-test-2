@@ -101,13 +101,13 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public PollsVote remove(PollsVote pollsVote) throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<PollsVote> listener : listeners) {
 			listener.onBeforeRemove(pollsVote);
 		}
 
 		pollsVote = removeImpl(pollsVote);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<PollsVote> listener : listeners) {
 			listener.onAfterRemove(pollsVote);
 		}
 
@@ -175,7 +175,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = pollsVote.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<PollsVote> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(pollsVote);
 			}
@@ -186,7 +186,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl
 
 		pollsVote = updateImpl(pollsVote, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<PollsVote> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(pollsVote);
 			}
@@ -1219,10 +1219,10 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<PollsVote>> listenersList = new ArrayList<ModelListener<PollsVote>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<PollsVote>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

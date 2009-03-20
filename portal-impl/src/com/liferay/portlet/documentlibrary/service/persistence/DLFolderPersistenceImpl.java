@@ -107,13 +107,13 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public DLFolder remove(DLFolder dlFolder) throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<DLFolder> listener : listeners) {
 			listener.onBeforeRemove(dlFolder);
 		}
 
 		dlFolder = removeImpl(dlFolder);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<DLFolder> listener : listeners) {
 			listener.onAfterRemove(dlFolder);
 		}
 
@@ -180,7 +180,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = dlFolder.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<DLFolder> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(dlFolder);
 			}
@@ -191,7 +191,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 		dlFolder = updateImpl(dlFolder, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<DLFolder> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(dlFolder);
 			}
@@ -2594,10 +2594,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<DLFolder>> listenersList = new ArrayList<ModelListener<DLFolder>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<DLFolder>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

@@ -97,13 +97,13 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Account remove(Account account) throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Account> listener : listeners) {
 			listener.onBeforeRemove(account);
 		}
 
 		account = removeImpl(account);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Account> listener : listeners) {
 			listener.onAfterRemove(account);
 		}
 
@@ -170,7 +170,7 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = account.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Account> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(account);
 			}
@@ -181,7 +181,7 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 
 		account = updateImpl(account, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Account> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(account);
 			}
@@ -431,10 +431,10 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<Account>> listenersList = new ArrayList<ModelListener<Account>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<Account>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

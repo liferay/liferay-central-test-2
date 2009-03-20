@@ -101,13 +101,13 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public MBThread remove(MBThread mbThread) throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<MBThread> listener : listeners) {
 			listener.onBeforeRemove(mbThread);
 		}
 
 		mbThread = removeImpl(mbThread);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<MBThread> listener : listeners) {
 			listener.onAfterRemove(mbThread);
 		}
 
@@ -174,7 +174,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = mbThread.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<MBThread> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(mbThread);
 			}
@@ -185,7 +185,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 		mbThread = updateImpl(mbThread, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<MBThread> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(mbThread);
 			}
@@ -1072,10 +1072,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<MBThread>> listenersList = new ArrayList<ModelListener<MBThread>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<MBThread>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

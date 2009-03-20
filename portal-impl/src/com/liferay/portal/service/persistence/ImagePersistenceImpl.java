@@ -98,13 +98,13 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Image remove(Image image) throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Image> listener : listeners) {
 			listener.onBeforeRemove(image);
 		}
 
 		image = removeImpl(image);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Image> listener : listeners) {
 			listener.onAfterRemove(image);
 		}
 
@@ -170,7 +170,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 	public Image update(Image image, boolean merge) throws SystemException {
 		boolean isNew = image.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Image> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(image);
 			}
@@ -181,7 +181,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 
 		image = updateImpl(image, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Image> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(image);
 			}
@@ -742,10 +742,10 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<Image>> listenersList = new ArrayList<ModelListener<Image>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<Image>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

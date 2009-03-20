@@ -103,13 +103,13 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 
 	public MBStatsUser remove(MBStatsUser mbStatsUser)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<MBStatsUser> listener : listeners) {
 			listener.onBeforeRemove(mbStatsUser);
 		}
 
 		mbStatsUser = removeImpl(mbStatsUser);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<MBStatsUser> listener : listeners) {
 			listener.onAfterRemove(mbStatsUser);
 		}
 
@@ -178,7 +178,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = mbStatsUser.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<MBStatsUser> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(mbStatsUser);
 			}
@@ -189,7 +189,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 
 		mbStatsUser = updateImpl(mbStatsUser, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<MBStatsUser> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(mbStatsUser);
 			}
@@ -1617,10 +1617,10 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<MBStatsUser>> listenersList = new ArrayList<ModelListener<MBStatsUser>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<MBStatsUser>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

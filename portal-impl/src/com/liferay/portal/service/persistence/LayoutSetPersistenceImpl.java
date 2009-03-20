@@ -99,13 +99,13 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public LayoutSet remove(LayoutSet layoutSet) throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<LayoutSet> listener : listeners) {
 			listener.onBeforeRemove(layoutSet);
 		}
 
 		layoutSet = removeImpl(layoutSet);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<LayoutSet> listener : listeners) {
 			listener.onAfterRemove(layoutSet);
 		}
 
@@ -173,7 +173,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = layoutSet.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<LayoutSet> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(layoutSet);
 			}
@@ -184,7 +184,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 		layoutSet = updateImpl(layoutSet, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<LayoutSet> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(layoutSet);
 			}
@@ -1092,10 +1092,10 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<LayoutSet>> listenersList = new ArrayList<ModelListener<LayoutSet>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<LayoutSet>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

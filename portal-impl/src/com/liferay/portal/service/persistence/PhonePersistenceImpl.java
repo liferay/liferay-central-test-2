@@ -98,13 +98,13 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Phone remove(Phone phone) throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Phone> listener : listeners) {
 			listener.onBeforeRemove(phone);
 		}
 
 		phone = removeImpl(phone);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Phone> listener : listeners) {
 			listener.onAfterRemove(phone);
 		}
 
@@ -170,7 +170,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 	public Phone update(Phone phone, boolean merge) throws SystemException {
 		boolean isNew = phone.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Phone> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(phone);
 			}
@@ -181,7 +181,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 		phone = updateImpl(phone, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Phone> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(phone);
 			}
@@ -2203,10 +2203,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<Phone>> listenersList = new ArrayList<ModelListener<Phone>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<Phone>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

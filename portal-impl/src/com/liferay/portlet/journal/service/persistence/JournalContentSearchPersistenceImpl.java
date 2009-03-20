@@ -104,13 +104,13 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 
 	public JournalContentSearch remove(
 		JournalContentSearch journalContentSearch) throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<JournalContentSearch> listener : listeners) {
 			listener.onBeforeRemove(journalContentSearch);
 		}
 
 		journalContentSearch = removeImpl(journalContentSearch);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<JournalContentSearch> listener : listeners) {
 			listener.onAfterRemove(journalContentSearch);
 		}
 
@@ -180,7 +180,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = journalContentSearch.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<JournalContentSearch> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(journalContentSearch);
 			}
@@ -191,7 +191,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 
 		journalContentSearch = updateImpl(journalContentSearch, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<JournalContentSearch> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(journalContentSearch);
 			}
@@ -2682,10 +2682,10 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<JournalContentSearch>> listenersList = new ArrayList<ModelListener<JournalContentSearch>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<JournalContentSearch>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

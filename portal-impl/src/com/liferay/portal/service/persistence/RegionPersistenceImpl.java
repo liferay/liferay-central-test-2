@@ -99,13 +99,13 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Region remove(Region region) throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Region> listener : listeners) {
 			listener.onBeforeRemove(region);
 		}
 
 		region = removeImpl(region);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Region> listener : listeners) {
 			listener.onAfterRemove(region);
 		}
 
@@ -172,7 +172,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = region.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Region> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(region);
 			}
@@ -183,7 +183,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 		region = updateImpl(region, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Region> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(region);
 			}
@@ -1399,10 +1399,10 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<Region>> listenersList = new ArrayList<ModelListener<Region>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<Region>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

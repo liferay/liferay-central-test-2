@@ -102,13 +102,13 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 
 	public MembershipRequest remove(MembershipRequest membershipRequest)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<MembershipRequest> listener : listeners) {
 			listener.onBeforeRemove(membershipRequest);
 		}
 
 		membershipRequest = removeImpl(membershipRequest);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<MembershipRequest> listener : listeners) {
 			listener.onAfterRemove(membershipRequest);
 		}
 
@@ -177,7 +177,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = membershipRequest.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<MembershipRequest> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(membershipRequest);
 			}
@@ -188,7 +188,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 
 		membershipRequest = updateImpl(membershipRequest, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<MembershipRequest> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(membershipRequest);
 			}
@@ -1436,10 +1436,10 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<MembershipRequest>> listenersList = new ArrayList<ModelListener<MembershipRequest>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<MembershipRequest>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

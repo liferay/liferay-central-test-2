@@ -102,13 +102,13 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 
 	public PasswordPolicyRel remove(PasswordPolicyRel passwordPolicyRel)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<PasswordPolicyRel> listener : listeners) {
 			listener.onBeforeRemove(passwordPolicyRel);
 		}
 
 		passwordPolicyRel = removeImpl(passwordPolicyRel);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<PasswordPolicyRel> listener : listeners) {
 			listener.onAfterRemove(passwordPolicyRel);
 		}
 
@@ -177,7 +177,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = passwordPolicyRel.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<PasswordPolicyRel> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(passwordPolicyRel);
 			}
@@ -188,7 +188,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 
 		passwordPolicyRel = updateImpl(passwordPolicyRel, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<PasswordPolicyRel> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(passwordPolicyRel);
 			}
@@ -839,10 +839,10 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<PasswordPolicyRel>> listenersList = new ArrayList<ModelListener<PasswordPolicyRel>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<PasswordPolicyRel>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

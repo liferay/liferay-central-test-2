@@ -101,13 +101,13 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 
 	public PluginSetting remove(PluginSetting pluginSetting)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<PluginSetting> listener : listeners) {
 			listener.onBeforeRemove(pluginSetting);
 		}
 
 		pluginSetting = removeImpl(pluginSetting);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<PluginSetting> listener : listeners) {
 			listener.onAfterRemove(pluginSetting);
 		}
 
@@ -176,7 +176,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = pluginSetting.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<PluginSetting> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(pluginSetting);
 			}
@@ -187,7 +187,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 
 		pluginSetting = updateImpl(pluginSetting, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<PluginSetting> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(pluginSetting);
 			}
@@ -984,10 +984,10 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<PluginSetting>> listenersList = new ArrayList<ModelListener<PluginSetting>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<PluginSetting>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

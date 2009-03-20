@@ -104,13 +104,13 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 	public SCProductScreenshot remove(SCProductScreenshot scProductScreenshot)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<SCProductScreenshot> listener : listeners) {
 			listener.onBeforeRemove(scProductScreenshot);
 		}
 
 		scProductScreenshot = removeImpl(scProductScreenshot);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<SCProductScreenshot> listener : listeners) {
 			listener.onAfterRemove(scProductScreenshot);
 		}
 
@@ -179,7 +179,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = scProductScreenshot.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<SCProductScreenshot> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(scProductScreenshot);
 			}
@@ -190,7 +190,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 		scProductScreenshot = updateImpl(scProductScreenshot, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<SCProductScreenshot> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(scProductScreenshot);
 			}
@@ -1309,10 +1309,10 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<SCProductScreenshot>> listenersList = new ArrayList<ModelListener<SCProductScreenshot>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<SCProductScreenshot>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

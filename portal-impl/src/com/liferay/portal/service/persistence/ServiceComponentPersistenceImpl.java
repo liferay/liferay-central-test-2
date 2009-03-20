@@ -102,13 +102,13 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 
 	public ServiceComponent remove(ServiceComponent serviceComponent)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<ServiceComponent> listener : listeners) {
 			listener.onBeforeRemove(serviceComponent);
 		}
 
 		serviceComponent = removeImpl(serviceComponent);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<ServiceComponent> listener : listeners) {
 			listener.onAfterRemove(serviceComponent);
 		}
 
@@ -177,7 +177,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = serviceComponent.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<ServiceComponent> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(serviceComponent);
 			}
@@ -188,7 +188,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 
 		serviceComponent = updateImpl(serviceComponent, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<ServiceComponent> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(serviceComponent);
 			}
@@ -1007,10 +1007,10 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<ServiceComponent>> listenersList = new ArrayList<ModelListener<ServiceComponent>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<ServiceComponent>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

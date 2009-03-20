@@ -108,13 +108,13 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 
 	public BookmarksEntry remove(BookmarksEntry bookmarksEntry)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<BookmarksEntry> listener : listeners) {
 			listener.onBeforeRemove(bookmarksEntry);
 		}
 
 		bookmarksEntry = removeImpl(bookmarksEntry);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<BookmarksEntry> listener : listeners) {
 			listener.onAfterRemove(bookmarksEntry);
 		}
 
@@ -183,7 +183,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = bookmarksEntry.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<BookmarksEntry> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(bookmarksEntry);
 			}
@@ -194,7 +194,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 
 		bookmarksEntry = updateImpl(bookmarksEntry, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<BookmarksEntry> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(bookmarksEntry);
 			}
@@ -1122,10 +1122,10 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<BookmarksEntry>> listenersList = new ArrayList<ModelListener<BookmarksEntry>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<BookmarksEntry>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

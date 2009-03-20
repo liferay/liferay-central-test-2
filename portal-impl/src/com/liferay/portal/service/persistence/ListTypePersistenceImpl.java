@@ -99,13 +99,13 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public ListType remove(ListType listType) throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<ListType> listener : listeners) {
 			listener.onBeforeRemove(listType);
 		}
 
 		listType = removeImpl(listType);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<ListType> listener : listeners) {
 			listener.onAfterRemove(listType);
 		}
 
@@ -172,7 +172,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = listType.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<ListType> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(listType);
 			}
@@ -183,7 +183,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 
 		listType = updateImpl(listType, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<ListType> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(listType);
 			}
@@ -774,10 +774,10 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<ListType>> listenersList = new ArrayList<ModelListener<ListType>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<ListType>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

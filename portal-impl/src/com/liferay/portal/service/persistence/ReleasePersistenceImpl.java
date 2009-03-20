@@ -97,13 +97,13 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Release remove(Release release) throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Release> listener : listeners) {
 			listener.onBeforeRemove(release);
 		}
 
 		release = removeImpl(release);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Release> listener : listeners) {
 			listener.onAfterRemove(release);
 		}
 
@@ -170,7 +170,7 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = release.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Release> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(release);
 			}
@@ -181,7 +181,7 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl
 
 		release = updateImpl(release, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Release> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(release);
 			}
@@ -431,10 +431,10 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<Release>> listenersList = new ArrayList<ModelListener<Release>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<Release>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

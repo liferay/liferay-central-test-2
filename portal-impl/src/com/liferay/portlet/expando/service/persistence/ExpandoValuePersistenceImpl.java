@@ -102,13 +102,13 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 	public ExpandoValue remove(ExpandoValue expandoValue)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<ExpandoValue> listener : listeners) {
 			listener.onBeforeRemove(expandoValue);
 		}
 
 		expandoValue = removeImpl(expandoValue);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<ExpandoValue> listener : listeners) {
 			listener.onAfterRemove(expandoValue);
 		}
 
@@ -177,7 +177,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = expandoValue.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<ExpandoValue> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(expandoValue);
 			}
@@ -188,7 +188,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 		expandoValue = updateImpl(expandoValue, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<ExpandoValue> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(expandoValue);
 			}
@@ -2950,10 +2950,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<ExpandoValue>> listenersList = new ArrayList<ModelListener<ExpandoValue>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<ExpandoValue>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

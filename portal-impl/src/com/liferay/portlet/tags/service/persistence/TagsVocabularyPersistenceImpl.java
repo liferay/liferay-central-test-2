@@ -103,13 +103,13 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 
 	public TagsVocabulary remove(TagsVocabulary tagsVocabulary)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<TagsVocabulary> listener : listeners) {
 			listener.onBeforeRemove(tagsVocabulary);
 		}
 
 		tagsVocabulary = removeImpl(tagsVocabulary);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<TagsVocabulary> listener : listeners) {
 			listener.onAfterRemove(tagsVocabulary);
 		}
 
@@ -178,7 +178,7 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = tagsVocabulary.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<TagsVocabulary> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(tagsVocabulary);
 			}
@@ -189,7 +189,7 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 
 		tagsVocabulary = updateImpl(tagsVocabulary, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<TagsVocabulary> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(tagsVocabulary);
 			}
@@ -1364,10 +1364,10 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<TagsVocabulary>> listenersList = new ArrayList<ModelListener<TagsVocabulary>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<TagsVocabulary>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

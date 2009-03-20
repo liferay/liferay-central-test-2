@@ -101,13 +101,13 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 	public UserTracker remove(UserTracker userTracker)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<UserTracker> listener : listeners) {
 			listener.onBeforeRemove(userTracker);
 		}
 
 		userTracker = removeImpl(userTracker);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<UserTracker> listener : listeners) {
 			listener.onAfterRemove(userTracker);
 		}
 
@@ -176,7 +176,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = userTracker.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<UserTracker> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(userTracker);
 			}
@@ -187,7 +187,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 		userTracker = updateImpl(userTracker, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<UserTracker> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(userTracker);
 			}
@@ -1354,10 +1354,10 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<UserTracker>> listenersList = new ArrayList<ModelListener<UserTracker>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<UserTracker>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

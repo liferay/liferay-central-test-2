@@ -110,13 +110,13 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public SCLicense remove(SCLicense scLicense) throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<SCLicense> listener : listeners) {
 			listener.onBeforeRemove(scLicense);
 		}
 
 		scLicense = removeImpl(scLicense);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<SCLicense> listener : listeners) {
 			listener.onAfterRemove(scLicense);
 		}
 
@@ -194,7 +194,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = scLicense.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<SCLicense> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(scLicense);
 			}
@@ -205,7 +205,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 		scLicense = updateImpl(scLicense, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<SCLicense> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(scLicense);
 			}
@@ -1500,10 +1500,10 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<SCLicense>> listenersList = new ArrayList<ModelListener<SCLicense>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<SCLicense>)Class.forName(
 							listenerClassName).newInstance());
 				}
 
@@ -1577,15 +1577,16 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 			throws SystemException {
 			if (!_persistenceImpl.containsSCProductEntry.contains(licenseId,
 						productEntryId)) {
-				ModelListener[] scProductEntryListeners = scProductEntryPersistence.getListeners();
+				ModelListener<com.liferay.portlet.softwarecatalog.model.SCProductEntry>[] scProductEntryListeners =
+					scProductEntryPersistence.getListeners();
 
-				for (ModelListener listener : listeners) {
+				for (ModelListener<SCLicense> listener : listeners) {
 					listener.onBeforeAddAssociation(licenseId,
 						com.liferay.portlet.softwarecatalog.model.SCProductEntry.class.getName(),
 						productEntryId);
 				}
 
-				for (ModelListener listener : scProductEntryListeners) {
+				for (ModelListener<com.liferay.portlet.softwarecatalog.model.SCProductEntry> listener : scProductEntryListeners) {
 					listener.onBeforeAddAssociation(productEntryId,
 						SCLicense.class.getName(), licenseId);
 				}
@@ -1594,13 +1595,13 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 						new Long(licenseId), new Long(productEntryId)
 					});
 
-				for (ModelListener listener : listeners) {
+				for (ModelListener<SCLicense> listener : listeners) {
 					listener.onAfterAddAssociation(licenseId,
 						com.liferay.portlet.softwarecatalog.model.SCProductEntry.class.getName(),
 						productEntryId);
 				}
 
-				for (ModelListener listener : scProductEntryListeners) {
+				for (ModelListener<com.liferay.portlet.softwarecatalog.model.SCProductEntry> listener : scProductEntryListeners) {
 					listener.onAfterAddAssociation(productEntryId,
 						SCLicense.class.getName(), licenseId);
 				}
@@ -1620,7 +1621,8 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 		}
 
 		protected void clear(long licenseId) throws SystemException {
-			ModelListener[] scProductEntryListeners = scProductEntryPersistence.getListeners();
+			ModelListener<com.liferay.portlet.softwarecatalog.model.SCProductEntry>[] scProductEntryListeners =
+				scProductEntryPersistence.getListeners();
 
 			List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> scProductEntries =
 				null;
@@ -1629,13 +1631,13 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 				scProductEntries = getSCProductEntries(licenseId);
 
 				for (com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry : scProductEntries) {
-					for (ModelListener listener : listeners) {
+					for (ModelListener<SCLicense> listener : listeners) {
 						listener.onBeforeRemoveAssociation(licenseId,
 							com.liferay.portlet.softwarecatalog.model.SCProductEntry.class.getName(),
 							scProductEntry.getPrimaryKey());
 					}
 
-					for (ModelListener listener : scProductEntryListeners) {
+					for (ModelListener<com.liferay.portlet.softwarecatalog.model.SCProductEntry> listener : scProductEntryListeners) {
 						listener.onBeforeRemoveAssociation(scProductEntry.getPrimaryKey(),
 							SCLicense.class.getName(), licenseId);
 					}
@@ -1646,13 +1648,13 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 			if ((listeners.length > 0) || (scProductEntryListeners.length > 0)) {
 				for (com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry : scProductEntries) {
-					for (ModelListener listener : listeners) {
+					for (ModelListener<SCLicense> listener : listeners) {
 						listener.onAfterRemoveAssociation(licenseId,
 							com.liferay.portlet.softwarecatalog.model.SCProductEntry.class.getName(),
 							scProductEntry.getPrimaryKey());
 					}
 
-					for (ModelListener listener : scProductEntryListeners) {
+					for (ModelListener<com.liferay.portlet.softwarecatalog.model.SCProductEntry> listener : scProductEntryListeners) {
 						listener.onBeforeRemoveAssociation(scProductEntry.getPrimaryKey(),
 							SCLicense.class.getName(), licenseId);
 					}
@@ -1675,15 +1677,16 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 			throws SystemException {
 			if (_persistenceImpl.containsSCProductEntry.contains(licenseId,
 						productEntryId)) {
-				ModelListener[] scProductEntryListeners = scProductEntryPersistence.getListeners();
+				ModelListener<com.liferay.portlet.softwarecatalog.model.SCProductEntry>[] scProductEntryListeners =
+					scProductEntryPersistence.getListeners();
 
-				for (ModelListener listener : listeners) {
+				for (ModelListener<SCLicense> listener : listeners) {
 					listener.onBeforeRemoveAssociation(licenseId,
 						com.liferay.portlet.softwarecatalog.model.SCProductEntry.class.getName(),
 						productEntryId);
 				}
 
-				for (ModelListener listener : scProductEntryListeners) {
+				for (ModelListener<com.liferay.portlet.softwarecatalog.model.SCProductEntry> listener : scProductEntryListeners) {
 					listener.onBeforeRemoveAssociation(productEntryId,
 						SCLicense.class.getName(), licenseId);
 				}
@@ -1692,13 +1695,13 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 						new Long(licenseId), new Long(productEntryId)
 					});
 
-				for (ModelListener listener : listeners) {
+				for (ModelListener<SCLicense> listener : listeners) {
 					listener.onAfterRemoveAssociation(licenseId,
 						com.liferay.portlet.softwarecatalog.model.SCProductEntry.class.getName(),
 						productEntryId);
 				}
 
-				for (ModelListener listener : scProductEntryListeners) {
+				for (ModelListener<com.liferay.portlet.softwarecatalog.model.SCProductEntry> listener : scProductEntryListeners) {
 					listener.onAfterRemoveAssociation(productEntryId,
 						SCLicense.class.getName(), licenseId);
 				}

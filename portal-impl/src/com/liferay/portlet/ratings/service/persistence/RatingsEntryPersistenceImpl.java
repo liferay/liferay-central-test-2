@@ -102,13 +102,13 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 
 	public RatingsEntry remove(RatingsEntry ratingsEntry)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<RatingsEntry> listener : listeners) {
 			listener.onBeforeRemove(ratingsEntry);
 		}
 
 		ratingsEntry = removeImpl(ratingsEntry);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<RatingsEntry> listener : listeners) {
 			listener.onAfterRemove(ratingsEntry);
 		}
 
@@ -177,7 +177,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = ratingsEntry.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<RatingsEntry> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(ratingsEntry);
 			}
@@ -188,7 +188,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 
 		ratingsEntry = updateImpl(ratingsEntry, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<RatingsEntry> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(ratingsEntry);
 			}
@@ -984,10 +984,10 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<RatingsEntry>> listenersList = new ArrayList<ModelListener<RatingsEntry>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<RatingsEntry>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

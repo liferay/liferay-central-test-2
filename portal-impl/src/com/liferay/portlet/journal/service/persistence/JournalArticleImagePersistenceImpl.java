@@ -104,13 +104,13 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 
 	public JournalArticleImage remove(JournalArticleImage journalArticleImage)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<JournalArticleImage> listener : listeners) {
 			listener.onBeforeRemove(journalArticleImage);
 		}
 
 		journalArticleImage = removeImpl(journalArticleImage);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<JournalArticleImage> listener : listeners) {
 			listener.onAfterRemove(journalArticleImage);
 		}
 
@@ -179,7 +179,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = journalArticleImage.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<JournalArticleImage> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(journalArticleImage);
 			}
@@ -190,7 +190,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 
 		journalArticleImage = updateImpl(journalArticleImage, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<JournalArticleImage> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(journalArticleImage);
 			}
@@ -1788,10 +1788,10 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<JournalArticleImage>> listenersList = new ArrayList<ModelListener<JournalArticleImage>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<JournalArticleImage>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

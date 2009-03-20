@@ -110,13 +110,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 
 	public Organization remove(Organization organization)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Organization> listener : listeners) {
 			listener.onBeforeRemove(organization);
 		}
 
 		organization = removeImpl(organization);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Organization> listener : listeners) {
 			listener.onAfterRemove(organization);
 		}
 
@@ -205,7 +205,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = organization.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Organization> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(organization);
 			}
@@ -216,7 +216,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 
 		organization = updateImpl(organization, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Organization> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(organization);
 			}
@@ -2362,10 +2362,10 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<Organization>> listenersList = new ArrayList<ModelListener<Organization>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<Organization>)Class.forName(
 							listenerClassName).newInstance());
 				}
 
@@ -2521,14 +2521,14 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 		protected void add(long organizationId, long groupId)
 			throws SystemException {
 			if (!_persistenceImpl.containsGroup.contains(organizationId, groupId)) {
-				ModelListener[] groupListeners = groupPersistence.getListeners();
+				ModelListener<com.liferay.portal.model.Group>[] groupListeners = groupPersistence.getListeners();
 
-				for (ModelListener listener : listeners) {
+				for (ModelListener<Organization> listener : listeners) {
 					listener.onBeforeAddAssociation(organizationId,
 						com.liferay.portal.model.Group.class.getName(), groupId);
 				}
 
-				for (ModelListener listener : groupListeners) {
+				for (ModelListener<com.liferay.portal.model.Group> listener : groupListeners) {
 					listener.onBeforeAddAssociation(groupId,
 						Organization.class.getName(), organizationId);
 				}
@@ -2537,12 +2537,12 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 						new Long(organizationId), new Long(groupId)
 					});
 
-				for (ModelListener listener : listeners) {
+				for (ModelListener<Organization> listener : listeners) {
 					listener.onAfterAddAssociation(organizationId,
 						com.liferay.portal.model.Group.class.getName(), groupId);
 				}
 
-				for (ModelListener listener : groupListeners) {
+				for (ModelListener<com.liferay.portal.model.Group> listener : groupListeners) {
 					listener.onAfterAddAssociation(groupId,
 						Organization.class.getName(), organizationId);
 				}
@@ -2561,7 +2561,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 		}
 
 		protected void clear(long organizationId) throws SystemException {
-			ModelListener[] groupListeners = groupPersistence.getListeners();
+			ModelListener<com.liferay.portal.model.Group>[] groupListeners = groupPersistence.getListeners();
 
 			List<com.liferay.portal.model.Group> groups = null;
 
@@ -2569,13 +2569,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 				groups = getGroups(organizationId);
 
 				for (com.liferay.portal.model.Group group : groups) {
-					for (ModelListener listener : listeners) {
+					for (ModelListener<Organization> listener : listeners) {
 						listener.onBeforeRemoveAssociation(organizationId,
 							com.liferay.portal.model.Group.class.getName(),
 							group.getPrimaryKey());
 					}
 
-					for (ModelListener listener : groupListeners) {
+					for (ModelListener<com.liferay.portal.model.Group> listener : groupListeners) {
 						listener.onBeforeRemoveAssociation(group.getPrimaryKey(),
 							Organization.class.getName(), organizationId);
 					}
@@ -2586,13 +2586,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 
 			if ((listeners.length > 0) || (groupListeners.length > 0)) {
 				for (com.liferay.portal.model.Group group : groups) {
-					for (ModelListener listener : listeners) {
+					for (ModelListener<Organization> listener : listeners) {
 						listener.onAfterRemoveAssociation(organizationId,
 							com.liferay.portal.model.Group.class.getName(),
 							group.getPrimaryKey());
 					}
 
-					for (ModelListener listener : groupListeners) {
+					for (ModelListener<com.liferay.portal.model.Group> listener : groupListeners) {
 						listener.onBeforeRemoveAssociation(group.getPrimaryKey(),
 							Organization.class.getName(), organizationId);
 					}
@@ -2614,14 +2614,14 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 		protected void remove(long organizationId, long groupId)
 			throws SystemException {
 			if (_persistenceImpl.containsGroup.contains(organizationId, groupId)) {
-				ModelListener[] groupListeners = groupPersistence.getListeners();
+				ModelListener<com.liferay.portal.model.Group>[] groupListeners = groupPersistence.getListeners();
 
-				for (ModelListener listener : listeners) {
+				for (ModelListener<Organization> listener : listeners) {
 					listener.onBeforeRemoveAssociation(organizationId,
 						com.liferay.portal.model.Group.class.getName(), groupId);
 				}
 
-				for (ModelListener listener : groupListeners) {
+				for (ModelListener<com.liferay.portal.model.Group> listener : groupListeners) {
 					listener.onBeforeRemoveAssociation(groupId,
 						Organization.class.getName(), organizationId);
 				}
@@ -2630,12 +2630,12 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 						new Long(organizationId), new Long(groupId)
 					});
 
-				for (ModelListener listener : listeners) {
+				for (ModelListener<Organization> listener : listeners) {
 					listener.onAfterRemoveAssociation(organizationId,
 						com.liferay.portal.model.Group.class.getName(), groupId);
 				}
 
-				for (ModelListener listener : groupListeners) {
+				for (ModelListener<com.liferay.portal.model.Group> listener : groupListeners) {
 					listener.onAfterRemoveAssociation(groupId,
 						Organization.class.getName(), organizationId);
 				}
@@ -2685,14 +2685,14 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 		protected void add(long organizationId, long userId)
 			throws SystemException {
 			if (!_persistenceImpl.containsUser.contains(organizationId, userId)) {
-				ModelListener[] userListeners = userPersistence.getListeners();
+				ModelListener<com.liferay.portal.model.User>[] userListeners = userPersistence.getListeners();
 
-				for (ModelListener listener : listeners) {
+				for (ModelListener<Organization> listener : listeners) {
 					listener.onBeforeAddAssociation(organizationId,
 						com.liferay.portal.model.User.class.getName(), userId);
 				}
 
-				for (ModelListener listener : userListeners) {
+				for (ModelListener<com.liferay.portal.model.User> listener : userListeners) {
 					listener.onBeforeAddAssociation(userId,
 						Organization.class.getName(), organizationId);
 				}
@@ -2701,12 +2701,12 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 						new Long(organizationId), new Long(userId)
 					});
 
-				for (ModelListener listener : listeners) {
+				for (ModelListener<Organization> listener : listeners) {
 					listener.onAfterAddAssociation(organizationId,
 						com.liferay.portal.model.User.class.getName(), userId);
 				}
 
-				for (ModelListener listener : userListeners) {
+				for (ModelListener<com.liferay.portal.model.User> listener : userListeners) {
 					listener.onAfterAddAssociation(userId,
 						Organization.class.getName(), organizationId);
 				}
@@ -2725,7 +2725,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 		}
 
 		protected void clear(long organizationId) throws SystemException {
-			ModelListener[] userListeners = userPersistence.getListeners();
+			ModelListener<com.liferay.portal.model.User>[] userListeners = userPersistence.getListeners();
 
 			List<com.liferay.portal.model.User> users = null;
 
@@ -2733,13 +2733,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 				users = getUsers(organizationId);
 
 				for (com.liferay.portal.model.User user : users) {
-					for (ModelListener listener : listeners) {
+					for (ModelListener<Organization> listener : listeners) {
 						listener.onBeforeRemoveAssociation(organizationId,
 							com.liferay.portal.model.User.class.getName(),
 							user.getPrimaryKey());
 					}
 
-					for (ModelListener listener : userListeners) {
+					for (ModelListener<com.liferay.portal.model.User> listener : userListeners) {
 						listener.onBeforeRemoveAssociation(user.getPrimaryKey(),
 							Organization.class.getName(), organizationId);
 					}
@@ -2750,13 +2750,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 
 			if ((listeners.length > 0) || (userListeners.length > 0)) {
 				for (com.liferay.portal.model.User user : users) {
-					for (ModelListener listener : listeners) {
+					for (ModelListener<Organization> listener : listeners) {
 						listener.onAfterRemoveAssociation(organizationId,
 							com.liferay.portal.model.User.class.getName(),
 							user.getPrimaryKey());
 					}
 
-					for (ModelListener listener : userListeners) {
+					for (ModelListener<com.liferay.portal.model.User> listener : userListeners) {
 						listener.onBeforeRemoveAssociation(user.getPrimaryKey(),
 							Organization.class.getName(), organizationId);
 					}
@@ -2778,14 +2778,14 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 		protected void remove(long organizationId, long userId)
 			throws SystemException {
 			if (_persistenceImpl.containsUser.contains(organizationId, userId)) {
-				ModelListener[] userListeners = userPersistence.getListeners();
+				ModelListener<com.liferay.portal.model.User>[] userListeners = userPersistence.getListeners();
 
-				for (ModelListener listener : listeners) {
+				for (ModelListener<Organization> listener : listeners) {
 					listener.onBeforeRemoveAssociation(organizationId,
 						com.liferay.portal.model.User.class.getName(), userId);
 				}
 
-				for (ModelListener listener : userListeners) {
+				for (ModelListener<com.liferay.portal.model.User> listener : userListeners) {
 					listener.onBeforeRemoveAssociation(userId,
 						Organization.class.getName(), organizationId);
 				}
@@ -2794,12 +2794,12 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 						new Long(organizationId), new Long(userId)
 					});
 
-				for (ModelListener listener : listeners) {
+				for (ModelListener<Organization> listener : listeners) {
 					listener.onAfterRemoveAssociation(organizationId,
 						com.liferay.portal.model.User.class.getName(), userId);
 				}
 
-				for (ModelListener listener : userListeners) {
+				for (ModelListener<com.liferay.portal.model.User> listener : userListeners) {
 					listener.onAfterRemoveAssociation(userId,
 						Organization.class.getName(), organizationId);
 				}

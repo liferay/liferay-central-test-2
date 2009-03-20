@@ -102,13 +102,13 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 
 	public OrgGroupPermission remove(OrgGroupPermission orgGroupPermission)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<OrgGroupPermission> listener : listeners) {
 			listener.onBeforeRemove(orgGroupPermission);
 		}
 
 		orgGroupPermission = removeImpl(orgGroupPermission);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<OrgGroupPermission> listener : listeners) {
 			listener.onAfterRemove(orgGroupPermission);
 		}
 
@@ -177,7 +177,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 		boolean merge) throws SystemException {
 		boolean isNew = orgGroupPermission.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<OrgGroupPermission> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(orgGroupPermission);
 			}
@@ -188,7 +188,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 
 		orgGroupPermission = updateImpl(orgGroupPermission, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<OrgGroupPermission> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(orgGroupPermission);
 			}
@@ -1050,10 +1050,10 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<OrgGroupPermission>> listenersList = new ArrayList<ModelListener<OrgGroupPermission>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<OrgGroupPermission>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

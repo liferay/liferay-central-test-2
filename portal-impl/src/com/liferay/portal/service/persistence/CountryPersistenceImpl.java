@@ -99,13 +99,13 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Country remove(Country country) throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Country> listener : listeners) {
 			listener.onBeforeRemove(country);
 		}
 
 		country = removeImpl(country);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Country> listener : listeners) {
 			listener.onAfterRemove(country);
 		}
 
@@ -172,7 +172,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = country.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Country> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(country);
 			}
@@ -183,7 +183,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 
 		country = updateImpl(country, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Country> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(country);
 			}
@@ -1282,10 +1282,10 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<Country>> listenersList = new ArrayList<ModelListener<Country>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<Country>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

@@ -107,13 +107,13 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public IGImage remove(IGImage igImage) throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<IGImage> listener : listeners) {
 			listener.onBeforeRemove(igImage);
 		}
 
 		igImage = removeImpl(igImage);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<IGImage> listener : listeners) {
 			listener.onAfterRemove(igImage);
 		}
 
@@ -180,7 +180,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = igImage.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<IGImage> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(igImage);
 			}
@@ -191,7 +191,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 		igImage = updateImpl(igImage, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<IGImage> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(igImage);
 			}
@@ -2154,10 +2154,10 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<IGImage>> listenersList = new ArrayList<ModelListener<IGImage>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<IGImage>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

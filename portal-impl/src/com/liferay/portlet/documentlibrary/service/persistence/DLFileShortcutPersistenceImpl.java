@@ -109,13 +109,13 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 	public DLFileShortcut remove(DLFileShortcut dlFileShortcut)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<DLFileShortcut> listener : listeners) {
 			listener.onBeforeRemove(dlFileShortcut);
 		}
 
 		dlFileShortcut = removeImpl(dlFileShortcut);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<DLFileShortcut> listener : listeners) {
 			listener.onAfterRemove(dlFileShortcut);
 		}
 
@@ -184,7 +184,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = dlFileShortcut.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<DLFileShortcut> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(dlFileShortcut);
 			}
@@ -195,7 +195,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 		dlFileShortcut = updateImpl(dlFileShortcut, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<DLFileShortcut> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(dlFileShortcut);
 			}
@@ -1448,10 +1448,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<DLFileShortcut>> listenersList = new ArrayList<ModelListener<DLFileShortcut>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<DLFileShortcut>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

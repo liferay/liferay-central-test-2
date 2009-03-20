@@ -99,13 +99,13 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Address remove(Address address) throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Address> listener : listeners) {
 			listener.onBeforeRemove(address);
 		}
 
 		address = removeImpl(address);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Address> listener : listeners) {
 			listener.onAfterRemove(address);
 		}
 
@@ -172,7 +172,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = address.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Address> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(address);
 			}
@@ -183,7 +183,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 
 		address = updateImpl(address, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Address> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(address);
 			}
@@ -2629,10 +2629,10 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<Address>> listenersList = new ArrayList<ModelListener<Address>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<Address>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

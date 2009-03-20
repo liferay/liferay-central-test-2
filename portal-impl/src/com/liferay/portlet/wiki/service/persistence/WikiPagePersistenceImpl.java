@@ -107,13 +107,13 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public WikiPage remove(WikiPage wikiPage) throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<WikiPage> listener : listeners) {
 			listener.onBeforeRemove(wikiPage);
 		}
 
 		wikiPage = removeImpl(wikiPage);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<WikiPage> listener : listeners) {
 			listener.onAfterRemove(wikiPage);
 		}
 
@@ -180,7 +180,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = wikiPage.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<WikiPage> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(wikiPage);
 			}
@@ -191,7 +191,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 		wikiPage = updateImpl(wikiPage, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<WikiPage> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(wikiPage);
 			}
@@ -4044,10 +4044,10 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<WikiPage>> listenersList = new ArrayList<ModelListener<WikiPage>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<WikiPage>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

@@ -109,13 +109,13 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 
 	public SocialRequest remove(SocialRequest socialRequest)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<SocialRequest> listener : listeners) {
 			listener.onBeforeRemove(socialRequest);
 		}
 
 		socialRequest = removeImpl(socialRequest);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<SocialRequest> listener : listeners) {
 			listener.onAfterRemove(socialRequest);
 		}
 
@@ -184,7 +184,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = socialRequest.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<SocialRequest> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(socialRequest);
 			}
@@ -195,7 +195,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 
 		socialRequest = updateImpl(socialRequest, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<SocialRequest> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(socialRequest);
 			}
@@ -3615,10 +3615,10 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<SocialRequest>> listenersList = new ArrayList<ModelListener<SocialRequest>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<SocialRequest>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

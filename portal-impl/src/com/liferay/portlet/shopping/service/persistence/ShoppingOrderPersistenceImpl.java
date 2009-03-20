@@ -102,13 +102,13 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 
 	public ShoppingOrder remove(ShoppingOrder shoppingOrder)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<ShoppingOrder> listener : listeners) {
 			listener.onBeforeRemove(shoppingOrder);
 		}
 
 		shoppingOrder = removeImpl(shoppingOrder);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<ShoppingOrder> listener : listeners) {
 			listener.onAfterRemove(shoppingOrder);
 		}
 
@@ -177,7 +177,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = shoppingOrder.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<ShoppingOrder> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(shoppingOrder);
 			}
@@ -188,7 +188,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 
 		shoppingOrder = updateImpl(shoppingOrder, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<ShoppingOrder> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(shoppingOrder);
 			}
@@ -1551,10 +1551,10 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<ShoppingOrder>> listenersList = new ArrayList<ModelListener<ShoppingOrder>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<ShoppingOrder>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

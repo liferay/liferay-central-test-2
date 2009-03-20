@@ -101,13 +101,13 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public ExpandoRow remove(ExpandoRow expandoRow) throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<ExpandoRow> listener : listeners) {
 			listener.onBeforeRemove(expandoRow);
 		}
 
 		expandoRow = removeImpl(expandoRow);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<ExpandoRow> listener : listeners) {
 			listener.onAfterRemove(expandoRow);
 		}
 
@@ -175,7 +175,7 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = expandoRow.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<ExpandoRow> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(expandoRow);
 			}
@@ -186,7 +186,7 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl
 
 		expandoRow = updateImpl(expandoRow, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<ExpandoRow> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(expandoRow);
 			}
@@ -917,10 +917,10 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<ExpandoRow>> listenersList = new ArrayList<ModelListener<ExpandoRow>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<ExpandoRow>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

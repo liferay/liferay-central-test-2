@@ -103,13 +103,13 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 
 	public MBDiscussion remove(MBDiscussion mbDiscussion)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<MBDiscussion> listener : listeners) {
 			listener.onBeforeRemove(mbDiscussion);
 		}
 
 		mbDiscussion = removeImpl(mbDiscussion);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<MBDiscussion> listener : listeners) {
 			listener.onAfterRemove(mbDiscussion);
 		}
 
@@ -178,7 +178,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = mbDiscussion.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<MBDiscussion> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(mbDiscussion);
 			}
@@ -189,7 +189,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 
 		mbDiscussion = updateImpl(mbDiscussion, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<MBDiscussion> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(mbDiscussion);
 			}
@@ -1096,10 +1096,10 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<MBDiscussion>> listenersList = new ArrayList<ModelListener<MBDiscussion>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<MBDiscussion>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

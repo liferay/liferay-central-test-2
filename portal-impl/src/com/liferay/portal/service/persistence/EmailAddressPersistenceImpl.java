@@ -101,13 +101,13 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 	public EmailAddress remove(EmailAddress emailAddress)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<EmailAddress> listener : listeners) {
 			listener.onBeforeRemove(emailAddress);
 		}
 
 		emailAddress = removeImpl(emailAddress);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<EmailAddress> listener : listeners) {
 			listener.onAfterRemove(emailAddress);
 		}
 
@@ -176,7 +176,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = emailAddress.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<EmailAddress> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(emailAddress);
 			}
@@ -187,7 +187,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 		emailAddress = updateImpl(emailAddress, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<EmailAddress> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(emailAddress);
 			}
@@ -2245,10 +2245,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<EmailAddress>> listenersList = new ArrayList<ModelListener<EmailAddress>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<EmailAddress>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

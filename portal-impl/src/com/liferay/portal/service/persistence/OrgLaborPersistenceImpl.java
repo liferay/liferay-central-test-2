@@ -99,13 +99,13 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public OrgLabor remove(OrgLabor orgLabor) throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<OrgLabor> listener : listeners) {
 			listener.onBeforeRemove(orgLabor);
 		}
 
 		orgLabor = removeImpl(orgLabor);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<OrgLabor> listener : listeners) {
 			listener.onAfterRemove(orgLabor);
 		}
 
@@ -172,7 +172,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = orgLabor.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<OrgLabor> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(orgLabor);
 			}
@@ -183,7 +183,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 
 		orgLabor = updateImpl(orgLabor, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<OrgLabor> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(orgLabor);
 			}
@@ -756,10 +756,10 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<OrgLabor>> listenersList = new ArrayList<ModelListener<OrgLabor>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<OrgLabor>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

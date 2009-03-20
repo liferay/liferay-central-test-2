@@ -103,13 +103,13 @@ public class TagsPropertyPersistenceImpl extends BasePersistenceImpl
 
 	public TagsProperty remove(TagsProperty tagsProperty)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<TagsProperty> listener : listeners) {
 			listener.onBeforeRemove(tagsProperty);
 		}
 
 		tagsProperty = removeImpl(tagsProperty);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<TagsProperty> listener : listeners) {
 			listener.onAfterRemove(tagsProperty);
 		}
 
@@ -178,7 +178,7 @@ public class TagsPropertyPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = tagsProperty.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<TagsProperty> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(tagsProperty);
 			}
@@ -189,7 +189,7 @@ public class TagsPropertyPersistenceImpl extends BasePersistenceImpl
 
 		tagsProperty = updateImpl(tagsProperty, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<TagsProperty> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(tagsProperty);
 			}
@@ -1657,10 +1657,10 @@ public class TagsPropertyPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<TagsProperty>> listenersList = new ArrayList<ModelListener<TagsProperty>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<TagsProperty>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

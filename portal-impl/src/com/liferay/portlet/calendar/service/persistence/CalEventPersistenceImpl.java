@@ -107,13 +107,13 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public CalEvent remove(CalEvent calEvent) throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<CalEvent> listener : listeners) {
 			listener.onBeforeRemove(calEvent);
 		}
 
 		calEvent = removeImpl(calEvent);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<CalEvent> listener : listeners) {
 			listener.onAfterRemove(calEvent);
 		}
 
@@ -180,7 +180,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = calEvent.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<CalEvent> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(calEvent);
 			}
@@ -191,7 +191,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 		calEvent = updateImpl(calEvent, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<CalEvent> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(calEvent);
 			}
@@ -2362,10 +2362,10 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<CalEvent>> listenersList = new ArrayList<ModelListener<CalEvent>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<CalEvent>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

@@ -99,13 +99,13 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Resource remove(Resource resource) throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Resource> listener : listeners) {
 			listener.onBeforeRemove(resource);
 		}
 
 		resource = removeImpl(resource);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Resource> listener : listeners) {
 			listener.onAfterRemove(resource);
 		}
 
@@ -172,7 +172,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = resource.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Resource> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(resource);
 			}
@@ -183,7 +183,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 
 		resource = updateImpl(resource, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Resource> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(resource);
 			}
@@ -921,10 +921,10 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<Resource>> listenersList = new ArrayList<ModelListener<Resource>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<Resource>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

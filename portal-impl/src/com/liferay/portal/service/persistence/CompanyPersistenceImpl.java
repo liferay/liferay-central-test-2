@@ -99,13 +99,13 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Company remove(Company company) throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Company> listener : listeners) {
 			listener.onBeforeRemove(company);
 		}
 
 		company = removeImpl(company);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Company> listener : listeners) {
 			listener.onAfterRemove(company);
 		}
 
@@ -172,7 +172,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = company.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Company> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(company);
 			}
@@ -183,7 +183,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 
 		company = updateImpl(company, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<Company> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(company);
 			}
@@ -1120,10 +1120,10 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<Company>> listenersList = new ArrayList<ModelListener<Company>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<Company>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

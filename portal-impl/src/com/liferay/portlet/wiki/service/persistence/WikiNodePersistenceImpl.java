@@ -107,13 +107,13 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public WikiNode remove(WikiNode wikiNode) throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<WikiNode> listener : listeners) {
 			listener.onBeforeRemove(wikiNode);
 		}
 
 		wikiNode = removeImpl(wikiNode);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<WikiNode> listener : listeners) {
 			listener.onAfterRemove(wikiNode);
 		}
 
@@ -180,7 +180,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = wikiNode.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<WikiNode> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(wikiNode);
 			}
@@ -191,7 +191,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 		wikiNode = updateImpl(wikiNode, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<WikiNode> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(wikiNode);
 			}
@@ -1812,10 +1812,10 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<WikiNode>> listenersList = new ArrayList<ModelListener<WikiNode>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<WikiNode>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

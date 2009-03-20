@@ -100,13 +100,13 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 	public ResourceCode remove(ResourceCode resourceCode)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<ResourceCode> listener : listeners) {
 			listener.onBeforeRemove(resourceCode);
 		}
 
 		resourceCode = removeImpl(resourceCode);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<ResourceCode> listener : listeners) {
 			listener.onAfterRemove(resourceCode);
 		}
 
@@ -175,7 +175,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = resourceCode.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<ResourceCode> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(resourceCode);
 			}
@@ -186,7 +186,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 		resourceCode = updateImpl(resourceCode, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<ResourceCode> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(resourceCode);
 			}
@@ -1285,10 +1285,10 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<ResourceCode>> listenersList = new ArrayList<ModelListener<ResourceCode>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<ResourceCode>)Class.forName(
 							listenerClassName).newInstance());
 				}
 

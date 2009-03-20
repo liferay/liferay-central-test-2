@@ -103,13 +103,13 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 	public MBMessageFlag remove(MBMessageFlag mbMessageFlag)
 		throws SystemException {
-		for (ModelListener listener : listeners) {
+		for (ModelListener<MBMessageFlag> listener : listeners) {
 			listener.onBeforeRemove(mbMessageFlag);
 		}
 
 		mbMessageFlag = removeImpl(mbMessageFlag);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<MBMessageFlag> listener : listeners) {
 			listener.onAfterRemove(mbMessageFlag);
 		}
 
@@ -178,7 +178,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		boolean isNew = mbMessageFlag.isNew();
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<MBMessageFlag> listener : listeners) {
 			if (isNew) {
 				listener.onBeforeCreate(mbMessageFlag);
 			}
@@ -189,7 +189,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 		mbMessageFlag = updateImpl(mbMessageFlag, merge);
 
-		for (ModelListener listener : listeners) {
+		for (ModelListener<MBMessageFlag> listener : listeners) {
 			if (isNew) {
 				listener.onAfterCreate(mbMessageFlag);
 			}
@@ -1585,10 +1585,10 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener> listenersList = new ArrayList<ModelListener>();
+				List<ModelListener<MBMessageFlag>> listenersList = new ArrayList<ModelListener<MBMessageFlag>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener)Class.forName(
+					listenersList.add((ModelListener<MBMessageFlag>)Class.forName(
 							listenerClassName).newInstance());
 				}
 
