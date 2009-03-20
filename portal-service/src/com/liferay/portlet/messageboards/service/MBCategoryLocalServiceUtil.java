@@ -211,6 +211,11 @@ public class MBCategoryLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getCategories(
+		long groupId) throws com.liferay.portal.SystemException {
+		return getService().getCategories(groupId);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getCategories(
 		long groupId, long parentCategoryId)
 		throws com.liferay.portal.SystemException {
 		return getService().getCategories(groupId, parentCategoryId);

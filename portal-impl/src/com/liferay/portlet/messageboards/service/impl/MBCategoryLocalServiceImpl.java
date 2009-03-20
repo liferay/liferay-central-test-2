@@ -257,6 +257,10 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		mbCategoryPersistence.remove(category);
 	}
 
+	public List<MBCategory> getCategories(long groupId) throws SystemException {
+		return mbCategoryPersistence.findByGroupId(groupId);
+	}
+
 	public List<MBCategory> getCategories(long groupId, long parentCategoryId)
 		throws SystemException {
 

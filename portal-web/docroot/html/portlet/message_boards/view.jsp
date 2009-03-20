@@ -34,6 +34,8 @@ MBCategory category = (MBCategory)request.getAttribute(WebKeys.MESSAGE_BOARDS_CA
 
 long categoryId = BeanParamUtil.getLong(category, request, "categoryId", MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 
+MBCategoryDisplay categoryDisplay = new MBCategoryDisplayImpl(scopeGroupId, categoryId);
+
 Set<Long> categorySubscriptionClassPKs = null;
 Set<Long> threadSubscriptionClassPKs = null;
 
@@ -94,11 +96,13 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-		int total = MBCategoryLocalServiceUtil.getCategoriesCount(scopeGroupId, categoryId);
+		List results = categoryDisplay.getCategories();
+
+		int total = results.size();
 
 		searchContainer.setTotal(total);
 
-		List results = MBCategoryLocalServiceUtil.getCategories(scopeGroupId, categoryId, searchContainer.getStart(), searchContainer.getEnd());
+		results = ListUtil.subList(results, searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 
@@ -186,15 +190,9 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 			// Statistics
 
-			List subcategoryIds = new ArrayList();
-
-			subcategoryIds.add(new Long(curCategory.getCategoryId()));
-
-			MBCategoryLocalServiceUtil.getSubcategoryIds(subcategoryIds, scopeGroupId, curCategory.getCategoryId());
-
-			int categoriesCount = subcategoryIds.size() - 1;
-			int threadsCount = MBThreadLocalServiceUtil.getCategoriesThreadsCount(subcategoryIds);
-			int messagesCount = MBMessageLocalServiceUtil.getCategoriesMessagesCount(subcategoryIds);
+			int categoriesCount = categoryDisplay.getSubcategoriesCount(curCategory);
+			int threadsCount = categoryDisplay.getSubcategoriesThreadsCount(curCategory);
+			int messagesCount = categoryDisplay.getSubcategoriesMessagesCount(curCategory);
 
 			row.addText(String.valueOf(categoriesCount), rowURL);
 			row.addText(String.valueOf(threadsCount), rowURL);
@@ -561,15 +559,9 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 				// Statistics
 
-				List subcategoryIds = new ArrayList();
-
-				subcategoryIds.add(new Long(curCategory.getCategoryId()));
-
-				MBCategoryLocalServiceUtil.getSubcategoryIds(subcategoryIds, scopeGroupId, curCategory.getCategoryId());
-
-				int categoriesCount = subcategoryIds.size() - 1;
-				int threadsCount = MBThreadLocalServiceUtil.getCategoriesThreadsCount(subcategoryIds);
-				int messagesCount = MBMessageLocalServiceUtil.getCategoriesMessagesCount(subcategoryIds);
+				int categoriesCount = categoryDisplay.getSubcategoriesCount(curCategory);
+				int threadsCount = categoryDisplay.getSubcategoriesThreadsCount(curCategory);
+				int messagesCount = categoryDisplay.getSubcategoriesMessagesCount(curCategory);
 
 				row.addText(String.valueOf(categoriesCount), rowURL);
 				row.addText(String.valueOf(threadsCount), rowURL);
@@ -788,7 +780,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 		<c:choose>
 			<c:when test='<%= tabs2.equals("general") %>'>
-				<liferay-ui:message key="num-of-categories" />: <%= numberFormat.format(MBCategoryLocalServiceUtil.getCategoriesCount(scopeGroupId)) %><br />
+				<liferay-ui:message key="num-of-categories" />: <%= numberFormat.format(categoryDisplay.getAllCategoriesCount()) %><br />
 				<liferay-ui:message key="num-of-posts" />: <%= numberFormat.format(MBMessageLocalServiceUtil.getGroupMessagesCount(scopeGroupId)) %><br />
 				<liferay-ui:message key="num-of-participants" />: <%= numberFormat.format(MBStatsUserLocalServiceUtil.getStatsUsersCount(scopeGroupId)) %>
 			</c:when>
