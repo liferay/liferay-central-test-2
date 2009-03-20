@@ -243,7 +243,7 @@ long javaScriptLastModified = ServletContextUtil.getLastModified(application, "/
 		String currentURL = PortalUtil.getCurrentURL(request);
 		%>
 
-		Liferay.currentURL = '<%= currentURL %>';
+		Liferay.currentURL = unescape('<%= HttpUtil.encodeURL(currentURL) %>');
 		Liferay.currentURLEncoded = '<%= HttpUtil.encodeURL(currentURL) %>';
 
 		jQuery(
