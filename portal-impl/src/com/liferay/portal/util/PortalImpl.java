@@ -2806,7 +2806,8 @@ public class PortalImpl implements Portal {
 				try {
 					if (!PortletPermissionUtil.contains(
 							themeDisplay.getPermissionChecker(),
-							portlet.getPortletId(), ActionKeys.CONFIGURATION)) {
+							themeDisplay.getPlid(), portlet.getPortletId(),
+							ActionKeys.CONFIGURATION)) {
 
 						showPortlet = false;
 					}
