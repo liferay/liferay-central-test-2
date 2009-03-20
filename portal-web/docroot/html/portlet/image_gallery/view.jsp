@@ -196,7 +196,7 @@ List scores = null;
 
 					<input id="<portlet:namespace />keywords1" name="<portlet:namespace />keywords" size="30" type="text" />
 
-					<input type="submit" value="<liferay-ui:message key="search-images" />" />
+					<input type="submit" value="<liferay-ui:message key="search-folders" />" />
 				</c:if>
 
 				<c:if test="<%= showAddFolderButton %>">
@@ -291,7 +291,7 @@ List scores = null;
 
 						<input id="<portlet:namespace />keywords2" name="<portlet:namespace />keywords" size="30" type="text" />
 
-						<input type="submit" value="<liferay-ui:message key="search-images" />" />
+						<input type="submit" value="<liferay-ui:message key="search-this-folder" />" />
 					</c:if>
 
 					<c:if test="<%= showAddImageButton %>">

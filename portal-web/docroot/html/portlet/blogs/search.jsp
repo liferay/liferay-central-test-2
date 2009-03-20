@@ -111,7 +111,7 @@ try {
 
 	<input id="<portlet:namespace />keywords" name="<portlet:namespace />keywords" size="30" type="text" value="<%= HtmlUtil.escape(keywords) %>" />
 
-	<input type="submit" value="<liferay-ui:message key="search-entries" />" />
+	<input type="submit" value="<liferay-ui:message key="search" />" />
 
 	<br /><br />
 

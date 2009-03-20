@@ -79,7 +79,7 @@ CouponDisplayTerms displayTerms = (CouponDisplayTerms)searchContainer.getDisplay
 		<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
 	</select>
 
-	<input type="submit" value="<liferay-ui:message key="search-coupons" />" />
+	<input type="submit" value="<liferay-ui:message key="search" />" />
 
 	<input type="button" value="<liferay-ui:message key="add-coupon" />" onClick="<portlet:namespace />addCoupon();" />
 </div>

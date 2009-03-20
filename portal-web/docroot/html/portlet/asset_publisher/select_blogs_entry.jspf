@@ -45,7 +45,7 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 
 	<input id="<portlet:namespace />keywords" name="<portlet:namespace />keywords" size="30" type="text" value="<%= HtmlUtil.escape(keywords) %>" onkeypress="if (event.keyCode == 13) { submitForm(document.<portlet:namespace />fm, '<%= portletURL.toString() %>'); }" />
 
-	<input type="button" value="<liferay-ui:message key="search-entries" />" onclick="submitForm(document.<portlet:namespace />fm, '<%= portletURL.toString() %>');" />
+	<input type="button" value="<liferay-ui:message key="search" />" onclick="submitForm(document.<portlet:namespace />fm, '<%= portletURL.toString() %>');" />
 </div>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">

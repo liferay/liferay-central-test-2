@@ -142,6 +142,8 @@ if ((rssDelta != SearchContainer.DEFAULT_DELTA) || !rssFormatType.equals(RSSUtil
 }
 
 boolean showSearch = true;
+boolean showSearchCategory = showSearch;
+boolean showSearchThread = showSearch;
 boolean childrenMessagesTaggable = true;
 
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);

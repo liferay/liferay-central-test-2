@@ -108,7 +108,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 							<input id="<portlet:namespace />keywords1" name="<portlet:namespace />keywords" size="30" type="text" />
 
-							<input type="submit" value="<liferay-ui:message key="search-file-entries" />" />
+							<input type="submit" value="<liferay-ui:message key="search-folders" />" />
 						</c:if>
 
 						<c:if test="<%= showAddFolderButton %>">
@@ -262,7 +262,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 							<input id="<portlet:namespace />keywords2" name="<portlet:namespace />keywords" size="30" type="text" />
 
-							<input type="submit" value="<liferay-ui:message key="search-file-entries" />" />
+							<input type="submit" value="<liferay-ui:message key="search-this-folder" />" />
 						</c:if>
 
 						<c:if test="<%= showAddFolderButton %>">

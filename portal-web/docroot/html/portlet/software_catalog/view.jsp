@@ -264,7 +264,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			</select>
 
-			<input type="submit" value="<liferay-ui:message key="search-products" />" />
+			<input type="submit" value="<liferay-ui:message key="search" />" />
 
 			<c:if test="<%= showAddProductEntryButton %>">
 				<input type="button" value="<liferay-ui:message key="add-product" />" onClick="<portlet:namespace />addProduct();" />

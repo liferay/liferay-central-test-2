@@ -214,17 +214,17 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 		boolean showAddCategoryButton = MBCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.ADD_CATEGORY);
 		boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
-		showSearch = showSearch && (results.size() > 0);
+		showSearchCategory = showSearchCategory && (results.size() > 0);
 		%>
 
-		<c:if test="<%= showAddCategoryButton || showPermissionsButton || showSearch %>">
+		<c:if test="<%= showAddCategoryButton || showPermissionsButton || showSearchCategory %>">
 			<div>
-				<c:if test="<%= showSearch %>">
+				<c:if test="<%= showSearchCategory %>">
 					<label for="<portlet:namespace />keywords1"><liferay-ui:message key="search" /></label>
 
 					<input id="<portlet:namespace />keywords1" name="<portlet:namespace />keywords" size="30" type="text" />
 
-					<input type="submit" value="<liferay-ui:message key="search-messages" />" />
+					<input type="submit" value="<liferay-ui:message key="search-categories" />" />
 				</c:if>
 
 				<c:if test="<%= showAddCategoryButton %>">
@@ -422,17 +422,17 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 				}
 			}
 
-			showSearch = showSearch && (results.size() > 0);
+			showSearchThread = showSearchThread && (results.size() > 0);
 			%>
 
-			<c:if test="<%= showAddMessageButton || showSearch %>">
+			<c:if test="<%= showAddMessageButton || showSearchThread %>">
 				<div>
-					<c:if test="<%= showSearch %>">
+					<c:if test="<%= showSearchThread %>">
 						<label for="<portlet:namespace />keywords2"><liferay-ui:message key="search" /></label>
 
 						<input id="<portlet:namespace />keywords2" name="<portlet:namespace />keywords" size="30" type="text" />
 
-						<input type="submit" value="<liferay-ui:message key="search-messages" />" />
+						<input type="submit" value="<liferay-ui:message key="search-this-category" />" />
 					</c:if>
 
 					<c:if test="<%= showAddMessageButton %>">

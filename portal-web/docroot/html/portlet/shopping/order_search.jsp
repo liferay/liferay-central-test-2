@@ -88,7 +88,7 @@ OrderDisplayTerms displayTerms = (OrderDisplayTerms)searchContainer.getDisplayTe
 		<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
 	</select>
 
-	<input type="submit" value="<liferay-ui:message key="search-orders" />" />
+	<input type="submit" value="<liferay-ui:message key="search" />" />
 </div>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
