@@ -46,7 +46,7 @@ import java.util.Date;
  * @see com.liferay.portlet.wiki.model.impl.WikiNodeModelImpl
  *
  */
-public interface WikiNodeModel extends BaseModel {
+public interface WikiNodeModel extends BaseModel<WikiNode> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

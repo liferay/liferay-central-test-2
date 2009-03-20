@@ -62,7 +62,7 @@ import java.util.List;
  * @see com.liferay.portlet.messageboards.model.impl.MBBanImpl
  *
  */
-public class MBBanModelImpl extends BaseModelImpl {
+public class MBBanModelImpl extends BaseModelImpl<MBBan> {
 	public static final String TABLE_NAME = "MBBan";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "banId", new Integer(Types.BIGINT) },
@@ -279,13 +279,7 @@ public class MBBanModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		MBBanImpl mbBan = (MBBanImpl)obj;
-
+	public int compareTo(MBBan mbBan) {
 		long pk = mbBan.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -304,10 +298,10 @@ public class MBBanModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		MBBanImpl mbBan = null;
+		MBBan mbBan = null;
 
 		try {
-			mbBan = (MBBanImpl)obj;
+			mbBan = (MBBan)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

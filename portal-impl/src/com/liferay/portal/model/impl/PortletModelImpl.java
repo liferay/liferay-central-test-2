@@ -60,7 +60,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.PortletImpl
  *
  */
-public class PortletModelImpl extends BaseModelImpl {
+public class PortletModelImpl extends BaseModelImpl<Portlet> {
 	public static final String TABLE_NAME = "Portlet";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "id_", new Integer(Types.BIGINT) },
@@ -230,13 +230,7 @@ public class PortletModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		PortletImpl portlet = (PortletImpl)obj;
-
+	public int compareTo(Portlet portlet) {
 		long pk = portlet.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -255,10 +249,10 @@ public class PortletModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		PortletImpl portlet = null;
+		Portlet portlet = null;
 
 		try {
-			portlet = (PortletImpl)obj;
+			portlet = (Portlet)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

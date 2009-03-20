@@ -44,7 +44,7 @@ import java.util.Date;
  * @see com.liferay.portal.model.impl.UserTrackerPathModelImpl
  *
  */
-public interface UserTrackerPathModel extends BaseModel {
+public interface UserTrackerPathModel extends BaseModel<UserTrackerPath> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

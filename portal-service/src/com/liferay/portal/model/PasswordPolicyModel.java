@@ -44,7 +44,7 @@ import java.util.Date;
  * @see com.liferay.portal.model.impl.PasswordPolicyModelImpl
  *
  */
-public interface PasswordPolicyModel extends BaseModel {
+public interface PasswordPolicyModel extends BaseModel<PasswordPolicy> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

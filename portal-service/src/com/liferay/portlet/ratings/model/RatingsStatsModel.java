@@ -44,7 +44,7 @@ import com.liferay.portal.model.BaseModel;
  * @see com.liferay.portlet.ratings.model.impl.RatingsStatsModelImpl
  *
  */
-public interface RatingsStatsModel extends BaseModel {
+public interface RatingsStatsModel extends BaseModel<RatingsStats> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

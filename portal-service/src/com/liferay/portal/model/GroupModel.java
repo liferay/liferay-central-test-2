@@ -43,7 +43,7 @@ package com.liferay.portal.model;
  * @see com.liferay.portal.model.impl.GroupModelImpl
  *
  */
-public interface GroupModel extends BaseModel {
+public interface GroupModel extends BaseModel<Group> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

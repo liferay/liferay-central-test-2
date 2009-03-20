@@ -44,7 +44,7 @@ import java.util.Date;
  * @see com.liferay.portal.model.impl.AddressModelImpl
  *
  */
-public interface AddressModel extends BaseModel {
+public interface AddressModel extends BaseModel<Address> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

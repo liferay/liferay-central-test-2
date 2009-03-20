@@ -64,7 +64,7 @@ import java.util.List;
  * @see com.liferay.portlet.social.model.impl.SocialRequestImpl
  *
  */
-public class SocialRequestModelImpl extends BaseModelImpl {
+public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest> {
 	public static final String TABLE_NAME = "SocialRequest";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
@@ -370,13 +370,7 @@ public class SocialRequestModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		SocialRequestImpl socialRequest = (SocialRequestImpl)obj;
-
+	public int compareTo(SocialRequest socialRequest) {
 		int value = 0;
 
 		if (getRequestId() < socialRequest.getRequestId()) {
@@ -403,10 +397,10 @@ public class SocialRequestModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		SocialRequestImpl socialRequest = null;
+		SocialRequest socialRequest = null;
 
 		try {
-			socialRequest = (SocialRequestImpl)obj;
+			socialRequest = (SocialRequest)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

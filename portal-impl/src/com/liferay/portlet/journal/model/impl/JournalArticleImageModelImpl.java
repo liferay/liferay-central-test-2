@@ -61,7 +61,7 @@ import java.util.List;
  * @see com.liferay.portlet.journal.model.impl.JournalArticleImageImpl
  *
  */
-public class JournalArticleImageModelImpl extends BaseModelImpl {
+public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleImage> {
 	public static final String TABLE_NAME = "JournalArticleImage";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "articleImageId", new Integer(Types.BIGINT) },
@@ -287,13 +287,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		JournalArticleImageImpl journalArticleImage = (JournalArticleImageImpl)obj;
-
+	public int compareTo(JournalArticleImage journalArticleImage) {
 		long pk = journalArticleImage.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -312,10 +306,10 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		JournalArticleImageImpl journalArticleImage = null;
+		JournalArticleImage journalArticleImage = null;
 
 		try {
-			journalArticleImage = (JournalArticleImageImpl)obj;
+			journalArticleImage = (JournalArticleImage)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

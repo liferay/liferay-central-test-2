@@ -60,7 +60,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.OrganizationImpl
  *
  */
-public class OrganizationModelImpl extends BaseModelImpl {
+public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 	public static final String TABLE_NAME = "Organization_";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "organizationId", new Integer(Types.BIGINT) },
@@ -314,13 +314,7 @@ public class OrganizationModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		OrganizationImpl organization = (OrganizationImpl)obj;
-
+	public int compareTo(Organization organization) {
 		int value = 0;
 
 		value = getName().compareTo(organization.getName());
@@ -337,10 +331,10 @@ public class OrganizationModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		OrganizationImpl organization = null;
+		Organization organization = null;
 
 		try {
-			organization = (OrganizationImpl)obj;
+			organization = (Organization)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

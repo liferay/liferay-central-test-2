@@ -43,7 +43,7 @@ package com.liferay.portal.model;
  * @see com.liferay.portal.model.impl.LayoutModelImpl
  *
  */
-public interface LayoutModel extends BaseModel {
+public interface LayoutModel extends BaseModel<Layout> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

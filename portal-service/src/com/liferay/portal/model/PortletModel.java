@@ -43,7 +43,7 @@ package com.liferay.portal.model;
  * @see com.liferay.portal.model.impl.PortletModelImpl
  *
  */
-public interface PortletModel extends BaseModel {
+public interface PortletModel extends BaseModel<Portlet> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

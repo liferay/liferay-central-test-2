@@ -44,7 +44,7 @@ import com.liferay.portal.model.BaseModel;
  * @see com.liferay.portlet.messageboards.model.impl.MBDiscussionModelImpl
  *
  */
-public interface MBDiscussionModel extends BaseModel {
+public interface MBDiscussionModel extends BaseModel<MBDiscussion> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

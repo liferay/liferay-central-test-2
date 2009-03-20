@@ -44,7 +44,7 @@ import java.util.Date;
  * @see com.liferay.portal.model.impl.ContactModelImpl
  *
  */
-public interface ContactModel extends BaseModel {
+public interface ContactModel extends BaseModel<Contact> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

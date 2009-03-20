@@ -43,7 +43,7 @@ package com.liferay.portal.model;
  * @see com.liferay.portal.model.impl.CountryModelImpl
  *
  */
-public interface CountryModel extends BaseModel {
+public interface CountryModel extends BaseModel<Country> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

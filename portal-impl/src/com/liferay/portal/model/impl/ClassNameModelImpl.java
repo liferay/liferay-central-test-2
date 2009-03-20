@@ -62,7 +62,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.ClassNameImpl
  *
  */
-public class ClassNameModelImpl extends BaseModelImpl {
+public class ClassNameModelImpl extends BaseModelImpl<ClassName> {
 	public static final String TABLE_NAME = "ClassName_";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "classNameId", new Integer(Types.BIGINT) },
@@ -185,13 +185,7 @@ public class ClassNameModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		ClassNameImpl className = (ClassNameImpl)obj;
-
+	public int compareTo(ClassName className) {
 		long pk = className.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -210,10 +204,10 @@ public class ClassNameModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		ClassNameImpl className = null;
+		ClassName className = null;
 
 		try {
-			className = (ClassNameImpl)obj;
+			className = (ClassName)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

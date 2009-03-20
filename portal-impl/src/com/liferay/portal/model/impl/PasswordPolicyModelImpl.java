@@ -61,7 +61,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.PasswordPolicyImpl
  *
  */
-public class PasswordPolicyModelImpl extends BaseModelImpl {
+public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	public static final String TABLE_NAME = "PasswordPolicy";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "passwordPolicyId", new Integer(Types.BIGINT) },
@@ -608,13 +608,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		PasswordPolicyImpl passwordPolicy = (PasswordPolicyImpl)obj;
-
+	public int compareTo(PasswordPolicy passwordPolicy) {
 		long pk = passwordPolicy.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -633,10 +627,10 @@ public class PasswordPolicyModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		PasswordPolicyImpl passwordPolicy = null;
+		PasswordPolicy passwordPolicy = null;
 
 		try {
-			passwordPolicy = (PasswordPolicyImpl)obj;
+			passwordPolicy = (PasswordPolicy)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

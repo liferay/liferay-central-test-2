@@ -64,7 +64,7 @@ import java.util.List;
  * @see com.liferay.portlet.tags.model.impl.TagsAssetImpl
  *
  */
-public class TagsAssetModelImpl extends BaseModelImpl {
+public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	public static final String TABLE_NAME = "TagsAsset";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "assetId", new Integer(Types.BIGINT) },
@@ -562,13 +562,7 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		TagsAssetImpl tagsAsset = (TagsAssetImpl)obj;
-
+	public int compareTo(TagsAsset tagsAsset) {
 		long pk = tagsAsset.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -587,10 +581,10 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		TagsAssetImpl tagsAsset = null;
+		TagsAsset tagsAsset = null;
 
 		try {
-			tagsAsset = (TagsAssetImpl)obj;
+			tagsAsset = (TagsAsset)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

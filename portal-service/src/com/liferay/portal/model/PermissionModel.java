@@ -43,7 +43,7 @@ package com.liferay.portal.model;
  * @see com.liferay.portal.model.impl.PermissionModelImpl
  *
  */
-public interface PermissionModel extends BaseModel {
+public interface PermissionModel extends BaseModel<Permission> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

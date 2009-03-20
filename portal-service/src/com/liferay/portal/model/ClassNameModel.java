@@ -43,7 +43,7 @@ package com.liferay.portal.model;
  * @see com.liferay.portal.model.impl.ClassNameModelImpl
  *
  */
-public interface ClassNameModel extends BaseModel {
+public interface ClassNameModel extends BaseModel<ClassName> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

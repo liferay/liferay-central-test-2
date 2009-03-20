@@ -61,7 +61,7 @@ import java.util.List;
  * @see com.liferay.portlet.expando.model.impl.ExpandoValueImpl
  *
  */
-public class ExpandoValueModelImpl extends BaseModelImpl {
+public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue> {
 	public static final String TABLE_NAME = "ExpandoValue";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "valueId", new Integer(Types.BIGINT) },
@@ -271,13 +271,7 @@ public class ExpandoValueModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		ExpandoValueImpl expandoValue = (ExpandoValueImpl)obj;
-
+	public int compareTo(ExpandoValue expandoValue) {
 		int value = 0;
 
 		if (getTableId() < expandoValue.getTableId()) {
@@ -330,10 +324,10 @@ public class ExpandoValueModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		ExpandoValueImpl expandoValue = null;
+		ExpandoValue expandoValue = null;
 
 		try {
-			expandoValue = (ExpandoValueImpl)obj;
+			expandoValue = (ExpandoValue)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

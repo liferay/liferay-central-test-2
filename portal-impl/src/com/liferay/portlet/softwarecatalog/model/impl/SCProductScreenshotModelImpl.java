@@ -60,7 +60,7 @@ import java.util.List;
  * @see com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotImpl
  *
  */
-public class SCProductScreenshotModelImpl extends BaseModelImpl {
+public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreenshot> {
 	public static final String TABLE_NAME = "SCProductScreenshot";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "productScreenshotId", new Integer(Types.BIGINT) },
@@ -254,13 +254,7 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		SCProductScreenshotImpl scProductScreenshot = (SCProductScreenshotImpl)obj;
-
+	public int compareTo(SCProductScreenshot scProductScreenshot) {
 		int value = 0;
 
 		if (getProductEntryId() < scProductScreenshot.getProductEntryId()) {
@@ -299,10 +293,10 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		SCProductScreenshotImpl scProductScreenshot = null;
+		SCProductScreenshot scProductScreenshot = null;
 
 		try {
-			scProductScreenshot = (SCProductScreenshotImpl)obj;
+			scProductScreenshot = (SCProductScreenshot)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

@@ -44,7 +44,7 @@ import com.liferay.portal.model.BaseModel;
  * @see com.liferay.portlet.shopping.model.impl.ShoppingItemFieldModelImpl
  *
  */
-public interface ShoppingItemFieldModel extends BaseModel {
+public interface ShoppingItemFieldModel extends BaseModel<ShoppingItemField> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

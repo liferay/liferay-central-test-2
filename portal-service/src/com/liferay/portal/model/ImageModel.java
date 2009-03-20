@@ -44,7 +44,7 @@ import java.util.Date;
  * @see com.liferay.portal.model.impl.ImageModelImpl
  *
  */
-public interface ImageModel extends BaseModel {
+public interface ImageModel extends BaseModel<Image> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

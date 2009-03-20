@@ -62,7 +62,7 @@ import java.util.List;
  * @see com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl
  *
  */
-public class SCFrameworkVersionModelImpl extends BaseModelImpl {
+public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersion> {
 	public static final String TABLE_NAME = "SCFrameworkVersion";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "frameworkVersionId", new Integer(Types.BIGINT) },
@@ -340,13 +340,7 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		SCFrameworkVersionImpl scFrameworkVersion = (SCFrameworkVersionImpl)obj;
-
+	public int compareTo(SCFrameworkVersion scFrameworkVersion) {
 		int value = 0;
 
 		value = getName().compareTo(scFrameworkVersion.getName());
@@ -365,10 +359,10 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		SCFrameworkVersionImpl scFrameworkVersion = null;
+		SCFrameworkVersion scFrameworkVersion = null;
 
 		try {
-			scFrameworkVersion = (SCFrameworkVersionImpl)obj;
+			scFrameworkVersion = (SCFrameworkVersion)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

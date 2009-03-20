@@ -62,7 +62,7 @@ import java.util.List;
  * @see com.liferay.portlet.announcements.model.impl.AnnouncementsFlagImpl
  *
  */
-public class AnnouncementsFlagModelImpl extends BaseModelImpl {
+public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag> {
 	public static final String TABLE_NAME = "AnnouncementsFlag";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "flagId", new Integer(Types.BIGINT) },
@@ -227,13 +227,7 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		AnnouncementsFlagImpl announcementsFlag = (AnnouncementsFlagImpl)obj;
-
+	public int compareTo(AnnouncementsFlag announcementsFlag) {
 		int value = 0;
 
 		if (getUserId() < announcementsFlag.getUserId()) {
@@ -265,10 +259,10 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		AnnouncementsFlagImpl announcementsFlag = null;
+		AnnouncementsFlag announcementsFlag = null;
 
 		try {
-			announcementsFlag = (AnnouncementsFlagImpl)obj;
+			announcementsFlag = (AnnouncementsFlag)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

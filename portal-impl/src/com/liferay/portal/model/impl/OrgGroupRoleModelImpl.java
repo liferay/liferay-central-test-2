@@ -57,7 +57,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.OrgGroupRoleImpl
  *
  */
-public class OrgGroupRoleModelImpl extends BaseModelImpl {
+public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole> {
 	public static final String TABLE_NAME = "OrgGroupRole";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "organizationId", new Integer(Types.BIGINT) },
@@ -179,13 +179,7 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		OrgGroupRoleImpl orgGroupRole = (OrgGroupRoleImpl)obj;
-
+	public int compareTo(OrgGroupRole orgGroupRole) {
 		OrgGroupRolePK pk = orgGroupRole.getPrimaryKey();
 
 		return getPrimaryKey().compareTo(pk);
@@ -196,10 +190,10 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		OrgGroupRoleImpl orgGroupRole = null;
+		OrgGroupRole orgGroupRole = null;
 
 		try {
-			orgGroupRole = (OrgGroupRoleImpl)obj;
+			orgGroupRole = (OrgGroupRole)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

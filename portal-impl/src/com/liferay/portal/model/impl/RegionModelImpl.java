@@ -60,7 +60,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.RegionImpl
  *
  */
-public class RegionModelImpl extends BaseModelImpl {
+public class RegionModelImpl extends BaseModelImpl<Region> {
 	public static final String TABLE_NAME = "Region";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "regionId", new Integer(Types.BIGINT) },
@@ -229,13 +229,7 @@ public class RegionModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		RegionImpl region = (RegionImpl)obj;
-
+	public int compareTo(Region region) {
 		int value = 0;
 
 		value = getName().compareTo(region.getName());
@@ -252,10 +246,10 @@ public class RegionModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		RegionImpl region = null;
+		Region region = null;
 
 		try {
-			region = (RegionImpl)obj;
+			region = (Region)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

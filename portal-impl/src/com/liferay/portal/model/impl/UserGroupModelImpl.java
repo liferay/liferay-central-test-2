@@ -60,7 +60,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.UserGroupImpl
  *
  */
-public class UserGroupModelImpl extends BaseModelImpl {
+public class UserGroupModelImpl extends BaseModelImpl<UserGroup> {
 	public static final String TABLE_NAME = "UserGroup";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "userGroupId", new Integer(Types.BIGINT) },
@@ -227,13 +227,7 @@ public class UserGroupModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		UserGroupImpl userGroup = (UserGroupImpl)obj;
-
+	public int compareTo(UserGroup userGroup) {
 		int value = 0;
 
 		value = getName().compareTo(userGroup.getName());
@@ -250,10 +244,10 @@ public class UserGroupModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		UserGroupImpl userGroup = null;
+		UserGroup userGroup = null;
 
 		try {
-			userGroup = (UserGroupImpl)obj;
+			userGroup = (UserGroup)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

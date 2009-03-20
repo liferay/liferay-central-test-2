@@ -46,7 +46,7 @@ import java.util.Date;
  * @see com.liferay.portlet.bookmarks.model.impl.BookmarksEntryModelImpl
  *
  */
-public interface BookmarksEntryModel extends BaseModel {
+public interface BookmarksEntryModel extends BaseModel<BookmarksEntry> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

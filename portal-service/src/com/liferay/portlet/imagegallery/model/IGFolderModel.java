@@ -46,7 +46,7 @@ import java.util.Date;
  * @see com.liferay.portlet.imagegallery.model.impl.IGFolderModelImpl
  *
  */
-public interface IGFolderModel extends BaseModel {
+public interface IGFolderModel extends BaseModel<IGFolder> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

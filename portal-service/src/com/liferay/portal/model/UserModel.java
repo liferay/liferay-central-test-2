@@ -44,7 +44,7 @@ import java.util.Date;
  * @see com.liferay.portal.model.impl.UserModelImpl
  *
  */
-public interface UserModel extends BaseModel {
+public interface UserModel extends BaseModel<User> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

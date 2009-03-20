@@ -61,7 +61,7 @@ import java.util.List;
  * @see com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl
  *
  */
-public class MBStatsUserModelImpl extends BaseModelImpl {
+public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser> {
 	public static final String TABLE_NAME = "MBStatsUser";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "statsUserId", new Integer(Types.BIGINT) },
@@ -225,13 +225,7 @@ public class MBStatsUserModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		MBStatsUserImpl mbStatsUser = (MBStatsUserImpl)obj;
-
+	public int compareTo(MBStatsUser mbStatsUser) {
 		int value = 0;
 
 		if (getMessageCount() < mbStatsUser.getMessageCount()) {
@@ -258,10 +252,10 @@ public class MBStatsUserModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		MBStatsUserImpl mbStatsUser = null;
+		MBStatsUser mbStatsUser = null;
 
 		try {
-			mbStatsUser = (MBStatsUserImpl)obj;
+			mbStatsUser = (MBStatsUser)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

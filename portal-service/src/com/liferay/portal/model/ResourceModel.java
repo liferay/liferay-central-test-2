@@ -43,7 +43,7 @@ package com.liferay.portal.model;
  * @see com.liferay.portal.model.impl.ResourceModelImpl
  *
  */
-public interface ResourceModel extends BaseModel {
+public interface ResourceModel extends BaseModel<Resource> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

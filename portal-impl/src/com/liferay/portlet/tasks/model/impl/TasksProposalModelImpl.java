@@ -65,7 +65,7 @@ import java.util.List;
  * @see com.liferay.portlet.tasks.model.impl.TasksProposalImpl
  *
  */
-public class TasksProposalModelImpl extends BaseModelImpl {
+public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal> {
 	public static final String TABLE_NAME = "TasksProposal";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "proposalId", new Integer(Types.BIGINT) },
@@ -385,13 +385,7 @@ public class TasksProposalModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		TasksProposalImpl tasksProposal = (TasksProposalImpl)obj;
-
+	public int compareTo(TasksProposal tasksProposal) {
 		int value = 0;
 
 		value = DateUtil.compareTo(getDueDate(), tasksProposal.getDueDate());
@@ -415,10 +409,10 @@ public class TasksProposalModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		TasksProposalImpl tasksProposal = null;
+		TasksProposal tasksProposal = null;
 
 		try {
-			tasksProposal = (TasksProposalImpl)obj;
+			tasksProposal = (TasksProposal)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

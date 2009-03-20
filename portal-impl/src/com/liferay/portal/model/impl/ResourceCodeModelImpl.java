@@ -60,7 +60,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.ResourceCodeImpl
  *
  */
-public class ResourceCodeModelImpl extends BaseModelImpl {
+public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode> {
 	public static final String TABLE_NAME = "ResourceCode";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "codeId", new Integer(Types.BIGINT) },
@@ -207,13 +207,7 @@ public class ResourceCodeModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		ResourceCodeImpl resourceCode = (ResourceCodeImpl)obj;
-
+	public int compareTo(ResourceCode resourceCode) {
 		long pk = resourceCode.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -232,10 +226,10 @@ public class ResourceCodeModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		ResourceCodeImpl resourceCode = null;
+		ResourceCode resourceCode = null;
 
 		try {
-			resourceCode = (ResourceCodeImpl)obj;
+			resourceCode = (ResourceCode)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

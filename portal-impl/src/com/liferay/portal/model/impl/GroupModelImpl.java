@@ -62,7 +62,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.GroupImpl
  *
  */
-public class GroupModelImpl extends BaseModelImpl {
+public class GroupModelImpl extends BaseModelImpl<Group> {
 	public static final String TABLE_NAME = "Group_";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "groupId", new Integer(Types.BIGINT) },
@@ -382,13 +382,7 @@ public class GroupModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		GroupImpl group = (GroupImpl)obj;
-
+	public int compareTo(Group group) {
 		int value = 0;
 
 		value = getName().toLowerCase().compareTo(group.getName().toLowerCase());
@@ -405,10 +399,10 @@ public class GroupModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		GroupImpl group = null;
+		Group group = null;
 
 		try {
-			group = (GroupImpl)obj;
+			group = (Group)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

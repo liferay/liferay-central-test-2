@@ -62,7 +62,7 @@ import java.util.List;
  * @see com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl
  *
  */
-public class DLFileShortcutModelImpl extends BaseModelImpl {
+public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 	public static final String TABLE_NAME = "DLFileShortcut";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
@@ -315,13 +315,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		DLFileShortcutImpl dlFileShortcut = (DLFileShortcutImpl)obj;
-
+	public int compareTo(DLFileShortcut dlFileShortcut) {
 		long pk = dlFileShortcut.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -340,10 +334,10 @@ public class DLFileShortcutModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		DLFileShortcutImpl dlFileShortcut = null;
+		DLFileShortcut dlFileShortcut = null;
 
 		try {
-			dlFileShortcut = (DLFileShortcutImpl)obj;
+			dlFileShortcut = (DLFileShortcut)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

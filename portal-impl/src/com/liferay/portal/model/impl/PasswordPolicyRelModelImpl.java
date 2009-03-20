@@ -61,7 +61,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.PasswordPolicyRelImpl
  *
  */
-public class PasswordPolicyRelModelImpl extends BaseModelImpl {
+public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel> {
 	public static final String TABLE_NAME = "PasswordPolicyRel";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "passwordPolicyRelId", new Integer(Types.BIGINT) },
@@ -215,13 +215,7 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		PasswordPolicyRelImpl passwordPolicyRel = (PasswordPolicyRelImpl)obj;
-
+	public int compareTo(PasswordPolicyRel passwordPolicyRel) {
 		long pk = passwordPolicyRel.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -240,10 +234,10 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		PasswordPolicyRelImpl passwordPolicyRel = null;
+		PasswordPolicyRel passwordPolicyRel = null;
 
 		try {
-			passwordPolicyRel = (PasswordPolicyRelImpl)obj;
+			passwordPolicyRel = (PasswordPolicyRel)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

@@ -57,7 +57,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.ListTypeImpl
  *
  */
-public class ListTypeModelImpl extends BaseModelImpl {
+public class ListTypeModelImpl extends BaseModelImpl<ListType> {
 	public static final String TABLE_NAME = "ListType";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "listTypeId", new Integer(Types.INTEGER) },
@@ -181,13 +181,7 @@ public class ListTypeModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		ListTypeImpl listType = (ListTypeImpl)obj;
-
+	public int compareTo(ListType listType) {
 		int value = 0;
 
 		value = getName().toLowerCase()
@@ -205,10 +199,10 @@ public class ListTypeModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		ListTypeImpl listType = null;
+		ListType listType = null;
 
 		try {
-			listType = (ListTypeImpl)obj;
+			listType = (ListType)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

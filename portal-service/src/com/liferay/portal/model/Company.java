@@ -49,7 +49,7 @@ package com.liferay.portal.model;
  *
  */
 public interface Company extends CompanyModel {
-	public int compareTo(java.lang.Object obj);
+	public int compareTo(com.liferay.portal.model.Company company);
 
 	public com.liferay.portal.model.Account getAccount();
 

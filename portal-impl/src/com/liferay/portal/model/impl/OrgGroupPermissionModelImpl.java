@@ -57,7 +57,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.OrgGroupPermissionImpl
  *
  */
-public class OrgGroupPermissionModelImpl extends BaseModelImpl {
+public class OrgGroupPermissionModelImpl extends BaseModelImpl<OrgGroupPermission> {
 	public static final String TABLE_NAME = "OrgGroupPermission";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "organizationId", new Integer(Types.BIGINT) },
@@ -180,13 +180,7 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		OrgGroupPermissionImpl orgGroupPermission = (OrgGroupPermissionImpl)obj;
-
+	public int compareTo(OrgGroupPermission orgGroupPermission) {
 		OrgGroupPermissionPK pk = orgGroupPermission.getPrimaryKey();
 
 		return getPrimaryKey().compareTo(pk);
@@ -197,10 +191,10 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		OrgGroupPermissionImpl orgGroupPermission = null;
+		OrgGroupPermission orgGroupPermission = null;
 
 		try {
-			orgGroupPermission = (OrgGroupPermissionImpl)obj;
+			orgGroupPermission = (OrgGroupPermission)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

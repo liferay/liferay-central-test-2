@@ -46,7 +46,7 @@ import java.util.Date;
  * @see com.liferay.portlet.tags.model.impl.TagsVocabularyModelImpl
  *
  */
-public interface TagsVocabularyModel extends BaseModel {
+public interface TagsVocabularyModel extends BaseModel<TagsVocabulary> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

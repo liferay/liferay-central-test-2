@@ -46,7 +46,7 @@ import java.util.Date;
  * @see com.liferay.portlet.imagegallery.model.impl.IGImageModelImpl
  *
  */
-public interface IGImageModel extends BaseModel {
+public interface IGImageModel extends BaseModel<IGImage> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

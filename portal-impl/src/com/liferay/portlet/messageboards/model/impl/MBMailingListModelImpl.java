@@ -62,7 +62,7 @@ import java.util.List;
  * @see com.liferay.portlet.messageboards.model.impl.MBMailingListImpl
  *
  */
-public class MBMailingListModelImpl extends BaseModelImpl {
+public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	public static final String TABLE_NAME = "MBMailingList";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
@@ -595,13 +595,7 @@ public class MBMailingListModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		MBMailingListImpl mbMailingList = (MBMailingListImpl)obj;
-
+	public int compareTo(MBMailingList mbMailingList) {
 		long pk = mbMailingList.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -620,10 +614,10 @@ public class MBMailingListModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		MBMailingListImpl mbMailingList = null;
+		MBMailingList mbMailingList = null;
 
 		try {
-			mbMailingList = (MBMailingListImpl)obj;
+			mbMailingList = (MBMailingList)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

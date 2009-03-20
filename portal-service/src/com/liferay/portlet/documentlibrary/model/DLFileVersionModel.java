@@ -46,7 +46,7 @@ import java.util.Date;
  * @see com.liferay.portlet.documentlibrary.model.impl.DLFileVersionModelImpl
  *
  */
-public interface DLFileVersionModel extends BaseModel {
+public interface DLFileVersionModel extends BaseModel<DLFileVersion> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

@@ -46,7 +46,7 @@ import java.util.Date;
  * @see com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryModelImpl
  *
  */
-public interface SCProductEntryModel extends BaseModel {
+public interface SCProductEntryModel extends BaseModel<SCProductEntry> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

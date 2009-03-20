@@ -63,7 +63,7 @@ import java.util.List;
  * @see com.liferay.portlet.messageboards.model.impl.MBMessageImpl
  *
  */
-public class MBMessageModelImpl extends BaseModelImpl {
+public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	public static final String TABLE_NAME = "MBMessage";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
@@ -406,13 +406,7 @@ public class MBMessageModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		MBMessageImpl mbMessage = (MBMessageImpl)obj;
-
+	public int compareTo(MBMessage mbMessage) {
 		int value = 0;
 
 		value = DateUtil.compareTo(getCreateDate(), mbMessage.getCreateDate());
@@ -443,10 +437,10 @@ public class MBMessageModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		MBMessageImpl mbMessage = null;
+		MBMessage mbMessage = null;
 
 		try {
-			mbMessage = (MBMessageImpl)obj;
+			mbMessage = (MBMessage)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

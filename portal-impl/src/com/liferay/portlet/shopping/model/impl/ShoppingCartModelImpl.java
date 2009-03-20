@@ -62,7 +62,7 @@ import java.util.List;
  * @see com.liferay.portlet.shopping.model.impl.ShoppingCartImpl
  *
  */
-public class ShoppingCartModelImpl extends BaseModelImpl {
+public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart> {
 	public static final String TABLE_NAME = "ShoppingCart";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "cartId", new Integer(Types.BIGINT) },
@@ -338,13 +338,7 @@ public class ShoppingCartModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		ShoppingCartImpl shoppingCart = (ShoppingCartImpl)obj;
-
+	public int compareTo(ShoppingCart shoppingCart) {
 		long pk = shoppingCart.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -363,10 +357,10 @@ public class ShoppingCartModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		ShoppingCartImpl shoppingCart = null;
+		ShoppingCart shoppingCart = null;
 
 		try {
-			shoppingCart = (ShoppingCartImpl)obj;
+			shoppingCart = (ShoppingCart)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

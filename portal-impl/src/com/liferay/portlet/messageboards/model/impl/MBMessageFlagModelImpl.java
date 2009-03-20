@@ -60,7 +60,7 @@ import java.util.List;
  * @see com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl
  *
  */
-public class MBMessageFlagModelImpl extends BaseModelImpl {
+public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag> {
 	public static final String TABLE_NAME = "MBMessageFlag";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "messageFlagId", new Integer(Types.BIGINT) },
@@ -205,13 +205,7 @@ public class MBMessageFlagModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		MBMessageFlagImpl mbMessageFlag = (MBMessageFlagImpl)obj;
-
+	public int compareTo(MBMessageFlag mbMessageFlag) {
 		long pk = mbMessageFlag.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -230,10 +224,10 @@ public class MBMessageFlagModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		MBMessageFlagImpl mbMessageFlag = null;
+		MBMessageFlag mbMessageFlag = null;
 
 		try {
-			mbMessageFlag = (MBMessageFlagImpl)obj;
+			mbMessageFlag = (MBMessageFlag)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

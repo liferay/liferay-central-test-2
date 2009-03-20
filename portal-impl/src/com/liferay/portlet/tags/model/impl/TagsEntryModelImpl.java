@@ -62,7 +62,7 @@ import java.util.List;
  * @see com.liferay.portlet.tags.model.impl.TagsEntryImpl
  *
  */
-public class TagsEntryModelImpl extends BaseModelImpl {
+public class TagsEntryModelImpl extends BaseModelImpl<TagsEntry> {
 	public static final String TABLE_NAME = "TagsEntry";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "entryId", new Integer(Types.BIGINT) },
@@ -315,13 +315,7 @@ public class TagsEntryModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		TagsEntryImpl tagsEntry = (TagsEntryImpl)obj;
-
+	public int compareTo(TagsEntry tagsEntry) {
 		int value = 0;
 
 		value = getName().compareTo(tagsEntry.getName());
@@ -338,10 +332,10 @@ public class TagsEntryModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		TagsEntryImpl tagsEntry = null;
+		TagsEntry tagsEntry = null;
 
 		try {
-			tagsEntry = (TagsEntryImpl)obj;
+			tagsEntry = (TagsEntry)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

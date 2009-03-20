@@ -46,7 +46,7 @@ import java.util.Date;
  * @see com.liferay.portlet.shopping.model.impl.ShoppingOrderItemModelImpl
  *
  */
-public interface ShoppingOrderItemModel extends BaseModel {
+public interface ShoppingOrderItemModel extends BaseModel<ShoppingOrderItem> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

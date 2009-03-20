@@ -46,7 +46,7 @@ import java.util.Date;
  * @see com.liferay.portlet.documentlibrary.model.impl.DLFolderModelImpl
  *
  */
-public interface DLFolderModel extends BaseModel {
+public interface DLFolderModel extends BaseModel<DLFolder> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

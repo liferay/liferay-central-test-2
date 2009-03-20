@@ -62,7 +62,7 @@ import java.util.List;
  * @see com.liferay.portlet.wiki.model.impl.WikiNodeImpl
  *
  */
-public class WikiNodeModelImpl extends BaseModelImpl {
+public class WikiNodeModelImpl extends BaseModelImpl<WikiNode> {
 	public static final String TABLE_NAME = "WikiNode";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
@@ -336,13 +336,7 @@ public class WikiNodeModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		WikiNodeImpl wikiNode = (WikiNodeImpl)obj;
-
+	public int compareTo(WikiNode wikiNode) {
 		int value = 0;
 
 		value = getName().toLowerCase()
@@ -360,10 +354,10 @@ public class WikiNodeModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		WikiNodeImpl wikiNode = null;
+		WikiNode wikiNode = null;
 
 		try {
-			wikiNode = (WikiNodeImpl)obj;
+			wikiNode = (WikiNode)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

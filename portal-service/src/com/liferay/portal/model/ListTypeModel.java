@@ -43,7 +43,7 @@ package com.liferay.portal.model;
  * @see com.liferay.portal.model.impl.ListTypeModelImpl
  *
  */
-public interface ListTypeModel extends BaseModel {
+public interface ListTypeModel extends BaseModel<ListType> {
 	public int getPrimaryKey();
 
 	public void setPrimaryKey(int pk);

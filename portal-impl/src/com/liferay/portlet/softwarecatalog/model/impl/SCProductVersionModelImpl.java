@@ -63,7 +63,7 @@ import java.util.List;
  * @see com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl
  *
  */
-public class SCProductVersionModelImpl extends BaseModelImpl {
+public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 	public static final String TABLE_NAME = "SCProductVersion";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "productVersionId", new Integer(Types.BIGINT) },
@@ -363,13 +363,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		SCProductVersionImpl scProductVersion = (SCProductVersionImpl)obj;
-
+	public int compareTo(SCProductVersion scProductVersion) {
 		int value = 0;
 
 		value = DateUtil.compareTo(getCreateDate(),
@@ -389,10 +383,10 @@ public class SCProductVersionModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		SCProductVersionImpl scProductVersion = null;
+		SCProductVersion scProductVersion = null;
 
 		try {
-			scProductVersion = (SCProductVersionImpl)obj;
+			scProductVersion = (SCProductVersion)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

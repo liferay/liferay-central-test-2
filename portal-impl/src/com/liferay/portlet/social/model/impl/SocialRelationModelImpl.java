@@ -62,7 +62,7 @@ import java.util.List;
  * @see com.liferay.portlet.social.model.impl.SocialRelationImpl
  *
  */
-public class SocialRelationModelImpl extends BaseModelImpl {
+public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation> {
 	public static final String TABLE_NAME = "SocialRelation";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
@@ -258,13 +258,7 @@ public class SocialRelationModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		SocialRelationImpl socialRelation = (SocialRelationImpl)obj;
-
+	public int compareTo(SocialRelation socialRelation) {
 		long pk = socialRelation.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -283,10 +277,10 @@ public class SocialRelationModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		SocialRelationImpl socialRelation = null;
+		SocialRelation socialRelation = null;
 
 		try {
-			socialRelation = (SocialRelationImpl)obj;
+			socialRelation = (SocialRelation)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

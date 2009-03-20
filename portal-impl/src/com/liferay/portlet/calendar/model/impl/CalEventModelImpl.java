@@ -63,7 +63,7 @@ import java.util.List;
  * @see com.liferay.portlet.calendar.model.impl.CalEventImpl
  *
  */
-public class CalEventModelImpl extends BaseModelImpl {
+public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	public static final String TABLE_NAME = "CalEvent";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
@@ -536,13 +536,7 @@ public class CalEventModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		CalEventImpl calEvent = (CalEventImpl)obj;
-
+	public int compareTo(CalEvent calEvent) {
 		int value = 0;
 
 		value = DateUtil.compareTo(getStartDate(), calEvent.getStartDate());
@@ -566,10 +560,10 @@ public class CalEventModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		CalEventImpl calEvent = null;
+		CalEvent calEvent = null;
 
 		try {
-			calEvent = (CalEventImpl)obj;
+			calEvent = (CalEvent)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

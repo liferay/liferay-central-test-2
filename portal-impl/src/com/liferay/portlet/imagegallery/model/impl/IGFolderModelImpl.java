@@ -62,7 +62,7 @@ import java.util.List;
  * @see com.liferay.portlet.imagegallery.model.impl.IGFolderImpl
  *
  */
-public class IGFolderModelImpl extends BaseModelImpl {
+public class IGFolderModelImpl extends BaseModelImpl<IGFolder> {
 	public static final String TABLE_NAME = "IGFolder";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
@@ -314,13 +314,7 @@ public class IGFolderModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		IGFolderImpl igFolder = (IGFolderImpl)obj;
-
+	public int compareTo(IGFolder igFolder) {
 		int value = 0;
 
 		if (getFolderId() < igFolder.getFolderId()) {
@@ -352,10 +346,10 @@ public class IGFolderModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		IGFolderImpl igFolder = null;
+		IGFolder igFolder = null;
 
 		try {
-			igFolder = (IGFolderImpl)obj;
+			igFolder = (IGFolder)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

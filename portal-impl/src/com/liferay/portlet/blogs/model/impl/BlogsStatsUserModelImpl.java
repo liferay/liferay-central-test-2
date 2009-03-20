@@ -61,7 +61,7 @@ import java.util.List;
  * @see com.liferay.portlet.blogs.model.impl.BlogsStatsUserImpl
  *
  */
-public class BlogsStatsUserModelImpl extends BaseModelImpl {
+public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser> {
 	public static final String TABLE_NAME = "BlogsStatsUser";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "statsUserId", new Integer(Types.BIGINT) },
@@ -289,13 +289,7 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		BlogsStatsUserImpl blogsStatsUser = (BlogsStatsUserImpl)obj;
-
+	public int compareTo(BlogsStatsUser blogsStatsUser) {
 		int value = 0;
 
 		if (getEntryCount() < blogsStatsUser.getEntryCount()) {
@@ -322,10 +316,10 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		BlogsStatsUserImpl blogsStatsUser = null;
+		BlogsStatsUser blogsStatsUser = null;
 
 		try {
-			blogsStatsUser = (BlogsStatsUserImpl)obj;
+			blogsStatsUser = (BlogsStatsUser)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

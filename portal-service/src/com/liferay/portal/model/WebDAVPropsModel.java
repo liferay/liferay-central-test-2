@@ -44,7 +44,7 @@ import java.util.Date;
  * @see com.liferay.portal.model.impl.WebDAVPropsModelImpl
  *
  */
-public interface WebDAVPropsModel extends BaseModel {
+public interface WebDAVPropsModel extends BaseModel<WebDAVProps> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

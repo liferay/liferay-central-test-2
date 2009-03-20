@@ -62,7 +62,7 @@ import java.util.List;
  * @see com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl
  *
  */
-public class DLFolderModelImpl extends BaseModelImpl {
+public class DLFolderModelImpl extends BaseModelImpl<DLFolder> {
 	public static final String TABLE_NAME = "DLFolder";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
@@ -352,13 +352,7 @@ public class DLFolderModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		DLFolderImpl dlFolder = (DLFolderImpl)obj;
-
+	public int compareTo(DLFolder dlFolder) {
 		int value = 0;
 
 		if (getParentFolderId() < dlFolder.getParentFolderId()) {
@@ -390,10 +384,10 @@ public class DLFolderModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		DLFolderImpl dlFolder = null;
+		DLFolder dlFolder = null;
 
 		try {
-			dlFolder = (DLFolderImpl)obj;
+			dlFolder = (DLFolder)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

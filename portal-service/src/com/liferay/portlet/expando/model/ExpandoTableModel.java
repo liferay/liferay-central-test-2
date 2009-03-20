@@ -44,7 +44,7 @@ import com.liferay.portal.model.BaseModel;
  * @see com.liferay.portlet.expando.model.impl.ExpandoTableModelImpl
  *
  */
-public interface ExpandoTableModel extends BaseModel {
+public interface ExpandoTableModel extends BaseModel<ExpandoTable> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

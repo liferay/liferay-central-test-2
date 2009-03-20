@@ -62,7 +62,7 @@ import java.util.List;
  * @see com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl
  *
  */
-public class BookmarksEntryModelImpl extends BaseModelImpl {
+public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 	public static final String TABLE_NAME = "BookmarksEntry";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
@@ -348,13 +348,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		BookmarksEntryImpl bookmarksEntry = (BookmarksEntryImpl)obj;
-
+	public int compareTo(BookmarksEntry bookmarksEntry) {
 		int value = 0;
 
 		if (getFolderId() < bookmarksEntry.getFolderId()) {
@@ -386,10 +380,10 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		BookmarksEntryImpl bookmarksEntry = null;
+		BookmarksEntry bookmarksEntry = null;
 
 		try {
-			bookmarksEntry = (BookmarksEntryImpl)obj;
+			bookmarksEntry = (BookmarksEntry)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

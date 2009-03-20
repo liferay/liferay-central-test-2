@@ -60,7 +60,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.CompanyImpl
  *
  */
-public class CompanyModelImpl extends BaseModelImpl {
+public class CompanyModelImpl extends BaseModelImpl<Company> {
 	public static final String TABLE_NAME = "Company";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "companyId", new Integer(Types.BIGINT) },
@@ -280,13 +280,7 @@ public class CompanyModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		CompanyImpl company = (CompanyImpl)obj;
-
+	public int compareTo(Company company) {
 		long pk = company.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -305,10 +299,10 @@ public class CompanyModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		CompanyImpl company = null;
+		Company company = null;
 
 		try {
-			company = (CompanyImpl)obj;
+			company = (Company)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

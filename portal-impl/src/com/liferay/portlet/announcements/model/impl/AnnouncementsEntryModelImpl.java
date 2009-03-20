@@ -65,7 +65,7 @@ import java.util.List;
  * @see com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl
  *
  */
-public class AnnouncementsEntryModelImpl extends BaseModelImpl {
+public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntry> {
 	public static final String TABLE_NAME = "AnnouncementsEntry";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
@@ -455,13 +455,7 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		AnnouncementsEntryImpl announcementsEntry = (AnnouncementsEntryImpl)obj;
-
+	public int compareTo(AnnouncementsEntry announcementsEntry) {
 		int value = 0;
 
 		if (getPriority() < announcementsEntry.getPriority()) {
@@ -493,10 +487,10 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		AnnouncementsEntryImpl announcementsEntry = null;
+		AnnouncementsEntry announcementsEntry = null;
 
 		try {
-			announcementsEntry = (AnnouncementsEntryImpl)obj;
+			announcementsEntry = (AnnouncementsEntry)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

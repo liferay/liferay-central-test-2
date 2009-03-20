@@ -44,7 +44,7 @@ import com.liferay.portal.model.BaseModel;
  * @see com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotModelImpl
  *
  */
-public interface SCProductScreenshotModel extends BaseModel {
+public interface SCProductScreenshotModel extends BaseModel<SCProductScreenshot> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

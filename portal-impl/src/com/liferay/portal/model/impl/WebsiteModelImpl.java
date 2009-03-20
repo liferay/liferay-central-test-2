@@ -64,7 +64,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.WebsiteImpl
  *
  */
-public class WebsiteModelImpl extends BaseModelImpl {
+public class WebsiteModelImpl extends BaseModelImpl<Website> {
 	public static final String TABLE_NAME = "Website";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "websiteId", new Integer(Types.BIGINT) },
@@ -344,13 +344,7 @@ public class WebsiteModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		WebsiteImpl website = (WebsiteImpl)obj;
-
+	public int compareTo(Website website) {
 		int value = 0;
 
 		value = DateUtil.compareTo(getCreateDate(), website.getCreateDate());
@@ -367,10 +361,10 @@ public class WebsiteModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		WebsiteImpl website = null;
+		Website website = null;
 
 		try {
-			website = (WebsiteImpl)obj;
+			website = (Website)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

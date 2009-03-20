@@ -60,7 +60,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.LayoutSetImpl
  *
  */
-public class LayoutSetModelImpl extends BaseModelImpl {
+public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	public static final String TABLE_NAME = "LayoutSet";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "layoutSetId", new Integer(Types.BIGINT) },
@@ -374,13 +374,7 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		LayoutSetImpl layoutSet = (LayoutSetImpl)obj;
-
+	public int compareTo(LayoutSet layoutSet) {
 		long pk = layoutSet.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -399,10 +393,10 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		LayoutSetImpl layoutSet = null;
+		LayoutSet layoutSet = null;
 
 		try {
-			layoutSet = (LayoutSetImpl)obj;
+			layoutSet = (LayoutSet)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

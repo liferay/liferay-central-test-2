@@ -60,7 +60,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.ServiceComponentImpl
  *
  */
-public class ServiceComponentModelImpl extends BaseModelImpl {
+public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent> {
 	public static final String TABLE_NAME = "ServiceComponent";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "serviceComponentId", new Integer(Types.BIGINT) },
@@ -227,13 +227,7 @@ public class ServiceComponentModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		ServiceComponentImpl serviceComponent = (ServiceComponentImpl)obj;
-
+	public int compareTo(ServiceComponent serviceComponent) {
 		int value = 0;
 
 		value = getBuildNamespace()
@@ -269,10 +263,10 @@ public class ServiceComponentModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		ServiceComponentImpl serviceComponent = null;
+		ServiceComponent serviceComponent = null;
 
 		try {
-			serviceComponent = (ServiceComponentImpl)obj;
+			serviceComponent = (ServiceComponent)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

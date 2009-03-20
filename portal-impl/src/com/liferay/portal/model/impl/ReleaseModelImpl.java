@@ -60,7 +60,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.ReleaseImpl
  *
  */
-public class ReleaseModelImpl extends BaseModelImpl {
+public class ReleaseModelImpl extends BaseModelImpl<Release> {
 	public static final String TABLE_NAME = "Release_";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "releaseId", new Integer(Types.BIGINT) },
@@ -250,13 +250,7 @@ public class ReleaseModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		ReleaseImpl release = (ReleaseImpl)obj;
-
+	public int compareTo(Release release) {
 		long pk = release.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -275,10 +269,10 @@ public class ReleaseModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		ReleaseImpl release = null;
+		Release release = null;
 
 		try {
-			release = (ReleaseImpl)obj;
+			release = (Release)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

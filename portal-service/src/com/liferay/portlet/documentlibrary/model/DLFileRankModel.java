@@ -46,7 +46,7 @@ import java.util.Date;
  * @see com.liferay.portlet.documentlibrary.model.impl.DLFileRankModelImpl
  *
  */
-public interface DLFileRankModel extends BaseModel {
+public interface DLFileRankModel extends BaseModel<DLFileRank> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

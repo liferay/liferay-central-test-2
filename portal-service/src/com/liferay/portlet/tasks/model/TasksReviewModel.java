@@ -46,7 +46,7 @@ import java.util.Date;
  * @see com.liferay.portlet.tasks.model.impl.TasksReviewModelImpl
  *
  */
-public interface TasksReviewModel extends BaseModel {
+public interface TasksReviewModel extends BaseModel<TasksReview> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

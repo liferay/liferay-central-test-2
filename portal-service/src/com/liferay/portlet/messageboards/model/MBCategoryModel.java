@@ -46,7 +46,7 @@ import java.util.Date;
  * @see com.liferay.portlet.messageboards.model.impl.MBCategoryModelImpl
  *
  */
-public interface MBCategoryModel extends BaseModel {
+public interface MBCategoryModel extends BaseModel<MBCategory> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

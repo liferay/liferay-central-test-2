@@ -46,7 +46,7 @@ import java.util.Date;
  * @see com.liferay.portlet.messageboards.model.impl.MBBanModelImpl
  *
  */
-public interface MBBanModel extends BaseModel {
+public interface MBBanModel extends BaseModel<MBBan> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

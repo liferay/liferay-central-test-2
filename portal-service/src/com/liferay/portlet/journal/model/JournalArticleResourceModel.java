@@ -44,7 +44,7 @@ import com.liferay.portal.model.BaseModel;
  * @see com.liferay.portlet.journal.model.impl.JournalArticleResourceModelImpl
  *
  */
-public interface JournalArticleResourceModel extends BaseModel {
+public interface JournalArticleResourceModel extends BaseModel<JournalArticleResource> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

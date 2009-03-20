@@ -62,7 +62,7 @@ import java.util.List;
  * @see com.liferay.portlet.ratings.model.impl.RatingsStatsImpl
  *
  */
-public class RatingsStatsModelImpl extends BaseModelImpl {
+public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats> {
 	public static final String TABLE_NAME = "RatingsStats";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "statsId", new Integer(Types.BIGINT) },
@@ -247,13 +247,7 @@ public class RatingsStatsModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		RatingsStatsImpl ratingsStats = (RatingsStatsImpl)obj;
-
+	public int compareTo(RatingsStats ratingsStats) {
 		long pk = ratingsStats.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -272,10 +266,10 @@ public class RatingsStatsModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		RatingsStatsImpl ratingsStats = null;
+		RatingsStats ratingsStats = null;
 
 		try {
-			ratingsStats = (RatingsStatsImpl)obj;
+			ratingsStats = (RatingsStats)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

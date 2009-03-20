@@ -62,7 +62,7 @@ import java.util.List;
  * @see com.liferay.portlet.journal.model.impl.JournalArticleImpl
  *
  */
-public class JournalArticleModelImpl extends BaseModelImpl {
+public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	public static final String TABLE_NAME = "JournalArticle";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
@@ -669,13 +669,7 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		JournalArticleImpl journalArticle = (JournalArticleImpl)obj;
-
+	public int compareTo(JournalArticle journalArticle) {
 		int value = 0;
 
 		value = getArticleId().compareTo(journalArticle.getArticleId());
@@ -708,10 +702,10 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		JournalArticleImpl journalArticle = null;
+		JournalArticle journalArticle = null;
 
 		try {
-			journalArticle = (JournalArticleImpl)obj;
+			journalArticle = (JournalArticle)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

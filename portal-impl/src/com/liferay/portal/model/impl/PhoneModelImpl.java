@@ -64,7 +64,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.PhoneImpl
  *
  */
-public class PhoneModelImpl extends BaseModelImpl {
+public class PhoneModelImpl extends BaseModelImpl<Phone> {
 	public static final String TABLE_NAME = "Phone";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "phoneId", new Integer(Types.BIGINT) },
@@ -363,13 +363,7 @@ public class PhoneModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		PhoneImpl phone = (PhoneImpl)obj;
-
+	public int compareTo(Phone phone) {
 		int value = 0;
 
 		value = DateUtil.compareTo(getCreateDate(), phone.getCreateDate());
@@ -386,10 +380,10 @@ public class PhoneModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		PhoneImpl phone = null;
+		Phone phone = null;
 
 		try {
-			phone = (PhoneImpl)obj;
+			phone = (Phone)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

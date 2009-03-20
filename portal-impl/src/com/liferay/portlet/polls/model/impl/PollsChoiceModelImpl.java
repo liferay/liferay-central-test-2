@@ -61,7 +61,7 @@ import java.util.List;
  * @see com.liferay.portlet.polls.model.impl.PollsChoiceImpl
  *
  */
-public class PollsChoiceModelImpl extends BaseModelImpl {
+public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice> {
 	public static final String TABLE_NAME = "PollsChoice";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
@@ -227,13 +227,7 @@ public class PollsChoiceModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		PollsChoiceImpl pollsChoice = (PollsChoiceImpl)obj;
-
+	public int compareTo(PollsChoice pollsChoice) {
 		int value = 0;
 
 		if (getQuestionId() < pollsChoice.getQuestionId()) {
@@ -264,10 +258,10 @@ public class PollsChoiceModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		PollsChoiceImpl pollsChoice = null;
+		PollsChoice pollsChoice = null;
 
 		try {
-			pollsChoice = (PollsChoiceImpl)obj;
+			pollsChoice = (PollsChoice)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

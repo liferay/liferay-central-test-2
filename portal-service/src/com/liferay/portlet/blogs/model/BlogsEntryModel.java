@@ -46,7 +46,7 @@ import java.util.Date;
  * @see com.liferay.portlet.blogs.model.impl.BlogsEntryModelImpl
  *
  */
-public interface BlogsEntryModel extends BaseModel {
+public interface BlogsEntryModel extends BaseModel<BlogsEntry> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

@@ -44,7 +44,7 @@ import java.util.Date;
  * @see com.liferay.portal.model.impl.PasswordTrackerModelImpl
  *
  */
-public interface PasswordTrackerModel extends BaseModel {
+public interface PasswordTrackerModel extends BaseModel<PasswordTracker> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

@@ -64,7 +64,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.EmailAddressImpl
  *
  */
-public class EmailAddressModelImpl extends BaseModelImpl {
+public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress> {
 	public static final String TABLE_NAME = "EmailAddress";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "emailAddressId", new Integer(Types.BIGINT) },
@@ -345,13 +345,7 @@ public class EmailAddressModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		EmailAddressImpl emailAddress = (EmailAddressImpl)obj;
-
+	public int compareTo(EmailAddress emailAddress) {
 		int value = 0;
 
 		value = DateUtil.compareTo(getCreateDate(), emailAddress.getCreateDate());
@@ -368,10 +362,10 @@ public class EmailAddressModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		EmailAddressImpl emailAddress = null;
+		EmailAddress emailAddress = null;
 
 		try {
-			emailAddress = (EmailAddressImpl)obj;
+			emailAddress = (EmailAddress)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

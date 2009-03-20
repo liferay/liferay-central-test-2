@@ -46,7 +46,7 @@ import java.util.Date;
  * @see com.liferay.portlet.polls.model.impl.PollsQuestionModelImpl
  *
  */
-public interface PollsQuestionModel extends BaseModel {
+public interface PollsQuestionModel extends BaseModel<PollsQuestion> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

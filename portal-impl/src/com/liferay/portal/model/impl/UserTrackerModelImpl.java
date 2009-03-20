@@ -61,7 +61,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.UserTrackerImpl
  *
  */
-public class UserTrackerModelImpl extends BaseModelImpl {
+public class UserTrackerModelImpl extends BaseModelImpl<UserTracker> {
 	public static final String TABLE_NAME = "UserTracker";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "userTrackerId", new Integer(Types.BIGINT) },
@@ -285,13 +285,7 @@ public class UserTrackerModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		UserTrackerImpl userTracker = (UserTrackerImpl)obj;
-
+	public int compareTo(UserTracker userTracker) {
 		long pk = userTracker.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -310,10 +304,10 @@ public class UserTrackerModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		UserTrackerImpl userTracker = null;
+		UserTracker userTracker = null;
 
 		try {
-			userTracker = (UserTrackerImpl)obj;
+			userTracker = (UserTracker)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

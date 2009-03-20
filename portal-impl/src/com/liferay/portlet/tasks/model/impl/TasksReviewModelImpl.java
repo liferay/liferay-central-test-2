@@ -63,7 +63,7 @@ import java.util.List;
  * @see com.liferay.portlet.tasks.model.impl.TasksReviewImpl
  *
  */
-public class TasksReviewModelImpl extends BaseModelImpl {
+public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {
 	public static final String TABLE_NAME = "TasksReview";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "reviewId", new Integer(Types.BIGINT) },
@@ -372,13 +372,7 @@ public class TasksReviewModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		TasksReviewImpl tasksReview = (TasksReviewImpl)obj;
-
+	public int compareTo(TasksReview tasksReview) {
 		int value = 0;
 
 		value = DateUtil.compareTo(getCreateDate(), tasksReview.getCreateDate());
@@ -395,10 +389,10 @@ public class TasksReviewModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		TasksReviewImpl tasksReview = null;
+		TasksReview tasksReview = null;
 
 		try {
-			tasksReview = (TasksReviewImpl)obj;
+			tasksReview = (TasksReview)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

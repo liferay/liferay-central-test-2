@@ -44,7 +44,7 @@ import java.util.Date;
  * @see com.liferay.portal.model.impl.WebsiteModelImpl
  *
  */
-public interface WebsiteModel extends BaseModel {
+public interface WebsiteModel extends BaseModel<Website> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

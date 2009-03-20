@@ -44,7 +44,7 @@ import com.liferay.portal.model.BaseModel;
  * @see com.liferay.portlet.polls.model.impl.PollsChoiceModelImpl
  *
  */
-public interface PollsChoiceModel extends BaseModel {
+public interface PollsChoiceModel extends BaseModel<PollsChoice> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

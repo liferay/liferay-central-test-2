@@ -46,7 +46,7 @@ import java.util.Date;
  * @see com.liferay.portlet.announcements.model.impl.AnnouncementsEntryModelImpl
  *
  */
-public interface AnnouncementsEntryModel extends BaseModel {
+public interface AnnouncementsEntryModel extends BaseModel<AnnouncementsEntry> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

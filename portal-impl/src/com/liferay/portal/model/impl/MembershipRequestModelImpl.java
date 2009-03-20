@@ -62,7 +62,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.MembershipRequestImpl
  *
  */
-public class MembershipRequestModelImpl extends BaseModelImpl {
+public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest> {
 	public static final String TABLE_NAME = "MembershipRequest";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "membershipRequestId", new Integer(Types.BIGINT) },
@@ -316,13 +316,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		MembershipRequestImpl membershipRequest = (MembershipRequestImpl)obj;
-
+	public int compareTo(MembershipRequest membershipRequest) {
 		int value = 0;
 
 		value = DateUtil.compareTo(getCreateDate(),
@@ -342,10 +336,10 @@ public class MembershipRequestModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		MembershipRequestImpl membershipRequest = null;
+		MembershipRequest membershipRequest = null;
 
 		try {
-			membershipRequest = (MembershipRequestImpl)obj;
+			membershipRequest = (MembershipRequest)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

@@ -62,7 +62,7 @@ import java.util.List;
  * @see com.liferay.portlet.wiki.model.impl.WikiPageImpl
  *
  */
-public class WikiPageModelImpl extends BaseModelImpl {
+public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	public static final String TABLE_NAME = "WikiPage";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
@@ -465,13 +465,7 @@ public class WikiPageModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		WikiPageImpl wikiPage = (WikiPageImpl)obj;
-
+	public int compareTo(WikiPage wikiPage) {
 		int value = 0;
 
 		if (getNodeId() < wikiPage.getNodeId()) {
@@ -517,10 +511,10 @@ public class WikiPageModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		WikiPageImpl wikiPage = null;
+		WikiPage wikiPage = null;
 
 		try {
-			wikiPage = (WikiPageImpl)obj;
+			wikiPage = (WikiPage)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

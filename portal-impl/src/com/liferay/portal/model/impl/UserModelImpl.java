@@ -61,7 +61,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.UserImpl
  *
  */
-public class UserModelImpl extends BaseModelImpl {
+public class UserModelImpl extends BaseModelImpl<User> {
 	public static final String TABLE_NAME = "User_";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
@@ -755,13 +755,7 @@ public class UserModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		UserImpl user = (UserImpl)obj;
-
+	public int compareTo(User user) {
 		long pk = user.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -780,10 +774,10 @@ public class UserModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		UserImpl user = null;
+		User user = null;
 
 		try {
-			user = (UserImpl)obj;
+			user = (User)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

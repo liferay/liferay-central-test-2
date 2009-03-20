@@ -523,7 +523,7 @@ public interface Portlet extends PortletModel {
 
 	public java.lang.Object clone();
 
-	public int compareTo(java.lang.Object obj);
+	public int compareTo(com.liferay.portal.model.Portlet portlet);
 
 	public boolean equals(java.lang.Object obj);
 }

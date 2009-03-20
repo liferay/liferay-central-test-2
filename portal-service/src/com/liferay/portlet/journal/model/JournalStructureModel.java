@@ -46,7 +46,7 @@ import java.util.Date;
  * @see com.liferay.portlet.journal.model.impl.JournalStructureModelImpl
  *
  */
-public interface JournalStructureModel extends BaseModel {
+public interface JournalStructureModel extends BaseModel<JournalStructure> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

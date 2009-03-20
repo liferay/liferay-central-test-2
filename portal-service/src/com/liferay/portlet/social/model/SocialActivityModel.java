@@ -46,7 +46,7 @@ import java.util.Date;
  * @see com.liferay.portlet.social.model.impl.SocialActivityModelImpl
  *
  */
-public interface SocialActivityModel extends BaseModel {
+public interface SocialActivityModel extends BaseModel<SocialActivity> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

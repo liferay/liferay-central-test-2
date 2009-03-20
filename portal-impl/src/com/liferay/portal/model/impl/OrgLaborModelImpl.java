@@ -59,7 +59,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.OrgLaborImpl
  *
  */
-public class OrgLaborModelImpl extends BaseModelImpl {
+public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor> {
 	public static final String TABLE_NAME = "OrgLabor";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "orgLaborId", new Integer(Types.BIGINT) },
@@ -412,13 +412,7 @@ public class OrgLaborModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		OrgLaborImpl orgLabor = (OrgLaborImpl)obj;
-
+	public int compareTo(OrgLabor orgLabor) {
 		int value = 0;
 
 		if (getOrganizationId() < orgLabor.getOrganizationId()) {
@@ -457,10 +451,10 @@ public class OrgLaborModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		OrgLaborImpl orgLabor = null;
+		OrgLabor orgLabor = null;
 
 		try {
-			orgLabor = (OrgLaborImpl)obj;
+			orgLabor = (OrgLabor)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

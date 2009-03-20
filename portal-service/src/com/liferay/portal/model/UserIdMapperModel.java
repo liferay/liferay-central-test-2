@@ -43,7 +43,7 @@ package com.liferay.portal.model;
  * @see com.liferay.portal.model.impl.UserIdMapperModelImpl
  *
  */
-public interface UserIdMapperModel extends BaseModel {
+public interface UserIdMapperModel extends BaseModel<UserIdMapper> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

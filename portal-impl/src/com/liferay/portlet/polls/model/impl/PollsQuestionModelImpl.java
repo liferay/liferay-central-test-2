@@ -63,7 +63,7 @@ import java.util.List;
  * @see com.liferay.portlet.polls.model.impl.PollsQuestionImpl
  *
  */
-public class PollsQuestionModelImpl extends BaseModelImpl {
+public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 	public static final String TABLE_NAME = "PollsQuestion";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
@@ -356,13 +356,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		PollsQuestionImpl pollsQuestion = (PollsQuestionImpl)obj;
-
+	public int compareTo(PollsQuestion pollsQuestion) {
 		int value = 0;
 
 		value = DateUtil.compareTo(getCreateDate(),
@@ -382,10 +376,10 @@ public class PollsQuestionModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		PollsQuestionImpl pollsQuestion = null;
+		PollsQuestion pollsQuestion = null;
 
 		try {
-			pollsQuestion = (PollsQuestionImpl)obj;
+			pollsQuestion = (PollsQuestion)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

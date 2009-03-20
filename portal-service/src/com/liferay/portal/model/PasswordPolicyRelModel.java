@@ -43,7 +43,7 @@ package com.liferay.portal.model;
  * @see com.liferay.portal.model.impl.PasswordPolicyRelModelImpl
  *
  */
-public interface PasswordPolicyRelModel extends BaseModel {
+public interface PasswordPolicyRelModel extends BaseModel<PasswordPolicyRel> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

@@ -44,7 +44,7 @@ import com.liferay.portal.model.BaseModel;
  * @see com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelImpl
  *
  */
-public interface AnnouncementsDeliveryModel extends BaseModel {
+public interface AnnouncementsDeliveryModel extends BaseModel<AnnouncementsDelivery> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

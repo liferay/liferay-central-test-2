@@ -60,7 +60,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.PortletPreferencesImpl
  *
  */
-public class PortletPreferencesModelImpl extends BaseModelImpl {
+public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreferences> {
 	public static final String TABLE_NAME = "PortletPreferences";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "portletPreferencesId", new Integer(Types.BIGINT) },
@@ -244,13 +244,7 @@ public class PortletPreferencesModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		PortletPreferencesImpl portletPreferences = (PortletPreferencesImpl)obj;
-
+	public int compareTo(PortletPreferences portletPreferences) {
 		long pk = portletPreferences.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -269,10 +263,10 @@ public class PortletPreferencesModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		PortletPreferencesImpl portletPreferences = null;
+		PortletPreferences portletPreferences = null;
 
 		try {
-			portletPreferences = (PortletPreferencesImpl)obj;
+			portletPreferences = (PortletPreferences)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

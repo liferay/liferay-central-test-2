@@ -61,7 +61,7 @@ import java.util.List;
  * @see com.liferay.portlet.tags.model.impl.TagsSourceImpl
  *
  */
-public class TagsSourceModelImpl extends BaseModelImpl {
+public class TagsSourceModelImpl extends BaseModelImpl<TagsSource> {
 	public static final String TABLE_NAME = "TagsSource";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "sourceId", new Integer(Types.BIGINT) },
@@ -211,13 +211,7 @@ public class TagsSourceModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		TagsSourceImpl tagsSource = (TagsSourceImpl)obj;
-
+	public int compareTo(TagsSource tagsSource) {
 		long pk = tagsSource.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -236,10 +230,10 @@ public class TagsSourceModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		TagsSourceImpl tagsSource = null;
+		TagsSource tagsSource = null;
 
 		try {
-			tagsSource = (TagsSourceImpl)obj;
+			tagsSource = (TagsSource)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

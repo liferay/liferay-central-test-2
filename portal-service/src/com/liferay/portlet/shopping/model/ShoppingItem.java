@@ -58,7 +58,7 @@ public interface ShoppingItem extends ShoppingItemModel {
 	public void setFieldsQuantitiesArray(
 		java.lang.String[] fieldsQuantitiesArray);
 
-	public int compareTo(java.lang.Object obj);
+	public int compareTo(com.liferay.portlet.shopping.model.ShoppingItem item);
 
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getItemPrices()
 		throws com.liferay.portal.PortalException,

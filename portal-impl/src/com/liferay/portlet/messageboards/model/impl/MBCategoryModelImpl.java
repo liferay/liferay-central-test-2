@@ -62,7 +62,7 @@ import java.util.List;
  * @see com.liferay.portlet.messageboards.model.impl.MBCategoryImpl
  *
  */
-public class MBCategoryModelImpl extends BaseModelImpl {
+public class MBCategoryModelImpl extends BaseModelImpl<MBCategory> {
 	public static final String TABLE_NAME = "MBCategory";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
@@ -384,13 +384,7 @@ public class MBCategoryModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		MBCategoryImpl mbCategory = (MBCategoryImpl)obj;
-
+	public int compareTo(MBCategory mbCategory) {
 		int value = 0;
 
 		if (getParentCategoryId() < mbCategory.getParentCategoryId()) {
@@ -422,10 +416,10 @@ public class MBCategoryModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		MBCategoryImpl mbCategory = null;
+		MBCategory mbCategory = null;
 
 		try {
-			mbCategory = (MBCategoryImpl)obj;
+			mbCategory = (MBCategory)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

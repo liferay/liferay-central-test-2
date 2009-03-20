@@ -43,7 +43,7 @@ package com.liferay.portal.model;
  * @see com.liferay.portal.model.impl.PluginSettingModelImpl
  *
  */
-public interface PluginSettingModel extends BaseModel {
+public interface PluginSettingModel extends BaseModel<PluginSetting> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

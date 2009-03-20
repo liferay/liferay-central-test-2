@@ -46,7 +46,7 @@ import java.util.Date;
  * @see com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutModelImpl
  *
  */
-public interface DLFileShortcutModel extends BaseModel {
+public interface DLFileShortcutModel extends BaseModel<DLFileShortcut> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

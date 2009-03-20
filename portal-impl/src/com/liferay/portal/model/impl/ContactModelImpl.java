@@ -61,7 +61,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.ContactImpl
  *
  */
-public class ContactModelImpl extends BaseModelImpl {
+public class ContactModelImpl extends BaseModelImpl<Contact> {
 	public static final String TABLE_NAME = "Contact_";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "contactId", new Integer(Types.BIGINT) },
@@ -687,13 +687,7 @@ public class ContactModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		ContactImpl contact = (ContactImpl)obj;
-
+	public int compareTo(Contact contact) {
 		long pk = contact.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -712,10 +706,10 @@ public class ContactModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		ContactImpl contact = null;
+		Contact contact = null;
 
 		try {
-			contact = (ContactImpl)obj;
+			contact = (Contact)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

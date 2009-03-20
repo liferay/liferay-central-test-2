@@ -62,7 +62,7 @@ import java.util.List;
  * @see com.liferay.portlet.imagegallery.model.impl.IGImageImpl
  *
  */
-public class IGImageModelImpl extends BaseModelImpl {
+public class IGImageModelImpl extends BaseModelImpl<IGImage> {
 	public static final String TABLE_NAME = "IGImage";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
@@ -362,13 +362,7 @@ public class IGImageModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		IGImageImpl igImage = (IGImageImpl)obj;
-
+	public int compareTo(IGImage igImage) {
 		int value = 0;
 
 		if (getImageId() < igImage.getImageId()) {
@@ -393,10 +387,10 @@ public class IGImageModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		IGImageImpl igImage = null;
+		IGImage igImage = null;
 
 		try {
-			igImage = (IGImageImpl)obj;
+			igImage = (IGImage)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

@@ -46,7 +46,7 @@ import java.util.Date;
  * @see com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionModelImpl
  *
  */
-public interface SCProductVersionModel extends BaseModel {
+public interface SCProductVersionModel extends BaseModel<SCProductVersion> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

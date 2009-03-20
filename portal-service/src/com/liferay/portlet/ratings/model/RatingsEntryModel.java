@@ -46,7 +46,7 @@ import java.util.Date;
  * @see com.liferay.portlet.ratings.model.impl.RatingsEntryModelImpl
  *
  */
-public interface RatingsEntryModel extends BaseModel {
+public interface RatingsEntryModel extends BaseModel<RatingsEntry> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

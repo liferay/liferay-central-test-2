@@ -46,7 +46,7 @@ import java.util.Date;
  * @see com.liferay.portlet.calendar.model.impl.CalEventModelImpl
  *
  */
-public interface CalEventModel extends BaseModel {
+public interface CalEventModel extends BaseModel<CalEvent> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

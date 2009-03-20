@@ -61,7 +61,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.ImageImpl
  *
  */
-public class ImageModelImpl extends BaseModelImpl {
+public class ImageModelImpl extends BaseModelImpl<Image> {
 	public static final String TABLE_NAME = "Image";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "imageId", new Integer(Types.BIGINT) },
@@ -260,13 +260,7 @@ public class ImageModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		ImageImpl image = (ImageImpl)obj;
-
+	public int compareTo(Image image) {
 		int value = 0;
 
 		if (getImageId() < image.getImageId()) {
@@ -291,10 +285,10 @@ public class ImageModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		ImageImpl image = null;
+		Image image = null;
 
 		try {
-			image = (ImageImpl)obj;
+			image = (Image)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

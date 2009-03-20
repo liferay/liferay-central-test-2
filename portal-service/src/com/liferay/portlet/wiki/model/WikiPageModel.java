@@ -46,7 +46,7 @@ import java.util.Date;
  * @see com.liferay.portlet.wiki.model.impl.WikiPageModelImpl
  *
  */
-public interface WikiPageModel extends BaseModel {
+public interface WikiPageModel extends BaseModel<WikiPage> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

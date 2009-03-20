@@ -43,7 +43,7 @@ package com.liferay.portal.model;
  * @see com.liferay.portal.model.impl.ServiceComponentModelImpl
  *
  */
-public interface ServiceComponentModel extends BaseModel {
+public interface ServiceComponentModel extends BaseModel<ServiceComponent> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

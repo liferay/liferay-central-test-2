@@ -60,7 +60,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.CountryImpl
  *
  */
-public class CountryModelImpl extends BaseModelImpl {
+public class CountryModelImpl extends BaseModelImpl<Country> {
 	public static final String TABLE_NAME = "Country";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "countryId", new Integer(Types.BIGINT) },
@@ -266,13 +266,7 @@ public class CountryModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		CountryImpl country = (CountryImpl)obj;
-
+	public int compareTo(Country country) {
 		int value = 0;
 
 		value = getName().compareTo(country.getName());
@@ -289,10 +283,10 @@ public class CountryModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		CountryImpl country = null;
+		Country country = null;
 
 		try {
-			country = (CountryImpl)obj;
+			country = (Country)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

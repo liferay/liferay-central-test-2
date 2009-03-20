@@ -62,7 +62,7 @@ import java.util.List;
  * @see com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl
  *
  */
-public class DLFileVersionModelImpl extends BaseModelImpl {
+public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	public static final String TABLE_NAME = "DLFileVersion";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "fileVersionId", new Integer(Types.BIGINT) },
@@ -295,13 +295,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		DLFileVersionImpl dlFileVersion = (DLFileVersionImpl)obj;
-
+	public int compareTo(DLFileVersion dlFileVersion) {
 		int value = 0;
 
 		if (getFolderId() < dlFileVersion.getFolderId()) {
@@ -352,10 +346,10 @@ public class DLFileVersionModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		DLFileVersionImpl dlFileVersion = null;
+		DLFileVersion dlFileVersion = null;
 
 		try {
-			dlFileVersion = (DLFileVersionImpl)obj;
+			dlFileVersion = (DLFileVersion)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

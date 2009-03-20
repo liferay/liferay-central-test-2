@@ -43,7 +43,7 @@ package com.liferay.portal.model;
  * @see com.liferay.portal.model.impl.CompanyModelImpl
  *
  */
-public interface CompanyModel extends BaseModel {
+public interface CompanyModel extends BaseModel<Company> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

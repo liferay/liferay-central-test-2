@@ -46,7 +46,7 @@ import java.util.Date;
  * @see com.liferay.portlet.messageboards.model.impl.MBMessageModelImpl
  *
  */
-public interface MBMessageModel extends BaseModel {
+public interface MBMessageModel extends BaseModel<MBMessage> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

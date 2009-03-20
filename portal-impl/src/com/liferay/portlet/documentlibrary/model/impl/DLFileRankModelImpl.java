@@ -63,7 +63,7 @@ import java.util.List;
  * @see com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl
  *
  */
-public class DLFileRankModelImpl extends BaseModelImpl {
+public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {
 	public static final String TABLE_NAME = "DLFileRank";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "fileRankId", new Integer(Types.BIGINT) },
@@ -245,13 +245,7 @@ public class DLFileRankModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		DLFileRankImpl dlFileRank = (DLFileRankImpl)obj;
-
+	public int compareTo(DLFileRank dlFileRank) {
 		int value = 0;
 
 		value = DateUtil.compareTo(getCreateDate(), dlFileRank.getCreateDate());
@@ -270,10 +264,10 @@ public class DLFileRankModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		DLFileRankImpl dlFileRank = null;
+		DLFileRank dlFileRank = null;
 
 		try {
-			dlFileRank = (DLFileRankImpl)obj;
+			dlFileRank = (DLFileRank)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

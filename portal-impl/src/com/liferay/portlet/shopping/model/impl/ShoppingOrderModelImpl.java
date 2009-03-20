@@ -63,7 +63,7 @@ import java.util.List;
  * @see com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl
  *
  */
-public class ShoppingOrderModelImpl extends BaseModelImpl {
+public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	public static final String TABLE_NAME = "ShoppingOrder";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "orderId", new Integer(Types.BIGINT) },
@@ -1091,13 +1091,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		ShoppingOrderImpl shoppingOrder = (ShoppingOrderImpl)obj;
-
+	public int compareTo(ShoppingOrder shoppingOrder) {
 		int value = 0;
 
 		value = DateUtil.compareTo(getCreateDate(),
@@ -1117,10 +1111,10 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		ShoppingOrderImpl shoppingOrder = null;
+		ShoppingOrder shoppingOrder = null;
 
 		try {
-			shoppingOrder = (ShoppingOrderImpl)obj;
+			shoppingOrder = (ShoppingOrder)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

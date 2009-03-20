@@ -61,7 +61,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.AccountImpl
  *
  */
-public class AccountModelImpl extends BaseModelImpl {
+public class AccountModelImpl extends BaseModelImpl<Account> {
 	public static final String TABLE_NAME = "Account_";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "accountId", new Integer(Types.BIGINT) },
@@ -431,13 +431,7 @@ public class AccountModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		AccountImpl account = (AccountImpl)obj;
-
+	public int compareTo(Account account) {
 		long pk = account.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -456,10 +450,10 @@ public class AccountModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		AccountImpl account = null;
+		Account account = null;
 
 		try {
-			account = (AccountImpl)obj;
+			account = (Account)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

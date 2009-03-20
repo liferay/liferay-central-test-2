@@ -43,7 +43,7 @@ package com.liferay.portal.model;
  * @see com.liferay.portal.model.impl.ShardModelImpl
  *
  */
-public interface ShardModel extends BaseModel {
+public interface ShardModel extends BaseModel<Shard> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

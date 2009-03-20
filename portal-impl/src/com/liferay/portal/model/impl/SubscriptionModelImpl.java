@@ -63,7 +63,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.SubscriptionImpl
  *
  */
-public class SubscriptionModelImpl extends BaseModelImpl {
+public class SubscriptionModelImpl extends BaseModelImpl<Subscription> {
 	public static final String TABLE_NAME = "Subscription";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "subscriptionId", new Integer(Types.BIGINT) },
@@ -308,13 +308,7 @@ public class SubscriptionModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		SubscriptionImpl subscription = (SubscriptionImpl)obj;
-
+	public int compareTo(Subscription subscription) {
 		long pk = subscription.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -333,10 +327,10 @@ public class SubscriptionModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		SubscriptionImpl subscription = null;
+		Subscription subscription = null;
 
 		try {
-			subscription = (SubscriptionImpl)obj;
+			subscription = (Subscription)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

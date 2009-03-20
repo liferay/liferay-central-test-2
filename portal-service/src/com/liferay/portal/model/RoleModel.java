@@ -43,7 +43,7 @@ package com.liferay.portal.model;
  * @see com.liferay.portal.model.impl.RoleModelImpl
  *
  */
-public interface RoleModel extends BaseModel {
+public interface RoleModel extends BaseModel<Role> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

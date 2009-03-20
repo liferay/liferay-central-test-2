@@ -46,7 +46,7 @@ import java.util.Date;
  * @see com.liferay.portlet.tags.model.impl.TagsAssetModelImpl
  *
  */
-public interface TagsAssetModel extends BaseModel {
+public interface TagsAssetModel extends BaseModel<TagsAsset> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

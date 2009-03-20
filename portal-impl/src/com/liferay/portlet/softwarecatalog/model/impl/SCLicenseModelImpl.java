@@ -61,7 +61,7 @@ import java.util.List;
  * @see com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl
  *
  */
-public class SCLicenseModelImpl extends BaseModelImpl {
+public class SCLicenseModelImpl extends BaseModelImpl<SCLicense> {
 	public static final String TABLE_NAME = "SCLicense";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "licenseId", new Integer(Types.BIGINT) },
@@ -257,13 +257,7 @@ public class SCLicenseModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		SCLicenseImpl scLicense = (SCLicenseImpl)obj;
-
+	public int compareTo(SCLicense scLicense) {
 		int value = 0;
 
 		value = getName().compareTo(scLicense.getName());
@@ -280,10 +274,10 @@ public class SCLicenseModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		SCLicenseImpl scLicense = null;
+		SCLicense scLicense = null;
 
 		try {
-			scLicense = (SCLicenseImpl)obj;
+			scLicense = (SCLicense)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

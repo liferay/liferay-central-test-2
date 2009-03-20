@@ -62,7 +62,7 @@ import java.util.List;
  * @see com.liferay.portlet.messageboards.model.impl.MBDiscussionImpl
  *
  */
-public class MBDiscussionModelImpl extends BaseModelImpl {
+public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion> {
 	public static final String TABLE_NAME = "MBDiscussion";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "discussionId", new Integer(Types.BIGINT) },
@@ -215,13 +215,7 @@ public class MBDiscussionModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		MBDiscussionImpl mbDiscussion = (MBDiscussionImpl)obj;
-
+	public int compareTo(MBDiscussion mbDiscussion) {
 		long pk = mbDiscussion.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -240,10 +234,10 @@ public class MBDiscussionModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		MBDiscussionImpl mbDiscussion = null;
+		MBDiscussion mbDiscussion = null;
 
 		try {
-			mbDiscussion = (MBDiscussionImpl)obj;
+			mbDiscussion = (MBDiscussion)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

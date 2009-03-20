@@ -62,7 +62,7 @@ import java.util.List;
  * @see com.liferay.portlet.tags.model.impl.TagsVocabularyImpl
  *
  */
-public class TagsVocabularyModelImpl extends BaseModelImpl {
+public class TagsVocabularyModelImpl extends BaseModelImpl<TagsVocabulary> {
 	public static final String TABLE_NAME = "TagsVocabulary";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "vocabularyId", new Integer(Types.BIGINT) },
@@ -321,13 +321,7 @@ public class TagsVocabularyModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		TagsVocabularyImpl tagsVocabulary = (TagsVocabularyImpl)obj;
-
+	public int compareTo(TagsVocabulary tagsVocabulary) {
 		int value = 0;
 
 		value = getName().compareTo(tagsVocabulary.getName());
@@ -344,10 +338,10 @@ public class TagsVocabularyModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		TagsVocabularyImpl tagsVocabulary = null;
+		TagsVocabulary tagsVocabulary = null;
 
 		try {
-			tagsVocabulary = (TagsVocabularyImpl)obj;
+			tagsVocabulary = (TagsVocabulary)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

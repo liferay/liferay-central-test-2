@@ -60,7 +60,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.UserIdMapperImpl
  *
  */
-public class UserIdMapperModelImpl extends BaseModelImpl {
+public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper> {
 	public static final String TABLE_NAME = "UserIdMapper";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "userIdMapperId", new Integer(Types.BIGINT) },
@@ -229,13 +229,7 @@ public class UserIdMapperModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		UserIdMapperImpl userIdMapper = (UserIdMapperImpl)obj;
-
+	public int compareTo(UserIdMapper userIdMapper) {
 		long pk = userIdMapper.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -254,10 +248,10 @@ public class UserIdMapperModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		UserIdMapperImpl userIdMapper = null;
+		UserIdMapper userIdMapper = null;
 
 		try {
-			userIdMapper = (UserIdMapperImpl)obj;
+			userIdMapper = (UserIdMapper)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

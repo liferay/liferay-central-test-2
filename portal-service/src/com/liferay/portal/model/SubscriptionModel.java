@@ -44,7 +44,7 @@ import java.util.Date;
  * @see com.liferay.portal.model.impl.SubscriptionModelImpl
  *
  */
-public interface SubscriptionModel extends BaseModel {
+public interface SubscriptionModel extends BaseModel<Subscription> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

@@ -44,7 +44,7 @@ import java.util.Date;
  * @see com.liferay.portal.model.impl.EmailAddressModelImpl
  *
  */
-public interface EmailAddressModel extends BaseModel {
+public interface EmailAddressModel extends BaseModel<EmailAddress> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

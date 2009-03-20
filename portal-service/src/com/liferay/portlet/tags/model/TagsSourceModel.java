@@ -44,7 +44,7 @@ import com.liferay.portal.model.BaseModel;
  * @see com.liferay.portlet.tags.model.impl.TagsSourceModelImpl
  *
  */
-public interface TagsSourceModel extends BaseModel {
+public interface TagsSourceModel extends BaseModel<TagsSource> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

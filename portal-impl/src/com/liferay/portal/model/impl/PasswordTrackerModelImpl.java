@@ -62,7 +62,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.PasswordTrackerImpl
  *
  */
-public class PasswordTrackerModelImpl extends BaseModelImpl {
+public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker> {
 	public static final String TABLE_NAME = "PasswordTracker";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "passwordTrackerId", new Integer(Types.BIGINT) },
@@ -214,13 +214,7 @@ public class PasswordTrackerModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		PasswordTrackerImpl passwordTracker = (PasswordTrackerImpl)obj;
-
+	public int compareTo(PasswordTracker passwordTracker) {
 		int value = 0;
 
 		if (getUserId() < passwordTracker.getUserId()) {
@@ -256,10 +250,10 @@ public class PasswordTrackerModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		PasswordTrackerImpl passwordTracker = null;
+		PasswordTracker passwordTracker = null;
 
 		try {
-			passwordTracker = (PasswordTrackerImpl)obj;
+			passwordTracker = (PasswordTracker)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

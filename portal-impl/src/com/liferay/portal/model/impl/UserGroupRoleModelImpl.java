@@ -57,7 +57,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.UserGroupRoleImpl
  *
  */
-public class UserGroupRoleModelImpl extends BaseModelImpl {
+public class UserGroupRoleModelImpl extends BaseModelImpl<UserGroupRole> {
 	public static final String TABLE_NAME = "UserGroupRole";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "userId", new Integer(Types.BIGINT) },
@@ -179,13 +179,7 @@ public class UserGroupRoleModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		UserGroupRoleImpl userGroupRole = (UserGroupRoleImpl)obj;
-
+	public int compareTo(UserGroupRole userGroupRole) {
 		UserGroupRolePK pk = userGroupRole.getPrimaryKey();
 
 		return getPrimaryKey().compareTo(pk);
@@ -196,10 +190,10 @@ public class UserGroupRoleModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		UserGroupRoleImpl userGroupRole = null;
+		UserGroupRole userGroupRole = null;
 
 		try {
-			userGroupRole = (UserGroupRoleImpl)obj;
+			userGroupRole = (UserGroupRole)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

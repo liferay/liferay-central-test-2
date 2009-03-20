@@ -62,7 +62,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.RoleImpl
  *
  */
-public class RoleModelImpl extends BaseModelImpl {
+public class RoleModelImpl extends BaseModelImpl<Role> {
 	public static final String TABLE_NAME = "Role_";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "roleId", new Integer(Types.BIGINT) },
@@ -308,13 +308,7 @@ public class RoleModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		RoleImpl role = (RoleImpl)obj;
-
+	public int compareTo(Role role) {
 		int value = 0;
 
 		value = getName().compareTo(role.getName());
@@ -331,10 +325,10 @@ public class RoleModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		RoleImpl role = null;
+		Role role = null;
 
 		try {
-			role = (RoleImpl)obj;
+			role = (Role)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

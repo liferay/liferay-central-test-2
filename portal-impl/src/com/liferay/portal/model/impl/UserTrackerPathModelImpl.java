@@ -61,7 +61,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.UserTrackerPathImpl
  *
  */
-public class UserTrackerPathModelImpl extends BaseModelImpl {
+public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath> {
 	public static final String TABLE_NAME = "UserTrackerPath";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "userTrackerPathId", new Integer(Types.BIGINT) },
@@ -212,13 +212,7 @@ public class UserTrackerPathModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		UserTrackerPathImpl userTrackerPath = (UserTrackerPathImpl)obj;
-
+	public int compareTo(UserTrackerPath userTrackerPath) {
 		long pk = userTrackerPath.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -237,10 +231,10 @@ public class UserTrackerPathModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		UserTrackerPathImpl userTrackerPath = null;
+		UserTrackerPath userTrackerPath = null;
 
 		try {
-			userTrackerPath = (UserTrackerPathImpl)obj;
+			userTrackerPath = (UserTrackerPath)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

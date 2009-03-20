@@ -62,7 +62,7 @@ import java.util.List;
  * @see com.liferay.portlet.messageboards.model.impl.MBThreadImpl
  *
  */
-public class MBThreadModelImpl extends BaseModelImpl {
+public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 	public static final String TABLE_NAME = "MBThread";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "threadId", new Integer(Types.BIGINT) },
@@ -290,13 +290,7 @@ public class MBThreadModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		MBThreadImpl mbThread = (MBThreadImpl)obj;
-
+	public int compareTo(MBThread mbThread) {
 		int value = 0;
 
 		if (getPriority() < mbThread.getPriority()) {
@@ -331,10 +325,10 @@ public class MBThreadModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		MBThreadImpl mbThread = null;
+		MBThread mbThread = null;
 
 		try {
-			mbThread = (MBThreadImpl)obj;
+			mbThread = (MBThread)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

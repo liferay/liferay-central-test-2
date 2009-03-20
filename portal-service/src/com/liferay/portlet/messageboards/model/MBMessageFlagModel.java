@@ -44,7 +44,7 @@ import com.liferay.portal.model.BaseModel;
  * @see com.liferay.portlet.messageboards.model.impl.MBMessageFlagModelImpl
  *
  */
-public interface MBMessageFlagModel extends BaseModel {
+public interface MBMessageFlagModel extends BaseModel<MBMessageFlag> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

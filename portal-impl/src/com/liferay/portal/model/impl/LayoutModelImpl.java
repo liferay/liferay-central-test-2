@@ -60,7 +60,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.LayoutImpl
  *
  */
-public class LayoutModelImpl extends BaseModelImpl {
+public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	public static final String TABLE_NAME = "Layout";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "plid", new Integer(Types.BIGINT) },
@@ -533,13 +533,7 @@ public class LayoutModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		LayoutImpl layout = (LayoutImpl)obj;
-
+	public int compareTo(Layout layout) {
 		int value = 0;
 
 		if (getParentLayoutId() < layout.getParentLayoutId()) {
@@ -578,10 +572,10 @@ public class LayoutModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		LayoutImpl layout = null;
+		Layout layout = null;
 
 		try {
-			layout = (LayoutImpl)obj;
+			layout = (Layout)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

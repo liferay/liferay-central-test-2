@@ -44,7 +44,7 @@ import java.util.Date;
  * @see com.liferay.portal.model.impl.PortletItemModelImpl
  *
  */
-public interface PortletItemModel extends BaseModel {
+public interface PortletItemModel extends BaseModel<PortletItem> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

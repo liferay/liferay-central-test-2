@@ -61,7 +61,7 @@ import java.util.List;
  * @see com.liferay.portlet.journal.model.impl.JournalContentSearchImpl
  *
  */
-public class JournalContentSearchModelImpl extends BaseModelImpl {
+public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentSearch> {
 	public static final String TABLE_NAME = "JournalContentSearch";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "contentSearchId", new Integer(Types.BIGINT) },
@@ -266,13 +266,7 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		JournalContentSearchImpl journalContentSearch = (JournalContentSearchImpl)obj;
-
+	public int compareTo(JournalContentSearch journalContentSearch) {
 		long pk = journalContentSearch.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -291,10 +285,10 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		JournalContentSearchImpl journalContentSearch = null;
+		JournalContentSearch journalContentSearch = null;
 
 		try {
-			journalContentSearch = (JournalContentSearchImpl)obj;
+			journalContentSearch = (JournalContentSearch)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

@@ -61,7 +61,7 @@ import java.util.List;
  * @see com.liferay.portlet.journal.model.impl.JournalArticleResourceImpl
  *
  */
-public class JournalArticleResourceModelImpl extends BaseModelImpl {
+public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticleResource> {
 	public static final String TABLE_NAME = "JournalArticleResource";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "resourcePrimKey", new Integer(Types.BIGINT) },
@@ -195,13 +195,7 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		JournalArticleResourceImpl journalArticleResource = (JournalArticleResourceImpl)obj;
-
+	public int compareTo(JournalArticleResource journalArticleResource) {
 		long pk = journalArticleResource.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -220,10 +214,10 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		JournalArticleResourceImpl journalArticleResource = null;
+		JournalArticleResource journalArticleResource = null;
 
 		try {
-			journalArticleResource = (JournalArticleResourceImpl)obj;
+			journalArticleResource = (JournalArticleResource)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

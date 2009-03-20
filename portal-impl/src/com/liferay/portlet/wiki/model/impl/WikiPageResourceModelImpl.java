@@ -61,7 +61,7 @@ import java.util.List;
  * @see com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl
  *
  */
-public class WikiPageResourceModelImpl extends BaseModelImpl {
+public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource> {
 	public static final String TABLE_NAME = "WikiPageResource";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "resourcePrimKey", new Integer(Types.BIGINT) },
@@ -193,13 +193,7 @@ public class WikiPageResourceModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		WikiPageResourceImpl wikiPageResource = (WikiPageResourceImpl)obj;
-
+	public int compareTo(WikiPageResource wikiPageResource) {
 		long pk = wikiPageResource.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -218,10 +212,10 @@ public class WikiPageResourceModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		WikiPageResourceImpl wikiPageResource = null;
+		WikiPageResource wikiPageResource = null;
 
 		try {
-			wikiPageResource = (WikiPageResourceImpl)obj;
+			wikiPageResource = (WikiPageResource)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

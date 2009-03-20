@@ -64,7 +64,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.AddressImpl
  *
  */
-public class AddressModelImpl extends BaseModelImpl {
+public class AddressModelImpl extends BaseModelImpl<Address> {
 	public static final String TABLE_NAME = "Address";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "addressId", new Integer(Types.BIGINT) },
@@ -471,13 +471,7 @@ public class AddressModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		AddressImpl address = (AddressImpl)obj;
-
+	public int compareTo(Address address) {
 		int value = 0;
 
 		value = DateUtil.compareTo(getCreateDate(), address.getCreateDate());
@@ -494,10 +488,10 @@ public class AddressModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		AddressImpl address = null;
+		Address address = null;
 
 		try {
-			address = (AddressImpl)obj;
+			address = (Address)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

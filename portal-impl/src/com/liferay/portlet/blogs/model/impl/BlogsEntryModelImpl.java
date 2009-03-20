@@ -63,7 +63,7 @@ import java.util.List;
  * @see com.liferay.portlet.blogs.model.impl.BlogsEntryImpl
  *
  */
-public class BlogsEntryModelImpl extends BaseModelImpl {
+public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 	public static final String TABLE_NAME = "BlogsEntry";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
@@ -415,13 +415,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		BlogsEntryImpl blogsEntry = (BlogsEntryImpl)obj;
-
+	public int compareTo(BlogsEntry blogsEntry) {
 		int value = 0;
 
 		value = DateUtil.compareTo(getDisplayDate(), blogsEntry.getDisplayDate());
@@ -440,10 +434,10 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		BlogsEntryImpl blogsEntry = null;
+		BlogsEntry blogsEntry = null;
 
 		try {
-			blogsEntry = (BlogsEntryImpl)obj;
+			blogsEntry = (BlogsEntry)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

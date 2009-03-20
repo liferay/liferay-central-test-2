@@ -62,7 +62,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.ShardImpl
  *
  */
-public class ShardModelImpl extends BaseModelImpl {
+public class ShardModelImpl extends BaseModelImpl<Shard> {
 	public static final String TABLE_NAME = "Shard";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "shardId", new Integer(Types.BIGINT) },
@@ -216,13 +216,7 @@ public class ShardModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		ShardImpl shard = (ShardImpl)obj;
-
+	public int compareTo(Shard shard) {
 		long pk = shard.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -241,10 +235,10 @@ public class ShardModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		ShardImpl shard = null;
+		Shard shard = null;
 
 		try {
-			shard = (ShardImpl)obj;
+			shard = (Shard)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

@@ -61,7 +61,7 @@ import java.util.List;
  * @see com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl
  *
  */
-public class AnnouncementsDeliveryModelImpl extends BaseModelImpl {
+public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsDelivery> {
 	public static final String TABLE_NAME = "AnnouncementsDelivery";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "deliveryId", new Integer(Types.BIGINT) },
@@ -270,13 +270,7 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		AnnouncementsDeliveryImpl announcementsDelivery = (AnnouncementsDeliveryImpl)obj;
-
+	public int compareTo(AnnouncementsDelivery announcementsDelivery) {
 		long pk = announcementsDelivery.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -295,10 +289,10 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		AnnouncementsDeliveryImpl announcementsDelivery = null;
+		AnnouncementsDelivery announcementsDelivery = null;
 
 		try {
-			announcementsDelivery = (AnnouncementsDeliveryImpl)obj;
+			announcementsDelivery = (AnnouncementsDelivery)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

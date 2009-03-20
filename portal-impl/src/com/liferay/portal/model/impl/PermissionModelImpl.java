@@ -60,7 +60,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.PermissionImpl
  *
  */
-public class PermissionModelImpl extends BaseModelImpl {
+public class PermissionModelImpl extends BaseModelImpl<Permission> {
 	public static final String TABLE_NAME = "Permission_";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "permissionId", new Integer(Types.BIGINT) },
@@ -211,13 +211,7 @@ public class PermissionModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		PermissionImpl permission = (PermissionImpl)obj;
-
+	public int compareTo(Permission permission) {
 		long pk = permission.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -236,10 +230,10 @@ public class PermissionModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		PermissionImpl permission = null;
+		Permission permission = null;
 
 		try {
-			permission = (PermissionImpl)obj;
+			permission = (Permission)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

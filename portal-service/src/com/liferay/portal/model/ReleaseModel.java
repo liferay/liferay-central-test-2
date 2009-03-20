@@ -44,7 +44,7 @@ import java.util.Date;
  * @see com.liferay.portal.model.impl.ReleaseModelImpl
  *
  */
-public interface ReleaseModel extends BaseModel {
+public interface ReleaseModel extends BaseModel<Release> {
 	public long getPrimaryKey();
 
 	public void setPrimaryKey(long pk);

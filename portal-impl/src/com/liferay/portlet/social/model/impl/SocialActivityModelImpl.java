@@ -65,7 +65,7 @@ import java.util.List;
  * @see com.liferay.portlet.social.model.impl.SocialActivityImpl
  *
  */
-public class SocialActivityModelImpl extends BaseModelImpl {
+public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity> {
 	public static final String TABLE_NAME = "SocialActivity";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "activityId", new Integer(Types.BIGINT) },
@@ -336,13 +336,7 @@ public class SocialActivityModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		SocialActivityImpl socialActivity = (SocialActivityImpl)obj;
-
+	public int compareTo(SocialActivity socialActivity) {
 		int value = 0;
 
 		value = DateUtil.compareTo(getCreateDate(),
@@ -362,10 +356,10 @@ public class SocialActivityModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		SocialActivityImpl socialActivity = null;
+		SocialActivity socialActivity = null;
 
 		try {
-			socialActivity = (SocialActivityImpl)obj;
+			socialActivity = (SocialActivity)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

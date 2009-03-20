@@ -63,7 +63,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.WebDAVPropsImpl
  *
  */
-public class WebDAVPropsModelImpl extends BaseModelImpl {
+public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps> {
 	public static final String TABLE_NAME = "WebDAVProps";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "webDavPropsId", new Integer(Types.BIGINT) },
@@ -272,13 +272,7 @@ public class WebDAVPropsModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		WebDAVPropsImpl webDAVProps = (WebDAVPropsImpl)obj;
-
+	public int compareTo(WebDAVProps webDAVProps) {
 		long pk = webDAVProps.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -297,10 +291,10 @@ public class WebDAVPropsModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		WebDAVPropsImpl webDAVProps = null;
+		WebDAVProps webDAVProps = null;
 
 		try {
-			webDAVProps = (WebDAVPropsImpl)obj;
+			webDAVProps = (WebDAVProps)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

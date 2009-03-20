@@ -59,5 +59,5 @@ public interface UserTracker extends UserTrackerModel {
 
 	public int getHits();
 
-	public int compareTo(java.lang.Object obj);
+	public int compareTo(com.liferay.portal.model.UserTracker userTracker);
 }

@@ -64,7 +64,7 @@ import java.util.List;
  * @see com.liferay.portlet.ratings.model.impl.RatingsEntryImpl
  *
  */
-public class RatingsEntryModelImpl extends BaseModelImpl {
+public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry> {
 	public static final String TABLE_NAME = "RatingsEntry";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "entryId", new Integer(Types.BIGINT) },
@@ -306,13 +306,7 @@ public class RatingsEntryModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		RatingsEntryImpl ratingsEntry = (RatingsEntryImpl)obj;
-
+	public int compareTo(RatingsEntry ratingsEntry) {
 		long pk = ratingsEntry.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -331,10 +325,10 @@ public class RatingsEntryModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		RatingsEntryImpl ratingsEntry = null;
+		RatingsEntry ratingsEntry = null;
 
 		try {
-			ratingsEntry = (RatingsEntryImpl)obj;
+			ratingsEntry = (RatingsEntry)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

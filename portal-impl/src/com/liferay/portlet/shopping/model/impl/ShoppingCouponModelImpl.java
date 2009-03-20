@@ -63,7 +63,7 @@ import java.util.List;
  * @see com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl
  *
  */
-public class ShoppingCouponModelImpl extends BaseModelImpl {
+public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 	public static final String TABLE_NAME = "ShoppingCoupon";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "couponId", new Integer(Types.BIGINT) },
@@ -467,13 +467,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		ShoppingCouponImpl shoppingCoupon = (ShoppingCouponImpl)obj;
-
+	public int compareTo(ShoppingCoupon shoppingCoupon) {
 		int value = 0;
 
 		value = DateUtil.compareTo(getCreateDate(),
@@ -491,10 +485,10 @@ public class ShoppingCouponModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		ShoppingCouponImpl shoppingCoupon = null;
+		ShoppingCoupon shoppingCoupon = null;
 
 		try {
-			shoppingCoupon = (ShoppingCouponImpl)obj;
+			shoppingCoupon = (ShoppingCoupon)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

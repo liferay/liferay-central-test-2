@@ -60,7 +60,7 @@ import java.util.List;
  * @see com.liferay.portal.model.impl.PluginSettingImpl
  *
  */
-public class PluginSettingModelImpl extends BaseModelImpl {
+public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting> {
 	public static final String TABLE_NAME = "PluginSetting";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "pluginSettingId", new Integer(Types.BIGINT) },
@@ -249,13 +249,7 @@ public class PluginSettingModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		PluginSettingImpl pluginSetting = (PluginSettingImpl)obj;
-
+	public int compareTo(PluginSetting pluginSetting) {
 		long pk = pluginSetting.getPrimaryKey();
 
 		if (getPrimaryKey() < pk) {
@@ -274,10 +268,10 @@ public class PluginSettingModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		PluginSettingImpl pluginSetting = null;
+		PluginSetting pluginSetting = null;
 
 		try {
-			pluginSetting = (PluginSettingImpl)obj;
+			pluginSetting = (PluginSetting)obj;
 		}
 		catch (ClassCastException cce) {
 			return false;
