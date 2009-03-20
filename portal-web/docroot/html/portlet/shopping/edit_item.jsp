@@ -351,19 +351,19 @@ for (int i = 0; i < fieldsCount; i++) {
 			<liferay-ui:message key="name" />
 		</td>
 		<td>
-		    <input class="lfr-input-text" name='<%= "fieldName" + i %>' type="text" value="<%= fieldName %>" style="width: 100px;">
+			<liferay-ui:input-field model="<%= ShoppingItemField.class %>" field="name" fieldParam='<%= "fieldName" + i %>' defaultValue="<%= fieldName %>" />
 		</td>
 		<td>
 			<liferay-ui:message key="values" />
 		</td>
 		<td>
-			<input class="lfr-input-text" name='<%= "fieldValues" + i %>' type="text" value='<%= StringUtil.merge(fieldValues, ", ") %>' style="width: 100px;">
+			<liferay-ui:input-field model="<%= ShoppingItemField.class %>" field="values" fieldParam='<%= "fieldValues" + i %>' defaultValue='<%= StringUtil.merge(fieldValues, ", ") %>' />
 		</td>
 		<td>
 			<liferay-ui:message key="description" />
 		</td>
 		<td>
-			<input class="lfr-input-text" name='<%= "fieldDescription" + i %>' type="text" value="<%= fieldDescription %>" style="width: 150px;">
+			<liferay-ui:input-field model="<%= ShoppingItemField.class %>" field="description" fieldParam='<%= "fieldDescription" + i %>' defaultValue="<%= fieldDescription %>" />
 		</td>
 
 		<c:if test="<%= fieldsCount > 0 %>">
