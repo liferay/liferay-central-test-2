@@ -343,7 +343,7 @@ public class PropsValues {
 	public static final String DEFAULT_GUEST_PUBLIC_LAYOUTS_LAR =
 		PropsUtil.get(PropsKeys.DEFAULT_GUEST_PUBLIC_LAYOUTS_LAR);
 
-	public static final String DEFAULT_LANDING_PAGE_PATH =
+	public static String DEFAULT_LANDING_PAGE_PATH =
 		PropsUtil.get(PropsKeys.DEFAULT_LANDING_PAGE_PATH);
 
 	public static final String DEFAULT_LAYOUT_TEMPLATE_ID =

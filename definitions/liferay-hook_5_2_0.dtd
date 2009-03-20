@@ -13,6 +13,7 @@ Not all portal properties can be overridden via a hook. The supported properties
 are:
 
 auth.forward.by.last.path
+default.landing.page.path
 javascript.fast.load
 layout.template.cache.enabled
 layout.user.private.layouts.auto.create

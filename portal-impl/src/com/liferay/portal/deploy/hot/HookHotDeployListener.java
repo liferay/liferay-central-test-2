@@ -864,6 +864,7 @@ public class HookHotDeployListener
 	};
 
 	private static final String[] _PROPS_VALUES_STRING = new String[] {
+		"DEFAULT_LANDING_PAGE_PATH",
 		"PASSWORDS_PASSWORDPOLICYTOOLKIT_GENERATOR",
 		"PASSWORDS_PASSWORDPOLICYTOOLKIT_STATIC"
 	};
