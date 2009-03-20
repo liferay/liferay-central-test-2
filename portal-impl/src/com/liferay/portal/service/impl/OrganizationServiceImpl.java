@@ -29,6 +29,7 @@ import com.liferay.portal.model.Address;
 import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.model.OrgLabor;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -167,8 +168,9 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 
 		if (permissionChecker.isCompanyAdmin()) {
 			return organizationLocalService.search(
-				permissionChecker.getCompanyId(), -1, null, null, null, null,
-				null, 0,
+				permissionChecker.getCompanyId(),
+				OrganizationConstants.ANY_PARENT_ORGANIZATION_ID, null, null,
+				null, null, null, 0,
 				PropsValues.CONTROL_PANEL_NAVIGATION_MAX_ORGANIZATIONS);
 		}
 
