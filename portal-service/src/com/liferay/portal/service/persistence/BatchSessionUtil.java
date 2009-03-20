@@ -46,7 +46,8 @@ public class BatchSessionUtil {
 		getBatchSession().setEnabled(enabled);
 	}
 
-	public static void update(Session session, BaseModel model, boolean merge)
+	public static void update(
+			Session session, BaseModel<?> model, boolean merge)
 		throws ORMException {
 
 		getBatchSession().update(session, model, merge);

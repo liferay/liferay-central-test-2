@@ -2818,15 +2818,13 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * Compares this portlet to the specified object.
 	 *
-	 * @param		obj the object to compare this portlet against
+	 * @param		portlet the portlet to compare this portlet against
 	 * @return		the value 0 if the argument portlet is equal to this
 	 *				portlet; a value less than -1 if this portlet is less than
 	 *				the portlet argument; and 1 if this portlet is greater than
 	 *				the portlet argument
 	 */
-	public int compareTo(Object obj) {
-		Portlet portlet = (Portlet)obj;
-
+	public int compareTo(Portlet portlet) {
 		return getPortletId().compareTo(portlet.getPortletId());
 	}
 

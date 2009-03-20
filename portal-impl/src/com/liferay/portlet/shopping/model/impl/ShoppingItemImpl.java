@@ -80,8 +80,8 @@ public class ShoppingItemImpl
 		super.setFieldsQuantities(StringUtil.merge(fieldsQuantitiesArray));
 	}
 
-	public int compareTo(Object obj) {
-		return new ItemNameComparator(true).compare(this, obj);
+	public int compareTo(ShoppingItem item) {
+		return new ItemNameComparator(true).compare(this, item);
 	}
 
 	public List<ShoppingItemPrice> getItemPrices()

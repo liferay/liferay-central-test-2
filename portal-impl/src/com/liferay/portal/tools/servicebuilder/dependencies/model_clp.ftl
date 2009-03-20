@@ -17,7 +17,7 @@ import java.lang.reflect.Proxy;
 
 import java.util.Date;
 
-public class ${entity.name}Clp extends BaseModelImpl implements ${entity.name} {
+public class ${entity.name}Clp extends BaseModelImpl<${entity.name}> implements ${entity.name} {
 
 	public ${entity.name}Clp() {
 	}
@@ -205,13 +205,7 @@ public class ${entity.name}Clp extends BaseModelImpl implements ${entity.name} {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		${entity.name}Clp ${entity.varName} = (${entity.name}Clp)obj;
-
+	public int compareTo(${entity.name} ${entity.varName}) {
 		<#if entity.isOrdered()>
 			int value = 0;
 

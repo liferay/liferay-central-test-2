@@ -50,7 +50,7 @@ import java.util.List;
  * @see ${packagePath}.model.impl.${entity.name}Impl
  *
  */
-public class ${entity.name}ModelImpl extends BaseModelImpl {
+public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 
 	public static final String TABLE_NAME = "${entity.table}";
 
@@ -315,13 +315,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl {
 		return clone;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		${entity.name}Impl ${entity.varName} = (${entity.name}Impl)obj;
-
+	public int compareTo(${entity.name} ${entity.varName}) {
 		<#if entity.isOrdered()>
 			int value = 0;
 
@@ -390,10 +384,10 @@ public class ${entity.name}ModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		${entity.name}Impl ${entity.varName} = null;
+		${entity.name} ${entity.varName} = null;
 
 		try {
-			${entity.varName} = (${entity.name}Impl)obj;
+			${entity.varName} = (${entity.name})obj;
 		}
 		catch (ClassCastException cce) {
 			return false;

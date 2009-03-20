@@ -32,7 +32,7 @@ import java.io.Serializable;
  * @author Brian Wing Shun Chan
  *
  */
-public interface BaseModel extends Cloneable, Comparable, Serializable {
+public interface BaseModel<T> extends Cloneable, Comparable<T>, Serializable {
 
 	public boolean isNew();
 

@@ -106,9 +106,7 @@ public class UserTrackerImpl
 		return _paths.size();
 	}
 
-	public int compareTo(Object obj) {
-		UserTracker userTracker = (UserTracker)obj;
-
+	public int compareTo(UserTracker userTracker) {
 		String userName1 = getFullName().toLowerCase();
 		String userName2 = userTracker.getFullName().toLowerCase();
 

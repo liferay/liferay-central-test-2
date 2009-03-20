@@ -28,7 +28,7 @@ import java.util.Date;
  * @see ${packagePath}.model.impl.${entity.name}ModelImpl
  *
  */
-public interface ${entity.name}Model extends BaseModel {
+public interface ${entity.name}Model extends BaseModel<${entity.name}> {
 
 	public ${entity.PKClassName} getPrimaryKey();
 

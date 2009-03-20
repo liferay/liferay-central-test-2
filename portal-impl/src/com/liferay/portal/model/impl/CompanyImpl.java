@@ -55,9 +55,7 @@ public class CompanyImpl extends CompanyModelImpl implements Company {
 	public CompanyImpl() {
 	}
 
-	public int compareTo(Object obj) {
-		Company company = (Company)obj;
-
+	public int compareTo(Company company) {
 		String webId1 = getWebId();
 		String webId2 = company.getWebId();
 
