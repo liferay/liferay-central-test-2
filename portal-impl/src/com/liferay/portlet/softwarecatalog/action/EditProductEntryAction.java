@@ -31,14 +31,12 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Image;
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.softwarecatalog.DuplicateProductEntryModuleIdException;
 import com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
 import com.liferay.portlet.softwarecatalog.ProductEntryAuthorException;
@@ -254,8 +252,6 @@ public class EditProductEntryAction extends PortletAction {
 
 		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
 			actionRequest);
-
-		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
 
 		long productEntryId = ParamUtil.getLong(
 			actionRequest, "productEntryId");

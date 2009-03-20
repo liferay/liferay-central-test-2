@@ -116,7 +116,7 @@ public class JournalArticleImageLocalServiceImpl
 	}
 
 	public void deleteImages(long groupId, String articleId, double version)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		for (JournalArticleImage articleImage :
 				journalArticleImagePersistence.findByG_A_V(

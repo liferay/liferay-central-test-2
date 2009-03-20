@@ -390,7 +390,6 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			String name = srcFileEntry.getName();
 			String title = srcFileEntry.getTitleWithExtension();
 			String description = srcFileEntry.getDescription();
-			String[] tagsEntries = null;
 			String extraSettings = srcFileEntry.getExtraSettings();
 
 			File file = null;

@@ -70,8 +70,7 @@ public interface ThemeLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Theme> getThemes(
 		long companyId, long groupId, long userId, boolean wapTheme)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<String> init(
 		javax.servlet.ServletContext servletContext,

@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.security.auth.AutoLoginException;
 import com.liferay.util.CookieUtil;
 
 import java.io.BufferedReader;
@@ -61,8 +60,7 @@ import javax.servlet.http.HttpServletRequest;
 public class OpenSSOUtil {
 
 	public static Map<String, String> getAttributes(
-			HttpServletRequest request, String serviceUrl)
-		throws AutoLoginException {
+		HttpServletRequest request, String serviceUrl) {
 
 		return _instance._getAttributes(request, serviceUrl);
 	}
@@ -84,8 +82,7 @@ public class OpenSSOUtil {
 	}
 
 	private Map<String, String> _getAttributes(
-			HttpServletRequest request, String serviceUrl)
-		throws AutoLoginException {
+		HttpServletRequest request, String serviceUrl) {
 
 		Map<String, String> nameValues = new HashMap<String, String>();
 

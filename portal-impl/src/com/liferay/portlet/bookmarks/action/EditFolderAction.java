@@ -25,12 +25,10 @@ package com.liferay.portlet.bookmarks.action;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.bookmarks.FolderNameException;
 import com.liferay.portlet.bookmarks.NoSuchFolderException;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
@@ -120,8 +118,6 @@ public class EditFolderAction extends PortletAction {
 	}
 
 	protected void updateFolder(ActionRequest actionRequest) throws Exception {
-		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
-
 		long folderId = ParamUtil.getLong(actionRequest, "folderId");
 
 		long parentFolderId = ParamUtil.getLong(

@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.documentlibrary.lar;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -254,8 +252,5 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	private static final PortletDataHandlerBoolean _tags =
 		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
-
-	private static Log _log =
-		LogFactoryUtil.getLog(DLDisplayPortletDataHandlerImpl.class);
 
 }

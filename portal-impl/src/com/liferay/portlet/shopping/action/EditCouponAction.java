@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -171,8 +170,6 @@ public class EditCouponAction extends PortletAction {
 	}
 
 	protected void updateCoupon(ActionRequest actionRequest) throws Exception {
-		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
-
 		long couponId = ParamUtil.getLong(actionRequest, "couponId");
 
 		String code = ParamUtil.getString(actionRequest, "code");

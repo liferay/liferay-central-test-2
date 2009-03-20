@@ -26,12 +26,10 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.polls.DuplicateVoteException;
 import com.liferay.portlet.polls.NoSuchChoiceException;
@@ -153,8 +151,6 @@ public class EditQuestionAction extends PortletAction {
 
 	protected void updateQuestion(ActionRequest actionRequest)
 		throws Exception {
-
-		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
 
 		long questionId = ParamUtil.getLong(actionRequest, "questionId");
 

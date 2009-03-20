@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.ProcessingInstruction;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
-import com.liferay.portal.model.Theme;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
@@ -121,8 +120,6 @@ public class GetArticleAction extends Action {
 		// document
 
 		// Portal CSS
-
-		Theme theme = themeDisplay.getTheme();
 
 		StringBuilder sb = new StringBuilder();
 

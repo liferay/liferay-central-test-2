@@ -141,9 +141,7 @@ public class JournalArticleImageLocalServiceUtil {
 	}
 
 	public static void deleteImages(long groupId, java.lang.String articleId,
-		double version)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		double version) throws com.liferay.portal.SystemException {
 		getService().deleteImages(groupId, articleId, version);
 	}
 

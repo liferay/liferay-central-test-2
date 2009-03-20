@@ -64,8 +64,7 @@ public class ThemeLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.Theme> getThemes(
 		long companyId, long groupId, long userId, boolean wapTheme)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		return getService().getThemes(companyId, groupId, userId, wapTheme);
 	}
 

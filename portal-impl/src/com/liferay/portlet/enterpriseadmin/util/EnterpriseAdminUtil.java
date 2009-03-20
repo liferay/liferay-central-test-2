@@ -233,8 +233,6 @@ public class EnterpriseAdminUtil {
 		while (itr.hasNext()) {
 			Role role = itr.next();
 
-			String name = role.getName();
-
 			if (!RolePermissionUtil.contains(
 					permissionChecker, role.getRoleId(),
 					ActionKeys.ASSIGN_MEMBERS)) {

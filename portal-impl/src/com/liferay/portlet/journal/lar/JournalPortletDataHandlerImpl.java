@@ -227,7 +227,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	public static void exportFeed(
 			PortletDataContext context, Element feedsEl, JournalFeed feed)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (!context.isWithinDateRange(feed.getModifiedDate())) {
 			return;
@@ -1636,8 +1636,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected static String getImportTemplateSmallImagePath(
-			PortletDataContext context, String templateId)
-		throws PortalException, SystemException {
+		PortletDataContext context, String templateId) {
 
 		StringBuilder sb = new StringBuilder();
 

@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.image.SpriteProcessorUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -176,7 +175,7 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 
 	public List<Theme> getThemes(
 			long companyId, long groupId, long userId, boolean wapTheme)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<Theme> themes = getThemes(companyId);
 
