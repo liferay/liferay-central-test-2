@@ -1,6 +1,20 @@
 <?xml version="1.0"?>
 
 <custom-sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsAssetClassPKFinder.findByE_C">
+		<![CDATA[
+			SELECT
+				DISTINCT TagsAsset.classPK
+			FROM
+				TagsAsset
+			INNER JOIN
+				TagsAssets_TagsEntries ON
+					(TagsAsset.assetId = TagsAssets_TagsEntries.assetId)
+			WHERE
+				(TagsAssets_TagsEntries.entryId = ?) AND
+				(TagsAsset.classNameId = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.tags.service.persistence.TagsAssetFinder.countByAndEntryIds">
 		<![CDATA[
 			SELECT
@@ -62,20 +76,6 @@
 			WHERE
 				(TagsAsset.classNameId = ?) AND
 				(TagsAsset.viewCount > 0)
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.tags.service.persistence.TagsAssetFinder.findByE_C">
-		<![CDATA[
-			SELECT
-				DISTINCT TagsAsset.classPK
-			FROM
-				TagsAsset
-			INNER JOIN
-				TagsAssets_TagsEntries ON
-					(TagsAsset.assetId = TagsAssets_TagsEntries.assetId)
-			WHERE
-				(TagsAssets_TagsEntries.entryId = ?) AND
-				(TagsAsset.classNameId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.countByG_C_N_F">
