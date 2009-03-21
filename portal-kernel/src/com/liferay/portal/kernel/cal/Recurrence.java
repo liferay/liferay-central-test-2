@@ -1129,12 +1129,7 @@ public class Recurrence implements Serializable {
 				break;
 
 			case YEARLY :
-				if (byMonth != null) {
-					field = Calendar.DAY_OF_MONTH;
-				}
-				else {
-					field = Calendar.DAY_OF_YEAR;
-				}
+				field = Calendar.DAY_OF_YEAR;
 				break;
 
 			default :
