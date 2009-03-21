@@ -744,6 +744,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="org.hibernate.event.def.AbstractFlushingEventListener">
+		<priority value="OFF" />
+	</category>
+
 	<category name="org.jabsorb">
 		<priority value="ERROR" />
 	</category>
