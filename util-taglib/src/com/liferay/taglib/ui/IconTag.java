@@ -41,8 +41,10 @@ public class IconTag extends IncludeTag {
 			(HttpServletRequest)pageContext.getRequest();
 
 		request.setAttribute("liferay-ui:icon:image", _image);
+		request.setAttribute("liferay-ui:icon:imageHover", _imageHover);
 		request.setAttribute("liferay-ui:icon:message", _message);
 		request.setAttribute("liferay-ui:icon:src", _src);
+		request.setAttribute("liferay-ui:icon:srcHover", _srcHover);
 		request.setAttribute("liferay-ui:icon:url", _url);
 		request.setAttribute("liferay-ui:icon:method", _method);
 		request.setAttribute("liferay-ui:icon:target", _target);
@@ -63,7 +65,9 @@ public class IconTag extends IncludeTag {
 
 			request.removeAttribute("liferay-ui:icon:image");
 			request.removeAttribute("liferay-ui:icon:message");
+			request.removeAttribute("liferay-ui:icon:messageHover");
 			request.removeAttribute("liferay-ui:icon:src");
+			request.removeAttribute("liferay-ui:icon:srcHover");
 			request.removeAttribute("liferay-ui:icon:url");
 			request.removeAttribute("liferay-ui:icon:method");
 			request.removeAttribute("liferay-ui:icon:target");
@@ -79,8 +83,10 @@ public class IconTag extends IncludeTag {
 		finally {
 			if (!ServerDetector.isResin()) {
 				_image = null;
+				_imageHover = null;
 				_message = null;
 				_src = null;
+				_srcHover = null;
 				_url = null;
 				_method = null;
 				_target = null;
@@ -94,12 +100,20 @@ public class IconTag extends IncludeTag {
 		_image = image;
 	}
 
+	public void setImageHover(String imageHover) {
+		_imageHover = imageHover;
+	}
+
 	public void setMessage(String message) {
 		_message = message;
 	}
 
 	public void setSrc(String src) {
 		_src = src;
+	}
+
+	public void setSrcHover(String srcHover) {
+		_srcHover = srcHover;
 	}
 
 	public void setUrl(String url) {
@@ -133,8 +147,10 @@ public class IconTag extends IncludeTag {
 	private static final String _PAGE = "/html/taglib/ui/icon/page.jsp";
 
 	private String _image;
+	private String _imageHover;
 	private String _message;
 	private String _src;
+	private String _srcHover;
 	private String _url;
 	private String _method;
 	private String _target = "_self";

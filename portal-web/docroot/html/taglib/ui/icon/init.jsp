@@ -46,6 +46,7 @@ Boolean iconMenuSingleIcon = (Boolean)request.getAttribute("liferay-ui:icon-menu
 boolean iconMenuShowWhenSingleIcon = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon-menu:showWhenSingleIcon"));
 
 String image = (String)request.getAttribute("liferay-ui:icon:image");
+String imageHover = (String)request.getAttribute("liferay-ui:icon:imageHover");
 
 String message = (String)request.getAttribute("liferay-ui:icon:message");
 
@@ -54,9 +55,14 @@ if (message == null) {
 }
 
 String src = (String)request.getAttribute("liferay-ui:icon:src");
+String srcHover = (String)request.getAttribute("liferay-ui:icon:srcHover");
 
 if (Validator.isNull(src)) {
 	src = themeDisplay.getPathThemeImages() + "/common/" + image + ".png";
+}
+
+if (Validator.isNull(srcHover) && Validator.isNotNull(imageHover)) {
+	srcHover = themeDisplay.getPathThemeImages() + "/common/" + imageHover + ".png";
 }
 
 String url = GetterUtil.getString((String)request.getAttribute("liferay-ui:icon:url"));

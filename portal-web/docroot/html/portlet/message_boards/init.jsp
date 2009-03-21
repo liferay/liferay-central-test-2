@@ -100,6 +100,7 @@ String rssDisplayStyle = preferences.getValue("rss-display-style", RSSUtil.DISPL
 String rssFormat = preferences.getValue("rss-format", "atom10");
 boolean allowAnonymousPosting = MBUtil.isAllowAnonymousPosting(preferences);
 boolean enableMessageRatings = GetterUtil.getBoolean(preferences.getValue("enable-message-ratings", null), true);
+boolean enableFlags = GetterUtil.getBoolean(preferences.getValue("enable-flags", null), true);
 
 String rssFormatType = RSSUtil.DEFAULT_TYPE;
 double rssFormatVersion = RSSUtil.DEFAULT_VERSION;

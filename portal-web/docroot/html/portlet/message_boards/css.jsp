@@ -151,6 +151,11 @@ td.user-info {
 	float: right;
 }
 
+.portlet-message-boards .thread-flags {
+	float: left;
+	margin-left: 20px;
+}
+
 .portlet-message-boards .emoticons {
 	border: 1px solid #ccc;
 	margin-left: 10px;

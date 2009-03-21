@@ -112,6 +112,11 @@ public class UserImpl extends UserModelImpl implements User {
 	}
 
 	public String getDisplayURL(ThemeDisplay themeDisplay) {
+		return getDisplayURL(
+			themeDisplay.getPortalURL(), themeDisplay.getPathMain());
+
+	}
+	public String getDisplayURL(String portalURL, String pathMain) {
 		try {
 			Group group = getGroup();
 
@@ -121,8 +126,8 @@ public class UserImpl extends UserModelImpl implements User {
 				if (publicLayoutsPageCount > 0) {
 					StringBuilder sb = new StringBuilder();
 
-					sb.append(themeDisplay.getPortalURL());
-					sb.append(themeDisplay.getPathMain());
+					sb.append(portalURL);
+					sb.append(pathMain);
 					sb.append("/my_places/view?groupId=");
 					sb.append(group.getGroupId());
 					sb.append("&privateLayout=0");

@@ -453,6 +453,10 @@
 		<put name="portlet_content" value="/portlet/expando/view.jsp" />
 	</definition>
 
+	<!-- Flags -->
+
+	<definition name="portlet.flags.edit_flags_entry" path="/portlet/flags/edit_flags_entry.jsp" />
+
 	<!-- IFrame -->
 
 	<definition name="portlet.iframe" extends="portlet" />
@@ -811,6 +815,14 @@
 
 	<definition name="portlet.page_comments.view" extends="portlet.page_comments">
 		<put name="portlet_content" value="/portlet/page_comments/view.jsp" />
+	</definition>
+
+	<!-- Page Flags -->
+
+	<definition name="portlet.page_flags" extends="portlet" />
+
+	<definition name="portlet.page_flags.view" extends="portlet.page_flags">
+		<put name="portlet_content" value="/portlet/page_flags/view.jsp" />
 	</definition>
 
 	<!-- Page Ratings -->

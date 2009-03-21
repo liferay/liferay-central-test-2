@@ -77,20 +77,17 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 		String tabs2 = ParamUtil.getString(actionRequest, "tabs2");
 
-		if (tabs2.equals("anonymous-posting")) {
-			updateAnonymousPosting(actionRequest, preferences);
-		}
-		else if (tabs2.equals("email-from")) {
+		if (tabs2.equals("email-from")) {
 			updateEmailFrom(actionRequest, preferences);
+		}
+		else if (tabs2.equals("general")) {
+			updateGeneral(actionRequest, preferences);
 		}
 		else if (tabs2.equals("message-added-email")) {
 			updateEmailMessageAdded(actionRequest, preferences);
 		}
 		else if (tabs2.equals("message-updated-email")) {
 			updateEmailMessageUpdated(actionRequest, preferences);
-		}
-		else if (tabs2.equals("ratings")) {
-			updateRatings(actionRequest, preferences);
 		}
 		else if (tabs2.equals("rss")) {
 			updateRSS(actionRequest, preferences);
@@ -116,16 +113,6 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		throws Exception {
 
 		return "/html/portlet/message_boards/configuration.jsp";
-	}
-
-	protected void updateAnonymousPosting(
-			ActionRequest actionRequest, PortletPreferences preferences)
-		throws Exception {
-
-		String allowAnonymousPosting = ParamUtil.getString(
-			actionRequest, "allowAnonymousPosting");
-
-		preferences.setValue("allow-anonymous-posting", allowAnonymousPosting);
 	}
 
 	protected void updateEmailFrom(
@@ -223,13 +210,19 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		}
 	}
 
-	protected void updateRatings(
+	protected void updateGeneral(
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
+		String allowAnonymousPosting = ParamUtil.getString(
+					actionRequest, "allowAnonymousPosting");
+		String enableFlags = ParamUtil.getString(
+			actionRequest, "enableFlags");
 		boolean enableMessageRatings = ParamUtil.getBoolean(
 			actionRequest, "enableMessageRatings");
 
+		preferences.setValue("allow-anonymous-posting", allowAnonymousPosting);
+		preferences.setValue("enable-flags", enableFlags);
 		preferences.setValue(
 			"enable-message-ratings", String.valueOf(enableMessageRatings));
 	}

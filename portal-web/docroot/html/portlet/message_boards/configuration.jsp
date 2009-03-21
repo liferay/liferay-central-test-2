@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/message_boards/init.jsp" %>
 
 <%
-String tabs2 = ParamUtil.getString(request, "tabs2", "email-from");
+String tabs2 = ParamUtil.getString(request, "tabs2", "general");
 
 String redirect = ParamUtil.getString(request, "redirect");
 
@@ -83,7 +83,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 
 <liferay-ui:tabs
-	names="email-from,message-added-email,message-updated-email,thread-priorities,user-ranks,rss,anonymous-posting,ratings"
+	names="general, email-from,message-added-email,message-updated-email,thread-priorities,user-ranks,rss"
 	param="tabs2"
 	url="<%= portletURL %>"
 />
@@ -98,6 +98,35 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 <liferay-ui:error key="emailMessageUpdatedSubjectPrefix" message="please-enter-a-valid-subject" />
 
 <c:choose>
+	<c:when test='<%= tabs2.equals("general") %>'>
+		<table class="lfr-table">
+		<tr>
+			<td class="lfr-label">
+				<liferay-ui:message key="allow-anonymous-posting" />
+			</td>
+			<td>
+				<liferay-ui:input-checkbox param="allowAnonymousPosting" defaultValue="<%= MBUtil.isAllowAnonymousPosting(preferences) %>" />
+			</td>
+		</tr>
+		<tr>
+			<td class="lfr-label">
+				<liferay-ui:message key="enable-message-ratings" />
+			</td>
+			<td>
+				<liferay-ui:input-checkbox param="enableMessageRatings" defaultValue="<%= enableMessageRatings %>" />
+			</td>
+		</tr>
+		<tr>
+			<td class="lfr-label">
+				<liferay-ui:message key="enable-flags" />
+			</td>
+			<td>
+				<liferay-ui:input-checkbox param="enableFlags" defaultValue="<%= enableFlags %>" />
+			</td>
+		</tr>
+		</table>
+
+	</c:when>
 	<c:when test='<%= tabs2.equals("email-from") %>'>
 		<table class="lfr-table">
 		<tr>
@@ -871,30 +900,6 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 					<option <%= (rssFormat.equals("rss20")) ? "selected" : "" %> value="rss20">RSS 2.0</option>
 					<option <%= (rssFormat.equals("atom10")) ? "selected" : "" %> value="atom10">Atom 1.0</option>
 				</select>
-			</td>
-		</tr>
-		</table>
-	</c:when>
-	<c:when test='<%= tabs2.equals("anonymous-posting") %>'>
-		<table class="lfr-table">
-		<tr>
-			<td class="lfr-label">
-				<liferay-ui:message key="allow-anonymous-posting" />
-			</td>
-			<td>
-				<liferay-ui:input-checkbox param="allowAnonymousPosting" defaultValue="<%= MBUtil.isAllowAnonymousPosting(preferences) %>" />
-			</td>
-		</tr>
-		</table>
-	</c:when>
-	<c:when test='<%= tabs2.equals("ratings") %>'>
-		<table class="lfr-table">
-		<tr>
-			<td class="lfr-label">
-				<liferay-ui:message key="enable-message-ratings" />
-			</td>
-			<td>
-				<liferay-ui:input-checkbox param="enableMessageRatings" defaultValue="<%= enableMessageRatings %>" />
 			</td>
 		</tr>
 		</table>

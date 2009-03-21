@@ -25,7 +25,18 @@
 <%@ include file="/html/taglib/ui/icon/init.jsp" %>
 
 <%
+if (method.equals("post") && (url.startsWith(Http.HTTP_WITH_SLASH) || url.startsWith(Http.HTTPS_WITH_SLASH))) {
+	url = "javascript: submitForm(document.hrefFm, '" + HttpUtil.encodeURL(url) + "');";
+}
+
+String idHtml = StringPool.BLANK;
+String randomId = StringPool.BLANK;
 String cssClassHtml = StringPool.BLANK;
+
+if (Validator.isNotNull(srcHover)){
+	randomId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
+	idHtml = " id=\"" + randomId + "\" ";
+}
 
 if (Validator.isNotNull(cssClass)) {
 	cssClassHtml = "class=\"nobr " + cssClass + "\"";
@@ -101,6 +112,19 @@ if (themeDisplay.isThemeImagesFastLoad()) {
 		<li <%= cssClassHtml %>><c:if test="<%= Validator.isNotNull(url) %>"><a href="<%= url %>" <%= onClickHtml %> <%= targetHtml %>></c:if><img class="icon" src="<%= src %>" <%= details %> /> <liferay-ui:message key="<%= message %>" /><c:if test="<%= Validator.isNotNull(url) %>"></a></c:if></li>
 	</c:when>
 	<c:otherwise>
-		<span <%= cssClassHtml %>><c:if test="<%= Validator.isNotNull(url) %>"><a href="<%= url %>" <%= onClickHtml %> <%= targetHtml %>></c:if><img class="icon" src="<%= src %>" <%= details %> /><c:if test="<%= Validator.isNotNull(url) %>"></a></c:if><c:if test="<%= label %>"> <c:if test="<%= Validator.isNotNull(url) %>"><a href="<%= url %>" <%= targetHtml %>></c:if><liferay-ui:message key="<%= message %>" /><c:if test="<%= Validator.isNotNull(url) %>"></a></c:if></c:if></span>
+		<span <%= cssClassHtml %> <%= idHtml %>><c:if test="<%= Validator.isNotNull(url) %>"><a href="<%= url %>" <%= targetHtml %>></c:if><img class="icon" src="<%= src %>" <%= details %> /><c:if test="<%= Validator.isNotNull(url) %>"></a></c:if><c:if test="<%= label %>"> <c:if test="<%= Validator.isNotNull(url) %>"><a href="<%= url %>" <%= targetHtml %>></c:if><liferay-ui:message key="<%= message %>" /><c:if test="<%= Validator.isNotNull(url) %>"></a></c:if></c:if></span>
 	</c:otherwise>
 </c:choose>
+
+<c:if test="<%= Validator.isNotNull(srcHover) %>">
+	<script type="text/javascript">
+		jQuery(function(){
+			jQuery('#<%= randomId %>').mouseover(function(){
+				jQuery('#<%= randomId %> img').attr('src','<%= srcHover %>');
+			});
+			jQuery('#<%= randomId %>').mouseout(function(){
+				jQuery('#<%= randomId %> img').attr('src','<%= src %>');
+			});
+		})
+	</script>
+</c:if>
