@@ -1517,6 +1517,10 @@ fieldset:last-child, .uni-form fieldset:last-child {
 
 /* ---------- Taglib ratings ---------- */
 
+.taglib-ratings.score {
+	white-space: nowrap;
+}
+
 .taglib-ratings.thumbs {
 	float: left;
 	margin: 0;
