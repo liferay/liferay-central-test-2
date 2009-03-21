@@ -351,7 +351,7 @@ for (int i = 0; i < fieldsCount; i++) {
 			<liferay-ui:message key="name" />
 		</td>
 		<td>
-		    <input class="lfr-input-text" name='<%= "fieldName" + i %>' type="text" value="<%= fieldName %>" style="width: 100px;" />
+			<input class="lfr-input-text" name='<%= "fieldName" + i %>' type="text" value="<%= fieldName %>" style="width: 100px;" />
 		</td>
 		<td>
 			<liferay-ui:message key="values" />
