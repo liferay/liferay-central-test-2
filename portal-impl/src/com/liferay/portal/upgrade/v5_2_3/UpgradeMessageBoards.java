@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -68,6 +70,17 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 				long categoryId = rs.getLong("categoryId");
 				long groupId = rs.getLong("groupId");
 
+				int threadCount =
+					MBThreadLocalServiceUtil.getCategoryThreadsCount(
+						categoryId);
+				int messageCount =
+					MBMessageLocalServiceUtil.getCategoryMessagesCount(
+						categoryId);
+
+				runSQL(
+					"update MBCategory set threadCount = " + threadCount +
+						", messageCount = " + messageCount +
+							" where categoryId = " + categoryId);
 				runSQL(
 					"update MBMessage set groupId = " + groupId +
 						" where categoryId = " + categoryId);

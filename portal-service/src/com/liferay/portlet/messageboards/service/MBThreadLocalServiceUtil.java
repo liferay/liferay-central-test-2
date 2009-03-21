@@ -128,10 +128,9 @@ public class MBThreadLocalServiceUtil {
 		getService().deleteThreads(categoryId);
 	}
 
-	public static int getCategoriesThreadsCount(
-		java.util.List<Long> categoryIds)
+	public static int getCategoryThreadsCount(long categoryId)
 		throws com.liferay.portal.SystemException {
-		return getService().getCategoriesThreadsCount(categoryIds);
+		return getService().getCategoryThreadsCount(categoryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> getGroupThreads(

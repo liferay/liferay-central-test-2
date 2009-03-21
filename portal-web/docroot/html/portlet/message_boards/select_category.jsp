@@ -28,6 +28,8 @@
 MBCategory category = (MBCategory)request.getAttribute(WebKeys.MESSAGE_BOARDS_CATEGORY);
 
 long categoryId = BeanParamUtil.getLong(category, request, "categoryId", MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
+
+MBCategoryDisplay categoryDisplay = new MBCategoryDisplayImpl(scopeGroupId, categoryId);
 %>
 
 <form method="post" name="<portlet:namespace />fm">
@@ -93,15 +95,9 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Statistics
 
-	List subcategoryIds = new ArrayList();
-
-	subcategoryIds.add(new Long(curCategory.getCategoryId()));
-
-	MBCategoryLocalServiceUtil.getSubcategoryIds(subcategoryIds, scopeGroupId, curCategory.getCategoryId());
-
-	int categoriesCount = subcategoryIds.size() - 1;
-	int threadsCount = MBThreadLocalServiceUtil.getCategoriesThreadsCount(subcategoryIds);
-	int messagesCount = MBMessageLocalServiceUtil.getCategoriesMessagesCount(subcategoryIds);
+	int categoriesCount = categoryDisplay.getSubcategoriesCount(curCategory);
+	int threadsCount = categoryDisplay.getSubcategoriesThreadsCount(curCategory);
+	int messagesCount = categoryDisplay.getSubcategoriesMessagesCount(curCategory);
 
 	row.addText(String.valueOf(categoriesCount), rowURL);
 	row.addText(String.valueOf(threadsCount), rowURL);

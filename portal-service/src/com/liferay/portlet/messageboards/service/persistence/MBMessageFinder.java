@@ -29,9 +29,6 @@ package com.liferay.portlet.messageboards.service.persistence;
  *
  */
 public interface MBMessageFinder {
-	public int countByCategoryIds(java.util.List<Long> categoryIds)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByNoAssets()
 		throws com.liferay.portal.SystemException;
 

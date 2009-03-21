@@ -299,6 +299,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			thread.setCategoryId(categoryId);
 			thread.setRootMessageId(messageId);
+
+			category.setThreadCount(category.getThreadCount() + 1);
 		}
 
 		thread.setMessageCount(thread.getMessageCount() + 1);
@@ -413,6 +415,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Category
 
+		category.setMessageCount(category.getMessageCount() + 1);
 		category.setLastPostDate(now);
 
 		mbCategoryPersistence.update(category, false);
@@ -671,6 +674,16 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			// Thread
 
 			mbThreadPersistence.remove(message.getThreadId());
+
+			// Category
+
+			MBCategory category = mbCategoryPersistence.findByPrimaryKey(
+				message.getCategoryId());
+
+			category.setThreadCount(category.getThreadCount() - 1);
+			category.setMessageCount(category.getMessageCount() - 1);
+
+			mbCategoryPersistence.update(category, false);
 		}
 		else if (count > 1) {
 			MBThread thread = mbThreadPersistence.findByPrimaryKey(
@@ -729,6 +742,15 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			thread.setMessageCount(count - 1);
 
 			mbThreadPersistence.update(thread, false);
+
+			// Category
+
+			MBCategory category = mbCategoryPersistence.findByPrimaryKey(
+				message.getCategoryId());
+
+			category.setMessageCount(count - 1);
+
+			mbCategoryPersistence.update(category, false);
 		}
 
 		// Tags
@@ -792,12 +814,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		throws SystemException {
 
 		return mbMessagePersistence.countByCategoryId(categoryId);
-	}
-
-	public int getCategoriesMessagesCount(List<Long> categoryIds)
-		throws SystemException {
-
-		return mbMessageFinder.countByCategoryIds(categoryIds);
 	}
 
 	public List<MBMessage> getCompanyMessages(

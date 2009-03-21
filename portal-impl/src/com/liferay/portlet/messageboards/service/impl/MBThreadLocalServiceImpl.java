@@ -140,6 +140,13 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			mbMessagePersistence.remove(message);
 		}
 
+		// Category
+
+		category.setThreadCount(category.getThreadCount() - 1);
+		category.setMessageCount(category.getMessageCount() - messages.size());
+
+		mbCategoryPersistence.update(category, false);
+
 		// Thread
 
 		mbThreadPersistence.remove(thread);
@@ -156,10 +163,8 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		}
 	}
 
-	public int getCategoriesThreadsCount(List<Long> categoryIds)
-		throws SystemException {
-
-		return mbThreadFinder.countByCategoryIds(categoryIds);
+	public int getCategoryThreadsCount(long categoryId) throws SystemException {
+		return mbThreadPersistence.countByCategoryId(categoryId);
 	}
 
 	public List<MBThread> getGroupThreads(long groupId, int start, int end)
@@ -292,6 +297,9 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		long oldCategoryId = thread.getCategoryId();
 
+		MBCategory oldCategory = mbCategoryPersistence.findByPrimaryKey(
+			oldCategoryId);
+
 		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
 			categoryId);
 
@@ -329,6 +337,19 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		thread.setCategoryId(category.getCategoryId());
 
 		mbThreadPersistence.update(thread, false);
+
+		// Category
+
+		oldCategory.setThreadCount(oldCategory.getThreadCount() - 1);
+		oldCategory.setMessageCount(
+			oldCategory.getMessageCount() - messages.size());
+
+		mbCategoryPersistence.update(oldCategory, false);
+
+		category.setThreadCount(category.getThreadCount() + 1);
+		category.setMessageCount(category.getMessageCount() + messages.size());
+
+		mbCategoryPersistence.update(category, false);
 
 		return thread;
 	}

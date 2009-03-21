@@ -278,12 +278,6 @@ public class MBMessageLocalServiceUtil {
 		return getService().getCategoryMessagesCount(categoryId);
 	}
 
-	public static int getCategoriesMessagesCount(
-		java.util.List<Long> categoryIds)
-		throws com.liferay.portal.SystemException {
-		return getService().getCategoriesMessagesCount(categoryIds);
-	}
-
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getCompanyMessages(
 		long companyId, int start, int end)
 		throws com.liferay.portal.SystemException {

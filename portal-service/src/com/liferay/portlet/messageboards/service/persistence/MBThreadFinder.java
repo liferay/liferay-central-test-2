@@ -29,9 +29,6 @@ package com.liferay.portlet.messageboards.service.persistence;
  *
  */
 public interface MBThreadFinder {
-	public int countByCategoryIds(java.util.List<Long> categoryIds)
-		throws com.liferay.portal.SystemException;
-
 	public int countByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 

@@ -112,7 +112,7 @@ public interface MBThreadLocalService {
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCategoriesThreadsCount(java.util.List<Long> categoryIds)
+	public int getCategoryThreadsCount(long categoryId)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

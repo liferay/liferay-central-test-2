@@ -26,14 +26,11 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
-import com.liferay.portal.kernel.dao.orm.Type;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -45,59 +42,11 @@ import java.util.List;
 public class MBMessageFinderImpl
 	extends BasePersistenceImpl implements MBMessageFinder {
 
-	public static String COUNT_BY_CATEGORY_IDS =
-		MBMessageFinder.class.getName() + ".countByCategoryIds";
-
 	public static String FIND_BY_NO_ASSETS =
 		MBMessageFinder.class.getName() + ".findByNoAssets";
 
 	public static String FIND_BY_C_C =
 		MBMessageFinder.class.getName() + ".findByC_C";
-
-	public int countByCategoryIds(List<Long> categoryIds)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(COUNT_BY_CATEGORY_IDS);
-
-			sql = StringUtil.replace(
-				sql, "[$CATEGORY_ID$]", getCategoryIds(categoryIds));
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			for (int i = 0; i < categoryIds.size(); i++) {
-				Long categoryId = categoryIds.get(i);
-
-				qPos.add(categoryId);
-			}
-
-			Iterator<Long> itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
 
 	public List<MBMessage> findByNoAssets() throws SystemException {
 		Session session = null;
@@ -148,20 +97,6 @@ public class MBMessageFinderImpl
 		finally {
 			closeSession(session);
 		}
-	}
-
-	protected String getCategoryIds(List<Long> categoryIds) {
-		StringBuilder sb = new StringBuilder();
-
-		for (int i = 0; i < categoryIds.size(); i++) {
-			sb.append("categoryId = ? ");
-
-			if ((i + 1) != categoryIds.size()) {
-				sb.append("OR ");
-			}
-		}
-
-		return sb.toString();
 	}
 
 }

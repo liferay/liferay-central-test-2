@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.model.MBThread;
@@ -47,9 +46,6 @@ import java.util.List;
 public class MBThreadFinderImpl
 	extends BasePersistenceImpl implements MBThreadFinder {
 
-	public static String COUNT_BY_CATEGORY_IDS =
-		MBThreadFinder.class.getName() + ".countByCategoryIds";
-
 	public static String COUNT_BY_G_U =
 		MBThreadFinder.class.getName() + ".countByG_U";
 
@@ -67,51 +63,6 @@ public class MBThreadFinderImpl
 
 	public static String FIND_BY_S_G_U =
 		MBThreadFinder.class.getName() + ".findByS_G_U";
-
-	public int countByCategoryIds(List<Long> categoryIds)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(COUNT_BY_CATEGORY_IDS);
-
-			sql = StringUtil.replace(
-				sql, "[$CATEGORY_ID$]", getCategoryIds(categoryIds));
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar(COUNT_COLUMN_NAME, Type.INTEGER);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			for (int i = 0; i < categoryIds.size(); i++) {
-				Long categoryId = categoryIds.get(i);
-
-				qPos.add(categoryId);
-			}
-
-			Iterator<Integer> itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Integer count = itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
 
 	public int countByG_U(long groupId, long userId) throws SystemException {
 		Session session = null;
@@ -322,20 +273,6 @@ public class MBThreadFinderImpl
 		finally {
 			closeSession(session);
 		}
-	}
-
-	protected String getCategoryIds(List<Long> categoryIds) {
-		StringBuilder sb = new StringBuilder();
-
-		for (int i = 0; i < categoryIds.size(); i++) {
-			sb.append("categoryId = ? ");
-
-			if ((i + 1) != categoryIds.size()) {
-				sb.append("OR ");
-			}
-		}
-
-		return sb.toString();
 	}
 
 }

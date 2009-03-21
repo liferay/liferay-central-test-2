@@ -33,16 +33,6 @@
 				MBCategory.lastPostDate DESC
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.countByCategoryIds">
-		<![CDATA[
-			SELECT
-				COUNT(*) AS COUNT_VALUE
-			FROM
-				MBMessage
-			WHERE
-				[$CATEGORY_ID$]
-		]]>
-	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.findByNoAssets">
 		<![CDATA[
 			SELECT
@@ -121,16 +111,6 @@
 				(MBMessageFlag.userId = ?) AND
 				(MBMessage.threadId = ?) AND
 				(MBMessageFlag.flag = ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByCategoryIds">
-		<![CDATA[
-			SELECT
-				COUNT(*) AS COUNT_VALUE
-			FROM
-				MBThread
-			WHERE
-				[$CATEGORY_ID$]
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByG_U">
