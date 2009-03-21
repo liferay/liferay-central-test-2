@@ -408,7 +408,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchProposalException, SystemException {
 		List<TasksProposal> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TasksProposal exists with the key {");
@@ -430,7 +430,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 
 		List<TasksProposal> list = findByGroupId(groupId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TasksProposal exists with the key {");
@@ -666,7 +666,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchProposalException, SystemException {
 		List<TasksProposal> list = findByG_U(groupId, userId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TasksProposal exists with the key {");
@@ -692,7 +692,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 		List<TasksProposal> list = findByG_U(groupId, userId, count - 1, count,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TasksProposal exists with the key {");
@@ -859,16 +859,15 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 
 				List<TasksProposal> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -880,7 +879,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<TasksProposal> list = (List<TasksProposal>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {

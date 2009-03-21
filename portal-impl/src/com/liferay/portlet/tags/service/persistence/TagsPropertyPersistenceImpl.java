@@ -406,7 +406,7 @@ public class TagsPropertyPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchPropertyException, SystemException {
 		List<TagsProperty> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TagsProperty exists with the key {");
@@ -429,7 +429,7 @@ public class TagsPropertyPersistenceImpl extends BasePersistenceImpl
 		List<TagsProperty> list = findByCompanyId(companyId, count - 1, count,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TagsProperty exists with the key {");
@@ -648,7 +648,7 @@ public class TagsPropertyPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchPropertyException, SystemException {
 		List<TagsProperty> list = findByEntryId(entryId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TagsProperty exists with the key {");
@@ -670,7 +670,7 @@ public class TagsPropertyPersistenceImpl extends BasePersistenceImpl
 
 		List<TagsProperty> list = findByEntryId(entryId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TagsProperty exists with the key {");
@@ -919,7 +919,7 @@ public class TagsPropertyPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchPropertyException, SystemException {
 		List<TagsProperty> list = findByC_K(companyId, key, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TagsProperty exists with the key {");
@@ -945,7 +945,7 @@ public class TagsPropertyPersistenceImpl extends BasePersistenceImpl
 		List<TagsProperty> list = findByC_K(companyId, key, count - 1, count,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TagsProperty exists with the key {");
@@ -1117,16 +1117,15 @@ public class TagsPropertyPersistenceImpl extends BasePersistenceImpl
 
 				List<TagsProperty> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1138,7 +1137,7 @@ public class TagsPropertyPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<TagsProperty> list = (List<TagsProperty>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {

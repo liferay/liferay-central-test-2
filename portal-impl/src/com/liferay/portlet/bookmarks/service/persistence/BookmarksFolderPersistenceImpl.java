@@ -434,7 +434,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchFolderException, SystemException {
 		List<BookmarksFolder> list = findByUuid(uuid, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BookmarksFolder exists with the key {");
@@ -456,7 +456,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl
 
 		List<BookmarksFolder> list = findByUuid(uuid, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BookmarksFolder exists with the key {");
@@ -620,16 +620,15 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl
 
 				List<BookmarksFolder> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -641,7 +640,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<BookmarksFolder> list = (List<BookmarksFolder>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {
@@ -798,7 +797,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchFolderException, SystemException {
 		List<BookmarksFolder> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BookmarksFolder exists with the key {");
@@ -821,7 +820,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl
 		List<BookmarksFolder> list = findByGroupId(groupId, count - 1, count,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BookmarksFolder exists with the key {");
@@ -1043,7 +1042,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchFolderException, SystemException {
 		List<BookmarksFolder> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BookmarksFolder exists with the key {");
@@ -1066,7 +1065,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl
 		List<BookmarksFolder> list = findByCompanyId(companyId, count - 1,
 				count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BookmarksFolder exists with the key {");
@@ -1305,7 +1304,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl
 		List<BookmarksFolder> list = findByG_P(groupId, parentFolderId, 0, 1,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BookmarksFolder exists with the key {");
@@ -1331,7 +1330,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl
 		List<BookmarksFolder> list = findByG_P(groupId, parentFolderId,
 				count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BookmarksFolder exists with the key {");

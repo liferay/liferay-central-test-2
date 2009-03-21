@@ -442,7 +442,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchFileVersionException, SystemException {
 		List<DLFileVersion> list = findByF_N(folderId, name, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileVersion exists with the key {");
@@ -469,7 +469,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 		List<DLFileVersion> list = findByF_N(folderId, name, count - 1, count,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileVersion exists with the key {");
@@ -659,16 +659,15 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 				List<DLFileVersion> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -680,7 +679,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<DLFileVersion> list = (List<DLFileVersion>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {

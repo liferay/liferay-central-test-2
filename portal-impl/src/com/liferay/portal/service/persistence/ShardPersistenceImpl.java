@@ -314,16 +314,15 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 
 				List<Shard> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -335,7 +334,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<Shard> list = (List<Shard>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {
@@ -417,16 +416,15 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 
 				List<Shard> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -438,7 +436,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<Shard> list = (List<Shard>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {

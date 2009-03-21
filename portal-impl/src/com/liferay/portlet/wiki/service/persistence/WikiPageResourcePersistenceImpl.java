@@ -341,16 +341,15 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 
 				List<WikiPageResource> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -362,7 +361,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 		else {
 			List<WikiPageResource> list = (List<WikiPageResource>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {

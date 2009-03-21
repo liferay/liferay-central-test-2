@@ -333,16 +333,15 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 
 				List<RatingsStats> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -354,7 +353,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<RatingsStats> list = (List<RatingsStats>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {

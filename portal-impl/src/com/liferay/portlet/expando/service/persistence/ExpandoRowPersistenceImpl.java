@@ -390,7 +390,7 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchRowException, SystemException {
 		List<ExpandoRow> list = findByTableId(tableId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoRow exists with the key {");
@@ -412,7 +412,7 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl
 
 		List<ExpandoRow> list = findByTableId(tableId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoRow exists with the key {");
@@ -550,16 +550,15 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl
 
 				List<ExpandoRow> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -571,7 +570,7 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<ExpandoRow> list = (List<ExpandoRow>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {

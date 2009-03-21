@@ -432,7 +432,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchQuestionException, SystemException {
 		List<PollsQuestion> list = findByUuid(uuid, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PollsQuestion exists with the key {");
@@ -454,7 +454,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl
 
 		List<PollsQuestion> list = findByUuid(uuid, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PollsQuestion exists with the key {");
@@ -616,16 +616,15 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl
 
 				List<PollsQuestion> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -637,7 +636,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<PollsQuestion> list = (List<PollsQuestion>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {
@@ -792,7 +791,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchQuestionException, SystemException {
 		List<PollsQuestion> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PollsQuestion exists with the key {");
@@ -814,7 +813,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl
 
 		List<PollsQuestion> list = findByGroupId(groupId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PollsQuestion exists with the key {");

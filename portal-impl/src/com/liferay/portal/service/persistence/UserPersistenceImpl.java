@@ -470,7 +470,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchUserException, SystemException {
 		List<User> list = findByUuid(uuid, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No User exists with the key {");
@@ -492,7 +492,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 		List<User> list = findByUuid(uuid, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No User exists with the key {");
@@ -696,7 +696,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchUserException, SystemException {
 		List<User> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No User exists with the key {");
@@ -718,7 +718,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 		List<User> list = findByCompanyId(companyId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No User exists with the key {");
@@ -841,16 +841,15 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 				List<User> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -862,7 +861,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<User> list = (List<User>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {
@@ -1019,7 +1018,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchUserException, SystemException {
 		List<User> list = findByEmailAddress(emailAddress, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No User exists with the key {");
@@ -1041,7 +1040,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 		List<User> list = findByEmailAddress(emailAddress, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No User exists with the key {");
@@ -1179,16 +1178,15 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 				List<User> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1200,7 +1198,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<User> list = (List<User>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {
@@ -1268,16 +1266,15 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 				List<User> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1289,7 +1286,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<User> list = (List<User>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {
@@ -1369,16 +1366,15 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 				List<User> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1390,7 +1386,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<User> list = (List<User>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {
@@ -1472,16 +1468,15 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 				List<User> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1493,7 +1488,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<User> list = (List<User>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {
@@ -1580,16 +1575,15 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 				List<User> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1601,7 +1595,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<User> list = (List<User>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {
@@ -1688,16 +1682,15 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 				List<User> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1709,7 +1702,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<User> list = (List<User>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {

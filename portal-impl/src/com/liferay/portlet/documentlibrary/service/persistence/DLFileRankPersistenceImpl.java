@@ -402,7 +402,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchFileRankException, SystemException {
 		List<DLFileRank> list = findByUserId(userId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileRank exists with the key {");
@@ -424,7 +424,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 
 		List<DLFileRank> list = findByUserId(userId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileRank exists with the key {");
@@ -672,7 +672,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchFileRankException, SystemException {
 		List<DLFileRank> list = findByF_N(folderId, name, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileRank exists with the key {");
@@ -697,7 +697,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 
 		List<DLFileRank> list = findByF_N(folderId, name, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileRank exists with the key {");
@@ -892,16 +892,15 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 
 				List<DLFileRank> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -913,7 +912,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<DLFileRank> list = (List<DLFileRank>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {

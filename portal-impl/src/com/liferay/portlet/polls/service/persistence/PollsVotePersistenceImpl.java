@@ -390,7 +390,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchVoteException, SystemException {
 		List<PollsVote> list = findByQuestionId(questionId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PollsVote exists with the key {");
@@ -413,7 +413,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl
 		List<PollsVote> list = findByQuestionId(questionId, count - 1, count,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PollsVote exists with the key {");
@@ -616,7 +616,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchVoteException, SystemException {
 		List<PollsVote> list = findByChoiceId(choiceId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PollsVote exists with the key {");
@@ -638,7 +638,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl
 
 		List<PollsVote> list = findByChoiceId(choiceId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PollsVote exists with the key {");
@@ -778,16 +778,15 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl
 
 				List<PollsVote> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -799,7 +798,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl
 		else {
 			List<PollsVote> list = (List<PollsVote>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {

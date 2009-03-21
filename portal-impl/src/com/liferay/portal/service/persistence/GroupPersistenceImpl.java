@@ -376,16 +376,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 				List<Group> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -397,7 +396,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<Group> list = (List<Group>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {
@@ -488,16 +487,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 				List<Group> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -509,7 +507,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<Group> list = (List<Group>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {
@@ -600,16 +598,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 				List<Group> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -621,7 +618,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<Group> list = (List<Group>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {
@@ -716,16 +713,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 				List<Group> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -737,7 +733,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<Group> list = (List<Group>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {

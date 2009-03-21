@@ -405,7 +405,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchOrderException, SystemException {
 		List<ShoppingOrder> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ShoppingOrder exists with the key {");
@@ -427,7 +427,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 
 		List<ShoppingOrder> list = findByGroupId(groupId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ShoppingOrder exists with the key {");
@@ -571,16 +571,15 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 
 				List<ShoppingOrder> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -592,7 +591,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<ShoppingOrder> list = (List<ShoppingOrder>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {
@@ -673,16 +672,15 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 
 				List<ShoppingOrder> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -694,7 +692,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<ShoppingOrder> list = (List<ShoppingOrder>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {
@@ -900,7 +898,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 		List<ShoppingOrder> list = findByG_U_PPPS(groupId, userId,
 				ppPaymentStatus, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ShoppingOrder exists with the key {");
@@ -930,7 +928,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 		List<ShoppingOrder> list = findByG_U_PPPS(groupId, userId,
 				ppPaymentStatus, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ShoppingOrder exists with the key {");

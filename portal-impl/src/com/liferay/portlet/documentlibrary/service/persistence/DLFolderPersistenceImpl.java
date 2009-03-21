@@ -427,7 +427,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchFolderException, SystemException {
 		List<DLFolder> list = findByUuid(uuid, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFolder exists with the key {");
@@ -449,7 +449,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 		List<DLFolder> list = findByUuid(uuid, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFolder exists with the key {");
@@ -612,16 +612,15 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 				List<DLFolder> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -633,7 +632,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<DLFolder> list = (List<DLFolder>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {
@@ -789,7 +788,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchFolderException, SystemException {
 		List<DLFolder> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFolder exists with the key {");
@@ -811,7 +810,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 		List<DLFolder> list = findByGroupId(groupId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFolder exists with the key {");
@@ -1031,7 +1030,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchFolderException, SystemException {
 		List<DLFolder> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFolder exists with the key {");
@@ -1053,7 +1052,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 		List<DLFolder> list = findByCompanyId(companyId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFolder exists with the key {");
@@ -1290,7 +1289,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchFolderException, SystemException {
 		List<DLFolder> list = findByG_P(groupId, parentFolderId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFolder exists with the key {");
@@ -1316,7 +1315,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 		List<DLFolder> list = findByG_P(groupId, parentFolderId, count - 1,
 				count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFolder exists with the key {");
@@ -1576,7 +1575,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchFolderException, SystemException {
 		List<DLFolder> list = findByP_N(parentFolderId, name, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFolder exists with the key {");
@@ -1602,7 +1601,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 		List<DLFolder> list = findByP_N(parentFolderId, name, count - 1, count,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFolder exists with the key {");
@@ -1789,16 +1788,15 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 				List<DLFolder> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1810,7 +1808,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<DLFolder> list = (List<DLFolder>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {

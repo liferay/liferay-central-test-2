@@ -432,7 +432,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchStructureException, SystemException {
 		List<JournalStructure> list = findByUuid(uuid, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalStructure exists with the key {");
@@ -454,7 +454,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 		List<JournalStructure> list = findByUuid(uuid, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalStructure exists with the key {");
@@ -616,16 +616,15 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 				List<JournalStructure> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -637,7 +636,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 		else {
 			List<JournalStructure> list = (List<JournalStructure>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {
@@ -792,7 +791,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchStructureException, SystemException {
 		List<JournalStructure> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalStructure exists with the key {");
@@ -815,7 +814,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 		List<JournalStructure> list = findByGroupId(groupId, count - 1, count,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalStructure exists with the key {");
@@ -1047,7 +1046,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchStructureException, SystemException {
 		List<JournalStructure> list = findByStructureId(structureId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalStructure exists with the key {");
@@ -1070,7 +1069,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 		List<JournalStructure> list = findByStructureId(structureId, count - 1,
 				count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalStructure exists with the key {");
@@ -1233,16 +1232,15 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 				List<JournalStructure> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1254,7 +1252,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 		else {
 			List<JournalStructure> list = (List<JournalStructure>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {
@@ -1442,7 +1440,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 		List<JournalStructure> list = findByG_P(groupId, parentStructureId, 0,
 				1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalStructure exists with the key {");
@@ -1469,7 +1467,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 		List<JournalStructure> list = findByG_P(groupId, parentStructureId,
 				count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalStructure exists with the key {");

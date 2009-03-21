@@ -424,7 +424,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchNodeException, SystemException {
 		List<WikiNode> list = findByUuid(uuid, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No WikiNode exists with the key {");
@@ -446,7 +446,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 		List<WikiNode> list = findByUuid(uuid, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No WikiNode exists with the key {");
@@ -606,16 +606,15 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 				List<WikiNode> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -627,7 +626,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 		else {
 			List<WikiNode> list = (List<WikiNode>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {
@@ -781,7 +780,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchNodeException, SystemException {
 		List<WikiNode> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No WikiNode exists with the key {");
@@ -803,7 +802,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 		List<WikiNode> list = findByGroupId(groupId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No WikiNode exists with the key {");
@@ -1019,7 +1018,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchNodeException, SystemException {
 		List<WikiNode> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No WikiNode exists with the key {");
@@ -1041,7 +1040,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 		List<WikiNode> list = findByCompanyId(companyId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No WikiNode exists with the key {");
@@ -1194,16 +1193,15 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 				List<WikiNode> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1215,7 +1213,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 		else {
 			List<WikiNode> list = (List<WikiNode>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {

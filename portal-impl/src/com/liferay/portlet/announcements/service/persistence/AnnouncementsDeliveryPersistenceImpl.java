@@ -400,7 +400,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchDeliveryException, SystemException {
 		List<AnnouncementsDelivery> list = findByUserId(userId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No AnnouncementsDelivery exists with the key {");
@@ -423,7 +423,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 		List<AnnouncementsDelivery> list = findByUserId(userId, count - 1,
 				count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No AnnouncementsDelivery exists with the key {");
@@ -569,16 +569,15 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 
 				List<AnnouncementsDelivery> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -590,7 +589,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<AnnouncementsDelivery> list = (List<AnnouncementsDelivery>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {

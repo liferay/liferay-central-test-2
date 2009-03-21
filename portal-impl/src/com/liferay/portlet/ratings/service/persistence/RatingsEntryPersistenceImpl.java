@@ -411,7 +411,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchEntryException, SystemException {
 		List<RatingsEntry> list = findByC_C(classNameId, classPK, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No RatingsEntry exists with the key {");
@@ -437,7 +437,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 		List<RatingsEntry> list = findByC_C(classNameId, classPK, count - 1,
 				count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No RatingsEntry exists with the key {");
@@ -596,16 +596,15 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 
 				List<RatingsEntry> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -617,7 +616,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<RatingsEntry> list = (List<RatingsEntry>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {

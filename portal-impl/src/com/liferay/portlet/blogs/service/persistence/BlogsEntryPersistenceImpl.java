@@ -429,7 +429,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchEntryException, SystemException {
 		List<BlogsEntry> list = findByUuid(uuid, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsEntry exists with the key {");
@@ -451,7 +451,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 		List<BlogsEntry> list = findByUuid(uuid, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsEntry exists with the key {");
@@ -613,16 +613,15 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 				List<BlogsEntry> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -634,7 +633,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<BlogsEntry> list = (List<BlogsEntry>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {
@@ -789,7 +788,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchEntryException, SystemException {
 		List<BlogsEntry> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsEntry exists with the key {");
@@ -811,7 +810,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 		List<BlogsEntry> list = findByGroupId(groupId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsEntry exists with the key {");
@@ -1029,7 +1028,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchEntryException, SystemException {
 		List<BlogsEntry> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsEntry exists with the key {");
@@ -1051,7 +1050,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 		List<BlogsEntry> list = findByCompanyId(companyId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsEntry exists with the key {");
@@ -1284,7 +1283,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchEntryException, SystemException {
 		List<BlogsEntry> list = findByG_U(groupId, userId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsEntry exists with the key {");
@@ -1309,7 +1308,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 		List<BlogsEntry> list = findByG_U(groupId, userId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsEntry exists with the key {");
@@ -1474,16 +1473,15 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 				List<BlogsEntry> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1495,7 +1493,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<BlogsEntry> list = (List<BlogsEntry>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {
@@ -1701,7 +1699,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		List<BlogsEntry> list = findByG_D_D(groupId, displayDate, draft, 0, 1,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsEntry exists with the key {");
@@ -1731,7 +1729,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		List<BlogsEntry> list = findByG_D_D(groupId, displayDate, draft,
 				count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsEntry exists with the key {");
@@ -2026,7 +2024,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		List<BlogsEntry> list = findByC_D_D(companyId, displayDate, draft, 0,
 				1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsEntry exists with the key {");
@@ -2056,7 +2054,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		List<BlogsEntry> list = findByC_D_D(companyId, displayDate, draft,
 				count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsEntry exists with the key {");
@@ -2365,7 +2363,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		List<BlogsEntry> list = findByG_U_D_D(groupId, userId, displayDate,
 				draft, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsEntry exists with the key {");
@@ -2398,7 +2396,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		List<BlogsEntry> list = findByG_U_D_D(groupId, userId, displayDate,
 				draft, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsEntry exists with the key {");

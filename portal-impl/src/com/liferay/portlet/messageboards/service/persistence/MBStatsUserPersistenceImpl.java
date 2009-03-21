@@ -406,7 +406,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchStatsUserException, SystemException {
 		List<MBStatsUser> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBStatsUser exists with the key {");
@@ -428,7 +428,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 
 		List<MBStatsUser> list = findByGroupId(groupId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBStatsUser exists with the key {");
@@ -647,7 +647,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchStatsUserException, SystemException {
 		List<MBStatsUser> list = findByUserId(userId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBStatsUser exists with the key {");
@@ -669,7 +669,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 
 		List<MBStatsUser> list = findByUserId(userId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBStatsUser exists with the key {");
@@ -818,16 +818,15 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 
 				List<MBStatsUser> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -839,7 +838,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<MBStatsUser> list = (List<MBStatsUser>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {
@@ -1010,7 +1009,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchStatsUserException, SystemException {
 		List<MBStatsUser> list = findByG_M(groupId, messageCount, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBStatsUser exists with the key {");
@@ -1036,7 +1035,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 		List<MBStatsUser> list = findByG_M(groupId, messageCount, count - 1,
 				count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBStatsUser exists with the key {");

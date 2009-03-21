@@ -321,16 +321,15 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 
 				List<Country> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -342,7 +341,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<Country> list = (List<Country>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {
@@ -421,16 +420,15 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 
 				List<Country> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -442,7 +440,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<Country> list = (List<Country>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {
@@ -521,16 +519,15 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 
 				List<Country> list = q.list();
 
+				if (list.isEmpty()) {
+					return null;
+				}
+
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
+				return list.get(0);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -542,7 +539,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<Country> list = (List<Country>)result;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				return null;
 			}
 			else {
@@ -694,7 +691,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchCountryException, SystemException {
 		List<Country> list = findByActive(active, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Country exists with the key {");
@@ -716,7 +713,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 
 		List<Country> list = findByActive(active, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Country exists with the key {");
