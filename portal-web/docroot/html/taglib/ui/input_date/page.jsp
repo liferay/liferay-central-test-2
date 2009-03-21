@@ -83,6 +83,24 @@ if (dateFormatPattern.indexOf("y") == 0) {
 					instance._yearRange = options.yearRange.join(':');
 					instance._firstDay = options.firstDay;
 
+					if (options.dayField != options.monthField &&
+						options.dayField != options.yearField) {
+
+						instance._setDays();
+
+						instance._yearField.bind('change keypress',
+							function() {
+								instance._setDays();
+							}
+						);
+
+						instance._monthField.bind('change keypress',
+							function() {
+								instance._setDays();
+							}
+						);
+					}
+
 					var button = jQuery('<img class="exp-datepicker-button" src="<%= themeDisplay.getPathThemeImages() %>/common/calendar.png" />');
 
 					instance._input.after(button);
@@ -128,6 +146,16 @@ if (dateFormatPattern.indexOf("y") == 0) {
 					);
 				},
 
+				_daysInMonth: function(year, month) {
+					var days = 31;
+
+					if (year != '' && month != '') {
+						days = 32 - (new Date(year, month, 32)).getDate();
+					}
+
+					return days;
+				},
+
 				_onSelect: function(eventName, dates) {
 					var instance = this;
 
@@ -147,6 +175,24 @@ if (dateFormatPattern.indexOf("y") == 0) {
 					}
 
 					instance._dayField.val(day);
+				},
+
+				_setDays: function() {
+					var instance = this;
+
+					var days = instance._daysInMonth(instance._yearField.val(), instance._monthField.val());
+
+					var curDay = instance._dayField.val();
+
+					curDay = curDay <= days ? curDay : days;
+
+					if (!instance._dayOptions) {
+						instance._dayOptions = instance._dayField.find('option');
+					}
+
+					instance._dayField.empty();
+					instance._dayField.append(instance._dayOptions.slice(0, days));
+					instance._dayField.val(curDay);
 				},
 
 				_showDatePicker: function() {
