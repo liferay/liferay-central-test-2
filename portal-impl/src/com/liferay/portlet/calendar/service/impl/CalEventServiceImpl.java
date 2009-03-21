@@ -80,7 +80,7 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 		CalEventPermission.check(
 			getPermissionChecker(), eventId, ActionKeys.VIEW);
 
-		return calEventLocalService.exportEvent(getUserId(), eventId);
+		return calEventLocalService.exportEvent(getGuestOrUserId(), eventId);
 	}
 
 	public File exportGroupEvents(long groupId, String fileName)
