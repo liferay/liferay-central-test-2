@@ -196,8 +196,8 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 										<liferay-ui:icon
 											image='<%= "../document_library/" + extension %>'
 											message="<%= extension.toUpperCase() %>"
-											method="get"
 											url="<%= exportArticleURL.toString() %>"
+											method="get"
 											label="<%= true %>"
 										/>
 
