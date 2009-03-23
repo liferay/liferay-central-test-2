@@ -25,6 +25,8 @@
 <%@ include file="/html/taglib/ui/icon/init.jsp" %>
 
 <%
+String randomId = StringPool.BLANK;
+
 String cssClassHtml = StringPool.BLANK;
 
 if (Validator.isNotNull(cssClass)) {
@@ -34,7 +36,7 @@ if (Validator.isNotNull(cssClass)) {
 String idHtml = StringPool.BLANK;
 
 if (Validator.isNotNull(srcHover)){
-	String randomId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
+	randomId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 
 	idHtml = " id=\"" + randomId + "\" ";
 }
@@ -119,15 +121,15 @@ if (themeDisplay.isThemeImagesFastLoad()) {
 			function() {
 				var icon = jQuery('#<%= randomId %>');
 
-				icon.mouseover(
-					function() {
-						jQuery('img', this).attr('src', '<%= srcHover %>');
-					}
-				);
-
 				icon.mouseout(
 					function() {
 						jQuery('img', this).attr('src', '<%= src %>');
+					}
+				);
+
+				icon.mouseover(
+					function() {
+						jQuery('img', this).attr('src', '<%= srcHover %>');
 					}
 				);
 			}
