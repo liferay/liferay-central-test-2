@@ -881,6 +881,8 @@ public interface PropsKeys {
 
 	public static final String OPEN_SSO_SERVICE_URL = "open.sso.service.url";
 
+	public static final String OPENOFFICE_CACHE_ENABLED = "openoffice.cache.enabled";
+
 	public static final String OPENOFFICE_SERVER_ENABLED = "openoffice.server.enabled";
 
 	public static final String OPENOFFICE_SERVER_HOST = "openoffice.server.host";

@@ -134,7 +134,7 @@ public class DocumentConversionUtil {
 
 		File file = new File(fileName);
 
-		if (!file.exists()) {
+		if (!PropsValues.OPENOFFICE_CACHE_ENABLED || !file.exists()) {
 			DocumentFormatRegistry registry =
 				new DefaultDocumentFormatRegistry();
 

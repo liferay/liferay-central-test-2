@@ -905,6 +905,10 @@ public class PropsValues {
 	public static final String OPEN_SSO_SERVICE_URL =
 		PropsUtil.get(PropsKeys.OPEN_SSO_SERVICE_URL);
 
+	public static final boolean OPENOFFICE_CACHE_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.OPENOFFICE_CACHE_ENABLED));
+
 	public static final boolean OPENOFFICE_SERVER_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.OPENOFFICE_SERVER_ENABLED));
