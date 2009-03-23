@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
@@ -150,39 +151,46 @@ public class StartupHelper {
 			String[] verifyProcesses = PropsUtil.getArray(
 				PropsKeys.VERIFY_PROCESSES);
 
-			for (int i = 0; i < verifyProcesses.length; i++) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Initializing verification " + verifyProcesses[i]);
-				}
+			BatchSessionUtil.setEnabled(true);
 
-				try {
-					VerifyProcess verifyProcess = (VerifyProcess)Class.forName(
-						verifyProcesses[i]).newInstance();
-
+			try {
+				for (int i = 0; i < verifyProcesses.length; i++) {
 					if (_log.isDebugEnabled()) {
 						_log.debug(
-							"Running verification " + verifyProcesses[i]);
+							"Initializing verification " + verifyProcesses[i]);
 					}
 
-					verifyProcess.verify();
+					try {
+						VerifyProcess verifyProcess = (VerifyProcess)Class.forName(
+							verifyProcesses[i]).newInstance();
 
-					if (_log.isDebugEnabled()) {
-						_log.debug(
-							"Finished verification " + verifyProcesses[i]);
+						if (_log.isDebugEnabled()) {
+							_log.debug(
+								"Running verification " + verifyProcesses[i]);
+						}
+
+						verifyProcess.verify();
+
+						if (_log.isDebugEnabled()) {
+							_log.debug(
+								"Finished verification " + verifyProcesses[i]);
+						}
+
+						_verified = true;
 					}
-
-					_verified = true;
+					catch (ClassNotFoundException cnfe) {
+						_log.error(verifyProcesses[i] + " cannot be found");
+					}
+					catch (IllegalAccessException iae) {
+						_log.error(verifyProcesses[i] + " cannot be accessed");
+					}
+					catch (InstantiationException ie) {
+						_log.error(verifyProcesses[i] + " cannot be initiated");
+					}
 				}
-				catch (ClassNotFoundException cnfe) {
-					_log.error(verifyProcesses[i] + " cannot be found");
-				}
-				catch (IllegalAccessException iae) {
-					_log.error(verifyProcesses[i] + " cannot be accessed");
-				}
-				catch (InstantiationException ie) {
-					_log.error(verifyProcesses[i] + " cannot be initiated");
-				}
+			}
+			finally {
+				BatchSessionUtil.setEnabled(false);
 			}
 		}
 
