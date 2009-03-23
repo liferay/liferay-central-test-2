@@ -176,14 +176,12 @@
 			</div>
 
 			<c:if test="<%= enableFlags %>">
-				<div class="entry-flags">
-					<liferay-ui:flags
-						className="<%= BlogsEntry.class.getName() %>"
-						classPK="<%= entry.getEntryId() %>"
-						userId="<%= entry.getUserId() %>"
-						title="<%= entry.getTitle() %>"
-					/>
-				</div>
+				<liferay-ui:flags
+					className="<%= BlogsEntry.class.getName() %>"
+					classPK="<%= entry.getEntryId() %>"
+					userId="<%= entry.getUserId() %>"
+					title="<%= entry.getTitle() %>"
+				/>
 			</c:if>
 
 			<div class="entry-tags">

@@ -426,14 +426,12 @@
 				</c:if>
 
 				<c:if test="<%= enableFlags %>">
-					<div class="thread-flags">
-						<liferay-ui:flags
-							className="<%= MBMessage.class.getName() %>"
-							classPK="<%= message.getMessageId() %>"
-							userId="<%= message.getUserId() %>"
-							title="<%= message.getSubject() %>"
-						/>
-					</div>
+					<liferay-ui:flags
+						className="<%= MBMessage.class.getName() %>"
+						classPK="<%= message.getMessageId() %>"
+						userId="<%= message.getUserId() %>"
+						title="<%= message.getSubject() %>"
+					/>
 				</c:if>
 
 				<ul class="edit-controls lfr-component">

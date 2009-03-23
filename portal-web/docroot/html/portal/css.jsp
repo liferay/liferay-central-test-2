@@ -1475,6 +1475,16 @@ fieldset:last-child, .uni-form fieldset:last-child {
 	width: 100%;
 }
 
+/* ---------- Taglib flags ---------- */
+
+.taglib-flags {
+	display: inline-block;
+}
+
+.taglib-flags span a {
+	margin-right: 2px;
+}
+
 /* ---------- Taglib icon list ---------- */
 
 .taglib-icon-list li {

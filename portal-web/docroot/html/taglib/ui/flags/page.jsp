@@ -35,13 +35,15 @@ String randomClass = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 String contentType = LanguageUtil.get(pageContext, "model.resource." + className);
 %>
 
-<liferay-ui:icon image="../ratings/flagged_icon" imageHover="../ratings/flagged_icon_hover" message="<%= message %>" cssClass="<%= randomClass  %>" label="<%= label %>" url="javascript: ;" />
+<div class="taglib-flags">
+	<liferay-ui:icon image="../ratings/flagged_icon" imageHover="../ratings/flagged_icon_hover" message="<%= message %>" cssClass="<%= randomClass  %>" label="<%= label %>" url="javascript: ;" />
+</div>
 
 <c:choose>
 	<c:when test="<%= PropsValues.FLAGS_GUEST_USERS || themeDisplay.isSignedIn() %>">
 		<script type="text/javascript">
 			jQuery('.<%= randomClass %>').click(
-				function(){
+				function() {
 					var popup = new Expanse.Popup(
 						{
 							header: '<%= LanguageUtil.format(pageContext, "report-this-x-as-inappropriate", contentType) %>',

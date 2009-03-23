@@ -25,21 +25,18 @@
 <%@ include file="/html/taglib/ui/icon/init.jsp" %>
 
 <%
-if (method.equals("post") && (url.startsWith(Http.HTTP_WITH_SLASH) || url.startsWith(Http.HTTPS_WITH_SLASH))) {
-	url = "javascript: submitForm(document.hrefFm, '" + HttpUtil.encodeURL(url) + "');";
-}
-
-String idHtml = StringPool.BLANK;
-String randomId = StringPool.BLANK;
 String cssClassHtml = StringPool.BLANK;
-
-if (Validator.isNotNull(srcHover)){
-	randomId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
-	idHtml = " id=\"" + randomId + "\" ";
-}
 
 if (Validator.isNotNull(cssClass)) {
 	cssClassHtml = "class=\"nobr " + cssClass + "\"";
+}
+
+String idHtml = StringPool.BLANK;
+
+if (Validator.isNotNull(srcHover)){
+	String randomId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
+
+	idHtml = " id=\"" + randomId + "\" ";
 }
 
 String onClickHtml = StringPool.BLANK;
@@ -118,13 +115,22 @@ if (themeDisplay.isThemeImagesFastLoad()) {
 
 <c:if test="<%= Validator.isNotNull(srcHover) %>">
 	<script type="text/javascript">
-		jQuery(function(){
-			jQuery('#<%= randomId %>').mouseover(function(){
-				jQuery('#<%= randomId %> img').attr('src','<%= srcHover %>');
-			});
-			jQuery('#<%= randomId %>').mouseout(function(){
-				jQuery('#<%= randomId %> img').attr('src','<%= src %>');
-			});
-		})
+		jQuery(
+			function() {
+				var icon = jQuery('#<%= randomId %>');
+
+				icon.mouseover(
+					function() {
+						jQuery('img', this).attr('src', '<%= srcHover %>');
+					}
+				);
+
+				icon.mouseout(
+					function() {
+						jQuery('img', this).attr('src', '<%= src %>');
+					}
+				);
+			}
+		);
 	</script>
 </c:if>

@@ -75,7 +75,7 @@
 	padding: 5px;
 }
 
-.portlet-blogs .entry-flags {
+.portlet-blogs .taglib-flags {
 	border-left: 1px solid #999;
 	color: #999;
 	float: left;

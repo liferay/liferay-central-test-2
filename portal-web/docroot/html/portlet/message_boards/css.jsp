@@ -151,7 +151,7 @@ td.user-info {
 	float: right;
 }
 
-.portlet-message-boards .thread-flags {
+.portlet-message-boards .taglib-flags {
 	float: left;
 	margin-left: 20px;
 }

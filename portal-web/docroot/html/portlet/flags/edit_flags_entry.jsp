@@ -33,22 +33,22 @@ String contentURL = ParamUtil.getString(request, "contentURL");
 %>
 
 <style type="text/css">
-.portlet-flags .uni-form fieldset {
-	border: none;
-	padding: 0;
-	width: 100%;
-}
+	.portlet-flags .uni-form fieldset {
+		border: none;
+		padding: 0;
+		width: 100%;
+	}
 
-.portlet-flags .uni-form .block-labels label {
-	font-weight: bold;
-}
+	.portlet-flags .uni-form .block-labels label {
+		font-weight: bold;
+	}
 </style>
 
 <div class="portlet-flags" id="<portlet:namespace />flagPopup">
 	<form class="uni-form" method="post" name="<portlet:namespace />flagForm">
 		<p><%= LanguageUtil.format(pageContext, "you-are-about-to-report-a-violation-of-our-x-terms-of-use-all-reports-are-strictly-confidential", themeDisplay.getPathMain() + "/portal/terms_of_use") %></p>
 
-		<fieldset class="block-labels col">
+		<fieldset class="block-labels">
 			<div class="ctrl-holder">
 				<label for="<portlet:namespace />reason"><liferay-ui:message key="reason-for-the-report" /></label>
 
@@ -90,7 +90,6 @@ String contentURL = ParamUtil.getString(request, "contentURL");
 
 				<input type="button" value="<liferay-ui:message key="cancel" />" onclick="Expanse.Popup.close(this)" />
 			</div>
-
 		</fieldset>
 	</form>
 </div>
@@ -104,40 +103,42 @@ String contentURL = ParamUtil.getString(request, "contentURL");
 		<input type="button" value="<liferay-ui:message key="close" />" onclick="Expanse.Popup.close(this)" />
 	</div>
 </div>
+
 <script type="text/javascript">
+	jQuery(
+		function(){
+			Liferay.Util.toggleSelectBox('<portlet:namespace />reason', 'other', '<portlet:namespace />otherReasonDiv');
+		}
+	);
 
-jQuery(function(){
-	Liferay.Util.toggleSelectBox('<portlet:namespace />reason', 'other', '<portlet:namespace />otherReasonDiv');
-});
+	function  <portlet:namespace />flag() {
+		var reason = jQuery('#<portlet:namespace />reason').val();
 
-function  <portlet:namespace />flag() {
-	var reason = jQuery('#<portlet:namespace />reason').val();
+		if (reason == 'other') {
+			reason = jQuery('#<portlet:namespace />otherReason').val() || '<liferay-ui:message key="no-reason-specified" />';
+		}
 
-	if (reason == 'other') {
-		reason = jQuery('#<portlet:namespace />otherReason').val() || '<liferay-ui:message key="no-reason-specified" />';
-	}
+		var emailAddress = jQuery('#<portlet:namespace />emailAddress').val() || "";
 
-	var emailAddress = jQuery('#<portlet:namespace />emailAddress').val() || "";
+		jQuery('#<portlet:namespace />flagPopup').html('<div class="loading-animation" />');
 
-	jQuery('#<portlet:namespace />flagPopup').html('<div class="loading-animation" />');
-
-	jQuery.ajax(
-			{
-				url:  '<liferay-portlet:actionURL portletName="<%= PortletKeys.FLAGS %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><liferay-portlet:param name="struts_action" value="/flags/edit_flags_entry" /></liferay-portlet:actionURL>',
-				data: {
-					className: '<%= HtmlUtil.escape(className) %>',
-					classPK: '<%= classPK %>',
-					userId: '<%= userId %>',
-					title: '<%= HtmlUtil.escape(title) %>',
-					contentURL: '<%= HtmlUtil.escape(contentURL) %>',
-					reason: reason,
-					emailAddress: emailAddress
-				},
-				success: function() {
-					var confirmationMessage = jQuery('#<portlet:namespace />confirmation');
-					jQuery('#<portlet:namespace />flagPopup').html(confirmationMessage.html());
+		jQuery.ajax(
+				{
+					url:  '<liferay-portlet:actionURL portletName="<%= PortletKeys.FLAGS %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><liferay-portlet:param name="struts_action" value="/flags/edit_flags_entry" /></liferay-portlet:actionURL>',
+					data: {
+						className: '<%= HtmlUtil.escape(className) %>',
+						classPK: '<%= classPK %>',
+						userId: '<%= userId %>',
+						title: '<%= HtmlUtil.escape(title) %>',
+						contentURL: '<%= HtmlUtil.escape(contentURL) %>',
+						reason: reason,
+						emailAddress: emailAddress
+					},
+					success: function() {
+						var confirmationMessage = jQuery('#<portlet:namespace />confirmation');
+						jQuery('#<portlet:namespace />flagPopup').html(confirmationMessage.html());
+					}
 				}
-			}
-		);
-}
+			);
+	}
 </script>
