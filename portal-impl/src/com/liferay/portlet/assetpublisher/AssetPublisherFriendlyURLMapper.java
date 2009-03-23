@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 
 import java.util.Map;
 
@@ -62,6 +61,7 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 			String assetId = portletURL.getParameter("assetId");
 			String type = GetterUtil.getString(
 				portletURL.getParameter("type"), "content");
+			String urlTitle = portletURL.getParameter("urlTitle");
 
 			if (Validator.isNotNull(portletId) &&
 				Validator.isNotNull(assetId)) {
@@ -83,7 +83,15 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 				friendlyURLPath =
 					"/asset_publisher/" + instanceId + StringPool.SLASH + type +
-						StringPool.SLASH + assetId;
+						StringPool.SLASH;
+
+				if (Validator.isNotNull(urlTitle)){
+					friendlyURLPath += urlTitle;
+					portletURL.addParameterIncludedInPath("urlTitle");
+				}
+				else {
+					friendlyURLPath += "id/" + assetId;
+				}
 
 				portletURL.addParameterIncludedInPath("type");
 				portletURL.addParameterIncludedInPath("assetId");
@@ -118,7 +126,15 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 		if (urlFragments.length > 2) {
 			String instanceId = urlFragments[0];
 			String type = urlFragments[1];
-			String assetId = urlFragments[2];
+			String assetId = null;
+			String urlTitle = null;
+
+			if (urlFragments.length > 3) {
+				assetId = urlFragments[3];
+			}
+			else {
+				urlTitle = urlFragments[2];
+			}
 
 			String portletId = _PORTLET_ID + "_INSTANCE_" + instanceId;
 
@@ -146,14 +162,12 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 				namespace + "struts_action",
 				new String[] {"/asset_publisher/view_content"});
 
-			if (Validator.isNumber(assetId) &&
-				!type.equals(AssetPublisherUtil.TYPE_CONTENT)) {
-
+			if (Validator.isNotNull(assetId)) {
 				params.put(namespace + "assetId", new String[] {assetId});
 			}
 			else {
 				params.put(namespace + "type", new String[] {type});
-				params.put(namespace + "urlTitle", new String[] {assetId});
+				params.put(namespace + "urlTitle", new String[] {urlTitle});
 			}
 		}
 	}

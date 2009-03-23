@@ -51,7 +51,7 @@ if (className.equals(BlogsEntry.class.getName())) {
 		title = entry.getTitle();
 	}
 
-	viewFullContentURL.setParameter("assetId", entry.getUrlTitle());
+	viewFullContentURL.setParameter("urlTitle", entry.getUrlTitle());
 	viewFullContentURL.setParameter("type", AssetPublisherUtil.TYPE_BLOG);
 
 	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/blogs/find_entry?noSuchEntryRedirect=" + HttpUtil.encodeURL(viewFullContentURL.toString()) + "&entryId=" + entry.getEntryId() : viewFullContentURL.toString();
@@ -116,7 +116,7 @@ else if (className.equals(JournalArticle.class.getName())) {
 		PortletURL articleURL = renderResponse.createRenderURL();
 
 		articleURL.setParameter("struts_action", "/asset_publisher/view_content");
-		articleURL.setParameter("assetId", articleDisplay.getArticleId());
+		articleURL.setParameter("urlTitle", articleDisplay.getArticleId());
 		articleURL.setParameter("type", AssetPublisherUtil.TYPE_CONTENT);
 
 		viewURL = articleURL.toString();

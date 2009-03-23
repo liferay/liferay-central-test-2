@@ -61,7 +61,7 @@ if (className.equals(BlogsEntry.class.getName())) {
 	String urlTitle = entry.getUrlTitle();
 
 	if (Validator.isNotNull(urlTitle)) {
-		viewFullContentURL.setParameter("assetId", urlTitle);
+		viewFullContentURL.setParameter("urlTitle", urlTitle);
 	}
 
 	summary = StringUtil.shorten(HtmlUtil.stripHtml(entry.getContent()), abstractLength);
@@ -197,7 +197,7 @@ else if (className.equals(JournalArticle.class.getName())) {
 			summary = StringUtil.shorten(HtmlUtil.stripHtml(articleDisplay.getContent()), abstractLength);
 		}
 
-		viewFullContentURL.setParameter("assetId", articleDisplay.getArticleId());
+		viewFullContentURL.setParameter("urlTitle", articleDisplay.getArticleId());
 		viewFullContentURL.setParameter("type", AssetPublisherUtil.TYPE_CONTENT);
 
 		viewURL = viewFullContentURL.toString();

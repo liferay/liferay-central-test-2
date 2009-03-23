@@ -41,7 +41,7 @@ String className = StringPool.BLANK;
 long classPK = 0;
 
 try {
-	if (assetId <= 0) {
+	if (Validator.isNotNull(urlTitle)) {
 		if (type.equals (AssetPublisherUtil.TYPE_BLOG)) {
 			BlogsEntry entry = BlogsEntryServiceUtil.getEntry(scopeGroupId, urlTitle);
 
@@ -57,7 +57,6 @@ try {
 
 		asset = TagsAssetLocalServiceUtil.getAsset(className, classPK);
 	}
-
 	else {
 		asset = TagsAssetLocalServiceUtil.getAsset(assetId);
 

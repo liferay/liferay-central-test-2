@@ -61,7 +61,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 			String urlTitle = entry.getUrlTitle();
 
-			viewFullContentURL.setParameter("assetId", urlTitle);
+			viewFullContentURL.setParameter("urlTitle", urlTitle);
 
 			String viewFullContent = viewFullContentURL.toString();
 
@@ -337,7 +337,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 						articlePageURL.setParameter("struts_action", "/asset_publisher/view_content");
 						articlePageURL.setParameter("redirect", pageRedirect);
-						articlePageURL.setParameter("assetId", articleDisplay.getArticleId());
+						articlePageURL.setParameter("urlTitle", articleDisplay.getArticleId());
 						articlePageURL.setParameter("cur", String.valueOf(cur));
 						%>
 

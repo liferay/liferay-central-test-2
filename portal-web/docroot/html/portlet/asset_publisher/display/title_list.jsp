@@ -57,7 +57,7 @@ if (className.equals(BlogsEntry.class.getName())) {
 	String urlTitle = entry.getUrlTitle();
 
 	if (Validator.isNotNull(urlTitle)) {
-		viewFullContentURL.setParameter("assetId", urlTitle);
+		viewFullContentURL.setParameter("urlTitle", urlTitle);
 	}
 
 	viewFullContentURL.setParameter("type", AssetPublisherUtil.TYPE_BLOG);
@@ -128,7 +128,7 @@ else if (className.equals(JournalArticle.class.getName())) {
 		PortletURL articleURL = renderResponse.createRenderURL();
 
 		articleURL.setParameter("struts_action", "/asset_publisher/view_content");
-		articleURL.setParameter("assetId", articleDisplay.getArticleId());
+		articleURL.setParameter("urlTitle", articleDisplay.getArticleId());
 		articleURL.setParameter("type", AssetPublisherUtil.TYPE_CONTENT);
 
 		viewURL = articleURL.toString();
