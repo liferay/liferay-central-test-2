@@ -595,6 +595,7 @@ alpha=Alpha
 already-registered=Rekisteröityneet
 alternative-shipping-calculation=Vaihtoehtoinen toimituslaskelma
 alternative-shipping=Vaihtoehtoinen toimitus
+although-we-cannot-disclose-our-final-decision,-we-do-review-every-report-and-appreciate-your-effort-to-make-sure-x-is-a-safe-environment-for-everyone=Although we cannot disclose our final decision, we do review every report and appreciate your effort to make sure {0} is a safe environment for everyone.
 always-use-my-user-id=Aina käytä minun käyttäjätunnusta.
 always=Aina
 americas=Amerikat
@@ -4093,6 +4094,7 @@ years=Vuodet
 yes=Kyllä
 yesterday=Eilen
 ym=YM
+you-are-about-to-report-a-violation-of-our-x-terms-of-use.-all-reports-are-strictly-confidential=You are about to report a violation of our <a href="{0}">Terms of Use</a>. All reports are strictly confidential.
 you-are-not-subscribed-to-any-categories=Et ole tilannut yhtään kategoriaa.
 you-are-not-subscribed-to-any-threads=Et ole tilannut yhtään viestiketjua.
 you-are-not-subscribed-to-this-page=Et ole tilannut tätä sivua.

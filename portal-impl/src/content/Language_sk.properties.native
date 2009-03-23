@@ -532,6 +532,7 @@ alpha=Alfa
 already-registered=Registrácia už prebehla
 alternative-shipping-calculation=Výpočet poštovného pre alternatívnu zásielku
 alternative-shipping=Alternatívna zásielka
+although-we-cannot-disclose-our-final-decision,-we-do-review-every-report-and-appreciate-your-effort-to-make-sure-x-is-a-safe-environment-for-everyone=Although we cannot disclose our final decision, we do review every report and appreciate your effort to make sure {0} is a safe environment for everyone.
 always-use-my-user-id=Vždy použiť moje používatľské ID.
 always=Vždy
 an-applet-version-of-the-editor-is-also-available=Je dostupná aj appletová verzia editora. Táto verzia je objemnejšia, ale viac používateľsky prítulná, poskytuje farebný text, vyhľadávanie a nahradzovanie a ďalšie funkcie. Úpravou portletových nastavení si môžete vybrať, ktorý editor chcete používať.
@@ -3682,6 +3683,7 @@ years=Roky
 yes=Áno
 yesterday=Včera
 ym=YM
+you-are-about-to-report-a-violation-of-our-x-terms-of-use.-all-reports-are-strictly-confidential=You are about to report a violation of our <a href="{0}">Terms of Use</a>. All reports are strictly confidential.
 you-are-not-subscribed-to-any-categories=Nie ste odberateľom ani jednej z kategórií.
 you-are-not-subscribed-to-any-threads=Nie ste odberateľom ani jednej z tém fóra.
 you-are-not-subscribed-to-this-page=Nie ste odberateľom tejto stránky.

@@ -165,6 +165,7 @@ alpha=Alfa
 already-registered=Již registrován
 alternative-shipping-calculation=Alternativní výpočet ceny dodání
 alternative-shipping=Alternativní dodání
+although-we-cannot-disclose-our-final-decision,-we-do-review-every-report-and-appreciate-your-effort-to-make-sure-x-is-a-safe-environment-for-everyone=Although we cannot disclose our final decision, we do review every report and appreciate your effort to make sure {0} is a safe environment for everyone.
 an-unexpected-database-error-occurred-while-querying-the-given-city-and-state=Neočekávaná chyba databáze během hledání města a země.
 an-unexpected-database-error-occurred-while-querying-the-given-street-city-and-state=Neočekávaná chyba databáze během hledání ulice, města a země.
 an-unexpected-database-error-occurred-while-querying-the-given-zip=Neočekávaná chyba databáze během hledání PSČ.
@@ -1658,6 +1659,7 @@ years=Roky
 yes=Ano
 yesterday=Včera
 ym=YM
+you-are-about-to-report-a-violation-of-our-x-terms-of-use.-all-reports-are-strictly-confidential=You are about to report a violation of our <a href="{0}">Terms of Use</a>. All reports are strictly confidential.
 you-are-signed-in-as-x=Nyní jste přihlášen(a) jako {0}.
 you-are-x=You are {0}.
 you-can-email-users-that-have-been-manually-added-to-the-database=Můžete obeslat uživatele kteří byli manuálně přidání do databáze. Tito uživatelé mají {0} jako jejich heslo. Zprovoznění těchto uživatelů zresetuje nové uživatele s náhodným heslem a informuje je o jejich novém účtu v portálu.

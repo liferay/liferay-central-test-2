@@ -384,6 +384,7 @@ alpha=ألفا
 already-registered=مسجل مسبقا
 alternative-shipping-calculation=حسبة طريقة الإرسال الأخرى
 alternative-shipping=طريقة إرسال أخرى
+although-we-cannot-disclose-our-final-decision,-we-do-review-every-report-and-appreciate-your-effort-to-make-sure-x-is-a-safe-environment-for-everyone=Although we cannot disclose our final decision, we do review every report and appreciate your effort to make sure {0} is a safe environment for everyone.
 an-applet-version-of-the-editor-is-also-available=توجد نسخة أخرى متطورة من محرر النصوص هذا تستخدم تقنية الأبليت. تعتبر ثقيلة نوعا ما لكنها توفر الكثير من المزايا مثل تلوين النص، البحث و التبديل وخصائص أخرى. يمكنك تفعيل النسخة المتطورة من خلال إختيارها في خصائص البورتلت.
 an-error-occurred-while-parsing-your-xml-please-check-the-syntax-of-your-xml=حدث خطأ عند قراءة الـXML. يرجى التأكد من الصيغة المدخلة.
 an-error-occurred-while-processing-your-xml-and-xsl=حدث خطأ خلال معالجة الـXML و XSL.
@@ -2579,6 +2580,7 @@ years=سنوات
 yes=نعم
 yesterday=أمس
 ym=YM
+you-are-about-to-report-a-violation-of-our-x-terms-of-use.-all-reports-are-strictly-confidential=You are about to report a violation of our <a href="{0}">Terms of Use</a>. All reports are strictly confidential.
 you-are-signed-in-as-x=لقد تم دخولك بإسم {0}.
 you-are-x=You are {0}.
 you-can-create-a-shortcut-to-any-document-that-you-have-read-access-for=يمكنك عمل إختصار لأي مستند لديك صلاحية قراءته. سيتمكن المستخدمون الآخرون من قراءة المستند من خلال هذا الإختصار.

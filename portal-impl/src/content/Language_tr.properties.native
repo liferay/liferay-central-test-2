@@ -158,6 +158,7 @@ allow-users-to-add-x-to-igoogle=Allow users to add <b>{0}</b> to iGoogle.
 allow-users-to-automatically-login=Kullanıcıların otomatik bağlanması?
 allow-users-to-share-x-with-friends=Allow users to share <b>{0}</b> with friends.
 already-registered=Kayıt Yapılmış
+although-we-cannot-disclose-our-final-decision,-we-do-review-every-report-and-appreciate-your-effort-to-make-sure-x-is-a-safe-environment-for-everyone=Although we cannot disclose our final decision, we do review every report and appreciate your effort to make sure {0} is a safe environment for everyone.
 an-unexpected-error-occurred-while-connecting-to-google=Google'e bağlanırken beklenmeyen bir hata oluştu.
 an-unexpected-error-occurred-while-finding-directions-between-the-following-addresses=Bu adreslerin tarifini araştırırken beklenmeyen hata oluştu:
 an-unexpected-error-occurred-while-finding-the-address=Bu adresleri ararken hata oluştu:
@@ -1161,6 +1162,7 @@ yearly=Yıllık
 years=Yıl
 yes=Evet
 ym=YM
+you-are-about-to-report-a-violation-of-our-x-terms-of-use.-all-reports-are-strictly-confidential=You are about to report a violation of our <a href="{0}">Terms of Use</a>. All reports are strictly confidential.
 you-are-signed-in-as-x=You are signed in as {0}.
 you-are-x=You are {0}.
 you-can-email-users-that-have-been-manually-added-to-the-database=You can email users that have been manually added to the database. These users should all have {0} as their password. Launching users will reset those new users with a random password and will notify them of their new account status on the portal.

@@ -328,6 +328,7 @@ alpha=آلفا
 already-registered=قبلا ثبت نام انجاد داده ايد
 alternative-shipping-calculation=روش محاسبه حمل و نقل ديگر
 alternative-shipping=روش حمل و نقل ديگر
+although-we-cannot-disclose-our-final-decision,-we-do-review-every-report-and-appreciate-your-effort-to-make-sure-x-is-a-safe-environment-for-everyone=Although we cannot disclose our final decision, we do review every report and appreciate your effort to make sure {0} is a safe environment for everyone.
 an-applet-version-of-the-editor-is-also-available=ويرايشگر بصورت اپلت نيز وجود دارد که دارای انعطاف بيشتری می باشد.
 an-unexpected-database-error-occurred-while-querying-the-given-city-and-state=مشکل در بازيافت اطلاعات از بانک اطلاعاتی بوجود آمد
 an-unexpected-database-error-occurred-while-querying-the-given-street-city-and-state=مشکل در بازيافت اطلاعات از بانک اطلاعاتی بوجود آمد
@@ -2185,6 +2186,7 @@ years=ستل
 yes=بله
 yesterday=ديروز
 ym=YM
+you-are-about-to-report-a-violation-of-our-x-terms-of-use.-all-reports-are-strictly-confidential=You are about to report a violation of our <a href="{0}">Terms of Use</a>. All reports are strictly confidential.
 you-are-signed-in-as-x=You are signed in as {0}.
 you-are-x=You are {0}.
 you-can-email-users-that-have-been-manually-added-to-the-database=شما می توانيد به کاربرانی ايميل ارسال کنيد که بصورت دستی به بانک اطلاعاتی اضافه شده اند. اين کاربران همگی دارای کلمه عبور {0} می باشند. ارسال به کاربران کلمه عبور جديدی برای آنها ايجاد می کند و آنها را از اين موضوع مطلع می سازد

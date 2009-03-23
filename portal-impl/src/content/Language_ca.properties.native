@@ -526,6 +526,7 @@ alpha=Alpha
 already-registered=Ja registrat
 alternative-shipping-calculation=Càlcul alternatiu de l'enviament
 alternative-shipping=Enviament alternatiu
+although-we-cannot-disclose-our-final-decision,-we-do-review-every-report-and-appreciate-your-effort-to-make-sure-x-is-a-safe-environment-for-everyone=Although we cannot disclose our final decision, we do review every report and appreciate your effort to make sure {0} is a safe environment for everyone.
 always-use-my-user-id=Usa sempre el meu ID d'usuari.
 always=Sempre
 an-applet-version-of-the-editor-is-also-available=Una versió de l'aplet de l'editor està disponible. Aquesta versió és més pesada però amb un editor més usable que proporciona color en el text, cerca i substitució i altres funcionalitats. Vosté pot elegir usar aquest editor seleccionant-lo en les seves preferències.
@@ -3670,6 +3671,7 @@ years=Anys
 yes=Si
 yesterday=Ahir
 ym=YM
+you-are-about-to-report-a-violation-of-our-x-terms-of-use.-all-reports-are-strictly-confidential=You are about to report a violation of our <a href="{0}">Terms of Use</a>. All reports are strictly confidential.
 you-are-not-subscribed-to-any-categories=No esteu subscrits a cap categoria.
 you-are-not-subscribed-to-any-threads=No esteu subcrits a cap fil.
 you-are-not-subscribed-to-this-page=No esteu subcrits a aquesta pàgina.

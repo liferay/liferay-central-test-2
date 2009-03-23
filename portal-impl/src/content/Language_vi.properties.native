@@ -205,6 +205,7 @@ allow-users-to-automatically-login=Cho phép người dùng tự động đăng 
 allow-users-to-share-x-with-friends=Allow users to share <b>{0}</b> with friends.
 alpha=Alpha
 already-registered=Đã đăng ký
+although-we-cannot-disclose-our-final-decision,-we-do-review-every-report-and-appreciate-your-effort-to-make-sure-x-is-a-safe-environment-for-everyone=Although we cannot disclose our final decision, we do review every report and appreciate your effort to make sure {0} is a safe environment for everyone.
 an-unexpected-database-error-occurred-while-querying-the-given-city-and-state=Một lỗi không mong đợi khi truy vấn dữ liệu về thành phố và bang.
 an-unexpected-database-error-occurred-while-querying-the-given-street-city-and-state=Một lỗi không mong đợi khi truy vấn dữ liệu về thành phố và bang.
 an-unexpected-database-error-occurred-while-querying-the-given-zip=Lỗi xảy ra khi truy vấn mã vùng.
@@ -1650,6 +1651,7 @@ years=Năm
 yes=Có
 yesterday=Hôm qua
 ym=YM
+you-are-about-to-report-a-violation-of-our-x-terms-of-use.-all-reports-are-strictly-confidential=You are about to report a violation of our <a href="{0}">Terms of Use</a>. All reports are strictly confidential.
 you-are-signed-in-as-x=You are signed in as {0}.
 you-are-x=You are {0}.
 you-can-email-users-that-have-been-manually-added-to-the-database=Bạn có thể mail tới người dùng mà bạn đã thêm vào cơ sở dữ liệu.Người dùng sẽ có tất cả {0} như : mật khẩu. 
