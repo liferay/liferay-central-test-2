@@ -59,7 +59,7 @@ public interface User extends UserModel {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay);
 
 	public java.lang.String getDisplayURL(java.lang.String portalURL,
-		java.lang.String pathMain);
+		java.lang.String mainPath);
 
 	public boolean getFemale();
 

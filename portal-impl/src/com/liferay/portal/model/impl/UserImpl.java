@@ -117,7 +117,7 @@ public class UserImpl extends UserModelImpl implements User {
 
 	}
 
-	public String getDisplayURL(String portalURL, String pathMain) {
+	public String getDisplayURL(String portalURL, String mainPath) {
 		try {
 			Group group = getGroup();
 
@@ -128,7 +128,7 @@ public class UserImpl extends UserModelImpl implements User {
 					StringBuilder sb = new StringBuilder();
 
 					sb.append(portalURL);
-					sb.append(pathMain);
+					sb.append(mainPath);
 					sb.append("/my_places/view?groupId=");
 					sb.append(group.getGroupId());
 					sb.append("&privateLayout=0");
