@@ -81,16 +81,16 @@ import java.rmi.RemoteException;
  *
  */
 public class FlagsEntryServiceSoap {
-	public static void addFlagEntry(java.lang.String className, long classPK,
-		long reportedUserId, java.lang.String contentTitle,
-		java.lang.String contentURL, java.lang.String reason,
-		java.lang.String emailAddress,
+	public static void addEntry(java.lang.String className, long classPK,
+		java.lang.String reporterEmailAddress, long reportedUserId,
+		java.lang.String contentTitle, java.lang.String contentURL,
+		java.lang.String reason,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			FlagsEntryServiceUtil.addFlagEntry(className, classPK,
-				reportedUserId, contentTitle, contentURL, reason, emailAddress,
-				serviceContext);
+			FlagsEntryServiceUtil.addEntry(className, classPK,
+				reporterEmailAddress, reportedUserId, contentTitle, contentURL,
+				reason, serviceContext);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

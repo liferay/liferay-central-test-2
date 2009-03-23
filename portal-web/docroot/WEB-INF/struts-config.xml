@@ -842,8 +842,8 @@
 
 		<!-- Flags -->
 
-		<action path="/flags/edit_flags_entry" type="com.liferay.portlet.flags.action.EditFlagsEntryAction">
-			<forward name="portlet.flags.edit_flags_entry" path="portlet.flags.edit_flags_entry" />
+		<action path="/flags/edit_entry" type="com.liferay.portlet.flags.action.EditEntryAction">
+			<forward name="portlet.flags.edit_entry" path="portlet.flags.edit_entry" />
 		</action>
 
 		<!-- Global Prayer Digest -->

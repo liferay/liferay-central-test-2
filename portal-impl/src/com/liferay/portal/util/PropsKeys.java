@@ -385,7 +385,7 @@ public interface PropsKeys {
 
 	public static final String FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_ORGANIZATION_STATUS = "field.enable.com.liferay.portal.model.Organization.status";
 
-	public static final String FLAGS_REASONS = "flags.reasons";
+	public static final String FLAGS_EMAIL_BODY = "flags.email.body";
 
 	public static final String FLAGS_EMAIL_FROM_ADDRESS = "flags.email.from.address";
 
@@ -393,9 +393,9 @@ public interface PropsKeys {
 
 	public static final String FLAGS_EMAIL_SUBJECT = "flags.email.subject";
 
-	public static final String FLAGS_EMAIL_BODY = "flags.email.body";
+	public static final String FLAGS_GUEST_USERS_ENABLED = "flags.guest.users.enabled";
 
-	public static final String FLAGS_GUEST_USERS = "flags.guest.users";
+	public static final String FLAGS_REASONS = "flags.reasons";
 
 	public static final String GLOBAL_SHUTDOWN_EVENTS = "global.shutdown.events";
 

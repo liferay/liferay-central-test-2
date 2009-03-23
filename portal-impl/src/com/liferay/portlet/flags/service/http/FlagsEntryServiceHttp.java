@@ -72,12 +72,14 @@ import com.liferay.portlet.flags.service.FlagsEntryServiceUtil;
  *
  */
 public class FlagsEntryServiceHttp {
-	public static void addFlagEntry(HttpPrincipal httpPrincipal,
-		java.lang.String className, long classPK, long reportedUserId,
+	public static void addEntry(HttpPrincipal httpPrincipal,
+		java.lang.String className, long classPK,
+		java.lang.String reporterEmailAddress, long reportedUserId,
 		java.lang.String contentTitle, java.lang.String contentURL,
-		java.lang.String reason, java.lang.String emailAddress,
+		java.lang.String reason,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.SystemException, java.lang.Exception {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = className;
 
@@ -87,29 +89,29 @@ public class FlagsEntryServiceHttp {
 
 			Object paramObj1 = new LongWrapper(classPK);
 
-			Object paramObj2 = new LongWrapper(reportedUserId);
+			Object paramObj2 = reporterEmailAddress;
 
-			Object paramObj3 = contentTitle;
-
-			if (contentTitle == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
+			if (reporterEmailAddress == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = contentURL;
+			Object paramObj3 = new LongWrapper(reportedUserId);
 
-			if (contentURL == null) {
+			Object paramObj4 = contentTitle;
+
+			if (contentTitle == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = reason;
+			Object paramObj5 = contentURL;
 
-			if (reason == null) {
+			if (contentURL == null) {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = emailAddress;
+			Object paramObj6 = reason;
 
-			if (emailAddress == null) {
+			if (reason == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
@@ -121,7 +123,7 @@ public class FlagsEntryServiceHttp {
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(FlagsEntryServiceUtil.class.getName(),
-					"addFlagEntry",
+					"addEntry",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7
@@ -131,8 +133,12 @@ public class FlagsEntryServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof java.lang.Exception) {
-					throw (java.lang.Exception)e;
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);

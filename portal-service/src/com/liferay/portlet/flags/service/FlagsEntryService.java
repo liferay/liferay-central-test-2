@@ -53,10 +53,11 @@ import com.liferay.portal.kernel.annotation.Transactional;
 @Transactional(rollbackFor =  {
 	PortalException.class, SystemException.class})
 public interface FlagsEntryService {
-	public void addFlagEntry(java.lang.String className, long classPK,
-		long reportedUserId, java.lang.String contentTitle,
-		java.lang.String contentURL, java.lang.String reason,
-		java.lang.String emailAddress,
+	public void addEntry(java.lang.String className, long classPK,
+		java.lang.String reporterEmailAddress, long reportedUserId,
+		java.lang.String contentTitle, java.lang.String contentURL,
+		java.lang.String reason,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws java.lang.Exception;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

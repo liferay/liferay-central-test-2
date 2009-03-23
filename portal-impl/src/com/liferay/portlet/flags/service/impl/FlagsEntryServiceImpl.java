@@ -25,11 +25,12 @@ package com.liferay.portlet.flags.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
@@ -60,15 +61,16 @@ import javax.mail.internet.InternetAddress;
  */
 public class FlagsEntryServiceImpl extends FlagsEntryServiceBaseImpl {
 
-	public void addFlagEntry(
-			String className, long classPK, long reportedUserId,
-			String contentTitle, String contentURL,	String reason,
-			String emailAddress, ServiceContext serviceContext)
-		throws Exception{
+	public void addEntry(
+			String className, long classPK, String reporterEmailAddress,
+			long reportedUserId, String contentTitle, String contentURL,
+			String reason, ServiceContext serviceContext)
+		throws PortalException, SystemException {
 
 		// Company
 
 		long companyId = serviceContext.getCompanyId();
+
 		Company company = companyPersistence.findByPrimaryKey(
 			serviceContext.getCompanyId());
 
@@ -79,201 +81,88 @@ public class FlagsEntryServiceImpl extends FlagsEntryServiceBaseImpl {
 
 		Group group = layout.getGroup();
 
-		// Reporter User
+		String groupName = group.getDescriptiveName();
+
+		// Reporter user
 
 		String reporterUserName = null;
-		String reporterUserEmailAddress = null;
 
-		User reporterUser = userPersistence.findByPrimaryKey(
-			serviceContext.getUserId());
+		User reporterUser = getUser();
 
 		Locale locale = LocaleUtil.getDefault();
 
-		if (reporterUser == null || reporterUser.isDefaultUser()) {
-			reporterUserName = LanguageUtil.get(locale, "an-anonymous-user");
-
-			if (Validator.isNotNull(emailAddress)) {
-				reporterUserEmailAddress = emailAddress;
-			}
-			else {
-				reporterUserEmailAddress = LanguageUtil.get(
-					locale, "no-email-address-provided");
-			}
+		if (reporterUser.isDefaultUser()) {
+			reporterUserName = LanguageUtil.get(locale, "anonymous");
 		}
 		else {
 			reporterUserName = reporterUser.getFullName();
-			reporterUserEmailAddress = reporterUser.getEmailAddress();
+			reporterEmailAddress = reporterUser.getEmailAddress();
 		}
 
-		// Reported User
+		// Reported user
+
 		String reportedUserName = StringPool.BLANK;
-		String reportedUserEmailAddress = StringPool.BLANK;
-		String reportedUserURL = StringPool.BLANK;
+		String reportedEmailAddress = StringPool.BLANK;
+		String reportedURL = StringPool.BLANK;
 
 		User reportedUser = userPersistence.findByPrimaryKey(reportedUserId);
+
 		if (reportedUser.isDefaultUser()){
 			reportedUserName = group.getDescriptiveName();
 		}
 		else {
 			reportedUserName = reportedUser.getFullName();
-			reportedUserEmailAddress = reportedUser.getEmailAddress();
-			reportedUserURL = reportedUser.getDisplayURL(
-			serviceContext.getPortalURL(), serviceContext.getPathMain());
+			reportedEmailAddress = reportedUser.getEmailAddress();
+			reportedURL = reportedUser.getDisplayURL(
+				serviceContext.getPortalURL(), serviceContext.getPathMain());
 		}
 
+		// Content
+
+		String contentType = LanguageUtil.get(
+			locale, "model.resource." + className);
+
+		// Reason
+
+		reason = LanguageUtil.get(locale, reason);
 
 		// Email
 
 		String fromName = PrefsPropsUtil.getString(
 			companyId, PropsKeys.FLAGS_EMAIL_FROM_NAME);
-
 		String fromAddress = PrefsPropsUtil.getString(
 			companyId, PropsKeys.FLAGS_EMAIL_FROM_ADDRESS);
-
 		String subject = PrefsPropsUtil.getContent(
 			companyId, PropsKeys.FLAGS_EMAIL_SUBJECT);
-
 		String body = PrefsPropsUtil.getContent(
 			companyId, PropsKeys.FLAGS_EMAIL_BODY);
 
-		List<User> receivers = getAdministrators(
+		// Recipients
+
+		List<User> recipients = getRecipients(
 			companyId, serviceContext.getScopeGroupId());
 
-		String localizedReason = LanguageUtil.get(locale, reason);
-		String contentType = LanguageUtil.get(
-			locale, "model.resource." + className);
-
-		for (User receiver : receivers) {
-			notify(
-				fromAddress, fromName, receiver.getEmailAddress(),
-				receiver.getFullName(), companyId, company.getMx(),
-				company.getName(), company.getVirtualHost(),
-				group.getDescriptiveName(), reporterUserEmailAddress,
-				reporterUserName, reportedUserEmailAddress, reportedUserName,
-				reportedUserURL, contentTitle, contentType, contentURL, classPK,
-				localizedReason, subject, body);
+		for (User recipient : recipients) {
+			try {
+				notify(
+					company, groupName, reporterEmailAddress, reporterUserName,
+					reportedEmailAddress, reportedUserName, reportedURL,
+					classPK, contentTitle, contentType, contentURL, reason,
+					fromName, fromAddress, recipient.getFullName(),
+					recipient.getEmailAddress(), subject, body, serviceContext);
+			}
+			catch (IOException ioe) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(ioe);
+				}
+			}
 		}
 	}
 
-	protected void notify(
-			String fromAddress, String fromName, String toAddress,
-			String toName, long companyId, String companyMx, String companyName,
-			String portalURL, String groupName, String reporterUserEmailAddress,
-			String reporterUserName, String reportedUserEmailAddress,
-			String reportedUserName,String reportedUserURL,
-			String contentTitle, String contentType, String contentURL,
-			long contentId, String reason, String subject, String body)
-		throws IOException, PortalException, SystemException {
+	protected List<User> getRecipients(long companyId, long groupId)
+		throws PortalException, SystemException {
 
-		Date now = new Date();
-
-		subject = StringUtil.replace(
-			subject,
-			new String[] {
-				"[$FROM_ADDRESS$]",
-				"[$FROM_NAME$]",
-				"[$TO_ADDRESS$]",
-				"[$TO_NAME$]",
-				"[$COMPANY_ID$]",
-				"[$COMPANY_MX$]",
-				"[$COMPANY_NAME$]",
-				"[$PORTAL_URL$]",
-				"[$COMMUNITY_NAME$]",
-				"[$REPORTER_USER_ADDRESS$]",
-				"[$REPORTER_USER_NAME$]",
-				"[$REPORTED_USER_ADDRESS$]",
-				"[$REPORTED_USER_NAME$]",
-				"[$REPORTED_USER_URL$]",
-				"[$CONTENT_TITLE$]",
-				"[$CONTENT_TYPE$]",
-				"[$CONTENT_URL$]",
-				"[$CONTENT_ID$]",
-				"[$REASON$]",
-				"[$DATE$]"
-			},
-			new String[] {
-				fromAddress,
-				fromName,
-				toAddress,
-				toName,
-				String.valueOf(companyId),
-				companyMx,
-				companyName,
-				portalURL,
-				groupName,
-				reporterUserEmailAddress,
-				reporterUserName,
-				reportedUserEmailAddress,
-				reportedUserName,
-				reportedUserURL,
-				contentTitle,
-				contentType,
-				contentURL,
-				String.valueOf(contentId),
-				reason,
-				now.toString()
-			});
-
-		body = StringUtil.replace(
-			body,
-			new String[] {
-				"[$FROM_ADDRESS$]",
-				"[$FROM_NAME$]",
-				"[$TO_ADDRESS$]",
-				"[$TO_NAME$]",
-				"[$COMPANY_ID$]",
-				"[$COMPANY_MX$]",
-				"[$COMPANY_NAME$]",
-				"[$PORTAL_URL$]",
-				"[$COMMUNITY_NAME$]",
-				"[$REPORTER_USER_ADDRESS$]",
-				"[$REPORTER_USER_NAME$]",
-				"[$REPORTED_USER_ADDRESS$]",
-				"[$REPORTED_USER_NAME$]",
-				"[$REPORTED_USER_URL$]",
-				"[$CONTENT_TITLE$]",
-				"[$CONTENT_TYPE$]",
-				"[$CONTENT_URL$]",
-				"[$CONTENT_ID$]",
-				"[$REASON$]",
-				"[$DATE$]"
-			},
-			new String[] {
-				fromAddress,
-				fromName,
-				toAddress,
-				toName,
-				String.valueOf(companyId),
-				companyMx,
-				companyName,
-				portalURL,
-				groupName,
-				reporterUserEmailAddress,
-				reporterUserName,
-				reportedUserEmailAddress,
-				reportedUserName,
-				reportedUserURL,
-				contentTitle,
-				contentType,
-				contentURL,
-				String.valueOf(contentId),
-				reason,
-				now.toString()
-			});
-
-		InternetAddress from = new InternetAddress(fromAddress, fromName);
-
-		InternetAddress to = new InternetAddress(toAddress, toName);
-
-		MailMessage message = new MailMessage(from, to, subject, body, true);
-
-		mailService.sendEmail(message);
-	}
-
-	protected List<User> getAdministrators(long companyId, long groupId)
-		throws IOException, PortalException, SystemException {
-
-		List<User> receivers = new UniqueList<User>();
+		List<User> recipients = new UniqueList<User>();
 
 		List<String> roleNames = new ArrayList<String>();
 
@@ -296,18 +185,136 @@ public class FlagsEntryServiceImpl extends FlagsEntryServiceBaseImpl {
 					groupId, role.getRoleId());
 
 			for (UserGroupRole userGroupRole : userGroupRoles) {
-				receivers.add(userGroupRole.getUser());
+				recipients.add(userGroupRole.getUser());
 			}
 		}
 
-		if (receivers.isEmpty()) {
+		if (recipients.isEmpty()) {
 			Role role = roleLocalService.getRole(
 				companyId, RoleConstants.ADMINISTRATOR);
 
-			receivers.addAll(userLocalService.getRoleUsers(role.getRoleId()));
+			recipients.addAll(userLocalService.getRoleUsers(role.getRoleId()));
 		}
 
-		return receivers;
+		return recipients;
 	}
+
+	protected void notify(
+			Company company, String groupName, String reporterEmailAddress,
+			String reporterUserName, String reportedEmailAddress,
+			String reportedUserName, String reportedUserURL, long contentId,
+			String contentTitle, String contentType, String contentURL,
+			String reason, String fromName, String fromAddress, String toName,
+			String toAddress, String subject, String body,
+			ServiceContext serviceContext)
+		throws IOException {
+
+		Date now = new Date();
+
+		subject = StringUtil.replace(
+			subject,
+			new String[] {
+				"[$COMMUNITY_NAME$]",
+				"[$COMPANY_ID$]",
+				"[$COMPANY_MX$]",
+				"[$COMPANY_NAME$]",
+				"[$CONTENT_ID$]",
+				"[$CONTENT_TITLE$]",
+				"[$CONTENT_TYPE$]",
+				"[$CONTENT_URL$]",
+				"[$DATE$]",
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]",
+				"[$PORTAL_URL$]",
+				"[$REASON$]",
+				"[$REPORTED_USER_ADDRESS$]",
+				"[$REPORTED_USER_NAME$]",
+				"[$REPORTED_USER_URL$]",
+				"[$REPORTER_USER_ADDRESS$]",
+				"[$REPORTER_USER_NAME$]",
+				"[$TO_ADDRESS$]",
+				"[$TO_NAME$]"
+			},
+			new String[] {
+				groupName,
+				String.valueOf(company.getCompanyId()),
+				company.getMx(),
+				company.getName(),
+				String.valueOf(contentId),
+				contentTitle,
+				contentType,
+				contentURL,
+				now.toString(),
+				fromAddress,
+				fromName,
+				serviceContext.getPortalURL(),
+				reason,
+				reportedEmailAddress,
+				reportedUserName,
+				reportedUserURL,
+				reporterEmailAddress,
+				reporterUserName,
+				toAddress,
+				toName
+			});
+
+		body = StringUtil.replace(
+			body,
+			new String[] {
+				"[$COMMUNITY_NAME$]",
+				"[$COMPANY_ID$]",
+				"[$COMPANY_MX$]",
+				"[$COMPANY_NAME$]",
+				"[$CONTENT_ID$]",
+				"[$CONTENT_TITLE$]",
+				"[$CONTENT_TYPE$]",
+				"[$CONTENT_URL$]",
+				"[$DATE$]",
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]",
+				"[$PORTAL_URL$]",
+				"[$REASON$]",
+				"[$REPORTED_USER_ADDRESS$]",
+				"[$REPORTED_USER_NAME$]",
+				"[$REPORTED_USER_URL$]",
+				"[$REPORTER_USER_ADDRESS$]",
+				"[$REPORTER_USER_NAME$]",
+				"[$TO_ADDRESS$]",
+				"[$TO_NAME$]"
+			},
+			new String[] {
+				groupName,
+				String.valueOf(company.getCompanyId()),
+				company.getMx(),
+				company.getName(),
+				String.valueOf(contentId),
+				contentTitle,
+				contentType,
+				contentURL,
+				now.toString(),
+				fromAddress,
+				fromName,
+				serviceContext.getPortalURL(),
+				reason,
+				reportedEmailAddress,
+				reportedUserName,
+				reportedUserURL,
+				reporterEmailAddress,
+				reporterUserName,
+				toAddress,
+				toName
+			});
+
+		InternetAddress from = new InternetAddress(fromAddress, fromName);
+
+		InternetAddress to = new InternetAddress(toAddress, toName);
+
+		MailMessage message = new MailMessage(from, to, subject, body, true);
+
+		mailService.sendEmail(message);
+	}
+
+	private static Log _log =
+		LogFactoryUtil.getLog(FlagsEntryServiceImpl.class);
 
 }

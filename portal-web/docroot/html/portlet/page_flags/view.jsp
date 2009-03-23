@@ -25,18 +25,19 @@
 <%@ include file="/html/portlet/page_ratings/init.jsp" %>
 
 <%
-long userId = themeDisplay.getDefaultUserId();
+long reportedUserId = themeDisplay.getDefaultUserId();
+
 Group group = layout.getGroup();
 
 if (group.isUser()) {
-	userId = group.getClassPK();
+	reportedUserId = group.getClassPK();
 }
 %>
 
 <liferay-ui:flags
 	className="<%= Layout.class.getName() %>"
 	classPK="<%= layout.getPlid() %>"
-    title="<%= layout.getHTMLTitle(LocaleUtil.getDefault()) %>"
-    userId="<%= userId %>"
+	contentTitle="<%= layout.getHTMLTitle(LocaleUtil.getDefault()) %>"
 	message="flag-this-page"
-    />
+	reportedUserId="<%= reportedUserId %>"
+/>

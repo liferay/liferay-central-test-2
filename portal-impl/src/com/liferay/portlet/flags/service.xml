@@ -7,6 +7,7 @@
 
 		<!-- References -->
 
+		<reference package-path="com.liferay.mail" entity="Mail" />
 		<reference package-path="com.liferay.portal" entity="Company" />
 		<reference package-path="com.liferay.portal" entity="Group" />
 		<reference package-path="com.liferay.portal" entity="Layout" />
@@ -14,7 +15,6 @@
 		<reference package-path="com.liferay.portal" entity="User" />
 		<reference package-path="com.liferay.portal" entity="UserGroup" />
 		<reference package-path="com.liferay.portal" entity="UserGroupRole" />
-		<reference package-path="com.liferay.mail" entity="Mail" />
 		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
 	</entity>
 </service-builder>

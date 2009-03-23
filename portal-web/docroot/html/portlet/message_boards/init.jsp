@@ -99,8 +99,8 @@ int rssDelta = GetterUtil.getInteger(preferences.getValue("rss-delta", StringPoo
 String rssDisplayStyle = preferences.getValue("rss-display-style", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
 String rssFormat = preferences.getValue("rss-format", "atom10");
 boolean allowAnonymousPosting = MBUtil.isAllowAnonymousPosting(preferences);
-boolean enableMessageRatings = GetterUtil.getBoolean(preferences.getValue("enable-message-ratings", null), true);
 boolean enableFlags = GetterUtil.getBoolean(preferences.getValue("enable-flags", null), true);
+boolean enableRatings = GetterUtil.getBoolean(preferences.getValue("enable-message-ratings", null), true);
 
 String rssFormatType = RSSUtil.DEFAULT_TYPE;
 double rssFormatVersion = RSSUtil.DEFAULT_VERSION;

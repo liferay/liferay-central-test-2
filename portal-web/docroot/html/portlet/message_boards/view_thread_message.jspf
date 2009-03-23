@@ -429,8 +429,8 @@
 					<liferay-ui:flags
 						className="<%= MBMessage.class.getName() %>"
 						classPK="<%= message.getMessageId() %>"
-						userId="<%= message.getUserId() %>"
-						title="<%= message.getSubject() %>"
+						contentTitle="<%= message.getSubject() %>"
+						reportedUserId="<%= message.getUserId() %>"
 					/>
 				</c:if>
 

@@ -41,11 +41,11 @@ public class FlagsTag extends IncludeTag {
 		request.setAttribute("liferay-ui:flags:className", _className);
 		request.setAttribute(
 			"liferay-ui:flags:classPK", String.valueOf(_classPK));
-		request.setAttribute(
-			"liferay-ui:flags:userId", String.valueOf(_userId));
-		request.setAttribute("liferay-ui:flags:title", _title);
-		request.setAttribute("liferay-ui:flags:message", _message);
+		request.setAttribute("liferay-ui:flags:contentTitle", _contentTitle);
 		request.setAttribute("liferay-ui:flags:label", String.valueOf(_label));
+		request.setAttribute("liferay-ui:flags:message", _message);
+		request.setAttribute(
+			"liferay-ui:flags:reportedUserId", String.valueOf(_reportedUserId));
 
 		return EVAL_BODY_BUFFERED;
 	}
@@ -58,20 +58,20 @@ public class FlagsTag extends IncludeTag {
 		_classPK = classPK;
 	}
 
-	public void setUserId(long userId) {
-		_userId = userId;
+	public void setContentTitle(String contentTitle) {
+		_contentTitle = contentTitle;
 	}
 
-	public void setTitle(String title) {
-		_title = title;
+	public void setLabel(boolean label) {
+		_label = label;
 	}
 
 	public void setMessage(String message) {
 		_message = message;
 	}
 
-	public void setLabel(boolean label) {
-		_label = label;
+	public void setReportedUserId(long reportedUserId) {
+		_reportedUserId = reportedUserId;
 	}
 
 	protected String getDefaultPage() {
@@ -82,9 +82,9 @@ public class FlagsTag extends IncludeTag {
 
 	private String _className;
 	private long _classPK;
-	private long _userId;
-	private String _title;
-	private String _message;
+	private String _contentTitle;
 	private boolean _label = true;
+	private String _message;
+	private long _reportedUserId;
 
 }

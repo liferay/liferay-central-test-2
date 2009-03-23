@@ -83,7 +83,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 
 <liferay-ui:tabs
-	names="general, email-from,message-added-email,message-updated-email,thread-priorities,user-ranks,rss"
+	names="general,email-from,message-added-email,message-updated-email,thread-priorities,user-ranks,rss"
 	param="tabs2"
 	url="<%= portletURL %>"
 />
@@ -110,22 +110,21 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 		</tr>
 		<tr>
 			<td class="lfr-label">
-				<liferay-ui:message key="enable-message-ratings" />
-			</td>
-			<td>
-				<liferay-ui:input-checkbox param="enableMessageRatings" defaultValue="<%= enableMessageRatings %>" />
-			</td>
-		</tr>
-		<tr>
-			<td class="lfr-label">
 				<liferay-ui:message key="enable-flags" />
 			</td>
 			<td>
 				<liferay-ui:input-checkbox param="enableFlags" defaultValue="<%= enableFlags %>" />
 			</td>
 		</tr>
+		<tr>
+			<td class="lfr-label">
+				<liferay-ui:message key="enable-ratings" />
+			</td>
+			<td>
+				<liferay-ui:input-checkbox param="enableRatings" defaultValue="<%= enableRatings %>" />
+			</td>
+		</tr>
 		</table>
-
 	</c:when>
 	<c:when test='<%= tabs2.equals("email-from") %>'>
 		<table class="lfr-table">

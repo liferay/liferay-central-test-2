@@ -45,15 +45,16 @@ package com.liferay.portlet.flags.service;
  *
  */
 public class FlagsEntryServiceUtil {
-	public static void addFlagEntry(java.lang.String className, long classPK,
-		long reportedUserId, java.lang.String contentTitle,
-		java.lang.String contentURL, java.lang.String reason,
-		java.lang.String emailAddress,
+	public static void addEntry(java.lang.String className, long classPK,
+		java.lang.String reporterEmailAddress, long reportedUserId,
+		java.lang.String contentTitle, java.lang.String contentURL,
+		java.lang.String reason,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws java.lang.Exception {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		getService()
-			.addFlagEntry(className, classPK, reportedUserId, contentTitle,
-			contentURL, reason, emailAddress, serviceContext);
+			.addEntry(className, classPK, reporterEmailAddress, reportedUserId,
+			contentTitle, contentURL, reason, serviceContext);
 	}
 
 	public static FlagsEntryService getService() {

@@ -64,8 +64,8 @@ public class IconTag extends IncludeTag {
 				(HttpServletRequest)pageContext.getRequest();
 
 			request.removeAttribute("liferay-ui:icon:image");
+			request.removeAttribute("liferay-ui:icon:imageHover");
 			request.removeAttribute("liferay-ui:icon:message");
-			request.removeAttribute("liferay-ui:icon:messageHover");
 			request.removeAttribute("liferay-ui:icon:src");
 			request.removeAttribute("liferay-ui:icon:srcHover");
 			request.removeAttribute("liferay-ui:icon:url");

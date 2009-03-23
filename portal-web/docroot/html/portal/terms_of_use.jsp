@@ -197,11 +197,13 @@
 				This Agreement shall be treated as though it were executed and performed in Los Angeles, CA, and shall be governed by and construed in accordance with the laws of the State of California (without regard to conflict of law principles). Any cause of action by you with respect to the Site (and/or any information, products or services related thereto) must be instituted within one (1) year after the cause of action arose or be forever waived and barred. All actions shall be subject to the limitations set forth in Section 8 and Section 10. The language in this Agreement shall be interpreted as to its fair meaning and not strictly for or against either party. All legal proceedings arising out of or in connection with this Agreement shall be brought solely in Los Angeles, CA. You expressly submit to the exclusive jurisdiction of said courts and consents to extra-territorial service of process. Should any part of this Agreement be held invalid or unenforceable, that portion shall be construed consistent with applicable law and the remaining portions shall remain in full force and effect. To the extent that anything in or associated with the Site is in conflict or inconsistent with this Agreement, this Agreement shall take precedence. Our failure to enforce any provision of this Agreement shall not be deemed a waiver of such provision nor of the right to enforce such provision.<br />
 			</li>
 		</ol>
-
-		<br />
 	</c:otherwise>
 </c:choose>
 
-<input type="button" value="<liferay-ui:message key="i-agree" />" onClick="submitForm(document.fm);" /> <input type="button" value="<liferay-ui:message key="i-disagree" />" onClick="alert('<%= UnicodeLanguageUtil.get(pageContext, "you-must-agree-with-the-terms-of-use-to-continue") %>');" />
+<c:if test="<%= !user.isAgreedToTermsOfUse() %>">
+	<br />
+
+	<input type="button" value="<liferay-ui:message key="i-agree" />" onClick="submitForm(document.fm);" /> <input type="button" value="<liferay-ui:message key="i-disagree" />" onClick="alert('<%= UnicodeLanguageUtil.get(pageContext, "you-must-agree-with-the-terms-of-use-to-continue") %>');" />
+</c:if>
 
 </form>

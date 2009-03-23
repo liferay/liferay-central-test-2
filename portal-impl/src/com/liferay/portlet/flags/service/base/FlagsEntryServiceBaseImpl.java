@@ -75,6 +75,14 @@ public abstract class FlagsEntryServiceBaseImpl extends PrincipalBean
 		this.flagsEntryService = flagsEntryService;
 	}
 
+	public MailService getMailService() {
+		return mailService;
+	}
+
+	public void setMailService(MailService mailService) {
+		this.mailService = mailService;
+	}
+
 	public CompanyLocalService getCompanyLocalService() {
 		return companyLocalService;
 	}
@@ -288,14 +296,6 @@ public abstract class FlagsEntryServiceBaseImpl extends PrincipalBean
 		this.userGroupRolePersistence = userGroupRolePersistence;
 	}
 
-	public MailService getMailService() {
-		return mailService;
-	}
-
-	public void setMailService(MailService mailService) {
-		this.mailService = mailService;
-	}
-
 	public TagsAssetLocalService getTagsAssetLocalService() {
 		return tagsAssetLocalService;
 	}
@@ -332,6 +332,8 @@ public abstract class FlagsEntryServiceBaseImpl extends PrincipalBean
 
 	@BeanReference(name = "com.liferay.portlet.flags.service.FlagsEntryService.impl")
 	protected FlagsEntryService flagsEntryService;
+	@BeanReference(name = "com.liferay.mail.service.MailService.impl")
+	protected MailService mailService;
 	@BeanReference(name = "com.liferay.portal.service.CompanyLocalService.impl")
 	protected CompanyLocalService companyLocalService;
 	@BeanReference(name = "com.liferay.portal.service.CompanyService.impl")
@@ -384,8 +386,6 @@ public abstract class FlagsEntryServiceBaseImpl extends PrincipalBean
 	protected UserGroupRoleService userGroupRoleService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserGroupRolePersistence.impl")
 	protected UserGroupRolePersistence userGroupRolePersistence;
-	@BeanReference(name = "com.liferay.mail.service.MailService.impl")
-	protected MailService mailService;
 	@BeanReference(name = "com.liferay.portlet.tags.service.TagsAssetLocalService.impl")
 	protected TagsAssetLocalService tagsAssetLocalService;
 	@BeanReference(name = "com.liferay.portlet.tags.service.TagsAssetService.impl")

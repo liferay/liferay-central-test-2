@@ -25,41 +25,48 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
+String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
+
 String className = (String)request.getAttribute("liferay-ui:flags:className");
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:flags:classPK"));
-long userId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:flags:userId"));
-String title = GetterUtil.getString((String)request.getAttribute("liferay-ui:flags:title"));
-String message = GetterUtil.getString((String)request.getAttribute("liferay-ui:flags:message"), "flag");
+String contentTitle = GetterUtil.getString((String)request.getAttribute("liferay-ui:flags:contentTitle"));
 boolean label = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:flags:label"), true);
-String randomClass = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
-String contentType = LanguageUtil.get(pageContext, "model.resource." + className);
+String message = GetterUtil.getString((String)request.getAttribute("liferay-ui:flags:message"), "flag");
+long reportedUserId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:flags:reportedUserId"));
 %>
 
 <div class="taglib-flags">
-	<liferay-ui:icon image="../ratings/flagged_icon" imageHover="../ratings/flagged_icon_hover" message="<%= message %>" cssClass="<%= randomClass  %>" label="<%= label %>" url="javascript: ;" />
+	<liferay-ui:icon
+		image="../ratings/flagged_icon"
+		imageHover="../ratings/flagged_icon_hover"
+		message="<%= message %>"
+		url="javascript: ;"
+		label="<%= label %>"
+		cssClass="<%= randomNamespace  %>"
+	/>
 </div>
 
 <c:choose>
-	<c:when test="<%= PropsValues.FLAGS_GUEST_USERS || themeDisplay.isSignedIn() %>">
+	<c:when test="<%= PropsValues.FLAGS_GUEST_USERS_ENABLED || themeDisplay.isSignedIn() %>">
 		<script type="text/javascript">
-			jQuery('.<%= randomClass %>').click(
+			jQuery('.<%= randomNamespace %>').click(
 				function() {
 					var popup = new Expanse.Popup(
 						{
-							header: '<%= LanguageUtil.format(pageContext, "report-this-x-as-inappropriate", contentType) %>',
 							constraintoviewport: true,
-							position:[150,150],
-							modal:true,
-							width:500,
-							xy: ['center', 100],
-							url:  '<liferay-portlet:renderURL portletName="<%= PortletKeys.FLAGS %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><liferay-portlet:param name="struts_action" value="/flags/edit_flags_entry" /></liferay-portlet:renderURL> ',
+							header: '<liferay-ui:message key="report-inappropriate-content" />',
+							modal: true,
+							position: [150, 150],
+							url:  '<liferay-portlet:renderURL portletName="<%= PortletKeys.FLAGS %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><liferay-portlet:param name="struts_action" value="/flags/edit_entry" /></liferay-portlet:renderURL> ',
 							urlData: {
 								className: '<%= className %>',
 								classPK: '<%= classPK %>',
-								userId: '<%= userId %>',
-								title: '<%= title %>',
-								contentURL: '<%= PortalUtil.getPortalURL(request) + currentURL %>'
-							}
+								contentTitle: '<%= contentTitle %>',
+								contentURL: '<%= PortalUtil.getPortalURL(request) + currentURL %>',
+								reportedUserId: '<%= reportedUserId %>'
+							},
+							width: 500,
+							xy: ['center', 100]
 						}
 					);
 
@@ -70,25 +77,21 @@ String contentType = LanguageUtil.get(pageContext, "model.resource." + className
 	</c:when>
 	<c:otherwise>
 		<div id="<portlet:namespace />signIn" style="display:none">
-			<p><%= LanguageUtil.format(pageContext, "please-sign-in-to-be-able-to-flag-this-x-as-inappropriate", contentType) %></p>
-
-			<div class="button-holder">
-				<input type="button" value="<liferay-ui:message key="close" />" onclick="Expanse.Popup.close(this)" />
-			</div>
+			<liferay-ui:message key="please-sign-in-to-flag-this-as-inappropriate" />
 		</div>
 
 		<script type="text/javascript">
-			jQuery('.<%= randomClass %>').click(
+			jQuery('.<%= randomNamespace %>').click(
 				function(){
 					var popup = new Expanse.Popup(
 						{
-							header: '<%= LanguageUtil.format(pageContext, "report-this-x-as-inappropriate", contentType) %>',
+							body: jQuery('#<portlet:namespace />signIn').html(),
 							constraintoviewport: true,
-							position:[150,150],
-							modal:true,
-							width:500,
-							xy: ['center', 100],
-							body: jQuery('#<portlet:namespace />signIn').html()
+							header: '<liferay-ui:message key="report-inappropriate-content" />',
+							modal: true,
+							position: [150, 150],
+							width: 500,
+							xy: ['center', 100]
 						}
 					);
 

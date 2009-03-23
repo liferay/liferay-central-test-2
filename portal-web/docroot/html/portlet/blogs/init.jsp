@@ -55,10 +55,10 @@ if (Validator.isNotNull(portletResource)) {
 int pageDelta = GetterUtil.getInteger(preferences.getValue("page-delta", StringPool.BLANK));
 String pageDisplayStyle = preferences.getValue("page-display-style", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
 int pageAbstractLength = PropsValues.BLOGS_PAGE_ABSTRACT_LENGTH;
+boolean enableFlags = GetterUtil.getBoolean(preferences.getValue("enable-flags", null), true);
 boolean enableRatings = GetterUtil.getBoolean(preferences.getValue("enable-ratings", null), true);
 boolean enableComments = GetterUtil.getBoolean(preferences.getValue("enable-comments", null), true);
 boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enable-comment-ratings", null), true);
-boolean enableFlags = GetterUtil.getBoolean(preferences.getValue("enable-flags", null), true);
 
 int rssDelta = GetterUtil.getInteger(preferences.getValue("rss-delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
 String rssDisplayStyle = preferences.getValue("rss-display-style", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);

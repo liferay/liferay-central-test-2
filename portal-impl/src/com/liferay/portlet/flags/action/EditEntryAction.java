@@ -27,7 +27,6 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.flags.service.FlagsEntryServiceUtil;
 
 import javax.portlet.ActionRequest;
@@ -41,12 +40,12 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="EditFlagsEntryAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditEntryAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Julio Camarero
  *
  */
-public class EditFlagsEntryAction extends PortletAction {
+public class EditEntryAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
@@ -55,26 +54,21 @@ public class EditFlagsEntryAction extends PortletAction {
 
 		String className = ParamUtil.getString(actionRequest, "className");
 		long classPK = ParamUtil.getLong(actionRequest, "classPK");
-
-		long reportedUserId = ParamUtil.getLong(actionRequest, "userId");
-		String title = ParamUtil.getString(actionRequest, "title");
+		String reporterEmailAddress = ParamUtil.getString(
+			actionRequest, "reporterEmailAddress");
+		long reportedUserId = ParamUtil.getLong(
+			actionRequest, "reportedUserId");
+		String contentTitle = ParamUtil.getString(
+			actionRequest, "contentTitle");
 		String contentURL = ParamUtil.getString(actionRequest, "contentURL");
-
 		String reason = ParamUtil.getString(actionRequest, "reason");
-		String emailAddress = ParamUtil.getString(
-			actionRequest, "emailAddress");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			"FlagsEntry", actionRequest);
+			"com.liferay.portlet.flags.model.FlagsEntry", actionRequest);
 
-		try {
-			FlagsEntryServiceUtil.addFlagEntry(
-				className, classPK, reportedUserId, title, contentURL,
-				reason, emailAddress, serviceContext);
-		}
-		catch (Exception e) {
-			PortalUtil.sendError(e, actionRequest, actionResponse);
-		}
+		FlagsEntryServiceUtil.addEntry(
+			className, classPK, reporterEmailAddress, reportedUserId,
+			contentTitle, contentURL, reason, serviceContext);
 
 		setForward(actionRequest, ActionConstants.COMMON_NULL);
 	}
@@ -85,7 +79,7 @@ public class EditFlagsEntryAction extends PortletAction {
 		throws Exception {
 
 		return mapping.findForward(
-			getForward(renderRequest, "portlet.flags.edit_flags_entry"));
+			getForward(renderRequest, "portlet.flags.edit_entry"));
 	}
 
 }

@@ -116,6 +116,7 @@ public class UserImpl extends UserModelImpl implements User {
 			themeDisplay.getPortalURL(), themeDisplay.getPathMain());
 
 	}
+
 	public String getDisplayURL(String portalURL, String pathMain) {
 		try {
 			Group group = getGroup();

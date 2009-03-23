@@ -179,8 +179,8 @@
 				<liferay-ui:flags
 					className="<%= BlogsEntry.class.getName() %>"
 					classPK="<%= entry.getEntryId() %>"
-					userId="<%= entry.getUserId() %>"
-					title="<%= entry.getTitle() %>"
+					contentTitle="<%= entry.getTitle() %>"
+					reportedUserId="<%= entry.getUserId() %>"
 				/>
 			</c:if>
 

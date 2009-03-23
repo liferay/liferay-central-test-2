@@ -456,11 +456,12 @@ public class PropsValues {
 			GetterUtil.getBoolean(PropsUtil.get(PropsKeys.
 				FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_ORGANIZATION_STATUS));
 
+	public static final boolean FLAGS_GUEST_USERS_ENABLED =
+		GetterUtil.getBoolean(PropsUtil.get(PropsKeys.
+			FLAGS_GUEST_USERS_ENABLED));
+
 	public static final String[] FLAGS_REASONS =
 		PropsUtil.getArray(PropsKeys.FLAGS_REASONS);
-
-	public static final boolean FLAGS_GUEST_USERS =
-		GetterUtil.getBoolean(PropsUtil.get(PropsKeys.FLAGS_GUEST_USERS));
 
 	public static final String[] GLOBAL_SHUTDOWN_EVENTS =
 		PropsUtil.getArray(PropsKeys.GLOBAL_SHUTDOWN_EVENTS);

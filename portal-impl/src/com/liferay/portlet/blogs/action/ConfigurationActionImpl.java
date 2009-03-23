@@ -57,14 +57,14 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		int pageDelta = ParamUtil.getInteger(actionRequest, "pageDelta");
 		String pageDisplayStyle = ParamUtil.getString(
 			actionRequest, "pageDisplayStyle");
+		boolean enableFlags = ParamUtil.getBoolean(
+			actionRequest, "enableFlags");
 		boolean enableRatings = ParamUtil.getBoolean(
 			actionRequest, "enableRatings");
 		boolean enableComments = ParamUtil.getBoolean(
 			actionRequest, "enableComments");
 		boolean enableCommentRatings = ParamUtil.getBoolean(
 			actionRequest, "enableCommentRatings");
-		boolean enableFlags = ParamUtil.getBoolean(
-			actionRequest, "enableFlags");
 
 		int rssDelta = ParamUtil.getInteger(actionRequest, "rssDelta");
 		String rssDisplayStyle = ParamUtil.getString(
@@ -80,11 +80,11 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 		preferences.setValue("page-delta", String.valueOf(pageDelta));
 		preferences.setValue("page-display-style", pageDisplayStyle);
+		preferences.setValue("enable-flags", String.valueOf(enableFlags));
 		preferences.setValue("enable-ratings", String.valueOf(enableRatings));
 		preferences.setValue("enable-comments", String.valueOf(enableComments));
 		preferences.setValue(
 			"enable-comment-ratings", String.valueOf(enableCommentRatings));
-		preferences.setValue("enable-flags", String.valueOf(enableFlags));
 
 		preferences.setValue("rss-delta", String.valueOf(rssDelta));
 		preferences.setValue("rss-display-style", rssDisplayStyle);

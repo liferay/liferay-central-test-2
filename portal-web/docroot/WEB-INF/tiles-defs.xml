@@ -455,7 +455,7 @@
 
 	<!-- Flags -->
 
-	<definition name="portlet.flags.edit_flags_entry" path="/portlet/flags/edit_flags_entry.jsp" />
+	<definition name="portlet.flags.edit_entry" path="/portlet/flags/edit_entry.jsp" />
 
 	<!-- IFrame -->
 
