@@ -77,21 +77,18 @@ public class BatchSessionImpl implements BatchSession {
 			return;
 		}
 
-		if (_counter.get() < PropsValues.HIBERNATE_JDBC_BATCH_SIZE) {
-			_counter.set(_counter.get() + 1);
-		}
-		else {
-			_counter.set(_INITIAL_COUNTER);
-
+		if (_counter.get() % PropsValues.HIBERNATE_JDBC_BATCH_SIZE == 0) {
 			session.flush();
 			session.clear();
 		}
+
+		_counter.set(_counter.get() + 1);
 	}
 
-	private static final Integer _INITIAL_COUNTER = new Integer(1);
+	private static final Long _INITIAL_COUNTER = new Long(1);
 
-	private static ThreadLocal<Integer> _counter =
-		new InitialThreadLocal<Integer>(_INITIAL_COUNTER);
+	private static ThreadLocal<Long> _counter =
+		new InitialThreadLocal<Long>(_INITIAL_COUNTER);
 	private static ThreadLocal<Boolean> _enabled =
 		new InitialThreadLocal<Boolean>(Boolean.FALSE);
 
