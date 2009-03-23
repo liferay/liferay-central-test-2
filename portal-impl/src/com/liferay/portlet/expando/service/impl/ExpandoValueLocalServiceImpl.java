@@ -39,6 +39,7 @@ import java.io.Serializable;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <a href="ExpandoValueLocalServiceImpl.java.html"><b><i>View Source</i></b>
@@ -527,6 +528,52 @@ public class ExpandoValueLocalServiceImpl
 		expandoValuePersistence.update(value, false);
 
 		return value;
+	}
+
+	public void addValues(
+			long classNameId, long tableId, List<ExpandoColumn> columns,
+			long classPK, Map<String, String> data)
+		throws SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		ExpandoRow row = expandoRowPersistence.fetchByT_C(tableId, classPK);
+
+		if (row == null) {
+			long rowId = counterLocalService.increment();
+
+			row = expandoRowPersistence.create(rowId);
+
+			row.setCompanyId(companyId);
+			row.setTableId(tableId);
+			row.setClassPK(classPK);
+
+			expandoRowPersistence.update(row, false);
+		}
+
+		for (ExpandoColumn column : columns) {
+			if (data.containsKey(column.getName())) {
+				ExpandoValue value = expandoValuePersistence.fetchByT_C_R(
+					tableId, column.getColumnId(), row.getRowId());
+
+				if (value == null) {
+					long valueId = counterLocalService.increment();
+
+					value = expandoValuePersistence.create(valueId);
+
+					value.setCompanyId(companyId);
+					value.setTableId(tableId);
+					value.setColumnId(column.getColumnId());
+					value.setRowId(row.getRowId());
+					value.setClassNameId(classNameId);
+					value.setClassPK(classPK);
+				}
+
+				value.setData(data.get(column.getName()));
+
+				expandoValuePersistence.update(value, false);
+			}
+		}
 	}
 
 	public void deleteColumnValues(long columnId) throws SystemException {

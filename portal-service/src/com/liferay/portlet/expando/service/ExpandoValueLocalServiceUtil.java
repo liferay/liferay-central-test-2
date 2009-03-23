@@ -269,6 +269,13 @@ public class ExpandoValueLocalServiceUtil {
 				   .addValue(classNameId, tableId, columnId, classPK, data);
 	}
 
+	public static void addValues(long classNameId, long tableId,
+		java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> columns,
+		long classPK, java.util.Map<String, String> data)
+		throws com.liferay.portal.SystemException {
+		getService().addValues(classNameId, tableId, columns, classPK, data);
+	}
+
 	public static void deleteColumnValues(long columnId)
 		throws com.liferay.portal.SystemException {
 		getService().deleteColumnValues(columnId);

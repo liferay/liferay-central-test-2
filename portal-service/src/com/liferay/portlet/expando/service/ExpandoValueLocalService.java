@@ -205,6 +205,11 @@ public interface ExpandoValueLocalService {
 		long classNameId, long tableId, long columnId, long classPK,
 		java.lang.String data) throws com.liferay.portal.SystemException;
 
+	public void addValues(long classNameId, long tableId,
+		java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> columns,
+		long classPK, java.util.Map<String, String> data)
+		throws com.liferay.portal.SystemException;
+
 	public void deleteColumnValues(long columnId)
 		throws com.liferay.portal.SystemException;
 
