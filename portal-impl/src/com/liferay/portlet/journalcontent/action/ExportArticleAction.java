@@ -123,6 +123,9 @@ public class ExportArticleAction extends PortletAction {
 			sb.append("<meta content=\"");
 			sb.append(ContentTypes.TEXT_HTML_UTF8);
 			sb.append("\" http-equiv=\"content-type\" />");
+			sb.append("<base href=\"");
+			sb.append(themeDisplay.getPortalURL());
+			sb.append("\" />");
 			sb.append("</head>");
 
 			sb.append("<body>");

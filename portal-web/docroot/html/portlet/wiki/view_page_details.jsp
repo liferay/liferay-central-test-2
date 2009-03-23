@@ -146,6 +146,7 @@ int count = 0;
 				<liferay-ui:icon
 					image='<%= "../document_library/" + conversion %>'
 					message="<%= conversion.toUpperCase() %>"
+					method="get"
 					url="<%= exportPageURL.toString() %>"
 					label="<%= true %>"
 				/>
