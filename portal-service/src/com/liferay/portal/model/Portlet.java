@@ -151,6 +151,8 @@ public interface Portlet extends PortletModel {
 	public void setPortletLayoutListenerClass(
 		java.lang.String portletLayoutListenerClass);
 
+	public com.liferay.portal.kernel.portlet.PortletLayoutListener getPortletLayoutListenerInstance();
+
 	public java.lang.String getPopMessageListenerClass();
 
 	public void setPopMessageListenerClass(

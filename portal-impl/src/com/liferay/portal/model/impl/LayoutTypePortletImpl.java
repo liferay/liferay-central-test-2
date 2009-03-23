@@ -400,7 +400,7 @@ public class LayoutTypePortletImpl
 
 			try {
 				PortletLayoutListener portletLayoutListener =
-					portlet.getPortletLayoutListener();
+					portlet.getPortletLayoutListenerInstance();
 
 				if (_enablePortletLayoutListener &&
 					(portletLayoutListener != null)) {
@@ -518,7 +518,7 @@ public class LayoutTypePortletImpl
 
 			if (portlet != null) {
 				PortletLayoutListener portletLayoutListener =
-					portlet.getPortletLayoutListener();
+					portlet.getPortletLayoutListenerInstance();
 
 				if (portletLayoutListener != null) {
 					portletLayoutListener.onMoveInLayout(
@@ -1180,7 +1180,7 @@ public class LayoutTypePortletImpl
 
 		if (_enablePortletLayoutListener) {
 			PortletLayoutListener portletLayoutListener =
-				portlet.getPortletLayoutListener();
+				portlet.getPortletLayoutListenerInstance();
 
 			long plid = getLayout().getPlid();
 

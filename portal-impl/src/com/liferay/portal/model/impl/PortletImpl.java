@@ -775,6 +775,26 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
+	 * Gets the portlet layout listener instance of the portlet.
+	 *
+	 * @return		the portlet layout listener instance of the portlet
+	 */
+	public PortletLayoutListener getPortletLayoutListenerInstance() {
+		if (Validator.isNull(getPortletLayoutListenerClass())) {
+			return null;
+		}
+
+		if (_portletApp.isWARFile()) {
+			PortletBag portletBag = PortletBagPool.get(getRootPortletId());
+
+			return portletBag.getPortletLayoutListenerInstance();
+		}
+
+		return (PortletLayoutListener)InstancePool.get(
+			getPortletLayoutListenerClass());
+	}
+
+	/**
 	 * Gets the name of the POP message listener class of the portlet.
 	 *
 	 * @return		the name of the POP message listener class of the portlet
