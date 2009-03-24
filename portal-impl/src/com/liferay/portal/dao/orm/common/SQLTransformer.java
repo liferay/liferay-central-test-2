@@ -25,8 +25,8 @@ package com.liferay.portal.dao.orm.common;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -44,8 +44,13 @@ public class SQLTransformer {
 	}
 
 	private SQLTransformer() {
-		 _sqlMap = new HashMap<String, String>();
-		 _vendorMySQL = CustomSQLUtil.isVendorMySQL();
+		_sqlMap = new HashMap<String, String>();
+
+		DBUtil dbUtil = DBUtil.getInstance();
+
+		if (dbUtil.getType().equals(DBUtil.TYPE_MYSQL)) {
+			_vendorMySQL = true;
+		}
 	}
 
 	private String _removeLower(String sql) {
