@@ -38,6 +38,10 @@ long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:ratin
 String type = GetterUtil.getString((String)request.getAttribute("liferay-ui:ratings:type"));
 String url = (String)request.getAttribute("liferay-ui:ratings:url");
 
+if (Validator.isNull(url)) {
+	url = themeDisplay.getPathMain() + "/ratings/rate_entry";
+}
+
 double yourScore = 0.0;
 
 try {

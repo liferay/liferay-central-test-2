@@ -96,7 +96,6 @@ request.setAttribute("view.jsp-showIconLabel", true);
 					<liferay-ui:ratings
 						className="<%= BlogsEntry.class.getName() %>"
 						classPK="<%= entry.getEntryId() %>"
-						url='<%= themeDisplay.getPathMain() + "/asset_publisher/rate_entry?p_p_id=" + portletDisplay.getId() %>'
 					/>
 				</c:if>
 
@@ -203,7 +202,6 @@ request.setAttribute("view.jsp-showIconLabel", true);
 					<liferay-ui:ratings
 						className="<%= DLFileEntry.class.getName() %>"
 						classPK="<%= fileEntry.getFileEntryId() %>"
-						url='<%= themeDisplay.getPathMain() + "/asset_publisher/rate_entry?p_p_id=" + portletDisplay.getId() %>'
 					/>
 				</c:if>
 
@@ -362,7 +360,6 @@ request.setAttribute("view.jsp-showIconLabel", true);
 						<liferay-ui:ratings
 							className="<%= JournalArticle.class.getName() %>"
 							classPK="<%= articleDisplay.getResourcePrimKey() %>"
-							url='<%= themeDisplay.getPathMain() + "/asset_publisher/rate_entry?p_p_id=" + portletDisplay.getId() %>'
 						/>
 					</c:if>
 

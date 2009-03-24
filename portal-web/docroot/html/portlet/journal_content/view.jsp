@@ -239,7 +239,6 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 					<liferay-ui:ratings
 						className="<%= JournalArticle.class.getName() %>"
 						classPK="<%= articleDisplay.getResourcePrimKey() %>"
-						url='<%= themeDisplay.getPathMain() + "/journal_content/rate_entry?p_p_id=" + portletDisplay.getId() %>'
 					/>
 				</div>
 			</c:if>

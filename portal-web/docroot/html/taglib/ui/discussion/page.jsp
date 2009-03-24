@@ -279,7 +279,6 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 										className="<%= MBMessage.class.getName() %>"
 										classPK="<%= message.getMessageId() %>"
 										type="thumbs"
-										url='<%= themeDisplay.getPathMain() + "/" + portlet.getStrutsPath() + "/rate_entry?p_p_id=" + portletDisplay.getId() %>'
 									/>
 								</td>
 							</c:if>
