@@ -161,7 +161,8 @@ public class DataFactory {
 	}
 
 	public MBCategory addMBCategory(
-			long groupId, long userId, String name, String description)
+			long groupId, long userId, String name, String description,
+			int threadCount, int messageCount)
 		throws Exception {
 
 		MBCategory mbCategory = new MBCategoryImpl();
@@ -171,18 +172,21 @@ public class DataFactory {
 		mbCategory.setUserId(userId);
 		mbCategory.setName(name);
 		mbCategory.setDescription(description);
+		mbCategory.setThreadCount(threadCount);
+		mbCategory.setMessageCount(messageCount);
 
 		return mbCategory;
 	}
 
 	public MBMessage addMBMessage(
-			long userId, long categoryId, long threadId, long parentMessageId,
-			String subject, String body)
+			long groupId, long userId, long categoryId, long threadId,
+			long parentMessageId, String subject, String body)
 		throws Exception {
 
 		MBMessage mbMessage = new MBMessageImpl();
 
 		mbMessage.setMessageId(_counter.get());
+		mbMessage.setGroupId(groupId);
 		mbMessage.setUserId(userId);
 		mbMessage.setCategoryId(categoryId);
 		mbMessage.setThreadId(threadId);
@@ -194,13 +198,14 @@ public class DataFactory {
 	}
 
 	public MBThread addMBThread(
-			long threadId, long categoryId, long rootMessageId,
+			long threadId, long groupId, long categoryId, long rootMessageId,
 			int messageCount, long lastPostByUserId)
 		throws Exception {
 
 		MBThread mbThread = new MBThreadImpl();
 
 		mbThread.setThreadId(threadId);
+		mbThread.setGroupId(groupId);
 		mbThread.setCategoryId(categoryId);
 		mbThread.setRootMessageId(rootMessageId);
 		mbThread.setMessageCount(messageCount);
