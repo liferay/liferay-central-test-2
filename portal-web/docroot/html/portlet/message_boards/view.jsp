@@ -146,11 +146,13 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			if (!restricted) {
 				sb.append("</a>");
 
-				List subcategories = MBCategoryLocalServiceUtil.getCategories(scopeGroupId, curCategory.getCategoryId(), 0, 5);
+				List subcategories = categoryDisplay.getCategories(curCategory);
 
-				if (subcategories.size() > 0) {
-					int subcategoriesCount = MBCategoryLocalServiceUtil.getCategoriesCount(scopeGroupId, curCategory.getCategoryId());
+				int subcategoriesCount = subcategories.size();
 
+				subcategories = ListUtil.subList(subcategories, 0, 5);
+
+				if (subcategoriesCount > 0) {
 					sb.append("<br /><span class=\"subcategories\">");
 					sb.append(LanguageUtil.get(pageContext, "subcategories"));
 					sb.append("</span>: ");
