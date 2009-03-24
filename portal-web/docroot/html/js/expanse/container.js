@@ -211,6 +211,7 @@
 				instance._destroyOnClose = options.destroyOnClose;
 
 				if (options.destroyOnClose !== false) {
+					Event.un(instance.close, 'click', instance._doClose);
 					Event.on(instance.close, 'click', instance.destroy, instance, true);
 				}
 				else {
@@ -232,7 +233,7 @@
 						el,
 						{
 							handles: options.handles || ['r', 'b', 'br'],
-							height: options.height,
+							height: options.height || 'auto',
 							proxy: true,
 							width: options.width
 						}
