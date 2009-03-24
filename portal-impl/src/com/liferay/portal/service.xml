@@ -348,10 +348,19 @@
 			<finder-column name="companyId" />
 			<finder-column name="friendlyURL" />
 		</finder>
+		<finder name="T_A" return-type="Collection">
+			<finder-column name="type" />
+			<finder-column name="active" />
+		</finder>
 		<finder name="C_C_C" return-type="Group" unique="true">
 			<finder-column name="companyId" />
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
+		</finder>
+		<finder name="C_L_N" return-type="Group" unique="true">
+			<finder-column name="companyId" />
+			<finder-column name="liveGroupId" />
+			<finder-column name="name" />
 		</finder>
 
 		<!-- References -->

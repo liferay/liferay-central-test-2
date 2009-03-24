@@ -97,6 +97,34 @@ public interface GroupPersistence extends BasePersistence {
 	public com.liferay.portal.model.Group fetchByC_F(long companyId,
 		java.lang.String friendlyURL) throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portal.model.Group> findByT_A(int type,
+		boolean active) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Group> findByT_A(int type,
+		boolean active, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Group> findByT_A(int type,
+		boolean active, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Group findByT_A_First(int type,
+		boolean active, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchGroupException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Group findByT_A_Last(int type,
+		boolean active, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchGroupException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Group[] findByT_A_PrevAndNext(
+		long groupId, int type, boolean active,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchGroupException,
+			com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Group findByC_C_C(long companyId,
 		long classNameId, long classPK)
 		throws com.liferay.portal.NoSuchGroupException,
@@ -104,6 +132,15 @@ public interface GroupPersistence extends BasePersistence {
 
 	public com.liferay.portal.model.Group fetchByC_C_C(long companyId,
 		long classNameId, long classPK)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Group findByC_L_N(long companyId,
+		long liveGroupId, java.lang.String name)
+		throws com.liferay.portal.NoSuchGroupException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Group fetchByC_L_N(long companyId,
+		long liveGroupId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<Object> findWithDynamicQuery(
@@ -136,7 +173,15 @@ public interface GroupPersistence extends BasePersistence {
 		throws com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.SystemException;
 
+	public void removeByT_A(int type, boolean active)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByC_C_C(long companyId, long classNameId, long classPK)
+		throws com.liferay.portal.NoSuchGroupException,
+			com.liferay.portal.SystemException;
+
+	public void removeByC_L_N(long companyId, long liveGroupId,
+		java.lang.String name)
 		throws com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.SystemException;
 
@@ -151,8 +196,14 @@ public interface GroupPersistence extends BasePersistence {
 	public int countByC_F(long companyId, java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException;
 
+	public int countByT_A(int type, boolean active)
+		throws com.liferay.portal.SystemException;
+
 	public int countByC_C_C(long companyId, long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
+
+	public int countByC_L_N(long companyId, long liveGroupId,
+		java.lang.String name) throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;
 

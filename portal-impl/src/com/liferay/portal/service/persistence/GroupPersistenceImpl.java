@@ -627,6 +627,271 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public List<Group> findByT_A(int type, boolean active)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED;
+		String finderClassName = Group.class.getName();
+		String finderMethodName = "findByT_A";
+		String[] finderParams = new String[] {
+				Integer.class.getName(), Boolean.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Integer(type), Boolean.valueOf(active)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("FROM com.liferay.portal.model.Group WHERE ");
+
+				query.append("type_ = ?");
+
+				query.append(" AND ");
+
+				query.append("active_ = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("name ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(type);
+
+				qPos.add(active);
+
+				List<Group> list = q.list();
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<Group>)result;
+		}
+	}
+
+	public List<Group> findByT_A(int type, boolean active, int start, int end)
+		throws SystemException {
+		return findByT_A(type, active, start, end, null);
+	}
+
+	public List<Group> findByT_A(int type, boolean active, int start, int end,
+		OrderByComparator obc) throws SystemException {
+		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED;
+		String finderClassName = Group.class.getName();
+		String finderMethodName = "findByT_A";
+		String[] finderParams = new String[] {
+				Integer.class.getName(), Boolean.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Integer(type), Boolean.valueOf(active),
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("FROM com.liferay.portal.model.Group WHERE ");
+
+				query.append("type_ = ?");
+
+				query.append(" AND ");
+
+				query.append("active_ = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("name ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(type);
+
+				qPos.add(active);
+
+				List<Group> list = (List<Group>)QueryUtil.list(q, getDialect(),
+						start, end);
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<Group>)result;
+		}
+	}
+
+	public Group findByT_A_First(int type, boolean active, OrderByComparator obc)
+		throws NoSuchGroupException, SystemException {
+		List<Group> list = findByT_A(type, active, 0, 1, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No Group exists with the key {");
+
+			msg.append("type=" + type);
+
+			msg.append(", ");
+			msg.append("active=" + active);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchGroupException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public Group findByT_A_Last(int type, boolean active, OrderByComparator obc)
+		throws NoSuchGroupException, SystemException {
+		int count = countByT_A(type, active);
+
+		List<Group> list = findByT_A(type, active, count - 1, count, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No Group exists with the key {");
+
+			msg.append("type=" + type);
+
+			msg.append(", ");
+			msg.append("active=" + active);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchGroupException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public Group[] findByT_A_PrevAndNext(long groupId, int type,
+		boolean active, OrderByComparator obc)
+		throws NoSuchGroupException, SystemException {
+		Group group = findByPrimaryKey(groupId);
+
+		int count = countByT_A(type, active);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append("FROM com.liferay.portal.model.Group WHERE ");
+
+			query.append("type_ = ?");
+
+			query.append(" AND ");
+
+			query.append("active_ = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("name ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(type);
+
+			qPos.add(active);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, group);
+
+			Group[] array = new GroupImpl[3];
+
+			array[0] = (Group)objArray[0];
+			array[1] = (Group)objArray[1];
+			array[2] = (Group)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public Group findByC_C_C(long companyId, long classNameId, long classPK)
 		throws NoSuchGroupException, SystemException {
 		Group group = fetchByC_C_C(companyId, classNameId, classPK);
@@ -710,6 +975,131 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 				qPos.add(classNameId);
 
 				qPos.add(classPK);
+
+				List<Group> list = q.list();
+
+				if (list.isEmpty()) {
+					return null;
+				}
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list.get(0);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List<Group> list = (List<Group>)result;
+
+			if (list.isEmpty()) {
+				return null;
+			}
+			else {
+				return list.get(0);
+			}
+		}
+	}
+
+	public Group findByC_L_N(long companyId, long liveGroupId, String name)
+		throws NoSuchGroupException, SystemException {
+		Group group = fetchByC_L_N(companyId, liveGroupId, name);
+
+		if (group == null) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No Group exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
+			msg.append(", ");
+			msg.append("liveGroupId=" + liveGroupId);
+
+			msg.append(", ");
+			msg.append("name=" + name);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchGroupException(msg.toString());
+		}
+
+		return group;
+	}
+
+	public Group fetchByC_L_N(long companyId, long liveGroupId, String name)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED;
+		String finderClassName = Group.class.getName();
+		String finderMethodName = "fetchByC_L_N";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName(),
+				String.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(companyId), new Long(liveGroupId),
+				
+				name
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("FROM com.liferay.portal.model.Group WHERE ");
+
+				query.append("companyId = ?");
+
+				query.append(" AND ");
+
+				query.append("liveGroupId = ?");
+
+				query.append(" AND ");
+
+				if (name == null) {
+					query.append("name IS NULL");
+				}
+				else {
+					query.append("name = ?");
+				}
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("name ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(liveGroupId);
+
+				if (name != null) {
+					qPos.add(name);
+				}
 
 				List<Group> list = q.list();
 
@@ -885,9 +1275,22 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 		remove(group);
 	}
 
+	public void removeByT_A(int type, boolean active) throws SystemException {
+		for (Group group : findByT_A(type, active)) {
+			remove(group);
+		}
+	}
+
 	public void removeByC_C_C(long companyId, long classNameId, long classPK)
 		throws NoSuchGroupException, SystemException {
 		Group group = findByC_C_C(companyId, classNameId, classPK);
+
+		remove(group);
+	}
+
+	public void removeByC_L_N(long companyId, long liveGroupId, String name)
+		throws NoSuchGroupException, SystemException {
+		Group group = findByC_L_N(companyId, liveGroupId, name);
 
 		remove(group);
 	}
@@ -1125,6 +1528,81 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public int countByT_A(int type, boolean active) throws SystemException {
+		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED;
+		String finderClassName = Group.class.getName();
+		String finderMethodName = "countByT_A";
+		String[] finderParams = new String[] {
+				Integer.class.getName(), Boolean.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Integer(type), Boolean.valueOf(active)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(*) ");
+				query.append("FROM com.liferay.portal.model.Group WHERE ");
+
+				query.append("type_ = ?");
+
+				query.append(" AND ");
+
+				query.append("active_ = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(type);
+
+				qPos.add(active);
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
 	public int countByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED;
@@ -1176,6 +1654,98 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 				qPos.add(classNameId);
 
 				qPos.add(classPK);
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByC_L_N(long companyId, long liveGroupId, String name)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED;
+		String finderClassName = Group.class.getName();
+		String finderMethodName = "countByC_L_N";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName(),
+				String.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(companyId), new Long(liveGroupId),
+				
+				name
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(*) ");
+				query.append("FROM com.liferay.portal.model.Group WHERE ");
+
+				query.append("companyId = ?");
+
+				query.append(" AND ");
+
+				query.append("liveGroupId = ?");
+
+				query.append(" AND ");
+
+				if (name == null) {
+					query.append("name IS NULL");
+				}
+				else {
+					query.append("name = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(liveGroupId);
+
+				if (name != null) {
+					qPos.add(name);
+				}
 
 				Long count = null;
 

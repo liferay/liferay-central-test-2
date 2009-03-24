@@ -113,8 +113,10 @@ create index IX_B71E92D5 on ExpandoValue (tableId, rowId_);
 
 create unique index IX_D0D5E397 on Group_ (companyId, classNameId, classPK);
 create unique index IX_5BDDB872 on Group_ (companyId, friendlyURL);
+create unique index IX_BBCA55B on Group_ (companyId, liveGroupId, name);
 create unique index IX_5AA68501 on Group_ (companyId, name);
 create index IX_16218A38 on Group_ (liveGroupId);
+create index IX_7B590A7A on Group_ (type_, active_);
 
 create index IX_75267DCA on Groups_Orgs (groupId);
 create index IX_6BBB7682 on Groups_Orgs (organizationId);
