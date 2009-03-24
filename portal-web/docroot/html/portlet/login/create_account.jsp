@@ -112,14 +112,16 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 		</c:otherwise>
 	</c:choose>
 
-	<div class="ctrl-holder">
-		<label for="<portlet:namespace />male"><liferay-ui:message key="gender" /></label>
+	<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE)) %>">
+		<div class="ctrl-holder">
+			<label for="<portlet:namespace />male"><liferay-ui:message key="gender" /></label>
 
-		<select name="<portlet:namespace />male">
-			<option value="1"><liferay-ui:message key="male" /></option>
-			<option <%= !male? "selected" : "" %> value="0"><liferay-ui:message key="female" /></option>
-		</select>
-	</div>
+			<select name="<portlet:namespace />male">
+				<option value="1"><liferay-ui:message key="male" /></option>
+				<option <%= !male? "selected" : "" %> value="0"><liferay-ui:message key="female" /></option>
+			</select>
+		</div>
+	</c:if>
 
 	<c:if test="<%= PropsValues.CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT %>">
 		<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
