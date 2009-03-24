@@ -2854,6 +2854,10 @@ public class PortalImpl implements Portal {
 			_log.warn(
 				"Current URL " + currentURL + " generates exception: " +
 					e.getMessage());
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(e, e);
+			}
 		}
 
 		if (response.isCommitted()) {
