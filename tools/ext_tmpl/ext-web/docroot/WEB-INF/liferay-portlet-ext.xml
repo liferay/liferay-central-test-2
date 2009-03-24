@@ -488,6 +488,21 @@
 		<struts-path>tags_entries_navigation</struts-path>
 		<include>true</include>
 	</portlet>
+	<portlet>
+		<portlet-name>142</portlet-name>
+		<struts-path>flags</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>143</portlet-name>
+		<struts-path>page_flags</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>144</portlet-name>
+		<struts-path>ratings</struts-path>
+		<include>true</include>
+	</portlet>
 	-->
 
 	<role-mapper>
