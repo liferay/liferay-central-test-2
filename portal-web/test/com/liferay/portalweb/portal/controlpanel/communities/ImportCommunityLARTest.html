@@ -1,0 +1,109 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ImportCommunityLARTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">ImportCommunityLARTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('my-community-private-pages'))</td>
+	<td>MyCommunityPage</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${MyCommunityPage}</td>
+	<td>NotMyCommunityPage</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>my-community-private-pages</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>NotMyCommunityPage</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Communities</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_134_name</td>
+	<td>LAR Communit</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_134_name</td>
+	<td>LAR Community</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Search']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//strong/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//body/div[2]/ul/li[2]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//body/div[2]/ul/li[2]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Export / Import</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Import</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>_134_importFileName</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_134_importFileName</td>
+	<td>L:\portal\build\portal-web\test\com\liferay\portalweb\portal\controlpanel\Community.Selenium.portlet.lar</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>_134_PERMISSIONS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Import']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

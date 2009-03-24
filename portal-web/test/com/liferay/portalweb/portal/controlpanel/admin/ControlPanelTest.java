@@ -20,35 +20,40 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal;
+package com.liferay.portalweb.portal.controlpanel.admin;
 
-import com.liferay.portalweb.portal.controlpanel.admin.AdminTests;
-import com.liferay.portalweb.portal.controlpanel.communities.CommunitiesTests;
-import com.liferay.portalweb.portal.controlpanel.portal.PortalTests;
-import com.liferay.portalweb.portal.login.LoginTests;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="ControlPanelTestSuite.java.html"><b><i>View Source</i></b></a>
+ * <a href="ControlPanelTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ControlPanelTestSuite extends BaseTests {
+public class ControlPanelTest extends BaseTestCase {
+	public void testControlPanel() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
+			try {
+				if (selenium.isElementPresent(
+							"//a[@id='my-community-private-pages']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
 
-		testSuite.addTest(LoginTests.suite());
-		testSuite.addTest(AdminTests.suite());
-		testSuite.addTest(CommunitiesTests.suite());
-		testSuite.addTest(PortalTests.suite());
+			Thread.sleep(1000);
+		}
 
-		testSuite.addTestSuite(StopSeleniumTest.class);
-
-		return testSuite;
+		selenium.click(RuntimeVariables.replace(
+				"//a[@id='my-community-private-pages']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Control Panel"));
+		selenium.waitForPageToLoad("30000");
 	}
-
 }

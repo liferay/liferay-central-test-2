@@ -20,33 +20,40 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal;
+package com.liferay.portalweb.portal.controlpanel.admin;
 
-import com.liferay.portalweb.portal.controlpanel.admin.AdminTests;
-import com.liferay.portalweb.portal.controlpanel.communities.CommunitiesTests;
-import com.liferay.portalweb.portal.controlpanel.portal.PortalTests;
-import com.liferay.portalweb.portal.login.LoginTests;
+import com.liferay.portalweb.portal.BaseTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="ControlPanelTestSuite.java.html"><b><i>View Source</i></b></a>
+ * <a href="AdminTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ControlPanelTestSuite extends BaseTests {
+public class AdminTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(LoginTests.suite());
-		testSuite.addTest(AdminTests.suite());
-		testSuite.addTest(CommunitiesTests.suite());
-		testSuite.addTest(PortalTests.suite());
-
-		testSuite.addTestSuite(StopSeleniumTest.class);
+		testSuite.addTestSuite(ControlPanelTest.class);
+		testSuite.addTestSuite(AddServerCategoryTest.class);
+		testSuite.addTestSuite(EditServerCategoryTest.class);
+		testSuite.addTestSuite(BrowseServerTest.class);
+		testSuite.addTestSuite(BrowseServerInstanceTest.class);
+		testSuite.addTestSuite(AddServerInstanceTest.class);
+		testSuite.addTestSuite(AddNullServerInstanceWebIDTest.class);
+		testSuite.addTestSuite(AddDuplicateServerInstanceWebIDTest.class);
+		testSuite.addTestSuite(AddNullServerInstanceVHTest.class);
+		testSuite.addTestSuite(AddDuplicateServerInstanceVHTest.class);
+		testSuite.addTestSuite(AddInvalidServerInstanceVHTest.class);
+		testSuite.addTestSuite(AddNullServerInstanceMDTest.class);
+		testSuite.addTestSuite(EditServerInstanceTest.class);
+		testSuite.addTestSuite(BrowseServerPluginsInstallationTest.class);
+		testSuite.addTestSuite(BrowseInstallMorePluginsTest.class);
+		testSuite.addTestSuite(EndControlPanelTest.class);
 
 		return testSuite;
 	}

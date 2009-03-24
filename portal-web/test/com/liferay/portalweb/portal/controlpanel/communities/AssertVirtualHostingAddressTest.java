@@ -20,35 +20,27 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal;
+package com.liferay.portalweb.portal.controlpanel.communities;
 
-import com.liferay.portalweb.portal.controlpanel.admin.AdminTests;
-import com.liferay.portalweb.portal.controlpanel.communities.CommunitiesTests;
-import com.liferay.portalweb.portal.controlpanel.portal.PortalTests;
-import com.liferay.portalweb.portal.login.LoginTests;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="ControlPanelTestSuite.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssertVirtualHostingAddressTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ControlPanelTestSuite extends BaseTests {
-
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
-
-		testSuite.addTest(LoginTests.suite());
-		testSuite.addTest(AdminTests.suite());
-		testSuite.addTest(CommunitiesTests.suite());
-		testSuite.addTest(PortalTests.suite());
-
-		testSuite.addTestSuite(StopSeleniumTest.class);
-
-		return testSuite;
+public class AssertVirtualHostingAddressTest extends BaseTestCase {
+	public void testAssertVirtualHostingAddress() throws Exception {
+		selenium.open("http://www.able.com:8080/");
+		Thread.sleep(5000);
+		assertEquals("http://www.able.com:8080/", selenium.getLocation());
+		assertTrue(selenium.isTextPresent(
+				"Hello and welcome to the Virtual Hosting Test Community!"));
+		selenium.open("http://localhost:8080/web/guest/home");
+		Thread.sleep(5000);
+		selenium.click(RuntimeVariables.replace("my-community-private-pages"));
+		selenium.waitForPageToLoad("30000");
 	}
-
 }
