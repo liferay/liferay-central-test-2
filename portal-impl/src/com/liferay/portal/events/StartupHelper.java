@@ -154,39 +154,8 @@ public class StartupHelper {
 			BatchSessionUtil.setEnabled(true);
 
 			try {
-				for (int i = 0; i < verifyProcesses.length; i++) {
-					if (_log.isDebugEnabled()) {
-						_log.debug(
-							"Initializing verification " + verifyProcesses[i]);
-					}
-
-					try {
-						VerifyProcess verifyProcess = (VerifyProcess)Class.forName(
-							verifyProcesses[i]).newInstance();
-
-						if (_log.isDebugEnabled()) {
-							_log.debug(
-								"Running verification " + verifyProcesses[i]);
-						}
-
-						verifyProcess.verify();
-
-						if (_log.isDebugEnabled()) {
-							_log.debug(
-								"Finished verification " + verifyProcesses[i]);
-						}
-
-						_verified = true;
-					}
-					catch (ClassNotFoundException cnfe) {
-						_log.error(verifyProcesses[i] + " cannot be found");
-					}
-					catch (IllegalAccessException iae) {
-						_log.error(verifyProcesses[i] + " cannot be accessed");
-					}
-					catch (InstantiationException ie) {
-						_log.error(verifyProcesses[i] + " cannot be initiated");
-					}
+				for (String className : verifyProcesses) {
+					verifyProcess(className);
 				}
 			}
 			finally {
@@ -265,6 +234,38 @@ public class StartupHelper {
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void verifyProcess(String className) throws VerifyException {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Initializing verification " + className);
+		}
+
+		try {
+			VerifyProcess verifyProcess = (VerifyProcess)Class.forName(
+				className).newInstance();
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Running verification " + className);
+			}
+
+			verifyProcess.verify();
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Finished verification " + className);
+			}
+
+			_verified = true;
+		}
+		catch (ClassNotFoundException cnfe) {
+			_log.error(className + " cannot be found");
+		}
+		catch (IllegalAccessException iae) {
+			_log.error(className + " cannot be accessed");
+		}
+		catch (InstantiationException ie) {
+			_log.error(className + " cannot be initiated");
 		}
 	}
 
