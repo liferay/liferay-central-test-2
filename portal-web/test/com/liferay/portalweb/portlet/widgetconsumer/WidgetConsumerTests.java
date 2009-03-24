@@ -28,7 +28,7 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="WeatherTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="WidgetConsumerTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
