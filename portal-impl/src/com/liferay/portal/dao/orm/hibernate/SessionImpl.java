@@ -22,6 +22,7 @@
 
 package com.liferay.portal.dao.orm.hibernate;
 
+import com.liferay.portal.dao.orm.common.SQLTransformer;
 import com.liferay.portal.kernel.dao.orm.LockMode;
 import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -73,6 +74,8 @@ public class SessionImpl implements Session {
 
 	public Query createQuery(String queryString) throws ORMException {
 		try {
+			queryString = SQLTransformer.transform(queryString);
+
 			return new QueryImpl(_session.createQuery(queryString));
 		}
 		catch (Exception e) {
@@ -84,6 +87,8 @@ public class SessionImpl implements Session {
 		throws ORMException {
 
 		try {
+			queryString = SQLTransformer.transform(queryString);
+
 			return new SQLQueryImpl(_session.createSQLQuery(queryString));
 		}
 		catch (Exception e) {
