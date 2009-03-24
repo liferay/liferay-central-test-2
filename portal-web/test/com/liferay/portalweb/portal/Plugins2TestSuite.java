@@ -59,6 +59,7 @@ import com.liferay.portalweb.portlet.twitter.TwitterTests;
 import com.liferay.portalweb.portlet.weather.WeatherTests;
 import com.liferay.portalweb.portlet.webform.WebFormTests;
 import com.liferay.portalweb.portlet.westminstercatechism.WestminsterCatechismTests;
+import com.liferay.portalweb.portlet.widgetconsumer.WidgetConsumerTests;
 import com.liferay.portalweb.portlet.wikinavigation.WikiNavigationTests;
 import com.liferay.portalweb.portlet.wol.WOLTests;
 
@@ -115,6 +116,7 @@ public class Plugins2TestSuite extends BaseTests {
 		testSuite.addTest(WeatherTests.suite());
 		testSuite.addTest(WebFormTests.suite());
 		testSuite.addTest(WestminsterCatechismTests.suite());
+		testSuite.addTest(WidgetConsumerTests.suite());
 		testSuite.addTest(WikiNavigationTests.suite());
 		testSuite.addTest(WOLTests.suite());
 
