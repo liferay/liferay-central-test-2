@@ -27,7 +27,7 @@
 <%
 long groupId = ParamUtil.getLong(request, "groupId");
 
-Layout group = layout.getGroup();
+Group group = layout.getGroup();
 
 String defaultKeywords = LanguageUtil.get(pageContext, "search") + "...";
 String unicodeDefaultKeywords = UnicodeFormatter.toString(defaultKeywords);
