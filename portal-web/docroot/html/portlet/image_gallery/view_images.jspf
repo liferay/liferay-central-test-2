@@ -99,51 +99,68 @@
 	<%
 	for (int i = 0; i < results.size(); i++) {
 		IGImage image = (IGImage)results.get(i);
-
-		Image largeImage = ImageLocalServiceUtil.getImage(image.getLargeImageId());
-		Image smallImage = ImageLocalServiceUtil.getImage(image.getSmallImageId());
-
-		long smallImageId = 0;
-		int smallImageHeight = 100;
-		int smallImageWidth = 100;
-
-		if (smallImage != null) {
-			smallImageId = smallImage.getImageId();
-			smallImageHeight = smallImage.getHeight();
-			smallImageWidth = smallImage.getWidth();
-		}
-
-		int topMargin = PrefsPropsUtil.getInteger(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION) - smallImageHeight + 20;
-		int sideMargin = (PrefsPropsUtil.getInteger(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION) - smallImageWidth + 20) / 2;
 	%>
 
-		<div style="float: left; margin: <%= topMargin %>px <%= sideMargin %>px 0px <%= sideMargin %>px;">
-			<a href="javascript: ;" onClick="<portlet:namespace />viewImage(<%= largeImage.getImageId() %>, '<%= ImageServletTokenUtil.getToken(largeImage.getImageId()) %>', '<b><%= image.getName() %></b><br /><%= HtmlUtil.escape(image.getDescription()) %>', <%= largeImage.getWidth() %>, <%= largeImage.getHeight() %>)">
-				<img alt="<liferay-ui:message key="image" />" border="no" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= smallImageId %>&t=<%= ImageServletTokenUtil.getToken(smallImageId) %>" style="height: <%= smallImageHeight %>; width: <%= smallImageWidth %>;" />
-			</a>
+		<c:choose>
+			<c:when test="<%= IGImagePermission.contains(permissionChecker, image, ActionKeys.VIEW) %>">
 
-			<div style="text-align: center;">
-				<%= image.getName() %>
+				<%
+				Image largeImage = ImageLocalServiceUtil.getImage(image.getLargeImageId());
+				Image smallImage = ImageLocalServiceUtil.getImage(image.getSmallImageId());
 
-				<c:if test="<%= scores != null %>">
-					<br />
+				long smallImageId = 0;
+				int smallImageHeight = 100;
+				int smallImageWidth = 100;
 
-					<%
-					double score = ((Double)scores.get(i)).doubleValue();
+				if (smallImage != null) {
+					smallImageId = smallImage.getImageId();
+					smallImageHeight = smallImage.getHeight();
+					smallImageWidth = smallImage.getWidth();
+				}
 
-					score = MathUtils.round((score * 10) / 2, 1, BigDecimal.ROUND_UP);
-					%>
+				int topMargin = PrefsPropsUtil.getInteger(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION) - smallImageHeight + 20;
+				int sideMargin = (PrefsPropsUtil.getInteger(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION) - smallImageWidth + 20) / 2;
+				%>
 
-					<liferay-ui:ratings-score score="<%= score %>" />
-				</c:if>
-			</div>
+				<div style="float: left; margin: <%= topMargin %>px <%= sideMargin %>px 0px <%= sideMargin %>px;">
+					<a href="javascript: ;" onClick="<portlet:namespace />viewImage(<%= largeImage.getImageId() %>, '<%= ImageServletTokenUtil.getToken(largeImage.getImageId()) %>', '<b><%= image.getName() %></b><br /><%= HtmlUtil.escape(image.getDescription()) %>', <%= largeImage.getWidth() %>, <%= largeImage.getHeight() %>)">
+						<img alt="<liferay-ui:message key="image" />" border="no" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= smallImageId %>&t=<%= ImageServletTokenUtil.getToken(smallImageId) %>" style="height: <%= smallImageHeight %>; width: <%= smallImageWidth %>;" />
+					</a>
 
-			<div id="<portlet:namespace />buttonsContainer_<%= largeImage.getImageId() %>" style="display: none;">
-				<div class="buttons-container float-container" id="<portlet:namespace />buttons_<%= largeImage.getImageId() %>">
-					<%@ include file="/html/portlet/image_gallery/image_action.jspf" %>
+					<div style="text-align: center;">
+						<%= image.getName() %>
+
+						<c:if test="<%= scores != null %>">
+							<br />
+
+							<%
+							double score = ((Double)scores.get(i)).doubleValue();
+
+							score = MathUtils.round((score * 10) / 2, 1, BigDecimal.ROUND_UP);
+							%>
+
+							<liferay-ui:ratings-score score="<%= score %>" />
+						</c:if>
+					</div>
+
+					<div id="<portlet:namespace />buttonsContainer_<%= largeImage.getImageId() %>" style="display: none;">
+						<div class="buttons-container float-container" id="<portlet:namespace />buttons_<%= largeImage.getImageId() %>">
+							<%@ include file="/html/portlet/image_gallery/image_action.jspf" %>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
+			</c:when>
+			<c:otherwise>
+
+				<%
+				String src = themeDisplay.getPathThemeImages() + "/application/forbidden_action.png";
+				%>
+
+				<div style="margin: 100px 10px 0px; float: left;">
+					<img alt="<liferay-ui:message key="image" />" border="no" src="<%= src %>" />
+				</div>
+			</c:otherwise>
+		</c:choose>
 
 	<%
 	}
