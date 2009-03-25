@@ -435,7 +435,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchEntryException, SystemException {
 		List<AnnouncementsEntry> list = findByUuid(uuid, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No AnnouncementsEntry exists with the key {");
@@ -457,7 +457,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 
 		List<AnnouncementsEntry> list = findByUuid(uuid, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No AnnouncementsEntry exists with the key {");
@@ -686,7 +686,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchEntryException, SystemException {
 		List<AnnouncementsEntry> list = findByUserId(userId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No AnnouncementsEntry exists with the key {");
@@ -709,7 +709,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 		List<AnnouncementsEntry> list = findByUserId(userId, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No AnnouncementsEntry exists with the key {");
@@ -948,7 +948,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 		List<AnnouncementsEntry> list = findByC_C(classNameId, classPK, 0, 1,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No AnnouncementsEntry exists with the key {");
@@ -974,7 +974,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 		List<AnnouncementsEntry> list = findByC_C(classNameId, classPK,
 				count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No AnnouncementsEntry exists with the key {");
@@ -1238,7 +1238,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 		List<AnnouncementsEntry> list = findByC_C_A(classNameId, classPK,
 				alert, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No AnnouncementsEntry exists with the key {");
@@ -1268,7 +1268,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 		List<AnnouncementsEntry> list = findByC_C_A(classNameId, classPK,
 				alert, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No AnnouncementsEntry exists with the key {");

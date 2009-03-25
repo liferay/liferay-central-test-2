@@ -432,7 +432,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchRequestException, SystemException {
 		List<SocialRequest> list = findByUuid(uuid, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRequest exists with the key {");
@@ -454,7 +454,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 
 		List<SocialRequest> list = findByUuid(uuid, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRequest exists with the key {");
@@ -616,15 +616,16 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 
 				List<SocialRequest> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -636,7 +637,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<SocialRequest> list = (List<SocialRequest>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {
@@ -791,7 +792,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchRequestException, SystemException {
 		List<SocialRequest> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRequest exists with the key {");
@@ -814,7 +815,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 		List<SocialRequest> list = findByCompanyId(companyId, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRequest exists with the key {");
@@ -1033,7 +1034,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchRequestException, SystemException {
 		List<SocialRequest> list = findByUserId(userId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRequest exists with the key {");
@@ -1055,7 +1056,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 
 		List<SocialRequest> list = findByUserId(userId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRequest exists with the key {");
@@ -1275,7 +1276,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 		List<SocialRequest> list = findByReceiverUserId(receiverUserId, 0, 1,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRequest exists with the key {");
@@ -1298,7 +1299,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 		List<SocialRequest> list = findByReceiverUserId(receiverUserId,
 				count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRequest exists with the key {");
@@ -1531,7 +1532,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchRequestException, SystemException {
 		List<SocialRequest> list = findByU_S(userId, status, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRequest exists with the key {");
@@ -1557,7 +1558,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 		List<SocialRequest> list = findByU_S(userId, status, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRequest exists with the key {");
@@ -1801,7 +1802,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchRequestException, SystemException {
 		List<SocialRequest> list = findByR_S(receiverUserId, status, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRequest exists with the key {");
@@ -1827,7 +1828,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 		List<SocialRequest> list = findByR_S(receiverUserId, status, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRequest exists with the key {");
@@ -2018,15 +2019,16 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 
 				List<SocialRequest> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -2038,7 +2040,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<SocialRequest> list = (List<SocialRequest>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {
@@ -2254,7 +2256,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 		List<SocialRequest> list = findByU_C_C_T_S(userId, classNameId,
 				classPK, type, status, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRequest exists with the key {");
@@ -2290,7 +2292,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 		List<SocialRequest> list = findByU_C_C_T_S(userId, classNameId,
 				classPK, type, status, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRequest exists with the key {");
@@ -2519,15 +2521,16 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 
 				List<SocialRequest> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -2539,7 +2542,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<SocialRequest> list = (List<SocialRequest>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {

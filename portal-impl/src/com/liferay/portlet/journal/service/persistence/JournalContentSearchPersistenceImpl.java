@@ -419,7 +419,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 		List<JournalContentSearch> list = findByG_P(groupId, privateLayout, 0,
 				1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalContentSearch exists with the key {");
@@ -446,7 +446,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 		List<JournalContentSearch> list = findByG_P(groupId, privateLayout,
 				count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalContentSearch exists with the key {");
@@ -690,7 +690,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 		List<JournalContentSearch> list = findByG_A(groupId, articleId, 0, 1,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalContentSearch exists with the key {");
@@ -717,7 +717,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 		List<JournalContentSearch> list = findByG_A(groupId, articleId,
 				count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalContentSearch exists with the key {");
@@ -972,7 +972,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 		List<JournalContentSearch> list = findByG_P_L(groupId, privateLayout,
 				layoutId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalContentSearch exists with the key {");
@@ -1002,7 +1002,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 		List<JournalContentSearch> list = findByG_P_L(groupId, privateLayout,
 				layoutId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalContentSearch exists with the key {");
@@ -1276,7 +1276,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 		List<JournalContentSearch> list = findByG_P_A(groupId, privateLayout,
 				articleId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalContentSearch exists with the key {");
@@ -1306,7 +1306,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 		List<JournalContentSearch> list = findByG_P_A(groupId, privateLayout,
 				articleId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalContentSearch exists with the key {");
@@ -1604,7 +1604,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 		List<JournalContentSearch> list = findByG_P_L_P(groupId, privateLayout,
 				layoutId, portletId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalContentSearch exists with the key {");
@@ -1638,7 +1638,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 		List<JournalContentSearch> list = findByG_P_L_P(groupId, privateLayout,
 				layoutId, portletId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalContentSearch exists with the key {");
@@ -1865,15 +1865,16 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 
 				List<JournalContentSearch> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1885,7 +1886,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<JournalContentSearch> list = (List<JournalContentSearch>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {

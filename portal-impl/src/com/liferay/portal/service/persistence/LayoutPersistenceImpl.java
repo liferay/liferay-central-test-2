@@ -393,7 +393,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchLayoutException, SystemException {
 		List<Layout> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Layout exists with the key {");
@@ -415,7 +415,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 		List<Layout> list = findByGroupId(groupId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Layout exists with the key {");
@@ -632,7 +632,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchLayoutException, SystemException {
 		List<Layout> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Layout exists with the key {");
@@ -654,7 +654,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 		List<Layout> list = findByCompanyId(companyId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Layout exists with the key {");
@@ -789,15 +789,16 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				List<Layout> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -809,7 +810,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<Layout> list = (List<Layout>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {
@@ -883,15 +884,16 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				List<Layout> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -903,7 +905,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<Layout> list = (List<Layout>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {
@@ -1074,7 +1076,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchLayoutException, SystemException {
 		List<Layout> list = findByG_P(groupId, privateLayout, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Layout exists with the key {");
@@ -1100,7 +1102,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 		List<Layout> list = findByG_P(groupId, privateLayout, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Layout exists with the key {");
@@ -1270,15 +1272,16 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				List<Layout> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1290,7 +1293,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<Layout> list = (List<Layout>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {
@@ -1481,7 +1484,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 		List<Layout> list = findByG_P_P(groupId, privateLayout, parentLayoutId,
 				0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Layout exists with the key {");
@@ -1511,7 +1514,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 		List<Layout> list = findByG_P_P(groupId, privateLayout, parentLayoutId,
 				count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Layout exists with the key {");
@@ -1698,15 +1701,16 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				List<Layout> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1718,7 +1722,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<Layout> list = (List<Layout>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {
@@ -1923,7 +1927,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchLayoutException, SystemException {
 		List<Layout> list = findByG_P_T(groupId, privateLayout, type, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Layout exists with the key {");
@@ -1953,7 +1957,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 		List<Layout> list = findByG_P_T(groupId, privateLayout, type,
 				count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Layout exists with the key {");

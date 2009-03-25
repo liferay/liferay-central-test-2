@@ -399,7 +399,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchOrgLaborException, SystemException {
 		List<OrgLabor> list = findByOrganizationId(organizationId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No OrgLabor exists with the key {");
@@ -422,7 +422,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 		List<OrgLabor> list = findByOrganizationId(organizationId, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No OrgLabor exists with the key {");

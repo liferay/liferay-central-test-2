@@ -394,7 +394,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchResourceCodeException, SystemException {
 		List<ResourceCode> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ResourceCode exists with the key {");
@@ -418,7 +418,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 		List<ResourceCode> list = findByCompanyId(companyId, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ResourceCode exists with the key {");
@@ -633,7 +633,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchResourceCodeException, SystemException {
 		List<ResourceCode> list = findByName(name, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ResourceCode exists with the key {");
@@ -655,7 +655,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 		List<ResourceCode> list = findByName(name, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ResourceCode exists with the key {");
@@ -821,15 +821,16 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 				List<ResourceCode> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -841,7 +842,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 		else {
 			List<ResourceCode> list = (List<ResourceCode>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {

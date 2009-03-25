@@ -431,7 +431,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchProductEntryException, SystemException {
 		List<SCProductEntry> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCProductEntry exists with the key {");
@@ -453,7 +453,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 		List<SCProductEntry> list = findByGroupId(groupId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCProductEntry exists with the key {");
@@ -676,7 +676,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchProductEntryException, SystemException {
 		List<SCProductEntry> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCProductEntry exists with the key {");
@@ -700,7 +700,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		List<SCProductEntry> list = findByCompanyId(companyId, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCProductEntry exists with the key {");
@@ -937,7 +937,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchProductEntryException, SystemException {
 		List<SCProductEntry> list = findByG_U(groupId, userId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCProductEntry exists with the key {");
@@ -964,7 +964,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		List<SCProductEntry> list = findByG_U(groupId, userId, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCProductEntry exists with the key {");
@@ -1138,15 +1138,16 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 				List<SCProductEntry> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1158,7 +1159,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<SCProductEntry> list = (List<SCProductEntry>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {

@@ -430,7 +430,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchFrameworkVersionException, SystemException {
 		List<SCFrameworkVersion> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCFrameworkVersion exists with the key {");
@@ -454,7 +454,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		List<SCFrameworkVersion> list = findByGroupId(groupId, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCFrameworkVersion exists with the key {");
@@ -674,7 +674,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchFrameworkVersionException, SystemException {
 		List<SCFrameworkVersion> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCFrameworkVersion exists with the key {");
@@ -698,7 +698,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		List<SCFrameworkVersion> list = findByCompanyId(companyId, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCFrameworkVersion exists with the key {");
@@ -934,7 +934,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchFrameworkVersionException, SystemException {
 		List<SCFrameworkVersion> list = findByG_A(groupId, active, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCFrameworkVersion exists with the key {");
@@ -961,7 +961,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		List<SCFrameworkVersion> list = findByG_A(groupId, active, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCFrameworkVersion exists with the key {");

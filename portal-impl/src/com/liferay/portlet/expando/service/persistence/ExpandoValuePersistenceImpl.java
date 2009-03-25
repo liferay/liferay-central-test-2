@@ -409,7 +409,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchValueException, SystemException {
 		List<ExpandoValue> list = findByTableId(tableId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
@@ -431,7 +431,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 		List<ExpandoValue> list = findByTableId(tableId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
@@ -655,7 +655,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchValueException, SystemException {
 		List<ExpandoValue> list = findByColumnId(columnId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
@@ -677,7 +677,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 		List<ExpandoValue> list = findByColumnId(columnId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
@@ -901,7 +901,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchValueException, SystemException {
 		List<ExpandoValue> list = findByRowId(rowId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
@@ -923,7 +923,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 		List<ExpandoValue> list = findByRowId(rowId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
@@ -1161,7 +1161,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchValueException, SystemException {
 		List<ExpandoValue> list = findByT_R(tableId, rowId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
@@ -1187,7 +1187,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		List<ExpandoValue> list = findByT_R(tableId, rowId, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
@@ -1349,15 +1349,16 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 				List<ExpandoValue> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1369,7 +1370,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		else {
 			List<ExpandoValue> list = (List<ExpandoValue>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {
@@ -1544,7 +1545,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchValueException, SystemException {
 		List<ExpandoValue> list = findByC_C(classNameId, classPK, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
@@ -1570,7 +1571,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		List<ExpandoValue> list = findByC_C(classNameId, classPK, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
@@ -1743,15 +1744,16 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 				List<ExpandoValue> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1763,7 +1765,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		else {
 			List<ExpandoValue> list = (List<ExpandoValue>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {
@@ -1971,7 +1973,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		List<ExpandoValue> list = findByT_C_C_C(tableId, columnId, classNameId,
 				classPK, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
@@ -2004,7 +2006,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		List<ExpandoValue> list = findByT_C_C_C(tableId, columnId, classNameId,
 				classPK, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");

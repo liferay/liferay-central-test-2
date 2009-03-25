@@ -428,7 +428,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchPageException, SystemException {
 		List<WikiPage> list = findByUuid(uuid, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No WikiPage exists with the key {");
@@ -450,7 +450,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 		List<WikiPage> list = findByUuid(uuid, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No WikiPage exists with the key {");
@@ -678,7 +678,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchPageException, SystemException {
 		List<WikiPage> list = findByNodeId(nodeId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No WikiPage exists with the key {");
@@ -700,7 +700,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 		List<WikiPage> list = findByNodeId(nodeId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No WikiPage exists with the key {");
@@ -935,7 +935,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchPageException, SystemException {
 		List<WikiPage> list = findByFormat(format, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No WikiPage exists with the key {");
@@ -957,7 +957,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 		List<WikiPage> list = findByFormat(format, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No WikiPage exists with the key {");
@@ -1216,7 +1216,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchPageException, SystemException {
 		List<WikiPage> list = findByN_T(nodeId, title, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No WikiPage exists with the key {");
@@ -1241,7 +1241,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 		List<WikiPage> list = findByN_T(nodeId, title, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No WikiPage exists with the key {");
@@ -1496,7 +1496,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchPageException, SystemException {
 		List<WikiPage> list = findByN_H(nodeId, head, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No WikiPage exists with the key {");
@@ -1521,7 +1521,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 		List<WikiPage> list = findByN_H(nodeId, head, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No WikiPage exists with the key {");
@@ -1783,7 +1783,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchPageException, SystemException {
 		List<WikiPage> list = findByN_P(nodeId, parentTitle, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No WikiPage exists with the key {");
@@ -1809,7 +1809,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 		List<WikiPage> list = findByN_P(nodeId, parentTitle, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No WikiPage exists with the key {");
@@ -2078,7 +2078,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchPageException, SystemException {
 		List<WikiPage> list = findByN_R(nodeId, redirectTitle, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No WikiPage exists with the key {");
@@ -2104,7 +2104,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 		List<WikiPage> list = findByN_R(nodeId, redirectTitle, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No WikiPage exists with the key {");
@@ -2292,15 +2292,16 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				List<WikiPage> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -2312,7 +2313,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 		else {
 			List<WikiPage> list = (List<WikiPage>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {
@@ -2519,7 +2520,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchPageException, SystemException {
 		List<WikiPage> list = findByN_T_H(nodeId, title, head, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No WikiPage exists with the key {");
@@ -2548,7 +2549,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 		List<WikiPage> list = findByN_T_H(nodeId, title, head, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No WikiPage exists with the key {");
@@ -2846,7 +2847,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchPageException, SystemException {
 		List<WikiPage> list = findByN_H_P(nodeId, head, parentTitle, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No WikiPage exists with the key {");
@@ -2876,7 +2877,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 		List<WikiPage> list = findByN_H_P(nodeId, head, parentTitle, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No WikiPage exists with the key {");

@@ -397,7 +397,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 		List<UserTrackerPath> list = findByUserTrackerId(userTrackerId, 0, 1,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserTrackerPath exists with the key {");
@@ -421,7 +421,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 		List<UserTrackerPath> list = findByUserTrackerId(userTrackerId,
 				count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserTrackerPath exists with the key {");

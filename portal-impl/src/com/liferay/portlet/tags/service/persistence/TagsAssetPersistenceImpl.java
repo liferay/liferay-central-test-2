@@ -412,7 +412,7 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchAssetException, SystemException {
 		List<TagsAsset> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TagsAsset exists with the key {");
@@ -434,7 +434,7 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 
 		List<TagsAsset> list = findByCompanyId(companyId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TagsAsset exists with the key {");
@@ -574,15 +574,16 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 
 				List<TagsAsset> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -594,7 +595,7 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<TagsAsset> list = (List<TagsAsset>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {

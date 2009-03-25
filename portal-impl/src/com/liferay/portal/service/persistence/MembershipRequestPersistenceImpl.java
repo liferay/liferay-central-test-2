@@ -407,7 +407,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchMembershipRequestException, SystemException {
 		List<MembershipRequest> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MembershipRequest exists with the key {");
@@ -431,7 +431,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 		List<MembershipRequest> list = findByGroupId(groupId, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MembershipRequest exists with the key {");
@@ -651,7 +651,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchMembershipRequestException, SystemException {
 		List<MembershipRequest> list = findByUserId(userId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MembershipRequest exists with the key {");
@@ -675,7 +675,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 		List<MembershipRequest> list = findByUserId(userId, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MembershipRequest exists with the key {");
@@ -911,7 +911,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchMembershipRequestException, SystemException {
 		List<MembershipRequest> list = findByG_S(groupId, statusId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MembershipRequest exists with the key {");
@@ -938,7 +938,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 		List<MembershipRequest> list = findByG_S(groupId, statusId, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MembershipRequest exists with the key {");

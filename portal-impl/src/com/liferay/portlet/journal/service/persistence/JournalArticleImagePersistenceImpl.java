@@ -399,7 +399,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchArticleImageException, SystemException {
 		List<JournalArticleImage> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalArticleImage exists with the key {");
@@ -423,7 +423,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 		List<JournalArticleImage> list = findByGroupId(groupId, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalArticleImage exists with the key {");
@@ -627,7 +627,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchArticleImageException, SystemException {
 		List<JournalArticleImage> list = findByTempImage(tempImage, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalArticleImage exists with the key {");
@@ -651,7 +651,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 		List<JournalArticleImage> list = findByTempImage(tempImage, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalArticleImage exists with the key {");
@@ -906,7 +906,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 		List<JournalArticleImage> list = findByG_A_V(groupId, articleId,
 				version, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalArticleImage exists with the key {");
@@ -936,7 +936,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 		List<JournalArticleImage> list = findByG_A_V(groupId, articleId,
 				version, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalArticleImage exists with the key {");
@@ -1179,15 +1179,16 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 
 				List<JournalArticleImage> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1199,7 +1200,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 		else {
 			List<JournalArticleImage> list = (List<JournalArticleImage>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {

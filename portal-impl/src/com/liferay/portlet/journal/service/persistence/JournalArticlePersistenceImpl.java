@@ -432,7 +432,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchArticleException, SystemException {
 		List<JournalArticle> list = findByUuid(uuid, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalArticle exists with the key {");
@@ -454,7 +454,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 		List<JournalArticle> list = findByUuid(uuid, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalArticle exists with the key {");
@@ -618,15 +618,16 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 				List<JournalArticle> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -638,7 +639,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		else {
 			List<JournalArticle> list = (List<JournalArticle>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {
@@ -795,7 +796,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchArticleException, SystemException {
 		List<JournalArticle> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalArticle exists with the key {");
@@ -817,7 +818,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 		List<JournalArticle> list = findByGroupId(groupId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalArticle exists with the key {");
@@ -1038,7 +1039,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchArticleException, SystemException {
 		List<JournalArticle> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalArticle exists with the key {");
@@ -1061,7 +1062,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		List<JournalArticle> list = findByCompanyId(companyId, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalArticle exists with the key {");
@@ -1283,7 +1284,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchArticleException, SystemException {
 		List<JournalArticle> list = findBySmallImageId(smallImageId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalArticle exists with the key {");
@@ -1306,7 +1307,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		List<JournalArticle> list = findBySmallImageId(smallImageId, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalArticle exists with the key {");
@@ -1547,7 +1548,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		List<JournalArticle> list = findByR_A(resourcePrimKey, approved, 0, 1,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalArticle exists with the key {");
@@ -1574,7 +1575,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		List<JournalArticle> list = findByR_A(resourcePrimKey, approved,
 				count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalArticle exists with the key {");
@@ -1835,7 +1836,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchArticleException, SystemException {
 		List<JournalArticle> list = findByG_A(groupId, articleId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalArticle exists with the key {");
@@ -1861,7 +1862,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		List<JournalArticle> list = findByG_A(groupId, articleId, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalArticle exists with the key {");
@@ -2129,7 +2130,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchArticleException, SystemException {
 		List<JournalArticle> list = findByG_S(groupId, structureId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalArticle exists with the key {");
@@ -2155,7 +2156,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		List<JournalArticle> list = findByG_S(groupId, structureId, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalArticle exists with the key {");
@@ -2423,7 +2424,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchArticleException, SystemException {
 		List<JournalArticle> list = findByG_T(groupId, templateId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalArticle exists with the key {");
@@ -2449,7 +2450,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		List<JournalArticle> list = findByG_T(groupId, templateId, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalArticle exists with the key {");
@@ -2637,15 +2638,16 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 				List<JournalArticle> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -2657,7 +2659,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		else {
 			List<JournalArticle> list = (List<JournalArticle>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {
@@ -2865,7 +2867,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		List<JournalArticle> list = findByG_A_A(groupId, articleId, approved,
 				0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalArticle exists with the key {");
@@ -2895,7 +2897,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		List<JournalArticle> list = findByG_A_A(groupId, articleId, approved,
 				count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalArticle exists with the key {");

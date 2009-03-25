@@ -424,7 +424,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchLicenseException, SystemException {
 		List<SCLicense> list = findByActive(active, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCLicense exists with the key {");
@@ -446,7 +446,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 		List<SCLicense> list = findByActive(active, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCLicense exists with the key {");
@@ -680,7 +680,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchLicenseException, SystemException {
 		List<SCLicense> list = findByA_R(active, recommended, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCLicense exists with the key {");
@@ -706,7 +706,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 		List<SCLicense> list = findByA_R(active, recommended, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCLicense exists with the key {");

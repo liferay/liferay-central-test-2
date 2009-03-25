@@ -410,7 +410,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
 		List<ShoppingCategory> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ShoppingCategory exists with the key {");
@@ -433,7 +433,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 		List<ShoppingCategory> list = findByGroupId(groupId, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ShoppingCategory exists with the key {");
@@ -674,7 +674,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 		List<ShoppingCategory> list = findByG_P(groupId, parentCategoryId, 0,
 				1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ShoppingCategory exists with the key {");
@@ -700,7 +700,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 		List<ShoppingCategory> list = findByG_P(groupId, parentCategoryId,
 				count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ShoppingCategory exists with the key {");

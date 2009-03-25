@@ -395,7 +395,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchOrgGroupRoleException, SystemException {
 		List<OrgGroupRole> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No OrgGroupRole exists with the key {");
@@ -417,7 +417,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 
 		List<OrgGroupRole> list = findByGroupId(groupId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No OrgGroupRole exists with the key {");
@@ -619,7 +619,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchOrgGroupRoleException, SystemException {
 		List<OrgGroupRole> list = findByRoleId(roleId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No OrgGroupRole exists with the key {");
@@ -641,7 +641,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 
 		List<OrgGroupRole> list = findByRoleId(roleId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No OrgGroupRole exists with the key {");

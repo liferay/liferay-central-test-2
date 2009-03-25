@@ -391,7 +391,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchImageException, SystemException {
 		List<Image> list = findBySize(size, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Image exists with the key {");
@@ -413,7 +413,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 
 		List<Image> list = findBySize(size, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Image exists with the key {");

@@ -405,7 +405,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchReviewException, SystemException {
 		List<TasksReview> list = findByUserId(userId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TasksReview exists with the key {");
@@ -427,7 +427,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 		List<TasksReview> list = findByUserId(userId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TasksReview exists with the key {");
@@ -645,7 +645,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchReviewException, SystemException {
 		List<TasksReview> list = findByProposalId(proposalId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TasksReview exists with the key {");
@@ -668,7 +668,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 		List<TasksReview> list = findByProposalId(proposalId, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TasksReview exists with the key {");
@@ -819,15 +819,16 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 				List<TasksReview> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -839,7 +840,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<TasksReview> list = (List<TasksReview>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {
@@ -1010,7 +1011,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchReviewException, SystemException {
 		List<TasksReview> list = findByP_S(proposalId, stage, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TasksReview exists with the key {");
@@ -1036,7 +1037,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 		List<TasksReview> list = findByP_S(proposalId, stage, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TasksReview exists with the key {");
@@ -1299,7 +1300,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 		List<TasksReview> list = findByP_S_C(proposalId, stage, completed, 0,
 				1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TasksReview exists with the key {");
@@ -1329,7 +1330,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 		List<TasksReview> list = findByP_S_C(proposalId, stage, completed,
 				count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TasksReview exists with the key {");
@@ -1615,7 +1616,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 		List<TasksReview> list = findByP_S_C_R(proposalId, stage, completed,
 				rejected, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TasksReview exists with the key {");
@@ -1648,7 +1649,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 		List<TasksReview> list = findByP_S_C_R(proposalId, stage, completed,
 				rejected, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TasksReview exists with the key {");

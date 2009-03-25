@@ -438,7 +438,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchOrganizationException, SystemException {
 		List<Organization> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Organization exists with the key {");
@@ -462,7 +462,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 		List<Organization> list = findByCompanyId(companyId, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Organization exists with the key {");
@@ -681,7 +681,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchOrganizationException, SystemException {
 		List<Organization> list = findByLocations(companyId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Organization exists with the key {");
@@ -705,7 +705,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 		List<Organization> list = findByLocations(companyId, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Organization exists with the key {");
@@ -943,7 +943,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 		List<Organization> list = findByC_P(companyId, parentOrganizationId, 0,
 				1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Organization exists with the key {");
@@ -970,7 +970,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 		List<Organization> list = findByC_P(companyId, parentOrganizationId,
 				count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Organization exists with the key {");
@@ -1134,15 +1134,16 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 
 				List<Organization> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1154,7 +1155,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<Organization> list = (List<Organization>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {

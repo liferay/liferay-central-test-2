@@ -406,7 +406,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchCouponException, SystemException {
 		List<ShoppingCoupon> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ShoppingCoupon exists with the key {");
@@ -428,7 +428,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 
 		List<ShoppingCoupon> list = findByGroupId(groupId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ShoppingCoupon exists with the key {");
@@ -572,15 +572,16 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 
 				List<ShoppingCoupon> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -592,7 +593,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<ShoppingCoupon> list = (List<ShoppingCoupon>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {

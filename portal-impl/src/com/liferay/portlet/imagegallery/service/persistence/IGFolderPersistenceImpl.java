@@ -427,7 +427,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchFolderException, SystemException {
 		List<IGFolder> list = findByUuid(uuid, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGFolder exists with the key {");
@@ -449,7 +449,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 		List<IGFolder> list = findByUuid(uuid, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGFolder exists with the key {");
@@ -612,15 +612,16 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 				List<IGFolder> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -632,7 +633,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<IGFolder> list = (List<IGFolder>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {
@@ -788,7 +789,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchFolderException, SystemException {
 		List<IGFolder> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGFolder exists with the key {");
@@ -810,7 +811,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 		List<IGFolder> list = findByGroupId(groupId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGFolder exists with the key {");
@@ -1030,7 +1031,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchFolderException, SystemException {
 		List<IGFolder> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGFolder exists with the key {");
@@ -1052,7 +1053,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 		List<IGFolder> list = findByCompanyId(companyId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGFolder exists with the key {");
@@ -1289,7 +1290,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchFolderException, SystemException {
 		List<IGFolder> list = findByG_P(groupId, parentFolderId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGFolder exists with the key {");
@@ -1315,7 +1316,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 		List<IGFolder> list = findByG_P(groupId, parentFolderId, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGFolder exists with the key {");
@@ -1495,15 +1496,16 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 				List<IGFolder> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1515,7 +1517,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<IGFolder> list = (List<IGFolder>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {

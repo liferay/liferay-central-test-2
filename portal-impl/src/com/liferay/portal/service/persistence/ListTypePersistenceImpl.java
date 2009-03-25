@@ -409,7 +409,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchListTypeException, SystemException {
 		List<ListType> list = findByType(type, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ListType exists with the key {");
@@ -431,7 +431,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 
 		List<ListType> list = findByType(type, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ListType exists with the key {");

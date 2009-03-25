@@ -405,7 +405,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchColumnException, SystemException {
 		List<ExpandoColumn> list = findByTableId(tableId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoColumn exists with the key {");
@@ -427,7 +427,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 
 		List<ExpandoColumn> list = findByTableId(tableId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoColumn exists with the key {");
@@ -583,15 +583,16 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 
 				List<ExpandoColumn> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -603,7 +604,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<ExpandoColumn> list = (List<ExpandoColumn>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {

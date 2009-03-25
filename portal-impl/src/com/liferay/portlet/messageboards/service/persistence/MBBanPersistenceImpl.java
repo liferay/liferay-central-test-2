@@ -384,7 +384,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchBanException, SystemException {
 		List<MBBan> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBBan exists with the key {");
@@ -406,7 +406,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 		List<MBBan> list = findByGroupId(groupId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBBan exists with the key {");
@@ -606,7 +606,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchBanException, SystemException {
 		List<MBBan> list = findByUserId(userId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBBan exists with the key {");
@@ -628,7 +628,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 		List<MBBan> list = findByUserId(userId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBBan exists with the key {");
@@ -829,7 +829,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchBanException, SystemException {
 		List<MBBan> list = findByBanUserId(banUserId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBBan exists with the key {");
@@ -851,7 +851,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 		List<MBBan> list = findByBanUserId(banUserId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBBan exists with the key {");
@@ -990,15 +990,16 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 				List<MBBan> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1010,7 +1011,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<MBBan> list = (List<MBBan>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {

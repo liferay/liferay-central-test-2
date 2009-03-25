@@ -385,7 +385,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchContactException, SystemException {
 		List<Contact> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Contact exists with the key {");
@@ -407,7 +407,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 
 		List<Contact> list = findByCompanyId(companyId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Contact exists with the key {");

@@ -408,7 +408,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchActivityException, SystemException {
 		List<SocialActivity> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialActivity exists with the key {");
@@ -430,7 +430,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 		List<SocialActivity> list = findByGroupId(groupId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialActivity exists with the key {");
@@ -649,7 +649,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchActivityException, SystemException {
 		List<SocialActivity> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialActivity exists with the key {");
@@ -672,7 +672,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 		List<SocialActivity> list = findByCompanyId(companyId, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialActivity exists with the key {");
@@ -891,7 +891,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchActivityException, SystemException {
 		List<SocialActivity> list = findByUserId(userId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialActivity exists with the key {");
@@ -913,7 +913,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 		List<SocialActivity> list = findByUserId(userId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialActivity exists with the key {");
@@ -1051,15 +1051,16 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 				List<SocialActivity> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1071,7 +1072,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<SocialActivity> list = (List<SocialActivity>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {
@@ -1226,7 +1227,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchActivityException, SystemException {
 		List<SocialActivity> list = findByClassNameId(classNameId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialActivity exists with the key {");
@@ -1249,7 +1250,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 		List<SocialActivity> list = findByClassNameId(classNameId, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialActivity exists with the key {");
@@ -1469,7 +1470,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 		List<SocialActivity> list = findByReceiverUserId(receiverUserId, 0, 1,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialActivity exists with the key {");
@@ -1492,7 +1493,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 		List<SocialActivity> list = findByReceiverUserId(receiverUserId,
 				count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialActivity exists with the key {");
@@ -1727,7 +1728,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchActivityException, SystemException {
 		List<SocialActivity> list = findByC_C(classNameId, classPK, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialActivity exists with the key {");
@@ -1753,7 +1754,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 		List<SocialActivity> list = findByC_C(classNameId, classPK, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialActivity exists with the key {");
@@ -2016,7 +2017,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 		List<SocialActivity> list = findByM_C_C(mirrorActivityId, classNameId,
 				classPK, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialActivity exists with the key {");
@@ -2046,7 +2047,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 		List<SocialActivity> list = findByM_C_C(mirrorActivityId, classNameId,
 				classPK, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialActivity exists with the key {");
@@ -2275,15 +2276,16 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 				List<SocialActivity> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -2295,7 +2297,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<SocialActivity> list = (List<SocialActivity>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {

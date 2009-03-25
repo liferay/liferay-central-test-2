@@ -422,7 +422,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchRelationException, SystemException {
 		List<SocialRelation> list = findByUuid(uuid, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -444,7 +444,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 		List<SocialRelation> list = findByUuid(uuid, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -654,7 +654,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchRelationException, SystemException {
 		List<SocialRelation> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -677,7 +677,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		List<SocialRelation> list = findByCompanyId(companyId, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -880,7 +880,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchRelationException, SystemException {
 		List<SocialRelation> list = findByUserId1(userId1, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -902,7 +902,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 		List<SocialRelation> list = findByUserId1(userId1, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -1105,7 +1105,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchRelationException, SystemException {
 		List<SocialRelation> list = findByUserId2(userId2, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -1127,7 +1127,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 		List<SocialRelation> list = findByUserId2(userId2, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -1329,7 +1329,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchRelationException, SystemException {
 		List<SocialRelation> list = findByType(type, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -1351,7 +1351,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 		List<SocialRelation> list = findByType(type, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -1569,7 +1569,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchRelationException, SystemException {
 		List<SocialRelation> list = findByC_T(companyId, type, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -1595,7 +1595,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		List<SocialRelation> list = findByC_T(companyId, type, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -1821,7 +1821,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchRelationException, SystemException {
 		List<SocialRelation> list = findByU1_T(userId1, type, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -1847,7 +1847,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		List<SocialRelation> list = findByU1_T(userId1, type, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -2073,7 +2073,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchRelationException, SystemException {
 		List<SocialRelation> list = findByU2_T(userId2, type, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -2099,7 +2099,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		List<SocialRelation> list = findByU2_T(userId2, type, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -2259,15 +2259,16 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 				List<SocialRelation> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -2279,7 +2280,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<SocialRelation> list = (List<SocialRelation>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {

@@ -388,7 +388,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchLayoutSetException, SystemException {
 		List<LayoutSet> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No LayoutSet exists with the key {");
@@ -410,7 +410,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 		List<LayoutSet> list = findByGroupId(groupId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No LayoutSet exists with the key {");
@@ -543,15 +543,16 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 				List<LayoutSet> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -563,7 +564,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<LayoutSet> list = (List<LayoutSet>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {
@@ -645,15 +646,16 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 				List<LayoutSet> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -665,7 +667,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<LayoutSet> list = (List<LayoutSet>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {

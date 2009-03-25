@@ -395,7 +395,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchSubscriptionException, SystemException {
 		List<Subscription> list = findByUserId(userId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Subscription exists with the key {");
@@ -417,7 +417,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 
 		List<Subscription> list = findByUserId(userId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Subscription exists with the key {");
@@ -636,7 +636,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchSubscriptionException, SystemException {
 		List<Subscription> list = findByU_C(userId, classNameId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Subscription exists with the key {");
@@ -663,7 +663,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 		List<Subscription> list = findByU_C(userId, classNameId, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Subscription exists with the key {");
@@ -905,7 +905,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 		List<Subscription> list = findByC_C_C(companyId, classNameId, classPK,
 				0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Subscription exists with the key {");
@@ -935,7 +935,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 		List<Subscription> list = findByC_C_C(companyId, classNameId, classPK,
 				count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Subscription exists with the key {");
@@ -1115,15 +1115,16 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 
 				List<Subscription> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1135,7 +1136,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<Subscription> list = (List<Subscription>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {

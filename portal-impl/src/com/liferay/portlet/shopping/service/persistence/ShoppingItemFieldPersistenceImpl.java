@@ -410,7 +410,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchItemFieldException, SystemException {
 		List<ShoppingItemField> list = findByItemId(itemId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ShoppingItemField exists with the key {");
@@ -433,7 +433,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl
 		List<ShoppingItemField> list = findByItemId(itemId, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ShoppingItemField exists with the key {");

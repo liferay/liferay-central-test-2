@@ -317,15 +317,16 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 
 				List<Company> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -337,7 +338,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<Company> list = (List<Company>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {
@@ -413,15 +414,16 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 
 				List<Company> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -433,7 +435,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<Company> list = (List<Company>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {
@@ -508,15 +510,16 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 
 				List<Company> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -528,7 +531,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<Company> list = (List<Company>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {
@@ -596,15 +599,16 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 
 				List<Company> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -616,7 +620,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<Company> list = (List<Company>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {

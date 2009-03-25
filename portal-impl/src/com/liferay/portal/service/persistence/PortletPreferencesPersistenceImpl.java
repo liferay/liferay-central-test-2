@@ -396,7 +396,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchPortletPreferencesException, SystemException {
 		List<PortletPreferences> list = findByPlid(plid, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PortletPreferences exists with the key {");
@@ -418,7 +418,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 
 		List<PortletPreferences> list = findByPlid(plid, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PortletPreferences exists with the key {");
@@ -652,7 +652,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchPortletPreferencesException, SystemException {
 		List<PortletPreferences> list = findByP_P(plid, portletId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PortletPreferences exists with the key {");
@@ -679,7 +679,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 		List<PortletPreferences> list = findByP_P(plid, portletId, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PortletPreferences exists with the key {");
@@ -932,7 +932,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 		List<PortletPreferences> list = findByO_O_P(ownerId, ownerType, plid,
 				0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PortletPreferences exists with the key {");
@@ -962,7 +962,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 		List<PortletPreferences> list = findByO_O_P(ownerId, ownerType, plid,
 				count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PortletPreferences exists with the key {");
@@ -1152,15 +1152,16 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 
 				List<PortletPreferences> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1172,7 +1173,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<PortletPreferences> list = (List<PortletPreferences>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {

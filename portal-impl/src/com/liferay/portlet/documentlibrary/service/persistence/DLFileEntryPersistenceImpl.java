@@ -433,7 +433,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchFileEntryException, SystemException {
 		List<DLFileEntry> list = findByUuid(uuid, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileEntry exists with the key {");
@@ -455,7 +455,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 		List<DLFileEntry> list = findByUuid(uuid, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileEntry exists with the key {");
@@ -683,7 +683,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchFileEntryException, SystemException {
 		List<DLFileEntry> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileEntry exists with the key {");
@@ -706,7 +706,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 		List<DLFileEntry> list = findByCompanyId(companyId, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileEntry exists with the key {");
@@ -928,7 +928,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchFileEntryException, SystemException {
 		List<DLFileEntry> list = findByFolderId(folderId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileEntry exists with the key {");
@@ -950,7 +950,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 		List<DLFileEntry> list = findByFolderId(folderId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileEntry exists with the key {");
@@ -1108,15 +1108,16 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 				List<DLFileEntry> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1128,7 +1129,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<DLFileEntry> list = (List<DLFileEntry>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {
@@ -1315,7 +1316,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchFileEntryException, SystemException {
 		List<DLFileEntry> list = findByF_T(folderId, title, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileEntry exists with the key {");
@@ -1341,7 +1342,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 		List<DLFileEntry> list = findByF_T(folderId, title, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileEntry exists with the key {");

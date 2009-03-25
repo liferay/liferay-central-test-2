@@ -409,7 +409,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchPortletItemException, SystemException {
 		List<PortletItem> list = findByG_C(groupId, classNameId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PortletItem exists with the key {");
@@ -436,7 +436,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 		List<PortletItem> list = findByG_C(groupId, classNameId, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PortletItem exists with the key {");
@@ -696,7 +696,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 		List<PortletItem> list = findByG_P_C(groupId, portletId, classNameId,
 				0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PortletItem exists with the key {");
@@ -726,7 +726,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 		List<PortletItem> list = findByG_P_C(groupId, portletId, classNameId,
 				count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PortletItem exists with the key {");
@@ -929,15 +929,16 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 
 				List<PortletItem> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -949,7 +950,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<PortletItem> list = (List<PortletItem>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {

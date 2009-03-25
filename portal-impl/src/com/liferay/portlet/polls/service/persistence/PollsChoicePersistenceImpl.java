@@ -432,7 +432,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchChoiceException, SystemException {
 		List<PollsChoice> list = findByUuid(uuid, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PollsChoice exists with the key {");
@@ -454,7 +454,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 
 		List<PollsChoice> list = findByUuid(uuid, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PollsChoice exists with the key {");
@@ -682,7 +682,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchChoiceException, SystemException {
 		List<PollsChoice> list = findByQuestionId(questionId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PollsChoice exists with the key {");
@@ -705,7 +705,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 		List<PollsChoice> list = findByQuestionId(questionId, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PollsChoice exists with the key {");
@@ -863,15 +863,16 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 
 				List<PollsChoice> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -883,7 +884,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 		else {
 			List<PollsChoice> list = (List<PollsChoice>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {

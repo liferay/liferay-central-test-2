@@ -393,7 +393,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchUserTrackerException, SystemException {
 		List<UserTracker> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserTracker exists with the key {");
@@ -417,7 +417,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 		List<UserTracker> list = findByCompanyId(companyId, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserTracker exists with the key {");
@@ -617,7 +617,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchUserTrackerException, SystemException {
 		List<UserTracker> list = findByUserId(userId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserTracker exists with the key {");
@@ -639,7 +639,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 		List<UserTracker> list = findByUserId(userId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserTracker exists with the key {");
@@ -854,7 +854,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchUserTrackerException, SystemException {
 		List<UserTracker> list = findBySessionId(sessionId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserTracker exists with the key {");
@@ -878,7 +878,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 		List<UserTracker> list = findBySessionId(sessionId, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserTracker exists with the key {");

@@ -423,7 +423,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchFileShortcutException, SystemException {
 		List<DLFileShortcut> list = findByUuid(uuid, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileShortcut exists with the key {");
@@ -445,7 +445,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 		List<DLFileShortcut> list = findByUuid(uuid, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileShortcut exists with the key {");
@@ -656,7 +656,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchFileShortcutException, SystemException {
 		List<DLFileShortcut> list = findByFolderId(folderId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileShortcut exists with the key {");
@@ -680,7 +680,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 		List<DLFileShortcut> list = findByFolderId(folderId, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileShortcut exists with the key {");
@@ -914,7 +914,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchFileShortcutException, SystemException {
 		List<DLFileShortcut> list = findByTF_TN(toFolderId, toName, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileShortcut exists with the key {");
@@ -941,7 +941,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 		List<DLFileShortcut> list = findByTF_TN(toFolderId, toName, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileShortcut exists with the key {");

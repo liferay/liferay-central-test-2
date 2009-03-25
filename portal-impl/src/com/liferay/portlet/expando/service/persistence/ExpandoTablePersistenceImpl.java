@@ -411,7 +411,7 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchTableException, SystemException {
 		List<ExpandoTable> list = findByC_C(companyId, classNameId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoTable exists with the key {");
@@ -437,7 +437,7 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 		List<ExpandoTable> list = findByC_C(companyId, classNameId, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoTable exists with the key {");
@@ -606,15 +606,16 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 
 				List<ExpandoTable> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -626,7 +627,7 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 		else {
 			List<ExpandoTable> list = (List<ExpandoTable>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {

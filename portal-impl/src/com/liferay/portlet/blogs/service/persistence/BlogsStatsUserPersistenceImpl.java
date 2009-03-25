@@ -406,7 +406,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchStatsUserException, SystemException {
 		List<BlogsStatsUser> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsStatsUser exists with the key {");
@@ -428,7 +428,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 		List<BlogsStatsUser> list = findByGroupId(groupId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsStatsUser exists with the key {");
@@ -647,7 +647,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchStatsUserException, SystemException {
 		List<BlogsStatsUser> list = findByUserId(userId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsStatsUser exists with the key {");
@@ -669,7 +669,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 		List<BlogsStatsUser> list = findByUserId(userId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsStatsUser exists with the key {");
@@ -818,15 +818,16 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 				List<BlogsStatsUser> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -838,7 +839,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<BlogsStatsUser> list = (List<BlogsStatsUser>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {
@@ -1009,7 +1010,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchStatsUserException, SystemException {
 		List<BlogsStatsUser> list = findByG_E(groupId, entryCount, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsStatsUser exists with the key {");
@@ -1035,7 +1036,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 		List<BlogsStatsUser> list = findByG_E(groupId, entryCount, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsStatsUser exists with the key {");
@@ -1279,7 +1280,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchStatsUserException, SystemException {
 		List<BlogsStatsUser> list = findByC_E(companyId, entryCount, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsStatsUser exists with the key {");
@@ -1305,7 +1306,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 		List<BlogsStatsUser> list = findByC_E(companyId, entryCount, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsStatsUser exists with the key {");

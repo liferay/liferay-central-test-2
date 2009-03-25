@@ -392,7 +392,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchPhoneException, SystemException {
 		List<Phone> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Phone exists with the key {");
@@ -414,7 +414,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 		List<Phone> list = findByCompanyId(companyId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Phone exists with the key {");
@@ -627,7 +627,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchPhoneException, SystemException {
 		List<Phone> list = findByUserId(userId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Phone exists with the key {");
@@ -649,7 +649,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 		List<Phone> list = findByUserId(userId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Phone exists with the key {");
@@ -879,7 +879,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchPhoneException, SystemException {
 		List<Phone> list = findByC_C(companyId, classNameId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Phone exists with the key {");
@@ -905,7 +905,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 		List<Phone> list = findByC_C(companyId, classNameId, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Phone exists with the key {");
@@ -1160,7 +1160,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 		List<Phone> list = findByC_C_C(companyId, classNameId, classPK, 0, 1,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Phone exists with the key {");
@@ -1190,7 +1190,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 		List<Phone> list = findByC_C_C(companyId, classNameId, classPK,
 				count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Phone exists with the key {");
@@ -1472,7 +1472,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 		List<Phone> list = findByC_C_C_P(companyId, classNameId, classPK,
 				primary, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Phone exists with the key {");
@@ -1505,7 +1505,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 		List<Phone> list = findByC_C_C_P(companyId, classNameId, classPK,
 				primary, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Phone exists with the key {");

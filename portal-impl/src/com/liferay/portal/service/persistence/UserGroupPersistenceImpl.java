@@ -419,7 +419,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchUserGroupException, SystemException {
 		List<UserGroup> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserGroup exists with the key {");
@@ -441,7 +441,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 
 		List<UserGroup> list = findByCompanyId(companyId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserGroup exists with the key {");
@@ -673,7 +673,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchUserGroupException, SystemException {
 		List<UserGroup> list = findByC_P(companyId, parentUserGroupId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserGroup exists with the key {");
@@ -699,7 +699,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 		List<UserGroup> list = findByC_P(companyId, parentUserGroupId,
 				count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserGroup exists with the key {");
@@ -862,15 +862,16 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 
 				List<UserGroup> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -882,7 +883,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<UserGroup> list = (List<UserGroup>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {

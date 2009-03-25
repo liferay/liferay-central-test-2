@@ -412,7 +412,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 		List<SCProductScreenshot> list = findByProductEntryId(productEntryId,
 				0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCProductScreenshot exists with the key {");
@@ -436,7 +436,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 		List<SCProductScreenshot> list = findByProductEntryId(productEntryId,
 				count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCProductScreenshot exists with the key {");
@@ -576,15 +576,16 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 				List<SCProductScreenshot> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -596,7 +597,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<SCProductScreenshot> list = (List<SCProductScreenshot>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {
@@ -671,15 +672,16 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 				List<SCProductScreenshot> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -691,7 +693,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<SCProductScreenshot> list = (List<SCProductScreenshot>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {
@@ -780,15 +782,16 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 				List<SCProductScreenshot> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -800,7 +803,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<SCProductScreenshot> list = (List<SCProductScreenshot>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {

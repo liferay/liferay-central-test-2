@@ -407,7 +407,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchPasswordTrackerException, SystemException {
 		List<PasswordTracker> list = findByUserId(userId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PasswordTracker exists with the key {");
@@ -429,7 +429,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 
 		List<PasswordTracker> list = findByUserId(userId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PasswordTracker exists with the key {");

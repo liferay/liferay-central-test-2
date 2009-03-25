@@ -426,7 +426,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchEventException, SystemException {
 		List<CalEvent> list = findByUuid(uuid, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No CalEvent exists with the key {");
@@ -448,7 +448,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 		List<CalEvent> list = findByUuid(uuid, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No CalEvent exists with the key {");
@@ -611,15 +611,16 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 				List<CalEvent> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -631,7 +632,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<CalEvent> list = (List<CalEvent>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {
@@ -788,7 +789,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchEventException, SystemException {
 		List<CalEvent> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No CalEvent exists with the key {");
@@ -810,7 +811,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 		List<CalEvent> list = findByCompanyId(companyId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No CalEvent exists with the key {");
@@ -1029,7 +1030,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchEventException, SystemException {
 		List<CalEvent> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No CalEvent exists with the key {");
@@ -1051,7 +1052,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 		List<CalEvent> list = findByGroupId(groupId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No CalEvent exists with the key {");
@@ -1301,7 +1302,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchEventException, SystemException {
 		List<CalEvent> list = findByG_T(groupId, type, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No CalEvent exists with the key {");
@@ -1326,7 +1327,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 		List<CalEvent> list = findByG_T(groupId, type, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No CalEvent exists with the key {");
@@ -1579,7 +1580,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchEventException, SystemException {
 		List<CalEvent> list = findByG_R(groupId, repeating, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No CalEvent exists with the key {");
@@ -1605,7 +1606,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 		List<CalEvent> list = findByG_R(groupId, repeating, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No CalEvent exists with the key {");

@@ -397,7 +397,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchMessageFlagException, SystemException {
 		List<MBMessageFlag> list = findByUserId(userId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessageFlag exists with the key {");
@@ -419,7 +419,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 		List<MBMessageFlag> list = findByUserId(userId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessageFlag exists with the key {");
@@ -623,7 +623,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchMessageFlagException, SystemException {
 		List<MBMessageFlag> list = findByMessageId(messageId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessageFlag exists with the key {");
@@ -647,7 +647,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 		List<MBMessageFlag> list = findByMessageId(messageId, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessageFlag exists with the key {");
@@ -867,7 +867,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchMessageFlagException, SystemException {
 		List<MBMessageFlag> list = findByM_F(messageId, flag, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessageFlag exists with the key {");
@@ -894,7 +894,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 		List<MBMessageFlag> list = findByM_F(messageId, flag, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessageFlag exists with the key {");
@@ -1054,15 +1054,16 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 				List<MBMessageFlag> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1074,7 +1075,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<MBMessageFlag> list = (List<MBMessageFlag>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {

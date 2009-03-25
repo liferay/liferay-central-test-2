@@ -394,7 +394,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchRegionException, SystemException {
 		List<Region> list = findByCountryId(countryId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Region exists with the key {");
@@ -416,7 +416,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 		List<Region> list = findByCountryId(countryId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Region exists with the key {");
@@ -629,7 +629,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchRegionException, SystemException {
 		List<Region> list = findByActive(active, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Region exists with the key {");
@@ -651,7 +651,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 		List<Region> list = findByActive(active, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Region exists with the key {");
@@ -881,7 +881,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchRegionException, SystemException {
 		List<Region> list = findByC_A(countryId, active, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Region exists with the key {");
@@ -906,7 +906,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 		List<Region> list = findByC_A(countryId, active, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Region exists with the key {");

@@ -401,7 +401,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchThreadException, SystemException {
 		List<MBThread> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBThread exists with the key {");
@@ -423,7 +423,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 		List<MBThread> list = findByGroupId(groupId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBThread exists with the key {");
@@ -643,7 +643,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchThreadException, SystemException {
 		List<MBThread> list = findByCategoryId(categoryId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBThread exists with the key {");
@@ -665,7 +665,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 		List<MBThread> list = findByCategoryId(categoryId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBThread exists with the key {");

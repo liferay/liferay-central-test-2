@@ -398,7 +398,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchOrgGroupPermissionException, SystemException {
 		List<OrgGroupPermission> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No OrgGroupPermission exists with the key {");
@@ -422,7 +422,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 		List<OrgGroupPermission> list = findByGroupId(groupId, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No OrgGroupPermission exists with the key {");
@@ -628,7 +628,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 		List<OrgGroupPermission> list = findByPermissionId(permissionId, 0, 1,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No OrgGroupPermission exists with the key {");
@@ -652,7 +652,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 		List<OrgGroupPermission> list = findByPermissionId(permissionId,
 				count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No OrgGroupPermission exists with the key {");

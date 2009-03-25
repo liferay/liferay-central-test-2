@@ -410,7 +410,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchItemPriceException, SystemException {
 		List<ShoppingItemPrice> list = findByItemId(itemId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ShoppingItemPrice exists with the key {");
@@ -433,7 +433,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 		List<ShoppingItemPrice> list = findByItemId(itemId, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ShoppingItemPrice exists with the key {");

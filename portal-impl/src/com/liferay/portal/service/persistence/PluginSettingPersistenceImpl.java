@@ -396,7 +396,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchPluginSettingException, SystemException {
 		List<PluginSetting> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PluginSetting exists with the key {");
@@ -420,7 +420,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 		List<PluginSetting> list = findByCompanyId(companyId, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PluginSetting exists with the key {");
@@ -589,15 +589,16 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 
 				List<PluginSetting> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -609,7 +610,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<PluginSetting> list = (List<PluginSetting>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {

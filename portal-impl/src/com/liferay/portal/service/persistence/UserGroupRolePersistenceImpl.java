@@ -395,7 +395,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchUserGroupRoleException, SystemException {
 		List<UserGroupRole> list = findByUserId(userId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserGroupRole exists with the key {");
@@ -417,7 +417,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 		List<UserGroupRole> list = findByUserId(userId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserGroupRole exists with the key {");
@@ -619,7 +619,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchUserGroupRoleException, SystemException {
 		List<UserGroupRole> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserGroupRole exists with the key {");
@@ -641,7 +641,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 		List<UserGroupRole> list = findByGroupId(groupId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserGroupRole exists with the key {");
@@ -843,7 +843,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchUserGroupRoleException, SystemException {
 		List<UserGroupRole> list = findByRoleId(roleId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserGroupRole exists with the key {");
@@ -865,7 +865,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 		List<UserGroupRole> list = findByRoleId(roleId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserGroupRole exists with the key {");
@@ -1082,7 +1082,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchUserGroupRoleException, SystemException {
 		List<UserGroupRole> list = findByU_G(userId, groupId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserGroupRole exists with the key {");
@@ -1109,7 +1109,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 		List<UserGroupRole> list = findByU_G(userId, groupId, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserGroupRole exists with the key {");
@@ -1336,7 +1336,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchUserGroupRoleException, SystemException {
 		List<UserGroupRole> list = findByG_R(groupId, roleId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserGroupRole exists with the key {");
@@ -1363,7 +1363,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 		List<UserGroupRole> list = findByG_R(groupId, roleId, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserGroupRole exists with the key {");

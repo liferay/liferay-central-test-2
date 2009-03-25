@@ -397,7 +397,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchDiscussionException, SystemException {
 		List<MBDiscussion> list = findByClassNameId(classNameId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBDiscussion exists with the key {");
@@ -421,7 +421,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 		List<MBDiscussion> list = findByClassNameId(classNameId, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBDiscussion exists with the key {");
@@ -549,15 +549,16 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 
 				List<MBDiscussion> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -569,7 +570,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<MBDiscussion> list = (List<MBDiscussion>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {
@@ -652,15 +653,16 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 
 				List<MBDiscussion> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -672,7 +674,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<MBDiscussion> list = (List<MBDiscussion>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {

@@ -433,7 +433,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchEntryException, SystemException {
 		List<BookmarksEntry> list = findByUuid(uuid, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BookmarksEntry exists with the key {");
@@ -455,7 +455,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 
 		List<BookmarksEntry> list = findByUuid(uuid, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BookmarksEntry exists with the key {");
@@ -683,7 +683,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchEntryException, SystemException {
 		List<BookmarksEntry> list = findByFolderId(folderId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BookmarksEntry exists with the key {");
@@ -706,7 +706,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 		List<BookmarksEntry> list = findByFolderId(folderId, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BookmarksEntry exists with the key {");

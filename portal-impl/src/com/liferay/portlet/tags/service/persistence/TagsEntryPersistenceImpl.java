@@ -422,7 +422,7 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchEntryException, SystemException {
 		List<TagsEntry> list = findByVocabularyId(vocabularyId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TagsEntry exists with the key {");
@@ -445,7 +445,7 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 		List<TagsEntry> list = findByVocabularyId(vocabularyId, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TagsEntry exists with the key {");
@@ -679,7 +679,7 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchEntryException, SystemException {
 		List<TagsEntry> list = findByP_V(parentEntryId, vocabularyId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TagsEntry exists with the key {");
@@ -705,7 +705,7 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 		List<TagsEntry> list = findByP_V(parentEntryId, vocabularyId,
 				count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TagsEntry exists with the key {");

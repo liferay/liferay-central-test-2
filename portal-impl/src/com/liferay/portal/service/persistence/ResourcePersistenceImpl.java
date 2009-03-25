@@ -386,7 +386,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchResourceException, SystemException {
 		List<Resource> list = findByCodeId(codeId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Resource exists with the key {");
@@ -408,7 +408,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 
 		List<Resource> list = findByCodeId(codeId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Resource exists with the key {");
@@ -550,15 +550,16 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 
 				List<Resource> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -570,7 +571,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 		else {
 			List<Resource> list = (List<Resource>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {

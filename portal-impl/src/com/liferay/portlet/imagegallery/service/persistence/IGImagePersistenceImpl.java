@@ -424,7 +424,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchImageException, SystemException {
 		List<IGImage> list = findByUuid(uuid, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGImage exists with the key {");
@@ -446,7 +446,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 		List<IGImage> list = findByUuid(uuid, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGImage exists with the key {");
@@ -670,7 +670,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchImageException, SystemException {
 		List<IGImage> list = findByFolderId(folderId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGImage exists with the key {");
@@ -692,7 +692,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 		List<IGImage> list = findByFolderId(folderId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGImage exists with the key {");
@@ -828,15 +828,16 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 				List<IGImage> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -848,7 +849,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 		else {
 			List<IGImage> list = (List<IGImage>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {
@@ -922,15 +923,16 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 				List<IGImage> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -942,7 +944,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 		else {
 			List<IGImage> list = (List<IGImage>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {
@@ -1016,15 +1018,16 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 				List<IGImage> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1036,7 +1039,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 		else {
 			List<IGImage> list = (List<IGImage>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {
@@ -1110,15 +1113,16 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 				List<IGImage> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1130,7 +1134,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 		else {
 			List<IGImage> list = (List<IGImage>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {
@@ -1315,7 +1319,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchImageException, SystemException {
 		List<IGImage> list = findByF_N(folderId, name, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGImage exists with the key {");
@@ -1340,7 +1344,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 		List<IGImage> list = findByF_N(folderId, name, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGImage exists with the key {");

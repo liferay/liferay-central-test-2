@@ -334,15 +334,16 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 
 				List<PasswordPolicyRel> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -354,7 +355,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<PasswordPolicyRel> list = (List<PasswordPolicyRel>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {
@@ -449,15 +450,16 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 
 				List<PasswordPolicyRel> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -469,7 +471,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<PasswordPolicyRel> list = (List<PasswordPolicyRel>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {

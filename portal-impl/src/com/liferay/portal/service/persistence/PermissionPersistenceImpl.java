@@ -434,7 +434,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchPermissionException, SystemException {
 		List<Permission> list = findByResourceId(resourceId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Permission exists with the key {");
@@ -458,7 +458,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		List<Permission> list = findByResourceId(resourceId, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Permission exists with the key {");
@@ -602,15 +602,16 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 
 				List<Permission> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -622,7 +623,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<Permission> list = (List<Permission>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {

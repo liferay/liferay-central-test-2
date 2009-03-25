@@ -430,7 +430,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchMessageException, SystemException {
 		List<MBMessage> list = findByUuid(uuid, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessage exists with the key {");
@@ -452,7 +452,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 		List<MBMessage> list = findByUuid(uuid, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessage exists with the key {");
@@ -616,15 +616,16 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 				List<MBMessage> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -636,7 +637,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 		else {
 			List<MBMessage> list = (List<MBMessage>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {
@@ -793,7 +794,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchMessageException, SystemException {
 		List<MBMessage> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessage exists with the key {");
@@ -815,7 +816,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 		List<MBMessage> list = findByCompanyId(companyId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessage exists with the key {");
@@ -1037,7 +1038,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchMessageException, SystemException {
 		List<MBMessage> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessage exists with the key {");
@@ -1059,7 +1060,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 		List<MBMessage> list = findByGroupId(groupId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessage exists with the key {");
@@ -1280,7 +1281,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchMessageException, SystemException {
 		List<MBMessage> list = findByCategoryId(categoryId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessage exists with the key {");
@@ -1303,7 +1304,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 		List<MBMessage> list = findByCategoryId(categoryId, count - 1, count,
 				obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessage exists with the key {");
@@ -1525,7 +1526,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchMessageException, SystemException {
 		List<MBMessage> list = findByThreadId(threadId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessage exists with the key {");
@@ -1547,7 +1548,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 		List<MBMessage> list = findByThreadId(threadId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessage exists with the key {");
@@ -1783,7 +1784,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchMessageException, SystemException {
 		List<MBMessage> list = findByG_U(groupId, userId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessage exists with the key {");
@@ -1808,7 +1809,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 		List<MBMessage> list = findByG_U(groupId, userId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessage exists with the key {");
@@ -2055,7 +2056,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchMessageException, SystemException {
 		List<MBMessage> list = findByC_T(categoryId, threadId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessage exists with the key {");
@@ -2081,7 +2082,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 		List<MBMessage> list = findByC_T(categoryId, threadId, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessage exists with the key {");
@@ -2328,7 +2329,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchMessageException, SystemException {
 		List<MBMessage> list = findByT_P(threadId, parentMessageId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessage exists with the key {");
@@ -2354,7 +2355,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 		List<MBMessage> list = findByT_P(threadId, parentMessageId, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessage exists with the key {");

@@ -430,7 +430,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchCategoryException, SystemException {
 		List<MBCategory> list = findByUuid(uuid, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBCategory exists with the key {");
@@ -452,7 +452,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 		List<MBCategory> list = findByUuid(uuid, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBCategory exists with the key {");
@@ -616,15 +616,16 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 				List<MBCategory> list = q.list();
 
-				if (list.isEmpty()) {
-					return null;
-				}
-
 				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list.get(0);
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -636,7 +637,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 		else {
 			List<MBCategory> list = (List<MBCategory>)result;
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return null;
 			}
 			else {
@@ -793,7 +794,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchCategoryException, SystemException {
 		List<MBCategory> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBCategory exists with the key {");
@@ -815,7 +816,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 		List<MBCategory> list = findByGroupId(groupId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBCategory exists with the key {");
@@ -1037,7 +1038,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
 		List<MBCategory> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBCategory exists with the key {");
@@ -1059,7 +1060,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 		List<MBCategory> list = findByCompanyId(companyId, count - 1, count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBCategory exists with the key {");
@@ -1297,7 +1298,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
 		List<MBCategory> list = findByG_P(groupId, parentCategoryId, 0, 1, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBCategory exists with the key {");
@@ -1323,7 +1324,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 		List<MBCategory> list = findByG_P(groupId, parentCategoryId, count - 1,
 				count, obc);
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBCategory exists with the key {");
