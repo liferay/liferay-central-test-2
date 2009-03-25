@@ -14,6 +14,9 @@ are:
 
 auth.forward.by.last.path
 default.landing.page.path
+field.enable.com.liferay.portal.model.contact.birthday
+field.enable.com.liferay.portal.model.contact.male
+field.enable.com.liferay.portal.model.organization.status
 javascript.fast.load
 layout.template.cache.enabled
 layout.user.private.layouts.auto.create

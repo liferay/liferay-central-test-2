@@ -115,7 +115,16 @@ public class HookHotDeployListener
 			return true;
 		}
 		else {
-			return portalProperties.containsKey(key);
+			if (portalProperties.containsKey(key)) {
+				return true;
+			}
+			else {
+				if (_log.isWarnEnabled()) {
+					_log.warn("Property " + key + " is not overridable");
+				}
+
+				return false;
+			}
 		}
 	}
 
@@ -705,10 +714,9 @@ public class HookHotDeployListener
 	protected void resetPortalProperties(Properties portalProperties)
 		throws Exception {
 
-		for (String fieldName : _PROPS_VALUES_BOOLEAN) {
-			String key = StringUtil.replace(
-				fieldName.toLowerCase(), StringPool.UNDERLINE,
-				StringPool.PERIOD);
+		for (String key : _PROPS_VALUES_BOOLEAN) {
+			String fieldName = StringUtil.replace(
+				key.toUpperCase(), StringPool.PERIOD,  StringPool.UNDERLINE);
 
 			if (!containsKey(portalProperties, key)) {
 				continue;
@@ -728,10 +736,9 @@ public class HookHotDeployListener
 			}
 		}
 
-		for (String fieldName : _PROPS_VALUES_INTEGER) {
-			String key = StringUtil.replace(
-				fieldName.toLowerCase(), StringPool.UNDERLINE,
-				StringPool.PERIOD);
+		for (String key : _PROPS_VALUES_INTEGER) {
+			String fieldName = StringUtil.replace(
+				key.toUpperCase(), StringPool.PERIOD,  StringPool.UNDERLINE);
 
 			if (!containsKey(portalProperties, key)) {
 				continue;
@@ -751,10 +758,9 @@ public class HookHotDeployListener
 			}
 		}
 
-		for (String fieldName : _PROPS_VALUES_LONG) {
-			String key = StringUtil.replace(
-				fieldName.toLowerCase(), StringPool.UNDERLINE,
-				StringPool.PERIOD);
+		for (String key : _PROPS_VALUES_LONG) {
+			String fieldName = StringUtil.replace(
+				key.toUpperCase(), StringPool.PERIOD,  StringPool.UNDERLINE);
 
 			if (!containsKey(portalProperties, key)) {
 				continue;
@@ -774,10 +780,9 @@ public class HookHotDeployListener
 			}
 		}
 
-		for (String fieldName : _PROPS_VALUES_STRING) {
-			String key = StringUtil.replace(
-				fieldName.toLowerCase(), StringPool.UNDERLINE,
-				StringPool.PERIOD);
+		for (String key : _PROPS_VALUES_STRING) {
+			String fieldName = StringUtil.replace(
+				key.toUpperCase(), StringPool.PERIOD,  StringPool.UNDERLINE);
 
 			if (!containsKey(portalProperties, key)) {
 				continue;
@@ -796,10 +801,9 @@ public class HookHotDeployListener
 			}
 		}
 
-		for (String fieldName : _PROPS_VALUES_STRING_ARRAY) {
-			String key = StringUtil.replace(
-				fieldName.toLowerCase(), StringPool.UNDERLINE,
-				StringPool.PERIOD);
+		for (String key : _PROPS_VALUES_STRING_ARRAY) {
+			String fieldName = StringUtil.replace(
+				key.toUpperCase(), StringPool.PERIOD,  StringPool.UNDERLINE);
 
 			if (!containsKey(portalProperties, key)) {
 				continue;
@@ -837,24 +841,27 @@ public class HookHotDeployListener
 	};
 
 	private static final String[] _PROPS_VALUES_BOOLEAN = new String[] {
-		"AUTH_FORWARD_BY_LAST_PATH",
-		"JAVASCRIPT_FAST_LOAD",
-		"LAYOUT_TEMPLATE_CACHE_ENABLED",
-		"LAYOUT_USER_PRIVATE_LAYOUTS_AUTO_CREATE",
-		"LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED",
-		"LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE",
-		"LAYOUT_USER_PUBLIC_LAYOUTS_AUTO_CREATE",
-		"LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED",
-		"LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE",
-		"MY_PLACES_SHOW_COMMUNITY_PRIVATE_SITES_WITH_NO_LAYOUTS",
-		"MY_PLACES_SHOW_COMMUNITY_PUBLIC_SITES_WITH_NO_LAYOUTS",
-		"MY_PLACES_SHOW_ORGANIZATION_PRIVATE_SITES_WITH_NO_LAYOUTS",
-		"MY_PLACES_SHOW_ORGANIZATION_PUBLIC_SITES_WITH_NO_LAYOUTS",
-		"MY_PLACES_SHOW_USER_PRIVATE_SITES_WITH_NO_LAYOUTS",
-		"MY_PLACES_SHOW_USER_PUBLIC_SITES_WITH_NO_LAYOUTS",
-		"TERMS_OF_USE_REQUIRED",
-		"THEME_CSS_FAST_LOAD",
-		"THEME_IMAGES_FAST_LOAD"
+		"auth.forward.by.last.path",
+		"field.enable.com.liferay.portal.model.Contact.birthday",
+		"field.enable.com.liferay.portal.model.Contact.male",
+		"field.enable.com.liferay.portal.model.Organization.status",
+		"javascript.fast.load",
+		"layout.template.cache.enabled",
+		"layout.user.private.layouts.auto.create",
+		"layout.user.private.layouts.enabled",
+		"layout.user.private.layouts.modifiable",
+		"layout.user.public.layouts.auto.create",
+		"layout.user.public.layouts.enabled",
+		"layout.user.public.layouts.modifiable",
+		"my.places.show.community.private.sites.with.no.layouts",
+		"my.places.show.community.public.sites.with.no.layouts",
+		"my.places.show.organization.private.sites.with.no.layouts",
+		"my.places.show.organization.public.sites.with.no.layouts",
+		"my.places.show.user.private.sites.with.no.layouts",
+		"my.places.show.user.public.sites.with.no.layouts",
+		"terms.of.use.required",
+		"theme.css.fast.load",
+		"theme.images.fast.load"
 	};
 
 	private static final String[] _PROPS_VALUES_INTEGER = new String[] {
@@ -864,13 +871,13 @@ public class HookHotDeployListener
 	};
 
 	private static final String[] _PROPS_VALUES_STRING = new String[] {
-		"DEFAULT_LANDING_PAGE_PATH",
-		"PASSWORDS_PASSWORDPOLICYTOOLKIT_GENERATOR",
-		"PASSWORDS_PASSWORDPOLICYTOOLKIT_STATIC"
+		"default.landing.page.path",
+		"passwords.passwordpolicytoolkit.generator",
+		"passwords.passwordpolicytoolkit.static"
 	};
 
 	private static final String[] _PROPS_VALUES_STRING_ARRAY = new String[] {
-		"LAYOUT_STATIC_PORTLETS_ALL"
+		"layout.static.portlets.all"
 	};
 
 	private static Log _log =

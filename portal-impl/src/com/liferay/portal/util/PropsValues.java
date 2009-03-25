@@ -445,17 +445,16 @@ public class PropsValues {
 	public static final String EDITOR_WYSIWYG_DEFAULT =
 		PropsUtil.get(PropsKeys.EDITOR_WYSIWYG_DEFAULT);
 
-	public static final boolean
+	public static boolean
 		FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY =
 			GetterUtil.getBoolean(PropsUtil.get(PropsKeys.
 				FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY));
 
-	public static final boolean
-		FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE =
-			GetterUtil.getBoolean(PropsUtil.get(PropsKeys.
-				FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE));
+	public static boolean FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE =
+		GetterUtil.getBoolean(PropsUtil.get(PropsKeys.
+			FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE));
 
-	public static final boolean
+	public static boolean
 		FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_ORGANIZATION_STATUS =
 			GetterUtil.getBoolean(PropsUtil.get(PropsKeys.
 				FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_ORGANIZATION_STATUS));
