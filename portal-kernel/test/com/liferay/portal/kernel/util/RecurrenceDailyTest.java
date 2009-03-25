@@ -33,33 +33,6 @@ import com.liferay.portal.kernel.cal.Recurrence;
  */
 public class RecurrenceDailyTest extends RecurrenceTestCase {
 
-	public void testDaily() throws Exception {
-		Recurrence recurrence = new Recurrence(
-			getCalendar(2009, MARCH, 23, HOUR_DURING, MINUTE_DURING),
-			getDefaultDuration(), Recurrence.DAILY);
-
-		assertIsInRecurrence(false, recurrence, 2009, MARCH, 22);
-		assertIsInRecurrence(true, recurrence, 2009, MARCH, 27);
-		assertIsInRecurrence(true, recurrence, 2009, MARCH, 28);
-
-		// Interval
-
-		recurrence.setInterval(3);
-
-		assertIsInRecurrence(false, recurrence, 2009, MARCH, 24);
-		assertIsInRecurrence(false, recurrence, 2009, MARCH, 25);
-		assertIsInRecurrence(true, recurrence, 2009, MARCH, 26);
-		assertIsInRecurrence(false, recurrence, 2009, MARCH, 27);
-		assertIsInRecurrence(true, recurrence, 2009, MARCH, 29);
-
-		// End date
-
-		recurrence.setUntil(getCalendar(2009, APRIL, 4, 0, 0));
-
-		assertIsInRecurrence(true, recurrence, 2009, APRIL, 1);
-		assertIsInRecurrence(false, recurrence, 2009, APRIL, 4);
-	}
-
 	public void testByDay() throws Exception {
 		Recurrence recurrence = new Recurrence(
 			getCalendar(2009, MARCH, 23, HOUR_DURING, MINUTE_DURING),
@@ -161,10 +134,11 @@ public class RecurrenceDailyTest extends RecurrenceTestCase {
 			new DayAndPosition(THURSDAY, 0),
 			new DayAndPosition(FRIDAY, 0)};
 
-		int[] months = { MARCH, MAY };
+		int[] months = {MARCH, MAY};
 
-		// Mar 25 & 28, Apr 1, May 6 & 7
-		int[] yearDays = { 84, 87, 91, 126, 127 };
+		// March 25, 28, April 1, May 6, 7
+
+		int[] yearDays = {84, 87, 91, 126, 127};
 
 		recurrence.setByDay(dayPos);
 		recurrence.setByMonth(months);
@@ -329,8 +303,9 @@ public class RecurrenceDailyTest extends RecurrenceTestCase {
 
 		int[] monthDays = {1, 2, 5, 6, 20, 25, 30};
 
-		// Mar 25 & 28, Apr 1, May 6 & 7
-		int[] yearDays = { 84, 87, 91, 126, 127 };
+		// March 25, 28, April 1, May 6, 7
+
+		int[] yearDays = {84, 87, 91, 126, 127};
 
 		recurrence.setByDay(dayPos);
 		recurrence.setByMonthDay(monthDays);
@@ -396,8 +371,9 @@ public class RecurrenceDailyTest extends RecurrenceTestCase {
 			new DayAndPosition(THURSDAY, 0),
 			new DayAndPosition(FRIDAY, 0)};
 
-		// Mar 25 & 28, Apr 1, May 6 & 7
-		int[] yearDays = { 84, 87, 91, 126, 127 };
+		// March 25, 28, April 1, May 6, 7
+
+		int[] yearDays = {84, 87, 91, 126, 127};
 
 		recurrence.setByDay(dayPos);
 		recurrence.setByYearDay(yearDays);
@@ -482,8 +458,9 @@ public class RecurrenceDailyTest extends RecurrenceTestCase {
 
 		int[] months = {MARCH, MAY};
 
-		// Mar 25 & 28, Apr 1, May 6 & 7
-		int[] yearDays = { 84, 87, 91, 126, 127 };
+		// March 25, 28, April 1, May 6, 7
+
+		int[] yearDays = {84, 87, 91, 126, 127};
 
 		recurrence.setByMonth(months);
 		recurrence.setByYearDay(yearDays);
@@ -618,8 +595,9 @@ public class RecurrenceDailyTest extends RecurrenceTestCase {
 		int[] monthDays = {2, 5, 20, 25, 30};
 		int[] months = {APRIL};
 
-		// Mar 25 & 28, Apr 1, 5, 20, 30
-		int[] yearDays = { 84, 87, 91, 95, 110, 120 };
+		// March 25, 28, April 1, 5, 20, 30
+
+		int[] yearDays = {84, 87, 91, 95, 110, 120};
 
 		recurrence.setByMonthDay(monthDays);
 		recurrence.setByMonth(months);
@@ -659,47 +637,48 @@ public class RecurrenceDailyTest extends RecurrenceTestCase {
 
 	public void testByMonthDayAndYearDay() throws Exception {
 		Recurrence recurrence = new Recurrence(
-				getCalendar(2009, MARCH, 23, HOUR_DURING, MINUTE_DURING),
-				getDefaultDuration(), Recurrence.DAILY);
+			getCalendar(2009, MARCH, 23, HOUR_DURING, MINUTE_DURING),
+			getDefaultDuration(), Recurrence.DAILY);
 
-			int[] monthDays = {2, 5, 20, 25, 30};
+		int[] monthDays = {2, 5, 20, 25, 30};
 
-			// Mar 25 & 28, Apr 1, 5, 20, 30
-			int[] yearDays = { 84, 87, 91, 95, 110, 120 };
+		// March 25, 28, April 1, 5, 20, 30
 
-			recurrence.setByMonthDay(monthDays);
-			recurrence.setByYearDay(yearDays);
+		int[] yearDays = {84, 87, 91, 95, 110, 120};
 
-			assertIsInRecurrence(false, recurrence, 2009, MARCH, 22);
-			assertIsInRecurrence(true, recurrence, 2009, MARCH, 25);
-			assertIsInRecurrence(false, recurrence, 2009, MARCH, 28);
-			assertIsInRecurrence(false, recurrence, 2009, APRIL, 1);
-			assertIsInRecurrence(false, recurrence, 2009, APRIL, 2);
-			assertIsInRecurrence(true, recurrence, 2009, APRIL, 5);
-			assertIsInRecurrence(true, recurrence, 2009, APRIL, 20);
-			assertIsInRecurrence(false, recurrence, 2009, APRIL, 25);
-			assertIsInRecurrence(true, recurrence, 2009, APRIL, 30);
+		recurrence.setByMonthDay(monthDays);
+		recurrence.setByYearDay(yearDays);
 
-			// Interval
+		assertIsInRecurrence(false, recurrence, 2009, MARCH, 22);
+		assertIsInRecurrence(true, recurrence, 2009, MARCH, 25);
+		assertIsInRecurrence(false, recurrence, 2009, MARCH, 28);
+		assertIsInRecurrence(false, recurrence, 2009, APRIL, 1);
+		assertIsInRecurrence(false, recurrence, 2009, APRIL, 2);
+		assertIsInRecurrence(true, recurrence, 2009, APRIL, 5);
+		assertIsInRecurrence(true, recurrence, 2009, APRIL, 20);
+		assertIsInRecurrence(false, recurrence, 2009, APRIL, 25);
+		assertIsInRecurrence(true, recurrence, 2009, APRIL, 30);
 
-			recurrence.setInterval(2);
+		// Interval
 
-			assertIsInRecurrence(false, recurrence, 2009, MARCH, 22);
-			assertIsInRecurrence(true, recurrence, 2009, MARCH, 25);
-			assertIsInRecurrence(false, recurrence, 2009, MARCH, 28);
-			assertIsInRecurrence(false, recurrence, 2009, APRIL, 1);
-			assertIsInRecurrence(false, recurrence, 2009, APRIL, 2);
-			assertIsInRecurrence(false, recurrence, 2009, APRIL, 5);
-			assertIsInRecurrence(true, recurrence, 2009, APRIL, 20);
-			assertIsInRecurrence(false, recurrence, 2009, APRIL, 25);
-			assertIsInRecurrence(true, recurrence, 2009, APRIL, 30);
+		recurrence.setInterval(2);
 
-			// End date
+		assertIsInRecurrence(false, recurrence, 2009, MARCH, 22);
+		assertIsInRecurrence(true, recurrence, 2009, MARCH, 25);
+		assertIsInRecurrence(false, recurrence, 2009, MARCH, 28);
+		assertIsInRecurrence(false, recurrence, 2009, APRIL, 1);
+		assertIsInRecurrence(false, recurrence, 2009, APRIL, 2);
+		assertIsInRecurrence(false, recurrence, 2009, APRIL, 5);
+		assertIsInRecurrence(true, recurrence, 2009, APRIL, 20);
+		assertIsInRecurrence(false, recurrence, 2009, APRIL, 25);
+		assertIsInRecurrence(true, recurrence, 2009, APRIL, 30);
 
-			recurrence.setUntil(getCalendar(2009, APRIL, 30, 0, 0));
+		// End date
 
-			assertIsInRecurrence(true, recurrence, 2009, APRIL, 20);
-			assertIsInRecurrence(false, recurrence, 2009, APRIL, 30);
+		recurrence.setUntil(getCalendar(2009, APRIL, 30, 0, 0));
+
+		assertIsInRecurrence(true, recurrence, 2009, APRIL, 20);
+		assertIsInRecurrence(false, recurrence, 2009, APRIL, 30);
 	}
 
 	public void testByYearDay() throws Exception {
@@ -707,8 +686,9 @@ public class RecurrenceDailyTest extends RecurrenceTestCase {
 			getCalendar(2009, MARCH, 23, HOUR_DURING, MINUTE_DURING),
 			getDefaultDuration(), Recurrence.DAILY);
 
-		// Mar 25 & 28, Apr 1, May 6 & 7
-		int[] yearDays = { 84, 87, 91, 126, 127 };
+		// March 25, 28, April 1, May 6, 7
+
+		int[] yearDays = {84, 87, 91, 126, 127};
 
 		recurrence.setByYearDay(yearDays);
 
@@ -742,6 +722,33 @@ public class RecurrenceDailyTest extends RecurrenceTestCase {
 
 		assertIsInRecurrence(true, recurrence, 2009, MARCH, 25);
 		assertIsInRecurrence(false, recurrence, 2009, MAY, 6);
+	}
+
+	public void testDaily() throws Exception {
+		Recurrence recurrence = new Recurrence(
+			getCalendar(2009, MARCH, 23, HOUR_DURING, MINUTE_DURING),
+			getDefaultDuration(), Recurrence.DAILY);
+
+		assertIsInRecurrence(false, recurrence, 2009, MARCH, 22);
+		assertIsInRecurrence(true, recurrence, 2009, MARCH, 27);
+		assertIsInRecurrence(true, recurrence, 2009, MARCH, 28);
+
+		// Interval
+
+		recurrence.setInterval(3);
+
+		assertIsInRecurrence(false, recurrence, 2009, MARCH, 24);
+		assertIsInRecurrence(false, recurrence, 2009, MARCH, 25);
+		assertIsInRecurrence(true, recurrence, 2009, MARCH, 26);
+		assertIsInRecurrence(false, recurrence, 2009, MARCH, 27);
+		assertIsInRecurrence(true, recurrence, 2009, MARCH, 29);
+
+		// End date
+
+		recurrence.setUntil(getCalendar(2009, APRIL, 4, 0, 0));
+
+		assertIsInRecurrence(true, recurrence, 2009, APRIL, 1);
+		assertIsInRecurrence(false, recurrence, 2009, APRIL, 4);
 	}
 
 }

@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.cal.Recurrence;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.TimeZone;
 
 import junit.framework.TestCase;
 
@@ -142,7 +141,6 @@ public abstract class RecurrenceTestCase extends TestCase {
 		Calendar calendar = new GregorianCalendar();
 
 		calendar.set(year, month, date, hour, minute);
-		calendar.setTimeZone(TimeZone.getTimeZone(StringPool.UTC));
 
 		return calendar;
 	}
