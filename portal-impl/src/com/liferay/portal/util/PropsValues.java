@@ -164,7 +164,7 @@ public class PropsValues {
 	public static final String BROWSER_LAUNCHER_URL =
 		PropsUtil.get(PropsKeys.BROWSER_LAUNCHER_URL);
 
-	public static final boolean CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT =
+	public static boolean CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT));
 
