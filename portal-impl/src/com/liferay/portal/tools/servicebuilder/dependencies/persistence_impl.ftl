@@ -627,7 +627,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 				0, 1, obc);
 
-				if (list.isEmpty()) {
+				if (list.size() == 0) {
 					StringBuilder msg = new StringBuilder();
 
 					msg.append("No ${entity.name} exists with the key {");
@@ -676,7 +676,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 				count - 1, count, obc);
 
-				if (list.isEmpty()) {
+				if (list.size() == 0) {
 					StringBuilder msg = new StringBuilder();
 
 					msg.append("No ${entity.name} exists with the key {");
@@ -1007,13 +1007,14 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 						List<${entity.name}> list = q.list();
 
-						if (list.isEmpty()) {
-							return null;
-						}
-
 						FinderCacheUtil.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
 
-						return list.get(0);
+						if (list.size() == 0) {
+							return null;
+						}
+						else {
+							return list.get(0);
+						}
 					}
 					catch (Exception e) {
 						throw processException(e);
@@ -1025,7 +1026,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 				else {
 					List<${entity.name}> list = (List<${entity.name}>)result;
 
-					if (list.isEmpty()) {
+					if (list.size() == 0) {
 						return null;
 					}
 					else {
