@@ -78,7 +78,6 @@ public class EditCommentTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertEquals("This is a edited test page comment!",
-			selenium.getText(
-				"//div[@id='portlet-wrapper-107']/div[2]/div/div/div[2]/form/table[2]/tbody/tr[2]/td[1]/a/b"));
+			selenium.getText("//td[1]/a"));
 	}
 }

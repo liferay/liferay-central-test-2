@@ -76,7 +76,7 @@ public class AddReplyCommentTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("_107_postReplyButton1"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals("This is a test reply comment!",
-			selenium.getText("//tr[3]/td[1]/a/b"));
+			selenium.getText("//tr[3]/td[1]/a"));
 		assertTrue(selenium.isTextPresent("This is a test reply comment!"));
 	}
 }
