@@ -123,6 +123,8 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 			<%
 			BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(classPK);
+
+			String entryURL = themeDisplay.getPathMain() + "/bookmarks/open_entry?entryId=" + entry.getEntryId();
 			%>
 
 			<c:choose>
@@ -141,7 +143,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			</c:choose>
 
 			<div class="asset-content">
-				<a href="<%= entry.getUrl() %>" target="_blank">
+				<a href="<%= entryURL %>" target="_blank">
 					<c:choose>
 						<c:when test="<%= showAssetTitle %>">
 							<%= entry.getUrl() %>

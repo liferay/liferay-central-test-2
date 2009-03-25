@@ -72,9 +72,11 @@ else if (className.equals(BookmarksEntry.class.getName())) {
 		title = entry.getName();
 	}
 
+	String entryURL = themeDisplay.getPathMain() + "/bookmarks/open_entry?entryId=" + entry.getEntryId();
+
 	viewFullContentURL.setParameter("type", AssetPublisherUtil.TYPE_BOOKMARK);
 
-	viewURL = viewInContext ? entry.getUrl() : viewFullContentURL.toString();
+	viewURL = viewInContext ? entryURL : viewFullContentURL.toString();
 	cssClassName = AssetPublisherUtil.TYPE_BOOKMARK;
 }
 else if (className.equals(DLFileEntry.class.getName())) {
