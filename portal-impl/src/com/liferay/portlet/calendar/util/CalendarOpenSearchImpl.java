@@ -39,11 +39,12 @@ public class CalendarOpenSearchImpl extends HitsOpenSearchImpl {
 	public static final String TITLE = "Liferay Calendar Search: ";
 
 	public Hits getHits(
-			long companyId, long userId, String keywords, int start, int end)
+			long companyId, long userId, long groupId, String keywords,
+			int start, int end)
 		throws Exception {
 
 		return CalEventLocalServiceUtil.search(
-			companyId, 0, userId, 0, keywords, start, end);
+			companyId, groupId, userId, 0, keywords, start, end);
 	}
 
 	public String getSearchPath() {

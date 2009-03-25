@@ -69,6 +69,14 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 			int startPage, int itemsPerPage, String format)
 		throws SearchException {
 
+		return search(
+			request, userId, 0, keywords, startPage, itemsPerPage, format);
+	}
+	public String search(
+			HttpServletRequest request, long userId, long groupId,
+			String keywords, int startPage, int itemsPerPage, String format)
+		throws SearchException {
+
 		try {
 			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 				WebKeys.THEME_DISPLAY);
@@ -105,12 +113,13 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 				String portletTitle = PortalUtil.getPortletTitle(
 					portletId, themeDisplay.getUser());
 
-				long groupId = GetterUtil.getLong(result.get(Field.GROUP_ID));
+				long resultGroupId = GetterUtil.getLong(
+					result.get(Field.GROUP_ID));
 
 				String title = StringPool.BLANK;
 
 				PortletURL portletURL = getPortletURL(
-					request, portletId, groupId);
+					request, portletId, resultGroupId);
 
 				String url = portletURL.toString();
 
@@ -130,7 +139,8 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 					content = docSummary.getContent();
 
 					if (portlet.getPortletId().equals(PortletKeys.JOURNAL)) {
-						url = getJournalURL(themeDisplay, groupId, result);
+						url = getJournalURL(
+							themeDisplay, resultGroupId, result);
 					}
 				}
 

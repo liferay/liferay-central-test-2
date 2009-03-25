@@ -39,11 +39,12 @@ public class IGOpenSearchImpl extends HitsOpenSearchImpl {
 	public static final String TITLE = "Liferay Image Gallery Search: ";
 
 	public Hits getHits(
-			long companyId, long userId, String keywords, int start, int end)
+			long companyId, long userId, long groupId, String keywords,
+			int start, int end)
 		throws Exception {
 
 		return IGFolderLocalServiceUtil.search(
-			companyId, 0, null, keywords, start, end);
+			companyId, groupId, null, keywords, start, end);
 	}
 
 	public String getSearchPath() {

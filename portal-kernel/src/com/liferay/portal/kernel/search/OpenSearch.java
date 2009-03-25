@@ -42,4 +42,8 @@ public interface OpenSearch {
 			int startPage, int itemsPerPage, String format)
 		throws SearchException;
 
+	public String search(
+			HttpServletRequest request, long userId, long groupId,
+			String keywords, int startPage, int itemsPerPage, String format)
+		throws SearchException;
 }

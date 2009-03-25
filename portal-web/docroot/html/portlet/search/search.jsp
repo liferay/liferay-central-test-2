@@ -39,6 +39,8 @@ String unicodeDefaultKeywords = UnicodeFormatter.toString(defaultKeywords);
 
 String keywords = ParamUtil.getString(request, "keywords", defaultKeywords);
 
+long groupId = ParamUtil.getLong(request, "groupId", 0);
+
 String format = ParamUtil.getString(request, "format");
 %>
 
@@ -127,7 +129,7 @@ for (int i = 0; i < portlets.size(); i++) {
 	List resultRows = new ArrayList();
 
 	try {
-		String xml = openSearch.search(request, themeDisplay.getUserId(), keywords, searchContainer.getCur(), searchContainer.getDelta(), format);
+		String xml = openSearch.search(request, themeDisplay.getUserId(), groupId, keywords, searchContainer.getCur(), searchContainer.getDelta(), format);
 
 		Document doc = SAXReaderUtil.read(xml);
 

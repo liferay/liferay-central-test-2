@@ -30,6 +30,10 @@ String unicodeDefaultKeywords = UnicodeFormatter.toString(defaultKeywords);
 
 String keywords = ParamUtil.getString(request, namespace + "keywords", defaultKeywords);
 
+long groupId = layout.getGroup().getGroupId();
+
+boolean allSites = ParamUtil.getLong(request, "groupId", 0) == 0;
+
 PortletURL portletURL = new PortletURLImpl(request, PortletKeys.SEARCH, plid, PortletRequest.RENDER_PHASE);
 
 portletURL.setWindowState(WindowState.MAXIMIZED);
@@ -41,5 +45,10 @@ portletURL.setParameter("struts_action", "/search/search");
 <form action="<%= portletURL.toString() %>" method="post" name="<%= namespace %>fm" onSubmit="submitForm(this); return false;">
 
 <input name="<%= namespace %>keywords" size="30" type="text" value="<%= HtmlUtil.escape(keywords) %>" onBlur="if (this.value == '') { this.value = '<%= unicodeDefaultKeywords %>'; }" onFocus="if (this.value == '<%= unicodeDefaultKeywords %>') { this.value = ''; }" />
+
+<select name="groupId">
+	<option value="0" <%= allSites ? "selected=\"selected\"" : "" %>><liferay-ui:message key="everything" /></option>
+	<option value="<%= groupId %>" <%= !allSites ? "selected=\"selected\"" : "" %>><liferay-ui:message key="this-community" /></option>
+</select>
 
 <input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" title="<liferay-ui:message key="search" />" type="image" />
