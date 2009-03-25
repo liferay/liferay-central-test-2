@@ -54,7 +54,7 @@ public class SearchEntriesTest extends BaseTestCase {
 		selenium.typeKeys("_28_keywords1", RuntimeVariables.replace("Test"));
 		selenium.type("_28_keywords1", RuntimeVariables.replace("Test"));
 		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Entries']"));
+				"//input[@value='Search Folders']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Bookmark"));
 		assertTrue(selenium.isElementPresent("link=Test Bookmark 2"));

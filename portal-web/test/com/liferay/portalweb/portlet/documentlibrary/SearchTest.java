@@ -56,7 +56,7 @@ public class SearchTest extends BaseTestCase {
 			RuntimeVariables.replace("Test Document"));
 		selenium.type("_20_keywords1", RuntimeVariables.replace("Test Document"));
 		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search File Entries']"));
+				"//input[@value='Search Folders']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Document"));
 	}

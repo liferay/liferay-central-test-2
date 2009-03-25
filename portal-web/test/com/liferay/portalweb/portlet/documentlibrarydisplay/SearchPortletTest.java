@@ -72,7 +72,7 @@ public class SearchPortletTest extends BaseTestCase {
 
 		selenium.type("//div/input[1]", RuntimeVariables.replace("test"));
 		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search File Entries']"));
+				"//input[@value='Search Folders']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=DLD Setup Test Folder"));
 		assertTrue(selenium.isElementPresent("link=DLD Test Document"));
@@ -94,8 +94,7 @@ public class SearchPortletTest extends BaseTestCase {
 		}
 
 		selenium.type("//input[11]", RuntimeVariables.replace("test1"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search File Entries']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=DLD Setup Test Folder"));
 		assertFalse(selenium.isElementPresent("link=DLD Test Document"));

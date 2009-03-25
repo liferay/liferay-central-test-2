@@ -54,13 +54,12 @@ public class SearchPortletTest extends BaseTestCase {
 		selenium.typeKeys("_31_keywords1", RuntimeVariables.replace("lifera"));
 		selenium.type("_31_keywords1", RuntimeVariables.replace("liferay"));
 		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Images']"));
+				"//input[@value='Search Folders']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Image"));
 		selenium.typeKeys("_31_keywords", RuntimeVariables.replace("lifera1"));
 		selenium.type("_31_keywords", RuntimeVariables.replace("liferay1"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Images']"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("Test Image"));
 	}

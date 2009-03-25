@@ -58,7 +58,7 @@ public class SearchTest extends BaseTestCase {
 		selenium.typeKeys("_19_keywords1", RuntimeVariables.replace("T\u00e9st"));
 		selenium.type("_19_keywords1", RuntimeVariables.replace("T\u00e9st"));
 		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Messages']"));
+				"//input[@value='Search Categories']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=T\u00e9st M\u00e9ssag\u00e9"));
 	}
