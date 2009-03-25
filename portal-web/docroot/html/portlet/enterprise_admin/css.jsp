@@ -66,10 +66,16 @@
 	margin: 10px auto;
 }
 
-.portlet-enterprise-admin .change-company-logo img {
+.portlet-enterprise-admin .change-company-logo {
+	background: url(<%= themeImagesPath %>/common/checkerboard.png);
 	display: block;
-	margin: 10px;
-	width: 300px;
+	margin-bottom: 10px;
+}
+
+.portlet-enterprise-admin .change-company-logo img {
+	border-width: 0;
+	display: block;
+	width: auto;
 }
 
 .portlet-enterprise-admin .company-logo {

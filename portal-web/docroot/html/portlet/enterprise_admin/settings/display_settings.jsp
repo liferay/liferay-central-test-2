@@ -113,7 +113,7 @@ boolean deleteLogo = ParamUtil.getBoolean(request, "deleteLogo");
 	</portlet:renderURL>
 
 	<a class="change-company-logo" href="javascript: <portlet:namespace />openEditCompanyLogoWindow('<%= editCompanyLogoURL %>');">
-		<img alt="<liferay-ui:message key="logo" />" class="avatar" id="<portlet:namespace />avatar" src="<%= themeDisplay.getPathImage() %>/company_logo?img_id=<%= deleteLogo ? 0 : company.getLogoId() %>&t=<%= ImageServletTokenUtil.getToken(company.getLogoId()) %>" /><br />
+		<img alt="<liferay-ui:message key="logo" />" class="avatar" id="<portlet:namespace />avatar" src="<%= themeDisplay.getPathImage() %>/company_logo?img_id=<%= deleteLogo ? 0 : company.getLogoId() %>&t=<%= ImageServletTokenUtil.getToken(company.getLogoId()) %>" />
 	</a>
 
 	<div class="portrait-icons">
