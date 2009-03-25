@@ -74,13 +74,7 @@ public class MBMessagePermission {
 			String actionId)
 		throws SystemException {
 
-		MBCategory category = message.getCategory();
-
-		long groupId = 0;
-
-		if (category != null) {
-			groupId = category.getGroupId();
-		}
+		long groupId = message.getGroupId();
 
 		if (MBBanLocalServiceUtil.hasBan(
 				groupId, permissionChecker.getUserId())) {
