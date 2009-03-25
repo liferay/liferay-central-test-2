@@ -122,6 +122,9 @@ public class EditServerAction extends PortletAction {
 		else if (cmd.equals("updateLogLevels")) {
 			updateLogLevels(actionRequest);
 		}
+		else if (cmd.equals("updateFileUploads")) {
+			updateFileUploads(actionRequest, preferences);
+		}
 		else if (cmd.equals("updateMail")) {
 			updateMail(actionRequest, preferences);
 		}
@@ -200,6 +203,10 @@ public class EditServerAction extends PortletAction {
 				}
 			}
 		}
+	}
+
+	protected String sanitizeExtensionLists(String extensions) {
+		return extensions.replace(", .", ",.");
 	}
 
 	protected void shutdown(ActionRequest actionRequest) throws Exception {
@@ -281,6 +288,95 @@ public class EditServerAction extends PortletAction {
 				logger.setLevel(Level.toLevel(priority));
 			}
 		}
+	}
+
+	protected void updateFileUploads(
+			ActionRequest actionRequest, PortletPreferences preferences)
+		throws Exception {
+
+		String dlFileExtensions = sanitizeExtensionLists(
+			ParamUtil.getString(actionRequest, "dlFileExtensions"));
+		long dlFileMaxSize = ParamUtil.getLong(
+			actionRequest, "dlFileMaxSize");
+		String igImageExtensions = sanitizeExtensionLists(
+			ParamUtil.getString(actionRequest, "igImageExtensions"));
+		long igImageMaxSize = ParamUtil.getLong(
+			actionRequest, "igImageMaxSize");
+		String igThumbnailMaxDimension = sanitizeExtensionLists(
+			ParamUtil.getString(actionRequest, "igThumbnailMaxDimension"));
+		String journalImageExtensions = sanitizeExtensionLists(
+			ParamUtil.getString(actionRequest, "journalImageExtensions"));
+		long journalImageSmallMaxSize = ParamUtil.getLong(
+			actionRequest, "journalImageSmallMaxSize");
+		String shoppingImageExtensions = sanitizeExtensionLists(
+			ParamUtil.getString(actionRequest, "shoppingImageExtensions"));
+		long scImageMaxSize = ParamUtil.getLong(
+			actionRequest, "scImageMaxSize");
+		long scImageThumbnailMaxHeight = ParamUtil.getLong(
+			actionRequest, "scImageThumbnailMaxHeight");
+		long scImageThumbnailMaxWidth = ParamUtil.getLong(
+			actionRequest, "scImageThumbnailMaxWidth");
+		long shoppingImageLargeMaxSize = ParamUtil.getLong(
+			actionRequest, "shoppingImageLargeMaxSize");
+		long shoppingImageMediumMaxSize = ParamUtil.getLong(
+			actionRequest, "shoppingImageMediumMaxSize");
+		long shoppingImageSmallMaxSize = ParamUtil.getLong(
+			actionRequest, "shoppingImageSmallMaxSize");
+		long uploadServletRequestImplMaxSize = ParamUtil.getLong(
+			actionRequest, "uploadServletRequestImplMaxSize");
+		String uploadServletRequestImplTempDir = ParamUtil.getString(
+			actionRequest, "uploadServletRequestImplTempDir");
+		long usersImageMaxSize = ParamUtil.getLong(
+			actionRequest, "usersImageMaxSize");
+
+		if (Validator.isNotNull(uploadServletRequestImplTempDir)) {
+			preferences.setValue(
+				PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_TEMP_DIR,
+				uploadServletRequestImplTempDir);
+		}
+
+		preferences.setValue(
+			PropsKeys.DL_FILE_EXTENSIONS, dlFileExtensions);
+		preferences.setValue(
+			PropsKeys.DL_FILE_MAX_SIZE, String.valueOf(dlFileMaxSize));
+		preferences.setValue(
+			PropsKeys.IG_IMAGE_EXTENSIONS, igImageExtensions);
+		preferences.setValue(
+			PropsKeys.IG_IMAGE_MAX_SIZE, String.valueOf(igImageMaxSize));
+		preferences.setValue(
+			PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION,
+			igThumbnailMaxDimension);
+		preferences.setValue(
+			PropsKeys.JOURNAL_IMAGE_EXTENSIONS, journalImageExtensions);
+		preferences.setValue(
+			PropsKeys.JOURNAL_IMAGE_SMALL_MAX_SIZE,
+			String.valueOf(journalImageSmallMaxSize));
+		preferences.setValue(
+			PropsKeys.SHOPPING_IMAGE_EXTENSIONS, shoppingImageExtensions);
+		preferences.setValue(
+			PropsKeys.SHOPPING_IMAGE_LARGE_MAX_SIZE,
+			String.valueOf(shoppingImageLargeMaxSize));
+		preferences.setValue(
+			PropsKeys.SHOPPING_IMAGE_MEDIUM_MAX_SIZE,
+			String.valueOf(shoppingImageMediumMaxSize));
+		preferences.setValue(
+			PropsKeys.SHOPPING_IMAGE_SMALL_MAX_SIZE,
+			String.valueOf(shoppingImageSmallMaxSize));
+		preferences.setValue(
+			PropsKeys.SC_IMAGE_MAX_SIZE, String.valueOf(scImageMaxSize));
+		preferences.setValue(
+			PropsKeys.SC_IMAGE_THUMBNAIL_MAX_HEIGHT,
+			String.valueOf(scImageThumbnailMaxHeight));
+		preferences.setValue(
+			PropsKeys.SC_IMAGE_THUMBNAIL_MAX_WIDTH,
+			String.valueOf(scImageThumbnailMaxWidth));
+		preferences.setValue(
+			PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_MAX_SIZE,
+			String.valueOf(uploadServletRequestImplMaxSize));
+		preferences.setValue(
+			PropsKeys.USERS_IMAGE_MAX_SIZE, String.valueOf(usersImageMaxSize));
+
+		preferences.store();
 	}
 
 	protected void updateMail(

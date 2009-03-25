@@ -111,19 +111,19 @@ public class DLLocalServiceUtil {
 	}
 
 	public static void validate(String fileName, File file)
-		throws PortalException {
+		throws PortalException, SystemException {
 
 		_service.validate(fileName, file);
 	}
 
 	public static void validate(String fileName, byte[] bytes)
-		throws PortalException {
+		throws PortalException, SystemException {
 
 		_service.validate(fileName, bytes);
 	}
 
 	public static void validate(String fileName, InputStream is)
-		throws PortalException {
+		throws PortalException, SystemException {
 
 		_service.validate(fileName, is);
 	}

@@ -79,12 +79,14 @@ public interface DLLocalService {
 			String[] tagsCategories, String[] tagsEntries, InputStream is)
 		throws PortalException, SystemException;
 
-	public void validate(String fileName, File file) throws PortalException;
+	public void validate(String fileName, File file)
+		throws PortalException, SystemException;
 
-	public void validate(String fileName, byte[] bytes) throws PortalException;
+	public void validate(String fileName, byte[] bytes)
+		throws PortalException, SystemException;
 
 	public void validate(String fileName, InputStream is)
-		throws PortalException;
+		throws PortalException, SystemException;
 
 	public void validate(String fileName, String sourceFileName, InputStream is)
 		throws PortalException;

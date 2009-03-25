@@ -23,7 +23,7 @@
 %>
 
 <script type="text/javascript">
-	var maxDimension = <%= PropsValues.IG_IMAGE_THUMBNAIL_MAX_DIMENSION %>;
+	var maxDimension = <%= PrefsPropsUtil.getInteger(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION) %>;
 
 	function <portlet:namespace />viewImage(id, token, name, width, height) {
 		var page = Liferay.Util.viewport.page();
@@ -113,8 +113,8 @@
 			smallImageWidth = smallImage.getWidth();
 		}
 
-		int topMargin = PropsValues.IG_IMAGE_THUMBNAIL_MAX_DIMENSION - smallImageHeight + 20;
-		int sideMargin = (PropsValues.IG_IMAGE_THUMBNAIL_MAX_DIMENSION - smallImageWidth + 20) / 2;
+		int topMargin = PrefsPropsUtil.getInteger(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION) - smallImageHeight + 20;
+		int sideMargin = (PrefsPropsUtil.getInteger(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION) - smallImageWidth + 20) / 2;
 	%>
 
 		<div style="float: left; margin: <%= topMargin %>px <%= sideMargin %>px 0px <%= sideMargin %>px;">

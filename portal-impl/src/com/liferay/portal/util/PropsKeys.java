@@ -1197,6 +1197,10 @@ public interface PropsKeys {
 
 	public static final String UPGRADE_PROCESSES = "upgrade.processes";
 
+	public static final String UPLOAD_SERVLET_REQUEST_IMPL_MAX_SIZE = "com.liferay.portal.upload.UploadServletRequestImpl.max.size";
+
+	public static final String UPLOAD_SERVLET_REQUEST_IMPL_TEMP_DIR = "com.liferay.portal.upload.UploadServletRequestImpl.temp.dir";
+
 	public static final String USERS_DELETE = "users.delete";
 
 	public static final String USERS_EMAIL_ADDRESS_REQUIRED = "users.email.address.required";

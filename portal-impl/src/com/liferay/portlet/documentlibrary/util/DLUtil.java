@@ -22,12 +22,14 @@
 
 package com.liferay.portlet.documentlibrary.util;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.PrefsPropsUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
@@ -215,7 +217,15 @@ public class DLUtil {
 	private DLUtil() {
 		_fileExtensions = new HashSet<String>();
 
-		String[] fileExtensions = PropsValues.DL_FILE_EXTENSIONS;
+		String[] fileExtensions;
+
+		try {
+			fileExtensions = PrefsPropsUtil.getStringArray(
+				PropsKeys.DL_FILE_EXTENSIONS, ",");
+		}
+		catch (SystemException e) {
+			fileExtensions = new String[]{StringPool.BLANK};
+		}
 
 		for (int i = 0; i < fileExtensions.length; i++) {
 

@@ -41,8 +41,8 @@ import com.liferay.portal.model.Image;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.imagegallery.DuplicateImageNameException;
@@ -707,7 +707,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			saveScaledImage(
 				renderedImage, smallImageId, contentType,
-				PropsValues.IG_IMAGE_THUMBNAIL_MAX_DIMENSION);
+				PrefsPropsUtil.getInteger(
+					PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION));
 
 			if (custom1ImageId > 0) {
 				saveScaledImage(
@@ -763,10 +764,13 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		imageLocalService.updateImage(imageId, bam.toByteArray());
 	}
 
-	protected void validate(byte[] bytes) throws ImageSizeException {
-		if ((PropsValues.IG_IMAGE_MAX_SIZE > 0) &&
+	protected void validate(byte[] bytes)
+		throws ImageSizeException, SystemException {
+
+		if ((PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_MAX_SIZE) > 0) &&
 			((bytes == null) ||
-			 (bytes.length > PropsValues.IG_IMAGE_MAX_SIZE))) {
+			 (bytes.length >
+				 PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_MAX_SIZE)))) {
 
 			throw new ImageSizeException();
 		}
@@ -795,7 +799,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		boolean validImageExtension = false;
 
 		String[] imageExtensions =
-			PropsUtil.getArray(PropsKeys.IG_IMAGE_EXTENSIONS);
+			PrefsPropsUtil.getStringArray(PropsKeys.IG_IMAGE_EXTENSIONS, ",");
 
 		for (int i = 0; i < imageExtensions.length; i++) {
 			if (StringPool.STAR.equals(imageExtensions[i]) ||

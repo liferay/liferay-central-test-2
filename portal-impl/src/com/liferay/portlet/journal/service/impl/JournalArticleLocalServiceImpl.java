@@ -64,6 +64,7 @@ import com.liferay.portal.servlet.filters.cache.CacheUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -2564,7 +2565,8 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		String[] imageExtensions =
-			PropsUtil.getArray(PropsKeys.JOURNAL_IMAGE_EXTENSIONS);
+			PrefsPropsUtil.getStringArray(
+				PropsKeys.JOURNAL_IMAGE_EXTENSIONS, ",");
 
 		if (smallImage && Validator.isNull(smallImageURL) &&
 			smallFile != null && smallBytes != null) {
@@ -2591,7 +2593,8 @@ public class JournalArticleLocalServiceImpl
 			}
 
 			long smallImageMaxSize = GetterUtil.getLong(
-				PropsUtil.get(PropsKeys.JOURNAL_IMAGE_SMALL_MAX_SIZE));
+				PrefsPropsUtil.getString(
+					PropsKeys.JOURNAL_IMAGE_SMALL_MAX_SIZE));
 
 			if ((smallImageMaxSize > 0) &&
 				((smallBytes == null) ||

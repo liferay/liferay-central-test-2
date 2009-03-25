@@ -160,11 +160,11 @@ if (image != null) {
 		jQuery(
 			function() {
 				new Liferay.Upload({
-					allowedFileTypes: '<%= StringUtil.merge(PropsValues.IG_IMAGE_EXTENSIONS) %>',
+					allowedFileTypes: '<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.IG_IMAGE_EXTENSIONS, ",")) %>',
 					container: '#<portlet:namespace />fileUpload',
-					fileDescription: '<%= StringUtil.merge(PropsValues.IG_IMAGE_EXTENSIONS) %>',
+					fileDescription: '<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.IG_IMAGE_EXTENSIONS, ",")) %>',
 					fallbackContainer: '#<portlet:namespace />fallback',
-					maxFileSize: <%= PropsValues.IG_IMAGE_MAX_SIZE %>,
+					maxFileSize: <%= PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_MAX_SIZE) %>,
 					namespace: '<portlet:namespace />',
 					uploadFile: '<liferay-portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" doAsUserId="<%= user.getUserId() %>"><portlet:param name="struts_action" value="/image_gallery/edit_image" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></liferay-portlet:actionURL><liferay-ui:input-permissions-params modelName="<%= IGImage.class.getName() %>" />'
 				});
@@ -208,7 +208,7 @@ if (image != null) {
 <liferay-ui:error exception="<%= DuplicateImageNameException.class %>" message="please-enter-a-unique-image-name" />
 
 <liferay-ui:error exception="<%= ImageNameException.class %>">
-	<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(PropsValues.IG_IMAGE_EXTENSIONS, ", ") %>.
+	<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.IG_IMAGE_EXTENSIONS, ","), ", ") %>.
 </liferay-ui:error>
 
 <liferay-ui:error exception="<%= ImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
@@ -217,7 +217,7 @@ if (image != null) {
 <liferay-ui:tags-error />
 
 <%
-String imageMaxSize = String.valueOf(PropsValues.IG_IMAGE_MAX_SIZE / 1024);
+String imageMaxSize = String.valueOf(PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_MAX_SIZE) / 1024);
 %>
 
 <c:if test='<%= !imageMaxSize.equals("0") %>'>
@@ -354,10 +354,10 @@ String imageMaxSize = String.valueOf(PropsValues.IG_IMAGE_MAX_SIZE / 1024);
 					if ((value != null) && (value != "")) {
 						var extension = value.substring(value.lastIndexOf(".")).toLowerCase();
 
-						var validExtensions = new Array('<%= StringUtil.merge(PropsValues.IG_IMAGE_EXTENSIONS, "', '") %>');
+						var validExtensions = new Array('<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.IG_IMAGE_EXTENSIONS, ","), "', '") %>');
 
 						if (jQuery.inArray(extension, validExtensions) == -1) {
-							alert('<%= UnicodeLanguageUtil.get(pageContext, "image-names-must-end-with-one-of-the-following-extensions") %> <%= StringUtil.merge(PropsValues.IG_IMAGE_EXTENSIONS, ", ") %>');
+							alert('<%= UnicodeLanguageUtil.get(pageContext, "image-names-must-end-with-one-of-the-following-extensions") %> <%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.IG_IMAGE_EXTENSIONS, ","), ", ") %>');
 
 							jQuery(this).val("");
 						}

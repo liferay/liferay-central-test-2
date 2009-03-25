@@ -158,7 +158,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 <liferay-ui:error exception="<%= TemplateSmallImageNameException.class %>">
 
 	<%
-	String[] imageExtensions = PropsUtil.getArray(PropsKeys.JOURNAL_IMAGE_EXTENSIONS);
+	String[] imageExtensions = PrefsPropsUtil.getStringArray(PropsKeys.JOURNAL_IMAGE_EXTENSIONS, ",");
 	%>
 
 	<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.

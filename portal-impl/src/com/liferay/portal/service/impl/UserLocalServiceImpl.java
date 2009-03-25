@@ -2169,8 +2169,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
-		long imageMaxSize = GetterUtil.getLong(
-			PropsUtil.get(PropsKeys.USERS_IMAGE_MAX_SIZE));
+		long imageMaxSize = PrefsPropsUtil.getLong(
+			PropsKeys.USERS_IMAGE_MAX_SIZE);
 
 		if ((imageMaxSize > 0) &&
 			((bytes == null) || (bytes.length > imageMaxSize))) {

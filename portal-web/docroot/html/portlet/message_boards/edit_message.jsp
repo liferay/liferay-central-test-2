@@ -166,7 +166,7 @@ if ((message != null) && message.isAttachments()) {
 <liferay-ui:error exception="<%= MessageSubjectException.class %>" message="please-enter-a-valid-subject" />
 
 <liferay-ui:error exception="<%= FileNameException.class %>">
-	<liferay-ui:message key="document-names-must-end-with-one-of-the-following-extensions" /><%= StringUtil.merge(PropsValues.DL_FILE_EXTENSIONS, ", ") %>.
+	<liferay-ui:message key="document-names-must-end-with-one-of-the-following-extensions" /><%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, ","), ", ") %>.
 </liferay-ui:error>
 
 <liferay-ui:error exception="<%= FileSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />

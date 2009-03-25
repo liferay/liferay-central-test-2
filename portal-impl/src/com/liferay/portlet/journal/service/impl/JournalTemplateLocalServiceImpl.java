@@ -36,8 +36,8 @@ import com.liferay.portal.model.Image;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.journal.DuplicateTemplateIdException;
 import com.liferay.portlet.journal.NoSuchTemplateException;
@@ -636,7 +636,7 @@ public class JournalTemplateLocalServiceImpl
 	protected void validate(
 			String name, String description, String xsl, boolean smallImage,
 			String smallImageURL, File smallFile, byte[] smallBytes)
-		throws PortalException {
+		throws PortalException, SystemException {
 
 		if (Validator.isNull(name)) {
 			throw new TemplateNameException();
@@ -649,7 +649,8 @@ public class JournalTemplateLocalServiceImpl
 		}
 
 		String[] imageExtensions =
-			PropsUtil.getArray(PropsKeys.JOURNAL_IMAGE_EXTENSIONS);
+			PrefsPropsUtil.getStringArray(
+				PropsKeys.JOURNAL_IMAGE_EXTENSIONS, ",");
 
 		if (smallImage && Validator.isNull(smallImageURL) &&
 			smallFile != null && smallBytes != null) {
@@ -676,7 +677,8 @@ public class JournalTemplateLocalServiceImpl
 			}
 
 			long smallImageMaxSize = GetterUtil.getLong(
-				PropsUtil.get(PropsKeys.JOURNAL_IMAGE_SMALL_MAX_SIZE));
+				PrefsPropsUtil.getString(
+					PropsKeys.JOURNAL_IMAGE_SMALL_MAX_SIZE));
 
 			if ((smallImageMaxSize > 0) &&
 				((smallBytes == null) ||

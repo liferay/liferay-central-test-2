@@ -353,11 +353,11 @@ portletURL.setParameter("name", name);
 				function() {
 					new Liferay.Upload(
 						{
-							allowedFileTypes: '<%= StringUtil.merge(PropsValues.DL_FILE_EXTENSIONS) %>',
+							allowedFileTypes: '<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, ",")) %>',
 							container: '#<portlet:namespace />fileUpload',
-							fileDescription: '<%= StringUtil.merge(PropsValues.DL_FILE_EXTENSIONS) %>',
+							fileDescription: '<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, ",")) %>',
 							fallbackContainer: '#<portlet:namespace />fallback',
-							maxFileSize: <%= PropsValues.DL_FILE_MAX_SIZE %>,
+							maxFileSize: <%= PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) %>,
 							namespace: '<portlet:namespace />',
 							uploadFile: '<liferay-portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" doAsUserId="<%= user.getUserId() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></liferay-portlet:actionURL><liferay-ui:input-permissions-params modelName="<%= DLFileEntry.class.getName() %>" />'
 						}
@@ -386,7 +386,7 @@ portletURL.setParameter("name", name);
 	<liferay-ui:error exception="<%= DuplicateFolderNameException.class %>" message="please-enter-a-unique-document-name" />
 
 	<liferay-ui:error exception="<%= FileNameException.class %>">
-		<liferay-ui:message key="document-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(PropsValues.DL_FILE_EXTENSIONS, ", ") %>.
+		<liferay-ui:message key="document-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, ","), ", ") %>.
 	</liferay-ui:error>
 
 	<liferay-ui:error exception="<%= NoSuchFolderException.class %>" message="please-enter-a-valid-folder" />
@@ -400,7 +400,7 @@ portletURL.setParameter("name", name);
 	<liferay-ui:tags-error />
 
 	<%
-	String fileMaxSize = String.valueOf(PropsValues.DL_FILE_MAX_SIZE / 1024);
+	String fileMaxSize = String.valueOf(PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) / 1024);
 	%>
 
 	<c:if test='<%= !fileMaxSize.equals("0") %>'>
@@ -569,10 +569,10 @@ portletURL.setParameter("name", name);
 						if ((value != null) && (value != "")) {
 							var extension = value.substring(value.lastIndexOf(".")).toLowerCase();
 
-							var validExtensions = new Array("<%= StringUtil.merge(PropsValues.DL_FILE_EXTENSIONS, "\", \"") %>");
+							var validExtensions = new Array("<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, ","), "\", \"") %>");
 
 							if ((jQuery.inArray("*", validExtensions) == -1) && (jQuery.inArray(extension, validExtensions) == -1)) {
-								alert('<%= UnicodeLanguageUtil.get(pageContext, "document-names-must-end-with-one-of-the-following-extensions") %> <%= StringUtil.merge(PropsValues.DL_FILE_EXTENSIONS, ", ") %>');
+								alert('<%= UnicodeLanguageUtil.get(pageContext, "document-names-must-end-with-one-of-the-following-extensions") %> <%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, ","), ", ") %>');
 
 								jQuery(this).val("");
 							}
