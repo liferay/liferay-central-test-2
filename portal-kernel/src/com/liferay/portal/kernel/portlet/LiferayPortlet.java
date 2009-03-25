@@ -94,7 +94,7 @@ public class LiferayPortlet extends GenericPortlet {
 
 	protected boolean callActionMethod(
 			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws IOException, PortletException {
+		throws PortletException {
 
 		String actionName = ParamUtil.getString(
 			actionRequest, ActionRequest.ACTION_NAME);
