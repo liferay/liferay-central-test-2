@@ -39,12 +39,12 @@ public class BlogsOpenSearchImpl extends HitsOpenSearchImpl {
 	public static final String TITLE = "Liferay Blogs Search: ";
 
 	public Hits getHits(
-			long companyId, long userId, long groupId, String keywords,
+			long companyId, long groupId, long userId, String keywords,
 			int start, int end)
 		throws Exception {
 
 		return BlogsEntryLocalServiceUtil.search(
-			companyId, 0, userId, 0, keywords, start, end);
+			companyId, groupId, userId, 0, keywords, start, end);
 	}
 
 	public String getSearchPath() {

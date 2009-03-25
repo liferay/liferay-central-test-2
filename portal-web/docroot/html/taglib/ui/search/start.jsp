@@ -25,14 +25,14 @@
 <%@ include file="/html/taglib/ui/search/init.jsp" %>
 
 <%
+long groupId = ParamUtil.getLong(request, "groupId");
+
+Layout group = layout.getGroup();
+
 String defaultKeywords = LanguageUtil.get(pageContext, "search") + "...";
 String unicodeDefaultKeywords = UnicodeFormatter.toString(defaultKeywords);
 
 String keywords = ParamUtil.getString(request, namespace + "keywords", defaultKeywords);
-
-long groupId = layout.getGroup().getGroupId();
-
-boolean allSites = ParamUtil.getLong(request, "groupId", 0) == 0;
 
 PortletURL portletURL = new PortletURLImpl(request, PortletKeys.SEARCH, plid, PortletRequest.RENDER_PHASE);
 
@@ -46,9 +46,9 @@ portletURL.setParameter("struts_action", "/search/search");
 
 <input name="<%= namespace %>keywords" size="30" type="text" value="<%= HtmlUtil.escape(keywords) %>" onBlur="if (this.value == '') { this.value = '<%= unicodeDefaultKeywords %>'; }" onFocus="if (this.value == '<%= unicodeDefaultKeywords %>') { this.value = ''; }" />
 
-<select name="groupId">
-	<option value="0" <%= allSites ? "selected=\"selected\"" : "" %>><liferay-ui:message key="everything" /></option>
-	<option value="<%= groupId %>" <%= !allSites ? "selected=\"selected\"" : "" %>><liferay-ui:message key="this-community" /></option>
+<select name="<%= namespace %>groupId">
+	<option value="0" <%= (groupId == 0) ? "selected" : "" %>><liferay-ui:message key="everything" /></option>
+	<option value="<%= group.getGroupId() %>" <%= (groupId != 0) ? "selected" : "" %>><liferay-ui:message key='<%= "this-" + (group.isOrganization() ? "organization" : "community") %>' /></option>
 </select>
 
 <input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" title="<liferay-ui:message key="search" />" type="image" />

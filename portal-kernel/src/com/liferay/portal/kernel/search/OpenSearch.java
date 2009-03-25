@@ -43,7 +43,8 @@ public interface OpenSearch {
 		throws SearchException;
 
 	public String search(
-			HttpServletRequest request, long userId, long groupId,
+			HttpServletRequest request, long groupId, long userId,
 			String keywords, int startPage, int itemsPerPage, String format)
 		throws SearchException;
+
 }

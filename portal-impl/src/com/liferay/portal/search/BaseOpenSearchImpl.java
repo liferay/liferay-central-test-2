@@ -98,13 +98,17 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 		}
 	}
 
-	public abstract String search(
+	public String search(
 			HttpServletRequest request, long userId, String keywords,
 			int startPage, int itemsPerPage, String format)
-		throws SearchException;
+		throws SearchException {
+
+		return search(
+			request, 0, userId, keywords, startPage, itemsPerPage, format);
+	}
 
 	public abstract String search(
-			HttpServletRequest request, long userId, long groupId,
+			HttpServletRequest request, long groupId, long userId,
 			String keywords, int startPage, int itemsPerPage, String format)
 		throws SearchException;
 

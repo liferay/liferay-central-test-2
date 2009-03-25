@@ -57,7 +57,7 @@ import javax.servlet.http.HttpServletRequest;
 public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 
 	public abstract Hits getHits(
-			long companyId, long userId, long groupId, String keywords,
+			long companyId, long groupId, long userId, String keywords,
 			int start, int end)
 		throws Exception;
 
@@ -66,16 +66,7 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 	public abstract String getTitle(String keywords);
 
 	public String search(
-			HttpServletRequest request, long userId, String keywords,
-			int startPage, int itemsPerPage, String format)
-		throws SearchException {
-
-		return search(
-			request, userId, 0, keywords, startPage, itemsPerPage, format);
-	}
-
-	public String search(
-			HttpServletRequest request, long userId, long groupId,
+			HttpServletRequest request, long groupId, long userId,
 			String keywords, int startPage, int itemsPerPage, String format)
 		throws SearchException {
 
@@ -87,8 +78,8 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 			int end = startPage * itemsPerPage;
 
 			Hits results = getHits(
-				themeDisplay.getCompanyId(), userId, groupId, keywords,
-				start, end);
+				themeDisplay.getCompanyId(), groupId, userId, keywords, start,
+				end);
 
 			int total = results.getLength();
 
@@ -111,7 +102,8 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 				//String portletTitle = PortalUtil.getPortletTitle(
 				//	portletId, themeDisplay.getUser());
 
-				long resultGroupId = GetterUtil.getLong(result.get(Field.GROUP_ID));
+				long resultGroupId = GetterUtil.getLong(
+					result.get(Field.GROUP_ID));
 
 				PortletURL portletURL = getPortletURL(
 					request, portletId, resultGroupId);
@@ -123,7 +115,8 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 					result, portletURL);
 
 				String title = docSummary.getTitle();
-				String url = getURL(themeDisplay, resultGroupId, result, portletURL);
+				String url = getURL(
+					themeDisplay, resultGroupId, result, portletURL);
 				Date modifedDate = result.getDate(Field.MODIFIED);
 				String content = docSummary.getContent();
 
