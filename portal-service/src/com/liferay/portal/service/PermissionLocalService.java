@@ -104,6 +104,10 @@ public interface PermissionLocalService {
 		long companyId, java.lang.String name, long resourceId,
 		boolean portletActions) throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portal.model.Permission> addPermissions(
+		long companyId, java.util.List<String> actionIds, long resourceId)
+		throws com.liferay.portal.SystemException;
+
 	public void addUserPermissions(long userId, java.lang.String[] actionIds,
 		long resourceId)
 		throws com.liferay.portal.PortalException,

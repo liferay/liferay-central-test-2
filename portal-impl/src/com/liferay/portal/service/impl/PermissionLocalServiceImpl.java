@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.OrgGroupPermission;
@@ -49,8 +50,10 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.PermissionComparator;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang.time.StopWatch;
 
@@ -92,23 +95,49 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			boolean portletActions)
 		throws SystemException {
 
-		List<Permission> permissions = new ArrayList<Permission>();
-
-		List<String> actions = null;
+		List<String> actionIds = null;
 
 		if (portletActions) {
-			actions =
+			actionIds =
 				ResourceActionsUtil.getPortletResourceActions(companyId, name);
 		}
 		else {
-			actions = ResourceActionsUtil.getModelResourceActions(name);
+			actionIds = ResourceActionsUtil.getModelResourceActions(name);
 		}
 
-		for (int i = 0; i < actions.size(); i++) {
-			String actionId = actions.get(i);
+		return addPermissions(companyId, actionIds, resourceId);
+	}
 
-			Permission permission = addPermission(
-				companyId, actionId, resourceId);
+	public List<Permission> addPermissions(
+			long companyId, List<String> actionIds, long resourceId)
+		throws SystemException {
+
+		List<Permission> permissions = permissionPersistence.findByResourceId(
+			resourceId);
+
+		permissions = ListUtil.copy(permissions);
+
+		Set<String> actionIdsSet = new HashSet<String>();
+
+		for (Permission permission : permissions) {
+			actionIdsSet.add(permission.getActionId());
+		}
+
+		for (String actionId : actionIds) {
+			if (actionIdsSet.contains(actionId)) {
+				continue;
+			}
+
+			long permissionId = counterLocalService.increment(
+				Permission.class.getName());
+
+			Permission permission = permissionPersistence.create(permissionId);
+
+			permission.setCompanyId(companyId);
+			permission.setActionId(actionId);
+			permission.setResourceId(resourceId);
+
+			permissionPersistence.update(permission, false);
 
 			permissions.add(permission);
 		}
@@ -134,17 +163,17 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public List<String> getActions(List<Permission> permissions) {
-		List<String> actions = new ArrayList<String>();
+		List<String> actionIds = new ArrayList<String>();
 
 		Iterator<Permission> itr = permissions.iterator();
 
 		while (itr.hasNext()) {
 			Permission permission = itr.next();
 
-			actions.add(permission.getActionId());
+			actionIds.add(permission.getActionId());
 		}
 
-		return actions;
+		return actionIds;
 	}
 
 	public List<Permission> getGroupPermissions(long groupId, long resourceId)

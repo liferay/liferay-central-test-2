@@ -122,6 +122,12 @@ public class PermissionLocalServiceUtil {
 				   .addPermissions(companyId, name, resourceId, portletActions);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Permission> addPermissions(
+		long companyId, java.util.List<String> actionIds, long resourceId)
+		throws com.liferay.portal.SystemException {
+		return getService().addPermissions(companyId, actionIds, resourceId);
+	}
+
 	public static void addUserPermissions(long userId,
 		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.PortalException,
