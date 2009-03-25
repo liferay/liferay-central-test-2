@@ -2365,21 +2365,6 @@
 		</comments>
 	</library>
 	<library>
-		<file-name>portal/uuid.jar</file-name>
-		<version>3.0</version>
-		<project-name>UUID</project-name>
-		<project-url>http://johannburkard.de/software/uuid</project-url>
-		<licenses>
-			<license>
-				<license-name>BSD Style License</license-name>
-			</license>
-		</licenses>
-		<comments>
-			This includes modifications to expose the MAC address logic in
-			UUIDGen.
-		</comments>
-	</library>
-	<library>
 		<file-name>portal/velocity.jar</file-name>
 		<version>1.6.1</version>
 		<project-name>Velocity</project-name>

@@ -214,7 +214,6 @@
 	<classpathentry kind="lib" path="lib/portal/struts-el.jar"/>
 	<classpathentry kind="lib" path="lib/portal/unoil.jar"/>
 	<classpathentry kind="lib" path="lib/portal/urlrewrite.jar"/>
-	<classpathentry kind="lib" path="lib/portal/uuid.jar"/>
 	<classpathentry kind="lib" path="lib/portal/velocity.jar"/>
 	<classpathentry kind="lib" path="lib/portal/velocity-tools.jar"/>
 	<classpathentry kind="lib" path="lib/portal/wsdl4j.jar"/>
