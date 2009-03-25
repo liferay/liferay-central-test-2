@@ -13,7 +13,7 @@
 		<#list 1..maxMBMessageCount as mbMessageCount>
 			<#assign mbMessageCounterIncrement = mbMessageCounter.increment()>
 
-			<#assign mbMessage = dataFactory.addMBMessage(firstUserId, mbCategory.groupId, mbCategory.categoryId, threadId, parentMessageId, "Test Message " + mbMessageCount, "This is a test message " + mbMessageCount + ".")>
+			<#assign mbMessage = dataFactory.addMBMessage(mbCategory.groupId, firstUserId, mbCategory.categoryId, threadId, parentMessageId, "Test Message " + mbMessageCount, "This is a test message " + mbMessageCount + ".")>
 
 			${sampleSQLBuilder.insertMBMessage(mbMessage)}
 
