@@ -24,6 +24,8 @@ package com.liferay.portlet.documentlibrary.util;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -217,14 +219,16 @@ public class DLUtil {
 	private DLUtil() {
 		_fileExtensions = new HashSet<String>();
 
-		String[] fileExtensions;
+		String[] fileExtensions = null;
 
 		try {
 			fileExtensions = PrefsPropsUtil.getStringArray(
-				PropsKeys.DL_FILE_EXTENSIONS, ",");
+				PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA);
 		}
-		catch (SystemException e) {
-			fileExtensions = new String[]{StringPool.BLANK};
+		catch (SystemException se) {
+			_log.error(se, se);
+
+			fileExtensions = new String[] {StringPool.BLANK};
 		}
 
 		for (int i = 0; i < fileExtensions.length; i++) {
@@ -260,6 +264,8 @@ public class DLUtil {
 	}
 
 	private static final String _DEFAULT_FILE_EXTENSION = "page";
+
+	private static Log _log = LogFactoryUtil.getLog(DLUtil.class);
 
 	private static DLUtil _instance = new DLUtil();
 

@@ -161,7 +161,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 	String[] imageExtensions = PrefsPropsUtil.getStringArray(PropsKeys.JOURNAL_IMAGE_EXTENSIONS, ",");
 	%>
 
-	<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
+	<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, EXTENSIONS, StringPool.COMMA) %>.
 </liferay-ui:error>
 
 

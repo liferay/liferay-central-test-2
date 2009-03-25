@@ -25,7 +25,6 @@ package com.liferay.portlet.shopping.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
@@ -843,9 +842,8 @@ public class ShoppingItemLocalServiceImpl
 			throw new ItemNameException();
 		}
 
-		String[] imageExtensions =
-			PrefsPropsUtil.getStringArray(
-				PropsKeys.SHOPPING_IMAGE_EXTENSIONS, ",");
+		String[] imageExtensions = PrefsPropsUtil.getStringArray(
+			PropsKeys.SHOPPING_IMAGE_EXTENSIONS, StringPool.COMMA);
 
 		// Small image
 
@@ -873,9 +871,8 @@ public class ShoppingItemLocalServiceImpl
 				}
 			}
 
-			long smallImageMaxSize = GetterUtil.getLong(
-				PrefsPropsUtil.getString(
-					PropsKeys.SHOPPING_IMAGE_MEDIUM_MAX_SIZE));
+			long smallImageMaxSize = PrefsPropsUtil.getLong(
+				PropsKeys.SHOPPING_IMAGE_MEDIUM_MAX_SIZE);
 
 			if ((smallImageMaxSize > 0) &&
 				((smallBytes == null) ||
@@ -911,9 +908,8 @@ public class ShoppingItemLocalServiceImpl
 				}
 			}
 
-			long mediumImageMaxSize = GetterUtil.getLong(
-				PrefsPropsUtil.getString(
-					PropsKeys.SHOPPING_IMAGE_MEDIUM_MAX_SIZE));
+			long mediumImageMaxSize = PrefsPropsUtil.getLong(
+				PropsKeys.SHOPPING_IMAGE_MEDIUM_MAX_SIZE);
 
 			if ((mediumImageMaxSize > 0) &&
 				((mediumBytes == null) ||
@@ -949,9 +945,8 @@ public class ShoppingItemLocalServiceImpl
 				}
 			}
 
-			long largeImageMaxSize = GetterUtil.getLong(
-				PrefsPropsUtil.getString(
-					PropsKeys.SHOPPING_IMAGE_LARGE_MAX_SIZE));
+			long largeImageMaxSize = PrefsPropsUtil.getLong(
+				PropsKeys.SHOPPING_IMAGE_LARGE_MAX_SIZE);
 
 			if ((largeImageMaxSize > 0) &&
 				((largeBytes == null) ||

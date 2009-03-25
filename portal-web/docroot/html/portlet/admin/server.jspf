@@ -317,34 +317,6 @@ numberFormat.setMinimumIntegerDigits(2);
 					<input type="button" value="<liferay-ui:message key="cancel-shutdown" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />minutes.value = 0; <portlet:namespace />saveServer('shutdown');" />
 				</c:if>
 			</c:when>
-			<c:when test='<%= tabs2.equals("OpenOffice") %>'>
-				<liferay-ui:message key="enabling-openoffice-integration-provides-document-conversion-functionality" />
-
-				<br /><br />
-
-				<table class="lfr-table">
-				<tr>
-					<td>
-						<liferay-ui:message key="enabled" />
-					</td>
-					<td>
-						<liferay-ui:input-checkbox param="enabled" defaultValue="<%= PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED) %>" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="port" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />port" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.OPENOFFICE_SERVER_PORT) %>" />
-					</td>
-				</tr>
-				</table>
-
-				<br />
-
-				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveServer('updateOpenOffice');" />
-			</c:when>
 			<c:when test='<%= tabs2.equals("file-uploads") %>'>
 				<liferay-ui:message key="configure-the-file-upload-settings" />
 
@@ -361,7 +333,7 @@ numberFormat.setMinimumIntegerDigits(2);
 						<liferay-ui:message key="overall-maximum-file-size" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />uploadServletRequestImplMaxSize" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_MAX_SIZE) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />uploadServletRequestImplMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_MAX_SIZE) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -375,6 +347,10 @@ numberFormat.setMinimumIntegerDigits(2);
 				<tr>
 					<td colspan="2">
 						<br />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
 						<b><liferay-ui:message key="document-library" /></b>
 					</td>
 				</tr>
@@ -397,6 +373,10 @@ numberFormat.setMinimumIntegerDigits(2);
 				<tr>
 					<td colspan="2">
 						<br />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
 						<b><liferay-ui:message key="image-gallery" /></b>
 					</td>
 				</tr>
@@ -405,7 +385,7 @@ numberFormat.setMinimumIntegerDigits(2);
 						<liferay-ui:message key="maximum-file-size" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />igImageMaxSize" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.IG_IMAGE_MAX_SIZE) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />igImageMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_MAX_SIZE) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -421,12 +401,16 @@ numberFormat.setMinimumIntegerDigits(2);
 						<liferay-ui:message key="maximum-thumbnail-dimensions" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />igImageThumbnailMaxDimensions" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />igImageThumbnailMaxDimensions" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION) %>" />
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2">
 						<br />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
 						<b><liferay-ui:message key="web-content-images" /></b>
 					</td>
 				</tr>
@@ -435,7 +419,7 @@ numberFormat.setMinimumIntegerDigits(2);
 						<liferay-ui:message key="maximum-file-size" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />journalImageSmallMaxSize" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.JOURNAL_IMAGE_SMALL_MAX_SIZE) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />journalImageSmallMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.JOURNAL_IMAGE_SMALL_MAX_SIZE) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -449,31 +433,35 @@ numberFormat.setMinimumIntegerDigits(2);
 				<tr>
 					<td colspan="2">
 						<br />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
 						<b><liferay-ui:message key="shopping-cart-images" /></b>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<liferay-ui:message key="maximum-file-size" /> - <liferay-ui:message key="large-image" />
+						<liferay-ui:message key="maximum-file-size" /> (<liferay-ui:message key="large-image" />)
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />shoppingImageLargeMaxSize" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.SHOPPING_IMAGE_LARGE_MAX_SIZE) %>" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="maximum-file-size" /> - <liferay-ui:message key="medium-image" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />shoppindImageMediumMaxSize" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.SHOPPING_IMAGE_MEDIUM_MAX_SIZE) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />shoppingImageLargeMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.SHOPPING_IMAGE_LARGE_MAX_SIZE) %>" />
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<liferay-ui:message key="maximum-file-size" /> - <liferay-ui:message key="small-image" />
+						<liferay-ui:message key="maximum-file-size" /> (<liferay-ui:message key="medium-image" />)
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />shoppingImageSmallMaxSize" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.SHOPPING_IMAGE_SMALL_MAX_SIZE) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />shoppindImageMediumMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.SHOPPING_IMAGE_MEDIUM_MAX_SIZE) %>" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="maximum-file-size" /> (<liferay-ui:message key="small-image" />)
+					</td>
+					<td>
+						<input class="lfr-input-text" name="<portlet:namespace />shoppingImageSmallMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.SHOPPING_IMAGE_SMALL_MAX_SIZE) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -487,6 +475,10 @@ numberFormat.setMinimumIntegerDigits(2);
 				<tr>
 					<td colspan="2">
 						<br />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
 						<b><liferay-ui:message key="software-catalog-images" /></b>
 					</td>
 				</tr>
@@ -495,7 +487,7 @@ numberFormat.setMinimumIntegerDigits(2);
 						<liferay-ui:message key="maximum-file-size" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />scImageMaxSize" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.SC_IMAGE_MAX_SIZE) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />scImageMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.SC_IMAGE_MAX_SIZE) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -503,7 +495,7 @@ numberFormat.setMinimumIntegerDigits(2);
 						<liferay-ui:message key="maximum-thumbnail-height" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />scImageThumbnailMaxHeight" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.SC_IMAGE_THUMBNAIL_MAX_HEIGHT) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />scImageThumbnailMaxHeight" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.SC_IMAGE_THUMBNAIL_MAX_HEIGHT) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -511,12 +503,16 @@ numberFormat.setMinimumIntegerDigits(2);
 						<liferay-ui:message key="maximum-thumbnail-width" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />scImageThumbnalMaxWidth" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.SC_IMAGE_THUMBNAIL_MAX_WIDTH) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />scImageThumbnalMaxWidth" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.SC_IMAGE_THUMBNAIL_MAX_WIDTH) %>" />
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2">
 						<br />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
 						<b><liferay-ui:message key="user-images" /></b>
 					</td>
 				</tr>
@@ -525,7 +521,7 @@ numberFormat.setMinimumIntegerDigits(2);
 						<liferay-ui:message key="maximum-file-size" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />usersImageMaxSize" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.USERS_IMAGE_MAX_SIZE) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />usersImageMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.USERS_IMAGE_MAX_SIZE) %>" />
 					</td>
 				</tr>
 				</table>
@@ -647,6 +643,34 @@ numberFormat.setMinimumIntegerDigits(2);
 				<br />
 
 				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveServer('updateMail');" />
+			</c:when>
+			<c:when test='<%= tabs2.equals("OpenOffice") %>'>
+				<liferay-ui:message key="enabling-openoffice-integration-provides-document-conversion-functionality" />
+
+				<br /><br />
+
+				<table class="lfr-table">
+				<tr>
+					<td>
+						<liferay-ui:message key="enabled" />
+					</td>
+					<td>
+						<liferay-ui:input-checkbox param="enabled" defaultValue="<%= PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED) %>" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="port" />
+					</td>
+					<td>
+						<input class="lfr-input-text" name="<portlet:namespace />port" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.OPENOFFICE_SERVER_PORT) %>" />
+					</td>
+				</tr>
+				</table>
+
+				<br />
+
+				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveServer('updateOpenOffice');" />
 			</c:when>
 			<c:otherwise>
 

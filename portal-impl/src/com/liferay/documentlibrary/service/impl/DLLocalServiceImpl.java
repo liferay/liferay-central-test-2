@@ -208,13 +208,14 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 	public void validate(String fileName, File file)
 		throws PortalException, SystemException {
+
 		validate(fileName);
 
 		if (((PropsValues.WEBDAV_LITMUS) ||
 			 (PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) > 0)) &&
 			((file == null) ||
 			 (file.length() >
-				 PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE)))) {
+				PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE)))) {
 
 			throw new FileSizeException(fileName);
 		}
@@ -222,6 +223,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 	public void validate(String fileName, byte[] bytes)
 		throws PortalException, SystemException {
+
 		validate(fileName);
 
 		if (((PropsValues.WEBDAV_LITMUS) ||
@@ -279,7 +281,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 		boolean validFileExtension = false;
 
 		String[] fileExtensions = PrefsPropsUtil.getStringArray(
-			PropsKeys.DL_FILE_EXTENSIONS, ",");
+			PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA);
 
 		if (!PropsValues.WEBDAV_LITMUS) {
 			for (int i = 0; i < fileExtensions.length; i++) {

@@ -234,7 +234,7 @@ public class MediaWikiImporter implements WikiImporter {
 		catch (PortalException pe) {
 			return false;
 		}
-		catch (SystemException e) {
+		catch (SystemException se) {
 			return false;
 		}
 

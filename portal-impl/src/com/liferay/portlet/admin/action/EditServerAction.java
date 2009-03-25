@@ -119,11 +119,11 @@ public class EditServerAction extends PortletAction {
 		else if (cmd.equals("threadDump")) {
 			threadDump();
 		}
-		else if (cmd.equals("updateLogLevels")) {
-			updateLogLevels(actionRequest);
-		}
 		else if (cmd.equals("updateFileUploads")) {
 			updateFileUploads(actionRequest, preferences);
+		}
+		else if (cmd.equals("updateLogLevels")) {
+			updateLogLevels(actionRequest);
 		}
 		else if (cmd.equals("updateMail")) {
 			updateMail(actionRequest, preferences);
@@ -158,6 +158,14 @@ public class EditServerAction extends PortletAction {
 
 	protected void gc() throws Exception {
 		Runtime.getRuntime().gc();
+	}
+
+	protected String getFileExtensions(
+		ActionRequest actionRequest, String name) {
+
+		String value = ParamUtil.getString(actionRequest, name);
+
+		return value.replace(", .", ",.");
 	}
 
 	protected void reIndex(ActionRequest actionRequest) throws Exception {
@@ -203,10 +211,6 @@ public class EditServerAction extends PortletAction {
 				}
 			}
 		}
-	}
-
-	protected String sanitizeExtensionLists(String extensions) {
-		return extensions.replace(", .", ",.");
 	}
 
 	protected void shutdown(ActionRequest actionRequest) throws Exception {
@@ -269,47 +273,25 @@ public class EditServerAction extends PortletAction {
 		}
 	}
 
-	protected void updateLogLevels(ActionRequest actionRequest)
-		throws Exception {
-
-		Enumeration<String> enu = actionRequest.getParameterNames();
-
-		while (enu.hasMoreElements()) {
-			String name = enu.nextElement();
-
-			if (name.startsWith("logLevel")) {
-				String loggerName = name.substring(8, name.length());
-
-				String priority = ParamUtil.getString(
-					actionRequest, name, Level.INFO.toString());
-
-				Logger logger = Logger.getLogger(loggerName);
-
-				logger.setLevel(Level.toLevel(priority));
-			}
-		}
-	}
-
 	protected void updateFileUploads(
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
-		String dlFileExtensions = sanitizeExtensionLists(
-			ParamUtil.getString(actionRequest, "dlFileExtensions"));
-		long dlFileMaxSize = ParamUtil.getLong(
-			actionRequest, "dlFileMaxSize");
-		String igImageExtensions = sanitizeExtensionLists(
-			ParamUtil.getString(actionRequest, "igImageExtensions"));
+		String dlFileExtensions = getFileExtensions(
+			actionRequest, "dlFileExtensions");
+		long dlFileMaxSize = ParamUtil.getLong(actionRequest, "dlFileMaxSize");
+		String igImageExtensions = getFileExtensions(
+			actionRequest, "igImageExtensions");
 		long igImageMaxSize = ParamUtil.getLong(
 			actionRequest, "igImageMaxSize");
-		String igThumbnailMaxDimension = sanitizeExtensionLists(
-			ParamUtil.getString(actionRequest, "igThumbnailMaxDimension"));
-		String journalImageExtensions = sanitizeExtensionLists(
-			ParamUtil.getString(actionRequest, "journalImageExtensions"));
+		String igThumbnailMaxDimension = getFileExtensions(
+			actionRequest, "igThumbnailMaxDimension");
+		String journalImageExtensions = getFileExtensions(
+			actionRequest, "journalImageExtensions");
 		long journalImageSmallMaxSize = ParamUtil.getLong(
 			actionRequest, "journalImageSmallMaxSize");
-		String shoppingImageExtensions = sanitizeExtensionLists(
-			ParamUtil.getString(actionRequest, "shoppingImageExtensions"));
+		String shoppingImageExtensions = getFileExtensions(
+			actionRequest, "shoppingImageExtensions");
 		long scImageMaxSize = ParamUtil.getLong(
 			actionRequest, "scImageMaxSize");
 		long scImageThumbnailMaxHeight = ParamUtil.getLong(
@@ -328,12 +310,6 @@ public class EditServerAction extends PortletAction {
 			actionRequest, "uploadServletRequestImplTempDir");
 		long usersImageMaxSize = ParamUtil.getLong(
 			actionRequest, "usersImageMaxSize");
-
-		if (Validator.isNotNull(uploadServletRequestImplTempDir)) {
-			preferences.setValue(
-				PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_TEMP_DIR,
-				uploadServletRequestImplTempDir);
-		}
 
 		preferences.setValue(
 			PropsKeys.DL_FILE_EXTENSIONS, dlFileExtensions);
@@ -373,10 +349,38 @@ public class EditServerAction extends PortletAction {
 		preferences.setValue(
 			PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_MAX_SIZE,
 			String.valueOf(uploadServletRequestImplMaxSize));
+
+		if (Validator.isNotNull(uploadServletRequestImplTempDir)) {
+			preferences.setValue(
+				PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_TEMP_DIR,
+				uploadServletRequestImplTempDir);
+		}
+
 		preferences.setValue(
 			PropsKeys.USERS_IMAGE_MAX_SIZE, String.valueOf(usersImageMaxSize));
 
 		preferences.store();
+	}
+
+	protected void updateLogLevels(ActionRequest actionRequest)
+		throws Exception {
+
+		Enumeration<String> enu = actionRequest.getParameterNames();
+
+		while (enu.hasMoreElements()) {
+			String name = enu.nextElement();
+
+			if (name.startsWith("logLevel")) {
+				String loggerName = name.substring(8, name.length());
+
+				String priority = ParamUtil.getString(
+					actionRequest, name, Level.INFO.toString());
+
+				Logger logger = Logger.getLogger(loggerName);
+
+				logger.setLevel(Level.toLevel(priority));
+			}
+		}
 	}
 
 	protected void updateMail(

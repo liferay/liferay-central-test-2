@@ -648,9 +648,8 @@ public class JournalTemplateLocalServiceImpl
 			throw new TemplateXslException();
 		}
 
-		String[] imageExtensions =
-			PrefsPropsUtil.getStringArray(
-				PropsKeys.JOURNAL_IMAGE_EXTENSIONS, ",");
+		String[] imageExtensions = PrefsPropsUtil.getStringArray(
+			PropsKeys.JOURNAL_IMAGE_EXTENSIONS, StringPool.COMMA);
 
 		if (smallImage && Validator.isNull(smallImageURL) &&
 			smallFile != null && smallBytes != null) {
@@ -676,9 +675,8 @@ public class JournalTemplateLocalServiceImpl
 				}
 			}
 
-			long smallImageMaxSize = GetterUtil.getLong(
-				PrefsPropsUtil.getString(
-					PropsKeys.JOURNAL_IMAGE_SMALL_MAX_SIZE));
+			long smallImageMaxSize = PrefsPropsUtil.getLong(
+				PropsKeys.JOURNAL_IMAGE_SMALL_MAX_SIZE);
 
 			if ((smallImageMaxSize > 0) &&
 				((smallBytes == null) ||

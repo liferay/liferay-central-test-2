@@ -419,12 +419,11 @@ Liferay.Service.registerClass(
 	}
 );
 
-Liferay.Service.register("Liferay.Service.DL", "com.liferay.portlet.documentlibrary.service.http");
+Liferay.Service.register("Liferay.Service.DL", "com.liferay.portlet.documentlibrary.service");
 
 Liferay.Service.registerClass(
 	Liferay.Service.DL, "DLFileEntry",
 	{
-		addFileEntry: true,
 		deleteFileEntry: true,
 		deleteFileEntryByTitle: true,
 		getFileEntries: true,
@@ -434,7 +433,6 @@ Liferay.Service.registerClass(
 		lockFileEntry: true,
 		refreshFileEntryLock: true,
 		unlockFileEntry: true,
-		updateFileEntry: true,
 		verifyFileEntryLock: true
 	}
 );

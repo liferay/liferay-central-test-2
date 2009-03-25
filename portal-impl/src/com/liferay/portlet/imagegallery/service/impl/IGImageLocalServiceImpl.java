@@ -798,8 +798,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 		boolean validImageExtension = false;
 
-		String[] imageExtensions =
-			PrefsPropsUtil.getStringArray(PropsKeys.IG_IMAGE_EXTENSIONS, ",");
+		String[] imageExtensions = PrefsPropsUtil.getStringArray(
+			PropsKeys.IG_IMAGE_EXTENSIONS, StringPool.COMMA);
 
 		for (int i = 0; i < imageExtensions.length; i++) {
 			if (StringPool.STAR.equals(imageExtensions[i]) ||

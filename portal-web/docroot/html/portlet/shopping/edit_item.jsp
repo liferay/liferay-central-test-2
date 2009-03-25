@@ -595,7 +595,7 @@ for (int i = 0; i < pricesCount; i++) {
 <liferay-ui:error exception="<%= ItemLargeImageNameException.class %>">
 
 	<%
-	String[] imageExtensions = PrefsPropsUtil.getStringArray(PropsKeys.SHOPPING_IMAGE_EXTENSIONS, ",");
+	String[] imageExtensions = PrefsPropsUtil.getStringArray(PropsKeys.SHOPPING_IMAGE_EXTENSIONS, StringPool.COMMA);
 	%>
 
 	<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
@@ -606,7 +606,7 @@ for (int i = 0; i < pricesCount; i++) {
 <liferay-ui:error exception="<%= ItemMediumImageNameException.class %>">
 
 	<%
-	String[] imageExtensions = PrefsPropsUtil.getStringArray(PropsKeys.SHOPPING_IMAGE_EXTENSIONS, ",");
+	String[] imageExtensions = PrefsPropsUtil.getStringArray(PropsKeys.SHOPPING_IMAGE_EXTENSIONS, StringPool.COMMA);
 	%>
 
 	<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
@@ -617,7 +617,7 @@ for (int i = 0; i < pricesCount; i++) {
 <liferay-ui:error exception="<%= ItemSmallImageNameException.class %>">
 
 	<%
-	String[] imageExtensions = PrefsPropsUtil.getStringArray(PropsKeys.SHOPPING_IMAGE_EXTENSIONS, ",");
+	String[] imageExtensions = PrefsPropsUtil.getStringArray(PropsKeys.SHOPPING_IMAGE_EXTENSIONS, StringPool.COMMA);
 	%>
 
 	<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
