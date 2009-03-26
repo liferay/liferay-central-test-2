@@ -327,6 +327,9 @@ public class BookmarksEntryLocalServiceImpl
 
 		bookmarksEntryPersistence.update(entry, false);
 
+		tagsAssetLocalService.incrementViewCounter(
+			BookmarksEntry.class.getName(), entryId);
+
 		return entry;
 	}
 

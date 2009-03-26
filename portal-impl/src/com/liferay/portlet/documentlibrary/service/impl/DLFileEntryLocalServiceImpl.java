@@ -511,6 +511,9 @@ public class DLFileEntryLocalServiceImpl
 
 		dlFileEntryPersistence.update(fileEntry, false);
 
+		tagsAssetLocalService.incrementViewCounter(
+			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+
 		if ((version > 0) && (fileEntry.getVersion() != version)) {
 			return dlLocalService.getFileAsStream(
 				companyId, folderId, name, version);
