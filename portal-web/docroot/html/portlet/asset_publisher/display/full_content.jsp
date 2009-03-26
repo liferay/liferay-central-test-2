@@ -54,6 +54,8 @@ request.setAttribute("view.jsp-showIconLabel", true);
 				}
 			}
 
+			TagsAssetLocalServiceUtil.incrementViewCounter(className, entry.getEntryId());
+
 			PortletURL viewFullContentURL = renderResponse.createRenderURL();
 
 			viewFullContentURL.setParameter("struts_action", "/asset_publisher/view_content");
@@ -284,6 +286,8 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 				show = false;
 			}
+
+			TagsAssetLocalServiceUtil.incrementViewCounter(className, articleDisplay.getResourcePrimKey());
 			%>
 
 			<c:if test="<%= articleDisplay != null %>">
@@ -395,6 +399,8 @@ request.setAttribute("view.jsp-showIconLabel", true);
 					showContextLink = false;
 				}
 			}
+
+			TagsAssetLocalServiceUtil.incrementViewCounter(className, message.getMessageId());
 			%>
 
 			<c:choose>
@@ -453,6 +459,8 @@ request.setAttribute("view.jsp-showIconLabel", true);
 							showContextLink = false;
 						}
 					}
+
+					TagsAssetLocalServiceUtil.incrementViewCounter(className, wikiPage.getResourcePrimKey());
 
 					try {
 						PortletURL viewPageURL = new PortletURLImpl(request, PortletKeys.WIKI, plid, PortletRequest.ACTION_PHASE);

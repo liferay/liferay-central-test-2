@@ -45,6 +45,7 @@
 <%@ page import="com.liferay.portlet.layoutconfiguration.util.xml.RenderURLLogic" %>
 <%@ page import="com.liferay.portlet.layoutconfiguration.util.xml.RuntimeLogic" %>
 <%@ page import="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil" %>
 
 <%
 PortletPreferences preferences = renderRequest.getPreferences();

@@ -176,6 +176,8 @@ double version = ParamUtil.getDouble(request, "version");
 		String xmlRequest = PortletRequestUtil.toXML(renderRequest, renderResponse);
 
 		JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(groupId, articleId, null, null, languageId, themeDisplay, articlePage, xmlRequest);
+
+		TagsAssetLocalServiceUtil.incrementViewCounter(JournalArticle.class.getName(), articleDisplay.getResourcePrimKey());
 		%>
 
 		<c:choose>
