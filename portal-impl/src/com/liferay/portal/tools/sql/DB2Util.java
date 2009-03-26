@@ -74,12 +74,18 @@ public class DB2Util extends DBUtil {
 	public void runSQL(String template)
 		throws IOException, NamingException, SQLException {
 
-		if (template.startsWith(ALTER_COLUMN_NAME)) {
+		if (template.startsWith(ALTER_COLUMN_NAME)
+                || template.startsWith(ALTER_COLUMN_TYPE)) {
 			String sql = buildSQL(template);
 
 			String[] renameSqls = sql.split(";");
-
-			runSQL(renameSqls);
+            int renameSqlsLength = renameSqls.length;
+            for (int i = 0; i < renameSqlsLength; i++) {
+                if (!renameSqls[i].startsWith("--")){
+                    runSQL(renameSqls);
+                    break;
+                }
+            }
 		}
 		else {
 			super.runSQL(template);
