@@ -383,7 +383,10 @@ public interface PropsKeys {
 	public static final String EHCACHE_SINGLE_VM_CONFIG_LOCATION = "ehcache.single.vm.config.location";
 
 	public static final String FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY = "field.enable.com.liferay.portal.model.Contact.birthday";
+
 	public static final String FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE = "field.enable.com.liferay.portal.model.Contact.male";
+
+	public static final String FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_PASSWORD = "field.enable.com.liferay.portal.model.Contact.password";
 
 	public static final String FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_ORGANIZATION_STATUS = "field.enable.com.liferay.portal.model.Organization.status";
 
