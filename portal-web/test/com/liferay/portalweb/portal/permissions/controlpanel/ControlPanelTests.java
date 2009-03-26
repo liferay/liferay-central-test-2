@@ -38,6 +38,7 @@ public class ControlPanelTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
+		testSuite.addTestSuite(ControlPanelTest.class);
 		testSuite.addTestSuite(CreateRolesTest.class);
 		testSuite.addTestSuite(DefineCARolesTest.class);
 		testSuite.addTestSuite(CA_PortalRolesTest.class);

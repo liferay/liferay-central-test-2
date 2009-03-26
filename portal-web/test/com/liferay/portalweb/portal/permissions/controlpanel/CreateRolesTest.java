@@ -33,27 +33,6 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CreateRolesTest extends BaseTestCase {
 	public void testCreateRoles() throws Exception {
-		selenium.click(RuntimeVariables.replace("//li[4]/ul/li[1]/a[1]"));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Control Panel")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Control Panel"));
-		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Roles"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Add"));
@@ -74,19 +53,19 @@ public class CreateRolesTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Member"));
 		selenium.click(RuntimeVariables.replace("link=Add"));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_128_name", RuntimeVariables.replace("Writer"));
-		selenium.type("_128_description",
-			RuntimeVariables.replace("This is the Writer Role."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Writer"));
-		selenium.click(RuntimeVariables.replace("link=Add"));
-		selenium.waitForPageToLoad("30000");
 		selenium.type("_128_name", RuntimeVariables.replace("Publisher"));
 		selenium.type("_128_description",
 			RuntimeVariables.replace("This is the Publisher Role."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Publisher"));
+		selenium.click(RuntimeVariables.replace("link=Add"));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_128_name", RuntimeVariables.replace("Writer"));
+		selenium.type("_128_description",
+			RuntimeVariables.replace("This is the Writer Role."));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Writer"));
 	}
 }
