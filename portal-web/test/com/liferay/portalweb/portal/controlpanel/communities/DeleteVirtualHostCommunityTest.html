@@ -9,8 +9,28 @@
 <tr><td rowspan="1" colspan="3">DeleteVirtualHostCommunityTest</td></tr>
 </thead><tbody>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>my-community-private-pages</td>
+	<td>store</td>
+	<td>eval(!selenium.isElementPresent('link=Plugins'))</td>
+	<td>HomepageLocation</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${HomepageLocation}</td>
+	<td>OnHomepage</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>http://localhost:8080/web/guest/home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>OnHomepage</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -51,6 +71,11 @@
 <tr>
 	<td>waitForTextPresent</td>
 	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Control Panel</td>
 	<td></td>
 </tr>
 

@@ -39,7 +39,7 @@ public class AddContentVirtualHostCommunityTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Back to My Community")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -49,6 +49,8 @@ public class AddContentVirtualHostCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Control Panel"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Back to My Community"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//li[7]/ul/li[1]/a[2]"));
@@ -98,7 +100,6 @@ public class AddContentVirtualHostCommunityTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Entry']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_84_title", RuntimeVariables.replace("Welcome"));
 		selenium.type("_84_title", RuntimeVariables.replace("Welcome"));
 		selenium.type("_84_content",
 			RuntimeVariables.replace(

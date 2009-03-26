@@ -77,7 +77,7 @@ public class AssertVirtualHostDefaultTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Virtual Host"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals("www.able.com", selenium.getValue("_134_publicVirtualHost"));
+		assertEquals("", selenium.getValue("_134_publicVirtualHost"));
 		assertEquals("", selenium.getValue("_134_privateVirtualHost"));
 		assertEquals("/virtual-hosting-test-community",
 			selenium.getValue("_134_friendlyURL"));

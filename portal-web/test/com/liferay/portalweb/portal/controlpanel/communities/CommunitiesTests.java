@@ -61,8 +61,8 @@ public class CommunitiesTests extends BaseTests {
 		testSuite.addTestSuite(AssertCommunityLARImportTest.class);
 		testSuite.addTestSuite(AddVirtualHostCommunityTest.class);
 		testSuite.addTestSuite(AddContentVirtualHostCommunityTest.class);
-		testSuite.addTestSuite(EnableVirtualHostingTest.class);
 		testSuite.addTestSuite(AssertVirtualHostDefaultTest.class);
+		testSuite.addTestSuite(EnableVirtualHostingTest.class);
 		testSuite.addTestSuite(AssertVirtualHostingAddressTest.class);
 		testSuite.addTestSuite(DeleteVirtualHostCommunityContentTest.class);
 		testSuite.addTestSuite(DeleteVirtualHostCommunityTest.class);

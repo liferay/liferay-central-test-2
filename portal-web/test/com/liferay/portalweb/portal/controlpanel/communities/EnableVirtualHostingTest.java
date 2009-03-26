@@ -33,73 +33,46 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EnableVirtualHostingTest extends BaseTestCase {
 	public void testEnableVirtualHosting() throws Exception {
-		int label = 1;
+		selenium.click(RuntimeVariables.replace("link=Control Panel"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Communities"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//tr[6]/td[6]/ul/li/strong/span");
 
-		while (label >= 1) {
-			switch (label) {
-			case 1:
-
-				boolean MyCommunityPage = selenium.isElementPresent(
-						"my-community-private-pages");
-
-				if (!MyCommunityPage) {
-					label = 2;
-
-					continue;
-				}
-
-				selenium.click(RuntimeVariables.replace(
-						"//a[@id='my-community-private-pages']/span"));
-				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("link=Control Panel"));
-				selenium.waitForPageToLoad("30000");
-
-			case 2:
-				selenium.click(RuntimeVariables.replace("link=Communities"));
-				selenium.waitForPageToLoad("30000");
-				selenium.click("//tr[6]/td[6]/ul/li/strong/span");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent(
-									"//body/div[2]/ul/li[2]/a")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click(RuntimeVariables.replace(
-						"//body/div[2]/ul/li[2]/a"));
-				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("//form/ul[1]/li[3]/a"));
-				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("link=Virtual Host"));
-				selenium.waitForPageToLoad("30000");
-				selenium.typeKeys("_134_publicVirtualHost",
-					RuntimeVariables.replace("www.able.com"));
-				selenium.type("_134_publicVirtualHost",
-					RuntimeVariables.replace("www.able.com"));
-				selenium.type("_134_privateVirtualHost",
-					RuntimeVariables.replace(""));
-				selenium.type("_134_friendlyURL",
-					RuntimeVariables.replace("/virtual-hosting-test-community"));
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Save']"));
-				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
-
-			case 100:
-				label = -1;
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
 			}
+
+			try {
+				if (selenium.isElementPresent("//body/div[2]/ul/li[2]/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
 		}
+
+		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[2]/a"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//form/ul[1]/li[3]/a"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Virtual Host"));
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_134_publicVirtualHost",
+			RuntimeVariables.replace("www.able.com"));
+		selenium.type("_134_publicVirtualHost",
+			RuntimeVariables.replace("www.able.com"));
+		selenium.type("_134_privateVirtualHost", RuntimeVariables.replace(""));
+		selenium.typeKeys("_134_friendlyURL",
+			RuntimeVariables.replace("/virtual-hosting-test-communit"));
+		selenium.type("_134_friendlyURL",
+			RuntimeVariables.replace("/virtual-hosting-test-community"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

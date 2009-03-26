@@ -33,66 +33,80 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class DeleteVirtualHostCommunityTest extends BaseTestCase {
 	public void testDeleteVirtualHostCommunity() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+		int label = 1;
 
-			try {
-				if (selenium.isElementPresent("my-community-private-pages")) {
-					break;
+		while (label >= 1) {
+			switch (label) {
+			case 1:
+
+				boolean HomepageLocation = !selenium.isElementPresent(
+						"link=Plugins");
+
+				if (!HomepageLocation) {
+					label = 2;
+
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.open("http://localhost:8080/web/guest/home");
 
-		selenium.click(RuntimeVariables.replace("my-community-private-pages"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Control Panel"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Communities"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("//tr[6]/td[6]/ul/li/strong/span");
+			case 2:
+				Thread.sleep(5000);
+				selenium.click(RuntimeVariables.replace(
+						"my-community-private-pages"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace("link=Control Panel"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace("link=Communities"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click("//tr[6]/td[6]/ul/li/strong/span");
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-			try {
-				if (selenium.isElementPresent("//body/div[2]/ul/li[6]/a")) {
-					break;
+					try {
+						if (selenium.isElementPresent(
+									"//body/div[2]/ul/li[6]/a")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.click(RuntimeVariables.replace(
+						"//body/div[2]/ul/li[6]/a"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
-		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[6]/a"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+					try {
+						if (selenium.isTextPresent(
+									"Your request processed successfully.")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
 
-			try {
-				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
-					break;
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				selenium.click(RuntimeVariables.replace("link=Control Panel"));
+				selenium.waitForPageToLoad("30000");
+
+			case 100:
+				label = -1;
+			}
 		}
 	}
 }

@@ -9,28 +9,8 @@
 <tr><td rowspan="1" colspan="3">AddVirtualHostCommunityTest</td></tr>
 </thead><tbody>
 <tr>
-	<td>store</td>
-	<td>eval(selenium.isElementPresent('my-community-private-pages'))</td>
-	<td>MyCommunityPage</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>!${MyCommunityPage}</td>
-	<td>NotMyCommunityPage</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>my-community-private-pages</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>link=Control Panel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>label</td>
-	<td>NotMyCommunityPage</td>
 	<td></td>
 </tr>
 <tr>
@@ -52,6 +32,11 @@
 	<td>type</td>
 	<td>_134_name</td>
 	<td>Virtual Hosting Test Community</td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_134_description</td>
+	<td>This is the Virtual Hosting test communit.</td>
 </tr>
 <tr>
 	<td>type</td>

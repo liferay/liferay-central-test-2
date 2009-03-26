@@ -33,50 +33,26 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddVirtualHostCommunityTest extends BaseTestCase {
 	public void testAddVirtualHostCommunity() throws Exception {
-		int label = 1;
-
-		while (label >= 1) {
-			switch (label) {
-			case 1:
-
-				boolean MyCommunityPage = selenium.isElementPresent(
-						"my-community-private-pages");
-
-				if (!MyCommunityPage) {
-					label = 2;
-
-					continue;
-				}
-
-				selenium.click(RuntimeVariables.replace(
-						"my-community-private-pages"));
-				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("link=Control Panel"));
-				selenium.waitForPageToLoad("30000");
-
-			case 2:
-				selenium.click(RuntimeVariables.replace("link=Communities"));
-				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("link=Add"));
-				selenium.waitForPageToLoad("30000");
-				selenium.typeKeys("_134_name",
-					RuntimeVariables.replace("Virtual Hosting Test Communit"));
-				selenium.type("_134_name",
-					RuntimeVariables.replace("Virtual Hosting Test Community"));
-				selenium.type("_134_description",
-					RuntimeVariables.replace(
-						"This is the Virtual Hosting test community."));
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Save']"));
-				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
-				assertTrue(selenium.isTextPresent(
-						"Virtual Hosting Test Community"));
-
-			case 100:
-				label = -1;
-			}
-		}
+		selenium.click(RuntimeVariables.replace("link=Control Panel"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Communities"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Add"));
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_134_name",
+			RuntimeVariables.replace("Virtual Hosting Test Communit"));
+		selenium.type("_134_name",
+			RuntimeVariables.replace("Virtual Hosting Test Community"));
+		selenium.typeKeys("_134_description",
+			RuntimeVariables.replace(
+				"This is the Virtual Hosting test communit."));
+		selenium.type("_134_description",
+			RuntimeVariables.replace(
+				"This is the Virtual Hosting test community."));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertTrue(selenium.isTextPresent("Virtual Hosting Test Community"));
 	}
 }
