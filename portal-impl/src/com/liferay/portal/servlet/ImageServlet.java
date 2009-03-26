@@ -40,6 +40,7 @@ import com.liferay.portal.util.ContentTypeUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
+import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.IOException;
@@ -134,9 +135,17 @@ public class ImageServlet extends HttpServlet {
 		long imageId = getImageId(request);
 
 		Image image = null;
+		IGImage igImage = null;
 
 		if (imageId > 0) {
 			image = ImageLocalServiceUtil.getImage(imageId);
+
+			try {
+				igImage = IGImageLocalServiceUtil.getImageByLargeImageId(
+					image.getImageId());
+			}
+			catch (Exception e) {
+			}
 		}
 		else {
 			String uuid = ParamUtil.getString(request, "uuid");
@@ -144,9 +153,8 @@ public class ImageServlet extends HttpServlet {
 
 			try {
 				if (Validator.isNotNull(uuid) && (groupId > 0)) {
-					IGImage igImage =
-						IGImageLocalServiceUtil.getImageByUuidAndGroupId(
-							uuid, groupId);
+					igImage = IGImageLocalServiceUtil.getImageByUuidAndGroupId(
+						uuid, groupId);
 
 					image = ImageLocalServiceUtil.getImage(
 						igImage.getLargeImageId());
@@ -154,6 +162,11 @@ public class ImageServlet extends HttpServlet {
 			}
 			catch (Exception e) {
 			}
+		}
+
+		if (igImage != null) {
+			TagsAssetLocalServiceUtil.incrementViewCounter(
+				IGImage.class.getName(), igImage.getImageId());
 		}
 
 		if (getDefault) {
