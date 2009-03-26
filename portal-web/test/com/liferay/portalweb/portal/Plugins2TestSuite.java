@@ -30,6 +30,7 @@ import com.liferay.portalweb.portlet.samplephp.SamplePHPTests;
 import com.liferay.portalweb.portlet.sampleportalclient.SamplePortalClientTests;
 import com.liferay.portalweb.portlet.samplepython.SamplePythonTests;
 import com.liferay.portalweb.portlet.sampleruby.SampleRubyTests;
+import com.liferay.portalweb.portlet.samplesearchcontainer.SampleSearchContainerTests;
 import com.liferay.portalweb.portlet.sampleservicebuilder.SampleServiceBuilderTests;
 import com.liferay.portalweb.portlet.samplesignin.SampleSignInTests;
 import com.liferay.portalweb.portlet.samplespring.SampleSpringTests;
@@ -86,6 +87,7 @@ public class Plugins2TestSuite extends BaseTests {
 		testSuite.addTest(SamplePortalClientTests.suite());
 		testSuite.addTest(SamplePythonTests.suite());
 		testSuite.addTest(SampleRubyTests.suite());
+		testSuite.addTest(SampleSearchContainerTests.suite());
 		testSuite.addTest(SampleServiceBuilderTests.suite());
 		testSuite.addTest(SampleSignInTests.suite());
 		testSuite.addTest(SampleSpringTests.suite());

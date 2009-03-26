@@ -38,6 +38,7 @@ import com.liferay.portalweb.portlet.rubyconsole.RubyConsoleTests;
 import com.liferay.portalweb.portlet.sampledao.SampleDAOTests;
 import com.liferay.portalweb.portlet.samplegroovy.SampleGroovyTests;
 import com.liferay.portalweb.portlet.samplehibernate.SampleHibernateTests;
+import com.liferay.portalweb.portlet.sampleicefacesipcajaxpush.SampleIcefacesIPCAjaxPushTests;
 import com.liferay.portalweb.portlet.sampleicefacesjsf11sunfacelets.SampleIcefacesJSF11SunFaceletsTests;
 import com.liferay.portalweb.portlet.sampleicefacesjsf11sunjsp.SampleIcefacesJSF11SunJSPTests;
 import com.liferay.portalweb.portlet.sampleicefacesjsf11sunmyfacesjsp.SampleIcefacesJSF11SunMyfacesJSPTests;
@@ -85,6 +86,7 @@ public class Plugins1TestSuite extends BaseTests {
 		testSuite.addTest(SampleDAOTests.suite());
 		testSuite.addTest(SampleGroovyTests.suite());
 		testSuite.addTest(SampleHibernateTests.suite());
+		testSuite.addTest(SampleIcefacesIPCAjaxPushTests.suite());
 		testSuite.addTest(SampleIcefacesJSF11SunFaceletsTests.suite());
 		testSuite.addTest(SampleIcefacesJSF11SunJSPTests.suite());
 		testSuite.addTest(SampleIcefacesJSF11SunMyfacesJSPTests.suite());
