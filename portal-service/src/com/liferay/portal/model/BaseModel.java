@@ -38,6 +38,10 @@ public interface BaseModel<T> extends Cloneable, Comparable<T>, Serializable {
 
 	public boolean setNew(boolean n);
 
+	public boolean isCachedModel();
+
+	public void setCachedModel(boolean cachedModel);
+
 	public boolean isEscapedModel();
 
 	public void setEscapedModel(boolean escapedModel);

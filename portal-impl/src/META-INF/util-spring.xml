@@ -68,6 +68,13 @@
 			<bean class="com.liferay.portal.dao.orm.hibernate.DynamicQueryFactoryImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.kernel.dao.orm.EntityCacheUtil" class="com.liferay.portal.kernel.dao.orm.EntityCacheUtil">
+		<property name="entityCache">
+			<bean class="com.liferay.portal.dao.orm.hibernate.EntityCacheImpl">
+				<property name="multiVMPool" ref="com.liferay.portal.kernel.cache.MultiVMPool" />
+			</bean>
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.dao.orm.FinderCacheUtil" class="com.liferay.portal.kernel.dao.orm.FinderCacheUtil">
 		<property name="finderCache">
 			<bean class="com.liferay.portal.dao.orm.hibernate.FinderCacheImpl">

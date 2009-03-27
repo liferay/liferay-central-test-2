@@ -815,8 +815,7 @@ public class ServiceBuilder {
 						finderEl.attributeValue("return-type");
 					boolean finderUnique = GetterUtil.getBoolean(
 						finderEl.attributeValue("unique"), false);
-					String finderWhere =
-						finderEl.attributeValue("where");
+					String finderWhere = finderEl.attributeValue("where");
 					boolean finderDBIndex = GetterUtil.getBoolean(
 						finderEl.attributeValue("db-index"), true);
 
@@ -843,6 +842,12 @@ public class ServiceBuilder {
 
 						EntityColumn col = Entity.getColumn(
 							finderColName, columnList);
+
+						if (!col.isFetchFinderPath() &&
+							!finderReturn.equals("Collection")) {
+
+							col.setFetchFinderPath(true);
+						}
 
 						col = (EntityColumn)col.clone();
 

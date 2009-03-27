@@ -48,7 +48,7 @@ public class BatchSessionImpl implements BatchSession {
 	public void update(Session session, BaseModel<?> model, boolean merge)
 		throws ORMException {
 
-		if (merge) {
+		if (merge || model.isCachedModel()) {
 			session.merge(model);
 		}
 		else {

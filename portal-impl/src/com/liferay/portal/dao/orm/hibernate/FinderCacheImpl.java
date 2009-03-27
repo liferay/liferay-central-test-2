@@ -27,14 +27,13 @@ import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.cache.CacheRegistryItem;
 import com.liferay.portal.kernel.cache.MultiVMPool;
 import com.liferay.portal.kernel.cache.PortalCache;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
-import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.SessionFactory;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.BaseModel;
-import com.liferay.portal.util.PropsKeys;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
 
@@ -50,9 +49,6 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  */
 public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
-
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(
-		PropsUtil.get(PropsKeys.VALUE_OBJECT_FINDER_CACHE_ENABLED), true);
 
 	public static final String CACHE_NAME = FinderCache.class.getName();
 
@@ -80,26 +76,23 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 	}
 
 	public Object getResult(
-		String className, String methodName, String[] params, Object[] args,
-		SessionFactory sessionFactory) {
+		FinderPath finderPath, Object[] args, SessionFactory sessionFactory) {
 
-		PortalCache portalCache = _getPortalCache(className);
+		if (!PropsValues.VALUE_OBJECT_FINDER_CACHE_ENABLED ||
+			!finderPath.isFinderCacheEnabled() || !CacheRegistry.isActive()) {
 
-		String key = _encodeKey(className, methodName, params, args);
+			return null;
+		}
+
+		PortalCache portalCache = _getPortalCache(finderPath.getClassName());
+
+		String key = _encodeKey(
+			finderPath.getMethodName(), finderPath.getParams(), args);
 
 		Object primaryKey = _multiVMPool.get(portalCache, key);
 
 		if (primaryKey != null) {
-			Session session = null;
-
-			try {
-				session = sessionFactory.openSession();
-
-				return _primaryKeyToResult(session, primaryKey);
-			}
-			finally {
-				sessionFactory.closeSession(session);
-			}
+			return _primaryKeyToResult(finderPath, sessionFactory, primaryKey);
 		}
 		else {
 			return null;
@@ -110,19 +103,35 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 		clearCache();
 	}
 
-	public void putResult(
-		boolean classNameCacheEnabled, String className, String methodName,
-		String[] params, Object[] args, Object result) {
+	public void putResult(FinderPath finderPath, Object[] args, Object result) {
+		if (!PropsValues.VALUE_OBJECT_FINDER_CACHE_ENABLED ||
+			!finderPath.isFinderCacheEnabled() || !CacheRegistry.isActive() ||
+			(result == null)) {
 
-		if (classNameCacheEnabled && CACHE_ENABLED &&
-			CacheRegistry.isActive() && (result != null)) {
-
-			PortalCache portalCache = _getPortalCache(className);
-
-			String key = _encodeKey(className, methodName, params, args);
-
-			_multiVMPool.put(portalCache, key, _resultToPrimaryKey(result));
+			return;
 		}
+
+		PortalCache portalCache = _getPortalCache(finderPath.getClassName());
+
+		String key = _encodeKey(
+			finderPath.getMethodName(), finderPath.getParams(), args);
+
+		_multiVMPool.put(portalCache, key, _resultToPrimaryKey(result));
+	}
+
+	public void removeResult(FinderPath finderPath, Object[] args) {
+		if (!PropsValues.VALUE_OBJECT_FINDER_CACHE_ENABLED ||
+			!finderPath.isFinderCacheEnabled() || !CacheRegistry.isActive()) {
+
+			return;
+		}
+
+		PortalCache portalCache = _getPortalCache(finderPath.getClassName());
+
+		String key = _encodeKey(
+			finderPath.getMethodName(), finderPath.getParams(), args);
+
+		_multiVMPool.remove(portalCache, key);
 	}
 
 	public void setMultiVMPool(MultiVMPool multiVMPool) {
@@ -140,7 +149,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 	}
 
 	private String _encodeKey(
-		String className, String methodName, String[] params, Object[] args) {
+		String methodName, String[] params, Object[] args) {
 
 		StringBuilder sb = new StringBuilder();
 
@@ -177,7 +186,8 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 	}
 
 	private Object _primaryKeyToResult(
-		Session session, Object primaryKey) {
+		FinderPath finderPath, SessionFactory sessionFactory,
+		Object primaryKey) {
 
 		if (primaryKey instanceof CacheKVP) {
 			CacheKVP cacheKVP = (CacheKVP)primaryKey;
@@ -185,7 +195,9 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 			Class<?> modelClass = cacheKVP.getModelClass();
 			Serializable primaryKeyObj = cacheKVP.getPrimaryKeyObj();
 
-			return session.load(modelClass, primaryKeyObj);
+			return EntityCacheUtil.loadResult(
+				finderPath.isEntityCacheEnabled(), modelClass, primaryKeyObj,
+				sessionFactory);
 		}
 		else if (primaryKey instanceof List) {
 			List<Object> cachedList = (List<Object>)primaryKey;
@@ -193,7 +205,8 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 			List<Object> list = new ArrayList<Object>(cachedList.size());
 
 			for (Object curPrimaryKey : cachedList) {
-				Object result = _primaryKeyToResult(session, curPrimaryKey);
+				Object result = _primaryKeyToResult(
+					finderPath, sessionFactory, curPrimaryKey);
 
 				list.add(result);
 			}

@@ -76,7 +76,17 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 
 	public static final String TX_MANAGER = "${entity.getTXManager()}";
 
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(${propsUtil}.get("value.object.finder.cache.enabled.${packagePath}.model.${entity.name}"),
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(${propsUtil}.get("value.object.entity.cache.enabled.${packagePath}.model.${entity.name}"),
+
+	<#if entity.isCacheEnabled()>
+		true
+	<#else>
+		false
+	</#if>
+
+	);
+
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(${propsUtil}.get("value.object.finder.cache.enabled.${packagePath}.model.${entity.name}"),
 
 	<#if entity.isCacheEnabled()>
 		true
@@ -108,7 +118,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 
 	<#list entity.columnList as column>
 		<#if column.mappingTable??>
-			public static final boolean CACHE_ENABLED_${stringUtil.upperCase(column.mappingTable)} =
+			public static final boolean FINDER_CACHE_ENABLED_${stringUtil.upperCase(column.mappingTable)} =
 
 			<#assign entityShortName = stringUtil.shorten(entity.name, 10, "")>
 
@@ -117,7 +127,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 			<#else>
 				<#assign tempEntity = serviceBuilder.getEntity(column.getEJBName())>
 
-				${tempEntity.packagePath}.model.impl.${tempEntity.name}ModelImpl.CACHE_ENABLED_${stringUtil.upperCase(column.mappingTable)}
+				${tempEntity.packagePath}.model.impl.${tempEntity.name}ModelImpl.FINDER_CACHE_ENABLED_${stringUtil.upperCase(column.mappingTable)}
 			</#if>
 
 			;
@@ -214,8 +224,14 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 
 		public void set${column.methodName}(${column.type} ${column.name}) {
 			<#if column.name == "uuid">
-				if ((uuid != null) && (uuid != _uuid)) {
+				if ((uuid != null) && !uuid.equals(_uuid)) {
 					_uuid = uuid;
+
+					<#if column.isFetchFinderPath()>
+						if (_originalUuid == null) {
+							_originalUuid = uuid;
+						}
+					</#if>
 				}
 			<#else>
 				if (
@@ -230,9 +246,32 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 
 				) {
 					_${column.name} = ${column.name};
+
+					<#if column.isFetchFinderPath()>
+						<#if column.isPrimitiveType()>
+							if (!_setOriginal${column.methodName}) {
+								_setOriginal${column.methodName} = true;
+						<#else>
+							if (_original${column.methodName} == null) {
+						</#if>
+
+							_original${column.methodName} = ${column.name};
+						}
+					</#if>
+
 				}
 			</#if>
 		}
+
+		<#if column.isFetchFinderPath()>
+			public ${column.type} getOriginal${column.methodName}() {
+				<#if column.type == "String" && column.isConvertNull()>
+					return GetterUtil.getString(_original${column.methodName});
+				<#else>
+					return _original${column.methodName};
+				</#if>
+			}
+		</#if>
 	</#list>
 
 	public ${entity.name} toEscapedModel() {
@@ -422,6 +461,14 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 
 	<#list entity.regularColList as column>
 		private ${column.type} _${column.name};
+
+		<#if column.isFetchFinderPath()>
+			private ${column.type} _original${column.methodName};
+
+			<#if column.isPrimitiveType()>
+				private boolean _setOriginal${column.methodName};
+			</#if>
+		</#if>
 	</#list>
 
 	<#if (entity.PKClassName == "long") && !stringUtil.startsWith(entity.name, "Expando")>

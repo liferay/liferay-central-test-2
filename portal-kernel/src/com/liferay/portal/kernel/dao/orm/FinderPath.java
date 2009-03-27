@@ -23,24 +23,48 @@
 package com.liferay.portal.kernel.dao.orm;
 
 /**
- * <a href="FinderCache.java.html"><b><i>View Source</i></b></a>
+ * <a href="FinderPath.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface FinderCache {
+public class FinderPath {
 
-	public void clearCache();
+	public FinderPath(
+		boolean entityCacheEnabled, boolean finderCacheEnabled,
+		String className, String methodName, String[] params) {
 
-	public void clearCache(String className);
+		_entityCacheEnabled = entityCacheEnabled;
+		_finderCacheEnabled = finderCacheEnabled;
+		_className = className;
+		_methodName = methodName;
+		_params = params;
+	}
 
-	public Object getResult(
-		FinderPath finderPath, Object[] args, SessionFactory sessionFactory);
+	public String getClassName() {
+		return _className;
+	}
 
-	public void invalidate();
+	public String getMethodName() {
+		return _methodName;
+	}
 
-	public void putResult(FinderPath finderPath, Object[] args, Object result);
+	public String[] getParams() {
+		return _params;
+	}
 
-	public void removeResult(FinderPath finderPath, Object[] args);
+	public boolean isEntityCacheEnabled() {
+		return _entityCacheEnabled;
+	}
+
+	public boolean isFinderCacheEnabled() {
+		return _finderCacheEnabled;
+	}
+
+	private String _className;
+	private boolean _entityCacheEnabled;
+	private boolean _finderCacheEnabled;
+	private String _methodName;
+	private String[] _params;
 
 }

@@ -22,25 +22,36 @@
 
 package com.liferay.portal.kernel.dao.orm;
 
+import java.io.Serializable;
+
 /**
- * <a href="FinderCache.java.html"><b><i>View Source</i></b></a>
+ * <a href="EntityCache.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface FinderCache {
+public interface EntityCache {
 
 	public void clearCache();
 
 	public void clearCache(String className);
 
 	public Object getResult(
-		FinderPath finderPath, Object[] args, SessionFactory sessionFactory);
+		boolean entityCacheEnabled, Class<?> classObj,
+		Serializable primaryKeyObj, SessionFactory sessionFactory);
 
 	public void invalidate();
 
-	public void putResult(FinderPath finderPath, Object[] args, Object result);
+	public Object loadResult(
+		boolean entityCacheEnabled, Class<?> classObj,
+		Serializable primaryKeyObj, SessionFactory sessionFactory);
 
-	public void removeResult(FinderPath finderPath, Object[] args);
+	public void putResult(
+		boolean entityCacheEnabled, Class<?> classObj,
+		Serializable primaryKeyObj, Object result);
+
+	public void removeResult(
+		boolean entityCacheEnabled, Class<?> classObj,
+		Serializable primaryKeyObj);
 
 }

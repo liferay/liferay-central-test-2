@@ -13,6 +13,13 @@
 		overflowToDisk="false"
 	/>
 	<cache
+		name="com.liferay.portal.kernel.dao.orm.EntityCache"
+		maxElementsInMemory="10000"
+		eternal="false"
+        timeToIdleSeconds="600"
+		overflowToDisk="false"
+	/>
+	<cache
 		name="com.liferay.portal.kernel.dao.orm.FinderCache"
 		maxElementsInMemory="10000"
 		eternal="false"

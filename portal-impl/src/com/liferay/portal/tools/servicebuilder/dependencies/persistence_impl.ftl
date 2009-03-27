@@ -15,7 +15,9 @@ import com.liferay.portal.kernel.dao.jdbc.RowMapper;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -46,6 +48,131 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implements ${entity.name}Persistence {
+
+	public static final String FINDER_CLASS_NAME_ENTITY = ${entity.name}.class.getName();
+
+	public static final String FINDER_CLASS_NAME_LIST = ${entity.name}.class.getName() + ".List";
+
+	<#list entity.getFinderList() as finder>
+		<#assign finderColsList = finder.getColumns()>
+
+		<#if finder.isCollection()>
+			public static final FinderPath FINDER_PATH_FIND_BY_${finder.name?upper_case} = new FinderPath(
+				${entity.name}ModelImpl.ENTITY_CACHE_ENABLED,
+				${entity.name}ModelImpl.FINDER_CACHE_ENABLED,
+				FINDER_CLASS_NAME_LIST,
+				"findBy${finder.name}",
+				new String[] {
+					<#list finderColsList as finderCol>
+						${serviceBuilder.getPrimitiveObj("${finderCol.type}")}.class.getName()
+
+						<#if finderCol_has_next>
+							,
+						</#if>
+					</#list>
+				});
+
+			public static final FinderPath FINDER_PATH_FIND_BY_OBC_${finder.name?upper_case} = new FinderPath(
+				${entity.name}ModelImpl.ENTITY_CACHE_ENABLED,
+				${entity.name}ModelImpl.FINDER_CACHE_ENABLED,
+				FINDER_CLASS_NAME_LIST,
+				"findBy${finder.name}",
+				new String[] {
+					<#list finderColsList as finderCol>
+						${serviceBuilder.getPrimitiveObj("${finderCol.type}")}.class.getName(),
+					</#list>
+
+					"java.lang.Integer", "java.lang.Integer", "com.liferay.portal.kernel.util.OrderByComparator"
+				});
+		<#else>
+			public static final FinderPath FINDER_PATH_FETCH_BY_${finder.name?upper_case} = new FinderPath(
+				${entity.name}ModelImpl.ENTITY_CACHE_ENABLED,
+				${entity.name}ModelImpl.FINDER_CACHE_ENABLED,
+				FINDER_CLASS_NAME_ENTITY,
+				"fetchBy${finder.name}",
+				new String[] {
+					<#list finderColsList as finderCol>
+						${serviceBuilder.getPrimitiveObj("${finderCol.type}")}.class.getName()
+
+						<#if finderCol_has_next>
+							,
+						</#if>
+					</#list>
+				});
+		</#if>
+
+		public static final FinderPath FINDER_PATH_COUNT_BY_${finder.name?upper_case} = new FinderPath(
+			${entity.name}ModelImpl.ENTITY_CACHE_ENABLED,
+			${entity.name}ModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST,
+			"countBy${finder.name}",
+			new String[] {
+				<#list finderColsList as finderCol>
+					${serviceBuilder.getPrimitiveObj("${finderCol.type}")}.class.getName()
+
+					<#if finderCol_has_next>
+						,
+					</#if>
+				</#list>
+			});
+	</#list>
+
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(
+		${entity.name}ModelImpl.ENTITY_CACHE_ENABLED,
+		${entity.name}ModelImpl.FINDER_CACHE_ENABLED,
+		FINDER_CLASS_NAME_LIST,
+		"findAll",
+		new String[0]);
+
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(
+		${entity.name}ModelImpl.ENTITY_CACHE_ENABLED,
+		${entity.name}ModelImpl.FINDER_CACHE_ENABLED,
+		FINDER_CLASS_NAME_LIST,
+		"countAll",
+		new String[0]);
+
+	public void cacheResult(${entity.name} ${entity.varName}) {
+		<#list entity.getFinderList() as finder>
+			<#assign finderColsList = finder.getColumns()>
+
+			<#if !finder.isCollection()>
+				FinderCacheUtil.putResult(
+					FINDER_PATH_FETCH_BY_${finder.name?upper_case},
+					new Object[] {
+						<#list finderColsList as finderCol>
+							<#if finderCol.isPrimitiveType()>
+								<#if finderCol.type == "boolean">
+									Boolean.valueOf(
+								<#else>
+									new ${serviceBuilder.getPrimitiveObj("${finderCol.type}")}(
+								</#if>
+							</#if>
+
+							${entity.varName}.get${finderCol.methodName}()
+
+							<#if finderCol.isPrimitiveType()>
+								)
+							</#if>
+
+							<#if finderCol_has_next>
+								,
+							</#if>
+						</#list>
+					},
+					${entity.varName});
+			</#if>
+		</#list>
+
+		EntityCacheUtil.putResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}.class, ${entity.varName}.getPrimaryKey(), ${entity.varName});
+	}
+
+	public void cacheResult(List<${entity.name}> ${entity.varNames}) {
+		for (${entity.name} ${entity.varName} : ${entity.varNames}) {
+			if (EntityCacheUtil.getResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}.class, ${entity.varName}.getPrimaryKey(), this) == null) {
+				cacheResult(${entity.varName});
+			}
+		}
+	}
 
 	public ${entity.name} create(${entity.PKClassName} ${entity.PKVarName}) {
 		${entity.name} ${entity.varName} = new ${entity.name}Impl();
@@ -150,17 +277,51 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 			session.delete(${entity.varName});
 
 			session.flush();
-
-			return ${entity.varName};
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(${entity.name}.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		${entity.name}ModelImpl ${entity.varName}ModelImpl = (${entity.name}ModelImpl)${entity.varName};
+
+		<#list entity.getFinderList() as finder>
+			<#assign finderColsList = finder.getColumns()>
+
+			<#if !finder.isCollection()>
+				FinderCacheUtil.removeResult(
+					FINDER_PATH_FETCH_BY_${finder.name?upper_case},
+					new Object[] {
+						<#list finderColsList as finderCol>
+							<#if finderCol.isPrimitiveType()>
+								<#if finderCol.type == "boolean">
+									Boolean.valueOf(
+								<#else>
+									new ${serviceBuilder.getPrimitiveObj("${finderCol.type}")}(
+								</#if>
+							</#if>
+
+							${entity.varName}ModelImpl.getOriginal${finderCol.methodName}()
+
+							<#if finderCol.isPrimitiveType()>
+								)
+							</#if>
+
+							<#if finderCol_has_next>
+								,
+							</#if>
+						</#list>
+					});
+			</#if>
+		</#list>
+
+		EntityCacheUtil.removeResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}.class, ${entity.varName}.getPrimaryKey());
+
+		return ${entity.varName};
 	}
 
 	/**
@@ -214,11 +375,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 	}
 
 	public ${entity.name} updateImpl(${packagePath}.model.${entity.name} ${entity.varName}, boolean merge) throws SystemException {
-		<#list entity.columnList as column>
-			<#if column.isCollection() && column.isMappingManyToMany()>
-				FinderCacheUtil.clearCache("${column.mappingTable}");
-			</#if>
-		</#list>
+		boolean isNew = ${entity.varName}.isNew();
 
 		<#if entity.hasUuid()>
 			if (Validator.isNull(${entity.varName}.getUuid())) {
@@ -236,17 +393,108 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 			BatchSessionUtil.update(session, ${entity.varName}, merge);
 
 			${entity.varName}.setNew(false);
-
-			return ${entity.varName};
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(${entity.name}.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		${entity.name}ModelImpl ${entity.varName}ModelImpl = (${entity.name}ModelImpl)${entity.varName};
+
+		<#list entity.getFinderList() as finder>
+			<#assign finderColsList = finder.getColumns()>
+
+			<#if !finder.isCollection()>
+				if (
+						!isNew && (
+							<#list finderColsList as finderCol>
+								<#if finderCol.isPrimitiveType()>
+									${entity.varName}.get${finderCol.methodName}() != ${entity.varName}ModelImpl.getOriginal${finderCol.methodName}()
+								<#else>
+									!${entity.varName}.get${finderCol.methodName}().equals(${entity.varName}ModelImpl.getOriginal${finderCol.methodName}())
+								</#if>
+
+								<#if finderCol_has_next>
+									||
+								</#if>
+							</#list>
+						)
+				) {
+					FinderCacheUtil.removeResult(
+						FINDER_PATH_FETCH_BY_${finder.name?upper_case},
+						new Object[] {
+							<#list finderColsList as finderCol>
+								<#if finderCol.isPrimitiveType()>
+									<#if finderCol.type == "boolean">
+										Boolean.valueOf(
+									<#else>
+										new ${serviceBuilder.getPrimitiveObj("${finderCol.type}")}(
+									</#if>
+								</#if>
+
+								${entity.varName}ModelImpl.getOriginal${finderCol.methodName}()
+
+								<#if finderCol.isPrimitiveType()>
+									)
+								</#if>
+
+								<#if finderCol_has_next>
+									,
+								</#if>
+							</#list>
+						});
+				}
+
+				if (
+						isNew || (
+							<#list finderColsList as finderCol>
+								<#if finderCol.isPrimitiveType()>
+									${entity.varName}.get${finderCol.methodName}() != ${entity.varName}ModelImpl.getOriginal${finderCol.methodName}()
+								<#else>
+									!${entity.varName}.get${finderCol.methodName}().equals(${entity.varName}ModelImpl.getOriginal${finderCol.methodName}())
+								</#if>
+
+								<#if finderCol_has_next>
+									||
+								</#if>
+							</#list>
+						)
+				) {
+					FinderCacheUtil.putResult(
+						FINDER_PATH_FETCH_BY_${finder.name?upper_case},
+						new Object[] {
+							<#list finderColsList as finderCol>
+								<#if finderCol.isPrimitiveType()>
+									<#if finderCol.type == "boolean">
+										Boolean.valueOf(
+									<#else>
+										new ${serviceBuilder.getPrimitiveObj("${finderCol.type}")}(
+									</#if>
+								</#if>
+
+								${entity.varName}.get${finderCol.methodName}()
+
+								<#if finderCol.isPrimitiveType()>
+									)
+								</#if>
+
+								<#if finderCol_has_next>
+									,
+								</#if>
+							</#list>
+						},
+						${entity.varName});
+				}
+			</#if>
+		</#list>
+
+		EntityCacheUtil.putResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}.class, ${entity.varName}.getPrimaryKey(), ${entity.varName});
+
+		return ${entity.varName};
 	}
 
 	public ${entity.name} findByPrimaryKey(${entity.PKClassName} ${entity.PKVarName}) throws ${noSuchEntity}Exception, SystemException {
@@ -264,30 +512,41 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 	}
 
 	public ${entity.name} fetchByPrimaryKey(${entity.PKClassName} ${entity.PKVarName}) throws SystemException {
-		Session session = null;
+		${entity.name} result = (${entity.name})EntityCacheUtil.getResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}.class, ${entity.PKVarName}, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (${entity.name})session.get(${entity.name}Impl.class,
+			try {
+				session = openSession();
 
-			<#if entity.hasPrimitivePK()>
-				new ${serviceBuilder.getPrimitiveObj("${entity.PKClassName}")}(
-			</#if>
+				${entity.name} ${entity.varName} = (${entity.name})session.get(${entity.name}Impl.class,
 
-			${entity.PKVarName}
+				<#if entity.hasPrimitivePK()>
+					new ${serviceBuilder.getPrimitiveObj("${entity.PKClassName}")}(
+				</#if>
 
-			<#if entity.hasPrimitivePK()>
-				)
-			</#if>
+				${entity.PKVarName}
 
-			);
+				<#if entity.hasPrimitivePK()>
+					)
+				</#if>
+
+				);
+
+				cacheResult(${entity.varName});
+
+				return ${entity.varName};
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (${entity.name})result;
 		}
 	}
 
@@ -306,18 +565,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 			</#list>
 
 			) throws SystemException {
-				boolean finderClassNameCacheEnabled = ${entity.name}ModelImpl.CACHE_ENABLED;
-				String finderClassName = ${entity.name}.class.getName();
-				String finderMethodName = "findBy${finder.name}";
-				String[] finderParams = new String[] {
-					<#list finderColsList as finderCol>
-						${serviceBuilder.getPrimitiveObj("${finderCol.type}")}.class.getName()
-
-						<#if finderCol_has_next>
-							,
-						</#if>
-					</#list>
-				};
 				Object[] finderArgs = new Object[] {
 					<#list finderColsList as finderCol>
 						<#if finderCol.isPrimitiveType()>
@@ -340,11 +587,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					</#list>
 				};
 
-				Object result = null;
-
-				if (finderClassNameCacheEnabled) {
-					result = FinderCacheUtil.getResult(finderClassName, finderMethodName, finderParams, finderArgs, this);
-				}
+				Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_${finder.name?upper_case}, finderArgs, this);
 
 				if (result == null) {
 					Session session = null;
@@ -429,7 +672,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 						List<${entity.name}> list = q.list();
 
-						FinderCacheUtil.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
+						FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_${finder.name?upper_case}, finderArgs, list);
+
+						cacheResult(list);
 
 						return list;
 					}
@@ -468,16 +713,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 			</#list>
 
 			int start, int end, OrderByComparator obc) throws SystemException {
-				boolean finderClassNameCacheEnabled = ${entity.name}ModelImpl.CACHE_ENABLED;
-				String finderClassName = ${entity.name}.class.getName();
-				String finderMethodName = "findBy${finder.name}";
-				String[] finderParams = new String[] {
-					<#list finderColsList as finderCol>
-						${serviceBuilder.getPrimitiveObj("${finderCol.type}")}.class.getName(),
-					</#list>
-
-					"java.lang.Integer", "java.lang.Integer", "com.liferay.portal.kernel.util.OrderByComparator"
-				};
 				Object[] finderArgs = new Object[] {
 					<#list finderColsList as finderCol>
 						<#if finderCol.isPrimitiveType()>
@@ -500,11 +735,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 				};
 
-				Object result = null;
-
-				if (finderClassNameCacheEnabled) {
-					result = FinderCacheUtil.getResult(finderClassName, finderMethodName, finderParams, finderArgs, this);
-				}
+				Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_${finder.name?upper_case}, finderArgs, this);
 
 				if (result == null) {
 					Session session = null;
@@ -596,7 +827,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 						List<${entity.name}> list = (List<${entity.name}>)QueryUtil.list(q, getDialect(), start, end);
 
-						FinderCacheUtil.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
+						FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_${finder.name?upper_case}, finderArgs, list);
+
+						cacheResult(list);
 
 						return list;
 					}
@@ -627,7 +860,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 				0, 1, obc);
 
-				if (list.size() == 0) {
+				if (list.isEmpty()) {
 					StringBuilder msg = new StringBuilder();
 
 					msg.append("No ${entity.name} exists with the key {");
@@ -676,7 +909,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 				count - 1, count, obc);
 
-				if (list.size() == 0) {
+				if (list.isEmpty()) {
 					StringBuilder msg = new StringBuilder();
 
 					msg.append("No ${entity.name} exists with the key {");
@@ -884,18 +1117,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 			</#list>
 
 			) throws SystemException {
-				boolean finderClassNameCacheEnabled = ${entity.name}ModelImpl.CACHE_ENABLED;
-				String finderClassName = ${entity.name}.class.getName();
-				String finderMethodName = "fetchBy${finder.name}";
-				String[] finderParams = new String[] {
-					<#list finderColsList as finderCol>
-						${serviceBuilder.getPrimitiveObj("${finderCol.type}")}.class.getName()
-
-						<#if finderCol_has_next>
-							,
-						</#if>
-					</#list>
-				};
 				Object[] finderArgs = new Object[] {
 					<#list finderColsList as finderCol>
 						<#if finderCol.isPrimitiveType()>
@@ -918,11 +1139,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					</#list>
 				};
 
-				Object result = null;
-
-				if (finderClassNameCacheEnabled) {
-					result = FinderCacheUtil.getResult(finderClassName, finderMethodName, finderParams, finderArgs, this);
-				}
+				Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_${finder.name?upper_case}, finderArgs, this);
 
 				if (result == null) {
 					Session session = null;
@@ -1007,14 +1224,18 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 						List<${entity.name}> list = q.list();
 
-						FinderCacheUtil.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
+						${entity.name} ${entity.varName} = null;
 
-						if (list.size() == 0) {
-							return null;
+						if (list.isEmpty()) {
+							FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_${finder.name?upper_case}, finderArgs, list);
 						}
 						else {
-							return list.get(0);
+							${entity.varName} = list.get(0);
+
+							cacheResult(${entity.varName});
 						}
+
+						return ${entity.varName};
 					}
 					catch (Exception e) {
 						throw processException(e);
@@ -1024,13 +1245,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					}
 				}
 				else {
-					List<${entity.name}> list = (List<${entity.name}>)result;
-
-					if (list.size() == 0) {
+					if (result instanceof List) {
 						return null;
 					}
 					else {
-						return list.get(0);
+						return (${entity.name})result;
 					}
 				}
 			}
@@ -1084,17 +1303,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 	}
 
 	public List<${entity.name}> findAll(int start, int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = ${entity.name}ModelImpl.CACHE_ENABLED;
-		String finderClassName = ${entity.name}.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {"java.lang.Integer", "java.lang.Integer", "com.liferay.portal.kernel.util.OrderByComparator"};
 		Object[] finderArgs = new Object[] {String.valueOf(start), String.valueOf(end), String.valueOf(obc)};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName, finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL, finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1136,7 +1347,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					list = (List<${entity.name}>)QueryUtil.list(q, getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1226,18 +1439,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 		</#list>
 
 		) throws SystemException {
-			boolean finderClassNameCacheEnabled = ${entity.name}ModelImpl.CACHE_ENABLED;
-			String finderClassName = ${entity.name}.class.getName();
-			String finderMethodName = "countBy${finder.name}";
-			String[] finderParams = new String[] {
-				<#list finderColsList as finderCol>
-					${serviceBuilder.getPrimitiveObj("${finderCol.type}")}.class.getName()
-
-					<#if finderCol_has_next>
-						,
-					</#if>
-				</#list>
-			};
 			Object[] finderArgs = new Object[] {
 				<#list finderColsList as finderCol>
 					<#if finderCol.isPrimitiveType()>
@@ -1260,11 +1461,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 				</#list>
 			};
 
-			Object result = null;
-
-			if (finderClassNameCacheEnabled) {
-				result = FinderCacheUtil.getResult(finderClassName, finderMethodName, finderParams, finderArgs, this);
-			}
+			Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_${finder.name?upper_case}, finderArgs, this);
 
 			if (result == null) {
 				Session session = null;
@@ -1350,7 +1547,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 						count = new Long(0);
 					}
 
-					FinderCacheUtil.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, count);
+					FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_${finder.name?upper_case}, finderArgs, count);
 
 					return count.intValue();
 				}
@@ -1368,17 +1565,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 	</#list>
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = ${entity.name}ModelImpl.CACHE_ENABLED;
-		String finderClassName = ${entity.name}.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {};
-		Object[] finderArgs = new Object[] {};
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName, finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL, finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1400,7 +1589,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs, count);
 
 				return count.intValue();
 			}
@@ -1428,25 +1617,23 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 				return get${tempEntity.names}(pk, start, end, null);
 			}
 
-			public List<${tempEntity.packagePath}.model.${tempEntity.name}> get${tempEntity.names}(${entity.PKClassName} pk, int start, int end, OrderByComparator obc) throws SystemException {
-				boolean finderClassNameCacheEnabled =
-					<#if column.mappingTable??>
-						${entity.name}ModelImpl.CACHE_ENABLED_${stringUtil.upperCase(column.mappingTable)}
-					<#else>
-						${tempEntity.packagePath}.model.impl.${tempEntity.name}ModelImpl.CACHE_ENABLED
-					</#if>
+			public static final FinderPath FINDER_PATH_GET_${tempEntity.names?upper_case} = new FinderPath(
+				${tempEntity.packagePath}.model.impl.${tempEntity.name}ModelImpl.ENTITY_CACHE_ENABLED,
 
-					;
-				String finderClassName =
-					<#if column.mappingTable??>
-						"${column.mappingTable}"
-					<#else>
-						${tempEntity.packagePath}.model.${tempEntity.name}.class.getName()
-					</#if>
+				<#if column.mappingTable??>
+					${entity.name}ModelImpl.FINDER_CACHE_ENABLED_${stringUtil.upperCase(column.mappingTable)},
+				<#else>
+					${tempEntity.packagePath}.model.impl.${tempEntity.name}ModelImpl.FINDER_CACHE_ENABLED,
+				</#if>
 
-					;
-				String finderMethodName = "get${tempEntity.names}";
-				String[] finderParams = new String[] {
+				<#if column.mappingTable??>
+					"${column.mappingTable}",
+				<#else>
+					${tempEntity.packagePath}.service.persistence.${tempEntity.name}PersistenceImpl.FINDER_CLASS_NAME_LIST,
+				</#if>
+
+				"get${tempEntity.names}",
+				new String[] {
 					<#if entity.hasPrimitivePK()>
 						${serviceBuilder.getPrimitiveObj(entity.getPKClassName())}
 					<#else>
@@ -1454,7 +1641,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					</#if>
 
 					.class.getName(), "java.lang.Integer", "java.lang.Integer", "com.liferay.portal.kernel.util.OrderByComparator"
-				};
+				});
+
+			public List<${tempEntity.packagePath}.model.${tempEntity.name}> get${tempEntity.names}(${entity.PKClassName} pk, int start, int end, OrderByComparator obc) throws SystemException {
 				Object[] finderArgs = new Object[] {
 					<#if entity.hasPrimitivePK()>
 						<#if entity.PKClassName == "boolean">
@@ -1473,11 +1662,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					, String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 				};
 
-				Object result = null;
-
-				if (finderClassNameCacheEnabled) {
-					result = FinderCacheUtil.getResult(finderClassName, finderMethodName, finderParams, finderArgs, this);
-				}
+				Object result = FinderCacheUtil.getResult(FINDER_PATH_GET_${tempEntity.names?upper_case}, finderArgs, this);
 
 				if (result == null) {
 					Session session = null;
@@ -1518,7 +1703,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 						List<${tempEntity.packagePath}.model.${tempEntity.name}> list = (List<${tempEntity.packagePath}.model.${tempEntity.name}>)QueryUtil.list(q, getDialect(), start, end);
 
-						FinderCacheUtil.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
+						FinderCacheUtil.putResult(FINDER_PATH_GET_${tempEntity.names?upper_case}, finderArgs, list);
+
+						${tempEntity.varName}Persistence.cacheResult(list);
 
 						return list;
 					}
@@ -1534,25 +1721,23 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 				}
 			}
 
-			public int get${tempEntity.names}Size(${entity.PKClassName} pk) throws SystemException {
-				boolean finderClassNameCacheEnabled =
-					<#if column.mappingTable??>
-						${entity.name}ModelImpl.CACHE_ENABLED_${stringUtil.upperCase(column.mappingTable)}
-					<#else>
-						${tempEntity.packagePath}.model.impl.${tempEntity.name}ModelImpl.CACHE_ENABLED
-					</#if>
+			public static final FinderPath FINDER_PATH_GET_${tempEntity.names?upper_case}_SIZE = new FinderPath(
+				${tempEntity.packagePath}.model.impl.${tempEntity.name}ModelImpl.ENTITY_CACHE_ENABLED,
 
-					;
-				String finderClassName =
-					<#if column.mappingTable??>
-						"${column.mappingTable}"
-					<#else>
-						${tempEntity.packagePath}.model.${tempEntity.name}.class.getName()
-					</#if>
+				<#if column.mappingTable??>
+					${entity.name}ModelImpl.FINDER_CACHE_ENABLED_${stringUtil.upperCase(column.mappingTable)},
+				<#else>
+					${tempEntity.packagePath}.model.impl.${tempEntity.name}ModelImpl.FINDER_CACHE_ENABLED,
+				</#if>
 
-					;
-				String finderMethodName = "get${tempEntity.names}Size";
-				String[] finderParams = new String[] {
+				<#if column.mappingTable??>
+					"${column.mappingTable}",
+				<#else>
+					${tempEntity.packagePath}.service.persistence.${tempEntity.name}PersistenceImpl.FINDER_CLASS_NAME_LIST,
+				</#if>
+
+				"get${tempEntity.names}Size",
+				new String[] {
 					<#if entity.hasPrimitivePK()>
 						${serviceBuilder.getPrimitiveObj(entity.getPKClassName())}
 					<#else>
@@ -1560,7 +1745,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					</#if>
 
 					.class.getName()
-				};
+				});
+
+			public int get${tempEntity.names}Size(${entity.PKClassName} pk) throws SystemException {
 				Object[] finderArgs = new Object[] {
 					<#if entity.hasPrimitivePK()>
 						<#if entity.PKClassName == "boolean">
@@ -1577,11 +1764,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					</#if>
 				};
 
-				Object result = null;
-
-				if (finderClassNameCacheEnabled) {
-					result = FinderCacheUtil.getResult(finderClassName, finderMethodName, finderParams, finderArgs, this);
-				}
+				Object result = FinderCacheUtil.getResult(FINDER_PATH_GET_${tempEntity.names?upper_case}_SIZE, finderArgs, this);
 
 				if (result == null) {
 					Session session = null;
@@ -1609,7 +1792,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 							count = new Long(0);
 						}
 
-						FinderCacheUtil.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, count);
+						FinderCacheUtil.putResult(FINDER_PATH_GET_${tempEntity.names?upper_case}_SIZE, finderArgs, count);
 
 						return count.intValue();
 					}
@@ -1625,25 +1808,23 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 				}
 			}
 
-			public boolean contains${tempEntity.name}(${entity.PKClassName} pk, ${tempEntity.PKClassName} ${tempEntity.varName}PK) throws SystemException {
-				boolean finderClassNameCacheEnabled =
-					<#if column.mappingTable??>
-						${entity.name}ModelImpl.CACHE_ENABLED_${stringUtil.upperCase(column.mappingTable)}
-					<#else>
-						${tempEntity.packagePath}.model.impl.${tempEntity.name}ModelImpl.CACHE_ENABLED
-					</#if>
+			public static final FinderPath FINDER_PATH_CONTAINS_${tempEntity.name?upper_case} = new FinderPath(
+				${tempEntity.packagePath}.model.impl.${tempEntity.name}ModelImpl.ENTITY_CACHE_ENABLED,
 
-					;
-				String finderClassName =
-					<#if column.mappingTable??>
-						"${column.mappingTable}"
-					<#else>
-						${tempEntity.packagePath}.model.${tempEntity.name}.class.getName()
-					</#if>
+				<#if column.mappingTable??>
+					${entity.name}ModelImpl.FINDER_CACHE_ENABLED_${stringUtil.upperCase(column.mappingTable)},
+				<#else>
+					${tempEntity.packagePath}.model.impl.${tempEntity.name}ModelImpl.FINDER_CACHE_ENABLED,
+				</#if>
 
-					;
-				String finderMethodName = "contains${tempEntity.names}";
-				String[] finderParams = new String[] {
+				<#if column.mappingTable??>
+					"${column.mappingTable}",
+				<#else>
+					${tempEntity.packagePath}.service.persistence.${tempEntity.name}PersistenceImpl.FINDER_CLASS_NAME_LIST,
+				</#if>
+
+				"contains${tempEntity.name}",
+				new String[] {
 					<#if entity.hasPrimitivePK()>
 						${serviceBuilder.getPrimitiveObj(entity.getPKClassName())}
 					<#else>
@@ -1659,7 +1840,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					</#if>
 
 					.class.getName()
-				};
+				});
+
+			public boolean contains${tempEntity.name}(${entity.PKClassName} pk, ${tempEntity.PKClassName} ${tempEntity.varName}PK) throws SystemException {
 				Object[] finderArgs = new Object[] {
 					<#if entity.hasPrimitivePK()>
 						<#if entity.PKClassName == "boolean">
@@ -1690,17 +1873,13 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					</#if>
 				};
 
-				Object result = null;
-
-				if (finderClassNameCacheEnabled) {
-					result = FinderCacheUtil.getResult(finderClassName, finderMethodName, finderParams, finderArgs, this);
-				}
+				Object result = FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_${tempEntity.name?upper_case}, finderArgs, this);
 
 				if (result == null) {
 					try {
 						Boolean value = Boolean.valueOf(contains${tempEntity.name}.contains(pk, ${tempEntity.varName}PK));
 
-						FinderCacheUtil.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, value);
+						FinderCacheUtil.putResult(FINDER_PATH_CONTAINS_${tempEntity.name?upper_case}, finderArgs, value);
 
 						return value.booleanValue();
 					}

@@ -182,6 +182,14 @@ public class EntityColumn implements Cloneable {
 		_convertNull = convertNull;
 	}
 
+	public boolean isFetchFinderPath() {
+		return _fetchFinderPath;
+	}
+
+	public void setFetchFinderPath(boolean fetchFinderPath) {
+		_fetchFinderPath = fetchFinderPath;
+	}
+
 	public Object clone() {
 		return new EntityColumn(
 			getName(), getDBName(), getType(), isPrimary(), getEJBName(),
@@ -217,5 +225,6 @@ public class EntityColumn implements Cloneable {
 	private String _idType;
 	private String _idParam;
 	private boolean _convertNull;
+	private boolean _fetchFinderPath;
 
 }

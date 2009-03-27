@@ -44,6 +44,14 @@ public abstract class BaseModelImpl<T> implements BaseModel<T> {
 		return _new = n;
 	}
 
+	public boolean isCachedModel() {
+		return _cachedModel;
+	}
+
+	public void setCachedModel(boolean cachedModel) {
+		_cachedModel = cachedModel;
+	}
+
 	public boolean isEscapedModel() {
 		return _escapedModel;
 	}
@@ -59,6 +67,7 @@ public abstract class BaseModelImpl<T> implements BaseModel<T> {
 	public abstract Object clone();
 
 	private boolean _new;
+	private boolean _cachedModel;
 	private boolean _escapedModel;
 
 }

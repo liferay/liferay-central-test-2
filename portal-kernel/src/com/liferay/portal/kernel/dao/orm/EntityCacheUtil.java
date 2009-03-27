@@ -22,50 +22,68 @@
 
 package com.liferay.portal.kernel.dao.orm;
 
+import java.io.Serializable;
+
 /**
- * <a href="FinderCacheUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="EntityCacheUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class FinderCacheUtil {
+public class EntityCacheUtil {
 
 	public static void clearCache() {
-		getFinderCache().clearCache();
+		getEntityCache().clearCache();
 	}
 
 	public static void clearCache(String className) {
-		getFinderCache().clearCache(className);
+		getEntityCache().clearCache(className);
 	}
 
-	public static FinderCache getFinderCache() {
+	public static EntityCache getEntityCache() {
 		return _finderCache;
 	}
 
 	public static Object getResult(
-		FinderPath finderPath, Object[] args, SessionFactory sessionFactory) {
+		boolean entityCacheEnabled, Class<?> classObj,
+		Serializable primaryKeyObj, SessionFactory sessionFactory) {
 
-		return getFinderCache().getResult(finderPath, args, sessionFactory);
+		return getEntityCache().getResult(
+			entityCacheEnabled, classObj, primaryKeyObj, sessionFactory);
 	}
 
 	public static void invalidate() {
-		getFinderCache().invalidate();
+		getEntityCache().invalidate();
+	}
+
+	public static Object loadResult(
+		boolean entityCacheEnabled, Class<?> classObj,
+		Serializable primaryKeyObj, SessionFactory sessionFactory) {
+
+		return getEntityCache().loadResult(
+			entityCacheEnabled, classObj, primaryKeyObj, sessionFactory);
 	}
 
 	public static void putResult(
-		FinderPath finderPath, Object[] args, Object result) {
+		boolean entityCacheEnabled, Class<?> classObj,
+		Serializable primaryKeyObj, Object result) {
 
-		getFinderCache().putResult(finderPath, args, result);
+		getEntityCache().putResult(
+			entityCacheEnabled, classObj, primaryKeyObj, result);
 	}
 
-	public static void removeResult(FinderPath finderPath, Object[] args) {
-		getFinderCache().removeResult(finderPath, args);
+	public static void removeResult(
+		boolean entityCacheEnabled, Class<?> classObj,
+		Serializable primaryKeyObj) {
+
+		getEntityCache().removeResult(
+			entityCacheEnabled, classObj, primaryKeyObj);
 	}
 
-	public void setFinderCache(FinderCache finderCache) {
+	public void setEntityCache(EntityCache finderCache) {
 		_finderCache = finderCache;
 	}
 
-	private static FinderCache _finderCache;
+	private static EntityCache _finderCache;
 
 }

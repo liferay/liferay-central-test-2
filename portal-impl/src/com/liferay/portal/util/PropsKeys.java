@@ -1242,6 +1242,8 @@ public interface PropsKeys {
 
 	public static final String USERS_UPDATE_LAST_LOGIN = "users.update.last.login";
 
+	public static final String VALUE_OBJECT_ENTITY_CACHE_ENABLED = "value.object.entity.cache.enabled";
+
 	public static final String VALUE_OBJECT_FINDER_CACHE_ENABLED = "value.object.finder.cache.enabled";
 
 	public static final String VALUE_OBJECT_LISTENER = "value.object.listener.";
