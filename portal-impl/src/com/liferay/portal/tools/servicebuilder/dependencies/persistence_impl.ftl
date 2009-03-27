@@ -534,7 +534,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 				);
 
-				cacheResult(${entity.varName});
+				if (${entity.varName} != null) {
+					cacheResult(${entity.varName});
+				}
 
 				return ${entity.varName};
 			}
