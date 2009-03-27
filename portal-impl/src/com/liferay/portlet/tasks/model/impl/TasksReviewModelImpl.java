@@ -109,7 +109,10 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.tasks.model.TasksReview"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.tasks.model.TasksReview"),
 			true);
 
@@ -198,7 +201,17 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {
 	public void setUserId(long userId) {
 		if (userId != _userId) {
 			_userId = userId;
+
+			if (!_setOriginalUserId) {
+				_setOriginalUserId = true;
+
+				_originalUserId = userId;
+			}
 		}
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	public String getUserName() {
@@ -247,7 +260,17 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {
 	public void setProposalId(long proposalId) {
 		if (proposalId != _proposalId) {
 			_proposalId = proposalId;
+
+			if (!_setOriginalProposalId) {
+				_setOriginalProposalId = true;
+
+				_originalProposalId = proposalId;
+			}
 		}
+	}
+
+	public long getOriginalProposalId() {
+		return _originalProposalId;
 	}
 
 	public long getAssignedByUserId() {
@@ -416,10 +439,14 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _proposalId;
+	private long _originalProposalId;
+	private boolean _setOriginalProposalId;
 	private long _assignedByUserId;
 	private String _assignedByUserName;
 	private int _stage;

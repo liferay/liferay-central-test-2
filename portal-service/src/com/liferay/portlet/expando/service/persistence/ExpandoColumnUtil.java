@@ -29,6 +29,16 @@ package com.liferay.portlet.expando.service.persistence;
  *
  */
 public class ExpandoColumnUtil {
+	public static void cacheResult(
+		com.liferay.portlet.expando.model.ExpandoColumn expandoColumn) {
+		getPersistence().cacheResult(expandoColumn);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> expandoColumns) {
+		getPersistence().cacheResult(expandoColumns);
+	}
+
 	public static com.liferay.portlet.expando.model.ExpandoColumn create(
 		long columnId) {
 		return getPersistence().create(columnId);

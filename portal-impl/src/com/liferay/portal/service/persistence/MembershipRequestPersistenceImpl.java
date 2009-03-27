@@ -26,7 +26,9 @@ import com.liferay.portal.NoSuchMembershipRequestException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -56,6 +58,84 @@ import java.util.List;
  */
 public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 	implements MembershipRequestPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = MembershipRequest.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = MembershipRequest.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(MembershipRequestModelImpl.ENTITY_CACHE_ENABLED,
+			MembershipRequestModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByGroupId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_GROUPID = new FinderPath(MembershipRequestModelImpl.ENTITY_CACHE_ENABLED,
+			MembershipRequestModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByGroupId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(MembershipRequestModelImpl.ENTITY_CACHE_ENABLED,
+			MembershipRequestModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByGroupId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_USERID = new FinderPath(MembershipRequestModelImpl.ENTITY_CACHE_ENABLED,
+			MembershipRequestModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByUserId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_USERID = new FinderPath(MembershipRequestModelImpl.ENTITY_CACHE_ENABLED,
+			MembershipRequestModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByUserId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_USERID = new FinderPath(MembershipRequestModelImpl.ENTITY_CACHE_ENABLED,
+			MembershipRequestModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByUserId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_G_S = new FinderPath(MembershipRequestModelImpl.ENTITY_CACHE_ENABLED,
+			MembershipRequestModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByG_S",
+			new String[] { Long.class.getName(), Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_S = new FinderPath(MembershipRequestModelImpl.ENTITY_CACHE_ENABLED,
+			MembershipRequestModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByG_S",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_S = new FinderPath(MembershipRequestModelImpl.ENTITY_CACHE_ENABLED,
+			MembershipRequestModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByG_S",
+			new String[] { Long.class.getName(), Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(MembershipRequestModelImpl.ENTITY_CACHE_ENABLED,
+			MembershipRequestModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(MembershipRequestModelImpl.ENTITY_CACHE_ENABLED,
+			MembershipRequestModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
+
+	public void cacheResult(MembershipRequest membershipRequest) {
+		EntityCacheUtil.putResult(MembershipRequestModelImpl.ENTITY_CACHE_ENABLED,
+			MembershipRequest.class, membershipRequest.getPrimaryKey(),
+			membershipRequest);
+	}
+
+	public void cacheResult(List<MembershipRequest> membershipRequests) {
+		for (MembershipRequest membershipRequest : membershipRequests) {
+			if (EntityCacheUtil.getResult(
+						MembershipRequestModelImpl.ENTITY_CACHE_ENABLED,
+						MembershipRequest.class,
+						membershipRequest.getPrimaryKey(), this) == null) {
+				cacheResult(membershipRequest);
+			}
+		}
+	}
+
 	public MembershipRequest create(long membershipRequestId) {
 		MembershipRequest membershipRequest = new MembershipRequestImpl();
 
@@ -134,17 +214,22 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 			session.delete(membershipRequest);
 
 			session.flush();
-
-			return membershipRequest;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(MembershipRequest.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		MembershipRequestModelImpl membershipRequestModelImpl = (MembershipRequestModelImpl)membershipRequest;
+
+		EntityCacheUtil.removeResult(MembershipRequestModelImpl.ENTITY_CACHE_ENABLED,
+			MembershipRequest.class, membershipRequest.getPrimaryKey());
+
+		return membershipRequest;
 	}
 
 	/**
@@ -203,6 +288,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 	public MembershipRequest updateImpl(
 		com.liferay.portal.model.MembershipRequest membershipRequest,
 		boolean merge) throws SystemException {
+		boolean isNew = membershipRequest.isNew();
+
 		Session session = null;
 
 		try {
@@ -211,17 +298,23 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, membershipRequest, merge);
 
 			membershipRequest.setNew(false);
-
-			return membershipRequest;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(MembershipRequest.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		MembershipRequestModelImpl membershipRequestModelImpl = (MembershipRequestModelImpl)membershipRequest;
+
+		EntityCacheUtil.putResult(MembershipRequestModelImpl.ENTITY_CACHE_ENABLED,
+			MembershipRequest.class, membershipRequest.getPrimaryKey(),
+			membershipRequest);
+
+		return membershipRequest;
 	}
 
 	public MembershipRequest findByPrimaryKey(long membershipRequestId)
@@ -244,36 +337,40 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 
 	public MembershipRequest fetchByPrimaryKey(long membershipRequestId)
 		throws SystemException {
-		Session session = null;
+		MembershipRequest result = (MembershipRequest)EntityCacheUtil.getResult(MembershipRequestModelImpl.ENTITY_CACHE_ENABLED,
+				MembershipRequest.class, membershipRequestId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (MembershipRequest)session.get(MembershipRequestImpl.class,
-				new Long(membershipRequestId));
+			try {
+				session = openSession();
+
+				MembershipRequest membershipRequest = (MembershipRequest)session.get(MembershipRequestImpl.class,
+						new Long(membershipRequestId));
+
+				cacheResult(membershipRequest);
+
+				return membershipRequest;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (MembershipRequest)result;
 		}
 	}
 
 	public List<MembershipRequest> findByGroupId(long groupId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = MembershipRequestModelImpl.CACHE_ENABLED;
-		String finderClassName = MembershipRequest.class.getName();
-		String finderMethodName = "findByGroupId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -302,9 +399,10 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 
 				List<MembershipRequest> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -327,27 +425,14 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 
 	public List<MembershipRequest> findByGroupId(long groupId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = MembershipRequestModelImpl.CACHE_ENABLED;
-		String finderClassName = MembershipRequest.class.getName();
-		String finderMethodName = "findByGroupId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -384,9 +469,10 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 				List<MembershipRequest> list = (List<MembershipRequest>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -407,7 +493,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchMembershipRequestException, SystemException {
 		List<MembershipRequest> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MembershipRequest exists with the key {");
@@ -431,7 +517,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 		List<MembershipRequest> list = findByGroupId(groupId, count - 1, count,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MembershipRequest exists with the key {");
@@ -506,18 +592,10 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 
 	public List<MembershipRequest> findByUserId(long userId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = MembershipRequestModelImpl.CACHE_ENABLED;
-		String finderClassName = MembershipRequest.class.getName();
-		String finderMethodName = "findByUserId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -546,9 +624,10 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 
 				List<MembershipRequest> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -571,27 +650,14 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 
 	public List<MembershipRequest> findByUserId(long userId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = MembershipRequestModelImpl.CACHE_ENABLED;
-		String finderClassName = MembershipRequest.class.getName();
-		String finderMethodName = "findByUserId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -628,9 +694,10 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 				List<MembershipRequest> list = (List<MembershipRequest>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -651,7 +718,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchMembershipRequestException, SystemException {
 		List<MembershipRequest> list = findByUserId(userId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MembershipRequest exists with the key {");
@@ -675,7 +742,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 		List<MembershipRequest> list = findByUserId(userId, count - 1, count,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MembershipRequest exists with the key {");
@@ -750,22 +817,12 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 
 	public List<MembershipRequest> findByG_S(long groupId, int statusId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = MembershipRequestModelImpl.CACHE_ENABLED;
-		String finderClassName = MembershipRequest.class.getName();
-		String finderMethodName = "findByG_S";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Integer.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Integer(statusId)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_S,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -800,9 +857,10 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 
 				List<MembershipRequest> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_S, finderArgs,
+					list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -825,27 +883,14 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 
 	public List<MembershipRequest> findByG_S(long groupId, int statusId,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = MembershipRequestModelImpl.CACHE_ENABLED;
-		String finderClassName = MembershipRequest.class.getName();
-		String finderMethodName = "findByG_S";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Integer.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Integer(statusId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_S,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -888,9 +933,10 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 				List<MembershipRequest> list = (List<MembershipRequest>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_S,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -911,7 +957,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchMembershipRequestException, SystemException {
 		List<MembershipRequest> list = findByG_S(groupId, statusId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MembershipRequest exists with the key {");
@@ -938,7 +984,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 		List<MembershipRequest> list = findByG_S(groupId, statusId, count - 1,
 				count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MembershipRequest exists with the key {");
@@ -1071,23 +1117,12 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 
 	public List<MembershipRequest> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = MembershipRequestModelImpl.CACHE_ENABLED;
-		String finderClassName = MembershipRequest.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1125,9 +1160,9 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1169,18 +1204,10 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		boolean finderClassNameCacheEnabled = MembershipRequestModelImpl.CACHE_ENABLED;
-		String finderClassName = MembershipRequest.class.getName();
-		String finderMethodName = "countByGroupId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1216,8 +1243,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1235,18 +1261,10 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByUserId(long userId) throws SystemException {
-		boolean finderClassNameCacheEnabled = MembershipRequestModelImpl.CACHE_ENABLED;
-		String finderClassName = MembershipRequest.class.getName();
-		String finderMethodName = "countByUserId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1282,8 +1300,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1301,22 +1318,12 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByG_S(long groupId, int statusId) throws SystemException {
-		boolean finderClassNameCacheEnabled = MembershipRequestModelImpl.CACHE_ENABLED;
-		String finderClassName = MembershipRequest.class.getName();
-		String finderMethodName = "countByG_S";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Integer.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Integer(statusId)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_S,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1358,9 +1365,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_S, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -1377,18 +1383,10 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = MembershipRequestModelImpl.CACHE_ENABLED;
-		String finderClassName = MembershipRequest.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1411,9 +1409,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

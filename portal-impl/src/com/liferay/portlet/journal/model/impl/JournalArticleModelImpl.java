@@ -156,7 +156,10 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.journal.model.JournalArticle"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.journal.model.JournalArticle"),
 			true);
 
@@ -229,9 +232,17 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setUuid(String uuid) {
-		if ((uuid != null) && (uuid != _uuid)) {
+		if ((uuid != null) && !uuid.equals(_uuid)) {
 			_uuid = uuid;
+
+			if (_originalUuid == null) {
+				_originalUuid = uuid;
+			}
 		}
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
 	}
 
 	public long getId() {
@@ -261,7 +272,17 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	public void setGroupId(long groupId) {
 		if (groupId != _groupId) {
 			_groupId = groupId;
+
+			if (!_setOriginalGroupId) {
+				_setOriginalGroupId = true;
+
+				_originalGroupId = groupId;
+			}
 		}
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	public long getCompanyId() {
@@ -333,7 +354,15 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 				((articleId != null) && (_articleId != null) &&
 				!articleId.equals(_articleId))) {
 			_articleId = articleId;
+
+			if (_originalArticleId == null) {
+				_originalArticleId = articleId;
+			}
 		}
+	}
+
+	public String getOriginalArticleId() {
+		return GetterUtil.getString(_originalArticleId);
 	}
 
 	public double getVersion() {
@@ -343,7 +372,17 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	public void setVersion(double version) {
 		if (version != _version) {
 			_version = version;
+
+			if (!_setOriginalVersion) {
+				_setOriginalVersion = true;
+
+				_originalVersion = version;
+			}
 		}
+	}
+
+	public double getOriginalVersion() {
+		return _originalVersion;
 	}
 
 	public String getTitle() {
@@ -726,16 +765,22 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	private String _uuid;
+	private String _originalUuid;
 	private long _id;
 	private long _resourcePrimKey;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _articleId;
+	private String _originalArticleId;
 	private double _version;
+	private double _originalVersion;
+	private boolean _setOriginalVersion;
 	private String _title;
 	private String _description;
 	private String _content;

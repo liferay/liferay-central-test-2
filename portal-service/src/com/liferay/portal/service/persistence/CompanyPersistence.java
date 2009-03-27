@@ -29,6 +29,11 @@ package com.liferay.portal.service.persistence;
  *
  */
 public interface CompanyPersistence extends BasePersistence {
+	public void cacheResult(com.liferay.portal.model.Company company);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portal.model.Company> companies);
+
 	public com.liferay.portal.model.Company create(long companyId);
 
 	public com.liferay.portal.model.Company remove(long companyId)

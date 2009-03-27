@@ -91,7 +91,10 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portal.model.Company"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Company"),
 			true);
 
@@ -167,7 +170,15 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 				((webId != null) && (_webId == null)) ||
 				((webId != null) && (_webId != null) && !webId.equals(_webId))) {
 			_webId = webId;
+
+			if (_originalWebId == null) {
+				_originalWebId = webId;
+			}
 		}
+	}
+
+	public String getOriginalWebId() {
+		return GetterUtil.getString(_originalWebId);
 	}
 
 	public String getKey() {
@@ -192,7 +203,15 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 				((virtualHost != null) && (_virtualHost != null) &&
 				!virtualHost.equals(_virtualHost))) {
 			_virtualHost = virtualHost;
+
+			if (_originalVirtualHost == null) {
+				_originalVirtualHost = virtualHost;
+			}
 		}
+	}
+
+	public String getOriginalVirtualHost() {
+		return GetterUtil.getString(_originalVirtualHost);
 	}
 
 	public String getMx() {
@@ -203,7 +222,15 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 		if (((mx == null) && (_mx != null)) || ((mx != null) && (_mx == null)) ||
 				((mx != null) && (_mx != null) && !mx.equals(_mx))) {
 			_mx = mx;
+
+			if (_originalMx == null) {
+				_originalMx = mx;
+			}
 		}
+	}
+
+	public String getOriginalMx() {
+		return GetterUtil.getString(_originalMx);
 	}
 
 	public String getHomeURL() {
@@ -226,7 +253,17 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 	public void setLogoId(long logoId) {
 		if (logoId != _logoId) {
 			_logoId = logoId;
+
+			if (!_setOriginalLogoId) {
+				_setOriginalLogoId = true;
+
+				_originalLogoId = logoId;
+			}
 		}
+	}
+
+	public long getOriginalLogoId() {
+		return _originalLogoId;
 	}
 
 	public Company toEscapedModel() {
@@ -325,10 +362,15 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 	private long _companyId;
 	private long _accountId;
 	private String _webId;
+	private String _originalWebId;
 	private String _key;
 	private String _virtualHost;
+	private String _originalVirtualHost;
 	private String _mx;
+	private String _originalMx;
 	private String _homeURL;
 	private long _logoId;
+	private long _originalLogoId;
+	private boolean _setOriginalLogoId;
 	private transient ExpandoBridge _expandoBridge;
 }

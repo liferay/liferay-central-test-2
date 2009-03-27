@@ -29,6 +29,16 @@ package com.liferay.portlet.expando.service.persistence;
  *
  */
 public class ExpandoTableUtil {
+	public static void cacheResult(
+		com.liferay.portlet.expando.model.ExpandoTable expandoTable) {
+		getPersistence().cacheResult(expandoTable);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.expando.model.ExpandoTable> expandoTables) {
+		getPersistence().cacheResult(expandoTables);
+	}
+
 	public static com.liferay.portlet.expando.model.ExpandoTable create(
 		long tableId) {
 		return getPersistence().create(tableId);

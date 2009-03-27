@@ -140,7 +140,10 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.tags.model.TagsAsset"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.tags.model.TagsAsset"),
 			true);
 
@@ -184,7 +187,7 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 		return models;
 	}
 
-	public static final boolean CACHE_ENABLED_TAGSASSETS_TAGSENTRIES = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean FINDER_CACHE_ENABLED_TAGSASSETS_TAGSENTRIES = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.TagsAssets_TagsEntries"),
 			true);
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
@@ -299,7 +302,17 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	public void setClassNameId(long classNameId) {
 		if (classNameId != _classNameId) {
 			_classNameId = classNameId;
+
+			if (!_setOriginalClassNameId) {
+				_setOriginalClassNameId = true;
+
+				_originalClassNameId = classNameId;
+			}
 		}
+	}
+
+	public long getOriginalClassNameId() {
+		return _originalClassNameId;
 	}
 
 	public long getClassPK() {
@@ -309,7 +322,17 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	public void setClassPK(long classPK) {
 		if (classPK != _classPK) {
 			_classPK = classPK;
+
+			if (!_setOriginalClassPK) {
+				_setOriginalClassPK = true;
+
+				_originalClassPK = classPK;
+			}
 		}
+	}
+
+	public long getOriginalClassPK() {
+		return _originalClassPK;
 	}
 
 	public boolean getVisible() {
@@ -612,7 +635,11 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _classNameId;
+	private long _originalClassNameId;
+	private boolean _setOriginalClassNameId;
 	private long _classPK;
+	private long _originalClassPK;
+	private boolean _setOriginalClassPK;
 	private boolean _visible;
 	private Date _startDate;
 	private Date _endDate;

@@ -77,7 +77,10 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.expando.model.ExpandoRow"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.expando.model.ExpandoRow"),
 			true);
 
@@ -147,7 +150,17 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow> {
 	public void setTableId(long tableId) {
 		if (tableId != _tableId) {
 			_tableId = tableId;
+
+			if (!_setOriginalTableId) {
+				_setOriginalTableId = true;
+
+				_originalTableId = tableId;
+			}
 		}
+	}
+
+	public long getOriginalTableId() {
+		return _originalTableId;
 	}
 
 	public long getClassPK() {
@@ -157,7 +170,17 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow> {
 	public void setClassPK(long classPK) {
 		if (classPK != _classPK) {
 			_classPK = classPK;
+
+			if (!_setOriginalClassPK) {
+				_setOriginalClassPK = true;
+
+				_originalClassPK = classPK;
+			}
 		}
+	}
+
+	public long getOriginalClassPK() {
+		return _originalClassPK;
 	}
 
 	public ExpandoRow toEscapedModel() {
@@ -239,5 +262,9 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow> {
 	private long _rowId;
 	private long _companyId;
 	private long _tableId;
+	private long _originalTableId;
+	private boolean _setOriginalTableId;
 	private long _classPK;
+	private long _originalClassPK;
+	private boolean _setOriginalClassPK;
 }

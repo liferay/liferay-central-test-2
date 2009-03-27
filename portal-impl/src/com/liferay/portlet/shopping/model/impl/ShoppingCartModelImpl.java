@@ -102,7 +102,10 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.shopping.model.ShoppingCart"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.shopping.model.ShoppingCart"),
 			true);
 
@@ -169,7 +172,17 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart> {
 	public void setGroupId(long groupId) {
 		if (groupId != _groupId) {
 			_groupId = groupId;
+
+			if (!_setOriginalGroupId) {
+				_setOriginalGroupId = true;
+
+				_originalGroupId = groupId;
+			}
 		}
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	public long getCompanyId() {
@@ -189,7 +202,17 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart> {
 	public void setUserId(long userId) {
 		if (userId != _userId) {
 			_userId = userId;
+
+			if (!_setOriginalUserId) {
+				_setOriginalUserId = true;
+
+				_originalUserId = userId;
+			}
 		}
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	public String getUserName() {
@@ -382,8 +405,12 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart> {
 
 	private long _cartId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;

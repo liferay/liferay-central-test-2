@@ -29,6 +29,15 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class PortletUtil {
+	public static void cacheResult(com.liferay.portal.model.Portlet portlet) {
+		getPersistence().cacheResult(portlet);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.Portlet> portlets) {
+		getPersistence().cacheResult(portlets);
+	}
+
 	public static com.liferay.portal.model.Portlet create(long id) {
 		return getPersistence().create(id);
 	}

@@ -82,7 +82,10 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portal.model.UserIdMapper"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.UserIdMapper"),
 			true);
 
@@ -143,7 +146,17 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper> {
 	public void setUserId(long userId) {
 		if (userId != _userId) {
 			_userId = userId;
+
+			if (!_setOriginalUserId) {
+				_setOriginalUserId = true;
+
+				_originalUserId = userId;
+			}
 		}
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	public String getType() {
@@ -155,7 +168,15 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper> {
 				((type != null) && (_type == null)) ||
 				((type != null) && (_type != null) && !type.equals(_type))) {
 			_type = type;
+
+			if (_originalType == null) {
+				_originalType = type;
+			}
 		}
+	}
+
+	public String getOriginalType() {
+		return GetterUtil.getString(_originalType);
 	}
 
 	public String getDescription() {
@@ -181,7 +202,15 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper> {
 				((externalUserId != null) && (_externalUserId != null) &&
 				!externalUserId.equals(_externalUserId))) {
 			_externalUserId = externalUserId;
+
+			if (_originalExternalUserId == null) {
+				_originalExternalUserId = externalUserId;
+			}
 		}
+	}
+
+	public String getOriginalExternalUserId() {
+		return GetterUtil.getString(_originalExternalUserId);
 	}
 
 	public UserIdMapper toEscapedModel() {
@@ -273,8 +302,12 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper> {
 
 	private long _userIdMapperId;
 	private long _userId;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private String _type;
+	private String _originalType;
 	private String _description;
 	private String _externalUserId;
+	private String _originalExternalUserId;
 	private transient ExpandoBridge _expandoBridge;
 }

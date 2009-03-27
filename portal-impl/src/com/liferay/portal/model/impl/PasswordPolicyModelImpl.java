@@ -146,7 +146,10 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portal.model.PasswordPolicy"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.PasswordPolicy"),
 			true);
 
@@ -228,7 +231,17 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	public void setCompanyId(long companyId) {
 		if (companyId != _companyId) {
 			_companyId = companyId;
+
+			if (!_setOriginalCompanyId) {
+				_setOriginalCompanyId = true;
+
+				_originalCompanyId = companyId;
+			}
 		}
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	public long getUserId() {
@@ -291,7 +304,17 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	public void setDefaultPolicy(boolean defaultPolicy) {
 		if (defaultPolicy != _defaultPolicy) {
 			_defaultPolicy = defaultPolicy;
+
+			if (!_setOriginalDefaultPolicy) {
+				_setOriginalDefaultPolicy = true;
+
+				_originalDefaultPolicy = defaultPolicy;
+			}
 		}
+	}
+
+	public boolean getOriginalDefaultPolicy() {
+		return _originalDefaultPolicy;
 	}
 
 	public String getName() {
@@ -303,7 +326,15 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 				((name != null) && (_name == null)) ||
 				((name != null) && (_name != null) && !name.equals(_name))) {
 			_name = name;
+
+			if (_originalName == null) {
+				_originalName = name;
+			}
 		}
+	}
+
+	public String getOriginalName() {
+		return GetterUtil.getString(_originalName);
 	}
 
 	public String getDescription() {
@@ -652,12 +683,17 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 
 	private long _passwordPolicyId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private boolean _defaultPolicy;
+	private boolean _originalDefaultPolicy;
+	private boolean _setOriginalDefaultPolicy;
 	private String _name;
+	private String _originalName;
 	private String _description;
 	private boolean _changeable;
 	private boolean _changeRequired;

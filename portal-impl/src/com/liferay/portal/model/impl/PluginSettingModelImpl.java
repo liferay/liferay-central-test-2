@@ -85,7 +85,10 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portal.model.PluginSetting"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.PluginSetting"),
 			true);
 
@@ -147,7 +150,17 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting> {
 	public void setCompanyId(long companyId) {
 		if (companyId != _companyId) {
 			_companyId = companyId;
+
+			if (!_setOriginalCompanyId) {
+				_setOriginalCompanyId = true;
+
+				_originalCompanyId = companyId;
+			}
 		}
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	public String getPluginId() {
@@ -160,7 +173,15 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting> {
 				((pluginId != null) && (_pluginId != null) &&
 				!pluginId.equals(_pluginId))) {
 			_pluginId = pluginId;
+
+			if (_originalPluginId == null) {
+				_originalPluginId = pluginId;
+			}
 		}
+	}
+
+	public String getOriginalPluginId() {
+		return GetterUtil.getString(_originalPluginId);
 	}
 
 	public String getPluginType() {
@@ -173,7 +194,15 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting> {
 				((pluginType != null) && (_pluginType != null) &&
 				!pluginType.equals(_pluginType))) {
 			_pluginType = pluginType;
+
+			if (_originalPluginType == null) {
+				_originalPluginType = pluginType;
+			}
 		}
+	}
+
+	public String getOriginalPluginType() {
+		return GetterUtil.getString(_originalPluginType);
 	}
 
 	public String getRoles() {
@@ -293,8 +322,12 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting> {
 
 	private long _pluginSettingId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private String _pluginId;
+	private String _originalPluginId;
 	private String _pluginType;
+	private String _originalPluginType;
 	private String _roles;
 	private boolean _active;
 	private transient ExpandoBridge _expandoBridge;

@@ -29,6 +29,15 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class CompanyUtil {
+	public static void cacheResult(com.liferay.portal.model.Company company) {
+		getPersistence().cacheResult(company);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.Company> companies) {
+		getPersistence().cacheResult(companies);
+	}
+
 	public static com.liferay.portal.model.Company create(long companyId) {
 		return getPersistence().create(companyId);
 	}

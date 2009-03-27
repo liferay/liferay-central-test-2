@@ -97,7 +97,10 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portal.model.Organization"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Organization"),
 			true);
 
@@ -128,8 +131,8 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 		return models;
 	}
 
-	public static final boolean CACHE_ENABLED_GROUPS_ORGS = com.liferay.portal.model.impl.GroupModelImpl.CACHE_ENABLED_GROUPS_ORGS;
-	public static final boolean CACHE_ENABLED_USERS_ORGS = com.liferay.portal.model.impl.UserModelImpl.CACHE_ENABLED_USERS_ORGS;
+	public static final boolean FINDER_CACHE_ENABLED_GROUPS_ORGS = com.liferay.portal.model.impl.GroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_ORGS;
+	public static final boolean FINDER_CACHE_ENABLED_USERS_ORGS = com.liferay.portal.model.impl.UserModelImpl.FINDER_CACHE_ENABLED_USERS_ORGS;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Organization"));
 
@@ -165,7 +168,17 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 	public void setCompanyId(long companyId) {
 		if (companyId != _companyId) {
 			_companyId = companyId;
+
+			if (!_setOriginalCompanyId) {
+				_setOriginalCompanyId = true;
+
+				_originalCompanyId = companyId;
+			}
 		}
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	public long getParentOrganizationId() {
@@ -187,7 +200,15 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 				((name != null) && (_name == null)) ||
 				((name != null) && (_name != null) && !name.equals(_name))) {
 			_name = name;
+
+			if (_originalName == null) {
+				_originalName = name;
+			}
 		}
+	}
+
+	public String getOriginalName() {
+		return GetterUtil.getString(_originalName);
 	}
 
 	public String getType() {
@@ -356,8 +377,11 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 
 	private long _organizationId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _parentOrganizationId;
 	private String _name;
+	private String _originalName;
 	private String _type;
 	private boolean _recursable;
 	private long _regionId;

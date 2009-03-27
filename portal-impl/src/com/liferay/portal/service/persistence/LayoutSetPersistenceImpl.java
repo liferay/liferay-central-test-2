@@ -26,7 +26,9 @@ import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -56,6 +58,69 @@ import java.util.List;
  */
 public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 	implements LayoutSetPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = LayoutSet.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = LayoutSet.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(LayoutSetModelImpl.ENTITY_CACHE_ENABLED,
+			LayoutSetModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByGroupId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_GROUPID = new FinderPath(LayoutSetModelImpl.ENTITY_CACHE_ENABLED,
+			LayoutSetModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByGroupId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(LayoutSetModelImpl.ENTITY_CACHE_ENABLED,
+			LayoutSetModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByGroupId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_VIRTUALHOST = new FinderPath(LayoutSetModelImpl.ENTITY_CACHE_ENABLED,
+			LayoutSetModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
+			"fetchByVirtualHost", new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_VIRTUALHOST = new FinderPath(LayoutSetModelImpl.ENTITY_CACHE_ENABLED,
+			LayoutSetModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByVirtualHost", new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_G_P = new FinderPath(LayoutSetModelImpl.ENTITY_CACHE_ENABLED,
+			LayoutSetModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
+			"fetchByG_P",
+			new String[] { Long.class.getName(), Boolean.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_P = new FinderPath(LayoutSetModelImpl.ENTITY_CACHE_ENABLED,
+			LayoutSetModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByG_P",
+			new String[] { Long.class.getName(), Boolean.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(LayoutSetModelImpl.ENTITY_CACHE_ENABLED,
+			LayoutSetModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(LayoutSetModelImpl.ENTITY_CACHE_ENABLED,
+			LayoutSetModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countAll", new String[0]);
+
+	public void cacheResult(LayoutSet layoutSet) {
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
+			new Object[] { layoutSet.getVirtualHost() }, layoutSet);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P,
+			new Object[] {
+				new Long(layoutSet.getGroupId()),
+				Boolean.valueOf(layoutSet.getPrivateLayout())
+			}, layoutSet);
+
+		EntityCacheUtil.putResult(LayoutSetModelImpl.ENTITY_CACHE_ENABLED,
+			LayoutSet.class, layoutSet.getPrimaryKey(), layoutSet);
+	}
+
+	public void cacheResult(List<LayoutSet> layoutSets) {
+		for (LayoutSet layoutSet : layoutSets) {
+			if (EntityCacheUtil.getResult(
+						LayoutSetModelImpl.ENTITY_CACHE_ENABLED,
+						LayoutSet.class, layoutSet.getPrimaryKey(), this) == null) {
+				cacheResult(layoutSet);
+			}
+		}
+	}
+
 	public LayoutSet create(long layoutSetId) {
 		LayoutSet layoutSet = new LayoutSetImpl();
 
@@ -131,17 +196,31 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 			session.delete(layoutSet);
 
 			session.flush();
-
-			return layoutSet;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(LayoutSet.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		LayoutSetModelImpl layoutSetModelImpl = (LayoutSetModelImpl)layoutSet;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
+			new Object[] { layoutSetModelImpl.getOriginalVirtualHost() });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P,
+			new Object[] {
+				new Long(layoutSetModelImpl.getOriginalGroupId()),
+				Boolean.valueOf(layoutSetModelImpl.getOriginalPrivateLayout())
+			});
+
+		EntityCacheUtil.removeResult(LayoutSetModelImpl.ENTITY_CACHE_ENABLED,
+			LayoutSet.class, layoutSet.getPrimaryKey());
+
+		return layoutSet;
 	}
 
 	/**
@@ -198,6 +277,8 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 	public LayoutSet updateImpl(com.liferay.portal.model.LayoutSet layoutSet,
 		boolean merge) throws SystemException {
+		boolean isNew = layoutSet.isNew();
+
 		Session session = null;
 
 		try {
@@ -206,17 +287,57 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, layoutSet, merge);
 
 			layoutSet.setNew(false);
-
-			return layoutSet;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(LayoutSet.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		LayoutSetModelImpl layoutSetModelImpl = (LayoutSetModelImpl)layoutSet;
+
+		if (!isNew &&
+				(!layoutSet.getVirtualHost()
+							   .equals(layoutSetModelImpl.getOriginalVirtualHost()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
+				new Object[] { layoutSetModelImpl.getOriginalVirtualHost() });
+		}
+
+		if (isNew ||
+				(!layoutSet.getVirtualHost()
+							   .equals(layoutSetModelImpl.getOriginalVirtualHost()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
+				new Object[] { layoutSet.getVirtualHost() }, layoutSet);
+		}
+
+		if (!isNew &&
+				((layoutSet.getGroupId() != layoutSetModelImpl.getOriginalGroupId()) ||
+				(layoutSet.getPrivateLayout() != layoutSetModelImpl.getOriginalPrivateLayout()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P,
+				new Object[] {
+					new Long(layoutSetModelImpl.getOriginalGroupId()),
+					Boolean.valueOf(
+						layoutSetModelImpl.getOriginalPrivateLayout())
+				});
+		}
+
+		if (isNew ||
+				((layoutSet.getGroupId() != layoutSetModelImpl.getOriginalGroupId()) ||
+				(layoutSet.getPrivateLayout() != layoutSetModelImpl.getOriginalPrivateLayout()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P,
+				new Object[] {
+					new Long(layoutSet.getGroupId()),
+					Boolean.valueOf(layoutSet.getPrivateLayout())
+				}, layoutSet);
+		}
+
+		EntityCacheUtil.putResult(LayoutSetModelImpl.ENTITY_CACHE_ENABLED,
+			LayoutSet.class, layoutSet.getPrimaryKey(), layoutSet);
+
+		return layoutSet;
 	}
 
 	public LayoutSet findByPrimaryKey(long layoutSetId)
@@ -238,36 +359,40 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 	public LayoutSet fetchByPrimaryKey(long layoutSetId)
 		throws SystemException {
-		Session session = null;
+		LayoutSet result = (LayoutSet)EntityCacheUtil.getResult(LayoutSetModelImpl.ENTITY_CACHE_ENABLED,
+				LayoutSet.class, layoutSetId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (LayoutSet)session.get(LayoutSetImpl.class,
-				new Long(layoutSetId));
+			try {
+				session = openSession();
+
+				LayoutSet layoutSet = (LayoutSet)session.get(LayoutSetImpl.class,
+						new Long(layoutSetId));
+
+				cacheResult(layoutSet);
+
+				return layoutSet;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (LayoutSet)result;
 		}
 	}
 
 	public List<LayoutSet> findByGroupId(long groupId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = LayoutSetModelImpl.CACHE_ENABLED;
-		String finderClassName = LayoutSet.class.getName();
-		String finderMethodName = "findByGroupId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -291,9 +416,10 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 				List<LayoutSet> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -316,27 +442,14 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 	public List<LayoutSet> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = LayoutSetModelImpl.CACHE_ENABLED;
-		String finderClassName = LayoutSet.class.getName();
-		String finderMethodName = "findByGroupId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -366,9 +479,10 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 				List<LayoutSet> list = (List<LayoutSet>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -388,7 +502,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchLayoutSetException, SystemException {
 		List<LayoutSet> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No LayoutSet exists with the key {");
@@ -410,7 +524,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 		List<LayoutSet> list = findByGroupId(groupId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No LayoutSet exists with the key {");
@@ -501,18 +615,10 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 	public LayoutSet fetchByVirtualHost(String virtualHost)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = LayoutSetModelImpl.CACHE_ENABLED;
-		String finderClassName = LayoutSet.class.getName();
-		String finderMethodName = "fetchByVirtualHost";
-		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { virtualHost };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -543,16 +649,19 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 				List<LayoutSet> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				LayoutSet layoutSet = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					layoutSet = list.get(0);
+
+					cacheResult(layoutSet);
 				}
+
+				return layoutSet;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -562,13 +671,11 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<LayoutSet> list = (List<LayoutSet>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (LayoutSet)result;
 			}
 		}
 	}
@@ -601,22 +708,12 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 	public LayoutSet fetchByG_P(long groupId, boolean privateLayout)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = LayoutSetModelImpl.CACHE_ENABLED;
-		String finderClassName = LayoutSet.class.getName();
-		String finderMethodName = "fetchByG_P";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Boolean.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(privateLayout)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_P,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -646,16 +743,19 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 				List<LayoutSet> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				LayoutSet layoutSet = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					layoutSet = list.get(0);
+
+					cacheResult(layoutSet);
 				}
+
+				return layoutSet;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -665,13 +765,11 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<LayoutSet> list = (List<LayoutSet>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (LayoutSet)result;
 			}
 		}
 	}
@@ -727,23 +825,12 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 	public List<LayoutSet> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = LayoutSetModelImpl.CACHE_ENABLED;
-		String finderClassName = LayoutSet.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -775,9 +862,9 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -820,18 +907,10 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		boolean finderClassNameCacheEnabled = LayoutSetModelImpl.CACHE_ENABLED;
-		String finderClassName = LayoutSet.class.getName();
-		String finderMethodName = "countByGroupId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -866,8 +945,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -885,18 +963,10 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByVirtualHost(String virtualHost) throws SystemException {
-		boolean finderClassNameCacheEnabled = LayoutSetModelImpl.CACHE_ENABLED;
-		String finderClassName = LayoutSet.class.getName();
-		String finderMethodName = "countByVirtualHost";
-		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { virtualHost };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_VIRTUALHOST,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -938,8 +1008,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_VIRTUALHOST,
 					finderArgs, count);
 
 				return count.intValue();
@@ -958,22 +1027,12 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 	public int countByG_P(long groupId, boolean privateLayout)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = LayoutSetModelImpl.CACHE_ENABLED;
-		String finderClassName = LayoutSet.class.getName();
-		String finderMethodName = "countByG_P";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Boolean.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(privateLayout)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_P,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1014,9 +1073,8 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_P, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -1033,18 +1091,10 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = LayoutSetModelImpl.CACHE_ENABLED;
-		String finderClassName = LayoutSet.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1067,9 +1117,8 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

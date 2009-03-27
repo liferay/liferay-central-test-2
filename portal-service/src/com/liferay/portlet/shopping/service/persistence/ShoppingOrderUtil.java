@@ -29,6 +29,16 @@ package com.liferay.portlet.shopping.service.persistence;
  *
  */
 public class ShoppingOrderUtil {
+	public static void cacheResult(
+		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder) {
+		getPersistence().cacheResult(shoppingOrder);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> shoppingOrders) {
+		getPersistence().cacheResult(shoppingOrders);
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingOrder create(
 		long orderId) {
 		return getPersistence().create(orderId);

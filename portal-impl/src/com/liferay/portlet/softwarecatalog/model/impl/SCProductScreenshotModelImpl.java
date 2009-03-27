@@ -88,7 +88,10 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.softwarecatalog.model.SCProductScreenshot"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.softwarecatalog.model.SCProductScreenshot"),
 			true);
 
@@ -172,7 +175,17 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 	public void setProductEntryId(long productEntryId) {
 		if (productEntryId != _productEntryId) {
 			_productEntryId = productEntryId;
+
+			if (!_setOriginalProductEntryId) {
+				_setOriginalProductEntryId = true;
+
+				_originalProductEntryId = productEntryId;
+			}
 		}
+	}
+
+	public long getOriginalProductEntryId() {
+		return _originalProductEntryId;
 	}
 
 	public long getThumbnailId() {
@@ -182,7 +195,17 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 	public void setThumbnailId(long thumbnailId) {
 		if (thumbnailId != _thumbnailId) {
 			_thumbnailId = thumbnailId;
+
+			if (!_setOriginalThumbnailId) {
+				_setOriginalThumbnailId = true;
+
+				_originalThumbnailId = thumbnailId;
+			}
 		}
+	}
+
+	public long getOriginalThumbnailId() {
+		return _originalThumbnailId;
 	}
 
 	public long getFullImageId() {
@@ -192,7 +215,17 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 	public void setFullImageId(long fullImageId) {
 		if (fullImageId != _fullImageId) {
 			_fullImageId = fullImageId;
+
+			if (!_setOriginalFullImageId) {
+				_setOriginalFullImageId = true;
+
+				_originalFullImageId = fullImageId;
+			}
 		}
+	}
+
+	public long getOriginalFullImageId() {
+		return _originalFullImageId;
 	}
 
 	public int getPriority() {
@@ -202,7 +235,17 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 	public void setPriority(int priority) {
 		if (priority != _priority) {
 			_priority = priority;
+
+			if (!_setOriginalPriority) {
+				_setOriginalPriority = true;
+
+				_originalPriority = priority;
+			}
 		}
+	}
+
+	public int getOriginalPriority() {
+		return _originalPriority;
 	}
 
 	public SCProductScreenshot toEscapedModel() {
@@ -320,8 +363,16 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 	private long _companyId;
 	private long _groupId;
 	private long _productEntryId;
+	private long _originalProductEntryId;
+	private boolean _setOriginalProductEntryId;
 	private long _thumbnailId;
+	private long _originalThumbnailId;
+	private boolean _setOriginalThumbnailId;
 	private long _fullImageId;
+	private long _originalFullImageId;
+	private boolean _setOriginalFullImageId;
 	private int _priority;
+	private int _originalPriority;
+	private boolean _setOriginalPriority;
 	private transient ExpandoBridge _expandoBridge;
 }

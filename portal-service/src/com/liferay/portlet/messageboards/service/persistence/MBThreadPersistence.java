@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface MBThreadPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.messageboards.model.MBThread mbThread);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.messageboards.model.MBThread> mbThreads);
+
 	public com.liferay.portlet.messageboards.model.MBThread create(
 		long threadId);
 

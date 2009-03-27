@@ -31,7 +31,9 @@ import com.liferay.portal.kernel.dao.jdbc.RowMapper;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -65,6 +67,59 @@ import java.util.List;
  */
 public class PermissionPersistenceImpl extends BasePersistenceImpl
 	implements PermissionPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = Permission.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = Permission.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_RESOURCEID = new FinderPath(PermissionModelImpl.ENTITY_CACHE_ENABLED,
+			PermissionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByResourceId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_RESOURCEID = new FinderPath(PermissionModelImpl.ENTITY_CACHE_ENABLED,
+			PermissionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByResourceId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_RESOURCEID = new FinderPath(PermissionModelImpl.ENTITY_CACHE_ENABLED,
+			PermissionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByResourceId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_A_R = new FinderPath(PermissionModelImpl.ENTITY_CACHE_ENABLED,
+			PermissionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
+			"fetchByA_R",
+			new String[] { String.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_A_R = new FinderPath(PermissionModelImpl.ENTITY_CACHE_ENABLED,
+			PermissionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByA_R",
+			new String[] { String.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(PermissionModelImpl.ENTITY_CACHE_ENABLED,
+			PermissionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(PermissionModelImpl.ENTITY_CACHE_ENABLED,
+			PermissionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countAll", new String[0]);
+
+	public void cacheResult(Permission permission) {
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_A_R,
+			new Object[] {
+				permission.getActionId(), new Long(permission.getResourceId())
+			}, permission);
+
+		EntityCacheUtil.putResult(PermissionModelImpl.ENTITY_CACHE_ENABLED,
+			Permission.class, permission.getPrimaryKey(), permission);
+	}
+
+	public void cacheResult(List<Permission> permissions) {
+		for (Permission permission : permissions) {
+			if (EntityCacheUtil.getResult(
+						PermissionModelImpl.ENTITY_CACHE_ENABLED,
+						Permission.class, permission.getPrimaryKey(), this) == null) {
+				cacheResult(permission);
+			}
+		}
+	}
+
 	public Permission create(long permissionId) {
 		Permission permission = new PermissionImpl();
 
@@ -171,17 +226,28 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 			session.delete(permission);
 
 			session.flush();
-
-			return permission;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(Permission.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		PermissionModelImpl permissionModelImpl = (PermissionModelImpl)permission;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_A_R,
+			new Object[] {
+				permissionModelImpl.getOriginalActionId(),
+				new Long(permissionModelImpl.getOriginalResourceId())
+			});
+
+		EntityCacheUtil.removeResult(PermissionModelImpl.ENTITY_CACHE_ENABLED,
+			Permission.class, permission.getPrimaryKey());
+
+		return permission;
 	}
 
 	/**
@@ -239,9 +305,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 	public Permission updateImpl(
 		com.liferay.portal.model.Permission permission, boolean merge)
 		throws SystemException {
-		FinderCacheUtil.clearCache("Groups_Permissions");
-		FinderCacheUtil.clearCache("Roles_Permissions");
-		FinderCacheUtil.clearCache("Users_Permissions");
+		boolean isNew = permission.isNew();
 
 		Session session = null;
 
@@ -251,17 +315,44 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, permission, merge);
 
 			permission.setNew(false);
-
-			return permission;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(Permission.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		PermissionModelImpl permissionModelImpl = (PermissionModelImpl)permission;
+
+		if (!isNew &&
+				(!permission.getActionId()
+								.equals(permissionModelImpl.getOriginalActionId()) ||
+				(permission.getResourceId() != permissionModelImpl.getOriginalResourceId()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_A_R,
+				new Object[] {
+					permissionModelImpl.getOriginalActionId(),
+					new Long(permissionModelImpl.getOriginalResourceId())
+				});
+		}
+
+		if (isNew ||
+				(!permission.getActionId()
+								.equals(permissionModelImpl.getOriginalActionId()) ||
+				(permission.getResourceId() != permissionModelImpl.getOriginalResourceId()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_A_R,
+				new Object[] {
+					permission.getActionId(),
+					new Long(permission.getResourceId())
+				}, permission);
+		}
+
+		EntityCacheUtil.putResult(PermissionModelImpl.ENTITY_CACHE_ENABLED,
+			Permission.class, permission.getPrimaryKey(), permission);
+
+		return permission;
 	}
 
 	public Permission findByPrimaryKey(long permissionId)
@@ -283,36 +374,40 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 
 	public Permission fetchByPrimaryKey(long permissionId)
 		throws SystemException {
-		Session session = null;
+		Permission result = (Permission)EntityCacheUtil.getResult(PermissionModelImpl.ENTITY_CACHE_ENABLED,
+				Permission.class, permissionId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (Permission)session.get(PermissionImpl.class,
-				new Long(permissionId));
+			try {
+				session = openSession();
+
+				Permission permission = (Permission)session.get(PermissionImpl.class,
+						new Long(permissionId));
+
+				cacheResult(permission);
+
+				return permission;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (Permission)result;
 		}
 	}
 
 	public List<Permission> findByResourceId(long resourceId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED;
-		String finderClassName = Permission.class.getName();
-		String finderMethodName = "findByResourceId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(resourceId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_RESOURCEID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -336,9 +431,10 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 
 				List<Permission> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_RESOURCEID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -361,27 +457,14 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 
 	public List<Permission> findByResourceId(long resourceId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED;
-		String finderClassName = Permission.class.getName();
-		String finderMethodName = "findByResourceId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(resourceId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_RESOURCEID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -411,9 +494,10 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				List<Permission> list = (List<Permission>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_RESOURCEID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -434,7 +518,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchPermissionException, SystemException {
 		List<Permission> list = findByResourceId(resourceId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Permission exists with the key {");
@@ -458,7 +542,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		List<Permission> list = findByResourceId(resourceId, count - 1, count,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Permission exists with the key {");
@@ -552,20 +636,10 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 
 	public Permission fetchByA_R(String actionId, long resourceId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED;
-		String finderClassName = Permission.class.getName();
-		String finderMethodName = "fetchByA_R";
-		String[] finderParams = new String[] {
-				String.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] { actionId, new Long(resourceId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_A_R,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -602,16 +676,19 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 
 				List<Permission> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				Permission permission = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_A_R,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					permission = list.get(0);
+
+					cacheResult(permission);
 				}
+
+				return permission;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -621,13 +698,11 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<Permission> list = (List<Permission>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (Permission)result;
 			}
 		}
 	}
@@ -683,23 +758,12 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 
 	public List<Permission> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED;
-		String finderClassName = Permission.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -731,9 +795,9 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -769,18 +833,10 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByResourceId(long resourceId) throws SystemException {
-		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED;
-		String finderClassName = Permission.class.getName();
-		String finderMethodName = "countByResourceId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(resourceId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_RESOURCEID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -815,8 +871,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_RESOURCEID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -835,20 +890,10 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 
 	public int countByA_R(String actionId, long resourceId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED;
-		String finderClassName = Permission.class.getName();
-		String finderMethodName = "countByA_R";
-		String[] finderParams = new String[] {
-				String.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] { actionId, new Long(resourceId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_A_R,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -896,9 +941,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_A_R, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -915,18 +959,10 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED;
-		String finderClassName = Permission.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -949,9 +985,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -977,28 +1012,23 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		return getGroups(pk, start, end, null);
 	}
 
-	public List<com.liferay.portal.model.Group> getGroups(long pk, int start,
-		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED_GROUPS_PERMISSIONS;
-
-		String finderClassName = "Groups_Permissions";
-
-		String finderMethodName = "getGroups";
-		String[] finderParams = new String[] {
+	public static final FinderPath FINDER_PATH_GET_GROUPS = new FinderPath(com.liferay.portal.model.impl.GroupModelImpl.ENTITY_CACHE_ENABLED,
+			PermissionModelImpl.FINDER_CACHE_ENABLED_GROUPS_PERMISSIONS,
+			"Groups_Permissions", "getGroups",
+			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
+			});
+
+	public List<com.liferay.portal.model.Group> getGroups(long pk, int start,
+		int end, OrderByComparator obc) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(pk), String.valueOf(start), String.valueOf(end),
 				String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_GET_GROUPS,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1035,9 +1065,10 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				List<com.liferay.portal.model.Group> list = (List<com.liferay.portal.model.Group>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_GET_GROUPS, finderArgs,
+					list);
+
+				groupPersistence.cacheResult(list);
 
 				return list;
 			}
@@ -1053,21 +1084,16 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public static final FinderPath FINDER_PATH_GET_GROUPS_SIZE = new FinderPath(com.liferay.portal.model.impl.GroupModelImpl.ENTITY_CACHE_ENABLED,
+			PermissionModelImpl.FINDER_CACHE_ENABLED_GROUPS_PERMISSIONS,
+			"Groups_Permissions", "getGroupsSize",
+			new String[] { Long.class.getName() });
+
 	public int getGroupsSize(long pk) throws SystemException {
-		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED_GROUPS_PERMISSIONS;
-
-		String finderClassName = "Groups_Permissions";
-
-		String finderMethodName = "getGroupsSize";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(pk) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_GET_GROUPS_SIZE,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1095,8 +1121,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_GET_GROUPS_SIZE,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1113,34 +1138,24 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public static final FinderPath FINDER_PATH_CONTAINS_GROUP = new FinderPath(com.liferay.portal.model.impl.GroupModelImpl.ENTITY_CACHE_ENABLED,
+			PermissionModelImpl.FINDER_CACHE_ENABLED_GROUPS_PERMISSIONS,
+			"Groups_Permissions", "containsGroup",
+			new String[] { Long.class.getName(), Long.class.getName() });
+
 	public boolean containsGroup(long pk, long groupPK)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED_GROUPS_PERMISSIONS;
-
-		String finderClassName = "Groups_Permissions";
-
-		String finderMethodName = "containsGroups";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(pk), new Long(groupPK) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_GROUP,
+				finderArgs, this);
 
 		if (result == null) {
 			try {
 				Boolean value = Boolean.valueOf(containsGroup.contains(pk,
 							groupPK));
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_CONTAINS_GROUP,
 					finderArgs, value);
 
 				return value.booleanValue();
@@ -1327,28 +1342,23 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		return getRoles(pk, start, end, null);
 	}
 
-	public List<com.liferay.portal.model.Role> getRoles(long pk, int start,
-		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED_ROLES_PERMISSIONS;
-
-		String finderClassName = "Roles_Permissions";
-
-		String finderMethodName = "getRoles";
-		String[] finderParams = new String[] {
+	public static final FinderPath FINDER_PATH_GET_ROLES = new FinderPath(com.liferay.portal.model.impl.RoleModelImpl.ENTITY_CACHE_ENABLED,
+			PermissionModelImpl.FINDER_CACHE_ENABLED_ROLES_PERMISSIONS,
+			"Roles_Permissions", "getRoles",
+			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
+			});
+
+	public List<com.liferay.portal.model.Role> getRoles(long pk, int start,
+		int end, OrderByComparator obc) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(pk), String.valueOf(start), String.valueOf(end),
 				String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_GET_ROLES,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1385,9 +1395,10 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				List<com.liferay.portal.model.Role> list = (List<com.liferay.portal.model.Role>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_GET_ROLES, finderArgs,
+					list);
+
+				rolePersistence.cacheResult(list);
 
 				return list;
 			}
@@ -1403,21 +1414,16 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public static final FinderPath FINDER_PATH_GET_ROLES_SIZE = new FinderPath(com.liferay.portal.model.impl.RoleModelImpl.ENTITY_CACHE_ENABLED,
+			PermissionModelImpl.FINDER_CACHE_ENABLED_ROLES_PERMISSIONS,
+			"Roles_Permissions", "getRolesSize",
+			new String[] { Long.class.getName() });
+
 	public int getRolesSize(long pk) throws SystemException {
-		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED_ROLES_PERMISSIONS;
-
-		String finderClassName = "Roles_Permissions";
-
-		String finderMethodName = "getRolesSize";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(pk) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_GET_ROLES_SIZE,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1445,8 +1451,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_GET_ROLES_SIZE,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1463,32 +1468,22 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public static final FinderPath FINDER_PATH_CONTAINS_ROLE = new FinderPath(com.liferay.portal.model.impl.RoleModelImpl.ENTITY_CACHE_ENABLED,
+			PermissionModelImpl.FINDER_CACHE_ENABLED_ROLES_PERMISSIONS,
+			"Roles_Permissions", "containsRole",
+			new String[] { Long.class.getName(), Long.class.getName() });
+
 	public boolean containsRole(long pk, long rolePK) throws SystemException {
-		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED_ROLES_PERMISSIONS;
-
-		String finderClassName = "Roles_Permissions";
-
-		String finderMethodName = "containsRoles";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(pk), new Long(rolePK) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_ROLE,
+				finderArgs, this);
 
 		if (result == null) {
 			try {
 				Boolean value = Boolean.valueOf(containsRole.contains(pk, rolePK));
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_CONTAINS_ROLE,
 					finderArgs, value);
 
 				return value.booleanValue();
@@ -1674,28 +1669,23 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		return getUsers(pk, start, end, null);
 	}
 
-	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
-		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED_USERS_PERMISSIONS;
-
-		String finderClassName = "Users_Permissions";
-
-		String finderMethodName = "getUsers";
-		String[] finderParams = new String[] {
+	public static final FinderPath FINDER_PATH_GET_USERS = new FinderPath(com.liferay.portal.model.impl.UserModelImpl.ENTITY_CACHE_ENABLED,
+			PermissionModelImpl.FINDER_CACHE_ENABLED_USERS_PERMISSIONS,
+			"Users_Permissions", "getUsers",
+			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
+			});
+
+	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
+		int end, OrderByComparator obc) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(pk), String.valueOf(start), String.valueOf(end),
 				String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_GET_USERS,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1726,9 +1716,10 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				List<com.liferay.portal.model.User> list = (List<com.liferay.portal.model.User>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_GET_USERS, finderArgs,
+					list);
+
+				userPersistence.cacheResult(list);
 
 				return list;
 			}
@@ -1744,21 +1735,16 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public static final FinderPath FINDER_PATH_GET_USERS_SIZE = new FinderPath(com.liferay.portal.model.impl.UserModelImpl.ENTITY_CACHE_ENABLED,
+			PermissionModelImpl.FINDER_CACHE_ENABLED_USERS_PERMISSIONS,
+			"Users_Permissions", "getUsersSize",
+			new String[] { Long.class.getName() });
+
 	public int getUsersSize(long pk) throws SystemException {
-		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED_USERS_PERMISSIONS;
-
-		String finderClassName = "Users_Permissions";
-
-		String finderMethodName = "getUsersSize";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(pk) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_GET_USERS_SIZE,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1786,8 +1772,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_GET_USERS_SIZE,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1804,32 +1789,22 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public static final FinderPath FINDER_PATH_CONTAINS_USER = new FinderPath(com.liferay.portal.model.impl.UserModelImpl.ENTITY_CACHE_ENABLED,
+			PermissionModelImpl.FINDER_CACHE_ENABLED_USERS_PERMISSIONS,
+			"Users_Permissions", "containsUser",
+			new String[] { Long.class.getName(), Long.class.getName() });
+
 	public boolean containsUser(long pk, long userPK) throws SystemException {
-		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED_USERS_PERMISSIONS;
-
-		String finderClassName = "Users_Permissions";
-
-		String finderMethodName = "containsUsers";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(pk), new Long(userPK) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_USER,
+				finderArgs, this);
 
 		if (result == null) {
 			try {
 				Boolean value = Boolean.valueOf(containsUser.contains(pk, userPK));
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_CONTAINS_USER,
 					finderArgs, value);
 
 				return value.booleanValue();

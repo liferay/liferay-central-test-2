@@ -25,7 +25,9 @@ package com.liferay.portlet.tasks.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -58,6 +60,140 @@ import java.util.List;
  */
 public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 	implements TasksReviewPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = TasksReview.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = TasksReview.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_USERID = new FinderPath(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
+			TasksReviewModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByUserId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_USERID = new FinderPath(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
+			TasksReviewModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByUserId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_USERID = new FinderPath(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
+			TasksReviewModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByUserId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_PROPOSALID = new FinderPath(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
+			TasksReviewModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByProposalId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_PROPOSALID = new FinderPath(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
+			TasksReviewModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByProposalId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_PROPOSALID = new FinderPath(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
+			TasksReviewModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByProposalId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_U_P = new FinderPath(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
+			TasksReviewModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByU_P",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_U_P = new FinderPath(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
+			TasksReviewModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByU_P",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_P_S = new FinderPath(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
+			TasksReviewModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByP_S",
+			new String[] { Long.class.getName(), Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_P_S = new FinderPath(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
+			TasksReviewModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByP_S",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_P_S = new FinderPath(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
+			TasksReviewModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByP_S",
+			new String[] { Long.class.getName(), Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_P_S_C = new FinderPath(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
+			TasksReviewModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByP_S_C",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Boolean.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_P_S_C = new FinderPath(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
+			TasksReviewModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByP_S_C",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Boolean.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_P_S_C = new FinderPath(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
+			TasksReviewModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByP_S_C",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Boolean.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_P_S_C_R = new FinderPath(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
+			TasksReviewModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByP_S_C_R",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Boolean.class.getName(), Boolean.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_P_S_C_R = new FinderPath(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
+			TasksReviewModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByP_S_C_R",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Boolean.class.getName(), Boolean.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_P_S_C_R = new FinderPath(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
+			TasksReviewModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByP_S_C_R",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Boolean.class.getName(), Boolean.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
+			TasksReviewModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
+			TasksReviewModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countAll", new String[0]);
+
+	public void cacheResult(TasksReview tasksReview) {
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_P,
+			new Object[] {
+				new Long(tasksReview.getUserId()),
+				new Long(tasksReview.getProposalId())
+			}, tasksReview);
+
+		EntityCacheUtil.putResult(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
+			TasksReview.class, tasksReview.getPrimaryKey(), tasksReview);
+	}
+
+	public void cacheResult(List<TasksReview> tasksReviews) {
+		for (TasksReview tasksReview : tasksReviews) {
+			if (EntityCacheUtil.getResult(
+						TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
+						TasksReview.class, tasksReview.getPrimaryKey(), this) == null) {
+				cacheResult(tasksReview);
+			}
+		}
+	}
+
 	public TasksReview create(long reviewId) {
 		TasksReview tasksReview = new TasksReviewImpl();
 
@@ -134,17 +270,28 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 			session.delete(tasksReview);
 
 			session.flush();
-
-			return tasksReview;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(TasksReview.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		TasksReviewModelImpl tasksReviewModelImpl = (TasksReviewModelImpl)tasksReview;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_P,
+			new Object[] {
+				new Long(tasksReviewModelImpl.getOriginalUserId()),
+				new Long(tasksReviewModelImpl.getOriginalProposalId())
+			});
+
+		EntityCacheUtil.removeResult(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
+			TasksReview.class, tasksReview.getPrimaryKey());
+
+		return tasksReview;
 	}
 
 	/**
@@ -203,6 +350,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 	public TasksReview updateImpl(
 		com.liferay.portlet.tasks.model.TasksReview tasksReview, boolean merge)
 		throws SystemException {
+		boolean isNew = tasksReview.isNew();
+
 		Session session = null;
 
 		try {
@@ -211,17 +360,42 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, tasksReview, merge);
 
 			tasksReview.setNew(false);
-
-			return tasksReview;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(TasksReview.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		TasksReviewModelImpl tasksReviewModelImpl = (TasksReviewModelImpl)tasksReview;
+
+		if (!isNew &&
+				((tasksReview.getUserId() != tasksReviewModelImpl.getOriginalUserId()) ||
+				(tasksReview.getProposalId() != tasksReviewModelImpl.getOriginalProposalId()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_P,
+				new Object[] {
+					new Long(tasksReviewModelImpl.getOriginalUserId()),
+					new Long(tasksReviewModelImpl.getOriginalProposalId())
+				});
+		}
+
+		if (isNew ||
+				((tasksReview.getUserId() != tasksReviewModelImpl.getOriginalUserId()) ||
+				(tasksReview.getProposalId() != tasksReviewModelImpl.getOriginalProposalId()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_P,
+				new Object[] {
+					new Long(tasksReview.getUserId()),
+					new Long(tasksReview.getProposalId())
+				}, tasksReview);
+		}
+
+		EntityCacheUtil.putResult(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
+			TasksReview.class, tasksReview.getPrimaryKey(), tasksReview);
+
+		return tasksReview;
 	}
 
 	public TasksReview findByPrimaryKey(long reviewId)
@@ -243,36 +417,40 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 	public TasksReview fetchByPrimaryKey(long reviewId)
 		throws SystemException {
-		Session session = null;
+		TasksReview result = (TasksReview)EntityCacheUtil.getResult(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
+				TasksReview.class, reviewId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (TasksReview)session.get(TasksReviewImpl.class,
-				new Long(reviewId));
+			try {
+				session = openSession();
+
+				TasksReview tasksReview = (TasksReview)session.get(TasksReviewImpl.class,
+						new Long(reviewId));
+
+				cacheResult(tasksReview);
+
+				return tasksReview;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (TasksReview)result;
 		}
 	}
 
 	public List<TasksReview> findByUserId(long userId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksReview.class.getName();
-		String finderMethodName = "findByUserId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -301,9 +479,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 				List<TasksReview> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -326,27 +505,14 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 	public List<TasksReview> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksReview.class.getName();
-		String finderMethodName = "findByUserId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -383,9 +549,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 				List<TasksReview> list = (List<TasksReview>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -405,7 +572,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchReviewException, SystemException {
 		List<TasksReview> list = findByUserId(userId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TasksReview exists with the key {");
@@ -427,7 +594,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 		List<TasksReview> list = findByUserId(userId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TasksReview exists with the key {");
@@ -501,18 +668,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 	public List<TasksReview> findByProposalId(long proposalId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksReview.class.getName();
-		String finderMethodName = "findByProposalId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(proposalId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_PROPOSALID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -541,9 +700,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 				List<TasksReview> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_PROPOSALID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -566,27 +726,14 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 	public List<TasksReview> findByProposalId(long proposalId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksReview.class.getName();
-		String finderMethodName = "findByProposalId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(proposalId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_PROPOSALID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -623,9 +770,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 				List<TasksReview> list = (List<TasksReview>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_PROPOSALID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -645,7 +793,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchReviewException, SystemException {
 		List<TasksReview> list = findByProposalId(proposalId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TasksReview exists with the key {");
@@ -668,7 +816,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 		List<TasksReview> list = findByProposalId(proposalId, count - 1, count,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TasksReview exists with the key {");
@@ -769,22 +917,12 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 	public TasksReview fetchByU_P(long userId, long proposalId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksReview.class.getName();
-		String finderMethodName = "fetchByU_P";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(userId), new Long(proposalId)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_U_P,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -819,16 +957,19 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 				List<TasksReview> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				TasksReview tasksReview = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_P,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					tasksReview = list.get(0);
+
+					cacheResult(tasksReview);
 				}
+
+				return tasksReview;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -838,35 +979,23 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<TasksReview> list = (List<TasksReview>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (TasksReview)result;
 			}
 		}
 	}
 
 	public List<TasksReview> findByP_S(long proposalId, int stage)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksReview.class.getName();
-		String finderMethodName = "findByP_S";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Integer.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(proposalId), new Integer(stage)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_P_S,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -901,9 +1030,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 				List<TasksReview> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_P_S, finderArgs,
+					list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -926,27 +1056,14 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 	public List<TasksReview> findByP_S(long proposalId, int stage, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksReview.class.getName();
-		String finderMethodName = "findByP_S";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Integer.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(proposalId), new Integer(stage),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_P_S,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -989,9 +1106,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 				List<TasksReview> list = (List<TasksReview>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_P_S,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1011,7 +1129,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchReviewException, SystemException {
 		List<TasksReview> list = findByP_S(proposalId, stage, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TasksReview exists with the key {");
@@ -1037,7 +1155,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 		List<TasksReview> list = findByP_S(proposalId, stage, count - 1, count,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TasksReview exists with the key {");
@@ -1121,24 +1239,13 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 	public List<TasksReview> findByP_S_C(long proposalId, int stage,
 		boolean completed) throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksReview.class.getName();
-		String finderMethodName = "findByP_S_C";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Integer.class.getName(),
-				Boolean.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(proposalId), new Integer(stage),
 				Boolean.valueOf(completed)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_P_S_C,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1179,9 +1286,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 				List<TasksReview> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_P_S_C,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1205,16 +1313,6 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 	public List<TasksReview> findByP_S_C(long proposalId, int stage,
 		boolean completed, int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksReview.class.getName();
-		String finderMethodName = "findByP_S_C";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Integer.class.getName(),
-				Boolean.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(proposalId), new Integer(stage),
 				Boolean.valueOf(completed),
@@ -1222,12 +1320,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_P_S_C,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1276,9 +1370,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 				List<TasksReview> list = (List<TasksReview>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_P_S_C,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1300,7 +1395,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 		List<TasksReview> list = findByP_S_C(proposalId, stage, completed, 0,
 				1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TasksReview exists with the key {");
@@ -1330,7 +1425,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 		List<TasksReview> list = findByP_S_C(proposalId, stage, completed,
 				count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TasksReview exists with the key {");
@@ -1423,24 +1518,13 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 	public List<TasksReview> findByP_S_C_R(long proposalId, int stage,
 		boolean completed, boolean rejected) throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksReview.class.getName();
-		String finderMethodName = "findByP_S_C_R";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Integer.class.getName(),
-				Boolean.class.getName(), Boolean.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(proposalId), new Integer(stage),
 				Boolean.valueOf(completed), Boolean.valueOf(rejected)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_P_S_C_R,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1487,9 +1571,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 				List<TasksReview> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_P_S_C_R,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1515,16 +1600,6 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 	public List<TasksReview> findByP_S_C_R(long proposalId, int stage,
 		boolean completed, boolean rejected, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksReview.class.getName();
-		String finderMethodName = "findByP_S_C_R";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Integer.class.getName(),
-				Boolean.class.getName(), Boolean.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(proposalId), new Integer(stage),
 				Boolean.valueOf(completed), Boolean.valueOf(rejected),
@@ -1532,12 +1607,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_P_S_C_R,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1592,9 +1663,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 				List<TasksReview> list = (List<TasksReview>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_P_S_C_R,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1616,7 +1688,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 		List<TasksReview> list = findByP_S_C_R(proposalId, stage, completed,
 				rejected, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TasksReview exists with the key {");
@@ -1649,7 +1721,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 		List<TasksReview> list = findByP_S_C_R(proposalId, stage, completed,
 				rejected, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TasksReview exists with the key {");
@@ -1800,23 +1872,12 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 	public List<TasksReview> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksReview.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1855,9 +1916,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1921,18 +1982,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByUserId(long userId) throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksReview.class.getName();
-		String finderMethodName = "countByUserId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1968,8 +2021,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1987,18 +2039,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByProposalId(long proposalId) throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksReview.class.getName();
-		String finderMethodName = "countByProposalId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(proposalId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_PROPOSALID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2034,8 +2078,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_PROPOSALID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -2054,22 +2097,12 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 	public int countByU_P(long userId, long proposalId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksReview.class.getName();
-		String finderMethodName = "countByU_P";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(userId), new Long(proposalId)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_P,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2111,9 +2144,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U_P, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -2130,22 +2162,12 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByP_S(long proposalId, int stage) throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksReview.class.getName();
-		String finderMethodName = "countByP_S";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Integer.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(proposalId), new Integer(stage)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_P_S,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2187,9 +2209,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_P_S, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -2207,24 +2228,13 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 	public int countByP_S_C(long proposalId, int stage, boolean completed)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksReview.class.getName();
-		String finderMethodName = "countByP_S_C";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Integer.class.getName(),
-				Boolean.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(proposalId), new Integer(stage),
 				Boolean.valueOf(completed)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_P_S_C,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2272,8 +2282,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_P_S_C,
 					finderArgs, count);
 
 				return count.intValue();
@@ -2292,24 +2301,13 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 	public int countByP_S_C_R(long proposalId, int stage, boolean completed,
 		boolean rejected) throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksReview.class.getName();
-		String finderMethodName = "countByP_S_C_R";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Integer.class.getName(),
-				Boolean.class.getName(), Boolean.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(proposalId), new Integer(stage),
 				Boolean.valueOf(completed), Boolean.valueOf(rejected)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_P_S_C_R,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2363,8 +2361,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_P_S_C_R,
 					finderArgs, count);
 
 				return count.intValue();
@@ -2382,18 +2379,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksReview.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2416,9 +2405,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

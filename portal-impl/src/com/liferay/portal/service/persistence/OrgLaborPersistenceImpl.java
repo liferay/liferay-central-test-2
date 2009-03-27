@@ -26,7 +26,9 @@ import com.liferay.portal.NoSuchOrgLaborException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -56,6 +58,46 @@ import java.util.List;
  */
 public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 	implements OrgLaborPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = OrgLabor.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = OrgLabor.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_ORGANIZATIONID = new FinderPath(OrgLaborModelImpl.ENTITY_CACHE_ENABLED,
+			OrgLaborModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByOrganizationId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_ORGANIZATIONID = new FinderPath(OrgLaborModelImpl.ENTITY_CACHE_ENABLED,
+			OrgLaborModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByOrganizationId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_ORGANIZATIONID = new FinderPath(OrgLaborModelImpl.ENTITY_CACHE_ENABLED,
+			OrgLaborModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByOrganizationId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(OrgLaborModelImpl.ENTITY_CACHE_ENABLED,
+			OrgLaborModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(OrgLaborModelImpl.ENTITY_CACHE_ENABLED,
+			OrgLaborModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countAll", new String[0]);
+
+	public void cacheResult(OrgLabor orgLabor) {
+		EntityCacheUtil.putResult(OrgLaborModelImpl.ENTITY_CACHE_ENABLED,
+			OrgLabor.class, orgLabor.getPrimaryKey(), orgLabor);
+	}
+
+	public void cacheResult(List<OrgLabor> orgLabors) {
+		for (OrgLabor orgLabor : orgLabors) {
+			if (EntityCacheUtil.getResult(
+						OrgLaborModelImpl.ENTITY_CACHE_ENABLED, OrgLabor.class,
+						orgLabor.getPrimaryKey(), this) == null) {
+				cacheResult(orgLabor);
+			}
+		}
+	}
+
 	public OrgLabor create(long orgLaborId) {
 		OrgLabor orgLabor = new OrgLaborImpl();
 
@@ -130,17 +172,22 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 			session.delete(orgLabor);
 
 			session.flush();
-
-			return orgLabor;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(OrgLabor.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		OrgLaborModelImpl orgLaborModelImpl = (OrgLaborModelImpl)orgLabor;
+
+		EntityCacheUtil.removeResult(OrgLaborModelImpl.ENTITY_CACHE_ENABLED,
+			OrgLabor.class, orgLabor.getPrimaryKey());
+
+		return orgLabor;
 	}
 
 	/**
@@ -197,6 +244,8 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 
 	public OrgLabor updateImpl(com.liferay.portal.model.OrgLabor orgLabor,
 		boolean merge) throws SystemException {
+		boolean isNew = orgLabor.isNew();
+
 		Session session = null;
 
 		try {
@@ -205,17 +254,22 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, orgLabor, merge);
 
 			orgLabor.setNew(false);
-
-			return orgLabor;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(OrgLabor.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		OrgLaborModelImpl orgLaborModelImpl = (OrgLaborModelImpl)orgLabor;
+
+		EntityCacheUtil.putResult(OrgLaborModelImpl.ENTITY_CACHE_ENABLED,
+			OrgLabor.class, orgLabor.getPrimaryKey(), orgLabor);
+
+		return orgLabor;
 	}
 
 	public OrgLabor findByPrimaryKey(long orgLaborId)
@@ -237,36 +291,40 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 
 	public OrgLabor fetchByPrimaryKey(long orgLaborId)
 		throws SystemException {
-		Session session = null;
+		OrgLabor result = (OrgLabor)EntityCacheUtil.getResult(OrgLaborModelImpl.ENTITY_CACHE_ENABLED,
+				OrgLabor.class, orgLaborId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (OrgLabor)session.get(OrgLaborImpl.class,
-				new Long(orgLaborId));
+			try {
+				session = openSession();
+
+				OrgLabor orgLabor = (OrgLabor)session.get(OrgLaborImpl.class,
+						new Long(orgLaborId));
+
+				cacheResult(orgLabor);
+
+				return orgLabor;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (OrgLabor)result;
 		}
 	}
 
 	public List<OrgLabor> findByOrganizationId(long organizationId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = OrgLaborModelImpl.CACHE_ENABLED;
-		String finderClassName = OrgLabor.class.getName();
-		String finderMethodName = "findByOrganizationId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(organizationId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ORGANIZATIONID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -295,9 +353,10 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 
 				List<OrgLabor> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ORGANIZATIONID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -320,27 +379,14 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 
 	public List<OrgLabor> findByOrganizationId(long organizationId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = OrgLaborModelImpl.CACHE_ENABLED;
-		String finderClassName = OrgLabor.class.getName();
-		String finderMethodName = "findByOrganizationId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(organizationId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ORGANIZATIONID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -377,9 +423,10 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 				List<OrgLabor> list = (List<OrgLabor>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_ORGANIZATIONID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -399,7 +446,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchOrgLaborException, SystemException {
 		List<OrgLabor> list = findByOrganizationId(organizationId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No OrgLabor exists with the key {");
@@ -422,7 +469,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 		List<OrgLabor> list = findByOrganizationId(organizationId, count - 1,
 				count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No OrgLabor exists with the key {");
@@ -544,23 +591,12 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 
 	public List<OrgLabor> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = OrgLaborModelImpl.CACHE_ENABLED;
-		String finderClassName = OrgLabor.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -599,9 +635,9 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -632,18 +668,10 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 
 	public int countByOrganizationId(long organizationId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = OrgLaborModelImpl.CACHE_ENABLED;
-		String finderClassName = OrgLabor.class.getName();
-		String finderMethodName = "countByOrganizationId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(organizationId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ORGANIZATIONID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -678,8 +706,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_ORGANIZATIONID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -697,18 +724,10 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = OrgLaborModelImpl.CACHE_ENABLED;
-		String finderClassName = OrgLabor.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -731,9 +750,8 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

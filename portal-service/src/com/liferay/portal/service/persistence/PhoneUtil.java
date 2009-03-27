@@ -29,6 +29,15 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class PhoneUtil {
+	public static void cacheResult(com.liferay.portal.model.Phone phone) {
+		getPersistence().cacheResult(phone);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.Phone> phones) {
+		getPersistence().cacheResult(phones);
+	}
+
 	public static com.liferay.portal.model.Phone create(long phoneId) {
 		return getPersistence().create(phoneId);
 	}

@@ -83,7 +83,10 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.polls.model.PollsChoice"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.polls.model.PollsChoice"),
 			true);
 
@@ -132,7 +135,7 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice> {
 	}
 
 	public void setUuid(String uuid) {
-		if ((uuid != null) && (uuid != _uuid)) {
+		if ((uuid != null) && !uuid.equals(_uuid)) {
 			_uuid = uuid;
 		}
 	}
@@ -154,7 +157,17 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice> {
 	public void setQuestionId(long questionId) {
 		if (questionId != _questionId) {
 			_questionId = questionId;
+
+			if (!_setOriginalQuestionId) {
+				_setOriginalQuestionId = true;
+
+				_originalQuestionId = questionId;
+			}
 		}
+	}
+
+	public long getOriginalQuestionId() {
+		return _originalQuestionId;
 	}
 
 	public String getName() {
@@ -166,7 +179,15 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice> {
 				((name != null) && (_name == null)) ||
 				((name != null) && (_name != null) && !name.equals(_name))) {
 			_name = name;
+
+			if (_originalName == null) {
+				_originalName = name;
+			}
 		}
+	}
+
+	public String getOriginalName() {
+		return GetterUtil.getString(_originalName);
 	}
 
 	public String getDescription() {
@@ -284,7 +305,10 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice> {
 	private String _uuid;
 	private long _choiceId;
 	private long _questionId;
+	private long _originalQuestionId;
+	private boolean _setOriginalQuestionId;
 	private String _name;
+	private String _originalName;
 	private String _description;
 	private transient ExpandoBridge _expandoBridge;
 }

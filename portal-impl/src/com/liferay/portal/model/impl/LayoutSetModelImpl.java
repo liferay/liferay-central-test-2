@@ -106,7 +106,10 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portal.model.LayoutSet"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.LayoutSet"),
 			true);
 
@@ -175,7 +178,17 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	public void setGroupId(long groupId) {
 		if (groupId != _groupId) {
 			_groupId = groupId;
+
+			if (!_setOriginalGroupId) {
+				_setOriginalGroupId = true;
+
+				_originalGroupId = groupId;
+			}
 		}
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	public long getCompanyId() {
@@ -199,7 +212,17 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	public void setPrivateLayout(boolean privateLayout) {
 		if (privateLayout != _privateLayout) {
 			_privateLayout = privateLayout;
+
+			if (!_setOriginalPrivateLayout) {
+				_setOriginalPrivateLayout = true;
+
+				_originalPrivateLayout = privateLayout;
+			}
 		}
+	}
+
+	public boolean getOriginalPrivateLayout() {
+		return _originalPrivateLayout;
 	}
 
 	public boolean getLogo() {
@@ -310,7 +333,15 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 				((virtualHost != null) && (_virtualHost != null) &&
 				!virtualHost.equals(_virtualHost))) {
 			_virtualHost = virtualHost;
+
+			if (_originalVirtualHost == null) {
+				_originalVirtualHost = virtualHost;
+			}
 		}
+	}
+
+	public String getOriginalVirtualHost() {
+		return GetterUtil.getString(_originalVirtualHost);
 	}
 
 	public LayoutSet toEscapedModel() {
@@ -418,8 +449,12 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 
 	private long _layoutSetId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private boolean _privateLayout;
+	private boolean _originalPrivateLayout;
+	private boolean _setOriginalPrivateLayout;
 	private boolean _logo;
 	private long _logoId;
 	private String _themeId;
@@ -429,5 +464,6 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	private String _css;
 	private int _pageCount;
 	private String _virtualHost;
+	private String _originalVirtualHost;
 	private transient ExpandoBridge _expandoBridge;
 }

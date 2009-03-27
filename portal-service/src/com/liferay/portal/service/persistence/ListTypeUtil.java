@@ -29,6 +29,15 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class ListTypeUtil {
+	public static void cacheResult(com.liferay.portal.model.ListType listType) {
+		getPersistence().cacheResult(listType);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.ListType> listTypes) {
+		getPersistence().cacheResult(listTypes);
+	}
+
 	public static com.liferay.portal.model.ListType create(int listTypeId) {
 		return getPersistence().create(listTypeId);
 	}

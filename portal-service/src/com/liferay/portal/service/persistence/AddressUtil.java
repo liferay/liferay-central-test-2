@@ -29,6 +29,15 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class AddressUtil {
+	public static void cacheResult(com.liferay.portal.model.Address address) {
+		getPersistence().cacheResult(address);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.Address> addresses) {
+		getPersistence().cacheResult(addresses);
+	}
+
 	public static com.liferay.portal.model.Address create(long addressId) {
 		return getPersistence().create(addressId);
 	}

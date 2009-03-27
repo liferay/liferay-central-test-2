@@ -26,7 +26,9 @@ import com.liferay.portal.NoSuchServiceComponentException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -56,6 +58,64 @@ import java.util.List;
  */
 public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 	implements ServiceComponentPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = ServiceComponent.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = ServiceComponent.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_BUILDNAMESPACE = new FinderPath(ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
+			ServiceComponentModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByBuildNamespace",
+			new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_BUILDNAMESPACE = new FinderPath(ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
+			ServiceComponentModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByBuildNamespace",
+			new String[] {
+				String.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_BUILDNAMESPACE = new FinderPath(ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
+			ServiceComponentModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByBuildNamespace",
+			new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_BNS_BNU = new FinderPath(ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
+			ServiceComponentModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByBNS_BNU",
+			new String[] { String.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_BNS_BNU = new FinderPath(ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
+			ServiceComponentModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByBNS_BNU",
+			new String[] { String.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
+			ServiceComponentModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
+			ServiceComponentModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
+
+	public void cacheResult(ServiceComponent serviceComponent) {
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BNS_BNU,
+			new Object[] {
+				serviceComponent.getBuildNamespace(),
+				new Long(serviceComponent.getBuildNumber())
+			}, serviceComponent);
+
+		EntityCacheUtil.putResult(ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
+			ServiceComponent.class, serviceComponent.getPrimaryKey(),
+			serviceComponent);
+	}
+
+	public void cacheResult(List<ServiceComponent> serviceComponents) {
+		for (ServiceComponent serviceComponent : serviceComponents) {
+			if (EntityCacheUtil.getResult(
+						ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
+						ServiceComponent.class,
+						serviceComponent.getPrimaryKey(), this) == null) {
+				cacheResult(serviceComponent);
+			}
+		}
+	}
+
 	public ServiceComponent create(long serviceComponentId) {
 		ServiceComponent serviceComponent = new ServiceComponentImpl();
 
@@ -134,17 +194,28 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 			session.delete(serviceComponent);
 
 			session.flush();
-
-			return serviceComponent;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(ServiceComponent.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		ServiceComponentModelImpl serviceComponentModelImpl = (ServiceComponentModelImpl)serviceComponent;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_BNS_BNU,
+			new Object[] {
+				serviceComponentModelImpl.getOriginalBuildNamespace(),
+				new Long(serviceComponentModelImpl.getOriginalBuildNumber())
+			});
+
+		EntityCacheUtil.removeResult(ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
+			ServiceComponent.class, serviceComponent.getPrimaryKey());
+
+		return serviceComponent;
 	}
 
 	/**
@@ -203,6 +274,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 	public ServiceComponent updateImpl(
 		com.liferay.portal.model.ServiceComponent serviceComponent,
 		boolean merge) throws SystemException {
+		boolean isNew = serviceComponent.isNew();
+
 		Session session = null;
 
 		try {
@@ -211,17 +284,45 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, serviceComponent, merge);
 
 			serviceComponent.setNew(false);
-
-			return serviceComponent;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(ServiceComponent.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		ServiceComponentModelImpl serviceComponentModelImpl = (ServiceComponentModelImpl)serviceComponent;
+
+		if (!isNew &&
+				(!serviceComponent.getBuildNamespace()
+									  .equals(serviceComponentModelImpl.getOriginalBuildNamespace()) ||
+				(serviceComponent.getBuildNumber() != serviceComponentModelImpl.getOriginalBuildNumber()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_BNS_BNU,
+				new Object[] {
+					serviceComponentModelImpl.getOriginalBuildNamespace(),
+					new Long(serviceComponentModelImpl.getOriginalBuildNumber())
+				});
+		}
+
+		if (isNew ||
+				(!serviceComponent.getBuildNamespace()
+									  .equals(serviceComponentModelImpl.getOriginalBuildNamespace()) ||
+				(serviceComponent.getBuildNumber() != serviceComponentModelImpl.getOriginalBuildNumber()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BNS_BNU,
+				new Object[] {
+					serviceComponent.getBuildNamespace(),
+					new Long(serviceComponent.getBuildNumber())
+				}, serviceComponent);
+		}
+
+		EntityCacheUtil.putResult(ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
+			ServiceComponent.class, serviceComponent.getPrimaryKey(),
+			serviceComponent);
+
+		return serviceComponent;
 	}
 
 	public ServiceComponent findByPrimaryKey(long serviceComponentId)
@@ -244,36 +345,40 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 
 	public ServiceComponent fetchByPrimaryKey(long serviceComponentId)
 		throws SystemException {
-		Session session = null;
+		ServiceComponent result = (ServiceComponent)EntityCacheUtil.getResult(ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
+				ServiceComponent.class, serviceComponentId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (ServiceComponent)session.get(ServiceComponentImpl.class,
-				new Long(serviceComponentId));
+			try {
+				session = openSession();
+
+				ServiceComponent serviceComponent = (ServiceComponent)session.get(ServiceComponentImpl.class,
+						new Long(serviceComponentId));
+
+				cacheResult(serviceComponent);
+
+				return serviceComponent;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (ServiceComponent)result;
 		}
 	}
 
 	public List<ServiceComponent> findByBuildNamespace(String buildNamespace)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = ServiceComponentModelImpl.CACHE_ENABLED;
-		String finderClassName = ServiceComponent.class.getName();
-		String finderMethodName = "findByBuildNamespace";
-		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { buildNamespace };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_BUILDNAMESPACE,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -310,9 +415,10 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 
 				List<ServiceComponent> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_BUILDNAMESPACE,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -335,27 +441,14 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 
 	public List<ServiceComponent> findByBuildNamespace(String buildNamespace,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = ServiceComponentModelImpl.CACHE_ENABLED;
-		String finderClassName = ServiceComponent.class.getName();
-		String finderMethodName = "findByBuildNamespace";
-		String[] finderParams = new String[] {
-				String.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				buildNamespace,
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_BUILDNAMESPACE,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -400,9 +493,10 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 				List<ServiceComponent> list = (List<ServiceComponent>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_BUILDNAMESPACE,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -424,7 +518,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 		List<ServiceComponent> list = findByBuildNamespace(buildNamespace, 0,
 				1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ServiceComponent exists with the key {");
@@ -448,7 +542,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 		List<ServiceComponent> list = findByBuildNamespace(buildNamespace,
 				count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ServiceComponent exists with the key {");
@@ -559,20 +653,10 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 
 	public ServiceComponent fetchByBNS_BNU(String buildNamespace,
 		long buildNumber) throws SystemException {
-		boolean finderClassNameCacheEnabled = ServiceComponentModelImpl.CACHE_ENABLED;
-		String finderClassName = ServiceComponent.class.getName();
-		String finderMethodName = "fetchByBNS_BNU";
-		String[] finderParams = new String[] {
-				String.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] { buildNamespace, new Long(buildNumber) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_BNS_BNU,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -615,16 +699,19 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 
 				List<ServiceComponent> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				ServiceComponent serviceComponent = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BNS_BNU,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					serviceComponent = list.get(0);
+
+					cacheResult(serviceComponent);
 				}
+
+				return serviceComponent;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -634,13 +721,11 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<ServiceComponent> list = (List<ServiceComponent>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (ServiceComponent)result;
 			}
 		}
 	}
@@ -696,23 +781,12 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 
 	public List<ServiceComponent> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = ServiceComponentModelImpl.CACHE_ENABLED;
-		String finderClassName = ServiceComponent.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -751,9 +825,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -793,18 +867,10 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 
 	public int countByBuildNamespace(String buildNamespace)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = ServiceComponentModelImpl.CACHE_ENABLED;
-		String finderClassName = ServiceComponent.class.getName();
-		String finderMethodName = "countByBuildNamespace";
-		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { buildNamespace };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_BUILDNAMESPACE,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -847,8 +913,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_BUILDNAMESPACE,
 					finderArgs, count);
 
 				return count.intValue();
@@ -867,20 +932,10 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 
 	public int countByBNS_BNU(String buildNamespace, long buildNumber)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = ServiceComponentModelImpl.CACHE_ENABLED;
-		String finderClassName = ServiceComponent.class.getName();
-		String finderMethodName = "countByBNS_BNU";
-		String[] finderParams = new String[] {
-				String.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] { buildNamespace, new Long(buildNumber) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_BNS_BNU,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -929,8 +984,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_BNS_BNU,
 					finderArgs, count);
 
 				return count.intValue();
@@ -948,18 +1002,10 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = ServiceComponentModelImpl.CACHE_ENABLED;
-		String finderClassName = ServiceComponent.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -982,9 +1028,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

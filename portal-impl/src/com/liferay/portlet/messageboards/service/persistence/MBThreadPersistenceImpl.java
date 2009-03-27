@@ -25,7 +25,9 @@ package com.liferay.portlet.messageboards.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -58,6 +60,61 @@ import java.util.List;
  */
 public class MBThreadPersistenceImpl extends BasePersistenceImpl
 	implements MBThreadPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = MBThread.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = MBThread.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
+			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByGroupId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_GROUPID = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
+			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByGroupId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
+			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByGroupId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_CATEGORYID = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
+			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByCategoryId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_CATEGORYID = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
+			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByCategoryId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_CATEGORYID = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
+			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByCategoryId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
+			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
+			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countAll", new String[0]);
+
+	public void cacheResult(MBThread mbThread) {
+		EntityCacheUtil.putResult(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
+			MBThread.class, mbThread.getPrimaryKey(), mbThread);
+	}
+
+	public void cacheResult(List<MBThread> mbThreads) {
+		for (MBThread mbThread : mbThreads) {
+			if (EntityCacheUtil.getResult(
+						MBThreadModelImpl.ENTITY_CACHE_ENABLED, MBThread.class,
+						mbThread.getPrimaryKey(), this) == null) {
+				cacheResult(mbThread);
+			}
+		}
+	}
+
 	public MBThread create(long threadId) {
 		MBThread mbThread = new MBThreadImpl();
 
@@ -132,17 +189,22 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 			session.delete(mbThread);
 
 			session.flush();
-
-			return mbThread;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(MBThread.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		MBThreadModelImpl mbThreadModelImpl = (MBThreadModelImpl)mbThread;
+
+		EntityCacheUtil.removeResult(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
+			MBThread.class, mbThread.getPrimaryKey());
+
+		return mbThread;
 	}
 
 	/**
@@ -200,6 +262,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 	public MBThread updateImpl(
 		com.liferay.portlet.messageboards.model.MBThread mbThread, boolean merge)
 		throws SystemException {
+		boolean isNew = mbThread.isNew();
+
 		Session session = null;
 
 		try {
@@ -208,17 +272,22 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, mbThread, merge);
 
 			mbThread.setNew(false);
-
-			return mbThread;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(MBThread.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		MBThreadModelImpl mbThreadModelImpl = (MBThreadModelImpl)mbThread;
+
+		EntityCacheUtil.putResult(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
+			MBThread.class, mbThread.getPrimaryKey(), mbThread);
+
+		return mbThread;
 	}
 
 	public MBThread findByPrimaryKey(long threadId)
@@ -239,34 +308,39 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public MBThread fetchByPrimaryKey(long threadId) throws SystemException {
-		Session session = null;
+		MBThread result = (MBThread)EntityCacheUtil.getResult(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
+				MBThread.class, threadId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (MBThread)session.get(MBThreadImpl.class, new Long(threadId));
+			try {
+				session = openSession();
+
+				MBThread mbThread = (MBThread)session.get(MBThreadImpl.class,
+						new Long(threadId));
+
+				cacheResult(mbThread);
+
+				return mbThread;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (MBThread)result;
 		}
 	}
 
 	public List<MBThread> findByGroupId(long groupId) throws SystemException {
-		boolean finderClassNameCacheEnabled = MBThreadModelImpl.CACHE_ENABLED;
-		String finderClassName = MBThread.class.getName();
-		String finderMethodName = "findByGroupId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -296,9 +370,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				List<MBThread> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -321,27 +396,14 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBThread> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = MBThreadModelImpl.CACHE_ENABLED;
-		String finderClassName = MBThread.class.getName();
-		String finderMethodName = "findByGroupId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -379,9 +441,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 				List<MBThread> list = (List<MBThread>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -401,7 +464,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchThreadException, SystemException {
 		List<MBThread> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBThread exists with the key {");
@@ -423,7 +486,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 		List<MBThread> list = findByGroupId(groupId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBThread exists with the key {");
@@ -497,18 +560,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBThread> findByCategoryId(long categoryId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = MBThreadModelImpl.CACHE_ENABLED;
-		String finderClassName = MBThread.class.getName();
-		String finderMethodName = "findByCategoryId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(categoryId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_CATEGORYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -538,9 +593,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				List<MBThread> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_CATEGORYID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -563,27 +619,14 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBThread> findByCategoryId(long categoryId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = MBThreadModelImpl.CACHE_ENABLED;
-		String finderClassName = MBThread.class.getName();
-		String finderMethodName = "findByCategoryId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(categoryId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_CATEGORYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -621,9 +664,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 				List<MBThread> list = (List<MBThread>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_CATEGORYID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -643,7 +687,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchThreadException, SystemException {
 		List<MBThread> list = findByCategoryId(categoryId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBThread exists with the key {");
@@ -665,7 +709,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 		List<MBThread> list = findByCategoryId(categoryId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBThread exists with the key {");
@@ -788,23 +832,12 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBThread> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = MBThreadModelImpl.CACHE_ENABLED;
-		String finderClassName = MBThread.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -844,9 +877,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -881,18 +914,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		boolean finderClassNameCacheEnabled = MBThreadModelImpl.CACHE_ENABLED;
-		String finderClassName = MBThread.class.getName();
-		String finderMethodName = "countByGroupId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -928,8 +953,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -947,18 +971,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByCategoryId(long categoryId) throws SystemException {
-		boolean finderClassNameCacheEnabled = MBThreadModelImpl.CACHE_ENABLED;
-		String finderClassName = MBThread.class.getName();
-		String finderMethodName = "countByCategoryId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(categoryId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_CATEGORYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -994,8 +1010,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CATEGORYID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1013,18 +1028,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = MBThreadModelImpl.CACHE_ENABLED;
-		String finderClassName = MBThread.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1047,9 +1054,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

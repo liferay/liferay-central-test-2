@@ -29,6 +29,12 @@ package com.liferay.portal.service.persistence;
  *
  */
 public interface PasswordPolicyPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portal.model.PasswordPolicy passwordPolicy);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portal.model.PasswordPolicy> passwordPolicies);
+
 	public com.liferay.portal.model.PasswordPolicy create(long passwordPolicyId);
 
 	public com.liferay.portal.model.PasswordPolicy remove(long passwordPolicyId)

@@ -29,6 +29,16 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class UserTrackerPathUtil {
+	public static void cacheResult(
+		com.liferay.portal.model.UserTrackerPath userTrackerPath) {
+		getPersistence().cacheResult(userTrackerPath);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.UserTrackerPath> userTrackerPaths) {
+		getPersistence().cacheResult(userTrackerPaths);
+	}
+
 	public static com.liferay.portal.model.UserTrackerPath create(
 		long userTrackerPathId) {
 		return getPersistence().create(userTrackerPathId);

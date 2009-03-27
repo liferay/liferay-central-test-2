@@ -25,7 +25,9 @@ package com.liferay.portlet.journal.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -60,6 +62,130 @@ import java.util.List;
  */
 public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 	implements JournalStructurePersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = JournalStructure.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = JournalStructure.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(JournalStructureModelImpl.ENTITY_CACHE_ENABLED,
+			JournalStructureModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByUuid",
+			new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_UUID = new FinderPath(JournalStructureModelImpl.ENTITY_CACHE_ENABLED,
+			JournalStructureModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByUuid",
+			new String[] {
+				String.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_UUID = new FinderPath(JournalStructureModelImpl.ENTITY_CACHE_ENABLED,
+			JournalStructureModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByUuid",
+			new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_UUID_G = new FinderPath(JournalStructureModelImpl.ENTITY_CACHE_ENABLED,
+			JournalStructureModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByUUID_G",
+			new String[] { String.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_UUID_G = new FinderPath(JournalStructureModelImpl.ENTITY_CACHE_ENABLED,
+			JournalStructureModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByUUID_G",
+			new String[] { String.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(JournalStructureModelImpl.ENTITY_CACHE_ENABLED,
+			JournalStructureModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByGroupId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_GROUPID = new FinderPath(JournalStructureModelImpl.ENTITY_CACHE_ENABLED,
+			JournalStructureModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByGroupId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(JournalStructureModelImpl.ENTITY_CACHE_ENABLED,
+			JournalStructureModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByGroupId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_STRUCTUREID = new FinderPath(JournalStructureModelImpl.ENTITY_CACHE_ENABLED,
+			JournalStructureModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByStructureId",
+			new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_STRUCTUREID = new FinderPath(JournalStructureModelImpl.ENTITY_CACHE_ENABLED,
+			JournalStructureModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByStructureId",
+			new String[] {
+				String.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_STRUCTUREID = new FinderPath(JournalStructureModelImpl.ENTITY_CACHE_ENABLED,
+			JournalStructureModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByStructureId",
+			new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_G_S = new FinderPath(JournalStructureModelImpl.ENTITY_CACHE_ENABLED,
+			JournalStructureModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByG_S",
+			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_S = new FinderPath(JournalStructureModelImpl.ENTITY_CACHE_ENABLED,
+			JournalStructureModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByG_S",
+			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_G_P = new FinderPath(JournalStructureModelImpl.ENTITY_CACHE_ENABLED,
+			JournalStructureModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByG_P",
+			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_P = new FinderPath(JournalStructureModelImpl.ENTITY_CACHE_ENABLED,
+			JournalStructureModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByG_P",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_P = new FinderPath(JournalStructureModelImpl.ENTITY_CACHE_ENABLED,
+			JournalStructureModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByG_P",
+			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(JournalStructureModelImpl.ENTITY_CACHE_ENABLED,
+			JournalStructureModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(JournalStructureModelImpl.ENTITY_CACHE_ENABLED,
+			JournalStructureModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
+
+	public void cacheResult(JournalStructure journalStructure) {
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] {
+				journalStructure.getUuid(),
+				new Long(journalStructure.getGroupId())
+			}, journalStructure);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_S,
+			new Object[] {
+				new Long(journalStructure.getGroupId()),
+				
+			journalStructure.getStructureId()
+			}, journalStructure);
+
+		EntityCacheUtil.putResult(JournalStructureModelImpl.ENTITY_CACHE_ENABLED,
+			JournalStructure.class, journalStructure.getPrimaryKey(),
+			journalStructure);
+	}
+
+	public void cacheResult(List<JournalStructure> journalStructures) {
+		for (JournalStructure journalStructure : journalStructures) {
+			if (EntityCacheUtil.getResult(
+						JournalStructureModelImpl.ENTITY_CACHE_ENABLED,
+						JournalStructure.class,
+						journalStructure.getPrimaryKey(), this) == null) {
+				cacheResult(journalStructure);
+			}
+		}
+	}
+
 	public JournalStructure create(long id) {
 		JournalStructure journalStructure = new JournalStructureImpl();
 
@@ -141,17 +267,35 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 			session.delete(journalStructure);
 
 			session.flush();
-
-			return journalStructure;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(JournalStructure.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		JournalStructureModelImpl journalStructureModelImpl = (JournalStructureModelImpl)journalStructure;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] {
+				journalStructureModelImpl.getOriginalUuid(),
+				new Long(journalStructureModelImpl.getOriginalGroupId())
+			});
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_S,
+			new Object[] {
+				new Long(journalStructureModelImpl.getOriginalGroupId()),
+				
+			journalStructureModelImpl.getOriginalStructureId()
+			});
+
+		EntityCacheUtil.removeResult(JournalStructureModelImpl.ENTITY_CACHE_ENABLED,
+			JournalStructure.class, journalStructure.getPrimaryKey());
+
+		return journalStructure;
 	}
 
 	/**
@@ -210,6 +354,8 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 	public JournalStructure updateImpl(
 		com.liferay.portlet.journal.model.JournalStructure journalStructure,
 		boolean merge) throws SystemException {
+		boolean isNew = journalStructure.isNew();
+
 		if (Validator.isNull(journalStructure.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
 
@@ -224,17 +370,69 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, journalStructure, merge);
 
 			journalStructure.setNew(false);
-
-			return journalStructure;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(JournalStructure.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		JournalStructureModelImpl journalStructureModelImpl = (JournalStructureModelImpl)journalStructure;
+
+		if (!isNew &&
+				(!journalStructure.getUuid()
+									  .equals(journalStructureModelImpl.getOriginalUuid()) ||
+				(journalStructure.getGroupId() != journalStructureModelImpl.getOriginalGroupId()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+				new Object[] {
+					journalStructureModelImpl.getOriginalUuid(),
+					new Long(journalStructureModelImpl.getOriginalGroupId())
+				});
+		}
+
+		if (isNew ||
+				(!journalStructure.getUuid()
+									  .equals(journalStructureModelImpl.getOriginalUuid()) ||
+				(journalStructure.getGroupId() != journalStructureModelImpl.getOriginalGroupId()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+				new Object[] {
+					journalStructure.getUuid(),
+					new Long(journalStructure.getGroupId())
+				}, journalStructure);
+		}
+
+		if (!isNew &&
+				((journalStructure.getGroupId() != journalStructureModelImpl.getOriginalGroupId()) ||
+				!journalStructure.getStructureId()
+									 .equals(journalStructureModelImpl.getOriginalStructureId()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_S,
+				new Object[] {
+					new Long(journalStructureModelImpl.getOriginalGroupId()),
+					
+				journalStructureModelImpl.getOriginalStructureId()
+				});
+		}
+
+		if (isNew ||
+				((journalStructure.getGroupId() != journalStructureModelImpl.getOriginalGroupId()) ||
+				!journalStructure.getStructureId()
+									 .equals(journalStructureModelImpl.getOriginalStructureId()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_S,
+				new Object[] {
+					new Long(journalStructure.getGroupId()),
+					
+				journalStructure.getStructureId()
+				}, journalStructure);
+		}
+
+		EntityCacheUtil.putResult(JournalStructureModelImpl.ENTITY_CACHE_ENABLED,
+			JournalStructure.class, journalStructure.getPrimaryKey(),
+			journalStructure);
+
+		return journalStructure;
 	}
 
 	public JournalStructure findByPrimaryKey(long id)
@@ -256,36 +454,40 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 	public JournalStructure fetchByPrimaryKey(long id)
 		throws SystemException {
-		Session session = null;
+		JournalStructure result = (JournalStructure)EntityCacheUtil.getResult(JournalStructureModelImpl.ENTITY_CACHE_ENABLED,
+				JournalStructure.class, id, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (JournalStructure)session.get(JournalStructureImpl.class,
-				new Long(id));
+			try {
+				session = openSession();
+
+				JournalStructure journalStructure = (JournalStructure)session.get(JournalStructureImpl.class,
+						new Long(id));
+
+				cacheResult(journalStructure);
+
+				return journalStructure;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (JournalStructure)result;
 		}
 	}
 
 	public List<JournalStructure> findByUuid(String uuid)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = JournalStructureModelImpl.CACHE_ENABLED;
-		String finderClassName = JournalStructure.class.getName();
-		String finderMethodName = "findByUuid";
-		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { uuid };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -321,9 +523,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 				List<JournalStructure> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
+					list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -346,27 +549,14 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalStructure> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = JournalStructureModelImpl.CACHE_ENABLED;
-		String finderClassName = JournalStructure.class.getName();
-		String finderMethodName = "findByUuid";
-		String[] finderParams = new String[] {
-				String.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -410,9 +600,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 				List<JournalStructure> list = (List<JournalStructure>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -432,7 +623,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchStructureException, SystemException {
 		List<JournalStructure> list = findByUuid(uuid, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalStructure exists with the key {");
@@ -454,7 +645,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 		List<JournalStructure> list = findByUuid(uuid, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalStructure exists with the key {");
@@ -561,20 +752,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 	public JournalStructure fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = JournalStructureModelImpl.CACHE_ENABLED;
-		String finderClassName = JournalStructure.class.getName();
-		String finderMethodName = "fetchByUUID_G";
-		String[] finderParams = new String[] {
-				String.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -616,16 +797,19 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 				List<JournalStructure> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				JournalStructure journalStructure = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					journalStructure = list.get(0);
+
+					cacheResult(journalStructure);
 				}
+
+				return journalStructure;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -635,31 +819,21 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<JournalStructure> list = (List<JournalStructure>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (JournalStructure)result;
 			}
 		}
 	}
 
 	public List<JournalStructure> findByGroupId(long groupId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = JournalStructureModelImpl.CACHE_ENABLED;
-		String finderClassName = JournalStructure.class.getName();
-		String finderMethodName = "findByGroupId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -688,9 +862,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 				List<JournalStructure> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -713,27 +888,14 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalStructure> findByGroupId(long groupId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = JournalStructureModelImpl.CACHE_ENABLED;
-		String finderClassName = JournalStructure.class.getName();
-		String finderMethodName = "findByGroupId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -770,9 +932,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 				List<JournalStructure> list = (List<JournalStructure>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -792,7 +955,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchStructureException, SystemException {
 		List<JournalStructure> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalStructure exists with the key {");
@@ -815,7 +978,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 		List<JournalStructure> list = findByGroupId(groupId, count - 1, count,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalStructure exists with the key {");
@@ -889,18 +1052,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalStructure> findByStructureId(String structureId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = JournalStructureModelImpl.CACHE_ENABLED;
-		String finderClassName = JournalStructure.class.getName();
-		String finderMethodName = "findByStructureId";
-		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { structureId };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_STRUCTUREID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -936,9 +1091,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 				List<JournalStructure> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_STRUCTUREID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -961,27 +1117,14 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalStructure> findByStructureId(String structureId,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = JournalStructureModelImpl.CACHE_ENABLED;
-		String finderClassName = JournalStructure.class.getName();
-		String finderMethodName = "findByStructureId";
-		String[] finderParams = new String[] {
-				String.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				structureId,
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_STRUCTUREID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1025,9 +1168,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 				List<JournalStructure> list = (List<JournalStructure>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_STRUCTUREID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1047,7 +1191,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchStructureException, SystemException {
 		List<JournalStructure> list = findByStructureId(structureId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalStructure exists with the key {");
@@ -1070,7 +1214,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 		List<JournalStructure> list = findByStructureId(structureId, count - 1,
 				count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalStructure exists with the key {");
@@ -1178,20 +1322,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 	public JournalStructure fetchByG_S(long groupId, String structureId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = JournalStructureModelImpl.CACHE_ENABLED;
-		String finderClassName = JournalStructure.class.getName();
-		String finderMethodName = "fetchByG_S";
-		String[] finderParams = new String[] {
-				Long.class.getName(), String.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(groupId), structureId };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_S,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1233,16 +1367,19 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 				List<JournalStructure> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				JournalStructure journalStructure = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_S,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					journalStructure = list.get(0);
+
+					cacheResult(journalStructure);
 				}
+
+				return journalStructure;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1252,33 +1389,21 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<JournalStructure> list = (List<JournalStructure>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (JournalStructure)result;
 			}
 		}
 	}
 
 	public List<JournalStructure> findByG_P(long groupId,
 		String parentStructureId) throws SystemException {
-		boolean finderClassNameCacheEnabled = JournalStructureModelImpl.CACHE_ENABLED;
-		String finderClassName = JournalStructure.class.getName();
-		String finderMethodName = "findByG_P";
-		String[] finderParams = new String[] {
-				Long.class.getName(), String.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(groupId), parentStructureId };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_P,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1320,9 +1445,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 				List<JournalStructure> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_P, finderArgs,
+					list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1346,15 +1472,6 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 	public List<JournalStructure> findByG_P(long groupId,
 		String parentStructureId, int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = JournalStructureModelImpl.CACHE_ENABLED;
-		String finderClassName = JournalStructure.class.getName();
-		String finderMethodName = "findByG_P";
-		String[] finderParams = new String[] {
-				Long.class.getName(), String.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -1363,12 +1480,8 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_P,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1418,9 +1531,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 				List<JournalStructure> list = (List<JournalStructure>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_P,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1442,7 +1556,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 		List<JournalStructure> list = findByG_P(groupId, parentStructureId, 0,
 				1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalStructure exists with the key {");
@@ -1469,7 +1583,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 		List<JournalStructure> list = findByG_P(groupId, parentStructureId,
 				count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalStructure exists with the key {");
@@ -1609,23 +1723,12 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalStructure> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = JournalStructureModelImpl.CACHE_ENABLED;
-		String finderClassName = JournalStructure.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1664,9 +1767,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1730,18 +1833,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByUuid(String uuid) throws SystemException {
-		boolean finderClassNameCacheEnabled = JournalStructureModelImpl.CACHE_ENABLED;
-		String finderClassName = JournalStructure.class.getName();
-		String finderMethodName = "countByUuid";
-		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { uuid };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1784,8 +1879,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1804,20 +1898,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = JournalStructureModelImpl.CACHE_ENABLED;
-		String finderClassName = JournalStructure.class.getName();
-		String finderMethodName = "countByUUID_G";
-		String[] finderParams = new String[] {
-				String.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID_G,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1866,8 +1950,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1885,18 +1968,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		boolean finderClassNameCacheEnabled = JournalStructureModelImpl.CACHE_ENABLED;
-		String finderClassName = JournalStructure.class.getName();
-		String finderMethodName = "countByGroupId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1932,8 +2007,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1951,18 +2025,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByStructureId(String structureId) throws SystemException {
-		boolean finderClassNameCacheEnabled = JournalStructureModelImpl.CACHE_ENABLED;
-		String finderClassName = JournalStructure.class.getName();
-		String finderMethodName = "countByStructureId";
-		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { structureId };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_STRUCTUREID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2005,8 +2071,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_STRUCTUREID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -2025,20 +2090,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 	public int countByG_S(long groupId, String structureId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = JournalStructureModelImpl.CACHE_ENABLED;
-		String finderClassName = JournalStructure.class.getName();
-		String finderMethodName = "countByG_S";
-		String[] finderParams = new String[] {
-				Long.class.getName(), String.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(groupId), structureId };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_S,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2087,9 +2142,8 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_S, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -2107,20 +2161,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 	public int countByG_P(long groupId, String parentStructureId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = JournalStructureModelImpl.CACHE_ENABLED;
-		String finderClassName = JournalStructure.class.getName();
-		String finderMethodName = "countByG_P";
-		String[] finderParams = new String[] {
-				Long.class.getName(), String.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(groupId), parentStructureId };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_P,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2169,9 +2213,8 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_P, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -2188,18 +2231,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = JournalStructureModelImpl.CACHE_ENABLED;
-		String finderClassName = JournalStructure.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2222,9 +2257,8 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

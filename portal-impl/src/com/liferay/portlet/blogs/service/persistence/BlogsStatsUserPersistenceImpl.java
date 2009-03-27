@@ -25,7 +25,9 @@ package com.liferay.portlet.blogs.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -58,6 +60,114 @@ import java.util.List;
  */
 public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 	implements BlogsStatsUserPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = BlogsStatsUser.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = BlogsStatsUser.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsStatsUserModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByGroupId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_GROUPID = new FinderPath(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsStatsUserModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByGroupId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsStatsUserModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByGroupId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_USERID = new FinderPath(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsStatsUserModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByUserId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_USERID = new FinderPath(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsStatsUserModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByUserId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_USERID = new FinderPath(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsStatsUserModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByUserId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_G_U = new FinderPath(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsStatsUserModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByG_U",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_U = new FinderPath(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsStatsUserModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByG_U",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_G_E = new FinderPath(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsStatsUserModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByG_E",
+			new String[] { Long.class.getName(), Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_E = new FinderPath(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsStatsUserModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByG_E",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_E = new FinderPath(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsStatsUserModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByG_E",
+			new String[] { Long.class.getName(), Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_C_E = new FinderPath(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsStatsUserModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByC_E",
+			new String[] { Long.class.getName(), Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_E = new FinderPath(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsStatsUserModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByC_E",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_E = new FinderPath(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsStatsUserModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByC_E",
+			new String[] { Long.class.getName(), Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsStatsUserModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsStatsUserModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
+
+	public void cacheResult(BlogsStatsUser blogsStatsUser) {
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
+			new Object[] {
+				new Long(blogsStatsUser.getGroupId()),
+				new Long(blogsStatsUser.getUserId())
+			}, blogsStatsUser);
+
+		EntityCacheUtil.putResult(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsStatsUser.class, blogsStatsUser.getPrimaryKey(), blogsStatsUser);
+	}
+
+	public void cacheResult(List<BlogsStatsUser> blogsStatsUsers) {
+		for (BlogsStatsUser blogsStatsUser : blogsStatsUsers) {
+			if (EntityCacheUtil.getResult(
+						BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+						BlogsStatsUser.class, blogsStatsUser.getPrimaryKey(),
+						this) == null) {
+				cacheResult(blogsStatsUser);
+			}
+		}
+	}
+
 	public BlogsStatsUser create(long statsUserId) {
 		BlogsStatsUser blogsStatsUser = new BlogsStatsUserImpl();
 
@@ -135,17 +245,28 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 			session.delete(blogsStatsUser);
 
 			session.flush();
-
-			return blogsStatsUser;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(BlogsStatsUser.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		BlogsStatsUserModelImpl blogsStatsUserModelImpl = (BlogsStatsUserModelImpl)blogsStatsUser;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U,
+			new Object[] {
+				new Long(blogsStatsUserModelImpl.getOriginalGroupId()),
+				new Long(blogsStatsUserModelImpl.getOriginalUserId())
+			});
+
+		EntityCacheUtil.removeResult(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsStatsUser.class, blogsStatsUser.getPrimaryKey());
+
+		return blogsStatsUser;
 	}
 
 	/**
@@ -204,6 +325,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 	public BlogsStatsUser updateImpl(
 		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser,
 		boolean merge) throws SystemException {
+		boolean isNew = blogsStatsUser.isNew();
+
 		Session session = null;
 
 		try {
@@ -212,17 +335,42 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, blogsStatsUser, merge);
 
 			blogsStatsUser.setNew(false);
-
-			return blogsStatsUser;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(BlogsStatsUser.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		BlogsStatsUserModelImpl blogsStatsUserModelImpl = (BlogsStatsUserModelImpl)blogsStatsUser;
+
+		if (!isNew &&
+				((blogsStatsUser.getGroupId() != blogsStatsUserModelImpl.getOriginalGroupId()) ||
+				(blogsStatsUser.getUserId() != blogsStatsUserModelImpl.getOriginalUserId()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U,
+				new Object[] {
+					new Long(blogsStatsUserModelImpl.getOriginalGroupId()),
+					new Long(blogsStatsUserModelImpl.getOriginalUserId())
+				});
+		}
+
+		if (isNew ||
+				((blogsStatsUser.getGroupId() != blogsStatsUserModelImpl.getOriginalGroupId()) ||
+				(blogsStatsUser.getUserId() != blogsStatsUserModelImpl.getOriginalUserId()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
+				new Object[] {
+					new Long(blogsStatsUser.getGroupId()),
+					new Long(blogsStatsUser.getUserId())
+				}, blogsStatsUser);
+		}
+
+		EntityCacheUtil.putResult(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsStatsUser.class, blogsStatsUser.getPrimaryKey(), blogsStatsUser);
+
+		return blogsStatsUser;
 	}
 
 	public BlogsStatsUser findByPrimaryKey(long statsUserId)
@@ -244,36 +392,40 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 	public BlogsStatsUser fetchByPrimaryKey(long statsUserId)
 		throws SystemException {
-		Session session = null;
+		BlogsStatsUser result = (BlogsStatsUser)EntityCacheUtil.getResult(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+				BlogsStatsUser.class, statsUserId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (BlogsStatsUser)session.get(BlogsStatsUserImpl.class,
-				new Long(statsUserId));
+			try {
+				session = openSession();
+
+				BlogsStatsUser blogsStatsUser = (BlogsStatsUser)session.get(BlogsStatsUserImpl.class,
+						new Long(statsUserId));
+
+				cacheResult(blogsStatsUser);
+
+				return blogsStatsUser;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (BlogsStatsUser)result;
 		}
 	}
 
 	public List<BlogsStatsUser> findByGroupId(long groupId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = BlogsStatsUserModelImpl.CACHE_ENABLED;
-		String finderClassName = BlogsStatsUser.class.getName();
-		String finderMethodName = "findByGroupId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -302,9 +454,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 				List<BlogsStatsUser> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -327,27 +480,14 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 	public List<BlogsStatsUser> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = BlogsStatsUserModelImpl.CACHE_ENABLED;
-		String finderClassName = BlogsStatsUser.class.getName();
-		String finderMethodName = "findByGroupId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -384,9 +524,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 				List<BlogsStatsUser> list = (List<BlogsStatsUser>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -406,7 +547,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchStatsUserException, SystemException {
 		List<BlogsStatsUser> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsStatsUser exists with the key {");
@@ -428,7 +569,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 		List<BlogsStatsUser> list = findByGroupId(groupId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsStatsUser exists with the key {");
@@ -503,18 +644,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 	public List<BlogsStatsUser> findByUserId(long userId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = BlogsStatsUserModelImpl.CACHE_ENABLED;
-		String finderClassName = BlogsStatsUser.class.getName();
-		String finderMethodName = "findByUserId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -543,9 +676,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 				List<BlogsStatsUser> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -568,27 +702,14 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 	public List<BlogsStatsUser> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = BlogsStatsUserModelImpl.CACHE_ENABLED;
-		String finderClassName = BlogsStatsUser.class.getName();
-		String finderMethodName = "findByUserId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -625,9 +746,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 				List<BlogsStatsUser> list = (List<BlogsStatsUser>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -647,7 +769,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchStatsUserException, SystemException {
 		List<BlogsStatsUser> list = findByUserId(userId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsStatsUser exists with the key {");
@@ -669,7 +791,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 		List<BlogsStatsUser> list = findByUserId(userId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsStatsUser exists with the key {");
@@ -770,20 +892,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 	public BlogsStatsUser fetchByG_U(long groupId, long userId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = BlogsStatsUserModelImpl.CACHE_ENABLED;
-		String finderClassName = BlogsStatsUser.class.getName();
-		String finderMethodName = "fetchByG_U";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_U,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -818,16 +930,19 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 				List<BlogsStatsUser> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				BlogsStatsUser blogsStatsUser = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					blogsStatsUser = list.get(0);
+
+					cacheResult(blogsStatsUser);
 				}
+
+				return blogsStatsUser;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -837,35 +952,23 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<BlogsStatsUser> list = (List<BlogsStatsUser>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (BlogsStatsUser)result;
 			}
 		}
 	}
 
 	public List<BlogsStatsUser> findByG_E(long groupId, int entryCount)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = BlogsStatsUserModelImpl.CACHE_ENABLED;
-		String finderClassName = BlogsStatsUser.class.getName();
-		String finderMethodName = "findByG_E";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Integer.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Integer(entryCount)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_E,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -900,9 +1003,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 				List<BlogsStatsUser> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_E, finderArgs,
+					list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -925,27 +1029,14 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 	public List<BlogsStatsUser> findByG_E(long groupId, int entryCount,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = BlogsStatsUserModelImpl.CACHE_ENABLED;
-		String finderClassName = BlogsStatsUser.class.getName();
-		String finderMethodName = "findByG_E";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Integer.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Integer(entryCount),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_E,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -988,9 +1079,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 				List<BlogsStatsUser> list = (List<BlogsStatsUser>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_E,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1010,7 +1102,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchStatsUserException, SystemException {
 		List<BlogsStatsUser> list = findByG_E(groupId, entryCount, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsStatsUser exists with the key {");
@@ -1036,7 +1128,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 		List<BlogsStatsUser> list = findByG_E(groupId, entryCount, count - 1,
 				count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsStatsUser exists with the key {");
@@ -1120,22 +1212,12 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 	public List<BlogsStatsUser> findByC_E(long companyId, int entryCount)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = BlogsStatsUserModelImpl.CACHE_ENABLED;
-		String finderClassName = BlogsStatsUser.class.getName();
-		String finderMethodName = "findByC_E";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Integer.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Integer(entryCount)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_E,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1170,9 +1252,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 				List<BlogsStatsUser> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_E, finderArgs,
+					list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1195,27 +1278,14 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 	public List<BlogsStatsUser> findByC_E(long companyId, int entryCount,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = BlogsStatsUserModelImpl.CACHE_ENABLED;
-		String finderClassName = BlogsStatsUser.class.getName();
-		String finderMethodName = "findByC_E";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Integer.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Integer(entryCount),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_E,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1258,9 +1328,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 				List<BlogsStatsUser> list = (List<BlogsStatsUser>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_E,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1280,7 +1351,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchStatsUserException, SystemException {
 		List<BlogsStatsUser> list = findByC_E(companyId, entryCount, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsStatsUser exists with the key {");
@@ -1306,7 +1377,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 		List<BlogsStatsUser> list = findByC_E(companyId, entryCount, count - 1,
 				count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsStatsUser exists with the key {");
@@ -1439,23 +1510,12 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 	public List<BlogsStatsUser> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = BlogsStatsUserModelImpl.CACHE_ENABLED;
-		String finderClassName = BlogsStatsUser.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1494,9 +1554,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1552,18 +1612,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		boolean finderClassNameCacheEnabled = BlogsStatsUserModelImpl.CACHE_ENABLED;
-		String finderClassName = BlogsStatsUser.class.getName();
-		String finderMethodName = "countByGroupId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1599,8 +1651,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1618,18 +1669,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByUserId(long userId) throws SystemException {
-		boolean finderClassNameCacheEnabled = BlogsStatsUserModelImpl.CACHE_ENABLED;
-		String finderClassName = BlogsStatsUser.class.getName();
-		String finderMethodName = "countByUserId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1665,8 +1708,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1684,20 +1726,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByG_U(long groupId, long userId) throws SystemException {
-		boolean finderClassNameCacheEnabled = BlogsStatsUserModelImpl.CACHE_ENABLED;
-		String finderClassName = BlogsStatsUser.class.getName();
-		String finderMethodName = "countByG_U";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_U,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1739,9 +1771,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_U, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -1759,22 +1790,12 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 	public int countByG_E(long groupId, int entryCount)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = BlogsStatsUserModelImpl.CACHE_ENABLED;
-		String finderClassName = BlogsStatsUser.class.getName();
-		String finderMethodName = "countByG_E";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Integer.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Integer(entryCount)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_E,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1816,9 +1837,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_E, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -1836,22 +1856,12 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 	public int countByC_E(long companyId, int entryCount)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = BlogsStatsUserModelImpl.CACHE_ENABLED;
-		String finderClassName = BlogsStatsUser.class.getName();
-		String finderMethodName = "countByC_E";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Integer.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Integer(entryCount)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_E,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1893,9 +1903,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_E, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -1912,18 +1921,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = BlogsStatsUserModelImpl.CACHE_ENABLED;
-		String finderClassName = BlogsStatsUser.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1946,9 +1947,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

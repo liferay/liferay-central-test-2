@@ -29,6 +29,11 @@ package com.liferay.portal.service.persistence;
  *
  */
 public interface ClassNamePersistence extends BasePersistence {
+	public void cacheResult(com.liferay.portal.model.ClassName className);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portal.model.ClassName> classNames);
+
 	public com.liferay.portal.model.ClassName create(long classNameId);
 
 	public com.liferay.portal.model.ClassName remove(long classNameId)

@@ -30,7 +30,9 @@ import com.liferay.portal.kernel.dao.jdbc.RowMapper;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -67,6 +69,84 @@ import java.util.List;
  */
 public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 	implements SCFrameworkVersionPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = SCFrameworkVersion.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = SCFrameworkVersion.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(SCFrameworkVersionModelImpl.ENTITY_CACHE_ENABLED,
+			SCFrameworkVersionModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByGroupId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_GROUPID = new FinderPath(SCFrameworkVersionModelImpl.ENTITY_CACHE_ENABLED,
+			SCFrameworkVersionModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByGroupId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(SCFrameworkVersionModelImpl.ENTITY_CACHE_ENABLED,
+			SCFrameworkVersionModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByGroupId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(SCFrameworkVersionModelImpl.ENTITY_CACHE_ENABLED,
+			SCFrameworkVersionModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByCompanyId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_COMPANYID = new FinderPath(SCFrameworkVersionModelImpl.ENTITY_CACHE_ENABLED,
+			SCFrameworkVersionModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByCompanyId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(SCFrameworkVersionModelImpl.ENTITY_CACHE_ENABLED,
+			SCFrameworkVersionModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByCompanyId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_G_A = new FinderPath(SCFrameworkVersionModelImpl.ENTITY_CACHE_ENABLED,
+			SCFrameworkVersionModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByG_A",
+			new String[] { Long.class.getName(), Boolean.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_A = new FinderPath(SCFrameworkVersionModelImpl.ENTITY_CACHE_ENABLED,
+			SCFrameworkVersionModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByG_A",
+			new String[] {
+				Long.class.getName(), Boolean.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_A = new FinderPath(SCFrameworkVersionModelImpl.ENTITY_CACHE_ENABLED,
+			SCFrameworkVersionModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByG_A",
+			new String[] { Long.class.getName(), Boolean.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(SCFrameworkVersionModelImpl.ENTITY_CACHE_ENABLED,
+			SCFrameworkVersionModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(SCFrameworkVersionModelImpl.ENTITY_CACHE_ENABLED,
+			SCFrameworkVersionModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
+
+	public void cacheResult(SCFrameworkVersion scFrameworkVersion) {
+		EntityCacheUtil.putResult(SCFrameworkVersionModelImpl.ENTITY_CACHE_ENABLED,
+			SCFrameworkVersion.class, scFrameworkVersion.getPrimaryKey(),
+			scFrameworkVersion);
+	}
+
+	public void cacheResult(List<SCFrameworkVersion> scFrameworkVersions) {
+		for (SCFrameworkVersion scFrameworkVersion : scFrameworkVersions) {
+			if (EntityCacheUtil.getResult(
+						SCFrameworkVersionModelImpl.ENTITY_CACHE_ENABLED,
+						SCFrameworkVersion.class,
+						scFrameworkVersion.getPrimaryKey(), this) == null) {
+				cacheResult(scFrameworkVersion);
+			}
+		}
+	}
+
 	public SCFrameworkVersion create(long frameworkVersionId) {
 		SCFrameworkVersion scFrameworkVersion = new SCFrameworkVersionImpl();
 
@@ -155,17 +235,22 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 			session.delete(scFrameworkVersion);
 
 			session.flush();
-
-			return scFrameworkVersion;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(SCFrameworkVersion.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		SCFrameworkVersionModelImpl scFrameworkVersionModelImpl = (SCFrameworkVersionModelImpl)scFrameworkVersion;
+
+		EntityCacheUtil.removeResult(SCFrameworkVersionModelImpl.ENTITY_CACHE_ENABLED,
+			SCFrameworkVersion.class, scFrameworkVersion.getPrimaryKey());
+
+		return scFrameworkVersion;
 	}
 
 	/**
@@ -224,7 +309,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 	public SCFrameworkVersion updateImpl(
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion,
 		boolean merge) throws SystemException {
-		FinderCacheUtil.clearCache("SCFrameworkVersi_SCProductVers");
+		boolean isNew = scFrameworkVersion.isNew();
 
 		Session session = null;
 
@@ -234,17 +319,23 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, scFrameworkVersion, merge);
 
 			scFrameworkVersion.setNew(false);
-
-			return scFrameworkVersion;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(SCFrameworkVersion.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		SCFrameworkVersionModelImpl scFrameworkVersionModelImpl = (SCFrameworkVersionModelImpl)scFrameworkVersion;
+
+		EntityCacheUtil.putResult(SCFrameworkVersionModelImpl.ENTITY_CACHE_ENABLED,
+			SCFrameworkVersion.class, scFrameworkVersion.getPrimaryKey(),
+			scFrameworkVersion);
+
+		return scFrameworkVersion;
 	}
 
 	public SCFrameworkVersion findByPrimaryKey(long frameworkVersionId)
@@ -267,36 +358,40 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 
 	public SCFrameworkVersion fetchByPrimaryKey(long frameworkVersionId)
 		throws SystemException {
-		Session session = null;
+		SCFrameworkVersion result = (SCFrameworkVersion)EntityCacheUtil.getResult(SCFrameworkVersionModelImpl.ENTITY_CACHE_ENABLED,
+				SCFrameworkVersion.class, frameworkVersionId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (SCFrameworkVersion)session.get(SCFrameworkVersionImpl.class,
-				new Long(frameworkVersionId));
+			try {
+				session = openSession();
+
+				SCFrameworkVersion scFrameworkVersion = (SCFrameworkVersion)session.get(SCFrameworkVersionImpl.class,
+						new Long(frameworkVersionId));
+
+				cacheResult(scFrameworkVersion);
+
+				return scFrameworkVersion;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (SCFrameworkVersion)result;
 		}
 	}
 
 	public List<SCFrameworkVersion> findByGroupId(long groupId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = SCFrameworkVersionModelImpl.CACHE_ENABLED;
-		String finderClassName = SCFrameworkVersion.class.getName();
-		String finderMethodName = "findByGroupId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -325,9 +420,10 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 
 				List<SCFrameworkVersion> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -350,27 +446,14 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 
 	public List<SCFrameworkVersion> findByGroupId(long groupId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = SCFrameworkVersionModelImpl.CACHE_ENABLED;
-		String finderClassName = SCFrameworkVersion.class.getName();
-		String finderMethodName = "findByGroupId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -407,9 +490,10 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 				List<SCFrameworkVersion> list = (List<SCFrameworkVersion>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -430,7 +514,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchFrameworkVersionException, SystemException {
 		List<SCFrameworkVersion> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCFrameworkVersion exists with the key {");
@@ -454,7 +538,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		List<SCFrameworkVersion> list = findByGroupId(groupId, count - 1,
 				count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCFrameworkVersion exists with the key {");
@@ -529,18 +613,10 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 
 	public List<SCFrameworkVersion> findByCompanyId(long companyId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = SCFrameworkVersionModelImpl.CACHE_ENABLED;
-		String finderClassName = SCFrameworkVersion.class.getName();
-		String finderMethodName = "findByCompanyId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -569,9 +645,10 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 
 				List<SCFrameworkVersion> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -594,27 +671,14 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 
 	public List<SCFrameworkVersion> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = SCFrameworkVersionModelImpl.CACHE_ENABLED;
-		String finderClassName = SCFrameworkVersion.class.getName();
-		String finderMethodName = "findByCompanyId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -651,9 +715,10 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 				List<SCFrameworkVersion> list = (List<SCFrameworkVersion>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -674,7 +739,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchFrameworkVersionException, SystemException {
 		List<SCFrameworkVersion> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCFrameworkVersion exists with the key {");
@@ -698,7 +763,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		List<SCFrameworkVersion> list = findByCompanyId(companyId, count - 1,
 				count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCFrameworkVersion exists with the key {");
@@ -773,22 +838,12 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 
 	public List<SCFrameworkVersion> findByG_A(long groupId, boolean active)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = SCFrameworkVersionModelImpl.CACHE_ENABLED;
-		String finderClassName = SCFrameworkVersion.class.getName();
-		String finderMethodName = "findByG_A";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Boolean.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(active)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_A,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -823,9 +878,10 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 
 				List<SCFrameworkVersion> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_A, finderArgs,
+					list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -848,27 +904,14 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 
 	public List<SCFrameworkVersion> findByG_A(long groupId, boolean active,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = SCFrameworkVersionModelImpl.CACHE_ENABLED;
-		String finderClassName = SCFrameworkVersion.class.getName();
-		String finderMethodName = "findByG_A";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Boolean.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(active),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_A,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -911,9 +954,10 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 				List<SCFrameworkVersion> list = (List<SCFrameworkVersion>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_A,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -934,7 +978,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchFrameworkVersionException, SystemException {
 		List<SCFrameworkVersion> list = findByG_A(groupId, active, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCFrameworkVersion exists with the key {");
@@ -961,7 +1005,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		List<SCFrameworkVersion> list = findByG_A(groupId, active, count - 1,
 				count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCFrameworkVersion exists with the key {");
@@ -1094,23 +1138,12 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 
 	public List<SCFrameworkVersion> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = SCFrameworkVersionModelImpl.CACHE_ENABLED;
-		String finderClassName = SCFrameworkVersion.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1149,9 +1182,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1193,18 +1226,10 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		boolean finderClassNameCacheEnabled = SCFrameworkVersionModelImpl.CACHE_ENABLED;
-		String finderClassName = SCFrameworkVersion.class.getName();
-		String finderMethodName = "countByGroupId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1240,8 +1265,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1259,18 +1283,10 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
-		boolean finderClassNameCacheEnabled = SCFrameworkVersionModelImpl.CACHE_ENABLED;
-		String finderClassName = SCFrameworkVersion.class.getName();
-		String finderMethodName = "countByCompanyId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1306,8 +1322,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_COMPANYID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1326,22 +1341,12 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 
 	public int countByG_A(long groupId, boolean active)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = SCFrameworkVersionModelImpl.CACHE_ENABLED;
-		String finderClassName = SCFrameworkVersion.class.getName();
-		String finderMethodName = "countByG_A";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Boolean.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(active)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_A,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1383,9 +1388,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_A, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -1402,18 +1406,10 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = SCFrameworkVersionModelImpl.CACHE_ENABLED;
-		String finderClassName = SCFrameworkVersion.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1436,9 +1432,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -1464,29 +1459,24 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		return getSCProductVersions(pk, start, end, null);
 	}
 
+	public static final FinderPath FINDER_PATH_GET_SCPRODUCTVERSIONS = new FinderPath(com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionModelImpl.ENTITY_CACHE_ENABLED,
+			SCFrameworkVersionModelImpl.FINDER_CACHE_ENABLED_SCFRAMEWORKVERSI_SCPRODUCTVERS,
+			"SCFrameworkVersi_SCProductVers", "getSCProductVersions",
+			new String[] {
+				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+
 	public List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> getSCProductVersions(
 		long pk, int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = SCFrameworkVersionModelImpl.CACHE_ENABLED_SCFRAMEWORKVERSI_SCPRODUCTVERS;
-
-		String finderClassName = "SCFrameworkVersi_SCProductVers";
-
-		String finderMethodName = "getSCProductVersions";
-		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(pk), String.valueOf(start), String.valueOf(end),
 				String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_GET_SCPRODUCTVERSIONS,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1524,9 +1514,10 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 					(List<com.liferay.portlet.softwarecatalog.model.SCProductVersion>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_GET_SCPRODUCTVERSIONS,
 					finderArgs, list);
+
+				scProductVersionPersistence.cacheResult(list);
 
 				return list;
 			}
@@ -1542,21 +1533,16 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public static final FinderPath FINDER_PATH_GET_SCPRODUCTVERSIONS_SIZE = new FinderPath(com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionModelImpl.ENTITY_CACHE_ENABLED,
+			SCFrameworkVersionModelImpl.FINDER_CACHE_ENABLED_SCFRAMEWORKVERSI_SCPRODUCTVERS,
+			"SCFrameworkVersi_SCProductVers", "getSCProductVersionsSize",
+			new String[] { Long.class.getName() });
+
 	public int getSCProductVersionsSize(long pk) throws SystemException {
-		boolean finderClassNameCacheEnabled = SCFrameworkVersionModelImpl.CACHE_ENABLED_SCFRAMEWORKVERSI_SCPRODUCTVERS;
-
-		String finderClassName = "SCFrameworkVersi_SCProductVers";
-
-		String finderMethodName = "getSCProductVersionsSize";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(pk) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_GET_SCPRODUCTVERSIONS_SIZE,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1584,8 +1570,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_GET_SCPRODUCTVERSIONS_SIZE,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1602,38 +1587,28 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public static final FinderPath FINDER_PATH_CONTAINS_SCPRODUCTVERSION = new FinderPath(com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionModelImpl.ENTITY_CACHE_ENABLED,
+			SCFrameworkVersionModelImpl.FINDER_CACHE_ENABLED_SCFRAMEWORKVERSI_SCPRODUCTVERS,
+			"SCFrameworkVersi_SCProductVers", "containsSCProductVersion",
+			new String[] { Long.class.getName(), Long.class.getName() });
+
 	public boolean containsSCProductVersion(long pk, long scProductVersionPK)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = SCFrameworkVersionModelImpl.CACHE_ENABLED_SCFRAMEWORKVERSI_SCPRODUCTVERS;
-
-		String finderClassName = "SCFrameworkVersi_SCProductVers";
-
-		String finderMethodName = "containsSCProductVersions";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(pk),
 				
 				new Long(scProductVersionPK)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_SCPRODUCTVERSION,
+				finderArgs, this);
 
 		if (result == null) {
 			try {
 				Boolean value = Boolean.valueOf(containsSCProductVersion.contains(
 							pk, scProductVersionPK));
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_CONTAINS_SCPRODUCTVERSION,
 					finderArgs, value);
 
 				return value.booleanValue();

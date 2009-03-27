@@ -26,7 +26,9 @@ import com.liferay.portal.NoSuchPortletException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -56,6 +58,61 @@ import java.util.List;
  */
 public class PortletPersistenceImpl extends BasePersistenceImpl
 	implements PortletPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = Portlet.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = Portlet.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(PortletModelImpl.ENTITY_CACHE_ENABLED,
+			PortletModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByCompanyId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_COMPANYID = new FinderPath(PortletModelImpl.ENTITY_CACHE_ENABLED,
+			PortletModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByCompanyId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(PortletModelImpl.ENTITY_CACHE_ENABLED,
+			PortletModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByCompanyId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_C_P = new FinderPath(PortletModelImpl.ENTITY_CACHE_ENABLED,
+			PortletModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
+			"fetchByC_P",
+			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_P = new FinderPath(PortletModelImpl.ENTITY_CACHE_ENABLED,
+			PortletModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByC_P",
+			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(PortletModelImpl.ENTITY_CACHE_ENABLED,
+			PortletModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(PortletModelImpl.ENTITY_CACHE_ENABLED,
+			PortletModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countAll", new String[0]);
+
+	public void cacheResult(Portlet portlet) {
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_P,
+			new Object[] {
+				new Long(portlet.getCompanyId()),
+				
+			portlet.getPortletId()
+			}, portlet);
+
+		EntityCacheUtil.putResult(PortletModelImpl.ENTITY_CACHE_ENABLED,
+			Portlet.class, portlet.getPrimaryKey(), portlet);
+	}
+
+	public void cacheResult(List<Portlet> portlets) {
+		for (Portlet portlet : portlets) {
+			if (EntityCacheUtil.getResult(
+						PortletModelImpl.ENTITY_CACHE_ENABLED, Portlet.class,
+						portlet.getPrimaryKey(), this) == null) {
+				cacheResult(portlet);
+			}
+		}
+	}
+
 	public Portlet create(long id) {
 		Portlet portlet = new PortletImpl();
 
@@ -129,17 +186,29 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 			session.delete(portlet);
 
 			session.flush();
-
-			return portlet;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(Portlet.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		PortletModelImpl portletModelImpl = (PortletModelImpl)portlet;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_P,
+			new Object[] {
+				new Long(portletModelImpl.getOriginalCompanyId()),
+				
+			portletModelImpl.getOriginalPortletId()
+			});
+
+		EntityCacheUtil.removeResult(PortletModelImpl.ENTITY_CACHE_ENABLED,
+			Portlet.class, portlet.getPrimaryKey());
+
+		return portlet;
 	}
 
 	/**
@@ -196,6 +265,8 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 
 	public Portlet updateImpl(com.liferay.portal.model.Portlet portlet,
 		boolean merge) throws SystemException {
+		boolean isNew = portlet.isNew();
+
 		Session session = null;
 
 		try {
@@ -204,17 +275,46 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, portlet, merge);
 
 			portlet.setNew(false);
-
-			return portlet;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(Portlet.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		PortletModelImpl portletModelImpl = (PortletModelImpl)portlet;
+
+		if (!isNew &&
+				((portlet.getCompanyId() != portletModelImpl.getOriginalCompanyId()) ||
+				!portlet.getPortletId()
+							.equals(portletModelImpl.getOriginalPortletId()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_P,
+				new Object[] {
+					new Long(portletModelImpl.getOriginalCompanyId()),
+					
+				portletModelImpl.getOriginalPortletId()
+				});
+		}
+
+		if (isNew ||
+				((portlet.getCompanyId() != portletModelImpl.getOriginalCompanyId()) ||
+				!portlet.getPortletId()
+							.equals(portletModelImpl.getOriginalPortletId()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_P,
+				new Object[] {
+					new Long(portlet.getCompanyId()),
+					
+				portlet.getPortletId()
+				}, portlet);
+		}
+
+		EntityCacheUtil.putResult(PortletModelImpl.ENTITY_CACHE_ENABLED,
+			Portlet.class, portlet.getPrimaryKey(), portlet);
+
+		return portlet;
 	}
 
 	public Portlet findByPrimaryKey(long id)
@@ -234,35 +334,40 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Portlet fetchByPrimaryKey(long id) throws SystemException {
-		Session session = null;
+		Portlet result = (Portlet)EntityCacheUtil.getResult(PortletModelImpl.ENTITY_CACHE_ENABLED,
+				Portlet.class, id, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (Portlet)session.get(PortletImpl.class, new Long(id));
+			try {
+				session = openSession();
+
+				Portlet portlet = (Portlet)session.get(PortletImpl.class,
+						new Long(id));
+
+				cacheResult(portlet);
+
+				return portlet;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (Portlet)result;
 		}
 	}
 
 	public List<Portlet> findByCompanyId(long companyId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = PortletModelImpl.CACHE_ENABLED;
-		String finderClassName = Portlet.class.getName();
-		String finderMethodName = "findByCompanyId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -286,9 +391,10 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 
 				List<Portlet> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -311,27 +417,14 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 
 	public List<Portlet> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = PortletModelImpl.CACHE_ENABLED;
-		String finderClassName = Portlet.class.getName();
-		String finderMethodName = "findByCompanyId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -361,9 +454,10 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 				List<Portlet> list = (List<Portlet>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -383,7 +477,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchPortletException, SystemException {
 		List<Portlet> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Portlet exists with the key {");
@@ -405,7 +499,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 
 		List<Portlet> list = findByCompanyId(companyId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Portlet exists with the key {");
@@ -497,20 +591,10 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 
 	public Portlet fetchByC_P(long companyId, String portletId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = PortletModelImpl.CACHE_ENABLED;
-		String finderClassName = Portlet.class.getName();
-		String finderMethodName = "fetchByC_P";
-		String[] finderParams = new String[] {
-				Long.class.getName(), String.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(companyId), portletId };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_P,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -547,16 +631,19 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 
 				List<Portlet> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				Portlet portlet = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_P,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					portlet = list.get(0);
+
+					cacheResult(portlet);
 				}
+
+				return portlet;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -566,13 +653,11 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<Portlet> list = (List<Portlet>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (Portlet)result;
 			}
 		}
 	}
@@ -627,23 +712,12 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 
 	public List<Portlet> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = PortletModelImpl.CACHE_ENABLED;
-		String finderClassName = Portlet.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -675,9 +749,9 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -713,18 +787,10 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
-		boolean finderClassNameCacheEnabled = PortletModelImpl.CACHE_ENABLED;
-		String finderClassName = Portlet.class.getName();
-		String finderMethodName = "countByCompanyId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -759,8 +825,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_COMPANYID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -779,20 +844,10 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 
 	public int countByC_P(long companyId, String portletId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = PortletModelImpl.CACHE_ENABLED;
-		String finderClassName = Portlet.class.getName();
-		String finderMethodName = "countByC_P";
-		String[] finderParams = new String[] {
-				Long.class.getName(), String.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(companyId), portletId };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_P,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -840,9 +895,8 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_P, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -859,18 +913,10 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = PortletModelImpl.CACHE_ENABLED;
-		String finderClassName = Portlet.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -893,9 +939,8 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

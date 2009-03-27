@@ -29,6 +29,16 @@ package com.liferay.portlet.softwarecatalog.service.persistence;
  *
  */
 public class SCFrameworkVersionUtil {
+	public static void cacheResult(
+		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion) {
+		getPersistence().cacheResult(scFrameworkVersion);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> scFrameworkVersions) {
+		getPersistence().cacheResult(scFrameworkVersions);
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion create(
 		long frameworkVersionId) {
 		return getPersistence().create(frameworkVersionId);

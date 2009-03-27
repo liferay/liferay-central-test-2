@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface ShoppingOrderPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> shoppingOrders);
+
 	public com.liferay.portlet.shopping.model.ShoppingOrder create(long orderId);
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder remove(long orderId)

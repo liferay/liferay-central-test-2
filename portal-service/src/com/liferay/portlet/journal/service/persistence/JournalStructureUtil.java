@@ -29,6 +29,16 @@ package com.liferay.portlet.journal.service.persistence;
  *
  */
 public class JournalStructureUtil {
+	public static void cacheResult(
+		com.liferay.portlet.journal.model.JournalStructure journalStructure) {
+		getPersistence().cacheResult(journalStructure);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.journal.model.JournalStructure> journalStructures) {
+		getPersistence().cacheResult(journalStructures);
+	}
+
 	public static com.liferay.portlet.journal.model.JournalStructure create(
 		long id) {
 		return getPersistence().create(id);

@@ -111,7 +111,10 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.messageboards.model.MBCategory"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.messageboards.model.MBCategory"),
 			true);
 
@@ -169,9 +172,17 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory> {
 	}
 
 	public void setUuid(String uuid) {
-		if ((uuid != null) && (uuid != _uuid)) {
+		if ((uuid != null) && !uuid.equals(_uuid)) {
 			_uuid = uuid;
+
+			if (_originalUuid == null) {
+				_originalUuid = uuid;
+			}
 		}
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
 	}
 
 	public long getCategoryId() {
@@ -191,7 +202,17 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory> {
 	public void setGroupId(long groupId) {
 		if (groupId != _groupId) {
 			_groupId = groupId;
+
+			if (!_setOriginalGroupId) {
+				_setOriginalGroupId = true;
+
+				_originalGroupId = groupId;
+			}
 		}
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	public long getCompanyId() {
@@ -440,8 +461,11 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory> {
 	}
 
 	private String _uuid;
+	private String _originalUuid;
 	private long _categoryId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;

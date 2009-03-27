@@ -123,7 +123,10 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.wiki.model.WikiPage"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.wiki.model.WikiPage"),
 			true);
 
@@ -185,7 +188,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public void setUuid(String uuid) {
-		if ((uuid != null) && (uuid != _uuid)) {
+		if ((uuid != null) && !uuid.equals(_uuid)) {
 			_uuid = uuid;
 		}
 	}
@@ -276,7 +279,17 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	public void setNodeId(long nodeId) {
 		if (nodeId != _nodeId) {
 			_nodeId = nodeId;
+
+			if (!_setOriginalNodeId) {
+				_setOriginalNodeId = true;
+
+				_originalNodeId = nodeId;
+			}
 		}
+	}
+
+	public long getOriginalNodeId() {
+		return _originalNodeId;
 	}
 
 	public String getTitle() {
@@ -288,7 +301,15 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 				((title != null) && (_title == null)) ||
 				((title != null) && (_title != null) && !title.equals(_title))) {
 			_title = title;
+
+			if (_originalTitle == null) {
+				_originalTitle = title;
+			}
 		}
+	}
+
+	public String getOriginalTitle() {
+		return GetterUtil.getString(_originalTitle);
 	}
 
 	public double getVersion() {
@@ -298,7 +319,17 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	public void setVersion(double version) {
 		if (version != _version) {
 			_version = version;
+
+			if (!_setOriginalVersion) {
+				_setOriginalVersion = true;
+
+				_originalVersion = version;
+			}
 		}
+	}
+
+	public double getOriginalVersion() {
+		return _originalVersion;
 	}
 
 	public boolean getMinorEdit() {
@@ -543,8 +574,13 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _nodeId;
+	private long _originalNodeId;
+	private boolean _setOriginalNodeId;
 	private String _title;
+	private String _originalTitle;
 	private double _version;
+	private double _originalVersion;
+	private boolean _setOriginalVersion;
 	private boolean _minorEdit;
 	private String _content;
 	private String _summary;

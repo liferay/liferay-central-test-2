@@ -26,7 +26,9 @@ import com.liferay.portal.NoSuchPhoneException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -56,6 +58,122 @@ import java.util.List;
  */
 public class PhonePersistenceImpl extends BasePersistenceImpl
 	implements PhonePersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = Phone.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = Phone.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(PhoneModelImpl.ENTITY_CACHE_ENABLED,
+			PhoneModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByCompanyId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_COMPANYID = new FinderPath(PhoneModelImpl.ENTITY_CACHE_ENABLED,
+			PhoneModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByCompanyId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(PhoneModelImpl.ENTITY_CACHE_ENABLED,
+			PhoneModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByCompanyId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_USERID = new FinderPath(PhoneModelImpl.ENTITY_CACHE_ENABLED,
+			PhoneModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByUserId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_USERID = new FinderPath(PhoneModelImpl.ENTITY_CACHE_ENABLED,
+			PhoneModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByUserId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_USERID = new FinderPath(PhoneModelImpl.ENTITY_CACHE_ENABLED,
+			PhoneModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByUserId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_C_C = new FinderPath(PhoneModelImpl.ENTITY_CACHE_ENABLED,
+			PhoneModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByC_C",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_C = new FinderPath(PhoneModelImpl.ENTITY_CACHE_ENABLED,
+			PhoneModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByC_C",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_C = new FinderPath(PhoneModelImpl.ENTITY_CACHE_ENABLED,
+			PhoneModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByC_C",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_C_C_C = new FinderPath(PhoneModelImpl.ENTITY_CACHE_ENABLED,
+			PhoneModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByC_C_C",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_C_C = new FinderPath(PhoneModelImpl.ENTITY_CACHE_ENABLED,
+			PhoneModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByC_C_C",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_C_C = new FinderPath(PhoneModelImpl.ENTITY_CACHE_ENABLED,
+			PhoneModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByC_C_C",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_C_C_C_P = new FinderPath(PhoneModelImpl.ENTITY_CACHE_ENABLED,
+			PhoneModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByC_C_C_P",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName(),
+				Boolean.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_C_C_P = new FinderPath(PhoneModelImpl.ENTITY_CACHE_ENABLED,
+			PhoneModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByC_C_C_P",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName(),
+				Boolean.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_C_C_P = new FinderPath(PhoneModelImpl.ENTITY_CACHE_ENABLED,
+			PhoneModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByC_C_C_P",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName(),
+				Boolean.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(PhoneModelImpl.ENTITY_CACHE_ENABLED,
+			PhoneModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(PhoneModelImpl.ENTITY_CACHE_ENABLED,
+			PhoneModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countAll", new String[0]);
+
+	public void cacheResult(Phone phone) {
+		EntityCacheUtil.putResult(PhoneModelImpl.ENTITY_CACHE_ENABLED,
+			Phone.class, phone.getPrimaryKey(), phone);
+	}
+
+	public void cacheResult(List<Phone> phones) {
+		for (Phone phone : phones) {
+			if (EntityCacheUtil.getResult(PhoneModelImpl.ENTITY_CACHE_ENABLED,
+						Phone.class, phone.getPrimaryKey(), this) == null) {
+				cacheResult(phone);
+			}
+		}
+	}
+
 	public Phone create(long phoneId) {
 		Phone phone = new PhoneImpl();
 
@@ -129,17 +247,22 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 			session.delete(phone);
 
 			session.flush();
-
-			return phone;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(Phone.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		PhoneModelImpl phoneModelImpl = (PhoneModelImpl)phone;
+
+		EntityCacheUtil.removeResult(PhoneModelImpl.ENTITY_CACHE_ENABLED,
+			Phone.class, phone.getPrimaryKey());
+
+		return phone;
 	}
 
 	/**
@@ -195,6 +318,8 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 	public Phone updateImpl(com.liferay.portal.model.Phone phone, boolean merge)
 		throws SystemException {
+		boolean isNew = phone.isNew();
+
 		Session session = null;
 
 		try {
@@ -203,17 +328,22 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, phone, merge);
 
 			phone.setNew(false);
-
-			return phone;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(Phone.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		PhoneModelImpl phoneModelImpl = (PhoneModelImpl)phone;
+
+		EntityCacheUtil.putResult(PhoneModelImpl.ENTITY_CACHE_ENABLED,
+			Phone.class, phone.getPrimaryKey(), phone);
+
+		return phone;
 	}
 
 	public Phone findByPrimaryKey(long phoneId)
@@ -233,35 +363,40 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Phone fetchByPrimaryKey(long phoneId) throws SystemException {
-		Session session = null;
+		Phone result = (Phone)EntityCacheUtil.getResult(PhoneModelImpl.ENTITY_CACHE_ENABLED,
+				Phone.class, phoneId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (Phone)session.get(PhoneImpl.class, new Long(phoneId));
+			try {
+				session = openSession();
+
+				Phone phone = (Phone)session.get(PhoneImpl.class,
+						new Long(phoneId));
+
+				cacheResult(phone);
+
+				return phone;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (Phone)result;
 		}
 	}
 
 	public List<Phone> findByCompanyId(long companyId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = PhoneModelImpl.CACHE_ENABLED;
-		String finderClassName = Phone.class.getName();
-		String finderMethodName = "findByCompanyId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -289,9 +424,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 				List<Phone> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -314,27 +450,14 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 	public List<Phone> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = PhoneModelImpl.CACHE_ENABLED;
-		String finderClassName = Phone.class.getName();
-		String finderMethodName = "findByCompanyId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -370,9 +493,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 				List<Phone> list = (List<Phone>)QueryUtil.list(q, getDialect(),
 						start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -392,7 +516,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchPhoneException, SystemException {
 		List<Phone> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Phone exists with the key {");
@@ -414,7 +538,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 		List<Phone> list = findByCompanyId(companyId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Phone exists with the key {");
@@ -485,18 +609,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<Phone> findByUserId(long userId) throws SystemException {
-		boolean finderClassNameCacheEnabled = PhoneModelImpl.CACHE_ENABLED;
-		String finderClassName = Phone.class.getName();
-		String finderMethodName = "findByUserId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -524,9 +640,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 				List<Phone> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -549,27 +666,14 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 	public List<Phone> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = PhoneModelImpl.CACHE_ENABLED;
-		String finderClassName = Phone.class.getName();
-		String finderMethodName = "findByUserId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -605,9 +709,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 				List<Phone> list = (List<Phone>)QueryUtil.list(q, getDialect(),
 						start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -627,7 +732,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchPhoneException, SystemException {
 		List<Phone> list = findByUserId(userId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Phone exists with the key {");
@@ -649,7 +754,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 		List<Phone> list = findByUserId(userId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Phone exists with the key {");
@@ -721,22 +826,12 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 	public List<Phone> findByC_C(long companyId, long classNameId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = PhoneModelImpl.CACHE_ENABLED;
-		String finderClassName = Phone.class.getName();
-		String finderMethodName = "findByC_C";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_C,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -770,9 +865,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 				List<Phone> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C, finderArgs,
+					list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -795,27 +891,14 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 	public List<Phone> findByC_C(long companyId, long classNameId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = PhoneModelImpl.CACHE_ENABLED;
-		String finderClassName = Phone.class.getName();
-		String finderMethodName = "findByC_C";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -857,9 +940,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 				List<Phone> list = (List<Phone>)QueryUtil.list(q, getDialect(),
 						start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_C,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -879,7 +963,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchPhoneException, SystemException {
 		List<Phone> list = findByC_C(companyId, classNameId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Phone exists with the key {");
@@ -905,7 +989,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 		List<Phone> list = findByC_C(companyId, classNameId, count - 1, count,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Phone exists with the key {");
@@ -987,22 +1071,12 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 	public List<Phone> findByC_C_C(long companyId, long classNameId,
 		long classPK) throws SystemException {
-		boolean finderClassNameCacheEnabled = PhoneModelImpl.CACHE_ENABLED;
-		String finderClassName = Phone.class.getName();
-		String finderMethodName = "findByC_C_C";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_C_C,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1042,9 +1116,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 				List<Phone> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C_C,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1068,27 +1143,14 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 	public List<Phone> findByC_C_C(long companyId, long classNameId,
 		long classPK, int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = PhoneModelImpl.CACHE_ENABLED;
-		String finderClassName = Phone.class.getName();
-		String finderMethodName = "findByC_C_C";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C_C,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1136,9 +1198,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 				List<Phone> list = (List<Phone>)QueryUtil.list(q, getDialect(),
 						start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_C_C,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1160,7 +1223,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 		List<Phone> list = findByC_C_C(companyId, classNameId, classPK, 0, 1,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Phone exists with the key {");
@@ -1190,7 +1253,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 		List<Phone> list = findByC_C_C(companyId, classNameId, classPK,
 				count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Phone exists with the key {");
@@ -1281,24 +1344,13 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 	public List<Phone> findByC_C_C_P(long companyId, long classNameId,
 		long classPK, boolean primary) throws SystemException {
-		boolean finderClassNameCacheEnabled = PhoneModelImpl.CACHE_ENABLED;
-		String finderClassName = Phone.class.getName();
-		String finderMethodName = "findByC_C_C_P";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName(),
-				Boolean.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK),
 				Boolean.valueOf(primary)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_C_C_P,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1344,9 +1396,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 				List<Phone> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C_C_P,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1372,16 +1425,6 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 	public List<Phone> findByC_C_C_P(long companyId, long classNameId,
 		long classPK, boolean primary, int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = PhoneModelImpl.CACHE_ENABLED;
-		String finderClassName = Phone.class.getName();
-		String finderMethodName = "findByC_C_C_P";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName(),
-				Boolean.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK),
 				Boolean.valueOf(primary),
@@ -1389,12 +1432,8 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C_C_P,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1448,9 +1487,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 				List<Phone> list = (List<Phone>)QueryUtil.list(q, getDialect(),
 						start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_C_C_P,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1472,7 +1512,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 		List<Phone> list = findByC_C_C_P(companyId, classNameId, classPK,
 				primary, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Phone exists with the key {");
@@ -1505,7 +1545,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 		List<Phone> list = findByC_C_C_P(companyId, classNameId, classPK,
 				primary, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Phone exists with the key {");
@@ -1653,23 +1693,12 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 	public List<Phone> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = PhoneModelImpl.CACHE_ENABLED;
-		String finderClassName = Phone.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1707,9 +1736,9 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 							end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1766,18 +1795,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
-		boolean finderClassNameCacheEnabled = PhoneModelImpl.CACHE_ENABLED;
-		String finderClassName = Phone.class.getName();
-		String finderMethodName = "countByCompanyId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1812,8 +1833,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_COMPANYID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1831,18 +1851,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByUserId(long userId) throws SystemException {
-		boolean finderClassNameCacheEnabled = PhoneModelImpl.CACHE_ENABLED;
-		String finderClassName = Phone.class.getName();
-		String finderMethodName = "countByUserId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1877,8 +1889,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1897,22 +1908,12 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 	public int countByC_C(long companyId, long classNameId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = PhoneModelImpl.CACHE_ENABLED;
-		String finderClassName = Phone.class.getName();
-		String finderMethodName = "countByC_C";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1953,9 +1954,8 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -1973,22 +1973,12 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 	public int countByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = PhoneModelImpl.CACHE_ENABLED;
-		String finderClassName = Phone.class.getName();
-		String finderMethodName = "countByC_C_C";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C_C,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2035,8 +2025,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C_C,
 					finderArgs, count);
 
 				return count.intValue();
@@ -2055,24 +2044,13 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 	public int countByC_C_C_P(long companyId, long classNameId, long classPK,
 		boolean primary) throws SystemException {
-		boolean finderClassNameCacheEnabled = PhoneModelImpl.CACHE_ENABLED;
-		String finderClassName = Phone.class.getName();
-		String finderMethodName = "countByC_C_C_P";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName(),
-				Boolean.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK),
 				Boolean.valueOf(primary)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C_C_P,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2125,8 +2103,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C_C_P,
 					finderArgs, count);
 
 				return count.intValue();
@@ -2144,18 +2121,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = PhoneModelImpl.CACHE_ENABLED;
-		String finderClassName = Phone.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2178,9 +2147,8 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

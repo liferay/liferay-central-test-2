@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface AnnouncementsFlagPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> announcementsFlags);
+
 	public com.liferay.portlet.announcements.model.AnnouncementsFlag create(
 		long flagId);
 

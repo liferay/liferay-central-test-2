@@ -29,6 +29,12 @@ package com.liferay.portal.service.persistence;
  *
  */
 public interface PasswordTrackerPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portal.model.PasswordTracker passwordTracker);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portal.model.PasswordTracker> passwordTrackers);
+
 	public com.liferay.portal.model.PasswordTracker create(
 		long passwordTrackerId);
 

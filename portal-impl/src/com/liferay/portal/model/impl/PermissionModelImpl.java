@@ -79,7 +79,10 @@ public class PermissionModelImpl extends BaseModelImpl<Permission> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portal.model.Permission"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Permission"),
 			true);
 
@@ -104,9 +107,9 @@ public class PermissionModelImpl extends BaseModelImpl<Permission> {
 		return models;
 	}
 
-	public static final boolean CACHE_ENABLED_GROUPS_PERMISSIONS = com.liferay.portal.model.impl.GroupModelImpl.CACHE_ENABLED_GROUPS_PERMISSIONS;
-	public static final boolean CACHE_ENABLED_ROLES_PERMISSIONS = com.liferay.portal.model.impl.RoleModelImpl.CACHE_ENABLED_ROLES_PERMISSIONS;
-	public static final boolean CACHE_ENABLED_USERS_PERMISSIONS = com.liferay.portal.model.impl.UserModelImpl.CACHE_ENABLED_USERS_PERMISSIONS;
+	public static final boolean FINDER_CACHE_ENABLED_GROUPS_PERMISSIONS = com.liferay.portal.model.impl.GroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_PERMISSIONS;
+	public static final boolean FINDER_CACHE_ENABLED_ROLES_PERMISSIONS = com.liferay.portal.model.impl.RoleModelImpl.FINDER_CACHE_ENABLED_ROLES_PERMISSIONS;
+	public static final boolean FINDER_CACHE_ENABLED_USERS_PERMISSIONS = com.liferay.portal.model.impl.UserModelImpl.FINDER_CACHE_ENABLED_USERS_PERMISSIONS;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Permission"));
 
@@ -155,7 +158,15 @@ public class PermissionModelImpl extends BaseModelImpl<Permission> {
 				((actionId != null) && (_actionId != null) &&
 				!actionId.equals(_actionId))) {
 			_actionId = actionId;
+
+			if (_originalActionId == null) {
+				_originalActionId = actionId;
+			}
 		}
+	}
+
+	public String getOriginalActionId() {
+		return GetterUtil.getString(_originalActionId);
 	}
 
 	public long getResourceId() {
@@ -165,7 +176,17 @@ public class PermissionModelImpl extends BaseModelImpl<Permission> {
 	public void setResourceId(long resourceId) {
 		if (resourceId != _resourceId) {
 			_resourceId = resourceId;
+
+			if (!_setOriginalResourceId) {
+				_setOriginalResourceId = true;
+
+				_originalResourceId = resourceId;
+			}
 		}
+	}
+
+	public long getOriginalResourceId() {
+		return _originalResourceId;
 	}
 
 	public Permission toEscapedModel() {
@@ -256,6 +277,9 @@ public class PermissionModelImpl extends BaseModelImpl<Permission> {
 	private long _permissionId;
 	private long _companyId;
 	private String _actionId;
+	private String _originalActionId;
 	private long _resourceId;
+	private long _originalResourceId;
+	private boolean _setOriginalResourceId;
 	private transient ExpandoBridge _expandoBridge;
 }

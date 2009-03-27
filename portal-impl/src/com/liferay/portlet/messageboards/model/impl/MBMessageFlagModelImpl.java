@@ -79,7 +79,10 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.messageboards.model.MBMessageFlag"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.messageboards.model.MBMessageFlag"),
 			true);
 
@@ -139,7 +142,17 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag> {
 	public void setUserId(long userId) {
 		if (userId != _userId) {
 			_userId = userId;
+
+			if (!_setOriginalUserId) {
+				_setOriginalUserId = true;
+
+				_originalUserId = userId;
+			}
 		}
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	public long getMessageId() {
@@ -149,7 +162,17 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag> {
 	public void setMessageId(long messageId) {
 		if (messageId != _messageId) {
 			_messageId = messageId;
+
+			if (!_setOriginalMessageId) {
+				_setOriginalMessageId = true;
+
+				_originalMessageId = messageId;
+			}
 		}
+	}
+
+	public long getOriginalMessageId() {
+		return _originalMessageId;
 	}
 
 	public int getFlag() {
@@ -159,7 +182,17 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag> {
 	public void setFlag(int flag) {
 		if (flag != _flag) {
 			_flag = flag;
+
+			if (!_setOriginalFlag) {
+				_setOriginalFlag = true;
+
+				_originalFlag = flag;
+			}
 		}
+	}
+
+	public int getOriginalFlag() {
+		return _originalFlag;
 	}
 
 	public MBMessageFlag toEscapedModel() {
@@ -249,7 +282,13 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag> {
 
 	private long _messageFlagId;
 	private long _userId;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private long _messageId;
+	private long _originalMessageId;
+	private boolean _setOriginalMessageId;
 	private int _flag;
+	private int _originalFlag;
+	private boolean _setOriginalFlag;
 	private transient ExpandoBridge _expandoBridge;
 }

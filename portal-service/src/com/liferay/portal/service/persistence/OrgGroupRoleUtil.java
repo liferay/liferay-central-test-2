@@ -29,6 +29,16 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class OrgGroupRoleUtil {
+	public static void cacheResult(
+		com.liferay.portal.model.OrgGroupRole orgGroupRole) {
+		getPersistence().cacheResult(orgGroupRole);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.OrgGroupRole> orgGroupRoles) {
+		getPersistence().cacheResult(orgGroupRoles);
+	}
+
 	public static com.liferay.portal.model.OrgGroupRole create(
 		com.liferay.portal.service.persistence.OrgGroupRolePK orgGroupRolePK) {
 		return getPersistence().create(orgGroupRolePK);

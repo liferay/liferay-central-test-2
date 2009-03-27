@@ -29,6 +29,16 @@ package com.liferay.portlet.tags.service.persistence;
  *
  */
 public class TagsVocabularyUtil {
+	public static void cacheResult(
+		com.liferay.portlet.tags.model.TagsVocabulary tagsVocabulary) {
+		getPersistence().cacheResult(tagsVocabulary);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> tagsVocabularies) {
+		getPersistence().cacheResult(tagsVocabularies);
+	}
+
 	public static com.liferay.portlet.tags.model.TagsVocabulary create(
 		long vocabularyId) {
 		return getPersistence().create(vocabularyId);

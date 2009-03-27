@@ -31,6 +31,11 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface WikiPagePersistence extends BasePersistence {
+	public void cacheResult(com.liferay.portlet.wiki.model.WikiPage wikiPage);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.wiki.model.WikiPage> wikiPages);
+
 	public com.liferay.portlet.wiki.model.WikiPage create(long pageId);
 
 	public com.liferay.portlet.wiki.model.WikiPage remove(long pageId)

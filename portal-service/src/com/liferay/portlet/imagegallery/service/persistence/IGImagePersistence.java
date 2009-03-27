@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface IGImagePersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.imagegallery.model.IGImage igImage);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.imagegallery.model.IGImage> igImages);
+
 	public com.liferay.portlet.imagegallery.model.IGImage create(long imageId);
 
 	public com.liferay.portlet.imagegallery.model.IGImage remove(long imageId)

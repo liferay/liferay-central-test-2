@@ -123,7 +123,10 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.journal.model.JournalTemplate"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.journal.model.JournalTemplate"),
 			true);
 
@@ -186,9 +189,17 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public void setUuid(String uuid) {
-		if ((uuid != null) && (uuid != _uuid)) {
+		if ((uuid != null) && !uuid.equals(_uuid)) {
 			_uuid = uuid;
+
+			if (_originalUuid == null) {
+				_originalUuid = uuid;
+			}
 		}
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
 	}
 
 	public long getId() {
@@ -208,7 +219,17 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	public void setGroupId(long groupId) {
 		if (groupId != _groupId) {
 			_groupId = groupId;
+
+			if (!_setOriginalGroupId) {
+				_setOriginalGroupId = true;
+
+				_originalGroupId = groupId;
+			}
 		}
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	public long getCompanyId() {
@@ -280,7 +301,15 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 				((templateId != null) && (_templateId != null) &&
 				!templateId.equals(_templateId))) {
 			_templateId = templateId;
+
+			if (_originalTemplateId == null) {
+				_originalTemplateId = templateId;
+			}
 		}
+	}
+
+	public String getOriginalTemplateId() {
+		return GetterUtil.getString(_originalTemplateId);
 	}
 
 	public String getStructureId() {
@@ -381,7 +410,17 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	public void setSmallImageId(long smallImageId) {
 		if (smallImageId != _smallImageId) {
 			_smallImageId = smallImageId;
+
+			if (!_setOriginalSmallImageId) {
+				_setOriginalSmallImageId = true;
+
+				_originalSmallImageId = smallImageId;
+			}
 		}
+	}
+
+	public long getOriginalSmallImageId() {
+		return _originalSmallImageId;
 	}
 
 	public String getSmallImageURL() {
@@ -509,14 +548,18 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	private String _uuid;
+	private String _originalUuid;
 	private long _id;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _templateId;
+	private String _originalTemplateId;
 	private String _structureId;
 	private String _name;
 	private String _description;
@@ -525,6 +568,8 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	private boolean _cacheable;
 	private boolean _smallImage;
 	private long _smallImageId;
+	private long _originalSmallImageId;
+	private boolean _setOriginalSmallImageId;
 	private String _smallImageURL;
 	private transient ExpandoBridge _expandoBridge;
 }

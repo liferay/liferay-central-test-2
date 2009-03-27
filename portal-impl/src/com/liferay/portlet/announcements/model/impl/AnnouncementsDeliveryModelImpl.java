@@ -89,7 +89,10 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.announcements.model.AnnouncementsDelivery"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.announcements.model.AnnouncementsDelivery"),
 			true);
 
@@ -164,7 +167,17 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 	public void setUserId(long userId) {
 		if (userId != _userId) {
 			_userId = userId;
+
+			if (!_setOriginalUserId) {
+				_setOriginalUserId = true;
+
+				_originalUserId = userId;
+			}
 		}
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	public String getType() {
@@ -176,7 +189,15 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 				((type != null) && (_type == null)) ||
 				((type != null) && (_type != null) && !type.equals(_type))) {
 			_type = type;
+
+			if (_originalType == null) {
+				_originalType = type;
+			}
 		}
+	}
+
+	public String getOriginalType() {
+		return GetterUtil.getString(_originalType);
 	}
 
 	public boolean getEmail() {
@@ -315,7 +336,10 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 	private long _deliveryId;
 	private long _companyId;
 	private long _userId;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private String _type;
+	private String _originalType;
 	private boolean _email;
 	private boolean _sms;
 	private boolean _website;

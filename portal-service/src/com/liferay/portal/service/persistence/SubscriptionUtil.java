@@ -29,6 +29,16 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class SubscriptionUtil {
+	public static void cacheResult(
+		com.liferay.portal.model.Subscription subscription) {
+		getPersistence().cacheResult(subscription);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.Subscription> subscriptions) {
+		getPersistence().cacheResult(subscriptions);
+	}
+
 	public static com.liferay.portal.model.Subscription create(
 		long subscriptionId) {
 		return getPersistence().create(subscriptionId);

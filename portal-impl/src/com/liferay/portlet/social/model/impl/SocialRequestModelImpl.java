@@ -110,7 +110,10 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.social.model.SocialRequest"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.social.model.SocialRequest"),
 			true);
 
@@ -167,9 +170,17 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest> {
 	}
 
 	public void setUuid(String uuid) {
-		if ((uuid != null) && (uuid != _uuid)) {
+		if ((uuid != null) && !uuid.equals(_uuid)) {
 			_uuid = uuid;
+
+			if (_originalUuid == null) {
+				_originalUuid = uuid;
+			}
 		}
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
 	}
 
 	public long getRequestId() {
@@ -189,7 +200,17 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest> {
 	public void setGroupId(long groupId) {
 		if (groupId != _groupId) {
 			_groupId = groupId;
+
+			if (!_setOriginalGroupId) {
+				_setOriginalGroupId = true;
+
+				_originalGroupId = groupId;
+			}
 		}
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	public long getCompanyId() {
@@ -209,7 +230,17 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest> {
 	public void setUserId(long userId) {
 		if (userId != _userId) {
 			_userId = userId;
+
+			if (!_setOriginalUserId) {
+				_setOriginalUserId = true;
+
+				_originalUserId = userId;
+			}
 		}
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	public Date getCreateDate() {
@@ -253,7 +284,17 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest> {
 	public void setClassNameId(long classNameId) {
 		if (classNameId != _classNameId) {
 			_classNameId = classNameId;
+
+			if (!_setOriginalClassNameId) {
+				_setOriginalClassNameId = true;
+
+				_originalClassNameId = classNameId;
+			}
 		}
+	}
+
+	public long getOriginalClassNameId() {
+		return _originalClassNameId;
 	}
 
 	public long getClassPK() {
@@ -263,7 +304,17 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest> {
 	public void setClassPK(long classPK) {
 		if (classPK != _classPK) {
 			_classPK = classPK;
+
+			if (!_setOriginalClassPK) {
+				_setOriginalClassPK = true;
+
+				_originalClassPK = classPK;
+			}
 		}
+	}
+
+	public long getOriginalClassPK() {
+		return _originalClassPK;
 	}
 
 	public int getType() {
@@ -273,7 +324,17 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest> {
 	public void setType(int type) {
 		if (type != _type) {
 			_type = type;
+
+			if (!_setOriginalType) {
+				_setOriginalType = true;
+
+				_originalType = type;
+			}
 		}
+	}
+
+	public int getOriginalType() {
+		return _originalType;
 	}
 
 	public String getExtraData() {
@@ -296,7 +357,17 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest> {
 	public void setReceiverUserId(long receiverUserId) {
 		if (receiverUserId != _receiverUserId) {
 			_receiverUserId = receiverUserId;
+
+			if (!_setOriginalReceiverUserId) {
+				_setOriginalReceiverUserId = true;
+
+				_originalReceiverUserId = receiverUserId;
+			}
 		}
+	}
+
+	public long getOriginalReceiverUserId() {
+		return _originalReceiverUserId;
 	}
 
 	public int getStatus() {
@@ -306,7 +377,17 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest> {
 	public void setStatus(int status) {
 		if (status != _status) {
 			_status = status;
+
+			if (!_setOriginalStatus) {
+				_setOriginalStatus = true;
+
+				_originalStatus = status;
+			}
 		}
+	}
+
+	public int getOriginalStatus() {
+		return _originalStatus;
 	}
 
 	public SocialRequest toEscapedModel() {
@@ -421,17 +502,32 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest> {
 	}
 
 	private String _uuid;
+	private String _originalUuid;
 	private long _requestId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _classNameId;
+	private long _originalClassNameId;
+	private boolean _setOriginalClassNameId;
 	private long _classPK;
+	private long _originalClassPK;
+	private boolean _setOriginalClassPK;
 	private int _type;
+	private int _originalType;
+	private boolean _setOriginalType;
 	private String _extraData;
 	private long _receiverUserId;
+	private long _originalReceiverUserId;
+	private boolean _setOriginalReceiverUserId;
 	private int _status;
+	private int _originalStatus;
+	private boolean _setOriginalStatus;
 	private transient ExpandoBridge _expandoBridge;
 }

@@ -82,7 +82,10 @@ public class PortletModelImpl extends BaseModelImpl<Portlet> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portal.model.Portlet"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Portlet"),
 			true);
 
@@ -143,7 +146,17 @@ public class PortletModelImpl extends BaseModelImpl<Portlet> {
 	public void setCompanyId(long companyId) {
 		if (companyId != _companyId) {
 			_companyId = companyId;
+
+			if (!_setOriginalCompanyId) {
+				_setOriginalCompanyId = true;
+
+				_originalCompanyId = companyId;
+			}
 		}
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	public String getPortletId() {
@@ -156,7 +169,15 @@ public class PortletModelImpl extends BaseModelImpl<Portlet> {
 				((portletId != null) && (_portletId != null) &&
 				!portletId.equals(_portletId))) {
 			_portletId = portletId;
+
+			if (_originalPortletId == null) {
+				_originalPortletId = portletId;
+			}
 		}
+	}
+
+	public String getOriginalPortletId() {
+		return GetterUtil.getString(_originalPortletId);
 	}
 
 	public String getRoles() {
@@ -274,7 +295,10 @@ public class PortletModelImpl extends BaseModelImpl<Portlet> {
 
 	private long _id;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private String _portletId;
+	private String _originalPortletId;
 	private String _roles;
 	private boolean _active;
 	private transient ExpandoBridge _expandoBridge;

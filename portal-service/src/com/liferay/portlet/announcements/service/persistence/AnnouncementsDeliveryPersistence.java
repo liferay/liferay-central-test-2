@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface AnnouncementsDeliveryPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.announcements.model.AnnouncementsDelivery announcementsDelivery);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> announcementsDeliveries);
+
 	public com.liferay.portlet.announcements.model.AnnouncementsDelivery create(
 		long deliveryId);
 

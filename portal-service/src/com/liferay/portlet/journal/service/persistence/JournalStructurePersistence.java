@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface JournalStructurePersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.journal.model.JournalStructure journalStructure);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.journal.model.JournalStructure> journalStructures);
+
 	public com.liferay.portlet.journal.model.JournalStructure create(long id);
 
 	public com.liferay.portlet.journal.model.JournalStructure remove(long id)

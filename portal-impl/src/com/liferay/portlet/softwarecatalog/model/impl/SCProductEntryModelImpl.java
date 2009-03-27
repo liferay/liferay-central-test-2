@@ -118,7 +118,10 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.softwarecatalog.model.SCProductEntry"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.softwarecatalog.model.SCProductEntry"),
 			true);
 
@@ -155,7 +158,8 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 		return models;
 	}
 
-	public static final boolean CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES = com.liferay.portlet.softwarecatalog.model.impl.SCLicenseModelImpl.CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES;
+	public static final boolean FINDER_CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES =
+		com.liferay.portlet.softwarecatalog.model.impl.SCLicenseModelImpl.FINDER_CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.softwarecatalog.model.SCProductEntry"));
 
@@ -351,7 +355,15 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 				((repoGroupId != null) && (_repoGroupId != null) &&
 				!repoGroupId.equals(_repoGroupId))) {
 			_repoGroupId = repoGroupId;
+
+			if (_originalRepoGroupId == null) {
+				_originalRepoGroupId = repoGroupId;
+			}
 		}
+	}
+
+	public String getOriginalRepoGroupId() {
+		return GetterUtil.getString(_originalRepoGroupId);
 	}
 
 	public String getRepoArtifactId() {
@@ -364,7 +376,15 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 				((repoArtifactId != null) && (_repoArtifactId != null) &&
 				!repoArtifactId.equals(_repoArtifactId))) {
 			_repoArtifactId = repoArtifactId;
+
+			if (_originalRepoArtifactId == null) {
+				_originalRepoArtifactId = repoArtifactId;
+			}
 		}
+	}
+
+	public String getOriginalRepoArtifactId() {
+		return GetterUtil.getString(_originalRepoArtifactId);
 	}
 
 	public SCProductEntry toEscapedModel() {
@@ -500,6 +520,8 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	private String _pageURL;
 	private String _author;
 	private String _repoGroupId;
+	private String _originalRepoGroupId;
 	private String _repoArtifactId;
+	private String _originalRepoArtifactId;
 	private transient ExpandoBridge _expandoBridge;
 }

@@ -25,7 +25,9 @@ package com.liferay.portlet.announcements.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -58,6 +60,65 @@ import java.util.List;
  */
 public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 	implements AnnouncementsDeliveryPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = AnnouncementsDelivery.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = AnnouncementsDelivery.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_USERID = new FinderPath(AnnouncementsDeliveryModelImpl.ENTITY_CACHE_ENABLED,
+			AnnouncementsDeliveryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByUserId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_USERID = new FinderPath(AnnouncementsDeliveryModelImpl.ENTITY_CACHE_ENABLED,
+			AnnouncementsDeliveryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByUserId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_USERID = new FinderPath(AnnouncementsDeliveryModelImpl.ENTITY_CACHE_ENABLED,
+			AnnouncementsDeliveryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByUserId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_U_T = new FinderPath(AnnouncementsDeliveryModelImpl.ENTITY_CACHE_ENABLED,
+			AnnouncementsDeliveryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByU_T",
+			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_U_T = new FinderPath(AnnouncementsDeliveryModelImpl.ENTITY_CACHE_ENABLED,
+			AnnouncementsDeliveryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByU_T",
+			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(AnnouncementsDeliveryModelImpl.ENTITY_CACHE_ENABLED,
+			AnnouncementsDeliveryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(AnnouncementsDeliveryModelImpl.ENTITY_CACHE_ENABLED,
+			AnnouncementsDeliveryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
+
+	public void cacheResult(AnnouncementsDelivery announcementsDelivery) {
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T,
+			new Object[] {
+				new Long(announcementsDelivery.getUserId()),
+				
+			announcementsDelivery.getType()
+			}, announcementsDelivery);
+
+		EntityCacheUtil.putResult(AnnouncementsDeliveryModelImpl.ENTITY_CACHE_ENABLED,
+			AnnouncementsDelivery.class, announcementsDelivery.getPrimaryKey(),
+			announcementsDelivery);
+	}
+
+	public void cacheResult(List<AnnouncementsDelivery> announcementsDeliveries) {
+		for (AnnouncementsDelivery announcementsDelivery : announcementsDeliveries) {
+			if (EntityCacheUtil.getResult(
+						AnnouncementsDeliveryModelImpl.ENTITY_CACHE_ENABLED,
+						AnnouncementsDelivery.class,
+						announcementsDelivery.getPrimaryKey(), this) == null) {
+				cacheResult(announcementsDelivery);
+			}
+		}
+	}
+
 	public AnnouncementsDelivery create(long deliveryId) {
 		AnnouncementsDelivery announcementsDelivery = new AnnouncementsDeliveryImpl();
 
@@ -136,17 +197,29 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 			session.delete(announcementsDelivery);
 
 			session.flush();
-
-			return announcementsDelivery;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(AnnouncementsDelivery.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		AnnouncementsDeliveryModelImpl announcementsDeliveryModelImpl = (AnnouncementsDeliveryModelImpl)announcementsDelivery;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_T,
+			new Object[] {
+				new Long(announcementsDeliveryModelImpl.getOriginalUserId()),
+				
+			announcementsDeliveryModelImpl.getOriginalType()
+			});
+
+		EntityCacheUtil.removeResult(AnnouncementsDeliveryModelImpl.ENTITY_CACHE_ENABLED,
+			AnnouncementsDelivery.class, announcementsDelivery.getPrimaryKey());
+
+		return announcementsDelivery;
 	}
 
 	/**
@@ -206,6 +279,8 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 	public AnnouncementsDelivery updateImpl(
 		com.liferay.portlet.announcements.model.AnnouncementsDelivery announcementsDelivery,
 		boolean merge) throws SystemException {
+		boolean isNew = announcementsDelivery.isNew();
+
 		Session session = null;
 
 		try {
@@ -214,17 +289,47 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, announcementsDelivery, merge);
 
 			announcementsDelivery.setNew(false);
-
-			return announcementsDelivery;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(AnnouncementsDelivery.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		AnnouncementsDeliveryModelImpl announcementsDeliveryModelImpl = (AnnouncementsDeliveryModelImpl)announcementsDelivery;
+
+		if (!isNew &&
+				((announcementsDelivery.getUserId() != announcementsDeliveryModelImpl.getOriginalUserId()) ||
+				!announcementsDelivery.getType()
+										  .equals(announcementsDeliveryModelImpl.getOriginalType()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_T,
+				new Object[] {
+					new Long(announcementsDeliveryModelImpl.getOriginalUserId()),
+					
+				announcementsDeliveryModelImpl.getOriginalType()
+				});
+		}
+
+		if (isNew ||
+				((announcementsDelivery.getUserId() != announcementsDeliveryModelImpl.getOriginalUserId()) ||
+				!announcementsDelivery.getType()
+										  .equals(announcementsDeliveryModelImpl.getOriginalType()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T,
+				new Object[] {
+					new Long(announcementsDelivery.getUserId()),
+					
+				announcementsDelivery.getType()
+				}, announcementsDelivery);
+		}
+
+		EntityCacheUtil.putResult(AnnouncementsDeliveryModelImpl.ENTITY_CACHE_ENABLED,
+			AnnouncementsDelivery.class, announcementsDelivery.getPrimaryKey(),
+			announcementsDelivery);
+
+		return announcementsDelivery;
 	}
 
 	public AnnouncementsDelivery findByPrimaryKey(long deliveryId)
@@ -248,36 +353,40 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 
 	public AnnouncementsDelivery fetchByPrimaryKey(long deliveryId)
 		throws SystemException {
-		Session session = null;
+		AnnouncementsDelivery result = (AnnouncementsDelivery)EntityCacheUtil.getResult(AnnouncementsDeliveryModelImpl.ENTITY_CACHE_ENABLED,
+				AnnouncementsDelivery.class, deliveryId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (AnnouncementsDelivery)session.get(AnnouncementsDeliveryImpl.class,
-				new Long(deliveryId));
+			try {
+				session = openSession();
+
+				AnnouncementsDelivery announcementsDelivery = (AnnouncementsDelivery)session.get(AnnouncementsDeliveryImpl.class,
+						new Long(deliveryId));
+
+				cacheResult(announcementsDelivery);
+
+				return announcementsDelivery;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (AnnouncementsDelivery)result;
 		}
 	}
 
 	public List<AnnouncementsDelivery> findByUserId(long userId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = AnnouncementsDeliveryModelImpl.CACHE_ENABLED;
-		String finderClassName = AnnouncementsDelivery.class.getName();
-		String finderMethodName = "findByUserId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -302,9 +411,10 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 
 				List<AnnouncementsDelivery> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -327,27 +437,14 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 
 	public List<AnnouncementsDelivery> findByUserId(long userId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = AnnouncementsDeliveryModelImpl.CACHE_ENABLED;
-		String finderClassName = AnnouncementsDelivery.class.getName();
-		String finderMethodName = "findByUserId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -378,9 +475,10 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 				List<AnnouncementsDelivery> list = (List<AnnouncementsDelivery>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -400,7 +498,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchDeliveryException, SystemException {
 		List<AnnouncementsDelivery> list = findByUserId(userId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No AnnouncementsDelivery exists with the key {");
@@ -423,7 +521,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 		List<AnnouncementsDelivery> list = findByUserId(userId, count - 1,
 				count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No AnnouncementsDelivery exists with the key {");
@@ -518,20 +616,10 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 
 	public AnnouncementsDelivery fetchByU_T(long userId, String type)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = AnnouncementsDeliveryModelImpl.CACHE_ENABLED;
-		String finderClassName = AnnouncementsDelivery.class.getName();
-		String finderMethodName = "fetchByU_T";
-		String[] finderParams = new String[] {
-				Long.class.getName(), String.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(userId), type };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_U_T,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -569,16 +657,19 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 
 				List<AnnouncementsDelivery> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				AnnouncementsDelivery announcementsDelivery = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					announcementsDelivery = list.get(0);
+
+					cacheResult(announcementsDelivery);
 				}
+
+				return announcementsDelivery;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -588,13 +679,11 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<AnnouncementsDelivery> list = (List<AnnouncementsDelivery>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (AnnouncementsDelivery)result;
 			}
 		}
 	}
@@ -650,23 +739,12 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 
 	public List<AnnouncementsDelivery> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = AnnouncementsDeliveryModelImpl.CACHE_ENABLED;
-		String finderClassName = AnnouncementsDelivery.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -699,9 +777,9 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -737,18 +815,10 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByUserId(long userId) throws SystemException {
-		boolean finderClassNameCacheEnabled = AnnouncementsDeliveryModelImpl.CACHE_ENABLED;
-		String finderClassName = AnnouncementsDelivery.class.getName();
-		String finderMethodName = "countByUserId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -784,8 +854,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -803,20 +872,10 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByU_T(long userId, String type) throws SystemException {
-		boolean finderClassNameCacheEnabled = AnnouncementsDeliveryModelImpl.CACHE_ENABLED;
-		String finderClassName = AnnouncementsDelivery.class.getName();
-		String finderMethodName = "countByU_T";
-		String[] finderParams = new String[] {
-				Long.class.getName(), String.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(userId), type };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_T,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -865,9 +924,8 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U_T, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -884,18 +942,10 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = AnnouncementsDeliveryModelImpl.CACHE_ENABLED;
-		String finderClassName = AnnouncementsDelivery.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -918,9 +968,8 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

@@ -77,7 +77,10 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.wiki.model.WikiPageResource"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.wiki.model.WikiPageResource"),
 			true);
 
@@ -137,7 +140,17 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource> {
 	public void setNodeId(long nodeId) {
 		if (nodeId != _nodeId) {
 			_nodeId = nodeId;
+
+			if (!_setOriginalNodeId) {
+				_setOriginalNodeId = true;
+
+				_originalNodeId = nodeId;
+			}
 		}
+	}
+
+	public long getOriginalNodeId() {
+		return _originalNodeId;
 	}
 
 	public String getTitle() {
@@ -149,7 +162,15 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource> {
 				((title != null) && (_title == null)) ||
 				((title != null) && (_title != null) && !title.equals(_title))) {
 			_title = title;
+
+			if (_originalTitle == null) {
+				_originalTitle = title;
+			}
 		}
+	}
+
+	public String getOriginalTitle() {
+		return GetterUtil.getString(_originalTitle);
 	}
 
 	public WikiPageResource toEscapedModel() {
@@ -237,6 +258,9 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource> {
 
 	private long _resourcePrimKey;
 	private long _nodeId;
+	private long _originalNodeId;
+	private boolean _setOriginalNodeId;
 	private String _title;
+	private String _originalTitle;
 	private transient ExpandoBridge _expandoBridge;
 }

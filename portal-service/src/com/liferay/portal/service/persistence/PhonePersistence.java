@@ -29,6 +29,11 @@ package com.liferay.portal.service.persistence;
  *
  */
 public interface PhonePersistence extends BasePersistence {
+	public void cacheResult(com.liferay.portal.model.Phone phone);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portal.model.Phone> phones);
+
 	public com.liferay.portal.model.Phone create(long phoneId);
 
 	public com.liferay.portal.model.Phone remove(long phoneId)

@@ -29,6 +29,16 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class EmailAddressUtil {
+	public static void cacheResult(
+		com.liferay.portal.model.EmailAddress emailAddress) {
+		getPersistence().cacheResult(emailAddress);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses) {
+		getPersistence().cacheResult(emailAddresses);
+	}
+
 	public static com.liferay.portal.model.EmailAddress create(
 		long emailAddressId) {
 		return getPersistence().create(emailAddressId);

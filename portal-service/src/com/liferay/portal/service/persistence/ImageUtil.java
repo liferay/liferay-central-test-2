@@ -29,6 +29,15 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class ImageUtil {
+	public static void cacheResult(com.liferay.portal.model.Image image) {
+		getPersistence().cacheResult(image);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.Image> images) {
+		getPersistence().cacheResult(images);
+	}
+
 	public static com.liferay.portal.model.Image create(long imageId) {
 		return getPersistence().create(imageId);
 	}

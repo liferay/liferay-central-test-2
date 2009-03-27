@@ -25,7 +25,9 @@ package com.liferay.portlet.tags.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -58,6 +60,81 @@ import java.util.List;
  */
 public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 	implements TagsVocabularyPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = TagsVocabulary.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = TagsVocabulary.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FETCH_BY_G_N = new FinderPath(TagsVocabularyModelImpl.ENTITY_CACHE_ENABLED,
+			TagsVocabularyModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByG_N",
+			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_N = new FinderPath(TagsVocabularyModelImpl.ENTITY_CACHE_ENABLED,
+			TagsVocabularyModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByG_N",
+			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_G_F = new FinderPath(TagsVocabularyModelImpl.ENTITY_CACHE_ENABLED,
+			TagsVocabularyModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByG_F",
+			new String[] { Long.class.getName(), Boolean.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_F = new FinderPath(TagsVocabularyModelImpl.ENTITY_CACHE_ENABLED,
+			TagsVocabularyModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByG_F",
+			new String[] {
+				Long.class.getName(), Boolean.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_F = new FinderPath(TagsVocabularyModelImpl.ENTITY_CACHE_ENABLED,
+			TagsVocabularyModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByG_F",
+			new String[] { Long.class.getName(), Boolean.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_C_F = new FinderPath(TagsVocabularyModelImpl.ENTITY_CACHE_ENABLED,
+			TagsVocabularyModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByC_F",
+			new String[] { Long.class.getName(), Boolean.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_F = new FinderPath(TagsVocabularyModelImpl.ENTITY_CACHE_ENABLED,
+			TagsVocabularyModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByC_F",
+			new String[] {
+				Long.class.getName(), Boolean.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_F = new FinderPath(TagsVocabularyModelImpl.ENTITY_CACHE_ENABLED,
+			TagsVocabularyModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByC_F",
+			new String[] { Long.class.getName(), Boolean.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(TagsVocabularyModelImpl.ENTITY_CACHE_ENABLED,
+			TagsVocabularyModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(TagsVocabularyModelImpl.ENTITY_CACHE_ENABLED,
+			TagsVocabularyModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
+
+	public void cacheResult(TagsVocabulary tagsVocabulary) {
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
+			new Object[] {
+				new Long(tagsVocabulary.getGroupId()),
+				
+			tagsVocabulary.getName()
+			}, tagsVocabulary);
+
+		EntityCacheUtil.putResult(TagsVocabularyModelImpl.ENTITY_CACHE_ENABLED,
+			TagsVocabulary.class, tagsVocabulary.getPrimaryKey(), tagsVocabulary);
+	}
+
+	public void cacheResult(List<TagsVocabulary> tagsVocabularies) {
+		for (TagsVocabulary tagsVocabulary : tagsVocabularies) {
+			if (EntityCacheUtil.getResult(
+						TagsVocabularyModelImpl.ENTITY_CACHE_ENABLED,
+						TagsVocabulary.class, tagsVocabulary.getPrimaryKey(),
+						this) == null) {
+				cacheResult(tagsVocabulary);
+			}
+		}
+	}
+
 	public TagsVocabulary create(long vocabularyId) {
 		TagsVocabulary tagsVocabulary = new TagsVocabularyImpl();
 
@@ -135,17 +212,29 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 			session.delete(tagsVocabulary);
 
 			session.flush();
-
-			return tagsVocabulary;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(TagsVocabulary.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		TagsVocabularyModelImpl tagsVocabularyModelImpl = (TagsVocabularyModelImpl)tagsVocabulary;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N,
+			new Object[] {
+				new Long(tagsVocabularyModelImpl.getOriginalGroupId()),
+				
+			tagsVocabularyModelImpl.getOriginalName()
+			});
+
+		EntityCacheUtil.removeResult(TagsVocabularyModelImpl.ENTITY_CACHE_ENABLED,
+			TagsVocabulary.class, tagsVocabulary.getPrimaryKey());
+
+		return tagsVocabulary;
 	}
 
 	/**
@@ -204,6 +293,8 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 	public TagsVocabulary updateImpl(
 		com.liferay.portlet.tags.model.TagsVocabulary tagsVocabulary,
 		boolean merge) throws SystemException {
+		boolean isNew = tagsVocabulary.isNew();
+
 		Session session = null;
 
 		try {
@@ -212,17 +303,46 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, tagsVocabulary, merge);
 
 			tagsVocabulary.setNew(false);
-
-			return tagsVocabulary;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(TagsVocabulary.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		TagsVocabularyModelImpl tagsVocabularyModelImpl = (TagsVocabularyModelImpl)tagsVocabulary;
+
+		if (!isNew &&
+				((tagsVocabulary.getGroupId() != tagsVocabularyModelImpl.getOriginalGroupId()) ||
+				!tagsVocabulary.getName()
+								   .equals(tagsVocabularyModelImpl.getOriginalName()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N,
+				new Object[] {
+					new Long(tagsVocabularyModelImpl.getOriginalGroupId()),
+					
+				tagsVocabularyModelImpl.getOriginalName()
+				});
+		}
+
+		if (isNew ||
+				((tagsVocabulary.getGroupId() != tagsVocabularyModelImpl.getOriginalGroupId()) ||
+				!tagsVocabulary.getName()
+								   .equals(tagsVocabularyModelImpl.getOriginalName()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
+				new Object[] {
+					new Long(tagsVocabulary.getGroupId()),
+					
+				tagsVocabulary.getName()
+				}, tagsVocabulary);
+		}
+
+		EntityCacheUtil.putResult(TagsVocabularyModelImpl.ENTITY_CACHE_ENABLED,
+			TagsVocabulary.class, tagsVocabulary.getPrimaryKey(), tagsVocabulary);
+
+		return tagsVocabulary;
 	}
 
 	public TagsVocabulary findByPrimaryKey(long vocabularyId)
@@ -245,19 +365,31 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 
 	public TagsVocabulary fetchByPrimaryKey(long vocabularyId)
 		throws SystemException {
-		Session session = null;
+		TagsVocabulary result = (TagsVocabulary)EntityCacheUtil.getResult(TagsVocabularyModelImpl.ENTITY_CACHE_ENABLED,
+				TagsVocabulary.class, vocabularyId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (TagsVocabulary)session.get(TagsVocabularyImpl.class,
-				new Long(vocabularyId));
+			try {
+				session = openSession();
+
+				TagsVocabulary tagsVocabulary = (TagsVocabulary)session.get(TagsVocabularyImpl.class,
+						new Long(vocabularyId));
+
+				cacheResult(tagsVocabulary);
+
+				return tagsVocabulary;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (TagsVocabulary)result;
 		}
 	}
 
@@ -289,20 +421,10 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 
 	public TagsVocabulary fetchByG_N(long groupId, String name)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = TagsVocabularyModelImpl.CACHE_ENABLED;
-		String finderClassName = TagsVocabulary.class.getName();
-		String finderMethodName = "fetchByG_N";
-		String[] finderParams = new String[] {
-				Long.class.getName(), String.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(groupId), name };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_N,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -344,16 +466,19 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 
 				List<TagsVocabulary> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				TagsVocabulary tagsVocabulary = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					tagsVocabulary = list.get(0);
+
+					cacheResult(tagsVocabulary);
 				}
+
+				return tagsVocabulary;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -363,35 +488,23 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<TagsVocabulary> list = (List<TagsVocabulary>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (TagsVocabulary)result;
 			}
 		}
 	}
 
 	public List<TagsVocabulary> findByG_F(long groupId, boolean folksonomy)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = TagsVocabularyModelImpl.CACHE_ENABLED;
-		String finderClassName = TagsVocabulary.class.getName();
-		String finderMethodName = "findByG_F";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Boolean.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(folksonomy)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_F,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -426,9 +539,10 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 
 				List<TagsVocabulary> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_F, finderArgs,
+					list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -451,27 +565,14 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 
 	public List<TagsVocabulary> findByG_F(long groupId, boolean folksonomy,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = TagsVocabularyModelImpl.CACHE_ENABLED;
-		String finderClassName = TagsVocabulary.class.getName();
-		String finderMethodName = "findByG_F";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Boolean.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(folksonomy),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_F,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -514,9 +615,10 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 				List<TagsVocabulary> list = (List<TagsVocabulary>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_F,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -537,7 +639,7 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchVocabularyException, SystemException {
 		List<TagsVocabulary> list = findByG_F(groupId, folksonomy, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TagsVocabulary exists with the key {");
@@ -564,7 +666,7 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 		List<TagsVocabulary> list = findByG_F(groupId, folksonomy, count - 1,
 				count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TagsVocabulary exists with the key {");
@@ -648,22 +750,12 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 
 	public List<TagsVocabulary> findByC_F(long companyId, boolean folksonomy)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = TagsVocabularyModelImpl.CACHE_ENABLED;
-		String finderClassName = TagsVocabulary.class.getName();
-		String finderMethodName = "findByC_F";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Boolean.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), Boolean.valueOf(folksonomy)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_F,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -698,9 +790,10 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 
 				List<TagsVocabulary> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_F, finderArgs,
+					list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -723,27 +816,14 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 
 	public List<TagsVocabulary> findByC_F(long companyId, boolean folksonomy,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = TagsVocabularyModelImpl.CACHE_ENABLED;
-		String finderClassName = TagsVocabulary.class.getName();
-		String finderMethodName = "findByC_F";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Boolean.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), Boolean.valueOf(folksonomy),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_F,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -786,9 +866,10 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 				List<TagsVocabulary> list = (List<TagsVocabulary>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_F,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -809,7 +890,7 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchVocabularyException, SystemException {
 		List<TagsVocabulary> list = findByC_F(companyId, folksonomy, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TagsVocabulary exists with the key {");
@@ -836,7 +917,7 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 		List<TagsVocabulary> list = findByC_F(companyId, folksonomy, count - 1,
 				count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TagsVocabulary exists with the key {");
@@ -969,23 +1050,12 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 
 	public List<TagsVocabulary> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = TagsVocabularyModelImpl.CACHE_ENABLED;
-		String finderClassName = TagsVocabulary.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1024,9 +1094,9 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1070,20 +1140,10 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByG_N(long groupId, String name) throws SystemException {
-		boolean finderClassNameCacheEnabled = TagsVocabularyModelImpl.CACHE_ENABLED;
-		String finderClassName = TagsVocabulary.class.getName();
-		String finderMethodName = "countByG_N";
-		String[] finderParams = new String[] {
-				Long.class.getName(), String.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(groupId), name };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_N,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1132,9 +1192,8 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_N, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -1152,22 +1211,12 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 
 	public int countByG_F(long groupId, boolean folksonomy)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = TagsVocabularyModelImpl.CACHE_ENABLED;
-		String finderClassName = TagsVocabulary.class.getName();
-		String finderMethodName = "countByG_F";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Boolean.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(folksonomy)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_F,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1209,9 +1258,8 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_F, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -1229,22 +1277,12 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 
 	public int countByC_F(long companyId, boolean folksonomy)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = TagsVocabularyModelImpl.CACHE_ENABLED;
-		String finderClassName = TagsVocabulary.class.getName();
-		String finderMethodName = "countByC_F";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Boolean.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), Boolean.valueOf(folksonomy)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_F,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1286,9 +1324,8 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_F, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -1305,18 +1342,10 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = TagsVocabularyModelImpl.CACHE_ENABLED;
-		String finderClassName = TagsVocabulary.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1339,9 +1368,8 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

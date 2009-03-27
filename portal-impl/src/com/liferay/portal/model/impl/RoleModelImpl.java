@@ -96,7 +96,10 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portal.model.Role"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Role"),
 			true);
 
@@ -126,10 +129,10 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 		return models;
 	}
 
-	public static final boolean CACHE_ENABLED_GROUPS_ROLES = com.liferay.portal.model.impl.GroupModelImpl.CACHE_ENABLED_GROUPS_ROLES;
-	public static final boolean CACHE_ENABLED_ROLES_PERMISSIONS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean FINDER_CACHE_ENABLED_GROUPS_ROLES = com.liferay.portal.model.impl.GroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_ROLES;
+	public static final boolean FINDER_CACHE_ENABLED_ROLES_PERMISSIONS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Roles_Permissions"), true);
-	public static final boolean CACHE_ENABLED_USERS_ROLES = com.liferay.portal.model.impl.UserModelImpl.CACHE_ENABLED_USERS_ROLES;
+	public static final boolean FINDER_CACHE_ENABLED_USERS_ROLES = com.liferay.portal.model.impl.UserModelImpl.FINDER_CACHE_ENABLED_USERS_ROLES;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Role"));
 
@@ -165,7 +168,17 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 	public void setCompanyId(long companyId) {
 		if (companyId != _companyId) {
 			_companyId = companyId;
+
+			if (!_setOriginalCompanyId) {
+				_setOriginalCompanyId = true;
+
+				_originalCompanyId = companyId;
+			}
 		}
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	public String getClassName() {
@@ -183,7 +196,17 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 	public void setClassNameId(long classNameId) {
 		if (classNameId != _classNameId) {
 			_classNameId = classNameId;
+
+			if (!_setOriginalClassNameId) {
+				_setOriginalClassNameId = true;
+
+				_originalClassNameId = classNameId;
+			}
 		}
+	}
+
+	public long getOriginalClassNameId() {
+		return _originalClassNameId;
 	}
 
 	public long getClassPK() {
@@ -193,7 +216,17 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 	public void setClassPK(long classPK) {
 		if (classPK != _classPK) {
 			_classPK = classPK;
+
+			if (!_setOriginalClassPK) {
+				_setOriginalClassPK = true;
+
+				_originalClassPK = classPK;
+			}
 		}
+	}
+
+	public long getOriginalClassPK() {
+		return _originalClassPK;
 	}
 
 	public String getName() {
@@ -205,7 +238,15 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 				((name != null) && (_name == null)) ||
 				((name != null) && (_name != null) && !name.equals(_name))) {
 			_name = name;
+
+			if (_originalName == null) {
+				_originalName = name;
+			}
 		}
+	}
+
+	public String getOriginalName() {
+		return GetterUtil.getString(_originalName);
 	}
 
 	public String getTitle() {
@@ -350,9 +391,16 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 
 	private long _roleId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _classNameId;
+	private long _originalClassNameId;
+	private boolean _setOriginalClassNameId;
 	private long _classPK;
+	private long _originalClassPK;
+	private boolean _setOriginalClassPK;
 	private String _name;
+	private String _originalName;
 	private String _title;
 	private String _description;
 	private int _type;

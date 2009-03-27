@@ -25,7 +25,9 @@ package com.liferay.portlet.announcements.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -58,6 +60,71 @@ import java.util.List;
  */
 public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 	implements AnnouncementsFlagPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = AnnouncementsFlag.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = AnnouncementsFlag.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_ENTRYID = new FinderPath(AnnouncementsFlagModelImpl.ENTITY_CACHE_ENABLED,
+			AnnouncementsFlagModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByEntryId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_ENTRYID = new FinderPath(AnnouncementsFlagModelImpl.ENTITY_CACHE_ENABLED,
+			AnnouncementsFlagModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByEntryId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_ENTRYID = new FinderPath(AnnouncementsFlagModelImpl.ENTITY_CACHE_ENABLED,
+			AnnouncementsFlagModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByEntryId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_U_E_V = new FinderPath(AnnouncementsFlagModelImpl.ENTITY_CACHE_ENABLED,
+			AnnouncementsFlagModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByU_E_V",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_U_E_V = new FinderPath(AnnouncementsFlagModelImpl.ENTITY_CACHE_ENABLED,
+			AnnouncementsFlagModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByU_E_V",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(AnnouncementsFlagModelImpl.ENTITY_CACHE_ENABLED,
+			AnnouncementsFlagModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(AnnouncementsFlagModelImpl.ENTITY_CACHE_ENABLED,
+			AnnouncementsFlagModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
+
+	public void cacheResult(AnnouncementsFlag announcementsFlag) {
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_E_V,
+			new Object[] {
+				new Long(announcementsFlag.getUserId()),
+				new Long(announcementsFlag.getEntryId()),
+				new Integer(announcementsFlag.getValue())
+			}, announcementsFlag);
+
+		EntityCacheUtil.putResult(AnnouncementsFlagModelImpl.ENTITY_CACHE_ENABLED,
+			AnnouncementsFlag.class, announcementsFlag.getPrimaryKey(),
+			announcementsFlag);
+	}
+
+	public void cacheResult(List<AnnouncementsFlag> announcementsFlags) {
+		for (AnnouncementsFlag announcementsFlag : announcementsFlags) {
+			if (EntityCacheUtil.getResult(
+						AnnouncementsFlagModelImpl.ENTITY_CACHE_ENABLED,
+						AnnouncementsFlag.class,
+						announcementsFlag.getPrimaryKey(), this) == null) {
+				cacheResult(announcementsFlag);
+			}
+		}
+	}
+
 	public AnnouncementsFlag create(long flagId) {
 		AnnouncementsFlag announcementsFlag = new AnnouncementsFlagImpl();
 
@@ -136,17 +203,29 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 			session.delete(announcementsFlag);
 
 			session.flush();
-
-			return announcementsFlag;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(AnnouncementsFlag.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		AnnouncementsFlagModelImpl announcementsFlagModelImpl = (AnnouncementsFlagModelImpl)announcementsFlag;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_E_V,
+			new Object[] {
+				new Long(announcementsFlagModelImpl.getOriginalUserId()),
+				new Long(announcementsFlagModelImpl.getOriginalEntryId()),
+				new Integer(announcementsFlagModelImpl.getOriginalValue())
+			});
+
+		EntityCacheUtil.removeResult(AnnouncementsFlagModelImpl.ENTITY_CACHE_ENABLED,
+			AnnouncementsFlag.class, announcementsFlag.getPrimaryKey());
+
+		return announcementsFlag;
 	}
 
 	/**
@@ -205,6 +284,8 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 	public AnnouncementsFlag updateImpl(
 		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag,
 		boolean merge) throws SystemException {
+		boolean isNew = announcementsFlag.isNew();
+
 		Session session = null;
 
 		try {
@@ -213,17 +294,47 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, announcementsFlag, merge);
 
 			announcementsFlag.setNew(false);
-
-			return announcementsFlag;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(AnnouncementsFlag.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		AnnouncementsFlagModelImpl announcementsFlagModelImpl = (AnnouncementsFlagModelImpl)announcementsFlag;
+
+		if (!isNew &&
+				((announcementsFlag.getUserId() != announcementsFlagModelImpl.getOriginalUserId()) ||
+				(announcementsFlag.getEntryId() != announcementsFlagModelImpl.getOriginalEntryId()) ||
+				(announcementsFlag.getValue() != announcementsFlagModelImpl.getOriginalValue()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_E_V,
+				new Object[] {
+					new Long(announcementsFlagModelImpl.getOriginalUserId()),
+					new Long(announcementsFlagModelImpl.getOriginalEntryId()),
+					new Integer(announcementsFlagModelImpl.getOriginalValue())
+				});
+		}
+
+		if (isNew ||
+				((announcementsFlag.getUserId() != announcementsFlagModelImpl.getOriginalUserId()) ||
+				(announcementsFlag.getEntryId() != announcementsFlagModelImpl.getOriginalEntryId()) ||
+				(announcementsFlag.getValue() != announcementsFlagModelImpl.getOriginalValue()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_E_V,
+				new Object[] {
+					new Long(announcementsFlag.getUserId()),
+					new Long(announcementsFlag.getEntryId()),
+					new Integer(announcementsFlag.getValue())
+				}, announcementsFlag);
+		}
+
+		EntityCacheUtil.putResult(AnnouncementsFlagModelImpl.ENTITY_CACHE_ENABLED,
+			AnnouncementsFlag.class, announcementsFlag.getPrimaryKey(),
+			announcementsFlag);
+
+		return announcementsFlag;
 	}
 
 	public AnnouncementsFlag findByPrimaryKey(long flagId)
@@ -245,36 +356,40 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 
 	public AnnouncementsFlag fetchByPrimaryKey(long flagId)
 		throws SystemException {
-		Session session = null;
+		AnnouncementsFlag result = (AnnouncementsFlag)EntityCacheUtil.getResult(AnnouncementsFlagModelImpl.ENTITY_CACHE_ENABLED,
+				AnnouncementsFlag.class, flagId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (AnnouncementsFlag)session.get(AnnouncementsFlagImpl.class,
-				new Long(flagId));
+			try {
+				session = openSession();
+
+				AnnouncementsFlag announcementsFlag = (AnnouncementsFlag)session.get(AnnouncementsFlagImpl.class,
+						new Long(flagId));
+
+				cacheResult(announcementsFlag);
+
+				return announcementsFlag;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (AnnouncementsFlag)result;
 		}
 	}
 
 	public List<AnnouncementsFlag> findByEntryId(long entryId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = AnnouncementsFlagModelImpl.CACHE_ENABLED;
-		String finderClassName = AnnouncementsFlag.class.getName();
-		String finderMethodName = "findByEntryId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(entryId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ENTRYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -304,9 +419,10 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 
 				List<AnnouncementsFlag> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ENTRYID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -329,27 +445,14 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 
 	public List<AnnouncementsFlag> findByEntryId(long entryId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = AnnouncementsFlagModelImpl.CACHE_ENABLED;
-		String finderClassName = AnnouncementsFlag.class.getName();
-		String finderMethodName = "findByEntryId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(entryId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ENTRYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -387,9 +490,10 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 				List<AnnouncementsFlag> list = (List<AnnouncementsFlag>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_ENTRYID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -409,7 +513,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchFlagException, SystemException {
 		List<AnnouncementsFlag> list = findByEntryId(entryId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No AnnouncementsFlag exists with the key {");
@@ -432,7 +536,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 		List<AnnouncementsFlag> list = findByEntryId(entryId, count - 1, count,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No AnnouncementsFlag exists with the key {");
@@ -538,23 +642,12 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 
 	public AnnouncementsFlag fetchByU_E_V(long userId, long entryId, int value)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = AnnouncementsFlagModelImpl.CACHE_ENABLED;
-		String finderClassName = AnnouncementsFlag.class.getName();
-		String finderMethodName = "fetchByU_E_V";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(),
-				Integer.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(userId), new Long(entryId), new Integer(value)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_U_E_V,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -596,16 +689,19 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 
 				List<AnnouncementsFlag> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				AnnouncementsFlag announcementsFlag = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_E_V,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					announcementsFlag = list.get(0);
+
+					cacheResult(announcementsFlag);
 				}
+
+				return announcementsFlag;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -615,13 +711,11 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<AnnouncementsFlag> list = (List<AnnouncementsFlag>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (AnnouncementsFlag)result;
 			}
 		}
 	}
@@ -677,23 +771,12 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 
 	public List<AnnouncementsFlag> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = AnnouncementsFlagModelImpl.CACHE_ENABLED;
-		String finderClassName = AnnouncementsFlag.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -733,9 +816,9 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -771,18 +854,10 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByEntryId(long entryId) throws SystemException {
-		boolean finderClassNameCacheEnabled = AnnouncementsFlagModelImpl.CACHE_ENABLED;
-		String finderClassName = AnnouncementsFlag.class.getName();
-		String finderMethodName = "countByEntryId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(entryId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ENTRYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -818,8 +893,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_ENTRYID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -838,23 +912,12 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 
 	public int countByU_E_V(long userId, long entryId, int value)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = AnnouncementsFlagModelImpl.CACHE_ENABLED;
-		String finderClassName = AnnouncementsFlag.class.getName();
-		String finderMethodName = "countByU_E_V";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(),
-				Integer.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(userId), new Long(entryId), new Integer(value)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_E_V,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -902,8 +965,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U_E_V,
 					finderArgs, count);
 
 				return count.intValue();
@@ -921,18 +983,10 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = AnnouncementsFlagModelImpl.CACHE_ENABLED;
-		String finderClassName = AnnouncementsFlag.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -955,9 +1009,8 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

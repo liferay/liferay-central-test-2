@@ -29,6 +29,16 @@ package com.liferay.portlet.softwarecatalog.service.persistence;
  *
  */
 public class SCProductScreenshotUtil {
+	public static void cacheResult(
+		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot) {
+		getPersistence().cacheResult(scProductScreenshot);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> scProductScreenshots) {
+		getPersistence().cacheResult(scProductScreenshots);
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot create(
 		long productScreenshotId) {
 		return getPersistence().create(productScreenshotId);

@@ -29,6 +29,15 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class OrgLaborUtil {
+	public static void cacheResult(com.liferay.portal.model.OrgLabor orgLabor) {
+		getPersistence().cacheResult(orgLabor);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.OrgLabor> orgLabors) {
+		getPersistence().cacheResult(orgLabors);
+	}
+
 	public static com.liferay.portal.model.OrgLabor create(long orgLaborId) {
 		return getPersistence().create(orgLaborId);
 	}

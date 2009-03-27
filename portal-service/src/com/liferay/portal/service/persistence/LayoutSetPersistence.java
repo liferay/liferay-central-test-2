@@ -29,6 +29,11 @@ package com.liferay.portal.service.persistence;
  *
  */
 public interface LayoutSetPersistence extends BasePersistence {
+	public void cacheResult(com.liferay.portal.model.LayoutSet layoutSet);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portal.model.LayoutSet> layoutSets);
+
 	public com.liferay.portal.model.LayoutSet create(long layoutSetId);
 
 	public com.liferay.portal.model.LayoutSet remove(long layoutSetId)

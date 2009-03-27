@@ -29,6 +29,11 @@ package com.liferay.portal.service.persistence;
  *
  */
 public interface CountryPersistence extends BasePersistence {
+	public void cacheResult(com.liferay.portal.model.Country country);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portal.model.Country> countries);
+
 	public com.liferay.portal.model.Country create(long countryId);
 
 	public com.liferay.portal.model.Country remove(long countryId)

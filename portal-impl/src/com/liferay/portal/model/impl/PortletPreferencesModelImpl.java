@@ -85,7 +85,10 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portal.model.PortletPreferences"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.PortletPreferences"),
 			true);
 
@@ -148,7 +151,17 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 	public void setOwnerId(long ownerId) {
 		if (ownerId != _ownerId) {
 			_ownerId = ownerId;
+
+			if (!_setOriginalOwnerId) {
+				_setOriginalOwnerId = true;
+
+				_originalOwnerId = ownerId;
+			}
 		}
+	}
+
+	public long getOriginalOwnerId() {
+		return _originalOwnerId;
 	}
 
 	public int getOwnerType() {
@@ -158,7 +171,17 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 	public void setOwnerType(int ownerType) {
 		if (ownerType != _ownerType) {
 			_ownerType = ownerType;
+
+			if (!_setOriginalOwnerType) {
+				_setOriginalOwnerType = true;
+
+				_originalOwnerType = ownerType;
+			}
 		}
+	}
+
+	public int getOriginalOwnerType() {
+		return _originalOwnerType;
 	}
 
 	public long getPlid() {
@@ -168,7 +191,17 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 	public void setPlid(long plid) {
 		if (plid != _plid) {
 			_plid = plid;
+
+			if (!_setOriginalPlid) {
+				_setOriginalPlid = true;
+
+				_originalPlid = plid;
+			}
 		}
+	}
+
+	public long getOriginalPlid() {
+		return _originalPlid;
 	}
 
 	public String getPortletId() {
@@ -181,7 +214,15 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 				((portletId != null) && (_portletId != null) &&
 				!portletId.equals(_portletId))) {
 			_portletId = portletId;
+
+			if (_originalPortletId == null) {
+				_originalPortletId = portletId;
+			}
 		}
+	}
+
+	public String getOriginalPortletId() {
+		return GetterUtil.getString(_originalPortletId);
 	}
 
 	public String getPreferences() {
@@ -288,9 +329,16 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 
 	private long _portletPreferencesId;
 	private long _ownerId;
+	private long _originalOwnerId;
+	private boolean _setOriginalOwnerId;
 	private int _ownerType;
+	private int _originalOwnerType;
+	private boolean _setOriginalOwnerType;
 	private long _plid;
+	private long _originalPlid;
+	private boolean _setOriginalPlid;
 	private String _portletId;
+	private String _originalPortletId;
 	private String _preferences;
 	private transient ExpandoBridge _expandoBridge;
 }

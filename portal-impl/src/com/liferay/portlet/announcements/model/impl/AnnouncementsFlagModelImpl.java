@@ -84,7 +84,10 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.announcements.model.AnnouncementsFlag"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.announcements.model.AnnouncementsFlag"),
 			true);
 
@@ -146,7 +149,17 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 	public void setUserId(long userId) {
 		if (userId != _userId) {
 			_userId = userId;
+
+			if (!_setOriginalUserId) {
+				_setOriginalUserId = true;
+
+				_originalUserId = userId;
+			}
 		}
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	public Date getCreateDate() {
@@ -169,7 +182,17 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 	public void setEntryId(long entryId) {
 		if (entryId != _entryId) {
 			_entryId = entryId;
+
+			if (!_setOriginalEntryId) {
+				_setOriginalEntryId = true;
+
+				_originalEntryId = entryId;
+			}
 		}
+	}
+
+	public long getOriginalEntryId() {
+		return _originalEntryId;
 	}
 
 	public int getValue() {
@@ -179,7 +202,17 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 	public void setValue(int value) {
 		if (value != _value) {
 			_value = value;
+
+			if (!_setOriginalValue) {
+				_setOriginalValue = true;
+
+				_originalValue = value;
+			}
 		}
+	}
+
+	public int getOriginalValue() {
+		return _originalValue;
 	}
 
 	public AnnouncementsFlag toEscapedModel() {
@@ -284,8 +317,14 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 
 	private long _flagId;
 	private long _userId;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private Date _createDate;
 	private long _entryId;
+	private long _originalEntryId;
+	private boolean _setOriginalEntryId;
 	private int _value;
+	private int _originalValue;
+	private boolean _setOriginalValue;
 	private transient ExpandoBridge _expandoBridge;
 }

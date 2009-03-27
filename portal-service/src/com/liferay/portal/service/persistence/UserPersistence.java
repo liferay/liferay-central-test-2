@@ -29,6 +29,10 @@ package com.liferay.portal.service.persistence;
  *
  */
 public interface UserPersistence extends BasePersistence {
+	public void cacheResult(com.liferay.portal.model.User user);
+
+	public void cacheResult(java.util.List<com.liferay.portal.model.User> users);
+
 	public com.liferay.portal.model.User create(long userId);
 
 	public com.liferay.portal.model.User remove(long userId)

@@ -29,6 +29,16 @@ package com.liferay.portlet.messageboards.service.persistence;
  *
  */
 public class MBThreadUtil {
+	public static void cacheResult(
+		com.liferay.portlet.messageboards.model.MBThread mbThread) {
+		getPersistence().cacheResult(mbThread);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.messageboards.model.MBThread> mbThreads) {
+		getPersistence().cacheResult(mbThreads);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBThread create(
 		long threadId) {
 		return getPersistence().create(threadId);

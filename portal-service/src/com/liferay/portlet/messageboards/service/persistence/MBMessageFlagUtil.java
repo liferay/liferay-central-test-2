@@ -29,6 +29,16 @@ package com.liferay.portlet.messageboards.service.persistence;
  *
  */
 public class MBMessageFlagUtil {
+	public static void cacheResult(
+		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag) {
+		getPersistence().cacheResult(mbMessageFlag);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> mbMessageFlags) {
+		getPersistence().cacheResult(mbMessageFlags);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMessageFlag create(
 		long messageFlagId) {
 		return getPersistence().create(messageFlagId);

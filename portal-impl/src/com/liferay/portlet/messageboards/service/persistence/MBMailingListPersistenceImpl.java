@@ -25,7 +25,9 @@ package com.liferay.portlet.messageboards.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -60,6 +62,90 @@ import java.util.List;
  */
 public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 	implements MBMailingListPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = MBMailingList.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = MBMailingList.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
+			MBMailingListModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByUuid",
+			new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_UUID = new FinderPath(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
+			MBMailingListModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByUuid",
+			new String[] {
+				String.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_UUID = new FinderPath(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
+			MBMailingListModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByUuid",
+			new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_UUID_G = new FinderPath(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
+			MBMailingListModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByUUID_G",
+			new String[] { String.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_UUID_G = new FinderPath(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
+			MBMailingListModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByUUID_G",
+			new String[] { String.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_CATEGORYID = new FinderPath(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
+			MBMailingListModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByCategoryId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_CATEGORYID = new FinderPath(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
+			MBMailingListModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByCategoryId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_ACTIVE = new FinderPath(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
+			MBMailingListModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByActive",
+			new String[] { Boolean.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_ACTIVE = new FinderPath(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
+			MBMailingListModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByActive",
+			new String[] {
+				Boolean.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_ACTIVE = new FinderPath(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
+			MBMailingListModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByActive",
+			new String[] { Boolean.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
+			MBMailingListModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
+			MBMailingListModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
+
+	public void cacheResult(MBMailingList mbMailingList) {
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] {
+				mbMailingList.getUuid(), new Long(mbMailingList.getGroupId())
+			}, mbMailingList);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CATEGORYID,
+			new Object[] { new Long(mbMailingList.getCategoryId()) },
+			mbMailingList);
+
+		EntityCacheUtil.putResult(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
+			MBMailingList.class, mbMailingList.getPrimaryKey(), mbMailingList);
+	}
+
+	public void cacheResult(List<MBMailingList> mbMailingLists) {
+		for (MBMailingList mbMailingList : mbMailingLists) {
+			if (EntityCacheUtil.getResult(
+						MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
+						MBMailingList.class, mbMailingList.getPrimaryKey(), this) == null) {
+				cacheResult(mbMailingList);
+			}
+		}
+	}
+
 	public MBMailingList create(long mailingListId) {
 		MBMailingList mbMailingList = new MBMailingListImpl();
 
@@ -141,17 +227,33 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 			session.delete(mbMailingList);
 
 			session.flush();
-
-			return mbMailingList;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(MBMailingList.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		MBMailingListModelImpl mbMailingListModelImpl = (MBMailingListModelImpl)mbMailingList;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] {
+				mbMailingListModelImpl.getOriginalUuid(),
+				new Long(mbMailingListModelImpl.getOriginalGroupId())
+			});
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CATEGORYID,
+			new Object[] {
+				new Long(mbMailingListModelImpl.getOriginalCategoryId())
+			});
+
+		EntityCacheUtil.removeResult(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
+			MBMailingList.class, mbMailingList.getPrimaryKey());
+
+		return mbMailingList;
 	}
 
 	/**
@@ -210,6 +312,8 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 	public MBMailingList updateImpl(
 		com.liferay.portlet.messageboards.model.MBMailingList mbMailingList,
 		boolean merge) throws SystemException {
+		boolean isNew = mbMailingList.isNew();
+
 		if (Validator.isNull(mbMailingList.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
 
@@ -224,17 +328,59 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, mbMailingList, merge);
 
 			mbMailingList.setNew(false);
-
-			return mbMailingList;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(MBMailingList.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		MBMailingListModelImpl mbMailingListModelImpl = (MBMailingListModelImpl)mbMailingList;
+
+		if (!isNew &&
+				(!mbMailingList.getUuid()
+								   .equals(mbMailingListModelImpl.getOriginalUuid()) ||
+				(mbMailingList.getGroupId() != mbMailingListModelImpl.getOriginalGroupId()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+				new Object[] {
+					mbMailingListModelImpl.getOriginalUuid(),
+					new Long(mbMailingListModelImpl.getOriginalGroupId())
+				});
+		}
+
+		if (isNew ||
+				(!mbMailingList.getUuid()
+								   .equals(mbMailingListModelImpl.getOriginalUuid()) ||
+				(mbMailingList.getGroupId() != mbMailingListModelImpl.getOriginalGroupId()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+				new Object[] {
+					mbMailingList.getUuid(),
+					new Long(mbMailingList.getGroupId())
+				}, mbMailingList);
+		}
+
+		if (!isNew &&
+				(mbMailingList.getCategoryId() != mbMailingListModelImpl.getOriginalCategoryId())) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CATEGORYID,
+				new Object[] {
+					new Long(mbMailingListModelImpl.getOriginalCategoryId())
+				});
+		}
+
+		if (isNew ||
+				(mbMailingList.getCategoryId() != mbMailingListModelImpl.getOriginalCategoryId())) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CATEGORYID,
+				new Object[] { new Long(mbMailingList.getCategoryId()) },
+				mbMailingList);
+		}
+
+		EntityCacheUtil.putResult(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
+			MBMailingList.class, mbMailingList.getPrimaryKey(), mbMailingList);
+
+		return mbMailingList;
 	}
 
 	public MBMailingList findByPrimaryKey(long mailingListId)
@@ -257,36 +403,40 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 	public MBMailingList fetchByPrimaryKey(long mailingListId)
 		throws SystemException {
-		Session session = null;
+		MBMailingList result = (MBMailingList)EntityCacheUtil.getResult(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
+				MBMailingList.class, mailingListId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (MBMailingList)session.get(MBMailingListImpl.class,
-				new Long(mailingListId));
+			try {
+				session = openSession();
+
+				MBMailingList mbMailingList = (MBMailingList)session.get(MBMailingListImpl.class,
+						new Long(mailingListId));
+
+				cacheResult(mbMailingList);
+
+				return mbMailingList;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (MBMailingList)result;
 		}
 	}
 
 	public List<MBMailingList> findByUuid(String uuid)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = MBMailingListModelImpl.CACHE_ENABLED;
-		String finderClassName = MBMailingList.class.getName();
-		String finderMethodName = "findByUuid";
-		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { uuid };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -318,9 +468,10 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 				List<MBMailingList> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
+					list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -343,27 +494,14 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBMailingList> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = MBMailingListModelImpl.CACHE_ENABLED;
-		String finderClassName = MBMailingList.class.getName();
-		String finderMethodName = "findByUuid";
-		String[] finderParams = new String[] {
-				String.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -401,9 +539,10 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 				List<MBMailingList> list = (List<MBMailingList>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -423,7 +562,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchMailingListException, SystemException {
 		List<MBMailingList> list = findByUuid(uuid, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMailingList exists with the key {");
@@ -445,7 +584,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 		List<MBMailingList> list = findByUuid(uuid, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMailingList exists with the key {");
@@ -547,20 +686,10 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 	public MBMailingList fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = MBMailingListModelImpl.CACHE_ENABLED;
-		String finderClassName = MBMailingList.class.getName();
-		String finderMethodName = "fetchByUUID_G";
-		String[] finderParams = new String[] {
-				String.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -598,16 +727,19 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 				List<MBMailingList> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				MBMailingList mbMailingList = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					mbMailingList = list.get(0);
+
+					cacheResult(mbMailingList);
 				}
+
+				return mbMailingList;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -617,13 +749,11 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<MBMailingList> list = (List<MBMailingList>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (MBMailingList)result;
 			}
 		}
 	}
@@ -653,18 +783,10 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 	public MBMailingList fetchByCategoryId(long categoryId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = MBMailingListModelImpl.CACHE_ENABLED;
-		String finderClassName = MBMailingList.class.getName();
-		String finderMethodName = "fetchByCategoryId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(categoryId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_CATEGORYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -689,16 +811,19 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 				List<MBMailingList> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				MBMailingList mbMailingList = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CATEGORYID,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					mbMailingList = list.get(0);
+
+					cacheResult(mbMailingList);
 				}
+
+				return mbMailingList;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -708,31 +833,21 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<MBMailingList> list = (List<MBMailingList>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (MBMailingList)result;
 			}
 		}
 	}
 
 	public List<MBMailingList> findByActive(boolean active)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = MBMailingListModelImpl.CACHE_ENABLED;
-		String finderClassName = MBMailingList.class.getName();
-		String finderMethodName = "findByActive";
-		String[] finderParams = new String[] { Boolean.class.getName() };
 		Object[] finderArgs = new Object[] { Boolean.valueOf(active) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ACTIVE,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -757,9 +872,10 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 				List<MBMailingList> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ACTIVE,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -782,27 +898,14 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBMailingList> findByActive(boolean active, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = MBMailingListModelImpl.CACHE_ENABLED;
-		String finderClassName = MBMailingList.class.getName();
-		String finderMethodName = "findByActive";
-		String[] finderParams = new String[] {
-				Boolean.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				Boolean.valueOf(active),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ACTIVE,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -833,9 +936,10 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 				List<MBMailingList> list = (List<MBMailingList>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_ACTIVE,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -856,7 +960,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchMailingListException, SystemException {
 		List<MBMailingList> list = findByActive(active, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMailingList exists with the key {");
@@ -878,7 +982,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 		List<MBMailingList> list = findByActive(active, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMailingList exists with the key {");
@@ -996,23 +1100,12 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBMailingList> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = MBMailingListModelImpl.CACHE_ENABLED;
-		String finderClassName = MBMailingList.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1045,9 +1138,9 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1096,18 +1189,10 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByUuid(String uuid) throws SystemException {
-		boolean finderClassNameCacheEnabled = MBMailingListModelImpl.CACHE_ENABLED;
-		String finderClassName = MBMailingList.class.getName();
-		String finderMethodName = "countByUuid";
-		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { uuid };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1150,8 +1235,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1170,20 +1254,10 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = MBMailingListModelImpl.CACHE_ENABLED;
-		String finderClassName = MBMailingList.class.getName();
-		String finderMethodName = "countByUUID_G";
-		String[] finderParams = new String[] {
-				String.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID_G,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1232,8 +1306,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1251,18 +1324,10 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByCategoryId(long categoryId) throws SystemException {
-		boolean finderClassNameCacheEnabled = MBMailingListModelImpl.CACHE_ENABLED;
-		String finderClassName = MBMailingList.class.getName();
-		String finderMethodName = "countByCategoryId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(categoryId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_CATEGORYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1298,8 +1363,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CATEGORYID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1317,18 +1381,10 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByActive(boolean active) throws SystemException {
-		boolean finderClassNameCacheEnabled = MBMailingListModelImpl.CACHE_ENABLED;
-		String finderClassName = MBMailingList.class.getName();
-		String finderMethodName = "countByActive";
-		String[] finderParams = new String[] { Boolean.class.getName() };
 		Object[] finderArgs = new Object[] { Boolean.valueOf(active) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ACTIVE,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1364,8 +1420,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_ACTIVE,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1383,18 +1438,10 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = MBMailingListModelImpl.CACHE_ENABLED;
-		String finderClassName = MBMailingList.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1417,9 +1464,8 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

@@ -29,6 +29,15 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class WebsiteUtil {
+	public static void cacheResult(com.liferay.portal.model.Website website) {
+		getPersistence().cacheResult(website);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.Website> websites) {
+		getPersistence().cacheResult(websites);
+	}
+
 	public static com.liferay.portal.model.Website create(long websiteId) {
 		return getPersistence().create(websiteId);
 	}

@@ -29,6 +29,16 @@ package com.liferay.portlet.bookmarks.service.persistence;
  *
  */
 public class BookmarksEntryUtil {
+	public static void cacheResult(
+		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry) {
+		getPersistence().cacheResult(bookmarksEntry);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> bookmarksEntries) {
+		getPersistence().cacheResult(bookmarksEntries);
+	}
+
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry create(
 		long entryId) {
 		return getPersistence().create(entryId);

@@ -83,7 +83,10 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.polls.model.PollsVote"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.polls.model.PollsVote"),
 			true);
 
@@ -144,7 +147,17 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote> {
 	public void setUserId(long userId) {
 		if (userId != _userId) {
 			_userId = userId;
+
+			if (!_setOriginalUserId) {
+				_setOriginalUserId = true;
+
+				_originalUserId = userId;
+			}
 		}
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	public long getQuestionId() {
@@ -154,7 +167,17 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote> {
 	public void setQuestionId(long questionId) {
 		if (questionId != _questionId) {
 			_questionId = questionId;
+
+			if (!_setOriginalQuestionId) {
+				_setOriginalQuestionId = true;
+
+				_originalQuestionId = questionId;
+			}
 		}
+	}
+
+	public long getOriginalQuestionId() {
+		return _originalQuestionId;
 	}
 
 	public long getChoiceId() {
@@ -269,7 +292,11 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote> {
 
 	private long _voteId;
 	private long _userId;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private long _questionId;
+	private long _originalQuestionId;
+	private boolean _setOriginalQuestionId;
 	private long _choiceId;
 	private Date _voteDate;
 	private transient ExpandoBridge _expandoBridge;

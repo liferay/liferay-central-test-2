@@ -29,6 +29,16 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class UserIdMapperUtil {
+	public static void cacheResult(
+		com.liferay.portal.model.UserIdMapper userIdMapper) {
+		getPersistence().cacheResult(userIdMapper);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.UserIdMapper> userIdMappers) {
+		getPersistence().cacheResult(userIdMappers);
+	}
+
 	public static com.liferay.portal.model.UserIdMapper create(
 		long userIdMapperId) {
 		return getPersistence().create(userIdMapperId);

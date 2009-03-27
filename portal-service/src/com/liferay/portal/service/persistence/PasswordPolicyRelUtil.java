@@ -29,6 +29,16 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class PasswordPolicyRelUtil {
+	public static void cacheResult(
+		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel) {
+		getPersistence().cacheResult(passwordPolicyRel);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.PasswordPolicyRel> passwordPolicyRels) {
+		getPersistence().cacheResult(passwordPolicyRels);
+	}
+
 	public static com.liferay.portal.model.PasswordPolicyRel create(
 		long passwordPolicyRelId) {
 		return getPersistence().create(passwordPolicyRelId);

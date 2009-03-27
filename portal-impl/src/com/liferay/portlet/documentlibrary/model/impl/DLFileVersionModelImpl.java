@@ -96,7 +96,10 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.documentlibrary.model.DLFileVersion"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.documentlibrary.model.DLFileVersion"),
 			true);
 
@@ -207,7 +210,17 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	public void setFolderId(long folderId) {
 		if (folderId != _folderId) {
 			_folderId = folderId;
+
+			if (!_setOriginalFolderId) {
+				_setOriginalFolderId = true;
+
+				_originalFolderId = folderId;
+			}
 		}
+	}
+
+	public long getOriginalFolderId() {
+		return _originalFolderId;
 	}
 
 	public String getName() {
@@ -219,7 +232,15 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 				((name != null) && (_name == null)) ||
 				((name != null) && (_name != null) && !name.equals(_name))) {
 			_name = name;
+
+			if (_originalName == null) {
+				_originalName = name;
+			}
 		}
+	}
+
+	public String getOriginalName() {
+		return GetterUtil.getString(_originalName);
 	}
 
 	public double getVersion() {
@@ -229,7 +250,17 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	public void setVersion(double version) {
 		if (version != _version) {
 			_version = version;
+
+			if (!_setOriginalVersion) {
+				_setOriginalVersion = true;
+
+				_originalVersion = version;
+			}
 		}
+	}
+
+	public double getOriginalVersion() {
+		return _originalVersion;
 	}
 
 	public int getSize() {
@@ -375,8 +406,13 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	private String _userName;
 	private Date _createDate;
 	private long _folderId;
+	private long _originalFolderId;
+	private boolean _setOriginalFolderId;
 	private String _name;
+	private String _originalName;
 	private double _version;
+	private double _originalVersion;
+	private boolean _setOriginalVersion;
 	private int _size;
 	private transient ExpandoBridge _expandoBridge;
 }

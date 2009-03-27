@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface CalEventPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.calendar.model.CalEvent calEvent);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.calendar.model.CalEvent> calEvents);
+
 	public com.liferay.portlet.calendar.model.CalEvent create(long eventId);
 
 	public com.liferay.portlet.calendar.model.CalEvent remove(long eventId)

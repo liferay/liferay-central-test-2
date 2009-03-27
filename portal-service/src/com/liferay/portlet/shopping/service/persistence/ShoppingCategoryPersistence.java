@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface ShoppingCategoryPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> shoppingCategories);
+
 	public com.liferay.portlet.shopping.model.ShoppingCategory create(
 		long categoryId);
 

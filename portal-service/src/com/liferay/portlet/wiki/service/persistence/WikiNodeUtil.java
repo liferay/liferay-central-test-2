@@ -29,6 +29,16 @@ package com.liferay.portlet.wiki.service.persistence;
  *
  */
 public class WikiNodeUtil {
+	public static void cacheResult(
+		com.liferay.portlet.wiki.model.WikiNode wikiNode) {
+		getPersistence().cacheResult(wikiNode);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.wiki.model.WikiNode> wikiNodes) {
+		getPersistence().cacheResult(wikiNodes);
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiNode create(long nodeId) {
 		return getPersistence().create(nodeId);
 	}

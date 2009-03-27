@@ -81,7 +81,10 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.messageboards.model.MBDiscussion"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.messageboards.model.MBDiscussion"),
 			true);
 
@@ -149,7 +152,17 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion> {
 	public void setClassNameId(long classNameId) {
 		if (classNameId != _classNameId) {
 			_classNameId = classNameId;
+
+			if (!_setOriginalClassNameId) {
+				_setOriginalClassNameId = true;
+
+				_originalClassNameId = classNameId;
+			}
 		}
+	}
+
+	public long getOriginalClassNameId() {
+		return _originalClassNameId;
 	}
 
 	public long getClassPK() {
@@ -159,7 +172,17 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion> {
 	public void setClassPK(long classPK) {
 		if (classPK != _classPK) {
 			_classPK = classPK;
+
+			if (!_setOriginalClassPK) {
+				_setOriginalClassPK = true;
+
+				_originalClassPK = classPK;
+			}
 		}
+	}
+
+	public long getOriginalClassPK() {
+		return _originalClassPK;
 	}
 
 	public long getThreadId() {
@@ -169,7 +192,17 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion> {
 	public void setThreadId(long threadId) {
 		if (threadId != _threadId) {
 			_threadId = threadId;
+
+			if (!_setOriginalThreadId) {
+				_setOriginalThreadId = true;
+
+				_originalThreadId = threadId;
+			}
 		}
+	}
+
+	public long getOriginalThreadId() {
+		return _originalThreadId;
 	}
 
 	public MBDiscussion toEscapedModel() {
@@ -259,7 +292,13 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion> {
 
 	private long _discussionId;
 	private long _classNameId;
+	private long _originalClassNameId;
+	private boolean _setOriginalClassNameId;
 	private long _classPK;
+	private long _originalClassPK;
+	private boolean _setOriginalClassPK;
 	private long _threadId;
+	private long _originalThreadId;
+	private boolean _setOriginalThreadId;
 	private transient ExpandoBridge _expandoBridge;
 }

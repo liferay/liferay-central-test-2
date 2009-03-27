@@ -29,6 +29,15 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class ContactUtil {
+	public static void cacheResult(com.liferay.portal.model.Contact contact) {
+		getPersistence().cacheResult(contact);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.Contact> contacts) {
+		getPersistence().cacheResult(contacts);
+	}
+
 	public static com.liferay.portal.model.Contact create(long contactId) {
 		return getPersistence().create(contactId);
 	}

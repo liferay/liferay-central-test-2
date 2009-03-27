@@ -29,6 +29,16 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class PortletPreferencesUtil {
+	public static void cacheResult(
+		com.liferay.portal.model.PortletPreferences portletPreferences) {
+		getPersistence().cacheResult(portletPreferences);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.PortletPreferences> portletPreferenceses) {
+		getPersistence().cacheResult(portletPreferenceses);
+	}
+
 	public static com.liferay.portal.model.PortletPreferences create(
 		long portletPreferencesId) {
 		return getPersistence().create(portletPreferencesId);

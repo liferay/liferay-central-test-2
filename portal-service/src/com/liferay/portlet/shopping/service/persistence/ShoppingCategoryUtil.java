@@ -29,6 +29,16 @@ package com.liferay.portlet.shopping.service.persistence;
  *
  */
 public class ShoppingCategoryUtil {
+	public static void cacheResult(
+		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory) {
+		getPersistence().cacheResult(shoppingCategory);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> shoppingCategories) {
+		getPersistence().cacheResult(shoppingCategories);
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingCategory create(
 		long categoryId) {
 		return getPersistence().create(categoryId);

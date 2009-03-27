@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface ExpandoValuePersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.expando.model.ExpandoValue expandoValue);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.expando.model.ExpandoValue> expandoValues);
+
 	public com.liferay.portlet.expando.model.ExpandoValue create(long valueId);
 
 	public com.liferay.portlet.expando.model.ExpandoValue remove(long valueId)

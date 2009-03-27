@@ -25,7 +25,9 @@ package com.liferay.portlet.messageboards.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -58,6 +60,88 @@ import java.util.List;
  */
 public class MBBanPersistenceImpl extends BasePersistenceImpl
 	implements MBBanPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = MBBan.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = MBBan.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(MBBanModelImpl.ENTITY_CACHE_ENABLED,
+			MBBanModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByGroupId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_GROUPID = new FinderPath(MBBanModelImpl.ENTITY_CACHE_ENABLED,
+			MBBanModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByGroupId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(MBBanModelImpl.ENTITY_CACHE_ENABLED,
+			MBBanModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByGroupId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_USERID = new FinderPath(MBBanModelImpl.ENTITY_CACHE_ENABLED,
+			MBBanModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByUserId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_USERID = new FinderPath(MBBanModelImpl.ENTITY_CACHE_ENABLED,
+			MBBanModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByUserId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_USERID = new FinderPath(MBBanModelImpl.ENTITY_CACHE_ENABLED,
+			MBBanModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByUserId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_BANUSERID = new FinderPath(MBBanModelImpl.ENTITY_CACHE_ENABLED,
+			MBBanModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByBanUserId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_BANUSERID = new FinderPath(MBBanModelImpl.ENTITY_CACHE_ENABLED,
+			MBBanModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByBanUserId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_BANUSERID = new FinderPath(MBBanModelImpl.ENTITY_CACHE_ENABLED,
+			MBBanModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByBanUserId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_G_B = new FinderPath(MBBanModelImpl.ENTITY_CACHE_ENABLED,
+			MBBanModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
+			"fetchByG_B",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_B = new FinderPath(MBBanModelImpl.ENTITY_CACHE_ENABLED,
+			MBBanModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByG_B",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(MBBanModelImpl.ENTITY_CACHE_ENABLED,
+			MBBanModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(MBBanModelImpl.ENTITY_CACHE_ENABLED,
+			MBBanModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countAll", new String[0]);
+
+	public void cacheResult(MBBan mbBan) {
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_B,
+			new Object[] {
+				new Long(mbBan.getGroupId()), new Long(mbBan.getBanUserId())
+			}, mbBan);
+
+		EntityCacheUtil.putResult(MBBanModelImpl.ENTITY_CACHE_ENABLED,
+			MBBan.class, mbBan.getPrimaryKey(), mbBan);
+	}
+
+	public void cacheResult(List<MBBan> mbBans) {
+		for (MBBan mbBan : mbBans) {
+			if (EntityCacheUtil.getResult(MBBanModelImpl.ENTITY_CACHE_ENABLED,
+						MBBan.class, mbBan.getPrimaryKey(), this) == null) {
+				cacheResult(mbBan);
+			}
+		}
+	}
+
 	public MBBan create(long banId) {
 		MBBan mbBan = new MBBanImpl();
 
@@ -129,17 +213,28 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 			session.delete(mbBan);
 
 			session.flush();
-
-			return mbBan;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(MBBan.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		MBBanModelImpl mbBanModelImpl = (MBBanModelImpl)mbBan;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_B,
+			new Object[] {
+				new Long(mbBanModelImpl.getOriginalGroupId()),
+				new Long(mbBanModelImpl.getOriginalBanUserId())
+			});
+
+		EntityCacheUtil.removeResult(MBBanModelImpl.ENTITY_CACHE_ENABLED,
+			MBBan.class, mbBan.getPrimaryKey());
+
+		return mbBan;
 	}
 
 	/**
@@ -196,6 +291,8 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 	public MBBan updateImpl(
 		com.liferay.portlet.messageboards.model.MBBan mbBan, boolean merge)
 		throws SystemException {
+		boolean isNew = mbBan.isNew();
+
 		Session session = null;
 
 		try {
@@ -204,17 +301,41 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, mbBan, merge);
 
 			mbBan.setNew(false);
-
-			return mbBan;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(MBBan.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		MBBanModelImpl mbBanModelImpl = (MBBanModelImpl)mbBan;
+
+		if (!isNew &&
+				((mbBan.getGroupId() != mbBanModelImpl.getOriginalGroupId()) ||
+				(mbBan.getBanUserId() != mbBanModelImpl.getOriginalBanUserId()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_B,
+				new Object[] {
+					new Long(mbBanModelImpl.getOriginalGroupId()),
+					new Long(mbBanModelImpl.getOriginalBanUserId())
+				});
+		}
+
+		if (isNew ||
+				((mbBan.getGroupId() != mbBanModelImpl.getOriginalGroupId()) ||
+				(mbBan.getBanUserId() != mbBanModelImpl.getOriginalBanUserId()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_B,
+				new Object[] {
+					new Long(mbBan.getGroupId()), new Long(mbBan.getBanUserId())
+				}, mbBan);
+		}
+
+		EntityCacheUtil.putResult(MBBanModelImpl.ENTITY_CACHE_ENABLED,
+			MBBan.class, mbBan.getPrimaryKey(), mbBan);
+
+		return mbBan;
 	}
 
 	public MBBan findByPrimaryKey(long banId)
@@ -234,34 +355,39 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public MBBan fetchByPrimaryKey(long banId) throws SystemException {
-		Session session = null;
+		MBBan result = (MBBan)EntityCacheUtil.getResult(MBBanModelImpl.ENTITY_CACHE_ENABLED,
+				MBBan.class, banId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (MBBan)session.get(MBBanImpl.class, new Long(banId));
+			try {
+				session = openSession();
+
+				MBBan mbBan = (MBBan)session.get(MBBanImpl.class,
+						new Long(banId));
+
+				cacheResult(mbBan);
+
+				return mbBan;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (MBBan)result;
 		}
 	}
 
 	public List<MBBan> findByGroupId(long groupId) throws SystemException {
-		boolean finderClassNameCacheEnabled = MBBanModelImpl.CACHE_ENABLED;
-		String finderClassName = MBBan.class.getName();
-		String finderMethodName = "findByGroupId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -286,9 +412,10 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 				List<MBBan> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -311,27 +438,14 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBBan> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = MBBanModelImpl.CACHE_ENABLED;
-		String finderClassName = MBBan.class.getName();
-		String finderMethodName = "findByGroupId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -362,9 +476,10 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 				List<MBBan> list = (List<MBBan>)QueryUtil.list(q, getDialect(),
 						start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -384,7 +499,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchBanException, SystemException {
 		List<MBBan> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBBan exists with the key {");
@@ -406,7 +521,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 		List<MBBan> list = findByGroupId(groupId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBBan exists with the key {");
@@ -472,18 +587,10 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<MBBan> findByUserId(long userId) throws SystemException {
-		boolean finderClassNameCacheEnabled = MBBanModelImpl.CACHE_ENABLED;
-		String finderClassName = MBBan.class.getName();
-		String finderMethodName = "findByUserId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -508,9 +615,10 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 				List<MBBan> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -533,27 +641,14 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBBan> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = MBBanModelImpl.CACHE_ENABLED;
-		String finderClassName = MBBan.class.getName();
-		String finderMethodName = "findByUserId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -584,9 +679,10 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 				List<MBBan> list = (List<MBBan>)QueryUtil.list(q, getDialect(),
 						start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -606,7 +702,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchBanException, SystemException {
 		List<MBBan> list = findByUserId(userId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBBan exists with the key {");
@@ -628,7 +724,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 		List<MBBan> list = findByUserId(userId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBBan exists with the key {");
@@ -695,18 +791,10 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBBan> findByBanUserId(long banUserId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = MBBanModelImpl.CACHE_ENABLED;
-		String finderClassName = MBBan.class.getName();
-		String finderMethodName = "findByBanUserId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(banUserId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_BANUSERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -731,9 +819,10 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 				List<MBBan> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_BANUSERID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -756,27 +845,14 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBBan> findByBanUserId(long banUserId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = MBBanModelImpl.CACHE_ENABLED;
-		String finderClassName = MBBan.class.getName();
-		String finderMethodName = "findByBanUserId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(banUserId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_BANUSERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -807,9 +883,10 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 				List<MBBan> list = (List<MBBan>)QueryUtil.list(q, getDialect(),
 						start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_BANUSERID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -829,7 +906,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchBanException, SystemException {
 		List<MBBan> list = findByBanUserId(banUserId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBBan exists with the key {");
@@ -851,7 +928,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 		List<MBBan> list = findByBanUserId(banUserId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBBan exists with the key {");
@@ -944,22 +1021,12 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 	public MBBan fetchByG_B(long groupId, long banUserId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = MBBanModelImpl.CACHE_ENABLED;
-		String finderClassName = MBBan.class.getName();
-		String finderMethodName = "fetchByG_B";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(banUserId)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_B,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -990,16 +1057,19 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 				List<MBBan> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				MBBan mbBan = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_B,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					mbBan = list.get(0);
+
+					cacheResult(mbBan);
 				}
+
+				return mbBan;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1009,13 +1079,11 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<MBBan> list = (List<MBBan>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (MBBan)result;
 			}
 		}
 	}
@@ -1070,23 +1138,12 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBBan> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = MBBanModelImpl.CACHE_ENABLED;
-		String finderClassName = MBBan.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1119,9 +1176,9 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 							end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1169,18 +1226,10 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		boolean finderClassNameCacheEnabled = MBBanModelImpl.CACHE_ENABLED;
-		String finderClassName = MBBan.class.getName();
-		String finderMethodName = "countByGroupId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1216,8 +1265,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1235,18 +1283,10 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByUserId(long userId) throws SystemException {
-		boolean finderClassNameCacheEnabled = MBBanModelImpl.CACHE_ENABLED;
-		String finderClassName = MBBan.class.getName();
-		String finderMethodName = "countByUserId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1282,8 +1322,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1301,18 +1340,10 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByBanUserId(long banUserId) throws SystemException {
-		boolean finderClassNameCacheEnabled = MBBanModelImpl.CACHE_ENABLED;
-		String finderClassName = MBBan.class.getName();
-		String finderMethodName = "countByBanUserId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(banUserId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_BANUSERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1348,8 +1379,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_BANUSERID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1368,22 +1398,12 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 	public int countByG_B(long groupId, long banUserId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = MBBanModelImpl.CACHE_ENABLED;
-		String finderClassName = MBBan.class.getName();
-		String finderMethodName = "countByG_B";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(banUserId)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_B,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1425,9 +1445,8 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_B, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -1444,18 +1463,10 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = MBBanModelImpl.CACHE_ENABLED;
-		String finderClassName = MBBan.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1478,9 +1489,8 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

@@ -29,6 +29,16 @@ package com.liferay.portlet.journal.service.persistence;
  *
  */
 public class JournalArticleResourceUtil {
+	public static void cacheResult(
+		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource) {
+		getPersistence().cacheResult(journalArticleResource);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.journal.model.JournalArticleResource> journalArticleResources) {
+		getPersistence().cacheResult(journalArticleResources);
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticleResource create(
 		long resourcePrimKey) {
 		return getPersistence().create(resourcePrimKey);

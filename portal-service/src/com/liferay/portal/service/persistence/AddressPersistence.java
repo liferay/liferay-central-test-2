@@ -29,6 +29,11 @@ package com.liferay.portal.service.persistence;
  *
  */
 public interface AddressPersistence extends BasePersistence {
+	public void cacheResult(com.liferay.portal.model.Address address);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portal.model.Address> addresses);
+
 	public com.liferay.portal.model.Address create(long addressId);
 
 	public com.liferay.portal.model.Address remove(long addressId)

@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface BlogsEntryPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> blogsEntries);
+
 	public com.liferay.portlet.blogs.model.BlogsEntry create(long entryId);
 
 	public com.liferay.portlet.blogs.model.BlogsEntry remove(long entryId)

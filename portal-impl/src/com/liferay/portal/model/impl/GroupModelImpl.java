@@ -108,7 +108,10 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portal.model.Group"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Group"),
 			true);
 
@@ -142,15 +145,15 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 		return models;
 	}
 
-	public static final boolean CACHE_ENABLED_GROUPS_ORGS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean FINDER_CACHE_ENABLED_GROUPS_ORGS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Groups_Orgs"), true);
-	public static final boolean CACHE_ENABLED_GROUPS_PERMISSIONS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean FINDER_CACHE_ENABLED_GROUPS_PERMISSIONS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Groups_Permissions"), true);
-	public static final boolean CACHE_ENABLED_GROUPS_ROLES = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean FINDER_CACHE_ENABLED_GROUPS_ROLES = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Groups_Roles"), true);
-	public static final boolean CACHE_ENABLED_GROUPS_USERGROUPS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean FINDER_CACHE_ENABLED_GROUPS_USERGROUPS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Groups_UserGroups"), true);
-	public static final boolean CACHE_ENABLED_USERS_GROUPS = com.liferay.portal.model.impl.UserModelImpl.CACHE_ENABLED_USERS_GROUPS;
+	public static final boolean FINDER_CACHE_ENABLED_USERS_GROUPS = com.liferay.portal.model.impl.UserModelImpl.FINDER_CACHE_ENABLED_USERS_GROUPS;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Group"));
 
@@ -186,7 +189,17 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 	public void setCompanyId(long companyId) {
 		if (companyId != _companyId) {
 			_companyId = companyId;
+
+			if (!_setOriginalCompanyId) {
+				_setOriginalCompanyId = true;
+
+				_originalCompanyId = companyId;
+			}
 		}
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	public long getCreatorUserId() {
@@ -214,7 +227,17 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 	public void setClassNameId(long classNameId) {
 		if (classNameId != _classNameId) {
 			_classNameId = classNameId;
+
+			if (!_setOriginalClassNameId) {
+				_setOriginalClassNameId = true;
+
+				_originalClassNameId = classNameId;
+			}
 		}
+	}
+
+	public long getOriginalClassNameId() {
+		return _originalClassNameId;
 	}
 
 	public long getClassPK() {
@@ -224,7 +247,17 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 	public void setClassPK(long classPK) {
 		if (classPK != _classPK) {
 			_classPK = classPK;
+
+			if (!_setOriginalClassPK) {
+				_setOriginalClassPK = true;
+
+				_originalClassPK = classPK;
+			}
 		}
+	}
+
+	public long getOriginalClassPK() {
+		return _originalClassPK;
 	}
 
 	public long getParentGroupId() {
@@ -244,7 +277,17 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 	public void setLiveGroupId(long liveGroupId) {
 		if (liveGroupId != _liveGroupId) {
 			_liveGroupId = liveGroupId;
+
+			if (!_setOriginalLiveGroupId) {
+				_setOriginalLiveGroupId = true;
+
+				_originalLiveGroupId = liveGroupId;
+			}
 		}
+	}
+
+	public long getOriginalLiveGroupId() {
+		return _originalLiveGroupId;
 	}
 
 	public String getName() {
@@ -256,7 +299,15 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 				((name != null) && (_name == null)) ||
 				((name != null) && (_name != null) && !name.equals(_name))) {
 			_name = name;
+
+			if (_originalName == null) {
+				_originalName = name;
+			}
 		}
+	}
+
+	public String getOriginalName() {
+		return GetterUtil.getString(_originalName);
 	}
 
 	public String getDescription() {
@@ -305,7 +356,15 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 				((friendlyURL != null) && (_friendlyURL != null) &&
 				!friendlyURL.equals(_friendlyURL))) {
 			_friendlyURL = friendlyURL;
+
+			if (_originalFriendlyURL == null) {
+				_originalFriendlyURL = friendlyURL;
+			}
 		}
+	}
+
+	public String getOriginalFriendlyURL() {
+		return GetterUtil.getString(_originalFriendlyURL);
 	}
 
 	public boolean getActive() {
@@ -424,16 +483,26 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 
 	private long _groupId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _creatorUserId;
 	private long _classNameId;
+	private long _originalClassNameId;
+	private boolean _setOriginalClassNameId;
 	private long _classPK;
+	private long _originalClassPK;
+	private boolean _setOriginalClassPK;
 	private long _parentGroupId;
 	private long _liveGroupId;
+	private long _originalLiveGroupId;
+	private boolean _setOriginalLiveGroupId;
 	private String _name;
+	private String _originalName;
 	private String _description;
 	private int _type;
 	private String _typeSettings;
 	private String _friendlyURL;
+	private String _originalFriendlyURL;
 	private boolean _active;
 	private transient ExpandoBridge _expandoBridge;
 }

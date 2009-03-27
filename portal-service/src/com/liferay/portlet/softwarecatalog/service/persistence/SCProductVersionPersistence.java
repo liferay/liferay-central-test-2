@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface SCProductVersionPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> scProductVersions);
+
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion create(
 		long productVersionId);
 

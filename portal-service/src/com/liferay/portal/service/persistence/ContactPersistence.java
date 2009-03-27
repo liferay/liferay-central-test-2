@@ -29,6 +29,11 @@ package com.liferay.portal.service.persistence;
  *
  */
 public interface ContactPersistence extends BasePersistence {
+	public void cacheResult(com.liferay.portal.model.Contact contact);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portal.model.Contact> contacts);
+
 	public com.liferay.portal.model.Contact create(long contactId);
 
 	public com.liferay.portal.model.Contact remove(long contactId)

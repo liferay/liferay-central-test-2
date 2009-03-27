@@ -26,7 +26,9 @@ import com.liferay.portal.NoSuchPasswordTrackerException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -56,6 +58,50 @@ import java.util.List;
  */
 public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 	implements PasswordTrackerPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = PasswordTracker.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = PasswordTracker.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_USERID = new FinderPath(PasswordTrackerModelImpl.ENTITY_CACHE_ENABLED,
+			PasswordTrackerModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByUserId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_USERID = new FinderPath(PasswordTrackerModelImpl.ENTITY_CACHE_ENABLED,
+			PasswordTrackerModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByUserId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_USERID = new FinderPath(PasswordTrackerModelImpl.ENTITY_CACHE_ENABLED,
+			PasswordTrackerModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByUserId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(PasswordTrackerModelImpl.ENTITY_CACHE_ENABLED,
+			PasswordTrackerModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(PasswordTrackerModelImpl.ENTITY_CACHE_ENABLED,
+			PasswordTrackerModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
+
+	public void cacheResult(PasswordTracker passwordTracker) {
+		EntityCacheUtil.putResult(PasswordTrackerModelImpl.ENTITY_CACHE_ENABLED,
+			PasswordTracker.class, passwordTracker.getPrimaryKey(),
+			passwordTracker);
+	}
+
+	public void cacheResult(List<PasswordTracker> passwordTrackers) {
+		for (PasswordTracker passwordTracker : passwordTrackers) {
+			if (EntityCacheUtil.getResult(
+						PasswordTrackerModelImpl.ENTITY_CACHE_ENABLED,
+						PasswordTracker.class, passwordTracker.getPrimaryKey(),
+						this) == null) {
+				cacheResult(passwordTracker);
+			}
+		}
+	}
+
 	public PasswordTracker create(long passwordTrackerId) {
 		PasswordTracker passwordTracker = new PasswordTrackerImpl();
 
@@ -133,17 +179,22 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 			session.delete(passwordTracker);
 
 			session.flush();
-
-			return passwordTracker;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(PasswordTracker.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		PasswordTrackerModelImpl passwordTrackerModelImpl = (PasswordTrackerModelImpl)passwordTracker;
+
+		EntityCacheUtil.removeResult(PasswordTrackerModelImpl.ENTITY_CACHE_ENABLED,
+			PasswordTracker.class, passwordTracker.getPrimaryKey());
+
+		return passwordTracker;
 	}
 
 	/**
@@ -202,6 +253,8 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 	public PasswordTracker updateImpl(
 		com.liferay.portal.model.PasswordTracker passwordTracker, boolean merge)
 		throws SystemException {
+		boolean isNew = passwordTracker.isNew();
+
 		Session session = null;
 
 		try {
@@ -210,17 +263,23 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, passwordTracker, merge);
 
 			passwordTracker.setNew(false);
-
-			return passwordTracker;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(PasswordTracker.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		PasswordTrackerModelImpl passwordTrackerModelImpl = (PasswordTrackerModelImpl)passwordTracker;
+
+		EntityCacheUtil.putResult(PasswordTrackerModelImpl.ENTITY_CACHE_ENABLED,
+			PasswordTracker.class, passwordTracker.getPrimaryKey(),
+			passwordTracker);
+
+		return passwordTracker;
 	}
 
 	public PasswordTracker findByPrimaryKey(long passwordTrackerId)
@@ -243,36 +302,40 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 
 	public PasswordTracker fetchByPrimaryKey(long passwordTrackerId)
 		throws SystemException {
-		Session session = null;
+		PasswordTracker result = (PasswordTracker)EntityCacheUtil.getResult(PasswordTrackerModelImpl.ENTITY_CACHE_ENABLED,
+				PasswordTracker.class, passwordTrackerId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (PasswordTracker)session.get(PasswordTrackerImpl.class,
-				new Long(passwordTrackerId));
+			try {
+				session = openSession();
+
+				PasswordTracker passwordTracker = (PasswordTracker)session.get(PasswordTrackerImpl.class,
+						new Long(passwordTrackerId));
+
+				cacheResult(passwordTracker);
+
+				return passwordTracker;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (PasswordTracker)result;
 		}
 	}
 
 	public List<PasswordTracker> findByUserId(long userId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = PasswordTrackerModelImpl.CACHE_ENABLED;
-		String finderClassName = PasswordTracker.class.getName();
-		String finderMethodName = "findByUserId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -302,9 +365,10 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 
 				List<PasswordTracker> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -327,27 +391,14 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 
 	public List<PasswordTracker> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = PasswordTrackerModelImpl.CACHE_ENABLED;
-		String finderClassName = PasswordTracker.class.getName();
-		String finderMethodName = "findByUserId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -385,9 +436,10 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 				List<PasswordTracker> list = (List<PasswordTracker>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -407,7 +459,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchPasswordTrackerException, SystemException {
 		List<PasswordTracker> list = findByUserId(userId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PasswordTracker exists with the key {");
@@ -429,7 +481,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 
 		List<PasswordTracker> list = findByUserId(userId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PasswordTracker exists with the key {");
@@ -553,23 +605,12 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 
 	public List<PasswordTracker> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = PasswordTrackerModelImpl.CACHE_ENABLED;
-		String finderClassName = PasswordTracker.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -608,9 +649,9 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -639,18 +680,10 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByUserId(long userId) throws SystemException {
-		boolean finderClassNameCacheEnabled = PasswordTrackerModelImpl.CACHE_ENABLED;
-		String finderClassName = PasswordTracker.class.getName();
-		String finderMethodName = "countByUserId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -686,8 +719,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -705,18 +737,10 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = PasswordTrackerModelImpl.CACHE_ENABLED;
-		String finderClassName = PasswordTracker.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -739,9 +763,8 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

@@ -26,7 +26,9 @@ import com.liferay.portal.NoSuchUserTrackerPathException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -56,6 +58,50 @@ import java.util.List;
  */
 public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 	implements UserTrackerPathPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = UserTrackerPath.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = UserTrackerPath.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_USERTRACKERID = new FinderPath(UserTrackerPathModelImpl.ENTITY_CACHE_ENABLED,
+			UserTrackerPathModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByUserTrackerId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_USERTRACKERID = new FinderPath(UserTrackerPathModelImpl.ENTITY_CACHE_ENABLED,
+			UserTrackerPathModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByUserTrackerId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_USERTRACKERID = new FinderPath(UserTrackerPathModelImpl.ENTITY_CACHE_ENABLED,
+			UserTrackerPathModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByUserTrackerId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(UserTrackerPathModelImpl.ENTITY_CACHE_ENABLED,
+			UserTrackerPathModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(UserTrackerPathModelImpl.ENTITY_CACHE_ENABLED,
+			UserTrackerPathModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
+
+	public void cacheResult(UserTrackerPath userTrackerPath) {
+		EntityCacheUtil.putResult(UserTrackerPathModelImpl.ENTITY_CACHE_ENABLED,
+			UserTrackerPath.class, userTrackerPath.getPrimaryKey(),
+			userTrackerPath);
+	}
+
+	public void cacheResult(List<UserTrackerPath> userTrackerPaths) {
+		for (UserTrackerPath userTrackerPath : userTrackerPaths) {
+			if (EntityCacheUtil.getResult(
+						UserTrackerPathModelImpl.ENTITY_CACHE_ENABLED,
+						UserTrackerPath.class, userTrackerPath.getPrimaryKey(),
+						this) == null) {
+				cacheResult(userTrackerPath);
+			}
+		}
+	}
+
 	public UserTrackerPath create(long userTrackerPathId) {
 		UserTrackerPath userTrackerPath = new UserTrackerPathImpl();
 
@@ -133,17 +179,22 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 			session.delete(userTrackerPath);
 
 			session.flush();
-
-			return userTrackerPath;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(UserTrackerPath.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		UserTrackerPathModelImpl userTrackerPathModelImpl = (UserTrackerPathModelImpl)userTrackerPath;
+
+		EntityCacheUtil.removeResult(UserTrackerPathModelImpl.ENTITY_CACHE_ENABLED,
+			UserTrackerPath.class, userTrackerPath.getPrimaryKey());
+
+		return userTrackerPath;
 	}
 
 	/**
@@ -202,6 +253,8 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 	public UserTrackerPath updateImpl(
 		com.liferay.portal.model.UserTrackerPath userTrackerPath, boolean merge)
 		throws SystemException {
+		boolean isNew = userTrackerPath.isNew();
+
 		Session session = null;
 
 		try {
@@ -210,17 +263,23 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, userTrackerPath, merge);
 
 			userTrackerPath.setNew(false);
-
-			return userTrackerPath;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(UserTrackerPath.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		UserTrackerPathModelImpl userTrackerPathModelImpl = (UserTrackerPathModelImpl)userTrackerPath;
+
+		EntityCacheUtil.putResult(UserTrackerPathModelImpl.ENTITY_CACHE_ENABLED,
+			UserTrackerPath.class, userTrackerPath.getPrimaryKey(),
+			userTrackerPath);
+
+		return userTrackerPath;
 	}
 
 	public UserTrackerPath findByPrimaryKey(long userTrackerPathId)
@@ -243,36 +302,40 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 
 	public UserTrackerPath fetchByPrimaryKey(long userTrackerPathId)
 		throws SystemException {
-		Session session = null;
+		UserTrackerPath result = (UserTrackerPath)EntityCacheUtil.getResult(UserTrackerPathModelImpl.ENTITY_CACHE_ENABLED,
+				UserTrackerPath.class, userTrackerPathId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (UserTrackerPath)session.get(UserTrackerPathImpl.class,
-				new Long(userTrackerPathId));
+			try {
+				session = openSession();
+
+				UserTrackerPath userTrackerPath = (UserTrackerPath)session.get(UserTrackerPathImpl.class,
+						new Long(userTrackerPathId));
+
+				cacheResult(userTrackerPath);
+
+				return userTrackerPath;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (UserTrackerPath)result;
 		}
 	}
 
 	public List<UserTrackerPath> findByUserTrackerId(long userTrackerId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = UserTrackerPathModelImpl.CACHE_ENABLED;
-		String finderClassName = UserTrackerPath.class.getName();
-		String finderMethodName = "findByUserTrackerId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userTrackerId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERTRACKERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -297,9 +360,10 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 
 				List<UserTrackerPath> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERTRACKERID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -322,27 +386,14 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 
 	public List<UserTrackerPath> findByUserTrackerId(long userTrackerId,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = UserTrackerPathModelImpl.CACHE_ENABLED;
-		String finderClassName = UserTrackerPath.class.getName();
-		String finderMethodName = "findByUserTrackerId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(userTrackerId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERTRACKERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -373,9 +424,10 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 				List<UserTrackerPath> list = (List<UserTrackerPath>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERTRACKERID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -397,7 +449,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 		List<UserTrackerPath> list = findByUserTrackerId(userTrackerId, 0, 1,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserTrackerPath exists with the key {");
@@ -421,7 +473,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 		List<UserTrackerPath> list = findByUserTrackerId(userTrackerId,
 				count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserTrackerPath exists with the key {");
@@ -538,23 +590,12 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 
 	public List<UserTrackerPath> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = UserTrackerPathModelImpl.CACHE_ENABLED;
-		String finderClassName = UserTrackerPath.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -586,9 +627,9 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -620,18 +661,10 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 
 	public int countByUserTrackerId(long userTrackerId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = UserTrackerPathModelImpl.CACHE_ENABLED;
-		String finderClassName = UserTrackerPath.class.getName();
-		String finderMethodName = "countByUserTrackerId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userTrackerId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERTRACKERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -667,8 +700,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERTRACKERID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -686,18 +718,10 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = UserTrackerPathModelImpl.CACHE_ENABLED;
-		String finderClassName = UserTrackerPath.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -720,9 +744,8 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

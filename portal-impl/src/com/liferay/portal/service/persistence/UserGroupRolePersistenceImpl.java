@@ -26,7 +26,9 @@ import com.liferay.portal.NoSuchUserGroupRoleException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -56,6 +58,116 @@ import java.util.List;
  */
 public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 	implements UserGroupRolePersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = UserGroupRole.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = UserGroupRole.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_USERID = new FinderPath(UserGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
+			UserGroupRoleModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByUserId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_USERID = new FinderPath(UserGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
+			UserGroupRoleModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByUserId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_USERID = new FinderPath(UserGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
+			UserGroupRoleModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByUserId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(UserGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
+			UserGroupRoleModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByGroupId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_GROUPID = new FinderPath(UserGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
+			UserGroupRoleModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByGroupId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(UserGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
+			UserGroupRoleModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByGroupId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_ROLEID = new FinderPath(UserGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
+			UserGroupRoleModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByRoleId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_ROLEID = new FinderPath(UserGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
+			UserGroupRoleModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByRoleId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_ROLEID = new FinderPath(UserGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
+			UserGroupRoleModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByRoleId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_U_G = new FinderPath(UserGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
+			UserGroupRoleModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByU_G",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_U_G = new FinderPath(UserGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
+			UserGroupRoleModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByU_G",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_U_G = new FinderPath(UserGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
+			UserGroupRoleModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByU_G",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_G_R = new FinderPath(UserGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
+			UserGroupRoleModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByG_R",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_R = new FinderPath(UserGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
+			UserGroupRoleModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByG_R",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_R = new FinderPath(UserGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
+			UserGroupRoleModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByG_R",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(UserGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
+			UserGroupRoleModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(UserGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
+			UserGroupRoleModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
+
+	public void cacheResult(UserGroupRole userGroupRole) {
+		EntityCacheUtil.putResult(UserGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
+			UserGroupRole.class, userGroupRole.getPrimaryKey(), userGroupRole);
+	}
+
+	public void cacheResult(List<UserGroupRole> userGroupRoles) {
+		for (UserGroupRole userGroupRole : userGroupRoles) {
+			if (EntityCacheUtil.getResult(
+						UserGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
+						UserGroupRole.class, userGroupRole.getPrimaryKey(), this) == null) {
+				cacheResult(userGroupRole);
+			}
+		}
+	}
+
 	public UserGroupRole create(UserGroupRolePK userGroupRolePK) {
 		UserGroupRole userGroupRole = new UserGroupRoleImpl();
 
@@ -133,17 +245,22 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 			session.delete(userGroupRole);
 
 			session.flush();
-
-			return userGroupRole;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(UserGroupRole.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		UserGroupRoleModelImpl userGroupRoleModelImpl = (UserGroupRoleModelImpl)userGroupRole;
+
+		EntityCacheUtil.removeResult(UserGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
+			UserGroupRole.class, userGroupRole.getPrimaryKey());
+
+		return userGroupRole;
 	}
 
 	/**
@@ -202,6 +319,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 	public UserGroupRole updateImpl(
 		com.liferay.portal.model.UserGroupRole userGroupRole, boolean merge)
 		throws SystemException {
+		boolean isNew = userGroupRole.isNew();
+
 		Session session = null;
 
 		try {
@@ -210,17 +329,22 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, userGroupRole, merge);
 
 			userGroupRole.setNew(false);
-
-			return userGroupRole;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(UserGroupRole.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		UserGroupRoleModelImpl userGroupRoleModelImpl = (UserGroupRoleModelImpl)userGroupRole;
+
+		EntityCacheUtil.putResult(UserGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
+			UserGroupRole.class, userGroupRole.getPrimaryKey(), userGroupRole);
+
+		return userGroupRole;
 	}
 
 	public UserGroupRole findByPrimaryKey(UserGroupRolePK userGroupRolePK)
@@ -243,36 +367,40 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 	public UserGroupRole fetchByPrimaryKey(UserGroupRolePK userGroupRolePK)
 		throws SystemException {
-		Session session = null;
+		UserGroupRole result = (UserGroupRole)EntityCacheUtil.getResult(UserGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
+				UserGroupRole.class, userGroupRolePK, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (UserGroupRole)session.get(UserGroupRoleImpl.class,
-				userGroupRolePK);
+			try {
+				session = openSession();
+
+				UserGroupRole userGroupRole = (UserGroupRole)session.get(UserGroupRoleImpl.class,
+						userGroupRolePK);
+
+				cacheResult(userGroupRole);
+
+				return userGroupRole;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (UserGroupRole)result;
 		}
 	}
 
 	public List<UserGroupRole> findByUserId(long userId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
-		String finderClassName = UserGroupRole.class.getName();
-		String finderMethodName = "findByUserId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -297,9 +425,10 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 				List<UserGroupRole> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -322,27 +451,14 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 	public List<UserGroupRole> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
-		String finderClassName = UserGroupRole.class.getName();
-		String finderMethodName = "findByUserId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -373,9 +489,10 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 				List<UserGroupRole> list = (List<UserGroupRole>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -395,7 +512,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchUserGroupRoleException, SystemException {
 		List<UserGroupRole> list = findByUserId(userId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserGroupRole exists with the key {");
@@ -417,7 +534,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 		List<UserGroupRole> list = findByUserId(userId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserGroupRole exists with the key {");
@@ -485,18 +602,10 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 	public List<UserGroupRole> findByGroupId(long groupId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
-		String finderClassName = UserGroupRole.class.getName();
-		String finderMethodName = "findByGroupId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -521,9 +630,10 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 				List<UserGroupRole> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -546,27 +656,14 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 	public List<UserGroupRole> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
-		String finderClassName = UserGroupRole.class.getName();
-		String finderMethodName = "findByGroupId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -597,9 +694,10 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 				List<UserGroupRole> list = (List<UserGroupRole>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -619,7 +717,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchUserGroupRoleException, SystemException {
 		List<UserGroupRole> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserGroupRole exists with the key {");
@@ -641,7 +739,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 		List<UserGroupRole> list = findByGroupId(groupId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserGroupRole exists with the key {");
@@ -709,18 +807,10 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 	public List<UserGroupRole> findByRoleId(long roleId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
-		String finderClassName = UserGroupRole.class.getName();
-		String finderMethodName = "findByRoleId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(roleId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ROLEID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -745,9 +835,10 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 				List<UserGroupRole> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ROLEID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -770,27 +861,14 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 	public List<UserGroupRole> findByRoleId(long roleId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
-		String finderClassName = UserGroupRole.class.getName();
-		String finderMethodName = "findByRoleId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(roleId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ROLEID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -821,9 +899,10 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 				List<UserGroupRole> list = (List<UserGroupRole>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_ROLEID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -843,7 +922,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchUserGroupRoleException, SystemException {
 		List<UserGroupRole> list = findByRoleId(roleId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserGroupRole exists with the key {");
@@ -865,7 +944,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 		List<UserGroupRole> list = findByRoleId(roleId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserGroupRole exists with the key {");
@@ -933,20 +1012,10 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 	public List<UserGroupRole> findByU_G(long userId, long groupId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
-		String finderClassName = UserGroupRole.class.getName();
-		String finderMethodName = "findByU_G";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(userId), new Long(groupId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_U_G,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -977,9 +1046,10 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 				List<UserGroupRole> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U_G, finderArgs,
+					list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1002,27 +1072,14 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 	public List<UserGroupRole> findByU_G(long userId, long groupId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
-		String finderClassName = UserGroupRole.class.getName();
-		String finderMethodName = "findByU_G";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(userId), new Long(groupId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_U_G,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1059,9 +1116,10 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 				List<UserGroupRole> list = (List<UserGroupRole>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_U_G,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1082,7 +1140,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchUserGroupRoleException, SystemException {
 		List<UserGroupRole> list = findByU_G(userId, groupId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserGroupRole exists with the key {");
@@ -1109,7 +1167,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 		List<UserGroupRole> list = findByU_G(userId, groupId, count - 1, count,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserGroupRole exists with the key {");
@@ -1187,20 +1245,10 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 	public List<UserGroupRole> findByG_R(long groupId, long roleId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
-		String finderClassName = UserGroupRole.class.getName();
-		String finderMethodName = "findByG_R";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(groupId), new Long(roleId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_R,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1231,9 +1279,10 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 				List<UserGroupRole> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_R, finderArgs,
+					list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1256,27 +1305,14 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 	public List<UserGroupRole> findByG_R(long groupId, long roleId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
-		String finderClassName = UserGroupRole.class.getName();
-		String finderMethodName = "findByG_R";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(roleId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_R,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1313,9 +1349,10 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 				List<UserGroupRole> list = (List<UserGroupRole>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_R,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1336,7 +1373,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchUserGroupRoleException, SystemException {
 		List<UserGroupRole> list = findByG_R(groupId, roleId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserGroupRole exists with the key {");
@@ -1363,7 +1400,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 		List<UserGroupRole> list = findByG_R(groupId, roleId, count - 1, count,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserGroupRole exists with the key {");
@@ -1490,23 +1527,12 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 	public List<UserGroupRole> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
-		String finderClassName = UserGroupRole.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1538,9 +1564,9 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1595,18 +1621,10 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByUserId(long userId) throws SystemException {
-		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
-		String finderClassName = UserGroupRole.class.getName();
-		String finderMethodName = "countByUserId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1642,8 +1660,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1661,18 +1678,10 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
-		String finderClassName = UserGroupRole.class.getName();
-		String finderMethodName = "countByGroupId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1708,8 +1717,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1727,18 +1735,10 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByRoleId(long roleId) throws SystemException {
-		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
-		String finderClassName = UserGroupRole.class.getName();
-		String finderMethodName = "countByRoleId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(roleId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ROLEID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1774,8 +1774,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_ROLEID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1793,20 +1792,10 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByU_G(long userId, long groupId) throws SystemException {
-		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
-		String finderClassName = UserGroupRole.class.getName();
-		String finderMethodName = "countByU_G";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(userId), new Long(groupId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_G,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1848,9 +1837,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U_G, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -1867,20 +1855,10 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByG_R(long groupId, long roleId) throws SystemException {
-		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
-		String finderClassName = UserGroupRole.class.getName();
-		String finderMethodName = "countByG_R";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(groupId), new Long(roleId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_R,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1922,9 +1900,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_R, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -1941,18 +1918,10 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
-		String finderClassName = UserGroupRole.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1975,9 +1944,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

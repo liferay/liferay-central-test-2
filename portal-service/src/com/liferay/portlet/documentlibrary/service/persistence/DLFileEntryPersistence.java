@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface DLFileEntryPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> dlFileEntries);
+
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry create(
 		long fileEntryId);
 

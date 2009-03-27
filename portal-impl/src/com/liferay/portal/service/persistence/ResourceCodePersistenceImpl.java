@@ -26,7 +26,9 @@ import com.liferay.portal.NoSuchResourceCodeException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -56,6 +58,82 @@ import java.util.List;
  */
 public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 	implements ResourceCodePersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = ResourceCode.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = ResourceCode.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
+			ResourceCodeModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByCompanyId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_COMPANYID = new FinderPath(ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
+			ResourceCodeModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByCompanyId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
+			ResourceCodeModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByCompanyId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_NAME = new FinderPath(ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
+			ResourceCodeModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByName", new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_NAME = new FinderPath(ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
+			ResourceCodeModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByName",
+			new String[] {
+				String.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_NAME = new FinderPath(ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
+			ResourceCodeModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByName", new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_C_N_S = new FinderPath(ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
+			ResourceCodeModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByC_N_S",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				Integer.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_N_S = new FinderPath(ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
+			ResourceCodeModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByC_N_S",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				Integer.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
+			ResourceCodeModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
+			ResourceCodeModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countAll", new String[0]);
+
+	public void cacheResult(ResourceCode resourceCode) {
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N_S,
+			new Object[] {
+				new Long(resourceCode.getCompanyId()),
+				
+			resourceCode.getName(), new Integer(resourceCode.getScope())
+			}, resourceCode);
+
+		EntityCacheUtil.putResult(ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
+			ResourceCode.class, resourceCode.getPrimaryKey(), resourceCode);
+	}
+
+	public void cacheResult(List<ResourceCode> resourceCodes) {
+		for (ResourceCode resourceCode : resourceCodes) {
+			if (EntityCacheUtil.getResult(
+						ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
+						ResourceCode.class, resourceCode.getPrimaryKey(), this) == null) {
+				cacheResult(resourceCode);
+			}
+		}
+	}
+
 	public ResourceCode create(long codeId) {
 		ResourceCode resourceCode = new ResourceCodeImpl();
 
@@ -132,17 +210,30 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 			session.delete(resourceCode);
 
 			session.flush();
-
-			return resourceCode;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(ResourceCode.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		ResourceCodeModelImpl resourceCodeModelImpl = (ResourceCodeModelImpl)resourceCode;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N_S,
+			new Object[] {
+				new Long(resourceCodeModelImpl.getOriginalCompanyId()),
+				
+			resourceCodeModelImpl.getOriginalName(),
+				new Integer(resourceCodeModelImpl.getOriginalScope())
+			});
+
+		EntityCacheUtil.removeResult(ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
+			ResourceCode.class, resourceCode.getPrimaryKey());
+
+		return resourceCode;
 	}
 
 	/**
@@ -201,6 +292,8 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 	public ResourceCode updateImpl(
 		com.liferay.portal.model.ResourceCode resourceCode, boolean merge)
 		throws SystemException {
+		boolean isNew = resourceCode.isNew();
+
 		Session session = null;
 
 		try {
@@ -209,17 +302,49 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, resourceCode, merge);
 
 			resourceCode.setNew(false);
-
-			return resourceCode;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(ResourceCode.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		ResourceCodeModelImpl resourceCodeModelImpl = (ResourceCodeModelImpl)resourceCode;
+
+		if (!isNew &&
+				((resourceCode.getCompanyId() != resourceCodeModelImpl.getOriginalCompanyId()) ||
+				!resourceCode.getName()
+								 .equals(resourceCodeModelImpl.getOriginalName()) ||
+				(resourceCode.getScope() != resourceCodeModelImpl.getOriginalScope()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N_S,
+				new Object[] {
+					new Long(resourceCodeModelImpl.getOriginalCompanyId()),
+					
+				resourceCodeModelImpl.getOriginalName(),
+					new Integer(resourceCodeModelImpl.getOriginalScope())
+				});
+		}
+
+		if (isNew ||
+				((resourceCode.getCompanyId() != resourceCodeModelImpl.getOriginalCompanyId()) ||
+				!resourceCode.getName()
+								 .equals(resourceCodeModelImpl.getOriginalName()) ||
+				(resourceCode.getScope() != resourceCodeModelImpl.getOriginalScope()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N_S,
+				new Object[] {
+					new Long(resourceCode.getCompanyId()),
+					
+				resourceCode.getName(), new Integer(resourceCode.getScope())
+				}, resourceCode);
+		}
+
+		EntityCacheUtil.putResult(ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
+			ResourceCode.class, resourceCode.getPrimaryKey(), resourceCode);
+
+		return resourceCode;
 	}
 
 	public ResourceCode findByPrimaryKey(long codeId)
@@ -241,36 +366,40 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 	public ResourceCode fetchByPrimaryKey(long codeId)
 		throws SystemException {
-		Session session = null;
+		ResourceCode result = (ResourceCode)EntityCacheUtil.getResult(ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
+				ResourceCode.class, codeId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (ResourceCode)session.get(ResourceCodeImpl.class,
-				new Long(codeId));
+			try {
+				session = openSession();
+
+				ResourceCode resourceCode = (ResourceCode)session.get(ResourceCodeImpl.class,
+						new Long(codeId));
+
+				cacheResult(resourceCode);
+
+				return resourceCode;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (ResourceCode)result;
 		}
 	}
 
 	public List<ResourceCode> findByCompanyId(long companyId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = ResourceCodeModelImpl.CACHE_ENABLED;
-		String finderClassName = ResourceCode.class.getName();
-		String finderMethodName = "findByCompanyId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -295,9 +424,10 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 				List<ResourceCode> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -320,27 +450,14 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 	public List<ResourceCode> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = ResourceCodeModelImpl.CACHE_ENABLED;
-		String finderClassName = ResourceCode.class.getName();
-		String finderMethodName = "findByCompanyId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -371,9 +488,10 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 				List<ResourceCode> list = (List<ResourceCode>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -394,7 +512,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchResourceCodeException, SystemException {
 		List<ResourceCode> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ResourceCode exists with the key {");
@@ -418,7 +536,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 		List<ResourceCode> list = findByCompanyId(companyId, count - 1, count,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ResourceCode exists with the key {");
@@ -485,18 +603,10 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<ResourceCode> findByName(String name) throws SystemException {
-		boolean finderClassNameCacheEnabled = ResourceCodeModelImpl.CACHE_ENABLED;
-		String finderClassName = ResourceCode.class.getName();
-		String finderMethodName = "findByName";
-		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { name };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_NAME,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -528,9 +638,10 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 				List<ResourceCode> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_NAME, finderArgs,
+					list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -553,27 +664,14 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 	public List<ResourceCode> findByName(String name, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = ResourceCodeModelImpl.CACHE_ENABLED;
-		String finderClassName = ResourceCode.class.getName();
-		String finderMethodName = "findByName";
-		String[] finderParams = new String[] {
-				String.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				name,
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_NAME,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -611,9 +709,10 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 				List<ResourceCode> list = (List<ResourceCode>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_NAME,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -633,7 +732,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchResourceCodeException, SystemException {
 		List<ResourceCode> list = findByName(name, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ResourceCode exists with the key {");
@@ -655,7 +754,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 		List<ResourceCode> list = findByName(name, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ResourceCode exists with the key {");
@@ -759,25 +858,14 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 	public ResourceCode fetchByC_N_S(long companyId, String name, int scope)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = ResourceCodeModelImpl.CACHE_ENABLED;
-		String finderClassName = ResourceCode.class.getName();
-		String finderMethodName = "fetchByC_N_S";
-		String[] finderParams = new String[] {
-				Long.class.getName(), String.class.getName(),
-				Integer.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
 				name, new Integer(scope)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_N_S,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -821,16 +909,19 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 				List<ResourceCode> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				ResourceCode resourceCode = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N_S,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					resourceCode = list.get(0);
+
+					cacheResult(resourceCode);
 				}
+
+				return resourceCode;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -840,13 +931,11 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<ResourceCode> list = (List<ResourceCode>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (ResourceCode)result;
 			}
 		}
 	}
@@ -902,23 +991,12 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 	public List<ResourceCode> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = ResourceCodeModelImpl.CACHE_ENABLED;
-		String finderClassName = ResourceCode.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -950,9 +1028,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -994,18 +1072,10 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
-		boolean finderClassNameCacheEnabled = ResourceCodeModelImpl.CACHE_ENABLED;
-		String finderClassName = ResourceCode.class.getName();
-		String finderMethodName = "countByCompanyId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1041,8 +1111,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_COMPANYID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1060,18 +1129,10 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByName(String name) throws SystemException {
-		boolean finderClassNameCacheEnabled = ResourceCodeModelImpl.CACHE_ENABLED;
-		String finderClassName = ResourceCode.class.getName();
-		String finderMethodName = "countByName";
-		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { name };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_NAME,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1114,8 +1175,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_NAME,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1134,25 +1194,14 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 	public int countByC_N_S(long companyId, String name, int scope)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = ResourceCodeModelImpl.CACHE_ENABLED;
-		String finderClassName = ResourceCode.class.getName();
-		String finderMethodName = "countByC_N_S";
-		String[] finderParams = new String[] {
-				Long.class.getName(), String.class.getName(),
-				Integer.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
 				name, new Integer(scope)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_N_S,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1207,8 +1256,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_N_S,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1226,18 +1274,10 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = ResourceCodeModelImpl.CACHE_ENABLED;
-		String finderClassName = ResourceCode.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1260,9 +1300,8 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

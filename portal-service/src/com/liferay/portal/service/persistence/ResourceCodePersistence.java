@@ -29,6 +29,11 @@ package com.liferay.portal.service.persistence;
  *
  */
 public interface ResourceCodePersistence extends BasePersistence {
+	public void cacheResult(com.liferay.portal.model.ResourceCode resourceCode);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portal.model.ResourceCode> resourceCodes);
+
 	public com.liferay.portal.model.ResourceCode create(long codeId);
 
 	public com.liferay.portal.model.ResourceCode remove(long codeId)

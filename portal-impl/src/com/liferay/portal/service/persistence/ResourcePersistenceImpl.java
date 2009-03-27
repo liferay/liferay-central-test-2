@@ -26,7 +26,9 @@ import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -56,6 +58,58 @@ import java.util.List;
  */
 public class ResourcePersistenceImpl extends BasePersistenceImpl
 	implements ResourcePersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = Resource.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = Resource.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_CODEID = new FinderPath(ResourceModelImpl.ENTITY_CACHE_ENABLED,
+			ResourceModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByCodeId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_CODEID = new FinderPath(ResourceModelImpl.ENTITY_CACHE_ENABLED,
+			ResourceModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByCodeId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_CODEID = new FinderPath(ResourceModelImpl.ENTITY_CACHE_ENABLED,
+			ResourceModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByCodeId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_C_P = new FinderPath(ResourceModelImpl.ENTITY_CACHE_ENABLED,
+			ResourceModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
+			"fetchByC_P",
+			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_P = new FinderPath(ResourceModelImpl.ENTITY_CACHE_ENABLED,
+			ResourceModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByC_P",
+			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(ResourceModelImpl.ENTITY_CACHE_ENABLED,
+			ResourceModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(ResourceModelImpl.ENTITY_CACHE_ENABLED,
+			ResourceModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countAll", new String[0]);
+
+	public void cacheResult(Resource resource) {
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_P,
+			new Object[] { new Long(resource.getCodeId()), resource.getPrimKey() },
+			resource);
+
+		EntityCacheUtil.putResult(ResourceModelImpl.ENTITY_CACHE_ENABLED,
+			Resource.class, resource.getPrimaryKey(), resource);
+	}
+
+	public void cacheResult(List<Resource> resources) {
+		for (Resource resource : resources) {
+			if (EntityCacheUtil.getResult(
+						ResourceModelImpl.ENTITY_CACHE_ENABLED, Resource.class,
+						resource.getPrimaryKey(), this) == null) {
+				cacheResult(resource);
+			}
+		}
+	}
+
 	public Resource create(long resourceId) {
 		Resource resource = new ResourceImpl();
 
@@ -130,17 +184,29 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 			session.delete(resource);
 
 			session.flush();
-
-			return resource;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(Resource.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		ResourceModelImpl resourceModelImpl = (ResourceModelImpl)resource;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_P,
+			new Object[] {
+				new Long(resourceModelImpl.getOriginalCodeId()),
+				
+			resourceModelImpl.getOriginalPrimKey()
+			});
+
+		EntityCacheUtil.removeResult(ResourceModelImpl.ENTITY_CACHE_ENABLED,
+			Resource.class, resource.getPrimaryKey());
+
+		return resource;
 	}
 
 	/**
@@ -197,6 +263,8 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 
 	public Resource updateImpl(com.liferay.portal.model.Resource resource,
 		boolean merge) throws SystemException {
+		boolean isNew = resource.isNew();
+
 		Session session = null;
 
 		try {
@@ -205,17 +273,46 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, resource, merge);
 
 			resource.setNew(false);
-
-			return resource;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(Resource.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		ResourceModelImpl resourceModelImpl = (ResourceModelImpl)resource;
+
+		if (!isNew &&
+				((resource.getCodeId() != resourceModelImpl.getOriginalCodeId()) ||
+				!resource.getPrimKey()
+							 .equals(resourceModelImpl.getOriginalPrimKey()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_P,
+				new Object[] {
+					new Long(resourceModelImpl.getOriginalCodeId()),
+					
+				resourceModelImpl.getOriginalPrimKey()
+				});
+		}
+
+		if (isNew ||
+				((resource.getCodeId() != resourceModelImpl.getOriginalCodeId()) ||
+				!resource.getPrimKey()
+							 .equals(resourceModelImpl.getOriginalPrimKey()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_P,
+				new Object[] {
+					new Long(resource.getCodeId()),
+					
+				resource.getPrimKey()
+				}, resource);
+		}
+
+		EntityCacheUtil.putResult(ResourceModelImpl.ENTITY_CACHE_ENABLED,
+			Resource.class, resource.getPrimaryKey(), resource);
+
+		return resource;
 	}
 
 	public Resource findByPrimaryKey(long resourceId)
@@ -237,35 +334,39 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 
 	public Resource fetchByPrimaryKey(long resourceId)
 		throws SystemException {
-		Session session = null;
+		Resource result = (Resource)EntityCacheUtil.getResult(ResourceModelImpl.ENTITY_CACHE_ENABLED,
+				Resource.class, resourceId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (Resource)session.get(ResourceImpl.class,
-				new Long(resourceId));
+			try {
+				session = openSession();
+
+				Resource resource = (Resource)session.get(ResourceImpl.class,
+						new Long(resourceId));
+
+				cacheResult(resource);
+
+				return resource;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (Resource)result;
 		}
 	}
 
 	public List<Resource> findByCodeId(long codeId) throws SystemException {
-		boolean finderClassNameCacheEnabled = ResourceModelImpl.CACHE_ENABLED;
-		String finderClassName = Resource.class.getName();
-		String finderMethodName = "findByCodeId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(codeId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_CODEID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -289,9 +390,10 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 
 				List<Resource> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_CODEID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -314,27 +416,14 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 
 	public List<Resource> findByCodeId(long codeId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = ResourceModelImpl.CACHE_ENABLED;
-		String finderClassName = Resource.class.getName();
-		String finderMethodName = "findByCodeId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(codeId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_CODEID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -364,9 +453,10 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 				List<Resource> list = (List<Resource>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_CODEID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -386,7 +476,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchResourceException, SystemException {
 		List<Resource> list = findByCodeId(codeId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Resource exists with the key {");
@@ -408,7 +498,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 
 		List<Resource> list = findByCodeId(codeId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Resource exists with the key {");
@@ -500,20 +590,10 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 
 	public Resource fetchByC_P(long codeId, String primKey)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = ResourceModelImpl.CACHE_ENABLED;
-		String finderClassName = Resource.class.getName();
-		String finderMethodName = "fetchByC_P";
-		String[] finderParams = new String[] {
-				Long.class.getName(), String.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(codeId), primKey };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_P,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -550,16 +630,19 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 
 				List<Resource> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				Resource resource = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_P,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					resource = list.get(0);
+
+					cacheResult(resource);
 				}
+
+				return resource;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -569,13 +652,11 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<Resource> list = (List<Resource>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (Resource)result;
 			}
 		}
 	}
@@ -630,23 +711,12 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 
 	public List<Resource> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = ResourceModelImpl.CACHE_ENABLED;
-		String finderClassName = Resource.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -678,9 +748,9 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -716,18 +786,10 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByCodeId(long codeId) throws SystemException {
-		boolean finderClassNameCacheEnabled = ResourceModelImpl.CACHE_ENABLED;
-		String finderClassName = Resource.class.getName();
-		String finderMethodName = "countByCodeId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(codeId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_CODEID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -762,8 +824,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CODEID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -782,20 +843,10 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 
 	public int countByC_P(long codeId, String primKey)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = ResourceModelImpl.CACHE_ENABLED;
-		String finderClassName = Resource.class.getName();
-		String finderMethodName = "countByC_P";
-		String[] finderParams = new String[] {
-				Long.class.getName(), String.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(codeId), primKey };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_P,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -843,9 +894,8 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_P, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -862,18 +912,10 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = ResourceModelImpl.CACHE_ENABLED;
-		String finderClassName = Resource.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -896,9 +938,8 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

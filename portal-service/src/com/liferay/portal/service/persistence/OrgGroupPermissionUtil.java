@@ -29,6 +29,16 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class OrgGroupPermissionUtil {
+	public static void cacheResult(
+		com.liferay.portal.model.OrgGroupPermission orgGroupPermission) {
+		getPersistence().cacheResult(orgGroupPermission);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.OrgGroupPermission> orgGroupPermissions) {
+		getPersistence().cacheResult(orgGroupPermissions);
+	}
+
 	public static com.liferay.portal.model.OrgGroupPermission create(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPK orgGroupPermissionPK) {
 		return getPersistence().create(orgGroupPermissionPK);

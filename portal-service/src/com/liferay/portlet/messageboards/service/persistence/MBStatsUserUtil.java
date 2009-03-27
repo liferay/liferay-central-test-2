@@ -29,6 +29,16 @@ package com.liferay.portlet.messageboards.service.persistence;
  *
  */
 public class MBStatsUserUtil {
+	public static void cacheResult(
+		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser) {
+		getPersistence().cacheResult(mbStatsUser);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> mbStatsUsers) {
+		getPersistence().cacheResult(mbStatsUsers);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBStatsUser create(
 		long statsUserId) {
 		return getPersistence().create(statsUserId);

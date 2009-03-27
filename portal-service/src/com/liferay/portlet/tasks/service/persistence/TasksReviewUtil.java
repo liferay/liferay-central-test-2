@@ -29,6 +29,16 @@ package com.liferay.portlet.tasks.service.persistence;
  *
  */
 public class TasksReviewUtil {
+	public static void cacheResult(
+		com.liferay.portlet.tasks.model.TasksReview tasksReview) {
+		getPersistence().cacheResult(tasksReview);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.tasks.model.TasksReview> tasksReviews) {
+		getPersistence().cacheResult(tasksReviews);
+	}
+
 	public static com.liferay.portlet.tasks.model.TasksReview create(
 		long reviewId) {
 		return getPersistence().create(reviewId);

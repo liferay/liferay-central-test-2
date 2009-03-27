@@ -29,6 +29,11 @@ package com.liferay.portal.service.persistence;
  *
  */
 public interface WebsitePersistence extends BasePersistence {
+	public void cacheResult(com.liferay.portal.model.Website website);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portal.model.Website> websites);
+
 	public com.liferay.portal.model.Website create(long websiteId);
 
 	public com.liferay.portal.model.Website remove(long websiteId)

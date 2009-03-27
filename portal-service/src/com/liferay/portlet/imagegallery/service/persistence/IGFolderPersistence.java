@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface IGFolderPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.imagegallery.model.IGFolder igFolder);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> igFolders);
+
 	public com.liferay.portlet.imagegallery.model.IGFolder create(long folderId);
 
 	public com.liferay.portlet.imagegallery.model.IGFolder remove(long folderId)

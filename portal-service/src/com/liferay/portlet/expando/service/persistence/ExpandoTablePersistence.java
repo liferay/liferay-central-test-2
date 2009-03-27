@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface ExpandoTablePersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.expando.model.ExpandoTable expandoTable);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.expando.model.ExpandoTable> expandoTables);
+
 	public com.liferay.portlet.expando.model.ExpandoTable create(long tableId);
 
 	public com.liferay.portlet.expando.model.ExpandoTable remove(long tableId)

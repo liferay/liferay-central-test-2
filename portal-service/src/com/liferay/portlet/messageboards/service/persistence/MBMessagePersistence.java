@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface MBMessagePersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.messageboards.model.MBMessage mbMessage);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.messageboards.model.MBMessage> mbMessages);
+
 	public com.liferay.portlet.messageboards.model.MBMessage create(
 		long messageId);
 

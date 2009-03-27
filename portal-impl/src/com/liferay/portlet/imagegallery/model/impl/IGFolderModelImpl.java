@@ -99,7 +99,10 @@ public class IGFolderModelImpl extends BaseModelImpl<IGFolder> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.imagegallery.model.IGFolder"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.imagegallery.model.IGFolder"),
 			true);
 
@@ -153,9 +156,17 @@ public class IGFolderModelImpl extends BaseModelImpl<IGFolder> {
 	}
 
 	public void setUuid(String uuid) {
-		if ((uuid != null) && (uuid != _uuid)) {
+		if ((uuid != null) && !uuid.equals(_uuid)) {
 			_uuid = uuid;
+
+			if (_originalUuid == null) {
+				_originalUuid = uuid;
+			}
 		}
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
 	}
 
 	public long getFolderId() {
@@ -175,7 +186,17 @@ public class IGFolderModelImpl extends BaseModelImpl<IGFolder> {
 	public void setGroupId(long groupId) {
 		if (groupId != _groupId) {
 			_groupId = groupId;
+
+			if (!_setOriginalGroupId) {
+				_setOriginalGroupId = true;
+
+				_originalGroupId = groupId;
+			}
 		}
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	public long getCompanyId() {
@@ -231,7 +252,17 @@ public class IGFolderModelImpl extends BaseModelImpl<IGFolder> {
 	public void setParentFolderId(long parentFolderId) {
 		if (parentFolderId != _parentFolderId) {
 			_parentFolderId = parentFolderId;
+
+			if (!_setOriginalParentFolderId) {
+				_setOriginalParentFolderId = true;
+
+				_originalParentFolderId = parentFolderId;
+			}
 		}
+	}
+
+	public long getOriginalParentFolderId() {
+		return _originalParentFolderId;
 	}
 
 	public String getName() {
@@ -243,7 +274,15 @@ public class IGFolderModelImpl extends BaseModelImpl<IGFolder> {
 				((name != null) && (_name == null)) ||
 				((name != null) && (_name != null) && !name.equals(_name))) {
 			_name = name;
+
+			if (_originalName == null) {
+				_originalName = name;
+			}
 		}
+	}
+
+	public String getOriginalName() {
+		return GetterUtil.getString(_originalName);
 	}
 
 	public String getDescription() {
@@ -370,14 +409,20 @@ public class IGFolderModelImpl extends BaseModelImpl<IGFolder> {
 	}
 
 	private String _uuid;
+	private String _originalUuid;
 	private long _folderId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _parentFolderId;
+	private long _originalParentFolderId;
+	private boolean _setOriginalParentFolderId;
 	private String _name;
+	private String _originalName;
 	private String _description;
 	private transient ExpandoBridge _expandoBridge;
 }

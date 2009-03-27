@@ -31,6 +31,11 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface MBBanPersistence extends BasePersistence {
+	public void cacheResult(com.liferay.portlet.messageboards.model.MBBan mbBan);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.messageboards.model.MBBan> mbBans);
+
 	public com.liferay.portlet.messageboards.model.MBBan create(long banId);
 
 	public com.liferay.portlet.messageboards.model.MBBan remove(long banId)

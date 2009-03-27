@@ -29,6 +29,15 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class LayoutUtil {
+	public static void cacheResult(com.liferay.portal.model.Layout layout) {
+		getPersistence().cacheResult(layout);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.Layout> layouts) {
+		getPersistence().cacheResult(layouts);
+	}
+
 	public static com.liferay.portal.model.Layout create(long plid) {
 		return getPersistence().create(plid);
 	}

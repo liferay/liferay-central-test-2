@@ -223,7 +223,10 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.shopping.model.ShoppingOrder"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.shopping.model.ShoppingOrder"),
 			true);
 
@@ -402,7 +405,15 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 				((number != null) && (_number != null) &&
 				!number.equals(_number))) {
 			_number = number;
+
+			if (_originalNumber == null) {
+				_originalNumber = number;
+			}
 		}
+	}
+
+	public String getOriginalNumber() {
+		return GetterUtil.getString(_originalNumber);
 	}
 
 	public double getTax() {
@@ -872,7 +883,15 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 				((ppTxnId != null) && (_ppTxnId != null) &&
 				!ppTxnId.equals(_ppTxnId))) {
 			_ppTxnId = ppTxnId;
+
+			if (_originalPpTxnId == null) {
+				_originalPpTxnId = ppTxnId;
+			}
 		}
+	}
+
+	public String getOriginalPpTxnId() {
+		return GetterUtil.getString(_originalPpTxnId);
 	}
 
 	public String getPpPaymentStatus() {
@@ -1142,6 +1161,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _number;
+	private String _originalNumber;
 	private double _tax;
 	private double _shipping;
 	private String _altShipping;
@@ -1179,6 +1199,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	private String _ccVerNumber;
 	private String _comments;
 	private String _ppTxnId;
+	private String _originalPpTxnId;
 	private String _ppPaymentStatus;
 	private double _ppPaymentGross;
 	private String _ppReceiverEmail;

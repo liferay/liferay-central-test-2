@@ -75,7 +75,10 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portal.model.ClassName"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.ClassName"),
 			true);
 
@@ -143,7 +146,15 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName> {
 				((value != null) && (_value == null)) ||
 				((value != null) && (_value != null) && !value.equals(_value))) {
 			_value = value;
+
+			if (_originalValue == null) {
+				_originalValue = value;
+			}
 		}
+	}
+
+	public String getOriginalValue() {
+		return GetterUtil.getString(_originalValue);
 	}
 
 	public ClassName toEscapedModel() {
@@ -229,5 +240,6 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName> {
 
 	private long _classNameId;
 	private String _value;
+	private String _originalValue;
 	private transient ExpandoBridge _expandoBridge;
 }

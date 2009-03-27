@@ -29,6 +29,12 @@ package com.liferay.portal.service.persistence;
  *
  */
 public interface PluginSettingPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portal.model.PluginSetting pluginSetting);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portal.model.PluginSetting> pluginSettings);
+
 	public com.liferay.portal.model.PluginSetting create(long pluginSettingId);
 
 	public com.liferay.portal.model.PluginSetting remove(long pluginSettingId)

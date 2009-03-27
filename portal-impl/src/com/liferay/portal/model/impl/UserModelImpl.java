@@ -164,7 +164,10 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portal.model.User"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.User"),
 			true);
 
@@ -217,15 +220,15 @@ public class UserModelImpl extends BaseModelImpl<User> {
 		return models;
 	}
 
-	public static final boolean CACHE_ENABLED_USERS_GROUPS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean FINDER_CACHE_ENABLED_USERS_GROUPS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_Groups"), true);
-	public static final boolean CACHE_ENABLED_USERS_ORGS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean FINDER_CACHE_ENABLED_USERS_ORGS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_Orgs"), true);
-	public static final boolean CACHE_ENABLED_USERS_PERMISSIONS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean FINDER_CACHE_ENABLED_USERS_PERMISSIONS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_Permissions"), true);
-	public static final boolean CACHE_ENABLED_USERS_ROLES = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean FINDER_CACHE_ENABLED_USERS_ROLES = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_Roles"), true);
-	public static final boolean CACHE_ENABLED_USERS_USERGROUPS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean FINDER_CACHE_ENABLED_USERS_USERGROUPS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_UserGroups"), true);
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.User"));
@@ -250,7 +253,7 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public void setUuid(String uuid) {
-		if ((uuid != null) && (uuid != _uuid)) {
+		if ((uuid != null) && !uuid.equals(_uuid)) {
 			_uuid = uuid;
 		}
 	}
@@ -262,7 +265,17 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	public void setUserId(long userId) {
 		if (userId != _userId) {
 			_userId = userId;
+
+			if (!_setOriginalUserId) {
+				_setOriginalUserId = true;
+
+				_originalUserId = userId;
+			}
 		}
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	public long getCompanyId() {
@@ -272,7 +285,17 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	public void setCompanyId(long companyId) {
 		if (companyId != _companyId) {
 			_companyId = companyId;
+
+			if (!_setOriginalCompanyId) {
+				_setOriginalCompanyId = true;
+
+				_originalCompanyId = companyId;
+			}
 		}
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	public Date getCreateDate() {
@@ -312,7 +335,17 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	public void setDefaultUser(boolean defaultUser) {
 		if (defaultUser != _defaultUser) {
 			_defaultUser = defaultUser;
+
+			if (!_setOriginalDefaultUser) {
+				_setOriginalDefaultUser = true;
+
+				_originalDefaultUser = defaultUser;
+			}
 		}
+	}
+
+	public boolean getOriginalDefaultUser() {
+		return _originalDefaultUser;
 	}
 
 	public long getContactId() {
@@ -322,7 +355,17 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	public void setContactId(long contactId) {
 		if (contactId != _contactId) {
 			_contactId = contactId;
+
+			if (!_setOriginalContactId) {
+				_setOriginalContactId = true;
+
+				_originalContactId = contactId;
+			}
 		}
+	}
+
+	public long getOriginalContactId() {
+		return _originalContactId;
 	}
 
 	public String getPassword() {
@@ -432,7 +475,15 @@ public class UserModelImpl extends BaseModelImpl<User> {
 				((screenName != null) && (_screenName != null) &&
 				!screenName.equals(_screenName))) {
 			_screenName = screenName;
+
+			if (_originalScreenName == null) {
+				_originalScreenName = screenName;
+			}
 		}
+	}
+
+	public String getOriginalScreenName() {
+		return GetterUtil.getString(_originalScreenName);
 	}
 
 	public String getEmailAddress() {
@@ -445,7 +496,15 @@ public class UserModelImpl extends BaseModelImpl<User> {
 				((emailAddress != null) && (_emailAddress != null) &&
 				!emailAddress.equals(_emailAddress))) {
 			_emailAddress = emailAddress;
+
+			if (_originalEmailAddress == null) {
+				_originalEmailAddress = emailAddress;
+			}
 		}
+	}
+
+	public String getOriginalEmailAddress() {
+		return GetterUtil.getString(_originalEmailAddress);
 	}
 
 	public String getOpenId() {
@@ -458,7 +517,15 @@ public class UserModelImpl extends BaseModelImpl<User> {
 				((openId != null) && (_openId != null) &&
 				!openId.equals(_openId))) {
 			_openId = openId;
+
+			if (_originalOpenId == null) {
+				_originalOpenId = openId;
+			}
 		}
+	}
+
+	public String getOriginalOpenId() {
+		return GetterUtil.getString(_originalOpenId);
 	}
 
 	public long getPortraitId() {
@@ -468,7 +535,17 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	public void setPortraitId(long portraitId) {
 		if (portraitId != _portraitId) {
 			_portraitId = portraitId;
+
+			if (!_setOriginalPortraitId) {
+				_setOriginalPortraitId = true;
+
+				_originalPortraitId = portraitId;
+			}
 		}
+	}
+
+	public long getOriginalPortraitId() {
+		return _originalPortraitId;
 	}
 
 	public String getLanguageId() {
@@ -799,11 +876,19 @@ public class UserModelImpl extends BaseModelImpl<User> {
 
 	private String _uuid;
 	private long _userId;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private boolean _defaultUser;
+	private boolean _originalDefaultUser;
+	private boolean _setOriginalDefaultUser;
 	private long _contactId;
+	private long _originalContactId;
+	private boolean _setOriginalContactId;
 	private String _password;
 	private boolean _passwordEncrypted;
 	private boolean _passwordReset;
@@ -812,9 +897,14 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	private String _reminderQueryAnswer;
 	private int _graceLoginCount;
 	private String _screenName;
+	private String _originalScreenName;
 	private String _emailAddress;
+	private String _originalEmailAddress;
 	private String _openId;
+	private String _originalOpenId;
 	private long _portraitId;
+	private long _originalPortraitId;
+	private boolean _setOriginalPortraitId;
 	private String _languageId;
 	private String _timeZoneId;
 	private String _greeting;

@@ -29,6 +29,12 @@ package com.liferay.portal.service.persistence;
  *
  */
 public interface UserGroupRolePersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portal.model.UserGroupRole userGroupRole);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portal.model.UserGroupRole> userGroupRoles);
+
 	public com.liferay.portal.model.UserGroupRole create(
 		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK);
 

@@ -100,7 +100,10 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portal.model.PortletItem"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.PortletItem"),
 			true);
 
@@ -166,7 +169,17 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem> {
 	public void setGroupId(long groupId) {
 		if (groupId != _groupId) {
 			_groupId = groupId;
+
+			if (!_setOriginalGroupId) {
+				_setOriginalGroupId = true;
+
+				_originalGroupId = groupId;
+			}
 		}
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	public long getCompanyId() {
@@ -237,7 +250,15 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem> {
 				((name != null) && (_name == null)) ||
 				((name != null) && (_name != null) && !name.equals(_name))) {
 			_name = name;
+
+			if (_originalName == null) {
+				_originalName = name;
+			}
 		}
+	}
+
+	public String getOriginalName() {
+		return GetterUtil.getString(_originalName);
 	}
 
 	public String getPortletId() {
@@ -250,7 +271,15 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem> {
 				((portletId != null) && (_portletId != null) &&
 				!portletId.equals(_portletId))) {
 			_portletId = portletId;
+
+			if (_originalPortletId == null) {
+				_originalPortletId = portletId;
+			}
 		}
+	}
+
+	public String getOriginalPortletId() {
+		return GetterUtil.getString(_originalPortletId);
 	}
 
 	public String getClassName() {
@@ -268,7 +297,17 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem> {
 	public void setClassNameId(long classNameId) {
 		if (classNameId != _classNameId) {
 			_classNameId = classNameId;
+
+			if (!_setOriginalClassNameId) {
+				_setOriginalClassNameId = true;
+
+				_originalClassNameId = classNameId;
+			}
 		}
+	}
+
+	public long getOriginalClassNameId() {
+		return _originalClassNameId;
 	}
 
 	public PortletItem toEscapedModel() {
@@ -370,13 +409,19 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem> {
 
 	private long _portletItemId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _name;
+	private String _originalName;
 	private String _portletId;
+	private String _originalPortletId;
 	private long _classNameId;
+	private long _originalClassNameId;
+	private boolean _setOriginalClassNameId;
 	private transient ExpandoBridge _expandoBridge;
 }

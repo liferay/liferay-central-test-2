@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface SCFrameworkVersionPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> scFrameworkVersions);
+
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion create(
 		long frameworkVersionId);
 

@@ -89,7 +89,10 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.journal.model.JournalContentSearch"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.journal.model.JournalContentSearch"),
 			true);
 
@@ -154,7 +157,17 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 	public void setGroupId(long groupId) {
 		if (groupId != _groupId) {
 			_groupId = groupId;
+
+			if (!_setOriginalGroupId) {
+				_setOriginalGroupId = true;
+
+				_originalGroupId = groupId;
+			}
 		}
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	public long getCompanyId() {
@@ -178,7 +191,17 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 	public void setPrivateLayout(boolean privateLayout) {
 		if (privateLayout != _privateLayout) {
 			_privateLayout = privateLayout;
+
+			if (!_setOriginalPrivateLayout) {
+				_setOriginalPrivateLayout = true;
+
+				_originalPrivateLayout = privateLayout;
+			}
 		}
+	}
+
+	public boolean getOriginalPrivateLayout() {
+		return _originalPrivateLayout;
 	}
 
 	public long getLayoutId() {
@@ -188,7 +211,17 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 	public void setLayoutId(long layoutId) {
 		if (layoutId != _layoutId) {
 			_layoutId = layoutId;
+
+			if (!_setOriginalLayoutId) {
+				_setOriginalLayoutId = true;
+
+				_originalLayoutId = layoutId;
+			}
 		}
+	}
+
+	public long getOriginalLayoutId() {
+		return _originalLayoutId;
 	}
 
 	public String getPortletId() {
@@ -201,7 +234,15 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 				((portletId != null) && (_portletId != null) &&
 				!portletId.equals(_portletId))) {
 			_portletId = portletId;
+
+			if (_originalPortletId == null) {
+				_originalPortletId = portletId;
+			}
 		}
+	}
+
+	public String getOriginalPortletId() {
+		return GetterUtil.getString(_originalPortletId);
 	}
 
 	public String getArticleId() {
@@ -214,7 +255,15 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 				((articleId != null) && (_articleId != null) &&
 				!articleId.equals(_articleId))) {
 			_articleId = articleId;
+
+			if (_originalArticleId == null) {
+				_originalArticleId = articleId;
+			}
 		}
+	}
+
+	public String getOriginalArticleId() {
+		return GetterUtil.getString(_originalArticleId);
 	}
 
 	public JournalContentSearch toEscapedModel() {
@@ -310,10 +359,18 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 
 	private long _contentSearchId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private boolean _privateLayout;
+	private boolean _originalPrivateLayout;
+	private boolean _setOriginalPrivateLayout;
 	private long _layoutId;
+	private long _originalLayoutId;
+	private boolean _setOriginalLayoutId;
 	private String _portletId;
+	private String _originalPortletId;
 	private String _articleId;
+	private String _originalArticleId;
 	private transient ExpandoBridge _expandoBridge;
 }

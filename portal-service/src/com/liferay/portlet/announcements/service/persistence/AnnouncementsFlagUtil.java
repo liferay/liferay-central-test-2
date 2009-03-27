@@ -29,6 +29,16 @@ package com.liferay.portlet.announcements.service.persistence;
  *
  */
 public class AnnouncementsFlagUtil {
+	public static void cacheResult(
+		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag) {
+		getPersistence().cacheResult(announcementsFlag);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> announcementsFlags) {
+		getPersistence().cacheResult(announcementsFlags);
+	}
+
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag create(
 		long flagId) {
 		return getPersistence().create(flagId);

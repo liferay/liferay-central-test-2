@@ -29,6 +29,11 @@ package com.liferay.portal.service.persistence;
  *
  */
 public interface ResourcePersistence extends BasePersistence {
+	public void cacheResult(com.liferay.portal.model.Resource resource);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portal.model.Resource> resources);
+
 	public com.liferay.portal.model.Resource create(long resourceId);
 
 	public com.liferay.portal.model.Resource remove(long resourceId)

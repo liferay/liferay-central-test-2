@@ -133,7 +133,10 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portal.model.Layout"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Layout"),
 			true);
 
@@ -211,7 +214,17 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	public void setGroupId(long groupId) {
 		if (groupId != _groupId) {
 			_groupId = groupId;
+
+			if (!_setOriginalGroupId) {
+				_setOriginalGroupId = true;
+
+				_originalGroupId = groupId;
+			}
 		}
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	public long getCompanyId() {
@@ -235,7 +248,17 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	public void setPrivateLayout(boolean privateLayout) {
 		if (privateLayout != _privateLayout) {
 			_privateLayout = privateLayout;
+
+			if (!_setOriginalPrivateLayout) {
+				_setOriginalPrivateLayout = true;
+
+				_originalPrivateLayout = privateLayout;
+			}
 		}
+	}
+
+	public boolean getOriginalPrivateLayout() {
+		return _originalPrivateLayout;
 	}
 
 	public long getLayoutId() {
@@ -245,7 +268,17 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	public void setLayoutId(long layoutId) {
 		if (layoutId != _layoutId) {
 			_layoutId = layoutId;
+
+			if (!_setOriginalLayoutId) {
+				_setOriginalLayoutId = true;
+
+				_originalLayoutId = layoutId;
+			}
 		}
+	}
+
+	public long getOriginalLayoutId() {
+		return _originalLayoutId;
 	}
 
 	public long getParentLayoutId() {
@@ -344,7 +377,15 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 				((friendlyURL != null) && (_friendlyURL != null) &&
 				!friendlyURL.equals(_friendlyURL))) {
 			_friendlyURL = friendlyURL;
+
+			if (_originalFriendlyURL == null) {
+				_originalFriendlyURL = friendlyURL;
+			}
 		}
+	}
+
+	public String getOriginalFriendlyURL() {
+		return GetterUtil.getString(_originalFriendlyURL);
 	}
 
 	public boolean getIconImage() {
@@ -368,7 +409,17 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	public void setIconImageId(long iconImageId) {
 		if (iconImageId != _iconImageId) {
 			_iconImageId = iconImageId;
+
+			if (!_setOriginalIconImageId) {
+				_setOriginalIconImageId = true;
+
+				_originalIconImageId = iconImageId;
+			}
 		}
+	}
+
+	public long getOriginalIconImageId() {
+		return _originalIconImageId;
 	}
 
 	public String getThemeId() {
@@ -452,7 +503,17 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	public void setDlFolderId(long dlFolderId) {
 		if (dlFolderId != _dlFolderId) {
 			_dlFolderId = dlFolderId;
+
+			if (!_setOriginalDlFolderId) {
+				_setOriginalDlFolderId = true;
+
+				_originalDlFolderId = dlFolderId;
+			}
 		}
+	}
+
+	public long getOriginalDlFolderId() {
+		return _originalDlFolderId;
 	}
 
 	public Layout toEscapedModel() {
@@ -597,9 +658,15 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 
 	private long _plid;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private boolean _privateLayout;
+	private boolean _originalPrivateLayout;
+	private boolean _setOriginalPrivateLayout;
 	private long _layoutId;
+	private long _originalLayoutId;
+	private boolean _setOriginalLayoutId;
 	private long _parentLayoutId;
 	private String _name;
 	private String _title;
@@ -608,8 +675,11 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	private String _typeSettings;
 	private boolean _hidden;
 	private String _friendlyURL;
+	private String _originalFriendlyURL;
 	private boolean _iconImage;
 	private long _iconImageId;
+	private long _originalIconImageId;
+	private boolean _setOriginalIconImageId;
 	private String _themeId;
 	private String _colorSchemeId;
 	private String _wapThemeId;
@@ -617,5 +687,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	private String _css;
 	private int _priority;
 	private long _dlFolderId;
+	private long _originalDlFolderId;
+	private boolean _setOriginalDlFolderId;
 	private transient ExpandoBridge _expandoBridge;
 }

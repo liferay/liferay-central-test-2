@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface MBMailingListPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.messageboards.model.MBMailingList mbMailingList);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.messageboards.model.MBMailingList> mbMailingLists);
+
 	public com.liferay.portlet.messageboards.model.MBMailingList create(
 		long mailingListId);
 

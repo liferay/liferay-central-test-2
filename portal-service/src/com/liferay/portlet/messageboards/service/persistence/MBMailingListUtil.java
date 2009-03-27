@@ -29,6 +29,16 @@ package com.liferay.portlet.messageboards.service.persistence;
  *
  */
 public class MBMailingListUtil {
+	public static void cacheResult(
+		com.liferay.portlet.messageboards.model.MBMailingList mbMailingList) {
+		getPersistence().cacheResult(mbMailingList);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.messageboards.model.MBMailingList> mbMailingLists) {
+		getPersistence().cacheResult(mbMailingLists);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMailingList create(
 		long mailingListId) {
 		return getPersistence().create(mailingListId);

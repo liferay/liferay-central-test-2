@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface TagsVocabularyPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.tags.model.TagsVocabulary tagsVocabulary);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> tagsVocabularies);
+
 	public com.liferay.portlet.tags.model.TagsVocabulary create(
 		long vocabularyId);
 

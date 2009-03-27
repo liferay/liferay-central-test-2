@@ -88,7 +88,10 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.documentlibrary.model.DLFileRank"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.documentlibrary.model.DLFileRank"),
 			true);
 
@@ -150,7 +153,17 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {
 	public void setCompanyId(long companyId) {
 		if (companyId != _companyId) {
 			_companyId = companyId;
+
+			if (!_setOriginalCompanyId) {
+				_setOriginalCompanyId = true;
+
+				_originalCompanyId = companyId;
+			}
 		}
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	public long getUserId() {
@@ -160,7 +173,17 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {
 	public void setUserId(long userId) {
 		if (userId != _userId) {
 			_userId = userId;
+
+			if (!_setOriginalUserId) {
+				_setOriginalUserId = true;
+
+				_originalUserId = userId;
+			}
 		}
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	public Date getCreateDate() {
@@ -183,7 +206,17 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {
 	public void setFolderId(long folderId) {
 		if (folderId != _folderId) {
 			_folderId = folderId;
+
+			if (!_setOriginalFolderId) {
+				_setOriginalFolderId = true;
+
+				_originalFolderId = folderId;
+			}
 		}
+	}
+
+	public long getOriginalFolderId() {
+		return _originalFolderId;
 	}
 
 	public String getName() {
@@ -195,7 +228,15 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {
 				((name != null) && (_name == null)) ||
 				((name != null) && (_name != null) && !name.equals(_name))) {
 			_name = name;
+
+			if (_originalName == null) {
+				_originalName = name;
+			}
 		}
+	}
+
+	public String getOriginalName() {
+		return GetterUtil.getString(_originalName);
 	}
 
 	public DLFileRank toEscapedModel() {
@@ -289,9 +330,16 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {
 
 	private long _fileRankId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private Date _createDate;
 	private long _folderId;
+	private long _originalFolderId;
+	private boolean _setOriginalFolderId;
 	private String _name;
+	private String _originalName;
 	private transient ExpandoBridge _expandoBridge;
 }

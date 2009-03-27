@@ -26,7 +26,9 @@ import com.liferay.portal.NoSuchAccountException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
@@ -54,6 +56,31 @@ import java.util.List;
  */
 public class AccountPersistenceImpl extends BasePersistenceImpl
 	implements AccountPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = Account.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = Account.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(AccountModelImpl.ENTITY_CACHE_ENABLED,
+			AccountModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(AccountModelImpl.ENTITY_CACHE_ENABLED,
+			AccountModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countAll", new String[0]);
+
+	public void cacheResult(Account account) {
+		EntityCacheUtil.putResult(AccountModelImpl.ENTITY_CACHE_ENABLED,
+			Account.class, account.getPrimaryKey(), account);
+	}
+
+	public void cacheResult(List<Account> accounts) {
+		for (Account account : accounts) {
+			if (EntityCacheUtil.getResult(
+						AccountModelImpl.ENTITY_CACHE_ENABLED, Account.class,
+						account.getPrimaryKey(), this) == null) {
+				cacheResult(account);
+			}
+		}
+	}
+
 	public Account create(long accountId) {
 		Account account = new AccountImpl();
 
@@ -128,17 +155,22 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 			session.delete(account);
 
 			session.flush();
-
-			return account;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(Account.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		AccountModelImpl accountModelImpl = (AccountModelImpl)account;
+
+		EntityCacheUtil.removeResult(AccountModelImpl.ENTITY_CACHE_ENABLED,
+			Account.class, account.getPrimaryKey());
+
+		return account;
 	}
 
 	/**
@@ -195,6 +227,8 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 
 	public Account updateImpl(com.liferay.portal.model.Account account,
 		boolean merge) throws SystemException {
+		boolean isNew = account.isNew();
+
 		Session session = null;
 
 		try {
@@ -203,17 +237,22 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, account, merge);
 
 			account.setNew(false);
-
-			return account;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(Account.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		AccountModelImpl accountModelImpl = (AccountModelImpl)account;
+
+		EntityCacheUtil.putResult(AccountModelImpl.ENTITY_CACHE_ENABLED,
+			Account.class, account.getPrimaryKey(), account);
+
+		return account;
 	}
 
 	public Account findByPrimaryKey(long accountId)
@@ -234,18 +273,31 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Account fetchByPrimaryKey(long accountId) throws SystemException {
-		Session session = null;
+		Account result = (Account)EntityCacheUtil.getResult(AccountModelImpl.ENTITY_CACHE_ENABLED,
+				Account.class, accountId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (Account)session.get(AccountImpl.class, new Long(accountId));
+			try {
+				session = openSession();
+
+				Account account = (Account)session.get(AccountImpl.class,
+						new Long(accountId));
+
+				cacheResult(account);
+
+				return account;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (Account)result;
 		}
 	}
 
@@ -299,23 +351,12 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 
 	public List<Account> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = AccountModelImpl.CACHE_ENABLED;
-		String finderClassName = Account.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -347,9 +388,9 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -372,18 +413,10 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = AccountModelImpl.CACHE_ENABLED;
-		String finderClassName = Account.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -406,9 +439,8 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

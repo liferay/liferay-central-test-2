@@ -29,6 +29,16 @@ package com.liferay.portlet.journal.service.persistence;
  *
  */
 public class JournalContentSearchUtil {
+	public static void cacheResult(
+		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch) {
+		getPersistence().cacheResult(journalContentSearch);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> journalContentSearchs) {
+		getPersistence().cacheResult(journalContentSearchs);
+	}
+
 	public static com.liferay.portlet.journal.model.JournalContentSearch create(
 		long contentSearchId) {
 		return getPersistence().create(contentSearchId);

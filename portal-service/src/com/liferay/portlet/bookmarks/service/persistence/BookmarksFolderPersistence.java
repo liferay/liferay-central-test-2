@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface BookmarksFolderPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> bookmarksFolders);
+
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder create(
 		long folderId);
 

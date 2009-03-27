@@ -86,7 +86,10 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.softwarecatalog.model.SCLicense"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.softwarecatalog.model.SCLicense"),
 			true);
 
@@ -113,7 +116,8 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense> {
 		return models;
 	}
 
-	public static final boolean CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean FINDER_CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES =
+		GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.SCLicenses_SCProductEntries"),
 			true);
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(

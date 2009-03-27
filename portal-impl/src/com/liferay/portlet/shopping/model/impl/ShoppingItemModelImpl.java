@@ -168,7 +168,10 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.shopping.model.ShoppingItem"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.shopping.model.ShoppingItem"),
 			true);
 
@@ -257,7 +260,17 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	public void setCompanyId(long companyId) {
 		if (companyId != _companyId) {
 			_companyId = companyId;
+
+			if (!_setOriginalCompanyId) {
+				_setOriginalCompanyId = true;
+
+				_originalCompanyId = companyId;
+			}
 		}
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	public long getUserId() {
@@ -328,7 +341,15 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 				((sku != null) && (_sku == null)) ||
 				((sku != null) && (_sku != null) && !sku.equals(_sku))) {
 			_sku = sku;
+
+			if (_originalSku == null) {
+				_originalSku = sku;
+			}
 		}
+	}
+
+	public String getOriginalSku() {
+		return GetterUtil.getString(_originalSku);
 	}
 
 	public String getName() {
@@ -547,7 +568,17 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	public void setSmallImageId(long smallImageId) {
 		if (smallImageId != _smallImageId) {
 			_smallImageId = smallImageId;
+
+			if (!_setOriginalSmallImageId) {
+				_setOriginalSmallImageId = true;
+
+				_originalSmallImageId = smallImageId;
+			}
 		}
+	}
+
+	public long getOriginalSmallImageId() {
+		return _originalSmallImageId;
 	}
 
 	public String getSmallImageURL() {
@@ -584,7 +615,17 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	public void setMediumImageId(long mediumImageId) {
 		if (mediumImageId != _mediumImageId) {
 			_mediumImageId = mediumImageId;
+
+			if (!_setOriginalMediumImageId) {
+				_setOriginalMediumImageId = true;
+
+				_originalMediumImageId = mediumImageId;
+			}
 		}
+	}
+
+	public long getOriginalMediumImageId() {
+		return _originalMediumImageId;
 	}
 
 	public String getMediumImageURL() {
@@ -621,7 +662,17 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	public void setLargeImageId(long largeImageId) {
 		if (largeImageId != _largeImageId) {
 			_largeImageId = largeImageId;
+
+			if (!_setOriginalLargeImageId) {
+				_setOriginalLargeImageId = true;
+
+				_originalLargeImageId = largeImageId;
+			}
 		}
+	}
+
+	public long getOriginalLargeImageId() {
+		return _originalLargeImageId;
 	}
 
 	public String getLargeImageURL() {
@@ -788,12 +839,15 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 
 	private long _itemId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _categoryId;
 	private String _sku;
+	private String _originalSku;
 	private String _name;
 	private String _description;
 	private String _properties;
@@ -812,12 +866,18 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	private boolean _sale;
 	private boolean _smallImage;
 	private long _smallImageId;
+	private long _originalSmallImageId;
+	private boolean _setOriginalSmallImageId;
 	private String _smallImageURL;
 	private boolean _mediumImage;
 	private long _mediumImageId;
+	private long _originalMediumImageId;
+	private boolean _setOriginalMediumImageId;
 	private String _mediumImageURL;
 	private boolean _largeImage;
 	private long _largeImageId;
+	private long _originalLargeImageId;
+	private boolean _setOriginalLargeImageId;
 	private String _largeImageURL;
 	private transient ExpandoBridge _expandoBridge;
 }

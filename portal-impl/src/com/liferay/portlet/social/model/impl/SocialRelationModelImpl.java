@@ -90,7 +90,10 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.social.model.SocialRelation"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.social.model.SocialRelation"),
 			true);
 
@@ -141,7 +144,7 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation> {
 	}
 
 	public void setUuid(String uuid) {
-		if ((uuid != null) && (uuid != _uuid)) {
+		if ((uuid != null) && !uuid.equals(_uuid)) {
 			_uuid = uuid;
 		}
 	}
@@ -186,7 +189,17 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation> {
 	public void setUserId1(long userId1) {
 		if (userId1 != _userId1) {
 			_userId1 = userId1;
+
+			if (!_setOriginalUserId1) {
+				_setOriginalUserId1 = true;
+
+				_originalUserId1 = userId1;
+			}
 		}
+	}
+
+	public long getOriginalUserId1() {
+		return _originalUserId1;
 	}
 
 	public long getUserId2() {
@@ -196,7 +209,17 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation> {
 	public void setUserId2(long userId2) {
 		if (userId2 != _userId2) {
 			_userId2 = userId2;
+
+			if (!_setOriginalUserId2) {
+				_setOriginalUserId2 = true;
+
+				_originalUserId2 = userId2;
+			}
 		}
+	}
+
+	public long getOriginalUserId2() {
+		return _originalUserId2;
 	}
 
 	public int getType() {
@@ -206,7 +229,17 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation> {
 	public void setType(int type) {
 		if (type != _type) {
 			_type = type;
+
+			if (!_setOriginalType) {
+				_setOriginalType = true;
+
+				_originalType = type;
+			}
 		}
+	}
+
+	public int getOriginalType() {
+		return _originalType;
 	}
 
 	public SocialRelation toEscapedModel() {
@@ -305,7 +338,13 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation> {
 	private long _companyId;
 	private Date _createDate;
 	private long _userId1;
+	private long _originalUserId1;
+	private boolean _setOriginalUserId1;
 	private long _userId2;
+	private long _originalUserId2;
+	private boolean _setOriginalUserId2;
 	private int _type;
+	private int _originalType;
+	private boolean _setOriginalType;
 	private transient ExpandoBridge _expandoBridge;
 }

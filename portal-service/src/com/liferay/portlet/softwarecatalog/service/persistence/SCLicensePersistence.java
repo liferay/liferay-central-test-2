@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface SCLicensePersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> scLicenses);
+
 	public com.liferay.portlet.softwarecatalog.model.SCLicense create(
 		long licenseId);
 

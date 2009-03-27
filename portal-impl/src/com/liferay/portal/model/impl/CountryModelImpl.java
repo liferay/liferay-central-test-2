@@ -88,7 +88,10 @@ public class CountryModelImpl extends BaseModelImpl<Country> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portal.model.Country"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Country"),
 			true);
 
@@ -153,7 +156,15 @@ public class CountryModelImpl extends BaseModelImpl<Country> {
 				((name != null) && (_name == null)) ||
 				((name != null) && (_name != null) && !name.equals(_name))) {
 			_name = name;
+
+			if (_originalName == null) {
+				_originalName = name;
+			}
 		}
+	}
+
+	public String getOriginalName() {
+		return GetterUtil.getString(_originalName);
 	}
 
 	public String getA2() {
@@ -164,7 +175,15 @@ public class CountryModelImpl extends BaseModelImpl<Country> {
 		if (((a2 == null) && (_a2 != null)) || ((a2 != null) && (_a2 == null)) ||
 				((a2 != null) && (_a2 != null) && !a2.equals(_a2))) {
 			_a2 = a2;
+
+			if (_originalA2 == null) {
+				_originalA2 = a2;
+			}
 		}
+	}
+
+	public String getOriginalA2() {
+		return GetterUtil.getString(_originalA2);
 	}
 
 	public String getA3() {
@@ -175,7 +194,15 @@ public class CountryModelImpl extends BaseModelImpl<Country> {
 		if (((a3 == null) && (_a3 != null)) || ((a3 != null) && (_a3 == null)) ||
 				((a3 != null) && (_a3 != null) && !a3.equals(_a3))) {
 			_a3 = a3;
+
+			if (_originalA3 == null) {
+				_originalA3 = a3;
+			}
 		}
+	}
+
+	public String getOriginalA3() {
+		return GetterUtil.getString(_originalA3);
 	}
 
 	public String getNumber() {
@@ -308,8 +335,11 @@ public class CountryModelImpl extends BaseModelImpl<Country> {
 
 	private long _countryId;
 	private String _name;
+	private String _originalName;
 	private String _a2;
+	private String _originalA2;
 	private String _a3;
+	private String _originalA3;
 	private String _number;
 	private String _idd;
 	private boolean _active;

@@ -92,7 +92,10 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.expando.model.ExpandoValue"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.expando.model.ExpandoValue"),
 			true);
 
@@ -166,7 +169,17 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue> {
 	public void setTableId(long tableId) {
 		if (tableId != _tableId) {
 			_tableId = tableId;
+
+			if (!_setOriginalTableId) {
+				_setOriginalTableId = true;
+
+				_originalTableId = tableId;
+			}
 		}
+	}
+
+	public long getOriginalTableId() {
+		return _originalTableId;
 	}
 
 	public long getColumnId() {
@@ -176,7 +189,17 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue> {
 	public void setColumnId(long columnId) {
 		if (columnId != _columnId) {
 			_columnId = columnId;
+
+			if (!_setOriginalColumnId) {
+				_setOriginalColumnId = true;
+
+				_originalColumnId = columnId;
+			}
 		}
+	}
+
+	public long getOriginalColumnId() {
+		return _originalColumnId;
 	}
 
 	public long getRowId() {
@@ -186,7 +209,17 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue> {
 	public void setRowId(long rowId) {
 		if (rowId != _rowId) {
 			_rowId = rowId;
+
+			if (!_setOriginalRowId) {
+				_setOriginalRowId = true;
+
+				_originalRowId = rowId;
+			}
 		}
+	}
+
+	public long getOriginalRowId() {
+		return _originalRowId;
 	}
 
 	public String getClassName() {
@@ -350,8 +383,14 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue> {
 	private long _valueId;
 	private long _companyId;
 	private long _tableId;
+	private long _originalTableId;
+	private boolean _setOriginalTableId;
 	private long _columnId;
+	private long _originalColumnId;
+	private boolean _setOriginalColumnId;
 	private long _rowId;
+	private long _originalRowId;
+	private boolean _setOriginalRowId;
 	private long _classNameId;
 	private long _classPK;
 	private String _data;

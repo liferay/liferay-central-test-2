@@ -25,7 +25,9 @@ package com.liferay.portlet.bookmarks.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -60,6 +62,66 @@ import java.util.List;
  */
 public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 	implements BookmarksEntryPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = BookmarksEntry.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = BookmarksEntry.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(BookmarksEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BookmarksEntryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByUuid",
+			new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_UUID = new FinderPath(BookmarksEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BookmarksEntryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByUuid",
+			new String[] {
+				String.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_UUID = new FinderPath(BookmarksEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BookmarksEntryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByUuid",
+			new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_FOLDERID = new FinderPath(BookmarksEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BookmarksEntryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByFolderId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_FOLDERID = new FinderPath(BookmarksEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BookmarksEntryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByFolderId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_FOLDERID = new FinderPath(BookmarksEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BookmarksEntryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByFolderId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(BookmarksEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BookmarksEntryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(BookmarksEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BookmarksEntryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
+
+	public void cacheResult(BookmarksEntry bookmarksEntry) {
+		EntityCacheUtil.putResult(BookmarksEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BookmarksEntry.class, bookmarksEntry.getPrimaryKey(), bookmarksEntry);
+	}
+
+	public void cacheResult(List<BookmarksEntry> bookmarksEntries) {
+		for (BookmarksEntry bookmarksEntry : bookmarksEntries) {
+			if (EntityCacheUtil.getResult(
+						BookmarksEntryModelImpl.ENTITY_CACHE_ENABLED,
+						BookmarksEntry.class, bookmarksEntry.getPrimaryKey(),
+						this) == null) {
+				cacheResult(bookmarksEntry);
+			}
+		}
+	}
+
 	public BookmarksEntry create(long entryId) {
 		BookmarksEntry bookmarksEntry = new BookmarksEntryImpl();
 
@@ -140,17 +202,22 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 			session.delete(bookmarksEntry);
 
 			session.flush();
-
-			return bookmarksEntry;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(BookmarksEntry.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		BookmarksEntryModelImpl bookmarksEntryModelImpl = (BookmarksEntryModelImpl)bookmarksEntry;
+
+		EntityCacheUtil.removeResult(BookmarksEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BookmarksEntry.class, bookmarksEntry.getPrimaryKey());
+
+		return bookmarksEntry;
 	}
 
 	/**
@@ -209,6 +276,8 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 	public BookmarksEntry updateImpl(
 		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry,
 		boolean merge) throws SystemException {
+		boolean isNew = bookmarksEntry.isNew();
+
 		if (Validator.isNull(bookmarksEntry.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
 
@@ -223,17 +292,22 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, bookmarksEntry, merge);
 
 			bookmarksEntry.setNew(false);
-
-			return bookmarksEntry;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(BookmarksEntry.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		BookmarksEntryModelImpl bookmarksEntryModelImpl = (BookmarksEntryModelImpl)bookmarksEntry;
+
+		EntityCacheUtil.putResult(BookmarksEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BookmarksEntry.class, bookmarksEntry.getPrimaryKey(), bookmarksEntry);
+
+		return bookmarksEntry;
 	}
 
 	public BookmarksEntry findByPrimaryKey(long entryId)
@@ -255,36 +329,40 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 
 	public BookmarksEntry fetchByPrimaryKey(long entryId)
 		throws SystemException {
-		Session session = null;
+		BookmarksEntry result = (BookmarksEntry)EntityCacheUtil.getResult(BookmarksEntryModelImpl.ENTITY_CACHE_ENABLED,
+				BookmarksEntry.class, entryId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (BookmarksEntry)session.get(BookmarksEntryImpl.class,
-				new Long(entryId));
+			try {
+				session = openSession();
+
+				BookmarksEntry bookmarksEntry = (BookmarksEntry)session.get(BookmarksEntryImpl.class,
+						new Long(entryId));
+
+				cacheResult(bookmarksEntry);
+
+				return bookmarksEntry;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (BookmarksEntry)result;
 		}
 	}
 
 	public List<BookmarksEntry> findByUuid(String uuid)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = BookmarksEntryModelImpl.CACHE_ENABLED;
-		String finderClassName = BookmarksEntry.class.getName();
-		String finderMethodName = "findByUuid";
-		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { uuid };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -321,9 +399,10 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 
 				List<BookmarksEntry> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
+					list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -346,27 +425,14 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<BookmarksEntry> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = BookmarksEntryModelImpl.CACHE_ENABLED;
-		String finderClassName = BookmarksEntry.class.getName();
-		String finderMethodName = "findByUuid";
-		String[] finderParams = new String[] {
-				String.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -411,9 +477,10 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 				List<BookmarksEntry> list = (List<BookmarksEntry>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -433,7 +500,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchEntryException, SystemException {
 		List<BookmarksEntry> list = findByUuid(uuid, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BookmarksEntry exists with the key {");
@@ -455,7 +522,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 
 		List<BookmarksEntry> list = findByUuid(uuid, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BookmarksEntry exists with the key {");
@@ -537,18 +604,10 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<BookmarksEntry> findByFolderId(long folderId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = BookmarksEntryModelImpl.CACHE_ENABLED;
-		String finderClassName = BookmarksEntry.class.getName();
-		String finderMethodName = "findByFolderId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(folderId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_FOLDERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -578,9 +637,10 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 
 				List<BookmarksEntry> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_FOLDERID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -603,27 +663,14 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<BookmarksEntry> findByFolderId(long folderId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = BookmarksEntryModelImpl.CACHE_ENABLED;
-		String finderClassName = BookmarksEntry.class.getName();
-		String finderMethodName = "findByFolderId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(folderId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_FOLDERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -661,9 +708,10 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 				List<BookmarksEntry> list = (List<BookmarksEntry>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_FOLDERID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -683,7 +731,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchEntryException, SystemException {
 		List<BookmarksEntry> list = findByFolderId(folderId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BookmarksEntry exists with the key {");
@@ -706,7 +754,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 		List<BookmarksEntry> list = findByFolderId(folderId, count - 1, count,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BookmarksEntry exists with the key {");
@@ -831,23 +879,12 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<BookmarksEntry> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = BookmarksEntryModelImpl.CACHE_ENABLED;
-		String finderClassName = BookmarksEntry.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -887,9 +924,9 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -924,18 +961,10 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByUuid(String uuid) throws SystemException {
-		boolean finderClassNameCacheEnabled = BookmarksEntryModelImpl.CACHE_ENABLED;
-		String finderClassName = BookmarksEntry.class.getName();
-		String finderMethodName = "countByUuid";
-		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { uuid };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -978,8 +1007,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -997,18 +1025,10 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByFolderId(long folderId) throws SystemException {
-		boolean finderClassNameCacheEnabled = BookmarksEntryModelImpl.CACHE_ENABLED;
-		String finderClassName = BookmarksEntry.class.getName();
-		String finderMethodName = "countByFolderId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(folderId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_FOLDERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1044,8 +1064,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_FOLDERID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1063,18 +1082,10 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = BookmarksEntryModelImpl.CACHE_ENABLED;
-		String finderClassName = BookmarksEntry.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1097,9 +1108,8 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

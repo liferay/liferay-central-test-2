@@ -29,6 +29,16 @@ package com.liferay.portlet.tags.service.persistence;
  *
  */
 public class TagsAssetUtil {
+	public static void cacheResult(
+		com.liferay.portlet.tags.model.TagsAsset tagsAsset) {
+		getPersistence().cacheResult(tagsAsset);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.tags.model.TagsAsset> tagsAssets) {
+		getPersistence().cacheResult(tagsAssets);
+	}
+
 	public static com.liferay.portlet.tags.model.TagsAsset create(long assetId) {
 		return getPersistence().create(assetId);
 	}

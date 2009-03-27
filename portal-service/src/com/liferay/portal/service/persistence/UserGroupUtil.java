@@ -29,6 +29,15 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class UserGroupUtil {
+	public static void cacheResult(com.liferay.portal.model.UserGroup userGroup) {
+		getPersistence().cacheResult(userGroup);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.UserGroup> userGroups) {
+		getPersistence().cacheResult(userGroups);
+	}
+
 	public static com.liferay.portal.model.UserGroup create(long userGroupId) {
 		return getPersistence().create(userGroupId);
 	}

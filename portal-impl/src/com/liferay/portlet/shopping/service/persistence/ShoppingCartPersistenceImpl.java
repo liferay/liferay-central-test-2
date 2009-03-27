@@ -25,7 +25,9 @@ package com.liferay.portlet.shopping.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -58,6 +60,75 @@ import java.util.List;
  */
 public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 	implements ShoppingCartPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = ShoppingCart.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = ShoppingCart.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(ShoppingCartModelImpl.ENTITY_CACHE_ENABLED,
+			ShoppingCartModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByGroupId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_GROUPID = new FinderPath(ShoppingCartModelImpl.ENTITY_CACHE_ENABLED,
+			ShoppingCartModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByGroupId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(ShoppingCartModelImpl.ENTITY_CACHE_ENABLED,
+			ShoppingCartModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByGroupId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_USERID = new FinderPath(ShoppingCartModelImpl.ENTITY_CACHE_ENABLED,
+			ShoppingCartModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByUserId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_USERID = new FinderPath(ShoppingCartModelImpl.ENTITY_CACHE_ENABLED,
+			ShoppingCartModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByUserId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_USERID = new FinderPath(ShoppingCartModelImpl.ENTITY_CACHE_ENABLED,
+			ShoppingCartModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByUserId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_G_U = new FinderPath(ShoppingCartModelImpl.ENTITY_CACHE_ENABLED,
+			ShoppingCartModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByG_U",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_U = new FinderPath(ShoppingCartModelImpl.ENTITY_CACHE_ENABLED,
+			ShoppingCartModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByG_U",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(ShoppingCartModelImpl.ENTITY_CACHE_ENABLED,
+			ShoppingCartModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(ShoppingCartModelImpl.ENTITY_CACHE_ENABLED,
+			ShoppingCartModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countAll", new String[0]);
+
+	public void cacheResult(ShoppingCart shoppingCart) {
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
+			new Object[] {
+				new Long(shoppingCart.getGroupId()),
+				new Long(shoppingCart.getUserId())
+			}, shoppingCart);
+
+		EntityCacheUtil.putResult(ShoppingCartModelImpl.ENTITY_CACHE_ENABLED,
+			ShoppingCart.class, shoppingCart.getPrimaryKey(), shoppingCart);
+	}
+
+	public void cacheResult(List<ShoppingCart> shoppingCarts) {
+		for (ShoppingCart shoppingCart : shoppingCarts) {
+			if (EntityCacheUtil.getResult(
+						ShoppingCartModelImpl.ENTITY_CACHE_ENABLED,
+						ShoppingCart.class, shoppingCart.getPrimaryKey(), this) == null) {
+				cacheResult(shoppingCart);
+			}
+		}
+	}
+
 	public ShoppingCart create(long cartId) {
 		ShoppingCart shoppingCart = new ShoppingCartImpl();
 
@@ -134,17 +205,28 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 			session.delete(shoppingCart);
 
 			session.flush();
-
-			return shoppingCart;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(ShoppingCart.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		ShoppingCartModelImpl shoppingCartModelImpl = (ShoppingCartModelImpl)shoppingCart;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U,
+			new Object[] {
+				new Long(shoppingCartModelImpl.getOriginalGroupId()),
+				new Long(shoppingCartModelImpl.getOriginalUserId())
+			});
+
+		EntityCacheUtil.removeResult(ShoppingCartModelImpl.ENTITY_CACHE_ENABLED,
+			ShoppingCart.class, shoppingCart.getPrimaryKey());
+
+		return shoppingCart;
 	}
 
 	/**
@@ -203,6 +285,8 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 	public ShoppingCart updateImpl(
 		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart,
 		boolean merge) throws SystemException {
+		boolean isNew = shoppingCart.isNew();
+
 		Session session = null;
 
 		try {
@@ -211,17 +295,42 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, shoppingCart, merge);
 
 			shoppingCart.setNew(false);
-
-			return shoppingCart;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(ShoppingCart.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		ShoppingCartModelImpl shoppingCartModelImpl = (ShoppingCartModelImpl)shoppingCart;
+
+		if (!isNew &&
+				((shoppingCart.getGroupId() != shoppingCartModelImpl.getOriginalGroupId()) ||
+				(shoppingCart.getUserId() != shoppingCartModelImpl.getOriginalUserId()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U,
+				new Object[] {
+					new Long(shoppingCartModelImpl.getOriginalGroupId()),
+					new Long(shoppingCartModelImpl.getOriginalUserId())
+				});
+		}
+
+		if (isNew ||
+				((shoppingCart.getGroupId() != shoppingCartModelImpl.getOriginalGroupId()) ||
+				(shoppingCart.getUserId() != shoppingCartModelImpl.getOriginalUserId()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
+				new Object[] {
+					new Long(shoppingCart.getGroupId()),
+					new Long(shoppingCart.getUserId())
+				}, shoppingCart);
+		}
+
+		EntityCacheUtil.putResult(ShoppingCartModelImpl.ENTITY_CACHE_ENABLED,
+			ShoppingCart.class, shoppingCart.getPrimaryKey(), shoppingCart);
+
+		return shoppingCart;
 	}
 
 	public ShoppingCart findByPrimaryKey(long cartId)
@@ -243,36 +352,40 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 
 	public ShoppingCart fetchByPrimaryKey(long cartId)
 		throws SystemException {
-		Session session = null;
+		ShoppingCart result = (ShoppingCart)EntityCacheUtil.getResult(ShoppingCartModelImpl.ENTITY_CACHE_ENABLED,
+				ShoppingCart.class, cartId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (ShoppingCart)session.get(ShoppingCartImpl.class,
-				new Long(cartId));
+			try {
+				session = openSession();
+
+				ShoppingCart shoppingCart = (ShoppingCart)session.get(ShoppingCartImpl.class,
+						new Long(cartId));
+
+				cacheResult(shoppingCart);
+
+				return shoppingCart;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (ShoppingCart)result;
 		}
 	}
 
 	public List<ShoppingCart> findByGroupId(long groupId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = ShoppingCartModelImpl.CACHE_ENABLED;
-		String finderClassName = ShoppingCart.class.getName();
-		String finderMethodName = "findByGroupId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -297,9 +410,10 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 
 				List<ShoppingCart> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -322,27 +436,14 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 
 	public List<ShoppingCart> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = ShoppingCartModelImpl.CACHE_ENABLED;
-		String finderClassName = ShoppingCart.class.getName();
-		String finderMethodName = "findByGroupId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -373,9 +474,10 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 				List<ShoppingCart> list = (List<ShoppingCart>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -395,7 +497,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchCartException, SystemException {
 		List<ShoppingCart> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ShoppingCart exists with the key {");
@@ -417,7 +519,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 
 		List<ShoppingCart> list = findByGroupId(groupId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ShoppingCart exists with the key {");
@@ -485,18 +587,10 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 
 	public List<ShoppingCart> findByUserId(long userId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = ShoppingCartModelImpl.CACHE_ENABLED;
-		String finderClassName = ShoppingCart.class.getName();
-		String finderMethodName = "findByUserId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -521,9 +615,10 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 
 				List<ShoppingCart> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -546,27 +641,14 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 
 	public List<ShoppingCart> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = ShoppingCartModelImpl.CACHE_ENABLED;
-		String finderClassName = ShoppingCart.class.getName();
-		String finderMethodName = "findByUserId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -597,9 +679,10 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 				List<ShoppingCart> list = (List<ShoppingCart>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -619,7 +702,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchCartException, SystemException {
 		List<ShoppingCart> list = findByUserId(userId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ShoppingCart exists with the key {");
@@ -641,7 +724,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 
 		List<ShoppingCart> list = findByUserId(userId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ShoppingCart exists with the key {");
@@ -735,20 +818,10 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 
 	public ShoppingCart fetchByG_U(long groupId, long userId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = ShoppingCartModelImpl.CACHE_ENABLED;
-		String finderClassName = ShoppingCart.class.getName();
-		String finderMethodName = "fetchByG_U";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_U,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -779,16 +852,19 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 
 				List<ShoppingCart> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				ShoppingCart shoppingCart = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					shoppingCart = list.get(0);
+
+					cacheResult(shoppingCart);
 				}
+
+				return shoppingCart;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -798,13 +874,11 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<ShoppingCart> list = (List<ShoppingCart>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (ShoppingCart)result;
 			}
 		}
 	}
@@ -860,23 +934,12 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 
 	public List<ShoppingCart> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = ShoppingCartModelImpl.CACHE_ENABLED;
-		String finderClassName = ShoppingCart.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -909,9 +972,9 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -953,18 +1016,10 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		boolean finderClassNameCacheEnabled = ShoppingCartModelImpl.CACHE_ENABLED;
-		String finderClassName = ShoppingCart.class.getName();
-		String finderMethodName = "countByGroupId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1000,8 +1055,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1019,18 +1073,10 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByUserId(long userId) throws SystemException {
-		boolean finderClassNameCacheEnabled = ShoppingCartModelImpl.CACHE_ENABLED;
-		String finderClassName = ShoppingCart.class.getName();
-		String finderMethodName = "countByUserId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1066,8 +1112,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1085,20 +1130,10 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByG_U(long groupId, long userId) throws SystemException {
-		boolean finderClassNameCacheEnabled = ShoppingCartModelImpl.CACHE_ENABLED;
-		String finderClassName = ShoppingCart.class.getName();
-		String finderMethodName = "countByG_U";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_U,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1140,9 +1175,8 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_U, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -1159,18 +1193,10 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = ShoppingCartModelImpl.CACHE_ENABLED;
-		String finderClassName = ShoppingCart.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1193,9 +1219,8 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

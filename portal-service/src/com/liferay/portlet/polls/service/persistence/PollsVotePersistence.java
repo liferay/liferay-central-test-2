@@ -31,6 +31,11 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface PollsVotePersistence extends BasePersistence {
+	public void cacheResult(com.liferay.portlet.polls.model.PollsVote pollsVote);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.polls.model.PollsVote> pollsVotes);
+
 	public com.liferay.portlet.polls.model.PollsVote create(long voteId);
 
 	public com.liferay.portlet.polls.model.PollsVote remove(long voteId)

@@ -29,6 +29,11 @@ package com.liferay.portal.service.persistence;
  *
  */
 public interface ListTypePersistence extends BasePersistence {
+	public void cacheResult(com.liferay.portal.model.ListType listType);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portal.model.ListType> listTypes);
+
 	public com.liferay.portal.model.ListType create(int listTypeId);
 
 	public com.liferay.portal.model.ListType remove(int listTypeId)

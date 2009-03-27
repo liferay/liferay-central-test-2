@@ -30,7 +30,9 @@ import com.liferay.portal.kernel.dao.jdbc.RowMapper;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -67,6 +69,98 @@ import java.util.List;
  */
 public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 	implements SCProductEntryPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = SCProductEntry.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = SCProductEntry.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SCProductEntryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByGroupId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_GROUPID = new FinderPath(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SCProductEntryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByGroupId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SCProductEntryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByGroupId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SCProductEntryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByCompanyId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_COMPANYID = new FinderPath(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SCProductEntryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByCompanyId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SCProductEntryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByCompanyId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_G_U = new FinderPath(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SCProductEntryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByG_U",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_U = new FinderPath(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SCProductEntryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByG_U",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_U = new FinderPath(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SCProductEntryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByG_U",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_RG_RA = new FinderPath(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SCProductEntryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByRG_RA",
+			new String[] { String.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_RG_RA = new FinderPath(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SCProductEntryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByRG_RA",
+			new String[] { String.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SCProductEntryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SCProductEntryModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
+
+	public void cacheResult(SCProductEntry scProductEntry) {
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_RG_RA,
+			new Object[] {
+				scProductEntry.getRepoGroupId(),
+				
+			scProductEntry.getRepoArtifactId()
+			}, scProductEntry);
+
+		EntityCacheUtil.putResult(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SCProductEntry.class, scProductEntry.getPrimaryKey(), scProductEntry);
+	}
+
+	public void cacheResult(List<SCProductEntry> scProductEntries) {
+		for (SCProductEntry scProductEntry : scProductEntries) {
+			if (EntityCacheUtil.getResult(
+						SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
+						SCProductEntry.class, scProductEntry.getPrimaryKey(),
+						this) == null) {
+				cacheResult(scProductEntry);
+			}
+		}
+	}
+
 	public SCProductEntry create(long productEntryId) {
 		SCProductEntry scProductEntry = new SCProductEntryImpl();
 
@@ -154,17 +248,29 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 			session.delete(scProductEntry);
 
 			session.flush();
-
-			return scProductEntry;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(SCProductEntry.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		SCProductEntryModelImpl scProductEntryModelImpl = (SCProductEntryModelImpl)scProductEntry;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_RG_RA,
+			new Object[] {
+				scProductEntryModelImpl.getOriginalRepoGroupId(),
+				
+			scProductEntryModelImpl.getOriginalRepoArtifactId()
+			});
+
+		EntityCacheUtil.removeResult(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SCProductEntry.class, scProductEntry.getPrimaryKey());
+
+		return scProductEntry;
 	}
 
 	/**
@@ -223,7 +329,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 	public SCProductEntry updateImpl(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry,
 		boolean merge) throws SystemException {
-		FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
+		boolean isNew = scProductEntry.isNew();
 
 		Session session = null;
 
@@ -233,17 +339,48 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, scProductEntry, merge);
 
 			scProductEntry.setNew(false);
-
-			return scProductEntry;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(SCProductEntry.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		SCProductEntryModelImpl scProductEntryModelImpl = (SCProductEntryModelImpl)scProductEntry;
+
+		if (!isNew &&
+				(!scProductEntry.getRepoGroupId()
+									.equals(scProductEntryModelImpl.getOriginalRepoGroupId()) ||
+				!scProductEntry.getRepoArtifactId()
+								   .equals(scProductEntryModelImpl.getOriginalRepoArtifactId()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_RG_RA,
+				new Object[] {
+					scProductEntryModelImpl.getOriginalRepoGroupId(),
+					
+				scProductEntryModelImpl.getOriginalRepoArtifactId()
+				});
+		}
+
+		if (isNew ||
+				(!scProductEntry.getRepoGroupId()
+									.equals(scProductEntryModelImpl.getOriginalRepoGroupId()) ||
+				!scProductEntry.getRepoArtifactId()
+								   .equals(scProductEntryModelImpl.getOriginalRepoArtifactId()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_RG_RA,
+				new Object[] {
+					scProductEntry.getRepoGroupId(),
+					
+				scProductEntry.getRepoArtifactId()
+				}, scProductEntry);
+		}
+
+		EntityCacheUtil.putResult(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SCProductEntry.class, scProductEntry.getPrimaryKey(), scProductEntry);
+
+		return scProductEntry;
 	}
 
 	public SCProductEntry findByPrimaryKey(long productEntryId)
@@ -266,36 +403,40 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 	public SCProductEntry fetchByPrimaryKey(long productEntryId)
 		throws SystemException {
-		Session session = null;
+		SCProductEntry result = (SCProductEntry)EntityCacheUtil.getResult(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
+				SCProductEntry.class, productEntryId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (SCProductEntry)session.get(SCProductEntryImpl.class,
-				new Long(productEntryId));
+			try {
+				session = openSession();
+
+				SCProductEntry scProductEntry = (SCProductEntry)session.get(SCProductEntryImpl.class,
+						new Long(productEntryId));
+
+				cacheResult(scProductEntry);
+
+				return scProductEntry;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (SCProductEntry)result;
 		}
 	}
 
 	public List<SCProductEntry> findByGroupId(long groupId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED;
-		String finderClassName = SCProductEntry.class.getName();
-		String finderMethodName = "findByGroupId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -325,9 +466,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 				List<SCProductEntry> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -350,27 +492,14 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<SCProductEntry> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED;
-		String finderClassName = SCProductEntry.class.getName();
-		String finderMethodName = "findByGroupId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -408,9 +537,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 				List<SCProductEntry> list = (List<SCProductEntry>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -431,7 +561,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchProductEntryException, SystemException {
 		List<SCProductEntry> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCProductEntry exists with the key {");
@@ -453,7 +583,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 		List<SCProductEntry> list = findByGroupId(groupId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCProductEntry exists with the key {");
@@ -529,18 +659,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<SCProductEntry> findByCompanyId(long companyId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED;
-		String finderClassName = SCProductEntry.class.getName();
-		String finderMethodName = "findByCompanyId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -570,9 +692,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 				List<SCProductEntry> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -595,27 +718,14 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<SCProductEntry> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED;
-		String finderClassName = SCProductEntry.class.getName();
-		String finderMethodName = "findByCompanyId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -653,9 +763,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 				List<SCProductEntry> list = (List<SCProductEntry>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -676,7 +787,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchProductEntryException, SystemException {
 		List<SCProductEntry> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCProductEntry exists with the key {");
@@ -700,7 +811,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		List<SCProductEntry> list = findByCompanyId(companyId, count - 1,
 				count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCProductEntry exists with the key {");
@@ -776,20 +887,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<SCProductEntry> findByG_U(long groupId, long userId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED;
-		String finderClassName = SCProductEntry.class.getName();
-		String finderMethodName = "findByG_U";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_U,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -825,9 +926,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 				List<SCProductEntry> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_U, finderArgs,
+					list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -850,27 +952,14 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<SCProductEntry> findByG_U(long groupId, long userId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED;
-		String finderClassName = SCProductEntry.class.getName();
-		String finderMethodName = "findByG_U";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(userId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_U,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -914,9 +1003,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 				List<SCProductEntry> list = (List<SCProductEntry>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_U,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -937,7 +1027,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchProductEntryException, SystemException {
 		List<SCProductEntry> list = findByG_U(groupId, userId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCProductEntry exists with the key {");
@@ -964,7 +1054,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		List<SCProductEntry> list = findByG_U(groupId, userId, count - 1,
 				count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCProductEntry exists with the key {");
@@ -1075,20 +1165,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 	public SCProductEntry fetchByRG_RA(String repoGroupId, String repoArtifactId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED;
-		String finderClassName = SCProductEntry.class.getName();
-		String finderMethodName = "fetchByRG_RA";
-		String[] finderParams = new String[] {
-				String.class.getName(), String.class.getName()
-			};
 		Object[] finderArgs = new Object[] { repoGroupId, repoArtifactId };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_RG_RA,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1138,16 +1218,19 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 				List<SCProductEntry> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				SCProductEntry scProductEntry = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_RG_RA,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					scProductEntry = list.get(0);
+
+					cacheResult(scProductEntry);
 				}
+
+				return scProductEntry;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1157,13 +1240,11 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<SCProductEntry> list = (List<SCProductEntry>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (SCProductEntry)result;
 			}
 		}
 	}
@@ -1219,23 +1300,12 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<SCProductEntry> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED;
-		String finderClassName = SCProductEntry.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1275,9 +1345,9 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1326,18 +1396,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED;
-		String finderClassName = SCProductEntry.class.getName();
-		String finderMethodName = "countByGroupId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1373,8 +1435,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1392,18 +1453,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
-		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED;
-		String finderClassName = SCProductEntry.class.getName();
-		String finderMethodName = "countByCompanyId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1439,8 +1492,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_COMPANYID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1458,20 +1510,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByG_U(long groupId, long userId) throws SystemException {
-		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED;
-		String finderClassName = SCProductEntry.class.getName();
-		String finderMethodName = "countByG_U";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_U,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1513,9 +1555,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_U, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -1533,20 +1574,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 	public int countByRG_RA(String repoGroupId, String repoArtifactId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED;
-		String finderClassName = SCProductEntry.class.getName();
-		String finderMethodName = "countByRG_RA";
-		String[] finderParams = new String[] {
-				String.class.getName(), String.class.getName()
-			};
 		Object[] finderArgs = new Object[] { repoGroupId, repoArtifactId };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_RG_RA,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1602,8 +1633,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_RG_RA,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1621,18 +1651,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED;
-		String finderClassName = SCProductEntry.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1655,9 +1677,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -1683,29 +1704,24 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		return getSCLicenses(pk, start, end, null);
 	}
 
+	public static final FinderPath FINDER_PATH_GET_SCLICENSES = new FinderPath(com.liferay.portlet.softwarecatalog.model.impl.SCLicenseModelImpl.ENTITY_CACHE_ENABLED,
+			SCProductEntryModelImpl.FINDER_CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES,
+			"SCLicenses_SCProductEntries", "getSCLicenses",
+			new String[] {
+				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+
 	public List<com.liferay.portlet.softwarecatalog.model.SCLicense> getSCLicenses(
 		long pk, int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES;
-
-		String finderClassName = "SCLicenses_SCProductEntries";
-
-		String finderMethodName = "getSCLicenses";
-		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(pk), String.valueOf(start), String.valueOf(end),
 				String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_GET_SCLICENSES,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1742,9 +1758,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 				List<com.liferay.portlet.softwarecatalog.model.SCLicense> list = (List<com.liferay.portlet.softwarecatalog.model.SCLicense>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_GET_SCLICENSES,
 					finderArgs, list);
+
+				scLicensePersistence.cacheResult(list);
 
 				return list;
 			}
@@ -1760,21 +1777,16 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public static final FinderPath FINDER_PATH_GET_SCLICENSES_SIZE = new FinderPath(com.liferay.portlet.softwarecatalog.model.impl.SCLicenseModelImpl.ENTITY_CACHE_ENABLED,
+			SCProductEntryModelImpl.FINDER_CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES,
+			"SCLicenses_SCProductEntries", "getSCLicensesSize",
+			new String[] { Long.class.getName() });
+
 	public int getSCLicensesSize(long pk) throws SystemException {
-		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES;
-
-		String finderClassName = "SCLicenses_SCProductEntries";
-
-		String finderMethodName = "getSCLicensesSize";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(pk) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_GET_SCLICENSES_SIZE,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1802,8 +1814,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_GET_SCLICENSES_SIZE,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1820,34 +1831,24 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public static final FinderPath FINDER_PATH_CONTAINS_SCLICENSE = new FinderPath(com.liferay.portlet.softwarecatalog.model.impl.SCLicenseModelImpl.ENTITY_CACHE_ENABLED,
+			SCProductEntryModelImpl.FINDER_CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES,
+			"SCLicenses_SCProductEntries", "containsSCLicense",
+			new String[] { Long.class.getName(), Long.class.getName() });
+
 	public boolean containsSCLicense(long pk, long scLicensePK)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES;
-
-		String finderClassName = "SCLicenses_SCProductEntries";
-
-		String finderMethodName = "containsSCLicenses";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(pk), new Long(scLicensePK) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_SCLICENSE,
+				finderArgs, this);
 
 		if (result == null) {
 			try {
 				Boolean value = Boolean.valueOf(containsSCLicense.contains(pk,
 							scLicensePK));
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_CONTAINS_SCLICENSE,
 					finderArgs, value);
 
 				return value.booleanValue();

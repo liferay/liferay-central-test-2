@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface JournalArticleResourcePersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.journal.model.JournalArticleResource> journalArticleResources);
+
 	public com.liferay.portlet.journal.model.JournalArticleResource create(
 		long resourcePrimKey);
 

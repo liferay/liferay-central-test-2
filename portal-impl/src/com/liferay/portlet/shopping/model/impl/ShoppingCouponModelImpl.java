@@ -124,7 +124,10 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.shopping.model.ShoppingCoupon"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.shopping.model.ShoppingCoupon"),
 			true);
 
@@ -269,7 +272,15 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 				((code != null) && (_code == null)) ||
 				((code != null) && (_code != null) && !code.equals(_code))) {
 			_code = code;
+
+			if (_originalCode == null) {
+				_originalCode = code;
+			}
 		}
+	}
+
+	public String getOriginalCode() {
+		return GetterUtil.getString(_originalCode);
 	}
 
 	public String getName() {
@@ -516,6 +527,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _code;
+	private String _originalCode;
 	private String _name;
 	private String _description;
 	private Date _startDate;

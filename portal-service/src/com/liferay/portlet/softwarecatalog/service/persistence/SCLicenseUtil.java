@@ -29,6 +29,16 @@ package com.liferay.portlet.softwarecatalog.service.persistence;
  *
  */
 public class SCLicenseUtil {
+	public static void cacheResult(
+		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense) {
+		getPersistence().cacheResult(scLicense);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> scLicenses) {
+		getPersistence().cacheResult(scLicenses);
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense create(
 		long licenseId) {
 		return getPersistence().create(licenseId);

@@ -96,7 +96,10 @@ public class TagsPropertyModelImpl extends BaseModelImpl<TagsProperty> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.tags.model.TagsProperty"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.tags.model.TagsProperty"),
 			true);
 
@@ -220,7 +223,17 @@ public class TagsPropertyModelImpl extends BaseModelImpl<TagsProperty> {
 	public void setEntryId(long entryId) {
 		if (entryId != _entryId) {
 			_entryId = entryId;
+
+			if (!_setOriginalEntryId) {
+				_setOriginalEntryId = true;
+
+				_originalEntryId = entryId;
+			}
 		}
+	}
+
+	public long getOriginalEntryId() {
+		return _originalEntryId;
 	}
 
 	public String getKey() {
@@ -232,7 +245,15 @@ public class TagsPropertyModelImpl extends BaseModelImpl<TagsProperty> {
 				((key != null) && (_key == null)) ||
 				((key != null) && (_key != null) && !key.equals(_key))) {
 			_key = key;
+
+			if (_originalKey == null) {
+				_originalKey = key;
+			}
 		}
+	}
+
+	public String getOriginalKey() {
+		return GetterUtil.getString(_originalKey);
 	}
 
 	public String getValue() {
@@ -347,7 +368,10 @@ public class TagsPropertyModelImpl extends BaseModelImpl<TagsProperty> {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _entryId;
+	private long _originalEntryId;
+	private boolean _setOriginalEntryId;
 	private String _key;
+	private String _originalKey;
 	private String _value;
 	private transient ExpandoBridge _expandoBridge;
 }

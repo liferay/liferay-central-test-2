@@ -29,6 +29,16 @@ package com.liferay.portlet.documentlibrary.service.persistence;
  *
  */
 public class DLFileEntryUtil {
+	public static void cacheResult(
+		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry) {
+		getPersistence().cacheResult(dlFileEntry);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> dlFileEntries) {
+		getPersistence().cacheResult(dlFileEntries);
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry create(
 		long fileEntryId) {
 		return getPersistence().create(fileEntryId);

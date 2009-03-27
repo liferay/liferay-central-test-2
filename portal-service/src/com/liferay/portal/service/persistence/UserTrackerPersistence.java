@@ -29,6 +29,11 @@ package com.liferay.portal.service.persistence;
  *
  */
 public interface UserTrackerPersistence extends BasePersistence {
+	public void cacheResult(com.liferay.portal.model.UserTracker userTracker);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portal.model.UserTracker> userTrackers);
+
 	public com.liferay.portal.model.UserTracker create(long userTrackerId);
 
 	public com.liferay.portal.model.UserTracker remove(long userTrackerId)

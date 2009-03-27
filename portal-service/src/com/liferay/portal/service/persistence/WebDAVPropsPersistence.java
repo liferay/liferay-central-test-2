@@ -29,6 +29,11 @@ package com.liferay.portal.service.persistence;
  *
  */
 public interface WebDAVPropsPersistence extends BasePersistence {
+	public void cacheResult(com.liferay.portal.model.WebDAVProps webDAVProps);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portal.model.WebDAVProps> webDAVPropses);
+
 	public com.liferay.portal.model.WebDAVProps create(long webDavPropsId);
 
 	public com.liferay.portal.model.WebDAVProps remove(long webDavPropsId)

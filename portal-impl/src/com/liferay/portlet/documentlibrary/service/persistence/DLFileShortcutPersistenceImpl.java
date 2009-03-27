@@ -25,7 +25,9 @@ package com.liferay.portlet.documentlibrary.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -60,6 +62,83 @@ import java.util.List;
  */
 public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 	implements DLFileShortcutPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = DLFileShortcut.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = DLFileShortcut.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileShortcutModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByUuid",
+			new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_UUID = new FinderPath(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileShortcutModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByUuid",
+			new String[] {
+				String.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_UUID = new FinderPath(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileShortcutModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByUuid",
+			new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_FOLDERID = new FinderPath(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileShortcutModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByFolderId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_FOLDERID = new FinderPath(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileShortcutModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByFolderId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_FOLDERID = new FinderPath(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileShortcutModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByFolderId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_TF_TN = new FinderPath(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileShortcutModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByTF_TN",
+			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_TF_TN = new FinderPath(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileShortcutModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByTF_TN",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_TF_TN = new FinderPath(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileShortcutModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByTF_TN",
+			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileShortcutModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileShortcutModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
+
+	public void cacheResult(DLFileShortcut dlFileShortcut) {
+		EntityCacheUtil.putResult(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileShortcut.class, dlFileShortcut.getPrimaryKey(), dlFileShortcut);
+	}
+
+	public void cacheResult(List<DLFileShortcut> dlFileShortcuts) {
+		for (DLFileShortcut dlFileShortcut : dlFileShortcuts) {
+			if (EntityCacheUtil.getResult(
+						DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
+						DLFileShortcut.class, dlFileShortcut.getPrimaryKey(),
+						this) == null) {
+				cacheResult(dlFileShortcut);
+			}
+		}
+	}
+
 	public DLFileShortcut create(long fileShortcutId) {
 		DLFileShortcut dlFileShortcut = new DLFileShortcutImpl();
 
@@ -141,17 +220,22 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 			session.delete(dlFileShortcut);
 
 			session.flush();
-
-			return dlFileShortcut;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(DLFileShortcut.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		DLFileShortcutModelImpl dlFileShortcutModelImpl = (DLFileShortcutModelImpl)dlFileShortcut;
+
+		EntityCacheUtil.removeResult(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileShortcut.class, dlFileShortcut.getPrimaryKey());
+
+		return dlFileShortcut;
 	}
 
 	/**
@@ -210,6 +294,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 	public DLFileShortcut updateImpl(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut,
 		boolean merge) throws SystemException {
+		boolean isNew = dlFileShortcut.isNew();
+
 		if (Validator.isNull(dlFileShortcut.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
 
@@ -224,17 +310,22 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, dlFileShortcut, merge);
 
 			dlFileShortcut.setNew(false);
-
-			return dlFileShortcut;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(DLFileShortcut.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		DLFileShortcutModelImpl dlFileShortcutModelImpl = (DLFileShortcutModelImpl)dlFileShortcut;
+
+		EntityCacheUtil.putResult(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileShortcut.class, dlFileShortcut.getPrimaryKey(), dlFileShortcut);
+
+		return dlFileShortcut;
 	}
 
 	public DLFileShortcut findByPrimaryKey(long fileShortcutId)
@@ -257,36 +348,40 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 	public DLFileShortcut fetchByPrimaryKey(long fileShortcutId)
 		throws SystemException {
-		Session session = null;
+		DLFileShortcut result = (DLFileShortcut)EntityCacheUtil.getResult(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
+				DLFileShortcut.class, fileShortcutId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (DLFileShortcut)session.get(DLFileShortcutImpl.class,
-				new Long(fileShortcutId));
+			try {
+				session = openSession();
+
+				DLFileShortcut dlFileShortcut = (DLFileShortcut)session.get(DLFileShortcutImpl.class,
+						new Long(fileShortcutId));
+
+				cacheResult(dlFileShortcut);
+
+				return dlFileShortcut;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (DLFileShortcut)result;
 		}
 	}
 
 	public List<DLFileShortcut> findByUuid(String uuid)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFileShortcutModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFileShortcut.class.getName();
-		String finderMethodName = "findByUuid";
-		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { uuid };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -318,9 +413,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 				List<DLFileShortcut> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
+					list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -343,27 +439,14 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFileShortcut> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFileShortcutModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFileShortcut.class.getName();
-		String finderMethodName = "findByUuid";
-		String[] finderParams = new String[] {
-				String.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -401,9 +484,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 				List<DLFileShortcut> list = (List<DLFileShortcut>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -423,7 +507,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchFileShortcutException, SystemException {
 		List<DLFileShortcut> list = findByUuid(uuid, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileShortcut exists with the key {");
@@ -445,7 +529,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 		List<DLFileShortcut> list = findByUuid(uuid, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileShortcut exists with the key {");
@@ -521,18 +605,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFileShortcut> findByFolderId(long folderId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFileShortcutModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFileShortcut.class.getName();
-		String finderMethodName = "findByFolderId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(folderId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_FOLDERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -557,9 +633,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 				List<DLFileShortcut> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_FOLDERID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -582,27 +659,14 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFileShortcut> findByFolderId(long folderId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFileShortcutModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFileShortcut.class.getName();
-		String finderMethodName = "findByFolderId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(folderId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_FOLDERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -633,9 +697,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 				List<DLFileShortcut> list = (List<DLFileShortcut>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_FOLDERID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -656,7 +721,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchFileShortcutException, SystemException {
 		List<DLFileShortcut> list = findByFolderId(folderId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileShortcut exists with the key {");
@@ -680,7 +745,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 		List<DLFileShortcut> list = findByFolderId(folderId, count - 1, count,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileShortcut exists with the key {");
@@ -749,20 +814,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFileShortcut> findByTF_TN(long toFolderId, String toName)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFileShortcutModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFileShortcut.class.getName();
-		String finderMethodName = "findByTF_TN";
-		String[] finderParams = new String[] {
-				Long.class.getName(), String.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(toFolderId), toName };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_TF_TN,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -800,9 +855,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 				List<DLFileShortcut> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_TF_TN,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -825,15 +881,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFileShortcut> findByTF_TN(long toFolderId, String toName,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFileShortcutModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFileShortcut.class.getName();
-		String finderMethodName = "findByTF_TN";
-		String[] finderParams = new String[] {
-				Long.class.getName(), String.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(toFolderId),
 				
@@ -842,12 +889,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_TF_TN,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -891,9 +934,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 				List<DLFileShortcut> list = (List<DLFileShortcut>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_TF_TN,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -914,7 +958,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchFileShortcutException, SystemException {
 		List<DLFileShortcut> list = findByTF_TN(toFolderId, toName, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileShortcut exists with the key {");
@@ -941,7 +985,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 		List<DLFileShortcut> list = findByTF_TN(toFolderId, toName, count - 1,
 				count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileShortcut exists with the key {");
@@ -1075,23 +1119,12 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFileShortcut> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFileShortcutModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFileShortcut.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1124,9 +1157,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1168,18 +1201,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByUuid(String uuid) throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFileShortcutModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFileShortcut.class.getName();
-		String finderMethodName = "countByUuid";
-		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { uuid };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1222,8 +1247,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1241,18 +1265,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByFolderId(long folderId) throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFileShortcutModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFileShortcut.class.getName();
-		String finderMethodName = "countByFolderId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(folderId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_FOLDERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1288,8 +1304,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_FOLDERID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1308,20 +1323,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 	public int countByTF_TN(long toFolderId, String toName)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFileShortcutModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFileShortcut.class.getName();
-		String finderMethodName = "countByTF_TN";
-		String[] finderParams = new String[] {
-				Long.class.getName(), String.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(toFolderId), toName };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_TF_TN,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1370,8 +1375,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_TF_TN,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1389,18 +1393,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFileShortcutModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFileShortcut.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1423,9 +1419,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

@@ -29,6 +29,16 @@ package com.liferay.portlet.imagegallery.service.persistence;
  *
  */
 public class IGFolderUtil {
+	public static void cacheResult(
+		com.liferay.portlet.imagegallery.model.IGFolder igFolder) {
+		getPersistence().cacheResult(igFolder);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> igFolders) {
+		getPersistence().cacheResult(igFolders);
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGFolder create(
 		long folderId) {
 		return getPersistence().create(folderId);

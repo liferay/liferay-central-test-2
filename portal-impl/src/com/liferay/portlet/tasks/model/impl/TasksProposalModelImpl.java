@@ -111,7 +111,10 @@ public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.tasks.model.TasksProposal"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.tasks.model.TasksProposal"),
 			true);
 
@@ -257,7 +260,17 @@ public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal> {
 	public void setClassNameId(long classNameId) {
 		if (classNameId != _classNameId) {
 			_classNameId = classNameId;
+
+			if (!_setOriginalClassNameId) {
+				_setOriginalClassNameId = true;
+
+				_originalClassNameId = classNameId;
+			}
 		}
+	}
+
+	public long getOriginalClassNameId() {
+		return _originalClassNameId;
 	}
 
 	public String getClassPK() {
@@ -270,7 +283,15 @@ public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal> {
 				((classPK != null) && (_classPK != null) &&
 				!classPK.equals(_classPK))) {
 			_classPK = classPK;
+
+			if (_originalClassPK == null) {
+				_originalClassPK = classPK;
+			}
 		}
+	}
+
+	public String getOriginalClassPK() {
+		return GetterUtil.getString(_originalClassPK);
 	}
 
 	public String getName() {
@@ -440,7 +461,10 @@ public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal> {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _classNameId;
+	private long _originalClassNameId;
+	private boolean _setOriginalClassNameId;
 	private String _classPK;
+	private String _originalClassPK;
 	private String _name;
 	private String _description;
 	private Date _publishDate;

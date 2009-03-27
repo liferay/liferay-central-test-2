@@ -29,6 +29,16 @@ package com.liferay.portlet.tags.service.persistence;
  *
  */
 public class TagsSourceUtil {
+	public static void cacheResult(
+		com.liferay.portlet.tags.model.TagsSource tagsSource) {
+		getPersistence().cacheResult(tagsSource);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.tags.model.TagsSource> tagsSources) {
+		getPersistence().cacheResult(tagsSources);
+	}
+
 	public static com.liferay.portlet.tags.model.TagsSource create(
 		long sourceId) {
 		return getPersistence().create(sourceId);

@@ -29,6 +29,16 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class PasswordTrackerUtil {
+	public static void cacheResult(
+		com.liferay.portal.model.PasswordTracker passwordTracker) {
+		getPersistence().cacheResult(passwordTracker);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.PasswordTracker> passwordTrackers) {
+		getPersistence().cacheResult(passwordTrackers);
+	}
+
 	public static com.liferay.portal.model.PasswordTracker create(
 		long passwordTrackerId) {
 		return getPersistence().create(passwordTrackerId);

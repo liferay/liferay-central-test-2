@@ -25,7 +25,9 @@ package com.liferay.portlet.messageboards.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -58,6 +60,70 @@ import java.util.List;
  */
 public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 	implements MBDiscussionPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = MBDiscussion.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = MBDiscussion.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_CLASSNAMEID = new FinderPath(MBDiscussionModelImpl.ENTITY_CACHE_ENABLED,
+			MBDiscussionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByClassNameId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_CLASSNAMEID = new FinderPath(MBDiscussionModelImpl.ENTITY_CACHE_ENABLED,
+			MBDiscussionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByClassNameId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_CLASSNAMEID = new FinderPath(MBDiscussionModelImpl.ENTITY_CACHE_ENABLED,
+			MBDiscussionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByClassNameId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_THREADID = new FinderPath(MBDiscussionModelImpl.ENTITY_CACHE_ENABLED,
+			MBDiscussionModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByThreadId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_THREADID = new FinderPath(MBDiscussionModelImpl.ENTITY_CACHE_ENABLED,
+			MBDiscussionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByThreadId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_C_C = new FinderPath(MBDiscussionModelImpl.ENTITY_CACHE_ENABLED,
+			MBDiscussionModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByC_C",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_C = new FinderPath(MBDiscussionModelImpl.ENTITY_CACHE_ENABLED,
+			MBDiscussionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByC_C",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(MBDiscussionModelImpl.ENTITY_CACHE_ENABLED,
+			MBDiscussionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(MBDiscussionModelImpl.ENTITY_CACHE_ENABLED,
+			MBDiscussionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countAll", new String[0]);
+
+	public void cacheResult(MBDiscussion mbDiscussion) {
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_THREADID,
+			new Object[] { new Long(mbDiscussion.getThreadId()) }, mbDiscussion);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
+			new Object[] {
+				new Long(mbDiscussion.getClassNameId()),
+				new Long(mbDiscussion.getClassPK())
+			}, mbDiscussion);
+
+		EntityCacheUtil.putResult(MBDiscussionModelImpl.ENTITY_CACHE_ENABLED,
+			MBDiscussion.class, mbDiscussion.getPrimaryKey(), mbDiscussion);
+	}
+
+	public void cacheResult(List<MBDiscussion> mbDiscussions) {
+		for (MBDiscussion mbDiscussion : mbDiscussions) {
+			if (EntityCacheUtil.getResult(
+						MBDiscussionModelImpl.ENTITY_CACHE_ENABLED,
+						MBDiscussion.class, mbDiscussion.getPrimaryKey(), this) == null) {
+				cacheResult(mbDiscussion);
+			}
+		}
+	}
+
 	public MBDiscussion create(long discussionId) {
 		MBDiscussion mbDiscussion = new MBDiscussionImpl();
 
@@ -135,17 +201,31 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 			session.delete(mbDiscussion);
 
 			session.flush();
-
-			return mbDiscussion;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(MBDiscussion.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		MBDiscussionModelImpl mbDiscussionModelImpl = (MBDiscussionModelImpl)mbDiscussion;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_THREADID,
+			new Object[] { new Long(mbDiscussionModelImpl.getOriginalThreadId()) });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
+			new Object[] {
+				new Long(mbDiscussionModelImpl.getOriginalClassNameId()),
+				new Long(mbDiscussionModelImpl.getOriginalClassPK())
+			});
+
+		EntityCacheUtil.removeResult(MBDiscussionModelImpl.ENTITY_CACHE_ENABLED,
+			MBDiscussion.class, mbDiscussion.getPrimaryKey());
+
+		return mbDiscussion;
 	}
 
 	/**
@@ -204,6 +284,8 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 	public MBDiscussion updateImpl(
 		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion,
 		boolean merge) throws SystemException {
+		boolean isNew = mbDiscussion.isNew();
+
 		Session session = null;
 
 		try {
@@ -212,17 +294,57 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, mbDiscussion, merge);
 
 			mbDiscussion.setNew(false);
-
-			return mbDiscussion;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(MBDiscussion.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		MBDiscussionModelImpl mbDiscussionModelImpl = (MBDiscussionModelImpl)mbDiscussion;
+
+		if (!isNew &&
+				(mbDiscussion.getThreadId() != mbDiscussionModelImpl.getOriginalThreadId())) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_THREADID,
+				new Object[] {
+					new Long(mbDiscussionModelImpl.getOriginalThreadId())
+				});
+		}
+
+		if (isNew ||
+				(mbDiscussion.getThreadId() != mbDiscussionModelImpl.getOriginalThreadId())) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_THREADID,
+				new Object[] { new Long(mbDiscussion.getThreadId()) },
+				mbDiscussion);
+		}
+
+		if (!isNew &&
+				((mbDiscussion.getClassNameId() != mbDiscussionModelImpl.getOriginalClassNameId()) ||
+				(mbDiscussion.getClassPK() != mbDiscussionModelImpl.getOriginalClassPK()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
+				new Object[] {
+					new Long(mbDiscussionModelImpl.getOriginalClassNameId()),
+					new Long(mbDiscussionModelImpl.getOriginalClassPK())
+				});
+		}
+
+		if (isNew ||
+				((mbDiscussion.getClassNameId() != mbDiscussionModelImpl.getOriginalClassNameId()) ||
+				(mbDiscussion.getClassPK() != mbDiscussionModelImpl.getOriginalClassPK()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
+				new Object[] {
+					new Long(mbDiscussion.getClassNameId()),
+					new Long(mbDiscussion.getClassPK())
+				}, mbDiscussion);
+		}
+
+		EntityCacheUtil.putResult(MBDiscussionModelImpl.ENTITY_CACHE_ENABLED,
+			MBDiscussion.class, mbDiscussion.getPrimaryKey(), mbDiscussion);
+
+		return mbDiscussion;
 	}
 
 	public MBDiscussion findByPrimaryKey(long discussionId)
@@ -244,36 +366,40 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 
 	public MBDiscussion fetchByPrimaryKey(long discussionId)
 		throws SystemException {
-		Session session = null;
+		MBDiscussion result = (MBDiscussion)EntityCacheUtil.getResult(MBDiscussionModelImpl.ENTITY_CACHE_ENABLED,
+				MBDiscussion.class, discussionId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (MBDiscussion)session.get(MBDiscussionImpl.class,
-				new Long(discussionId));
+			try {
+				session = openSession();
+
+				MBDiscussion mbDiscussion = (MBDiscussion)session.get(MBDiscussionImpl.class,
+						new Long(discussionId));
+
+				cacheResult(mbDiscussion);
+
+				return mbDiscussion;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (MBDiscussion)result;
 		}
 	}
 
 	public List<MBDiscussion> findByClassNameId(long classNameId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = MBDiscussionModelImpl.CACHE_ENABLED;
-		String finderClassName = MBDiscussion.class.getName();
-		String finderMethodName = "findByClassNameId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(classNameId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_CLASSNAMEID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -298,9 +424,10 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 
 				List<MBDiscussion> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_CLASSNAMEID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -323,27 +450,14 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBDiscussion> findByClassNameId(long classNameId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = MBDiscussionModelImpl.CACHE_ENABLED;
-		String finderClassName = MBDiscussion.class.getName();
-		String finderMethodName = "findByClassNameId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_CLASSNAMEID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -374,9 +488,10 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 				List<MBDiscussion> list = (List<MBDiscussion>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_CLASSNAMEID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -397,7 +512,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchDiscussionException, SystemException {
 		List<MBDiscussion> list = findByClassNameId(classNameId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBDiscussion exists with the key {");
@@ -421,7 +536,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 		List<MBDiscussion> list = findByClassNameId(classNameId, count - 1,
 				count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBDiscussion exists with the key {");
@@ -513,18 +628,10 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 
 	public MBDiscussion fetchByThreadId(long threadId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = MBDiscussionModelImpl.CACHE_ENABLED;
-		String finderClassName = MBDiscussion.class.getName();
-		String finderMethodName = "fetchByThreadId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(threadId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_THREADID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -549,16 +656,19 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 
 				List<MBDiscussion> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				MBDiscussion mbDiscussion = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_THREADID,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					mbDiscussion = list.get(0);
+
+					cacheResult(mbDiscussion);
 				}
+
+				return mbDiscussion;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -568,13 +678,11 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<MBDiscussion> list = (List<MBDiscussion>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (MBDiscussion)result;
 			}
 		}
 	}
@@ -607,22 +715,12 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 
 	public MBDiscussion fetchByC_C(long classNameId, long classPK)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = MBDiscussionModelImpl.CACHE_ENABLED;
-		String finderClassName = MBDiscussion.class.getName();
-		String finderMethodName = "fetchByC_C";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_C,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -653,16 +751,19 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 
 				List<MBDiscussion> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				MBDiscussion mbDiscussion = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					mbDiscussion = list.get(0);
+
+					cacheResult(mbDiscussion);
 				}
+
+				return mbDiscussion;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -672,13 +773,11 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<MBDiscussion> list = (List<MBDiscussion>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (MBDiscussion)result;
 			}
 		}
 	}
@@ -734,23 +833,12 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBDiscussion> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = MBDiscussionModelImpl.CACHE_ENABLED;
-		String finderClassName = MBDiscussion.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -783,9 +871,9 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -828,18 +916,10 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByClassNameId(long classNameId) throws SystemException {
-		boolean finderClassNameCacheEnabled = MBDiscussionModelImpl.CACHE_ENABLED;
-		String finderClassName = MBDiscussion.class.getName();
-		String finderMethodName = "countByClassNameId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(classNameId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_CLASSNAMEID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -875,8 +955,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CLASSNAMEID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -894,18 +973,10 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByThreadId(long threadId) throws SystemException {
-		boolean finderClassNameCacheEnabled = MBDiscussionModelImpl.CACHE_ENABLED;
-		String finderClassName = MBDiscussion.class.getName();
-		String finderMethodName = "countByThreadId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(threadId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_THREADID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -941,8 +1012,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_THREADID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -961,22 +1031,12 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 
 	public int countByC_C(long classNameId, long classPK)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = MBDiscussionModelImpl.CACHE_ENABLED;
-		String finderClassName = MBDiscussion.class.getName();
-		String finderMethodName = "countByC_C";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1018,9 +1078,8 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -1037,18 +1096,10 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = MBDiscussionModelImpl.CACHE_ENABLED;
-		String finderClassName = MBDiscussion.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1071,9 +1122,8 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

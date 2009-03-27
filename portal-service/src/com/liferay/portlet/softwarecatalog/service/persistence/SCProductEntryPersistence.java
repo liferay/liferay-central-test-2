@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface SCProductEntryPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> scProductEntries);
+
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry create(
 		long productEntryId);
 

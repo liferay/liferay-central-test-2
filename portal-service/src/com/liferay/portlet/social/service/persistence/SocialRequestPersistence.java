@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface SocialRequestPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.social.model.SocialRequest socialRequest);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.social.model.SocialRequest> socialRequests);
+
 	public com.liferay.portlet.social.model.SocialRequest create(long requestId);
 
 	public com.liferay.portlet.social.model.SocialRequest remove(long requestId)

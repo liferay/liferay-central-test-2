@@ -26,7 +26,9 @@ import com.liferay.portal.NoSuchContactException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -56,6 +58,46 @@ import java.util.List;
  */
 public class ContactPersistenceImpl extends BasePersistenceImpl
 	implements ContactPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = Contact.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = Contact.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(ContactModelImpl.ENTITY_CACHE_ENABLED,
+			ContactModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByCompanyId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_COMPANYID = new FinderPath(ContactModelImpl.ENTITY_CACHE_ENABLED,
+			ContactModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByCompanyId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(ContactModelImpl.ENTITY_CACHE_ENABLED,
+			ContactModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByCompanyId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(ContactModelImpl.ENTITY_CACHE_ENABLED,
+			ContactModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(ContactModelImpl.ENTITY_CACHE_ENABLED,
+			ContactModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countAll", new String[0]);
+
+	public void cacheResult(Contact contact) {
+		EntityCacheUtil.putResult(ContactModelImpl.ENTITY_CACHE_ENABLED,
+			Contact.class, contact.getPrimaryKey(), contact);
+	}
+
+	public void cacheResult(List<Contact> contacts) {
+		for (Contact contact : contacts) {
+			if (EntityCacheUtil.getResult(
+						ContactModelImpl.ENTITY_CACHE_ENABLED, Contact.class,
+						contact.getPrimaryKey(), this) == null) {
+				cacheResult(contact);
+			}
+		}
+	}
+
 	public Contact create(long contactId) {
 		Contact contact = new ContactImpl();
 
@@ -130,17 +172,22 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 			session.delete(contact);
 
 			session.flush();
-
-			return contact;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(Contact.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		ContactModelImpl contactModelImpl = (ContactModelImpl)contact;
+
+		EntityCacheUtil.removeResult(ContactModelImpl.ENTITY_CACHE_ENABLED,
+			Contact.class, contact.getPrimaryKey());
+
+		return contact;
 	}
 
 	/**
@@ -197,6 +244,8 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 
 	public Contact updateImpl(com.liferay.portal.model.Contact contact,
 		boolean merge) throws SystemException {
+		boolean isNew = contact.isNew();
+
 		Session session = null;
 
 		try {
@@ -205,17 +254,22 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, contact, merge);
 
 			contact.setNew(false);
-
-			return contact;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(Contact.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		ContactModelImpl contactModelImpl = (ContactModelImpl)contact;
+
+		EntityCacheUtil.putResult(ContactModelImpl.ENTITY_CACHE_ENABLED,
+			Contact.class, contact.getPrimaryKey(), contact);
+
+		return contact;
 	}
 
 	public Contact findByPrimaryKey(long contactId)
@@ -236,35 +290,40 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Contact fetchByPrimaryKey(long contactId) throws SystemException {
-		Session session = null;
+		Contact result = (Contact)EntityCacheUtil.getResult(ContactModelImpl.ENTITY_CACHE_ENABLED,
+				Contact.class, contactId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (Contact)session.get(ContactImpl.class, new Long(contactId));
+			try {
+				session = openSession();
+
+				Contact contact = (Contact)session.get(ContactImpl.class,
+						new Long(contactId));
+
+				cacheResult(contact);
+
+				return contact;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (Contact)result;
 		}
 	}
 
 	public List<Contact> findByCompanyId(long companyId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = ContactModelImpl.CACHE_ENABLED;
-		String finderClassName = Contact.class.getName();
-		String finderMethodName = "findByCompanyId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -288,9 +347,10 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 
 				List<Contact> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -313,27 +373,14 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 
 	public List<Contact> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = ContactModelImpl.CACHE_ENABLED;
-		String finderClassName = Contact.class.getName();
-		String finderMethodName = "findByCompanyId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -363,9 +410,10 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 				List<Contact> list = (List<Contact>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -385,7 +433,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchContactException, SystemException {
 		List<Contact> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Contact exists with the key {");
@@ -407,7 +455,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 
 		List<Contact> list = findByCompanyId(companyId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Contact exists with the key {");
@@ -522,23 +570,12 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 
 	public List<Contact> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = ContactModelImpl.CACHE_ENABLED;
-		String finderClassName = Contact.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -570,9 +607,9 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -601,18 +638,10 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
-		boolean finderClassNameCacheEnabled = ContactModelImpl.CACHE_ENABLED;
-		String finderClassName = Contact.class.getName();
-		String finderMethodName = "countByCompanyId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -647,8 +676,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_COMPANYID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -666,18 +694,10 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = ContactModelImpl.CACHE_ENABLED;
-		String finderClassName = Contact.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -700,9 +720,8 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

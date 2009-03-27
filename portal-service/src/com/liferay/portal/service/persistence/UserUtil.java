@@ -29,6 +29,15 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class UserUtil {
+	public static void cacheResult(com.liferay.portal.model.User user) {
+		getPersistence().cacheResult(user);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.User> users) {
+		getPersistence().cacheResult(users);
+	}
+
 	public static com.liferay.portal.model.User create(long userId) {
 		return getPersistence().create(userId);
 	}

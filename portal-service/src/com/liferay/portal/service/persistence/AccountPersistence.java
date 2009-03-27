@@ -29,6 +29,11 @@ package com.liferay.portal.service.persistence;
  *
  */
 public interface AccountPersistence extends BasePersistence {
+	public void cacheResult(com.liferay.portal.model.Account account);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portal.model.Account> accounts);
+
 	public com.liferay.portal.model.Account create(long accountId);
 
 	public com.liferay.portal.model.Account remove(long accountId)

@@ -26,7 +26,9 @@ import com.liferay.portal.NoSuchUserIdMapperException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -56,6 +58,76 @@ import java.util.List;
  */
 public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 	implements UserIdMapperPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = UserIdMapper.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = UserIdMapper.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_USERID = new FinderPath(UserIdMapperModelImpl.ENTITY_CACHE_ENABLED,
+			UserIdMapperModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByUserId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_USERID = new FinderPath(UserIdMapperModelImpl.ENTITY_CACHE_ENABLED,
+			UserIdMapperModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByUserId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_USERID = new FinderPath(UserIdMapperModelImpl.ENTITY_CACHE_ENABLED,
+			UserIdMapperModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByUserId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_U_T = new FinderPath(UserIdMapperModelImpl.ENTITY_CACHE_ENABLED,
+			UserIdMapperModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByU_T",
+			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_U_T = new FinderPath(UserIdMapperModelImpl.ENTITY_CACHE_ENABLED,
+			UserIdMapperModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByU_T",
+			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_T_E = new FinderPath(UserIdMapperModelImpl.ENTITY_CACHE_ENABLED,
+			UserIdMapperModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByT_E",
+			new String[] { String.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_T_E = new FinderPath(UserIdMapperModelImpl.ENTITY_CACHE_ENABLED,
+			UserIdMapperModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByT_E",
+			new String[] { String.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(UserIdMapperModelImpl.ENTITY_CACHE_ENABLED,
+			UserIdMapperModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(UserIdMapperModelImpl.ENTITY_CACHE_ENABLED,
+			UserIdMapperModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countAll", new String[0]);
+
+	public void cacheResult(UserIdMapper userIdMapper) {
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T,
+			new Object[] {
+				new Long(userIdMapper.getUserId()),
+				
+			userIdMapper.getType()
+			}, userIdMapper);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_E,
+			new Object[] {
+				userIdMapper.getType(),
+				
+			userIdMapper.getExternalUserId()
+			}, userIdMapper);
+
+		EntityCacheUtil.putResult(UserIdMapperModelImpl.ENTITY_CACHE_ENABLED,
+			UserIdMapper.class, userIdMapper.getPrimaryKey(), userIdMapper);
+	}
+
+	public void cacheResult(List<UserIdMapper> userIdMappers) {
+		for (UserIdMapper userIdMapper : userIdMappers) {
+			if (EntityCacheUtil.getResult(
+						UserIdMapperModelImpl.ENTITY_CACHE_ENABLED,
+						UserIdMapper.class, userIdMapper.getPrimaryKey(), this) == null) {
+				cacheResult(userIdMapper);
+			}
+		}
+	}
+
 	public UserIdMapper create(long userIdMapperId) {
 		UserIdMapper userIdMapper = new UserIdMapperImpl();
 
@@ -133,17 +205,36 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 			session.delete(userIdMapper);
 
 			session.flush();
-
-			return userIdMapper;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(UserIdMapper.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		UserIdMapperModelImpl userIdMapperModelImpl = (UserIdMapperModelImpl)userIdMapper;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_T,
+			new Object[] {
+				new Long(userIdMapperModelImpl.getOriginalUserId()),
+				
+			userIdMapperModelImpl.getOriginalType()
+			});
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_E,
+			new Object[] {
+				userIdMapperModelImpl.getOriginalType(),
+				
+			userIdMapperModelImpl.getOriginalExternalUserId()
+			});
+
+		EntityCacheUtil.removeResult(UserIdMapperModelImpl.ENTITY_CACHE_ENABLED,
+			UserIdMapper.class, userIdMapper.getPrimaryKey());
+
+		return userIdMapper;
 	}
 
 	/**
@@ -202,6 +293,8 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 	public UserIdMapper updateImpl(
 		com.liferay.portal.model.UserIdMapper userIdMapper, boolean merge)
 		throws SystemException {
+		boolean isNew = userIdMapper.isNew();
+
 		Session session = null;
 
 		try {
@@ -210,17 +303,72 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, userIdMapper, merge);
 
 			userIdMapper.setNew(false);
-
-			return userIdMapper;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(UserIdMapper.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		UserIdMapperModelImpl userIdMapperModelImpl = (UserIdMapperModelImpl)userIdMapper;
+
+		if (!isNew &&
+				((userIdMapper.getUserId() != userIdMapperModelImpl.getOriginalUserId()) ||
+				!userIdMapper.getType()
+								 .equals(userIdMapperModelImpl.getOriginalType()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_T,
+				new Object[] {
+					new Long(userIdMapperModelImpl.getOriginalUserId()),
+					
+				userIdMapperModelImpl.getOriginalType()
+				});
+		}
+
+		if (isNew ||
+				((userIdMapper.getUserId() != userIdMapperModelImpl.getOriginalUserId()) ||
+				!userIdMapper.getType()
+								 .equals(userIdMapperModelImpl.getOriginalType()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T,
+				new Object[] {
+					new Long(userIdMapper.getUserId()),
+					
+				userIdMapper.getType()
+				}, userIdMapper);
+		}
+
+		if (!isNew &&
+				(!userIdMapper.getType()
+								  .equals(userIdMapperModelImpl.getOriginalType()) ||
+				!userIdMapper.getExternalUserId()
+								 .equals(userIdMapperModelImpl.getOriginalExternalUserId()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_E,
+				new Object[] {
+					userIdMapperModelImpl.getOriginalType(),
+					
+				userIdMapperModelImpl.getOriginalExternalUserId()
+				});
+		}
+
+		if (isNew ||
+				(!userIdMapper.getType()
+								  .equals(userIdMapperModelImpl.getOriginalType()) ||
+				!userIdMapper.getExternalUserId()
+								 .equals(userIdMapperModelImpl.getOriginalExternalUserId()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_E,
+				new Object[] {
+					userIdMapper.getType(),
+					
+				userIdMapper.getExternalUserId()
+				}, userIdMapper);
+		}
+
+		EntityCacheUtil.putResult(UserIdMapperModelImpl.ENTITY_CACHE_ENABLED,
+			UserIdMapper.class, userIdMapper.getPrimaryKey(), userIdMapper);
+
+		return userIdMapper;
 	}
 
 	public UserIdMapper findByPrimaryKey(long userIdMapperId)
@@ -243,36 +391,40 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 
 	public UserIdMapper fetchByPrimaryKey(long userIdMapperId)
 		throws SystemException {
-		Session session = null;
+		UserIdMapper result = (UserIdMapper)EntityCacheUtil.getResult(UserIdMapperModelImpl.ENTITY_CACHE_ENABLED,
+				UserIdMapper.class, userIdMapperId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (UserIdMapper)session.get(UserIdMapperImpl.class,
-				new Long(userIdMapperId));
+			try {
+				session = openSession();
+
+				UserIdMapper userIdMapper = (UserIdMapper)session.get(UserIdMapperImpl.class,
+						new Long(userIdMapperId));
+
+				cacheResult(userIdMapper);
+
+				return userIdMapper;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (UserIdMapper)result;
 		}
 	}
 
 	public List<UserIdMapper> findByUserId(long userId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = UserIdMapperModelImpl.CACHE_ENABLED;
-		String finderClassName = UserIdMapper.class.getName();
-		String finderMethodName = "findByUserId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -297,9 +449,10 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 
 				List<UserIdMapper> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -322,27 +475,14 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 
 	public List<UserIdMapper> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = UserIdMapperModelImpl.CACHE_ENABLED;
-		String finderClassName = UserIdMapper.class.getName();
-		String finderMethodName = "findByUserId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -373,9 +513,10 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 				List<UserIdMapper> list = (List<UserIdMapper>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -395,7 +536,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchUserIdMapperException, SystemException {
 		List<UserIdMapper> list = findByUserId(userId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserIdMapper exists with the key {");
@@ -417,7 +558,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 
 		List<UserIdMapper> list = findByUserId(userId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No UserIdMapper exists with the key {");
@@ -511,20 +652,10 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 
 	public UserIdMapper fetchByU_T(long userId, String type)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = UserIdMapperModelImpl.CACHE_ENABLED;
-		String finderClassName = UserIdMapper.class.getName();
-		String finderMethodName = "fetchByU_T";
-		String[] finderParams = new String[] {
-				Long.class.getName(), String.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(userId), type };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_U_T,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -562,16 +693,19 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 
 				List<UserIdMapper> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				UserIdMapper userIdMapper = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					userIdMapper = list.get(0);
+
+					cacheResult(userIdMapper);
 				}
+
+				return userIdMapper;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -581,13 +715,11 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<UserIdMapper> list = (List<UserIdMapper>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (UserIdMapper)result;
 			}
 		}
 	}
@@ -620,20 +752,10 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 
 	public UserIdMapper fetchByT_E(String type, String externalUserId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = UserIdMapperModelImpl.CACHE_ENABLED;
-		String finderClassName = UserIdMapper.class.getName();
-		String finderMethodName = "fetchByT_E";
-		String[] finderParams = new String[] {
-				String.class.getName(), String.class.getName()
-			};
 		Object[] finderArgs = new Object[] { type, externalUserId };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_T_E,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -678,16 +800,19 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 
 				List<UserIdMapper> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				UserIdMapper userIdMapper = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_E,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					userIdMapper = list.get(0);
+
+					cacheResult(userIdMapper);
 				}
+
+				return userIdMapper;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -697,13 +822,11 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<UserIdMapper> list = (List<UserIdMapper>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (UserIdMapper)result;
 			}
 		}
 	}
@@ -759,23 +882,12 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 
 	public List<UserIdMapper> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = UserIdMapperModelImpl.CACHE_ENABLED;
-		String finderClassName = UserIdMapper.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -807,9 +919,9 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -852,18 +964,10 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByUserId(long userId) throws SystemException {
-		boolean finderClassNameCacheEnabled = UserIdMapperModelImpl.CACHE_ENABLED;
-		String finderClassName = UserIdMapper.class.getName();
-		String finderMethodName = "countByUserId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -899,8 +1003,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -918,20 +1021,10 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByU_T(long userId, String type) throws SystemException {
-		boolean finderClassNameCacheEnabled = UserIdMapperModelImpl.CACHE_ENABLED;
-		String finderClassName = UserIdMapper.class.getName();
-		String finderMethodName = "countByU_T";
-		String[] finderParams = new String[] {
-				Long.class.getName(), String.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(userId), type };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_T,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -980,9 +1073,8 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U_T, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -1000,20 +1092,10 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 
 	public int countByT_E(String type, String externalUserId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = UserIdMapperModelImpl.CACHE_ENABLED;
-		String finderClassName = UserIdMapper.class.getName();
-		String finderMethodName = "countByT_E";
-		String[] finderParams = new String[] {
-				String.class.getName(), String.class.getName()
-			};
 		Object[] finderArgs = new Object[] { type, externalUserId };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_T_E,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1069,9 +1151,8 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_T_E, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -1088,18 +1169,10 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = UserIdMapperModelImpl.CACHE_ENABLED;
-		String finderClassName = UserIdMapper.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1122,9 +1195,8 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

@@ -26,7 +26,9 @@ import com.liferay.portal.NoSuchPluginSettingException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -56,6 +58,71 @@ import java.util.List;
  */
 public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 	implements PluginSettingPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = PluginSetting.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = PluginSetting.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(PluginSettingModelImpl.ENTITY_CACHE_ENABLED,
+			PluginSettingModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByCompanyId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_COMPANYID = new FinderPath(PluginSettingModelImpl.ENTITY_CACHE_ENABLED,
+			PluginSettingModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByCompanyId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(PluginSettingModelImpl.ENTITY_CACHE_ENABLED,
+			PluginSettingModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByCompanyId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_C_I_T = new FinderPath(PluginSettingModelImpl.ENTITY_CACHE_ENABLED,
+			PluginSettingModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByC_I_T",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				String.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_I_T = new FinderPath(PluginSettingModelImpl.ENTITY_CACHE_ENABLED,
+			PluginSettingModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByC_I_T",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				String.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(PluginSettingModelImpl.ENTITY_CACHE_ENABLED,
+			PluginSettingModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(PluginSettingModelImpl.ENTITY_CACHE_ENABLED,
+			PluginSettingModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
+
+	public void cacheResult(PluginSetting pluginSetting) {
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_I_T,
+			new Object[] {
+				new Long(pluginSetting.getCompanyId()),
+				
+			pluginSetting.getPluginId(),
+				
+			pluginSetting.getPluginType()
+			}, pluginSetting);
+
+		EntityCacheUtil.putResult(PluginSettingModelImpl.ENTITY_CACHE_ENABLED,
+			PluginSetting.class, pluginSetting.getPrimaryKey(), pluginSetting);
+	}
+
+	public void cacheResult(List<PluginSetting> pluginSettings) {
+		for (PluginSetting pluginSetting : pluginSettings) {
+			if (EntityCacheUtil.getResult(
+						PluginSettingModelImpl.ENTITY_CACHE_ENABLED,
+						PluginSetting.class, pluginSetting.getPrimaryKey(), this) == null) {
+				cacheResult(pluginSetting);
+			}
+		}
+	}
+
 	public PluginSetting create(long pluginSettingId) {
 		PluginSetting pluginSetting = new PluginSettingImpl();
 
@@ -133,17 +200,31 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 			session.delete(pluginSetting);
 
 			session.flush();
-
-			return pluginSetting;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(PluginSetting.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		PluginSettingModelImpl pluginSettingModelImpl = (PluginSettingModelImpl)pluginSetting;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_I_T,
+			new Object[] {
+				new Long(pluginSettingModelImpl.getOriginalCompanyId()),
+				
+			pluginSettingModelImpl.getOriginalPluginId(),
+				
+			pluginSettingModelImpl.getOriginalPluginType()
+			});
+
+		EntityCacheUtil.removeResult(PluginSettingModelImpl.ENTITY_CACHE_ENABLED,
+			PluginSetting.class, pluginSetting.getPrimaryKey());
+
+		return pluginSetting;
 	}
 
 	/**
@@ -202,6 +283,8 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 	public PluginSetting updateImpl(
 		com.liferay.portal.model.PluginSetting pluginSetting, boolean merge)
 		throws SystemException {
+		boolean isNew = pluginSetting.isNew();
+
 		Session session = null;
 
 		try {
@@ -210,17 +293,54 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, pluginSetting, merge);
 
 			pluginSetting.setNew(false);
-
-			return pluginSetting;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(PluginSetting.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		PluginSettingModelImpl pluginSettingModelImpl = (PluginSettingModelImpl)pluginSetting;
+
+		if (!isNew &&
+				((pluginSetting.getCompanyId() != pluginSettingModelImpl.getOriginalCompanyId()) ||
+				!pluginSetting.getPluginId()
+								  .equals(pluginSettingModelImpl.getOriginalPluginId()) ||
+				!pluginSetting.getPluginType()
+								  .equals(pluginSettingModelImpl.getOriginalPluginType()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_I_T,
+				new Object[] {
+					new Long(pluginSettingModelImpl.getOriginalCompanyId()),
+					
+				pluginSettingModelImpl.getOriginalPluginId(),
+					
+				pluginSettingModelImpl.getOriginalPluginType()
+				});
+		}
+
+		if (isNew ||
+				((pluginSetting.getCompanyId() != pluginSettingModelImpl.getOriginalCompanyId()) ||
+				!pluginSetting.getPluginId()
+								  .equals(pluginSettingModelImpl.getOriginalPluginId()) ||
+				!pluginSetting.getPluginType()
+								  .equals(pluginSettingModelImpl.getOriginalPluginType()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_I_T,
+				new Object[] {
+					new Long(pluginSetting.getCompanyId()),
+					
+				pluginSetting.getPluginId(),
+					
+				pluginSetting.getPluginType()
+				}, pluginSetting);
+		}
+
+		EntityCacheUtil.putResult(PluginSettingModelImpl.ENTITY_CACHE_ENABLED,
+			PluginSetting.class, pluginSetting.getPrimaryKey(), pluginSetting);
+
+		return pluginSetting;
 	}
 
 	public PluginSetting findByPrimaryKey(long pluginSettingId)
@@ -243,36 +363,40 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 
 	public PluginSetting fetchByPrimaryKey(long pluginSettingId)
 		throws SystemException {
-		Session session = null;
+		PluginSetting result = (PluginSetting)EntityCacheUtil.getResult(PluginSettingModelImpl.ENTITY_CACHE_ENABLED,
+				PluginSetting.class, pluginSettingId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (PluginSetting)session.get(PluginSettingImpl.class,
-				new Long(pluginSettingId));
+			try {
+				session = openSession();
+
+				PluginSetting pluginSetting = (PluginSetting)session.get(PluginSettingImpl.class,
+						new Long(pluginSettingId));
+
+				cacheResult(pluginSetting);
+
+				return pluginSetting;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (PluginSetting)result;
 		}
 	}
 
 	public List<PluginSetting> findByCompanyId(long companyId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = PluginSettingModelImpl.CACHE_ENABLED;
-		String finderClassName = PluginSetting.class.getName();
-		String finderMethodName = "findByCompanyId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -297,9 +421,10 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 
 				List<PluginSetting> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -322,27 +447,14 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 
 	public List<PluginSetting> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = PluginSettingModelImpl.CACHE_ENABLED;
-		String finderClassName = PluginSetting.class.getName();
-		String finderMethodName = "findByCompanyId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -373,9 +485,10 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 				List<PluginSetting> list = (List<PluginSetting>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -396,7 +509,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchPluginSettingException, SystemException {
 		List<PluginSetting> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PluginSetting exists with the key {");
@@ -420,7 +533,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 		List<PluginSetting> list = findByCompanyId(companyId, count - 1, count,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PluginSetting exists with the key {");
@@ -518,13 +631,6 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 
 	public PluginSetting fetchByC_I_T(long companyId, String pluginId,
 		String pluginType) throws SystemException {
-		boolean finderClassNameCacheEnabled = PluginSettingModelImpl.CACHE_ENABLED;
-		String finderClassName = PluginSetting.class.getName();
-		String finderMethodName = "fetchByC_I_T";
-		String[] finderParams = new String[] {
-				Long.class.getName(), String.class.getName(),
-				String.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
@@ -533,12 +639,8 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 				pluginType
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_I_T,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -589,16 +691,19 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 
 				List<PluginSetting> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				PluginSetting pluginSetting = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_I_T,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					pluginSetting = list.get(0);
+
+					cacheResult(pluginSetting);
 				}
+
+				return pluginSetting;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -608,13 +713,11 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<PluginSetting> list = (List<PluginSetting>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (PluginSetting)result;
 			}
 		}
 	}
@@ -670,23 +773,12 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 
 	public List<PluginSetting> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = PluginSettingModelImpl.CACHE_ENABLED;
-		String finderClassName = PluginSetting.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -718,9 +810,9 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -757,18 +849,10 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
-		boolean finderClassNameCacheEnabled = PluginSettingModelImpl.CACHE_ENABLED;
-		String finderClassName = PluginSetting.class.getName();
-		String finderMethodName = "countByCompanyId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -804,8 +888,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_COMPANYID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -824,13 +907,6 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 
 	public int countByC_I_T(long companyId, String pluginId, String pluginType)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = PluginSettingModelImpl.CACHE_ENABLED;
-		String finderClassName = PluginSetting.class.getName();
-		String finderMethodName = "countByC_I_T";
-		String[] finderParams = new String[] {
-				Long.class.getName(), String.class.getName(),
-				String.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
@@ -839,12 +915,8 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 				pluginType
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_I_T,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -906,8 +978,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_I_T,
 					finderArgs, count);
 
 				return count.intValue();
@@ -925,18 +996,10 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = PluginSettingModelImpl.CACHE_ENABLED;
-		String finderClassName = PluginSetting.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -959,9 +1022,8 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

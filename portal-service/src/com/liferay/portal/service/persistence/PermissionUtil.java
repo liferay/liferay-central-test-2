@@ -29,6 +29,16 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class PermissionUtil {
+	public static void cacheResult(
+		com.liferay.portal.model.Permission permission) {
+		getPersistence().cacheResult(permission);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.Permission> permissions) {
+		getPersistence().cacheResult(permissions);
+	}
+
 	public static com.liferay.portal.model.Permission create(long permissionId) {
 		return getPersistence().create(permissionId);
 	}

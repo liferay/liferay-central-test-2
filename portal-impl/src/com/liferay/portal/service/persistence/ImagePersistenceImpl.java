@@ -26,7 +26,9 @@ import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -56,6 +58,45 @@ import java.util.List;
  */
 public class ImagePersistenceImpl extends BasePersistenceImpl
 	implements ImagePersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = Image.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = Image.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_SIZE = new FinderPath(ImageModelImpl.ENTITY_CACHE_ENABLED,
+			ImageModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findBySize", new String[] { Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_SIZE = new FinderPath(ImageModelImpl.ENTITY_CACHE_ENABLED,
+			ImageModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findBySize",
+			new String[] {
+				Integer.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_SIZE = new FinderPath(ImageModelImpl.ENTITY_CACHE_ENABLED,
+			ImageModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countBySize", new String[] { Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(ImageModelImpl.ENTITY_CACHE_ENABLED,
+			ImageModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(ImageModelImpl.ENTITY_CACHE_ENABLED,
+			ImageModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countAll", new String[0]);
+
+	public void cacheResult(Image image) {
+		EntityCacheUtil.putResult(ImageModelImpl.ENTITY_CACHE_ENABLED,
+			Image.class, image.getPrimaryKey(), image);
+	}
+
+	public void cacheResult(List<Image> images) {
+		for (Image image : images) {
+			if (EntityCacheUtil.getResult(ImageModelImpl.ENTITY_CACHE_ENABLED,
+						Image.class, image.getPrimaryKey(), this) == null) {
+				cacheResult(image);
+			}
+		}
+	}
+
 	public Image create(long imageId) {
 		Image image = new ImageImpl();
 
@@ -129,17 +170,22 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 			session.delete(image);
 
 			session.flush();
-
-			return image;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(Image.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		ImageModelImpl imageModelImpl = (ImageModelImpl)image;
+
+		EntityCacheUtil.removeResult(ImageModelImpl.ENTITY_CACHE_ENABLED,
+			Image.class, image.getPrimaryKey());
+
+		return image;
 	}
 
 	/**
@@ -195,6 +241,8 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 
 	public Image updateImpl(com.liferay.portal.model.Image image, boolean merge)
 		throws SystemException {
+		boolean isNew = image.isNew();
+
 		Session session = null;
 
 		try {
@@ -203,17 +251,22 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, image, merge);
 
 			image.setNew(false);
-
-			return image;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(Image.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		ImageModelImpl imageModelImpl = (ImageModelImpl)image;
+
+		EntityCacheUtil.putResult(ImageModelImpl.ENTITY_CACHE_ENABLED,
+			Image.class, image.getPrimaryKey(), image);
+
+		return image;
 	}
 
 	public Image findByPrimaryKey(long imageId)
@@ -233,34 +286,39 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Image fetchByPrimaryKey(long imageId) throws SystemException {
-		Session session = null;
+		Image result = (Image)EntityCacheUtil.getResult(ImageModelImpl.ENTITY_CACHE_ENABLED,
+				Image.class, imageId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (Image)session.get(ImageImpl.class, new Long(imageId));
+			try {
+				session = openSession();
+
+				Image image = (Image)session.get(ImageImpl.class,
+						new Long(imageId));
+
+				cacheResult(image);
+
+				return image;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (Image)result;
 		}
 	}
 
 	public List<Image> findBySize(int size) throws SystemException {
-		boolean finderClassNameCacheEnabled = ImageModelImpl.CACHE_ENABLED;
-		String finderClassName = Image.class.getName();
-		String finderMethodName = "findBySize";
-		String[] finderParams = new String[] { Integer.class.getName() };
 		Object[] finderArgs = new Object[] { new Integer(size) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_SIZE,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -288,9 +346,10 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 
 				List<Image> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_SIZE, finderArgs,
+					list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -313,27 +372,14 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 
 	public List<Image> findBySize(int size, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = ImageModelImpl.CACHE_ENABLED;
-		String finderClassName = Image.class.getName();
-		String finderMethodName = "findBySize";
-		String[] finderParams = new String[] {
-				Integer.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Integer(size),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_SIZE,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -369,9 +415,10 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 				List<Image> list = (List<Image>)QueryUtil.list(q, getDialect(),
 						start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_SIZE,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -391,7 +438,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchImageException, SystemException {
 		List<Image> list = findBySize(size, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Image exists with the key {");
@@ -413,7 +460,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 
 		List<Image> list = findBySize(size, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Image exists with the key {");
@@ -533,23 +580,12 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 
 	public List<Image> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = ImageModelImpl.CACHE_ENABLED;
-		String finderClassName = Image.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -587,9 +623,9 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 							end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -618,18 +654,10 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countBySize(int size) throws SystemException {
-		boolean finderClassNameCacheEnabled = ImageModelImpl.CACHE_ENABLED;
-		String finderClassName = Image.class.getName();
-		String finderMethodName = "countBySize";
-		String[] finderParams = new String[] { Integer.class.getName() };
 		Object[] finderArgs = new Object[] { new Integer(size) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_SIZE,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -664,8 +692,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_SIZE,
 					finderArgs, count);
 
 				return count.intValue();
@@ -683,18 +710,10 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = ImageModelImpl.CACHE_ENABLED;
-		String finderClassName = Image.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -717,9 +736,8 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

@@ -108,7 +108,10 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.imagegallery.model.IGImage"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.imagegallery.model.IGImage"),
 			true);
 
@@ -165,7 +168,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage> {
 	}
 
 	public void setUuid(String uuid) {
-		if ((uuid != null) && (uuid != _uuid)) {
+		if ((uuid != null) && !uuid.equals(_uuid)) {
 			_uuid = uuid;
 		}
 	}
@@ -268,7 +271,17 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage> {
 	public void setSmallImageId(long smallImageId) {
 		if (smallImageId != _smallImageId) {
 			_smallImageId = smallImageId;
+
+			if (!_setOriginalSmallImageId) {
+				_setOriginalSmallImageId = true;
+
+				_originalSmallImageId = smallImageId;
+			}
 		}
+	}
+
+	public long getOriginalSmallImageId() {
+		return _originalSmallImageId;
 	}
 
 	public long getLargeImageId() {
@@ -278,7 +291,17 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage> {
 	public void setLargeImageId(long largeImageId) {
 		if (largeImageId != _largeImageId) {
 			_largeImageId = largeImageId;
+
+			if (!_setOriginalLargeImageId) {
+				_setOriginalLargeImageId = true;
+
+				_originalLargeImageId = largeImageId;
+			}
 		}
+	}
+
+	public long getOriginalLargeImageId() {
+		return _originalLargeImageId;
 	}
 
 	public long getCustom1ImageId() {
@@ -288,7 +311,17 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage> {
 	public void setCustom1ImageId(long custom1ImageId) {
 		if (custom1ImageId != _custom1ImageId) {
 			_custom1ImageId = custom1ImageId;
+
+			if (!_setOriginalCustom1ImageId) {
+				_setOriginalCustom1ImageId = true;
+
+				_originalCustom1ImageId = custom1ImageId;
+			}
 		}
+	}
+
+	public long getOriginalCustom1ImageId() {
+		return _originalCustom1ImageId;
 	}
 
 	public long getCustom2ImageId() {
@@ -298,7 +331,17 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage> {
 	public void setCustom2ImageId(long custom2ImageId) {
 		if (custom2ImageId != _custom2ImageId) {
 			_custom2ImageId = custom2ImageId;
+
+			if (!_setOriginalCustom2ImageId) {
+				_setOriginalCustom2ImageId = true;
+
+				_originalCustom2ImageId = custom2ImageId;
+			}
 		}
+	}
+
+	public long getOriginalCustom2ImageId() {
+		return _originalCustom2ImageId;
 	}
 
 	public IGImage toEscapedModel() {
@@ -420,8 +463,16 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage> {
 	private String _name;
 	private String _description;
 	private long _smallImageId;
+	private long _originalSmallImageId;
+	private boolean _setOriginalSmallImageId;
 	private long _largeImageId;
+	private long _originalLargeImageId;
+	private boolean _setOriginalLargeImageId;
 	private long _custom1ImageId;
+	private long _originalCustom1ImageId;
+	private boolean _setOriginalCustom1ImageId;
 	private long _custom2ImageId;
+	private long _originalCustom2ImageId;
+	private boolean _setOriginalCustom2ImageId;
 	private transient ExpandoBridge _expandoBridge;
 }

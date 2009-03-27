@@ -29,6 +29,15 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class ClassNameUtil {
+	public static void cacheResult(com.liferay.portal.model.ClassName className) {
+		getPersistence().cacheResult(className);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.ClassName> classNames) {
+		getPersistence().cacheResult(classNames);
+	}
+
 	public static com.liferay.portal.model.ClassName create(long classNameId) {
 		return getPersistence().create(classNameId);
 	}

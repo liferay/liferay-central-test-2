@@ -29,6 +29,16 @@ package com.liferay.portlet.polls.service.persistence;
  *
  */
 public class PollsChoiceUtil {
+	public static void cacheResult(
+		com.liferay.portlet.polls.model.PollsChoice pollsChoice) {
+		getPersistence().cacheResult(pollsChoice);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.polls.model.PollsChoice> pollsChoices) {
+		getPersistence().cacheResult(pollsChoices);
+	}
+
 	public static com.liferay.portlet.polls.model.PollsChoice create(
 		long choiceId) {
 		return getPersistence().create(choiceId);

@@ -25,7 +25,9 @@ package com.liferay.portlet.documentlibrary.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -60,6 +62,144 @@ import java.util.List;
  */
 public class DLFolderPersistenceImpl extends BasePersistenceImpl
 	implements DLFolderPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = DLFolder.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = DLFolder.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
+			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByUuid", new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_UUID = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
+			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByUuid",
+			new String[] {
+				String.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_UUID = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
+			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByUuid", new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_UUID_G = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
+			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
+			"fetchByUUID_G",
+			new String[] { String.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_UUID_G = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
+			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByUUID_G",
+			new String[] { String.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
+			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByGroupId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_GROUPID = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
+			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByGroupId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
+			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByGroupId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
+			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByCompanyId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_COMPANYID = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
+			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByCompanyId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
+			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByCompanyId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_G_P = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
+			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByG_P",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_P = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
+			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByG_P",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_P = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
+			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByG_P",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_P_N = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
+			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByP_N",
+			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_P_N = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
+			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByP_N",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_P_N = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
+			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByP_N",
+			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_G_P_N = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
+			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
+			"fetchByG_P_N",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				String.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_P_N = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
+			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByG_P_N",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				String.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
+			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
+			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countAll", new String[0]);
+
+	public void cacheResult(DLFolder dlFolder) {
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] { dlFolder.getUuid(), new Long(dlFolder.getGroupId()) },
+			dlFolder);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_N,
+			new Object[] {
+				new Long(dlFolder.getGroupId()),
+				new Long(dlFolder.getParentFolderId()),
+				
+			dlFolder.getName()
+			}, dlFolder);
+
+		EntityCacheUtil.putResult(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
+			DLFolder.class, dlFolder.getPrimaryKey(), dlFolder);
+	}
+
+	public void cacheResult(List<DLFolder> dlFolders) {
+		for (DLFolder dlFolder : dlFolders) {
+			if (EntityCacheUtil.getResult(
+						DLFolderModelImpl.ENTITY_CACHE_ENABLED, DLFolder.class,
+						dlFolder.getPrimaryKey(), this) == null) {
+				cacheResult(dlFolder);
+			}
+		}
+	}
+
 	public DLFolder create(long folderId) {
 		DLFolder dlFolder = new DLFolderImpl();
 
@@ -138,17 +278,36 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 			session.delete(dlFolder);
 
 			session.flush();
-
-			return dlFolder;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(DLFolder.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		DLFolderModelImpl dlFolderModelImpl = (DLFolderModelImpl)dlFolder;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] {
+				dlFolderModelImpl.getOriginalUuid(),
+				new Long(dlFolderModelImpl.getOriginalGroupId())
+			});
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_N,
+			new Object[] {
+				new Long(dlFolderModelImpl.getOriginalGroupId()),
+				new Long(dlFolderModelImpl.getOriginalParentFolderId()),
+				
+			dlFolderModelImpl.getOriginalName()
+			});
+
+		EntityCacheUtil.removeResult(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
+			DLFolder.class, dlFolder.getPrimaryKey());
+
+		return dlFolder;
 	}
 
 	/**
@@ -206,6 +365,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 	public DLFolder updateImpl(
 		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder,
 		boolean merge) throws SystemException {
+		boolean isNew = dlFolder.isNew();
+
 		if (Validator.isNull(dlFolder.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
 
@@ -220,17 +381,66 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, dlFolder, merge);
 
 			dlFolder.setNew(false);
-
-			return dlFolder;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(DLFolder.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		DLFolderModelImpl dlFolderModelImpl = (DLFolderModelImpl)dlFolder;
+
+		if (!isNew &&
+				(!dlFolder.getUuid().equals(dlFolderModelImpl.getOriginalUuid()) ||
+				(dlFolder.getGroupId() != dlFolderModelImpl.getOriginalGroupId()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+				new Object[] {
+					dlFolderModelImpl.getOriginalUuid(),
+					new Long(dlFolderModelImpl.getOriginalGroupId())
+				});
+		}
+
+		if (isNew ||
+				(!dlFolder.getUuid().equals(dlFolderModelImpl.getOriginalUuid()) ||
+				(dlFolder.getGroupId() != dlFolderModelImpl.getOriginalGroupId()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+				new Object[] { dlFolder.getUuid(), new Long(
+						dlFolder.getGroupId()) }, dlFolder);
+		}
+
+		if (!isNew &&
+				((dlFolder.getGroupId() != dlFolderModelImpl.getOriginalGroupId()) ||
+				(dlFolder.getParentFolderId() != dlFolderModelImpl.getOriginalParentFolderId()) ||
+				!dlFolder.getName().equals(dlFolderModelImpl.getOriginalName()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_N,
+				new Object[] {
+					new Long(dlFolderModelImpl.getOriginalGroupId()),
+					new Long(dlFolderModelImpl.getOriginalParentFolderId()),
+					
+				dlFolderModelImpl.getOriginalName()
+				});
+		}
+
+		if (isNew ||
+				((dlFolder.getGroupId() != dlFolderModelImpl.getOriginalGroupId()) ||
+				(dlFolder.getParentFolderId() != dlFolderModelImpl.getOriginalParentFolderId()) ||
+				!dlFolder.getName().equals(dlFolderModelImpl.getOriginalName()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_N,
+				new Object[] {
+					new Long(dlFolder.getGroupId()),
+					new Long(dlFolder.getParentFolderId()),
+					
+				dlFolder.getName()
+				}, dlFolder);
+		}
+
+		EntityCacheUtil.putResult(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
+			DLFolder.class, dlFolder.getPrimaryKey(), dlFolder);
+
+		return dlFolder;
 	}
 
 	public DLFolder findByPrimaryKey(long folderId)
@@ -251,34 +461,39 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public DLFolder fetchByPrimaryKey(long folderId) throws SystemException {
-		Session session = null;
+		DLFolder result = (DLFolder)EntityCacheUtil.getResult(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
+				DLFolder.class, folderId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (DLFolder)session.get(DLFolderImpl.class, new Long(folderId));
+			try {
+				session = openSession();
+
+				DLFolder dlFolder = (DLFolder)session.get(DLFolderImpl.class,
+						new Long(folderId));
+
+				cacheResult(dlFolder);
+
+				return dlFolder;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (DLFolder)result;
 		}
 	}
 
 	public List<DLFolder> findByUuid(String uuid) throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFolderModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFolder.class.getName();
-		String finderMethodName = "findByUuid";
-		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { uuid };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -315,9 +530,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 				List<DLFolder> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
+					list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -340,27 +556,14 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFolder> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFolderModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFolder.class.getName();
-		String finderMethodName = "findByUuid";
-		String[] finderParams = new String[] {
-				String.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -405,9 +608,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 				List<DLFolder> list = (List<DLFolder>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -427,7 +631,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchFolderException, SystemException {
 		List<DLFolder> list = findByUuid(uuid, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFolder exists with the key {");
@@ -449,7 +653,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 		List<DLFolder> list = findByUuid(uuid, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFolder exists with the key {");
@@ -556,20 +760,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 	public DLFolder fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFolderModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFolder.class.getName();
-		String finderMethodName = "fetchByUUID_G";
-		String[] finderParams = new String[] {
-				String.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -612,16 +806,19 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 				List<DLFolder> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				DLFolder dlFolder = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					dlFolder = list.get(0);
+
+					cacheResult(dlFolder);
 				}
+
+				return dlFolder;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -631,30 +828,20 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<DLFolder> list = (List<DLFolder>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (DLFolder)result;
 			}
 		}
 	}
 
 	public List<DLFolder> findByGroupId(long groupId) throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFolderModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFolder.class.getName();
-		String finderMethodName = "findByGroupId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -684,9 +871,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 				List<DLFolder> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -709,27 +897,14 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFolder> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFolderModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFolder.class.getName();
-		String finderMethodName = "findByGroupId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -767,9 +942,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 				List<DLFolder> list = (List<DLFolder>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -789,7 +965,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchFolderException, SystemException {
 		List<DLFolder> list = findByGroupId(groupId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFolder exists with the key {");
@@ -811,7 +987,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 		List<DLFolder> list = findByGroupId(groupId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFolder exists with the key {");
@@ -885,18 +1061,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFolder> findByCompanyId(long companyId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFolderModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFolder.class.getName();
-		String finderMethodName = "findByCompanyId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -926,9 +1094,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 				List<DLFolder> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -951,27 +1120,14 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFolder> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFolderModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFolder.class.getName();
-		String finderMethodName = "findByCompanyId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1009,9 +1165,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 				List<DLFolder> list = (List<DLFolder>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1031,7 +1188,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchFolderException, SystemException {
 		List<DLFolder> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFolder exists with the key {");
@@ -1053,7 +1210,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 		List<DLFolder> list = findByCompanyId(companyId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFolder exists with the key {");
@@ -1128,22 +1285,12 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFolder> findByG_P(long groupId, long parentFolderId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFolderModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFolder.class.getName();
-		String finderMethodName = "findByG_P";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(parentFolderId)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_P,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1179,9 +1326,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 				List<DLFolder> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_P, finderArgs,
+					list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1204,27 +1352,14 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFolder> findByG_P(long groupId, long parentFolderId,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFolderModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFolder.class.getName();
-		String finderMethodName = "findByG_P";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(parentFolderId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_P,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1268,9 +1403,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 				List<DLFolder> list = (List<DLFolder>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_P,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1290,7 +1426,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchFolderException, SystemException {
 		List<DLFolder> list = findByG_P(groupId, parentFolderId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFolder exists with the key {");
@@ -1316,7 +1452,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 		List<DLFolder> list = findByG_P(groupId, parentFolderId, count - 1,
 				count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFolder exists with the key {");
@@ -1400,20 +1536,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFolder> findByP_N(long parentFolderId, String name)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFolderModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFolder.class.getName();
-		String finderMethodName = "findByP_N";
-		String[] finderParams = new String[] {
-				Long.class.getName(), String.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(parentFolderId), name };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_P_N,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1456,9 +1582,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 				List<DLFolder> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_P_N, finderArgs,
+					list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1481,15 +1608,6 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFolder> findByP_N(long parentFolderId, String name,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFolderModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFolder.class.getName();
-		String finderMethodName = "findByP_N";
-		String[] finderParams = new String[] {
-				Long.class.getName(), String.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(parentFolderId),
 				
@@ -1498,12 +1616,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_P_N,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1554,9 +1668,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 				List<DLFolder> list = (List<DLFolder>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_P_N,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1576,7 +1691,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchFolderException, SystemException {
 		List<DLFolder> list = findByP_N(parentFolderId, name, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFolder exists with the key {");
@@ -1602,7 +1717,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 		List<DLFolder> list = findByP_N(parentFolderId, name, count - 1, count,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFolder exists with the key {");
@@ -1722,25 +1837,14 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 	public DLFolder fetchByG_P_N(long groupId, long parentFolderId, String name)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFolderModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFolder.class.getName();
-		String finderMethodName = "fetchByG_P_N";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(),
-				String.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(parentFolderId),
 				
 				name
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_P_N,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1789,16 +1893,19 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 				List<DLFolder> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				DLFolder dlFolder = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_N,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					dlFolder = list.get(0);
+
+					cacheResult(dlFolder);
 				}
+
+				return dlFolder;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1808,13 +1915,11 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<DLFolder> list = (List<DLFolder>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (DLFolder)result;
 			}
 		}
 	}
@@ -1869,23 +1974,12 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFolder> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFolderModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFolder.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1925,9 +2019,9 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1996,18 +2090,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByUuid(String uuid) throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFolderModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFolder.class.getName();
-		String finderMethodName = "countByUuid";
-		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { uuid };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2050,8 +2136,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -2070,20 +2155,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFolderModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFolder.class.getName();
-		String finderMethodName = "countByUUID_G";
-		String[] finderParams = new String[] {
-				String.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID_G,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2132,8 +2207,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G,
 					finderArgs, count);
 
 				return count.intValue();
@@ -2151,18 +2225,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFolderModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFolder.class.getName();
-		String finderMethodName = "countByGroupId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2198,8 +2264,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -2217,18 +2282,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFolderModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFolder.class.getName();
-		String finderMethodName = "countByCompanyId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2264,8 +2321,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_COMPANYID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -2284,22 +2340,12 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 	public int countByG_P(long groupId, long parentFolderId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFolderModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFolder.class.getName();
-		String finderMethodName = "countByG_P";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(parentFolderId)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_P,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2341,9 +2387,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_P, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -2361,20 +2406,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 	public int countByP_N(long parentFolderId, String name)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFolderModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFolder.class.getName();
-		String finderMethodName = "countByP_N";
-		String[] finderParams = new String[] {
-				Long.class.getName(), String.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(parentFolderId), name };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_P_N,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2423,9 +2458,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_P_N, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -2443,25 +2477,14 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 	public int countByG_P_N(long groupId, long parentFolderId, String name)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFolderModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFolder.class.getName();
-		String finderMethodName = "countByG_P_N";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(),
-				String.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(parentFolderId),
 				
 				name
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_P_N,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2516,8 +2539,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_P_N,
 					finderArgs, count);
 
 				return count.intValue();
@@ -2535,18 +2557,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = DLFolderModelImpl.CACHE_ENABLED;
-		String finderClassName = DLFolder.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2569,9 +2583,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

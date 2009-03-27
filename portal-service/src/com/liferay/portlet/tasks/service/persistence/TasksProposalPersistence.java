@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface TasksProposalPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.tasks.model.TasksProposal tasksProposal);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.tasks.model.TasksProposal> tasksProposals);
+
 	public com.liferay.portlet.tasks.model.TasksProposal create(long proposalId);
 
 	public com.liferay.portlet.tasks.model.TasksProposal remove(long proposalId)

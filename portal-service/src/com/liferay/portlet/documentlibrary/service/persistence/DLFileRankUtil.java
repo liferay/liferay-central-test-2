@@ -29,6 +29,16 @@ package com.liferay.portlet.documentlibrary.service.persistence;
  *
  */
 public class DLFileRankUtil {
+	public static void cacheResult(
+		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank) {
+		getPersistence().cacheResult(dlFileRank);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> dlFileRanks) {
+		getPersistence().cacheResult(dlFileRanks);
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank create(
 		long fileRankId) {
 		return getPersistence().create(fileRankId);

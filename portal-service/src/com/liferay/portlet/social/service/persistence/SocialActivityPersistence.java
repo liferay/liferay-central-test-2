@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface SocialActivityPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.social.model.SocialActivity socialActivity);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.social.model.SocialActivity> socialActivities);
+
 	public com.liferay.portlet.social.model.SocialActivity create(
 		long activityId);
 

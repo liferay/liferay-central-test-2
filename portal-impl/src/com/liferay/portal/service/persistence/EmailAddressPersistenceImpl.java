@@ -26,7 +26,9 @@ import com.liferay.portal.NoSuchEmailAddressException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -56,6 +58,123 @@ import java.util.List;
  */
 public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 	implements EmailAddressPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = EmailAddress.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = EmailAddress.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
+			EmailAddressModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByCompanyId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_COMPANYID = new FinderPath(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
+			EmailAddressModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByCompanyId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
+			EmailAddressModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByCompanyId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_USERID = new FinderPath(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
+			EmailAddressModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByUserId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_USERID = new FinderPath(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
+			EmailAddressModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByUserId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_USERID = new FinderPath(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
+			EmailAddressModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByUserId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_C_C = new FinderPath(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
+			EmailAddressModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByC_C",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_C = new FinderPath(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
+			EmailAddressModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByC_C",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_C = new FinderPath(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
+			EmailAddressModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByC_C",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_C_C_C = new FinderPath(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
+			EmailAddressModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByC_C_C",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_C_C = new FinderPath(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
+			EmailAddressModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByC_C_C",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_C_C = new FinderPath(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
+			EmailAddressModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByC_C_C",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_C_C_C_P = new FinderPath(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
+			EmailAddressModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByC_C_C_P",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName(),
+				Boolean.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_C_C_P = new FinderPath(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
+			EmailAddressModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByC_C_C_P",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName(),
+				Boolean.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_C_C_P = new FinderPath(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
+			EmailAddressModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByC_C_C_P",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName(),
+				Boolean.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
+			EmailAddressModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
+			EmailAddressModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countAll", new String[0]);
+
+	public void cacheResult(EmailAddress emailAddress) {
+		EntityCacheUtil.putResult(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
+			EmailAddress.class, emailAddress.getPrimaryKey(), emailAddress);
+	}
+
+	public void cacheResult(List<EmailAddress> emailAddresses) {
+		for (EmailAddress emailAddress : emailAddresses) {
+			if (EntityCacheUtil.getResult(
+						EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
+						EmailAddress.class, emailAddress.getPrimaryKey(), this) == null) {
+				cacheResult(emailAddress);
+			}
+		}
+	}
+
 	public EmailAddress create(long emailAddressId) {
 		EmailAddress emailAddress = new EmailAddressImpl();
 
@@ -133,17 +252,22 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 			session.delete(emailAddress);
 
 			session.flush();
-
-			return emailAddress;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(EmailAddress.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		EmailAddressModelImpl emailAddressModelImpl = (EmailAddressModelImpl)emailAddress;
+
+		EntityCacheUtil.removeResult(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
+			EmailAddress.class, emailAddress.getPrimaryKey());
+
+		return emailAddress;
 	}
 
 	/**
@@ -202,6 +326,8 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 	public EmailAddress updateImpl(
 		com.liferay.portal.model.EmailAddress emailAddress, boolean merge)
 		throws SystemException {
+		boolean isNew = emailAddress.isNew();
+
 		Session session = null;
 
 		try {
@@ -210,17 +336,22 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, emailAddress, merge);
 
 			emailAddress.setNew(false);
-
-			return emailAddress;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(EmailAddress.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		EmailAddressModelImpl emailAddressModelImpl = (EmailAddressModelImpl)emailAddress;
+
+		EntityCacheUtil.putResult(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
+			EmailAddress.class, emailAddress.getPrimaryKey(), emailAddress);
+
+		return emailAddress;
 	}
 
 	public EmailAddress findByPrimaryKey(long emailAddressId)
@@ -243,36 +374,40 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 	public EmailAddress fetchByPrimaryKey(long emailAddressId)
 		throws SystemException {
-		Session session = null;
+		EmailAddress result = (EmailAddress)EntityCacheUtil.getResult(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
+				EmailAddress.class, emailAddressId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (EmailAddress)session.get(EmailAddressImpl.class,
-				new Long(emailAddressId));
+			try {
+				session = openSession();
+
+				EmailAddress emailAddress = (EmailAddress)session.get(EmailAddressImpl.class,
+						new Long(emailAddressId));
+
+				cacheResult(emailAddress);
+
+				return emailAddress;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (EmailAddress)result;
 		}
 	}
 
 	public List<EmailAddress> findByCompanyId(long companyId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = EmailAddressModelImpl.CACHE_ENABLED;
-		String finderClassName = EmailAddress.class.getName();
-		String finderMethodName = "findByCompanyId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -301,9 +436,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 				List<EmailAddress> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -326,27 +462,14 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 	public List<EmailAddress> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = EmailAddressModelImpl.CACHE_ENABLED;
-		String finderClassName = EmailAddress.class.getName();
-		String finderMethodName = "findByCompanyId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -383,9 +506,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 				List<EmailAddress> list = (List<EmailAddress>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -406,7 +530,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchEmailAddressException, SystemException {
 		List<EmailAddress> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No EmailAddress exists with the key {");
@@ -430,7 +554,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 		List<EmailAddress> list = findByCompanyId(companyId, count - 1, count,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No EmailAddress exists with the key {");
@@ -504,18 +628,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 	public List<EmailAddress> findByUserId(long userId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = EmailAddressModelImpl.CACHE_ENABLED;
-		String finderClassName = EmailAddress.class.getName();
-		String finderMethodName = "findByUserId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -544,9 +660,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 				List<EmailAddress> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -569,27 +686,14 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 	public List<EmailAddress> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = EmailAddressModelImpl.CACHE_ENABLED;
-		String finderClassName = EmailAddress.class.getName();
-		String finderMethodName = "findByUserId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -626,9 +730,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 				List<EmailAddress> list = (List<EmailAddress>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -648,7 +753,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchEmailAddressException, SystemException {
 		List<EmailAddress> list = findByUserId(userId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No EmailAddress exists with the key {");
@@ -670,7 +775,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 		List<EmailAddress> list = findByUserId(userId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No EmailAddress exists with the key {");
@@ -744,22 +849,12 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 	public List<EmailAddress> findByC_C(long companyId, long classNameId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = EmailAddressModelImpl.CACHE_ENABLED;
-		String finderClassName = EmailAddress.class.getName();
-		String finderMethodName = "findByC_C";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_C,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -794,9 +889,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 				List<EmailAddress> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C, finderArgs,
+					list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -819,27 +915,14 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 	public List<EmailAddress> findByC_C(long companyId, long classNameId,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = EmailAddressModelImpl.CACHE_ENABLED;
-		String finderClassName = EmailAddress.class.getName();
-		String finderMethodName = "findByC_C";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -882,9 +965,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 				List<EmailAddress> list = (List<EmailAddress>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_C,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -905,7 +989,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchEmailAddressException, SystemException {
 		List<EmailAddress> list = findByC_C(companyId, classNameId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No EmailAddress exists with the key {");
@@ -932,7 +1016,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 		List<EmailAddress> list = findByC_C(companyId, classNameId, count - 1,
 				count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No EmailAddress exists with the key {");
@@ -1015,22 +1099,12 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 	public List<EmailAddress> findByC_C_C(long companyId, long classNameId,
 		long classPK) throws SystemException {
-		boolean finderClassNameCacheEnabled = EmailAddressModelImpl.CACHE_ENABLED;
-		String finderClassName = EmailAddress.class.getName();
-		String finderMethodName = "findByC_C_C";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_C_C,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1071,9 +1145,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 				List<EmailAddress> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C_C,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1097,27 +1172,14 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 	public List<EmailAddress> findByC_C_C(long companyId, long classNameId,
 		long classPK, int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = EmailAddressModelImpl.CACHE_ENABLED;
-		String finderClassName = EmailAddress.class.getName();
-		String finderMethodName = "findByC_C_C";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C_C,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1166,9 +1228,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 				List<EmailAddress> list = (List<EmailAddress>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_C_C,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1190,7 +1253,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 		List<EmailAddress> list = findByC_C_C(companyId, classNameId, classPK,
 				0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No EmailAddress exists with the key {");
@@ -1220,7 +1283,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 		List<EmailAddress> list = findByC_C_C(companyId, classNameId, classPK,
 				count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No EmailAddress exists with the key {");
@@ -1312,24 +1375,13 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 	public List<EmailAddress> findByC_C_C_P(long companyId, long classNameId,
 		long classPK, boolean primary) throws SystemException {
-		boolean finderClassNameCacheEnabled = EmailAddressModelImpl.CACHE_ENABLED;
-		String finderClassName = EmailAddress.class.getName();
-		String finderMethodName = "findByC_C_C_P";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName(),
-				Boolean.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK),
 				Boolean.valueOf(primary)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_C_C_P,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1376,9 +1428,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 				List<EmailAddress> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C_C_P,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1404,16 +1457,6 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 	public List<EmailAddress> findByC_C_C_P(long companyId, long classNameId,
 		long classPK, boolean primary, int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = EmailAddressModelImpl.CACHE_ENABLED;
-		String finderClassName = EmailAddress.class.getName();
-		String finderMethodName = "findByC_C_C_P";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName(),
-				Boolean.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK),
 				Boolean.valueOf(primary),
@@ -1421,12 +1464,8 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C_C_P,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1481,9 +1520,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 				List<EmailAddress> list = (List<EmailAddress>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_C_C_P,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1505,7 +1545,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 		List<EmailAddress> list = findByC_C_C_P(companyId, classNameId,
 				classPK, primary, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No EmailAddress exists with the key {");
@@ -1538,7 +1578,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 		List<EmailAddress> list = findByC_C_C_P(companyId, classNameId,
 				classPK, primary, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No EmailAddress exists with the key {");
@@ -1689,23 +1729,12 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 	public List<EmailAddress> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = EmailAddressModelImpl.CACHE_ENABLED;
-		String finderClassName = EmailAddress.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1743,9 +1772,9 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1803,18 +1832,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
-		boolean finderClassNameCacheEnabled = EmailAddressModelImpl.CACHE_ENABLED;
-		String finderClassName = EmailAddress.class.getName();
-		String finderMethodName = "countByCompanyId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1850,8 +1871,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_COMPANYID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1869,18 +1889,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByUserId(long userId) throws SystemException {
-		boolean finderClassNameCacheEnabled = EmailAddressModelImpl.CACHE_ENABLED;
-		String finderClassName = EmailAddress.class.getName();
-		String finderMethodName = "countByUserId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1916,8 +1928,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -1936,22 +1947,12 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 	public int countByC_C(long companyId, long classNameId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = EmailAddressModelImpl.CACHE_ENABLED;
-		String finderClassName = EmailAddress.class.getName();
-		String finderMethodName = "countByC_C";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1993,9 +1994,8 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -2013,22 +2013,12 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 	public int countByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = EmailAddressModelImpl.CACHE_ENABLED;
-		String finderClassName = EmailAddress.class.getName();
-		String finderMethodName = "countByC_C_C";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C_C,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2076,8 +2066,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C_C,
 					finderArgs, count);
 
 				return count.intValue();
@@ -2096,24 +2085,13 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 	public int countByC_C_C_P(long companyId, long classNameId, long classPK,
 		boolean primary) throws SystemException {
-		boolean finderClassNameCacheEnabled = EmailAddressModelImpl.CACHE_ENABLED;
-		String finderClassName = EmailAddress.class.getName();
-		String finderMethodName = "countByC_C_C_P";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName(),
-				Boolean.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK),
 				Boolean.valueOf(primary)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C_C_P,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2167,8 +2145,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C_C_P,
 					finderArgs, count);
 
 				return count.intValue();
@@ -2186,18 +2163,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = EmailAddressModelImpl.CACHE_ENABLED;
-		String finderClassName = EmailAddress.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2220,9 +2189,8 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

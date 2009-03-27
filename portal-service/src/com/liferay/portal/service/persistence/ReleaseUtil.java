@@ -29,6 +29,15 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class ReleaseUtil {
+	public static void cacheResult(com.liferay.portal.model.Release release) {
+		getPersistence().cacheResult(release);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.Release> releases) {
+		getPersistence().cacheResult(releases);
+	}
+
 	public static com.liferay.portal.model.Release create(long releaseId) {
 		return getPersistence().create(releaseId);
 	}

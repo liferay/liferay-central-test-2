@@ -83,7 +83,10 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.messageboards.model.MBStatsUser"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.messageboards.model.MBStatsUser"),
 			true);
 
@@ -144,7 +147,17 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser> {
 	public void setGroupId(long groupId) {
 		if (groupId != _groupId) {
 			_groupId = groupId;
+
+			if (!_setOriginalGroupId) {
+				_setOriginalGroupId = true;
+
+				_originalGroupId = groupId;
+			}
 		}
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	public long getUserId() {
@@ -154,7 +167,17 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser> {
 	public void setUserId(long userId) {
 		if (userId != _userId) {
 			_userId = userId;
+
+			if (!_setOriginalUserId) {
+				_setOriginalUserId = true;
+
+				_originalUserId = userId;
+			}
 		}
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	public int getMessageCount() {
@@ -277,7 +300,11 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser> {
 
 	private long _statsUserId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _userId;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private int _messageCount;
 	private Date _lastPostDate;
 	private transient ExpandoBridge _expandoBridge;

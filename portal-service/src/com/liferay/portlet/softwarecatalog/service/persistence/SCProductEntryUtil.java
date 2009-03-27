@@ -29,6 +29,16 @@ package com.liferay.portlet.softwarecatalog.service.persistence;
  *
  */
 public class SCProductEntryUtil {
+	public static void cacheResult(
+		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry) {
+		getPersistence().cacheResult(scProductEntry);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> scProductEntries) {
+		getPersistence().cacheResult(scProductEntries);
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry create(
 		long productEntryId) {
 		return getPersistence().create(productEntryId);

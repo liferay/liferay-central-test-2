@@ -29,6 +29,11 @@ package com.liferay.portal.service.persistence;
  *
  */
 public interface ReleasePersistence extends BasePersistence {
+	public void cacheResult(com.liferay.portal.model.Release release);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portal.model.Release> releases);
+
 	public com.liferay.portal.model.Release create(long releaseId);
 
 	public com.liferay.portal.model.Release remove(long releaseId)

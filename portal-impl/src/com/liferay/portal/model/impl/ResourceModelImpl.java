@@ -76,7 +76,10 @@ public class ResourceModelImpl extends BaseModelImpl<Resource> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portal.model.Resource"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Resource"),
 			true);
 
@@ -135,7 +138,17 @@ public class ResourceModelImpl extends BaseModelImpl<Resource> {
 	public void setCodeId(long codeId) {
 		if (codeId != _codeId) {
 			_codeId = codeId;
+
+			if (!_setOriginalCodeId) {
+				_setOriginalCodeId = true;
+
+				_originalCodeId = codeId;
+			}
 		}
+	}
+
+	public long getOriginalCodeId() {
+		return _originalCodeId;
 	}
 
 	public String getPrimKey() {
@@ -148,7 +161,15 @@ public class ResourceModelImpl extends BaseModelImpl<Resource> {
 				((primKey != null) && (_primKey != null) &&
 				!primKey.equals(_primKey))) {
 			_primKey = primKey;
+
+			if (_originalPrimKey == null) {
+				_originalPrimKey = primKey;
+			}
 		}
+	}
+
+	public String getOriginalPrimKey() {
+		return GetterUtil.getString(_originalPrimKey);
 	}
 
 	public Resource toEscapedModel() {
@@ -236,6 +257,9 @@ public class ResourceModelImpl extends BaseModelImpl<Resource> {
 
 	private long _resourceId;
 	private long _codeId;
+	private long _originalCodeId;
+	private boolean _setOriginalCodeId;
 	private String _primKey;
+	private String _originalPrimKey;
 	private transient ExpandoBridge _expandoBridge;
 }

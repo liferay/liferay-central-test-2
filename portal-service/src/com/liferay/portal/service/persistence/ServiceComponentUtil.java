@@ -29,6 +29,16 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class ServiceComponentUtil {
+	public static void cacheResult(
+		com.liferay.portal.model.ServiceComponent serviceComponent) {
+		getPersistence().cacheResult(serviceComponent);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.ServiceComponent> serviceComponents) {
+		getPersistence().cacheResult(serviceComponents);
+	}
+
 	public static com.liferay.portal.model.ServiceComponent create(
 		long serviceComponentId) {
 		return getPersistence().create(serviceComponentId);

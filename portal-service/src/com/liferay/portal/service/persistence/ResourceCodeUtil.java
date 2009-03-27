@@ -29,6 +29,16 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class ResourceCodeUtil {
+	public static void cacheResult(
+		com.liferay.portal.model.ResourceCode resourceCode) {
+		getPersistence().cacheResult(resourceCode);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.ResourceCode> resourceCodes) {
+		getPersistence().cacheResult(resourceCodes);
+	}
+
 	public static com.liferay.portal.model.ResourceCode create(long codeId) {
 		return getPersistence().create(codeId);
 	}

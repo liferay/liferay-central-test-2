@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface MBMessageFlagPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> mbMessageFlags);
+
 	public com.liferay.portlet.messageboards.model.MBMessageFlag create(
 		long messageFlagId);
 

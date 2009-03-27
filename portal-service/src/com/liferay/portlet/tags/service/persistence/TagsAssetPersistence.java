@@ -31,6 +31,11 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface TagsAssetPersistence extends BasePersistence {
+	public void cacheResult(com.liferay.portlet.tags.model.TagsAsset tagsAsset);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.tags.model.TagsAsset> tagsAssets);
+
 	public com.liferay.portlet.tags.model.TagsAsset create(long assetId);
 
 	public com.liferay.portlet.tags.model.TagsAsset remove(long assetId)

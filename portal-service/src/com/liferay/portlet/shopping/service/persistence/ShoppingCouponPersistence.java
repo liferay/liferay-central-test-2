@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface ShoppingCouponPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> shoppingCoupons);
+
 	public com.liferay.portlet.shopping.model.ShoppingCoupon create(
 		long couponId);
 

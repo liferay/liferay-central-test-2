@@ -29,6 +29,16 @@ package com.liferay.portlet.calendar.service.persistence;
  *
  */
 public class CalEventUtil {
+	public static void cacheResult(
+		com.liferay.portlet.calendar.model.CalEvent calEvent) {
+		getPersistence().cacheResult(calEvent);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.calendar.model.CalEvent> calEvents) {
+		getPersistence().cacheResult(calEvents);
+	}
+
 	public static com.liferay.portlet.calendar.model.CalEvent create(
 		long eventId) {
 		return getPersistence().create(eventId);

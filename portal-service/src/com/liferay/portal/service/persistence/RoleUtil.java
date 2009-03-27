@@ -29,6 +29,15 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class RoleUtil {
+	public static void cacheResult(com.liferay.portal.model.Role role) {
+		getPersistence().cacheResult(role);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.Role> roles) {
+		getPersistence().cacheResult(roles);
+	}
+
 	public static com.liferay.portal.model.Role create(long roleId) {
 		return getPersistence().create(roleId);
 	}

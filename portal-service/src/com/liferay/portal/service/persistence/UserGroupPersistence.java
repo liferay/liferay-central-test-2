@@ -29,6 +29,11 @@ package com.liferay.portal.service.persistence;
  *
  */
 public interface UserGroupPersistence extends BasePersistence {
+	public void cacheResult(com.liferay.portal.model.UserGroup userGroup);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portal.model.UserGroup> userGroups);
+
 	public com.liferay.portal.model.UserGroup create(long userGroupId);
 
 	public com.liferay.portal.model.UserGroup remove(long userGroupId)

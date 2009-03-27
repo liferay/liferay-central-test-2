@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface DLFolderPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> dlFolders);
+
 	public com.liferay.portlet.documentlibrary.model.DLFolder create(
 		long folderId);
 

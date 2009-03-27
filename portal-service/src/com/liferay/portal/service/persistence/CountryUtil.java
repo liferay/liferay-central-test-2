@@ -29,6 +29,15 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class CountryUtil {
+	public static void cacheResult(com.liferay.portal.model.Country country) {
+		getPersistence().cacheResult(country);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.Country> countries) {
+		getPersistence().cacheResult(countries);
+	}
+
 	public static com.liferay.portal.model.Country create(long countryId) {
 		return getPersistence().create(countryId);
 	}

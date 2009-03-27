@@ -29,6 +29,16 @@ package com.liferay.portlet.ratings.service.persistence;
  *
  */
 public class RatingsEntryUtil {
+	public static void cacheResult(
+		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry) {
+		getPersistence().cacheResult(ratingsEntry);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> ratingsEntries) {
+		getPersistence().cacheResult(ratingsEntries);
+	}
+
 	public static com.liferay.portlet.ratings.model.RatingsEntry create(
 		long entryId) {
 		return getPersistence().create(entryId);

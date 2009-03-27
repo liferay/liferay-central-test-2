@@ -29,6 +29,12 @@ package com.liferay.portal.service.persistence;
  *
  */
 public interface MembershipRequestPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portal.model.MembershipRequest membershipRequest);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portal.model.MembershipRequest> membershipRequests);
+
 	public com.liferay.portal.model.MembershipRequest create(
 		long membershipRequestId);
 

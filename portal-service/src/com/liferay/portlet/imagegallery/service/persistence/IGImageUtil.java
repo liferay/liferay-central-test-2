@@ -29,6 +29,16 @@ package com.liferay.portlet.imagegallery.service.persistence;
  *
  */
 public class IGImageUtil {
+	public static void cacheResult(
+		com.liferay.portlet.imagegallery.model.IGImage igImage) {
+		getPersistence().cacheResult(igImage);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.imagegallery.model.IGImage> igImages) {
+		getPersistence().cacheResult(igImages);
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGImage create(
 		long imageId) {
 		return getPersistence().create(imageId);

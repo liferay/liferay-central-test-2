@@ -25,7 +25,9 @@ package com.liferay.portlet.shopping.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -58,6 +60,50 @@ import java.util.List;
  */
 public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl
 	implements ShoppingItemFieldPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = ShoppingItemField.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = ShoppingItemField.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_ITEMID = new FinderPath(ShoppingItemFieldModelImpl.ENTITY_CACHE_ENABLED,
+			ShoppingItemFieldModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByItemId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_ITEMID = new FinderPath(ShoppingItemFieldModelImpl.ENTITY_CACHE_ENABLED,
+			ShoppingItemFieldModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByItemId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_ITEMID = new FinderPath(ShoppingItemFieldModelImpl.ENTITY_CACHE_ENABLED,
+			ShoppingItemFieldModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByItemId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(ShoppingItemFieldModelImpl.ENTITY_CACHE_ENABLED,
+			ShoppingItemFieldModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(ShoppingItemFieldModelImpl.ENTITY_CACHE_ENABLED,
+			ShoppingItemFieldModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
+
+	public void cacheResult(ShoppingItemField shoppingItemField) {
+		EntityCacheUtil.putResult(ShoppingItemFieldModelImpl.ENTITY_CACHE_ENABLED,
+			ShoppingItemField.class, shoppingItemField.getPrimaryKey(),
+			shoppingItemField);
+	}
+
+	public void cacheResult(List<ShoppingItemField> shoppingItemFields) {
+		for (ShoppingItemField shoppingItemField : shoppingItemFields) {
+			if (EntityCacheUtil.getResult(
+						ShoppingItemFieldModelImpl.ENTITY_CACHE_ENABLED,
+						ShoppingItemField.class,
+						shoppingItemField.getPrimaryKey(), this) == null) {
+				cacheResult(shoppingItemField);
+			}
+		}
+	}
+
 	public ShoppingItemField create(long itemFieldId) {
 		ShoppingItemField shoppingItemField = new ShoppingItemFieldImpl();
 
@@ -136,17 +182,22 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl
 			session.delete(shoppingItemField);
 
 			session.flush();
-
-			return shoppingItemField;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(ShoppingItemField.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		ShoppingItemFieldModelImpl shoppingItemFieldModelImpl = (ShoppingItemFieldModelImpl)shoppingItemField;
+
+		EntityCacheUtil.removeResult(ShoppingItemFieldModelImpl.ENTITY_CACHE_ENABLED,
+			ShoppingItemField.class, shoppingItemField.getPrimaryKey());
+
+		return shoppingItemField;
 	}
 
 	/**
@@ -205,6 +256,8 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl
 	public ShoppingItemField updateImpl(
 		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField,
 		boolean merge) throws SystemException {
+		boolean isNew = shoppingItemField.isNew();
+
 		Session session = null;
 
 		try {
@@ -213,17 +266,23 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, shoppingItemField, merge);
 
 			shoppingItemField.setNew(false);
-
-			return shoppingItemField;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(ShoppingItemField.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		ShoppingItemFieldModelImpl shoppingItemFieldModelImpl = (ShoppingItemFieldModelImpl)shoppingItemField;
+
+		EntityCacheUtil.putResult(ShoppingItemFieldModelImpl.ENTITY_CACHE_ENABLED,
+			ShoppingItemField.class, shoppingItemField.getPrimaryKey(),
+			shoppingItemField);
+
+		return shoppingItemField;
 	}
 
 	public ShoppingItemField findByPrimaryKey(long itemFieldId)
@@ -246,36 +305,40 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl
 
 	public ShoppingItemField fetchByPrimaryKey(long itemFieldId)
 		throws SystemException {
-		Session session = null;
+		ShoppingItemField result = (ShoppingItemField)EntityCacheUtil.getResult(ShoppingItemFieldModelImpl.ENTITY_CACHE_ENABLED,
+				ShoppingItemField.class, itemFieldId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (ShoppingItemField)session.get(ShoppingItemFieldImpl.class,
-				new Long(itemFieldId));
+			try {
+				session = openSession();
+
+				ShoppingItemField shoppingItemField = (ShoppingItemField)session.get(ShoppingItemFieldImpl.class,
+						new Long(itemFieldId));
+
+				cacheResult(shoppingItemField);
+
+				return shoppingItemField;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (ShoppingItemField)result;
 		}
 	}
 
 	public List<ShoppingItemField> findByItemId(long itemId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = ShoppingItemFieldModelImpl.CACHE_ENABLED;
-		String finderClassName = ShoppingItemField.class.getName();
-		String finderMethodName = "findByItemId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(itemId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ITEMID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -305,9 +368,10 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl
 
 				List<ShoppingItemField> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ITEMID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -330,27 +394,14 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl
 
 	public List<ShoppingItemField> findByItemId(long itemId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = ShoppingItemFieldModelImpl.CACHE_ENABLED;
-		String finderClassName = ShoppingItemField.class.getName();
-		String finderMethodName = "findByItemId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(itemId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ITEMID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -388,9 +439,10 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl
 				List<ShoppingItemField> list = (List<ShoppingItemField>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_ITEMID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -410,7 +462,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchItemFieldException, SystemException {
 		List<ShoppingItemField> list = findByItemId(itemId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ShoppingItemField exists with the key {");
@@ -433,7 +485,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl
 		List<ShoppingItemField> list = findByItemId(itemId, count - 1, count,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ShoppingItemField exists with the key {");
@@ -558,23 +610,12 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl
 
 	public List<ShoppingItemField> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = ShoppingItemFieldModelImpl.CACHE_ENABLED;
-		String finderClassName = ShoppingItemField.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -614,9 +655,9 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -645,18 +686,10 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByItemId(long itemId) throws SystemException {
-		boolean finderClassNameCacheEnabled = ShoppingItemFieldModelImpl.CACHE_ENABLED;
-		String finderClassName = ShoppingItemField.class.getName();
-		String finderMethodName = "countByItemId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(itemId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ITEMID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -692,8 +725,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_ITEMID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -711,18 +743,10 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = ShoppingItemFieldModelImpl.CACHE_ENABLED;
-		String finderClassName = ShoppingItemField.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -745,9 +769,8 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

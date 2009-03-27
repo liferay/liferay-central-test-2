@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface SCProductScreenshotPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> scProductScreenshots);
+
 	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot create(
 		long productScreenshotId);
 

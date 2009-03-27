@@ -29,6 +29,11 @@ package com.liferay.portal.service.persistence;
  *
  */
 public interface ImagePersistence extends BasePersistence {
+	public void cacheResult(com.liferay.portal.model.Image image);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portal.model.Image> images);
+
 	public com.liferay.portal.model.Image create(long imageId);
 
 	public com.liferay.portal.model.Image remove(long imageId)

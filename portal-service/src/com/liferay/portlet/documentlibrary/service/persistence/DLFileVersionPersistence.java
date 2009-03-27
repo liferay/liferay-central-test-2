@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface DLFileVersionPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> dlFileVersions);
+
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion create(
 		long fileVersionId);
 

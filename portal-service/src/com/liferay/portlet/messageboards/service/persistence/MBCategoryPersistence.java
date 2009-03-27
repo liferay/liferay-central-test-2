@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface MBCategoryPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.messageboards.model.MBCategory mbCategory);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.messageboards.model.MBCategory> mbCategories);
+
 	public com.liferay.portlet.messageboards.model.MBCategory create(
 		long categoryId);
 

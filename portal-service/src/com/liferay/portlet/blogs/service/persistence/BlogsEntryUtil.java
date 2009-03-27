@@ -29,6 +29,16 @@ package com.liferay.portlet.blogs.service.persistence;
  *
  */
 public class BlogsEntryUtil {
+	public static void cacheResult(
+		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry) {
+		getPersistence().cacheResult(blogsEntry);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> blogsEntries) {
+		getPersistence().cacheResult(blogsEntries);
+	}
+
 	public static com.liferay.portlet.blogs.model.BlogsEntry create(
 		long entryId) {
 		return getPersistence().create(entryId);

@@ -29,6 +29,11 @@ package com.liferay.portal.service.persistence;
  *
  */
 public interface OrgLaborPersistence extends BasePersistence {
+	public void cacheResult(com.liferay.portal.model.OrgLabor orgLabor);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portal.model.OrgLabor> orgLabors);
+
 	public com.liferay.portal.model.OrgLabor create(long orgLaborId);
 
 	public com.liferay.portal.model.OrgLabor remove(long orgLaborId)

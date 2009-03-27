@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface ExpandoColumnPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.expando.model.ExpandoColumn expandoColumn);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> expandoColumns);
+
 	public com.liferay.portlet.expando.model.ExpandoColumn create(long columnId);
 
 	public com.liferay.portlet.expando.model.ExpandoColumn remove(long columnId)

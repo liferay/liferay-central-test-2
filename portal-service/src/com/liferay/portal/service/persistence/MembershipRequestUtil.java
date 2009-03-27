@@ -29,6 +29,16 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class MembershipRequestUtil {
+	public static void cacheResult(
+		com.liferay.portal.model.MembershipRequest membershipRequest) {
+		getPersistence().cacheResult(membershipRequest);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.MembershipRequest> membershipRequests) {
+		getPersistence().cacheResult(membershipRequests);
+	}
+
 	public static com.liferay.portal.model.MembershipRequest create(
 		long membershipRequestId) {
 		return getPersistence().create(membershipRequestId);

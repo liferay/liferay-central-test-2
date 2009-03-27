@@ -29,6 +29,16 @@ package com.liferay.portlet.announcements.service.persistence;
  *
  */
 public class AnnouncementsEntryUtil {
+	public static void cacheResult(
+		com.liferay.portlet.announcements.model.AnnouncementsEntry announcementsEntry) {
+		getPersistence().cacheResult(announcementsEntry);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> announcementsEntries) {
+		getPersistence().cacheResult(announcementsEntries);
+	}
+
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry create(
 		long entryId) {
 		return getPersistence().create(entryId);

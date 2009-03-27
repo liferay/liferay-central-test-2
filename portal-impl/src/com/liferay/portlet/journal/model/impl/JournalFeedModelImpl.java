@@ -138,7 +138,10 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.journal.model.JournalFeed"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.journal.model.JournalFeed"),
 			true);
 
@@ -205,9 +208,17 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setUuid(String uuid) {
-		if ((uuid != null) && (uuid != _uuid)) {
+		if ((uuid != null) && !uuid.equals(_uuid)) {
 			_uuid = uuid;
+
+			if (_originalUuid == null) {
+				_originalUuid = uuid;
+			}
 		}
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
 	}
 
 	public long getId() {
@@ -227,7 +238,17 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	public void setGroupId(long groupId) {
 		if (groupId != _groupId) {
 			_groupId = groupId;
+
+			if (!_setOriginalGroupId) {
+				_setOriginalGroupId = true;
+
+				_originalGroupId = groupId;
+			}
 		}
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	public long getCompanyId() {
@@ -299,7 +320,15 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 				((feedId != null) && (_feedId != null) &&
 				!feedId.equals(_feedId))) {
 			_feedId = feedId;
+
+			if (_originalFeedId == null) {
+				_originalFeedId = feedId;
+			}
 		}
+	}
+
+	public String getOriginalFeedId() {
+		return GetterUtil.getString(_originalFeedId);
 	}
 
 	public String getName() {
@@ -602,14 +631,18 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	private String _uuid;
+	private String _originalUuid;
 	private long _id;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _feedId;
+	private String _originalFeedId;
 	private String _name;
 	private String _description;
 	private String _type;

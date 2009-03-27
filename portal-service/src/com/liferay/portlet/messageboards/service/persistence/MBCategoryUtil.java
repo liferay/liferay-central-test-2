@@ -29,6 +29,16 @@ package com.liferay.portlet.messageboards.service.persistence;
  *
  */
 public class MBCategoryUtil {
+	public static void cacheResult(
+		com.liferay.portlet.messageboards.model.MBCategory mbCategory) {
+		getPersistence().cacheResult(mbCategory);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.messageboards.model.MBCategory> mbCategories) {
+		getPersistence().cacheResult(mbCategories);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBCategory create(
 		long categoryId) {
 		return getPersistence().create(categoryId);

@@ -120,7 +120,10 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.documentlibrary.model.DLFileEntry"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.documentlibrary.model.DLFileEntry"),
 			true);
 
@@ -181,7 +184,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public void setUuid(String uuid) {
-		if ((uuid != null) && (uuid != _uuid)) {
+		if ((uuid != null) && !uuid.equals(_uuid)) {
 			_uuid = uuid;
 		}
 	}
@@ -285,7 +288,17 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	public void setFolderId(long folderId) {
 		if (folderId != _folderId) {
 			_folderId = folderId;
+
+			if (!_setOriginalFolderId) {
+				_setOriginalFolderId = true;
+
+				_originalFolderId = folderId;
+			}
 		}
+	}
+
+	public long getOriginalFolderId() {
+		return _originalFolderId;
 	}
 
 	public String getName() {
@@ -297,7 +310,15 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 				((name != null) && (_name == null)) ||
 				((name != null) && (_name != null) && !name.equals(_name))) {
 			_name = name;
+
+			if (_originalName == null) {
+				_originalName = name;
+			}
 		}
+	}
+
+	public String getOriginalName() {
+		return GetterUtil.getString(_originalName);
 	}
 
 	public String getTitle() {
@@ -501,7 +522,10 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _folderId;
+	private long _originalFolderId;
+	private boolean _setOriginalFolderId;
 	private String _name;
+	private String _originalName;
 	private String _title;
 	private String _description;
 	private double _version;

@@ -25,7 +25,9 @@ package com.liferay.portlet.wiki.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -58,6 +60,48 @@ import java.util.List;
  */
 public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 	implements WikiPageResourcePersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = WikiPageResource.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = WikiPageResource.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FETCH_BY_N_T = new FinderPath(WikiPageResourceModelImpl.ENTITY_CACHE_ENABLED,
+			WikiPageResourceModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByN_T",
+			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_N_T = new FinderPath(WikiPageResourceModelImpl.ENTITY_CACHE_ENABLED,
+			WikiPageResourceModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByN_T",
+			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(WikiPageResourceModelImpl.ENTITY_CACHE_ENABLED,
+			WikiPageResourceModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(WikiPageResourceModelImpl.ENTITY_CACHE_ENABLED,
+			WikiPageResourceModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
+
+	public void cacheResult(WikiPageResource wikiPageResource) {
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_T,
+			new Object[] {
+				new Long(wikiPageResource.getNodeId()),
+				
+			wikiPageResource.getTitle()
+			}, wikiPageResource);
+
+		EntityCacheUtil.putResult(WikiPageResourceModelImpl.ENTITY_CACHE_ENABLED,
+			WikiPageResource.class, wikiPageResource.getPrimaryKey(),
+			wikiPageResource);
+	}
+
+	public void cacheResult(List<WikiPageResource> wikiPageResources) {
+		for (WikiPageResource wikiPageResource : wikiPageResources) {
+			if (EntityCacheUtil.getResult(
+						WikiPageResourceModelImpl.ENTITY_CACHE_ENABLED,
+						WikiPageResource.class,
+						wikiPageResource.getPrimaryKey(), this) == null) {
+				cacheResult(wikiPageResource);
+			}
+		}
+	}
+
 	public WikiPageResource create(long resourcePrimKey) {
 		WikiPageResource wikiPageResource = new WikiPageResourceImpl();
 
@@ -136,17 +180,29 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 			session.delete(wikiPageResource);
 
 			session.flush();
-
-			return wikiPageResource;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(WikiPageResource.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		WikiPageResourceModelImpl wikiPageResourceModelImpl = (WikiPageResourceModelImpl)wikiPageResource;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_T,
+			new Object[] {
+				new Long(wikiPageResourceModelImpl.getOriginalNodeId()),
+				
+			wikiPageResourceModelImpl.getOriginalTitle()
+			});
+
+		EntityCacheUtil.removeResult(WikiPageResourceModelImpl.ENTITY_CACHE_ENABLED,
+			WikiPageResource.class, wikiPageResource.getPrimaryKey());
+
+		return wikiPageResource;
 	}
 
 	/**
@@ -205,6 +261,8 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 	public WikiPageResource updateImpl(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource,
 		boolean merge) throws SystemException {
+		boolean isNew = wikiPageResource.isNew();
+
 		Session session = null;
 
 		try {
@@ -213,17 +271,47 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, wikiPageResource, merge);
 
 			wikiPageResource.setNew(false);
-
-			return wikiPageResource;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(WikiPageResource.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		WikiPageResourceModelImpl wikiPageResourceModelImpl = (WikiPageResourceModelImpl)wikiPageResource;
+
+		if (!isNew &&
+				((wikiPageResource.getNodeId() != wikiPageResourceModelImpl.getOriginalNodeId()) ||
+				!wikiPageResource.getTitle()
+									 .equals(wikiPageResourceModelImpl.getOriginalTitle()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_T,
+				new Object[] {
+					new Long(wikiPageResourceModelImpl.getOriginalNodeId()),
+					
+				wikiPageResourceModelImpl.getOriginalTitle()
+				});
+		}
+
+		if (isNew ||
+				((wikiPageResource.getNodeId() != wikiPageResourceModelImpl.getOriginalNodeId()) ||
+				!wikiPageResource.getTitle()
+									 .equals(wikiPageResourceModelImpl.getOriginalTitle()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_T,
+				new Object[] {
+					new Long(wikiPageResource.getNodeId()),
+					
+				wikiPageResource.getTitle()
+				}, wikiPageResource);
+		}
+
+		EntityCacheUtil.putResult(WikiPageResourceModelImpl.ENTITY_CACHE_ENABLED,
+			WikiPageResource.class, wikiPageResource.getPrimaryKey(),
+			wikiPageResource);
+
+		return wikiPageResource;
 	}
 
 	public WikiPageResource findByPrimaryKey(long resourcePrimKey)
@@ -246,19 +334,31 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 
 	public WikiPageResource fetchByPrimaryKey(long resourcePrimKey)
 		throws SystemException {
-		Session session = null;
+		WikiPageResource result = (WikiPageResource)EntityCacheUtil.getResult(WikiPageResourceModelImpl.ENTITY_CACHE_ENABLED,
+				WikiPageResource.class, resourcePrimKey, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (WikiPageResource)session.get(WikiPageResourceImpl.class,
-				new Long(resourcePrimKey));
+			try {
+				session = openSession();
+
+				WikiPageResource wikiPageResource = (WikiPageResource)session.get(WikiPageResourceImpl.class,
+						new Long(resourcePrimKey));
+
+				cacheResult(wikiPageResource);
+
+				return wikiPageResource;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (WikiPageResource)result;
 		}
 	}
 
@@ -290,20 +390,10 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 
 	public WikiPageResource fetchByN_T(long nodeId, String title)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = WikiPageResourceModelImpl.CACHE_ENABLED;
-		String finderClassName = WikiPageResource.class.getName();
-		String finderMethodName = "fetchByN_T";
-		String[] finderParams = new String[] {
-				Long.class.getName(), String.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(nodeId), title };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_N_T,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -341,16 +431,19 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 
 				List<WikiPageResource> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				WikiPageResource wikiPageResource = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_T,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					wikiPageResource = list.get(0);
+
+					cacheResult(wikiPageResource);
 				}
+
+				return wikiPageResource;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -360,13 +453,11 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<WikiPageResource> list = (List<WikiPageResource>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (WikiPageResource)result;
 			}
 		}
 	}
@@ -422,23 +513,12 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 
 	public List<WikiPageResource> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = WikiPageResourceModelImpl.CACHE_ENABLED;
-		String finderClassName = WikiPageResource.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -471,9 +551,9 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -503,20 +583,10 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByN_T(long nodeId, String title) throws SystemException {
-		boolean finderClassNameCacheEnabled = WikiPageResourceModelImpl.CACHE_ENABLED;
-		String finderClassName = WikiPageResource.class.getName();
-		String finderMethodName = "countByN_T";
-		String[] finderParams = new String[] {
-				Long.class.getName(), String.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(nodeId), title };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_N_T,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -565,9 +635,8 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_N_T, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -584,18 +653,10 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = WikiPageResourceModelImpl.CACHE_ENABLED;
-		String finderClassName = WikiPageResource.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -618,9 +679,8 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

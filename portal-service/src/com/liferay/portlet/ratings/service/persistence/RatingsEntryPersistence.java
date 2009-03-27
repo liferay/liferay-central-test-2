@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface RatingsEntryPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> ratingsEntries);
+
 	public com.liferay.portlet.ratings.model.RatingsEntry create(long entryId);
 
 	public com.liferay.portlet.ratings.model.RatingsEntry remove(long entryId)

@@ -25,7 +25,9 @@ package com.liferay.portlet.social.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -60,6 +62,189 @@ import java.util.List;
  */
 public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 	implements SocialRelationPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = SocialRelation.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = SocialRelation.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelationModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByUuid",
+			new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_UUID = new FinderPath(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelationModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByUuid",
+			new String[] {
+				String.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_UUID = new FinderPath(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelationModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByUuid",
+			new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelationModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByCompanyId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_COMPANYID = new FinderPath(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelationModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByCompanyId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelationModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByCompanyId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_USERID1 = new FinderPath(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelationModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByUserId1",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_USERID1 = new FinderPath(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelationModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByUserId1",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_USERID1 = new FinderPath(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelationModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByUserId1",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_USERID2 = new FinderPath(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelationModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByUserId2",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_USERID2 = new FinderPath(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelationModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByUserId2",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_USERID2 = new FinderPath(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelationModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByUserId2",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_TYPE = new FinderPath(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelationModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByType",
+			new String[] { Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_TYPE = new FinderPath(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelationModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByType",
+			new String[] {
+				Integer.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_TYPE = new FinderPath(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelationModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByType",
+			new String[] { Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_C_T = new FinderPath(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelationModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByC_T",
+			new String[] { Long.class.getName(), Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_T = new FinderPath(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelationModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByC_T",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_T = new FinderPath(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelationModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByC_T",
+			new String[] { Long.class.getName(), Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_U1_T = new FinderPath(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelationModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByU1_T",
+			new String[] { Long.class.getName(), Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_U1_T = new FinderPath(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelationModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByU1_T",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_U1_T = new FinderPath(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelationModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByU1_T",
+			new String[] { Long.class.getName(), Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_U2_T = new FinderPath(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelationModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByU2_T",
+			new String[] { Long.class.getName(), Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_U2_T = new FinderPath(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelationModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByU2_T",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_U2_T = new FinderPath(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelationModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByU2_T",
+			new String[] { Long.class.getName(), Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_U1_U2_T = new FinderPath(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelationModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByU1_U2_T",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_U1_U2_T = new FinderPath(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelationModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByU1_U2_T",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelationModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelationModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
+
+	public void cacheResult(SocialRelation socialRelation) {
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U1_U2_T,
+			new Object[] {
+				new Long(socialRelation.getUserId1()),
+				new Long(socialRelation.getUserId2()),
+				new Integer(socialRelation.getType())
+			}, socialRelation);
+
+		EntityCacheUtil.putResult(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelation.class, socialRelation.getPrimaryKey(), socialRelation);
+	}
+
+	public void cacheResult(List<SocialRelation> socialRelations) {
+		for (SocialRelation socialRelation : socialRelations) {
+			if (EntityCacheUtil.getResult(
+						SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+						SocialRelation.class, socialRelation.getPrimaryKey(),
+						this) == null) {
+				cacheResult(socialRelation);
+			}
+		}
+	}
+
 	public SocialRelation create(long relationId) {
 		SocialRelation socialRelation = new SocialRelationImpl();
 
@@ -141,17 +326,29 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 			session.delete(socialRelation);
 
 			session.flush();
-
-			return socialRelation;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(SocialRelation.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		SocialRelationModelImpl socialRelationModelImpl = (SocialRelationModelImpl)socialRelation;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U1_U2_T,
+			new Object[] {
+				new Long(socialRelationModelImpl.getOriginalUserId1()),
+				new Long(socialRelationModelImpl.getOriginalUserId2()),
+				new Integer(socialRelationModelImpl.getOriginalType())
+			});
+
+		EntityCacheUtil.removeResult(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelation.class, socialRelation.getPrimaryKey());
+
+		return socialRelation;
 	}
 
 	/**
@@ -210,6 +407,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 	public SocialRelation updateImpl(
 		com.liferay.portlet.social.model.SocialRelation socialRelation,
 		boolean merge) throws SystemException {
+		boolean isNew = socialRelation.isNew();
+
 		if (Validator.isNull(socialRelation.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
 
@@ -224,17 +423,46 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, socialRelation, merge);
 
 			socialRelation.setNew(false);
-
-			return socialRelation;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(SocialRelation.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		SocialRelationModelImpl socialRelationModelImpl = (SocialRelationModelImpl)socialRelation;
+
+		if (!isNew &&
+				((socialRelation.getUserId1() != socialRelationModelImpl.getOriginalUserId1()) ||
+				(socialRelation.getUserId2() != socialRelationModelImpl.getOriginalUserId2()) ||
+				(socialRelation.getType() != socialRelationModelImpl.getOriginalType()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U1_U2_T,
+				new Object[] {
+					new Long(socialRelationModelImpl.getOriginalUserId1()),
+					new Long(socialRelationModelImpl.getOriginalUserId2()),
+					new Integer(socialRelationModelImpl.getOriginalType())
+				});
+		}
+
+		if (isNew ||
+				((socialRelation.getUserId1() != socialRelationModelImpl.getOriginalUserId1()) ||
+				(socialRelation.getUserId2() != socialRelationModelImpl.getOriginalUserId2()) ||
+				(socialRelation.getType() != socialRelationModelImpl.getOriginalType()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U1_U2_T,
+				new Object[] {
+					new Long(socialRelation.getUserId1()),
+					new Long(socialRelation.getUserId2()),
+					new Integer(socialRelation.getType())
+				}, socialRelation);
+		}
+
+		EntityCacheUtil.putResult(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelation.class, socialRelation.getPrimaryKey(), socialRelation);
+
+		return socialRelation;
 	}
 
 	public SocialRelation findByPrimaryKey(long relationId)
@@ -256,36 +484,40 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 	public SocialRelation fetchByPrimaryKey(long relationId)
 		throws SystemException {
-		Session session = null;
+		SocialRelation result = (SocialRelation)EntityCacheUtil.getResult(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+				SocialRelation.class, relationId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (SocialRelation)session.get(SocialRelationImpl.class,
-				new Long(relationId));
+			try {
+				session = openSession();
+
+				SocialRelation socialRelation = (SocialRelation)session.get(SocialRelationImpl.class,
+						new Long(relationId));
+
+				cacheResult(socialRelation);
+
+				return socialRelation;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (SocialRelation)result;
 		}
 	}
 
 	public List<SocialRelation> findByUuid(String uuid)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
-		String finderClassName = SocialRelation.class.getName();
-		String finderMethodName = "findByUuid";
-		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { uuid };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -317,9 +549,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 				List<SocialRelation> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
+					list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -342,27 +575,14 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialRelation> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
-		String finderClassName = SocialRelation.class.getName();
-		String finderMethodName = "findByUuid";
-		String[] finderParams = new String[] {
-				String.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -400,9 +620,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				List<SocialRelation> list = (List<SocialRelation>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -422,7 +643,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchRelationException, SystemException {
 		List<SocialRelation> list = findByUuid(uuid, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -444,7 +665,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 		List<SocialRelation> list = findByUuid(uuid, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -520,18 +741,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialRelation> findByCompanyId(long companyId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
-		String finderClassName = SocialRelation.class.getName();
-		String finderMethodName = "findByCompanyId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -556,9 +769,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 				List<SocialRelation> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -581,27 +795,14 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialRelation> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
-		String finderClassName = SocialRelation.class.getName();
-		String finderMethodName = "findByCompanyId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -632,9 +833,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				List<SocialRelation> list = (List<SocialRelation>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -654,7 +856,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchRelationException, SystemException {
 		List<SocialRelation> list = findByCompanyId(companyId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -677,7 +879,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		List<SocialRelation> list = findByCompanyId(companyId, count - 1,
 				count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -746,18 +948,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialRelation> findByUserId1(long userId1)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
-		String finderClassName = SocialRelation.class.getName();
-		String finderMethodName = "findByUserId1";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId1) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID1,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -782,9 +976,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 				List<SocialRelation> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID1,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -807,27 +1002,14 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialRelation> findByUserId1(long userId1, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
-		String finderClassName = SocialRelation.class.getName();
-		String finderMethodName = "findByUserId1";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(userId1),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID1,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -858,9 +1040,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				List<SocialRelation> list = (List<SocialRelation>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID1,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -880,7 +1063,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchRelationException, SystemException {
 		List<SocialRelation> list = findByUserId1(userId1, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -902,7 +1085,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 		List<SocialRelation> list = findByUserId1(userId1, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -971,18 +1154,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialRelation> findByUserId2(long userId2)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
-		String finderClassName = SocialRelation.class.getName();
-		String finderMethodName = "findByUserId2";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId2) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID2,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1007,9 +1182,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 				List<SocialRelation> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID2,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1032,27 +1208,14 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialRelation> findByUserId2(long userId2, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
-		String finderClassName = SocialRelation.class.getName();
-		String finderMethodName = "findByUserId2";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(userId2),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID2,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1083,9 +1246,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				List<SocialRelation> list = (List<SocialRelation>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID2,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1105,7 +1269,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchRelationException, SystemException {
 		List<SocialRelation> list = findByUserId2(userId2, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -1127,7 +1291,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 		List<SocialRelation> list = findByUserId2(userId2, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -1195,18 +1359,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<SocialRelation> findByType(int type) throws SystemException {
-		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
-		String finderClassName = SocialRelation.class.getName();
-		String finderMethodName = "findByType";
-		String[] finderParams = new String[] { Integer.class.getName() };
 		Object[] finderArgs = new Object[] { new Integer(type) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_TYPE,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1231,9 +1387,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 				List<SocialRelation> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_TYPE, finderArgs,
+					list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1256,27 +1413,14 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialRelation> findByType(int type, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
-		String finderClassName = SocialRelation.class.getName();
-		String finderMethodName = "findByType";
-		String[] finderParams = new String[] {
-				Integer.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Integer(type),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_TYPE,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1307,9 +1451,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				List<SocialRelation> list = (List<SocialRelation>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_TYPE,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1329,7 +1474,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		throws NoSuchRelationException, SystemException {
 		List<SocialRelation> list = findByType(type, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -1351,7 +1496,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 		List<SocialRelation> list = findByType(type, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -1419,22 +1564,12 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialRelation> findByC_T(long companyId, int type)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
-		String finderClassName = SocialRelation.class.getName();
-		String finderMethodName = "findByC_T";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Integer.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Integer(type)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_T,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1465,9 +1600,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 				List<SocialRelation> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_T, finderArgs,
+					list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1490,27 +1626,14 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialRelation> findByC_T(long companyId, int type, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
-		String finderClassName = SocialRelation.class.getName();
-		String finderMethodName = "findByC_T";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Integer.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Integer(type),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_T,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1547,9 +1670,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				List<SocialRelation> list = (List<SocialRelation>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_T,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1569,7 +1693,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchRelationException, SystemException {
 		List<SocialRelation> list = findByC_T(companyId, type, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -1595,7 +1719,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		List<SocialRelation> list = findByC_T(companyId, type, count - 1,
 				count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -1673,20 +1797,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialRelation> findByU1_T(long userId1, int type)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
-		String finderClassName = SocialRelation.class.getName();
-		String finderMethodName = "findByU1_T";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Integer.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(userId1), new Integer(type) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_U1_T,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1717,9 +1831,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 				List<SocialRelation> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U1_T, finderArgs,
+					list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1742,27 +1857,14 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialRelation> findByU1_T(long userId1, int type, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
-		String finderClassName = SocialRelation.class.getName();
-		String finderMethodName = "findByU1_T";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Integer.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(userId1), new Integer(type),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_U1_T,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1799,9 +1901,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				List<SocialRelation> list = (List<SocialRelation>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_U1_T,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1821,7 +1924,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchRelationException, SystemException {
 		List<SocialRelation> list = findByU1_T(userId1, type, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -1847,7 +1950,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		List<SocialRelation> list = findByU1_T(userId1, type, count - 1, count,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -1925,20 +2028,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialRelation> findByU2_T(long userId2, int type)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
-		String finderClassName = SocialRelation.class.getName();
-		String finderMethodName = "findByU2_T";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Integer.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(userId2), new Integer(type) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_U2_T,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1969,9 +2062,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 				List<SocialRelation> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U2_T, finderArgs,
+					list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1994,27 +2088,14 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialRelation> findByU2_T(long userId2, int type, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
-		String finderClassName = SocialRelation.class.getName();
-		String finderMethodName = "findByU2_T";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Integer.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(userId2), new Integer(type),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_U2_T,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2051,9 +2132,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				List<SocialRelation> list = (List<SocialRelation>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_U2_T,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -2073,7 +2155,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchRelationException, SystemException {
 		List<SocialRelation> list = findByU2_T(userId2, type, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -2099,7 +2181,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		List<SocialRelation> list = findByU2_T(userId2, type, count - 1, count,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRelation exists with the key {");
@@ -2206,23 +2288,12 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 	public SocialRelation fetchByU1_U2_T(long userId1, long userId2, int type)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
-		String finderClassName = SocialRelation.class.getName();
-		String finderMethodName = "fetchByU1_U2_T";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(),
-				Integer.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(userId1), new Long(userId2), new Integer(type)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_U1_U2_T,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2259,16 +2330,19 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 				List<SocialRelation> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				SocialRelation socialRelation = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U1_U2_T,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					socialRelation = list.get(0);
+
+					cacheResult(socialRelation);
 				}
+
+				return socialRelation;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -2278,13 +2352,11 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<SocialRelation> list = (List<SocialRelation>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (SocialRelation)result;
 			}
 		}
 	}
@@ -2340,23 +2412,12 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialRelation> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
-		String finderClassName = SocialRelation.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2389,9 +2450,9 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -2469,18 +2530,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByUuid(String uuid) throws SystemException {
-		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
-		String finderClassName = SocialRelation.class.getName();
-		String finderMethodName = "countByUuid";
-		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { uuid };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2523,8 +2576,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -2542,18 +2594,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
-		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
-		String finderClassName = SocialRelation.class.getName();
-		String finderMethodName = "countByCompanyId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2589,8 +2633,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_COMPANYID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -2608,18 +2651,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByUserId1(long userId1) throws SystemException {
-		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
-		String finderClassName = SocialRelation.class.getName();
-		String finderMethodName = "countByUserId1";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId1) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID1,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2655,8 +2690,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERID1,
 					finderArgs, count);
 
 				return count.intValue();
@@ -2674,18 +2708,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByUserId2(long userId2) throws SystemException {
-		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
-		String finderClassName = SocialRelation.class.getName();
-		String finderMethodName = "countByUserId2";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId2) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID2,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2721,8 +2747,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERID2,
 					finderArgs, count);
 
 				return count.intValue();
@@ -2740,18 +2765,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByType(int type) throws SystemException {
-		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
-		String finderClassName = SocialRelation.class.getName();
-		String finderMethodName = "countByType";
-		String[] finderParams = new String[] { Integer.class.getName() };
 		Object[] finderArgs = new Object[] { new Integer(type) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_TYPE,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2787,8 +2804,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_TYPE,
 					finderArgs, count);
 
 				return count.intValue();
@@ -2806,22 +2822,12 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByC_T(long companyId, int type) throws SystemException {
-		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
-		String finderClassName = SocialRelation.class.getName();
-		String finderMethodName = "countByC_T";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Integer.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Integer(type)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_T,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2863,9 +2869,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_T, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -2882,20 +2887,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByU1_T(long userId1, int type) throws SystemException {
-		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
-		String finderClassName = SocialRelation.class.getName();
-		String finderMethodName = "countByU1_T";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Integer.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(userId1), new Integer(type) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U1_T,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2937,8 +2932,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U1_T,
 					finderArgs, count);
 
 				return count.intValue();
@@ -2956,20 +2950,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByU2_T(long userId2, int type) throws SystemException {
-		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
-		String finderClassName = SocialRelation.class.getName();
-		String finderMethodName = "countByU2_T";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Integer.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(userId2), new Integer(type) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U2_T,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -3011,8 +2995,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U2_T,
 					finderArgs, count);
 
 				return count.intValue();
@@ -3031,23 +3014,12 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 	public int countByU1_U2_T(long userId1, long userId2, int type)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
-		String finderClassName = SocialRelation.class.getName();
-		String finderMethodName = "countByU1_U2_T";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(),
-				Integer.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(userId1), new Long(userId2), new Integer(type)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U1_U2_T,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -3095,8 +3067,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U1_U2_T,
 					finderArgs, count);
 
 				return count.intValue();
@@ -3114,18 +3085,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
-		String finderClassName = SocialRelation.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -3148,9 +3111,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

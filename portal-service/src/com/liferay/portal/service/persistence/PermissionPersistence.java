@@ -29,6 +29,11 @@ package com.liferay.portal.service.persistence;
  *
  */
 public interface PermissionPersistence extends BasePersistence {
+	public void cacheResult(com.liferay.portal.model.Permission permission);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portal.model.Permission> permissions);
+
 	public com.liferay.portal.model.Permission create(long permissionId);
 
 	public com.liferay.portal.model.Permission remove(long permissionId)

@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface ShoppingItemFieldPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> shoppingItemFields);
+
 	public com.liferay.portlet.shopping.model.ShoppingItemField create(
 		long itemFieldId);
 

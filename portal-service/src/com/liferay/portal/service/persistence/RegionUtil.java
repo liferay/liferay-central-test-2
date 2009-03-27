@@ -29,6 +29,15 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class RegionUtil {
+	public static void cacheResult(com.liferay.portal.model.Region region) {
+		getPersistence().cacheResult(region);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.Region> regions) {
+		getPersistence().cacheResult(regions);
+	}
+
 	public static com.liferay.portal.model.Region create(long regionId) {
 		return getPersistence().create(regionId);
 	}

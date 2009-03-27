@@ -79,7 +79,10 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portal.model.ResourceCode"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.ResourceCode"),
 			true);
 
@@ -139,7 +142,17 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode> {
 	public void setCompanyId(long companyId) {
 		if (companyId != _companyId) {
 			_companyId = companyId;
+
+			if (!_setOriginalCompanyId) {
+				_setOriginalCompanyId = true;
+
+				_originalCompanyId = companyId;
+			}
 		}
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	public String getName() {
@@ -151,7 +164,15 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode> {
 				((name != null) && (_name == null)) ||
 				((name != null) && (_name != null) && !name.equals(_name))) {
 			_name = name;
+
+			if (_originalName == null) {
+				_originalName = name;
+			}
 		}
+	}
+
+	public String getOriginalName() {
+		return GetterUtil.getString(_originalName);
 	}
 
 	public int getScope() {
@@ -161,7 +182,17 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode> {
 	public void setScope(int scope) {
 		if (scope != _scope) {
 			_scope = scope;
+
+			if (!_setOriginalScope) {
+				_setOriginalScope = true;
+
+				_originalScope = scope;
+			}
 		}
+	}
+
+	public int getOriginalScope() {
+		return _originalScope;
 	}
 
 	public ResourceCode toEscapedModel() {
@@ -251,7 +282,12 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode> {
 
 	private long _codeId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private String _name;
+	private String _originalName;
 	private int _scope;
+	private int _originalScope;
+	private boolean _setOriginalScope;
 	private transient ExpandoBridge _expandoBridge;
 }

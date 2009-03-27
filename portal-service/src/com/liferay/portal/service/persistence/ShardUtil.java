@@ -29,6 +29,15 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class ShardUtil {
+	public static void cacheResult(com.liferay.portal.model.Shard shard) {
+		getPersistence().cacheResult(shard);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.Shard> shards) {
+		getPersistence().cacheResult(shards);
+	}
+
 	public static com.liferay.portal.model.Shard create(long shardId) {
 		return getPersistence().create(shardId);
 	}

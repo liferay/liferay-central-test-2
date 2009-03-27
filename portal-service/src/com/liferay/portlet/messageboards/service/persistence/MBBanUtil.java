@@ -29,6 +29,16 @@ package com.liferay.portlet.messageboards.service.persistence;
  *
  */
 public class MBBanUtil {
+	public static void cacheResult(
+		com.liferay.portlet.messageboards.model.MBBan mbBan) {
+		getPersistence().cacheResult(mbBan);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.messageboards.model.MBBan> mbBans) {
+		getPersistence().cacheResult(mbBans);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBBan create(
 		long banId) {
 		return getPersistence().create(banId);

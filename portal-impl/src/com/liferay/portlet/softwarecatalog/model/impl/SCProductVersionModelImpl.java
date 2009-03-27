@@ -106,7 +106,10 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.softwarecatalog.model.SCProductVersion"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.softwarecatalog.model.SCProductVersion"),
 			true);
 
@@ -140,7 +143,8 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 		return models;
 	}
 
-	public static final boolean CACHE_ENABLED_SCFRAMEWORKVERSI_SCPRODUCTVERS = com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionModelImpl.CACHE_ENABLED_SCFRAMEWORKVERSI_SCPRODUCTVERS;
+	public static final boolean FINDER_CACHE_ENABLED_SCFRAMEWORKVERSI_SCPRODUCTVERS =
+		com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionModelImpl.FINDER_CACHE_ENABLED_SCFRAMEWORKVERSI_SCPRODUCTVERS;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.softwarecatalog.model.SCProductVersion"));
 
@@ -287,7 +291,15 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 				((directDownloadURL != null) && (_directDownloadURL != null) &&
 				!directDownloadURL.equals(_directDownloadURL))) {
 			_directDownloadURL = directDownloadURL;
+
+			if (_originalDirectDownloadURL == null) {
+				_originalDirectDownloadURL = directDownloadURL;
+			}
 		}
+	}
+
+	public String getOriginalDirectDownloadURL() {
+		return GetterUtil.getString(_originalDirectDownloadURL);
 	}
 
 	public boolean getRepoStoreArtifact() {
@@ -417,6 +429,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 	private String _changeLog;
 	private String _downloadPageURL;
 	private String _directDownloadURL;
+	private String _originalDirectDownloadURL;
 	private boolean _repoStoreArtifact;
 	private transient ExpandoBridge _expandoBridge;
 }

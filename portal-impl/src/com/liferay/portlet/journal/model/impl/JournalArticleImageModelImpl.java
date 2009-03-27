@@ -92,7 +92,10 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.journal.model.JournalArticleImage"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.journal.model.JournalArticleImage"),
 			true);
 
@@ -157,7 +160,17 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	public void setGroupId(long groupId) {
 		if (groupId != _groupId) {
 			_groupId = groupId;
+
+			if (!_setOriginalGroupId) {
+				_setOriginalGroupId = true;
+
+				_originalGroupId = groupId;
+			}
 		}
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	public String getArticleId() {
@@ -170,7 +183,15 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 				((articleId != null) && (_articleId != null) &&
 				!articleId.equals(_articleId))) {
 			_articleId = articleId;
+
+			if (_originalArticleId == null) {
+				_originalArticleId = articleId;
+			}
 		}
+	}
+
+	public String getOriginalArticleId() {
+		return GetterUtil.getString(_originalArticleId);
 	}
 
 	public double getVersion() {
@@ -180,7 +201,17 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	public void setVersion(double version) {
 		if (version != _version) {
 			_version = version;
+
+			if (!_setOriginalVersion) {
+				_setOriginalVersion = true;
+
+				_originalVersion = version;
+			}
 		}
+	}
+
+	public double getOriginalVersion() {
+		return _originalVersion;
 	}
 
 	public String getElInstanceId() {
@@ -193,7 +224,15 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 				((elInstanceId != null) && (_elInstanceId != null) &&
 				!elInstanceId.equals(_elInstanceId))) {
 			_elInstanceId = elInstanceId;
+
+			if (_originalElInstanceId == null) {
+				_originalElInstanceId = elInstanceId;
+			}
 		}
+	}
+
+	public String getOriginalElInstanceId() {
+		return GetterUtil.getString(_originalElInstanceId);
 	}
 
 	public String getElName() {
@@ -206,7 +245,15 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 				((elName != null) && (_elName != null) &&
 				!elName.equals(_elName))) {
 			_elName = elName;
+
+			if (_originalElName == null) {
+				_originalElName = elName;
+			}
 		}
+	}
+
+	public String getOriginalElName() {
+		return GetterUtil.getString(_originalElName);
 	}
 
 	public String getLanguageId() {
@@ -219,7 +266,15 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 				((languageId != null) && (_languageId != null) &&
 				!languageId.equals(_languageId))) {
 			_languageId = languageId;
+
+			if (_originalLanguageId == null) {
+				_originalLanguageId = languageId;
+			}
 		}
+	}
+
+	public String getOriginalLanguageId() {
+		return GetterUtil.getString(_originalLanguageId);
 	}
 
 	public boolean getTempImage() {
@@ -331,11 +386,19 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 
 	private long _articleImageId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private String _articleId;
+	private String _originalArticleId;
 	private double _version;
+	private double _originalVersion;
+	private boolean _setOriginalVersion;
 	private String _elInstanceId;
+	private String _originalElInstanceId;
 	private String _elName;
+	private String _originalElName;
 	private String _languageId;
+	private String _originalLanguageId;
 	private boolean _tempImage;
 	private transient ExpandoBridge _expandoBridge;
 }

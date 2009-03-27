@@ -25,7 +25,9 @@ package com.liferay.portlet.expando.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -58,6 +60,167 @@ import java.util.List;
  */
 public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 	implements ExpandoValuePersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = ExpandoValue.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = ExpandoValue.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_TABLEID = new FinderPath(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
+			ExpandoValueModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByTableId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_TABLEID = new FinderPath(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
+			ExpandoValueModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByTableId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_TABLEID = new FinderPath(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
+			ExpandoValueModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByTableId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_COLUMNID = new FinderPath(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
+			ExpandoValueModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByColumnId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_COLUMNID = new FinderPath(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
+			ExpandoValueModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByColumnId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_COLUMNID = new FinderPath(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
+			ExpandoValueModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByColumnId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_ROWID = new FinderPath(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
+			ExpandoValueModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByRowId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_ROWID = new FinderPath(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
+			ExpandoValueModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByRowId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_ROWID = new FinderPath(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
+			ExpandoValueModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByRowId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_T_R = new FinderPath(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
+			ExpandoValueModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByT_R",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_T_R = new FinderPath(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
+			ExpandoValueModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByT_R",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_T_R = new FinderPath(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
+			ExpandoValueModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByT_R",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_C_R = new FinderPath(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
+			ExpandoValueModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByC_R",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_R = new FinderPath(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
+			ExpandoValueModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByC_R",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_C_C = new FinderPath(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
+			ExpandoValueModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByC_C",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_C = new FinderPath(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
+			ExpandoValueModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByC_C",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_C = new FinderPath(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
+			ExpandoValueModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByC_C",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_T_C_R = new FinderPath(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
+			ExpandoValueModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByT_C_R",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_T_C_R = new FinderPath(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
+			ExpandoValueModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByT_C_R",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_T_C_C_C = new FinderPath(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
+			ExpandoValueModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByT_C_C_C",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName(),
+				Long.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_T_C_C_C = new FinderPath(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
+			ExpandoValueModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByT_C_C_C",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName(),
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_T_C_C_C = new FinderPath(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
+			ExpandoValueModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByT_C_C_C",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName(),
+				Long.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
+			ExpandoValueModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
+			ExpandoValueModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countAll", new String[0]);
+
+	public void cacheResult(ExpandoValue expandoValue) {
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_R,
+			new Object[] {
+				new Long(expandoValue.getColumnId()),
+				new Long(expandoValue.getRowId())
+			}, expandoValue);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_C_R,
+			new Object[] {
+				new Long(expandoValue.getTableId()),
+				new Long(expandoValue.getColumnId()),
+				new Long(expandoValue.getRowId())
+			}, expandoValue);
+
+		EntityCacheUtil.putResult(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
+			ExpandoValue.class, expandoValue.getPrimaryKey(), expandoValue);
+	}
+
+	public void cacheResult(List<ExpandoValue> expandoValues) {
+		for (ExpandoValue expandoValue : expandoValues) {
+			if (EntityCacheUtil.getResult(
+						ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
+						ExpandoValue.class, expandoValue.getPrimaryKey(), this) == null) {
+				cacheResult(expandoValue);
+			}
+		}
+	}
+
 	public ExpandoValue create(long valueId) {
 		ExpandoValue expandoValue = new ExpandoValueImpl();
 
@@ -134,17 +297,35 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 			session.delete(expandoValue);
 
 			session.flush();
-
-			return expandoValue;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(ExpandoValue.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		ExpandoValueModelImpl expandoValueModelImpl = (ExpandoValueModelImpl)expandoValue;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_R,
+			new Object[] {
+				new Long(expandoValueModelImpl.getOriginalColumnId()),
+				new Long(expandoValueModelImpl.getOriginalRowId())
+			});
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_C_R,
+			new Object[] {
+				new Long(expandoValueModelImpl.getOriginalTableId()),
+				new Long(expandoValueModelImpl.getOriginalColumnId()),
+				new Long(expandoValueModelImpl.getOriginalRowId())
+			});
+
+		EntityCacheUtil.removeResult(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
+			ExpandoValue.class, expandoValue.getPrimaryKey());
+
+		return expandoValue;
 	}
 
 	/**
@@ -203,6 +384,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 	public ExpandoValue updateImpl(
 		com.liferay.portlet.expando.model.ExpandoValue expandoValue,
 		boolean merge) throws SystemException {
+		boolean isNew = expandoValue.isNew();
+
 		Session session = null;
 
 		try {
@@ -211,17 +394,66 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, expandoValue, merge);
 
 			expandoValue.setNew(false);
-
-			return expandoValue;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(ExpandoValue.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		ExpandoValueModelImpl expandoValueModelImpl = (ExpandoValueModelImpl)expandoValue;
+
+		if (!isNew &&
+				((expandoValue.getColumnId() != expandoValueModelImpl.getOriginalColumnId()) ||
+				(expandoValue.getRowId() != expandoValueModelImpl.getOriginalRowId()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_R,
+				new Object[] {
+					new Long(expandoValueModelImpl.getOriginalColumnId()),
+					new Long(expandoValueModelImpl.getOriginalRowId())
+				});
+		}
+
+		if (isNew ||
+				((expandoValue.getColumnId() != expandoValueModelImpl.getOriginalColumnId()) ||
+				(expandoValue.getRowId() != expandoValueModelImpl.getOriginalRowId()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_R,
+				new Object[] {
+					new Long(expandoValue.getColumnId()),
+					new Long(expandoValue.getRowId())
+				}, expandoValue);
+		}
+
+		if (!isNew &&
+				((expandoValue.getTableId() != expandoValueModelImpl.getOriginalTableId()) ||
+				(expandoValue.getColumnId() != expandoValueModelImpl.getOriginalColumnId()) ||
+				(expandoValue.getRowId() != expandoValueModelImpl.getOriginalRowId()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_C_R,
+				new Object[] {
+					new Long(expandoValueModelImpl.getOriginalTableId()),
+					new Long(expandoValueModelImpl.getOriginalColumnId()),
+					new Long(expandoValueModelImpl.getOriginalRowId())
+				});
+		}
+
+		if (isNew ||
+				((expandoValue.getTableId() != expandoValueModelImpl.getOriginalTableId()) ||
+				(expandoValue.getColumnId() != expandoValueModelImpl.getOriginalColumnId()) ||
+				(expandoValue.getRowId() != expandoValueModelImpl.getOriginalRowId()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_C_R,
+				new Object[] {
+					new Long(expandoValue.getTableId()),
+					new Long(expandoValue.getColumnId()),
+					new Long(expandoValue.getRowId())
+				}, expandoValue);
+		}
+
+		EntityCacheUtil.putResult(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
+			ExpandoValue.class, expandoValue.getPrimaryKey(), expandoValue);
+
+		return expandoValue;
 	}
 
 	public ExpandoValue findByPrimaryKey(long valueId)
@@ -243,36 +475,40 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 	public ExpandoValue fetchByPrimaryKey(long valueId)
 		throws SystemException {
-		Session session = null;
+		ExpandoValue result = (ExpandoValue)EntityCacheUtil.getResult(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
+				ExpandoValue.class, valueId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (ExpandoValue)session.get(ExpandoValueImpl.class,
-				new Long(valueId));
+			try {
+				session = openSession();
+
+				ExpandoValue expandoValue = (ExpandoValue)session.get(ExpandoValueImpl.class,
+						new Long(valueId));
+
+				cacheResult(expandoValue);
+
+				return expandoValue;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (ExpandoValue)result;
 		}
 	}
 
 	public List<ExpandoValue> findByTableId(long tableId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = ExpandoValueModelImpl.CACHE_ENABLED;
-		String finderClassName = ExpandoValue.class.getName();
-		String finderMethodName = "findByTableId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(tableId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_TABLEID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -303,9 +539,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 				List<ExpandoValue> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_TABLEID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -328,27 +565,14 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 	public List<ExpandoValue> findByTableId(long tableId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = ExpandoValueModelImpl.CACHE_ENABLED;
-		String finderClassName = ExpandoValue.class.getName();
-		String finderMethodName = "findByTableId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(tableId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_TABLEID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -387,9 +611,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 				List<ExpandoValue> list = (List<ExpandoValue>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_TABLEID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -409,7 +634,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchValueException, SystemException {
 		List<ExpandoValue> list = findByTableId(tableId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
@@ -431,7 +656,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 		List<ExpandoValue> list = findByTableId(tableId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
@@ -507,18 +732,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 	public List<ExpandoValue> findByColumnId(long columnId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = ExpandoValueModelImpl.CACHE_ENABLED;
-		String finderClassName = ExpandoValue.class.getName();
-		String finderMethodName = "findByColumnId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(columnId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COLUMNID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -549,9 +766,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 				List<ExpandoValue> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COLUMNID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -574,27 +792,14 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 	public List<ExpandoValue> findByColumnId(long columnId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = ExpandoValueModelImpl.CACHE_ENABLED;
-		String finderClassName = ExpandoValue.class.getName();
-		String finderMethodName = "findByColumnId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(columnId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COLUMNID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -633,9 +838,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 				List<ExpandoValue> list = (List<ExpandoValue>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COLUMNID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -655,7 +861,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchValueException, SystemException {
 		List<ExpandoValue> list = findByColumnId(columnId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
@@ -677,7 +883,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 		List<ExpandoValue> list = findByColumnId(columnId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
@@ -753,18 +959,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<ExpandoValue> findByRowId(long rowId) throws SystemException {
-		boolean finderClassNameCacheEnabled = ExpandoValueModelImpl.CACHE_ENABLED;
-		String finderClassName = ExpandoValue.class.getName();
-		String finderMethodName = "findByRowId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(rowId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ROWID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -795,9 +993,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 				List<ExpandoValue> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ROWID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -820,27 +1019,14 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 	public List<ExpandoValue> findByRowId(long rowId, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = ExpandoValueModelImpl.CACHE_ENABLED;
-		String finderClassName = ExpandoValue.class.getName();
-		String finderMethodName = "findByRowId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(rowId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ROWID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -879,9 +1065,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 				List<ExpandoValue> list = (List<ExpandoValue>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_ROWID,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -901,7 +1088,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchValueException, SystemException {
 		List<ExpandoValue> list = findByRowId(rowId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
@@ -923,7 +1110,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 		List<ExpandoValue> list = findByRowId(rowId, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
@@ -999,20 +1186,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 	public List<ExpandoValue> findByT_R(long tableId, long rowId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = ExpandoValueModelImpl.CACHE_ENABLED;
-		String finderClassName = ExpandoValue.class.getName();
-		String finderMethodName = "findByT_R";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(tableId), new Long(rowId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_T_R,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1049,9 +1226,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 				List<ExpandoValue> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_T_R, finderArgs,
+					list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1074,27 +1252,14 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 	public List<ExpandoValue> findByT_R(long tableId, long rowId, int start,
 		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = ExpandoValueModelImpl.CACHE_ENABLED;
-		String finderClassName = ExpandoValue.class.getName();
-		String finderMethodName = "findByT_R";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(tableId), new Long(rowId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_T_R,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1139,9 +1304,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 				List<ExpandoValue> list = (List<ExpandoValue>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_T_R,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1161,7 +1327,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchValueException, SystemException {
 		List<ExpandoValue> list = findByT_R(tableId, rowId, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
@@ -1187,7 +1353,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		List<ExpandoValue> list = findByT_R(tableId, rowId, count - 1, count,
 				obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
@@ -1299,20 +1465,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 	public ExpandoValue fetchByC_R(long columnId, long rowId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = ExpandoValueModelImpl.CACHE_ENABLED;
-		String finderClassName = ExpandoValue.class.getName();
-		String finderMethodName = "fetchByC_R";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(columnId), new Long(rowId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_R,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1349,16 +1505,19 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 				List<ExpandoValue> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				ExpandoValue expandoValue = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_R,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					expandoValue = list.get(0);
+
+					cacheResult(expandoValue);
 				}
+
+				return expandoValue;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1368,35 +1527,23 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<ExpandoValue> list = (List<ExpandoValue>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (ExpandoValue)result;
 			}
 		}
 	}
 
 	public List<ExpandoValue> findByC_C(long classNameId, long classPK)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = ExpandoValueModelImpl.CACHE_ENABLED;
-		String finderClassName = ExpandoValue.class.getName();
-		String finderMethodName = "findByC_C";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_C,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1433,9 +1580,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 				List<ExpandoValue> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C, finderArgs,
+					list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1458,27 +1606,14 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 	public List<ExpandoValue> findByC_C(long classNameId, long classPK,
 		int start, int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = ExpandoValueModelImpl.CACHE_ENABLED;
-		String finderClassName = ExpandoValue.class.getName();
-		String finderMethodName = "findByC_C";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1523,9 +1658,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 				List<ExpandoValue> list = (List<ExpandoValue>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_C,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1545,7 +1681,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		OrderByComparator obc) throws NoSuchValueException, SystemException {
 		List<ExpandoValue> list = findByC_C(classNameId, classPK, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
@@ -1571,7 +1707,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		List<ExpandoValue> list = findByC_C(classNameId, classPK, count - 1,
 				count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
@@ -1686,22 +1822,12 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 	public ExpandoValue fetchByT_C_R(long tableId, long columnId, long rowId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = ExpandoValueModelImpl.CACHE_ENABLED;
-		String finderClassName = ExpandoValue.class.getName();
-		String finderMethodName = "fetchByT_C_R";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(tableId), new Long(columnId), new Long(rowId)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_T_C_R,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1744,16 +1870,19 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 				List<ExpandoValue> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				ExpandoValue expandoValue = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_C_R,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					expandoValue = list.get(0);
+
+					cacheResult(expandoValue);
 				}
+
+				return expandoValue;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1763,37 +1892,24 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<ExpandoValue> list = (List<ExpandoValue>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (ExpandoValue)result;
 			}
 		}
 	}
 
 	public List<ExpandoValue> findByT_C_C_C(long tableId, long columnId,
 		long classNameId, long classPK) throws SystemException {
-		boolean finderClassNameCacheEnabled = ExpandoValueModelImpl.CACHE_ENABLED;
-		String finderClassName = ExpandoValue.class.getName();
-		String finderMethodName = "findByT_C_C_C";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName(),
-				Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(tableId), new Long(columnId), new Long(classNameId),
 				new Long(classPK)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_T_C_C_C,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1842,9 +1958,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 				List<ExpandoValue> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_T_C_C_C,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1870,16 +1987,6 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 	public List<ExpandoValue> findByT_C_C_C(long tableId, long columnId,
 		long classNameId, long classPK, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = ExpandoValueModelImpl.CACHE_ENABLED;
-		String finderClassName = ExpandoValue.class.getName();
-		String finderMethodName = "findByT_C_C_C";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName(),
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(tableId), new Long(columnId), new Long(classNameId),
 				new Long(classPK),
@@ -1887,12 +1994,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_T_C_C_C,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -1949,9 +2052,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 				List<ExpandoValue> list = (List<ExpandoValue>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_T_C_C_C,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -1973,7 +2077,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		List<ExpandoValue> list = findByT_C_C_C(tableId, columnId, classNameId,
 				classPK, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
@@ -2006,7 +2110,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		List<ExpandoValue> list = findByT_C_C_C(tableId, columnId, classNameId,
 				classPK, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
@@ -2159,23 +2263,12 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 	public List<ExpandoValue> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = ExpandoValueModelImpl.CACHE_ENABLED;
-		String finderClassName = ExpandoValue.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2216,9 +2309,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -2294,18 +2387,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByTableId(long tableId) throws SystemException {
-		boolean finderClassNameCacheEnabled = ExpandoValueModelImpl.CACHE_ENABLED;
-		String finderClassName = ExpandoValue.class.getName();
-		String finderMethodName = "countByTableId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(tableId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_TABLEID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2341,8 +2426,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_TABLEID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -2360,18 +2444,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByColumnId(long columnId) throws SystemException {
-		boolean finderClassNameCacheEnabled = ExpandoValueModelImpl.CACHE_ENABLED;
-		String finderClassName = ExpandoValue.class.getName();
-		String finderMethodName = "countByColumnId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(columnId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COLUMNID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2407,8 +2483,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_COLUMNID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -2426,18 +2501,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByRowId(long rowId) throws SystemException {
-		boolean finderClassNameCacheEnabled = ExpandoValueModelImpl.CACHE_ENABLED;
-		String finderClassName = ExpandoValue.class.getName();
-		String finderMethodName = "countByRowId";
-		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(rowId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ROWID,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2473,8 +2540,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_ROWID,
 					finderArgs, count);
 
 				return count.intValue();
@@ -2492,20 +2558,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByT_R(long tableId, long rowId) throws SystemException {
-		boolean finderClassNameCacheEnabled = ExpandoValueModelImpl.CACHE_ENABLED;
-		String finderClassName = ExpandoValue.class.getName();
-		String finderMethodName = "countByT_R";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(tableId), new Long(rowId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_T_R,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2547,9 +2603,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_T_R, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -2566,20 +2621,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByC_R(long columnId, long rowId) throws SystemException {
-		boolean finderClassNameCacheEnabled = ExpandoValueModelImpl.CACHE_ENABLED;
-		String finderClassName = ExpandoValue.class.getName();
-		String finderMethodName = "countByC_R";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] { new Long(columnId), new Long(rowId) };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_R,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2621,9 +2666,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_R, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -2641,22 +2685,12 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 	public int countByC_C(long classNameId, long classPK)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = ExpandoValueModelImpl.CACHE_ENABLED;
-		String finderClassName = ExpandoValue.class.getName();
-		String finderMethodName = "countByC_C";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2698,9 +2732,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -2718,22 +2751,12 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 	public int countByT_C_R(long tableId, long columnId, long rowId)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = ExpandoValueModelImpl.CACHE_ENABLED;
-		String finderClassName = ExpandoValue.class.getName();
-		String finderMethodName = "countByT_C_R";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(tableId), new Long(columnId), new Long(rowId)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_T_C_R,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2781,8 +2804,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_T_C_R,
 					finderArgs, count);
 
 				return count.intValue();
@@ -2801,24 +2823,13 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 	public int countByT_C_C_C(long tableId, long columnId, long classNameId,
 		long classPK) throws SystemException {
-		boolean finderClassNameCacheEnabled = ExpandoValueModelImpl.CACHE_ENABLED;
-		String finderClassName = ExpandoValue.class.getName();
-		String finderMethodName = "countByT_C_C_C";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName(),
-				Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(tableId), new Long(columnId), new Long(classNameId),
 				new Long(classPK)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_T_C_C_C,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2872,8 +2883,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_T_C_C_C,
 					finderArgs, count);
 
 				return count.intValue();
@@ -2891,18 +2901,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = ExpandoValueModelImpl.CACHE_ENABLED;
-		String finderClassName = ExpandoValue.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -2925,9 +2927,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

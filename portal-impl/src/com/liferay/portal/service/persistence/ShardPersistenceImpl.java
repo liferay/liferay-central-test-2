@@ -26,7 +26,9 @@ import com.liferay.portal.NoSuchShardException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -56,6 +58,52 @@ import java.util.List;
  */
 public class ShardPersistenceImpl extends BasePersistenceImpl
 	implements ShardPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = Shard.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = Shard.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FETCH_BY_NAME = new FinderPath(ShardModelImpl.ENTITY_CACHE_ENABLED,
+			ShardModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
+			"fetchByName", new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_NAME = new FinderPath(ShardModelImpl.ENTITY_CACHE_ENABLED,
+			ShardModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByName", new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_C_C = new FinderPath(ShardModelImpl.ENTITY_CACHE_ENABLED,
+			ShardModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
+			"fetchByC_C",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_C = new FinderPath(ShardModelImpl.ENTITY_CACHE_ENABLED,
+			ShardModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByC_C",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(ShardModelImpl.ENTITY_CACHE_ENABLED,
+			ShardModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(ShardModelImpl.ENTITY_CACHE_ENABLED,
+			ShardModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countAll", new String[0]);
+
+	public void cacheResult(Shard shard) {
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NAME,
+			new Object[] { shard.getName() }, shard);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
+			new Object[] {
+				new Long(shard.getClassNameId()), new Long(shard.getClassPK())
+			}, shard);
+
+		EntityCacheUtil.putResult(ShardModelImpl.ENTITY_CACHE_ENABLED,
+			Shard.class, shard.getPrimaryKey(), shard);
+	}
+
+	public void cacheResult(List<Shard> shards) {
+		for (Shard shard : shards) {
+			if (EntityCacheUtil.getResult(ShardModelImpl.ENTITY_CACHE_ENABLED,
+						Shard.class, shard.getPrimaryKey(), this) == null) {
+				cacheResult(shard);
+			}
+		}
+	}
+
 	public Shard create(long shardId) {
 		Shard shard = new ShardImpl();
 
@@ -129,17 +177,31 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 			session.delete(shard);
 
 			session.flush();
-
-			return shard;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(Shard.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		ShardModelImpl shardModelImpl = (ShardModelImpl)shard;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_NAME,
+			new Object[] { shardModelImpl.getOriginalName() });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
+			new Object[] {
+				new Long(shardModelImpl.getOriginalClassNameId()),
+				new Long(shardModelImpl.getOriginalClassPK())
+			});
+
+		EntityCacheUtil.removeResult(ShardModelImpl.ENTITY_CACHE_ENABLED,
+			Shard.class, shard.getPrimaryKey());
+
+		return shard;
 	}
 
 	/**
@@ -195,6 +257,8 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 
 	public Shard updateImpl(com.liferay.portal.model.Shard shard, boolean merge)
 		throws SystemException {
+		boolean isNew = shard.isNew();
+
 		Session session = null;
 
 		try {
@@ -203,17 +267,54 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, shard, merge);
 
 			shard.setNew(false);
-
-			return shard;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(Shard.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		ShardModelImpl shardModelImpl = (ShardModelImpl)shard;
+
+		if (!isNew &&
+				(!shard.getName().equals(shardModelImpl.getOriginalName()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_NAME,
+				new Object[] { shardModelImpl.getOriginalName() });
+		}
+
+		if (isNew ||
+				(!shard.getName().equals(shardModelImpl.getOriginalName()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NAME,
+				new Object[] { shard.getName() }, shard);
+		}
+
+		if (!isNew &&
+				((shard.getClassNameId() != shardModelImpl.getOriginalClassNameId()) ||
+				(shard.getClassPK() != shardModelImpl.getOriginalClassPK()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
+				new Object[] {
+					new Long(shardModelImpl.getOriginalClassNameId()),
+					new Long(shardModelImpl.getOriginalClassPK())
+				});
+		}
+
+		if (isNew ||
+				((shard.getClassNameId() != shardModelImpl.getOriginalClassNameId()) ||
+				(shard.getClassPK() != shardModelImpl.getOriginalClassPK()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
+				new Object[] {
+					new Long(shard.getClassNameId()),
+					new Long(shard.getClassPK())
+				}, shard);
+		}
+
+		EntityCacheUtil.putResult(ShardModelImpl.ENTITY_CACHE_ENABLED,
+			Shard.class, shard.getPrimaryKey(), shard);
+
+		return shard;
 	}
 
 	public Shard findByPrimaryKey(long shardId)
@@ -233,18 +334,31 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Shard fetchByPrimaryKey(long shardId) throws SystemException {
-		Session session = null;
+		Shard result = (Shard)EntityCacheUtil.getResult(ShardModelImpl.ENTITY_CACHE_ENABLED,
+				Shard.class, shardId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (Shard)session.get(ShardImpl.class, new Long(shardId));
+			try {
+				session = openSession();
+
+				Shard shard = (Shard)session.get(ShardImpl.class,
+						new Long(shardId));
+
+				cacheResult(shard);
+
+				return shard;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (Shard)result;
 		}
 	}
 
@@ -272,18 +386,10 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Shard fetchByName(String name) throws SystemException {
-		boolean finderClassNameCacheEnabled = ShardModelImpl.CACHE_ENABLED;
-		String finderClassName = Shard.class.getName();
-		String finderMethodName = "fetchByName";
-		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { name };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_NAME,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -314,16 +420,19 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 
 				List<Shard> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				Shard shard = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NAME,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					shard = list.get(0);
+
+					cacheResult(shard);
 				}
+
+				return shard;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -333,13 +442,11 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<Shard> list = (List<Shard>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (Shard)result;
 			}
 		}
 	}
@@ -372,22 +479,12 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 
 	public Shard fetchByC_C(long classNameId, long classPK)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = ShardModelImpl.CACHE_ENABLED;
-		String finderClassName = Shard.class.getName();
-		String finderMethodName = "fetchByC_C";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_C,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -417,16 +514,19 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 
 				List<Shard> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				Shard shard = null;
 
-				if (list.size() == 0) {
-					return null;
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
+						finderArgs, list);
 				}
 				else {
-					return list.get(0);
+					shard = list.get(0);
+
+					cacheResult(shard);
 				}
+
+				return shard;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -436,13 +536,11 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 			}
 		}
 		else {
-			List<Shard> list = (List<Shard>)result;
-
-			if (list.size() == 0) {
+			if (result instanceof List) {
 				return null;
 			}
 			else {
-				return list.get(0);
+				return (Shard)result;
 			}
 		}
 	}
@@ -497,23 +595,12 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 
 	public List<Shard> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = ShardModelImpl.CACHE_ENABLED;
-		String finderClassName = Shard.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -545,9 +632,9 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 							end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -584,18 +671,10 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByName(String name) throws SystemException {
-		boolean finderClassNameCacheEnabled = ShardModelImpl.CACHE_ENABLED;
-		String finderClassName = Shard.class.getName();
-		String finderMethodName = "countByName";
-		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { name };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_NAME,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -637,8 +716,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_NAME,
 					finderArgs, count);
 
 				return count.intValue();
@@ -657,22 +735,12 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 
 	public int countByC_C(long classNameId, long classPK)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = ShardModelImpl.CACHE_ENABLED;
-		String finderClassName = Shard.class.getName();
-		String finderMethodName = "countByC_C";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -713,9 +781,8 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C, finderArgs,
+					count);
 
 				return count.intValue();
 			}
@@ -732,18 +799,10 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = ShardModelImpl.CACHE_ENABLED;
-		String finderClassName = Shard.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -766,9 +825,8 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

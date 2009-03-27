@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface DLFileRankPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> dlFileRanks);
+
 	public com.liferay.portlet.documentlibrary.model.DLFileRank create(
 		long fileRankId);
 

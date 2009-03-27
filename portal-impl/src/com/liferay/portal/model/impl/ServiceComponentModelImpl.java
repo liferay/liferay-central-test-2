@@ -82,7 +82,10 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portal.model.ServiceComponent"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.ServiceComponent"),
 			true);
 
@@ -147,7 +150,15 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent> {
 				((buildNamespace != null) && (_buildNamespace != null) &&
 				!buildNamespace.equals(_buildNamespace))) {
 			_buildNamespace = buildNamespace;
+
+			if (_originalBuildNamespace == null) {
+				_originalBuildNamespace = buildNamespace;
+			}
 		}
+	}
+
+	public String getOriginalBuildNamespace() {
+		return GetterUtil.getString(_originalBuildNamespace);
 	}
 
 	public long getBuildNumber() {
@@ -157,7 +168,17 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent> {
 	public void setBuildNumber(long buildNumber) {
 		if (buildNumber != _buildNumber) {
 			_buildNumber = buildNumber;
+
+			if (!_setOriginalBuildNumber) {
+				_setOriginalBuildNumber = true;
+
+				_originalBuildNumber = buildNumber;
+			}
 		}
+	}
+
+	public long getOriginalBuildNumber() {
+		return _originalBuildNumber;
 	}
 
 	public long getBuildDate() {
@@ -288,7 +309,10 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent> {
 
 	private long _serviceComponentId;
 	private String _buildNamespace;
+	private String _originalBuildNamespace;
 	private long _buildNumber;
+	private long _originalBuildNumber;
+	private boolean _setOriginalBuildNumber;
 	private long _buildDate;
 	private String _data;
 	private transient ExpandoBridge _expandoBridge;

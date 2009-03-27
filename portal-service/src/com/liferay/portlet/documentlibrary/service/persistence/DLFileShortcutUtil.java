@@ -29,6 +29,16 @@ package com.liferay.portlet.documentlibrary.service.persistence;
  *
  */
 public class DLFileShortcutUtil {
+	public static void cacheResult(
+		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut) {
+		getPersistence().cacheResult(dlFileShortcut);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> dlFileShortcuts) {
+		getPersistence().cacheResult(dlFileShortcuts);
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut create(
 		long fileShortcutId) {
 		return getPersistence().create(fileShortcutId);

@@ -29,6 +29,15 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class AccountUtil {
+	public static void cacheResult(com.liferay.portal.model.Account account) {
+		getPersistence().cacheResult(account);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.Account> accounts) {
+		getPersistence().cacheResult(accounts);
+	}
+
 	public static com.liferay.portal.model.Account create(long accountId) {
 		return getPersistence().create(accountId);
 	}

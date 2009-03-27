@@ -29,6 +29,16 @@ package com.liferay.portlet.wiki.service.persistence;
  *
  */
 public class WikiPageUtil {
+	public static void cacheResult(
+		com.liferay.portlet.wiki.model.WikiPage wikiPage) {
+		getPersistence().cacheResult(wikiPage);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.wiki.model.WikiPage> wikiPages) {
+		getPersistence().cacheResult(wikiPages);
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiPage create(long pageId) {
 		return getPersistence().create(pageId);
 	}

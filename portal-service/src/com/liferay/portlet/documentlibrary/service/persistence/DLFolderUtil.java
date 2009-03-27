@@ -29,6 +29,16 @@ package com.liferay.portlet.documentlibrary.service.persistence;
  *
  */
 public class DLFolderUtil {
+	public static void cacheResult(
+		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder) {
+		getPersistence().cacheResult(dlFolder);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> dlFolders) {
+		getPersistence().cacheResult(dlFolders);
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFolder create(
 		long folderId) {
 		return getPersistence().create(folderId);

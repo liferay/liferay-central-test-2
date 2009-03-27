@@ -29,6 +29,16 @@ package com.liferay.portlet.expando.service.persistence;
  *
  */
 public class ExpandoValueUtil {
+	public static void cacheResult(
+		com.liferay.portlet.expando.model.ExpandoValue expandoValue) {
+		getPersistence().cacheResult(expandoValue);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.expando.model.ExpandoValue> expandoValues) {
+		getPersistence().cacheResult(expandoValues);
+	}
+
 	public static com.liferay.portlet.expando.model.ExpandoValue create(
 		long valueId) {
 		return getPersistence().create(valueId);

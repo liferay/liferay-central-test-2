@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface JournalArticleImagePersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> journalArticleImages);
+
 	public com.liferay.portlet.journal.model.JournalArticleImage create(
 		long articleImageId);
 

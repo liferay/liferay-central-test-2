@@ -87,7 +87,10 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn> {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portlet.expando.model.ExpandoColumn"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.expando.model.ExpandoColumn"),
 			true);
 
@@ -160,7 +163,17 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn> {
 	public void setTableId(long tableId) {
 		if (tableId != _tableId) {
 			_tableId = tableId;
+
+			if (!_setOriginalTableId) {
+				_setOriginalTableId = true;
+
+				_originalTableId = tableId;
+			}
 		}
+	}
+
+	public long getOriginalTableId() {
+		return _originalTableId;
 	}
 
 	public String getName() {
@@ -172,7 +185,15 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn> {
 				((name != null) && (_name == null)) ||
 				((name != null) && (_name != null) && !name.equals(_name))) {
 			_name = name;
+
+			if (_originalName == null) {
+				_originalName = name;
+			}
 		}
+	}
+
+	public String getOriginalName() {
+		return GetterUtil.getString(_originalName);
 	}
 
 	public int getType() {
@@ -294,7 +315,10 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn> {
 	private long _columnId;
 	private long _companyId;
 	private long _tableId;
+	private long _originalTableId;
+	private boolean _setOriginalTableId;
 	private String _name;
+	private String _originalName;
 	private int _type;
 	private String _defaultData;
 	private String _typeSettings;

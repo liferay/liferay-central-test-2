@@ -29,6 +29,16 @@ package com.liferay.portlet.shopping.service.persistence;
  *
  */
 public class ShoppingCouponUtil {
+	public static void cacheResult(
+		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon) {
+		getPersistence().cacheResult(shoppingCoupon);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> shoppingCoupons) {
+		getPersistence().cacheResult(shoppingCoupons);
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon create(
 		long couponId) {
 		return getPersistence().create(couponId);

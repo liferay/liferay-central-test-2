@@ -29,6 +29,16 @@ package com.liferay.portlet.social.service.persistence;
  *
  */
 public class SocialActivityUtil {
+	public static void cacheResult(
+		com.liferay.portlet.social.model.SocialActivity socialActivity) {
+		getPersistence().cacheResult(socialActivity);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.social.model.SocialActivity> socialActivities) {
+		getPersistence().cacheResult(socialActivities);
+	}
+
 	public static com.liferay.portlet.social.model.SocialActivity create(
 		long activityId) {
 		return getPersistence().create(activityId);

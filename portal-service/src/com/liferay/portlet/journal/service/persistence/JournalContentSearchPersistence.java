@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface JournalContentSearchPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> journalContentSearchs);
+
 	public com.liferay.portlet.journal.model.JournalContentSearch create(
 		long contentSearchId);
 

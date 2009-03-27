@@ -29,6 +29,16 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class PluginSettingUtil {
+	public static void cacheResult(
+		com.liferay.portal.model.PluginSetting pluginSetting) {
+		getPersistence().cacheResult(pluginSetting);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.PluginSetting> pluginSettings) {
+		getPersistence().cacheResult(pluginSettings);
+	}
+
 	public static com.liferay.portal.model.PluginSetting create(
 		long pluginSettingId) {
 		return getPersistence().create(pluginSettingId);

@@ -29,6 +29,16 @@ package com.liferay.portlet.documentlibrary.service.persistence;
  *
  */
 public class DLFileVersionUtil {
+	public static void cacheResult(
+		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion) {
+		getPersistence().cacheResult(dlFileVersion);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> dlFileVersions) {
+		getPersistence().cacheResult(dlFileVersions);
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion create(
 		long fileVersionId) {
 		return getPersistence().create(fileVersionId);

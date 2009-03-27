@@ -26,7 +26,9 @@ import com.liferay.portal.NoSuchListTypeException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -56,6 +58,46 @@ import java.util.List;
  */
 public class ListTypePersistenceImpl extends BasePersistenceImpl
 	implements ListTypePersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = ListType.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = ListType.class.getName() +
+		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_TYPE = new FinderPath(ListTypeModelImpl.ENTITY_CACHE_ENABLED,
+			ListTypeModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByType", new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_TYPE = new FinderPath(ListTypeModelImpl.ENTITY_CACHE_ENABLED,
+			ListTypeModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByType",
+			new String[] {
+				String.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_TYPE = new FinderPath(ListTypeModelImpl.ENTITY_CACHE_ENABLED,
+			ListTypeModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByType", new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(ListTypeModelImpl.ENTITY_CACHE_ENABLED,
+			ListTypeModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(ListTypeModelImpl.ENTITY_CACHE_ENABLED,
+			ListTypeModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countAll", new String[0]);
+
+	public void cacheResult(ListType listType) {
+		EntityCacheUtil.putResult(ListTypeModelImpl.ENTITY_CACHE_ENABLED,
+			ListType.class, listType.getPrimaryKey(), listType);
+	}
+
+	public void cacheResult(List<ListType> listTypes) {
+		for (ListType listType : listTypes) {
+			if (EntityCacheUtil.getResult(
+						ListTypeModelImpl.ENTITY_CACHE_ENABLED, ListType.class,
+						listType.getPrimaryKey(), this) == null) {
+				cacheResult(listType);
+			}
+		}
+	}
+
 	public ListType create(int listTypeId) {
 		ListType listType = new ListTypeImpl();
 
@@ -130,17 +172,22 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 			session.delete(listType);
 
 			session.flush();
-
-			return listType;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(ListType.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		ListTypeModelImpl listTypeModelImpl = (ListTypeModelImpl)listType;
+
+		EntityCacheUtil.removeResult(ListTypeModelImpl.ENTITY_CACHE_ENABLED,
+			ListType.class, listType.getPrimaryKey());
+
+		return listType;
 	}
 
 	/**
@@ -197,6 +244,8 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 
 	public ListType updateImpl(com.liferay.portal.model.ListType listType,
 		boolean merge) throws SystemException {
+		boolean isNew = listType.isNew();
+
 		Session session = null;
 
 		try {
@@ -205,17 +254,22 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 			BatchSessionUtil.update(session, listType, merge);
 
 			listType.setNew(false);
-
-			return listType;
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
 			closeSession(session);
-
-			FinderCacheUtil.clearCache(ListType.class.getName());
 		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		ListTypeModelImpl listTypeModelImpl = (ListTypeModelImpl)listType;
+
+		EntityCacheUtil.putResult(ListTypeModelImpl.ENTITY_CACHE_ENABLED,
+			ListType.class, listType.getPrimaryKey(), listType);
+
+		return listType;
 	}
 
 	public ListType findByPrimaryKey(int listTypeId)
@@ -236,35 +290,39 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public ListType fetchByPrimaryKey(int listTypeId) throws SystemException {
-		Session session = null;
+		ListType result = (ListType)EntityCacheUtil.getResult(ListTypeModelImpl.ENTITY_CACHE_ENABLED,
+				ListType.class, listTypeId, this);
 
-		try {
-			session = openSession();
+		if (result == null) {
+			Session session = null;
 
-			return (ListType)session.get(ListTypeImpl.class,
-				new Integer(listTypeId));
+			try {
+				session = openSession();
+
+				ListType listType = (ListType)session.get(ListTypeImpl.class,
+						new Integer(listTypeId));
+
+				cacheResult(listType);
+
+				return listType;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return (ListType)result;
 		}
 	}
 
 	public List<ListType> findByType(String type) throws SystemException {
-		boolean finderClassNameCacheEnabled = ListTypeModelImpl.CACHE_ENABLED;
-		String finderClassName = ListType.class.getName();
-		String finderMethodName = "findByType";
-		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { type };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_TYPE,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -299,9 +357,10 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 
 				List<ListType> list = q.list();
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_TYPE, finderArgs,
+					list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -324,27 +383,14 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 
 	public List<ListType> findByType(String type, int start, int end,
 		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = ListTypeModelImpl.CACHE_ENABLED;
-		String finderClassName = ListType.class.getName();
-		String finderMethodName = "findByType";
-		String[] finderParams = new String[] {
-				String.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				type,
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_TYPE,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -387,9 +433,10 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 				List<ListType> list = (List<ListType>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_TYPE,
 					finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -409,7 +456,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 		throws NoSuchListTypeException, SystemException {
 		List<ListType> list = findByType(type, 0, 1, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ListType exists with the key {");
@@ -431,7 +478,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 
 		List<ListType> list = findByType(type, count - 1, count, obc);
 
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ListType exists with the key {");
@@ -558,23 +605,12 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 
 	public List<ListType> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
-		boolean finderClassNameCacheEnabled = ListTypeModelImpl.CACHE_ENABLED;
-		String finderClassName = ListType.class.getName();
-		String finderMethodName = "findAll";
-		String[] finderParams = new String[] {
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -612,9 +648,9 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
+				cacheResult(list);
 
 				return list;
 			}
@@ -643,18 +679,10 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countByType(String type) throws SystemException {
-		boolean finderClassNameCacheEnabled = ListTypeModelImpl.CACHE_ENABLED;
-		String finderClassName = ListType.class.getName();
-		String finderMethodName = "countByType";
-		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { type };
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_TYPE,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -696,8 +724,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_TYPE,
 					finderArgs, count);
 
 				return count.intValue();
@@ -715,18 +742,10 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public int countAll() throws SystemException {
-		boolean finderClassNameCacheEnabled = ListTypeModelImpl.CACHE_ENABLED;
-		String finderClassName = ListType.class.getName();
-		String finderMethodName = "countAll";
-		String[] finderParams = new String[] {  };
-		Object[] finderArgs = new Object[] {  };
+		Object[] finderArgs = new Object[0];
 
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
+		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
@@ -749,9 +768,8 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 					count = new Long(0);
 				}
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
 
 				return count.intValue();
 			}

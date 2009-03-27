@@ -29,6 +29,16 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class WebDAVPropsUtil {
+	public static void cacheResult(
+		com.liferay.portal.model.WebDAVProps webDAVProps) {
+		getPersistence().cacheResult(webDAVProps);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portal.model.WebDAVProps> webDAVPropses) {
+		getPersistence().cacheResult(webDAVPropses);
+	}
+
 	public static com.liferay.portal.model.WebDAVProps create(
 		long webDavPropsId) {
 		return getPersistence().create(webDavPropsId);

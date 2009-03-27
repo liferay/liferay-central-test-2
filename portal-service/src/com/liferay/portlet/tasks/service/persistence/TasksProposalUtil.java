@@ -29,6 +29,16 @@ package com.liferay.portlet.tasks.service.persistence;
  *
  */
 public class TasksProposalUtil {
+	public static void cacheResult(
+		com.liferay.portlet.tasks.model.TasksProposal tasksProposal) {
+		getPersistence().cacheResult(tasksProposal);
+	}
+
+	public static void cacheResult(
+		java.util.List<com.liferay.portlet.tasks.model.TasksProposal> tasksProposals) {
+		getPersistence().cacheResult(tasksProposals);
+	}
+
 	public static com.liferay.portlet.tasks.model.TasksProposal create(
 		long proposalId) {
 		return getPersistence().create(proposalId);

@@ -31,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  *
  */
 public interface DLFileShortcutPersistence extends BasePersistence {
+	public void cacheResult(
+		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut);
+
+	public void cacheResult(
+		java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> dlFileShortcuts);
+
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut create(
 		long fileShortcutId);
 
