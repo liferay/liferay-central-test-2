@@ -24,6 +24,7 @@ package com.liferay.portal.tools.sql;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.BufferedReader;
@@ -74,18 +75,18 @@ public class DB2Util extends DBUtil {
 	public void runSQL(String template)
 		throws IOException, NamingException, SQLException {
 
-		if (template.startsWith(ALTER_COLUMN_NAME)
-                || template.startsWith(ALTER_COLUMN_TYPE)) {
+		if (template.startsWith(ALTER_COLUMN_NAME) ||
+			template.startsWith(ALTER_COLUMN_TYPE)) {
+
 			String sql = buildSQL(template);
 
-			String[] renameSqls = sql.split(";");
-            int renameSqlsLength = renameSqls.length;
-            for (int i = 0; i < renameSqlsLength; i++) {
-                if (!renameSqls[i].startsWith("--")){
-                    runSQL(renameSqls);
-                    break;
-                }
-            }
+			String[] alterSqls = StringUtil.split(sql, StringPool.SEMICOLON);
+
+			for (String alterSql : alterSqls) {
+				if (!alterSql.startsWith("-- ")){
+					runSQL(alterSql);
+				}
+			}
 		}
 		else {
 			super.runSQL(template);
