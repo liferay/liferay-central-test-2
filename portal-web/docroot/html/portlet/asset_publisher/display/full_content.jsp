@@ -48,13 +48,13 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			<%
 			BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
 
+			TagsAssetLocalServiceUtil.incrementViewCounter(className, entry.getEntryId());
+
 			if (showContextLink) {
 				if (PortalUtil.getPlidFromPortletId(entry.getGroupId(), PortletKeys.BLOGS) == 0) {
 					showContextLink = false;
 				}
 			}
-
-			TagsAssetLocalServiceUtil.incrementViewCounter(className, entry.getEntryId());
 
 			PortletURL viewFullContentURL = renderResponse.createRenderURL();
 
@@ -280,14 +280,15 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 			JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(articleResource.getGroupId(), articleResource.getArticleId(), templateId, null, languageId, themeDisplay, articlePage, xmlRequest);
 
-			if (articleDisplay == null) {
+			if (articleDisplay != null) {
+				TagsAssetLocalServiceUtil.incrementViewCounter(className, articleDisplay.getResourcePrimKey());
+			}
+			else {
 
 				// No version has been approved yet, the article should not be rendered
 
 				show = false;
 			}
-
-			TagsAssetLocalServiceUtil.incrementViewCounter(className, articleDisplay.getResourcePrimKey());
 			%>
 
 			<c:if test="<%= articleDisplay != null %>">
@@ -394,13 +395,13 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			<%
 			MBMessage message = MBMessageLocalServiceUtil.getMessage(classPK);
 
+			TagsAssetLocalServiceUtil.incrementViewCounter(className, message.getMessageId());
+
 			if (showContextLink) {
 				if (PortalUtil.getPlidFromPortletId(message.getCategory().getGroupId(), PortletKeys.MESSAGE_BOARDS) == 0) {
 					showContextLink = false;
 				}
 			}
-
-			TagsAssetLocalServiceUtil.incrementViewCounter(className, message.getMessageId());
 			%>
 
 			<c:choose>
@@ -452,6 +453,8 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 					WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(pageResource.getNodeId(), pageResource.getTitle());
 
+					TagsAssetLocalServiceUtil.incrementViewCounter(className, wikiPage.getResourcePrimKey());
+
 					if (showContextLink) {
 						WikiNode node = WikiNodeLocalServiceUtil.getNode(pageResource.getNodeId());
 
@@ -459,8 +462,6 @@ request.setAttribute("view.jsp-showIconLabel", true);
 							showContextLink = false;
 						}
 					}
-
-					TagsAssetLocalServiceUtil.incrementViewCounter(className, wikiPage.getResourcePrimKey());
 
 					try {
 						PortletURL viewPageURL = new PortletURLImpl(request, PortletKeys.WIKI, plid, PortletRequest.ACTION_PHASE);

@@ -26,6 +26,10 @@
 
 <%
 JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribute(WebKeys.JOURNAL_ARTICLE_DISPLAY);
+
+if (articleDisplay != null) {
+	TagsAssetLocalServiceUtil.incrementViewCounter(JournalArticle.class.getName(), articleDisplay.getResourcePrimKey());
+}
 %>
 
 <c:choose>
@@ -50,8 +54,6 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 			<c:when test="<%= articleDisplay != null %>">
 
 				<%
-				TagsAssetLocalServiceUtil.incrementViewCounter(JournalArticle.class.getName(), articleDisplay.getResourcePrimKey());
-
 				RuntimeLogic portletLogic = new PortletLogic(application, request, response, renderRequest, renderResponse);
 				RuntimeLogic actionURLLogic = new ActionURLLogic(renderResponse);
 				RuntimeLogic renderURLLogic = new RenderURLLogic(renderResponse);
