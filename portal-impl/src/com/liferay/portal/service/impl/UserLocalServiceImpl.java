@@ -280,9 +280,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		if (autoPassword) {
 			password1 = PwdToolkitUtil.generate();
 		}
-		else {
-			validatePassword(password1, password2);
-		}
 
 		if (autoScreenName) {
 			ScreenNameGenerator screenNameGenerator =
@@ -3266,15 +3263,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			if (emailAddress.equalsIgnoreCase(reservedEmailAddresses[i])) {
 				throw new ReservedUserEmailAddressException();
 			}
-		}
-	}
-
-	protected void validatePassword(String password1, String password2)
-		throws PortalException, SystemException {
-
-		if (Validator.isNull(password1) || Validator.isNull(password2)) {
-			throw new UserPasswordException(
-				UserPasswordException.PASSWORD_INVALID);
 		}
 	}
 
