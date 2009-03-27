@@ -495,10 +495,7 @@
 			SELECT
 				COUNT(*) AS COUNT_VALUE
 			FROM
-				Permission_
-			INNER JOIN
-				Roles_Permissions ON
-					(Roles_Permissions.permissionId = Permission_.permissionId)
+				Roles_Permissions
 			WHERE
 				([$PERMISSION_IDS$]) AND
 				([$ROLE_IDS$])
