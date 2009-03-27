@@ -487,7 +487,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 				ExpandoValue expandoValue = (ExpandoValue)session.get(ExpandoValueImpl.class,
 						new Long(valueId));
 
-				cacheResult(expandoValue);
+				if (expandoValue != null) {
+					cacheResult(expandoValue);
+				}
 
 				return expandoValue;
 			}

@@ -379,7 +379,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 				Website website = (Website)session.get(WebsiteImpl.class,
 						new Long(websiteId));
 
-				cacheResult(website);
+				if (website != null) {
+					cacheResult(website);
+				}
 
 				return website;
 			}

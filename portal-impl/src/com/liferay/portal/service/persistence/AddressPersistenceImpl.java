@@ -403,7 +403,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 				Address address = (Address)session.get(AddressImpl.class,
 						new Long(addressId));
 
-				cacheResult(address);
+				if (address != null) {
+					cacheResult(address);
+				}
 
 				return address;
 			}

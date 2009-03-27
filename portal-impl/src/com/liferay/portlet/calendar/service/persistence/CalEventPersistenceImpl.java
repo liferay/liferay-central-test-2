@@ -416,7 +416,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 				CalEvent calEvent = (CalEvent)session.get(CalEventImpl.class,
 						new Long(eventId));
 
-				cacheResult(calEvent);
+				if (calEvent != null) {
+					cacheResult(calEvent);
+				}
 
 				return calEvent;
 			}

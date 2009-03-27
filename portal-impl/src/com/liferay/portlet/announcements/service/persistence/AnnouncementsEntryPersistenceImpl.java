@@ -386,7 +386,9 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 				AnnouncementsEntry announcementsEntry = (AnnouncementsEntry)session.get(AnnouncementsEntryImpl.class,
 						new Long(entryId));
 
-				cacheResult(announcementsEntry);
+				if (announcementsEntry != null) {
+					cacheResult(announcementsEntry);
+				}
 
 				return announcementsEntry;
 			}

@@ -456,7 +456,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 				IGFolder igFolder = (IGFolder)session.get(IGFolderImpl.class,
 						new Long(folderId));
 
-				cacheResult(igFolder);
+				if (igFolder != null) {
+					cacheResult(igFolder);
+				}
 
 				return igFolder;
 			}

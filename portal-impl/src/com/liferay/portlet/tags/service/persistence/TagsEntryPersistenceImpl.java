@@ -342,7 +342,9 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 				TagsEntry tagsEntry = (TagsEntry)session.get(TagsEntryImpl.class,
 						new Long(entryId));
 
-				cacheResult(tagsEntry);
+				if (tagsEntry != null) {
+					cacheResult(tagsEntry);
+				}
 
 				return tagsEntry;
 			}

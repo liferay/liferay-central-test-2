@@ -375,7 +375,9 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 				TasksProposal tasksProposal = (TasksProposal)session.get(TasksProposalImpl.class,
 						new Long(proposalId));
 
-				cacheResult(tasksProposal);
+				if (tasksProposal != null) {
+					cacheResult(tasksProposal);
+				}
 
 				return tasksProposal;
 			}

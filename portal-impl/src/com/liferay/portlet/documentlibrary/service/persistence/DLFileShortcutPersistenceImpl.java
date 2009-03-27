@@ -360,7 +360,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 				DLFileShortcut dlFileShortcut = (DLFileShortcut)session.get(DLFileShortcutImpl.class,
 						new Long(fileShortcutId));
 
-				cacheResult(dlFileShortcut);
+				if (dlFileShortcut != null) {
+					cacheResult(dlFileShortcut);
+				}
 
 				return dlFileShortcut;
 			}

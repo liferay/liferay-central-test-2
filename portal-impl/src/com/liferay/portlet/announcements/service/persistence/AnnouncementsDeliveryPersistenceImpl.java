@@ -365,7 +365,9 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 				AnnouncementsDelivery announcementsDelivery = (AnnouncementsDelivery)session.get(AnnouncementsDeliveryImpl.class,
 						new Long(deliveryId));
 
-				cacheResult(announcementsDelivery);
+				if (announcementsDelivery != null) {
+					cacheResult(announcementsDelivery);
+				}
 
 				return announcementsDelivery;
 			}

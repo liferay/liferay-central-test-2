@@ -349,7 +349,9 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 				MembershipRequest membershipRequest = (MembershipRequest)session.get(MembershipRequestImpl.class,
 						new Long(membershipRequestId));
 
-				cacheResult(membershipRequest);
+				if (membershipRequest != null) {
+					cacheResult(membershipRequest);
+				}
 
 				return membershipRequest;
 			}

@@ -302,7 +302,9 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 				ListType listType = (ListType)session.get(ListTypeImpl.class,
 						new Integer(listTypeId));
 
-				cacheResult(listType);
+				if (listType != null) {
+					cacheResult(listType);
+				}
 
 				return listType;
 			}

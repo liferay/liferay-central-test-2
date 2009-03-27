@@ -537,7 +537,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 				SocialActivity socialActivity = (SocialActivity)session.get(SocialActivityImpl.class,
 						new Long(activityId));
 
-				cacheResult(socialActivity);
+				if (socialActivity != null) {
+					cacheResult(socialActivity);
+				}
 
 				return socialActivity;
 			}

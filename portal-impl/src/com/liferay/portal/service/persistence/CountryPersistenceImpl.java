@@ -374,7 +374,9 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 				Country country = (Country)session.get(CountryImpl.class,
 						new Long(countryId));
 
-				cacheResult(country);
+				if (country != null) {
+					cacheResult(country);
+				}
 
 				return country;
 			}

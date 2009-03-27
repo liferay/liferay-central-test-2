@@ -317,7 +317,9 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl
 				ShoppingItemField shoppingItemField = (ShoppingItemField)session.get(ShoppingItemFieldImpl.class,
 						new Long(itemFieldId));
 
-				cacheResult(shoppingItemField);
+				if (shoppingItemField != null) {
+					cacheResult(shoppingItemField);
+				}
 
 				return shoppingItemField;
 			}

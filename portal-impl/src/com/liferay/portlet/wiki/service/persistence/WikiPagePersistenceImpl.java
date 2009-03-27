@@ -516,7 +516,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 				WikiPage wikiPage = (WikiPage)session.get(WikiPageImpl.class,
 						new Long(pageId));
 
-				cacheResult(wikiPage);
+				if (wikiPage != null) {
+					cacheResult(wikiPage);
+				}
 
 				return wikiPage;
 			}

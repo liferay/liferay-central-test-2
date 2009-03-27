@@ -341,7 +341,9 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 				ShoppingCoupon shoppingCoupon = (ShoppingCoupon)session.get(ShoppingCouponImpl.class,
 						new Long(couponId));
 
-				cacheResult(shoppingCoupon);
+				if (shoppingCoupon != null) {
+					cacheResult(shoppingCoupon);
+				}
 
 				return shoppingCoupon;
 			}

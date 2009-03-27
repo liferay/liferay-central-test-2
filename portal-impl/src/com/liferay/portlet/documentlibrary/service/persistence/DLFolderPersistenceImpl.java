@@ -473,7 +473,9 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 				DLFolder dlFolder = (DLFolder)session.get(DLFolderImpl.class,
 						new Long(folderId));
 
-				cacheResult(dlFolder);
+				if (dlFolder != null) {
+					cacheResult(dlFolder);
+				}
 
 				return dlFolder;
 			}

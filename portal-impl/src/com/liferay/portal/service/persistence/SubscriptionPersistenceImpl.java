@@ -405,7 +405,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 				Subscription subscription = (Subscription)session.get(SubscriptionImpl.class,
 						new Long(subscriptionId));
 
-				cacheResult(subscription);
+				if (subscription != null) {
+					cacheResult(subscription);
+				}
 
 				return subscription;
 			}

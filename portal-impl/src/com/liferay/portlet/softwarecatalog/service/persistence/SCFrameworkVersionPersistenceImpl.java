@@ -370,7 +370,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 				SCFrameworkVersion scFrameworkVersion = (SCFrameworkVersion)session.get(SCFrameworkVersionImpl.class,
 						new Long(frameworkVersionId));
 
-				cacheResult(scFrameworkVersion);
+				if (scFrameworkVersion != null) {
+					cacheResult(scFrameworkVersion);
+				}
 
 				return scFrameworkVersion;
 			}

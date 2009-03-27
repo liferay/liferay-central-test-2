@@ -315,7 +315,9 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl
 				ClassName className = (ClassName)session.get(ClassNameImpl.class,
 						new Long(classNameId));
 
-				cacheResult(className);
+				if (className != null) {
+					cacheResult(className);
+				}
 
 				return className;
 			}

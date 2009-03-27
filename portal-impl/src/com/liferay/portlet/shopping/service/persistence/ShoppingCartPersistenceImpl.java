@@ -364,7 +364,9 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl
 				ShoppingCart shoppingCart = (ShoppingCart)session.get(ShoppingCartImpl.class,
 						new Long(cartId));
 
-				cacheResult(shoppingCart);
+				if (shoppingCart != null) {
+					cacheResult(shoppingCart);
+				}
 
 				return shoppingCart;
 			}

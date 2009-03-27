@@ -382,7 +382,9 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 				MBStatsUser mbStatsUser = (MBStatsUser)session.get(MBStatsUserImpl.class,
 						new Long(statsUserId));
 
-				cacheResult(mbStatsUser);
+				if (mbStatsUser != null) {
+					cacheResult(mbStatsUser);
+				}
 
 				return mbStatsUser;
 			}

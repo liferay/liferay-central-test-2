@@ -537,7 +537,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 				Layout layout = (Layout)session.get(LayoutImpl.class,
 						new Long(plid));
 
-				cacheResult(layout);
+				if (layout != null) {
+					cacheResult(layout);
+				}
 
 				return layout;
 			}

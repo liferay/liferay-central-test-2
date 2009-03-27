@@ -385,7 +385,9 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 				Company company = (Company)session.get(CompanyImpl.class,
 						new Long(companyId));
 
-				cacheResult(company);
+				if (company != null) {
+					cacheResult(company);
+				}
 
 				return company;
 			}

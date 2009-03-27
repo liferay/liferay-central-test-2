@@ -369,7 +369,9 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 				DLFileVersion dlFileVersion = (DLFileVersion)session.get(DLFileVersionImpl.class,
 						new Long(fileVersionId));
 
-				cacheResult(dlFileVersion);
+				if (dlFileVersion != null) {
+					cacheResult(dlFileVersion);
+				}
 
 				return dlFileVersion;
 			}

@@ -388,7 +388,9 @@ public class TagsPropertyPersistenceImpl extends BasePersistenceImpl
 				TagsProperty tagsProperty = (TagsProperty)session.get(TagsPropertyImpl.class,
 						new Long(propertyId));
 
-				cacheResult(tagsProperty);
+				if (tagsProperty != null) {
+					cacheResult(tagsProperty);
+				}
 
 				return tagsProperty;
 			}

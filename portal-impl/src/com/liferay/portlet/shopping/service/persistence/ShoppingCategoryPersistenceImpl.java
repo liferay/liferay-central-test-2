@@ -334,7 +334,9 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 				ShoppingCategory shoppingCategory = (ShoppingCategory)session.get(ShoppingCategoryImpl.class,
 						new Long(categoryId));
 
-				cacheResult(shoppingCategory);
+				if (shoppingCategory != null) {
+					cacheResult(shoppingCategory);
+				}
 
 				return shoppingCategory;
 			}

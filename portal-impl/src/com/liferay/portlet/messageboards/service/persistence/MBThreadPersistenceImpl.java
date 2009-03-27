@@ -320,7 +320,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 				MBThread mbThread = (MBThread)session.get(MBThreadImpl.class,
 						new Long(threadId));
 
-				cacheResult(mbThread);
+				if (mbThread != null) {
+					cacheResult(mbThread);
+				}
 
 				return mbThread;
 			}

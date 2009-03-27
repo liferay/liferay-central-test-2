@@ -420,7 +420,9 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl
 				JournalFeed journalFeed = (JournalFeed)session.get(JournalFeedImpl.class,
 						new Long(id));
 
-				cacheResult(journalFeed);
+				if (journalFeed != null) {
+					cacheResult(journalFeed);
+				}
 
 				return journalFeed;
 			}

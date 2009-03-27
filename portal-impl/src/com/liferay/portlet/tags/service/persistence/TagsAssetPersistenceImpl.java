@@ -365,7 +365,9 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 				TagsAsset tagsAsset = (TagsAsset)session.get(TagsAssetImpl.class,
 						new Long(assetId));
 
-				cacheResult(tagsAsset);
+				if (tagsAsset != null) {
+					cacheResult(tagsAsset);
+				}
 
 				return tagsAsset;
 			}

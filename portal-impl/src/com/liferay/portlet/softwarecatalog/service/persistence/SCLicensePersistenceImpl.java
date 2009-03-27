@@ -343,7 +343,9 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 				SCLicense scLicense = (SCLicense)session.get(SCLicenseImpl.class,
 						new Long(licenseId));
 
-				cacheResult(scLicense);
+				if (scLicense != null) {
+					cacheResult(scLicense);
+				}
 
 				return scLicense;
 			}

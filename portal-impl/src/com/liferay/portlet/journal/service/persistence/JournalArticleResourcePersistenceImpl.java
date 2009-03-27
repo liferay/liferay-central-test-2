@@ -369,7 +369,9 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 				JournalArticleResource journalArticleResource = (JournalArticleResource)session.get(JournalArticleResourceImpl.class,
 						new Long(resourcePrimKey));
 
-				cacheResult(journalArticleResource);
+				if (journalArticleResource != null) {
+					cacheResult(journalArticleResource);
+				}
 
 				return journalArticleResource;
 			}

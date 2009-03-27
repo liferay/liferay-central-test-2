@@ -415,7 +415,9 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 				SCProductEntry scProductEntry = (SCProductEntry)session.get(SCProductEntryImpl.class,
 						new Long(productEntryId));
 
-				cacheResult(scProductEntry);
+				if (scProductEntry != null) {
+					cacheResult(scProductEntry);
+				}
 
 				return scProductEntry;
 			}

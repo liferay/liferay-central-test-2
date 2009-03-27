@@ -324,7 +324,9 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 				OrgGroupRole orgGroupRole = (OrgGroupRole)session.get(OrgGroupRoleImpl.class,
 						orgGroupRolePK);
 
-				cacheResult(orgGroupRole);
+				if (orgGroupRole != null) {
+					cacheResult(orgGroupRole);
+				}
 
 				return orgGroupRole;
 			}

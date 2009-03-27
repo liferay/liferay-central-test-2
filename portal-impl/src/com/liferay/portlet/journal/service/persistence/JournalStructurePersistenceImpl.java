@@ -466,7 +466,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 				JournalStructure journalStructure = (JournalStructure)session.get(JournalStructureImpl.class,
 						new Long(id));
 
-				cacheResult(journalStructure);
+				if (journalStructure != null) {
+					cacheResult(journalStructure);
+				}
 
 				return journalStructure;
 			}

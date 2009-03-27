@@ -314,7 +314,9 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 				UserTrackerPath userTrackerPath = (UserTrackerPath)session.get(UserTrackerPathImpl.class,
 						new Long(userTrackerPathId));
 
-				cacheResult(userTrackerPath);
+				if (userTrackerPath != null) {
+					cacheResult(userTrackerPath);
+				}
 
 				return userTrackerPath;
 			}

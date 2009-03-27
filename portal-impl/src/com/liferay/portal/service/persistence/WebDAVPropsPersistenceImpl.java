@@ -333,7 +333,9 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 				WebDAVProps webDAVProps = (WebDAVProps)session.get(WebDAVPropsImpl.class,
 						new Long(webDavPropsId));
 
-				cacheResult(webDAVProps);
+				if (webDAVProps != null) {
+					cacheResult(webDAVProps);
+				}
 
 				return webDAVProps;
 			}

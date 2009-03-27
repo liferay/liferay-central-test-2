@@ -346,7 +346,9 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 				WikiPageResource wikiPageResource = (WikiPageResource)session.get(WikiPageResourceImpl.class,
 						new Long(resourcePrimKey));
 
-				cacheResult(wikiPageResource);
+				if (wikiPageResource != null) {
+					cacheResult(wikiPageResource);
+				}
 
 				return wikiPageResource;
 			}

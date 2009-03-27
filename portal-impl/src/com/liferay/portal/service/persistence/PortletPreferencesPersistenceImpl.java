@@ -420,7 +420,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 				PortletPreferences portletPreferences = (PortletPreferences)session.get(PortletPreferencesImpl.class,
 						new Long(portletPreferencesId));
 
-				cacheResult(portletPreferences);
+				if (portletPreferences != null) {
+					cacheResult(portletPreferences);
+				}
 
 				return portletPreferences;
 			}

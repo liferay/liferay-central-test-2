@@ -375,7 +375,9 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 				PluginSetting pluginSetting = (PluginSetting)session.get(PluginSettingImpl.class,
 						new Long(pluginSettingId));
 
-				cacheResult(pluginSetting);
+				if (pluginSetting != null) {
+					cacheResult(pluginSetting);
+				}
 
 				return pluginSetting;
 			}

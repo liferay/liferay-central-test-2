@@ -386,7 +386,9 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 				EmailAddress emailAddress = (EmailAddress)session.get(EmailAddressImpl.class,
 						new Long(emailAddressId));
 
-				cacheResult(emailAddress);
+				if (emailAddress != null) {
+					cacheResult(emailAddress);
+				}
 
 				return emailAddress;
 			}

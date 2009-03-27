@@ -416,7 +416,9 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 				Organization organization = (Organization)session.get(OrganizationImpl.class,
 						new Long(organizationId));
 
-				cacheResult(organization);
+				if (organization != null) {
+					cacheResult(organization);
+				}
 
 				return organization;
 			}

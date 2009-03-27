@@ -357,7 +357,9 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 				ExpandoColumn expandoColumn = (ExpandoColumn)session.get(ExpandoColumnImpl.class,
 						new Long(columnId));
 
-				cacheResult(expandoColumn);
+				if (expandoColumn != null) {
+					cacheResult(expandoColumn);
+				}
 
 				return expandoColumn;
 			}

@@ -369,7 +369,9 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 				ExpandoTable expandoTable = (ExpandoTable)session.get(ExpandoTableImpl.class,
 						new Long(tableId));
 
-				cacheResult(expandoTable);
+				if (expandoTable != null) {
+					cacheResult(expandoTable);
+				}
 
 				return expandoTable;
 			}

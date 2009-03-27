@@ -404,7 +404,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 				BlogsStatsUser blogsStatsUser = (BlogsStatsUser)session.get(BlogsStatsUserImpl.class,
 						new Long(statsUserId));
 
-				cacheResult(blogsStatsUser);
+				if (blogsStatsUser != null) {
+					cacheResult(blogsStatsUser);
+				}
 
 				return blogsStatsUser;
 			}

@@ -375,7 +375,9 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 				Phone phone = (Phone)session.get(PhoneImpl.class,
 						new Long(phoneId));
 
-				cacheResult(phone);
+				if (phone != null) {
+					cacheResult(phone);
+				}
 
 				return phone;
 			}

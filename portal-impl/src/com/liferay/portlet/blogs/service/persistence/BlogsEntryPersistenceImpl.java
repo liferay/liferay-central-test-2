@@ -524,7 +524,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 				BlogsEntry blogsEntry = (BlogsEntry)session.get(BlogsEntryImpl.class,
 						new Long(entryId));
 
-				cacheResult(blogsEntry);
+				if (blogsEntry != null) {
+					cacheResult(blogsEntry);
+				}
 
 				return blogsEntry;
 			}

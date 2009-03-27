@@ -469,7 +469,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 				MBMessage mbMessage = (MBMessage)session.get(MBMessageImpl.class,
 						new Long(messageId));
 
-				cacheResult(mbMessage);
+				if (mbMessage != null) {
+					cacheResult(mbMessage);
+				}
 
 				return mbMessage;
 			}

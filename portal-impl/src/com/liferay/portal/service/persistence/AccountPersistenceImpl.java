@@ -285,7 +285,9 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 				Account account = (Account)session.get(AccountImpl.class,
 						new Long(accountId));
 
-				cacheResult(account);
+				if (account != null) {
+					cacheResult(account);
+				}
 
 				return account;
 			}

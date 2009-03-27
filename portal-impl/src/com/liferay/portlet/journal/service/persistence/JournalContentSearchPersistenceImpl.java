@@ -488,7 +488,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 				JournalContentSearch journalContentSearch = (JournalContentSearch)session.get(JournalContentSearchImpl.class,
 						new Long(contentSearchId));
 
-				cacheResult(journalContentSearch);
+				if (journalContentSearch != null) {
+					cacheResult(journalContentSearch);
+				}
 
 				return journalContentSearch;
 			}

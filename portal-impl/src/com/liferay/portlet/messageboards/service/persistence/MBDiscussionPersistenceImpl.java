@@ -378,7 +378,9 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 				MBDiscussion mbDiscussion = (MBDiscussion)session.get(MBDiscussionImpl.class,
 						new Long(discussionId));
 
-				cacheResult(mbDiscussion);
+				if (mbDiscussion != null) {
+					cacheResult(mbDiscussion);
+				}
 
 				return mbDiscussion;
 			}

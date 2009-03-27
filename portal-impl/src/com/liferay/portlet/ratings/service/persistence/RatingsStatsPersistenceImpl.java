@@ -334,7 +334,9 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 				RatingsStats ratingsStats = (RatingsStats)session.get(RatingsStatsImpl.class,
 						new Long(statsId));
 
-				cacheResult(ratingsStats);
+				if (ratingsStats != null) {
+					cacheResult(ratingsStats);
+				}
 
 				return ratingsStats;
 			}

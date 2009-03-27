@@ -419,7 +419,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 				Role role = (Role)session.get(RoleImpl.class, new Long(roleId));
 
-				cacheResult(role);
+				if (role != null) {
+					cacheResult(role);
+				}
 
 				return role;
 			}

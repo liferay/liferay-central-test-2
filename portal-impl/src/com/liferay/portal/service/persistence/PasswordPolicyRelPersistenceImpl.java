@@ -388,7 +388,9 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 				PasswordPolicyRel passwordPolicyRel = (PasswordPolicyRel)session.get(PasswordPolicyRelImpl.class,
 						new Long(passwordPolicyRelId));
 
-				cacheResult(passwordPolicyRel);
+				if (passwordPolicyRel != null) {
+					cacheResult(passwordPolicyRel);
+				}
 
 				return passwordPolicyRel;
 			}

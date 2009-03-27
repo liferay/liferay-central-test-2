@@ -405,7 +405,9 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 				MBCategory mbCategory = (MBCategory)session.get(MBCategoryImpl.class,
 						new Long(categoryId));
 
-				cacheResult(mbCategory);
+				if (mbCategory != null) {
+					cacheResult(mbCategory);
+				}
 
 				return mbCategory;
 			}

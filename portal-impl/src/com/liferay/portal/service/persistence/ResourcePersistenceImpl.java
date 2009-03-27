@@ -346,7 +346,9 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 				Resource resource = (Resource)session.get(ResourceImpl.class,
 						new Long(resourceId));
 
-				cacheResult(resource);
+				if (resource != null) {
+					cacheResult(resource);
+				}
 
 				return resource;
 			}

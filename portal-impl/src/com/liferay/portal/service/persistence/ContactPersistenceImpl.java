@@ -302,7 +302,9 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 				Contact contact = (Contact)session.get(ContactImpl.class,
 						new Long(contactId));
 
-				cacheResult(contact);
+				if (contact != null) {
+					cacheResult(contact);
+				}
 
 				return contact;
 			}

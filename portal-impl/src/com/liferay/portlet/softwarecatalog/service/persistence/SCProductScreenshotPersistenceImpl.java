@@ -421,7 +421,9 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 				SCProductScreenshot scProductScreenshot = (SCProductScreenshot)session.get(SCProductScreenshotImpl.class,
 						new Long(productScreenshotId));
 
-				cacheResult(scProductScreenshot);
+				if (scProductScreenshot != null) {
+					cacheResult(scProductScreenshot);
+				}
 
 				return scProductScreenshot;
 			}

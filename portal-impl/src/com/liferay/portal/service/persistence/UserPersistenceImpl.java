@@ -629,7 +629,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 				User user = (User)session.get(UserImpl.class, new Long(userId));
 
-				cacheResult(user);
+				if (user != null) {
+					cacheResult(user);
+				}
 
 				return user;
 			}

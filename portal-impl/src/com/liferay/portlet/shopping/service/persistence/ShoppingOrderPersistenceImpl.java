@@ -391,7 +391,9 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 				ShoppingOrder shoppingOrder = (ShoppingOrder)session.get(ShoppingOrderImpl.class,
 						new Long(orderId));
 
-				cacheResult(shoppingOrder);
+				if (shoppingOrder != null) {
+					cacheResult(shoppingOrder);
+				}
 
 				return shoppingOrder;
 			}

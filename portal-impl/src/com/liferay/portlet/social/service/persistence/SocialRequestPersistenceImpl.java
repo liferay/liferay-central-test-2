@@ -610,7 +610,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 				SocialRequest socialRequest = (SocialRequest)session.get(SocialRequestImpl.class,
 						new Long(requestId));
 
-				cacheResult(socialRequest);
+				if (socialRequest != null) {
+					cacheResult(socialRequest);
+				}
 
 				return socialRequest;
 			}

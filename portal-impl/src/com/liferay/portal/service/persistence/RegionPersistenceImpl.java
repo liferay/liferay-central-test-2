@@ -333,7 +333,9 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 				Region region = (Region)session.get(RegionImpl.class,
 						new Long(regionId));
 
-				cacheResult(region);
+				if (region != null) {
+					cacheResult(region);
+				}
 
 				return region;
 			}

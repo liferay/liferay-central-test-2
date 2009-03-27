@@ -377,7 +377,9 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 				TagsVocabulary tagsVocabulary = (TagsVocabulary)session.get(TagsVocabularyImpl.class,
 						new Long(vocabularyId));
 
-				cacheResult(tagsVocabulary);
+				if (tagsVocabulary != null) {
+					cacheResult(tagsVocabulary);
+				}
 
 				return tagsVocabulary;
 			}

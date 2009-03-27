@@ -403,7 +403,9 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 				UserIdMapper userIdMapper = (UserIdMapper)session.get(UserIdMapperImpl.class,
 						new Long(userIdMapperId));
 
-				cacheResult(userIdMapper);
+				if (userIdMapper != null) {
+					cacheResult(userIdMapper);
+				}
 
 				return userIdMapper;
 			}

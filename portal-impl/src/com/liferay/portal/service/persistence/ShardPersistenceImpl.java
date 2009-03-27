@@ -346,7 +346,9 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 				Shard shard = (Shard)session.get(ShardImpl.class,
 						new Long(shardId));
 
-				cacheResult(shard);
+				if (shard != null) {
+					cacheResult(shard);
+				}
 
 				return shard;
 			}

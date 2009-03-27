@@ -415,7 +415,9 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 				MBMailingList mbMailingList = (MBMailingList)session.get(MBMailingListImpl.class,
 						new Long(mailingListId));
 
-				cacheResult(mbMailingList);
+				if (mbMailingList != null) {
+					cacheResult(mbMailingList);
+				}
 
 				return mbMailingList;
 			}

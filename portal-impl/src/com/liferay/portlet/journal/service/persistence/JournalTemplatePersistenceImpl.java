@@ -496,7 +496,9 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 				JournalTemplate journalTemplate = (JournalTemplate)session.get(JournalTemplateImpl.class,
 						new Long(id));
 
-				cacheResult(journalTemplate);
+				if (journalTemplate != null) {
+					cacheResult(journalTemplate);
+				}
 
 				return journalTemplate;
 			}

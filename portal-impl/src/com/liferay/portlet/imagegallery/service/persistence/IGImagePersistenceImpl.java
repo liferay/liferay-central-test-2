@@ -452,7 +452,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 				IGImage igImage = (IGImage)session.get(IGImageImpl.class,
 						new Long(imageId));
 
-				cacheResult(igImage);
+				if (igImage != null) {
+					cacheResult(igImage);
+				}
 
 				return igImage;
 			}

@@ -370,7 +370,9 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 				SCProductVersion scProductVersion = (SCProductVersion)session.get(SCProductVersionImpl.class,
 						new Long(productVersionId));
 
-				cacheResult(scProductVersion);
+				if (scProductVersion != null) {
+					cacheResult(scProductVersion);
+				}
 
 				return scProductVersion;
 			}

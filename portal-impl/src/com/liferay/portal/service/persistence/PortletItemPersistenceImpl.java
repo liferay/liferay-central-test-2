@@ -403,7 +403,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 				PortletItem portletItem = (PortletItem)session.get(PortletItemImpl.class,
 						new Long(portletItemId));
 
-				cacheResult(portletItem);
+				if (portletItem != null) {
+					cacheResult(portletItem);
+				}
 
 				return portletItem;
 			}

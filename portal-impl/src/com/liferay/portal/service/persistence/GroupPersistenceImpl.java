@@ -568,7 +568,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 				Group group = (Group)session.get(GroupImpl.class,
 						new Long(groupId));
 
-				cacheResult(group);
+				if (group != null) {
+					cacheResult(group);
+				}
 
 				return group;
 			}

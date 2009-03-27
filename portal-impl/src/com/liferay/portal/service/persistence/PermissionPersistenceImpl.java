@@ -386,7 +386,9 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				Permission permission = (Permission)session.get(PermissionImpl.class,
 						new Long(permissionId));
 
-				cacheResult(permission);
+				if (permission != null) {
+					cacheResult(permission);
+				}
 
 				return permission;
 			}

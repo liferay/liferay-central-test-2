@@ -298,7 +298,9 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 				Image image = (Image)session.get(ImageImpl.class,
 						new Long(imageId));
 
-				cacheResult(image);
+				if (image != null) {
+					cacheResult(image);
+				}
 
 				return image;
 			}

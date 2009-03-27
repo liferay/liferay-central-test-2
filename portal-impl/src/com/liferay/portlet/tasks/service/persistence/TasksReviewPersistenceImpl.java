@@ -429,7 +429,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 				TasksReview tasksReview = (TasksReview)session.get(TasksReviewImpl.class,
 						new Long(reviewId));
 
-				cacheResult(tasksReview);
+				if (tasksReview != null) {
+					cacheResult(tasksReview);
+				}
 
 				return tasksReview;
 			}

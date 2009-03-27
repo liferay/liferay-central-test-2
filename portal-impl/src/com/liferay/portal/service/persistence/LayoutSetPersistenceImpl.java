@@ -371,7 +371,9 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 				LayoutSet layoutSet = (LayoutSet)session.get(LayoutSetImpl.class,
 						new Long(layoutSetId));
 
-				cacheResult(layoutSet);
+				if (layoutSet != null) {
+					cacheResult(layoutSet);
+				}
 
 				return layoutSet;
 			}

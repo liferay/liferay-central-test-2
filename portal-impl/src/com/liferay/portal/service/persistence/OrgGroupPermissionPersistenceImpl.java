@@ -333,7 +333,9 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 				OrgGroupPermission orgGroupPermission = (OrgGroupPermission)session.get(OrgGroupPermissionImpl.class,
 						orgGroupPermissionPK);
 
-				cacheResult(orgGroupPermission);
+				if (orgGroupPermission != null) {
+					cacheResult(orgGroupPermission);
+				}
 
 				return orgGroupPermission;
 			}

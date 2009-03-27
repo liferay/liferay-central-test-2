@@ -368,7 +368,9 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 				AnnouncementsFlag announcementsFlag = (AnnouncementsFlag)session.get(AnnouncementsFlagImpl.class,
 						new Long(flagId));
 
-				cacheResult(announcementsFlag);
+				if (announcementsFlag != null) {
+					cacheResult(announcementsFlag);
+				}
 
 				return announcementsFlag;
 			}

@@ -346,7 +346,9 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 				Portlet portlet = (Portlet)session.get(PortletImpl.class,
 						new Long(id));
 
-				cacheResult(portlet);
+				if (portlet != null) {
+					cacheResult(portlet);
+				}
 
 				return portlet;
 			}

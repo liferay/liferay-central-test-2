@@ -379,7 +379,9 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 				UserGroupRole userGroupRole = (UserGroupRole)session.get(UserGroupRoleImpl.class,
 						userGroupRolePK);
 
-				cacheResult(userGroupRole);
+				if (userGroupRole != null) {
+					cacheResult(userGroupRole);
+				}
 
 				return userGroupRole;
 			}

@@ -420,7 +420,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 				WikiNode wikiNode = (WikiNode)session.get(WikiNodeImpl.class,
 						new Long(nodeId));
 
-				cacheResult(wikiNode);
+				if (wikiNode != null) {
+					cacheResult(wikiNode);
+				}
 
 				return wikiNode;
 			}

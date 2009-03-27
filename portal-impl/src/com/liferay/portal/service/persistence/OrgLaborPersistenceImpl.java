@@ -303,7 +303,9 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 				OrgLabor orgLabor = (OrgLabor)session.get(OrgLaborImpl.class,
 						new Long(orgLaborId));
 
-				cacheResult(orgLabor);
+				if (orgLabor != null) {
+					cacheResult(orgLabor);
+				}
 
 				return orgLabor;
 			}

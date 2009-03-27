@@ -357,7 +357,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 				ServiceComponent serviceComponent = (ServiceComponent)session.get(ServiceComponentImpl.class,
 						new Long(serviceComponentId));
 
-				cacheResult(serviceComponent);
+				if (serviceComponent != null) {
+					cacheResult(serviceComponent);
+				}
 
 				return serviceComponent;
 			}

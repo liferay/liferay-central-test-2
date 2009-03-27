@@ -345,7 +345,9 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl
 				ExpandoRow expandoRow = (ExpandoRow)session.get(ExpandoRowImpl.class,
 						new Long(rowId));
 
-				cacheResult(expandoRow);
+				if (expandoRow != null) {
+					cacheResult(expandoRow);
+				}
 
 				return expandoRow;
 			}

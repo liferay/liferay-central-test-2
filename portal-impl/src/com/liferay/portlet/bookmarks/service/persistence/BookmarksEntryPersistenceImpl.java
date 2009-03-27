@@ -341,7 +341,9 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 				BookmarksEntry bookmarksEntry = (BookmarksEntry)session.get(BookmarksEntryImpl.class,
 						new Long(entryId));
 
-				cacheResult(bookmarksEntry);
+				if (bookmarksEntry != null) {
+					cacheResult(bookmarksEntry);
+				}
 
 				return bookmarksEntry;
 			}

@@ -382,7 +382,9 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 				PollsChoice pollsChoice = (PollsChoice)session.get(PollsChoiceImpl.class,
 						new Long(choiceId));
 
-				cacheResult(pollsChoice);
+				if (pollsChoice != null) {
+					cacheResult(pollsChoice);
+				}
 
 				return pollsChoice;
 			}

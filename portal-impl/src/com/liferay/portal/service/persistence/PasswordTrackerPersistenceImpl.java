@@ -314,7 +314,9 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 				PasswordTracker passwordTracker = (PasswordTracker)session.get(PasswordTrackerImpl.class,
 						new Long(passwordTrackerId));
 
-				cacheResult(passwordTracker);
+				if (passwordTracker != null) {
+					cacheResult(passwordTracker);
+				}
 
 				return passwordTracker;
 			}

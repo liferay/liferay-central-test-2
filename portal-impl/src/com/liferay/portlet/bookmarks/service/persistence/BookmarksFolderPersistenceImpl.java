@@ -420,7 +420,9 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl
 				BookmarksFolder bookmarksFolder = (BookmarksFolder)session.get(BookmarksFolderImpl.class,
 						new Long(folderId));
 
-				cacheResult(bookmarksFolder);
+				if (bookmarksFolder != null) {
+					cacheResult(bookmarksFolder);
+				}
 
 				return bookmarksFolder;
 			}

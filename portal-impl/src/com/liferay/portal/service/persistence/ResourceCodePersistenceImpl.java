@@ -378,7 +378,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 				ResourceCode resourceCode = (ResourceCode)session.get(ResourceCodeImpl.class,
 						new Long(codeId));
 
-				cacheResult(resourceCode);
+				if (resourceCode != null) {
+					cacheResult(resourceCode);
+				}
 
 				return resourceCode;
 			}

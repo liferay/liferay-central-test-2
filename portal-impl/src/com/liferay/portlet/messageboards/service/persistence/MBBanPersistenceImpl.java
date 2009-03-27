@@ -367,7 +367,9 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 				MBBan mbBan = (MBBan)session.get(MBBanImpl.class,
 						new Long(banId));
 
-				cacheResult(mbBan);
+				if (mbBan != null) {
+					cacheResult(mbBan);
+				}
 
 				return mbBan;
 			}

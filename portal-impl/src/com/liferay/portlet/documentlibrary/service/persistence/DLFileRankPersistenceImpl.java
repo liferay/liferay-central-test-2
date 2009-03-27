@@ -388,7 +388,9 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 				DLFileRank dlFileRank = (DLFileRank)session.get(DLFileRankImpl.class,
 						new Long(fileRankId));
 
-				cacheResult(dlFileRank);
+				if (dlFileRank != null) {
+					cacheResult(dlFileRank);
+				}
 
 				return dlFileRank;
 			}

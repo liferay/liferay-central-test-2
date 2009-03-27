@@ -496,7 +496,9 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				SocialRelation socialRelation = (SocialRelation)session.get(SocialRelationImpl.class,
 						new Long(relationId));
 
-				cacheResult(socialRelation);
+				if (socialRelation != null) {
+					cacheResult(socialRelation);
+				}
 
 				return socialRelation;
 			}

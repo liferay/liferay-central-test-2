@@ -381,7 +381,9 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 				UserGroup userGroup = (UserGroup)session.get(UserGroupImpl.class,
 						new Long(userGroupId));
 
-				cacheResult(userGroup);
+				if (userGroup != null) {
+					cacheResult(userGroup);
+				}
 
 				return userGroup;
 			}

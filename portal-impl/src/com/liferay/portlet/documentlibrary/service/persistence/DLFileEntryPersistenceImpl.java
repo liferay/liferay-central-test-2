@@ -415,7 +415,9 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 				DLFileEntry dlFileEntry = (DLFileEntry)session.get(DLFileEntryImpl.class,
 						new Long(fileEntryId));
 
-				cacheResult(dlFileEntry);
+				if (dlFileEntry != null) {
+					cacheResult(dlFileEntry);
+				}
 
 				return dlFileEntry;
 			}

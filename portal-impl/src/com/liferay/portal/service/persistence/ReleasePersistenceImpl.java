@@ -285,7 +285,9 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl
 				Release release = (Release)session.get(ReleaseImpl.class,
 						new Long(releaseId));
 
-				cacheResult(release);
+				if (release != null) {
+					cacheResult(release);
+				}
 
 				return release;
 			}

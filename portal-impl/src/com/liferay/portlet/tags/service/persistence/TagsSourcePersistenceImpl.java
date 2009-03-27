@@ -290,7 +290,9 @@ public class TagsSourcePersistenceImpl extends BasePersistenceImpl
 				TagsSource tagsSource = (TagsSource)session.get(TagsSourceImpl.class,
 						new Long(sourceId));
 
-				cacheResult(tagsSource);
+				if (tagsSource != null) {
+					cacheResult(tagsSource);
+				}
 
 				return tagsSource;
 			}

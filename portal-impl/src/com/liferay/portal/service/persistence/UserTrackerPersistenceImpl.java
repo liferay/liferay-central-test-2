@@ -338,7 +338,9 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 				UserTracker userTracker = (UserTracker)session.get(UserTrackerImpl.class,
 						new Long(userTrackerId));
 
-				cacheResult(userTracker);
+				if (userTracker != null) {
+					cacheResult(userTracker);
+				}
 
 				return userTracker;
 			}

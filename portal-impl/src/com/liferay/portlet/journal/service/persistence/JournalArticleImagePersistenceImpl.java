@@ -454,7 +454,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 				JournalArticleImage journalArticleImage = (JournalArticleImage)session.get(JournalArticleImageImpl.class,
 						new Long(articleImageId));
 
-				cacheResult(journalArticleImage);
+				if (journalArticleImage != null) {
+					cacheResult(journalArticleImage);
+				}
 
 				return journalArticleImage;
 			}

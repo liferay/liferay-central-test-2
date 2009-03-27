@@ -565,7 +565,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 				JournalArticle journalArticle = (JournalArticle)session.get(JournalArticleImpl.class,
 						new Long(id));
 
-				cacheResult(journalArticle);
+				if (journalArticle != null) {
+					cacheResult(journalArticle);
+				}
 
 				return journalArticle;
 			}

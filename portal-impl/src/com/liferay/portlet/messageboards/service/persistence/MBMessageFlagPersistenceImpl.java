@@ -399,7 +399,9 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 				MBMessageFlag mbMessageFlag = (MBMessageFlag)session.get(MBMessageFlagImpl.class,
 						new Long(messageFlagId));
 
-				cacheResult(mbMessageFlag);
+				if (mbMessageFlag != null) {
+					cacheResult(mbMessageFlag);
+				}
 
 				return mbMessageFlag;
 			}

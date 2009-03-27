@@ -317,7 +317,9 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 				ShoppingItemPrice shoppingItemPrice = (ShoppingItemPrice)session.get(ShoppingItemPriceImpl.class,
 						new Long(itemPriceId));
 
-				cacheResult(shoppingItemPrice);
+				if (shoppingItemPrice != null) {
+					cacheResult(shoppingItemPrice);
+				}
 
 				return shoppingItemPrice;
 			}
