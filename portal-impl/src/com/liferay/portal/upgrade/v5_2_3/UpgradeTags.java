@@ -22,7 +22,6 @@
 
 package com.liferay.portal.upgrade.v5_2_3;
 
-import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.UpgradeException;
@@ -30,16 +29,8 @@ import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.v5_2_3.util.TagsPropertyValueUpgradeColumnImpl;
-import com.liferay.portlet.bookmarks.model.BookmarksEntry;
-import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.tags.model.impl.TagsAssetImpl;
 import com.liferay.portlet.tags.model.impl.TagsPropertyImpl;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 /**
  * <a href="UpgradeTags.java.html"><b><i>View Source</i></b></a>
@@ -76,8 +67,6 @@ public class UpgradeTags extends UpgradeProcess {
 			upgradeTable.updateTable();
 		}
 
-		updateViewCount();
-
 		// TagsProperty
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
@@ -87,71 +76,6 @@ public class UpgradeTags extends UpgradeProcess {
 		upgradeTable.setCreateSQL(TagsPropertyImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
-	}
-
-	protected void updateViewCount() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(
-				"select assetId, classNameId, classPK, viewCount from " +
-					"TagsAsset where classNameId = 10048 or classNameId = " +
-						"10051");
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long assetId = rs.getLong("assetId");
-				long classNameId = rs.getLong("classNameId");
-				long classPK = rs.getLong("classPK");
-				int viewCount = rs.getInt("viewCount");
-
-				if (classNameId == 10048) {
-					BookmarksEntry entry =
-						BookmarksEntryLocalServiceUtil.getBookmarksEntry(
-							classPK);
-
-					viewCount = entry.getVisits();
-				}
-				else if (classNameId == 10051) {
-					DLFileEntry fileEntry =
-						DLFileEntryLocalServiceUtil.getDLFileEntry(classPK);
-
-					viewCount = fileEntry.getReadCount();
-				}
-
-				updateViewCount(assetId, viewCount);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	protected void updateViewCount(long assetId, int viewCount)
-		throws Exception {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(
-				"update TagsAsset set viewCount = ? where assetId = " +
-					assetId);
-
-			ps.setInt(1, viewCount);
-
-			ps.executeUpdate();
-		}
-		finally {
-			DataAccess.cleanUp(con, ps);
-		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(UpgradeTags.class);
