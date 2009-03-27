@@ -151,13 +151,8 @@
 				</div>
 			</c:when>
 			<c:otherwise>
-
-				<%
-				String src = themeDisplay.getPathThemeImages() + "/application/forbidden_action.png";
-				%>
-
-				<div style="margin: 100px 10px 0px; float: left;">
-					<img alt="<liferay-ui:message key="image" />" border="no" src="<%= src %>" />
+				<div style="float: left; margin: 100px 10px 0px;">
+					<img alt="<liferay-ui:message key="image" />" border="no" src="<%= themeDisplay.getPathThemeImages() %>/application/forbidden_action.png" />
 				</div>
 			</c:otherwise>
 		</c:choose>
