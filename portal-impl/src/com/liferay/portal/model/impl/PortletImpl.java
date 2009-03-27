@@ -2800,7 +2800,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return		a copy of this object
 	 */
 	public Object clone() {
-		return new PortletImpl(
+		Portlet portlet = new PortletImpl(
 			getPortletId(), getPluginPackage(), getDefaultPluginSetting(),
 			getCompanyId(), getTimestamp(), getIcon(), getVirtualPath(),
 			getStrutsPath(), getPortletName(), getDisplayName(),
@@ -2833,6 +2833,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getPublicRenderParameters(), isRemote(), getRemoteConsumerId(),
 			getRemoteProducerEntityId(), getRemotePortletHandle(),
 			getRemotePortletId(), getPortletApp());
+
+		portlet.setId(getId());
+
+		return portlet;
 	}
 
 	/**
