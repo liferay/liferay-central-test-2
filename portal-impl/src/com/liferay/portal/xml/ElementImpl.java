@@ -22,6 +22,7 @@
 
 package com.liferay.portal.xml;
 
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Attribute;
 import com.liferay.portal.kernel.xml.CDATA;
 import com.liferay.portal.kernel.xml.Element;
@@ -91,6 +92,8 @@ public class ElementImpl extends BranchImpl implements Element {
 	}
 
 	public Element addCDATA(String cdata) {
+		cdata = StringUtil.replace(cdata, "]]>", "]]]]><![CDATA[>");
+
 		return new ElementImpl(_element.addCDATA(cdata));
 	}
 
