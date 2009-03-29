@@ -232,8 +232,10 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		ResourceCode resourceCode = resourceCodeLocalService.getResourceCode(
 			companyId, name, scope);
 
+		long codeId = resourceCode.getCodeId();
+
 		Resource resource = resourcePersistence.fetchByC_P(
-			resourceCode.getCodeId(), primKey);
+			codeId, primKey, false);
 
 		if (resource == null) {
 			long resourceId = counterLocalService.increment(
@@ -241,10 +243,26 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 			resource = resourcePersistence.create(resourceId);
 
-			resource.setCodeId(resourceCode.getCodeId());
+			resource.setCodeId(codeId);
 			resource.setPrimKey(primKey);
 
-			resourcePersistence.update(resource, false);
+			try {
+				resourcePersistence.update(resource, false);
+			}
+			catch (SystemException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Add failed, fetch {codeId=" + codeId + ", primKey=" +
+							primKey + "}");
+				}
+
+				resource = resourcePersistence.fetchByC_P(
+					codeId, primKey, false);
+
+				if (resource == null) {
+					throw se;
+				}
+			}
 		}
 
 		return resource;

@@ -24,6 +24,8 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.service.base.ResourceCodeLocalServiceBaseImpl;
 
@@ -52,7 +54,23 @@ public class ResourceCodeLocalServiceImpl
 		resourceCode.setName(name);
 		resourceCode.setScope(scope);
 
-		resourceCodePersistence.update(resourceCode, false);
+		try {
+			resourceCodePersistence.update(resourceCode, false);
+		}
+		catch (SystemException se) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Add failed, fetch {companyId=" + companyId + ", name=" +
+						name + ", scope=" + scope + "}");
+			}
+
+			resourceCode = resourceCodePersistence.fetchByC_N_S(
+				companyId, name, scope, false);
+
+			if (resourceCode == null) {
+				throw se;
+			}
+		}
 
 		return resourceCode;
 	}
@@ -75,7 +93,7 @@ public class ResourceCodeLocalServiceImpl
 
 		if (resourceCode == null) {
 			resourceCode = resourceCodePersistence.fetchByC_N_S(
-				companyId, name, scope);
+				companyId, name, scope, false);
 
 			if (resourceCode == null) {
 				resourceCode = resourceCodeLocalService.addResourceCode(
@@ -97,6 +115,9 @@ public class ResourceCodeLocalServiceImpl
 
 		return sb.toString();
 	}
+
+	private static Log _log =
+		LogFactoryUtil.getLog(ResourceCodeLocalServiceImpl.class);
 
 	private static Map<String, ResourceCode> _resourceCodes =
 		new ConcurrentHashMap<String, ResourceCode>();

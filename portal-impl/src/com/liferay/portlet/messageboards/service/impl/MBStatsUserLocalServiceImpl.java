@@ -23,6 +23,8 @@
 package com.liferay.portlet.messageboards.service.impl;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portlet.messageboards.model.MBStatsUser;
 import com.liferay.portlet.messageboards.service.base.MBStatsUserLocalServiceBaseImpl;
 
@@ -48,7 +50,23 @@ public class MBStatsUserLocalServiceImpl
 		statsUser.setGroupId(groupId);
 		statsUser.setUserId(userId);
 
-		mbStatsUserPersistence.update(statsUser, false);
+		try {
+			mbStatsUserPersistence.update(statsUser, false);
+		}
+		catch (SystemException se) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Add failed, fetch {groupId=" + groupId + ", userId=" +
+						userId + "}");
+			}
+
+			statsUser = mbStatsUserPersistence.fetchByG_U(
+				groupId, userId, false);
+
+			if (statsUser == null) {
+				throw se;
+			}
+		}
 
 		return statsUser;
 	}
@@ -67,7 +85,7 @@ public class MBStatsUserLocalServiceImpl
 		throws SystemException {
 
 		MBStatsUser statsUser = mbStatsUserPersistence.fetchByG_U(
-			groupId, userId);
+			groupId, userId, false);
 
 		if (statsUser == null) {
 			statsUser = mbStatsUserLocalService.addStatsUser(groupId, userId);
@@ -110,5 +128,8 @@ public class MBStatsUserLocalServiceImpl
 
 		return statsUser;
 	}
+
+	private static Log _log =
+		LogFactoryUtil.getLog(MBStatsUserLocalServiceImpl.class);
 
 }

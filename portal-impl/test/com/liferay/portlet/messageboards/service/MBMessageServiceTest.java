@@ -23,11 +23,13 @@
 package com.liferay.portlet.messageboards.service;
 
 import com.liferay.portal.kernel.util.ObjectValuePair;
-import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.security.permission.DoAsUserThread;
 import com.liferay.portal.service.BaseServiceTestCase;
-import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
@@ -51,7 +53,7 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 		for (int i = 0; i < threads.length; i++) {
 			String subject = "Test Message " + i;
 
-			threads[i] = new AddMessageThread(subject);
+			threads[i] = new AddMessageThread(_userIds[i], subject);
 		}
 
 		for (DoAsUserThread thread : threads) {
@@ -59,7 +61,7 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 		}
 
 		for (DoAsUserThread thread : threads) {
-			thread.join(5000);
+			thread.join();
 		}
 
 		int successCount = 0;
@@ -98,14 +100,14 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 		String outPassword = null;
 		boolean mailingListActive = false;
 
-		Layout layout = LayoutLocalServiceUtil.getLayout(
-			TestPropsValues.LAYOUT_PLID);
+		Group group = GroupLocalServiceUtil.getGroup(
+			TestPropsValues.COMPANY_ID, GroupConstants.GUEST);
 
 		ServiceContext serviceContext = new ServiceContext();
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setScopeGroupId(layout.getGroupId());
+		serviceContext.setScopeGroupId(group.getGroupId());
 
 		_category = MBCategoryServiceUtil.addCategory(
 			MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID, name, description,
@@ -113,6 +115,8 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 			inUserName, inPassword, inReadInterval, outEmailAddress, outCustom,
 			outServerName, outServerPort, outUseSSL, outUserName, outPassword,
 			mailingListActive, serviceContext);
+
+		_userIds = UserLocalServiceUtil.getGroupUserIds(group.getGroupId());
 	}
 
 	protected void tearDown() throws Exception {
@@ -124,11 +128,12 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 	}
 
 	private MBCategory _category;
+	private long[] _userIds;
 
 	private class AddMessageThread extends DoAsUserThread {
 
-		public AddMessageThread(String subject) {
-			super(TestPropsValues.USER_ID);
+		public AddMessageThread(long userId, String subject) {
+			super(userId);
 
 			_subject = subject;
 		}
