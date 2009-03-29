@@ -237,6 +237,13 @@ public class SocialActivityUtil {
 		return getPersistence().fetchByMirrorActivityId(mirrorActivityId);
 	}
 
+	public static com.liferay.portlet.social.model.SocialActivity fetchByMirrorActivityId(
+		long mirrorActivityId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByMirrorActivityId(mirrorActivityId, cacheEmptyResult);
+	}
+
 	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> findByClassNameId(
 		long classNameId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByClassNameId(classNameId);
@@ -437,6 +444,15 @@ public class SocialActivityUtil {
 		return getPersistence()
 				   .fetchByG_U_CD_C_C_T_R(groupId, userId, createDate,
 			classNameId, classPK, type, receiverUserId);
+	}
+
+	public static com.liferay.portlet.social.model.SocialActivity fetchByG_U_CD_C_C_T_R(
+		long groupId, long userId, java.util.Date createDate, long classNameId,
+		long classPK, int type, long receiverUserId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByG_U_CD_C_C_T_R(groupId, userId, createDate,
+			classNameId, classPK, type, receiverUserId, cacheEmptyResult);
 	}
 
 	public static java.util.List<Object> findWithDynamicQuery(

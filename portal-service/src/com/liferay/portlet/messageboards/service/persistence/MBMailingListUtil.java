@@ -158,6 +158,12 @@ public class MBMailingListUtil {
 		return getPersistence().fetchByUUID_G(uuid, groupId);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBMailingList fetchByUUID_G(
+		java.lang.String uuid, long groupId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByUUID_G(uuid, groupId, cacheEmptyResult);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMailingList findByCategoryId(
 		long categoryId)
 		throws com.liferay.portal.SystemException,
@@ -168,6 +174,12 @@ public class MBMailingListUtil {
 	public static com.liferay.portlet.messageboards.model.MBMailingList fetchByCategoryId(
 		long categoryId) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByCategoryId(categoryId);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMailingList fetchByCategoryId(
+		long categoryId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByCategoryId(categoryId, cacheEmptyResult);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMailingList> findByActive(

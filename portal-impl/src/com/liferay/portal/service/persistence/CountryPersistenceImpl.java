@@ -58,8 +58,8 @@ import java.util.List;
  */
 public class CountryPersistenceImpl extends BasePersistenceImpl
 	implements CountryPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = Country.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = Country.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = CountryImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FETCH_BY_NAME = new FinderPath(CountryModelImpl.ENTITY_CACHE_ENABLED,
 			CountryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
@@ -102,6 +102,9 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 			"countAll", new String[0]);
 
 	public void cacheResult(Country country) {
+		EntityCacheUtil.putResult(CountryModelImpl.ENTITY_CACHE_ENABLED,
+			CountryImpl.class, country.getPrimaryKey(), country);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NAME,
 			new Object[] { country.getName() }, country);
 
@@ -110,16 +113,13 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_A3,
 			new Object[] { country.getA3() }, country);
-
-		EntityCacheUtil.putResult(CountryModelImpl.ENTITY_CACHE_ENABLED,
-			Country.class, country.getPrimaryKey(), country);
 	}
 
 	public void cacheResult(List<Country> countries) {
 		for (Country country : countries) {
 			if (EntityCacheUtil.getResult(
-						CountryModelImpl.ENTITY_CACHE_ENABLED, Country.class,
-						country.getPrimaryKey(), this) == null) {
+						CountryModelImpl.ENTITY_CACHE_ENABLED,
+						CountryImpl.class, country.getPrimaryKey(), this) == null) {
 				cacheResult(country);
 			}
 		}
@@ -187,7 +187,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (country.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(CountryImpl.class,
 						country.getPrimaryKeyObj());
 
@@ -221,7 +221,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 			new Object[] { countryModelImpl.getOriginalA3() });
 
 		EntityCacheUtil.removeResult(CountryModelImpl.ENTITY_CACHE_ENABLED,
-			Country.class, country.getPrimaryKey());
+			CountryImpl.class, country.getPrimaryKey());
 
 		return country;
 	}
@@ -300,6 +300,9 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(CountryModelImpl.ENTITY_CACHE_ENABLED,
+			CountryImpl.class, country.getPrimaryKey(), country);
+
 		CountryModelImpl countryModelImpl = (CountryModelImpl)country;
 
 		if (!isNew &&
@@ -338,9 +341,6 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 				new Object[] { country.getA3() }, country);
 		}
 
-		EntityCacheUtil.putResult(CountryModelImpl.ENTITY_CACHE_ENABLED,
-			Country.class, country.getPrimaryKey(), country);
-
 		return country;
 	}
 
@@ -363,7 +363,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 
 	public Country fetchByPrimaryKey(long countryId) throws SystemException {
 		Country result = (Country)EntityCacheUtil.getResult(CountryModelImpl.ENTITY_CACHE_ENABLED,
-				Country.class, countryId, this);
+				CountryImpl.class, countryId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -416,6 +416,11 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Country fetchByName(String name) throws SystemException {
+		return fetchByName(name, true);
+	}
+
+	public Country fetchByName(String name, boolean cacheEmptyResult)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { name };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_NAME,
@@ -457,8 +462,10 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 				Country country = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NAME,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NAME,
+							finderArgs, list);
+					}
 				}
 				else {
 					country = list.get(0);
@@ -509,6 +516,11 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Country fetchByA2(String a2) throws SystemException {
+		return fetchByA2(a2, true);
+	}
+
+	public Country fetchByA2(String a2, boolean cacheEmptyResult)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { a2 };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_A2,
@@ -550,8 +562,10 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 				Country country = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_A2,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_A2,
+							finderArgs, list);
+					}
 				}
 				else {
 					country = list.get(0);
@@ -602,6 +616,11 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Country fetchByA3(String a3) throws SystemException {
+		return fetchByA3(a3, true);
+	}
+
+	public Country fetchByA3(String a3, boolean cacheEmptyResult)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { a3 };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_A3,
@@ -643,8 +662,10 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 				Country country = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_A3,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_A3,
+							finderArgs, list);
+					}
 				}
 				else {
 					country = list.get(0);
@@ -703,10 +724,10 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 
 				List<Country> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ACTIVE,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -772,10 +793,10 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 				List<Country> list = (List<Country>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_ACTIVE,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -980,9 +1001,9 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

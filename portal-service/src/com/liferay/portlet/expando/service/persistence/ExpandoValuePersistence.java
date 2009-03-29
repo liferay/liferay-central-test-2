@@ -205,6 +205,10 @@ public interface ExpandoValuePersistence extends BasePersistence {
 	public com.liferay.portlet.expando.model.ExpandoValue fetchByC_R(
 		long columnId, long rowId) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.expando.model.ExpandoValue fetchByC_R(
+		long columnId, long rowId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByC_C(
 		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
@@ -243,6 +247,10 @@ public interface ExpandoValuePersistence extends BasePersistence {
 
 	public com.liferay.portlet.expando.model.ExpandoValue fetchByT_C_R(
 		long tableId, long columnId, long rowId)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.expando.model.ExpandoValue fetchByT_C_R(
+		long tableId, long columnId, long rowId, boolean cacheEmptyResult)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByT_C_C_C(

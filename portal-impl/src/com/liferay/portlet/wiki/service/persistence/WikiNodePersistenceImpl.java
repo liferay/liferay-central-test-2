@@ -62,8 +62,8 @@ import java.util.List;
  */
 public class WikiNodePersistenceImpl extends BasePersistenceImpl
 	implements WikiNodePersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = WikiNode.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = WikiNode.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = WikiNodeImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(WikiNodeModelImpl.ENTITY_CACHE_ENABLED,
 			WikiNodeModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -134,6 +134,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 			"countAll", new String[0]);
 
 	public void cacheResult(WikiNode wikiNode) {
+		EntityCacheUtil.putResult(WikiNodeModelImpl.ENTITY_CACHE_ENABLED,
+			WikiNodeImpl.class, wikiNode.getPrimaryKey(), wikiNode);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] { wikiNode.getUuid(), new Long(wikiNode.getGroupId()) },
 			wikiNode);
@@ -141,16 +144,13 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
 			new Object[] { new Long(wikiNode.getGroupId()), wikiNode.getName() },
 			wikiNode);
-
-		EntityCacheUtil.putResult(WikiNodeModelImpl.ENTITY_CACHE_ENABLED,
-			WikiNode.class, wikiNode.getPrimaryKey(), wikiNode);
 	}
 
 	public void cacheResult(List<WikiNode> wikiNodes) {
 		for (WikiNode wikiNode : wikiNodes) {
 			if (EntityCacheUtil.getResult(
-						WikiNodeModelImpl.ENTITY_CACHE_ENABLED, WikiNode.class,
-						wikiNode.getPrimaryKey(), this) == null) {
+						WikiNodeModelImpl.ENTITY_CACHE_ENABLED,
+						WikiNodeImpl.class, wikiNode.getPrimaryKey(), this) == null) {
 				cacheResult(wikiNode);
 			}
 		}
@@ -222,7 +222,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (wikiNode.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(WikiNodeImpl.class,
 						wikiNode.getPrimaryKeyObj());
 
@@ -260,7 +260,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(WikiNodeModelImpl.ENTITY_CACHE_ENABLED,
-			WikiNode.class, wikiNode.getPrimaryKey());
+			WikiNodeImpl.class, wikiNode.getPrimaryKey());
 
 		return wikiNode;
 	}
@@ -346,6 +346,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(WikiNodeModelImpl.ENTITY_CACHE_ENABLED,
+			WikiNodeImpl.class, wikiNode.getPrimaryKey(), wikiNode);
+
 		WikiNodeModelImpl wikiNodeModelImpl = (WikiNodeModelImpl)wikiNode;
 
 		if (!isNew &&
@@ -385,9 +388,6 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 				wikiNode);
 		}
 
-		EntityCacheUtil.putResult(WikiNodeModelImpl.ENTITY_CACHE_ENABLED,
-			WikiNode.class, wikiNode.getPrimaryKey(), wikiNode);
-
 		return wikiNode;
 	}
 
@@ -409,7 +409,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 	public WikiNode fetchByPrimaryKey(long nodeId) throws SystemException {
 		WikiNode result = (WikiNode)EntityCacheUtil.getResult(WikiNodeModelImpl.ENTITY_CACHE_ENABLED,
-				WikiNode.class, nodeId, this);
+				WikiNodeImpl.class, nodeId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -478,10 +478,10 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 				List<WikiNode> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -555,10 +555,10 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 				List<WikiNode> list = (List<WikiNode>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -705,6 +705,11 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 	public WikiNode fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
+		return fetchByUUID_G(uuid, groupId, true);
+	}
+
+	public WikiNode fetchByUUID_G(String uuid, long groupId,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
@@ -753,8 +758,10 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 				WikiNode wikiNode = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+							finderArgs, list);
+					}
 				}
 				else {
 					wikiNode = list.get(0);
@@ -814,10 +821,10 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 				List<WikiNode> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -884,10 +891,10 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 				List<WikiNode> list = (List<WikiNode>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1033,10 +1040,10 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 				List<WikiNode> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1103,10 +1110,10 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 				List<WikiNode> list = (List<WikiNode>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1246,6 +1253,11 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 	public WikiNode fetchByG_N(long groupId, String name)
 		throws SystemException {
+		return fetchByG_N(groupId, name, true);
+	}
+
+	public WikiNode fetchByG_N(long groupId, String name,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId), name };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_N,
@@ -1294,8 +1306,10 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 				WikiNode wikiNode = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
+							finderArgs, list);
+					}
 				}
 				else {
 					wikiNode = list.get(0);
@@ -1415,9 +1429,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

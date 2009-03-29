@@ -157,6 +157,12 @@ public class JournalArticleResourceUtil {
 		return getPersistence().fetchByG_A(groupId, articleId);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalArticleResource fetchByG_A(
+		long groupId, java.lang.String articleId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByG_A(groupId, articleId, cacheEmptyResult);
+	}
+
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

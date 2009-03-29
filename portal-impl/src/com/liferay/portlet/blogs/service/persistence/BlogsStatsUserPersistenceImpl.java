@@ -60,8 +60,8 @@ import java.util.List;
  */
 public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 	implements BlogsStatsUserPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = BlogsStatsUser.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = BlogsStatsUser.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = BlogsStatsUserImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
 			BlogsStatsUserModelImpl.FINDER_CACHE_ENABLED,
@@ -147,22 +147,23 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
 	public void cacheResult(BlogsStatsUser blogsStatsUser) {
+		EntityCacheUtil.putResult(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsStatsUserImpl.class, blogsStatsUser.getPrimaryKey(),
+			blogsStatsUser);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
 			new Object[] {
 				new Long(blogsStatsUser.getGroupId()),
 				new Long(blogsStatsUser.getUserId())
 			}, blogsStatsUser);
-
-		EntityCacheUtil.putResult(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
-			BlogsStatsUser.class, blogsStatsUser.getPrimaryKey(), blogsStatsUser);
 	}
 
 	public void cacheResult(List<BlogsStatsUser> blogsStatsUsers) {
 		for (BlogsStatsUser blogsStatsUser : blogsStatsUsers) {
 			if (EntityCacheUtil.getResult(
 						BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
-						BlogsStatsUser.class, blogsStatsUser.getPrimaryKey(),
-						this) == null) {
+						BlogsStatsUserImpl.class,
+						blogsStatsUser.getPrimaryKey(), this) == null) {
 				cacheResult(blogsStatsUser);
 			}
 		}
@@ -233,7 +234,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (blogsStatsUser.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(BlogsStatsUserImpl.class,
 						blogsStatsUser.getPrimaryKeyObj());
 
@@ -264,7 +265,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
-			BlogsStatsUser.class, blogsStatsUser.getPrimaryKey());
+			BlogsStatsUserImpl.class, blogsStatsUser.getPrimaryKey());
 
 		return blogsStatsUser;
 	}
@@ -345,6 +346,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsStatsUserImpl.class, blogsStatsUser.getPrimaryKey(),
+			blogsStatsUser);
+
 		BlogsStatsUserModelImpl blogsStatsUserModelImpl = (BlogsStatsUserModelImpl)blogsStatsUser;
 
 		if (!isNew &&
@@ -366,9 +371,6 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 					new Long(blogsStatsUser.getUserId())
 				}, blogsStatsUser);
 		}
-
-		EntityCacheUtil.putResult(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
-			BlogsStatsUser.class, blogsStatsUser.getPrimaryKey(), blogsStatsUser);
 
 		return blogsStatsUser;
 	}
@@ -393,7 +395,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 	public BlogsStatsUser fetchByPrimaryKey(long statsUserId)
 		throws SystemException {
 		BlogsStatsUser result = (BlogsStatsUser)EntityCacheUtil.getResult(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
-				BlogsStatsUser.class, statsUserId, this);
+				BlogsStatsUserImpl.class, statsUserId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -456,10 +458,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 				List<BlogsStatsUser> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -526,10 +528,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 				List<BlogsStatsUser> list = (List<BlogsStatsUser>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -678,10 +680,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 				List<BlogsStatsUser> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -748,10 +750,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 				List<BlogsStatsUser> list = (List<BlogsStatsUser>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -894,6 +896,11 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 	public BlogsStatsUser fetchByG_U(long groupId, long userId)
 		throws SystemException {
+		return fetchByG_U(groupId, userId, true);
+	}
+
+	public BlogsStatsUser fetchByG_U(long groupId, long userId,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_U,
@@ -935,8 +942,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 				BlogsStatsUser blogsStatsUser = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
+							finderArgs, list);
+					}
 				}
 				else {
 					blogsStatsUser = list.get(0);
@@ -1005,10 +1014,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 				List<BlogsStatsUser> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_E, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1081,10 +1090,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 				List<BlogsStatsUser> list = (List<BlogsStatsUser>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_E,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1254,10 +1263,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 				List<BlogsStatsUser> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_E, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1330,10 +1339,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 				List<BlogsStatsUser> list = (List<BlogsStatsUser>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_E,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1556,9 +1565,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

@@ -449,6 +449,13 @@ public class SocialRelationUtil {
 		return getPersistence().fetchByU1_U2_T(userId1, userId2, type);
 	}
 
+	public static com.liferay.portlet.social.model.SocialRelation fetchByU1_U2_T(
+		long userId1, long userId2, int type, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByU1_U2_T(userId1, userId2, type, cacheEmptyResult);
+	}
+
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

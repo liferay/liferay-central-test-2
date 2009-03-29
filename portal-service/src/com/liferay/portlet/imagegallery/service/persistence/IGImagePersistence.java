@@ -149,6 +149,10 @@ public interface IGImagePersistence extends BasePersistence {
 	public com.liferay.portlet.imagegallery.model.IGImage fetchBySmallImageId(
 		long smallImageId) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.imagegallery.model.IGImage fetchBySmallImageId(
+		long smallImageId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.imagegallery.model.IGImage findByLargeImageId(
 		long largeImageId)
 		throws com.liferay.portal.SystemException,
@@ -156,6 +160,10 @@ public interface IGImagePersistence extends BasePersistence {
 
 	public com.liferay.portlet.imagegallery.model.IGImage fetchByLargeImageId(
 		long largeImageId) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.imagegallery.model.IGImage fetchByLargeImageId(
+		long largeImageId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage findByCustom1ImageId(
 		long custom1ImageId)
@@ -165,6 +173,10 @@ public interface IGImagePersistence extends BasePersistence {
 	public com.liferay.portlet.imagegallery.model.IGImage fetchByCustom1ImageId(
 		long custom1ImageId) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.imagegallery.model.IGImage fetchByCustom1ImageId(
+		long custom1ImageId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.imagegallery.model.IGImage findByCustom2ImageId(
 		long custom2ImageId)
 		throws com.liferay.portal.SystemException,
@@ -172,6 +184,10 @@ public interface IGImagePersistence extends BasePersistence {
 
 	public com.liferay.portlet.imagegallery.model.IGImage fetchByCustom2ImageId(
 		long custom2ImageId) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.imagegallery.model.IGImage fetchByCustom2ImageId(
+		long custom2ImageId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByF_N(
 		long folderId, java.lang.String name)

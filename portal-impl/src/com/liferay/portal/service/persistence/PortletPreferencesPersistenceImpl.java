@@ -58,8 +58,8 @@ import java.util.List;
  */
 public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 	implements PortletPreferencesPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = PortletPreferences.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = PortletPreferences.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = PortletPreferencesImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_PLID = new FinderPath(PortletPreferencesModelImpl.ENTITY_CACHE_ENABLED,
 			PortletPreferencesModelImpl.FINDER_CACHE_ENABLED,
@@ -141,6 +141,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
 	public void cacheResult(PortletPreferences portletPreferences) {
+		EntityCacheUtil.putResult(PortletPreferencesModelImpl.ENTITY_CACHE_ENABLED,
+			PortletPreferencesImpl.class, portletPreferences.getPrimaryKey(),
+			portletPreferences);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_O_O_P_P,
 			new Object[] {
 				new Long(portletPreferences.getOwnerId()),
@@ -149,17 +153,13 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 				
 			portletPreferences.getPortletId()
 			}, portletPreferences);
-
-		EntityCacheUtil.putResult(PortletPreferencesModelImpl.ENTITY_CACHE_ENABLED,
-			PortletPreferences.class, portletPreferences.getPrimaryKey(),
-			portletPreferences);
 	}
 
 	public void cacheResult(List<PortletPreferences> portletPreferenceses) {
 		for (PortletPreferences portletPreferences : portletPreferenceses) {
 			if (EntityCacheUtil.getResult(
 						PortletPreferencesModelImpl.ENTITY_CACHE_ENABLED,
-						PortletPreferences.class,
+						PortletPreferencesImpl.class,
 						portletPreferences.getPrimaryKey(), this) == null) {
 				cacheResult(portletPreferences);
 			}
@@ -232,7 +232,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (portletPreferences.isCachedModel() ||
+					BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(PortletPreferencesImpl.class,
 						portletPreferences.getPrimaryKeyObj());
 
@@ -266,7 +267,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(PortletPreferencesModelImpl.ENTITY_CACHE_ENABLED,
-			PortletPreferences.class, portletPreferences.getPrimaryKey());
+			PortletPreferencesImpl.class, portletPreferences.getPrimaryKey());
 
 		return portletPreferences;
 	}
@@ -347,6 +348,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(PortletPreferencesModelImpl.ENTITY_CACHE_ENABLED,
+			PortletPreferencesImpl.class, portletPreferences.getPrimaryKey(),
+			portletPreferences);
+
 		PortletPreferencesModelImpl portletPreferencesModelImpl = (PortletPreferencesModelImpl)portletPreferences;
 
 		if (!isNew &&
@@ -381,10 +386,6 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 				}, portletPreferences);
 		}
 
-		EntityCacheUtil.putResult(PortletPreferencesModelImpl.ENTITY_CACHE_ENABLED,
-			PortletPreferences.class, portletPreferences.getPrimaryKey(),
-			portletPreferences);
-
 		return portletPreferences;
 	}
 
@@ -409,7 +410,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 	public PortletPreferences fetchByPrimaryKey(long portletPreferencesId)
 		throws SystemException {
 		PortletPreferences result = (PortletPreferences)EntityCacheUtil.getResult(PortletPreferencesModelImpl.ENTITY_CACHE_ENABLED,
-				PortletPreferences.class, portletPreferencesId, this);
+				PortletPreferencesImpl.class, portletPreferencesId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -468,10 +469,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 
 				List<PortletPreferences> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_PLID, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -532,10 +533,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 				List<PortletPreferences> list = (List<PortletPreferences>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_PLID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -687,10 +688,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 
 				List<PortletPreferences> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_P_P, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -766,10 +767,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 				List<PortletPreferences> list = (List<PortletPreferences>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_P_P,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -945,10 +946,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 
 				List<PortletPreferences> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_O_O_P,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1022,10 +1023,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 				List<PortletPreferences> list = (List<PortletPreferences>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_O_O_P,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1199,6 +1200,12 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 
 	public PortletPreferences fetchByO_O_P_P(long ownerId, int ownerType,
 		long plid, String portletId) throws SystemException {
+		return fetchByO_O_P_P(ownerId, ownerType, plid, portletId, true);
+	}
+
+	public PortletPreferences fetchByO_O_P_P(long ownerId, int ownerType,
+		long plid, String portletId, boolean cacheEmptyResult)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(ownerId), new Integer(ownerType), new Long(plid),
 				
@@ -1259,8 +1266,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 				PortletPreferences portletPreferences = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_O_O_P_P,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_O_O_P_P,
+							finderArgs, list);
+					}
 				}
 				else {
 					portletPreferences = list.get(0);
@@ -1376,9 +1385,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

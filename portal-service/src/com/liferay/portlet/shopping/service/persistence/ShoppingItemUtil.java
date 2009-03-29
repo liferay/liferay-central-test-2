@@ -156,6 +156,13 @@ public class ShoppingItemUtil {
 		return getPersistence().fetchBySmallImageId(smallImageId);
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingItem fetchBySmallImageId(
+		long smallImageId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchBySmallImageId(smallImageId, cacheEmptyResult);
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingItem findByMediumImageId(
 		long mediumImageId)
 		throws com.liferay.portal.SystemException,
@@ -166,6 +173,13 @@ public class ShoppingItemUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingItem fetchByMediumImageId(
 		long mediumImageId) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByMediumImageId(mediumImageId);
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingItem fetchByMediumImageId(
+		long mediumImageId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByMediumImageId(mediumImageId, cacheEmptyResult);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem findByLargeImageId(
@@ -180,6 +194,13 @@ public class ShoppingItemUtil {
 		return getPersistence().fetchByLargeImageId(largeImageId);
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingItem fetchByLargeImageId(
+		long largeImageId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByLargeImageId(largeImageId, cacheEmptyResult);
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingItem findByC_S(
 		long companyId, java.lang.String sku)
 		throws com.liferay.portal.SystemException,
@@ -191,6 +212,12 @@ public class ShoppingItemUtil {
 		long companyId, java.lang.String sku)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByC_S(companyId, sku);
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingItem fetchByC_S(
+		long companyId, java.lang.String sku, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByC_S(companyId, sku, cacheEmptyResult);
 	}
 
 	public static java.util.List<Object> findWithDynamicQuery(

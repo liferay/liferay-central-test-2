@@ -62,8 +62,8 @@ import java.util.List;
  */
 public class WikiPagePersistenceImpl extends BasePersistenceImpl
 	implements WikiPagePersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = WikiPage.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = WikiPage.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = WikiPageImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(WikiPageModelImpl.ENTITY_CACHE_ENABLED,
 			WikiPageModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -248,22 +248,22 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 			"countAll", new String[0]);
 
 	public void cacheResult(WikiPage wikiPage) {
+		EntityCacheUtil.putResult(WikiPageModelImpl.ENTITY_CACHE_ENABLED,
+			WikiPageImpl.class, wikiPage.getPrimaryKey(), wikiPage);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_T_V,
 			new Object[] {
 				new Long(wikiPage.getNodeId()),
 				
 			wikiPage.getTitle(), new Double(wikiPage.getVersion())
 			}, wikiPage);
-
-		EntityCacheUtil.putResult(WikiPageModelImpl.ENTITY_CACHE_ENABLED,
-			WikiPage.class, wikiPage.getPrimaryKey(), wikiPage);
 	}
 
 	public void cacheResult(List<WikiPage> wikiPages) {
 		for (WikiPage wikiPage : wikiPages) {
 			if (EntityCacheUtil.getResult(
-						WikiPageModelImpl.ENTITY_CACHE_ENABLED, WikiPage.class,
-						wikiPage.getPrimaryKey(), this) == null) {
+						WikiPageModelImpl.ENTITY_CACHE_ENABLED,
+						WikiPageImpl.class, wikiPage.getPrimaryKey(), this) == null) {
 				cacheResult(wikiPage);
 			}
 		}
@@ -335,7 +335,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (wikiPage.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(WikiPageImpl.class,
 						wikiPage.getPrimaryKeyObj());
 
@@ -368,7 +368,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(WikiPageModelImpl.ENTITY_CACHE_ENABLED,
-			WikiPage.class, wikiPage.getPrimaryKey());
+			WikiPageImpl.class, wikiPage.getPrimaryKey());
 
 		return wikiPage;
 	}
@@ -454,6 +454,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(WikiPageModelImpl.ENTITY_CACHE_ENABLED,
+			WikiPageImpl.class, wikiPage.getPrimaryKey(), wikiPage);
+
 		WikiPageModelImpl wikiPageModelImpl = (WikiPageModelImpl)wikiPage;
 
 		if (!isNew &&
@@ -481,9 +484,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 				}, wikiPage);
 		}
 
-		EntityCacheUtil.putResult(WikiPageModelImpl.ENTITY_CACHE_ENABLED,
-			WikiPage.class, wikiPage.getPrimaryKey(), wikiPage);
-
 		return wikiPage;
 	}
 
@@ -505,7 +505,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 	public WikiPage fetchByPrimaryKey(long pageId) throws SystemException {
 		WikiPage result = (WikiPage)EntityCacheUtil.getResult(WikiPageModelImpl.ENTITY_CACHE_ENABLED,
-				WikiPage.class, pageId, this);
+				WikiPageImpl.class, pageId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -576,10 +576,10 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				List<WikiPage> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -655,10 +655,10 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 				List<WikiPage> list = (List<WikiPage>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -814,10 +814,10 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				List<WikiPage> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_NODEID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -886,10 +886,10 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 				List<WikiPage> list = (List<WikiPage>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_NODEID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1045,10 +1045,10 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				List<WikiPage> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_FORMAT,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1124,10 +1124,10 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 				List<WikiPage> list = (List<WikiPage>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_FORMAT,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1297,10 +1297,10 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				List<WikiPage> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_T, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1384,10 +1384,10 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 				List<WikiPage> list = (List<WikiPage>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_N_T,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1565,10 +1565,10 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				List<WikiPage> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_H, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1643,10 +1643,10 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 				List<WikiPage> list = (List<WikiPage>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_N_H,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1822,10 +1822,10 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				List<WikiPage> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_P, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1909,10 +1909,10 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 				List<WikiPage> list = (List<WikiPage>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_N_P,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -2096,10 +2096,10 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				List<WikiPage> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_R, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -2183,10 +2183,10 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 				List<WikiPage> list = (List<WikiPage>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_N_R,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -2352,6 +2352,11 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 	public WikiPage fetchByN_T_V(long nodeId, String title, double version)
 		throws SystemException {
+		return fetchByN_T_V(nodeId, title, version, true);
+	}
+
+	public WikiPage fetchByN_T_V(long nodeId, String title, double version,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(nodeId),
 				
@@ -2412,8 +2417,10 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 				WikiPage wikiPage = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_T_V,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_T_V,
+							finderArgs, list);
+					}
 				}
 				else {
 					wikiPage = list.get(0);
@@ -2499,10 +2506,10 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				List<WikiPage> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_T_H,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -2592,10 +2599,10 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 				List<WikiPage> list = (List<WikiPage>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_N_T_H,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -2801,10 +2808,10 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 				List<WikiPage> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_H_P,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -2895,10 +2902,10 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 				List<WikiPage> list = (List<WikiPage>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_N_H_P,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -3142,9 +3149,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

@@ -58,8 +58,8 @@ import java.util.List;
  */
 public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 	implements OrgLaborPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = OrgLabor.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = OrgLabor.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = OrgLaborImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_ORGANIZATIONID = new FinderPath(OrgLaborModelImpl.ENTITY_CACHE_ENABLED,
 			OrgLaborModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -85,14 +85,14 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 
 	public void cacheResult(OrgLabor orgLabor) {
 		EntityCacheUtil.putResult(OrgLaborModelImpl.ENTITY_CACHE_ENABLED,
-			OrgLabor.class, orgLabor.getPrimaryKey(), orgLabor);
+			OrgLaborImpl.class, orgLabor.getPrimaryKey(), orgLabor);
 	}
 
 	public void cacheResult(List<OrgLabor> orgLabors) {
 		for (OrgLabor orgLabor : orgLabors) {
 			if (EntityCacheUtil.getResult(
-						OrgLaborModelImpl.ENTITY_CACHE_ENABLED, OrgLabor.class,
-						orgLabor.getPrimaryKey(), this) == null) {
+						OrgLaborModelImpl.ENTITY_CACHE_ENABLED,
+						OrgLaborImpl.class, orgLabor.getPrimaryKey(), this) == null) {
 				cacheResult(orgLabor);
 			}
 		}
@@ -160,7 +160,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (orgLabor.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(OrgLaborImpl.class,
 						orgLabor.getPrimaryKeyObj());
 
@@ -185,7 +185,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 		OrgLaborModelImpl orgLaborModelImpl = (OrgLaborModelImpl)orgLabor;
 
 		EntityCacheUtil.removeResult(OrgLaborModelImpl.ENTITY_CACHE_ENABLED,
-			OrgLabor.class, orgLabor.getPrimaryKey());
+			OrgLaborImpl.class, orgLabor.getPrimaryKey());
 
 		return orgLabor;
 	}
@@ -264,10 +264,10 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		OrgLaborModelImpl orgLaborModelImpl = (OrgLaborModelImpl)orgLabor;
-
 		EntityCacheUtil.putResult(OrgLaborModelImpl.ENTITY_CACHE_ENABLED,
-			OrgLabor.class, orgLabor.getPrimaryKey(), orgLabor);
+			OrgLaborImpl.class, orgLabor.getPrimaryKey(), orgLabor);
+
+		OrgLaborModelImpl orgLaborModelImpl = (OrgLaborModelImpl)orgLabor;
 
 		return orgLabor;
 	}
@@ -292,7 +292,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 	public OrgLabor fetchByPrimaryKey(long orgLaborId)
 		throws SystemException {
 		OrgLabor result = (OrgLabor)EntityCacheUtil.getResult(OrgLaborModelImpl.ENTITY_CACHE_ENABLED,
-				OrgLabor.class, orgLaborId, this);
+				OrgLaborImpl.class, orgLaborId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -355,10 +355,10 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 
 				List<OrgLabor> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ORGANIZATIONID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -425,10 +425,10 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 				List<OrgLabor> list = (List<OrgLabor>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_ORGANIZATIONID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -637,9 +637,9 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

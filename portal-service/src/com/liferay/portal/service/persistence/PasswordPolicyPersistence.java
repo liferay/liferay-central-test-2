@@ -89,6 +89,10 @@ public interface PasswordPolicyPersistence extends BasePersistence {
 	public com.liferay.portal.model.PasswordPolicy fetchByC_DP(long companyId,
 		boolean defaultPolicy) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.PasswordPolicy fetchByC_DP(long companyId,
+		boolean defaultPolicy, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.PasswordPolicy findByC_N(long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.NoSuchPasswordPolicyException,
@@ -96,6 +100,10 @@ public interface PasswordPolicyPersistence extends BasePersistence {
 
 	public com.liferay.portal.model.PasswordPolicy fetchByC_N(long companyId,
 		java.lang.String name) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.PasswordPolicy fetchByC_N(long companyId,
+		java.lang.String name, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)

@@ -156,6 +156,13 @@ public class AnnouncementsFlagUtil {
 		return getPersistence().fetchByU_E_V(userId, entryId, value);
 	}
 
+	public static com.liferay.portlet.announcements.model.AnnouncementsFlag fetchByU_E_V(
+		long userId, long entryId, int value, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByU_E_V(userId, entryId, value, cacheEmptyResult);
+	}
+
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

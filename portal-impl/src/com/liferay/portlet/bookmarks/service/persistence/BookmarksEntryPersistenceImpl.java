@@ -62,8 +62,8 @@ import java.util.List;
  */
 public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 	implements BookmarksEntryPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = BookmarksEntry.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = BookmarksEntry.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = BookmarksEntryImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(BookmarksEntryModelImpl.ENTITY_CACHE_ENABLED,
 			BookmarksEntryModelImpl.FINDER_CACHE_ENABLED,
@@ -108,15 +108,16 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 
 	public void cacheResult(BookmarksEntry bookmarksEntry) {
 		EntityCacheUtil.putResult(BookmarksEntryModelImpl.ENTITY_CACHE_ENABLED,
-			BookmarksEntry.class, bookmarksEntry.getPrimaryKey(), bookmarksEntry);
+			BookmarksEntryImpl.class, bookmarksEntry.getPrimaryKey(),
+			bookmarksEntry);
 	}
 
 	public void cacheResult(List<BookmarksEntry> bookmarksEntries) {
 		for (BookmarksEntry bookmarksEntry : bookmarksEntries) {
 			if (EntityCacheUtil.getResult(
 						BookmarksEntryModelImpl.ENTITY_CACHE_ENABLED,
-						BookmarksEntry.class, bookmarksEntry.getPrimaryKey(),
-						this) == null) {
+						BookmarksEntryImpl.class,
+						bookmarksEntry.getPrimaryKey(), this) == null) {
 				cacheResult(bookmarksEntry);
 			}
 		}
@@ -190,7 +191,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (bookmarksEntry.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(BookmarksEntryImpl.class,
 						bookmarksEntry.getPrimaryKeyObj());
 
@@ -215,7 +216,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 		BookmarksEntryModelImpl bookmarksEntryModelImpl = (BookmarksEntryModelImpl)bookmarksEntry;
 
 		EntityCacheUtil.removeResult(BookmarksEntryModelImpl.ENTITY_CACHE_ENABLED,
-			BookmarksEntry.class, bookmarksEntry.getPrimaryKey());
+			BookmarksEntryImpl.class, bookmarksEntry.getPrimaryKey());
 
 		return bookmarksEntry;
 	}
@@ -302,10 +303,11 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		BookmarksEntryModelImpl bookmarksEntryModelImpl = (BookmarksEntryModelImpl)bookmarksEntry;
-
 		EntityCacheUtil.putResult(BookmarksEntryModelImpl.ENTITY_CACHE_ENABLED,
-			BookmarksEntry.class, bookmarksEntry.getPrimaryKey(), bookmarksEntry);
+			BookmarksEntryImpl.class, bookmarksEntry.getPrimaryKey(),
+			bookmarksEntry);
+
+		BookmarksEntryModelImpl bookmarksEntryModelImpl = (BookmarksEntryModelImpl)bookmarksEntry;
 
 		return bookmarksEntry;
 	}
@@ -330,7 +332,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 	public BookmarksEntry fetchByPrimaryKey(long entryId)
 		throws SystemException {
 		BookmarksEntry result = (BookmarksEntry)EntityCacheUtil.getResult(BookmarksEntryModelImpl.ENTITY_CACHE_ENABLED,
-				BookmarksEntry.class, entryId, this);
+				BookmarksEntryImpl.class, entryId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -401,10 +403,10 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 
 				List<BookmarksEntry> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -479,10 +481,10 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 				List<BookmarksEntry> list = (List<BookmarksEntry>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -639,10 +641,10 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 
 				List<BookmarksEntry> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_FOLDERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -710,10 +712,10 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 				List<BookmarksEntry> list = (List<BookmarksEntry>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_FOLDERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -926,9 +928,9 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

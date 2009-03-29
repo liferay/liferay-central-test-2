@@ -62,8 +62,8 @@ import java.util.List;
  */
 public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 	implements DLFileEntryPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = DLFileEntry.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = DLFileEntry.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = DLFileEntryImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -143,22 +143,22 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 			"countAll", new String[0]);
 
 	public void cacheResult(DLFileEntry dlFileEntry) {
+		EntityCacheUtil.putResult(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileEntryImpl.class, dlFileEntry.getPrimaryKey(), dlFileEntry);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_F_N,
 			new Object[] {
 				new Long(dlFileEntry.getFolderId()),
 				
 			dlFileEntry.getName()
 			}, dlFileEntry);
-
-		EntityCacheUtil.putResult(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
-			DLFileEntry.class, dlFileEntry.getPrimaryKey(), dlFileEntry);
 	}
 
 	public void cacheResult(List<DLFileEntry> dlFileEntries) {
 		for (DLFileEntry dlFileEntry : dlFileEntries) {
 			if (EntityCacheUtil.getResult(
 						DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
-						DLFileEntry.class, dlFileEntry.getPrimaryKey(), this) == null) {
+						DLFileEntryImpl.class, dlFileEntry.getPrimaryKey(), this) == null) {
 				cacheResult(dlFileEntry);
 			}
 		}
@@ -233,7 +233,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (dlFileEntry.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(DLFileEntryImpl.class,
 						dlFileEntry.getPrimaryKeyObj());
 
@@ -265,7 +265,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
-			DLFileEntry.class, dlFileEntry.getPrimaryKey());
+			DLFileEntryImpl.class, dlFileEntry.getPrimaryKey());
 
 		return dlFileEntry;
 	}
@@ -352,6 +352,9 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileEntryImpl.class, dlFileEntry.getPrimaryKey(), dlFileEntry);
+
 		DLFileEntryModelImpl dlFileEntryModelImpl = (DLFileEntryModelImpl)dlFileEntry;
 
 		if (!isNew &&
@@ -378,9 +381,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 				}, dlFileEntry);
 		}
 
-		EntityCacheUtil.putResult(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
-			DLFileEntry.class, dlFileEntry.getPrimaryKey(), dlFileEntry);
-
 		return dlFileEntry;
 	}
 
@@ -404,7 +404,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 	public DLFileEntry fetchByPrimaryKey(long fileEntryId)
 		throws SystemException {
 		DLFileEntry result = (DLFileEntry)EntityCacheUtil.getResult(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
-				DLFileEntry.class, fileEntryId, this);
+				DLFileEntryImpl.class, fileEntryId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -474,10 +474,10 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 				List<DLFileEntry> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -552,10 +552,10 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 				List<DLFileEntry> list = (List<DLFileEntry>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -712,10 +712,10 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 				List<DLFileEntry> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -783,10 +783,10 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 				List<DLFileEntry> list = (List<DLFileEntry>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -938,10 +938,10 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 				List<DLFileEntry> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_FOLDERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1009,10 +1009,10 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 				List<DLFileEntry> list = (List<DLFileEntry>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_FOLDERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1156,6 +1156,11 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 	public DLFileEntry fetchByF_N(long folderId, String name)
 		throws SystemException {
+		return fetchByF_N(folderId, name, true);
+	}
+
+	public DLFileEntry fetchByF_N(long folderId, String name,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(folderId), name };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_F_N,
@@ -1205,8 +1210,10 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 				DLFileEntry dlFileEntry = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_F_N,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_F_N,
+							finderArgs, list);
+					}
 				}
 				else {
 					dlFileEntry = list.get(0);
@@ -1281,10 +1288,10 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 				List<DLFileEntry> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_F_T, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1367,10 +1374,10 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 				List<DLFileEntry> list = (List<DLFileEntry>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_F_T,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1602,9 +1609,9 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

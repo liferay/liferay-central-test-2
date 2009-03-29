@@ -60,8 +60,8 @@ import java.util.List;
  */
 public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 	implements AnnouncementsDeliveryPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = AnnouncementsDelivery.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = AnnouncementsDelivery.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = AnnouncementsDeliveryImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_USERID = new FinderPath(AnnouncementsDeliveryModelImpl.ENTITY_CACHE_ENABLED,
 			AnnouncementsDeliveryModelImpl.FINDER_CACHE_ENABLED,
@@ -96,23 +96,23 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
 	public void cacheResult(AnnouncementsDelivery announcementsDelivery) {
+		EntityCacheUtil.putResult(AnnouncementsDeliveryModelImpl.ENTITY_CACHE_ENABLED,
+			AnnouncementsDeliveryImpl.class,
+			announcementsDelivery.getPrimaryKey(), announcementsDelivery);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T,
 			new Object[] {
 				new Long(announcementsDelivery.getUserId()),
 				
 			announcementsDelivery.getType()
 			}, announcementsDelivery);
-
-		EntityCacheUtil.putResult(AnnouncementsDeliveryModelImpl.ENTITY_CACHE_ENABLED,
-			AnnouncementsDelivery.class, announcementsDelivery.getPrimaryKey(),
-			announcementsDelivery);
 	}
 
 	public void cacheResult(List<AnnouncementsDelivery> announcementsDeliveries) {
 		for (AnnouncementsDelivery announcementsDelivery : announcementsDeliveries) {
 			if (EntityCacheUtil.getResult(
 						AnnouncementsDeliveryModelImpl.ENTITY_CACHE_ENABLED,
-						AnnouncementsDelivery.class,
+						AnnouncementsDeliveryImpl.class,
 						announcementsDelivery.getPrimaryKey(), this) == null) {
 				cacheResult(announcementsDelivery);
 			}
@@ -185,7 +185,8 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (announcementsDelivery.isCachedModel() ||
+					BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(AnnouncementsDeliveryImpl.class,
 						announcementsDelivery.getPrimaryKeyObj());
 
@@ -217,7 +218,8 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(AnnouncementsDeliveryModelImpl.ENTITY_CACHE_ENABLED,
-			AnnouncementsDelivery.class, announcementsDelivery.getPrimaryKey());
+			AnnouncementsDeliveryImpl.class,
+			announcementsDelivery.getPrimaryKey());
 
 		return announcementsDelivery;
 	}
@@ -299,6 +301,10 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(AnnouncementsDeliveryModelImpl.ENTITY_CACHE_ENABLED,
+			AnnouncementsDeliveryImpl.class,
+			announcementsDelivery.getPrimaryKey(), announcementsDelivery);
+
 		AnnouncementsDeliveryModelImpl announcementsDeliveryModelImpl = (AnnouncementsDeliveryModelImpl)announcementsDelivery;
 
 		if (!isNew &&
@@ -325,10 +331,6 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 				}, announcementsDelivery);
 		}
 
-		EntityCacheUtil.putResult(AnnouncementsDeliveryModelImpl.ENTITY_CACHE_ENABLED,
-			AnnouncementsDelivery.class, announcementsDelivery.getPrimaryKey(),
-			announcementsDelivery);
-
 		return announcementsDelivery;
 	}
 
@@ -354,7 +356,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 	public AnnouncementsDelivery fetchByPrimaryKey(long deliveryId)
 		throws SystemException {
 		AnnouncementsDelivery result = (AnnouncementsDelivery)EntityCacheUtil.getResult(AnnouncementsDeliveryModelImpl.ENTITY_CACHE_ENABLED,
-				AnnouncementsDelivery.class, deliveryId, this);
+				AnnouncementsDeliveryImpl.class, deliveryId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -413,10 +415,10 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 
 				List<AnnouncementsDelivery> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -477,10 +479,10 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 				List<AnnouncementsDelivery> list = (List<AnnouncementsDelivery>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -618,6 +620,11 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 
 	public AnnouncementsDelivery fetchByU_T(long userId, String type)
 		throws SystemException {
+		return fetchByU_T(userId, type, true);
+	}
+
+	public AnnouncementsDelivery fetchByU_T(long userId, String type,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(userId), type };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_U_T,
@@ -662,8 +669,10 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 				AnnouncementsDelivery announcementsDelivery = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T,
+							finderArgs, list);
+					}
 				}
 				else {
 					announcementsDelivery = list.get(0);
@@ -779,9 +788,9 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

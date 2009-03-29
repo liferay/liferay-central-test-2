@@ -122,6 +122,10 @@ public interface PollsQuestionPersistence extends BasePersistence {
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.polls.model.PollsQuestion fetchByUUID_G(
+		java.lang.String uuid, long groupId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.polls.model.PollsQuestion> findByGroupId(
 		long groupId) throws com.liferay.portal.SystemException;
 

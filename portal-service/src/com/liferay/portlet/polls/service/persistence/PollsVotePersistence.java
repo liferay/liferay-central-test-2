@@ -146,6 +146,10 @@ public interface PollsVotePersistence extends BasePersistence {
 	public com.liferay.portlet.polls.model.PollsVote fetchByQ_U(
 		long questionId, long userId) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.polls.model.PollsVote fetchByQ_U(
+		long questionId, long userId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;

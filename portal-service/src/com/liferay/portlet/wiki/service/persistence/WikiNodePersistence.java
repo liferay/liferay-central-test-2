@@ -120,6 +120,10 @@ public interface WikiNodePersistence extends BasePersistence {
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.wiki.model.WikiNode fetchByUUID_G(
+		java.lang.String uuid, long groupId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.wiki.model.WikiNode> findByGroupId(
 		long groupId) throws com.liferay.portal.SystemException;
 
@@ -183,6 +187,10 @@ public interface WikiNodePersistence extends BasePersistence {
 
 	public com.liferay.portlet.wiki.model.WikiNode fetchByG_N(long groupId,
 		java.lang.String name) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.wiki.model.WikiNode fetchByG_N(long groupId,
+		java.lang.String name, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)

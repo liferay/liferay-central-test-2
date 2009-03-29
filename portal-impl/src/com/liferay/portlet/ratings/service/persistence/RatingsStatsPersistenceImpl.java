@@ -60,8 +60,8 @@ import java.util.List;
  */
 public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 	implements RatingsStatsPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = RatingsStats.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = RatingsStats.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = RatingsStatsImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FETCH_BY_C_C = new FinderPath(RatingsStatsModelImpl.ENTITY_CACHE_ENABLED,
 			RatingsStatsModelImpl.FINDER_CACHE_ENABLED,
@@ -79,21 +79,22 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 			"countAll", new String[0]);
 
 	public void cacheResult(RatingsStats ratingsStats) {
+		EntityCacheUtil.putResult(RatingsStatsModelImpl.ENTITY_CACHE_ENABLED,
+			RatingsStatsImpl.class, ratingsStats.getPrimaryKey(), ratingsStats);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
 				new Long(ratingsStats.getClassNameId()),
 				new Long(ratingsStats.getClassPK())
 			}, ratingsStats);
-
-		EntityCacheUtil.putResult(RatingsStatsModelImpl.ENTITY_CACHE_ENABLED,
-			RatingsStats.class, ratingsStats.getPrimaryKey(), ratingsStats);
 	}
 
 	public void cacheResult(List<RatingsStats> ratingsStatses) {
 		for (RatingsStats ratingsStats : ratingsStatses) {
 			if (EntityCacheUtil.getResult(
 						RatingsStatsModelImpl.ENTITY_CACHE_ENABLED,
-						RatingsStats.class, ratingsStats.getPrimaryKey(), this) == null) {
+						RatingsStatsImpl.class, ratingsStats.getPrimaryKey(),
+						this) == null) {
 				cacheResult(ratingsStats);
 			}
 		}
@@ -163,7 +164,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (ratingsStats.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(RatingsStatsImpl.class,
 						ratingsStats.getPrimaryKeyObj());
 
@@ -194,7 +195,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(RatingsStatsModelImpl.ENTITY_CACHE_ENABLED,
-			RatingsStats.class, ratingsStats.getPrimaryKey());
+			RatingsStatsImpl.class, ratingsStats.getPrimaryKey());
 
 		return ratingsStats;
 	}
@@ -275,6 +276,9 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(RatingsStatsModelImpl.ENTITY_CACHE_ENABLED,
+			RatingsStatsImpl.class, ratingsStats.getPrimaryKey(), ratingsStats);
+
 		RatingsStatsModelImpl ratingsStatsModelImpl = (RatingsStatsModelImpl)ratingsStats;
 
 		if (!isNew &&
@@ -296,9 +300,6 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 					new Long(ratingsStats.getClassPK())
 				}, ratingsStats);
 		}
-
-		EntityCacheUtil.putResult(RatingsStatsModelImpl.ENTITY_CACHE_ENABLED,
-			RatingsStats.class, ratingsStats.getPrimaryKey(), ratingsStats);
 
 		return ratingsStats;
 	}
@@ -323,7 +324,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 	public RatingsStats fetchByPrimaryKey(long statsId)
 		throws SystemException {
 		RatingsStats result = (RatingsStats)EntityCacheUtil.getResult(RatingsStatsModelImpl.ENTITY_CACHE_ENABLED,
-				RatingsStats.class, statsId, this);
+				RatingsStatsImpl.class, statsId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -380,6 +381,11 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 
 	public RatingsStats fetchByC_C(long classNameId, long classPK)
 		throws SystemException {
+		return fetchByC_C(classNameId, classPK, true);
+	}
+
+	public RatingsStats fetchByC_C(long classNameId, long classPK,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK)
 			};
@@ -419,8 +425,10 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 				RatingsStats ratingsStats = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
+							finderArgs, list);
+					}
 				}
 				else {
 					ratingsStats = list.get(0);
@@ -536,9 +544,9 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

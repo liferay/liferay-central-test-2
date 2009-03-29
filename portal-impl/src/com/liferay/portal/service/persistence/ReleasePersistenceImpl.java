@@ -56,8 +56,8 @@ import java.util.List;
  */
 public class ReleasePersistenceImpl extends BasePersistenceImpl
 	implements ReleasePersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = Release.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = Release.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = ReleaseImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(ReleaseModelImpl.ENTITY_CACHE_ENABLED,
 			ReleaseModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -68,14 +68,14 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl
 
 	public void cacheResult(Release release) {
 		EntityCacheUtil.putResult(ReleaseModelImpl.ENTITY_CACHE_ENABLED,
-			Release.class, release.getPrimaryKey(), release);
+			ReleaseImpl.class, release.getPrimaryKey(), release);
 	}
 
 	public void cacheResult(List<Release> releases) {
 		for (Release release : releases) {
 			if (EntityCacheUtil.getResult(
-						ReleaseModelImpl.ENTITY_CACHE_ENABLED, Release.class,
-						release.getPrimaryKey(), this) == null) {
+						ReleaseModelImpl.ENTITY_CACHE_ENABLED,
+						ReleaseImpl.class, release.getPrimaryKey(), this) == null) {
 				cacheResult(release);
 			}
 		}
@@ -143,7 +143,7 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (release.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(ReleaseImpl.class,
 						release.getPrimaryKeyObj());
 
@@ -168,7 +168,7 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl
 		ReleaseModelImpl releaseModelImpl = (ReleaseModelImpl)release;
 
 		EntityCacheUtil.removeResult(ReleaseModelImpl.ENTITY_CACHE_ENABLED,
-			Release.class, release.getPrimaryKey());
+			ReleaseImpl.class, release.getPrimaryKey());
 
 		return release;
 	}
@@ -247,10 +247,10 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		ReleaseModelImpl releaseModelImpl = (ReleaseModelImpl)release;
-
 		EntityCacheUtil.putResult(ReleaseModelImpl.ENTITY_CACHE_ENABLED,
-			Release.class, release.getPrimaryKey(), release);
+			ReleaseImpl.class, release.getPrimaryKey(), release);
+
+		ReleaseModelImpl releaseModelImpl = (ReleaseModelImpl)release;
 
 		return release;
 	}
@@ -274,7 +274,7 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl
 
 	public Release fetchByPrimaryKey(long releaseId) throws SystemException {
 		Release result = (Release)EntityCacheUtil.getResult(ReleaseModelImpl.ENTITY_CACHE_ENABLED,
-				Release.class, releaseId, this);
+				ReleaseImpl.class, releaseId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -390,9 +390,9 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

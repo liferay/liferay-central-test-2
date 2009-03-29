@@ -58,8 +58,8 @@ import java.util.List;
  */
 public class RegionPersistenceImpl extends BasePersistenceImpl
 	implements RegionPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = Region.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = Region.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = RegionImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_COUNTRYID = new FinderPath(RegionModelImpl.ENTITY_CACHE_ENABLED,
 			RegionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -117,13 +117,13 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 	public void cacheResult(Region region) {
 		EntityCacheUtil.putResult(RegionModelImpl.ENTITY_CACHE_ENABLED,
-			Region.class, region.getPrimaryKey(), region);
+			RegionImpl.class, region.getPrimaryKey(), region);
 	}
 
 	public void cacheResult(List<Region> regions) {
 		for (Region region : regions) {
 			if (EntityCacheUtil.getResult(
-						RegionModelImpl.ENTITY_CACHE_ENABLED, Region.class,
+						RegionModelImpl.ENTITY_CACHE_ENABLED, RegionImpl.class,
 						region.getPrimaryKey(), this) == null) {
 				cacheResult(region);
 			}
@@ -192,7 +192,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (region.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(RegionImpl.class,
 						region.getPrimaryKeyObj());
 
@@ -217,7 +217,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 		RegionModelImpl regionModelImpl = (RegionModelImpl)region;
 
 		EntityCacheUtil.removeResult(RegionModelImpl.ENTITY_CACHE_ENABLED,
-			Region.class, region.getPrimaryKey());
+			RegionImpl.class, region.getPrimaryKey());
 
 		return region;
 	}
@@ -296,10 +296,10 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		RegionModelImpl regionModelImpl = (RegionModelImpl)region;
-
 		EntityCacheUtil.putResult(RegionModelImpl.ENTITY_CACHE_ENABLED,
-			Region.class, region.getPrimaryKey(), region);
+			RegionImpl.class, region.getPrimaryKey(), region);
+
+		RegionModelImpl regionModelImpl = (RegionModelImpl)region;
 
 		return region;
 	}
@@ -322,7 +322,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 	public Region fetchByPrimaryKey(long regionId) throws SystemException {
 		Region result = (Region)EntityCacheUtil.getResult(RegionModelImpl.ENTITY_CACHE_ENABLED,
-				Region.class, regionId, this);
+				RegionImpl.class, regionId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -384,10 +384,10 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 				List<Region> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COUNTRYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -453,10 +453,10 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 				List<Region> list = (List<Region>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COUNTRYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -600,10 +600,10 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 				List<Region> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ACTIVE,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -669,10 +669,10 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 				List<Region> list = (List<Region>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_ACTIVE,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -825,10 +825,10 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 				List<Region> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_A, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -900,10 +900,10 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 				List<Region> list = (List<Region>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_A,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1121,9 +1121,9 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 							end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

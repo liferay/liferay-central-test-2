@@ -58,8 +58,8 @@ import java.util.List;
  */
 public class ListTypePersistenceImpl extends BasePersistenceImpl
 	implements ListTypePersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = ListType.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = ListType.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = ListTypeImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_TYPE = new FinderPath(ListTypeModelImpl.ENTITY_CACHE_ENABLED,
 			ListTypeModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -85,14 +85,14 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 
 	public void cacheResult(ListType listType) {
 		EntityCacheUtil.putResult(ListTypeModelImpl.ENTITY_CACHE_ENABLED,
-			ListType.class, listType.getPrimaryKey(), listType);
+			ListTypeImpl.class, listType.getPrimaryKey(), listType);
 	}
 
 	public void cacheResult(List<ListType> listTypes) {
 		for (ListType listType : listTypes) {
 			if (EntityCacheUtil.getResult(
-						ListTypeModelImpl.ENTITY_CACHE_ENABLED, ListType.class,
-						listType.getPrimaryKey(), this) == null) {
+						ListTypeModelImpl.ENTITY_CACHE_ENABLED,
+						ListTypeImpl.class, listType.getPrimaryKey(), this) == null) {
 				cacheResult(listType);
 			}
 		}
@@ -160,7 +160,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (listType.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(ListTypeImpl.class,
 						listType.getPrimaryKeyObj());
 
@@ -185,7 +185,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 		ListTypeModelImpl listTypeModelImpl = (ListTypeModelImpl)listType;
 
 		EntityCacheUtil.removeResult(ListTypeModelImpl.ENTITY_CACHE_ENABLED,
-			ListType.class, listType.getPrimaryKey());
+			ListTypeImpl.class, listType.getPrimaryKey());
 
 		return listType;
 	}
@@ -264,10 +264,10 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		ListTypeModelImpl listTypeModelImpl = (ListTypeModelImpl)listType;
-
 		EntityCacheUtil.putResult(ListTypeModelImpl.ENTITY_CACHE_ENABLED,
-			ListType.class, listType.getPrimaryKey(), listType);
+			ListTypeImpl.class, listType.getPrimaryKey(), listType);
+
+		ListTypeModelImpl listTypeModelImpl = (ListTypeModelImpl)listType;
 
 		return listType;
 	}
@@ -291,7 +291,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 
 	public ListType fetchByPrimaryKey(int listTypeId) throws SystemException {
 		ListType result = (ListType)EntityCacheUtil.getResult(ListTypeModelImpl.ENTITY_CACHE_ENABLED,
-				ListType.class, listTypeId, this);
+				ListTypeImpl.class, listTypeId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -359,10 +359,10 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 
 				List<ListType> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_TYPE, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -435,10 +435,10 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 				List<ListType> list = (List<ListType>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_TYPE,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -650,9 +650,9 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

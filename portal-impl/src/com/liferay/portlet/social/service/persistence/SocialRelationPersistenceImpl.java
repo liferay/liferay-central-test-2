@@ -62,8 +62,8 @@ import java.util.List;
  */
 public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 	implements SocialRelationPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = SocialRelation.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = SocialRelation.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = SocialRelationImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
 			SocialRelationModelImpl.FINDER_CACHE_ENABLED,
@@ -223,23 +223,24 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
 	public void cacheResult(SocialRelation socialRelation) {
+		EntityCacheUtil.putResult(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelationImpl.class, socialRelation.getPrimaryKey(),
+			socialRelation);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U1_U2_T,
 			new Object[] {
 				new Long(socialRelation.getUserId1()),
 				new Long(socialRelation.getUserId2()),
 				new Integer(socialRelation.getType())
 			}, socialRelation);
-
-		EntityCacheUtil.putResult(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
-			SocialRelation.class, socialRelation.getPrimaryKey(), socialRelation);
 	}
 
 	public void cacheResult(List<SocialRelation> socialRelations) {
 		for (SocialRelation socialRelation : socialRelations) {
 			if (EntityCacheUtil.getResult(
 						SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
-						SocialRelation.class, socialRelation.getPrimaryKey(),
-						this) == null) {
+						SocialRelationImpl.class,
+						socialRelation.getPrimaryKey(), this) == null) {
 				cacheResult(socialRelation);
 			}
 		}
@@ -314,7 +315,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (socialRelation.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(SocialRelationImpl.class,
 						socialRelation.getPrimaryKeyObj());
 
@@ -346,7 +347,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
-			SocialRelation.class, socialRelation.getPrimaryKey());
+			SocialRelationImpl.class, socialRelation.getPrimaryKey());
 
 		return socialRelation;
 	}
@@ -433,6 +434,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelationImpl.class, socialRelation.getPrimaryKey(),
+			socialRelation);
+
 		SocialRelationModelImpl socialRelationModelImpl = (SocialRelationModelImpl)socialRelation;
 
 		if (!isNew &&
@@ -459,9 +464,6 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				}, socialRelation);
 		}
 
-		EntityCacheUtil.putResult(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
-			SocialRelation.class, socialRelation.getPrimaryKey(), socialRelation);
-
 		return socialRelation;
 	}
 
@@ -485,7 +487,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 	public SocialRelation fetchByPrimaryKey(long relationId)
 		throws SystemException {
 		SocialRelation result = (SocialRelation)EntityCacheUtil.getResult(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
-				SocialRelation.class, relationId, this);
+				SocialRelationImpl.class, relationId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -551,10 +553,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 				List<SocialRelation> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -622,10 +624,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				List<SocialRelation> list = (List<SocialRelation>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -771,10 +773,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 				List<SocialRelation> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -835,10 +837,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				List<SocialRelation> list = (List<SocialRelation>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -978,10 +980,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 				List<SocialRelation> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID1,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1042,10 +1044,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				List<SocialRelation> list = (List<SocialRelation>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID1,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1184,10 +1186,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 				List<SocialRelation> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID2,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1248,10 +1250,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				List<SocialRelation> list = (List<SocialRelation>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID2,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1389,10 +1391,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 				List<SocialRelation> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_TYPE, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1453,10 +1455,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				List<SocialRelation> list = (List<SocialRelation>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_TYPE,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1602,10 +1604,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 				List<SocialRelation> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_T, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1672,10 +1674,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				List<SocialRelation> list = (List<SocialRelation>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_T,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1833,10 +1835,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 				List<SocialRelation> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U1_T, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1903,10 +1905,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				List<SocialRelation> list = (List<SocialRelation>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_U1_T,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -2064,10 +2066,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 				List<SocialRelation> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U2_T, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -2134,10 +2136,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				List<SocialRelation> list = (List<SocialRelation>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_U2_T,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -2290,6 +2292,11 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 	public SocialRelation fetchByU1_U2_T(long userId1, long userId2, int type)
 		throws SystemException {
+		return fetchByU1_U2_T(userId1, userId2, type, true);
+	}
+
+	public SocialRelation fetchByU1_U2_T(long userId1, long userId2, int type,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(userId1), new Long(userId2), new Integer(type)
 			};
@@ -2335,8 +2342,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 				SocialRelation socialRelation = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U1_U2_T,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U1_U2_T,
+							finderArgs, list);
+					}
 				}
 				else {
 					socialRelation = list.get(0);
@@ -2452,9 +2461,9 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

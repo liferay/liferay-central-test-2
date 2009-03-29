@@ -160,6 +160,13 @@ public class RatingsEntryUtil {
 		return getPersistence().fetchByU_C_C(userId, classNameId, classPK);
 	}
 
+	public static com.liferay.portlet.ratings.model.RatingsEntry fetchByU_C_C(
+		long userId, long classNameId, long classPK, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByU_C_C(userId, classNameId, classPK, cacheEmptyResult);
+	}
+
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

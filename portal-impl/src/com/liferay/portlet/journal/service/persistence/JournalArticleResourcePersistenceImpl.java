@@ -60,8 +60,8 @@ import java.util.List;
  */
 public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 	implements JournalArticleResourcePersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = JournalArticleResource.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = JournalArticleResource.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = JournalArticleResourceImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(JournalArticleResourceModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleResourceModelImpl.FINDER_CACHE_ENABLED,
@@ -96,16 +96,16 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
 	public void cacheResult(JournalArticleResource journalArticleResource) {
+		EntityCacheUtil.putResult(JournalArticleResourceModelImpl.ENTITY_CACHE_ENABLED,
+			JournalArticleResourceImpl.class,
+			journalArticleResource.getPrimaryKey(), journalArticleResource);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A,
 			new Object[] {
 				new Long(journalArticleResource.getGroupId()),
 				
 			journalArticleResource.getArticleId()
 			}, journalArticleResource);
-
-		EntityCacheUtil.putResult(JournalArticleResourceModelImpl.ENTITY_CACHE_ENABLED,
-			JournalArticleResource.class,
-			journalArticleResource.getPrimaryKey(), journalArticleResource);
 	}
 
 	public void cacheResult(
@@ -113,7 +113,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 		for (JournalArticleResource journalArticleResource : journalArticleResources) {
 			if (EntityCacheUtil.getResult(
 						JournalArticleResourceModelImpl.ENTITY_CACHE_ENABLED,
-						JournalArticleResource.class,
+						JournalArticleResourceImpl.class,
 						journalArticleResource.getPrimaryKey(), this) == null) {
 				cacheResult(journalArticleResource);
 			}
@@ -188,7 +188,8 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (journalArticleResource.isCachedModel() ||
+					BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(JournalArticleResourceImpl.class,
 						journalArticleResource.getPrimaryKeyObj());
 
@@ -220,7 +221,8 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(JournalArticleResourceModelImpl.ENTITY_CACHE_ENABLED,
-			JournalArticleResource.class, journalArticleResource.getPrimaryKey());
+			JournalArticleResourceImpl.class,
+			journalArticleResource.getPrimaryKey());
 
 		return journalArticleResource;
 	}
@@ -303,6 +305,10 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(JournalArticleResourceModelImpl.ENTITY_CACHE_ENABLED,
+			JournalArticleResourceImpl.class,
+			journalArticleResource.getPrimaryKey(), journalArticleResource);
+
 		JournalArticleResourceModelImpl journalArticleResourceModelImpl = (JournalArticleResourceModelImpl)journalArticleResource;
 
 		if (!isNew &&
@@ -329,10 +335,6 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 				}, journalArticleResource);
 		}
 
-		EntityCacheUtil.putResult(JournalArticleResourceModelImpl.ENTITY_CACHE_ENABLED,
-			JournalArticleResource.class,
-			journalArticleResource.getPrimaryKey(), journalArticleResource);
-
 		return journalArticleResource;
 	}
 
@@ -358,7 +360,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 	public JournalArticleResource fetchByPrimaryKey(long resourcePrimKey)
 		throws SystemException {
 		JournalArticleResource result = (JournalArticleResource)EntityCacheUtil.getResult(JournalArticleResourceModelImpl.ENTITY_CACHE_ENABLED,
-				JournalArticleResource.class, resourcePrimKey, this);
+				JournalArticleResourceImpl.class, resourcePrimKey, this);
 
 		if (result == null) {
 			Session session = null;
@@ -417,10 +419,10 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 
 				List<JournalArticleResource> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -481,10 +483,10 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 				List<JournalArticleResource> list = (List<JournalArticleResource>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -625,6 +627,11 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 
 	public JournalArticleResource fetchByG_A(long groupId, String articleId)
 		throws SystemException {
+		return fetchByG_A(groupId, articleId, true);
+	}
+
+	public JournalArticleResource fetchByG_A(long groupId, String articleId,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId), articleId };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_A,
@@ -669,8 +676,10 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 				JournalArticleResource journalArticleResource = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A,
+							finderArgs, list);
+					}
 				}
 				else {
 					journalArticleResource = list.get(0);
@@ -786,9 +795,9 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

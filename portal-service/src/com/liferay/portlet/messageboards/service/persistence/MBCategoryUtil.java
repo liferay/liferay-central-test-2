@@ -158,6 +158,12 @@ public class MBCategoryUtil {
 		return getPersistence().fetchByUUID_G(uuid, groupId);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBCategory fetchByUUID_G(
+		java.lang.String uuid, long groupId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByUUID_G(uuid, groupId, cacheEmptyResult);
+	}
+
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByGroupId(
 		long groupId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId);

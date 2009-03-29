@@ -60,8 +60,8 @@ import java.util.List;
  */
 public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 	implements ShoppingItemPricePersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = ShoppingItemPrice.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = ShoppingItemPrice.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = ShoppingItemPriceImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_ITEMID = new FinderPath(ShoppingItemPriceModelImpl.ENTITY_CACHE_ENABLED,
 			ShoppingItemPriceModelImpl.FINDER_CACHE_ENABLED,
@@ -89,7 +89,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 
 	public void cacheResult(ShoppingItemPrice shoppingItemPrice) {
 		EntityCacheUtil.putResult(ShoppingItemPriceModelImpl.ENTITY_CACHE_ENABLED,
-			ShoppingItemPrice.class, shoppingItemPrice.getPrimaryKey(),
+			ShoppingItemPriceImpl.class, shoppingItemPrice.getPrimaryKey(),
 			shoppingItemPrice);
 	}
 
@@ -97,7 +97,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 		for (ShoppingItemPrice shoppingItemPrice : shoppingItemPrices) {
 			if (EntityCacheUtil.getResult(
 						ShoppingItemPriceModelImpl.ENTITY_CACHE_ENABLED,
-						ShoppingItemPrice.class,
+						ShoppingItemPriceImpl.class,
 						shoppingItemPrice.getPrimaryKey(), this) == null) {
 				cacheResult(shoppingItemPrice);
 			}
@@ -170,7 +170,8 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (shoppingItemPrice.isCachedModel() ||
+					BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(ShoppingItemPriceImpl.class,
 						shoppingItemPrice.getPrimaryKeyObj());
 
@@ -195,7 +196,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 		ShoppingItemPriceModelImpl shoppingItemPriceModelImpl = (ShoppingItemPriceModelImpl)shoppingItemPrice;
 
 		EntityCacheUtil.removeResult(ShoppingItemPriceModelImpl.ENTITY_CACHE_ENABLED,
-			ShoppingItemPrice.class, shoppingItemPrice.getPrimaryKey());
+			ShoppingItemPriceImpl.class, shoppingItemPrice.getPrimaryKey());
 
 		return shoppingItemPrice;
 	}
@@ -276,11 +277,11 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		ShoppingItemPriceModelImpl shoppingItemPriceModelImpl = (ShoppingItemPriceModelImpl)shoppingItemPrice;
-
 		EntityCacheUtil.putResult(ShoppingItemPriceModelImpl.ENTITY_CACHE_ENABLED,
-			ShoppingItemPrice.class, shoppingItemPrice.getPrimaryKey(),
+			ShoppingItemPriceImpl.class, shoppingItemPrice.getPrimaryKey(),
 			shoppingItemPrice);
+
+		ShoppingItemPriceModelImpl shoppingItemPriceModelImpl = (ShoppingItemPriceModelImpl)shoppingItemPrice;
 
 		return shoppingItemPrice;
 	}
@@ -306,7 +307,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 	public ShoppingItemPrice fetchByPrimaryKey(long itemPriceId)
 		throws SystemException {
 		ShoppingItemPrice result = (ShoppingItemPrice)EntityCacheUtil.getResult(ShoppingItemPriceModelImpl.ENTITY_CACHE_ENABLED,
-				ShoppingItemPrice.class, itemPriceId, this);
+				ShoppingItemPriceImpl.class, itemPriceId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -370,10 +371,10 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 
 				List<ShoppingItemPrice> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ITEMID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -441,10 +442,10 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 				List<ShoppingItemPrice> list = (List<ShoppingItemPrice>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_ITEMID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -657,9 +658,9 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

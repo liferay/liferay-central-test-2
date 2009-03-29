@@ -69,8 +69,8 @@ import java.util.List;
  */
 public class SCLicensePersistenceImpl extends BasePersistenceImpl
 	implements SCLicensePersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = SCLicense.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = SCLicense.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = SCLicenseImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_ACTIVE = new FinderPath(SCLicenseModelImpl.ENTITY_CACHE_ENABLED,
 			SCLicenseModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -113,14 +113,14 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 	public void cacheResult(SCLicense scLicense) {
 		EntityCacheUtil.putResult(SCLicenseModelImpl.ENTITY_CACHE_ENABLED,
-			SCLicense.class, scLicense.getPrimaryKey(), scLicense);
+			SCLicenseImpl.class, scLicense.getPrimaryKey(), scLicense);
 	}
 
 	public void cacheResult(List<SCLicense> scLicenses) {
 		for (SCLicense scLicense : scLicenses) {
 			if (EntityCacheUtil.getResult(
 						SCLicenseModelImpl.ENTITY_CACHE_ENABLED,
-						SCLicense.class, scLicense.getPrimaryKey(), this) == null) {
+						SCLicenseImpl.class, scLicense.getPrimaryKey(), this) == null) {
 				cacheResult(scLicense);
 			}
 		}
@@ -199,7 +199,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (scLicense.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(SCLicenseImpl.class,
 						scLicense.getPrimaryKeyObj());
 
@@ -224,7 +224,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 		SCLicenseModelImpl scLicenseModelImpl = (SCLicenseModelImpl)scLicense;
 
 		EntityCacheUtil.removeResult(SCLicenseModelImpl.ENTITY_CACHE_ENABLED,
-			SCLicense.class, scLicense.getPrimaryKey());
+			SCLicenseImpl.class, scLicense.getPrimaryKey());
 
 		return scLicense;
 	}
@@ -304,10 +304,10 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		SCLicenseModelImpl scLicenseModelImpl = (SCLicenseModelImpl)scLicense;
-
 		EntityCacheUtil.putResult(SCLicenseModelImpl.ENTITY_CACHE_ENABLED,
-			SCLicense.class, scLicense.getPrimaryKey(), scLicense);
+			SCLicenseImpl.class, scLicense.getPrimaryKey(), scLicense);
+
+		SCLicenseModelImpl scLicenseModelImpl = (SCLicenseModelImpl)scLicense;
 
 		return scLicense;
 	}
@@ -332,7 +332,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 	public SCLicense fetchByPrimaryKey(long licenseId)
 		throws SystemException {
 		SCLicense result = (SCLicense)EntityCacheUtil.getResult(SCLicenseModelImpl.ENTITY_CACHE_ENABLED,
-				SCLicense.class, licenseId, this);
+				SCLicenseImpl.class, licenseId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -395,10 +395,10 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 				List<SCLicense> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ACTIVE,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -465,10 +465,10 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 				List<SCLicense> list = (List<SCLicense>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_ACTIVE,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -624,10 +624,10 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 				List<SCLicense> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_A_R, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -700,10 +700,10 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 				List<SCLicense> list = (List<SCLicense>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_A_R,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -926,9 +926,9 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}
@@ -1196,10 +1196,10 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 					(List<com.liferay.portlet.softwarecatalog.model.SCProductEntry>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				scProductEntryPersistence.cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_GET_SCPRODUCTENTRIES,
 					finderArgs, list);
-
-				scProductEntryPersistence.cacheResult(list);
 
 				return list;
 			}

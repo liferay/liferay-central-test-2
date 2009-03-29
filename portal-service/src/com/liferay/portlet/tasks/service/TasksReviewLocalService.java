@@ -24,6 +24,7 @@ package com.liferay.portlet.tasks.service;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.Isolation;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
@@ -51,7 +52,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.portlet.tasks.service.TasksReviewLocalServiceUtil
  *
  */
-@Transactional(rollbackFor =  {
+@Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor =  {
 	PortalException.class, SystemException.class})
 public interface TasksReviewLocalService {
 	public com.liferay.portlet.tasks.model.TasksReview addTasksReview(

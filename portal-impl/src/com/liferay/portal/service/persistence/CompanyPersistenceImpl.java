@@ -58,8 +58,8 @@ import java.util.List;
  */
 public class CompanyPersistenceImpl extends BasePersistenceImpl
 	implements CompanyPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = Company.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = Company.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = CompanyImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FETCH_BY_WEBID = new FinderPath(CompanyModelImpl.ENTITY_CACHE_ENABLED,
 			CompanyModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
@@ -93,6 +93,9 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 			"countAll", new String[0]);
 
 	public void cacheResult(Company company) {
+		EntityCacheUtil.putResult(CompanyModelImpl.ENTITY_CACHE_ENABLED,
+			CompanyImpl.class, company.getPrimaryKey(), company);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_WEBID,
 			new Object[] { company.getWebId() }, company);
 
@@ -104,16 +107,13 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_LOGOID,
 			new Object[] { new Long(company.getLogoId()) }, company);
-
-		EntityCacheUtil.putResult(CompanyModelImpl.ENTITY_CACHE_ENABLED,
-			Company.class, company.getPrimaryKey(), company);
 	}
 
 	public void cacheResult(List<Company> companies) {
 		for (Company company : companies) {
 			if (EntityCacheUtil.getResult(
-						CompanyModelImpl.ENTITY_CACHE_ENABLED, Company.class,
-						company.getPrimaryKey(), this) == null) {
+						CompanyModelImpl.ENTITY_CACHE_ENABLED,
+						CompanyImpl.class, company.getPrimaryKey(), this) == null) {
 				cacheResult(company);
 			}
 		}
@@ -181,7 +181,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (company.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(CompanyImpl.class,
 						company.getPrimaryKeyObj());
 
@@ -218,7 +218,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 			new Object[] { new Long(companyModelImpl.getOriginalLogoId()) });
 
 		EntityCacheUtil.removeResult(CompanyModelImpl.ENTITY_CACHE_ENABLED,
-			Company.class, company.getPrimaryKey());
+			CompanyImpl.class, company.getPrimaryKey());
 
 		return company;
 	}
@@ -297,6 +297,9 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(CompanyModelImpl.ENTITY_CACHE_ENABLED,
+			CompanyImpl.class, company.getPrimaryKey(), company);
+
 		CompanyModelImpl companyModelImpl = (CompanyModelImpl)company;
 
 		if (!isNew &&
@@ -349,9 +352,6 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 				new Object[] { new Long(company.getLogoId()) }, company);
 		}
 
-		EntityCacheUtil.putResult(CompanyModelImpl.ENTITY_CACHE_ENABLED,
-			Company.class, company.getPrimaryKey(), company);
-
 		return company;
 	}
 
@@ -374,7 +374,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 
 	public Company fetchByPrimaryKey(long companyId) throws SystemException {
 		Company result = (Company)EntityCacheUtil.getResult(CompanyModelImpl.ENTITY_CACHE_ENABLED,
-				Company.class, companyId, this);
+				CompanyImpl.class, companyId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -427,6 +427,11 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Company fetchByWebId(String webId) throws SystemException {
+		return fetchByWebId(webId, true);
+	}
+
+	public Company fetchByWebId(String webId, boolean cacheEmptyResult)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { webId };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_WEBID,
@@ -464,8 +469,10 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 				Company company = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_WEBID,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_WEBID,
+							finderArgs, list);
+					}
 				}
 				else {
 					company = list.get(0);
@@ -517,6 +524,11 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 
 	public Company fetchByVirtualHost(String virtualHost)
 		throws SystemException {
+		return fetchByVirtualHost(virtualHost, true);
+	}
+
+	public Company fetchByVirtualHost(String virtualHost,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { virtualHost };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
@@ -554,8 +566,10 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 				Company company = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
+							finderArgs, list);
+					}
 				}
 				else {
 					company = list.get(0);
@@ -606,6 +620,11 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Company fetchByMx(String mx) throws SystemException {
+		return fetchByMx(mx, true);
+	}
+
+	public Company fetchByMx(String mx, boolean cacheEmptyResult)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { mx };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_MX,
@@ -643,8 +662,10 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 				Company company = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_MX,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_MX,
+							finderArgs, list);
+					}
 				}
 				else {
 					company = list.get(0);
@@ -695,6 +716,11 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Company fetchByLogoId(long logoId) throws SystemException {
+		return fetchByLogoId(logoId, true);
+	}
+
+	public Company fetchByLogoId(long logoId, boolean cacheEmptyResult)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(logoId) };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_LOGOID,
@@ -725,8 +751,10 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 				Company company = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_LOGOID,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_LOGOID,
+							finderArgs, list);
+					}
 				}
 				else {
 					company = list.get(0);
@@ -840,9 +868,9 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

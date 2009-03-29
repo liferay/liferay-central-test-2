@@ -58,8 +58,8 @@ import java.util.List;
  */
 public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 	implements MembershipRequestPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = MembershipRequest.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = MembershipRequest.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = MembershipRequestImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(MembershipRequestModelImpl.ENTITY_CACHE_ENABLED,
 			MembershipRequestModelImpl.FINDER_CACHE_ENABLED,
@@ -121,7 +121,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 
 	public void cacheResult(MembershipRequest membershipRequest) {
 		EntityCacheUtil.putResult(MembershipRequestModelImpl.ENTITY_CACHE_ENABLED,
-			MembershipRequest.class, membershipRequest.getPrimaryKey(),
+			MembershipRequestImpl.class, membershipRequest.getPrimaryKey(),
 			membershipRequest);
 	}
 
@@ -129,7 +129,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 		for (MembershipRequest membershipRequest : membershipRequests) {
 			if (EntityCacheUtil.getResult(
 						MembershipRequestModelImpl.ENTITY_CACHE_ENABLED,
-						MembershipRequest.class,
+						MembershipRequestImpl.class,
 						membershipRequest.getPrimaryKey(), this) == null) {
 				cacheResult(membershipRequest);
 			}
@@ -202,7 +202,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (membershipRequest.isCachedModel() ||
+					BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(MembershipRequestImpl.class,
 						membershipRequest.getPrimaryKeyObj());
 
@@ -227,7 +228,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 		MembershipRequestModelImpl membershipRequestModelImpl = (MembershipRequestModelImpl)membershipRequest;
 
 		EntityCacheUtil.removeResult(MembershipRequestModelImpl.ENTITY_CACHE_ENABLED,
-			MembershipRequest.class, membershipRequest.getPrimaryKey());
+			MembershipRequestImpl.class, membershipRequest.getPrimaryKey());
 
 		return membershipRequest;
 	}
@@ -308,11 +309,11 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		MembershipRequestModelImpl membershipRequestModelImpl = (MembershipRequestModelImpl)membershipRequest;
-
 		EntityCacheUtil.putResult(MembershipRequestModelImpl.ENTITY_CACHE_ENABLED,
-			MembershipRequest.class, membershipRequest.getPrimaryKey(),
+			MembershipRequestImpl.class, membershipRequest.getPrimaryKey(),
 			membershipRequest);
+
+		MembershipRequestModelImpl membershipRequestModelImpl = (MembershipRequestModelImpl)membershipRequest;
 
 		return membershipRequest;
 	}
@@ -338,7 +339,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 	public MembershipRequest fetchByPrimaryKey(long membershipRequestId)
 		throws SystemException {
 		MembershipRequest result = (MembershipRequest)EntityCacheUtil.getResult(MembershipRequestModelImpl.ENTITY_CACHE_ENABLED,
-				MembershipRequest.class, membershipRequestId, this);
+				MembershipRequestImpl.class, membershipRequestId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -401,10 +402,10 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 
 				List<MembershipRequest> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -471,10 +472,10 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 				List<MembershipRequest> list = (List<MembershipRequest>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -626,10 +627,10 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 
 				List<MembershipRequest> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -696,10 +697,10 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 				List<MembershipRequest> list = (List<MembershipRequest>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -859,10 +860,10 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 
 				List<MembershipRequest> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_S, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -935,10 +936,10 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 				List<MembershipRequest> list = (List<MembershipRequest>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_S,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1162,9 +1163,9 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

@@ -180,6 +180,10 @@ public interface SCProductEntryPersistence extends BasePersistence {
 		java.lang.String repoGroupId, java.lang.String repoArtifactId)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.softwarecatalog.model.SCProductEntry fetchByRG_RA(
+		java.lang.String repoGroupId, java.lang.String repoArtifactId,
+		boolean cacheEmptyResult) throws com.liferay.portal.SystemException;
+
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;

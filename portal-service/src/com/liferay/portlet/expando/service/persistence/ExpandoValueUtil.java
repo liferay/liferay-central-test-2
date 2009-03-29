@@ -279,6 +279,12 @@ public class ExpandoValueUtil {
 		return getPersistence().fetchByC_R(columnId, rowId);
 	}
 
+	public static com.liferay.portlet.expando.model.ExpandoValue fetchByC_R(
+		long columnId, long rowId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByC_R(columnId, rowId, cacheEmptyResult);
+	}
+
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByC_C(
 		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException {
@@ -334,6 +340,13 @@ public class ExpandoValueUtil {
 		long tableId, long columnId, long rowId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByT_C_R(tableId, columnId, rowId);
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoValue fetchByT_C_R(
+		long tableId, long columnId, long rowId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByT_C_R(tableId, columnId, rowId, cacheEmptyResult);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByT_C_C_C(

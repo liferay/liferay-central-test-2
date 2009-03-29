@@ -213,6 +213,15 @@ public class PortletItemUtil {
 				   .fetchByG_N_P_C(groupId, name, portletId, classNameId);
 	}
 
+	public static com.liferay.portal.model.PortletItem fetchByG_N_P_C(
+		long groupId, java.lang.String name, java.lang.String portletId,
+		long classNameId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByG_N_P_C(groupId, name, portletId, classNameId,
+			cacheEmptyResult);
+	}
+
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

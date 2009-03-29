@@ -60,8 +60,8 @@ import java.util.List;
  */
 public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 	implements WikiPageResourcePersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = WikiPageResource.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = WikiPageResource.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = WikiPageResourceImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FETCH_BY_N_T = new FinderPath(WikiPageResourceModelImpl.ENTITY_CACHE_ENABLED,
 			WikiPageResourceModelImpl.FINDER_CACHE_ENABLED,
@@ -79,23 +79,23 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
 	public void cacheResult(WikiPageResource wikiPageResource) {
+		EntityCacheUtil.putResult(WikiPageResourceModelImpl.ENTITY_CACHE_ENABLED,
+			WikiPageResourceImpl.class, wikiPageResource.getPrimaryKey(),
+			wikiPageResource);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_T,
 			new Object[] {
 				new Long(wikiPageResource.getNodeId()),
 				
 			wikiPageResource.getTitle()
 			}, wikiPageResource);
-
-		EntityCacheUtil.putResult(WikiPageResourceModelImpl.ENTITY_CACHE_ENABLED,
-			WikiPageResource.class, wikiPageResource.getPrimaryKey(),
-			wikiPageResource);
 	}
 
 	public void cacheResult(List<WikiPageResource> wikiPageResources) {
 		for (WikiPageResource wikiPageResource : wikiPageResources) {
 			if (EntityCacheUtil.getResult(
 						WikiPageResourceModelImpl.ENTITY_CACHE_ENABLED,
-						WikiPageResource.class,
+						WikiPageResourceImpl.class,
 						wikiPageResource.getPrimaryKey(), this) == null) {
 				cacheResult(wikiPageResource);
 			}
@@ -168,7 +168,8 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (wikiPageResource.isCachedModel() ||
+					BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(WikiPageResourceImpl.class,
 						wikiPageResource.getPrimaryKeyObj());
 
@@ -200,7 +201,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(WikiPageResourceModelImpl.ENTITY_CACHE_ENABLED,
-			WikiPageResource.class, wikiPageResource.getPrimaryKey());
+			WikiPageResourceImpl.class, wikiPageResource.getPrimaryKey());
 
 		return wikiPageResource;
 	}
@@ -281,6 +282,10 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(WikiPageResourceModelImpl.ENTITY_CACHE_ENABLED,
+			WikiPageResourceImpl.class, wikiPageResource.getPrimaryKey(),
+			wikiPageResource);
+
 		WikiPageResourceModelImpl wikiPageResourceModelImpl = (WikiPageResourceModelImpl)wikiPageResource;
 
 		if (!isNew &&
@@ -307,10 +312,6 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 				}, wikiPageResource);
 		}
 
-		EntityCacheUtil.putResult(WikiPageResourceModelImpl.ENTITY_CACHE_ENABLED,
-			WikiPageResource.class, wikiPageResource.getPrimaryKey(),
-			wikiPageResource);
-
 		return wikiPageResource;
 	}
 
@@ -335,7 +336,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 	public WikiPageResource fetchByPrimaryKey(long resourcePrimKey)
 		throws SystemException {
 		WikiPageResource result = (WikiPageResource)EntityCacheUtil.getResult(WikiPageResourceModelImpl.ENTITY_CACHE_ENABLED,
-				WikiPageResource.class, resourcePrimKey, this);
+				WikiPageResourceImpl.class, resourcePrimKey, this);
 
 		if (result == null) {
 			Session session = null;
@@ -392,6 +393,11 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 
 	public WikiPageResource fetchByN_T(long nodeId, String title)
 		throws SystemException {
+		return fetchByN_T(nodeId, title, true);
+	}
+
+	public WikiPageResource fetchByN_T(long nodeId, String title,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(nodeId), title };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_N_T,
@@ -436,8 +442,10 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 				WikiPageResource wikiPageResource = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_T,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_T,
+							finderArgs, list);
+					}
 				}
 				else {
 					wikiPageResource = list.get(0);
@@ -553,9 +561,9 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

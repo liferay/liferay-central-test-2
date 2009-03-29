@@ -58,8 +58,8 @@ import java.util.List;
  */
 public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 	implements ResourceCodePersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = ResourceCode.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = ResourceCode.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = ResourceCodeImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
 			ResourceCodeModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -113,22 +113,23 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 			"countAll", new String[0]);
 
 	public void cacheResult(ResourceCode resourceCode) {
+		EntityCacheUtil.putResult(ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
+			ResourceCodeImpl.class, resourceCode.getPrimaryKey(), resourceCode);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N_S,
 			new Object[] {
 				new Long(resourceCode.getCompanyId()),
 				
 			resourceCode.getName(), new Integer(resourceCode.getScope())
 			}, resourceCode);
-
-		EntityCacheUtil.putResult(ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
-			ResourceCode.class, resourceCode.getPrimaryKey(), resourceCode);
 	}
 
 	public void cacheResult(List<ResourceCode> resourceCodes) {
 		for (ResourceCode resourceCode : resourceCodes) {
 			if (EntityCacheUtil.getResult(
 						ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
-						ResourceCode.class, resourceCode.getPrimaryKey(), this) == null) {
+						ResourceCodeImpl.class, resourceCode.getPrimaryKey(),
+						this) == null) {
 				cacheResult(resourceCode);
 			}
 		}
@@ -198,7 +199,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (resourceCode.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(ResourceCodeImpl.class,
 						resourceCode.getPrimaryKeyObj());
 
@@ -231,7 +232,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
-			ResourceCode.class, resourceCode.getPrimaryKey());
+			ResourceCodeImpl.class, resourceCode.getPrimaryKey());
 
 		return resourceCode;
 	}
@@ -312,6 +313,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
+			ResourceCodeImpl.class, resourceCode.getPrimaryKey(), resourceCode);
+
 		ResourceCodeModelImpl resourceCodeModelImpl = (ResourceCodeModelImpl)resourceCode;
 
 		if (!isNew &&
@@ -341,9 +345,6 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 				}, resourceCode);
 		}
 
-		EntityCacheUtil.putResult(ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
-			ResourceCode.class, resourceCode.getPrimaryKey(), resourceCode);
-
 		return resourceCode;
 	}
 
@@ -367,7 +368,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 	public ResourceCode fetchByPrimaryKey(long codeId)
 		throws SystemException {
 		ResourceCode result = (ResourceCode)EntityCacheUtil.getResult(ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
-				ResourceCode.class, codeId, this);
+				ResourceCodeImpl.class, codeId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -426,10 +427,10 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 				List<ResourceCode> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -490,10 +491,10 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 				List<ResourceCode> list = (List<ResourceCode>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -640,10 +641,10 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 				List<ResourceCode> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_NAME, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -711,10 +712,10 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 				List<ResourceCode> list = (List<ResourceCode>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_NAME,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -860,6 +861,11 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 	public ResourceCode fetchByC_N_S(long companyId, String name, int scope)
 		throws SystemException {
+		return fetchByC_N_S(companyId, name, scope, true);
+	}
+
+	public ResourceCode fetchByC_N_S(long companyId, String name, int scope,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
@@ -914,8 +920,10 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 				ResourceCode resourceCode = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N_S,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N_S,
+							finderArgs, list);
+					}
 				}
 				else {
 					resourceCode = list.get(0);
@@ -1030,9 +1038,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

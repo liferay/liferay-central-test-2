@@ -158,6 +158,12 @@ public class JournalStructureUtil {
 		return getPersistence().fetchByUUID_G(uuid, groupId);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalStructure fetchByUUID_G(
+		java.lang.String uuid, long groupId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByUUID_G(uuid, groupId, cacheEmptyResult);
+	}
+
 	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> findByGroupId(
 		long groupId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId);
@@ -252,6 +258,13 @@ public class JournalStructureUtil {
 		long groupId, java.lang.String structureId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByG_S(groupId, structureId);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalStructure fetchByG_S(
+		long groupId, java.lang.String structureId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByG_S(groupId, structureId, cacheEmptyResult);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> findByG_P(

@@ -58,8 +58,8 @@ import java.util.List;
  */
 public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 	implements OrgGroupRolePersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = OrgGroupRole.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = OrgGroupRole.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = OrgGroupRoleImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(OrgGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
 			OrgGroupRoleModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -100,14 +100,15 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 
 	public void cacheResult(OrgGroupRole orgGroupRole) {
 		EntityCacheUtil.putResult(OrgGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
-			OrgGroupRole.class, orgGroupRole.getPrimaryKey(), orgGroupRole);
+			OrgGroupRoleImpl.class, orgGroupRole.getPrimaryKey(), orgGroupRole);
 	}
 
 	public void cacheResult(List<OrgGroupRole> orgGroupRoles) {
 		for (OrgGroupRole orgGroupRole : orgGroupRoles) {
 			if (EntityCacheUtil.getResult(
 						OrgGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
-						OrgGroupRole.class, orgGroupRole.getPrimaryKey(), this) == null) {
+						OrgGroupRoleImpl.class, orgGroupRole.getPrimaryKey(),
+						this) == null) {
 				cacheResult(orgGroupRole);
 			}
 		}
@@ -178,7 +179,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (orgGroupRole.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(OrgGroupRoleImpl.class,
 						orgGroupRole.getPrimaryKeyObj());
 
@@ -203,7 +204,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 		OrgGroupRoleModelImpl orgGroupRoleModelImpl = (OrgGroupRoleModelImpl)orgGroupRole;
 
 		EntityCacheUtil.removeResult(OrgGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
-			OrgGroupRole.class, orgGroupRole.getPrimaryKey());
+			OrgGroupRoleImpl.class, orgGroupRole.getPrimaryKey());
 
 		return orgGroupRole;
 	}
@@ -284,10 +285,10 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		OrgGroupRoleModelImpl orgGroupRoleModelImpl = (OrgGroupRoleModelImpl)orgGroupRole;
-
 		EntityCacheUtil.putResult(OrgGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
-			OrgGroupRole.class, orgGroupRole.getPrimaryKey(), orgGroupRole);
+			OrgGroupRoleImpl.class, orgGroupRole.getPrimaryKey(), orgGroupRole);
+
+		OrgGroupRoleModelImpl orgGroupRoleModelImpl = (OrgGroupRoleModelImpl)orgGroupRole;
 
 		return orgGroupRole;
 	}
@@ -313,7 +314,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 	public OrgGroupRole fetchByPrimaryKey(OrgGroupRolePK orgGroupRolePK)
 		throws SystemException {
 		OrgGroupRole result = (OrgGroupRole)EntityCacheUtil.getResult(OrgGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
-				OrgGroupRole.class, orgGroupRolePK, this);
+				OrgGroupRoleImpl.class, orgGroupRolePK, this);
 
 		if (result == null) {
 			Session session = null;
@@ -372,10 +373,10 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 
 				List<OrgGroupRole> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -436,10 +437,10 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 				List<OrgGroupRole> list = (List<OrgGroupRole>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -577,10 +578,10 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 
 				List<OrgGroupRole> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ROLEID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -641,10 +642,10 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 				List<OrgGroupRole> list = (List<OrgGroupRole>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_ROLEID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -840,9 +841,9 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

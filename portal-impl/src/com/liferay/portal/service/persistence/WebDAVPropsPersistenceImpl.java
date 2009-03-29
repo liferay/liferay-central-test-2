@@ -58,8 +58,8 @@ import java.util.List;
  */
 public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 	implements WebDAVPropsPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = WebDAVProps.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = WebDAVProps.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = WebDAVPropsImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FETCH_BY_C_C = new FinderPath(WebDAVPropsModelImpl.ENTITY_CACHE_ENABLED,
 			WebDAVPropsModelImpl.FINDER_CACHE_ENABLED,
@@ -77,21 +77,21 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 			"countAll", new String[0]);
 
 	public void cacheResult(WebDAVProps webDAVProps) {
+		EntityCacheUtil.putResult(WebDAVPropsModelImpl.ENTITY_CACHE_ENABLED,
+			WebDAVPropsImpl.class, webDAVProps.getPrimaryKey(), webDAVProps);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
 				new Long(webDAVProps.getClassNameId()),
 				new Long(webDAVProps.getClassPK())
 			}, webDAVProps);
-
-		EntityCacheUtil.putResult(WebDAVPropsModelImpl.ENTITY_CACHE_ENABLED,
-			WebDAVProps.class, webDAVProps.getPrimaryKey(), webDAVProps);
 	}
 
 	public void cacheResult(List<WebDAVProps> webDAVPropses) {
 		for (WebDAVProps webDAVProps : webDAVPropses) {
 			if (EntityCacheUtil.getResult(
 						WebDAVPropsModelImpl.ENTITY_CACHE_ENABLED,
-						WebDAVProps.class, webDAVProps.getPrimaryKey(), this) == null) {
+						WebDAVPropsImpl.class, webDAVProps.getPrimaryKey(), this) == null) {
 				cacheResult(webDAVProps);
 			}
 		}
@@ -162,7 +162,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (webDAVProps.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(WebDAVPropsImpl.class,
 						webDAVProps.getPrimaryKeyObj());
 
@@ -193,7 +193,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(WebDAVPropsModelImpl.ENTITY_CACHE_ENABLED,
-			WebDAVProps.class, webDAVProps.getPrimaryKey());
+			WebDAVPropsImpl.class, webDAVProps.getPrimaryKey());
 
 		return webDAVProps;
 	}
@@ -274,6 +274,9 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(WebDAVPropsModelImpl.ENTITY_CACHE_ENABLED,
+			WebDAVPropsImpl.class, webDAVProps.getPrimaryKey(), webDAVProps);
+
 		WebDAVPropsModelImpl webDAVPropsModelImpl = (WebDAVPropsModelImpl)webDAVProps;
 
 		if (!isNew &&
@@ -295,9 +298,6 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 					new Long(webDAVProps.getClassPK())
 				}, webDAVProps);
 		}
-
-		EntityCacheUtil.putResult(WebDAVPropsModelImpl.ENTITY_CACHE_ENABLED,
-			WebDAVProps.class, webDAVProps.getPrimaryKey(), webDAVProps);
 
 		return webDAVProps;
 	}
@@ -322,7 +322,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 	public WebDAVProps fetchByPrimaryKey(long webDavPropsId)
 		throws SystemException {
 		WebDAVProps result = (WebDAVProps)EntityCacheUtil.getResult(WebDAVPropsModelImpl.ENTITY_CACHE_ENABLED,
-				WebDAVProps.class, webDavPropsId, this);
+				WebDAVPropsImpl.class, webDavPropsId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -379,6 +379,11 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 
 	public WebDAVProps fetchByC_C(long classNameId, long classPK)
 		throws SystemException {
+		return fetchByC_C(classNameId, classPK, true);
+	}
+
+	public WebDAVProps fetchByC_C(long classNameId, long classPK,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK)
 			};
@@ -417,8 +422,10 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 				WebDAVProps webDAVProps = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
+							finderArgs, list);
+					}
 				}
 				else {
 					webDAVProps = list.get(0);
@@ -533,9 +540,9 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

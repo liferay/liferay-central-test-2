@@ -58,8 +58,8 @@ import java.util.List;
  */
 public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 	implements UserIdMapperPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = UserIdMapper.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = UserIdMapper.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = UserIdMapperImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_USERID = new FinderPath(UserIdMapperModelImpl.ENTITY_CACHE_ENABLED,
 			UserIdMapperModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -100,6 +100,9 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 			"countAll", new String[0]);
 
 	public void cacheResult(UserIdMapper userIdMapper) {
+		EntityCacheUtil.putResult(UserIdMapperModelImpl.ENTITY_CACHE_ENABLED,
+			UserIdMapperImpl.class, userIdMapper.getPrimaryKey(), userIdMapper);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T,
 			new Object[] {
 				new Long(userIdMapper.getUserId()),
@@ -113,16 +116,14 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 				
 			userIdMapper.getExternalUserId()
 			}, userIdMapper);
-
-		EntityCacheUtil.putResult(UserIdMapperModelImpl.ENTITY_CACHE_ENABLED,
-			UserIdMapper.class, userIdMapper.getPrimaryKey(), userIdMapper);
 	}
 
 	public void cacheResult(List<UserIdMapper> userIdMappers) {
 		for (UserIdMapper userIdMapper : userIdMappers) {
 			if (EntityCacheUtil.getResult(
 						UserIdMapperModelImpl.ENTITY_CACHE_ENABLED,
-						UserIdMapper.class, userIdMapper.getPrimaryKey(), this) == null) {
+						UserIdMapperImpl.class, userIdMapper.getPrimaryKey(),
+						this) == null) {
 				cacheResult(userIdMapper);
 			}
 		}
@@ -193,7 +194,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (userIdMapper.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(UserIdMapperImpl.class,
 						userIdMapper.getPrimaryKeyObj());
 
@@ -232,7 +233,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(UserIdMapperModelImpl.ENTITY_CACHE_ENABLED,
-			UserIdMapper.class, userIdMapper.getPrimaryKey());
+			UserIdMapperImpl.class, userIdMapper.getPrimaryKey());
 
 		return userIdMapper;
 	}
@@ -313,6 +314,9 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(UserIdMapperModelImpl.ENTITY_CACHE_ENABLED,
+			UserIdMapperImpl.class, userIdMapper.getPrimaryKey(), userIdMapper);
+
 		UserIdMapperModelImpl userIdMapperModelImpl = (UserIdMapperModelImpl)userIdMapper;
 
 		if (!isNew &&
@@ -365,9 +369,6 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 				}, userIdMapper);
 		}
 
-		EntityCacheUtil.putResult(UserIdMapperModelImpl.ENTITY_CACHE_ENABLED,
-			UserIdMapper.class, userIdMapper.getPrimaryKey(), userIdMapper);
-
 		return userIdMapper;
 	}
 
@@ -392,7 +393,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 	public UserIdMapper fetchByPrimaryKey(long userIdMapperId)
 		throws SystemException {
 		UserIdMapper result = (UserIdMapper)EntityCacheUtil.getResult(UserIdMapperModelImpl.ENTITY_CACHE_ENABLED,
-				UserIdMapper.class, userIdMapperId, this);
+				UserIdMapperImpl.class, userIdMapperId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -451,10 +452,10 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 
 				List<UserIdMapper> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -515,10 +516,10 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 				List<UserIdMapper> list = (List<UserIdMapper>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -654,6 +655,11 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 
 	public UserIdMapper fetchByU_T(long userId, String type)
 		throws SystemException {
+		return fetchByU_T(userId, type, true);
+	}
+
+	public UserIdMapper fetchByU_T(long userId, String type,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(userId), type };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_U_T,
@@ -698,8 +704,10 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 				UserIdMapper userIdMapper = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T,
+							finderArgs, list);
+					}
 				}
 				else {
 					userIdMapper = list.get(0);
@@ -754,6 +762,11 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 
 	public UserIdMapper fetchByT_E(String type, String externalUserId)
 		throws SystemException {
+		return fetchByT_E(type, externalUserId, true);
+	}
+
+	public UserIdMapper fetchByT_E(String type, String externalUserId,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { type, externalUserId };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_T_E,
@@ -805,8 +818,10 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 				UserIdMapper userIdMapper = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_E,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_E,
+							finderArgs, list);
+					}
 				}
 				else {
 					userIdMapper = list.get(0);
@@ -921,9 +936,9 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

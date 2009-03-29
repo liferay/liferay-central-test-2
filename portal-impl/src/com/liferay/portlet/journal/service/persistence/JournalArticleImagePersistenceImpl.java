@@ -60,8 +60,8 @@ import java.util.List;
  */
 public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 	implements JournalArticleImagePersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = JournalArticleImage.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = JournalArticleImage.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = JournalArticleImageImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(JournalArticleImageModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleImageModelImpl.FINDER_CACHE_ENABLED,
@@ -145,6 +145,10 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
 	public void cacheResult(JournalArticleImage journalArticleImage) {
+		EntityCacheUtil.putResult(JournalArticleImageModelImpl.ENTITY_CACHE_ENABLED,
+			JournalArticleImageImpl.class, journalArticleImage.getPrimaryKey(),
+			journalArticleImage);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A_V_E_E_L,
 			new Object[] {
 				new Long(journalArticleImage.getGroupId()),
@@ -158,17 +162,13 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 				
 			journalArticleImage.getLanguageId()
 			}, journalArticleImage);
-
-		EntityCacheUtil.putResult(JournalArticleImageModelImpl.ENTITY_CACHE_ENABLED,
-			JournalArticleImage.class, journalArticleImage.getPrimaryKey(),
-			journalArticleImage);
 	}
 
 	public void cacheResult(List<JournalArticleImage> journalArticleImages) {
 		for (JournalArticleImage journalArticleImage : journalArticleImages) {
 			if (EntityCacheUtil.getResult(
 						JournalArticleImageModelImpl.ENTITY_CACHE_ENABLED,
-						JournalArticleImage.class,
+						JournalArticleImageImpl.class,
 						journalArticleImage.getPrimaryKey(), this) == null) {
 				cacheResult(journalArticleImage);
 			}
@@ -241,7 +241,8 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (journalArticleImage.isCachedModel() ||
+					BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(JournalArticleImageImpl.class,
 						journalArticleImage.getPrimaryKeyObj());
 
@@ -280,7 +281,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(JournalArticleImageModelImpl.ENTITY_CACHE_ENABLED,
-			JournalArticleImage.class, journalArticleImage.getPrimaryKey());
+			JournalArticleImageImpl.class, journalArticleImage.getPrimaryKey());
 
 		return journalArticleImage;
 	}
@@ -361,6 +362,10 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(JournalArticleImageModelImpl.ENTITY_CACHE_ENABLED,
+			JournalArticleImageImpl.class, journalArticleImage.getPrimaryKey(),
+			journalArticleImage);
+
 		JournalArticleImageModelImpl journalArticleImageModelImpl = (JournalArticleImageModelImpl)journalArticleImage;
 
 		if (!isNew &&
@@ -415,10 +420,6 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 				}, journalArticleImage);
 		}
 
-		EntityCacheUtil.putResult(JournalArticleImageModelImpl.ENTITY_CACHE_ENABLED,
-			JournalArticleImage.class, journalArticleImage.getPrimaryKey(),
-			journalArticleImage);
-
 		return journalArticleImage;
 	}
 
@@ -443,7 +444,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 	public JournalArticleImage fetchByPrimaryKey(long articleImageId)
 		throws SystemException {
 		JournalArticleImage result = (JournalArticleImage)EntityCacheUtil.getResult(JournalArticleImageModelImpl.ENTITY_CACHE_ENABLED,
-				JournalArticleImage.class, articleImageId, this);
+				JournalArticleImageImpl.class, articleImageId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -502,10 +503,10 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 
 				List<JournalArticleImage> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -566,10 +567,10 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 				List<JournalArticleImage> list = (List<JournalArticleImage>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -711,10 +712,10 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 
 				List<JournalArticleImage> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_TEMPIMAGE,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -775,10 +776,10 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 				List<JournalArticleImage> list = (List<JournalArticleImage>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_TEMPIMAGE,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -943,10 +944,10 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 
 				List<JournalArticleImage> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_A_V,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1030,10 +1031,10 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 				List<JournalArticleImage> list = (List<JournalArticleImage>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_A_V,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1220,6 +1221,13 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 	public JournalArticleImage fetchByG_A_V_E_E_L(long groupId,
 		String articleId, double version, String elInstanceId, String elName,
 		String languageId) throws SystemException {
+		return fetchByG_A_V_E_E_L(groupId, articleId, version, elInstanceId,
+			elName, languageId, true);
+	}
+
+	public JournalArticleImage fetchByG_A_V_E_E_L(long groupId,
+		String articleId, double version, String elInstanceId, String elName,
+		String languageId, boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -1319,8 +1327,10 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 				JournalArticleImage journalArticleImage = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A_V_E_E_L,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A_V_E_E_L,
+							finderArgs, list);
+					}
 				}
 				else {
 					journalArticleImage = list.get(0);
@@ -1436,9 +1446,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

@@ -67,8 +67,8 @@ import java.util.List;
  */
 public class PermissionPersistenceImpl extends BasePersistenceImpl
 	implements PermissionPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = Permission.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = Permission.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = PermissionImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_RESOURCEID = new FinderPath(PermissionModelImpl.ENTITY_CACHE_ENABLED,
 			PermissionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -101,20 +101,20 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 			"countAll", new String[0]);
 
 	public void cacheResult(Permission permission) {
+		EntityCacheUtil.putResult(PermissionModelImpl.ENTITY_CACHE_ENABLED,
+			PermissionImpl.class, permission.getPrimaryKey(), permission);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_A_R,
 			new Object[] {
 				permission.getActionId(), new Long(permission.getResourceId())
 			}, permission);
-
-		EntityCacheUtil.putResult(PermissionModelImpl.ENTITY_CACHE_ENABLED,
-			Permission.class, permission.getPrimaryKey(), permission);
 	}
 
 	public void cacheResult(List<Permission> permissions) {
 		for (Permission permission : permissions) {
 			if (EntityCacheUtil.getResult(
 						PermissionModelImpl.ENTITY_CACHE_ENABLED,
-						Permission.class, permission.getPrimaryKey(), this) == null) {
+						PermissionImpl.class, permission.getPrimaryKey(), this) == null) {
 				cacheResult(permission);
 			}
 		}
@@ -214,7 +214,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (permission.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(PermissionImpl.class,
 						permission.getPrimaryKeyObj());
 
@@ -245,7 +245,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(PermissionModelImpl.ENTITY_CACHE_ENABLED,
-			Permission.class, permission.getPrimaryKey());
+			PermissionImpl.class, permission.getPrimaryKey());
 
 		return permission;
 	}
@@ -325,6 +325,9 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(PermissionModelImpl.ENTITY_CACHE_ENABLED,
+			PermissionImpl.class, permission.getPrimaryKey(), permission);
+
 		PermissionModelImpl permissionModelImpl = (PermissionModelImpl)permission;
 
 		if (!isNew &&
@@ -349,9 +352,6 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				}, permission);
 		}
 
-		EntityCacheUtil.putResult(PermissionModelImpl.ENTITY_CACHE_ENABLED,
-			Permission.class, permission.getPrimaryKey(), permission);
-
 		return permission;
 	}
 
@@ -375,7 +375,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 	public Permission fetchByPrimaryKey(long permissionId)
 		throws SystemException {
 		Permission result = (Permission)EntityCacheUtil.getResult(PermissionModelImpl.ENTITY_CACHE_ENABLED,
-				Permission.class, permissionId, this);
+				PermissionImpl.class, permissionId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -433,10 +433,10 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 
 				List<Permission> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_RESOURCEID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -496,10 +496,10 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				List<Permission> list = (List<Permission>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_RESOURCEID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -638,6 +638,11 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 
 	public Permission fetchByA_R(String actionId, long resourceId)
 		throws SystemException {
+		return fetchByA_R(actionId, resourceId, true);
+	}
+
+	public Permission fetchByA_R(String actionId, long resourceId,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { actionId, new Long(resourceId) };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_A_R,
@@ -681,8 +686,10 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				Permission permission = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_A_R,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_A_R,
+							finderArgs, list);
+					}
 				}
 				else {
 					permission = list.get(0);
@@ -797,9 +804,9 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}
@@ -1067,10 +1074,10 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				List<com.liferay.portal.model.Group> list = (List<com.liferay.portal.model.Group>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				groupPersistence.cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_GET_GROUPS, finderArgs,
 					list);
-
-				groupPersistence.cacheResult(list);
 
 				return list;
 			}
@@ -1397,10 +1404,10 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				List<com.liferay.portal.model.Role> list = (List<com.liferay.portal.model.Role>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				rolePersistence.cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_GET_ROLES, finderArgs,
 					list);
-
-				rolePersistence.cacheResult(list);
 
 				return list;
 			}
@@ -1718,10 +1725,10 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				List<com.liferay.portal.model.User> list = (List<com.liferay.portal.model.User>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				userPersistence.cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_GET_USERS, finderArgs,
 					list);
-
-				userPersistence.cacheResult(list);
 
 				return list;
 			}

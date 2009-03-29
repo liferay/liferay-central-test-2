@@ -193,6 +193,12 @@ public class UserUtil {
 		return getPersistence().fetchByContactId(contactId);
 	}
 
+	public static com.liferay.portal.model.User fetchByContactId(
+		long contactId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByContactId(contactId, cacheEmptyResult);
+	}
+
 	public static java.util.List<com.liferay.portal.model.User> findByEmailAddress(
 		java.lang.String emailAddress)
 		throws com.liferay.portal.SystemException {
@@ -249,6 +255,12 @@ public class UserUtil {
 		return getPersistence().fetchByOpenId(openId);
 	}
 
+	public static com.liferay.portal.model.User fetchByOpenId(
+		java.lang.String openId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByOpenId(openId, cacheEmptyResult);
+	}
+
 	public static com.liferay.portal.model.User findByPortraitId(
 		long portraitId)
 		throws com.liferay.portal.NoSuchUserException,
@@ -259,6 +271,12 @@ public class UserUtil {
 	public static com.liferay.portal.model.User fetchByPortraitId(
 		long portraitId) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByPortraitId(portraitId);
+	}
+
+	public static com.liferay.portal.model.User fetchByPortraitId(
+		long portraitId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPortraitId(portraitId, cacheEmptyResult);
 	}
 
 	public static com.liferay.portal.model.User findByC_U(long companyId,
@@ -273,6 +291,12 @@ public class UserUtil {
 		return getPersistence().fetchByC_U(companyId, userId);
 	}
 
+	public static com.liferay.portal.model.User fetchByC_U(long companyId,
+		long userId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByC_U(companyId, userId, cacheEmptyResult);
+	}
+
 	public static com.liferay.portal.model.User findByC_DU(long companyId,
 		boolean defaultUser)
 		throws com.liferay.portal.NoSuchUserException,
@@ -283,6 +307,13 @@ public class UserUtil {
 	public static com.liferay.portal.model.User fetchByC_DU(long companyId,
 		boolean defaultUser) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByC_DU(companyId, defaultUser);
+	}
+
+	public static com.liferay.portal.model.User fetchByC_DU(long companyId,
+		boolean defaultUser, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByC_DU(companyId, defaultUser, cacheEmptyResult);
 	}
 
 	public static com.liferay.portal.model.User findByC_SN(long companyId,
@@ -297,6 +328,13 @@ public class UserUtil {
 		return getPersistence().fetchByC_SN(companyId, screenName);
 	}
 
+	public static com.liferay.portal.model.User fetchByC_SN(long companyId,
+		java.lang.String screenName, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByC_SN(companyId, screenName, cacheEmptyResult);
+	}
+
 	public static com.liferay.portal.model.User findByC_EA(long companyId,
 		java.lang.String emailAddress)
 		throws com.liferay.portal.NoSuchUserException,
@@ -308,6 +346,13 @@ public class UserUtil {
 		java.lang.String emailAddress)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByC_EA(companyId, emailAddress);
+	}
+
+	public static com.liferay.portal.model.User fetchByC_EA(long companyId,
+		java.lang.String emailAddress, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByC_EA(companyId, emailAddress, cacheEmptyResult);
 	}
 
 	public static java.util.List<Object> findWithDynamicQuery(

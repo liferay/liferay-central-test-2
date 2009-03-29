@@ -58,8 +58,8 @@ import java.util.List;
  */
 public class PortletItemPersistenceImpl extends BasePersistenceImpl
 	implements PortletItemPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = PortletItem.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = PortletItem.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = PortletItemImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_G_C = new FinderPath(PortletItemModelImpl.ENTITY_CACHE_ENABLED,
 			PortletItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -124,6 +124,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 			"countAll", new String[0]);
 
 	public void cacheResult(PortletItem portletItem) {
+		EntityCacheUtil.putResult(PortletItemModelImpl.ENTITY_CACHE_ENABLED,
+			PortletItemImpl.class, portletItem.getPrimaryKey(), portletItem);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N_P_C,
 			new Object[] {
 				new Long(portletItem.getGroupId()),
@@ -132,16 +135,13 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 				
 			portletItem.getPortletId(), new Long(portletItem.getClassNameId())
 			}, portletItem);
-
-		EntityCacheUtil.putResult(PortletItemModelImpl.ENTITY_CACHE_ENABLED,
-			PortletItem.class, portletItem.getPrimaryKey(), portletItem);
 	}
 
 	public void cacheResult(List<PortletItem> portletItems) {
 		for (PortletItem portletItem : portletItems) {
 			if (EntityCacheUtil.getResult(
 						PortletItemModelImpl.ENTITY_CACHE_ENABLED,
-						PortletItem.class, portletItem.getPrimaryKey(), this) == null) {
+						PortletItemImpl.class, portletItem.getPrimaryKey(), this) == null) {
 				cacheResult(portletItem);
 			}
 		}
@@ -212,7 +212,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (portletItem.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(PortletItemImpl.class,
 						portletItem.getPrimaryKeyObj());
 
@@ -247,7 +247,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(PortletItemModelImpl.ENTITY_CACHE_ENABLED,
-			PortletItem.class, portletItem.getPrimaryKey());
+			PortletItemImpl.class, portletItem.getPrimaryKey());
 
 		return portletItem;
 	}
@@ -328,6 +328,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(PortletItemModelImpl.ENTITY_CACHE_ENABLED,
+			PortletItemImpl.class, portletItem.getPrimaryKey(), portletItem);
+
 		PortletItemModelImpl portletItemModelImpl = (PortletItemModelImpl)portletItem;
 
 		if (!isNew &&
@@ -366,9 +369,6 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 				}, portletItem);
 		}
 
-		EntityCacheUtil.putResult(PortletItemModelImpl.ENTITY_CACHE_ENABLED,
-			PortletItem.class, portletItem.getPrimaryKey(), portletItem);
-
 		return portletItem;
 	}
 
@@ -392,7 +392,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 	public PortletItem fetchByPrimaryKey(long portletItemId)
 		throws SystemException {
 		PortletItem result = (PortletItem)EntityCacheUtil.getResult(PortletItemModelImpl.ENTITY_CACHE_ENABLED,
-				PortletItem.class, portletItemId, this);
+				PortletItemImpl.class, portletItemId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -458,10 +458,10 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 
 				List<PortletItem> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_C, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -527,10 +527,10 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 				List<PortletItem> list = (List<PortletItem>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_C,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -705,10 +705,10 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 
 				List<PortletItem> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_P_C,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -790,10 +790,10 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 				List<PortletItem> list = (List<PortletItem>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_P_C,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -972,6 +972,12 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 
 	public PortletItem fetchByG_N_P_C(long groupId, String name,
 		String portletId, long classNameId) throws SystemException {
+		return fetchByG_N_P_C(groupId, name, portletId, classNameId, true);
+	}
+
+	public PortletItem fetchByG_N_P_C(long groupId, String name,
+		String portletId, long classNameId, boolean cacheEmptyResult)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -1040,8 +1046,10 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 				PortletItem portletItem = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N_P_C,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N_P_C,
+							finderArgs, list);
+					}
 				}
 				else {
 					portletItem = list.get(0);
@@ -1156,9 +1164,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

@@ -24,6 +24,7 @@ package com.liferay.portal.service;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.Isolation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
 /**
@@ -50,7 +51,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.portal.service.PortalLocalServiceUtil
  *
  */
-@Transactional(rollbackFor =  {
+@Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor =  {
 	PortalException.class, SystemException.class})
 public interface PortalLocalService {
 }

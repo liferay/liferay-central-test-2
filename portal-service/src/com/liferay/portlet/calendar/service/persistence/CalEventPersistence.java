@@ -122,6 +122,10 @@ public interface CalEventPersistence extends BasePersistence {
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.calendar.model.CalEvent fetchByUUID_G(
+		java.lang.String uuid, long groupId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByCompanyId(
 		long companyId) throws com.liferay.portal.SystemException;
 

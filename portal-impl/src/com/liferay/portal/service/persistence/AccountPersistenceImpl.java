@@ -56,8 +56,8 @@ import java.util.List;
  */
 public class AccountPersistenceImpl extends BasePersistenceImpl
 	implements AccountPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = Account.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = Account.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = AccountImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(AccountModelImpl.ENTITY_CACHE_ENABLED,
 			AccountModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -68,14 +68,14 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 
 	public void cacheResult(Account account) {
 		EntityCacheUtil.putResult(AccountModelImpl.ENTITY_CACHE_ENABLED,
-			Account.class, account.getPrimaryKey(), account);
+			AccountImpl.class, account.getPrimaryKey(), account);
 	}
 
 	public void cacheResult(List<Account> accounts) {
 		for (Account account : accounts) {
 			if (EntityCacheUtil.getResult(
-						AccountModelImpl.ENTITY_CACHE_ENABLED, Account.class,
-						account.getPrimaryKey(), this) == null) {
+						AccountModelImpl.ENTITY_CACHE_ENABLED,
+						AccountImpl.class, account.getPrimaryKey(), this) == null) {
 				cacheResult(account);
 			}
 		}
@@ -143,7 +143,7 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (account.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(AccountImpl.class,
 						account.getPrimaryKeyObj());
 
@@ -168,7 +168,7 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 		AccountModelImpl accountModelImpl = (AccountModelImpl)account;
 
 		EntityCacheUtil.removeResult(AccountModelImpl.ENTITY_CACHE_ENABLED,
-			Account.class, account.getPrimaryKey());
+			AccountImpl.class, account.getPrimaryKey());
 
 		return account;
 	}
@@ -247,10 +247,10 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		AccountModelImpl accountModelImpl = (AccountModelImpl)account;
-
 		EntityCacheUtil.putResult(AccountModelImpl.ENTITY_CACHE_ENABLED,
-			Account.class, account.getPrimaryKey(), account);
+			AccountImpl.class, account.getPrimaryKey(), account);
+
+		AccountModelImpl accountModelImpl = (AccountModelImpl)account;
 
 		return account;
 	}
@@ -274,7 +274,7 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 
 	public Account fetchByPrimaryKey(long accountId) throws SystemException {
 		Account result = (Account)EntityCacheUtil.getResult(AccountModelImpl.ENTITY_CACHE_ENABLED,
-				Account.class, accountId, this);
+				AccountImpl.class, accountId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -390,9 +390,9 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

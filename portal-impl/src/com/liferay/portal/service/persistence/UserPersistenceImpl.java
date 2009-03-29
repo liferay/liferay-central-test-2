@@ -69,8 +69,8 @@ import java.util.List;
  */
 public class UserPersistenceImpl extends BasePersistenceImpl
 	implements UserPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = User.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = User.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = UserImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(UserModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -175,6 +175,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 			"countAll", new String[0]);
 
 	public void cacheResult(User user) {
+		EntityCacheUtil.putResult(UserModelImpl.ENTITY_CACHE_ENABLED,
+			UserImpl.class, user.getPrimaryKey(), user);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CONTACTID,
 			new Object[] { new Long(user.getContactId()) }, user);
 
@@ -202,15 +205,12 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_EA,
 			new Object[] { new Long(user.getCompanyId()), user.getEmailAddress() },
 			user);
-
-		EntityCacheUtil.putResult(UserModelImpl.ENTITY_CACHE_ENABLED,
-			User.class, user.getPrimaryKey(), user);
 	}
 
 	public void cacheResult(List<User> users) {
 		for (User user : users) {
 			if (EntityCacheUtil.getResult(UserModelImpl.ENTITY_CACHE_ENABLED,
-						User.class, user.getPrimaryKey(), this) == null) {
+						UserImpl.class, user.getPrimaryKey(), this) == null) {
 				cacheResult(user);
 			}
 		}
@@ -329,7 +329,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (user.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(UserImpl.class,
 						user.getPrimaryKeyObj());
 
@@ -389,7 +389,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(UserModelImpl.ENTITY_CACHE_ENABLED,
-			User.class, user.getPrimaryKey());
+			UserImpl.class, user.getPrimaryKey());
 
 		return user;
 	}
@@ -472,6 +472,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		}
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		EntityCacheUtil.putResult(UserModelImpl.ENTITY_CACHE_ENABLED,
+			UserImpl.class, user.getPrimaryKey(), user);
 
 		UserModelImpl userModelImpl = (UserModelImpl)user;
 
@@ -595,9 +598,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 				}, user);
 		}
 
-		EntityCacheUtil.putResult(UserModelImpl.ENTITY_CACHE_ENABLED,
-			User.class, user.getPrimaryKey(), user);
-
 		return user;
 	}
 
@@ -619,7 +619,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 	public User fetchByPrimaryKey(long userId) throws SystemException {
 		User result = (User)EntityCacheUtil.getResult(UserModelImpl.ENTITY_CACHE_ENABLED,
-				User.class, userId, this);
+				UserImpl.class, userId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -682,10 +682,10 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 				List<User> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -752,10 +752,10 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 				List<User> list = (List<User>)QueryUtil.list(q, getDialect(),
 						start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -896,10 +896,10 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 				List<User> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -959,10 +959,10 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 				List<User> list = (List<User>)QueryUtil.list(q, getDialect(),
 						start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1092,6 +1092,11 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public User fetchByContactId(long contactId) throws SystemException {
+		return fetchByContactId(contactId, true);
+	}
+
+	public User fetchByContactId(long contactId, boolean cacheEmptyResult)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(contactId) };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_CONTACTID,
@@ -1122,8 +1127,10 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 				User user = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CONTACTID,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CONTACTID,
+							finderArgs, list);
+					}
 				}
 				else {
 					user = list.get(0);
@@ -1186,10 +1193,10 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 				List<User> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_EMAILADDRESS,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1256,10 +1263,10 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 				List<User> list = (List<User>)QueryUtil.list(q, getDialect(),
 						start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_EMAILADDRESS,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1397,6 +1404,11 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public User fetchByOpenId(String openId) throws SystemException {
+		return fetchByOpenId(openId, true);
+	}
+
+	public User fetchByOpenId(String openId, boolean cacheEmptyResult)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { openId };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_OPENID,
@@ -1434,8 +1446,10 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 				User user = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_OPENID,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_OPENID,
+							finderArgs, list);
+					}
 				}
 				else {
 					user = list.get(0);
@@ -1486,6 +1500,11 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public User fetchByPortraitId(long portraitId) throws SystemException {
+		return fetchByPortraitId(portraitId, true);
+	}
+
+	public User fetchByPortraitId(long portraitId, boolean cacheEmptyResult)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(portraitId) };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_PORTRAITID,
@@ -1516,8 +1535,10 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 				User user = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_PORTRAITID,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_PORTRAITID,
+							finderArgs, list);
+					}
 				}
 				else {
 					user = list.get(0);
@@ -1572,6 +1593,11 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 	public User fetchByC_U(long companyId, long userId)
 		throws SystemException {
+		return fetchByC_U(companyId, userId, true);
+	}
+
+	public User fetchByC_U(long companyId, long userId, boolean cacheEmptyResult)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(companyId), new Long(userId) };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_U,
@@ -1608,8 +1634,10 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 				User user = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_U,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_U,
+							finderArgs, list);
+					}
 				}
 				else {
 					user = list.get(0);
@@ -1664,6 +1692,11 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 	public User fetchByC_DU(long companyId, boolean defaultUser)
 		throws SystemException {
+		return fetchByC_DU(companyId, defaultUser, true);
+	}
+
+	public User fetchByC_DU(long companyId, boolean defaultUser,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), Boolean.valueOf(defaultUser)
 			};
@@ -1702,8 +1735,10 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 				User user = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_DU,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_DU,
+							finderArgs, list);
+					}
 				}
 				else {
 					user = list.get(0);
@@ -1758,6 +1793,11 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 	public User fetchByC_SN(long companyId, String screenName)
 		throws SystemException {
+		return fetchByC_SN(companyId, screenName, true);
+	}
+
+	public User fetchByC_SN(long companyId, String screenName,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(companyId), screenName };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_SN,
@@ -1801,8 +1841,10 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 				User user = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_SN,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_SN,
+							finderArgs, list);
+					}
 				}
 				else {
 					user = list.get(0);
@@ -1857,6 +1899,11 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 	public User fetchByC_EA(long companyId, String emailAddress)
 		throws SystemException {
+		return fetchByC_EA(companyId, emailAddress, true);
+	}
+
+	public User fetchByC_EA(long companyId, String emailAddress,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(companyId), emailAddress };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_EA,
@@ -1900,8 +1947,10 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 				User user = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_EA,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_EA,
+							finderArgs, list);
+					}
 				}
 				else {
 					user = list.get(0);
@@ -2015,9 +2064,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 							end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}
@@ -2840,10 +2889,10 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 				List<com.liferay.portal.model.Group> list = (List<com.liferay.portal.model.Group>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				groupPersistence.cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_GET_GROUPS, finderArgs,
 					list);
-
-				groupPersistence.cacheResult(list);
 
 				return list;
 			}
@@ -3170,10 +3219,10 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 				List<com.liferay.portal.model.Organization> list = (List<com.liferay.portal.model.Organization>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				organizationPersistence.cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_GET_ORGANIZATIONS,
 					finderArgs, list);
-
-				organizationPersistence.cacheResult(list);
 
 				return list;
 			}
@@ -3506,10 +3555,10 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 				List<com.liferay.portal.model.Permission> list = (List<com.liferay.portal.model.Permission>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				permissionPersistence.cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_GET_PERMISSIONS,
 					finderArgs, list);
-
-				permissionPersistence.cacheResult(list);
 
 				return list;
 			}
@@ -3845,10 +3894,10 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 				List<com.liferay.portal.model.Role> list = (List<com.liferay.portal.model.Role>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				rolePersistence.cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_GET_ROLES, finderArgs,
 					list);
-
-				rolePersistence.cacheResult(list);
 
 				return list;
 			}
@@ -4171,10 +4220,10 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 				List<com.liferay.portal.model.UserGroup> list = (List<com.liferay.portal.model.UserGroup>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				userGroupPersistence.cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_GET_USERGROUPS,
 					finderArgs, list);
-
-				userGroupPersistence.cacheResult(list);
 
 				return list;
 			}

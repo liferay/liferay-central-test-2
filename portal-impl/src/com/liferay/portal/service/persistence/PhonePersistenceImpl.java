@@ -58,8 +58,8 @@ import java.util.List;
  */
 public class PhonePersistenceImpl extends BasePersistenceImpl
 	implements PhonePersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = Phone.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = Phone.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = PhoneImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(PhoneModelImpl.ENTITY_CACHE_ENABLED,
 			PhoneModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -162,13 +162,13 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 	public void cacheResult(Phone phone) {
 		EntityCacheUtil.putResult(PhoneModelImpl.ENTITY_CACHE_ENABLED,
-			Phone.class, phone.getPrimaryKey(), phone);
+			PhoneImpl.class, phone.getPrimaryKey(), phone);
 	}
 
 	public void cacheResult(List<Phone> phones) {
 		for (Phone phone : phones) {
 			if (EntityCacheUtil.getResult(PhoneModelImpl.ENTITY_CACHE_ENABLED,
-						Phone.class, phone.getPrimaryKey(), this) == null) {
+						PhoneImpl.class, phone.getPrimaryKey(), this) == null) {
 				cacheResult(phone);
 			}
 		}
@@ -235,7 +235,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (phone.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(PhoneImpl.class,
 						phone.getPrimaryKeyObj());
 
@@ -260,7 +260,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 		PhoneModelImpl phoneModelImpl = (PhoneModelImpl)phone;
 
 		EntityCacheUtil.removeResult(PhoneModelImpl.ENTITY_CACHE_ENABLED,
-			Phone.class, phone.getPrimaryKey());
+			PhoneImpl.class, phone.getPrimaryKey());
 
 		return phone;
 	}
@@ -338,10 +338,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		PhoneModelImpl phoneModelImpl = (PhoneModelImpl)phone;
-
 		EntityCacheUtil.putResult(PhoneModelImpl.ENTITY_CACHE_ENABLED,
-			Phone.class, phone.getPrimaryKey(), phone);
+			PhoneImpl.class, phone.getPrimaryKey(), phone);
+
+		PhoneModelImpl phoneModelImpl = (PhoneModelImpl)phone;
 
 		return phone;
 	}
@@ -364,7 +364,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 	public Phone fetchByPrimaryKey(long phoneId) throws SystemException {
 		Phone result = (Phone)EntityCacheUtil.getResult(PhoneModelImpl.ENTITY_CACHE_ENABLED,
-				Phone.class, phoneId, this);
+				PhoneImpl.class, phoneId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -426,10 +426,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 				List<Phone> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -495,10 +495,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 				List<Phone> list = (List<Phone>)QueryUtil.list(q, getDialect(),
 						start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -642,10 +642,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 				List<Phone> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -711,10 +711,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 				List<Phone> list = (List<Phone>)QueryUtil.list(q, getDialect(),
 						start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -867,10 +867,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 				List<Phone> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -942,10 +942,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 				List<Phone> list = (List<Phone>)QueryUtil.list(q, getDialect(),
 						start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_C,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1118,10 +1118,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 				List<Phone> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C_C,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1200,10 +1200,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 				List<Phone> list = (List<Phone>)QueryUtil.list(q, getDialect(),
 						start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_C_C,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1398,10 +1398,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 				List<Phone> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C_C_P,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1489,10 +1489,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 				List<Phone> list = (List<Phone>)QueryUtil.list(q, getDialect(),
 						start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_C_C_P,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1738,9 +1738,9 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 							end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

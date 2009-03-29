@@ -69,8 +69,8 @@ import java.util.List;
  */
 public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 	implements TagsEntryPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = TagsEntry.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = TagsEntry.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = TagsEntryImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_VOCABULARYID = new FinderPath(TagsEntryModelImpl.ENTITY_CACHE_ENABLED,
 			TagsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -113,14 +113,14 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 	public void cacheResult(TagsEntry tagsEntry) {
 		EntityCacheUtil.putResult(TagsEntryModelImpl.ENTITY_CACHE_ENABLED,
-			TagsEntry.class, tagsEntry.getPrimaryKey(), tagsEntry);
+			TagsEntryImpl.class, tagsEntry.getPrimaryKey(), tagsEntry);
 	}
 
 	public void cacheResult(List<TagsEntry> tagsEntries) {
 		for (TagsEntry tagsEntry : tagsEntries) {
 			if (EntityCacheUtil.getResult(
 						TagsEntryModelImpl.ENTITY_CACHE_ENABLED,
-						TagsEntry.class, tagsEntry.getPrimaryKey(), this) == null) {
+						TagsEntryImpl.class, tagsEntry.getPrimaryKey(), this) == null) {
 				cacheResult(tagsEntry);
 			}
 		}
@@ -199,7 +199,7 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (tagsEntry.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(TagsEntryImpl.class,
 						tagsEntry.getPrimaryKeyObj());
 
@@ -224,7 +224,7 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 		TagsEntryModelImpl tagsEntryModelImpl = (TagsEntryModelImpl)tagsEntry;
 
 		EntityCacheUtil.removeResult(TagsEntryModelImpl.ENTITY_CACHE_ENABLED,
-			TagsEntry.class, tagsEntry.getPrimaryKey());
+			TagsEntryImpl.class, tagsEntry.getPrimaryKey());
 
 		return tagsEntry;
 	}
@@ -304,10 +304,10 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		TagsEntryModelImpl tagsEntryModelImpl = (TagsEntryModelImpl)tagsEntry;
-
 		EntityCacheUtil.putResult(TagsEntryModelImpl.ENTITY_CACHE_ENABLED,
-			TagsEntry.class, tagsEntry.getPrimaryKey(), tagsEntry);
+			TagsEntryImpl.class, tagsEntry.getPrimaryKey(), tagsEntry);
+
+		TagsEntryModelImpl tagsEntryModelImpl = (TagsEntryModelImpl)tagsEntry;
 
 		return tagsEntry;
 	}
@@ -331,7 +331,7 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 	public TagsEntry fetchByPrimaryKey(long entryId) throws SystemException {
 		TagsEntry result = (TagsEntry)EntityCacheUtil.getResult(TagsEntryModelImpl.ENTITY_CACHE_ENABLED,
-				TagsEntry.class, entryId, this);
+				TagsEntryImpl.class, entryId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -394,10 +394,10 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 				List<TagsEntry> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_VOCABULARYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -464,10 +464,10 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 				List<TagsEntry> list = (List<TagsEntry>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_VOCABULARYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -624,10 +624,10 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 				List<TagsEntry> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_P_V, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -700,10 +700,10 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 				List<TagsEntry> list = (List<TagsEntry>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_P_V,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -924,9 +924,9 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}
@@ -1187,10 +1187,10 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 				List<com.liferay.portlet.tags.model.TagsAsset> list = (List<com.liferay.portlet.tags.model.TagsAsset>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				tagsAssetPersistence.cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_GET_TAGSASSETS,
 					finderArgs, list);
-
-				tagsAssetPersistence.cacheResult(list);
 
 				return list;
 			}

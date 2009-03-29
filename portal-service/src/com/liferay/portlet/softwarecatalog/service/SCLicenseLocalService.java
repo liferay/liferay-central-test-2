@@ -24,6 +24,7 @@ package com.liferay.portlet.softwarecatalog.service;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.annotation.Isolation;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
@@ -51,7 +52,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.portlet.softwarecatalog.service.SCLicenseLocalServiceUtil
  *
  */
-@Transactional(rollbackFor =  {
+@Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor =  {
 	PortalException.class, SystemException.class})
 public interface SCLicenseLocalService {
 	public com.liferay.portlet.softwarecatalog.model.SCLicense addSCLicense(

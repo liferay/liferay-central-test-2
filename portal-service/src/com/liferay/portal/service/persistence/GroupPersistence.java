@@ -86,6 +86,9 @@ public interface GroupPersistence extends BasePersistence {
 	public com.liferay.portal.model.Group fetchByLiveGroupId(long liveGroupId)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Group fetchByLiveGroupId(long liveGroupId,
+		boolean cacheEmptyResult) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Group findByC_N(long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.NoSuchGroupException,
@@ -94,6 +97,10 @@ public interface GroupPersistence extends BasePersistence {
 	public com.liferay.portal.model.Group fetchByC_N(long companyId,
 		java.lang.String name) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Group fetchByC_N(long companyId,
+		java.lang.String name, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Group findByC_F(long companyId,
 		java.lang.String friendlyURL)
 		throws com.liferay.portal.NoSuchGroupException,
@@ -101,6 +108,10 @@ public interface GroupPersistence extends BasePersistence {
 
 	public com.liferay.portal.model.Group fetchByC_F(long companyId,
 		java.lang.String friendlyURL) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Group fetchByC_F(long companyId,
+		java.lang.String friendlyURL, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Group> findByT_A(int type,
 		boolean active) throws com.liferay.portal.SystemException;
@@ -139,6 +150,10 @@ public interface GroupPersistence extends BasePersistence {
 		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Group fetchByC_C_C(long companyId,
+		long classNameId, long classPK, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Group findByC_L_N(long companyId,
 		long liveGroupId, java.lang.String name)
 		throws com.liferay.portal.NoSuchGroupException,
@@ -146,6 +161,10 @@ public interface GroupPersistence extends BasePersistence {
 
 	public com.liferay.portal.model.Group fetchByC_L_N(long companyId,
 		long liveGroupId, java.lang.String name)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Group fetchByC_L_N(long companyId,
+		long liveGroupId, java.lang.String name, boolean cacheEmptyResult)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<Object> findWithDynamicQuery(

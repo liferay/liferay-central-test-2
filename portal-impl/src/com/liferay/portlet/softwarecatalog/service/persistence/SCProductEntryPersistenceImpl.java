@@ -69,8 +69,8 @@ import java.util.List;
  */
 public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 	implements SCProductEntryPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = SCProductEntry.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = SCProductEntry.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = SCProductEntryImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
 			SCProductEntryModelImpl.FINDER_CACHE_ENABLED,
@@ -139,23 +139,24 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
 	public void cacheResult(SCProductEntry scProductEntry) {
+		EntityCacheUtil.putResult(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SCProductEntryImpl.class, scProductEntry.getPrimaryKey(),
+			scProductEntry);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_RG_RA,
 			new Object[] {
 				scProductEntry.getRepoGroupId(),
 				
 			scProductEntry.getRepoArtifactId()
 			}, scProductEntry);
-
-		EntityCacheUtil.putResult(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
-			SCProductEntry.class, scProductEntry.getPrimaryKey(), scProductEntry);
 	}
 
 	public void cacheResult(List<SCProductEntry> scProductEntries) {
 		for (SCProductEntry scProductEntry : scProductEntries) {
 			if (EntityCacheUtil.getResult(
 						SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
-						SCProductEntry.class, scProductEntry.getPrimaryKey(),
-						this) == null) {
+						SCProductEntryImpl.class,
+						scProductEntry.getPrimaryKey(), this) == null) {
 				cacheResult(scProductEntry);
 			}
 		}
@@ -236,7 +237,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (scProductEntry.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(SCProductEntryImpl.class,
 						scProductEntry.getPrimaryKeyObj());
 
@@ -268,7 +269,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
-			SCProductEntry.class, scProductEntry.getPrimaryKey());
+			SCProductEntryImpl.class, scProductEntry.getPrimaryKey());
 
 		return scProductEntry;
 	}
@@ -349,6 +350,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SCProductEntryImpl.class, scProductEntry.getPrimaryKey(),
+			scProductEntry);
+
 		SCProductEntryModelImpl scProductEntryModelImpl = (SCProductEntryModelImpl)scProductEntry;
 
 		if (!isNew &&
@@ -377,9 +382,6 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 				}, scProductEntry);
 		}
 
-		EntityCacheUtil.putResult(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
-			SCProductEntry.class, scProductEntry.getPrimaryKey(), scProductEntry);
-
 		return scProductEntry;
 	}
 
@@ -404,7 +406,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 	public SCProductEntry fetchByPrimaryKey(long productEntryId)
 		throws SystemException {
 		SCProductEntry result = (SCProductEntry)EntityCacheUtil.getResult(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
-				SCProductEntry.class, productEntryId, this);
+				SCProductEntryImpl.class, productEntryId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -468,10 +470,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 				List<SCProductEntry> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -539,10 +541,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 				List<SCProductEntry> list = (List<SCProductEntry>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -694,10 +696,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 				List<SCProductEntry> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -765,10 +767,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 				List<SCProductEntry> list = (List<SCProductEntry>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -928,10 +930,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 				List<SCProductEntry> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_U, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1005,10 +1007,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 				List<SCProductEntry> list = (List<SCProductEntry>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_U,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1167,6 +1169,12 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 	public SCProductEntry fetchByRG_RA(String repoGroupId, String repoArtifactId)
 		throws SystemException {
+		return fetchByRG_RA(repoGroupId, repoArtifactId, true);
+	}
+
+	public SCProductEntry fetchByRG_RA(String repoGroupId,
+		String repoArtifactId, boolean cacheEmptyResult)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { repoGroupId, repoArtifactId };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_RG_RA,
@@ -1223,8 +1231,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 				SCProductEntry scProductEntry = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_RG_RA,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_RG_RA,
+							finderArgs, list);
+					}
 				}
 				else {
 					scProductEntry = list.get(0);
@@ -1347,9 +1357,9 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}
@@ -1760,10 +1770,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 				List<com.liferay.portlet.softwarecatalog.model.SCLicense> list = (List<com.liferay.portlet.softwarecatalog.model.SCLicense>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				scLicensePersistence.cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_GET_SCLICENSES,
 					finderArgs, list);
-
-				scLicensePersistence.cacheResult(list);
 
 				return list;
 			}

@@ -60,8 +60,8 @@ import java.util.List;
  */
 public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 	implements RatingsEntryPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = RatingsEntry.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = RatingsEntry.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = RatingsEntryImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_C_C = new FinderPath(RatingsEntryModelImpl.ENTITY_CACHE_ENABLED,
 			RatingsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -100,22 +100,23 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 			"countAll", new String[0]);
 
 	public void cacheResult(RatingsEntry ratingsEntry) {
+		EntityCacheUtil.putResult(RatingsEntryModelImpl.ENTITY_CACHE_ENABLED,
+			RatingsEntryImpl.class, ratingsEntry.getPrimaryKey(), ratingsEntry);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_C_C,
 			new Object[] {
 				new Long(ratingsEntry.getUserId()),
 				new Long(ratingsEntry.getClassNameId()),
 				new Long(ratingsEntry.getClassPK())
 			}, ratingsEntry);
-
-		EntityCacheUtil.putResult(RatingsEntryModelImpl.ENTITY_CACHE_ENABLED,
-			RatingsEntry.class, ratingsEntry.getPrimaryKey(), ratingsEntry);
 	}
 
 	public void cacheResult(List<RatingsEntry> ratingsEntries) {
 		for (RatingsEntry ratingsEntry : ratingsEntries) {
 			if (EntityCacheUtil.getResult(
 						RatingsEntryModelImpl.ENTITY_CACHE_ENABLED,
-						RatingsEntry.class, ratingsEntry.getPrimaryKey(), this) == null) {
+						RatingsEntryImpl.class, ratingsEntry.getPrimaryKey(),
+						this) == null) {
 				cacheResult(ratingsEntry);
 			}
 		}
@@ -185,7 +186,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (ratingsEntry.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(RatingsEntryImpl.class,
 						ratingsEntry.getPrimaryKeyObj());
 
@@ -217,7 +218,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(RatingsEntryModelImpl.ENTITY_CACHE_ENABLED,
-			RatingsEntry.class, ratingsEntry.getPrimaryKey());
+			RatingsEntryImpl.class, ratingsEntry.getPrimaryKey());
 
 		return ratingsEntry;
 	}
@@ -298,6 +299,9 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(RatingsEntryModelImpl.ENTITY_CACHE_ENABLED,
+			RatingsEntryImpl.class, ratingsEntry.getPrimaryKey(), ratingsEntry);
+
 		RatingsEntryModelImpl ratingsEntryModelImpl = (RatingsEntryModelImpl)ratingsEntry;
 
 		if (!isNew &&
@@ -324,9 +328,6 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 				}, ratingsEntry);
 		}
 
-		EntityCacheUtil.putResult(RatingsEntryModelImpl.ENTITY_CACHE_ENABLED,
-			RatingsEntry.class, ratingsEntry.getPrimaryKey(), ratingsEntry);
-
 		return ratingsEntry;
 	}
 
@@ -350,7 +351,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 	public RatingsEntry fetchByPrimaryKey(long entryId)
 		throws SystemException {
 		RatingsEntry result = (RatingsEntry)EntityCacheUtil.getResult(RatingsEntryModelImpl.ENTITY_CACHE_ENABLED,
-				RatingsEntry.class, entryId, this);
+				RatingsEntryImpl.class, entryId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -417,10 +418,10 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 
 				List<RatingsEntry> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -487,10 +488,10 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 				List<RatingsEntry> list = (List<RatingsEntry>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_C,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -643,6 +644,11 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 
 	public RatingsEntry fetchByU_C_C(long userId, long classNameId, long classPK)
 		throws SystemException {
+		return fetchByU_C_C(userId, classNameId, classPK, true);
+	}
+
+	public RatingsEntry fetchByU_C_C(long userId, long classNameId,
+		long classPK, boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(userId), new Long(classNameId), new Long(classPK)
 			};
@@ -688,8 +694,10 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 				RatingsEntry ratingsEntry = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_C_C,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_C_C,
+							finderArgs, list);
+					}
 				}
 				else {
 					ratingsEntry = list.get(0);
@@ -805,9 +813,9 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

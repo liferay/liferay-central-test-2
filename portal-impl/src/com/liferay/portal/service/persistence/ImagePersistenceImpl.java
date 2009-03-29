@@ -58,8 +58,8 @@ import java.util.List;
  */
 public class ImagePersistenceImpl extends BasePersistenceImpl
 	implements ImagePersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = Image.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = Image.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = ImageImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_SIZE = new FinderPath(ImageModelImpl.ENTITY_CACHE_ENABLED,
 			ImageModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -85,13 +85,13 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 
 	public void cacheResult(Image image) {
 		EntityCacheUtil.putResult(ImageModelImpl.ENTITY_CACHE_ENABLED,
-			Image.class, image.getPrimaryKey(), image);
+			ImageImpl.class, image.getPrimaryKey(), image);
 	}
 
 	public void cacheResult(List<Image> images) {
 		for (Image image : images) {
 			if (EntityCacheUtil.getResult(ImageModelImpl.ENTITY_CACHE_ENABLED,
-						Image.class, image.getPrimaryKey(), this) == null) {
+						ImageImpl.class, image.getPrimaryKey(), this) == null) {
 				cacheResult(image);
 			}
 		}
@@ -158,7 +158,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (image.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(ImageImpl.class,
 						image.getPrimaryKeyObj());
 
@@ -183,7 +183,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 		ImageModelImpl imageModelImpl = (ImageModelImpl)image;
 
 		EntityCacheUtil.removeResult(ImageModelImpl.ENTITY_CACHE_ENABLED,
-			Image.class, image.getPrimaryKey());
+			ImageImpl.class, image.getPrimaryKey());
 
 		return image;
 	}
@@ -261,10 +261,10 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		ImageModelImpl imageModelImpl = (ImageModelImpl)image;
-
 		EntityCacheUtil.putResult(ImageModelImpl.ENTITY_CACHE_ENABLED,
-			Image.class, image.getPrimaryKey(), image);
+			ImageImpl.class, image.getPrimaryKey(), image);
+
+		ImageModelImpl imageModelImpl = (ImageModelImpl)image;
 
 		return image;
 	}
@@ -287,7 +287,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 
 	public Image fetchByPrimaryKey(long imageId) throws SystemException {
 		Image result = (Image)EntityCacheUtil.getResult(ImageModelImpl.ENTITY_CACHE_ENABLED,
-				Image.class, imageId, this);
+				ImageImpl.class, imageId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -348,10 +348,10 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 
 				List<Image> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_SIZE, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -417,10 +417,10 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 				List<Image> list = (List<Image>)QueryUtil.list(q, getDialect(),
 						start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_SIZE,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -625,9 +625,9 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 							end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

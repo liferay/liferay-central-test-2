@@ -62,8 +62,8 @@ import java.util.List;
  */
 public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 	implements MBMailingListPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = MBMailingList.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = MBMailingList.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = MBMailingListImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
 			MBMailingListModelImpl.FINDER_CACHE_ENABLED,
@@ -123,6 +123,10 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
 	public void cacheResult(MBMailingList mbMailingList) {
+		EntityCacheUtil.putResult(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
+			MBMailingListImpl.class, mbMailingList.getPrimaryKey(),
+			mbMailingList);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				mbMailingList.getUuid(), new Long(mbMailingList.getGroupId())
@@ -131,16 +135,14 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CATEGORYID,
 			new Object[] { new Long(mbMailingList.getCategoryId()) },
 			mbMailingList);
-
-		EntityCacheUtil.putResult(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
-			MBMailingList.class, mbMailingList.getPrimaryKey(), mbMailingList);
 	}
 
 	public void cacheResult(List<MBMailingList> mbMailingLists) {
 		for (MBMailingList mbMailingList : mbMailingLists) {
 			if (EntityCacheUtil.getResult(
 						MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
-						MBMailingList.class, mbMailingList.getPrimaryKey(), this) == null) {
+						MBMailingListImpl.class, mbMailingList.getPrimaryKey(),
+						this) == null) {
 				cacheResult(mbMailingList);
 			}
 		}
@@ -215,7 +217,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (mbMailingList.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(MBMailingListImpl.class,
 						mbMailingList.getPrimaryKeyObj());
 
@@ -251,7 +253,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
-			MBMailingList.class, mbMailingList.getPrimaryKey());
+			MBMailingListImpl.class, mbMailingList.getPrimaryKey());
 
 		return mbMailingList;
 	}
@@ -338,6 +340,10 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
+			MBMailingListImpl.class, mbMailingList.getPrimaryKey(),
+			mbMailingList);
+
 		MBMailingListModelImpl mbMailingListModelImpl = (MBMailingListModelImpl)mbMailingList;
 
 		if (!isNew &&
@@ -377,9 +383,6 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 				mbMailingList);
 		}
 
-		EntityCacheUtil.putResult(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
-			MBMailingList.class, mbMailingList.getPrimaryKey(), mbMailingList);
-
 		return mbMailingList;
 	}
 
@@ -404,7 +407,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 	public MBMailingList fetchByPrimaryKey(long mailingListId)
 		throws SystemException {
 		MBMailingList result = (MBMailingList)EntityCacheUtil.getResult(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
-				MBMailingList.class, mailingListId, this);
+				MBMailingListImpl.class, mailingListId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -470,10 +473,10 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 				List<MBMailingList> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -541,10 +544,10 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 				List<MBMailingList> list = (List<MBMailingList>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -688,6 +691,11 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 	public MBMailingList fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
+		return fetchByUUID_G(uuid, groupId, true);
+	}
+
+	public MBMailingList fetchByUUID_G(String uuid, long groupId,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
@@ -732,8 +740,10 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 				MBMailingList mbMailingList = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+							finderArgs, list);
+					}
 				}
 				else {
 					mbMailingList = list.get(0);
@@ -785,6 +795,11 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 	public MBMailingList fetchByCategoryId(long categoryId)
 		throws SystemException {
+		return fetchByCategoryId(categoryId, true);
+	}
+
+	public MBMailingList fetchByCategoryId(long categoryId,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(categoryId) };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_CATEGORYID,
@@ -816,8 +831,10 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 				MBMailingList mbMailingList = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CATEGORYID,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CATEGORYID,
+							finderArgs, list);
+					}
 				}
 				else {
 					mbMailingList = list.get(0);
@@ -874,10 +891,10 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 				List<MBMailingList> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ACTIVE,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -938,10 +955,10 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 				List<MBMailingList> list = (List<MBMailingList>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_ACTIVE,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1140,9 +1157,9 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

@@ -241,6 +241,13 @@ public class MBMessageFlagUtil {
 		return getPersistence().fetchByU_M_F(userId, messageId, flag);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBMessageFlag fetchByU_M_F(
+		long userId, long messageId, int flag, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByU_M_F(userId, messageId, flag, cacheEmptyResult);
+	}
+
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

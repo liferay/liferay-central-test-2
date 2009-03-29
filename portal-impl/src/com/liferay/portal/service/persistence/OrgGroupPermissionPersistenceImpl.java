@@ -58,8 +58,8 @@ import java.util.List;
  */
 public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 	implements OrgGroupPermissionPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = OrgGroupPermission.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = OrgGroupPermission.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = OrgGroupPermissionImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(OrgGroupPermissionModelImpl.ENTITY_CACHE_ENABLED,
 			OrgGroupPermissionModelImpl.FINDER_CACHE_ENABLED,
@@ -104,7 +104,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 
 	public void cacheResult(OrgGroupPermission orgGroupPermission) {
 		EntityCacheUtil.putResult(OrgGroupPermissionModelImpl.ENTITY_CACHE_ENABLED,
-			OrgGroupPermission.class, orgGroupPermission.getPrimaryKey(),
+			OrgGroupPermissionImpl.class, orgGroupPermission.getPrimaryKey(),
 			orgGroupPermission);
 	}
 
@@ -112,7 +112,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 		for (OrgGroupPermission orgGroupPermission : orgGroupPermissions) {
 			if (EntityCacheUtil.getResult(
 						OrgGroupPermissionModelImpl.ENTITY_CACHE_ENABLED,
-						OrgGroupPermission.class,
+						OrgGroupPermissionImpl.class,
 						orgGroupPermission.getPrimaryKey(), this) == null) {
 				cacheResult(orgGroupPermission);
 			}
@@ -185,7 +185,8 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (orgGroupPermission.isCachedModel() ||
+					BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(OrgGroupPermissionImpl.class,
 						orgGroupPermission.getPrimaryKeyObj());
 
@@ -210,7 +211,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 		OrgGroupPermissionModelImpl orgGroupPermissionModelImpl = (OrgGroupPermissionModelImpl)orgGroupPermission;
 
 		EntityCacheUtil.removeResult(OrgGroupPermissionModelImpl.ENTITY_CACHE_ENABLED,
-			OrgGroupPermission.class, orgGroupPermission.getPrimaryKey());
+			OrgGroupPermissionImpl.class, orgGroupPermission.getPrimaryKey());
 
 		return orgGroupPermission;
 	}
@@ -291,11 +292,11 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		OrgGroupPermissionModelImpl orgGroupPermissionModelImpl = (OrgGroupPermissionModelImpl)orgGroupPermission;
-
 		EntityCacheUtil.putResult(OrgGroupPermissionModelImpl.ENTITY_CACHE_ENABLED,
-			OrgGroupPermission.class, orgGroupPermission.getPrimaryKey(),
+			OrgGroupPermissionImpl.class, orgGroupPermission.getPrimaryKey(),
 			orgGroupPermission);
+
+		OrgGroupPermissionModelImpl orgGroupPermissionModelImpl = (OrgGroupPermissionModelImpl)orgGroupPermission;
 
 		return orgGroupPermission;
 	}
@@ -322,7 +323,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 	public OrgGroupPermission fetchByPrimaryKey(
 		OrgGroupPermissionPK orgGroupPermissionPK) throws SystemException {
 		OrgGroupPermission result = (OrgGroupPermission)EntityCacheUtil.getResult(OrgGroupPermissionModelImpl.ENTITY_CACHE_ENABLED,
-				OrgGroupPermission.class, orgGroupPermissionPK, this);
+				OrgGroupPermissionImpl.class, orgGroupPermissionPK, this);
 
 		if (result == null) {
 			Session session = null;
@@ -381,10 +382,10 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 
 				List<OrgGroupPermission> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -445,10 +446,10 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 				List<OrgGroupPermission> list = (List<OrgGroupPermission>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -591,10 +592,10 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 
 				List<OrgGroupPermission> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_PERMISSIONID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -655,10 +656,10 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 				List<OrgGroupPermission> list = (List<OrgGroupPermission>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_PERMISSIONID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -861,9 +862,9 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

@@ -58,8 +58,8 @@ import java.util.List;
  */
 public class ContactPersistenceImpl extends BasePersistenceImpl
 	implements ContactPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = Contact.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = Contact.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = ContactImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(ContactModelImpl.ENTITY_CACHE_ENABLED,
 			ContactModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -85,14 +85,14 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 
 	public void cacheResult(Contact contact) {
 		EntityCacheUtil.putResult(ContactModelImpl.ENTITY_CACHE_ENABLED,
-			Contact.class, contact.getPrimaryKey(), contact);
+			ContactImpl.class, contact.getPrimaryKey(), contact);
 	}
 
 	public void cacheResult(List<Contact> contacts) {
 		for (Contact contact : contacts) {
 			if (EntityCacheUtil.getResult(
-						ContactModelImpl.ENTITY_CACHE_ENABLED, Contact.class,
-						contact.getPrimaryKey(), this) == null) {
+						ContactModelImpl.ENTITY_CACHE_ENABLED,
+						ContactImpl.class, contact.getPrimaryKey(), this) == null) {
 				cacheResult(contact);
 			}
 		}
@@ -160,7 +160,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (contact.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(ContactImpl.class,
 						contact.getPrimaryKeyObj());
 
@@ -185,7 +185,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 		ContactModelImpl contactModelImpl = (ContactModelImpl)contact;
 
 		EntityCacheUtil.removeResult(ContactModelImpl.ENTITY_CACHE_ENABLED,
-			Contact.class, contact.getPrimaryKey());
+			ContactImpl.class, contact.getPrimaryKey());
 
 		return contact;
 	}
@@ -264,10 +264,10 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		ContactModelImpl contactModelImpl = (ContactModelImpl)contact;
-
 		EntityCacheUtil.putResult(ContactModelImpl.ENTITY_CACHE_ENABLED,
-			Contact.class, contact.getPrimaryKey(), contact);
+			ContactImpl.class, contact.getPrimaryKey(), contact);
+
+		ContactModelImpl contactModelImpl = (ContactModelImpl)contact;
 
 		return contact;
 	}
@@ -291,7 +291,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 
 	public Contact fetchByPrimaryKey(long contactId) throws SystemException {
 		Contact result = (Contact)EntityCacheUtil.getResult(ContactModelImpl.ENTITY_CACHE_ENABLED,
-				Contact.class, contactId, this);
+				ContactImpl.class, contactId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -349,10 +349,10 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 
 				List<Contact> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -412,10 +412,10 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 				List<Contact> list = (List<Contact>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -609,9 +609,9 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

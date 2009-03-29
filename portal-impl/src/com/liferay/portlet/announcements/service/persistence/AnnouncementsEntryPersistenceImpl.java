@@ -62,8 +62,8 @@ import java.util.List;
  */
 public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 	implements AnnouncementsEntryPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = AnnouncementsEntry.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = AnnouncementsEntry.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = AnnouncementsEntryImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(AnnouncementsEntryModelImpl.ENTITY_CACHE_ENABLED,
 			AnnouncementsEntryModelImpl.FINDER_CACHE_ENABLED,
@@ -149,7 +149,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 
 	public void cacheResult(AnnouncementsEntry announcementsEntry) {
 		EntityCacheUtil.putResult(AnnouncementsEntryModelImpl.ENTITY_CACHE_ENABLED,
-			AnnouncementsEntry.class, announcementsEntry.getPrimaryKey(),
+			AnnouncementsEntryImpl.class, announcementsEntry.getPrimaryKey(),
 			announcementsEntry);
 	}
 
@@ -157,7 +157,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 		for (AnnouncementsEntry announcementsEntry : announcementsEntries) {
 			if (EntityCacheUtil.getResult(
 						AnnouncementsEntryModelImpl.ENTITY_CACHE_ENABLED,
-						AnnouncementsEntry.class,
+						AnnouncementsEntryImpl.class,
 						announcementsEntry.getPrimaryKey(), this) == null) {
 				cacheResult(announcementsEntry);
 			}
@@ -234,7 +234,8 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (announcementsEntry.isCachedModel() ||
+					BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(AnnouncementsEntryImpl.class,
 						announcementsEntry.getPrimaryKeyObj());
 
@@ -259,7 +260,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 		AnnouncementsEntryModelImpl announcementsEntryModelImpl = (AnnouncementsEntryModelImpl)announcementsEntry;
 
 		EntityCacheUtil.removeResult(AnnouncementsEntryModelImpl.ENTITY_CACHE_ENABLED,
-			AnnouncementsEntry.class, announcementsEntry.getPrimaryKey());
+			AnnouncementsEntryImpl.class, announcementsEntry.getPrimaryKey());
 
 		return announcementsEntry;
 	}
@@ -346,11 +347,11 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		AnnouncementsEntryModelImpl announcementsEntryModelImpl = (AnnouncementsEntryModelImpl)announcementsEntry;
-
 		EntityCacheUtil.putResult(AnnouncementsEntryModelImpl.ENTITY_CACHE_ENABLED,
-			AnnouncementsEntry.class, announcementsEntry.getPrimaryKey(),
+			AnnouncementsEntryImpl.class, announcementsEntry.getPrimaryKey(),
 			announcementsEntry);
+
+		AnnouncementsEntryModelImpl announcementsEntryModelImpl = (AnnouncementsEntryModelImpl)announcementsEntry;
 
 		return announcementsEntry;
 	}
@@ -375,7 +376,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 	public AnnouncementsEntry fetchByPrimaryKey(long entryId)
 		throws SystemException {
 		AnnouncementsEntry result = (AnnouncementsEntry)EntityCacheUtil.getResult(AnnouncementsEntryModelImpl.ENTITY_CACHE_ENABLED,
-				AnnouncementsEntry.class, entryId, this);
+				AnnouncementsEntryImpl.class, entryId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -446,10 +447,10 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 
 				List<AnnouncementsEntry> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -524,10 +525,10 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 				List<AnnouncementsEntry> list = (List<AnnouncementsEntry>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -685,10 +686,10 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 
 				List<AnnouncementsEntry> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -756,10 +757,10 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 				List<AnnouncementsEntry> list = (List<AnnouncementsEntry>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -919,10 +920,10 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 
 				List<AnnouncementsEntry> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -996,10 +997,10 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 				List<AnnouncementsEntry> list = (List<AnnouncementsEntry>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_C,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1178,10 +1179,10 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 
 				List<AnnouncementsEntry> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C_A,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1262,10 +1263,10 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 				List<AnnouncementsEntry> list = (List<AnnouncementsEntry>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_C_A,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1505,9 +1506,9 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

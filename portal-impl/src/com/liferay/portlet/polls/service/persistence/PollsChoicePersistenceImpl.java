@@ -62,8 +62,8 @@ import java.util.List;
  */
 public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 	implements PollsChoicePersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = PollsChoice.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = PollsChoice.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = PollsChoiceImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(PollsChoiceModelImpl.ENTITY_CACHE_ENABLED,
 			PollsChoiceModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -111,22 +111,22 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 			"countAll", new String[0]);
 
 	public void cacheResult(PollsChoice pollsChoice) {
+		EntityCacheUtil.putResult(PollsChoiceModelImpl.ENTITY_CACHE_ENABLED,
+			PollsChoiceImpl.class, pollsChoice.getPrimaryKey(), pollsChoice);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_Q_N,
 			new Object[] {
 				new Long(pollsChoice.getQuestionId()),
 				
 			pollsChoice.getName()
 			}, pollsChoice);
-
-		EntityCacheUtil.putResult(PollsChoiceModelImpl.ENTITY_CACHE_ENABLED,
-			PollsChoice.class, pollsChoice.getPrimaryKey(), pollsChoice);
 	}
 
 	public void cacheResult(List<PollsChoice> pollsChoices) {
 		for (PollsChoice pollsChoice : pollsChoices) {
 			if (EntityCacheUtil.getResult(
 						PollsChoiceModelImpl.ENTITY_CACHE_ENABLED,
-						PollsChoice.class, pollsChoice.getPrimaryKey(), this) == null) {
+						PollsChoiceImpl.class, pollsChoice.getPrimaryKey(), this) == null) {
 				cacheResult(pollsChoice);
 			}
 		}
@@ -200,7 +200,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (pollsChoice.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(PollsChoiceImpl.class,
 						pollsChoice.getPrimaryKeyObj());
 
@@ -232,7 +232,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(PollsChoiceModelImpl.ENTITY_CACHE_ENABLED,
-			PollsChoice.class, pollsChoice.getPrimaryKey());
+			PollsChoiceImpl.class, pollsChoice.getPrimaryKey());
 
 		return pollsChoice;
 	}
@@ -319,6 +319,9 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(PollsChoiceModelImpl.ENTITY_CACHE_ENABLED,
+			PollsChoiceImpl.class, pollsChoice.getPrimaryKey(), pollsChoice);
+
 		PollsChoiceModelImpl pollsChoiceModelImpl = (PollsChoiceModelImpl)pollsChoice;
 
 		if (!isNew &&
@@ -345,9 +348,6 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 				}, pollsChoice);
 		}
 
-		EntityCacheUtil.putResult(PollsChoiceModelImpl.ENTITY_CACHE_ENABLED,
-			PollsChoice.class, pollsChoice.getPrimaryKey(), pollsChoice);
-
 		return pollsChoice;
 	}
 
@@ -371,7 +371,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 	public PollsChoice fetchByPrimaryKey(long choiceId)
 		throws SystemException {
 		PollsChoice result = (PollsChoice)EntityCacheUtil.getResult(PollsChoiceModelImpl.ENTITY_CACHE_ENABLED,
-				PollsChoice.class, choiceId, this);
+				PollsChoiceImpl.class, choiceId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -441,10 +441,10 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 
 				List<PollsChoice> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -519,10 +519,10 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 				List<PollsChoice> list = (List<PollsChoice>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -679,10 +679,10 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 
 				List<PollsChoice> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_QUESTIONID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -750,10 +750,10 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 				List<PollsChoice> list = (List<PollsChoice>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_QUESTIONID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -898,6 +898,11 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 
 	public PollsChoice fetchByQ_N(long questionId, String name)
 		throws SystemException {
+		return fetchByQ_N(questionId, name, true);
+	}
+
+	public PollsChoice fetchByQ_N(long questionId, String name,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(questionId), name };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_Q_N,
@@ -947,8 +952,10 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 				PollsChoice pollsChoice = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_Q_N,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_Q_N,
+							finderArgs, list);
+					}
 				}
 				else {
 					pollsChoice = list.get(0);
@@ -1071,9 +1078,9 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

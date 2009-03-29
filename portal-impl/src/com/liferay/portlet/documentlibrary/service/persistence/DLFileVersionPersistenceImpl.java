@@ -60,8 +60,8 @@ import java.util.List;
  */
 public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 	implements DLFileVersionPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = DLFileVersion.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = DLFileVersion.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = DLFileVersionImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_F_N = new FinderPath(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileVersionModelImpl.FINDER_CACHE_ENABLED,
@@ -102,22 +102,24 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
 	public void cacheResult(DLFileVersion dlFileVersion) {
+		EntityCacheUtil.putResult(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileVersionImpl.class, dlFileVersion.getPrimaryKey(),
+			dlFileVersion);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_F_N_V,
 			new Object[] {
 				new Long(dlFileVersion.getFolderId()),
 				
 			dlFileVersion.getName(), new Double(dlFileVersion.getVersion())
 			}, dlFileVersion);
-
-		EntityCacheUtil.putResult(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
-			DLFileVersion.class, dlFileVersion.getPrimaryKey(), dlFileVersion);
 	}
 
 	public void cacheResult(List<DLFileVersion> dlFileVersions) {
 		for (DLFileVersion dlFileVersion : dlFileVersions) {
 			if (EntityCacheUtil.getResult(
 						DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
-						DLFileVersion.class, dlFileVersion.getPrimaryKey(), this) == null) {
+						DLFileVersionImpl.class, dlFileVersion.getPrimaryKey(),
+						this) == null) {
 				cacheResult(dlFileVersion);
 			}
 		}
@@ -188,7 +190,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (dlFileVersion.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(DLFileVersionImpl.class,
 						dlFileVersion.getPrimaryKeyObj());
 
@@ -221,7 +223,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
-			DLFileVersion.class, dlFileVersion.getPrimaryKey());
+			DLFileVersionImpl.class, dlFileVersion.getPrimaryKey());
 
 		return dlFileVersion;
 	}
@@ -302,6 +304,10 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileVersionImpl.class, dlFileVersion.getPrimaryKey(),
+			dlFileVersion);
+
 		DLFileVersionModelImpl dlFileVersionModelImpl = (DLFileVersionModelImpl)dlFileVersion;
 
 		if (!isNew &&
@@ -331,9 +337,6 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 				}, dlFileVersion);
 		}
 
-		EntityCacheUtil.putResult(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
-			DLFileVersion.class, dlFileVersion.getPrimaryKey(), dlFileVersion);
-
 		return dlFileVersion;
 	}
 
@@ -358,7 +361,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 	public DLFileVersion fetchByPrimaryKey(long fileVersionId)
 		throws SystemException {
 		DLFileVersion result = (DLFileVersion)EntityCacheUtil.getResult(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
-				DLFileVersion.class, fileVersionId, this);
+				DLFileVersionImpl.class, fileVersionId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -436,10 +439,10 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 				List<DLFileVersion> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_F_N, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -523,10 +526,10 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 				List<DLFileVersion> list = (List<DLFileVersion>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_F_N,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -696,6 +699,11 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 	public DLFileVersion fetchByF_N_V(long folderId, String name, double version)
 		throws SystemException {
+		return fetchByF_N_V(folderId, name, version, true);
+	}
+
+	public DLFileVersion fetchByF_N_V(long folderId, String name,
+		double version, boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(folderId),
 				
@@ -756,8 +764,10 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 				DLFileVersion dlFileVersion = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_F_N_V,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_F_N_V,
+							finderArgs, list);
+					}
 				}
 				else {
 					dlFileVersion = list.get(0);
@@ -881,9 +891,9 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

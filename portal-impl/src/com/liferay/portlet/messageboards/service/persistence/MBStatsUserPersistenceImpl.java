@@ -60,8 +60,8 @@ import java.util.List;
  */
 public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 	implements MBStatsUserPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = MBStatsUser.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = MBStatsUser.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = MBStatsUserImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(MBStatsUserModelImpl.ENTITY_CACHE_ENABLED,
 			MBStatsUserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -126,21 +126,21 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 			"countAll", new String[0]);
 
 	public void cacheResult(MBStatsUser mbStatsUser) {
+		EntityCacheUtil.putResult(MBStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+			MBStatsUserImpl.class, mbStatsUser.getPrimaryKey(), mbStatsUser);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
 			new Object[] {
 				new Long(mbStatsUser.getGroupId()),
 				new Long(mbStatsUser.getUserId())
 			}, mbStatsUser);
-
-		EntityCacheUtil.putResult(MBStatsUserModelImpl.ENTITY_CACHE_ENABLED,
-			MBStatsUser.class, mbStatsUser.getPrimaryKey(), mbStatsUser);
 	}
 
 	public void cacheResult(List<MBStatsUser> mbStatsUsers) {
 		for (MBStatsUser mbStatsUser : mbStatsUsers) {
 			if (EntityCacheUtil.getResult(
 						MBStatsUserModelImpl.ENTITY_CACHE_ENABLED,
-						MBStatsUser.class, mbStatsUser.getPrimaryKey(), this) == null) {
+						MBStatsUserImpl.class, mbStatsUser.getPrimaryKey(), this) == null) {
 				cacheResult(mbStatsUser);
 			}
 		}
@@ -211,7 +211,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (mbStatsUser.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(MBStatsUserImpl.class,
 						mbStatsUser.getPrimaryKeyObj());
 
@@ -242,7 +242,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(MBStatsUserModelImpl.ENTITY_CACHE_ENABLED,
-			MBStatsUser.class, mbStatsUser.getPrimaryKey());
+			MBStatsUserImpl.class, mbStatsUser.getPrimaryKey());
 
 		return mbStatsUser;
 	}
@@ -323,6 +323,9 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(MBStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+			MBStatsUserImpl.class, mbStatsUser.getPrimaryKey(), mbStatsUser);
+
 		MBStatsUserModelImpl mbStatsUserModelImpl = (MBStatsUserModelImpl)mbStatsUser;
 
 		if (!isNew &&
@@ -344,9 +347,6 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 					new Long(mbStatsUser.getUserId())
 				}, mbStatsUser);
 		}
-
-		EntityCacheUtil.putResult(MBStatsUserModelImpl.ENTITY_CACHE_ENABLED,
-			MBStatsUser.class, mbStatsUser.getPrimaryKey(), mbStatsUser);
 
 		return mbStatsUser;
 	}
@@ -371,7 +371,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 	public MBStatsUser fetchByPrimaryKey(long statsUserId)
 		throws SystemException {
 		MBStatsUser result = (MBStatsUser)EntityCacheUtil.getResult(MBStatsUserModelImpl.ENTITY_CACHE_ENABLED,
-				MBStatsUser.class, statsUserId, this);
+				MBStatsUserImpl.class, statsUserId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -434,10 +434,10 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 
 				List<MBStatsUser> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -504,10 +504,10 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 				List<MBStatsUser> list = (List<MBStatsUser>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -656,10 +656,10 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 
 				List<MBStatsUser> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -726,10 +726,10 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 				List<MBStatsUser> list = (List<MBStatsUser>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -872,6 +872,11 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 
 	public MBStatsUser fetchByG_U(long groupId, long userId)
 		throws SystemException {
+		return fetchByG_U(groupId, userId, true);
+	}
+
+	public MBStatsUser fetchByG_U(long groupId, long userId,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_U,
@@ -913,8 +918,10 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 				MBStatsUser mbStatsUser = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
+							finderArgs, list);
+					}
 				}
 				else {
 					mbStatsUser = list.get(0);
@@ -983,10 +990,10 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 
 				List<MBStatsUser> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_M, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1059,10 +1066,10 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 				List<MBStatsUser> list = (List<MBStatsUser>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_M,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1285,9 +1292,9 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

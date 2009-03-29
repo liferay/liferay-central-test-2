@@ -58,8 +58,8 @@ import java.util.List;
  */
 public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 	implements UserTrackerPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = UserTracker.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = UserTracker.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = UserTrackerImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(UserTrackerModelImpl.ENTITY_CACHE_ENABLED,
 			UserTrackerModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -115,14 +115,14 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 	public void cacheResult(UserTracker userTracker) {
 		EntityCacheUtil.putResult(UserTrackerModelImpl.ENTITY_CACHE_ENABLED,
-			UserTracker.class, userTracker.getPrimaryKey(), userTracker);
+			UserTrackerImpl.class, userTracker.getPrimaryKey(), userTracker);
 	}
 
 	public void cacheResult(List<UserTracker> userTrackers) {
 		for (UserTracker userTracker : userTrackers) {
 			if (EntityCacheUtil.getResult(
 						UserTrackerModelImpl.ENTITY_CACHE_ENABLED,
-						UserTracker.class, userTracker.getPrimaryKey(), this) == null) {
+						UserTrackerImpl.class, userTracker.getPrimaryKey(), this) == null) {
 				cacheResult(userTracker);
 			}
 		}
@@ -193,7 +193,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (userTracker.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(UserTrackerImpl.class,
 						userTracker.getPrimaryKeyObj());
 
@@ -218,7 +218,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 		UserTrackerModelImpl userTrackerModelImpl = (UserTrackerModelImpl)userTracker;
 
 		EntityCacheUtil.removeResult(UserTrackerModelImpl.ENTITY_CACHE_ENABLED,
-			UserTracker.class, userTracker.getPrimaryKey());
+			UserTrackerImpl.class, userTracker.getPrimaryKey());
 
 		return userTracker;
 	}
@@ -299,10 +299,10 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		UserTrackerModelImpl userTrackerModelImpl = (UserTrackerModelImpl)userTracker;
-
 		EntityCacheUtil.putResult(UserTrackerModelImpl.ENTITY_CACHE_ENABLED,
-			UserTracker.class, userTracker.getPrimaryKey(), userTracker);
+			UserTrackerImpl.class, userTracker.getPrimaryKey(), userTracker);
+
+		UserTrackerModelImpl userTrackerModelImpl = (UserTrackerModelImpl)userTracker;
 
 		return userTracker;
 	}
@@ -327,7 +327,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 	public UserTracker fetchByPrimaryKey(long userTrackerId)
 		throws SystemException {
 		UserTracker result = (UserTracker)EntityCacheUtil.getResult(UserTrackerModelImpl.ENTITY_CACHE_ENABLED,
-				UserTracker.class, userTrackerId, this);
+				UserTrackerImpl.class, userTrackerId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -385,10 +385,10 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 				List<UserTracker> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -448,10 +448,10 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 				List<UserTracker> list = (List<UserTracker>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -591,10 +591,10 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 				List<UserTracker> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -654,10 +654,10 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 				List<UserTracker> list = (List<UserTracker>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -801,10 +801,10 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 				List<UserTracker> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_SESSIONID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -871,10 +871,10 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 				List<UserTracker> list = (List<UserTracker>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_SESSIONID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1080,9 +1080,9 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

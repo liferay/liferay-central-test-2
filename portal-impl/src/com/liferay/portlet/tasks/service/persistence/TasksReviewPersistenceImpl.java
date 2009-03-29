@@ -60,8 +60,8 @@ import java.util.List;
  */
 public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 	implements TasksReviewPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = TasksReview.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = TasksReview.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = TasksReviewImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_USERID = new FinderPath(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
 			TasksReviewModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -174,21 +174,21 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 			"countAll", new String[0]);
 
 	public void cacheResult(TasksReview tasksReview) {
+		EntityCacheUtil.putResult(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
+			TasksReviewImpl.class, tasksReview.getPrimaryKey(), tasksReview);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_P,
 			new Object[] {
 				new Long(tasksReview.getUserId()),
 				new Long(tasksReview.getProposalId())
 			}, tasksReview);
-
-		EntityCacheUtil.putResult(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
-			TasksReview.class, tasksReview.getPrimaryKey(), tasksReview);
 	}
 
 	public void cacheResult(List<TasksReview> tasksReviews) {
 		for (TasksReview tasksReview : tasksReviews) {
 			if (EntityCacheUtil.getResult(
 						TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
-						TasksReview.class, tasksReview.getPrimaryKey(), this) == null) {
+						TasksReviewImpl.class, tasksReview.getPrimaryKey(), this) == null) {
 				cacheResult(tasksReview);
 			}
 		}
@@ -258,7 +258,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (tasksReview.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(TasksReviewImpl.class,
 						tasksReview.getPrimaryKeyObj());
 
@@ -289,7 +289,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
-			TasksReview.class, tasksReview.getPrimaryKey());
+			TasksReviewImpl.class, tasksReview.getPrimaryKey());
 
 		return tasksReview;
 	}
@@ -370,6 +370,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
+			TasksReviewImpl.class, tasksReview.getPrimaryKey(), tasksReview);
+
 		TasksReviewModelImpl tasksReviewModelImpl = (TasksReviewModelImpl)tasksReview;
 
 		if (!isNew &&
@@ -391,9 +394,6 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 					new Long(tasksReview.getProposalId())
 				}, tasksReview);
 		}
-
-		EntityCacheUtil.putResult(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
-			TasksReview.class, tasksReview.getPrimaryKey(), tasksReview);
 
 		return tasksReview;
 	}
@@ -418,7 +418,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 	public TasksReview fetchByPrimaryKey(long reviewId)
 		throws SystemException {
 		TasksReview result = (TasksReview)EntityCacheUtil.getResult(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
-				TasksReview.class, reviewId, this);
+				TasksReviewImpl.class, reviewId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -481,10 +481,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 				List<TasksReview> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -551,10 +551,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 				List<TasksReview> list = (List<TasksReview>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -702,10 +702,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 				List<TasksReview> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_PROPOSALID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -772,10 +772,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 				List<TasksReview> list = (List<TasksReview>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_PROPOSALID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -919,6 +919,11 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 	public TasksReview fetchByU_P(long userId, long proposalId)
 		throws SystemException {
+		return fetchByU_P(userId, proposalId, true);
+	}
+
+	public TasksReview fetchByU_P(long userId, long proposalId,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(userId), new Long(proposalId)
 			};
@@ -962,8 +967,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 				TasksReview tasksReview = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_P,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_P,
+							finderArgs, list);
+					}
 				}
 				else {
 					tasksReview = list.get(0);
@@ -1032,10 +1039,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 				List<TasksReview> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_P_S, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1108,10 +1115,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 				List<TasksReview> list = (List<TasksReview>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_P_S,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1288,10 +1295,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 				List<TasksReview> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_P_S_C,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1372,10 +1379,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 				List<TasksReview> list = (List<TasksReview>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_P_S_C,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1573,10 +1580,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 				List<TasksReview> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_P_S_C_R,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1665,10 +1672,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 				List<TasksReview> list = (List<TasksReview>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_P_S_C_R,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1918,9 +1925,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

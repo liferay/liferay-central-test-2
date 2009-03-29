@@ -58,8 +58,8 @@ import java.util.List;
  */
 public class LayoutPersistenceImpl extends BasePersistenceImpl
 	implements LayoutPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = Layout.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = Layout.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = LayoutImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(LayoutModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -204,6 +204,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 			"countAll", new String[0]);
 
 	public void cacheResult(Layout layout) {
+		EntityCacheUtil.putResult(LayoutModelImpl.ENTITY_CACHE_ENABLED,
+			LayoutImpl.class, layout.getPrimaryKey(), layout);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DLFOLDERID,
 			new Object[] { new Long(layout.getDlFolderId()) }, layout);
 
@@ -224,15 +227,12 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 				
 			layout.getFriendlyURL()
 			}, layout);
-
-		EntityCacheUtil.putResult(LayoutModelImpl.ENTITY_CACHE_ENABLED,
-			Layout.class, layout.getPrimaryKey(), layout);
 	}
 
 	public void cacheResult(List<Layout> layouts) {
 		for (Layout layout : layouts) {
 			if (EntityCacheUtil.getResult(
-						LayoutModelImpl.ENTITY_CACHE_ENABLED, Layout.class,
+						LayoutModelImpl.ENTITY_CACHE_ENABLED, LayoutImpl.class,
 						layout.getPrimaryKey(), this) == null) {
 				cacheResult(layout);
 			}
@@ -299,7 +299,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (layout.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(LayoutImpl.class,
 						layout.getPrimaryKeyObj());
 
@@ -345,7 +345,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(LayoutModelImpl.ENTITY_CACHE_ENABLED,
-			Layout.class, layout.getPrimaryKey());
+			LayoutImpl.class, layout.getPrimaryKey());
 
 		return layout;
 	}
@@ -423,6 +423,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 		}
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		EntityCacheUtil.putResult(LayoutModelImpl.ENTITY_CACHE_ENABLED,
+			LayoutImpl.class, layout.getPrimaryKey(), layout);
 
 		LayoutModelImpl layoutModelImpl = (LayoutModelImpl)layout;
 
@@ -502,9 +505,6 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 				}, layout);
 		}
 
-		EntityCacheUtil.putResult(LayoutModelImpl.ENTITY_CACHE_ENABLED,
-			Layout.class, layout.getPrimaryKey(), layout);
-
 		return layout;
 	}
 
@@ -526,7 +526,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 	public Layout fetchByPrimaryKey(long plid) throws SystemException {
 		Layout result = (Layout)EntityCacheUtil.getResult(LayoutModelImpl.ENTITY_CACHE_ENABLED,
-				Layout.class, plid, this);
+				LayoutImpl.class, plid, this);
 
 		if (result == null) {
 			Session session = null;
@@ -588,10 +588,10 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				List<Layout> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -658,10 +658,10 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 				List<Layout> list = (List<Layout>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -808,10 +808,10 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				List<Layout> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -878,10 +878,10 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 				List<Layout> list = (List<Layout>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1018,6 +1018,11 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Layout fetchByDLFolderId(long dlFolderId) throws SystemException {
+		return fetchByDLFolderId(dlFolderId, true);
+	}
+
+	public Layout fetchByDLFolderId(long dlFolderId, boolean cacheEmptyResult)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(dlFolderId) };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_DLFOLDERID,
@@ -1053,8 +1058,10 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 				Layout layout = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DLFOLDERID,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DLFOLDERID,
+							finderArgs, list);
+					}
 				}
 				else {
 					layout = list.get(0);
@@ -1106,6 +1113,11 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 	public Layout fetchByIconImageId(long iconImageId)
 		throws SystemException {
+		return fetchByIconImageId(iconImageId, true);
+	}
+
+	public Layout fetchByIconImageId(long iconImageId, boolean cacheEmptyResult)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(iconImageId) };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_ICONIMAGEID,
@@ -1141,8 +1153,10 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 				Layout layout = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_ICONIMAGEID,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_ICONIMAGEID,
+							finderArgs, list);
+					}
 				}
 				else {
 					layout = list.get(0);
@@ -1211,10 +1225,10 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				List<Layout> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_P, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1287,10 +1301,10 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 				List<Layout> list = (List<Layout>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_P,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1448,6 +1462,11 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 	public Layout fetchByG_P_L(long groupId, boolean privateLayout,
 		long layoutId) throws SystemException {
+		return fetchByG_P_L(groupId, privateLayout, layoutId, true);
+	}
+
+	public Layout fetchByG_P_L(long groupId, boolean privateLayout,
+		long layoutId, boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(privateLayout),
 				new Long(layoutId)
@@ -1498,8 +1517,10 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 				Layout layout = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_L,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_L,
+							finderArgs, list);
+					}
 				}
 				else {
 					layout = list.get(0);
@@ -1575,10 +1596,10 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				List<Layout> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_P_P,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1660,10 +1681,10 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 				List<Layout> list = (List<Layout>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_P_P,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1836,6 +1857,11 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 	public Layout fetchByG_P_F(long groupId, boolean privateLayout,
 		String friendlyURL) throws SystemException {
+		return fetchByG_P_F(groupId, privateLayout, friendlyURL, true);
+	}
+
+	public Layout fetchByG_P_F(long groupId, boolean privateLayout,
+		String friendlyURL, boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(privateLayout),
 				
@@ -1894,8 +1920,10 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 				Layout layout = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_F,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_F,
+							finderArgs, list);
+					}
 				}
 				else {
 					layout = list.get(0);
@@ -1979,10 +2007,10 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 				List<Layout> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_P_T,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -2071,10 +2099,10 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 				List<Layout> list = (List<Layout>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_P_T,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -2316,9 +2344,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 							end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

@@ -62,8 +62,8 @@ import java.util.List;
  */
 public class PollsQuestionPersistenceImpl extends BasePersistenceImpl
 	implements PollsQuestionPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = PollsQuestion.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = PollsQuestion.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = PollsQuestionImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(PollsQuestionModelImpl.ENTITY_CACHE_ENABLED,
 			PollsQuestionModelImpl.FINDER_CACHE_ENABLED,
@@ -115,20 +115,22 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
 	public void cacheResult(PollsQuestion pollsQuestion) {
+		EntityCacheUtil.putResult(PollsQuestionModelImpl.ENTITY_CACHE_ENABLED,
+			PollsQuestionImpl.class, pollsQuestion.getPrimaryKey(),
+			pollsQuestion);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				pollsQuestion.getUuid(), new Long(pollsQuestion.getGroupId())
 			}, pollsQuestion);
-
-		EntityCacheUtil.putResult(PollsQuestionModelImpl.ENTITY_CACHE_ENABLED,
-			PollsQuestion.class, pollsQuestion.getPrimaryKey(), pollsQuestion);
 	}
 
 	public void cacheResult(List<PollsQuestion> pollsQuestions) {
 		for (PollsQuestion pollsQuestion : pollsQuestions) {
 			if (EntityCacheUtil.getResult(
 						PollsQuestionModelImpl.ENTITY_CACHE_ENABLED,
-						PollsQuestion.class, pollsQuestion.getPrimaryKey(), this) == null) {
+						PollsQuestionImpl.class, pollsQuestion.getPrimaryKey(),
+						this) == null) {
 				cacheResult(pollsQuestion);
 			}
 		}
@@ -203,7 +205,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (pollsQuestion.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(PollsQuestionImpl.class,
 						pollsQuestion.getPrimaryKeyObj());
 
@@ -234,7 +236,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(PollsQuestionModelImpl.ENTITY_CACHE_ENABLED,
-			PollsQuestion.class, pollsQuestion.getPrimaryKey());
+			PollsQuestionImpl.class, pollsQuestion.getPrimaryKey());
 
 		return pollsQuestion;
 	}
@@ -321,6 +323,10 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(PollsQuestionModelImpl.ENTITY_CACHE_ENABLED,
+			PollsQuestionImpl.class, pollsQuestion.getPrimaryKey(),
+			pollsQuestion);
+
 		PollsQuestionModelImpl pollsQuestionModelImpl = (PollsQuestionModelImpl)pollsQuestion;
 
 		if (!isNew &&
@@ -345,9 +351,6 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl
 				}, pollsQuestion);
 		}
 
-		EntityCacheUtil.putResult(PollsQuestionModelImpl.ENTITY_CACHE_ENABLED,
-			PollsQuestion.class, pollsQuestion.getPrimaryKey(), pollsQuestion);
-
 		return pollsQuestion;
 	}
 
@@ -371,7 +374,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl
 	public PollsQuestion fetchByPrimaryKey(long questionId)
 		throws SystemException {
 		PollsQuestion result = (PollsQuestion)EntityCacheUtil.getResult(PollsQuestionModelImpl.ENTITY_CACHE_ENABLED,
-				PollsQuestion.class, questionId, this);
+				PollsQuestionImpl.class, questionId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -441,10 +444,10 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl
 
 				List<PollsQuestion> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -518,10 +521,10 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl
 				List<PollsQuestion> list = (List<PollsQuestion>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -670,6 +673,11 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl
 
 	public PollsQuestion fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
+		return fetchByUUID_G(uuid, groupId, true);
+	}
+
+	public PollsQuestion fetchByUUID_G(String uuid, long groupId,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
@@ -718,8 +726,10 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl
 				PollsQuestion pollsQuestion = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+							finderArgs, list);
+					}
 				}
 				else {
 					pollsQuestion = list.get(0);
@@ -780,10 +790,10 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl
 
 				List<PollsQuestion> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -850,10 +860,10 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl
 				List<PollsQuestion> list = (List<PollsQuestion>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1063,9 +1073,9 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

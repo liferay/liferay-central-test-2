@@ -60,8 +60,8 @@ import java.util.List;
  */
 public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 	implements SCProductScreenshotPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = SCProductScreenshot.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = SCProductScreenshot.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = SCProductScreenshotImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_PRODUCTENTRYID = new FinderPath(SCProductScreenshotModelImpl.ENTITY_CACHE_ENABLED,
 			SCProductScreenshotModelImpl.FINDER_CACHE_ENABLED,
@@ -112,6 +112,10 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
 	public void cacheResult(SCProductScreenshot scProductScreenshot) {
+		EntityCacheUtil.putResult(SCProductScreenshotModelImpl.ENTITY_CACHE_ENABLED,
+			SCProductScreenshotImpl.class, scProductScreenshot.getPrimaryKey(),
+			scProductScreenshot);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_THUMBNAILID,
 			new Object[] { new Long(scProductScreenshot.getThumbnailId()) },
 			scProductScreenshot);
@@ -125,17 +129,13 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 				new Long(scProductScreenshot.getProductEntryId()),
 				new Integer(scProductScreenshot.getPriority())
 			}, scProductScreenshot);
-
-		EntityCacheUtil.putResult(SCProductScreenshotModelImpl.ENTITY_CACHE_ENABLED,
-			SCProductScreenshot.class, scProductScreenshot.getPrimaryKey(),
-			scProductScreenshot);
 	}
 
 	public void cacheResult(List<SCProductScreenshot> scProductScreenshots) {
 		for (SCProductScreenshot scProductScreenshot : scProductScreenshots) {
 			if (EntityCacheUtil.getResult(
 						SCProductScreenshotModelImpl.ENTITY_CACHE_ENABLED,
-						SCProductScreenshot.class,
+						SCProductScreenshotImpl.class,
 						scProductScreenshot.getPrimaryKey(), this) == null) {
 				cacheResult(scProductScreenshot);
 			}
@@ -208,7 +208,8 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (scProductScreenshot.isCachedModel() ||
+					BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(SCProductScreenshotImpl.class,
 						scProductScreenshot.getPrimaryKeyObj());
 
@@ -249,7 +250,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(SCProductScreenshotModelImpl.ENTITY_CACHE_ENABLED,
-			SCProductScreenshot.class, scProductScreenshot.getPrimaryKey());
+			SCProductScreenshotImpl.class, scProductScreenshot.getPrimaryKey());
 
 		return scProductScreenshot;
 	}
@@ -330,6 +331,10 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(SCProductScreenshotModelImpl.ENTITY_CACHE_ENABLED,
+			SCProductScreenshotImpl.class, scProductScreenshot.getPrimaryKey(),
+			scProductScreenshot);
+
 		SCProductScreenshotModelImpl scProductScreenshotModelImpl = (SCProductScreenshotModelImpl)scProductScreenshot;
 
 		if (!isNew &&
@@ -382,10 +387,6 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 				}, scProductScreenshot);
 		}
 
-		EntityCacheUtil.putResult(SCProductScreenshotModelImpl.ENTITY_CACHE_ENABLED,
-			SCProductScreenshot.class, scProductScreenshot.getPrimaryKey(),
-			scProductScreenshot);
-
 		return scProductScreenshot;
 	}
 
@@ -410,7 +411,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 	public SCProductScreenshot fetchByPrimaryKey(long productScreenshotId)
 		throws SystemException {
 		SCProductScreenshot result = (SCProductScreenshot)EntityCacheUtil.getResult(SCProductScreenshotModelImpl.ENTITY_CACHE_ENABLED,
-				SCProductScreenshot.class, productScreenshotId, this);
+				SCProductScreenshotImpl.class, productScreenshotId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -474,10 +475,10 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 				List<SCProductScreenshot> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_PRODUCTENTRYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -545,10 +546,10 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 				List<SCProductScreenshot> list = (List<SCProductScreenshot>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_PRODUCTENTRYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -693,6 +694,11 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 	public SCProductScreenshot fetchByThumbnailId(long thumbnailId)
 		throws SystemException {
+		return fetchByThumbnailId(thumbnailId, true);
+	}
+
+	public SCProductScreenshot fetchByThumbnailId(long thumbnailId,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(thumbnailId) };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_THUMBNAILID,
@@ -729,8 +735,10 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 				SCProductScreenshot scProductScreenshot = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_THUMBNAILID,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_THUMBNAILID,
+							finderArgs, list);
+					}
 				}
 				else {
 					scProductScreenshot = list.get(0);
@@ -782,6 +790,11 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 	public SCProductScreenshot fetchByFullImageId(long fullImageId)
 		throws SystemException {
+		return fetchByFullImageId(fullImageId, true);
+	}
+
+	public SCProductScreenshot fetchByFullImageId(long fullImageId,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(fullImageId) };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_FULLIMAGEID,
@@ -818,8 +831,10 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 				SCProductScreenshot scProductScreenshot = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_FULLIMAGEID,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_FULLIMAGEID,
+							finderArgs, list);
+					}
 				}
 				else {
 					scProductScreenshot = list.get(0);
@@ -875,6 +890,11 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 	public SCProductScreenshot fetchByP_P(long productEntryId, int priority)
 		throws SystemException {
+		return fetchByP_P(productEntryId, priority, true);
+	}
+
+	public SCProductScreenshot fetchByP_P(long productEntryId, int priority,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(productEntryId), new Integer(priority)
 			};
@@ -919,8 +939,10 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 				SCProductScreenshot scProductScreenshot = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_P_P,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_P_P,
+							finderArgs, list);
+					}
 				}
 				else {
 					scProductScreenshot = list.get(0);
@@ -1043,9 +1065,9 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

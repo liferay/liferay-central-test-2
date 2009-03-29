@@ -161,6 +161,13 @@ public class SCProductVersionUtil {
 		return getPersistence().fetchByDirectDownloadURL(directDownloadURL);
 	}
 
+	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion fetchByDirectDownloadURL(
+		java.lang.String directDownloadURL, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByDirectDownloadURL(directDownloadURL, cacheEmptyResult);
+	}
+
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

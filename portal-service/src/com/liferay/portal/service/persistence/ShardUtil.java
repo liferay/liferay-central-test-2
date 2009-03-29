@@ -111,6 +111,12 @@ public class ShardUtil {
 		return getPersistence().fetchByName(name);
 	}
 
+	public static com.liferay.portal.model.Shard fetchByName(
+		java.lang.String name, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByName(name, cacheEmptyResult);
+	}
+
 	public static com.liferay.portal.model.Shard findByC_C(long classNameId,
 		long classPK)
 		throws com.liferay.portal.NoSuchShardException,
@@ -121,6 +127,13 @@ public class ShardUtil {
 	public static com.liferay.portal.model.Shard fetchByC_C(long classNameId,
 		long classPK) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByC_C(classNameId, classPK);
+	}
+
+	public static com.liferay.portal.model.Shard fetchByC_C(long classNameId,
+		long classPK, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByC_C(classNameId, classPK, cacheEmptyResult);
 	}
 
 	public static java.util.List<Object> findWithDynamicQuery(

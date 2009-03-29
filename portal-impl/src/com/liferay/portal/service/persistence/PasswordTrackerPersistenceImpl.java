@@ -58,8 +58,8 @@ import java.util.List;
  */
 public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 	implements PasswordTrackerPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = PasswordTracker.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = PasswordTracker.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = PasswordTrackerImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_USERID = new FinderPath(PasswordTrackerModelImpl.ENTITY_CACHE_ENABLED,
 			PasswordTrackerModelImpl.FINDER_CACHE_ENABLED,
@@ -87,7 +87,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 
 	public void cacheResult(PasswordTracker passwordTracker) {
 		EntityCacheUtil.putResult(PasswordTrackerModelImpl.ENTITY_CACHE_ENABLED,
-			PasswordTracker.class, passwordTracker.getPrimaryKey(),
+			PasswordTrackerImpl.class, passwordTracker.getPrimaryKey(),
 			passwordTracker);
 	}
 
@@ -95,8 +95,8 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 		for (PasswordTracker passwordTracker : passwordTrackers) {
 			if (EntityCacheUtil.getResult(
 						PasswordTrackerModelImpl.ENTITY_CACHE_ENABLED,
-						PasswordTracker.class, passwordTracker.getPrimaryKey(),
-						this) == null) {
+						PasswordTrackerImpl.class,
+						passwordTracker.getPrimaryKey(), this) == null) {
 				cacheResult(passwordTracker);
 			}
 		}
@@ -167,7 +167,8 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (passwordTracker.isCachedModel() ||
+					BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(PasswordTrackerImpl.class,
 						passwordTracker.getPrimaryKeyObj());
 
@@ -192,7 +193,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 		PasswordTrackerModelImpl passwordTrackerModelImpl = (PasswordTrackerModelImpl)passwordTracker;
 
 		EntityCacheUtil.removeResult(PasswordTrackerModelImpl.ENTITY_CACHE_ENABLED,
-			PasswordTracker.class, passwordTracker.getPrimaryKey());
+			PasswordTrackerImpl.class, passwordTracker.getPrimaryKey());
 
 		return passwordTracker;
 	}
@@ -273,11 +274,11 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		PasswordTrackerModelImpl passwordTrackerModelImpl = (PasswordTrackerModelImpl)passwordTracker;
-
 		EntityCacheUtil.putResult(PasswordTrackerModelImpl.ENTITY_CACHE_ENABLED,
-			PasswordTracker.class, passwordTracker.getPrimaryKey(),
+			PasswordTrackerImpl.class, passwordTracker.getPrimaryKey(),
 			passwordTracker);
+
+		PasswordTrackerModelImpl passwordTrackerModelImpl = (PasswordTrackerModelImpl)passwordTracker;
 
 		return passwordTracker;
 	}
@@ -303,7 +304,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 	public PasswordTracker fetchByPrimaryKey(long passwordTrackerId)
 		throws SystemException {
 		PasswordTracker result = (PasswordTracker)EntityCacheUtil.getResult(PasswordTrackerModelImpl.ENTITY_CACHE_ENABLED,
-				PasswordTracker.class, passwordTrackerId, this);
+				PasswordTrackerImpl.class, passwordTrackerId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -367,10 +368,10 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 
 				List<PasswordTracker> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -438,10 +439,10 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 				List<PasswordTracker> list = (List<PasswordTracker>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -651,9 +652,9 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

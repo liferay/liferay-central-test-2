@@ -116,6 +116,12 @@ public class WikiPageResourceUtil {
 		return getPersistence().fetchByN_T(nodeId, title);
 	}
 
+	public static com.liferay.portlet.wiki.model.WikiPageResource fetchByN_T(
+		long nodeId, java.lang.String title, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByN_T(nodeId, title, cacheEmptyResult);
+	}
+
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

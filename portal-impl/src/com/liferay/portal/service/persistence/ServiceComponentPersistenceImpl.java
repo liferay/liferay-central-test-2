@@ -58,8 +58,8 @@ import java.util.List;
  */
 public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 	implements ServiceComponentPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = ServiceComponent.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = ServiceComponent.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = ServiceComponentImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_BUILDNAMESPACE = new FinderPath(ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
 			ServiceComponentModelImpl.FINDER_CACHE_ENABLED,
@@ -94,22 +94,22 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
 	public void cacheResult(ServiceComponent serviceComponent) {
+		EntityCacheUtil.putResult(ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
+			ServiceComponentImpl.class, serviceComponent.getPrimaryKey(),
+			serviceComponent);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BNS_BNU,
 			new Object[] {
 				serviceComponent.getBuildNamespace(),
 				new Long(serviceComponent.getBuildNumber())
 			}, serviceComponent);
-
-		EntityCacheUtil.putResult(ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
-			ServiceComponent.class, serviceComponent.getPrimaryKey(),
-			serviceComponent);
 	}
 
 	public void cacheResult(List<ServiceComponent> serviceComponents) {
 		for (ServiceComponent serviceComponent : serviceComponents) {
 			if (EntityCacheUtil.getResult(
 						ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
-						ServiceComponent.class,
+						ServiceComponentImpl.class,
 						serviceComponent.getPrimaryKey(), this) == null) {
 				cacheResult(serviceComponent);
 			}
@@ -182,7 +182,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (serviceComponent.isCachedModel() ||
+					BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(ServiceComponentImpl.class,
 						serviceComponent.getPrimaryKeyObj());
 
@@ -213,7 +214,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
-			ServiceComponent.class, serviceComponent.getPrimaryKey());
+			ServiceComponentImpl.class, serviceComponent.getPrimaryKey());
 
 		return serviceComponent;
 	}
@@ -294,6 +295,10 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
+			ServiceComponentImpl.class, serviceComponent.getPrimaryKey(),
+			serviceComponent);
+
 		ServiceComponentModelImpl serviceComponentModelImpl = (ServiceComponentModelImpl)serviceComponent;
 
 		if (!isNew &&
@@ -317,10 +322,6 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 					new Long(serviceComponent.getBuildNumber())
 				}, serviceComponent);
 		}
-
-		EntityCacheUtil.putResult(ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
-			ServiceComponent.class, serviceComponent.getPrimaryKey(),
-			serviceComponent);
 
 		return serviceComponent;
 	}
@@ -346,7 +347,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 	public ServiceComponent fetchByPrimaryKey(long serviceComponentId)
 		throws SystemException {
 		ServiceComponent result = (ServiceComponent)EntityCacheUtil.getResult(ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
-				ServiceComponent.class, serviceComponentId, this);
+				ServiceComponentImpl.class, serviceComponentId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -417,10 +418,10 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 
 				List<ServiceComponent> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_BUILDNAMESPACE,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -495,10 +496,10 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 				List<ServiceComponent> list = (List<ServiceComponent>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_BUILDNAMESPACE,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -655,6 +656,11 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 
 	public ServiceComponent fetchByBNS_BNU(String buildNamespace,
 		long buildNumber) throws SystemException {
+		return fetchByBNS_BNU(buildNamespace, buildNumber, true);
+	}
+
+	public ServiceComponent fetchByBNS_BNU(String buildNamespace,
+		long buildNumber, boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { buildNamespace, new Long(buildNumber) };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_BNS_BNU,
@@ -704,8 +710,10 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 				ServiceComponent serviceComponent = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BNS_BNU,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BNS_BNU,
+							finderArgs, list);
+					}
 				}
 				else {
 					serviceComponent = list.get(0);
@@ -827,9 +835,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

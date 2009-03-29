@@ -157,6 +157,12 @@ public class UserIdMapperUtil {
 		return getPersistence().fetchByU_T(userId, type);
 	}
 
+	public static com.liferay.portal.model.UserIdMapper fetchByU_T(
+		long userId, java.lang.String type, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByU_T(userId, type, cacheEmptyResult);
+	}
+
 	public static com.liferay.portal.model.UserIdMapper findByT_E(
 		java.lang.String type, java.lang.String externalUserId)
 		throws com.liferay.portal.NoSuchUserIdMapperException,
@@ -168,6 +174,13 @@ public class UserIdMapperUtil {
 		java.lang.String type, java.lang.String externalUserId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByT_E(type, externalUserId);
+	}
+
+	public static com.liferay.portal.model.UserIdMapper fetchByT_E(
+		java.lang.String type, java.lang.String externalUserId,
+		boolean cacheEmptyResult) throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByT_E(type, externalUserId, cacheEmptyResult);
 	}
 
 	public static java.util.List<Object> findWithDynamicQuery(

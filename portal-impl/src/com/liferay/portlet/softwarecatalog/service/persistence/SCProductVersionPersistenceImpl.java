@@ -69,8 +69,8 @@ import java.util.List;
  */
 public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 	implements SCProductVersionPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = SCProductVersion.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = SCProductVersion.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = SCProductVersionImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_PRODUCTENTRYID = new FinderPath(SCProductVersionModelImpl.ENTITY_CACHE_ENABLED,
 			SCProductVersionModelImpl.FINDER_CACHE_ENABLED,
@@ -105,12 +105,12 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
 	public void cacheResult(SCProductVersion scProductVersion) {
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DIRECTDOWNLOADURL,
-			new Object[] { scProductVersion.getDirectDownloadURL() },
+		EntityCacheUtil.putResult(SCProductVersionModelImpl.ENTITY_CACHE_ENABLED,
+			SCProductVersionImpl.class, scProductVersion.getPrimaryKey(),
 			scProductVersion);
 
-		EntityCacheUtil.putResult(SCProductVersionModelImpl.ENTITY_CACHE_ENABLED,
-			SCProductVersion.class, scProductVersion.getPrimaryKey(),
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DIRECTDOWNLOADURL,
+			new Object[] { scProductVersion.getDirectDownloadURL() },
 			scProductVersion);
 	}
 
@@ -118,7 +118,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 		for (SCProductVersion scProductVersion : scProductVersions) {
 			if (EntityCacheUtil.getResult(
 						SCProductVersionModelImpl.ENTITY_CACHE_ENABLED,
-						SCProductVersion.class,
+						SCProductVersionImpl.class,
 						scProductVersion.getPrimaryKey(), this) == null) {
 				cacheResult(scProductVersion);
 			}
@@ -201,7 +201,8 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (scProductVersion.isCachedModel() ||
+					BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(SCProductVersionImpl.class,
 						scProductVersion.getPrimaryKeyObj());
 
@@ -231,7 +232,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(SCProductVersionModelImpl.ENTITY_CACHE_ENABLED,
-			SCProductVersion.class, scProductVersion.getPrimaryKey());
+			SCProductVersionImpl.class, scProductVersion.getPrimaryKey());
 
 		return scProductVersion;
 	}
@@ -312,6 +313,10 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(SCProductVersionModelImpl.ENTITY_CACHE_ENABLED,
+			SCProductVersionImpl.class, scProductVersion.getPrimaryKey(),
+			scProductVersion);
+
 		SCProductVersionModelImpl scProductVersionModelImpl = (SCProductVersionModelImpl)scProductVersion;
 
 		if (!isNew &&
@@ -330,10 +335,6 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 				new Object[] { scProductVersion.getDirectDownloadURL() },
 				scProductVersion);
 		}
-
-		EntityCacheUtil.putResult(SCProductVersionModelImpl.ENTITY_CACHE_ENABLED,
-			SCProductVersion.class, scProductVersion.getPrimaryKey(),
-			scProductVersion);
 
 		return scProductVersion;
 	}
@@ -359,7 +360,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 	public SCProductVersion fetchByPrimaryKey(long productVersionId)
 		throws SystemException {
 		SCProductVersion result = (SCProductVersion)EntityCacheUtil.getResult(SCProductVersionModelImpl.ENTITY_CACHE_ENABLED,
-				SCProductVersion.class, productVersionId, this);
+				SCProductVersionImpl.class, productVersionId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -422,10 +423,10 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 
 				List<SCProductVersion> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_PRODUCTENTRYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -492,10 +493,10 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 				List<SCProductVersion> list = (List<SCProductVersion>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_PRODUCTENTRYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -639,6 +640,11 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 
 	public SCProductVersion fetchByDirectDownloadURL(String directDownloadURL)
 		throws SystemException {
+		return fetchByDirectDownloadURL(directDownloadURL, true);
+	}
+
+	public SCProductVersion fetchByDirectDownloadURL(String directDownloadURL,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { directDownloadURL };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_DIRECTDOWNLOADURL,
@@ -681,8 +687,10 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 				SCProductVersion scProductVersion = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DIRECTDOWNLOADURL,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DIRECTDOWNLOADURL,
+							finderArgs, list);
+					}
 				}
 				else {
 					scProductVersion = list.get(0);
@@ -804,9 +812,9 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}
@@ -1075,10 +1083,10 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 					(List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				scFrameworkVersionPersistence.cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_GET_SCFRAMEWORKVERSIONS,
 					finderArgs, list);
-
-				scFrameworkVersionPersistence.cacheResult(list);
 
 				return list;
 			}

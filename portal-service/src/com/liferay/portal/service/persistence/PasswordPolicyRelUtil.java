@@ -116,6 +116,13 @@ public class PasswordPolicyRelUtil {
 		return getPersistence().fetchByC_C(classNameId, classPK);
 	}
 
+	public static com.liferay.portal.model.PasswordPolicyRel fetchByC_C(
+		long classNameId, long classPK, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByC_C(classNameId, classPK, cacheEmptyResult);
+	}
+
 	public static com.liferay.portal.model.PasswordPolicyRel findByP_C_C(
 		long passwordPolicyId, long classNameId, long classPK)
 		throws com.liferay.portal.NoSuchPasswordPolicyRelException,
@@ -129,6 +136,14 @@ public class PasswordPolicyRelUtil {
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .fetchByP_C_C(passwordPolicyId, classNameId, classPK);
+	}
+
+	public static com.liferay.portal.model.PasswordPolicyRel fetchByP_C_C(
+		long passwordPolicyId, long classNameId, long classPK,
+		boolean cacheEmptyResult) throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByP_C_C(passwordPolicyId, classNameId, classPK,
+			cacheEmptyResult);
 	}
 
 	public static java.util.List<Object> findWithDynamicQuery(

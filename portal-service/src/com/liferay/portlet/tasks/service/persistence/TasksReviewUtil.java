@@ -196,6 +196,12 @@ public class TasksReviewUtil {
 		return getPersistence().fetchByU_P(userId, proposalId);
 	}
 
+	public static com.liferay.portlet.tasks.model.TasksReview fetchByU_P(
+		long userId, long proposalId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByU_P(userId, proposalId, cacheEmptyResult);
+	}
+
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S(
 		long proposalId, int stage) throws com.liferay.portal.SystemException {
 		return getPersistence().findByP_S(proposalId, stage);

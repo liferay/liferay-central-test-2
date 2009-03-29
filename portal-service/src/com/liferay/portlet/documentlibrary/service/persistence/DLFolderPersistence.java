@@ -124,6 +124,10 @@ public interface DLFolderPersistence extends BasePersistence {
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.documentlibrary.model.DLFolder fetchByUUID_G(
+		java.lang.String uuid, long groupId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> findByGroupId(
 		long groupId) throws com.liferay.portal.SystemException;
 
@@ -250,6 +254,10 @@ public interface DLFolderPersistence extends BasePersistence {
 	public com.liferay.portlet.documentlibrary.model.DLFolder fetchByG_P_N(
 		long groupId, long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFolder fetchByG_P_N(
+		long groupId, long parentFolderId, java.lang.String name,
+		boolean cacheEmptyResult) throws com.liferay.portal.SystemException;
 
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)

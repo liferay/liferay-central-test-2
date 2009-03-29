@@ -253,6 +253,14 @@ public class SubscriptionUtil {
 				   .fetchByC_U_C_C(companyId, userId, classNameId, classPK);
 	}
 
+	public static com.liferay.portal.model.Subscription fetchByC_U_C_C(
+		long companyId, long userId, long classNameId, long classPK,
+		boolean cacheEmptyResult) throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByC_U_C_C(companyId, userId, classNameId, classPK,
+			cacheEmptyResult);
+	}
+
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

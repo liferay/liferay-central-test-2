@@ -123,6 +123,10 @@ public interface SCProductScreenshotPersistence extends BasePersistence {
 	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot fetchByThumbnailId(
 		long thumbnailId) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot fetchByThumbnailId(
+		long thumbnailId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot findByFullImageId(
 		long fullImageId)
 		throws com.liferay.portal.SystemException,
@@ -131,6 +135,10 @@ public interface SCProductScreenshotPersistence extends BasePersistence {
 	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot fetchByFullImageId(
 		long fullImageId) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot fetchByFullImageId(
+		long fullImageId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot findByP_P(
 		long productEntryId, int priority)
 		throws com.liferay.portal.SystemException,
@@ -138,6 +146,10 @@ public interface SCProductScreenshotPersistence extends BasePersistence {
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot fetchByP_P(
 		long productEntryId, int priority)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot fetchByP_P(
+		long productEntryId, int priority, boolean cacheEmptyResult)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<Object> findWithDynamicQuery(

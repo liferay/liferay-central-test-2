@@ -160,6 +160,12 @@ public class SCProductScreenshotUtil {
 		return getPersistence().fetchByThumbnailId(thumbnailId);
 	}
 
+	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot fetchByThumbnailId(
+		long thumbnailId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByThumbnailId(thumbnailId, cacheEmptyResult);
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot findByFullImageId(
 		long fullImageId)
 		throws com.liferay.portal.SystemException,
@@ -170,6 +176,12 @@ public class SCProductScreenshotUtil {
 	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot fetchByFullImageId(
 		long fullImageId) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByFullImageId(fullImageId);
+	}
+
+	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot fetchByFullImageId(
+		long fullImageId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByFullImageId(fullImageId, cacheEmptyResult);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot findByP_P(
@@ -183,6 +195,13 @@ public class SCProductScreenshotUtil {
 		long productEntryId, int priority)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByP_P(productEntryId, priority);
+	}
+
+	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot fetchByP_P(
+		long productEntryId, int priority, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByP_P(productEntryId, priority, cacheEmptyResult);
 	}
 
 	public static java.util.List<Object> findWithDynamicQuery(

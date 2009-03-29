@@ -60,8 +60,8 @@ import java.util.List;
  */
 public class MBThreadPersistenceImpl extends BasePersistenceImpl
 	implements MBThreadPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = MBThread.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = MBThread.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = MBThreadImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
 			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -102,14 +102,14 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 	public void cacheResult(MBThread mbThread) {
 		EntityCacheUtil.putResult(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
-			MBThread.class, mbThread.getPrimaryKey(), mbThread);
+			MBThreadImpl.class, mbThread.getPrimaryKey(), mbThread);
 	}
 
 	public void cacheResult(List<MBThread> mbThreads) {
 		for (MBThread mbThread : mbThreads) {
 			if (EntityCacheUtil.getResult(
-						MBThreadModelImpl.ENTITY_CACHE_ENABLED, MBThread.class,
-						mbThread.getPrimaryKey(), this) == null) {
+						MBThreadModelImpl.ENTITY_CACHE_ENABLED,
+						MBThreadImpl.class, mbThread.getPrimaryKey(), this) == null) {
 				cacheResult(mbThread);
 			}
 		}
@@ -177,7 +177,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (mbThread.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(MBThreadImpl.class,
 						mbThread.getPrimaryKeyObj());
 
@@ -202,7 +202,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 		MBThreadModelImpl mbThreadModelImpl = (MBThreadModelImpl)mbThread;
 
 		EntityCacheUtil.removeResult(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
-			MBThread.class, mbThread.getPrimaryKey());
+			MBThreadImpl.class, mbThread.getPrimaryKey());
 
 		return mbThread;
 	}
@@ -282,10 +282,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		MBThreadModelImpl mbThreadModelImpl = (MBThreadModelImpl)mbThread;
-
 		EntityCacheUtil.putResult(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
-			MBThread.class, mbThread.getPrimaryKey(), mbThread);
+			MBThreadImpl.class, mbThread.getPrimaryKey(), mbThread);
+
+		MBThreadModelImpl mbThreadModelImpl = (MBThreadModelImpl)mbThread;
 
 		return mbThread;
 	}
@@ -309,7 +309,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 	public MBThread fetchByPrimaryKey(long threadId) throws SystemException {
 		MBThread result = (MBThread)EntityCacheUtil.getResult(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
-				MBThread.class, threadId, this);
+				MBThreadImpl.class, threadId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -372,10 +372,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				List<MBThread> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -443,10 +443,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 				List<MBThread> list = (List<MBThread>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -595,10 +595,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				List<MBThread> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_CATEGORYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -666,10 +666,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 				List<MBThread> list = (List<MBThread>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_CATEGORYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -879,9 +879,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

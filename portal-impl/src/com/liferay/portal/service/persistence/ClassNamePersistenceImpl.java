@@ -58,8 +58,8 @@ import java.util.List;
  */
 public class ClassNamePersistenceImpl extends BasePersistenceImpl
 	implements ClassNamePersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = ClassName.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = ClassName.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = ClassNameImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FETCH_BY_VALUE = new FinderPath(ClassNameModelImpl.ENTITY_CACHE_ENABLED,
 			ClassNameModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
@@ -75,18 +75,18 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl
 			"countAll", new String[0]);
 
 	public void cacheResult(ClassName className) {
+		EntityCacheUtil.putResult(ClassNameModelImpl.ENTITY_CACHE_ENABLED,
+			ClassNameImpl.class, className.getPrimaryKey(), className);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VALUE,
 			new Object[] { className.getValue() }, className);
-
-		EntityCacheUtil.putResult(ClassNameModelImpl.ENTITY_CACHE_ENABLED,
-			ClassName.class, className.getPrimaryKey(), className);
 	}
 
 	public void cacheResult(List<ClassName> classNames) {
 		for (ClassName className : classNames) {
 			if (EntityCacheUtil.getResult(
 						ClassNameModelImpl.ENTITY_CACHE_ENABLED,
-						ClassName.class, className.getPrimaryKey(), this) == null) {
+						ClassNameImpl.class, className.getPrimaryKey(), this) == null) {
 				cacheResult(className);
 			}
 		}
@@ -155,7 +155,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (className.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(ClassNameImpl.class,
 						className.getPrimaryKeyObj());
 
@@ -183,7 +183,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl
 			new Object[] { classNameModelImpl.getOriginalValue() });
 
 		EntityCacheUtil.removeResult(ClassNameModelImpl.ENTITY_CACHE_ENABLED,
-			ClassName.class, className.getPrimaryKey());
+			ClassNameImpl.class, className.getPrimaryKey());
 
 		return className;
 	}
@@ -262,6 +262,9 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(ClassNameModelImpl.ENTITY_CACHE_ENABLED,
+			ClassNameImpl.class, className.getPrimaryKey(), className);
+
 		ClassNameModelImpl classNameModelImpl = (ClassNameModelImpl)className;
 
 		if (!isNew &&
@@ -277,9 +280,6 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VALUE,
 				new Object[] { className.getValue() }, className);
 		}
-
-		EntityCacheUtil.putResult(ClassNameModelImpl.ENTITY_CACHE_ENABLED,
-			ClassName.class, className.getPrimaryKey(), className);
 
 		return className;
 	}
@@ -304,7 +304,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl
 	public ClassName fetchByPrimaryKey(long classNameId)
 		throws SystemException {
 		ClassName result = (ClassName)EntityCacheUtil.getResult(ClassNameModelImpl.ENTITY_CACHE_ENABLED,
-				ClassName.class, classNameId, this);
+				ClassNameImpl.class, classNameId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -357,6 +357,11 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public ClassName fetchByValue(String value) throws SystemException {
+		return fetchByValue(value, true);
+	}
+
+	public ClassName fetchByValue(String value, boolean cacheEmptyResult)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { value };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_VALUE,
@@ -394,8 +399,10 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl
 				ClassName className = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VALUE,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VALUE,
+							finderArgs, list);
+					}
 				}
 				else {
 					className = list.get(0);
@@ -510,9 +517,9 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

@@ -60,8 +60,8 @@ import java.util.List;
  */
 public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 	implements TasksProposalPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = TasksProposal.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = TasksProposal.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = TasksProposalImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(TasksProposalModelImpl.ENTITY_CACHE_ENABLED,
 			TasksProposalModelImpl.FINDER_CACHE_ENABLED,
@@ -113,22 +113,24 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
 	public void cacheResult(TasksProposal tasksProposal) {
+		EntityCacheUtil.putResult(TasksProposalModelImpl.ENTITY_CACHE_ENABLED,
+			TasksProposalImpl.class, tasksProposal.getPrimaryKey(),
+			tasksProposal);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
 				new Long(tasksProposal.getClassNameId()),
 				
 			tasksProposal.getClassPK()
 			}, tasksProposal);
-
-		EntityCacheUtil.putResult(TasksProposalModelImpl.ENTITY_CACHE_ENABLED,
-			TasksProposal.class, tasksProposal.getPrimaryKey(), tasksProposal);
 	}
 
 	public void cacheResult(List<TasksProposal> tasksProposals) {
 		for (TasksProposal tasksProposal : tasksProposals) {
 			if (EntityCacheUtil.getResult(
 						TasksProposalModelImpl.ENTITY_CACHE_ENABLED,
-						TasksProposal.class, tasksProposal.getPrimaryKey(), this) == null) {
+						TasksProposalImpl.class, tasksProposal.getPrimaryKey(),
+						this) == null) {
 				cacheResult(tasksProposal);
 			}
 		}
@@ -199,7 +201,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (tasksProposal.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(TasksProposalImpl.class,
 						tasksProposal.getPrimaryKeyObj());
 
@@ -231,7 +233,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(TasksProposalModelImpl.ENTITY_CACHE_ENABLED,
-			TasksProposal.class, tasksProposal.getPrimaryKey());
+			TasksProposalImpl.class, tasksProposal.getPrimaryKey());
 
 		return tasksProposal;
 	}
@@ -312,6 +314,10 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(TasksProposalModelImpl.ENTITY_CACHE_ENABLED,
+			TasksProposalImpl.class, tasksProposal.getPrimaryKey(),
+			tasksProposal);
+
 		TasksProposalModelImpl tasksProposalModelImpl = (TasksProposalModelImpl)tasksProposal;
 
 		if (!isNew &&
@@ -338,9 +344,6 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 				}, tasksProposal);
 		}
 
-		EntityCacheUtil.putResult(TasksProposalModelImpl.ENTITY_CACHE_ENABLED,
-			TasksProposal.class, tasksProposal.getPrimaryKey(), tasksProposal);
-
 		return tasksProposal;
 	}
 
@@ -364,7 +367,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 	public TasksProposal fetchByPrimaryKey(long proposalId)
 		throws SystemException {
 		TasksProposal result = (TasksProposal)EntityCacheUtil.getResult(TasksProposalModelImpl.ENTITY_CACHE_ENABLED,
-				TasksProposal.class, proposalId, this);
+				TasksProposalImpl.class, proposalId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -428,10 +431,10 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 
 				List<TasksProposal> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -499,10 +502,10 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 				List<TasksProposal> list = (List<TasksProposal>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -659,10 +662,10 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 
 				List<TasksProposal> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_U, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -736,10 +739,10 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 				List<TasksProposal> list = (List<TasksProposal>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_U,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -896,6 +899,11 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 
 	public TasksProposal fetchByC_C(long classNameId, String classPK)
 		throws SystemException {
+		return fetchByC_C(classNameId, classPK, true);
+	}
+
+	public TasksProposal fetchByC_C(long classNameId, String classPK,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(classNameId), classPK };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_C,
@@ -945,8 +953,10 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 				TasksProposal tasksProposal = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
+							finderArgs, list);
+					}
 				}
 				else {
 					tasksProposal = list.get(0);
@@ -1069,9 +1079,9 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

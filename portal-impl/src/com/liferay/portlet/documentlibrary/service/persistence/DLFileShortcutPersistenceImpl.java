@@ -62,8 +62,8 @@ import java.util.List;
  */
 public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 	implements DLFileShortcutPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = DLFileShortcut.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = DLFileShortcut.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = DLFileShortcutImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileShortcutModelImpl.FINDER_CACHE_ENABLED,
@@ -125,15 +125,16 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 	public void cacheResult(DLFileShortcut dlFileShortcut) {
 		EntityCacheUtil.putResult(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
-			DLFileShortcut.class, dlFileShortcut.getPrimaryKey(), dlFileShortcut);
+			DLFileShortcutImpl.class, dlFileShortcut.getPrimaryKey(),
+			dlFileShortcut);
 	}
 
 	public void cacheResult(List<DLFileShortcut> dlFileShortcuts) {
 		for (DLFileShortcut dlFileShortcut : dlFileShortcuts) {
 			if (EntityCacheUtil.getResult(
 						DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
-						DLFileShortcut.class, dlFileShortcut.getPrimaryKey(),
-						this) == null) {
+						DLFileShortcutImpl.class,
+						dlFileShortcut.getPrimaryKey(), this) == null) {
 				cacheResult(dlFileShortcut);
 			}
 		}
@@ -208,7 +209,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (dlFileShortcut.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(DLFileShortcutImpl.class,
 						dlFileShortcut.getPrimaryKeyObj());
 
@@ -233,7 +234,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 		DLFileShortcutModelImpl dlFileShortcutModelImpl = (DLFileShortcutModelImpl)dlFileShortcut;
 
 		EntityCacheUtil.removeResult(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
-			DLFileShortcut.class, dlFileShortcut.getPrimaryKey());
+			DLFileShortcutImpl.class, dlFileShortcut.getPrimaryKey());
 
 		return dlFileShortcut;
 	}
@@ -320,10 +321,11 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		DLFileShortcutModelImpl dlFileShortcutModelImpl = (DLFileShortcutModelImpl)dlFileShortcut;
-
 		EntityCacheUtil.putResult(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
-			DLFileShortcut.class, dlFileShortcut.getPrimaryKey(), dlFileShortcut);
+			DLFileShortcutImpl.class, dlFileShortcut.getPrimaryKey(),
+			dlFileShortcut);
+
+		DLFileShortcutModelImpl dlFileShortcutModelImpl = (DLFileShortcutModelImpl)dlFileShortcut;
 
 		return dlFileShortcut;
 	}
@@ -349,7 +351,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 	public DLFileShortcut fetchByPrimaryKey(long fileShortcutId)
 		throws SystemException {
 		DLFileShortcut result = (DLFileShortcut)EntityCacheUtil.getResult(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
-				DLFileShortcut.class, fileShortcutId, this);
+				DLFileShortcutImpl.class, fileShortcutId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -415,10 +417,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 				List<DLFileShortcut> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -486,10 +488,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 				List<DLFileShortcut> list = (List<DLFileShortcut>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -635,10 +637,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 				List<DLFileShortcut> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_FOLDERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -699,10 +701,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 				List<DLFileShortcut> list = (List<DLFileShortcut>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_FOLDERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -857,10 +859,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 				List<DLFileShortcut> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_TF_TN,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -936,10 +938,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 				List<DLFileShortcut> list = (List<DLFileShortcut>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_TF_TN,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1159,9 +1161,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

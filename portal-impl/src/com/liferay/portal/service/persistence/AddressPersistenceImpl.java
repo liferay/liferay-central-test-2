@@ -58,8 +58,8 @@ import java.util.List;
  */
 public class AddressPersistenceImpl extends BasePersistenceImpl
 	implements AddressPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = Address.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = Address.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = AddressImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(AddressModelImpl.ENTITY_CACHE_ENABLED,
 			AddressModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -186,14 +186,14 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 
 	public void cacheResult(Address address) {
 		EntityCacheUtil.putResult(AddressModelImpl.ENTITY_CACHE_ENABLED,
-			Address.class, address.getPrimaryKey(), address);
+			AddressImpl.class, address.getPrimaryKey(), address);
 	}
 
 	public void cacheResult(List<Address> addresses) {
 		for (Address address : addresses) {
 			if (EntityCacheUtil.getResult(
-						AddressModelImpl.ENTITY_CACHE_ENABLED, Address.class,
-						address.getPrimaryKey(), this) == null) {
+						AddressModelImpl.ENTITY_CACHE_ENABLED,
+						AddressImpl.class, address.getPrimaryKey(), this) == null) {
 				cacheResult(address);
 			}
 		}
@@ -261,7 +261,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (address.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(AddressImpl.class,
 						address.getPrimaryKeyObj());
 
@@ -286,7 +286,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 		AddressModelImpl addressModelImpl = (AddressModelImpl)address;
 
 		EntityCacheUtil.removeResult(AddressModelImpl.ENTITY_CACHE_ENABLED,
-			Address.class, address.getPrimaryKey());
+			AddressImpl.class, address.getPrimaryKey());
 
 		return address;
 	}
@@ -365,10 +365,10 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		AddressModelImpl addressModelImpl = (AddressModelImpl)address;
-
 		EntityCacheUtil.putResult(AddressModelImpl.ENTITY_CACHE_ENABLED,
-			Address.class, address.getPrimaryKey(), address);
+			AddressImpl.class, address.getPrimaryKey(), address);
+
+		AddressModelImpl addressModelImpl = (AddressModelImpl)address;
 
 		return address;
 	}
@@ -392,7 +392,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 
 	public Address fetchByPrimaryKey(long addressId) throws SystemException {
 		Address result = (Address)EntityCacheUtil.getResult(AddressModelImpl.ENTITY_CACHE_ENABLED,
-				Address.class, addressId, this);
+				AddressImpl.class, addressId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -454,10 +454,10 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 
 				List<Address> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -523,10 +523,10 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 				List<Address> list = (List<Address>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -671,10 +671,10 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 
 				List<Address> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -740,10 +740,10 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 				List<Address> list = (List<Address>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -896,10 +896,10 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 
 				List<Address> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -971,10 +971,10 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 				List<Address> list = (List<Address>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_C,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1147,10 +1147,10 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 
 				List<Address> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C_C,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1229,10 +1229,10 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 				List<Address> list = (List<Address>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_C_C,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1427,10 +1427,10 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 
 				List<Address> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C_C_M,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1518,10 +1518,10 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 				List<Address> list = (List<Address>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_C_C_M,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1728,10 +1728,10 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 
 				List<Address> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C_C_P,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1819,10 +1819,10 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 				List<Address> list = (List<Address>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_C_C_P,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -2068,9 +2068,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

@@ -58,8 +58,8 @@ import java.util.List;
  */
 public class WebsitePersistenceImpl extends BasePersistenceImpl
 	implements WebsitePersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = Website.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = Website.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = WebsiteImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(WebsiteModelImpl.ENTITY_CACHE_ENABLED,
 			WebsiteModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -162,14 +162,14 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 	public void cacheResult(Website website) {
 		EntityCacheUtil.putResult(WebsiteModelImpl.ENTITY_CACHE_ENABLED,
-			Website.class, website.getPrimaryKey(), website);
+			WebsiteImpl.class, website.getPrimaryKey(), website);
 	}
 
 	public void cacheResult(List<Website> websites) {
 		for (Website website : websites) {
 			if (EntityCacheUtil.getResult(
-						WebsiteModelImpl.ENTITY_CACHE_ENABLED, Website.class,
-						website.getPrimaryKey(), this) == null) {
+						WebsiteModelImpl.ENTITY_CACHE_ENABLED,
+						WebsiteImpl.class, website.getPrimaryKey(), this) == null) {
 				cacheResult(website);
 			}
 		}
@@ -237,7 +237,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (website.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(WebsiteImpl.class,
 						website.getPrimaryKeyObj());
 
@@ -262,7 +262,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 		WebsiteModelImpl websiteModelImpl = (WebsiteModelImpl)website;
 
 		EntityCacheUtil.removeResult(WebsiteModelImpl.ENTITY_CACHE_ENABLED,
-			Website.class, website.getPrimaryKey());
+			WebsiteImpl.class, website.getPrimaryKey());
 
 		return website;
 	}
@@ -341,10 +341,10 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		WebsiteModelImpl websiteModelImpl = (WebsiteModelImpl)website;
-
 		EntityCacheUtil.putResult(WebsiteModelImpl.ENTITY_CACHE_ENABLED,
-			Website.class, website.getPrimaryKey(), website);
+			WebsiteImpl.class, website.getPrimaryKey(), website);
+
+		WebsiteModelImpl websiteModelImpl = (WebsiteModelImpl)website;
 
 		return website;
 	}
@@ -368,7 +368,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 	public Website fetchByPrimaryKey(long websiteId) throws SystemException {
 		Website result = (Website)EntityCacheUtil.getResult(WebsiteModelImpl.ENTITY_CACHE_ENABLED,
-				Website.class, websiteId, this);
+				WebsiteImpl.class, websiteId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -430,10 +430,10 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 				List<Website> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -499,10 +499,10 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 				List<Website> list = (List<Website>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -647,10 +647,10 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 				List<Website> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -716,10 +716,10 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 				List<Website> list = (List<Website>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -872,10 +872,10 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 				List<Website> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -947,10 +947,10 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 				List<Website> list = (List<Website>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_C,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1123,10 +1123,10 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 				List<Website> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C_C,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1205,10 +1205,10 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 				List<Website> list = (List<Website>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_C_C,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1403,10 +1403,10 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 				List<Website> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C_C_P,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1494,10 +1494,10 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 				List<Website> list = (List<Website>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_C_C_P,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1743,9 +1743,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

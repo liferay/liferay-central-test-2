@@ -157,6 +157,14 @@ public class PluginSettingUtil {
 		return getPersistence().fetchByC_I_T(companyId, pluginId, pluginType);
 	}
 
+	public static com.liferay.portal.model.PluginSetting fetchByC_I_T(
+		long companyId, java.lang.String pluginId, java.lang.String pluginType,
+		boolean cacheEmptyResult) throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByC_I_T(companyId, pluginId, pluginType,
+			cacheEmptyResult);
+	}
+
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

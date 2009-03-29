@@ -67,8 +67,8 @@ import java.util.List;
  */
 public class RolePersistenceImpl extends BasePersistenceImpl
 	implements RolePersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = Role.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = Role.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = RoleImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(RoleModelImpl.ENTITY_CACHE_ENABLED,
 			RoleModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -113,6 +113,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 			"countAll", new String[0]);
 
 	public void cacheResult(Role role) {
+		EntityCacheUtil.putResult(RoleModelImpl.ENTITY_CACHE_ENABLED,
+			RoleImpl.class, role.getPrimaryKey(), role);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
 			new Object[] { new Long(role.getCompanyId()), role.getName() }, role);
 
@@ -121,15 +124,12 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 				new Long(role.getCompanyId()), new Long(role.getClassNameId()),
 				new Long(role.getClassPK())
 			}, role);
-
-		EntityCacheUtil.putResult(RoleModelImpl.ENTITY_CACHE_ENABLED,
-			Role.class, role.getPrimaryKey(), role);
 	}
 
 	public void cacheResult(List<Role> roles) {
 		for (Role role : roles) {
 			if (EntityCacheUtil.getResult(RoleModelImpl.ENTITY_CACHE_ENABLED,
-						Role.class, role.getPrimaryKey(), this) == null) {
+						RoleImpl.class, role.getPrimaryKey(), this) == null) {
 				cacheResult(role);
 			}
 		}
@@ -224,7 +224,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (role.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(RoleImpl.class,
 						role.getPrimaryKeyObj());
 
@@ -263,7 +263,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(RoleModelImpl.ENTITY_CACHE_ENABLED,
-			Role.class, role.getPrimaryKey());
+			RoleImpl.class, role.getPrimaryKey());
 
 		return role;
 	}
@@ -341,6 +341,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(RoleModelImpl.ENTITY_CACHE_ENABLED,
+			RoleImpl.class, role.getPrimaryKey(), role);
+
 		RoleModelImpl roleModelImpl = (RoleModelImpl)role;
 
 		if (!isNew &&
@@ -385,9 +388,6 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 				}, role);
 		}
 
-		EntityCacheUtil.putResult(RoleModelImpl.ENTITY_CACHE_ENABLED,
-			Role.class, role.getPrimaryKey(), role);
-
 		return role;
 	}
 
@@ -409,7 +409,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 	public Role fetchByPrimaryKey(long roleId) throws SystemException {
 		Role result = (Role)EntityCacheUtil.getResult(RoleModelImpl.ENTITY_CACHE_ENABLED,
-				Role.class, roleId, this);
+				RoleImpl.class, roleId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -469,10 +469,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 				List<Role> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -538,10 +538,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 				List<Role> list = (List<Role>)QueryUtil.list(q, getDialect(),
 						start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -681,6 +681,11 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 	public Role fetchByC_N(long companyId, String name)
 		throws SystemException {
+		return fetchByC_N(companyId, name, true);
+	}
+
+	public Role fetchByC_N(long companyId, String name, boolean cacheEmptyResult)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(companyId), name };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_N,
@@ -728,8 +733,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 				Role role = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
+							finderArgs, list);
+					}
 				}
 				else {
 					role = list.get(0);
@@ -787,6 +794,11 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 	public Role fetchByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
+		return fetchByC_C_C(companyId, classNameId, classPK, true);
+	}
+
+	public Role fetchByC_C_C(long companyId, long classNameId, long classPK,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK)
 			};
@@ -835,8 +847,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 				Role role = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C_C,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C_C,
+							finderArgs, list);
+					}
 				}
 				else {
 					role = list.get(0);
@@ -956,9 +970,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 							end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}
@@ -1304,10 +1318,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 				List<com.liferay.portal.model.Group> list = (List<com.liferay.portal.model.Group>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				groupPersistence.cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_GET_GROUPS, finderArgs,
 					list);
-
-				groupPersistence.cacheResult(list);
 
 				return list;
 			}
@@ -1627,10 +1641,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 				List<com.liferay.portal.model.Permission> list = (List<com.liferay.portal.model.Permission>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				permissionPersistence.cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_GET_PERMISSIONS,
 					finderArgs, list);
-
-				permissionPersistence.cacheResult(list);
 
 				return list;
 			}
@@ -1960,10 +1974,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 				List<com.liferay.portal.model.User> list = (List<com.liferay.portal.model.User>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				userPersistence.cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_GET_USERS, finderArgs,
 					list);
-
-				userPersistence.cacheResult(list);
 
 				return list;
 			}

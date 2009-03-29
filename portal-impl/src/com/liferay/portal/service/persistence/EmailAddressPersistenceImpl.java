@@ -58,8 +58,8 @@ import java.util.List;
  */
 public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 	implements EmailAddressPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = EmailAddress.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = EmailAddress.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = EmailAddressImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
 			EmailAddressModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -162,14 +162,15 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 	public void cacheResult(EmailAddress emailAddress) {
 		EntityCacheUtil.putResult(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
-			EmailAddress.class, emailAddress.getPrimaryKey(), emailAddress);
+			EmailAddressImpl.class, emailAddress.getPrimaryKey(), emailAddress);
 	}
 
 	public void cacheResult(List<EmailAddress> emailAddresses) {
 		for (EmailAddress emailAddress : emailAddresses) {
 			if (EntityCacheUtil.getResult(
 						EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
-						EmailAddress.class, emailAddress.getPrimaryKey(), this) == null) {
+						EmailAddressImpl.class, emailAddress.getPrimaryKey(),
+						this) == null) {
 				cacheResult(emailAddress);
 			}
 		}
@@ -240,7 +241,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (emailAddress.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(EmailAddressImpl.class,
 						emailAddress.getPrimaryKeyObj());
 
@@ -265,7 +266,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 		EmailAddressModelImpl emailAddressModelImpl = (EmailAddressModelImpl)emailAddress;
 
 		EntityCacheUtil.removeResult(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
-			EmailAddress.class, emailAddress.getPrimaryKey());
+			EmailAddressImpl.class, emailAddress.getPrimaryKey());
 
 		return emailAddress;
 	}
@@ -346,10 +347,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		EmailAddressModelImpl emailAddressModelImpl = (EmailAddressModelImpl)emailAddress;
-
 		EntityCacheUtil.putResult(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
-			EmailAddress.class, emailAddress.getPrimaryKey(), emailAddress);
+			EmailAddressImpl.class, emailAddress.getPrimaryKey(), emailAddress);
+
+		EmailAddressModelImpl emailAddressModelImpl = (EmailAddressModelImpl)emailAddress;
 
 		return emailAddress;
 	}
@@ -375,7 +376,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 	public EmailAddress fetchByPrimaryKey(long emailAddressId)
 		throws SystemException {
 		EmailAddress result = (EmailAddress)EntityCacheUtil.getResult(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
-				EmailAddress.class, emailAddressId, this);
+				EmailAddressImpl.class, emailAddressId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -438,10 +439,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 				List<EmailAddress> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -508,10 +509,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 				List<EmailAddress> list = (List<EmailAddress>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -662,10 +663,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 				List<EmailAddress> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -732,10 +733,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 				List<EmailAddress> list = (List<EmailAddress>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -891,10 +892,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 				List<EmailAddress> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -967,10 +968,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 				List<EmailAddress> list = (List<EmailAddress>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_C,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1147,10 +1148,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 				List<EmailAddress> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C_C,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1230,10 +1231,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 				List<EmailAddress> list = (List<EmailAddress>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_C_C,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1430,10 +1431,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 				List<EmailAddress> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C_C_P,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1522,10 +1523,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 				List<EmailAddress> list = (List<EmailAddress>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_C_C_P,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1774,9 +1775,9 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

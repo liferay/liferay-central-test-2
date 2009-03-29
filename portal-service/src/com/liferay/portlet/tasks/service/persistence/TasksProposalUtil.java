@@ -200,6 +200,13 @@ public class TasksProposalUtil {
 		return getPersistence().fetchByC_C(classNameId, classPK);
 	}
 
+	public static com.liferay.portlet.tasks.model.TasksProposal fetchByC_C(
+		long classNameId, java.lang.String classPK, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByC_C(classNameId, classPK, cacheEmptyResult);
+	}
+
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

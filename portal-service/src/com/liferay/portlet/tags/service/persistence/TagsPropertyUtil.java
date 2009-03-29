@@ -242,6 +242,12 @@ public class TagsPropertyUtil {
 		return getPersistence().fetchByE_K(entryId, key);
 	}
 
+	public static com.liferay.portlet.tags.model.TagsProperty fetchByE_K(
+		long entryId, java.lang.String key, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByE_K(entryId, key, cacheEmptyResult);
+	}
+
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

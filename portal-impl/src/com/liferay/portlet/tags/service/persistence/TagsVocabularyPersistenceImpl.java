@@ -60,8 +60,8 @@ import java.util.List;
  */
 public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 	implements TagsVocabularyPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = TagsVocabulary.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = TagsVocabulary.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = TagsVocabularyImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FETCH_BY_G_N = new FinderPath(TagsVocabularyModelImpl.ENTITY_CACHE_ENABLED,
 			TagsVocabularyModelImpl.FINDER_CACHE_ENABLED,
@@ -113,23 +113,24 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
 	public void cacheResult(TagsVocabulary tagsVocabulary) {
+		EntityCacheUtil.putResult(TagsVocabularyModelImpl.ENTITY_CACHE_ENABLED,
+			TagsVocabularyImpl.class, tagsVocabulary.getPrimaryKey(),
+			tagsVocabulary);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
 			new Object[] {
 				new Long(tagsVocabulary.getGroupId()),
 				
 			tagsVocabulary.getName()
 			}, tagsVocabulary);
-
-		EntityCacheUtil.putResult(TagsVocabularyModelImpl.ENTITY_CACHE_ENABLED,
-			TagsVocabulary.class, tagsVocabulary.getPrimaryKey(), tagsVocabulary);
 	}
 
 	public void cacheResult(List<TagsVocabulary> tagsVocabularies) {
 		for (TagsVocabulary tagsVocabulary : tagsVocabularies) {
 			if (EntityCacheUtil.getResult(
 						TagsVocabularyModelImpl.ENTITY_CACHE_ENABLED,
-						TagsVocabulary.class, tagsVocabulary.getPrimaryKey(),
-						this) == null) {
+						TagsVocabularyImpl.class,
+						tagsVocabulary.getPrimaryKey(), this) == null) {
 				cacheResult(tagsVocabulary);
 			}
 		}
@@ -200,7 +201,7 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (tagsVocabulary.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(TagsVocabularyImpl.class,
 						tagsVocabulary.getPrimaryKeyObj());
 
@@ -232,7 +233,7 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(TagsVocabularyModelImpl.ENTITY_CACHE_ENABLED,
-			TagsVocabulary.class, tagsVocabulary.getPrimaryKey());
+			TagsVocabularyImpl.class, tagsVocabulary.getPrimaryKey());
 
 		return tagsVocabulary;
 	}
@@ -313,6 +314,10 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(TagsVocabularyModelImpl.ENTITY_CACHE_ENABLED,
+			TagsVocabularyImpl.class, tagsVocabulary.getPrimaryKey(),
+			tagsVocabulary);
+
 		TagsVocabularyModelImpl tagsVocabularyModelImpl = (TagsVocabularyModelImpl)tagsVocabulary;
 
 		if (!isNew &&
@@ -339,9 +344,6 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 				}, tagsVocabulary);
 		}
 
-		EntityCacheUtil.putResult(TagsVocabularyModelImpl.ENTITY_CACHE_ENABLED,
-			TagsVocabulary.class, tagsVocabulary.getPrimaryKey(), tagsVocabulary);
-
 		return tagsVocabulary;
 	}
 
@@ -366,7 +368,7 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 	public TagsVocabulary fetchByPrimaryKey(long vocabularyId)
 		throws SystemException {
 		TagsVocabulary result = (TagsVocabulary)EntityCacheUtil.getResult(TagsVocabularyModelImpl.ENTITY_CACHE_ENABLED,
-				TagsVocabulary.class, vocabularyId, this);
+				TagsVocabularyImpl.class, vocabularyId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -423,6 +425,11 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 
 	public TagsVocabulary fetchByG_N(long groupId, String name)
 		throws SystemException {
+		return fetchByG_N(groupId, name, true);
+	}
+
+	public TagsVocabulary fetchByG_N(long groupId, String name,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId), name };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_N,
@@ -471,8 +478,10 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 				TagsVocabulary tagsVocabulary = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
+							finderArgs, list);
+					}
 				}
 				else {
 					tagsVocabulary = list.get(0);
@@ -541,10 +550,10 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 
 				List<TagsVocabulary> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_F, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -617,10 +626,10 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 				List<TagsVocabulary> list = (List<TagsVocabulary>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_F,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -792,10 +801,10 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 
 				List<TagsVocabulary> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_F, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -868,10 +877,10 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 				List<TagsVocabulary> list = (List<TagsVocabulary>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_F,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1096,9 +1105,9 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

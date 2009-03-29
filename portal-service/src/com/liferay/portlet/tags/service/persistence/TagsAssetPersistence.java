@@ -119,6 +119,10 @@ public interface TagsAssetPersistence extends BasePersistence {
 		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.tags.model.TagsAsset fetchByC_C(
+		long classNameId, long classPK, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;

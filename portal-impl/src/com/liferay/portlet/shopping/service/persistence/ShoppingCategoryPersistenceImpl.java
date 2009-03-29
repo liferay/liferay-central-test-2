@@ -60,8 +60,8 @@ import java.util.List;
  */
 public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 	implements ShoppingCategoryPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = ShoppingCategory.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = ShoppingCategory.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = ShoppingCategoryImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(ShoppingCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			ShoppingCategoryModelImpl.FINDER_CACHE_ENABLED,
@@ -106,7 +106,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 
 	public void cacheResult(ShoppingCategory shoppingCategory) {
 		EntityCacheUtil.putResult(ShoppingCategoryModelImpl.ENTITY_CACHE_ENABLED,
-			ShoppingCategory.class, shoppingCategory.getPrimaryKey(),
+			ShoppingCategoryImpl.class, shoppingCategory.getPrimaryKey(),
 			shoppingCategory);
 	}
 
@@ -114,7 +114,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 		for (ShoppingCategory shoppingCategory : shoppingCategories) {
 			if (EntityCacheUtil.getResult(
 						ShoppingCategoryModelImpl.ENTITY_CACHE_ENABLED,
-						ShoppingCategory.class,
+						ShoppingCategoryImpl.class,
 						shoppingCategory.getPrimaryKey(), this) == null) {
 				cacheResult(shoppingCategory);
 			}
@@ -187,7 +187,8 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (shoppingCategory.isCachedModel() ||
+					BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(ShoppingCategoryImpl.class,
 						shoppingCategory.getPrimaryKeyObj());
 
@@ -212,7 +213,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 		ShoppingCategoryModelImpl shoppingCategoryModelImpl = (ShoppingCategoryModelImpl)shoppingCategory;
 
 		EntityCacheUtil.removeResult(ShoppingCategoryModelImpl.ENTITY_CACHE_ENABLED,
-			ShoppingCategory.class, shoppingCategory.getPrimaryKey());
+			ShoppingCategoryImpl.class, shoppingCategory.getPrimaryKey());
 
 		return shoppingCategory;
 	}
@@ -293,11 +294,11 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		ShoppingCategoryModelImpl shoppingCategoryModelImpl = (ShoppingCategoryModelImpl)shoppingCategory;
-
 		EntityCacheUtil.putResult(ShoppingCategoryModelImpl.ENTITY_CACHE_ENABLED,
-			ShoppingCategory.class, shoppingCategory.getPrimaryKey(),
+			ShoppingCategoryImpl.class, shoppingCategory.getPrimaryKey(),
 			shoppingCategory);
+
+		ShoppingCategoryModelImpl shoppingCategoryModelImpl = (ShoppingCategoryModelImpl)shoppingCategory;
 
 		return shoppingCategory;
 	}
@@ -323,7 +324,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 	public ShoppingCategory fetchByPrimaryKey(long categoryId)
 		throws SystemException {
 		ShoppingCategory result = (ShoppingCategory)EntityCacheUtil.getResult(ShoppingCategoryModelImpl.ENTITY_CACHE_ENABLED,
-				ShoppingCategory.class, categoryId, this);
+				ShoppingCategoryImpl.class, categoryId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -387,10 +388,10 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 
 				List<ShoppingCategory> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -458,10 +459,10 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 				List<ShoppingCategory> list = (List<ShoppingCategory>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -621,10 +622,10 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 
 				List<ShoppingCategory> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_P, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -699,10 +700,10 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 				List<ShoppingCategory> list = (List<ShoppingCategory>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_P,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -929,9 +930,9 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 							getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

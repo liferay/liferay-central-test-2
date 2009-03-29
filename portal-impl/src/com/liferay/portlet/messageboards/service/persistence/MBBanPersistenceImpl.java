@@ -60,8 +60,8 @@ import java.util.List;
  */
 public class MBBanPersistenceImpl extends BasePersistenceImpl
 	implements MBBanPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = MBBan.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = MBBan.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = MBBanImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(MBBanModelImpl.ENTITY_CACHE_ENABLED,
 			MBBanModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -124,19 +124,19 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 			"countAll", new String[0]);
 
 	public void cacheResult(MBBan mbBan) {
+		EntityCacheUtil.putResult(MBBanModelImpl.ENTITY_CACHE_ENABLED,
+			MBBanImpl.class, mbBan.getPrimaryKey(), mbBan);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_B,
 			new Object[] {
 				new Long(mbBan.getGroupId()), new Long(mbBan.getBanUserId())
 			}, mbBan);
-
-		EntityCacheUtil.putResult(MBBanModelImpl.ENTITY_CACHE_ENABLED,
-			MBBan.class, mbBan.getPrimaryKey(), mbBan);
 	}
 
 	public void cacheResult(List<MBBan> mbBans) {
 		for (MBBan mbBan : mbBans) {
 			if (EntityCacheUtil.getResult(MBBanModelImpl.ENTITY_CACHE_ENABLED,
-						MBBan.class, mbBan.getPrimaryKey(), this) == null) {
+						MBBanImpl.class, mbBan.getPrimaryKey(), this) == null) {
 				cacheResult(mbBan);
 			}
 		}
@@ -201,7 +201,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (mbBan.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(MBBanImpl.class,
 						mbBan.getPrimaryKeyObj());
 
@@ -232,7 +232,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(MBBanModelImpl.ENTITY_CACHE_ENABLED,
-			MBBan.class, mbBan.getPrimaryKey());
+			MBBanImpl.class, mbBan.getPrimaryKey());
 
 		return mbBan;
 	}
@@ -311,6 +311,9 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(MBBanModelImpl.ENTITY_CACHE_ENABLED,
+			MBBanImpl.class, mbBan.getPrimaryKey(), mbBan);
+
 		MBBanModelImpl mbBanModelImpl = (MBBanModelImpl)mbBan;
 
 		if (!isNew &&
@@ -331,9 +334,6 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 					new Long(mbBan.getGroupId()), new Long(mbBan.getBanUserId())
 				}, mbBan);
 		}
-
-		EntityCacheUtil.putResult(MBBanModelImpl.ENTITY_CACHE_ENABLED,
-			MBBan.class, mbBan.getPrimaryKey(), mbBan);
 
 		return mbBan;
 	}
@@ -356,7 +356,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 	public MBBan fetchByPrimaryKey(long banId) throws SystemException {
 		MBBan result = (MBBan)EntityCacheUtil.getResult(MBBanModelImpl.ENTITY_CACHE_ENABLED,
-				MBBan.class, banId, this);
+				MBBanImpl.class, banId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -414,10 +414,10 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 				List<MBBan> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -478,10 +478,10 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 				List<MBBan> list = (List<MBBan>)QueryUtil.list(q, getDialect(),
 						start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -617,10 +617,10 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 				List<MBBan> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -681,10 +681,10 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 				List<MBBan> list = (List<MBBan>)QueryUtil.list(q, getDialect(),
 						start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -821,10 +821,10 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 				List<MBBan> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_BANUSERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -885,10 +885,10 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 				List<MBBan> list = (List<MBBan>)QueryUtil.list(q, getDialect(),
 						start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_BANUSERID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1023,6 +1023,11 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 	public MBBan fetchByG_B(long groupId, long banUserId)
 		throws SystemException {
+		return fetchByG_B(groupId, banUserId, true);
+	}
+
+	public MBBan fetchByG_B(long groupId, long banUserId,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(banUserId)
 			};
@@ -1062,8 +1067,10 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 				MBBan mbBan = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_B,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_B,
+							finderArgs, list);
+					}
 				}
 				else {
 					mbBan = list.get(0);
@@ -1178,9 +1185,9 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 							end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

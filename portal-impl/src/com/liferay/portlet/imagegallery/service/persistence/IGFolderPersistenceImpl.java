@@ -62,8 +62,8 @@ import java.util.List;
  */
 public class IGFolderPersistenceImpl extends BasePersistenceImpl
 	implements IGFolderPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = IGFolder.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = IGFolder.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = IGFolderImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(IGFolderModelImpl.ENTITY_CACHE_ENABLED,
 			IGFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -157,6 +157,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 			"countAll", new String[0]);
 
 	public void cacheResult(IGFolder igFolder) {
+		EntityCacheUtil.putResult(IGFolderModelImpl.ENTITY_CACHE_ENABLED,
+			IGFolderImpl.class, igFolder.getPrimaryKey(), igFolder);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] { igFolder.getUuid(), new Long(igFolder.getGroupId()) },
 			igFolder);
@@ -168,16 +171,13 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 				
 			igFolder.getName()
 			}, igFolder);
-
-		EntityCacheUtil.putResult(IGFolderModelImpl.ENTITY_CACHE_ENABLED,
-			IGFolder.class, igFolder.getPrimaryKey(), igFolder);
 	}
 
 	public void cacheResult(List<IGFolder> igFolders) {
 		for (IGFolder igFolder : igFolders) {
 			if (EntityCacheUtil.getResult(
-						IGFolderModelImpl.ENTITY_CACHE_ENABLED, IGFolder.class,
-						igFolder.getPrimaryKey(), this) == null) {
+						IGFolderModelImpl.ENTITY_CACHE_ENABLED,
+						IGFolderImpl.class, igFolder.getPrimaryKey(), this) == null) {
 				cacheResult(igFolder);
 			}
 		}
@@ -249,7 +249,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (igFolder.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(IGFolderImpl.class,
 						igFolder.getPrimaryKeyObj());
 
@@ -288,7 +288,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 			});
 
 		EntityCacheUtil.removeResult(IGFolderModelImpl.ENTITY_CACHE_ENABLED,
-			IGFolder.class, igFolder.getPrimaryKey());
+			IGFolderImpl.class, igFolder.getPrimaryKey());
 
 		return igFolder;
 	}
@@ -374,6 +374,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EntityCacheUtil.putResult(IGFolderModelImpl.ENTITY_CACHE_ENABLED,
+			IGFolderImpl.class, igFolder.getPrimaryKey(), igFolder);
+
 		IGFolderModelImpl igFolderModelImpl = (IGFolderModelImpl)igFolder;
 
 		if (!isNew &&
@@ -420,9 +423,6 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 				}, igFolder);
 		}
 
-		EntityCacheUtil.putResult(IGFolderModelImpl.ENTITY_CACHE_ENABLED,
-			IGFolder.class, igFolder.getPrimaryKey(), igFolder);
-
 		return igFolder;
 	}
 
@@ -445,7 +445,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 	public IGFolder fetchByPrimaryKey(long folderId) throws SystemException {
 		IGFolder result = (IGFolder)EntityCacheUtil.getResult(IGFolderModelImpl.ENTITY_CACHE_ENABLED,
-				IGFolder.class, folderId, this);
+				IGFolderImpl.class, folderId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -515,10 +515,10 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 				List<IGFolder> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -593,10 +593,10 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 				List<IGFolder> list = (List<IGFolder>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -745,6 +745,11 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 	public IGFolder fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
+		return fetchByUUID_G(uuid, groupId, true);
+	}
+
+	public IGFolder fetchByUUID_G(String uuid, long groupId,
+		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
@@ -794,8 +799,10 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 				IGFolder igFolder = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+							finderArgs, list);
+					}
 				}
 				else {
 					igFolder = list.get(0);
@@ -856,10 +863,10 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 				List<IGFolder> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -927,10 +934,10 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 				List<IGFolder> list = (List<IGFolder>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1079,10 +1086,10 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 				List<IGFolder> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1150,10 +1157,10 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 				List<IGFolder> list = (List<IGFolder>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1311,10 +1318,10 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 				List<IGFolder> list = q.list();
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_P, finderArgs,
 					list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1388,10 +1395,10 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 				List<IGFolder> list = (List<IGFolder>)QueryUtil.list(q,
 						getDialect(), start, end);
 
+				cacheResult(list);
+
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_P,
 					finderArgs, list);
-
-				cacheResult(list);
 
 				return list;
 			}
@@ -1550,6 +1557,11 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 	public IGFolder fetchByG_P_N(long groupId, long parentFolderId, String name)
 		throws SystemException {
+		return fetchByG_P_N(groupId, parentFolderId, name, true);
+	}
+
+	public IGFolder fetchByG_P_N(long groupId, long parentFolderId,
+		String name, boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(parentFolderId),
 				
@@ -1609,8 +1621,10 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 				IGFolder igFolder = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_N,
-						finderArgs, list);
+					if (cacheEmptyResult) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_N,
+							finderArgs, list);
+					}
 				}
 				else {
 					igFolder = list.get(0);
@@ -1732,9 +1746,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

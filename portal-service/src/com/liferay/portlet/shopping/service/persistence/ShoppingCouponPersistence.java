@@ -121,6 +121,10 @@ public interface ShoppingCouponPersistence extends BasePersistence {
 	public com.liferay.portlet.shopping.model.ShoppingCoupon fetchByCode(
 		java.lang.String code) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.shopping.model.ShoppingCoupon fetchByCode(
+		java.lang.String code, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;

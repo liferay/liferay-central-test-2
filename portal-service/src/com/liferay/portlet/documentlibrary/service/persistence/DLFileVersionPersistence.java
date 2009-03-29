@@ -125,6 +125,10 @@ public interface DLFileVersionPersistence extends BasePersistence {
 		long folderId, java.lang.String name, double version)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.documentlibrary.model.DLFileVersion fetchByF_N_V(
+		long folderId, java.lang.String name, double version,
+		boolean cacheEmptyResult) throws com.liferay.portal.SystemException;
+
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;

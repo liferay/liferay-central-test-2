@@ -58,8 +58,8 @@ import java.util.List;
  */
 public class TagsSourcePersistenceImpl extends BasePersistenceImpl
 	implements TagsSourcePersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = TagsSource.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = TagsSource.class.getName() +
+	public static final String FINDER_CLASS_NAME_ENTITY = TagsSourceImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(TagsSourceModelImpl.ENTITY_CACHE_ENABLED,
 			TagsSourceModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -70,14 +70,14 @@ public class TagsSourcePersistenceImpl extends BasePersistenceImpl
 
 	public void cacheResult(TagsSource tagsSource) {
 		EntityCacheUtil.putResult(TagsSourceModelImpl.ENTITY_CACHE_ENABLED,
-			TagsSource.class, tagsSource.getPrimaryKey(), tagsSource);
+			TagsSourceImpl.class, tagsSource.getPrimaryKey(), tagsSource);
 	}
 
 	public void cacheResult(List<TagsSource> tagsSources) {
 		for (TagsSource tagsSource : tagsSources) {
 			if (EntityCacheUtil.getResult(
 						TagsSourceModelImpl.ENTITY_CACHE_ENABLED,
-						TagsSource.class, tagsSource.getPrimaryKey(), this) == null) {
+						TagsSourceImpl.class, tagsSource.getPrimaryKey(), this) == null) {
 				cacheResult(tagsSource);
 			}
 		}
@@ -146,7 +146,7 @@ public class TagsSourcePersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (tagsSource.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(TagsSourceImpl.class,
 						tagsSource.getPrimaryKeyObj());
 
@@ -171,7 +171,7 @@ public class TagsSourcePersistenceImpl extends BasePersistenceImpl
 		TagsSourceModelImpl tagsSourceModelImpl = (TagsSourceModelImpl)tagsSource;
 
 		EntityCacheUtil.removeResult(TagsSourceModelImpl.ENTITY_CACHE_ENABLED,
-			TagsSource.class, tagsSource.getPrimaryKey());
+			TagsSourceImpl.class, tagsSource.getPrimaryKey());
 
 		return tagsSource;
 	}
@@ -251,10 +251,10 @@ public class TagsSourcePersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		TagsSourceModelImpl tagsSourceModelImpl = (TagsSourceModelImpl)tagsSource;
-
 		EntityCacheUtil.putResult(TagsSourceModelImpl.ENTITY_CACHE_ENABLED,
-			TagsSource.class, tagsSource.getPrimaryKey(), tagsSource);
+			TagsSourceImpl.class, tagsSource.getPrimaryKey(), tagsSource);
+
+		TagsSourceModelImpl tagsSourceModelImpl = (TagsSourceModelImpl)tagsSource;
 
 		return tagsSource;
 	}
@@ -279,7 +279,7 @@ public class TagsSourcePersistenceImpl extends BasePersistenceImpl
 	public TagsSource fetchByPrimaryKey(long sourceId)
 		throws SystemException {
 		TagsSource result = (TagsSource)EntityCacheUtil.getResult(TagsSourceModelImpl.ENTITY_CACHE_ENABLED,
-				TagsSource.class, sourceId, this);
+				TagsSourceImpl.class, sourceId, this);
 
 		if (result == null) {
 			Session session = null;
@@ -396,9 +396,9 @@ public class TagsSourcePersistenceImpl extends BasePersistenceImpl
 							start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}

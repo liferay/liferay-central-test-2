@@ -236,6 +236,12 @@ public class MBBanUtil {
 		return getPersistence().fetchByG_B(groupId, banUserId);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBBan fetchByG_B(
+		long groupId, long banUserId, boolean cacheEmptyResult)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByG_B(groupId, banUserId, cacheEmptyResult);
+	}
+
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
