@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Permission;
@@ -92,6 +93,16 @@ public class PermissionFinderImpl
 
 	public static String FIND_BY_U_C_N_S_P =
 		PermissionFinder.class.getName() + ".findByU_C_N_S_P";
+
+	public static final FinderPath FINDER_PATH_COUNT_BY_ROLES_PERMISSIONS =
+		new FinderPath(
+			PermissionModelImpl.ENTITY_CACHE_ENABLED,
+			PermissionModelImpl.FINDER_CACHE_ENABLED,
+			PermissionPersistenceImpl.FINDER_CLASS_NAME_LIST,
+			"customCountByRolesPermissions",
+			new String[] {
+				java.util.List.class.getName(), java.util.List.class.getName()
+			});
 
 	public static final FinderPath FINDER_PATH_FIND_BY_A_R = new FinderPath(
 		PermissionModelImpl.ENTITY_CACHE_ENABLED,
@@ -435,47 +446,65 @@ public class PermissionFinderImpl
 			List<Permission> permissions, List<Role> roles)
 		throws SystemException {
 
-		Session session = null;
+		Object finderArgs[] = new Object[] {
+			ListUtil.toString(permissions, "permissionId"),
+			ListUtil.toString(roles, "roleId")
+		};
 
-		try {
-			session = openSession();
+		Object result = FinderCacheUtil.getResult(
+			FINDER_PATH_COUNT_BY_ROLES_PERMISSIONS, finderArgs, this);
 
-			String sql = CustomSQLUtil.get(COUNT_BY_ROLES_PERMISSIONS);
+		if (result == null) {
+			Session session = null;
 
-			sql = StringUtil.replace(
-				sql, "[$PERMISSION_IDS$]",
-				getPermissionIds(permissions, "Roles_Permissions"));
-			sql = StringUtil.replace(
-				sql, "[$ROLE_IDS$]", getRoleIds(roles, "Roles_Permissions"));
+			try {
+				session = openSession();
 
-			SQLQuery q = session.createSQLQuery(sql);
+				String sql = CustomSQLUtil.get(COUNT_BY_ROLES_PERMISSIONS);
 
-			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+				sql = StringUtil.replace(
+					sql, "[$PERMISSION_IDS$]",
+					getPermissionIds(permissions, "Roles_Permissions"));
+				sql = StringUtil.replace(
+					sql, "[$ROLE_IDS$]",
+					getRoleIds(roles, "Roles_Permissions"));
 
-			QueryPos qPos = QueryPos.getInstance(q);
+				SQLQuery q = session.createSQLQuery(sql);
 
-			setPermissionIds(qPos, permissions);
-			setRoleIds(qPos, roles);
+				q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
-			int count = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-			Iterator<Long> itr = q.list().iterator();
+				setPermissionIds(qPos, permissions);
+				setRoleIds(qPos, roles);
 
-			if (itr.hasNext()) {
-				Long l = itr.next();
+				int count = 0;
 
-				if (l != null) {
-					count = l.intValue();
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					Long l = itr.next();
+
+					if (l != null) {
+						count = l.intValue();
+					}
 				}
-			}
 
-			return count;
+				FinderCacheUtil.putResult(
+					FINDER_PATH_COUNT_BY_ROLES_PERMISSIONS, finderArgs,
+					new Long(count));
+
+				return count;
+			}
+			catch (Exception e) {
+				throw new SystemException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return ((Long)result).intValue();
 		}
 	}
 
