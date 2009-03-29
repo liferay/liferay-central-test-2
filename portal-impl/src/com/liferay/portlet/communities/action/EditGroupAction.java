@@ -23,7 +23,6 @@
 package com.liferay.portlet.communities.action;
 
 import com.liferay.portal.DuplicateGroupException;
-import com.liferay.portal.GroupCanNotDeleteException;
 import com.liferay.portal.GroupFriendlyURLException;
 import com.liferay.portal.GroupNameException;
 import com.liferay.portal.NoSuchGroupException;
@@ -84,7 +83,6 @@ public class EditGroupAction extends PortletAction {
 				setForward(actionRequest, "portlet.communities.error");
 			}
 			else if (e instanceof DuplicateGroupException ||
-					 e instanceof GroupCanNotDeleteException ||
 					 e instanceof GroupFriendlyURLException ||
 					 e instanceof GroupNameException ||
 					 e instanceof RequiredGroupException) {
@@ -132,18 +130,6 @@ public class EditGroupAction extends PortletAction {
 			WebKeys.THEME_DISPLAY);
 
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
-		long currentGroupId;
-
-		if (ParamUtil.getLong(actionRequest, "doAsGroupId") == 0) {
-			currentGroupId = themeDisplay.getScopeGroupId();
-		}
-		else {
-			currentGroupId = ParamUtil.getLong(actionRequest, "doAsGroupId");
-		}
-
-		if (groupId == currentGroupId){
-			throw new GroupCanNotDeleteException();
-		}
 
 		GroupServiceUtil.deleteGroup(groupId);
 

@@ -25,7 +25,6 @@
 <%@ include file="/html/portlet/init.jsp" %>
 
 <%@ page import="com.liferay.portal.DuplicateGroupException" %>
-<%@ page import="com.liferay.portal.GroupCanNotDeleteException" %>
 <%@ page import="com.liferay.portal.GroupNameException" %>
 <%@ page import="com.liferay.portal.LARFileException" %>
 <%@ page import="com.liferay.portal.LARTypeException" %>
