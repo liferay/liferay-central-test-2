@@ -29,6 +29,8 @@ import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.SessionFactory;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.util.PropsValues;
@@ -127,6 +129,11 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 			result = _cloneResult(result);
 		}
 		else {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Load " + classObj + " " + primaryKeyObj + " from session");
+			}
+
 			Session session = null;
 
 			try {
@@ -224,6 +231,8 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 
 		return portalCache;
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(EntityCacheImpl.class);
 
 	private MultiVMPool _multiVMPool;
 	private Map<String, PortalCache> _portalCaches =
