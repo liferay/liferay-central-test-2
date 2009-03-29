@@ -76,18 +76,6 @@ create table AnnouncementsFlag (
 	value INTEGER
 );
 
-create table BlogsCategory (
-	categoryId LONG not null primary key,
-	companyId LONG,
-	userId LONG,
-	userName VARCHAR(75) null,
-	createDate DATE null,
-	modifiedDate DATE null,
-	parentCategoryId LONG,
-	name VARCHAR(75) null,
-	description STRING null
-);
-
 create table BlogsEntry (
 	uuid_ VARCHAR(75) null,
 	entryId LONG not null primary key,
