@@ -49,9 +49,9 @@ import java.util.List;
 
 public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implements ${entity.name}Persistence {
 
-	public static final String FINDER_CLASS_NAME_ENTITY = ${entity.name}.class.getName();
+	public static final String FINDER_CLASS_NAME_ENTITY = ${entity.name}Impl.class.getName();
 
-	public static final String FINDER_CLASS_NAME_LIST = ${entity.name}.class.getName() + ".List";
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY + ".List";
 
 	<#list entity.getFinderList() as finder>
 		<#assign finderColsList = finder.getColumns()>
@@ -132,6 +132,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 		new String[0]);
 
 	public void cacheResult(${entity.name} ${entity.varName}) {
+		EntityCacheUtil.putResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}Impl.class, ${entity.varName}.getPrimaryKey(), ${entity.varName});
+
 		<#list entity.getFinderList() as finder>
 			<#assign finderColsList = finder.getColumns()>
 
@@ -162,13 +164,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					${entity.varName});
 			</#if>
 		</#list>
-
-		EntityCacheUtil.putResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}.class, ${entity.varName}.getPrimaryKey(), ${entity.varName});
 	}
 
 	public void cacheResult(List<${entity.name}> ${entity.varNames}) {
 		for (${entity.name} ${entity.varName} : ${entity.varNames}) {
-			if (EntityCacheUtil.getResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}.class, ${entity.varName}.getPrimaryKey(), this) == null) {
+			if (EntityCacheUtil.getResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}Impl.class, ${entity.varName}.getPrimaryKey(), this) == null) {
 				cacheResult(${entity.varName});
 			}
 		}
@@ -266,7 +266,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 		try {
 			session = openSession();
 
-			if (BatchSessionUtil.isEnabled()) {
+			if (${entity.varName}.isCachedModel() || BatchSessionUtil.isEnabled()) {
 				Object staleObject = session.get(${entity.name}Impl.class, ${entity.varName}.getPrimaryKeyObj());
 
 				if (staleObject != null) {
@@ -319,7 +319,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 			</#if>
 		</#list>
 
-		EntityCacheUtil.removeResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}.class, ${entity.varName}.getPrimaryKey());
+		EntityCacheUtil.removeResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}Impl.class, ${entity.varName}.getPrimaryKey());
 
 		return ${entity.varName};
 	}
@@ -402,6 +402,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 		}
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		EntityCacheUtil.putResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}Impl.class, ${entity.varName}.getPrimaryKey(), ${entity.varName});
 
 		${entity.name}ModelImpl ${entity.varName}ModelImpl = (${entity.name}ModelImpl)${entity.varName};
 
@@ -492,8 +494,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 			</#if>
 		</#list>
 
-		EntityCacheUtil.putResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}.class, ${entity.varName}.getPrimaryKey(), ${entity.varName});
-
 		return ${entity.varName};
 	}
 
@@ -512,7 +512,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 	}
 
 	public ${entity.name} fetchByPrimaryKey(${entity.PKClassName} ${entity.PKVarName}) throws SystemException {
-		${entity.name} result = (${entity.name})EntityCacheUtil.getResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}.class, ${entity.PKVarName}, this);
+		${entity.name} result = (${entity.name})EntityCacheUtil.getResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}Impl.class, ${entity.PKVarName}, this);
 
 		if (result == null) {
 			Session session = null;
@@ -674,9 +674,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 						List<${entity.name}> list = q.list();
 
-						FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_${finder.name?upper_case}, finderArgs, list);
-
 						cacheResult(list);
+
+						FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_${finder.name?upper_case}, finderArgs, list);
 
 						return list;
 					}
@@ -829,9 +829,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 						List<${entity.name}> list = (List<${entity.name}>)QueryUtil.list(q, getDialect(), start, end);
 
-						FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_${finder.name?upper_case}, finderArgs, list);
-
 						cacheResult(list);
+
+						FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_${finder.name?upper_case}, finderArgs, list);
 
 						return list;
 					}
@@ -1119,6 +1119,24 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 			</#list>
 
 			) throws SystemException {
+				return fetchBy${finder.name}(
+
+				<#list finderColsList as finderCol>
+					${finderCol.name},
+				</#list>
+
+				true);
+			}
+
+			public ${entity.name} fetchBy${finder.name}(
+
+			<#list finderColsList as finderCol>
+				${finderCol.type} ${finderCol.name},
+			</#list>
+
+			boolean cacheEmptyResult
+
+			) throws SystemException {
 				Object[] finderArgs = new Object[] {
 					<#list finderColsList as finderCol>
 						<#if finderCol.isPrimitiveType()>
@@ -1229,7 +1247,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 						${entity.name} ${entity.varName} = null;
 
 						if (list.isEmpty()) {
-							FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_${finder.name?upper_case}, finderArgs, list);
+							if (cacheEmptyResult) {
+								FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_${finder.name?upper_case}, finderArgs, list);
+							}
 						}
 						else {
 							${entity.varName} = list.get(0);
@@ -1349,9 +1369,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					list = (List<${entity.name}>)QueryUtil.list(q, getDialect(), start, end);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
 				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
 
 				return list;
 			}
@@ -1705,9 +1725,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 						List<${tempEntity.packagePath}.model.${tempEntity.name}> list = (List<${tempEntity.packagePath}.model.${tempEntity.name}>)QueryUtil.list(q, getDialect(), start, end);
 
-						FinderCacheUtil.putResult(FINDER_PATH_GET_${tempEntity.names?upper_case}, finderArgs, list);
-
 						${tempEntity.varName}Persistence.cacheResult(list);
+
+						FinderCacheUtil.putResult(FINDER_PATH_GET_${tempEntity.names?upper_case}, finderArgs, list);
 
 						return list;
 					}

@@ -77,10 +77,7 @@ public class BasePersistenceImpl implements BasePersistence, SessionFactory {
 	}
 
 	public SystemException processException(Exception e) {
-		if (e instanceof ORMException) {
-			_log.error("Caught ORMException");
-		}
-		else {
+		if (!(e instanceof ORMException)) {
 			_log.error("Caught unexpected exception " + e.getClass().getName());
 		}
 
