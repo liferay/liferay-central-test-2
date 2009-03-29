@@ -2131,7 +2131,8 @@ public class PortalImpl implements Portal {
 		if ((parameterMap == null) ||
 			(!parameterMap.containsKey("browserId"))) {
 
-			sb.append("&browserId=");
+			sb.append(StringPool.AMPERSAND_ENCODED);
+			sb.append("browserId=");
 			sb.append(BrowserSnifferUtil.getBrowserId(request));
 		}
 
@@ -2141,14 +2142,16 @@ public class PortalImpl implements Portal {
 			if ((parameterMap == null) ||
 				(!parameterMap.containsKey("themeId"))) {
 
-				sb.append("&themeId=");
+				sb.append(StringPool.AMPERSAND_ENCODED);
+				sb.append("themeId=");
 				sb.append(theme.getThemeId());
 			}
 
 			if ((parameterMap == null) ||
 				(!parameterMap.containsKey("colorSchemeId"))) {
 
-				sb.append("&colorSchemeId=");
+				sb.append(StringPool.AMPERSAND_ENCODED);
+				sb.append("colorSchemeId=");
 				sb.append(colorScheme.getColorSchemeId());
 			}
 		}
@@ -2165,12 +2168,13 @@ public class PortalImpl implements Portal {
 					minifierType = "css";
 				}
 			}
-			else if (themeDisplay.isThemeJsFastLoad()){
+			else if (themeDisplay.isThemeJsFastLoad()) {
 				minifierType = "js";
 			}
 
 			if (Validator.isNotNull(minifierType)) {
-				sb.append("&minifierType=");
+				sb.append(StringPool.AMPERSAND_ENCODED);
+				sb.append("minifierType=");
 				sb.append(minifierType);
 			}
 		}
@@ -2178,8 +2182,12 @@ public class PortalImpl implements Portal {
 		// Query string
 
 		if (Validator.isNotNull(queryString)) {
-			if (!queryString.startsWith(StringPool.AMPERSAND)) {
-				sb.append(StringPool.AMPERSAND);
+			queryString =
+				StringUtil.replace(
+					queryString, "&", StringPool.AMPERSAND_ENCODED);
+			
+			if (!queryString.startsWith(StringPool.AMPERSAND_ENCODED)) {
+				sb.append(StringPool.AMPERSAND_ENCODED);
 			}
 
 			sb.append(queryString);
@@ -2200,7 +2208,8 @@ public class PortalImpl implements Portal {
 				File uriFile = new File(uriRealPath);
 
 				if (uriFile.exists()) {
-					sb.append("&t=");
+					sb.append(StringPool.AMPERSAND_ENCODED);
+					sb.append("t=");
 					sb.append(uriFile.lastModified());
 
 					appendedTimestamp = true;
@@ -2211,13 +2220,15 @@ public class PortalImpl implements Portal {
 		if (!appendedTimestamp &&
 			((parameterMap == null) || !parameterMap.containsKey("t"))) {
 
-			sb.append("&t=");
+			sb.append(StringPool.AMPERSAND_ENCODED);
+			sb.append("t=");
 			sb.append(theme.getTimestamp());
 		}
 
 		String url = sb.toString();
 
-		url = StringUtil.replace(url, "?&", StringPool.QUESTION);
+		url = StringUtil.replace(
+			url, "?" + StringPool.AMPERSAND_ENCODED, StringPool.QUESTION);
 
 		return url;
 	}
