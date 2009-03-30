@@ -43,6 +43,8 @@ public interface SingleVMPool {
 
 	public PortalCache getCache(String name);
 
+	public PortalCache getCache(String name, boolean blocking);
+
 	public void put(String name, String key, Object obj);
 
 	public void put(PortalCache portalCache, String key, Object obj);

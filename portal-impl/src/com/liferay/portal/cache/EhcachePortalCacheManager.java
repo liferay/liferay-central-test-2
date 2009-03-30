@@ -30,9 +30,10 @@ import java.net.URL;
 
 import javax.management.MBeanServer;
 
-import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
+import net.sf.ehcache.Ehcache;
 import net.sf.ehcache.ObjectExistsException;
+import net.sf.ehcache.constructs.blocking.BlockingCache;
 import net.sf.ehcache.management.ManagementService;
 
 /**
@@ -64,7 +65,11 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 	}
 
 	public PortalCache getCache(String name) {
-		Cache cache = _cacheManager.getCache(name);
+		return getCache(name, false);
+	}
+
+	public PortalCache getCache(String name, boolean blocking) {
+		Ehcache cache = _cacheManager.getEhcache(name);
 
 		if (cache == null) {
 			try {
@@ -76,7 +81,11 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 
 			}
 
-			cache = _cacheManager.getCache(name);
+			cache = _cacheManager.getEhcache(name);
+
+			if (blocking) {
+				cache = replaceCacheWithDecoratedCache(cache);
+			}
 		}
 
 		return new EhcachePortalCache(cache);
@@ -106,6 +115,19 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 
 	public void setRegisterCacheStatistics(boolean registerCacheStatistics) {
 		_registerCacheStatistics = registerCacheStatistics;
+	}
+
+	protected Ehcache replaceCacheWithDecoratedCache(Ehcache cache) {
+		if (cache instanceof BlockingCache) {
+			return cache;
+		}
+
+		Ehcache decoratedCache = new BlockingCache(cache);
+
+		_cacheManager.replaceCacheWithDecoratedCache(
+			cache, decoratedCache);
+
+		return decoratedCache;
 	}
 
 	private String _configPropertyKey;

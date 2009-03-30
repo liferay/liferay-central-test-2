@@ -89,8 +89,14 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 
 		Object result = _multiVMPool.get(portalCache, key);
 
+		if (result == null) {
+			result = StringPool.BLANK;
+
+			_multiVMPool.put(portalCache, key, result);
+		}
+
 		if (result != null) {
-			result = _cloneResult(result);
+			result = _objectToResult(result);
 		}
 
 		return result;
@@ -126,7 +132,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		Object result = _multiVMPool.get(portalCache, key);
 
 		if (result != null) {
-			result = _cloneResult(result);
+			result = _objectToResult(result);
 		}
 		else {
 			if (_log.isDebugEnabled()) {
@@ -142,12 +148,16 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 				result = session.load(classObj, primaryKeyObj);
 			}
 			finally {
+				if (result == null) {
+					result = StringPool.BLANK;
+				}
+
+				result = _objectToResult(result);
+
+				_multiVMPool.put(portalCache, key, result);
+
 				sessionFactory.closeSession(session);
 			}
-
-			result = _cloneResult(result);
-
-			_multiVMPool.put(portalCache, key, result);
 		}
 
 		return result;
@@ -168,7 +178,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 
 		String key = _encodeKey(primaryKeyObj);
 
-		result = _cloneResult(result);
+		result = _objectToResult(result);
 
 		_multiVMPool.put(portalCache, key, result);
 	}
@@ -194,14 +204,19 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		_multiVMPool = multiVMPool;
 	}
 
-	private Object _cloneResult(Object result) {
-		result = ((BaseModel<?>)result).clone();
+	private Object _objectToResult(Object result) {
+		if (result instanceof String) {
+			return null;
+		}
+		else {
+			result = ((BaseModel<?>)result).clone();
 
-		BaseModel<?> model = (BaseModel<?>)result;
+			BaseModel<?> model = (BaseModel<?>)result;
 
-		model.setCachedModel(true);
+			model.setCachedModel(true);
 
-		return model;
+			return model;
+		}
 	}
 
 	private String _encodeGroupKey(String className) {
@@ -224,7 +239,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		PortalCache portalCache = _portalCaches.get(groupKey);
 
 		if (portalCache == null) {
-			portalCache = _multiVMPool.getCache(groupKey);
+			portalCache = _multiVMPool.getCache(groupKey, true);
 
 			_portalCaches.put(groupKey, portalCache);
 		}

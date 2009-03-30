@@ -1308,9 +1308,17 @@ public class PropsValues {
 	public static final boolean USERS_UPDATE_LAST_LOGIN =
 		GetterUtil.getBoolean(PropsUtil.get(PropsKeys.USERS_UPDATE_LAST_LOGIN));
 
+	public static final boolean VALUE_OBJECT_ENTITY_BLOCKING_CACHE =
+		GetterUtil.getBoolean(PropsUtil.get(PropsKeys.
+			VALUE_OBJECT_ENTITY_BLOCKING_CACHE));
+
 	public static final boolean VALUE_OBJECT_ENTITY_CACHE_ENABLED =
 		GetterUtil.getBoolean(PropsUtil.get(PropsKeys.
 			VALUE_OBJECT_ENTITY_CACHE_ENABLED));
+
+	public static final boolean VALUE_OBJECT_FINDER_BLOCKING_CACHE =
+		GetterUtil.getBoolean(PropsUtil.get(PropsKeys.
+			VALUE_OBJECT_FINDER_BLOCKING_CACHE));
 
 	public static final boolean VALUE_OBJECT_FINDER_CACHE_ENABLED =
 		GetterUtil.getBoolean(PropsUtil.get(PropsKeys.

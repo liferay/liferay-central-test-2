@@ -34,4 +34,7 @@ public interface PortalCacheManager {
 
 	public PortalCache getCache(String name) throws PortalCacheException;
 
+	public PortalCache getCache(String name, boolean blocking)
+		throws PortalCacheException;
+
 }

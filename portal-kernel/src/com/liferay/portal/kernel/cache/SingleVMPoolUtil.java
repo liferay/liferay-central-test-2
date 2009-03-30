@@ -53,6 +53,10 @@ public class SingleVMPoolUtil {
 		return getSingleVMPool().getCache(name);
 	}
 
+	public static PortalCache getCache(String name, boolean blocking) {
+		return getSingleVMPool().getCache(name, blocking);
+	}
+
 	public static SingleVMPool getSingleVMPool() {
 		return _singleVMPool;
 	}

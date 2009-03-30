@@ -12,20 +12,6 @@
 		overflowToDisk="false"
 	/>
 	<cache
-		name="com.liferay.portal.lastmodified.LastModifiedCSS"
-		maxElementsInMemory="10000"
-		eternal="false"
-        timeToIdleSeconds="600"
-		overflowToDisk="false"
-	/>
-	<cache
-		name="com.liferay.portal.lastmodified.LastModifiedJavaScript"
-		maxElementsInMemory="10000"
-		eternal="false"
-        timeToIdleSeconds="600"
-		overflowToDisk="false"
-	/>
-	<cache
 		name="com.liferay.portal.util.WebCachePool"
 		maxElementsInMemory="1000"
 		eternal="false"

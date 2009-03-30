@@ -46,6 +46,10 @@ public class MemoryPortalCacheManager implements PortalCacheManager {
 	}
 
 	public PortalCache getCache(String name) {
+		return getCache(name, false);
+	}
+
+	public PortalCache getCache(String name, boolean blocking) {
 		PortalCache cache = _cacheMap.get(name);
 
 		if (cache == null) {

@@ -1240,7 +1240,11 @@ public interface PropsKeys {
 
 	public static final String USERS_UPDATE_LAST_LOGIN = "users.update.last.login";
 
+	public static final String VALUE_OBJECT_ENTITY_BLOCKING_CACHE = "value.object.entity.blocking.cache";
+
 	public static final String VALUE_OBJECT_ENTITY_CACHE_ENABLED = "value.object.entity.cache.enabled";
+
+	public static final String VALUE_OBJECT_FINDER_BLOCKING_CACHE = "value.object.finder.blocking.cache";
 
 	public static final String VALUE_OBJECT_FINDER_CACHE_ENABLED = "value.object.finder.cache.enabled";
 

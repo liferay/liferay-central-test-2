@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.cache.PortalCache;
 
 import java.io.Serializable;
 
-import net.sf.ehcache.Cache;
+import net.sf.ehcache.Ehcache;
 import net.sf.ehcache.Element;
 
 /**
@@ -37,7 +37,7 @@ import net.sf.ehcache.Element;
  */
 public class EhcachePortalCache implements PortalCache {
 
-	public EhcachePortalCache(Cache cache) {
+	public EhcachePortalCache(Ehcache cache) {
 		_cache = cache;
 	}
 
@@ -88,6 +88,6 @@ public class EhcachePortalCache implements PortalCache {
 		_cache.removeAll();
 	}
 
-	private Cache _cache;
+	private Ehcache _cache;
 
 }

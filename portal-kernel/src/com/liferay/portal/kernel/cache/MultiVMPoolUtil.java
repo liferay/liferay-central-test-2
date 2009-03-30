@@ -57,6 +57,10 @@ public class MultiVMPoolUtil {
 		return getMultiVMPool().getCache(name);
 	}
 
+	public static PortalCache getCache(String name, boolean blocking) {
+		return getMultiVMPool().getCache(name, blocking);
+	}
+
 	public static void put(String name, String key, Object obj) {
 		getMultiVMPool().put(name, key, obj);
 	}

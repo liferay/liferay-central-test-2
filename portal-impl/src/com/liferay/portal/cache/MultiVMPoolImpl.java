@@ -61,6 +61,10 @@ public class MultiVMPoolImpl implements MultiVMPool {
 		return _portalCacheManager.getCache(name);
 	}
 
+	public PortalCache getCache(String name, boolean blocking) {
+		return _portalCacheManager.getCache(name, blocking);
+	}
+
 	public void put(String name, String key, Object obj) {
 		PortalCache portalCache = getCache(name);
 

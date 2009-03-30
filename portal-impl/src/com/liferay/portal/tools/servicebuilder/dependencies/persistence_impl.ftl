@@ -512,15 +512,15 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 	}
 
 	public ${entity.name} fetchByPrimaryKey(${entity.PKClassName} ${entity.PKVarName}) throws SystemException {
-		${entity.name} result = (${entity.name})EntityCacheUtil.getResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}Impl.class, ${entity.PKVarName}, this);
+		${entity.name} ${entity.varName} = (${entity.name})EntityCacheUtil.getResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}Impl.class, ${entity.PKVarName}, this);
 
-		if (result == null) {
+		if (${entity.varName} == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				${entity.name} ${entity.varName} = (${entity.name})session.get(${entity.name}Impl.class,
+				${entity.varName} = (${entity.name})session.get(${entity.name}Impl.class,
 
 				<#if entity.hasPrimitivePK()>
 					new ${serviceBuilder.getPrimitiveObj("${entity.PKClassName}")}(
@@ -533,23 +533,20 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 				</#if>
 
 				);
-
-				if (${entity.varName} != null) {
-					cacheResult(${entity.varName});
-				}
-
-				return ${entity.varName};
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (${entity.varName} != null) {
+					cacheResult(${entity.varName});
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (${entity.name})result;
-		}
+
+		return ${entity.varName};
 	}
 
 	<#list entity.getFinderList() as finder>
@@ -589,9 +586,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					</#list>
 				};
 
-				Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_${finder.name?upper_case}, finderArgs, this);
+				List<${entity.name}> list = (List<${entity.name}>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_${finder.name?upper_case}, finderArgs, this);
 
-				if (result == null) {
+				if (list == null) {
 					Session session = null;
 
 					try {
@@ -672,24 +669,25 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 							</#if>
 						</#list>
 
-						List<${entity.name}> list = q.list();
-
-						cacheResult(list);
-
-						FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_${finder.name?upper_case}, finderArgs, list);
-
-						return list;
+						list = q.list();
 					}
 					catch (Exception e) {
 						throw processException(e);
 					}
 					finally {
+						if (list == null) {
+							list = new ArrayList<${entity.name}>();
+						}
+
+						cacheResult(list);
+
+						FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_${finder.name?upper_case}, finderArgs, list);
+
 						closeSession(session);
 					}
 				}
-				else {
-					return (List<${entity.name}>)result;
-				}
+
+				return list;
 			}
 
 			public List<${entity.name}> findBy${finder.name}(
@@ -737,9 +735,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 				};
 
-				Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_${finder.name?upper_case}, finderArgs, this);
+				List<${entity.name}> list = (List<${entity.name}>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_${finder.name?upper_case}, finderArgs, this);
 
-				if (result == null) {
+				if (list == null) {
 					Session session = null;
 
 					try {
@@ -827,24 +825,25 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 							</#if>
 						</#list>
 
-						List<${entity.name}> list = (List<${entity.name}>)QueryUtil.list(q, getDialect(), start, end);
-
-						cacheResult(list);
-
-						FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_${finder.name?upper_case}, finderArgs, list);
-
-						return list;
+						list = (List<${entity.name}>)QueryUtil.list(q, getDialect(), start, end);
 					}
 					catch (Exception e) {
 						throw processException(e);
 					}
 					finally {
+						if (list == null) {
+							list = new ArrayList<${entity.name}>();
+						}
+
+						cacheResult(list);
+
+						FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_${finder.name?upper_case}, finderArgs, list);
+
 						closeSession(session);
 					}
 				}
-				else {
-					return (List<${entity.name}>)result;
-				}
+
+				return list;
 			}
 
 			public ${entity.name} findBy${finder.name}_First(
@@ -1119,24 +1118,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 			</#list>
 
 			) throws SystemException {
-				return fetchBy${finder.name}(
-
-				<#list finderColsList as finderCol>
-					${finderCol.name},
-				</#list>
-
-				true);
-			}
-
-			public ${entity.name} fetchBy${finder.name}(
-
-			<#list finderColsList as finderCol>
-				${finderCol.type} ${finderCol.name},
-			</#list>
-
-			boolean cacheEmptyResult
-
-			) throws SystemException {
 				Object[] finderArgs = new Object[] {
 					<#list finderColsList as finderCol>
 						<#if finderCol.isPrimitiveType()>
@@ -1244,12 +1225,12 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 						List<${entity.name}> list = q.list();
 
+						result = list;
+
 						${entity.name} ${entity.varName} = null;
 
 						if (list.isEmpty()) {
-							if (cacheEmptyResult) {
-								FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_${finder.name?upper_case}, finderArgs, list);
-							}
+							FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_${finder.name?upper_case}, finderArgs, list);
 						}
 						else {
 							${entity.varName} = list.get(0);
@@ -1263,6 +1244,10 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 						throw processException(e);
 					}
 					finally {
+						if (result == null) {
+							FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_${finder.name?upper_case}, finderArgs, new ArrayList<${entity.name}>());
+						}
+
 						closeSession(session);
 					}
 				}
@@ -1327,9 +1312,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 	public List<${entity.name}> findAll(int start, int end, OrderByComparator obc) throws SystemException {
 		Object[] finderArgs = new Object[] {String.valueOf(start), String.valueOf(end), String.valueOf(obc)};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL, finderArgs, this);
+		List<${entity.name}> list = (List<${entity.name}>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL, finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1358,8 +1343,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 				Query q = session.createQuery(query.toString());
 
-				List<${entity.name}> list = null;
-
 				if (obc == null) {
 					list = (List<${entity.name}>)QueryUtil.list(q, getDialect(), start, end, false);
 
@@ -1368,23 +1351,24 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 				else {
 					list = (List<${entity.name}>)QueryUtil.list(q, getDialect(), start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<${entity.name}>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<${entity.name}>)result;
-		}
+
+		return list;
 	}
 
 	<#list entity.getFinderList() as finder>
@@ -1483,9 +1467,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 				</#list>
 			};
 
-			Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_${finder.name?upper_case}, finderArgs, this);
+			Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_${finder.name?upper_case}, finderArgs, this);
 
-			if (result == null) {
+			if (count == null) {
 				Session session = null;
 
 				try {
@@ -1557,41 +1541,32 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 						</#if>
 					</#list>
 
-					Long count = null;
-
-					Iterator<Long> itr = q.list().iterator();
-
-					if (itr.hasNext()) {
-						count = itr.next();
-					}
-
-					if (count == null) {
-						count = new Long(0);
-					}
-
-					FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_${finder.name?upper_case}, finderArgs, count);
-
-					return count.intValue();
+					count = (Long)q.uniqueResult();
 				}
 				catch (Exception e) {
 					throw processException(e);
 				}
 				finally {
+					if (count == null) {
+						count = Long.valueOf(0);
+					}
+
+					FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_${finder.name?upper_case}, finderArgs, count);
+
 					closeSession(session);
 				}
 			}
-			else {
-				return ((Long)result).intValue();
-			}
+
+			return count.intValue();
 		}
 	</#list>
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL, finderArgs, this);
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL, finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1599,32 +1574,23 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 				Query q = session.createQuery("SELECT COUNT(*) FROM ${packagePath}.model.${entity.name}");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	<#list entity.columnList as column>
@@ -1684,9 +1650,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					, String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 				};
 
-				Object result = FinderCacheUtil.getResult(FINDER_PATH_GET_${tempEntity.names?upper_case}, finderArgs, this);
+				List<${tempEntity.packagePath}.model.${tempEntity.name}> list = (List<${tempEntity.packagePath}.model.${tempEntity.name}>)FinderCacheUtil.getResult(FINDER_PATH_GET_${tempEntity.names?upper_case}, finderArgs, this);
 
-				if (result == null) {
+				if (list == null) {
 					Session session = null;
 
 					try {
@@ -1723,24 +1689,25 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 						qPos.add(pk);
 
-						List<${tempEntity.packagePath}.model.${tempEntity.name}> list = (List<${tempEntity.packagePath}.model.${tempEntity.name}>)QueryUtil.list(q, getDialect(), start, end);
-
-						${tempEntity.varName}Persistence.cacheResult(list);
-
-						FinderCacheUtil.putResult(FINDER_PATH_GET_${tempEntity.names?upper_case}, finderArgs, list);
-
-						return list;
+						list = (List<${tempEntity.packagePath}.model.${tempEntity.name}>)QueryUtil.list(q, getDialect(), start, end);
 					}
 					catch (Exception e) {
 						throw processException(e);
 					}
 					finally {
+						if (list == null) {
+							list = new ArrayList<${tempEntity.packagePath}.model.${tempEntity.name}>();
+						}
+
+						${tempEntity.varName}Persistence.cacheResult(list);
+
+						FinderCacheUtil.putResult(FINDER_PATH_GET_${tempEntity.names?upper_case}, finderArgs, list);
+
 						closeSession(session);
 					}
 				}
-				else {
-					return (List<${tempEntity.packagePath}.model.${tempEntity.name}>)result;
-				}
+
+				return list;
 			}
 
 			public static final FinderPath FINDER_PATH_GET_${tempEntity.names?upper_case}_SIZE = new FinderPath(
@@ -1786,9 +1753,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					</#if>
 				};
 
-				Object result = FinderCacheUtil.getResult(FINDER_PATH_GET_${tempEntity.names?upper_case}_SIZE, finderArgs, this);
+				Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_GET_${tempEntity.names?upper_case}_SIZE, finderArgs, this);
 
-				if (result == null) {
+				if (count == null) {
 					Session session = null;
 
 					try {
@@ -1802,32 +1769,23 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 						qPos.add(pk);
 
-						Long count = null;
-
-						Iterator<Long> itr = q.list().iterator();
-
-						if (itr.hasNext()) {
-							count = itr.next();
-						}
-
-						if (count == null) {
-							count = new Long(0);
-						}
-
-						FinderCacheUtil.putResult(FINDER_PATH_GET_${tempEntity.names?upper_case}_SIZE, finderArgs, count);
-
-						return count.intValue();
+						count = (Long)q.uniqueResult();
 					}
 					catch (Exception e) {
 						throw processException(e);
 					}
 					finally {
+						if (count == null) {
+							count = Long.valueOf(0);
+						}
+
+						FinderCacheUtil.putResult(FINDER_PATH_GET_${tempEntity.names?upper_case}_SIZE, finderArgs, count);
+
 						closeSession(session);
 					}
 				}
-				else {
-					return ((Long)result).intValue();
-				}
+
+				return count.intValue();
 			}
 
 			public static final FinderPath FINDER_PATH_CONTAINS_${tempEntity.name?upper_case} = new FinderPath(
@@ -1895,23 +1853,25 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					</#if>
 				};
 
-				Object result = FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_${tempEntity.name?upper_case}, finderArgs, this);
+				Boolean value = (Boolean)FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_${tempEntity.name?upper_case}, finderArgs, this);
 
-				if (result == null) {
+				if (value == null) {
 					try {
-						Boolean value = Boolean.valueOf(contains${tempEntity.name}.contains(pk, ${tempEntity.varName}PK));
-
-						FinderCacheUtil.putResult(FINDER_PATH_CONTAINS_${tempEntity.name?upper_case}, finderArgs, value);
-
-						return value.booleanValue();
+						value = Boolean.valueOf(contains${tempEntity.name}.contains(pk, ${tempEntity.varName}PK));
 					}
 					catch (Exception e) {
 						throw processException(e);
 					}
+					finally {
+						if (value == null) {
+							value = Boolean.FALSE;
+						}
+
+						FinderCacheUtil.putResult(FINDER_PATH_CONTAINS_${tempEntity.name?upper_case}, finderArgs, value);
+					}
 				}
-				else {
-					return ((Boolean)result).booleanValue();
-				}
+
+				return value.booleanValue();
 			}
 
 			public boolean contains${tempEntity.names}(${entity.PKClassName} pk) throws SystemException {
