@@ -92,23 +92,6 @@ public class SA_TearDownTest extends BaseTestCase {
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isTextPresent(
-									"Your request processed successfully.")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
 			case 2:
 
 				boolean DLFoldersNotPresent2 = selenium.isElementPresent(
@@ -166,8 +149,6 @@ public class SA_TearDownTest extends BaseTestCase {
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
 				selenium.click(RuntimeVariables.replace("link=Welcome"));
 				selenium.waitForPageToLoad("30000");
-				assertFalse(selenium.isElementPresent(
-						"link=Document Library Permissions Test Page"));
 
 			case 100:
 				label = -1;

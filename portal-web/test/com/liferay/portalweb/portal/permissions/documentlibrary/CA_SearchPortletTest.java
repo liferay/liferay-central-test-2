@@ -57,7 +57,7 @@ public class CA_SearchPortletTest extends BaseTestCase {
 			RuntimeVariables.replace("Permissions"));
 		selenium.type("_20_keywords1", RuntimeVariables.replace("Permissions"));
 		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search File Entries']"));
+				"//input[@value='Search Folders']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent(
 				"link=Admin Permissions Upload Edited 1"));
