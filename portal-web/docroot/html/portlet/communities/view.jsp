@@ -132,7 +132,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 		<%= LanguageUtil.format(pageContext, "community-x-does-not-have-any-private-pages", group.getName()) %>
 	</liferay-ui:error>
 
-	<liferay-ui:error exception="<%= RequiredGroupException.class %>" message="the-group-cannot-be-deleted-because-it-is-a-required-system-group" />
+	<liferay-ui:error exception="<%= RequiredGroupException.class %>" message="the-group-cannot-be-deleted-because-it-is-a-required-system-group-or-you-are-currently-accessing-this-group" />
 
 	<%
 	List<String> headerNames = new ArrayList<String>();

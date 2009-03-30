@@ -130,6 +130,12 @@ public class EditGroupAction extends PortletAction {
 			WebKeys.THEME_DISPLAY);
 
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
+		long doAsGroupId = ParamUtil.getLong(actionRequest, "doAsGroupId",
+				themeDisplay.getScopeGroupId());
+
+		if (groupId == doAsGroupId) {
+			throw new RequiredGroupException();
+		}
 
 		GroupServiceUtil.deleteGroup(groupId);
 
