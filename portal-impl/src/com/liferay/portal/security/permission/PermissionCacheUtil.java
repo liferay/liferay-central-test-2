@@ -114,6 +114,7 @@ public class PermissionCacheUtil {
 		return sb.toString();
 	}
 
-	private static PortalCache _cache = MultiVMPoolUtil.getCache(CACHE_NAME);
+	private static PortalCache _cache = MultiVMPoolUtil.getCache(
+		CACHE_NAME, true);
 
 }

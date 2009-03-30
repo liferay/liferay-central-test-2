@@ -144,17 +144,24 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			user.getUserId(), groupId, name, primKey, actionId);
 
 		if (value == null) {
-			value = Boolean.valueOf(
-				hasPermissionImpl(groupId, name, primKey, actionId));
+			try {
+				value = Boolean.valueOf(
+					hasPermissionImpl(groupId, name, primKey, actionId));
 
-			PermissionCacheUtil.putPermission(
-				user.getUserId(), groupId, name, primKey, actionId, value);
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Checking permission for " + groupId + " " + name + " " +
+							primKey + " " + actionId + " takes " +
+								stopWatch.getTime() + " ms");
+				}
+			}
+			finally {
+				if (value == null) {
+					value = Boolean.FALSE;
+				}
 
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Checking permission for " + groupId + " " + name + " " +
-						primKey + " " + actionId + " takes " +
-							stopWatch.getTime() + " ms");
+				PermissionCacheUtil.putPermission(
+					user.getUserId(), groupId, name, primKey, actionId, value);
 			}
 		}
 
@@ -321,86 +328,98 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			return bag;
 		}
 
-		// If we are checking permissions on an object that belongs to a
-		// community, then it's only necessary to check the group that
-		// represents the community and not all the groups that the user
-		// belongs to. This is so because an object cannot belong to
-		// more than one community.
+		try {
 
-		List<Group> userGroups = new ArrayList<Group>();
-		//List<Group> userGroups = UserUtil.getGroups(userId);
+			// If we are checking permissions on an object that belongs to a
+			// community, then it's only necessary to check the group that
+			// represents the community and not all the groups that the user
+			// belongs to. This is so because an object cannot belong to
+			// more than one community.
 
-		if (groupId > 0) {
-			if (GroupLocalServiceUtil.hasUserGroup(userId, groupId)) {
-				Group group = GroupLocalServiceUtil.getGroup(groupId);
+			List<Group> userGroups = new ArrayList<Group>();
+			//List<Group> userGroups = UserUtil.getGroups(userId);
 
-				userGroups.add(group);
+			if (groupId > 0) {
+				if (GroupLocalServiceUtil.hasUserGroup(userId, groupId)) {
+					Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+					userGroups.add(group);
+				}
 			}
-		}
 
-		List<Organization> userOrgs = getUserOrgs(userId);
+			List<Organization> userOrgs = getUserOrgs(userId);
 
-		List<Group> userOrgGroups =
-			GroupLocalServiceUtil.getOrganizationsGroups(userOrgs);
+			List<Group> userOrgGroups =
+				GroupLocalServiceUtil.getOrganizationsGroups(userOrgs);
 
-		List<UserGroup> userUserGroups =
-			UserGroupLocalServiceUtil.getUserUserGroups(userId);
+			List<UserGroup> userUserGroups =
+				UserGroupLocalServiceUtil.getUserUserGroups(userId);
 
-		List<Group> userUserGroupGroups =
-			GroupLocalServiceUtil.getUserGroupsGroups(userUserGroups);
+			List<Group> userUserGroupGroups =
+				GroupLocalServiceUtil.getUserGroupsGroups(userUserGroups);
 
-		List<Group> groups = new ArrayList<Group>(
-			userGroups.size() + userOrgGroups.size() +
-				userUserGroupGroups.size());
+			List<Group> groups = new ArrayList<Group>(
+				userGroups.size() + userOrgGroups.size() +
+					userUserGroupGroups.size());
 
-		groups.addAll(userGroups);
-		groups.addAll(userOrgGroups);
-		groups.addAll(userUserGroupGroups);
+			groups.addAll(userGroups);
+			groups.addAll(userOrgGroups);
+			groups.addAll(userUserGroupGroups);
 
-		List<Role> roles = new ArrayList<Role>(10);
+			List<Role> roles = new ArrayList<Role>(10);
 
-		if ((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 3) ||
-			(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 4) ||
-			(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5)) {
+			if ((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 3) ||
+				(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 4) ||
+				(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5)) {
 
-			if (groups.size() > 0) {
-				roles.addAll(
-					RoleLocalServiceUtil.getUserRelatedRoles(userId, groups));
+				if (groups.size() > 0) {
+					roles.addAll(
+						RoleLocalServiceUtil.getUserRelatedRoles(userId, groups));
+				}
+				else {
+					roles.addAll(RoleLocalServiceUtil.getUserRoles(userId));
+				}
+
+				if (userGroups.size() > 0) {
+					Role role = RoleLocalServiceUtil.getRole(
+						user.getCompanyId(), RoleConstants.COMMUNITY_MEMBER);
+
+					roles.add(role);
+				}
+
+				if (userOrgs.size() > 0) {
+					Role role = RoleLocalServiceUtil.getRole(
+						user.getCompanyId(), RoleConstants.ORGANIZATION_MEMBER);
+
+					roles.add(role);
+				}
+
+				List<Role> userGroupRoles = RoleLocalServiceUtil.getUserGroupRoles(
+					userId, groupId);
+
+				roles.addAll(userGroupRoles);
 			}
 			else {
-				roles.addAll(RoleLocalServiceUtil.getUserRoles(userId));
+				roles = new ArrayList<Role>();
 			}
 
-			if (userGroups.size() > 0) {
-				Role role = RoleLocalServiceUtil.getRole(
-					user.getCompanyId(), RoleConstants.COMMUNITY_MEMBER);
+			bag = new PermissionCheckerBagImpl(
+				userId, userGroups, userOrgs, userOrgGroups,
+				userUserGroupGroups, groups, roles);
 
-				roles.add(role);
-			}
-
-			if (userOrgs.size() > 0) {
-				Role role = RoleLocalServiceUtil.getRole(
-					user.getCompanyId(), RoleConstants.ORGANIZATION_MEMBER);
-
-				roles.add(role);
-			}
-
-			List<Role> userGroupRoles = RoleLocalServiceUtil.getUserGroupRoles(
-				userId, groupId);
-
-			roles.addAll(userGroupRoles);
+			return bag;
 		}
-		else {
-			roles = new ArrayList<Role>();
+		finally {
+			if (bag == null) {
+				bag = new PermissionCheckerBagImpl(
+					userId, new ArrayList<Group>(),
+					new ArrayList<Organization>(), new ArrayList<Group>(),
+					new ArrayList<Group>(), new ArrayList<Group>(),
+					new ArrayList<Role>());
+			}
+
+			PermissionCacheUtil.putBag(userId, groupId, bag);
 		}
-
-		bag = new PermissionCheckerBagImpl(
-			userId, userGroups, userOrgs, userOrgGroups,
-			userUserGroupGroups, groups, roles);
-
-		PermissionCacheUtil.putBag(userId, groupId, bag);
-
-		return bag;
 	}
 
 	protected List<Organization> getUserOrgs(long userId) throws Exception {
@@ -467,20 +486,31 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			defaultUserId, guestGroup.getGroupId());
 
 		if (bag == null) {
-			List<Group> groups = new ArrayList<Group>();
+			try {
+				List<Group> groups = new ArrayList<Group>();
 
-			groups.add(guestGroup);
+				groups.add(guestGroup);
 
-			List<Role> roles = RoleLocalServiceUtil.getUserRelatedRoles(
-				defaultUserId, groups);
+				List<Role> roles = RoleLocalServiceUtil.getUserRelatedRoles(
+					defaultUserId, groups);
 
-			bag = new PermissionCheckerBagImpl(
-				defaultUserId, new ArrayList<Group>(),
-				new ArrayList<Organization>(), new ArrayList<Group>(),
-				new ArrayList<Group>(), new ArrayList<Group>(), roles);
+				bag = new PermissionCheckerBagImpl(
+					defaultUserId, new ArrayList<Group>(),
+					new ArrayList<Organization>(), new ArrayList<Group>(),
+					new ArrayList<Group>(), new ArrayList<Group>(), roles);
+			}
+			finally {
+				if (bag == null) {
+					bag = new PermissionCheckerBagImpl(
+						defaultUserId, new ArrayList<Group>(),
+						new ArrayList<Organization>(), new ArrayList<Group>(),
+						new ArrayList<Group>(), new ArrayList<Group>(),
+						new ArrayList<Role>());
+				}
 
-			PermissionCacheUtil.putBag(
-				defaultUserId, guestGroup.getGroupId(), bag);
+				PermissionCacheUtil.putBag(
+					defaultUserId, guestGroup.getGroupId(), bag);
+			}
 		}
 
 		try {
