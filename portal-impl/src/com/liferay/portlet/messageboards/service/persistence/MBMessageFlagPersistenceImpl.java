@@ -49,7 +49,6 @@ import com.liferay.portlet.messageboards.model.impl.MBMessageFlagModelImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -390,44 +389,41 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 	public MBMessageFlag fetchByPrimaryKey(long messageFlagId)
 		throws SystemException {
-		MBMessageFlag result = (MBMessageFlag)EntityCacheUtil.getResult(MBMessageFlagModelImpl.ENTITY_CACHE_ENABLED,
+		MBMessageFlag mbMessageFlag = (MBMessageFlag)EntityCacheUtil.getResult(MBMessageFlagModelImpl.ENTITY_CACHE_ENABLED,
 				MBMessageFlagImpl.class, messageFlagId, this);
 
-		if (result == null) {
+		if (mbMessageFlag == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				MBMessageFlag mbMessageFlag = (MBMessageFlag)session.get(MBMessageFlagImpl.class,
+				mbMessageFlag = (MBMessageFlag)session.get(MBMessageFlagImpl.class,
 						new Long(messageFlagId));
-
-				if (mbMessageFlag != null) {
-					cacheResult(mbMessageFlag);
-				}
-
-				return mbMessageFlag;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (mbMessageFlag != null) {
+					cacheResult(mbMessageFlag);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (MBMessageFlag)result;
-		}
+
+		return mbMessageFlag;
 	}
 
 	public List<MBMessageFlag> findByUserId(long userId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
+		List<MBMessageFlag> list = (List<MBMessageFlag>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -448,25 +444,26 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(userId);
 
-				List<MBMessageFlag> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<MBMessageFlag>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<MBMessageFlag>)result;
-		}
+
+		return list;
 	}
 
 	public List<MBMessageFlag> findByUserId(long userId, int start, int end)
@@ -482,10 +479,10 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
+		List<MBMessageFlag> list = (List<MBMessageFlag>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -511,26 +508,27 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(userId);
 
-				List<MBMessageFlag> list = (List<MBMessageFlag>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<MBMessageFlag>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<MBMessageFlag>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<MBMessageFlag>)result;
-		}
+
+		return list;
 	}
 
 	public MBMessageFlag findByUserId_First(long userId, OrderByComparator obc)
@@ -630,10 +628,10 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(messageId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_MESSAGEID,
+		List<MBMessageFlag> list = (List<MBMessageFlag>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_MESSAGEID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -654,25 +652,26 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(messageId);
 
-				List<MBMessageFlag> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<MBMessageFlag>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_MESSAGEID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<MBMessageFlag>)result;
-		}
+
+		return list;
 	}
 
 	public List<MBMessageFlag> findByMessageId(long messageId, int start,
@@ -688,10 +687,10 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_MESSAGEID,
+		List<MBMessageFlag> list = (List<MBMessageFlag>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_MESSAGEID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -717,26 +716,27 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(messageId);
 
-				List<MBMessageFlag> list = (List<MBMessageFlag>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<MBMessageFlag>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<MBMessageFlag>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_MESSAGEID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<MBMessageFlag>)result;
-		}
+
+		return list;
 	}
 
 	public MBMessageFlag findByMessageId_First(long messageId,
@@ -841,10 +841,10 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 				new Long(messageId), new Integer(flag)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_M_F,
+		List<MBMessageFlag> list = (List<MBMessageFlag>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_M_F,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -871,25 +871,26 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(flag);
 
-				List<MBMessageFlag> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<MBMessageFlag>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_M_F, finderArgs,
 					list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<MBMessageFlag>)result;
-		}
+
+		return list;
 	}
 
 	public List<MBMessageFlag> findByM_F(long messageId, int flag, int start,
@@ -905,10 +906,10 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_M_F,
+		List<MBMessageFlag> list = (List<MBMessageFlag>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_M_F,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -940,26 +941,27 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(flag);
 
-				List<MBMessageFlag> list = (List<MBMessageFlag>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<MBMessageFlag>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<MBMessageFlag>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_M_F,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<MBMessageFlag>)result;
-		}
+
+		return list;
 	}
 
 	public MBMessageFlag findByM_F_First(long messageId, int flag,
@@ -1101,11 +1103,6 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 	public MBMessageFlag fetchByU_M_F(long userId, long messageId, int flag)
 		throws SystemException {
-		return fetchByU_M_F(userId, messageId, flag, true);
-	}
-
-	public MBMessageFlag fetchByU_M_F(long userId, long messageId, int flag,
-		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(userId), new Long(messageId), new Integer(flag)
 			};
@@ -1148,13 +1145,13 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 				List<MBMessageFlag> list = q.list();
 
+				result = list;
+
 				MBMessageFlag mbMessageFlag = null;
 
 				if (list.isEmpty()) {
-					if (cacheEmptyResult) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_M_F,
-							finderArgs, list);
-					}
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_M_F,
+						finderArgs, list);
 				}
 				else {
 					mbMessageFlag = list.get(0);
@@ -1168,6 +1165,11 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 				throw processException(e);
 			}
 			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_M_F,
+						finderArgs, new ArrayList<MBMessageFlag>());
+				}
+
 				closeSession(session);
 			}
 		}
@@ -1236,10 +1238,10 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<MBMessageFlag> list = (List<MBMessageFlag>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1257,8 +1259,6 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<MBMessageFlag> list = null;
-
 				if (obc == null) {
 					list = (List<MBMessageFlag>)QueryUtil.list(q, getDialect(),
 							start, end, false);
@@ -1269,23 +1269,24 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 					list = (List<MBMessageFlag>)QueryUtil.list(q, getDialect(),
 							start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<MBMessageFlag>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<MBMessageFlag>)result;
-		}
+
+		return list;
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
@@ -1322,10 +1323,10 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 	public int countByUserId(long userId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1347,42 +1348,33 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(userId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByMessageId(long messageId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(messageId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_MESSAGEID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_MESSAGEID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1404,33 +1396,24 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(messageId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_MESSAGEID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_MESSAGEID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByM_F(long messageId, int flag) throws SystemException {
@@ -1438,10 +1421,10 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 				new Long(messageId), new Integer(flag)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_M_F,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_M_F,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1469,33 +1452,24 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(flag);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_M_F, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_M_F, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByU_M_F(long userId, long messageId, int flag)
@@ -1504,10 +1478,10 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 				new Long(userId), new Long(messageId), new Integer(flag)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_M_F,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_M_F,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1541,42 +1515,33 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(flag);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U_M_F,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U_M_F,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1585,33 +1550,24 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portlet.messageboards.model.MBMessageFlag");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public void afterPropertiesSet() {

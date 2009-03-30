@@ -45,7 +45,6 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -273,34 +272,31 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Account fetchByPrimaryKey(long accountId) throws SystemException {
-		Account result = (Account)EntityCacheUtil.getResult(AccountModelImpl.ENTITY_CACHE_ENABLED,
+		Account account = (Account)EntityCacheUtil.getResult(AccountModelImpl.ENTITY_CACHE_ENABLED,
 				AccountImpl.class, accountId, this);
 
-		if (result == null) {
+		if (account == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				Account account = (Account)session.get(AccountImpl.class,
+				account = (Account)session.get(AccountImpl.class,
 						new Long(accountId));
-
-				if (account != null) {
-					cacheResult(account);
-				}
-
-				return account;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (account != null) {
+					cacheResult(account);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (Account)result;
-		}
+
+		return account;
 	}
 
 	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
@@ -357,10 +353,10 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<Account> list = (List<Account>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -377,8 +373,6 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<Account> list = null;
-
 				if (obc == null) {
 					list = (List<Account>)QueryUtil.list(q, getDialect(),
 							start, end, false);
@@ -389,23 +383,24 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 					list = (List<Account>)QueryUtil.list(q, getDialect(),
 							start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<Account>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<Account>)result;
-		}
+
+		return list;
 	}
 
 	public void removeAll() throws SystemException {
@@ -417,10 +412,10 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -429,33 +424,24 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portal.model.Account");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public void afterPropertiesSet() {

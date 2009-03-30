@@ -49,7 +49,6 @@ import com.liferay.portlet.messageboards.model.impl.MBThreadModelImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -308,43 +307,40 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public MBThread fetchByPrimaryKey(long threadId) throws SystemException {
-		MBThread result = (MBThread)EntityCacheUtil.getResult(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
+		MBThread mbThread = (MBThread)EntityCacheUtil.getResult(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
 				MBThreadImpl.class, threadId, this);
 
-		if (result == null) {
+		if (mbThread == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				MBThread mbThread = (MBThread)session.get(MBThreadImpl.class,
+				mbThread = (MBThread)session.get(MBThreadImpl.class,
 						new Long(threadId));
-
-				if (mbThread != null) {
-					cacheResult(mbThread);
-				}
-
-				return mbThread;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (mbThread != null) {
+					cacheResult(mbThread);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (MBThread)result;
-		}
+
+		return mbThread;
 	}
 
 	public List<MBThread> findByGroupId(long groupId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
+		List<MBThread> list = (List<MBThread>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -370,25 +366,26 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				List<MBThread> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<MBThread>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<MBThread>)result;
-		}
+
+		return list;
 	}
 
 	public List<MBThread> findByGroupId(long groupId, int start, int end)
@@ -404,10 +401,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+		List<MBThread> list = (List<MBThread>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -440,26 +437,27 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				List<MBThread> list = (List<MBThread>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<MBThread>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<MBThread>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<MBThread>)result;
-		}
+
+		return list;
 	}
 
 	public MBThread findByGroupId_First(long groupId, OrderByComparator obc)
@@ -564,10 +562,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(categoryId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_CATEGORYID,
+		List<MBThread> list = (List<MBThread>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_CATEGORYID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -593,25 +591,26 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(categoryId);
 
-				List<MBThread> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<MBThread>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_CATEGORYID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<MBThread>)result;
-		}
+
+		return list;
 	}
 
 	public List<MBThread> findByCategoryId(long categoryId, int start, int end)
@@ -627,10 +626,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_CATEGORYID,
+		List<MBThread> list = (List<MBThread>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_CATEGORYID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -663,26 +662,27 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(categoryId);
 
-				List<MBThread> list = (List<MBThread>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<MBThread>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<MBThread>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_CATEGORYID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<MBThread>)result;
-		}
+
+		return list;
 	}
 
 	public MBThread findByCategoryId_First(long categoryId,
@@ -838,10 +838,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<MBThread> list = (List<MBThread>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -866,8 +866,6 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<MBThread> list = null;
-
 				if (obc == null) {
 					list = (List<MBThread>)QueryUtil.list(q, getDialect(),
 							start, end, false);
@@ -878,23 +876,24 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 					list = (List<MBThread>)QueryUtil.list(q, getDialect(),
 							start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<MBThread>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<MBThread>)result;
-		}
+
+		return list;
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
@@ -918,10 +917,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 	public int countByGroupId(long groupId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -943,42 +942,33 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByCategoryId(long categoryId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(categoryId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_CATEGORYID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_CATEGORYID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1000,42 +990,33 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(categoryId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CATEGORYID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CATEGORYID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1044,33 +1025,24 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portlet.messageboards.model.MBThread");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public void afterPropertiesSet() {

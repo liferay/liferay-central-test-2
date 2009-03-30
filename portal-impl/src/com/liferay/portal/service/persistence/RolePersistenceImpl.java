@@ -56,7 +56,6 @@ import java.sql.Types;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -408,42 +407,39 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Role fetchByPrimaryKey(long roleId) throws SystemException {
-		Role result = (Role)EntityCacheUtil.getResult(RoleModelImpl.ENTITY_CACHE_ENABLED,
+		Role role = (Role)EntityCacheUtil.getResult(RoleModelImpl.ENTITY_CACHE_ENABLED,
 				RoleImpl.class, roleId, this);
 
-		if (result == null) {
+		if (role == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				Role role = (Role)session.get(RoleImpl.class, new Long(roleId));
-
-				if (role != null) {
-					cacheResult(role);
-				}
-
-				return role;
+				role = (Role)session.get(RoleImpl.class, new Long(roleId));
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (role != null) {
+					cacheResult(role);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (Role)result;
-		}
+
+		return role;
 	}
 
 	public List<Role> findByCompanyId(long companyId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
+		List<Role> list = (List<Role>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -467,25 +463,26 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(companyId);
 
-				List<Role> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<Role>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<Role>)result;
-		}
+
+		return list;
 	}
 
 	public List<Role> findByCompanyId(long companyId, int start, int end)
@@ -501,10 +498,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+		List<Role> list = (List<Role>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -535,26 +532,26 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(companyId);
 
-				List<Role> list = (List<Role>)QueryUtil.list(q, getDialect(),
-						start, end);
+				list = (List<Role>)QueryUtil.list(q, getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<Role>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<Role>)result;
-		}
+
+		return list;
 	}
 
 	public Role findByCompanyId_First(long companyId, OrderByComparator obc)
@@ -681,11 +678,6 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 	public Role fetchByC_N(long companyId, String name)
 		throws SystemException {
-		return fetchByC_N(companyId, name, true);
-	}
-
-	public Role fetchByC_N(long companyId, String name, boolean cacheEmptyResult)
-		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(companyId), name };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_N,
@@ -730,13 +722,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 				List<Role> list = q.list();
 
+				result = list;
+
 				Role role = null;
 
 				if (list.isEmpty()) {
-					if (cacheEmptyResult) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
-							finderArgs, list);
-					}
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
+						finderArgs, list);
 				}
 				else {
 					role = list.get(0);
@@ -750,6 +742,11 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 				throw processException(e);
 			}
 			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
+						finderArgs, new ArrayList<Role>());
+				}
+
 				closeSession(session);
 			}
 		}
@@ -794,11 +791,6 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 	public Role fetchByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
-		return fetchByC_C_C(companyId, classNameId, classPK, true);
-	}
-
-	public Role fetchByC_C_C(long companyId, long classNameId, long classPK,
-		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK)
 			};
@@ -844,13 +836,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 				List<Role> list = q.list();
 
+				result = list;
+
 				Role role = null;
 
 				if (list.isEmpty()) {
-					if (cacheEmptyResult) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C_C,
-							finderArgs, list);
-					}
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C_C,
+						finderArgs, list);
 				}
 				else {
 					role = list.get(0);
@@ -864,6 +856,11 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 				throw processException(e);
 			}
 			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C_C,
+						finderArgs, new ArrayList<Role>());
+				}
+
 				closeSession(session);
 			}
 		}
@@ -931,10 +928,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<Role> list = (List<Role>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -957,8 +954,6 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<Role> list = null;
-
 				if (obc == null) {
 					list = (List<Role>)QueryUtil.list(q, getDialect(), start,
 							end, false);
@@ -969,23 +964,24 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 					list = (List<Role>)QueryUtil.list(q, getDialect(), start,
 							end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<Role>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<Role>)result;
-		}
+
+		return list;
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
@@ -1017,10 +1013,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 	public int countByCompanyId(long companyId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1041,43 +1037,34 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(companyId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_COMPANYID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_COMPANYID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByC_N(long companyId, String name)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(companyId), name };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_N,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_N,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1111,33 +1098,24 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 					qPos.add(name);
 				}
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_N, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_N, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByC_C_C(long companyId, long classNameId, long classPK)
@@ -1146,10 +1124,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 				new Long(companyId), new Long(classNameId), new Long(classPK)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C_C,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C_C,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1182,42 +1160,33 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(classPK);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C_C,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C_C,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1226,33 +1195,24 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portal.model.Role");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public List<com.liferay.portal.model.Group> getGroups(long pk)
@@ -1280,10 +1240,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_GET_GROUPS,
+		List<com.liferay.portal.model.Group> list = (List<com.liferay.portal.model.Group>)FinderCacheUtil.getResult(FINDER_PATH_GET_GROUPS,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1315,26 +1275,27 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(pk);
 
-				List<com.liferay.portal.model.Group> list = (List<com.liferay.portal.model.Group>)QueryUtil.list(q,
+				list = (List<com.liferay.portal.model.Group>)QueryUtil.list(q,
 						getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<com.liferay.portal.model.Group>();
+				}
 
 				groupPersistence.cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_GET_GROUPS, finderArgs,
 					list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<com.liferay.portal.model.Group>)result;
-		}
+
+		return list;
 	}
 
 	public static final FinderPath FINDER_PATH_GET_GROUPS_SIZE = new FinderPath(com.liferay.portal.model.impl.GroupModelImpl.ENTITY_CACHE_ENABLED,
@@ -1344,10 +1305,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 	public int getGroupsSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_GET_GROUPS_SIZE,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_GET_GROUPS_SIZE,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1361,33 +1322,24 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(pk);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_GET_GROUPS_SIZE,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_GET_GROUPS_SIZE,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public static final FinderPath FINDER_PATH_CONTAINS_GROUP = new FinderPath(com.liferay.portal.model.impl.GroupModelImpl.ENTITY_CACHE_ENABLED,
@@ -1399,26 +1351,27 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk), new Long(groupPK) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_GROUP,
+		Boolean value = (Boolean)FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_GROUP,
 				finderArgs, this);
 
-		if (result == null) {
+		if (value == null) {
 			try {
-				Boolean value = Boolean.valueOf(containsGroup.contains(pk,
-							groupPK));
-
-				FinderCacheUtil.putResult(FINDER_PATH_CONTAINS_GROUP,
-					finderArgs, value);
-
-				return value.booleanValue();
+				value = Boolean.valueOf(containsGroup.contains(pk, groupPK));
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
+			finally {
+				if (value == null) {
+					value = Boolean.FALSE;
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_CONTAINS_GROUP,
+					finderArgs, value);
+			}
 		}
-		else {
-			return ((Boolean)result).booleanValue();
-		}
+
+		return value.booleanValue();
 	}
 
 	public boolean containsGroups(long pk) throws SystemException {
@@ -1609,10 +1562,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_GET_PERMISSIONS,
+		List<com.liferay.portal.model.Permission> list = (List<com.liferay.portal.model.Permission>)FinderCacheUtil.getResult(FINDER_PATH_GET_PERMISSIONS,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1638,26 +1591,27 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(pk);
 
-				List<com.liferay.portal.model.Permission> list = (List<com.liferay.portal.model.Permission>)QueryUtil.list(q,
+				list = (List<com.liferay.portal.model.Permission>)QueryUtil.list(q,
 						getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<com.liferay.portal.model.Permission>();
+				}
 
 				permissionPersistence.cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_GET_PERMISSIONS,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<com.liferay.portal.model.Permission>)result;
-		}
+
+		return list;
 	}
 
 	public static final FinderPath FINDER_PATH_GET_PERMISSIONS_SIZE = new FinderPath(com.liferay.portal.model.impl.PermissionModelImpl.ENTITY_CACHE_ENABLED,
@@ -1668,10 +1622,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 	public int getPermissionsSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_GET_PERMISSIONS_SIZE,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_GET_PERMISSIONS_SIZE,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1685,33 +1639,24 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(pk);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_GET_PERMISSIONS_SIZE,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_GET_PERMISSIONS_SIZE,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public static final FinderPath FINDER_PATH_CONTAINS_PERMISSION = new FinderPath(com.liferay.portal.model.impl.PermissionModelImpl.ENTITY_CACHE_ENABLED,
@@ -1723,26 +1668,28 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk), new Long(permissionPK) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_PERMISSION,
+		Boolean value = (Boolean)FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_PERMISSION,
 				finderArgs, this);
 
-		if (result == null) {
+		if (value == null) {
 			try {
-				Boolean value = Boolean.valueOf(containsPermission.contains(
-							pk, permissionPK));
-
-				FinderCacheUtil.putResult(FINDER_PATH_CONTAINS_PERMISSION,
-					finderArgs, value);
-
-				return value.booleanValue();
+				value = Boolean.valueOf(containsPermission.contains(pk,
+							permissionPK));
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
+			finally {
+				if (value == null) {
+					value = Boolean.FALSE;
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_CONTAINS_PERMISSION,
+					finderArgs, value);
+			}
 		}
-		else {
-			return ((Boolean)result).booleanValue();
-		}
+
+		return value.booleanValue();
 	}
 
 	public boolean containsPermissions(long pk) throws SystemException {
@@ -1942,10 +1889,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_GET_USERS,
+		List<com.liferay.portal.model.User> list = (List<com.liferay.portal.model.User>)FinderCacheUtil.getResult(FINDER_PATH_GET_USERS,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1971,26 +1918,27 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(pk);
 
-				List<com.liferay.portal.model.User> list = (List<com.liferay.portal.model.User>)QueryUtil.list(q,
+				list = (List<com.liferay.portal.model.User>)QueryUtil.list(q,
 						getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<com.liferay.portal.model.User>();
+				}
 
 				userPersistence.cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_GET_USERS, finderArgs,
 					list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<com.liferay.portal.model.User>)result;
-		}
+
+		return list;
 	}
 
 	public static final FinderPath FINDER_PATH_GET_USERS_SIZE = new FinderPath(com.liferay.portal.model.impl.UserModelImpl.ENTITY_CACHE_ENABLED,
@@ -2000,10 +1948,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 	public int getUsersSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_GET_USERS_SIZE,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_GET_USERS_SIZE,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -2017,33 +1965,24 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(pk);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_GET_USERS_SIZE,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_GET_USERS_SIZE,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public static final FinderPath FINDER_PATH_CONTAINS_USER = new FinderPath(com.liferay.portal.model.impl.UserModelImpl.ENTITY_CACHE_ENABLED,
@@ -2054,25 +1993,27 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 	public boolean containsUser(long pk, long userPK) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk), new Long(userPK) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_USER,
+		Boolean value = (Boolean)FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_USER,
 				finderArgs, this);
 
-		if (result == null) {
+		if (value == null) {
 			try {
-				Boolean value = Boolean.valueOf(containsUser.contains(pk, userPK));
-
-				FinderCacheUtil.putResult(FINDER_PATH_CONTAINS_USER,
-					finderArgs, value);
-
-				return value.booleanValue();
+				value = Boolean.valueOf(containsUser.contains(pk, userPK));
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
+			finally {
+				if (value == null) {
+					value = Boolean.FALSE;
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_CONTAINS_USER,
+					finderArgs, value);
+			}
 		}
-		else {
-			return ((Boolean)result).booleanValue();
-		}
+
+		return value.booleanValue();
 	}
 
 	public boolean containsUsers(long pk) throws SystemException {

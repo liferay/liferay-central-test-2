@@ -143,9 +143,6 @@ public interface UserPersistence extends BasePersistence {
 	public com.liferay.portal.model.User fetchByContactId(long contactId)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.User fetchByContactId(long contactId,
-		boolean cacheEmptyResult) throws com.liferay.portal.SystemException;
-
 	public java.util.List<com.liferay.portal.model.User> findByEmailAddress(
 		java.lang.String emailAddress)
 		throws com.liferay.portal.SystemException;
@@ -184,10 +181,6 @@ public interface UserPersistence extends BasePersistence {
 	public com.liferay.portal.model.User fetchByOpenId(java.lang.String openId)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.User fetchByOpenId(
-		java.lang.String openId, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
-
 	public com.liferay.portal.model.User findByPortraitId(long portraitId)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.SystemException;
@@ -195,18 +188,11 @@ public interface UserPersistence extends BasePersistence {
 	public com.liferay.portal.model.User fetchByPortraitId(long portraitId)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.User fetchByPortraitId(long portraitId,
-		boolean cacheEmptyResult) throws com.liferay.portal.SystemException;
-
 	public com.liferay.portal.model.User findByC_U(long companyId, long userId)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User fetchByC_U(long companyId, long userId)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.User fetchByC_U(long companyId,
-		long userId, boolean cacheEmptyResult)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User findByC_DU(long companyId,
@@ -217,10 +203,6 @@ public interface UserPersistence extends BasePersistence {
 	public com.liferay.portal.model.User fetchByC_DU(long companyId,
 		boolean defaultUser) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.User fetchByC_DU(long companyId,
-		boolean defaultUser, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
-
 	public com.liferay.portal.model.User findByC_SN(long companyId,
 		java.lang.String screenName)
 		throws com.liferay.portal.NoSuchUserException,
@@ -229,10 +211,6 @@ public interface UserPersistence extends BasePersistence {
 	public com.liferay.portal.model.User fetchByC_SN(long companyId,
 		java.lang.String screenName) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.User fetchByC_SN(long companyId,
-		java.lang.String screenName, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
-
 	public com.liferay.portal.model.User findByC_EA(long companyId,
 		java.lang.String emailAddress)
 		throws com.liferay.portal.NoSuchUserException,
@@ -240,10 +218,6 @@ public interface UserPersistence extends BasePersistence {
 
 	public com.liferay.portal.model.User fetchByC_EA(long companyId,
 		java.lang.String emailAddress)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.User fetchByC_EA(long companyId,
-		java.lang.String emailAddress, boolean cacheEmptyResult)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<Object> findWithDynamicQuery(

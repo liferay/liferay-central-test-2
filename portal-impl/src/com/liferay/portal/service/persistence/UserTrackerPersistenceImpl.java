@@ -47,7 +47,6 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -326,44 +325,41 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 	public UserTracker fetchByPrimaryKey(long userTrackerId)
 		throws SystemException {
-		UserTracker result = (UserTracker)EntityCacheUtil.getResult(UserTrackerModelImpl.ENTITY_CACHE_ENABLED,
+		UserTracker userTracker = (UserTracker)EntityCacheUtil.getResult(UserTrackerModelImpl.ENTITY_CACHE_ENABLED,
 				UserTrackerImpl.class, userTrackerId, this);
 
-		if (result == null) {
+		if (userTracker == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				UserTracker userTracker = (UserTracker)session.get(UserTrackerImpl.class,
+				userTracker = (UserTracker)session.get(UserTrackerImpl.class,
 						new Long(userTrackerId));
-
-				if (userTracker != null) {
-					cacheResult(userTracker);
-				}
-
-				return userTracker;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (userTracker != null) {
+					cacheResult(userTracker);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (UserTracker)result;
-		}
+
+		return userTracker;
 	}
 
 	public List<UserTracker> findByCompanyId(long companyId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
+		List<UserTracker> list = (List<UserTracker>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -383,25 +379,26 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(companyId);
 
-				List<UserTracker> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<UserTracker>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<UserTracker>)result;
-		}
+
+		return list;
 	}
 
 	public List<UserTracker> findByCompanyId(long companyId, int start, int end)
@@ -417,10 +414,10 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+		List<UserTracker> list = (List<UserTracker>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -445,26 +442,27 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(companyId);
 
-				List<UserTracker> list = (List<UserTracker>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<UserTracker>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<UserTracker>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<UserTracker>)result;
-		}
+
+		return list;
 	}
 
 	public UserTracker findByCompanyId_First(long companyId,
@@ -566,10 +564,10 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
+		List<UserTracker> list = (List<UserTracker>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -589,25 +587,26 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(userId);
 
-				List<UserTracker> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<UserTracker>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<UserTracker>)result;
-		}
+
+		return list;
 	}
 
 	public List<UserTracker> findByUserId(long userId, int start, int end)
@@ -623,10 +622,10 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
+		List<UserTracker> list = (List<UserTracker>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -651,26 +650,27 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(userId);
 
-				List<UserTracker> list = (List<UserTracker>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<UserTracker>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<UserTracker>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<UserTracker>)result;
-		}
+
+		return list;
 	}
 
 	public UserTracker findByUserId_First(long userId, OrderByComparator obc)
@@ -769,10 +769,10 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		Object[] finderArgs = new Object[] { sessionId };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_SESSIONID,
+		List<UserTracker> list = (List<UserTracker>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_SESSIONID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -799,25 +799,26 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 					qPos.add(sessionId);
 				}
 
-				List<UserTracker> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<UserTracker>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_SESSIONID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<UserTracker>)result;
-		}
+
+		return list;
 	}
 
 	public List<UserTracker> findBySessionId(String sessionId, int start,
@@ -833,10 +834,10 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_SESSIONID,
+		List<UserTracker> list = (List<UserTracker>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_SESSIONID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -868,26 +869,27 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 					qPos.add(sessionId);
 				}
 
-				List<UserTracker> list = (List<UserTracker>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<UserTracker>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<UserTracker>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_SESSIONID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<UserTracker>)result;
-		}
+
+		return list;
 	}
 
 	public UserTracker findBySessionId_First(String sessionId,
@@ -1047,10 +1049,10 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<UserTracker> list = (List<UserTracker>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1067,8 +1069,6 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<UserTracker> list = null;
-
 				if (obc == null) {
 					list = (List<UserTracker>)QueryUtil.list(q, getDialect(),
 							start, end, false);
@@ -1079,23 +1079,24 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 					list = (List<UserTracker>)QueryUtil.list(q, getDialect(),
 							start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<UserTracker>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<UserTracker>)result;
-		}
+
+		return list;
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
@@ -1125,10 +1126,10 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 	public int countByCompanyId(long companyId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1149,42 +1150,33 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(companyId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_COMPANYID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_COMPANYID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByUserId(long userId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1205,42 +1197,33 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(userId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countBySessionId(String sessionId) throws SystemException {
 		Object[] finderArgs = new Object[] { sessionId };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_SESSIONID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_SESSIONID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1268,42 +1251,33 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 					qPos.add(sessionId);
 				}
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_SESSIONID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_SESSIONID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1312,33 +1286,24 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portal.model.UserTracker");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public void afterPropertiesSet() {

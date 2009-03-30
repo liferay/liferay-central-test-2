@@ -47,7 +47,6 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -313,44 +312,41 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 
 	public OrgGroupRole fetchByPrimaryKey(OrgGroupRolePK orgGroupRolePK)
 		throws SystemException {
-		OrgGroupRole result = (OrgGroupRole)EntityCacheUtil.getResult(OrgGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
+		OrgGroupRole orgGroupRole = (OrgGroupRole)EntityCacheUtil.getResult(OrgGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
 				OrgGroupRoleImpl.class, orgGroupRolePK, this);
 
-		if (result == null) {
+		if (orgGroupRole == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				OrgGroupRole orgGroupRole = (OrgGroupRole)session.get(OrgGroupRoleImpl.class,
+				orgGroupRole = (OrgGroupRole)session.get(OrgGroupRoleImpl.class,
 						orgGroupRolePK);
-
-				if (orgGroupRole != null) {
-					cacheResult(orgGroupRole);
-				}
-
-				return orgGroupRole;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (orgGroupRole != null) {
+					cacheResult(orgGroupRole);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (OrgGroupRole)result;
-		}
+
+		return orgGroupRole;
 	}
 
 	public List<OrgGroupRole> findByGroupId(long groupId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
+		List<OrgGroupRole> list = (List<OrgGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -371,25 +367,26 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				List<OrgGroupRole> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<OrgGroupRole>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<OrgGroupRole>)result;
-		}
+
+		return list;
 	}
 
 	public List<OrgGroupRole> findByGroupId(long groupId, int start, int end)
@@ -405,10 +402,10 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+		List<OrgGroupRole> list = (List<OrgGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -434,26 +431,27 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				List<OrgGroupRole> list = (List<OrgGroupRole>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<OrgGroupRole>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<OrgGroupRole>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<OrgGroupRole>)result;
-		}
+
+		return list;
 	}
 
 	public OrgGroupRole findByGroupId_First(long groupId, OrderByComparator obc)
@@ -552,10 +550,10 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(roleId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ROLEID,
+		List<OrgGroupRole> list = (List<OrgGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ROLEID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -576,25 +574,26 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(roleId);
 
-				List<OrgGroupRole> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<OrgGroupRole>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ROLEID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<OrgGroupRole>)result;
-		}
+
+		return list;
 	}
 
 	public List<OrgGroupRole> findByRoleId(long roleId, int start, int end)
@@ -610,10 +609,10 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ROLEID,
+		List<OrgGroupRole> list = (List<OrgGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ROLEID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -639,26 +638,27 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(roleId);
 
-				List<OrgGroupRole> list = (List<OrgGroupRole>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<OrgGroupRole>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<OrgGroupRole>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_ROLEID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<OrgGroupRole>)result;
-		}
+
+		return list;
 	}
 
 	public OrgGroupRole findByRoleId_First(long roleId, OrderByComparator obc)
@@ -808,10 +808,10 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<OrgGroupRole> list = (List<OrgGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -828,8 +828,6 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<OrgGroupRole> list = null;
-
 				if (obc == null) {
 					list = (List<OrgGroupRole>)QueryUtil.list(q, getDialect(),
 							start, end, false);
@@ -840,23 +838,24 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 					list = (List<OrgGroupRole>)QueryUtil.list(q, getDialect(),
 							start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<OrgGroupRole>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<OrgGroupRole>)result;
-		}
+
+		return list;
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
@@ -880,10 +879,10 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 	public int countByGroupId(long groupId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -905,42 +904,33 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByRoleId(long roleId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(roleId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ROLEID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ROLEID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -962,42 +952,33 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(roleId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_ROLEID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_ROLEID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1006,33 +987,24 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portal.model.OrgGroupRole");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public void afterPropertiesSet() {

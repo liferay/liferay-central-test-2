@@ -51,7 +51,6 @@ import com.liferay.portlet.messageboards.model.impl.MBCategoryModelImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -393,43 +392,40 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 	public MBCategory fetchByPrimaryKey(long categoryId)
 		throws SystemException {
-		MBCategory result = (MBCategory)EntityCacheUtil.getResult(MBCategoryModelImpl.ENTITY_CACHE_ENABLED,
+		MBCategory mbCategory = (MBCategory)EntityCacheUtil.getResult(MBCategoryModelImpl.ENTITY_CACHE_ENABLED,
 				MBCategoryImpl.class, categoryId, this);
 
-		if (result == null) {
+		if (mbCategory == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				MBCategory mbCategory = (MBCategory)session.get(MBCategoryImpl.class,
+				mbCategory = (MBCategory)session.get(MBCategoryImpl.class,
 						new Long(categoryId));
-
-				if (mbCategory != null) {
-					cacheResult(mbCategory);
-				}
-
-				return mbCategory;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (mbCategory != null) {
+					cacheResult(mbCategory);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (MBCategory)result;
-		}
+
+		return mbCategory;
 	}
 
 	public List<MBCategory> findByUuid(String uuid) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
+		List<MBCategory> list = (List<MBCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -462,25 +458,26 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 					qPos.add(uuid);
 				}
 
-				List<MBCategory> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<MBCategory>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
 					list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<MBCategory>)result;
-		}
+
+		return list;
 	}
 
 	public List<MBCategory> findByUuid(String uuid, int start, int end)
@@ -496,10 +493,10 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
+		List<MBCategory> list = (List<MBCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -539,26 +536,27 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 					qPos.add(uuid);
 				}
 
-				List<MBCategory> list = (List<MBCategory>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<MBCategory>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<MBCategory>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<MBCategory>)result;
-		}
+
+		return list;
 	}
 
 	public MBCategory findByUuid_First(String uuid, OrderByComparator obc)
@@ -695,11 +693,6 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 	public MBCategory fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
-		return fetchByUUID_G(uuid, groupId, true);
-	}
-
-	public MBCategory fetchByUUID_G(String uuid, long groupId,
-		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
@@ -746,13 +739,13 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 				List<MBCategory> list = q.list();
 
+				result = list;
+
 				MBCategory mbCategory = null;
 
 				if (list.isEmpty()) {
-					if (cacheEmptyResult) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-							finderArgs, list);
-					}
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+						finderArgs, list);
 				}
 				else {
 					mbCategory = list.get(0);
@@ -766,6 +759,11 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 				throw processException(e);
 			}
 			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+						finderArgs, new ArrayList<MBCategory>());
+				}
+
 				closeSession(session);
 			}
 		}
@@ -783,10 +781,10 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
+		List<MBCategory> list = (List<MBCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -812,25 +810,26 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				List<MBCategory> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<MBCategory>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<MBCategory>)result;
-		}
+
+		return list;
 	}
 
 	public List<MBCategory> findByGroupId(long groupId, int start, int end)
@@ -846,10 +845,10 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+		List<MBCategory> list = (List<MBCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -882,26 +881,27 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				List<MBCategory> list = (List<MBCategory>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<MBCategory>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<MBCategory>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<MBCategory>)result;
-		}
+
+		return list;
 	}
 
 	public MBCategory findByGroupId_First(long groupId, OrderByComparator obc)
@@ -1008,10 +1008,10 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
+		List<MBCategory> list = (List<MBCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1037,25 +1037,26 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(companyId);
 
-				List<MBCategory> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<MBCategory>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<MBCategory>)result;
-		}
+
+		return list;
 	}
 
 	public List<MBCategory> findByCompanyId(long companyId, int start, int end)
@@ -1071,10 +1072,10 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+		List<MBCategory> list = (List<MBCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1107,26 +1108,27 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(companyId);
 
-				List<MBCategory> list = (List<MBCategory>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<MBCategory>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<MBCategory>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<MBCategory>)result;
-		}
+
+		return list;
 	}
 
 	public MBCategory findByCompanyId_First(long companyId,
@@ -1235,10 +1237,10 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 				new Long(groupId), new Long(parentCategoryId)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_P,
+		List<MBCategory> list = (List<MBCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_P,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1270,25 +1272,26 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(parentCategoryId);
 
-				List<MBCategory> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<MBCategory>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_P, finderArgs,
 					list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<MBCategory>)result;
-		}
+
+		return list;
 	}
 
 	public List<MBCategory> findByG_P(long groupId, long parentCategoryId,
@@ -1304,10 +1307,10 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_P,
+		List<MBCategory> list = (List<MBCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_P,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1346,26 +1349,27 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(parentCategoryId);
 
-				List<MBCategory> list = (List<MBCategory>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<MBCategory>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<MBCategory>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_P,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<MBCategory>)result;
-		}
+
+		return list;
 	}
 
 	public MBCategory findByG_P_First(long groupId, long parentCategoryId,
@@ -1536,10 +1540,10 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<MBCategory> list = (List<MBCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1564,8 +1568,6 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<MBCategory> list = null;
-
 				if (obc == null) {
 					list = (List<MBCategory>)QueryUtil.list(q, getDialect(),
 							start, end, false);
@@ -1576,23 +1578,24 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 					list = (List<MBCategory>)QueryUtil.list(q, getDialect(),
 							start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<MBCategory>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<MBCategory>)result;
-		}
+
+		return list;
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
@@ -1636,10 +1639,10 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 	public int countByUuid(String uuid) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1668,43 +1671,34 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 					qPos.add(uuid);
 				}
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID_G,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID_G,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1739,42 +1733,33 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1796,42 +1781,33 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1853,33 +1829,24 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(companyId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_COMPANYID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_COMPANYID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByG_P(long groupId, long parentCategoryId)
@@ -1888,10 +1855,10 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 				new Long(groupId), new Long(parentCategoryId)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_P,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_P,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1919,42 +1886,33 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(parentCategoryId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_P, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_P, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1963,33 +1921,24 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portlet.messageboards.model.MBCategory");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public void afterPropertiesSet() {

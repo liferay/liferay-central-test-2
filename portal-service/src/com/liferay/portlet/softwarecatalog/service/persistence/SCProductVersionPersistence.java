@@ -124,10 +124,6 @@ public interface SCProductVersionPersistence extends BasePersistence {
 		java.lang.String directDownloadURL)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.softwarecatalog.model.SCProductVersion fetchByDirectDownloadURL(
-		java.lang.String directDownloadURL, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;

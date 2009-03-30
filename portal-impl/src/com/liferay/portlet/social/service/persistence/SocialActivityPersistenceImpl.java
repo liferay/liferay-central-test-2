@@ -51,7 +51,6 @@ import com.liferay.portlet.social.model.impl.SocialActivityModelImpl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -527,44 +526,41 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 	public SocialActivity fetchByPrimaryKey(long activityId)
 		throws SystemException {
-		SocialActivity result = (SocialActivity)EntityCacheUtil.getResult(SocialActivityModelImpl.ENTITY_CACHE_ENABLED,
+		SocialActivity socialActivity = (SocialActivity)EntityCacheUtil.getResult(SocialActivityModelImpl.ENTITY_CACHE_ENABLED,
 				SocialActivityImpl.class, activityId, this);
 
-		if (result == null) {
+		if (socialActivity == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				SocialActivity socialActivity = (SocialActivity)session.get(SocialActivityImpl.class,
+				socialActivity = (SocialActivity)session.get(SocialActivityImpl.class,
 						new Long(activityId));
-
-				if (socialActivity != null) {
-					cacheResult(socialActivity);
-				}
-
-				return socialActivity;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (socialActivity != null) {
+					cacheResult(socialActivity);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (SocialActivity)result;
-		}
+
+		return socialActivity;
 	}
 
 	public List<SocialActivity> findByGroupId(long groupId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
+		List<SocialActivity> list = (List<SocialActivity>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -589,25 +585,26 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				List<SocialActivity> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<SocialActivity>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<SocialActivity>)result;
-		}
+
+		return list;
 	}
 
 	public List<SocialActivity> findByGroupId(long groupId, int start, int end)
@@ -623,10 +620,10 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+		List<SocialActivity> list = (List<SocialActivity>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -658,26 +655,27 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				List<SocialActivity> list = (List<SocialActivity>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<SocialActivity>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<SocialActivity>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<SocialActivity>)result;
-		}
+
+		return list;
 	}
 
 	public SocialActivity findByGroupId_First(long groupId,
@@ -783,10 +781,10 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
+		List<SocialActivity> list = (List<SocialActivity>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -811,25 +809,26 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(companyId);
 
-				List<SocialActivity> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<SocialActivity>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<SocialActivity>)result;
-		}
+
+		return list;
 	}
 
 	public List<SocialActivity> findByCompanyId(long companyId, int start,
@@ -845,10 +844,10 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+		List<SocialActivity> list = (List<SocialActivity>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -880,26 +879,27 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(companyId);
 
-				List<SocialActivity> list = (List<SocialActivity>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<SocialActivity>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<SocialActivity>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<SocialActivity>)result;
-		}
+
+		return list;
 	}
 
 	public SocialActivity findByCompanyId_First(long companyId,
@@ -1006,10 +1006,10 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
+		List<SocialActivity> list = (List<SocialActivity>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1034,25 +1034,26 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(userId);
 
-				List<SocialActivity> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<SocialActivity>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<SocialActivity>)result;
-		}
+
+		return list;
 	}
 
 	public List<SocialActivity> findByUserId(long userId, int start, int end)
@@ -1068,10 +1069,10 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
+		List<SocialActivity> list = (List<SocialActivity>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1103,26 +1104,27 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(userId);
 
-				List<SocialActivity> list = (List<SocialActivity>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<SocialActivity>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<SocialActivity>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<SocialActivity>)result;
-		}
+
+		return list;
 	}
 
 	public SocialActivity findByUserId_First(long userId, OrderByComparator obc)
@@ -1249,11 +1251,6 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 	public SocialActivity fetchByMirrorActivityId(long mirrorActivityId)
 		throws SystemException {
-		return fetchByMirrorActivityId(mirrorActivityId, true);
-	}
-
-	public SocialActivity fetchByMirrorActivityId(long mirrorActivityId,
-		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(mirrorActivityId) };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_MIRRORACTIVITYID,
@@ -1286,13 +1283,13 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 				List<SocialActivity> list = q.list();
 
+				result = list;
+
 				SocialActivity socialActivity = null;
 
 				if (list.isEmpty()) {
-					if (cacheEmptyResult) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_MIRRORACTIVITYID,
-							finderArgs, list);
-					}
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_MIRRORACTIVITYID,
+						finderArgs, list);
 				}
 				else {
 					socialActivity = list.get(0);
@@ -1306,6 +1303,11 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 				throw processException(e);
 			}
 			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_MIRRORACTIVITYID,
+						finderArgs, new ArrayList<SocialActivity>());
+				}
+
 				closeSession(session);
 			}
 		}
@@ -1323,10 +1325,10 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(classNameId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_CLASSNAMEID,
+		List<SocialActivity> list = (List<SocialActivity>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_CLASSNAMEID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1351,25 +1353,26 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(classNameId);
 
-				List<SocialActivity> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<SocialActivity>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_CLASSNAMEID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<SocialActivity>)result;
-		}
+
+		return list;
 	}
 
 	public List<SocialActivity> findByClassNameId(long classNameId, int start,
@@ -1385,10 +1388,10 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_CLASSNAMEID,
+		List<SocialActivity> list = (List<SocialActivity>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_CLASSNAMEID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1420,26 +1423,27 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(classNameId);
 
-				List<SocialActivity> list = (List<SocialActivity>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<SocialActivity>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<SocialActivity>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_CLASSNAMEID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<SocialActivity>)result;
-		}
+
+		return list;
 	}
 
 	public SocialActivity findByClassNameId_First(long classNameId,
@@ -1546,10 +1550,10 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(receiverUserId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_RECEIVERUSERID,
+		List<SocialActivity> list = (List<SocialActivity>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_RECEIVERUSERID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1574,25 +1578,26 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(receiverUserId);
 
-				List<SocialActivity> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<SocialActivity>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_RECEIVERUSERID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<SocialActivity>)result;
-		}
+
+		return list;
 	}
 
 	public List<SocialActivity> findByReceiverUserId(long receiverUserId,
@@ -1608,10 +1613,10 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_RECEIVERUSERID,
+		List<SocialActivity> list = (List<SocialActivity>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_RECEIVERUSERID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1643,26 +1648,27 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(receiverUserId);
 
-				List<SocialActivity> list = (List<SocialActivity>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<SocialActivity>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<SocialActivity>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_RECEIVERUSERID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<SocialActivity>)result;
-		}
+
+		return list;
 	}
 
 	public SocialActivity findByReceiverUserId_First(long receiverUserId,
@@ -1772,10 +1778,10 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 				new Long(classNameId), new Long(classPK)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_C,
+		List<SocialActivity> list = (List<SocialActivity>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_C,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1806,25 +1812,26 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(classPK);
 
-				List<SocialActivity> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<SocialActivity>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C, finderArgs,
 					list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<SocialActivity>)result;
-		}
+
+		return list;
 	}
 
 	public List<SocialActivity> findByC_C(long classNameId, long classPK,
@@ -1840,10 +1847,10 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C,
+		List<SocialActivity> list = (List<SocialActivity>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1881,26 +1888,27 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(classPK);
 
-				List<SocialActivity> list = (List<SocialActivity>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<SocialActivity>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<SocialActivity>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_C,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<SocialActivity>)result;
-		}
+
+		return list;
 	}
 
 	public SocialActivity findByC_C_First(long classNameId, long classPK,
@@ -2022,10 +2030,10 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 				new Long(classPK)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_M_C_C,
+		List<SocialActivity> list = (List<SocialActivity>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_M_C_C,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -2062,25 +2070,26 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(classPK);
 
-				List<SocialActivity> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<SocialActivity>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_M_C_C,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<SocialActivity>)result;
-		}
+
+		return list;
 	}
 
 	public List<SocialActivity> findByM_C_C(long mirrorActivityId,
@@ -2100,10 +2109,10 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_M_C_C,
+		List<SocialActivity> list = (List<SocialActivity>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_M_C_C,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -2147,26 +2156,27 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(classPK);
 
-				List<SocialActivity> list = (List<SocialActivity>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<SocialActivity>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<SocialActivity>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_M_C_C,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<SocialActivity>)result;
-		}
+
+		return list;
 	}
 
 	public SocialActivity findByM_C_C_First(long mirrorActivityId,
@@ -2342,14 +2352,6 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 	public SocialActivity fetchByG_U_CD_C_C_T_R(long groupId, long userId,
 		Date createDate, long classNameId, long classPK, int type,
 		long receiverUserId) throws SystemException {
-		return fetchByG_U_CD_C_C_T_R(groupId, userId, createDate, classNameId,
-			classPK, type, receiverUserId, true);
-	}
-
-	public SocialActivity fetchByG_U_CD_C_C_T_R(long groupId, long userId,
-		Date createDate, long classNameId, long classPK, int type,
-		long receiverUserId, boolean cacheEmptyResult)
-		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(userId),
 				
@@ -2430,13 +2432,13 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 				List<SocialActivity> list = q.list();
 
+				result = list;
+
 				SocialActivity socialActivity = null;
 
 				if (list.isEmpty()) {
-					if (cacheEmptyResult) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U_CD_C_C_T_R,
-							finderArgs, list);
-					}
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U_CD_C_C_T_R,
+						finderArgs, list);
 				}
 				else {
 					socialActivity = list.get(0);
@@ -2450,6 +2452,11 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 				throw processException(e);
 			}
 			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U_CD_C_C_T_R,
+						finderArgs, new ArrayList<SocialActivity>());
+				}
+
 				closeSession(session);
 			}
 		}
@@ -2518,10 +2525,10 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<SocialActivity> list = (List<SocialActivity>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -2545,8 +2552,6 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<SocialActivity> list = null;
-
 				if (obc == null) {
 					list = (List<SocialActivity>)QueryUtil.list(q,
 							getDialect(), start, end, false);
@@ -2557,23 +2562,24 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 					list = (List<SocialActivity>)QueryUtil.list(q,
 							getDialect(), start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<SocialActivity>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<SocialActivity>)result;
-		}
+
+		return list;
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
@@ -2648,10 +2654,10 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 	public int countByGroupId(long groupId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -2673,42 +2679,33 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -2730,42 +2727,33 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(companyId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_COMPANYID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_COMPANYID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByUserId(long userId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -2787,43 +2775,34 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(userId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByMirrorActivityId(long mirrorActivityId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(mirrorActivityId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_MIRRORACTIVITYID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_MIRRORACTIVITYID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -2845,42 +2824,33 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(mirrorActivityId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_MIRRORACTIVITYID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_MIRRORACTIVITYID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByClassNameId(long classNameId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(classNameId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_CLASSNAMEID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_CLASSNAMEID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -2902,43 +2872,34 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(classNameId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CLASSNAMEID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CLASSNAMEID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByReceiverUserId(long receiverUserId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(receiverUserId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_RECEIVERUSERID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_RECEIVERUSERID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -2960,33 +2921,24 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(receiverUserId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_RECEIVERUSERID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_RECEIVERUSERID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByC_C(long classNameId, long classPK)
@@ -2995,10 +2947,10 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 				new Long(classNameId), new Long(classPK)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -3026,33 +2978,24 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(classPK);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByM_C_C(long mirrorActivityId, long classNameId,
@@ -3062,10 +3005,10 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 				new Long(classPK)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_M_C_C,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_M_C_C,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -3099,33 +3042,24 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(classPK);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_M_C_C,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_M_C_C,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByG_U_CD_C_C_T_R(long groupId, long userId,
@@ -3138,10 +3072,10 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 				new Integer(type), new Long(receiverUserId)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_U_CD_C_C_T_R,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_U_CD_C_C_T_R,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -3206,42 +3140,33 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(receiverUserId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_U_CD_C_C_T_R,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_U_CD_C_C_T_R,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -3250,33 +3175,24 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portlet.social.model.SocialActivity");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public void afterPropertiesSet() {

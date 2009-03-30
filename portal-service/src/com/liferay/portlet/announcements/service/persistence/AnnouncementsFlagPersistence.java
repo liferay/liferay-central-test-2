@@ -122,10 +122,6 @@ public interface AnnouncementsFlagPersistence extends BasePersistence {
 		long userId, long entryId, int value)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.announcements.model.AnnouncementsFlag fetchByU_E_V(
-		long userId, long entryId, int value, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;

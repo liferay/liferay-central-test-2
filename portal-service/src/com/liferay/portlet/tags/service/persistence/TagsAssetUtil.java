@@ -155,13 +155,6 @@ public class TagsAssetUtil {
 		return getPersistence().fetchByC_C(classNameId, classPK);
 	}
 
-	public static com.liferay.portlet.tags.model.TagsAsset fetchByC_C(
-		long classNameId, long classPK, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException {
-		return getPersistence()
-				   .fetchByC_C(classNameId, classPK, cacheEmptyResult);
-	}
-
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

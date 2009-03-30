@@ -47,7 +47,6 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -334,43 +333,40 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 
 	public Resource fetchByPrimaryKey(long resourceId)
 		throws SystemException {
-		Resource result = (Resource)EntityCacheUtil.getResult(ResourceModelImpl.ENTITY_CACHE_ENABLED,
+		Resource resource = (Resource)EntityCacheUtil.getResult(ResourceModelImpl.ENTITY_CACHE_ENABLED,
 				ResourceImpl.class, resourceId, this);
 
-		if (result == null) {
+		if (resource == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				Resource resource = (Resource)session.get(ResourceImpl.class,
+				resource = (Resource)session.get(ResourceImpl.class,
 						new Long(resourceId));
-
-				if (resource != null) {
-					cacheResult(resource);
-				}
-
-				return resource;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (resource != null) {
+					cacheResult(resource);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (Resource)result;
-		}
+
+		return resource;
 	}
 
 	public List<Resource> findByCodeId(long codeId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(codeId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_CODEID,
+		List<Resource> list = (List<Resource>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_CODEID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -390,25 +386,26 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(codeId);
 
-				List<Resource> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<Resource>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_CODEID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<Resource>)result;
-		}
+
+		return list;
 	}
 
 	public List<Resource> findByCodeId(long codeId, int start, int end)
@@ -424,10 +421,10 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_CODEID,
+		List<Resource> list = (List<Resource>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_CODEID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -452,26 +449,27 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(codeId);
 
-				List<Resource> list = (List<Resource>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<Resource>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<Resource>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_CODEID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<Resource>)result;
-		}
+
+		return list;
 	}
 
 	public Resource findByCodeId_First(long codeId, OrderByComparator obc)
@@ -592,11 +590,6 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 
 	public Resource fetchByC_P(long codeId, String primKey)
 		throws SystemException {
-		return fetchByC_P(codeId, primKey, true);
-	}
-
-	public Resource fetchByC_P(long codeId, String primKey,
-		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(codeId), primKey };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_P,
@@ -637,13 +630,13 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 
 				List<Resource> list = q.list();
 
+				result = list;
+
 				Resource resource = null;
 
 				if (list.isEmpty()) {
-					if (cacheEmptyResult) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_P,
-							finderArgs, list);
-					}
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_P,
+						finderArgs, list);
 				}
 				else {
 					resource = list.get(0);
@@ -657,6 +650,11 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 				throw processException(e);
 			}
 			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_P,
+						finderArgs, new ArrayList<Resource>());
+				}
+
 				closeSession(session);
 			}
 		}
@@ -724,10 +722,10 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<Resource> list = (List<Resource>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -744,8 +742,6 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<Resource> list = null;
-
 				if (obc == null) {
 					list = (List<Resource>)QueryUtil.list(q, getDialect(),
 							start, end, false);
@@ -756,23 +752,24 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 					list = (List<Resource>)QueryUtil.list(q, getDialect(),
 							start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<Resource>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<Resource>)result;
-		}
+
+		return list;
 	}
 
 	public void removeByCodeId(long codeId) throws SystemException {
@@ -797,10 +794,10 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 	public int countByCodeId(long codeId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(codeId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_CODEID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_CODEID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -821,43 +818,34 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(codeId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CODEID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CODEID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByC_P(long codeId, String primKey)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(codeId), primKey };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_P,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_P,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -891,42 +879,33 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 					qPos.add(primKey);
 				}
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_P, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_P, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -935,33 +914,24 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portal.model.Resource");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public void afterPropertiesSet() {

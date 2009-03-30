@@ -47,7 +47,6 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -346,44 +345,41 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 
 	public ServiceComponent fetchByPrimaryKey(long serviceComponentId)
 		throws SystemException {
-		ServiceComponent result = (ServiceComponent)EntityCacheUtil.getResult(ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
+		ServiceComponent serviceComponent = (ServiceComponent)EntityCacheUtil.getResult(ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
 				ServiceComponentImpl.class, serviceComponentId, this);
 
-		if (result == null) {
+		if (serviceComponent == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				ServiceComponent serviceComponent = (ServiceComponent)session.get(ServiceComponentImpl.class,
+				serviceComponent = (ServiceComponent)session.get(ServiceComponentImpl.class,
 						new Long(serviceComponentId));
-
-				if (serviceComponent != null) {
-					cacheResult(serviceComponent);
-				}
-
-				return serviceComponent;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (serviceComponent != null) {
+					cacheResult(serviceComponent);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (ServiceComponent)result;
-		}
+
+		return serviceComponent;
 	}
 
 	public List<ServiceComponent> findByBuildNamespace(String buildNamespace)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { buildNamespace };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_BUILDNAMESPACE,
+		List<ServiceComponent> list = (List<ServiceComponent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_BUILDNAMESPACE,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -416,25 +412,26 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 					qPos.add(buildNamespace);
 				}
 
-				List<ServiceComponent> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<ServiceComponent>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_BUILDNAMESPACE,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<ServiceComponent>)result;
-		}
+
+		return list;
 	}
 
 	public List<ServiceComponent> findByBuildNamespace(String buildNamespace,
@@ -450,10 +447,10 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_BUILDNAMESPACE,
+		List<ServiceComponent> list = (List<ServiceComponent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_BUILDNAMESPACE,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -493,26 +490,27 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 					qPos.add(buildNamespace);
 				}
 
-				List<ServiceComponent> list = (List<ServiceComponent>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<ServiceComponent>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<ServiceComponent>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_BUILDNAMESPACE,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<ServiceComponent>)result;
-		}
+
+		return list;
 	}
 
 	public ServiceComponent findByBuildNamespace_First(String buildNamespace,
@@ -656,11 +654,6 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 
 	public ServiceComponent fetchByBNS_BNU(String buildNamespace,
 		long buildNumber) throws SystemException {
-		return fetchByBNS_BNU(buildNamespace, buildNumber, true);
-	}
-
-	public ServiceComponent fetchByBNS_BNU(String buildNamespace,
-		long buildNumber, boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { buildNamespace, new Long(buildNumber) };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_BNS_BNU,
@@ -707,13 +700,13 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 
 				List<ServiceComponent> list = q.list();
 
+				result = list;
+
 				ServiceComponent serviceComponent = null;
 
 				if (list.isEmpty()) {
-					if (cacheEmptyResult) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BNS_BNU,
-							finderArgs, list);
-					}
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BNS_BNU,
+						finderArgs, list);
 				}
 				else {
 					serviceComponent = list.get(0);
@@ -727,6 +720,11 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 				throw processException(e);
 			}
 			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BNS_BNU,
+						finderArgs, new ArrayList<ServiceComponent>());
+				}
+
 				closeSession(session);
 			}
 		}
@@ -795,10 +793,10 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<ServiceComponent> list = (List<ServiceComponent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -822,8 +820,6 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<ServiceComponent> list = null;
-
 				if (obc == null) {
 					list = (List<ServiceComponent>)QueryUtil.list(q,
 							getDialect(), start, end, false);
@@ -834,23 +830,24 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 					list = (List<ServiceComponent>)QueryUtil.list(q,
 							getDialect(), start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<ServiceComponent>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<ServiceComponent>)result;
-		}
+
+		return list;
 	}
 
 	public void removeByBuildNamespace(String buildNamespace)
@@ -879,10 +876,10 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		Object[] finderArgs = new Object[] { buildNamespace };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_BUILDNAMESPACE,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_BUILDNAMESPACE,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -911,43 +908,34 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 					qPos.add(buildNamespace);
 				}
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_BUILDNAMESPACE,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_BUILDNAMESPACE,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByBNS_BNU(String buildNamespace, long buildNumber)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { buildNamespace, new Long(buildNumber) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_BNS_BNU,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_BNS_BNU,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -982,42 +970,33 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(buildNumber);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_BNS_BNU,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_BNS_BNU,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1026,33 +1005,24 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portal.model.ServiceComponent");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public void afterPropertiesSet() {

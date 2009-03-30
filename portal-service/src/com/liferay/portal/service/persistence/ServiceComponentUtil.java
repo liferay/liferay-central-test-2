@@ -162,13 +162,6 @@ public class ServiceComponentUtil {
 		return getPersistence().fetchByBNS_BNU(buildNamespace, buildNumber);
 	}
 
-	public static com.liferay.portal.model.ServiceComponent fetchByBNS_BNU(
-		java.lang.String buildNamespace, long buildNumber,
-		boolean cacheEmptyResult) throws com.liferay.portal.SystemException {
-		return getPersistence()
-				   .fetchByBNS_BNU(buildNamespace, buildNumber, cacheEmptyResult);
-	}
-
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

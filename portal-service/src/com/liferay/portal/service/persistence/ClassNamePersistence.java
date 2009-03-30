@@ -87,10 +87,6 @@ public interface ClassNamePersistence extends BasePersistence {
 	public com.liferay.portal.model.ClassName fetchByValue(
 		java.lang.String value) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.ClassName fetchByValue(
-		java.lang.String value, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;

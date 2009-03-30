@@ -47,7 +47,6 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -291,44 +290,41 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 
 	public OrgLabor fetchByPrimaryKey(long orgLaborId)
 		throws SystemException {
-		OrgLabor result = (OrgLabor)EntityCacheUtil.getResult(OrgLaborModelImpl.ENTITY_CACHE_ENABLED,
+		OrgLabor orgLabor = (OrgLabor)EntityCacheUtil.getResult(OrgLaborModelImpl.ENTITY_CACHE_ENABLED,
 				OrgLaborImpl.class, orgLaborId, this);
 
-		if (result == null) {
+		if (orgLabor == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				OrgLabor orgLabor = (OrgLabor)session.get(OrgLaborImpl.class,
+				orgLabor = (OrgLabor)session.get(OrgLaborImpl.class,
 						new Long(orgLaborId));
-
-				if (orgLabor != null) {
-					cacheResult(orgLabor);
-				}
-
-				return orgLabor;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (orgLabor != null) {
+					cacheResult(orgLabor);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (OrgLabor)result;
-		}
+
+		return orgLabor;
 	}
 
 	public List<OrgLabor> findByOrganizationId(long organizationId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(organizationId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ORGANIZATIONID,
+		List<OrgLabor> list = (List<OrgLabor>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ORGANIZATIONID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -353,25 +349,26 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(organizationId);
 
-				List<OrgLabor> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<OrgLabor>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ORGANIZATIONID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<OrgLabor>)result;
-		}
+
+		return list;
 	}
 
 	public List<OrgLabor> findByOrganizationId(long organizationId, int start,
@@ -387,10 +384,10 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ORGANIZATIONID,
+		List<OrgLabor> list = (List<OrgLabor>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ORGANIZATIONID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -422,26 +419,27 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(organizationId);
 
-				List<OrgLabor> list = (List<OrgLabor>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<OrgLabor>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<OrgLabor>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_ORGANIZATIONID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<OrgLabor>)result;
-		}
+
+		return list;
 	}
 
 	public OrgLabor findByOrganizationId_First(long organizationId,
@@ -597,10 +595,10 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<OrgLabor> list = (List<OrgLabor>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -624,8 +622,6 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<OrgLabor> list = null;
-
 				if (obc == null) {
 					list = (List<OrgLabor>)QueryUtil.list(q, getDialect(),
 							start, end, false);
@@ -636,23 +632,24 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 					list = (List<OrgLabor>)QueryUtil.list(q, getDialect(),
 							start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<OrgLabor>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<OrgLabor>)result;
-		}
+
+		return list;
 	}
 
 	public void removeByOrganizationId(long organizationId)
@@ -672,10 +669,10 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(organizationId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ORGANIZATIONID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ORGANIZATIONID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -696,42 +693,33 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(organizationId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_ORGANIZATIONID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_ORGANIZATIONID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -740,33 +728,24 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portal.model.OrgLabor");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public void afterPropertiesSet() {

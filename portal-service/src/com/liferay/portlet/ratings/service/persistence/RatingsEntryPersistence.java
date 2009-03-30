@@ -123,10 +123,6 @@ public interface RatingsEntryPersistence extends BasePersistence {
 		long userId, long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.ratings.model.RatingsEntry fetchByU_C_C(
-		long userId, long classNameId, long classPK, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;

@@ -120,10 +120,6 @@ public interface ExpandoColumnPersistence extends BasePersistence {
 		long tableId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.expando.model.ExpandoColumn fetchByT_N(
-		long tableId, java.lang.String name, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;

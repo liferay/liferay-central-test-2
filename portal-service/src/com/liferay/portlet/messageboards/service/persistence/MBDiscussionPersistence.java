@@ -121,10 +121,6 @@ public interface MBDiscussionPersistence extends BasePersistence {
 	public com.liferay.portlet.messageboards.model.MBDiscussion fetchByThreadId(
 		long threadId) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.messageboards.model.MBDiscussion fetchByThreadId(
-		long threadId, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
-
 	public com.liferay.portlet.messageboards.model.MBDiscussion findByC_C(
 		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException,
@@ -132,10 +128,6 @@ public interface MBDiscussionPersistence extends BasePersistence {
 
 	public com.liferay.portlet.messageboards.model.MBDiscussion fetchByC_C(
 		long classNameId, long classPK)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.messageboards.model.MBDiscussion fetchByC_C(
-		long classNameId, long classPK, boolean cacheEmptyResult)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<Object> findWithDynamicQuery(

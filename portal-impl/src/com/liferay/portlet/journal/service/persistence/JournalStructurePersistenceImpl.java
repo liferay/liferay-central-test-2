@@ -51,7 +51,6 @@ import com.liferay.portlet.journal.model.impl.JournalStructureModelImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -455,44 +454,41 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 	public JournalStructure fetchByPrimaryKey(long id)
 		throws SystemException {
-		JournalStructure result = (JournalStructure)EntityCacheUtil.getResult(JournalStructureModelImpl.ENTITY_CACHE_ENABLED,
+		JournalStructure journalStructure = (JournalStructure)EntityCacheUtil.getResult(JournalStructureModelImpl.ENTITY_CACHE_ENABLED,
 				JournalStructureImpl.class, id, this);
 
-		if (result == null) {
+		if (journalStructure == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				JournalStructure journalStructure = (JournalStructure)session.get(JournalStructureImpl.class,
+				journalStructure = (JournalStructure)session.get(JournalStructureImpl.class,
 						new Long(id));
-
-				if (journalStructure != null) {
-					cacheResult(journalStructure);
-				}
-
-				return journalStructure;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (journalStructure != null) {
+					cacheResult(journalStructure);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (JournalStructure)result;
-		}
+
+		return journalStructure;
 	}
 
 	public List<JournalStructure> findByUuid(String uuid)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { uuid };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
+		List<JournalStructure> list = (List<JournalStructure>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -524,25 +520,26 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 					qPos.add(uuid);
 				}
 
-				List<JournalStructure> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<JournalStructure>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
 					list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<JournalStructure>)result;
-		}
+
+		return list;
 	}
 
 	public List<JournalStructure> findByUuid(String uuid, int start, int end)
@@ -558,10 +555,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
+		List<JournalStructure> list = (List<JournalStructure>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -600,26 +597,27 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 					qPos.add(uuid);
 				}
 
-				List<JournalStructure> list = (List<JournalStructure>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<JournalStructure>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<JournalStructure>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<JournalStructure>)result;
-		}
+
+		return list;
 	}
 
 	public JournalStructure findByUuid_First(String uuid, OrderByComparator obc)
@@ -755,11 +753,6 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 	public JournalStructure fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
-		return fetchByUUID_G(uuid, groupId, true);
-	}
-
-	public JournalStructure fetchByUUID_G(String uuid, long groupId,
-		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
@@ -805,13 +798,13 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 				List<JournalStructure> list = q.list();
 
+				result = list;
+
 				JournalStructure journalStructure = null;
 
 				if (list.isEmpty()) {
-					if (cacheEmptyResult) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-							finderArgs, list);
-					}
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+						finderArgs, list);
 				}
 				else {
 					journalStructure = list.get(0);
@@ -825,6 +818,11 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 				throw processException(e);
 			}
 			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+						finderArgs, new ArrayList<JournalStructure>());
+				}
+
 				closeSession(session);
 			}
 		}
@@ -842,10 +840,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
+		List<JournalStructure> list = (List<JournalStructure>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -870,25 +868,26 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				List<JournalStructure> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<JournalStructure>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<JournalStructure>)result;
-		}
+
+		return list;
 	}
 
 	public List<JournalStructure> findByGroupId(long groupId, int start, int end)
@@ -904,10 +903,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+		List<JournalStructure> list = (List<JournalStructure>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -939,26 +938,27 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				List<JournalStructure> list = (List<JournalStructure>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<JournalStructure>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<JournalStructure>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<JournalStructure>)result;
-		}
+
+		return list;
 	}
 
 	public JournalStructure findByGroupId_First(long groupId,
@@ -1064,10 +1064,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		Object[] finderArgs = new Object[] { structureId };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_STRUCTUREID,
+		List<JournalStructure> list = (List<JournalStructure>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_STRUCTUREID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1099,25 +1099,26 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 					qPos.add(structureId);
 				}
 
-				List<JournalStructure> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<JournalStructure>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_STRUCTUREID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<JournalStructure>)result;
-		}
+
+		return list;
 	}
 
 	public List<JournalStructure> findByStructureId(String structureId,
@@ -1133,10 +1134,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_STRUCTUREID,
+		List<JournalStructure> list = (List<JournalStructure>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_STRUCTUREID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1175,26 +1176,27 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 					qPos.add(structureId);
 				}
 
-				List<JournalStructure> list = (List<JournalStructure>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<JournalStructure>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<JournalStructure>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_STRUCTUREID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<JournalStructure>)result;
-		}
+
+		return list;
 	}
 
 	public JournalStructure findByStructureId_First(String structureId,
@@ -1332,11 +1334,6 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 	public JournalStructure fetchByG_S(long groupId, String structureId)
 		throws SystemException {
-		return fetchByG_S(groupId, structureId, true);
-	}
-
-	public JournalStructure fetchByG_S(long groupId, String structureId,
-		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId), structureId };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_S,
@@ -1382,13 +1379,13 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 				List<JournalStructure> list = q.list();
 
+				result = list;
+
 				JournalStructure journalStructure = null;
 
 				if (list.isEmpty()) {
-					if (cacheEmptyResult) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_S,
-							finderArgs, list);
-					}
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_S,
+						finderArgs, list);
 				}
 				else {
 					journalStructure = list.get(0);
@@ -1402,6 +1399,11 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 				throw processException(e);
 			}
 			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_S,
+						finderArgs, new ArrayList<JournalStructure>());
+				}
+
 				closeSession(session);
 			}
 		}
@@ -1419,10 +1421,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 		String parentStructureId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId), parentStructureId };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_P,
+		List<JournalStructure> list = (List<JournalStructure>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_P,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1460,25 +1462,26 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 					qPos.add(parentStructureId);
 				}
 
-				List<JournalStructure> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<JournalStructure>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_P, finderArgs,
 					list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<JournalStructure>)result;
-		}
+
+		return list;
 	}
 
 	public List<JournalStructure> findByG_P(long groupId,
@@ -1497,10 +1500,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_P,
+		List<JournalStructure> list = (List<JournalStructure>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_P,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1545,26 +1548,27 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 					qPos.add(parentStructureId);
 				}
 
-				List<JournalStructure> list = (List<JournalStructure>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<JournalStructure>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<JournalStructure>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_P,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<JournalStructure>)result;
-		}
+
+		return list;
 	}
 
 	public JournalStructure findByG_P_First(long groupId,
@@ -1744,10 +1748,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<JournalStructure> list = (List<JournalStructure>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1771,8 +1775,6 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<JournalStructure> list = null;
-
 				if (obc == null) {
 					list = (List<JournalStructure>)QueryUtil.list(q,
 							getDialect(), start, end, false);
@@ -1783,23 +1785,24 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 					list = (List<JournalStructure>)QueryUtil.list(q,
 							getDialect(), start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<JournalStructure>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<JournalStructure>)result;
-		}
+
+		return list;
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
@@ -1852,10 +1855,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 	public int countByUuid(String uuid) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1884,43 +1887,34 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 					qPos.add(uuid);
 				}
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID_G,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID_G,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1955,42 +1949,33 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByGroupId(long groupId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -2012,42 +1997,33 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByStructureId(String structureId) throws SystemException {
 		Object[] finderArgs = new Object[] { structureId };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_STRUCTUREID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_STRUCTUREID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -2076,43 +2052,34 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 					qPos.add(structureId);
 				}
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_STRUCTUREID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_STRUCTUREID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByG_S(long groupId, String structureId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId), structureId };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_S,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_S,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -2147,43 +2114,34 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 					qPos.add(structureId);
 				}
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_S, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_S, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByG_P(long groupId, String parentStructureId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId), parentStructureId };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_P,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_P,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -2218,42 +2176,33 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 					qPos.add(parentStructureId);
 				}
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_P, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_P, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -2262,33 +2211,24 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portlet.journal.model.JournalStructure");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public void afterPropertiesSet() {

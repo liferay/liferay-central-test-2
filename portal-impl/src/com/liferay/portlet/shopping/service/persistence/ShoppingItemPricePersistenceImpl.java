@@ -49,7 +49,6 @@ import com.liferay.portlet.shopping.model.impl.ShoppingItemPriceModelImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -306,44 +305,41 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 
 	public ShoppingItemPrice fetchByPrimaryKey(long itemPriceId)
 		throws SystemException {
-		ShoppingItemPrice result = (ShoppingItemPrice)EntityCacheUtil.getResult(ShoppingItemPriceModelImpl.ENTITY_CACHE_ENABLED,
+		ShoppingItemPrice shoppingItemPrice = (ShoppingItemPrice)EntityCacheUtil.getResult(ShoppingItemPriceModelImpl.ENTITY_CACHE_ENABLED,
 				ShoppingItemPriceImpl.class, itemPriceId, this);
 
-		if (result == null) {
+		if (shoppingItemPrice == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				ShoppingItemPrice shoppingItemPrice = (ShoppingItemPrice)session.get(ShoppingItemPriceImpl.class,
+				shoppingItemPrice = (ShoppingItemPrice)session.get(ShoppingItemPriceImpl.class,
 						new Long(itemPriceId));
-
-				if (shoppingItemPrice != null) {
-					cacheResult(shoppingItemPrice);
-				}
-
-				return shoppingItemPrice;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (shoppingItemPrice != null) {
+					cacheResult(shoppingItemPrice);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (ShoppingItemPrice)result;
-		}
+
+		return shoppingItemPrice;
 	}
 
 	public List<ShoppingItemPrice> findByItemId(long itemId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(itemId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ITEMID,
+		List<ShoppingItemPrice> list = (List<ShoppingItemPrice>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ITEMID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -369,25 +365,26 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(itemId);
 
-				List<ShoppingItemPrice> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<ShoppingItemPrice>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ITEMID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<ShoppingItemPrice>)result;
-		}
+
+		return list;
 	}
 
 	public List<ShoppingItemPrice> findByItemId(long itemId, int start, int end)
@@ -403,10 +400,10 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ITEMID,
+		List<ShoppingItemPrice> list = (List<ShoppingItemPrice>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ITEMID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -439,26 +436,27 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(itemId);
 
-				List<ShoppingItemPrice> list = (List<ShoppingItemPrice>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<ShoppingItemPrice>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<ShoppingItemPrice>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_ITEMID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<ShoppingItemPrice>)result;
-		}
+
+		return list;
 	}
 
 	public ShoppingItemPrice findByItemId_First(long itemId,
@@ -617,10 +615,10 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<ShoppingItemPrice> list = (List<ShoppingItemPrice>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -645,8 +643,6 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<ShoppingItemPrice> list = null;
-
 				if (obc == null) {
 					list = (List<ShoppingItemPrice>)QueryUtil.list(q,
 							getDialect(), start, end, false);
@@ -657,23 +653,24 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 					list = (List<ShoppingItemPrice>)QueryUtil.list(q,
 							getDialect(), start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<ShoppingItemPrice>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<ShoppingItemPrice>)result;
-		}
+
+		return list;
 	}
 
 	public void removeByItemId(long itemId) throws SystemException {
@@ -691,10 +688,10 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 	public int countByItemId(long itemId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(itemId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ITEMID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ITEMID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -716,42 +713,33 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(itemId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_ITEMID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_ITEMID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -760,33 +748,24 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portlet.shopping.model.ShoppingItemPrice");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public void afterPropertiesSet() {

@@ -58,7 +58,6 @@ import java.sql.Types;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -330,44 +329,41 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public TagsEntry fetchByPrimaryKey(long entryId) throws SystemException {
-		TagsEntry result = (TagsEntry)EntityCacheUtil.getResult(TagsEntryModelImpl.ENTITY_CACHE_ENABLED,
+		TagsEntry tagsEntry = (TagsEntry)EntityCacheUtil.getResult(TagsEntryModelImpl.ENTITY_CACHE_ENABLED,
 				TagsEntryImpl.class, entryId, this);
 
-		if (result == null) {
+		if (tagsEntry == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				TagsEntry tagsEntry = (TagsEntry)session.get(TagsEntryImpl.class,
+				tagsEntry = (TagsEntry)session.get(TagsEntryImpl.class,
 						new Long(entryId));
-
-				if (tagsEntry != null) {
-					cacheResult(tagsEntry);
-				}
-
-				return tagsEntry;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (tagsEntry != null) {
+					cacheResult(tagsEntry);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (TagsEntry)result;
-		}
+
+		return tagsEntry;
 	}
 
 	public List<TagsEntry> findByVocabularyId(long vocabularyId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(vocabularyId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_VOCABULARYID,
+		List<TagsEntry> list = (List<TagsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_VOCABULARYID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -392,25 +388,26 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(vocabularyId);
 
-				List<TagsEntry> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<TagsEntry>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_VOCABULARYID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<TagsEntry>)result;
-		}
+
+		return list;
 	}
 
 	public List<TagsEntry> findByVocabularyId(long vocabularyId, int start,
@@ -426,10 +423,10 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_VOCABULARYID,
+		List<TagsEntry> list = (List<TagsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_VOCABULARYID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -461,26 +458,27 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(vocabularyId);
 
-				List<TagsEntry> list = (List<TagsEntry>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<TagsEntry>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<TagsEntry>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_VOCABULARYID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<TagsEntry>)result;
-		}
+
+		return list;
 	}
 
 	public TagsEntry findByVocabularyId_First(long vocabularyId,
@@ -588,10 +586,10 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 				new Long(parentEntryId), new Long(vocabularyId)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_P_V,
+		List<TagsEntry> list = (List<TagsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_P_V,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -622,25 +620,26 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(vocabularyId);
 
-				List<TagsEntry> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<TagsEntry>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_P_V, finderArgs,
 					list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<TagsEntry>)result;
-		}
+
+		return list;
 	}
 
 	public List<TagsEntry> findByP_V(long parentEntryId, long vocabularyId,
@@ -656,10 +655,10 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_P_V,
+		List<TagsEntry> list = (List<TagsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_P_V,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -697,26 +696,27 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(vocabularyId);
 
-				List<TagsEntry> list = (List<TagsEntry>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<TagsEntry>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<TagsEntry>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_P_V,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<TagsEntry>)result;
-		}
+
+		return list;
 	}
 
 	public TagsEntry findByP_V_First(long parentEntryId, long vocabularyId,
@@ -885,10 +885,10 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<TagsEntry> list = (List<TagsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -911,8 +911,6 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<TagsEntry> list = null;
-
 				if (obc == null) {
 					list = (List<TagsEntry>)QueryUtil.list(q, getDialect(),
 							start, end, false);
@@ -923,23 +921,24 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 					list = (List<TagsEntry>)QueryUtil.list(q, getDialect(),
 							start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<TagsEntry>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<TagsEntry>)result;
-		}
+
+		return list;
 	}
 
 	public void removeByVocabularyId(long vocabularyId)
@@ -965,10 +964,10 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 	public int countByVocabularyId(long vocabularyId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(vocabularyId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_VOCABULARYID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_VOCABULARYID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -990,33 +989,24 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(vocabularyId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_VOCABULARYID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_VOCABULARYID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByP_V(long parentEntryId, long vocabularyId)
@@ -1025,10 +1015,10 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 				new Long(parentEntryId), new Long(vocabularyId)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_P_V,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_P_V,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1056,42 +1046,33 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(vocabularyId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_P_V, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_P_V, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1100,33 +1081,24 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portlet.tags.model.TagsEntry");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public List<com.liferay.portlet.tags.model.TagsAsset> getTagsAssets(long pk)
@@ -1155,10 +1127,10 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_GET_TAGSASSETS,
+		List<com.liferay.portlet.tags.model.TagsAsset> list = (List<com.liferay.portlet.tags.model.TagsAsset>)FinderCacheUtil.getResult(FINDER_PATH_GET_TAGSASSETS,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1184,26 +1156,27 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(pk);
 
-				List<com.liferay.portlet.tags.model.TagsAsset> list = (List<com.liferay.portlet.tags.model.TagsAsset>)QueryUtil.list(q,
+				list = (List<com.liferay.portlet.tags.model.TagsAsset>)QueryUtil.list(q,
 						getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<com.liferay.portlet.tags.model.TagsAsset>();
+				}
 
 				tagsAssetPersistence.cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_GET_TAGSASSETS,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<com.liferay.portlet.tags.model.TagsAsset>)result;
-		}
+
+		return list;
 	}
 
 	public static final FinderPath FINDER_PATH_GET_TAGSASSETS_SIZE = new FinderPath(com.liferay.portlet.tags.model.impl.TagsAssetModelImpl.ENTITY_CACHE_ENABLED,
@@ -1214,10 +1187,10 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 	public int getTagsAssetsSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_GET_TAGSASSETS_SIZE,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_GET_TAGSASSETS_SIZE,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1231,33 +1204,24 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(pk);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_GET_TAGSASSETS_SIZE,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_GET_TAGSASSETS_SIZE,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public static final FinderPath FINDER_PATH_CONTAINS_TAGSASSET = new FinderPath(com.liferay.portlet.tags.model.impl.TagsAssetModelImpl.ENTITY_CACHE_ENABLED,
@@ -1269,26 +1233,28 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk), new Long(tagsAssetPK) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_TAGSASSET,
+		Boolean value = (Boolean)FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_TAGSASSET,
 				finderArgs, this);
 
-		if (result == null) {
+		if (value == null) {
 			try {
-				Boolean value = Boolean.valueOf(containsTagsAsset.contains(pk,
+				value = Boolean.valueOf(containsTagsAsset.contains(pk,
 							tagsAssetPK));
-
-				FinderCacheUtil.putResult(FINDER_PATH_CONTAINS_TAGSASSET,
-					finderArgs, value);
-
-				return value.booleanValue();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
+			finally {
+				if (value == null) {
+					value = Boolean.FALSE;
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_CONTAINS_TAGSASSET,
+					finderArgs, value);
+			}
 		}
-		else {
-			return ((Boolean)result).booleanValue();
-		}
+
+		return value.booleanValue();
 	}
 
 	public boolean containsTagsAssets(long pk) throws SystemException {

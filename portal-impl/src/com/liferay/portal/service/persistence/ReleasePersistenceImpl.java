@@ -45,7 +45,6 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -273,34 +272,31 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Release fetchByPrimaryKey(long releaseId) throws SystemException {
-		Release result = (Release)EntityCacheUtil.getResult(ReleaseModelImpl.ENTITY_CACHE_ENABLED,
+		Release release = (Release)EntityCacheUtil.getResult(ReleaseModelImpl.ENTITY_CACHE_ENABLED,
 				ReleaseImpl.class, releaseId, this);
 
-		if (result == null) {
+		if (release == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				Release release = (Release)session.get(ReleaseImpl.class,
+				release = (Release)session.get(ReleaseImpl.class,
 						new Long(releaseId));
-
-				if (release != null) {
-					cacheResult(release);
-				}
-
-				return release;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (release != null) {
+					cacheResult(release);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (Release)result;
-		}
+
+		return release;
 	}
 
 	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
@@ -357,10 +353,10 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<Release> list = (List<Release>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -377,8 +373,6 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<Release> list = null;
-
 				if (obc == null) {
 					list = (List<Release>)QueryUtil.list(q, getDialect(),
 							start, end, false);
@@ -389,23 +383,24 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl
 					list = (List<Release>)QueryUtil.list(q, getDialect(),
 							start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<Release>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<Release>)result;
-		}
+
+		return list;
 	}
 
 	public void removeAll() throws SystemException {
@@ -417,10 +412,10 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -429,33 +424,24 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portal.model.Release");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public void afterPropertiesSet() {

@@ -58,7 +58,6 @@ import java.sql.Types;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -359,44 +358,41 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 
 	public SCProductVersion fetchByPrimaryKey(long productVersionId)
 		throws SystemException {
-		SCProductVersion result = (SCProductVersion)EntityCacheUtil.getResult(SCProductVersionModelImpl.ENTITY_CACHE_ENABLED,
+		SCProductVersion scProductVersion = (SCProductVersion)EntityCacheUtil.getResult(SCProductVersionModelImpl.ENTITY_CACHE_ENABLED,
 				SCProductVersionImpl.class, productVersionId, this);
 
-		if (result == null) {
+		if (scProductVersion == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				SCProductVersion scProductVersion = (SCProductVersion)session.get(SCProductVersionImpl.class,
+				scProductVersion = (SCProductVersion)session.get(SCProductVersionImpl.class,
 						new Long(productVersionId));
-
-				if (scProductVersion != null) {
-					cacheResult(scProductVersion);
-				}
-
-				return scProductVersion;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (scProductVersion != null) {
+					cacheResult(scProductVersion);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (SCProductVersion)result;
-		}
+
+		return scProductVersion;
 	}
 
 	public List<SCProductVersion> findByProductEntryId(long productEntryId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(productEntryId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_PRODUCTENTRYID,
+		List<SCProductVersion> list = (List<SCProductVersion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_PRODUCTENTRYID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -421,25 +417,26 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(productEntryId);
 
-				List<SCProductVersion> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<SCProductVersion>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_PRODUCTENTRYID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<SCProductVersion>)result;
-		}
+
+		return list;
 	}
 
 	public List<SCProductVersion> findByProductEntryId(long productEntryId,
@@ -455,10 +452,10 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_PRODUCTENTRYID,
+		List<SCProductVersion> list = (List<SCProductVersion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_PRODUCTENTRYID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -490,26 +487,27 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(productEntryId);
 
-				List<SCProductVersion> list = (List<SCProductVersion>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<SCProductVersion>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<SCProductVersion>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_PRODUCTENTRYID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<SCProductVersion>)result;
-		}
+
+		return list;
 	}
 
 	public SCProductVersion findByProductEntryId_First(long productEntryId,
@@ -640,11 +638,6 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 
 	public SCProductVersion fetchByDirectDownloadURL(String directDownloadURL)
 		throws SystemException {
-		return fetchByDirectDownloadURL(directDownloadURL, true);
-	}
-
-	public SCProductVersion fetchByDirectDownloadURL(String directDownloadURL,
-		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { directDownloadURL };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_DIRECTDOWNLOADURL,
@@ -684,13 +677,13 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 
 				List<SCProductVersion> list = q.list();
 
+				result = list;
+
 				SCProductVersion scProductVersion = null;
 
 				if (list.isEmpty()) {
-					if (cacheEmptyResult) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DIRECTDOWNLOADURL,
-							finderArgs, list);
-					}
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DIRECTDOWNLOADURL,
+						finderArgs, list);
 				}
 				else {
 					scProductVersion = list.get(0);
@@ -704,6 +697,11 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 				throw processException(e);
 			}
 			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DIRECTDOWNLOADURL,
+						finderArgs, new ArrayList<SCProductVersion>());
+				}
+
 				closeSession(session);
 			}
 		}
@@ -772,10 +770,10 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<SCProductVersion> list = (List<SCProductVersion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -799,8 +797,6 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<SCProductVersion> list = null;
-
 				if (obc == null) {
 					list = (List<SCProductVersion>)QueryUtil.list(q,
 							getDialect(), start, end, false);
@@ -811,23 +807,24 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 					list = (List<SCProductVersion>)QueryUtil.list(q,
 							getDialect(), start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<SCProductVersion>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<SCProductVersion>)result;
-		}
+
+		return list;
 	}
 
 	public void removeByProductEntryId(long productEntryId)
@@ -855,10 +852,10 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(productEntryId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_PRODUCTENTRYID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_PRODUCTENTRYID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -880,43 +877,34 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(productEntryId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_PRODUCTENTRYID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_PRODUCTENTRYID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByDirectDownloadURL(String directDownloadURL)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { directDownloadURL };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_DIRECTDOWNLOADURL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_DIRECTDOWNLOADURL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -945,42 +933,33 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 					qPos.add(directDownloadURL);
 				}
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_DIRECTDOWNLOADURL,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_DIRECTDOWNLOADURL,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -989,33 +968,24 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portlet.softwarecatalog.model.SCProductVersion");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getSCFrameworkVersions(
@@ -1044,10 +1014,10 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_GET_SCFRAMEWORKVERSIONS,
+		List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> list = (List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion>)FinderCacheUtil.getResult(FINDER_PATH_GET_SCFRAMEWORKVERSIONS,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1079,27 +1049,27 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(pk);
 
-				List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> list =
-					(List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion>)QueryUtil.list(q,
+				list = (List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion>)QueryUtil.list(q,
 						getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion>();
+				}
 
 				scFrameworkVersionPersistence.cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_GET_SCFRAMEWORKVERSIONS,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion>)result;
-		}
+
+		return list;
 	}
 
 	public static final FinderPath FINDER_PATH_GET_SCFRAMEWORKVERSIONS_SIZE = new FinderPath(com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionModelImpl.ENTITY_CACHE_ENABLED,
@@ -1110,10 +1080,10 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 	public int getSCFrameworkVersionsSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_GET_SCFRAMEWORKVERSIONS_SIZE,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_GET_SCFRAMEWORKVERSIONS_SIZE,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1127,33 +1097,24 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(pk);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_GET_SCFRAMEWORKVERSIONS_SIZE,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_GET_SCFRAMEWORKVERSIONS_SIZE,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public static final FinderPath FINDER_PATH_CONTAINS_SCFRAMEWORKVERSION = new FinderPath(com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionModelImpl.ENTITY_CACHE_ENABLED,
@@ -1169,26 +1130,28 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 				new Long(scFrameworkVersionPK)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_SCFRAMEWORKVERSION,
+		Boolean value = (Boolean)FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_SCFRAMEWORKVERSION,
 				finderArgs, this);
 
-		if (result == null) {
+		if (value == null) {
 			try {
-				Boolean value = Boolean.valueOf(containsSCFrameworkVersion.contains(
+				value = Boolean.valueOf(containsSCFrameworkVersion.contains(
 							pk, scFrameworkVersionPK));
-
-				FinderCacheUtil.putResult(FINDER_PATH_CONTAINS_SCFRAMEWORKVERSION,
-					finderArgs, value);
-
-				return value.booleanValue();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
+			finally {
+				if (value == null) {
+					value = Boolean.FALSE;
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_CONTAINS_SCFRAMEWORKVERSION,
+					finderArgs, value);
+			}
 		}
-		else {
-			return ((Boolean)result).booleanValue();
-		}
+
+		return value.booleanValue();
 	}
 
 	public boolean containsSCFrameworkVersions(long pk)

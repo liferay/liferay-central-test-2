@@ -153,12 +153,6 @@ public class LayoutSetUtil {
 		return getPersistence().fetchByVirtualHost(virtualHost);
 	}
 
-	public static com.liferay.portal.model.LayoutSet fetchByVirtualHost(
-		java.lang.String virtualHost, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByVirtualHost(virtualHost, cacheEmptyResult);
-	}
-
 	public static com.liferay.portal.model.LayoutSet findByG_P(long groupId,
 		boolean privateLayout)
 		throws com.liferay.portal.NoSuchLayoutSetException,
@@ -169,13 +163,6 @@ public class LayoutSetUtil {
 	public static com.liferay.portal.model.LayoutSet fetchByG_P(long groupId,
 		boolean privateLayout) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByG_P(groupId, privateLayout);
-	}
-
-	public static com.liferay.portal.model.LayoutSet fetchByG_P(long groupId,
-		boolean privateLayout, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException {
-		return getPersistence()
-				   .fetchByG_P(groupId, privateLayout, cacheEmptyResult);
 	}
 
 	public static java.util.List<Object> findWithDynamicQuery(

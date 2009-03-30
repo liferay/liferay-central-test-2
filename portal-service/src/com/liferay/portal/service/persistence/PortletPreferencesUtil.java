@@ -250,14 +250,6 @@ public class PortletPreferencesUtil {
 				   .fetchByO_O_P_P(ownerId, ownerType, plid, portletId);
 	}
 
-	public static com.liferay.portal.model.PortletPreferences fetchByO_O_P_P(
-		long ownerId, int ownerType, long plid, java.lang.String portletId,
-		boolean cacheEmptyResult) throws com.liferay.portal.SystemException {
-		return getPersistence()
-				   .fetchByO_O_P_P(ownerId, ownerType, plid, portletId,
-			cacheEmptyResult);
-	}
-
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

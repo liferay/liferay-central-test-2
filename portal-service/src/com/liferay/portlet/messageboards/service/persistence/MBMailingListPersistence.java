@@ -124,10 +124,6 @@ public interface MBMailingListPersistence extends BasePersistence {
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.messageboards.model.MBMailingList fetchByUUID_G(
-		java.lang.String uuid, long groupId, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
-
 	public com.liferay.portlet.messageboards.model.MBMailingList findByCategoryId(
 		long categoryId)
 		throws com.liferay.portal.SystemException,
@@ -135,10 +131,6 @@ public interface MBMailingListPersistence extends BasePersistence {
 
 	public com.liferay.portlet.messageboards.model.MBMailingList fetchByCategoryId(
 		long categoryId) throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.messageboards.model.MBMailingList fetchByCategoryId(
-		long categoryId, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMailingList> findByActive(
 		boolean active) throws com.liferay.portal.SystemException;

@@ -116,12 +116,6 @@ public class TagsVocabularyUtil {
 		return getPersistence().fetchByG_N(groupId, name);
 	}
 
-	public static com.liferay.portlet.tags.model.TagsVocabulary fetchByG_N(
-		long groupId, java.lang.String name, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByG_N(groupId, name, cacheEmptyResult);
-	}
-
 	public static java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> findByG_F(
 		long groupId, boolean folksonomy)
 		throws com.liferay.portal.SystemException {

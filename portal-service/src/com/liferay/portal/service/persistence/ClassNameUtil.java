@@ -112,12 +112,6 @@ public class ClassNameUtil {
 		return getPersistence().fetchByValue(value);
 	}
 
-	public static com.liferay.portal.model.ClassName fetchByValue(
-		java.lang.String value, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByValue(value, cacheEmptyResult);
-	}
-
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

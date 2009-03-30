@@ -155,12 +155,6 @@ public class ExpandoRowUtil {
 		return getPersistence().fetchByT_C(tableId, classPK);
 	}
 
-	public static com.liferay.portlet.expando.model.ExpandoRow fetchByT_C(
-		long tableId, long classPK, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByT_C(tableId, classPK, cacheEmptyResult);
-	}
-
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

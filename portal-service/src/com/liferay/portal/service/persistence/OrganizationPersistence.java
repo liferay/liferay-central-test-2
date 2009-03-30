@@ -175,10 +175,6 @@ public interface OrganizationPersistence extends BasePersistence {
 	public com.liferay.portal.model.Organization fetchByC_N(long companyId,
 		java.lang.String name) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Organization fetchByC_N(long companyId,
-		java.lang.String name, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;

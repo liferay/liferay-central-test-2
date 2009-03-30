@@ -156,12 +156,6 @@ public class WikiNodeUtil {
 		return getPersistence().fetchByUUID_G(uuid, groupId);
 	}
 
-	public static com.liferay.portlet.wiki.model.WikiNode fetchByUUID_G(
-		java.lang.String uuid, long groupId, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByUUID_G(uuid, groupId, cacheEmptyResult);
-	}
-
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiNode> findByGroupId(
 		long groupId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId);
@@ -254,12 +248,6 @@ public class WikiNodeUtil {
 		long groupId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByG_N(groupId, name);
-	}
-
-	public static com.liferay.portlet.wiki.model.WikiNode fetchByG_N(
-		long groupId, java.lang.String name, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByG_N(groupId, name, cacheEmptyResult);
 	}
 
 	public static java.util.List<Object> findWithDynamicQuery(

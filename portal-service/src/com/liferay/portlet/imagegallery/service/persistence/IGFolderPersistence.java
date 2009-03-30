@@ -122,10 +122,6 @@ public interface IGFolderPersistence extends BasePersistence {
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.imagegallery.model.IGFolder fetchByUUID_G(
-		java.lang.String uuid, long groupId, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> findByGroupId(
 		long groupId) throws com.liferay.portal.SystemException;
 
@@ -221,10 +217,6 @@ public interface IGFolderPersistence extends BasePersistence {
 	public com.liferay.portlet.imagegallery.model.IGFolder fetchByG_P_N(
 		long groupId, long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.imagegallery.model.IGFolder fetchByG_P_N(
-		long groupId, long parentFolderId, java.lang.String name,
-		boolean cacheEmptyResult) throws com.liferay.portal.SystemException;
 
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)

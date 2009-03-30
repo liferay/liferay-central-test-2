@@ -49,7 +49,6 @@ import com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelIm
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -355,44 +354,41 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 
 	public AnnouncementsDelivery fetchByPrimaryKey(long deliveryId)
 		throws SystemException {
-		AnnouncementsDelivery result = (AnnouncementsDelivery)EntityCacheUtil.getResult(AnnouncementsDeliveryModelImpl.ENTITY_CACHE_ENABLED,
+		AnnouncementsDelivery announcementsDelivery = (AnnouncementsDelivery)EntityCacheUtil.getResult(AnnouncementsDeliveryModelImpl.ENTITY_CACHE_ENABLED,
 				AnnouncementsDeliveryImpl.class, deliveryId, this);
 
-		if (result == null) {
+		if (announcementsDelivery == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				AnnouncementsDelivery announcementsDelivery = (AnnouncementsDelivery)session.get(AnnouncementsDeliveryImpl.class,
+				announcementsDelivery = (AnnouncementsDelivery)session.get(AnnouncementsDeliveryImpl.class,
 						new Long(deliveryId));
-
-				if (announcementsDelivery != null) {
-					cacheResult(announcementsDelivery);
-				}
-
-				return announcementsDelivery;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (announcementsDelivery != null) {
+					cacheResult(announcementsDelivery);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (AnnouncementsDelivery)result;
-		}
+
+		return announcementsDelivery;
 	}
 
 	public List<AnnouncementsDelivery> findByUserId(long userId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
+		List<AnnouncementsDelivery> list = (List<AnnouncementsDelivery>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -413,25 +409,26 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(userId);
 
-				List<AnnouncementsDelivery> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<AnnouncementsDelivery>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<AnnouncementsDelivery>)result;
-		}
+
+		return list;
 	}
 
 	public List<AnnouncementsDelivery> findByUserId(long userId, int start,
@@ -447,10 +444,10 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
+		List<AnnouncementsDelivery> list = (List<AnnouncementsDelivery>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -476,26 +473,27 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(userId);
 
-				List<AnnouncementsDelivery> list = (List<AnnouncementsDelivery>)QueryUtil.list(q,
+				list = (List<AnnouncementsDelivery>)QueryUtil.list(q,
 						getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<AnnouncementsDelivery>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<AnnouncementsDelivery>)result;
-		}
+
+		return list;
 	}
 
 	public AnnouncementsDelivery findByUserId_First(long userId,
@@ -620,11 +618,6 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 
 	public AnnouncementsDelivery fetchByU_T(long userId, String type)
 		throws SystemException {
-		return fetchByU_T(userId, type, true);
-	}
-
-	public AnnouncementsDelivery fetchByU_T(long userId, String type,
-		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(userId), type };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_U_T,
@@ -666,13 +659,13 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 
 				List<AnnouncementsDelivery> list = q.list();
 
+				result = list;
+
 				AnnouncementsDelivery announcementsDelivery = null;
 
 				if (list.isEmpty()) {
-					if (cacheEmptyResult) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T,
-							finderArgs, list);
-					}
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T,
+						finderArgs, list);
 				}
 				else {
 					announcementsDelivery = list.get(0);
@@ -686,6 +679,11 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 				throw processException(e);
 			}
 			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T,
+						finderArgs, new ArrayList<AnnouncementsDelivery>());
+				}
+
 				closeSession(session);
 			}
 		}
@@ -754,10 +752,10 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<AnnouncementsDelivery> list = (List<AnnouncementsDelivery>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -775,8 +773,6 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<AnnouncementsDelivery> list = null;
-
 				if (obc == null) {
 					list = (List<AnnouncementsDelivery>)QueryUtil.list(q,
 							getDialect(), start, end, false);
@@ -787,23 +783,24 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 					list = (List<AnnouncementsDelivery>)QueryUtil.list(q,
 							getDialect(), start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<AnnouncementsDelivery>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<AnnouncementsDelivery>)result;
-		}
+
+		return list;
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
@@ -828,10 +825,10 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 	public int countByUserId(long userId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -853,42 +850,33 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(userId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByU_T(long userId, String type) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(userId), type };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_T,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_T,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -923,42 +911,33 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 					qPos.add(type);
 				}
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U_T, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U_T, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -967,33 +946,24 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portlet.announcements.model.AnnouncementsDelivery");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public void afterPropertiesSet() {

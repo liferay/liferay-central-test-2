@@ -49,7 +49,6 @@ import com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotModelIm
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -410,44 +409,41 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 	public SCProductScreenshot fetchByPrimaryKey(long productScreenshotId)
 		throws SystemException {
-		SCProductScreenshot result = (SCProductScreenshot)EntityCacheUtil.getResult(SCProductScreenshotModelImpl.ENTITY_CACHE_ENABLED,
+		SCProductScreenshot scProductScreenshot = (SCProductScreenshot)EntityCacheUtil.getResult(SCProductScreenshotModelImpl.ENTITY_CACHE_ENABLED,
 				SCProductScreenshotImpl.class, productScreenshotId, this);
 
-		if (result == null) {
+		if (scProductScreenshot == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				SCProductScreenshot scProductScreenshot = (SCProductScreenshot)session.get(SCProductScreenshotImpl.class,
+				scProductScreenshot = (SCProductScreenshot)session.get(SCProductScreenshotImpl.class,
 						new Long(productScreenshotId));
-
-				if (scProductScreenshot != null) {
-					cacheResult(scProductScreenshot);
-				}
-
-				return scProductScreenshot;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (scProductScreenshot != null) {
+					cacheResult(scProductScreenshot);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (SCProductScreenshot)result;
-		}
+
+		return scProductScreenshot;
 	}
 
 	public List<SCProductScreenshot> findByProductEntryId(long productEntryId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(productEntryId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_PRODUCTENTRYID,
+		List<SCProductScreenshot> list = (List<SCProductScreenshot>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_PRODUCTENTRYID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -473,25 +469,26 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(productEntryId);
 
-				List<SCProductScreenshot> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<SCProductScreenshot>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_PRODUCTENTRYID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<SCProductScreenshot>)result;
-		}
+
+		return list;
 	}
 
 	public List<SCProductScreenshot> findByProductEntryId(long productEntryId,
@@ -507,10 +504,10 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_PRODUCTENTRYID,
+		List<SCProductScreenshot> list = (List<SCProductScreenshot>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_PRODUCTENTRYID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -543,26 +540,27 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(productEntryId);
 
-				List<SCProductScreenshot> list = (List<SCProductScreenshot>)QueryUtil.list(q,
+				list = (List<SCProductScreenshot>)QueryUtil.list(q,
 						getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<SCProductScreenshot>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_PRODUCTENTRYID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<SCProductScreenshot>)result;
-		}
+
+		return list;
 	}
 
 	public SCProductScreenshot findByProductEntryId_First(long productEntryId,
@@ -694,11 +692,6 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 	public SCProductScreenshot fetchByThumbnailId(long thumbnailId)
 		throws SystemException {
-		return fetchByThumbnailId(thumbnailId, true);
-	}
-
-	public SCProductScreenshot fetchByThumbnailId(long thumbnailId,
-		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(thumbnailId) };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_THUMBNAILID,
@@ -732,13 +725,13 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 				List<SCProductScreenshot> list = q.list();
 
+				result = list;
+
 				SCProductScreenshot scProductScreenshot = null;
 
 				if (list.isEmpty()) {
-					if (cacheEmptyResult) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_THUMBNAILID,
-							finderArgs, list);
-					}
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_THUMBNAILID,
+						finderArgs, list);
 				}
 				else {
 					scProductScreenshot = list.get(0);
@@ -752,6 +745,11 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 				throw processException(e);
 			}
 			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_THUMBNAILID,
+						finderArgs, new ArrayList<SCProductScreenshot>());
+				}
+
 				closeSession(session);
 			}
 		}
@@ -790,11 +788,6 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 	public SCProductScreenshot fetchByFullImageId(long fullImageId)
 		throws SystemException {
-		return fetchByFullImageId(fullImageId, true);
-	}
-
-	public SCProductScreenshot fetchByFullImageId(long fullImageId,
-		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(fullImageId) };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_FULLIMAGEID,
@@ -828,13 +821,13 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 				List<SCProductScreenshot> list = q.list();
 
+				result = list;
+
 				SCProductScreenshot scProductScreenshot = null;
 
 				if (list.isEmpty()) {
-					if (cacheEmptyResult) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_FULLIMAGEID,
-							finderArgs, list);
-					}
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_FULLIMAGEID,
+						finderArgs, list);
 				}
 				else {
 					scProductScreenshot = list.get(0);
@@ -848,6 +841,11 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 				throw processException(e);
 			}
 			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_FULLIMAGEID,
+						finderArgs, new ArrayList<SCProductScreenshot>());
+				}
+
 				closeSession(session);
 			}
 		}
@@ -890,11 +888,6 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 	public SCProductScreenshot fetchByP_P(long productEntryId, int priority)
 		throws SystemException {
-		return fetchByP_P(productEntryId, priority, true);
-	}
-
-	public SCProductScreenshot fetchByP_P(long productEntryId, int priority,
-		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(productEntryId), new Integer(priority)
 			};
@@ -936,13 +929,13 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 				List<SCProductScreenshot> list = q.list();
 
+				result = list;
+
 				SCProductScreenshot scProductScreenshot = null;
 
 				if (list.isEmpty()) {
-					if (cacheEmptyResult) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_P_P,
-							finderArgs, list);
-					}
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_P_P,
+						finderArgs, list);
 				}
 				else {
 					scProductScreenshot = list.get(0);
@@ -956,6 +949,11 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 				throw processException(e);
 			}
 			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_P_P,
+						finderArgs, new ArrayList<SCProductScreenshot>());
+				}
+
 				closeSession(session);
 			}
 		}
@@ -1024,10 +1022,10 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<SCProductScreenshot> list = (List<SCProductScreenshot>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1052,8 +1050,6 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<SCProductScreenshot> list = null;
-
 				if (obc == null) {
 					list = (List<SCProductScreenshot>)QueryUtil.list(q,
 							getDialect(), start, end, false);
@@ -1064,23 +1060,24 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 					list = (List<SCProductScreenshot>)QueryUtil.list(q,
 							getDialect(), start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<SCProductScreenshot>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<SCProductScreenshot>)result;
-		}
+
+		return list;
 	}
 
 	public void removeByProductEntryId(long productEntryId)
@@ -1123,10 +1120,10 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(productEntryId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_PRODUCTENTRYID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_PRODUCTENTRYID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1148,42 +1145,33 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(productEntryId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_PRODUCTENTRYID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_PRODUCTENTRYID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByThumbnailId(long thumbnailId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(thumbnailId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_THUMBNAILID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_THUMBNAILID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1205,42 +1193,33 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(thumbnailId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_THUMBNAILID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_THUMBNAILID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByFullImageId(long fullImageId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(fullImageId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_FULLIMAGEID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_FULLIMAGEID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1262,33 +1241,24 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(fullImageId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_FULLIMAGEID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_FULLIMAGEID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByP_P(long productEntryId, int priority)
@@ -1297,10 +1267,10 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 				new Long(productEntryId), new Integer(priority)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_P_P,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_P_P,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1328,42 +1298,33 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(priority);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_P_P, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_P_P, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1372,33 +1333,24 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public void afterPropertiesSet() {

@@ -122,10 +122,6 @@ public interface JournalTemplatePersistence extends BasePersistence {
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.journal.model.JournalTemplate fetchByUUID_G(
-		java.lang.String uuid, long groupId, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List<com.liferay.portlet.journal.model.JournalTemplate> findByGroupId(
 		long groupId) throws com.liferay.portal.SystemException;
 
@@ -192,10 +188,6 @@ public interface JournalTemplatePersistence extends BasePersistence {
 	public com.liferay.portlet.journal.model.JournalTemplate fetchBySmallImageId(
 		long smallImageId) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.journal.model.JournalTemplate fetchBySmallImageId(
-		long smallImageId, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
-
 	public com.liferay.portlet.journal.model.JournalTemplate findByG_T(
 		long groupId, java.lang.String templateId)
 		throws com.liferay.portal.SystemException,
@@ -203,10 +195,6 @@ public interface JournalTemplatePersistence extends BasePersistence {
 
 	public com.liferay.portlet.journal.model.JournalTemplate fetchByG_T(
 		long groupId, java.lang.String templateId)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.journal.model.JournalTemplate fetchByG_T(
-		long groupId, java.lang.String templateId, boolean cacheEmptyResult)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalTemplate> findByG_S(

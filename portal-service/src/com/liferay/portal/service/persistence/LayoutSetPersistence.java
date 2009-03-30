@@ -115,10 +115,6 @@ public interface LayoutSetPersistence extends BasePersistence {
 	public com.liferay.portal.model.LayoutSet fetchByVirtualHost(
 		java.lang.String virtualHost) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.LayoutSet fetchByVirtualHost(
-		java.lang.String virtualHost, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
-
 	public com.liferay.portal.model.LayoutSet findByG_P(long groupId,
 		boolean privateLayout)
 		throws com.liferay.portal.NoSuchLayoutSetException,
@@ -126,10 +122,6 @@ public interface LayoutSetPersistence extends BasePersistence {
 
 	public com.liferay.portal.model.LayoutSet fetchByG_P(long groupId,
 		boolean privateLayout) throws com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.LayoutSet fetchByG_P(long groupId,
-		boolean privateLayout, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
 
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)

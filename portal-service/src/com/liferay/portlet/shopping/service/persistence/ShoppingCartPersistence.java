@@ -147,10 +147,6 @@ public interface ShoppingCartPersistence extends BasePersistence {
 	public com.liferay.portlet.shopping.model.ShoppingCart fetchByG_U(
 		long groupId, long userId) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.shopping.model.ShoppingCart fetchByG_U(
-		long groupId, long userId, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;

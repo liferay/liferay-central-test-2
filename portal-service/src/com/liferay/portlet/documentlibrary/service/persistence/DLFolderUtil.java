@@ -158,12 +158,6 @@ public class DLFolderUtil {
 		return getPersistence().fetchByUUID_G(uuid, groupId);
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFolder fetchByUUID_G(
-		java.lang.String uuid, long groupId, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByUUID_G(uuid, groupId, cacheEmptyResult);
-	}
-
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> findByGroupId(
 		long groupId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId);
@@ -345,13 +339,6 @@ public class DLFolderUtil {
 		long groupId, long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByG_P_N(groupId, parentFolderId, name);
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLFolder fetchByG_P_N(
-		long groupId, long parentFolderId, java.lang.String name,
-		boolean cacheEmptyResult) throws com.liferay.portal.SystemException {
-		return getPersistence()
-				   .fetchByG_P_N(groupId, parentFolderId, name, cacheEmptyResult);
 	}
 
 	public static java.util.List<Object> findWithDynamicQuery(

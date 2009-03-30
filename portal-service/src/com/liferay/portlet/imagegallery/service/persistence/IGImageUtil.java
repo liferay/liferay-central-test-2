@@ -198,13 +198,6 @@ public class IGImageUtil {
 		return getPersistence().fetchBySmallImageId(smallImageId);
 	}
 
-	public static com.liferay.portlet.imagegallery.model.IGImage fetchBySmallImageId(
-		long smallImageId, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException {
-		return getPersistence()
-				   .fetchBySmallImageId(smallImageId, cacheEmptyResult);
-	}
-
 	public static com.liferay.portlet.imagegallery.model.IGImage findByLargeImageId(
 		long largeImageId)
 		throws com.liferay.portal.SystemException,
@@ -215,13 +208,6 @@ public class IGImageUtil {
 	public static com.liferay.portlet.imagegallery.model.IGImage fetchByLargeImageId(
 		long largeImageId) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByLargeImageId(largeImageId);
-	}
-
-	public static com.liferay.portlet.imagegallery.model.IGImage fetchByLargeImageId(
-		long largeImageId, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException {
-		return getPersistence()
-				   .fetchByLargeImageId(largeImageId, cacheEmptyResult);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage findByCustom1ImageId(
@@ -236,13 +222,6 @@ public class IGImageUtil {
 		return getPersistence().fetchByCustom1ImageId(custom1ImageId);
 	}
 
-	public static com.liferay.portlet.imagegallery.model.IGImage fetchByCustom1ImageId(
-		long custom1ImageId, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException {
-		return getPersistence()
-				   .fetchByCustom1ImageId(custom1ImageId, cacheEmptyResult);
-	}
-
 	public static com.liferay.portlet.imagegallery.model.IGImage findByCustom2ImageId(
 		long custom2ImageId)
 		throws com.liferay.portal.SystemException,
@@ -253,13 +232,6 @@ public class IGImageUtil {
 	public static com.liferay.portlet.imagegallery.model.IGImage fetchByCustom2ImageId(
 		long custom2ImageId) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByCustom2ImageId(custom2ImageId);
-	}
-
-	public static com.liferay.portlet.imagegallery.model.IGImage fetchByCustom2ImageId(
-		long custom2ImageId, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException {
-		return getPersistence()
-				   .fetchByCustom2ImageId(custom2ImageId, cacheEmptyResult);
 	}
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByF_N(

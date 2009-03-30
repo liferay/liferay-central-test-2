@@ -122,10 +122,6 @@ public interface JournalStructurePersistence extends BasePersistence {
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.journal.model.JournalStructure fetchByUUID_G(
-		java.lang.String uuid, long groupId, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List<com.liferay.portlet.journal.model.JournalStructure> findByGroupId(
 		long groupId) throws com.liferay.portal.SystemException;
 
@@ -191,10 +187,6 @@ public interface JournalStructurePersistence extends BasePersistence {
 
 	public com.liferay.portlet.journal.model.JournalStructure fetchByG_S(
 		long groupId, java.lang.String structureId)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.journal.model.JournalStructure fetchByG_S(
-		long groupId, java.lang.String structureId, boolean cacheEmptyResult)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalStructure> findByG_P(

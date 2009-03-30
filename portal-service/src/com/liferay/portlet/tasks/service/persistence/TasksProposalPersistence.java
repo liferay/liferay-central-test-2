@@ -150,10 +150,6 @@ public interface TasksProposalPersistence extends BasePersistence {
 		long classNameId, java.lang.String classPK)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.tasks.model.TasksProposal fetchByC_C(
-		long classNameId, java.lang.String classPK, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;

@@ -180,10 +180,6 @@ public interface DLFileEntryPersistence extends BasePersistence {
 		long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry fetchByF_N(
-		long folderId, java.lang.String name, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByF_T(
 		long folderId, java.lang.String title)
 		throws com.liferay.portal.SystemException;

@@ -47,7 +47,6 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -377,34 +376,31 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 
 	public PasswordPolicyRel fetchByPrimaryKey(long passwordPolicyRelId)
 		throws SystemException {
-		PasswordPolicyRel result = (PasswordPolicyRel)EntityCacheUtil.getResult(PasswordPolicyRelModelImpl.ENTITY_CACHE_ENABLED,
+		PasswordPolicyRel passwordPolicyRel = (PasswordPolicyRel)EntityCacheUtil.getResult(PasswordPolicyRelModelImpl.ENTITY_CACHE_ENABLED,
 				PasswordPolicyRelImpl.class, passwordPolicyRelId, this);
 
-		if (result == null) {
+		if (passwordPolicyRel == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				PasswordPolicyRel passwordPolicyRel = (PasswordPolicyRel)session.get(PasswordPolicyRelImpl.class,
+				passwordPolicyRel = (PasswordPolicyRel)session.get(PasswordPolicyRelImpl.class,
 						new Long(passwordPolicyRelId));
-
-				if (passwordPolicyRel != null) {
-					cacheResult(passwordPolicyRel);
-				}
-
-				return passwordPolicyRel;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (passwordPolicyRel != null) {
+					cacheResult(passwordPolicyRel);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (PasswordPolicyRel)result;
-		}
+
+		return passwordPolicyRel;
 	}
 
 	public PasswordPolicyRel findByC_C(long classNameId, long classPK)
@@ -435,11 +431,6 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 
 	public PasswordPolicyRel fetchByC_C(long classNameId, long classPK)
 		throws SystemException {
-		return fetchByC_C(classNameId, classPK, true);
-	}
-
-	public PasswordPolicyRel fetchByC_C(long classNameId, long classPK,
-		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK)
 			};
@@ -476,13 +467,13 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 
 				List<PasswordPolicyRel> list = q.list();
 
+				result = list;
+
 				PasswordPolicyRel passwordPolicyRel = null;
 
 				if (list.isEmpty()) {
-					if (cacheEmptyResult) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
-							finderArgs, list);
-					}
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
+						finderArgs, list);
 				}
 				else {
 					passwordPolicyRel = list.get(0);
@@ -496,6 +487,11 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 				throw processException(e);
 			}
 			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
+						finderArgs, new ArrayList<PasswordPolicyRel>());
+				}
+
 				closeSession(session);
 			}
 		}
@@ -542,12 +538,6 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 
 	public PasswordPolicyRel fetchByP_C_C(long passwordPolicyId,
 		long classNameId, long classPK) throws SystemException {
-		return fetchByP_C_C(passwordPolicyId, classNameId, classPK, true);
-	}
-
-	public PasswordPolicyRel fetchByP_C_C(long passwordPolicyId,
-		long classNameId, long classPK, boolean cacheEmptyResult)
-		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(passwordPolicyId), new Long(classNameId),
 				new Long(classPK)
@@ -591,13 +581,13 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 
 				List<PasswordPolicyRel> list = q.list();
 
+				result = list;
+
 				PasswordPolicyRel passwordPolicyRel = null;
 
 				if (list.isEmpty()) {
-					if (cacheEmptyResult) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_P_C_C,
-							finderArgs, list);
-					}
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_P_C_C,
+						finderArgs, list);
 				}
 				else {
 					passwordPolicyRel = list.get(0);
@@ -611,6 +601,11 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 				throw processException(e);
 			}
 			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_P_C_C,
+						finderArgs, new ArrayList<PasswordPolicyRel>());
+				}
+
 				closeSession(session);
 			}
 		}
@@ -679,10 +674,10 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<PasswordPolicyRel> list = (List<PasswordPolicyRel>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -699,8 +694,6 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<PasswordPolicyRel> list = null;
-
 				if (obc == null) {
 					list = (List<PasswordPolicyRel>)QueryUtil.list(q,
 							getDialect(), start, end, false);
@@ -711,23 +704,24 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 					list = (List<PasswordPolicyRel>)QueryUtil.list(q,
 							getDialect(), start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<PasswordPolicyRel>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<PasswordPolicyRel>)result;
-		}
+
+		return list;
 	}
 
 	public void removeByC_C(long classNameId, long classPK)
@@ -757,10 +751,10 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 				new Long(classNameId), new Long(classPK)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -788,33 +782,24 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(classPK);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByP_C_C(long passwordPolicyId, long classNameId,
@@ -824,10 +809,10 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 				new Long(classPK)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_P_C_C,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_P_C_C,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -861,42 +846,33 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(classPK);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_P_C_C,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_P_C_C,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -905,33 +881,24 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portal.model.PasswordPolicyRel");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public void afterPropertiesSet() {

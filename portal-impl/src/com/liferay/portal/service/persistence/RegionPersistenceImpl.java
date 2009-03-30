@@ -47,7 +47,6 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -321,44 +320,41 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Region fetchByPrimaryKey(long regionId) throws SystemException {
-		Region result = (Region)EntityCacheUtil.getResult(RegionModelImpl.ENTITY_CACHE_ENABLED,
+		Region region = (Region)EntityCacheUtil.getResult(RegionModelImpl.ENTITY_CACHE_ENABLED,
 				RegionImpl.class, regionId, this);
 
-		if (result == null) {
+		if (region == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				Region region = (Region)session.get(RegionImpl.class,
+				region = (Region)session.get(RegionImpl.class,
 						new Long(regionId));
-
-				if (region != null) {
-					cacheResult(region);
-				}
-
-				return region;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (region != null) {
+					cacheResult(region);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (Region)result;
-		}
+
+		return region;
 	}
 
 	public List<Region> findByCountryId(long countryId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(countryId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COUNTRYID,
+		List<Region> list = (List<Region>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COUNTRYID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -382,25 +378,26 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(countryId);
 
-				List<Region> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<Region>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COUNTRYID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<Region>)result;
-		}
+
+		return list;
 	}
 
 	public List<Region> findByCountryId(long countryId, int start, int end)
@@ -416,10 +413,10 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COUNTRYID,
+		List<Region> list = (List<Region>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COUNTRYID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -450,26 +447,26 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(countryId);
 
-				List<Region> list = (List<Region>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<Region>)QueryUtil.list(q, getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<Region>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COUNTRYID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<Region>)result;
-		}
+
+		return list;
 	}
 
 	public Region findByCountryId_First(long countryId, OrderByComparator obc)
@@ -571,10 +568,10 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 	public List<Region> findByActive(boolean active) throws SystemException {
 		Object[] finderArgs = new Object[] { Boolean.valueOf(active) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ACTIVE,
+		List<Region> list = (List<Region>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ACTIVE,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -598,25 +595,26 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(active);
 
-				List<Region> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<Region>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ACTIVE,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<Region>)result;
-		}
+
+		return list;
 	}
 
 	public List<Region> findByActive(boolean active, int start, int end)
@@ -632,10 +630,10 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ACTIVE,
+		List<Region> list = (List<Region>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ACTIVE,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -666,26 +664,26 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(active);
 
-				List<Region> list = (List<Region>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<Region>)QueryUtil.list(q, getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<Region>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_ACTIVE,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<Region>)result;
-		}
+
+		return list;
 	}
 
 	public Region findByActive_First(boolean active, OrderByComparator obc)
@@ -790,10 +788,10 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 				new Long(countryId), Boolean.valueOf(active)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_A,
+		List<Region> list = (List<Region>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_A,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -823,25 +821,26 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(active);
 
-				List<Region> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<Region>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_A, finderArgs,
 					list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<Region>)result;
-		}
+
+		return list;
 	}
 
 	public List<Region> findByC_A(long countryId, boolean active, int start,
@@ -857,10 +856,10 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_A,
+		List<Region> list = (List<Region>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_A,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -897,26 +896,26 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(active);
 
-				List<Region> list = (List<Region>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<Region>)QueryUtil.list(q, getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<Region>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_A,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<Region>)result;
-		}
+
+		return list;
 	}
 
 	public Region findByC_A_First(long countryId, boolean active,
@@ -1082,10 +1081,10 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<Region> list = (List<Region>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1108,8 +1107,6 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<Region> list = null;
-
 				if (obc == null) {
 					list = (List<Region>)QueryUtil.list(q, getDialect(), start,
 							end, false);
@@ -1120,23 +1117,24 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 					list = (List<Region>)QueryUtil.list(q, getDialect(), start,
 							end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<Region>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<Region>)result;
-		}
+
+		return list;
 	}
 
 	public void removeByCountryId(long countryId) throws SystemException {
@@ -1167,10 +1165,10 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 	public int countByCountryId(long countryId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(countryId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COUNTRYID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COUNTRYID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1191,42 +1189,33 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(countryId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_COUNTRYID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_COUNTRYID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByActive(boolean active) throws SystemException {
 		Object[] finderArgs = new Object[] { Boolean.valueOf(active) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ACTIVE,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ACTIVE,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1247,33 +1236,24 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(active);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_ACTIVE,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_ACTIVE,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByC_A(long countryId, boolean active)
@@ -1282,10 +1262,10 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 				new Long(countryId), Boolean.valueOf(active)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_A,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_A,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1312,42 +1292,33 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(active);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_A, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_A, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1356,33 +1327,24 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portal.model.Region");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public void afterPropertiesSet() {

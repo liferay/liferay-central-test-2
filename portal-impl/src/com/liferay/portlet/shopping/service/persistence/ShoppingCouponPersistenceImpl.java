@@ -49,7 +49,6 @@ import com.liferay.portlet.shopping.model.impl.ShoppingCouponModelImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -331,44 +330,41 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 
 	public ShoppingCoupon fetchByPrimaryKey(long couponId)
 		throws SystemException {
-		ShoppingCoupon result = (ShoppingCoupon)EntityCacheUtil.getResult(ShoppingCouponModelImpl.ENTITY_CACHE_ENABLED,
+		ShoppingCoupon shoppingCoupon = (ShoppingCoupon)EntityCacheUtil.getResult(ShoppingCouponModelImpl.ENTITY_CACHE_ENABLED,
 				ShoppingCouponImpl.class, couponId, this);
 
-		if (result == null) {
+		if (shoppingCoupon == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				ShoppingCoupon shoppingCoupon = (ShoppingCoupon)session.get(ShoppingCouponImpl.class,
+				shoppingCoupon = (ShoppingCoupon)session.get(ShoppingCouponImpl.class,
 						new Long(couponId));
-
-				if (shoppingCoupon != null) {
-					cacheResult(shoppingCoupon);
-				}
-
-				return shoppingCoupon;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (shoppingCoupon != null) {
+					cacheResult(shoppingCoupon);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (ShoppingCoupon)result;
-		}
+
+		return shoppingCoupon;
 	}
 
 	public List<ShoppingCoupon> findByGroupId(long groupId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
+		List<ShoppingCoupon> list = (List<ShoppingCoupon>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -393,25 +389,26 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				List<ShoppingCoupon> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<ShoppingCoupon>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<ShoppingCoupon>)result;
-		}
+
+		return list;
 	}
 
 	public List<ShoppingCoupon> findByGroupId(long groupId, int start, int end)
@@ -427,10 +424,10 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+		List<ShoppingCoupon> list = (List<ShoppingCoupon>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -462,26 +459,27 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				List<ShoppingCoupon> list = (List<ShoppingCoupon>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<ShoppingCoupon>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<ShoppingCoupon>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<ShoppingCoupon>)result;
-		}
+
+		return list;
 	}
 
 	public ShoppingCoupon findByGroupId_First(long groupId,
@@ -607,11 +605,6 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public ShoppingCoupon fetchByCode(String code) throws SystemException {
-		return fetchByCode(code, true);
-	}
-
-	public ShoppingCoupon fetchByCode(String code, boolean cacheEmptyResult)
-		throws SystemException {
 		Object[] finderArgs = new Object[] { code };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_CODE,
@@ -651,13 +644,13 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 
 				List<ShoppingCoupon> list = q.list();
 
+				result = list;
+
 				ShoppingCoupon shoppingCoupon = null;
 
 				if (list.isEmpty()) {
-					if (cacheEmptyResult) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODE,
-							finderArgs, list);
-					}
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODE,
+						finderArgs, list);
 				}
 				else {
 					shoppingCoupon = list.get(0);
@@ -671,6 +664,11 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 				throw processException(e);
 			}
 			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODE,
+						finderArgs, new ArrayList<ShoppingCoupon>());
+				}
+
 				closeSession(session);
 			}
 		}
@@ -739,10 +737,10 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<ShoppingCoupon> list = (List<ShoppingCoupon>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -766,8 +764,6 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<ShoppingCoupon> list = null;
-
 				if (obc == null) {
 					list = (List<ShoppingCoupon>)QueryUtil.list(q,
 							getDialect(), start, end, false);
@@ -778,23 +774,24 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 					list = (List<ShoppingCoupon>)QueryUtil.list(q,
 							getDialect(), start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<ShoppingCoupon>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<ShoppingCoupon>)result;
-		}
+
+		return list;
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
@@ -819,10 +816,10 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 	public int countByGroupId(long groupId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -844,42 +841,33 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByCode(String code) throws SystemException {
 		Object[] finderArgs = new Object[] { code };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_CODE,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_CODE,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -908,42 +896,33 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 					qPos.add(code);
 				}
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CODE,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CODE,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -952,33 +931,24 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portlet.shopping.model.ShoppingCoupon");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public void afterPropertiesSet() {

@@ -51,7 +51,6 @@ import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutModelImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -350,44 +349,41 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 	public DLFileShortcut fetchByPrimaryKey(long fileShortcutId)
 		throws SystemException {
-		DLFileShortcut result = (DLFileShortcut)EntityCacheUtil.getResult(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
+		DLFileShortcut dlFileShortcut = (DLFileShortcut)EntityCacheUtil.getResult(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
 				DLFileShortcutImpl.class, fileShortcutId, this);
 
-		if (result == null) {
+		if (dlFileShortcut == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				DLFileShortcut dlFileShortcut = (DLFileShortcut)session.get(DLFileShortcutImpl.class,
+				dlFileShortcut = (DLFileShortcut)session.get(DLFileShortcutImpl.class,
 						new Long(fileShortcutId));
-
-				if (dlFileShortcut != null) {
-					cacheResult(dlFileShortcut);
-				}
-
-				return dlFileShortcut;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (dlFileShortcut != null) {
+					cacheResult(dlFileShortcut);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (DLFileShortcut)result;
-		}
+
+		return dlFileShortcut;
 	}
 
 	public List<DLFileShortcut> findByUuid(String uuid)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { uuid };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
+		List<DLFileShortcut> list = (List<DLFileShortcut>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -415,25 +411,26 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 					qPos.add(uuid);
 				}
 
-				List<DLFileShortcut> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<DLFileShortcut>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
 					list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<DLFileShortcut>)result;
-		}
+
+		return list;
 	}
 
 	public List<DLFileShortcut> findByUuid(String uuid, int start, int end)
@@ -449,10 +446,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
+		List<DLFileShortcut> list = (List<DLFileShortcut>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -485,26 +482,27 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 					qPos.add(uuid);
 				}
 
-				List<DLFileShortcut> list = (List<DLFileShortcut>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<DLFileShortcut>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<DLFileShortcut>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<DLFileShortcut>)result;
-		}
+
+		return list;
 	}
 
 	public DLFileShortcut findByUuid_First(String uuid, OrderByComparator obc)
@@ -611,10 +609,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(folderId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_FOLDERID,
+		List<DLFileShortcut> list = (List<DLFileShortcut>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_FOLDERID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -635,25 +633,26 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(folderId);
 
-				List<DLFileShortcut> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<DLFileShortcut>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_FOLDERID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<DLFileShortcut>)result;
-		}
+
+		return list;
 	}
 
 	public List<DLFileShortcut> findByFolderId(long folderId, int start, int end)
@@ -669,10 +668,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_FOLDERID,
+		List<DLFileShortcut> list = (List<DLFileShortcut>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_FOLDERID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -698,26 +697,27 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(folderId);
 
-				List<DLFileShortcut> list = (List<DLFileShortcut>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<DLFileShortcut>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<DLFileShortcut>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_FOLDERID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<DLFileShortcut>)result;
-		}
+
+		return list;
 	}
 
 	public DLFileShortcut findByFolderId_First(long folderId,
@@ -820,10 +820,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(toFolderId), toName };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_TF_TN,
+		List<DLFileShortcut> list = (List<DLFileShortcut>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_TF_TN,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -857,25 +857,26 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 					qPos.add(toName);
 				}
 
-				List<DLFileShortcut> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<DLFileShortcut>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_TF_TN,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<DLFileShortcut>)result;
-		}
+
+		return list;
 	}
 
 	public List<DLFileShortcut> findByTF_TN(long toFolderId, String toName,
@@ -893,10 +894,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_TF_TN,
+		List<DLFileShortcut> list = (List<DLFileShortcut>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_TF_TN,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -935,26 +936,27 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 					qPos.add(toName);
 				}
 
-				List<DLFileShortcut> list = (List<DLFileShortcut>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<DLFileShortcut>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<DLFileShortcut>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_TF_TN,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<DLFileShortcut>)result;
-		}
+
+		return list;
 	}
 
 	public DLFileShortcut findByTF_TN_First(long toFolderId, String toName,
@@ -1127,10 +1129,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<DLFileShortcut> list = (List<DLFileShortcut>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1148,8 +1150,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<DLFileShortcut> list = null;
-
 				if (obc == null) {
 					list = (List<DLFileShortcut>)QueryUtil.list(q,
 							getDialect(), start, end, false);
@@ -1160,23 +1160,24 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 					list = (List<DLFileShortcut>)QueryUtil.list(q,
 							getDialect(), start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<DLFileShortcut>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<DLFileShortcut>)result;
-		}
+
+		return list;
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
@@ -1207,10 +1208,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 	public int countByUuid(String uuid) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1239,42 +1240,33 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 					qPos.add(uuid);
 				}
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByFolderId(long folderId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(folderId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_FOLDERID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_FOLDERID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1296,43 +1288,34 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(folderId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_FOLDERID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_FOLDERID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByTF_TN(long toFolderId, String toName)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(toFolderId), toName };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_TF_TN,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_TF_TN,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1367,42 +1350,33 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 					qPos.add(toName);
 				}
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_TF_TN,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_TF_TN,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1411,33 +1385,24 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public void afterPropertiesSet() {

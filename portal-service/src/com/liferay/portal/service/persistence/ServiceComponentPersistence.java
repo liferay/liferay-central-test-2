@@ -123,10 +123,6 @@ public interface ServiceComponentPersistence extends BasePersistence {
 		java.lang.String buildNamespace, long buildNumber)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.ServiceComponent fetchByBNS_BNU(
-		java.lang.String buildNamespace, long buildNumber,
-		boolean cacheEmptyResult) throws com.liferay.portal.SystemException;
-
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;

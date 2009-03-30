@@ -47,7 +47,6 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -303,44 +302,41 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 
 	public UserTrackerPath fetchByPrimaryKey(long userTrackerPathId)
 		throws SystemException {
-		UserTrackerPath result = (UserTrackerPath)EntityCacheUtil.getResult(UserTrackerPathModelImpl.ENTITY_CACHE_ENABLED,
+		UserTrackerPath userTrackerPath = (UserTrackerPath)EntityCacheUtil.getResult(UserTrackerPathModelImpl.ENTITY_CACHE_ENABLED,
 				UserTrackerPathImpl.class, userTrackerPathId, this);
 
-		if (result == null) {
+		if (userTrackerPath == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				UserTrackerPath userTrackerPath = (UserTrackerPath)session.get(UserTrackerPathImpl.class,
+				userTrackerPath = (UserTrackerPath)session.get(UserTrackerPathImpl.class,
 						new Long(userTrackerPathId));
-
-				if (userTrackerPath != null) {
-					cacheResult(userTrackerPath);
-				}
-
-				return userTrackerPath;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (userTrackerPath != null) {
+					cacheResult(userTrackerPath);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (UserTrackerPath)result;
-		}
+
+		return userTrackerPath;
 	}
 
 	public List<UserTrackerPath> findByUserTrackerId(long userTrackerId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(userTrackerId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERTRACKERID,
+		List<UserTrackerPath> list = (List<UserTrackerPath>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERTRACKERID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -361,25 +357,26 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(userTrackerId);
 
-				List<UserTrackerPath> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<UserTrackerPath>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERTRACKERID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<UserTrackerPath>)result;
-		}
+
+		return list;
 	}
 
 	public List<UserTrackerPath> findByUserTrackerId(long userTrackerId,
@@ -395,10 +392,10 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERTRACKERID,
+		List<UserTrackerPath> list = (List<UserTrackerPath>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERTRACKERID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -424,26 +421,27 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(userTrackerId);
 
-				List<UserTrackerPath> list = (List<UserTrackerPath>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<UserTrackerPath>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<UserTrackerPath>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERTRACKERID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<UserTrackerPath>)result;
-		}
+
+		return list;
 	}
 
 	public UserTrackerPath findByUserTrackerId_First(long userTrackerId,
@@ -597,10 +595,10 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<UserTrackerPath> list = (List<UserTrackerPath>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -617,8 +615,6 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<UserTrackerPath> list = null;
-
 				if (obc == null) {
 					list = (List<UserTrackerPath>)QueryUtil.list(q,
 							getDialect(), start, end, false);
@@ -629,23 +625,24 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 					list = (List<UserTrackerPath>)QueryUtil.list(q,
 							getDialect(), start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<UserTrackerPath>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<UserTrackerPath>)result;
-		}
+
+		return list;
 	}
 
 	public void removeByUserTrackerId(long userTrackerId)
@@ -666,10 +663,10 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(userTrackerId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERTRACKERID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERTRACKERID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -691,42 +688,33 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(userTrackerId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERTRACKERID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERTRACKERID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -735,33 +723,24 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portal.model.UserTrackerPath");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public void afterPropertiesSet() {

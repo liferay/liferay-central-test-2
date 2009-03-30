@@ -58,7 +58,6 @@ import java.sql.Types;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -331,44 +330,41 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 	public SCLicense fetchByPrimaryKey(long licenseId)
 		throws SystemException {
-		SCLicense result = (SCLicense)EntityCacheUtil.getResult(SCLicenseModelImpl.ENTITY_CACHE_ENABLED,
+		SCLicense scLicense = (SCLicense)EntityCacheUtil.getResult(SCLicenseModelImpl.ENTITY_CACHE_ENABLED,
 				SCLicenseImpl.class, licenseId, this);
 
-		if (result == null) {
+		if (scLicense == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				SCLicense scLicense = (SCLicense)session.get(SCLicenseImpl.class,
+				scLicense = (SCLicense)session.get(SCLicenseImpl.class,
 						new Long(licenseId));
-
-				if (scLicense != null) {
-					cacheResult(scLicense);
-				}
-
-				return scLicense;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (scLicense != null) {
+					cacheResult(scLicense);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (SCLicense)result;
-		}
+
+		return scLicense;
 	}
 
 	public List<SCLicense> findByActive(boolean active)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { Boolean.valueOf(active) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ACTIVE,
+		List<SCLicense> list = (List<SCLicense>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ACTIVE,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -393,25 +389,26 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(active);
 
-				List<SCLicense> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<SCLicense>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ACTIVE,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<SCLicense>)result;
-		}
+
+		return list;
 	}
 
 	public List<SCLicense> findByActive(boolean active, int start, int end)
@@ -427,10 +424,10 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ACTIVE,
+		List<SCLicense> list = (List<SCLicense>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ACTIVE,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -462,26 +459,27 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(active);
 
-				List<SCLicense> list = (List<SCLicense>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<SCLicense>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<SCLicense>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_ACTIVE,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<SCLicense>)result;
-		}
+
+		return list;
 	}
 
 	public SCLicense findByActive_First(boolean active, OrderByComparator obc)
@@ -588,10 +586,10 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 				Boolean.valueOf(active), Boolean.valueOf(recommended)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_A_R,
+		List<SCLicense> list = (List<SCLicense>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_A_R,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -622,25 +620,26 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(recommended);
 
-				List<SCLicense> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<SCLicense>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_A_R, finderArgs,
 					list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<SCLicense>)result;
-		}
+
+		return list;
 	}
 
 	public List<SCLicense> findByA_R(boolean active, boolean recommended,
@@ -656,10 +655,10 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_A_R,
+		List<SCLicense> list = (List<SCLicense>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_A_R,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -697,26 +696,27 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(recommended);
 
-				List<SCLicense> list = (List<SCLicense>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<SCLicense>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<SCLicense>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_A_R,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<SCLicense>)result;
-		}
+
+		return list;
 	}
 
 	public SCLicense findByA_R_First(boolean active, boolean recommended,
@@ -886,10 +886,10 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<SCLicense> list = (List<SCLicense>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -913,8 +913,6 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<SCLicense> list = null;
-
 				if (obc == null) {
 					list = (List<SCLicense>)QueryUtil.list(q, getDialect(),
 							start, end, false);
@@ -925,23 +923,24 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 					list = (List<SCLicense>)QueryUtil.list(q, getDialect(),
 							start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<SCLicense>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<SCLicense>)result;
-		}
+
+		return list;
 	}
 
 	public void removeByActive(boolean active) throws SystemException {
@@ -966,10 +965,10 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 	public int countByActive(boolean active) throws SystemException {
 		Object[] finderArgs = new Object[] { Boolean.valueOf(active) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ACTIVE,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ACTIVE,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -991,33 +990,24 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(active);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_ACTIVE,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_ACTIVE,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByA_R(boolean active, boolean recommended)
@@ -1026,10 +1016,10 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 				Boolean.valueOf(active), Boolean.valueOf(recommended)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_A_R,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_A_R,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1057,42 +1047,33 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(recommended);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_A_R, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_A_R, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1101,33 +1082,24 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portlet.softwarecatalog.model.SCLicense");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getSCProductEntries(
@@ -1156,10 +1128,10 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_GET_SCPRODUCTENTRIES,
+		List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> list = (List<com.liferay.portlet.softwarecatalog.model.SCProductEntry>)FinderCacheUtil.getResult(FINDER_PATH_GET_SCPRODUCTENTRIES,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1192,27 +1164,27 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(pk);
 
-				List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> list =
-					(List<com.liferay.portlet.softwarecatalog.model.SCProductEntry>)QueryUtil.list(q,
+				list = (List<com.liferay.portlet.softwarecatalog.model.SCProductEntry>)QueryUtil.list(q,
 						getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<com.liferay.portlet.softwarecatalog.model.SCProductEntry>();
+				}
 
 				scProductEntryPersistence.cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_GET_SCPRODUCTENTRIES,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<com.liferay.portlet.softwarecatalog.model.SCProductEntry>)result;
-		}
+
+		return list;
 	}
 
 	public static final FinderPath FINDER_PATH_GET_SCPRODUCTENTRIES_SIZE = new FinderPath(com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
@@ -1223,10 +1195,10 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 	public int getSCProductEntriesSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(pk) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_GET_SCPRODUCTENTRIES_SIZE,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_GET_SCPRODUCTENTRIES_SIZE,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1240,33 +1212,24 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(pk);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_GET_SCPRODUCTENTRIES_SIZE,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_GET_SCPRODUCTENTRIES_SIZE,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public static final FinderPath FINDER_PATH_CONTAINS_SCPRODUCTENTRY = new FinderPath(com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
@@ -1282,26 +1245,28 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 				new Long(scProductEntryPK)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_SCPRODUCTENTRY,
+		Boolean value = (Boolean)FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_SCPRODUCTENTRY,
 				finderArgs, this);
 
-		if (result == null) {
+		if (value == null) {
 			try {
-				Boolean value = Boolean.valueOf(containsSCProductEntry.contains(
-							pk, scProductEntryPK));
-
-				FinderCacheUtil.putResult(FINDER_PATH_CONTAINS_SCPRODUCTENTRY,
-					finderArgs, value);
-
-				return value.booleanValue();
+				value = Boolean.valueOf(containsSCProductEntry.contains(pk,
+							scProductEntryPK));
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
+			finally {
+				if (value == null) {
+					value = Boolean.FALSE;
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_CONTAINS_SCPRODUCTENTRY,
+					finderArgs, value);
+			}
 		}
-		else {
-			return ((Boolean)result).booleanValue();
-		}
+
+		return value.booleanValue();
 	}
 
 	public boolean containsSCProductEntries(long pk) throws SystemException {

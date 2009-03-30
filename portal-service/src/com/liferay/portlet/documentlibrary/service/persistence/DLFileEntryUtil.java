@@ -240,12 +240,6 @@ public class DLFileEntryUtil {
 		return getPersistence().fetchByF_N(folderId, name);
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntry fetchByF_N(
-		long folderId, java.lang.String name, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByF_N(folderId, name, cacheEmptyResult);
-	}
-
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByF_T(
 		long folderId, java.lang.String title)
 		throws com.liferay.portal.SystemException {

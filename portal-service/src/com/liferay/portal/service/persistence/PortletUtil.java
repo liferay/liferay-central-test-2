@@ -151,13 +151,6 @@ public class PortletUtil {
 		return getPersistence().fetchByC_P(companyId, portletId);
 	}
 
-	public static com.liferay.portal.model.Portlet fetchByC_P(long companyId,
-		java.lang.String portletId, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException {
-		return getPersistence()
-				   .fetchByC_P(companyId, portletId, cacheEmptyResult);
-	}
-
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

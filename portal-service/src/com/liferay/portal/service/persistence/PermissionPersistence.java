@@ -117,10 +117,6 @@ public interface PermissionPersistence extends BasePersistence {
 		java.lang.String actionId, long resourceId)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Permission fetchByA_R(
-		java.lang.String actionId, long resourceId, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;

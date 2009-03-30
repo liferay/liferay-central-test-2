@@ -179,10 +179,6 @@ public interface TagsPropertyPersistence extends BasePersistence {
 		long entryId, java.lang.String key)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.tags.model.TagsProperty fetchByE_K(
-		long entryId, java.lang.String key, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;

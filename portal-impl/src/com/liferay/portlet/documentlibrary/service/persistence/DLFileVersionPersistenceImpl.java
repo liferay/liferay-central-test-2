@@ -49,7 +49,6 @@ import com.liferay.portlet.documentlibrary.model.impl.DLFileVersionModelImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -360,44 +359,41 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 	public DLFileVersion fetchByPrimaryKey(long fileVersionId)
 		throws SystemException {
-		DLFileVersion result = (DLFileVersion)EntityCacheUtil.getResult(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
+		DLFileVersion dlFileVersion = (DLFileVersion)EntityCacheUtil.getResult(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
 				DLFileVersionImpl.class, fileVersionId, this);
 
-		if (result == null) {
+		if (dlFileVersion == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				DLFileVersion dlFileVersion = (DLFileVersion)session.get(DLFileVersionImpl.class,
+				dlFileVersion = (DLFileVersion)session.get(DLFileVersionImpl.class,
 						new Long(fileVersionId));
-
-				if (dlFileVersion != null) {
-					cacheResult(dlFileVersion);
-				}
-
-				return dlFileVersion;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (dlFileVersion != null) {
+					cacheResult(dlFileVersion);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (DLFileVersion)result;
-		}
+
+		return dlFileVersion;
 	}
 
 	public List<DLFileVersion> findByF_N(long folderId, String name)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(folderId), name };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_F_N,
+		List<DLFileVersion> list = (List<DLFileVersion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_F_N,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -437,25 +433,26 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 					qPos.add(name);
 				}
 
-				List<DLFileVersion> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<DLFileVersion>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_F_N, finderArgs,
 					list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<DLFileVersion>)result;
-		}
+
+		return list;
 	}
 
 	public List<DLFileVersion> findByF_N(long folderId, String name, int start,
@@ -473,10 +470,10 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_F_N,
+		List<DLFileVersion> list = (List<DLFileVersion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_F_N,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -523,26 +520,27 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 					qPos.add(name);
 				}
 
-				List<DLFileVersion> list = (List<DLFileVersion>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<DLFileVersion>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<DLFileVersion>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_F_N,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<DLFileVersion>)result;
-		}
+
+		return list;
 	}
 
 	public DLFileVersion findByF_N_First(long folderId, String name,
@@ -699,11 +697,6 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 	public DLFileVersion fetchByF_N_V(long folderId, String name, double version)
 		throws SystemException {
-		return fetchByF_N_V(folderId, name, version, true);
-	}
-
-	public DLFileVersion fetchByF_N_V(long folderId, String name,
-		double version, boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(folderId),
 				
@@ -761,13 +754,13 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 				List<DLFileVersion> list = q.list();
 
+				result = list;
+
 				DLFileVersion dlFileVersion = null;
 
 				if (list.isEmpty()) {
-					if (cacheEmptyResult) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_F_N_V,
-							finderArgs, list);
-					}
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_F_N_V,
+						finderArgs, list);
 				}
 				else {
 					dlFileVersion = list.get(0);
@@ -781,6 +774,11 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 				throw processException(e);
 			}
 			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_F_N_V,
+						finderArgs, new ArrayList<DLFileVersion>());
+				}
+
 				closeSession(session);
 			}
 		}
@@ -849,10 +847,10 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<DLFileVersion> list = (List<DLFileVersion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -878,8 +876,6 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<DLFileVersion> list = null;
-
 				if (obc == null) {
 					list = (List<DLFileVersion>)QueryUtil.list(q, getDialect(),
 							start, end, false);
@@ -890,23 +886,24 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 					list = (List<DLFileVersion>)QueryUtil.list(q, getDialect(),
 							start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<DLFileVersion>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<DLFileVersion>)result;
-		}
+
+		return list;
 	}
 
 	public void removeByF_N(long folderId, String name)
@@ -932,10 +929,10 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 	public int countByF_N(long folderId, String name) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(folderId), name };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_F_N,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_F_N,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -970,33 +967,24 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 					qPos.add(name);
 				}
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_F_N, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_F_N, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByF_N_V(long folderId, String name, double version)
@@ -1007,10 +995,10 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 				name, new Double(version)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_F_N_V,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_F_N_V,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1051,42 +1039,33 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(version);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_F_N_V,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_F_N_V,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1095,33 +1074,24 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portlet.documentlibrary.model.DLFileVersion");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public void afterPropertiesSet() {

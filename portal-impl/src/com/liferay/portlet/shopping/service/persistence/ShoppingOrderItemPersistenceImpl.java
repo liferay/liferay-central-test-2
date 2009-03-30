@@ -49,7 +49,6 @@ import com.liferay.portlet.shopping.model.impl.ShoppingOrderItemModelImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -306,44 +305,41 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl
 
 	public ShoppingOrderItem fetchByPrimaryKey(long orderItemId)
 		throws SystemException {
-		ShoppingOrderItem result = (ShoppingOrderItem)EntityCacheUtil.getResult(ShoppingOrderItemModelImpl.ENTITY_CACHE_ENABLED,
+		ShoppingOrderItem shoppingOrderItem = (ShoppingOrderItem)EntityCacheUtil.getResult(ShoppingOrderItemModelImpl.ENTITY_CACHE_ENABLED,
 				ShoppingOrderItemImpl.class, orderItemId, this);
 
-		if (result == null) {
+		if (shoppingOrderItem == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				ShoppingOrderItem shoppingOrderItem = (ShoppingOrderItem)session.get(ShoppingOrderItemImpl.class,
+				shoppingOrderItem = (ShoppingOrderItem)session.get(ShoppingOrderItemImpl.class,
 						new Long(orderItemId));
-
-				if (shoppingOrderItem != null) {
-					cacheResult(shoppingOrderItem);
-				}
-
-				return shoppingOrderItem;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (shoppingOrderItem != null) {
+					cacheResult(shoppingOrderItem);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (ShoppingOrderItem)result;
-		}
+
+		return shoppingOrderItem;
 	}
 
 	public List<ShoppingOrderItem> findByOrderId(long orderId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(orderId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ORDERID,
+		List<ShoppingOrderItem> list = (List<ShoppingOrderItem>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ORDERID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -369,25 +365,26 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(orderId);
 
-				List<ShoppingOrderItem> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<ShoppingOrderItem>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ORDERID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<ShoppingOrderItem>)result;
-		}
+
+		return list;
 	}
 
 	public List<ShoppingOrderItem> findByOrderId(long orderId, int start,
@@ -403,10 +400,10 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ORDERID,
+		List<ShoppingOrderItem> list = (List<ShoppingOrderItem>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ORDERID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -439,26 +436,27 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(orderId);
 
-				List<ShoppingOrderItem> list = (List<ShoppingOrderItem>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<ShoppingOrderItem>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<ShoppingOrderItem>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_ORDERID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<ShoppingOrderItem>)result;
-		}
+
+		return list;
 	}
 
 	public ShoppingOrderItem findByOrderId_First(long orderId,
@@ -617,10 +615,10 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<ShoppingOrderItem> list = (List<ShoppingOrderItem>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -645,8 +643,6 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<ShoppingOrderItem> list = null;
-
 				if (obc == null) {
 					list = (List<ShoppingOrderItem>)QueryUtil.list(q,
 							getDialect(), start, end, false);
@@ -657,23 +653,24 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl
 					list = (List<ShoppingOrderItem>)QueryUtil.list(q,
 							getDialect(), start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<ShoppingOrderItem>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<ShoppingOrderItem>)result;
-		}
+
+		return list;
 	}
 
 	public void removeByOrderId(long orderId) throws SystemException {
@@ -691,10 +688,10 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl
 	public int countByOrderId(long orderId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(orderId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ORDERID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ORDERID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -716,42 +713,33 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(orderId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_ORDERID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_ORDERID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -760,33 +748,24 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portlet.shopping.model.ShoppingOrderItem");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public void afterPropertiesSet() {

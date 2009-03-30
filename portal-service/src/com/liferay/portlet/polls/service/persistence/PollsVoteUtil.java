@@ -194,12 +194,6 @@ public class PollsVoteUtil {
 		return getPersistence().fetchByQ_U(questionId, userId);
 	}
 
-	public static com.liferay.portlet.polls.model.PollsVote fetchByQ_U(
-		long questionId, long userId, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByQ_U(questionId, userId, cacheEmptyResult);
-	}
-
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

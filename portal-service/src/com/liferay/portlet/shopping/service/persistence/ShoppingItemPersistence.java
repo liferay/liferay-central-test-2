@@ -119,10 +119,6 @@ public interface ShoppingItemPersistence extends BasePersistence {
 	public com.liferay.portlet.shopping.model.ShoppingItem fetchBySmallImageId(
 		long smallImageId) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.shopping.model.ShoppingItem fetchBySmallImageId(
-		long smallImageId, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
-
 	public com.liferay.portlet.shopping.model.ShoppingItem findByMediumImageId(
 		long mediumImageId)
 		throws com.liferay.portal.SystemException,
@@ -130,10 +126,6 @@ public interface ShoppingItemPersistence extends BasePersistence {
 
 	public com.liferay.portlet.shopping.model.ShoppingItem fetchByMediumImageId(
 		long mediumImageId) throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.shopping.model.ShoppingItem fetchByMediumImageId(
-		long mediumImageId, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingItem findByLargeImageId(
 		long largeImageId)
@@ -143,10 +135,6 @@ public interface ShoppingItemPersistence extends BasePersistence {
 	public com.liferay.portlet.shopping.model.ShoppingItem fetchByLargeImageId(
 		long largeImageId) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.shopping.model.ShoppingItem fetchByLargeImageId(
-		long largeImageId, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
-
 	public com.liferay.portlet.shopping.model.ShoppingItem findByC_S(
 		long companyId, java.lang.String sku)
 		throws com.liferay.portal.SystemException,
@@ -154,10 +142,6 @@ public interface ShoppingItemPersistence extends BasePersistence {
 
 	public com.liferay.portlet.shopping.model.ShoppingItem fetchByC_S(
 		long companyId, java.lang.String sku)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.shopping.model.ShoppingItem fetchByC_S(
-		long companyId, java.lang.String sku, boolean cacheEmptyResult)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<Object> findWithDynamicQuery(

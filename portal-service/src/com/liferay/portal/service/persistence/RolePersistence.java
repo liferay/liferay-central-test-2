@@ -114,10 +114,6 @@ public interface RolePersistence extends BasePersistence {
 	public com.liferay.portal.model.Role fetchByC_N(long companyId,
 		java.lang.String name) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Role fetchByC_N(long companyId,
-		java.lang.String name, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
-
 	public com.liferay.portal.model.Role findByC_C_C(long companyId,
 		long classNameId, long classPK)
 		throws com.liferay.portal.NoSuchRoleException,
@@ -125,10 +121,6 @@ public interface RolePersistence extends BasePersistence {
 
 	public com.liferay.portal.model.Role fetchByC_C_C(long companyId,
 		long classNameId, long classPK)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.Role fetchByC_C_C(long companyId,
-		long classNameId, long classPK, boolean cacheEmptyResult)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<Object> findWithDynamicQuery(

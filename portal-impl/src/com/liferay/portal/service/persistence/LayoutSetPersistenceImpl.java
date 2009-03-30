@@ -47,7 +47,6 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -359,44 +358,41 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 	public LayoutSet fetchByPrimaryKey(long layoutSetId)
 		throws SystemException {
-		LayoutSet result = (LayoutSet)EntityCacheUtil.getResult(LayoutSetModelImpl.ENTITY_CACHE_ENABLED,
+		LayoutSet layoutSet = (LayoutSet)EntityCacheUtil.getResult(LayoutSetModelImpl.ENTITY_CACHE_ENABLED,
 				LayoutSetImpl.class, layoutSetId, this);
 
-		if (result == null) {
+		if (layoutSet == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				LayoutSet layoutSet = (LayoutSet)session.get(LayoutSetImpl.class,
+				layoutSet = (LayoutSet)session.get(LayoutSetImpl.class,
 						new Long(layoutSetId));
-
-				if (layoutSet != null) {
-					cacheResult(layoutSet);
-				}
-
-				return layoutSet;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (layoutSet != null) {
+					cacheResult(layoutSet);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (LayoutSet)result;
-		}
+
+		return layoutSet;
 	}
 
 	public List<LayoutSet> findByGroupId(long groupId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
+		List<LayoutSet> list = (List<LayoutSet>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -416,25 +412,26 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				List<LayoutSet> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<LayoutSet>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<LayoutSet>)result;
-		}
+
+		return list;
 	}
 
 	public List<LayoutSet> findByGroupId(long groupId, int start, int end)
@@ -450,10 +447,10 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+		List<LayoutSet> list = (List<LayoutSet>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -478,26 +475,27 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				List<LayoutSet> list = (List<LayoutSet>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<LayoutSet>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<LayoutSet>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<LayoutSet>)result;
-		}
+
+		return list;
 	}
 
 	public LayoutSet findByGroupId_First(long groupId, OrderByComparator obc)
@@ -617,11 +615,6 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 	public LayoutSet fetchByVirtualHost(String virtualHost)
 		throws SystemException {
-		return fetchByVirtualHost(virtualHost, true);
-	}
-
-	public LayoutSet fetchByVirtualHost(String virtualHost,
-		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { virtualHost };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
@@ -656,13 +649,13 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 				List<LayoutSet> list = q.list();
 
+				result = list;
+
 				LayoutSet layoutSet = null;
 
 				if (list.isEmpty()) {
-					if (cacheEmptyResult) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
-							finderArgs, list);
-					}
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
+						finderArgs, list);
 				}
 				else {
 					layoutSet = list.get(0);
@@ -676,6 +669,11 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 				throw processException(e);
 			}
 			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
+						finderArgs, new ArrayList<LayoutSet>());
+				}
+
 				closeSession(session);
 			}
 		}
@@ -717,11 +715,6 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 	public LayoutSet fetchByG_P(long groupId, boolean privateLayout)
 		throws SystemException {
-		return fetchByG_P(groupId, privateLayout, true);
-	}
-
-	public LayoutSet fetchByG_P(long groupId, boolean privateLayout,
-		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(privateLayout)
 			};
@@ -757,13 +750,13 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 				List<LayoutSet> list = q.list();
 
+				result = list;
+
 				LayoutSet layoutSet = null;
 
 				if (list.isEmpty()) {
-					if (cacheEmptyResult) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P,
-							finderArgs, list);
-					}
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P,
+						finderArgs, list);
 				}
 				else {
 					layoutSet = list.get(0);
@@ -777,6 +770,11 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 				throw processException(e);
 			}
 			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P,
+						finderArgs, new ArrayList<LayoutSet>());
+				}
+
 				closeSession(session);
 			}
 		}
@@ -845,10 +843,10 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<LayoutSet> list = (List<LayoutSet>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -865,8 +863,6 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<LayoutSet> list = null;
-
 				if (obc == null) {
 					list = (List<LayoutSet>)QueryUtil.list(q, getDialect(),
 							start, end, false);
@@ -877,23 +873,24 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 					list = (List<LayoutSet>)QueryUtil.list(q, getDialect(),
 							start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<LayoutSet>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<LayoutSet>)result;
-		}
+
+		return list;
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
@@ -925,10 +922,10 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 	public int countByGroupId(long groupId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -949,42 +946,33 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByVirtualHost(String virtualHost) throws SystemException {
 		Object[] finderArgs = new Object[] { virtualHost };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_VIRTUALHOST,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_VIRTUALHOST,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1012,33 +1000,24 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 					qPos.add(virtualHost);
 				}
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_VIRTUALHOST,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_VIRTUALHOST,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByG_P(long groupId, boolean privateLayout)
@@ -1047,10 +1026,10 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 				new Long(groupId), Boolean.valueOf(privateLayout)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_P,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_P,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1077,42 +1056,33 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(privateLayout);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_P, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_P, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1121,33 +1091,24 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portal.model.LayoutSet");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public void afterPropertiesSet() {

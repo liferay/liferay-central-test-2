@@ -51,7 +51,6 @@ import com.liferay.portlet.imagegallery.model.impl.IGImageModelImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -440,43 +439,40 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public IGImage fetchByPrimaryKey(long imageId) throws SystemException {
-		IGImage result = (IGImage)EntityCacheUtil.getResult(IGImageModelImpl.ENTITY_CACHE_ENABLED,
+		IGImage igImage = (IGImage)EntityCacheUtil.getResult(IGImageModelImpl.ENTITY_CACHE_ENABLED,
 				IGImageImpl.class, imageId, this);
 
-		if (result == null) {
+		if (igImage == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				IGImage igImage = (IGImage)session.get(IGImageImpl.class,
+				igImage = (IGImage)session.get(IGImageImpl.class,
 						new Long(imageId));
-
-				if (igImage != null) {
-					cacheResult(igImage);
-				}
-
-				return igImage;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (igImage != null) {
+					cacheResult(igImage);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (IGImage)result;
-		}
+
+		return igImage;
 	}
 
 	public List<IGImage> findByUuid(String uuid) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
+		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -508,25 +504,26 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 					qPos.add(uuid);
 				}
 
-				List<IGImage> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<IGImage>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
 					list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<IGImage>)result;
-		}
+
+		return list;
 	}
 
 	public List<IGImage> findByUuid(String uuid, int start, int end)
@@ -542,10 +539,10 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
+		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -584,26 +581,26 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 					qPos.add(uuid);
 				}
 
-				List<IGImage> list = (List<IGImage>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<IGImage>)QueryUtil.list(q, getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<IGImage>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<IGImage>)result;
-		}
+
+		return list;
 	}
 
 	public IGImage findByUuid_First(String uuid, OrderByComparator obc)
@@ -714,10 +711,10 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(folderId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_FOLDERID,
+		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_FOLDERID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -742,25 +739,26 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(folderId);
 
-				List<IGImage> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<IGImage>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_FOLDERID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<IGImage>)result;
-		}
+
+		return list;
 	}
 
 	public List<IGImage> findByFolderId(long folderId, int start, int end)
@@ -776,10 +774,10 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_FOLDERID,
+		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_FOLDERID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -811,26 +809,26 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(folderId);
 
-				List<IGImage> list = (List<IGImage>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<IGImage>)QueryUtil.list(q, getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<IGImage>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_FOLDERID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<IGImage>)result;
-		}
+
+		return list;
 	}
 
 	public IGImage findByFolderId_First(long folderId, OrderByComparator obc)
@@ -955,11 +953,6 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 	public IGImage fetchBySmallImageId(long smallImageId)
 		throws SystemException {
-		return fetchBySmallImageId(smallImageId, true);
-	}
-
-	public IGImage fetchBySmallImageId(long smallImageId,
-		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(smallImageId) };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_SMALLIMAGEID,
@@ -992,13 +985,13 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 				List<IGImage> list = q.list();
 
+				result = list;
+
 				IGImage igImage = null;
 
 				if (list.isEmpty()) {
-					if (cacheEmptyResult) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SMALLIMAGEID,
-							finderArgs, list);
-					}
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SMALLIMAGEID,
+						finderArgs, list);
 				}
 				else {
 					igImage = list.get(0);
@@ -1012,6 +1005,11 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 				throw processException(e);
 			}
 			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SMALLIMAGEID,
+						finderArgs, new ArrayList<IGImage>());
+				}
+
 				closeSession(session);
 			}
 		}
@@ -1050,11 +1048,6 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 	public IGImage fetchByLargeImageId(long largeImageId)
 		throws SystemException {
-		return fetchByLargeImageId(largeImageId, true);
-	}
-
-	public IGImage fetchByLargeImageId(long largeImageId,
-		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(largeImageId) };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_LARGEIMAGEID,
@@ -1087,13 +1080,13 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 				List<IGImage> list = q.list();
 
+				result = list;
+
 				IGImage igImage = null;
 
 				if (list.isEmpty()) {
-					if (cacheEmptyResult) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_LARGEIMAGEID,
-							finderArgs, list);
-					}
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_LARGEIMAGEID,
+						finderArgs, list);
 				}
 				else {
 					igImage = list.get(0);
@@ -1107,6 +1100,11 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 				throw processException(e);
 			}
 			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_LARGEIMAGEID,
+						finderArgs, new ArrayList<IGImage>());
+				}
+
 				closeSession(session);
 			}
 		}
@@ -1145,11 +1143,6 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 	public IGImage fetchByCustom1ImageId(long custom1ImageId)
 		throws SystemException {
-		return fetchByCustom1ImageId(custom1ImageId, true);
-	}
-
-	public IGImage fetchByCustom1ImageId(long custom1ImageId,
-		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(custom1ImageId) };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_CUSTOM1IMAGEID,
@@ -1182,13 +1175,13 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 				List<IGImage> list = q.list();
 
+				result = list;
+
 				IGImage igImage = null;
 
 				if (list.isEmpty()) {
-					if (cacheEmptyResult) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CUSTOM1IMAGEID,
-							finderArgs, list);
-					}
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CUSTOM1IMAGEID,
+						finderArgs, list);
 				}
 				else {
 					igImage = list.get(0);
@@ -1202,6 +1195,11 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 				throw processException(e);
 			}
 			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CUSTOM1IMAGEID,
+						finderArgs, new ArrayList<IGImage>());
+				}
+
 				closeSession(session);
 			}
 		}
@@ -1240,11 +1238,6 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 	public IGImage fetchByCustom2ImageId(long custom2ImageId)
 		throws SystemException {
-		return fetchByCustom2ImageId(custom2ImageId, true);
-	}
-
-	public IGImage fetchByCustom2ImageId(long custom2ImageId,
-		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(custom2ImageId) };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_CUSTOM2IMAGEID,
@@ -1277,13 +1270,13 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 				List<IGImage> list = q.list();
 
+				result = list;
+
 				IGImage igImage = null;
 
 				if (list.isEmpty()) {
-					if (cacheEmptyResult) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CUSTOM2IMAGEID,
-							finderArgs, list);
-					}
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CUSTOM2IMAGEID,
+						finderArgs, list);
 				}
 				else {
 					igImage = list.get(0);
@@ -1297,6 +1290,11 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 				throw processException(e);
 			}
 			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CUSTOM2IMAGEID,
+						finderArgs, new ArrayList<IGImage>());
+				}
+
 				closeSession(session);
 			}
 		}
@@ -1314,10 +1312,10 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(folderId), name };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_F_N,
+		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_F_N,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1355,25 +1353,26 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 					qPos.add(name);
 				}
 
-				List<IGImage> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<IGImage>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_F_N, finderArgs,
 					list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<IGImage>)result;
-		}
+
+		return list;
 	}
 
 	public List<IGImage> findByF_N(long folderId, String name, int start,
@@ -1391,10 +1390,10 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_F_N,
+		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_F_N,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1439,26 +1438,26 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 					qPos.add(name);
 				}
 
-				List<IGImage> list = (List<IGImage>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<IGImage>)QueryUtil.list(q, getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<IGImage>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_F_N,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<IGImage>)result;
-		}
+
+		return list;
 	}
 
 	public IGImage findByF_N_First(long folderId, String name,
@@ -1632,10 +1631,10 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1659,8 +1658,6 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<IGImage> list = null;
-
 				if (obc == null) {
 					list = (List<IGImage>)QueryUtil.list(q, getDialect(),
 							start, end, false);
@@ -1671,23 +1668,24 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 					list = (List<IGImage>)QueryUtil.list(q, getDialect(),
 							start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<IGImage>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<IGImage>)result;
-		}
+
+		return list;
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
@@ -1746,10 +1744,10 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 	public int countByUuid(String uuid) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1778,42 +1776,33 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 					qPos.add(uuid);
 				}
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByFolderId(long folderId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(folderId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_FOLDERID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_FOLDERID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1835,42 +1824,33 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(folderId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_FOLDERID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_FOLDERID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countBySmallImageId(long smallImageId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(smallImageId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_SMALLIMAGEID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_SMALLIMAGEID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1892,42 +1872,33 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(smallImageId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_SMALLIMAGEID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_SMALLIMAGEID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByLargeImageId(long largeImageId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(largeImageId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_LARGEIMAGEID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_LARGEIMAGEID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1949,43 +1920,34 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(largeImageId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_LARGEIMAGEID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_LARGEIMAGEID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByCustom1ImageId(long custom1ImageId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(custom1ImageId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_CUSTOM1IMAGEID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_CUSTOM1IMAGEID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -2007,43 +1969,34 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(custom1ImageId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CUSTOM1IMAGEID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CUSTOM1IMAGEID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByCustom2ImageId(long custom2ImageId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(custom2ImageId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_CUSTOM2IMAGEID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_CUSTOM2IMAGEID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -2065,42 +2018,33 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(custom2ImageId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CUSTOM2IMAGEID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CUSTOM2IMAGEID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByF_N(long folderId, String name) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(folderId), name };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_F_N,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_F_N,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -2135,42 +2079,33 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 					qPos.add(name);
 				}
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_F_N, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_F_N, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -2179,33 +2114,24 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portlet.imagegallery.model.IGImage");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public void afterPropertiesSet() {

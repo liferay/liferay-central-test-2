@@ -47,7 +47,6 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -290,43 +289,40 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public ListType fetchByPrimaryKey(int listTypeId) throws SystemException {
-		ListType result = (ListType)EntityCacheUtil.getResult(ListTypeModelImpl.ENTITY_CACHE_ENABLED,
+		ListType listType = (ListType)EntityCacheUtil.getResult(ListTypeModelImpl.ENTITY_CACHE_ENABLED,
 				ListTypeImpl.class, listTypeId, this);
 
-		if (result == null) {
+		if (listType == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				ListType listType = (ListType)session.get(ListTypeImpl.class,
+				listType = (ListType)session.get(ListTypeImpl.class,
 						new Integer(listTypeId));
-
-				if (listType != null) {
-					cacheResult(listType);
-				}
-
-				return listType;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (listType != null) {
+					cacheResult(listType);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (ListType)result;
-		}
+
+		return listType;
 	}
 
 	public List<ListType> findByType(String type) throws SystemException {
 		Object[] finderArgs = new Object[] { type };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_TYPE,
+		List<ListType> list = (List<ListType>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_TYPE,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -357,25 +353,26 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 					qPos.add(type);
 				}
 
-				List<ListType> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<ListType>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_TYPE, finderArgs,
 					list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<ListType>)result;
-		}
+
+		return list;
 	}
 
 	public List<ListType> findByType(String type, int start, int end)
@@ -391,10 +388,10 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_TYPE,
+		List<ListType> list = (List<ListType>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_TYPE,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -432,26 +429,27 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 					qPos.add(type);
 				}
 
-				List<ListType> list = (List<ListType>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<ListType>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<ListType>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_TYPE,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<ListType>)result;
-		}
+
+		return list;
 	}
 
 	public ListType findByType_First(String type, OrderByComparator obc)
@@ -611,10 +609,10 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<ListType> list = (List<ListType>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -637,8 +635,6 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<ListType> list = null;
-
 				if (obc == null) {
 					list = (List<ListType>)QueryUtil.list(q, getDialect(),
 							start, end, false);
@@ -649,23 +645,24 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 					list = (List<ListType>)QueryUtil.list(q, getDialect(),
 							start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<ListType>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<ListType>)result;
-		}
+
+		return list;
 	}
 
 	public void removeByType(String type) throws SystemException {
@@ -683,10 +680,10 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 	public int countByType(String type) throws SystemException {
 		Object[] finderArgs = new Object[] { type };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_TYPE,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_TYPE,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -714,42 +711,33 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 					qPos.add(type);
 				}
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_TYPE,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_TYPE,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -758,33 +746,24 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portal.model.ListType");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public void afterPropertiesSet() {

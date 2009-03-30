@@ -199,12 +199,6 @@ public class PollsChoiceUtil {
 		return getPersistence().fetchByQ_N(questionId, name);
 	}
 
-	public static com.liferay.portlet.polls.model.PollsChoice fetchByQ_N(
-		long questionId, java.lang.String name, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByQ_N(questionId, name, cacheEmptyResult);
-	}
-
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

@@ -47,7 +47,6 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -286,43 +285,39 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Image fetchByPrimaryKey(long imageId) throws SystemException {
-		Image result = (Image)EntityCacheUtil.getResult(ImageModelImpl.ENTITY_CACHE_ENABLED,
+		Image image = (Image)EntityCacheUtil.getResult(ImageModelImpl.ENTITY_CACHE_ENABLED,
 				ImageImpl.class, imageId, this);
 
-		if (result == null) {
+		if (image == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				Image image = (Image)session.get(ImageImpl.class,
-						new Long(imageId));
-
-				if (image != null) {
-					cacheResult(image);
-				}
-
-				return image;
+				image = (Image)session.get(ImageImpl.class, new Long(imageId));
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (image != null) {
+					cacheResult(image);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (Image)result;
-		}
+
+		return image;
 	}
 
 	public List<Image> findBySize(int size) throws SystemException {
 		Object[] finderArgs = new Object[] { new Integer(size) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_SIZE,
+		List<Image> list = (List<Image>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_SIZE,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -346,25 +341,26 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(size);
 
-				List<Image> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<Image>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_SIZE, finderArgs,
 					list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<Image>)result;
-		}
+
+		return list;
 	}
 
 	public List<Image> findBySize(int size, int start, int end)
@@ -380,10 +376,10 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_SIZE,
+		List<Image> list = (List<Image>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_SIZE,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -414,26 +410,26 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(size);
 
-				List<Image> list = (List<Image>)QueryUtil.list(q, getDialect(),
-						start, end);
+				list = (List<Image>)QueryUtil.list(q, getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<Image>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_SIZE,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<Image>)result;
-		}
+
+		return list;
 	}
 
 	public Image findBySize_First(int size, OrderByComparator obc)
@@ -586,10 +582,10 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<Image> list = (List<Image>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -612,8 +608,6 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<Image> list = null;
-
 				if (obc == null) {
 					list = (List<Image>)QueryUtil.list(q, getDialect(), start,
 							end, false);
@@ -624,23 +618,24 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 					list = (List<Image>)QueryUtil.list(q, getDialect(), start,
 							end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<Image>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<Image>)result;
-		}
+
+		return list;
 	}
 
 	public void removeBySize(int size) throws SystemException {
@@ -658,10 +653,10 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 	public int countBySize(int size) throws SystemException {
 		Object[] finderArgs = new Object[] { new Integer(size) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_SIZE,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_SIZE,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -682,42 +677,33 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(size);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_SIZE,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_SIZE,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -726,33 +712,24 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portal.model.Image");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public void afterPropertiesSet() {

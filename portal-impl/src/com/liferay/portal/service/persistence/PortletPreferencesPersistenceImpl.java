@@ -47,7 +47,6 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -409,44 +408,41 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 
 	public PortletPreferences fetchByPrimaryKey(long portletPreferencesId)
 		throws SystemException {
-		PortletPreferences result = (PortletPreferences)EntityCacheUtil.getResult(PortletPreferencesModelImpl.ENTITY_CACHE_ENABLED,
+		PortletPreferences portletPreferences = (PortletPreferences)EntityCacheUtil.getResult(PortletPreferencesModelImpl.ENTITY_CACHE_ENABLED,
 				PortletPreferencesImpl.class, portletPreferencesId, this);
 
-		if (result == null) {
+		if (portletPreferences == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				PortletPreferences portletPreferences = (PortletPreferences)session.get(PortletPreferencesImpl.class,
+				portletPreferences = (PortletPreferences)session.get(PortletPreferencesImpl.class,
 						new Long(portletPreferencesId));
-
-				if (portletPreferences != null) {
-					cacheResult(portletPreferences);
-				}
-
-				return portletPreferences;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (portletPreferences != null) {
+					cacheResult(portletPreferences);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (PortletPreferences)result;
-		}
+
+		return portletPreferences;
 	}
 
 	public List<PortletPreferences> findByPlid(long plid)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(plid) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_PLID,
+		List<PortletPreferences> list = (List<PortletPreferences>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_PLID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -467,25 +463,26 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(plid);
 
-				List<PortletPreferences> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<PortletPreferences>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_PLID, finderArgs,
 					list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<PortletPreferences>)result;
-		}
+
+		return list;
 	}
 
 	public List<PortletPreferences> findByPlid(long plid, int start, int end)
@@ -501,10 +498,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_PLID,
+		List<PortletPreferences> list = (List<PortletPreferences>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_PLID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -530,26 +527,27 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(plid);
 
-				List<PortletPreferences> list = (List<PortletPreferences>)QueryUtil.list(q,
+				list = (List<PortletPreferences>)QueryUtil.list(q,
 						getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<PortletPreferences>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_PLID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<PortletPreferences>)result;
-		}
+
+		return list;
 	}
 
 	public PortletPreferences findByPlid_First(long plid, OrderByComparator obc)
@@ -649,10 +647,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(plid), portletId };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_P_P,
+		List<PortletPreferences> list = (List<PortletPreferences>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_P_P,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -686,25 +684,26 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 					qPos.add(portletId);
 				}
 
-				List<PortletPreferences> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<PortletPreferences>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_P_P, finderArgs,
 					list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<PortletPreferences>)result;
-		}
+
+		return list;
 	}
 
 	public List<PortletPreferences> findByP_P(long plid, String portletId,
@@ -722,10 +721,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_P_P,
+		List<PortletPreferences> list = (List<PortletPreferences>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_P_P,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -764,26 +763,27 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 					qPos.add(portletId);
 				}
 
-				List<PortletPreferences> list = (List<PortletPreferences>)QueryUtil.list(q,
+				list = (List<PortletPreferences>)QueryUtil.list(q,
 						getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<PortletPreferences>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_P_P,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<PortletPreferences>)result;
-		}
+
+		return list;
 	}
 
 	public PortletPreferences findByP_P_First(long plid, String portletId,
@@ -908,10 +908,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 				new Long(ownerId), new Integer(ownerType), new Long(plid)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_O_O_P,
+		List<PortletPreferences> list = (List<PortletPreferences>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_O_O_P,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -944,25 +944,26 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(plid);
 
-				List<PortletPreferences> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<PortletPreferences>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_O_O_P,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<PortletPreferences>)result;
-		}
+
+		return list;
 	}
 
 	public List<PortletPreferences> findByO_O_P(long ownerId, int ownerType,
@@ -979,10 +980,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_O_O_P,
+		List<PortletPreferences> list = (List<PortletPreferences>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_O_O_P,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1020,26 +1021,27 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(plid);
 
-				List<PortletPreferences> list = (List<PortletPreferences>)QueryUtil.list(q,
+				list = (List<PortletPreferences>)QueryUtil.list(q,
 						getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<PortletPreferences>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_O_O_P,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<PortletPreferences>)result;
-		}
+
+		return list;
 	}
 
 	public PortletPreferences findByO_O_P_First(long ownerId, int ownerType,
@@ -1200,12 +1202,6 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 
 	public PortletPreferences fetchByO_O_P_P(long ownerId, int ownerType,
 		long plid, String portletId) throws SystemException {
-		return fetchByO_O_P_P(ownerId, ownerType, plid, portletId, true);
-	}
-
-	public PortletPreferences fetchByO_O_P_P(long ownerId, int ownerType,
-		long plid, String portletId, boolean cacheEmptyResult)
-		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(ownerId), new Integer(ownerType), new Long(plid),
 				
@@ -1263,13 +1259,13 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 
 				List<PortletPreferences> list = q.list();
 
+				result = list;
+
 				PortletPreferences portletPreferences = null;
 
 				if (list.isEmpty()) {
-					if (cacheEmptyResult) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_O_O_P_P,
-							finderArgs, list);
-					}
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_O_O_P_P,
+						finderArgs, list);
 				}
 				else {
 					portletPreferences = list.get(0);
@@ -1283,6 +1279,11 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 				throw processException(e);
 			}
 			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_O_O_P_P,
+						finderArgs, new ArrayList<PortletPreferences>());
+				}
+
 				closeSession(session);
 			}
 		}
@@ -1351,10 +1352,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<PortletPreferences> list = (List<PortletPreferences>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -1372,8 +1373,6 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<PortletPreferences> list = null;
-
 				if (obc == null) {
 					list = (List<PortletPreferences>)QueryUtil.list(q,
 							getDialect(), start, end, false);
@@ -1384,23 +1383,24 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 					list = (List<PortletPreferences>)QueryUtil.list(q,
 							getDialect(), start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<PortletPreferences>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<PortletPreferences>)result;
-		}
+
+		return list;
 	}
 
 	public void removeByPlid(long plid) throws SystemException {
@@ -1442,10 +1442,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 	public int countByPlid(long plid) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(plid) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_PLID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_PLID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1467,43 +1467,34 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(plid);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_PLID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_PLID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByP_P(long plid, String portletId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(plid), portletId };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_P_P,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_P_P,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1538,33 +1529,24 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 					qPos.add(portletId);
 				}
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_P_P, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_P_P, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByO_O_P(long ownerId, int ownerType, long plid)
@@ -1573,10 +1555,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 				new Long(ownerId), new Integer(ownerType), new Long(plid)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_O_O_P,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_O_O_P,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1610,33 +1592,24 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(plid);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_O_O_P,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_O_O_P,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByO_O_P_P(long ownerId, int ownerType, long plid,
@@ -1647,10 +1620,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 				portletId
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_O_O_P_P,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_O_O_P_P,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1697,42 +1670,33 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 					qPos.add(portletId);
 				}
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_O_O_P_P,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_O_O_P_P,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -1741,33 +1705,24 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portal.model.PortletPreferences");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public void afterPropertiesSet() {

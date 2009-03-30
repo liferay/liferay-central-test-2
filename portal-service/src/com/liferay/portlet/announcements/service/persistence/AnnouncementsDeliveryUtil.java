@@ -156,12 +156,6 @@ public class AnnouncementsDeliveryUtil {
 		return getPersistence().fetchByU_T(userId, type);
 	}
 
-	public static com.liferay.portlet.announcements.model.AnnouncementsDelivery fetchByU_T(
-		long userId, java.lang.String type, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByU_T(userId, type, cacheEmptyResult);
-	}
-
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

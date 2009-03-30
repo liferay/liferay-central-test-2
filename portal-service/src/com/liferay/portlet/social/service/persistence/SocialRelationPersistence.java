@@ -325,10 +325,6 @@ public interface SocialRelationPersistence extends BasePersistence {
 		long userId1, long userId2, int type)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.social.model.SocialRelation fetchByU1_U2_T(
-		long userId1, long userId2, int type, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;

@@ -147,10 +147,6 @@ public interface TasksReviewPersistence extends BasePersistence {
 	public com.liferay.portlet.tasks.model.TasksReview fetchByU_P(long userId,
 		long proposalId) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.tasks.model.TasksReview fetchByU_P(long userId,
-		long proposalId, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S(
 		long proposalId, int stage) throws com.liferay.portal.SystemException;
 

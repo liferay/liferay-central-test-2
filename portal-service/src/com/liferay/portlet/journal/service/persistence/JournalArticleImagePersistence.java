@@ -184,12 +184,6 @@ public interface JournalArticleImagePersistence extends BasePersistence {
 		java.lang.String elInstanceId, java.lang.String elName,
 		java.lang.String languageId) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.journal.model.JournalArticleImage fetchByG_A_V_E_E_L(
-		long groupId, java.lang.String articleId, double version,
-		java.lang.String elInstanceId, java.lang.String elName,
-		java.lang.String languageId, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;

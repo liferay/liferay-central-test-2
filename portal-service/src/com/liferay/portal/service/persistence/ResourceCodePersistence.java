@@ -146,10 +146,6 @@ public interface ResourceCodePersistence extends BasePersistence {
 		java.lang.String name, int scope)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.ResourceCode fetchByC_N_S(long companyId,
-		java.lang.String name, int scope, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;

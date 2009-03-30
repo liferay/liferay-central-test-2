@@ -47,7 +47,6 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -334,34 +333,30 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Shard fetchByPrimaryKey(long shardId) throws SystemException {
-		Shard result = (Shard)EntityCacheUtil.getResult(ShardModelImpl.ENTITY_CACHE_ENABLED,
+		Shard shard = (Shard)EntityCacheUtil.getResult(ShardModelImpl.ENTITY_CACHE_ENABLED,
 				ShardImpl.class, shardId, this);
 
-		if (result == null) {
+		if (shard == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				Shard shard = (Shard)session.get(ShardImpl.class,
-						new Long(shardId));
-
-				if (shard != null) {
-					cacheResult(shard);
-				}
-
-				return shard;
+				shard = (Shard)session.get(ShardImpl.class, new Long(shardId));
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (shard != null) {
+					cacheResult(shard);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (Shard)result;
-		}
+
+		return shard;
 	}
 
 	public Shard findByName(String name)
@@ -388,11 +383,6 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Shard fetchByName(String name) throws SystemException {
-		return fetchByName(name, true);
-	}
-
-	public Shard fetchByName(String name, boolean cacheEmptyResult)
-		throws SystemException {
 		Object[] finderArgs = new Object[] { name };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_NAME,
@@ -427,13 +417,13 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 
 				List<Shard> list = q.list();
 
+				result = list;
+
 				Shard shard = null;
 
 				if (list.isEmpty()) {
-					if (cacheEmptyResult) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NAME,
-							finderArgs, list);
-					}
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NAME,
+						finderArgs, list);
 				}
 				else {
 					shard = list.get(0);
@@ -447,6 +437,11 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 				throw processException(e);
 			}
 			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NAME,
+						finderArgs, new ArrayList<Shard>());
+				}
+
 				closeSession(session);
 			}
 		}
@@ -488,11 +483,6 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 
 	public Shard fetchByC_C(long classNameId, long classPK)
 		throws SystemException {
-		return fetchByC_C(classNameId, classPK, true);
-	}
-
-	public Shard fetchByC_C(long classNameId, long classPK,
-		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK)
 			};
@@ -528,13 +518,13 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 
 				List<Shard> list = q.list();
 
+				result = list;
+
 				Shard shard = null;
 
 				if (list.isEmpty()) {
-					if (cacheEmptyResult) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
-							finderArgs, list);
-					}
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
+						finderArgs, list);
 				}
 				else {
 					shard = list.get(0);
@@ -548,6 +538,11 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 				throw processException(e);
 			}
 			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
+						finderArgs, new ArrayList<Shard>());
+				}
+
 				closeSession(session);
 			}
 		}
@@ -615,10 +610,10 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<Shard> list = (List<Shard>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -635,8 +630,6 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<Shard> list = null;
-
 				if (obc == null) {
 					list = (List<Shard>)QueryUtil.list(q, getDialect(), start,
 							end, false);
@@ -647,23 +640,24 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 					list = (List<Shard>)QueryUtil.list(q, getDialect(), start,
 							end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<Shard>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<Shard>)result;
-		}
+
+		return list;
 	}
 
 	public void removeByName(String name)
@@ -689,10 +683,10 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 	public int countByName(String name) throws SystemException {
 		Object[] finderArgs = new Object[] { name };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_NAME,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_NAME,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -720,33 +714,24 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 					qPos.add(name);
 				}
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_NAME,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_NAME,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByC_C(long classNameId, long classPK)
@@ -755,10 +740,10 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 				new Long(classNameId), new Long(classPK)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -785,42 +770,33 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(classPK);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -829,33 +805,24 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portal.model.Shard");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public void afterPropertiesSet() {

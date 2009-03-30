@@ -49,7 +49,6 @@ import com.liferay.portlet.expando.model.impl.ExpandoColumnModelImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -348,44 +347,41 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 
 	public ExpandoColumn fetchByPrimaryKey(long columnId)
 		throws SystemException {
-		ExpandoColumn result = (ExpandoColumn)EntityCacheUtil.getResult(ExpandoColumnModelImpl.ENTITY_CACHE_ENABLED,
+		ExpandoColumn expandoColumn = (ExpandoColumn)EntityCacheUtil.getResult(ExpandoColumnModelImpl.ENTITY_CACHE_ENABLED,
 				ExpandoColumnImpl.class, columnId, this);
 
-		if (result == null) {
+		if (expandoColumn == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				ExpandoColumn expandoColumn = (ExpandoColumn)session.get(ExpandoColumnImpl.class,
+				expandoColumn = (ExpandoColumn)session.get(ExpandoColumnImpl.class,
 						new Long(columnId));
-
-				if (expandoColumn != null) {
-					cacheResult(expandoColumn);
-				}
-
-				return expandoColumn;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (expandoColumn != null) {
+					cacheResult(expandoColumn);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (ExpandoColumn)result;
-		}
+
+		return expandoColumn;
 	}
 
 	public List<ExpandoColumn> findByTableId(long tableId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(tableId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_TABLEID,
+		List<ExpandoColumn> list = (List<ExpandoColumn>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_TABLEID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -410,25 +406,26 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(tableId);
 
-				List<ExpandoColumn> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<ExpandoColumn>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_TABLEID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<ExpandoColumn>)result;
-		}
+
+		return list;
 	}
 
 	public List<ExpandoColumn> findByTableId(long tableId, int start, int end)
@@ -444,10 +441,10 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_TABLEID,
+		List<ExpandoColumn> list = (List<ExpandoColumn>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_TABLEID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -479,26 +476,27 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(tableId);
 
-				List<ExpandoColumn> list = (List<ExpandoColumn>)QueryUtil.list(q,
-						getDialect(), start, end);
+				list = (List<ExpandoColumn>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<ExpandoColumn>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_TABLEID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<ExpandoColumn>)result;
-		}
+
+		return list;
 	}
 
 	public ExpandoColumn findByTableId_First(long tableId, OrderByComparator obc)
@@ -628,11 +626,6 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 
 	public ExpandoColumn fetchByT_N(long tableId, String name)
 		throws SystemException {
-		return fetchByT_N(tableId, name, true);
-	}
-
-	public ExpandoColumn fetchByT_N(long tableId, String name,
-		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(tableId), name };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_T_N,
@@ -678,13 +671,13 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 
 				List<ExpandoColumn> list = q.list();
 
+				result = list;
+
 				ExpandoColumn expandoColumn = null;
 
 				if (list.isEmpty()) {
-					if (cacheEmptyResult) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_N,
-							finderArgs, list);
-					}
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_N,
+						finderArgs, list);
 				}
 				else {
 					expandoColumn = list.get(0);
@@ -698,6 +691,11 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 				throw processException(e);
 			}
 			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_N,
+						finderArgs, new ArrayList<ExpandoColumn>());
+				}
+
 				closeSession(session);
 			}
 		}
@@ -766,10 +764,10 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<ExpandoColumn> list = (List<ExpandoColumn>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -793,8 +791,6 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<ExpandoColumn> list = null;
-
 				if (obc == null) {
 					list = (List<ExpandoColumn>)QueryUtil.list(q, getDialect(),
 							start, end, false);
@@ -805,23 +801,24 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 					list = (List<ExpandoColumn>)QueryUtil.list(q, getDialect(),
 							start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<ExpandoColumn>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<ExpandoColumn>)result;
-		}
+
+		return list;
 	}
 
 	public void removeByTableId(long tableId) throws SystemException {
@@ -846,10 +843,10 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 	public int countByTableId(long tableId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(tableId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_TABLEID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_TABLEID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -871,42 +868,33 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(tableId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_TABLEID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_TABLEID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByT_N(long tableId, String name) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(tableId), name };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_T_N,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_T_N,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -941,42 +929,33 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 					qPos.add(name);
 				}
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_T_N, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_T_N, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -985,33 +964,24 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portlet.expando.model.ExpandoColumn");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public void afterPropertiesSet() {

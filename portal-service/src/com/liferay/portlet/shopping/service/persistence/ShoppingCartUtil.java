@@ -195,12 +195,6 @@ public class ShoppingCartUtil {
 		return getPersistence().fetchByG_U(groupId, userId);
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingCart fetchByG_U(
-		long groupId, long userId, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByG_U(groupId, userId, cacheEmptyResult);
-	}
-
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

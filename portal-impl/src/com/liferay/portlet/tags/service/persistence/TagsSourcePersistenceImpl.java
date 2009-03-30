@@ -47,7 +47,6 @@ import com.liferay.portlet.tags.model.impl.TagsSourceModelImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -278,34 +277,31 @@ public class TagsSourcePersistenceImpl extends BasePersistenceImpl
 
 	public TagsSource fetchByPrimaryKey(long sourceId)
 		throws SystemException {
-		TagsSource result = (TagsSource)EntityCacheUtil.getResult(TagsSourceModelImpl.ENTITY_CACHE_ENABLED,
+		TagsSource tagsSource = (TagsSource)EntityCacheUtil.getResult(TagsSourceModelImpl.ENTITY_CACHE_ENABLED,
 				TagsSourceImpl.class, sourceId, this);
 
-		if (result == null) {
+		if (tagsSource == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				TagsSource tagsSource = (TagsSource)session.get(TagsSourceImpl.class,
+				tagsSource = (TagsSource)session.get(TagsSourceImpl.class,
 						new Long(sourceId));
-
-				if (tagsSource != null) {
-					cacheResult(tagsSource);
-				}
-
-				return tagsSource;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (tagsSource != null) {
+					cacheResult(tagsSource);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (TagsSource)result;
-		}
+
+		return tagsSource;
 	}
 
 	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
@@ -363,10 +359,10 @@ public class TagsSourcePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<TagsSource> list = (List<TagsSource>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -383,8 +379,6 @@ public class TagsSourcePersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<TagsSource> list = null;
-
 				if (obc == null) {
 					list = (List<TagsSource>)QueryUtil.list(q, getDialect(),
 							start, end, false);
@@ -395,23 +389,24 @@ public class TagsSourcePersistenceImpl extends BasePersistenceImpl
 					list = (List<TagsSource>)QueryUtil.list(q, getDialect(),
 							start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<TagsSource>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<TagsSource>)result;
-		}
+
+		return list;
 	}
 
 	public void removeAll() throws SystemException {
@@ -423,10 +418,10 @@ public class TagsSourcePersistenceImpl extends BasePersistenceImpl
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -435,33 +430,24 @@ public class TagsSourcePersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portlet.tags.model.TagsSource");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public void afterPropertiesSet() {

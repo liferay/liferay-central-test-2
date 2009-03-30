@@ -86,10 +86,6 @@ public interface CompanyPersistence extends BasePersistence {
 	public com.liferay.portal.model.Company fetchByWebId(java.lang.String webId)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Company fetchByWebId(
-		java.lang.String webId, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
-
 	public com.liferay.portal.model.Company findByVirtualHost(
 		java.lang.String virtualHost)
 		throws com.liferay.portal.NoSuchCompanyException,
@@ -98,10 +94,6 @@ public interface CompanyPersistence extends BasePersistence {
 	public com.liferay.portal.model.Company fetchByVirtualHost(
 		java.lang.String virtualHost) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Company fetchByVirtualHost(
-		java.lang.String virtualHost, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
-
 	public com.liferay.portal.model.Company findByMx(java.lang.String mx)
 		throws com.liferay.portal.NoSuchCompanyException,
 			com.liferay.portal.SystemException;
@@ -109,18 +101,12 @@ public interface CompanyPersistence extends BasePersistence {
 	public com.liferay.portal.model.Company fetchByMx(java.lang.String mx)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Company fetchByMx(java.lang.String mx,
-		boolean cacheEmptyResult) throws com.liferay.portal.SystemException;
-
 	public com.liferay.portal.model.Company findByLogoId(long logoId)
 		throws com.liferay.portal.NoSuchCompanyException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Company fetchByLogoId(long logoId)
 		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.Company fetchByLogoId(long logoId,
-		boolean cacheEmptyResult) throws com.liferay.portal.SystemException;
 
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)

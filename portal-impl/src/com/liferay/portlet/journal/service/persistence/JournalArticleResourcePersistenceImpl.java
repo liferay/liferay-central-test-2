@@ -49,7 +49,6 @@ import com.liferay.portlet.journal.model.impl.JournalArticleResourceModelImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -359,44 +358,41 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 
 	public JournalArticleResource fetchByPrimaryKey(long resourcePrimKey)
 		throws SystemException {
-		JournalArticleResource result = (JournalArticleResource)EntityCacheUtil.getResult(JournalArticleResourceModelImpl.ENTITY_CACHE_ENABLED,
+		JournalArticleResource journalArticleResource = (JournalArticleResource)EntityCacheUtil.getResult(JournalArticleResourceModelImpl.ENTITY_CACHE_ENABLED,
 				JournalArticleResourceImpl.class, resourcePrimKey, this);
 
-		if (result == null) {
+		if (journalArticleResource == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				JournalArticleResource journalArticleResource = (JournalArticleResource)session.get(JournalArticleResourceImpl.class,
+				journalArticleResource = (JournalArticleResource)session.get(JournalArticleResourceImpl.class,
 						new Long(resourcePrimKey));
-
-				if (journalArticleResource != null) {
-					cacheResult(journalArticleResource);
-				}
-
-				return journalArticleResource;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (journalArticleResource != null) {
+					cacheResult(journalArticleResource);
+				}
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (JournalArticleResource)result;
-		}
+
+		return journalArticleResource;
 	}
 
 	public List<JournalArticleResource> findByGroupId(long groupId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
+		List<JournalArticleResource> list = (List<JournalArticleResource>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -417,25 +413,26 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				List<JournalArticleResource> list = q.list();
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<JournalArticleResource>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<JournalArticleResource>)result;
-		}
+
+		return list;
 	}
 
 	public List<JournalArticleResource> findByGroupId(long groupId, int start,
@@ -451,10 +448,10 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+		List<JournalArticleResource> list = (List<JournalArticleResource>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -480,26 +477,27 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				List<JournalArticleResource> list = (List<JournalArticleResource>)QueryUtil.list(q,
+				list = (List<JournalArticleResource>)QueryUtil.list(q,
 						getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<JournalArticleResource>();
+				}
 
 				cacheResult(list);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<JournalArticleResource>)result;
-		}
+
+		return list;
 	}
 
 	public JournalArticleResource findByGroupId_First(long groupId,
@@ -627,11 +625,6 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 
 	public JournalArticleResource fetchByG_A(long groupId, String articleId)
 		throws SystemException {
-		return fetchByG_A(groupId, articleId, true);
-	}
-
-	public JournalArticleResource fetchByG_A(long groupId, String articleId,
-		boolean cacheEmptyResult) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId), articleId };
 
 		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_A,
@@ -673,13 +666,13 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 
 				List<JournalArticleResource> list = q.list();
 
+				result = list;
+
 				JournalArticleResource journalArticleResource = null;
 
 				if (list.isEmpty()) {
-					if (cacheEmptyResult) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A,
-							finderArgs, list);
-					}
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A,
+						finderArgs, list);
 				}
 				else {
 					journalArticleResource = list.get(0);
@@ -693,6 +686,11 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 				throw processException(e);
 			}
 			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A,
+						finderArgs, new ArrayList<JournalArticleResource>());
+				}
+
 				closeSession(session);
 			}
 		}
@@ -761,10 +759,10 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<JournalArticleResource> list = (List<JournalArticleResource>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -782,8 +780,6 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 
 				Query q = session.createQuery(query.toString());
 
-				List<JournalArticleResource> list = null;
-
 				if (obc == null) {
 					list = (List<JournalArticleResource>)QueryUtil.list(q,
 							getDialect(), start, end, false);
@@ -794,23 +790,24 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 					list = (List<JournalArticleResource>)QueryUtil.list(q,
 							getDialect(), start, end);
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<JournalArticleResource>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<JournalArticleResource>)result;
-		}
+
+		return list;
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
@@ -837,10 +834,10 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 	public int countByGroupId(long groupId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -862,43 +859,34 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
-					finderArgs, count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
+					finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByG_A(long groupId, String articleId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId), articleId };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_A,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_A,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -933,42 +921,33 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 					qPos.add(articleId);
 				}
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_A, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_A, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -977,33 +956,24 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 				Query q = session.createQuery(
 						"SELECT COUNT(*) FROM com.liferay.portlet.journal.model.JournalArticleResource");
 
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
-					count);
-
-				return count.intValue();
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public void afterPropertiesSet() {

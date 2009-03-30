@@ -122,10 +122,6 @@ public interface BlogsEntryPersistence extends BasePersistence {
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.blogs.model.BlogsEntry fetchByUUID_G(
-		java.lang.String uuid, long groupId, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByGroupId(
 		long groupId) throws com.liferay.portal.SystemException;
 
@@ -219,10 +215,6 @@ public interface BlogsEntryPersistence extends BasePersistence {
 
 	public com.liferay.portlet.blogs.model.BlogsEntry fetchByG_UT(
 		long groupId, java.lang.String urlTitle)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.blogs.model.BlogsEntry fetchByG_UT(
-		long groupId, java.lang.String urlTitle, boolean cacheEmptyResult)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByG_D_D(

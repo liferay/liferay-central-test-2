@@ -152,12 +152,6 @@ public class ResourceUtil {
 		return getPersistence().fetchByC_P(codeId, primKey);
 	}
 
-	public static com.liferay.portal.model.Resource fetchByC_P(long codeId,
-		java.lang.String primKey, boolean cacheEmptyResult)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByC_P(codeId, primKey, cacheEmptyResult);
-	}
-
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
