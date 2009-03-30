@@ -150,8 +150,8 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"Checking permission for " + groupId + " " + name + " " +
-							primKey + " " + actionId + " takes " +
+						"Checking permission for " + groupId + " " + name +
+							" " + primKey + " " + actionId + " takes " +
 								stopWatch.getTime() + " ms");
 				}
 			}
@@ -373,8 +373,11 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 				(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5)) {
 
 				if (groups.size() > 0) {
-					roles.addAll(
-						RoleLocalServiceUtil.getUserRelatedRoles(userId, groups));
+					List<Role> userRelatedRoles=
+						RoleLocalServiceUtil.getUserRelatedRoles(
+							userId, groups);
+
+					roles.addAll(userRelatedRoles);
 				}
 				else {
 					roles.addAll(RoleLocalServiceUtil.getUserRoles(userId));
@@ -394,8 +397,8 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 					roles.add(role);
 				}
 
-				List<Role> userGroupRoles = RoleLocalServiceUtil.getUserGroupRoles(
-					userId, groupId);
+				List<Role> userGroupRoles =
+					RoleLocalServiceUtil.getUserGroupRoles(userId, groupId);
 
 				roles.addAll(userGroupRoles);
 			}
