@@ -100,6 +100,14 @@ public abstract class RecurrenceTestCase extends TestCase {
 
 	public abstract void testByDayAndMonthDayAndYearDay() throws Exception;
 
+	public abstract void testByDayAndWeekNo() throws Exception;
+
+	public abstract void testByDayAndWeekNoAndMonth() throws Exception;
+
+	public abstract void testByDayAndWeekNoAndMonthDay() throws Exception;
+
+	public abstract void testByDayAndWeekNoAndYearDay() throws Exception;
+
 	public abstract void testByDayAndYearDay() throws Exception;
 
 	public abstract void testByMonth() throws Exception;
@@ -113,6 +121,21 @@ public abstract class RecurrenceTestCase extends TestCase {
 	public abstract void testByMonthDayAndMonthAndYearDay() throws Exception;
 
 	public abstract void testByMonthDayAndYearDay() throws Exception;
+
+	public abstract void testByWeekNo() throws Exception;
+
+	public abstract void testByWeekNoAndMonth() throws Exception;
+
+	public abstract void testByWeekNoAndMonthAndYearDay() throws Exception;
+
+	public abstract void testByWeekNoAndMonthDay() throws Exception;
+
+	public abstract void testByWeekNoAndMonthDayAndMonth() throws Exception;
+
+	public abstract void testByWeekNoAndMonthDayAndYearDay()
+		throws Exception;
+
+	public abstract void testByWeekNoAndYearDay() throws Exception;
 
 	public abstract void testByYearDay() throws Exception;
 
