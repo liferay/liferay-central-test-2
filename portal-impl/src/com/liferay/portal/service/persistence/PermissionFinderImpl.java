@@ -40,6 +40,7 @@ import com.liferay.portal.model.impl.PermissionModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -451,10 +452,10 @@ public class PermissionFinderImpl
 			ListUtil.toString(roles, "roleId")
 		};
 
-		Object result = FinderCacheUtil.getResult(
+		Long count = (Long)FinderCacheUtil.getResult(
 			FINDER_PATH_COUNT_BY_ROLES_PERMISSIONS, finderArgs, this);
 
-		if (result == null) {
+		if (count == null) {
 			Session session = null;
 
 			try {
@@ -478,34 +479,24 @@ public class PermissionFinderImpl
 				setPermissionIds(qPos, permissions);
 				setRoleIds(qPos, roles);
 
-				int count = 0;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					Long l = itr.next();
-
-					if (l != null) {
-						count = l.intValue();
-					}
-				}
-
-				FinderCacheUtil.putResult(
-					FINDER_PATH_COUNT_BY_ROLES_PERMISSIONS, finderArgs,
-					new Long(count));
-
-				return count;
+				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
 				throw new SystemException(e);
 			}
 			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(
+					FINDER_PATH_COUNT_BY_ROLES_PERMISSIONS, finderArgs, count);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return ((Long)result).intValue();
-		}
+
+		return count.intValue();
 	}
 
 	public int countByUserGroupRole(
@@ -647,10 +638,10 @@ public class PermissionFinderImpl
 			actionId, StringUtil.merge(ArrayUtil.toArray(resourceIds))
 		};
 
-		Object result = FinderCacheUtil.getResult(
+		List<Permission> list = (List<Permission>)FinderCacheUtil.getResult(
 			FINDER_PATH_FIND_BY_A_R, finderArgs, this);
 
-		if (result == null) {
+		if (list == null) {
 			Session session = null;
 
 			try {
@@ -670,23 +661,24 @@ public class PermissionFinderImpl
 				qPos.add(actionId);
 				setResourceIds(qPos, resourceIds);
 
-				List<Permission> permissions = q.list();
-
-				FinderCacheUtil.putResult(
-					FINDER_PATH_FIND_BY_A_R, finderArgs, permissions);
-
-				return permissions;
+				list = q.list();
 			}
 			catch (Exception e) {
 				throw new SystemException(e);
 			}
 			finally {
+				if (list == null) {
+					list = new ArrayList<Permission>();
+				}
+
+				FinderCacheUtil.putResult(
+					FINDER_PATH_FIND_BY_A_R, finderArgs, list);
+
 				closeSession(session);
 			}
 		}
-		else {
-			return (List<Permission>)result;
-		}
+
+		return list;
 	}
 
 	public List<Permission> findByG_R(long groupId, long resourceId)
