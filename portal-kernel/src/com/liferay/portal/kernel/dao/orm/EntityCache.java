@@ -36,6 +36,8 @@ public interface EntityCache {
 
 	public void clearCache(String className);
 
+	public void clearLocalCache();
+
 	public Object getResult(
 		boolean entityCacheEnabled, Class<?> classObj,
 		Serializable primaryKeyObj, SessionFactory sessionFactory);

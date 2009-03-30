@@ -23,6 +23,8 @@
 package com.liferay.portal.servlet.filters.virtualhost;
 
 import com.liferay.portal.LayoutFriendlyURLException;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -115,6 +117,9 @@ public class VirtualHostFilter extends BasePortalFilter {
 
 		PortalUtil.getCurrentCompleteURL(request);
 		PortalUtil.getCurrentURL(request);
+
+		EntityCacheUtil.clearLocalCache();
+		FinderCacheUtil.clearLocalCache();
 
 		HttpSession session = request.getSession();
 

@@ -1316,6 +1316,10 @@ public class PropsValues {
 		GetterUtil.getBoolean(PropsUtil.get(PropsKeys.
 			VALUE_OBJECT_ENTITY_CACHE_ENABLED));
 
+	public static final int VALUE_OBJECT_ENTITY_THREAD_LOCAL_CACHE_MAX_SIZE =
+		GetterUtil.getInteger(PropsUtil.get(PropsKeys.
+			VALUE_OBJECT_ENTITY_THREAD_LOCAL_CACHE_MAX_SIZE));
+
 	public static final boolean VALUE_OBJECT_FINDER_BLOCKING_CACHE =
 		GetterUtil.getBoolean(PropsUtil.get(PropsKeys.
 			VALUE_OBJECT_FINDER_BLOCKING_CACHE));
@@ -1323,6 +1327,10 @@ public class PropsValues {
 	public static final boolean VALUE_OBJECT_FINDER_CACHE_ENABLED =
 		GetterUtil.getBoolean(PropsUtil.get(PropsKeys.
 			VALUE_OBJECT_FINDER_CACHE_ENABLED));
+
+	public static final int VALUE_OBJECT_FINDER_THREAD_LOCAL_CACHE_MAX_SIZE =
+		GetterUtil.getInteger(PropsUtil.get(PropsKeys.
+			VALUE_OBJECT_FINDER_THREAD_LOCAL_CACHE_MAX_SIZE));
 
 	public static final String[] VELOCITY_ENGINE_RESOURCE_LISTENERS =
 		PropsUtil.getArray(PropsKeys.VELOCITY_ENGINE_RESOURCE_LISTENERS);

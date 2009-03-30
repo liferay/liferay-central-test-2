@@ -34,6 +34,8 @@ public interface FinderCache {
 
 	public void clearCache(String className);
 
+	public void clearLocalCache();
+
 	public Object getResult(
 		FinderPath finderPath, Object[] args, SessionFactory sessionFactory);
 

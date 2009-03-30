@@ -40,6 +40,10 @@ public class EntityCacheUtil {
 		getEntityCache().clearCache(className);
 	}
 
+	public static void clearLocalCache() {
+		getEntityCache().clearLocalCache();
+	}
+
 	public static EntityCache getEntityCache() {
 		return _finderCache;
 	}

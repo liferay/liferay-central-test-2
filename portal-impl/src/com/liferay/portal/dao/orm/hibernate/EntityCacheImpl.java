@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.SessionFactory;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.InitialThreadLocal;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.util.PropsValues;
@@ -39,6 +40,8 @@ import java.io.Serializable;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import org.apache.commons.collections.map.LRUMap;
 
 /**
  * <a href="EntityCacheImpl.java.html"><b><i>View Source</i></b></a>
@@ -55,6 +58,10 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 	}
 
 	public void clearCache() {
+		Map<String, Object> localCache = _localCache.get();
+
+		localCache.clear();
+
 		PortalCache[] portalCaches = _portalCaches.values().toArray(
 			new PortalCache[_portalCaches.size()]);
 
@@ -64,9 +71,19 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 	}
 
 	public void clearCache(String className) {
+		Map<String, Object> localCache = _localCache.get();
+
+		localCache.clear();
+
 		PortalCache portalCache = _getPortalCache(className);
 
 		portalCache.removeAll();
+	}
+
+	public void clearLocalCache() {
+		Map<String, Object> localCache = _localCache.get();
+
+		localCache.clear();
 	}
 
 	public String getRegistryName() {
@@ -83,16 +100,26 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 			return null;
 		}
 
-		PortalCache portalCache = _getPortalCache(classObj.getName());
+		Map<String, Object> localCache = _localCache.get();
 
-		String key = _encodeKey(primaryKeyObj);
+		String localCacheKey = _encodeLocalCacheKey(classObj, primaryKeyObj);
 
-		Object result = _multiVMPool.get(portalCache, key);
+		Object result = localCache.get(localCacheKey);
 
 		if (result == null) {
-			result = StringPool.BLANK;
+			PortalCache portalCache = _getPortalCache(classObj.getName());
 
-			_multiVMPool.put(portalCache, key, result);
+			String cacheKey = _encodeCacheKey(primaryKeyObj);
+
+			result = _multiVMPool.get(portalCache, cacheKey);
+
+			if (result == null) {
+				result = StringPool.BLANK;
+
+				_multiVMPool.put(portalCache, cacheKey, result);
+			}
+
+			localCache.put(localCacheKey, result);
 		}
 
 		if (result != null) {
@@ -125,40 +152,50 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 			}
 		}
 
-		PortalCache portalCache = _getPortalCache(classObj.getName());
+		Map<String, Object> localCache = _localCache.get();
 
-		String key = _encodeKey(primaryKeyObj);
+		String localCacheKey = _encodeLocalCacheKey(classObj, primaryKeyObj);
 
-		Object result = _multiVMPool.get(portalCache, key);
+		Object result = localCache.get(localCacheKey);
 
-		if (result != null) {
-			result = _objectToResult(result);
-		}
-		else {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Load " + classObj + " " + primaryKeyObj + " from session");
-			}
+		if (result == null) {
+			PortalCache portalCache = _getPortalCache(classObj.getName());
 
-			Session session = null;
+			String cacheKey = _encodeCacheKey(primaryKeyObj);
 
-			try {
-				session = sessionFactory.openSession();
+			result = _multiVMPool.get(portalCache, cacheKey);
 
-				result = session.load(classObj, primaryKeyObj);
-			}
-			finally {
-				if (result == null) {
-					result = StringPool.BLANK;
+			if (result == null) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Load " + classObj + " " + primaryKeyObj +
+							" from session");
 				}
 
-				result = _objectToResult(result);
+				Session session = null;
 
-				_multiVMPool.put(portalCache, key, result);
+				try {
+					session = sessionFactory.openSession();
 
-				sessionFactory.closeSession(session);
+					result = session.load(classObj, primaryKeyObj);
+				}
+				finally {
+					if (result == null) {
+						result = StringPool.BLANK;
+					}
+
+					result = _objectToResult(result);
+
+					_multiVMPool.put(portalCache, cacheKey, result);
+
+					sessionFactory.closeSession(session);
+				}
 			}
+
+			localCache.put(localCacheKey, result);
 		}
+
+		result = _objectToResult(result);
 
 		return result;
 	}
@@ -174,13 +211,19 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 			return;
 		}
 
-		PortalCache portalCache = _getPortalCache(classObj.getName());
+		Map<String, Object> localCache = _localCache.get();
 
-		String key = _encodeKey(primaryKeyObj);
+		String localCacheKey = _encodeLocalCacheKey(classObj, primaryKeyObj);
 
 		result = _objectToResult(result);
 
-		_multiVMPool.put(portalCache, key, result);
+		localCache.put(localCacheKey, result);
+
+		PortalCache portalCache = _getPortalCache(classObj.getName());
+
+		String cacheKey = _encodeCacheKey(primaryKeyObj);
+
+		_multiVMPool.put(portalCache, cacheKey, result);
 	}
 
 	public void removeResult(
@@ -193,15 +236,61 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 			return;
 		}
 
+		Map<String, Object> localCache = _localCache.get();
+
+		String localCacheKey = _encodeLocalCacheKey(classObj, primaryKeyObj);
+
+		localCache.remove(localCacheKey);
+
 		PortalCache portalCache = _getPortalCache(classObj.getName());
 
-		String key = _encodeKey(primaryKeyObj);
+		String cacheKey = _encodeCacheKey(primaryKeyObj);
 
-		_multiVMPool.remove(portalCache, key);
+		_multiVMPool.remove(portalCache, cacheKey);
 	}
 
 	public void setMultiVMPool(MultiVMPool multiVMPool) {
 		_multiVMPool = multiVMPool;
+	}
+
+	private String _encodeCacheKey(Serializable primaryKeyObj) {
+		return String.valueOf(primaryKeyObj);
+	}
+
+	private String _encodeGroupKey(String className) {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(CACHE_NAME);
+		sb.append(StringPool.POUND);
+		sb.append(className);
+
+		return sb.toString();
+	}
+
+	private String _encodeLocalCacheKey(
+		Class<?> classObj, Serializable primaryKeyObj) {
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(classObj.getName());
+		sb.append(StringPool.POUND);
+		sb.append(primaryKeyObj);
+
+		return sb.toString();
+	}
+
+	private PortalCache _getPortalCache(String className) {
+		String groupKey = _encodeGroupKey(className);
+
+		PortalCache portalCache = _portalCaches.get(groupKey);
+
+		if (portalCache == null) {
+			portalCache = _multiVMPool.getCache(groupKey, true);
+
+			_portalCaches.put(groupKey, portalCache);
+		}
+
+		return portalCache;
 	}
 
 	private Object _objectToResult(Object result) {
@@ -219,35 +308,11 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		}
 	}
 
-	private String _encodeGroupKey(String className) {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(CACHE_NAME);
-		sb.append(StringPool.PERIOD);
-		sb.append(className);
-
-		return sb.toString();
-	}
-
-	private String _encodeKey(Serializable primaryKeyObj) {
-		return String.valueOf(primaryKeyObj);
-	}
-
-	private PortalCache _getPortalCache(String className) {
-		String groupKey = _encodeGroupKey(className);
-
-		PortalCache portalCache = _portalCaches.get(groupKey);
-
-		if (portalCache == null) {
-			portalCache = _multiVMPool.getCache(groupKey, true);
-
-			_portalCaches.put(groupKey, portalCache);
-		}
-
-		return portalCache;
-	}
-
 	private static Log _log = LogFactoryUtil.getLog(EntityCacheImpl.class);
+
+	private static ThreadLocal<Map> _localCache = new InitialThreadLocal<Map>(
+		new LRUMap(
+			PropsValues.VALUE_OBJECT_ENTITY_THREAD_LOCAL_CACHE_MAX_SIZE));
 
 	private MultiVMPool _multiVMPool;
 	private Map<String, PortalCache> _portalCaches =

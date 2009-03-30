@@ -38,6 +38,10 @@ public class FinderCacheUtil {
 		getFinderCache().clearCache(className);
 	}
 
+	public static void clearLocalCache() {
+		getFinderCache().clearLocalCache();
+	}
+
 	public static FinderCache getFinderCache() {
 		return _finderCache;
 	}

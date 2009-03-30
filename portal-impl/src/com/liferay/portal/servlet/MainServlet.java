@@ -26,6 +26,8 @@ import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.deploy.hot.PluginPackageHotDeployListener;
 import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.events.StartupAction;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.job.Scheduler;
@@ -756,6 +758,11 @@ public class MainServlet extends ActionServlet {
 			// Clear the principal associated with this thread
 
 			PrincipalThreadLocal.setName(null);
+
+			// Clear the entity and finder local cache
+
+			EntityCacheUtil.clearLocalCache();
+			FinderCacheUtil.clearLocalCache();
 		}
 	}
 

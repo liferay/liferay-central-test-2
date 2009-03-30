@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.SessionFactory;
+import com.liferay.portal.kernel.util.InitialThreadLocal;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.util.PropsValues;
@@ -41,6 +42,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import org.apache.commons.collections.map.LRUMap;
 
 /**
  * <a href="FinderCacheImpl.java.html"><b><i>View Source</i></b></a>
@@ -57,6 +60,10 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 	}
 
 	public void clearCache() {
+		Map<String, Object> localCache = _localCache.get();
+
+		localCache.clear();
+
 		PortalCache[] portalCaches = _portalCaches.values().toArray(
 			new PortalCache[_portalCaches.size()]);
 
@@ -66,9 +73,19 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 	}
 
 	public void clearCache(String className) {
+		Map<String, Object> localCache = _localCache.get();
+
+		localCache.clear();
+
 		PortalCache portalCache = _getPortalCache(className);
 
 		portalCache.removeAll();
+	}
+
+	public void clearLocalCache() {
+		Map<String, Object> localCache = _localCache.get();
+
+		localCache.clear();
 	}
 
 	public String getRegistryName() {
@@ -84,12 +101,27 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 			return null;
 		}
 
-		PortalCache portalCache = _getPortalCache(finderPath.getClassName());
+		Map<String, Object> localCache = _localCache.get();
 
-		String key = _encodeKey(
-			finderPath.getMethodName(), finderPath.getParams(), args);
+		String localCacheKey = _encodeLocalCacheKey(
+			finderPath.getClassName(), finderPath.getMethodName(),
+			finderPath.getParams(), args);
 
-		Object primaryKey = _multiVMPool.get(portalCache, key);
+		Object primaryKey = localCache.get(localCacheKey);
+
+		if (primaryKey == null) {
+			PortalCache portalCache = _getPortalCache(
+				finderPath.getClassName());
+
+			String cacheKey = _encodeCacheKey(
+				finderPath.getMethodName(), finderPath.getParams(), args);
+
+			primaryKey = _multiVMPool.get(portalCache, cacheKey);
+
+			if (primaryKey != null) {
+				localCache.put(localCacheKey, primaryKey);
+			}
+		}
 
 		if (primaryKey != null) {
 			return _primaryKeyToResult(finderPath, sessionFactory, primaryKey);
@@ -111,12 +143,22 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 			return;
 		}
 
+		Map<String, Object> localCache = _localCache.get();
+
+		String localCacheKey = _encodeLocalCacheKey(
+			finderPath.getClassName(), finderPath.getMethodName(),
+			finderPath.getParams(), args);
+
+		Object primaryKey = _resultToPrimaryKey(result);
+
+		localCache.put(localCacheKey, primaryKey);
+
 		PortalCache portalCache = _getPortalCache(finderPath.getClassName());
 
-		String key = _encodeKey(
+		String cacheKey = _encodeCacheKey(
 			finderPath.getMethodName(), finderPath.getParams(), args);
 
-		_multiVMPool.put(portalCache, key, _resultToPrimaryKey(result));
+		_multiVMPool.put(portalCache, cacheKey, primaryKey);
 	}
 
 	public void removeResult(FinderPath finderPath, Object[] args) {
@@ -126,29 +168,27 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 			return;
 		}
 
+		Map<String, Object> localCache = _localCache.get();
+
+		String localCacheKey = _encodeLocalCacheKey(
+			finderPath.getClassName(), finderPath.getMethodName(),
+			finderPath.getParams(), args);
+
+		localCache.remove(localCacheKey);
+
 		PortalCache portalCache = _getPortalCache(finderPath.getClassName());
 
-		String key = _encodeKey(
+		String cacheKey = _encodeCacheKey(
 			finderPath.getMethodName(), finderPath.getParams(), args);
 
-		_multiVMPool.remove(portalCache, key);
+		_multiVMPool.remove(portalCache, cacheKey);
 	}
 
 	public void setMultiVMPool(MultiVMPool multiVMPool) {
 		_multiVMPool = multiVMPool;
 	}
 
-	private String _encodeGroupKey(String className) {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(CACHE_NAME);
-		sb.append(StringPool.PERIOD);
-		sb.append(className);
-
-		return sb.toString();
-	}
-
-	private String _encodeKey(
+	private String _encodeCacheKey(
 		String methodName, String[] params, Object[] args) {
 
 		StringBuilder sb = new StringBuilder();
@@ -157,14 +197,49 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 		sb.append(_PARAMS_SEPARATOR);
 
 		for (String param : params) {
-			sb.append(StringPool.PERIOD);
+			sb.append(StringPool.POUND);
 			sb.append(param);
 		}
 
 		sb.append(_ARGS_SEPARATOR);
 
 		for (Object arg : args) {
-			sb.append(StringPool.PERIOD);
+			sb.append(StringPool.POUND);
+			sb.append(String.valueOf(arg));
+		}
+
+		return sb.toString();
+	}
+
+	private String _encodeGroupKey(String className) {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(CACHE_NAME);
+		sb.append(StringPool.POUND);
+		sb.append(className);
+
+		return sb.toString();
+	}
+
+	private String _encodeLocalCacheKey(
+		String className, String methodName, String[] params, Object[] args) {
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(className);
+		sb.append(StringPool.POUND);
+		sb.append(methodName);
+		sb.append(_PARAMS_SEPARATOR);
+
+		for (String param : params) {
+			sb.append(StringPool.POUND);
+			sb.append(param);
+		}
+
+		sb.append(_ARGS_SEPARATOR);
+
+		for (Object arg : args) {
+			sb.append(StringPool.POUND);
 			sb.append(String.valueOf(arg));
 		}
 
@@ -248,6 +323,10 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 	private static final String _ARGS_SEPARATOR = "_A_";
 
 	private static final String _PARAMS_SEPARATOR = "_P_";
+
+	private static ThreadLocal<Map> _localCache = new InitialThreadLocal<Map>(
+		new LRUMap(
+			PropsValues.VALUE_OBJECT_FINDER_THREAD_LOCAL_CACHE_MAX_SIZE));
 
 	private MultiVMPool _multiVMPool;
 	private Map<String, PortalCache> _portalCaches =
