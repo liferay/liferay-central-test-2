@@ -65,7 +65,7 @@ public class ResourceCodeLocalServiceImpl
 			}
 
 			resourceCode = resourceCodePersistence.fetchByC_N_S(
-				companyId, name, scope, false);
+				companyId, name, scope);
 
 			if (resourceCode == null) {
 				throw se;
@@ -93,7 +93,7 @@ public class ResourceCodeLocalServiceImpl
 
 		if (resourceCode == null) {
 			resourceCode = resourceCodePersistence.fetchByC_N_S(
-				companyId, name, scope, false);
+				companyId, name, scope);
 
 			if (resourceCode == null) {
 				resourceCode = resourceCodeLocalService.addResourceCode(

@@ -234,8 +234,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 		long codeId = resourceCode.getCodeId();
 
-		Resource resource = resourcePersistence.fetchByC_P(
-			codeId, primKey, false);
+		Resource resource = resourcePersistence.fetchByC_P(codeId, primKey);
 
 		if (resource == null) {
 			long resourceId = counterLocalService.increment(
@@ -256,8 +255,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 							primKey + "}");
 				}
 
-				resource = resourcePersistence.fetchByC_P(
-					codeId, primKey, false);
+				resource = resourcePersistence.fetchByC_P(codeId, primKey);
 
 				if (resource == null) {
 					throw se;

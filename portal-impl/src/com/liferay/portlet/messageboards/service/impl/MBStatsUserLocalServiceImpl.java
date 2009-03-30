@@ -60,8 +60,7 @@ public class MBStatsUserLocalServiceImpl
 						userId + "}");
 			}
 
-			statsUser = mbStatsUserPersistence.fetchByG_U(
-				groupId, userId, false);
+			statsUser = mbStatsUserPersistence.fetchByG_U(groupId, userId);
 
 			if (statsUser == null) {
 				throw se;
@@ -85,7 +84,7 @@ public class MBStatsUserLocalServiceImpl
 		throws SystemException {
 
 		MBStatsUser statsUser = mbStatsUserPersistence.fetchByG_U(
-			groupId, userId, false);
+			groupId, userId);
 
 		if (statsUser == null) {
 			statsUser = mbStatsUserLocalService.addStatsUser(groupId, userId);
