@@ -845,7 +845,6 @@ public class HookHotDeployListener
 		"captcha.check.portal.create_account",
 		"field.enable.com.liferay.portal.model.Contact.birthday",
 		"field.enable.com.liferay.portal.model.Contact.male",
-		"field.enable.com.liferay.portal.model.Contact.password",
 		"field.enable.com.liferay.portal.model.Organization.status",
 		"javascript.fast.load",
 		"layout.template.cache.enabled",

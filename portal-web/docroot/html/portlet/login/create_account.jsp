@@ -30,7 +30,6 @@ String openId = ParamUtil.getString(request, "openId");
 User user2 = null;
 Contact contact2 = null;
 
-PasswordPolicy passwordPolicy = PasswordPolicyLocalServiceUtil.getDefaultPasswordPolicy(company.getCompanyId());
 Calendar birthday = CalendarFactoryUtil.getCalendar();
 
 birthday.set(Calendar.MONTH, Calendar.JANUARY);
@@ -55,29 +54,6 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 <liferay-ui:error exception="<%= ReservedUserScreenNameException.class %>" message="the-screen-name-you-requested-is-reserved" />
 <liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-email-address" />
 <liferay-ui:error exception="<%= UserIdException.class %>" message="please-enter-a-valid-user-id" />
-<liferay-ui:error exception="<%= UserPasswordException.class %>">
-
-	<%
-	UserPasswordException upe = (UserPasswordException)errorException;
-	%>
-
-	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_CONTAINS_TRIVIAL_WORDS %>">
-		<liferay-ui:message key="that-password-uses-common-words-please-enter-in-a-password-that-is-harder-to-guess-i-e-contains-a-mix-of-numbers-and-letters" />
-	</c:if>
-
-	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_INVALID %>">
-		<liferay-ui:message key="that-password-is-invalid-please-enter-in-a-different-password" />
-	</c:if>
-
-	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_LENGTH %>">
-		<%= LanguageUtil.format(pageContext, "that-password-is-too-short-or-too-long-please-make-sure-your-password-is-between-x-and-512-characters", String.valueOf(passwordPolicy.getMinLength()), false) %>
-	</c:if>
-
-	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORDS_DO_NOT_MATCH %>">
-		<liferay-ui:message key="the-passwords-you-entered-do-not-match-each-other-please-re-enter-your-password" />
-	</c:if>
-</liferay-ui:error>
-
 <liferay-ui:error exception="<%= UserScreenNameException.class %>" message="please-enter-a-valid-screen-name" />
 
 <c:if test='<%= SessionMessages.contains(request, "missingOpenIdUserInformation") %>'>
@@ -121,19 +97,6 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 </fieldset>
 
 <fieldset class="block-labels col">
-	<c:if test="<%= PropsValues.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_PASSWORD %>">
-		<div class="ctrl-holder">
-			<label for=""><liferay-ui:message key="password" /></label>
-
-			<input name="<portlet:namespace />password1" size="30" type="password" value="" />
-		</div>
-		<div class="ctrl-holder">
-			<label for=""><liferay-ui:message key="enter-again" /></label>
-
-			<input name="<portlet:namespace />password2" size="30" type="password" value="" />
-		</div>
-	</c:if>
-
 	<c:choose>
 		<c:when test="<%= PropsValues.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY %>">
 			<div class="ctrl-holder">
