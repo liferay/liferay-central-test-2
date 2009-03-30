@@ -32,6 +32,7 @@
 		<property name="configPropertyKey" value="ehcache.multi.vm.config.location" />
 		<property name="MBeanServer" ref="mbeanServer" />
 	</bean>
+	<!--<bean id="com.liferay.portal.cache.MultiVMPortalCacheManager" class="com.liferay.portal.cache.MemoryPortalCacheManager" />-->
 	<bean id="com.liferay.portal.kernel.cache.MultiVMPool" class="com.liferay.portal.cache.MultiVMPoolImpl">
 		<property name="portalCacheManager" ref="com.liferay.portal.cache.MultiVMPortalCacheManager" />
 	</bean>
@@ -42,6 +43,7 @@
 		<property name="configPropertyKey" value="ehcache.single.vm.config.location" />
 		<property name="MBeanServer" ref="mbeanServer" />
 	</bean>
+	<!--<bean id="com.liferay.portal.cache.SingleVMPortalCacheManager" class="com.liferay.portal.cache.MemoryPortalCacheManager" />-->
 	<bean id="com.liferay.portal.kernel.cache.SingleVMPool" class="com.liferay.portal.cache.SingleVMPoolImpl">
 		<property name="portalCacheManager" ref="com.liferay.portal.cache.SingleVMPortalCacheManager" />
 	</bean>
