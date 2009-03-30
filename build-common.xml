@@ -257,6 +257,7 @@ ECJ was automatically installed. Please rerun your task.
 			<equals arg1="${test.suite.classes.available}" arg2="$${test.suite.classes.available}" />
 			<then>
 				<junit dir="${project.dir}" fork="on" forkmode="once" haltonfailure="no" printsummary="on">
+					<jvmarg value="-Xmx256m" />
 					<jvmarg value="-Duser.timezone=GMT" />
 					<jvmarg value="-Dexternal-properties=${test.properties}" />
 					<classpath refid="test.classpath" />
@@ -269,6 +270,7 @@ ECJ was automatically installed. Please rerun your task.
 			</then>
 			<else>
 				<junit dir="${project.dir}" fork="on" forkmode="once" haltonfailure="no" printsummary="on">
+					<jvmarg value="-Xmx256m" />
 					<jvmarg value="-Duser.timezone=GMT" />
 					<jvmarg value="-Dexternal-properties=${test.properties}" />
 					<classpath refid="test.classpath" />
@@ -284,6 +286,7 @@ ECJ was automatically installed. Please rerun your task.
 
 	<target name="test-class" depends="compile,compile-test" if="class">
 		<junit dir="${project.dir}" fork="on" forkmode="once" haltonfailure="no" outputtoformatters="false" printsummary="on" showoutput="true">
+			<jvmarg value="-Xmx256m" />
 			<jvmarg value="-Duser.timezone=GMT" />
 			<jvmarg value="-Dexternal-properties=${test.properties}" />
 			<classpath refid="test.classpath" />
