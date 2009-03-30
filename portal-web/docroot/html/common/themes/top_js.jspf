@@ -191,10 +191,10 @@ long javaScriptLastModified = ServletContextUtil.getLastModified(application, "/
 
 <c:choose>
 	<c:when test="<%= themeDisplay.isThemeJsFastLoad() %>">
-		<script src="<%= PortalUtil.getStaticResourceURL(request, themeDisplay.getPathJavaScript() + "/barebone.jsp", "minifierBundleId=" + HttpUtil.encodeURL("javascript.barebone.files") + "&minifierBundleDir=" + HttpUtil.encodeURL("/html/js"), javaScriptLastModified) %>" type="text/javascript"></script>
+		<script src="<%= HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, themeDisplay.getPathJavaScript() + "/barebone.jsp", "minifierBundleId=" + HttpUtil.encodeURL("javascript.barebone.files") + "&minifierBundleDir=" + HttpUtil.encodeURL("/html/js"), javaScriptLastModified)) %>" type="text/javascript"></script>
 
 		<c:if test="<%= !themeDisplay.isThemeJsBarebone() %>">
-			<script src="<%= PortalUtil.getStaticResourceURL(request, themeDisplay.getPathJavaScript() + "/everything.jsp", "minifierBundleId=" + HttpUtil.encodeURL("javascript.everything.files") + "&minifierBundleDir=" + HttpUtil.encodeURL("/html/js"), javaScriptLastModified) %>" type="text/javascript"></script>
+			<script src="<%= HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, themeDisplay.getPathJavaScript() + "/everything.jsp", "minifierBundleId=" + HttpUtil.encodeURL("javascript.everything.files") + "&minifierBundleDir=" + HttpUtil.encodeURL("/html/js"), javaScriptLastModified)) %>" type="text/javascript"></script>
 		</c:if>
 	</c:when>
 	<c:otherwise>
