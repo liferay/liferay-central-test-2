@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.dao.orm.SessionFactory;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.InitialThreadLocal;
+import com.liferay.portal.kernel.util.LRUMap;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.util.PropsValues;
@@ -40,8 +41,6 @@ import java.io.Serializable;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-import org.apache.commons.collections.map.LRUMap;
 
 /**
  * <a href="EntityCacheImpl.java.html"><b><i>View Source</i></b></a>
@@ -310,8 +309,8 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 
 	private static Log _log = LogFactoryUtil.getLog(EntityCacheImpl.class);
 
-	private static ThreadLocal<Map> _localCache = new InitialThreadLocal<Map>(
-		new LRUMap(
+	private static ThreadLocal<Map<String, Object>> _localCache =
+		new InitialThreadLocal<Map<String, Object>>(new LRUMap<String, Object>(
 			PropsValues.VALUE_OBJECT_ENTITY_THREAD_LOCAL_CACHE_MAX_SIZE));
 
 	private MultiVMPool _multiVMPool;
