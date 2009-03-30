@@ -23,9 +23,11 @@
 package com.liferay.portal.tools.servicebuilder;
 
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.TextFormatter;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -301,6 +303,38 @@ public class Entity {
 
 	public List<EntityFinder> getFinderList() {
 		return _finderList;
+	}
+
+	public List<EntityFinder> getCollectionFinderList() {
+		List<EntityFinder> finderList = ListUtil.copy(_finderList);
+
+		Iterator<EntityFinder> itr = finderList.iterator();
+
+		while (itr.hasNext()) {
+			EntityFinder finder = itr.next();
+
+			if (!finder.isCollection()) {
+				itr.remove();
+			}
+		}
+
+		return finderList;
+	}
+
+	public List<EntityFinder> getUniqueFinderList() {
+		List<EntityFinder> finderList = ListUtil.copy(_finderList);
+
+		Iterator<EntityFinder> itr = finderList.iterator();
+
+		while (itr.hasNext()) {
+			EntityFinder finder = itr.next();
+
+			if (finder.isCollection()) {
+				itr.remove();
+			}
+		}
+
+		return finderList;
 	}
 
 	public boolean isPortalReference() {

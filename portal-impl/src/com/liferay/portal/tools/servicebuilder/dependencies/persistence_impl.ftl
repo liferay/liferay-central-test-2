@@ -134,35 +134,33 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 	public void cacheResult(${entity.name} ${entity.varName}) {
 		EntityCacheUtil.putResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}Impl.class, ${entity.varName}.getPrimaryKey(), ${entity.varName});
 
-		<#list entity.getFinderList() as finder>
+		<#list entity.getUniqueFinderList() as finder>
 			<#assign finderColsList = finder.getColumns()>
 
-			<#if !finder.isCollection()>
-				FinderCacheUtil.putResult(
-					FINDER_PATH_FETCH_BY_${finder.name?upper_case},
-					new Object[] {
-						<#list finderColsList as finderCol>
-							<#if finderCol.isPrimitiveType()>
-								<#if finderCol.type == "boolean">
-									Boolean.valueOf(
-								<#else>
-									new ${serviceBuilder.getPrimitiveObj("${finderCol.type}")}(
-								</#if>
+			FinderCacheUtil.putResult(
+				FINDER_PATH_FETCH_BY_${finder.name?upper_case},
+				new Object[] {
+					<#list finderColsList as finderCol>
+						<#if finderCol.isPrimitiveType()>
+							<#if finderCol.type == "boolean">
+								Boolean.valueOf(
+							<#else>
+								new ${serviceBuilder.getPrimitiveObj("${finderCol.type}")}(
 							</#if>
+						</#if>
 
-							${entity.varName}.get${finderCol.methodName}()
+						${entity.varName}.get${finderCol.methodName}()
 
-							<#if finderCol.isPrimitiveType()>
-								)
-							</#if>
+						<#if finderCol.isPrimitiveType()>
+							)
+						</#if>
 
-							<#if finderCol_has_next>
-								,
-							</#if>
-						</#list>
-					},
-					${entity.varName});
-			</#if>
+						<#if finderCol_has_next>
+							,
+						</#if>
+					</#list>
+				},
+				${entity.varName});
 		</#list>
 	}
 
@@ -287,36 +285,38 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		${entity.name}ModelImpl ${entity.varName}ModelImpl = (${entity.name}ModelImpl)${entity.varName};
+		<#assign uniqueFinderList = entity.getUniqueFinderList()>
 
-		<#list entity.getFinderList() as finder>
+		<#if uniqueFinderList?size != 0>
+			${entity.name}ModelImpl ${entity.varName}ModelImpl = (${entity.name}ModelImpl)${entity.varName};
+		</#if>
+
+		<#list uniqueFinderList as finder>
 			<#assign finderColsList = finder.getColumns()>
 
-			<#if !finder.isCollection()>
-				FinderCacheUtil.removeResult(
-					FINDER_PATH_FETCH_BY_${finder.name?upper_case},
-					new Object[] {
-						<#list finderColsList as finderCol>
-							<#if finderCol.isPrimitiveType()>
-								<#if finderCol.type == "boolean">
-									Boolean.valueOf(
-								<#else>
-									new ${serviceBuilder.getPrimitiveObj("${finderCol.type}")}(
-								</#if>
+			FinderCacheUtil.removeResult(
+				FINDER_PATH_FETCH_BY_${finder.name?upper_case},
+				new Object[] {
+					<#list finderColsList as finderCol>
+						<#if finderCol.isPrimitiveType()>
+							<#if finderCol.type == "boolean">
+								Boolean.valueOf(
+							<#else>
+								new ${serviceBuilder.getPrimitiveObj("${finderCol.type}")}(
 							</#if>
+						</#if>
 
-							${entity.varName}ModelImpl.getOriginal${finderCol.methodName}()
+						${entity.varName}ModelImpl.getOriginal${finderCol.methodName}()
 
-							<#if finderCol.isPrimitiveType()>
-								)
-							</#if>
+						<#if finderCol.isPrimitiveType()>
+							)
+						</#if>
 
-							<#if finderCol_has_next>
-								,
-							</#if>
-						</#list>
-					});
-			</#if>
+						<#if finderCol_has_next>
+							,
+						</#if>
+					</#list>
+				});
 		</#list>
 
 		EntityCacheUtil.removeResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}Impl.class, ${entity.varName}.getPrimaryKey());
@@ -375,7 +375,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 	}
 
 	public ${entity.name} updateImpl(${packagePath}.model.${entity.name} ${entity.varName}, boolean merge) throws SystemException {
-		boolean isNew = ${entity.varName}.isNew();
+		<#assign uniqueFinderList = entity.getUniqueFinderList()>
+
+		<#if uniqueFinderList?size != 0>
+			boolean isNew = ${entity.varName}.isNew();
+		</#if>
 
 		<#if entity.hasUuid()>
 			if (Validator.isNull(${entity.varName}.getUuid())) {
@@ -405,93 +409,93 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 		EntityCacheUtil.putResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}Impl.class, ${entity.varName}.getPrimaryKey(), ${entity.varName});
 
-		${entity.name}ModelImpl ${entity.varName}ModelImpl = (${entity.name}ModelImpl)${entity.varName};
+		<#if uniqueFinderList?size != 0>
+			${entity.name}ModelImpl ${entity.varName}ModelImpl = (${entity.name}ModelImpl)${entity.varName};
+		</#if>
 
-		<#list entity.getFinderList() as finder>
+		<#list uniqueFinderList as finder>
 			<#assign finderColsList = finder.getColumns()>
 
-			<#if !finder.isCollection()>
-				if (
-						!isNew && (
-							<#list finderColsList as finderCol>
-								<#if finderCol.isPrimitiveType()>
-									${entity.varName}.get${finderCol.methodName}() != ${entity.varName}ModelImpl.getOriginal${finderCol.methodName}()
+			if (
+					!isNew && (
+						<#list finderColsList as finderCol>
+							<#if finderCol.isPrimitiveType()>
+								${entity.varName}.get${finderCol.methodName}() != ${entity.varName}ModelImpl.getOriginal${finderCol.methodName}()
+							<#else>
+								!${entity.varName}.get${finderCol.methodName}().equals(${entity.varName}ModelImpl.getOriginal${finderCol.methodName}())
+							</#if>
+
+							<#if finderCol_has_next>
+								||
+							</#if>
+						</#list>
+					)
+			) {
+				FinderCacheUtil.removeResult(
+					FINDER_PATH_FETCH_BY_${finder.name?upper_case},
+					new Object[] {
+						<#list finderColsList as finderCol>
+							<#if finderCol.isPrimitiveType()>
+								<#if finderCol.type == "boolean">
+									Boolean.valueOf(
 								<#else>
-									!${entity.varName}.get${finderCol.methodName}().equals(${entity.varName}ModelImpl.getOriginal${finderCol.methodName}())
+									new ${serviceBuilder.getPrimitiveObj("${finderCol.type}")}(
 								</#if>
+							</#if>
 
-								<#if finderCol_has_next>
-									||
-								</#if>
-							</#list>
-						)
-				) {
-					FinderCacheUtil.removeResult(
-						FINDER_PATH_FETCH_BY_${finder.name?upper_case},
-						new Object[] {
-							<#list finderColsList as finderCol>
-								<#if finderCol.isPrimitiveType()>
-									<#if finderCol.type == "boolean">
-										Boolean.valueOf(
-									<#else>
-										new ${serviceBuilder.getPrimitiveObj("${finderCol.type}")}(
-									</#if>
-								</#if>
+							${entity.varName}ModelImpl.getOriginal${finderCol.methodName}()
 
-								${entity.varName}ModelImpl.getOriginal${finderCol.methodName}()
+							<#if finderCol.isPrimitiveType()>
+								)
+							</#if>
 
-								<#if finderCol.isPrimitiveType()>
-									)
-								</#if>
+							<#if finderCol_has_next>
+								,
+							</#if>
+						</#list>
+					});
+			}
 
-								<#if finderCol_has_next>
-									,
-								</#if>
-							</#list>
-						});
-				}
+			if (
+					isNew || (
+						<#list finderColsList as finderCol>
+							<#if finderCol.isPrimitiveType()>
+								${entity.varName}.get${finderCol.methodName}() != ${entity.varName}ModelImpl.getOriginal${finderCol.methodName}()
+							<#else>
+								!${entity.varName}.get${finderCol.methodName}().equals(${entity.varName}ModelImpl.getOriginal${finderCol.methodName}())
+							</#if>
 
-				if (
-						isNew || (
-							<#list finderColsList as finderCol>
-								<#if finderCol.isPrimitiveType()>
-									${entity.varName}.get${finderCol.methodName}() != ${entity.varName}ModelImpl.getOriginal${finderCol.methodName}()
+							<#if finderCol_has_next>
+								||
+							</#if>
+						</#list>
+					)
+			) {
+				FinderCacheUtil.putResult(
+					FINDER_PATH_FETCH_BY_${finder.name?upper_case},
+					new Object[] {
+						<#list finderColsList as finderCol>
+							<#if finderCol.isPrimitiveType()>
+								<#if finderCol.type == "boolean">
+									Boolean.valueOf(
 								<#else>
-									!${entity.varName}.get${finderCol.methodName}().equals(${entity.varName}ModelImpl.getOriginal${finderCol.methodName}())
+									new ${serviceBuilder.getPrimitiveObj("${finderCol.type}")}(
 								</#if>
+							</#if>
 
-								<#if finderCol_has_next>
-									||
-								</#if>
-							</#list>
-						)
-				) {
-					FinderCacheUtil.putResult(
-						FINDER_PATH_FETCH_BY_${finder.name?upper_case},
-						new Object[] {
-							<#list finderColsList as finderCol>
-								<#if finderCol.isPrimitiveType()>
-									<#if finderCol.type == "boolean">
-										Boolean.valueOf(
-									<#else>
-										new ${serviceBuilder.getPrimitiveObj("${finderCol.type}")}(
-									</#if>
-								</#if>
+							${entity.varName}.get${finderCol.methodName}()
 
-								${entity.varName}.get${finderCol.methodName}()
+							<#if finderCol.isPrimitiveType()>
+								)
+							</#if>
 
-								<#if finderCol.isPrimitiveType()>
-									)
-								</#if>
-
-								<#if finderCol_has_next>
-									,
-								</#if>
-							</#list>
-						},
-						${entity.varName});
-				}
-			</#if>
+							<#if finderCol_has_next>
+								,
+							</#if>
+						</#list>
+					},
+					${entity.varName});
+			}
 		</#list>
 
 		return ${entity.varName};
