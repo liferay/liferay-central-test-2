@@ -83,7 +83,7 @@ public class CA_RemoveGuestViewFolderPermissionsTest extends BaseTestCase {
 				assertTrue(selenium.isTextPresent(
 						"Edit Permissions for Image Gallery Folder: Image Permissions Test Folder"));
 
-				boolean AbleToView = selenium.isChecked("11_ACTION_VIEW");
+				boolean AbleToView = selenium.isChecked("13_ACTION_VIEW");
 
 				if (!AbleToView) {
 					label = 2;
@@ -91,7 +91,7 @@ public class CA_RemoveGuestViewFolderPermissionsTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("11_ACTION_VIEW");
+				selenium.click("13_ACTION_VIEW");
 
 			case 2:
 				selenium.click(RuntimeVariables.replace(
