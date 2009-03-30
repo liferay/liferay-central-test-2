@@ -57,12 +57,20 @@ import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
+import com.liferay.portlet.blogs.model.BlogsEntry;
+import com.liferay.portlet.blogs.model.BlogsStatsUser;
+import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
+import com.liferay.portlet.blogs.model.impl.BlogsStatsUserImpl;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.MBStatsUser;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
+import com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl;
 import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
+import com.liferay.portlet.tags.model.TagsAsset;
+import com.liferay.portlet.tags.model.impl.TagsAssetImpl;
 import com.liferay.util.SimpleCounter;
 
 import java.io.File;
@@ -102,6 +110,34 @@ public class DataFactory {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public BlogsEntry addBlogsEntry(
+			long groupId, long userId, String title, String urlTitle,
+			String content)
+		throws Exception {
+
+		BlogsEntry blogsEntry = new BlogsEntryImpl();
+
+		blogsEntry.setEntryId(_counter.get());
+		blogsEntry.setGroupId(groupId);
+		blogsEntry.setUserId(userId);
+		blogsEntry.setTitle(title);
+		blogsEntry.setUrlTitle(urlTitle);
+		blogsEntry.setContent(content);
+
+		return blogsEntry;
+	}
+
+	public BlogsStatsUser addBlogsStatsUser(long groupId, long userId)
+		throws Exception {
+
+		BlogsStatsUser blogsStatsUser = new BlogsStatsUserImpl();
+
+		blogsStatsUser.setGroupId(groupId);
+		blogsStatsUser.setUserId(userId);
+
+		return blogsStatsUser;
 	}
 
 	public Contact addContact(String firstName, String lastName)
@@ -195,6 +231,17 @@ public class DataFactory {
 		mbMessage.setBody(body);
 
 		return mbMessage;
+	}
+
+	public MBStatsUser addMBStatsUser(long groupId, long userId)
+		throws Exception {
+
+		MBStatsUser mbStatsUser = new MBStatsUserImpl();
+
+		mbStatsUser.setGroupId(groupId);
+		mbStatsUser.setUserId(userId);
+
+		return mbStatsUser;
 	}
 
 	public MBThread addMBThread(
@@ -305,6 +352,23 @@ public class DataFactory {
 		return rolesPermissions;
 	}
 
+	public TagsAsset addTagsAsset(
+			long groupId, long userId, long classNameId, long classPK,
+			String mimeType, String title)
+		throws Exception {
+
+		TagsAsset tagsAsset = new TagsAssetImpl();
+
+		tagsAsset.setGroupId(groupId);
+		tagsAsset.setUserId(userId);
+		tagsAsset.setClassNameId(classNameId);
+		tagsAsset.setClassPK(classPK);
+		tagsAsset.setMimeType(mimeType);
+		tagsAsset.setTitle(title);
+
+		return tagsAsset;
+	}
+
 	public User addUser(boolean defaultUser, Contact contact) throws Exception {
 		User user = new UserImpl();
 
@@ -330,6 +394,10 @@ public class DataFactory {
 
 	public Role getAdministratorRole() {
 		return _administratorRole;
+	}
+
+	public ClassName getBlogsEntryClassName() {
+		return _blogsEntryClassName;
 	}
 
 	public List<ClassName> getClassNames() {
@@ -433,6 +501,9 @@ public class DataFactory {
 
 			_classNames.add(className);
 
+			if (model.equals(BlogsEntry.class.getName())) {
+				_blogsEntryClassName = className;
+			}
 			if (model.equals(Group.class.getName())) {
 				_groupClassName = className;
 			}
@@ -771,6 +842,7 @@ public class DataFactory {
 	}
 
 	private Role _administratorRole;
+	private ClassName _blogsEntryClassName;
 	private List<ClassName> _classNames;
 	private Role _communityAdministratorRole;
 	private Role _communityMemberRole;

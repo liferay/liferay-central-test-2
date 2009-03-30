@@ -25,6 +25,14 @@
 
 		${sampleSQLBuilder.insertUser(contact, group, groups, organizations, privateLayouts, publicLayouts, roles, user)}
 
+		<#assign blogsStatsUser = dataFactory.addBlogsStatsUser(group.groupId, user.userId)>
+
+		${sampleSQLBuilder.insertBlogsStatsUser(blogsStatsUser)}
+
+		<#assign mbStatsUser = dataFactory.addMBStatsUser(group.groupId, user.userId)>
+
+		${sampleSQLBuilder.insertMBStatsUser(mbStatsUser)}
+
 		${usersCsvWriter.write(stringUtil.lowerCase(firstName + lastName) + "," + group.groupId + ",")}
 
 		<#if (userCounter.value < maxUserCount)>
@@ -44,5 +52,7 @@
 		<#break>
 	</#if>
 </#list>
+
+<#include "blogs.ftl">
 
 <#include "mb.ftl">

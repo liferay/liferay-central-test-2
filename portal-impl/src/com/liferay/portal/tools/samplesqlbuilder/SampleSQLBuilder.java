@@ -38,9 +38,13 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.util.InitUtil;
+import com.liferay.portlet.blogs.model.BlogsEntry;
+import com.liferay.portlet.blogs.model.BlogsStatsUser;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.MBStatsUser;
 import com.liferay.portlet.messageboards.model.MBThread;
+import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.util.SimpleCounter;
 
 import java.io.BufferedReader;
@@ -65,6 +69,8 @@ public class SampleSQLBuilder {
 		InitUtil.initWithSpring();
 
 		String outputDir = System.getProperty("sample.sql.output.dir");
+		int maxBlogsEntryCount = GetterUtil.getInteger(
+			System.getProperty("sample.sql.max.blogs.entry.count"));
 		int maxMBCategoryCount = GetterUtil.getInteger(
 			System.getProperty("sample.sql.max.mb.category.count"));
 		int maxMBMessageCount = GetterUtil.getInteger(
@@ -75,16 +81,17 @@ public class SampleSQLBuilder {
 			System.getProperty("sample.sql.max.user.count"));
 
 		new SampleSQLBuilder(
-			outputDir, maxMBCategoryCount, maxMBMessageCount, maxMBThreadCount,
-			maxUserCount);
+			outputDir, maxBlogsEntryCount, maxMBCategoryCount,
+			maxMBMessageCount, maxMBThreadCount, maxUserCount);
 	}
 
 	public SampleSQLBuilder(
-		String outputDir, int maxMBCategoryCount, int maxMBMessageCount,
-		int maxMBThreadCount, int maxUserCount) {
+		String outputDir, int maxBlogsEntryCount, int maxMBCategoryCount,
+		int maxMBMessageCount, int maxMBThreadCount, int maxUserCount) {
 
 		try {
 			_outputDir = outputDir;
+			_maxBlogsEntryCount = maxBlogsEntryCount;
 			_maxMBCategoryCount = maxMBCategoryCount;
 			_maxMBMessageCount = maxMBMessageCount;
 			_maxMBThreadCount = maxMBThreadCount;
@@ -145,6 +152,24 @@ public class SampleSQLBuilder {
 		}
 	}
 
+	public void insertBlogsEntry(BlogsEntry blogsEntry) throws Exception {
+		Map<String, Object> context = getContext();
+
+		put(context, "blogsEntry", blogsEntry);
+
+		processTemplate(_tplBlogsEntry, context);
+	}
+
+	public void insertBlogsStatsUser(BlogsStatsUser blogsStatsUser)
+		throws Exception {
+
+		Map<String, Object> context = getContext();
+
+		put(context, "blogsStatsUser", blogsStatsUser);
+
+		processTemplate(_tplBlogsStatsUser, context);
+	}
+
 	public void insertGroup(
 			Group group, List<Layout> privateLayouts,
 			List<Layout> publicLayouts)
@@ -175,6 +200,14 @@ public class SampleSQLBuilder {
 		processTemplate(_tplMBMessage, context);
 	}
 
+	public void insertMBStatsUser(MBStatsUser mbStatsUser) throws Exception {
+		Map<String, Object> context = getContext();
+
+		put(context, "mbStatsUser", mbStatsUser);
+
+		processTemplate(_tplMBStatsUser, context);
+	}
+
 	public void insertMBThread(MBThread mbThread) throws Exception {
 		Map<String, Object> context = getContext();
 
@@ -195,6 +228,14 @@ public class SampleSQLBuilder {
 		put(context, "resource", resource);
 
 		processTemplate(_tplSecurity, context);
+	}
+
+	public void insertTagsAsset(TagsAsset tagsAsset) throws Exception {
+		Map<String, Object> context = getContext();
+
+		put(context, "tagsAsset", tagsAsset);
+
+		processTemplate(_tplTagsAsset, context);
 	}
 
 	public void insertUser(
@@ -220,16 +261,20 @@ public class SampleSQLBuilder {
 	protected void createSample() throws Exception {
 		Map<String, Object> context = getContext();
 
+		Writer blogsEntriesCsvWriter = new FileWriter(
+			new File(_outputDir + "/blogs_entries.csv"));
 		Writer mbMessagesCsvWriter = new FileWriter(
 			new File(_outputDir + "/mb_messages.csv"));
 		Writer usersCsvWriter = new FileWriter(
 			new File(_outputDir +  "/users.csv"));
 
+		put(context, "blogsEntriesCsvWriter", blogsEntriesCsvWriter);
 		put(context, "mbMessagesCsvWriter", mbMessagesCsvWriter);
 		put(context, "usersCsvWriter", usersCsvWriter);
 
 		processTemplate(_tplSample, context);
 
+		blogsEntriesCsvWriter.flush();
 		mbMessagesCsvWriter.flush();
 		usersCsvWriter.flush();
 	}
@@ -244,6 +289,7 @@ public class SampleSQLBuilder {
 		put(context, "counter", _counter);
 		put(context, "dataFactory", _dataFactory);
 		put(context, "defaultUserId", defaultUser.getCompanyId());
+		put(context, "maxBlogsEntryCount", _maxBlogsEntryCount);
 		put(context, "maxMBCategoryCount", _maxMBCategoryCount);
 		put(context, "maxMBMessageCount", _maxMBMessageCount);
 		put(context, "maxMBThreadCount", _maxMBThreadCount);
@@ -270,6 +316,7 @@ public class SampleSQLBuilder {
 
 	private SimpleCounter _counter;
 	private DataFactory _dataFactory;
+	private int _maxBlogsEntryCount;
 	private int _maxMBCategoryCount;
 	private int _maxMBMessageCount;
 	private int _maxMBThreadCount;
@@ -279,11 +326,15 @@ public class SampleSQLBuilder {
 	private SimpleCounter _resourceCodeCounter;
 	private SimpleCounter _resourceCounter;
 	private String _tplGroup = _TPL_ROOT + "group.ftl";
+	private String _tplBlogsEntry = _TPL_ROOT + "blogs_entry.ftl";
+	private String _tplBlogsStatsUser = _TPL_ROOT + "blogs_stats_user.ftl";
 	private String _tplMBCategory = _TPL_ROOT + "mb_category.ftl";
 	private String _tplMBMessage = _TPL_ROOT + "mb_message.ftl";
+	private String _tplMBStatsUser = _TPL_ROOT + "mb_stats_user.ftl";
 	private String _tplMBThread = _TPL_ROOT + "mb_thread.ftl";
 	private String _tplSample = _TPL_ROOT + "sample.ftl";
 	private String _tplSecurity = _TPL_ROOT + "security.ftl";
+	private String _tplTagsAsset = _TPL_ROOT + "tags_asset.ftl";
 	private String _tplUser = _TPL_ROOT + "user.ftl";
 	private Writer _writerGeneric;
 	private Writer _writerMySQL;
