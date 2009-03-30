@@ -3516,6 +3516,7 @@ the-framework-version-could-not-be-found=框架版本不能被發現。
 the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages=The friendly URL is appended to <b>{0}</b> for public pages and <b>{1}</b> for private pages.
 the-friendly-url-may-conflict-with-another-page=友好的url 也許相衝突與其它頁。
 the-group-cannot-be-deleted-because-it-is-a-required-system-group=小組無法被刪除因為這是一個必需的系統小組。
+the-group-cannot-be-deleted-because-you-are-accessing-the-group=因為您訪問小組，小組不可能被刪除。
 the-group-could-not-be-found=群組找不到。
 the-item-could-not-be-found=項目找不到。
 the-item-sku-you-requested-is-already-taken=您請求的SKU 項目已經被取用。

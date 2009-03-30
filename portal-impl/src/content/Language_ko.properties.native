@@ -3516,6 +3516,7 @@ the-framework-version-could-not-be-found=기구 버전은 발견될 수 없었�
 the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages=The friendly URL is appended to <b>{0}</b> for public pages and <b>{1}</b> for private pages.
 the-friendly-url-may-conflict-with-another-page=친절한url은 다른 페이지에 투쟁할지도 모른다.
 the-group-cannot-be-deleted-because-it-is-a-required-system-group=필수 체계 그룹 이기 때문에 그룹은 삭제될.
+the-group-cannot-be-deleted-because-you-are-accessing-the-group=그룹은 당신이 그룹에 접근하고 있기 때문에 삭제될 수 없다.
 the-group-could-not-be-found=그룹은 발견될 수 없었다.
 the-item-could-not-be-found=품목은 발견될 수 없었다.
 the-item-sku-you-requested-is-already-taken=너가 요구한 품목 SKU은 이미 가지고 간다.

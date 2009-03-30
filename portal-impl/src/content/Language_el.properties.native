@@ -3516,6 +3516,7 @@ the-framework-version-could-not-be-found=Η έκδοση πλαισίου δεν
 the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages=The friendly URL is appended to <b>{0}</b> for public pages and <b>{1}</b> for private pages.
 the-friendly-url-may-conflict-with-another-page=Το φιλικό url μπορεί να συγκρουστεί με μια άλλη σελίδα.
 the-group-cannot-be-deleted-because-it-is-a-required-system-group=Η ομάδα δεν μπορεί να διαγραφεί επειδή είναι απαραίτητη ομάδα συστημάτων.
+the-group-cannot-be-deleted-because-you-are-accessing-the-group=Η ομάδα δεν μπορεί να διαγραφεί επειδή έχετε πρόσβαση στην ομάδα.
 the-group-could-not-be-found=Η ομάδα δεν μπόρεσε να βρεθεί.
 the-item-could-not-be-found=Το είδος δεν μπόρεσε να βρεθεί.
 the-item-sku-you-requested-is-already-taken=Το SKU είδους που ζητήσατε έχει ήδη χρησιμοποιηθεί.

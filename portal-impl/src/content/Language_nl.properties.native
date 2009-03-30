@@ -3516,6 +3516,7 @@ the-framework-version-could-not-be-found=De framework versie kon niet worden gev
 the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages=De gebruiksvriendelijke URL is toegevoegd aan  <b>{0}</b>  voor de openbare pagina's en aan <b>{1}</b> voor de privé pagina's.
 the-friendly-url-may-conflict-with-another-page=Vriendschappelijke url kan met een andere pagina strijdig zijn.
 the-group-cannot-be-deleted-because-it-is-a-required-system-group=De groep kan niet worden verwijderd omdat het een vereiste systeemgroep is.
+the-group-cannot-be-deleted-because-you-are-accessing-the-group=De groep kan niet worden geschrapt omdat u tot de groep toegang hebt.
 the-group-could-not-be-found=De groep kon niet worden gevonden.
 the-item-could-not-be-found=Het item kon niet worden gevonden.
 the-item-sku-you-requested-is-already-taken=Het item's artikelnummer dat u verzocht is reeds in gebruik.

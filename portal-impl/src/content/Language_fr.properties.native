@@ -3516,6 +3516,7 @@ the-framework-version-could-not-be-found=La version du framework n'a pas pu êtr
 the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages=l'URL simplifié est concaténé à <b>{0}</b> pour les pages publiques et à <b>{1}</b> pour les pages privées. 
 the-friendly-url-may-conflict-with-another-page=La friendly URL peut être en conflit avec une autre page.
 the-group-cannot-be-deleted-because-it-is-a-required-system-group=Le groupe ne peut pas être supprimé parce que c'est un groupe système.
+the-group-cannot-be-deleted-because-you-are-accessing-the-group=Le groupe ne peut pas être supprimé parce que vous accédez au groupe.
 the-group-could-not-be-found=Le groupe n'a pu être trouvé.
 the-item-could-not-be-found=L'élement n'a pu être trouvé.
 the-item-sku-you-requested-is-already-taken=L'article SKU que vous avez demandé est déjà pris.

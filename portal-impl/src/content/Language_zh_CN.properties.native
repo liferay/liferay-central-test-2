@@ -3516,6 +3516,7 @@ the-framework-version-could-not-be-found=找不到框架版本。
 the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages=易用 URL 为公开页面附加于 <b>{0}</b>，为私有页面附加于 <b>{1}</b>。
 the-friendly-url-may-conflict-with-another-page=易用 URL 可能与其他页面冲突。
 the-group-cannot-be-deleted-because-it-is-a-required-system-group=不能删除用户组，因为这是一个必需的系统组。
+the-group-cannot-be-deleted-because-you-are-accessing-the-group=因为您访问小组，小组不可能被删除。
 the-group-could-not-be-found=找不到用户组。
 the-item-could-not-be-found=找不到项目。
 the-item-sku-you-requested-is-already-taken=您请求的 SKU 项目已经被使用。

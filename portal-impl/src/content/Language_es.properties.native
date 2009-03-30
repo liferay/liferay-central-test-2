@@ -3516,6 +3516,7 @@ the-framework-version-could-not-be-found=La versión del marco no podía ser enc
 the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages=La URL amigable se añade al prefijo <b>{0}</b> para las páginas públicas y al prefijo <b>{1}</b> para las páginas privadas.
 the-friendly-url-may-conflict-with-another-page=La URL amigable puede estar en conflicto con la usada por otra página.
 the-group-cannot-be-deleted-because-it-is-a-required-system-group=El grupo no puede ser suprimido porque es un grupo requerido del sistema.
+the-group-cannot-be-deleted-because-you-are-accessing-the-group=El grupo no puede ser suprimido porque usted está teniendo acceso al grupo.
 the-group-could-not-be-found=El grupo no ha sido encontrado.
 the-item-could-not-be-found=El artículo no ha sido encontrado.
 the-item-sku-you-requested-is-already-taken=El SKU de artículo solicitado ya existe.

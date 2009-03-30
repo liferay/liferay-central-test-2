@@ -3516,6 +3516,7 @@ the-framework-version-could-not-be-found=フレームワークのバージョン
 the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages=フレンドリーURLがパブリックページの<b>{0}</b>およびプライベートページの<b>{1}</b>に付け加えられます。
 the-friendly-url-may-conflict-with-another-page=フレンドリーURLが他のページと競合しています。
 the-group-cannot-be-deleted-because-it-is-a-required-system-group=システムグループのため削除できません。
+the-group-cannot-be-deleted-because-you-are-accessing-the-group=グループはグループにアクセスしているので削除することができない。
 the-group-could-not-be-found=グループが見つかりません。
 the-item-could-not-be-found=商品が見つかりません。
 the-item-sku-you-requested-is-already-taken=商品SKUはすでに登録があります。
