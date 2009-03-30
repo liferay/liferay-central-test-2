@@ -508,6 +508,10 @@ public class LayoutAction extends Action {
 
 		String portletId = ParamUtil.getString(request, "p_p_id");
 
+		if (Validator.isNull(portletId)) {
+			return null;
+		}
+
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			companyId, portletId);
 
