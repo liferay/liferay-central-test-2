@@ -509,14 +509,6 @@ public class LayoutAction extends Action {
 		String portletId = ParamUtil.getString(request, "p_p_id");
 
 		if (Validator.isNull(portletId)) {
-			String currentURL = PortalUtil.getCurrentURL(request);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Current URL " + currentURL +
-						" is not a valid portlet request");
-			}
-
 			return null;
 		}
 
