@@ -39,6 +39,10 @@ public class SearchEngineUtil {
 	public static void addDocument(long companyId, Document doc)
 		throws SearchException {
 
+		if (isIndexReadOnly()) {
+			return;
+		}
+
 		_searchPermissionChecker.addPermissionFields(companyId, doc);
 
 		getSearchEngine().getWriter().addDocument(companyId, doc);
@@ -47,11 +51,19 @@ public class SearchEngineUtil {
 	public static void deleteDocument(long companyId, String uid)
 		throws SearchException {
 
+		if (isIndexReadOnly()) {
+			return;
+		}
+
 		getSearchEngine().getWriter().deleteDocument(companyId, uid);
 	}
 
 	public static void deletePortletDocuments(long companyId, String portletId)
 		throws SearchException {
+
+		if (isIndexReadOnly()) {
+			return;
+		}
 
 		getSearchEngine().getWriter().deletePortletDocuments(
 			companyId, portletId);
@@ -142,12 +154,20 @@ public class SearchEngineUtil {
 	public static void updateDocument(long companyId, String uid, Document doc)
 		throws SearchException {
 
+		if (isIndexReadOnly()) {
+			return;
+		}
+
 		_searchPermissionChecker.addPermissionFields(companyId, doc);
 
 		getSearchEngine().getWriter().updateDocument(companyId, uid, doc);
 	}
 
 	public static void updatePermissionFields(long resourceId) {
+		if (isIndexReadOnly()) {
+			return;
+		}
+
 		_searchPermissionChecker.updatePermissionFields(resourceId);
 	}
 
