@@ -102,10 +102,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
-				assertFalse(selenium.isTextPresent(
-						"DLD Setup Test Document.txt"));
 
 			case 2:
 				selenium.click(RuntimeVariables.replace("//span[1]/a"));
@@ -132,10 +128,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
-				assertFalse(selenium.isElementPresent(
-						"link=DLD Setup Test Folder"));
 				selenium.click(RuntimeVariables.replace(
 						"link=Return to Full Page"));
 				selenium.waitForPageToLoad("30000");
@@ -144,8 +136,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.click("//img[@alt='Remove']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
-				assertFalse(selenium.isElementPresent(
-						"//input[@value='Add Folder']"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -192,15 +182,12 @@ public class TearDownTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Save']"));
 				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.isTextPresent(
-						"You have successfully updated the setup."));
 				selenium.click(RuntimeVariables.replace(
 						"link=Return to Full Page"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click("//img[@alt='Remove']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
-				assertFalse(selenium.isElementPresent("link=Configuration"));
 				selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/a"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace("link=Manage Pages"));
@@ -215,8 +202,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 				selenium.click(RuntimeVariables.replace(
 						"//li[2]/ul/li[3]/a/span"));
 				selenium.waitForPageToLoad("30000");
@@ -227,14 +212,8 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 				selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/a"));
 				selenium.waitForPageToLoad("30000");
-				assertFalse(selenium.isElementPresent(
-						"link=Document Library Display Test Page"));
-				assertFalse(selenium.isElementPresent(
-						"link=DLD Setup Test Page"));
 
 			case 100:
 				label = -1;

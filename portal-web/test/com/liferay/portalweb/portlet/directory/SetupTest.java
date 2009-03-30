@@ -85,8 +85,6 @@ public class SetupTest extends BaseTestCase {
 		selenium.type("_125_lastName", RuntimeVariables.replace("TestLast1"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
 		selenium.click(RuntimeVariables.replace("link=Add"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_125_screenName", RuntimeVariables.replace("TestSN2"));
@@ -98,8 +96,6 @@ public class SetupTest extends BaseTestCase {
 		selenium.type("_125_lastName", RuntimeVariables.replace("TestLast2"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
 		selenium.click(RuntimeVariables.replace("link=Organizations"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Add"));
@@ -139,8 +135,6 @@ public class SetupTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a test user group!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
 		selenium.click("//tr[3]/td[4]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
@@ -172,8 +166,6 @@ public class SetupTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Update Associations']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
 		selenium.click(RuntimeVariables.replace("link=Organizations"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_126_keywords", RuntimeVariables.replace("Test"));
@@ -204,8 +196,6 @@ public class SetupTest extends BaseTestCase {
 		selenium.type("_126_name", RuntimeVariables.replace("Test Child"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
 		selenium.click("addressesLink");
 		selenium.typeKeys("_126_addressStreet10",
 			RuntimeVariables.replace("11111 Main Street USA"));
@@ -222,8 +212,6 @@ public class SetupTest extends BaseTestCase {
 		selenium.type("_126_addressCity0", RuntimeVariables.replace("Cerritos"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
 		selenium.click(RuntimeVariables.replace("link=Organizations"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_126_keywords",
@@ -262,8 +250,6 @@ public class SetupTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Update Associations']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
 		selenium.click(RuntimeVariables.replace("link=Back to My Community"));
 		selenium.waitForPageToLoad("30000");
 	}

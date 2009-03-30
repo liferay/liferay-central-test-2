@@ -532,24 +532,10 @@ public class SetupTest extends BaseTestCase {
 
 				selenium.click(
 					"//div[@id='ContentManagement-DocumentLibrary']/p/a");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent(
-									"//input[@value='Add Folder']")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
+				Thread.sleep(2000);
+				selenium.click(RuntimeVariables.replace(
+						"link=AP Setup DL Test Page"));
+				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Add Folder']"));
 				selenium.waitForPageToLoad("30000");
@@ -748,24 +734,10 @@ public class SetupTest extends BaseTestCase {
 
 				selenium.click(
 					"//div[@id='ContentManagement-ImageGallery']/p/a");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent(
-									"//input[@value='Add Folder']")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
+				Thread.sleep(2000);
+				selenium.click(RuntimeVariables.replace(
+						"link=AP Setup IG Test Page"));
+				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Add Folder']"));
 				selenium.waitForPageToLoad("30000");
@@ -1324,8 +1296,6 @@ public class SetupTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 
 			case 2:
 				selenium.click(RuntimeVariables.replace("link=Main"));

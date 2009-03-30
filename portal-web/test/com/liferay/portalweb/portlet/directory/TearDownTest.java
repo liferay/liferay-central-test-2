@@ -81,8 +81,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to deactivate the selected users[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 				selenium.click("link=Advanced \u00bb");
 
 				for (int second = 0;; second++) {
@@ -112,8 +110,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to permanently delete the selected users[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 				selenium.click("link=\u00ab Basic");
 
 			case 2:
@@ -160,8 +156,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Update Associations']"));
 				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 				selenium.click(RuntimeVariables.replace("_126_tabs2TabsBack"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click("_126_allRowIds");
@@ -170,8 +164,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 
 			case 3:
 				selenium.click(RuntimeVariables.replace("link=Organizations"));
@@ -217,8 +209,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Update Associations']"));
 				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 				selenium.click(RuntimeVariables.replace("link=Organizations"));
 				selenium.waitForPageToLoad("30000");
 				selenium.typeKeys("_126_keywords",
@@ -234,8 +224,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 
 			case 4:
 				selenium.click(RuntimeVariables.replace("link=User Groups"));
@@ -256,8 +244,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 
 			case 5:
 				selenium.click(RuntimeVariables.replace(
@@ -304,7 +290,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.click("//img[@alt='Remove']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
-				assertFalse(selenium.isElementPresent("link=Configuration"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -336,12 +321,8 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 				selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/a"));
 				selenium.waitForPageToLoad("30000");
-				assertFalse(selenium.isElementPresent(
-						"link=Directory Test Page"));
 
 			case 100:
 				label = -1;

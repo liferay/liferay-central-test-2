@@ -107,8 +107,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 
 			case 2:
 
@@ -141,14 +139,8 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 
 			case 3:
-				assertFalse(selenium.isElementPresent(
-						"link=AP Setup Test Entry"));
-				assertFalse(selenium.isElementPresent(
-						"link=AP Setup Test Entry 2"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -169,8 +161,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.click("//img[@alt='Remove']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
-				assertFalse(selenium.isElementPresent(
-						"//input[@value='Add Blog Entry']"));
 
 			case 4:
 			case 5:
@@ -257,8 +247,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 
 			case 6:
 
@@ -293,8 +281,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 
 			case 7:
 				assertFalse(selenium.isElementPresent(
@@ -326,8 +312,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 
 			case 8:
 
@@ -350,8 +334,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.click("//img[@alt='Remove']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
-				assertFalse(selenium.isElementPresent(
-						"//input[@value='Add Folder']"));
 
 			case 9:
 			case 10:
@@ -439,8 +421,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 
 			case 11:
 
@@ -475,14 +455,8 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 
 			case 12:
-				assertFalse(selenium.isElementPresent(
-						"link=AP Setup Test Document.txt"));
-				assertFalse(selenium.isElementPresent(
-						"link=AP Setup Test Document 2.txt"));
 				selenium.click(RuntimeVariables.replace("//span[1]/a"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click("//strong/span");
@@ -507,8 +481,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 				selenium.click(RuntimeVariables.replace(
 						"link=Return to Full Page"));
 				selenium.waitForPageToLoad("30000");
@@ -534,8 +506,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.click("//img[@alt='Remove']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
-				assertFalse(selenium.isElementPresent(
-						"//input[@value='Add Folder']"));
 
 			case 14:
 			case 15:
@@ -637,8 +607,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 
 			case 16:
 
@@ -689,12 +657,8 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 
 			case 17:
-				assertFalse(selenium.isTextPresent("AP Setup Test Image"));
-				assertFalse(selenium.isTextPresent("AP Setup Test Image 2"));
 				selenium.click(RuntimeVariables.replace(
 						"link=Return to Full Page"));
 				selenium.waitForPageToLoad("30000");
@@ -720,8 +684,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 
 			case 18:
 
@@ -744,8 +706,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.click("//img[@alt='Remove']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
-				assertFalse(selenium.isElementPresent(
-						"//input[@value='Add Folder']"));
 
 			case 19:
 			case 20:
@@ -776,12 +736,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected web content[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
-				assertFalse(selenium.isElementPresent(
-						"link=AP Setup Test Article"));
-				assertFalse(selenium.isElementPresent(
-						"link=AP Setup Test Article 2"));
 				selenium.click(RuntimeVariables.replace(
 						"link=Back to My Community"));
 				selenium.waitForPageToLoad("30000");
@@ -867,10 +821,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
-				assertFalse(selenium.isElementPresent(
-						"link=AP Setup MB Test Thread"));
 
 			case 21:
 				selenium.click(RuntimeVariables.replace("link=Categories"));
@@ -897,8 +847,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 
 			case 22:
 
@@ -921,8 +869,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.click("//img[@alt='Remove']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
-				assertFalse(selenium.isElementPresent(
-						"//input[@value='Add Category']"));
 
 			case 23:
 			case 24:
@@ -1000,8 +946,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 
 			case 25:
 
@@ -1036,8 +980,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 
 			case 26:
 
@@ -1060,8 +1002,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.click("//img[@alt='Remove']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
-				assertFalse(selenium.isElementPresent(
-						"//img[@alt='Manage Wikis']"));
 
 			case 27:
 			case 28:
@@ -1164,8 +1104,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Save']"));
 				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.isTextPresent(
-						"You have successfully updated the setup."));
 				selenium.click("link=Display Settings");
 
 				for (int second = 0;; second++) {
@@ -1193,8 +1131,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Save']"));
 				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.isTextPresent(
-						"You have successfully updated the setup."));
 				selenium.click(RuntimeVariables.replace(
 						"link=Return to Full Page"));
 				selenium.waitForPageToLoad("30000");
@@ -1218,7 +1154,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.click("//img[@alt='Remove']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
-				assertFalse(selenium.isElementPresent("link=Configuration"));
 
 			case 29:
 			case 30:
@@ -1266,8 +1201,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 
 			case 31:
 
@@ -1290,8 +1223,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 
 			case 32:
 
@@ -1314,8 +1245,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 
 			case 33:
 
@@ -1338,8 +1267,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 
 			case 34:
 
@@ -1362,8 +1289,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 
 			case 35:
 
@@ -1386,8 +1311,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 
 			case 36:
 
@@ -1435,20 +1358,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//div[2]/ul/li[1]/a/span"));
 				selenium.waitForPageToLoad("30000");
-				assertFalse(selenium.isElementPresent(
-						"link=AP Setup Blogs Test Page"));
-				assertFalse(selenium.isElementPresent(
-						"link=AP Setup Bookmark Test Page"));
-				assertFalse(selenium.isElementPresent(
-						"link=AP Setup DL Test Page"));
-				assertFalse(selenium.isElementPresent(
-						"link=AP Setup IG Test Page"));
-				assertFalse(selenium.isElementPresent(
-						"link=AP Setup MB Test Page"));
-				assertFalse(selenium.isElementPresent(
-						"link=AP Setup Wiki Test Page"));
-				assertFalse(selenium.isElementPresent(
-						"link=Asset Publisher Test Page"));
 
 			case 100:
 				label = -1;
