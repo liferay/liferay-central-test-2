@@ -38,7 +38,7 @@ public class AssertVirtualHostingAddressTest extends BaseTestCase {
 		assertEquals("http://www.able.com:8080/", selenium.getLocation());
 		assertTrue(selenium.isTextPresent(
 				"Hello and welcome to the Virtual Hosting Test Community!"));
-		selenium.open("http://localhost:8080/web/guest/home");
+		selenium.open("/web/guest/home");
 		Thread.sleep(5000);
 		selenium.click(RuntimeVariables.replace("my-community-private-pages"));
 		selenium.waitForPageToLoad("30000");

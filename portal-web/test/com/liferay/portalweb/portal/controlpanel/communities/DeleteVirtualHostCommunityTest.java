@@ -48,7 +48,7 @@ public class DeleteVirtualHostCommunityTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.open("http://localhost:8080/web/guest/home");
+				selenium.open("/web/guest/home");
 
 			case 2:
 				Thread.sleep(5000);
