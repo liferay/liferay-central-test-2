@@ -45,7 +45,7 @@
 	</category>
 
 	<category name="com.liferay.portal.action.LayoutAction">
-		<priority value="ERROR" />
+		<priority value="WARN" />
 	</category>
 
 	<category name="com.liferay.portal.bean.BeanLocatorImpl">
