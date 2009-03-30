@@ -292,6 +292,10 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 			_log.debug("Build date " + buildDate);
 		}
 
+		if (Validator.isNull(buildNamespace)) {
+			return;
+		}
+
 		ServiceComponentLocalServiceUtil.initServiceComponent(
 			servletContext, classLoader, buildNamespace, buildNumber,
 			buildDate);
