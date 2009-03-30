@@ -1111,7 +1111,7 @@
 	</library>
 	<library>
 		<file-name>portal/commons-collections.jar</file-name>
-		<version>3.2.0</version>
+		<version>3.2.1</version>
 		<project-name>Commons Collections</project-name>
 		<project-url>http://commons.apache.org/collections</project-url>
 		<licenses>
