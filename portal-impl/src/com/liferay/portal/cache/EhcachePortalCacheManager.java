@@ -35,9 +35,6 @@ import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.ObjectExistsException;
 import net.sf.ehcache.management.ManagementService;
 
-import org.springframework.beans.factory.DisposableBean;
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * <a href="EhcachePortalCacheManager.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,8 +43,7 @@ import org.springframework.beans.factory.InitializingBean;
  * @author Michael C. Han
  *
  */
-public class EhcachePortalCacheManager
-	implements DisposableBean, InitializingBean, PortalCacheManager {
+public class EhcachePortalCacheManager implements PortalCacheManager {
 
 	public void afterPropertiesSet() {
 		URL url = getClass().getResource(PropsUtil.get(_configPropertyKey));

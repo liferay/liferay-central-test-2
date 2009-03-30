@@ -28,7 +28,7 @@
 	<bean id="com.liferay.portal.kernel.bean.RendererUtil.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityUtil">
 		<property name="target" ref="com.liferay.portal.kernel.bean.Renderer" />
 	</bean>
-	<bean id="com.liferay.portal.cache.MultiVMPortalCacheManager" class="com.liferay.portal.cache.EhcachePortalCacheManager">
+	<bean id="com.liferay.portal.cache.MultiVMPortalCacheManager" class="com.liferay.portal.cache.EhcachePortalCacheManager" destroy-method="destroy">
 		<property name="configPropertyKey" value="ehcache.multi.vm.config.location" />
 		<property name="MBeanServer" ref="mbeanServer" />
 	</bean>
@@ -39,7 +39,7 @@
 	<bean id="com.liferay.portal.kernel.cache.MultiVMPoolUtil" class="com.liferay.portal.kernel.cache.MultiVMPoolUtil">
 		<property name="multiVMPool" ref="com.liferay.portal.kernel.cache.MultiVMPool" />
 	</bean>
-	<bean id="com.liferay.portal.cache.SingleVMPortalCacheManager" class="com.liferay.portal.cache.EhcachePortalCacheManager">
+	<bean id="com.liferay.portal.cache.SingleVMPortalCacheManager" class="com.liferay.portal.cache.EhcachePortalCacheManager" destroy-method="destroy">
 		<property name="configPropertyKey" value="ehcache.single.vm.config.location" />
 		<property name="MBeanServer" ref="mbeanServer" />
 	</bean>

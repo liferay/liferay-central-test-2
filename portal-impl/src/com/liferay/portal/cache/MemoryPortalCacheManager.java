@@ -28,16 +28,13 @@ import com.liferay.portal.kernel.cache.PortalCacheManager;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * <a href="MemoryPortalCacheManager.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class MemoryPortalCacheManager
-	implements InitializingBean, PortalCacheManager {
+public class MemoryPortalCacheManager implements PortalCacheManager {
 
 	public void afterPropertiesSet() {
 		_cacheMap = new ConcurrentHashMap<String, PortalCache>(
