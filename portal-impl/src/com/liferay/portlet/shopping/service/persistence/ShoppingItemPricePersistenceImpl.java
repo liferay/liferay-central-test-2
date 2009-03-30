@@ -192,8 +192,6 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		ShoppingItemPriceModelImpl shoppingItemPriceModelImpl = (ShoppingItemPriceModelImpl)shoppingItemPrice;
-
 		EntityCacheUtil.removeResult(ShoppingItemPriceModelImpl.ENTITY_CACHE_ENABLED,
 			ShoppingItemPriceImpl.class, shoppingItemPrice.getPrimaryKey());
 
@@ -256,8 +254,6 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 	public ShoppingItemPrice updateImpl(
 		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice,
 		boolean merge) throws SystemException {
-		boolean isNew = shoppingItemPrice.isNew();
-
 		Session session = null;
 
 		try {
@@ -279,8 +275,6 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(ShoppingItemPriceModelImpl.ENTITY_CACHE_ENABLED,
 			ShoppingItemPriceImpl.class, shoppingItemPrice.getPrimaryKey(),
 			shoppingItemPrice);
-
-		ShoppingItemPriceModelImpl shoppingItemPriceModelImpl = (ShoppingItemPriceModelImpl)shoppingItemPrice;
 
 		return shoppingItemPrice;
 	}

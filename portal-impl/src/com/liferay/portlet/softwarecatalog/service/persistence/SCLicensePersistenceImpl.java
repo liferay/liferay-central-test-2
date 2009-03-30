@@ -220,8 +220,6 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		SCLicenseModelImpl scLicenseModelImpl = (SCLicenseModelImpl)scLicense;
-
 		EntityCacheUtil.removeResult(SCLicenseModelImpl.ENTITY_CACHE_ENABLED,
 			SCLicenseImpl.class, scLicense.getPrimaryKey());
 
@@ -283,8 +281,6 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 	public SCLicense updateImpl(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense,
 		boolean merge) throws SystemException {
-		boolean isNew = scLicense.isNew();
-
 		Session session = null;
 
 		try {
@@ -305,8 +301,6 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(SCLicenseModelImpl.ENTITY_CACHE_ENABLED,
 			SCLicenseImpl.class, scLicense.getPrimaryKey(), scLicense);
-
-		SCLicenseModelImpl scLicenseModelImpl = (SCLicenseModelImpl)scLicense;
 
 		return scLicense;
 	}

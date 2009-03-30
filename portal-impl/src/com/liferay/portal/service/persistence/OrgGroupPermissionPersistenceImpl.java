@@ -207,8 +207,6 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		OrgGroupPermissionModelImpl orgGroupPermissionModelImpl = (OrgGroupPermissionModelImpl)orgGroupPermission;
-
 		EntityCacheUtil.removeResult(OrgGroupPermissionModelImpl.ENTITY_CACHE_ENABLED,
 			OrgGroupPermissionImpl.class, orgGroupPermission.getPrimaryKey());
 
@@ -271,8 +269,6 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 	public OrgGroupPermission updateImpl(
 		com.liferay.portal.model.OrgGroupPermission orgGroupPermission,
 		boolean merge) throws SystemException {
-		boolean isNew = orgGroupPermission.isNew();
-
 		Session session = null;
 
 		try {
@@ -294,8 +290,6 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(OrgGroupPermissionModelImpl.ENTITY_CACHE_ENABLED,
 			OrgGroupPermissionImpl.class, orgGroupPermission.getPrimaryKey(),
 			orgGroupPermission);
-
-		OrgGroupPermissionModelImpl orgGroupPermissionModelImpl = (OrgGroupPermissionModelImpl)orgGroupPermission;
 
 		return orgGroupPermission;
 	}

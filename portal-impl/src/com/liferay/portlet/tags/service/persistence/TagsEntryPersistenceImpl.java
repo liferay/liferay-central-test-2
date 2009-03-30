@@ -220,8 +220,6 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		TagsEntryModelImpl tagsEntryModelImpl = (TagsEntryModelImpl)tagsEntry;
-
 		EntityCacheUtil.removeResult(TagsEntryModelImpl.ENTITY_CACHE_ENABLED,
 			TagsEntryImpl.class, tagsEntry.getPrimaryKey());
 
@@ -283,8 +281,6 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 	public TagsEntry updateImpl(
 		com.liferay.portlet.tags.model.TagsEntry tagsEntry, boolean merge)
 		throws SystemException {
-		boolean isNew = tagsEntry.isNew();
-
 		Session session = null;
 
 		try {
@@ -305,8 +301,6 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(TagsEntryModelImpl.ENTITY_CACHE_ENABLED,
 			TagsEntryImpl.class, tagsEntry.getPrimaryKey(), tagsEntry);
-
-		TagsEntryModelImpl tagsEntryModelImpl = (TagsEntryModelImpl)tagsEntry;
 
 		return tagsEntry;
 	}

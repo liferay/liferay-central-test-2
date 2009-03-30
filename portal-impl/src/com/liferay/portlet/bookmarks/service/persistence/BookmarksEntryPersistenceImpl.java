@@ -212,8 +212,6 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		BookmarksEntryModelImpl bookmarksEntryModelImpl = (BookmarksEntryModelImpl)bookmarksEntry;
-
 		EntityCacheUtil.removeResult(BookmarksEntryModelImpl.ENTITY_CACHE_ENABLED,
 			BookmarksEntryImpl.class, bookmarksEntry.getPrimaryKey());
 
@@ -276,8 +274,6 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 	public BookmarksEntry updateImpl(
 		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry,
 		boolean merge) throws SystemException {
-		boolean isNew = bookmarksEntry.isNew();
-
 		if (Validator.isNull(bookmarksEntry.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
 
@@ -305,8 +301,6 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(BookmarksEntryModelImpl.ENTITY_CACHE_ENABLED,
 			BookmarksEntryImpl.class, bookmarksEntry.getPrimaryKey(),
 			bookmarksEntry);
-
-		BookmarksEntryModelImpl bookmarksEntryModelImpl = (BookmarksEntryModelImpl)bookmarksEntry;
 
 		return bookmarksEntry;
 	}

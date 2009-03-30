@@ -164,8 +164,6 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		ReleaseModelImpl releaseModelImpl = (ReleaseModelImpl)release;
-
 		EntityCacheUtil.removeResult(ReleaseModelImpl.ENTITY_CACHE_ENABLED,
 			ReleaseImpl.class, release.getPrimaryKey());
 
@@ -226,8 +224,6 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl
 
 	public Release updateImpl(com.liferay.portal.model.Release release,
 		boolean merge) throws SystemException {
-		boolean isNew = release.isNew();
-
 		Session session = null;
 
 		try {
@@ -248,8 +244,6 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(ReleaseModelImpl.ENTITY_CACHE_ENABLED,
 			ReleaseImpl.class, release.getPrimaryKey(), release);
-
-		ReleaseModelImpl releaseModelImpl = (ReleaseModelImpl)release;
 
 		return release;
 	}

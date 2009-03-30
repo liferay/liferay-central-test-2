@@ -256,8 +256,6 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		UserGroupRoleModelImpl userGroupRoleModelImpl = (UserGroupRoleModelImpl)userGroupRole;
-
 		EntityCacheUtil.removeResult(UserGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
 			UserGroupRoleImpl.class, userGroupRole.getPrimaryKey());
 
@@ -320,8 +318,6 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 	public UserGroupRole updateImpl(
 		com.liferay.portal.model.UserGroupRole userGroupRole, boolean merge)
 		throws SystemException {
-		boolean isNew = userGroupRole.isNew();
-
 		Session session = null;
 
 		try {
@@ -343,8 +339,6 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(UserGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
 			UserGroupRoleImpl.class, userGroupRole.getPrimaryKey(),
 			userGroupRole);
-
-		UserGroupRoleModelImpl userGroupRoleModelImpl = (UserGroupRoleModelImpl)userGroupRole;
 
 		return userGroupRole;
 	}

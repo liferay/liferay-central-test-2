@@ -181,8 +181,6 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		ContactModelImpl contactModelImpl = (ContactModelImpl)contact;
-
 		EntityCacheUtil.removeResult(ContactModelImpl.ENTITY_CACHE_ENABLED,
 			ContactImpl.class, contact.getPrimaryKey());
 
@@ -243,8 +241,6 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 
 	public Contact updateImpl(com.liferay.portal.model.Contact contact,
 		boolean merge) throws SystemException {
-		boolean isNew = contact.isNew();
-
 		Session session = null;
 
 		try {
@@ -265,8 +261,6 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(ContactModelImpl.ENTITY_CACHE_ENABLED,
 			ContactImpl.class, contact.getPrimaryKey(), contact);
-
-		ContactModelImpl contactModelImpl = (ContactModelImpl)contact;
 
 		return contact;
 	}

@@ -181,8 +181,6 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		ListTypeModelImpl listTypeModelImpl = (ListTypeModelImpl)listType;
-
 		EntityCacheUtil.removeResult(ListTypeModelImpl.ENTITY_CACHE_ENABLED,
 			ListTypeImpl.class, listType.getPrimaryKey());
 
@@ -243,8 +241,6 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 
 	public ListType updateImpl(com.liferay.portal.model.ListType listType,
 		boolean merge) throws SystemException {
-		boolean isNew = listType.isNew();
-
 		Session session = null;
 
 		try {
@@ -265,8 +261,6 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(ListTypeModelImpl.ENTITY_CACHE_ENABLED,
 			ListTypeImpl.class, listType.getPrimaryKey(), listType);
-
-		ListTypeModelImpl listTypeModelImpl = (ListTypeModelImpl)listType;
 
 		return listType;
 	}

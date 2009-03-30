@@ -224,8 +224,6 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		MembershipRequestModelImpl membershipRequestModelImpl = (MembershipRequestModelImpl)membershipRequest;
-
 		EntityCacheUtil.removeResult(MembershipRequestModelImpl.ENTITY_CACHE_ENABLED,
 			MembershipRequestImpl.class, membershipRequest.getPrimaryKey());
 
@@ -288,8 +286,6 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 	public MembershipRequest updateImpl(
 		com.liferay.portal.model.MembershipRequest membershipRequest,
 		boolean merge) throws SystemException {
-		boolean isNew = membershipRequest.isNew();
-
 		Session session = null;
 
 		try {
@@ -311,8 +307,6 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(MembershipRequestModelImpl.ENTITY_CACHE_ENABLED,
 			MembershipRequestImpl.class, membershipRequest.getPrimaryKey(),
 			membershipRequest);
-
-		MembershipRequestModelImpl membershipRequestModelImpl = (MembershipRequestModelImpl)membershipRequest;
 
 		return membershipRequest;
 	}

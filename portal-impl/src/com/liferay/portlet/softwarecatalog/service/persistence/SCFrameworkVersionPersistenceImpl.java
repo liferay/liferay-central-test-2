@@ -245,8 +245,6 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		SCFrameworkVersionModelImpl scFrameworkVersionModelImpl = (SCFrameworkVersionModelImpl)scFrameworkVersion;
-
 		EntityCacheUtil.removeResult(SCFrameworkVersionModelImpl.ENTITY_CACHE_ENABLED,
 			SCFrameworkVersionImpl.class, scFrameworkVersion.getPrimaryKey());
 
@@ -309,8 +307,6 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 	public SCFrameworkVersion updateImpl(
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion,
 		boolean merge) throws SystemException {
-		boolean isNew = scFrameworkVersion.isNew();
-
 		Session session = null;
 
 		try {
@@ -332,8 +328,6 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(SCFrameworkVersionModelImpl.ENTITY_CACHE_ENABLED,
 			SCFrameworkVersionImpl.class, scFrameworkVersion.getPrimaryKey(),
 			scFrameworkVersion);
-
-		SCFrameworkVersionModelImpl scFrameworkVersionModelImpl = (SCFrameworkVersionModelImpl)scFrameworkVersion;
 
 		return scFrameworkVersion;
 	}

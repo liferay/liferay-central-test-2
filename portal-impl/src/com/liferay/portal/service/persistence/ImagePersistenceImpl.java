@@ -179,8 +179,6 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		ImageModelImpl imageModelImpl = (ImageModelImpl)image;
-
 		EntityCacheUtil.removeResult(ImageModelImpl.ENTITY_CACHE_ENABLED,
 			ImageImpl.class, image.getPrimaryKey());
 
@@ -240,8 +238,6 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 
 	public Image updateImpl(com.liferay.portal.model.Image image, boolean merge)
 		throws SystemException {
-		boolean isNew = image.isNew();
-
 		Session session = null;
 
 		try {
@@ -262,8 +258,6 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(ImageModelImpl.ENTITY_CACHE_ENABLED,
 			ImageImpl.class, image.getPrimaryKey(), image);
-
-		ImageModelImpl imageModelImpl = (ImageModelImpl)image;
 
 		return image;
 	}

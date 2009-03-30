@@ -213,8 +213,6 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		RegionModelImpl regionModelImpl = (RegionModelImpl)region;
-
 		EntityCacheUtil.removeResult(RegionModelImpl.ENTITY_CACHE_ENABLED,
 			RegionImpl.class, region.getPrimaryKey());
 
@@ -275,8 +273,6 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 	public Region updateImpl(com.liferay.portal.model.Region region,
 		boolean merge) throws SystemException {
-		boolean isNew = region.isNew();
-
 		Session session = null;
 
 		try {
@@ -297,8 +293,6 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(RegionModelImpl.ENTITY_CACHE_ENABLED,
 			RegionImpl.class, region.getPrimaryKey(), region);
-
-		RegionModelImpl regionModelImpl = (RegionModelImpl)region;
 
 		return region;
 	}

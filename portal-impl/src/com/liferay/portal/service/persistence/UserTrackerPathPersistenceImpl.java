@@ -189,8 +189,6 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		UserTrackerPathModelImpl userTrackerPathModelImpl = (UserTrackerPathModelImpl)userTrackerPath;
-
 		EntityCacheUtil.removeResult(UserTrackerPathModelImpl.ENTITY_CACHE_ENABLED,
 			UserTrackerPathImpl.class, userTrackerPath.getPrimaryKey());
 
@@ -253,8 +251,6 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 	public UserTrackerPath updateImpl(
 		com.liferay.portal.model.UserTrackerPath userTrackerPath, boolean merge)
 		throws SystemException {
-		boolean isNew = userTrackerPath.isNew();
-
 		Session session = null;
 
 		try {
@@ -276,8 +272,6 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(UserTrackerPathModelImpl.ENTITY_CACHE_ENABLED,
 			UserTrackerPathImpl.class, userTrackerPath.getPrimaryKey(),
 			userTrackerPath);
-
-		UserTrackerPathModelImpl userTrackerPathModelImpl = (UserTrackerPathModelImpl)userTrackerPath;
 
 		return userTrackerPath;
 	}

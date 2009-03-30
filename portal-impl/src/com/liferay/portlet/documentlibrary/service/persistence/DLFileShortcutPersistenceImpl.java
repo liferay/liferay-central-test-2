@@ -230,8 +230,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		DLFileShortcutModelImpl dlFileShortcutModelImpl = (DLFileShortcutModelImpl)dlFileShortcut;
-
 		EntityCacheUtil.removeResult(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileShortcutImpl.class, dlFileShortcut.getPrimaryKey());
 
@@ -294,8 +292,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 	public DLFileShortcut updateImpl(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut,
 		boolean merge) throws SystemException {
-		boolean isNew = dlFileShortcut.isNew();
-
 		if (Validator.isNull(dlFileShortcut.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
 
@@ -323,8 +319,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileShortcutImpl.class, dlFileShortcut.getPrimaryKey(),
 			dlFileShortcut);
-
-		DLFileShortcutModelImpl dlFileShortcutModelImpl = (DLFileShortcutModelImpl)dlFileShortcut;
 
 		return dlFileShortcut;
 	}

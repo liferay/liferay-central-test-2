@@ -256,8 +256,6 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		AnnouncementsEntryModelImpl announcementsEntryModelImpl = (AnnouncementsEntryModelImpl)announcementsEntry;
-
 		EntityCacheUtil.removeResult(AnnouncementsEntryModelImpl.ENTITY_CACHE_ENABLED,
 			AnnouncementsEntryImpl.class, announcementsEntry.getPrimaryKey());
 
@@ -320,8 +318,6 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 	public AnnouncementsEntry updateImpl(
 		com.liferay.portlet.announcements.model.AnnouncementsEntry announcementsEntry,
 		boolean merge) throws SystemException {
-		boolean isNew = announcementsEntry.isNew();
-
 		if (Validator.isNull(announcementsEntry.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
 
@@ -349,8 +345,6 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(AnnouncementsEntryModelImpl.ENTITY_CACHE_ENABLED,
 			AnnouncementsEntryImpl.class, announcementsEntry.getPrimaryKey(),
 			announcementsEntry);
-
-		AnnouncementsEntryModelImpl announcementsEntryModelImpl = (AnnouncementsEntryModelImpl)announcementsEntry;
 
 		return announcementsEntry;
 	}

@@ -256,8 +256,6 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		PhoneModelImpl phoneModelImpl = (PhoneModelImpl)phone;
-
 		EntityCacheUtil.removeResult(PhoneModelImpl.ENTITY_CACHE_ENABLED,
 			PhoneImpl.class, phone.getPrimaryKey());
 
@@ -317,8 +315,6 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 	public Phone updateImpl(com.liferay.portal.model.Phone phone, boolean merge)
 		throws SystemException {
-		boolean isNew = phone.isNew();
-
 		Session session = null;
 
 		try {
@@ -339,8 +335,6 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(PhoneModelImpl.ENTITY_CACHE_ENABLED,
 			PhoneImpl.class, phone.getPrimaryKey(), phone);
-
-		PhoneModelImpl phoneModelImpl = (PhoneModelImpl)phone;
 
 		return phone;
 	}

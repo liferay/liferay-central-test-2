@@ -181,8 +181,6 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		OrgLaborModelImpl orgLaborModelImpl = (OrgLaborModelImpl)orgLabor;
-
 		EntityCacheUtil.removeResult(OrgLaborModelImpl.ENTITY_CACHE_ENABLED,
 			OrgLaborImpl.class, orgLabor.getPrimaryKey());
 
@@ -243,8 +241,6 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 
 	public OrgLabor updateImpl(com.liferay.portal.model.OrgLabor orgLabor,
 		boolean merge) throws SystemException {
-		boolean isNew = orgLabor.isNew();
-
 		Session session = null;
 
 		try {
@@ -265,8 +261,6 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(OrgLaborModelImpl.ENTITY_CACHE_ENABLED,
 			OrgLaborImpl.class, orgLabor.getPrimaryKey(), orgLabor);
-
-		OrgLaborModelImpl orgLaborModelImpl = (OrgLaborModelImpl)orgLabor;
 
 		return orgLabor;
 	}

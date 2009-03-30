@@ -164,8 +164,6 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		AccountModelImpl accountModelImpl = (AccountModelImpl)account;
-
 		EntityCacheUtil.removeResult(AccountModelImpl.ENTITY_CACHE_ENABLED,
 			AccountImpl.class, account.getPrimaryKey());
 
@@ -226,8 +224,6 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 
 	public Account updateImpl(com.liferay.portal.model.Account account,
 		boolean merge) throws SystemException {
-		boolean isNew = account.isNew();
-
 		Session session = null;
 
 		try {
@@ -248,8 +244,6 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(AccountModelImpl.ENTITY_CACHE_ENABLED,
 			AccountImpl.class, account.getPrimaryKey(), account);
-
-		AccountModelImpl accountModelImpl = (AccountModelImpl)account;
 
 		return account;
 	}

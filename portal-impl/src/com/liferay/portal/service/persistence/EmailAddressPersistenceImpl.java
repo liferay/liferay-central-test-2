@@ -262,8 +262,6 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		EmailAddressModelImpl emailAddressModelImpl = (EmailAddressModelImpl)emailAddress;
-
 		EntityCacheUtil.removeResult(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
 			EmailAddressImpl.class, emailAddress.getPrimaryKey());
 
@@ -326,8 +324,6 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 	public EmailAddress updateImpl(
 		com.liferay.portal.model.EmailAddress emailAddress, boolean merge)
 		throws SystemException {
-		boolean isNew = emailAddress.isNew();
-
 		Session session = null;
 
 		try {
@@ -348,8 +344,6 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
 			EmailAddressImpl.class, emailAddress.getPrimaryKey(), emailAddress);
-
-		EmailAddressModelImpl emailAddressModelImpl = (EmailAddressModelImpl)emailAddress;
 
 		return emailAddress;
 	}

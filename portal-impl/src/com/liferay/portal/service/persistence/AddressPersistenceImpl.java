@@ -282,8 +282,6 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		AddressModelImpl addressModelImpl = (AddressModelImpl)address;
-
 		EntityCacheUtil.removeResult(AddressModelImpl.ENTITY_CACHE_ENABLED,
 			AddressImpl.class, address.getPrimaryKey());
 
@@ -344,8 +342,6 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 
 	public Address updateImpl(com.liferay.portal.model.Address address,
 		boolean merge) throws SystemException {
-		boolean isNew = address.isNew();
-
 		Session session = null;
 
 		try {
@@ -366,8 +362,6 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(AddressModelImpl.ENTITY_CACHE_ENABLED,
 			AddressImpl.class, address.getPrimaryKey(), address);
-
-		AddressModelImpl addressModelImpl = (AddressModelImpl)address;
 
 		return address;
 	}

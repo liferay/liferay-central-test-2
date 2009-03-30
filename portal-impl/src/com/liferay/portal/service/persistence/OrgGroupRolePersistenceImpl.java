@@ -200,8 +200,6 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		OrgGroupRoleModelImpl orgGroupRoleModelImpl = (OrgGroupRoleModelImpl)orgGroupRole;
-
 		EntityCacheUtil.removeResult(OrgGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
 			OrgGroupRoleImpl.class, orgGroupRole.getPrimaryKey());
 
@@ -264,8 +262,6 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 	public OrgGroupRole updateImpl(
 		com.liferay.portal.model.OrgGroupRole orgGroupRole, boolean merge)
 		throws SystemException {
-		boolean isNew = orgGroupRole.isNew();
-
 		Session session = null;
 
 		try {
@@ -286,8 +282,6 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(OrgGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
 			OrgGroupRoleImpl.class, orgGroupRole.getPrimaryKey(), orgGroupRole);
-
-		OrgGroupRoleModelImpl orgGroupRoleModelImpl = (OrgGroupRoleModelImpl)orgGroupRole;
 
 		return orgGroupRole;
 	}

@@ -189,8 +189,6 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		PasswordTrackerModelImpl passwordTrackerModelImpl = (PasswordTrackerModelImpl)passwordTracker;
-
 		EntityCacheUtil.removeResult(PasswordTrackerModelImpl.ENTITY_CACHE_ENABLED,
 			PasswordTrackerImpl.class, passwordTracker.getPrimaryKey());
 
@@ -253,8 +251,6 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 	public PasswordTracker updateImpl(
 		com.liferay.portal.model.PasswordTracker passwordTracker, boolean merge)
 		throws SystemException {
-		boolean isNew = passwordTracker.isNew();
-
 		Session session = null;
 
 		try {
@@ -276,8 +272,6 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 		EntityCacheUtil.putResult(PasswordTrackerModelImpl.ENTITY_CACHE_ENABLED,
 			PasswordTrackerImpl.class, passwordTracker.getPrimaryKey(),
 			passwordTracker);
-
-		PasswordTrackerModelImpl passwordTrackerModelImpl = (PasswordTrackerModelImpl)passwordTracker;
 
 		return passwordTracker;
 	}

@@ -198,8 +198,6 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		MBThreadModelImpl mbThreadModelImpl = (MBThreadModelImpl)mbThread;
-
 		EntityCacheUtil.removeResult(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
 			MBThreadImpl.class, mbThread.getPrimaryKey());
 
@@ -261,8 +259,6 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 	public MBThread updateImpl(
 		com.liferay.portlet.messageboards.model.MBThread mbThread, boolean merge)
 		throws SystemException {
-		boolean isNew = mbThread.isNew();
-
 		Session session = null;
 
 		try {
@@ -283,8 +279,6 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
 			MBThreadImpl.class, mbThread.getPrimaryKey(), mbThread);
-
-		MBThreadModelImpl mbThreadModelImpl = (MBThreadModelImpl)mbThread;
 
 		return mbThread;
 	}

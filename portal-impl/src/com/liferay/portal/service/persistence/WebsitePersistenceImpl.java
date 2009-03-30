@@ -258,8 +258,6 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		WebsiteModelImpl websiteModelImpl = (WebsiteModelImpl)website;
-
 		EntityCacheUtil.removeResult(WebsiteModelImpl.ENTITY_CACHE_ENABLED,
 			WebsiteImpl.class, website.getPrimaryKey());
 
@@ -320,8 +318,6 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 	public Website updateImpl(com.liferay.portal.model.Website website,
 		boolean merge) throws SystemException {
-		boolean isNew = website.isNew();
-
 		Session session = null;
 
 		try {
@@ -342,8 +338,6 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 
 		EntityCacheUtil.putResult(WebsiteModelImpl.ENTITY_CACHE_ENABLED,
 			WebsiteImpl.class, website.getPrimaryKey(), website);
-
-		WebsiteModelImpl websiteModelImpl = (WebsiteModelImpl)website;
 
 		return website;
 	}
