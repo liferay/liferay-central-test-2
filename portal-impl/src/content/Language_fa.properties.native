@@ -322,6 +322,7 @@ allow-strangers-to-create-accounts=به کاربران ناشناس اجازه �
 allow-users-to-add-x-to-any-website=Allow users to add <b>{0}</b> to any website.
 allow-users-to-add-x-to-facebook=Allow users to add <b>{0}</b> to Facebook.
 allow-users-to-add-x-to-igoogle=Allow users to add <b>{0}</b> to iGoogle.
+allow-users-to-add-x-to-netvibes-pages=Allow users to add <b>{0}</b> to Netvibes pages.
 allow-users-to-automatically-login=به کاربران اجازه ورود خودکار داده شود؟
 allow-users-to-share-x-with-friends=Allow users to share <b>{0}</b> with friends.
 alpha=آلفا

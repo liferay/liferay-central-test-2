@@ -525,6 +525,7 @@ allow-strangers-to-create-accounts=Povoliť cudzincom vytváranie účtov?
 allow-users-to-add-x-to-any-website=Povoliť používateľom pridať <b>{0}</b> na akékoľvek webové sídlo.
 allow-users-to-add-x-to-facebook=Povoľte používateľom pridať <b>{0}</b> na Facebook.
 allow-users-to-add-x-to-igoogle=Allow users to add <b>{0}</b> to iGoogle.
+allow-users-to-add-x-to-netvibes-pages=Allow users to add <b>{0}</b> to Netvibes pages.
 allow-users-to-automatically-login=Povoliť používateľom automatické prihlasovanie?
 allow-users-to-request-forgotten-passwords=Povoliť používateľom vyžiadanie zabudnutého hesla?
 allow-users-to-share-x-with-friends=Povoľte používateľa zdieľať <b>{0}</b> s priateľmi.

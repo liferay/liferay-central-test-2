@@ -159,6 +159,7 @@ allow-strangers-to-create-accounts=Může si neznámý uživatel sám vytvořit 
 allow-users-to-add-x-to-any-website=Povolit uživatelům umístit portlet <b>{0}</b> na libovolný web.
 allow-users-to-add-x-to-facebook=Povolit uživatelům umístit portlet <b>{0}</b> na Facebook.
 allow-users-to-add-x-to-igoogle=Allow users to add <b>{0}</b> to iGoogle.
+allow-users-to-add-x-to-netvibes-pages=Allow users to add <b>{0}</b> to Netvibes pages.
 allow-users-to-automatically-login=Mohou být návštěvníci automaticky zalogování?
 allow-users-to-share-x-with-friends=Povolit uživatelům sdílet <b>{0}</b> s přáteli.
 alpha=Alfa
