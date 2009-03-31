@@ -24,7 +24,12 @@ package com.liferay.portal.security.permission;
 
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
+import com.liferay.portal.kernel.util.InitialThreadLocal;
+import com.liferay.portal.kernel.util.LRUMap;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.util.PropsValues;
+
+import java.util.Map;
 
 /**
  * <a href="PermissionCacheUtil.java.html"><b><i>View Source</i></b></a>
@@ -38,29 +43,53 @@ public class PermissionCacheUtil {
 	public static final String CACHE_NAME = PermissionCacheUtil.class.getName();
 
 	public static void clearCache() {
+		Map<String, Object> localCache = _localCache.get();
+
+		localCache.clear();
+
 		_cache.removeAll();
 	}
 
 	public static PermissionCheckerBag getBag(long userId, long groupId) {
+		Map<String, Object> localCache = _localCache.get();
+
 		String key = _encodeKey(userId, groupId);
 
-		return (PermissionCheckerBag)MultiVMPoolUtil.get(_cache, key);
+		PermissionCheckerBag bag = (PermissionCheckerBag)localCache.get(key);
+
+		if (bag == null) {
+			bag = (PermissionCheckerBag)MultiVMPoolUtil.get(_cache, key);
+		}
+
+		return bag;
 	}
 
 	public static Boolean getPermission(
 		long userId, long groupId, String name, String primKey,
 		String actionId) {
 
+		Map<String, Object> localCache = _localCache.get();
+
 		String key = _encodeKey(userId, groupId, name, primKey, actionId);
 
-		return (Boolean)MultiVMPoolUtil.get(_cache, key);
+		Boolean value = (Boolean)localCache.get(key);
+
+		if (value == null) {
+			value = (Boolean)MultiVMPoolUtil.get(_cache, key);
+		}
+
+		return value;
 	}
 
 	public static PermissionCheckerBag putBag(
 		long userId, long groupId, PermissionCheckerBag bag) {
 
 		if (bag != null) {
+			Map<String, Object> localCache = _localCache.get();
+
 			String key = _encodeKey(userId, groupId);
+
+			localCache.put(key, bag);
 
 			MultiVMPoolUtil.put(_cache, key, bag);
 		}
@@ -73,7 +102,11 @@ public class PermissionCacheUtil {
 		Boolean value) {
 
 		if (value != null) {
+			Map<String, Object> localCache = _localCache.get();
+
 			String key = _encodeKey(userId, groupId, name, primKey, actionId);
+
+			localCache.put(key, value);
 
 			MultiVMPoolUtil.put(_cache, key, value);
 		}
@@ -113,6 +146,10 @@ public class PermissionCacheUtil {
 
 		return sb.toString();
 	}
+
+	private static ThreadLocal<Map<String, Object>> _localCache =
+		new InitialThreadLocal<Map<String, Object>>(new LRUMap<String, Object>(
+			PropsValues.PERMISSIONS_THREAD_LOCAL_CACHE_MAX_SIZE));
 
 	private static PortalCache _cache = MultiVMPoolUtil.getCache(
 		CACHE_NAME, true);

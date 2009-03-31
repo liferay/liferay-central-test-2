@@ -942,6 +942,8 @@ public interface PropsKeys {
 
 	public static final String PERMISSIONS_LIST_FILTER = "permissions.list.filter";
 
+	public static final String PERMISSIONS_THREAD_LOCAL_CACHE_MAX_SIZE = "permissions.thread.local.cache.max.size";
+
 	public static final String PERMISSIONS_USER_CHECK_ALGORITHM = "permissions.user.check.algorithm";
 
 	public static final String PLUGIN_NOTIFICATIONS_ENABLED = "plugin.notifications.enabled";

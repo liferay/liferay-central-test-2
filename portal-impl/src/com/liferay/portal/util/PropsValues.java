@@ -971,6 +971,10 @@ public class PropsValues {
 	public static final String PERMISSIONS_CHECKER =
 		PropsUtil.get(PropsKeys.PERMISSIONS_CHECKER);
 
+	public static final int PERMISSIONS_THREAD_LOCAL_CACHE_MAX_SIZE =
+		GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.PERMISSIONS_THREAD_LOCAL_CACHE_MAX_SIZE));
+
 	public static final int PERMISSIONS_USER_CHECK_ALGORITHM =
 		GetterUtil.getInteger(
 			PropsUtil.get(PropsKeys.PERMISSIONS_USER_CHECK_ALGORITHM));
