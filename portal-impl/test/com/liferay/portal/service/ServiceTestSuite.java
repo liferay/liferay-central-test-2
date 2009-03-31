@@ -118,6 +118,7 @@ public class ServiceTestSuite extends TestSuite {
 
 		testSuite.addTestSuite(CounterServiceTest.class);
 
+		testSuite.addTestSuite(ResourceLocalServiceTest.class);
 		testSuite.addTestSuite(UserServiceTest.class);
 
 		testSuite.addTestSuite(BookmarksFolderServiceTest.class);
