@@ -4,7 +4,7 @@ Liferay.PortletSharing = {
 
 		portletURL.setPortletId(133);
 
-		portletURL.setParameter("netvibesURL",netvibesURL);
+		portletURL.setParameter("netvibesURL", netvibesURL);
 
 		new Expanse.Popup(
 			{
