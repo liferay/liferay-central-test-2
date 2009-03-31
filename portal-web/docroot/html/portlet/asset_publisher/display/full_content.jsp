@@ -233,6 +233,8 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			<%
 			IGImage image = IGImageLocalServiceUtil.getImage(classPK);
 
+			TagsAssetLocalServiceUtil.incrementViewCounter(className, image.getImageId());
+
 			PortletURL viewImageURL = new PortletURLImpl(request, PortletKeys.IMAGE_GALLERY, plid, PortletRequest.RENDER_PHASE);
 
 			viewImageURL.setWindowState(WindowState.MAXIMIZED);
