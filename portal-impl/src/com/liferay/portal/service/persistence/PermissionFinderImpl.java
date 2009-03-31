@@ -98,8 +98,7 @@ public class PermissionFinderImpl
 	public static final FinderPath FINDER_PATH_COUNT_BY_ROLES_PERMISSIONS =
 		new FinderPath(
 			PermissionModelImpl.ENTITY_CACHE_ENABLED,
-			PermissionModelImpl.FINDER_CACHE_ENABLED,
-			PermissionPersistenceImpl.FINDER_CLASS_NAME_LIST,
+			PermissionModelImpl.FINDER_CACHE_ENABLED, "Roles_Permissions",
 			"customCountByRolesPermissions",
 			new String[] {
 				java.util.List.class.getName(), java.util.List.class.getName()
