@@ -294,8 +294,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		Group group = groupPersistence.findByPrimaryKey(groupId);
 
 		if (PortalUtil.isSystemGroup(group.getName())) {
-			throw new RequiredGroupException(
-				"{groupId=" + group.getGroupId() + "}");
+			throw new RequiredGroupException(String.valueOf(groupId));
 		}
 
 		// Layout sets
