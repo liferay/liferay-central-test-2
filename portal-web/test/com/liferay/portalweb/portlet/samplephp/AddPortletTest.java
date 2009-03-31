@@ -40,8 +40,7 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id=\"Undefined-SamplePHP\"]")) {
+				if (selenium.isElementPresent("//div[@id='Sample-SamplePHP']")) {
 					break;
 				}
 			}
@@ -51,7 +50,7 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id=\"Undefined-SamplePHP\"]/p/a");
+		selenium.click("//div[@id='Sample-SamplePHP']/p/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
