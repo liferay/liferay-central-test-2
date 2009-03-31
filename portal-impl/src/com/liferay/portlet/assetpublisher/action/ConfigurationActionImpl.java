@@ -328,6 +328,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			actionRequest, "enableCommentRatings");
 		boolean enableRatings = ParamUtil.getBoolean(
 			actionRequest, "enableRatings");
+		String medatadaFields = ParamUtil.getString(
+			actionRequest, "metadataFields");
 
 		preferences.setValue("selection-style", "manual");
 		preferences.setValue("display-style", displayStyle);
@@ -343,6 +345,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		preferences.setValue(
 			"enable-comment-ratings", String.valueOf(enableCommentRatings));
 		preferences.setValue("enable-ratings", String.valueOf(enableRatings));
+		preferences.setValue("metadata-fields", medatadaFields);
 	}
 
 }
