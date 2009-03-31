@@ -66,6 +66,7 @@ import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
+import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
@@ -763,6 +764,10 @@ public class MainServlet extends ActionServlet {
 
 			EntityCacheUtil.clearLocalCache();
 			FinderCacheUtil.clearLocalCache();
+
+			// Clear permission local cache
+
+			PermissionCacheUtil.clearLocalCache();
 		}
 	}
 

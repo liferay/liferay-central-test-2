@@ -50,6 +50,12 @@ public class PermissionCacheUtil {
 		_cache.removeAll();
 	}
 
+	public static void clearLocalCache() {
+		Map<String, Object> localCache = _localCache.get();
+
+		localCache.clear();
+	}
+
 	public static PermissionCheckerBag getBag(long userId, long groupId) {
 		Map<String, Object> localCache = _localCache.get();
 
