@@ -92,9 +92,6 @@ public class SetupTest extends BaseTestCase {
 			RuntimeVariables.replace("PD Setup Choice C"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertTrue(selenium.isElementPresent("link=PD Setup Test Question"));
 		selenium.click(RuntimeVariables.replace("link=Back to My Community"));
 		selenium.waitForPageToLoad("30000");
 	}

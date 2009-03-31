@@ -216,8 +216,6 @@ public class SetupTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Save and Approve']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -354,6 +352,5 @@ public class SetupTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=WCS Setup Test Article"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Displaying Content"));
 	}
 }

@@ -162,12 +162,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected web content[\\s\\S]$"));
-				assertFalse(selenium.isElementPresent(
-						"link=Test Journal Article"));
-				assertFalse(selenium.isElementPresent(
-						"link=Test Journal Article 2"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 				selenium.click(RuntimeVariables.replace("link=Web Content"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace("link=Templates"));
@@ -213,9 +207,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected templates[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent("No templates were found."));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -276,9 +267,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected structures[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent("No structures were found."));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {

@@ -91,8 +91,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 
 			case 2:
 
@@ -129,14 +127,8 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 
 			case 3:
-				assertFalse(selenium.isElementPresent("link=Test Poll Question"));
-				assertFalse(selenium.isElementPresent(
-						"link=Edited Test Question 2"));
-
 			case 100:
 				label = -1;
 			}

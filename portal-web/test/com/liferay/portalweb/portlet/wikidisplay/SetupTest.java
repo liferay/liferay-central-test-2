@@ -239,11 +239,6 @@ public class SetupTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Save']"));
 				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
-				assertTrue(selenium.isTextPresent("WD Setup Wiki Test Article"));
-				assertTrue(selenium.isTextPresent(
-						"This is a WD wiki test article!"));
 
 			case 100:
 				label = -1;

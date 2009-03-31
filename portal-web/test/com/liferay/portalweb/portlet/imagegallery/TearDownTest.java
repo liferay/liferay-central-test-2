@@ -91,8 +91,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 
 			case 2:
 
@@ -127,13 +125,8 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 
 			case 3:
-				assertFalse(selenium.isTextPresent("This is a test folder!"));
-				assertFalse(selenium.isTextPresent(
-						"This is a second test folder."));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -154,8 +147,6 @@ public class TearDownTest extends BaseTestCase {
 				selenium.click("//img[@alt='Remove']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
-				assertFalse(selenium.isElementPresent(
-						"//input[@value='Add Folder']"));
 				selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/a"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace("link=Manage Pages"));
@@ -167,12 +158,8 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 				selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/a"));
 				selenium.waitForPageToLoad("30000");
-				assertFalse(selenium.isElementPresent(
-						"link=Image Gallery Test Page"));
 
 			case 100:
 				label = -1;

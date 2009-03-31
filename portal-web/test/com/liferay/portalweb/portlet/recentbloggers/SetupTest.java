@@ -265,8 +265,5 @@ public class SetupTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("_33_saveButton"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=RB Test Entry"));
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
 	}
 }

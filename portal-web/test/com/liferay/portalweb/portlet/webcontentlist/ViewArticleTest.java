@@ -33,15 +33,13 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class ViewArticleTest extends BaseTestCase {
 	public void testViewArticle() throws Exception {
-		assertTrue(selenium.isElementPresent("link=WC Setup Test Article"));
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=WC Setup Test Article")) {
+				if (selenium.isElementPresent("link=Web Content List Test Page")) {
 					break;
 				}
 			}
@@ -51,6 +49,10 @@ public class ViewArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace(
+				"link=Web Content List Test Page"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=WC Setup Test Article"));
 		selenium.click(RuntimeVariables.replace("link=WC Setup Test Article"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("This is a WC setup test article!"));
