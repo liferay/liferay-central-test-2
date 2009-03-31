@@ -294,7 +294,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		Group group = groupPersistence.findByPrimaryKey(groupId);
 
 		if (PortalUtil.isSystemGroup(group.getName())) {
-			throw new RequiredGroupException();
+			throw new RequiredGroupException(
+				"{groupId=" + group.getGroupId() + "}");
 		}
 
 		// Layout sets
@@ -720,7 +721,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		if (PortalUtil.isSystemGroup(group.getName()) &&
 			!group.getName().equals(name)) {
 
-			throw new RequiredGroupException();
+			throw new RequiredGroupException(
+				"{groupId=" + group.getGroupId() + "}");
 		}
 
 		validateFriendlyURL(

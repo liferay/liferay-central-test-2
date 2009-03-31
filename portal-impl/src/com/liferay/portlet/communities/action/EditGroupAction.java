@@ -134,7 +134,7 @@ public class EditGroupAction extends PortletAction {
 		if ((groupId == themeDisplay.getDoAsGroupId()) ||
 			(groupId == themeDisplay.getScopeGroupId())) {
 
-			throw new RequiredGroupException();
+			throw new RequiredGroupException("{groupId=" + groupId + "}");
 		}
 
 		GroupServiceUtil.deleteGroup(groupId);
