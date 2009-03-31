@@ -54,7 +54,22 @@ public class RatingsStatsLocalServiceImpl
 		stats.setTotalScore(0.0);
 		stats.setAverageScore(0.0);
 
-		ratingsStatsPersistence.update(stats, false);
+		try {
+			ratingsStatsPersistence.update(stats, false);
+		}
+		catch (SystemException se) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Add failed, fetch {classNameId=" + classNameId +
+						", classPK=" + classPK + "}");
+			}
+
+			stats = ratingsStatsPersistence.fetchByC_C(classNameId, classPK);
+
+			if (stats == null) {
+				throw se;
+			}
+		}
 
 		return stats;
 	}
