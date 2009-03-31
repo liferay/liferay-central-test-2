@@ -137,7 +137,23 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			permission.setActionId(actionId);
 			permission.setResourceId(resourceId);
 
-			permissionPersistence.update(permission, false);
+			try {
+				permissionPersistence.update(permission, false);
+			}
+			catch (SystemException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Add failed, fetch {actionId=" + actionId +
+							", resourceId=" + resourceId + "}");
+				}
+
+				permission = permissionPersistence.fetchByA_R(
+					actionId, resourceId, false);
+
+				if (permission == null) {
+					throw se;
+				}
+			}
 
 			permissions.add(permission);
 		}
