@@ -32,8 +32,6 @@ results = AnnouncementsEntryLocalServiceUtil.getEntries(user.getUserId(), scopes
 searchContainer.setResults(results);
 
 for (int i = 0; i < results.size(); i++) {
-	hasResults = true;
-
 	AnnouncementsEntry entry = results.get(i);
 
 	boolean readEntry = false;
