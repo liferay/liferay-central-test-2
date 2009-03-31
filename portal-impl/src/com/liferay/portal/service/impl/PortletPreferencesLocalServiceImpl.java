@@ -88,7 +88,7 @@ public class PortletPreferencesLocalServiceImpl
 			}
 
 			portletPreferences = portletPreferencesPersistence.fetchByO_O_P_P(
-				ownerId, ownerType, plid, portletId);
+				ownerId, ownerType, plid, portletId, false);
 
 			if (portletPreferences == null) {
 				throw se;

@@ -1122,6 +1122,24 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 			</#list>
 
 			) throws SystemException {
+				return fetchBy${finder.name}(
+
+				<#list finderColsList as finderCol>
+					${finderCol.name},
+				</#list>
+
+				true);
+			}
+
+			public ${entity.name} fetchBy${finder.name}(
+
+			<#list finderColsList as finderCol>
+				${finderCol.type} ${finderCol.name}
+
+				,
+			</#list>
+
+			boolean retrieveFromCache) throws SystemException {
 				Object[] finderArgs = new Object[] {
 					<#list finderColsList as finderCol>
 						<#if finderCol.isPrimitiveType()>
@@ -1144,7 +1162,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					</#list>
 				};
 
-				Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_${finder.name?upper_case}, finderArgs, this);
+				Object result = null;
+
+				if (retrieveFromCache) {
+					result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_${finder.name?upper_case}, finderArgs, this);
+				}
 
 				if (result == null) {
 					Session session = null;

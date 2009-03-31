@@ -255,7 +255,8 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 							primKey + "}");
 				}
 
-				resource = resourcePersistence.fetchByC_P(codeId, primKey);
+				resource = resourcePersistence.fetchByC_P(
+					codeId, primKey, false);
 
 				if (resource == null) {
 					throw se;

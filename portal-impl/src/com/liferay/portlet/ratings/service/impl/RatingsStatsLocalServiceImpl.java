@@ -64,7 +64,8 @@ public class RatingsStatsLocalServiceImpl
 						", classPK=" + classPK + "}");
 			}
 
-			stats = ratingsStatsPersistence.fetchByC_C(classNameId, classPK);
+			stats = ratingsStatsPersistence.fetchByC_C(
+				classNameId, classPK, false);
 
 			if (stats == null) {
 				throw se;

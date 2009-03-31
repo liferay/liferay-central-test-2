@@ -60,7 +60,8 @@ public class MBStatsUserLocalServiceImpl
 						userId + "}");
 			}
 
-			statsUser = mbStatsUserPersistence.fetchByG_U(groupId, userId);
+			statsUser = mbStatsUserPersistence.fetchByG_U(
+				groupId, userId, false);
 
 			if (statsUser == null) {
 				throw se;
