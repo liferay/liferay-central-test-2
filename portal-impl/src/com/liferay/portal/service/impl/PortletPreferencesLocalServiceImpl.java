@@ -24,6 +24,8 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
@@ -74,7 +76,24 @@ public class PortletPreferencesLocalServiceImpl
 
 		portletPreferences.setPreferences(defaultPreferences);
 
-		portletPreferencesPersistence.update(portletPreferences, false);
+		try {
+			portletPreferencesPersistence.update(portletPreferences, false);
+		}
+		catch (SystemException se) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Add failed, fetch {ownerId=" + ownerId + ", ownerType=" +
+						ownerType + ", plid=" + plid + ", portletId=" +
+							portletId + "}");
+			}
+
+			portletPreferences = portletPreferencesPersistence.fetchByO_O_P_P(
+				ownerId, ownerType, plid, portletId);
+
+			if (portletPreferences == null) {
+				throw se;
+			}
+		}
 
 		return portletPreferences;
 	}
@@ -269,5 +288,8 @@ public class PortletPreferencesLocalServiceImpl
 
 		return sb.toString();
 	}
+
+	private static Log _log =
+		LogFactoryUtil.getLog(PortletPreferencesLocalServiceImpl.class);
 
 }
