@@ -135,7 +135,9 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 	<liferay-ui:error exception="<%= RequiredGroupException.class %>">
 
 		<%
-		long groupId = GetterUtil.getLong(errorException.getMessage());
+		RequiredGroupException rge = (RequiredGroupException)errorException;
+
+		long groupId = GetterUtil.getLong(rge.getMessage());
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 		%>
