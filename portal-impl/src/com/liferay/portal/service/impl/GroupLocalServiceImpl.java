@@ -721,8 +721,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		if (PortalUtil.isSystemGroup(group.getName()) &&
 			!group.getName().equals(name)) {
 
-			throw new RequiredGroupException(
-				"{groupId=" + group.getGroupId() + "}");
+			throw new RequiredGroupException();
 		}
 
 		validateFriendlyURL(
