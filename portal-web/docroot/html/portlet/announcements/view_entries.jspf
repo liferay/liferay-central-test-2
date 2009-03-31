@@ -82,6 +82,8 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 List<AnnouncementsEntry> results = null;
 int total = 0;
 
+boolean hasResults = false;
+
 int flagValue = AnnouncementsFlagImpl.NOT_HIDDEN;
 %>
 
@@ -98,5 +100,15 @@ flagValue = AnnouncementsFlagImpl.HIDDEN;
 <div class="read-entries">
 	<%@ include file="/html/portlet/announcements/entry_iterator.jspf" %>
 </div>
+
+<c:if test="<%= !hasResults && portletName.equals(PortletKeys.ALERTS) && !PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.ANNOUNCEMENTS, ActionKeys.ADD_ENTRY) %>">
+	<script>
+		jQuery(
+			function() {
+				jQuery('#p_p_id<portlet:namespace />').hide();
+			}
+		);
+	</script>
+</c:if>
 
 <liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="article" />
