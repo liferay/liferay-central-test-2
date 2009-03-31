@@ -74,21 +74,6 @@
 	<script src="<%= HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, themeDisplay.getPathJavaScript() + "/liferay/portlet_css.js", javaScriptLastModified)) %>" type="text/javascript"></script>
 </c:if>
 
-<c:if test="<%= BrowserSnifferUtil.isIe(request) && (BrowserSnifferUtil.getMajorVersion(request) < 7) %>">
-
-	<%
-	long javaScriptLastModified = ServletContextUtil.getLastModified(application, "/html/js", true);
-	%>
-
-	<script src="<%= HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, themeDisplay.getPathJavaScript() + "/jquery/DD_belatedPNG.js",
-	javaScriptLastModified)) %>" type="text/javascript"></script>
-
-	<script type="text/javascript">
-		jQuery(document).ready(function() {
-			jQuery('img,.png').DD_belatedPNG();
-		});
-	</script>
-</c:if>
 <%-- Portlet CSS and JavaScript References --%>
 
 <%
