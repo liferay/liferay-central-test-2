@@ -40,4 +40,13 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 }
 %>
 
-<iframe border="<%= border %>" bordercolor="<%= bordercolor %>" frameborder="<%= frameborder %>" height="<%= iframeHeight %>" hspace="<%= hspace %>" name="<portlet:namespace />iframe" scrolling="<%= scrolling %>" src="<%= iframeSrc %>" vspace="<%= vspace %>" width="<%= width %>"></iframe>
+<c:choose>
+	<c:when test="<%= auth && Validator.isNull(userName) && !themeDisplay.isSignedIn() %>">
+		<div class="portlet-msg-info">
+			<a href="<%= themeDisplay.getURLSignIn() %>" target="_top"><liferay-ui:message key="please-sign-in-to-access-this-application" /></a>
+		</div>
+	</c:when>
+	<c:otherwise>
+		<iframe border="<%= border %>" bordercolor="<%= bordercolor %>" frameborder="<%= frameborder %>" height="<%= iframeHeight %>" hspace="<%= hspace %>" name="<portlet:namespace />iframe" scrolling="<%= scrolling %>" src="<%= iframeSrc %>" vspace="<%= vspace %>" width="<%= width %>"></iframe>
+	</c:otherwise>
+</c:choose>
