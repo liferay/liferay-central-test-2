@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.PortletModeFactory;
 import com.liferay.portal.kernel.portlet.WindowStateFactory;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -157,19 +156,17 @@ public class ActionURLTagUtil {
 				portletURL.setParameters(params);
 			}
 
-			String portletURLString = HtmlUtil.escape(portletURL.toString());
-
 			if (Validator.isNotNull(var)) {
-				pageContext.setAttribute(var, portletURLString);
+				pageContext.setAttribute(var, portletURL.toString());
 			}
 			else if (Validator.isNotNull(varImpl)) {
 				pageContext.setAttribute(varImpl, portletURL);
 			}
 			else if (writeOutput) {
-				pageContext.getOut().print(portletURLString);
+				pageContext.getOut().print(portletURL.toString());
 			}
 
-			return portletURLString;
+			return portletURL.toString();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
