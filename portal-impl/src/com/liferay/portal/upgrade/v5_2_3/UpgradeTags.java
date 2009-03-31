@@ -22,7 +22,6 @@
 
 package com.liferay.portal.upgrade.v5_2_3;
 
-import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.UpgradeException;
@@ -35,9 +34,6 @@ import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.tags.model.impl.TagsAssetImpl;
 import com.liferay.portlet.tags.model.impl.TagsPropertyImpl;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 
 /**
  * <a href="UpgradeTags.java.html"><b><i>View Source</i></b></a>
@@ -75,7 +71,7 @@ public class UpgradeTags extends UpgradeProcess {
 			upgradeTable.updateTable();
 		}
 
-		updateViewCount();
+		updateAssetViewCount();
 
 		// TagsProperty
 
@@ -88,40 +84,42 @@ public class UpgradeTags extends UpgradeProcess {
 		upgradeTable.updateTable();
 	}
 
-	protected void updateViewCount() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
+	protected void updateAssetViewCount() throws Exception {
+		long bookmarksEntryClassNameId = PortalUtil.getClassNameId(
+			BookmarksEntry.class.getName());
 
-		try {
-			con = DataAccess.getConnection();
+		updateAssetViewCount(
+			BookmarksEntry.class.getName(), "BookmarksEntry", "entryId",
+			"visits");
 
-			long bookmarksEntryClassNameId = PortalUtil.getClassNameId(
-				BookmarksEntry.class.getName());
+		updateAssetViewCount(
+			DLFileEntry.class.getName(), "DLFileEntry", "fileEntryId",
+			"readCount");
+	}
 
-			ps = con.prepareStatement(
-				"update TagsAsset inner join BookmarksEntry on " +
-					"TagsAsset.classPK = BookmarksEntry.entryId set " +
-						"TagsAsset.viewCount = BookmarksEntry.visits WHERE " +
-							"TagsAsset.classNameId = " +
-								bookmarksEntryClassNameId);
+	protected void updateAssetViewCount(
+			String className, String tableName, String columnClassPK,
+			String columnViewCount)
+		throws Exception {
 
-			ps.executeUpdate();
+		long classNameId = PortalUtil.getClassNameId(className);
 
-			long dlFileEntryClassNameId = PortalUtil.getClassNameId(
-				DLFileEntry.class.getName());
+		StringBuilder sb = new StringBuilder();
 
-			ps = con.prepareStatement(
-				"update TagsAsset inner join DLFileEntry on " +
-					"TagsAsset.classPK = DLFileEntry.fileEntryId set " +
-						"TagsAsset.viewCount = DLFileEntry.readCount WHERE " +
-							"TagsAsset.classNameId = " +
-								dlFileEntryClassNameId);
+		sb.append("update TagsAsset inner join ");
+		sb.append(tableName);
+		sb.append(" on TagsAsset.classPK = ");
+		sb.append(tableName);
+		sb.append(".");
+		sb.append(columnClassPK);
+		sb.append(" set TagsAsset.viewCount = ");
+		sb.append(tableName);
+		sb.append(".");
+		sb.append(columnViewCount);
+		sb.append(" WHERE TagsAsset.classNameId = ");
+		sb.append(classNameId);
 
-			ps.executeUpdate();
-		}
-		finally {
-			DataAccess.cleanUp(con, ps);
-		}
+		runSQL(sb.toString());
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(UpgradeTags.class);
