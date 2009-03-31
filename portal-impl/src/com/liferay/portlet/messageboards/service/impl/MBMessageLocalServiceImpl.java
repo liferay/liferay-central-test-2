@@ -269,6 +269,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		MBMessage message = mbMessagePersistence.create(messageId);
 
 		message.setUuid(uuid);
+		message.setGroupId(category.getGroupId());
 		message.setCompanyId(user.getCompanyId());
 		message.setUserId(user.getUserId());
 		message.setUserName(userName);
@@ -297,6 +298,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			thread = mbThreadPersistence.create(threadId);
 
+			thread.setGroupId(category.getGroupId());
 			thread.setCategoryId(categoryId);
 			thread.setRootMessageId(messageId);
 

@@ -444,6 +444,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		MBThread thread = mbThreadPersistence.create(threadId);
 
+		thread.setGroupId(message.getGroupId());
 		thread.setCategoryId(categoryId);
 		thread.setRootMessageId(message.getMessageId());
 
