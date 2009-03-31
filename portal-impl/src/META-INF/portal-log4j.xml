@@ -752,6 +752,10 @@
 		<priority value="OFF" />
 	</category>
 
+	<category name="org.hibernate.util.JDBCExceptionReporter">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="org.jabsorb">
 		<priority value="ERROR" />
 	</category>

@@ -99,14 +99,12 @@ public class ResourceLocalServiceTest extends BaseServiceTestCase {
 
 		protected void doRun() throws Exception {
 			try {
-				System.out.println("## get resource");
 				ResourceLocalServiceUtil.getResource(
 					_layout.getCompanyId(), Layout.class.getName(),
 					ResourceConstants.SCOPE_INDIVIDUAL,
 					String.valueOf(_layout.getPlid()));
 			}
 			catch (NoSuchResourceException nsre) {
-				System.out.println("## adding resource");
 				boolean addCommunityPermission = true;
 				boolean addGuestPermission = true;
 
