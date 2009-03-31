@@ -870,6 +870,9 @@ public class PropsValues {
 	public static final String NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT =
 		PropsUtil.get(PropsKeys.NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT);
 
+	public static final String NETVIBES_SERVLET_MAPPING =
+		PropsUtil.get(PropsKeys.NETVIBES_SERVLET_MAPPING);
+
 	public static final boolean NTLM_AUTH_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.NTLM_AUTH_ENABLED));
 

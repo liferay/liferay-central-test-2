@@ -217,6 +217,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String NESTED_PORTLET_VELOCITY_TEMPLATE_ID = "NESTED_PORTLET_VELOCITY_TEMPLATE_ID";
 
+	public static final String NETVIBES = "NETVIBES";
+
 	public static final String NOTES_LIST = "NOTES_LIST";
 
 	public static final String NTLM_REMOTE_USER = "NTLM_REMOTE_USER";

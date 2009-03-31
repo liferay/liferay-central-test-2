@@ -1295,6 +1295,13 @@ public class PortalImpl implements Portal {
 		return getLocale(getHttpServletRequest(renderRequest));
 	}
 
+	public String getNetvibesURL(
+		Portlet portlet, ThemeDisplay themeDisplay) {
+
+		return _getServletURL(
+			portlet, PropsValues.NETVIBES_SERVLET_MAPPING, themeDisplay);
+	}
+
 	public HttpServletRequest getOriginalServletRequest(
 		HttpServletRequest request) {
 

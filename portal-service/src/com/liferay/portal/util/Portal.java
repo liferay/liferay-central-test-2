@@ -251,6 +251,8 @@ public interface Portal {
 
 	public Locale getLocale(RenderRequest renderRequest);
 
+	public String getNetvibesURL(Portlet portlet, ThemeDisplay themeDisplay);
+
 	public HttpServletRequest getOriginalServletRequest(
 		HttpServletRequest request);
 

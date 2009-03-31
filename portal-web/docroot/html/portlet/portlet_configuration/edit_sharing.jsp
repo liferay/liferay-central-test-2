@@ -53,7 +53,7 @@ String widgetURL = PortalUtil.getWidgetURL(portlet, themeDisplay);
 </liferay-util:include>
 
 <liferay-ui:tabs
-	names="any-website,facebook,google-gadget,friends"
+	names="any-website,facebook,google-gadget,netvibes,friends"
 	param="tabs2"
 	url="<%= portletURL.toString() %>"
 />
@@ -191,6 +191,34 @@ Liferay.Widget({ url: &#x27;<%= widgetURL %>&#x27;});
 
 		<div>
 			<%= LanguageUtil.format(pageContext, "allow-users-to-add-x-to-igoogle", portletDisplay.getTitle()) %> <liferay-ui:input-checkbox param="iGoogleShowAddAppLink" defaultValue="<%= iGoogleShowAddAppLink %>" />
+		</div>
+	</c:when>
+	<c:when test='<%= tabs2.equals("netvibes") %>'>
+
+		<%
+		boolean netvibesShowAddAppLink = PrefsParamUtil.getBoolean(preferences, request, "lfr-netvibes-show-add-app-link");
+		String netvibesURL = PortalUtil.getNetvibesURL(portlet, themeDisplay);
+		%>
+
+		<div class="portlet-msg-info">
+			<liferay-ui:message key="use-the-netvibes-widget-url-to-create-a-netvibes-widget" />
+		</div>
+
+		<table class="lfr-table">
+			<tr>
+				<td>
+					<liferay-ui:message key="netvibes-widget-url" />
+				</td>
+				<td>
+					<liferay-ui:input-resource url="<%= netvibesURL %>" />
+				</td>
+			</tr>
+		</table>
+
+		<br /><br />
+
+		<div>
+			<%= LanguageUtil.format(pageContext, "allow-users-to-add-x-to-netvibes-pages", portletDisplay.getTitle()) %> <liferay-ui:input-checkbox param="netvibesShowAddAppLink" defaultValue="<%= netvibesShowAddAppLink %>" />
 		</div>
 	</c:when>
 	<c:when test='<%= tabs2.equals("friends") %>'>

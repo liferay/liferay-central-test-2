@@ -616,6 +616,11 @@
 		<load-on-startup>2</load-on-startup>
 	</servlet>
 	<servlet>
+		<servlet-name>Netvibes Servlet</servlet-name>
+		<servlet-class>com.liferay.portal.servlet.NetvibesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet>
 		<servlet-name>Portal Delegator Servlet</servlet-name>
 		<servlet-class>com.liferay.portal.kernel.servlet.PortalDelegatorServlet</servlet-class>
 		<load-on-startup>2</load-on-startup>
@@ -722,6 +727,10 @@
 	<servlet-mapping>
 		<servlet-name>Language Servlet</servlet-name>
 		<url-pattern>/language/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Netvibes Servlet</servlet-name>
+		<url-pattern>/netvibes/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Portal Delegator Servlet</servlet-name>

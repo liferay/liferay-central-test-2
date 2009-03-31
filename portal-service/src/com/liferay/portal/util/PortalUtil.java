@@ -375,6 +375,11 @@ public class PortalUtil {
 		return getPortal().getLocale(renderRequest);
 	}
 
+	public static String getNetvibesURL(
+			Portlet portlet, ThemeDisplay themeDisplay) {
+		return getPortal().getNetvibesURL(portlet, themeDisplay);
+	}
+
 	public static HttpServletRequest getOriginalServletRequest(
 		HttpServletRequest request) {
 

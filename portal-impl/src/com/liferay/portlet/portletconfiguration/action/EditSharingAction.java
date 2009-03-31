@@ -90,6 +90,9 @@ public class EditSharingAction extends EditConfigurationAction {
 		else if (tabs2.equals("google-gadget")) {
 			updateGoogleGadget(actionRequest, preferences);
 		}
+		else if (tabs2.equals("netvibes")) {
+			updateNetvibes(actionRequest, preferences);
+		}
 
 		preferences.store();
 
@@ -172,6 +175,18 @@ public class EditSharingAction extends EditConfigurationAction {
 		preferences.setValue(
 			"lfr-igoogle-show-add-app-link",
 			String.valueOf(iGoogleShowAddAppLink));
+	}
+
+	protected void updateNetvibes(
+			ActionRequest actionRequest, PortletPreferences preferences)
+		throws Exception {
+
+		boolean netvibesShowAddAppLink = ParamUtil.getBoolean(
+			actionRequest, "netvibesShowAddAppLink");
+
+		preferences.setValue(
+			"lfr-netvibes-show-add-app-link",
+			String.valueOf(netvibesShowAddAppLink));
 	}
 
 }
