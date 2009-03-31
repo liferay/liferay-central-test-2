@@ -182,6 +182,10 @@ public interface PortletPreferencesPersistence extends BasePersistence {
 		long ownerId, int ownerType, long plid, java.lang.String portletId)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.PortletPreferences fetchByO_O_P_P(
+		long ownerId, int ownerType, long plid, java.lang.String portletId,
+		boolean retrieveFromCache) throws com.liferay.portal.SystemException;
+
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;

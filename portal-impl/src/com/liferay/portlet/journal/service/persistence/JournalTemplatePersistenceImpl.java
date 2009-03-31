@@ -783,10 +783,19 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 
 	public JournalTemplate fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
+		return fetchByUUID_G(uuid, groupId, true);
+	}
+
+	public JournalTemplate fetchByUUID_G(String uuid, long groupId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1361,10 +1370,19 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 
 	public JournalTemplate fetchBySmallImageId(long smallImageId)
 		throws SystemException {
+		return fetchBySmallImageId(smallImageId, true);
+	}
+
+	public JournalTemplate fetchBySmallImageId(long smallImageId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(smallImageId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_SMALLIMAGEID,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_SMALLIMAGEID,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1459,10 +1477,19 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl
 
 	public JournalTemplate fetchByG_T(long groupId, String templateId)
 		throws SystemException {
+		return fetchByG_T(groupId, templateId, true);
+	}
+
+	public JournalTemplate fetchByG_T(long groupId, String templateId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId), templateId };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_T,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_T,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

@@ -156,6 +156,12 @@ public class MBDiscussionUtil {
 		return getPersistence().fetchByThreadId(threadId);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBDiscussion fetchByThreadId(
+		long threadId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByThreadId(threadId, retrieveFromCache);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBDiscussion findByC_C(
 		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException,
@@ -167,6 +173,13 @@ public class MBDiscussionUtil {
 		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByC_C(classNameId, classPK);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBDiscussion fetchByC_C(
+		long classNameId, long classPK, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByC_C(classNameId, classPK, retrieveFromCache);
 	}
 
 	public static java.util.List<Object> findWithDynamicQuery(

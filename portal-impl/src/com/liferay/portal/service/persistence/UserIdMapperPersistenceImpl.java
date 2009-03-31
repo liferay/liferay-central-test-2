@@ -653,10 +653,19 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 
 	public UserIdMapper fetchByU_T(long userId, String type)
 		throws SystemException {
+		return fetchByU_T(userId, type, true);
+	}
+
+	public UserIdMapper fetchByU_T(long userId, String type,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(userId), type };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_U_T,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_U_T,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -760,10 +769,19 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 
 	public UserIdMapper fetchByT_E(String type, String externalUserId)
 		throws SystemException {
+		return fetchByT_E(type, externalUserId, true);
+	}
+
+	public UserIdMapper fetchByT_E(String type, String externalUserId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { type, externalUserId };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_T_E,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_T_E,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

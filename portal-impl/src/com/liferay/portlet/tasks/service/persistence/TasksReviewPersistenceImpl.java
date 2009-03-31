@@ -919,12 +919,21 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 
 	public TasksReview fetchByU_P(long userId, long proposalId)
 		throws SystemException {
+		return fetchByU_P(userId, proposalId, true);
+	}
+
+	public TasksReview fetchByU_P(long userId, long proposalId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(userId), new Long(proposalId)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_U_P,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_U_P,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

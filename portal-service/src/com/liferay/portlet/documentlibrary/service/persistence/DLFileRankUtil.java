@@ -200,6 +200,14 @@ public class DLFileRankUtil {
 		return getPersistence().fetchByC_U_F_N(companyId, userId, folderId, name);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileRank fetchByC_U_F_N(
+		long companyId, long userId, long folderId, java.lang.String name,
+		boolean retrieveFromCache) throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByC_U_F_N(companyId, userId, folderId, name,
+			retrieveFromCache);
+	}
+
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

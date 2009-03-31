@@ -1161,13 +1161,23 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 
 	public Subscription fetchByC_U_C_C(long companyId, long userId,
 		long classNameId, long classPK) throws SystemException {
+		return fetchByC_U_C_C(companyId, userId, classNameId, classPK, true);
+	}
+
+	public Subscription fetchByC_U_C_C(long companyId, long userId,
+		long classNameId, long classPK, boolean retrieveFromCache)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(userId), new Long(classNameId),
 				new Long(classPK)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_U_C_C,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_U_C_C,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

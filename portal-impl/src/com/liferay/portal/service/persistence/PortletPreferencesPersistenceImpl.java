@@ -1202,14 +1202,24 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 
 	public PortletPreferences fetchByO_O_P_P(long ownerId, int ownerType,
 		long plid, String portletId) throws SystemException {
+		return fetchByO_O_P_P(ownerId, ownerType, plid, portletId, true);
+	}
+
+	public PortletPreferences fetchByO_O_P_P(long ownerId, int ownerType,
+		long plid, String portletId, boolean retrieveFromCache)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(ownerId), new Integer(ownerType), new Long(plid),
 				
 				portletId
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_O_O_P_P,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_O_O_P_P,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

@@ -809,10 +809,19 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 	public BlogsEntry fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
+		return fetchByUUID_G(uuid, groupId, true);
+	}
+
+	public BlogsEntry fetchByUUID_G(String uuid, long groupId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1615,10 +1624,19 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 	public BlogsEntry fetchByG_UT(long groupId, String urlTitle)
 		throws SystemException {
+		return fetchByG_UT(groupId, urlTitle, true);
+	}
+
+	public BlogsEntry fetchByG_UT(long groupId, String urlTitle,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId), urlTitle };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_UT,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_UT,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

@@ -118,6 +118,10 @@ public interface PluginSettingPersistence extends BasePersistence {
 		java.lang.String pluginId, java.lang.String pluginType)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.PluginSetting fetchByC_I_T(long companyId,
+		java.lang.String pluginId, java.lang.String pluginType,
+		boolean retrieveFromCache) throws com.liferay.portal.SystemException;
+
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;

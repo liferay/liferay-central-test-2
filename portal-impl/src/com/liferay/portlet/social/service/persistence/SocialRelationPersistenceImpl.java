@@ -2304,12 +2304,21 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 
 	public SocialRelation fetchByU1_U2_T(long userId1, long userId2, int type)
 		throws SystemException {
+		return fetchByU1_U2_T(userId1, userId2, type, true);
+	}
+
+	public SocialRelation fetchByU1_U2_T(long userId1, long userId2, int type,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(userId1), new Long(userId2), new Integer(type)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_U1_U2_T,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_U1_U2_T,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

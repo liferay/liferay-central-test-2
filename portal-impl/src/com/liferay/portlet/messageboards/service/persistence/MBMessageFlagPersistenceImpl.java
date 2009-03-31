@@ -1103,12 +1103,21 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 	public MBMessageFlag fetchByU_M_F(long userId, long messageId, int flag)
 		throws SystemException {
+		return fetchByU_M_F(userId, messageId, flag, true);
+	}
+
+	public MBMessageFlag fetchByU_M_F(long userId, long messageId, int flag,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(userId), new Long(messageId), new Integer(flag)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_U_M_F,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_U_M_F,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

@@ -115,6 +115,10 @@ public interface PortletPersistence extends BasePersistence {
 	public com.liferay.portal.model.Portlet fetchByC_P(long companyId,
 		java.lang.String portletId) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Portlet fetchByC_P(long companyId,
+		java.lang.String portletId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;

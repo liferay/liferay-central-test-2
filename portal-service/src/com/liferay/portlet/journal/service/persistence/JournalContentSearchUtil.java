@@ -373,6 +373,15 @@ public class JournalContentSearchUtil {
 			portletId, articleId);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalContentSearch fetchByG_P_L_P_A(
+		long groupId, boolean privateLayout, long layoutId,
+		java.lang.String portletId, java.lang.String articleId,
+		boolean retrieveFromCache) throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByG_P_L_P_A(groupId, privateLayout, layoutId,
+			portletId, articleId, retrieveFromCache);
+	}
+
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

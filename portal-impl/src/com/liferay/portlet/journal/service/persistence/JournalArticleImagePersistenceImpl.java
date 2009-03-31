@@ -1223,6 +1223,13 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 	public JournalArticleImage fetchByG_A_V_E_E_L(long groupId,
 		String articleId, double version, String elInstanceId, String elName,
 		String languageId) throws SystemException {
+		return fetchByG_A_V_E_E_L(groupId, articleId, version, elInstanceId,
+			elName, languageId, true);
+	}
+
+	public JournalArticleImage fetchByG_A_V_E_E_L(long groupId,
+		String articleId, double version, String elInstanceId, String elName,
+		String languageId, boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -1235,8 +1242,12 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 				languageId
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_A_V_E_E_L,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_A_V_E_E_L,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

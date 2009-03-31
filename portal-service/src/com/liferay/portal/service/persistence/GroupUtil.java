@@ -111,6 +111,13 @@ public class GroupUtil {
 		return getPersistence().fetchByLiveGroupId(liveGroupId);
 	}
 
+	public static com.liferay.portal.model.Group fetchByLiveGroupId(
+		long liveGroupId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByLiveGroupId(liveGroupId, retrieveFromCache);
+	}
+
 	public static com.liferay.portal.model.Group findByC_N(long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.NoSuchGroupException,
@@ -123,6 +130,12 @@ public class GroupUtil {
 		return getPersistence().fetchByC_N(companyId, name);
 	}
 
+	public static com.liferay.portal.model.Group fetchByC_N(long companyId,
+		java.lang.String name, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByC_N(companyId, name, retrieveFromCache);
+	}
+
 	public static com.liferay.portal.model.Group findByC_F(long companyId,
 		java.lang.String friendlyURL)
 		throws com.liferay.portal.NoSuchGroupException,
@@ -133,6 +146,13 @@ public class GroupUtil {
 	public static com.liferay.portal.model.Group fetchByC_F(long companyId,
 		java.lang.String friendlyURL) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByC_F(companyId, friendlyURL);
+	}
+
+	public static com.liferay.portal.model.Group fetchByC_F(long companyId,
+		java.lang.String friendlyURL, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByC_F(companyId, friendlyURL, retrieveFromCache);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Group> findByT_A(
@@ -188,6 +208,14 @@ public class GroupUtil {
 		return getPersistence().fetchByC_C_C(companyId, classNameId, classPK);
 	}
 
+	public static com.liferay.portal.model.Group fetchByC_C_C(long companyId,
+		long classNameId, long classPK, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByC_C_C(companyId, classNameId, classPK,
+			retrieveFromCache);
+	}
+
 	public static com.liferay.portal.model.Group findByC_L_N(long companyId,
 		long liveGroupId, java.lang.String name)
 		throws com.liferay.portal.NoSuchGroupException,
@@ -199,6 +227,13 @@ public class GroupUtil {
 		long liveGroupId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByC_L_N(companyId, liveGroupId, name);
+	}
+
+	public static com.liferay.portal.model.Group fetchByC_L_N(long companyId,
+		long liveGroupId, java.lang.String name, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByC_L_N(companyId, liveGroupId, name, retrieveFromCache);
 	}
 
 	public static java.util.List<Object> findWithDynamicQuery(

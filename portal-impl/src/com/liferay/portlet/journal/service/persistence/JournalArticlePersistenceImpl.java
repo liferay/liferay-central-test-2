@@ -856,10 +856,19 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 	public JournalArticle fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
+		return fetchByUUID_G(uuid, groupId, true);
+	}
+
+	public JournalArticle fetchByUUID_G(String uuid, long groupId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -2736,14 +2745,23 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 	public JournalArticle fetchByG_A_V(long groupId, String articleId,
 		double version) throws SystemException {
+		return fetchByG_A_V(groupId, articleId, version, true);
+	}
+
+	public JournalArticle fetchByG_A_V(long groupId, String articleId,
+		double version, boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
 				articleId, new Double(version)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_A_V,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_A_V,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

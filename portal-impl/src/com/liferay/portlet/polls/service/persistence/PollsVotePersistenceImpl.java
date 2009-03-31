@@ -818,12 +818,21 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl
 
 	public PollsVote fetchByQ_U(long questionId, long userId)
 		throws SystemException {
+		return fetchByQ_U(questionId, userId, true);
+	}
+
+	public PollsVote fetchByQ_U(long questionId, long userId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(questionId), new Long(userId)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_Q_U,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_Q_U,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

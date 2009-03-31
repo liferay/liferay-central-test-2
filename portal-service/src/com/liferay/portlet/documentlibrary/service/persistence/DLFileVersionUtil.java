@@ -160,6 +160,13 @@ public class DLFileVersionUtil {
 		return getPersistence().fetchByF_N_V(folderId, name, version);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileVersion fetchByF_N_V(
+		long folderId, java.lang.String name, double version,
+		boolean retrieveFromCache) throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByF_N_V(folderId, name, version, retrieveFromCache);
+	}
+
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

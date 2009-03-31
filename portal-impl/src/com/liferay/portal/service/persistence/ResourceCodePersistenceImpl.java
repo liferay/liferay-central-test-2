@@ -861,14 +861,23 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 
 	public ResourceCode fetchByC_N_S(long companyId, String name, int scope)
 		throws SystemException {
+		return fetchByC_N_S(companyId, name, scope, true);
+	}
+
+	public ResourceCode fetchByC_N_S(long companyId, String name, int scope,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
 				name, new Integer(scope)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_N_S,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_N_S,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

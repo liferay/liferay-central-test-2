@@ -638,10 +638,19 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 
 	public SCProductVersion fetchByDirectDownloadURL(String directDownloadURL)
 		throws SystemException {
+		return fetchByDirectDownloadURL(directDownloadURL, true);
+	}
+
+	public SCProductVersion fetchByDirectDownloadURL(String directDownloadURL,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { directDownloadURL };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_DIRECTDOWNLOADURL,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_DIRECTDOWNLOADURL,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

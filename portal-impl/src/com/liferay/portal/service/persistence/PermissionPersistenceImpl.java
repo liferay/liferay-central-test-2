@@ -636,10 +636,19 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 
 	public Permission fetchByA_R(String actionId, long resourceId)
 		throws SystemException {
+		return fetchByA_R(actionId, resourceId, true);
+	}
+
+	public Permission fetchByA_R(String actionId, long resourceId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { actionId, new Long(resourceId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_A_R,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_A_R,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

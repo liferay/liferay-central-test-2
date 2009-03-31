@@ -152,6 +152,12 @@ public class RoleUtil {
 		return getPersistence().fetchByC_N(companyId, name);
 	}
 
+	public static com.liferay.portal.model.Role fetchByC_N(long companyId,
+		java.lang.String name, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByC_N(companyId, name, retrieveFromCache);
+	}
+
 	public static com.liferay.portal.model.Role findByC_C_C(long companyId,
 		long classNameId, long classPK)
 		throws com.liferay.portal.NoSuchRoleException,
@@ -163,6 +169,14 @@ public class RoleUtil {
 		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByC_C_C(companyId, classNameId, classPK);
+	}
+
+	public static com.liferay.portal.model.Role fetchByC_C_C(long companyId,
+		long classNameId, long classPK, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByC_C_C(companyId, classNameId, classPK,
+			retrieveFromCache);
 	}
 
 	public static java.util.List<Object> findWithDynamicQuery(

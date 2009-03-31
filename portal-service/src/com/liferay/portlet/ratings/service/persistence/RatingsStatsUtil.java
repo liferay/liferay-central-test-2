@@ -116,6 +116,13 @@ public class RatingsStatsUtil {
 		return getPersistence().fetchByC_C(classNameId, classPK);
 	}
 
+	public static com.liferay.portlet.ratings.model.RatingsStats fetchByC_C(
+		long classNameId, long classPK, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByC_C(classNameId, classPK, retrieveFromCache);
+	}
+
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

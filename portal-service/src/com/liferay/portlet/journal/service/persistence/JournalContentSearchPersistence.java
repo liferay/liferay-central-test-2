@@ -257,6 +257,11 @@ public interface JournalContentSearchPersistence extends BasePersistence {
 		java.lang.String portletId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.journal.model.JournalContentSearch fetchByG_P_L_P_A(
+		long groupId, boolean privateLayout, long layoutId,
+		java.lang.String portletId, java.lang.String articleId,
+		boolean retrieveFromCache) throws com.liferay.portal.SystemException;
+
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;

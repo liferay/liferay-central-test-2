@@ -197,6 +197,13 @@ public class ResourceCodeUtil {
 		return getPersistence().fetchByC_N_S(companyId, name, scope);
 	}
 
+	public static com.liferay.portal.model.ResourceCode fetchByC_N_S(
+		long companyId, java.lang.String name, int scope,
+		boolean retrieveFromCache) throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByC_N_S(companyId, name, scope, retrieveFromCache);
+	}
+
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

@@ -155,6 +155,12 @@ public class ShoppingCouponUtil {
 		return getPersistence().fetchByCode(code);
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingCoupon fetchByCode(
+		java.lang.String code, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByCode(code, retrieveFromCache);
+	}
+
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

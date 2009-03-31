@@ -654,10 +654,19 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 
 	public ServiceComponent fetchByBNS_BNU(String buildNamespace,
 		long buildNumber) throws SystemException {
+		return fetchByBNS_BNU(buildNamespace, buildNumber, true);
+	}
+
+	public ServiceComponent fetchByBNS_BNU(String buildNamespace,
+		long buildNumber, boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { buildNamespace, new Long(buildNumber) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_BNS_BNU,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_BNS_BNU,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

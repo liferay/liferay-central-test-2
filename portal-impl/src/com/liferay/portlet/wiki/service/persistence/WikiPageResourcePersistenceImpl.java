@@ -389,10 +389,19 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 
 	public WikiPageResource fetchByN_T(long nodeId, String title)
 		throws SystemException {
+		return fetchByN_T(nodeId, title, true);
+	}
+
+	public WikiPageResource fetchByN_T(long nodeId, String title,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(nodeId), title };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_N_T,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_N_T,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

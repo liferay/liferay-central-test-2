@@ -247,6 +247,12 @@ public class OrganizationUtil {
 		return getPersistence().fetchByC_N(companyId, name);
 	}
 
+	public static com.liferay.portal.model.Organization fetchByC_N(
+		long companyId, java.lang.String name, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByC_N(companyId, name, retrieveFromCache);
+	}
+
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

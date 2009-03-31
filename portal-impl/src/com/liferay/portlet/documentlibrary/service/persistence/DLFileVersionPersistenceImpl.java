@@ -697,14 +697,23 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 	public DLFileVersion fetchByF_N_V(long folderId, String name, double version)
 		throws SystemException {
+		return fetchByF_N_V(folderId, name, version, true);
+	}
+
+	public DLFileVersion fetchByF_N_V(long folderId, String name,
+		double version, boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(folderId),
 				
 				name, new Double(version)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_F_N_V,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_F_N_V,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

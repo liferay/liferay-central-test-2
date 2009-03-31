@@ -626,10 +626,19 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 
 	public ExpandoColumn fetchByT_N(long tableId, String name)
 		throws SystemException {
+		return fetchByT_N(tableId, name, true);
+	}
+
+	public ExpandoColumn fetchByT_N(long tableId, String name,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(tableId), name };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_T_N,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_T_N,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

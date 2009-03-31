@@ -703,10 +703,19 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 
 	public CalEvent fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
+		return fetchByUUID_G(uuid, groupId, true);
+	}
+
+	public CalEvent fetchByUUID_G(String uuid, long groupId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

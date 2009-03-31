@@ -1021,12 +1021,21 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 	public MBBan fetchByG_B(long groupId, long banUserId)
 		throws SystemException {
+		return fetchByG_B(groupId, banUserId, true);
+	}
+
+	public MBBan fetchByG_B(long groupId, long banUserId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(banUserId)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_B,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_B,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

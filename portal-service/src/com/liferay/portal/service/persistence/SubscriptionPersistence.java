@@ -177,6 +177,10 @@ public interface SubscriptionPersistence extends BasePersistence {
 		long companyId, long userId, long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Subscription fetchByC_U_C_C(
+		long companyId, long userId, long classNameId, long classPK,
+		boolean retrieveFromCache) throws com.liferay.portal.SystemException;
+
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;

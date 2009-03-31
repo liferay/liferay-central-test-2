@@ -2362,14 +2362,23 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl
 
 	public WikiPage fetchByN_T_V(long nodeId, String title, double version)
 		throws SystemException {
+		return fetchByN_T_V(nodeId, title, version, true);
+	}
+
+	public WikiPage fetchByN_T_V(long nodeId, String title, double version,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(nodeId),
 				
 				title, new Double(version)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_N_T_V,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_N_T_V,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

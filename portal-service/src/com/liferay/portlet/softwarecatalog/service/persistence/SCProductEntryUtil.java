@@ -241,6 +241,13 @@ public class SCProductEntryUtil {
 		return getPersistence().fetchByRG_RA(repoGroupId, repoArtifactId);
 	}
 
+	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry fetchByRG_RA(
+		java.lang.String repoGroupId, java.lang.String repoArtifactId,
+		boolean retrieveFromCache) throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByRG_RA(repoGroupId, repoArtifactId, retrieveFromCache);
+	}
+
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

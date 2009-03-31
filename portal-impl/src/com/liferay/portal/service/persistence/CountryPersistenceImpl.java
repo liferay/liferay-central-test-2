@@ -412,10 +412,19 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Country fetchByName(String name) throws SystemException {
+		return fetchByName(name, true);
+	}
+
+	public Country fetchByName(String name, boolean retrieveFromCache)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { name };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_NAME,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_NAME,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -512,10 +521,19 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Country fetchByA2(String a2) throws SystemException {
+		return fetchByA2(a2, true);
+	}
+
+	public Country fetchByA2(String a2, boolean retrieveFromCache)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { a2 };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_A2,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_A2,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -612,10 +630,19 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Country fetchByA3(String a3) throws SystemException {
+		return fetchByA3(a3, true);
+	}
+
+	public Country fetchByA3(String a3, boolean retrieveFromCache)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { a3 };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_A3,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_A3,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

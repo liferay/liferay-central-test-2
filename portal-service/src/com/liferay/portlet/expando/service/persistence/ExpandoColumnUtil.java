@@ -156,6 +156,12 @@ public class ExpandoColumnUtil {
 		return getPersistence().fetchByT_N(tableId, name);
 	}
 
+	public static com.liferay.portlet.expando.model.ExpandoColumn fetchByT_N(
+		long tableId, java.lang.String name, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByT_N(tableId, name, retrieveFromCache);
+	}
+
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

@@ -1472,10 +1472,19 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 	public ExpandoValue fetchByC_R(long columnId, long rowId)
 		throws SystemException {
+		return fetchByC_R(columnId, rowId, true);
+	}
+
+	public ExpandoValue fetchByC_R(long columnId, long rowId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(columnId), new Long(rowId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_R,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_R,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1838,12 +1847,21 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 	public ExpandoValue fetchByT_C_R(long tableId, long columnId, long rowId)
 		throws SystemException {
+		return fetchByT_C_R(tableId, columnId, rowId, true);
+	}
+
+	public ExpandoValue fetchByT_C_R(long tableId, long columnId, long rowId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(tableId), new Long(columnId), new Long(rowId)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_T_C_R,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_T_C_R,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

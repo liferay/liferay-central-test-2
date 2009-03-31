@@ -899,10 +899,19 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 
 	public SocialRequest fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
+		return fetchByUUID_G(uuid, groupId, true);
+	}
+
+	public SocialRequest fetchByUUID_G(String uuid, long groupId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -2196,13 +2205,24 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 
 	public SocialRequest fetchByU_C_C_T_R(long userId, long classNameId,
 		long classPK, int type, long receiverUserId) throws SystemException {
+		return fetchByU_C_C_T_R(userId, classNameId, classPK, type,
+			receiverUserId, true);
+	}
+
+	public SocialRequest fetchByU_C_C_T_R(long userId, long classNameId,
+		long classPK, int type, long receiverUserId, boolean retrieveFromCache)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(userId), new Long(classNameId), new Long(classPK),
 				new Integer(type), new Long(receiverUserId)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_U_C_C_T_R,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_U_C_C_T_R,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -2667,13 +2687,24 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 	public SocialRequest fetchByU_C_C_T_R_S(long userId, long classNameId,
 		long classPK, int type, long receiverUserId, int status)
 		throws SystemException {
+		return fetchByU_C_C_T_R_S(userId, classNameId, classPK, type,
+			receiverUserId, status, true);
+	}
+
+	public SocialRequest fetchByU_C_C_T_R_S(long userId, long classNameId,
+		long classPK, int type, long receiverUserId, int status,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(userId), new Long(classNameId), new Long(classPK),
 				new Integer(type), new Long(receiverUserId), new Integer(status)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_U_C_C_T_R_S,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_U_C_C_T_R_S,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

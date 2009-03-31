@@ -112,6 +112,12 @@ public class CompanyUtil {
 		return getPersistence().fetchByWebId(webId);
 	}
 
+	public static com.liferay.portal.model.Company fetchByWebId(
+		java.lang.String webId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByWebId(webId, retrieveFromCache);
+	}
+
 	public static com.liferay.portal.model.Company findByVirtualHost(
 		java.lang.String virtualHost)
 		throws com.liferay.portal.NoSuchCompanyException,
@@ -122,6 +128,13 @@ public class CompanyUtil {
 	public static com.liferay.portal.model.Company fetchByVirtualHost(
 		java.lang.String virtualHost) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByVirtualHost(virtualHost);
+	}
+
+	public static com.liferay.portal.model.Company fetchByVirtualHost(
+		java.lang.String virtualHost, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByVirtualHost(virtualHost, retrieveFromCache);
 	}
 
 	public static com.liferay.portal.model.Company findByMx(java.lang.String mx)
@@ -135,6 +148,12 @@ public class CompanyUtil {
 		return getPersistence().fetchByMx(mx);
 	}
 
+	public static com.liferay.portal.model.Company fetchByMx(
+		java.lang.String mx, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByMx(mx, retrieveFromCache);
+	}
+
 	public static com.liferay.portal.model.Company findByLogoId(long logoId)
 		throws com.liferay.portal.NoSuchCompanyException,
 			com.liferay.portal.SystemException {
@@ -144,6 +163,11 @@ public class CompanyUtil {
 	public static com.liferay.portal.model.Company fetchByLogoId(long logoId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByLogoId(logoId);
+	}
+
+	public static com.liferay.portal.model.Company fetchByLogoId(long logoId,
+		boolean retrieveFromCache) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByLogoId(logoId, retrieveFromCache);
 	}
 
 	public static java.util.List<Object> findWithDynamicQuery(

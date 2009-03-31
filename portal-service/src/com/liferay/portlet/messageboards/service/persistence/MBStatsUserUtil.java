@@ -197,6 +197,12 @@ public class MBStatsUserUtil {
 		return getPersistence().fetchByG_U(groupId, userId);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBStatsUser fetchByG_U(
+		long groupId, long userId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByG_U(groupId, userId, retrieveFromCache);
+	}
+
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findByG_M(
 		long groupId, int messageCount)
 		throws com.liferay.portal.SystemException {

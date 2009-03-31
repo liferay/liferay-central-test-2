@@ -423,10 +423,19 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Company fetchByWebId(String webId) throws SystemException {
+		return fetchByWebId(webId, true);
+	}
+
+	public Company fetchByWebId(String webId, boolean retrieveFromCache)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { webId };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_WEBID,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_WEBID,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -520,10 +529,19 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 
 	public Company fetchByVirtualHost(String virtualHost)
 		throws SystemException {
+		return fetchByVirtualHost(virtualHost, true);
+	}
+
+	public Company fetchByVirtualHost(String virtualHost,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { virtualHost };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -616,10 +634,19 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Company fetchByMx(String mx) throws SystemException {
+		return fetchByMx(mx, true);
+	}
+
+	public Company fetchByMx(String mx, boolean retrieveFromCache)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { mx };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_MX,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_MX,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -712,10 +739,19 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Company fetchByLogoId(long logoId) throws SystemException {
+		return fetchByLogoId(logoId, true);
+	}
+
+	public Company fetchByLogoId(long logoId, boolean retrieveFromCache)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(logoId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_LOGOID,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_LOGOID,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

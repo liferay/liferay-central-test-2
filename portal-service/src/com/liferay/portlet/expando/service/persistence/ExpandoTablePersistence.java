@@ -123,6 +123,10 @@ public interface ExpandoTablePersistence extends BasePersistence {
 		long companyId, long classNameId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.expando.model.ExpandoTable fetchByC_C_N(
+		long companyId, long classNameId, java.lang.String name,
+		boolean retrieveFromCache) throws com.liferay.portal.SystemException;
+
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;

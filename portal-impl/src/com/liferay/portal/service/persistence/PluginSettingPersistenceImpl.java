@@ -634,6 +634,11 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 
 	public PluginSetting fetchByC_I_T(long companyId, String pluginId,
 		String pluginType) throws SystemException {
+		return fetchByC_I_T(companyId, pluginId, pluginType, true);
+	}
+
+	public PluginSetting fetchByC_I_T(long companyId, String pluginId,
+		String pluginType, boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
@@ -642,8 +647,12 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 				pluginType
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_I_T,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_I_T,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

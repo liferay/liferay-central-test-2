@@ -590,10 +590,19 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 
 	public Resource fetchByC_P(long codeId, String primKey)
 		throws SystemException {
+		return fetchByC_P(codeId, primKey, true);
+	}
+
+	public Resource fetchByC_P(long codeId, String primKey,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(codeId), primKey };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_P,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_P,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

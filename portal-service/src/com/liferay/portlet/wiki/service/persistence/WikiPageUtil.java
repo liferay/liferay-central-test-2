@@ -411,6 +411,13 @@ public class WikiPageUtil {
 		return getPersistence().fetchByN_T_V(nodeId, title, version);
 	}
 
+	public static com.liferay.portlet.wiki.model.WikiPage fetchByN_T_V(
+		long nodeId, java.lang.String title, double version,
+		boolean retrieveFromCache) throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByN_T_V(nodeId, title, version, retrieveFromCache);
+	}
+
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByN_T_H(
 		long nodeId, java.lang.String title, boolean head)
 		throws com.liferay.portal.SystemException {

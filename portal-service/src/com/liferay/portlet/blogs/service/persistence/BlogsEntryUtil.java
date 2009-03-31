@@ -158,6 +158,12 @@ public class BlogsEntryUtil {
 		return getPersistence().fetchByUUID_G(uuid, groupId);
 	}
 
+	public static com.liferay.portlet.blogs.model.BlogsEntry fetchByUUID_G(
+		java.lang.String uuid, long groupId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByUUID_G(uuid, groupId, retrieveFromCache);
+	}
+
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByGroupId(
 		long groupId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId);
@@ -293,6 +299,12 @@ public class BlogsEntryUtil {
 		long groupId, java.lang.String urlTitle)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByG_UT(groupId, urlTitle);
+	}
+
+	public static com.liferay.portlet.blogs.model.BlogsEntry fetchByG_UT(
+		long groupId, java.lang.String urlTitle, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByG_UT(groupId, urlTitle, retrieveFromCache);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByG_D_D(

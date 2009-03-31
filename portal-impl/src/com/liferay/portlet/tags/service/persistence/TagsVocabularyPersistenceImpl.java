@@ -421,10 +421,19 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 
 	public TagsVocabulary fetchByG_N(long groupId, String name)
 		throws SystemException {
+		return fetchByG_N(groupId, name, true);
+	}
+
+	public TagsVocabulary fetchByG_N(long groupId, String name,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId), name };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_N,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_N,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

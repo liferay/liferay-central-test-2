@@ -615,10 +615,19 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 	public LayoutSet fetchByVirtualHost(String virtualHost)
 		throws SystemException {
+		return fetchByVirtualHost(virtualHost, true);
+	}
+
+	public LayoutSet fetchByVirtualHost(String virtualHost,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { virtualHost };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -715,12 +724,21 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 
 	public LayoutSet fetchByG_P(long groupId, boolean privateLayout)
 		throws SystemException {
+		return fetchByG_P(groupId, privateLayout, true);
+	}
+
+	public LayoutSet fetchByG_P(long groupId, boolean privateLayout,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(privateLayout)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_P,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_P,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

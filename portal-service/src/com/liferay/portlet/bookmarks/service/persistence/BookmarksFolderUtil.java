@@ -158,6 +158,12 @@ public class BookmarksFolderUtil {
 		return getPersistence().fetchByUUID_G(uuid, groupId);
 	}
 
+	public static com.liferay.portlet.bookmarks.model.BookmarksFolder fetchByUUID_G(
+		java.lang.String uuid, long groupId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByUUID_G(uuid, groupId, retrieveFromCache);
+	}
+
 	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> findByGroupId(
 		long groupId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId);

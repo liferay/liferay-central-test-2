@@ -122,6 +122,10 @@ public interface SocialRequestPersistence extends BasePersistence {
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.social.model.SocialRequest fetchByUUID_G(
+		java.lang.String uuid, long groupId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.social.model.SocialRequest> findByCompanyId(
 		long companyId) throws com.liferay.portal.SystemException;
 
@@ -279,6 +283,11 @@ public interface SocialRequestPersistence extends BasePersistence {
 		long userId, long classNameId, long classPK, int type,
 		long receiverUserId) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.social.model.SocialRequest fetchByU_C_C_T_R(
+		long userId, long classNameId, long classPK, int type,
+		long receiverUserId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.social.model.SocialRequest> findByU_C_C_T_S(
 		long userId, long classNameId, long classPK, int type, int status)
 		throws com.liferay.portal.SystemException;
@@ -319,6 +328,11 @@ public interface SocialRequestPersistence extends BasePersistence {
 	public com.liferay.portlet.social.model.SocialRequest fetchByU_C_C_T_R_S(
 		long userId, long classNameId, long classPK, int type,
 		long receiverUserId, int status)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.social.model.SocialRequest fetchByU_C_C_T_R_S(
+		long userId, long classNameId, long classPK, int type,
+		long receiverUserId, int status, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<Object> findWithDynamicQuery(

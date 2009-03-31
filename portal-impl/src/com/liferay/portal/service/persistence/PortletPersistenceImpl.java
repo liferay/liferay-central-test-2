@@ -589,10 +589,19 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 
 	public Portlet fetchByC_P(long companyId, String portletId)
 		throws SystemException {
+		return fetchByC_P(companyId, portletId, true);
+	}
+
+	public Portlet fetchByC_P(long companyId, String portletId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(companyId), portletId };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_P,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_P,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

@@ -656,10 +656,19 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public ShoppingOrder fetchByNumber(String number) throws SystemException {
+		return fetchByNumber(number, true);
+	}
+
+	public ShoppingOrder fetchByNumber(String number, boolean retrieveFromCache)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { number };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_NUMBER,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_NUMBER,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -758,10 +767,19 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 
 	public ShoppingOrder fetchByPPTxnId(String ppTxnId)
 		throws SystemException {
+		return fetchByPPTxnId(ppTxnId, true);
+	}
+
+	public ShoppingOrder fetchByPPTxnId(String ppTxnId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { ppTxnId };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_PPTXNID,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_PPTXNID,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

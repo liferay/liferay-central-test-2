@@ -953,10 +953,19 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 	public IGImage fetchBySmallImageId(long smallImageId)
 		throws SystemException {
+		return fetchBySmallImageId(smallImageId, true);
+	}
+
+	public IGImage fetchBySmallImageId(long smallImageId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(smallImageId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_SMALLIMAGEID,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_SMALLIMAGEID,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1048,10 +1057,19 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 	public IGImage fetchByLargeImageId(long largeImageId)
 		throws SystemException {
+		return fetchByLargeImageId(largeImageId, true);
+	}
+
+	public IGImage fetchByLargeImageId(long largeImageId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(largeImageId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_LARGEIMAGEID,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_LARGEIMAGEID,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1143,10 +1161,19 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 	public IGImage fetchByCustom1ImageId(long custom1ImageId)
 		throws SystemException {
+		return fetchByCustom1ImageId(custom1ImageId, true);
+	}
+
+	public IGImage fetchByCustom1ImageId(long custom1ImageId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(custom1ImageId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_CUSTOM1IMAGEID,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_CUSTOM1IMAGEID,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1238,10 +1265,19 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 
 	public IGImage fetchByCustom2ImageId(long custom2ImageId)
 		throws SystemException {
+		return fetchByCustom2ImageId(custom2ImageId, true);
+	}
+
+	public IGImage fetchByCustom2ImageId(long custom2ImageId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(custom2ImageId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_CUSTOM2IMAGEID,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_CUSTOM2IMAGEID,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

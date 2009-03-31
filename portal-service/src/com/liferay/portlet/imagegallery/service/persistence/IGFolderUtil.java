@@ -158,6 +158,12 @@ public class IGFolderUtil {
 		return getPersistence().fetchByUUID_G(uuid, groupId);
 	}
 
+	public static com.liferay.portlet.imagegallery.model.IGFolder fetchByUUID_G(
+		java.lang.String uuid, long groupId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByUUID_G(uuid, groupId, retrieveFromCache);
+	}
+
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> findByGroupId(
 		long groupId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId);
@@ -295,6 +301,14 @@ public class IGFolderUtil {
 		long groupId, long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByG_P_N(groupId, parentFolderId, name);
+	}
+
+	public static com.liferay.portlet.imagegallery.model.IGFolder fetchByG_P_N(
+		long groupId, long parentFolderId, java.lang.String name,
+		boolean retrieveFromCache) throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByG_P_N(groupId, parentFolderId, name,
+			retrieveFromCache);
 	}
 
 	public static java.util.List<Object> findWithDynamicQuery(

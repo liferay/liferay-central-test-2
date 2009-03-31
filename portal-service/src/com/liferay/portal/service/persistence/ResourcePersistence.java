@@ -115,6 +115,10 @@ public interface ResourcePersistence extends BasePersistence {
 	public com.liferay.portal.model.Resource fetchByC_P(long codeId,
 		java.lang.String primKey) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Resource fetchByC_P(long codeId,
+		java.lang.String primKey, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;

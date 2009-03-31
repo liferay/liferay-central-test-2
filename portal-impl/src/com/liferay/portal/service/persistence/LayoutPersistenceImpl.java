@@ -1015,10 +1015,19 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Layout fetchByDLFolderId(long dlFolderId) throws SystemException {
+		return fetchByDLFolderId(dlFolderId, true);
+	}
+
+	public Layout fetchByDLFolderId(long dlFolderId, boolean retrieveFromCache)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(dlFolderId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_DLFOLDERID,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_DLFOLDERID,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1110,10 +1119,19 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 	public Layout fetchByIconImageId(long iconImageId)
 		throws SystemException {
+		return fetchByIconImageId(iconImageId, true);
+	}
+
+	public Layout fetchByIconImageId(long iconImageId, boolean retrieveFromCache)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(iconImageId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_ICONIMAGEID,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_ICONIMAGEID,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1460,13 +1478,22 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 	public Layout fetchByG_P_L(long groupId, boolean privateLayout,
 		long layoutId) throws SystemException {
+		return fetchByG_P_L(groupId, privateLayout, layoutId, true);
+	}
+
+	public Layout fetchByG_P_L(long groupId, boolean privateLayout,
+		long layoutId, boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(privateLayout),
 				new Long(layoutId)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_P_L,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_P_L,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1856,14 +1883,24 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 	public Layout fetchByG_P_F(long groupId, boolean privateLayout,
 		String friendlyURL) throws SystemException {
+		return fetchByG_P_F(groupId, privateLayout, friendlyURL, true);
+	}
+
+	public Layout fetchByG_P_F(long groupId, boolean privateLayout,
+		String friendlyURL, boolean retrieveFromCache)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(privateLayout),
 				
 				friendlyURL
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_P_F,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_P_F,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

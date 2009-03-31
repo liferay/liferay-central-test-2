@@ -149,6 +149,10 @@ public interface MBStatsUserPersistence extends BasePersistence {
 	public com.liferay.portlet.messageboards.model.MBStatsUser fetchByG_U(
 		long groupId, long userId) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.messageboards.model.MBStatsUser fetchByG_U(
+		long groupId, long userId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findByG_M(
 		long groupId, int messageCount)
 		throws com.liferay.portal.SystemException;

@@ -650,14 +650,23 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 
 	public ExpandoTable fetchByC_C_N(long companyId, long classNameId,
 		String name) throws SystemException {
+		return fetchByC_C_N(companyId, classNameId, name, true);
+	}
+
+	public ExpandoTable fetchByC_C_N(long companyId, long classNameId,
+		String name, boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId),
 				
 				name
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_C_N,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_C_N,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

@@ -94,6 +94,10 @@ public interface TagsVocabularyPersistence extends BasePersistence {
 		long groupId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.tags.model.TagsVocabulary fetchByG_N(
+		long groupId, java.lang.String name, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> findByG_F(
 		long groupId, boolean folksonomy)
 		throws com.liferay.portal.SystemException;

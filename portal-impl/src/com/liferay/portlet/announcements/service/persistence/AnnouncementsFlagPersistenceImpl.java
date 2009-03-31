@@ -643,12 +643,21 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 
 	public AnnouncementsFlag fetchByU_E_V(long userId, long entryId, int value)
 		throws SystemException {
+		return fetchByU_E_V(userId, entryId, value, true);
+	}
+
+	public AnnouncementsFlag fetchByU_E_V(long userId, long entryId, int value,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(userId), new Long(entryId), new Integer(value)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_U_E_V,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_U_E_V,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

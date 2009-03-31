@@ -112,6 +112,12 @@ public class CountryUtil {
 		return getPersistence().fetchByName(name);
 	}
 
+	public static com.liferay.portal.model.Country fetchByName(
+		java.lang.String name, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByName(name, retrieveFromCache);
+	}
+
 	public static com.liferay.portal.model.Country findByA2(java.lang.String a2)
 		throws com.liferay.portal.NoSuchCountryException,
 			com.liferay.portal.SystemException {
@@ -123,6 +129,12 @@ public class CountryUtil {
 		return getPersistence().fetchByA2(a2);
 	}
 
+	public static com.liferay.portal.model.Country fetchByA2(
+		java.lang.String a2, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByA2(a2, retrieveFromCache);
+	}
+
 	public static com.liferay.portal.model.Country findByA3(java.lang.String a3)
 		throws com.liferay.portal.NoSuchCountryException,
 			com.liferay.portal.SystemException {
@@ -132,6 +144,12 @@ public class CountryUtil {
 	public static com.liferay.portal.model.Country fetchByA3(
 		java.lang.String a3) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByA3(a3);
+	}
+
+	public static com.liferay.portal.model.Country fetchByA3(
+		java.lang.String a3, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByA3(a3, retrieveFromCache);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Country> findByActive(

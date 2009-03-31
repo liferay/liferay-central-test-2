@@ -625,10 +625,19 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 
 	public JournalArticleResource fetchByG_A(long groupId, String articleId)
 		throws SystemException {
+		return fetchByG_A(groupId, articleId, true);
+	}
+
+	public JournalArticleResource fetchByG_A(long groupId, String articleId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId), articleId };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_A,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_A,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

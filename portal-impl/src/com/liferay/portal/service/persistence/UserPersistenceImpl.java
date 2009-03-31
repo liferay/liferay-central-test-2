@@ -1090,10 +1090,19 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public User fetchByContactId(long contactId) throws SystemException {
+		return fetchByContactId(contactId, true);
+	}
+
+	public User fetchByContactId(long contactId, boolean retrieveFromCache)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(contactId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_CONTACTID,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_CONTACTID,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1403,10 +1412,19 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public User fetchByOpenId(String openId) throws SystemException {
+		return fetchByOpenId(openId, true);
+	}
+
+	public User fetchByOpenId(String openId, boolean retrieveFromCache)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { openId };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_OPENID,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_OPENID,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1499,10 +1517,19 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public User fetchByPortraitId(long portraitId) throws SystemException {
+		return fetchByPortraitId(portraitId, true);
+	}
+
+	public User fetchByPortraitId(long portraitId, boolean retrieveFromCache)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(portraitId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_PORTRAITID,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_PORTRAITID,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1592,10 +1619,19 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 	public User fetchByC_U(long companyId, long userId)
 		throws SystemException {
+		return fetchByC_U(companyId, userId, true);
+	}
+
+	public User fetchByC_U(long companyId, long userId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(companyId), new Long(userId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_U,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_U,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1691,12 +1727,21 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 	public User fetchByC_DU(long companyId, boolean defaultUser)
 		throws SystemException {
+		return fetchByC_DU(companyId, defaultUser, true);
+	}
+
+	public User fetchByC_DU(long companyId, boolean defaultUser,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), Boolean.valueOf(defaultUser)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_DU,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_DU,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1792,10 +1837,19 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 	public User fetchByC_SN(long companyId, String screenName)
 		throws SystemException {
+		return fetchByC_SN(companyId, screenName, true);
+	}
+
+	public User fetchByC_SN(long companyId, String screenName,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(companyId), screenName };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_SN,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_SN,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1898,10 +1952,19 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 	public User fetchByC_EA(long companyId, String emailAddress)
 		throws SystemException {
+		return fetchByC_EA(companyId, emailAddress, true);
+	}
+
+	public User fetchByC_EA(long companyId, String emailAddress,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(companyId), emailAddress };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_EA,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_EA,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

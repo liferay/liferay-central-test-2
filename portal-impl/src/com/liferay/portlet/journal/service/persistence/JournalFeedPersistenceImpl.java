@@ -705,10 +705,19 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl
 
 	public JournalFeed fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
+		return fetchByUUID_G(uuid, groupId, true);
+	}
+
+	public JournalFeed fetchByUUID_G(String uuid, long groupId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1039,10 +1048,19 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl
 
 	public JournalFeed fetchByG_F(long groupId, String feedId)
 		throws SystemException {
+		return fetchByG_F(groupId, feedId, true);
+	}
+
+	public JournalFeed fetchByG_F(long groupId, String feedId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId), feedId };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_F,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_F,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

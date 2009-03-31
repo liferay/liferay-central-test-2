@@ -155,6 +155,13 @@ public class PermissionUtil {
 		return getPersistence().fetchByA_R(actionId, resourceId);
 	}
 
+	public static com.liferay.portal.model.Permission fetchByA_R(
+		java.lang.String actionId, long resourceId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByA_R(actionId, resourceId, retrieveFromCache);
+	}
+
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

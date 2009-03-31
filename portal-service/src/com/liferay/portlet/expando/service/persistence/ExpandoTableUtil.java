@@ -161,6 +161,13 @@ public class ExpandoTableUtil {
 		return getPersistence().fetchByC_C_N(companyId, classNameId, name);
 	}
 
+	public static com.liferay.portlet.expando.model.ExpandoTable fetchByC_C_N(
+		long companyId, long classNameId, java.lang.String name,
+		boolean retrieveFromCache) throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByC_C_N(companyId, classNameId, name, retrieveFromCache);
+	}
+
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

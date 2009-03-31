@@ -1152,10 +1152,19 @@ public class TagsPropertyPersistenceImpl extends BasePersistenceImpl
 
 	public TagsProperty fetchByE_K(long entryId, String key)
 		throws SystemException {
+		return fetchByE_K(entryId, key, true);
+	}
+
+	public TagsProperty fetchByE_K(long entryId, String key,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(entryId), key };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_E_K,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_E_K,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

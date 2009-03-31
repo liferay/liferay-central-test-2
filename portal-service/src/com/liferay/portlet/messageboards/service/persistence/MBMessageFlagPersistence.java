@@ -180,6 +180,10 @@ public interface MBMessageFlagPersistence extends BasePersistence {
 		long userId, long messageId, int flag)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.messageboards.model.MBMessageFlag fetchByU_M_F(
+		long userId, long messageId, int flag, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;

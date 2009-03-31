@@ -605,10 +605,19 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public ShoppingCoupon fetchByCode(String code) throws SystemException {
+		return fetchByCode(code, true);
+	}
+
+	public ShoppingCoupon fetchByCode(String code, boolean retrieveFromCache)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { code };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_CODE,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_CODE,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

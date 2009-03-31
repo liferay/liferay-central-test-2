@@ -155,6 +155,12 @@ public class ShoppingOrderUtil {
 		return getPersistence().fetchByNumber(number);
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingOrder fetchByNumber(
+		java.lang.String number, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByNumber(number, retrieveFromCache);
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingOrder findByPPTxnId(
 		java.lang.String ppTxnId)
 		throws com.liferay.portal.SystemException,
@@ -165,6 +171,12 @@ public class ShoppingOrderUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingOrder fetchByPPTxnId(
 		java.lang.String ppTxnId) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByPPTxnId(ppTxnId);
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingOrder fetchByPPTxnId(
+		java.lang.String ppTxnId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPPTxnId(ppTxnId, retrieveFromCache);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findByG_U_PPPS(

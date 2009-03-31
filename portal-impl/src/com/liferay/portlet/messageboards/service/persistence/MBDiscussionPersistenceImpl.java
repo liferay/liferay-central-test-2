@@ -629,10 +629,19 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 
 	public MBDiscussion fetchByThreadId(long threadId)
 		throws SystemException {
+		return fetchByThreadId(threadId, true);
+	}
+
+	public MBDiscussion fetchByThreadId(long threadId, boolean retrieveFromCache)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(threadId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_THREADID,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_THREADID,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -723,12 +732,21 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 
 	public MBDiscussion fetchByC_C(long classNameId, long classPK)
 		throws SystemException {
+		return fetchByC_C(classNameId, classPK, true);
+	}
+
+	public MBDiscussion fetchByC_C(long classNameId, long classPK,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_C,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_C,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

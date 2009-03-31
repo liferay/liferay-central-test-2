@@ -872,10 +872,19 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 
 	public MBStatsUser fetchByG_U(long groupId, long userId)
 		throws SystemException {
+		return fetchByG_U(groupId, userId, true);
+	}
+
+	public MBStatsUser fetchByG_U(long groupId, long userId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_U,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_U,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

@@ -119,6 +119,10 @@ public interface ShoppingOrderPersistence extends BasePersistence {
 	public com.liferay.portlet.shopping.model.ShoppingOrder fetchByNumber(
 		java.lang.String number) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.shopping.model.ShoppingOrder fetchByNumber(
+		java.lang.String number, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.shopping.model.ShoppingOrder findByPPTxnId(
 		java.lang.String ppTxnId)
 		throws com.liferay.portal.SystemException,
@@ -126,6 +130,10 @@ public interface ShoppingOrderPersistence extends BasePersistence {
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder fetchByPPTxnId(
 		java.lang.String ppTxnId) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.shopping.model.ShoppingOrder fetchByPPTxnId(
+		java.lang.String ppTxnId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findByG_U_PPPS(
 		long groupId, long userId, java.lang.String ppPaymentStatus)

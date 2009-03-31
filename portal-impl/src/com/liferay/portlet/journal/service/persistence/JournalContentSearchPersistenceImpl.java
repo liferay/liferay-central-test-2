@@ -1918,6 +1918,13 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 	public JournalContentSearch fetchByG_P_L_P_A(long groupId,
 		boolean privateLayout, long layoutId, String portletId, String articleId)
 		throws SystemException {
+		return fetchByG_P_L_P_A(groupId, privateLayout, layoutId, portletId,
+			articleId, true);
+	}
+
+	public JournalContentSearch fetchByG_P_L_P_A(long groupId,
+		boolean privateLayout, long layoutId, String portletId,
+		String articleId, boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(privateLayout),
 				new Long(layoutId),
@@ -1927,8 +1934,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 				articleId
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_P_L_P_A,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_P_L_P_A,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

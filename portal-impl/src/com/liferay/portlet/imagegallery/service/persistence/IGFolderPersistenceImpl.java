@@ -743,10 +743,19 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 	public IGFolder fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
+		return fetchByUUID_G(uuid, groupId, true);
+	}
+
+	public IGFolder fetchByUUID_G(String uuid, long groupId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1561,14 +1570,23 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 	public IGFolder fetchByG_P_N(long groupId, long parentFolderId, String name)
 		throws SystemException {
+		return fetchByG_P_N(groupId, parentFolderId, name, true);
+	}
+
+	public IGFolder fetchByG_P_N(long groupId, long parentFolderId,
+		String name, boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(parentFolderId),
 				
 				name
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_P_N,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_P_N,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

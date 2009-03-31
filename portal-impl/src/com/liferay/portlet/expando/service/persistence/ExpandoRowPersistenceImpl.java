@@ -594,10 +594,19 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl
 
 	public ExpandoRow fetchByT_C(long tableId, long classPK)
 		throws SystemException {
+		return fetchByT_C(tableId, classPK, true);
+	}
+
+	public ExpandoRow fetchByT_C(long tableId, long classPK,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(tableId), new Long(classPK) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_T_C,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_T_C,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

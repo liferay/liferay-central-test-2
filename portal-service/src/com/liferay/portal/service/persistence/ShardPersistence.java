@@ -86,6 +86,9 @@ public interface ShardPersistence extends BasePersistence {
 	public com.liferay.portal.model.Shard fetchByName(java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Shard fetchByName(java.lang.String name,
+		boolean retrieveFromCache) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Shard findByC_C(long classNameId,
 		long classPK)
 		throws com.liferay.portal.NoSuchShardException,
@@ -93,6 +96,10 @@ public interface ShardPersistence extends BasePersistence {
 
 	public com.liferay.portal.model.Shard fetchByC_C(long classNameId,
 		long classPK) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Shard fetchByC_C(long classNameId,
+		long classPK, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)

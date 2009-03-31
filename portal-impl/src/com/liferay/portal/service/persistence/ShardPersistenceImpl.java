@@ -383,10 +383,19 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Shard fetchByName(String name) throws SystemException {
+		return fetchByName(name, true);
+	}
+
+	public Shard fetchByName(String name, boolean retrieveFromCache)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { name };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_NAME,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_NAME,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -483,12 +492,21 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 
 	public Shard fetchByC_C(long classNameId, long classPK)
 		throws SystemException {
+		return fetchByC_C(classNameId, classPK, true);
+	}
+
+	public Shard fetchByC_C(long classNameId, long classPK,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_C,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_C,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

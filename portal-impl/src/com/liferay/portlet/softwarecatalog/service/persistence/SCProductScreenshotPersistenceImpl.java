@@ -692,10 +692,19 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 	public SCProductScreenshot fetchByThumbnailId(long thumbnailId)
 		throws SystemException {
+		return fetchByThumbnailId(thumbnailId, true);
+	}
+
+	public SCProductScreenshot fetchByThumbnailId(long thumbnailId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(thumbnailId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_THUMBNAILID,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_THUMBNAILID,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -788,10 +797,19 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 	public SCProductScreenshot fetchByFullImageId(long fullImageId)
 		throws SystemException {
+		return fetchByFullImageId(fullImageId, true);
+	}
+
+	public SCProductScreenshot fetchByFullImageId(long fullImageId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(fullImageId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_FULLIMAGEID,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_FULLIMAGEID,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -888,12 +906,21 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 	public SCProductScreenshot fetchByP_P(long productEntryId, int priority)
 		throws SystemException {
+		return fetchByP_P(productEntryId, priority, true);
+	}
+
+	public SCProductScreenshot fetchByP_P(long productEntryId, int priority,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(productEntryId), new Integer(priority)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_P_P,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_P_P,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

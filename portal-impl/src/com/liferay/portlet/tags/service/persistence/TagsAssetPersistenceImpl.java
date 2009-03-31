@@ -614,12 +614,21 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 
 	public TagsAsset fetchByC_C(long classNameId, long classPK)
 		throws SystemException {
+		return fetchByC_C(classNameId, classPK, true);
+	}
+
+	public TagsAsset fetchByC_C(long classNameId, long classPK,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_C,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_C,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

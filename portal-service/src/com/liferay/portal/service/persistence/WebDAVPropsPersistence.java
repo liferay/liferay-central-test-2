@@ -88,6 +88,10 @@ public interface WebDAVPropsPersistence extends BasePersistence {
 	public com.liferay.portal.model.WebDAVProps fetchByC_C(long classNameId,
 		long classPK) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.WebDAVProps fetchByC_C(long classNameId,
+		long classPK, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;

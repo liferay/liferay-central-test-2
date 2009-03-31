@@ -642,12 +642,21 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 
 	public RatingsEntry fetchByU_C_C(long userId, long classNameId, long classPK)
 		throws SystemException {
+		return fetchByU_C_C(userId, classNameId, classPK, true);
+	}
+
+	public RatingsEntry fetchByU_C_C(long userId, long classNameId,
+		long classPK, boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(userId), new Long(classNameId), new Long(classPK)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_U_C_C,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_U_C_C,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

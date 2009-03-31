@@ -689,10 +689,19 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 	public MBMailingList fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
+		return fetchByUUID_G(uuid, groupId, true);
+	}
+
+	public MBMailingList fetchByUUID_G(String uuid, long groupId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -793,10 +802,19 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 	public MBMailingList fetchByCategoryId(long categoryId)
 		throws SystemException {
+		return fetchByCategoryId(categoryId, true);
+	}
+
+	public MBMailingList fetchByCategoryId(long categoryId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(categoryId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_CATEGORYID,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_CATEGORYID,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

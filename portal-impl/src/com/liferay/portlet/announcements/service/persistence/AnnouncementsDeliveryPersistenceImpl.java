@@ -618,10 +618,19 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 
 	public AnnouncementsDelivery fetchByU_T(long userId, String type)
 		throws SystemException {
+		return fetchByU_T(userId, type, true);
+	}
+
+	public AnnouncementsDelivery fetchByU_T(long userId, String type,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(userId), type };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_U_T,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_U_T,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

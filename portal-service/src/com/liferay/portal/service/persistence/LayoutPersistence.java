@@ -142,11 +142,18 @@ public interface LayoutPersistence extends BasePersistence {
 	public com.liferay.portal.model.Layout fetchByDLFolderId(long dlFolderId)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Layout fetchByDLFolderId(long dlFolderId,
+		boolean retrieveFromCache) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Layout findByIconImageId(long iconImageId)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Layout fetchByIconImageId(long iconImageId)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Layout fetchByIconImageId(
+		long iconImageId, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Layout> findByG_P(
@@ -189,6 +196,10 @@ public interface LayoutPersistence extends BasePersistence {
 		boolean privateLayout, long layoutId)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Layout fetchByG_P_L(long groupId,
+		boolean privateLayout, long layoutId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portal.model.Layout> findByG_P_P(
 		long groupId, boolean privateLayout, long parentLayoutId)
 		throws com.liferay.portal.SystemException;
@@ -228,6 +239,10 @@ public interface LayoutPersistence extends BasePersistence {
 	public com.liferay.portal.model.Layout fetchByG_P_F(long groupId,
 		boolean privateLayout, java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Layout fetchByG_P_F(long groupId,
+		boolean privateLayout, java.lang.String friendlyURL,
+		boolean retrieveFromCache) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Layout> findByG_P_T(
 		long groupId, boolean privateLayout, java.lang.String type)

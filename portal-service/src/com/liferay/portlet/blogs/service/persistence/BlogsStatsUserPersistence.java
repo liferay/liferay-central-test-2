@@ -149,6 +149,10 @@ public interface BlogsStatsUserPersistence extends BasePersistence {
 	public com.liferay.portlet.blogs.model.BlogsStatsUser fetchByG_U(
 		long groupId, long userId) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.blogs.model.BlogsStatsUser fetchByG_U(
+		long groupId, long userId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByG_E(
 		long groupId, int entryCount) throws com.liferay.portal.SystemException;
 

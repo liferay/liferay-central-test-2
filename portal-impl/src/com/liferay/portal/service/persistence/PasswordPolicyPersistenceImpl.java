@@ -427,12 +427,21 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl
 
 	public PasswordPolicy fetchByC_DP(long companyId, boolean defaultPolicy)
 		throws SystemException {
+		return fetchByC_DP(companyId, defaultPolicy, true);
+	}
+
+	public PasswordPolicy fetchByC_DP(long companyId, boolean defaultPolicy,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), Boolean.valueOf(defaultPolicy)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_DP,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_DP,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -529,10 +538,19 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl
 
 	public PasswordPolicy fetchByC_N(long companyId, String name)
 		throws SystemException {
+		return fetchByC_N(companyId, name, true);
+	}
+
+	public PasswordPolicy fetchByC_N(long companyId, String name,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(companyId), name };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_N,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_N,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

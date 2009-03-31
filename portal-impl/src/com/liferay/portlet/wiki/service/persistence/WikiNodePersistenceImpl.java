@@ -703,10 +703,19 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 	public WikiNode fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
+		return fetchByUUID_G(uuid, groupId, true);
+	}
+
+	public WikiNode fetchByUUID_G(String uuid, long groupId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1255,10 +1264,19 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 
 	public WikiNode fetchByG_N(long groupId, String name)
 		throws SystemException {
+		return fetchByG_N(groupId, name, true);
+	}
+
+	public WikiNode fetchByG_N(long groupId, String name,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId), name };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_N,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_N,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

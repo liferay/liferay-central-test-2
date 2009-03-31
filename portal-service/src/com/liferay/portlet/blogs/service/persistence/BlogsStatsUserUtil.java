@@ -197,6 +197,12 @@ public class BlogsStatsUserUtil {
 		return getPersistence().fetchByG_U(groupId, userId);
 	}
 
+	public static com.liferay.portlet.blogs.model.BlogsStatsUser fetchByG_U(
+		long groupId, long userId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByG_U(groupId, userId, retrieveFromCache);
+	}
+
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByG_E(
 		long groupId, int entryCount) throws com.liferay.portal.SystemException {
 		return getPersistence().findByG_E(groupId, entryCount);

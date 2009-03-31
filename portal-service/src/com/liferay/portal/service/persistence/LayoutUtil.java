@@ -191,6 +191,12 @@ public class LayoutUtil {
 		return getPersistence().fetchByDLFolderId(dlFolderId);
 	}
 
+	public static com.liferay.portal.model.Layout fetchByDLFolderId(
+		long dlFolderId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByDLFolderId(dlFolderId, retrieveFromCache);
+	}
+
 	public static com.liferay.portal.model.Layout findByIconImageId(
 		long iconImageId)
 		throws com.liferay.portal.NoSuchLayoutException,
@@ -201,6 +207,13 @@ public class LayoutUtil {
 	public static com.liferay.portal.model.Layout fetchByIconImageId(
 		long iconImageId) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByIconImageId(iconImageId);
+	}
+
+	public static com.liferay.portal.model.Layout fetchByIconImageId(
+		long iconImageId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByIconImageId(iconImageId, retrieveFromCache);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Layout> findByG_P(
@@ -259,6 +272,14 @@ public class LayoutUtil {
 		boolean privateLayout, long layoutId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByG_P_L(groupId, privateLayout, layoutId);
+	}
+
+	public static com.liferay.portal.model.Layout fetchByG_P_L(long groupId,
+		boolean privateLayout, long layoutId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByG_P_L(groupId, privateLayout, layoutId,
+			retrieveFromCache);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Layout> findByG_P_P(
@@ -325,6 +346,14 @@ public class LayoutUtil {
 		boolean privateLayout, java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByG_P_F(groupId, privateLayout, friendlyURL);
+	}
+
+	public static com.liferay.portal.model.Layout fetchByG_P_F(long groupId,
+		boolean privateLayout, java.lang.String friendlyURL,
+		boolean retrieveFromCache) throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByG_P_F(groupId, privateLayout, friendlyURL,
+			retrieveFromCache);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Layout> findByG_P_T(

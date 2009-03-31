@@ -431,12 +431,21 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 
 	public PasswordPolicyRel fetchByC_C(long classNameId, long classPK)
 		throws SystemException {
+		return fetchByC_C(classNameId, classPK, true);
+	}
+
+	public PasswordPolicyRel fetchByC_C(long classNameId, long classPK,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_C,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_C,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -538,13 +547,23 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 
 	public PasswordPolicyRel fetchByP_C_C(long passwordPolicyId,
 		long classNameId, long classPK) throws SystemException {
+		return fetchByP_C_C(passwordPolicyId, classNameId, classPK, true);
+	}
+
+	public PasswordPolicyRel fetchByP_C_C(long passwordPolicyId,
+		long classNameId, long classPK, boolean retrieveFromCache)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(passwordPolicyId), new Long(classNameId),
 				new Long(classPK)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_P_C_C,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_P_C_C,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

@@ -605,10 +605,19 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public Group fetchByLiveGroupId(long liveGroupId) throws SystemException {
+		return fetchByLiveGroupId(liveGroupId, true);
+	}
+
+	public Group fetchByLiveGroupId(long liveGroupId, boolean retrieveFromCache)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(liveGroupId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_LIVEGROUPID,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_LIVEGROUPID,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -702,10 +711,19 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 	public Group fetchByC_N(long companyId, String name)
 		throws SystemException {
+		return fetchByC_N(companyId, name, true);
+	}
+
+	public Group fetchByC_N(long companyId, String name,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(companyId), name };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_N,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_N,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -812,10 +830,19 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 	public Group fetchByC_F(long companyId, String friendlyURL)
 		throws SystemException {
+		return fetchByC_F(companyId, friendlyURL, true);
+	}
+
+	public Group fetchByC_F(long companyId, String friendlyURL,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(companyId), friendlyURL };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_F,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_F,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1170,12 +1197,21 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 	public Group fetchByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
+		return fetchByC_C_C(companyId, classNameId, classPK, true);
+	}
+
+	public Group fetchByC_C_C(long companyId, long classNameId, long classPK,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_C_C,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_C_C,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1284,14 +1320,23 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 	public Group fetchByC_L_N(long companyId, long liveGroupId, String name)
 		throws SystemException {
+		return fetchByC_L_N(companyId, liveGroupId, name, true);
+	}
+
+	public Group fetchByC_L_N(long companyId, long liveGroupId, String name,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(liveGroupId),
 				
 				name
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_L_N,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_L_N,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

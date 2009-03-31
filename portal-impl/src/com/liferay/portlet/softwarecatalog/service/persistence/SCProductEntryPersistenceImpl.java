@@ -1171,10 +1171,20 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 	public SCProductEntry fetchByRG_RA(String repoGroupId, String repoArtifactId)
 		throws SystemException {
+		return fetchByRG_RA(repoGroupId, repoArtifactId, true);
+	}
+
+	public SCProductEntry fetchByRG_RA(String repoGroupId,
+		String repoArtifactId, boolean retrieveFromCache)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { repoGroupId, repoArtifactId };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_RG_RA,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_RG_RA,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

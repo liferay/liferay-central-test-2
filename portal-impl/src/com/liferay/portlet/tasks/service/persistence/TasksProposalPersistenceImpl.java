@@ -899,10 +899,19 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 
 	public TasksProposal fetchByC_C(long classNameId, String classPK)
 		throws SystemException {
+		return fetchByC_C(classNameId, classPK, true);
+	}
+
+	public TasksProposal fetchByC_C(long classNameId, String classPK,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(classNameId), classPK };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_C,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_C,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

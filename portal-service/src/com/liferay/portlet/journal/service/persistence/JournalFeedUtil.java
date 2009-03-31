@@ -156,6 +156,12 @@ public class JournalFeedUtil {
 		return getPersistence().fetchByUUID_G(uuid, groupId);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalFeed fetchByUUID_G(
+		java.lang.String uuid, long groupId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByUUID_G(uuid, groupId, retrieveFromCache);
+	}
+
 	public static java.util.List<com.liferay.portlet.journal.model.JournalFeed> findByGroupId(
 		long groupId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId);
@@ -207,6 +213,12 @@ public class JournalFeedUtil {
 		long groupId, java.lang.String feedId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByG_F(groupId, feedId);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalFeed fetchByG_F(
+		long groupId, java.lang.String feedId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByG_F(groupId, feedId, retrieveFromCache);
 	}
 
 	public static java.util.List<Object> findWithDynamicQuery(

@@ -124,6 +124,10 @@ public interface BookmarksFolderPersistence extends BasePersistence {
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.bookmarks.model.BookmarksFolder fetchByUUID_G(
+		java.lang.String uuid, long groupId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> findByGroupId(
 		long groupId) throws com.liferay.portal.SystemException;
 

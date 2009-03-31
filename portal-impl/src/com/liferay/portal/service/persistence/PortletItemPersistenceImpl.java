@@ -972,6 +972,12 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 
 	public PortletItem fetchByG_N_P_C(long groupId, String name,
 		String portletId, long classNameId) throws SystemException {
+		return fetchByG_N_P_C(groupId, name, portletId, classNameId, true);
+	}
+
+	public PortletItem fetchByG_N_P_C(long groupId, String name,
+		String portletId, long classNameId, boolean retrieveFromCache)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -980,8 +986,12 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 				portletId, new Long(classNameId)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_N_P_C,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_N_P_C,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

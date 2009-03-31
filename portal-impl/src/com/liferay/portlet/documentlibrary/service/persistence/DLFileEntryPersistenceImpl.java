@@ -1158,10 +1158,19 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 
 	public DLFileEntry fetchByF_N(long folderId, String name)
 		throws SystemException {
+		return fetchByF_N(folderId, name, true);
+	}
+
+	public DLFileEntry fetchByF_N(long folderId, String name,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(folderId), name };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_F_N,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_F_N,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

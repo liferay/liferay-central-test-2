@@ -892,10 +892,19 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 
 	public UserGroup fetchByC_N(long companyId, String name)
 		throws SystemException {
+		return fetchByC_N(companyId, name, true);
+	}
+
+	public UserGroup fetchByC_N(long companyId, String name,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(companyId), name };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_N,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_N,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

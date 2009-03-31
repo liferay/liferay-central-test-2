@@ -158,6 +158,12 @@ public class JournalTemplateUtil {
 		return getPersistence().fetchByUUID_G(uuid, groupId);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalTemplate fetchByUUID_G(
+		java.lang.String uuid, long groupId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByUUID_G(uuid, groupId, retrieveFromCache);
+	}
+
 	public static java.util.List<com.liferay.portlet.journal.model.JournalTemplate> findByGroupId(
 		long groupId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId);
@@ -252,6 +258,13 @@ public class JournalTemplateUtil {
 		return getPersistence().fetchBySmallImageId(smallImageId);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalTemplate fetchBySmallImageId(
+		long smallImageId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchBySmallImageId(smallImageId, retrieveFromCache);
+	}
+
 	public static com.liferay.portlet.journal.model.JournalTemplate findByG_T(
 		long groupId, java.lang.String templateId)
 		throws com.liferay.portal.SystemException,
@@ -263,6 +276,13 @@ public class JournalTemplateUtil {
 		long groupId, java.lang.String templateId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByG_T(groupId, templateId);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalTemplate fetchByG_T(
+		long groupId, java.lang.String templateId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByG_T(groupId, templateId, retrieveFromCache);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalTemplate> findByG_S(

@@ -124,6 +124,10 @@ public interface MBCategoryPersistence extends BasePersistence {
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.messageboards.model.MBCategory fetchByUUID_G(
+		java.lang.String uuid, long groupId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByGroupId(
 		long groupId) throws com.liferay.portal.SystemException;
 

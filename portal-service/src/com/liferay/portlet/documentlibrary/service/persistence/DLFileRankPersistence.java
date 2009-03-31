@@ -153,6 +153,10 @@ public interface DLFileRankPersistence extends BasePersistence {
 		long companyId, long userId, long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.documentlibrary.model.DLFileRank fetchByC_U_F_N(
+		long companyId, long userId, long folderId, java.lang.String name,
+		boolean retrieveFromCache) throws com.liferay.portal.SystemException;
+
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;

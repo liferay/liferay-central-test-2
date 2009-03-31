@@ -720,10 +720,19 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 
 	public ShoppingItem fetchBySmallImageId(long smallImageId)
 		throws SystemException {
+		return fetchBySmallImageId(smallImageId, true);
+	}
+
+	public ShoppingItem fetchBySmallImageId(long smallImageId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(smallImageId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_SMALLIMAGEID,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_SMALLIMAGEID,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -815,10 +824,19 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 
 	public ShoppingItem fetchByMediumImageId(long mediumImageId)
 		throws SystemException {
+		return fetchByMediumImageId(mediumImageId, true);
+	}
+
+	public ShoppingItem fetchByMediumImageId(long mediumImageId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(mediumImageId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_MEDIUMIMAGEID,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_MEDIUMIMAGEID,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -910,10 +928,19 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 
 	public ShoppingItem fetchByLargeImageId(long largeImageId)
 		throws SystemException {
+		return fetchByLargeImageId(largeImageId, true);
+	}
+
+	public ShoppingItem fetchByLargeImageId(long largeImageId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(largeImageId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_LARGEIMAGEID,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_LARGEIMAGEID,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -1008,10 +1035,19 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 
 	public ShoppingItem fetchByC_S(long companyId, String sku)
 		throws SystemException {
+		return fetchByC_S(companyId, sku, true);
+	}
+
+	public ShoppingItem fetchByC_S(long companyId, String sku,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(companyId), sku };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_S,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_S,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

@@ -122,6 +122,10 @@ public interface JournalArticleResourcePersistence extends BasePersistence {
 		long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.journal.model.JournalArticleResource fetchByG_A(
+		long groupId, java.lang.String articleId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;

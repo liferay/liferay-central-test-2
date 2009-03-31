@@ -177,6 +177,10 @@ public interface SocialActivityPersistence extends BasePersistence {
 	public com.liferay.portlet.social.model.SocialActivity fetchByMirrorActivityId(
 		long mirrorActivityId) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.social.model.SocialActivity fetchByMirrorActivityId(
+		long mirrorActivityId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> findByClassNameId(
 		long classNameId) throws com.liferay.portal.SystemException;
 
@@ -306,6 +310,11 @@ public interface SocialActivityPersistence extends BasePersistence {
 	public com.liferay.portlet.social.model.SocialActivity fetchByG_U_CD_C_C_T_R(
 		long groupId, long userId, java.util.Date createDate, long classNameId,
 		long classPK, int type, long receiverUserId)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.social.model.SocialActivity fetchByG_U_CD_C_C_T_R(
+		long groupId, long userId, java.util.Date createDate, long classNameId,
+		long classPK, int type, long receiverUserId, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<Object> findWithDynamicQuery(

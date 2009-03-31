@@ -1251,10 +1251,19 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 	public SocialActivity fetchByMirrorActivityId(long mirrorActivityId)
 		throws SystemException {
+		return fetchByMirrorActivityId(mirrorActivityId, true);
+	}
+
+	public SocialActivity fetchByMirrorActivityId(long mirrorActivityId,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(mirrorActivityId) };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_MIRRORACTIVITYID,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_MIRRORACTIVITYID,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -2352,6 +2361,14 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 	public SocialActivity fetchByG_U_CD_C_C_T_R(long groupId, long userId,
 		Date createDate, long classNameId, long classPK, int type,
 		long receiverUserId) throws SystemException {
+		return fetchByG_U_CD_C_C_T_R(groupId, userId, createDate, classNameId,
+			classPK, type, receiverUserId, true);
+	}
+
+	public SocialActivity fetchByG_U_CD_C_C_T_R(long groupId, long userId,
+		Date createDate, long classNameId, long classPK, int type,
+		long receiverUserId, boolean retrieveFromCache)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(userId),
 				
@@ -2359,8 +2376,12 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 				new Integer(type), new Long(receiverUserId)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_U_CD_C_C_T_R,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_U_CD_C_C_T_R,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

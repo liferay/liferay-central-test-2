@@ -353,10 +353,19 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public ClassName fetchByValue(String value) throws SystemException {
+		return fetchByValue(value, true);
+	}
+
+	public ClassName fetchByValue(String value, boolean retrieveFromCache)
+		throws SystemException {
 		Object[] finderArgs = new Object[] { value };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_VALUE,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_VALUE,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

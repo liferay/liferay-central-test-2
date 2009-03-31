@@ -122,6 +122,10 @@ public interface JournalFeedPersistence extends BasePersistence {
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.journal.model.JournalFeed fetchByUUID_G(
+		java.lang.String uuid, long groupId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.journal.model.JournalFeed> findByGroupId(
 		long groupId) throws com.liferay.portal.SystemException;
 
@@ -157,6 +161,10 @@ public interface JournalFeedPersistence extends BasePersistence {
 
 	public com.liferay.portlet.journal.model.JournalFeed fetchByG_F(
 		long groupId, java.lang.String feedId)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.journal.model.JournalFeed fetchByG_F(
+		long groupId, java.lang.String feedId, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<Object> findWithDynamicQuery(

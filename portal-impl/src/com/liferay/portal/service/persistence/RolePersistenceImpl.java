@@ -678,10 +678,19 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 	public Role fetchByC_N(long companyId, String name)
 		throws SystemException {
+		return fetchByC_N(companyId, name, true);
+	}
+
+	public Role fetchByC_N(long companyId, String name,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(companyId), name };
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_N,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_N,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -791,12 +800,21 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 	public Role fetchByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
+		return fetchByC_C_C(companyId, classNameId, classPK, true);
+	}
+
+	public Role fetchByC_C_C(long companyId, long classNameId, long classPK,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK)
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_C_C,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_C_C,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

@@ -254,6 +254,16 @@ public class JournalArticleImageUtil {
 			elInstanceId, elName, languageId);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalArticleImage fetchByG_A_V_E_E_L(
+		long groupId, java.lang.String articleId, double version,
+		java.lang.String elInstanceId, java.lang.String elName,
+		java.lang.String languageId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByG_A_V_E_E_L(groupId, articleId, version,
+			elInstanceId, elName, languageId, retrieveFromCache);
+	}
+
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

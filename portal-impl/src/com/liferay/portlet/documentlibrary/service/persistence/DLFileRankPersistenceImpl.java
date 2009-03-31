@@ -929,14 +929,24 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 
 	public DLFileRank fetchByC_U_F_N(long companyId, long userId,
 		long folderId, String name) throws SystemException {
+		return fetchByC_U_F_N(companyId, userId, folderId, name, true);
+	}
+
+	public DLFileRank fetchByC_U_F_N(long companyId, long userId,
+		long folderId, String name, boolean retrieveFromCache)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(userId), new Long(folderId),
 				
 				name
 			};
 
-		Object result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_U_F_N,
-				finderArgs, this);
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_U_F_N,
+					finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;

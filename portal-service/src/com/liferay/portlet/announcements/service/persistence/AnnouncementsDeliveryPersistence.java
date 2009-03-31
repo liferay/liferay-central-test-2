@@ -122,6 +122,10 @@ public interface AnnouncementsDeliveryPersistence extends BasePersistence {
 		long userId, java.lang.String type)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.announcements.model.AnnouncementsDelivery fetchByU_T(
+		long userId, java.lang.String type, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
