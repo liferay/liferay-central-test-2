@@ -30,7 +30,7 @@ String widgetURL = ParamUtil.getString(request, "widgetURL");
 %>
 
 <c:choose>
-	<c:when test="<%= Validator.isNotNull(widgetURL)%>">
+	<c:when test="<%= Validator.isNotNull(widgetURL) %>">
 	<p>
 		<liferay-ui:message key="share-this-application-on-any-website" />
 	</p>
@@ -41,7 +41,7 @@ String widgetURL = ParamUtil.getString(request, "widgetURL");
 	&lt;/script&gt;</textarea>
 	</c:when>
 
-	<c:when test="<%= Validator.isNotNull(netvibesURL)%>">
+	<c:when test="<%= Validator.isNotNull(netvibesURL) %>">
 		<p>
 			<a href="http://eco.netvibes.com/submit/widget" target="_blank"><liferay-ui:message key="add-this-application-to-netvibes" /></a>
 		</p>

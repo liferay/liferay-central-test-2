@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.NoSuchLayoutException;
@@ -28,18 +29,19 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.util.PropsValues;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.util.WebKeys;
+
+import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="NetvibesServlet.java.html"><b><i>View Source</i></b></a>
@@ -89,23 +91,30 @@ public class NetvibesServlet extends HttpServlet {
 
 				StringBuilder sb = new StringBuilder();
 				sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-				sb.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"\n");
-				sb.append("\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n");
+				sb.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 ");
+				sb.append("Strict//EN\"\n");
+				sb.append("\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.");
+				sb.append("dtd\">\n");
 				sb.append("<html xmlns=\"http://www.w3.org/1999/xhtml\"\n");
 				sb.append("xmlns:widget=\"http://www.netvibes.com/ns/\">\n");
 
 				sb.append("<head>\n");
-				sb.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"http://www.netvibes.com/themes/uwa/style.css\" />\n");
-				sb.append("<script type=\"text/javascript\" src=\"http://www.netvibes.com/js/UWA/load.js.php?env=Standalone\"></script>\n");
+				sb.append("<link rel=\"stylesheet\" type=\"text/css\" ");
+				sb.append("href=\"http://www.netvibes.com/themes/uwa/");
+				sb.append("style.css\" />\n");
+				sb.append("<script type=\"text/javascript\" ");
+				sb.append("src=\"http://www.netvibes.com/js/UWA/");
+				sb.append("load.js.php?env=Standalone\"></script>\n");
 				sb.append("<title>" + widgetTitle + "</title>\n");
-				sb.append("<link rel=\"icon\" type=\"image/png\" href=\"" + iconURL + "\" />\n");
+				sb.append("<link rel=\"icon\" type=\"image/png\" ");
+				sb.append("href=\"" + iconURL + "\" />\n");
 				sb.append("</head>\n");
 				sb.append("<body>\n");
-				sb.append("  <script src=\"" + widgetJSURL + "\"");
-				sb.append("    type=\"text/javascript\"></script>\n");
-				sb.append("  <script type=\"text/javascript\">\n");
-				sb.append("    Liferay.Widget({url:\"" + widgetURL + "\"});\n");
-				sb.append("  </script>\n");
+				sb.append(" <script src=\"" + widgetJSURL + "\"");
+				sb.append("  type=\"text/javascript\"></script>\n");
+				sb.append(" <script type=\"text/javascript\">\n");
+				sb.append("  Liferay.Widget({url:\"" + widgetURL + "\"});\n");
+				sb.append(" </script>\n");
 				sb.append("</body>\n");
 				sb.append("</html>\n");
 
