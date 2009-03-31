@@ -1190,6 +1190,9 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.SPRING_HIBERNATE_SESSION_DELEGATED));
 
+	public static final String[] STATIC_RESOURCES_404_EXTENSIONS =
+		PropsUtil.getArray(PropsKeys.STATIC_RESOURCES_404_EXTENSIONS);
+
 	public static final String STRUTS_PORTLET_REQUEST_PROCESSOR = PropsUtil.get(
 		PropsKeys.STRUTS_PORTLET_REQUEST_PROCESSOR);
 
