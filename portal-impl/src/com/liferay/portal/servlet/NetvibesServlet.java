@@ -23,15 +23,18 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.IOException;
 
@@ -40,14 +43,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="NetvibesServlet.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alberto Montero
  * @author Julio Camarero
+ *
  */
 public class NetvibesServlet extends HttpServlet {
 
@@ -56,9 +57,9 @@ public class NetvibesServlet extends HttpServlet {
 		throws IOException, ServletException {
 
 		try {
-			String redirect = getRedirect(request);
+			String content = getContent(request);
 
-			if (redirect == null) {
+			if (content == null) {
 				PortalUtil.sendError(
 					HttpServletResponse.SC_NOT_FOUND,
 					new NoSuchLayoutException(), request, response);
@@ -66,59 +67,9 @@ public class NetvibesServlet extends HttpServlet {
 			else {
 				request.setAttribute(WebKeys.NETVIBES, Boolean.TRUE);
 
-				String path = GetterUtil.getString(request.getPathInfo());
-				String portletId = path.substring(
-					path.indexOf("/-/") + "/-/".length());
-				Portlet portlet = PortletLocalServiceUtil.getPortletById(
-					PortalUtil.getCompanyId(request), portletId);
-
-				String widgetTitle = portlet.getDisplayName();
-
-				String iconURL = PortalUtil.getPortalURL(request) +
-					PortalUtil.getPathContext() + portlet.getIcon();
-				System.out.println("icono: "+iconURL) ;
-
-				String widgetJSURL =
-					PortalUtil.getPortalURL(request) +
-					PortalUtil.getPathContext() + "/html/js/liferay/widget.js";
-
-				String widgetURL =
-					request.getRequestURL().toString().replaceFirst(
-						PropsValues.NETVIBES_SERVLET_MAPPING,
-						PropsValues.WIDGET_SERVLET_MAPPING);
-
 				response.setContentType(ContentTypes.TEXT_XML);
 
-				StringBuilder sb = new StringBuilder();
-				sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-				sb.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 ");
-				sb.append("Strict//EN\"\n");
-				sb.append("\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.");
-				sb.append("dtd\">\n");
-				sb.append("<html xmlns=\"http://www.w3.org/1999/xhtml\"\n");
-				sb.append("xmlns:widget=\"http://www.netvibes.com/ns/\">\n");
-
-				sb.append("<head>\n");
-				sb.append("<link rel=\"stylesheet\" type=\"text/css\" ");
-				sb.append("href=\"http://www.netvibes.com/themes/uwa/");
-				sb.append("style.css\" />\n");
-				sb.append("<script type=\"text/javascript\" ");
-				sb.append("src=\"http://www.netvibes.com/js/UWA/");
-				sb.append("load.js.php?env=Standalone\"></script>\n");
-				sb.append("<title>" + widgetTitle + "</title>\n");
-				sb.append("<link rel=\"icon\" type=\"image/png\" ");
-				sb.append("href=\"" + iconURL + "\" />\n");
-				sb.append("</head>\n");
-				sb.append("<body>\n");
-				sb.append(" <script src=\"" + widgetJSURL + "\"");
-				sb.append("  type=\"text/javascript\"></script>\n");
-				sb.append(" <script type=\"text/javascript\">\n");
-				sb.append("  Liferay.Widget({url:\"" + widgetURL + "\"});\n");
-				sb.append(" </script>\n");
-				sb.append("</body>\n");
-				sb.append("</html>\n");
-
-				response.getOutputStream().print(sb.toString());
+				ServletResponseUtil.write(response, content);
 			}
 		}
 		catch (Exception e) {
@@ -130,24 +81,79 @@ public class NetvibesServlet extends HttpServlet {
 		}
 	}
 
-	protected String getRedirect(HttpServletRequest request) {
+	protected String getContent(HttpServletRequest request) throws Exception {
 		String path = GetterUtil.getString(request.getPathInfo());
 
 		if (Validator.isNull(path)) {
 			return null;
 		}
 
-		String ppid = ParamUtil.getString(request, "p_p_id");
+		int pos = path.indexOf(Portal.FRIENDLY_URL_SEPARATOR);
 
-		int pos = path.indexOf("/-/");
-
-		if (Validator.isNull(ppid) && (pos == -1)) {
+		if (pos == -1) {
 			return null;
 		}
 
-		return path;
+		long companyId = PortalUtil.getCompanyId(request);
+
+		String portletId = path.substring(
+			pos + Portal.FRIENDLY_URL_SEPARATOR.length());
+
+		Portlet portlet = PortletLocalServiceUtil.getPortletById(
+			companyId, portletId);
+
+		String title = portlet.getDisplayName();
+
+		String portalURL = PortalUtil.getPortalURL(request);
+
+		String iconURL =
+			portalURL + PortalUtil.getPathContext() + portlet.getIcon();
+
+		String widgetJsURL =
+			portalURL + PortalUtil.getPathContext() +
+				"/html/js/liferay/widget.js";
+
+		String widgetURL = request.getRequestURL().toString();
+
+		widgetURL = widgetURL.replaceFirst(
+			PropsValues.NETVIBES_SERVLET_MAPPING,
+			PropsValues.WIDGET_SERVLET_MAPPING);
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+		sb.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 ");
+		sb.append("Strict//EN\" ");
+		sb.append("\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
+		sb.append("<html xmlns=\"http://www.w3.org/1999/xhtml\" ");
+		sb.append("xmlns:widget=\"http://www.netvibes.com/ns/\">");
+		sb.append("<head>");
+		sb.append("<link href=\"" + _NETVIBES_CSS + "\" rel=\"stylesheet\"");
+		sb.append("type=\"text/css\" />");
+		sb.append("<script src=\"" + _NETVIBES_JS + "\" ");
+		sb.append("type=\"text/javascript\"></script>");
+		sb.append("<title>" + title + "</title>");
+		sb.append("<link href=\"" + iconURL + "\" rel=\"icon\" ");
+		sb.append("type=\"image/png\" />");
+		sb.append("</head>");
+		sb.append("<body>");
+		sb.append("<script src=\"" + widgetJsURL + "\" ");
+		sb.append("type=\"text/javascript\"></script>");
+		sb.append("<script type=\"text/javascript\">");
+		sb.append("Liferay.Widget({url:\"" + widgetURL + "\"});");
+		sb.append("</script>");
+		sb.append("</body>");
+		sb.append("</html>");
+
+		return sb.toString();
 	}
 
-	private static Log _log = LogFactory.getLog(NetvibesServlet.class);
+	private static final String _NETVIBES_CSS =
+		"http://www.netvibes.com/themes/uwa/style.css";
+
+	private static final String _NETVIBES_JS =
+		"http://www.netvibes.com/js/UWA/load.js.php?env=Standalone";
+
+	private static Log _log = LogFactoryUtil.getLog(NetvibesServlet.class);
 
 }

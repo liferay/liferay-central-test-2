@@ -31,21 +31,20 @@ String widgetURL = ParamUtil.getString(request, "widgetURL");
 
 <c:choose>
 	<c:when test="<%= Validator.isNotNull(widgetURL) %>">
-	<p>
-		<liferay-ui:message key="share-this-application-on-any-website" />
-	</p>
+		<p>
+			<liferay-ui:message key="share-this-application-on-any-website" />
+		</p>
 
-	<textarea class="lfr-textarea">&lt;script src=&quot;<%= themeDisplay.getPortalURL() %><%= themeDisplay.getPathContext() %>/html/js/liferay/widget.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-	&lt;script type=&quot;text/javascript&quot;&gt;
-	Liferay.Widget({ url: &#x27;<%= widgetURL %>&#x27;});
-	&lt;/script&gt;</textarea>
+		<textarea class="lfr-textarea" onClick="Liferay.Util.selectAndCopy(this);">&lt;script src=&quot;<%= themeDisplay.getPortalURL() %><%= themeDisplay.getPathContext() %>/html/js/liferay/widget.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+Liferay.Widget({ url: &#x27;<%= widgetURL %>&#x27;});
+&lt;/script&gt;</textarea>
 	</c:when>
-
 	<c:when test="<%= Validator.isNotNull(netvibesURL) %>">
 		<p>
 			<a href="http://eco.netvibes.com/submit/widget" target="_blank"><liferay-ui:message key="add-this-application-to-netvibes" /></a>
 		</p>
 
-		<textarea class="lfr-textarea"><%= netvibesURL %></textarea>
+		<liferay-ui:input-resource url="<%= netvibesURL %>" />
 	</c:when>
 </c:choose>

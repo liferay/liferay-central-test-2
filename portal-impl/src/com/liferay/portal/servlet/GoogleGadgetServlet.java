@@ -120,7 +120,7 @@ public class GoogleGadgetServlet extends HttpServlet {
 		sb.append("<ModulePrefs title=\"" + title + "\"/>");
 		sb.append("<Content type=\"html\">");
 		sb.append("<![CDATA[");
-		sb.append("<script src=\"" + widgetJsURL + "\"");
+		sb.append("<script src=\"" + widgetJsURL + "\" ");
 		sb.append("type=\"text/javascript\"></script>");
 		sb.append("<script type=\"text/javascript\">");
 		sb.append("window.Liferay.Widget({url:'" + widgetURL + "'});");

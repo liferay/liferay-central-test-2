@@ -376,7 +376,8 @@ public class PortalUtil {
 	}
 
 	public static String getNetvibesURL(
-			Portlet portlet, ThemeDisplay themeDisplay) {
+		Portlet portlet, ThemeDisplay themeDisplay) {
+
 		return getPortal().getNetvibesURL(portlet, themeDisplay);
 	}
 

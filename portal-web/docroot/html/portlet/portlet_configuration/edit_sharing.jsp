@@ -177,14 +177,14 @@ Liferay.Widget({ url: &#x27;<%= widgetURL %>&#x27;});
 		</div>
 
 		<table class="lfr-table">
-			<tr>
-				<td>
-					<liferay-ui:message key="google-gadget-url" />
-				</td>
-				<td>
-					<liferay-ui:input-resource url="<%= PortalUtil.getGoogleGadgetURL(portlet, themeDisplay) %>" />
-				</td>
-			</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="google-gadget-url" />
+			</td>
+			<td>
+				<liferay-ui:input-resource url="<%= PortalUtil.getGoogleGadgetURL(portlet, themeDisplay) %>" />
+			</td>
+		</tr>
 		</table>
 
 		<br />
@@ -197,7 +197,6 @@ Liferay.Widget({ url: &#x27;<%= widgetURL %>&#x27;});
 
 		<%
 		boolean netvibesShowAddAppLink = PrefsParamUtil.getBoolean(preferences, request, "lfr-netvibes-show-add-app-link");
-		String netvibesURL = PortalUtil.getNetvibesURL(portlet, themeDisplay);
 		%>
 
 		<div class="portlet-msg-info">
@@ -205,17 +204,17 @@ Liferay.Widget({ url: &#x27;<%= widgetURL %>&#x27;});
 		</div>
 
 		<table class="lfr-table">
-			<tr>
-				<td>
-					<liferay-ui:message key="netvibes-widget-url" />
-				</td>
-				<td>
-					<liferay-ui:input-resource url="<%= netvibesURL %>" />
-				</td>
-			</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="netvibes-widget-url" />
+			</td>
+			<td>
+				<liferay-ui:input-resource url="<%= PortalUtil.getNetvibesURL(portlet, themeDisplay) %>" />
+			</td>
+		</tr>
 		</table>
 
-		<br /><br />
+		<br />
 
 		<div>
 			<%= LanguageUtil.format(pageContext, "allow-users-to-add-x-to-netvibes-pages", portletDisplay.getTitle()) %> <liferay-ui:input-checkbox param="netvibesShowAddAppLink" defaultValue="<%= netvibesShowAddAppLink %>" />

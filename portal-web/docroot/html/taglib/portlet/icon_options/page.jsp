@@ -68,13 +68,11 @@
 		}
 
 		boolean iGoogleShowAddAppLink = GetterUtil.getBoolean(portletSetup.getValue("lfr-igoogle-show-add-app-link", StringPool.BLANK));
-
 		boolean netvibesShowAddAppLinks = GetterUtil.getBoolean(portletSetup.getValue("lfr-netvibes-show-add-app-link", StringPool.BLANK));
-
 		boolean appShowShareWithFriendsLink = GetterUtil.getBoolean(portletSetup.getValue("lfr-app-show-share-with-friends-link", StringPool.BLANK));
 		%>
 
-		<c:if test="<%= widgetShowAddAppLink || facebookShowAddAppLink || iGoogleShowAddAppLink || appShowShareWithFriendsLink || netvibesShowAddAppLinks%>">
+		<c:if test="<%= widgetShowAddAppLink || facebookShowAddAppLink || iGoogleShowAddAppLink || netvibesShowAddAppLinks || appShowShareWithFriendsLink %>">
 			<c:if test="<%= widgetShowAddAppLink %>">
 
 				<%
@@ -118,15 +116,15 @@
 			<c:if test="<%= netvibesShowAddAppLinks %>">
 
 				<%
-				String portletSharingHREF = "javascript: Liferay.PortletSharing.showNetvibesInfo('" + PortalUtil.getNetvibesURL(portlet, themeDisplay) + "');";
+				String netvibesHREF = "javascript: Liferay.PortletSharing.showNetvibesInfo('" + PortalUtil.getNetvibesURL(portlet, themeDisplay) + "');";
 				%>
 
 				<liferay-ui:icon
-						image="../dock/add_content"
-						message="add-to-netvibes"
-						url="<%= portletSharingHREF %>"
-						method="get"
-						label="<%= true %>"
+					image="../dock/add_content"
+					message="add-to-netvibes"
+					url="<%= netvibesHREF %>"
+					method="get"
+					label="<%= true %>"
 				/>
 			</c:if>
 
