@@ -67,8 +67,9 @@ configurationActionURL.setParameter("portletResource", portletResource);
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function <portlet:namespace />saveMetaFieldsAndSubmit() {
+	function <portlet:namespace />saveMetadataFields() {
 		document.<portlet:namespace />fm.<portlet:namespace />metadataFields.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentMetadataFields);
+
 		submitForm(document.<portlet:namespace />fm);
 	}
 
@@ -268,7 +269,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 						<br />
 
-						<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveMetaFieldsAndSubmit();" />
+						<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveMetadataFields();" />
 
 						<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 					</liferay-ui:section>
@@ -370,7 +371,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 				<br />
 
-				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveMetaFieldsAndSubmit();" />
+				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveMetadataFields();" />
 
 				<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 			</c:when>
