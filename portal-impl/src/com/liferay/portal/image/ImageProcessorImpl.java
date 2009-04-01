@@ -33,6 +33,7 @@ import com.sun.media.jai.codec.ImageCodec;
 import com.sun.media.jai.codec.ImageDecoder;
 
 import java.awt.Graphics2D;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBuffer;
@@ -72,6 +73,7 @@ public class ImageProcessorImpl implements ImageProcessor {
 		Graphics2D graphics = targetImage.createGraphics();
 
 		graphics.drawRenderedImage(sourceImage, null);
+
 		graphics.dispose();
 
 		return targetImage;
@@ -115,7 +117,9 @@ public class ImageProcessorImpl implements ImageProcessor {
 				bufferedImage.getWidth(), bufferedImage.getHeight(),
 				BufferedImage.TYPE_BYTE_BINARY);
 
-			binaryImage.getGraphics().drawImage(bufferedImage, 0, 0, null);
+			Graphics graphics = binaryImage.getGraphics();
+
+			graphics.drawImage(bufferedImage, 0, 0, null);
 
 			renderedImage = binaryImage;
 		}

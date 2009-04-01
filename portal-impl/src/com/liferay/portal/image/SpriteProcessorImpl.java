@@ -57,7 +57,6 @@ import javax.media.jai.JAI;
 import javax.media.jai.LookupTableJAI;
 import javax.media.jai.PlanarImage;
 import javax.media.jai.RasterFactory;
-import javax.media.jai.RenderedOp;
 import javax.media.jai.TiledImage;
 import javax.media.jai.operator.FileLoadDescriptor;
 import javax.media.jai.operator.LookupDescriptor;
@@ -141,15 +140,15 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 			}
 
 			try {
-				RenderedOp renderedOp = FileLoadDescriptor.create(
+				RenderedImage renderedImage = FileLoadDescriptor.create(
 					file.toString(), null, null, null);
-
-				RenderedImage renderedImage = convert(renderedOp);
 
 				int height = renderedImage.getHeight();
 				int width = renderedImage.getWidth();
 
 				if ((height <= maxHeight) && (width <= maxWidth)) {
+					renderedImage = convert(renderedImage);
+
 					renderedImage = TranslateDescriptor.create(
 						renderedImage, x, y, null, null);
 
@@ -166,7 +165,7 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 
 					spriteProperties.setProperty(key, value);
 
-					y += renderedOp.getHeight();
+					y += renderedImage.getHeight();
 				}
 			}
 			catch (Exception e) {
@@ -185,7 +184,7 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 			spriteProperties.clear();
 		}
 		else {
-			RenderedOp renderedOp = MosaicDescriptor.create(
+			RenderedImage renderedImage = MosaicDescriptor.create(
 				renderedImages.toArray(
 					new RenderedImage[renderedImages.size()]),
 				MosaicDescriptor.MOSAIC_TYPE_OVERLAY, null, null, null, null,
@@ -194,7 +193,7 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 			File spriteFile = new File(
 				dir.toString() + StringPool.SLASH + spriteFileName);
 
-			ImageIO.write(renderedOp, "png", spriteFile);
+			ImageIO.write(renderedImage, "png", spriteFile);
 
 			if (lastModified > 0) {
 				spriteFile.setLastModified(lastModified);
@@ -211,16 +210,16 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 		return spriteProperties;
 	}
 
-	protected RenderedImage convert(RenderedOp renderedOp) throws Exception {
-		RenderedImage renderedImage = renderedOp;
+	protected RenderedImage convert(RenderedImage renderedImage)
+		throws Exception {
 
-		int height = renderedOp.getHeight();
-		int width = renderedOp.getWidth();
+		int height = renderedImage.getHeight();
+		int width = renderedImage.getWidth();
 
-		SampleModel sampleModel = renderedOp.getSampleModel();
-		ColorModel colorModel = renderedOp.getColorModel();
+		SampleModel sampleModel = renderedImage.getSampleModel();
+		ColorModel colorModel = renderedImage.getColorModel();
 
-		Raster raster = renderedOp.getData();
+		Raster raster = renderedImage.getData();
 
 		DataBuffer dataBuffer = raster.getDataBuffer();
 
@@ -239,7 +238,7 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 			LookupTableJAI lookupTableJAI = new LookupTableJAI(data);
 
 			renderedImage = LookupDescriptor.create(
-				renderedOp, lookupTableJAI, null);
+				renderedImage, lookupTableJAI, null);
 		}
 		else if (sampleModel.getNumBands() == 2) {
 			List<Byte> bytesList = new ArrayList<Byte>(
@@ -274,7 +273,7 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 			DataBuffer newDataBuffer = new DataBufferByte(data, data.length);
 
 			renderedImage = createRenderedImage(
-				renderedOp, height, width, newDataBuffer);
+				renderedImage, height, width, newDataBuffer);
 		}
 		else if (colorModel.getTransparency() != Transparency.TRANSLUCENT) {
 			List<Byte> bytesList = new ArrayList<Byte>(
@@ -306,14 +305,15 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 			DataBuffer newDataBuffer = new DataBufferByte(data, data.length);
 
 			renderedImage = createRenderedImage(
-				renderedOp, height, width, newDataBuffer);
+				renderedImage, height, width, newDataBuffer);
 		}
 
 		return renderedImage;
 	}
 
 	protected RenderedImage createRenderedImage(
-		RenderedOp renderedOp, int height, int width, DataBuffer dataBuffer) {
+		RenderedImage renderedImage, int height, int width,
+		DataBuffer dataBuffer) {
 
 		SampleModel sampleModel =
 			RasterFactory.createPixelInterleavedSampleModel(
@@ -331,23 +331,23 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 		if (false) {
 			JAI.create("filestore", tiledImage, "test.png", "PNG");
 
-			printImage(renderedOp);
+			printImage(renderedImage);
 			printImage(tiledImage);
 		}
 
 		return tiledImage;
 	}
 
-	protected void printImage(PlanarImage planarImage) {
-		SampleModel sampleModel = planarImage.getSampleModel();
+	protected void printImage(RenderedImage renderedImage) {
+		SampleModel sampleModel = renderedImage.getSampleModel();
 
-		int height = planarImage.getHeight();
-		int width = planarImage.getWidth();
+		int height = renderedImage.getHeight();
+		int width = renderedImage.getWidth();
 		int numOfBands = sampleModel.getNumBands();
 
 		int[] pixels = new int[height * width * numOfBands];
 
-		Raster raster = planarImage.getData();
+		Raster raster = renderedImage.getData();
 
 		raster.getPixels(0, 0, width, height, pixels);
 
