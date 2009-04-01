@@ -41,6 +41,7 @@ import com.liferay.portal.util.InitUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBStatsUser;
 import com.liferay.portlet.messageboards.model.MBThread;
@@ -192,6 +193,14 @@ public class SampleSQLBuilder {
 		processTemplate(_tplMBCategory, context);
 	}
 
+	public void insertMBDiscussion(MBDiscussion mbDiscussion) throws Exception {
+		Map<String, Object> context = getContext();
+
+		put(context, "mbDiscussion", mbDiscussion);
+
+		processTemplate(_tplMBDiscussion, context);
+	}
+
 	public void insertMBMessage(MBMessage mbMessage) throws Exception {
 		Map<String, Object> context = getContext();
 
@@ -329,6 +338,7 @@ public class SampleSQLBuilder {
 	private String _tplBlogsEntry = _TPL_ROOT + "blogs_entry.ftl";
 	private String _tplBlogsStatsUser = _TPL_ROOT + "blogs_stats_user.ftl";
 	private String _tplMBCategory = _TPL_ROOT + "mb_category.ftl";
+	private String _tplMBDiscussion = _TPL_ROOT + "mb_discussion.ftl";
 	private String _tplMBMessage = _TPL_ROOT + "mb_message.ftl";
 	private String _tplMBStatsUser = _TPL_ROOT + "mb_stats_user.ftl";
 	private String _tplMBThread = _TPL_ROOT + "mb_thread.ftl";

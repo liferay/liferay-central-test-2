@@ -62,10 +62,12 @@ import com.liferay.portlet.blogs.model.BlogsStatsUser;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 import com.liferay.portlet.blogs.model.impl.BlogsStatsUserImpl;
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBStatsUser;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
+import com.liferay.portlet.messageboards.model.impl.MBDiscussionImpl;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl;
 import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
@@ -197,14 +199,15 @@ public class DataFactory {
 	}
 
 	public MBCategory addMBCategory(
-			long groupId, long userId, String name, String description,
-			int threadCount, int messageCount)
+			long categoryId, long groupId, long companyId, long userId,
+			String name, String description, int threadCount, int messageCount)
 		throws Exception {
 
 		MBCategory mbCategory = new MBCategoryImpl();
 
-		mbCategory.setCategoryId(_counter.get());
+		mbCategory.setCategoryId(categoryId);
 		mbCategory.setGroupId(groupId);
+		mbCategory.setCompanyId(companyId);
 		mbCategory.setUserId(userId);
 		mbCategory.setName(name);
 		mbCategory.setDescription(description);
@@ -212,6 +215,20 @@ public class DataFactory {
 		mbCategory.setMessageCount(messageCount);
 
 		return mbCategory;
+	}
+
+	public MBDiscussion addMBDiscussion(
+			long classNameId, long classPK, long threadId)
+		throws Exception {
+
+		MBDiscussion mbDiscussion = new MBDiscussionImpl();
+
+		mbDiscussion.setDiscussionId(_counter.get());
+		mbDiscussion.setClassNameId(classNameId);
+		mbDiscussion.setClassPK(classPK);
+		mbDiscussion.setThreadId(threadId);
+
+		return mbDiscussion;
 	}
 
 	public MBMessage addMBMessage(
