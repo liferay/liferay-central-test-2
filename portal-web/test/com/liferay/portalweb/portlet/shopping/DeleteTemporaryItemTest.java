@@ -39,6 +39,27 @@ public class DeleteTemporaryItemTest extends BaseTestCase {
 			}
 
 			try {
+				if (selenium.isElementPresent("link=Shopping Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//td[1]/a"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
 				if (selenium.isElementPresent("//tr[4]/td[5]/ul/li/strong/span")) {
 					break;
 				}
@@ -50,30 +71,14 @@ public class DeleteTemporaryItemTest extends BaseTestCase {
 		}
 
 		selenium.click("//tr[4]/td[5]/ul/li/strong/span");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[3]/ul/li[3]/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//div[3]/ul/li[3]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-		assertFalse(selenium.isTextPresent("The Prodigal Project"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertFalse(selenium.isTextPresent("The Prodigal Project - J. H."));
+		assertTrue(selenium.isTextPresent("Jona Lyons - Wheel"));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}

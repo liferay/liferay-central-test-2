@@ -39,7 +39,7 @@ public class SearchItemsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_34_keywords1")) {
+				if (selenium.isElementPresent("link=Shopping Test Page")) {
 					break;
 				}
 			}
@@ -49,28 +49,16 @@ public class SearchItemsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_34_keywords1", RuntimeVariables.replace("Jona"));
 		selenium.type("_34_keywords1", RuntimeVariables.replace("Jona"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Search Items']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Items']"));
+				"//input[@value='Search Categories']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Jona Lyons - Wheel"));
+		assertFalse(selenium.isTextPresent(
+				"M. Saech - How to Play Guitar - for Dummies."));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}

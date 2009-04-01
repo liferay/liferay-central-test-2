@@ -39,7 +39,7 @@ public class AddCategoryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@value='Add Category']")) {
+				if (selenium.isElementPresent("link=Shopping Test Page")) {
 					break;
 				}
 			}
@@ -49,53 +49,21 @@ public class AddCategoryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Category']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_34_name")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.typeKeys("_34_name", RuntimeVariables.replace("Audio Center"));
 		selenium.type("_34_name", RuntimeVariables.replace("Audio Center"));
 		selenium.typeKeys("_34_description",
-			RuntimeVariables.replace("CD's, MP3's, Vinyl Records."));
+			RuntimeVariables.replace("CD's, MP3's, Vinl Records."));
 		selenium.type("_34_description",
 			RuntimeVariables.replace("CD's, MP3's, Vinyl Records."));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Audio Center"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertTrue(selenium.isTextPresent("Audio Center"));
 	}
 }

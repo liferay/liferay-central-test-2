@@ -10,7 +10,12 @@
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//td[1]/a</td>
+	<td>link=Shopping Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Shopping Test Page</td>
 	<td></td>
 </tr>
 <tr>
@@ -19,19 +24,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Add Item']</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Add Item']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>typeKeys</td>
 	<td>_34_sku</td>
-	<td></td>
+	<td>2222</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -39,9 +39,19 @@
 	<td>2222</td>
 </tr>
 <tr>
+	<td>typeKeys</td>
+	<td>_34_name</td>
+	<td>The Prodigal Project - J. H.</td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>_34_name</td>
 	<td>The Prodigal Project - J. H.</td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_34_description</td>
+	<td>For those on a journe, the end of which is faintl out of sight.</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -49,14 +59,14 @@
 	<td>For those on a journey, the end of which is faintly out of sight.</td>
 </tr>
 <tr>
-	<td>type</td>
+	<td>typeKeys</td>
 	<td>_34_price0</td>
 	<td>$2.99</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Save']</td>
-	<td></td>
+	<td>type</td>
+	<td>_34_price0</td>
+	<td>$2.99</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -65,12 +75,12 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>The Prodigal Project</td>
+	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
+	<td>The Prodigal Project - J. H.</td>
 	<td></td>
 </tr>
 

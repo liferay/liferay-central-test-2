@@ -10,7 +10,12 @@
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//td[1]/a</td>
+	<td>link=Shopping Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Shopping Test Page</td>
 	<td></td>
 </tr>
 <tr>
@@ -19,19 +24,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Add Item']</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Add Item']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>typeKeys</td>
 	<td>_34_sku</td>
-	<td></td>
+	<td>1112</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -39,9 +39,19 @@
 	<td>1112</td>
 </tr>
 <tr>
+	<td>typeKeys</td>
+	<td>_34_name</td>
+	<td>M. Saech - How to Pla Guitar - for Dummies.</td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>_34_name</td>
 	<td>M. Saech - How to Play Guitar - for Dummies.</td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_34_description</td>
+	<td>Noted guitarist and performer (for one) las down how to thrash with the might battle axe of music.</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -49,19 +59,24 @@
 	<td>Noted guitarist and performer (for one) lays down how to thrash with the might battle axe of music.</td>
 </tr>
 <tr>
-	<td>type</td>
+	<td>typeKeys</td>
 	<td>_34_price0</td>
 	<td>$16.99</td>
 </tr>
 <tr>
 	<td>type</td>
+	<td>_34_price0</td>
+	<td>$16.99</td>
+</tr>
+<tr>
+	<td>typeKeys</td>
 	<td>_34_stockQuantity</td>
 	<td>200</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Save']</td>
-	<td></td>
+	<td>type</td>
+	<td>_34_stockQuantity</td>
+	<td>200</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -70,12 +85,12 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>How to Play Guitar - for Dummies.</td>
+	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
+	<td>M. Saech - How to Play Guitar - for Dummies.</td>
 	<td></td>
 </tr>
 <tr>

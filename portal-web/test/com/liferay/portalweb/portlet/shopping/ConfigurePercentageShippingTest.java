@@ -39,7 +39,7 @@ public class ConfigurePercentageShippingTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
+				if (selenium.isElementPresent("link=Shopping Test Page")) {
 					break;
 				}
 			}
@@ -49,68 +49,24 @@ public class ConfigurePercentageShippingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Shipping Calculation")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("link=Shipping Calculation"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_86_shippingFormula")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.select("_86_shippingFormula",
 			RuntimeVariables.replace("label=Percentage"));
+		selenium.typeKeys("_86_shipping0", RuntimeVariables.replace(".10"));
 		selenium.type("_86_shipping0", RuntimeVariables.replace(".10"));
+		selenium.typeKeys("_86_shipping1", RuntimeVariables.replace(".20"));
 		selenium.type("_86_shipping1", RuntimeVariables.replace(".20"));
+		selenium.typeKeys("_86_shipping2", RuntimeVariables.replace(".30"));
 		selenium.type("_86_shipping2", RuntimeVariables.replace(".30"));
+		selenium.typeKeys("_86_shipping3", RuntimeVariables.replace(".40"));
 		selenium.type("_86_shipping3", RuntimeVariables.replace(".40"));
+		selenium.typeKeys("_86_shipping4", RuntimeVariables.replace(".50"));
 		selenium.type("_86_shipping4", RuntimeVariables.replace(".50"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

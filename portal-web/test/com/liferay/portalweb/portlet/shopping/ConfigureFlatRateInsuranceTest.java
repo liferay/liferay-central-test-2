@@ -39,7 +39,7 @@ public class ConfigureFlatRateInsuranceTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
+				if (selenium.isElementPresent("link=Shopping Test Page")) {
 					break;
 				}
 			}
@@ -49,66 +49,22 @@ public class ConfigureFlatRateInsuranceTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Insurance Calculation")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("link=Insurance Calculation"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_86_insurance0")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		selenium.typeKeys("_86_insurance0", RuntimeVariables.replace("2.00"));
 		selenium.type("_86_insurance0", RuntimeVariables.replace("2.00"));
+		selenium.typeKeys("_86_insurance1", RuntimeVariables.replace("3.00"));
 		selenium.type("_86_insurance1", RuntimeVariables.replace("3.00"));
+		selenium.typeKeys("_86_insurance2", RuntimeVariables.replace("5.00"));
 		selenium.type("_86_insurance2", RuntimeVariables.replace("5.00"));
+		selenium.typeKeys("_86_insurance3", RuntimeVariables.replace("10.00"));
 		selenium.type("_86_insurance3", RuntimeVariables.replace("10.00"));
+		selenium.typeKeys("_86_insurance4", RuntimeVariables.replace("20.00"));
 		selenium.type("_86_insurance4", RuntimeVariables.replace("20.00"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

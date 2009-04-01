@@ -19,18 +19,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Cart</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>link=Cart</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Checkout']</td>
 	<td></td>
 </tr>
 <tr>
@@ -39,14 +29,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>_34_billingFirstName</td>
-	<td></td>
+	<td>typeKeys</td>
+	<td>_34_billingStreet</td>
+	<td>1234 Sesame Street</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_34_billingStreet</td>
 	<td>1234 Sesame Street</td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_34_billingCity</td>
+	<td>Gotham Cit</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -59,9 +54,19 @@
 	<td>label=California</td>
 </tr>
 <tr>
+	<td>typeKeys</td>
+	<td>_34_billingZip</td>
+	<td>90028</td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>_34_billingZip</td>
 	<td>90028</td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_34_billingCountry</td>
+	<td>USA</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -69,9 +74,19 @@
 	<td>USA</td>
 </tr>
 <tr>
+	<td>typeKeys</td>
+	<td>_34_billingPhone</td>
+	<td>626-589-1453</td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>_34_billingPhone</td>
 	<td>626-589-1453</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>_34_shipToBillingCheckbox</td>
+	<td></td>
 </tr>
 <tr>
 	<td>click</td>
@@ -79,9 +94,19 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertChecked</td>
+	<td>_34_shipToBillingCheckbox</td>
+	<td></td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>_34_ccType</td>
 	<td>label=Visa</td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_34_ccNumber</td>
+	<td>4111111111111111</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -94,24 +119,14 @@
 	<td>label=2011</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>_34_comments</td>
-	<td></td>
-</tr>
-<tr>
 	<td>typeKeys</td>
 	<td>_34_comments</td>
-	<td>Please take care of my order.</td>
+	<td>Please take care of m order.</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_34_comments</td>
 	<td>Please take care of my order.</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Continue']</td>
-	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -126,11 +141,6 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>In Stock</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Finished']</td>
 	<td></td>
 </tr>
 <tr>

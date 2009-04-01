@@ -39,7 +39,7 @@ public class VerifyAcceptedCCTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Cart")) {
+				if (selenium.isElementPresent("link=Shopping Test Page")) {
 					break;
 				}
 			}
@@ -49,25 +49,10 @@ public class VerifyAcceptedCCTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Cart"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Checkout']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Checkout']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("//option[@value='visa']"));

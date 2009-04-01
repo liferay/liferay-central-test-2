@@ -39,7 +39,7 @@ public class AddTemporaryItemTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[1]/a")) {
+				if (selenium.isElementPresent("link=Shopping Test Page")) {
 					break;
 				}
 			}
@@ -49,72 +49,30 @@ public class AddTemporaryItemTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//td[1]/a"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Add Item']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Item']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_34_sku")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		selenium.typeKeys("_34_sku", RuntimeVariables.replace("2222"));
 		selenium.type("_34_sku", RuntimeVariables.replace("2222"));
+		selenium.typeKeys("_34_name",
+			RuntimeVariables.replace("The Prodigal Project - J. H."));
 		selenium.type("_34_name",
 			RuntimeVariables.replace("The Prodigal Project - J. H."));
+		selenium.typeKeys("_34_description",
+			RuntimeVariables.replace(
+				"For those on a journe, the end of which is faintl out of sight."));
 		selenium.type("_34_description",
 			RuntimeVariables.replace(
 				"For those on a journey, the end of which is faintly out of sight."));
+		selenium.typeKeys("_34_price0", RuntimeVariables.replace("$2.99"));
 		selenium.type("_34_price0", RuntimeVariables.replace("$2.99"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("The Prodigal Project"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertTrue(selenium.isTextPresent("The Prodigal Project - J. H."));
 	}
 }

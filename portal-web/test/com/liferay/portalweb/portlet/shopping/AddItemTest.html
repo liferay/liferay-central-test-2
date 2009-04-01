@@ -10,7 +10,12 @@
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//td[1]/a</td>
+	<td>link=Shopping Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Shopping Test Page</td>
 	<td></td>
 </tr>
 <tr>
@@ -19,19 +24,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Add Item']</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Add Item']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>typeKeys</td>
 	<td>_34_sku</td>
-	<td></td>
+	<td>1111</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -39,9 +39,19 @@
 	<td>1111</td>
 </tr>
 <tr>
+	<td>typeKeys</td>
+	<td>_34_name</td>
+	<td>Jona Lons - Wheel</td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>_34_name</td>
 	<td>Jona Lyons - Wheel</td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_34_description</td>
+	<td>Sounds like: The middle of a vacation.</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -49,9 +59,19 @@
 	<td>Sounds like: The middle of a vacation.</td>
 </tr>
 <tr>
+	<td>typeKeys</td>
+	<td>_34_stockQuantity</td>
+	<td>50</td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>_34_stockQuantity</td>
 	<td>50</td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_34_properties</td>
+	<td>Limited Time Onl</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -59,9 +79,24 @@
 	<td>Limited Time Only</td>
 </tr>
 <tr>
+	<td>assertElementPresent</td>
+	<td>_34_requiresShippingCheckbox</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>_34_requiresShippingCheckbox</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>_34_requiresShippingCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_34_price0</td>
+	<td>$9.99</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -69,14 +104,14 @@
 	<td>$9.99</td>
 </tr>
 <tr>
-	<td>type</td>
+	<td>typeKeys</td>
 	<td>_34_minQuantity0</td>
 	<td>1</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Save']</td>
-	<td></td>
+	<td>type</td>
+	<td>_34_minQuantity0</td>
+	<td>1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -85,12 +120,22 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
 	<td>Jona Lyons - Wheel</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
+	<td>Sounds like: The middle of a vacation.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Limited: Time Only</td>
 	<td></td>
 </tr>
 

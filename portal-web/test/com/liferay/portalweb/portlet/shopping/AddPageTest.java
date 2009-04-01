@@ -91,6 +91,23 @@ public class AddPageTest extends BaseTestCase {
 		selenium.typeKeys("new_page",
 			RuntimeVariables.replace("Shopping Test Page"));
 		selenium.type("new_page", RuntimeVariables.replace("Shopping Test Page"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Save")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=Save");
 
 		for (int second = 0;; second++) {

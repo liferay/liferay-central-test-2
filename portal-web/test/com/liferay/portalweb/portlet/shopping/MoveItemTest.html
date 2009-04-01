@@ -10,7 +10,12 @@
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//td[1]/a</td>
+	<td>link=Shopping Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Shopping Test Page</td>
 	<td></td>
 </tr>
 <tr>
@@ -20,17 +25,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//strong/span</td>
+	<td>//strong</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//strong/span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[3]/ul/li[1]/a</td>
+	<td>//strong</td>
 	<td></td>
 </tr>
 <tr>
@@ -69,6 +69,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//tr[4]/td[4]/input</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//tr[4]/td[4]/input</td>
 	<td></td>
@@ -84,13 +89,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>clickAndWait</td>
 	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Save']</td>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 <tr>
@@ -100,17 +105,12 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
+	<td>M. Saech - How to Play Guitar - for Dummies.</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Return to Full Page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//tr[4]/td[1]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -129,18 +129,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Edit</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>link=Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Sounds like: The middle of a vacation.</td>
+	<td>//div[3]/ul/li[1]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -194,18 +184,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Save']</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Save']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>Jona Lyons - Wheel</td>
 	<td></td>
 </tr>
 <tr>
@@ -214,13 +194,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Return to Full Page</td>
+	<td>assertTextNotPresent</td>
+	<td>Jona Lyons - Wheel</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//td[1]/a</td>
+	<td>clickAndWait</td>
+	<td>link=Return to Full Page</td>
 	<td></td>
 </tr>
 <tr>
@@ -231,6 +211,11 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Jona Lyons - Wheel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>M. Saech - How to Play Guitar - for Dummies.</td>
 	<td></td>
 </tr>
 <tr>

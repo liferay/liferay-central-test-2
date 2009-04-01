@@ -39,7 +39,7 @@ public class AddSecondItemTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[1]/a")) {
+				if (selenium.isElementPresent("link=Shopping Test Page")) {
 					break;
 				}
 			}
@@ -49,75 +49,36 @@ public class AddSecondItemTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//td[1]/a"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Add Item']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Item']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_34_sku")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		selenium.typeKeys("_34_sku", RuntimeVariables.replace("1112"));
 		selenium.type("_34_sku", RuntimeVariables.replace("1112"));
+		selenium.typeKeys("_34_name",
+			RuntimeVariables.replace(
+				"M. Saech - How to Pla Guitar - for Dummies."));
 		selenium.type("_34_name",
 			RuntimeVariables.replace(
 				"M. Saech - How to Play Guitar - for Dummies."));
+		selenium.typeKeys("_34_description",
+			RuntimeVariables.replace(
+				"Noted guitarist and performer (for one) las down how to thrash with the might battle axe of music."));
 		selenium.type("_34_description",
 			RuntimeVariables.replace(
 				"Noted guitarist and performer (for one) lays down how to thrash with the might battle axe of music."));
+		selenium.typeKeys("_34_price0", RuntimeVariables.replace("$16.99"));
 		selenium.type("_34_price0", RuntimeVariables.replace("$16.99"));
+		selenium.typeKeys("_34_stockQuantity", RuntimeVariables.replace("200"));
 		selenium.type("_34_stockQuantity", RuntimeVariables.replace("200"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("How to Play Guitar - for Dummies."));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertTrue(selenium.isTextPresent(
+				"M. Saech - How to Play Guitar - for Dummies."));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}

@@ -39,7 +39,7 @@ public class AddTemporaryCouponTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Coupons")) {
+				if (selenium.isElementPresent("link=Shopping Test Page")) {
 					break;
 				}
 			}
@@ -49,71 +49,32 @@ public class AddTemporaryCouponTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Coupons"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Add Coupon']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Coupon']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_34_autoCodeCheckbox")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isElementPresent("_34_autoCodeCheckbox"));
 		selenium.click("_34_autoCodeCheckbox");
+		assertTrue(selenium.isChecked("_34_autoCodeCheckbox"));
+		selenium.typeKeys("_34_name",
+			RuntimeVariables.replace("Temporar Coupon"));
 		selenium.type("_34_name", RuntimeVariables.replace("Temporary Coupon"));
+		selenium.typeKeys("_34_description",
+			RuntimeVariables.replace(
+				"This is a limited time onl coupon - soon to be - Deleted!"));
 		selenium.type("_34_description",
 			RuntimeVariables.replace(
 				"This is a limited time only coupon - soon to be - Deleted!"));
+		selenium.typeKeys("_34_discount", RuntimeVariables.replace("0.99"));
 		selenium.type("_34_discount", RuntimeVariables.replace("0.99"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Temporary Coupon"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertTrue(selenium.isTextPresent("Temporary Coupon"));
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.waitForPageToLoad("30000");
 	}
 }

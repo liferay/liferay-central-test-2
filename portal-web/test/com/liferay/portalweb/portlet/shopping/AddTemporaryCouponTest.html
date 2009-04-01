@@ -10,7 +10,12 @@
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Coupons</td>
+	<td>link=Shopping Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Shopping Test Page</td>
 	<td></td>
 </tr>
 <tr>
@@ -19,17 +24,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Add Coupon']</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Add Coupon']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>_34_autoCodeCheckbox</td>
 	<td></td>
 </tr>
@@ -39,9 +39,24 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertChecked</td>
+	<td>_34_autoCodeCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_34_name</td>
+	<td>Temporar Coupon</td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>_34_name</td>
 	<td>Temporary Coupon</td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_34_description</td>
+	<td>This is a limited time onl coupon - soon to be - Deleted!</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -49,14 +64,14 @@
 	<td>This is a limited time only coupon - soon to be - Deleted!</td>
 </tr>
 <tr>
-	<td>type</td>
+	<td>typeKeys</td>
 	<td>_34_discount</td>
 	<td>0.99</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Save']</td>
-	<td></td>
+	<td>type</td>
+	<td>_34_discount</td>
+	<td>0.99</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -65,12 +80,17 @@
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Temporary Coupon</td>
+	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
+	<td>Temporary Coupon</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Return to Full Page</td>
 	<td></td>
 </tr>
 

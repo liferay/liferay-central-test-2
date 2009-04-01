@@ -51,83 +51,18 @@ public class VerifyStateTaxTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Cart")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("link=Cart"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Checkout']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Checkout']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_34_ccType")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.select("_34_ccType", RuntimeVariables.replace("label=Visa"));
+		selenium.typeKeys("_34_ccNumber",
+			RuntimeVariables.replace("4111111111111111"));
 		selenium.type("_34_ccNumber",
 			RuntimeVariables.replace("4111111111111111"));
 		selenium.select("_34_ccExpYear", RuntimeVariables.replace("label=2011"));
+		selenium.typeKeys("_34_ccVerNumber", RuntimeVariables.replace("526"));
 		selenium.type("_34_ccVerNumber", RuntimeVariables.replace("526"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Continue']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Continue']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("$12.92"));

@@ -10,6 +10,16 @@
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
+	<td>link=Shopping Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Shopping Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>//td[4]/ul/li/strong/span</td>
 	<td></td>
 </tr>
@@ -19,18 +29,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Edit</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>link=Edit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>_34_name</td>
 	<td></td>
 </tr>
 <tr>
@@ -44,13 +44,13 @@
 	<td>Music</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>clickAndWait</td>
 	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Save']</td>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 <tr>
@@ -61,11 +61,6 @@
 <tr>
 	<td>assertTextNotPresent</td>
 	<td>Audio Center</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 

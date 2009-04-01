@@ -39,7 +39,7 @@ public class ConfirmOrderTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Orders")) {
+				if (selenium.isElementPresent("link=Shopping Test Page")) {
 					break;
 				}
 			}
@@ -49,26 +49,11 @@ public class ConfirmOrderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Orders"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Joe Bloggs"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Checkout")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertEquals("Joe Bloggs", selenium.getText("//tr[3]/td[5]"));
 		selenium.click(RuntimeVariables.replace("link=Checkout"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Please take care of my order."));

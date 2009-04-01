@@ -39,7 +39,7 @@ public class AddCouponTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Coupons")) {
+				if (selenium.isElementPresent("link=Shopping Test Page")) {
 					break;
 				}
 			}
@@ -49,72 +49,33 @@ public class AddCouponTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Coupons"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Add Coupon']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Coupon']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_34_autoCodeCheckbox")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isElementPresent("_34_autoCodeCheckbox"));
 		selenium.click("_34_autoCodeCheckbox");
+		assertTrue(selenium.isChecked("_34_autoCodeCheckbox"));
+		selenium.typeKeys("_34_name",
+			RuntimeVariables.replace("Friends and Famil Discount"));
 		selenium.type("_34_name",
 			RuntimeVariables.replace("Friends and Family Discount"));
+		selenium.typeKeys("_34_description",
+			RuntimeVariables.replace(
+				"This discount is for everyone who is considered a friend or part of the famil."));
 		selenium.type("_34_description",
 			RuntimeVariables.replace(
 				"This discount is for everyone who is considered a friend or part of the family."));
+		selenium.typeKeys("_34_discount", RuntimeVariables.replace("0.50"));
 		selenium.type("_34_discount", RuntimeVariables.replace("0.50"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Friends and Family Discount"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertTrue(selenium.isTextPresent("Friends and Family Discount"));
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.waitForPageToLoad("30000");
 	}
 }

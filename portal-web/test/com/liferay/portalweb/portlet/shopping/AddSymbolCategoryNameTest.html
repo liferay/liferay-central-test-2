@@ -1,0 +1,94 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AddSymbolCategoryNameTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">AddSymbolCategoryNameTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Shopping Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Shopping Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Add Category']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_34_name</td>
+	<td>Audio Center//</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_34_name</td>
+	<td>Audio Center//</td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_34_description</td>
+	<td>CD's, MP3's, Vinl Records.</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_34_description</td>
+	<td>CD's, MP3's, Vinyl Records.</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You have entered invalid data. Please try again.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please enter a valid name.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_34_name</td>
+	<td>Audio Center////</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_34_name</td>
+	<td>Audio Center////</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You have entered invalid data. Please try again.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Please enter a valid name.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Return to Full Page</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

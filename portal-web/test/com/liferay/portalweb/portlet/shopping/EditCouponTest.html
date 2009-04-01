@@ -10,6 +10,21 @@
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
+	<td>link=Shopping Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Shopping Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Coupons</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>//strong/span</td>
 	<td></td>
 </tr>
@@ -19,19 +34,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//img[@alt='Edit']</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>//img[@alt='Edit']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>typeKeys</td>
 	<td>_34_name</td>
-	<td></td>
+	<td>Famil Discount</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -39,18 +49,23 @@
 	<td>Family Discount</td>
 </tr>
 <tr>
+	<td>typeKeys</td>
+	<td>_34_description</td>
+	<td>Discount for famil onl!</td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>_34_description</td>
 	<td>Discount for family only!</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>clickAndWait</td>
 	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Save']</td>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 <tr>
@@ -64,8 +79,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
+	<td>clickAndWait</td>
+	<td>link=Return to Full Page</td>
 	<td></td>
 </tr>
 

@@ -39,7 +39,7 @@ public class MoveItemTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[1]/a")) {
+				if (selenium.isElementPresent("link=Shopping Test Page")) {
 					break;
 				}
 			}
@@ -49,6 +49,8 @@ public class MoveItemTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//td[1]/a"));
 		selenium.waitForPageToLoad("30000");
 
@@ -58,7 +60,7 @@ public class MoveItemTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//strong/span")) {
+				if (selenium.isElementPresent("//strong")) {
 					break;
 				}
 			}
@@ -68,24 +70,7 @@ public class MoveItemTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//strong/span");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[3]/ul/li[1]/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		selenium.click("//strong");
 		selenium.click(RuntimeVariables.replace("//div[3]/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
 
@@ -127,50 +112,35 @@ public class MoveItemTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Categories"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//tr[4]/td[4]/input")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("//tr[4]/td[4]/input");
 		selenium.selectWindow("null");
 		assertTrue(selenium.isElementPresent("link=Video"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isTextPresent("Jona Lyons - Wheel"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertFalse(selenium.isTextPresent("Jona Lyons - Wheel"));
+		assertTrue(selenium.isTextPresent(
+				"M. Saech - How to Play Guitar - for Dummies."));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//tr[4]/td[1]/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a"));
 		selenium.waitForPageToLoad("30000");
 
@@ -191,27 +161,8 @@ public class MoveItemTest extends BaseTestCase {
 		}
 
 		selenium.click("//strong/span");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Edit")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Edit"));
+		selenium.click(RuntimeVariables.replace("//div[3]/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Sounds like: The middle of a vacation."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -271,50 +222,18 @@ public class MoveItemTest extends BaseTestCase {
 		selenium.click("//input[@value='Choose']");
 		selenium.selectWindow("null");
 		assertTrue(selenium.isElementPresent("link=Music"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isTextPresent("Jona Lyons - Wheel"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertFalse(selenium.isTextPresent("Jona Lyons - Wheel"));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//td[1]/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//td[1]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Jona Lyons - Wheel"));
+		assertTrue(selenium.isTextPresent(
+				"M. Saech - How to Play Guitar - for Dummies."));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
