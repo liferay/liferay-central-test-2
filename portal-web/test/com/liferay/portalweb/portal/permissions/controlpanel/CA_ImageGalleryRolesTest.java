@@ -38,7 +38,7 @@ public class CA_ImageGalleryRolesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Next"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//tr[9]/td/a"));
+		selenium.click(RuntimeVariables.replace("//tr[8]/td/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_128_scope31CONFIGURATION",
 			RuntimeVariables.replace("label=Enterprise"));

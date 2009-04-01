@@ -36,7 +36,7 @@ public class CA_AnnouncementsRolesTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Portlet Permissions']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//tr[8]/td/a"));
+		selenium.click(RuntimeVariables.replace("//tr[7]/td/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_128_scope84ADD_ENTRY",
 			RuntimeVariables.replace("label=Enterprise"));

@@ -38,7 +38,7 @@ public class CA_MessageBoardsRolesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Next"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//tr[13]/td/a"));
+		selenium.click(RuntimeVariables.replace("//tr[12]/td/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_128_scopecom.liferay.portlet.messageboardsADD_CATEGORY",
 			RuntimeVariables.replace("label=Enterprise"));

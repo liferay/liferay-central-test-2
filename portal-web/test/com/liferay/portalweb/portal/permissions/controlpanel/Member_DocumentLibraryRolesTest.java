@@ -36,7 +36,7 @@ public class Member_DocumentLibraryRolesTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Portlet Permissions']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//tr[21]/td/a"));
+		selenium.click(RuntimeVariables.replace("//tr[20]/td/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_128_scope20CONFIGURATION",
 			RuntimeVariables.replace("label="));

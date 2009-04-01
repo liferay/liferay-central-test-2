@@ -36,7 +36,7 @@ public class CA_BlogsRolesTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Portlet Permissions']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//tr[11]/td/a"));
+		selenium.click(RuntimeVariables.replace("//tr[10]/td/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_128_scopecom.liferay.portlet.blogsADD_ENTRY",
 			RuntimeVariables.replace("label=Enterprise"));
