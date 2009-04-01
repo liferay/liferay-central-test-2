@@ -79,7 +79,8 @@ public class AssetPublisherTests extends BaseTests {
 		testSuite.addTestSuite(AssertWebContentCommentsTest.class);
 		testSuite.addTestSuite(AssertWebContentCommentsRatingsTest.class);
 		testSuite.addTestSuite(EditDynamicConfigurationMessageBoardTest.class);
-		testSuite.addTestSuite(VerifyDynamicConfigurationMessageBoardTest.class);
+		testSuite.addTestSuite(
+			VerifyDynamicConfigurationMessageBoardTest.class);
 		testSuite.addTestSuite(EditDynamicConfigurationWikiTest.class);
 		testSuite.addTestSuite(VerifyDynamicConfigurationWikiTest.class);
 		testSuite.addTestSuite(EditManualConfigurationTest.class);
