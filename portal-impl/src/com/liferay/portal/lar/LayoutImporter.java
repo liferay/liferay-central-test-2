@@ -413,6 +413,11 @@ public class LayoutImporter {
 						break;
 					}
 				}
+
+				if (layout == null) {
+					layoutId = LayoutLocalServiceUtil.getNextLayoutId(
+						groupId, privateLayout);
+				}
 			}
 			else {
 				layout = LayoutUtil.fetchByG_P_L(
