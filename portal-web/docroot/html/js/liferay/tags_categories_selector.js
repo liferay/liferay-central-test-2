@@ -157,6 +157,7 @@ Liferay.TagsCategoriesSelector = new Expanse.Class(
 
 				instance.selectTagCategoryPopup = popup;
 			}
+
 			instance._popupVisible = true;
 
 			if (Liferay.Browser.isIe()) {
