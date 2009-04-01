@@ -24,6 +24,8 @@ package com.liferay.portlet.messageboards.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
@@ -52,8 +54,11 @@ public class MBMessageFlagLocalServiceImpl
 		}
 
 		for (MBMessage message : messages) {
+			long messageId = message.getMessageId();
+			int flag = MBMessageFlagImpl.READ_FLAG;
+
 			MBMessageFlag messageFlag = mbMessageFlagPersistence.fetchByU_M_F(
-				userId, message.getMessageId(), MBMessageFlagImpl.READ_FLAG);
+				userId, messageId, flag);
 
 			if (messageFlag == null) {
 				long messageFlagId = counterLocalService.increment();
@@ -61,10 +66,29 @@ public class MBMessageFlagLocalServiceImpl
 				messageFlag = mbMessageFlagPersistence.create(messageFlagId);
 
 				messageFlag.setUserId(userId);
-				messageFlag.setMessageId(message.getMessageId());
-				messageFlag.setFlag(MBMessageFlagImpl.READ_FLAG);
+				messageFlag.setMessageId(messageId);
+				messageFlag.setFlag(flag);
 
 				mbMessageFlagPersistence.update(messageFlag, false);
+
+				try {
+					mbMessageFlagPersistence.update(messageFlag, false);
+				}
+				catch (SystemException se) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Add failed, fetch {userId=" + userId +
+								", messageId=" + messageId + ",flag=" + flag +
+									"}");
+					}
+
+					messageFlag = mbMessageFlagPersistence.fetchByU_M_F(
+						userId, messageId, flag, false);
+
+					if (messageFlag == null) {
+						throw se;
+					}
+				}
 			}
 		}
 	}
@@ -170,5 +194,8 @@ public class MBMessageFlagLocalServiceImpl
 			return false;
 		}
 	}
+
+	private static Log _log =
+		LogFactoryUtil.getLog(MBMessageFlagLocalServiceImpl.class);
 
 }
