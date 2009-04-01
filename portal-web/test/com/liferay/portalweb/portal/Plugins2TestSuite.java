@@ -37,6 +37,8 @@ import com.liferay.portalweb.portlet.samplespring.SampleSpringTests;
 import com.liferay.portalweb.portlet.samplestruts.SampleStrutsTests;
 import com.liferay.portalweb.portlet.sampletapestry.SampleTapestryTests;
 import com.liferay.portalweb.portlet.sampletest.SampleTestTests;
+import com.liferay.portalweb.portlet.sampletestdependency.SampleTestDependencyTests;
+import com.liferay.portalweb.portlet.sampletesthook.SampleTestHookTests;
 import com.liferay.portalweb.portlet.sampleuitaglibs.SampleUITagLibsTests;
 import com.liferay.portalweb.portlet.samplewap.SampleWAPTests;
 import com.liferay.portalweb.portlet.stocks.StocksTests;
@@ -95,6 +97,8 @@ public class Plugins2TestSuite extends BaseTests {
 		//testSuite.addTest(SampleStrutsLiferayTests.suite());
 		testSuite.addTest(SampleTapestryTests.suite());
 		testSuite.addTest(SampleTestTests.suite());
+		testSuite.addTest(SampleTestDependencyTests.suite());
+		testSuite.addTest(SampleTestHookTests.suite());
 		testSuite.addTest(SampleUITagLibsTests.suite());
 		testSuite.addTest(SampleWAPTests.suite());
 		testSuite.addTest(StocksTests.suite());
