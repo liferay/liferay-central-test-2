@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.SessionFactory;
 import com.liferay.portal.kernel.util.InitialThreadLocal;
-import com.liferay.portal.kernel.util.LRUMap;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.util.PropsValues;
@@ -43,6 +42,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import org.apache.commons.collections.map.LRUMap;
 
 /**
  * <a href="FinderCacheImpl.java.html"><b><i>View Source</i></b></a>
@@ -323,8 +324,8 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 
 	private static final String _PARAMS_SEPARATOR = "_P_";
 
-	private static ThreadLocal<Map<String, Object>> _localCache =
-		new InitialThreadLocal<Map<String, Object>>(new LRUMap<String, Object>(
+	private static ThreadLocal<Map> _localCache = new InitialThreadLocal<Map>(
+		new LRUMap(
 			PropsValues.VALUE_OBJECT_FINDER_THREAD_LOCAL_CACHE_MAX_SIZE));
 
 	private MultiVMPool _multiVMPool;

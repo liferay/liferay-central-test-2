@@ -25,11 +25,12 @@ package com.liferay.portal.security.permission;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.util.InitialThreadLocal;
-import com.liferay.portal.kernel.util.LRUMap;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.Map;
+
+import org.apache.commons.collections.map.LRUMap;
 
 /**
  * <a href="PermissionCacheUtil.java.html"><b><i>View Source</i></b></a>
@@ -153,8 +154,8 @@ public class PermissionCacheUtil {
 		return sb.toString();
 	}
 
-	private static ThreadLocal<Map<String, Object>> _localCache =
-		new InitialThreadLocal<Map<String, Object>>(new LRUMap<String, Object>(
+	private static ThreadLocal<Map> _localCache = new InitialThreadLocal<Map>(
+		new LRUMap(
 			PropsValues.PERMISSIONS_THREAD_LOCAL_CACHE_MAX_SIZE));
 
 	private static PortalCache _cache = MultiVMPoolUtil.getCache(
