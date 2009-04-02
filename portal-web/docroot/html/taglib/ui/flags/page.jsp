@@ -61,7 +61,7 @@ long reportedUserId = GetterUtil.getLong((String)request.getAttribute("liferay-u
 							urlData: {
 								className: '<%= className %>',
 								classPK: '<%= classPK %>',
-								contentTitle: '<%= contentTitle %>',
+								contentTitle: '<%= HtmlUtil.escape(contentTitle) %>',
 								contentURL: '<%= PortalUtil.getPortalURL(request) + currentURL %>',
 								reportedUserId: '<%= reportedUserId %>'
 							},
