@@ -70,6 +70,8 @@ public class SampleSQLBuilder {
 		InitUtil.initWithSpring();
 
 		String outputDir = System.getProperty("sample.sql.output.dir");
+		boolean generateSecurity = GetterUtil.getBoolean(
+			System.getProperty("sample.sql.generate.security"));
 		int maxBlogsEntryCount = GetterUtil.getInteger(
 			System.getProperty("sample.sql.max.blogs.entry.count"));
 		int maxGroupsCount = GetterUtil.getInteger(
@@ -84,17 +86,19 @@ public class SampleSQLBuilder {
 			System.getProperty("sample.sql.max.user.count"));
 
 		new SampleSQLBuilder(
-			outputDir, maxBlogsEntryCount, maxGroupsCount, maxMBCategoryCount,
-			maxMBMessageCount, maxMBThreadCount, maxUserCount);
+			outputDir, generateSecurity, maxBlogsEntryCount, maxGroupsCount,
+			maxMBCategoryCount, maxMBMessageCount, maxMBThreadCount,
+			maxUserCount);
 	}
 
 	public SampleSQLBuilder(
-		String outputDir, int maxBlogsEntryCount, int maxGroupsCount,
-		int maxMBCategoryCount, int maxMBMessageCount, int maxMBThreadCount,
-		int maxUserCount) {
+		String outputDir, boolean generateSecurity, int maxBlogsEntryCount,
+		int maxGroupsCount, int maxMBCategoryCount, int maxMBMessageCount,
+		int maxMBThreadCount, int maxUserCount) {
 
 		try {
 			_outputDir = outputDir;
+			_generateSecurity = generateSecurity;
 			_maxBlogsEntryCount = maxBlogsEntryCount;
 			_maxGroupsCount = maxGroupsCount;
 			_maxMBCategoryCount = maxMBCategoryCount;
@@ -236,6 +240,10 @@ public class SampleSQLBuilder {
 	}
 
 	public void insertSecurity(String name, String primKey) throws Exception {
+		if (!_generateSecurity) {
+			return;
+		}
+
 		Map<String, Object> context = getContext();
 
 		Resource resource = _dataFactory.addResource(name, primKey);
@@ -333,6 +341,7 @@ public class SampleSQLBuilder {
 
 	private SimpleCounter _counter;
 	private DataFactory _dataFactory;
+	private boolean _generateSecurity;
 	private int _maxBlogsEntryCount;
 	private int _maxGroupsCount;
 	private int _maxMBCategoryCount;

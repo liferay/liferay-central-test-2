@@ -1,3 +1,3 @@
 <#setting number_format = "0">
 
-insert into BlogsStatsUser (statsUserId, companyId, groupId, userId) values (${counter.get()}, ${companyId}, ${blogsStatsUser.groupId}, ${blogsStatsUser.userId});
+insert into BlogsStatsUser (statsUserId, groupId, companyId, userId) values (${counter.get()}, ${blogsStatsUser.groupId}, ${companyId}, ${blogsStatsUser.userId});
