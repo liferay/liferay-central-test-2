@@ -109,6 +109,7 @@ public class CacheFilter extends BasePortalFilter {
 
 		sb.append(HttpUtil.getProtocol(request));
 		sb.append("://");
+		sb.append(request.getContextPath());
 		sb.append(request.getServletPath());
 		sb.append(request.getPathInfo());
 		sb.append(StringPool.QUESTION);
