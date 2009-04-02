@@ -410,6 +410,7 @@ public class LayoutImporter {
 				for (Layout curLayout : previousLayouts) {
 					if (curLayout.getName(locale).equals(localizedName)) {
 						layout = curLayout;
+
 						break;
 					}
 				}
