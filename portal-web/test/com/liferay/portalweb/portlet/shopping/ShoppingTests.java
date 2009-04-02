@@ -95,7 +95,7 @@ public class ShoppingTests extends BaseTests {
 		testSuite.addTestSuite(AddNullShippingStateTest.class);
 		testSuite.addTestSuite(AddNullShippingZipTest.class);
 		testSuite.addTestSuite(AddNullShippingCountryTest.class);
-		testSuite.addTestSuite(AddNullShippingPhonetest.class);
+		testSuite.addTestSuite(AddNullShippingPhoneTest.class);
 		testSuite.addTestSuite(AddNullCreditCardNameTest.class);
 		testSuite.addTestSuite(AddNullCreditCardTypeTest.class);
 		testSuite.addTestSuite(AddNullCreditCardNumberTest.class);
