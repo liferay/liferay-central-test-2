@@ -39,7 +39,7 @@ import java.util.List;
  * @see com.ext.portlet.reports.model.impl.ReportsEntryImpl
  *
  */
-public class ReportsEntryModelImpl extends BaseModelImpl {
+public class ReportsEntryModelImpl extends BaseModelImpl<ReportsEntry> {
     public static final String TABLE_NAME = "ReportsEntry";
     public static final Object[][] TABLE_COLUMNS = {
             { "entryId", new Integer(Types.VARCHAR) },
@@ -67,7 +67,10 @@ public class ReportsEntryModelImpl extends BaseModelImpl {
     public static final String DATA_SOURCE = "liferayDataSource";
     public static final String SESSION_FACTORY = "liferaySessionFactory";
     public static final String TX_MANAGER = "liferayTransactionManager";
-    public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+    public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+                "value.object.entity.cache.enabled.com.ext.portlet.reports.model.ReportsEntry"),
+            true);
+    public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
                 "value.object.finder.cache.enabled.com.ext.portlet.reports.model.ReportsEntry"),
             true);
     public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
@@ -248,13 +251,7 @@ public class ReportsEntryModelImpl extends BaseModelImpl {
         return clone;
     }
 
-    public int compareTo(Object obj) {
-        if (obj == null) {
-            return -1;
-        }
-
-        ReportsEntryImpl reportsEntry = (ReportsEntryImpl) obj;
-
+    public int compareTo(ReportsEntry reportsEntry) {
         int value = 0;
 
         value = getName().toLowerCase()
@@ -272,10 +269,10 @@ public class ReportsEntryModelImpl extends BaseModelImpl {
             return false;
         }
 
-        ReportsEntryImpl reportsEntry = null;
+        ReportsEntry reportsEntry = null;
 
         try {
-            reportsEntry = (ReportsEntryImpl) obj;
+            reportsEntry = (ReportsEntry) obj;
         } catch (ClassCastException cce) {
             return false;
         }

@@ -25,7 +25,7 @@ import java.util.Date;
  * @see com.ext.portlet.reports.model.impl.ReportsEntryModelImpl
  *
  */
-public interface ReportsEntryModel extends BaseModel {
+public interface ReportsEntryModel extends BaseModel<ReportsEntry> {
     public String getPrimaryKey();
 
     public void setPrimaryKey(String pk);

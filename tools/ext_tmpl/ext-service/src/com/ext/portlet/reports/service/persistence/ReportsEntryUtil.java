@@ -3,6 +3,16 @@ package com.ext.portlet.reports.service.persistence;
 public class ReportsEntryUtil {
     private static ReportsEntryPersistence _persistence;
 
+    public static void cacheResult(
+        com.ext.portlet.reports.model.ReportsEntry reportsEntry) {
+        getPersistence().cacheResult(reportsEntry);
+    }
+
+    public static void cacheResult(
+        java.util.List<com.ext.portlet.reports.model.ReportsEntry> reportsEntries) {
+        getPersistence().cacheResult(reportsEntries);
+    }
+
     public static com.ext.portlet.reports.model.ReportsEntry create(
         java.lang.String entryId) {
         return getPersistence().create(entryId);
