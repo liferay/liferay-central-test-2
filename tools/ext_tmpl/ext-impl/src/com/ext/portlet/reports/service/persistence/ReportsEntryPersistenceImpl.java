@@ -8,11 +8,15 @@ import com.ext.portlet.reports.model.impl.ReportsEntryModelImpl;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
@@ -21,20 +25,71 @@ import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 
 public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
     implements ReportsEntryPersistence {
-    private static Log _log = LogFactory.getLog(ReportsEntryPersistenceImpl.class);
+    public static final String FINDER_CLASS_NAME_ENTITY = ReportsEntryImpl.class.getName();
+    public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
+        ".List";
+    public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(ReportsEntryModelImpl.ENTITY_CACHE_ENABLED,
+            ReportsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+            "findByCompanyId", new String[] { String.class.getName() });
+    public static final FinderPath FINDER_PATH_FIND_BY_OBC_COMPANYID = new FinderPath(ReportsEntryModelImpl.ENTITY_CACHE_ENABLED,
+            ReportsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+            "findByCompanyId",
+            new String[] {
+                String.class.getName(),
+                
+            "java.lang.Integer", "java.lang.Integer",
+                "com.liferay.portal.kernel.util.OrderByComparator"
+            });
+    public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(ReportsEntryModelImpl.ENTITY_CACHE_ENABLED,
+            ReportsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+            "countByCompanyId", new String[] { String.class.getName() });
+    public static final FinderPath FINDER_PATH_FIND_BY_USERID = new FinderPath(ReportsEntryModelImpl.ENTITY_CACHE_ENABLED,
+            ReportsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+            "findByUserId", new String[] { String.class.getName() });
+    public static final FinderPath FINDER_PATH_FIND_BY_OBC_USERID = new FinderPath(ReportsEntryModelImpl.ENTITY_CACHE_ENABLED,
+            ReportsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+            "findByUserId",
+            new String[] {
+                String.class.getName(),
+                
+            "java.lang.Integer", "java.lang.Integer",
+                "com.liferay.portal.kernel.util.OrderByComparator"
+            });
+    public static final FinderPath FINDER_PATH_COUNT_BY_USERID = new FinderPath(ReportsEntryModelImpl.ENTITY_CACHE_ENABLED,
+            ReportsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+            "countByUserId", new String[] { String.class.getName() });
+    public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(ReportsEntryModelImpl.ENTITY_CACHE_ENABLED,
+            ReportsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+            "findAll", new String[0]);
+    public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(ReportsEntryModelImpl.ENTITY_CACHE_ENABLED,
+            ReportsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+            "countAll", new String[0]);
+    private static Log _log = LogFactoryUtil.getLog(ReportsEntryPersistenceImpl.class);
     @BeanReference(name = "com.ext.portlet.reports.service.persistence.ReportsEntryPersistence.impl")
     protected com.ext.portlet.reports.service.persistence.ReportsEntryPersistence reportsEntryPersistence;
+
+    public void cacheResult(ReportsEntry reportsEntry) {
+        EntityCacheUtil.putResult(ReportsEntryModelImpl.ENTITY_CACHE_ENABLED,
+            ReportsEntryImpl.class, reportsEntry.getPrimaryKey(), reportsEntry);
+    }
+
+    public void cacheResult(List<ReportsEntry> reportsEntries) {
+        for (ReportsEntry reportsEntry : reportsEntries) {
+            if (EntityCacheUtil.getResult(
+                        ReportsEntryModelImpl.ENTITY_CACHE_ENABLED,
+                        ReportsEntryImpl.class, reportsEntry.getPrimaryKey(),
+                        this) == null) {
+                cacheResult(reportsEntry);
+            }
+        }
+    }
 
     public ReportsEntry create(String entryId) {
         ReportsEntry reportsEntry = new ReportsEntryImpl();
@@ -77,13 +132,13 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
 
     public ReportsEntry remove(ReportsEntry reportsEntry)
         throws SystemException {
-        for (ModelListener listener : listeners) {
+        for (ModelListener<ReportsEntry> listener : listeners) {
             listener.onBeforeRemove(reportsEntry);
         }
 
         reportsEntry = removeImpl(reportsEntry);
 
-        for (ModelListener listener : listeners) {
+        for (ModelListener<ReportsEntry> listener : listeners) {
             listener.onAfterRemove(reportsEntry);
         }
 
@@ -97,7 +152,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
         try {
             session = openSession();
 
-            if (BatchSessionUtil.isEnabled()) {
+            if (reportsEntry.isCachedModel() || BatchSessionUtil.isEnabled()) {
                 Object staleObject = session.get(ReportsEntryImpl.class,
                         reportsEntry.getPrimaryKeyObj());
 
@@ -109,15 +164,18 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
             session.delete(reportsEntry);
 
             session.flush();
-
-            return reportsEntry;
         } catch (Exception e) {
             throw processException(e);
         } finally {
             closeSession(session);
-
-            FinderCacheUtil.clearCache(ReportsEntry.class.getName());
         }
+
+        FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+        EntityCacheUtil.removeResult(ReportsEntryModelImpl.ENTITY_CACHE_ENABLED,
+            ReportsEntryImpl.class, reportsEntry.getPrimaryKey());
+
+        return reportsEntry;
     }
 
     /**
@@ -150,7 +208,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
         throws SystemException {
         boolean isNew = reportsEntry.isNew();
 
-        for (ModelListener listener : listeners) {
+        for (ModelListener<ReportsEntry> listener : listeners) {
             if (isNew) {
                 listener.onBeforeCreate(reportsEntry);
             } else {
@@ -160,7 +218,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
 
         reportsEntry = updateImpl(reportsEntry, merge);
 
-        for (ModelListener listener : listeners) {
+        for (ModelListener<ReportsEntry> listener : listeners) {
             if (isNew) {
                 listener.onAfterCreate(reportsEntry);
             } else {
@@ -182,15 +240,18 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
             BatchSessionUtil.update(session, reportsEntry, merge);
 
             reportsEntry.setNew(false);
-
-            return reportsEntry;
         } catch (Exception e) {
             throw processException(e);
         } finally {
             closeSession(session);
-
-            FinderCacheUtil.clearCache(ReportsEntry.class.getName());
         }
+
+        FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+        EntityCacheUtil.putResult(ReportsEntryModelImpl.ENTITY_CACHE_ENABLED,
+            ReportsEntryImpl.class, reportsEntry.getPrimaryKey(), reportsEntry);
+
+        return reportsEntry;
     }
 
     public ReportsEntry findByPrimaryKey(String entryId)
@@ -212,35 +273,39 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
 
     public ReportsEntry fetchByPrimaryKey(String entryId)
         throws SystemException {
-        Session session = null;
+        ReportsEntry reportsEntry = (ReportsEntry) EntityCacheUtil.getResult(ReportsEntryModelImpl.ENTITY_CACHE_ENABLED,
+                ReportsEntryImpl.class, entryId, this);
 
-        try {
-            session = openSession();
+        if (reportsEntry == null) {
+            Session session = null;
 
-            return (ReportsEntry) session.get(ReportsEntryImpl.class, entryId);
-        } catch (Exception e) {
-            throw processException(e);
-        } finally {
-            closeSession(session);
+            try {
+                session = openSession();
+
+                reportsEntry = (ReportsEntry) session.get(ReportsEntryImpl.class,
+                        entryId);
+            } catch (Exception e) {
+                throw processException(e);
+            } finally {
+                if (reportsEntry != null) {
+                    cacheResult(reportsEntry);
+                }
+
+                closeSession(session);
+            }
         }
+
+        return reportsEntry;
     }
 
     public List<ReportsEntry> findByCompanyId(String companyId)
         throws SystemException {
-        boolean finderClassNameCacheEnabled = ReportsEntryModelImpl.CACHE_ENABLED;
-        String finderClassName = ReportsEntry.class.getName();
-        String finderMethodName = "findByCompanyId";
-        String[] finderParams = new String[] { String.class.getName() };
         Object[] finderArgs = new Object[] { companyId };
 
-        Object result = null;
+        List<ReportsEntry> list = (List<ReportsEntry>) FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
+                finderArgs, this);
 
-        if (finderClassNameCacheEnabled) {
-            result = FinderCacheUtil.getResult(finderClassName,
-                    finderMethodName, finderParams, finderArgs, this);
-        }
-
-        if (result == null) {
+        if (list == null) {
             Session session = null;
 
             try {
@@ -271,21 +336,24 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
                     qPos.add(companyId);
                 }
 
-                List<ReportsEntry> list = q.list();
-
-                FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-                    finderClassName, finderMethodName, finderParams,
-                    finderArgs, list);
-
-                return list;
+                list = q.list();
             } catch (Exception e) {
                 throw processException(e);
             } finally {
+                if (list == null) {
+                    list = new ArrayList<ReportsEntry>();
+                }
+
+                cacheResult(list);
+
+                FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
+                    finderArgs, list);
+
                 closeSession(session);
             }
-        } else {
-            return (List<ReportsEntry>) result;
         }
+
+        return list;
     }
 
     public List<ReportsEntry> findByCompanyId(String companyId, int start,
@@ -295,29 +363,16 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
 
     public List<ReportsEntry> findByCompanyId(String companyId, int start,
         int end, OrderByComparator obc) throws SystemException {
-        boolean finderClassNameCacheEnabled = ReportsEntryModelImpl.CACHE_ENABLED;
-        String finderClassName = ReportsEntry.class.getName();
-        String finderMethodName = "findByCompanyId";
-        String[] finderParams = new String[] {
-                String.class.getName(),
-                
-                "java.lang.Integer", "java.lang.Integer",
-                "com.liferay.portal.kernel.util.OrderByComparator"
-            };
         Object[] finderArgs = new Object[] {
                 companyId,
                 
                 String.valueOf(start), String.valueOf(end), String.valueOf(obc)
             };
 
-        Object result = null;
+        List<ReportsEntry> list = (List<ReportsEntry>) FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+                finderArgs, this);
 
-        if (finderClassNameCacheEnabled) {
-            result = FinderCacheUtil.getResult(finderClassName,
-                    finderMethodName, finderParams, finderArgs, this);
-        }
-
-        if (result == null) {
+        if (list == null) {
             Session session = null;
 
             try {
@@ -354,29 +409,32 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
                     qPos.add(companyId);
                 }
 
-                List<ReportsEntry> list = (List<ReportsEntry>) QueryUtil.list(q,
-                        getDialect(), start, end);
-
-                FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-                    finderClassName, finderMethodName, finderParams,
-                    finderArgs, list);
-
-                return list;
+                list = (List<ReportsEntry>) QueryUtil.list(q, getDialect(),
+                        start, end);
             } catch (Exception e) {
                 throw processException(e);
             } finally {
+                if (list == null) {
+                    list = new ArrayList<ReportsEntry>();
+                }
+
+                cacheResult(list);
+
+                FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+                    finderArgs, list);
+
                 closeSession(session);
             }
-        } else {
-            return (List<ReportsEntry>) result;
         }
+
+        return list;
     }
 
     public ReportsEntry findByCompanyId_First(String companyId,
         OrderByComparator obc) throws NoSuchEntryException, SystemException {
         List<ReportsEntry> list = findByCompanyId(companyId, 0, 1, obc);
 
-        if (list.size() == 0) {
+        if (list.isEmpty()) {
             StringBuilder msg = new StringBuilder();
 
             msg.append("No ReportsEntry exists with the key {");
@@ -398,7 +456,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
         List<ReportsEntry> list = findByCompanyId(companyId, count - 1, count,
                 obc);
 
-        if (list.size() == 0) {
+        if (list.isEmpty()) {
             StringBuilder msg = new StringBuilder();
 
             msg.append("No ReportsEntry exists with the key {");
@@ -475,20 +533,12 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
 
     public List<ReportsEntry> findByUserId(String userId)
         throws SystemException {
-        boolean finderClassNameCacheEnabled = ReportsEntryModelImpl.CACHE_ENABLED;
-        String finderClassName = ReportsEntry.class.getName();
-        String finderMethodName = "findByUserId";
-        String[] finderParams = new String[] { String.class.getName() };
         Object[] finderArgs = new Object[] { userId };
 
-        Object result = null;
+        List<ReportsEntry> list = (List<ReportsEntry>) FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
+                finderArgs, this);
 
-        if (finderClassNameCacheEnabled) {
-            result = FinderCacheUtil.getResult(finderClassName,
-                    finderMethodName, finderParams, finderArgs, this);
-        }
-
-        if (result == null) {
+        if (list == null) {
             Session session = null;
 
             try {
@@ -519,21 +569,24 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
                     qPos.add(userId);
                 }
 
-                List<ReportsEntry> list = q.list();
-
-                FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-                    finderClassName, finderMethodName, finderParams,
-                    finderArgs, list);
-
-                return list;
+                list = q.list();
             } catch (Exception e) {
                 throw processException(e);
             } finally {
+                if (list == null) {
+                    list = new ArrayList<ReportsEntry>();
+                }
+
+                cacheResult(list);
+
+                FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
+                    finderArgs, list);
+
                 closeSession(session);
             }
-        } else {
-            return (List<ReportsEntry>) result;
         }
+
+        return list;
     }
 
     public List<ReportsEntry> findByUserId(String userId, int start, int end)
@@ -543,29 +596,16 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
 
     public List<ReportsEntry> findByUserId(String userId, int start, int end,
         OrderByComparator obc) throws SystemException {
-        boolean finderClassNameCacheEnabled = ReportsEntryModelImpl.CACHE_ENABLED;
-        String finderClassName = ReportsEntry.class.getName();
-        String finderMethodName = "findByUserId";
-        String[] finderParams = new String[] {
-                String.class.getName(),
-                
-                "java.lang.Integer", "java.lang.Integer",
-                "com.liferay.portal.kernel.util.OrderByComparator"
-            };
         Object[] finderArgs = new Object[] {
                 userId,
                 
                 String.valueOf(start), String.valueOf(end), String.valueOf(obc)
             };
 
-        Object result = null;
+        List<ReportsEntry> list = (List<ReportsEntry>) FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
+                finderArgs, this);
 
-        if (finderClassNameCacheEnabled) {
-            result = FinderCacheUtil.getResult(finderClassName,
-                    finderMethodName, finderParams, finderArgs, this);
-        }
-
-        if (result == null) {
+        if (list == null) {
             Session session = null;
 
             try {
@@ -602,29 +642,32 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
                     qPos.add(userId);
                 }
 
-                List<ReportsEntry> list = (List<ReportsEntry>) QueryUtil.list(q,
-                        getDialect(), start, end);
-
-                FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-                    finderClassName, finderMethodName, finderParams,
-                    finderArgs, list);
-
-                return list;
+                list = (List<ReportsEntry>) QueryUtil.list(q, getDialect(),
+                        start, end);
             } catch (Exception e) {
                 throw processException(e);
             } finally {
+                if (list == null) {
+                    list = new ArrayList<ReportsEntry>();
+                }
+
+                cacheResult(list);
+
+                FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
+                    finderArgs, list);
+
                 closeSession(session);
             }
-        } else {
-            return (List<ReportsEntry>) result;
         }
+
+        return list;
     }
 
     public ReportsEntry findByUserId_First(String userId, OrderByComparator obc)
         throws NoSuchEntryException, SystemException {
         List<ReportsEntry> list = findByUserId(userId, 0, 1, obc);
 
-        if (list.size() == 0) {
+        if (list.isEmpty()) {
             StringBuilder msg = new StringBuilder();
 
             msg.append("No ReportsEntry exists with the key {");
@@ -645,7 +688,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
 
         List<ReportsEntry> list = findByUserId(userId, count - 1, count, obc);
 
-        if (list.size() == 0) {
+        if (list.isEmpty()) {
             StringBuilder msg = new StringBuilder();
 
             msg.append("No ReportsEntry exists with the key {");
@@ -767,25 +810,14 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
 
     public List<ReportsEntry> findAll(int start, int end, OrderByComparator obc)
         throws SystemException {
-        boolean finderClassNameCacheEnabled = ReportsEntryModelImpl.CACHE_ENABLED;
-        String finderClassName = ReportsEntry.class.getName();
-        String finderMethodName = "findAll";
-        String[] finderParams = new String[] {
-                "java.lang.Integer", "java.lang.Integer",
-                "com.liferay.portal.kernel.util.OrderByComparator"
-            };
         Object[] finderArgs = new Object[] {
                 String.valueOf(start), String.valueOf(end), String.valueOf(obc)
             };
 
-        Object result = null;
+        List<ReportsEntry> list = (List<ReportsEntry>) FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+                finderArgs, this);
 
-        if (finderClassNameCacheEnabled) {
-            result = FinderCacheUtil.getResult(finderClassName,
-                    finderMethodName, finderParams, finderArgs, this);
-        }
-
-        if (result == null) {
+        if (list == null) {
             Session session = null;
 
             try {
@@ -807,8 +839,6 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
 
                 Query q = session.createQuery(query.toString());
 
-                List<ReportsEntry> list = null;
-
                 if (obc == null) {
                     list = (List<ReportsEntry>) QueryUtil.list(q, getDialect(),
                             start, end, false);
@@ -818,20 +848,22 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
                     list = (List<ReportsEntry>) QueryUtil.list(q, getDialect(),
                             start, end);
                 }
-
-                FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-                    finderClassName, finderMethodName, finderParams,
-                    finderArgs, list);
-
-                return list;
             } catch (Exception e) {
                 throw processException(e);
             } finally {
+                if (list == null) {
+                    list = new ArrayList<ReportsEntry>();
+                }
+
+                cacheResult(list);
+
+                FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+
                 closeSession(session);
             }
-        } else {
-            return (List<ReportsEntry>) result;
         }
+
+        return list;
     }
 
     public void removeByCompanyId(String companyId) throws SystemException {
@@ -853,20 +885,12 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
     }
 
     public int countByCompanyId(String companyId) throws SystemException {
-        boolean finderClassNameCacheEnabled = ReportsEntryModelImpl.CACHE_ENABLED;
-        String finderClassName = ReportsEntry.class.getName();
-        String finderMethodName = "countByCompanyId";
-        String[] finderParams = new String[] { String.class.getName() };
         Object[] finderArgs = new Object[] { companyId };
 
-        Object result = null;
+        Long count = (Long) FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
+                finderArgs, this);
 
-        if (finderClassNameCacheEnabled) {
-            result = FinderCacheUtil.getResult(finderClassName,
-                    finderMethodName, finderParams, finderArgs, this);
-        }
-
-        if (result == null) {
+        if (count == null) {
             Session session = null;
 
             try {
@@ -894,48 +918,31 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
                     qPos.add(companyId);
                 }
 
-                Long count = null;
-
-                Iterator<Long> itr = q.list().iterator();
-
-                if (itr.hasNext()) {
-                    count = itr.next();
-                }
-
-                if (count == null) {
-                    count = new Long(0);
-                }
-
-                FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-                    finderClassName, finderMethodName, finderParams,
-                    finderArgs, count);
-
-                return count.intValue();
+                count = (Long) q.uniqueResult();
             } catch (Exception e) {
                 throw processException(e);
             } finally {
+                if (count == null) {
+                    count = Long.valueOf(0);
+                }
+
+                FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_COMPANYID,
+                    finderArgs, count);
+
                 closeSession(session);
             }
-        } else {
-            return ((Long) result).intValue();
         }
+
+        return count.intValue();
     }
 
     public int countByUserId(String userId) throws SystemException {
-        boolean finderClassNameCacheEnabled = ReportsEntryModelImpl.CACHE_ENABLED;
-        String finderClassName = ReportsEntry.class.getName();
-        String finderMethodName = "countByUserId";
-        String[] finderParams = new String[] { String.class.getName() };
         Object[] finderArgs = new Object[] { userId };
 
-        Object result = null;
+        Long count = (Long) FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_USERID,
+                finderArgs, this);
 
-        if (finderClassNameCacheEnabled) {
-            result = FinderCacheUtil.getResult(finderClassName,
-                    finderMethodName, finderParams, finderArgs, this);
-        }
-
-        if (result == null) {
+        if (count == null) {
             Session session = null;
 
             try {
@@ -963,48 +970,31 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
                     qPos.add(userId);
                 }
 
-                Long count = null;
-
-                Iterator<Long> itr = q.list().iterator();
-
-                if (itr.hasNext()) {
-                    count = itr.next();
-                }
-
-                if (count == null) {
-                    count = new Long(0);
-                }
-
-                FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-                    finderClassName, finderMethodName, finderParams,
-                    finderArgs, count);
-
-                return count.intValue();
+                count = (Long) q.uniqueResult();
             } catch (Exception e) {
                 throw processException(e);
             } finally {
+                if (count == null) {
+                    count = Long.valueOf(0);
+                }
+
+                FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERID,
+                    finderArgs, count);
+
                 closeSession(session);
             }
-        } else {
-            return ((Long) result).intValue();
         }
+
+        return count.intValue();
     }
 
     public int countAll() throws SystemException {
-        boolean finderClassNameCacheEnabled = ReportsEntryModelImpl.CACHE_ENABLED;
-        String finderClassName = ReportsEntry.class.getName();
-        String finderMethodName = "countAll";
-        String[] finderParams = new String[] {  };
-        Object[] finderArgs = new Object[] {  };
+        Object[] finderArgs = new Object[0];
 
-        Object result = null;
+        Long count = (Long) FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+                finderArgs, this);
 
-        if (finderClassNameCacheEnabled) {
-            result = FinderCacheUtil.getResult(finderClassName,
-                    finderMethodName, finderParams, finderArgs, this);
-        }
-
-        if (result == null) {
+        if (count == null) {
             Session session = null;
 
             try {
@@ -1013,31 +1003,22 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
                 Query q = session.createQuery(
                         "SELECT COUNT(*) FROM com.ext.portlet.reports.model.ReportsEntry");
 
-                Long count = null;
-
-                Iterator<Long> itr = q.list().iterator();
-
-                if (itr.hasNext()) {
-                    count = itr.next();
-                }
-
-                if (count == null) {
-                    count = new Long(0);
-                }
-
-                FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-                    finderClassName, finderMethodName, finderParams,
-                    finderArgs, count);
-
-                return count.intValue();
+                count = (Long) q.uniqueResult();
             } catch (Exception e) {
                 throw processException(e);
             } finally {
+                if (count == null) {
+                    count = Long.valueOf(0);
+                }
+
+                FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+                    count);
+
                 closeSession(session);
             }
-        } else {
-            return ((Long) result).intValue();
         }
+
+        return count.intValue();
     }
 
     public void afterPropertiesSet() {
@@ -1047,10 +1028,10 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
 
         if (listenerClassNames.length > 0) {
             try {
-                List<ModelListener> listenersList = new ArrayList<ModelListener>();
+                List<ModelListener<ReportsEntry>> listenersList = new ArrayList<ModelListener<ReportsEntry>>();
 
                 for (String listenerClassName : listenerClassNames) {
-                    listenersList.add((ModelListener) Class.forName(
+                    listenersList.add((ModelListener<ReportsEntry>) Class.forName(
                             listenerClassName).newInstance());
                 }
 
