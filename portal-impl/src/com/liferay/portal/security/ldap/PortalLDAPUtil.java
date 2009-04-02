@@ -892,6 +892,14 @@ public class PortalLDAPUtil {
 			// User does not exist so create
 
 		}
+		catch (Exception e) {
+			_log.error(
+				"Problem updating user with screen name " + screenName +
+					" and email address " + emailAddress,
+				e);
+
+			return null;
+		}
 
 		if (user == null) {
 			try {
