@@ -72,6 +72,8 @@ public class SampleSQLBuilder {
 		String outputDir = System.getProperty("sample.sql.output.dir");
 		int maxBlogsEntryCount = GetterUtil.getInteger(
 			System.getProperty("sample.sql.max.blogs.entry.count"));
+		int maxGroupsCount = GetterUtil.getInteger(
+			System.getProperty("sample.sql.max.groups.count"));
 		int maxMBCategoryCount = GetterUtil.getInteger(
 			System.getProperty("sample.sql.max.mb.category.count"));
 		int maxMBMessageCount = GetterUtil.getInteger(
@@ -82,17 +84,19 @@ public class SampleSQLBuilder {
 			System.getProperty("sample.sql.max.user.count"));
 
 		new SampleSQLBuilder(
-			outputDir, maxBlogsEntryCount, maxMBCategoryCount,
+			outputDir, maxBlogsEntryCount, maxGroupsCount, maxMBCategoryCount,
 			maxMBMessageCount, maxMBThreadCount, maxUserCount);
 	}
 
 	public SampleSQLBuilder(
-		String outputDir, int maxBlogsEntryCount, int maxMBCategoryCount,
-		int maxMBMessageCount, int maxMBThreadCount, int maxUserCount) {
+		String outputDir, int maxBlogsEntryCount, int maxGroupsCount,
+		int maxMBCategoryCount, int maxMBMessageCount, int maxMBThreadCount,
+		int maxUserCount) {
 
 		try {
 			_outputDir = outputDir;
 			_maxBlogsEntryCount = maxBlogsEntryCount;
+			_maxGroupsCount = maxGroupsCount;
 			_maxMBCategoryCount = maxMBCategoryCount;
 			_maxMBMessageCount = maxMBMessageCount;
 			_maxMBThreadCount = maxMBThreadCount;
@@ -102,6 +106,8 @@ public class SampleSQLBuilder {
 			_permissionCounter = new SimpleCounter();
 			_resourceCounter = new SimpleCounter();
 			_resourceCodeCounter = new SimpleCounter();
+
+			_userScreenNameIncrementer = new SimpleCounter();
 
 			_dataFactory = new DataFactory(
 				_counter, _permissionCounter, _resourceCounter,
@@ -299,6 +305,7 @@ public class SampleSQLBuilder {
 		put(context, "dataFactory", _dataFactory);
 		put(context, "defaultUserId", defaultUser.getCompanyId());
 		put(context, "maxBlogsEntryCount", _maxBlogsEntryCount);
+		put(context, "maxGroupsCount", _maxGroupsCount);
 		put(context, "maxMBCategoryCount", _maxMBCategoryCount);
 		put(context, "maxMBMessageCount", _maxMBMessageCount);
 		put(context, "maxMBThreadCount", _maxMBThreadCount);
@@ -306,6 +313,7 @@ public class SampleSQLBuilder {
 		put(context, "portalUUIDUtil", PortalUUIDUtil.getPortalUUID());
 		put(context, "sampleSQLBuilder", this);
 		put(context, "stringUtil", StringUtil_IW.getInstance());
+		put(context, "userScreenNameIncrementer", _userScreenNameIncrementer);
 
 		return context;
 	}
@@ -326,6 +334,7 @@ public class SampleSQLBuilder {
 	private SimpleCounter _counter;
 	private DataFactory _dataFactory;
 	private int _maxBlogsEntryCount;
+	private int _maxGroupsCount;
 	private int _maxMBCategoryCount;
 	private int _maxMBMessageCount;
 	private int _maxMBThreadCount;
@@ -346,6 +355,7 @@ public class SampleSQLBuilder {
 	private String _tplSecurity = _TPL_ROOT + "security.ftl";
 	private String _tplTagsAsset = _TPL_ROOT + "tags_asset.ftl";
 	private String _tplUser = _TPL_ROOT + "user.ftl";
+	private SimpleCounter _userScreenNameIncrementer;
 	private Writer _writerGeneric;
 	private Writer _writerMySQL;
 

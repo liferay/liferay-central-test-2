@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -156,12 +157,13 @@ public class DataFactory {
 	}
 
 	public Group addGroup(
-			long classNameId, long classPK, String name, String friendlyURL)
+			long groupId, long classNameId, long classPK, String name,
+			String friendlyURL)
 		throws Exception {
 
 		Group group = new GroupImpl();
 
-		group.setGroupId(_counter.get());
+		group.setGroupId(groupId);
 		group.setClassNameId(classNameId);
 		group.setClassPK(classPK);
 		group.setName(name);
@@ -386,23 +388,21 @@ public class DataFactory {
 		return tagsAsset;
 	}
 
-	public User addUser(boolean defaultUser, Contact contact) throws Exception {
+	public User addUser(boolean defaultUser, String screenName)
+		throws Exception {
+
 		User user = new UserImpl();
 
 		user.setUserId(_counter.get());
 		user.setDefaultUser(defaultUser);
-		user.setScreenName(String.valueOf(user.getUserId()));
 
-		String emailAddress = "@liferay.com";
+		if (Validator.isNull(screenName)) {
+			screenName = String.valueOf(user.getUserId());
+		}
 
-		if (defaultUser) {
-			emailAddress = "default" + emailAddress;
-		}
-		else {
-			emailAddress =
-				contact.getFirstName() + contact.getLastName() + emailAddress;
-			emailAddress = emailAddress.toLowerCase();
-		}
+		user.setScreenName(screenName);
+
+		String emailAddress = screenName + "@liferay.com";
 
 		user.setEmailAddress(emailAddress);
 

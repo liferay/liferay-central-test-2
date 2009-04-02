@@ -8,8 +8,6 @@
 
 <#include "groups.ftl">
 
-<#include "users.ftl">
-
 <#include "counters.ftl">
 
 update Release_ set verified = TRUE;

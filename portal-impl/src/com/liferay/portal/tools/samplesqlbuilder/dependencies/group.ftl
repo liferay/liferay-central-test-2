@@ -2,6 +2,8 @@
 
 insert into Group_ (groupId, companyId, creatorUserId, classNameId, classPK, parentGroupId, liveGroupId, name, friendlyURL, active_) values (${group.groupId}, ${companyId}, ${defaultUserId}, ${group.classNameId}, ${group.classPK}, 0, 0, '${group.name}', '${group.friendlyURL}', TRUE);
 
+${sampleSQLBuilder.insertSecurity("com.liferay.portal.model.Group", group.groupId)}
+
 insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, themeId, colorSchemeId, pageCount) values (${counter.get()}, ${companyId}, ${group.groupId}, TRUE, FALSE, 'classic', '01', ${privateLayouts?size});
 insert into LayoutSet (layoutSetId, companyId, groupId, privateLayout, logo, themeId, colorSchemeId, pageCount) values (${counter.get()}, ${companyId}, ${group.groupId}, FALSE, FALSE, 'classic', '01', ${publicLayouts?size});
 

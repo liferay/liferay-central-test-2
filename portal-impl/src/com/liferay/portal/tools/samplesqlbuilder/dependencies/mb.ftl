@@ -1,12 +1,8 @@
 <#assign mbMessageCounter = dataFactory.newInteger()>
 <#assign totalMBMessageCount = maxMBCategoryCount * maxMBThreadCount * maxMBMessageCount>
 
-<#assign mbSystemCategory = dataFactory.addMBCategory(0, 0, 0, 0, "", "", 0, 0)>
-
-${sampleSQLBuilder.insertMBCategory(mbSystemCategory)}
-
 <#list 1..maxMBCategoryCount as mbCategoryCount>
-	<#assign mbCategory = dataFactory.addMBCategory(counter.get(), dataFactory.guestGroup.groupId, companyId, firstUserId, "Test Category " + mbCategoryCount, "This is a test category " + mbCategoryCount + ".", maxMBThreadCount, maxMBThreadCount * maxMBMessageCount)>
+	<#assign mbCategory = dataFactory.addMBCategory(counter.get(), groupId, companyId, firstUserId, "Test Category " + mbCategoryCount, "This is a test category " + mbCategoryCount + ".", maxMBThreadCount, maxMBThreadCount * maxMBMessageCount)>
 
 	${sampleSQLBuilder.insertMBCategory(mbCategory)}
 

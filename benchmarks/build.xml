@@ -19,6 +19,7 @@
 			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 			<jvmarg value="-Dsample.sql.output.dir=${sample.sql.output.dir}" />
 			<jvmarg value="-Dsample.sql.max.blogs.entry.count=${sample.sql.max.blogs.entry.count}" />
+			<jvmarg value="-Dsample.sql.max.groups.count=${sample.sql.max.groups.count}" />
 			<jvmarg value="-Dsample.sql.max.mb.category.count=${sample.sql.max.mb.category.count}" />
 			<jvmarg value="-Dsample.sql.max.mb.message.count=${sample.sql.max.mb.message.count}" />
 			<jvmarg value="-Dsample.sql.max.mb.thread.count=${sample.sql.max.mb.thread.count}" />
