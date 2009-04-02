@@ -484,6 +484,16 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return manageableGroups;
 	}
 
+	public List<Group> getNoLayoutsGroups(
+			String className, boolean privateLayout, int start, int end)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return groupFinder.findByNoLayouts(
+			classNameId, privateLayout, start, end);
+	}
+
 	public List<Group> getNullFriendlyURLGroups() throws SystemException {
 		return groupFinder.findByNullFriendlyURL();
 	}

@@ -60,6 +60,9 @@ public class GroupFinderImpl
 	public static String COUNT_BY_C_N_D =
 		GroupFinder.class.getName() + ".countByC_N_D";
 
+	public static String FIND_BY_NO_LAYOUTS =
+		GroupFinder.class.getName() + ".findByNoLayouts";
+
 	public static String FIND_BY_NULL_FRIENDLY_URL =
 		GroupFinder.class.getName() + ".findByNullFriendlyURL";
 
@@ -193,6 +196,36 @@ public class GroupFinderImpl
 			}
 
 			return count;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<Group> findByNoLayouts(
+			long classNameId, boolean privateLayout, int start, int end)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_SYSTEM);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("Group_", GroupImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(classNameId);
+			qPos.add(privateLayout);
+
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

@@ -41,6 +41,21 @@
 				(friendlyURL = '' OR friendlyURL IS NULL)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.GroupFinder.findByNoLayouts">
+		<![CDATA[
+			SELECT
+				{Group_.*}
+			FROM
+				Group_
+			INNER JOIN
+				LayoutSet ON
+					LayoutSet.groupId = Group_.groupId
+			WHERE
+				(Group_.classNameId = ?) AND
+				(LayoutSet.privateLayout = ?) AND
+				(LayoutSet.pageCount = 0)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.findBySystem">
 		<![CDATA[
 			(

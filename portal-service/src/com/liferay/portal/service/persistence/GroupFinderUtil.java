@@ -41,6 +41,13 @@ public class GroupFinderUtil {
 		return getFinder().countByC_N_D(companyId, name, description, params);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Group> findByNoLayouts(
+		long classNameId, boolean privateLayout, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getFinder()
+				   .findByNoLayouts(classNameId, privateLayout, start, end);
+	}
+
 	public static java.util.List<com.liferay.portal.model.Group> findByNullFriendlyURL()
 		throws com.liferay.portal.SystemException {
 		return getFinder().findByNullFriendlyURL();

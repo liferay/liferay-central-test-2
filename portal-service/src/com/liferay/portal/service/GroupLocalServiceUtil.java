@@ -180,6 +180,13 @@ public class GroupLocalServiceUtil {
 		return getService().getManageableGroups(userId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Group> getNoLayoutsGroups(
+		java.lang.String className, boolean privateLayout, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getService()
+				   .getNoLayoutsGroups(className, privateLayout, start, end);
+	}
+
 	public static java.util.List<com.liferay.portal.model.Group> getNullFriendlyURLGroups()
 		throws com.liferay.portal.SystemException {
 		return getService().getNullFriendlyURLGroups();
