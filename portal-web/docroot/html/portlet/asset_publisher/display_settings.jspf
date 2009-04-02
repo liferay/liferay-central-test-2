@@ -211,6 +211,16 @@
 		<liferay-ui:input-checkbox param="enableCommentRatings" defaultValue="<%= enableCommentRatings %>" />
 	</td>
 </tr>
+<c:if test='<%= selectionStyle.equals("manual") %>'>
+	<tr>
+		<td>
+			<liferay-ui:message key="enable-tag-based-navigation" /> <liferay-ui:icon-help message="enable-tag-based-navigation-help" />
+		</td>
+		<td>
+			<liferay-ui:input-checkbox param="enableTagBasedNavigation" defaultValue="<%= enableTagBasedNavigation %>" />
+		</td>
+	</tr>
+</c:if>
 
 <c:if test='<%= selectionStyle.equals("dynamic") %>'>
 	<tr>

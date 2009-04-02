@@ -328,6 +328,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			actionRequest, "enableCommentRatings");
 		boolean enableRatings = ParamUtil.getBoolean(
 			actionRequest, "enableRatings");
+		boolean enableTagBasedNavigation = ParamUtil.getBoolean(
+			actionRequest, "enableTagBasedNavigation");
 		String medatadaFields = ParamUtil.getString(
 			actionRequest, "metadataFields");
 
@@ -345,6 +347,9 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		preferences.setValue(
 			"enable-comment-ratings", String.valueOf(enableCommentRatings));
 		preferences.setValue("enable-ratings", String.valueOf(enableRatings));
+		preferences.setValue(
+			"enable-tag-based-navigation",
+			String.valueOf(enableTagBasedNavigation));
 		preferences.setValue("metadata-fields", medatadaFields);
 	}
 

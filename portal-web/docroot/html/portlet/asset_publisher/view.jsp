@@ -83,6 +83,10 @@ for (String entryName : entries) {
 	}
 }
 
+if (false && enableTagBasedNavigation && selectionStyle.equals("manual") && entries.length > 0) {
+	selectionStyle = "dynamic";
+}
+
 String portletId = portletDisplay.getId();
 %>
 
