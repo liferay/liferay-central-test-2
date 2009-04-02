@@ -118,9 +118,15 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 			Document doc)
 		throws Exception {
 
-		Resource resource = ResourceLocalServiceUtil.getResource(
-			companyId, className, ResourceConstants.SCOPE_INDIVIDUAL,
-			classPK);
+		String[] permissionResourceIds = doc.getValues("permissionResourceId");
+		Resource resource = null;
+		try {
+			resource = ResourceLocalServiceUtil.getResource(Long.parseLong(permissionResourceIds[0]));
+		} catch (Exception pe) {
+			resource = ResourceLocalServiceUtil.getResource(
+				companyId, className, ResourceConstants.SCOPE_INDIVIDUAL,
+				classPK);
+		}
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
@@ -154,6 +160,7 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 		roles = ListUtil.copy(roles);
 
 		roles.addAll(RoleLocalServiceUtil.getUserGroupRoles(userId, groupId));
+		roles.add(RoleLocalServiceUtil.getRole(companyId, RoleConstants.GUEST));
 
 		long companyResourceId = 0;
 

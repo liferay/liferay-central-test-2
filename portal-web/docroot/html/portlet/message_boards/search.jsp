@@ -97,7 +97,7 @@ try {
 	// filter the results with ThreadHits first and then make a subset of the
 	// filtered results.
 
-	Hits results = MBCategoryLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, categoryIdsArray, threadId, keywords, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	Hits results = MBCategoryLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, themeDisplay.getUserId(), categoryIdsArray, threadId, keywords, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 	ThreadHits threadHits = new ThreadHits();
 

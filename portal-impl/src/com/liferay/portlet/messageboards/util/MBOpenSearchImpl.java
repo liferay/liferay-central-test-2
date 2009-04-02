@@ -44,7 +44,7 @@ public class MBOpenSearchImpl extends HitsOpenSearchImpl {
 		throws Exception {
 
 		return MBCategoryLocalServiceUtil.search(
-			companyId, groupId, null, 0, keywords, start, end);
+			companyId, groupId, userId, null, 0, keywords, start, end);
 	}
 
 	public String getSearchPath() {

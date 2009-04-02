@@ -390,7 +390,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	}
 
 	public Hits search(
-			long companyId, long groupId, long[] categoryIds, long threadId,
+			long companyId, long groupId, long userId, long[] categoryIds, long threadId,
 			String keywords, int start, int end)
 		throws SystemException {
 
@@ -438,7 +438,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 			}
 
-			return SearchEngineUtil.search(companyId, fullQuery, start, end);
+			return SearchEngineUtil.search(companyId, groupId, userId, MBMessage.class.getName(), fullQuery, start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

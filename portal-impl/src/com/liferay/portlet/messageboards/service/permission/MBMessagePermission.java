@@ -88,8 +88,18 @@ public class MBMessagePermission {
 			return true;
 		}
 
+		long rootMessageId = message.getMessageId();
+		if (!message.isRoot()) {
+			try {
+				rootMessageId = message.getThread().getRootMessageId();
+			} catch (Exception e) {
+			
+ 			}
+
+		}
+
 		return permissionChecker.hasPermission(
-			groupId, MBMessage.class.getName(), message.getMessageId(),
+			groupId, MBMessage.class.getName(), rootMessageId,
 			actionId);
 	}
 
