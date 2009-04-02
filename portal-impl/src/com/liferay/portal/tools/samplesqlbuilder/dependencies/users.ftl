@@ -2,7 +2,6 @@
 
 <#assign groups = [dataFactory.guestGroup, group]>
 <#assign organizations = []>
-<#assign privateLayouts = []>
 <#assign roles = [dataFactory.administratorRole]>
 
 <#assign firstNames = dataFactory.userNames?first>
@@ -19,9 +18,8 @@
 
 		<#assign userGroup = dataFactory.addGroup(counter.get(), dataFactory.userClassName.classNameId, user.userId, stringUtil.valueOf(user.userId), "/" + user.screenName)>
 
-		<#assign publicLayouts = [
-			dataFactory.addLayout(1, "Home", "/home", "", "33,")
-		]>
+		<#include "users_user_private_layouts.ftl">
+		<#include "users_user_public_layouts.ftl">
 
 		${sampleSQLBuilder.insertUser(contact, userGroup, groups, organizations, privateLayouts, publicLayouts, roles, user)}
 

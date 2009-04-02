@@ -70,41 +70,40 @@ public class SampleSQLBuilder {
 		InitUtil.initWithSpring();
 
 		String outputDir = System.getProperty("sample.sql.output.dir");
-		boolean generateSecurity = GetterUtil.getBoolean(
-			System.getProperty("sample.sql.generate.security"));
 		int maxBlogsEntryCount = GetterUtil.getInteger(
-			System.getProperty("sample.sql.max.blogs.entry.count"));
+			System.getProperty("sample.sql.blogs.entry.count"));
 		int maxGroupsCount = GetterUtil.getInteger(
-			System.getProperty("sample.sql.max.groups.count"));
+			System.getProperty("sample.sql.groups.count"));
 		int maxMBCategoryCount = GetterUtil.getInteger(
-			System.getProperty("sample.sql.max.mb.category.count"));
+			System.getProperty("sample.sql.mb.category.count"));
 		int maxMBMessageCount = GetterUtil.getInteger(
-			System.getProperty("sample.sql.max.mb.message.count"));
+			System.getProperty("sample.sql.mb.message.count"));
 		int maxMBThreadCount = GetterUtil.getInteger(
-			System.getProperty("sample.sql.max.mb.thread.count"));
+			System.getProperty("sample.sql.mb.thread.count"));
 		int maxUserCount = GetterUtil.getInteger(
-			System.getProperty("sample.sql.max.user.count"));
+			System.getProperty("sample.sql.user.count"));
+		boolean securityEnabled = GetterUtil.getBoolean(
+			System.getProperty("sample.sql.security.enabled"));
 
 		new SampleSQLBuilder(
-			outputDir, generateSecurity, maxBlogsEntryCount, maxGroupsCount,
-			maxMBCategoryCount, maxMBMessageCount, maxMBThreadCount,
-			maxUserCount);
+			outputDir, maxBlogsEntryCount, maxGroupsCount, maxMBCategoryCount,
+			maxMBMessageCount, maxMBThreadCount, maxUserCount, securityEnabled);
 	}
 
 	public SampleSQLBuilder(
-		String outputDir, boolean generateSecurity, int maxBlogsEntryCount,
-		int maxGroupsCount, int maxMBCategoryCount, int maxMBMessageCount,
-		int maxMBThreadCount, int maxUserCount) {
+		String outputDir, int maxBlogsEntryCount, int maxGroupsCount,
+		int maxMBCategoryCount, int maxMBMessageCount, int maxMBThreadCount,
+		int maxUserCount, boolean securityEnabled) {
 
 		try {
 			_outputDir = outputDir;
-			_generateSecurity = generateSecurity;
 			_maxBlogsEntryCount = maxBlogsEntryCount;
 			_maxGroupsCount = maxGroupsCount;
 			_maxMBCategoryCount = maxMBCategoryCount;
 			_maxMBMessageCount = maxMBMessageCount;
 			_maxMBThreadCount = maxMBThreadCount;
 			_maxUserCount = maxUserCount;
+			_securityEnabled = securityEnabled;
 
 			_counter = new SimpleCounter();
 			_permissionCounter = new SimpleCounter();
@@ -240,7 +239,7 @@ public class SampleSQLBuilder {
 	}
 
 	public void insertSecurity(String name, String primKey) throws Exception {
-		if (!_generateSecurity) {
+		if (!_securityEnabled) {
 			return;
 		}
 
@@ -341,7 +340,6 @@ public class SampleSQLBuilder {
 
 	private SimpleCounter _counter;
 	private DataFactory _dataFactory;
-	private boolean _generateSecurity;
 	private int _maxBlogsEntryCount;
 	private int _maxGroupsCount;
 	private int _maxMBCategoryCount;
@@ -352,6 +350,7 @@ public class SampleSQLBuilder {
 	private SimpleCounter _permissionCounter;
 	private SimpleCounter _resourceCodeCounter;
 	private SimpleCounter _resourceCounter;
+	private boolean _securityEnabled;
 	private String _tplGroup = _TPL_ROOT + "group.ftl";
 	private String _tplBlogsEntry = _TPL_ROOT + "blogs_entry.ftl";
 	private String _tplBlogsStatsUser = _TPL_ROOT + "blogs_stats_user.ftl";

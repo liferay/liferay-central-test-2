@@ -17,14 +17,15 @@
 			newenvironment="true"
 		>
 			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
-			<jvmarg value="-Dsample.sql.generate.security=${sample.sql.generate.security}" />
 			<jvmarg value="-Dsample.sql.output.dir=${sample.sql.output.dir}" />
-			<jvmarg value="-Dsample.sql.max.blogs.entry.count=${sample.sql.max.blogs.entry.count}" />
-			<jvmarg value="-Dsample.sql.max.groups.count=${sample.sql.max.groups.count}" />
-			<jvmarg value="-Dsample.sql.max.mb.category.count=${sample.sql.max.mb.category.count}" />
-			<jvmarg value="-Dsample.sql.max.mb.message.count=${sample.sql.max.mb.message.count}" />
-			<jvmarg value="-Dsample.sql.max.mb.thread.count=${sample.sql.max.mb.thread.count}" />
-			<jvmarg value="-Dsample.sql.max.user.count=${sample.sql.max.user.count}" />
+			<jvmarg value="-Dsample.sql.blogs.entry.count=${sample.sql.blogs.entry.count}" />
+			<jvmarg value="-Dsample.sql.groups.count=${sample.sql.groups.count}" />
+			<jvmarg value="-Dsample.sql.mb.category.count=${sample.sql.mb.category.count}" />
+			<jvmarg value="-Dsample.sql.mb.message.count=${sample.sql.mb.message.count}" />
+			<jvmarg value="-Dsample.sql.mb.thread.count=${sample.sql.mb.thread.count}" />
+			<jvmarg value="-Dsample.sql.user.count=${sample.sql.user.count}" />
+			<jvmarg value="-Dsample.sql.user.to.group.association.count=${sample.sql.user.to.group.association.count}" />
+			<jvmarg value="-Dsample.sql.sample.sql.security.enabled=${sample.sql.sample.sql.security.enabled}" />
 		</java>
 	</target>
 

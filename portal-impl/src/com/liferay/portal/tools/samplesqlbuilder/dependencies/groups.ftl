@@ -1,11 +1,8 @@
 <#setting number_format = "0">
 
 <#list dataFactory.groups as group>
-	<#assign privateLayouts = []>
-
-	<#assign publicLayouts = [
-		dataFactory.addLayout(1, "Welcome", "/welcome", "58,", "47,")
-	]>
+	<#include "groups_guest_private_layouts.ftl">
+	<#include "groups_guest_public_layouts.ftl">
 
 	${sampleSQLBuilder.insertGroup(group, privateLayouts, publicLayouts)}
 </#list>
@@ -15,14 +12,8 @@
 
 	<#assign group = dataFactory.addGroup(groupId, dataFactory.groupClassName.classNameId, groupId, "Community " + groupCount, "/community" + groupCount)>
 
-	<#assign privateLayouts = []>
-
-	<#assign publicLayouts = [
-		dataFactory.addLayout(1, "Welcome", "/welcome", "58,", "47,"),
-		dataFactory.addLayout(2, "Forums", "/forums", "", "19,")
-		dataFactory.addLayout(3, "Blogs", "/blogs", "", "33,")
-		dataFactory.addLayout(4, "Wiki", "/wiki", "", "36,")
-	]>
+	<#include "groups_group_private_layouts.ftl">
+	<#include "groups_group_public_layouts.ftl">
 
 	${sampleSQLBuilder.insertGroup(group, privateLayouts, publicLayouts)}
 
