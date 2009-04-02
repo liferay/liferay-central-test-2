@@ -346,6 +346,32 @@ insert into Region (regionId, countryId, regionCode, name, active_) values (117,
 insert into Region (regionId, countryId, regionCode, name, active_) values (118, 8, '10', 'Umbria', TRUE);
 insert into Region (regionId, countryId, regionCode, name, active_) values (119, 8, '02', 'Valle d\'Aosta', TRUE);
 insert into Region (regionId, countryId, regionCode, name, active_) values (120, 8, '05', 'Veneto', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) VALUES (121, 3, 'A', 'Alsace', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) VALUES (122, 3, 'B', 'Aquitaine', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) VALUES (123, 3, 'C', 'Auvergne', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) VALUES (124, 3, 'P', 'Basse-Normandie', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) VALUES (125, 3, 'D', 'Bourgogne', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) VALUES (126, 3, 'E', 'Bretagne', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) VALUES (127, 3, 'F', 'Centre', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) VALUES (128, 3, 'G', 'Champagne-Ardenne', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) VALUES (129, 3, 'H', 'Corse', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) VALUES (130, 3, 'GF', 'Guyane', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) VALUES (131, 3, 'I', 'Franche Comté', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) VALUES (132, 3, 'GP', 'Guadeloupe', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) VALUES (133, 3, 'Q', 'Haute-Normandie', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) VALUES (134, 3, 'J', 'Île-de-France', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) VALUES (135, 3, 'K', 'Languedoc-Roussillon', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) VALUES (136, 3, 'L', 'Limousin', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) VALUES (137, 3, 'M', 'Lorraine', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) VALUES (138, 3, 'MQ', 'Martinique', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) VALUES (139, 3, 'N', 'Midi-Pyrénées', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) VALUES (140, 3, 'O', 'Nord Pas de Calais', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) VALUES (141, 3, 'R', 'Pays de la Loire', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) VALUES (142, 3, 'S', 'Picardie', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) VALUES (143, 3, 'T', 'Poitou-Charentes', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) VALUES (144, 3, 'U', 'Provence-Alpes-Côte-d\'Azur', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) VALUES (145, 3, 'RE', 'Réunion', TRUE);
+insert into Region (regionId, countryId, regionCode, name, active_) VALUES (146, 3, 'V', 'Rhône-Alpes', TRUE);
 
 ##
 ## List types for accounts
