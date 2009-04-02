@@ -22,6 +22,7 @@
 
 package com.liferay.portal.servlet;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -43,6 +44,10 @@ public class PortalSessionContext {
 		return _instance._get(sessionId);
 	}
 
+	public static Collection<HttpSession> getSessionPool() {
+		return _instance._getSessionPool();
+	}
+
 	public static void put(String sessionId, HttpSession session) {
 		_instance._put(sessionId, session);
 	}
@@ -61,6 +66,10 @@ public class PortalSessionContext {
 
 	private HttpSession _get(String sessionId) {
 		return _sessionPool.get(sessionId);
+	}
+
+	public Collection<HttpSession> _getSessionPool() {
+		return _sessionPool.values();
 	}
 
 	private void _put(String sessionId, HttpSession session) {

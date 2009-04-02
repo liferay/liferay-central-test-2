@@ -281,6 +281,9 @@ public class PropsValues {
 		GetterUtil.getInteger(PropsUtil.get(PropsKeys.
 			CONTROL_PANEL_NAVIGATION_MAX_ORGANIZATIONS));
 
+	public static final String[] CONVERT_PROCESSES =
+		PropsUtil.getArray(PropsKeys.CONVERT_PROCESSES);
+
 	public static final long COUNTER_CONNECTION_HEARTBEAT_JOB_INTERVAL =
 		GetterUtil.getLong(
 			PropsUtil.get(PropsKeys.COUNTER_CONNECTION_HEARTBEAT_JOB_INTERVAL));

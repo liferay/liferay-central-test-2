@@ -28,8 +28,10 @@
 <%@ page import="com.liferay.portal.CompanyMxException" %>
 <%@ page import="com.liferay.portal.CompanyVirtualHostException" %>
 <%@ page import="com.liferay.portal.CompanyWebIdException" %>
+<%@ page import="com.liferay.portal.convert.ConvertProcess" %>
 <%@ page import="com.liferay.portal.dao.shard.ManualShardSelector" %>
 <%@ page import="com.liferay.portal.kernel.plugin.PluginPackage" %>
+<%@ page import="com.liferay.portal.kernel.util.InstancePool" %>
 <%@ page import="com.liferay.portal.servlet.PortalSessionContext" %>
 
 <%@ page import="java.awt.BasicStroke" %>

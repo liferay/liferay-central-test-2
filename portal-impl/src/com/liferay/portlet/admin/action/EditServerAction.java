@@ -28,6 +28,9 @@ import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.Account;
+import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -44,6 +47,7 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.MaintenanceUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
@@ -107,6 +111,9 @@ public class EditServerAction extends PortletAction {
 		else if (cmd.equals("cacheSingle")) {
 			cacheSingle();
 		}
+		else if (cmd.startsWith("convertProcess.")) {
+			convertProcess(actionRequest, cmd);
+		}
 		else if (cmd.equals("gc")) {
 			gc();
 		}
@@ -154,6 +161,24 @@ public class EditServerAction extends PortletAction {
 
 	protected void cacheSingle() throws Exception {
 		WebCachePoolUtil.clear();
+	}
+
+	protected void convertProcess(ActionRequest actionRequest, String cmd)
+		throws Exception {
+
+		String sessionId = actionRequest.getPortletSession().getId();
+		String convertProcess = cmd.replace("convertProcess.", "");
+
+		MaintenanceUtil.maintain(sessionId, convertProcess);
+
+		// Asynchronously invoking convert process
+
+		Message messagingObj = new Message();
+
+		messagingObj.put("convertProcess", convertProcess);
+
+		MessageBusUtil.sendMessage(
+			DestinationNames.CONVERT_PROCESS, messagingObj);
 	}
 
 	protected void gc() throws Exception {

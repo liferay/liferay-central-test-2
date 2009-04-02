@@ -27,6 +27,9 @@
 
 	<!-- Destinations -->
 
+	<bean id="destination.convert_process" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<constructor-arg index="0" type="java.lang.String" value="liferay/convert_process" />
+	</bean>
 	<bean id="destination.global" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<constructor-arg index="0" type="java.lang.String" value="liferay/global" />
 	</bean>
@@ -72,6 +75,7 @@
 
 	<!-- Listeners -->
 
+	<bean id="messageListener.convert_process" class="com.liferay.portal.convert.ConvertProcessListener" />
 	<bean id="messageListener.global" class="com.liferay.portal.kernel.messaging.BridgingMessageListener">
 		<constructor-arg index="0" type="com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender">
 			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationMessageSender">
@@ -114,6 +118,7 @@
 		</property>
 		<property name="destinations">
 			<list>
+				<ref bean="destination.convert_process" />
 				<ref bean="destination.hot_deploy" />
 				<ref bean="destination.layouts_local_publisher" />
 				<ref bean="destination.layouts_remote_publisher" />
@@ -134,6 +139,11 @@
 		</property>
 		<property name="messageListeners">
 			<map key-type="java.lang.String" value-type="java.util.List">
+				<entry key="liferay/convert_process">
+					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+						<ref bean="messageListener.convert_process" />
+					</list>
+				</entry>
 				<entry key="liferay/layouts_local_publisher">
 					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
 						<ref bean="messageListener.layouts_local_publisher" />

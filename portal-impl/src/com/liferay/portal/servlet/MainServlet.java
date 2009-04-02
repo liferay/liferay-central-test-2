@@ -77,6 +77,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.PortletRequestProcessor;
 import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.util.ContentUtil;
+import com.liferay.portal.util.MaintenanceUtil;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
@@ -111,6 +112,7 @@ import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -523,6 +525,22 @@ public class MainServlet extends ActionServlet {
 				"com/liferay/portal/dependencies/shutdown.html");
 
 			response.getOutputStream().print(html);
+
+			return;
+		}
+
+		if (MaintenanceUtil.isMaintaining()) {
+			String path = "/html/portal/maintenance.jsp";
+
+			RequestDispatcher requestDispatcher =
+				request.getRequestDispatcher(path);
+
+			try {
+				requestDispatcher.include(request, response);
+			}
+			catch (IOException ioe) {
+				_log.warn(ioe, ioe);
+			}
 
 			return;
 		}

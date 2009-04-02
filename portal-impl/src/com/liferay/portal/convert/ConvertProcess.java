@@ -20,32 +20,51 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.verify;
+package com.liferay.portal.convert;
 
-import com.liferay.portal.convert.ConvertProcess;
-import com.liferay.portal.convert.ConvertWikiCreole;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.util.MaintenanceUtil;
 
 /**
- * <a href="VerifyWikiCreole.java.html"><b><i>View Source</i></b></a>
+ * <a href="ConvertProcess.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
  * @author Alexander Chow
  *
- * @deprecated
- * @see com.liferay.portal.convert.ConvertWikiCreole
- *
  */
-public class VerifyWikiCreole extends VerifyProcess {
+public abstract class ConvertProcess {
 
-	public void verify() throws VerifyException {
+	public ConvertProcess() {
+	}
+
+	public void convert() throws ConvertException {
 		try {
-			ConvertProcess convertProcess = new ConvertWikiCreole();
+			if (isEnabled()) {
+				_log.info("Converting");
 
-			convertProcess.convert();
+				doConvert();
+
+				_log.info("Conversion complete");
+			}
+			else {
+				_log.warn(
+					"Conversion is not enabled for " + getClass().getName());
+			}
 		}
 		catch (Exception e) {
-			throw new VerifyException(e);
+			throw new ConvertException(e);
+		}
+		finally {
+			MaintenanceUtil.cancel();
 		}
 	}
+
+	public abstract boolean isEnabled() throws ConvertException;
+
+	public abstract String getDescription();
+
+	protected abstract void doConvert() throws Exception;
+
+	private static Log _log = LogFactoryUtil.getLog(ConvertProcess.class);
 
 }

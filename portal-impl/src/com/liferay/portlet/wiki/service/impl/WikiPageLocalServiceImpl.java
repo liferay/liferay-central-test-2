@@ -652,6 +652,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		return wikiPagePersistence.findByFormat(format);
 	}
 
+	public long getPagesCount(String format) throws SystemException {
+		return wikiPagePersistence.countByFormat(format);
+	}
+
 	public List<WikiPage> getPages(
 			long nodeId, String title, int start, int end)
 		throws SystemException {

@@ -787,6 +787,24 @@ numberFormat.setMinimumIntegerDigits(2);
 						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('threadDump');" />
 					</td>
 				</tr>
+				<%
+				for (String convertProcess : PropsValues.CONVERT_PROCESSES) {
+					ConvertProcess cp = (ConvertProcess)InstancePool.get(convertProcess);
+
+					if (cp.isEnabled()) {
+				%>
+					<tr>
+						<td>
+							<liferay-ui:message key="<%= cp.getDescription() %>" />
+						</td>
+						<td>
+							<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('convertProcess.<%= cp.getClass().getName() %>');" />
+						</td>
+					</tr>
+				<%
+					}
+				}
+				%>
 				</table>
 			</c:otherwise>
 		</c:choose>

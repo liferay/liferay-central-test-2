@@ -65,11 +65,6 @@ public class VerifyProcessSuite extends VerifyProcess {
 		// images in Liferay's Image service for your custom models.
 
 		//verify(new VerifyImage());
-
-		// VerifyWikiCreole converts all existing wiki pages in the Classic Wiki
-		// format to Creole.
-
-		//verify(new VerifyWikiCreole());
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(VerifyProcessSuite.class);

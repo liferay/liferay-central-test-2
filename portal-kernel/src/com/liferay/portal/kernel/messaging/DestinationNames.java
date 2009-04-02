@@ -30,6 +30,8 @@ package com.liferay.portal.kernel.messaging;
  */
 public interface DestinationNames {
 
+	public static final String CONVERT_PROCESS = "liferay/convert_process";
+
 	/**
 	 * This is a special destination. Binding a message listener to this
 	 * destination will allow it to listen to messages sent to all destinations.

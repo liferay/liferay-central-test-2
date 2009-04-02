@@ -225,6 +225,10 @@ public interface WikiPageLocalService {
 		java.lang.String format) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public long getPagesCount(java.lang.String format)
+		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
 		long nodeId, java.lang.String title, int start, int end)
 		throws com.liferay.portal.SystemException;

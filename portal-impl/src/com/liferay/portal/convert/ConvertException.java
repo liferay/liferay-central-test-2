@@ -20,32 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.verify;
+package com.liferay.portal.convert;
 
-import com.liferay.portal.convert.ConvertProcess;
-import com.liferay.portal.convert.ConvertWikiCreole;
+import com.liferay.portal.PortalException;
 
 /**
- * <a href="VerifyWikiCreole.java.html"><b><i>View Source</i></b></a>
+ * <a href="ConvertException.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
  * @author Alexander Chow
  *
- * @deprecated
- * @see com.liferay.portal.convert.ConvertWikiCreole
- *
  */
-public class VerifyWikiCreole extends VerifyProcess {
+public class ConvertException extends PortalException {
 
-	public void verify() throws VerifyException {
-		try {
-			ConvertProcess convertProcess = new ConvertWikiCreole();
+	public ConvertException() {
+		super();
+	}
 
-			convertProcess.convert();
-		}
-		catch (Exception e) {
-			throw new VerifyException(e);
-		}
+	public ConvertException(String msg) {
+		super(msg);
+	}
+
+	public ConvertException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public ConvertException(Throwable cause) {
+		super(cause);
 	}
 
 }
