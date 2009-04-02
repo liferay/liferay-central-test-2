@@ -123,6 +123,9 @@ while (enu.hasMoreElements()) {
 				<liferay-ui:message key="last-name" />
 			</th>
 			<th>
+				<liferay-ui:message key="password" />
+			</th>
+			<th>
 				<liferay-ui:message key="job-title" />
 			</th>
 			<th>
@@ -151,6 +154,11 @@ while (enu.hasMoreElements()) {
 		</td>
 		<td>
 			<%= lastName %>
+		</td>
+		<td>
+			<c:if test="<%= Validator.isNotNull(password) %>">
+				******
+			</c:if>
 		</td>
 		<td>
 			<%= jobTitle %>
