@@ -115,7 +115,7 @@ public class DynamicDataSourceTargetSource implements TargetSource {
 			_log.debug("Method stack " + getMethodStack());
 		}
 
-		if (!inOperation()) {
+		if (!inOperation() || (operation == Operation.WRITE)) {
 			_operationTypeThreadLocal.set(operation);
 		}
 	}
