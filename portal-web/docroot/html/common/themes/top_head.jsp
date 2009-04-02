@@ -220,11 +220,36 @@ StringBuilder pageTopSB = (StringBuilder)request.getAttribute(WebKeys.PAGE_TOP);
 			img, .png{
 				position: relative;
 				behavior: expression(
-					(this.runtimeStyle.behavior="none")&&(this.pngSet?this.pngSet=true:(this.nodeName == "IMG" && (this.src.toLowerCase().indexOf('.png')>-1||(this.className && ([''].concat(this.className.split(' ')).concat(['']).join('|').indexOf('|png|')) > -1))?(this.runtimeStyle.backgroundImage = "none",
-					this.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + this.src + "', sizingMethod='image')",
-					this.src = "<%= themeDisplay.getPathThemeImages() %>/spacer.png"):(this.origBg = this.origBg? this.origBg :this.currentStyle.backgroundImage.toString().replace('url("','').replace('")',''),
-					this.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + this.origBg + "', sizingMethod='crop')",
-					this.runtimeStyle.backgroundImage = "none")),this.pngSet=true)
+					(this.runtimeStyle.behavior="none") &&
+					(
+						this.pngSet || (this.src && this.src.toLowerCase().indexOf('spacer.png') > -1)
+
+						? this.pngSet=true
+
+						: ( this.nodeName == "IMG" &&
+								(
+									this.src.toLowerCase().indexOf('.png') > -1 || 
+									(this.className && ([''].concat(this.className.split(' ')).concat(['']).join('|').indexOf('|png|')) > -1)
+								)
+									? (
+											this.runtimeStyle.backgroundImage = "none",
+											this.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + this.src + "', sizingMethod='image')",
+
+											this.src = "<%= themeDisplay.getPathThemeImages() %>/spacer.png"
+									)
+
+									: (
+										this.origBg = this.origBg
+
+											? this.origBg 
+
+											: this.currentStyle.backgroundImage.toString().replace('url("','').replace('")',''),
+											this.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + this.origBg + "', sizingMethod='crop')",
+												this.runtimeStyle.backgroundImage = "none"
+										)
+							),
+						this.pngSet=true
+					)
 				);
 			}
 		</c:if>
