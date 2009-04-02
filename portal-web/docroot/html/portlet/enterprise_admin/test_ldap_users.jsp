@@ -157,7 +157,7 @@ while (enu.hasMoreElements()) {
 		</td>
 		<td>
 			<c:if test="<%= Validator.isNotNull(password) %>">
-				******
+				********
 			</c:if>
 		</td>
 		<td>
