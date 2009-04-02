@@ -41,6 +41,7 @@ public class CommunitiesTests extends BaseTests {
 		testSuite.addTestSuite(ControlPanelTest.class);
 		testSuite.addTestSuite(SetupTest.class);
 		testSuite.addTestSuite(AddCommunitiesTest.class);
+		testSuite.addTestSuite(AssertCommunityDropDownTest.class);
 		testSuite.addTestSuite(AddAsteriskCommunityNameTest.class);
 		testSuite.addTestSuite(AddCommaCommunityNameTest.class);
 		testSuite.addTestSuite(AddDuplicateCommunityNameTest.class);

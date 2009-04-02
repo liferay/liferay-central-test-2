@@ -26,20 +26,20 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddAsteriskCommunityNameTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssertCommunityDropDownTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddAsteriskCommunityNameTest extends BaseTestCase {
-	public void testAddAsteriskCommunityName() throws Exception {
+public class AssertCommunityDropDownTest extends BaseTestCase {
+	public void testAssertCommunityDropDown() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Control Panel")) {
+				if (selenium.isElementPresent("link=Back to My Community")) {
 					break;
 				}
 			}
@@ -49,20 +49,10 @@ public class AddAsteriskCommunityNameTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Control Panel"));
+		selenium.click(RuntimeVariables.replace("link=Back to My Community"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Communities"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Add"));
-		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_134_name", RuntimeVariables.replace("Test*test"));
-		selenium.type("_134_name", RuntimeVariables.replace("Test*test"));
-		selenium.type("_134_description",
-			RuntimeVariables.replace("This is an asterisk community test."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
-		assertTrue(selenium.isTextPresent("Please enter a valid name."));
+		assertTrue(selenium.isElementPresent("link=Test Community"));
+		assertTrue(selenium.isElementPresent("//li[5]/ul/li[1]/a[1]"));
+		assertTrue(selenium.isElementPresent("//li[5]/ul/li[2]/a[1]"));
 	}
 }
