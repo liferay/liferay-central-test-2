@@ -65,7 +65,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.PageContext;
 
+import org.apache.struts.Globals;
 import org.apache.struts.taglib.TagUtils;
+import org.apache.struts.util.MessageResources;
 
 /**
  * <a href="LanguageImpl.java.html"><b><i>View Source</i></b></a>
@@ -309,8 +311,8 @@ public class LanguageImpl implements Language {
 		String value = null;
 
 		try {
-			LanguageResources resources = (LanguageResources)WebAppPool.get(
-				String.valueOf(companyId), WebKeys.LANGUAGE_RESOURCES);
+			MessageResources resources = (MessageResources)WebAppPool.get(
+				String.valueOf(companyId), Globals.MESSAGES_KEY);
 
 			if (resources == null) {
 
