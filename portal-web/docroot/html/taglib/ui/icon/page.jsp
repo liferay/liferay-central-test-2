@@ -67,7 +67,13 @@ if (themeDisplay.isThemeImagesFastLoad()) {
 		spriteImage = theme.getSpriteImage(imageFileName);
 
 		if (spriteImage != null) {
-			spriteFileName = themeDisplay.getPathThemeImages() + spriteImage.getSpriteFileName();
+			spriteFileName = spriteImage.getSpriteFileName();
+
+			if (BrowserSnifferUtil.isIe(request) && (BrowserSnifferUtil.getMajorVersion(request) < 7)) {
+				spriteFileName = StringUtil.replace(spriteFileName, ".png", ".gif");
+			}
+
+			spriteFileName = themeDisplay.getPathThemeImages() + spriteFileName;
 		}
 	}
 
@@ -90,7 +96,13 @@ if (themeDisplay.isThemeImagesFastLoad()) {
 			spriteImage = portletApp.getSpriteImage(imageFileName);
 
 			if (spriteImage != null) {
-				spriteFileName = portlet.getContextPath() + spriteImage.getSpriteFileName();
+				spriteFileName = spriteImage.getSpriteFileName();
+
+				if (BrowserSnifferUtil.isIe(request) && (BrowserSnifferUtil.getMajorVersion(request) < 7)) {
+					spriteFileName = StringUtil.replace(spriteFileName, ".png", ".gif");
+				}
+
+				spriteFileName = portlet.getContextPath() + spriteFileName;
 			}
 		}
 	}
