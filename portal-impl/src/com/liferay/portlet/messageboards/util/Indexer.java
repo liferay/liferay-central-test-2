@@ -36,9 +36,6 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.model.Resource;
-import com.liferay.portal.model.ResourceConstants;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -46,7 +43,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 
 import java.util.Date;
 
@@ -146,17 +142,6 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		doc.addKeyword("threadId", threadId);
 		doc.addKeyword(Field.ENTRY_CLASS_NAME, MBMessage.class.getName());
 		doc.addKeyword(Field.ENTRY_CLASS_PK, messageId);
-
-		try {
-			long rootMessageId = MBThreadLocalServiceUtil.getMBThread(threadId).getRootMessageId();
-			if (rootMessageId != messageId) {
-				Resource resource = ResourceLocalServiceUtil.getResource(
-					companyId, MBMessage.class.getName(), ResourceConstants.SCOPE_INDIVIDUAL,
-					Long.toString(rootMessageId));
-				doc.addKeyword("permissionResourceId", resource.getResourceId());
-			}
-		} catch (Exception ee) {
-		}
 
 		ExpandoBridgeIndexerUtil.addAttributes(doc, expandoBridge);
 

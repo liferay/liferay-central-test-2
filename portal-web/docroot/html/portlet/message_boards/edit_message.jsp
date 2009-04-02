@@ -410,7 +410,7 @@ if (message != null) {
 	</tr>
 </c:if>
 
-<c:if test="<%= (message == null && curParentMessage == null) %>">
+<c:if test="<%= message == null %>">
 	<tr>
 		<td colspan="2">
 			<br />

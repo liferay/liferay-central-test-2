@@ -455,7 +455,7 @@
 						</li>
 					</c:if>
 
-					<c:if test="<%= message.isRoot() && MBMessagePermission.contains(permissionChecker, message, ActionKeys.PERMISSIONS) %>">
+					<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.PERMISSIONS) %>">
 						<li>
 							<liferay-security:permissionsURL
 								modelResource="<%= MBMessage.class.getName() %>"

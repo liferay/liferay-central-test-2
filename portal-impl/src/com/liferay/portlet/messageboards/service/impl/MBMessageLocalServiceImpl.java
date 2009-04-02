@@ -1029,23 +1029,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			return;
 		}
 
-		if (message.isRoot()) {
-			List<MBMessage> messages = this.getThreadMessages(message.getThreadId());
-			_reIndex(message);
-			for(MBMessage msg : messages ) {
-				_reIndex(msg);
-			}
-		}
-	}
-
-	private void _reIndex(MBMessage message) throws SystemException {
-
-		if (message == null) {
-			return;
-		}
-
-        	long messageId = message.getMessageId();
-
 		MBCategory category = mbCategoryPersistence.fetchByPrimaryKey(
 			message.getCategoryId());
 
