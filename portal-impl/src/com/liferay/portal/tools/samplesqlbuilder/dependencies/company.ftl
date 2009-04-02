@@ -8,6 +8,19 @@ insert into Account_ (accountId, companyId, userId, userName, createDate, modifi
 
 ${sampleSQLBuilder.insertUser(contact, null, null, null, null, null, null, user)}
 
+<#assign contact = dataFactory.addContact("Test", "Test")>
+<#assign user = dataFactory.addUser(false, "test")>
+
+<#assign userGroup = dataFactory.addGroup(counter.get(), dataFactory.userClassName.classNameId, user.userId, stringUtil.valueOf(user.userId), "/" + user.screenName)>
+
+<#assign groups = [dataFactory.guestGroup]>
+<#assign organizations = []>
+<#assign privateLayouts = []>
+<#assign publicLayouts = []>
+<#assign roles = [dataFactory.administratorRole]>
+
+${sampleSQLBuilder.insertUser(contact, userGroup, groups, organizations, privateLayouts, publicLayouts, roles, user)}
+
 <#assign mbSystemCategory = dataFactory.addMBCategory(0, 0, 0, 0, "", "", 0, 0)>
 
 ${sampleSQLBuilder.insertMBCategory(mbSystemCategory)}
