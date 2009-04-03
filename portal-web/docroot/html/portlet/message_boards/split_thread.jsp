@@ -96,7 +96,7 @@ long breadcrumbsMessageId = message.getMessageId();
 </div>
 
 <%
-MBMessageDisplay messageDisplay = MBMessageLocalServiceUtil.getMessageDisplay(messageId);
+MBMessageDisplay messageDisplay = MBMessageLocalServiceUtil.getMessageDisplay(messageId, MBThreadImpl.THREAD_VIEW_TREE);
 
 MBTreeWalker treeWalker = messageDisplay.getTreeWalker();
 
