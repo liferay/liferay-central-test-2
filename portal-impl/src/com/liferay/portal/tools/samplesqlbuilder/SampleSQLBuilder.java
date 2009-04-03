@@ -45,6 +45,8 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBStatsUser;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.tags.model.TagsAsset;
+import com.liferay.portlet.wiki.model.WikiNode;
+import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.util.SimpleCounter;
 
 import java.io.BufferedReader;
@@ -69,10 +71,12 @@ public class SampleSQLBuilder {
 		InitUtil.initWithSpring();
 
 		String outputDir = System.getProperty("sample.sql.output.dir");
+		int maxBlogsCommentCount = GetterUtil.getInteger(
+			System.getProperty("sample.sql.blogs.comment.count"));
 		int maxBlogsEntryCount = GetterUtil.getInteger(
 			System.getProperty("sample.sql.blogs.entry.count"));
-		int maxGroupsCount = GetterUtil.getInteger(
-			System.getProperty("sample.sql.groups.count"));
+		int maxGroupCount = GetterUtil.getInteger(
+			System.getProperty("sample.sql.group.count"));
 		int maxMBCategoryCount = GetterUtil.getInteger(
 			System.getProperty("sample.sql.mb.category.count"));
 		int maxMBMessageCount = GetterUtil.getInteger(
@@ -83,37 +87,46 @@ public class SampleSQLBuilder {
 			System.getProperty("sample.sql.user.count"));
 		int maxUserToGroupCount = GetterUtil.getInteger(
 			System.getProperty("sample.sql.user.to.group.count"));
+		int maxWikiNodeCount = GetterUtil.getInteger(
+			System.getProperty("sample.sql.wiki.node.count"));
+		int maxWikiPageCount = GetterUtil.getInteger(
+			System.getProperty("sample.sql.wiki.page.count"));
 		boolean securityEnabled = GetterUtil.getBoolean(
 			System.getProperty("sample.sql.security.enabled"));
 
 		new SampleSQLBuilder(
-			outputDir, maxBlogsEntryCount, maxGroupsCount, maxMBCategoryCount,
-			maxMBMessageCount, maxMBThreadCount, maxUserCount,
-			maxUserToGroupCount, securityEnabled);
+			outputDir, maxBlogsCommentCount, maxBlogsEntryCount, maxGroupCount,
+			maxMBCategoryCount, maxMBMessageCount, maxMBThreadCount,
+			maxUserCount, maxUserToGroupCount, maxWikiNodeCount,
+			maxWikiPageCount, securityEnabled);
 	}
 
 	public SampleSQLBuilder(
-		String outputDir, int maxBlogsEntryCount, int maxGroupsCount,
-		int maxMBCategoryCount, int maxMBMessageCount, int maxMBThreadCount,
-		int maxUserCount, int maxUserToGroupCount, boolean securityEnabled) {
+		String outputDir, int maxBlogsCommentCount, int maxBlogsEntryCount,
+		int maxGroupCount, int maxMBCategoryCount, int maxMBMessageCount,
+		int maxMBThreadCount, int maxUserCount, int maxUserToGroupCount,
+		int maxWikiNodeCount, int maxWikiPageCount, boolean securityEnabled) {
 
 		try {
 			_outputDir = outputDir;
+			_maxBlogsCommentCount = maxBlogsCommentCount;
 			_maxBlogsEntryCount = maxBlogsEntryCount;
-			_maxGroupsCount = maxGroupsCount;
+			_maxGroupCount = maxGroupCount;
 			_maxMBCategoryCount = maxMBCategoryCount;
 			_maxMBMessageCount = maxMBMessageCount;
 			_maxMBThreadCount = maxMBThreadCount;
 			_maxUserCount = maxUserCount;
 			_maxUserToGroupCount = maxUserToGroupCount;
+			_maxWikiNodeCount = maxWikiNodeCount;
+			_maxWikiPageCount = maxWikiPageCount;
 			_securityEnabled = securityEnabled;
 
 			int totalMThreadCount = maxMBCategoryCount * maxMBThreadCount;
 			int totalMBMessageCount = totalMThreadCount * maxMBMessageCount;
 
 			int counterOffset =
-				_maxGroupsCount +
-				(_maxGroupsCount *
+				_maxGroupCount +
+				(_maxGroupCount *
 					(maxMBCategoryCount + totalMThreadCount +
 						totalMBMessageCount)
 				) + 1;
@@ -126,7 +139,7 @@ public class SampleSQLBuilder {
 			_userScreenNameIncrementer = new SimpleCounter();
 
 			_dataFactory = new DataFactory(
-				_maxGroupsCount, _maxUserToGroupCount, _counter,
+				_maxGroupCount, _maxUserToGroupCount, _counter,
 				_permissionCounter, _resourceCounter, _resourceCodeCounter);
 
 			// Generic
@@ -293,25 +306,44 @@ public class SampleSQLBuilder {
 		processTemplate(_tplUser, context);
 	}
 
+	public void insertWikiNode(WikiNode wikiNode) throws Exception {
+		Map<String, Object> context = getContext();
+
+		put(context, "wikiNode", wikiNode);
+
+		processTemplate(_tplWikiNode, context);
+	}
+
+	public void insertWikiPage(WikiNode wikiNode, WikiPage wikiPage)
+		throws Exception {
+
+		Map<String, Object> context = getContext();
+
+		put(context, "wikiNode", wikiNode);
+		put(context, "wikiPage", wikiPage);
+
+		processTemplate(_tplWikiPage, context);
+	}
+
 	protected void createSample() throws Exception {
 		Map<String, Object> context = getContext();
 
-		Writer blogsEntriesCsvWriter = new FileWriter(
-			new File(_outputDir + "/blogs_entries.csv"));
-		Writer mbMessagesCsvWriter = new FileWriter(
-			new File(_outputDir + "/mb_messages.csv"));
-		Writer usersCsvWriter = new FileWriter(
-			new File(_outputDir +  "/users.csv"));
+		Writer blogsEntriesCsvWriter = getWriter("blogs_entries.csv");
+		Writer mbMessagesCsvWriter = getWriter("mb_messages.csv");
+		Writer usersCsvWriter = getWriter("users.csv");
+		Writer wikiPagesCsvWriter = getWriter("wiki_pages.csv");
 
 		put(context, "blogsEntriesCsvWriter", blogsEntriesCsvWriter);
 		put(context, "mbMessagesCsvWriter", mbMessagesCsvWriter);
 		put(context, "usersCsvWriter", usersCsvWriter);
+		put(context, "wikiPagesCsvWriter", wikiPagesCsvWriter);
 
 		processTemplate(_tplSample, context);
 
 		blogsEntriesCsvWriter.flush();
 		mbMessagesCsvWriter.flush();
 		usersCsvWriter.flush();
+		wikiPagesCsvWriter.flush();
 	}
 
 	protected Map<String, Object> getContext() {
@@ -324,19 +356,26 @@ public class SampleSQLBuilder {
 		put(context, "counter", _counter);
 		put(context, "dataFactory", _dataFactory);
 		put(context, "defaultUserId", defaultUser.getCompanyId());
+		put(context, "maxBlogsCommentCount", _maxBlogsCommentCount);
 		put(context, "maxBlogsEntryCount", _maxBlogsEntryCount);
-		put(context, "maxGroupsCount", _maxGroupsCount);
+		put(context, "maxGroupCount", _maxGroupCount);
 		put(context, "maxMBCategoryCount", _maxMBCategoryCount);
 		put(context, "maxMBMessageCount", _maxMBMessageCount);
 		put(context, "maxMBThreadCount", _maxMBThreadCount);
 		put(context, "maxUserCount", _maxUserCount);
 		put(context, "maxUserToGroupCount", _maxUserToGroupCount);
+		put(context, "maxWikiNodeCount", _maxWikiNodeCount);
+		put(context, "maxWikiPageCount", _maxWikiPageCount);
 		put(context, "portalUUIDUtil", PortalUUIDUtil.getPortalUUID());
 		put(context, "sampleSQLBuilder", this);
 		put(context, "stringUtil", StringUtil_IW.getInstance());
 		put(context, "userScreenNameIncrementer", _userScreenNameIncrementer);
 
 		return context;
+	}
+
+	protected Writer getWriter(String fileName) throws Exception {
+		return new FileWriter(new File(_outputDir + "/" + fileName));
 	}
 
 	protected void processTemplate(String name, Map<String, Object> context)
@@ -354,13 +393,16 @@ public class SampleSQLBuilder {
 
 	private SimpleCounter _counter;
 	private DataFactory _dataFactory;
+	private int _maxBlogsCommentCount;
 	private int _maxBlogsEntryCount;
-	private int _maxGroupsCount;
+	private int _maxGroupCount;
 	private int _maxMBCategoryCount;
 	private int _maxMBMessageCount;
 	private int _maxMBThreadCount;
 	private int _maxUserCount;
 	private int _maxUserToGroupCount;
+	private int _maxWikiNodeCount;
+	private int _maxWikiPageCount;
 	private String _outputDir;
 	private SimpleCounter _permissionCounter;
 	private SimpleCounter _resourceCodeCounter;
@@ -378,6 +420,8 @@ public class SampleSQLBuilder {
 	private String _tplSecurity = _TPL_ROOT + "security.ftl";
 	private String _tplTagsAsset = _TPL_ROOT + "tags_asset.ftl";
 	private String _tplUser = _TPL_ROOT + "user.ftl";
+	private String _tplWikiNode = _TPL_ROOT + "wiki_node.ftl";
+	private String _tplWikiPage = _TPL_ROOT + "wiki_page.ftl";
 	private SimpleCounter _userScreenNameIncrementer;
 	private Writer _writerGeneric;
 	private Writer _writerMySQL;

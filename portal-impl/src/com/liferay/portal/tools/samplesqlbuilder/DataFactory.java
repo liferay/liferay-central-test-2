@@ -74,6 +74,10 @@ import com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl;
 import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
 import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.model.impl.TagsAssetImpl;
+import com.liferay.portlet.wiki.model.WikiNode;
+import com.liferay.portlet.wiki.model.WikiPage;
+import com.liferay.portlet.wiki.model.impl.WikiNodeImpl;
+import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 import com.liferay.util.SimpleCounter;
 
 import java.io.File;
@@ -429,6 +433,40 @@ public class DataFactory {
 		return groupIds;
 	}
 
+	public WikiNode addWikiNode(
+			long groupId, long userId, String name, String description)
+		throws Exception {
+
+		WikiNode wikiNode = new WikiNodeImpl();
+
+		wikiNode.setNodeId(_counter.get());
+		wikiNode.setGroupId(groupId);
+		wikiNode.setUserId(userId);
+		wikiNode.setName(name);
+		wikiNode.setDescription(description);
+
+		return wikiNode;
+	}
+
+	public WikiPage addWikiPage(
+			long userId, long nodeId, String title, double version,
+			String content, boolean head)
+		throws Exception {
+
+		WikiPage wikiPage = new WikiPageImpl();
+
+		wikiPage.setPageId(_counter.get());
+		wikiPage.setResourcePrimKey(_counter.get());
+		wikiPage.setUserId(userId);
+		wikiPage.setNodeId(nodeId);
+		wikiPage.setTitle(title);
+		wikiPage.setVersion(version);
+		wikiPage.setContent(content);
+		wikiPage.setHead(head);
+
+		return wikiPage;
+	}
+
 	public Role getAdministratorRole() {
 		return _administratorRole;
 	}
@@ -521,6 +559,10 @@ public class DataFactory {
 		return _userRole;
 	}
 
+	public ClassName getWikiPageClassName() {
+		return _wikiPageClassName;
+	}
+
 	public void initClassNames() throws Exception {
 		if (_classNames != null) {
 			return;
@@ -549,6 +591,9 @@ public class DataFactory {
 			}
 			else if (model.equals(User.class.getName())) {
 				_userClassName = className;
+			}
+			else if (model.equals(WikiPage.class.getName())) {
+				_wikiPageClassName = className;
 			}
 		}
 	}
@@ -910,5 +955,6 @@ public class DataFactory {
 	private ClassName _userClassName;
 	private Object[] _userNames;
 	private Role _userRole;
+	private ClassName _wikiPageClassName;
 
 }

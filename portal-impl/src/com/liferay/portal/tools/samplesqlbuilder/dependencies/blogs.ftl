@@ -14,13 +14,17 @@
 
 		${sampleSQLBuilder.insertMBMessage(mbRootMessage)}
 
-		<#assign mbThread = dataFactory.addMBThread(mbThreadId, mbGroupId, mbCategoryId, mbRootMessage.messageId, 1, mbUserId)>
+		<#assign mbThread = dataFactory.addMBThread(mbThreadId, mbGroupId, mbCategoryId, mbRootMessage.messageId, maxBlogsCommentCount, mbUserId)>
 
 		${sampleSQLBuilder.insertMBThread(mbThread)}
 
-		<#assign mbMessage = dataFactory.addMBMessage(counter.get(), mbGroupId, mbUserId, mbCategoryId, mbThreadId, mbRootMessage.messageId, "N/A", "This is a test comment.")>
+		<#if (maxBlogsCommentCount > 0)>
+			<#list 1..maxBlogsCommentCount as blogsCommentCount>
+				<#assign mbMessage = dataFactory.addMBMessage(counter.get(), mbGroupId, mbUserId, mbCategoryId, mbThreadId, mbRootMessage.messageId, "N/A", "This is a test comment " + blogsCommentCount + ".")>
 
-		${sampleSQLBuilder.insertMBMessage(mbMessage)}
+				${sampleSQLBuilder.insertMBMessage(mbMessage)}
+			</#list>
+		</#if>
 
 		<#assign mbDiscussion = dataFactory.addMBDiscussion(dataFactory.blogsEntryClassName.classNameId, blogsEntry.entryId, mbThreadId)>
 

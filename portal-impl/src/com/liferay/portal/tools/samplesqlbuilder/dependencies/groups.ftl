@@ -7,7 +7,7 @@
 	${sampleSQLBuilder.insertGroup(group, privateLayouts, publicLayouts)}
 </#list>
 
-<#list 1..maxGroupsCount as groupCount>
+<#list 1..maxGroupCount as groupCount>
 	<#assign groupId = groupCount>
 
 	<#assign group = dataFactory.addGroup(groupId, dataFactory.groupClassName.classNameId, groupId, "Community " + groupCount, "/community" + groupCount)>

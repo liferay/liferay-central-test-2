@@ -18,13 +18,16 @@
 		>
 			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 			<jvmarg value="-Dsample.sql.output.dir=${sample.sql.output.dir}" />
+			<jvmarg value="-Dsample.sql.blogs.comment.count=${sample.sql.blogs.comment.count}" />
 			<jvmarg value="-Dsample.sql.blogs.entry.count=${sample.sql.blogs.entry.count}" />
-			<jvmarg value="-Dsample.sql.groups.count=${sample.sql.groups.count}" />
+			<jvmarg value="-Dsample.sql.group.count=${sample.sql.group.count}" />
 			<jvmarg value="-Dsample.sql.mb.category.count=${sample.sql.mb.category.count}" />
 			<jvmarg value="-Dsample.sql.mb.message.count=${sample.sql.mb.message.count}" />
 			<jvmarg value="-Dsample.sql.mb.thread.count=${sample.sql.mb.thread.count}" />
 			<jvmarg value="-Dsample.sql.user.count=${sample.sql.user.count}" />
 			<jvmarg value="-Dsample.sql.user.to.group.count=${sample.sql.user.to.group.count}" />
+			<jvmarg value="-Dsample.sql.wiki.node.count=${sample.sql.wiki.node.count}" />
+			<jvmarg value="-Dsample.sql.wiki.page.count=${sample.sql.wiki.page.count}" />
 			<jvmarg value="-Dsample.sql.security.enabled=${sample.sql.security.enabled}" />
 		</java>
 	</target>

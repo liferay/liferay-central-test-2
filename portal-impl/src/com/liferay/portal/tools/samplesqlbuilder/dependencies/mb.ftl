@@ -2,7 +2,7 @@
 <#assign totalMBThreadCount = maxMBCategoryCount * maxMBThreadCount>
 <#assign totalMBMessageCount = totalMBThreadCount * maxMBMessageCount>
 
-<#assign categoryCounterOffset = maxGroupsCount + ((groupId - 1) * (maxMBCategoryCount + totalMBThreadCount + totalMBMessageCount))>
+<#assign categoryCounterOffset = maxGroupCount + ((groupId - 1) * (maxMBCategoryCount + totalMBThreadCount + totalMBMessageCount))>
 
 <#if (maxMBCategoryCount > 0)>
 	<#list 1..maxMBCategoryCount as mbCategoryCount>
