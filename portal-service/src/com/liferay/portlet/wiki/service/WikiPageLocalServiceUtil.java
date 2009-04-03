@@ -293,11 +293,6 @@ public class WikiPageLocalServiceUtil {
 		return getService().getPages(format);
 	}
 
-	public static long getPagesCount(java.lang.String format)
-		throws com.liferay.portal.SystemException {
-		return getService().getPagesCount(format);
-	}
-
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
 		long nodeId, java.lang.String title, int start, int end)
 		throws com.liferay.portal.SystemException {

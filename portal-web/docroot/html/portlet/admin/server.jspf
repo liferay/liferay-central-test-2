@@ -53,7 +53,7 @@ numberFormat.setMinimumIntegerDigits(2);
 	</c:when>
 	<c:otherwise>
 		<liferay-ui:tabs
-			names="resources,log-levels,system-properties,portal-properties,shutdown,file-uploads,mail,OpenOffice"
+			names="resources,log-levels,properties,data-migration,file-uploads,mail,OpenOffice,shutdown"
 			param="tabs2"
 			url="<%= portletURL.toString() %>"
 		/>
@@ -193,129 +193,134 @@ numberFormat.setMinimumIntegerDigits(2);
 					</c:otherwise>
 				</c:choose>
 			</c:when>
-			<c:when test='<%= tabs2.equals("system-properties") %>'>
+			<c:when test='<%= tabs2.equals("properties") %>'>
+				<liferay-ui:tabs
+					names="system-properties,portal-properties"
+					param="tabs3"
+					url="<%= portletURL.toString() %>"
+				/>
 
-				<%
-				List<String> headerNames = new ArrayList<String>();
+				<c:choose>
+					<c:when test='<%= tabs3.equals("portal-properties") %>'>
 
-				headerNames.add("property");
-				headerNames.add("value");
+						<%
+						List<String> headerNames = new ArrayList<String>();
 
-				SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+						headerNames.add("property");
+						headerNames.add("value");
 
-				Map portalProps = new TreeMap();
+						SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-				portalProps.putAll(System.getProperties());
+						Map portalProps = new TreeMap();
 
-				List results = ListUtil.fromCollection(portalProps.entrySet());
+						portalProps.putAll(PropsUtil.getProperties());
 
-				searchContainer.setTotal(results.size());
+						List results = ListUtil.fromCollection(portalProps.entrySet());
 
-				results = ListUtil.subList(results, searchContainer.getStart(), searchContainer.getEnd());
+						searchContainer.setTotal(results.size());
 
-				searchContainer.setResults(results);
+						results = ListUtil.subList(results, searchContainer.getStart(), searchContainer.getEnd());
 
-				List resultRows = searchContainer.getResultRows();
+						searchContainer.setResults(results);
 
-				for (int i = 0; i < results.size(); i++) {
-					Map.Entry entry = (Map.Entry)results.get(i);
+						List resultRows = searchContainer.getResultRows();
 
-					String property = (String)entry.getKey();
-					String value = (String)entry.getValue();
+						for (int i = 0; i < results.size(); i++) {
+							Map.Entry entry = (Map.Entry)results.get(i);
 
-					ResultRow row = new ResultRow(entry, property, i);
+							String property = (String)entry.getKey();
+							String value = (String)entry.getValue();
 
-					// Property
+							ResultRow row = new ResultRow(entry, property, i);
 
-					row.addText(StringUtil.shorten(property, 80));
+							// Property
 
-					// Value
+							row.addText(StringUtil.shorten(property, 80));
 
-					row.addText(StringUtil.shorten(value, 80));
+							// Value
 
-					// Add result row
+							row.addText(StringUtil.shorten(value, 80));
 
-					resultRows.add(row);
-				}
-				%>
+							// Add result row
 
-				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+							resultRows.add(row);
+						}
+						%>
+
+						<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+					</c:when>
+					<c:otherwise>
+
+						<%
+						List<String> headerNames = new ArrayList<String>();
+
+						headerNames.add("property");
+						headerNames.add("value");
+
+						SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+
+						Map portalProps = new TreeMap();
+
+						portalProps.putAll(System.getProperties());
+
+						List results = ListUtil.fromCollection(portalProps.entrySet());
+
+						searchContainer.setTotal(results.size());
+
+						results = ListUtil.subList(results, searchContainer.getStart(), searchContainer.getEnd());
+
+						searchContainer.setResults(results);
+
+						List resultRows = searchContainer.getResultRows();
+
+						for (int i = 0; i < results.size(); i++) {
+							Map.Entry entry = (Map.Entry)results.get(i);
+
+							String property = (String)entry.getKey();
+							String value = (String)entry.getValue();
+
+							ResultRow row = new ResultRow(entry, property, i);
+
+							// Property
+
+							row.addText(StringUtil.shorten(property, 80));
+
+							// Value
+
+							row.addText(StringUtil.shorten(value, 80));
+
+							// Add result row
+
+							resultRows.add(row);
+						}
+						%>
+
+						<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+					</c:otherwise>
+				</c:choose>
 			</c:when>
-			<c:when test='<%= tabs2.equals("portal-properties") %>'>
-
-				<%
-				List<String> headerNames = new ArrayList<String>();
-
-				headerNames.add("property");
-				headerNames.add("value");
-
-				SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
-
-				Map portalProps = new TreeMap();
-
-				portalProps.putAll(PropsUtil.getProperties());
-
-				List results = ListUtil.fromCollection(portalProps.entrySet());
-
-				searchContainer.setTotal(results.size());
-
-				results = ListUtil.subList(results, searchContainer.getStart(), searchContainer.getEnd());
-
-				searchContainer.setResults(results);
-
-				List resultRows = searchContainer.getResultRows();
-
-				for (int i = 0; i < results.size(); i++) {
-					Map.Entry entry = (Map.Entry)results.get(i);
-
-					String property = (String)entry.getKey();
-					String value = (String)entry.getValue();
-
-					ResultRow row = new ResultRow(entry, property, i);
-
-					// Property
-
-					row.addText(StringUtil.shorten(property, 80));
-
-					// Value
-
-					row.addText(StringUtil.shorten(value, 80));
-
-					// Add result row
-
-					resultRows.add(row);
-				}
-				%>
-
-				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-			</c:when>
-			<c:when test='<%= tabs2.equals("shutdown") %>'>
+			<c:when test='<%= tabs2.equals("data-migration") %>'>
 				<table class="lfr-table">
-				<tr>
-					<td>
-						<liferay-ui:message key="number-of-minutes" />
-					</td>
-					<td>
-						<input name="<portlet:namespace />minutes" size="3" type="text" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="custom-message" />
-					</td>
-					<td>
-						<textarea class="lfr-textarea" name="<portlet:namespace />message"><%= GetterUtil.getString(ShutdownUtil.getMessage()) %></textarea>
-					</td>
-				</tr>
+
+				<%
+				for (String convertProcessClassName : PropsValues.CONVERT_PROCESSES) {
+					ConvertProcess convertProcess = (ConvertProcess)InstancePool.get(convertProcessClassName);
+				%>
+
+					<tr>
+						<td>
+							<liferay-ui:message key="<%= convertProcess.getDescription() %>" />
+						</td>
+						<td>
+							<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('convertProcess.<%= convertProcessClassName %>');" />
+						</td>
+					</tr>
+
+				<%
+				}
+				%>
+
 				</table>
-
-				<br />
-
-				<input type="button" value="<liferay-ui:message key="shutdown" />" onClick="<portlet:namespace />saveServer('shutdown');" />
-
-				<c:if test="<%= ShutdownUtil.isInProcess() %>">
-					<input type="button" value="<liferay-ui:message key="cancel-shutdown" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />minutes.value = 0; <portlet:namespace />saveServer('shutdown');" />
-				</c:if>
 			</c:when>
 			<c:when test='<%= tabs2.equals("file-uploads") %>'>
 				<liferay-ui:message key="configure-the-file-upload-settings" />
@@ -672,6 +677,34 @@ numberFormat.setMinimumIntegerDigits(2);
 
 				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveServer('updateOpenOffice');" />
 			</c:when>
+			<c:when test='<%= tabs2.equals("shutdown") %>'>
+				<table class="lfr-table">
+				<tr>
+					<td>
+						<liferay-ui:message key="number-of-minutes" />
+					</td>
+					<td>
+						<input name="<portlet:namespace />minutes" size="3" type="text" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="custom-message" />
+					</td>
+					<td>
+						<textarea class="lfr-textarea" name="<portlet:namespace />message"><%= GetterUtil.getString(ShutdownUtil.getMessage()) %></textarea>
+					</td>
+				</tr>
+				</table>
+
+				<br />
+
+				<input type="button" value="<liferay-ui:message key="shutdown" />" onClick="<portlet:namespace />saveServer('shutdown');" />
+
+				<c:if test="<%= ShutdownUtil.isInProcess() %>">
+					<input type="button" value="<liferay-ui:message key="cancel-shutdown" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />minutes.value = 0; <portlet:namespace />saveServer('shutdown');" />
+				</c:if>
+			</c:when>
 			<c:otherwise>
 
 				<%
@@ -787,24 +820,6 @@ numberFormat.setMinimumIntegerDigits(2);
 						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('threadDump');" />
 					</td>
 				</tr>
-				<%
-				for (String convertProcess : PropsValues.CONVERT_PROCESSES) {
-					ConvertProcess cp = (ConvertProcess)InstancePool.get(convertProcess);
-
-					if (cp.isEnabled()) {
-				%>
-					<tr>
-						<td>
-							<liferay-ui:message key="<%= cp.getDescription() %>" />
-						</td>
-						<td>
-							<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('convertProcess.<%= cp.getClass().getName() %>');" />
-						</td>
-					</tr>
-				<%
-					}
-				}
-				%>
 				</table>
 			</c:otherwise>
 		</c:choose>

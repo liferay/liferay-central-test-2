@@ -34,22 +34,13 @@ import com.liferay.portal.util.MaintenanceUtil;
  */
 public abstract class ConvertProcess {
 
-	public ConvertProcess() {
-	}
-
 	public void convert() throws ConvertException {
 		try {
-			if (isEnabled()) {
-				_log.info("Converting");
+			_log.info("Converting");
 
-				doConvert();
+			doConvert();
 
-				_log.info("Conversion complete");
-			}
-			else {
-				_log.warn(
-					"Conversion is not enabled for " + getClass().getName());
-			}
+			_log.info("Conversion complete");
 		}
 		catch (Exception e) {
 			throw new ConvertException(e);
@@ -58,8 +49,6 @@ public abstract class ConvertProcess {
 			MaintenanceUtil.cancel();
 		}
 	}
-
-	public abstract boolean isEnabled() throws ConvertException;
 
 	public abstract String getDescription();
 

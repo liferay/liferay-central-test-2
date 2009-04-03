@@ -42,9 +42,6 @@ public abstract class VerifyProcess {
 
 	public static final int ONCE = 1;
 
-	public VerifyProcess() {
-	}
-
 	public abstract void verify() throws VerifyException;
 
 	public void verify(VerifyProcess verifyProcess)

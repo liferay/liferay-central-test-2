@@ -44,16 +44,16 @@ public class PortalSessionContext {
 		return _instance._get(sessionId);
 	}
 
-	public static Collection<HttpSession> getSessionPool() {
-		return _instance._getSessionPool();
-	}
-
 	public static void put(String sessionId, HttpSession session) {
 		_instance._put(sessionId, session);
 	}
 
 	public static HttpSession remove(String sessionId) {
 		return _instance._remove(sessionId);
+	}
+
+	public static Collection<HttpSession> values() {
+		return _instance._values();
 	}
 
 	private PortalSessionContext() {
@@ -68,16 +68,16 @@ public class PortalSessionContext {
 		return _sessionPool.get(sessionId);
 	}
 
-	public Collection<HttpSession> _getSessionPool() {
-		return _sessionPool.values();
-	}
-
 	private void _put(String sessionId, HttpSession session) {
 		_sessionPool.put(sessionId, session);
 	}
 
 	private HttpSession _remove(String sessionId) {
 		return _sessionPool.remove(sessionId);
+	}
+
+	public Collection<HttpSession> _values() {
+		return _sessionPool.values();
 	}
 
 	private static PortalSessionContext _instance = new PortalSessionContext();

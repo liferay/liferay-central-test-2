@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.Account;
 import com.liferay.portal.kernel.messaging.DestinationNames;
-import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
@@ -37,6 +36,7 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
@@ -61,6 +61,7 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
+import javax.portlet.PortletSession;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -166,19 +167,14 @@ public class EditServerAction extends PortletAction {
 	protected void convertProcess(ActionRequest actionRequest, String cmd)
 		throws Exception {
 
-		String sessionId = actionRequest.getPortletSession().getId();
-		String convertProcess = cmd.replace("convertProcess.", "");
+		PortletSession portletSession = actionRequest.getPortletSession();
 
-		MaintenanceUtil.maintain(sessionId, convertProcess);
+		String className = StringUtil.replaceFirst(
+			cmd, "convertProcess.", StringPool.BLANK);
 
-		// Asynchronously invoking convert process
+		MaintenanceUtil.maintain(portletSession.getId(), className);
 
-		Message messagingObj = new Message();
-
-		messagingObj.put("convertProcess", convertProcess);
-
-		MessageBusUtil.sendMessage(
-			DestinationNames.CONVERT_PROCESS, messagingObj);
+		MessageBusUtil.sendMessage(DestinationNames.CONVERT_PROCESS, className);
 	}
 
 	protected void gc() throws Exception {

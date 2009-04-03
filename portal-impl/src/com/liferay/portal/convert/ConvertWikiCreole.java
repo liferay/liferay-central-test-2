@@ -32,33 +32,13 @@ import java.util.List;
 /**
  * <a href="ConvertWikiCreole.java.html"><b><i>View Source</i></b></a>
  *
- * <p>
- * This class converts all existing wiki pages in the Classic Wiki format to
- * Creole. Do not run this unless you want to do this.
- * </p>
- *
  * @author Jorge Ferrer
  *
  */
 public class ConvertWikiCreole extends ConvertProcess {
 
-	public boolean isEnabled() throws ConvertException {
-		try {
-			boolean enabled = false;
-
-			if (WikiPageLocalServiceUtil.getPagesCount("classic_wiki") > 0) {
-				enabled = true;
-			}
-
-			return enabled;
-		}
-		catch (Exception e) {
-			throw new ConvertException(e);
-		}
-	}
-
 	public String getDescription() {
-		return "convert-pages-from-classic-wiki-to-creole-format";
+		return "convert-wiki-pages-from-classic-wiki-to-creole-format";
 	}
 
 	protected void doConvert() throws Exception {
@@ -69,14 +49,11 @@ public class ConvertWikiCreole extends ConvertProcess {
 
 		MaintenanceUtil.appendStatus(
 			"Converting " + pages.size() +
-				" pages from Classic Wiki to Creole format");
-
-		long twentyFivePercent = pages.size() / 4;
+				" Wiki pages from Classic Wiki to Creole format.");
 
 		for (int i = 0; i < pages.size(); i++) {
-			if ((i > 0) && (i % twentyFivePercent == 0)) {
-				MaintenanceUtil.appendStatus(
-					(i * 100. / pages.size()) + "% complete");
+			if ((i > 0) && (i % (pages.size() / 4) == 0)) {
+				MaintenanceUtil.appendStatus((i * 100. / pages.size()) + "%");
 			}
 
 			WikiPage page = pages.get(i);

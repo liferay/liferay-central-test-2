@@ -530,17 +530,10 @@ public class MainServlet extends ActionServlet {
 		}
 
 		if (MaintenanceUtil.isMaintaining()) {
-			String path = "/html/portal/maintenance.jsp";
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher(
+				"/html/portal/maintenance.jsp");
 
-			RequestDispatcher requestDispatcher =
-				request.getRequestDispatcher(path);
-
-			try {
-				requestDispatcher.include(request, response);
-			}
-			catch (IOException ioe) {
-				_log.warn(ioe, ioe);
-			}
+			requestDispatcher.include(request, response);
 
 			return;
 		}

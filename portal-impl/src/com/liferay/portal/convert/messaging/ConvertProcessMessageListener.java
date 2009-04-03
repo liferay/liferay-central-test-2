@@ -20,32 +20,46 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.verify;
+package com.liferay.portal.convert.messaging;
 
 import com.liferay.portal.convert.ConvertProcess;
-import com.liferay.portal.convert.ConvertWikiCreole;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.util.ShutdownUtil;
 
 /**
- * <a href="VerifyWikiCreole.java.html"><b><i>View Source</i></b></a>
+ * <a href="ConvertProcessMessageListener.java.html"><b><i>View Source</i></b>
+ * </a>
  *
- * @author Jorge Ferrer
  * @author Alexander Chow
  *
- * @deprecated
- * @see com.liferay.portal.convert.ConvertWikiCreole
- *
  */
-public class VerifyWikiCreole extends VerifyProcess {
+public class ConvertProcessMessageListener implements MessageListener {
 
-	public void verify() throws VerifyException {
+	public void receive(Message message) {
 		try {
-			ConvertProcess convertProcess = new ConvertWikiCreole();
-
-			convertProcess.convert();
+			doReceive(message);
 		}
 		catch (Exception e) {
-			throw new VerifyException(e);
+			_log.fatal("Unable to process message " + message, e);
+
+			ShutdownUtil.shutdown(0);
 		}
 	}
+
+	public void doReceive(Message message) throws Exception {
+		String className = (String)message.getPayload();
+
+		ConvertProcess convertProcess = (ConvertProcess)InstancePool.get(
+			className);
+
+		convertProcess.convert();
+	}
+
+	private static Log _log =
+		LogFactoryUtil.getLog(ConvertProcessMessageListener.class);
 
 }

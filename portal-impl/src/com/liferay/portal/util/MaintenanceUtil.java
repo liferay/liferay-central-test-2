@@ -79,16 +79,25 @@ public class MaintenanceUtil {
 	}
 
 	private void _cancel() {
-		PortalSessionContext.get(_sessionId).invalidate();
+		HttpSession session = PortalSessionContext.get(_sessionId);
 
-		_isMaintaining = false;
+		if (session != null) {
+			session.invalidate();
+		}
+		else {
+			if (_log.isWarnEnabled()) {
+				_log.isWarn("Session " + _sessionId + " is null");
+			}
+		}
+
+		_maintaining = false;
 	}
 
-	public String _getClassName() {
+	private String _getClassName() {
 		return _className;
 	}
 
-	public String _getSessionId() {
+	private String _getSessionId() {
 		return _sessionId;
 	}
 
@@ -97,37 +106,31 @@ public class MaintenanceUtil {
 	}
 
 	private boolean _isMaintaining() {
-		return _isMaintaining;
+		return _maintaining;
 	}
 
 	private void _maintain(String sessionId, String className) {
-
-		// Reset values
-
 		_sessionId = sessionId;
 		_className = className;
-		_isMaintaining = true;
+		_maintaining = true;
 		_status = new StringBuffer();
 
-		// Kill all sessions
+		Collection<HttpSession> sessions = PortalSessionContext.values();
 
-		Collection<HttpSession> sessionPool =
-			PortalSessionContext.getSessionPool();
-
-		for (HttpSession session : sessionPool) {
+		for (HttpSession session : sessions) {
 			if (!sessionId.equals(session.getId())) {
 				session.invalidate();
 			}
 		}
 	}
 
+	private static Log _log = LogFactoryUtil.getLog(MaintenanceUtil.class);
+
 	private static MaintenanceUtil _instance = new MaintenanceUtil();
 
-	private String _sessionId;
 	private String _className;
+	private boolean _maintaining = false;
+	private String _sessionId;
 	private StringBuffer _status = new StringBuffer();
-	private boolean _isMaintaining = false;
-
-	private static Log _log = LogFactoryUtil.getLog(MaintenanceUtil.class);
 
 }

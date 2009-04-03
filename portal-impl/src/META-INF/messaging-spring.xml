@@ -27,7 +27,7 @@
 
 	<!-- Destinations -->
 
-	<bean id="destination.convert_process" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+	<bean id="destination.convert_process" class="com.liferay.portal.kernel.messaging.SerialDestination">
 		<constructor-arg index="0" type="java.lang.String" value="liferay/convert_process" />
 	</bean>
 	<bean id="destination.global" class="com.liferay.portal.kernel.messaging.ParallelDestination">
@@ -75,7 +75,7 @@
 
 	<!-- Listeners -->
 
-	<bean id="messageListener.convert_process" class="com.liferay.portal.convert.ConvertProcessListener" />
+	<bean id="messageListener.convert_process" class="com.liferay.portal.convert.messaging.ConvertProcessMessageListener" />
 	<bean id="messageListener.global" class="com.liferay.portal.kernel.messaging.BridgingMessageListener">
 		<constructor-arg index="0" type="com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender">
 			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationMessageSender">
