@@ -139,7 +139,7 @@ public class NetvibesServlet extends HttpServlet {
 		sb.append("<body>");
 		sb.append("<script src=\"" + widgetJsURL + "\" ");
 		sb.append("type=\"text/javascript\"></script>");
-		sb.append("<script type=\"text/javascript\"> ");
+		sb.append("<script type=\"text/javascript\">");
 		sb.append("Liferay.Widget({url:\"" + widgetURL + "\"});");
 		sb.append("</script>");
 		sb.append("</body>");
