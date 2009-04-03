@@ -344,11 +344,11 @@ public class UpgradeTags extends UpgradeProcess {
 				try {
 					vocabularyId = getVocabularyId(userId, groupId, value);
 				}
-				catch (NoSuchUserException e) {
+				catch (NoSuchUserException nsue) {
 					if (_log.isWarnEnabled()) {
 						_log.warn(
-							"Unable to get vocabulary ID for TagsProperty " +
-								propertyId + ": " + e.getMessage());
+							"Unable to get vocabulary id for tags property " +
+								propertyId + ": " + nsue.getMessage());
 					}
 
 					continue;
