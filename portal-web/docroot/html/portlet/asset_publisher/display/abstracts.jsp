@@ -136,6 +136,12 @@ else if (className.equals(IGImage.class.getName())) {
 	viewURLMessage = viewInContext ? "view-album" : "view";
 	cssClassName = AssetPublisherUtil.TYPE_IMAGE;
 
+	String href = viewURL;
+
+	if (href.startsWith(themeDisplay.getURLPortal())) {
+		href = HttpUtil.setParameter(href, "redirect", currentURL);
+	}
+
 	StringBuilder sb = new StringBuilder();
 
 	Image smallImage = ImageLocalServiceUtil.getImage(image.getSmallImageId());
@@ -144,7 +150,7 @@ else if (className.equals(IGImage.class.getName())) {
 		long smallImageId = smallImage.getImageId();
 
 		sb.append("<a href=\"");
-		sb.append(viewURL);
+		sb.append(href);
 		sb.append("\"><img align=\"left\" alt=\"");
 		sb.append(LanguageUtil.get(pageContext, viewURLMessage));
 		sb.append("\" border=\"0\" src=\"");
