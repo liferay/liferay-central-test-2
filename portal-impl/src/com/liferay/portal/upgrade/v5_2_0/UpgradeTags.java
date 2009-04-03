@@ -23,6 +23,7 @@
 package com.liferay.portal.upgrade.v5_2_0;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.dao.jdbc.SmartResultSet;
 import com.liferay.portal.kernel.log.Log;
@@ -338,7 +339,20 @@ public class UpgradeTags extends UpgradeProcess {
 				long propertyId = srs.getLong("TP.propertyId");
 				String value = srs.getString("TP.value");
 
-				long vocabularyId = getVocabularyId(userId, groupId, value);
+				long vocabularyId = -1;
+
+				try {
+					vocabularyId = getVocabularyId(userId, groupId, value);
+				}
+				catch (NoSuchUserException e) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Unable to get vocabulary ID for TagsProperty " +
+								propertyId + ": " + e.getMessage());
+					}
+
+					continue;
+				}
 
 				ps = con.prepareStatement(
 					"update TagsEntry set vocabularyId = ? where entryId = ?");
