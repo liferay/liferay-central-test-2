@@ -52,9 +52,9 @@ public class ViewArticleTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Web Content List Test Page"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=WC Setup Test Article"));
-		selenium.click(RuntimeVariables.replace("link=WC Setup Test Article"));
+		assertTrue(selenium.isElementPresent("link=WCL Setup Test Article"));
+		selenium.click(RuntimeVariables.replace("link=WCL Setup Test Article"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("This is a WC setup test article!"));
+		assertTrue(selenium.isTextPresent("This is a WCL setup test article!"));
 	}
 }

@@ -60,27 +60,10 @@ public class SetupTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Web Content']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_15_title")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.typeKeys("_15_title",
-			RuntimeVariables.replace("WC Setup Test Article"));
+			RuntimeVariables.replace("WCL Setup Test Article"));
 		selenium.type("_15_title",
-			RuntimeVariables.replace("WC Setup Test Article"));
+			RuntimeVariables.replace("WCL Setup Test Article"));
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -135,46 +118,11 @@ public class SetupTest extends BaseTestCase {
 		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
 		selenium.selectFrame("//iframe");
 		selenium.typeKeys("//body",
-			RuntimeVariables.replace("This is a WC setup test article!"));
+			RuntimeVariables.replace("This is a WCL setup test article!"));
 		selenium.type("//body",
-			RuntimeVariables.replace("This is a WC setup test article!"));
+			RuntimeVariables.replace("This is a WCL setup test article!"));
 		selenium.selectFrame("relative=top");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_15_type")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.select("_15_type", RuntimeVariables.replace("label=Test"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//input[@value='Save and Approve']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Save and Approve']"));
 		selenium.waitForPageToLoad("30000");

@@ -9,6 +9,26 @@
 <tr><td rowspan="1" colspan="3">AddPageTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('link=Back to My Community'))</td>
+	<td>InControlPanel</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${InControlPanel}</td>
+	<td>NotInControlPanel</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Back to My Community</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>NotInControlPanel</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>//a[@id="my-community-private-pages"]</td>
 	<td></td>
