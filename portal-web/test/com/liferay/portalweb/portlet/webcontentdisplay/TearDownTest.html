@@ -24,14 +24,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>_86_enableRatingsCheckbox</td>
-	<td></td>
+	<td>store</td>
+	<td>eval(selenium.isVisible('link=« Basic'))</td>
+	<td>AdvancedSearch</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>_86_enableCommentsCheckbox</td>
-	<td></td>
+	<td>gotoIf</td>
+	<td>!${AdvancedSearch}</td>
+	<td>BasicSearch</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -39,23 +39,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Return to Full Page</td>
+	<td>label</td>
+	<td>BasicSearch</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Return to Full Page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>link=Add Comment</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>Your Rating</td>
 	<td></td>
 </tr>
 <tr>
@@ -69,16 +59,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
-	<td>Select an existing article or add an article to be displayed in this portlet.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Control Panel</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>link=Control Panel</td>
 	<td></td>
@@ -86,11 +66,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Web Content</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>_15_allRowIds</td>
 	<td></td>
 </tr>
 <tr>
@@ -106,11 +81,6 @@
 <tr>
 	<td>assertConfirmation</td>
 	<td>Are you sure you want to delete the selected web content?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 <tr>
@@ -154,23 +124,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[2]/ul/li[1]/a/span</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>//div[2]/ul/li[1]/a/span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>link=Web Content Display Test Page</td>
 	<td></td>
 </tr>
 

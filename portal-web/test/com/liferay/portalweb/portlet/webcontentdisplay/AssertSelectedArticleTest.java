@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="ConfigureSettingsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssertSelectedArticleTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ConfigureSettingsTest extends BaseTestCase {
-	public void testConfigureSettings() throws Exception {
+public class AssertSelectedArticleTest extends BaseTestCase {
+	public void testAssertSelectedArticle() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -53,20 +53,6 @@ public class ConfigureSettingsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Web Content Display Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Configuration"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("_86_showAvailableLocalesCheckbox");
-		selenium.click("_86_enablePrintCheckbox");
-		selenium.click("_86_enableRatingsCheckbox");
-		selenium.click("_86_enableCommentsCheckbox");
-		selenium.click("_86_enableCommentRatingsCheckbox");
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("This is a WCD Setup Test Entry!"));
-		assertTrue(selenium.isTextPresent("Your Rating"));
-		assertTrue(selenium.isElementPresent("link=Add Comment"));
-		assertTrue(selenium.isElementPresent("//span[4]/a/img"));
-		assertTrue(selenium.isElementPresent(
-				"//img[@alt='English (United States)']"));
 	}
 }

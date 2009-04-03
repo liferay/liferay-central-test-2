@@ -42,13 +42,15 @@ public class WebContentDisplayTests extends BaseTests {
 		testSuite.addTestSuite(AddPageTest.class);
 		testSuite.addTestSuite(AddPortletTest.class);
 		testSuite.addTestSuite(SelectArticleTest.class);
-		testSuite.addTestSuite(VerifySelectedArticleTest.class);
+		testSuite.addTestSuite(AssertSelectedArticleTest.class);
 		testSuite.addTestSuite(ConfigureSettingsTest.class);
 		testSuite.addTestSuite(CheckRatingTest.class);
 		testSuite.addTestSuite(AddCommentTest.class);
 		testSuite.addTestSuite(EditCommentTest.class);
+		testSuite.addTestSuite(AssertCommentRatingTest.class);
 		testSuite.addTestSuite(DeleteCommentTest.class);
-		testSuite.addTestSuite(AddArticleThroughConfigurationTest.class);
+		//testSuite.addTestSuite(AddArticleThroughConfigurationTest.class);
+		testSuite.addTestSuite(AddArticleThroughPortletTest.class);
 		testSuite.addTestSuite(SearchArticleTest.class);
 		testSuite.addTestSuite(TearDownTest.class);
 

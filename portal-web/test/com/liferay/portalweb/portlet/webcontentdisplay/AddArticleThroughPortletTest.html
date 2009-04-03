@@ -1,47 +1,37 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>SetupTest</title>
+<title>AddArticleThroughPortletTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">SetupTest</td></tr>
+<tr><td rowspan="1" colspan="3">AddArticleThroughPortletTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//a[@id="my-community-private-pages"]</td>
+	<td>link=Web Content Display Test Page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//a[@id="my-community-private-pages"]</td>
+	<td>link=Web Content Display Test Page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Control Panel</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Web Content</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Add Web Content']</td>
+	<td>//img[@alt='Add Web Content']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>typeKeys</td>
 	<td>_15_title</td>
-	<td>WCD Setup Test Entr</td>
+	<td>Test Web Content Article</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_15_title</td>
-	<td>WCD Setup Test Entry</td>
+	<td>Test Web Content Article</td>
 </tr>
 <tr>
 	<td>pause</td>
@@ -81,17 +71,27 @@
 <tr>
 	<td>typeKeys</td>
 	<td>//body</td>
-	<td>This is a WCD Setup Test Entr!</td>
+	<td>This is a test web content article!</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>//body</td>
-	<td>This is a WCD Setup Test Entry!</td>
+	<td>This is a test web content article!</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
 	<td>relative=top</td>
 	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_15_type</td>
+	<td>label=Announcements</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_15_description</td>
+	<td>Test Description.</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -100,7 +100,42 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Back to My Community</td>
+	<td>link=Configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>_86_keywords</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_86_keywords</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Search']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Test Web Content Article</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Displaying Content</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Return to Full Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>This is a test web content article!</td>
 	<td></td>
 </tr>
 

@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="VerifySelectedArticleTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssertCommentRatingTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class VerifySelectedArticleTest extends BaseTestCase {
-	public void testVerifySelectedArticle() throws Exception {
+public class AssertCommentRatingTest extends BaseTestCase {
+	public void testAssertCommentRating() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -53,6 +53,17 @@ public class VerifySelectedArticleTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Web Content Display Test Page"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("This is a WCD Setup Test Entry!"));
+		selenium.click("//td[1]/ul/li[2]/a[1]");
+		Thread.sleep(5000);
+		assertTrue(selenium.isTextPresent("+1"));
+		selenium.click("//td[1]/ul/li[2]/a[1]");
+		Thread.sleep(5000);
+		assertTrue(selenium.isTextPresent("\u00b10"));
+		selenium.click("//td[1]/ul/li[2]/a[2]");
+		Thread.sleep(5000);
+		assertTrue(selenium.isTextPresent("-1"));
+		selenium.click("//td[1]/ul/li[2]/a[2]");
+		Thread.sleep(5000);
+		assertTrue(selenium.isTextPresent("\u00b10"));
 	}
 }

@@ -26,13 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="SetupTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddArticleThroughPortletTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class SetupTest extends BaseTestCase {
-	public void testSetup() throws Exception {
+public class AddArticleThroughPortletTest extends BaseTestCase {
+	public void testAddArticleThroughPortlet() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -40,7 +40,7 @@ public class SetupTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//a[@id=\"my-community-private-pages\"]")) {
+							"link=Web Content Display Test Page")) {
 					break;
 				}
 			}
@@ -51,19 +51,14 @@ public class SetupTest extends BaseTestCase {
 		}
 
 		selenium.click(RuntimeVariables.replace(
-				"//a[@id=\"my-community-private-pages\"]"));
+				"link=Web Content Display Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Control Panel"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Web Content"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Web Content']"));
+		selenium.click(RuntimeVariables.replace("//img[@alt='Add Web Content']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_15_title",
-			RuntimeVariables.replace("WCD Setup Test Entr"));
+			RuntimeVariables.replace("Test Web Content Article"));
 		selenium.type("_15_title",
-			RuntimeVariables.replace("WCD Setup Test Entry"));
+			RuntimeVariables.replace("Test Web Content Article"));
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -118,14 +113,28 @@ public class SetupTest extends BaseTestCase {
 		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
 		selenium.selectFrame("//iframe");
 		selenium.typeKeys("//body",
-			RuntimeVariables.replace("This is a WCD Setup Test Entr!"));
+			RuntimeVariables.replace("This is a test web content article!"));
 		selenium.type("//body",
-			RuntimeVariables.replace("This is a WCD Setup Test Entry!"));
+			RuntimeVariables.replace("This is a test web content article!"));
 		selenium.selectFrame("relative=top");
+		selenium.select("_15_type",
+			RuntimeVariables.replace("label=Announcements"));
+		selenium.type("_15_description",
+			RuntimeVariables.replace("Test Description."));
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Save and Approve']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Back to My Community"));
+		selenium.click(RuntimeVariables.replace("link=Configuration"));
 		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_86_keywords", RuntimeVariables.replace("test"));
+		selenium.type("_86_keywords", RuntimeVariables.replace("test"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Test Web Content Article"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Displaying Content"));
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("This is a test web content article!"));
 	}
 }
