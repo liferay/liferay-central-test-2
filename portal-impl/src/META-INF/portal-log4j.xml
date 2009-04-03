@@ -172,6 +172,10 @@
 		<priority value="INFO" />
 	</category>
 
+	<category name="com.liferay.portal.kernel.servlet.ServletContextUtil">
+		<priority value="INFO" />
+	</category>
+
 	<category name="com.liferay.portal.kernel.util.JavaProps">
 		<priority value="ERROR" />
 	</category>
@@ -273,6 +277,10 @@
 	</category>
 
 	<category name="com.liferay.portal.service.impl.ServiceComponentLocalServiceImpl">
+		<priority value="INFO" />
+	</category>
+
+	<category name="com.liferay.portal.service.impl.ThemeLocalServiceImpl">
 		<priority value="INFO" />
 	</category>
 

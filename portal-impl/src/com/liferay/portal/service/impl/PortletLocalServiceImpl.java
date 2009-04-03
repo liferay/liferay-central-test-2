@@ -1741,7 +1741,15 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 					images.add(new File(realPath));
 				}
 				else {
-					_log.error("Real path for " + curResourcePath + " is null");
+					if (ServerDetector.isTomcat()) {
+						if (_log.isInfoEnabled()) {
+							_log.info(ServletContextUtil.LOG_INFO_SPRITES);
+						}
+					}
+					else {
+						_log.error(
+							"Real path for " + curResourcePath + " is null");
+					}
 				}
 			}
 		}
