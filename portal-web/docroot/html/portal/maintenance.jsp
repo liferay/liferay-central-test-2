@@ -26,16 +26,17 @@
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
 
 <%
-boolean isInvokingSession = false;
+boolean invokingSession = false;
 
-if (request.getSession().getId().equals(MaintenanceUtil.getSessionId())) {
-	isInvokingSession = true;
+if (session.getId().equals(MaintenanceUtil.getSessionId())) {
+	invokingSession = true;
 }
 %>
+
 <html>
 
 <head>
-	<meta http-equiv="refresh" content="30;url=<%= PortalUtil.getPortalURL(request) %>">
+	<meta http-equiv="refresh" content="30; url=<%= PortalUtil.getPortalURL(request) %>;">
 </head>
 
 <body>
@@ -51,39 +52,38 @@ if (request.getSession().getId().equals(MaintenanceUtil.getSessionId())) {
 				<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tr>
 					<td bgcolor="#FFFFFF">
-						<br>
+						<br />
 
 						<table border="0" cellpadding="10" cellspacing="0" width="100%">
 						<tr>
 							<td align="center">
-								<font color="#FF0000" face="Verdana, Tahoma, Arial" size="2">
 								The system is currently undergoing maintenance. Please try again later.
-								</font>
 							</td>
 						</tr>
+
 						<%
-						if (isInvokingSession) {
+						if (invokingSession) {
 						%>
-						<tr>
-							<td>
-								<font face="Verdana, Tahoma, Arial" size="2">
-								<p>
+
+							<tr>
+								<td>
+									<br />
+
 									Executing <%= MaintenanceUtil.getClassName() %>...
 
-									<br />
-									<br />
+									<br /><br />
 
 									<%= MaintenanceUtil.getStatus() %>
-								</p>
-								</font>
-							</td>
-						</tr>
+								</td>
+							</tr>
+
 						<%
 						}
 						%>
+
 						</table>
 
-						<br>
+						<br />
 					</td>
 				</tr>
 				</table>
