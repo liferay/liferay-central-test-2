@@ -268,8 +268,6 @@ public interface PropsKeys {
 
 	public static final String COUNTER_INCREMENT = "counter.increment";
 
-	public static final String LOGIN_CREATE_ACCOUNT_ALLOW_CUSTOM_PASSWORD = "login.create.account.allow.custom.password";
-
 	public static final String CUSTOM_SQL_FUNCTION_ISNOTNULL = "custom.sql.function.isnotnull";
 
 	public static final String CUSTOM_SQL_FUNCTION_ISNULL = "custom.sql.function.isnull";
@@ -713,6 +711,8 @@ public interface PropsKeys {
 	public static final String LOCALE_DEFAULT_REQUEST = "locale.default.request";
 
 	public static final String LOCALES = "locales";
+
+	public static final String LOGIN_CREATE_ACCOUNT_ALLOW_CUSTOM_PASSWORD = "login.create.account.allow.custom.password";
 
 	public static final String LOGIN_EVENTS_POST = "login.events.post";
 

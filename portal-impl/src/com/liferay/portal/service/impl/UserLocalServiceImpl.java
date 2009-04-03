@@ -281,7 +281,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			password1 = PwdToolkitUtil.generate();
 		}
 		else {
-			validatePassword(password1, password2);
+			if (Validator.isNull(password1) || Validator.isNull(password2)) {
+				throw new UserPasswordException(
+					UserPasswordException.PASSWORD_INVALID);
+			}
 		}
 
 		if (autoScreenName) {
@@ -1384,9 +1387,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 * @param		companyId the company id of the company
 	 * @param		name the name of the role
 	 * @param		userId the user id of the user
-	 * @param		inherited boolean value for whether to check roles
-	 * 				inherited from the community, organization, location, or
-	 *				user group
+	 * @param		inherited boolean value for whether to check roles inherited
+	 *				from the community, organization, location, or user group
 	 * @return		true if the user has the role
 	 */
 	public boolean hasRoleUser(
@@ -3267,15 +3269,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			if (emailAddress.equalsIgnoreCase(reservedEmailAddresses[i])) {
 				throw new ReservedUserEmailAddressException();
 			}
-		}
-	}
-
-	protected void validatePassword(String password1, String password2)
-		throws PortalException, SystemException {
-
-		if (Validator.isNull(password1) || Validator.isNull(password2)) {
-			throw new UserPasswordException(
-				UserPasswordException.PASSWORD_INVALID);
 		}
 	}
 

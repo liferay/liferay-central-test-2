@@ -199,6 +199,13 @@ public class CreateAccountAction extends PortletAction {
 		boolean sendEmail = true;
 		ServiceContext serviceContext = new ServiceContext();
 
+		if (PropsValues.LOGIN_CREATE_ACCOUNT_ALLOW_CUSTOM_PASSWORD) {
+			autoPassword = false;
+
+			password1 = ParamUtil.getString(actionRequest, "password1");
+			password2 = ParamUtil.getString(actionRequest, "password2");
+		}
+
 		boolean openIdPending = false;
 
 		Boolean openIdLoginPending = (Boolean)session.getAttribute(
@@ -214,13 +221,6 @@ public class CreateAccountAction extends PortletAction {
 
 		if (PropsValues.CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT) {
 			CaptchaUtil.check(actionRequest);
-		}
-
-		if (PropsValues.LOGIN_CREATE_ACCOUNT_ALLOW_CUSTOM_PASSWORD) {
-			autoPassword = false;
-
-			password1 = ParamUtil.getString(actionRequest, "password1");
-			password2 = ParamUtil.getString(actionRequest, "password2");
 		}
 
 		User user = UserServiceUtil.addUser(

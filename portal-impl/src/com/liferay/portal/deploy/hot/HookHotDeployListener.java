@@ -843,7 +843,6 @@ public class HookHotDeployListener
 	private static final String[] _PROPS_VALUES_BOOLEAN = new String[] {
 		"auth.forward.by.last.path",
 		"captcha.check.portal.create_account",
-		"create.account.allow.custom.password",
 		"field.enable.com.liferay.portal.model.Contact.birthday",
 		"field.enable.com.liferay.portal.model.Contact.male",
 		"field.enable.com.liferay.portal.model.Organization.status",
@@ -855,6 +854,7 @@ public class HookHotDeployListener
 		"layout.user.public.layouts.auto.create",
 		"layout.user.public.layouts.enabled",
 		"layout.user.public.layouts.modifiable",
+		"login.create.account.allow.custom.password",
 		"my.places.show.community.private.sites.with.no.layouts",
 		"my.places.show.community.public.sites.with.no.layouts",
 		"my.places.show.organization.private.sites.with.no.layouts",

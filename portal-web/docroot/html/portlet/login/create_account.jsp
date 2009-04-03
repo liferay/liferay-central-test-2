@@ -30,8 +30,9 @@ String openId = ParamUtil.getString(request, "openId");
 User user2 = null;
 Contact contact2 = null;
 
-Calendar birthday = CalendarFactoryUtil.getCalendar();
 PasswordPolicy passwordPolicy = PasswordPolicyLocalServiceUtil.getDefaultPasswordPolicy(company.getCompanyId());
+
+Calendar birthday = CalendarFactoryUtil.getCalendar();
 
 birthday.set(Calendar.MONTH, Calendar.JANUARY);
 birthday.set(Calendar.DATE, 1);
@@ -55,6 +56,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 <liferay-ui:error exception="<%= ReservedUserScreenNameException.class %>" message="the-screen-name-you-requested-is-reserved" />
 <liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-email-address" />
 <liferay-ui:error exception="<%= UserIdException.class %>" message="please-enter-a-valid-user-id" />
+
 <liferay-ui:error exception="<%= UserPasswordException.class %>">
 
 	<%
@@ -127,6 +129,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 
 			<input name="<portlet:namespace />password1" size="30" type="password" value="" />
 		</div>
+
 		<div class="ctrl-holder">
 			<label for=""><liferay-ui:message key="enter-again" /></label>
 
