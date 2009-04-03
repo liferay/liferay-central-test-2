@@ -784,7 +784,7 @@ numberFormat.setMinimumIntegerDigits(2);
 					<td>
 						<liferay-ui:message key="clear-content-cached-by-this-vm" />
 					</td>
-					<td align="right">
+					<td>
 						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('cacheSingle');" />
 					</td>
 				</tr>
