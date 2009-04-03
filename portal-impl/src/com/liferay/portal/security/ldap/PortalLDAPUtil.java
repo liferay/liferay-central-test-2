@@ -894,7 +894,7 @@ public class PortalLDAPUtil {
 		}
 		catch (Exception e) {
 			_log.error(
-				"Problem updating user with screen name " + screenName +
+				"Error updating user with screen name " + screenName +
 					" and email address " + emailAddress,
 				e);
 
