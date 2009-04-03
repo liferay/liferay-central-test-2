@@ -132,52 +132,54 @@ String threadView = messageDisplay.getThreadView();
 		</div>
 	</td>
 
-	<c:if test="<%= ArrayUtil.contains(PropsValues.MESSAGE_BOARDS_THREAD_VIEWS, MBThreadImpl.THREAD_VIEW_COMBINATION) %>">
-		<td class="thread-icon">
+	<c:if test="<%= PropsValues.MESSAGE_BOARDS_THREAD_VIEWS.length > 1 %>">
+		<c:if test="<%= ArrayUtil.contains(PropsValues.MESSAGE_BOARDS_THREAD_VIEWS, MBThreadImpl.THREAD_VIEW_COMBINATION) %>">
+			<td class="thread-icon">
 
-			<%
-			currentURLObj.setParameter("threadView", MBThreadImpl.THREAD_VIEW_COMBINATION);
-			%>
+				<%
+				currentURLObj.setParameter("threadView", MBThreadImpl.THREAD_VIEW_COMBINATION);
+				%>
 
-			<liferay-ui:icon
-				image="../message_boards/thread_view_combination"
-				message="combination-view"
-				url="<%= currentURLObj.toString() %>"
-				method="get"
-			/>
-		</td>
-	</c:if>
+				<liferay-ui:icon
+					image="../message_boards/thread_view_combination"
+					message="combination-view"
+					url="<%= currentURLObj.toString() %>"
+					method="get"
+				/>
+			</td>
+		</c:if>
 
-	<c:if test="<%= ArrayUtil.contains(PropsValues.MESSAGE_BOARDS_THREAD_VIEWS, MBThreadImpl.THREAD_VIEW_FLAT) %>">
-		<td class="thread-icon">
+		<c:if test="<%= ArrayUtil.contains(PropsValues.MESSAGE_BOARDS_THREAD_VIEWS, MBThreadImpl.THREAD_VIEW_FLAT) %>">
+			<td class="thread-icon">
 
-			<%
-			currentURLObj.setParameter("threadView", MBThreadImpl.THREAD_VIEW_FLAT);
-			%>
+				<%
+				currentURLObj.setParameter("threadView", MBThreadImpl.THREAD_VIEW_FLAT);
+				%>
 
-			<liferay-ui:icon
-				image="../message_boards/thread_view_flat"
-				message="flat-view"
-				url="<%= currentURLObj.toString() %>"
-				method="get"
-			/>
-		</td>
-	</c:if>
+				<liferay-ui:icon
+					image="../message_boards/thread_view_flat"
+					message="flat-view"
+					url="<%= currentURLObj.toString() %>"
+					method="get"
+				/>
+			</td>
+		</c:if>
 
-	<c:if test="<%= ArrayUtil.contains(PropsValues.MESSAGE_BOARDS_THREAD_VIEWS, MBThreadImpl.THREAD_VIEW_TREE) %>">
-		<td class="thread-icon">
+		<c:if test="<%= ArrayUtil.contains(PropsValues.MESSAGE_BOARDS_THREAD_VIEWS, MBThreadImpl.THREAD_VIEW_TREE) %>">
+			<td class="thread-icon">
 
-			<%
-			currentURLObj.setParameter("threadView", MBThreadImpl.THREAD_VIEW_TREE);
-			%>
+				<%
+				currentURLObj.setParameter("threadView", MBThreadImpl.THREAD_VIEW_TREE);
+				%>
 
-			<liferay-ui:icon
-				image="../message_boards/thread_view_tree"
-				message="tree-view"
-				url="<%= currentURLObj.toString() %>"
-				method="get"
-			/>
-		</td>
+				<liferay-ui:icon
+					image="../message_boards/thread_view_tree"
+					message="tree-view"
+					url="<%= currentURLObj.toString() %>"
+					method="get"
+				/>
+			</td>
+		</c:if>
 	</c:if>
 </tr>
 </table>
