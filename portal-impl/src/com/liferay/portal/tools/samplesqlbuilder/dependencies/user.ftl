@@ -7,21 +7,21 @@ insert into Contact_ values (${contact.contactId}, ${companyId}, ${user.userId},
 	${sampleSQLBuilder.insertGroup(group, privateLayouts, publicLayouts)}
 </#if>
 
-<#if roles??>
-	<#list roles as role>
-		insert into Users_Roles values (${user.userId}, ${role.roleId});
+<#if roleIds??>
+	<#list roleIds as roleId>
+		insert into Users_Roles values (${user.userId}, ${roleId});
 	</#list>
 </#if>
 
-<#if groups??>
-	<#list groups as group>
-		insert into Users_Groups values (${user.userId}, ${group.groupId});
+<#if groupIds??>
+	<#list groupIds as groupId>
+		insert into Users_Groups values (${user.userId}, ${groupId});
 	</#list>
 </#if>
 
-<#if organizations??>
-	<#list organizations as organization>
-		insert into Users_Orgs values (${user.userId}, ${organization.organizationId});
+<#if organizationIds??>
+	<#list organizationIds as organizationId>
+		insert into Users_Orgs values (${user.userId}, ${organizationId});
 	</#list>
 </#if>
 

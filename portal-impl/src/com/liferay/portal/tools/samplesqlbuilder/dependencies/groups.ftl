@@ -8,7 +8,7 @@
 </#list>
 
 <#list 1..maxGroupsCount as groupCount>
-	<#assign groupId = counter.get()>
+	<#assign groupId = groupCount>
 
 	<#assign group = dataFactory.addGroup(groupId, dataFactory.groupClassName.classNameId, groupId, "Community " + groupCount, "/community" + groupCount)>
 

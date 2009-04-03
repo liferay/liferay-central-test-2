@@ -10,7 +10,7 @@
 		<#assign mbCategoryId = 0>
 		<#assign mbThreadId = counter.get()>
 
-		<#assign mbRootMessage = dataFactory.addMBMessage(mbGroupId, mbUserId, mbCategoryId, mbThreadId, 0, stringUtil.valueOf(blogsEntry.entryId), stringUtil.valueOf(blogsEntry.entryId))>
+		<#assign mbRootMessage = dataFactory.addMBMessage(counter.get(), mbGroupId, mbUserId, mbCategoryId, mbThreadId, 0, stringUtil.valueOf(blogsEntry.entryId), stringUtil.valueOf(blogsEntry.entryId))>
 
 		${sampleSQLBuilder.insertMBMessage(mbRootMessage)}
 
@@ -18,7 +18,7 @@
 
 		${sampleSQLBuilder.insertMBThread(mbThread)}
 
-		<#assign mbMessage = dataFactory.addMBMessage(mbGroupId, mbUserId, mbCategoryId, mbThreadId, mbRootMessage.messageId, "N/A", "This is a test comment.")>
+		<#assign mbMessage = dataFactory.addMBMessage(counter.get(), mbGroupId, mbUserId, mbCategoryId, mbThreadId, mbRootMessage.messageId, "N/A", "This is a test comment.")>
 
 		${sampleSQLBuilder.insertMBMessage(mbMessage)}
 

@@ -13,13 +13,13 @@ ${sampleSQLBuilder.insertUser(contact, null, null, null, null, null, null, user)
 
 <#assign userGroup = dataFactory.addGroup(counter.get(), dataFactory.userClassName.classNameId, user.userId, stringUtil.valueOf(user.userId), "/" + user.screenName)>
 
-<#assign groups = [dataFactory.guestGroup]>
-<#assign organizations = []>
+<#assign groupIds = [dataFactory.guestGroup.groupId]>
+<#assign organizationIds = []>
 <#assign privateLayouts = []>
 <#assign publicLayouts = []>
-<#assign roles = [dataFactory.administratorRole]>
+<#assign roleIds = [dataFactory.administratorRole.roleId]>
 
-${sampleSQLBuilder.insertUser(contact, userGroup, groups, organizations, privateLayouts, publicLayouts, roles, user)}
+${sampleSQLBuilder.insertUser(contact, userGroup, groupIds, organizationIds, privateLayouts, publicLayouts, roleIds, user)}
 
 <#assign mbSystemCategory = dataFactory.addMBCategory(0, 0, 0, 0, "", "", 0, 0)>
 

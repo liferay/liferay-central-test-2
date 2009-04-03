@@ -30,6 +30,14 @@ package com.liferay.util;
  */
 public class SimpleCounter {
 
+	public SimpleCounter() {
+		this(_DEFAULT_COUNTER);
+	}
+
+	public SimpleCounter(long counter) {
+		_counter = counter;
+	}
+
 	public synchronized long get() {
 		return _counter++;
 	}
@@ -38,6 +46,8 @@ public class SimpleCounter {
 		return String.valueOf(get());
 	}
 
-	private long _counter = 1;
+	private static final long _DEFAULT_COUNTER = 1;
+
+	private long _counter;
 
 }

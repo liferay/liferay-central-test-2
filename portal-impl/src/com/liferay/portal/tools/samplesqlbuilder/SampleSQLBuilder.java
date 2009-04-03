@@ -32,7 +32,6 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
@@ -82,18 +81,21 @@ public class SampleSQLBuilder {
 			System.getProperty("sample.sql.mb.thread.count"));
 		int maxUserCount = GetterUtil.getInteger(
 			System.getProperty("sample.sql.user.count"));
+		int maxUserToGroupCount = GetterUtil.getInteger(
+			System.getProperty("sample.sql.user.to.group.count"));
 		boolean securityEnabled = GetterUtil.getBoolean(
 			System.getProperty("sample.sql.security.enabled"));
 
 		new SampleSQLBuilder(
 			outputDir, maxBlogsEntryCount, maxGroupsCount, maxMBCategoryCount,
-			maxMBMessageCount, maxMBThreadCount, maxUserCount, securityEnabled);
+			maxMBMessageCount, maxMBThreadCount, maxUserCount,
+			maxUserToGroupCount, securityEnabled);
 	}
 
 	public SampleSQLBuilder(
 		String outputDir, int maxBlogsEntryCount, int maxGroupsCount,
 		int maxMBCategoryCount, int maxMBMessageCount, int maxMBThreadCount,
-		int maxUserCount, boolean securityEnabled) {
+		int maxUserCount, int maxUserToGroupCount, boolean securityEnabled) {
 
 		try {
 			_outputDir = outputDir;
@@ -103,9 +105,20 @@ public class SampleSQLBuilder {
 			_maxMBMessageCount = maxMBMessageCount;
 			_maxMBThreadCount = maxMBThreadCount;
 			_maxUserCount = maxUserCount;
+			_maxUserToGroupCount = maxUserToGroupCount;
 			_securityEnabled = securityEnabled;
 
-			_counter = new SimpleCounter();
+			int totalMThreadCount = maxMBCategoryCount * maxMBThreadCount;
+			int totalMBMessageCount = totalMThreadCount * maxMBMessageCount;
+
+			int counterOffset =
+				_maxGroupsCount +
+				(_maxGroupsCount *
+					(maxMBCategoryCount + totalMThreadCount +
+						totalMBMessageCount)
+				) + 1;
+
+			_counter = new SimpleCounter(counterOffset);
 			_permissionCounter = new SimpleCounter();
 			_resourceCounter = new SimpleCounter();
 			_resourceCodeCounter = new SimpleCounter();
@@ -113,8 +126,8 @@ public class SampleSQLBuilder {
 			_userScreenNameIncrementer = new SimpleCounter();
 
 			_dataFactory = new DataFactory(
-				_counter, _permissionCounter, _resourceCounter,
-				_resourceCodeCounter);
+				_maxGroupsCount, _maxUserToGroupCount, _counter,
+				_permissionCounter, _resourceCounter, _resourceCodeCounter);
 
 			// Generic
 
@@ -261,20 +274,20 @@ public class SampleSQLBuilder {
 	}
 
 	public void insertUser(
-			Contact contact, Group group, List<Group> groups,
-			List<Organization> organizations, List<Layout> privateLayouts,
-			List<Layout> publicLayouts, List<Role> roles, User user)
+			Contact contact, Group group, List<Long> groupIds,
+			List<Long> organizationIds, List<Layout> privateLayouts,
+			List<Layout> publicLayouts, List<Role> roleIds, User user)
 		throws Exception {
 
 		Map<String, Object> context = getContext();
 
 		put(context, "contact", contact);
 		put(context, "group", group);
-		put(context, "groups", groups);
-		put(context, "organizations", organizations);
+		put(context, "groupIds", groupIds);
+		put(context, "organizationIds", organizationIds);
 		put(context, "privateLayouts", privateLayouts);
 		put(context, "publicLayouts", publicLayouts);
-		put(context, "roles", roles);
+		put(context, "roleIds", roleIds);
 		put(context, "user", user);
 
 		processTemplate(_tplUser, context);
@@ -317,6 +330,7 @@ public class SampleSQLBuilder {
 		put(context, "maxMBMessageCount", _maxMBMessageCount);
 		put(context, "maxMBThreadCount", _maxMBThreadCount);
 		put(context, "maxUserCount", _maxUserCount);
+		put(context, "maxUserToGroupCount", _maxUserToGroupCount);
 		put(context, "portalUUIDUtil", PortalUUIDUtil.getPortalUUID());
 		put(context, "sampleSQLBuilder", this);
 		put(context, "stringUtil", StringUtil_IW.getInstance());
@@ -346,6 +360,7 @@ public class SampleSQLBuilder {
 	private int _maxMBMessageCount;
 	private int _maxMBThreadCount;
 	private int _maxUserCount;
+	private int _maxUserToGroupCount;
 	private String _outputDir;
 	private SimpleCounter _permissionCounter;
 	private SimpleCounter _resourceCodeCounter;

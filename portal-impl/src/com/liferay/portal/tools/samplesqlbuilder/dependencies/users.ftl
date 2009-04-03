@@ -1,8 +1,8 @@
 <#setting number_format = "0">
 
-<#assign groups = [dataFactory.guestGroup, group]>
-<#assign organizations = []>
-<#assign roles = [dataFactory.administratorRole]>
+<#assign groupIds = dataFactory.addUserToGroupIds(group.groupId)>
+<#assign organizationIds = []>
+<#assign roleIds = [dataFactory.administratorRole.roleId]>
 
 <#assign firstNames = dataFactory.userNames?first>
 <#assign lastNames = dataFactory.userNames?last>
@@ -21,7 +21,7 @@
 		<#include "users_user_private_layouts.ftl">
 		<#include "users_user_public_layouts.ftl">
 
-		${sampleSQLBuilder.insertUser(contact, userGroup, groups, organizations, privateLayouts, publicLayouts, roles, user)}
+		${sampleSQLBuilder.insertUser(contact, userGroup, groupIds, organizationIds, privateLayouts, publicLayouts, roleIds, user)}
 
 		<#assign blogsStatsUser = dataFactory.addBlogsStatsUser(groupId, user.userId)>
 

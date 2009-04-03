@@ -93,10 +93,14 @@ import java.util.Map;
 public class DataFactory {
 
 	public DataFactory(
-		SimpleCounter counter, SimpleCounter permissionCounter,
-		SimpleCounter resourceCounter, SimpleCounter resourceCodeCounter) {
+		int maxGroupsCount, int maxUserToGroupCount, SimpleCounter counter,
+		SimpleCounter permissionCounter, SimpleCounter resourceCounter,
+		SimpleCounter resourceCodeCounter) {
 
 		try {
+			_maxGroupsCount = maxGroupsCount;
+			_maxUserToGroupCount = maxUserToGroupCount;
+
 			_counter = counter;
 			_permissionCounter = permissionCounter;
 			_resourceCounter = resourceCounter;
@@ -234,13 +238,13 @@ public class DataFactory {
 	}
 
 	public MBMessage addMBMessage(
-			long groupId, long userId, long categoryId, long threadId,
-			long parentMessageId, String subject, String body)
+			long messageId, long groupId, long userId, long categoryId,
+			long threadId, long parentMessageId, String subject, String body)
 		throws Exception {
 
 		MBMessage mbMessage = new MBMessageImpl();
 
-		mbMessage.setMessageId(_counter.get());
+		mbMessage.setMessageId(messageId);
 		mbMessage.setGroupId(groupId);
 		mbMessage.setUserId(userId);
 		mbMessage.setCategoryId(categoryId);
@@ -407,6 +411,22 @@ public class DataFactory {
 		user.setEmailAddress(emailAddress);
 
 		return user;
+	}
+
+	public List<Long> addUserToGroupIds(long groupId) {
+		List<Long> groupIds = new ArrayList<Long>(_maxUserToGroupCount + 1);
+
+		groupIds.add(_guestGroup.getGroupId());
+
+		if ((groupId + _maxUserToGroupCount) > _maxGroupsCount) {
+			groupId = groupId - _maxUserToGroupCount + 1;
+		}
+
+		for (int i = 0; i < _maxUserToGroupCount; i++) {
+			groupIds.add(groupId + i);
+		}
+
+		return groupIds;
 	}
 
 	public Role getAdministratorRole() {
@@ -874,6 +894,8 @@ public class DataFactory {
 	private Role _guestRole;
 	private Map<String, Long> _individualResourceCodeIds;
 	private Map<Long, String> _individualResourceNames;
+	private int _maxGroupsCount;
+	private int _maxUserToGroupCount;
 	private Role _organizationAdministratorRole;
 	private Role _organizationMemberRole;
 	private Role _organizationOwnerRole;
