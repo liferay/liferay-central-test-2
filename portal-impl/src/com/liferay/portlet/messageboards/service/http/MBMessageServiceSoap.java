@@ -209,10 +209,10 @@ public class MBMessageServiceSoap {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
-		long messageId) throws RemoteException {
+		long messageId, java.lang.String threadView) throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBMessageDisplay returnValue =
-				MBMessageServiceUtil.getMessageDisplay(messageId);
+				MBMessageServiceUtil.getMessageDisplay(messageId, threadView);
 
 			return returnValue;
 		}

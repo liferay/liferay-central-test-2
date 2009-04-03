@@ -58,6 +58,7 @@
 <%@ page import="com.liferay.portlet.messageboards.model.impl.MBCategoryDisplayImpl" %>
 <%@ page import="com.liferay.portlet.messageboards.model.impl.MBCategoryImpl" %>
 <%@ page import="com.liferay.portlet.messageboards.model.impl.MBMessageImpl" %>
+<%@ page import="com.liferay.portlet.messageboards.model.impl.MBThreadImpl" %>
 <%@ page import="com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.service.MBMailingListLocalServiceUtil" %>

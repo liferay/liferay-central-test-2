@@ -162,10 +162,10 @@ public class MBMessageServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
-		long messageId)
+		long messageId, java.lang.String threadView)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().getMessageDisplay(messageId);
+		return getService().getMessageDisplay(messageId, threadView);
 	}
 
 	public static java.lang.String getThreadMessagesRSS(long threadId, int max,

@@ -793,14 +793,20 @@ public class MBMessageServiceHttp {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
-		HttpPrincipal httpPrincipal, long messageId)
+		HttpPrincipal httpPrincipal, long messageId, java.lang.String threadView)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(messageId);
 
+			Object paramObj1 = threadView;
+
+			if (threadView == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"getMessageDisplay", new Object[] { paramObj0 });
+					"getMessageDisplay", new Object[] { paramObj0, paramObj1 });
 
 			Object returnObj = null;
 

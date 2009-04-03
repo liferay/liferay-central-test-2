@@ -392,13 +392,13 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		return mbMessageLocalService.getMessage(messageId);
 	}
 
-	public MBMessageDisplay getMessageDisplay(long messageId)
+	public MBMessageDisplay getMessageDisplay(long messageId, String threadView)
 		throws PortalException, SystemException {
 
 		MBMessagePermission.check(
 			getPermissionChecker(), messageId, ActionKeys.VIEW);
 
-		return mbMessageLocalService.getMessageDisplay(messageId);
+		return mbMessageLocalService.getMessageDisplay(messageId, threadView);
 	}
 
 	public String getThreadMessagesRSS(

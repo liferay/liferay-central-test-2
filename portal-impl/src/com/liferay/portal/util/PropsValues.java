@@ -833,6 +833,12 @@ public class PropsValues {
 		GetterUtil.getLong(
 			PropsUtil.get(PropsKeys.MESSAGE_BOARDS_EXPIRE_BAN_JOB_INTERVAL));
 
+	public static final String[] MESSAGE_BOARDS_THREAD_VIEWS =
+		PropsUtil.getArray(PropsKeys.MESSAGE_BOARDS_THREAD_VIEWS);
+
+	public static final String MESSAGE_BOARDS_THREAD_VIEWS_DEFAULT =
+		PropsUtil.get(PropsKeys.MESSAGE_BOARDS_THREAD_VIEWS_DEFAULT);
+
 	public static final String[] MIME_TYPES =
 		PropsUtil.getArray(PropsKeys.MIME_TYPES);
 

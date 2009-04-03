@@ -364,17 +364,18 @@ public class MBMessageLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
-		long messageId)
+		long messageId, java.lang.String threadView)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().getMessageDisplay(messageId);
+		return getService().getMessageDisplay(messageId, threadView);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
-		com.liferay.portlet.messageboards.model.MBMessage message)
+		com.liferay.portlet.messageboards.model.MBMessage message,
+		java.lang.String threadView)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().getMessageDisplay(message);
+		return getService().getMessageDisplay(message, threadView);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getNoAssetMessages()
@@ -392,6 +393,12 @@ public class MBMessageLocalServiceUtil {
 		java.util.Comparator<com.liferay.portlet.messageboards.model.MBMessage> comparator)
 		throws com.liferay.portal.SystemException {
 		return getService().getThreadMessages(threadId, comparator);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getThreadMessages(
+		long threadId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getService().getThreadMessages(threadId, start, end);
 	}
 
 	public static int getThreadMessagesCount(long threadId)

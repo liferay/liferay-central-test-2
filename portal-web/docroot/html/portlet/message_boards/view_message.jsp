@@ -40,14 +40,7 @@ MBThread nextThread = messageDisplay.getNextThread();
 
 PortalPreferences portalPrefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
-String threadView = ParamUtil.getString(request, "threadView");
-
-if (Validator.isNotNull(threadView)) {
-	portalPrefs.setValue(PortletKeys.MESSAGE_BOARDS, "thread-view", threadView);
-}
-else {
-	threadView = portalPrefs.getValue(PortletKeys.MESSAGE_BOARDS, "thread-view", "combination");
-}
+String threadView = messageDisplay.getThreadView();
 %>
 
 <script type="text/javascript">
@@ -138,45 +131,54 @@ else {
 			<%= MBUtil.getBreadcrumbs(null, message, pageContext, renderRequest, renderResponse) %>
 		</div>
 	</td>
-	<td class="thread-icon">
 
-		<%
-		currentURLObj.setParameter("threadView", "combination");
-		%>
+	<c:if test="<%= ArrayUtil.contains(PropsValues.MESSAGE_BOARDS_THREAD_VIEWS, MBThreadImpl.THREAD_VIEW_COMBINATION) %>">
+		<td class="thread-icon">
 
-		<liferay-ui:icon
-			image="../message_boards/thread_view_combination"
-			message="combination-view"
-			url="<%= currentURLObj.toString() %>"
-			method="get"
-		/>
-	</td>
-	<td class="thread-icon">
+			<%
+			currentURLObj.setParameter("threadView", MBThreadImpl.THREAD_VIEW_COMBINATION);
+			%>
 
-		<%
-		currentURLObj.setParameter("threadView", "flat");
-		%>
+			<liferay-ui:icon
+				image="../message_boards/thread_view_combination"
+				message="combination-view"
+				url="<%= currentURLObj.toString() %>"
+				method="get"
+			/>
+		</td>
+	</c:if>
 
-		<liferay-ui:icon
-			image="../message_boards/thread_view_flat"
-			message="flat-view"
-			url="<%= currentURLObj.toString() %>"
-			method="get"
-		/>
-	</td>
-	<td class="thread-icon">
+	<c:if test="<%= ArrayUtil.contains(PropsValues.MESSAGE_BOARDS_THREAD_VIEWS, MBThreadImpl.THREAD_VIEW_FLAT) %>">
+		<td class="thread-icon">
 
-		<%
-		currentURLObj.setParameter("threadView", "tree");
-		%>
+			<%
+			currentURLObj.setParameter("threadView", MBThreadImpl.THREAD_VIEW_FLAT);
+			%>
 
-		<liferay-ui:icon
-			image="../message_boards/thread_view_tree"
-			message="tree-view"
-			url="<%= currentURLObj.toString() %>"
-			method="get"
-		/>
-	</td>
+			<liferay-ui:icon
+				image="../message_boards/thread_view_flat"
+				message="flat-view"
+				url="<%= currentURLObj.toString() %>"
+				method="get"
+			/>
+		</td>
+	</c:if>
+
+	<c:if test="<%= ArrayUtil.contains(PropsValues.MESSAGE_BOARDS_THREAD_VIEWS, MBThreadImpl.THREAD_VIEW_TREE) %>">
+		<td class="thread-icon">
+
+			<%
+			currentURLObj.setParameter("threadView", MBThreadImpl.THREAD_VIEW_TREE);
+			%>
+
+			<liferay-ui:icon
+				image="../message_boards/thread_view_tree"
+				message="tree-view"
+				url="<%= currentURLObj.toString() %>"
+				method="get"
+			/>
+		</td>
+	</c:if>
 </tr>
 </table>
 
@@ -280,18 +282,22 @@ else {
 	<%
 	MBTreeWalker treeWalker = messageDisplay.getTreeWalker();
 
-	List messages = new ArrayList();
+	List<MBMessage> messages = null;
 
-	messages.addAll(treeWalker.getMessages());
+	if (treeWalker != null) {
+		messages = new ArrayList<MBMessage>();
 
-	messages = ListUtil.sort(messages, new MessageCreateDateComparator(true, false));
+		messages.addAll(treeWalker.getMessages());
+
+		messages = ListUtil.sort(messages, new MessageCreateDateComparator(true, false));
+	}
 
 	TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(MBMessage.class.getName(), thread.getRootMessageId(), true));
 	%>
 
 	<div class="message-scroll" id="<portlet:namespace />message_0"></div>
 
-	<c:if test='<%= threadView.equals("combination") && (messages.size() > 1) %>'>
+	<c:if test='<%= threadView.equals(MBThreadImpl.THREAD_VIEW_COMBINATION) && (messages.size() > 1) %>'>
 		<liferay-ui:toggle-area id="toggle_id_message_boards_view_message_thread">
 			<table class="toggle_id_message_boards_view_message_thread">
 
@@ -312,7 +318,7 @@ else {
 	</c:if>
 
 	<c:choose>
-		<c:when test='<%= threadView.equals("tree") %>'>
+		<c:when test='<%= threadView.equals(MBThreadImpl.THREAD_VIEW_TREE) %>'>
 
 			<%
 			request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER, treeWalker);
@@ -338,6 +344,8 @@ else {
 
 <%
 MBMessageFlagLocalServiceUtil.addReadFlags(themeDisplay.getUserId(), messages);
+
+message = messageDisplay.getMessage();
 
 PortalUtil.setPageSubtitle(message.getSubject(), request);
 PortalUtil.setPageDescription(message.getSubject(), request);

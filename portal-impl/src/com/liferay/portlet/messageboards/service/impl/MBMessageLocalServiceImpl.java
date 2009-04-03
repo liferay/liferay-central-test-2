@@ -866,7 +866,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				new ServiceContext());
 		}
 
-		return getMessageDisplay(message);
+		return getMessageDisplay(message, MBThreadImpl.THREAD_VIEW_COMBINATION);
 	}
 
 	public int getDiscussionMessagesCount(long classNameId, long classPK)
@@ -950,15 +950,16 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		return mbMessageFinder.findByC_C(classNameId, classPK);
 	}
 
-	public MBMessageDisplay getMessageDisplay(long messageId)
+	public MBMessageDisplay getMessageDisplay(long messageId, String threadView)
 		throws PortalException, SystemException {
 
 		MBMessage message = getMessage(messageId);
 
-		return getMessageDisplay(message);
+		return getMessageDisplay(message, threadView);
 	}
 
-	public MBMessageDisplay getMessageDisplay(MBMessage message)
+	public MBMessageDisplay getMessageDisplay(
+			MBMessage message, String threadView)
 		throws PortalException, SystemException {
 
 		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
@@ -991,7 +992,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		return new MBMessageDisplayImpl(
 			message, parentMessage, category, thread, treeWalker,
-			previousThread, nextThread);
+			previousThread, nextThread, threadView);
 	}
 
 	public List<MBMessage> getNoAssetMessages() throws SystemException {
@@ -1012,6 +1013,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			threadId);
 
 		return ListUtil.sort(messages, comparator);
+	}
+
+	public List<MBMessage> getThreadMessages(long threadId, int start, int end)
+		throws SystemException {
+
+		return mbMessagePersistence.findByThreadId(threadId, start, end);
 	}
 
 	public int getThreadMessagesCount(long threadId) throws SystemException {

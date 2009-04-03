@@ -23,10 +23,16 @@
 package com.liferay.portlet.messageboards.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortalPreferences;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.model.MBMessageDisplay;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
@@ -55,8 +61,34 @@ public class ViewMessageAction extends PortletAction {
 		try {
 			long messageId = ParamUtil.getLong(renderRequest, "messageId");
 
+			PortalPreferences preferences =
+				PortletPreferencesFactoryUtil.getPortalPreferences(
+					renderRequest);
+
+			String threadView = ParamUtil.getString(
+				renderRequest, "threadView");
+
+			if (Validator.isNotNull(threadView)) {
+				preferences.setValue(
+					PortletKeys.MESSAGE_BOARDS, "thread-view", threadView);
+			}
+			else {
+				threadView = preferences.getValue(
+					PortletKeys.MESSAGE_BOARDS, "thread-view",
+					PropsValues.MESSAGE_BOARDS_THREAD_VIEWS_DEFAULT);
+			}
+
+			if (!ArrayUtil.contains(
+					PropsValues.MESSAGE_BOARDS_THREAD_VIEWS, threadView)) {
+
+				threadView = PropsValues.MESSAGE_BOARDS_THREAD_VIEWS_DEFAULT;
+
+				preferences.setValue(
+					PortletKeys.MESSAGE_BOARDS, "thread-view", threadView);
+			}
+
 			MBMessageDisplay messageDisplay =
-				MBMessageServiceUtil.getMessageDisplay(messageId);
+				MBMessageServiceUtil.getMessageDisplay(messageId, threadView);
 
 			renderRequest.setAttribute(
 				WebKeys.MESSAGE_BOARDS_MESSAGE, messageDisplay);

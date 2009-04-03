@@ -40,15 +40,20 @@ public class MBMessageDisplayImpl implements MBMessageDisplay {
 	public MBMessageDisplayImpl(
 		MBMessage message, MBMessage parentMessage, MBCategory category,
 		MBThread thread, MBTreeWalker treeWalker, MBThread previousThread,
-		MBThread nextThread) {
+		MBThread nextThread, String threadView) {
 
 		_message = message;
 		_parentMessage = parentMessage;
 		_category = category;
 		_thread = thread;
-		_treeWalker = new MBTreeWalkerImpl(message);
+
+		if (!threadView.equals(MBThreadImpl.THREAD_VIEW_FLAT)) {
+			_treeWalker = new MBTreeWalkerImpl(message);
+		}
+
 		_previousThread = previousThread;
 		_nextThread = nextThread;
+		_threadView = threadView;
 	}
 
 	public MBMessage getMessage() {
@@ -79,6 +84,10 @@ public class MBMessageDisplayImpl implements MBMessageDisplay {
 		return _nextThread;
 	}
 
+	public String getThreadView() {
+		return _threadView;
+	}
+
 	private MBMessage _message;
 	private MBMessage _parentMessage;
 	private MBCategory _category;
@@ -86,5 +95,6 @@ public class MBMessageDisplayImpl implements MBMessageDisplay {
 	private MBTreeWalker _treeWalker;
 	private MBThread _previousThread;
 	private MBThread _nextThread;
+	private String _threadView;
 
 }

@@ -47,4 +47,6 @@ public interface MBMessageDisplay extends Serializable {
 
 	public MBThread getNextThread();
 
+	public String getThreadView();
+
 }

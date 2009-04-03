@@ -23,12 +23,37 @@
 %>
 
 <%
+PortletURL portletURL = renderResponse.createRenderURL();
+
+portletURL.setParameter("struts_action", "/message_boards/view_message");
+portletURL.setParameter("messageId", String.valueOf(message.getMessageId()));
+
+int delta = 10;
+
+SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, delta, portletURL, null, null);
+
+int total = MBMessageLocalServiceUtil.getThreadMessagesCount(message.getThreadId());
+
+searchContainer.setTotal(total);
+
+messages = MBMessageLocalServiceUtil.getThreadMessages(message.getThreadId(), searchContainer.getStart(), searchContainer.getEnd());
+
+searchContainer.setResults(messages);
+%>
+
+<c:if test="<%= total > delta %>">
+	<div class="taglib-search-iterator-page-iterator-top">
+		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+	</div>
+</c:if>
+
+<%
 boolean editable = true;
 
 int depth = 0;
 
 for (int i = 0; i < messages.size(); i++) {
-	message = (MBMessage)messages.get(i);
+	message = messages.get(i);
 
 	String className = "portlet-section-alternate results-row alt";
 	String classHoverName = "portlet-section-alternate-hover results-row alt hover";
@@ -44,3 +69,9 @@ for (int i = 0; i < messages.size(); i++) {
 <%
 }
 %>
+
+<c:if test="<%= total > delta %>">
+	<div class="taglib-search-iterator-page-iterator-bottom">
+		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+	</div>
+</c:if>

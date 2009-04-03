@@ -832,6 +832,10 @@ public interface PropsKeys {
 
 	public static final String MESSAGE_BOARDS_RSS_ABSTRACT_LENGTH = "message.boards.rss.abstract.length";
 
+	public static final String MESSAGE_BOARDS_THREAD_VIEWS = "message.boards.thread.views";
+
+    public static final String MESSAGE_BOARDS_THREAD_VIEWS_DEFAULT = "message.boards.thread.views.default";
+
 	public static final String MIME_TYPES = "mime.types";
 
 	public static final String MIME_TYPES_CONTENT_DISPOSITION_INLINE = "mime.types.content.disposition.inline";

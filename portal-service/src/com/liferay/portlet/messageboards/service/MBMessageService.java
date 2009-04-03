@@ -139,7 +139,7 @@ public interface MBMessageService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
-		long messageId)
+		long messageId, java.lang.String threadView)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
