@@ -128,7 +128,7 @@ public class NetvibesServlet extends HttpServlet {
 		sb.append("<html xmlns=\"http://www.w3.org/1999/xhtml\" ");
 		sb.append("xmlns:widget=\"http://www.netvibes.com/ns/\">");
 		sb.append("<head>");
-		sb.append("<link href=\"" + _NETVIBES_CSS + "\" rel=\"stylesheet\"");
+		sb.append("<link href=\"" + _NETVIBES_CSS + "\" rel=\"stylesheet\" ");
 		sb.append("type=\"text/css\" />");
 		sb.append("<script src=\"" + _NETVIBES_JS + "\" ");
 		sb.append("type=\"text/javascript\"></script>");
@@ -139,7 +139,7 @@ public class NetvibesServlet extends HttpServlet {
 		sb.append("<body>");
 		sb.append("<script src=\"" + widgetJsURL + "\" ");
 		sb.append("type=\"text/javascript\"></script>");
-		sb.append("<script type=\"text/javascript\">");
+		sb.append("<script type=\"text/javascript\"> ");
 		sb.append("Liferay.Widget({url:\"" + widgetURL + "\"});");
 		sb.append("</script>");
 		sb.append("</body>");
