@@ -64,7 +64,6 @@ public class MaintenanceUtil {
 	}
 
 	public static void maintain(String sessionId, String className) {
-
 		_instance._maintain(sessionId, className);
 	}
 
@@ -80,6 +79,8 @@ public class MaintenanceUtil {
 	}
 
 	private void _cancel() {
+		PortalSessionContext.get(_sessionId).invalidate();
+
 		_isMaintaining = false;
 	}
 
@@ -114,7 +115,9 @@ public class MaintenanceUtil {
 			PortalSessionContext.getSessionPool();
 
 		for (HttpSession session : sessionPool) {
-			session.invalidate();
+			if (!sessionId.equals(session.getId())) {
+				session.invalidate();
+			}
 		}
 	}
 
