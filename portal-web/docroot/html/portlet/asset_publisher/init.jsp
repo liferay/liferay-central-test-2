@@ -193,3 +193,13 @@ DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 %>
 
 <%@ include file="/html/portlet/asset_publisher/init-ext.jsp" %>
+
+<%!
+private String _checkViewURL(String viewURL, String currentURL, ThemeDisplay themeDisplay) {
+	if (viewURL.startsWith(themeDisplay.getURLPortal())) {
+		viewURL = HttpUtil.setParameter(viewURL, "redirect", currentURL);
+	}
+
+	return viewURL;
+}
+%>

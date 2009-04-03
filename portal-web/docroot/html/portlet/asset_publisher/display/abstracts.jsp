@@ -136,12 +136,6 @@ else if (className.equals(IGImage.class.getName())) {
 	viewURLMessage = viewInContext ? "view-album" : "view";
 	cssClassName = AssetPublisherUtil.TYPE_IMAGE;
 
-	String href = viewURL;
-
-	if (href.startsWith(themeDisplay.getURLPortal())) {
-		href = HttpUtil.setParameter(href, "redirect", currentURL);
-	}
-
 	StringBuilder sb = new StringBuilder();
 
 	Image smallImage = ImageLocalServiceUtil.getImage(image.getSmallImageId());
@@ -150,7 +144,7 @@ else if (className.equals(IGImage.class.getName())) {
 		long smallImageId = smallImage.getImageId();
 
 		sb.append("<a href=\"");
-		sb.append(href);
+		sb.append(_checkViewURL(viewURL, currentURL, themeDisplay));
 		sb.append("\"><img align=\"left\" alt=\"");
 		sb.append(LanguageUtil.get(pageContext, viewURLMessage));
 		sb.append("\" border=\"0\" src=\"");
@@ -245,9 +239,7 @@ else if (className.equals(WikiPage.class.getName())) {
 	cssClassName = AssetPublisherUtil.TYPE_WIKI;
 }
 
-if (viewURL.startsWith(themeDisplay.getURLPortal())) {
-	viewURL = HttpUtil.setParameter(viewURL, "redirect", currentURL);
-}
+viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 %>
 
 <c:if test="<%= show %>">

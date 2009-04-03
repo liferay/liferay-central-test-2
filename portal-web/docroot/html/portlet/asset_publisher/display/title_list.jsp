@@ -159,9 +159,7 @@ else if (className.equals(WikiPage.class.getName())) {
 	cssClassName = AssetPublisherUtil.TYPE_WIKI;
 }
 
-if (viewURL.startsWith(themeDisplay.getURLPortal())) {
-	viewURL = HttpUtil.setParameter(viewURL, "redirect", currentURL);
-}
+viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 %>
 
 	<c:if test="<%= assetIndex == 0 %>">

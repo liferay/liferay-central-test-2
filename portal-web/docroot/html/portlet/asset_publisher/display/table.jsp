@@ -152,9 +152,7 @@ else if (className.equals(WikiPage.class.getName())) {
 	viewURL = viewInContext? pageURL.toString() : viewFullContentURL.toString();
 }
 
-if (viewURL.startsWith(themeDisplay.getURLPortal())) {
-	viewURL = HttpUtil.setParameter(viewURL, "redirect", currentURL);
-}
+viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 %>
 
 <c:if test="<%= assetIndex == 0 %>">
