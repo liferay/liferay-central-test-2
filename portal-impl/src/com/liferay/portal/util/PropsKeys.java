@@ -261,9 +261,9 @@ public interface PropsKeys {
 	public static final String CONTROL_PANEL_NAVIGATION_MAX_COMMUNITIES = "control.panel.navigation.max.communities";
 
 	public static final String CONTROL_PANEL_NAVIGATION_MAX_ORGANIZATIONS = "control.panel.navigation.max.organizations";
-	
+
 	public static final String CONVERT_PROCESSES = "convert.processes";
-	
+
 	public static final String COUNTER_CONNECTION_HEARTBEAT_JOB_INTERVAL = "counter.connection.heartbeat.job.interval";
 
 	public static final String COUNTER_INCREMENT = "counter.increment";

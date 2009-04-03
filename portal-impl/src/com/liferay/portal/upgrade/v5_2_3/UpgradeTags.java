@@ -85,9 +85,6 @@ public class UpgradeTags extends UpgradeProcess {
 	}
 
 	protected void updateAssetViewCount() throws Exception {
-		long bookmarksEntryClassNameId = PortalUtil.getClassNameId(
-			BookmarksEntry.class.getName());
-
 		updateAssetViewCount(
 			BookmarksEntry.class.getName(), "BookmarksEntry", "entryId",
 			"visits");
