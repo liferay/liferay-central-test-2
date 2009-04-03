@@ -86,7 +86,7 @@ public class MaintenanceUtil {
 		}
 		else {
 			if (_log.isWarnEnabled()) {
-				_log.isWarn("Session " + _sessionId + " is null");
+				_log.warn("Session " + _sessionId + " is null");
 			}
 		}
 
