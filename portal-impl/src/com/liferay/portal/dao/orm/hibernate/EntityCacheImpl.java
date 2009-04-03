@@ -58,9 +58,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 	}
 
 	public void clearCache() {
-		Map<String, Object> localCache = _localCache.get();
-
-		localCache.clear();
+		clearLocalCache();
 
 		PortalCache[] portalCaches = _portalCaches.values().toArray(
 			new PortalCache[_portalCaches.size()]);
@@ -71,9 +69,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 	}
 
 	public void clearCache(String className) {
-		Map<String, Object> localCache = _localCache.get();
-
-		localCache.clear();
+		clearLocalCache();
 
 		PortalCache portalCache = _getPortalCache(className);
 
@@ -81,9 +77,11 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 	}
 
 	public void clearLocalCache() {
-		Map<String, Object> localCache = _localCache.get();
+		if (_localCacheEnabled) {
+			Map<String, Object> localCache = _localCache.get();
 
-		localCache.clear();
+			localCache.clear();
+		}
 	}
 
 	public String getRegistryName() {
@@ -100,11 +98,19 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 			return null;
 		}
 
-		Map<String, Object> localCache = _localCache.get();
+		Object result = null;
 
-		String localCacheKey = _encodeLocalCacheKey(classObj, primaryKeyObj);
+		Map<String, Object> localCache = null;
 
-		Object result = localCache.get(localCacheKey);
+		String localCacheKey = null;
+
+		if (_localCacheEnabled) {
+			localCache = _localCache.get();
+
+			localCacheKey = _encodeLocalCacheKey(classObj, primaryKeyObj);
+
+			result = localCache.get(localCacheKey);
+		}
 
 		if (result == null) {
 			PortalCache portalCache = _getPortalCache(classObj.getName());
@@ -119,7 +125,9 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 				_multiVMPool.put(portalCache, cacheKey, result);
 			}
 
-			localCache.put(localCacheKey, result);
+			if (_localCacheEnabled) {
+				localCache.put(localCacheKey, result);
+			}
 		}
 
 		if (result != null) {
@@ -152,11 +160,19 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 			}
 		}
 
-		Map<String, Object> localCache = _localCache.get();
+		Object result = null;
 
-		String localCacheKey = _encodeLocalCacheKey(classObj, primaryKeyObj);
+		Map<String, Object> localCache = null;
 
-		Object result = localCache.get(localCacheKey);
+		String localCacheKey = null;
+
+		if (_localCacheEnabled) {
+			localCache = _localCache.get();
+
+			localCacheKey = _encodeLocalCacheKey(classObj, primaryKeyObj);
+
+			result = localCache.get(localCacheKey);
+		}
 
 		if (result == null) {
 			PortalCache portalCache = _getPortalCache(classObj.getName());
@@ -192,7 +208,9 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 				}
 			}
 
-			localCache.put(localCacheKey, result);
+			if (_localCacheEnabled) {
+				localCache.put(localCacheKey, result);
+			}
 		}
 
 		result = _objectToResult(result);
@@ -211,13 +229,16 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 			return;
 		}
 
-		Map<String, Object> localCache = _localCache.get();
-
-		String localCacheKey = _encodeLocalCacheKey(classObj, primaryKeyObj);
-
 		result = _objectToResult(result);
 
-		localCache.put(localCacheKey, result);
+		if (_localCacheEnabled) {
+			Map<String, Object> localCache = _localCache.get();
+
+			String localCacheKey = _encodeLocalCacheKey(
+				classObj, primaryKeyObj);
+
+			localCache.put(localCacheKey, result);
+		}
 
 		PortalCache portalCache = _getPortalCache(classObj.getName());
 
@@ -236,11 +257,14 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 			return;
 		}
 
-		Map<String, Object> localCache = _localCache.get();
+		if (_localCacheEnabled) {
+			Map<String, Object> localCache = _localCache.get();
 
-		String localCacheKey = _encodeLocalCacheKey(classObj, primaryKeyObj);
+			String localCacheKey = _encodeLocalCacheKey(
+				classObj, primaryKeyObj);
 
-		localCache.remove(localCacheKey);
+			localCache.remove(localCacheKey);
+		}
 
 		PortalCache portalCache = _getPortalCache(classObj.getName());
 
@@ -310,9 +334,16 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 
 	private static Log _log = LogFactoryUtil.getLog(EntityCacheImpl.class);
 
-	private static ThreadLocal<Map> _localCache = new InitialThreadLocal<Map>(
-		new LRUMap(
-			PropsValues.VALUE_OBJECT_ENTITY_THREAD_LOCAL_CACHE_MAX_SIZE));
+	private static ThreadLocal<Map> _localCache;
+	private static boolean _localCacheEnabled;
+
+	static {
+		if (PropsValues.VALUE_OBJECT_ENTITY_THREAD_LOCAL_CACHE_MAX_SIZE > 0) {
+			_localCache = new InitialThreadLocal<Map>(new LRUMap(
+				PropsValues.VALUE_OBJECT_ENTITY_THREAD_LOCAL_CACHE_MAX_SIZE));
+			_localCacheEnabled = true;
+		}
+	}
 
 	private MultiVMPool _multiVMPool;
 	private Map<String, PortalCache> _portalCaches =

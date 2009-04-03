@@ -60,9 +60,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 	}
 
 	public void clearCache() {
-		Map<String, Object> localCache = _localCache.get();
-
-		localCache.clear();
+		clearLocalCache();
 
 		PortalCache[] portalCaches = _portalCaches.values().toArray(
 			new PortalCache[_portalCaches.size()]);
@@ -73,9 +71,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 	}
 
 	public void clearCache(String className) {
-		Map<String, Object> localCache = _localCache.get();
-
-		localCache.clear();
+		clearLocalCache();
 
 		PortalCache portalCache = _getPortalCache(className);
 
@@ -83,9 +79,11 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 	}
 
 	public void clearLocalCache() {
-		Map<String, Object> localCache = _localCache.get();
+		if (_localCacheEnabled) {
+			Map<String, Object> localCache = _localCache.get();
 
-		localCache.clear();
+			localCache.clear();
+		}
 	}
 
 	public String getRegistryName() {
@@ -101,13 +99,21 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 			return null;
 		}
 
-		Map<String, Object> localCache = _localCache.get();
+		Object primaryKey = null;
 
-		String localCacheKey = _encodeLocalCacheKey(
-			finderPath.getClassName(), finderPath.getMethodName(),
-			finderPath.getParams(), args);
+		Map<String, Object> localCache = null;
 
-		Object primaryKey = localCache.get(localCacheKey);
+		String localCacheKey = null;
+
+		if (_localCacheEnabled) {
+			localCache = _localCache.get();
+
+			localCacheKey = _encodeLocalCacheKey(
+				finderPath.getClassName(), finderPath.getMethodName(),
+				finderPath.getParams(), args);
+
+			primaryKey = localCache.get(localCacheKey);
+		}
 
 		if (primaryKey == null) {
 			PortalCache portalCache = _getPortalCache(
@@ -119,7 +125,9 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 			primaryKey = _multiVMPool.get(portalCache, cacheKey);
 
 			if (primaryKey != null) {
-				localCache.put(localCacheKey, primaryKey);
+				if (_localCacheEnabled) {
+					localCache.put(localCacheKey, primaryKey);
+				}
 			}
 		}
 
@@ -143,15 +151,17 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 			return;
 		}
 
-		Map<String, Object> localCache = _localCache.get();
-
-		String localCacheKey = _encodeLocalCacheKey(
-			finderPath.getClassName(), finderPath.getMethodName(),
-			finderPath.getParams(), args);
-
 		Object primaryKey = _resultToPrimaryKey(result);
 
-		localCache.put(localCacheKey, primaryKey);
+		if (_localCacheEnabled) {
+			Map<String, Object> localCache = _localCache.get();
+
+			String localCacheKey = _encodeLocalCacheKey(
+				finderPath.getClassName(), finderPath.getMethodName(),
+				finderPath.getParams(), args);
+
+			localCache.put(localCacheKey, primaryKey);
+		}
 
 		PortalCache portalCache = _getPortalCache(finderPath.getClassName());
 
@@ -168,13 +178,15 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 			return;
 		}
 
-		Map<String, Object> localCache = _localCache.get();
+		if (_localCacheEnabled) {
+			Map<String, Object> localCache = _localCache.get();
 
-		String localCacheKey = _encodeLocalCacheKey(
-			finderPath.getClassName(), finderPath.getMethodName(),
-			finderPath.getParams(), args);
+			String localCacheKey = _encodeLocalCacheKey(
+				finderPath.getClassName(), finderPath.getMethodName(),
+				finderPath.getParams(), args);
 
-		localCache.remove(localCacheKey);
+			localCache.remove(localCacheKey);
+		}
 
 		PortalCache portalCache = _getPortalCache(finderPath.getClassName());
 
@@ -324,9 +336,16 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 
 	private static final String _PARAMS_SEPARATOR = "_P_";
 
-	private static ThreadLocal<Map> _localCache = new InitialThreadLocal<Map>(
-		new LRUMap(
-			PropsValues.VALUE_OBJECT_FINDER_THREAD_LOCAL_CACHE_MAX_SIZE));
+	private static ThreadLocal<Map> _localCache;
+	private static boolean _localCacheEnabled;
+
+	static {
+		if (PropsValues.VALUE_OBJECT_FINDER_THREAD_LOCAL_CACHE_MAX_SIZE > 0) {
+			_localCache = new InitialThreadLocal<Map>(new LRUMap(
+				PropsValues.VALUE_OBJECT_FINDER_THREAD_LOCAL_CACHE_MAX_SIZE));
+			_localCacheEnabled = true;
+		}
+	}
 
 	private MultiVMPool _multiVMPool;
 	private Map<String, PortalCache> _portalCaches =

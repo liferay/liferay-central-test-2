@@ -44,25 +44,29 @@ public class PermissionCacheUtil {
 	public static final String CACHE_NAME = PermissionCacheUtil.class.getName();
 
 	public static void clearCache() {
-		Map<String, Object> localCache = _localCache.get();
-
-		localCache.clear();
+		clearLocalCache();
 
 		_cache.removeAll();
 	}
 
 	public static void clearLocalCache() {
-		Map<String, Object> localCache = _localCache.get();
+		if (_localCacheEnabled) {
+			Map<String, Object> localCache = _localCache.get();
 
-		localCache.clear();
+			localCache.clear();
+		}
 	}
 
 	public static PermissionCheckerBag getBag(long userId, long groupId) {
-		Map<String, Object> localCache = _localCache.get();
+		PermissionCheckerBag bag = null;
 
 		String key = _encodeKey(userId, groupId);
 
-		PermissionCheckerBag bag = (PermissionCheckerBag)localCache.get(key);
+		if (_localCacheEnabled) {
+			Map<String, Object> localCache = _localCache.get();
+
+			bag = (PermissionCheckerBag)localCache.get(key);
+		}
 
 		if (bag == null) {
 			bag = (PermissionCheckerBag)MultiVMPoolUtil.get(_cache, key);
@@ -75,11 +79,15 @@ public class PermissionCacheUtil {
 		long userId, long groupId, String name, String primKey,
 		String actionId) {
 
-		Map<String, Object> localCache = _localCache.get();
+		Boolean value = null;
 
 		String key = _encodeKey(userId, groupId, name, primKey, actionId);
 
-		Boolean value = (Boolean)localCache.get(key);
+		if (_localCacheEnabled) {
+			Map<String, Object> localCache = _localCache.get();
+
+			value = (Boolean)localCache.get(key);
+		}
 
 		if (value == null) {
 			value = (Boolean)MultiVMPoolUtil.get(_cache, key);
@@ -92,11 +100,13 @@ public class PermissionCacheUtil {
 		long userId, long groupId, PermissionCheckerBag bag) {
 
 		if (bag != null) {
-			Map<String, Object> localCache = _localCache.get();
-
 			String key = _encodeKey(userId, groupId);
 
-			localCache.put(key, bag);
+			if (_localCacheEnabled) {
+				Map<String, Object> localCache = _localCache.get();
+
+				localCache.put(key, bag);
+			}
 
 			MultiVMPoolUtil.put(_cache, key, bag);
 		}
@@ -109,11 +119,13 @@ public class PermissionCacheUtil {
 		Boolean value) {
 
 		if (value != null) {
-			Map<String, Object> localCache = _localCache.get();
-
 			String key = _encodeKey(userId, groupId, name, primKey, actionId);
 
-			localCache.put(key, value);
+			if (_localCacheEnabled) {
+				Map<String, Object> localCache = _localCache.get();
+
+				localCache.put(key, value);
+			}
 
 			MultiVMPoolUtil.put(_cache, key, value);
 		}
@@ -154,11 +166,18 @@ public class PermissionCacheUtil {
 		return sb.toString();
 	}
 
-	private static ThreadLocal<Map> _localCache = new InitialThreadLocal<Map>(
-		new LRUMap(
-			PropsValues.PERMISSIONS_THREAD_LOCAL_CACHE_MAX_SIZE));
-
 	private static PortalCache _cache = MultiVMPoolUtil.getCache(
 		CACHE_NAME, true);
+
+	private static ThreadLocal<Map> _localCache;
+	private static boolean _localCacheEnabled;
+
+	static {
+		if (PropsValues.PERMISSIONS_THREAD_LOCAL_CACHE_MAX_SIZE > 0) {
+			_localCache = new InitialThreadLocal<Map>(new LRUMap(
+				PropsValues.PERMISSIONS_THREAD_LOCAL_CACHE_MAX_SIZE));
+			_localCacheEnabled = true;
+		}
+	}
 
 }
