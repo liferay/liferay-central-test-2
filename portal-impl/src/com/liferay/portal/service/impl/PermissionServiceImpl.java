@@ -116,12 +116,13 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 	}
 
 	public boolean hasUserPermissions(
-			long userId, long groupId, String actionId, long[] resourceIds,
+			long userId, long groupId, String actionId, String name,
+			long[] resourceIds,
 			PermissionCheckerBag permissionCheckerBag)
 		throws SystemException {
 
 		return permissionLocalService.hasUserPermissions(
-			userId, groupId, actionId, resourceIds, permissionCheckerBag);
+			userId, groupId, actionId, name, resourceIds, permissionCheckerBag);
 	}
 
 	public void setGroupPermissions(

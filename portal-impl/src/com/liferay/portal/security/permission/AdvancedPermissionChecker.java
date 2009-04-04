@@ -518,7 +518,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 		try {
 			return PermissionLocalServiceUtil.hasUserPermissions(
-				defaultUserId, groupId, actionId, resourceIds, bag);
+				defaultUserId, groupId, actionId, name, resourceIds, bag);
 		}
 		catch (Exception e) {
 			return false;
@@ -606,7 +606,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		PermissionCheckerBag bag = getUserBag(user.getUserId(), groupId);
 
 		boolean value = PermissionLocalServiceUtil.hasUserPermissions(
-			user.getUserId(), groupId, actionId, resourceIds, bag);
+			user.getUserId(), groupId, actionId, name, resourceIds, bag);
 
 		logHasUserPermission(groupId, name, primKey, actionId, stopWatch, 3);
 

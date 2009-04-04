@@ -179,7 +179,7 @@ public interface PermissionLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasUserPermissions(long userId, long groupId,
-		java.lang.String actionId, long[] resourceIds,
+		java.lang.String actionId, java.lang.String name, long[] resourceIds,
 		com.liferay.portal.security.permission.PermissionCheckerBag permissionCheckerBag)
 		throws com.liferay.portal.SystemException;
 
