@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.service.base.ResourceCodeLocalServiceBaseImpl;
 
@@ -110,7 +111,9 @@ public class ResourceCodeLocalServiceImpl
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(companyId);
+		sb.append(StringPool.POUND);
 		sb.append(name);
+		sb.append(StringPool.POUND);
 		sb.append(scope);
 
 		return sb.toString();
