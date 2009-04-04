@@ -174,7 +174,7 @@ int organizationIdsPos = ParamUtil.getInteger(request, "organizationIdsPos");
 		<%
 		List permissions = PermissionLocalServiceUtil.getGroupPermissions(organization.getGroup().getGroupId(), resource.getResourceId());
 
-		List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
+		List actions1 = ResourceActionsUtil.getResourceActions(portletResource, modelResource);
 		List actions2 = ResourceActionsUtil.getActions(permissions);
 
 		// Left list

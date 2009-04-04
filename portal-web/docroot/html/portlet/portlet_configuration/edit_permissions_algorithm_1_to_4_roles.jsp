@@ -152,7 +152,7 @@ else if (tabs2.equals("organization-roles")) {
 		<%
 		List permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId(), resource.getResourceId());
 
-		List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
+		List actions1 = ResourceActionsUtil.getResourceActions(portletResource, modelResource);
 		List actions2 = ResourceActionsUtil.getActions(permissions);
 
 		List guestUnsupportedActions = ResourceActionsUtil.getResourceGuestUnsupportedActions(portletResource, modelResource);

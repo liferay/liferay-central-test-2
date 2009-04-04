@@ -98,8 +98,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		List<String> actionIds = null;
 
 		if (portletActions) {
-			actionIds =
-				ResourceActionsUtil.getPortletResourceActions(companyId, name);
+			actionIds = ResourceActionsUtil.getPortletResourceActions(name);
 		}
 		else {
 			actionIds = ResourceActionsUtil.getModelResourceActions(name);

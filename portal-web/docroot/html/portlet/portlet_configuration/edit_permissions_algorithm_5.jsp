@@ -129,7 +129,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 	</c:if>
 
 	<%
-	List<String> actions = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
+	List<String> actions = ResourceActionsUtil.getResourceActions(portletResource, modelResource);
 	List<String> actionsNames = ResourceActionsUtil.getActionsNames(pageContext, actions);
 
 	RoleSearch searchContainer = new RoleSearch(renderRequest, portletURL);

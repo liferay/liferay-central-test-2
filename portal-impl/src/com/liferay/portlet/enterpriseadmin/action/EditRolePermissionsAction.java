@@ -189,15 +189,13 @@ public class EditRolePermissionsAction extends PortletAction {
 		if (Validator.isNotNull(portletResource)) {
 			resourceActionsMap.put(
 				portletResource,
-				ResourceActionsUtil.getResourceActions(
-					themeDisplay.getCompanyId(), portletResource, null));
+				ResourceActionsUtil.getResourceActions(portletResource, null));
 		}
 
 		for (String modelResource : modelResources) {
 			resourceActionsMap.put(
 				modelResource,
-				ResourceActionsUtil.getResourceActions(
-					themeDisplay.getCompanyId(), null, modelResource));
+				ResourceActionsUtil.getResourceActions(null, modelResource));
 		}
 
 		for (Map.Entry<String, List<String>> entry :

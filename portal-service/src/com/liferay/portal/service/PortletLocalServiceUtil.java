@@ -135,6 +135,11 @@ public class PortletLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Portlet getPortletById(
+		java.lang.String portletId) {
+		return getService().getPortletById(portletId);
+	}
+
+	public static com.liferay.portal.model.Portlet getPortletById(
 		long companyId, java.lang.String portletId)
 		throws com.liferay.portal.SystemException {
 		return getService().getPortletById(companyId, portletId);

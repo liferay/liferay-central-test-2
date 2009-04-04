@@ -213,6 +213,12 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		return friendlyURLMappers;
 	}
 
+	public Portlet getPortletById(String portletId) {
+		Map<String, Portlet> portletsPool = _getPortletsPool();
+
+		return portletsPool.get(portletId);
+	}
+
 	public Portlet getPortletById(long companyId, String portletId)
 		throws SystemException {
 

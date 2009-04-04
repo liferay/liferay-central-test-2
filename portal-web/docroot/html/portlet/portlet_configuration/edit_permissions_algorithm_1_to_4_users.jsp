@@ -137,7 +137,7 @@ int userIdsPos = ParamUtil.getInteger(request, "userIdsPos");
 		<%
 		List permissions = PermissionLocalServiceUtil.getUserPermissions(user2.getUserId(), resource.getResourceId());
 
-		List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
+		List actions1 = ResourceActionsUtil.getResourceActions(portletResource, modelResource);
 		List actions2 = ResourceActionsUtil.getActions(permissions);
 
 		String leftTitle = "what-he-can-do";

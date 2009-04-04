@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
@@ -49,7 +50,6 @@ import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.PortletResourceBundles;
 import com.liferay.portlet.expando.model.ExpandoColumn;
-import com.liferay.portlet.expando.model.ExpandoValue;
 import com.liferay.util.UniqueList;
 
 import java.util.ArrayList;
@@ -82,9 +82,9 @@ public class ResourceActionsUtil {
 	};
 
 	public static final String[] PORTAL_MODEL_RESOURCES = {
-		ExpandoColumn.class.getName(), ExpandoValue.class.getName(),
-		Organization.class.getName(), PasswordPolicy.class.getName(),
-		Role.class.getName(), User.class.getName(), UserGroup.class.getName()
+		ExpandoColumn.class.getName(), Organization.class.getName(),
+		PasswordPolicy.class.getName(), Role.class.getName(),
+		User.class.getName(), UserGroup.class.getName()
 	};
 
 	public static String getAction(
@@ -145,6 +145,10 @@ public class ResourceActionsUtil {
 		list.addAll(uniqueList);
 
 		return list;
+	}
+
+	public static List<String> getModelNames() {
+		return _instance._getModelNames();
 	}
 
 	public static List<String> getModelPortletResources(String name) {
@@ -213,11 +217,14 @@ public class ResourceActionsUtil {
 		return _instance._getPortletModelResources(portletName);
 	}
 
-	public static List<String> getPortletResourceActions(
-			long companyId, String name)
+	public static List<String> getPortletNames() {
+		return _instance._getPortletNames();
+	}
+
+	public static List<String> getPortletResourceActions(String name)
 		throws SystemException {
 
-		return _instance._getPortletResourceActions(companyId, name);
+		return _instance._getPortletResourceActions(name);
 	}
 
 	public static List<String> getPortletResourceCommunityDefaultActions(
@@ -245,13 +252,13 @@ public class ResourceActionsUtil {
 	}
 
 	public static List<String> getResourceActions(
-			long companyId, String portletResource, String modelResource)
+			String portletResource, String modelResource)
 		throws SystemException {
 
 		List<String> actions = null;
 
 		if (Validator.isNull(modelResource)) {
-			actions = getPortletResourceActions(companyId, portletResource);
+			actions = getPortletResourceActions(portletResource);
 		}
 		else {
 			actions = getModelResourceActions(modelResource);
@@ -322,6 +329,10 @@ public class ResourceActionsUtil {
 		}
 
 		return roles;
+	}
+
+	public static void init() {
+		_instance._init();
 	}
 
 	public static boolean isOrganizationModelResource(String modelResource) {
@@ -453,6 +464,10 @@ public class ResourceActionsUtil {
 		return actions;
 	}
 
+	private List<String> _getModelNames() {
+		return ListUtil.fromCollection(_modelPortletResources.keySet());
+	}
+
 	private List<String> _getModelPortletResources(String name) {
 		Set<String> resources = _modelPortletResources.get(name);
 
@@ -495,7 +510,11 @@ public class ResourceActionsUtil {
 		}
 	}
 
-	private List<String> _getPortletResourceActions(long companyId, String name)
+	private List<String> _getPortletNames() {
+		return ListUtil.fromCollection(_portletModelResources.keySet());
+	}
+
+	private List<String> _getPortletResourceActions(String name)
 		throws SystemException {
 
 		name = PortletConstants.getRootPortletId(name);
@@ -504,8 +523,7 @@ public class ResourceActionsUtil {
 
 		if (actions.size() == 0) {
 			synchronized (this) {
-				Portlet portlet = PortletLocalServiceUtil.getPortletById(
-					companyId, name);
+				Portlet portlet = PortletLocalServiceUtil.getPortletById(name);
 
 				Map<String, Set<String>> portletModes =
 					portlet.getPortletModes();
@@ -617,6 +635,9 @@ public class ResourceActionsUtil {
 		}
 
 		return actions;
+	}
+
+	private void _init() {
 	}
 
 	private boolean _isOrganizationModelResource(String modelResource) {

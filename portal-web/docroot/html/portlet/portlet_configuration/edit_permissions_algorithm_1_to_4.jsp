@@ -339,7 +339,7 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 			<%
 			List permissions = PermissionLocalServiceUtil.getGroupPermissions(groupId, resource.getResourceId());
 
-			List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
+			List actions1 = ResourceActionsUtil.getResourceActions(portletResource, modelResource);
 			List actions2 = ResourceActionsUtil.getActions(permissions);
 
 			// Left list
@@ -395,7 +395,7 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 
 			List permissions = PermissionLocalServiceUtil.getUserPermissions(guestUser.getUserId(), resource.getResourceId());
 
-			List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
+			List actions1 = ResourceActionsUtil.getResourceActions(portletResource, modelResource);
 			List actions2 = ResourceActionsUtil.getActions(permissions);
 
 			List guestUnsupportedActions = ResourceActionsUtil.getResourceGuestUnsupportedActions(portletResource, modelResource);
@@ -464,7 +464,7 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 					<select name="<portlet:namespace />selectedActionId">
 
 						<%
-						List actions = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
+						List actions = ResourceActionsUtil.getResourceActions(portletResource, modelResource);
 
 						actions = ListUtil.sort(actions, new ActionComparator(company.getCompanyId(), locale));
 

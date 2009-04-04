@@ -75,7 +75,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		validate(companyId, name, false);
+		validate(name, false);
 
 		// Company
 
@@ -300,7 +300,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			stopWatch.start();
 		}
 
-		validate(companyId, name, portletActions);
+		validate(name, portletActions);
 
 		logAddResources(name, primKey, stopWatch, 1);
 
@@ -707,15 +707,13 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 				" takes " + stopWatch.getTime() + " ms");
 	}
 
-	protected void validate(
-			long companyId, String name, boolean portletActions)
+	protected void validate(String name, boolean portletActions)
 		throws PortalException, SystemException {
 
 		List<String> actions = null;
 
 		if (portletActions) {
-			actions = ResourceActionsUtil.getPortletResourceActions(
-				companyId, name);
+			actions = ResourceActionsUtil.getPortletResourceActions(name);
 		}
 		else {
 			actions = ResourceActionsUtil.getModelResourceActions(name);
