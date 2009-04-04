@@ -40,28 +40,41 @@ public class LanguageResources {
 
 	public LanguageResources(MessageResources resources) {
 		_resources = resources;
-		_cache = new ConcurrentHashMap<String, String>(10000);
+		_cache = new ConcurrentHashMap<String, ResourceValue>(10000);
 	}
 
 	public String getMessage(Locale locale, String key) {
 		String cacheKey = _getCacheKey(locale, key);
 
-		String value = _cache.get(cacheKey);
+		ResourceValue resourceValue = _cache.get(cacheKey);
 
-		if (value == null) {
-			value = _resources.getMessage(locale, key);
+		if (resourceValue == null) {
+			String value = _resources.getMessage(locale, key);
+			resourceValue = new ResourceValue(value);
 
-			_cache.put(cacheKey, value);
+			_cache.put(cacheKey, resourceValue);
 		}
 
-		return value;
+		return resourceValue.getValue();
 	}
 
 	private String _getCacheKey(Locale locale, String key) {
 		return String.valueOf(locale) + StringPool.POUND + key;
 	}
 
+	private class ResourceValue {
+		private ResourceValue(String value) {
+			_value = value;
+		}
+
+		public String getValue() {
+			return _value;
+		}
+
+		private String _value;
+	}
+
+	private Map<String, ResourceValue> _cache;
 	private MessageResources _resources;
-	private Map<String, String> _cache;
 
 }
