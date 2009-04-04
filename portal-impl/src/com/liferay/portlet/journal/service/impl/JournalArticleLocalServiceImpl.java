@@ -895,6 +895,15 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
+	public JournalArticle getArticleByUrlTitle(long groupId, String urlTitle)
+		throws PortalException, SystemException {
+
+		JournalArticle article = journalArticlePersistence.findByG_UT(
+			groupId, urlTitle);
+
+		return getArticle(groupId, article.getArticleId());
+	}
+
 	public JournalArticle getArticle(
 			long groupId, String articleId, double version)
 		throws PortalException, SystemException {

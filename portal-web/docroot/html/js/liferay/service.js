@@ -531,6 +531,7 @@ Liferay.Service.registerClass(
 		approveArticle: true,
 		copyArticle: true,
 		getArticle: true,
+		getArticleByUrlTitle: true,
 		deleteArticle: true,
 		expireArticle: true,
 		removeArticleLocale: true,

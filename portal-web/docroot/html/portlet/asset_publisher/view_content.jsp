@@ -49,7 +49,7 @@ try {
 			classPK = entry.getPrimaryKey();
 		}
 		else if (type.equals (AssetPublisherUtil.TYPE_CONTENT)) {
-			JournalArticle article = JournalArticleServiceUtil.getArticle(scopeGroupId, urlTitle);
+			JournalArticle article = JournalArticleServiceUtil.getArticleByUrlTitle(scopeGroupId, urlTitle);
 
 			className = JournalArticle.class.getName();
 			classPK = article.getResourcePrimKey();

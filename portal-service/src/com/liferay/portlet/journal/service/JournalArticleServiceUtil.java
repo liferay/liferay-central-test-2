@@ -128,6 +128,13 @@ public class JournalArticleServiceUtil {
 		return getService().getArticle(groupId, articleId);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalArticle getArticleByUrlTitle(
+		long groupId, java.lang.String urlTitle)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getArticleByUrlTitle(groupId, urlTitle);
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticle getArticle(
 		long groupId, java.lang.String articleId, double version)
 		throws com.liferay.portal.PortalException,
