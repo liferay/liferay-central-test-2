@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.language.LanguageResources;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.PortletCategory;
@@ -374,6 +375,10 @@ public class PortalInstances {
 
 		WebAppPool.put(
 			String.valueOf(companyId), Globals.MESSAGES_KEY, messageResources);
+
+		WebAppPool.put(
+			String.valueOf(companyId), WebKeys.LANGUAGE_RESOURCES,
+			new LanguageResources(messageResources));
 
 		// Process application startup events
 
