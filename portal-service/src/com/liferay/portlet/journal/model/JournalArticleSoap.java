@@ -62,7 +62,6 @@ public class JournalArticleSoap implements Serializable {
 		soapModel.setArticleId(model.getArticleId());
 		soapModel.setVersion(model.getVersion());
 		soapModel.setTitle(model.getTitle());
-		soapModel.setUrlTitle(model.getUrlTitle());
 		soapModel.setDescription(model.getDescription());
 		soapModel.setContent(model.getContent());
 		soapModel.setType(model.getType());
@@ -199,14 +198,6 @@ public class JournalArticleSoap implements Serializable {
 
 	public void setTitle(String title) {
 		_title = title;
-	}
-
-	public String getUrlTitle() {
-		return _urlTitle;
-	}
-
-	public void setUrlTitle(String urlTitle) {
-		_urlTitle = urlTitle;
 	}
 
 	public String getDescription() {
@@ -373,7 +364,6 @@ public class JournalArticleSoap implements Serializable {
 	private String _articleId;
 	private double _version;
 	private String _title;
-	private String _urlTitle;
 	private String _description;
 	private String _content;
 	private String _type;

@@ -1,9 +1,5 @@
 update Group_ set name = classPK where classPK > 0 and name = '';
 
-alter table JournalArticle add urlTitle VARCHAR(150) null;
-
-update JournalArticle set urlTitle = articleId;
-
 alter table MBCategory add threadCount INTEGER;
 alter table MBCategory add messageCount INTEGER;
 

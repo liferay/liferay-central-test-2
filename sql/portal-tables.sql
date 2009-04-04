@@ -443,7 +443,6 @@ create table JournalArticle (
 	articleId VARCHAR(75) null,
 	version DOUBLE,
 	title VARCHAR(100) null,
-	urlTitle VARCHAR(150) null,
 	description STRING null,
 	content TEXT null,
 	type_ VARCHAR(75) null,

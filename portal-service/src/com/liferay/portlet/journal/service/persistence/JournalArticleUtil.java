@@ -462,25 +462,6 @@ public class JournalArticleUtil {
 				   .findByG_T_PrevAndNext(id, groupId, templateId, obc);
 	}
 
-	public static com.liferay.portlet.journal.model.JournalArticle findByG_UT(
-		long groupId, java.lang.String urlTitle)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.journal.NoSuchArticleException {
-		return getPersistence().findByG_UT(groupId, urlTitle);
-	}
-
-	public static com.liferay.portlet.journal.model.JournalArticle fetchByG_UT(
-		long groupId, java.lang.String urlTitle)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByG_UT(groupId, urlTitle);
-	}
-
-	public static com.liferay.portlet.journal.model.JournalArticle fetchByG_UT(
-		long groupId, java.lang.String urlTitle, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByG_UT(groupId, urlTitle, retrieveFromCache);
-	}
-
 	public static com.liferay.portlet.journal.model.JournalArticle findByG_A_V(
 		long groupId, java.lang.String articleId, double version)
 		throws com.liferay.portal.SystemException,
@@ -624,12 +605,6 @@ public class JournalArticleUtil {
 		getPersistence().removeByG_T(groupId, templateId);
 	}
 
-	public static void removeByG_UT(long groupId, java.lang.String urlTitle)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.journal.NoSuchArticleException {
-		getPersistence().removeByG_UT(groupId, urlTitle);
-	}
-
 	public static void removeByG_A_V(long groupId, java.lang.String articleId,
 		double version)
 		throws com.liferay.portal.SystemException,
@@ -689,11 +664,6 @@ public class JournalArticleUtil {
 	public static int countByG_T(long groupId, java.lang.String templateId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByG_T(groupId, templateId);
-	}
-
-	public static int countByG_UT(long groupId, java.lang.String urlTitle)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().countByG_UT(groupId, urlTitle);
 	}
 
 	public static int countByG_A_V(long groupId, java.lang.String articleId,

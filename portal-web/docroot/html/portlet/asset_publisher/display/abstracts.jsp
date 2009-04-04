@@ -198,7 +198,8 @@ else if (className.equals(JournalArticle.class.getName())) {
 		if (Validator.isNull(summary)) {
 			summary = StringUtil.shorten(HtmlUtil.stripHtml(articleDisplay.getContent()), abstractLength);
 		}
-		viewFullContentURL.setParameter("urlTitle", articleDisplay.getUrlTitle());
+
+		viewFullContentURL.setParameter("urlTitle", articleDisplay.getArticleId());
 		viewFullContentURL.setParameter("type", AssetPublisherUtil.TYPE_CONTENT);
 
 		viewURL = viewFullContentURL.toString();

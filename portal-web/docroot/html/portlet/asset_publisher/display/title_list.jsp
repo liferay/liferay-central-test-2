@@ -130,7 +130,7 @@ else if (className.equals(JournalArticle.class.getName())) {
 		PortletURL articleURL = renderResponse.createRenderURL();
 
 		articleURL.setParameter("struts_action", "/asset_publisher/view_content");
-		articleURL.setParameter("urlTitle", articleDisplay.getUrlTitle());
+		articleURL.setParameter("urlTitle", articleDisplay.getArticleId());
 		articleURL.setParameter("type", AssetPublisherUtil.TYPE_CONTENT);
 
 		viewURL = articleURL.toString();

@@ -139,20 +139,6 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 		return journalArticleLocalService.getArticle(groupId, articleId);
 	}
 
-	public JournalArticle getArticleByUrlTitle(long groupId, String urlTitle)
-		throws PortalException, SystemException {
-
-		JournalArticle article =
-			journalArticleLocalService.getArticleByUrlTitle(
-				groupId, urlTitle);
-
-		JournalArticlePermission.check(
-			getPermissionChecker(), groupId, article.getArticleId(),
-			ActionKeys.VIEW);
-
-		return article;
-	}
-
 	public JournalArticle getArticle(
 			long groupId, String articleId, double version)
 		throws PortalException, SystemException {
