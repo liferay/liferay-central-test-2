@@ -465,9 +465,8 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			communityPermissions = new String[0];
 		}
 
-		permissionService.setRolePermissions(
-			role.getRoleId(), groupId, communityPermissions,
-			resource.getResourceId());
+		permissionLocalService.setRolePermissions(
+			role.getRoleId(), communityPermissions, resource.getResourceId());
 
 		role = roleLocalService.getRole(companyId, RoleConstants.GUEST);
 
@@ -475,9 +474,8 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			guestPermissions = new String[0];
 		}
 
-		permissionService.setRolePermissions(
-			role.getRoleId(), groupId, guestPermissions,
-			resource.getResourceId());
+		permissionLocalService.setRolePermissions(
+			role.getRoleId(), guestPermissions, resource.getResourceId());
 	}
 
 	protected void addCommunityPermissions(
