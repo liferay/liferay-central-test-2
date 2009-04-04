@@ -360,9 +360,8 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public boolean hasUserPermissions(
-			long userId, long groupId, String actionId,
-			String name, long[] resourceIds,
-			PermissionCheckerBag permissionCheckerBag)
+			long userId, long groupId, String actionId, String name,
+			long[] resourceIds, PermissionCheckerBag permissionCheckerBag)
 		throws SystemException {
 
 		StopWatch stopWatch = null;
