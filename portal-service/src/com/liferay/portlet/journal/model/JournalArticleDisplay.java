@@ -47,6 +47,8 @@ public interface JournalArticleDisplay extends Serializable {
 
 	public String getTitle();
 
+	public String getUrlTitle();
+
 	public String getDescription();
 
 	public String[] getAvailableLocales();

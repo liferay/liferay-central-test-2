@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -62,6 +63,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextUtil;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.FriendlyURLNormalizer;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -263,6 +265,7 @@ public class JournalArticleLocalServiceImpl
 		article.setArticleId(articleId);
 		article.setVersion(version);
 		article.setTitle(title);
+		article.setUrlTitle(getUniqueUrlTitle(id, groupId, title));
 		article.setDescription(description);
 		article.setContent(content);
 		article.setType(type);
@@ -1216,7 +1219,7 @@ public class JournalArticleLocalServiceImpl
 		return new JournalArticleDisplayImpl(
 			article.getId(), article.getResourcePrimKey(), article.getGroupId(),
 			article.getUserId(), article.getArticleId(), article.getVersion(),
-			article.getTitle(), article.getDescription(),
+			article.getTitle(), article.getUrlTitle(), article.getDescription(),
 			article.getAvailableLocales(), content, article.getType(),
 			article.getStructureId(), templateId, article.isSmallImage(),
 			article.getSmallImageId(), article.getSmallImageURL(),
@@ -2346,6 +2349,68 @@ public class JournalArticleLocalServiceImpl
 		return dateInterval;
 	}
 
+	protected String getUniqueUrlTitle(
+			long id, long groupId, String title)
+		throws SystemException {
+
+		String urlTitle = getUrlTitle(id, title);
+
+		String newUrlTitle = new String(urlTitle);
+
+		for (int i = 1;; i++) {
+			JournalArticle article  = journalArticlePersistence.fetchByG_UT(
+				groupId, newUrlTitle);
+
+			if ((article == null) || (article.getId() == id)) {
+				break;
+			}
+			else {
+				newUrlTitle = urlTitle + StringPool.DASH + i;
+			}
+		}
+
+		return newUrlTitle;
+	}
+
+	protected String getUrlTitle(long id, String title) {
+		String urlTitle = String.valueOf(id);
+
+		title = title.trim().toLowerCase();
+
+		if (Validator.isNull(title) || Validator.isNumber(title) ||
+			title.equals("rss")) {
+
+			return urlTitle;
+		}
+
+		title = FriendlyURLNormalizer.normalize(
+			title, _URL_TITLE_REPLACE_CHARS);
+
+		char[] urlTitleCharArray = title.toCharArray();
+
+		for (int i = 0; i < urlTitleCharArray.length; i++) {
+			char oldChar = urlTitleCharArray[i];
+
+			char newChar = oldChar;
+
+			if ((oldChar == CharPool.DASH) ||
+				(Validator.isChar(oldChar)) || (Validator.isDigit(oldChar))) {
+
+			}
+			else {
+				return urlTitle;
+			}
+
+			if (oldChar != newChar) {
+				urlTitleCharArray[i] = newChar;
+			}
+		}
+
+		urlTitle = new String(urlTitleCharArray);
+
+		return urlTitle;
+	}
+
 	protected void saveImages(
 			boolean smallImage, long smallImageId, File smallFile,
 			byte[] smallBytes)
@@ -2605,6 +2670,10 @@ public class JournalArticleLocalServiceImpl
 
 	private static final String _TOKEN_PAGE_BREAK = PropsUtil.get(
 		PropsKeys.JOURNAL_ARTICLE_TOKEN_PAGE_BREAK);
+
+	private static final char[] _URL_TITLE_REPLACE_CHARS = new char[] {
+		'.', '/'
+	};
 
 	private static Log _log =
 		LogFactoryUtil.getLog(JournalArticleLocalServiceImpl.class);

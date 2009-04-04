@@ -83,6 +83,7 @@ public class JournalArticlePersistenceTest extends BasePersistenceTestCase {
 		newJournalArticle.setArticleId(randomString());
 		newJournalArticle.setVersion(nextDouble());
 		newJournalArticle.setTitle(randomString());
+		newJournalArticle.setUrlTitle(randomString());
 		newJournalArticle.setDescription(randomString());
 		newJournalArticle.setContent(randomString());
 		newJournalArticle.setType(randomString());
@@ -130,6 +131,8 @@ public class JournalArticlePersistenceTest extends BasePersistenceTestCase {
 			newJournalArticle.getVersion());
 		assertEquals(existingJournalArticle.getTitle(),
 			newJournalArticle.getTitle());
+		assertEquals(existingJournalArticle.getUrlTitle(),
+			newJournalArticle.getUrlTitle());
 		assertEquals(existingJournalArticle.getDescription(),
 			newJournalArticle.getDescription());
 		assertEquals(existingJournalArticle.getContent(),
@@ -222,6 +225,7 @@ public class JournalArticlePersistenceTest extends BasePersistenceTestCase {
 		journalArticle.setArticleId(randomString());
 		journalArticle.setVersion(nextDouble());
 		journalArticle.setTitle(randomString());
+		journalArticle.setUrlTitle(randomString());
 		journalArticle.setDescription(randomString());
 		journalArticle.setContent(randomString());
 		journalArticle.setType(randomString());

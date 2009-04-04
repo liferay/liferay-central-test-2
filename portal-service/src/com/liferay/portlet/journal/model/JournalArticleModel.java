@@ -99,6 +99,10 @@ public interface JournalArticleModel extends BaseModel<JournalArticle> {
 
 	public void setTitle(String title);
 
+	public String getUrlTitle();
+
+	public void setUrlTitle(String urlTitle);
+
 	public String getDescription();
 
 	public void setDescription(String description);

@@ -344,7 +344,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 						articlePageURL.setParameter("struts_action", "/asset_publisher/view_content");
 						articlePageURL.setParameter("redirect", pageRedirect);
-						articlePageURL.setParameter("urlTitle", articleDisplay.getArticleId());
+						articlePageURL.setParameter("urlTitle", articleDisplay.getUrlTitle());
 						articlePageURL.setParameter("cur", String.valueOf(cur));
 						%>
 

@@ -85,6 +85,7 @@ public class JournalArticleJSONSerializer {
 		jsonObj.put("articleId", model.getArticleId());
 		jsonObj.put("version", model.getVersion());
 		jsonObj.put("title", model.getTitle());
+		jsonObj.put("urlTitle", model.getUrlTitle());
 		jsonObj.put("description", model.getDescription());
 		jsonObj.put("content", model.getContent());
 		jsonObj.put("type", model.getType());
