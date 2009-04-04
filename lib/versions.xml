@@ -1248,7 +1248,7 @@
 	</library>
 	<library>
 		<file-name>portal/commons-math.jar</file-name>
-		<version>1.1.0</version>
+		<version>1.2.0</version>
 		<project-name>Commons Math</project-name>
 		<project-url>http://commons.apache.org/math</project-url>
 		<licenses>
