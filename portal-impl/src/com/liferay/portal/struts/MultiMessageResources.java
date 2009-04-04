@@ -34,6 +34,9 @@ import java.net.URL;
 import java.util.Enumeration;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import javax.servlet.ServletContext;
 
@@ -52,22 +55,44 @@ public class MultiMessageResources extends PropertyMessageResources {
 	public MultiMessageResources(
 		MessageResourcesFactory factory, String config) {
 
-		super(factory, config);
+		this(factory, config, true);
 	}
 
 	public MultiMessageResources(
 		MessageResourcesFactory factory, String config, boolean returnNull) {
 
 		super(factory, config, returnNull);
+
+		_localeReadWriteLock = new ReentrantReadWriteLock();
+
+		_localeReadLock = _localeReadWriteLock.readLock();
+		_localeWriteLock = _localeReadWriteLock.writeLock();
+
+		_messagesReadWriteLock = new ReentrantReadWriteLock();
+
+		_messagesReadLock = _messagesReadWriteLock.readLock();
+		_messagesWriteLock = _messagesReadWriteLock.writeLock();
 	}
 
 	public Map<String, String> getMessages() {
-		return messages;
+		_messagesReadLock.lock();
+
+		try {
+			return messages;
+		}
+		finally {
+			_messagesReadLock.unlock();
+		}
 	}
 
 	public void putLocale(String localeKey) {
-		synchronized (locales) {
+		_localeWriteLock.lock();
+
+		try {
 			locales.put(localeKey, localeKey);
+		}
+		finally {
+			_localeWriteLock.unlock();
 		}
 	}
 
@@ -78,7 +103,9 @@ public class MultiMessageResources extends PropertyMessageResources {
 			return oldProps;
 		}
 
-		synchronized (messages) {
+		_messagesWriteLock.lock();
+
+		try {
 			Enumeration<Object> names = props.keys();
 
 			while (names.hasMoreElements()) {
@@ -95,6 +122,9 @@ public class MultiMessageResources extends PropertyMessageResources {
 					messageKey(localeKey, key), props.getProperty(key));
 			}
 		}
+		finally {
+			_messagesWriteLock.unlock();
+		}
 
 		return oldProps;
 	}
@@ -104,12 +134,28 @@ public class MultiMessageResources extends PropertyMessageResources {
 	}
 
 	public void loadLocale(String localeKey) {
-		synchronized (locales) {
-			if (locales.get(localeKey) != null) {
+		_localeReadLock.lock();
+
+		try {
+			if (locales.containsKey(localeKey)) {
+				return;
+			}
+		}
+		finally {
+			_localeReadLock.unlock();
+		}
+
+		_localeWriteLock.lock();
+
+		try {
+			if (locales.containsKey(localeKey)) {
 				return;
 			}
 
-			putLocale(localeKey);
+			locales.put(localeKey, localeKey);
+		}
+		finally {
+			_localeWriteLock.unlock();
 		}
 
 		String[] names = StringUtil.split(config.replace('.', '/'));
@@ -185,6 +231,12 @@ public class MultiMessageResources extends PropertyMessageResources {
 	private static Log _log =
 		 LogFactoryUtil.getLog(MultiMessageResources.class);
 
+	private Lock _localeReadLock;
+	private ReadWriteLock _localeReadWriteLock;
+	private Lock _localeWriteLock;
+	private Lock _messagesReadLock;
+	private ReadWriteLock _messagesReadWriteLock;
+	private Lock _messagesWriteLock;
 	private transient ServletContext _servletContext;
 
 }
