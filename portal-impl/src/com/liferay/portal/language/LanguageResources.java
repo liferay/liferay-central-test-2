@@ -50,6 +50,7 @@ public class LanguageResources {
 
 		if (resourceValue == null) {
 			String value = _resources.getMessage(locale, key);
+
 			resourceValue = new ResourceValue(value);
 
 			_cache.put(cacheKey, resourceValue);
@@ -63,6 +64,7 @@ public class LanguageResources {
 	}
 
 	private class ResourceValue {
+
 		private ResourceValue(String value) {
 			_value = value;
 		}
@@ -72,6 +74,7 @@ public class LanguageResources {
 		}
 
 		private String _value;
+
 	}
 
 	private Map<String, ResourceValue> _cache;
