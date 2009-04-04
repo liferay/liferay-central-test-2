@@ -81,6 +81,12 @@ import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
  */
 public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 
+	public void checkPermission(long groupId, String name, long primKey)
+		throws PortalException, SystemException {
+
+		checkPermission(getPermissionChecker(), groupId, name, primKey);
+	}
+
 	public void checkPermission(long groupId, String name, String primKey)
 		throws PortalException, SystemException {
 

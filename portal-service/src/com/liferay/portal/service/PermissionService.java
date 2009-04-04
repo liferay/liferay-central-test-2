@@ -56,6 +56,11 @@ import com.liferay.portal.kernel.annotation.Transactional;
 	PortalException.class, SystemException.class})
 public interface PermissionService {
 	public void checkPermission(long groupId, java.lang.String name,
+		long primKey)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void checkPermission(long groupId, java.lang.String name,
 		java.lang.String primKey)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

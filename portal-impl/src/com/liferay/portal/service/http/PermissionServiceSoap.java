@@ -81,6 +81,18 @@ import java.rmi.RemoteException;
  */
 public class PermissionServiceSoap {
 	public static void checkPermission(long groupId, java.lang.String name,
+		long primKey) throws RemoteException {
+		try {
+			PermissionServiceUtil.checkPermission(groupId, name, primKey);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void checkPermission(long groupId, java.lang.String name,
 		java.lang.String primKey) throws RemoteException {
 		try {
 			PermissionServiceUtil.checkPermission(groupId, name, primKey);
