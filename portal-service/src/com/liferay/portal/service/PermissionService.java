@@ -55,6 +55,10 @@ import com.liferay.portal.kernel.annotation.Transactional;
 @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor =  {
 	PortalException.class, SystemException.class})
 public interface PermissionService {
+	public void checkPermission(long groupId, long resourceId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public void checkPermission(long groupId, java.lang.String name,
 		long primKey)
 		throws com.liferay.portal.PortalException,

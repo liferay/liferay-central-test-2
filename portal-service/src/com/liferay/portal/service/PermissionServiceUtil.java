@@ -45,6 +45,12 @@ package com.liferay.portal.service;
  *
  */
 public class PermissionServiceUtil {
+	public static void checkPermission(long groupId, long resourceId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().checkPermission(groupId, resourceId);
+	}
+
 	public static void checkPermission(long groupId, java.lang.String name,
 		long primKey)
 		throws com.liferay.portal.PortalException,

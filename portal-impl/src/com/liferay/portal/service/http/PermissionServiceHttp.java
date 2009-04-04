@@ -72,6 +72,40 @@ import com.liferay.portal.service.PermissionServiceUtil;
  */
 public class PermissionServiceHttp {
 	public static void checkPermission(HttpPrincipal httpPrincipal,
+		long groupId, long resourceId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new LongWrapper(resourceId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
+					"checkPermission", new Object[] { paramObj0, paramObj1 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static void checkPermission(HttpPrincipal httpPrincipal,
 		long groupId, java.lang.String name, long primKey)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
