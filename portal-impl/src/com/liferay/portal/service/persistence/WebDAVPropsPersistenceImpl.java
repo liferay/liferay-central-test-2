@@ -746,8 +746,12 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portal.service.persistence.ReleasePersistence releasePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceActionPersistence.impl")
+	protected com.liferay.portal.service.persistence.ResourceActionPersistence resourceActionPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceCodePersistence.impl")
 	protected com.liferay.portal.service.persistence.ResourceCodePersistence resourceCodePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePermissionPersistence.impl")
+	protected com.liferay.portal.service.persistence.ResourcePermissionPersistence resourcePermissionPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.RolePersistence.impl")
 	protected com.liferay.portal.service.persistence.RolePersistence rolePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ServiceComponentPersistence.impl")

@@ -181,7 +181,8 @@ public interface PermissionLocalService {
 	public boolean hasUserPermissions(long userId, long groupId,
 		java.lang.String actionId, java.lang.String name, long[] resourceIds,
 		com.liferay.portal.security.permission.PermissionCheckerBag permissionCheckerBag)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void setGroupPermissions(long groupId, java.lang.String[] actionIds,
 		long resourceId)

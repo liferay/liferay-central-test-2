@@ -78,8 +78,11 @@ import com.liferay.portal.service.PortletService;
 import com.liferay.portal.service.QuartzLocalService;
 import com.liferay.portal.service.RegionService;
 import com.liferay.portal.service.ReleaseLocalService;
+import com.liferay.portal.service.ResourceActionLocalService;
 import com.liferay.portal.service.ResourceCodeLocalService;
 import com.liferay.portal.service.ResourceLocalService;
+import com.liferay.portal.service.ResourcePermissionLocalService;
+import com.liferay.portal.service.ResourcePermissionService;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.RoleLocalService;
 import com.liferay.portal.service.RoleService;
@@ -136,8 +139,10 @@ import com.liferay.portal.service.persistence.PortletPreferencesFinder;
 import com.liferay.portal.service.persistence.PortletPreferencesPersistence;
 import com.liferay.portal.service.persistence.RegionPersistence;
 import com.liferay.portal.service.persistence.ReleasePersistence;
+import com.liferay.portal.service.persistence.ResourceActionPersistence;
 import com.liferay.portal.service.persistence.ResourceCodePersistence;
 import com.liferay.portal.service.persistence.ResourceFinder;
+import com.liferay.portal.service.persistence.ResourcePermissionPersistence;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.RoleFinder;
 import com.liferay.portal.service.persistence.RolePersistence;
@@ -961,6 +966,24 @@ public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService
 		this.resourceFinder = resourceFinder;
 	}
 
+	public ResourceActionLocalService getResourceActionLocalService() {
+		return resourceActionLocalService;
+	}
+
+	public void setResourceActionLocalService(
+		ResourceActionLocalService resourceActionLocalService) {
+		this.resourceActionLocalService = resourceActionLocalService;
+	}
+
+	public ResourceActionPersistence getResourceActionPersistence() {
+		return resourceActionPersistence;
+	}
+
+	public void setResourceActionPersistence(
+		ResourceActionPersistence resourceActionPersistence) {
+		this.resourceActionPersistence = resourceActionPersistence;
+	}
+
 	public ResourceCodeLocalService getResourceCodeLocalService() {
 		return resourceCodeLocalService;
 	}
@@ -977,6 +1000,33 @@ public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService
 	public void setResourceCodePersistence(
 		ResourceCodePersistence resourceCodePersistence) {
 		this.resourceCodePersistence = resourceCodePersistence;
+	}
+
+	public ResourcePermissionLocalService getResourcePermissionLocalService() {
+		return resourcePermissionLocalService;
+	}
+
+	public void setResourcePermissionLocalService(
+		ResourcePermissionLocalService resourcePermissionLocalService) {
+		this.resourcePermissionLocalService = resourcePermissionLocalService;
+	}
+
+	public ResourcePermissionService getResourcePermissionService() {
+		return resourcePermissionService;
+	}
+
+	public void setResourcePermissionService(
+		ResourcePermissionService resourcePermissionService) {
+		this.resourcePermissionService = resourcePermissionService;
+	}
+
+	public ResourcePermissionPersistence getResourcePermissionPersistence() {
+		return resourcePermissionPersistence;
+	}
+
+	public void setResourcePermissionPersistence(
+		ResourcePermissionPersistence resourcePermissionPersistence) {
+		this.resourcePermissionPersistence = resourcePermissionPersistence;
 	}
 
 	public RoleLocalService getRoleLocalService() {
@@ -1460,10 +1510,20 @@ public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService
 	protected ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceFinder.impl")
 	protected ResourceFinder resourceFinder;
+	@BeanReference(name = "com.liferay.portal.service.ResourceActionLocalService.impl")
+	protected ResourceActionLocalService resourceActionLocalService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceActionPersistence.impl")
+	protected ResourceActionPersistence resourceActionPersistence;
 	@BeanReference(name = "com.liferay.portal.service.ResourceCodeLocalService.impl")
 	protected ResourceCodeLocalService resourceCodeLocalService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceCodePersistence.impl")
 	protected ResourceCodePersistence resourceCodePersistence;
+	@BeanReference(name = "com.liferay.portal.service.ResourcePermissionLocalService.impl")
+	protected ResourcePermissionLocalService resourcePermissionLocalService;
+	@BeanReference(name = "com.liferay.portal.service.ResourcePermissionService.impl")
+	protected ResourcePermissionService resourcePermissionService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePermissionPersistence.impl")
+	protected ResourcePermissionPersistence resourcePermissionPersistence;
 	@BeanReference(name = "com.liferay.portal.service.RoleLocalService.impl")
 	protected RoleLocalService roleLocalService;
 	@BeanReference(name = "com.liferay.portal.service.RoleService.impl")

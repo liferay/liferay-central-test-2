@@ -277,6 +277,18 @@
 		<property name="service" ref="com.liferay.portal.service.ResourceService.impl" />
 		<property name="serviceInterface" value="com.liferay.portal.service.ResourceService" />
 	</bean>
+	<bean name="/com_liferay_portal_service_spring_ResourcePermissionService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.ResourcePermissionService.impl" />
+		<property name="serviceInterface" value="com.liferay.portal.service.ResourcePermissionService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_ResourcePermissionService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.ResourcePermissionService.impl" />
+		<property name="serviceInterface" value="com.liferay.portal.service.ResourcePermissionService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_ResourcePermissionService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.ResourcePermissionService.impl" />
+		<property name="serviceInterface" value="com.liferay.portal.service.ResourcePermissionService" />
+	</bean>
 	<bean name="/com_liferay_portal_service_spring_RoleService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portal.service.RoleService.impl" />
 		<property name="serviceInterface" value="com.liferay.portal.service.RoleService" />

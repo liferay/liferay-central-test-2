@@ -243,6 +243,16 @@ Liferay.Service.registerClass(
 );
 
 Liferay.Service.registerClass(
+	Liferay.Service.Portal, "ResourcePermission",
+	{
+		setResourcePermission: true,
+		setResourcePermissions: true,
+		unsetResourcePermission: true,
+		unsetResourcePermissions: true
+	}
+);
+
+Liferay.Service.registerClass(
 	Liferay.Service.Portal, "Role",
 	{
 		addRole: true,

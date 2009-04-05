@@ -325,9 +325,16 @@ create index IX_2D9A426F on Region (active_);
 create index IX_16D87CA7 on Region (countryId);
 create index IX_11FB3E42 on Region (countryId, active_);
 
+create index IX_81F2DB09 on ResourceAction (name);
+create unique index IX_EDB9986E on ResourceAction (name, actionId);
+
 create index IX_717FDD47 on ResourceCode (companyId);
 create unique index IX_A32C097E on ResourceCode (companyId, name, scope);
 create index IX_AACAFF40 on ResourceCode (name);
+
+create index IX_70E202A0 on ResourcePermission (resourceId);
+create unique index IX_CC410205 on ResourcePermission (resourceId, roleId);
+create index IX_A37A0588 on ResourcePermission (roleId);
 
 create index IX_2578FBD3 on Resource_ (codeId);
 create unique index IX_67DE7856 on Resource_ (codeId, primKey);

@@ -653,6 +653,20 @@
 	<bean id="com.liferay.portal.service.persistence.ResourceFinderUtil" class="com.liferay.portal.service.persistence.ResourceFinderUtil">
 		<property name="finder" ref="com.liferay.portal.service.persistence.ResourceFinder.impl" />
 	</bean>
+	<bean id="com.liferay.portal.service.ResourceActionLocalService.impl" class="com.liferay.portal.service.impl.ResourceActionLocalServiceImpl" />
+	<bean id="com.liferay.portal.service.ResourceActionLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portal.service.ResourceActionLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.ResourceActionLocalServiceFactory" class="com.liferay.portal.service.ResourceActionLocalServiceFactory">
+		<property name="service" ref="com.liferay.portal.service.ResourceActionLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.ResourceActionLocalServiceUtil" class="com.liferay.portal.service.ResourceActionLocalServiceUtil">
+		<property name="service" ref="com.liferay.portal.service.ResourceActionLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.ResourceActionPersistence.impl" class="com.liferay.portal.service.persistence.ResourceActionPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portal.service.persistence.ResourceActionUtil" class="com.liferay.portal.service.persistence.ResourceActionUtil">
+		<property name="persistence" ref="com.liferay.portal.service.persistence.ResourceActionPersistence.impl" />
+	</bean>
 	<bean id="com.liferay.portal.service.ResourceCodeLocalService.impl" class="com.liferay.portal.service.impl.ResourceCodeLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.ResourceCodeLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.liferay.portal.service.ResourceCodeLocalService.impl" />
@@ -666,6 +680,30 @@
 	<bean id="com.liferay.portal.service.persistence.ResourceCodePersistence.impl" class="com.liferay.portal.service.persistence.ResourceCodePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.ResourceCodeUtil" class="com.liferay.portal.service.persistence.ResourceCodeUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.ResourceCodePersistence.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.ResourcePermissionLocalService.impl" class="com.liferay.portal.service.impl.ResourcePermissionLocalServiceImpl" />
+	<bean id="com.liferay.portal.service.ResourcePermissionLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portal.service.ResourcePermissionLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.ResourcePermissionLocalServiceFactory" class="com.liferay.portal.service.ResourcePermissionLocalServiceFactory">
+		<property name="service" ref="com.liferay.portal.service.ResourcePermissionLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.ResourcePermissionLocalServiceUtil" class="com.liferay.portal.service.ResourcePermissionLocalServiceUtil">
+		<property name="service" ref="com.liferay.portal.service.ResourcePermissionLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.ResourcePermissionService.impl" class="com.liferay.portal.service.impl.ResourcePermissionServiceImpl" />
+	<bean id="com.liferay.portal.service.ResourcePermissionService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portal.service.ResourcePermissionService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.ResourcePermissionServiceFactory" class="com.liferay.portal.service.ResourcePermissionServiceFactory">
+		<property name="service" ref="com.liferay.portal.service.ResourcePermissionService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.ResourcePermissionServiceUtil" class="com.liferay.portal.service.ResourcePermissionServiceUtil">
+		<property name="service" ref="com.liferay.portal.service.ResourcePermissionService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.ResourcePermissionPersistence.impl" class="com.liferay.portal.service.persistence.ResourcePermissionPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portal.service.persistence.ResourcePermissionUtil" class="com.liferay.portal.service.persistence.ResourcePermissionUtil">
+		<property name="persistence" ref="com.liferay.portal.service.persistence.ResourcePermissionPersistence.impl" />
 	</bean>
 	<bean id="com.liferay.portal.service.RoleLocalService.impl" class="com.liferay.portal.service.impl.RoleLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.RoleLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">

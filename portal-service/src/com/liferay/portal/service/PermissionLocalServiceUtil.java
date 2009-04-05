@@ -223,7 +223,8 @@ public class PermissionLocalServiceUtil {
 	public static boolean hasUserPermissions(long userId, long groupId,
 		java.lang.String actionId, java.lang.String name, long[] resourceIds,
 		com.liferay.portal.security.permission.PermissionCheckerBag permissionCheckerBag)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		return getService()
 				   .hasUserPermissions(userId, groupId, actionId, name,
 			resourceIds, permissionCheckerBag);

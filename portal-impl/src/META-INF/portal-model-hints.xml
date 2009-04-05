@@ -446,6 +446,12 @@
 			<hint name="max-length">255</hint>
 		</field>
 	</model>
+	<model name="com.liferay.portal.model.ResourceAction">
+		<field name="resourceActionId" type="long" />
+		<field name="name" type="String" />
+		<field name="actionId" type="String" />
+		<field name="bitwiseValue" type="long" />
+	</model>
 	<model name="com.liferay.portal.model.ResourceCode">
 		<field name="codeId" type="long" />
 		<field name="companyId" type="long" />
@@ -453,6 +459,12 @@
 			<hint name="max-length">255</hint>
 		</field>
 		<field name="scope" type="int" />
+	</model>
+	<model name="com.liferay.portal.model.ResourcePermission">
+		<field name="resourcePermissionId" type="long" />
+		<field name="resourceId" type="long" />
+		<field name="roleId" type="long" />
+		<field name="actionIds" type="long" />
 	</model>
 	<model name="com.liferay.portal.model.Role">
 		<field name="roleId" type="long" />
