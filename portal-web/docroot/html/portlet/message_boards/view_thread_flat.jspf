@@ -28,20 +28,24 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setParameter("struts_action", "/message_boards/view_message");
 portletURL.setParameter("messageId", String.valueOf(message.getMessageId()));
 
-int delta = 10;
+SearchContainer searchContainer = null;
 
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, delta, portletURL, null, null);
+if (threadView.equals(MBThreadImpl.THREAD_VIEW_FLAT)) {
+	int delta = 10;
 
-int total = MBMessageLocalServiceUtil.getThreadMessagesCount(message.getThreadId());
+	searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, delta, portletURL, null, null);
 
-searchContainer.setTotal(total);
+	int total = MBMessageLocalServiceUtil.getThreadMessagesCount(message.getThreadId());
 
-messages = MBMessageLocalServiceUtil.getThreadMessages(message.getThreadId(), searchContainer.getStart(), searchContainer.getEnd());
+	searchContainer.setTotal(total);
 
-searchContainer.setResults(messages);
+	messages = MBMessageLocalServiceUtil.getThreadMessages(message.getThreadId(), searchContainer.getStart(), searchContainer.getEnd());
+
+	searchContainer.setResults(messages);
+}
 %>
 
-<c:if test="<%= total > delta %>">
+<c:if test="<%= threadView.equals(MBThreadImpl.THREAD_VIEW_FLAT) && (searchContainer.getTotal() > searchContainer.getDelta()) %>">
 	<div class="taglib-search-iterator-page-iterator-top">
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</div>
@@ -70,7 +74,7 @@ for (int i = 0; i < messages.size(); i++) {
 }
 %>
 
-<c:if test="<%= total > delta %>">
+<c:if test="<%= threadView.equals(MBThreadImpl.THREAD_VIEW_FLAT) && (searchContainer.getTotal() > searchContainer.getDelta()) %>">
 	<div class="taglib-search-iterator-page-iterator-bottom">
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</div>
