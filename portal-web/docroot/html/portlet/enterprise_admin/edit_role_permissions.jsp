@@ -311,7 +311,7 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 			String actionId = permissionDisplay.getActionId();
 			String actionLabel = permissionDisplay.getActionLabel();
 
-			ResultRow row = new ResultRow(new Object[]{permission, role}, actionId, i);
+			ResultRow row = new ResultRow(new Object[] {permission, role}, actionId, i);
 
 			boolean hasCompanyScope = (role.getType() == RoleConstants.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_COMPANY, actionId);
 			boolean hasGroupTemplateScope = ((role.getType() == RoleConstants.TYPE_COMMUNITY) || (role.getType() == RoleConstants.TYPE_ORGANIZATION)) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_GROUP_TEMPLATE, actionId);
