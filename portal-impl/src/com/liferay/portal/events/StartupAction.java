@@ -160,7 +160,13 @@ public class StartupAction extends SimpleAction {
 
 		// Update release
 
-		ReleaseLocalServiceUtil.updateRelease(StartupHelperUtil.isVerified());
+		boolean verified = StartupHelperUtil.isVerified();
+
+		if (release.isVerified()) {
+			verified = true;
+		}
+
+		ReleaseLocalServiceUtil.updateRelease(verified);
 
 		// Enable database caching after verify
 
