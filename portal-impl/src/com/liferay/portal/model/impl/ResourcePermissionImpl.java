@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
@@ -20,15 +19,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/portlet_configuration/init.jsp" %>
+package com.liferay.portal.model.impl;
 
-<c:choose>
-	<c:when test="<%= (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) || (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) %>">
-		<liferay-util:include page="/html/portlet/portlet_configuration/edit_permissions_algorithm_5_to_6.jsp" />
-	</c:when>
-	<c:otherwise>
-		<liferay-util:include page="/html/portlet/portlet_configuration/edit_permissions_algorithm_1_to_4.jsp" />
-	</c:otherwise>
-</c:choose>
+import com.liferay.portal.model.ResourcePermission;
+
+/**
+ * <a href="ResourcePermissionImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class ResourcePermissionImpl
+	extends ResourcePermissionModelImpl implements ResourcePermission {
+
+	public ResourcePermissionImpl() {
+	}
+
+}

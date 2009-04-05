@@ -165,9 +165,16 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 
 		// Actions
 
-		List permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId(), resource.getResourceId());
+		List currentActions = null;
 
-		List currentActions = ResourceActionsUtil.getActions(permissions);
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+			currentActions = ResourcePermissionLocalServiceUtil.getAvailableResourcePermissionActionIds(resource.getResourceId(), role.getRoleId(), selResource, actions);
+		}
+		else {
+			List permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId(), resource.getResourceId());
+
+			currentActions = ResourceActionsUtil.getActions(permissions);
+		}
 
 		List guestUnsupportedActions = ResourceActionsUtil.getResourceGuestUnsupportedActions(portletResource, modelResource);
 

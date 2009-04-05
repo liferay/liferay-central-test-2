@@ -96,7 +96,8 @@ public class UserPermissionImpl implements UserPermission {
 		PermissionChecker permissionChecker, long userId,
 		long[] organizationIds, String actionId) {
 
-		if (((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) &&
+		if (((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5 ||
+			  PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) &&
 			 (permissionChecker.hasOwnerPermission(
 				permissionChecker.getCompanyId(), User.class.getName(), userId,
 				userId, actionId))) ||

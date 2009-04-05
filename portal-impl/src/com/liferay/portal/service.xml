@@ -1189,6 +1189,39 @@
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
+	<entity name="ResourceAction" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="resourceActionId" type="long" primary="true" />
+
+		<!-- Other fields -->
+
+		<column name="name" type="String" />
+		<column name="actionId" type="String" />
+		<column name="bitwiseValue" type="long" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="name" />
+			<order-column name="bitwiseValue" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Name" return-type="Collection">
+			<finder-column name="name" />
+		</finder>
+		<finder name="N_A" return-type="ResourceAction" unique="true">
+			<finder-column name="name" />
+			<finder-column name="actionId" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+	</entity>
 	<entity name="ResourceCode" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
@@ -1216,6 +1249,35 @@
 			<finder-column name="companyId" />
 			<finder-column name="name" />
 			<finder-column name="scope" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+	</entity>
+	<entity name="ResourcePermission" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="resourcePermissionId" type="long" primary="true" />
+
+		<!-- Other fields -->
+
+		<column name="resourceId" type="long" />
+		<column name="roleId" type="long" />
+		<column name="actionIds" type="long" />
+
+		<!-- Finder methods -->
+
+		<finder name="ResourceId" return-type="Collection">
+			<finder-column name="resourceId" />
+		</finder>
+		<finder name="RoleId" return-type="Collection">
+			<finder-column name="roleId" />
+		</finder>
+		<finder name="R_R" return-type="ResourcePermission" unique="true">
+			<finder-column name="resourceId" />
+			<finder-column name="roleId" />
 		</finder>
 
 		<!-- References -->

@@ -39,6 +39,7 @@ import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.PermissionServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.service.ResourcePermissionServiceUtil;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsValues;
@@ -244,14 +245,17 @@ public class EditPermissionsAction extends EditConfigurationAction {
 		throws Exception {
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
-			updateRolePermissions5(actionRequest);
+			updateRolePermissions_5(actionRequest);
+		}
+		else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+			updateRolePermissions_6(actionRequest);
 		}
 		else {
-			updateRolePermissions1to4(actionRequest);
+			updateRolePermissions_1to4(actionRequest);
 		}
 	}
 
-	protected void updateRolePermissions1to4(ActionRequest actionRequest)
+	protected void updateRolePermissions_1to4(ActionRequest actionRequest)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
@@ -266,7 +270,7 @@ public class EditPermissionsAction extends EditConfigurationAction {
 			roleId, themeDisplay.getScopeGroupId(), actionIds, resourceId);
 	}
 
-	protected void updateRolePermissions5(ActionRequest actionRequest)
+	protected void updateRolePermissions_5(ActionRequest actionRequest)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
@@ -274,9 +278,9 @@ public class EditPermissionsAction extends EditConfigurationAction {
 
 		Layout layout = themeDisplay.getLayout();
 
-		long resourceId = ParamUtil.getLong(actionRequest, "resourceId");
 		String modelResource = ParamUtil.getString(
 			actionRequest, "modelResource");
+		long resourceId = ParamUtil.getLong(actionRequest, "resourceId");
 
 		List<Role> roles = ResourceActionsUtil.getRoles(
 			layout.getGroup(), modelResource);
@@ -285,6 +289,39 @@ public class EditPermissionsAction extends EditConfigurationAction {
 			String[] actionIds = getActionIds(actionRequest, role.getRoleId());
 
 			PermissionServiceUtil.setRolePermissions(
+				role.getRoleId(), themeDisplay.getScopeGroupId(), actionIds,
+				resourceId);
+		}
+	}
+
+	protected void updateRolePermissions_6(ActionRequest actionRequest)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		Layout layout = themeDisplay.getLayout();
+
+		String portletResource = ParamUtil.getString(
+			actionRequest, "portletResource");
+		String modelResource = ParamUtil.getString(
+			actionRequest, "modelResource");
+
+		String selResource = portletResource;
+
+		if (Validator.isNotNull(modelResource)) {
+			selResource = modelResource;
+		}
+
+		long resourceId = ParamUtil.getLong(actionRequest, "resourceId");
+
+		List<Role> roles = ResourceActionsUtil.getRoles(
+			layout.getGroup(), modelResource);
+
+		for (Role role : roles) {
+			String[] actionIds = getActionIds(actionRequest, role.getRoleId());
+
+			ResourcePermissionServiceUtil.setResourcePermissions(
 				role.getRoleId(), themeDisplay.getScopeGroupId(), actionIds,
 				resourceId);
 		}

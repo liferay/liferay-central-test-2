@@ -119,7 +119,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 			long userId, long groupId, String actionId, String name,
 			long[] resourceIds,
 			PermissionCheckerBag permissionCheckerBag)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		return permissionLocalService.hasUserPermissions(
 			userId, groupId, actionId, name, resourceIds, permissionCheckerBag);

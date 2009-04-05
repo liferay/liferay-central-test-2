@@ -80,9 +80,16 @@ for (int i = 0; i < curActions.size(); i++) {
 		hasGroupScope = (scopeParam == ResourceConstants.SCOPE_GROUP);
 	}
 	else {
-		hasCompanyScope = (role.getType() == RoleConstants.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), curResource, ResourceConstants.SCOPE_COMPANY, actionId);
-		hasGroupTemplateScope = ((role.getType() == RoleConstants.TYPE_COMMUNITY) || (role.getType() == RoleConstants.TYPE_ORGANIZATION)) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), curResource, ResourceConstants.SCOPE_GROUP_TEMPLATE, actionId);
-		hasGroupScope = (role.getType() == RoleConstants.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), curResource, ResourceConstants.SCOPE_GROUP, actionId);
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+			hasCompanyScope = (role.getType() == RoleConstants.TYPE_REGULAR) && ResourcePermissionLocalServiceUtil.hasScopeResourcePermission(role.getRoleId(), company.getCompanyId(), curResource, ResourceConstants.SCOPE_COMPANY, actionId);
+			hasGroupTemplateScope = ((role.getType() == RoleConstants.TYPE_COMMUNITY) || (role.getType() == RoleConstants.TYPE_ORGANIZATION)) && ResourcePermissionLocalServiceUtil.hasScopeResourcePermission(role.getRoleId(), company.getCompanyId(), curResource, ResourceConstants.SCOPE_GROUP_TEMPLATE, actionId);
+			hasGroupScope = (role.getType() == RoleConstants.TYPE_REGULAR) && ResourcePermissionLocalServiceUtil.hasScopeResourcePermission(role.getRoleId(), company.getCompanyId(), curResource, ResourceConstants.SCOPE_GROUP, actionId);
+		}
+		else {
+			hasCompanyScope = (role.getType() == RoleConstants.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), curResource, ResourceConstants.SCOPE_COMPANY, actionId);
+			hasGroupTemplateScope = ((role.getType() == RoleConstants.TYPE_COMMUNITY) || (role.getType() == RoleConstants.TYPE_ORGANIZATION)) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), curResource, ResourceConstants.SCOPE_GROUP_TEMPLATE, actionId);
+			hasGroupScope = (role.getType() == RoleConstants.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), curResource, ResourceConstants.SCOPE_GROUP, actionId);
+		}
 	}
 %>
 

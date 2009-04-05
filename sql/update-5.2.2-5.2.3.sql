@@ -9,6 +9,20 @@ alter table MBThread add groupId LONG;
 
 update Region set regionCode = 'AB' where countryId = 1 and name = 'Alberta';
 
+create table ResourceAction (
+	resourceActionId LONG not null primary key,
+	name VARCHAR(75) null,
+	actionId VARCHAR(75) null,
+	bitwiseValue LONG
+);
+
+create table ResourcePermission (
+	resourcePermissionId LONG not null primary key,
+	resourceId LONG,
+	roleId LONG,
+	actionIds LONG
+);
+
 create table Shard (
 	shardId LONG not null primary key,
 	classNameId LONG,

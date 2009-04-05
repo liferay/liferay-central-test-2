@@ -946,11 +946,25 @@ create table Resource_ (
 	primKey VARCHAR(255) null
 );
 
+create table ResourceAction (
+	resourceActionId LONG not null primary key,
+	name VARCHAR(75) null,
+	actionId VARCHAR(75) null,
+	bitwiseValue LONG
+);
+
 create table ResourceCode (
 	codeId LONG not null primary key,
 	companyId LONG,
 	name VARCHAR(255) null,
 	scope INTEGER
+);
+
+create table ResourcePermission (
+	resourcePermissionId LONG not null primary key,
+	resourceId LONG,
+	roleId LONG,
+	actionIds LONG
 );
 
 create table Role_ (

@@ -43,8 +43,11 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.scheduler.SchedulerEngineProxy;
 import com.liferay.portal.search.lucene.LuceneUtil;
+import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.ReleaseLocalServiceUtil;
+import com.liferay.portal.service.ResourceActionLocalServiceUtil;
+import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
 
 /**
  * <a href="StartupAction.java.html"><b><i>View Source</i></b></a>
@@ -115,6 +118,16 @@ public class StartupAction extends SimpleAction {
 		// Class names
 
 		ClassNameLocalServiceUtil.checkClassNames();
+
+		// Resource actions
+
+		ResourceActionsUtil.init();
+
+		ResourceActionLocalServiceUtil.checkResourceActions();
+
+		// Resource codes
+
+		ResourceCodeLocalServiceUtil.checkResourceCodes();
 
 		// Delete temporary images
 

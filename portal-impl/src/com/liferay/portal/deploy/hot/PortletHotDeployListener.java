@@ -61,6 +61,8 @@ import com.liferay.portal.model.PortletURLListener;
 import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.service.ResourceActionLocalServiceUtil;
+import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsValues;
@@ -235,13 +237,12 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		_portletAppInitialized = false;
 		_strutsBridges = false;
 
-		Iterator<Portlet> portletsItr = portlets.iterator();
+		Iterator<Portlet> itr = portlets.iterator();
 
-		while (portletsItr.hasNext()) {
-			Portlet portlet = portletsItr.next();
+		while (itr.hasNext()) {
+			Portlet portlet = itr.next();
 
-			initPortlet(
-				portlet, servletContext, portletClassLoader, portletsItr);
+			initPortlet(portlet, servletContext, portletClassLoader, itr);
 		}
 
 		// Struts bridges
@@ -286,6 +287,43 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		// Portlet properties
 
 		processPortletProperties(servletContextName, portletClassLoader);
+
+		// Resource actions and codes
+
+		itr = portlets.iterator();
+
+		while (itr.hasNext()) {
+			Portlet portlet = itr.next();
+
+			List<String> modelNames =
+				ResourceActionsUtil.getPortletModelResources(
+					portlet.getPortletId());
+
+			for (long companyId : companyIds) {
+				ResourceCodeLocalServiceUtil.checkResourceCodes(
+					companyId, portlet.getPortletId());
+
+				for (String modelName : modelNames) {
+					ResourceCodeLocalServiceUtil.checkResourceCodes(
+						companyId, modelName);
+				}
+			}
+
+			List<String> portletActions =
+				ResourceActionsUtil.getPortletResourceActions(
+					portlet.getPortletId());
+
+			ResourceActionLocalServiceUtil.checkResourceActions(
+				portlet.getPortletId(), portletActions);
+
+			for (String modelName : modelNames) {
+				List<String> modelActions =
+					ResourceActionsUtil.getModelResourceActions(modelName);
+
+				ResourceActionLocalServiceUtil.checkResourceActions(
+					modelName, modelActions);
+			}
+		}
 
 		// Variables
 

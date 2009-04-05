@@ -40,9 +40,11 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.security.permission.comparator.ActionComparator;
 import com.liferay.portal.service.PermissionServiceUtil;
+import com.liferay.portal.service.ResourcePermissionServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 
 import java.util.HashMap;
@@ -132,6 +134,8 @@ public class EditRolePermissionsAction extends PortletAction {
 
 		long roleId = ParamUtil.getLong(actionRequest, "roleId");
 		long permissionId = ParamUtil.getLong(actionRequest, "permissionId");
+		long resourceId = ParamUtil.getLong(actionRequest, "resourceId");
+		String actionId = ParamUtil.getString(actionRequest, "actionId");
 
 		Role role = RoleLocalServiceUtil.getRole(roleId);
 
@@ -145,8 +149,14 @@ public class EditRolePermissionsAction extends PortletAction {
 			throw new RolePermissionsException(role.getName());
 		}
 
-		PermissionServiceUtil.unsetRolePermission(
-			roleId, themeDisplay.getScopeGroupId(), permissionId);
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+			ResourcePermissionServiceUtil.unsetResourcePermission(
+				roleId, themeDisplay.getScopeGroupId(), resourceId, actionId);
+		}
+		else {
+			PermissionServiceUtil.unsetRolePermission(
+				roleId, themeDisplay.getScopeGroupId(), permissionId);
+		}
 
 		// Send redirect
 
@@ -155,6 +165,142 @@ public class EditRolePermissionsAction extends PortletAction {
 		String redirect = ParamUtil.getString(actionRequest, "redirect");
 
 		actionResponse.sendRedirect(redirect);
+	}
+
+	protected void updateAction_1to5(
+			ActionRequest actionRequest, Role role, long groupId,
+			String selResource, String actionId)
+		throws Exception {
+
+		long roleId = role.getRoleId();
+
+		int scope = ParamUtil.getInteger(
+			actionRequest, "scope" + selResource + actionId);
+
+		if (scope == ResourceConstants.SCOPE_COMPANY) {
+			PermissionServiceUtil.setRolePermission(
+				roleId, groupId, selResource, scope,
+				String.valueOf(role.getCompanyId()), actionId);
+		}
+		else if (scope == ResourceConstants.SCOPE_GROUP) {
+			if ((role.getType() == RoleConstants.TYPE_COMMUNITY) ||
+				(role.getType() == RoleConstants.TYPE_ORGANIZATION)) {
+
+				PermissionServiceUtil.setRolePermission(
+					roleId, groupId, selResource,
+					ResourceConstants.SCOPE_GROUP_TEMPLATE,
+					String.valueOf(GroupConstants.DEFAULT_PARENT_GROUP_ID),
+					actionId);
+			}
+			else {
+				String[] groupIds = StringUtil.split(
+					ParamUtil.getString(
+						actionRequest, "groupIds" + selResource + actionId));
+
+				if (groupIds.length == 0) {
+					SessionErrors.add(
+						actionRequest, "missingGroupIdsForAction");
+
+					return;
+				}
+
+				groupIds = ArrayUtil.distinct(groupIds);
+
+				PermissionServiceUtil.unsetRolePermissions(
+					roleId, groupId, selResource, ResourceConstants.SCOPE_GROUP,
+					actionId);
+
+				for (String curGroupId : groupIds) {
+					PermissionServiceUtil.setRolePermission(
+						roleId, groupId, selResource,
+						ResourceConstants.SCOPE_GROUP, curGroupId, actionId);
+				}
+			}
+		}
+		else {
+
+			// Remove company, group template, and group permissions
+
+			PermissionServiceUtil.unsetRolePermissions(
+				roleId, groupId, selResource, ResourceConstants.SCOPE_COMPANY,
+				actionId);
+
+			PermissionServiceUtil.unsetRolePermissions(
+				roleId, groupId, selResource,
+				ResourceConstants.SCOPE_GROUP_TEMPLATE, actionId);
+
+			PermissionServiceUtil.unsetRolePermissions(
+				roleId, groupId, selResource, ResourceConstants.SCOPE_GROUP,
+				actionId);
+		}
+	}
+
+	protected void updateAction_6(
+			ActionRequest actionRequest, Role role, long groupId,
+			String selResource, String actionId)
+		throws Exception {
+
+		long roleId = role.getRoleId();
+
+		int scope = ParamUtil.getInteger(
+			actionRequest, "scope" + selResource + actionId);
+
+		if (scope == ResourceConstants.SCOPE_COMPANY) {
+			ResourcePermissionServiceUtil.setResourcePermission(
+				roleId, groupId, selResource, scope,
+				String.valueOf(role.getCompanyId()), actionId);
+		}
+		else if (scope == ResourceConstants.SCOPE_GROUP) {
+			if ((role.getType() == RoleConstants.TYPE_COMMUNITY) ||
+				(role.getType() == RoleConstants.TYPE_ORGANIZATION)) {
+
+				ResourcePermissionServiceUtil.setResourcePermission(
+					roleId, groupId, selResource,
+					ResourceConstants.SCOPE_GROUP_TEMPLATE,
+					String.valueOf(GroupConstants.DEFAULT_PARENT_GROUP_ID),
+					actionId);
+			}
+			else {
+				String[] groupIds = StringUtil.split(
+					ParamUtil.getString(
+						actionRequest, "groupIds" + selResource + actionId));
+
+				if (groupIds.length == 0) {
+					SessionErrors.add(
+						actionRequest, "missingGroupIdsForAction");
+
+					return;
+				}
+
+				groupIds = ArrayUtil.distinct(groupIds);
+
+				ResourcePermissionServiceUtil.unsetResourcePermissions(
+					roleId, groupId, selResource, ResourceConstants.SCOPE_GROUP,
+					actionId);
+
+				for (String curGroupId : groupIds) {
+					ResourcePermissionServiceUtil.setResourcePermission(
+						roleId, groupId, selResource,
+						ResourceConstants.SCOPE_GROUP, curGroupId, actionId);
+				}
+			}
+		}
+		else {
+
+			// Remove company, group template, and group permissions
+
+			ResourcePermissionServiceUtil.unsetResourcePermissions(
+				roleId, groupId, selResource, ResourceConstants.SCOPE_COMPANY,
+				actionId);
+
+			ResourcePermissionServiceUtil.unsetResourcePermissions(
+				roleId, groupId, selResource,
+				ResourceConstants.SCOPE_GROUP_TEMPLATE, actionId);
+
+			ResourcePermissionServiceUtil.unsetResourcePermissions(
+				roleId, groupId, selResource, ResourceConstants.SCOPE_GROUP,
+				actionId);
+		}
 	}
 
 	protected void updateActions(
@@ -210,69 +356,15 @@ public class EditRolePermissionsAction extends PortletAction {
 					themeDisplay.getCompanyId(), themeDisplay.getLocale()));
 
 			for (String actionId : actions) {
-				int scope = ParamUtil.getInteger(
-					actionRequest, "scope" + selResource + actionId);
-
-				if (scope == ResourceConstants.SCOPE_COMPANY) {
-					PermissionServiceUtil.setRolePermission(
-						roleId, themeDisplay.getScopeGroupId(), selResource,
-						scope, String.valueOf(themeDisplay.getCompanyId()),
-						actionId);
-				}
-				else if (scope == ResourceConstants.SCOPE_GROUP) {
-					if ((role.getType() == RoleConstants.TYPE_COMMUNITY) ||
-						(role.getType() == RoleConstants.TYPE_ORGANIZATION)) {
-
-						PermissionServiceUtil.setRolePermission(
-							roleId, themeDisplay.getScopeGroupId(), selResource,
-							ResourceConstants.SCOPE_GROUP_TEMPLATE,
-							String.valueOf(
-								GroupConstants.DEFAULT_PARENT_GROUP_ID),
-							actionId);
-					}
-					else {
-						String[] groupIds = StringUtil.split(
-							ParamUtil.getString(
-								actionRequest,
-								"groupIds" + selResource + actionId));
-
-						if (groupIds.length == 0) {
-							SessionErrors.add(
-								actionRequest, "missingGroupIdsForAction");
-
-							return;
-						}
-
-						groupIds = ArrayUtil.distinct(groupIds);
-
-						PermissionServiceUtil.unsetRolePermissions(
-							roleId, themeDisplay.getScopeGroupId(),
-							selResource, ResourceConstants.SCOPE_GROUP,
-							actionId);
-
-						for (int j = 0; j < groupIds.length; j++) {
-							PermissionServiceUtil.setRolePermission(
-								roleId, themeDisplay.getScopeGroupId(),
-								selResource, ResourceConstants.SCOPE_GROUP,
-								groupIds[j], actionId);
-						}
-					}
+				if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+					updateAction_6(
+						actionRequest, role, themeDisplay.getScopeGroupId(),
+						selResource, actionId);
 				}
 				else {
-
-					// Remove company, group template, and group permissions
-
-					PermissionServiceUtil.unsetRolePermissions(
-						roleId, themeDisplay.getScopeGroupId(), selResource,
-						ResourceConstants.SCOPE_COMPANY, actionId);
-
-					PermissionServiceUtil.unsetRolePermissions(
-						roleId, themeDisplay.getScopeGroupId(), selResource,
-						ResourceConstants.SCOPE_GROUP_TEMPLATE, actionId);
-
-					PermissionServiceUtil.unsetRolePermissions(
-						roleId, themeDisplay.getScopeGroupId(), selResource,
-						ResourceConstants.SCOPE_GROUP, actionId);
+					updateAction_1to5(
+						actionRequest, role, themeDisplay.getScopeGroupId(),
+						selResource, actionId);
 				}
 			}
 		}

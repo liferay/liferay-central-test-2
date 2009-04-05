@@ -40,6 +40,8 @@ Role role = (Role)objArray[1];
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
 		<portlet:param name="permissionId" value="<%= String.valueOf(permission.getPermissionId()) %>" />
+		<portlet:param name="resourceId" value="<%= String.valueOf(permission.getResourceId()) %>" />
+		<portlet:param name="actionId" value="<%= String.valueOf(permission.getActionId()) %>" />
 	</portlet:actionURL>
 
 	<liferay-ui:icon image="delete" url="<%= deletePermissionURL %>" />

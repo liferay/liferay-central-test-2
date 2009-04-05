@@ -370,7 +370,8 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 			if ((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 3) ||
 				(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 4) ||
-				(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5)) {
+				(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) ||
+				(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6)) {
 
 				if (groups.size() > 0) {
 					List<Role> userRelatedRoles=

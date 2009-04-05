@@ -67,11 +67,14 @@ import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
+import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutTemplateLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.service.ResourceActionLocalServiceUtil;
+import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
 import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.PortletRequestProcessor;
@@ -488,12 +491,81 @@ public class MainServlet extends ActionServlet {
 			_log.error(e, e);
 		}
 
+		// Resource actions
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Initialize resource actions");
+		}
+
+		try {
+			Iterator<Portlet> itr = portlets.iterator();
+
+			while (itr.hasNext()) {
+				Portlet portlet = itr.next();
+
+				List<String> portletActions =
+					ResourceActionsUtil.getPortletResourceActions(
+						portlet.getPortletId());
+
+				ResourceActionLocalServiceUtil.checkResourceActions(
+					portlet.getPortletId(), portletActions);
+
+				List<String> modelNames =
+					ResourceActionsUtil.getPortletModelResources(
+						portlet.getPortletId());
+
+				for (String modelName : modelNames) {
+					List<String> modelActions =
+						ResourceActionsUtil.getModelResourceActions(modelName);
+
+					ResourceActionLocalServiceUtil.checkResourceActions(
+						modelName, modelActions);
+				}
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
 		// Companies
 
 		String[] webIds = PortalInstances.getWebIds();
 
 		for (int i = 0; i < webIds.length; i++) {
 			PortalInstances.initCompany(servletContext, webIds[i]);
+		}
+
+		// Resource codes
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Initialize resource codes");
+		}
+
+		try {
+			long[] companyIds = PortalInstances.getCompanyIds();
+
+			Iterator<Portlet> itr = portlets.iterator();
+
+			while (itr.hasNext()) {
+				Portlet portlet = itr.next();
+
+				List<String> modelNames =
+					ResourceActionsUtil.getPortletModelResources(
+						portlet.getPortletId());
+
+				for (long companyId : companyIds) {
+					ResourceCodeLocalServiceUtil.checkResourceCodes(
+						companyId, portlet.getPortletId());
+
+					for (String modelName : modelNames) {
+						ResourceCodeLocalServiceUtil.checkResourceCodes(
+							companyId, modelName);
+					}
+				}
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 
 		// See LEP-2885. Don't flush hot deploy events until after the portal

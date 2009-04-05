@@ -362,7 +362,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	public boolean hasUserPermissions(
 			long userId, long groupId, String actionId, String name,
 			long[] resourceIds, PermissionCheckerBag permissionCheckerBag)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		StopWatch stopWatch = null;
 
@@ -382,13 +382,16 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			return false;
 		}
 
-		List<Permission> permissions = permissionFinder.findByA_R(
-			actionId, resourceIds);
+		List<Permission> permissions = null;
 
-		// Return false if there are no permissions
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6) {
+			permissions = permissionFinder.findByA_R(actionId, resourceIds);
 
-		if (permissions.size() == 0) {
-			return false;
+			// Return false if there are no permissions
+
+			if (permissions.size() == 0) {
+				return false;
+			}
 		}
 
 		// Record logs with the first resource id
@@ -441,6 +444,11 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			return hasUserPermissions_5(
 				userId, actionId, resourceId, permissions, roles, stopWatch,
 				block);
+		}
+		else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+			return hasUserPermissions_6(
+				userId, actionId, name, resourceId, permissions, roles,
+				stopWatch, block);
 		}
 
 		return false;
@@ -915,6 +923,25 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		if (roles.size() > 0) {
 			if (permissionFinder.countByRolesPermissions(
 					permissions, roles) > 0) {
+
+				return true;
+			}
+		}
+
+		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
+
+		return false;
+	}
+
+	protected boolean hasUserPermissions_6(
+			long userId, String actionId, String name, long resourceId,
+			List<Permission> permissions, List<Role> roles, StopWatch stopWatch,
+			int block)
+		throws PortalException, SystemException {
+
+		for (Role role : roles) {
+			if (resourcePermissionLocalService.hasResourcePermission(
+					resourceId, role.getRoleId(), name, actionId)) {
 
 				return true;
 			}

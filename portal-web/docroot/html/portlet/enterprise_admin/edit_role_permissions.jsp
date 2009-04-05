@@ -234,12 +234,40 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "this-role-does-have-any-permissions");
 
-		List permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId());
+		List<Permission> permissions = null;
+
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+			permissions = new ArrayList<Permission>();
+
+			List<ResourcePermission> resourcePermissions = ResourcePermissionLocalServiceUtil.getRoleResourcePermissions(role.getRoleId());
+
+			for (ResourcePermission resourcePermission : resourcePermissions) {
+				Resource resource = ResourceLocalServiceUtil.getResource(resourcePermission.getResourceId());
+
+				ResourceCode resourceCode = ResourceCodeLocalServiceUtil.getResourceCode(resource.getCodeId());
+
+				List<ResourceAction> resourceActions = ResourceActionLocalServiceUtil.getResourceActions(resourceCode.getName());
+
+				for (ResourceAction resourceAction : resourceActions) {
+					if (ResourcePermissionLocalServiceUtil.hasActionId(resourcePermission, resourceAction)) {
+						Permission permission = new PermissionImpl();
+
+						permission.setResourceId(resource.getResourceId());
+						permission.setActionId(resourceAction.getActionId());
+
+						permissions.add(permission);
+					}
+				}
+			}
+		}
+		else {
+			permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId());
+		}
 
 		List permissionsDisplay = new ArrayList(permissions.size());
 
 		for (int i = 0; i < permissions.size(); i++) {
-			Permission permission = (Permission)permissions.get(i);
+			Permission permission = permissions.get(i);
 
 			Resource resource = ResourceLocalServiceUtil.getResource(permission.getResourceId());
 
@@ -313,9 +341,20 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 
 			ResultRow row = new ResultRow(new Object[] {permission, role}, actionId, i);
 
-			boolean hasCompanyScope = (role.getType() == RoleConstants.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_COMPANY, actionId);
-			boolean hasGroupTemplateScope = ((role.getType() == RoleConstants.TYPE_COMMUNITY) || (role.getType() == RoleConstants.TYPE_ORGANIZATION)) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_GROUP_TEMPLATE, actionId);
-			boolean hasGroupScope = (role.getType() == RoleConstants.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_GROUP, actionId);
+			boolean hasCompanyScope = false;
+			boolean hasGroupTemplateScope = false;
+			boolean hasGroupScope = false;
+
+			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+				hasCompanyScope = (role.getType() == RoleConstants.TYPE_REGULAR) && ResourcePermissionLocalServiceUtil.hasScopeResourcePermission(role.getRoleId(), company.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_COMPANY, actionId);
+				hasGroupTemplateScope = ((role.getType() == RoleConstants.TYPE_COMMUNITY) || (role.getType() == RoleConstants.TYPE_ORGANIZATION)) && ResourcePermissionLocalServiceUtil.hasScopeResourcePermission(role.getRoleId(), company.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_GROUP_TEMPLATE, actionId);
+				hasGroupScope = (role.getType() == RoleConstants.TYPE_REGULAR) && ResourcePermissionLocalServiceUtil.hasScopeResourcePermission(role.getRoleId(), company.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_GROUP, actionId);
+			}
+			else {
+				hasCompanyScope = (role.getType() == RoleConstants.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_COMPANY, actionId);
+				hasGroupTemplateScope = ((role.getType() == RoleConstants.TYPE_COMMUNITY) || (role.getType() == RoleConstants.TYPE_ORGANIZATION)) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_GROUP_TEMPLATE, actionId);
+				hasGroupScope = (role.getType() == RoleConstants.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_GROUP, actionId);
+			}
 
 			PortletURL editResourcePermissionsURL = renderResponse.createRenderURL();
 
