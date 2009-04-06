@@ -978,8 +978,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		mbThreadLocalService.updateThread(
 			thread.getThreadId(), thread.getViewCount() + 1);
 
-		MBTreeWalker treeWalker = new MBTreeWalkerImpl(message);
-
 		ThreadLastPostDateComparator comparator =
 			new ThreadLastPostDateComparator(false);
 
@@ -991,7 +989,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		MBThread nextThread = prevAndNextThreads[2];
 
 		return new MBMessageDisplayImpl(
-			message, parentMessage, category, thread, treeWalker,
+			message, parentMessage, category, thread,
 			previousThread, nextThread, threadView);
 	}
 
