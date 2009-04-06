@@ -206,6 +206,13 @@ public class PropsValues {
 	public static final String CAS_VALIDATE_URL =
 		PropsUtil.get(PropsKeys.CAS_VALIDATE_URL);
 
+	public static final String COMMUNITIES_MEMBERSHIP_INVITATION_EMAIL_BODY =
+		PropsUtil.get(PropsKeys.COMMUNITIES_MEMBERSHIP_INVITATION_EMAIL_BODY);
+
+	public static final String COMMUNITIES_MEMBERSHIP_INVITATION_EMAIL_SUBJECT =
+		PropsUtil.get(PropsKeys.
+			COMMUNITIES_MEMBERSHIP_INVITATION_EMAIL_SUBJECT);
+
 	public static final String COMPANY_DEFAULT_HOME_URL =
 		PropsUtil.get(PropsKeys.COMPANY_DEFAULT_HOME_URL);
 

@@ -351,6 +351,18 @@ create table ExpandoValue (
 	data_ STRING null
 );
 
+create table MembershipInvitation (
+	membershipRequestId LONG not null primary key,
+	companyId LONG,
+	userId LONG,
+	createDate DATE null,
+	acceptedDate DATE null,
+	declinedDate DATE null,
+	invitedUserId LONG,
+	groupId LONG,
+	key_ VARCHAR(75) null
+);
+
 create table Group_ (
 	groupId LONG not null primary key,
 	companyId LONG,

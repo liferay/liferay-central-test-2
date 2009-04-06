@@ -574,6 +574,11 @@
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
 		</action>
 
+		<action path="/enterprise_admin_communities/invite_users" type="com.liferay.portlet.communities.action.InviteUsersAction">
+			<forward name="portlet.communities.invite_users" path="portlet.communities.invite_users"/>
+			<forward name="portlet.communities.error" path="portlet.communities.error"/>
+		</action>
+
 		<action path="/enterprise_admin_communities/page" type="com.liferay.portlet.myplaces.action.ViewAction" />
 
 		<action path="/enterprise_admin_communities/post_membership_request" type="com.liferay.portlet.communities.action.PostMembershipRequestAction">
@@ -1048,6 +1053,10 @@
 
 		<action path="/login/captcha" type="com.liferay.portal.captcha.CaptchaPortletAction" />
 
+		<action path="/login/confirm_membership_invitation" type="com.liferay.portlet.login.action.ConfirmMembershipInvitationAction">
+			<forward name="portlet.login.confirm_membership_invitation" path="portlet.login.confirm_membership_invitation"/>
+		</action>
+
 		<action path="/login/create_account" type="com.liferay.portlet.login.action.CreateAccountAction">
 			<forward name="portlet.login.create_account" path="portlet.login.create_account" />
 		</action>
@@ -1057,6 +1066,7 @@
 		</action>
 
 		<action path="/login/login" type="com.liferay.portlet.login.action.LoginAction">
+			<forward name="portlet.login.confirm_membership_invitation" path="portlet.login.confirm_membership_invitation"/>
 			<forward name="portlet.login.login" path="portlet.login.login" />
 		</action>
 
@@ -1210,6 +1220,11 @@
 		<action path="/communities/import_pages" type="com.liferay.portlet.communities.action.ImportPagesAction">
 			<forward name="portlet.communities.edit_pages" path="portlet.communities.edit_pages" />
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
+		</action>
+
+		<action path="/communities/invite_users" type="com.liferay.portlet.communities.action.InviteUsersAction">
+			<forward name="portlet.communities.error" path="portlet.communities.error"/>
+			<forward name="portlet.communities.invite_users" path="portlet.communities.invite_users"/>
 		</action>
 
 		<action path="/communities/page" type="com.liferay.portlet.myplaces.action.ViewAction" />

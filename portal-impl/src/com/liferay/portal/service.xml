@@ -388,6 +388,52 @@
 		<reference package-path="com.liferay.portlet.tasks" entity="TasksProposal" />
 		<reference package-path="com.liferay.portlet.wiki" entity="WikiNode" />
 	</entity>
+	<entity name="MembershipInvitation" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="membershipRequestId" type="long" primary="true"/>
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long"/>
+		<column name="userId" type="long"/>
+		<column name="createDate" type="Date"/>
+		<column name="acceptedDate" type="Date"/>
+		<column name="declinedDate" type="Date"/>
+
+		<!-- Other fields -->
+
+		<column name="groupId" type="long"/>
+		<column name="invitedUserId" type="long" />
+		<column name="key" type="String"/>
+
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="createDate"/>
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId"/>
+		</finder>
+		<finder name="Key" return-type="MembershipInvitation">
+			<finder-column name="key"/>
+		</finder>
+		<finder name="UserId" return-type="Collection">
+			<finder-column name="userId"/>
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter"/>
+		<reference package-path="com.liferay.mail" entity="Mail"/>
+		<reference package-path="com.liferay.portlet.social" entity="SocialActivity"/>
+		<reference package-path="com.liferay.portlet.social" entity="SocialRequest"/>
+	</entity>
+
 	<entity name="Image" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
@@ -1826,6 +1872,8 @@
 		<exception>LayoutPermission</exception>
 		<exception>LayoutSetVirtualHost</exception>
 		<exception>LayoutType</exception>
+		<exception>MembershipInvitationAlreadyUsed</exception>
+		<exception>MembershipInvitationUserNotInvited</exception>
 		<exception>MembershipRequestComments</exception>
 		<exception>OrganizationId</exception>
 		<exception>OrganizationName</exception>

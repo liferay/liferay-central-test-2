@@ -1,0 +1,368 @@
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.liferay.portal.model.impl;
+
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.util.DateUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.model.MembershipInvitation;
+import com.liferay.portal.model.MembershipInvitationSoap;
+
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+
+import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
+
+import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+/**
+ * <a href="MembershipInvitationModelImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is a model that represents the <code>MembershipInvitation</code> table
+ * in the database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portal.model.MembershipInvitation
+ * @see com.liferay.portal.model.MembershipInvitationModel
+ * @see com.liferay.portal.model.impl.MembershipInvitationImpl
+ *
+ */
+public class MembershipInvitationModelImpl extends BaseModelImpl<MembershipInvitation> {
+	public static final String TABLE_NAME = "MembershipInvitation";
+	public static final Object[][] TABLE_COLUMNS = {
+			{ "membershipRequestId", new Integer(Types.BIGINT) },
+			
+
+			{ "companyId", new Integer(Types.BIGINT) },
+			
+
+			{ "userId", new Integer(Types.BIGINT) },
+			
+
+			{ "createDate", new Integer(Types.TIMESTAMP) },
+			
+
+			{ "acceptedDate", new Integer(Types.TIMESTAMP) },
+			
+
+			{ "declinedDate", new Integer(Types.TIMESTAMP) },
+			
+
+			{ "invitedUserId", new Integer(Types.BIGINT) },
+			
+
+			{ "groupId", new Integer(Types.BIGINT) },
+			
+
+			{ "key_", new Integer(Types.VARCHAR) }
+		};
+	public static final String TABLE_SQL_CREATE = "create table MembershipInvitation (membershipRequestId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,acceptedDate DATE null,declinedDate DATE null,invitedUserId LONG,groupId LONG,key_ VARCHAR(75) null)";
+	public static final String TABLE_SQL_DROP = "drop table MembershipInvitation";
+	public static final String DATA_SOURCE = "liferayDataSource";
+	public static final String SESSION_FACTORY = "liferaySessionFactory";
+	public static final String TX_MANAGER = "liferayTransactionManager";
+	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.entity.cache.enabled.com.liferay.portal.model.MembershipInvitation"),
+			true);
+	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.finder.cache.enabled.com.liferay.portal.model.MembershipInvitation"),
+			true);
+
+	public static MembershipInvitation toModel(
+		MembershipInvitationSoap soapModel) {
+		MembershipInvitation model = new MembershipInvitationImpl();
+
+		model.setMembershipRequestId(soapModel.getMembershipRequestId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setAcceptedDate(soapModel.getAcceptedDate());
+		model.setDeclinedDate(soapModel.getDeclinedDate());
+		model.setInvitedUserId(soapModel.getInvitedUserId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setKey(soapModel.getKey());
+
+		return model;
+	}
+
+	public static List<MembershipInvitation> toModels(
+		MembershipInvitationSoap[] soapModels) {
+		List<MembershipInvitation> models = new ArrayList<MembershipInvitation>(soapModels.length);
+
+		for (MembershipInvitationSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
+				"lock.expiration.time.com.liferay.portal.model.MembershipInvitation"));
+
+	public MembershipInvitationModelImpl() {
+	}
+
+	public long getPrimaryKey() {
+		return _membershipRequestId;
+	}
+
+	public void setPrimaryKey(long pk) {
+		setMembershipRequestId(pk);
+	}
+
+	public Serializable getPrimaryKeyObj() {
+		return new Long(_membershipRequestId);
+	}
+
+	public long getMembershipRequestId() {
+		return _membershipRequestId;
+	}
+
+	public void setMembershipRequestId(long membershipRequestId) {
+		if (membershipRequestId != _membershipRequestId) {
+			_membershipRequestId = membershipRequestId;
+		}
+	}
+
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		if (companyId != _companyId) {
+			_companyId = companyId;
+		}
+	}
+
+	public long getUserId() {
+		return _userId;
+	}
+
+	public void setUserId(long userId) {
+		if (userId != _userId) {
+			_userId = userId;
+		}
+	}
+
+	public Date getCreateDate() {
+		return _createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		if (((createDate == null) && (_createDate != null)) ||
+				((createDate != null) && (_createDate == null)) ||
+				((createDate != null) && (_createDate != null) &&
+				!createDate.equals(_createDate))) {
+			_createDate = createDate;
+		}
+	}
+
+	public Date getAcceptedDate() {
+		return _acceptedDate;
+	}
+
+	public void setAcceptedDate(Date acceptedDate) {
+		if (((acceptedDate == null) && (_acceptedDate != null)) ||
+				((acceptedDate != null) && (_acceptedDate == null)) ||
+				((acceptedDate != null) && (_acceptedDate != null) &&
+				!acceptedDate.equals(_acceptedDate))) {
+			_acceptedDate = acceptedDate;
+		}
+	}
+
+	public Date getDeclinedDate() {
+		return _declinedDate;
+	}
+
+	public void setDeclinedDate(Date declinedDate) {
+		if (((declinedDate == null) && (_declinedDate != null)) ||
+				((declinedDate != null) && (_declinedDate == null)) ||
+				((declinedDate != null) && (_declinedDate != null) &&
+				!declinedDate.equals(_declinedDate))) {
+			_declinedDate = declinedDate;
+		}
+	}
+
+	public long getInvitedUserId() {
+		return _invitedUserId;
+	}
+
+	public void setInvitedUserId(long invitedUserId) {
+		if (invitedUserId != _invitedUserId) {
+			_invitedUserId = invitedUserId;
+		}
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		if (groupId != _groupId) {
+			_groupId = groupId;
+		}
+	}
+
+	public String getKey() {
+		return GetterUtil.getString(_key);
+	}
+
+	public void setKey(String key) {
+		if (((key == null) && (_key != null)) ||
+				((key != null) && (_key == null)) ||
+				((key != null) && (_key != null) && !key.equals(_key))) {
+			_key = key;
+
+			if (_originalKey == null) {
+				_originalKey = key;
+			}
+		}
+	}
+
+	public String getOriginalKey() {
+		return GetterUtil.getString(_originalKey);
+	}
+
+	public MembershipInvitation toEscapedModel() {
+		if (isEscapedModel()) {
+			return (MembershipInvitation)this;
+		}
+		else {
+			MembershipInvitation model = new MembershipInvitationImpl();
+
+			model.setNew(isNew());
+			model.setEscapedModel(true);
+
+			model.setMembershipRequestId(getMembershipRequestId());
+			model.setCompanyId(getCompanyId());
+			model.setUserId(getUserId());
+			model.setCreateDate(getCreateDate());
+			model.setAcceptedDate(getAcceptedDate());
+			model.setDeclinedDate(getDeclinedDate());
+			model.setInvitedUserId(getInvitedUserId());
+			model.setGroupId(getGroupId());
+			model.setKey(HtmlUtil.escape(getKey()));
+
+			model = (MembershipInvitation)Proxy.newProxyInstance(MembershipInvitation.class.getClassLoader(),
+					new Class[] { MembershipInvitation.class },
+					new ReadOnlyBeanHandler(model));
+
+			return model;
+		}
+	}
+
+	public ExpandoBridge getExpandoBridge() {
+		if (_expandoBridge == null) {
+			_expandoBridge = new ExpandoBridgeImpl(MembershipInvitation.class.getName(),
+					getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
+	public Object clone() {
+		MembershipInvitationImpl clone = new MembershipInvitationImpl();
+
+		clone.setMembershipRequestId(getMembershipRequestId());
+		clone.setCompanyId(getCompanyId());
+		clone.setUserId(getUserId());
+		clone.setCreateDate(getCreateDate());
+		clone.setAcceptedDate(getAcceptedDate());
+		clone.setDeclinedDate(getDeclinedDate());
+		clone.setInvitedUserId(getInvitedUserId());
+		clone.setGroupId(getGroupId());
+		clone.setKey(getKey());
+
+		return clone;
+	}
+
+	public int compareTo(MembershipInvitation membershipInvitation) {
+		int value = 0;
+
+		value = DateUtil.compareTo(getCreateDate(),
+				membershipInvitation.getCreateDate());
+
+		value = value * -1;
+
+		if (value != 0) {
+			return value;
+		}
+
+		return 0;
+	}
+
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+
+		MembershipInvitation membershipInvitation = null;
+
+		try {
+			membershipInvitation = (MembershipInvitation)obj;
+		}
+		catch (ClassCastException cce) {
+			return false;
+		}
+
+		long pk = membershipInvitation.getPrimaryKey();
+
+		if (getPrimaryKey() == pk) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public int hashCode() {
+		return (int)getPrimaryKey();
+	}
+
+	private long _membershipRequestId;
+	private long _companyId;
+	private long _userId;
+	private Date _createDate;
+	private Date _acceptedDate;
+	private Date _declinedDate;
+	private long _invitedUserId;
+	private long _groupId;
+	private String _key;
+	private String _originalKey;
+	private transient ExpandoBridge _expandoBridge;
+}

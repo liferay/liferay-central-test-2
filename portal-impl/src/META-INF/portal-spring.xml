@@ -187,6 +187,30 @@
 	<bean id="com.liferay.portal.service.persistence.GroupFinderUtil" class="com.liferay.portal.service.persistence.GroupFinderUtil">
 		<property name="finder" ref="com.liferay.portal.service.persistence.GroupFinder.impl" />
 	</bean>
+	<bean id="com.liferay.portal.service.MembershipInvitationLocalService.impl" class="com.liferay.portal.service.impl.MembershipInvitationLocalServiceImpl" />
+	<bean id="com.liferay.portal.service.MembershipInvitationLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portal.service.MembershipInvitationLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.MembershipInvitationLocalServiceFactory" class="com.liferay.portal.service.MembershipInvitationLocalServiceFactory">
+		<property name="service" ref="com.liferay.portal.service.MembershipInvitationLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.MembershipInvitationLocalServiceUtil" class="com.liferay.portal.service.MembershipInvitationLocalServiceUtil">
+		<property name="service" ref="com.liferay.portal.service.MembershipInvitationLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.MembershipInvitationService.impl" class="com.liferay.portal.service.impl.MembershipInvitationServiceImpl" />
+	<bean id="com.liferay.portal.service.MembershipInvitationService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portal.service.MembershipInvitationService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.MembershipInvitationServiceFactory" class="com.liferay.portal.service.MembershipInvitationServiceFactory">
+		<property name="service" ref="com.liferay.portal.service.MembershipInvitationService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.MembershipInvitationServiceUtil" class="com.liferay.portal.service.MembershipInvitationServiceUtil">
+		<property name="service" ref="com.liferay.portal.service.MembershipInvitationService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.MembershipInvitationPersistence.impl" class="com.liferay.portal.service.persistence.MembershipInvitationPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portal.service.persistence.MembershipInvitationUtil" class="com.liferay.portal.service.persistence.MembershipInvitationUtil">
+		<property name="persistence" ref="com.liferay.portal.service.persistence.MembershipInvitationPersistence.impl" />
+	</bean>
 	<bean id="com.liferay.portal.service.ImageLocalService.impl" class="com.liferay.portal.service.impl.ImageLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.ImageLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.liferay.portal.service.ImageLocalService.impl" />

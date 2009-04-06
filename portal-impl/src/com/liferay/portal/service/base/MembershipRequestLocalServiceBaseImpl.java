@@ -54,6 +54,8 @@ import com.liferay.portal.service.LayoutSetLocalService;
 import com.liferay.portal.service.LayoutSetService;
 import com.liferay.portal.service.LayoutTemplateLocalService;
 import com.liferay.portal.service.ListTypeService;
+import com.liferay.portal.service.MembershipInvitationLocalService;
+import com.liferay.portal.service.MembershipInvitationService;
 import com.liferay.portal.service.MembershipRequestLocalService;
 import com.liferay.portal.service.MembershipRequestService;
 import com.liferay.portal.service.OrgLaborLocalService;
@@ -119,6 +121,7 @@ import com.liferay.portal.service.persistence.LayoutFinder;
 import com.liferay.portal.service.persistence.LayoutPersistence;
 import com.liferay.portal.service.persistence.LayoutSetPersistence;
 import com.liferay.portal.service.persistence.ListTypePersistence;
+import com.liferay.portal.service.persistence.MembershipInvitationPersistence;
 import com.liferay.portal.service.persistence.MembershipRequestPersistence;
 import com.liferay.portal.service.persistence.OrgGroupPermissionFinder;
 import com.liferay.portal.service.persistence.OrgGroupPermissionPersistence;
@@ -427,6 +430,33 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 
 	public void setGroupFinder(GroupFinder groupFinder) {
 		this.groupFinder = groupFinder;
+	}
+
+	public MembershipInvitationLocalService getMembershipInvitationLocalService() {
+		return membershipInvitationLocalService;
+	}
+
+	public void setMembershipInvitationLocalService(
+		MembershipInvitationLocalService membershipInvitationLocalService) {
+		this.membershipInvitationLocalService = membershipInvitationLocalService;
+	}
+
+	public MembershipInvitationService getMembershipInvitationService() {
+		return membershipInvitationService;
+	}
+
+	public void setMembershipInvitationService(
+		MembershipInvitationService membershipInvitationService) {
+		this.membershipInvitationService = membershipInvitationService;
+	}
+
+	public MembershipInvitationPersistence getMembershipInvitationPersistence() {
+		return membershipInvitationPersistence;
+	}
+
+	public void setMembershipInvitationPersistence(
+		MembershipInvitationPersistence membershipInvitationPersistence) {
+		this.membershipInvitationPersistence = membershipInvitationPersistence;
 	}
 
 	public ImageLocalService getImageLocalService() {
@@ -1398,6 +1428,12 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 	protected GroupPersistence groupPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.GroupFinder.impl")
 	protected GroupFinder groupFinder;
+	@BeanReference(name = "com.liferay.portal.service.MembershipInvitationLocalService.impl")
+	protected MembershipInvitationLocalService membershipInvitationLocalService;
+	@BeanReference(name = "com.liferay.portal.service.MembershipInvitationService.impl")
+	protected MembershipInvitationService membershipInvitationService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.MembershipInvitationPersistence.impl")
+	protected MembershipInvitationPersistence membershipInvitationPersistence;
 	@BeanReference(name = "com.liferay.portal.service.ImageLocalService.impl")
 	protected ImageLocalService imageLocalService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ImagePersistence.impl")

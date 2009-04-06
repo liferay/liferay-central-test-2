@@ -97,6 +97,18 @@
 		<property name="service" ref="com.liferay.portal.service.GroupService.impl" />
 		<property name="serviceInterface" value="com.liferay.portal.service.GroupService" />
 	</bean>
+	<bean name="/com_liferay_portal_service_spring_MembershipInvitationService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.MembershipInvitationService.impl" />
+		<property name="serviceInterface" value="com.liferay.portal.service.MembershipInvitationService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_MembershipInvitationService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.MembershipInvitationService.impl" />
+		<property name="serviceInterface" value="com.liferay.portal.service.MembershipInvitationService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_MembershipInvitationService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.MembershipInvitationService.impl" />
+		<property name="serviceInterface" value="com.liferay.portal.service.MembershipInvitationService" />
+	</bean>
 	<bean name="/com_liferay_portal_service_spring_LayoutService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portal.service.LayoutService.impl" />
 		<property name="serviceInterface" value="com.liferay.portal.service.LayoutService" />
