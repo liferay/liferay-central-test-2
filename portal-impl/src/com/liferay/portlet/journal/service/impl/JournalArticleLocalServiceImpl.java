@@ -1923,10 +1923,24 @@ public class JournalArticleLocalServiceImpl
 		Date displayDate = dateInterval[0];
 		Date expirationDate = dateInterval[1];
 
+		boolean visible = article.getApproved();
+
+		if (!visible &&
+			(article.getVersion() != JournalArticleImpl.DEFAULT_VERSION)) {
+
+			int countApprovedArticles =
+				journalArticlePersistence.countByG_A_A(
+					article.getGroupId(), article.getArticleId(), true);
+
+			if (countApprovedArticles > 0) {
+				visible = true;
+			}
+		}
+
 		tagsAssetLocalService.updateAsset(
 			userId, article.getGroupId(), JournalArticle.class.getName(),
 			article.getResourcePrimKey(), tagsCategories, tagsEntries,
-			article.getApproved(), null, null, displayDate, expirationDate,
+			visible, null, null, displayDate, expirationDate,
 			ContentTypes.TEXT_HTML, article.getTitle(),
 			article.getDescription(), null, null, 0, 0, null, false);
 	}
