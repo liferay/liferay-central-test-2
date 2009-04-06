@@ -737,26 +737,6 @@ public class JournalArticleLocalServiceImpl
 			}
 		}
 
-		// Tags
-
-		tagsAssetLocalService.deleteAsset(
-			JournalArticle.class.getName(), article.getResourcePrimKey());
-
-		// Ratings
-
-		ratingsStatsLocalService.deleteStats(
-			JournalArticle.class.getName(), article.getResourcePrimKey());
-
-		// Message boards
-
-		mbMessageLocalService.deleteDiscussionMessages(
-			JournalArticle.class.getName(), article.getResourcePrimKey());
-
-		// Content searches
-
-		journalContentSearchLocalService.deleteArticleContentSearches(
-			article.getGroupId(), article.getArticleId());
-
 		// Images
 
 		journalArticleImageLocalService.deleteImages(
@@ -771,21 +751,37 @@ public class JournalArticleLocalServiceImpl
 		expandoValueLocalService.deleteValues(
 			JournalArticle.class.getName(), article.getResourcePrimKey());
 
-		// Resources
-
 		if (journalArticlePersistence.countByG_A(
 				article.getGroupId(), article.getArticleId()) == 1) {
+
+			// Tags
+
+			tagsAssetLocalService.deleteAsset(
+				JournalArticle.class.getName(), article.getResourcePrimKey());
+
+			// Ratings
+
+			ratingsStatsLocalService.deleteStats(
+				JournalArticle.class.getName(), article.getResourcePrimKey());
+
+			// Message boards
+
+			mbMessageLocalService.deleteDiscussionMessages(
+				JournalArticle.class.getName(), article.getResourcePrimKey());
+
+			// Content searches
+
+			journalContentSearchLocalService.deleteArticleContentSearches(
+				article.getGroupId(), article.getArticleId());
+
+			// Resources
 
 			resourceLocalService.deleteResource(
 				article.getCompanyId(), JournalArticle.class.getName(),
 				ResourceConstants.SCOPE_INDIVIDUAL,
 				article.getResourcePrimKey());
-		}
 
-		// Resource
-
-		if (journalArticlePersistence.countByG_A(
-				article.getGroupId(), article.getArticleId()) == 1) {
+			// Resource
 
 			try {
 				journalArticleResourceLocalService.deleteArticleResource(
