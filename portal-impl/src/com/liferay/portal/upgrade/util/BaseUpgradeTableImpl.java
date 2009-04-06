@@ -63,14 +63,18 @@ public abstract class BaseUpgradeTableImpl extends Table {
 		try {
 			DBUtil dbUtil = DBUtil.getInstance();
 
-			if (Validator.isNotNull(getCreateSQL())) {
+			String createSQL = getCreateSQL();
+
+			if (Validator.isNotNull(createSQL)) {
 				dbUtil.runSQL("drop table " + getTableName());
 
-				dbUtil.runSQL(getCreateSQL());
+				dbUtil.runSQL(createSQL);
 			}
 
 			if (Validator.isNotNull(tempFileName)) {
-				dbUtil.runSQL(getDeleteSQL());
+				String deleteSQL = getDeleteSQL();
+
+				dbUtil.runSQL(deleteSQL);
 
 				populateTable(tempFileName);
 			}

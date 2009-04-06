@@ -65,7 +65,6 @@ import java.sql.ResultSet;
 import java.sql.Types;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -80,8 +79,7 @@ import org.apache.commons.collections.map.MultiValueMap;
  *
  * <p>
  * This class converts all existing permissions from the legacy permissions
- * algorithm to the new, role-based one.  Do not run this unless you want to do
- * this.
+ * algorithm to the latest algorithm.
  * </p>
  *
  * @author Alexander Chow
@@ -89,7 +87,11 @@ import org.apache.commons.collections.map.MultiValueMap;
  */
 public class ConvertPermissionAlgorithm extends ConvertProcess {
 
-	public boolean isEnabled() throws ConvertException {
+	public String getDescription() {
+		return "convert-legacy-permission-algorithm";
+	}
+
+	public boolean isEnabled() {
 		boolean enabled = false;
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM < 5) {
@@ -99,74 +101,128 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		return enabled;
 	}
 
-	public String getDescription() {
-		return "convert-legacy-permission-algorithm";
-	}
-
 	protected void doConvert() throws Exception {
 		try {
 			BatchSessionUtil.setEnabled(true);
 
-			_initialize();
-
-			// Users_Permissions
-
-			_convertPermissions(
-				RoleConstants.TYPE_REGULAR,
-				"Users_Permissions",
-				new String[] { "userId" },
-				"Users_Roles",
-				new Object[][] {
-					{ "userId", Types.BIGINT },
-					{ "roleId", Types.BIGINT }
-				}
-			);
-
-			// Groups_Permissions
-
-			_convertPermissions(
-					RoleConstants.TYPE_COMMUNITY,
-					"Groups_Permissions",
-					new String[] { "groupId" },
-					"Groups_Roles",
-					new Object[][] {
-						{ "groupId", Types.BIGINT },
-						{ "roleId", Types.BIGINT }
-					}
-				);
-
-			// OrgGroupPermission
-
-			_convertPermissions(
-					RoleConstants.TYPE_ORGANIZATION,
-					"OrgGroupPermission",
-					new String[] { "organizationId", "groupId" },
-					"OrgGroupRole",
-					new Object[][] {
-						{ "organizationId", Types.BIGINT },
-						{ "groupId", Types.BIGINT },
-						{ "roleId", Types.BIGINT }
-					}
-				);
-
-			// Cleanup
-
-			PermissionCacheUtil.clearCache();
-
-			_log.info(
-				"Please set " + PropsKeys.PERMISSIONS_USER_CHECK_ALGORITHM +
-					" in your portal-ext.properties to use algorithm 5");
-
-			PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM = 5;
+			_convert();
 		}
 		catch (Exception e) {
-			_log.fatal(e);
+			_log.fatal(e, e);
 		}
 		finally {
 			CacheRegistry.clear();
 
 			BatchSessionUtil.setEnabled(false);
 		}
+	}
+
+	private void _convert() throws Exception {
+
+		// Initialize
+
+		_initialize();
+
+		// Groups_Permissions
+
+		_convertPermissions(
+			RoleConstants.TYPE_COMMUNITY, "Groups_Permissions",
+			new String[] {"groupId"}, "Groups_Roles",
+			new Object[][] {
+				{"groupId", Types.BIGINT}, {"roleId", Types.BIGINT}
+			});
+
+		// OrgGroupPermission
+
+		_convertPermissions(
+			RoleConstants.TYPE_ORGANIZATION, "OrgGroupPermission",
+			new String[] {"organizationId", "groupId"}, "OrgGroupRole",
+			new Object[][] {
+				{"organizationId", Types.BIGINT}, {"groupId", Types.BIGINT},
+				{"roleId", Types.BIGINT}
+			});
+
+		// Users_Permissions
+
+		_convertPermissions(
+			RoleConstants.TYPE_REGULAR, "Users_Permissions",
+			new String[] {"userId"}, "Users_Roles",
+			new Object[][] {
+				{"userId", Types.BIGINT}, {"roleId", Types.BIGINT}
+			});
+
+		// Cleanup
+
+		PermissionCacheUtil.clearCache();
+
+		PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM = 5;
+
+		MaintenanceUtil.appendStatus(
+			"Please set " + PropsKeys.PERMISSIONS_USER_CHECK_ALGORITHM +
+				" in your portal-ext.properties to use algorithm 5");
+	}
+
+	private String _convertGuestUsers(String legacyFile) throws Exception {
+		BufferedReader legacyFileReader = new BufferedReader(
+			new FileReader(legacyFile));
+
+		BufferedWriter legacyFileUpdatedWriter = new BufferedWriter(
+			new FileWriter(legacyFile + _UPDATED));
+		BufferedWriter legacyFileExtRolesPermissionsWriter = new BufferedWriter(
+			new FileWriter(legacyFile + _EXT_ROLES_PERMIMISSIONS));
+
+		try {
+			String line = null;
+
+			while (Validator.isNotNull(line = legacyFileReader.readLine())) {
+				String[] values = StringUtil.split(line);
+
+				long companyId = PermissionView.getCompanyId(values);
+				long permissionId = PermissionView.getPermissionId(values);
+				int scope = PermissionView.getScopeId(values);
+				long userId = PermissionView.getPrimaryKey(values);
+
+				if ((scope == ResourceConstants.SCOPE_INDIVIDUAL) &&
+					(_guestUsersSet.contains(userId))) {
+
+					long roleId = _guestRolesMap.get(companyId).getRoleId();
+
+					String key = roleId + "_" + permissionId;
+
+					if (_rolesPermissions.contains(key)) {
+						continue;
+					}
+					else {
+						_rolesPermissions.add(key);
+					}
+
+					legacyFileExtRolesPermissionsWriter.write(
+						roleId + "," + permissionId + "\n");
+				}
+				else {
+					legacyFileUpdatedWriter.write(line + "\n");
+				}
+			}
+		}
+		finally {
+			legacyFileReader.close();
+
+			legacyFileUpdatedWriter.close();
+			legacyFileExtRolesPermissionsWriter.close();
+		}
+
+		Table table = new Table(
+			"Roles_Permissions",
+			new Object[][] {
+				{"roleId", Types.BIGINT}, {"permissionId", Types.BIGINT}
+			});
+
+		table.populateTable(legacyFile + _EXT_ROLES_PERMIMISSIONS);
+
+		FileUtil.delete(legacyFile);
+		FileUtil.delete(legacyFile + _EXT_ROLES_PERMIMISSIONS);
+
+		return legacyFile + _UPDATED;
 	}
 
 	private void _convertPermissions(
@@ -180,108 +236,49 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 
 		String legacyFile = legacyTable.generateTempFile();
 
-		if (legacyFile != null) {
-			if (type == RoleConstants.TYPE_REGULAR) {
-				legacyFile = _convertGuestUsers(legacyFile);
-
-				MaintenanceUtil.appendStatus(
-					"Converted guest users to guest roles");
-			}
-
-			_convertRoles(legacyFile, type, newName, newColumns);
-
-			MaintenanceUtil.appendStatus("Converted roles for " + legacyName);
-
-			// Cleanup
-
-			DBUtil.getInstance().runSQL(legacyTable.getDeleteSQL());
-
-			FileUtil.delete(legacyFile);
-		}
-	}
-
-	private String _convertGuestUsers(String legacyFile) throws Exception {
-		BufferedReader br = new BufferedReader(new FileReader(legacyFile));
-		BufferedWriter bw1 =
-			new BufferedWriter(new FileWriter(legacyFile + _UPDATED));
-		BufferedWriter bw2 =
-			new BufferedWriter(new FileWriter(legacyFile + _ROLE_PERM_MAP_EXT));
-
-		try {
-			String line = null;
-
-			while (Validator.isNotNull(line = br.readLine())) {
-				String[] values = StringUtil.split(line);
-
-				long userId = PermissionView.getPrimaryKey(values);
-				long permissionId = PermissionView.getPermissionId(values);
-				long companyId = PermissionView.getCompanyId(values);
-				int scope = PermissionView.getScopeId(values);
-
-				if (scope == ResourceConstants.SCOPE_INDIVIDUAL &&
-					_guestUsersSet.contains(userId)) {
-
-					long roleId = _guestRolesMap.get(companyId).getRoleId();
-
-					String key = roleId + "_" + permissionId;
-
-					if (_rolesPermissions.contains(key)) {
-						continue;
-					}
-					else {
-						_rolesPermissions.add(key);
-					}
-
-					bw2.write(roleId + "," + permissionId + "\n");
-				}
-				else {
-					bw1.write(line + "\n");
-				}
-			}
-		}
-		finally {
-			br.close();
-			bw1.close();
-			bw2.close();
+		if (legacyFile == null) {
+			return;
 		}
 
-		Table table = new Table(
-				"Roles_Permissions",
-				new Object[][] {
-					{ "roleId", Types.BIGINT },
-					{ "permissionId", Types.BIGINT }
-				});
+		if (type == RoleConstants.TYPE_REGULAR) {
+			legacyFile = _convertGuestUsers(legacyFile);
 
-		table.populateTable(legacyFile + _ROLE_PERM_MAP_EXT);
+			MaintenanceUtil.appendStatus(
+				"Converted guest users to guest roles");
+		}
+
+		_convertRoles(legacyFile, type, newName, newColumns);
+
+		MaintenanceUtil.appendStatus("Converted roles for " + legacyName);
+
+		DBUtil.getInstance().runSQL(legacyTable.getDeleteSQL());
 
 		FileUtil.delete(legacyFile);
-		FileUtil.delete(legacyFile + _ROLE_PERM_MAP_EXT);
-
-		return legacyFile + _UPDATED;
 	}
 
 	private void _convertRoles(
-			String legacyFile, int type, String newName,
-			Object[][] newColumns)
+			String legacyFile, int type, String newName, Object[][] newColumns)
 		throws Exception {
 
-		BufferedReader br = new BufferedReader(new FileReader(legacyFile));
-		BufferedWriter rolePermMapBuff = new BufferedWriter(
-			new FileWriter(legacyFile + _ROLE_PERM_MAP_EXT));
-		BufferedWriter roleBuff = new BufferedWriter(
-			new FileWriter(legacyFile + _ROLE_EXT));
-		BufferedWriter otherRoleMapBuff = new BufferedWriter(
-			new FileWriter(legacyFile + _OTHER_ROLE_MAP_EXT));
+		BufferedReader legacyFileReader = new BufferedReader(
+			new FileReader(legacyFile));
+
+		BufferedWriter legacyFileExtRoleWriter = new BufferedWriter(
+			new FileWriter(legacyFile + _EXT_ROLE));
+		BufferedWriter legacyFileExtRolesPermissionsWriter = new BufferedWriter(
+			new FileWriter(legacyFile + _EXT_ROLES_PERMIMISSIONS));
+		BufferedWriter legacyFileExtOtherRolesWriter = new BufferedWriter(
+			new FileWriter(legacyFile + _EXT_OTHER_ROLES));
 
 		try {
 
-			// Group by resourceId
+			// Group by resource id
 
 			MultiValueMap mvp = new MultiValueMap();
 
-			String line;
+			String line = null;
 
-			while ((line = br.readLine()) != null) {
+			while ((line = legacyFileReader.readLine()) != null) {
 				String[] values = StringUtil.split(line);
 
 				long resourceId = PermissionView.getResourceId(values);
@@ -293,29 +290,33 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 
 			for (Long key : (Set<Long>)mvp.keySet()) {
 				List<String[]> valuesList = new ArrayList<String[]>(
-					(Collection<String[]>)mvp.getCollection(key));
+					mvp.getCollection(key));
 
 				String[] values = valuesList.get(0);
 
-				long groupId = PermissionView.getPrimaryKey(values);
 				long companyId = PermissionView.getCompanyId(values);
+				long groupId = PermissionView.getPrimaryKey(values);
 				String name = PermissionView.getNameId(values);
 				int scope = PermissionView.getScopeId(values);
 
-				// Group actions and permissionIds
+				// Group action ids and permission ids
 
 				List<String> actionsIds = new ArrayList<String>();
 				List<Long> permissionIds = new ArrayList<Long>();
 
-				for (String[] values2 : valuesList) {
-					actionsIds.add(PermissionView.getActionId(values2));
-					permissionIds.add(PermissionView.getPermissionId(values2));
+				for (String[] curValues : valuesList) {
+					String actionId = PermissionView.getActionId(curValues);
+					long permissionId = PermissionView.getPermissionId(
+						curValues);
+
+					actionsIds.add(actionId);
+					permissionIds.add(permissionId);
 				}
 
 				// Look for owner and system roles
 
-				if (type != RoleConstants.TYPE_ORGANIZATION &&
-					scope == ResourceConstants.SCOPE_INDIVIDUAL) {
+				if ((type != RoleConstants.TYPE_ORGANIZATION) &&
+					(scope == ResourceConstants.SCOPE_INDIVIDUAL)) {
 
 					// Find default actions
 
@@ -356,8 +357,8 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 					}
 					else {
 						if (defaultActions.containsAll(actionsIds)) {
-							Role[] defaultRoles =
-								_defaultRolesMap.get(companyId);
+							Role[] defaultRoles = _defaultRolesMap.get(
+								companyId);
 
 							Group group = _groupsMap.get(groupId);
 
@@ -377,16 +378,16 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 						long roleId = defaultRole.getRoleId();
 
 						for (Long permissionId : permissionIds) {
-							String key2 = roleId + "_" + permissionId;
+							String curKey = roleId + "_" + permissionId;
 
-							if (_rolesPermissions.contains(key2)) {
+							if (_rolesPermissions.contains(curKey)) {
 								continue;
 							}
 							else {
-								_rolesPermissions.add(key2);
+								_rolesPermissions.add(curKey);
 							}
 
-							rolePermMapBuff.write(
+							legacyFileExtRolesPermissionsWriter.write(
 								roleId + "," + permissionId + ",\n");
 						}
 
@@ -397,132 +398,131 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 				// Role_
 
 				long roleId = CounterLocalServiceUtil.increment();
-				String roleName =
-					StringUtil.upperCaseFirstLetter(RoleConstants.getTypeLabel(type)) +
-						" " + Long.toHexString(roleId);
+
+				String roleName = StringUtil.upperCaseFirstLetter(
+					RoleConstants.getTypeLabel(type));
+
+				roleName += " " + Long.toHexString(roleId);
 
 				String[] roleColumns = new String[] {
-					Long.toString(roleId),
-					Long.toString(companyId),
-					Long.toString(ClassNameLocalServiceUtil.getClassNameId(Role.class)),
-					Long.toString(roleId),
-					roleName,
-					StringPool.BLANK,
+					String.valueOf(roleId), String.valueOf(companyId),
+					String.valueOf(
+						ClassNameLocalServiceUtil.getClassNameId(Role.class)),
+					String.valueOf(roleId), roleName, StringPool.BLANK,
 					"Autogenerated role from portal upgrade",
-					Integer.toString(type),
-					StringPool.BLANK
+					String.valueOf(type), StringPool.BLANK
 				};
 
 				for (int i = 0; i < roleColumns.length; i++) {
-					roleBuff.write(roleColumns[i] + StringPool.COMMA);
+					legacyFileExtRoleWriter.write(
+						roleColumns[i] + StringPool.COMMA);
 
 					if (i == (roleColumns.length - 1)) {
-						roleBuff.write(StringPool.NEW_LINE);
+						legacyFileExtRoleWriter.write(StringPool.NEW_LINE);
 					}
 				}
 
 				// Roles_Permissions
 
 				for (Long permissionId : permissionIds) {
-					String key2 = roleId + "_" + permissionId;
+					String curKey = roleId + "_" + permissionId;
 
-					if (_rolesPermissions.contains(key2)) {
+					if (_rolesPermissions.contains(curKey)) {
 						continue;
 					}
 					else {
-						_rolesPermissions.add(key2);
+						_rolesPermissions.add(curKey);
 					}
 
-					rolePermMapBuff.write(
+					legacyFileExtRolesPermissionsWriter.write(
 						roleId + "," + permissionId + ",\n");
 				}
 
 				// Others_Roles
 
 				for (int i = 0; i < newColumns.length - 1; i++) {
-					otherRoleMapBuff.write(values[i] + StringPool.COMMA);
+					legacyFileExtOtherRolesWriter.write(
+						values[i] + StringPool.COMMA);
 				}
 
-				otherRoleMapBuff.write(roleId + ",\n");
+				legacyFileExtOtherRolesWriter.write(roleId + ",\n");
 			}
 		}
 		finally {
-			br.close();
-			roleBuff.close();
-			rolePermMapBuff.close();
-			otherRoleMapBuff.close();
+			legacyFileReader.close();
+
+			legacyFileExtRoleWriter.close();
+			legacyFileExtRolesPermissionsWriter.close();
+			legacyFileExtOtherRolesWriter.close();
 		}
 
 		// Role_
 
-		Table roleTable =
-			new Table(RoleModelImpl.TABLE_NAME, RoleModelImpl.TABLE_COLUMNS);
+		Table roleTable = new Table(
+			RoleModelImpl.TABLE_NAME, RoleModelImpl.TABLE_COLUMNS);
 
-		roleTable.populateTable(legacyFile + _ROLE_EXT);
+		roleTable.populateTable(legacyFile + _EXT_ROLE);
 
 		// Roles_Permissions
 
 		Table rolesPermissionsTable = new Table(
 			"Roles_Permissions",
 			new Object[][] {
-				{ "roleId", Types.BIGINT },
-				{ "permissionId", Types.BIGINT }
+				{"roleId", Types.BIGINT}, {"permissionId", Types.BIGINT}
 			});
 
-		rolesPermissionsTable.populateTable(legacyFile + _ROLE_PERM_MAP_EXT);
+		rolesPermissionsTable.populateTable(
+			legacyFile + _EXT_ROLES_PERMIMISSIONS);
 
 		// Others_Roles
 
 		Table othersRolesTable = new Table(newName, newColumns);
 
-		othersRolesTable.populateTable(legacyFile + _OTHER_ROLE_MAP_EXT);
+		othersRolesTable.populateTable(legacyFile + _EXT_OTHER_ROLES);
 
 		// Cleanup
 
-		FileUtil.delete(legacyFile + _ROLE_EXT);
-		FileUtil.delete(legacyFile + _ROLE_PERM_MAP_EXT);
-		FileUtil.delete(legacyFile + _OTHER_ROLE_MAP_EXT);
+		FileUtil.delete(legacyFile + _EXT_ROLE);
+		FileUtil.delete(legacyFile + _EXT_ROLES_PERMIMISSIONS);
+		FileUtil.delete(legacyFile + _EXT_OTHER_ROLES);
 	}
 
 	private void _initialize() throws Exception {
 
-		// System Roles and Users
+		// System roles and default users
 
 		long[] companyIds = PortalInstances.getCompanyIds();
 
-		_defaultRolesMap = new HashMap<Long, Role[]>();
-		_ownerRolesMap = new HashMap<Long, Role>();
-		_guestRolesMap = new HashMap<Long, Role>();
-		_guestUsersSet = new HashSet<Long>();
-		_rolesPermissions = new HashSet<String>();
-
 		for (long companyId : companyIds) {
 			_defaultRolesMap.put(
-				companyId, new Role[] {
-					RoleLocalServiceUtil.getRole(
+				companyId,
+				new Role[] {
+						RoleLocalServiceUtil.getRole(
 							companyId, RoleConstants.COMMUNITY_MEMBER),
-					RoleLocalServiceUtil.getRole(
-						companyId, RoleConstants.ORGANIZATION_MEMBER),
-					RoleLocalServiceUtil.getRole(
-						companyId, RoleConstants.POWER_USER),
+						RoleLocalServiceUtil.getRole(
+							companyId, RoleConstants.ORGANIZATION_MEMBER),
+						RoleLocalServiceUtil.getRole(
+							companyId, RoleConstants.POWER_USER),
 					}
 				);
-
-			Role ownerRole = RoleLocalServiceUtil.getRole(
-				companyId, RoleConstants.OWNER);
-
-			_ownerRolesMap.put(companyId, ownerRole);
 
 			Role guestRole = RoleLocalServiceUtil.getRole(
 				companyId, RoleConstants.GUEST);
 
 			_guestRolesMap.put(companyId, guestRole);
 
-			_guestUsersSet.add(
-				UserLocalServiceUtil.getDefaultUserId(companyId));
+			Role ownerRole = RoleLocalServiceUtil.getRole(
+				companyId, RoleConstants.OWNER);
+
+			_ownerRolesMap.put(companyId, ownerRole);
+
+			long defaultUserId = UserLocalServiceUtil.getDefaultUserId(
+				companyId);
+
+			_guestUsersSet.add(defaultUserId);
 		}
 
-		// Roles_Permissions for GUEST
+		// Roles_Permissions
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -531,7 +531,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			ps = con.prepareStatement("SELECT * FROM Roles_Permissions ");
+			ps = con.prepareStatement("SELECT * FROM Roles_Permissions");
 
 			rs = ps.executeQuery();
 
@@ -551,13 +551,11 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		List<Group> groups = GroupLocalServiceUtil.getGroups(
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
-		_groupsMap = new HashMap<Long, Group>(groups.size());
-
 		for (Group group : groups) {
 			_groupsMap.put(group.getGroupId(), group);
 		}
 
-		// Cache ResourceActions for unknown portlets
+		// Resource actions for unknown portlets
 
 		List<ResourceCode> resourceCodes =
 			ResourceCodeLocalServiceUtil.getResourceCodes(
@@ -572,27 +570,22 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		}
 	}
 
-	private Map<Long, Role[]> _defaultRolesMap;
+	private static final String _EXT_OTHER_ROLES = ".others_roles";
 
-	private Map<Long, Role> _ownerRolesMap;
+	private static final String _EXT_ROLE = ".role";
 
-	private Map<Long, Group> _groupsMap;
-
-	private Map<Long, Role> _guestRolesMap;
-
-	private Set<Long> _guestUsersSet;
-
-	private Set<String> _rolesPermissions;
+	private static final String _EXT_ROLES_PERMIMISSIONS = ".roles_permissions";
 
 	private static final String _UPDATED = ".updated";
 
-	private static final String _ROLE_EXT = ".role";
-
-	private static final String _ROLE_PERM_MAP_EXT = ".roles_permissions";
-
-	private static final String _OTHER_ROLE_MAP_EXT = ".others_roles";
-
 	private static final Log _log =
 		LogFactoryUtil.getLog(ConvertPermissionAlgorithm.class);
+
+	private Map<Long, Role[]> _defaultRolesMap = new HashMap<Long, Role[]>();
+	private Map<Long, Group> _groupsMap = new HashMap<Long, Group>();
+	private Map<Long, Role> _guestRolesMap = new HashMap<Long, Role>();
+	private Set<Long> _guestUsersSet = new HashSet<Long>();
+	private Map<Long, Role> _ownerRolesMap = new HashMap<Long, Role>();
+	private Set<String> _rolesPermissions = new HashSet<String>();
 
 }

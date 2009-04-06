@@ -68,17 +68,17 @@ import org.hibernate.usertype.UserType;
  */
 public class Table {
 
-	protected static final int BATCH_SIZE = GetterUtil.getInteger(
+	public static final int BATCH_SIZE = GetterUtil.getInteger(
 		PropsUtil.get("hibernate.jdbc.batch_size"));
-
-	public static final String SAFE_RETURN_CHARACTER =
-		"_SAFE_RETURN_CHARACTER_";
 
 	public static final String SAFE_COMMA_CHARACTER =
 		"_SAFE_COMMA_CHARACTER_";
 
 	public static final String SAFE_NEWLINE_CHARACTER =
 		"_SAFE_NEWLINE_CHARACTER_";
+
+	public static final String SAFE_RETURN_CHARACTER =
+		"_SAFE_RETURN_CHARACTER_";
 
 	public static final String[][] SAFE_CHARS = {
 		{StringPool.RETURN, StringPool.COMMA, StringPool.NEW_LINE},
@@ -93,61 +93,6 @@ public class Table {
 		_tableName = tableName;
 
 		setColumns(columns);
-	}
-
-	public String getTableName() {
-		return _tableName;
-	}
-
-	public Object[][] getColumns() {
-		return _columns;
-	}
-
-	public void setColumns(Object[][] columns) {
-		_columns = columns;
-
-		// LEP-7331
-
-		_order = new int[_columns.length];
-
-		int clobCount = 0;
-
-		for (int i = 0; i < _columns.length; ++i) {
-			Integer type = (Integer)columns[i][1];
-
-			if (type.intValue() == Types.CLOB) {
-				clobCount++;
-
-				int pos = _columns.length - clobCount;
-
-				_order[pos] = i;
-			}
-			else {
-				int pos = i - clobCount;
-
-				_order[pos] = i;
-			}
-		}
-	}
-
-	public String getExportedData(ResultSet rs) throws Exception {
-		StringBuilder sb = new StringBuilder();
-
-		Object[][] columns = getColumns();
-
-		for (int i = 0; i < columns.length; i++) {
-			boolean last = false;
-
-			if ((i + 1) == columns.length) {
-				last = true;
-			}
-
-			appendColumn(
-				sb, rs, (String)columns[i][0], (Integer)columns[i][1],
-				last);
-		}
-
-		return sb.toString();
 	}
 
 	public void appendColumn(StringBuilder sb, Object value, boolean last)
@@ -190,20 +135,35 @@ public class Table {
 		appendColumn(sb, value, last);
 	}
 
-	public String getCreateSQL() throws Exception {
-		return _createSQL;
+	public Object[][] getColumns() {
+		return _columns;
 	}
 
-	public void setCreateSQL(String createSQL) throws Exception {
-		_createSQL = createSQL;
+	public String getCreateSQL() throws Exception {
+		return _createSQL;
 	}
 
 	public String getDeleteSQL() throws Exception {
 		return "DELETE FROM " + _tableName;
 	}
 
-	public int[] getOrder() {
-		return _order;
+	public String getExportedData(ResultSet rs) throws Exception {
+		StringBuilder sb = new StringBuilder();
+
+		Object[][] columns = getColumns();
+
+		for (int i = 0; i < columns.length; i++) {
+			boolean last = false;
+
+			if ((i + 1) == columns.length) {
+				last = true;
+			}
+
+			appendColumn(
+				sb, rs, (String)columns[i][0], (Integer)columns[i][1], last);
+		}
+
+		return sb.toString();
 	}
 
 	public String getInsertSQL() throws Exception {
@@ -236,6 +196,10 @@ public class Table {
 		return sql;
 	}
 
+	public int[] getOrder() {
+		return _order;
+	}
+
 	public String getSelectSQL() throws Exception {
 		/*String sql = "SELECT ";
 
@@ -253,6 +217,10 @@ public class Table {
 		return sql;*/
 
 		return "SELECT * FROM " + _tableName;
+	}
+
+	public String getTableName() {
+		return _tableName;
 	}
 
 	public long getTotalRows() {
@@ -355,54 +323,6 @@ public class Table {
 		return value;
 	}
 
-	public void setColumn(
-			PreparedStatement ps, int index, Integer type, String value)
-		throws Exception {
-
-		int t = type.intValue();
-
-		int paramIndex = index + 1;
-
-		if (t == Types.BIGINT) {
-			ps.setLong(paramIndex, GetterUtil.getLong(value));
-		}
-		else if (t == Types.BOOLEAN) {
-			ps.setBoolean(paramIndex, GetterUtil.getBoolean(value));
-		}
-		else if ((t == Types.CLOB) || (t == Types.VARCHAR)) {
-			value = StringUtil.replace(value, SAFE_CHARS[1], SAFE_CHARS[0]);
-
-			ps.setString(paramIndex, value);
-		}
-		else if (t == Types.DOUBLE) {
-			ps.setDouble(paramIndex, GetterUtil.getDouble(value));
-		}
-		else if (t == Types.FLOAT) {
-			ps.setFloat(paramIndex, GetterUtil.getFloat(value));
-		}
-		else if (t == Types.INTEGER) {
-			ps.setInt(paramIndex, GetterUtil.getInteger(value));
-		}
-		else if (t == Types.SMALLINT) {
-			ps.setShort(paramIndex, GetterUtil.getShort(value));
-		}
-		else if (t == Types.TIMESTAMP) {
-			if (StringPool.NULL.equals(value)) {
-				ps.setTimestamp(paramIndex, null);
-			}
-			else {
-				DateFormat df = DateUtil.getISOFormat();
-
-				ps.setTimestamp(
-					paramIndex, new Timestamp(df.parse(value).getTime()));
-			}
-		}
-		else {
-			throw new UpgradeException(
-				"Upgrade code using unsupported class type " + type);
-		}
-	}
-
 	public String generateTempFile() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -497,9 +417,10 @@ public class Table {
 
 			while ((line = br.readLine()) != null) {
 				String[] values = StringUtil.split(line);
+
 				Object[][] columns = getColumns();
 
-				if (values.length != columns.length) {
+				if ((values.length) != (columns.length)) {
 					throw new UpgradeException(
 						"Column lengths differ between temp file and schema. " +
 							"Attempted to insert row " + line  + ".");
@@ -510,6 +431,7 @@ public class Table {
 				}
 
 				int[] order = getOrder();
+
 				for (int i = 0; i < order.length; i++) {
 					int pos = order[i];
 
@@ -567,12 +489,91 @@ public class Table {
 		ps.close();
 	}
 
+	public void setColumn(
+			PreparedStatement ps, int index, Integer type, String value)
+		throws Exception {
+
+		int t = type.intValue();
+
+		int paramIndex = index + 1;
+
+		if (t == Types.BIGINT) {
+			ps.setLong(paramIndex, GetterUtil.getLong(value));
+		}
+		else if (t == Types.BOOLEAN) {
+			ps.setBoolean(paramIndex, GetterUtil.getBoolean(value));
+		}
+		else if ((t == Types.CLOB) || (t == Types.VARCHAR)) {
+			value = StringUtil.replace(value, SAFE_CHARS[1], SAFE_CHARS[0]);
+
+			ps.setString(paramIndex, value);
+		}
+		else if (t == Types.DOUBLE) {
+			ps.setDouble(paramIndex, GetterUtil.getDouble(value));
+		}
+		else if (t == Types.FLOAT) {
+			ps.setFloat(paramIndex, GetterUtil.getFloat(value));
+		}
+		else if (t == Types.INTEGER) {
+			ps.setInt(paramIndex, GetterUtil.getInteger(value));
+		}
+		else if (t == Types.SMALLINT) {
+			ps.setShort(paramIndex, GetterUtil.getShort(value));
+		}
+		else if (t == Types.TIMESTAMP) {
+			if (StringPool.NULL.equals(value)) {
+				ps.setTimestamp(paramIndex, null);
+			}
+			else {
+				DateFormat df = DateUtil.getISOFormat();
+
+				ps.setTimestamp(
+					paramIndex, new Timestamp(df.parse(value).getTime()));
+			}
+		}
+		else {
+			throw new UpgradeException(
+				"Upgrade code using unsupported class type " + type);
+		}
+	}
+
+	public void setColumns(Object[][] columns) {
+		_columns = columns;
+
+		// LEP-7331
+
+		_order = new int[_columns.length];
+
+		int clobCount = 0;
+
+		for (int i = 0; i < _columns.length; ++i) {
+			Integer type = (Integer)columns[i][1];
+
+			if (type.intValue() == Types.CLOB) {
+				clobCount++;
+
+				int pos = _columns.length - clobCount;
+
+				_order[pos] = i;
+			}
+			else {
+				int pos = i - clobCount;
+
+				_order[pos] = i;
+			}
+		}
+	}
+
+	public void setCreateSQL(String createSQL) throws Exception {
+		_createSQL = createSQL;
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(Table.class);
 
-	private long _totalRows = 0;
-	private String _tableName;
 	private Object[][] _columns;
 	private String _createSQL;
 	private int[] _order;
+	private String _tableName;
+	private long _totalRows = 0;
 
 }
