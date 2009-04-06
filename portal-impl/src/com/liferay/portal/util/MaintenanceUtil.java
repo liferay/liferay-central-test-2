@@ -115,6 +115,8 @@ public class MaintenanceUtil {
 		_maintaining = true;
 		_status = new StringBuffer();
 
+		_appendStatus("Executing " + _className);
+
 		Collection<HttpSession> sessions = PortalSessionContext.values();
 
 		for (HttpSession session : sessions) {

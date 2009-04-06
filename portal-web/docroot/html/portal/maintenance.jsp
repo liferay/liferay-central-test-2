@@ -36,14 +36,14 @@ if (session.getId().equals(MaintenanceUtil.getSessionId())) {
 <html>
 
 <head>
-	<meta http-equiv="refresh" content="30; url=<%= PortalUtil.getPortalURL(request) %>;">
+	<meta http-equiv="refresh" content="30; url=<%= PortalUtil.getPortalURL(request) %>">
 </head>
 
 <body>
 
 <center>
 
-<table border="0" cellpadding="0" cellspacing="0" height="100%" width="600">
+<table border="0" cellpadding="0" cellspacing="0" height="100%" width="700">
 <tr>
 	<td align="center" valign="middle">
 		<table border="0" cellpadding="1" cellspacing="0" width="100%">
@@ -67,12 +67,6 @@ if (session.getId().equals(MaintenanceUtil.getSessionId())) {
 
 							<tr>
 								<td>
-									<br />
-
-									Executing <%= MaintenanceUtil.getClassName() %>...
-
-									<br /><br />
-
 									<%= MaintenanceUtil.getStatus() %>
 								</td>
 							</tr>
