@@ -39,8 +39,8 @@ public class MBMessageDisplayImpl implements MBMessageDisplay {
 
 	public MBMessageDisplayImpl(
 		MBMessage message, MBMessage parentMessage, MBCategory category,
-		MBThread thread, MBThread previousThread,
-		MBThread nextThread, String threadView) {
+		MBThread thread, MBThread previousThread, MBThread nextThread,
+		String threadView) {
 
 		_message = message;
 		_parentMessage = parentMessage;
