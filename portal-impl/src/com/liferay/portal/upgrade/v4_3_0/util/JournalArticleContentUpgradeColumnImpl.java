@@ -32,8 +32,8 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
-import com.liferay.portal.upgrade.util.BaseUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.IdReplacer;
+import com.liferay.portal.upgrade.util.Table;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.util.ValueMapperFactory;
@@ -72,8 +72,8 @@ public class JournalArticleContentUpgradeColumnImpl
 		String content = (String)oldValue;
 
 		content = StringUtil.replace(
-			content, BaseUpgradeTableImpl.SAFE_CHARS[1],
-			BaseUpgradeTableImpl.SAFE_CHARS[0]);
+			content, Table.SAFE_CHARS[1],
+			Table.SAFE_CHARS[0]);
 
 		/*if (content.indexOf("\\n") != -1) {
 			content = StringUtil.replace(
@@ -91,8 +91,8 @@ public class JournalArticleContentUpgradeColumnImpl
 		content = replaceIds(content);
 
 		content = StringUtil.replace(
-			content, BaseUpgradeTableImpl.SAFE_CHARS[0],
-			BaseUpgradeTableImpl.SAFE_CHARS[1]);
+			content, Table.SAFE_CHARS[0],
+			Table.SAFE_CHARS[1]);
 
 		return content;
 	}

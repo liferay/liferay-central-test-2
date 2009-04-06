@@ -998,7 +998,7 @@ public class PropsValues {
 		GetterUtil.getInteger(
 			PropsUtil.get(PropsKeys.PERMISSIONS_THREAD_LOCAL_CACHE_MAX_SIZE));
 
-	public static final int PERMISSIONS_USER_CHECK_ALGORITHM =
+	public static int PERMISSIONS_USER_CHECK_ALGORITHM =
 		GetterUtil.getInteger(
 			PropsUtil.get(PropsKeys.PERMISSIONS_USER_CHECK_ALGORITHM));
 
