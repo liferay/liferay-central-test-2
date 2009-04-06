@@ -162,7 +162,7 @@ public class JSONServiceAction extends JSONAction {
 					else if (returnObj instanceof List) {
 						JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-						List returnList = (List)returnObj;
+						List<Object> returnList = (List<Object>)returnObj;
 
 						if (!returnList.isEmpty()) {
 							Object returnItem0 = returnList.get(0);
@@ -218,16 +218,8 @@ public class JSONServiceAction extends JSONAction {
 			catch (Exception e) {
 				JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-				if (e instanceof IllegalArgumentException) {
-					IllegalArgumentException iae = (IllegalArgumentException)e;
-
-					jsonObj.put("exception", iae.getMessage());
-				}
-				else if (e instanceof InvocationTargetException) {
-					InvocationTargetException ite =
-						(InvocationTargetException)e;
-
-					jsonObj.put("exception", ite.getCause().toString());
+				if (e instanceof InvocationTargetException) {
+					jsonObj.put("exception", e.getCause().toString());
 				}
 				else {
 					jsonObj.put("exception", e.getMessage());
@@ -303,15 +295,6 @@ public class JSONServiceAction extends JSONAction {
 
 			return null;
 		}
-	}
-
-	protected String getSerializerClassName(Object obj) {
-		String serlializerClassName = StringUtil.replace(
-				obj.getClass().getName(),
-				new String[] {".model.impl.", "Impl"},
-				new String[] {".service.http.", "JSONSerializer"});
-
-		return serlializerClassName;
 	}
 
 	protected Object[] getMethodAndParameterTypes(
@@ -457,6 +440,15 @@ public class JSONServiceAction extends JSONAction {
 		}
 
 		return jsonArray.toString();
+	}
+
+	protected String getSerializerClassName(Object obj) {
+		String serlializerClassName = StringUtil.replace(
+			obj.getClass().getName(),
+			new String[] {".model.impl.", "Impl"},
+			new String[] {".service.http.", "JSONSerializer"});
+
+		return serlializerClassName;
 	}
 
 	protected boolean isValidRequest(HttpServletRequest request) {
