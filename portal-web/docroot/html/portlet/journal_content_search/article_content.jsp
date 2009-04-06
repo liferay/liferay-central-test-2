@@ -83,7 +83,8 @@ List hitLayoutIds = JournalContentSearchLocalServiceUtil.getLayoutIds(layout.get
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(PortalUtil.getLayoutFriendlyURL(layout, themeDisplay));
-		sb.append("/-/journal_content/");
+		sb.append(Portal.FRIENDLY_URL_SEPARATOR);
+		sb.append("journal_content/");
 
 		if (Validator.isNotNull(targetPortletId)) {
 			sb.append(targetPortletId);
