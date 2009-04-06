@@ -121,11 +121,6 @@ public class JSONServiceAction extends JSONAction {
 			return null;
 		}
 
-		String serlializerClassName = StringUtil.replace(
-			className,
-			new String[] {".service.", "ServiceUtil"},
-			new String[] {".service.http.", "JSONSerializer"});
-
 		Class<?> classObj = Class.forName(className);
 
 		Object[] methodAndParameterTypes = getMethodAndParameterTypes(
@@ -153,6 +148,9 @@ public class JSONServiceAction extends JSONAction {
 
 				if (returnObj != null) {
 					if (returnObj instanceof BaseModel) {
+						String serlializerClassName = getSerializerClassName(
+							returnObj);
+
 						MethodWrapper methodWrapper = new MethodWrapper(
 							serlializerClassName, "toJSONObject", returnObj);
 
@@ -162,11 +160,22 @@ public class JSONServiceAction extends JSONAction {
 						return jsonObj.toString();
 					}
 					else if (returnObj instanceof List) {
-						MethodWrapper methodWrapper = new MethodWrapper(
-							serlializerClassName, "toJSONArray", returnObj);
+						JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-						JSONArray jsonArray = (JSONArray)MethodInvoker.invoke(
-							methodWrapper, false);
+						List returnList = (List)returnObj;
+
+						if (!returnList.isEmpty()) {
+							Object returnItem0 = returnList.get(0);
+
+							String serlializerClassName =
+								getSerializerClassName(returnItem0);
+
+							MethodWrapper methodWrapper = new MethodWrapper(
+								serlializerClassName, "toJSONArray", returnObj);
+
+							jsonArray = (JSONArray)MethodInvoker.invoke(
+								methodWrapper, false);
+						}
 
 						return jsonArray.toString();
 					}
@@ -206,17 +215,23 @@ public class JSONServiceAction extends JSONAction {
 					return jsonObj.toString();
 				}
 			}
-			catch (IllegalArgumentException iae) {
+			catch (Exception e) {
 				JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-				jsonObj.put("exception", iae.getMessage());
+				if (e instanceof IllegalArgumentException) {
+					IllegalArgumentException iae = (IllegalArgumentException)e;
 
-				return jsonObj.toString();
-			}
-			catch (InvocationTargetException ite) {
-				JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+					jsonObj.put("exception", iae.getMessage());
+				}
+				else if (e instanceof InvocationTargetException) {
+					InvocationTargetException ite =
+						(InvocationTargetException)e;
 
-				jsonObj.put("exception", ite.getCause().toString());
+					jsonObj.put("exception", ite.getCause().toString());
+				}
+				else {
+					jsonObj.put("exception", e.getMessage());
+				}
 
 				return jsonObj.toString();
 			}
@@ -288,6 +303,15 @@ public class JSONServiceAction extends JSONAction {
 
 			return null;
 		}
+	}
+
+	protected String getSerializerClassName(Object obj) {
+		String serlializerClassName = StringUtil.replace(
+				obj.getClass().getName(),
+				new String[] {".model.impl.", "Impl"},
+				new String[] {".service.http.", "JSONSerializer"});
+
+		return serlializerClassName;
 	}
 
 	protected Object[] getMethodAndParameterTypes(
