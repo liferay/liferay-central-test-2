@@ -47,7 +47,7 @@ String path = (String)request.getAttribute("liferay-ui:webdav:path");
 	</table>
 </div>
 
-<script>
+<script type="text/javascript">
 	jQuery(
 		function () {
 			var webdavDiv = jQuery('#<%= randomNamespace %>webdav');
