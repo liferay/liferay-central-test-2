@@ -42,11 +42,13 @@ if (Validator.isNotNull(portletResource)) {
 	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-boolean showListed = GetterUtil.getBoolean(preferences.getValue("show-listed", "true"));
+String defaultShowListed = "true";
 
 if (portletName.equals(PortletKeys.JOURNAL_CONTENT_SEARCH)) {
-	showListed = PropsValues.JOURNAL_CONTENT_SEARCH_SHOW_LISTED;
+	defaultShowListed = StringUtil.valueOf(PropsValues.JOURNAL_CONTENT_SEARCH_SHOW_LISTED);
 }
+
+boolean showListed = GetterUtil.getBoolean(preferences.getValue("show-listed", defaultShowListed));
 
 String targetPortletId = preferences.getValue("target-portlet-id", StringPool.BLANK);
 String type = preferences.getValue("type", StringPool.BLANK);
