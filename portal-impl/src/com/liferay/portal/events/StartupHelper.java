@@ -133,10 +133,6 @@ public class StartupHelper {
 
 		// LPS-1880
 
-		boolean tempIndexReadOnly = PropsValues.INDEX_READ_ONLY;
-
-		PropsValues.INDEX_READ_ONLY = true;
-
 		int verifyFrequency = GetterUtil.getInteger(
 			PropsUtil.get(PropsKeys.VERIFY_FREQUENCY));
 
@@ -153,6 +149,10 @@ public class StartupHelper {
 
 			BatchSessionUtil.setEnabled(true);
 
+			boolean tempIndexReadOnly = PropsValues.INDEX_READ_ONLY;
+
+			PropsValues.INDEX_READ_ONLY = true;
+
 			try {
 				for (String className : verifyProcesses) {
 					verifyProcess(className);
@@ -160,10 +160,10 @@ public class StartupHelper {
 			}
 			finally {
 				BatchSessionUtil.setEnabled(false);
+
+				PropsValues.INDEX_READ_ONLY = tempIndexReadOnly;
 			}
 		}
-
-		PropsValues.INDEX_READ_ONLY = tempIndexReadOnly;
 	}
 
 	public boolean isUpgraded() {
