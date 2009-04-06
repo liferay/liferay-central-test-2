@@ -742,17 +742,10 @@ public class JournalArticleLocalServiceImpl
 		journalArticleImageLocalService.deleteImages(
 			article.getGroupId(), article.getArticleId(), article.getVersion());
 
-		// Small image
+		int articlesCount = journalArticlePersistence.countByG_A(
+			article.getGroupId(), article.getArticleId());
 
-		imageLocalService.deleteImage(article.getSmallImageId());
-
-		// Expando
-
-		expandoValueLocalService.deleteValues(
-			JournalArticle.class.getName(), article.getResourcePrimKey());
-
-		if (journalArticlePersistence.countByG_A(
-				article.getGroupId(), article.getArticleId()) == 1) {
+		if (articlesCount == 1) {
 
 			// Tags
 
@@ -773,6 +766,15 @@ public class JournalArticleLocalServiceImpl
 
 			journalContentSearchLocalService.deleteArticleContentSearches(
 				article.getGroupId(), article.getArticleId());
+
+			// Small image
+
+			imageLocalService.deleteImage(article.getSmallImageId());
+
+			// Expando
+
+			expandoValueLocalService.deleteValues(
+				JournalArticle.class.getName(), article.getResourcePrimKey());
 
 			// Resources
 
@@ -1928,11 +1930,11 @@ public class JournalArticleLocalServiceImpl
 		if (!visible &&
 			(article.getVersion() != JournalArticleImpl.DEFAULT_VERSION)) {
 
-			int countApprovedArticles =
+			int approvedArticlesCount =
 				journalArticlePersistence.countByG_A_A(
 					article.getGroupId(), article.getArticleId(), true);
 
-			if (countApprovedArticles > 0) {
+			if (approvedArticlesCount > 0) {
 				visible = true;
 			}
 		}
