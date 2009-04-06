@@ -291,27 +291,30 @@ public class PollsQuestionLocalServiceImpl
 
 		// Choices
 
-		int oldChoicesCount = pollsChoicePersistence.countByQuestionId(
-			questionId);
+		if (choices != null) {
+			int oldChoicesCount = pollsChoicePersistence.countByQuestionId(
+				questionId);
 
-		if (oldChoicesCount > choices.size()) {
-			throw new QuestionChoiceException();
-		}
-
-		for (PollsChoice choice : choices) {
-			String choiceName = choice.getName();
-			String choiceDescription = choice.getDescription();
-
-			choice = pollsChoicePersistence.fetchByQ_N(questionId, choiceName);
-
-			if (choice == null) {
-				pollsChoiceLocalService.addChoice(
-					questionId, choiceName, choiceDescription);
+			if (oldChoicesCount > choices.size()) {
+				throw new QuestionChoiceException();
 			}
-			else {
-				pollsChoiceLocalService.updateChoice(
-					choice.getChoiceId(), questionId, choiceName,
-					choiceDescription);
+
+			for (PollsChoice choice : choices) {
+				String choiceName = choice.getName();
+				String choiceDescription = choice.getDescription();
+
+				choice = pollsChoicePersistence.fetchByQ_N(
+					questionId, choiceName);
+
+				if (choice == null) {
+					pollsChoiceLocalService.addChoice(
+						questionId, choiceName, choiceDescription);
+				}
+				else {
+					pollsChoiceLocalService.updateChoice(
+						choice.getChoiceId(), questionId, choiceName,
+						choiceDescription);
+				}
 			}
 		}
 
@@ -329,7 +332,7 @@ public class PollsQuestionLocalServiceImpl
 			throw new QuestionDescriptionException();
 		}
 
-		if (choices != null && choices.size() < 2) {
+		if ((choices != null) && (choices.size() < 2)) {
 			throw new QuestionChoiceException();
 		}
 	}
