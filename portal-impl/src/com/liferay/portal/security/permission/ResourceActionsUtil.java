@@ -525,6 +525,14 @@ public class ResourceActionsUtil {
 			synchronized (this) {
 				Portlet portlet = PortletLocalServiceUtil.getPortletById(name);
 
+				if (portlet == null) {
+					_log.warn(
+						"Returning zero resource actions for unknown portlet "
+							+ name);
+
+					return actions;
+				}
+
 				Map<String, Set<String>> portletModes =
 					portlet.getPortletModes();
 
