@@ -28,7 +28,7 @@
 String redirect = ParamUtil.getString(request, "redirect");
 
 if (Validator.isNull(redirect)) {
-	redirect = PortalUtil.getLayoutURL(layout, themeDisplay) + "/-/blogs";
+	redirect = PortalUtil.getLayoutURL(layout, themeDisplay) + Portal.FRIENDLY_URL_SEPARATOR + "blogs";
 }
 
 BlogsEntry entry = (BlogsEntry)request.getAttribute(WebKeys.BLOGS_ENTRY);
@@ -66,7 +66,7 @@ TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(Blog
 		<liferay-ui:message key="trackback-url" />:
 
 		<liferay-ui:input-resource
-			url='<%= themeDisplay.getPortalURL() + PortalUtil.getLayoutURL(themeDisplay) + "/-/blogs/trackback/" + entry.getUrlTitle() %>'
+			url='<%= themeDisplay.getPortalURL() + PortalUtil.getLayoutURL(themeDisplay) + Portal.FRIENDLY_URL_SEPARATOR + "blogs/trackback/" + entry.getUrlTitle() %>'
 		/>
 
 		<br /><br />

@@ -67,7 +67,7 @@ for (int i = 0; i < results.size(); i++) {
 <%
 }
 
-String rssURL = PortalUtil.getLayoutURL(layout, themeDisplay) + "/-/blogs/rss";
+String rssURL = PortalUtil.getLayoutURL(layout, themeDisplay) + Portal.FRIENDLY_URL_SEPARATOR + "blogs/rss";
 
 if (rssURLParams.length() > 0) {
 	rssURL += "?" + rssURLParams.substring(1);

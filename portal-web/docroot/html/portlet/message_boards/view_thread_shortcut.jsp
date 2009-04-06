@@ -61,7 +61,7 @@ if (treeWalker.isOdd()) {
 		String portalURL = themeDisplay.getPortalURL();
 		String layoutURL = PortalUtil.getLayoutURL(themeDisplay);
 
-		String messageURL = layoutURL + "/-/message_boards/message/" + selMessage.getMessageId();
+		String messageURL = layoutURL + Portal.FRIENDLY_URL_SEPARATOR + "message_boards/message/" + selMessage.getMessageId();
 
 		if (!HttpUtil.hasDomain(layoutURL)) {
 			messageURL = portalURL + messageURL;
