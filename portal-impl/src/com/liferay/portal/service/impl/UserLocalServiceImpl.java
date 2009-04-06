@@ -2506,6 +2506,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				parameterMap);
 		}
 		else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
+			login = StringUtil.replace(
+				login, StringPool.SPACE, StringPool.DASH);
+
 			authResult = AuthPipeline.authenticateByScreenName(
 				authPipelinePre, companyId, login, password, headerMap,
 				parameterMap);
