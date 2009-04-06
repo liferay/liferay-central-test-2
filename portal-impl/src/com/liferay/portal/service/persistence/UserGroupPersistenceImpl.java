@@ -1678,8 +1678,6 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portal.service.persistence.EmailAddressPersistence emailAddressPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence.impl")
 	protected com.liferay.portal.service.persistence.GroupPersistence groupPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.MembershipInvitationPersistence.impl")
-	protected com.liferay.portal.service.persistence.MembershipInvitationPersistence membershipInvitationPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ImagePersistence.impl")
 	protected com.liferay.portal.service.persistence.ImagePersistence imagePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutPersistence.impl")

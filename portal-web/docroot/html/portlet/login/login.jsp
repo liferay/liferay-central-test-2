@@ -42,7 +42,6 @@
 		<%
 		String redirect = ParamUtil.getString(renderRequest, "redirect");
 
-		String key = ParamUtil.getString(request, "key");
 		String login = LoginUtil.getLogin(request, "login", company);
 		String password = StringPool.BLANK;
 		boolean rememberMe = ParamUtil.getBoolean(request, "rememberMe");
@@ -54,7 +53,6 @@
 
 		<form action="<portlet:actionURL secure="<%= PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS || request.isSecure() %>"><portlet:param name="saveLastPath" value="0" /><portlet:param name="struts_action" value="/login/login" /></portlet:actionURL>" class="uni-form" method="post" name="<portlet:namespace />fm">
 		<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
-		<input name="<portlet:namespace />key" type="hidden" value="<%= HtmlUtil.escape(key) %>" />
 		<input id="<portlet:namespace />rememberMe" name="<portlet:namespace />rememberMe" type="hidden" value="<%= rememberMe %>" />
 
 		<c:if test='<%= SessionMessages.contains(request, "user_added") %>'>

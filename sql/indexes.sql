@@ -253,10 +253,6 @@ create index IX_847F92B5 on MBStatsUser (userId);
 create index IX_CB854772 on MBThread (categoryId);
 create index IX_95C0EA45 on MBThread (groupId);
 
-create index IX_E5117015 on MembershipInvitation (groupId);
-create index IX_DDB63649 on MembershipInvitation (key_);
-create index IX_1B5EC36F on MembershipInvitation (userId);
-
 create index IX_8A1CC4B on MembershipRequest (groupId);
 create index IX_C28C72EC on MembershipRequest (groupId, statusId);
 create index IX_66D70879 on MembershipRequest (userId);

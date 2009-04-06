@@ -147,20 +147,6 @@
 		<property name="friendlyURL" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="active" column="active_" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
-	<class name="com.liferay.portal.model.impl.MembershipInvitationImpl" table="MembershipInvitation">
-		<cache usage="read-write" />
-		<id name="membershipRequestId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="createDate" type="org.hibernate.type.TimestampType" />
-		<property name="acceptedDate" type="org.hibernate.type.TimestampType" />
-		<property name="declinedDate" type="org.hibernate.type.TimestampType" />
-		<property name="invitedUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="key" column="key_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-	</class>
 	<class name="com.liferay.portal.model.impl.ImageImpl" table="Image">
 		<cache usage="read-write" />
 		<id name="imageId" type="long">

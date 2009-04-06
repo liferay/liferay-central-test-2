@@ -97,14 +97,6 @@ String tabs1 = (String)objArray[1];
 
 	<c:choose>
 		<c:when test='<%= tabs1.equals("communities-owned") || tabs1.equals("communities-joined") %>'>
-				<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="inviteURL">
-					<portlet:param name="struts_action" value="/communities/invite_users" />
-					<portlet:param name="redirect" value="<%= currentURL %>" />
-					<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
-				</portlet:renderURL>
-
-				<liferay-ui:icon image="assign" message="invite" url="<%= inviteURL %>" />
-
 			<c:if test="<%= (group.getType() == GroupConstants.TYPE_COMMUNITY_OPEN) || (group.getType() == GroupConstants.TYPE_COMMUNITY_RESTRICTED) %>">
 				<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="leaveURL">
 					<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
@@ -145,14 +137,6 @@ String tabs1 = (String)objArray[1];
 				</c:when>
 				<c:otherwise>
 					<c:if test="<%= (group.getType() == GroupConstants.TYPE_COMMUNITY_OPEN) || (group.getType() == GroupConstants.TYPE_COMMUNITY_RESTRICTED) %>">
-						<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="inviteURL">
-							<portlet:param name="struts_action" value="/communities/invite_users" />
-							<portlet:param name="redirect" value="<%= currentURL %>" />
-							<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
-						</portlet:renderURL>
-
-						<liferay-ui:icon image="assign" message="invite" url="<%= inviteURL %>" />
-
 						<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="leaveURL">
 							<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
 							<portlet:param name="<%= Constants.CMD %>" value="group_users" />

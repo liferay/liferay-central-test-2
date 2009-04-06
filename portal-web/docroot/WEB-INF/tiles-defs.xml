@@ -633,10 +633,6 @@
 
 	<definition name="portlet.login" extends="portlet" />
 
-	<definition name="portlet.login.confirm_membership_invitation" extends="portlet.login">
-		<put name="portlet_content" value="/portlet/login/confirm_membership_invitation.jsp"/>
-	</definition>
-
 	<definition name="portlet.login.create_account" extends="portlet.login">
 		<put name="portlet_content" value="/portlet/login/create_account.jsp" />
 	</definition>
@@ -739,10 +735,6 @@
 
 	<definition name="portlet.communities.export_pages" extends="portlet.communities">
 		<put name="portlet_content" value="/portlet/communities/export_pages.jsp" />
-	</definition>
-
-	<definition name="portlet.communities.invite_users" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/invite_users.jsp"/>
 	</definition>
 
 	<definition name="portlet.communities.post_membership_request" extends="portlet.communities">

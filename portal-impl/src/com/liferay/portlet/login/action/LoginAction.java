@@ -120,23 +120,7 @@ public class LoginAction extends PortletAction {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay) renderRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		String key = ParamUtil.getString(renderRequest, "key");
-
-		if (themeDisplay.isSignedIn() && Validator.isNotNull(key)) {
-
-			return mapping.findForward(
-				getForward(
-					renderRequest,
-					"portlet.login.confirm_membership_invitation"));
-		}
-		else {
-			return mapping.findForward(
-				getForward(renderRequest, "portlet.login.login"));
-		}
-
+		return mapping.findForward("portlet.login.login");
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {
@@ -153,7 +137,6 @@ public class LoginAction extends PortletAction {
 		HttpServletResponse response = PortalUtil.getHttpServletResponse(
 			actionResponse);
 
-		String key = ParamUtil.getString(actionRequest, "key");
 		String login = ParamUtil.getString(actionRequest, "login");
 		String password = ParamUtil.getString(actionRequest, "password");
 		boolean rememberMe = ParamUtil.getBoolean(actionRequest, "rememberMe");
@@ -166,10 +149,6 @@ public class LoginAction extends PortletAction {
 		if (PropsValues.PORTAL_JAAS_ENABLE) {
 			actionResponse.sendRedirect(
 				themeDisplay.getPathMain() + "/portal/protected");
-		}
-		else if (Validator.isNotNull(key)) {
-			setForward(
-				actionRequest, "portlet.login.confirm_membership_invitation");
 		}
 		else {
 			String redirect = ParamUtil.getString(actionRequest, "redirect");

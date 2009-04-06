@@ -173,17 +173,6 @@
 		</field>
 		<field name="active" type="boolean" />
 	</model>
-	<model name="com.liferay.portal.model.MembershipInvitation">
-		<field name="membershipRequestId" type="long" />
-		<field name="companyId" type="long" />
-		<field name="userId" type="long" />
-		<field name="createDate" type="Date" />
-		<field name="acceptedDate" type="Date" />
-		<field name="declinedDate" type="Date" />
-		<field name="invitedUserId" type="long" />
-		<field name="groupId" type="long" />
-		<field name="key" type="String" />
-	</model>
 	<model name="com.liferay.portal.model.Image">
 		<field name="imageId" type="long" />
 		<field name="modifiedDate" type="Date" />
