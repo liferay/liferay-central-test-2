@@ -313,11 +313,11 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 		image.setWidth(width);
 		image.setSize(size);
 
-		imagePersistence.update(image, false);
-
 		Hook hook = HookFactory.getInstance();
 
 		hook.updateImage(image, type, bytes);
+
+		imagePersistence.update(image, false);
 
 		ImageServletTokenUtil.resetToken(imageId);
 
