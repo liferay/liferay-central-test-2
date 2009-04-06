@@ -525,31 +525,30 @@ public class ResourceActionsUtil {
 			synchronized (this) {
 				Portlet portlet = PortletLocalServiceUtil.getPortletById(name);
 
-				if (portlet == null) {
-					_log.warn(
-						"Returning zero resource actions for unknown portlet "
-							+ name);
+				if (portlet != null) {
+					Map<String, Set<String>> portletModes =
+						portlet.getPortletModes();
 
-					return actions;
-				}
+					Set<String> mimeTypeModes = portletModes.get("text/html");
 
-				Map<String, Set<String>> portletModes =
-					portlet.getPortletModes();
-
-				Set<String> mimeTypeModes = portletModes.get("text/html");
-
-				if (mimeTypeModes != null) {
-					for (String actionId : mimeTypeModes) {
-						if (actionId.equalsIgnoreCase("edit")) {
-							actions.add(ActionKeys.PREFERENCES);
-						}
-						else if (actionId.equalsIgnoreCase("edit_guest")) {
-							actions.add(ActionKeys.GUEST_PREFERENCES);
-						}
-						else {
-							actions.add(actionId.toUpperCase());
+					if (mimeTypeModes != null) {
+						for (String actionId : mimeTypeModes) {
+							if (actionId.equalsIgnoreCase("edit")) {
+								actions.add(ActionKeys.PREFERENCES);
+							}
+							else if (actionId.equalsIgnoreCase("edit_guest")) {
+								actions.add(ActionKeys.GUEST_PREFERENCES);
+							}
+							else {
+								actions.add(actionId.toUpperCase());
+							}
 						}
 					}
+				}
+				else {
+					_log.warn(
+						"Attempting to obtain resource actions for unknown " +
+							"portlet " + name);
 				}
 
 				_checkPortletActions(actions);
