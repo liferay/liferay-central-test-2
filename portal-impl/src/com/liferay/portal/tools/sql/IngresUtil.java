@@ -47,6 +47,7 @@ public class IngresUtil extends DBUtil {
 		template = replaceTemplate(template, getTemplate());
 
 		template = reword(template);
+		template = StringUtil.replace(template, "\\n", "'+x'0a'+'");
 
 		return template;
 	}
