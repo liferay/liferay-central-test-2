@@ -4,6 +4,20 @@
 
 		extend: jQuery.extend,
 
+		extendDelta: function(dest, src) {
+			var instance = this;
+
+			if (dest) {
+				for (var prop in src) {
+					if (Expanse.isEmpty(src[prop])) {
+						dest[prop] = src[prop];
+					}
+				}
+			}
+
+			return dest;
+		},
+
 		emptyFunction: function() {},
 
 		generateId: YAHOO.util.Dom.generateId,
@@ -69,6 +83,10 @@
 			return instance._window;
 		},
 
+		isEmpty: function(value, allowBlank) {
+			return value === null || value === undefined || ((YAHOO.lang.isArray(value) && !value.length)) || (!allowBlank ? value === '' : false);
+		},
+
 		namespace: function() {
 			var args = arguments;
 			var baseObject = Expanse;
@@ -107,7 +125,7 @@
 			}
 		},
 
-		prefix: function() {
+		prefix: function(str, prefix) {
 			var instance = this;
 
 			if (typeof str != "string") {
