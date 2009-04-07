@@ -413,13 +413,38 @@ public class Validator {
 			return true;
 		}
 
-		s = s.trim();
+        int counter = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (ch == ' ') {
+                continue;
+            }
+            else if (counter > 3) {
+                return false;
+            }
 
-		if ((s.length() == 0) || (s.equals(StringPool.NULL))) {
-			return true;
-		}
+            switch (counter) {
+                case 0:
+                    if (ch != 'n') {
+                        return false;
+                    }
+                    break;
+                case 1:
+                    if (ch != 'u') {
+                        return false;
+                    }
+                    break;
+                case 2:
+                case 3:
+                    if (ch != 'l') {
+                        return false;
+                    }
+                    break;
+            }
+            counter++;
+        }
 
-		return false;
+        return true;
 	}
 
 	public static boolean isNull(Object[] array) {
