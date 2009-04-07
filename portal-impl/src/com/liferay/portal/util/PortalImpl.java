@@ -2988,7 +2988,9 @@ public class PortalImpl implements Portal {
 	 * @param		request the HTTP servlet request
 	 */
 	public void setPageKeywords(String keywords, HttpServletRequest request) {
-		request.setAttribute(WebKeys.PAGE_KEYWORDS, keywords);
+		request.removeAttribute(WebKeys.PAGE_KEYWORDS);
+
+		addPageKeywords(keywords, request);
 	}
 
 	/**
