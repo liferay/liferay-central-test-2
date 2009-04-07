@@ -47,7 +47,10 @@ public class ConvertWikiCreole extends ConvertProcess {
 		boolean enabled = false;
 
 		try {
-			if (WikiPageLocalServiceUtil.getPagesCount("classic_wiki") > 0) {
+			int pagesCount = WikiPageLocalServiceUtil.getPagesCount(
+				"classic_wiki");
+
+			if (pagesCount > 0) {
 				enabled = true;
 			}
 		}

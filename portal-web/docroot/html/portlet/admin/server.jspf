@@ -35,16 +35,6 @@ NumberFormat numberFormat = NumberFormat.getInstance();
 
 numberFormat.setMaximumIntegerDigits(2);
 numberFormat.setMinimumIntegerDigits(2);
-
-boolean migrationAvailable = false;
-
-for (String convertProcessClassName : PropsValues.CONVERT_PROCESSES) {
-	ConvertProcess convertProcess = (ConvertProcess)InstancePool.get(convertProcessClassName);
-
-	if (convertProcess.isEnabled()) {
-		migrationAvailable = true;
-	}
-}
 %>
 
 <liferay-ui:message key="uptime" />:
@@ -310,37 +300,48 @@ for (String convertProcessClassName : PropsValues.CONVERT_PROCESSES) {
 				</c:choose>
 			</c:when>
 			<c:when test='<%= tabs2.equals("data-migration") %>'>
-				<table class="lfr-table">
-					<c:choose>
-						<c:when test='<%= migrationAvailable %>'>
-							<%
-							for (String convertProcessClassName : PropsValues.CONVERT_PROCESSES) {
-								ConvertProcess convertProcess = (ConvertProcess)InstancePool.get(convertProcessClassName);
 
-								if (convertProcess.isEnabled()) {
-							%>
+				<%
+				List<ConvertProcess> convertProcesses = new ArrayList<ConvertProcess>();
 
-									<tr>
-										<td>
-											<liferay-ui:message key="<%= convertProcess.getDescription() %>" />
-										</td>
-										<td>
-											<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('convertProcess.<%= convertProcessClassName %>');" />
-										</td>
-									</tr>
+				for (String convertProcessClassName : PropsValues.CONVERT_PROCESSES) {
+					ConvertProcess convertProcess = (ConvertProcess)InstancePool.get(convertProcessClassName);
 
-							<%
-								}
-							}
-							%>
-						</c:when>
-						<c:otherwise>
-							<div class="portlet-msg-info">
-								<liferay-ui:message key="no-data-migration-processes-are-available" />
-							</div>
-						</c:otherwise>
-					</c:choose>
-				</table>
+					if (convertProcess.isEnabled()) {
+						convertProcesses.add(convertProcess);
+					}
+				}
+				%>
+
+				<c:choose>
+					<c:when test="<%= convertProcesses.isEmpty() %>">
+						<div class="portlet-msg-info">
+							<liferay-ui:message key="no-data-migration-processes-are-available" />
+						</div>
+					</c:when>
+					<c:otherwise>
+						<table class="lfr-table">
+
+						<%
+						for (ConvertProcess convertProcess : convertProcesses) {
+						%>
+
+							<tr>
+								<td>
+									<liferay-ui:message key="<%= convertProcess.getDescription() %>" />
+								</td>
+								<td>
+									<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('convertProcess.<%= convertProcessClassName %>');" />
+								</td>
+							</tr>
+
+						<%
+						}
+						%>
+
+						</table>
+					</c:otherwise>
+				</c:choose>
 			</c:when>
 			<c:when test='<%= tabs2.equals("file-uploads") %>'>
 				<liferay-ui:message key="configure-the-file-upload-settings" />
