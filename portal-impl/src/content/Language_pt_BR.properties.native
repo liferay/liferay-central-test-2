@@ -1057,6 +1057,7 @@ content-text=Texto Satisfeito
 content=Conteúdo
 continue=Continue
 control-panel=Painel de controle
+convert-legacy-permission-algorithm=Algoritmo da permissão do legado do converso.
 convert-to=Converso A
 convert-wiki-pages-from-classic-wiki-to-creole-format=Converta páginas de Wiki de Wiki clássico ao formato crioulo.
 convert=Converso

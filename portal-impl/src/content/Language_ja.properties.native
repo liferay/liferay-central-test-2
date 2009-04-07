@@ -1057,6 +1057,7 @@ content-text=コンテンツのテキスト
 content=内容
 continue=続行
 control-panel=コントロールパネル
+convert-legacy-permission-algorithm=改宗者の遺産の許可のアルゴリズム。
 convert-to=Convert To
 convert-wiki-pages-from-classic-wiki-to-creole-format=古典的なWikiからのクリオールのフォーマットへの改宗者のWikiのページ。
 convert=変換

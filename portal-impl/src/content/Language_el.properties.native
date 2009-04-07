@@ -1057,6 +1057,7 @@ content-text=Ικανοποιημένο κείμενο
 content=Περιεχόμενο
 continue=Συνέχεια
 control-panel=Επιτροπή ελέγχου
+convert-legacy-permission-algorithm=Μετατρέψτε τον αλγόριθμο άδειας κληρονομιών.
 convert-to=Μετατρέψτε
 convert-wiki-pages-from-classic-wiki-to-creole-format=Μετατρέψτε τις σελίδες Wiki από κλασικό Wiki στο κρεολικό σχήμα.
 convert=Μετατροπή

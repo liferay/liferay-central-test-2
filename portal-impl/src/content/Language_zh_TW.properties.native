@@ -1057,6 +1057,7 @@ content-text=美滿的文本
 content=內容
 continue=繼續
 control-panel=控制板
+convert-legacy-permission-algorithm=改變信仰者遺產允許算法。
 convert-to=改變信仰者
 convert-wiki-pages-from-classic-wiki-to-creole-format=轉換從經典Wiki的Wiki頁成克里奧爾人的格式。
 convert=轉換

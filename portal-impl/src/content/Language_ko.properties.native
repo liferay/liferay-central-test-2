@@ -1057,6 +1057,7 @@ content-text=만족한 원본
 content=내용
 continue=계속하십시요
 control-panel=제어반
+convert-legacy-permission-algorithm=개심자 유산 허가 산법.
 convert-to=개심자에
 convert-wiki-pages-from-classic-wiki-to-creole-format=고전적인 Wiki에서 크리올 사람 체재에 개심자 Wiki 페이지.
 convert=개심자
