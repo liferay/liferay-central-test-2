@@ -149,4 +149,10 @@
 	};
 
 	Expanse.Dom = YAHOO.util.Dom;
+
+	Expanse.zIndex = {
+		COLOR_PICKER: 5000,
+		CONTAINER: 500,
+		TOOLTIP: 25000
+	};
 })();

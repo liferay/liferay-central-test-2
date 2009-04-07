@@ -11,6 +11,30 @@
 	Expanse.Tooltip = new Expanse.Class(Widget.Tooltip);
 	Expanse.Panel = new Expanse.Class(Widget.Panel);
 
+	Expanse.Overlay = Expanse.Overlay.extend(
+		{
+			initialize: function(el, options) {
+				var instance = this;
+
+				options.zIndex = options.zIndex || Expanse.zIndex.CONTAINER;
+
+				instance._super(el, options);
+			}
+		}
+	);
+
+	Expanse.Tooltip = Expanse.Tooltip.extend(
+		{
+			initialize: function(el, options) {
+				var instance = this;
+
+				options.zIndex = options.zIndex || Expanse.zIndex.TOOLTIP;
+
+				instance._super(el, options);
+			}
+		}
+	);
+
 	Expanse.Panel = Expanse.Panel.extend(
 		{
 			buildMask: function() {
@@ -85,7 +109,7 @@
 					options.height = (parseInt(options.height, 10) || 300) + 'px';
 				}
 
-				options.zIndex = options.zIndex || 9999;
+				options.zIndex = options.zIndex || Expanse.zIndex.CONTAINER;
 
 				if (options.xy) {
 					var position = options.xy;

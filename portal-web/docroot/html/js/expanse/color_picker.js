@@ -63,7 +63,7 @@
 
 				options.button = instance._button;
 
-				options.zIndex = Liferay.zIndex.ALERT + 10000;
+				options.zIndex = Expanse.zIndex.COLOR_PICKER;
 
 				options.container = instance.panel;
 
