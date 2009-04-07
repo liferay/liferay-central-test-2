@@ -270,23 +270,35 @@ Liferay.Util = {
 	},
 
 	defaultValue: function(obj, defaultValue) {
-		var input = jQuery(obj).val(defaultValue);
+		var inputs = jQuery(obj);
 
-		input.focus(
-			function() {
-				if (this.value == defaultValue) {
-					this.value = '';
-				}
-			}
-		);
+		inputs.each(function() {
+			var input = jQuery(this);
 
-		input.blur(
-			function() {
-				if (!this.value) {
-					this.value = defaultValue;
-				}
+			input.unbind('.lfrDefaultValue');
+
+			if (!input.val().length) {
+				input.val(defaultValue);
 			}
-		);
+
+			input.bind(
+				'focus.lfrDefaultValue',
+				function() {
+					if (this.value == defaultValue) {
+						this.value = '';
+					}
+				}
+			);
+
+			input.bind(
+				'blur.lfrDefaultValue',
+				function() {
+					if (!this.value) {
+						this.value = defaultValue;
+					}
+				}
+			);
+		});
 	},
 
 	disableElements: function(obj) {
