@@ -147,7 +147,12 @@ public class EditPageAction extends PortletAction {
 
 		try {
 			ActionUtil.getNode(renderRequest);
-			getPage(renderRequest);
+
+			if (!SessionErrors.contains(
+					renderRequest, DuplicatePageException.class.getName())) {
+
+				getPage(renderRequest);
+			}
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchNodeException ||
