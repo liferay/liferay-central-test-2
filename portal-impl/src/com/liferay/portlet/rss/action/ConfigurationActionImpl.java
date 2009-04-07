@@ -153,6 +153,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String[] titles = actionRequest.getParameterValues("title");
 		int entriesPerFeed = ParamUtil.getInteger(
 			actionRequest, "entriesPerFeed", 4);
+		int expandedEntriesPerFeed = ParamUtil.getInteger(
+			actionRequest, "expandedEntriesPerFeed", 1);
 		boolean showFeedTitle = ParamUtil.getBoolean(
 			actionRequest, "showFeedTitle");
 		boolean showFeedPublishedDate = ParamUtil.getBoolean(
@@ -177,6 +179,9 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 		preferences.setValue(
 			"items-per-channel", String.valueOf(entriesPerFeed));
+		preferences.setValue(
+			"expanded-items-per-channel",
+			String.valueOf(expandedEntriesPerFeed));
 		preferences.setValue("show-feed-title", String.valueOf(showFeedTitle));
 		preferences.setValue(
 			"show-feed-published-date", String.valueOf(showFeedPublishedDate));

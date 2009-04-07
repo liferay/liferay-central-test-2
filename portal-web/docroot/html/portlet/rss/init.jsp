@@ -49,6 +49,7 @@ if (Validator.isNotNull(portletResource)) {
 String[] urls = preferences.getValues("urls", new String[0]);
 String[] titles = preferences.getValues("titles", new String[0]);
 int entriesPerFeed = GetterUtil.getInteger(preferences.getValue("items-per-channel", "8"));
+int expandedEntriesPerFeed = GetterUtil.getInteger(preferences.getValue("expanded-items-per-channel", "1"));
 boolean showFeedTitle = GetterUtil.getBoolean(preferences.getValue("show-feed-title", Boolean.TRUE.toString()));
 boolean showFeedPublishedDate = GetterUtil.getBoolean(preferences.getValue("show-feed-published-date", Boolean.TRUE.toString()));
 boolean showFeedDescription = GetterUtil.getBoolean(preferences.getValue("show-feed-description", Boolean.TRUE.toString()));

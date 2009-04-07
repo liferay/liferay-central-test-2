@@ -246,6 +246,26 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 		</tr>
 		<tr>
 			<td>
+				<liferay-ui:message key="num-of-expanded-entries-per-feed" />
+			</td>
+			<td>
+				<select name="<portlet:namespace />expandedEntriesPerFeed">
+
+					<%
+					for (int i = 0; i < 10; i++) {
+					%>
+
+						<option <%= (i == expandedEntriesPerFeed) ? "selected" : "" %> value="<%= i %>"><%= i %></option>
+
+					<%
+					}
+					%>
+
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
 				<liferay-ui:message key="feed-image-alignment" />
 			</td>
 			<td>
