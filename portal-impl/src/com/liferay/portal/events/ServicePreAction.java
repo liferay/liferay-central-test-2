@@ -1160,6 +1160,16 @@ public class ServicePreAction extends Action {
 
 		LayoutTypePortlet layoutTypePortlet = null;
 
+		Group group = null;
+
+		if (layout != null) {
+			group = layout.getGroup();
+
+			if (!group.getName().equals(GroupConstants.CONTROL_PANEL)) {
+				rememberVisitedGroupIds(request, group.getGroupId());
+			}
+		}
+
 		layouts = mergeAdditionalLayouts(
 			request, user, permissionChecker, layout, layouts);
 
@@ -1248,20 +1258,12 @@ public class ServicePreAction extends Action {
 
 		long scopeGroupId = PortalUtil.getScopeGroupId(request);
 
-		rememberVisitedGroupIds(request, scopeGroupId);
-
 		// Theme and color scheme
 
 		Theme theme = null;
 		ColorScheme colorScheme = null;
 
 		boolean wapTheme = BrowserSnifferUtil.isWap(request);
-
-		Group group = null;
-
-		if (layout != null) {
-			group = layout.getGroup();
-		}
 
 		if ((layout != null) &&
 			group.getName().equals(GroupConstants.CONTROL_PANEL)) {
