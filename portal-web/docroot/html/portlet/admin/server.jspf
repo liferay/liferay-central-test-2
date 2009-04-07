@@ -35,6 +35,16 @@ NumberFormat numberFormat = NumberFormat.getInstance();
 
 numberFormat.setMaximumIntegerDigits(2);
 numberFormat.setMinimumIntegerDigits(2);
+
+boolean migrationAvailable = false;
+
+for (String convertProcessClassName : PropsValues.CONVERT_PROCESSES) {
+	ConvertProcess convertProcess = (ConvertProcess)InstancePool.get(convertProcessClassName);
+
+	if (convertProcess.isEnabled()) {
+		migrationAvailable = true;
+	}
+}
 %>
 
 <liferay-ui:message key="uptime" />:
@@ -301,25 +311,35 @@ numberFormat.setMinimumIntegerDigits(2);
 			</c:when>
 			<c:when test='<%= tabs2.equals("data-migration") %>'>
 				<table class="lfr-table">
+					<c:choose>
+						<c:when test='<%= migrationAvailable %>'>
+							<%
+							for (String convertProcessClassName : PropsValues.CONVERT_PROCESSES) {
+								ConvertProcess convertProcess = (ConvertProcess)InstancePool.get(convertProcessClassName);
 
-				<%
-				for (String convertProcessClassName : PropsValues.CONVERT_PROCESSES) {
-					ConvertProcess convertProcess = (ConvertProcess)InstancePool.get(convertProcessClassName);
-				%>
+								if (convertProcess.isEnabled()) {
+							%>
 
-					<tr>
-						<td>
-							<liferay-ui:message key="<%= convertProcess.getDescription() %>" />
-						</td>
-						<td>
-							<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('convertProcess.<%= convertProcessClassName %>');" />
-						</td>
-					</tr>
+									<tr>
+										<td>
+											<liferay-ui:message key="<%= convertProcess.getDescription() %>" />
+										</td>
+										<td>
+											<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('convertProcess.<%= convertProcessClassName %>');" />
+										</td>
+									</tr>
 
-				<%
-				}
-				%>
-
+							<%
+								}
+							}
+							%>
+						</c:when>
+						<c:otherwise>
+							<div class="portlet-msg-info">
+								<liferay-ui:message key="no-data-migration-processes-are-available" />
+							</div>
+						</c:otherwise>
+					</c:choose>
 				</table>
 			</c:when>
 			<c:when test='<%= tabs2.equals("file-uploads") %>'>

@@ -338,6 +338,11 @@ public class WikiPageLocalServiceUtil {
 		return getService().getPagesCount(nodeId, title, head);
 	}
 
+	public static int getPagesCount(java.lang.String format)
+		throws com.liferay.portal.SystemException {
+		return getService().getPagesCount(format);
+	}
+
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> getRecentChanges(
 		long nodeId, int start, int end)
 		throws com.liferay.portal.SystemException {

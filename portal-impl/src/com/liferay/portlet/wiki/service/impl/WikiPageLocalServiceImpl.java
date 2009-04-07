@@ -707,6 +707,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		return wikiPagePersistence.countByN_T_H(nodeId, title, head);
 	}
 
+	public int getPagesCount(String format) throws SystemException {
+		return wikiPagePersistence.countByFormat(format);
+	}
+
 	public List<WikiPage> getRecentChanges(long nodeId, int start, int end)
 		throws SystemException {
 

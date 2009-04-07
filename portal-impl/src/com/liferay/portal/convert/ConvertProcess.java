@@ -52,6 +52,8 @@ public abstract class ConvertProcess {
 
 	public abstract String getDescription();
 
+	public abstract boolean isEnabled();
+
 	protected abstract void doConvert() throws Exception;
 
 	private static Log _log = LogFactoryUtil.getLog(ConvertProcess.class);

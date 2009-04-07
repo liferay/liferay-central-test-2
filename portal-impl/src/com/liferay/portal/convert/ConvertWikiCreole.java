@@ -22,6 +22,8 @@
 
 package com.liferay.portal.convert;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.MaintenanceUtil;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
@@ -39,6 +41,21 @@ public class ConvertWikiCreole extends ConvertProcess {
 
 	public String getDescription() {
 		return "convert-wiki-pages-from-classic-wiki-to-creole-format";
+	}
+
+	public boolean isEnabled() {
+		boolean enabled = false;
+
+		try {
+			if (WikiPageLocalServiceUtil.getPagesCount("classic_wiki") > 0) {
+				enabled = true;
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		return enabled;
 	}
 
 	protected void doConvert() throws Exception {
@@ -65,5 +82,8 @@ public class ConvertWikiCreole extends ConvertProcess {
 			WikiPageLocalServiceUtil.updateWikiPage(page);
 		}
 	}
+
+	private static final Log _log =
+		LogFactoryUtil.getLog(ConvertWikiCreole.class);
 
 }
