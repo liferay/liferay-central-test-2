@@ -127,6 +127,7 @@ import com.liferay.portlet.tags.util.TagsUtil;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.util.Encryptor;
 import com.liferay.util.JS;
+import com.liferay.util.UniqueList;
 import com.liferay.util.servlet.DynamicServletRequest;
 
 import java.io.File;
@@ -400,7 +401,7 @@ public class PortalImpl implements Portal {
 			WebKeys.PAGE_DESCRIPTION);
 
 		if (requestDescription != null) {
-			description = requestDescription + StringPool.BLANK + description;
+			description = requestDescription + StringPool.SPACE + description;
 		}
 
 		request.setAttribute(WebKeys.PAGE_DESCRIPTION, description);
@@ -413,14 +414,22 @@ public class PortalImpl implements Portal {
 	 * @param		request the HTTP servlet request
 	 */
 	public void addPageKeywords(String keywords, HttpServletRequest request) {
-		String requestKeywords = (String)request.getAttribute(
+		List<String> requestKeywords = (List<String>)request.getAttribute(
 			WebKeys.PAGE_KEYWORDS);
 
-		if (requestKeywords != null) {
-			keywords = requestKeywords + StringPool.BLANK + keywords;
+		if (requestKeywords == null) {
+			requestKeywords = new UniqueList<String>();
 		}
 
-		request.setAttribute(WebKeys.PAGE_KEYWORDS, keywords);
+		String[] keywordsArray = StringUtil.split(keywords);
+
+		for (String keyword : keywordsArray) {
+			if (!requestKeywords.contains(keyword.toLowerCase())) {
+				requestKeywords.add(keyword.toLowerCase());
+			}
+		}
+
+		request.setAttribute(WebKeys.PAGE_KEYWORDS, requestKeywords);
 	}
 
 	/**
@@ -434,7 +443,7 @@ public class PortalImpl implements Portal {
 			WebKeys.PAGE_SUBTITLE);
 
 		if (requestSubtitle != null) {
-			subtitle = requestSubtitle + StringPool.BLANK + subtitle;
+			subtitle = requestSubtitle + StringPool.SPACE + subtitle;
 		}
 
 		request.setAttribute(WebKeys.PAGE_SUBTITLE, subtitle);
@@ -451,7 +460,7 @@ public class PortalImpl implements Portal {
 		String requestTitle = (String)request.getAttribute(WebKeys.PAGE_TITLE);
 
 		if (requestTitle != null) {
-			title = requestTitle + StringPool.BLANK + title;
+			title = requestTitle + StringPool.SPACE + title;
 		}
 
 		request.setAttribute(WebKeys.PAGE_TITLE, title);

@@ -86,12 +86,12 @@
 		metaKeywordsLanguageId = w3cDefaultLanguageId;
 	}
 
-	String dynamicMetaKeywords = (String)request.getAttribute(WebKeys.PAGE_KEYWORDS);
+	List<String> dynamicMetaKeywords = (List<String>)request.getAttribute(WebKeys.PAGE_KEYWORDS);
 
-	if (Validator.isNotNull(dynamicMetaKeywords)) {
+	if (dynamicMetaKeywords != null) {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(dynamicMetaKeywords);
+		sb.append(StringUtil.merge(dynamicMetaKeywords));
 
 		if (Validator.isNotNull(metaKeywords)) {
 			sb.append(StringPool.COMMA);
