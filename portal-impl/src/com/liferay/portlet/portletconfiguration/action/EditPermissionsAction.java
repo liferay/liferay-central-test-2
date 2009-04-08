@@ -276,14 +276,12 @@ public class EditPermissionsAction extends EditConfigurationAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		Layout layout = themeDisplay.getLayout();
-
 		String modelResource = ParamUtil.getString(
 			actionRequest, "modelResource");
 		long resourceId = ParamUtil.getLong(actionRequest, "resourceId");
 
 		List<Role> roles = ResourceActionsUtil.getRoles(
-			layout.getGroup(), modelResource);
+			themeDisplay.getScopeGroup(), modelResource);
 
 		for (Role role : roles) {
 			String[] actionIds = getActionIds(actionRequest, role.getRoleId());
@@ -300,8 +298,6 @@ public class EditPermissionsAction extends EditConfigurationAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		Layout layout = themeDisplay.getLayout();
-
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
 		String modelResource = ParamUtil.getString(
@@ -316,7 +312,7 @@ public class EditPermissionsAction extends EditConfigurationAction {
 		long resourceId = ParamUtil.getLong(actionRequest, "resourceId");
 
 		List<Role> roles = ResourceActionsUtil.getRoles(
-			layout.getGroup(), modelResource);
+			themeDisplay.getScopeGroup(), modelResource);
 
 		for (Role role : roles) {
 			String[] actionIds = getActionIds(actionRequest, role.getRoleId());
