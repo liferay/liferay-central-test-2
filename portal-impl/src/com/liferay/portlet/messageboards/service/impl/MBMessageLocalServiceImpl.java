@@ -858,10 +858,22 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			String subject = String.valueOf(classPK);
 			//String body = subject;
 
-			message = addDiscussionMessage(
-				userId, null, className, classPK, 0,
-				MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID, subject, subject,
-				new ServiceContext());
+			try {
+				message = addDiscussionMessage(
+					userId, null, className, classPK, _DEFAULT_THREAD_ID,
+					MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID, subject, subject,
+					new ServiceContext());
+			}
+			catch (SystemException e) {
+				//we had multiple threads both attempt to add the same entry
+				//into the db...
+				List<MBMessage> messages = mbMessagePersistence.findByT_P(
+					_DEFAULT_THREAD_ID, MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID);
+				if (messages.isEmpty()) {
+					throw e;
+				}
+				message = messages.get(0);
+			}
 		}
 
 		return getMessageDisplay(message, MBThreadImpl.THREAD_VIEW_COMBINATION);
@@ -1721,4 +1733,5 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	private static Log _log =
 		LogFactoryUtil.getLog(MBMessageLocalServiceImpl.class);
 
+	private static final long _DEFAULT_THREAD_ID = 0;
 }
