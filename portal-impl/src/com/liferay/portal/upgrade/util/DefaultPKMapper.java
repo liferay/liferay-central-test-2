@@ -50,6 +50,10 @@ public class DefaultPKMapper extends ValueMapperWrapper {
 			try {
 				ValueMapper valueMapper = getValueMapper();
 
+				if (oldValue instanceof String) {
+					oldValue = oldValueString.toLowerCase();
+				}
+
 				return valueMapper.getNewValue(oldValue);
 			}
 			catch (StagnantRowException sre) {
