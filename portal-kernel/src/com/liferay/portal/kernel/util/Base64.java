@@ -125,6 +125,11 @@ public class Base64 {
 	}
 
 	public static byte[] decode(String base64) {
+
+		if (Validator.isNull(base64)) {
+			return new byte[0];
+		}
+
 		int pad = 0;
 
 		for (int i = base64.length() - 1; base64.charAt(i) == '='; i--) {
