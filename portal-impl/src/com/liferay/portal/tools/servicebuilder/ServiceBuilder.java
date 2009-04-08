@@ -2110,7 +2110,7 @@ public class ServiceBuilder {
 
 		File upgradeFile = new File(
 			_implDir + "/com/liferay/portal/upgrade/v" + releaseVersion +
-				"/model/" + entity.getName() + "Table.java");
+				"/util/" + entity.getName() + "Table.java");
 
 		content = _processTemplate(_tplUpgradeTable, context);
 
