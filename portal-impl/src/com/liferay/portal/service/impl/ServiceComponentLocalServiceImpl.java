@@ -214,10 +214,19 @@ public class ServiceComponentLocalServiceImpl
 
 		models.addAll(getModels(xml));
 
-		xml = StringUtil.read(
-			classLoader, "META-INF/portlet-model-hints-ext.xml");
+		try {
+			xml = StringUtil.read(
+				classLoader, "META-INF/portlet-model-hints-ext.xml");
 
-		models.addAll(getModels(xml));
+			models.addAll(getModels(xml));
+		}
+		catch (IOException e) {
+			// nothing to do here...the ext model hints is optional...
+			if (_log.isInfoEnabled()) {
+			    _log.info("No optional file, " +
+						  "META-INF/portlet-model-hints-ext.xml found");
+			}
+		}
 
 		return models;
 	}

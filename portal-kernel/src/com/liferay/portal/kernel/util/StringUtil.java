@@ -540,6 +540,10 @@ public class StringUtil {
 				URL url = enu.nextElement();
 
 				InputStream is = url.openStream();
+				if (is == null) {
+					throw new IOException(
+						"Unable to open resource at: " + url.toString());
+				}
 
 				String s = read(is);
 
@@ -555,7 +559,10 @@ public class StringUtil {
 		}
 		else {
 			InputStream is = classLoader.getResourceAsStream(name);
-
+			if (is == null) {
+				throw new IOException(
+					"Unable to open resource in classloader: " + name);
+			}
 			String s = read(is);
 
 			is.close();
