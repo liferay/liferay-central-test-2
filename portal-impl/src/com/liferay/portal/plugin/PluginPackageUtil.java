@@ -900,8 +900,16 @@ public class PluginPackageUtil {
 		String moduleGroupId = GetterUtil.getString(
 			properties.getProperty("module-group-id"));
 		String moduleArtifactId = displayPrefix + "-" + pluginType;
-		String moduleVersion = displayName.substring(
-			pos + pluginType.length() + 2);
+
+		String moduleVersion = null;
+		int versionPos = pos + pluginType.length() + 2;
+		if (displayName.length() > versionPos) {
+			moduleVersion = displayName.substring(versionPos);
+		}
+		else {
+			moduleVersion = ReleaseInfo.getVersion();
+		}
+		
 		String moduleId =
 			moduleGroupId + "/" + moduleArtifactId + "/" + moduleVersion +
 				"/war";
