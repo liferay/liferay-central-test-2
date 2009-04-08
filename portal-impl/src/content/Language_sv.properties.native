@@ -2689,10 +2689,10 @@ post-new-message=Nytt meddelande
 post-new-thread=Ny diskussion
 post-reply=Svara
 post=Skicka
-posted-as-a-reply-to=Skicka som svar till\: <a href\="{0}">Meddelande \#{1}</a> av {2}.
-posted-by=Skickad av
-posted-on-x-in-reply-to-x=Skickad på {0} som svar på {1}.
-posted-on-x=Skickad på {0}.
+posted-as-a-reply-to=som svar till {0}.
+posted-by=Skickat av
+posted-on-x-in-reply-to-x=Skickat {0} som svar till {1}.
+posted-on-x=Skickat {0}.
 posts=Inlägg
 pound=Pund
 precompile-jsps-for-faster-speed=Förkompilera jsps för bättre hastighet.
