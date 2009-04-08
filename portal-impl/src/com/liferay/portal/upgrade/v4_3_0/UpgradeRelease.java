@@ -24,11 +24,11 @@ package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.model.impl.ReleaseImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
+import com.liferay.portal.upgrade.v4_3_0.util.ReleaseTable;
 
 /**
  * <a href="UpgradeRelease.java.html"><b><i>View Source</i></b></a>
@@ -54,9 +54,9 @@ public class UpgradeRelease extends UpgradeProcess {
 		// Release
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			ReleaseImpl.TABLE_NAME, ReleaseImpl.TABLE_COLUMNS);
+			ReleaseTable.TABLE_NAME, ReleaseTable.TABLE_COLUMNS);
 
-		upgradeTable.setCreateSQL(ReleaseImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(ReleaseTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 	}

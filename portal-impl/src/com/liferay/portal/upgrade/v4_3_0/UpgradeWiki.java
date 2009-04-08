@@ -34,10 +34,10 @@ import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
+import com.liferay.portal.upgrade.v4_3_0.util.WikiNodeTable;
 import com.liferay.portal.upgrade.v4_3_0.util.WikiPageIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.WikiPageResourcePrimKeyUpgradeColumnImpl;
-import com.liferay.portlet.wiki.model.impl.WikiNodeImpl;
-import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.WikiPageTable;
 
 import java.sql.Types;
 
@@ -75,10 +75,10 @@ public class UpgradeWiki extends UpgradeProcess {
 			"nodeId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			WikiNodeImpl.TABLE_NAME, WikiNodeImpl.TABLE_COLUMNS,
+			WikiNodeTable.TABLE_NAME, WikiNodeTable.TABLE_COLUMNS,
 			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
-		upgradeTable.setCreateSQL(WikiNodeImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(WikiNodeTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -102,11 +102,11 @@ public class UpgradeWiki extends UpgradeProcess {
 				upgradePageIdColumn);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			WikiPageImpl.TABLE_NAME, WikiPageImpl.TABLE_COLUMNS,
+			WikiPageTable.TABLE_NAME, WikiPageTable.TABLE_COLUMNS,
 			upgradeNodeIdColumn, upgradeTitleColumn, upgradePageIdColumn,
 			upgradePageResourcePrimKeyColumn, upgradeUserIdColumn);
 
-		upgradeTable.setCreateSQL(WikiPageImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(WikiPageTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 

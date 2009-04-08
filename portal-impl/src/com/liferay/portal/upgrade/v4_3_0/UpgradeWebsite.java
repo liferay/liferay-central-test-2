@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Organization;
-import com.liferay.portal.model.impl.WebsiteImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -39,6 +38,7 @@ import com.liferay.portal.upgrade.v4_3_0.util.ClassNameIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKContainer;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.ValueMapperUtil;
+import com.liferay.portal.upgrade.v4_3_0.util.WebsiteTable;
 import com.liferay.portal.util.PortalUtil;
 
 import java.sql.Types;
@@ -97,10 +97,10 @@ public class UpgradeWebsite extends UpgradeProcess {
 			classNameIdColumn, classPKContainers);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			WebsiteImpl.TABLE_NAME, WebsiteImpl.TABLE_COLUMNS, upgradePKColumn,
+			WebsiteTable.TABLE_NAME, WebsiteTable.TABLE_COLUMNS, upgradePKColumn,
 			upgradeUserIdColumn, classNameIdColumn, upgradeClassPKColumn);
 
-		upgradeTable.setCreateSQL(WebsiteImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(WebsiteTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 

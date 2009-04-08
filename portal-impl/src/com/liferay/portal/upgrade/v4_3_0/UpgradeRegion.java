@@ -24,11 +24,11 @@ package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.model.impl.RegionImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
+import com.liferay.portal.upgrade.v4_3_0.util.RegionTable;
 
 /**
  * <a href="UpgradeRegion.java.html"><b><i>View Source</i></b></a>
@@ -54,9 +54,9 @@ public class UpgradeRegion extends UpgradeProcess {
 		// Region
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			RegionImpl.TABLE_NAME, RegionImpl.TABLE_COLUMNS);
+			RegionTable.TABLE_NAME, RegionTable.TABLE_COLUMNS);
 
-		upgradeTable.setCreateSQL(RegionImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(RegionTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 	}

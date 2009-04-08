@@ -22,54 +22,12 @@
 
 package com.liferay.portal.tools.servicebuilder;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.freemarker.FreeMarkerUtil;
-import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.ArrayUtil_IW;
-import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.PropertiesUtil;
-import com.liferay.portal.kernel.util.SetUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.StringUtil_IW;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelHintsUtil;
-import com.liferay.portal.tools.SourceFormatter;
-import com.liferay.portal.util.InitUtil;
-import com.liferay.portal.util.PropsValues;
-import com.liferay.util.TextFormatter;
-import com.liferay.portal.kernel.util.Time;
-import com.liferay.portal.kernel.xml.Document;
-import com.liferay.portal.kernel.xml.Element;
-import com.liferay.portal.kernel.xml.SAXReaderUtil;
-import com.liferay.util.xml.XMLFormatter;
-
-import com.thoughtworks.qdox.JavaDocBuilder;
-import com.thoughtworks.qdox.model.JavaClass;
-import com.thoughtworks.qdox.model.JavaMethod;
-import com.thoughtworks.qdox.model.JavaParameter;
-import com.thoughtworks.qdox.model.Type;
-
-import de.hunsicker.io.FileFormat;
-import de.hunsicker.jalopy.Jalopy;
-import de.hunsicker.jalopy.storage.Convention;
-import de.hunsicker.jalopy.storage.ConventionKeys;
-import de.hunsicker.jalopy.storage.Environment;
-
-import freemarker.ext.beans.BeansWrapper;
-import freemarker.template.TemplateHashModel;
-import freemarker.template.TemplateModelException;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -84,6 +42,46 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import org.dom4j.DocumentException;
+
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.freemarker.FreeMarkerUtil;
+import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.ArrayUtil_IW;
+import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.PropertiesUtil;
+import com.liferay.portal.kernel.util.ReleaseInfo;
+import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.StringUtil_IW;
+import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.model.ModelHintsUtil;
+import com.liferay.portal.tools.SourceFormatter;
+import com.liferay.portal.util.InitUtil;
+import com.liferay.portal.util.PropsValues;
+import com.liferay.util.TextFormatter;
+import com.liferay.util.xml.XMLFormatter;
+import com.thoughtworks.qdox.JavaDocBuilder;
+import com.thoughtworks.qdox.model.JavaClass;
+import com.thoughtworks.qdox.model.JavaMethod;
+import com.thoughtworks.qdox.model.JavaParameter;
+import com.thoughtworks.qdox.model.Type;
+
+import de.hunsicker.io.FileFormat;
+import de.hunsicker.jalopy.Jalopy;
+import de.hunsicker.jalopy.storage.Convention;
+import de.hunsicker.jalopy.storage.ConventionKeys;
+import de.hunsicker.jalopy.storage.Environment;
+import freemarker.ext.beans.BeansWrapper;
+import freemarker.template.TemplateHashModel;
+import freemarker.template.TemplateModelException;
 
 /**
  * <a href="ServiceBuilder.java.html"><b><i>View Source</i></b></a>
@@ -2089,7 +2087,7 @@ public class ServiceBuilder {
 
 		String content = _processTemplate(_tplModelImpl, context);
 
-		// Write file
+		// Write model file
 
 		File modelFile = new File(
 			_outputPath + "/model/impl/" + entity.getName() + "ModelImpl.java");
@@ -2099,6 +2097,24 @@ public class ServiceBuilder {
 		jalopySettings.put("keepJavadoc", Boolean.TRUE);
 
 		writeFile(modelFile, content, _author, jalopySettings);
+
+		// Write upgrade file
+
+		String releaseVersion = StringUtil.replace(
+			ReleaseInfo.getVersion(), StringPool.PERIOD, StringPool.UNDERLINE);
+
+		String upgradePackagePath =
+			"com.liferay.portal.upgrade.v" + releaseVersion + ".util";
+
+		context.put("upgradePackagePath", upgradePackagePath);
+
+		File upgradeFile = new File(
+			_implDir + "/com/liferay/portal/upgrade/v" + releaseVersion +
+				"/model/" + entity.getName() + "Table.java");
+
+		content = _processTemplate(_tplUpgradeTable, context);
+
+		writeFile(upgradeFile, content, _author, jalopySettings);
 	}
 
 	private void _createModelSoap(Entity entity) throws Exception {
@@ -3813,6 +3829,7 @@ public class ServiceBuilder {
 	private String _tplModelClp = _TPL_ROOT + "model_clp.ftl";
 	private String _tplModelHintsXml = _TPL_ROOT + "model_hints_xml.ftl";
 	private String _tplModelImpl = _TPL_ROOT + "model_impl.ftl";
+	private String _tplUpgradeTable = _TPL_ROOT + "upgrade_table.ftl";
 	private String _tplModelSoap = _TPL_ROOT + "model_soap.ftl";
 	private String _tplPersistence = _TPL_ROOT + "persistence.ftl";
 	private String _tplPersistenceImpl = _TPL_ROOT + "persistence_impl.ftl";

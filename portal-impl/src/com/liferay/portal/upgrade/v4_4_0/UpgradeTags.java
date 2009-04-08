@@ -31,7 +31,7 @@ import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.v4_4_0.util.TagsAssetGroupIdUpgradeColumnImpl;
-import com.liferay.portlet.tags.model.impl.TagsAssetImpl;
+import com.liferay.portal.upgrade.v4_4_0.util.TagsAssetTable;
 
 /**
  * <a href="UpgradeTags.java.html"><b><i>View Source</i></b></a>
@@ -65,7 +65,7 @@ public class UpgradeTags extends UpgradeProcess {
 			classNameIdColumn, classPKColumn);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			TagsAssetImpl.TABLE_NAME, TagsAssetImpl.TABLE_COLUMNS,
+			TagsAssetTable.TABLE_NAME, TagsAssetTable.TABLE_COLUMNS,
 			classNameIdColumn, classPKColumn, groupIdColumn);
 
 		upgradeTable.updateTable();

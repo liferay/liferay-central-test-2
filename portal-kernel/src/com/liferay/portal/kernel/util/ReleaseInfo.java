@@ -56,6 +56,8 @@ public class ReleaseInfo {
 
 	static String serverInfo = name + " / " + version;
 
+	public static int RELEASE_4_1_0_BUILD_NUMBER = 3100;
+
 	public static int RELEASE_4_2_0_BUILD_NUMBER = 3500;
 
 	public static int RELEASE_4_2_1_BUILD_NUMBER = 3501;

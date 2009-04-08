@@ -36,11 +36,11 @@ import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.DLFileEntryIdUpgradeColumnImpl;
-import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
-import com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl;
-import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl;
-import com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl;
-import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.DLFileEntryTable;
+import com.liferay.portal.upgrade.v4_3_0.util.DLFileRankTable;
+import com.liferay.portal.upgrade.v4_3_0.util.DLFileShortcutTable;
+import com.liferay.portal.upgrade.v4_3_0.util.DLFileVersionTable;
+import com.liferay.portal.upgrade.v4_3_0.util.DLFolderTable;
 
 import java.sql.Types;
 
@@ -82,10 +82,10 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			"folderId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			DLFolderImpl.TABLE_NAME, DLFolderImpl.TABLE_COLUMNS,
+			DLFolderTable.TABLE_NAME, DLFolderTable.TABLE_COLUMNS,
 			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
-		upgradeTable.setCreateSQL(DLFolderImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(DLFolderTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -98,7 +98,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			"parentFolderId", folderIdMapper);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			DLFolderImpl.TABLE_NAME, DLFolderImpl.TABLE_COLUMNS,
+			DLFolderTable.TABLE_NAME, DLFolderTable.TABLE_COLUMNS,
 			upgradeParentFolderIdColumn);
 
 		upgradeTable.updateTable();
@@ -123,11 +123,11 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			AvailableMappersUtil.getUserIdMapper());
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			DLFileEntryImpl.TABLE_NAME, DLFileEntryImpl.TABLE_COLUMNS,
+			DLFileEntryTable.TABLE_NAME, DLFileEntryTable.TABLE_COLUMNS,
 			upgradeCompanyIdColumn, upgradeFolderIdColumn, upgradeNameColumn,
 			fileEntryIdColumn, upgradeUserIdColumn, upgradeVersionUserIdColumn);
 
-		upgradeTable.setCreateSQL(DLFileEntryImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(DLFileEntryTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -138,11 +138,11 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		// DLFileRank
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			DLFileRankImpl.TABLE_NAME, DLFileRankImpl.TABLE_COLUMNS,
+			DLFileRankTable.TABLE_NAME, DLFileRankTable.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("fileRankId", false),
 			upgradeUserIdColumn, upgradeFolderIdColumn);
 
-		upgradeTable.setCreateSQL(DLFileRankImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(DLFileRankTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -151,11 +151,11 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		upgradePKColumn = new PKUpgradeColumnImpl("fileShortcutId", true);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			DLFileShortcutImpl.TABLE_NAME, DLFileShortcutImpl.TABLE_COLUMNS,
+			DLFileShortcutTable.TABLE_NAME, DLFileShortcutTable.TABLE_COLUMNS,
 			upgradePKColumn, upgradeUserIdColumn, upgradeFolderIdColumn,
 			upgradeToFolderIdColumn);
 
-		upgradeTable.setCreateSQL(DLFileShortcutImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(DLFileShortcutTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -166,11 +166,11 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		// DLFileVersion
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			DLFileVersionImpl.TABLE_NAME, DLFileVersionImpl.TABLE_COLUMNS,
+			DLFileVersionTable.TABLE_NAME, DLFileVersionTable.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("fileVersionId", false),
 			upgradeUserIdColumn, upgradeFolderIdColumn);
 
-		upgradeTable.setCreateSQL(DLFileVersionImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(DLFileVersionTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 	}

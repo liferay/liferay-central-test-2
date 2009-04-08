@@ -36,15 +36,14 @@ import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.ShoppingCartItemIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.ShoppingCartItemIdsUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.ShoppingCartTable;
+import com.liferay.portal.upgrade.v4_3_0.util.ShoppingCategoryTable;
 import com.liferay.portal.upgrade.v4_3_0.util.ShoppingCouponLimitCategoriesUpgradeColumnImpl;
-import com.liferay.portlet.shopping.model.impl.ShoppingCartImpl;
-import com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl;
-import com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl;
-import com.liferay.portlet.shopping.model.impl.ShoppingItemFieldImpl;
-import com.liferay.portlet.shopping.model.impl.ShoppingItemImpl;
-import com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl;
-import com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl;
-import com.liferay.portlet.shopping.model.impl.ShoppingOrderItemImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.ShoppingCouponTable;
+import com.liferay.portal.upgrade.v4_3_0.util.ShoppingItemPriceTable;
+import com.liferay.portal.upgrade.v4_3_0.util.ShoppingItemTable;
+import com.liferay.portal.upgrade.v4_3_0.util.ShoppingOrderItemTable;
+import com.liferay.portal.upgrade.v4_3_0.util.ShoppingOrderTable;
 
 import java.sql.Types;
 
@@ -82,10 +81,10 @@ public class UpgradeShopping extends UpgradeProcess {
 			"categoryId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			ShoppingCategoryImpl.TABLE_NAME, ShoppingCategoryImpl.TABLE_COLUMNS,
+			ShoppingCategoryTable.TABLE_NAME, ShoppingCategoryTable.TABLE_COLUMNS,
 			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
-		upgradeTable.setCreateSQL(ShoppingCategoryImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(ShoppingCategoryTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -98,7 +97,7 @@ public class UpgradeShopping extends UpgradeProcess {
 			"parentCategoryId", categoryIdMapper);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			ShoppingCategoryImpl.TABLE_NAME, ShoppingCategoryImpl.TABLE_COLUMNS,
+			ShoppingCategoryTable.TABLE_NAME, ShoppingCategoryTable.TABLE_COLUMNS,
 			upgradeParentCategoryIdColumn);
 
 		upgradeTable.updateTable();
@@ -111,10 +110,10 @@ public class UpgradeShopping extends UpgradeProcess {
 		upgradePKColumn = new PKUpgradeColumnImpl("itemId", true);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			ShoppingItemImpl.TABLE_NAME, ShoppingItemImpl.TABLE_COLUMNS,
+			ShoppingItemTable.TABLE_NAME, ShoppingItemTable.TABLE_COLUMNS,
 			upgradePKColumn, upgradeCategoryIdColumn, upgradeUserIdColumn);
 
-		upgradeTable.setCreateSQL(ShoppingItemImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(ShoppingItemTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -128,22 +127,22 @@ public class UpgradeShopping extends UpgradeProcess {
 		// ShoppingItemField
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			ShoppingItemFieldImpl.TABLE_NAME,
-			ShoppingItemFieldImpl.TABLE_COLUMNS,
+			ShoppingItemTable.TABLE_NAME,
+			ShoppingItemTable.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("itemFieldId", false), upgradeItemIdColumn);
 
-		upgradeTable.setCreateSQL(ShoppingItemFieldImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(ShoppingItemTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
 		// ShoppingItemPrice
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			ShoppingItemPriceImpl.TABLE_NAME,
-			ShoppingItemPriceImpl.TABLE_COLUMNS,
+			ShoppingItemPriceTable.TABLE_NAME,
+			ShoppingItemPriceTable.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("itemPriceId", false), upgradeItemIdColumn);
 
-		upgradeTable.setCreateSQL(ShoppingItemPriceImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(ShoppingItemPriceTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -153,10 +152,10 @@ public class UpgradeShopping extends UpgradeProcess {
 			"orderId", new Integer(Types.VARCHAR), true);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			ShoppingOrderImpl.TABLE_NAME, ShoppingOrderImpl.TABLE_COLUMNS,
+			ShoppingOrderTable.TABLE_NAME, ShoppingOrderTable.TABLE_COLUMNS,
 			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
-		upgradeTable.setCreateSQL(ShoppingOrderImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(ShoppingOrderTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -171,12 +170,12 @@ public class UpgradeShopping extends UpgradeProcess {
 			new ShoppingCartItemIdUpgradeColumnImpl(itemIdMapper);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			ShoppingOrderItemImpl.TABLE_NAME,
-			ShoppingOrderItemImpl.TABLE_COLUMNS,
+			ShoppingOrderItemTable.TABLE_NAME,
+			ShoppingOrderItemTable.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("orderItemId", false),
 			upgradeOrderIdColumn, upgradeCartItemIdColumn);
 
-		upgradeTable.setCreateSQL(ShoppingOrderItemImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(ShoppingOrderItemTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -186,12 +185,12 @@ public class UpgradeShopping extends UpgradeProcess {
 			new ShoppingCartItemIdsUpgradeColumnImpl(itemIdMapper);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			ShoppingCartImpl.TABLE_NAME, ShoppingCartImpl.TABLE_COLUMNS,
+			ShoppingCartTable.TABLE_NAME, ShoppingCartTable.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl(
 				"cartId", new Integer(Types.VARCHAR), false),
 			upgradeGroupIdColumn, upgradeUserIdColumn, upgradeItemIdsColumn);
 
-		upgradeTable.setCreateSQL(ShoppingCartImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(ShoppingCartTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -202,13 +201,13 @@ public class UpgradeShopping extends UpgradeProcess {
 				categoryIdMapper);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			ShoppingCouponImpl.TABLE_NAME, ShoppingCouponImpl.TABLE_COLUMNS,
+			ShoppingCouponTable.TABLE_NAME, ShoppingCouponTable.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl(
 				"couponId", new Integer(Types.VARCHAR), false),
 			upgradeGroupIdColumn, upgradeUserIdColumn,
 			upgradeLimitCategoriesColumn);
 
-		upgradeTable.setCreateSQL(ShoppingCouponImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(ShoppingCouponTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 	}

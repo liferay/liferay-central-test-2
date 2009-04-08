@@ -24,11 +24,11 @@ package com.liferay.portal.upgrade.v4_3_3;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.model.impl.WebsiteImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
+import com.liferay.portal.upgrade.v4_3_3.util.WebsiteTable;
 
 /**
  * <a href="UpgradeWebsite.java.html"><b><i>View Source</i></b></a>
@@ -54,9 +54,9 @@ public class UpgradeWebsite extends UpgradeProcess {
 		// Website
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			WebsiteImpl.TABLE_NAME, WebsiteImpl.TABLE_COLUMNS);
+			WebsiteTable.TABLE_NAME, WebsiteTable.TABLE_COLUMNS);
 
-		upgradeTable.setCreateSQL(WebsiteImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(WebsiteTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 	}

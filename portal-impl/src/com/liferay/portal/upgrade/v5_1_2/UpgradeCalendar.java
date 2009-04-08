@@ -30,7 +30,7 @@ import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.v5_1_2.util.CalEventRecurrenceUpgradeColumnImpl;
-import com.liferay.portlet.calendar.model.impl.CalEventImpl;
+import com.liferay.portal.upgrade.v5_1_2.util.CalEventTable;
 
 /**
  * <a href="UpgradeCalendar.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +58,7 @@ public class UpgradeCalendar extends UpgradeProcess {
 			new CalEventRecurrenceUpgradeColumnImpl("recurrence");
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			CalEventImpl.TABLE_NAME, CalEventImpl.TABLE_COLUMNS,
+			CalEventTable.TABLE_NAME, CalEventTable.TABLE_COLUMNS,
 			recurrenceColumn);
 
 		upgradeTable.updateTable();

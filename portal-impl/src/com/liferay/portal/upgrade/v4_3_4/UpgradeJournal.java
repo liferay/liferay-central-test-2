@@ -31,7 +31,7 @@ import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.v4_3_4.util.JournalArticleContentUpgradeColumnImpl;
-import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
+import com.liferay.portal.upgrade.v4_3_4.util.JournalArticleTable;
 
 /**
  * <a href="UpgradeJournal.java.html"><b><i>View Source</i></b></a>
@@ -63,7 +63,7 @@ public class UpgradeJournal extends UpgradeProcess {
 			new JournalArticleContentUpgradeColumnImpl(structureIdColumn);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			JournalArticleImpl.TABLE_NAME, JournalArticleImpl.TABLE_COLUMNS,
+			JournalArticleTable.TABLE_NAME, JournalArticleTable.TABLE_COLUMNS,
 			structureIdColumn, contentColumn);
 
 		upgradeTable.updateTable();

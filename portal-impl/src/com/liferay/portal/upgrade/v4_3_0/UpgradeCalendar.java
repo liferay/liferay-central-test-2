@@ -33,7 +33,7 @@ import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
-import com.liferay.portlet.calendar.model.impl.CalEventImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.CalEventTable;
 
 import java.sql.Types;
 
@@ -72,10 +72,10 @@ public class UpgradeCalendar extends UpgradeProcess {
 			"eventId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			CalEventImpl.TABLE_NAME, CalEventImpl.TABLE_COLUMNS,
+			CalEventTable.TABLE_NAME, CalEventTable.TABLE_COLUMNS,
 			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
-		upgradeTable.setCreateSQL(CalEventImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(CalEventTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
