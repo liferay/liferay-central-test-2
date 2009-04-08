@@ -23,12 +23,15 @@
 package com.liferay.portal.spring.annotation;
 
 import com.liferay.portal.kernel.annotation.BeanReference;
+import com.liferay.portal.kernel.bean.BeanLocatorException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 import java.beans.PropertyDescriptor;
 
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Member;
 
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.InjectionMetadata;
 
@@ -36,6 +39,7 @@ import org.springframework.beans.factory.annotation.InjectionMetadata;
  * <a href="BeanReferenceElement.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael Young
+ * @author Raymond Augé
  *
  */
 public class BeanReferenceElement extends InjectionMetadata.InjectedElement {
@@ -59,7 +63,17 @@ public class BeanReferenceElement extends InjectionMetadata.InjectedElement {
 	protected Object getResourceToInject(
 		Object target, String requestingBeanName) {
 
-		return _beanFactory.getBean(_name, getResourceType());
+		try {
+			return _beanFactory.getBean(_name, getResourceType());
+		}
+		catch (BeansException be) {
+			try {
+				return PortalBeanLocatorUtil.locate(_name);
+			}
+			catch (BeanLocatorException ble) {
+				throw be;
+			}
+		}
 	}
 
 	private BeanFactory _beanFactory;
