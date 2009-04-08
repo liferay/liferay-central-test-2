@@ -864,14 +864,18 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID, subject, subject,
 					new ServiceContext());
 			}
-			catch (SystemException e) {
-				//we had multiple threads both attempt to add the same entry
-				//into the db...
+			catch (SystemException se) {
+
+				// LPS-2843
+
 				List<MBMessage> messages = mbMessagePersistence.findByT_P(
-					_DEFAULT_THREAD_ID, MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID);
+					_DEFAULT_THREAD_ID,
+					MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID);
+
 				if (messages.isEmpty()) {
-					throw e;
+					throw se;
 				}
+
 				message = messages.get(0);
 			}
 		}
@@ -1734,4 +1738,5 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		LogFactoryUtil.getLog(MBMessageLocalServiceImpl.class);
 
 	private static final long _DEFAULT_THREAD_ID = 0;
+
 }
