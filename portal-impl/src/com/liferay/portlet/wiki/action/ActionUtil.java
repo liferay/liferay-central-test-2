@@ -28,8 +28,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -46,7 +44,6 @@ import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
-import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
 import com.liferay.portlet.wiki.util.WikiUtil;
 
 import java.util.List;
@@ -73,9 +70,10 @@ public class ActionUtil {
 
 		WikiNode node = null;
 
-		List<WikiNode> nodes = WikiUtil.getNodes(renderRequest);
+		int nodesCount = WikiNodeLocalServiceUtil.getNodesCount(
+			themeDisplay.getScopeGroupId());
 
-		if (nodes.size() == 0) {
+		if (nodesCount == 0) {
 			String nodeName = PropsUtil.get(PropsKeys.WIKI_INITIAL_NODE_NAME);
 
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(
@@ -89,23 +87,13 @@ public class ActionUtil {
 				serviceContext);
 		}
 		else {
-			PermissionChecker permissionChecker =
-				themeDisplay.getPermissionChecker();
+			List <WikiNode> nodes = WikiUtil.getNodes(renderRequest);
 
-			for (WikiNode curNode : nodes) {
-				if (WikiNodePermission.contains(
-						permissionChecker, curNode.getNodeId(),
-						ActionKeys.VIEW)) {
-
-					node = curNode;
-
-					break;
-				}
-			}
-
-			if (node == null) {
+			if (nodes.size() == 0) {
 				throw new PrincipalException();
 			}
+
+			node = nodes.get(0);
 		}
 
 		renderRequest.setAttribute(WebKeys.WIKI_NODE, node);
