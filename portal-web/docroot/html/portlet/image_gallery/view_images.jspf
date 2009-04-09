@@ -123,7 +123,7 @@
 				%>
 
 				<div style="float: left; margin: <%= topMargin %>px <%= sideMargin %>px 0px <%= sideMargin %>px;">
-					<a href="javascript: ;" onClick="<portlet:namespace />viewImage(<%= largeImage.getImageId() %>, '<%= ImageServletTokenUtil.getToken(largeImage.getImageId()) %>', '<b><%= image.getName() %></b><br /><%= HtmlUtil.escape(image.getDescription().replace("\n","\\n")) %>', <%= largeImage.getWidth() %>, <%= largeImage.getHeight() %>)">
+					<a href="javascript: ;" onClick="<portlet:namespace />viewImage(<%= largeImage.getImageId() %>, '<%= ImageServletTokenUtil.getToken(largeImage.getImageId()) %>', '<b><%= UnicodeFormatter.toString(image.getName()) %></b><br /><%= UnicodeFormatter.toString(image.getDescription()) %>', <%= largeImage.getWidth() %>, <%= largeImage.getHeight() %>)">
 						<img alt="<liferay-ui:message key="image" />" border="no" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= smallImageId %>&t=<%= ImageServletTokenUtil.getToken(smallImageId) %>" style="height: <%= smallImageHeight %>; width: <%= smallImageWidth %>;" />
 					</a>
 
