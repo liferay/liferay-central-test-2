@@ -132,7 +132,7 @@ public class Base64 {
 
 		int pad = 0;
 
-		for (int i = base64.length() - 1; i >= 0 && base64.charAt(i) == '='; i--) {
+		for (int i = base64.length() - 1; base64.charAt(i) == '='; i--) {
 			pad++;
 		}
 
