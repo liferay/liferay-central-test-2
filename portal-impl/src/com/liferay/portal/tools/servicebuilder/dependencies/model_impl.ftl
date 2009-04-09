@@ -239,9 +239,8 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 				<#if column.isPrimitiveType()>
 					${column.name} != _${column.name}
 				<#else>
-					(${column.name} == null && _${column.name} != null) ||
-					(${column.name} != null && _${column.name} == null) ||
-					(${column.name} != null && _${column.name} != null && !${column.name}.equals(_${column.name}))
+					(${column.name} != _${column.name}) ||
+					(${column.name} != null && !${column.name}.equals(_${column.name}))
 				</#if>
 
 				) {
