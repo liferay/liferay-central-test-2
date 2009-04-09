@@ -71,8 +71,8 @@ public class SampleSQLBuilder {
 		InitUtil.initWithSpring();
 
 		String outputDir = System.getProperty("sample.sql.output.dir");
-		int maxBlogsCommentCount = GetterUtil.getInteger(
-			System.getProperty("sample.sql.blogs.comment.count"));
+		int maxBlogsEntryCommentCount = GetterUtil.getInteger(
+			System.getProperty("sample.sql.blogs.entry.comment.count"));
 		int maxBlogsEntryCount = GetterUtil.getInteger(
 			System.getProperty("sample.sql.blogs.entry.count"));
 		int maxGroupCount = GetterUtil.getInteger(
@@ -89,27 +89,31 @@ public class SampleSQLBuilder {
 			System.getProperty("sample.sql.user.to.group.count"));
 		int maxWikiNodeCount = GetterUtil.getInteger(
 			System.getProperty("sample.sql.wiki.node.count"));
+		int maxWikiPageCommentCount = GetterUtil.getInteger(
+			System.getProperty("sample.sql.wiki.page.comment.count"));
 		int maxWikiPageCount = GetterUtil.getInteger(
 			System.getProperty("sample.sql.wiki.page.count"));
 		boolean securityEnabled = GetterUtil.getBoolean(
 			System.getProperty("sample.sql.security.enabled"));
 
 		new SampleSQLBuilder(
-			outputDir, maxBlogsCommentCount, maxBlogsEntryCount, maxGroupCount,
-			maxMBCategoryCount, maxMBMessageCount, maxMBThreadCount,
-			maxUserCount, maxUserToGroupCount, maxWikiNodeCount,
-			maxWikiPageCount, securityEnabled);
+			outputDir, maxBlogsEntryCommentCount, maxBlogsEntryCount,
+			maxGroupCount, maxMBCategoryCount, maxMBMessageCount,
+			maxMBThreadCount, maxUserCount, maxUserToGroupCount,
+			maxWikiNodeCount, maxWikiPageCommentCount, maxWikiPageCount,
+			securityEnabled);
 	}
 
 	public SampleSQLBuilder(
-		String outputDir, int maxBlogsCommentCount, int maxBlogsEntryCount,
+		String outputDir, int maxBlogsEntryCommentCount, int maxBlogsEntryCount,
 		int maxGroupCount, int maxMBCategoryCount, int maxMBMessageCount,
 		int maxMBThreadCount, int maxUserCount, int maxUserToGroupCount,
-		int maxWikiNodeCount, int maxWikiPageCount, boolean securityEnabled) {
+		int maxWikiNodeCount, int maxWikiPageCommentCount, int maxWikiPageCount,
+		boolean securityEnabled) {
 
 		try {
 			_outputDir = outputDir;
-			_maxBlogsCommentCount = maxBlogsCommentCount;
+			_maxBlogsEntryCommentCount = maxBlogsEntryCommentCount;
 			_maxBlogsEntryCount = maxBlogsEntryCount;
 			_maxGroupCount = maxGroupCount;
 			_maxMBCategoryCount = maxMBCategoryCount;
@@ -118,6 +122,7 @@ public class SampleSQLBuilder {
 			_maxUserCount = maxUserCount;
 			_maxUserToGroupCount = maxUserToGroupCount;
 			_maxWikiNodeCount = maxWikiNodeCount;
+			_maxWikiPageCommentCount = maxWikiPageCommentCount;
 			_maxWikiPageCount = maxWikiPageCount;
 			_securityEnabled = securityEnabled;
 
@@ -356,7 +361,7 @@ public class SampleSQLBuilder {
 		put(context, "counter", _counter);
 		put(context, "dataFactory", _dataFactory);
 		put(context, "defaultUserId", defaultUser.getCompanyId());
-		put(context, "maxBlogsCommentCount", _maxBlogsCommentCount);
+		put(context, "maxBlogsEntryCommentCount", _maxBlogsEntryCommentCount);
 		put(context, "maxBlogsEntryCount", _maxBlogsEntryCount);
 		put(context, "maxGroupCount", _maxGroupCount);
 		put(context, "maxMBCategoryCount", _maxMBCategoryCount);
@@ -365,6 +370,7 @@ public class SampleSQLBuilder {
 		put(context, "maxUserCount", _maxUserCount);
 		put(context, "maxUserToGroupCount", _maxUserToGroupCount);
 		put(context, "maxWikiNodeCount", _maxWikiNodeCount);
+		put(context, "maxWikiPageCommentCount", _maxWikiPageCommentCount);
 		put(context, "maxWikiPageCount", _maxWikiPageCount);
 		put(context, "portalUUIDUtil", PortalUUIDUtil.getPortalUUID());
 		put(context, "sampleSQLBuilder", this);
@@ -393,7 +399,7 @@ public class SampleSQLBuilder {
 
 	private SimpleCounter _counter;
 	private DataFactory _dataFactory;
-	private int _maxBlogsCommentCount;
+	private int _maxBlogsEntryCommentCount;
 	private int _maxBlogsEntryCount;
 	private int _maxGroupCount;
 	private int _maxMBCategoryCount;
@@ -402,6 +408,7 @@ public class SampleSQLBuilder {
 	private int _maxUserCount;
 	private int _maxUserToGroupCount;
 	private int _maxWikiNodeCount;
+	private int _maxWikiPageCommentCount;
 	private int _maxWikiPageCount;
 	private String _outputDir;
 	private SimpleCounter _permissionCounter;
