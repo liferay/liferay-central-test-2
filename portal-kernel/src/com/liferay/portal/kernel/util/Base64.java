@@ -125,7 +125,6 @@ public class Base64 {
 	}
 
 	public static byte[] decode(String base64) {
-
 		if (Validator.isNull(base64)) {
 			return new byte[0];
 		}
