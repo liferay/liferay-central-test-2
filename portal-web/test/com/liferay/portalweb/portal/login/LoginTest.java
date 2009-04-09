@@ -34,6 +34,24 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class LoginTest extends BaseTestCase {
 	public void testLogin() throws Exception {
 		selenium.open("/web/guest/home");
+		Thread.sleep(5000);
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Sign In")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Sign In"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_58_login", RuntimeVariables.replace("test@liferay.com"));
