@@ -860,14 +860,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			try {
 				message = addDiscussionMessage(
-					userId, null, className, classPK, _DISCUSSION_THREAD_ID,
+					userId, null, className, classPK, 0,
 					MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID, subject, subject,
 					new ServiceContext());
 			}
 			catch (SystemException se) {
 				List<MBMessage> messages = mbMessagePersistence.findByT_P(
-					_DISCUSSION_THREAD_ID,
-					MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID);
+					0, MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID);
 
 				if (messages.isEmpty()) {
 					throw se;
@@ -1730,8 +1729,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			throw new MessageBodyException();
 		}
 	}
-
-	private static final long _DISCUSSION_THREAD_ID = 0;
 
 	private static Log _log =
 		LogFactoryUtil.getLog(MBMessageLocalServiceImpl.class);
