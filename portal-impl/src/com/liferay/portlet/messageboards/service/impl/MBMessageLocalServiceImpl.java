@@ -865,6 +865,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					new ServiceContext());
 			}
 			catch (SystemException se) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Add failed, fetch {threadId=0, parentMessageId=" +
+							MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID + "}");
+				}
+
 				List<MBMessage> messages = mbMessagePersistence.findByT_P(
 					0, MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID);
 
