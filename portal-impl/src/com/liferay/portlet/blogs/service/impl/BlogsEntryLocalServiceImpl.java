@@ -50,8 +50,6 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.FriendlyURLNormalizer;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsKeys;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.blogs.EntryContentException;
 import com.liferay.portlet.blogs.EntryDisplayDateException;
@@ -795,7 +793,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		String portalURL = serviceContext.getPortalURL();
 		String layoutURL = serviceContext.getLayoutURL();
 
-		if (!GetterUtil.getBoolean(PropsUtil.get(PropsKeys.BLOGS_PING_GOOGLE_ENABLED)) &&
+		if (!PropsValues.BLOGS_PING_GOOGLE_ENABLED ||
 			Validator.isNull(portalURL) || Validator.isNull(layoutURL) ||
 			(portalURL.indexOf("://localhost") != -1) ||
 			(portalURL.indexOf("://127.0.0.1") != -1)) {

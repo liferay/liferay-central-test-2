@@ -158,13 +158,13 @@ public interface PropsKeys {
 
 	public static final String BLOGS_PAGE_ABSTRACT_LENGTH = "blogs.page.abstract.length";
 
+	public static final String BLOGS_PING_GOOGLE_ENABLED = "blogs.ping.google.enabled";
+
 	public static final String BLOGS_RSS_ABSTRACT_LENGTH = "blogs.rss.abstract.length";
 
 	public static final String BLOGS_TRACKBACK_EXCERPT_LENGTH = "blogs.trackback.excerpt.length";
 
 	public static final String BLOGS_TRACKBACK_VERIFIER_JOB_INTERVAL = "blogs.trackback.verifier.job.interval";
-
-	public static final String BLOGS_PING_GOOGLE_ENABLED = "blogs.ping.google.enabled";
 	
 	public static final String BROWSER_LAUNCHER_URL = "browser.launcher.url";
 

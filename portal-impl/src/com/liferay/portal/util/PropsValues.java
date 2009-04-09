@@ -153,6 +153,10 @@ public class PropsValues {
 	public static final int BLOGS_PAGE_ABSTRACT_LENGTH = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.BLOGS_PAGE_ABSTRACT_LENGTH));
 
+	public static final boolean BLOGS_PING_GOOGLE_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.BLOGS_PING_GOOGLE_ENABLED));
+
 	public static final int BLOGS_TRACKBACK_EXCERPT_LENGTH =
 		GetterUtil.getInteger(PropsUtil.get(PropsKeys.
 			BLOGS_TRACKBACK_EXCERPT_LENGTH));
