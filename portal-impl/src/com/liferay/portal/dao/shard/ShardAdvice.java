@@ -67,7 +67,7 @@ public class ShardAdvice {
 
 		String shardName = PropsValues.SHARD_DEFAULT_NAME;
 
-		if (methodName.equals("getAccount") && arguments.length == 2) {
+		if (methodName.equals("getAccount") && (arguments.length == 2)) {
 			long companyId = (Long)arguments[0];
 
 			Shard shard = ShardLocalServiceUtil.getShard(
