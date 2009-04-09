@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.upgrade.v5_1_0.UpgradeBlogs;
-import com.liferay.portal.upgrade.v5_1_0.UpgradeGroup;
 import com.liferay.portal.upgrade.v5_1_0.UpgradeMessageBoards;
 import com.liferay.portal.upgrade.v5_1_0.UpgradeSchema;
 import com.liferay.portal.upgrade.v5_1_0.UpgradeSitemap;
@@ -48,7 +47,6 @@ public class UpgradeProcess_5_1_0 extends UpgradeProcess {
 
 		upgrade(UpgradeSchema.class);
 		upgrade(UpgradeBlogs.class);
-		upgrade(UpgradeGroup.class);
 		upgrade(UpgradeMessageBoards.class);
 		upgrade(UpgradeSitemap.class);
 	}

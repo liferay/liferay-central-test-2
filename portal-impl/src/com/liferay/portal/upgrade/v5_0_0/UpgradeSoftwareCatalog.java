@@ -28,7 +28,7 @@ import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
-import com.liferay.portal.upgrade.v5_0_0.util.SCProductVersionTable;
+import com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl;
 
 /**
  * <a href="UpgradeSoftwareCatalog.java.html"><b><i>View Source</i></b></a>
@@ -54,10 +54,10 @@ public class UpgradeSoftwareCatalog extends UpgradeProcess {
 		// SCProductVersion
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			SCProductVersionTable.TABLE_NAME,
-			SCProductVersionTable.TABLE_COLUMNS);
+			SCProductVersionImpl.TABLE_NAME,
+			SCProductVersionImpl.TABLE_COLUMNS);
 
-		upgradeTable.setCreateSQL(SCProductVersionTable.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(SCProductVersionImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 	}

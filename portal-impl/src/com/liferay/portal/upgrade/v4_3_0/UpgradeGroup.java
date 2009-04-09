@@ -28,6 +28,11 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.model.impl.GroupImpl;
+import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.model.impl.LayoutSetImpl;
+import com.liferay.portal.model.impl.OrgGroupPermissionImpl;
+import com.liferay.portal.model.impl.OrgGroupRoleImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultPKMapper;
@@ -43,13 +48,8 @@ import com.liferay.portal.upgrade.v4_3_0.util.ClassNameIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKContainer;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.GroupNameUpgradeColumnImpl;
-import com.liferay.portal.upgrade.v4_3_0.util.GroupTable;
 import com.liferay.portal.upgrade.v4_3_0.util.LayoutOwnerIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.LayoutPlidUpgradeColumnImpl;
-import com.liferay.portal.upgrade.v4_3_0.util.LayoutSetTable;
-import com.liferay.portal.upgrade.v4_3_0.util.LayoutTable;
-import com.liferay.portal.upgrade.v4_3_0.util.OrgGroupPermissionTable;
-import com.liferay.portal.upgrade.v4_3_0.util.OrgGroupRoleTable;
 import com.liferay.portal.util.PortalUtil;
 
 import java.sql.Types;
@@ -112,10 +112,10 @@ public class UpgradeGroup extends UpgradeProcess {
 			upgradePKColumn, upgradeClassPKColumn);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			GroupTable.TABLE_NAME, GroupTable.TABLE_COLUMNS, upgradePKColumn,
+			GroupImpl.TABLE_NAME, GroupImpl.TABLE_COLUMNS, upgradePKColumn,
 			classNameIdColumn, upgradeClassPKColumn, upgradeNameColumn);
 
-		upgradeTable.setCreateSQL(GroupTable.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(GroupImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -149,18 +149,18 @@ public class UpgradeGroup extends UpgradeProcess {
 				upgradeLayoutOwnerIdPrivateLayoutColumn, upgradeLayoutIdColumn);
 
 		Object[][] layoutColumns1 = {{"ownerId", new Integer(Types.VARCHAR)}};
-		Object[][] layoutColumns2 = LayoutTable.TABLE_COLUMNS.clone();
+		Object[][] layoutColumns2 = LayoutImpl.TABLE_COLUMNS.clone();
 
 		Object[][] layoutColumns = ArrayUtil.append(
 			layoutColumns1, layoutColumns2);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			LayoutTable.TABLE_NAME, layoutColumns, upgradeLayoutOwnerIdColumn,
+			LayoutImpl.TABLE_NAME, layoutColumns, upgradeLayoutOwnerIdColumn,
 			upgradeLayoutOwnerIdGroupIdColumn,
 			upgradeLayoutOwnerIdPrivateLayoutColumn, upgradeLayoutIdColumn,
 			upgradeLayoutPlidColumn);
 
-		String createSQL = LayoutTable.TABLE_SQL_CREATE;
+		String createSQL = LayoutImpl.TABLE_SQL_CREATE;
 
 		createSQL =
 			createSQL.substring(0, createSQL.length() - 1) +
@@ -178,17 +178,17 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		Object[][] layoutSetColumns1 =
 			{{"ownerId", new Integer(Types.VARCHAR)}};
-		Object[][] layoutSetColumns2 = LayoutSetTable.TABLE_COLUMNS.clone();
+		Object[][] layoutSetColumns2 = LayoutSetImpl.TABLE_COLUMNS.clone();
 
 		Object[][] layoutSetColumns = ArrayUtil.append(
 			layoutSetColumns1, layoutSetColumns2);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			LayoutSetTable.TABLE_NAME, layoutSetColumns,
+			LayoutSetImpl.TABLE_NAME, layoutSetColumns,
 			new PKUpgradeColumnImpl("layoutSetId", false),
 			upgradeGroupIdColumn);
 
-		createSQL = LayoutSetTable.TABLE_SQL_CREATE;
+		createSQL = LayoutSetImpl.TABLE_SQL_CREATE;
 
 		createSQL =
 			createSQL.substring(0, createSQL.length() - 1) +
@@ -201,20 +201,20 @@ public class UpgradeGroup extends UpgradeProcess {
 		// OrgGroupPermission
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			OrgGroupPermissionTable.TABLE_NAME,
-			OrgGroupPermissionTable.TABLE_COLUMNS, upgradeGroupIdColumn);
+			OrgGroupPermissionImpl.TABLE_NAME,
+			OrgGroupPermissionImpl.TABLE_COLUMNS, upgradeGroupIdColumn);
 
-		upgradeTable.setCreateSQL(OrgGroupPermissionTable.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(OrgGroupPermissionImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
 		// OrgGroupRole
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			OrgGroupRoleTable.TABLE_NAME, OrgGroupRoleTable.TABLE_COLUMNS,
+			OrgGroupRoleImpl.TABLE_NAME, OrgGroupRoleImpl.TABLE_COLUMNS,
 			upgradeGroupIdColumn);
 
-		upgradeTable.setCreateSQL(OrgGroupRoleTable.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(OrgGroupRoleImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 

@@ -24,11 +24,11 @@ package com.liferay.portal.upgrade.v5_2_3;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
-import com.liferay.portal.upgrade.v5_2_3.util.ResourceTable;
 
 /**
  * <a href="UpgradeResource.java.html"><b><i>View Source</i></b></a>
@@ -58,9 +58,9 @@ public class UpgradeResource extends UpgradeProcess {
 			// Resource
 
 			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-				ResourceTable.TABLE_NAME, ResourceTable.TABLE_COLUMNS);
+				ResourceImpl.TABLE_NAME, ResourceImpl.TABLE_COLUMNS);
 
-			upgradeTable.setCreateSQL(ResourceTable.TABLE_SQL_CREATE);
+			upgradeTable.setCreateSQL(ResourceImpl.TABLE_SQL_CREATE);
 
 			upgradeTable.updateTable();
 		}

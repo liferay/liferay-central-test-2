@@ -105,8 +105,8 @@ public class StartupAction extends SimpleAction {
 
 		int buildNumber = ReleaseLocalServiceUtil.getBuildNumberOrCreate();
 
-		if (buildNumber < ReleaseInfo.RELEASE_4_1_0_BUILD_NUMBER) {
-			String msg = "You must first upgrade to Liferay Portal 4.1.0";
+		if (buildNumber < ReleaseInfo.RELEASE_4_2_1_BUILD_NUMBER) {
+			String msg = "You must first upgrade to Liferay Portal 4.2.1";
 
 			_log.fatal(msg);
 

@@ -28,10 +28,10 @@ import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
-import com.liferay.portal.upgrade.v4_3_3.util.SCFrameworkVersionTable;
-import com.liferay.portal.upgrade.v4_3_3.util.SCLicenseTable;
-import com.liferay.portal.upgrade.v4_3_3.util.SCProductEntryTable;
-import com.liferay.portal.upgrade.v4_3_3.util.SCProductVersionTable;
+import com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl;
+import com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl;
+import com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryImpl;
+import com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl;
 
 /**
  * <a href="UpgradeSoftwareCatalog.java.html"><b><i>View Source</i></b></a>
@@ -57,38 +57,38 @@ public class UpgradeSoftwareCatalog extends UpgradeProcess {
 		// SCFrameworkVersion
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			SCFrameworkVersionTable.TABLE_NAME,
-			SCFrameworkVersionTable.TABLE_COLUMNS);
+			SCFrameworkVersionImpl.TABLE_NAME,
+			SCFrameworkVersionImpl.TABLE_COLUMNS);
 
-		upgradeTable.setCreateSQL(SCFrameworkVersionTable.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(SCFrameworkVersionImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
 		// SCLicense
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			SCLicenseTable.TABLE_NAME, SCLicenseTable.TABLE_COLUMNS);
+			SCLicenseImpl.TABLE_NAME, SCLicenseImpl.TABLE_COLUMNS);
 
-		upgradeTable.setCreateSQL(SCLicenseTable.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(SCLicenseImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
 		// SCProductEntry
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			SCProductEntryTable.TABLE_NAME, SCProductEntryTable.TABLE_COLUMNS);
+			SCProductEntryImpl.TABLE_NAME, SCProductEntryImpl.TABLE_COLUMNS);
 
-		upgradeTable.setCreateSQL(SCProductEntryTable.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(SCProductEntryImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
 		// SCProductVersion
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			SCProductVersionTable.TABLE_NAME,
-			SCProductVersionTable.TABLE_COLUMNS);
+			SCProductVersionImpl.TABLE_NAME,
+			SCProductVersionImpl.TABLE_COLUMNS);
 
-		upgradeTable.setCreateSQL(SCProductVersionTable.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(SCProductVersionImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 	}

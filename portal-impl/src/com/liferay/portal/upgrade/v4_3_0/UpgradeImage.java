@@ -24,6 +24,7 @@ package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultPKMapper;
@@ -34,7 +35,6 @@ import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.ImageHeightUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.ImageSizeUpgradeColumnImpl;
-import com.liferay.portal.upgrade.v4_3_0.util.ImageTable;
 import com.liferay.portal.upgrade.v4_3_0.util.ImageTextUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.ImageTypeUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.ImageWidthUpgradeColumnImpl;
@@ -99,11 +99,11 @@ public class UpgradeImage extends UpgradeProcess {
 			new ImageSizeUpgradeColumnImpl(upgradeTextColumn);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			ImageTable.TABLE_NAME, ImageTable.TABLE_COLUMNS,
+			ImageImpl.TABLE_NAME, ImageImpl.TABLE_COLUMNS,
 			upgradePKColumn, upgradeTextColumn, upgradeTypeColumn,
 			upgradeHeightColumn, upgradeWidthColumn, upgradeSizeColumn);
 
-		upgradeTable.setCreateSQL(ImageTable.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(ImageImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 

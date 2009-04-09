@@ -22,8 +22,7 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.portal.upgrade.UpgradeException;
-import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.upgrade.SmartUpgradeSchema;
 
 /**
  * <a href="UpgradeSchema.java.html"><b><i>View Source</i></b></a>
@@ -31,15 +30,10 @@ import com.liferay.portal.upgrade.UpgradeProcess;
  * @author Brian Wing Shun Chan
  *
  */
-public class UpgradeSchema extends UpgradeProcess {
+public class UpgradeSchema extends SmartUpgradeSchema {
 
-	public void upgrade() throws UpgradeException {
-		try {
-			runSQLTemplate("update-4.2.0-4.3.0.sql", false);
-		}
-		catch (Exception e) {
-			throw new UpgradeException();
-		}
+	protected void upgradeOnce() throws Exception {
+		runSQLTemplate("update-4.2.0-4.3.0.sql", false);
 
 		for (int i = 0; i < _OLD_TABLES.length; i++) {
 			try {

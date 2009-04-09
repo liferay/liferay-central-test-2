@@ -28,7 +28,7 @@ import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
-import com.liferay.portal.upgrade.v5_2_3.util.WikiPageTable;
+import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 
 /**
  * <a href="UpgradeWiki.java.html"><b><i>View Source</i></b></a>
@@ -58,9 +58,9 @@ public class UpgradeWiki extends UpgradeProcess {
 			// WikiPage
 
 			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-				WikiPageTable.TABLE_NAME, WikiPageTable.TABLE_COLUMNS);
+				WikiPageImpl.TABLE_NAME, WikiPageImpl.TABLE_COLUMNS);
 
-			upgradeTable.setCreateSQL(WikiPageTable.TABLE_SQL_CREATE);
+			upgradeTable.setCreateSQL(WikiPageImpl.TABLE_SQL_CREATE);
 
 			upgradeTable.updateTable();
 		}

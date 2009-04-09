@@ -28,14 +28,18 @@ import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
-import com.liferay.portal.upgrade.v5_2_3.util.TagsAssetTable;
-import com.liferay.portal.upgrade.v5_2_3.util.TagsPropertyTable;
 import com.liferay.portal.upgrade.v5_2_3.util.TagsPropertyValueUpgradeColumnImpl;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.bookmarks.model.BookmarksEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.tags.model.impl.TagsAssetImpl;
+import com.liferay.portlet.tags.model.impl.TagsPropertyImpl;
 
 /**
  * <a href="UpgradeTags.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Samuel Kong
  *
  */
 public class UpgradeTags extends UpgradeProcess {
@@ -60,22 +64,59 @@ public class UpgradeTags extends UpgradeProcess {
 			// TagsAsset
 
 			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-				TagsAssetTable.TABLE_NAME, TagsAssetTable.TABLE_COLUMNS);
+				TagsAssetImpl.TABLE_NAME, TagsAssetImpl.TABLE_COLUMNS);
 
-			upgradeTable.setCreateSQL(TagsAssetTable.TABLE_SQL_CREATE);
+			upgradeTable.setCreateSQL(TagsAssetImpl.TABLE_SQL_CREATE);
 
 			upgradeTable.updateTable();
 		}
 
+		updateAssetViewCount();
+
 		// TagsProperty
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			TagsPropertyTable.TABLE_NAME, TagsPropertyTable.TABLE_COLUMNS,
+			TagsPropertyImpl.TABLE_NAME, TagsPropertyImpl.TABLE_COLUMNS,
 			new TagsPropertyValueUpgradeColumnImpl("value"));
 
-		upgradeTable.setCreateSQL(TagsPropertyTable.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(TagsPropertyImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
+	}
+
+	protected void updateAssetViewCount() throws Exception {
+		updateAssetViewCount(
+			BookmarksEntry.class.getName(), "BookmarksEntry", "entryId",
+			"visits");
+
+		updateAssetViewCount(
+			DLFileEntry.class.getName(), "DLFileEntry", "fileEntryId",
+			"readCount");
+	}
+
+	protected void updateAssetViewCount(
+			String className, String tableName, String columnClassPK,
+			String columnViewCount)
+		throws Exception {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("UPDATE TagsAsset SET TagsAsset.viewCount = (SELECT ");
+		sb.append(tableName);
+		sb.append(".");
+		sb.append(columnViewCount);
+		sb.append(" FROM ");
+		sb.append(tableName);
+		sb.append(" WHERE TagsAsset.classPK = ");
+		sb.append(tableName);
+		sb.append(".");
+		sb.append(columnClassPK);
+		sb.append(") WHERE TagsAsset.classNameId = ");
+		sb.append(classNameId);
+
+		runSQL(sb.toString());
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(UpgradeTags.class);

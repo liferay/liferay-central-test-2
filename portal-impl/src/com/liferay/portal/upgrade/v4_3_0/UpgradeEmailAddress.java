@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.impl.EmailAddressImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -37,7 +38,6 @@ import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassNameIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKContainer;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKUpgradeColumnImpl;
-import com.liferay.portal.upgrade.v4_3_0.util.EmailAddressTable;
 import com.liferay.portal.upgrade.v4_3_0.util.ValueMapperUtil;
 import com.liferay.portal.util.PortalUtil;
 
@@ -97,11 +97,11 @@ public class UpgradeEmailAddress extends UpgradeProcess {
 			classNameIdColumn, classPKContainers);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			EmailAddressTable.TABLE_NAME, EmailAddressTable.TABLE_COLUMNS,
+			EmailAddressImpl.TABLE_NAME, EmailAddressImpl.TABLE_COLUMNS,
 			upgradePKColumn, upgradeUserIdColumn, classNameIdColumn,
 			upgradeClassPKColumn);
 
-		upgradeTable.setCreateSQL(EmailAddressTable.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(EmailAddressImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 

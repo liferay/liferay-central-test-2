@@ -24,11 +24,11 @@ package com.liferay.portal.upgrade.v5_2_3;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
-import com.liferay.portal.upgrade.v5_2_3.util.UserTable;
 
 /**
  * <a href="UpgradeUser.java.html"><b><i>View Source</i></b></a>
@@ -58,9 +58,9 @@ public class UpgradeUser extends UpgradeProcess {
 			// User_
 
 			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-				UserTable.TABLE_NAME, UserTable.TABLE_COLUMNS);
+				UserImpl.TABLE_NAME, UserImpl.TABLE_COLUMNS);
 
-			upgradeTable.setCreateSQL(UserTable.TABLE_SQL_CREATE);
+			upgradeTable.setCreateSQL(UserImpl.TABLE_SQL_CREATE);
 
 			upgradeTable.updateTable();
 		}

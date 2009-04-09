@@ -34,10 +34,10 @@ import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.PollsChoiceIdUpgradeColumnImpl;
-import com.liferay.portal.upgrade.v4_3_0.util.PollsChoiceTable;
-import com.liferay.portal.upgrade.v4_3_0.util.PollsQuestionTable;
 import com.liferay.portal.upgrade.v4_3_0.util.PollsVoteChoiceIdUpgradeColumnImpl;
-import com.liferay.portal.upgrade.v4_3_0.util.PollsVoteTable;
+import com.liferay.portlet.polls.model.impl.PollsChoiceImpl;
+import com.liferay.portlet.polls.model.impl.PollsQuestionImpl;
+import com.liferay.portlet.polls.model.impl.PollsVoteImpl;
 
 import java.sql.Types;
 
@@ -75,10 +75,10 @@ public class UpgradePolls extends UpgradeProcess {
 			"questionId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			PollsQuestionTable.TABLE_NAME, PollsQuestionTable.TABLE_COLUMNS,
+			PollsQuestionImpl.TABLE_NAME, PollsQuestionImpl.TABLE_COLUMNS,
 			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
-		upgradeTable.setCreateSQL(PollsQuestionTable.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(PollsQuestionImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -95,10 +95,10 @@ public class UpgradePolls extends UpgradeProcess {
 			new PollsChoiceIdUpgradeColumnImpl(upgradeQuestionIdColumn);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			PollsChoiceTable.TABLE_NAME, PollsChoiceTable.TABLE_COLUMNS,
+			PollsChoiceImpl.TABLE_NAME, PollsChoiceImpl.TABLE_COLUMNS,
 			upgradeQuestionIdColumn, upgradeChoiceId);
 
-		upgradeTable.setCreateSQL(PollsChoiceTable.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(PollsChoiceImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -111,11 +111,11 @@ public class UpgradePolls extends UpgradeProcess {
 				upgradeQuestionIdColumn, choiceIdMapper);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			PollsVoteTable.TABLE_NAME, PollsVoteTable.TABLE_COLUMNS,
+			PollsVoteImpl.TABLE_NAME, PollsVoteImpl.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("voteId", false), upgradeUserIdColumn,
 			upgradeQuestionIdColumn, upgradeVoteChoiceIdColumn);
 
-		upgradeTable.setCreateSQL(PollsVoteTable.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(PollsVoteImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 	}
