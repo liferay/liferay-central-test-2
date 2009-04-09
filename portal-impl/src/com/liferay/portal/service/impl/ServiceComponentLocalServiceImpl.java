@@ -220,11 +220,11 @@ public class ServiceComponentLocalServiceImpl
 
 			models.addAll(getModels(xml));
 		}
-		catch (IOException e) {
-			// nothing to do here...the ext model hints is optional...
+		catch (Exception e) {
 			if (_log.isInfoEnabled()) {
-			    _log.info("No optional file, " +
-						  "META-INF/portlet-model-hints-ext.xml found");
+				_log.info(
+					"No optional file META-INF/portlet-model-hints-ext.xml " +
+						"found");
 			}
 		}
 
