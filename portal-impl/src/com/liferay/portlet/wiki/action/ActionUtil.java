@@ -87,7 +87,7 @@ public class ActionUtil {
 				serviceContext);
 		}
 		else {
-			List <WikiNode> nodes = WikiUtil.getNodes(renderRequest);
+			List<WikiNode> nodes = WikiUtil.getNodes(renderRequest);
 
 			if (nodes.size() == 0) {
 				throw new PrincipalException();
