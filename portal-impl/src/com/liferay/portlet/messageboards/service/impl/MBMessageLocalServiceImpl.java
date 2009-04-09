@@ -860,16 +860,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			try {
 				message = addDiscussionMessage(
-					userId, null, className, classPK, _DEFAULT_THREAD_ID,
+					userId, null, className, classPK, _DISCUSSION_THREAD_ID,
 					MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID, subject, subject,
 					new ServiceContext());
 			}
 			catch (SystemException se) {
-
-				// LPS-2843
-
 				List<MBMessage> messages = mbMessagePersistence.findByT_P(
-					_DEFAULT_THREAD_ID,
+					_DISCUSSION_THREAD_ID,
 					MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID);
 
 				if (messages.isEmpty()) {
@@ -1734,9 +1731,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 	}
 
+	private static final long _DISCUSSION_THREAD_ID = 0;
+
 	private static Log _log =
 		LogFactoryUtil.getLog(MBMessageLocalServiceImpl.class);
-
-	private static final long _DEFAULT_THREAD_ID = 0;
 
 }
