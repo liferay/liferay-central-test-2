@@ -1158,8 +1158,6 @@ public class ServicePreAction extends Action {
 		layout = (Layout)viewableLayouts[0];
 		layouts = (List<Layout>)viewableLayouts[1];
 
-		LayoutTypePortlet layoutTypePortlet = null;
-
 		Group group = null;
 
 		if (layout != null) {
@@ -1169,6 +1167,8 @@ public class ServicePreAction extends Action {
 				rememberVisitedGroupIds(request, group.getGroupId());
 			}
 		}
+
+		LayoutTypePortlet layoutTypePortlet = null;
 
 		layouts = mergeAdditionalLayouts(
 			request, user, permissionChecker, layout, layouts);
