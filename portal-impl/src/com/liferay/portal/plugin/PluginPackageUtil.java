@@ -902,14 +902,16 @@ public class PluginPackageUtil {
 		String moduleArtifactId = displayPrefix + "-" + pluginType;
 
 		String moduleVersion = null;
-		int versionPos = pos + pluginType.length() + 2;
-		if (displayName.length() > versionPos) {
-			moduleVersion = displayName.substring(versionPos);
+
+		int moduleVersionPos = pos + pluginType.length() + 2;
+
+		if (displayName.length() > moduleVersionPos) {
+			moduleVersion = displayName.substring(moduleVersionPos);
 		}
 		else {
 			moduleVersion = ReleaseInfo.getVersion();
 		}
-		
+
 		String moduleId =
 			moduleGroupId + "/" + moduleArtifactId + "/" + moduleVersion +
 				"/war";
