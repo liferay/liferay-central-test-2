@@ -74,7 +74,8 @@ public class CompanyImpl extends CompanyModelImpl implements Company {
 		Account account = null;
 
 		try {
-			account = AccountLocalServiceUtil.getAccount(getAccountId());
+			account = AccountLocalServiceUtil.getAccount(
+				getCompanyId(), getAccountId());
 		}
 		catch (Exception e) {
 			account = new AccountImpl();

@@ -95,4 +95,10 @@ public interface AccountLocalService {
 	public com.liferay.portal.model.Account updateAccount(
 		com.liferay.portal.model.Account account, boolean merge)
 		throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.model.Account getAccount(long companyId,
+		long accountId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

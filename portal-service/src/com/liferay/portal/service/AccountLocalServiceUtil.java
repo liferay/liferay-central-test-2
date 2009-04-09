@@ -106,6 +106,13 @@ public class AccountLocalServiceUtil {
 		return getService().updateAccount(account, merge);
 	}
 
+	public static com.liferay.portal.model.Account getAccount(long companyId,
+		long accountId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getAccount(companyId, accountId);
+	}
+
 	public static AccountLocalService getService() {
 		if (_service == null) {
 			throw new RuntimeException("AccountLocalService is not set");

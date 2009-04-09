@@ -105,6 +105,7 @@
 	</bean>
 	<aop:config>
 		<aop:aspect ref="com.liferay.portal.dao.shard.ShardAdvice">
+			<aop:around pointcut="bean(com.liferay.portal.service.AccountLocalService.impl)" method="invokeAccountService" />
 			<aop:around pointcut="bean(com.liferay.portal.service.CompanyLocalService.impl)" method="invokeCompanyService" />
 			<aop:around pointcut="bean(com.liferay.portal.service.UserLocalService.impl)" method="invokeUserService" />
 			<aop:around pointcut="bean(*Persistence.impl) or bean(*Finder.impl)" method="invokePersistence" />

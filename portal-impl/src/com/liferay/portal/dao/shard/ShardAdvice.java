@@ -59,6 +59,46 @@ import org.aspectj.lang.ProceedingJoinPoint;
  */
 public class ShardAdvice {
 
+	public Object invokeAccountService(ProceedingJoinPoint proceedingJoinPoint)
+		throws Throwable {
+
+		String methodName = proceedingJoinPoint.getSignature().getName();
+		Object[] arguments = proceedingJoinPoint.getArgs();
+
+		String shardName = PropsValues.SHARD_DEFAULT_NAME;
+
+		if (methodName.equals("getAccount") && arguments.length == 2) {
+			long companyId = (Long)arguments[0];
+
+			Shard shard = ShardLocalServiceUtil.getShard(
+				Company.class.getName(), companyId);
+
+			shardName = shard.getName();
+		}
+		else {
+			return proceedingJoinPoint.proceed();
+		}
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Company service being set to shard " + shardName + " for " +
+					_getSignature(proceedingJoinPoint));
+		}
+
+		Object returnValue = null;
+
+		pushCompanyService(shardName);
+
+		try {
+			returnValue = proceedingJoinPoint.proceed();
+		}
+		finally {
+			popCompanyService();
+		}
+
+		return returnValue;
+	}
+
 	public Object invokeCompanyService(ProceedingJoinPoint proceedingJoinPoint)
 		throws Throwable {
 
