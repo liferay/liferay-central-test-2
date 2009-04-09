@@ -164,6 +164,8 @@ public interface PropsKeys {
 
 	public static final String BLOGS_TRACKBACK_VERIFIER_JOB_INTERVAL = "blogs.trackback.verifier.job.interval";
 
+	public static final String BLOGS_PING_GOOGLE_ENABLED = "blogs.ping.google.enabled";
+	
 	public static final String BROWSER_LAUNCHER_URL = "browser.launcher.url";
 
 	public static final String CALENDAR_EMAIL_EVENT_REMINDER_BODY = "calendar.email.event.reminder.body";
