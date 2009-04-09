@@ -255,9 +255,7 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue> {
 	}
 
 	public void setData(String data) {
-		if (((data == null) && (_data != null)) ||
-				((data != null) && (_data == null)) ||
-				((data != null) && (_data != null) && !data.equals(_data))) {
+		if ((data != _data) || ((data != null) && !data.equals(_data))) {
 			_data = data;
 		}
 	}

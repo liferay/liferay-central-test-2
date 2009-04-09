@@ -191,10 +191,8 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
+		if ((createDate != _createDate) ||
+				((createDate != null) && !createDate.equals(_createDate))) {
 			_createDate = createDate;
 		}
 	}
@@ -224,9 +222,7 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {
 	}
 
 	public void setName(String name) {
-		if (((name == null) && (_name != null)) ||
-				((name != null) && (_name == null)) ||
-				((name != null) && (_name != null) && !name.equals(_name))) {
+		if ((name != _name) || ((name != null) && !name.equals(_name))) {
 			_name = name;
 
 			if (_originalName == null) {

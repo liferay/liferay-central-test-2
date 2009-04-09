@@ -273,10 +273,8 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setUserName(String userName) {
-		if (((userName == null) && (_userName != null)) ||
-				((userName != null) && (_userName == null)) ||
-				((userName != null) && (_userName != null) &&
-				!userName.equals(_userName))) {
+		if ((userName != _userName) ||
+				((userName != null) && !userName.equals(_userName))) {
 			_userName = userName;
 		}
 	}
@@ -286,10 +284,8 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
+		if ((createDate != _createDate) ||
+				((createDate != null) && !createDate.equals(_createDate))) {
 			_createDate = createDate;
 		}
 	}
@@ -299,10 +295,8 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if (((modifiedDate == null) && (_modifiedDate != null)) ||
-				((modifiedDate != null) && (_modifiedDate == null)) ||
-				((modifiedDate != null) && (_modifiedDate != null) &&
-				!modifiedDate.equals(_modifiedDate))) {
+		if ((modifiedDate != _modifiedDate) ||
+				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
 		}
 	}
@@ -312,9 +306,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setTitle(String title) {
-		if (((title == null) && (_title != null)) ||
-				((title != null) && (_title == null)) ||
-				((title != null) && (_title != null) && !title.equals(_title))) {
+		if ((title != _title) || ((title != null) && !title.equals(_title))) {
 			_title = title;
 		}
 	}
@@ -324,10 +316,8 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setDescription(String description) {
-		if (((description == null) && (_description != null)) ||
-				((description != null) && (_description == null)) ||
-				((description != null) && (_description != null) &&
-				!description.equals(_description))) {
+		if ((description != _description) ||
+				((description != null) && !description.equals(_description))) {
 			_description = description;
 		}
 	}
@@ -337,10 +327,8 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setStartDate(Date startDate) {
-		if (((startDate == null) && (_startDate != null)) ||
-				((startDate != null) && (_startDate == null)) ||
-				((startDate != null) && (_startDate != null) &&
-				!startDate.equals(_startDate))) {
+		if ((startDate != _startDate) ||
+				((startDate != null) && !startDate.equals(_startDate))) {
 			_startDate = startDate;
 		}
 	}
@@ -350,10 +338,8 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setEndDate(Date endDate) {
-		if (((endDate == null) && (_endDate != null)) ||
-				((endDate != null) && (_endDate == null)) ||
-				((endDate != null) && (_endDate != null) &&
-				!endDate.equals(_endDate))) {
+		if ((endDate != _endDate) ||
+				((endDate != null) && !endDate.equals(_endDate))) {
 			_endDate = endDate;
 		}
 	}
@@ -411,9 +397,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setType(String type) {
-		if (((type == null) && (_type != null)) ||
-				((type != null) && (_type == null)) ||
-				((type != null) && (_type != null) && !type.equals(_type))) {
+		if ((type != _type) || ((type != null) && !type.equals(_type))) {
 			_type = type;
 		}
 	}
@@ -437,10 +421,8 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setRecurrence(String recurrence) {
-		if (((recurrence == null) && (_recurrence != null)) ||
-				((recurrence != null) && (_recurrence == null)) ||
-				((recurrence != null) && (_recurrence != null) &&
-				!recurrence.equals(_recurrence))) {
+		if ((recurrence != _recurrence) ||
+				((recurrence != null) && !recurrence.equals(_recurrence))) {
 			_recurrence = recurrence;
 		}
 	}
@@ -450,10 +432,8 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public void setRemindBy(String remindBy) {
-		if (((remindBy == null) && (_remindBy != null)) ||
-				((remindBy != null) && (_remindBy == null)) ||
-				((remindBy != null) && (_remindBy != null) &&
-				!remindBy.equals(_remindBy))) {
+		if ((remindBy != _remindBy) ||
+				((remindBy != null) && !remindBy.equals(_remindBy))) {
 			_remindBy = remindBy;
 		}
 	}

@@ -185,9 +185,7 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 	}
 
 	public void setType(String type) {
-		if (((type == null) && (_type != null)) ||
-				((type != null) && (_type == null)) ||
-				((type != null) && (_type != null) && !type.equals(_type))) {
+		if ((type != _type) || ((type != null) && !type.equals(_type))) {
 			_type = type;
 
 			if (_originalType == null) {

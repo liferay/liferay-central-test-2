@@ -228,10 +228,8 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public void setUserName(String userName) {
-		if (((userName == null) && (_userName != null)) ||
-				((userName != null) && (_userName == null)) ||
-				((userName != null) && (_userName != null) &&
-				!userName.equals(_userName))) {
+		if ((userName != _userName) ||
+				((userName != null) && !userName.equals(_userName))) {
 			_userName = userName;
 		}
 	}
@@ -241,10 +239,8 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
+		if ((createDate != _createDate) ||
+				((createDate != null) && !createDate.equals(_createDate))) {
 			_createDate = createDate;
 		}
 	}
@@ -254,10 +250,8 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if (((modifiedDate == null) && (_modifiedDate != null)) ||
-				((modifiedDate != null) && (_modifiedDate == null)) ||
-				((modifiedDate != null) && (_modifiedDate != null) &&
-				!modifiedDate.equals(_modifiedDate))) {
+		if ((modifiedDate != _modifiedDate) ||
+				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
 		}
 	}
@@ -295,9 +289,7 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public void setTitle(String title) {
-		if (((title == null) && (_title != null)) ||
-				((title != null) && (_title == null)) ||
-				((title != null) && (_title != null) && !title.equals(_title))) {
+		if ((title != _title) || ((title != null) && !title.equals(_title))) {
 			_title = title;
 		}
 	}
@@ -307,10 +299,8 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public void setContent(String content) {
-		if (((content == null) && (_content != null)) ||
-				((content != null) && (_content == null)) ||
-				((content != null) && (_content != null) &&
-				!content.equals(_content))) {
+		if ((content != _content) ||
+				((content != null) && !content.equals(_content))) {
 			_content = content;
 		}
 	}
@@ -320,9 +310,7 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public void setUrl(String url) {
-		if (((url == null) && (_url != null)) ||
-				((url != null) && (_url == null)) ||
-				((url != null) && (_url != null) && !url.equals(_url))) {
+		if ((url != _url) || ((url != null) && !url.equals(_url))) {
 			_url = url;
 		}
 	}
@@ -332,9 +320,7 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public void setType(String type) {
-		if (((type == null) && (_type != null)) ||
-				((type != null) && (_type == null)) ||
-				((type != null) && (_type != null) && !type.equals(_type))) {
+		if ((type != _type) || ((type != null) && !type.equals(_type))) {
 			_type = type;
 		}
 	}
@@ -344,10 +330,8 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public void setDisplayDate(Date displayDate) {
-		if (((displayDate == null) && (_displayDate != null)) ||
-				((displayDate != null) && (_displayDate == null)) ||
-				((displayDate != null) && (_displayDate != null) &&
-				!displayDate.equals(_displayDate))) {
+		if ((displayDate != _displayDate) ||
+				((displayDate != null) && !displayDate.equals(_displayDate))) {
 			_displayDate = displayDate;
 		}
 	}
@@ -357,9 +341,8 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public void setExpirationDate(Date expirationDate) {
-		if (((expirationDate == null) && (_expirationDate != null)) ||
-				((expirationDate != null) && (_expirationDate == null)) ||
-				((expirationDate != null) && (_expirationDate != null) &&
+		if ((expirationDate != _expirationDate) ||
+				((expirationDate != null) &&
 				!expirationDate.equals(_expirationDate))) {
 			_expirationDate = expirationDate;
 		}

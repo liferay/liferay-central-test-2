@@ -174,10 +174,8 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
+		if ((createDate != _createDate) ||
+				((createDate != null) && !createDate.equals(_createDate))) {
 			_createDate = createDate;
 		}
 	}

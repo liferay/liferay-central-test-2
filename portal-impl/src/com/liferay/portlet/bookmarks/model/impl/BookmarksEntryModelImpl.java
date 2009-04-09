@@ -204,10 +204,8 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
+		if ((createDate != _createDate) ||
+				((createDate != null) && !createDate.equals(_createDate))) {
 			_createDate = createDate;
 		}
 	}
@@ -217,10 +215,8 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if (((modifiedDate == null) && (_modifiedDate != null)) ||
-				((modifiedDate != null) && (_modifiedDate == null)) ||
-				((modifiedDate != null) && (_modifiedDate != null) &&
-				!modifiedDate.equals(_modifiedDate))) {
+		if ((modifiedDate != _modifiedDate) ||
+				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
 		}
 	}
@@ -240,9 +236,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 	}
 
 	public void setName(String name) {
-		if (((name == null) && (_name != null)) ||
-				((name != null) && (_name == null)) ||
-				((name != null) && (_name != null) && !name.equals(_name))) {
+		if ((name != _name) || ((name != null) && !name.equals(_name))) {
 			_name = name;
 		}
 	}
@@ -252,9 +246,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 	}
 
 	public void setUrl(String url) {
-		if (((url == null) && (_url != null)) ||
-				((url != null) && (_url == null)) ||
-				((url != null) && (_url != null) && !url.equals(_url))) {
+		if ((url != _url) || ((url != null) && !url.equals(_url))) {
 			_url = url;
 		}
 	}
@@ -264,10 +256,8 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 	}
 
 	public void setComments(String comments) {
-		if (((comments == null) && (_comments != null)) ||
-				((comments != null) && (_comments == null)) ||
-				((comments != null) && (_comments != null) &&
-				!comments.equals(_comments))) {
+		if ((comments != _comments) ||
+				((comments != null) && !comments.equals(_comments))) {
 			_comments = comments;
 		}
 	}

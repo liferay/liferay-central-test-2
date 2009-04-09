@@ -153,9 +153,7 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense> {
 	}
 
 	public void setName(String name) {
-		if (((name == null) && (_name != null)) ||
-				((name != null) && (_name == null)) ||
-				((name != null) && (_name != null) && !name.equals(_name))) {
+		if ((name != _name) || ((name != null) && !name.equals(_name))) {
 			_name = name;
 		}
 	}
@@ -165,9 +163,7 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense> {
 	}
 
 	public void setUrl(String url) {
-		if (((url == null) && (_url != null)) ||
-				((url != null) && (_url == null)) ||
-				((url != null) && (_url != null) && !url.equals(_url))) {
+		if ((url != _url) || ((url != null) && !url.equals(_url))) {
 			_url = url;
 		}
 	}

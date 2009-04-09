@@ -245,10 +245,8 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 	}
 
 	public void setUserName(String userName) {
-		if (((userName == null) && (_userName != null)) ||
-				((userName != null) && (_userName == null)) ||
-				((userName != null) && (_userName != null) &&
-				!userName.equals(_userName))) {
+		if ((userName != _userName) ||
+				((userName != null) && !userName.equals(_userName))) {
 			_userName = userName;
 		}
 	}
@@ -258,10 +256,8 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
+		if ((createDate != _createDate) ||
+				((createDate != null) && !createDate.equals(_createDate))) {
 			_createDate = createDate;
 		}
 	}
@@ -271,10 +267,8 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if (((modifiedDate == null) && (_modifiedDate != null)) ||
-				((modifiedDate != null) && (_modifiedDate == null)) ||
-				((modifiedDate != null) && (_modifiedDate != null) &&
-				!modifiedDate.equals(_modifiedDate))) {
+		if ((modifiedDate != _modifiedDate) ||
+				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
 		}
 	}
@@ -284,9 +278,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 	}
 
 	public void setTitle(String title) {
-		if (((title == null) && (_title != null)) ||
-				((title != null) && (_title == null)) ||
-				((title != null) && (_title != null) && !title.equals(_title))) {
+		if ((title != _title) || ((title != null) && !title.equals(_title))) {
 			_title = title;
 		}
 	}
@@ -296,10 +288,8 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 	}
 
 	public void setUrlTitle(String urlTitle) {
-		if (((urlTitle == null) && (_urlTitle != null)) ||
-				((urlTitle != null) && (_urlTitle == null)) ||
-				((urlTitle != null) && (_urlTitle != null) &&
-				!urlTitle.equals(_urlTitle))) {
+		if ((urlTitle != _urlTitle) ||
+				((urlTitle != null) && !urlTitle.equals(_urlTitle))) {
 			_urlTitle = urlTitle;
 
 			if (_originalUrlTitle == null) {
@@ -317,10 +307,8 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 	}
 
 	public void setContent(String content) {
-		if (((content == null) && (_content != null)) ||
-				((content != null) && (_content == null)) ||
-				((content != null) && (_content != null) &&
-				!content.equals(_content))) {
+		if ((content != _content) ||
+				((content != null) && !content.equals(_content))) {
 			_content = content;
 		}
 	}
@@ -330,10 +318,8 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 	}
 
 	public void setDisplayDate(Date displayDate) {
-		if (((displayDate == null) && (_displayDate != null)) ||
-				((displayDate != null) && (_displayDate == null)) ||
-				((displayDate != null) && (_displayDate != null) &&
-				!displayDate.equals(_displayDate))) {
+		if ((displayDate != _displayDate) ||
+				((displayDate != null) && !displayDate.equals(_displayDate))) {
 			_displayDate = displayDate;
 		}
 	}
@@ -371,10 +357,8 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 	}
 
 	public void setTrackbacks(String trackbacks) {
-		if (((trackbacks == null) && (_trackbacks != null)) ||
-				((trackbacks != null) && (_trackbacks == null)) ||
-				((trackbacks != null) && (_trackbacks != null) &&
-				!trackbacks.equals(_trackbacks))) {
+		if ((trackbacks != _trackbacks) ||
+				((trackbacks != null) && !trackbacks.equals(_trackbacks))) {
 			_trackbacks = trackbacks;
 		}
 	}

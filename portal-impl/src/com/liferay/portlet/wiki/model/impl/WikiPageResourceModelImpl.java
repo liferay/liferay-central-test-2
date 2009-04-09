@@ -158,9 +158,7 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource> {
 	}
 
 	public void setTitle(String title) {
-		if (((title == null) && (_title != null)) ||
-				((title != null) && (_title == null)) ||
-				((title != null) && (_title != null) && !title.equals(_title))) {
+		if ((title != _title) || ((title != null) && !title.equals(_title))) {
 			_title = title;
 
 			if (_originalTitle == null) {

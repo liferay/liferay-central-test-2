@@ -168,10 +168,8 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting> {
 	}
 
 	public void setPluginId(String pluginId) {
-		if (((pluginId == null) && (_pluginId != null)) ||
-				((pluginId != null) && (_pluginId == null)) ||
-				((pluginId != null) && (_pluginId != null) &&
-				!pluginId.equals(_pluginId))) {
+		if ((pluginId != _pluginId) ||
+				((pluginId != null) && !pluginId.equals(_pluginId))) {
 			_pluginId = pluginId;
 
 			if (_originalPluginId == null) {
@@ -189,10 +187,8 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting> {
 	}
 
 	public void setPluginType(String pluginType) {
-		if (((pluginType == null) && (_pluginType != null)) ||
-				((pluginType != null) && (_pluginType == null)) ||
-				((pluginType != null) && (_pluginType != null) &&
-				!pluginType.equals(_pluginType))) {
+		if ((pluginType != _pluginType) ||
+				((pluginType != null) && !pluginType.equals(_pluginType))) {
 			_pluginType = pluginType;
 
 			if (_originalPluginType == null) {
@@ -210,9 +206,7 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting> {
 	}
 
 	public void setRoles(String roles) {
-		if (((roles == null) && (_roles != null)) ||
-				((roles != null) && (_roles == null)) ||
-				((roles != null) && (_roles != null) && !roles.equals(_roles))) {
+		if ((roles != _roles) || ((roles != null) && !roles.equals(_roles))) {
 			_roles = roles;
 		}
 	}

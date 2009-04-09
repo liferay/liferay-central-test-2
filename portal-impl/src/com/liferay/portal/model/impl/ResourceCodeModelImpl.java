@@ -160,9 +160,7 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode> {
 	}
 
 	public void setName(String name) {
-		if (((name == null) && (_name != null)) ||
-				((name != null) && (_name == null)) ||
-				((name != null) && (_name != null) && !name.equals(_name))) {
+		if ((name != _name) || ((name != null) && !name.equals(_name))) {
 			_name = name;
 
 			if (_originalName == null) {

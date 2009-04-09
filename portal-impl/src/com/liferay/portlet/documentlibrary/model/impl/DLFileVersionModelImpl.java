@@ -182,10 +182,8 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	}
 
 	public void setUserName(String userName) {
-		if (((userName == null) && (_userName != null)) ||
-				((userName != null) && (_userName == null)) ||
-				((userName != null) && (_userName != null) &&
-				!userName.equals(_userName))) {
+		if ((userName != _userName) ||
+				((userName != null) && !userName.equals(_userName))) {
 			_userName = userName;
 		}
 	}
@@ -195,10 +193,8 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
+		if ((createDate != _createDate) ||
+				((createDate != null) && !createDate.equals(_createDate))) {
 			_createDate = createDate;
 		}
 	}
@@ -228,9 +224,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	}
 
 	public void setName(String name) {
-		if (((name == null) && (_name != null)) ||
-				((name != null) && (_name == null)) ||
-				((name != null) && (_name != null) && !name.equals(_name))) {
+		if ((name != _name) || ((name != null) && !name.equals(_name))) {
 			_name = name;
 
 			if (_originalName == null) {

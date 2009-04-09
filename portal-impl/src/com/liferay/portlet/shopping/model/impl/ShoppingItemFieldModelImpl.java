@@ -156,9 +156,7 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl<ShoppingItemField>
 	}
 
 	public void setName(String name) {
-		if (((name == null) && (_name != null)) ||
-				((name != null) && (_name == null)) ||
-				((name != null) && (_name != null) && !name.equals(_name))) {
+		if ((name != _name) || ((name != null) && !name.equals(_name))) {
 			_name = name;
 		}
 	}
@@ -168,10 +166,8 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl<ShoppingItemField>
 	}
 
 	public void setValues(String values) {
-		if (((values == null) && (_values != null)) ||
-				((values != null) && (_values == null)) ||
-				((values != null) && (_values != null) &&
-				!values.equals(_values))) {
+		if ((values != _values) ||
+				((values != null) && !values.equals(_values))) {
 			_values = values;
 		}
 	}
@@ -181,10 +177,8 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl<ShoppingItemField>
 	}
 
 	public void setDescription(String description) {
-		if (((description == null) && (_description != null)) ||
-				((description != null) && (_description == null)) ||
-				((description != null) && (_description != null) &&
-				!description.equals(_description))) {
+		if ((description != _description) ||
+				((description != null) && !description.equals(_description))) {
 			_description = description;
 		}
 	}

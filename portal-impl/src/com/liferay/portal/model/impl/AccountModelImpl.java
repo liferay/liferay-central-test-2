@@ -209,10 +209,8 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public void setUserName(String userName) {
-		if (((userName == null) && (_userName != null)) ||
-				((userName != null) && (_userName == null)) ||
-				((userName != null) && (_userName != null) &&
-				!userName.equals(_userName))) {
+		if ((userName != _userName) ||
+				((userName != null) && !userName.equals(_userName))) {
 			_userName = userName;
 		}
 	}
@@ -222,10 +220,8 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
+		if ((createDate != _createDate) ||
+				((createDate != null) && !createDate.equals(_createDate))) {
 			_createDate = createDate;
 		}
 	}
@@ -235,10 +231,8 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if (((modifiedDate == null) && (_modifiedDate != null)) ||
-				((modifiedDate != null) && (_modifiedDate == null)) ||
-				((modifiedDate != null) && (_modifiedDate != null) &&
-				!modifiedDate.equals(_modifiedDate))) {
+		if ((modifiedDate != _modifiedDate) ||
+				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
 		}
 	}
@@ -258,9 +252,7 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public void setName(String name) {
-		if (((name == null) && (_name != null)) ||
-				((name != null) && (_name == null)) ||
-				((name != null) && (_name != null) && !name.equals(_name))) {
+		if ((name != _name) || ((name != null) && !name.equals(_name))) {
 			_name = name;
 		}
 	}
@@ -270,10 +262,8 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public void setLegalName(String legalName) {
-		if (((legalName == null) && (_legalName != null)) ||
-				((legalName != null) && (_legalName == null)) ||
-				((legalName != null) && (_legalName != null) &&
-				!legalName.equals(_legalName))) {
+		if ((legalName != _legalName) ||
+				((legalName != null) && !legalName.equals(_legalName))) {
 			_legalName = legalName;
 		}
 	}
@@ -283,10 +273,8 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public void setLegalId(String legalId) {
-		if (((legalId == null) && (_legalId != null)) ||
-				((legalId != null) && (_legalId == null)) ||
-				((legalId != null) && (_legalId != null) &&
-				!legalId.equals(_legalId))) {
+		if ((legalId != _legalId) ||
+				((legalId != null) && !legalId.equals(_legalId))) {
 			_legalId = legalId;
 		}
 	}
@@ -296,10 +284,8 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public void setLegalType(String legalType) {
-		if (((legalType == null) && (_legalType != null)) ||
-				((legalType != null) && (_legalType == null)) ||
-				((legalType != null) && (_legalType != null) &&
-				!legalType.equals(_legalType))) {
+		if ((legalType != _legalType) ||
+				((legalType != null) && !legalType.equals(_legalType))) {
 			_legalType = legalType;
 		}
 	}
@@ -309,10 +295,8 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public void setSicCode(String sicCode) {
-		if (((sicCode == null) && (_sicCode != null)) ||
-				((sicCode != null) && (_sicCode == null)) ||
-				((sicCode != null) && (_sicCode != null) &&
-				!sicCode.equals(_sicCode))) {
+		if ((sicCode != _sicCode) ||
+				((sicCode != null) && !sicCode.equals(_sicCode))) {
 			_sicCode = sicCode;
 		}
 	}
@@ -322,10 +306,8 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public void setTickerSymbol(String tickerSymbol) {
-		if (((tickerSymbol == null) && (_tickerSymbol != null)) ||
-				((tickerSymbol != null) && (_tickerSymbol == null)) ||
-				((tickerSymbol != null) && (_tickerSymbol != null) &&
-				!tickerSymbol.equals(_tickerSymbol))) {
+		if ((tickerSymbol != _tickerSymbol) ||
+				((tickerSymbol != null) && !tickerSymbol.equals(_tickerSymbol))) {
 			_tickerSymbol = tickerSymbol;
 		}
 	}
@@ -335,10 +317,8 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public void setIndustry(String industry) {
-		if (((industry == null) && (_industry != null)) ||
-				((industry != null) && (_industry == null)) ||
-				((industry != null) && (_industry != null) &&
-				!industry.equals(_industry))) {
+		if ((industry != _industry) ||
+				((industry != null) && !industry.equals(_industry))) {
 			_industry = industry;
 		}
 	}
@@ -348,9 +328,7 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public void setType(String type) {
-		if (((type == null) && (_type != null)) ||
-				((type != null) && (_type == null)) ||
-				((type != null) && (_type != null) && !type.equals(_type))) {
+		if ((type != _type) || ((type != null) && !type.equals(_type))) {
 			_type = type;
 		}
 	}
@@ -360,9 +338,7 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public void setSize(String size) {
-		if (((size == null) && (_size != null)) ||
-				((size != null) && (_size == null)) ||
-				((size != null) && (_size != null) && !size.equals(_size))) {
+		if ((size != _size) || ((size != null) && !size.equals(_size))) {
 			_size = size;
 		}
 	}

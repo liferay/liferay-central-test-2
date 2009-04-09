@@ -224,10 +224,8 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public void setUserName(String userName) {
-		if (((userName == null) && (_userName != null)) ||
-				((userName != null) && (_userName == null)) ||
-				((userName != null) && (_userName != null) &&
-				!userName.equals(_userName))) {
+		if ((userName != _userName) ||
+				((userName != null) && !userName.equals(_userName))) {
 			_userName = userName;
 		}
 	}
@@ -247,9 +245,8 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public void setVersionUserName(String versionUserName) {
-		if (((versionUserName == null) && (_versionUserName != null)) ||
-				((versionUserName != null) && (_versionUserName == null)) ||
-				((versionUserName != null) && (_versionUserName != null) &&
+		if ((versionUserName != _versionUserName) ||
+				((versionUserName != null) &&
 				!versionUserName.equals(_versionUserName))) {
 			_versionUserName = versionUserName;
 		}
@@ -260,10 +257,8 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
+		if ((createDate != _createDate) ||
+				((createDate != null) && !createDate.equals(_createDate))) {
 			_createDate = createDate;
 		}
 	}
@@ -273,10 +268,8 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if (((modifiedDate == null) && (_modifiedDate != null)) ||
-				((modifiedDate != null) && (_modifiedDate == null)) ||
-				((modifiedDate != null) && (_modifiedDate != null) &&
-				!modifiedDate.equals(_modifiedDate))) {
+		if ((modifiedDate != _modifiedDate) ||
+				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
 		}
 	}
@@ -306,9 +299,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public void setName(String name) {
-		if (((name == null) && (_name != null)) ||
-				((name != null) && (_name == null)) ||
-				((name != null) && (_name != null) && !name.equals(_name))) {
+		if ((name != _name) || ((name != null) && !name.equals(_name))) {
 			_name = name;
 
 			if (_originalName == null) {
@@ -326,9 +317,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public void setTitle(String title) {
-		if (((title == null) && (_title != null)) ||
-				((title != null) && (_title == null)) ||
-				((title != null) && (_title != null) && !title.equals(_title))) {
+		if ((title != _title) || ((title != null) && !title.equals(_title))) {
 			_title = title;
 		}
 	}
@@ -338,10 +327,8 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public void setDescription(String description) {
-		if (((description == null) && (_description != null)) ||
-				((description != null) && (_description == null)) ||
-				((description != null) && (_description != null) &&
-				!description.equals(_description))) {
+		if ((description != _description) ||
+				((description != null) && !description.equals(_description))) {
 			_description = description;
 		}
 	}
@@ -381,9 +368,8 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public void setExtraSettings(String extraSettings) {
-		if (((extraSettings == null) && (_extraSettings != null)) ||
-				((extraSettings != null) && (_extraSettings == null)) ||
-				((extraSettings != null) && (_extraSettings != null) &&
+		if ((extraSettings != _extraSettings) ||
+				((extraSettings != null) &&
 				!extraSettings.equals(_extraSettings))) {
 			_extraSettings = extraSettings;
 		}

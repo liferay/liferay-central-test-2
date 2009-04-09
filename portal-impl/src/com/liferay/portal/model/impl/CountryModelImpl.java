@@ -152,9 +152,7 @@ public class CountryModelImpl extends BaseModelImpl<Country> {
 	}
 
 	public void setName(String name) {
-		if (((name == null) && (_name != null)) ||
-				((name != null) && (_name == null)) ||
-				((name != null) && (_name != null) && !name.equals(_name))) {
+		if ((name != _name) || ((name != null) && !name.equals(_name))) {
 			_name = name;
 
 			if (_originalName == null) {
@@ -172,8 +170,7 @@ public class CountryModelImpl extends BaseModelImpl<Country> {
 	}
 
 	public void setA2(String a2) {
-		if (((a2 == null) && (_a2 != null)) || ((a2 != null) && (_a2 == null)) ||
-				((a2 != null) && (_a2 != null) && !a2.equals(_a2))) {
+		if ((a2 != _a2) || ((a2 != null) && !a2.equals(_a2))) {
 			_a2 = a2;
 
 			if (_originalA2 == null) {
@@ -191,8 +188,7 @@ public class CountryModelImpl extends BaseModelImpl<Country> {
 	}
 
 	public void setA3(String a3) {
-		if (((a3 == null) && (_a3 != null)) || ((a3 != null) && (_a3 == null)) ||
-				((a3 != null) && (_a3 != null) && !a3.equals(_a3))) {
+		if ((a3 != _a3) || ((a3 != null) && !a3.equals(_a3))) {
 			_a3 = a3;
 
 			if (_originalA3 == null) {
@@ -210,10 +206,8 @@ public class CountryModelImpl extends BaseModelImpl<Country> {
 	}
 
 	public void setNumber(String number) {
-		if (((number == null) && (_number != null)) ||
-				((number != null) && (_number == null)) ||
-				((number != null) && (_number != null) &&
-				!number.equals(_number))) {
+		if ((number != _number) ||
+				((number != null) && !number.equals(_number))) {
 			_number = number;
 		}
 	}
@@ -223,9 +217,7 @@ public class CountryModelImpl extends BaseModelImpl<Country> {
 	}
 
 	public void setIdd(String idd) {
-		if (((idd == null) && (_idd != null)) ||
-				((idd != null) && (_idd == null)) ||
-				((idd != null) && (_idd != null) && !idd.equals(_idd))) {
+		if ((idd != _idd) || ((idd != null) && !idd.equals(_idd))) {
 			_idd = idd;
 		}
 	}

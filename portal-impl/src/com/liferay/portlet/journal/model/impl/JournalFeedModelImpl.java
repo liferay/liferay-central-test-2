@@ -276,10 +276,8 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setUserName(String userName) {
-		if (((userName == null) && (_userName != null)) ||
-				((userName != null) && (_userName == null)) ||
-				((userName != null) && (_userName != null) &&
-				!userName.equals(_userName))) {
+		if ((userName != _userName) ||
+				((userName != null) && !userName.equals(_userName))) {
 			_userName = userName;
 		}
 	}
@@ -289,10 +287,8 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
+		if ((createDate != _createDate) ||
+				((createDate != null) && !createDate.equals(_createDate))) {
 			_createDate = createDate;
 		}
 	}
@@ -302,10 +298,8 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if (((modifiedDate == null) && (_modifiedDate != null)) ||
-				((modifiedDate != null) && (_modifiedDate == null)) ||
-				((modifiedDate != null) && (_modifiedDate != null) &&
-				!modifiedDate.equals(_modifiedDate))) {
+		if ((modifiedDate != _modifiedDate) ||
+				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
 		}
 	}
@@ -315,10 +309,8 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setFeedId(String feedId) {
-		if (((feedId == null) && (_feedId != null)) ||
-				((feedId != null) && (_feedId == null)) ||
-				((feedId != null) && (_feedId != null) &&
-				!feedId.equals(_feedId))) {
+		if ((feedId != _feedId) ||
+				((feedId != null) && !feedId.equals(_feedId))) {
 			_feedId = feedId;
 
 			if (_originalFeedId == null) {
@@ -336,9 +328,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setName(String name) {
-		if (((name == null) && (_name != null)) ||
-				((name != null) && (_name == null)) ||
-				((name != null) && (_name != null) && !name.equals(_name))) {
+		if ((name != _name) || ((name != null) && !name.equals(_name))) {
 			_name = name;
 		}
 	}
@@ -348,10 +338,8 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setDescription(String description) {
-		if (((description == null) && (_description != null)) ||
-				((description != null) && (_description == null)) ||
-				((description != null) && (_description != null) &&
-				!description.equals(_description))) {
+		if ((description != _description) ||
+				((description != null) && !description.equals(_description))) {
 			_description = description;
 		}
 	}
@@ -361,9 +349,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setType(String type) {
-		if (((type == null) && (_type != null)) ||
-				((type != null) && (_type == null)) ||
-				((type != null) && (_type != null) && !type.equals(_type))) {
+		if ((type != _type) || ((type != null) && !type.equals(_type))) {
 			_type = type;
 		}
 	}
@@ -373,10 +359,8 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setStructureId(String structureId) {
-		if (((structureId == null) && (_structureId != null)) ||
-				((structureId != null) && (_structureId == null)) ||
-				((structureId != null) && (_structureId != null) &&
-				!structureId.equals(_structureId))) {
+		if ((structureId != _structureId) ||
+				((structureId != null) && !structureId.equals(_structureId))) {
 			_structureId = structureId;
 		}
 	}
@@ -386,10 +370,8 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setTemplateId(String templateId) {
-		if (((templateId == null) && (_templateId != null)) ||
-				((templateId != null) && (_templateId == null)) ||
-				((templateId != null) && (_templateId != null) &&
-				!templateId.equals(_templateId))) {
+		if ((templateId != _templateId) ||
+				((templateId != null) && !templateId.equals(_templateId))) {
 			_templateId = templateId;
 		}
 	}
@@ -399,9 +381,8 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setRendererTemplateId(String rendererTemplateId) {
-		if (((rendererTemplateId == null) && (_rendererTemplateId != null)) ||
-				((rendererTemplateId != null) && (_rendererTemplateId == null)) ||
-				((rendererTemplateId != null) && (_rendererTemplateId != null) &&
+		if ((rendererTemplateId != _rendererTemplateId) ||
+				((rendererTemplateId != null) &&
 				!rendererTemplateId.equals(_rendererTemplateId))) {
 			_rendererTemplateId = rendererTemplateId;
 		}
@@ -422,10 +403,8 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setOrderByCol(String orderByCol) {
-		if (((orderByCol == null) && (_orderByCol != null)) ||
-				((orderByCol != null) && (_orderByCol == null)) ||
-				((orderByCol != null) && (_orderByCol != null) &&
-				!orderByCol.equals(_orderByCol))) {
+		if ((orderByCol != _orderByCol) ||
+				((orderByCol != null) && !orderByCol.equals(_orderByCol))) {
 			_orderByCol = orderByCol;
 		}
 	}
@@ -435,10 +414,8 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setOrderByType(String orderByType) {
-		if (((orderByType == null) && (_orderByType != null)) ||
-				((orderByType != null) && (_orderByType == null)) ||
-				((orderByType != null) && (_orderByType != null) &&
-				!orderByType.equals(_orderByType))) {
+		if ((orderByType != _orderByType) ||
+				((orderByType != null) && !orderByType.equals(_orderByType))) {
 			_orderByType = orderByType;
 		}
 	}
@@ -448,12 +425,8 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setTargetLayoutFriendlyUrl(String targetLayoutFriendlyUrl) {
-		if (((targetLayoutFriendlyUrl == null) &&
-				(_targetLayoutFriendlyUrl != null)) ||
+		if ((targetLayoutFriendlyUrl != _targetLayoutFriendlyUrl) ||
 				((targetLayoutFriendlyUrl != null) &&
-				(_targetLayoutFriendlyUrl == null)) ||
-				((targetLayoutFriendlyUrl != null) &&
-				(_targetLayoutFriendlyUrl != null) &&
 				!targetLayoutFriendlyUrl.equals(_targetLayoutFriendlyUrl))) {
 			_targetLayoutFriendlyUrl = targetLayoutFriendlyUrl;
 		}
@@ -464,9 +437,8 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setTargetPortletId(String targetPortletId) {
-		if (((targetPortletId == null) && (_targetPortletId != null)) ||
-				((targetPortletId != null) && (_targetPortletId == null)) ||
-				((targetPortletId != null) && (_targetPortletId != null) &&
+		if ((targetPortletId != _targetPortletId) ||
+				((targetPortletId != null) &&
 				!targetPortletId.equals(_targetPortletId))) {
 			_targetPortletId = targetPortletId;
 		}
@@ -477,10 +449,8 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setContentField(String contentField) {
-		if (((contentField == null) && (_contentField != null)) ||
-				((contentField != null) && (_contentField == null)) ||
-				((contentField != null) && (_contentField != null) &&
-				!contentField.equals(_contentField))) {
+		if ((contentField != _contentField) ||
+				((contentField != null) && !contentField.equals(_contentField))) {
 			_contentField = contentField;
 		}
 	}
@@ -490,10 +460,8 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	}
 
 	public void setFeedType(String feedType) {
-		if (((feedType == null) && (_feedType != null)) ||
-				((feedType != null) && (_feedType == null)) ||
-				((feedType != null) && (_feedType != null) &&
-				!feedType.equals(_feedType))) {
+		if ((feedType != _feedType) ||
+				((feedType != null) && !feedType.equals(_feedType))) {
 			_feedType = feedType;
 		}
 	}

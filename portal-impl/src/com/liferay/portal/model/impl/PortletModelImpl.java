@@ -164,10 +164,8 @@ public class PortletModelImpl extends BaseModelImpl<Portlet> {
 	}
 
 	public void setPortletId(String portletId) {
-		if (((portletId == null) && (_portletId != null)) ||
-				((portletId != null) && (_portletId == null)) ||
-				((portletId != null) && (_portletId != null) &&
-				!portletId.equals(_portletId))) {
+		if ((portletId != _portletId) ||
+				((portletId != null) && !portletId.equals(_portletId))) {
 			_portletId = portletId;
 
 			if (_originalPortletId == null) {
@@ -185,9 +183,7 @@ public class PortletModelImpl extends BaseModelImpl<Portlet> {
 	}
 
 	public void setRoles(String roles) {
-		if (((roles == null) && (_roles != null)) ||
-				((roles != null) && (_roles == null)) ||
-				((roles != null) && (_roles != null) && !roles.equals(_roles))) {
+		if ((roles != _roles) || ((roles != null) && !roles.equals(_roles))) {
 			_roles = roles;
 		}
 	}

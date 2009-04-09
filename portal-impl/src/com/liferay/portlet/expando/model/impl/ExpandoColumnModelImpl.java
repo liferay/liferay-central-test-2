@@ -181,9 +181,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn> {
 	}
 
 	public void setName(String name) {
-		if (((name == null) && (_name != null)) ||
-				((name != null) && (_name == null)) ||
-				((name != null) && (_name != null) && !name.equals(_name))) {
+		if ((name != _name) || ((name != null) && !name.equals(_name))) {
 			_name = name;
 
 			if (_originalName == null) {
@@ -211,10 +209,8 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn> {
 	}
 
 	public void setDefaultData(String defaultData) {
-		if (((defaultData == null) && (_defaultData != null)) ||
-				((defaultData != null) && (_defaultData == null)) ||
-				((defaultData != null) && (_defaultData != null) &&
-				!defaultData.equals(_defaultData))) {
+		if ((defaultData != _defaultData) ||
+				((defaultData != null) && !defaultData.equals(_defaultData))) {
 			_defaultData = defaultData;
 		}
 	}
@@ -224,10 +220,8 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn> {
 	}
 
 	public void setTypeSettings(String typeSettings) {
-		if (((typeSettings == null) && (_typeSettings != null)) ||
-				((typeSettings != null) && (_typeSettings == null)) ||
-				((typeSettings != null) && (_typeSettings != null) &&
-				!typeSettings.equals(_typeSettings))) {
+		if ((typeSettings != _typeSettings) ||
+				((typeSettings != null) && !typeSettings.equals(_typeSettings))) {
 			_typeSettings = typeSettings;
 		}
 	}

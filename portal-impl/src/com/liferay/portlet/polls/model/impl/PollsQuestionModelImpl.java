@@ -233,10 +233,8 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 	}
 
 	public void setUserName(String userName) {
-		if (((userName == null) && (_userName != null)) ||
-				((userName != null) && (_userName == null)) ||
-				((userName != null) && (_userName != null) &&
-				!userName.equals(_userName))) {
+		if ((userName != _userName) ||
+				((userName != null) && !userName.equals(_userName))) {
 			_userName = userName;
 		}
 	}
@@ -246,10 +244,8 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
+		if ((createDate != _createDate) ||
+				((createDate != null) && !createDate.equals(_createDate))) {
 			_createDate = createDate;
 		}
 	}
@@ -259,10 +255,8 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if (((modifiedDate == null) && (_modifiedDate != null)) ||
-				((modifiedDate != null) && (_modifiedDate == null)) ||
-				((modifiedDate != null) && (_modifiedDate != null) &&
-				!modifiedDate.equals(_modifiedDate))) {
+		if ((modifiedDate != _modifiedDate) ||
+				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
 		}
 	}
@@ -272,9 +266,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 	}
 
 	public void setTitle(String title) {
-		if (((title == null) && (_title != null)) ||
-				((title != null) && (_title == null)) ||
-				((title != null) && (_title != null) && !title.equals(_title))) {
+		if ((title != _title) || ((title != null) && !title.equals(_title))) {
 			_title = title;
 		}
 	}
@@ -284,10 +276,8 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 	}
 
 	public void setDescription(String description) {
-		if (((description == null) && (_description != null)) ||
-				((description != null) && (_description == null)) ||
-				((description != null) && (_description != null) &&
-				!description.equals(_description))) {
+		if ((description != _description) ||
+				((description != null) && !description.equals(_description))) {
 			_description = description;
 		}
 	}
@@ -297,9 +287,8 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 	}
 
 	public void setExpirationDate(Date expirationDate) {
-		if (((expirationDate == null) && (_expirationDate != null)) ||
-				((expirationDate != null) && (_expirationDate == null)) ||
-				((expirationDate != null) && (_expirationDate != null) &&
+		if ((expirationDate != _expirationDate) ||
+				((expirationDate != null) &&
 				!expirationDate.equals(_expirationDate))) {
 			_expirationDate = expirationDate;
 		}
@@ -310,10 +299,8 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 	}
 
 	public void setLastVoteDate(Date lastVoteDate) {
-		if (((lastVoteDate == null) && (_lastVoteDate != null)) ||
-				((lastVoteDate != null) && (_lastVoteDate == null)) ||
-				((lastVoteDate != null) && (_lastVoteDate != null) &&
-				!lastVoteDate.equals(_lastVoteDate))) {
+		if ((lastVoteDate != _lastVoteDate) ||
+				((lastVoteDate != null) && !lastVoteDate.equals(_lastVoteDate))) {
 			_lastVoteDate = lastVoteDate;
 		}
 	}

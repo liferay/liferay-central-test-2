@@ -153,10 +153,8 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
+		if ((createDate != _createDate) ||
+				((createDate != null) && !createDate.equals(_createDate))) {
 			_createDate = createDate;
 		}
 	}
@@ -166,10 +164,8 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker> {
 	}
 
 	public void setPassword(String password) {
-		if (((password == null) && (_password != null)) ||
-				((password != null) && (_password == null)) ||
-				((password != null) && (_password != null) &&
-				!password.equals(_password))) {
+		if ((password != _password) ||
+				((password != null) && !password.equals(_password))) {
 			_password = password;
 		}
 	}

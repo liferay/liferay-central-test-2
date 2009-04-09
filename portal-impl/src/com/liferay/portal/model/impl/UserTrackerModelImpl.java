@@ -177,10 +177,8 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if (((modifiedDate == null) && (_modifiedDate != null)) ||
-				((modifiedDate != null) && (_modifiedDate == null)) ||
-				((modifiedDate != null) && (_modifiedDate != null) &&
-				!modifiedDate.equals(_modifiedDate))) {
+		if ((modifiedDate != _modifiedDate) ||
+				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
 		}
 	}
@@ -190,10 +188,8 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker> {
 	}
 
 	public void setSessionId(String sessionId) {
-		if (((sessionId == null) && (_sessionId != null)) ||
-				((sessionId != null) && (_sessionId == null)) ||
-				((sessionId != null) && (_sessionId != null) &&
-				!sessionId.equals(_sessionId))) {
+		if ((sessionId != _sessionId) ||
+				((sessionId != null) && !sessionId.equals(_sessionId))) {
 			_sessionId = sessionId;
 		}
 	}
@@ -203,10 +199,8 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker> {
 	}
 
 	public void setRemoteAddr(String remoteAddr) {
-		if (((remoteAddr == null) && (_remoteAddr != null)) ||
-				((remoteAddr != null) && (_remoteAddr == null)) ||
-				((remoteAddr != null) && (_remoteAddr != null) &&
-				!remoteAddr.equals(_remoteAddr))) {
+		if ((remoteAddr != _remoteAddr) ||
+				((remoteAddr != null) && !remoteAddr.equals(_remoteAddr))) {
 			_remoteAddr = remoteAddr;
 		}
 	}
@@ -216,10 +210,8 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker> {
 	}
 
 	public void setRemoteHost(String remoteHost) {
-		if (((remoteHost == null) && (_remoteHost != null)) ||
-				((remoteHost != null) && (_remoteHost == null)) ||
-				((remoteHost != null) && (_remoteHost != null) &&
-				!remoteHost.equals(_remoteHost))) {
+		if ((remoteHost != _remoteHost) ||
+				((remoteHost != null) && !remoteHost.equals(_remoteHost))) {
 			_remoteHost = remoteHost;
 		}
 	}
@@ -229,10 +221,8 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker> {
 	}
 
 	public void setUserAgent(String userAgent) {
-		if (((userAgent == null) && (_userAgent != null)) ||
-				((userAgent != null) && (_userAgent == null)) ||
-				((userAgent != null) && (_userAgent != null) &&
-				!userAgent.equals(_userAgent))) {
+		if ((userAgent != _userAgent) ||
+				((userAgent != null) && !userAgent.equals(_userAgent))) {
 			_userAgent = userAgent;
 		}
 	}

@@ -178,10 +178,8 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	}
 
 	public void setArticleId(String articleId) {
-		if (((articleId == null) && (_articleId != null)) ||
-				((articleId != null) && (_articleId == null)) ||
-				((articleId != null) && (_articleId != null) &&
-				!articleId.equals(_articleId))) {
+		if ((articleId != _articleId) ||
+				((articleId != null) && !articleId.equals(_articleId))) {
 			_articleId = articleId;
 
 			if (_originalArticleId == null) {
@@ -219,10 +217,8 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	}
 
 	public void setElInstanceId(String elInstanceId) {
-		if (((elInstanceId == null) && (_elInstanceId != null)) ||
-				((elInstanceId != null) && (_elInstanceId == null)) ||
-				((elInstanceId != null) && (_elInstanceId != null) &&
-				!elInstanceId.equals(_elInstanceId))) {
+		if ((elInstanceId != _elInstanceId) ||
+				((elInstanceId != null) && !elInstanceId.equals(_elInstanceId))) {
 			_elInstanceId = elInstanceId;
 
 			if (_originalElInstanceId == null) {
@@ -240,10 +236,8 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	}
 
 	public void setElName(String elName) {
-		if (((elName == null) && (_elName != null)) ||
-				((elName != null) && (_elName == null)) ||
-				((elName != null) && (_elName != null) &&
-				!elName.equals(_elName))) {
+		if ((elName != _elName) ||
+				((elName != null) && !elName.equals(_elName))) {
 			_elName = elName;
 
 			if (_originalElName == null) {
@@ -261,10 +255,8 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	}
 
 	public void setLanguageId(String languageId) {
-		if (((languageId == null) && (_languageId != null)) ||
-				((languageId != null) && (_languageId == null)) ||
-				((languageId != null) && (_languageId != null) &&
-				!languageId.equals(_languageId))) {
+		if ((languageId != _languageId) ||
+				((languageId != null) && !languageId.equals(_languageId))) {
 			_languageId = languageId;
 
 			if (_originalLanguageId == null) {

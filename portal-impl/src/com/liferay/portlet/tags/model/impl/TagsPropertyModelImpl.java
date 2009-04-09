@@ -182,10 +182,8 @@ public class TagsPropertyModelImpl extends BaseModelImpl<TagsProperty> {
 	}
 
 	public void setUserName(String userName) {
-		if (((userName == null) && (_userName != null)) ||
-				((userName != null) && (_userName == null)) ||
-				((userName != null) && (_userName != null) &&
-				!userName.equals(_userName))) {
+		if ((userName != _userName) ||
+				((userName != null) && !userName.equals(_userName))) {
 			_userName = userName;
 		}
 	}
@@ -195,10 +193,8 @@ public class TagsPropertyModelImpl extends BaseModelImpl<TagsProperty> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
+		if ((createDate != _createDate) ||
+				((createDate != null) && !createDate.equals(_createDate))) {
 			_createDate = createDate;
 		}
 	}
@@ -208,10 +204,8 @@ public class TagsPropertyModelImpl extends BaseModelImpl<TagsProperty> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if (((modifiedDate == null) && (_modifiedDate != null)) ||
-				((modifiedDate != null) && (_modifiedDate == null)) ||
-				((modifiedDate != null) && (_modifiedDate != null) &&
-				!modifiedDate.equals(_modifiedDate))) {
+		if ((modifiedDate != _modifiedDate) ||
+				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
 		}
 	}
@@ -241,9 +235,7 @@ public class TagsPropertyModelImpl extends BaseModelImpl<TagsProperty> {
 	}
 
 	public void setKey(String key) {
-		if (((key == null) && (_key != null)) ||
-				((key != null) && (_key == null)) ||
-				((key != null) && (_key != null) && !key.equals(_key))) {
+		if ((key != _key) || ((key != null) && !key.equals(_key))) {
 			_key = key;
 
 			if (_originalKey == null) {
@@ -261,9 +253,7 @@ public class TagsPropertyModelImpl extends BaseModelImpl<TagsProperty> {
 	}
 
 	public void setValue(String value) {
-		if (((value == null) && (_value != null)) ||
-				((value != null) && (_value == null)) ||
-				((value != null) && (_value != null) && !value.equals(_value))) {
+		if ((value != _value) || ((value != null) && !value.equals(_value))) {
 			_value = value;
 		}
 	}

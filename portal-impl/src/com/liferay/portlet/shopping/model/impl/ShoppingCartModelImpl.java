@@ -220,10 +220,8 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart> {
 	}
 
 	public void setUserName(String userName) {
-		if (((userName == null) && (_userName != null)) ||
-				((userName != null) && (_userName == null)) ||
-				((userName != null) && (_userName != null) &&
-				!userName.equals(_userName))) {
+		if ((userName != _userName) ||
+				((userName != null) && !userName.equals(_userName))) {
 			_userName = userName;
 		}
 	}
@@ -233,10 +231,8 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
+		if ((createDate != _createDate) ||
+				((createDate != null) && !createDate.equals(_createDate))) {
 			_createDate = createDate;
 		}
 	}
@@ -246,10 +242,8 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if (((modifiedDate == null) && (_modifiedDate != null)) ||
-				((modifiedDate != null) && (_modifiedDate == null)) ||
-				((modifiedDate != null) && (_modifiedDate != null) &&
-				!modifiedDate.equals(_modifiedDate))) {
+		if ((modifiedDate != _modifiedDate) ||
+				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
 		}
 	}
@@ -259,10 +253,8 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart> {
 	}
 
 	public void setItemIds(String itemIds) {
-		if (((itemIds == null) && (_itemIds != null)) ||
-				((itemIds != null) && (_itemIds == null)) ||
-				((itemIds != null) && (_itemIds != null) &&
-				!itemIds.equals(_itemIds))) {
+		if ((itemIds != _itemIds) ||
+				((itemIds != null) && !itemIds.equals(_itemIds))) {
 			_itemIds = itemIds;
 		}
 	}
@@ -272,10 +264,8 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart> {
 	}
 
 	public void setCouponCodes(String couponCodes) {
-		if (((couponCodes == null) && (_couponCodes != null)) ||
-				((couponCodes != null) && (_couponCodes == null)) ||
-				((couponCodes != null) && (_couponCodes != null) &&
-				!couponCodes.equals(_couponCodes))) {
+		if ((couponCodes != _couponCodes) ||
+				((couponCodes != null) && !couponCodes.equals(_couponCodes))) {
 			_couponCodes = couponCodes;
 		}
 	}

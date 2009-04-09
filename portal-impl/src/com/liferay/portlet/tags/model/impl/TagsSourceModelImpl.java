@@ -151,9 +151,7 @@ public class TagsSourceModelImpl extends BaseModelImpl<TagsSource> {
 	}
 
 	public void setName(String name) {
-		if (((name == null) && (_name != null)) ||
-				((name != null) && (_name == null)) ||
-				((name != null) && (_name != null) && !name.equals(_name))) {
+		if ((name != _name) || ((name != null) && !name.equals(_name))) {
 			_name = name;
 		}
 	}
@@ -163,10 +161,8 @@ public class TagsSourceModelImpl extends BaseModelImpl<TagsSource> {
 	}
 
 	public void setAcronym(String acronym) {
-		if (((acronym == null) && (_acronym != null)) ||
-				((acronym != null) && (_acronym == null)) ||
-				((acronym != null) && (_acronym != null) &&
-				!acronym.equals(_acronym))) {
+		if ((acronym != _acronym) ||
+				((acronym != null) && !acronym.equals(_acronym))) {
 			_acronym = acronym;
 		}
 	}

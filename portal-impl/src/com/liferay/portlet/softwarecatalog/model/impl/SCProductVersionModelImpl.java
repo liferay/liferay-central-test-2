@@ -198,10 +198,8 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 	}
 
 	public void setUserName(String userName) {
-		if (((userName == null) && (_userName != null)) ||
-				((userName != null) && (_userName == null)) ||
-				((userName != null) && (_userName != null) &&
-				!userName.equals(_userName))) {
+		if ((userName != _userName) ||
+				((userName != null) && !userName.equals(_userName))) {
 			_userName = userName;
 		}
 	}
@@ -211,10 +209,8 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
+		if ((createDate != _createDate) ||
+				((createDate != null) && !createDate.equals(_createDate))) {
 			_createDate = createDate;
 		}
 	}
@@ -224,10 +220,8 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if (((modifiedDate == null) && (_modifiedDate != null)) ||
-				((modifiedDate != null) && (_modifiedDate == null)) ||
-				((modifiedDate != null) && (_modifiedDate != null) &&
-				!modifiedDate.equals(_modifiedDate))) {
+		if ((modifiedDate != _modifiedDate) ||
+				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
 		}
 	}
@@ -247,10 +241,8 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 	}
 
 	public void setVersion(String version) {
-		if (((version == null) && (_version != null)) ||
-				((version != null) && (_version == null)) ||
-				((version != null) && (_version != null) &&
-				!version.equals(_version))) {
+		if ((version != _version) ||
+				((version != null) && !version.equals(_version))) {
 			_version = version;
 		}
 	}
@@ -260,10 +252,8 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 	}
 
 	public void setChangeLog(String changeLog) {
-		if (((changeLog == null) && (_changeLog != null)) ||
-				((changeLog != null) && (_changeLog == null)) ||
-				((changeLog != null) && (_changeLog != null) &&
-				!changeLog.equals(_changeLog))) {
+		if ((changeLog != _changeLog) ||
+				((changeLog != null) && !changeLog.equals(_changeLog))) {
 			_changeLog = changeLog;
 		}
 	}
@@ -273,9 +263,8 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 	}
 
 	public void setDownloadPageURL(String downloadPageURL) {
-		if (((downloadPageURL == null) && (_downloadPageURL != null)) ||
-				((downloadPageURL != null) && (_downloadPageURL == null)) ||
-				((downloadPageURL != null) && (_downloadPageURL != null) &&
+		if ((downloadPageURL != _downloadPageURL) ||
+				((downloadPageURL != null) &&
 				!downloadPageURL.equals(_downloadPageURL))) {
 			_downloadPageURL = downloadPageURL;
 		}
@@ -286,9 +275,8 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 	}
 
 	public void setDirectDownloadURL(String directDownloadURL) {
-		if (((directDownloadURL == null) && (_directDownloadURL != null)) ||
-				((directDownloadURL != null) && (_directDownloadURL == null)) ||
-				((directDownloadURL != null) && (_directDownloadURL != null) &&
+		if ((directDownloadURL != _directDownloadURL) ||
+				((directDownloadURL != null) &&
 				!directDownloadURL.equals(_directDownloadURL))) {
 			_directDownloadURL = directDownloadURL;
 

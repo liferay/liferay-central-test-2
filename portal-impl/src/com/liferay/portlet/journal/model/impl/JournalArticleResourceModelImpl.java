@@ -159,10 +159,8 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 	}
 
 	public void setArticleId(String articleId) {
-		if (((articleId == null) && (_articleId != null)) ||
-				((articleId != null) && (_articleId == null)) ||
-				((articleId != null) && (_articleId != null) &&
-				!articleId.equals(_articleId))) {
+		if ((articleId != _articleId) ||
+				((articleId != null) && !articleId.equals(_articleId))) {
 			_articleId = articleId;
 
 			if (_originalArticleId == null) {

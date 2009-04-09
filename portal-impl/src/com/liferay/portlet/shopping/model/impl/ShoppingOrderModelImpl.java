@@ -361,10 +361,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setUserName(String userName) {
-		if (((userName == null) && (_userName != null)) ||
-				((userName != null) && (_userName == null)) ||
-				((userName != null) && (_userName != null) &&
-				!userName.equals(_userName))) {
+		if ((userName != _userName) ||
+				((userName != null) && !userName.equals(_userName))) {
 			_userName = userName;
 		}
 	}
@@ -374,10 +372,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
+		if ((createDate != _createDate) ||
+				((createDate != null) && !createDate.equals(_createDate))) {
 			_createDate = createDate;
 		}
 	}
@@ -387,10 +383,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if (((modifiedDate == null) && (_modifiedDate != null)) ||
-				((modifiedDate != null) && (_modifiedDate == null)) ||
-				((modifiedDate != null) && (_modifiedDate != null) &&
-				!modifiedDate.equals(_modifiedDate))) {
+		if ((modifiedDate != _modifiedDate) ||
+				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
 		}
 	}
@@ -400,10 +394,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setNumber(String number) {
-		if (((number == null) && (_number != null)) ||
-				((number != null) && (_number == null)) ||
-				((number != null) && (_number != null) &&
-				!number.equals(_number))) {
+		if ((number != _number) ||
+				((number != null) && !number.equals(_number))) {
 			_number = number;
 
 			if (_originalNumber == null) {
@@ -441,10 +433,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setAltShipping(String altShipping) {
-		if (((altShipping == null) && (_altShipping != null)) ||
-				((altShipping != null) && (_altShipping == null)) ||
-				((altShipping != null) && (_altShipping != null) &&
-				!altShipping.equals(_altShipping))) {
+		if ((altShipping != _altShipping) ||
+				((altShipping != null) && !altShipping.equals(_altShipping))) {
 			_altShipping = altShipping;
 		}
 	}
@@ -492,10 +482,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setCouponCodes(String couponCodes) {
-		if (((couponCodes == null) && (_couponCodes != null)) ||
-				((couponCodes != null) && (_couponCodes == null)) ||
-				((couponCodes != null) && (_couponCodes != null) &&
-				!couponCodes.equals(_couponCodes))) {
+		if ((couponCodes != _couponCodes) ||
+				((couponCodes != null) && !couponCodes.equals(_couponCodes))) {
 			_couponCodes = couponCodes;
 		}
 	}
@@ -515,9 +503,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setBillingFirstName(String billingFirstName) {
-		if (((billingFirstName == null) && (_billingFirstName != null)) ||
-				((billingFirstName != null) && (_billingFirstName == null)) ||
-				((billingFirstName != null) && (_billingFirstName != null) &&
+		if ((billingFirstName != _billingFirstName) ||
+				((billingFirstName != null) &&
 				!billingFirstName.equals(_billingFirstName))) {
 			_billingFirstName = billingFirstName;
 		}
@@ -528,9 +515,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setBillingLastName(String billingLastName) {
-		if (((billingLastName == null) && (_billingLastName != null)) ||
-				((billingLastName != null) && (_billingLastName == null)) ||
-				((billingLastName != null) && (_billingLastName != null) &&
+		if ((billingLastName != _billingLastName) ||
+				((billingLastName != null) &&
 				!billingLastName.equals(_billingLastName))) {
 			_billingLastName = billingLastName;
 		}
@@ -541,11 +527,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setBillingEmailAddress(String billingEmailAddress) {
-		if (((billingEmailAddress == null) && (_billingEmailAddress != null)) ||
+		if ((billingEmailAddress != _billingEmailAddress) ||
 				((billingEmailAddress != null) &&
-				(_billingEmailAddress == null)) ||
-				((billingEmailAddress != null) &&
-				(_billingEmailAddress != null) &&
 				!billingEmailAddress.equals(_billingEmailAddress))) {
 			_billingEmailAddress = billingEmailAddress;
 		}
@@ -556,9 +539,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setBillingCompany(String billingCompany) {
-		if (((billingCompany == null) && (_billingCompany != null)) ||
-				((billingCompany != null) && (_billingCompany == null)) ||
-				((billingCompany != null) && (_billingCompany != null) &&
+		if ((billingCompany != _billingCompany) ||
+				((billingCompany != null) &&
 				!billingCompany.equals(_billingCompany))) {
 			_billingCompany = billingCompany;
 		}
@@ -569,9 +551,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setBillingStreet(String billingStreet) {
-		if (((billingStreet == null) && (_billingStreet != null)) ||
-				((billingStreet != null) && (_billingStreet == null)) ||
-				((billingStreet != null) && (_billingStreet != null) &&
+		if ((billingStreet != _billingStreet) ||
+				((billingStreet != null) &&
 				!billingStreet.equals(_billingStreet))) {
 			_billingStreet = billingStreet;
 		}
@@ -582,10 +563,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setBillingCity(String billingCity) {
-		if (((billingCity == null) && (_billingCity != null)) ||
-				((billingCity != null) && (_billingCity == null)) ||
-				((billingCity != null) && (_billingCity != null) &&
-				!billingCity.equals(_billingCity))) {
+		if ((billingCity != _billingCity) ||
+				((billingCity != null) && !billingCity.equals(_billingCity))) {
 			_billingCity = billingCity;
 		}
 	}
@@ -595,10 +574,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setBillingState(String billingState) {
-		if (((billingState == null) && (_billingState != null)) ||
-				((billingState != null) && (_billingState == null)) ||
-				((billingState != null) && (_billingState != null) &&
-				!billingState.equals(_billingState))) {
+		if ((billingState != _billingState) ||
+				((billingState != null) && !billingState.equals(_billingState))) {
 			_billingState = billingState;
 		}
 	}
@@ -608,10 +585,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setBillingZip(String billingZip) {
-		if (((billingZip == null) && (_billingZip != null)) ||
-				((billingZip != null) && (_billingZip == null)) ||
-				((billingZip != null) && (_billingZip != null) &&
-				!billingZip.equals(_billingZip))) {
+		if ((billingZip != _billingZip) ||
+				((billingZip != null) && !billingZip.equals(_billingZip))) {
 			_billingZip = billingZip;
 		}
 	}
@@ -621,9 +596,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setBillingCountry(String billingCountry) {
-		if (((billingCountry == null) && (_billingCountry != null)) ||
-				((billingCountry != null) && (_billingCountry == null)) ||
-				((billingCountry != null) && (_billingCountry != null) &&
+		if ((billingCountry != _billingCountry) ||
+				((billingCountry != null) &&
 				!billingCountry.equals(_billingCountry))) {
 			_billingCountry = billingCountry;
 		}
@@ -634,10 +608,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setBillingPhone(String billingPhone) {
-		if (((billingPhone == null) && (_billingPhone != null)) ||
-				((billingPhone != null) && (_billingPhone == null)) ||
-				((billingPhone != null) && (_billingPhone != null) &&
-				!billingPhone.equals(_billingPhone))) {
+		if ((billingPhone != _billingPhone) ||
+				((billingPhone != null) && !billingPhone.equals(_billingPhone))) {
 			_billingPhone = billingPhone;
 		}
 	}
@@ -661,9 +633,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setShippingFirstName(String shippingFirstName) {
-		if (((shippingFirstName == null) && (_shippingFirstName != null)) ||
-				((shippingFirstName != null) && (_shippingFirstName == null)) ||
-				((shippingFirstName != null) && (_shippingFirstName != null) &&
+		if ((shippingFirstName != _shippingFirstName) ||
+				((shippingFirstName != null) &&
 				!shippingFirstName.equals(_shippingFirstName))) {
 			_shippingFirstName = shippingFirstName;
 		}
@@ -674,9 +645,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setShippingLastName(String shippingLastName) {
-		if (((shippingLastName == null) && (_shippingLastName != null)) ||
-				((shippingLastName != null) && (_shippingLastName == null)) ||
-				((shippingLastName != null) && (_shippingLastName != null) &&
+		if ((shippingLastName != _shippingLastName) ||
+				((shippingLastName != null) &&
 				!shippingLastName.equals(_shippingLastName))) {
 			_shippingLastName = shippingLastName;
 		}
@@ -687,11 +657,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setShippingEmailAddress(String shippingEmailAddress) {
-		if (((shippingEmailAddress == null) && (_shippingEmailAddress != null)) ||
+		if ((shippingEmailAddress != _shippingEmailAddress) ||
 				((shippingEmailAddress != null) &&
-				(_shippingEmailAddress == null)) ||
-				((shippingEmailAddress != null) &&
-				(_shippingEmailAddress != null) &&
 				!shippingEmailAddress.equals(_shippingEmailAddress))) {
 			_shippingEmailAddress = shippingEmailAddress;
 		}
@@ -702,9 +669,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setShippingCompany(String shippingCompany) {
-		if (((shippingCompany == null) && (_shippingCompany != null)) ||
-				((shippingCompany != null) && (_shippingCompany == null)) ||
-				((shippingCompany != null) && (_shippingCompany != null) &&
+		if ((shippingCompany != _shippingCompany) ||
+				((shippingCompany != null) &&
 				!shippingCompany.equals(_shippingCompany))) {
 			_shippingCompany = shippingCompany;
 		}
@@ -715,9 +681,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setShippingStreet(String shippingStreet) {
-		if (((shippingStreet == null) && (_shippingStreet != null)) ||
-				((shippingStreet != null) && (_shippingStreet == null)) ||
-				((shippingStreet != null) && (_shippingStreet != null) &&
+		if ((shippingStreet != _shippingStreet) ||
+				((shippingStreet != null) &&
 				!shippingStreet.equals(_shippingStreet))) {
 			_shippingStreet = shippingStreet;
 		}
@@ -728,10 +693,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setShippingCity(String shippingCity) {
-		if (((shippingCity == null) && (_shippingCity != null)) ||
-				((shippingCity != null) && (_shippingCity == null)) ||
-				((shippingCity != null) && (_shippingCity != null) &&
-				!shippingCity.equals(_shippingCity))) {
+		if ((shippingCity != _shippingCity) ||
+				((shippingCity != null) && !shippingCity.equals(_shippingCity))) {
 			_shippingCity = shippingCity;
 		}
 	}
@@ -741,9 +704,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setShippingState(String shippingState) {
-		if (((shippingState == null) && (_shippingState != null)) ||
-				((shippingState != null) && (_shippingState == null)) ||
-				((shippingState != null) && (_shippingState != null) &&
+		if ((shippingState != _shippingState) ||
+				((shippingState != null) &&
 				!shippingState.equals(_shippingState))) {
 			_shippingState = shippingState;
 		}
@@ -754,10 +716,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setShippingZip(String shippingZip) {
-		if (((shippingZip == null) && (_shippingZip != null)) ||
-				((shippingZip != null) && (_shippingZip == null)) ||
-				((shippingZip != null) && (_shippingZip != null) &&
-				!shippingZip.equals(_shippingZip))) {
+		if ((shippingZip != _shippingZip) ||
+				((shippingZip != null) && !shippingZip.equals(_shippingZip))) {
 			_shippingZip = shippingZip;
 		}
 	}
@@ -767,9 +727,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setShippingCountry(String shippingCountry) {
-		if (((shippingCountry == null) && (_shippingCountry != null)) ||
-				((shippingCountry != null) && (_shippingCountry == null)) ||
-				((shippingCountry != null) && (_shippingCountry != null) &&
+		if ((shippingCountry != _shippingCountry) ||
+				((shippingCountry != null) &&
 				!shippingCountry.equals(_shippingCountry))) {
 			_shippingCountry = shippingCountry;
 		}
@@ -780,9 +739,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setShippingPhone(String shippingPhone) {
-		if (((shippingPhone == null) && (_shippingPhone != null)) ||
-				((shippingPhone != null) && (_shippingPhone == null)) ||
-				((shippingPhone != null) && (_shippingPhone != null) &&
+		if ((shippingPhone != _shippingPhone) ||
+				((shippingPhone != null) &&
 				!shippingPhone.equals(_shippingPhone))) {
 			_shippingPhone = shippingPhone;
 		}
@@ -793,10 +751,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setCcName(String ccName) {
-		if (((ccName == null) && (_ccName != null)) ||
-				((ccName != null) && (_ccName == null)) ||
-				((ccName != null) && (_ccName != null) &&
-				!ccName.equals(_ccName))) {
+		if ((ccName != _ccName) ||
+				((ccName != null) && !ccName.equals(_ccName))) {
 			_ccName = ccName;
 		}
 	}
@@ -806,10 +762,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setCcType(String ccType) {
-		if (((ccType == null) && (_ccType != null)) ||
-				((ccType != null) && (_ccType == null)) ||
-				((ccType != null) && (_ccType != null) &&
-				!ccType.equals(_ccType))) {
+		if ((ccType != _ccType) ||
+				((ccType != null) && !ccType.equals(_ccType))) {
 			_ccType = ccType;
 		}
 	}
@@ -819,10 +773,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setCcNumber(String ccNumber) {
-		if (((ccNumber == null) && (_ccNumber != null)) ||
-				((ccNumber != null) && (_ccNumber == null)) ||
-				((ccNumber != null) && (_ccNumber != null) &&
-				!ccNumber.equals(_ccNumber))) {
+		if ((ccNumber != _ccNumber) ||
+				((ccNumber != null) && !ccNumber.equals(_ccNumber))) {
 			_ccNumber = ccNumber;
 		}
 	}
@@ -852,10 +804,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setCcVerNumber(String ccVerNumber) {
-		if (((ccVerNumber == null) && (_ccVerNumber != null)) ||
-				((ccVerNumber != null) && (_ccVerNumber == null)) ||
-				((ccVerNumber != null) && (_ccVerNumber != null) &&
-				!ccVerNumber.equals(_ccVerNumber))) {
+		if ((ccVerNumber != _ccVerNumber) ||
+				((ccVerNumber != null) && !ccVerNumber.equals(_ccVerNumber))) {
 			_ccVerNumber = ccVerNumber;
 		}
 	}
@@ -865,10 +815,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setComments(String comments) {
-		if (((comments == null) && (_comments != null)) ||
-				((comments != null) && (_comments == null)) ||
-				((comments != null) && (_comments != null) &&
-				!comments.equals(_comments))) {
+		if ((comments != _comments) ||
+				((comments != null) && !comments.equals(_comments))) {
 			_comments = comments;
 		}
 	}
@@ -878,10 +826,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setPpTxnId(String ppTxnId) {
-		if (((ppTxnId == null) && (_ppTxnId != null)) ||
-				((ppTxnId != null) && (_ppTxnId == null)) ||
-				((ppTxnId != null) && (_ppTxnId != null) &&
-				!ppTxnId.equals(_ppTxnId))) {
+		if ((ppTxnId != _ppTxnId) ||
+				((ppTxnId != null) && !ppTxnId.equals(_ppTxnId))) {
 			_ppTxnId = ppTxnId;
 
 			if (_originalPpTxnId == null) {
@@ -899,9 +845,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setPpPaymentStatus(String ppPaymentStatus) {
-		if (((ppPaymentStatus == null) && (_ppPaymentStatus != null)) ||
-				((ppPaymentStatus != null) && (_ppPaymentStatus == null)) ||
-				((ppPaymentStatus != null) && (_ppPaymentStatus != null) &&
+		if ((ppPaymentStatus != _ppPaymentStatus) ||
+				((ppPaymentStatus != null) &&
 				!ppPaymentStatus.equals(_ppPaymentStatus))) {
 			_ppPaymentStatus = ppPaymentStatus;
 		}
@@ -922,9 +867,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setPpReceiverEmail(String ppReceiverEmail) {
-		if (((ppReceiverEmail == null) && (_ppReceiverEmail != null)) ||
-				((ppReceiverEmail != null) && (_ppReceiverEmail == null)) ||
-				((ppReceiverEmail != null) && (_ppReceiverEmail != null) &&
+		if ((ppReceiverEmail != _ppReceiverEmail) ||
+				((ppReceiverEmail != null) &&
 				!ppReceiverEmail.equals(_ppReceiverEmail))) {
 			_ppReceiverEmail = ppReceiverEmail;
 		}
@@ -935,10 +879,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	}
 
 	public void setPpPayerEmail(String ppPayerEmail) {
-		if (((ppPayerEmail == null) && (_ppPayerEmail != null)) ||
-				((ppPayerEmail != null) && (_ppPayerEmail == null)) ||
-				((ppPayerEmail != null) && (_ppPayerEmail != null) &&
-				!ppPayerEmail.equals(_ppPayerEmail))) {
+		if ((ppPayerEmail != _ppPayerEmail) ||
+				((ppPayerEmail != null) && !ppPayerEmail.equals(_ppPayerEmail))) {
 			_ppPayerEmail = ppPayerEmail;
 		}
 	}

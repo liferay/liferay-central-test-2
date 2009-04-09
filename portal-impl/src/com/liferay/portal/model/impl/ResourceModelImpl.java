@@ -156,10 +156,8 @@ public class ResourceModelImpl extends BaseModelImpl<Resource> {
 	}
 
 	public void setPrimKey(String primKey) {
-		if (((primKey == null) && (_primKey != null)) ||
-				((primKey != null) && (_primKey == null)) ||
-				((primKey != null) && (_primKey != null) &&
-				!primKey.equals(_primKey))) {
+		if ((primKey != _primKey) ||
+				((primKey != null) && !primKey.equals(_primKey))) {
 			_primKey = primKey;
 
 			if (_originalPrimKey == null) {

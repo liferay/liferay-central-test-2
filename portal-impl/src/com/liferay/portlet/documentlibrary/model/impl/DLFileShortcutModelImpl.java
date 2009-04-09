@@ -196,10 +196,8 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 	}
 
 	public void setUserName(String userName) {
-		if (((userName == null) && (_userName != null)) ||
-				((userName != null) && (_userName == null)) ||
-				((userName != null) && (_userName != null) &&
-				!userName.equals(_userName))) {
+		if ((userName != _userName) ||
+				((userName != null) && !userName.equals(_userName))) {
 			_userName = userName;
 		}
 	}
@@ -209,10 +207,8 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
+		if ((createDate != _createDate) ||
+				((createDate != null) && !createDate.equals(_createDate))) {
 			_createDate = createDate;
 		}
 	}
@@ -222,10 +218,8 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if (((modifiedDate == null) && (_modifiedDate != null)) ||
-				((modifiedDate != null) && (_modifiedDate == null)) ||
-				((modifiedDate != null) && (_modifiedDate != null) &&
-				!modifiedDate.equals(_modifiedDate))) {
+		if ((modifiedDate != _modifiedDate) ||
+				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
 		}
 	}
@@ -255,10 +249,8 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 	}
 
 	public void setToName(String toName) {
-		if (((toName == null) && (_toName != null)) ||
-				((toName != null) && (_toName == null)) ||
-				((toName != null) && (_toName != null) &&
-				!toName.equals(_toName))) {
+		if ((toName != _toName) ||
+				((toName != null) && !toName.equals(_toName))) {
 			_toName = toName;
 		}
 	}

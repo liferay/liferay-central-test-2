@@ -237,10 +237,8 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure> {
 	}
 
 	public void setUserName(String userName) {
-		if (((userName == null) && (_userName != null)) ||
-				((userName != null) && (_userName == null)) ||
-				((userName != null) && (_userName != null) &&
-				!userName.equals(_userName))) {
+		if ((userName != _userName) ||
+				((userName != null) && !userName.equals(_userName))) {
 			_userName = userName;
 		}
 	}
@@ -250,10 +248,8 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
+		if ((createDate != _createDate) ||
+				((createDate != null) && !createDate.equals(_createDate))) {
 			_createDate = createDate;
 		}
 	}
@@ -263,10 +259,8 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if (((modifiedDate == null) && (_modifiedDate != null)) ||
-				((modifiedDate != null) && (_modifiedDate == null)) ||
-				((modifiedDate != null) && (_modifiedDate != null) &&
-				!modifiedDate.equals(_modifiedDate))) {
+		if ((modifiedDate != _modifiedDate) ||
+				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
 		}
 	}
@@ -276,10 +270,8 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure> {
 	}
 
 	public void setStructureId(String structureId) {
-		if (((structureId == null) && (_structureId != null)) ||
-				((structureId != null) && (_structureId == null)) ||
-				((structureId != null) && (_structureId != null) &&
-				!structureId.equals(_structureId))) {
+		if ((structureId != _structureId) ||
+				((structureId != null) && !structureId.equals(_structureId))) {
 			_structureId = structureId;
 
 			if (_originalStructureId == null) {
@@ -297,9 +289,8 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure> {
 	}
 
 	public void setParentStructureId(String parentStructureId) {
-		if (((parentStructureId == null) && (_parentStructureId != null)) ||
-				((parentStructureId != null) && (_parentStructureId == null)) ||
-				((parentStructureId != null) && (_parentStructureId != null) &&
+		if ((parentStructureId != _parentStructureId) ||
+				((parentStructureId != null) &&
 				!parentStructureId.equals(_parentStructureId))) {
 			_parentStructureId = parentStructureId;
 		}
@@ -310,9 +301,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure> {
 	}
 
 	public void setName(String name) {
-		if (((name == null) && (_name != null)) ||
-				((name != null) && (_name == null)) ||
-				((name != null) && (_name != null) && !name.equals(_name))) {
+		if ((name != _name) || ((name != null) && !name.equals(_name))) {
 			_name = name;
 		}
 	}
@@ -322,10 +311,8 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure> {
 	}
 
 	public void setDescription(String description) {
-		if (((description == null) && (_description != null)) ||
-				((description != null) && (_description == null)) ||
-				((description != null) && (_description != null) &&
-				!description.equals(_description))) {
+		if ((description != _description) ||
+				((description != null) && !description.equals(_description))) {
 			_description = description;
 		}
 	}
@@ -335,9 +322,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure> {
 	}
 
 	public void setXsd(String xsd) {
-		if (((xsd == null) && (_xsd != null)) ||
-				((xsd != null) && (_xsd == null)) ||
-				((xsd != null) && (_xsd != null) && !xsd.equals(_xsd))) {
+		if ((xsd != _xsd) || ((xsd != null) && !xsd.equals(_xsd))) {
 			_xsd = xsd;
 		}
 	}

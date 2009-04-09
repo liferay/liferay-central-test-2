@@ -209,10 +209,8 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 	}
 
 	public void setPortletId(String portletId) {
-		if (((portletId == null) && (_portletId != null)) ||
-				((portletId != null) && (_portletId == null)) ||
-				((portletId != null) && (_portletId != null) &&
-				!portletId.equals(_portletId))) {
+		if ((portletId != _portletId) ||
+				((portletId != null) && !portletId.equals(_portletId))) {
 			_portletId = portletId;
 
 			if (_originalPortletId == null) {
@@ -230,10 +228,8 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 	}
 
 	public void setPreferences(String preferences) {
-		if (((preferences == null) && (_preferences != null)) ||
-				((preferences != null) && (_preferences == null)) ||
-				((preferences != null) && (_preferences != null) &&
-				!preferences.equals(_preferences))) {
+		if ((preferences != _preferences) ||
+				((preferences != null) && !preferences.equals(_preferences))) {
 			_preferences = preferences;
 		}
 	}

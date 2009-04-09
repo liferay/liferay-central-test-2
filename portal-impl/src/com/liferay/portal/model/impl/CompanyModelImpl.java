@@ -166,9 +166,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 	}
 
 	public void setWebId(String webId) {
-		if (((webId == null) && (_webId != null)) ||
-				((webId != null) && (_webId == null)) ||
-				((webId != null) && (_webId != null) && !webId.equals(_webId))) {
+		if ((webId != _webId) || ((webId != null) && !webId.equals(_webId))) {
 			_webId = webId;
 
 			if (_originalWebId == null) {
@@ -186,9 +184,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 	}
 
 	public void setKey(String key) {
-		if (((key == null) && (_key != null)) ||
-				((key != null) && (_key == null)) ||
-				((key != null) && (_key != null) && !key.equals(_key))) {
+		if ((key != _key) || ((key != null) && !key.equals(_key))) {
 			_key = key;
 		}
 	}
@@ -198,10 +194,8 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 	}
 
 	public void setVirtualHost(String virtualHost) {
-		if (((virtualHost == null) && (_virtualHost != null)) ||
-				((virtualHost != null) && (_virtualHost == null)) ||
-				((virtualHost != null) && (_virtualHost != null) &&
-				!virtualHost.equals(_virtualHost))) {
+		if ((virtualHost != _virtualHost) ||
+				((virtualHost != null) && !virtualHost.equals(_virtualHost))) {
 			_virtualHost = virtualHost;
 
 			if (_originalVirtualHost == null) {
@@ -219,8 +213,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 	}
 
 	public void setMx(String mx) {
-		if (((mx == null) && (_mx != null)) || ((mx != null) && (_mx == null)) ||
-				((mx != null) && (_mx != null) && !mx.equals(_mx))) {
+		if ((mx != _mx) || ((mx != null) && !mx.equals(_mx))) {
 			_mx = mx;
 
 			if (_originalMx == null) {
@@ -238,10 +231,8 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 	}
 
 	public void setHomeURL(String homeURL) {
-		if (((homeURL == null) && (_homeURL != null)) ||
-				((homeURL != null) && (_homeURL == null)) ||
-				((homeURL != null) && (_homeURL != null) &&
-				!homeURL.equals(_homeURL))) {
+		if ((homeURL != _homeURL) ||
+				((homeURL != null) && !homeURL.equals(_homeURL))) {
 			_homeURL = homeURL;
 		}
 	}

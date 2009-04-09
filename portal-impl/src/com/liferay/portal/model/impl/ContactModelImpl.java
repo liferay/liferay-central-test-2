@@ -265,10 +265,8 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setUserName(String userName) {
-		if (((userName == null) && (_userName != null)) ||
-				((userName != null) && (_userName == null)) ||
-				((userName != null) && (_userName != null) &&
-				!userName.equals(_userName))) {
+		if ((userName != _userName) ||
+				((userName != null) && !userName.equals(_userName))) {
 			_userName = userName;
 		}
 	}
@@ -278,10 +276,8 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
+		if ((createDate != _createDate) ||
+				((createDate != null) && !createDate.equals(_createDate))) {
 			_createDate = createDate;
 		}
 	}
@@ -291,10 +287,8 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if (((modifiedDate == null) && (_modifiedDate != null)) ||
-				((modifiedDate != null) && (_modifiedDate == null)) ||
-				((modifiedDate != null) && (_modifiedDate != null) &&
-				!modifiedDate.equals(_modifiedDate))) {
+		if ((modifiedDate != _modifiedDate) ||
+				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
 		}
 	}
@@ -324,10 +318,8 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setFirstName(String firstName) {
-		if (((firstName == null) && (_firstName != null)) ||
-				((firstName != null) && (_firstName == null)) ||
-				((firstName != null) && (_firstName != null) &&
-				!firstName.equals(_firstName))) {
+		if ((firstName != _firstName) ||
+				((firstName != null) && !firstName.equals(_firstName))) {
 			_firstName = firstName;
 		}
 	}
@@ -337,10 +329,8 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setMiddleName(String middleName) {
-		if (((middleName == null) && (_middleName != null)) ||
-				((middleName != null) && (_middleName == null)) ||
-				((middleName != null) && (_middleName != null) &&
-				!middleName.equals(_middleName))) {
+		if ((middleName != _middleName) ||
+				((middleName != null) && !middleName.equals(_middleName))) {
 			_middleName = middleName;
 		}
 	}
@@ -350,10 +340,8 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setLastName(String lastName) {
-		if (((lastName == null) && (_lastName != null)) ||
-				((lastName != null) && (_lastName == null)) ||
-				((lastName != null) && (_lastName != null) &&
-				!lastName.equals(_lastName))) {
+		if ((lastName != _lastName) ||
+				((lastName != null) && !lastName.equals(_lastName))) {
 			_lastName = lastName;
 		}
 	}
@@ -397,10 +385,8 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setBirthday(Date birthday) {
-		if (((birthday == null) && (_birthday != null)) ||
-				((birthday != null) && (_birthday == null)) ||
-				((birthday != null) && (_birthday != null) &&
-				!birthday.equals(_birthday))) {
+		if ((birthday != _birthday) ||
+				((birthday != null) && !birthday.equals(_birthday))) {
 			_birthday = birthday;
 		}
 	}
@@ -410,9 +396,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setSmsSn(String smsSn) {
-		if (((smsSn == null) && (_smsSn != null)) ||
-				((smsSn != null) && (_smsSn == null)) ||
-				((smsSn != null) && (_smsSn != null) && !smsSn.equals(_smsSn))) {
+		if ((smsSn != _smsSn) || ((smsSn != null) && !smsSn.equals(_smsSn))) {
 			_smsSn = smsSn;
 		}
 	}
@@ -422,9 +406,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setAimSn(String aimSn) {
-		if (((aimSn == null) && (_aimSn != null)) ||
-				((aimSn != null) && (_aimSn == null)) ||
-				((aimSn != null) && (_aimSn != null) && !aimSn.equals(_aimSn))) {
+		if ((aimSn != _aimSn) || ((aimSn != null) && !aimSn.equals(_aimSn))) {
 			_aimSn = aimSn;
 		}
 	}
@@ -434,10 +416,8 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setFacebookSn(String facebookSn) {
-		if (((facebookSn == null) && (_facebookSn != null)) ||
-				((facebookSn != null) && (_facebookSn == null)) ||
-				((facebookSn != null) && (_facebookSn != null) &&
-				!facebookSn.equals(_facebookSn))) {
+		if ((facebookSn != _facebookSn) ||
+				((facebookSn != null) && !facebookSn.equals(_facebookSn))) {
 			_facebookSn = facebookSn;
 		}
 	}
@@ -447,9 +427,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setIcqSn(String icqSn) {
-		if (((icqSn == null) && (_icqSn != null)) ||
-				((icqSn != null) && (_icqSn == null)) ||
-				((icqSn != null) && (_icqSn != null) && !icqSn.equals(_icqSn))) {
+		if ((icqSn != _icqSn) || ((icqSn != null) && !icqSn.equals(_icqSn))) {
 			_icqSn = icqSn;
 		}
 	}
@@ -459,10 +437,8 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setJabberSn(String jabberSn) {
-		if (((jabberSn == null) && (_jabberSn != null)) ||
-				((jabberSn != null) && (_jabberSn == null)) ||
-				((jabberSn != null) && (_jabberSn != null) &&
-				!jabberSn.equals(_jabberSn))) {
+		if ((jabberSn != _jabberSn) ||
+				((jabberSn != null) && !jabberSn.equals(_jabberSn))) {
 			_jabberSn = jabberSn;
 		}
 	}
@@ -472,9 +448,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setMsnSn(String msnSn) {
-		if (((msnSn == null) && (_msnSn != null)) ||
-				((msnSn != null) && (_msnSn == null)) ||
-				((msnSn != null) && (_msnSn != null) && !msnSn.equals(_msnSn))) {
+		if ((msnSn != _msnSn) || ((msnSn != null) && !msnSn.equals(_msnSn))) {
 			_msnSn = msnSn;
 		}
 	}
@@ -484,10 +458,8 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setMySpaceSn(String mySpaceSn) {
-		if (((mySpaceSn == null) && (_mySpaceSn != null)) ||
-				((mySpaceSn != null) && (_mySpaceSn == null)) ||
-				((mySpaceSn != null) && (_mySpaceSn != null) &&
-				!mySpaceSn.equals(_mySpaceSn))) {
+		if ((mySpaceSn != _mySpaceSn) ||
+				((mySpaceSn != null) && !mySpaceSn.equals(_mySpaceSn))) {
 			_mySpaceSn = mySpaceSn;
 		}
 	}
@@ -497,10 +469,8 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setSkypeSn(String skypeSn) {
-		if (((skypeSn == null) && (_skypeSn != null)) ||
-				((skypeSn != null) && (_skypeSn == null)) ||
-				((skypeSn != null) && (_skypeSn != null) &&
-				!skypeSn.equals(_skypeSn))) {
+		if ((skypeSn != _skypeSn) ||
+				((skypeSn != null) && !skypeSn.equals(_skypeSn))) {
 			_skypeSn = skypeSn;
 		}
 	}
@@ -510,10 +480,8 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setTwitterSn(String twitterSn) {
-		if (((twitterSn == null) && (_twitterSn != null)) ||
-				((twitterSn != null) && (_twitterSn == null)) ||
-				((twitterSn != null) && (_twitterSn != null) &&
-				!twitterSn.equals(_twitterSn))) {
+		if ((twitterSn != _twitterSn) ||
+				((twitterSn != null) && !twitterSn.equals(_twitterSn))) {
 			_twitterSn = twitterSn;
 		}
 	}
@@ -523,9 +491,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setYmSn(String ymSn) {
-		if (((ymSn == null) && (_ymSn != null)) ||
-				((ymSn != null) && (_ymSn == null)) ||
-				((ymSn != null) && (_ymSn != null) && !ymSn.equals(_ymSn))) {
+		if ((ymSn != _ymSn) || ((ymSn != null) && !ymSn.equals(_ymSn))) {
 			_ymSn = ymSn;
 		}
 	}
@@ -535,9 +501,8 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setEmployeeStatusId(String employeeStatusId) {
-		if (((employeeStatusId == null) && (_employeeStatusId != null)) ||
-				((employeeStatusId != null) && (_employeeStatusId == null)) ||
-				((employeeStatusId != null) && (_employeeStatusId != null) &&
+		if ((employeeStatusId != _employeeStatusId) ||
+				((employeeStatusId != null) &&
 				!employeeStatusId.equals(_employeeStatusId))) {
 			_employeeStatusId = employeeStatusId;
 		}
@@ -548,9 +513,8 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setEmployeeNumber(String employeeNumber) {
-		if (((employeeNumber == null) && (_employeeNumber != null)) ||
-				((employeeNumber != null) && (_employeeNumber == null)) ||
-				((employeeNumber != null) && (_employeeNumber != null) &&
+		if ((employeeNumber != _employeeNumber) ||
+				((employeeNumber != null) &&
 				!employeeNumber.equals(_employeeNumber))) {
 			_employeeNumber = employeeNumber;
 		}
@@ -561,10 +525,8 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setJobTitle(String jobTitle) {
-		if (((jobTitle == null) && (_jobTitle != null)) ||
-				((jobTitle != null) && (_jobTitle == null)) ||
-				((jobTitle != null) && (_jobTitle != null) &&
-				!jobTitle.equals(_jobTitle))) {
+		if ((jobTitle != _jobTitle) ||
+				((jobTitle != null) && !jobTitle.equals(_jobTitle))) {
 			_jobTitle = jobTitle;
 		}
 	}
@@ -574,10 +536,8 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setJobClass(String jobClass) {
-		if (((jobClass == null) && (_jobClass != null)) ||
-				((jobClass != null) && (_jobClass == null)) ||
-				((jobClass != null) && (_jobClass != null) &&
-				!jobClass.equals(_jobClass))) {
+		if ((jobClass != _jobClass) ||
+				((jobClass != null) && !jobClass.equals(_jobClass))) {
 			_jobClass = jobClass;
 		}
 	}
@@ -587,9 +547,8 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public void setHoursOfOperation(String hoursOfOperation) {
-		if (((hoursOfOperation == null) && (_hoursOfOperation != null)) ||
-				((hoursOfOperation != null) && (_hoursOfOperation == null)) ||
-				((hoursOfOperation != null) && (_hoursOfOperation != null) &&
+		if ((hoursOfOperation != _hoursOfOperation) ||
+				((hoursOfOperation != null) &&
 				!hoursOfOperation.equals(_hoursOfOperation))) {
 			_hoursOfOperation = hoursOfOperation;
 		}

@@ -153,10 +153,8 @@ public class ImageModelImpl extends BaseModelImpl<Image> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if (((modifiedDate == null) && (_modifiedDate != null)) ||
-				((modifiedDate != null) && (_modifiedDate == null)) ||
-				((modifiedDate != null) && (_modifiedDate != null) &&
-				!modifiedDate.equals(_modifiedDate))) {
+		if ((modifiedDate != _modifiedDate) ||
+				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
 		}
 	}
@@ -166,9 +164,7 @@ public class ImageModelImpl extends BaseModelImpl<Image> {
 	}
 
 	public void setText(String text) {
-		if (((text == null) && (_text != null)) ||
-				((text != null) && (_text == null)) ||
-				((text != null) && (_text != null) && !text.equals(_text))) {
+		if ((text != _text) || ((text != null) && !text.equals(_text))) {
 			_text = text;
 		}
 	}
@@ -178,9 +174,7 @@ public class ImageModelImpl extends BaseModelImpl<Image> {
 	}
 
 	public void setType(String type) {
-		if (((type == null) && (_type != null)) ||
-				((type != null) && (_type == null)) ||
-				((type != null) && (_type != null) && !type.equals(_type))) {
+		if ((type != _type) || ((type != null) && !type.equals(_type))) {
 			_type = type;
 		}
 	}

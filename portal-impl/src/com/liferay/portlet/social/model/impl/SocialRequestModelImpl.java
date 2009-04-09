@@ -248,10 +248,8 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
+		if ((createDate != _createDate) ||
+				((createDate != null) && !createDate.equals(_createDate))) {
 			_createDate = createDate;
 		}
 	}
@@ -261,10 +259,8 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if (((modifiedDate == null) && (_modifiedDate != null)) ||
-				((modifiedDate != null) && (_modifiedDate == null)) ||
-				((modifiedDate != null) && (_modifiedDate != null) &&
-				!modifiedDate.equals(_modifiedDate))) {
+		if ((modifiedDate != _modifiedDate) ||
+				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
 		}
 	}
@@ -342,10 +338,8 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest> {
 	}
 
 	public void setExtraData(String extraData) {
-		if (((extraData == null) && (_extraData != null)) ||
-				((extraData != null) && (_extraData == null)) ||
-				((extraData != null) && (_extraData != null) &&
-				!extraData.equals(_extraData))) {
+		if ((extraData != _extraData) ||
+				((extraData != null) && !extraData.equals(_extraData))) {
 			_extraData = extraData;
 		}
 	}

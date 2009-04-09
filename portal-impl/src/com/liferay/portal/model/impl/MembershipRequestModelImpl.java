@@ -187,10 +187,8 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	}
 
 	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
+		if ((createDate != _createDate) ||
+				((createDate != null) && !createDate.equals(_createDate))) {
 			_createDate = createDate;
 		}
 	}
@@ -210,10 +208,8 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	}
 
 	public void setComments(String comments) {
-		if (((comments == null) && (_comments != null)) ||
-				((comments != null) && (_comments == null)) ||
-				((comments != null) && (_comments != null) &&
-				!comments.equals(_comments))) {
+		if ((comments != _comments) ||
+				((comments != null) && !comments.equals(_comments))) {
 			_comments = comments;
 		}
 	}
@@ -223,9 +219,8 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	}
 
 	public void setReplyComments(String replyComments) {
-		if (((replyComments == null) && (_replyComments != null)) ||
-				((replyComments != null) && (_replyComments == null)) ||
-				((replyComments != null) && (_replyComments != null) &&
+		if ((replyComments != _replyComments) ||
+				((replyComments != null) &&
 				!replyComments.equals(_replyComments))) {
 			_replyComments = replyComments;
 		}
@@ -236,10 +231,8 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	}
 
 	public void setReplyDate(Date replyDate) {
-		if (((replyDate == null) && (_replyDate != null)) ||
-				((replyDate != null) && (_replyDate == null)) ||
-				((replyDate != null) && (_replyDate != null) &&
-				!replyDate.equals(_replyDate))) {
+		if ((replyDate != _replyDate) ||
+				((replyDate != null) && !replyDate.equals(_replyDate))) {
 			_replyDate = replyDate;
 		}
 	}

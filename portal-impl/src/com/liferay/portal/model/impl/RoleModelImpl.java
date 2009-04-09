@@ -234,9 +234,7 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 	}
 
 	public void setName(String name) {
-		if (((name == null) && (_name != null)) ||
-				((name != null) && (_name == null)) ||
-				((name != null) && (_name != null) && !name.equals(_name))) {
+		if ((name != _name) || ((name != null) && !name.equals(_name))) {
 			_name = name;
 
 			if (_originalName == null) {
@@ -254,9 +252,7 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 	}
 
 	public void setTitle(String title) {
-		if (((title == null) && (_title != null)) ||
-				((title != null) && (_title == null)) ||
-				((title != null) && (_title != null) && !title.equals(_title))) {
+		if ((title != _title) || ((title != null) && !title.equals(_title))) {
 			_title = title;
 		}
 	}
@@ -266,10 +262,8 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 	}
 
 	public void setDescription(String description) {
-		if (((description == null) && (_description != null)) ||
-				((description != null) && (_description == null)) ||
-				((description != null) && (_description != null) &&
-				!description.equals(_description))) {
+		if ((description != _description) ||
+				((description != null) && !description.equals(_description))) {
 			_description = description;
 		}
 	}
@@ -289,10 +283,8 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 	}
 
 	public void setSubtype(String subtype) {
-		if (((subtype == null) && (_subtype != null)) ||
-				((subtype != null) && (_subtype == null)) ||
-				((subtype != null) && (_subtype != null) &&
-				!subtype.equals(_subtype))) {
+		if ((subtype != _subtype) ||
+				((subtype != null) && !subtype.equals(_subtype))) {
 			_subtype = subtype;
 		}
 	}

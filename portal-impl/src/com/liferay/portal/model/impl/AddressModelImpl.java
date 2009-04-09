@@ -220,10 +220,8 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public void setUserName(String userName) {
-		if (((userName == null) && (_userName != null)) ||
-				((userName != null) && (_userName == null)) ||
-				((userName != null) && (_userName != null) &&
-				!userName.equals(_userName))) {
+		if ((userName != _userName) ||
+				((userName != null) && !userName.equals(_userName))) {
 			_userName = userName;
 		}
 	}
@@ -233,10 +231,8 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
+		if ((createDate != _createDate) ||
+				((createDate != null) && !createDate.equals(_createDate))) {
 			_createDate = createDate;
 		}
 	}
@@ -246,10 +242,8 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if (((modifiedDate == null) && (_modifiedDate != null)) ||
-				((modifiedDate != null) && (_modifiedDate == null)) ||
-				((modifiedDate != null) && (_modifiedDate != null) &&
-				!modifiedDate.equals(_modifiedDate))) {
+		if ((modifiedDate != _modifiedDate) ||
+				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
 		}
 	}
@@ -287,10 +281,8 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public void setStreet1(String street1) {
-		if (((street1 == null) && (_street1 != null)) ||
-				((street1 != null) && (_street1 == null)) ||
-				((street1 != null) && (_street1 != null) &&
-				!street1.equals(_street1))) {
+		if ((street1 != _street1) ||
+				((street1 != null) && !street1.equals(_street1))) {
 			_street1 = street1;
 		}
 	}
@@ -300,10 +292,8 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public void setStreet2(String street2) {
-		if (((street2 == null) && (_street2 != null)) ||
-				((street2 != null) && (_street2 == null)) ||
-				((street2 != null) && (_street2 != null) &&
-				!street2.equals(_street2))) {
+		if ((street2 != _street2) ||
+				((street2 != null) && !street2.equals(_street2))) {
 			_street2 = street2;
 		}
 	}
@@ -313,10 +303,8 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public void setStreet3(String street3) {
-		if (((street3 == null) && (_street3 != null)) ||
-				((street3 != null) && (_street3 == null)) ||
-				((street3 != null) && (_street3 != null) &&
-				!street3.equals(_street3))) {
+		if ((street3 != _street3) ||
+				((street3 != null) && !street3.equals(_street3))) {
 			_street3 = street3;
 		}
 	}
@@ -326,9 +314,7 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public void setCity(String city) {
-		if (((city == null) && (_city != null)) ||
-				((city != null) && (_city == null)) ||
-				((city != null) && (_city != null) && !city.equals(_city))) {
+		if ((city != _city) || ((city != null) && !city.equals(_city))) {
 			_city = city;
 		}
 	}
@@ -338,9 +324,7 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public void setZip(String zip) {
-		if (((zip == null) && (_zip != null)) ||
-				((zip != null) && (_zip == null)) ||
-				((zip != null) && (_zip != null) && !zip.equals(_zip))) {
+		if ((zip != _zip) || ((zip != null) && !zip.equals(_zip))) {
 			_zip = zip;
 		}
 	}

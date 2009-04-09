@@ -223,10 +223,8 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public void setUserName(String userName) {
-		if (((userName == null) && (_userName != null)) ||
-				((userName != null) && (_userName == null)) ||
-				((userName != null) && (_userName != null) &&
-				!userName.equals(_userName))) {
+		if ((userName != _userName) ||
+				((userName != null) && !userName.equals(_userName))) {
 			_userName = userName;
 		}
 	}
@@ -236,10 +234,8 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
+		if ((createDate != _createDate) ||
+				((createDate != null) && !createDate.equals(_createDate))) {
 			_createDate = createDate;
 		}
 	}
@@ -249,10 +245,8 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if (((modifiedDate == null) && (_modifiedDate != null)) ||
-				((modifiedDate != null) && (_modifiedDate == null)) ||
-				((modifiedDate != null) && (_modifiedDate != null) &&
-				!modifiedDate.equals(_modifiedDate))) {
+		if ((modifiedDate != _modifiedDate) ||
+				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
 		}
 	}
@@ -262,9 +256,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public void setName(String name) {
-		if (((name == null) && (_name != null)) ||
-				((name != null) && (_name == null)) ||
-				((name != null) && (_name != null) && !name.equals(_name))) {
+		if ((name != _name) || ((name != null) && !name.equals(_name))) {
 			_name = name;
 		}
 	}
@@ -274,9 +266,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public void setType(String type) {
-		if (((type == null) && (_type != null)) ||
-				((type != null) && (_type == null)) ||
-				((type != null) && (_type != null) && !type.equals(_type))) {
+		if ((type != _type) || ((type != null) && !type.equals(_type))) {
 			_type = type;
 		}
 	}
@@ -286,9 +276,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public void setTags(String tags) {
-		if (((tags == null) && (_tags != null)) ||
-				((tags != null) && (_tags == null)) ||
-				((tags != null) && (_tags != null) && !tags.equals(_tags))) {
+		if ((tags != _tags) || ((tags != null) && !tags.equals(_tags))) {
 			_tags = tags;
 		}
 	}
@@ -298,9 +286,8 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public void setShortDescription(String shortDescription) {
-		if (((shortDescription == null) && (_shortDescription != null)) ||
-				((shortDescription != null) && (_shortDescription == null)) ||
-				((shortDescription != null) && (_shortDescription != null) &&
+		if ((shortDescription != _shortDescription) ||
+				((shortDescription != null) &&
 				!shortDescription.equals(_shortDescription))) {
 			_shortDescription = shortDescription;
 		}
@@ -311,9 +298,8 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public void setLongDescription(String longDescription) {
-		if (((longDescription == null) && (_longDescription != null)) ||
-				((longDescription != null) && (_longDescription == null)) ||
-				((longDescription != null) && (_longDescription != null) &&
+		if ((longDescription != _longDescription) ||
+				((longDescription != null) &&
 				!longDescription.equals(_longDescription))) {
 			_longDescription = longDescription;
 		}
@@ -324,10 +310,8 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public void setPageURL(String pageURL) {
-		if (((pageURL == null) && (_pageURL != null)) ||
-				((pageURL != null) && (_pageURL == null)) ||
-				((pageURL != null) && (_pageURL != null) &&
-				!pageURL.equals(_pageURL))) {
+		if ((pageURL != _pageURL) ||
+				((pageURL != null) && !pageURL.equals(_pageURL))) {
 			_pageURL = pageURL;
 		}
 	}
@@ -337,10 +321,8 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public void setAuthor(String author) {
-		if (((author == null) && (_author != null)) ||
-				((author != null) && (_author == null)) ||
-				((author != null) && (_author != null) &&
-				!author.equals(_author))) {
+		if ((author != _author) ||
+				((author != null) && !author.equals(_author))) {
 			_author = author;
 		}
 	}
@@ -350,10 +332,8 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public void setRepoGroupId(String repoGroupId) {
-		if (((repoGroupId == null) && (_repoGroupId != null)) ||
-				((repoGroupId != null) && (_repoGroupId == null)) ||
-				((repoGroupId != null) && (_repoGroupId != null) &&
-				!repoGroupId.equals(_repoGroupId))) {
+		if ((repoGroupId != _repoGroupId) ||
+				((repoGroupId != null) && !repoGroupId.equals(_repoGroupId))) {
 			_repoGroupId = repoGroupId;
 
 			if (_originalRepoGroupId == null) {
@@ -371,9 +351,8 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public void setRepoArtifactId(String repoArtifactId) {
-		if (((repoArtifactId == null) && (_repoArtifactId != null)) ||
-				((repoArtifactId != null) && (_repoArtifactId == null)) ||
-				((repoArtifactId != null) && (_repoArtifactId != null) &&
+		if ((repoArtifactId != _repoArtifactId) ||
+				((repoArtifactId != null) &&
 				!repoArtifactId.equals(_repoArtifactId))) {
 			_repoArtifactId = repoArtifactId;
 

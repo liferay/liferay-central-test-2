@@ -164,9 +164,7 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper> {
 	}
 
 	public void setType(String type) {
-		if (((type == null) && (_type != null)) ||
-				((type != null) && (_type == null)) ||
-				((type != null) && (_type != null) && !type.equals(_type))) {
+		if ((type != _type) || ((type != null) && !type.equals(_type))) {
 			_type = type;
 
 			if (_originalType == null) {
@@ -184,10 +182,8 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper> {
 	}
 
 	public void setDescription(String description) {
-		if (((description == null) && (_description != null)) ||
-				((description != null) && (_description == null)) ||
-				((description != null) && (_description != null) &&
-				!description.equals(_description))) {
+		if ((description != _description) ||
+				((description != null) && !description.equals(_description))) {
 			_description = description;
 		}
 	}
@@ -197,9 +193,8 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper> {
 	}
 
 	public void setExternalUserId(String externalUserId) {
-		if (((externalUserId == null) && (_externalUserId != null)) ||
-				((externalUserId != null) && (_externalUserId == null)) ||
-				((externalUserId != null) && (_externalUserId != null) &&
+		if ((externalUserId != _externalUserId) ||
+				((externalUserId != null) &&
 				!externalUserId.equals(_externalUserId))) {
 			_externalUserId = externalUserId;
 

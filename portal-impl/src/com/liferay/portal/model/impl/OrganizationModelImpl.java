@@ -196,9 +196,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 	}
 
 	public void setName(String name) {
-		if (((name == null) && (_name != null)) ||
-				((name != null) && (_name == null)) ||
-				((name != null) && (_name != null) && !name.equals(_name))) {
+		if ((name != _name) || ((name != null) && !name.equals(_name))) {
 			_name = name;
 
 			if (_originalName == null) {
@@ -216,9 +214,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 	}
 
 	public void setType(String type) {
-		if (((type == null) && (_type != null)) ||
-				((type != null) && (_type == null)) ||
-				((type != null) && (_type != null) && !type.equals(_type))) {
+		if ((type != _type) || ((type != null) && !type.equals(_type))) {
 			_type = type;
 		}
 	}
@@ -272,10 +268,8 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 	}
 
 	public void setComments(String comments) {
-		if (((comments == null) && (_comments != null)) ||
-				((comments != null) && (_comments == null)) ||
-				((comments != null) && (_comments != null) &&
-				!comments.equals(_comments))) {
+		if ((comments != _comments) ||
+				((comments != null) && !comments.equals(_comments))) {
 			_comments = comments;
 		}
 	}

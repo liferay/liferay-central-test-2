@@ -148,10 +148,8 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
+		if ((createDate != _createDate) ||
+				((createDate != null) && !createDate.equals(_createDate))) {
 			_createDate = createDate;
 		}
 	}
@@ -161,10 +159,8 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if (((modifiedDate == null) && (_modifiedDate != null)) ||
-				((modifiedDate != null) && (_modifiedDate == null)) ||
-				((modifiedDate != null) && (_modifiedDate != null) &&
-				!modifiedDate.equals(_modifiedDate))) {
+		if ((modifiedDate != _modifiedDate) ||
+				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
 		}
 	}
@@ -184,10 +180,8 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 	}
 
 	public void setBuildDate(Date buildDate) {
-		if (((buildDate == null) && (_buildDate != null)) ||
-				((buildDate != null) && (_buildDate == null)) ||
-				((buildDate != null) && (_buildDate != null) &&
-				!buildDate.equals(_buildDate))) {
+		if ((buildDate != _buildDate) ||
+				((buildDate != null) && !buildDate.equals(_buildDate))) {
 			_buildDate = buildDate;
 		}
 	}

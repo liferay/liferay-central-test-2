@@ -145,9 +145,8 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent> {
 	}
 
 	public void setBuildNamespace(String buildNamespace) {
-		if (((buildNamespace == null) && (_buildNamespace != null)) ||
-				((buildNamespace != null) && (_buildNamespace == null)) ||
-				((buildNamespace != null) && (_buildNamespace != null) &&
+		if ((buildNamespace != _buildNamespace) ||
+				((buildNamespace != null) &&
 				!buildNamespace.equals(_buildNamespace))) {
 			_buildNamespace = buildNamespace;
 
@@ -196,9 +195,7 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent> {
 	}
 
 	public void setData(String data) {
-		if (((data == null) && (_data != null)) ||
-				((data != null) && (_data == null)) ||
-				((data != null) && (_data != null) && !data.equals(_data))) {
+		if ((data != _data) || ((data != null) && !data.equals(_data))) {
 			_data = data;
 		}
 	}

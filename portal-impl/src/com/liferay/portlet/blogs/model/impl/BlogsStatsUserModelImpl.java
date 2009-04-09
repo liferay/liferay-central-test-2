@@ -221,10 +221,8 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser> {
 	}
 
 	public void setLastPostDate(Date lastPostDate) {
-		if (((lastPostDate == null) && (_lastPostDate != null)) ||
-				((lastPostDate != null) && (_lastPostDate == null)) ||
-				((lastPostDate != null) && (_lastPostDate != null) &&
-				!lastPostDate.equals(_lastPostDate))) {
+		if ((lastPostDate != _lastPostDate) ||
+				((lastPostDate != null) && !lastPostDate.equals(_lastPostDate))) {
 			_lastPostDate = lastPostDate;
 		}
 	}

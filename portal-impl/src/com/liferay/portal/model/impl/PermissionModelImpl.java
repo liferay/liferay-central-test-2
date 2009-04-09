@@ -153,10 +153,8 @@ public class PermissionModelImpl extends BaseModelImpl<Permission> {
 	}
 
 	public void setActionId(String actionId) {
-		if (((actionId == null) && (_actionId != null)) ||
-				((actionId != null) && (_actionId == null)) ||
-				((actionId != null) && (_actionId != null) &&
-				!actionId.equals(_actionId))) {
+		if ((actionId != _actionId) ||
+				((actionId != null) && !actionId.equals(_actionId))) {
 			_actionId = actionId;
 
 			if (_originalActionId == null) {

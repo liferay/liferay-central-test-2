@@ -310,10 +310,8 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setUserName(String userName) {
-		if (((userName == null) && (_userName != null)) ||
-				((userName != null) && (_userName == null)) ||
-				((userName != null) && (_userName != null) &&
-				!userName.equals(_userName))) {
+		if ((userName != _userName) ||
+				((userName != null) && !userName.equals(_userName))) {
 			_userName = userName;
 		}
 	}
@@ -323,10 +321,8 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
+		if ((createDate != _createDate) ||
+				((createDate != null) && !createDate.equals(_createDate))) {
 			_createDate = createDate;
 		}
 	}
@@ -336,10 +332,8 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if (((modifiedDate == null) && (_modifiedDate != null)) ||
-				((modifiedDate != null) && (_modifiedDate == null)) ||
-				((modifiedDate != null) && (_modifiedDate != null) &&
-				!modifiedDate.equals(_modifiedDate))) {
+		if ((modifiedDate != _modifiedDate) ||
+				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
 		}
 	}
@@ -349,10 +343,8 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setArticleId(String articleId) {
-		if (((articleId == null) && (_articleId != null)) ||
-				((articleId != null) && (_articleId == null)) ||
-				((articleId != null) && (_articleId != null) &&
-				!articleId.equals(_articleId))) {
+		if ((articleId != _articleId) ||
+				((articleId != null) && !articleId.equals(_articleId))) {
 			_articleId = articleId;
 
 			if (_originalArticleId == null) {
@@ -390,9 +382,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setTitle(String title) {
-		if (((title == null) && (_title != null)) ||
-				((title != null) && (_title == null)) ||
-				((title != null) && (_title != null) && !title.equals(_title))) {
+		if ((title != _title) || ((title != null) && !title.equals(_title))) {
 			_title = title;
 		}
 	}
@@ -402,10 +392,8 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setDescription(String description) {
-		if (((description == null) && (_description != null)) ||
-				((description != null) && (_description == null)) ||
-				((description != null) && (_description != null) &&
-				!description.equals(_description))) {
+		if ((description != _description) ||
+				((description != null) && !description.equals(_description))) {
 			_description = description;
 		}
 	}
@@ -415,10 +403,8 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setContent(String content) {
-		if (((content == null) && (_content != null)) ||
-				((content != null) && (_content == null)) ||
-				((content != null) && (_content != null) &&
-				!content.equals(_content))) {
+		if ((content != _content) ||
+				((content != null) && !content.equals(_content))) {
 			_content = content;
 		}
 	}
@@ -428,9 +414,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setType(String type) {
-		if (((type == null) && (_type != null)) ||
-				((type != null) && (_type == null)) ||
-				((type != null) && (_type != null) && !type.equals(_type))) {
+		if ((type != _type) || ((type != null) && !type.equals(_type))) {
 			_type = type;
 		}
 	}
@@ -440,10 +424,8 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setStructureId(String structureId) {
-		if (((structureId == null) && (_structureId != null)) ||
-				((structureId != null) && (_structureId == null)) ||
-				((structureId != null) && (_structureId != null) &&
-				!structureId.equals(_structureId))) {
+		if ((structureId != _structureId) ||
+				((structureId != null) && !structureId.equals(_structureId))) {
 			_structureId = structureId;
 		}
 	}
@@ -453,10 +435,8 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setTemplateId(String templateId) {
-		if (((templateId == null) && (_templateId != null)) ||
-				((templateId != null) && (_templateId == null)) ||
-				((templateId != null) && (_templateId != null) &&
-				!templateId.equals(_templateId))) {
+		if ((templateId != _templateId) ||
+				((templateId != null) && !templateId.equals(_templateId))) {
 			_templateId = templateId;
 		}
 	}
@@ -466,10 +446,8 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setDisplayDate(Date displayDate) {
-		if (((displayDate == null) && (_displayDate != null)) ||
-				((displayDate != null) && (_displayDate == null)) ||
-				((displayDate != null) && (_displayDate != null) &&
-				!displayDate.equals(_displayDate))) {
+		if ((displayDate != _displayDate) ||
+				((displayDate != null) && !displayDate.equals(_displayDate))) {
 			_displayDate = displayDate;
 		}
 	}
@@ -503,9 +481,8 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setApprovedByUserName(String approvedByUserName) {
-		if (((approvedByUserName == null) && (_approvedByUserName != null)) ||
-				((approvedByUserName != null) && (_approvedByUserName == null)) ||
-				((approvedByUserName != null) && (_approvedByUserName != null) &&
+		if ((approvedByUserName != _approvedByUserName) ||
+				((approvedByUserName != null) &&
 				!approvedByUserName.equals(_approvedByUserName))) {
 			_approvedByUserName = approvedByUserName;
 		}
@@ -516,10 +493,8 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setApprovedDate(Date approvedDate) {
-		if (((approvedDate == null) && (_approvedDate != null)) ||
-				((approvedDate != null) && (_approvedDate == null)) ||
-				((approvedDate != null) && (_approvedDate != null) &&
-				!approvedDate.equals(_approvedDate))) {
+		if ((approvedDate != _approvedDate) ||
+				((approvedDate != null) && !approvedDate.equals(_approvedDate))) {
 			_approvedDate = approvedDate;
 		}
 	}
@@ -543,9 +518,8 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setExpirationDate(Date expirationDate) {
-		if (((expirationDate == null) && (_expirationDate != null)) ||
-				((expirationDate != null) && (_expirationDate == null)) ||
-				((expirationDate != null) && (_expirationDate != null) &&
+		if ((expirationDate != _expirationDate) ||
+				((expirationDate != null) &&
 				!expirationDate.equals(_expirationDate))) {
 			_expirationDate = expirationDate;
 		}
@@ -556,10 +530,8 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setReviewDate(Date reviewDate) {
-		if (((reviewDate == null) && (_reviewDate != null)) ||
-				((reviewDate != null) && (_reviewDate == null)) ||
-				((reviewDate != null) && (_reviewDate != null) &&
-				!reviewDate.equals(_reviewDate))) {
+		if ((reviewDate != _reviewDate) ||
+				((reviewDate != null) && !reviewDate.equals(_reviewDate))) {
 			_reviewDate = reviewDate;
 		}
 	}
@@ -607,9 +579,8 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	}
 
 	public void setSmallImageURL(String smallImageURL) {
-		if (((smallImageURL == null) && (_smallImageURL != null)) ||
-				((smallImageURL != null) && (_smallImageURL == null)) ||
-				((smallImageURL != null) && (_smallImageURL != null) &&
+		if ((smallImageURL != _smallImageURL) ||
+				((smallImageURL != null) &&
 				!smallImageURL.equals(_smallImageURL))) {
 			_smallImageURL = smallImageURL;
 		}

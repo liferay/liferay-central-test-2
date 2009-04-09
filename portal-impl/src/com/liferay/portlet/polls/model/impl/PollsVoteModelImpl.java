@@ -195,10 +195,8 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote> {
 	}
 
 	public void setVoteDate(Date voteDate) {
-		if (((voteDate == null) && (_voteDate != null)) ||
-				((voteDate != null) && (_voteDate == null)) ||
-				((voteDate != null) && (_voteDate != null) &&
-				!voteDate.equals(_voteDate))) {
+		if ((voteDate != _voteDate) ||
+				((voteDate != null) && !voteDate.equals(_voteDate))) {
 			_voteDate = voteDate;
 		}
 	}

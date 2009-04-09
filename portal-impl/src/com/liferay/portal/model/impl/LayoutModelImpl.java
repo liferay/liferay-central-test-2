@@ -296,9 +296,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setName(String name) {
-		if (((name == null) && (_name != null)) ||
-				((name != null) && (_name == null)) ||
-				((name != null) && (_name != null) && !name.equals(_name))) {
+		if ((name != _name) || ((name != null) && !name.equals(_name))) {
 			_name = name;
 		}
 	}
@@ -308,9 +306,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setTitle(String title) {
-		if (((title == null) && (_title != null)) ||
-				((title != null) && (_title == null)) ||
-				((title != null) && (_title != null) && !title.equals(_title))) {
+		if ((title != _title) || ((title != null) && !title.equals(_title))) {
 			_title = title;
 		}
 	}
@@ -320,10 +316,8 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setDescription(String description) {
-		if (((description == null) && (_description != null)) ||
-				((description != null) && (_description == null)) ||
-				((description != null) && (_description != null) &&
-				!description.equals(_description))) {
+		if ((description != _description) ||
+				((description != null) && !description.equals(_description))) {
 			_description = description;
 		}
 	}
@@ -333,9 +327,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setType(String type) {
-		if (((type == null) && (_type != null)) ||
-				((type != null) && (_type == null)) ||
-				((type != null) && (_type != null) && !type.equals(_type))) {
+		if ((type != _type) || ((type != null) && !type.equals(_type))) {
 			_type = type;
 		}
 	}
@@ -345,10 +337,8 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setTypeSettings(String typeSettings) {
-		if (((typeSettings == null) && (_typeSettings != null)) ||
-				((typeSettings != null) && (_typeSettings == null)) ||
-				((typeSettings != null) && (_typeSettings != null) &&
-				!typeSettings.equals(_typeSettings))) {
+		if ((typeSettings != _typeSettings) ||
+				((typeSettings != null) && !typeSettings.equals(_typeSettings))) {
 			_typeSettings = typeSettings;
 		}
 	}
@@ -372,10 +362,8 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setFriendlyURL(String friendlyURL) {
-		if (((friendlyURL == null) && (_friendlyURL != null)) ||
-				((friendlyURL != null) && (_friendlyURL == null)) ||
-				((friendlyURL != null) && (_friendlyURL != null) &&
-				!friendlyURL.equals(_friendlyURL))) {
+		if ((friendlyURL != _friendlyURL) ||
+				((friendlyURL != null) && !friendlyURL.equals(_friendlyURL))) {
 			_friendlyURL = friendlyURL;
 
 			if (_originalFriendlyURL == null) {
@@ -427,10 +415,8 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setThemeId(String themeId) {
-		if (((themeId == null) && (_themeId != null)) ||
-				((themeId != null) && (_themeId == null)) ||
-				((themeId != null) && (_themeId != null) &&
-				!themeId.equals(_themeId))) {
+		if ((themeId != _themeId) ||
+				((themeId != null) && !themeId.equals(_themeId))) {
 			_themeId = themeId;
 		}
 	}
@@ -440,9 +426,8 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setColorSchemeId(String colorSchemeId) {
-		if (((colorSchemeId == null) && (_colorSchemeId != null)) ||
-				((colorSchemeId != null) && (_colorSchemeId == null)) ||
-				((colorSchemeId != null) && (_colorSchemeId != null) &&
+		if ((colorSchemeId != _colorSchemeId) ||
+				((colorSchemeId != null) &&
 				!colorSchemeId.equals(_colorSchemeId))) {
 			_colorSchemeId = colorSchemeId;
 		}
@@ -453,10 +438,8 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setWapThemeId(String wapThemeId) {
-		if (((wapThemeId == null) && (_wapThemeId != null)) ||
-				((wapThemeId != null) && (_wapThemeId == null)) ||
-				((wapThemeId != null) && (_wapThemeId != null) &&
-				!wapThemeId.equals(_wapThemeId))) {
+		if ((wapThemeId != _wapThemeId) ||
+				((wapThemeId != null) && !wapThemeId.equals(_wapThemeId))) {
 			_wapThemeId = wapThemeId;
 		}
 	}
@@ -466,9 +449,8 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setWapColorSchemeId(String wapColorSchemeId) {
-		if (((wapColorSchemeId == null) && (_wapColorSchemeId != null)) ||
-				((wapColorSchemeId != null) && (_wapColorSchemeId == null)) ||
-				((wapColorSchemeId != null) && (_wapColorSchemeId != null) &&
+		if ((wapColorSchemeId != _wapColorSchemeId) ||
+				((wapColorSchemeId != null) &&
 				!wapColorSchemeId.equals(_wapColorSchemeId))) {
 			_wapColorSchemeId = wapColorSchemeId;
 		}
@@ -479,9 +461,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	}
 
 	public void setCss(String css) {
-		if (((css == null) && (_css != null)) ||
-				((css != null) && (_css == null)) ||
-				((css != null) && (_css != null) && !css.equals(_css))) {
+		if ((css != _css) || ((css != null) && !css.equals(_css))) {
 			_css = css;
 		}
 	}

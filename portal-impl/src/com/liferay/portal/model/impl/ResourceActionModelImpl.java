@@ -140,9 +140,7 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction> {
 	}
 
 	public void setName(String name) {
-		if (((name == null) && (_name != null)) ||
-				((name != null) && (_name == null)) ||
-				((name != null) && (_name != null) && !name.equals(_name))) {
+		if ((name != _name) || ((name != null) && !name.equals(_name))) {
 			_name = name;
 
 			if (_originalName == null) {
@@ -160,10 +158,8 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction> {
 	}
 
 	public void setActionId(String actionId) {
-		if (((actionId == null) && (_actionId != null)) ||
-				((actionId != null) && (_actionId == null)) ||
-				((actionId != null) && (_actionId != null) &&
-				!actionId.equals(_actionId))) {
+		if ((actionId != _actionId) ||
+				((actionId != null) && !actionId.equals(_actionId))) {
 			_actionId = actionId;
 
 			if (_originalActionId == null) {

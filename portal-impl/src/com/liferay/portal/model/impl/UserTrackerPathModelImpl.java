@@ -152,9 +152,7 @@ public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath> {
 	}
 
 	public void setPath(String path) {
-		if (((path == null) && (_path != null)) ||
-				((path != null) && (_path == null)) ||
-				((path != null) && (_path != null) && !path.equals(_path))) {
+		if ((path != _path) || ((path != null) && !path.equals(_path))) {
 			_path = path;
 		}
 	}
@@ -164,10 +162,8 @@ public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath> {
 	}
 
 	public void setPathDate(Date pathDate) {
-		if (((pathDate == null) && (_pathDate != null)) ||
-				((pathDate != null) && (_pathDate == null)) ||
-				((pathDate != null) && (_pathDate != null) &&
-				!pathDate.equals(_pathDate))) {
+		if ((pathDate != _pathDate) ||
+				((pathDate != null) && !pathDate.equals(_pathDate))) {
 			_pathDate = pathDate;
 		}
 	}

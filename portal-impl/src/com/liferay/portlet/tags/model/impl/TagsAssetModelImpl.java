@@ -253,10 +253,8 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setUserName(String userName) {
-		if (((userName == null) && (_userName != null)) ||
-				((userName != null) && (_userName == null)) ||
-				((userName != null) && (_userName != null) &&
-				!userName.equals(_userName))) {
+		if ((userName != _userName) ||
+				((userName != null) && !userName.equals(_userName))) {
 			_userName = userName;
 		}
 	}
@@ -266,10 +264,8 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
+		if ((createDate != _createDate) ||
+				((createDate != null) && !createDate.equals(_createDate))) {
 			_createDate = createDate;
 		}
 	}
@@ -279,10 +275,8 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if (((modifiedDate == null) && (_modifiedDate != null)) ||
-				((modifiedDate != null) && (_modifiedDate == null)) ||
-				((modifiedDate != null) && (_modifiedDate != null) &&
-				!modifiedDate.equals(_modifiedDate))) {
+		if ((modifiedDate != _modifiedDate) ||
+				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
 		}
 	}
@@ -354,10 +348,8 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setStartDate(Date startDate) {
-		if (((startDate == null) && (_startDate != null)) ||
-				((startDate != null) && (_startDate == null)) ||
-				((startDate != null) && (_startDate != null) &&
-				!startDate.equals(_startDate))) {
+		if ((startDate != _startDate) ||
+				((startDate != null) && !startDate.equals(_startDate))) {
 			_startDate = startDate;
 		}
 	}
@@ -367,10 +359,8 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setEndDate(Date endDate) {
-		if (((endDate == null) && (_endDate != null)) ||
-				((endDate != null) && (_endDate == null)) ||
-				((endDate != null) && (_endDate != null) &&
-				!endDate.equals(_endDate))) {
+		if ((endDate != _endDate) ||
+				((endDate != null) && !endDate.equals(_endDate))) {
 			_endDate = endDate;
 		}
 	}
@@ -380,10 +370,8 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setPublishDate(Date publishDate) {
-		if (((publishDate == null) && (_publishDate != null)) ||
-				((publishDate != null) && (_publishDate == null)) ||
-				((publishDate != null) && (_publishDate != null) &&
-				!publishDate.equals(_publishDate))) {
+		if ((publishDate != _publishDate) ||
+				((publishDate != null) && !publishDate.equals(_publishDate))) {
 			_publishDate = publishDate;
 		}
 	}
@@ -393,9 +381,8 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setExpirationDate(Date expirationDate) {
-		if (((expirationDate == null) && (_expirationDate != null)) ||
-				((expirationDate != null) && (_expirationDate == null)) ||
-				((expirationDate != null) && (_expirationDate != null) &&
+		if ((expirationDate != _expirationDate) ||
+				((expirationDate != null) &&
 				!expirationDate.equals(_expirationDate))) {
 			_expirationDate = expirationDate;
 		}
@@ -406,10 +393,8 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setMimeType(String mimeType) {
-		if (((mimeType == null) && (_mimeType != null)) ||
-				((mimeType != null) && (_mimeType == null)) ||
-				((mimeType != null) && (_mimeType != null) &&
-				!mimeType.equals(_mimeType))) {
+		if ((mimeType != _mimeType) ||
+				((mimeType != null) && !mimeType.equals(_mimeType))) {
 			_mimeType = mimeType;
 		}
 	}
@@ -419,9 +404,7 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setTitle(String title) {
-		if (((title == null) && (_title != null)) ||
-				((title != null) && (_title == null)) ||
-				((title != null) && (_title != null) && !title.equals(_title))) {
+		if ((title != _title) || ((title != null) && !title.equals(_title))) {
 			_title = title;
 		}
 	}
@@ -431,10 +414,8 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setDescription(String description) {
-		if (((description == null) && (_description != null)) ||
-				((description != null) && (_description == null)) ||
-				((description != null) && (_description != null) &&
-				!description.equals(_description))) {
+		if ((description != _description) ||
+				((description != null) && !description.equals(_description))) {
 			_description = description;
 		}
 	}
@@ -444,10 +425,8 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setSummary(String summary) {
-		if (((summary == null) && (_summary != null)) ||
-				((summary != null) && (_summary == null)) ||
-				((summary != null) && (_summary != null) &&
-				!summary.equals(_summary))) {
+		if ((summary != _summary) ||
+				((summary != null) && !summary.equals(_summary))) {
 			_summary = summary;
 		}
 	}
@@ -457,9 +436,7 @@ public class TagsAssetModelImpl extends BaseModelImpl<TagsAsset> {
 	}
 
 	public void setUrl(String url) {
-		if (((url == null) && (_url != null)) ||
-				((url != null) && (_url == null)) ||
-				((url != null) && (_url != null) && !url.equals(_url))) {
+		if ((url != _url) || ((url != null) && !url.equals(_url))) {
 			_url = url;
 		}
 	}

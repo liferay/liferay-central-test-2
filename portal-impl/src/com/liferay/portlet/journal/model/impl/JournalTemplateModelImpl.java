@@ -257,10 +257,8 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public void setUserName(String userName) {
-		if (((userName == null) && (_userName != null)) ||
-				((userName != null) && (_userName == null)) ||
-				((userName != null) && (_userName != null) &&
-				!userName.equals(_userName))) {
+		if ((userName != _userName) ||
+				((userName != null) && !userName.equals(_userName))) {
 			_userName = userName;
 		}
 	}
@@ -270,10 +268,8 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
+		if ((createDate != _createDate) ||
+				((createDate != null) && !createDate.equals(_createDate))) {
 			_createDate = createDate;
 		}
 	}
@@ -283,10 +279,8 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if (((modifiedDate == null) && (_modifiedDate != null)) ||
-				((modifiedDate != null) && (_modifiedDate == null)) ||
-				((modifiedDate != null) && (_modifiedDate != null) &&
-				!modifiedDate.equals(_modifiedDate))) {
+		if ((modifiedDate != _modifiedDate) ||
+				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
 		}
 	}
@@ -296,10 +290,8 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public void setTemplateId(String templateId) {
-		if (((templateId == null) && (_templateId != null)) ||
-				((templateId != null) && (_templateId == null)) ||
-				((templateId != null) && (_templateId != null) &&
-				!templateId.equals(_templateId))) {
+		if ((templateId != _templateId) ||
+				((templateId != null) && !templateId.equals(_templateId))) {
 			_templateId = templateId;
 
 			if (_originalTemplateId == null) {
@@ -317,10 +309,8 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public void setStructureId(String structureId) {
-		if (((structureId == null) && (_structureId != null)) ||
-				((structureId != null) && (_structureId == null)) ||
-				((structureId != null) && (_structureId != null) &&
-				!structureId.equals(_structureId))) {
+		if ((structureId != _structureId) ||
+				((structureId != null) && !structureId.equals(_structureId))) {
 			_structureId = structureId;
 		}
 	}
@@ -330,9 +320,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public void setName(String name) {
-		if (((name == null) && (_name != null)) ||
-				((name != null) && (_name == null)) ||
-				((name != null) && (_name != null) && !name.equals(_name))) {
+		if ((name != _name) || ((name != null) && !name.equals(_name))) {
 			_name = name;
 		}
 	}
@@ -342,10 +330,8 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public void setDescription(String description) {
-		if (((description == null) && (_description != null)) ||
-				((description != null) && (_description == null)) ||
-				((description != null) && (_description != null) &&
-				!description.equals(_description))) {
+		if ((description != _description) ||
+				((description != null) && !description.equals(_description))) {
 			_description = description;
 		}
 	}
@@ -355,9 +341,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public void setXsl(String xsl) {
-		if (((xsl == null) && (_xsl != null)) ||
-				((xsl != null) && (_xsl == null)) ||
-				((xsl != null) && (_xsl != null) && !xsl.equals(_xsl))) {
+		if ((xsl != _xsl) || ((xsl != null) && !xsl.equals(_xsl))) {
 			_xsl = xsl;
 		}
 	}
@@ -367,10 +351,8 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public void setLangType(String langType) {
-		if (((langType == null) && (_langType != null)) ||
-				((langType != null) && (_langType == null)) ||
-				((langType != null) && (_langType != null) &&
-				!langType.equals(_langType))) {
+		if ((langType != _langType) ||
+				((langType != null) && !langType.equals(_langType))) {
 			_langType = langType;
 		}
 	}
@@ -428,9 +410,8 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public void setSmallImageURL(String smallImageURL) {
-		if (((smallImageURL == null) && (_smallImageURL != null)) ||
-				((smallImageURL != null) && (_smallImageURL == null)) ||
-				((smallImageURL != null) && (_smallImageURL != null) &&
+		if ((smallImageURL != _smallImageURL) ||
+				((smallImageURL != null) &&
 				!smallImageURL.equals(_smallImageURL))) {
 			_smallImageURL = smallImageURL;
 		}

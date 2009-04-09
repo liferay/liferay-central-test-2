@@ -254,10 +254,8 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	}
 
 	public void setThemeId(String themeId) {
-		if (((themeId == null) && (_themeId != null)) ||
-				((themeId != null) && (_themeId == null)) ||
-				((themeId != null) && (_themeId != null) &&
-				!themeId.equals(_themeId))) {
+		if ((themeId != _themeId) ||
+				((themeId != null) && !themeId.equals(_themeId))) {
 			_themeId = themeId;
 		}
 	}
@@ -267,9 +265,8 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	}
 
 	public void setColorSchemeId(String colorSchemeId) {
-		if (((colorSchemeId == null) && (_colorSchemeId != null)) ||
-				((colorSchemeId != null) && (_colorSchemeId == null)) ||
-				((colorSchemeId != null) && (_colorSchemeId != null) &&
+		if ((colorSchemeId != _colorSchemeId) ||
+				((colorSchemeId != null) &&
 				!colorSchemeId.equals(_colorSchemeId))) {
 			_colorSchemeId = colorSchemeId;
 		}
@@ -280,10 +277,8 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	}
 
 	public void setWapThemeId(String wapThemeId) {
-		if (((wapThemeId == null) && (_wapThemeId != null)) ||
-				((wapThemeId != null) && (_wapThemeId == null)) ||
-				((wapThemeId != null) && (_wapThemeId != null) &&
-				!wapThemeId.equals(_wapThemeId))) {
+		if ((wapThemeId != _wapThemeId) ||
+				((wapThemeId != null) && !wapThemeId.equals(_wapThemeId))) {
 			_wapThemeId = wapThemeId;
 		}
 	}
@@ -293,9 +288,8 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	}
 
 	public void setWapColorSchemeId(String wapColorSchemeId) {
-		if (((wapColorSchemeId == null) && (_wapColorSchemeId != null)) ||
-				((wapColorSchemeId != null) && (_wapColorSchemeId == null)) ||
-				((wapColorSchemeId != null) && (_wapColorSchemeId != null) &&
+		if ((wapColorSchemeId != _wapColorSchemeId) ||
+				((wapColorSchemeId != null) &&
 				!wapColorSchemeId.equals(_wapColorSchemeId))) {
 			_wapColorSchemeId = wapColorSchemeId;
 		}
@@ -306,9 +300,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	}
 
 	public void setCss(String css) {
-		if (((css == null) && (_css != null)) ||
-				((css != null) && (_css == null)) ||
-				((css != null) && (_css != null) && !css.equals(_css))) {
+		if ((css != _css) || ((css != null) && !css.equals(_css))) {
 			_css = css;
 		}
 	}
@@ -328,10 +320,8 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	}
 
 	public void setVirtualHost(String virtualHost) {
-		if (((virtualHost == null) && (_virtualHost != null)) ||
-				((virtualHost != null) && (_virtualHost == null)) ||
-				((virtualHost != null) && (_virtualHost != null) &&
-				!virtualHost.equals(_virtualHost))) {
+		if ((virtualHost != _virtualHost) ||
+				((virtualHost != null) && !virtualHost.equals(_virtualHost))) {
 			_virtualHost = virtualHost;
 
 			if (_originalVirtualHost == null) {

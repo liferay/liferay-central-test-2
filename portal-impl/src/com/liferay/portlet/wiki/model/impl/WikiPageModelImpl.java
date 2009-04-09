@@ -238,10 +238,8 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public void setUserName(String userName) {
-		if (((userName == null) && (_userName != null)) ||
-				((userName != null) && (_userName == null)) ||
-				((userName != null) && (_userName != null) &&
-				!userName.equals(_userName))) {
+		if ((userName != _userName) ||
+				((userName != null) && !userName.equals(_userName))) {
 			_userName = userName;
 		}
 	}
@@ -251,10 +249,8 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
+		if ((createDate != _createDate) ||
+				((createDate != null) && !createDate.equals(_createDate))) {
 			_createDate = createDate;
 		}
 	}
@@ -264,10 +260,8 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if (((modifiedDate == null) && (_modifiedDate != null)) ||
-				((modifiedDate != null) && (_modifiedDate == null)) ||
-				((modifiedDate != null) && (_modifiedDate != null) &&
-				!modifiedDate.equals(_modifiedDate))) {
+		if ((modifiedDate != _modifiedDate) ||
+				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
 		}
 	}
@@ -297,9 +291,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public void setTitle(String title) {
-		if (((title == null) && (_title != null)) ||
-				((title != null) && (_title == null)) ||
-				((title != null) && (_title != null) && !title.equals(_title))) {
+		if ((title != _title) || ((title != null) && !title.equals(_title))) {
 			_title = title;
 
 			if (_originalTitle == null) {
@@ -351,10 +343,8 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public void setContent(String content) {
-		if (((content == null) && (_content != null)) ||
-				((content != null) && (_content == null)) ||
-				((content != null) && (_content != null) &&
-				!content.equals(_content))) {
+		if ((content != _content) ||
+				((content != null) && !content.equals(_content))) {
 			_content = content;
 		}
 	}
@@ -364,10 +354,8 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public void setSummary(String summary) {
-		if (((summary == null) && (_summary != null)) ||
-				((summary != null) && (_summary == null)) ||
-				((summary != null) && (_summary != null) &&
-				!summary.equals(_summary))) {
+		if ((summary != _summary) ||
+				((summary != null) && !summary.equals(_summary))) {
 			_summary = summary;
 		}
 	}
@@ -377,10 +365,8 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public void setFormat(String format) {
-		if (((format == null) && (_format != null)) ||
-				((format != null) && (_format == null)) ||
-				((format != null) && (_format != null) &&
-				!format.equals(_format))) {
+		if ((format != _format) ||
+				((format != null) && !format.equals(_format))) {
 			_format = format;
 		}
 	}
@@ -404,10 +390,8 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public void setParentTitle(String parentTitle) {
-		if (((parentTitle == null) && (_parentTitle != null)) ||
-				((parentTitle != null) && (_parentTitle == null)) ||
-				((parentTitle != null) && (_parentTitle != null) &&
-				!parentTitle.equals(_parentTitle))) {
+		if ((parentTitle != _parentTitle) ||
+				((parentTitle != null) && !parentTitle.equals(_parentTitle))) {
 			_parentTitle = parentTitle;
 		}
 	}
@@ -417,9 +401,8 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public void setRedirectTitle(String redirectTitle) {
-		if (((redirectTitle == null) && (_redirectTitle != null)) ||
-				((redirectTitle != null) && (_redirectTitle == null)) ||
-				((redirectTitle != null) && (_redirectTitle != null) &&
+		if ((redirectTitle != _redirectTitle) ||
+				((redirectTitle != null) &&
 				!redirectTitle.equals(_redirectTitle))) {
 			_redirectTitle = redirectTitle;
 		}

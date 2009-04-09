@@ -288,10 +288,8 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setUserName(String userName) {
-		if (((userName == null) && (_userName != null)) ||
-				((userName != null) && (_userName == null)) ||
-				((userName != null) && (_userName != null) &&
-				!userName.equals(_userName))) {
+		if ((userName != _userName) ||
+				((userName != null) && !userName.equals(_userName))) {
 			_userName = userName;
 		}
 	}
@@ -301,10 +299,8 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
+		if ((createDate != _createDate) ||
+				((createDate != null) && !createDate.equals(_createDate))) {
 			_createDate = createDate;
 		}
 	}
@@ -314,10 +310,8 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if (((modifiedDate == null) && (_modifiedDate != null)) ||
-				((modifiedDate != null) && (_modifiedDate == null)) ||
-				((modifiedDate != null) && (_modifiedDate != null) &&
-				!modifiedDate.equals(_modifiedDate))) {
+		if ((modifiedDate != _modifiedDate) ||
+				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
 		}
 	}
@@ -337,9 +331,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setSku(String sku) {
-		if (((sku == null) && (_sku != null)) ||
-				((sku != null) && (_sku == null)) ||
-				((sku != null) && (_sku != null) && !sku.equals(_sku))) {
+		if ((sku != _sku) || ((sku != null) && !sku.equals(_sku))) {
 			_sku = sku;
 
 			if (_originalSku == null) {
@@ -357,9 +349,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setName(String name) {
-		if (((name == null) && (_name != null)) ||
-				((name != null) && (_name == null)) ||
-				((name != null) && (_name != null) && !name.equals(_name))) {
+		if ((name != _name) || ((name != null) && !name.equals(_name))) {
 			_name = name;
 		}
 	}
@@ -369,10 +359,8 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setDescription(String description) {
-		if (((description == null) && (_description != null)) ||
-				((description != null) && (_description == null)) ||
-				((description != null) && (_description != null) &&
-				!description.equals(_description))) {
+		if ((description != _description) ||
+				((description != null) && !description.equals(_description))) {
 			_description = description;
 		}
 	}
@@ -382,10 +370,8 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setProperties(String properties) {
-		if (((properties == null) && (_properties != null)) ||
-				((properties != null) && (_properties == null)) ||
-				((properties != null) && (_properties != null) &&
-				!properties.equals(_properties))) {
+		if ((properties != _properties) ||
+				((properties != null) && !properties.equals(_properties))) {
 			_properties = properties;
 		}
 	}
@@ -409,9 +395,8 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setFieldsQuantities(String fieldsQuantities) {
-		if (((fieldsQuantities == null) && (_fieldsQuantities != null)) ||
-				((fieldsQuantities != null) && (_fieldsQuantities == null)) ||
-				((fieldsQuantities != null) && (_fieldsQuantities != null) &&
+		if ((fieldsQuantities != _fieldsQuantities) ||
+				((fieldsQuantities != null) &&
 				!fieldsQuantities.equals(_fieldsQuantities))) {
 			_fieldsQuantities = fieldsQuantities;
 		}
@@ -586,9 +571,8 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setSmallImageURL(String smallImageURL) {
-		if (((smallImageURL == null) && (_smallImageURL != null)) ||
-				((smallImageURL != null) && (_smallImageURL == null)) ||
-				((smallImageURL != null) && (_smallImageURL != null) &&
+		if ((smallImageURL != _smallImageURL) ||
+				((smallImageURL != null) &&
 				!smallImageURL.equals(_smallImageURL))) {
 			_smallImageURL = smallImageURL;
 		}
@@ -633,9 +617,8 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setMediumImageURL(String mediumImageURL) {
-		if (((mediumImageURL == null) && (_mediumImageURL != null)) ||
-				((mediumImageURL != null) && (_mediumImageURL == null)) ||
-				((mediumImageURL != null) && (_mediumImageURL != null) &&
+		if ((mediumImageURL != _mediumImageURL) ||
+				((mediumImageURL != null) &&
 				!mediumImageURL.equals(_mediumImageURL))) {
 			_mediumImageURL = mediumImageURL;
 		}
@@ -680,9 +663,8 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public void setLargeImageURL(String largeImageURL) {
-		if (((largeImageURL == null) && (_largeImageURL != null)) ||
-				((largeImageURL != null) && (_largeImageURL == null)) ||
-				((largeImageURL != null) && (_largeImageURL != null) &&
+		if ((largeImageURL != _largeImageURL) ||
+				((largeImageURL != null) &&
 				!largeImageURL.equals(_largeImageURL))) {
 			_largeImageURL = largeImageURL;
 		}

@@ -284,10 +284,8 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setUserName(String userName) {
-		if (((userName == null) && (_userName != null)) ||
-				((userName != null) && (_userName == null)) ||
-				((userName != null) && (_userName != null) &&
-				!userName.equals(_userName))) {
+		if ((userName != _userName) ||
+				((userName != null) && !userName.equals(_userName))) {
 			_userName = userName;
 		}
 	}
@@ -297,10 +295,8 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
+		if ((createDate != _createDate) ||
+				((createDate != null) && !createDate.equals(_createDate))) {
 			_createDate = createDate;
 		}
 	}
@@ -310,10 +306,8 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if (((modifiedDate == null) && (_modifiedDate != null)) ||
-				((modifiedDate != null) && (_modifiedDate == null)) ||
-				((modifiedDate != null) && (_modifiedDate != null) &&
-				!modifiedDate.equals(_modifiedDate))) {
+		if ((modifiedDate != _modifiedDate) ||
+				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
 		}
 	}
@@ -343,10 +337,8 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setEmailAddress(String emailAddress) {
-		if (((emailAddress == null) && (_emailAddress != null)) ||
-				((emailAddress != null) && (_emailAddress == null)) ||
-				((emailAddress != null) && (_emailAddress != null) &&
-				!emailAddress.equals(_emailAddress))) {
+		if ((emailAddress != _emailAddress) ||
+				((emailAddress != null) && !emailAddress.equals(_emailAddress))) {
 			_emailAddress = emailAddress;
 		}
 	}
@@ -356,10 +348,8 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setInProtocol(String inProtocol) {
-		if (((inProtocol == null) && (_inProtocol != null)) ||
-				((inProtocol != null) && (_inProtocol == null)) ||
-				((inProtocol != null) && (_inProtocol != null) &&
-				!inProtocol.equals(_inProtocol))) {
+		if ((inProtocol != _inProtocol) ||
+				((inProtocol != null) && !inProtocol.equals(_inProtocol))) {
 			_inProtocol = inProtocol;
 		}
 	}
@@ -369,10 +359,8 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setInServerName(String inServerName) {
-		if (((inServerName == null) && (_inServerName != null)) ||
-				((inServerName != null) && (_inServerName == null)) ||
-				((inServerName != null) && (_inServerName != null) &&
-				!inServerName.equals(_inServerName))) {
+		if ((inServerName != _inServerName) ||
+				((inServerName != null) && !inServerName.equals(_inServerName))) {
 			_inServerName = inServerName;
 		}
 	}
@@ -406,10 +394,8 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setInUserName(String inUserName) {
-		if (((inUserName == null) && (_inUserName != null)) ||
-				((inUserName != null) && (_inUserName == null)) ||
-				((inUserName != null) && (_inUserName != null) &&
-				!inUserName.equals(_inUserName))) {
+		if ((inUserName != _inUserName) ||
+				((inUserName != null) && !inUserName.equals(_inUserName))) {
 			_inUserName = inUserName;
 		}
 	}
@@ -419,10 +405,8 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setInPassword(String inPassword) {
-		if (((inPassword == null) && (_inPassword != null)) ||
-				((inPassword != null) && (_inPassword == null)) ||
-				((inPassword != null) && (_inPassword != null) &&
-				!inPassword.equals(_inPassword))) {
+		if ((inPassword != _inPassword) ||
+				((inPassword != null) && !inPassword.equals(_inPassword))) {
 			_inPassword = inPassword;
 		}
 	}
@@ -442,9 +426,8 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setOutEmailAddress(String outEmailAddress) {
-		if (((outEmailAddress == null) && (_outEmailAddress != null)) ||
-				((outEmailAddress != null) && (_outEmailAddress == null)) ||
-				((outEmailAddress != null) && (_outEmailAddress != null) &&
+		if ((outEmailAddress != _outEmailAddress) ||
+				((outEmailAddress != null) &&
 				!outEmailAddress.equals(_outEmailAddress))) {
 			_outEmailAddress = outEmailAddress;
 		}
@@ -469,9 +452,8 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setOutServerName(String outServerName) {
-		if (((outServerName == null) && (_outServerName != null)) ||
-				((outServerName != null) && (_outServerName == null)) ||
-				((outServerName != null) && (_outServerName != null) &&
+		if ((outServerName != _outServerName) ||
+				((outServerName != null) &&
 				!outServerName.equals(_outServerName))) {
 			_outServerName = outServerName;
 		}
@@ -506,10 +488,8 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setOutUserName(String outUserName) {
-		if (((outUserName == null) && (_outUserName != null)) ||
-				((outUserName != null) && (_outUserName == null)) ||
-				((outUserName != null) && (_outUserName != null) &&
-				!outUserName.equals(_outUserName))) {
+		if ((outUserName != _outUserName) ||
+				((outUserName != null) && !outUserName.equals(_outUserName))) {
 			_outUserName = outUserName;
 		}
 	}
@@ -519,10 +499,8 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public void setOutPassword(String outPassword) {
-		if (((outPassword == null) && (_outPassword != null)) ||
-				((outPassword != null) && (_outPassword == null)) ||
-				((outPassword != null) && (_outPassword != null) &&
-				!outPassword.equals(_outPassword))) {
+		if ((outPassword != _outPassword) ||
+				((outPassword != null) && !outPassword.equals(_outPassword))) {
 			_outPassword = outPassword;
 		}
 	}

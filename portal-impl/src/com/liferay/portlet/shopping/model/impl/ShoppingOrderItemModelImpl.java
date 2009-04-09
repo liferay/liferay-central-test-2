@@ -177,10 +177,8 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 	}
 
 	public void setItemId(String itemId) {
-		if (((itemId == null) && (_itemId != null)) ||
-				((itemId != null) && (_itemId == null)) ||
-				((itemId != null) && (_itemId != null) &&
-				!itemId.equals(_itemId))) {
+		if ((itemId != _itemId) ||
+				((itemId != null) && !itemId.equals(_itemId))) {
 			_itemId = itemId;
 		}
 	}
@@ -190,9 +188,7 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 	}
 
 	public void setSku(String sku) {
-		if (((sku == null) && (_sku != null)) ||
-				((sku != null) && (_sku == null)) ||
-				((sku != null) && (_sku != null) && !sku.equals(_sku))) {
+		if ((sku != _sku) || ((sku != null) && !sku.equals(_sku))) {
 			_sku = sku;
 		}
 	}
@@ -202,9 +198,7 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 	}
 
 	public void setName(String name) {
-		if (((name == null) && (_name != null)) ||
-				((name != null) && (_name == null)) ||
-				((name != null) && (_name != null) && !name.equals(_name))) {
+		if ((name != _name) || ((name != null) && !name.equals(_name))) {
 			_name = name;
 		}
 	}
@@ -214,10 +208,8 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 	}
 
 	public void setDescription(String description) {
-		if (((description == null) && (_description != null)) ||
-				((description != null) && (_description == null)) ||
-				((description != null) && (_description != null) &&
-				!description.equals(_description))) {
+		if ((description != _description) ||
+				((description != null) && !description.equals(_description))) {
 			_description = description;
 		}
 	}
@@ -227,10 +219,8 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 	}
 
 	public void setProperties(String properties) {
-		if (((properties == null) && (_properties != null)) ||
-				((properties != null) && (_properties == null)) ||
-				((properties != null) && (_properties != null) &&
-				!properties.equals(_properties))) {
+		if ((properties != _properties) ||
+				((properties != null) && !properties.equals(_properties))) {
 			_properties = properties;
 		}
 	}
@@ -260,10 +250,8 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 	}
 
 	public void setShippedDate(Date shippedDate) {
-		if (((shippedDate == null) && (_shippedDate != null)) ||
-				((shippedDate != null) && (_shippedDate == null)) ||
-				((shippedDate != null) && (_shippedDate != null) &&
-				!shippedDate.equals(_shippedDate))) {
+		if ((shippedDate != _shippedDate) ||
+				((shippedDate != null) && !shippedDate.equals(_shippedDate))) {
 			_shippedDate = shippedDate;
 		}
 	}

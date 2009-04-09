@@ -229,10 +229,8 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 	}
 
 	public void setPortletId(String portletId) {
-		if (((portletId == null) && (_portletId != null)) ||
-				((portletId != null) && (_portletId == null)) ||
-				((portletId != null) && (_portletId != null) &&
-				!portletId.equals(_portletId))) {
+		if ((portletId != _portletId) ||
+				((portletId != null) && !portletId.equals(_portletId))) {
 			_portletId = portletId;
 
 			if (_originalPortletId == null) {
@@ -250,10 +248,8 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 	}
 
 	public void setArticleId(String articleId) {
-		if (((articleId == null) && (_articleId != null)) ||
-				((articleId != null) && (_articleId == null)) ||
-				((articleId != null) && (_articleId != null) &&
-				!articleId.equals(_articleId))) {
+		if ((articleId != _articleId) ||
+				((articleId != null) && !articleId.equals(_articleId))) {
 			_articleId = articleId;
 
 			if (_originalArticleId == null) {

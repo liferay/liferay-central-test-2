@@ -142,9 +142,7 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName> {
 	}
 
 	public void setValue(String value) {
-		if (((value == null) && (_value != null)) ||
-				((value != null) && (_value == null)) ||
-				((value != null) && (_value != null) && !value.equals(_value))) {
+		if ((value != _value) || ((value != null) && !value.equals(_value))) {
 			_value = value;
 
 			if (_originalValue == null) {

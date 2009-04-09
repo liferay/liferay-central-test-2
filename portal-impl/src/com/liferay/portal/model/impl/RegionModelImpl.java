@@ -154,10 +154,8 @@ public class RegionModelImpl extends BaseModelImpl<Region> {
 	}
 
 	public void setRegionCode(String regionCode) {
-		if (((regionCode == null) && (_regionCode != null)) ||
-				((regionCode != null) && (_regionCode == null)) ||
-				((regionCode != null) && (_regionCode != null) &&
-				!regionCode.equals(_regionCode))) {
+		if ((regionCode != _regionCode) ||
+				((regionCode != null) && !regionCode.equals(_regionCode))) {
 			_regionCode = regionCode;
 		}
 	}
@@ -167,9 +165,7 @@ public class RegionModelImpl extends BaseModelImpl<Region> {
 	}
 
 	public void setName(String name) {
-		if (((name == null) && (_name != null)) ||
-				((name != null) && (_name == null)) ||
-				((name != null) && (_name != null) && !name.equals(_name))) {
+		if ((name != _name) || ((name != null) && !name.equals(_name))) {
 			_name = name;
 		}
 	}

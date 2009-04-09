@@ -303,10 +303,8 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public void setCreateDate(Date createDate) {
-		if (((createDate == null) && (_createDate != null)) ||
-				((createDate != null) && (_createDate == null)) ||
-				((createDate != null) && (_createDate != null) &&
-				!createDate.equals(_createDate))) {
+		if ((createDate != _createDate) ||
+				((createDate != null) && !createDate.equals(_createDate))) {
 			_createDate = createDate;
 		}
 	}
@@ -316,10 +314,8 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
-		if (((modifiedDate == null) && (_modifiedDate != null)) ||
-				((modifiedDate != null) && (_modifiedDate == null)) ||
-				((modifiedDate != null) && (_modifiedDate != null) &&
-				!modifiedDate.equals(_modifiedDate))) {
+		if ((modifiedDate != _modifiedDate) ||
+				((modifiedDate != null) && !modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
 		}
 	}
@@ -373,10 +369,8 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public void setPassword(String password) {
-		if (((password == null) && (_password != null)) ||
-				((password != null) && (_password == null)) ||
-				((password != null) && (_password != null) &&
-				!password.equals(_password))) {
+		if ((password != _password) ||
+				((password != null) && !password.equals(_password))) {
 			_password = password;
 		}
 	}
@@ -414,11 +408,8 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public void setPasswordModifiedDate(Date passwordModifiedDate) {
-		if (((passwordModifiedDate == null) && (_passwordModifiedDate != null)) ||
+		if ((passwordModifiedDate != _passwordModifiedDate) ||
 				((passwordModifiedDate != null) &&
-				(_passwordModifiedDate == null)) ||
-				((passwordModifiedDate != null) &&
-				(_passwordModifiedDate != null) &&
 				!passwordModifiedDate.equals(_passwordModifiedDate))) {
 			_passwordModifiedDate = passwordModifiedDate;
 		}
@@ -429,12 +420,8 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public void setReminderQueryQuestion(String reminderQueryQuestion) {
-		if (((reminderQueryQuestion == null) &&
-				(_reminderQueryQuestion != null)) ||
+		if ((reminderQueryQuestion != _reminderQueryQuestion) ||
 				((reminderQueryQuestion != null) &&
-				(_reminderQueryQuestion == null)) ||
-				((reminderQueryQuestion != null) &&
-				(_reminderQueryQuestion != null) &&
 				!reminderQueryQuestion.equals(_reminderQueryQuestion))) {
 			_reminderQueryQuestion = reminderQueryQuestion;
 		}
@@ -445,11 +432,8 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public void setReminderQueryAnswer(String reminderQueryAnswer) {
-		if (((reminderQueryAnswer == null) && (_reminderQueryAnswer != null)) ||
+		if ((reminderQueryAnswer != _reminderQueryAnswer) ||
 				((reminderQueryAnswer != null) &&
-				(_reminderQueryAnswer == null)) ||
-				((reminderQueryAnswer != null) &&
-				(_reminderQueryAnswer != null) &&
 				!reminderQueryAnswer.equals(_reminderQueryAnswer))) {
 			_reminderQueryAnswer = reminderQueryAnswer;
 		}
@@ -470,10 +454,8 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public void setScreenName(String screenName) {
-		if (((screenName == null) && (_screenName != null)) ||
-				((screenName != null) && (_screenName == null)) ||
-				((screenName != null) && (_screenName != null) &&
-				!screenName.equals(_screenName))) {
+		if ((screenName != _screenName) ||
+				((screenName != null) && !screenName.equals(_screenName))) {
 			_screenName = screenName;
 
 			if (_originalScreenName == null) {
@@ -491,10 +473,8 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public void setEmailAddress(String emailAddress) {
-		if (((emailAddress == null) && (_emailAddress != null)) ||
-				((emailAddress != null) && (_emailAddress == null)) ||
-				((emailAddress != null) && (_emailAddress != null) &&
-				!emailAddress.equals(_emailAddress))) {
+		if ((emailAddress != _emailAddress) ||
+				((emailAddress != null) && !emailAddress.equals(_emailAddress))) {
 			_emailAddress = emailAddress;
 
 			if (_originalEmailAddress == null) {
@@ -512,10 +492,8 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public void setOpenId(String openId) {
-		if (((openId == null) && (_openId != null)) ||
-				((openId != null) && (_openId == null)) ||
-				((openId != null) && (_openId != null) &&
-				!openId.equals(_openId))) {
+		if ((openId != _openId) ||
+				((openId != null) && !openId.equals(_openId))) {
 			_openId = openId;
 
 			if (_originalOpenId == null) {
@@ -553,10 +531,8 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public void setLanguageId(String languageId) {
-		if (((languageId == null) && (_languageId != null)) ||
-				((languageId != null) && (_languageId == null)) ||
-				((languageId != null) && (_languageId != null) &&
-				!languageId.equals(_languageId))) {
+		if ((languageId != _languageId) ||
+				((languageId != null) && !languageId.equals(_languageId))) {
 			_languageId = languageId;
 		}
 	}
@@ -566,10 +542,8 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public void setTimeZoneId(String timeZoneId) {
-		if (((timeZoneId == null) && (_timeZoneId != null)) ||
-				((timeZoneId != null) && (_timeZoneId == null)) ||
-				((timeZoneId != null) && (_timeZoneId != null) &&
-				!timeZoneId.equals(_timeZoneId))) {
+		if ((timeZoneId != _timeZoneId) ||
+				((timeZoneId != null) && !timeZoneId.equals(_timeZoneId))) {
 			_timeZoneId = timeZoneId;
 		}
 	}
@@ -579,10 +553,8 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public void setGreeting(String greeting) {
-		if (((greeting == null) && (_greeting != null)) ||
-				((greeting != null) && (_greeting == null)) ||
-				((greeting != null) && (_greeting != null) &&
-				!greeting.equals(_greeting))) {
+		if ((greeting != _greeting) ||
+				((greeting != null) && !greeting.equals(_greeting))) {
 			_greeting = greeting;
 		}
 	}
@@ -592,10 +564,8 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public void setComments(String comments) {
-		if (((comments == null) && (_comments != null)) ||
-				((comments != null) && (_comments == null)) ||
-				((comments != null) && (_comments != null) &&
-				!comments.equals(_comments))) {
+		if ((comments != _comments) ||
+				((comments != null) && !comments.equals(_comments))) {
 			_comments = comments;
 		}
 	}
@@ -605,10 +575,8 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public void setLoginDate(Date loginDate) {
-		if (((loginDate == null) && (_loginDate != null)) ||
-				((loginDate != null) && (_loginDate == null)) ||
-				((loginDate != null) && (_loginDate != null) &&
-				!loginDate.equals(_loginDate))) {
+		if ((loginDate != _loginDate) ||
+				((loginDate != null) && !loginDate.equals(_loginDate))) {
 			_loginDate = loginDate;
 		}
 	}
@@ -618,10 +586,8 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public void setLoginIP(String loginIP) {
-		if (((loginIP == null) && (_loginIP != null)) ||
-				((loginIP != null) && (_loginIP == null)) ||
-				((loginIP != null) && (_loginIP != null) &&
-				!loginIP.equals(_loginIP))) {
+		if ((loginIP != _loginIP) ||
+				((loginIP != null) && !loginIP.equals(_loginIP))) {
 			_loginIP = loginIP;
 		}
 	}
@@ -631,9 +597,8 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public void setLastLoginDate(Date lastLoginDate) {
-		if (((lastLoginDate == null) && (_lastLoginDate != null)) ||
-				((lastLoginDate != null) && (_lastLoginDate == null)) ||
-				((lastLoginDate != null) && (_lastLoginDate != null) &&
+		if ((lastLoginDate != _lastLoginDate) ||
+				((lastLoginDate != null) &&
 				!lastLoginDate.equals(_lastLoginDate))) {
 			_lastLoginDate = lastLoginDate;
 		}
@@ -644,10 +609,8 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public void setLastLoginIP(String lastLoginIP) {
-		if (((lastLoginIP == null) && (_lastLoginIP != null)) ||
-				((lastLoginIP != null) && (_lastLoginIP == null)) ||
-				((lastLoginIP != null) && (_lastLoginIP != null) &&
-				!lastLoginIP.equals(_lastLoginIP))) {
+		if ((lastLoginIP != _lastLoginIP) ||
+				((lastLoginIP != null) && !lastLoginIP.equals(_lastLoginIP))) {
 			_lastLoginIP = lastLoginIP;
 		}
 	}
@@ -657,11 +620,8 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public void setLastFailedLoginDate(Date lastFailedLoginDate) {
-		if (((lastFailedLoginDate == null) && (_lastFailedLoginDate != null)) ||
+		if ((lastFailedLoginDate != _lastFailedLoginDate) ||
 				((lastFailedLoginDate != null) &&
-				(_lastFailedLoginDate == null)) ||
-				((lastFailedLoginDate != null) &&
-				(_lastFailedLoginDate != null) &&
 				!lastFailedLoginDate.equals(_lastFailedLoginDate))) {
 			_lastFailedLoginDate = lastFailedLoginDate;
 		}
@@ -696,10 +656,8 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public void setLockoutDate(Date lockoutDate) {
-		if (((lockoutDate == null) && (_lockoutDate != null)) ||
-				((lockoutDate != null) && (_lockoutDate == null)) ||
-				((lockoutDate != null) && (_lockoutDate != null) &&
-				!lockoutDate.equals(_lockoutDate))) {
+		if ((lockoutDate != _lockoutDate) ||
+				((lockoutDate != null) && !lockoutDate.equals(_lockoutDate))) {
 			_lockoutDate = lockoutDate;
 		}
 	}

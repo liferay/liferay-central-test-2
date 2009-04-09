@@ -295,9 +295,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 	}
 
 	public void setName(String name) {
-		if (((name == null) && (_name != null)) ||
-				((name != null) && (_name == null)) ||
-				((name != null) && (_name != null) && !name.equals(_name))) {
+		if ((name != _name) || ((name != null) && !name.equals(_name))) {
 			_name = name;
 
 			if (_originalName == null) {
@@ -315,10 +313,8 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 	}
 
 	public void setDescription(String description) {
-		if (((description == null) && (_description != null)) ||
-				((description != null) && (_description == null)) ||
-				((description != null) && (_description != null) &&
-				!description.equals(_description))) {
+		if ((description != _description) ||
+				((description != null) && !description.equals(_description))) {
 			_description = description;
 		}
 	}
@@ -338,10 +334,8 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 	}
 
 	public void setTypeSettings(String typeSettings) {
-		if (((typeSettings == null) && (_typeSettings != null)) ||
-				((typeSettings != null) && (_typeSettings == null)) ||
-				((typeSettings != null) && (_typeSettings != null) &&
-				!typeSettings.equals(_typeSettings))) {
+		if ((typeSettings != _typeSettings) ||
+				((typeSettings != null) && !typeSettings.equals(_typeSettings))) {
 			_typeSettings = typeSettings;
 		}
 	}
@@ -351,10 +345,8 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 	}
 
 	public void setFriendlyURL(String friendlyURL) {
-		if (((friendlyURL == null) && (_friendlyURL != null)) ||
-				((friendlyURL != null) && (_friendlyURL == null)) ||
-				((friendlyURL != null) && (_friendlyURL != null) &&
-				!friendlyURL.equals(_friendlyURL))) {
+		if ((friendlyURL != _friendlyURL) ||
+				((friendlyURL != null) && !friendlyURL.equals(_friendlyURL))) {
 			_friendlyURL = friendlyURL;
 
 			if (_originalFriendlyURL == null) {
