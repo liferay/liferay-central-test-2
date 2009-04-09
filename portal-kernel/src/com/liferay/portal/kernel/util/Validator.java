@@ -413,38 +413,38 @@ public class Validator {
 			return true;
 		}
 
-        int counter = 0;
-        for (int i = 0; i < s.length(); i++) {
-            char ch = s.charAt(i);
-            if (ch == ' ') {
-                continue;
-            }
-            else if (counter > 3) {
-                return false;
-            }
+		int counter = 0;
 
-            switch (counter) {
-                case 0:
-                    if (ch != 'n') {
-                        return false;
-                    }
-                    break;
-                case 1:
-                    if (ch != 'u') {
-                        return false;
-                    }
-                    break;
-                case 2:
-                case 3:
-                    if (ch != 'l') {
-                        return false;
-                    }
-                    break;
-            }
-            counter++;
-        }
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
 
-        return true;
+			if (c == CharPool.SPACE) {
+				continue;
+			}
+			else if (counter > 3) {
+				return false;
+			}
+
+			if (counter == 0) {
+				if (c != CharPool.LOWER_CASE_N) {
+					return false;
+				}
+			}
+			else if (counter == 1) {
+				if (c != CharPool.LOWER_CASE_U) {
+					return false;
+				}
+			}
+			else if ((counter == 2) || (counter == 3)) {
+				if (c != CharPool.LOWER_CASE_L) {
+					return false;
+				}
+			}
+
+			counter++;
+		}
+
+		return true;
 	}
 
 	public static boolean isNull(Object[] array) {
