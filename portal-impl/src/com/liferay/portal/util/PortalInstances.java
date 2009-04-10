@@ -256,8 +256,7 @@ public class PortalInstances {
 		}
 
 		try {
-			List<Company> companies = 
-					CompanyLocalServiceUtil.getCompanies(false);
+			List<Company> companies = CompanyLocalServiceUtil.getCompanies();
 
 			List<String> webIdsList = new ArrayList<String>(companies.size());
 
