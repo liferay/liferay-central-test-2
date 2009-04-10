@@ -204,61 +204,11 @@ public class CompanyServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.CompanySoap updateCompany(
-		long companyId, java.lang.String virtualHost, java.lang.String mx,
-		java.lang.String homeURL, java.lang.String name,
-		java.lang.String legalName, java.lang.String legalId,
-		java.lang.String legalType, java.lang.String sicCode,
-		java.lang.String tickerSymbol, java.lang.String industry,
-		java.lang.String type, java.lang.String size,
-		java.lang.String languageId, java.lang.String timeZoneId,
-		com.liferay.portal.model.AddressSoap[] addresses,
-		com.liferay.portal.model.EmailAddressSoap[] emailAddresses,
-		com.liferay.portal.model.PhoneSoap[] phones,
-		com.liferay.portal.model.WebsiteSoap[] websites,
-		com.liferay.portal.kernel.util.UnicodeProperties properties)
-		throws RemoteException {
-		try {
-			com.liferay.portal.model.Company returnValue = CompanyServiceUtil.updateCompany(companyId,
-					virtualHost, mx, homeURL, name, legalName, legalId,
-					legalType, sicCode, tickerSymbol, industry, type, size,
-					languageId, timeZoneId,
-					com.liferay.portal.model.impl.AddressModelImpl.toModels(
-						addresses),
-					com.liferay.portal.model.impl.EmailAddressModelImpl.toModels(
-						emailAddresses),
-					com.liferay.portal.model.impl.PhoneModelImpl.toModels(
-						phones),
-					com.liferay.portal.model.impl.WebsiteModelImpl.toModels(
-						websites), properties);
-
-			return com.liferay.portal.model.CompanySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static void updateDisplay(long companyId,
 		java.lang.String languageId, java.lang.String timeZoneId)
 		throws RemoteException {
 		try {
 			CompanyServiceUtil.updateDisplay(companyId, languageId, timeZoneId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void updatePreferences(long companyId,
-		com.liferay.portal.kernel.util.UnicodeProperties properties)
-		throws RemoteException {
-		try {
-			CompanyServiceUtil.updatePreferences(companyId, properties);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

@@ -16,6 +16,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="webId" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="virtualHost" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="mx" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="shardName" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getCompanyByLogoId" qname="operNS:getCompanyByLogoId" returnQName="getCompanyByLogoIdReturn" returnType="rtns:CompanySoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="logoId" type="tns:long"></parameter>
