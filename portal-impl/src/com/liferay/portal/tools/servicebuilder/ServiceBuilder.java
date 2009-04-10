@@ -1559,6 +1559,8 @@ public class ServiceBuilder {
 					_getDimensions(javaParameter.getType());
 
 			if (parameterTypeName.equals(
+					"com.liferay.portal.kernel.util.UnicodeProperties") ||
+				parameterTypeName.equals(
 					"com.liferay.portal.theme.ThemeDisplay") ||
 				parameterTypeName.equals(
 					"com.liferay.portlet.PortletPreferencesImpl") ||
