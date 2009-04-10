@@ -25,7 +25,6 @@ package com.liferay.portal.lar;
 import com.liferay.portal.LARFileException;
 import com.liferay.portal.LARTypeException;
 import com.liferay.portal.LayoutImportException;
-import com.liferay.portal.NoSuchPortletPreferencesException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.PortletIdException;
 import com.liferay.portal.SystemException;
@@ -260,13 +259,11 @@ public class PortletImporter {
 		long ownerId = PortletKeys.PREFS_OWNER_ID_DEFAULT;
 		int ownerType = PortletKeys.PREFS_OWNER_TYPE_LAYOUT;
 
-		PortletPreferences portletPreferences = null;
-
-		try {
-			portletPreferences = PortletPreferencesUtil.findByO_O_P_P(
+		PortletPreferences portletPreferences =
+			PortletPreferencesUtil.fetchByO_O_P_P(
 				ownerId, ownerType, plid, portletId);
-		}
-		catch (NoSuchPortletPreferencesException nsppe) {
+
+		if (portletPreferences == null) {
 			portletPreferences =
 				new com.liferay.portal.model.impl.PortletPreferencesImpl();
 		}
@@ -357,13 +354,11 @@ public class PortletImporter {
 		long ownerId = PortletKeys.PREFS_OWNER_ID_DEFAULT;
 		int ownerType = PortletKeys.PREFS_OWNER_TYPE_LAYOUT;
 
-		PortletPreferences portletPreferences = null;
-
-		try {
-			portletPreferences = PortletPreferencesUtil.findByO_O_P_P(
+		PortletPreferences portletPreferences =
+			PortletPreferencesUtil.fetchByO_O_P_P(
 				ownerId, ownerType, plid, portletId);
-		}
-		catch (NoSuchPortletPreferencesException nsppe) {
+
+		if (portletPreferences == null) {
 			portletPreferences =
 				new com.liferay.portal.model.impl.PortletPreferencesImpl();
 		}
