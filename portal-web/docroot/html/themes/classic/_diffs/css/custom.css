@@ -104,7 +104,7 @@ body {
 	text-decoration: none;
 }
 
-#navigation li.selected a, #navigation li a:hover {
+#navigation li.selected a, #navigation li a:hover, #navigation .child-menu li a {
 	background-color: #1E2529;
 	color: #fff;
 }
@@ -112,6 +112,45 @@ body {
 #navigation li.selected a span {
 	background: url(../images/navigation/bullet_selected.png) no-repeat 0 50%;
 	padding-left: 10px;
+}
+
+#navigation li:hover .child-menu {
+	background: #1E2529;
+	display: block;
+	position: absolute;
+	width: 200px;
+	z-index: 300;
+}
+
+.ie6 #navigation li.hover .child-menu {
+	background: #1E2529;
+	display: block;
+	position: absolute;
+	width: 200px;
+	z-index: 300;
+}
+
+#navigation .child-menu li {
+	border-width: 0 0 1px;
+	display: block;
+	float: none;
+	margin: 0;
+}
+
+#navigation .child-menu li a {
+	cursor: pointer !important;
+}
+
+.ie7 #navigation .child-menu li a {
+	zoom: 1;
+}
+
+#navigation .child-menu li a:hover {
+	background-color: #020509;
+}
+
+#navigation .child-menu .selected a {
+	background: #020509 url(../images/navigation/bullet_selected.png) no-repeat 5px 50%;
 }
 
 /* ---------- Add/remove page ---------- */
@@ -233,40 +272,4 @@ body.lfr-has-sidebar {
 .lfr-has-sidebar #content-wrapper {
 	padding-left: 270px;
 	width: auto;
-}
-
-#navigation li:hover .child-menu {
-	background: #1E2529;
-	display: block;
-	position: absolute;
-	width: 200px;
-}
-
-.ie6 #navigation li.hover .child-menu {
-	background: #1E2529;
-	display: block;
-	position: absolute;
-	width: 200px;
-}
-
-#navigation .child-menu li {
-	border-width: 0 0 1px;
-	display: block;
-	float: none;
-}
-
-#navigation .child-menu li a {
-	cursor: pointer !important;
-}
-
-.ie7 #navigation .child-menu li a {
-	zoom: 1;
-}
-
-#navigation .child-menu li a:hover {
-	background-color: #020509;
-}
-
-#navigation .child-menu .selected a {
-	background: #020509 url(../images/navigation/bullet_selected.png) no-repeat 5px 50%;
 }

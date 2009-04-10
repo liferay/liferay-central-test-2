@@ -182,7 +182,7 @@ Liferay.Navigation = new Expanse.Class(
 			var instance = this;
 
 			if (instance._isModifiable && instance._hasPermission) {
-				var navItems = instance._navBlock.find('li').not('.selected');
+				var navItems = instance._navBlock.find('> ul > li').not('.selected');
 
 				instance._deleteButton(navItems);
 			}
