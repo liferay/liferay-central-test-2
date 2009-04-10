@@ -209,13 +209,10 @@ public class PortalInstances {
 		}
 
 		try {
-			List<Company> companies = CompanyLocalServiceUtil.getCompanies();
+			Company company =
+					CompanyLocalServiceUtil.getCompanyByVirtualHost(host);
 
-			for (Company company : companies) {
-				if (company.getVirtualHost().equals(host)) {
-					return company.getCompanyId();
-				}
-			}
+			return company.getCompanyId();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -259,7 +256,8 @@ public class PortalInstances {
 		}
 
 		try {
-			List<Company> companies = CompanyLocalServiceUtil.getCompanies();
+			List<Company> companies = 
+					CompanyLocalServiceUtil.getCompanies(false);
 
 			List<String> webIdsList = new ArrayList<String>(companies.size());
 
