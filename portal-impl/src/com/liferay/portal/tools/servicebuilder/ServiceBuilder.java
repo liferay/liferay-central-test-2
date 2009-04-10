@@ -2296,24 +2296,20 @@ public class ServiceBuilder {
 
 			String beanId = beanEl.attributeValue("id");
 
-			if (beanId.endsWith("ServiceFactory") &&
-				!beanId.endsWith("LocalServiceFactory")) {
+			if (beanId.endsWith("ServiceUtil") &&
+				!beanId.endsWith("LocalServiceUtil")) {
 
 				String entityName = beanId;
 
 				entityName = StringUtil.replace(entityName, ".service.", ".");
 
-				int pos = entityName.indexOf("LocalServiceFactory");
-
-				if (pos == -1) {
-					pos = entityName.indexOf("ServiceFactory");
-				}
+				int pos = entityName.indexOf("ServiceUtil");
 
 				entityName = entityName.substring(0, pos);
 
 				Entity entity = getEntity(entityName);
 
-				String serviceName = beanId.substring(0, beanId.length() - 7);
+				String serviceName = beanId.substring(0, beanId.length() - 4);
 
 				String serviceMapping = serviceName;
 
@@ -2523,49 +2519,24 @@ public class ServiceBuilder {
 	private void _createServiceFactory(Entity entity, int sessionType)
 		throws Exception {
 
-		if (Validator.isNotNull(_pluginName)) {
-			FileUtil.delete(
-				_serviceOutputPath + "/service/" + entity.getName() +
-					_getSessionTypeName(sessionType) + "ServiceFactory.java");
-
-			FileUtil.delete(
-				_outputPath + "/service/" + entity.getName() +
-					_getSessionTypeName(sessionType) + "ServiceFactory.java");
-
-			return;
-		}
-
-		Map<String, Object> context = _getContext();
-
-		context.put("entity", entity);
-		context.put("sessionTypeName", _getSessionTypeName(sessionType));
-
-		// Content
-
-		String content = _processTemplate(_tplServiceFactory, context);
-
-		// Write file
-
 		File ejbFile = new File(
 			_serviceOutputPath + "/service/" + entity.getName() +
 				_getSessionTypeName(sessionType) + "ServiceFactory.java");
 
-		Map<String, Object> jalopySettings = new HashMap<String, Object>();
+		if (ejbFile.exists()) {
+			System.out.println("Removing deprecated " + ejbFile);
 
-		jalopySettings.put("keepJavadoc", Boolean.TRUE);
+			ejbFile.delete();
+		}
 
-		writeFile(ejbFile, content, _author, jalopySettings);
+		ejbFile = new File(
+			_outputPath + "/service/" + entity.getName() +
+				_getSessionTypeName(sessionType) + "ServiceFactory.java");
 
-		if (!_serviceOutputPath.equals(_outputPath)) {
-			ejbFile = new File(
-				_outputPath + "/service/" + entity.getName() +
-					_getSessionTypeName(sessionType) + "ServiceFactory.java");
+		if (ejbFile.exists()) {
+			System.out.println("Removing deprecated " + ejbFile);
 
-			if (ejbFile.exists()) {
-				System.out.println("Relocating " + ejbFile);
-
-				ejbFile.delete();
-			}
+			ejbFile.delete();
 		}
 	}
 
