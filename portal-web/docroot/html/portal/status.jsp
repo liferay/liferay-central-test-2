@@ -70,7 +70,7 @@ if (Validator.isNotNull(exception)) {
 
 		<br /><br />
 
-		<code><%= url %></code>
+		<code><%= HtmlUtil.escape(url) %></code>
 	</c:when>
 	<c:when test="<%= SessionErrors.contains(request, PortalException.class.getName()) || SessionErrors.contains(request, SystemException.class.getName()) %>">
 		<h3 class="portlet-msg-error">
@@ -81,7 +81,7 @@ if (Validator.isNotNull(exception)) {
 
 		<br /><br />
 
-		<code><%= url %></code>
+		<code><%= HtmlUtil.escape(url) %></code>
 	</c:when>
 	<c:when test="<%= SessionErrors.contains(request, TransformException.class.getName()) %>">
 		<h3 class="portlet-msg-error">
@@ -92,7 +92,7 @@ if (Validator.isNotNull(exception)) {
 
 		<br /><br />
 
-		<code><%= url %></code>
+		<code><%= HtmlUtil.escape(url) %></code>
 
 		<br /><br />
 
@@ -113,7 +113,7 @@ if (Validator.isNotNull(exception)) {
 
 		<br /><br />
 
-		<code><%= url %></code>
+		<code><%= HtmlUtil.escape(url) %></code>
 	</c:when>
 	<c:otherwise>
 		<h3 class="portlet-msg-error">
@@ -124,7 +124,7 @@ if (Validator.isNotNull(exception)) {
 
 		<br /><br />
 
-		<code><%= url %></code>
+		<code><%= HtmlUtil.escape(url) %></code>
 
 		<%
 		for (String key : SessionErrors.keySet(request)) {
