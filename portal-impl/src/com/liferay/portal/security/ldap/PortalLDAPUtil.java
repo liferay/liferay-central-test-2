@@ -196,55 +196,47 @@ public class PortalLDAPUtil {
 				user.getCompanyId(), user.getScreenName());
 			String name = StringPool.BLANK;
 
-			if (binding == null) {
+			// Modify existing LDAP user record
 
-				// User is not exported until contact is created
+			name = getNameInNamespace(companyId, binding);
 
+			Modifications mods = Modifications.getInstance();
+
+			mods.addItem(
+				userMappings.getProperty("firstName"), user.getFirstName());
+			mods.addItem(
+				userMappings.getProperty("lastName"), user.getLastName());
+
+			String fullNameMapping = userMappings.getProperty("fullName");
+
+			if (Validator.isNotNull(fullNameMapping)) {
+				mods.addItem(fullNameMapping, user.getFullName());
 			}
-			else {
 
-				// Modify existing LDAP user record
-
-				name = getNameInNamespace(companyId, binding);
-
-				Modifications mods = Modifications.getInstance();
+			if (user.isPasswordModified() &&
+				Validator.isNotNull(user.getPasswordUnencrypted())) {
 
 				mods.addItem(
-					userMappings.getProperty("firstName"), user.getFirstName());
-				mods.addItem(
-					userMappings.getProperty("lastName"), user.getLastName());
-
-				String fullNameMapping = userMappings.getProperty("fullName");
-
-				if (Validator.isNotNull(fullNameMapping)) {
-					mods.addItem(fullNameMapping, user.getFullName());
-				}
-
-				if (user.isPasswordModified() &&
-					Validator.isNotNull(user.getPasswordUnencrypted())) {
-
-					mods.addItem(
-						userMappings.getProperty("password"),
-						user.getPasswordUnencrypted());
-				}
-
-				if (Validator.isNotNull(user.getEmailAddress())) {
-					mods.addItem(
-						userMappings.getProperty("emailAddress"),
-						user.getEmailAddress());
-				}
-
-				String jobTitleMapping = userMappings.getProperty("jobTitle");
-
-				if (Validator.isNotNull(jobTitleMapping)) {
-					mods.addItem(
-						jobTitleMapping, user.getContact().getJobTitle());
-				}
-
-				ModificationItem[] modItems = mods.getItems();
-
-				ctx.modifyAttributes(name, modItems);
+					userMappings.getProperty("password"),
+					user.getPasswordUnencrypted());
 			}
+
+			if (Validator.isNotNull(user.getEmailAddress())) {
+				mods.addItem(
+					userMappings.getProperty("emailAddress"),
+					user.getEmailAddress());
+			}
+
+			String jobTitleMapping = userMappings.getProperty("jobTitle");
+
+			if (Validator.isNotNull(jobTitleMapping)) {
+				mods.addItem(
+					jobTitleMapping, user.getContact().getJobTitle());
+			}
+
+			ModificationItem[] modItems = mods.getItems();
+
+			ctx.modifyAttributes(name, modItems);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

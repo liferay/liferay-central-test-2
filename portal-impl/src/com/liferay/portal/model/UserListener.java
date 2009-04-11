@@ -35,15 +35,6 @@ import com.liferay.portal.security.ldap.PortalLDAPUtil;
  */
 public class UserListener extends BaseModelListener<User> {
 
-	public void onAfterCreate(User user) throws ModelListenerException {
-		try {
-			PortalLDAPUtil.exportToLDAP(user);
-		}
-		catch (Exception e) {
-			throw new ModelListenerException(e);
-		}
-	}
-
 	public void onAfterUpdate(User user) throws ModelListenerException {
 		try {
 			PortalLDAPUtil.exportToLDAP(user);
