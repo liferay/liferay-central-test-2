@@ -113,17 +113,18 @@ if (themeDisplay.isThemeImagesFastLoad()) {
 		details += " style=\"background-image: url('" + spriteFileName + "'); background-position: 50% -" + spriteImage.getOffset() + "px; background-repeat: no-repeat; height: " + spriteImage.getHeight() + "px; width: " + spriteImage.getWidth() + "px;\"";
 	}
 }
+boolean urlIsNotNull = Validator.isNotNull(url);
 %>
 
 <c:choose>
 	<c:when test="<%= (iconListIconCount != null) && ((iconListSingleIcon == null) || iconListShowWhenSingleIcon) %>">
-		<li <%= cssClassHtml %>><c:if test="<%= Validator.isNotNull(url) %>"><a href="<%= url %>" <%= onClickHtml %> <%= targetHtml %>></c:if><img class="icon" src="<%= src %>" <%= details %> /><c:if test="<%= Validator.isNotNull(url) %>"></a></c:if> <c:if test="<%= Validator.isNotNull(url) %>"><a href="<%= url %>" <%= onClickHtml %> <%= targetHtml %>></c:if><liferay-ui:message key="<%= message %>" /><c:if test="<%= Validator.isNotNull(url) %>"></a></c:if></li>
+		<li <%= cssClassHtml %>><c:if test="<%= urlIsNotNull %>"><a href="<%= url %>" <%= onClickHtml %> <%= targetHtml %>></c:if><img class="icon" src="<%= src %>" <%= details %> /><c:if test="<%= urlIsNotNull %>"></a></c:if> <c:if test="<%= urlIsNotNull %>"><a href="<%= url %>" <%= onClickHtml %> <%= targetHtml %>></c:if><liferay-ui:message key="<%= message %>" /><c:if test="<%= urlIsNotNull %>"></a></c:if></li>
 	</c:when>
 	<c:when test="<%= (iconMenuIconCount != null) && ((iconMenuSingleIcon == null) || iconMenuShowWhenSingleIcon) %>">
-		<li <%= cssClassHtml %>><c:if test="<%= Validator.isNotNull(url) %>"><a href="<%= url %>" <%= onClickHtml %> <%= targetHtml %>></c:if><img class="icon" src="<%= src %>" <%= details %> /> <liferay-ui:message key="<%= message %>" /><c:if test="<%= Validator.isNotNull(url) %>"></a></c:if></li>
+		<li <%= cssClassHtml %>><c:if test="<%= urlIsNotNull %>"><a href="<%= url %>" <%= onClickHtml %> <%= targetHtml %>></c:if><img class="icon" src="<%= src %>" <%= details %> /> <liferay-ui:message key="<%= message %>" /><c:if test="<%= urlIsNotNull %>"></a></c:if></li>
 	</c:when>
 	<c:otherwise>
-		<span <%= cssClassHtml %> <%= idHtml %>><c:if test="<%= Validator.isNotNull(url) %>"><a href="<%= url %>" <%= onClickHtml %> <%= targetHtml %>></c:if><img class="icon" src="<%= src %>" <%= details %> /><c:if test="<%= Validator.isNotNull(url) %>"></a></c:if><c:if test="<%= label %>"> <c:if test="<%= Validator.isNotNull(url) %>"><a href="<%= url %>" <%= onClickHtml %> <%= targetHtml %>></c:if><liferay-ui:message key="<%= message %>" /><c:if test="<%= Validator.isNotNull(url) %>"></a></c:if></c:if></span>
+		<span <%= cssClassHtml %> <%= idHtml %>><c:if test="<%= urlIsNotNull %>"><a href="<%= url %>" <%= onClickHtml %> <%= targetHtml %>></c:if><img class="icon" src="<%= src %>" <%= details %> /><c:if test="<%= urlIsNotNull %>"></a></c:if><c:if test="<%= label %>"> <c:if test="<%= urlIsNotNull %>"><a href="<%= url %>" <%= onClickHtml %> <%= targetHtml %>></c:if><liferay-ui:message key="<%= message %>" /><c:if test="<%= urlIsNotNull %>"></a></c:if></c:if></span>
 	</c:otherwise>
 </c:choose>
 

@@ -164,6 +164,7 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 		if ((i == values.length - 1) && Validator.isNull(backURL)) {
 			cssClassName += " last";
 		}
+		boolean isCurURLNotNull = Validator.isNotNull(curURL);
 	%>
 
 		<c:choose>
@@ -178,7 +179,7 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 			<c:otherwise>
 				<li class="<%= cssClassName %>" id="<%= namespace %><%= param %><%= values[i] %>TabsId">
 					<c:choose>
-						<c:when test="<%= Validator.isNotNull(curURL) %>">
+						<c:when test="<%= isCurURLNotNull %>">
 							<a href="<%= curURL %>"
 								<c:if test="<%= Validator.isNotNull(curOnClick) %>">
 									onClick="<%= curOnClick %>"
@@ -193,7 +194,7 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 					<%= LanguageUtil.get(pageContext, names[i]) %>
 
 					<c:choose>
-						<c:when test="<%= Validator.isNotNull(curURL) %>">
+						<c:when test="<%= isCurURLNotNull %>">
 							</a>
 						</c:when>
 						<c:otherwise>

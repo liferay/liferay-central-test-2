@@ -92,6 +92,7 @@ public class IconTag extends IncludeTag {
 				_target = null;
 				_label = false;
 				_toolTip = false;
+				_cssClass = null;
 			}
 		}
 	}
