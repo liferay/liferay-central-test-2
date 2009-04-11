@@ -27,6 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.tasks.NoSuchProposalException;
 import com.liferay.portlet.tasks.ProposalDueDateException;
@@ -122,6 +123,12 @@ public class TasksProposalLocalServiceImpl
 
 		tasksReviewLocalService.addReview(
 			reviewUserId, proposal.getProposalId(), assignedByUserId, stage);
+
+		// Discussions
+
+		mbMessageLocalService.addDiscussionMessage(
+				userId, TasksProposal.class, proposalId, proposal.getName(),
+				new ServiceContext());
 
 		// Social
 
@@ -219,7 +226,7 @@ public class TasksProposalLocalServiceImpl
 		socialActivityLocalService.deleteActivities(
 			TasksProposal.class.getName(), proposal.getProposalId());
 
-		// Message boards
+		// Discussion
 
 		mbMessageLocalService.deleteDiscussionMessages(
 			TasksProposal.class.getName(), proposal.getProposalId());

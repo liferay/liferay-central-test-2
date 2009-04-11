@@ -1,5 +1,4 @@
-<%
-/**
+/*
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,27 +19,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/taglib/init.jsp" %>
+package com.liferay.portal.kernel.dao.jdbc;
 
-<%
-String randomNamespace = (String)request.getAttribute("liferay-ui:search-toggle:randomNamespace");
+import com.liferay.portal.SystemException;
 
-String id = (String)request.getAttribute("liferay-ui:search-toggle:id");
-DisplayTerms displayTerms = (DisplayTerms)request.getAttribute("liferay-ui:search-toggle:displayTerms");
-String buttonLabel = (String)request.getAttribute("liferay-ui:search-toggle:buttonLabel");
-boolean isButtonLabelNotNull = Validator.isNotNull(buttonLabel);
-String clickValue = GetterUtil.getString(SessionClicks.get(request, id, null), "basic");
+import java.util.Properties;
 
-if (clickValue.equals("basic")) {
-	if (displayTerms.isAdvancedSearch()) {
-		displayTerms.setAdvancedSearch(false);
-	}
+import javax.sql.DataSource;
+
+/**
+ * <a href="DataSourceFactory.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael C. Han
+ */
+public interface DataSourceFactory {
+	DataSource createDataSource(Properties connectionProps)
+		throws SystemException;
 }
-else {
-	if (!displayTerms.isAdvancedSearch()) {
-		displayTerms.setAdvancedSearch(true);
-	}
-}
-%>

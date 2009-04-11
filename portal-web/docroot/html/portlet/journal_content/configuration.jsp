@@ -201,6 +201,8 @@ type = ParamUtil.getString(request, "type", type);
 			<liferay-ui:input-checkbox param="enableRatings" defaultValue="<%= enableRatings %>" onClick='<%= renderResponse.getNamespace() + "save();" %>' />
 		</td>
 	</tr>
+<c:if test="<%= PropsValues.JOURNAL_ARTICLE_COMMENTS_ENABLED %>">
+
 	<tr>
 		<td>
 			<liferay-ui:message key="enable-comments" />
@@ -217,6 +219,7 @@ type = ParamUtil.getString(request, "type", type);
 			<liferay-ui:input-checkbox param="enableCommentRatings" defaultValue="<%= enableCommentRatings %>" onClick='<%= renderResponse.getNamespace() + "save();" %>' />
 		</td>
 	</tr>
+</c:if>
 	</table>
 </c:if>
 

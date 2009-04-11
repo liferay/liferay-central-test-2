@@ -68,6 +68,11 @@ public class JNDIUtil {
 		return obj;
 	}
 
+	public static void bind(Context context, String location, Object obj)
+	throws NamingException {
+		context.bind(location, obj);
+	}
+
 	private static Object _lookup(Context ctx, String location)
 		throws NamingException {
 

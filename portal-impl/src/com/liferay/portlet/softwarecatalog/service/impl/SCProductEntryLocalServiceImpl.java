@@ -47,6 +47,7 @@ import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.plugin.ModuleId;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.softwarecatalog.DuplicateProductEntryModuleIdException;
 import com.liferay.portlet.softwarecatalog.ProductEntryAuthorException;
 import com.liferay.portlet.softwarecatalog.ProductEntryLicenseException;
@@ -151,6 +152,14 @@ public class SCProductEntryLocalServiceImpl
 		// Product screenshots
 
 		saveProductScreenshots(productEntry, thumbnails, fullImages);
+
+		// Discussions
+
+		if (PropsValues.SC_PRODUCT_COMMENTS_ENABLED) {
+			mbMessageLocalService.addDiscussionMessage(
+					productEntry.getUserId(), SCProductEntry.class,
+					productEntryId, name, serviceContext);
+		}
 
 		// Indexer
 
@@ -265,7 +274,7 @@ public class SCProductEntryLocalServiceImpl
 		ratingsStatsLocalService.deleteStats(
 			SCProductEntry.class.getName(), productEntry.getProductEntryId());
 
-		// Message boards
+		// Discussions
 
 		mbMessageLocalService.deleteDiscussionMessages(
 			SCProductEntry.class.getName(), productEntry.getProductEntryId());

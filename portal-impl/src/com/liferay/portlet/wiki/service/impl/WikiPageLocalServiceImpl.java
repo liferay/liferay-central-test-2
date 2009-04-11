@@ -195,6 +195,14 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			userId, page, serviceContext.getTagsCategories(),
 			serviceContext.getTagsEntries());
 
+		// Discussions
+
+		if (PropsValues.WIKI_PAGE_COMMENTS_ENABLED) {
+			mbMessageLocalService.addDiscussionMessage(
+					userId, WikiPage.class,
+					resourcePrimKey, title, serviceContext);
+		}
+
 		// Indexer
 
 		try {

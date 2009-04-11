@@ -31,15 +31,27 @@ package com.liferay.portal.kernel.bi.reporting;
 public enum ReportFormat {
 
 	EXCEL("excel"), HTML("html"), PDF("pdf");
+	private static final Map<String, ReportFormat> _FORMATS =
+		new HashMap<String, ReportFormat>();
+	static {
+		_FORMATS.put(EXCEL.toString(), EXCEL);
+		_FORMATS.put(PDF.toString(), PDF);
+		_FORMATS.put(HTML.toString(), HTML);
+
+	}
 
 	public static ReportFormat parse(String value) {
-		if (EXCEL.toString().equals(value)) {
+		ReportFormat format = _FORMATS.get(value);
+		if (format != null) {
+			return format;
+		}
+		if (EXCEL.toString().equalsIgnoreCase(value)) {
 			return EXCEL;
 		}
-		else if (HTML.toString().equals(value)) {
+		else if (HTML.toString().equalsIgnoreCase(value)) {
 			return HTML;
 		}
-		else if (PDF.toString().equals(value)) {
+		else if (PDF.toString().equalsIgnoreCase(value)) {
 			return PDF;
 		}
 		else {

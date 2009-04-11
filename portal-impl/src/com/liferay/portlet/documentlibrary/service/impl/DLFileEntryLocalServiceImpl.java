@@ -238,6 +238,14 @@ public class DLFileEntryLocalServiceImpl
 			userId, folder.getGroupId(), DLFileEntry.class.getName(),
 			fileEntryId, DLActivityKeys.ADD_FILE_ENTRY, StringPool.BLANK, 0);
 
+		// Discussions
+
+		if (PropsValues.DL_FILE_COMMENTS_ENABLED) {
+			mbMessageLocalService.addDiscussionMessage(
+					userId, DLFileEntry.class, fileEntryId, title,
+					serviceContext);
+		}
+
 		// Tags
 
 		updateTagsAsset(
@@ -438,7 +446,7 @@ public class DLFileEntryLocalServiceImpl
 		ratingsStatsLocalService.deleteStats(
 			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
-		// Message boards
+		// Discussion
 
 		mbMessageLocalService.deleteDiscussionMessages(
 			DLFileEntry.class.getName(), fileEntry.getFileEntryId());

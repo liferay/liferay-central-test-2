@@ -30,6 +30,7 @@ SearchContainer searchContainer = (SearchContainer)request.getAttribute("liferay
 boolean paginate = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:search-iterator:paginate"));
 
 String id = searchContainer.getId();
+boolean isIdNotNull = Validator.isNotNull(id);
 int start = searchContainer.getStart();
 int end = searchContainer.getEnd();
 int total = searchContainer.getTotal();
@@ -70,7 +71,7 @@ List<String> primaryKeys = new ArrayList<String>();
 	</c:if>
 
 	<div class="results-grid"
-		<c:if test="<%= Validator.isNotNull(id) %>">
+		<c:if test="<%= isIdNotNull %>">
 			id="<%= id %>SearchContainer"
 		</c:if>
 	>
@@ -274,7 +275,7 @@ List<String> primaryKeys = new ArrayList<String>();
 	</c:if>
 </c:if>
 
-<c:if test="<%= Validator.isNotNull(id) %>">
+<c:if test="<%= isIdNotNull %>">
 	<input id="<%= id %>PrimaryKeys" name="<%= id %>PrimaryKeys" type="hidden" value="<%= StringUtil.merge(primaryKeys) %>" />
 
 	<script type="text/javascript">

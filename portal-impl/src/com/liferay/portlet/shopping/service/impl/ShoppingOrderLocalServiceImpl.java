@@ -31,8 +31,10 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.shopping.BillingCityException;
 import com.liferay.portlet.shopping.BillingCountryException;
 import com.liferay.portlet.shopping.BillingEmailAddressException;
@@ -170,6 +172,15 @@ public class ShoppingOrderLocalServiceImpl
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
 		}
+
+		// Discussions
+
+		if (PropsValues.SHOPPING_ORDER_COMMENTS_ENABLED) {
+			mbMessageLocalService.addDiscussionMessage(
+					order.getUserId(), ShoppingOrder.class, order.getOrderId(),
+					order.getNumber(), new ServiceContext());
+		}
+
 	}
 
 	public void deleteOrder(long orderId)
@@ -188,7 +199,7 @@ public class ShoppingOrderLocalServiceImpl
 
 		shoppingOrderItemPersistence.removeByOrderId(order.getOrderId());
 
-		// Message boards
+		// Discussion
 
 		mbMessageLocalService.deleteDiscussionMessages(
 			ShoppingOrder.class.getName(), order.getOrderId());

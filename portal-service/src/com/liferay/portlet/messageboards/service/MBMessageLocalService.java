@@ -100,6 +100,13 @@ public interface MBMessageLocalService {
 		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
+		long userId, java.lang.Class modelClazz, long classPK,
+		java.lang.String subject,
+		com.liferay.portal.service.ServiceContext context)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
 		long userId, java.lang.String userName, java.lang.String subject,
 		java.lang.String body)
 		throws com.liferay.portal.PortalException,

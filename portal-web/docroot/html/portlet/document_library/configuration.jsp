@@ -253,6 +253,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <br />
 
+<c:if test="<%= PropsValues.DL_FILE_COMMENTS_ENABLED %>">
 <liferay-ui:tabs names="ratings" />
 
 <table class="lfr-table">
@@ -265,6 +266,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 	</td>
 </tr>
 </table>
+</c:if>
 
 <br />
 
