@@ -150,17 +150,24 @@ public class PropsValues {
 	public static final String[] AUTO_LOGIN_HOOKS =
 		PropsUtil.getArray(PropsKeys.AUTO_LOGIN_HOOKS);
 
+	public static final boolean BLOGS_ENTRY_COMMENTS_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.BLOGS_ENTRY_COMMENTS_ENABLED));
+
 	public static final int BLOGS_PAGE_ABSTRACT_LENGTH = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.BLOGS_PAGE_ABSTRACT_LENGTH));
 
-	public static final boolean BLOGS_PING_GOOGLE_ENABLED =
+	public static final boolean BLOGS_TRACKBACK_ENABLED =
 		GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.BLOGS_PING_GOOGLE_ENABLED));
+			PropsUtil.get(PropsKeys.BLOGS_TRACKBACK_ENABLED));
 
 	public static final int BLOGS_TRACKBACK_EXCERPT_LENGTH =
 		GetterUtil.getInteger(PropsUtil.get(PropsKeys.
 			BLOGS_TRACKBACK_EXCERPT_LENGTH));
 
+	public static final boolean BLOGS_TRACKBACK_GOOGLE_BLOGSEARCH_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.BLOGS_TRACKBACK_GOOGLE_BLOGSEARCH_ENABLED));
 	public static final int BLOGS_TRACKBACK_VERIFIER_JOB_INTERVAL =
 		GetterUtil.getInteger(PropsUtil.get(PropsKeys.
 			BLOGS_TRACKBACK_VERIFIER_JOB_INTERVAL));
@@ -437,6 +444,10 @@ public class PropsValues {
 	public static final String[] DL_COMPARABLE_FILE_EXTENSIONS =
 		PropsUtil.getArray(PropsKeys.DL_COMPARABLE_FILE_EXTENSIONS);
 
+	public static final boolean DL_FILE_COMMENTS_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.DL_FILE_COMMENTS_ENABLED));
+
 	public static final String[] DL_FILE_EXTENSIONS =
 		PropsUtil.getArray(PropsKeys.DL_FILE_EXTENSIONS);
 
@@ -551,6 +562,10 @@ public class PropsValues {
 	public static final String JBI_WORKFLOW_URL =
 		PropsUtil.get(PropsKeys.JBI_WORKFLOW_URL);
 
+	public static final boolean JOURNAL_ARTICLE_COMMENTS_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.JOURNAL_ARTICLE_COMMENTS_ENABLED));
+
 	public static final boolean JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID));
@@ -594,6 +609,10 @@ public class PropsValues {
 
 	public static final String LAYOUT_CLONE_IMPL = PropsUtil.get(
 		PropsKeys.LAYOUT_CLONE_IMPL);
+
+	public static final boolean LAYOUT_COMMENTS_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.LAYOUT_COMMENTS_ENABLED));
 
 	public static final boolean LAYOUT_DEFAULT_P_L_RESET =
 		GetterUtil.getBoolean(
@@ -1112,6 +1131,10 @@ public class PropsValues {
 	public static final boolean SCHEDULER_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.SCHEDULER_ENABLED));
 
+	public static final boolean SC_PRODUCT_COMMENTS_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.SC_PRODUCT_COMMENTS_ENABLED));
+
 	public static final int[] SEARCH_CONTAINER_PAGE_DELTA_VALUES =
 		GetterUtil.getIntegerValues(
 			PropsUtil.getArray(PropsKeys.SEARCH_CONTAINER_PAGE_DELTA_VALUES));
@@ -1182,6 +1205,10 @@ public class PropsValues {
 	public static final boolean SESSION_TRACKER_PERSISTENCE_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.SESSION_TRACKER_PERSISTENCE_ENABLED));
+
+	public static final boolean SHOPPING_ORDER_COMMENTS_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.SHOPPING_ORDER_COMMENTS_ENABLED));
 
 	public static final String[] SHARD_AVAILABLE_NAMES =
 		PropsUtil.getArray(PropsKeys.SHARD_AVAILABLE_NAMES);
@@ -1393,6 +1420,10 @@ public class PropsValues {
 
 	public static final String WIKI_PAGE_TITLES_REMOVE_REGEXP = PropsUtil.get(
 		PropsKeys.WIKI_PAGE_TITLES_REMOVE_REGEXP);
+
+	public static final boolean WIKI_PAGE_COMMENTS_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.WIKI_PAGE_COMMENTS_ENABLED));
 
 	static {
 		if (!LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED) {

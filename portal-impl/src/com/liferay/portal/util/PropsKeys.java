@@ -156,13 +156,17 @@ public interface PropsKeys {
 
 	public static final String BLOGS_EMAIL_COMMENTS_ADDED_SUBJECT = "blogs.email.comments.added.subject";
 
-	public static final String BLOGS_PAGE_ABSTRACT_LENGTH = "blogs.page.abstract.length";
+	public static final String BLOGS_ENTRY_COMMENTS_ENABLED = "blogs.entry.comments.enabled";
 
-	public static final String BLOGS_PING_GOOGLE_ENABLED = "blogs.ping.google.enabled";
+	public static final String BLOGS_PAGE_ABSTRACT_LENGTH = "blogs.page.abstract.length";
 
 	public static final String BLOGS_RSS_ABSTRACT_LENGTH = "blogs.rss.abstract.length";
 
+	public static final String BLOGS_TRACKBACK_ENABLED = "blogs.trackback.enabled";
+
 	public static final String BLOGS_TRACKBACK_EXCERPT_LENGTH = "blogs.trackback.excerpt.length";
+
+	public static final String BLOGS_TRACKBACK_GOOGLE_BLOGSEARCH_ENABLED = "blogs.trackback.google.blogsearch.enabled";
 
 	public static final String BLOGS_TRACKBACK_VERIFIER_JOB_INTERVAL = "blogs.trackback.verifier.job.interval";
 
@@ -360,6 +364,8 @@ public interface PropsKeys {
 
 	public static final String DL_COMPARABLE_FILE_EXTENSIONS = "dl.comparable.file.extensions";
 
+	public static final String DL_FILE_COMMENTS_ENABLED = "dl.file.comments.enabled";
+
 	public static final String DL_FILE_EXTENSIONS = "dl.file.extensions";
 
 	public static final String DL_FILE_MAX_SIZE = "dl.file.max.size";
@@ -500,6 +506,8 @@ public interface PropsKeys {
 
 	public static final String JOURNAL_ARTICLE_CHECK_INTERVAL = "journal.article.check.interval";
 
+	public static final String JOURNAL_ARTICLE_COMMENTS_ENABLED= "journal.article.comments.enabled";
+
 	public static final String JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID = "journal.article.force.autogenerate.id";
 
 	public static final String JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION = "journal.article.force.increment.version";
@@ -565,6 +573,8 @@ public interface PropsKeys {
 	public static final String JOURNAL_TRANSFORMER_LISTENER = "journal.transformer.listener";
 
 	public static final String LAYOUT_CLONE_IMPL = "layout.clone.impl";
+
+	public static final String LAYOUT_COMMENTS_ENABLED = "layout.comments.enabled";
 
 	public static final String LAYOUT_CONFIGURATION_ACTION_DELETE = "layout.configuration.action.delete";
 
@@ -1030,6 +1040,8 @@ public interface PropsKeys {
 
 	public static final String SC_IMAGE_THUMBNAIL_MAX_WIDTH = "sc.image.thumbnail.max.width";
 
+	public static final String SC_PRODUCT_COMMENTS_ENABLED = "sc.product.comments.enabled";
+
 	public static final String SCHEDULER_CLASSES = "scheduler.classes";
 
 	public static final String SCHEDULER_ENABLED = "scheduler.enabled";
@@ -1123,6 +1135,8 @@ public interface PropsKeys {
 	public static final String SHOPPING_IMAGE_SMALL_MAX_SIZE = "shopping.image.small.max.size";
 
 	public static final String SHOPPING_ITEM_SHOW_AVAILABILITY = "shopping.item.show.availability";
+
+	public static final String SHOPPING_ORDER_COMMENTS_ENABLED = "shopping.order.comments.enabled";
 
 	public static final String SHUTDOWN_PROGRAMMATICALLY_EXIT = "shutdown.programmatically.exit";
 
@@ -1355,6 +1369,8 @@ public interface PropsKeys {
 	public static final String WIKI_IMPORTERS_PAGE = "wiki.importers.page";
 
 	public static final String WIKI_INITIAL_NODE_NAME = "wiki.initial.node.name";
+
+	public static final String WIKI_PAGE_COMMENTS_ENABLED = "wiki.page.comments.enabled";
 
 	public static final String WIKI_PAGE_TITLES_REGEXP = "wiki.page.titles.regexp";
 

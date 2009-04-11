@@ -87,6 +87,7 @@
 			<liferay-ui:input-checkbox param="enableRatings" defaultValue="<%= enableRatings %>" />
 		</td>
 	</tr>
+<c:if test="<%= PropsValues.BLOGS_ENTRY_COMMENTS_ENABLED %>">
 	<tr>
 		<td class="lfr-label">
 			<liferay-ui:message key="enable-comments" />
@@ -103,6 +104,7 @@
 			<liferay-ui:input-checkbox param="enableCommentRatings" defaultValue="<%= enableCommentRatings %>" />
 		</td>
 	</tr>
+</c:if>
 	</table>
 </fieldset>
 
