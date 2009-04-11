@@ -59,7 +59,7 @@
 
 <div id="<%= id %>basic" style="display: <%= clickValue.equals("basic") ? "block" : "none" %>;">
 	<c:choose>
-		<c:when test="<%= isButtonLabelNotNull %>">
+		<c:when test="<%= Validator.isNotNull(buttonLabel) %>">
 			<input id="<%= id %><%= displayTerms.KEYWORDS %>" name="<%= namespace %><%= displayTerms.KEYWORDS %>" size="30" type="text" value="<%= HtmlUtil.escape(displayTerms.getKeywords()) %>" />
 
 			<input type="submit" value="<liferay-ui:message key="<%= buttonLabel %>" />" /><br />

@@ -106,6 +106,10 @@ public class DataSourceFactoryBean extends AbstractFactoryBean {
 			sortedProperties.list(System.out);
 		}
 
+		if (Validator.isNotNull(jndiName)) {
+			JNDIUtil.bind(new InitialContext(), jndiName, dataSource);
+		}
+
 		return dataSource;
 	}
 

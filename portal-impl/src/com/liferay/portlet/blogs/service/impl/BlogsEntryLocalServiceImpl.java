@@ -174,13 +174,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				BlogsActivityKeys.ADD_ENTRY, StringPool.BLANK, 0);
 		}
 
-		// Discussions
-
-		if (PropsValues.BLOGS_ENTRY_COMMENTS_ENABLED) {
-			mbMessageLocalService.addDiscussionMessage(
-					userId, BlogsEntry.class, entryId, title, serviceContext);
-		}
-
 		// Tags
 
 		updateTagsAsset(userId, entry, serviceContext.getTagsEntries());
@@ -203,12 +196,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		// Ping
 
 		if (!draft) {
-			if (PropsValues.BLOGS_TRACKBACK_GOOGLE_BLOGSEARCH_ENABLED) {
-				pingGoogle(entry, serviceContext);
-			}
-			if (PropsValues.BLOGS_TRACKBACK_ENABLED) {
-				pingTrackbacks(entry, trackbacks, false, serviceContext);
-			}
+			pingGoogle(entry, serviceContext);
+			pingTrackbacks(entry, trackbacks, false, serviceContext);
 		}
 
 		return entry;
@@ -736,20 +725,17 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		}
 
 		// Ping
+
 		if (!draft) {
-			if (PropsValues.BLOGS_TRACKBACK_GOOGLE_BLOGSEARCH_ENABLED) {
-				pingGoogle(entry, serviceContext);
+			pingGoogle(entry, serviceContext);
+
+			String urlTitle = entry.getUrlTitle();
+
+			if (!oldDraft && !oldUrlTitle.equals(urlTitle)) {
+				pingTrackbacks(entry, trackbacks, true, serviceContext);
 			}
-
-			if (PropsValues.BLOGS_TRACKBACK_ENABLED) {
-				String urlTitle = entry.getUrlTitle();
-
-				if (!oldDraft && !oldUrlTitle.equals(urlTitle)) {
-					pingTrackbacks(entry, trackbacks, true, serviceContext);
-				}
-				else {
-					pingTrackbacks(entry, trackbacks, false, serviceContext);
-				}
+			else {
+				pingTrackbacks(entry, trackbacks, false, serviceContext);
 			}
 		}
 
@@ -807,7 +793,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		String portalURL = serviceContext.getPortalURL();
 		String layoutURL = serviceContext.getLayoutURL();
 
-		if (Validator.isNull(portalURL) || Validator.isNull(layoutURL) ||
+		if (!PropsValues.BLOGS_PING_GOOGLE_ENABLED ||
+			Validator.isNull(portalURL) || Validator.isNull(layoutURL) ||
 			(portalURL.indexOf("://localhost") != -1) ||
 			(portalURL.indexOf("://127.0.0.1") != -1)) {
 

@@ -238,40 +238,38 @@ if (articleDisplay != null) {
 				</div>
 			</c:if>
 
-			<c:if test="<%= (articleDisplay != null) %>">
-				<c:if test="<%= enableRatings %>">
-					<div class="taglib-ratings-wrapper">
-						<liferay-ui:ratings
-							className="<%= JournalArticle.class.getName() %>"
-							classPK="<%= articleDisplay.getResourcePrimKey() %>"
-						/>
-					</div>
-				</c:if>
-
-				<c:if test="<%= enableComments %>">
-
-					<%
-					int discussionMessagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(PortalUtil.getClassNameId(JournalArticle.class.getName()), articleDisplay.getResourcePrimKey());
-					%>
-
-					<c:if test="<%= discussionMessagesCount > 0 %>">
-						<liferay-ui:tabs names="comments" />
-					</c:if>
-
-					<portlet:actionURL var="discussionURL">
-						<portlet:param name="struts_action" value="/journal_content/edit_article_discussion" />
-					</portlet:actionURL>
-
-					<liferay-ui:discussion
-						formAction="<%= discussionURL %>"
+			<c:if test="<%= enableRatings %>">
+				<div class="taglib-ratings-wrapper">
+					<liferay-ui:ratings
 						className="<%= JournalArticle.class.getName() %>"
 						classPK="<%= articleDisplay.getResourcePrimKey() %>"
-						userId="<%= articleDisplay.getUserId() %>"
-						subject="<%= articleDisplay.getTitle() %>"
-						redirect="<%= currentURL %>"
-						ratingsEnabled="<%= enableCommentRatings %>"
 					/>
+				</div>
+			</c:if>
+
+			<c:if test="<%= enableComments %>">
+
+				<%
+				int discussionMessagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(PortalUtil.getClassNameId(JournalArticle.class.getName()), articleDisplay.getResourcePrimKey());
+				%>
+
+				<c:if test="<%= discussionMessagesCount > 0 %>">
+					<liferay-ui:tabs names="comments" />
 				</c:if>
+
+				<portlet:actionURL var="discussionURL">
+					<portlet:param name="struts_action" value="/journal_content/edit_article_discussion" />
+				</portlet:actionURL>
+
+				<liferay-ui:discussion
+					formAction="<%= discussionURL %>"
+					className="<%= JournalArticle.class.getName() %>"
+					classPK="<%= articleDisplay.getResourcePrimKey() %>"
+					userId="<%= articleDisplay.getUserId() %>"
+					subject="<%= articleDisplay.getTitle() %>"
+					redirect="<%= currentURL %>"
+					ratingsEnabled="<%= enableCommentRatings %>"
+				/>
 			</c:if>
 		</c:if>
 	</c:otherwise>

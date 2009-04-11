@@ -22,6 +22,9 @@
 
 package com.liferay.portal.kernel.bi.reporting;
 
+import java.util.Map;
+import java.util.HashMap;
+
 /**
  * <a href="ReportFormat.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,27 +34,15 @@ package com.liferay.portal.kernel.bi.reporting;
 public enum ReportFormat {
 
 	EXCEL("excel"), HTML("html"), PDF("pdf");
-	private static final Map<String, ReportFormat> _FORMATS =
-		new HashMap<String, ReportFormat>();
-	static {
-		_FORMATS.put(EXCEL.toString(), EXCEL);
-		_FORMATS.put(PDF.toString(), PDF);
-		_FORMATS.put(HTML.toString(), HTML);
-
-	}
 
 	public static ReportFormat parse(String value) {
-		ReportFormat format = _FORMATS.get(value);
-		if (format != null) {
-			return format;
-		}
-		if (EXCEL.toString().equalsIgnoreCase(value)) {
+		if (EXCEL.toString().equals(value)) {
 			return EXCEL;
 		}
-		else if (HTML.toString().equalsIgnoreCase(value)) {
+		else if (HTML.toString().equals(value)) {
 			return HTML;
 		}
-		else if (PDF.toString().equalsIgnoreCase(value)) {
+		else if (PDF.toString().equals(value)) {
 			return PDF;
 		}
 		else {

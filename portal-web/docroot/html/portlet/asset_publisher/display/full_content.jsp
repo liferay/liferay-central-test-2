@@ -101,7 +101,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 					/>
 				</c:if>
 
-				<c:if test="<%= enableBlogComments %>">
+				<c:if test="<%= enableComments %>">
 					<br />
 
 					<portlet:actionURL var="discussionURL">
@@ -209,7 +209,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 					/>
 				</c:if>
 
-				<c:if test="<%= enableDLComments %>">
+				<c:if test="<%= enableComments %>">
 					<br />
 
 					<portlet:actionURL var="discussionURL">
@@ -372,7 +372,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 						/>
 					</c:if>
 
-					<c:if test="<%= enableWebContentComments %>">
+					<c:if test="<%= enableComments %>">
 						<br />
 
 						<portlet:actionURL var="discussionURL">
@@ -505,7 +505,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 				</div>
 
-				<c:if test="<%= enableWikiComments %>">
+				<c:if test="<%= enableComments %>">
 					<br />
 
 					<portlet:actionURL var="discussionURL">

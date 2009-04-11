@@ -62,10 +62,9 @@
 				}
 				catch (Exception e) {
 				}
-				boolean isFriendlyURLNotNull = Validator.isNotNull(friendlyURL);
 				%>
 
-				<c:if test="<%= isFriendlyURLNotNull %>">
+				<c:if test="<%= Validator.isNotNull(friendlyURL) %>">
 					<li class="page-settings">
 						<a href="<%= friendlyURL %>"><liferay-ui:message key="view-live-page" /></a>
 					</li>
@@ -171,7 +170,7 @@
 				}
 				%>
 
-				<c:if test="<%= isFriendlyURLNotNull %>">
+				<c:if test="<%= Validator.isNotNull(friendlyURL) %>">
 					<li class="page-settings">
 						<a href="<%= friendlyURL %>"><liferay-ui:message key="view-staged-page" /></a>
 					</li>

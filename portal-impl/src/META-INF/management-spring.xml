@@ -8,8 +8,4 @@
 	<bean id="mbeanServer" class="org.springframework.jmx.support.MBeanServerFactoryBean">
 		 <property name="locateExistingServerIfPossible" value="true" />
 	</bean>
-
-    <bean id="com.liferay.portal.log.jmx.Log4jManagementAdapter" class="com.liferay.portal.log.jmx.Log4jManagementAdapter" init-method="init">
-		 <constructor-arg index="0" ref="mbeanServer"/>
-	</bean>
 </beans>

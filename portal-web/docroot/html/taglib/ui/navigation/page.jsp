@@ -154,9 +154,8 @@ private void _buildNavigation(Layout rootLayout, Layout selLayout, List selBranc
 				}
 
 				sb.append("<li ");
-				boolean isClassNameNotNull = Validator.isNotNull(className);
 
-				if (isClassNameNotNull) {
+				if (Validator.isNotNull(className)) {
 					sb.append("class=\"");
 					sb.append(className);
 					sb.append("\" ");
@@ -165,7 +164,7 @@ private void _buildNavigation(Layout rootLayout, Layout selLayout, List selBranc
 				sb.append(">");
 				sb.append("<a ");
 
-				if (isClassNameNotNull) {
+				if (Validator.isNotNull(className)) {
 					sb.append("class=\"");
 					sb.append(className);
 					sb.append("\" ");
