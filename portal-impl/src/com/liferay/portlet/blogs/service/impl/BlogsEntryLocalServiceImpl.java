@@ -202,13 +202,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Ping
 
-		if (!draft) {
+		if (!draft && PropsValues.BLOGS_TRACKBACK_ENABLED && allowTrackbacks) {
 			if (PropsValues.BLOGS_TRACKBACK_GOOGLE_BLOGSEARCH_ENABLED) {
 				pingGoogle(entry, serviceContext);
 			}
-			if (PropsValues.BLOGS_TRACKBACK_ENABLED) {
-				pingTrackbacks(entry, trackbacks, false, serviceContext);
-			}
+			pingTrackbacks(entry, trackbacks, false, serviceContext);
 		}
 
 		return entry;
@@ -736,12 +734,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		}
 
 		// Ping
-		if (!draft) {
+		if (!draft && PropsValues.BLOGS_TRACKBACK_ENABLED && allowTrackbacks) {
 			if (PropsValues.BLOGS_TRACKBACK_GOOGLE_BLOGSEARCH_ENABLED) {
 				pingGoogle(entry, serviceContext);
 			}
 
-			if (PropsValues.BLOGS_TRACKBACK_ENABLED) {
 				String urlTitle = entry.getUrlTitle();
 
 				if (!oldDraft && !oldUrlTitle.equals(urlTitle)) {
@@ -749,7 +746,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				}
 				else {
 					pingTrackbacks(entry, trackbacks, false, serviceContext);
-				}
 			}
 		}
 
@@ -784,21 +780,19 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		String urlTitle = getUrlTitle(entryId, title);
 
-		String newUrlTitle = new String(urlTitle);
-
 		for (int i = 1;; i++) {
 			BlogsEntry entry = blogsEntryPersistence.fetchByG_UT(
-				groupId, newUrlTitle);
+				groupId, urlTitle);
 
 			if ((entry == null) || (entry.getEntryId() == entryId)) {
 				break;
 			}
 			else {
-				newUrlTitle = urlTitle + StringPool.DASH + i;
+				urlTitle = urlTitle + StringPool.DASH + i;
 			}
 		}
 
-		return newUrlTitle;
+		return urlTitle;
 	}
 
 	protected void pingGoogle(BlogsEntry entry, ServiceContext serviceContext)

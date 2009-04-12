@@ -62,7 +62,7 @@ TagsUtil.addLayoutTagsEntries(request, TagsEntryLocalServiceUtil.getEntries(Blog
 
 	<liferay-ui:tabs names="comments" />
 
-	<c:if test="<%= entry.isAllowTrackbacks() %>">
+	<c:if test="<%= entry.isAllowTrackbacks() && PropsValues.BLOGS_TRACKBACK_ENABLED %>">
 		<liferay-ui:message key="trackback-url" />:
 
 		<liferay-ui:input-resource
