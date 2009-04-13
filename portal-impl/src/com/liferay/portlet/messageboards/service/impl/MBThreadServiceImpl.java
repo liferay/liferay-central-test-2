@@ -49,7 +49,7 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 		List<MBMessage> messages = mbMessagePersistence.findByThreadId(
 			threadId);
 
-		for(MBMessage message : messages) {
+		for (MBMessage message : messages) {
 			MBMessagePermission.check(
 				getPermissionChecker(), message.getMessageId(),
 				ActionKeys.DELETE);

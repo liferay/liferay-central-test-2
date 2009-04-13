@@ -45,21 +45,13 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portlet.messageboards.MessageBodyException;
-import com.liferay.portlet.messageboards.MessageSubjectException;
-import com.liferay.portlet.messageboards.NoSuchMessageException;
-import com.liferay.portlet.messageboards.NoSuchThreadException;
-import com.liferay.portlet.messageboards.RequiredMessageException;
 import com.liferay.portlet.messageboards.service.MBThreadServiceUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
 
 import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
@@ -77,50 +69,19 @@ public class DeleteThreadAction extends PortletAction {
 
 		try {
 			deleteThread(actionRequest, actionResponse);
+
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
-			if (e instanceof PrincipalException ||
-				e instanceof RequiredMessageException) {
-
+			if (e instanceof PrincipalException) {
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
 				setForward(actionRequest, "portlet.message_boards.error");
 			}
-			else if (e instanceof MessageBodyException ||
-					 e instanceof MessageSubjectException ||
-					 e instanceof NoSuchThreadException) {
-
-				SessionErrors.add(actionRequest, e.getClass().getName());
-			}
 			else {
 				throw e;
 			}
 		}
-	}
-
-	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
-		throws Exception {
-
-		try {
-			ActionUtil.getCategory(renderRequest);
-		}
-		catch (Exception e) {
-			if (e instanceof NoSuchMessageException ||
-				e instanceof PrincipalException) {
-
-				SessionErrors.add(renderRequest, e.getClass().getName());
-
-				return mapping.findForward("portlet.message_boards.error");
-			}
-			else {
-				throw e;
-			}
-		}
-
-		return mapping.findForward(
-			getForward(renderRequest, "portlet.message_boards.delete_thread"));
 	}
 
 	protected void deleteThread(

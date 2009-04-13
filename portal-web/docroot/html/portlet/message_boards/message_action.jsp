@@ -33,7 +33,6 @@ MBMessage message = (MBMessage)objArray[0];
 Set<Long> threadSubscriptionClassPKs = (Set<Long>)objArray[1];
 
 MBCategory category = message.getCategory();
-long categoryId = BeanParamUtil.getLong(category, request, "categoryId");
 %>
 
 <liferay-ui:icon-menu>
@@ -100,7 +99,6 @@ long categoryId = BeanParamUtil.getLong(category, request, "categoryId");
 			<portlet:param name="struts_action" value="/message_boards/delete_thread" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="categoryId" value="<%= String.valueOf(category.getCategoryId()) %>" />
 			<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
 		</portlet:actionURL>
 
