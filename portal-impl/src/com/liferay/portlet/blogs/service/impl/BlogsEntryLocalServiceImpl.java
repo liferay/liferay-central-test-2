@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
-import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -484,42 +483,17 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public String getUrlTitle(long entryId, String title) {
-		String urlTitle = String.valueOf(entryId);
-
 		title = title.trim().toLowerCase();
 
 		if (Validator.isNull(title) || Validator.isNumber(title) ||
 			title.equals("rss")) {
 
-			return urlTitle;
+			return String.valueOf(entryId);
 		}
-
-		title = FriendlyURLNormalizer.normalize(
-			title, _URL_TITLE_REPLACE_CHARS);
-
-		char[] urlTitleCharArray = title.toCharArray();
-
-		for (int i = 0; i < urlTitleCharArray.length; i++) {
-			char oldChar = urlTitleCharArray[i];
-
-			char newChar = oldChar;
-
-			if ((oldChar == CharPool.DASH) ||
-				(Validator.isChar(oldChar)) || (Validator.isDigit(oldChar))) {
-
-			}
-			else {
-				return urlTitle;
-			}
-
-			if (oldChar != newChar) {
-				urlTitleCharArray[i] = newChar;
-			}
+		else {
+			return FriendlyURLNormalizer.normalize(
+				title, _URL_TITLE_REPLACE_CHARS);
 		}
-
-		urlTitle = new String(urlTitleCharArray);
-
-		return urlTitle;
 	}
 
 	public void reIndex(long entryId) throws SystemException {
