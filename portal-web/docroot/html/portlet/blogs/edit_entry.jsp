@@ -1,4 +1,3 @@
-<%@ page import="com.liferay.portal.util.PropsValues" %>
 <%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
@@ -44,7 +43,7 @@ if (entry != null) {
 	}
 }
 
-boolean allowTrackbacks = (PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.getBoolean(entry, request, "allowTrackbacks", true));
+boolean allowTrackbacks = BeanParamUtil.getBoolean(entry, request, "allowTrackbacks", true);
 %>
 
 <script type="text/javascript">
@@ -245,7 +244,6 @@ boolean allowTrackbacks = (PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.
 		<br />
 	</td>
 </tr>
-<c:if test="<%= PropsValues.BLOGS_TRACKBACK_ENABLED %>">
 <tr>
 	<td class="lfr-label">
 		<liferay-ui:message key="allow-incoming-trackbacks" />
@@ -293,13 +291,12 @@ boolean allowTrackbacks = (PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.
 		</td>
 	</tr>
 </c:if>
+
 <tr>
 	<td colspan="2">
 		<br />
 	</td>
 </tr>
-</c:if>
-
 <tr>
 	<td class="lfr-label">
 		<liferay-ui:message key="tags" />

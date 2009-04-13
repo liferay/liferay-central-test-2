@@ -168,7 +168,6 @@ public class PropsValues {
 	public static final boolean BLOGS_TRACKBACK_GOOGLE_BLOGSEARCH_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.BLOGS_TRACKBACK_GOOGLE_BLOGSEARCH_ENABLED));
-	
 	public static final int BLOGS_TRACKBACK_VERIFIER_JOB_INTERVAL =
 		GetterUtil.getInteger(PropsUtil.get(PropsKeys.
 			BLOGS_TRACKBACK_VERIFIER_JOB_INTERVAL));
