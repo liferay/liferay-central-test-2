@@ -128,7 +128,7 @@ public class DestinationStatisticsManager
 	}
 
 	private static final String _OBJECT_NAME_PREFIX =
-		"Liferay:product=Portal,type=MessagingDestinationStatistics,name=";
+		"com.liferay.portal.kernel.messaging:type=DestinationStatistics,name=";
 
 	private boolean _autoRefresh;
 	private Destination _destination;
