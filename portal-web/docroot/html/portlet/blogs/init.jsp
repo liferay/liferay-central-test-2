@@ -57,7 +57,7 @@ String pageDisplayStyle = preferences.getValue("page-display-style", RSSUtil.DIS
 int pageAbstractLength = PropsValues.BLOGS_PAGE_ABSTRACT_LENGTH;
 boolean enableFlags = GetterUtil.getBoolean(preferences.getValue("enable-flags", null), true);
 boolean enableRatings = GetterUtil.getBoolean(preferences.getValue("enable-ratings", null), true);
-boolean enableComments = GetterUtil.getBoolean(preferences.getValue("enable-comments", null), true);
+boolean enableComments = PropsValues.BLOGS_ENTRY_COMMENTS_ENABLED && GetterUtil.getBoolean(preferences.getValue("enable-comments", null), true);
 boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enable-comment-ratings", null), true);
 
 int rssDelta = GetterUtil.getInteger(preferences.getValue("rss-delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);

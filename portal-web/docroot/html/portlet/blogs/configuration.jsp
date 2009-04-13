@@ -87,22 +87,26 @@
 			<liferay-ui:input-checkbox param="enableRatings" defaultValue="<%= enableRatings %>" />
 		</td>
 	</tr>
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="enable-comments" />
-		</td>
-		<td>
-			<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" />
-		</td>
-	</tr>
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="enable-comment-ratings" />
-		</td>
-		<td>
-			<liferay-ui:input-checkbox param="enableCommentRatings" defaultValue="<%= enableCommentRatings %>" />
-		</td>
-	</tr>
+
+	<c:if test="<%= PropsValues.BLOGS_ENTRY_COMMENTS_ENABLED %>">
+		<tr>
+			<td class="lfr-label">
+				<liferay-ui:message key="enable-comments" />
+			</td>
+			<td>
+				<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" />
+			</td>
+		</tr>
+		<tr>
+			<td class="lfr-label">
+				<liferay-ui:message key="enable-comment-ratings" />
+			</td>
+			<td>
+				<liferay-ui:input-checkbox param="enableCommentRatings" defaultValue="<%= enableCommentRatings %>" />
+			</td>
+		</tr>
+	</c:if>
+
 	</table>
 </fieldset>
 

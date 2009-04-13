@@ -292,7 +292,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 	<%
 	String tabs2Names = "version-history,comments";
 
-	if (!DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.ADD_DISCUSSION)) {
+	if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.ADD_DISCUSSION)) {
 		tabs2Names = "version-history";
 	}
 	%>

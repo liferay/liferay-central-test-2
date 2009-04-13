@@ -165,6 +165,14 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			blogsStatsUserLocalService.updateStatsUser(groupId, userId, now);
 		}
 
+		// Message boards
+
+		if (PropsValues.BLOGS_ENTRY_COMMENTS_ENABLED) {
+			mbMessageLocalService.addDiscussionMessage(
+				userId, entry.getUserName(), BlogsEntry.class.getName(),
+				entryId);
+		}
+
 		// Social
 
 		if (!draft) {

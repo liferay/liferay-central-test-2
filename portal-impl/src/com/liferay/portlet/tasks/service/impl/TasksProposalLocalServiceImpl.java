@@ -123,6 +123,10 @@ public class TasksProposalLocalServiceImpl
 		tasksReviewLocalService.addReview(
 			reviewUserId, proposal.getProposalId(), assignedByUserId, stage);
 
+		mbMessageLocalService.addDiscussionMessage(
+			userId, proposal.getUserName(), TasksProposal.class.getName(),
+			proposalId);
+
 		// Social
 
 		socialActivityLocalService.addActivity(

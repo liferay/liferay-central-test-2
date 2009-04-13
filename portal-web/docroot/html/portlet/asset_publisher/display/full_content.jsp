@@ -101,7 +101,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 					/>
 				</c:if>
 
-				<c:if test="<%= enableComments %>">
+				<c:if test="<%= PropsValues.BLOGS_ENTRY_COMMENTS_ENABLED && enableComments %>">
 					<br />
 
 					<portlet:actionURL var="discussionURL">
@@ -209,7 +209,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 					/>
 				</c:if>
 
-				<c:if test="<%= enableComments %>">
+				<c:if test="<%= PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED && enableComments %>">
 					<br />
 
 					<portlet:actionURL var="discussionURL">
@@ -372,7 +372,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 						/>
 					</c:if>
 
-					<c:if test="<%= enableComments %>">
+					<c:if test="<%= PropsValues.JOURNAL_ARTICLE_COMMENTS_ENABLED && enableComments %>">
 						<br />
 
 						<portlet:actionURL var="discussionURL">
@@ -505,7 +505,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 				</div>
 
-				<c:if test="<%= enableComments %>">
+				<c:if test="<%= PropsValues.WIKI_PAGE_COMMENTS_ENABLED && enableComments %>">
 					<br />
 
 					<portlet:actionURL var="discussionURL">

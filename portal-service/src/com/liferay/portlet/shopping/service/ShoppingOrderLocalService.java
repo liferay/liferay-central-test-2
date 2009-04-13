@@ -100,6 +100,11 @@ public interface ShoppingOrderLocalService {
 		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder,
 		boolean merge) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.shopping.model.ShoppingOrder addLatestOrder(
+		long userId, long groupId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public void completeOrder(java.lang.String number,
 		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
 		double ppPaymentGross, java.lang.String ppReceiverEmail,

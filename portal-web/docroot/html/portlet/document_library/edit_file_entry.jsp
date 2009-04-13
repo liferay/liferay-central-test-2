@@ -607,7 +607,7 @@ portletURL.setParameter("name", name);
 	<%
 	String tabs2Names = "version-history,comments";
 
-	if (!DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.ADD_DISCUSSION)) {
+	if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.ADD_DISCUSSION)) {
 		tabs2Names = "version-history";
 	}
 	%>

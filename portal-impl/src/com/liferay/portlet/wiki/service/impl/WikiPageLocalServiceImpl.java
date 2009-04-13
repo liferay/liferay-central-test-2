@@ -177,6 +177,14 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		wikiNodePersistence.update(node, false);
 
+		// Message boards
+
+		if (PropsValues.WIKI_PAGE_COMMENTS_ENABLED) {
+			mbMessageLocalService.addDiscussionMessage(
+				userId, page.getUserName(), WikiPage.class.getName(),
+				resourcePrimKey);
+		}
+
 		// Social
 
 		socialActivityLocalService.addActivity(

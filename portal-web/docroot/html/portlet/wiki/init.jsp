@@ -78,7 +78,7 @@ if (Validator.isNotNull(portletResource)) {
 	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-boolean enableComments = GetterUtil.getBoolean(preferences.getValue("enable-comments", null), true);
+boolean enableComments = PropsValues.WIKI_PAGE_COMMENTS_ENABLED && GetterUtil.getBoolean(preferences.getValue("enable-comments", null), true);
 boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enable-comment-ratings", null), true);
 
 String allNodes = ListUtil.toString(WikiNodeLocalServiceUtil.getNodes(scopeGroupId), "name");

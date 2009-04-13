@@ -150,6 +150,10 @@ public class PropsValues {
 	public static final String[] AUTO_LOGIN_HOOKS =
 		PropsUtil.getArray(PropsKeys.AUTO_LOGIN_HOOKS);
 
+	public static final boolean BLOGS_ENTRY_COMMENTS_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.BLOGS_ENTRY_COMMENTS_ENABLED));
+
 	public static final int BLOGS_PAGE_ABSTRACT_LENGTH = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.BLOGS_PAGE_ABSTRACT_LENGTH));
 
@@ -440,6 +444,10 @@ public class PropsValues {
 	public static final String[] DL_COMPARABLE_FILE_EXTENSIONS =
 		PropsUtil.getArray(PropsKeys.DL_COMPARABLE_FILE_EXTENSIONS);
 
+	public static final boolean DL_FILE_ENTRY_COMMENTS_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.DL_FILE_ENTRY_COMMENTS_ENABLED));
+
 	public static final String[] DL_FILE_EXTENSIONS =
 		PropsUtil.getArray(PropsKeys.DL_FILE_EXTENSIONS);
 
@@ -554,6 +562,10 @@ public class PropsValues {
 	public static final String JBI_WORKFLOW_URL =
 		PropsUtil.get(PropsKeys.JBI_WORKFLOW_URL);
 
+	public static final boolean JOURNAL_ARTICLE_COMMENTS_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.JOURNAL_ARTICLE_COMMENTS_ENABLED));
+
 	public static final boolean JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID));
@@ -597,6 +609,9 @@ public class PropsValues {
 
 	public static final String LAYOUT_CLONE_IMPL = PropsUtil.get(
 		PropsKeys.LAYOUT_CLONE_IMPL);
+
+	public static final boolean LAYOUT_COMMENTS_ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(PropsKeys.LAYOUT_COMMENTS_ENABLED));
 
 	public static final boolean LAYOUT_DEFAULT_P_L_RESET =
 		GetterUtil.getBoolean(
@@ -1109,6 +1124,10 @@ public class PropsValues {
 	public static final String[] ROLES_REGULAR_SUBTYPES =
 		PropsUtil.getArray(PropsKeys.ROLES_REGULAR_SUBTYPES);
 
+	public static final boolean SC_PRODUCT_COMMENTS_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.SC_PRODUCT_COMMENTS_ENABLED));
+
 	public static final String[] SCHEDULER_CLASSES =
 		PropsUtil.getArray(PropsKeys.SCHEDULER_CLASSES);
 
@@ -1197,6 +1216,10 @@ public class PropsValues {
 
 	public static final String[] SHARED_SESSION_ATTRIBUTES =
 		PropsUtil.getArray(PropsKeys.SESSION_SHARED_ATTRIBUTES);
+
+	public static final boolean SHOPPING_ORDER_COMMENTS_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.SHOPPING_ORDER_COMMENTS_ENABLED));
 
 	public static final boolean SITEMINDER_AUTH_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.SITEMINDER_AUTH_ENABLED));
@@ -1390,6 +1413,10 @@ public class PropsValues {
 
 	public static final String[] WIKI_IMPORTERS =
 		PropsUtil.getArray(PropsKeys.WIKI_IMPORTERS);
+
+	public static final boolean WIKI_PAGE_COMMENTS_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.WIKI_PAGE_COMMENTS_ENABLED));
 
 	public static final String WIKI_PAGE_TITLES_REGEXP = PropsUtil.get(
 		PropsKeys.WIKI_PAGE_TITLES_REGEXP);

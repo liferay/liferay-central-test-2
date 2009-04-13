@@ -206,6 +206,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		layoutSetLocalService.updatePageCount(groupId, privateLayout);
 
+		// Message boards
+
+		if (PropsValues.LAYOUT_COMMENTS_ENABLED) {
+			mbMessageLocalService.addDiscussionMessage(
+				userId, user.getFullName(), Layout.class.getName(), plid);
+		}
+
 		return layout;
 	}
 

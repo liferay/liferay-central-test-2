@@ -396,26 +396,28 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</table>
 	</c:when>
 	<c:when test='<%= tabs2.equals("display-settings") %>'>
-		<table class="lfr-table">
-		<tr>
-			<td class="lfr-label">
-				<liferay-ui:message key="enable-comments" />
-			</td>
-			<td>
-				<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" />
-			</td>
-		</tr>
-		<tr>
-			<td class="lfr-label">
-				<liferay-ui:message key="enable-comment-ratings" />
-			</td>
-			<td>
-				<liferay-ui:input-checkbox param="enableCommentRatings" defaultValue="<%= enableCommentRatings %>" />
-			</td>
-		</tr>
-		</table>
+		<c:if test="<%= PropsValues.WIKI_PAGE_COMMENTS_ENABLED %>">
+			<table class="lfr-table">
+			<tr>
+				<td class="lfr-label">
+					<liferay-ui:message key="enable-comments" />
+				</td>
+				<td>
+					<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" />
+				</td>
+			</tr>
+			<tr>
+				<td class="lfr-label">
+					<liferay-ui:message key="enable-comment-ratings" />
+				</td>
+				<td>
+					<liferay-ui:input-checkbox param="enableCommentRatings" defaultValue="<%= enableCommentRatings %>" />
+				</td>
+			</tr>
+			</table>
 
-		<br />
+			<br />
+		</c:if>
 
 		<table class="lfr-table">
 		<tr>
