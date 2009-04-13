@@ -157,6 +157,9 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.BLOGS_PING_GOOGLE_ENABLED));
 
+	public static final boolean BLOGS_TRACKBACK_ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(PropsKeys.BLOGS_TRACKBACK_ENABLED));
+
 	public static final int BLOGS_TRACKBACK_EXCERPT_LENGTH =
 		GetterUtil.getInteger(PropsUtil.get(PropsKeys.
 			BLOGS_TRACKBACK_EXCERPT_LENGTH));

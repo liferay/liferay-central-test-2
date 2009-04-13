@@ -43,7 +43,7 @@ if (entry != null) {
 	}
 }
 
-boolean allowTrackbacks = BeanParamUtil.getBoolean(entry, request, "allowTrackbacks", true);
+boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.getBoolean(entry, request, "allowTrackbacks", true);
 %>
 
 <script type="text/javascript">
@@ -239,57 +239,60 @@ boolean allowTrackbacks = BeanParamUtil.getBoolean(entry, request, "allowTrackba
 		<input name="<portlet:namespace />content" type="hidden" value="" />
 	</td>
 </tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="allow-incoming-trackbacks" />
-	</td>
-	<td>
-		<liferay-ui:input-checkbox param="allowTrackbacks" defaultValue="<%= allowTrackbacks %>" />
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="trackbacks-to-send" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= BlogsEntry.class %>" bean="<%= entry %>" field="trackbacks" />
-	</td>
-</tr>
 
-<c:if test="<%= (entry != null) && Validator.isNotNull(entry.getTrackbacks()) %>">
+<c:if test="<%= PropsValues.BLOGS_TRACKBACK_ENABLED %>">
 	<tr>
 		<td colspan="2">
 			<br />
 		</td>
 	</tr>
 	<tr>
-		<td>
-			<liferay-ui:message key="trackbacks-already-sent" />
+		<td class="lfr-label">
+			<liferay-ui:message key="allow-incoming-trackbacks" />
 		</td>
 		<td>
-
-			<%
-			for (String trackback : StringUtil.split(entry.getTrackbacks())) {
-			%>
-
-				<%= trackback %><br />
-
-			<%
-			}
-			%>
-
+			<liferay-ui:input-checkbox param="allowTrackbacks" defaultValue="<%= allowTrackbacks %>" />
 		</td>
 	</tr>
+	<tr>
+		<td colspan="2">
+			<br />
+		</td>
+	</tr>
+	<tr>
+		<td class="lfr-label">
+			<liferay-ui:message key="trackbacks-to-send" />
+		</td>
+		<td>
+			<liferay-ui:input-field model="<%= BlogsEntry.class %>" bean="<%= entry %>" field="trackbacks" />
+		</td>
+	</tr>
+
+	<c:if test="<%= (entry != null) && Validator.isNotNull(entry.getTrackbacks()) %>">
+		<tr>
+			<td colspan="2">
+				<br />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="trackbacks-already-sent" />
+			</td>
+			<td>
+
+				<%
+				for (String trackback : StringUtil.split(entry.getTrackbacks())) {
+				%>
+
+					<%= trackback %><br />
+
+				<%
+				}
+				%>
+
+			</td>
+		</tr>
+	</c:if>
 </c:if>
 
 <tr>
