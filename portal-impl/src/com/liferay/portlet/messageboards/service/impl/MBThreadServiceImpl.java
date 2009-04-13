@@ -30,14 +30,33 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.base.MBThreadServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.permission.MBCategoryPermission;
+import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
+
+import java.util.List;
 
 /**
  * <a href="MBThreadServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ * @author Deepak Gothe
  *
  */
 public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
+
+	public void deleteThread(long threadId)
+		throws PortalException, SystemException {
+
+		List<MBMessage> messages = mbMessagePersistence.findByThreadId(
+			threadId);
+
+		for(MBMessage message : messages) {
+			MBMessagePermission.check(
+				getPermissionChecker(), message.getMessageId(),
+				ActionKeys.DELETE);
+		}
+
+		mbThreadLocalService.deleteThread(threadId);
+	}
 
 	public MBThread moveThread(long categoryId, long threadId)
 		throws PortalException, SystemException {

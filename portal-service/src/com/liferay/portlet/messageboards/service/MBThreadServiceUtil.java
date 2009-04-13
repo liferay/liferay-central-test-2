@@ -45,6 +45,12 @@ package com.liferay.portlet.messageboards.service;
  *
  */
 public class MBThreadServiceUtil {
+	public static void deleteThread(long threadId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().deleteThread(threadId);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBThread moveThread(
 		long categoryId, long threadId)
 		throws com.liferay.portal.PortalException,

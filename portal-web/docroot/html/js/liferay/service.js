@@ -634,6 +634,7 @@ Liferay.Service.registerClass(
 Liferay.Service.registerClass(
 	Liferay.Service.MB, "MBThread",
 	{
+		deleteThread: true,
 		moveThread: true,
 		splitThread: true
 	}

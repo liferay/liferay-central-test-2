@@ -81,6 +81,17 @@ import java.rmi.RemoteException;
  *
  */
 public class MBThreadServiceSoap {
+	public static void deleteThread(long threadId) throws RemoteException {
+		try {
+			MBThreadServiceUtil.deleteThread(threadId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBThreadSoap moveThread(
 		long categoryId, long threadId) throws RemoteException {
 		try {
