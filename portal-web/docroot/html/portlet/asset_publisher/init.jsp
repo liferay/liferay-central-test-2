@@ -170,15 +170,7 @@ String paginationType = GetterUtil.getString(preferences.getValue("pagination-ty
 boolean showQueryLogic = GetterUtil.getBoolean(preferences.getValue("show-query-logic", StringPool.BLANK));
 boolean showAvailableLocales = GetterUtil.getBoolean(preferences.getValue("show-available-locales", StringPool.BLANK));
 boolean enableRatings = GetterUtil.getBoolean(preferences.getValue("enable-ratings", null));
-
-//enable contents if and only if comments are enabled for this portlet and enabled on the backend as well.
-boolean enableComments = GetterUtil.getBoolean(preferences.getValue("enable-comments", null), true);
-boolean enableBlogComments = (PropsValues.BLOGS_ENTRY_COMMENTS_ENABLED && enableComments);
-boolean enableDLComments = (PropsValues.DL_FILE_COMMENTS_ENABLED && enableComments);
-boolean enableWebContentComments = (PropsValues.JOURNAL_ARTICLE_COMMENTS_ENABLED && enableComments);
-boolean enableWikiComments = (PropsValues.WIKI_PAGE_COMMENTS_ENABLED && enableComments);
-
-
+boolean enableComments = GetterUtil.getBoolean(preferences.getValue("enable-comments", null));
 boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enable-comment-ratings", null));
 boolean enableTagBasedNavigation = GetterUtil.getBoolean(preferences.getValue("enable-tag-based-navigation", null));
 

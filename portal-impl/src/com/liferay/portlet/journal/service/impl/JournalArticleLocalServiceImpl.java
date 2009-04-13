@@ -67,7 +67,6 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.journal.ArticleContentException;
 import com.liferay.portlet.journal.ArticleDisplayDateException;
@@ -319,13 +318,6 @@ public class JournalArticleLocalServiceImpl
 		updateTagsAsset(
 			userId, article, serviceContext.getTagsCategories(),
 			serviceContext.getTagsEntries());
-
-		// Discussions
-
-		if (PropsValues.JOURNAL_ARTICLE_COMMENTS_ENABLED) {
-			mbMessageLocalService.addDiscussionMessage(
-					userId, JournalArticle.class, id, title, serviceContext);
-		}
 
 		// Email
 

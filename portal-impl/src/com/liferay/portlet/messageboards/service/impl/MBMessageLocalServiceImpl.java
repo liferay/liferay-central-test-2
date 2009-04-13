@@ -110,19 +110,6 @@ import org.apache.commons.lang.time.StopWatch;
 public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 	public MBMessage addDiscussionMessage(
-			long userId, Class modelClazz, long classPK, String subject,
-			ServiceContext context)
-		throws PortalException, SystemException {
-
-		long threadId = 0;
-		long parentMessageId = 0;
-
-		return addDiscussionMessage(
-				userId, null, modelClazz.getName(), classPK,
-				threadId, parentMessageId, subject, subject, context);
-	}
-
-	public MBMessage addDiscussionMessage(
 			long userId, String userName, String subject, String body)
 		throws PortalException, SystemException {
 

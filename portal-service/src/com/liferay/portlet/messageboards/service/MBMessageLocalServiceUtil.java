@@ -110,17 +110,6 @@ public class MBMessageLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
-		long userId, java.lang.Class modelClazz, long classPK,
-		java.lang.String subject,
-		com.liferay.portal.service.ServiceContext context)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addDiscussionMessage(userId, modelClazz, classPK, subject,
-			context);
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
 		long userId, java.lang.String userName, java.lang.String subject,
 		java.lang.String body)
 		throws com.liferay.portal.PortalException,
