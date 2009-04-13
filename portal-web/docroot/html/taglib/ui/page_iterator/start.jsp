@@ -36,7 +36,6 @@ String target = (String)request.getAttribute("liferay-ui:page-iterator:target");
 int total = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:page-iterator:total"));
 String type = (String)request.getAttribute("liferay-ui:page-iterator:type");
 String url = (String)request.getAttribute("liferay-ui:page-iterator:url");
-boolean isUrlNotNull = Validator.isNotNull(url);
 String urlAnchor = (String)request.getAttribute("liferay-ui:page-iterator:urlAnchor");
 int pages = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:page-iterator:pages"));
 
@@ -70,7 +69,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 		function <%= namespace %><%= curParam %>updateCur(box) {
 			var cur = jQuery("option:selected", box).val();
 
-			if (<%= isUrlNotNull %>) {
+			if (<%= Validator.isNotNull(url) %>) {
 				var href = "<%= url %><%= namespace %><%= curParam %>=" + cur + "<%= urlAnchor %>";
 
 				location.href = href;
@@ -85,7 +84,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 		function <%= namespace %><%= deltaParam %>updateDelta(box) {
 			var delta = jQuery("option:selected", box).val();
 
-			if (<%= isUrlNotNull %>) {
+			if (<%= Validator.isNotNull(url) %>) {
 				var href = "<%= deltaURL %>&<%= namespace %><%= deltaParam %>=" + delta + "<%= urlAnchor %>";
 
 				location.href = href;

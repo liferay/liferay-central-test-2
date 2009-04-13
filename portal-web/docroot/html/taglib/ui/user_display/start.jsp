@@ -33,9 +33,7 @@ if (userDisplay != null) {
 	tokenId = ImageServletTokenUtil.getToken(userDisplay.getPortraitId());
 }
 
-boolean isNotNullURL = Validator.isNotNull(url);
-
-if (isNotNullURL && (userDisplay != null)) {
+if (Validator.isNull(url) && (userDisplay != null)) {
 	url = userDisplay.getDisplayURL(themeDisplay);
 }
 
@@ -75,11 +73,11 @@ if ((presences != null) && (presences.size() > 0)) {
 	</c:if>
 
 	<div class="user-profile-image">
-		<c:if test="<%= isNotNullURL %>"><a href="<%= url %>"></c:if>
+		<c:if test="<%= Validator.isNotNull(url) %>"><a href="<%= url %>"></c:if>
 
 		<img alt="<%= (userDisplay != null) ? userDisplay.getFullName() : LanguageUtil.get(pageContext, "generic-portrait") %>" class="avatar" src="<%= themeDisplay.getPathImage() %>/user_<%= (userDisplay != null) && userDisplay.isFemale() ? "female" : "male" %>_portrait?img_id=<%= portraitId %>&t=<%= tokenId %>" width="65" />
 
-		<c:if test="<%= isNotNullURL %>"></a></c:if>
+		<c:if test="<%= Validator.isNotNull(url) %>"></a></c:if>
 	</div>
 
 	<c:if test="<%= displayStyle == 1 %>">
@@ -93,11 +91,11 @@ if ((presences != null) && (presences.size() > 0)) {
 	<div class="user-details <%= online ? "user-online" : "user-offline" %>">
 		<c:choose>
 			<c:when test="<%= userDisplay != null %>">
-				<c:if test="<%= isNotNullURL %>"><a class="user-name" href="<%= url %>"></c:if>
+				<c:if test="<%= Validator.isNotNull(url) %>"><a class="user-name" href="<%= url %>"></c:if>
 
 				<%= userDisplay.getFullName() %>
 
-				<c:if test="<%= isNotNullURL %>"></a></c:if>
+				<c:if test="<%= Validator.isNotNull(url) %>"></a></c:if>
 
 				<c:if test="<%= online %>">
 					<ul class="lfr-component network-list">

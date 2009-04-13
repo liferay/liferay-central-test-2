@@ -30,7 +30,7 @@ String randomNamespace = (String)request.getAttribute("liferay-ui:search-toggle:
 String id = (String)request.getAttribute("liferay-ui:search-toggle:id");
 DisplayTerms displayTerms = (DisplayTerms)request.getAttribute("liferay-ui:search-toggle:displayTerms");
 String buttonLabel = (String)request.getAttribute("liferay-ui:search-toggle:buttonLabel");
-boolean isButtonLabelNotNull = Validator.isNotNull(buttonLabel);
+
 String clickValue = GetterUtil.getString(SessionClicks.get(request, id, null), "basic");
 
 if (clickValue.equals("basic")) {

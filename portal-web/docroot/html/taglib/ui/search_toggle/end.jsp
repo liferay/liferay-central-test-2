@@ -26,7 +26,7 @@
 
 	<br />
 
-	<c:if test="<%= isButtonLabelNotNull %>">
+	<c:if test="<%= Validator.isNotNull(buttonLabel) %>">
 		<input type="submit" value="<liferay-ui:message key="<%= buttonLabel %>" />" />
 
 		<br />

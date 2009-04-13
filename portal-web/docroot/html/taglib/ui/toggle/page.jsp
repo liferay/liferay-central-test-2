@@ -29,7 +29,6 @@ String id = (String)request.getAttribute("liferay-ui:toggle:id");
 String showImage = (String)request.getAttribute("liferay-ui:toggle:showImage");
 String hideImage = (String)request.getAttribute("liferay-ui:toggle:hideImage");
 String showMessage = (String)request.getAttribute("liferay-ui:toggle:showMessage");
-boolean isShowMessageNotNull = Validator.isNotNull(showMessage);
 String hideMessage = (String)request.getAttribute("liferay-ui:toggle:hideMessage");
 String stateVar = (String)request.getAttribute("liferay-ui:toggle:stateVar");
 String defaultStateValue = (String)request.getAttribute("liferay-ui:toggle:defaultStateValue");
@@ -51,7 +50,7 @@ String defaultMessage = (String)request.getAttribute("liferay-ui:toggle:defaultM
 			document.getElementById("<%= id %>").style.display = "none";
 
 			<c:choose>
-				<c:when test="<%= isShowMessageNotNull %>">
+				<c:when test="<%= Validator.isNotNull(showMessage) %>">
 					document.getElementById("<%= id %>_message").innerHTML = "<%= showMessage %>";
 				</c:when>
 				<c:otherwise>
@@ -76,7 +75,7 @@ String defaultMessage = (String)request.getAttribute("liferay-ui:toggle:defaultM
 			document.getElementById("<%= id %>").style.display = "";
 
 			<c:choose>
-				<c:when test="<%= isShowMessageNotNull %>">
+				<c:when test="<%= Validator.isNotNull(showMessage) %>">
 					document.getElementById("<%= id %>_message").innerHTML = "<%= hideMessage %>";
 				</c:when>
 				<c:otherwise>
@@ -99,7 +98,7 @@ String defaultMessage = (String)request.getAttribute("liferay-ui:toggle:defaultM
 </script>
 
 <c:choose>
-	<c:when test="<%= isShowMessageNotNull %>">
+	<c:when test="<%= Validator.isNotNull(showMessage) %>">
 		<a href="javascript: <%= stateVar %>Toggle();" id="<%= id %>_message"><%= defaultMessage %></a>
 	</c:when>
 	<c:otherwise>
