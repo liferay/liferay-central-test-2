@@ -42,6 +42,7 @@
 package com.liferay.portal.portletcontainer;
 
 import com.liferay.portal.ccpp.PortalProfileFactory;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletSession;
@@ -305,6 +306,8 @@ public class WindowInvoker extends InvokerPortletImpl {
 
 				if (eventUpdatedPortlets != null) {
 					_updatePortletModeAndState(request, eventUpdatedPortlets);
+					_clearEventPortletsResponse(
+						request, actionRequest, eventUpdatedPortlets);
 				}
 
 				_transferHeaders(request, response, executeActionResponse);
@@ -833,6 +836,19 @@ public class WindowInvoker extends InvokerPortletImpl {
 		}
 
 		return wsrpUserInfoMap;
+	}
+
+	private void _clearEventPortletsResponse(
+		HttpServletRequest request, ActionRequest actionRequest,
+		List<EntityID> eventUpdatedPortlets) {
+
+		Layout layout = (Layout)request.getAttribute(WebKeys.LAYOUT);
+
+		for(EntityID entityID : eventUpdatedPortlets) {
+			clearResponse(request.getSession(), layout.getPlid(),
+				entityID.getPortletWindowName(),
+				LanguageUtil.getLanguageId(actionRequest));
+		}
 	}
 
 	private void _setHttpSession(

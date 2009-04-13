@@ -342,6 +342,10 @@ public class LayoutAction extends Action {
 
 		try {
 			try {
+				InvokerPortletImpl.clearResponse(
+					request.getSession(), layout.getPlid(),
+					portletId, LanguageUtil.getLanguageId(eventRequestImpl));
+
 				invokerPortlet.processEvent(
 					eventRequestImpl, eventResponseImpl);
 
