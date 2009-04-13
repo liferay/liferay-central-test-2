@@ -306,6 +306,7 @@ public class LayoutAction extends Action {
 		HttpServletRequest request = portletRequestImpl.getHttpServletRequest();
 		HttpServletResponse response =
 			stateAwareResponseImpl.getHttpServletResponse();
+		HttpSession session = request.getSession();
 
 		String portletId = portlet.getPortletId();
 
@@ -343,8 +344,8 @@ public class LayoutAction extends Action {
 		try {
 			try {
 				InvokerPortletImpl.clearResponse(
-					request.getSession(), layout.getPlid(),
-					portletId, LanguageUtil.getLanguageId(eventRequestImpl));
+					session, layout.getPrimaryKey(), portletId,
+					LanguageUtil.getLanguageId(eventRequestImpl));
 
 				invokerPortlet.processEvent(
 					eventRequestImpl, eventResponseImpl);

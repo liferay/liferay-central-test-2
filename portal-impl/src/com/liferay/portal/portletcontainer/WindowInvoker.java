@@ -306,8 +306,7 @@ public class WindowInvoker extends InvokerPortletImpl {
 
 				if (eventUpdatedPortlets != null) {
 					_updatePortletModeAndState(request, eventUpdatedPortlets);
-					_clearEventPortletsResponse(
-						request, actionRequest, eventUpdatedPortlets);
+					_clearEventPortletsResponse(request, eventUpdatedPortlets);
 				}
 
 				_transferHeaders(request, response, executeActionResponse);
@@ -839,15 +838,15 @@ public class WindowInvoker extends InvokerPortletImpl {
 	}
 
 	private void _clearEventPortletsResponse(
-		HttpServletRequest request, ActionRequest actionRequest,
-		List<EntityID> eventUpdatedPortlets) {
+		HttpServletRequest request, List<EntityID> eventUpdatedPortlets) {
 
 		Layout layout = (Layout)request.getAttribute(WebKeys.LAYOUT);
 
-		for(EntityID entityID : eventUpdatedPortlets) {
-			clearResponse(request.getSession(), layout.getPlid(),
+		for (EntityID entityID : eventUpdatedPortlets) {
+			clearResponse(
+				request.getSession(), layout.getPlid(),
 				entityID.getPortletWindowName(),
-				LanguageUtil.getLanguageId(actionRequest));
+				LanguageUtil.getLanguageId(request));
 		}
 	}
 
