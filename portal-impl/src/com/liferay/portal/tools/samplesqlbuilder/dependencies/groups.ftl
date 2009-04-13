@@ -1,5 +1,8 @@
 <#setting number_format = "0">
 
+<#assign mbMessageCounter = dataFactory.newInteger()>
+<#assign wikiPageCounter = dataFactory.newInteger()>
+
 <#list dataFactory.groups as group>
 	<#include "groups_guest_private_layouts.ftl">
 	<#include "groups_guest_public_layouts.ftl">

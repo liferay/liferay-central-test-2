@@ -6,6 +6,8 @@
 
 		<#if (maxWikiPageCount > 0)>
 			<#list 1..maxWikiPageCount as wikiPageCount>
+				${wikiPageCounter.increment()}
+
 				<#assign wikiPage = dataFactory.addWikiPage(firstUserId, wikiNode.nodeId, "Test Page " + wikiPageCount, 1.0, "This is a test page " + wikiPageCount + ".", true)>
 
 				${sampleSQLBuilder.insertWikiPage(wikiNode, wikiPage)}
@@ -35,6 +37,12 @@
 				<#assign mbDiscussion = dataFactory.addMBDiscussion(dataFactory.wikiPageClassName.classNameId, wikiPage.resourcePrimKey, mbThreadId)>
 
 				${sampleSQLBuilder.insertMBDiscussion(mbDiscussion)}
+
+				${wikiPagesCsvWriter.write(wikiNode.nodeId + "," + wikiNode.name + "," + wikiPage.resourcePrimKey + "," + wikiPage.title + "," + mbMessage.threadId + "," + mbMessage.messageId + ",")}
+
+				<#if (wikiPageCounter.value < (maxGroupCount * maxWikiNodeCount * maxWikiPageCount))>
+					${wikiPagesCsvWriter.write("\n")}
+				</#if>
 			</#list>
 		</#if>
 	</#list>

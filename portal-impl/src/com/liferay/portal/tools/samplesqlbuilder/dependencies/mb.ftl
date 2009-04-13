@@ -1,4 +1,3 @@
-<#assign mbMessageCounter = dataFactory.newInteger()>
 <#assign totalMBThreadCount = maxMBCategoryCount * maxMBThreadCount>
 <#assign totalMBMessageCount = totalMBThreadCount * maxMBMessageCount>
 
@@ -22,6 +21,8 @@
 				<#assign parentMessageId = 0>
 
 				<#list 1..maxMBMessageCount as mbMessageCount>
+					${mbMessageCounter.increment()}
+
 					<#assign messageId = messageCounterOffset + mbMessageCount>
 
 					<#assign mbMessage = dataFactory.addMBMessage(messageId, mbCategory.groupId, firstUserId, categoryId, threadId, parentMessageId, "Test Message " + mbMessageCount, "This is a test message " + mbMessageCount + ".")>
@@ -40,7 +41,7 @@
 
 				${mbMessagesCsvWriter.write(categoryId + "," + rootMessageId + ",")}
 
-				<#if (mbMessageCounter.value < totalMBMessageCount)>
+				<#if (mbMessageCounter.value < (maxGroupCount * totalMBMessageCount))>
 					${mbMessagesCsvWriter.write("\n")}
 				</#if>
 			</#list>
