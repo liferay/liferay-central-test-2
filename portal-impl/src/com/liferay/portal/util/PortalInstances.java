@@ -209,8 +209,8 @@ public class PortalInstances {
 		}
 
 		try {
-			Company company =
-					CompanyLocalServiceUtil.getCompanyByVirtualHost(host);
+			Company company = CompanyLocalServiceUtil.getCompanyByVirtualHost(
+				host);
 
 			return company.getCompanyId();
 		}
