@@ -1783,6 +1783,7 @@ import-wiki-images-help=Someta un archivo de CIERRE RELÁMPAGO de las imágenes 
 import-wiki-pages-help=Importar un archivo de XML exportado desde MediaWiki a través del 'Special: Export page' (ver 'Special pages' en el menú de la Toolbox).
 import-wiki-users-help=Someta un archivo de CSV con los email address de los usuarios para emparejar con ésos en el portal. El archivo debe tener dos columnas: el nombre de usuario y el email address. Este archivo se puede obtener usando el SQL directamente de MediaWiki&#039; base de datos de s.
 import=Importar
+important=Importante
 importing=Importación
 in-progress=En progreso
 in-stock=Disponible

@@ -1783,6 +1783,7 @@ import-wiki-images-help=インポートするためにはイメージの ZIP フ
 import-wiki-pages-help=MediaWiki によりエクスポートされた XML ファイルを
 import-wiki-users-help=ポータルのユーザーと一致させるめに、ユーザーの電子メールアドレスの CSV ファイルを送ってください。ファイルには 2 つのカラムがあるべきです: ユーザー名および電子メールアドレス。 このファイルは MediaWiki のデータベースから SQL を使用して直接得ることができます。
 import=インポート
+important=重要
 importing=インポート中です
 in-progress=進行中
 in-stock=在庫あり

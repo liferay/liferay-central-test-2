@@ -166,6 +166,10 @@
 			<forward name="portlet.announcements.error" path="portlet.announcements.error" />
 		</action>
 
+		<action path="/alerts/preview_entry" type="com.liferay.portlet.announcements.action.PreviewEntryAction">
+			<forward name="portlet.announcements.preview_entry" path="portlet.announcements.preview_entry" />
+		</action>
+
 		<action path="/alerts/view" type="com.liferay.portlet.announcements.action.ViewAction">
 			<forward name="portlet.announcements.view" path="portlet.announcements.view" />
 		</action>
@@ -179,6 +183,10 @@
 		<action path="/announcements/edit_entry" type="com.liferay.portlet.announcements.action.EditEntryAction">
 			<forward name="portlet.announcements.edit_entry" path="portlet.announcements.edit_entry" />
 			<forward name="portlet.announcements.error" path="portlet.announcements.error" />
+		</action>
+
+		<action path="/announcements/preview_entry" type="com.liferay.portlet.announcements.action.PreviewEntryAction">
+			<forward name="portlet.announcements.preview_entry" path="portlet.announcements.preview_entry" />
 		</action>
 
 		<action path="/announcements/view" forward="portlet.announcements.view" />

@@ -1783,6 +1783,7 @@ import-wiki-images-help=提交图片的 ZIP 文件以便导入。您可以直接
 import-wiki-pages-help=通过“特殊：导出”页面提交由 MediaWiki 导出的 XML 文件（参见工具箱菜单的“特殊页面”）。
 import-wiki-users-help=提交带有用户电子邮件地址的 CSV 文件，以与门户中的电子邮件地址匹配。文件应该有两列：用户名和电子邮件地址。可使用 SQL 直接从 MediaWiki 的数据库中获得此文件。
 import=导入
+important=重要
 importing=导入
 in-progress=进行中
 in-stock=库存

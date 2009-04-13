@@ -34,17 +34,6 @@ searchContainer.setResults(results);
 for (int i = 0; i < results.size(); i++) {
 	AnnouncementsEntry entry = results.get(i);
 
-	boolean readEntry = false;
-
-	try {
-		AnnouncementsFlagLocalServiceUtil.getFlag(user.getUserId(), entry.getEntryId(), AnnouncementsFlagImpl.READ);
-
-		readEntry = true;
-	}
-	catch (NoSuchFlagException nsfe) {
-		AnnouncementsFlagLocalServiceUtil.addFlag(user.getUserId(), entry.getEntryId(), AnnouncementsFlagImpl.READ);
-	}
-
 	String className = StringPool.BLANK;
 
 	if (i == 0) {
@@ -54,36 +43,9 @@ for (int i = 0; i < results.size(); i++) {
 	if ((i + 1) == results.size()) {
 		className += " last";
 	}
-
-	if (readEntry) {
-		className += " read";
-	}
-
-	if (entry.getPriority() > 0) {
-		className += " important";
-	}
 %>
 
-	<div class="entry<%= className %>" id="<portlet:namespace/><%= entry.getEntryId() %>">
-		<h3 class="entry-title">
-			<c:choose>
-				<c:when test="<%= Validator.isNotNull(entry.getUrl()) %>">
-					<a class="entry-url" href="<%= entry.getUrl() %>"><%= entry.getTitle() %></a>
-				</c:when>
-				<c:when test="<%= Validator.isNull(entry.getUrl()) %>">
-					<%= entry.getTitle() %>
-				</c:when>
-			</c:choose>
-
-			<%@ include file="/html/portlet/announcements/entry_action.jspf" %>
-		</h3>
-
-		<p class="entry-content entry-type-<%= entry.getType() %>">
-			<%@ include file="/html/portlet/announcements/entry_scope.jspf" %>
-
-			<%= entry.getContent() %>
-		</p>
-	</div>
+	<%@ include file="/html/portlet/announcements/view_entry.jspf" %>
 
 <%
 }

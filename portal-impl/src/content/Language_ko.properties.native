@@ -1783,6 +1783,7 @@ import-wiki-images-help=수입품에 심상의 ZIP 파일을 복종시키십시�
 import-wiki-pages-help=&quot를 통해서 MediaWiki가 수출한 XML 파일을 복종시키십시오; 스페셜: Export&quot; 페이지 (&quot를 보십시오; 특별한 pages&quot; 연장통 메뉴에서).
 import-wiki-users-help=문에서 그들과 일치하기 위하여 사용자의 이메일 주소를 가진 CSV 파일을 복종시키십시오. 파일에는 2개의 란이 있어야 한다: 사용자 명 및 이메일 주소. 이 파일은 MediaWiki&#039에서 SQL를 사용하여 직접 얻어질 수 있다; s 데이타베이스.
 import=수입품
+important=중요한
 importing=수입
 in-progress=진도안에
 in-stock=저장안에
