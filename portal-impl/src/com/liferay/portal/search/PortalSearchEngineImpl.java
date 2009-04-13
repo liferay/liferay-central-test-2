@@ -20,63 +20,31 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.search.lucene;
+package com.liferay.portal.search;
 
-import com.liferay.portal.kernel.search.IndexSearcher;
-import com.liferay.portal.kernel.search.IndexWriter;
-import com.liferay.portal.kernel.search.SearchEngine;
+import com.liferay.portal.kernel.search.PortalSearchEngine;
+import com.liferay.portal.util.PropsValues;
 
 /**
- * <a href="LuceneSearchEngineImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalSearchEngineImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
  *
  */
-public class LuceneSearchEngineImpl implements SearchEngine {
+public class PortalSearchEngineImpl implements PortalSearchEngine {
 
-	public String getName() {
-		return _name;
+	public PortalSearchEngineImpl() {
+		_indexReadOnly = PropsValues.INDEX_READ_ONLY;
 	}
 
-	public IndexSearcher getSearcher() {
-		return _searcher;
+	public boolean isIndexReadOnly() {
+		return _indexReadOnly;
 	}
 
-	public IndexWriter getWriter() {
-		return _writer;
+	public void setIndexReadOnly(boolean indexReadOnly) {
+		_indexReadOnly = indexReadOnly;
 	}
 
-	public boolean isRegistered() {
-		return _registered;
-	}
-
-	public void register(String name) {
-		if (_name.equals(name)) {
-			_registered = true;
-		}
-	}
-
-	public void setName(String name) {
-		_name = name;
-	}
-
-	public void setSearcher(IndexSearcher searcher) {
-		_searcher = searcher;
-	}
-
-	public void setWriter(IndexWriter writer) {
-		_writer = writer;
-	}
-
-	public void unregister(String fromName) {
-		if (!_name.equals(fromName)) {
-			_registered = false;
-		}
-	}
-
-	private String _name;
-	private IndexSearcher _searcher;
-	private IndexWriter _writer;
-	private boolean _registered = true;
+	private boolean _indexReadOnly;
 
 }

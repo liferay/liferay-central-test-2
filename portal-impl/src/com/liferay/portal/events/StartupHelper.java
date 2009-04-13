@@ -25,6 +25,7 @@ package com.liferay.portal.events;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
@@ -33,7 +34,6 @@ import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.verify.VerifyException;
 import com.liferay.portal.verify.VerifyProcess;
 
@@ -149,9 +149,9 @@ public class StartupHelper {
 
 			BatchSessionUtil.setEnabled(true);
 
-			boolean tempIndexReadOnly = PropsValues.INDEX_READ_ONLY;
+			boolean tempIndexReadOnly = SearchEngineUtil.isIndexReadOnly();
 
-			PropsValues.INDEX_READ_ONLY = true;
+			SearchEngineUtil.setIndexReadOnly(true);
 
 			try {
 				for (String className : verifyProcesses) {
@@ -161,7 +161,7 @@ public class StartupHelper {
 			finally {
 				BatchSessionUtil.setEnabled(false);
 
-				PropsValues.INDEX_READ_ONLY = tempIndexReadOnly;
+				SearchEngineUtil.setIndexReadOnly(tempIndexReadOnly);
 			}
 		}
 	}

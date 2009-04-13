@@ -69,12 +69,16 @@ public class SearchEngineUtil {
 			companyId, portletId);
 	}
 
+	public static PortalSearchEngine getPortalSearchEngine() {
+		return _portalSearchEngine;
+	}
+
 	public static SearchEngine getSearchEngine() {
 		return _searchEngine;
 	}
 
 	public static boolean isIndexReadOnly() {
-		return getSearchEngine().isIndexReadOnly();
+		return _portalSearchEngine.isIndexReadOnly();
 	}
 
 	public static void register(String name) {
@@ -147,6 +151,10 @@ public class SearchEngineUtil {
 		return search(companyId, query, sorts, start, end);
 	}
 
+	public static void setIndexReadOnly(boolean indexReadOnly) {
+		getPortalSearchEngine().setIndexReadOnly(indexReadOnly);
+	}
+
 	public static void unregister(String fromName) {
 		getSearchEngine().unregister(fromName);
 	}
@@ -175,6 +183,10 @@ public class SearchEngineUtil {
 		_defaultSearchEngineName = defaultSearchEngineName;
 	}
 
+	public void setPortalSearchEngine(PortalSearchEngine portalSearchEngine) {
+		_portalSearchEngine = portalSearchEngine;
+	}
+
 	public void setSearchEngine(SearchEngine searchEngine) {
 		_searchEngine = searchEngine;
 	}
@@ -191,6 +203,7 @@ public class SearchEngineUtil {
 	};
 
 	private static String _defaultSearchEngineName;
+	private static PortalSearchEngine _portalSearchEngine;
 	private static SearchEngine _searchEngine;
 	private static SearchPermissionChecker _searchPermissionChecker;
 

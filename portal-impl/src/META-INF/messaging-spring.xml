@@ -96,8 +96,11 @@
 	</bean>
 	<bean id="messageListener.lucene_reader" class="com.liferay.portal.search.lucene.messaging.LuceneReaderMessageListener">
 		<constructor-arg index="0" type="com.liferay.portal.kernel.messaging.sender.MessageSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
+		<property name="searchEngine" ref="searchEngine.lucene" />
 	</bean>
-	<bean id="messageListener.lucene_writer" class="com.liferay.portal.search.lucene.messaging.LuceneWriterMessageListener" />
+	<bean id="messageListener.lucene_writer" class="com.liferay.portal.search.lucene.messaging.LuceneWriterMessageListener">
+		<property name="searchEngine" ref="searchEngine.lucene" />
+	</bean>
 	<bean id="messageListener.wiki" class="com.liferay.portlet.wiki.messaging.WikiMessageListener" />
 
 	<!-- Configurator -->

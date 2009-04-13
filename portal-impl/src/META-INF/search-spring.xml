@@ -15,6 +15,9 @@
 	<bean id="indexWriter.portal" class="com.liferay.portal.search.IndexWriterImpl" />
 	<bean id="com.liferay.portal.kernel.search.SearchEngineUtil" class="com.liferay.portal.kernel.search.SearchEngineUtil">
 		<property name="defaultSearchEngineName" ref="defaultSearchEngineName" />
+		<property name="portalSearchEngine">
+			<bean class="com.liferay.portal.search.PortalSearchEngineImpl" />
+		</property>
 		<property name="searchEngine">
 			<bean class="com.liferay.portal.search.SearchEngineImpl">
 				<property name="searcher" ref="indexSearcher.portal" />
@@ -30,13 +33,9 @@
 
 	<bean id="indexSearcher.lucene" class="com.liferay.portal.search.lucene.LuceneIndexSearcherImpl" />
 	<bean id="indexWriter.lucene" class="com.liferay.portal.search.lucene.LuceneIndexWriterImpl" />
-	<bean id="com.liferay.portal.search.lucene.LuceneSearchEngineUtil" class="com.liferay.portal.search.lucene.LuceneSearchEngineUtil">
-		<property name="searchEngine">
-			<bean class="com.liferay.portal.search.lucene.LuceneSearchEngineImpl">
-				<property name="name" ref="defaultSearchEngineName" />
-				<property name="searcher" ref="indexSearcher.lucene" />
-				<property name="writer" ref="indexWriter.lucene" />
-			</bean>
-		</property>
+	<bean id="searchEngine.lucene" class="com.liferay.portal.search.lucene.LuceneSearchEngineImpl">
+		<property name="name" ref="defaultSearchEngineName" />
+		<property name="searcher" ref="indexSearcher.lucene" />
+		<property name="writer" ref="indexWriter.lucene" />
 	</bean>
 </beans>

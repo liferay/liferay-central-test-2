@@ -27,8 +27,8 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.SearchEngine;
 import com.liferay.portal.kernel.search.messaging.SearchRequest;
-import com.liferay.portal.search.lucene.LuceneSearchEngineUtil;
 
 /**
  * <a href="LuceneWriterMessageListener.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +58,7 @@ public class LuceneWriterMessageListener implements MessageListener {
 
 		String command = searchRequest.getCommand();
 
-		if (!LuceneSearchEngineUtil.isRegistered() &&
+		if (!_searchEngine.isRegistered() &&
 			!command.equals(SearchRequest.COMMAND_REGISTER)) {
 
 			return;
@@ -69,26 +69,32 @@ public class LuceneWriterMessageListener implements MessageListener {
 		Document doc = searchRequest.getDocument();
 
 		if (command.equals(SearchRequest.COMMAND_ADD)) {
-			LuceneSearchEngineUtil.addDocument(companyId, doc);
+			_searchEngine.getWriter().addDocument(companyId, doc);
 		}
 		else if (command.equals(SearchRequest.COMMAND_DELETE)) {
-			LuceneSearchEngineUtil.deleteDocument(companyId, id);
+			_searchEngine.getWriter().deleteDocument(companyId, id);
 		}
 		else if (command.equals(SearchRequest.COMMAND_DELETE_PORTLET_DOCS)) {
-			LuceneSearchEngineUtil.deletePortletDocuments(companyId, id);
+			_searchEngine.getWriter().deletePortletDocuments(companyId, id);
 		}
 		else if (command.equals(SearchRequest.COMMAND_REGISTER)) {
-			LuceneSearchEngineUtil.register(id);
+			_searchEngine.register(id);
 		}
 		else if (command.equals(SearchRequest.COMMAND_UNREGISTER)) {
-			LuceneSearchEngineUtil.unregister(id);
+			_searchEngine.unregister(id);
 		}
 		else if (command.equals(SearchRequest.COMMAND_UPDATE)) {
-			LuceneSearchEngineUtil.updateDocument(companyId, id, doc);
+			_searchEngine.getWriter().updateDocument(companyId, id, doc);
 		}
+	}
+
+	public void setSearchEngine(SearchEngine searchEngine) {
+		_searchEngine = searchEngine;
 	}
 
 	private static Log _log =
 		LogFactoryUtil.getLog(LuceneWriterMessageListener.class);
+
+	private SearchEngine _searchEngine;
 
 }

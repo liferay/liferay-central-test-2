@@ -41,8 +41,6 @@ public class SearchRequest {
 	public static final String COMMAND_DELETE_PORTLET_DOCS =
 		"DELETE_PORTLET_DOCS";
 
-	public static final String COMMAND_INDEX_ONLY = "INDEX_ONLY";
-
 	public static final String COMMAND_REGISTER = "REGISTER";
 
 	public static final String COMMAND_SEARCH = "SEARCH";

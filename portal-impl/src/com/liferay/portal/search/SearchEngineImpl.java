@@ -22,10 +22,7 @@
 
 package com.liferay.portal.search;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
-import com.liferay.portal.kernel.messaging.MessageBusException;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.IndexSearcher;
 import com.liferay.portal.kernel.search.IndexWriter;
@@ -50,34 +47,6 @@ public class SearchEngineImpl implements SearchEngine {
 
 	public IndexWriter getWriter() {
 		return _writer;
-	}
-
-	public boolean isIndexReadOnly() {
-		if (_indexReadOnly != null) {
-			return _indexReadOnly.booleanValue();
-		}
-
-		try {
-			SearchRequest searchRequest = new SearchRequest();
-
-			searchRequest.setCommand(SearchRequest.COMMAND_INDEX_ONLY);
-
-			_indexReadOnly = (Boolean)MessageBusUtil.sendSynchronousMessage(
-				DestinationNames.SEARCH_READER, searchRequest);
-
-			if (_indexReadOnly == null) {
-				_indexReadOnly = Boolean.FALSE;
-			}
-
-			return _indexReadOnly.booleanValue();
-		}
-		catch (MessageBusException mbe) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to check index status", mbe);
-			}
-
-			return false;
-		}
 	}
 
 	public boolean isRegistered() {
@@ -112,10 +81,7 @@ public class SearchEngineImpl implements SearchEngine {
 			DestinationNames.SEARCH_WRITER, searchRequest);
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(SearchEngineImpl.class);
-
 	private IndexSearcher _searcher;
 	private IndexWriter _writer;
-	private Boolean _indexReadOnly;
 
 }

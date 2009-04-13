@@ -25,13 +25,13 @@ package com.liferay.portal.search.lucene;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.util.SystemProperties;
 
 import java.io.File;
@@ -72,7 +72,7 @@ import org.apache.lucene.store.FSDirectory;
 public class IndexWriterFactory {
 
 	public IndexWriterFactory() {
-		if (PropsValues.INDEX_READ_ONLY) {
+		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
 
@@ -95,7 +95,7 @@ public class IndexWriterFactory {
 	public void acquireLock(long companyId, boolean needExclusive)
 		throws InterruptedException {
 
-		if (PropsValues.INDEX_READ_ONLY) {
+		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
 
@@ -134,7 +134,7 @@ public class IndexWriterFactory {
 	public void deleteDocuments(long companyId, Term term)
 		throws InterruptedException, IOException {
 
-		if (PropsValues.INDEX_READ_ONLY) {
+		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
 
@@ -162,7 +162,7 @@ public class IndexWriterFactory {
 	public IndexWriter getWriter(long companyId, boolean create)
 		throws IOException {
 
-		if (PropsValues.INDEX_READ_ONLY) {
+		if (SearchEngineUtil.isIndexReadOnly()) {
 			return getReadOnlyIndexWriter();
 		}
 
@@ -222,7 +222,7 @@ public class IndexWriterFactory {
 	}
 
 	public void releaseLock(long companyId) {
-		if (PropsValues.INDEX_READ_ONLY) {
+		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
 
@@ -234,7 +234,7 @@ public class IndexWriterFactory {
 	}
 
 	public void write(long companyId) {
-		if (PropsValues.INDEX_READ_ONLY) {
+		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
 
@@ -251,7 +251,7 @@ public class IndexWriterFactory {
 	}
 
 	public void write(IndexWriter writer) throws IOException {
-		if (PropsValues.INDEX_READ_ONLY) {
+		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
 

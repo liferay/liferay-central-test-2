@@ -36,8 +36,6 @@ public interface SearchEngine {
 
 	public IndexWriter getWriter();
 
-	public boolean isIndexReadOnly();
-
 	public boolean isRegistered();
 
 	public void register(String name);

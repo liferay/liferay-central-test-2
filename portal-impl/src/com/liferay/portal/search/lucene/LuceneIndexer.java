@@ -26,6 +26,7 @@ import com.liferay.portal.dao.shard.ShardUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Portlet;
@@ -79,7 +80,7 @@ public class LuceneIndexer implements Runnable {
 	}
 
 	protected void doReIndex(int delay) {
-		if (PropsValues.INDEX_READ_ONLY) {
+		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
 

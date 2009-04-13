@@ -25,6 +25,7 @@ package com.liferay.portal.search.lucene;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
@@ -317,7 +318,7 @@ public class LuceneUtil {
 	}
 
 	public static void checkLuceneDir(long companyId) {
-		if (PropsValues.INDEX_READ_ONLY) {
+		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
 
@@ -486,7 +487,7 @@ public class LuceneUtil {
 	}
 
 	public void _delete(long companyId) {
-		if (PropsValues.INDEX_READ_ONLY) {
+		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
 
