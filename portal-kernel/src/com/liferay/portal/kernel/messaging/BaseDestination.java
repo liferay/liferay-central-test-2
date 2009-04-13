@@ -144,9 +144,9 @@ public abstract class BaseDestination implements Destination {
 		_listenerCount = listenerCount;
 	}
 
-	private static final int _WORKERS_CORE_SIZE = 5;
+	private static final int _WORKERS_CORE_SIZE = 2;
 
-	private static final int _WORKERS_MAX_SIZE = 10;
+	private static final int _WORKERS_MAX_SIZE = 5;
 
 	private static Log _log = LogFactoryUtil.getLog(BaseDestination.class);
 
