@@ -208,6 +208,14 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countByG_T",
 			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_G_UT = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByG_UT",
+			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_UT = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByG_UT",
+			new String[] { Long.class.getName(), String.class.getName() });
 	public static final FinderPath FINDER_PATH_FETCH_BY_G_A_V = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_ENTITY, "fetchByG_A_V",
@@ -261,6 +269,13 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				journalArticle.getUuid(), new Long(journalArticle.getGroupId())
+			}, journalArticle);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_UT,
+			new Object[] {
+				new Long(journalArticle.getGroupId()),
+				
+			journalArticle.getUrlTitle()
 			}, journalArticle);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A_V,
@@ -379,6 +394,13 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 			new Object[] {
 				journalArticleModelImpl.getOriginalUuid(),
 				new Long(journalArticleModelImpl.getOriginalGroupId())
+			});
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_UT,
+			new Object[] {
+				new Long(journalArticleModelImpl.getOriginalGroupId()),
+				
+			journalArticleModelImpl.getOriginalUrlTitle()
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_A_V,
@@ -502,6 +524,30 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 				new Object[] {
 					journalArticle.getUuid(),
 					new Long(journalArticle.getGroupId())
+				}, journalArticle);
+		}
+
+		if (!isNew &&
+				((journalArticle.getGroupId() != journalArticleModelImpl.getOriginalGroupId()) ||
+				!journalArticle.getUrlTitle()
+								   .equals(journalArticleModelImpl.getOriginalUrlTitle()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_UT,
+				new Object[] {
+					new Long(journalArticleModelImpl.getOriginalGroupId()),
+					
+				journalArticleModelImpl.getOriginalUrlTitle()
+				});
+		}
+
+		if (isNew ||
+				((journalArticle.getGroupId() != journalArticleModelImpl.getOriginalGroupId()) ||
+				!journalArticle.getUrlTitle()
+								   .equals(journalArticleModelImpl.getOriginalUrlTitle()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_UT,
+				new Object[] {
+					new Long(journalArticle.getGroupId()),
+					
+				journalArticle.getUrlTitle()
 				}, journalArticle);
 		}
 
@@ -2714,6 +2760,127 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public JournalArticle findByG_UT(long groupId, String urlTitle)
+		throws NoSuchArticleException, SystemException {
+		JournalArticle journalArticle = fetchByG_UT(groupId, urlTitle);
+
+		if (journalArticle == null) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No JournalArticle exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("urlTitle=" + urlTitle);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchArticleException(msg.toString());
+		}
+
+		return journalArticle;
+	}
+
+	public JournalArticle fetchByG_UT(long groupId, String urlTitle)
+		throws SystemException {
+		return fetchByG_UT(groupId, urlTitle, true);
+	}
+
+	public JournalArticle fetchByG_UT(long groupId, String urlTitle,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(groupId), urlTitle };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_UT,
+					finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" AND ");
+
+				if (urlTitle == null) {
+					query.append("urlTitle IS NULL");
+				}
+				else {
+					query.append("urlTitle = ?");
+				}
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("articleId ASC, ");
+				query.append("version DESC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (urlTitle != null) {
+					qPos.add(urlTitle);
+				}
+
+				List<JournalArticle> list = q.list();
+
+				result = list;
+
+				JournalArticle journalArticle = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_UT,
+						finderArgs, list);
+				}
+				else {
+					journalArticle = list.get(0);
+
+					cacheResult(journalArticle);
+				}
+
+				return journalArticle;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_UT,
+						finderArgs, new ArrayList<JournalArticle>());
+				}
+
+				closeSession(session);
+			}
+		}
+		else {
+			if (result instanceof List) {
+				return null;
+			}
+			else {
+				return (JournalArticle)result;
+			}
+		}
+	}
+
 	public JournalArticle findByG_A_V(long groupId, String articleId,
 		double version) throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = fetchByG_A_V(groupId, articleId, version);
@@ -3328,6 +3495,13 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public void removeByG_UT(long groupId, String urlTitle)
+		throws NoSuchArticleException, SystemException {
+		JournalArticle journalArticle = findByG_UT(groupId, urlTitle);
+
+		remove(journalArticle);
+	}
+
 	public void removeByG_A_V(long groupId, String articleId, double version)
 		throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = findByG_A_V(groupId, articleId, version);
@@ -3845,6 +4019,68 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_T, finderArgs,
 					count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByG_UT(long groupId, String urlTitle)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(groupId), urlTitle };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_UT,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" AND ");
+
+				if (urlTitle == null) {
+					query.append("urlTitle IS NULL");
+				}
+				else {
+					query.append("urlTitle = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (urlTitle != null) {
+					qPos.add(urlTitle);
+				}
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_UT,
+					finderArgs, count);
 
 				closeSession(session);
 			}

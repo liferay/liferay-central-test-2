@@ -150,6 +150,18 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			groupId, articleId, version);
 	}
 
+	public JournalArticle getArticleByUrlTitle(long groupId, String urlTitle)
+		throws PortalException, SystemException {
+
+		JournalArticle article =
+			journalArticleLocalService.getArticleByUrlTitle(groupId, urlTitle);
+
+		JournalArticlePermission.check(
+			getPermissionChecker(), article, ActionKeys.VIEW);
+
+		return article;
+	}
+
 	public String getArticleContent(
 			long groupId, String articleId, String languageId,
 			ThemeDisplay themeDisplay)

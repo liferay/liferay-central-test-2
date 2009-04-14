@@ -35,9 +35,9 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 
 	public JournalArticleDisplayImpl(
 		long id, long resourcePrimKey, long groupId, long userId,
-		String articleId, double version, String title, String description,
-		String[] availableLocales, String content, String type,
-		String structureId, String templateId, boolean smallImage,
+		String articleId, double version, String title, String urlTitle,
+		String description, String[] availableLocales, String content,
+		String type, String structureId, String templateId, boolean smallImage,
 		long smallImageId, String smallImageURL, int numberOfPages,
 		int currentPage, boolean paginate, boolean cacheable) {
 
@@ -48,6 +48,7 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 		_articleId = articleId;
 		_version = version;
 		_title = title;
+		_urlTitle = urlTitle;
 		_description = description;
 		_availableLocales = availableLocales;
 		_content = content;
@@ -89,6 +90,10 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 
 	public String getTitle() {
 		return _title;
+	}
+
+	public String getUrlTitle() {
+		return _urlTitle;
 	}
 
 	public String getDescription() {
@@ -190,6 +195,7 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 	private String _articleId;
 	private double _version;
 	private String _title;
+	private String _urlTitle;
 	private String _description;
 	private String[] _availableLocales;
 	private String _content;

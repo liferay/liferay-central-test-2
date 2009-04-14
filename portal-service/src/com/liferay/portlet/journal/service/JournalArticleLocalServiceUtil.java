@@ -351,6 +351,13 @@ public class JournalArticleLocalServiceUtil {
 		return getService().getArticle(groupId, articleId, version);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalArticle getArticleByUrlTitle(
+		long groupId, java.lang.String urlTitle)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getArticleByUrlTitle(groupId, urlTitle);
+	}
+
 	public static java.lang.String getArticleContent(long groupId,
 		java.lang.String articleId, java.lang.String viewMode,
 		java.lang.String languageId,
