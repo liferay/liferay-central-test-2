@@ -319,7 +319,7 @@ public class JournalArticleLocalServiceImpl
 		if (PropsValues.JOURNAL_ARTICLE_COMMENTS_ENABLED) {
 			mbMessageLocalService.addDiscussionMessage(
 				userId, article.getUserName(),
-				JournalArticle.class.getName(), id);
+				JournalArticle.class.getName(), resourcePrimKey);
 		}
 
 		// Tags
