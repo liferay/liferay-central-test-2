@@ -47,7 +47,11 @@ public class LuceneWriterMessageListener implements MessageListener {
 		}
 	}
 
-	public void doReceive(Message message) throws Exception {
+	public void setSearchEngine(SearchEngine searchEngine) {
+		_searchEngine = searchEngine;
+	}
+
+	protected void doReceive(Message message) throws Exception {
 		Object payload = message.getPayload();
 
 		if (!(payload instanceof SearchRequest)) {
@@ -86,10 +90,6 @@ public class LuceneWriterMessageListener implements MessageListener {
 		else if (command.equals(SearchRequest.COMMAND_UPDATE)) {
 			_searchEngine.getWriter().updateDocument(companyId, id, doc);
 		}
-	}
-
-	public void setSearchEngine(SearchEngine searchEngine) {
-		_searchEngine = searchEngine;
 	}
 
 	private static Log _log =

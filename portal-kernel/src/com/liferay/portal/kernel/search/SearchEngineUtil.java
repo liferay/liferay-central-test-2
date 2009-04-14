@@ -45,7 +45,7 @@ public class SearchEngineUtil {
 
 		_searchPermissionChecker.addPermissionFields(companyId, doc);
 
-		getSearchEngine().getWriter().addDocument(companyId, doc);
+		_searchEngine.getWriter().addDocument(companyId, doc);
 	}
 
 	public static void deleteDocument(long companyId, String uid)
@@ -55,7 +55,7 @@ public class SearchEngineUtil {
 			return;
 		}
 
-		getSearchEngine().getWriter().deleteDocument(companyId, uid);
+		_searchEngine.getWriter().deleteDocument(companyId, uid);
 	}
 
 	public static void deletePortletDocuments(long companyId, String portletId)
@@ -65,8 +65,7 @@ public class SearchEngineUtil {
 			return;
 		}
 
-		getSearchEngine().getWriter().deletePortletDocuments(
-			companyId, portletId);
+		_searchEngine.getWriter().deletePortletDocuments(companyId, portletId);
 	}
 
 	public static PortalSearchEngine getPortalSearchEngine() {
@@ -82,7 +81,7 @@ public class SearchEngineUtil {
 	}
 
 	public static void register(String name) {
-		getSearchEngine().register(name);
+		_searchEngine.register(name);
 	}
 
 	public static void registerDefaultSearchEngine() {
@@ -92,7 +91,7 @@ public class SearchEngineUtil {
 	public static Hits search(long companyId, Query query, int start, int end)
 		throws SearchException {
 
-		return getSearchEngine().getSearcher().search(
+		return _searchEngine.getSearcher().search(
 			companyId, query, _DEFAULT_SORT, start, end);
 	}
 
@@ -100,7 +99,7 @@ public class SearchEngineUtil {
 			long companyId, Query query, Sort sort, int start, int end)
 		throws SearchException {
 
-		return getSearchEngine().getSearcher().search(
+		return _searchEngine.getSearcher().search(
 			companyId, query, new Sort[] {sort}, start, end);
 	}
 
@@ -108,7 +107,7 @@ public class SearchEngineUtil {
 			long companyId, Query query, Sort[] sorts, int start, int end)
 		throws SearchException {
 
-		return getSearchEngine().getSearcher().search(
+		return _searchEngine.getSearcher().search(
 			companyId, query, sorts, start, end);
 	}
 
@@ -152,11 +151,11 @@ public class SearchEngineUtil {
 	}
 
 	public static void setIndexReadOnly(boolean indexReadOnly) {
-		getPortalSearchEngine().setIndexReadOnly(indexReadOnly);
+		_portalSearchEngine.setIndexReadOnly(indexReadOnly);
 	}
 
 	public static void unregister(String fromName) {
-		getSearchEngine().unregister(fromName);
+		_searchEngine.unregister(fromName);
 	}
 
 	public static void updateDocument(long companyId, String uid, Document doc)
@@ -168,7 +167,7 @@ public class SearchEngineUtil {
 
 		_searchPermissionChecker.addPermissionFields(companyId, doc);
 
-		getSearchEngine().getWriter().updateDocument(companyId, uid, doc);
+		_searchEngine.getWriter().updateDocument(companyId, uid, doc);
 	}
 
 	public static void updatePermissionFields(long resourceId) {

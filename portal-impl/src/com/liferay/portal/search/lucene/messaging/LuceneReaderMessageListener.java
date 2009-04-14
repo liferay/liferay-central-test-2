@@ -52,24 +52,6 @@ public class LuceneReaderMessageListener implements MessageListener {
 		}
 	}
 
-	public void doReceive(Message message) throws Exception {
-		Object payload = message.getPayload();
-
-		if (!_searchEngine.isRegistered() ||
-			!(payload instanceof SearchRequest)) {
-
-			return;
-		}
-
-		SearchRequest searchRequest = (SearchRequest)payload;
-
-		String command = searchRequest.getCommand();
-
-		if (command.equals(SearchRequest.COMMAND_SEARCH)) {
-			doCommandSearch(message, searchRequest);
-		}
-	}
-
 	public void setSearchEngine(SearchEngine searchEngine) {
 		_searchEngine = searchEngine;
 	}
@@ -85,6 +67,24 @@ public class LuceneReaderMessageListener implements MessageListener {
 		message.setPayload(hits);
 
 		_messageSender.send(message.getResponseDestination(), message);
+	}
+
+	protected void doReceive(Message message) throws Exception {
+		Object payload = message.getPayload();
+
+		if (!_searchEngine.isRegistered() ||
+			!(payload instanceof SearchRequest)) {
+
+			return;
+		}
+
+		SearchRequest searchRequest = (SearchRequest)payload;
+
+		String command = searchRequest.getCommand();
+
+		if (command.equals(SearchRequest.COMMAND_SEARCH)) {
+			doCommandSearch(message, searchRequest);
+		}
 	}
 
 	private static Log _log =
