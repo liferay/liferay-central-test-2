@@ -344,6 +344,8 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			syndEntry.setTitle(entry.getTitle());
 			syndEntry.setLink(link);
 			syndEntry.setPublishedDate(entry.getCreateDate());
+			syndEntry.setUpdatedDate(entry.getModifiedDate());
+			syndEntry.setUri(link);
 
 			SyndContent syndContent = new SyndContentImpl();
 
