@@ -318,7 +318,7 @@ public class JournalArticleLocalServiceImpl
 
 		if (PropsValues.JOURNAL_ARTICLE_COMMENTS_ENABLED) {
 			mbMessageLocalService.addDiscussionMessage(
-				resourcePrimKey, article.getUserName(),
+				userId, article.getUserName(),
 				JournalArticle.class.getName(), id);
 		}
 
