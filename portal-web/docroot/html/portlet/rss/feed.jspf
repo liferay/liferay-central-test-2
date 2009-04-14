@@ -47,7 +47,7 @@ catch (Exception e) {
 
 			String feedLink = feed.getLink();
 
-			if (!HttpUtil.hasDomain(feedLink)) {
+			if ((feedLink == null) || (!HttpUtil.hasDomain(feedLink))) {
 				sb.append(HttpUtil.getProtocol(url));
 				sb.append(Http.PROTOCOL_DELIMITER);
 				sb.append(HttpUtil.getDomain(url));
@@ -55,9 +55,9 @@ catch (Exception e) {
 				feedLink = sb.toString() + feed.getLink();
 			}
 			else {
-				sb.append(HttpUtil.getProtocol(feed.getLink()));
+				sb.append(HttpUtil.getProtocol(feedLink));
 				sb.append(Http.PROTOCOL_DELIMITER);
-				sb.append(HttpUtil.getDomain(feed.getLink()));
+				sb.append(HttpUtil.getDomain(feedLink));
 			}
 
 			String baseURL = sb.toString();
