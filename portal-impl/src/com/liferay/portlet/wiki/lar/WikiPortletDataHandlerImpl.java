@@ -408,7 +408,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 							page.getFormat(), page.getParentTitle(),
 							page.getRedirectTitle(), serviceContext);
 					}
-					catch (NoSuchPageException nspe) {
+					catch (NoSuchPageException nspexception) {
 						existingPage = WikiPageLocalServiceUtil.addPage(
 							page.getUuid(), userId, nodeId, page.getTitle(),
 							page.getVersion(), page.getContent(),
