@@ -397,12 +397,25 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 						page.getRedirectTitle(), serviceContext);
 				}
 				catch (NoSuchPageException nspe) {
-					existingPage = WikiPageLocalServiceUtil.addPage(
-						page.getUuid(), userId, nodeId, page.getTitle(),
-						page.getVersion(), page.getContent(), page.getSummary(),
-						true, page.getFormat(), page.getHead(),
-						page.getParentTitle(), page.getRedirectTitle(),
-						serviceContext);
+					try {
+						WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(
+							nodeId, page.getTitle());
+
+						existingPage = WikiPageLocalServiceUtil.updatePage(
+							userId, nodeId, page.getTitle(),
+							wikiPage.getVersion(), page.getContent(),
+							page.getSummary(), page.isMinorEdit(),
+							page.getFormat(), page.getParentTitle(),
+							page.getRedirectTitle(), serviceContext);
+					}
+					catch (NoSuchPageException nspe) {
+						existingPage = WikiPageLocalServiceUtil.addPage(
+							page.getUuid(), userId, nodeId, page.getTitle(),
+							page.getVersion(), page.getContent(),
+							page.getSummary(), true, page.getFormat(),
+							page.getHead(), page.getParentTitle(),
+							page.getRedirectTitle(), serviceContext);
+					}
 				}
 			}
 			else {
