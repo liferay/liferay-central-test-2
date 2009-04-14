@@ -30,6 +30,8 @@ AnnouncementsEntry entry = (AnnouncementsEntry)request.getAttribute(WebKeys.ANNO
 int flagValue = AnnouncementsFlagImpl.NOT_HIDDEN;
 
 String className = StringPool.BLANK;
+
+String tabs1 = "preview";
 %>
 
 <%@ include file="/html/portlet/announcements/view_entry.jspf" %>
