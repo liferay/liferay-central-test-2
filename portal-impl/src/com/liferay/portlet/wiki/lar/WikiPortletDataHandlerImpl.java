@@ -25,6 +25,7 @@ package com.liferay.portlet.wiki.lar;
 import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MapUtil;
@@ -53,6 +54,7 @@ import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiNodeUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiPageFinderUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiPageUtil;
+import com.liferay.portlet.wiki.util.comparator.PageCreateDateComparator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -195,7 +197,9 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 
-		List<WikiPage> nodePages = WikiPageUtil.findByNodeId(node.getNodeId());
+		List<WikiPage> nodePages = WikiPageUtil.findByNodeId(
+			node.getNodeId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			new PageCreateDateComparator(true));
 
 		for (WikiPage page : nodePages) {
 			exportPage(context, nodesEl, pagesEl, page);
