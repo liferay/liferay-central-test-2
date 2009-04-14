@@ -25,17 +25,13 @@ package com.liferay.portlet.announcements.action;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.User;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.announcements.EntryDisplayDateException;
-import com.liferay.portlet.announcements.EntryExpirationDateException;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.announcements.model.AnnouncementsEntry;
 import com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl;
 
-import java.util.Calendar;
 import java.util.Date;
 
 import javax.portlet.ActionRequest;
@@ -62,7 +58,10 @@ public class PreviewEntryAction extends PortletAction {
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
+			WebKeys.THEME_DISPLAY);
+
+		User user = themeDisplay.getUser();
+		Date now = new Date();
 
 		String[] distributionScopeParts = StringUtil.split(
 			ParamUtil.getString(actionRequest, "distributionScope"));
@@ -82,59 +81,11 @@ public class PreviewEntryAction extends PortletAction {
 		String content = ParamUtil.getString(actionRequest, "content");
 		String url = ParamUtil.getString(actionRequest, "url");
 		String type = ParamUtil.getString(actionRequest, "type");
-
-		int displayDateMonth = ParamUtil.getInteger(
-			actionRequest, "displayDateMonth");
-		int displayDateDay = ParamUtil.getInteger(
-			actionRequest, "displayDateDay");
-		int displayDateYear = ParamUtil.getInteger(
-			actionRequest, "displayDateYear");
-		int displayDateHour = ParamUtil.getInteger(
-			actionRequest, "displayDateHour");
-		int displayDateMinute = ParamUtil.getInteger(
-			actionRequest, "displayDateMinute");
-		int displayDateAmPm = ParamUtil.getInteger(
-			actionRequest, "displayDateAmPm");
-
-		if (displayDateAmPm == Calendar.PM) {
-			displayDateHour += 12;
-		}
-
-		int expirationDateMonth = ParamUtil.getInteger(
-			actionRequest, "expirationDateMonth");
-		int expirationDateDay = ParamUtil.getInteger(
-			actionRequest, "expirationDateDay");
-		int expirationDateYear = ParamUtil.getInteger(
-			actionRequest, "expirationDateYear");
-		int expirationDateHour = ParamUtil.getInteger(
-			actionRequest, "expirationDateHour");
-		int expirationDateMinute = ParamUtil.getInteger(
-			actionRequest, "expirationDateMinute");
-		int expirationDateAmPm = ParamUtil.getInteger(
-			actionRequest, "expirationDateAmPm");
-
-		if (expirationDateAmPm == Calendar.PM) {
-			expirationDateHour += 12;
-		}
-
 		int priority = ParamUtil.getInteger(actionRequest, "priority");
 		boolean alert = ParamUtil.getBoolean(actionRequest, "alert");
 
-		User user = themeDisplay.getUser();
-
-		Date displayDate = PortalUtil.getDate(
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, user.getTimeZone(),
-			new EntryDisplayDateException());
-
-		Date expirationDate = PortalUtil.getDate(
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, user.getTimeZone(),
-			new EntryExpirationDateException());
-
-		Date now = new Date();
-
 		AnnouncementsEntry entry = new AnnouncementsEntryImpl();
+
 		entry.setCompanyId(user.getCompanyId());
 		entry.setUserId(user.getUserId());
 		entry.setUserName(user.getFullName());
@@ -146,12 +97,12 @@ public class PreviewEntryAction extends PortletAction {
 		entry.setContent(content);
 		entry.setUrl(url);
 		entry.setType(type);
-		entry.setDisplayDate(displayDate);
-		entry.setExpirationDate(expirationDate);
+		entry.setDisplayDate(now);
+		entry.setExpirationDate(now);
 		entry.setPriority(priority);
 		entry.setAlert(alert);
 
-		actionRequest.setAttribute("preview_entry.jsp-previewEntry", entry);
+		actionRequest.setAttribute(WebKeys.ANNOUNCEMENTS_ENTRY, entry);
 	}
 
 	public ActionForward render(
@@ -162,4 +113,5 @@ public class PreviewEntryAction extends PortletAction {
 		return mapping.findForward(
 			getForward(renderRequest, "portlet.announcements.preview_entry"));
 	}
+
 }

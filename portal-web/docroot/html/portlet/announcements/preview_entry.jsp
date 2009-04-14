@@ -25,13 +25,11 @@
 <%@ include file="/html/portlet/announcements/init.jsp" %>
 
 <%
-AnnouncementsEntry entry = (AnnouncementsEntry) request.getAttribute("preview_entry.jsp-previewEntry");
+AnnouncementsEntry entry = (AnnouncementsEntry)request.getAttribute(WebKeys.ANNOUNCEMENTS_ENTRY);
 
 int flagValue = AnnouncementsFlagImpl.NOT_HIDDEN;
 
 String className = StringPool.BLANK;
-
-String tabs1 = "preview";
 %>
 
 <%@ include file="/html/portlet/announcements/view_entry.jspf" %>
