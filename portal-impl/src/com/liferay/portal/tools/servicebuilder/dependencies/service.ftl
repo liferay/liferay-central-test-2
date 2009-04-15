@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see ${packagePath}.service.${entity.name}${sessionTypeName}ServiceUtil
  *
  */
-@Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = {PortalException.class, SystemException.class})
+@Transactional(isolation = Isolation.PORTAL, rollbackFor = {PortalException.class, SystemException.class})
 public interface ${entity.name}${sessionTypeName}Service {
 
 	<#list methods as method>

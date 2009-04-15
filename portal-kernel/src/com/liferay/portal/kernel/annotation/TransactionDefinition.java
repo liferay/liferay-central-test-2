@@ -34,6 +34,8 @@ public interface TransactionDefinition {
 
 	public static final int ISOLATION_DEFAULT = -1;
 
+	public static final int ISOLATION_PORTAL = -2;
+
 	public static final int ISOLATION_READ_COMMITTED =
 		Connection.TRANSACTION_READ_COMMITTED;
 

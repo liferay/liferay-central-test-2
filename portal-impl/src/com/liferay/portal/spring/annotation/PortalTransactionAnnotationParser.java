@@ -22,7 +22,9 @@
 
 package com.liferay.portal.spring.annotation;
 
+import com.liferay.portal.kernel.annotation.TransactionDefinition;
 import com.liferay.portal.kernel.annotation.Transactional;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
 
@@ -60,8 +62,16 @@ public class PortalTransactionAnnotationParser
 		RuleBasedTransactionAttribute ruleBasedTransactionAttribute =
 			new RuleBasedTransactionAttribute();
 
-		ruleBasedTransactionAttribute.setIsolationLevel(
-			annotation.isolation().value());
+		int isolationLevel = annotation.isolation().value();
+
+		if (isolationLevel == TransactionDefinition.ISOLATION_PORTAL) {
+			ruleBasedTransactionAttribute.setIsolationLevel(
+				PropsValues.TRANSACTION_ISOLATION_PORTAL);
+		}
+		else {
+			ruleBasedTransactionAttribute.setIsolationLevel(isolationLevel);
+		}
+
 		ruleBasedTransactionAttribute.setPropagationBehavior(
 			annotation.propagation().value());
 		ruleBasedTransactionAttribute.setReadOnly(annotation.readOnly());

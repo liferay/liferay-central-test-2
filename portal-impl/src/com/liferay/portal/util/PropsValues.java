@@ -1302,6 +1302,9 @@ public class PropsValues {
 	public static final String THEME_VIRTUAL_PATH = PropsUtil.get(
 		PropsKeys.THEME_VIRTUAL_PATH);
 
+	public static int TRANSACTION_ISOLATION_PORTAL = GetterUtil.getInteger(
+		PropsUtil.get(PropsKeys.TRANSACTION_ISOLATION_PORTAL));
+
 	public static final boolean USERS_DELETE = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.USERS_DELETE));
 

@@ -31,6 +31,7 @@ package com.liferay.portal.kernel.annotation;
 public enum Isolation {
 
 	DEFAULT(TransactionDefinition.ISOLATION_DEFAULT),
+	PORTAL(TransactionDefinition.ISOLATION_PORTAL),
 	READ_COMMITTED(TransactionDefinition.ISOLATION_READ_COMMITTED),
 	READ_UNCOMMITTED(TransactionDefinition.ISOLATION_READ_UNCOMMITTED),
 	REPEATABLE_READ(TransactionDefinition.ISOLATION_REPEATABLE_READ),
