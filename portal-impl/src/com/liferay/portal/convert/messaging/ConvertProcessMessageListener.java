@@ -50,7 +50,7 @@ public class ConvertProcessMessageListener implements MessageListener {
 		}
 	}
 
-	public void doReceive(Message message) throws Exception {
+	protected void doReceive(Message message) throws Exception {
 		String className = (String)message.getPayload();
 
 		ConvertProcess convertProcess = (ConvertProcess)InstancePool.get(
