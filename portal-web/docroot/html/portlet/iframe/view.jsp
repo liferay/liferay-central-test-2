@@ -33,6 +33,23 @@ if (relative) {
 
 iframeSrc += (String)request.getAttribute(WebKeys.IFRAME_SRC);
 
+if (Validator.isNotNull(iframeVariables)){
+	StringBuilder sb = new StringBuilder();
+
+	sb.append(iframeSrc);
+
+	if (iframeSrc.indexOf('?') != -1){
+		sb.append('&');
+	}
+	else {
+		sb.append('?');
+	}
+
+	sb.append(StringUtil.merge(iframeVariables, StringPool.AMPERSAND));
+
+	iframeSrc = sb.toString();
+}
+
 String baseSrc = iframeSrc;
 
 int lastSlashPos = iframeSrc.substring(7).lastIndexOf(StringPool.SLASH);

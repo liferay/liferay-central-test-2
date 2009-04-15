@@ -54,4 +54,20 @@ String hspace = preferences.getValue("hspace", "0");
 String scrolling = preferences.getValue("scrolling", "auto");
 String vspace = preferences.getValue("vspace", "0");
 String width = preferences.getValue("width", "100%");
+
+List<String> iframeVariables = new ArrayList<String>();
+
+for (Enumeration e = request.getParameterNames(); e.hasMoreElements();) {
+	String name = (String)e.nextElement();
+
+	if (name.startsWith("iframe_")){
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(name.substring("iframe_".length()));
+		sb.append(StringPool.EQUAL);
+		sb.append(request.getParameter(name));
+
+		iframeVariables.add(sb.toString());
+	}
+}
 %>

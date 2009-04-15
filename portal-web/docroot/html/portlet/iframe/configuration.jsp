@@ -223,6 +223,19 @@ String htmlAttributes =
 				</table>
 			</td>
 		</tr>
+		<tr>
+			<td colspan="2">
+				<br />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="hidden-variables" />
+			</td>
+			<td>
+				<input class="lfr-input-text" name="<portlet:namespace />hiddenVariables" type="text" value="<%= hiddenVariables %>" />
+			</td>
+		</tr>
 	</tbody>
 	<tbody id="<portlet:namespace />basicFields">
 		<tr id="<portlet:namespace />userName">
@@ -249,19 +262,6 @@ String htmlAttributes =
 	<legend><liferay-ui:message key="advanced" /></legend>
 
 	<table class="lfr-table">
-	<tr>
-		<td>
-			<liferay-ui:message key="hidden-variables" />
-		</td>
-		<td>
-			<input class="lfr-input-text" name="<portlet:namespace />hiddenVariables" type="text" value="<%= hiddenVariables %>" />
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
 	<tr>
 		<td>
 			<liferay-ui:message key="html-attributes" />

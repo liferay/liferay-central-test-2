@@ -25,7 +25,9 @@
 <%@ include file="/html/portlet/iframe/init.jsp" %>
 
 <%
-String[] hiddenVariablesArray = StringUtil.split(hiddenVariables, StringPool.SEMICOLON);
+List<String> hiddenVariablesList = ListUtil.toList(StringUtil.split(hiddenVariables, StringPool.SEMICOLON));
+
+hiddenVariablesList.addAll(iframeVariables);
 %>
 
 <html dir="<liferay-ui:message key="lang.dir" />">
@@ -41,15 +43,15 @@ String[] hiddenVariablesArray = StringUtil.split(hiddenVariables, StringPool.SEM
 <form action="<%= src %>" method="<%= formMethod %>" name="fm">
 
 <%
-for (int i = 0; i < hiddenVariablesArray.length; i++) {
+for (String hiddenVariable : hiddenVariablesList) {
 	String hiddenKey = StringPool.BLANK;
 	String hiddenValue = StringPool.BLANK;
 
-	int pos = hiddenVariablesArray[i].indexOf(StringPool.EQUAL);
+	int pos = hiddenVariable.indexOf(StringPool.EQUAL);
 
 	if (pos != -1) {
-		hiddenKey = hiddenVariablesArray[i].substring(0, pos);
-		hiddenValue = hiddenVariablesArray[i].substring(pos + 1, hiddenVariablesArray[i].length());
+		hiddenKey = hiddenVariable.substring(0, pos);
+		hiddenValue = hiddenVariable.substring(pos + 1, hiddenVariable.length());
 	}
 %>
 
