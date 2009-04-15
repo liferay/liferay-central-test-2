@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.social.model;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -29,12 +30,16 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portlet.social.service.persistence.SocialRequestUtil;
+
+import java.util.List;
 
 /**
  * <a href="BaseSocialRequestInterpreter.java.html"><b><i>View Source</i></b>
  * </a>
  *
  * @author Brian Wing Shun Chan
+ * @author Amos Fong
  *
  */
 public abstract class BaseSocialRequestInterpreter
@@ -109,6 +114,40 @@ public abstract class BaseSocialRequestInterpreter
 		}
 
 		return false;
+	}
+
+	public void processDuplicateRequestsFromUser(
+			SocialRequest request, int oldStatus)
+		throws SystemException {
+
+		List<SocialRequest> requests = SocialRequestUtil.findByU_C_C_T_S(
+			request.getUserId(), request.getClassNameId(), request.getClassPK(),
+			request.getType(), oldStatus);
+
+		int newStatus = request.getStatus();
+
+		for (SocialRequest curRequest : requests) {
+			curRequest.setStatus(newStatus);
+
+			SocialRequestUtil.update(curRequest, false);
+		}
+	}
+
+	public void processDuplicateRequestsToUser(
+			SocialRequest request, int oldStatus)
+		throws SystemException {
+
+		List<SocialRequest> requests = SocialRequestUtil.findByC_C_T_R_S(
+			request.getClassNameId(), request.getClassPK(), request.getType(),
+			request.getReceiverUserId(), oldStatus);
+
+		int newStatus = request.getStatus();
+
+		for (SocialRequest curRequest : requests) {
+			curRequest.setStatus(newStatus);
+
+			SocialRequestUtil.update(curRequest, false);
+		}
 	}
 
 	protected abstract SocialRequestFeedEntry doInterpret(

@@ -174,6 +174,33 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 			SocialRequestModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countByR_S",
 			new String[] { Long.class.getName(), Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_C_C_T_R_S = new FinderPath(SocialRequestModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRequestModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByC_C_T_R_S",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName(), Long.class.getName(),
+				Integer.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_C_T_R_S = new FinderPath(SocialRequestModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRequestModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByC_C_T_R_S",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName(), Long.class.getName(),
+				Integer.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_C_T_R_S = new FinderPath(SocialRequestModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRequestModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByC_C_T_R_S",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName(), Long.class.getName(),
+				Integer.class.getName()
+			});
 	public static final FinderPath FINDER_PATH_FETCH_BY_U_C_C_T_R = new FinderPath(SocialRequestModelImpl.ENTITY_CACHE_ENABLED,
 			SocialRequestModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_ENTITY, "fetchByU_C_C_T_R",
@@ -2166,6 +2193,340 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public List<SocialRequest> findByC_C_T_R_S(long classNameId, long classPK,
+		int type, long receiverUserId, int status) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(classNameId), new Long(classPK), new Integer(type),
+				new Long(receiverUserId), new Integer(status)
+			};
+
+		List<SocialRequest> list = (List<SocialRequest>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_C_T_R_S,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.social.model.SocialRequest WHERE ");
+
+				query.append("classNameId = ?");
+
+				query.append(" AND ");
+
+				query.append("classPK = ?");
+
+				query.append(" AND ");
+
+				query.append("type_ = ?");
+
+				query.append(" AND ");
+
+				query.append("receiverUserId = ?");
+
+				query.append(" AND ");
+
+				query.append("status = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("requestId DESC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(classNameId);
+
+				qPos.add(classPK);
+
+				qPos.add(type);
+
+				qPos.add(receiverUserId);
+
+				qPos.add(status);
+
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<SocialRequest>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C_T_R_S,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public List<SocialRequest> findByC_C_T_R_S(long classNameId, long classPK,
+		int type, long receiverUserId, int status, int start, int end)
+		throws SystemException {
+		return findByC_C_T_R_S(classNameId, classPK, type, receiverUserId,
+			status, start, end, null);
+	}
+
+	public List<SocialRequest> findByC_C_T_R_S(long classNameId, long classPK,
+		int type, long receiverUserId, int status, int start, int end,
+		OrderByComparator obc) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(classNameId), new Long(classPK), new Integer(type),
+				new Long(receiverUserId), new Integer(status),
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		List<SocialRequest> list = (List<SocialRequest>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C_T_R_S,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.social.model.SocialRequest WHERE ");
+
+				query.append("classNameId = ?");
+
+				query.append(" AND ");
+
+				query.append("classPK = ?");
+
+				query.append(" AND ");
+
+				query.append("type_ = ?");
+
+				query.append(" AND ");
+
+				query.append("receiverUserId = ?");
+
+				query.append(" AND ");
+
+				query.append("status = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("requestId DESC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(classNameId);
+
+				qPos.add(classPK);
+
+				qPos.add(type);
+
+				qPos.add(receiverUserId);
+
+				qPos.add(status);
+
+				list = (List<SocialRequest>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<SocialRequest>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_C_T_R_S,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public SocialRequest findByC_C_T_R_S_First(long classNameId, long classPK,
+		int type, long receiverUserId, int status, OrderByComparator obc)
+		throws NoSuchRequestException, SystemException {
+		List<SocialRequest> list = findByC_C_T_R_S(classNameId, classPK, type,
+				receiverUserId, status, 0, 1, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No SocialRequest exists with the key {");
+
+			msg.append("classNameId=" + classNameId);
+
+			msg.append(", ");
+			msg.append("classPK=" + classPK);
+
+			msg.append(", ");
+			msg.append("type=" + type);
+
+			msg.append(", ");
+			msg.append("receiverUserId=" + receiverUserId);
+
+			msg.append(", ");
+			msg.append("status=" + status);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchRequestException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public SocialRequest findByC_C_T_R_S_Last(long classNameId, long classPK,
+		int type, long receiverUserId, int status, OrderByComparator obc)
+		throws NoSuchRequestException, SystemException {
+		int count = countByC_C_T_R_S(classNameId, classPK, type,
+				receiverUserId, status);
+
+		List<SocialRequest> list = findByC_C_T_R_S(classNameId, classPK, type,
+				receiverUserId, status, count - 1, count, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No SocialRequest exists with the key {");
+
+			msg.append("classNameId=" + classNameId);
+
+			msg.append(", ");
+			msg.append("classPK=" + classPK);
+
+			msg.append(", ");
+			msg.append("type=" + type);
+
+			msg.append(", ");
+			msg.append("receiverUserId=" + receiverUserId);
+
+			msg.append(", ");
+			msg.append("status=" + status);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchRequestException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public SocialRequest[] findByC_C_T_R_S_PrevAndNext(long requestId,
+		long classNameId, long classPK, int type, long receiverUserId,
+		int status, OrderByComparator obc)
+		throws NoSuchRequestException, SystemException {
+		SocialRequest socialRequest = findByPrimaryKey(requestId);
+
+		int count = countByC_C_T_R_S(classNameId, classPK, type,
+				receiverUserId, status);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append(
+				"FROM com.liferay.portlet.social.model.SocialRequest WHERE ");
+
+			query.append("classNameId = ?");
+
+			query.append(" AND ");
+
+			query.append("classPK = ?");
+
+			query.append(" AND ");
+
+			query.append("type_ = ?");
+
+			query.append(" AND ");
+
+			query.append("receiverUserId = ?");
+
+			query.append(" AND ");
+
+			query.append("status = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("requestId DESC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(classNameId);
+
+			qPos.add(classPK);
+
+			qPos.add(type);
+
+			qPos.add(receiverUserId);
+
+			qPos.add(status);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					socialRequest);
+
+			SocialRequest[] array = new SocialRequestImpl[3];
+
+			array[0] = (SocialRequest)objArray[0];
+			array[1] = (SocialRequest)objArray[1];
+			array[2] = (SocialRequest)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public SocialRequest findByU_C_C_T_R(long userId, long classNameId,
 		long classPK, int type, long receiverUserId)
 		throws NoSuchRequestException, SystemException {
@@ -2958,6 +3319,14 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public void removeByC_C_T_R_S(long classNameId, long classPK, int type,
+		long receiverUserId, int status) throws SystemException {
+		for (SocialRequest socialRequest : findByC_C_T_R_S(classNameId,
+				classPK, type, receiverUserId, status)) {
+			remove(socialRequest);
+		}
+	}
+
 	public void removeByU_C_C_T_R(long userId, long classNameId, long classPK,
 		int type, long receiverUserId)
 		throws NoSuchRequestException, SystemException {
@@ -3355,6 +3724,82 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_R_S, finderArgs,
 					count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByC_C_T_R_S(long classNameId, long classPK, int type,
+		long receiverUserId, int status) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(classNameId), new Long(classPK), new Integer(type),
+				new Long(receiverUserId), new Integer(status)
+			};
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C_T_R_S,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.social.model.SocialRequest WHERE ");
+
+				query.append("classNameId = ?");
+
+				query.append(" AND ");
+
+				query.append("classPK = ?");
+
+				query.append(" AND ");
+
+				query.append("type_ = ?");
+
+				query.append(" AND ");
+
+				query.append("receiverUserId = ?");
+
+				query.append(" AND ");
+
+				query.append("status = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(classNameId);
+
+				qPos.add(classPK);
+
+				qPos.add(type);
+
+				qPos.add(receiverUserId);
+
+				qPos.add(status);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C_T_R_S,
+					finderArgs, count);
 
 				closeSession(session);
 			}

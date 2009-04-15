@@ -217,16 +217,6 @@ public class SocialRequestLocalServiceImpl
 				request, themeDisplay);
 		}
 
-		List<SocialRequest> requests = socialRequestPersistence.findByU_C_C_T_S(
-			request.getUserId(), request.getClassNameId(), request.getClassPK(),
-			request.getType(), oldStatus);
-
-		for (SocialRequest curRequest : requests) {
-			curRequest.setStatus(status);
-
-			socialRequestPersistence.update(curRequest, false);
-		}
-
 		return request;
 	}
 
