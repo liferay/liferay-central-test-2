@@ -52,7 +52,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.portal.service.ResourceCodeLocalServiceUtil
  *
  */
-@Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor =  {
+@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
 public interface ResourceCodeLocalService {
 	public com.liferay.portal.model.ResourceCode addResourceCode(

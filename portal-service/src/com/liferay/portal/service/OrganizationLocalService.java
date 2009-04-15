@@ -52,7 +52,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.portal.service.OrganizationLocalServiceUtil
  *
  */
-@Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor =  {
+@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
 public interface OrganizationLocalService {
 	public com.liferay.portal.model.Organization addOrganization(

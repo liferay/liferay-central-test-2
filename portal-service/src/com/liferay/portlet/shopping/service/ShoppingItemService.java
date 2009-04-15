@@ -52,7 +52,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.portlet.shopping.service.ShoppingItemServiceUtil
  *
  */
-@Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor =  {
+@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
 public interface ShoppingItemService {
 	public void addBookItems(long categoryId, java.lang.String[] isbns)

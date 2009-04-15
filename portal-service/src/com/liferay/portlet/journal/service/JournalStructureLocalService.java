@@ -52,7 +52,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil
  *
  */
-@Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor =  {
+@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
 public interface JournalStructureLocalService {
 	public com.liferay.portlet.journal.model.JournalStructure addJournalStructure(

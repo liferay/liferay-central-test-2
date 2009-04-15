@@ -51,7 +51,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.portlet.polls.service.PollsVoteServiceUtil
  *
  */
-@Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor =  {
+@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
 public interface PollsVoteService {
 	public com.liferay.portlet.polls.model.PollsVote addVote(long questionId,

@@ -52,7 +52,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.portlet.announcements.service.AnnouncementsEntryLocalServiceUtil
  *
  */
-@Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor =  {
+@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
 public interface AnnouncementsEntryLocalService {
 	public com.liferay.portlet.announcements.model.AnnouncementsEntry addAnnouncementsEntry(

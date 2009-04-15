@@ -51,7 +51,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.portlet.messageboards.service.MBMessageFlagServiceUtil
  *
  */
-@Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor =  {
+@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
 public interface MBMessageFlagService {
 	public void addAnswerFlag(long messageId)

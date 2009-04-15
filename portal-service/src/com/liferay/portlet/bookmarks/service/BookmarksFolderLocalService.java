@@ -52,7 +52,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil
  *
  */
-@Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor =  {
+@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
 public interface BookmarksFolderLocalService {
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder addBookmarksFolder(

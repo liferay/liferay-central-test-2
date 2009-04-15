@@ -52,7 +52,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.portlet.shopping.service.ShoppingOrderItemLocalServiceUtil
  *
  */
-@Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor =  {
+@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
 public interface ShoppingOrderItemLocalService {
 	public com.liferay.portlet.shopping.model.ShoppingOrderItem addShoppingOrderItem(

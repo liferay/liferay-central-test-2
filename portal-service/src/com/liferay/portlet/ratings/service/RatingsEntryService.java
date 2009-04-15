@@ -51,7 +51,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.portlet.ratings.service.RatingsEntryServiceUtil
  *
  */
-@Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor =  {
+@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
 public interface RatingsEntryService {
 	public void deleteEntry(java.lang.String className, long classPK)

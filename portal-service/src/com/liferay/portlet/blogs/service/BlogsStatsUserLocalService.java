@@ -52,7 +52,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * @see com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceUtil
  *
  */
-@Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor =  {
+@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
 public interface BlogsStatsUserLocalService {
 	public com.liferay.portlet.blogs.model.BlogsStatsUser addBlogsStatsUser(
