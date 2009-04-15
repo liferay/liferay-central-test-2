@@ -393,33 +393,33 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 				try {
 					existingPage = WikiPageFinderUtil.findByUuid_G(
 						page.getUuid(), context.getGroupId());
+				}
+				catch (NoSuchPageException nspe) {
+				}
 
+				if (existingPage == null) {
+					try {
+						existingPage = WikiPageLocalServiceUtil.getPage(
+							nodeId, page.getTitle());
+					}
+					catch (NoSuchPageException nspe) {
+					}
+				}
+
+				if (existingPage != null) {
 					existingPage = WikiPageLocalServiceUtil.updatePage(
 						userId, nodeId, existingPage.getTitle(), 0,
 						page.getContent(), page.getSummary(), true,
 						page.getFormat(), page.getParentTitle(),
 						page.getRedirectTitle(), serviceContext);
 				}
-				catch (NoSuchPageException nspe) {
-					try {
-						WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(
-							nodeId, page.getTitle());
-
-						existingPage = WikiPageLocalServiceUtil.updatePage(
-							userId, nodeId, page.getTitle(),
-							wikiPage.getVersion(), page.getContent(),
-							page.getSummary(), page.isMinorEdit(),
-							page.getFormat(), page.getParentTitle(),
-							page.getRedirectTitle(), serviceContext);
-					}
-					catch (NoSuchPageException nspexception) {
-						existingPage = WikiPageLocalServiceUtil.addPage(
-							page.getUuid(), userId, nodeId, page.getTitle(),
-							page.getVersion(), page.getContent(),
-							page.getSummary(), true, page.getFormat(),
-							page.getHead(), page.getParentTitle(),
-							page.getRedirectTitle(), serviceContext);
-					}
+				else {
+					existingPage = WikiPageLocalServiceUtil.addPage(
+						page.getUuid(), userId, nodeId, page.getTitle(),
+						page.getVersion(), page.getContent(), page.getSummary(),
+						true, page.getFormat(), page.getHead(),
+						page.getParentTitle(), page.getRedirectTitle(),
+						serviceContext);
 				}
 			}
 			else {
