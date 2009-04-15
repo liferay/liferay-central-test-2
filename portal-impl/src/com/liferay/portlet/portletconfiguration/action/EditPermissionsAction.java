@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Portlet;
@@ -36,6 +37,7 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PermissionServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
@@ -279,9 +281,19 @@ public class EditPermissionsAction extends EditConfigurationAction {
 		String modelResource = ParamUtil.getString(
 			actionRequest, "modelResource");
 		long resourceId = ParamUtil.getLong(actionRequest, "resourceId");
+		long resourcePrimKey = ParamUtil.getLong(
+			actionRequest, "resourcePrimKey");
 
-		List<Role> roles = ResourceActionsUtil.getRoles(
-			themeDisplay.getScopeGroup(), modelResource);
+		Group group = themeDisplay.getScopeGroup();
+
+		if (modelResource.equals(Layout.class.getName())) {
+			Layout layout = LayoutLocalServiceUtil.getLayout(
+				resourcePrimKey);
+
+			group = layout.getGroup();
+		}
+
+		List<Role> roles = ResourceActionsUtil.getRoles(group, modelResource);
 
 		for (Role role : roles) {
 			String[] actionIds = getActionIds(actionRequest, role.getRoleId());
@@ -298,21 +310,22 @@ public class EditPermissionsAction extends EditConfigurationAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String portletResource = ParamUtil.getString(
-			actionRequest, "portletResource");
 		String modelResource = ParamUtil.getString(
 			actionRequest, "modelResource");
+		long resourceId = ParamUtil.getLong(actionRequest, "resourceId");
+		long resourcePrimKey = ParamUtil.getLong(
+			actionRequest, "resourcePrimKey");
 
-		String selResource = portletResource;
+		Group group = themeDisplay.getScopeGroup();
 
-		if (Validator.isNotNull(modelResource)) {
-			selResource = modelResource;
+		if (modelResource.equals(Layout.class.getName())) {
+			Layout layout = LayoutLocalServiceUtil.getLayout(
+				resourcePrimKey);
+
+			group = layout.getGroup();
 		}
 
-		long resourceId = ParamUtil.getLong(actionRequest, "resourceId");
-
-		List<Role> roles = ResourceActionsUtil.getRoles(
-			themeDisplay.getScopeGroup(), modelResource);
+		List<Role> roles = ResourceActionsUtil.getRoles(group, modelResource);
 
 		for (Role role : roles) {
 			String[] actionIds = getActionIds(actionRequest, role.getRoleId());
