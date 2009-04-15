@@ -22,6 +22,7 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.NoSuchCompanyException;
 import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -213,6 +214,8 @@ public class PortalInstances {
 				host);
 
 			return company.getCompanyId();
+		}
+		catch (NoSuchCompanyException nsce) {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
