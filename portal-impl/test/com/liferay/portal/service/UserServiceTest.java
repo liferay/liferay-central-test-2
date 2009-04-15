@@ -82,6 +82,7 @@ public class UserServiceTest extends BaseServiceTestCase {
 		long[] roleIds = null;
 		long[] userGroupIds = null;
 		boolean sendMail = false;
+
 		ServiceContext serviceContext = new ServiceContext();
 
 		return UserServiceUtil.addUser(

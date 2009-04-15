@@ -95,6 +95,7 @@ public class SampleAppStartupAction extends SimpleAction {
 		long[] roleIds = null;
 		long[] userGroupIds = null;
 		boolean sendEmail = false;
+
 		ServiceContext serviceContext = new ServiceContext();
 
 		User paulUser = UserLocalServiceUtil.addUser(

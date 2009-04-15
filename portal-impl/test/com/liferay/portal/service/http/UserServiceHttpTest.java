@@ -82,6 +82,7 @@ public class UserServiceHttpTest extends BaseServiceHttpTestCase {
 		long[] roleIds = null;
 		long[] userGroupIds = null;
 		boolean sendMail = false;
+
 		ServiceContext serviceContext = new ServiceContext();
 
 		return UserServiceHttp.addUser(
