@@ -78,41 +78,6 @@ public class HtmlImpl implements Html {
 
 					break;
 
-				case '(':
-					sb.append("&#040;");
-
-					break;
-
-				case ')':
-					sb.append("&#041;");
-
-					break;
-
-				case '#':
-					sb.append("&#035;");
-
-					break;
-
-				case '%':
-					sb.append("&#037;");
-
-					break;
-
-				case ';':
-					sb.append("&#059;");
-
-					break;
-
-				case '+':
-					sb.append("&#043;");
-
-					break;
-
-				case '-':
-					sb.append("&#045;");
-
-					break;
-
 				default:
 					sb.append(c);
 
