@@ -340,6 +340,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			syndEntry.setAuthor(author);
 			syndEntry.setTitle(title);
 			syndEntry.setPublishedDate(page.getCreateDate());
+			syndEntry.setUpdatedDate(page.getModifiedDate());
 
 			SyndContent syndContent = new SyndContentImpl();
 
@@ -384,6 +385,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			}
 
 			syndEntry.setLink(link);
+			syndEntry.setUri(syndEntry.getLink());
 
 			latestPage = page;
 		}

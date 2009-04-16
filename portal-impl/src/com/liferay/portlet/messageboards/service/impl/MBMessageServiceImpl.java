@@ -598,7 +598,9 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			syndEntry.setTitle(message.getSubject());
 			syndEntry.setLink(
 				entryURL + "&messageId=" + message.getMessageId());
+			syndEntry.setUri(syndEntry.getLink());
 			syndEntry.setPublishedDate(message.getCreateDate());
+			syndEntry.setUpdatedDate(message.getModifiedDate());
 
 			SyndContent syndContent = new SyndContentImpl();
 

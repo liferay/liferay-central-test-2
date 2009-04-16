@@ -233,7 +233,9 @@ public class TagsAssetServiceImpl extends TagsAssetServiceBaseImpl {
 			syndEntry.setAuthor(author);
 			syndEntry.setTitle(asset.getTitle());
 			syndEntry.setLink(link);
+			syndEntry.setUri(syndEntry.getLink());
 			syndEntry.setPublishedDate(asset.getCreateDate());
+			syndEntry.setUpdatedDate(asset.getModifiedDate());
 
 			SyndContent syndContent = new SyndContentImpl();
 
