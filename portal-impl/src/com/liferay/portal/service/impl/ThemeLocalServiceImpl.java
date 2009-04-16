@@ -198,6 +198,25 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 		return themes;
 	}
 
+	public List<Theme> getWARThemes() {
+		Iterator<Map.Entry<String, Theme>> itr =
+			_themes.entrySet().iterator();
+
+		List<Theme> warThemes = new ArrayList();
+
+		while (itr.hasNext()) {
+			Map.Entry<String, Theme> entry = itr.next();
+
+			Theme theme = entry.getValue();
+
+			if (theme.isWARFile()) {
+				warThemes.add(theme);
+			}
+		}
+
+		return warThemes;
+	}
+
 	public List<String> init(
 		ServletContext servletContext, String themesPath,
 		boolean loadFromServletContext, String[] xmls,

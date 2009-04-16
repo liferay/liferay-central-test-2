@@ -50,6 +50,10 @@ public class ThemeServiceUtil {
 		return getService().getThemes(companyId);
 	}
 
+	public static com.liferay.portal.kernel.json.JSONArray getWARThemes() {
+		return getService().getWARThemes();
+	}
+
 	public static ThemeService getService() {
 		if (_service == null) {
 			throw new RuntimeException("ThemeService is not set");

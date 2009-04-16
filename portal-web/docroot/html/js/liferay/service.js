@@ -273,7 +273,8 @@ Liferay.Service.registerClass(
 Liferay.Service.registerClass(
 	Liferay.Service.Portal, "Theme",
 	{
-		getThemes: true
+		getThemes: true,
+		getWARThemes: true
 	}
 );
 

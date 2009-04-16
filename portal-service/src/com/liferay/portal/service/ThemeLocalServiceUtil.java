@@ -68,6 +68,10 @@ public class ThemeLocalServiceUtil {
 		return getService().getThemes(companyId, groupId, userId, wapTheme);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Theme> getWARThemes() {
+		return getService().getWARThemes();
+	}
+
 	public static java.util.List<String> init(
 		javax.servlet.ServletContext servletContext,
 		java.lang.String themesPath, boolean loadFromServletContext,

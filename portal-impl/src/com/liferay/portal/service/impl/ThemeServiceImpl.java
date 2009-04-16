@@ -22,6 +22,9 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.base.ThemeServiceBaseImpl;
 
@@ -37,6 +40,24 @@ public class ThemeServiceImpl extends ThemeServiceBaseImpl {
 
 	public List<Theme> getThemes(long companyId) {
 		return themeLocalService.getThemes(companyId);
+	}
+
+	public JSONArray getWARThemes() {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		List<Theme> warThemes = themeLocalService.getWARThemes();
+
+		for(Theme theme : warThemes) {
+			JSONObject jsonObject= JSONFactoryUtil.createJSONObject();
+			jsonObject.put("theme_id", theme.getThemeId());
+			jsonObject.put("theme_name", theme.getName());
+			jsonObject.put(
+				"servlet_context_name",
+				theme.getServletContextName());
+			jsonArray.put(jsonObject);
+		}
+
+		return jsonArray;
 	}
 
 }

@@ -73,6 +73,9 @@ public interface ThemeLocalService {
 		long companyId, long groupId, long userId, boolean wapTheme)
 		throws com.liferay.portal.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portal.model.Theme> getWARThemes();
+
 	public java.util.List<String> init(
 		javax.servlet.ServletContext servletContext,
 		java.lang.String themesPath, boolean loadFromServletContext,

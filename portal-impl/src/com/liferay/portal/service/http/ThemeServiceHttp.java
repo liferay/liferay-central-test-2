@@ -96,5 +96,29 @@ public class ThemeServiceHttp {
 		}
 	}
 
+	public static com.liferay.portal.kernel.json.JSONArray getWARThemes(
+		HttpPrincipal httpPrincipal) throws com.liferay.portal.SystemException {
+		try {
+			MethodWrapper methodWrapper = new MethodWrapper(ThemeServiceUtil.class.getName(),
+					"getWARThemes", new Object[0]);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portal.kernel.json.JSONArray)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(ThemeServiceHttp.class);
 }
