@@ -50,7 +50,7 @@ public class Member_AssertActionsTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isElementPresent(
-				"//input[@value='Search Messages']"));
+				"//input[@value='Search Categories']"));
 		assertTrue(selenium.isElementPresent("link=RSS"));
 		assertTrue(selenium.isElementPresent("link=Subscribe"));
 		assertFalse(selenium.isElementPresent("//input[@value='Add Category']"));
