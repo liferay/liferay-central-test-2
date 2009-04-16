@@ -55,19 +55,23 @@ public class ReportCompilerRequestMessageListener implements MessageListener {
 		ReportResultContainer reportResultContainer =
 			_reportResultContainer.clone(reportRequest.getReportName());
 
+		Message replyMessage = new Message();
+
+		replyMessage.setDestination(message.getResponseDestination());
+		replyMessage.setResponseId(message.getResponseId());
+
 		try {
 			_reportEngine.compile(reportRequest);
 		}
 		catch (ReportGenerationException rge) {
-			_log.error("Unable to generate report", rge);
+			_log.error("Unable to compile report", rge);
 
 			reportResultContainer.setReportGenerationException(rge);
 		}
 		finally {
-			message.setPayload(true);
-
+			replyMessage.setPayload(reportResultContainer);
 			MessageBusUtil.sendMessage(
-				message.getResponseDestination(), message);
+				message.getResponseDestination(), replyMessage);
 		}
 	}
 
