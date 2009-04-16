@@ -1342,6 +1342,11 @@
 			<forward name="portlet.portlet_configuration.error" path="portlet.portlet_configuration.error" />
 		</action>
 
+		<action path="/portlet_configuration/edit_render_rules" type="com.liferay.portlet.portletconfiguration.action.EditRenderRulesAction">
+			<forward name="portlet.portlet_configuration.edit_render_rules" path="portlet.portlet_configuration.edit_render_rules" />
+			<forward name="portlet.portlet_configuration.error" path="portlet.portlet_configuration.error" />
+		</action>
+
 		<action path="/portlet_configuration/edit_scope" type="com.liferay.portlet.portletconfiguration.action.EditScopeAction">
 			<forward name="portlet.portlet_configuration.edit_scope" path="portlet.portlet_configuration.edit_scope" />
 			<forward name="portlet.portlet_configuration.error" path="portlet.portlet_configuration.error" />

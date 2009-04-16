@@ -1004,6 +1004,8 @@ public interface PropsKeys {
 
 	public static final String PORTLET_PUBLIC_RENDER_PARAMETER_DISTRIBUTION = "portlet.public.render.parameter.distribution";
 
+	public static final String PORTLET_RENDER_RULES_EVALUATORS = "portlet.render.rules.evaluators";
+
 	public static final String PORTLET_URL_ANCHOR_ENABLE = "portlet.url.anchor.enable";
 
 	public static final String PORTLET_URL_APPEND_PARAMETERS = "portlet.url.append.parameters";
