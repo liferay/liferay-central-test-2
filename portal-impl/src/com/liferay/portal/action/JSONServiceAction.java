@@ -184,6 +184,11 @@ public class JSONServiceAction extends JSONAction {
 
 						return jsonObj.toString();
 					}
+					else if (returnObj instanceof JSONArray) {
+						JSONArray jsonArray = (JSONArray)returnObj;
+
+						return jsonArray.toString();
+					}
 					else if (returnObj instanceof Boolean ||
 							 returnObj instanceof Double ||
 							 returnObj instanceof Integer ||
