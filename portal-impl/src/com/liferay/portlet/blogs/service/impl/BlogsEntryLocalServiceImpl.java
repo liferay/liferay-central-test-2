@@ -747,8 +747,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		tagsAssetLocalService.updateAsset(
 			userId, entry.getGroupId(), BlogsEntry.class.getName(),
 			entry.getEntryId(), null, tagsEntries, !entry.isDraft(), null, null,
-			null, null, ContentTypes.TEXT_HTML, entry.getTitle(), null, null,
-			null, 0, 0, null, false);
+			entry.getDisplayDate(), null, ContentTypes.TEXT_HTML,
+			entry.getTitle(), null, null, null, 0, 0, null, false);
 	}
 
 	protected String getUniqueUrlTitle(
