@@ -394,6 +394,12 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 
 	public List<PluginSetting> findByCompanyId(long companyId)
 		throws SystemException {
+		int count = countByCompanyId(companyId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
 		List<PluginSetting> list = (List<PluginSetting>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
@@ -449,6 +455,12 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 
 	public List<PluginSetting> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator obc) throws SystemException {
+		int count = countByCompanyId(companyId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				

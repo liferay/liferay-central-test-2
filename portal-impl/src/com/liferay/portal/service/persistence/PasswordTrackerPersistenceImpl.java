@@ -325,6 +325,12 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 
 	public List<PasswordTracker> findByUserId(long userId)
 		throws SystemException {
+		int count = countByUserId(userId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
 		List<PasswordTracker> list = (List<PasswordTracker>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
@@ -385,6 +391,12 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 
 	public List<PasswordTracker> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByUserId(userId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				

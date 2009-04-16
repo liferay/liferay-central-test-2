@@ -359,6 +359,12 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 
 	public List<ShoppingCoupon> findByGroupId(long groupId)
 		throws SystemException {
+		int count = countByGroupId(groupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		List<ShoppingCoupon> list = (List<ShoppingCoupon>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
@@ -418,6 +424,12 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 
 	public List<ShoppingCoupon> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByGroupId(groupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				

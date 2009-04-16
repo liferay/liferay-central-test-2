@@ -361,6 +361,12 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 
 	public List<Portlet> findByCompanyId(long companyId)
 		throws SystemException {
+		int count = countByCompanyId(companyId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
 		List<Portlet> list = (List<Portlet>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
@@ -415,6 +421,12 @@ public class PortletPersistenceImpl extends BasePersistenceImpl
 
 	public List<Portlet> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByCompanyId(companyId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				

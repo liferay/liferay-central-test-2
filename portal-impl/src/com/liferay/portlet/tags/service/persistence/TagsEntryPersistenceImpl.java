@@ -352,6 +352,12 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<TagsEntry> findByVocabularyId(long vocabularyId)
 		throws SystemException {
+		int count = countByVocabularyId(vocabularyId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(vocabularyId) };
 
 		List<TagsEntry> list = (List<TagsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_VOCABULARYID,
@@ -411,6 +417,12 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<TagsEntry> findByVocabularyId(long vocabularyId, int start,
 		int end, OrderByComparator obc) throws SystemException {
+		int count = countByVocabularyId(vocabularyId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(vocabularyId),
 				
@@ -576,6 +588,12 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<TagsEntry> findByP_V(long parentEntryId, long vocabularyId)
 		throws SystemException {
+		int count = countByP_V(parentEntryId, vocabularyId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(parentEntryId), new Long(vocabularyId)
 			};
@@ -643,6 +661,12 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<TagsEntry> findByP_V(long parentEntryId, long vocabularyId,
 		int start, int end, OrderByComparator obc) throws SystemException {
+		int count = countByP_V(parentEntryId, vocabularyId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(parentEntryId), new Long(vocabularyId),
 				

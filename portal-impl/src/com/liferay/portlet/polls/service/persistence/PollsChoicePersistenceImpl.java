@@ -397,6 +397,12 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<PollsChoice> findByUuid(String uuid) throws SystemException {
+		int count = countByUuid(uuid);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { uuid };
 
 		List<PollsChoice> list = (List<PollsChoice>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
@@ -464,6 +470,12 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 
 	public List<PollsChoice> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByUuid(uuid);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
@@ -644,6 +656,12 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 
 	public List<PollsChoice> findByQuestionId(long questionId)
 		throws SystemException {
+		int count = countByQuestionId(questionId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(questionId) };
 
 		List<PollsChoice> list = (List<PollsChoice>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_QUESTIONID,
@@ -704,6 +722,12 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl
 
 	public List<PollsChoice> findByQuestionId(long questionId, int start,
 		int end, OrderByComparator obc) throws SystemException {
+		int count = countByQuestionId(questionId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(questionId),
 				

@@ -353,6 +353,12 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<BookmarksEntry> findByUuid(String uuid)
 		throws SystemException {
+		int count = countByUuid(uuid);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { uuid };
 
 		List<BookmarksEntry> list = (List<BookmarksEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
@@ -420,6 +426,12 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<BookmarksEntry> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByUuid(uuid);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
@@ -600,6 +612,12 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<BookmarksEntry> findByFolderId(long folderId)
 		throws SystemException {
+		int count = countByFolderId(folderId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(folderId) };
 
 		List<BookmarksEntry> list = (List<BookmarksEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_FOLDERID,
@@ -660,6 +678,12 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<BookmarksEntry> findByFolderId(long folderId, int start,
 		int end, OrderByComparator obc) throws SystemException {
+		int count = countByFolderId(folderId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(folderId),
 				

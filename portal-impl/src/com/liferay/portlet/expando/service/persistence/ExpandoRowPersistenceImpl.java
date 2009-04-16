@@ -361,6 +361,12 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl
 
 	public List<ExpandoRow> findByTableId(long tableId)
 		throws SystemException {
+		int count = countByTableId(tableId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(tableId) };
 
 		List<ExpandoRow> list = (List<ExpandoRow>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_TABLEID,
@@ -416,6 +422,12 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl
 
 	public List<ExpandoRow> findByTableId(long tableId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByTableId(tableId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(tableId),
 				

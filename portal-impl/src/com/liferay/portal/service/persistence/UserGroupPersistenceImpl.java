@@ -397,6 +397,12 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 
 	public List<UserGroup> findByCompanyId(long companyId)
 		throws SystemException {
+		int count = countByCompanyId(companyId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
 		List<UserGroup> list = (List<UserGroup>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
@@ -455,6 +461,12 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 
 	public List<UserGroup> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByCompanyId(companyId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
@@ -618,6 +630,12 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 
 	public List<UserGroup> findByC_P(long companyId, long parentUserGroupId)
 		throws SystemException {
+		int count = countByC_P(companyId, parentUserGroupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(parentUserGroupId)
 			};
@@ -684,6 +702,12 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 
 	public List<UserGroup> findByC_P(long companyId, long parentUserGroupId,
 		int start, int end, OrderByComparator obc) throws SystemException {
+		int count = countByC_P(companyId, parentUserGroupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(parentUserGroupId),
 				

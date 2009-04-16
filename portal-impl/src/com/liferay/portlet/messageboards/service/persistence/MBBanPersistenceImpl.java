@@ -381,6 +381,12 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<MBBan> findByGroupId(long groupId) throws SystemException {
+		int count = countByGroupId(groupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		List<MBBan> list = (List<MBBan>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
@@ -436,6 +442,12 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBBan> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByGroupId(groupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -585,6 +597,12 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<MBBan> findByUserId(long userId) throws SystemException {
+		int count = countByUserId(userId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
 		List<MBBan> list = (List<MBBan>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
@@ -640,6 +658,12 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBBan> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByUserId(userId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
@@ -790,6 +814,12 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBBan> findByBanUserId(long banUserId)
 		throws SystemException {
+		int count = countByBanUserId(banUserId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(banUserId) };
 
 		List<MBBan> list = (List<MBBan>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_BANUSERID,
@@ -845,6 +875,12 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBBan> findByBanUserId(long banUserId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByBanUserId(banUserId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(banUserId),
 				

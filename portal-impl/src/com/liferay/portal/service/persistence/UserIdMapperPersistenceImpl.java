@@ -420,6 +420,12 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 
 	public List<UserIdMapper> findByUserId(long userId)
 		throws SystemException {
+		int count = countByUserId(userId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
 		List<UserIdMapper> list = (List<UserIdMapper>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
@@ -475,6 +481,12 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 
 	public List<UserIdMapper> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByUserId(userId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				

@@ -433,6 +433,12 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<SCProductEntry> findByGroupId(long groupId)
 		throws SystemException {
+		int count = countByGroupId(groupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		List<SCProductEntry> list = (List<SCProductEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
@@ -493,6 +499,12 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<SCProductEntry> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByGroupId(groupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -661,6 +673,12 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<SCProductEntry> findByCompanyId(long companyId)
 		throws SystemException {
+		int count = countByCompanyId(companyId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
 		List<SCProductEntry> list = (List<SCProductEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
@@ -721,6 +739,12 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<SCProductEntry> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator obc) throws SystemException {
+		int count = countByCompanyId(companyId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
@@ -891,6 +915,12 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<SCProductEntry> findByG_U(long groupId, long userId)
 		throws SystemException {
+		int count = countByG_U(groupId, userId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
 
 		List<SCProductEntry> list = (List<SCProductEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_U,
@@ -957,6 +987,12 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<SCProductEntry> findByG_U(long groupId, long userId, int start,
 		int end, OrderByComparator obc) throws SystemException {
+		int count = countByG_U(groupId, userId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(userId),
 				

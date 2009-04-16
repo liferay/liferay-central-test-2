@@ -433,6 +433,12 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 
 	public List<Organization> findByCompanyId(long companyId)
 		throws SystemException {
+		int count = countByCompanyId(companyId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
 		List<Organization> list = (List<Organization>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
@@ -492,6 +498,12 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 
 	public List<Organization> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator obc) throws SystemException {
+		int count = countByCompanyId(companyId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
@@ -659,6 +671,12 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 
 	public List<Organization> findByLocations(long companyId)
 		throws SystemException {
+		int count = countByLocations(companyId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
 		List<Organization> list = (List<Organization>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_LOCATIONS,
@@ -718,6 +736,12 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 
 	public List<Organization> findByLocations(long companyId, int start,
 		int end, OrderByComparator obc) throws SystemException {
+		int count = countByLocations(companyId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
@@ -885,6 +909,12 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 
 	public List<Organization> findByC_P(long companyId,
 		long parentOrganizationId) throws SystemException {
+		int count = countByC_P(companyId, parentOrganizationId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(parentOrganizationId)
 			};
@@ -954,6 +984,12 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 	public List<Organization> findByC_P(long companyId,
 		long parentOrganizationId, int start, int end, OrderByComparator obc)
 		throws SystemException {
+		int count = countByC_P(companyId, parentOrganizationId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(parentOrganizationId),
 				

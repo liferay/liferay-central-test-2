@@ -434,6 +434,12 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<Role> findByCompanyId(long companyId) throws SystemException {
+		int count = countByCompanyId(companyId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
 		List<Role> list = (List<Role>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
@@ -492,6 +498,12 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 	public List<Role> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByCompanyId(companyId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				

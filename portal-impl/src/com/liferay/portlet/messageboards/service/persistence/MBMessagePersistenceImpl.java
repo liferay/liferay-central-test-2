@@ -484,6 +484,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<MBMessage> findByUuid(String uuid) throws SystemException {
+		int count = countByUuid(uuid);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { uuid };
 
 		List<MBMessage> list = (List<MBMessage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
@@ -551,6 +557,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 	public List<MBMessage> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByUuid(uuid);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
@@ -852,6 +864,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 	public List<MBMessage> findByCompanyId(long companyId)
 		throws SystemException {
+		int count = countByCompanyId(companyId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
 		List<MBMessage> list = (List<MBMessage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
@@ -912,6 +930,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 	public List<MBMessage> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByCompanyId(companyId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
@@ -1079,6 +1103,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 	public List<MBMessage> findByGroupId(long groupId)
 		throws SystemException {
+		int count = countByGroupId(groupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		List<MBMessage> list = (List<MBMessage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
@@ -1139,6 +1169,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 	public List<MBMessage> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByGroupId(groupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -1305,6 +1341,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 	public List<MBMessage> findByCategoryId(long categoryId)
 		throws SystemException {
+		int count = countByCategoryId(categoryId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(categoryId) };
 
 		List<MBMessage> list = (List<MBMessage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_CATEGORYID,
@@ -1365,6 +1407,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 	public List<MBMessage> findByCategoryId(long categoryId, int start,
 		int end, OrderByComparator obc) throws SystemException {
+		int count = countByCategoryId(categoryId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(categoryId),
 				
@@ -1533,6 +1581,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 	public List<MBMessage> findByThreadId(long threadId)
 		throws SystemException {
+		int count = countByThreadId(threadId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(threadId) };
 
 		List<MBMessage> list = (List<MBMessage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_THREADID,
@@ -1593,6 +1647,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 	public List<MBMessage> findByThreadId(long threadId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByThreadId(threadId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(threadId),
 				
@@ -1760,6 +1820,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 	public List<MBMessage> findByG_U(long groupId, long userId)
 		throws SystemException {
+		int count = countByG_U(groupId, userId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
 
 		List<MBMessage> list = (List<MBMessage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_U,
@@ -1826,6 +1892,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 	public List<MBMessage> findByG_U(long groupId, long userId, int start,
 		int end, OrderByComparator obc) throws SystemException {
+		int count = countByG_U(groupId, userId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(userId),
 				
@@ -2011,6 +2083,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 	public List<MBMessage> findByC_T(long categoryId, long threadId)
 		throws SystemException {
+		int count = countByC_T(categoryId, threadId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(categoryId), new Long(threadId)
 			};
@@ -2079,6 +2157,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 	public List<MBMessage> findByC_T(long categoryId, long threadId, int start,
 		int end, OrderByComparator obc) throws SystemException {
+		int count = countByC_T(categoryId, threadId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(categoryId), new Long(threadId),
 				
@@ -2265,6 +2349,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 	public List<MBMessage> findByT_P(long threadId, long parentMessageId)
 		throws SystemException {
+		int count = countByT_P(threadId, parentMessageId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(threadId), new Long(parentMessageId)
 			};
@@ -2333,6 +2423,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl
 
 	public List<MBMessage> findByT_P(long threadId, long parentMessageId,
 		int start, int end, OrderByComparator obc) throws SystemException {
+		int count = countByT_P(threadId, parentMessageId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(threadId), new Long(parentMessageId),
 				

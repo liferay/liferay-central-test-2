@@ -397,6 +397,12 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<AnnouncementsEntry> findByUuid(String uuid)
 		throws SystemException {
+		int count = countByUuid(uuid);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { uuid };
 
 		List<AnnouncementsEntry> list = (List<AnnouncementsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
@@ -464,6 +470,12 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<AnnouncementsEntry> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByUuid(uuid);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
@@ -645,6 +657,12 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<AnnouncementsEntry> findByUserId(long userId)
 		throws SystemException {
+		int count = countByUserId(userId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
 		List<AnnouncementsEntry> list = (List<AnnouncementsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
@@ -705,6 +723,12 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<AnnouncementsEntry> findByUserId(long userId, int start,
 		int end, OrderByComparator obc) throws SystemException {
+		int count = countByUserId(userId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
@@ -873,6 +897,12 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<AnnouncementsEntry> findByC_C(long classNameId, long classPK)
 		throws SystemException {
+		int count = countByC_C(classNameId, classPK);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK)
 			};
@@ -941,6 +971,12 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<AnnouncementsEntry> findByC_C(long classNameId, long classPK,
 		int start, int end, OrderByComparator obc) throws SystemException {
+		int count = countByC_C(classNameId, classPK);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK),
 				
@@ -1128,6 +1164,12 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<AnnouncementsEntry> findByC_C_A(long classNameId, long classPK,
 		boolean alert) throws SystemException {
+		int count = countByC_C_A(classNameId, classPK, alert);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK), Boolean.valueOf(alert)
 			};
@@ -1203,6 +1245,12 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 	public List<AnnouncementsEntry> findByC_C_A(long classNameId, long classPK,
 		boolean alert, int start, int end, OrderByComparator obc)
 		throws SystemException {
+		int count = countByC_C_A(classNameId, classPK, alert);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK), Boolean.valueOf(alert),
 				

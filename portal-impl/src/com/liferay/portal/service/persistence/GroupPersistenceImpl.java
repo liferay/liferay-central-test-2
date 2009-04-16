@@ -923,6 +923,12 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 	public List<Group> findByT_A(int type, boolean active)
 		throws SystemException {
+		int count = countByT_A(type, active);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Integer(type), Boolean.valueOf(active)
 			};
@@ -989,6 +995,12 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 	public List<Group> findByT_A(int type, boolean active, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByT_A(type, active);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Integer(type), Boolean.valueOf(active),
 				

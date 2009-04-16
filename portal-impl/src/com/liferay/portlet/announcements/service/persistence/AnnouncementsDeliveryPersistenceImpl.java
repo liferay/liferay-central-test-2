@@ -383,6 +383,12 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 
 	public List<AnnouncementsDelivery> findByUserId(long userId)
 		throws SystemException {
+		int count = countByUserId(userId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
 		List<AnnouncementsDelivery> list = (List<AnnouncementsDelivery>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
@@ -438,6 +444,12 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 
 	public List<AnnouncementsDelivery> findByUserId(long userId, int start,
 		int end, OrderByComparator obc) throws SystemException {
+		int count = countByUserId(userId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				

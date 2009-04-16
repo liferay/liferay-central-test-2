@@ -325,6 +325,12 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 
 	public List<UserTrackerPath> findByUserTrackerId(long userTrackerId)
 		throws SystemException {
+		int count = countByUserTrackerId(userTrackerId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(userTrackerId) };
 
 		List<UserTrackerPath> list = (List<UserTrackerPath>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERTRACKERID,
@@ -380,6 +386,12 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 
 	public List<UserTrackerPath> findByUserTrackerId(long userTrackerId,
 		int start, int end, OrderByComparator obc) throws SystemException {
+		int count = countByUserTrackerId(userTrackerId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(userTrackerId),
 				

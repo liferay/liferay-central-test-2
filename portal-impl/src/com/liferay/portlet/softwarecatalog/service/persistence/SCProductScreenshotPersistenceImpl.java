@@ -438,6 +438,12 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 	public List<SCProductScreenshot> findByProductEntryId(long productEntryId)
 		throws SystemException {
+		int count = countByProductEntryId(productEntryId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(productEntryId) };
 
 		List<SCProductScreenshot> list = (List<SCProductScreenshot>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_PRODUCTENTRYID,
@@ -498,6 +504,12 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 
 	public List<SCProductScreenshot> findByProductEntryId(long productEntryId,
 		int start, int end, OrderByComparator obc) throws SystemException {
+		int count = countByProductEntryId(productEntryId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(productEntryId),
 				

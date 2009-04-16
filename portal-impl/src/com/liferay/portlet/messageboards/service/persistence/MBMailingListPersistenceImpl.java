@@ -434,6 +434,12 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBMailingList> findByUuid(String uuid)
 		throws SystemException {
+		int count = countByUuid(uuid);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { uuid };
 
 		List<MBMailingList> list = (List<MBMailingList>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
@@ -496,6 +502,12 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBMailingList> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByUuid(uuid);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
@@ -879,6 +891,12 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBMailingList> findByActive(boolean active)
 		throws SystemException {
+		int count = countByActive(active);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { Boolean.valueOf(active) };
 
 		List<MBMailingList> list = (List<MBMailingList>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ACTIVE,
@@ -934,6 +952,12 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBMailingList> findByActive(boolean active, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByActive(active);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				Boolean.valueOf(active),
 				

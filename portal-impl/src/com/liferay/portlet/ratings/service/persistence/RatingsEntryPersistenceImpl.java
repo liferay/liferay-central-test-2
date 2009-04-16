@@ -378,6 +378,12 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<RatingsEntry> findByC_C(long classNameId, long classPK)
 		throws SystemException {
+		int count = countByC_C(classNameId, classPK);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK)
 			};
@@ -441,6 +447,12 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl
 
 	public List<RatingsEntry> findByC_C(long classNameId, long classPK,
 		int start, int end, OrderByComparator obc) throws SystemException {
+		int count = countByC_C(classNameId, classPK);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK),
 				

@@ -361,6 +361,12 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<Resource> findByCodeId(long codeId) throws SystemException {
+		int count = countByCodeId(codeId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(codeId) };
 
 		List<Resource> list = (List<Resource>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_CODEID,
@@ -415,6 +421,12 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 
 	public List<Resource> findByCodeId(long codeId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByCodeId(codeId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(codeId),
 				

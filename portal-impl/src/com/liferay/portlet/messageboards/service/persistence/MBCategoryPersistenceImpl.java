@@ -420,6 +420,12 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<MBCategory> findByUuid(String uuid) throws SystemException {
+		int count = countByUuid(uuid);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { uuid };
 
 		List<MBCategory> list = (List<MBCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
@@ -487,6 +493,12 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBCategory> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByUuid(uuid);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
@@ -788,6 +800,12 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBCategory> findByGroupId(long groupId)
 		throws SystemException {
+		int count = countByGroupId(groupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		List<MBCategory> list = (List<MBCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
@@ -848,6 +866,12 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBCategory> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByGroupId(groupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -1015,6 +1039,12 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBCategory> findByCompanyId(long companyId)
 		throws SystemException {
+		int count = countByCompanyId(companyId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
 		List<MBCategory> list = (List<MBCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
@@ -1075,6 +1105,12 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBCategory> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByCompanyId(companyId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
@@ -1242,6 +1278,12 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBCategory> findByG_P(long groupId, long parentCategoryId)
 		throws SystemException {
+		int count = countByG_P(groupId, parentCategoryId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(parentCategoryId)
 			};
@@ -1310,6 +1352,12 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBCategory> findByG_P(long groupId, long parentCategoryId,
 		int start, int end, OrderByComparator obc) throws SystemException {
+		int count = countByG_P(groupId, parentCategoryId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(parentCategoryId),
 				

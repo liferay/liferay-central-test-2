@@ -328,6 +328,12 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl
 
 	public List<ShoppingItemField> findByItemId(long itemId)
 		throws SystemException {
+		int count = countByItemId(itemId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(itemId) };
 
 		List<ShoppingItemField> list = (List<ShoppingItemField>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ITEMID,
@@ -388,6 +394,12 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl
 
 	public List<ShoppingItemField> findByItemId(long itemId, int start,
 		int end, OrderByComparator obc) throws SystemException {
+		int count = countByItemId(itemId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(itemId),
 				

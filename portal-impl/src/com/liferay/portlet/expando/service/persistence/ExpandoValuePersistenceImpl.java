@@ -504,6 +504,12 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 	public List<ExpandoValue> findByTableId(long tableId)
 		throws SystemException {
+		int count = countByTableId(tableId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(tableId) };
 
 		List<ExpandoValue> list = (List<ExpandoValue>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_TABLEID,
@@ -565,6 +571,12 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 	public List<ExpandoValue> findByTableId(long tableId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByTableId(tableId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(tableId),
 				
@@ -733,6 +745,12 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 	public List<ExpandoValue> findByColumnId(long columnId)
 		throws SystemException {
+		int count = countByColumnId(columnId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(columnId) };
 
 		List<ExpandoValue> list = (List<ExpandoValue>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COLUMNID,
@@ -794,6 +812,12 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 	public List<ExpandoValue> findByColumnId(long columnId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByColumnId(columnId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(columnId),
 				
@@ -962,6 +986,12 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<ExpandoValue> findByRowId(long rowId) throws SystemException {
+		int count = countByRowId(rowId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(rowId) };
 
 		List<ExpandoValue> list = (List<ExpandoValue>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ROWID,
@@ -1023,6 +1053,12 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 	public List<ExpandoValue> findByRowId(long rowId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByRowId(rowId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(rowId),
 				
@@ -1191,6 +1227,12 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 	public List<ExpandoValue> findByT_R(long tableId, long rowId)
 		throws SystemException {
+		int count = countByT_R(tableId, rowId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(tableId), new Long(rowId) };
 
 		List<ExpandoValue> list = (List<ExpandoValue>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_T_R,
@@ -1258,6 +1300,12 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 	public List<ExpandoValue> findByT_R(long tableId, long rowId, int start,
 		int end, OrderByComparator obc) throws SystemException {
+		int count = countByT_R(tableId, rowId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(tableId), new Long(rowId),
 				
@@ -1561,6 +1609,12 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 	public List<ExpandoValue> findByC_C(long classNameId, long classPK)
 		throws SystemException {
+		int count = countByC_C(classNameId, classPK);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK)
 			};
@@ -1630,6 +1684,12 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 	public List<ExpandoValue> findByC_C(long classNameId, long classPK,
 		int start, int end, OrderByComparator obc) throws SystemException {
+		int count = countByC_C(classNameId, classPK);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK),
 				
@@ -1944,6 +2004,12 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 
 	public List<ExpandoValue> findByT_C_C_C(long tableId, long columnId,
 		long classNameId, long classPK) throws SystemException {
+		int count = countByT_C_C_C(tableId, columnId, classNameId, classPK);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(tableId), new Long(columnId), new Long(classNameId),
 				new Long(classPK)
@@ -2029,6 +2095,12 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 	public List<ExpandoValue> findByT_C_C_C(long tableId, long columnId,
 		long classNameId, long classPK, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByT_C_C_C(tableId, columnId, classNameId, classPK);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(tableId), new Long(columnId), new Long(classNameId),
 				new Long(classPK),

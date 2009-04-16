@@ -555,6 +555,12 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialActivity> findByGroupId(long groupId)
 		throws SystemException {
+		int count = countByGroupId(groupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		List<SocialActivity> list = (List<SocialActivity>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
@@ -614,6 +620,12 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialActivity> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByGroupId(groupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -779,6 +791,12 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialActivity> findByCompanyId(long companyId)
 		throws SystemException {
+		int count = countByCompanyId(companyId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
 		List<SocialActivity> list = (List<SocialActivity>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
@@ -838,6 +856,12 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialActivity> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator obc) throws SystemException {
+		int count = countByCompanyId(companyId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
@@ -1004,6 +1028,12 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialActivity> findByUserId(long userId)
 		throws SystemException {
+		int count = countByUserId(userId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
 		List<SocialActivity> list = (List<SocialActivity>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
@@ -1063,6 +1093,12 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialActivity> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByUserId(userId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
@@ -1332,6 +1368,12 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialActivity> findByClassNameId(long classNameId)
 		throws SystemException {
+		int count = countByClassNameId(classNameId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(classNameId) };
 
 		List<SocialActivity> list = (List<SocialActivity>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_CLASSNAMEID,
@@ -1391,6 +1433,12 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialActivity> findByClassNameId(long classNameId, int start,
 		int end, OrderByComparator obc) throws SystemException {
+		int count = countByClassNameId(classNameId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId),
 				
@@ -1557,6 +1605,12 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialActivity> findByReceiverUserId(long receiverUserId)
 		throws SystemException {
+		int count = countByReceiverUserId(receiverUserId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(receiverUserId) };
 
 		List<SocialActivity> list = (List<SocialActivity>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_RECEIVERUSERID,
@@ -1616,6 +1670,12 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialActivity> findByReceiverUserId(long receiverUserId,
 		int start, int end, OrderByComparator obc) throws SystemException {
+		int count = countByReceiverUserId(receiverUserId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(receiverUserId),
 				
@@ -1783,6 +1843,12 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialActivity> findByC_C(long classNameId, long classPK)
 		throws SystemException {
+		int count = countByC_C(classNameId, classPK);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK)
 			};
@@ -1850,6 +1916,12 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialActivity> findByC_C(long classNameId, long classPK,
 		int start, int end, OrderByComparator obc) throws SystemException {
+		int count = countByC_C(classNameId, classPK);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK),
 				
@@ -2034,6 +2106,12 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 
 	public List<SocialActivity> findByM_C_C(long mirrorActivityId,
 		long classNameId, long classPK) throws SystemException {
+		int count = countByM_C_C(mirrorActivityId, classNameId, classPK);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(mirrorActivityId), new Long(classNameId),
 				new Long(classPK)
@@ -2111,6 +2189,12 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl
 	public List<SocialActivity> findByM_C_C(long mirrorActivityId,
 		long classNameId, long classPK, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByM_C_C(mirrorActivityId, classNameId, classPK);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(mirrorActivityId), new Long(classNameId),
 				new Long(classPK),

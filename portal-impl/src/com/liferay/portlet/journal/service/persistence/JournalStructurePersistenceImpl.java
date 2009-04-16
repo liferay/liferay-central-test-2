@@ -483,6 +483,12 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalStructure> findByUuid(String uuid)
 		throws SystemException {
+		int count = countByUuid(uuid);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { uuid };
 
 		List<JournalStructure> list = (List<JournalStructure>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
@@ -549,6 +555,12 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalStructure> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByUuid(uuid);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
@@ -847,6 +859,12 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalStructure> findByGroupId(long groupId)
 		throws SystemException {
+		int count = countByGroupId(groupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		List<JournalStructure> list = (List<JournalStructure>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
@@ -906,6 +924,12 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalStructure> findByGroupId(long groupId, int start,
 		int end, OrderByComparator obc) throws SystemException {
+		int count = countByGroupId(groupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -1071,6 +1095,12 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalStructure> findByStructureId(String structureId)
 		throws SystemException {
+		int count = countByStructureId(structureId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { structureId };
 
 		List<JournalStructure> list = (List<JournalStructure>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_STRUCTUREID,
@@ -1137,6 +1167,12 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalStructure> findByStructureId(String structureId,
 		int start, int end, OrderByComparator obc) throws SystemException {
+		int count = countByStructureId(structureId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				structureId,
 				
@@ -1437,6 +1473,12 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalStructure> findByG_P(long groupId,
 		String parentStructureId) throws SystemException {
+		int count = countByG_P(groupId, parentStructureId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(groupId), parentStructureId };
 
 		List<JournalStructure> list = (List<JournalStructure>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_P,
@@ -1510,6 +1552,12 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 	public List<JournalStructure> findByG_P(long groupId,
 		String parentStructureId, int start, int end, OrderByComparator obc)
 		throws SystemException {
+		int count = countByG_P(groupId, parentStructureId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				

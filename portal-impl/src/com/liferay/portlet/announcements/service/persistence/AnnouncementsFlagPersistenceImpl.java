@@ -385,6 +385,12 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 
 	public List<AnnouncementsFlag> findByEntryId(long entryId)
 		throws SystemException {
+		int count = countByEntryId(entryId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(entryId) };
 
 		List<AnnouncementsFlag> list = (List<AnnouncementsFlag>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ENTRYID,
@@ -445,6 +451,12 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 
 	public List<AnnouncementsFlag> findByEntryId(long entryId, int start,
 		int end, OrderByComparator obc) throws SystemException {
+		int count = countByEntryId(entryId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(entryId),
 				

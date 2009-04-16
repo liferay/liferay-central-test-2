@@ -335,6 +335,12 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 
 	public List<OrgGroupRole> findByGroupId(long groupId)
 		throws SystemException {
+		int count = countByGroupId(groupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		List<OrgGroupRole> list = (List<OrgGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
@@ -390,6 +396,12 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 
 	public List<OrgGroupRole> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByGroupId(groupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -542,6 +554,12 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 
 	public List<OrgGroupRole> findByRoleId(long roleId)
 		throws SystemException {
+		int count = countByRoleId(roleId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(roleId) };
 
 		List<OrgGroupRole> list = (List<OrgGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ROLEID,
@@ -597,6 +615,12 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 
 	public List<OrgGroupRole> findByRoleId(long roleId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByRoleId(roleId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(roleId),
 				

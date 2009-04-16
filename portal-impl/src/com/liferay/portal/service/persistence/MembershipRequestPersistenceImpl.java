@@ -360,6 +360,12 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 
 	public List<MembershipRequest> findByGroupId(long groupId)
 		throws SystemException {
+		int count = countByGroupId(groupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		List<MembershipRequest> list = (List<MembershipRequest>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
@@ -419,6 +425,12 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 
 	public List<MembershipRequest> findByGroupId(long groupId, int start,
 		int end, OrderByComparator obc) throws SystemException {
+		int count = countByGroupId(groupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -587,6 +599,12 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 
 	public List<MembershipRequest> findByUserId(long userId)
 		throws SystemException {
+		int count = countByUserId(userId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
 		List<MembershipRequest> list = (List<MembershipRequest>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
@@ -646,6 +664,12 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 
 	public List<MembershipRequest> findByUserId(long userId, int start,
 		int end, OrderByComparator obc) throws SystemException {
+		int count = countByUserId(userId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
@@ -814,6 +838,12 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 
 	public List<MembershipRequest> findByG_S(long groupId, int statusId)
 		throws SystemException {
+		int count = countByG_S(groupId, statusId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Integer(statusId)
 			};
@@ -881,6 +911,12 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 
 	public List<MembershipRequest> findByG_S(long groupId, int statusId,
 		int start, int end, OrderByComparator obc) throws SystemException {
+		int count = countByG_S(groupId, statusId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Integer(statusId),
 				

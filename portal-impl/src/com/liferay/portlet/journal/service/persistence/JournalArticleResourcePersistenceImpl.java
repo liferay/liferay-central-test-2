@@ -387,6 +387,12 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalArticleResource> findByGroupId(long groupId)
 		throws SystemException {
+		int count = countByGroupId(groupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		List<JournalArticleResource> list = (List<JournalArticleResource>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
@@ -442,6 +448,12 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalArticleResource> findByGroupId(long groupId, int start,
 		int end, OrderByComparator obc) throws SystemException {
+		int count = countByGroupId(groupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				

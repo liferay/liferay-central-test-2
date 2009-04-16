@@ -386,6 +386,12 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 
 	public List<ExpandoTable> findByC_C(long companyId, long classNameId)
 		throws SystemException {
+		int count = countByC_C(companyId, classNameId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId)
 			};
@@ -449,6 +455,12 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 
 	public List<ExpandoTable> findByC_C(long companyId, long classNameId,
 		int start, int end, OrderByComparator obc) throws SystemException {
+		int count = countByC_C(companyId, classNameId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId),
 				

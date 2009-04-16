@@ -403,6 +403,12 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<DLFileRank> findByUserId(long userId) throws SystemException {
+		int count = countByUserId(userId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
 		List<DLFileRank> list = (List<DLFileRank>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
@@ -462,6 +468,12 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFileRank> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByUserId(userId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
@@ -626,6 +638,12 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFileRank> findByF_N(long folderId, String name)
 		throws SystemException {
+		int count = countByF_N(folderId, name);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(folderId), name };
 
 		List<DLFileRank> list = (List<DLFileRank>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_F_N,
@@ -698,6 +716,12 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFileRank> findByF_N(long folderId, String name, int start,
 		int end, OrderByComparator obc) throws SystemException {
+		int count = countByF_N(folderId, name);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(folderId),
 				

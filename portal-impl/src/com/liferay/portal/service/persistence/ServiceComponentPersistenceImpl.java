@@ -374,6 +374,12 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 
 	public List<ServiceComponent> findByBuildNamespace(String buildNamespace)
 		throws SystemException {
+		int count = countByBuildNamespace(buildNamespace);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { buildNamespace };
 
 		List<ServiceComponent> list = (List<ServiceComponent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_BUILDNAMESPACE,
@@ -441,6 +447,12 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 
 	public List<ServiceComponent> findByBuildNamespace(String buildNamespace,
 		int start, int end, OrderByComparator obc) throws SystemException {
+		int count = countByBuildNamespace(buildNamespace);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				buildNamespace,
 				

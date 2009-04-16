@@ -329,6 +329,12 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<MBThread> findByGroupId(long groupId) throws SystemException {
+		int count = countByGroupId(groupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		List<MBThread> list = (List<MBThread>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
@@ -389,6 +395,12 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBThread> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByGroupId(groupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -554,6 +566,12 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBThread> findByCategoryId(long categoryId)
 		throws SystemException {
+		int count = countByCategoryId(categoryId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(categoryId) };
 
 		List<MBThread> list = (List<MBThread>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_CATEGORYID,
@@ -614,6 +632,12 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 
 	public List<MBThread> findByCategoryId(long categoryId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByCategoryId(categoryId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(categoryId),
 				

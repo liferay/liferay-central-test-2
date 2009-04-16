@@ -551,6 +551,12 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<Layout> findByGroupId(long groupId) throws SystemException {
+		int count = countByGroupId(groupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		List<Layout> list = (List<Layout>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
@@ -610,6 +616,12 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 	public List<Layout> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByGroupId(groupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -772,6 +784,12 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 	public List<Layout> findByCompanyId(long companyId)
 		throws SystemException {
+		int count = countByCompanyId(companyId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
 		List<Layout> list = (List<Layout>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
@@ -831,6 +849,12 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 	public List<Layout> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByCompanyId(companyId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
@@ -1200,6 +1224,12 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 	public List<Layout> findByG_P(long groupId, boolean privateLayout)
 		throws SystemException {
+		int count = countByG_P(groupId, privateLayout);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(privateLayout)
 			};
@@ -1267,6 +1297,12 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 	public List<Layout> findByG_P(long groupId, boolean privateLayout,
 		int start, int end, OrderByComparator obc) throws SystemException {
+		int count = countByG_P(groupId, privateLayout);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(privateLayout),
 				
@@ -1574,6 +1610,12 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 	public List<Layout> findByG_P_P(long groupId, boolean privateLayout,
 		long parentLayoutId) throws SystemException {
+		int count = countByG_P_P(groupId, privateLayout, parentLayoutId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(privateLayout),
 				new Long(parentLayoutId)
@@ -1650,6 +1692,12 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 	public List<Layout> findByG_P_P(long groupId, boolean privateLayout,
 		long parentLayoutId, int start, int end, OrderByComparator obc)
 		throws SystemException {
+		int count = countByG_P_P(groupId, privateLayout, parentLayoutId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(privateLayout),
 				new Long(parentLayoutId),
@@ -1988,6 +2036,12 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 
 	public List<Layout> findByG_P_T(long groupId, boolean privateLayout,
 		String type) throws SystemException {
+		int count = countByG_P_T(groupId, privateLayout, type);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(privateLayout),
 				
@@ -2071,6 +2125,12 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 	public List<Layout> findByG_P_T(long groupId, boolean privateLayout,
 		String type, int start, int end, OrderByComparator obc)
 		throws SystemException {
+		int count = countByG_P_T(groupId, privateLayout, type);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(privateLayout),
 				

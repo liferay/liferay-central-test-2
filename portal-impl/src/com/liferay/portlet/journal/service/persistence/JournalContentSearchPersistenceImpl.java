@@ -505,6 +505,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalContentSearch> findByG_P(long groupId,
 		boolean privateLayout) throws SystemException {
+		int count = countByG_P(groupId, privateLayout);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(privateLayout)
 			};
@@ -569,6 +575,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 	public List<JournalContentSearch> findByG_P(long groupId,
 		boolean privateLayout, int start, int end, OrderByComparator obc)
 		throws SystemException {
+		int count = countByG_P(groupId, privateLayout);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(privateLayout),
 				
@@ -744,6 +756,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalContentSearch> findByG_A(long groupId, String articleId)
 		throws SystemException {
+		int count = countByG_A(groupId, articleId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(groupId), articleId };
 
 		List<JournalContentSearch> list = (List<JournalContentSearch>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_A,
@@ -812,6 +830,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalContentSearch> findByG_A(long groupId, String articleId,
 		int start, int end, OrderByComparator obc) throws SystemException {
+		int count = countByG_A(groupId, articleId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -1003,6 +1027,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalContentSearch> findByG_P_L(long groupId,
 		boolean privateLayout, long layoutId) throws SystemException {
+		int count = countByG_P_L(groupId, privateLayout, layoutId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(privateLayout),
 				new Long(layoutId)
@@ -1075,6 +1105,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 	public List<JournalContentSearch> findByG_P_L(long groupId,
 		boolean privateLayout, long layoutId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByG_P_L(groupId, privateLayout, layoutId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(privateLayout),
 				new Long(layoutId),
@@ -1270,6 +1306,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 
 	public List<JournalContentSearch> findByG_P_A(long groupId,
 		boolean privateLayout, String articleId) throws SystemException {
+		int count = countByG_P_A(groupId, privateLayout, articleId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(privateLayout),
 				
@@ -1350,6 +1392,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 	public List<JournalContentSearch> findByG_P_A(long groupId,
 		boolean privateLayout, String articleId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByG_P_A(groupId, privateLayout, articleId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(privateLayout),
 				
@@ -1561,6 +1609,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 	public List<JournalContentSearch> findByG_P_L_P(long groupId,
 		boolean privateLayout, long layoutId, String portletId)
 		throws SystemException {
+		int count = countByG_P_L_P(groupId, privateLayout, layoutId, portletId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(privateLayout),
 				new Long(layoutId),
@@ -1649,6 +1703,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 	public List<JournalContentSearch> findByG_P_L_P(long groupId,
 		boolean privateLayout, long layoutId, String portletId, int start,
 		int end, OrderByComparator obc) throws SystemException {
+		int count = countByG_P_L_P(groupId, privateLayout, layoutId, portletId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(privateLayout),
 				new Long(layoutId),

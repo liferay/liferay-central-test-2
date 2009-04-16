@@ -471,6 +471,12 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<IGFolder> findByUuid(String uuid) throws SystemException {
+		int count = countByUuid(uuid);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { uuid };
 
 		List<IGFolder> list = (List<IGFolder>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
@@ -538,6 +544,12 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 	public List<IGFolder> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByUuid(uuid);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
@@ -837,6 +849,12 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<IGFolder> findByGroupId(long groupId) throws SystemException {
+		int count = countByGroupId(groupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		List<IGFolder> list = (List<IGFolder>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
@@ -897,6 +915,12 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 	public List<IGFolder> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByGroupId(groupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -1062,6 +1086,12 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 	public List<IGFolder> findByCompanyId(long companyId)
 		throws SystemException {
+		int count = countByCompanyId(companyId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
 		List<IGFolder> list = (List<IGFolder>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
@@ -1122,6 +1152,12 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 	public List<IGFolder> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByCompanyId(companyId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
@@ -1288,6 +1324,12 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 	public List<IGFolder> findByG_P(long groupId, long parentFolderId)
 		throws SystemException {
+		int count = countByG_P(groupId, parentFolderId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(parentFolderId)
 			};
@@ -1356,6 +1398,12 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 
 	public List<IGFolder> findByG_P(long groupId, long parentFolderId,
 		int start, int end, OrderByComparator obc) throws SystemException {
+		int count = countByG_P(groupId, parentFolderId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(parentFolderId),
 				

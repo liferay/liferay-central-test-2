@@ -422,6 +422,12 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 	public List<BlogsStatsUser> findByGroupId(long groupId)
 		throws SystemException {
+		int count = countByGroupId(groupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		List<BlogsStatsUser> list = (List<BlogsStatsUser>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
@@ -481,6 +487,12 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 	public List<BlogsStatsUser> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByGroupId(groupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -646,6 +658,12 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 	public List<BlogsStatsUser> findByUserId(long userId)
 		throws SystemException {
+		int count = countByUserId(userId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(userId) };
 
 		List<BlogsStatsUser> list = (List<BlogsStatsUser>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
@@ -705,6 +723,12 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 	public List<BlogsStatsUser> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByUserId(userId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
@@ -983,6 +1007,12 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 	public List<BlogsStatsUser> findByG_E(long groupId, int entryCount)
 		throws SystemException {
+		int count = countByG_E(groupId, entryCount);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Integer(entryCount)
 			};
@@ -1050,6 +1080,12 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 	public List<BlogsStatsUser> findByG_E(long groupId, int entryCount,
 		int start, int end, OrderByComparator obc) throws SystemException {
+		int count = countByG_E(groupId, entryCount);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Integer(entryCount),
 				
@@ -1234,6 +1270,12 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 	public List<BlogsStatsUser> findByC_E(long companyId, int entryCount)
 		throws SystemException {
+		int count = countByC_E(companyId, entryCount);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Integer(entryCount)
 			};
@@ -1301,6 +1343,12 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 
 	public List<BlogsStatsUser> findByC_E(long companyId, int entryCount,
 		int start, int end, OrderByComparator obc) throws SystemException {
+		int count = countByC_E(companyId, entryCount);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Integer(entryCount),
 				

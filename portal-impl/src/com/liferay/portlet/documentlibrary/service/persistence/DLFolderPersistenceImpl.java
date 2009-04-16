@@ -488,6 +488,12 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<DLFolder> findByUuid(String uuid) throws SystemException {
+		int count = countByUuid(uuid);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { uuid };
 
 		List<DLFolder> list = (List<DLFolder>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
@@ -555,6 +561,12 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFolder> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByUuid(uuid);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
@@ -854,6 +866,12 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 	}
 
 	public List<DLFolder> findByGroupId(long groupId) throws SystemException {
+		int count = countByGroupId(groupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		List<DLFolder> list = (List<DLFolder>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
@@ -914,6 +932,12 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFolder> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByGroupId(groupId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
@@ -1079,6 +1103,12 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFolder> findByCompanyId(long companyId)
 		throws SystemException {
+		int count = countByCompanyId(companyId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
 		List<DLFolder> list = (List<DLFolder>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
@@ -1139,6 +1169,12 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFolder> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator obc) throws SystemException {
+		int count = countByCompanyId(companyId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
@@ -1305,6 +1341,12 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFolder> findByG_P(long groupId, long parentFolderId)
 		throws SystemException {
+		int count = countByG_P(groupId, parentFolderId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(parentFolderId)
 			};
@@ -1373,6 +1415,12 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFolder> findByG_P(long groupId, long parentFolderId,
 		int start, int end, OrderByComparator obc) throws SystemException {
+		int count = countByG_P(groupId, parentFolderId);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(parentFolderId),
 				
@@ -1558,6 +1606,12 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFolder> findByP_N(long parentFolderId, String name)
 		throws SystemException {
+		int count = countByP_N(parentFolderId, name);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] { new Long(parentFolderId), name };
 
 		List<DLFolder> list = (List<DLFolder>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_P_N,
@@ -1631,6 +1685,12 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 
 	public List<DLFolder> findByP_N(long parentFolderId, String name,
 		int start, int end, OrderByComparator obc) throws SystemException {
+		int count = countByP_N(parentFolderId, name);
+
+		if (count == 0) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Object[] finderArgs = new Object[] {
 				new Long(parentFolderId),
 				
