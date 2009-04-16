@@ -273,40 +273,6 @@ public interface SocialRequestPersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.social.NoSuchRequestException;
 
-	public java.util.List<com.liferay.portlet.social.model.SocialRequest> findByC_C_T_R_S(
-		long classNameId, long classPK, int type, long receiverUserId,
-		int status) throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.social.model.SocialRequest> findByC_C_T_R_S(
-		long classNameId, long classPK, int type, long receiverUserId,
-		int status, int start, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.social.model.SocialRequest> findByC_C_T_R_S(
-		long classNameId, long classPK, int type, long receiverUserId,
-		int status, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.social.model.SocialRequest findByC_C_T_R_S_First(
-		long classNameId, long classPK, int type, long receiverUserId,
-		int status, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.social.NoSuchRequestException;
-
-	public com.liferay.portlet.social.model.SocialRequest findByC_C_T_R_S_Last(
-		long classNameId, long classPK, int type, long receiverUserId,
-		int status, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.social.NoSuchRequestException;
-
-	public com.liferay.portlet.social.model.SocialRequest[] findByC_C_T_R_S_PrevAndNext(
-		long requestId, long classNameId, long classPK, int type,
-		long receiverUserId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.social.NoSuchRequestException;
-
 	public com.liferay.portlet.social.model.SocialRequest findByU_C_C_T_R(
 		long userId, long classNameId, long classPK, int type,
 		long receiverUserId)
@@ -350,6 +316,40 @@ public interface SocialRequestPersistence extends BasePersistence {
 	public com.liferay.portlet.social.model.SocialRequest[] findByU_C_C_T_S_PrevAndNext(
 		long requestId, long userId, long classNameId, long classPK, int type,
 		int status, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchRequestException;
+
+	public java.util.List<com.liferay.portlet.social.model.SocialRequest> findByC_C_T_R_S(
+		long classNameId, long classPK, int type, long receiverUserId,
+		int status) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.social.model.SocialRequest> findByC_C_T_R_S(
+		long classNameId, long classPK, int type, long receiverUserId,
+		int status, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.social.model.SocialRequest> findByC_C_T_R_S(
+		long classNameId, long classPK, int type, long receiverUserId,
+		int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.social.model.SocialRequest findByC_C_T_R_S_First(
+		long classNameId, long classPK, int type, long receiverUserId,
+		int status, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchRequestException;
+
+	public com.liferay.portlet.social.model.SocialRequest findByC_C_T_R_S_Last(
+		long classNameId, long classPK, int type, long receiverUserId,
+		int status, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchRequestException;
+
+	public com.liferay.portlet.social.model.SocialRequest[] findByC_C_T_R_S_PrevAndNext(
+		long requestId, long classNameId, long classPK, int type,
+		long receiverUserId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.social.NoSuchRequestException;
 
@@ -409,10 +409,6 @@ public interface SocialRequestPersistence extends BasePersistence {
 	public void removeByR_S(long receiverUserId, int status)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByC_C_T_R_S(long classNameId, long classPK, int type,
-		long receiverUserId, int status)
-		throws com.liferay.portal.SystemException;
-
 	public void removeByU_C_C_T_R(long userId, long classNameId, long classPK,
 		int type, long receiverUserId)
 		throws com.liferay.portal.SystemException,
@@ -420,6 +416,10 @@ public interface SocialRequestPersistence extends BasePersistence {
 
 	public void removeByU_C_C_T_S(long userId, long classNameId, long classPK,
 		int type, int status) throws com.liferay.portal.SystemException;
+
+	public void removeByC_C_T_R_S(long classNameId, long classPK, int type,
+		long receiverUserId, int status)
+		throws com.liferay.portal.SystemException;
 
 	public void removeByU_C_C_T_R_S(long userId, long classNameId,
 		long classPK, int type, long receiverUserId, int status)
@@ -449,16 +449,16 @@ public interface SocialRequestPersistence extends BasePersistence {
 	public int countByR_S(long receiverUserId, int status)
 		throws com.liferay.portal.SystemException;
 
-	public int countByC_C_T_R_S(long classNameId, long classPK, int type,
-		long receiverUserId, int status)
-		throws com.liferay.portal.SystemException;
-
 	public int countByU_C_C_T_R(long userId, long classNameId, long classPK,
 		int type, long receiverUserId)
 		throws com.liferay.portal.SystemException;
 
 	public int countByU_C_C_T_S(long userId, long classNameId, long classPK,
 		int type, int status) throws com.liferay.portal.SystemException;
+
+	public int countByC_C_T_R_S(long classNameId, long classPK, int type,
+		long receiverUserId, int status)
+		throws com.liferay.portal.SystemException;
 
 	public int countByU_C_C_T_R_S(long userId, long classNameId, long classPK,
 		int type, long receiverUserId, int status)

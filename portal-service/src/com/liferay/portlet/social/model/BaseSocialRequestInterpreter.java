@@ -103,19 +103,6 @@ public abstract class BaseSocialRequestInterpreter
 		return false;
 	}
 
-	public boolean processRejection(
-		SocialRequest request, ThemeDisplay themeDisplay) {
-
-		try {
-			return doProcessRejection(request, themeDisplay);
-		}
-		catch (Exception e) {
-			_log.error("Unable to process rejection", e);
-		}
-
-		return false;
-	}
-
 	public void processDuplicateRequestsFromUser(
 			SocialRequest request, int oldStatus)
 		throws SystemException {
@@ -148,6 +135,19 @@ public abstract class BaseSocialRequestInterpreter
 
 			SocialRequestUtil.update(curRequest, false);
 		}
+	}
+
+	public boolean processRejection(
+		SocialRequest request, ThemeDisplay themeDisplay) {
+
+		try {
+			return doProcessRejection(request, themeDisplay);
+		}
+		catch (Exception e) {
+			_log.error("Unable to process rejection", e);
+		}
+
+		return false;
 	}
 
 	protected abstract SocialRequestFeedEntry doInterpret(
