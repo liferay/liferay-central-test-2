@@ -22,24 +22,44 @@
 
 package com.liferay.portal.kernel.bi.reporting;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * <a href="ReportFormat.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
- *
  */
 public enum ReportFormat {
 
-	EXCEL("excel"), HTML("html"), PDF("pdf");
+	EXCEL("excel"), HTML("html"), PDF("pdf"), CSV("csv"),
+	RTF("rtf"), XML("xml"), TEXT("text");
+	private static final Map<String, ReportFormat> _FORMATS =
+		new HashMap<String, ReportFormat>();
+
+	static {
+		_FORMATS.put(EXCEL.toString(), EXCEL);
+		_FORMATS.put(PDF.toString(), PDF);
+		_FORMATS.put(HTML.toString(), HTML);
+		_FORMATS.put(CSV.toString(), CSV);
+		_FORMATS.put(RTF.toString(), RTF);
+		_FORMATS.put(XML.toString(), XML);
+		_FORMATS.put(TEXT.toString(), TEXT);
+
+	}
 
 	public static ReportFormat parse(String value) {
-		if (EXCEL.toString().equals(value)) {
+		ReportFormat format = _FORMATS.get(value);
+		if (format != null) {
+			return format;
+		}
+		if (EXCEL.toString().equalsIgnoreCase(value)) {
 			return EXCEL;
 		}
-		else if (HTML.toString().equals(value)) {
+		else if (HTML.toString().equalsIgnoreCase(value)) {
 			return HTML;
 		}
-		else if (PDF.toString().equals(value)) {
+		else if (PDF.toString().equalsIgnoreCase(value)) {
 			return PDF;
 		}
 		else {
