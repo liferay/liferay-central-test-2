@@ -56,19 +56,21 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 
 <script type="text/javascript">
 	function <portlet:namespace />previewEntry() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.PREVIEW %>";
+		document.<portlet:namespace />fm.action = '<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/announcements/preview_entry" /></portlet:actionURL>';
 		document.<portlet:namespace />fm.target = '_blank';
-		submitForm(document.<portlet:namespace />fm, '<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/announcements/preview_entry" /></portlet:actionURL>', false);		
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.PREVIEW %>";
+		document.<portlet:namespace />fm.submit();
 	}
 
 	function <portlet:namespace />saveEntry() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= entry == null ? Constants.ADD : Constants.UPDATE %>";
+		document.<portlet:namespace />fm.action = '<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/announcements/edit_entry" /></portlet:actionURL>';
 		document.<portlet:namespace />fm.target = '';
-		submitForm(document.<portlet:namespace />fm, '<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/announcements/edit_entry" /></portlet:actionURL>');
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= entry == null ? Constants.ADD : Constants.UPDATE %>";
+		submitForm(document.<portlet:namespace />fm);
 	}
 </script>
 
-<form method="post" name="<portlet:namespace />fm">
+<form onSubmit="<portlet:namespace />saveEntry(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 <input name="<portlet:namespace />entryId" type="hidden" value="<%= entryId %>" />
@@ -359,9 +361,9 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 
 <br />
 
-<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveEntry(); return false;"/>
+<input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input type="button" value="<liferay-ui:message key="preview" />" onClick="<portlet:namespace />previewEntry(); return false;" />
+<input type="button" value="<liferay-ui:message key="preview" />" onClick="<portlet:namespace />previewEntry();" />
 
 <input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 
