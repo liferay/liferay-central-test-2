@@ -129,7 +129,7 @@ private static PortletCategory _getRelevantPortletCategory(PortletCategory portl
 			if (portlet != null) {
 				if (portlet.isSystem()) {
 				}
-				else if (!portlet.isActive()) {
+				else if (!portlet.isActive() || portlet.isUndeployedPortlet()) {
 				}
 				else if (layout.getType().equals(LayoutConstants.TYPE_PANEL) && panelSelectedPortlets.contains(portlet.getRootPortletId())) {
 					portletIds.add(portlet.getPortletId());
