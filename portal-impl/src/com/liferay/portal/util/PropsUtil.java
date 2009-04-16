@@ -25,11 +25,16 @@ package com.liferay.portal.util;
 import com.liferay.portal.configuration.ConfigurationImpl;
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.Filter;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.model.CompanyConstants;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.util.SystemProperties;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -92,30 +97,61 @@ public class PropsUtil {
 
 		SystemProperties.set(
 			"ehcache.disk.store.dir", liferayHome + "/data/ehcache");
+
+		if (GetterUtil.getBoolean(
+				SystemProperties.get("company-id-properties"))) {
+
+			_configurations = new HashMap<Long, Configuration>();
+		}
 	}
 
 	private void _addProperties(Properties properties) {
-		_configuration.addProperties(properties);
+		_getConfiguration().addProperties(properties);
 	}
 
 	private boolean _contains(String key) {
-		return _configuration.contains(key);
+		return _getConfiguration().contains(key);
 	}
 
 	private String _get(String key) {
-		return _configuration.get(key);
+		return _getConfiguration().get(key);
 	}
 
 	private String _get(String key, Filter filter) {
-		return _configuration.get(key, filter);
+		return _getConfiguration().get(key, filter);
 	}
 
 	private String[] _getArray(String key) {
-		return _configuration.getArray(key);
+		return _getConfiguration().getArray(key);
 	}
 
 	private String[] _getArray(String key, Filter filter) {
-		return _configuration.getArray(key, filter);
+		return _getConfiguration().getArray(key, filter);
+	}
+
+	private Configuration _getConfiguration() {
+		if (_configurations == null) {
+			return _configuration;
+		}
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		if (companyId > CompanyConstants.SYSTEM) {
+			Configuration configuration = _configurations.get(companyId);
+
+			if (configuration == null) {
+				configuration = new ConfigurationImpl(
+					PropsUtil.class.getClassLoader(), PropsFiles.PORTAL,
+					companyId);
+
+				_configurations.put(companyId, configuration);
+			}
+
+			return configuration;
+		}
+		else {
+			return _configuration;
+		}
 	}
 
 	private String _getDefaultLiferayHome() {
@@ -171,23 +207,24 @@ public class PropsUtil {
 	}
 
 	private Properties _getProperties() {
-		return _configuration.getProperties();
+		return _getConfiguration().getProperties();
 	}
 
 	private Properties _getProperties(String prefix, boolean removePrefix) {
-		return _configuration.getProperties(prefix, removePrefix);
+		return _getConfiguration().getProperties(prefix, removePrefix);
 	}
 
 	private void _removeProperties(Properties properties) {
-		_configuration.removeProperties(properties);
+		_getConfiguration().removeProperties(properties);
 	}
 
 	private void _set(String key, String value) {
-		_configuration.set(key, value);
+		_getConfiguration().set(key, value);
 	}
 
 	private static PropsUtil _instance = new PropsUtil();
 
 	private Configuration _configuration;
+	private Map<Long, Configuration> _configurations;
 
 }

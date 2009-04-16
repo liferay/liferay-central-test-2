@@ -33,6 +33,9 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Company;
+import com.liferay.portal.model.CompanyConstants;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -66,6 +69,12 @@ public class ConfigurationImpl
 	implements com.liferay.portal.kernel.configuration.Configuration {
 
 	public ConfigurationImpl(ClassLoader classLoader, String name) {
+		this(classLoader, name, CompanyConstants.SYSTEM);
+	}
+
+	public ConfigurationImpl(
+		ClassLoader classLoader, String name, long companyId) {
+
 		try {
 			URL url = classLoader.getResource(
 				name + Conventions.PROPERTIES_EXTENSION);
@@ -98,10 +107,30 @@ public class ConfigurationImpl
 			_log.error(e, e);
 		}
 
-		_componentConfiguration = EasyConf.getConfiguration(
-			getFileName(classLoader, name));
+		String webId = null;
 
-		printSources();
+		if (companyId > CompanyConstants.SYSTEM) {
+			try {
+				Company company = CompanyLocalServiceUtil.getCompanyById(
+					companyId);
+
+				webId = company.getWebId();
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+		}
+
+		if (webId != null) {
+			_componentConfiguration = EasyConf.getConfiguration(
+				webId, getFileName(classLoader, name));
+		}
+		else {
+			_componentConfiguration = EasyConf.getConfiguration(
+				getFileName(classLoader, name));
+		}
+
+		printSources(companyId, webId);
 	}
 
 	public void addProperties(Properties properties) {
@@ -357,13 +386,20 @@ public class ConfigurationImpl
 		return name;
 	}
 
-	protected void printSources() {
+	protected void printSources(long companyId, String webId) {
 		List<String> sources = getComponentProperties().getLoadedSources();
 
 		for (int i = sources.size() - 1; i >= 0; i--) {
 			String source = sources.get(i);
 
-			System.out.println("Loading " + source);
+			String info = "Loading " + source;
+
+			if (companyId > CompanyConstants.SYSTEM) {
+				info +=
+					" for {companyId=" + companyId + ", webId=" + webId + "}";
+			}
+
+			System.out.println(info);
 		}
 	}
 
